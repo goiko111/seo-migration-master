@@ -1,12 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import LogoStrip from "@/components/LogoStrip";
+import WhatIsWinerim from "@/components/WhatIsWinerim";
+import Features from "@/components/Features";
+import Quote from "@/components/Quote";
+import Benefits from "@/components/Benefits";
+import Capabilities from "@/components/Capabilities";
+import VideoSection from "@/components/VideoSection";
+import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <LogoStrip />
+        <WhatIsWinerim />
+        <Features />
+        <Quote />
+        <Benefits />
+        <Capabilities />
+        <VideoSection />
+        <CTASection />
+      </main>
+      <Footer />
     </div>
   );
 };
