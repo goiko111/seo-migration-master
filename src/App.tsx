@@ -10,6 +10,7 @@ import Afiliate from "./pages/Afiliate";
 import Contacto from "./pages/Contacto";
 import Demo from "./pages/Demo";
 import NotFound from "./pages/NotFound";
+import ArticlePage from "./pages/ArticlePage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/afiliate" element={<Afiliate />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/demo" element={<Demo />} />
+          <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
