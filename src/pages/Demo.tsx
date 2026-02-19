@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const benefits = [
   "Configuración en menos de 24 horas",
@@ -13,6 +16,28 @@ const benefits = [
 ];
 
 const Demo = () => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    const { error } = await supabase.from("contact_leads").insert({
+      form_type: "demo",
+      name: fd.get("name") as string || null,
+      email: fd.get("email") as string || null,
+      phone: fd.get("phone") as string || null,
+      restaurant: fd.get("restaurant") as string || null,
+      city: fd.get("city") as string || null,
+    });
+    if (error) toast.error("Error al enviar. Inténtalo de nuevo.");
+    else {
+      toast.success("¡Solicitud recibida! Te contactaremos pronto.");
+      (e.target as HTMLFormElement).reset();
+    }
+    setSubmitting(false);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -56,17 +81,18 @@ const Demo = () => {
               <h2 className="font-heading text-2xl font-bold mb-6">
                 Solicita tu demo gratuita
               </h2>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                <Input placeholder="Nombre completo" className="bg-background border-border" />
-                <Input type="email" placeholder="Email" className="bg-background border-border" />
-                <Input type="tel" placeholder="Teléfono" className="bg-background border-border" />
-                <Input placeholder="Nombre del restaurante" className="bg-background border-border" />
-                <Input placeholder="Ciudad" className="bg-background border-border" />
+              <form className="space-y-5" onSubmit={handleSubmit}>
+                <Input name="name" placeholder="Nombre completo" className="bg-background border-border" />
+                <Input name="email" type="email" placeholder="Email" className="bg-background border-border" />
+                <Input name="phone" type="tel" placeholder="Teléfono" className="bg-background border-border" />
+                <Input name="restaurant" placeholder="Nombre del restaurante" className="bg-background border-border" />
+                <Input name="city" placeholder="Ciudad" className="bg-background border-border" />
                 <Button
                   type="submit"
+                  disabled={submitting}
                   className="w-full bg-gradient-wine text-primary-foreground py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
                 >
-                  Solicitar demo
+                  {submitting ? "Enviando..." : "Solicitar demo"}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">
                   Al enviar aceptas nuestra política de privacidad.
