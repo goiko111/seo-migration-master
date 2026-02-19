@@ -1,15 +1,75 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
 import { ArrowLeft } from "lucide-react";
 
+interface ArticleData {
+  title: string;
+  subtitle: string;
+  heroImage: string;
+  body: string;
+  type: "interview" | "blog";
+}
+
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = slug ? getArticleBySlug(slug) : undefined;
+  const [article, setArticle] = useState<ArticleData | null | undefined>(undefined);
+
+  useEffect(() => {
+    if (!slug) { setArticle(null); return; }
+
+    const fetchArticle = async () => {
+      const { data } = await supabase
+        .from("articles")
+        .select("title, excerpt, body, image_url, category, author, author_role")
+        .eq("slug", slug)
+        .eq("published", true)
+        .maybeSingle();
+
+      if (data) {
+        setArticle({
+          title: data.title,
+          subtitle: data.category === "interview"
+            ? `${data.author || ""}${data.author_role ? ", " + data.author_role : ""}`
+            : (data.excerpt || ""),
+          heroImage: data.image_url || "",
+          body: data.body || "",
+          type: data.category === "interview" ? "interview" : "blog",
+        });
+      } else {
+        // Fallback to static
+        const staticArticle = getArticleBySlug(slug);
+        if (staticArticle) {
+          setArticle({
+            title: staticArticle.title,
+            subtitle: staticArticle.subtitle,
+            heroImage: staticArticle.heroImage,
+            body: staticArticle.body,
+            type: staticArticle.type,
+          });
+        } else {
+          setArticle(null);
+        }
+      }
+    };
+    fetchArticle();
+  }, [slug]);
+
+  if (article === undefined) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">Cargando...</p></main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!article) {
     return (
@@ -32,7 +92,6 @@ const ArticlePage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        {/* Hero */}
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-4xl mx-auto">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -64,22 +123,23 @@ const ArticlePage = () => {
               {article.title}
             </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="rounded-2xl overflow-hidden mb-12"
-            >
-              <img
-                src={article.heroImage}
-                alt={article.title}
-                className="w-full max-h-[600px] object-cover"
-              />
-            </motion.div>
+            {article.heroImage && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="rounded-2xl overflow-hidden mb-12"
+              >
+                <img
+                  src={article.heroImage}
+                  alt={article.title}
+                  className="w-full max-h-[600px] object-cover"
+                />
+              </motion.div>
+            )}
           </div>
         </section>
 
-        {/* Content */}
         <section className="max-w-3xl mx-auto px-6 md:px-12 pb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +162,6 @@ const ArticlePage = () => {
             </ReactMarkdown>
           </motion.div>
 
-          {/* Back link */}
           <div className="mt-16 pt-8 border-t border-border">
             <Link
               to={backLink}

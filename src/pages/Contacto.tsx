@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -5,8 +6,36 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Contacto = () => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    const { error } = await supabase.from("contact_leads").insert({
+      form_type: "contacto",
+      name: fd.get("name") as string || null,
+      position: fd.get("position") as string || null,
+      email: fd.get("email") as string || null,
+      phone: fd.get("phone") as string || null,
+      restaurant: fd.get("restaurant") as string || null,
+      city: fd.get("city") as string || null,
+      references_count: fd.get("references") as string || null,
+      menu_link: fd.get("menu_link") as string || null,
+      message: fd.get("message") as string || null,
+    });
+    if (error) toast.error("Error al enviar. Inténtalo de nuevo.");
+    else {
+      toast.success("¡Solicitud enviada! Te contactaremos pronto.");
+      (e.target as HTMLFormElement).reset();
+    }
+    setSubmitting(false);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -45,32 +74,34 @@ const Contacto = () => {
               <h2 className="font-heading text-2xl font-bold mb-8">
                 Analizamos tu carta gratis
               </h2>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input placeholder="Nombre" className="bg-card border-border" />
-                  <Input placeholder="Cargo en el restaurante" className="bg-card border-border" />
+                  <Input name="name" placeholder="Nombre" className="bg-card border-border" />
+                  <Input name="position" placeholder="Cargo en el restaurante" className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input type="email" placeholder="Email" className="bg-card border-border" />
-                  <Input type="tel" placeholder="Teléfono" className="bg-card border-border" />
+                  <Input name="email" type="email" placeholder="Email" className="bg-card border-border" />
+                  <Input name="phone" type="tel" placeholder="Teléfono" className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input placeholder="Restaurante" className="bg-card border-border" />
-                  <Input placeholder="Ciudad" className="bg-card border-border" />
+                  <Input name="restaurant" placeholder="Restaurante" className="bg-card border-border" />
+                  <Input name="city" placeholder="Ciudad" className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input placeholder="Número de referencias" className="bg-card border-border" />
-                  <Input placeholder="Link a tu carta" className="bg-card border-border" />
+                  <Input name="references" placeholder="Número de referencias" className="bg-card border-border" />
+                  <Input name="menu_link" placeholder="Link a tu carta" className="bg-card border-border" />
                 </div>
                 <Textarea
+                  name="message"
                   placeholder="Mensaje (¿Qué aspectos deseas mejorar?)"
                   className="bg-card border-border min-h-[120px]"
                 />
                 <Button
                   type="submit"
+                  disabled={submitting}
                   className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto"
                 >
-                  Enviar solicitud
+                  {submitting ? "Enviando..." : "Enviar solicitud"}
                 </Button>
               </form>
             </motion.div>
