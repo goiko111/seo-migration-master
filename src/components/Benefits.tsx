@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePageContent } from "@/hooks/usePageContent";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const tabs = [
   {
@@ -48,7 +48,7 @@ const tabs = [
 const Benefits = () => {
   const [activeTab, setActiveTab] = useState("profesionales");
   const active = tabs.find((t) => t.id === activeTab)!;
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding">

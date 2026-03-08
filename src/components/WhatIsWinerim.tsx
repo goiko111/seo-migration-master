@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { usePageContent } from "@/hooks/usePageContent";
+import { Link } from "react-router-dom";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const WhatIsWinerim = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding">
@@ -26,12 +27,12 @@ const WhatIsWinerim = () => {
             <p className="text-muted-foreground leading-relaxed mb-8">
               {get("what", "description2", "Facilita la gestión total de la bodega del restaurante, así como el consumo de vinos de precio más elevado, lo que reporta numerosas ventajas económicas para el negocio.")}
             </p>
-            <a
-              href="/demo"
+            <Link
+              to="/demo"
               className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
             >
               {get("what", "cta", "Solicita una demo")}
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div

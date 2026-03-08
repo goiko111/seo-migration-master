@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { usePageContent } from "@/hooks/usePageContent";
+import { Link } from "react-router-dom";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const CTASection = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding">
@@ -23,18 +24,18 @@ const CTASection = () => {
             {get("cta", "description", "Te diremos cómo Winerim puede ayudarte a optimizar y equilibrar tu carta. Más de 1.000 bodegas de restaurantes ya confían en nosotros.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/demo"
+            <Link
+              to="/demo"
               className="bg-gradient-wine text-primary-foreground px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
             >
               {get("cta", "cta_primary", "Analiza tu carta de vinos")}
-            </a>
-            <a
-              href="/contacto"
+            </Link>
+            <Link
+              to="/contacto"
               className="px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-colors"
             >
               {get("cta", "cta_secondary", "Contactar")}
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

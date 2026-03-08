@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
-import { usePageContent } from "@/hooks/usePageContent";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const Hero = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -62,12 +63,12 @@ const Hero = () => {
             transition={{ delay: 0.9 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <a
-              href="/demo"
+            <Link
+              to="/demo"
               className="bg-gradient-wine text-primary-foreground px-8 py-4 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity text-center"
             >
               {get("hero", "cta_primary", "Descubre Winerim")}
-            </a>
+            </Link>
             <a
               href={get("hero", "video_url", "https://youtu.be/-PleM286zeY")}
               target="_blank"

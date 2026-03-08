@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { usePageContent } from "@/hooks/usePageContent";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const VideoSection = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding bg-gradient-dark">
