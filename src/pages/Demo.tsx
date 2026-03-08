@@ -19,7 +19,8 @@ const defaultBenefits = [
 
 const Demo = () => {
   const [submitting, setSubmitting] = useState(false);
-  const { get } = usePageContent("demo");
+  const { get, getJson } = usePageContent("demo");
+  const benefits = getJson<string[]>("hero", "benefits", defaultBenefits);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +61,7 @@ const Demo = () => {
                 {get("hero", "subtitle", "Solicita una demostración personalizada y comprueba cómo puedes aumentar tus ventas de vino en más de un 30%.")}
               </p>
               <ul className="space-y-3">
-                {defaultBenefits.map((b) => (
+                {benefits.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-muted-foreground">
                     <Check className="w-5 h-5 text-accent shrink-0" />
                     <span>{b}</span>
@@ -75,11 +76,11 @@ const Demo = () => {
                 {get("form", "title", "Solicita tu demo gratuita")}
               </h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <Input name="name" placeholder="Nombre completo" required className="bg-background border-border" />
-                <Input name="email" type="email" placeholder="Email" required className="bg-background border-border" />
-                <Input name="phone" type="tel" placeholder="Teléfono" className="bg-background border-border" />
-                <Input name="restaurant" placeholder="Nombre del restaurante" required className="bg-background border-border" />
-                <Input name="city" placeholder="Ciudad" className="bg-background border-border" />
+                <Input name="name" placeholder={get("form", "placeholder_name", "Nombre completo")} required className="bg-background border-border" />
+                <Input name="email" type="email" placeholder={get("form", "placeholder_email", "Email")} required className="bg-background border-border" />
+                <Input name="phone" type="tel" placeholder={get("form", "placeholder_phone", "Teléfono")} className="bg-background border-border" />
+                <Input name="restaurant" placeholder={get("form", "placeholder_restaurant", "Nombre del restaurante")} required className="bg-background border-border" />
+                <Input name="city" placeholder={get("form", "placeholder_city", "Ciudad")} className="bg-background border-border" />
                 <Button type="submit" disabled={submitting}
                   className="w-full bg-gradient-wine text-primary-foreground py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
                   {submitting ? "Enviando..." : get("form", "button", "Solicitar demo")}

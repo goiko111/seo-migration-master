@@ -2,7 +2,19 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 
-const tabs = [
+interface BenefitItem {
+  title: string;
+  desc: string;
+}
+
+interface TabItem {
+  id: string;
+  label: string;
+  subtitle: string;
+  benefits: BenefitItem[];
+}
+
+const defaultTabs: TabItem[] = [
   {
     id: "profesionales",
     label: "Profesionales",
@@ -47,8 +59,9 @@ const tabs = [
 
 const Benefits = () => {
   const [activeTab, setActiveTab] = useState("profesionales");
-  const active = tabs.find((t) => t.id === activeTab)!;
-  const { get } = useSharedPageContent();
+  const { get, getJson } = useSharedPageContent();
+  const tabs = getJson<TabItem[]>("benefits", "tabs", defaultTabs);
+  const active = tabs.find((t) => t.id === activeTab) || tabs[0];
 
   return (
     <section className="section-padding">
@@ -78,7 +91,7 @@ const Benefits = () => {
             <p className="text-center text-muted-foreground mb-10">{active.subtitle}</p>
             <div className="grid md:grid-cols-3 gap-8">
               {active.benefits.map((benefit, i) => (
-                <div key={benefit.title} className="bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300">
+                <div key={i} className="bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300">
                   <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-5">
                     <span className="text-wine font-heading text-xl font-bold">{i + 1}</span>
                   </div>

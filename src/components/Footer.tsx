@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import winerimLogo from "@/assets/winerim-logo.png";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const Footer = () => {
+  const { get, getJson } = usePageContent("footer");
+
+  const socialLinks = getJson<{ label: string; url: string }[]>("social", "links", [
+    { label: "Instagram", url: "https://www.instagram.com/winerim/" },
+    { label: "YouTube", url: "https://www.youtube.com/@Winerim" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/company/winerim/" },
+  ]);
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
@@ -9,13 +18,13 @@ const Footer = () => {
           <div className="md:col-span-1">
             <img src={winerimLogo} alt="Winerim" className="h-7 mb-4" />
             <p className="text-sm text-muted-foreground leading-relaxed">
-              La carta de vinos digital que revoluciona la hostelería.
+              {get("general", "description", "La carta de vinos digital que revoluciona la hostelería.")}
             </p>
           </div>
 
           <div>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              Producto
+              {get("columns", "col1_title", "Producto")}
             </h4>
             <ul className="space-y-3">
               {[
@@ -34,7 +43,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              Empresa
+              {get("columns", "col2_title", "Empresa")}
             </h4>
             <ul className="space-y-3">
               {[
@@ -54,10 +63,14 @@ const Footer = () => {
 
           <div>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              Legal
+              {get("columns", "col3_title", "Legal")}
             </h4>
             <ul className="space-y-3">
-              {["Política de privacidad", "Términos de uso", "Cookies"].map((item) => (
+              {[
+                get("legal", "item1", "Política de privacidad"),
+                get("legal", "item2", "Términos de uso"),
+                get("legal", "item3", "Cookies"),
+              ].map((item) => (
                 <li key={item}>
                   <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
                     {item}
@@ -70,33 +83,20 @@ const Footer = () => {
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Winerim. Todos los derechos reservados.
+            © {new Date().getFullYear()} {get("general", "copyright", "Winerim. Todos los derechos reservados.")}
           </p>
           <div className="flex gap-6">
-            <a
-              href="https://www.instagram.com/winerim/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://www.youtube.com/@Winerim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase"
-            >
-              YouTube
-            </a>
-            <a
-              href="https://www.linkedin.com/company/winerim/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase"
-            >
-              LinkedIn
-            </a>
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

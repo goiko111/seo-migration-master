@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
-const restaurants = [
+const defaultRestaurants = [
   "Miramar", "Zortziko", "Tres", "Santé", "Sacla", "La Parra",
   "Ment", "La Carbonería", "Cocina del Sol", "Cañabota", "Alejandra",
   "Bidea", "Tribeca", "Taverna", "Serrano", "Roig Robí",
@@ -9,6 +10,9 @@ const restaurants = [
 ];
 
 const LogoStrip = () => {
+  const { get, getJson } = useSharedPageContent();
+  const restaurants = getJson<string[]>("logostrip", "restaurants", defaultRestaurants);
+
   return (
     <section className="section-padding overflow-hidden">
       <motion.div
@@ -18,14 +22,13 @@ const LogoStrip = () => {
         className="text-center mb-12"
       >
         <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-3">
-          La revolución de la hostelería
+          {get("logostrip", "label", "La revolución de la hostelería")}
         </p>
         <h2 className="font-heading text-2xl md:text-3xl">
-          Winerim, en los mejores restaurantes
+          {get("logostrip", "title", "Winerim, en los mejores restaurantes")}
         </h2>
       </motion.div>
 
-      {/* Scrolling logos placeholder */}
       <div className="relative">
         <div className="flex animate-scroll-left gap-12 items-center">
           {[...restaurants, ...restaurants].map((name, i) => (
@@ -40,7 +43,7 @@ const LogoStrip = () => {
       </div>
 
       <p className="text-center text-muted-foreground text-sm mt-8">
-        Más de 1.000 bodegas de restaurantes ya confían en nosotros
+        {get("logostrip", "footer", "Más de 1.000 bodegas de restaurantes ya confían en nosotros")}
       </p>
     </section>
   );

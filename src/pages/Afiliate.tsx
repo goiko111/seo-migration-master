@@ -6,27 +6,33 @@ import Footer from "@/components/Footer";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 
-const features = [
-  { icon: TrendingUp, title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
-  { icon: BarChart3, title: "Rotación de bodega", desc: "Aumenta las ventas de tu selección de vinos" },
-  { icon: Package, title: "Gestión de inventario", desc: "Mejora la administración de tu stock" },
-  { icon: Layers, title: "Flexibilidad en tu oferta", desc: "Adapta tu carta según temporada y disponibilidad" },
-  { icon: PenTool, title: "Editor exclusivo", desc: "Maneja tu propio editor para realizar tus actualizaciones diarias" },
-  { icon: Users, title: "Selección personalizada", desc: "Ofrece sugerencias personalizadas a cada cliente" },
-  { icon: Zap, title: "Sugerencias instantáneas", desc: "Proporciona recomendaciones de forma inmediata" },
-  { icon: Filter, title: "Filtros eficientes", desc: "Simplifica la búsqueda de tus clientes con filtros concisos" },
-  { icon: Smartphone, title: "Instalación sencilla", desc: "Implementación simple y actualizaciones constantes" },
-  { icon: QrCode, title: "Compatibilidad QR", desc: "Disponible en cualquier formato a través de códigos QR" },
-  { icon: Headphones, title: "Soporte técnico", desc: "Resuelve dudas con nuestro equipo de soporte" },
-  { icon: Activity, title: "Información en tiempo real", desc: "Accede a tus datos actualizados de forma inmediata" },
-  { icon: BarChart3, title: "Analítica en tiempo real", desc: "Controla los datos y comportamiento de tu bodega y clientes" },
-  { icon: ShoppingCart, title: "Gestión de compras", desc: "Controla y mantén en seguimiento tus pedidos" },
-  { icon: CreditCard, title: "Historial de ventas", desc: "Informes de tus ventas y de tu equipo" },
-  { icon: Settings, title: "Integraciones", desc: "Nos conectamos a tu TPV, ERP y más" },
+const iconMap: Record<string, React.ElementType> = {
+  TrendingUp, BarChart3, Package, Layers, PenTool, Users, Zap, Filter,
+  Smartphone, QrCode, Headphones, Activity, ShoppingCart, CreditCard, Settings,
+};
+
+const defaultFeatures = [
+  { icon: "TrendingUp", title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
+  { icon: "BarChart3", title: "Rotación de bodega", desc: "Aumenta las ventas de tu selección de vinos" },
+  { icon: "Package", title: "Gestión de inventario", desc: "Mejora la administración de tu stock" },
+  { icon: "Layers", title: "Flexibilidad en tu oferta", desc: "Adapta tu carta según temporada y disponibilidad" },
+  { icon: "PenTool", title: "Editor exclusivo", desc: "Maneja tu propio editor para realizar tus actualizaciones diarias" },
+  { icon: "Users", title: "Selección personalizada", desc: "Ofrece sugerencias personalizadas a cada cliente" },
+  { icon: "Zap", title: "Sugerencias instantáneas", desc: "Proporciona recomendaciones de forma inmediata" },
+  { icon: "Filter", title: "Filtros eficientes", desc: "Simplifica la búsqueda de tus clientes con filtros concisos" },
+  { icon: "Smartphone", title: "Instalación sencilla", desc: "Implementación simple y actualizaciones constantes" },
+  { icon: "QrCode", title: "Compatibilidad QR", desc: "Disponible en cualquier formato a través de códigos QR" },
+  { icon: "Headphones", title: "Soporte técnico", desc: "Resuelve dudas con nuestro equipo de soporte" },
+  { icon: "Activity", title: "Información en tiempo real", desc: "Accede a tus datos actualizados de forma inmediata" },
+  { icon: "BarChart3", title: "Analítica en tiempo real", desc: "Controla los datos y comportamiento de tu bodega y clientes" },
+  { icon: "ShoppingCart", title: "Gestión de compras", desc: "Controla y mantén en seguimiento tus pedidos" },
+  { icon: "CreditCard", title: "Historial de ventas", desc: "Informes de tus ventas y de tu equipo" },
+  { icon: "Settings", title: "Integraciones", desc: "Nos conectamos a tu TPV, ERP y más" },
 ];
 
 const Afiliate = () => {
-  const { get } = usePageContent("afiliate");
+  const { get, getJson } = usePageContent("afiliate");
+  const features = getJson<typeof defaultFeatures>("features", "items", defaultFeatures);
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,14 +58,17 @@ const Afiliate = () => {
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((f, i) => (
-              <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="bg-gradient-card border border-border rounded-xl p-6 hover:border-wine transition-colors group">
-                <f.icon className="w-8 h-8 text-accent mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="font-heading text-base font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-muted-foreground">{f.desc}</p>
-              </motion.div>
-            ))}
+            {features.map((f, i) => {
+              const Icon = iconMap[f.icon] || TrendingUp;
+              return (
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                  className="bg-gradient-card border border-border rounded-xl p-6 hover:border-wine transition-colors group">
+                  <Icon className="w-8 h-8 text-accent mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="font-heading text-base font-semibold mb-2">{f.title}</h3>
+                  <p className="text-sm text-muted-foreground">{f.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 

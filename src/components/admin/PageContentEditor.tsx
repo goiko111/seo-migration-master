@@ -22,6 +22,7 @@ const PAGES = [
   { value: "contacto", label: "Contacto" },
   { value: "blog", label: "Blog" },
   { value: "sommelier", label: "Sommelier Corner" },
+  { value: "footer", label: "Footer" },
 ];
 
 const PageContentEditor = () => {
