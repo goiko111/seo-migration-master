@@ -153,38 +153,49 @@ const PageContentEditor = () => {
         Object.entries(sections).map(([section, sectionItems]) => (
           <div key={section} className="bg-card border border-border rounded-lg p-4 space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{section}</h3>
-            {sectionItems.map(item => (
-              <div key={item.id} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-foreground">{item.content_key}</label>
-                  <div className="flex gap-1">
-                    <Button variant="ghost" size="icon"
-                      onClick={() => saveItem(item)}
-                      disabled={saving === item.id}>
-                      {saving === item.id
-                        ? <Loader2 className="w-4 h-4 animate-spin" />
-                        : <Save className="w-4 h-4 text-accent" />}
-                    </Button>
-                    <Button variant="ghost" size="icon" onClick={() => deleteItem(item.id)}>
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
+            {sectionItems.map(item => {
+              const isJson = (() => { try { const p = JSON.parse(item.content_value); return Array.isArray(p); } catch { return false; } })();
+              return (
+                <div key={item.id} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-medium text-foreground flex items-center gap-2">
+                      {item.content_key}
+                      {isJson && <span className="text-xs bg-accent/20 text-accent px-1.5 py-0.5 rounded">JSON</span>}
+                    </label>
+                    <div className="flex gap-1">
+                      <Button variant="ghost" size="icon"
+                        onClick={() => saveItem(item)}
+                        disabled={saving === item.id}>
+                        {saving === item.id
+                          ? <Loader2 className="w-4 h-4 animate-spin" />
+                          : <Save className="w-4 h-4 text-accent" />}
+                      </Button>
+                      <Button variant="ghost" size="icon" onClick={() => deleteItem(item.id)}>
+                        <Trash2 className="w-4 h-4 text-destructive" />
+                      </Button>
+                    </div>
                   </div>
+                  {isJson ? (
+                    <JsonListEditor
+                      value={item.content_value}
+                      onChange={val => updateLocal(item.id, val)}
+                    />
+                  ) : item.content_value.length > 100 ? (
+                    <Textarea
+                      value={item.content_value}
+                      onChange={e => updateLocal(item.id, e.target.value)}
+                      className="bg-background border-border min-h-[80px] text-sm"
+                    />
+                  ) : (
+                    <Input
+                      value={item.content_value}
+                      onChange={e => updateLocal(item.id, e.target.value)}
+                      className="bg-background border-border"
+                    />
+                  )}
                 </div>
-                {item.content_value.length > 100 ? (
-                  <Textarea
-                    value={item.content_value}
-                    onChange={e => updateLocal(item.id, e.target.value)}
-                    className="bg-background border-border min-h-[80px] text-sm"
-                  />
-                ) : (
-                  <Input
-                    value={item.content_value}
-                    onChange={e => updateLocal(item.id, e.target.value)}
-                    className="bg-background border-border"
-                  />
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         ))
       )}
