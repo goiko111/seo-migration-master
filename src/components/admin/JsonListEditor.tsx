@@ -25,12 +25,12 @@ const JsonListEditor = ({ value, onChange }: JsonListEditorProps) => {
     return null; // Not valid JSON, don't render
   }
 
-  const update = (newItems: typeof items) => {
+  const update = (newItems: any[]) => {
     onChange(JSON.stringify(newItems, null, 2));
   };
 
   const moveItem = (index: number, direction: -1 | 1) => {
-    const arr = [...items];
+    const arr = [...items] as any[];
     const newIndex = index + direction;
     if (newIndex < 0 || newIndex >= arr.length) return;
     [arr[index], arr[newIndex]] = [arr[newIndex], arr[index]];
@@ -38,7 +38,7 @@ const JsonListEditor = ({ value, onChange }: JsonListEditorProps) => {
   };
 
   const removeItem = (index: number) => {
-    update(items.filter((_, i) => i !== index));
+    update((items as any[]).filter((_, i) => i !== index));
   };
 
   if (isSimpleArray) {
