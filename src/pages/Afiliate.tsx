@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { TrendingUp, BarChart3, Package, Layers, PenTool, Users, Zap, Filter, Smartphone, QrCode, Headphones, Activity, ShoppingCart, CreditCard, Settings } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
