@@ -14,27 +14,31 @@ const LogoStrip = () => {
   const restaurants = getJson<string[]>("logostrip", "restaurants", defaultRestaurants);
 
   return (
-    <section className="section-padding overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12 px-6"
       >
-        <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-3">
+        <p className="text-xs sm:text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-3">
           {get("logostrip", "label", "La revolución de la hostelería")}
         </p>
-        <h2 className="font-heading text-2xl md:text-3xl">
+        <h2 className="font-heading text-xl sm:text-2xl md:text-3xl">
           {get("logostrip", "title", "Winerim, en los mejores restaurantes")}
         </h2>
       </motion.div>
 
       <div className="relative">
-        <div className="flex animate-scroll-left gap-12 items-center">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+        <div className="flex animate-scroll-left gap-4 sm:gap-6 md:gap-8 items-center">
           {[...restaurants, ...restaurants].map((name, i) => (
             <div
               key={`${name}-${i}`}
-              className="flex-shrink-0 px-6 py-3 rounded border border-border bg-card text-muted-foreground text-sm font-medium tracking-wider whitespace-nowrap"
+              className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded border border-border bg-card text-muted-foreground text-xs sm:text-sm font-medium tracking-wider whitespace-nowrap hover:border-wine/30 hover:text-foreground transition-all duration-300"
             >
               {name}
             </div>
@@ -42,7 +46,7 @@ const LogoStrip = () => {
         </div>
       </div>
 
-      <p className="text-center text-muted-foreground text-sm mt-8">
+      <p className="text-center text-muted-foreground text-xs sm:text-sm mt-6 sm:mt-8 px-6">
         {get("logostrip", "footer", "Más de 1.000 bodegas de restaurantes ya confían en nosotros")}
       </p>
     </section>
