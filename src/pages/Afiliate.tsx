@@ -71,9 +71,9 @@ const Afiliate = () => {
             <p className="text-primary-foreground/80 mb-8">
               {get("cta", "subtitle", "Contacta con nosotros y descubre cómo Winerim puede impulsar tu negocio.")}
             </p>
-            <a href="/contacto" className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
+            <Link to="/contacto" className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
               {get("cta", "button", "Contactar")}
-            </a>
+            </Link>
           </div>
         </section>
       </main>
