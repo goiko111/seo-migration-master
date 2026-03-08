@@ -64,7 +64,7 @@ const Contacto = () => {
               </h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="name" placeholder="Nombre" className="bg-card border-border" />
+                  <Input name="name" placeholder="Nombre" required className="bg-card border-border" />
                   <Input name="position" placeholder="Cargo en el restaurante" className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
