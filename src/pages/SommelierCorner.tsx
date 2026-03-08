@@ -63,9 +63,7 @@ const SommelierCorner = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main className="pt-32 pb-24 text-center">
-          <p className="text-muted-foreground">Cargando...</p>
-        </main>
+        <main><InterviewSkeleton /></main>
         <Footer />
       </div>
     );
