@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ImageUpload from "./ImageUpload";
+import MarkdownToolbar from "./MarkdownToolbar";
 
 interface ArticleForm {
   id?: string;
@@ -68,9 +69,9 @@ const ArticleEditor = ({ article, onChange, onSave, onCancel, saving }: ArticleE
         onChange={e => update({ excerpt: e.target.value })}
         className="bg-background border-border min-h-[80px]" />
 
-      {/* Markdown editor with preview toggle */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
+      {/* Markdown editor with toolbar and preview */}
+      <div className="space-y-0">
+        <div className="flex items-center justify-between mb-2">
           <label className="text-sm font-medium text-foreground">Contenido (Markdown)</label>
           <Button variant="ghost" size="sm" onClick={() => setShowPreview(!showPreview)} type="button">
             {showPreview ? <><EyeOff className="w-4 h-4 mr-1" /> Editor</> : <><Eye className="w-4 h-4 mr-1" /> Vista previa</>}
@@ -85,9 +86,20 @@ const ArticleEditor = ({ article, onChange, onSave, onCancel, saving }: ArticleE
             )}
           </div>
         ) : (
-          <Textarea placeholder="Escribe el contenido en Markdown..." value={article.body}
-            onChange={e => update({ body: e.target.value })}
-            className="bg-background border-border min-h-[300px] font-mono text-sm" />
+          <div>
+            <MarkdownToolbar
+              textareaId="article-body-editor"
+              value={article.body}
+              onChange={body => update({ body })}
+            />
+            <Textarea
+              id="article-body-editor"
+              placeholder="Escribe el contenido en Markdown..."
+              value={article.body}
+              onChange={e => update({ body: e.target.value })}
+              className="bg-background border-border min-h-[300px] font-mono text-sm rounded-t-none"
+            />
+          </div>
         )}
       </div>
 
