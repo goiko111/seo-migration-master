@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import { InterviewSkeleton } from "@/components/ContentSkeletons";
 
 interface Interview {
   quote: string;
@@ -62,9 +63,7 @@ const SommelierCorner = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main className="pt-32 pb-24 text-center">
-          <p className="text-muted-foreground">Cargando...</p>
-        </main>
+        <main><InterviewSkeleton /></main>
         <Footer />
       </div>
     );

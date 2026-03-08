@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import { BlogSkeleton } from "@/components/ContentSkeletons";
 
 interface BlogPost {
   title: string;
@@ -56,7 +57,7 @@ const Blog = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">Cargando...</p></main>
+        <main><BlogSkeleton /></main>
         <Footer />
       </div>
     );
