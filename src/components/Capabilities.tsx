@@ -39,19 +39,20 @@ const Capabilities = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {capabilities.map((cap, i) => {
             const Icon = iconMap[cap.icon] || Settings;
             return (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="bg-gradient-card rounded-2xl border border-border p-8 hover:border-wine/30 transition-all duration-300 group">
-                <div className="w-14 h-14 rounded-xl bg-wine/10 flex items-center justify-center mb-6 group-hover:bg-wine/20 transition-colors">
+                className="bg-gradient-card rounded-2xl border border-border p-6 sm:p-8 hover:border-wine/30 transition-all duration-500 group hover:-translate-y-1 hover:shadow-xl hover:shadow-wine/10">
+                <div className="w-14 h-14 rounded-xl bg-wine/10 flex items-center justify-center mb-6 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300">
                   <Icon size={28} className="text-wine" />
                 </div>
-                <h3 className="font-heading text-2xl font-bold mb-4">{cap.title}</h3>
+                <h3 className="font-heading text-xl sm:text-2xl font-bold mb-4">{cap.title}</h3>
                 <p className="text-muted-foreground leading-relaxed text-sm mb-6">{cap.desc}</p>
-                <Link to="/demo" className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase">
-                  {get("capabilities", "cta", "Solicita una demo →")}
+                <Link to="/demo" className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase inline-flex items-center gap-1 group-hover:gap-2">
+                  {get("capabilities", "cta", "Solicita una demo")}
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
               </motion.div>
             );
