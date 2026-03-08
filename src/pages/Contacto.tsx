@@ -11,9 +11,18 @@ import { toast } from "sonner";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 
+const defaultProblems = [
+  "Siempre vendes los mismos vinos",
+  "Tu equipo de sala no llega",
+  "Tienes vinos estancados",
+  "Te falta variedad",
+  "Gestión en tiempo real",
+];
+
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
-  const { get } = usePageContent("contacto");
+  const { get, getJson } = usePageContent("contacto");
+  const problems = getJson<string[]>("sidebar", "problems", defaultProblems);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,22 +73,22 @@ const Contacto = () => {
               </h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="name" placeholder="Nombre" required className="bg-card border-border" />
-                  <Input name="position" placeholder="Cargo en el restaurante" className="bg-card border-border" />
+                  <Input name="name" placeholder={get("form", "placeholder_name", "Nombre")} required className="bg-card border-border" />
+                  <Input name="position" placeholder={get("form", "placeholder_position", "Cargo en el restaurante")} className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="email" type="email" placeholder="Email" required className="bg-card border-border" />
-                  <Input name="phone" type="tel" placeholder="Teléfono" className="bg-card border-border" />
+                  <Input name="email" type="email" placeholder={get("form", "placeholder_email", "Email")} required className="bg-card border-border" />
+                  <Input name="phone" type="tel" placeholder={get("form", "placeholder_phone", "Teléfono")} className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="restaurant" placeholder="Restaurante" className="bg-card border-border" />
-                  <Input name="city" placeholder="Ciudad" className="bg-card border-border" />
+                  <Input name="restaurant" placeholder={get("form", "placeholder_restaurant", "Restaurante")} className="bg-card border-border" />
+                  <Input name="city" placeholder={get("form", "placeholder_city", "Ciudad")} className="bg-card border-border" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="references" placeholder="Número de referencias" className="bg-card border-border" />
-                  <Input name="menu_link" placeholder="Link a tu carta" className="bg-card border-border" />
+                  <Input name="references" placeholder={get("form", "placeholder_references", "Número de referencias")} className="bg-card border-border" />
+                  <Input name="menu_link" placeholder={get("form", "placeholder_menu_link", "Link a tu carta")} className="bg-card border-border" />
                 </div>
-                <Textarea name="message" placeholder="Mensaje (¿Qué aspectos deseas mejorar?)" className="bg-card border-border min-h-[120px]" />
+                <Textarea name="message" placeholder={get("form", "placeholder_message", "Mensaje (¿Qué aspectos deseas mejorar?)")} className="bg-card border-border min-h-[120px]" />
                 <Button type="submit" disabled={submitting}
                   className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? "Enviando..." : get("form", "button", "Enviar solicitud")}
@@ -93,7 +102,7 @@ const Contacto = () => {
                   {get("sidebar", "problems_title", "¿Tienes alguno de estos problemas?")}
                 </h3>
                 <ul className="space-y-3 text-muted-foreground text-sm">
-                  {["Siempre vendes los mismos vinos", "Tu equipo de sala no llega", "Tienes vinos estancados", "Te falta variedad", "Gestión en tiempo real"].map(item => (
+                  {problems.map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
                       {item}
@@ -106,7 +115,7 @@ const Contacto = () => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">Email</p>
+                    <p className="text-sm font-medium">{get("contact", "email_label", "Email")}</p>
                     <a href={`mailto:${get("contact", "email", "info@winerim.com")}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {get("contact", "email", "info@winerim.com")}
                     </a>
@@ -115,7 +124,7 @@ const Contacto = () => {
                 <div className="flex items-center gap-3">
                   <MessageCircle className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">WhatsApp</p>
+                    <p className="text-sm font-medium">{get("contact", "whatsapp_label", "WhatsApp")}</p>
                     <a href={`https://wa.me/${get("contact", "whatsapp_number", "34623165179")}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {get("contact", "whatsapp_display", "+34 623 165 179")}
                     </a>
@@ -124,7 +133,7 @@ const Contacto = () => {
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">Llamadas</p>
+                    <p className="text-sm font-medium">{get("contact", "phone_label", "Llamadas")}</p>
                     <a href={`tel:${get("contact", "phone_number", "+34722180348")}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {get("contact", "phone_display", "+34 722 180 348")}
                     </a>
@@ -133,9 +142,11 @@ const Contacto = () => {
               </div>
 
               <div className="pt-4 border-t border-border">
-                <h3 className="font-heading text-lg font-semibold mb-4">Winerim en un minuto</h3>
+                <h3 className="font-heading text-lg font-semibold mb-4">
+                  {get("sidebar", "video_title", "Winerim en un minuto")}
+                </h3>
                 <div className="aspect-video rounded-xl overflow-hidden border border-border">
-                  <iframe src="https://www.youtube.com/embed/-PleM286zeY" title="Winerim en un minuto"
+                  <iframe src={get("sidebar", "video_url", "https://www.youtube.com/embed/-PleM286zeY")} title="Winerim en un minuto"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen className="w-full h-full" loading="lazy" />
                 </div>
