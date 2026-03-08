@@ -75,10 +75,10 @@ const Demo = () => {
                 {get("form", "title", "Solicita tu demo gratuita")}
               </h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <Input name="name" placeholder="Nombre completo" className="bg-background border-border" />
-                <Input name="email" type="email" placeholder="Email" className="bg-background border-border" />
+                <Input name="name" placeholder="Nombre completo" required className="bg-background border-border" />
+                <Input name="email" type="email" placeholder="Email" required className="bg-background border-border" />
                 <Input name="phone" type="tel" placeholder="Teléfono" className="bg-background border-border" />
-                <Input name="restaurant" placeholder="Nombre del restaurante" className="bg-background border-border" />
+                <Input name="restaurant" placeholder="Nombre del restaurante" required className="bg-background border-border" />
                 <Input name="city" placeholder="Ciudad" className="bg-background border-border" />
                 <Button type="submit" disabled={submitting}
                   className="w-full bg-gradient-wine text-primary-foreground py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
