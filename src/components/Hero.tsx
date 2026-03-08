@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const Hero = () => {
+  const { get } = usePageContent("home");
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
@@ -24,7 +27,7 @@ const Hero = () => {
             transition={{ delay: 0.3 }}
             className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6"
           >
-            Carta de vinos digital
+            {get("hero", "tagline", "Carta de vinos digital")}
           </motion.p>
 
           <motion.h1
@@ -33,9 +36,15 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8"
           >
-            Una nueva forma de{" "}
-            <span className="text-gradient-wine italic">sentir</span> y{" "}
-            <span className="text-gradient-wine italic">vivir</span> el vino
+            {get("hero", "title", "Una nueva forma de")}{" "}
+            <span className="text-gradient-wine italic">
+              {get("hero", "highlight1", "sentir")}
+            </span>{" "}
+            {get("hero", "connector", "y")}{" "}
+            <span className="text-gradient-wine italic">
+              {get("hero", "highlight2", "vivir")}
+            </span>{" "}
+            {get("hero", "title_end", "el vino")}
           </motion.h1>
 
           <motion.p
@@ -44,8 +53,7 @@ const Hero = () => {
             transition={{ delay: 0.7 }}
             className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-lg"
           >
-            El recomendador inteligente que transforma la experiencia
-            gastronómica de tu restaurante y potencia las ventas de tu bodega.
+            {get("hero", "subtitle", "El recomendador inteligente que transforma la experiencia gastronómica de tu restaurante y potencia las ventas de tu bodega.")}
           </motion.p>
 
           <motion.div
@@ -58,16 +66,16 @@ const Hero = () => {
               href="/demo"
               className="bg-gradient-wine text-primary-foreground px-8 py-4 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity text-center"
             >
-              Descubre Winerim
+              {get("hero", "cta_primary", "Descubre Winerim")}
             </a>
             <a
-              href="https://youtu.be/-PleM286zeY"
+              href={get("hero", "video_url", "https://youtu.be/-PleM286zeY")}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 px-8 py-4 rounded border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-colors"
             >
               <Play size={16} className="text-wine" />
-              Winerim en 1 minuto
+              {get("hero", "cta_secondary", "Winerim en 1 minuto")}
             </a>
           </motion.div>
         </div>
