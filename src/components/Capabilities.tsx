@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Settings, Package, Utensils } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const capabilities = [
   {
@@ -20,47 +21,31 @@ const capabilities = [
 ];
 
 const Capabilities = () => {
+  const { get } = usePageContent("home");
+
   return (
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">
-            Winerim te permite
+            {get("capabilities", "label", "Winerim te permite")}
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold">
-            Funcionalidades principales
+            {get("capabilities", "title", "Funcionalidades principales")}
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {capabilities.map((cap, i) => (
-            <motion.div
-              key={cap.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-gradient-card rounded-2xl border border-border p-8 hover:border-wine/30 transition-all duration-300 group"
-            >
+            <motion.div key={cap.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
+              className="bg-gradient-card rounded-2xl border border-border p-8 hover:border-wine/30 transition-all duration-300 group">
               <div className="w-14 h-14 rounded-xl bg-wine/10 flex items-center justify-center mb-6 group-hover:bg-wine/20 transition-colors">
                 <cap.icon size={28} className="text-wine" />
               </div>
-              <h3 className="font-heading text-2xl font-bold mb-4">
-                {cap.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed text-sm mb-6">
-                {cap.desc}
-              </p>
-              <a
-                href="/demo"
-                className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase"
-              >
-                Solicita una demo →
+              <h3 className="font-heading text-2xl font-bold mb-4">{cap.title}</h3>
+              <p className="text-muted-foreground leading-relaxed text-sm mb-6">{cap.desc}</p>
+              <a href="/demo" className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase">
+                {get("capabilities", "cta", "Solicita una demo →")}
               </a>
             </motion.div>
           ))}
