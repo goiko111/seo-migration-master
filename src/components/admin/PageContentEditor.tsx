@@ -3,8 +3,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Save, Plus, Trash2, Loader2 } from "lucide-react";
+import { Save, Plus, Trash2, Loader2, Code, List } from "lucide-react";
 import { toast } from "sonner";
+import JsonListEditor from "./JsonListEditor";
 
 interface ContentItem {
   id: string;
