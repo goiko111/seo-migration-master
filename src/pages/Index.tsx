@@ -9,22 +9,25 @@ import Capabilities from "@/components/Capabilities";
 import VideoSection from "@/components/VideoSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import { PageContentProvider } from "@/contexts/PageContentContext";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main>
-        <Hero />
-        <LogoStrip />
-        <WhatIsWinerim />
-        <Features />
-        <Quote />
-        <Benefits />
-        <Capabilities />
-        <VideoSection />
-        <CTASection />
-      </main>
+      <PageContentProvider page="home">
+        <main>
+          <Hero />
+          <LogoStrip />
+          <WhatIsWinerim />
+          <Features />
+          <Quote />
+          <Benefits />
+          <Capabilities />
+          <VideoSection />
+          <CTASection />
+        </main>
+      </PageContentProvider>
       <Footer />
     </div>
   );

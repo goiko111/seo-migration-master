@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import winerimLogo from "@/assets/winerim-logo.png";
 
 const Footer = () => {
@@ -17,11 +18,15 @@ const Footer = () => {
               Producto
             </h4>
             <ul className="space-y-3">
-              {["Funcionalidades", "Precios", "Demo gratuita", "Integraciones"].map((item) => (
-                <li key={item}>
-                  <a href="/demo" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item}
-                  </a>
+              {[
+                { label: "Funcionalidades", href: "/afiliate" },
+                { label: "Demo gratuita", href: "/demo" },
+                { label: "Contacto", href: "/contacto" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link to={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -39,9 +44,9 @@ const Footer = () => {
                 { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -54,9 +59,9 @@ const Footer = () => {
             <ul className="space-y-3">
               {["Política de privacidad", "Términos de uso", "Cookies"].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
                     {item}
-                  </a>
+                  </span>
                 </li>
               ))}
             </ul>

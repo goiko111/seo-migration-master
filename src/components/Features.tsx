@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   TrendingUp, RotateCcw, Package, Sliders,
   Edit3, Users, Zap, Filter,
   Monitor, QrCode, Headphones, BarChart3,
 } from "lucide-react";
-import { usePageContent } from "@/hooks/usePageContent";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const features = [
   { icon: TrendingUp, title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
@@ -22,7 +23,7 @@ const features = [
 ];
 
 const Features = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding bg-gradient-dark">
@@ -51,9 +52,9 @@ const Features = () => {
         </div>
 
         <div className="text-center mt-12">
-          <a href="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
+          <Link to="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
             {get("features", "cta", "Agenda una llamada")}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

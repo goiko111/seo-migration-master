@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageContent } from "@/hooks/usePageContent";
+import SEOHead from "@/components/SEOHead";
 
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -41,6 +42,7 @@ const Contacto = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SEOHead title="Contacto" description="Contacta con Winerim. Analizamos tu carta de vinos gratis y te ayudamos a optimizarla." url="https://winerim.wine/contacto" />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}

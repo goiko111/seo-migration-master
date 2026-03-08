@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { TrendingUp, BarChart3, Package, Layers, PenTool, Users, Zap, Filter, Smartphone, QrCode, Headphones, Activity, ShoppingCart, CreditCard, Settings } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePageContent } from "@/hooks/usePageContent";
+import SEOHead from "@/components/SEOHead";
 
 const features = [
   { icon: TrendingUp, title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
@@ -29,6 +31,7 @@ const Afiliate = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SEOHead title="Programa de Afiliados" description="Únete a la red de establecimientos que están transformando su carta de vinos con Winerim." url="https://winerim.wine/afiliate" />
       <main>
         <section className="pt-32 pb-20 section-padding text-center">
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
@@ -40,10 +43,11 @@ const Afiliate = () => {
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
             {get("hero", "subtitle", "Únete a la red de establecimientos que están transformando su carta de vinos. Accede a todas las herramientas de Winerim.")}
           </motion.p>
-          <motion.a initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            href="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
-            {get("hero", "cta", "Solicita tu demo")}
-          </motion.a>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+            <Link to="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
+              {get("hero", "cta", "Solicita tu demo")}
+            </Link>
+          </motion.div>
         </section>
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
@@ -67,9 +71,9 @@ const Afiliate = () => {
             <p className="text-primary-foreground/80 mb-8">
               {get("cta", "subtitle", "Contacta con nosotros y descubre cómo Winerim puede impulsar tu negocio.")}
             </p>
-            <a href="/contacto" className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
+            <Link to="/contacto" className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
               {get("cta", "button", "Contactar")}
-            </a>
+            </Link>
           </div>
         </section>
       </main>

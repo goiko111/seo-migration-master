@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Settings, Package, Utensils } from "lucide-react";
-import { usePageContent } from "@/hooks/usePageContent";
+import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const capabilities = [
   {
@@ -21,7 +22,7 @@ const capabilities = [
 ];
 
 const Capabilities = () => {
-  const { get } = usePageContent("home");
+  const { get } = useSharedPageContent();
 
   return (
     <section className="section-padding bg-gradient-dark">
@@ -44,9 +45,9 @@ const Capabilities = () => {
               </div>
               <h3 className="font-heading text-2xl font-bold mb-4">{cap.title}</h3>
               <p className="text-muted-foreground leading-relaxed text-sm mb-6">{cap.desc}</p>
-              <a href="/demo" className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase">
+              <Link to="/demo" className="text-sm font-semibold text-wine hover:text-wine-light transition-colors tracking-wider uppercase">
                 {get("capabilities", "cta", "Solicita una demo →")}
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>

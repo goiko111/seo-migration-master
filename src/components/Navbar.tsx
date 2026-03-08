@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.png";
@@ -31,29 +32,29 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
-        <a href="/">
+        <Link to="/">
           <img src={winerimLogo} alt="Winerim" className="h-7" />
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.href}
               className="text-sm font-medium tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
-          href="/demo"
+        <Link
+          to="/demo"
           className="hidden md:inline-flex bg-gradient-wine text-primary-foreground px-6 py-2.5 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
         >
           Prueba Gratis
-        </a>
+        </Link>
 
         {/* Mobile toggle */}
         <button
@@ -76,21 +77,22 @@ const Navbar = () => {
           >
             <nav className="flex flex-col gap-4 px-6 py-6">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.href}
+                  to={item.href}
                   className="text-sm font-medium tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="/demo"
+              <Link
+                to="/demo"
                 className="bg-gradient-wine text-primary-foreground px-6 py-2.5 rounded text-sm font-semibold tracking-wider uppercase text-center"
+                onClick={() => setMobileOpen(false)}
               >
                 Prueba Gratis
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}
