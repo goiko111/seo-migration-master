@@ -7,23 +7,30 @@ import {
 } from "lucide-react";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 
-const features = [
-  { icon: TrendingUp, title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
-  { icon: RotateCcw, title: "Rotación de bodega", desc: "Aumenta las ventas de tu selección de vinos" },
-  { icon: Package, title: "Gestión de inventario", desc: "Mejora la administración de tu stock" },
-  { icon: Sliders, title: "Flexibilidad en tu oferta", desc: "Adapta tu carta en tiempo real" },
-  { icon: Edit3, title: "Editor exclusivo", desc: "Realiza tus actualizaciones diarias" },
-  { icon: Users, title: "Selección personalizada", desc: "Ofrece sugerencias a cada cliente" },
-  { icon: Zap, title: "Sugerencias instantáneas", desc: "Recomendaciones de forma inmediata" },
-  { icon: Filter, title: "Filtros eficientes", desc: "Simplifica la búsqueda con filtros concisos" },
-  { icon: Monitor, title: "Instalación sencilla", desc: "Implementación simple y actualizable" },
-  { icon: QrCode, title: "Códigos QR", desc: "Disponible en cualquier formato vía QR" },
-  { icon: Headphones, title: "Soporte técnico", desc: "Resuelve dudas con nuestro equipo" },
-  { icon: BarChart3, title: "Analítica en tiempo real", desc: "Controla datos y comportamiento" },
+const iconMap: Record<string, React.ElementType> = {
+  TrendingUp, RotateCcw, Package, Sliders,
+  Edit3, Users, Zap, Filter,
+  Monitor, QrCode, Headphones, BarChart3,
+};
+
+const defaultFeatures = [
+  { icon: "TrendingUp", title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
+  { icon: "RotateCcw", title: "Rotación de bodega", desc: "Aumenta las ventas de tu selección de vinos" },
+  { icon: "Package", title: "Gestión de inventario", desc: "Mejora la administración de tu stock" },
+  { icon: "Sliders", title: "Flexibilidad en tu oferta", desc: "Adapta tu carta en tiempo real" },
+  { icon: "Edit3", title: "Editor exclusivo", desc: "Realiza tus actualizaciones diarias" },
+  { icon: "Users", title: "Selección personalizada", desc: "Ofrece sugerencias a cada cliente" },
+  { icon: "Zap", title: "Sugerencias instantáneas", desc: "Recomendaciones de forma inmediata" },
+  { icon: "Filter", title: "Filtros eficientes", desc: "Simplifica la búsqueda con filtros concisos" },
+  { icon: "Monitor", title: "Instalación sencilla", desc: "Implementación simple y actualizable" },
+  { icon: "QrCode", title: "Códigos QR", desc: "Disponible en cualquier formato vía QR" },
+  { icon: "Headphones", title: "Soporte técnico", desc: "Resuelve dudas con nuestro equipo" },
+  { icon: "BarChart3", title: "Analítica en tiempo real", desc: "Controla datos y comportamiento" },
 ];
 
 const Features = () => {
-  const { get } = useSharedPageContent();
+  const { get, getJson } = useSharedPageContent();
+  const features = getJson<typeof defaultFeatures>("features", "items", defaultFeatures);
 
   return (
     <section className="section-padding bg-gradient-dark">
@@ -41,14 +48,17 @@ const Features = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {features.map((feat, i) => (
-            <motion.div key={feat.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-              className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:glow-wine">
-              <feat.icon size={28} className="text-wine mb-4 group-hover:text-wine-light transition-colors" />
-              <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
-            </motion.div>
-          ))}
+          {features.map((feat, i) => {
+            const Icon = iconMap[feat.icon] || TrendingUp;
+            return (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:glow-wine">
+                <Icon size={28} className="text-wine mb-4 group-hover:text-wine-light transition-colors" />
+                <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="text-center mt-12">
