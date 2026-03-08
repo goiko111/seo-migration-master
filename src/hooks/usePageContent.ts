@@ -36,5 +36,15 @@ export const usePageContent = (page: string) => {
     return content[section]?.[key] ?? fallback;
   };
 
-  return { content, loading, get };
+  const getJson = <T,>(section: string, key: string, fallback: T): T => {
+    const raw = content[section]?.[key];
+    if (!raw) return fallback;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return fallback;
+    }
+  };
+
+  return { content, loading, get, getJson };
 };
