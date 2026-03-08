@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import { InterviewSkeleton } from "@/components/ContentSkeletons";
 
 interface Interview {
   quote: string;
