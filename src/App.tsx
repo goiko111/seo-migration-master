@@ -1,22 +1,37 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
-import Index from "./pages/Index";
-import Blog from "./pages/Blog";
-import SommelierCorner from "./pages/SommelierCorner";
-import Afiliate from "./pages/Afiliate";
-import Contacto from "./pages/Contacto";
-import Demo from "./pages/Demo";
-import NotFound from "./pages/NotFound";
-import ArticlePage from "./pages/ArticlePage";
-import AdminLogin from "./pages/AdminLogin";
-import Admin from "./pages/Admin";
 import ScrollToTop from "./components/ScrollToTop";
+import CookieConsent from "./components/CookieConsent";
+import WhatsAppButton from "./components/WhatsAppButton";
+
+// Eager load home for fast first paint
+import Index from "./pages/Index";
+
+// Lazy load other routes
+const Blog = lazy(() => import("./pages/Blog"));
+const SommelierCorner = lazy(() => import("./pages/SommelierCorner"));
+const Afiliate = lazy(() => import("./pages/Afiliate"));
+const Contacto = lazy(() => import("./pages/Contacto"));
+const Demo = lazy(() => import("./pages/Demo"));
+const ArticlePage = lazy(() => import("./pages/ArticlePage"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Privacidad = lazy(() => import("./pages/Privacidad"));
+const Terminos = lazy(() => import("./pages/Terminos"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
+
+const PageLoader = () => (
+  <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-wine border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -26,18 +41,24 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/sommelier-corner" element={<SommelierCorner />} />
-            <Route path="/afiliate" element={<Afiliate />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/demo" element={<Demo />} />
-            <Route path="/article/:slug" element={<ArticlePage />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/sommelier-corner" element={<SommelierCorner />} />
+              <Route path="/afiliate" element={<Afiliate />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/demo" element={<Demo />} />
+              <Route path="/article/:slug" element={<ArticlePage />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/privacidad" element={<Privacidad />} />
+              <Route path="/terminos" element={<Terminos />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+          <WhatsAppButton />
+          <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
