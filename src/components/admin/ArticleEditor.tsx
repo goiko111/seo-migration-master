@@ -43,11 +43,26 @@ const ArticleEditor = ({ article, onChange, onSave, onCancel, saving }: ArticleE
       </div>
       <div className="grid md:grid-cols-2 gap-4">
         <Input placeholder="Título" value={article.title}
-          onChange={e => update({ title: e.target.value })}
+          onChange={e => {
+            const title = e.target.value;
+            const autoSlug = !article.id && !article.slug;
+            update({
+              title,
+              ...(autoSlug ? { slug: title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") } : {}),
+            });
+          }}
           className="bg-background border-border" />
-        <Input placeholder="Slug (URL)" value={article.slug}
-          onChange={e => update({ slug: e.target.value })}
-          className="bg-background border-border" />
+        <div className="flex gap-2">
+          <Input placeholder="Slug (URL)" value={article.slug}
+            onChange={e => update({ slug: e.target.value })}
+            className="bg-background border-border flex-1" />
+          {article.slug && (
+            <a href={`/article/${article.slug}`} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center px-3 text-xs text-accent hover:underline shrink-0">
+              Vista previa ↗
+            </a>
+          )}
+        </div>
       </div>
       <div className="grid md:grid-cols-3 gap-4">
         <select value={article.category}
