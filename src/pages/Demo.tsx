@@ -44,6 +44,7 @@ const Demo = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SEOHead title="Demo Gratuita" description="Solicita una demostración personalizada de Winerim y descubre cómo aumentar tus ventas de vino." url="https://winerim.wine/demo" />
       <main>
         <section className="pt-32 pb-24 section-padding">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">

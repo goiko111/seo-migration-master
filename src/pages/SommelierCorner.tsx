@@ -73,6 +73,7 @@ const SommelierCorner = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SEOHead title="Sommelier Corner" description="Entrevistas con los mejores sommeliers y expertos en vino de España." url="https://winerim.wine/sommelier-corner" />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
