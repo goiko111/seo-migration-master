@@ -158,7 +158,7 @@ const Admin = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs defaultValue="articles">
+        <Tabs defaultValue="analytics">
           <TabsList className="mb-8">
             <TabsTrigger value="analytics">Dashboard</TabsTrigger>
             <TabsTrigger value="articles">Artículos</TabsTrigger>
