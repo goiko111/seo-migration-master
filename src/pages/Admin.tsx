@@ -11,6 +11,7 @@ import ArticleEditor from "@/components/admin/ArticleEditor";
 import ArticleList from "@/components/admin/ArticleList";
 import LeadsTab from "@/components/admin/LeadsTab";
 import PageContentEditor from "@/components/admin/PageContentEditor";
+import AnalyticsTab from "@/components/admin/AnalyticsTab";
 
 interface Article {
   id: string;
@@ -157,12 +158,17 @@ const Admin = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs defaultValue="articles">
+        <Tabs defaultValue="analytics">
           <TabsList className="mb-8">
+            <TabsTrigger value="analytics">Dashboard</TabsTrigger>
             <TabsTrigger value="articles">Artículos</TabsTrigger>
             <TabsTrigger value="pages">Textos de páginas</TabsTrigger>
             <TabsTrigger value="leads">Leads ({leads.length})</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="analytics">
+            <AnalyticsTab leads={leads} />
+          </TabsContent>
 
           <TabsContent value="articles">
             {editingArticle ? (
