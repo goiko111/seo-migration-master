@@ -11,6 +11,7 @@ import ArticleEditor from "@/components/admin/ArticleEditor";
 import ArticleList from "@/components/admin/ArticleList";
 import LeadsTab from "@/components/admin/LeadsTab";
 import PageContentEditor from "@/components/admin/PageContentEditor";
+import AnalyticsTab from "@/components/admin/AnalyticsTab";
 
 interface Article {
   id: string;
