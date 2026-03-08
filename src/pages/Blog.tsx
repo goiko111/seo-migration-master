@@ -8,10 +8,6 @@ import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
-import { supabase } from "@/integrations/supabase/client";
-import { articles as staticArticles } from "@/data/articles";
-import { usePageContent } from "@/hooks/usePageContent";
-import SEOHead from "@/components/SEOHead";
 
 interface BlogPost {
   title: string;
