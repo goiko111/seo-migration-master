@@ -43,10 +43,11 @@ const Afiliate = () => {
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
             {get("hero", "subtitle", "Únete a la red de establecimientos que están transformando su carta de vinos. Accede a todas las herramientas de Winerim.")}
           </motion.p>
-          <motion.a initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            href="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
-            {get("hero", "cta", "Solicita tu demo")}
-          </motion.a>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+            <Link to="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
+              {get("hero", "cta", "Solicita tu demo")}
+            </Link>
+          </motion.div>
         </section>
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
