@@ -3,6 +3,7 @@ import { TrendingUp, BarChart3, Package, Layers, PenTool, Users, Zap, Filter, Sm
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePageContent } from "@/hooks/usePageContent";
+import SEOHead from "@/components/SEOHead";
 
 const features = [
   { icon: TrendingUp, title: "Potencia las ventas", desc: "Duplica el valor de tu ticket medio" },
