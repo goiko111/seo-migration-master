@@ -67,14 +67,13 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                get("legal", "item1", "Política de privacidad"),
-                get("legal", "item2", "Términos de uso"),
-                get("legal", "item3", "Cookies"),
+                { label: get("legal", "item1", "Política de privacidad"), href: "/privacidad" },
+                { label: get("legal", "item2", "Términos de uso"), href: "/terminos" },
               ].map((item) => (
-                <li key={item}>
-                  <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                    {item}
-                  </span>
+                <li key={item.href}>
+                  <Link to={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
