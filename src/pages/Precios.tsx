@@ -303,32 +303,7 @@ const Precios = () => {
         </div>
       </section>
 
-      {/* 6. FAQ */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-3xl mx-auto">
-          <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Preguntas frecuentes</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold">
-              Todo lo que necesitas <span className="text-gradient-wine italic">saber</span>
-            </h2>
-          </ScrollReveal>
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <ScrollReveal key={i} delay={i * 0.04}>
-                <details className="group bg-gradient-card rounded-xl border border-border overflow-hidden">
-                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                    <span className="font-medium text-sm pr-4">{faq.q}</span>
-                    <ChevronDown size={16} className="text-muted-foreground shrink-0 transition-transform group-open:rotate-180" />
-                  </summary>
-                  <div className="px-5 pb-5 -mt-1">
-                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
-                  </div>
-                </details>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} schemaId="precios" />
 
       {/* 7. CTA FINAL */}
       <section className="section-padding">
