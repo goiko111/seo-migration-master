@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const iconMap: Record<string, React.ElementType> = {
   TrendingUp, BarChart3, Package, Layers, PenTool, Users, Zap, Filter,
@@ -30,28 +31,76 @@ const defaultFeatures = [
   { icon: "Settings", title: "Integraciones", desc: "Nos conectamos a tu TPV, ERP y más" },
 ];
 
+type LangContent = {
+  metaTitle: string; metaDesc: string;
+  heroTitlePrefix: string; heroTitleHighlight: string;
+  heroSubtitle: string; heroCta: string;
+  ctaTitle: string; ctaSubtitle: string; ctaButton: string;
+};
+
+const langContent: Record<string, LangContent> = {
+  es: {
+    metaTitle: "Programa de Afiliados", metaDesc: "Únete a la red de establecimientos que están transformando su carta de vinos con Winerim.",
+    heroTitlePrefix: "Programa de", heroTitleHighlight: "Afiliados",
+    heroSubtitle: "Únete a la red de establecimientos que están transformando su carta de vinos. Accede a todas las herramientas de Winerim.",
+    heroCta: "Solicita tu demo",
+    ctaTitle: "¿Listo para transformar tu carta de vinos?",
+    ctaSubtitle: "Contacta con nosotros y descubre cómo Winerim puede impulsar tu negocio.",
+    ctaButton: "Contactar",
+  },
+  en: {
+    metaTitle: "Affiliate Program", metaDesc: "Join the network of establishments transforming their wine lists with Winerim.",
+    heroTitlePrefix: "Affiliate", heroTitleHighlight: "Program",
+    heroSubtitle: "Join the network of establishments transforming their wine lists. Access all Winerim tools.",
+    heroCta: "Request your demo",
+    ctaTitle: "Ready to transform your wine list?",
+    ctaSubtitle: "Contact us and discover how Winerim can boost your business.",
+    ctaButton: "Contact us",
+  },
+  it: {
+    metaTitle: "Programma Affiliati", metaDesc: "Unisciti alla rete di ristoranti che stanno trasformando la loro carta dei vini con Winerim.",
+    heroTitlePrefix: "Programma", heroTitleHighlight: "Affiliati",
+    heroSubtitle: "Unisciti alla rete di ristoranti che stanno trasformando la loro carta dei vini. Accedi a tutti gli strumenti di Winerim.",
+    heroCta: "Richiedi la tua demo",
+    ctaTitle: "Pronto a trasformare la tua carta dei vini?",
+    ctaSubtitle: "Contattaci e scopri come Winerim può potenziare il tuo business.",
+    ctaButton: "Contattaci",
+  },
+  fr: {
+    metaTitle: "Programme Affiliés", metaDesc: "Rejoignez le réseau d'établissements qui transforment leur carte des vins avec Winerim.",
+    heroTitlePrefix: "Programme", heroTitleHighlight: "d'Affiliés",
+    heroSubtitle: "Rejoignez le réseau d'établissements qui transforment leur carte des vins. Accédez à tous les outils Winerim.",
+    heroCta: "Demandez votre démo",
+    ctaTitle: "Prêt à transformer votre carte des vins ?",
+    ctaSubtitle: "Contactez-nous et découvrez comment Winerim peut booster votre activité.",
+    ctaButton: "Nous contacter",
+  },
+};
+
 const Afiliate = () => {
   const { get, getJson } = usePageContent("afiliate");
+  const { lang, localePath } = useLanguage();
+  const t = langContent[lang] || langContent.es;
   const features = getJson<typeof defaultFeatures>("features", "items", defaultFeatures);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title="Programa de Afiliados" description="Únete a la red de establecimientos que están transformando su carta de vinos con Winerim." url="https://winerim.wine/afiliate" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/afiliate" />
       <main>
         <section className="pt-32 pb-20 section-padding text-center">
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="font-heading text-4xl md:text-6xl font-bold mb-6">
-            {get("hero", "title_prefix", "Programa de")}{" "}
-            <span className="text-gradient-wine">{get("hero", "title_highlight", "Afiliados")}</span>
+            {lang === "es" ? get("hero", "title_prefix", t.heroTitlePrefix) : t.heroTitlePrefix}{" "}
+            <span className="text-gradient-wine">{lang === "es" ? get("hero", "title_highlight", t.heroTitleHighlight) : t.heroTitleHighlight}</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            {get("hero", "subtitle", "Únete a la red de establecimientos que están transformando su carta de vinos. Accede a todas las herramientas de Winerim.")}
+            {lang === "es" ? get("hero", "subtitle", t.heroSubtitle) : t.heroSubtitle}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-            <Link to="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
-              {get("hero", "cta", "Solicita tu demo")}
+            <Link to={localePath("/demo")} className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
+              {lang === "es" ? get("hero", "cta", t.heroCta) : t.heroCta}
             </Link>
           </motion.div>
         </section>
@@ -75,13 +124,13 @@ const Afiliate = () => {
         <section className="section-padding bg-gradient-wine text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
-              {get("cta", "title", "¿Listo para transformar tu carta de vinos?")}
+              {lang === "es" ? get("cta", "title", t.ctaTitle) : t.ctaTitle}
             </h2>
             <p className="text-primary-foreground/80 mb-8">
-              {get("cta", "subtitle", "Contacta con nosotros y descubre cómo Winerim puede impulsar tu negocio.")}
+              {lang === "es" ? get("cta", "subtitle", t.ctaSubtitle) : t.ctaSubtitle}
             </p>
-            <Link to="/contacto" className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
-              {get("cta", "button", "Contactar")}
+            <Link to={localePath("/contacto")} className="inline-flex bg-background text-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:bg-background/90 transition-colors">
+              {lang === "es" ? get("cta", "button", t.ctaButton) : t.ctaButton}
             </Link>
           </div>
         </section>
