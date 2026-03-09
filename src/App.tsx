@@ -102,6 +102,7 @@ const App = () => (
               <Route path="/integraciones" element={<Integraciones />} />
               <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
               <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
+              <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
