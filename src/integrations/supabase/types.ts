@@ -137,6 +137,113 @@ export type Database = {
         }
         Relationships: []
       }
+      seo_pages: {
+        Row: {
+          body: Json
+          canonical_url: string | null
+          cluster: Database["public"]["Enums"]["seo_cluster"]
+          created_at: string
+          cta_primary_text: string | null
+          cta_primary_url: string | null
+          cta_secondary_text: string | null
+          cta_secondary_url: string | null
+          faqs: Json | null
+          hero_badge: string | null
+          hero_subtitle: string | null
+          hero_title: string
+          id: string
+          lang: string
+          meta_description: string
+          meta_title: string
+          og_image: string | null
+          published: boolean
+          published_at: string | null
+          related_pages: string[] | null
+          schema_type: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          body?: Json
+          canonical_url?: string | null
+          cluster: Database["public"]["Enums"]["seo_cluster"]
+          created_at?: string
+          cta_primary_text?: string | null
+          cta_primary_url?: string | null
+          cta_secondary_text?: string | null
+          cta_secondary_url?: string | null
+          faqs?: Json | null
+          hero_badge?: string | null
+          hero_subtitle?: string | null
+          hero_title: string
+          id?: string
+          lang?: string
+          meta_description: string
+          meta_title: string
+          og_image?: string | null
+          published?: boolean
+          published_at?: string | null
+          related_pages?: string[] | null
+          schema_type?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          body?: Json
+          canonical_url?: string | null
+          cluster?: Database["public"]["Enums"]["seo_cluster"]
+          created_at?: string
+          cta_primary_text?: string | null
+          cta_primary_url?: string | null
+          cta_secondary_text?: string | null
+          cta_secondary_url?: string | null
+          faqs?: Json | null
+          hero_badge?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string
+          id?: string
+          lang?: string
+          meta_description?: string
+          meta_title?: string
+          og_image?: string | null
+          published?: boolean
+          published_at?: string | null
+          related_pages?: string[] | null
+          schema_type?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      seo_taxonomies: {
+        Row: {
+          id: string
+          page_id: string
+          taxonomy_type: string
+          taxonomy_value: string
+        }
+        Insert: {
+          id?: string
+          page_id: string
+          taxonomy_type: string
+          taxonomy_value: string
+        }
+        Update: {
+          id?: string
+          page_id?: string
+          taxonomy_type?: string
+          taxonomy_value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_taxonomies_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "seo_pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -173,6 +280,18 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "editor"
+      seo_cluster:
+        | "city"
+        | "restaurant_type"
+        | "country"
+        | "grape"
+        | "region"
+        | "style"
+        | "pairing"
+        | "guide"
+        | "problem"
+        | "comparison"
+        | "resource"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -301,6 +420,19 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "editor"],
+      seo_cluster: [
+        "city",
+        "restaurant_type",
+        "country",
+        "grape",
+        "region",
+        "style",
+        "pairing",
+        "guide",
+        "problem",
+        "comparison",
+        "resource",
+      ],
     },
   },
 } as const
