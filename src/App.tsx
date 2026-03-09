@@ -52,6 +52,7 @@ const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
+const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
