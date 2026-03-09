@@ -112,20 +112,7 @@ const SoftwareCartaVinos = () => {
     });
     document.head.appendChild(faqScript);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "breadcrumb-jsonld-software";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine" },
-        { "@type": "ListItem", position: 2, name: "Software para Carta de Vinos", item: "https://winerim.wine/software-carta-de-vinos" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
-    return () => { faqScript.remove(); breadcrumb.remove(); };
+    return () => { faqScript.remove(); };
   }, []);
 
   return (
