@@ -347,18 +347,18 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 3. POR QUÉ EL VINO */}
+      {/* WHY WINE */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">El vino como palanca</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.whyLabel}</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">
-              Por qué el vino <span className="text-gradient-wine italic">aumenta el ticket medio</span>
+              {t.whyTitle1}<span className="text-gradient-wine italic">{t.whyHighlight}</span>
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-5">
-            {wineAdvantages.map((adv, i) => {
-              const Icon = adv.icon;
+            {t.wineAdvantages.map((adv, i) => {
+              const Icon = wineAdvIcons[i] || DollarSign;
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <div className="bg-gradient-card rounded-xl border border-border p-6 h-full">
