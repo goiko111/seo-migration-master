@@ -46,6 +46,7 @@ interface ArticleData {
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<ArticleData | null | undefined>(undefined);
+  const mdComponents = useMarkdownComponents(article?.type === "interview");
 
   useEffect(() => {
     if (!slug) { setArticle(null); return; }
