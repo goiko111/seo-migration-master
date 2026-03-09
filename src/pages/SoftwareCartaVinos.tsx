@@ -90,7 +90,7 @@ const faqs = [
 ];
 
 const CellIcon = ({ value }: { value: boolean | string }) => {
-  if (value === true) return <CheckCircle2 size={18} className="text-green-500 mx-auto" />;
+  if (value === true) return <CheckCircle2 size={18} className="text-wine mx-auto" />;
   if (value === "partial") return <MinusCircle size={18} className="text-accent mx-auto" />;
   return <XCircle size={18} className="text-muted-foreground/40 mx-auto" />;
 };
