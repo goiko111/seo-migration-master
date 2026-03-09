@@ -132,7 +132,7 @@ const ArticlePage = () => {
             {article.heroImage && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                 className="rounded-2xl overflow-hidden mb-12">
-                <img src={article.heroImage} alt={article.title} className="w-full max-h-[600px] object-cover" />
+                <img src={article.heroImage} alt={article.title} className="w-full max-h-[600px] object-cover grayscale" />
               </motion.div>
             )}
           </div>
