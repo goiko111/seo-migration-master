@@ -14,6 +14,13 @@ const guides = [
     tag: "Guía",
   },
   {
+    to: "/blog/cuantos-vinos-carta-restaurante",
+    icon: Wine,
+    title: "Cuántos vinos debe tener una carta",
+    desc: "Define el número ideal de referencias según tu tipo de restaurante, cocina y perfil de cliente.",
+    tag: "Guía",
+  },
+  {
     to: "/como-vender-mas-vino-en-un-restaurante",
     icon: TrendingUp,
     title: "Cómo vender más vino en un restaurante",
