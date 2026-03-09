@@ -405,17 +405,17 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 5. ERRORES COMUNES */}
+      {/* MISTAKES */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Evita estos errores</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.errLabel}</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">
-              Errores que <span className="text-gradient-wine italic">reducen</span> tu ticket medio
+              {t.errTitle1}<span className="text-gradient-wine italic">{t.errHighlight}</span>
             </h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
-            {mistakes.map((m, i) => (
+            {t.mistakes.map((m, i) => (
               <ScrollReveal key={i} delay={i * 0.05}>
                 <div className="bg-gradient-card rounded-xl border border-border p-5 flex items-start gap-3">
                   <XCircle size={16} className="text-destructive shrink-0 mt-0.5" />
