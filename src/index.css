@@ -131,20 +131,4 @@
   background: hsl(var(--accent));
 }
 
-/* Interview question styling — bold paragraphs that start with a number */
-.article-body p > strong:first-child:only-child {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1.35rem;
-  line-height: 1.4;
-  color: hsl(var(--foreground));
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid hsl(var(--border));
-}
-
-.article-body p:first-of-type > strong:first-child:only-child {
-  border-top: none;
-  padding-top: 0;
-  margin-top: 1rem;
-}
+/* Interview question styling — handled via ReactMarkdown components instead */
