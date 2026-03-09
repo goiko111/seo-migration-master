@@ -167,8 +167,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       if (scriptEl) scriptEl.remove();
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
+      hreflangEls.forEach((el) => el.remove());
     };
-  }, [title, description, image, url, type, publishedAt, author, noindex]);
+  }, [title, description, image, url, type, publishedAt, author, noindex, hreflang]);
 
   return null;
 };
