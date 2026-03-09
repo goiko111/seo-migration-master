@@ -64,6 +64,8 @@ const CartaNoVende = lazy(() => import("./pages/CartaNoVende"));
 const RotacionVinos = lazy(() => import("./pages/RotacionVinos"));
 const EstrategiaMaridaje = lazy(() => import("./pages/EstrategiaMaridaje"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
+const Soluciones = lazy(() => import("./pages/Soluciones"));
+const Problemas = lazy(() => import("./pages/Problemas"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
