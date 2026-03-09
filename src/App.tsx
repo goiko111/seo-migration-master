@@ -35,6 +35,7 @@ const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
 const CalculadoraMargen = lazy(() => import("./pages/CalculadoraMargen"));
 const BibliotecaVino = lazy(() => import("./pages/BibliotecaVino"));
 const BibliotecaDetalle = lazy(() => import("./pages/BibliotecaDetalle"));
+const CasosExito = lazy(() => import("./pages/CasosExito"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
               <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
               <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
+              <Route path="/casos-exito" element={<CasosExito />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
