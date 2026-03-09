@@ -327,6 +327,12 @@ const WineROICalculator = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+        { to: "/soluciones/aumentar-ticket-medio-restaurante", label: "Aumentar el ticket medio", type: "solution" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "guide" },
+        { to: "/demo", label: "Solicitar demo", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

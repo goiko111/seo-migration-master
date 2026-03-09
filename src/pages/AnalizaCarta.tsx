@@ -531,6 +531,12 @@ const AnalizaCarta = () => {
         </section>
       </main>
 
+      <InternalLinks links={[
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta", type: "guide" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Carta de vinos rentable", type: "guide" },
+        { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist carta rentable", type: "resource" },
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

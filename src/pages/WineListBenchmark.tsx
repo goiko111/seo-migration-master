@@ -271,6 +271,12 @@ const WineListBenchmark = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/cuantos-vinos-carta-restaurante", label: "Cuántos vinos en carta", type: "guide" },
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta", type: "guide" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

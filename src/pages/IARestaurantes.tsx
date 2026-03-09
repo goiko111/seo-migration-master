@@ -411,6 +411,12 @@ const IARestaurantes = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+        { to: "/wine-pairing-generator", label: "Generador de maridajes con IA", type: "tool" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

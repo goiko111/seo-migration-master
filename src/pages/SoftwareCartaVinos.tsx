@@ -460,6 +460,12 @@ const SoftwareCartaVinos = () => {
         </section>
       </main>
 
+      <InternalLinks links={[
+        { to: "/carta-papel-vs-digital", label: "Carta papel vs digital", type: "guide" },
+        { to: "/inteligencia-artificial-restaurantes", label: "IA para restaurantes", type: "guide" },
+        { to: "/wine-roi-calculator", label: "Calculadora de ROI", type: "tool" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "guide" },
+      ]} />
       <Footer />
     </div>
   );
