@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const problems = [
   { icon: Layers, text: "Cada restaurante gestiona el vino de forma diferente: cartas distintas, criterios distintos, calidades distintas." },
