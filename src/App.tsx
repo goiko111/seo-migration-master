@@ -50,6 +50,7 @@ const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
 const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
+const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
