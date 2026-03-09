@@ -28,6 +28,7 @@ const Blog = () => {
         .from("articles")
         .select("slug, title, excerpt, image_url, category")
         .eq("published", true)
+        .neq("category", "interview")
         .order("published_at", { ascending: false });
 
       if (data && data.length > 0) {
