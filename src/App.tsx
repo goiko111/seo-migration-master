@@ -129,6 +129,7 @@ const App = () => (
               <Route path="/ai-wine-software" element={<AiWineSoftware />} />
               <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
               <Route path="/problemas/carta-de-vinos-no-vende" element={<CartaNoVende />} />
+              <Route path="/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" element={<RotacionVinos />} />
               {/* Dynamic programmatic SEO pages - must be before NotFound */}
               <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
               <Route path="/software-vino-*" element={<SeoPage />} />
