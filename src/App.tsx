@@ -39,6 +39,7 @@ const CasosExito = lazy(() => import("./pages/CasosExito"));
 const EjemplosCarta = lazy(() => import("./pages/EjemplosCarta"));
 const CartaPapelVsDigital = lazy(() => import("./pages/CartaPapelVsDigital"));
 const WineListAnalyzer = lazy(() => import("./pages/WineListAnalyzer"));
+const WineROICalculator = lazy(() => import("./pages/WineROICalculator"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
