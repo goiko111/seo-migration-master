@@ -81,6 +81,7 @@ const QueEsWinerim = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
            <div className="max-w-3xl">
             <Breadcrumbs items={[{ label: "Qué es Winerim" }]} />
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
