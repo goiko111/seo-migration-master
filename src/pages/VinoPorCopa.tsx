@@ -71,22 +71,8 @@ const VinoPorCopa = () => {
     });
     document.head.appendChild(faqSchema);
 
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "copa-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Cómo vender vino por copa en un restaurante", item: "https://winerim.wine/vino-por-copa-restaurante" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
     return () => {
       document.getElementById("copa-faq-jsonld")?.remove();
-      document.getElementById("copa-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
