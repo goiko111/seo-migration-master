@@ -11,14 +11,18 @@ import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import VideoSection from "@/components/VideoSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import { PageContentProvider } from "@/contexts/PageContentContext";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Index = () => {
+  const { t, allLangPaths } = useLanguage();
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Carta de Vinos Digital con IA | Vende Más Vino"
-        description="Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomendaciones automáticas, maridajes y analítica para aumentar las ventas de vino en tu restaurante."
+        title={t.seo_home_title}
+        description={t.seo_home_description}
         url="https://winerim.wine"
+        hreflang={allLangPaths("/")}
       />
       <Navbar />
       <PageContentProvider page="home">
