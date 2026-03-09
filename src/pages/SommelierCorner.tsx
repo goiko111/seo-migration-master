@@ -7,11 +7,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import ScrollReveal from "@/components/ScrollReveal";
 import { InterviewSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface Interview {
-  quote: string; name: string; role: string; excerpt: string; image: string; slug: string;
+  quote: string; name: string; role: string; excerpt: string; image: string; slug: string; publishedAt: string | null;
 }
 
 type LangContent = {
@@ -46,6 +48,12 @@ const langContent: Record<string, LangContent> = {
   },
 };
 
+const formatDate = (dateStr: string | null) => {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" });
+};
+
 const SommelierCorner = () => {
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +65,7 @@ const SommelierCorner = () => {
     const fetchInterviews = async () => {
       const { data } = await supabase
         .from("articles")
-        .select("slug, title, excerpt, image_url, author, author_role")
+        .select("slug, title, excerpt, image_url, author, author_role, published_at")
         .eq("published", true)
         .eq("category", "interview")
         .order("published_at", { ascending: false });
@@ -66,6 +74,7 @@ const SommelierCorner = () => {
         setInterviews(data.map(a => ({
           quote: a.title, name: a.author || "", role: a.author_role || "",
           excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${a.slug}`,
+          publishedAt: a.published_at,
         })));
       } else {
         const staticInterviews = Object.values(staticArticles)
@@ -73,6 +82,7 @@ const SommelierCorner = () => {
           .map(a => ({
             quote: a.title, name: a.name || "", role: a.role || "",
             excerpt: a.subtitle || "", image: a.heroImage, slug: `/article/${a.slug}`,
+            publishedAt: null,
           }));
         setInterviews(staticInterviews);
       }
@@ -92,47 +102,63 @@ const SommelierCorner = () => {
       <Navbar />
       <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/sommelier-corner" />
       <main>
-        <section className="pt-32 pb-16 section-padding text-center">
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
-            {lang === "es" ? get("hero", "label", t.label) : t.label}
-          </motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="font-heading text-4xl md:text-6xl font-bold mb-6">
-            {lang === "es" ? get("hero", "title", t.title) : t.title}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            {lang === "es" ? get("hero", "subtitle", t.subtitle) : t.subtitle}
-          </motion.p>
+        {/* Hero — same as GuiasRecursos */}
+        <section className="pt-32 pb-12 section-padding">
+          <div className="max-w-5xl mx-auto px-6 md:px-12">
+            <Breadcrumbs items={[{ label: "Sommelier Corner" }]} />
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
+              {lang === "es" ? get("hero", "label", t.label) : t.label}
+            </motion.span>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              {lang === "es" ? get("hero", "title", t.title) : t.title}
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+              {lang === "es" ? get("hero", "subtitle", t.subtitle) : t.subtitle}
+            </motion.p>
+          </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24 space-y-16">
-          {interviews.map((item, i) => (
-            <motion.div key={item.slug} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-              <Link to={item.slug}
-                className="group grid md:grid-cols-2 gap-8 bg-gradient-card rounded-2xl overflow-hidden border border-border hover:border-wine transition-colors">
-                <div className={`aspect-square md:aspect-auto overflow-hidden ${i % 2 !== 0 ? "md:order-2" : ""}`}>
-                  <img src={item.image} alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                </div>
-                <div className={`flex flex-col justify-center p-8 md:p-12 ${i % 2 !== 0 ? "md:order-1" : ""}`}>
-                  <blockquote className="font-heading text-xl md:text-2xl font-semibold mb-6 leading-snug italic text-foreground/90">
-                    {item.quote}
-                  </blockquote>
-                  <p className="text-muted-foreground mb-4">{item.excerpt}</p>
-                  <div className="mt-auto">
-                    <p className="font-semibold text-foreground">{item.name}</p>
-                    <p className="text-sm text-muted-foreground">{item.role}</p>
+        {/* Card grid — GuiasRecursos style with B&W images */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {interviews.map((item, i) => (
+              <ScrollReveal key={item.slug} delay={i * 0.03}>
+                <Link to={item.slug}
+                  className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block h-full hover:shadow-lg hover:shadow-wine/5 overflow-hidden">
+                  {item.image && (
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img src={item.image} alt={item.name}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                        loading="lazy" />
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] font-semibold tracking-widest uppercase text-accent">Entrevista</span>
+                      {item.publishedAt && (
+                        <>
+                          <span className="text-muted-foreground/40">·</span>
+                          <span className="text-[10px] text-muted-foreground">{formatDate(item.publishedAt)}</span>
+                        </>
+                      )}
+                    </div>
+                    <h3 className="font-heading text-sm font-bold mb-1.5 group-hover:text-wine transition-colors line-clamp-2">{item.quote}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{item.excerpt}</p>
+                    <div className="mt-3">
+                      <p className="text-xs font-semibold text-foreground">{item.name}</p>
+                      <p className="text-[10px] text-muted-foreground">{item.role}</p>
+                    </div>
+                    <span className="mt-2 text-[10px] font-semibold tracking-widest uppercase text-accent block">
+                      {lang === "es" ? get("hero", "read_cta", t.readCta) : t.readCta}
+                    </span>
                   </div>
-                  <span className="mt-6 text-sm font-semibold tracking-widest uppercase text-accent">
-                    {lang === "es" ? get("hero", "read_cta", t.readCta) : t.readCta}
-                  </span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
         </section>
       </main>
       <Footer />

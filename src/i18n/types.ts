@@ -97,6 +97,7 @@ export interface TranslationDict {
   nav_product: string;
   nav_tools: string;
   nav_blog: string;
+  nav_sommelier: string;
   nav_guides: string;
   nav_contact: string;
   nav_cta: string;
