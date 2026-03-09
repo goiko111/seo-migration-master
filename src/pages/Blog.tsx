@@ -40,13 +40,15 @@ const Blog = () => {
           slug: `/article/${a.slug}`,
         })));
       } else {
-        const staticPosts = Object.values(staticArticles).map(a => ({
-          title: a.title,
-          excerpt: a.subtitle || "",
-          image: a.heroImage,
-          category: a.category,
-          slug: `/article/${a.slug}`,
-        }));
+        const staticPosts = Object.values(staticArticles)
+          .filter(a => a.type !== "interview")
+          .map(a => ({
+            title: a.title,
+            excerpt: a.subtitle || "",
+            image: a.heroImage,
+            category: a.category,
+            slug: `/article/${a.slug}`,
+          }));
         setBlogPosts(staticPosts);
       }
       setLoading(false);
