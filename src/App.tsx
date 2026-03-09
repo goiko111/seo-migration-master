@@ -66,6 +66,7 @@ const App = () => (
               <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
               <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
               <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
+              <Route path="/wine-list-management-software" element={<WineListSoftware />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
