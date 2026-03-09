@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import winerimLogo from "@/assets/winerim-logo.png";
 import { usePageContent } from "@/hooks/usePageContent";
+import ScrollReveal from "./ScrollReveal";
 
 const Footer = () => {
   const { get, getJson } = usePageContent("footer");
@@ -15,14 +16,14 @@ const Footer = () => {
     <footer className="border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
-          <div className="md:col-span-1">
+          <ScrollReveal direction="up" className="md:col-span-1">
             <img src={winerimLogo} alt="Winerim" className="h-7 mb-4" />
             <p className="text-sm text-muted-foreground leading-relaxed">
               {get("general", "description", "La carta de vinos digital que revoluciona la hostelería.")}
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div>
+          <ScrollReveal delay={0.1}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
               {get("columns", "col1_title", "Producto")}
             </h4>
@@ -39,9 +40,9 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </ScrollReveal>
 
-          <div>
+          <ScrollReveal delay={0.15}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
               {get("columns", "col2_title", "Empresa")}
             </h4>
@@ -59,9 +60,9 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </ScrollReveal>
 
-          <div>
+          <ScrollReveal delay={0.2}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
               {get("columns", "col3_title", "Legal")}
             </h4>
@@ -77,7 +78,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </ScrollReveal>
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
