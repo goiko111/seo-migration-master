@@ -27,6 +27,7 @@ const Terminos = lazy(() => import("./pages/Terminos"));
 const VenderMasVino = lazy(() => import("./pages/VenderMasVino"));
 const AnalizaCarta = lazy(() => import("./pages/AnalizaCarta"));
 const SoftwareCartaVinos = lazy(() => import("./pages/SoftwareCartaVinos"));
+const IARestaurantes = lazy(() => import("./pages/IARestaurantes"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
