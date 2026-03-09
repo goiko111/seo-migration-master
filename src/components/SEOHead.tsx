@@ -2,6 +2,11 @@ import { useEffect } from "react";
 
 const DEFAULT_OG_IMAGE = "https://winerim.wine/og-image.png";
 
+interface HreflangLink {
+  lang: string;
+  url: string;
+}
+
 interface SEOHeadProps {
   title: string;
   description?: string;
@@ -11,6 +16,7 @@ interface SEOHeadProps {
   publishedAt?: string;
   author?: string;
   noindex?: boolean;
+  hreflang?: HreflangLink[];
 }
 
 const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex }: SEOHeadProps) => {
