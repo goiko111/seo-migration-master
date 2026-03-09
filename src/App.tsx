@@ -62,6 +62,7 @@ const App = () => (
               <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
               <Route path="/analisis-carta" element={<AnalizaCarta />} />
               <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
+              <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
