@@ -21,6 +21,8 @@ const STATIC_ROUTES = [
   { loc: '/integraciones', priority: '0.7', changefreq: 'monthly' },
   { loc: '/soluciones', priority: '0.7', changefreq: 'monthly' },
   { loc: '/problemas', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/clientes', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/funcionalidades', priority: '0.8', changefreq: 'monthly' },
 
   // Commercial / Product pages (ES)
   { loc: '/software-carta-de-vinos', priority: '0.8', changefreq: 'monthly' },

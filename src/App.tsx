@@ -66,6 +66,8 @@ const EstrategiaMaridaje = lazy(() => import("./pages/EstrategiaMaridaje"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const Soluciones = lazy(() => import("./pages/Soluciones"));
 const Problemas = lazy(() => import("./pages/Problemas"));
+const Clientes = lazy(() => import("./pages/Clientes"));
+const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -140,6 +142,8 @@ const App = () => (
               <Route path="/herramientas" element={<Herramientas />} />
               <Route path="/soluciones" element={<Soluciones />} />
               <Route path="/problemas" element={<Problemas />} />
+              <Route path="/clientes" element={<Clientes />} />
+              <Route path="/funcionalidades" element={<Funcionalidades />} />
               {/* Dynamic programmatic SEO pages - must be before NotFound */}
               <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
               <Route path="/software-vino-*" element={<SeoPage />} />

@@ -29,7 +29,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "Funcionalidades", href: "/afiliate" },
+                { label: "Funcionalidades", href: "/funcionalidades" },
                 { label: "Precios", href: "/precios" },
                 { label: "Integraciones", href: "/integraciones" },
                 { label: "Casos de éxito", href: "/casos-exito" },

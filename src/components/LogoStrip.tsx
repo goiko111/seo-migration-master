@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 
 const defaultRestaurants = [
@@ -46,9 +47,14 @@ const LogoStrip = () => {
         </div>
       </div>
 
-      <p className="text-center text-muted-foreground text-xs sm:text-sm mt-6 sm:mt-8 px-6">
-        {get("logostrip", "footer", "Más de 1.000 bodegas de restaurantes ya confían en nosotros")}
-      </p>
+      <div className="text-center mt-6 sm:mt-8 px-6">
+        <p className="text-muted-foreground text-xs sm:text-sm mb-3">
+          {get("logostrip", "footer", "Más de 1.000 bodegas de restaurantes ya confían en nosotros")}
+        </p>
+        <Link to="/clientes" className="text-xs font-semibold tracking-widest uppercase text-accent hover:text-accent/80 transition-colors">
+          Ver todos los clientes →
+        </Link>
+      </div>
     </section>
   );
 };

@@ -5,6 +5,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import LogoStrip from "@/components/LogoStrip";
 import ProblemSection from "@/components/landing/ProblemSection";
 import SolutionSection from "@/components/landing/SolutionSection";
+import FeaturesPreview from "@/components/landing/FeaturesPreview";
 import ResultsSection from "@/components/landing/ResultsSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import VideoSection from "@/components/VideoSection";
@@ -26,6 +27,7 @@ const Index = () => {
           <LogoStrip />
           <ProblemSection />
           <SolutionSection />
+          <FeaturesPreview />
           <ResultsSection />
           <HowItWorksSection />
           <VideoSection />
