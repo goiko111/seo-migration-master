@@ -75,6 +75,8 @@ const App = () => (
               <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
               <Route path="/que-es-winerim" element={<QueEsWinerim />} />
               <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
+              <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
+              <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
