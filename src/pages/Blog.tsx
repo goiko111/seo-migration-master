@@ -11,6 +11,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { ArrowRight } from "lucide-react";
 
 interface BlogPost {
   title: string;
@@ -21,17 +22,17 @@ interface BlogPost {
   publishedAt: string | null;
 }
 
-const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string; heroLabel: string; guidesQ: string; guidesBtn: string }> = {
-  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer más →", heroLabel: "Centro de conocimiento", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →" },
-  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read more →", heroLabel: "Knowledge center", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →" },
-  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi di più →", heroLabel: "Centro conoscenze", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →" },
-  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire la suite →", heroLabel: "Centre de connaissances", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →" },
+const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string; heroLabel: string; heroSubtitle: string; guidesQ: string; guidesBtn: string; featured: string }> = {
+  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer artículo", heroLabel: "Centro de conocimiento", heroSubtitle: "Artículos, análisis y tendencias sobre la gestión de vinos en restauración.", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →", featured: "Destacado" },
+  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →", featured: "Featured" },
+  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →", featured: "In evidenza" },
+  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →", featured: "À la une" },
 };
 
-const formatDate = (dateStr: string | null) => {
+const formatDate = (dateStr: string | null, locale = "es-ES") => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
-  return d.toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" });
+  return d.toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 };
 
 const Blog = () => {
@@ -87,57 +88,105 @@ const Blog = () => {
     );
   }
 
+  const featured = blogPosts[0];
+  const rest = blogPosts.slice(1);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/blog")}`} hreflang={allLangPaths("/blog")} />
       <main>
-        {/* Hero — same as GuiasRecursos */}
-        <section className="pt-32 pb-12 section-padding">
-          <div className="max-w-5xl mx-auto px-6 md:px-12">
+        {/* Hero */}
+        <section className="pt-32 pb-16 section-padding">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
             <Breadcrumbs items={[{ label: "Blog" }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               {t.heroLabel}
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               {get("hero", "title", "Blog")}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
-              {t.seoDesc}
+              className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+              {t.heroSubtitle}
             </motion.p>
           </div>
         </section>
 
-        {/* Card grid — GuiasRecursos style with B&W images */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {blogPosts.map((post, i) => (
-              <ScrollReveal key={post.slug} delay={i * 0.03}>
+        {/* Featured article — full width card */}
+        {featured && (
+          <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
+            <ScrollReveal>
+              <Link to={featured.slug}
+                className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/5">
+                <div className="grid md:grid-cols-2">
+                  {featured.image && (
+                    <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
+                      <img src={featured.image} alt={featured.title}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        loading="eager" />
+                    </div>
+                  )}
+                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent bg-accent/10 px-3 py-1 rounded-full">
+                        {t.featured}
+                      </span>
+                      {featured.publishedAt && (
+                        <span className="text-xs text-muted-foreground">{formatDate(featured.publishedAt)}</span>
+                      )}
+                    </div>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4 group-hover:text-wine transition-colors leading-tight">
+                      {featured.title}
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
+                      {featured.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:gap-3 transition-all">
+                      {t.readMore} <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+          </section>
+        )}
+
+        {/* Grid — spacious 2-col cards */}
+        <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
+          <div className="grid md:grid-cols-2 gap-8">
+            {rest.map((post, i) => (
+              <ScrollReveal key={post.slug} delay={i * 0.04}>
                 <Link to={post.slug}
-                  className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block h-full hover:shadow-lg hover:shadow-wine/5 overflow-hidden">
+                  className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/5">
                   {post.image && (
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={post.image} alt={post.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                         loading="lazy" />
                     </div>
                   )}
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-semibold tracking-widest uppercase text-accent">{post.category}</span>
+                  <div className="p-6 md:p-8">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-accent">{post.category}</span>
                       {post.publishedAt && (
                         <>
-                          <span className="text-muted-foreground/40">·</span>
-                          <span className="text-[10px] text-muted-foreground">{formatDate(post.publishedAt)}</span>
+                          <span className="text-muted-foreground/30">·</span>
+                          <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt)}</span>
                         </>
                       )}
                     </div>
-                    <h3 className="font-heading text-sm font-bold mb-1.5 group-hover:text-wine transition-colors line-clamp-2">{post.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{post.excerpt}</p>
-                    <span className="mt-3 text-[10px] font-semibold tracking-widest uppercase text-accent block">{t.readMore}</span>
+                    <h3 className="font-heading text-lg md:text-xl font-bold mb-3 group-hover:text-wine transition-colors leading-snug line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                      {post.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-accent group-hover:gap-3 transition-all">
+                      {t.readMore} <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </Link>
               </ScrollReveal>
