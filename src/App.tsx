@@ -35,6 +35,7 @@ const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
 const CalculadoraMargen = lazy(() => import("./pages/CalculadoraMargen"));
 const BibliotecaVino = lazy(() => import("./pages/BibliotecaVino"));
 const BibliotecaDetalle = lazy(() => import("./pages/BibliotecaDetalle"));
+const CasosExito = lazy(() => import("./pages/CasosExito"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
