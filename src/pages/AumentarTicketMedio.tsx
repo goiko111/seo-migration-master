@@ -266,64 +266,56 @@ const metrics = [
   { value: "+30%", label: "Rotación de referencias", icon: BarChart3 },
 ];
 
+const wineAdvIcons = [DollarSign, Users, Utensils, Target];
+const stratIcons = [GlassWater, Utensils, BookOpen, Users, Target];
+const techIcons = [Sparkles, BookOpen, Target, BarChart3];
+const metricIcons = [TrendingUp, Wine, BarChart3];
+
 const AumentarTicketMedio = () => {
+  const { lang, localePath } = useLanguage();
+  const t = translations[lang] || translations.es;
+
   useEffect(() => {
     const ld = document.createElement("script");
     ld.id = "ticket-medio-jsonld";
     ld.type = "application/ld+json";
     ld.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: "Cómo aumentar el ticket medio en un restaurante",
-      description: "Estrategias prácticas para aumentar el gasto medio por cliente en restaurantes utilizando el vino como herramienta de venta.",
+      "@context": "https://schema.org", "@type": "Article",
+      headline: t.metaTitle,
+      description: t.metaDesc,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine", logo: { "@type": "ImageObject", url: "https://winerim.wine/og-image.png" } },
-      mainEntityOfPage: "https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante",
-      breadcrumb: {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-          { "@type": "ListItem", position: 2, name: "Soluciones", item: "https://winerim.wine/soluciones" },
-          { "@type": "ListItem", position: 3, name: "Aumentar ticket medio", item: "https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante" },
-        ],
-      },
     });
     document.head.appendChild(ld);
     return () => { document.getElementById("ticket-medio-jsonld")?.remove(); };
-  }, []);
+  }, [t]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead
-        title="Cómo Aumentar el Ticket Medio en un Restaurante | Winerim"
-        description="Estrategias prácticas para aumentar el gasto medio por cliente en tu restaurante. Descubre cómo el vino puede ser tu herramienta más efectiva."
-        url="https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante"
-        type="article"
-      />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante" type="article" />
       <Navbar />
 
-      {/* 1. HERO */}
+      {/* HERO */}
       <section className="relative flex items-center overflow-hidden pt-32 pb-20">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
-          <Breadcrumbs items={[{ label: "Soluciones" }, { label: "Aumentar ticket medio" }]} />
+          <Breadcrumbs items={[{ label: "Soluciones" }, { label: t.breadLabel }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <TrendingUp size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Rentabilidad</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.badge}</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6">
-            Cómo aumentar el <span className="text-gradient-wine italic">ticket medio</span> en un restaurante
+            {t.heroTitle1}<span className="text-gradient-wine italic">{t.heroHighlight}</span>{t.heroTitle2}
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
-            Estrategias prácticas para aumentar el gasto medio por cliente sin afectar la experiencia gastronómica.
+            {t.heroDesc}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="flex flex-col sm:flex-row gap-4">
-            <Link to="/wine-list-analyzer" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
-              Analizar mi carta de vinos <ArrowRight size={16} />
+            <Link to={localePath("/wine-list-analyzer")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+              {t.ctaAnalyze} <ArrowRight size={16} />
             </Link>
-            <Link to="/demo" className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 hover:bg-wine/5 transition-all">
-              Solicitar demo
+            <Link to={localePath("/demo")} className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 hover:bg-wine/5 transition-all">
+              {t.ctaDemo}
             </Link>
           </motion.div>
         </div>
