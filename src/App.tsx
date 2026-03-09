@@ -31,6 +31,7 @@ const IARestaurantes = lazy(() => import("./pages/IARestaurantes"));
 const PrecioVinoRestaurante = lazy(() => import("./pages/PrecioVinoRestaurante"));
 const WineListSoftware = lazy(() => import("./pages/WineListSoftware"));
 const VinoPorCopa = lazy(() => import("./pages/VinoPorCopa"));
+const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
