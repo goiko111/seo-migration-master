@@ -25,6 +25,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import InternalLinks from "@/components/seo/InternalLinks";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
