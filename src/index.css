@@ -107,3 +107,28 @@
     @apply py-20 md:py-32 px-6 md:px-12 lg:px-20;
   }
 }
+
+/* Article body — editorial styling */
+.article-body h2:first-of-type {
+  border-top: none !important;
+  padding-top: 0 !important;
+  margin-top: 2rem !important;
+}
+
+.article-body h3 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.article-body h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  border-radius: 2px;
+  background: hsl(var(--accent));
+}
+
+/* Interview question styling — handled via ReactMarkdown components instead */
