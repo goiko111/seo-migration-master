@@ -71,22 +71,8 @@ const IARestaurantes = () => {
     });
     document.head.appendChild(faqSchema);
 
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "ia-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Inteligencia artificial para restaurantes", item: "https://winerim.wine/inteligencia-artificial-restaurantes" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
     return () => {
       document.getElementById("ia-faq-jsonld")?.remove();
-      document.getElementById("ia-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
