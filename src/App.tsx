@@ -40,6 +40,7 @@ const EjemplosCarta = lazy(() => import("./pages/EjemplosCarta"));
 const CartaPapelVsDigital = lazy(() => import("./pages/CartaPapelVsDigital"));
 const WineListAnalyzer = lazy(() => import("./pages/WineListAnalyzer"));
 const WineROICalculator = lazy(() => import("./pages/WineROICalculator"));
+const WinePairingGenerator = lazy(() => import("./pages/WinePairingGenerator"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -87,6 +88,7 @@ const App = () => (
               <Route path="/carta-papel-vs-digital" element={<CartaPapelVsDigital />} />
               <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
               <Route path="/wine-roi-calculator" element={<WineROICalculator />} />
+              <Route path="/wine-pairing-generator" element={<WinePairingGenerator />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
