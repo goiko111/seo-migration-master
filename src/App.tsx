@@ -55,6 +55,8 @@ const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
 const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
 const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
+const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
+const CartaNoVende = lazy(() => import("./pages/CartaNoVende"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
