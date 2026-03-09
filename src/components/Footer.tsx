@@ -33,6 +33,7 @@ const Footer = () => {
                 { label: "Precios", href: "/precios" },
                 { label: "Integraciones", href: "/integraciones" },
                 { label: "Casos de éxito", href: "/casos-exito" },
+                { label: "Soluciones", href: "/soluciones" },
                 { label: "Demo gratuita", href: "/demo" },
               ].map((item) => (
                 <li key={item.label}>
