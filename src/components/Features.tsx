@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   TrendingUp, RotateCcw, Package, Sliders,
@@ -6,6 +5,7 @@ import {
   Monitor, QrCode, Headphones, BarChart3,
 } from "lucide-react";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
+import ScrollReveal from "./ScrollReveal";
 
 const iconMap: Record<string, React.ElementType> = {
   TrendingUp, RotateCcw, Package, Sliders,
@@ -35,7 +35,7 @@ const Features = () => {
   return (
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">
             {get("features", "label", "Todo lo que necesitas")}
           </p>
@@ -45,27 +45,28 @@ const Features = () => {
           <p className="text-muted-foreground max-w-xl mx-auto">
             {get("features", "subtitle", "¿Alguna vez has tenido problemas gestionando aspectos de tu bodega? Winerim es la solución.")}
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {features.map((feat, i) => {
             const Icon = iconMap[feat.icon] || TrendingUp;
             return (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:glow-wine">
-                <Icon size={28} className="text-wine mb-4 group-hover:text-wine-light transition-colors" />
-                <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
-              </motion.div>
+              <ScrollReveal key={i} delay={i * 0.04}>
+                <div className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:glow-wine hover:-translate-y-1 h-full">
+                  <Icon size={28} className="text-wine mb-4 group-hover:text-wine-light transition-colors" />
+                  <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        <div className="text-center mt-12">
+        <ScrollReveal delay={0.2} className="text-center mt-12">
           <Link to="/demo" className="inline-flex bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
             {get("features", "cta", "Agenda una llamada")}
           </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
