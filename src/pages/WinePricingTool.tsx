@@ -10,6 +10,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const restaurantTypes = [
   { value: "bistro", label: "Bistró / Taberna", multiplierRange: [2.5, 3.5] },
@@ -299,6 +301,12 @@ const WinePricingTool = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino", type: "guide" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Carta de vinos rentable", type: "guide" },
+        { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

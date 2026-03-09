@@ -13,6 +13,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const INCREMENTS = [10, 20, 30] as const;
 const DAYS_PER_MONTH = 26;
@@ -325,6 +327,12 @@ const WineROICalculator = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+        { to: "/soluciones/aumentar-ticket-medio-restaurante", label: "Aumentar el ticket medio", type: "solution" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "guide" },
+        { to: "/demo", label: "Solicitar demo", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

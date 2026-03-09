@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import mockupImg from "@/assets/winerim-mockup.png";
 
 const problems = [
@@ -410,6 +411,12 @@ const IARestaurantes = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+        { to: "/wine-pairing-generator", label: "Generador de maridajes con IA", type: "tool" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

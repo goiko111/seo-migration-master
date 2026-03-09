@@ -13,6 +13,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const stats = [
   { label: "Referencias medias", value: "42", sub: "por restaurante", icon: Wine },
@@ -269,6 +271,12 @@ const WineListBenchmark = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/cuantos-vinos-carta-restaurante", label: "Cuántos vinos en carta", type: "guide" },
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta", type: "guide" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

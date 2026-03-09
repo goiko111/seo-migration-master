@@ -10,6 +10,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 
 interface WineRec {
@@ -296,6 +298,12 @@ const WinePairingGenerator = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", label: "Estrategia de maridaje", type: "guide" },
+        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );
