@@ -375,18 +375,18 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 4. ESTRATEGIAS */}
+      {/* STRATEGIES */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Estrategias</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.stratLabel}</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">
-              5 formas de <span className="text-gradient-wine italic">aumentar el ticket medio</span> con vino
+              {t.stratTitle1}<span className="text-gradient-wine italic">{t.stratHighlight}</span>
             </h2>
           </ScrollReveal>
           <div className="space-y-5">
-            {strategies.map((s, i) => {
-              const Icon = s.icon;
+            {t.strategies.map((s, i) => {
+              const Icon = stratIcons[i] || GlassWater;
               return (
                 <ScrollReveal key={i} delay={i * 0.05}>
                   <div className="bg-gradient-card rounded-xl border border-border p-6 flex items-start gap-5">
