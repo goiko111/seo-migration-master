@@ -29,6 +29,7 @@ const AnalizaCarta = lazy(() => import("./pages/AnalizaCarta"));
 const SoftwareCartaVinos = lazy(() => import("./pages/SoftwareCartaVinos"));
 const IARestaurantes = lazy(() => import("./pages/IARestaurantes"));
 const PrecioVinoRestaurante = lazy(() => import("./pages/PrecioVinoRestaurante"));
+const WineListSoftware = lazy(() => import("./pages/WineListSoftware"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const App = () => (
               <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
               <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
               <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
+              <Route path="/wine-list-management-software" element={<WineListSoftware />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
