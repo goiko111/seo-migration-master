@@ -33,6 +33,7 @@ const Footer = () => {
                 { label: "Precios", href: "/precios" },
                 { label: "Integraciones", href: "/integraciones" },
                 { label: "Casos de éxito", href: "/casos-exito" },
+                { label: "Soluciones", href: "/soluciones" },
                 { label: "Demo gratuita", href: "/demo" },
               ].map((item) => (
                 <li key={item.label}>
@@ -53,7 +54,7 @@ const Footer = () => {
                 { label: "Blog", href: "/blog" },
                 { label: "Sommelier Corner", href: "/sommelier-corner" },
                 { label: "Guías y recursos", href: "/guias-y-recursos" },
-                { label: "Soluciones", href: "/soluciones/grupos-restauracion" },
+                { label: "Problemas comunes", href: "/problemas" },
                 { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>

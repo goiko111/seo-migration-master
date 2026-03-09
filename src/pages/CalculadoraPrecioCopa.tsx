@@ -11,6 +11,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import FAQSection from "@/components/seo/FAQSection";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -202,29 +203,14 @@ const CalculadoraPrecioCopa = () => {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
-        <ScrollReveal>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
-        </ScrollReveal>
-        <div className="space-y-6">
-          {[
-            { q: "¿Cuántas copas salen de una botella de vino?", a: "Una botella estándar de 750ml da entre 4 y 6 copas según el tamaño del servicio. Lo habitual en restaurantes son 5 copas de 150ml. Para cataciones o copas generosas, 4 copas de 180ml." },
-            { q: "¿Qué multiplicador debo usar?", a: "Depende del tipo de establecimiento. Restaurantes casuales: x3-x3.5. Restaurantes de gama media-alta: x3.5-x4. Wine bars: x4-x5. La clave es que el precio resultante sea competitivo en tu zona." },
-            { q: "¿Cómo gestiono la merma?", a: "Con sistemas de conservación (Coravin, gas inerte) puedes mantener el vino 5-7 días. Sin sistema, calcula 48-72h. Si una botella no se termina, incluye un 10-15% de merma en tu coste." },
-          ].map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 0.05}>
-              <div className="p-6 rounded-xl border border-border bg-gradient-card">
-                <div className="flex items-start gap-3 mb-3">
-                  <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                  <h3 className="font-heading font-bold">{faq.q}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+      <FAQSection
+        faqs={[
+          { q: "¿Cuántas copas salen de una botella de vino?", a: "Una botella estándar de 750ml da entre 4 y 6 copas según el tamaño del servicio. Lo habitual en restaurantes son 5 copas de 150ml. Para cataciones o copas generosas, 4 copas de 180ml." },
+          { q: "¿Qué multiplicador debo usar?", a: "Depende del tipo de establecimiento. Restaurantes casuales: x3-x3.5. Restaurantes de gama media-alta: x3.5-x4. Wine bars: x4-x5. La clave es que el precio resultante sea competitivo en tu zona." },
+          { q: "¿Cómo gestiono la merma?", a: "Con sistemas de conservación (Coravin, gas inerte) puedes mantener el vino 5-7 días. Sin sistema, calcula 48-72h. Si una botella no se termina, incluye un 10-15% de merma en tu coste." },
+        ]}
+        schemaId="calculadora-copa"
+      />
 
       {/* CTA FINAL */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">

@@ -30,6 +30,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import FAQSection from "@/components/seo/FAQSection";
 import mockupImg from "@/assets/winerim-mockup.png";
 
 /* ── Intro problems ── */
@@ -395,32 +396,7 @@ const SoftwareCartaVinos = () => {
           </div>
         </section>
 
-        {/* ═══════════ FAQ ═══════════ */}
-        <section className="section-padding">
-          <div className="max-w-3xl mx-auto">
-            <ScrollReveal className="text-center mb-14">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold">
-                Preguntas frecuentes
-              </h2>
-            </ScrollReveal>
-
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.06}>
-                  <details className="group bg-gradient-card rounded-xl border border-border hover:border-wine/20 transition-colors">
-                    <summary className="flex items-center justify-between cursor-pointer p-6 text-foreground font-semibold">
-                      <span className="pr-4">{faq.q}</span>
-                      <span className="text-muted-foreground flex-shrink-0 transition-transform group-open:rotate-180">▾</span>
-                    </summary>
-                    <div className="px-6 pb-6">
-                      <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
-                    </div>
-                  </details>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FAQSection faqs={faqs} schemaId="software-carta" />
 
         {/* ═══════════ 8. CTA FINAL ═══════════ */}
         <section className="section-padding bg-gradient-dark">
