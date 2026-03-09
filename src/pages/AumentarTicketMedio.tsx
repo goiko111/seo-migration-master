@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const wineAdvantages = [
   { icon: DollarSign, title: "Mayor margen que otros productos", desc: "El vino ofrece márgenes del 65-75%, superiores a la mayoría de productos de la carta. Cada copa vendida mejora directamente la rentabilidad." },
