@@ -128,22 +128,8 @@ const VenderMasVino = () => {
     });
     document.head.appendChild(script);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "breadcrumb-jsonld";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine" },
-        { "@type": "ListItem", position: 2, name: "Cómo vender más vino en un restaurante", item: "https://winerim.wine/como-vender-mas-vino-en-un-restaurante" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
     return () => {
       script.remove();
-      breadcrumb.remove();
     };
   }, []);
 
