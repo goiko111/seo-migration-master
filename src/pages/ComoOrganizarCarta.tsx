@@ -345,6 +345,12 @@ const ComoOrganizarCarta = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/cuantos-vinos-carta-restaurante", label: "Cuántos vinos debe tener una carta", type: "guide" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta de vinos", type: "tool" },
+        { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

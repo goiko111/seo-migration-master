@@ -360,6 +360,12 @@ const CartaVinosRentable = () => {
         </ScrollReveal>
       </section>
 
+      <InternalLinks links={[
+        { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino", type: "guide" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+        { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

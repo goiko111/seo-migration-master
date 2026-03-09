@@ -371,6 +371,12 @@ const EjemplosCarta = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta de vinos", type: "guide" },
+        { to: "/como-hacer-una-carta-de-vinos", label: "Cómo hacer una carta de vinos", type: "guide" },
+        { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

@@ -209,6 +209,12 @@ const CartaPapelVsDigital = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta de vinos", type: "tool" },
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta de vinos", type: "guide" },
+        { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

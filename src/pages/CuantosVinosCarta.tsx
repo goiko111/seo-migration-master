@@ -331,6 +331,12 @@ const CuantosVinosCarta = () => {
         </ScrollReveal>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta de vinos", type: "guide" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", label: "Cómo mejorar la rotación de vinos", type: "guide" },
+      ]} />
       <Footer />
     </div>
   );
