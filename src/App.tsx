@@ -70,6 +70,7 @@ const App = () => (
               <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
               <Route path="/wine-list-management-software" element={<WineListSoftware />} />
               <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
+              <Route path="/que-es-winerim" element={<QueEsWinerim />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
