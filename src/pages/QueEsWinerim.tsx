@@ -108,6 +108,10 @@ const QueEsWinerim = () => {
         title="Qué es Winerim | Software Inteligente de Carta de Vinos"
         description="Winerim es una plataforma inteligente que ayuda a restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente con carta digital, IA y analítica."
         url="https://winerim.wine/que-es-winerim"
+        hreflang={[
+          { lang: "es", url: "https://winerim.wine/que-es-winerim" },
+          { lang: "en", url: "https://winerim.wine/what-is-winerim" },
+        ]}
       />
       <Navbar />
 
