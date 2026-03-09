@@ -48,6 +48,7 @@ const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
+const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -103,6 +104,7 @@ const App = () => (
               <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
               <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
               <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
+              <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
