@@ -43,6 +43,7 @@ const WineROICalculator = lazy(() => import("./pages/WineROICalculator"));
 const WinePairingGenerator = lazy(() => import("./pages/WinePairingGenerator"));
 const WinePricingTool = lazy(() => import("./pages/WinePricingTool"));
 const WineListBenchmark = lazy(() => import("./pages/WineListBenchmark"));
+const Precios = lazy(() => import("./pages/Precios"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
