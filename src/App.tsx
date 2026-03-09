@@ -38,6 +38,7 @@ const BibliotecaDetalle = lazy(() => import("./pages/BibliotecaDetalle"));
 const CasosExito = lazy(() => import("./pages/CasosExito"));
 const EjemplosCarta = lazy(() => import("./pages/EjemplosCarta"));
 const CartaPapelVsDigital = lazy(() => import("./pages/CartaPapelVsDigital"));
+const WineListAnalyzer = lazy(() => import("./pages/WineListAnalyzer"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -83,6 +84,7 @@ const App = () => (
               <Route path="/casos-exito" element={<CasosExito />} />
               <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
               <Route path="/carta-papel-vs-digital" element={<CartaPapelVsDigital />} />
+              <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
