@@ -53,6 +53,8 @@ const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
+const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
+const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
