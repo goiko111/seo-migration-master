@@ -58,6 +58,7 @@ const App = () => (
               <Route path="/privacidad" element={<Privacidad />} />
               <Route path="/terminos" element={<Terminos />} />
               <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
+              <Route path="/analisis-carta" element={<AnalizaCarta />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
