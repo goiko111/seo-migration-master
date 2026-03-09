@@ -24,6 +24,7 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Terminos = lazy(() => import("./pages/Terminos"));
+const VenderMasVino = lazy(() => import("./pages/VenderMasVino"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
               <Route path="/admin" element={<Admin />} />
               <Route path="/privacidad" element={<Privacidad />} />
               <Route path="/terminos" element={<Terminos />} />
+              <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
