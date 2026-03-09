@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const AnimatedNumber = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -31,20 +32,40 @@ const AnimatedNumber = ({ target, suffix = "" }: { target: number; suffix?: stri
   return <span ref={ref}>+{display}{suffix}</span>;
 };
 
-const metrics = [
-  { value: 20, suffix: "%", label: "Incremento medio en ventas de vino", color: "from-wine to-wine-light" },
-  { value: 15, suffix: "%", label: "Aumento del ticket medio", color: "from-accent to-gold-light" },
-  { value: 30, suffix: "%", label: "Más rotación de referencias", color: "from-wine-light to-accent" },
-];
+const metricsByLang: Record<string, { value: number; suffix: string; label: string; color: string }[]> = {
+  es: [
+    { value: 20, suffix: "%", label: "Incremento medio en ventas de vino", color: "from-wine to-wine-light" },
+    { value: 15, suffix: "%", label: "Aumento del ticket medio", color: "from-accent to-gold-light" },
+    { value: 30, suffix: "%", label: "Más rotación de referencias", color: "from-wine-light to-accent" },
+  ],
+  en: [
+    { value: 20, suffix: "%", label: "Average increase in wine sales", color: "from-wine to-wine-light" },
+    { value: 15, suffix: "%", label: "Average ticket increase", color: "from-accent to-gold-light" },
+    { value: 30, suffix: "%", label: "More reference rotation", color: "from-wine-light to-accent" },
+  ],
+  it: [
+    { value: 20, suffix: "%", label: "Incremento medio nelle vendite di vino", color: "from-wine to-wine-light" },
+    { value: 15, suffix: "%", label: "Aumento dello scontrino medio", color: "from-accent to-gold-light" },
+    { value: 30, suffix: "%", label: "Più rotazione delle referenze", color: "from-wine-light to-accent" },
+  ],
+  fr: [
+    { value: 20, suffix: "%", label: "Augmentation moyenne des ventes de vin", color: "from-wine to-wine-light" },
+    { value: 15, suffix: "%", label: "Augmentation du ticket moyen", color: "from-accent to-gold-light" },
+    { value: 30, suffix: "%", label: "Plus de rotation des références", color: "from-wine-light to-accent" },
+  ],
+};
 
 const ResultsSection = () => {
+  const { t, lang } = useLanguage();
+  const metrics = metricsByLang[lang] || metricsByLang.es;
+
   return (
     <section className="section-padding">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="text-center mb-14">
-          <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Resultados</p>
+          <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.results_badge}</p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold">
-            Resultados reales en restaurantes
+            {t.results_title}
           </h2>
         </ScrollReveal>
 
@@ -52,7 +73,6 @@ const ResultsSection = () => {
           {metrics.map((metric, i) => (
             <ScrollReveal key={i} delay={i * 0.12}>
               <div className="relative bg-gradient-card rounded-2xl border border-border p-8 text-center hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
-                {/* Subtle gradient accent */}
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${metric.color} opacity-60 group-hover:opacity-100 transition-opacity`} />
                 <p className="font-heading text-5xl md:text-6xl font-bold text-gradient-wine mb-4">
                   <AnimatedNumber target={metric.value} suffix={metric.suffix} />
