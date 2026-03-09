@@ -51,6 +51,19 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       setMeta("robots", "noindex, nofollow", true);
     }
 
+    // Hreflang
+    const hreflangEls: HTMLLinkElement[] = [];
+    if (hreflang && hreflang.length > 0) {
+      hreflang.forEach((link) => {
+        const el = document.createElement("link");
+        el.rel = "alternate";
+        el.hreflang = link.lang;
+        el.href = link.url;
+        document.head.appendChild(el);
+        hreflangEls.push(el);
+      });
+    }
+
     if (description) {
       setMeta("description", description.slice(0, 160), true);
       setMeta("og:description", description.slice(0, 160));
