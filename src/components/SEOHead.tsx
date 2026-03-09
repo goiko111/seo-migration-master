@@ -19,7 +19,7 @@ interface SEOHeadProps {
   hreflang?: HreflangLink[];
 }
 
-const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex }: SEOHeadProps) => {
+const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex, hreflang }: SEOHeadProps) => {
   useEffect(() => {
     const fullTitle = title.length > 55 ? title : `${title} | Winerim`;
     document.title = fullTitle;
