@@ -46,6 +46,7 @@ const WineListBenchmark = lazy(() => import("./pages/WineListBenchmark"));
 const Precios = lazy(() => import("./pages/Precios"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
+const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -99,6 +100,7 @@ const App = () => (
               <Route path="/precios" element={<Precios />} />
               <Route path="/integraciones" element={<Integraciones />} />
               <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
+              <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
