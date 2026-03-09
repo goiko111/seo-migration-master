@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,6 +9,29 @@ import SEOHead from "@/components/SEOHead";
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
 import { ArrowLeft } from "lucide-react";
+
+const useMarkdownComponents = (isInterview: boolean): Components => {
+  return useMemo(() => {
+    if (!isInterview) return {};
+    return {
+      p: ({ children, ...props }) => {
+        // Check if this paragraph contains only a single <strong> that starts with a number
+        const childArray = Array.isArray(children) ? children : [children];
+        if (childArray.length === 1 && typeof childArray[0] === "object" && childArray[0] !== null && "type" in childArray[0] && childArray[0].type === "strong") {
+          const text = String(childArray[0].props?.children || "");
+          if (/^\d+\.?\s/.test(text)) {
+            return (
+              <p className="!mt-12 !pt-8 !border-t !border-border !font-heading !text-[1.35rem] !leading-snug !text-foreground !font-bold" {...props}>
+                {children}
+              </p>
+            );
+          }
+        }
+        return <p {...props}>{children}</p>;
+      },
+    };
+  }, [isInterview]);
+};
 
 interface ArticleData {
   title: string;
