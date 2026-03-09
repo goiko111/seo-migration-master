@@ -54,6 +54,7 @@ const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
 const ChecklistCartaRentable = lazy(() => import("./pages/ChecklistCartaRentable"));
+const GuiaVinoPorCopa = lazy(() => import("./pages/GuiaVinoPorCopa"));
 const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
 const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
@@ -120,6 +121,7 @@ const App = () => (
               <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
               <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
               <Route path="/recursos/checklist-carta-de-vinos-rentable" element={<ChecklistCartaRentable />} />
+              <Route path="/recursos/guia-vino-por-copa-para-restaurantes" element={<GuiaVinoPorCopa />} />
               <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
               <Route path="/ai-wine-software" element={<AiWineSoftware />} />
               <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
