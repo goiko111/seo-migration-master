@@ -93,6 +93,7 @@ const IARestaurantes = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
+              <Breadcrumbs items={[{ label: "IA para restaurantes" }]} />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

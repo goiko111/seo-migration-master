@@ -133,6 +133,7 @@ const SoftwareCartaVinos = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                <Breadcrumbs items={[{ label: "Software carta de vinos" }]} />
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
                   <Monitor size={14} className="text-wine" />
                   <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Software para hostelería</span>

@@ -156,6 +156,7 @@ const VenderMasVino = () => {
             transition={{ duration: 0.7 }}
             className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center"
           >
+            <Breadcrumbs items={[{ label: "Guías", href: "/guias-y-recursos" }, { label: "Vender más vino" }]} />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
               <Wine size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Guía para hostelería</span>
