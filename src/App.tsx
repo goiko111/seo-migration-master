@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 import WhatsAppButton from "./components/WhatsAppButton";
+import BackToTop from "./components/BackToTop";
 
 // Eager load home for fast first paint
 import Index from "./pages/Index";
