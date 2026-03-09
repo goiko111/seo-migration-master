@@ -195,7 +195,7 @@ const ArticlePage = () => {
               prose-a:text-accent prose-a:no-underline hover:prose-a:underline
               prose-img:rounded-xl prose-img:my-12
               prose-hr:border-border prose-hr:my-12">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>{article.body}</ReactMarkdown>
           </motion.div>
 
           <div className="mt-16 pt-8 border-t border-border">
