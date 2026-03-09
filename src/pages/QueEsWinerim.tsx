@@ -319,6 +319,8 @@ const QueEsWinerim = () => {
         </div>
       </section>
 
+      <FAQSection faqs={faqs} schemaId="que-es-winerim" />
+
       {/* CTA */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
