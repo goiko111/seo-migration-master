@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+const DEFAULT_OG_IMAGE = "https://winerim.wine/og-image.png";
+
 interface SEOHeadProps {
   title: string;
   description?: string;
@@ -56,16 +58,18 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("og:locale", "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
-    if (image) {
-      setMeta("og:image", image);
-      setMeta("twitter:image", image);
-    }
+    // Always set og:image (use default if none provided)
+    const ogImage = image || DEFAULT_OG_IMAGE;
+    setMeta("og:image", ogImage);
+    setMeta("og:image:width", "1200");
+    setMeta("og:image:height", "630");
+    setMeta("twitter:image", ogImage);
 
     if (url) {
       setMeta("og:url", url);
     }
 
-    // JSON-LD
+    // JSON-LD: Page-specific
     let scriptEl = document.getElementById("seo-jsonld") as HTMLScriptElement | null;
     if (!scriptEl) {
       scriptEl = document.createElement("script");
@@ -80,14 +84,14 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         "@type": "Article",
         headline: title,
         description: description || "",
-        image: image || "",
+        image: ogImage,
         author: author ? { "@type": "Person", name: author } : undefined,
         datePublished: publishedAt || undefined,
         publisher: {
           "@type": "Organization",
           name: "Winerim",
           url: "https://winerim.wine",
-          logo: { "@type": "ImageObject", url: "https://winerim.wine/favicon.ico" },
+          logo: { "@type": "ImageObject", url: "https://winerim.wine/og-image.png" },
         },
       });
     } else {
@@ -111,9 +115,38 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       });
     }
 
+    // JSON-LD: Organization (always present)
+    let orgScript = document.getElementById("seo-org-jsonld") as HTMLScriptElement | null;
+    if (!orgScript) {
+      orgScript = document.createElement("script");
+      orgScript.id = "seo-org-jsonld";
+      orgScript.type = "application/ld+json";
+      document.head.appendChild(orgScript);
+    }
+    orgScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Winerim",
+      url: "https://winerim.wine",
+      logo: "https://winerim.wine/og-image.png",
+      description: "Carta de vinos digital y recomendador inteligente para restaurantes, hoteles y vinotecas.",
+      sameAs: [
+        "https://www.instagram.com/winerim/",
+        "https://www.youtube.com/@Winerim",
+        "https://www.linkedin.com/company/winerim/",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        url: "https://winerim.wine/contacto",
+        availableLanguage: ["Spanish"],
+      },
+    });
+
     return () => {
       document.title = "Winerim – Carta de Vinos Digital | Recomendador Inteligente";
       if (scriptEl) scriptEl.remove();
+      if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
     };
   }, [title, description, image, url, type, publishedAt, author, noindex]);
