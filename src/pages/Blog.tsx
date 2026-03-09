@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Wine, TrendingUp, BookOpen, Globe, Building2, Laptop } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,6 +28,7 @@ const Blog = () => {
         .from("articles")
         .select("slug, title, excerpt, image_url, category")
         .eq("published", true)
+        .neq("category", "interview")
         .order("published_at", { ascending: false });
 
       if (data && data.length > 0) {
@@ -40,13 +40,15 @@ const Blog = () => {
           slug: `/article/${a.slug}`,
         })));
       } else {
-        const staticPosts = Object.values(staticArticles).map(a => ({
-          title: a.title,
-          excerpt: a.subtitle || "",
-          image: a.heroImage,
-          category: a.category,
-          slug: `/article/${a.slug}`,
-        }));
+        const staticPosts = Object.values(staticArticles)
+          .filter(a => a.type !== "interview")
+          .map(a => ({
+            title: a.title,
+            excerpt: a.subtitle || "",
+            image: a.heroImage,
+            category: a.category,
+            slug: `/article/${a.slug}`,
+          }));
         setBlogPosts(staticPosts);
       }
       setLoading(false);
@@ -122,38 +124,15 @@ const Blog = () => {
               </div>
             </section>
 
-            {/* Guías y recursos */}
-            <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8">
-                <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-2">Guías y recursos</p>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold">Aprende a optimizar tu carta de vinos</h2>
+            {/* Link to Guías y Recursos */}
+            <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24 text-center">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <p className="text-muted-foreground mb-4">¿Buscas guías prácticas para optimizar tu carta de vinos?</p>
+                <Link to="/guias-y-recursos"
+                  className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+                  Ver guías y recursos →
+                </Link>
               </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {[
-                  { to: "/blog/como-organizar-carta-de-vinos", icon: BookOpen, title: "Cómo organizar una carta de vinos", desc: "Guía práctica para estructurar tu carta de forma clara, rentable y fácil de entender." },
-                  { to: "/soluciones/aumentar-ticket-medio-restaurante", icon: TrendingUp, title: "Cómo aumentar el ticket medio", desc: "Estrategias para aumentar el gasto medio por cliente usando el vino como palanca." },
-                  { to: "/soluciones/grupos-restauracion", icon: Building2, title: "Winerim para grupos de restauración", desc: "Gestión centralizada del vino para grupos con múltiples restaurantes." },
-                  { to: "/en/digital-wine-list", icon: Globe, title: "What is a digital wine list?", desc: "Learn how digital wine lists are transforming the way restaurants sell wine." },
-                  { to: "/integraciones", icon: Laptop, title: "Integraciones de Winerim", desc: "Conecta Winerim con tu POS, ERP y sistemas de gestión existentes." },
-                  { to: "/precios", icon: Wine, title: "Planes y precios", desc: "Descubre qué plan de Winerim se adapta mejor a tu restaurante." },
-                ].map((guide, i) => {
-                  const Icon = guide.icon;
-                  return (
-                    <motion.div key={guide.to} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
-                      <Link to={guide.to}
-                        className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-colors block p-6 h-full">
-                        <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-4">
-                          <Icon size={20} className="text-wine" />
-                        </div>
-                        <h3 className="font-heading font-bold mb-2 group-hover:text-wine transition-colors">{guide.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{guide.desc}</p>
-                        <span className="mt-4 text-xs font-semibold tracking-widest uppercase text-accent block">Leer más →</span>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </div>
             </section>
           </>
         )}

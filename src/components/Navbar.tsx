@@ -8,7 +8,8 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "Sommelier Corner", href: "/sommelier-corner" },
   { label: "Blog", href: "/blog" },
-  { label: "Afíliate", href: "/afiliate" },
+  { label: "Guías", href: "/guias-y-recursos" },
+  { label: "Precios", href: "/precios" },
   { label: "Contacto", href: "/contacto" },
 ];
 
