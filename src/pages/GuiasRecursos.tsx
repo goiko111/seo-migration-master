@@ -21,6 +21,13 @@ const guides = [
     tag: "Guía",
   },
   {
+    to: "/blog/como-disenar-carta-vinos-rentable",
+    icon: DollarSign,
+    title: "Cómo diseñar una carta de vinos rentable",
+    desc: "Estrategias de pricing, wine mapping y selección para maximizar ventas y márgenes.",
+    tag: "Guía",
+  },
+  {
     to: "/como-vender-mas-vino-en-un-restaurante",
     icon: TrendingUp,
     title: "Cómo vender más vino en un restaurante",

@@ -109,6 +109,7 @@ const App = () => (
               <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
               <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
               <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
+              <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
               <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
