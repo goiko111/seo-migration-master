@@ -84,6 +84,7 @@ const App = () => (
               <Route path="/casos-exito" element={<CasosExito />} />
               <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
               <Route path="/carta-papel-vs-digital" element={<CartaPapelVsDigital />} />
+              <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
