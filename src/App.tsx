@@ -61,6 +61,7 @@ const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
 const CartaNoVende = lazy(() => import("./pages/CartaNoVende"));
 const RotacionVinos = lazy(() => import("./pages/RotacionVinos"));
+const EstrategiaMaridaje = lazy(() => import("./pages/EstrategiaMaridaje"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -130,6 +131,7 @@ const App = () => (
               <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
               <Route path="/problemas/carta-de-vinos-no-vende" element={<CartaNoVende />} />
               <Route path="/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" element={<RotacionVinos />} />
+              <Route path="/guias/como-crear-una-estrategia-de-maridaje-en-restauracion" element={<EstrategiaMaridaje />} />
               {/* Dynamic programmatic SEO pages - must be before NotFound */}
               <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
               <Route path="/software-vino-*" element={<SeoPage />} />
