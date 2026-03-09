@@ -116,6 +116,10 @@ const WineListSoftware = () => {
         title="Wine List Management Software for Restaurants | Winerim"
         description="Manage your wine list, optimize your cellar and increase wine sales with intelligent software designed for hospitality. Digital wine lists with smart filters, food pairings and AI recommendations."
         url="https://winerim.wine/wine-list-management-software"
+        hreflang={[
+          { lang: "en", url: "https://winerim.wine/wine-list-management-software" },
+          { lang: "es", url: "https://winerim.wine/software-carta-de-vinos" },
+        ]}
       />
       <Navbar />
 
