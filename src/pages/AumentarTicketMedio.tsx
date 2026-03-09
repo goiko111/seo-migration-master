@@ -321,35 +321,26 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 2. INTRODUCCIÓN */}
+      {/* INTRO */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="bg-gradient-card rounded-xl border border-border p-8 md:p-10">
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">
-                El ticket medio: la métrica que define la <span className="text-gradient-wine italic">rentabilidad</span>
+                {t.introTitle1}<span className="text-gradient-wine italic">{t.introHighlight}</span>
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed text-sm md:text-base">
-                <p>
-                  Aumentar el ticket medio es uno de los objetivos más importantes en restauración. No se trata de subir precios, sino de <strong className="text-foreground">mejorar la experiencia de compra</strong> para que cada cliente gaste más de forma natural.
-                </p>
-                <p>Los factores que más influyen en el ticket medio son:</p>
+                <p>{t.introP1}</p>
+                <p>{t.introP2}</p>
                 <ul className="grid sm:grid-cols-2 gap-3 mt-4">
-                  {[
-                    { icon: Wine, text: "Venta de bebidas, especialmente vino" },
-                    { icon: Users, text: "Recomendación activa del personal" },
-                    { icon: BookOpen, text: "Estructura y diseño de la carta" },
-                    { icon: Sparkles, text: "Experiencia global del cliente" },
-                  ].map((item, i) => (
+                  {[Wine, Users, BookOpen, Sparkles].map((Icon, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <item.icon size={16} className="text-wine shrink-0 mt-1" />
-                      <span>{item.text}</span>
+                      <Icon size={16} className="text-wine shrink-0 mt-1" />
+                      <span>{t.introFactors[i]}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-4">
-                  De todos estos factores, el <strong className="text-foreground">vino es la herramienta más efectiva</strong> para aumentar el ticket medio: alto margen, fácil de recomendar y presente durante toda la comida.
-                </p>
+                <p className="mt-4">{t.introP3}</p>
               </div>
             </div>
           </ScrollReveal>
