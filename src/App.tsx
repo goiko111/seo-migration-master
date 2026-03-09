@@ -25,6 +25,7 @@ const Admin = lazy(() => import("./pages/Admin"));
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Terminos = lazy(() => import("./pages/Terminos"));
 const VenderMasVino = lazy(() => import("./pages/VenderMasVino"));
+const AnalizaCarta = lazy(() => import("./pages/AnalizaCarta"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
