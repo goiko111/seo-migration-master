@@ -117,7 +117,7 @@ const ArticlePage = () => {
               </Link>
             </motion.div>
 
-            {article.subtitle && (
+            {article.type === "blog" && article.subtitle && (
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4">
                 {article.subtitle}
@@ -125,9 +125,27 @@ const ArticlePage = () => {
             )}
 
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-              className="font-heading text-3xl md:text-5xl font-bold mb-8 leading-tight">
+              className="font-heading text-3xl md:text-5xl font-bold mb-6 leading-tight">
               {article.title}
             </motion.h1>
+
+            {(article.author || article.publishedAt) && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
+                className="flex items-center gap-4 mb-10 text-sm text-muted-foreground">
+                {article.author && <span className="font-medium text-foreground">{article.author}</span>}
+                {article.author && article.publishedAt && <span className="text-muted-foreground/30">·</span>}
+                {article.publishedAt && (
+                  <time>{new Date(article.publishedAt).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
+                )}
+              </motion.div>
+            )}
+
+            {article.type === "interview" && article.subtitle && (
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                {article.subtitle}
+              </motion.p>
+            )}
 
             {article.heroImage && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
