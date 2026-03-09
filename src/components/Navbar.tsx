@@ -3,49 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.png";
-
-interface DropdownItem {
-  label: string;
-  href: string;
-}
-
-interface NavItem {
-  label: string;
-  href: string;
-  dropdown?: DropdownItem[];
-}
-
-const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  {
-    label: "Producto",
-    href: "/software-carta-de-vinos",
-    dropdown: [
-      { label: "Software carta de vinos", href: "/software-carta-de-vinos" },
-      { label: "Funcionalidades", href: "/funcionalidades" },
-      { label: "Integraciones", href: "/integraciones" },
-      { label: "Precios", href: "/precios" },
-      { label: "Casos de éxito", href: "/casos-exito" },
-      { label: "Clientes", href: "/clientes" },
-      { label: "Soluciones para grupos", href: "/soluciones/grupos-restauracion" },
-    ],
-  },
-  {
-    label: "Herramientas",
-    href: "/herramientas",
-    dropdown: [
-      { label: "Analizador de carta", href: "/wine-list-analyzer" },
-      { label: "Calculadora de margen", href: "/calculadora-margen-vino" },
-      { label: "Precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
-      { label: "Generador de maridajes", href: "/wine-pairing-generator" },
-      { label: "Wine pricing tool", href: "/wine-pricing-tool" },
-      { label: "Ver todas →", href: "/herramientas" },
-    ],
-  },
-  { label: "Blog", href: "/blog" },
-  { label: "Guías", href: "/guias-y-recursos" },
-  { label: "Contacto", href: "/contacto" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -54,6 +13,39 @@ const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const { t, localePath } = useLanguage();
+
+  const navItems = [
+    { label: t.nav_home, href: localePath("/") },
+    {
+      label: t.nav_product,
+      href: localePath("/software-carta-de-vinos"),
+      dropdown: [
+        { label: t.nav_software, href: localePath("/software-carta-de-vinos") },
+        { label: t.nav_features, href: localePath("/funcionalidades") },
+        { label: t.nav_integrations, href: localePath("/integraciones") },
+        { label: t.nav_pricing, href: localePath("/precios") },
+        { label: t.nav_case_studies, href: localePath("/casos-exito") },
+        { label: t.nav_clients, href: localePath("/clientes") },
+        { label: t.nav_solutions_groups, href: localePath("/soluciones/grupos-restauracion") },
+      ],
+    },
+    {
+      label: t.nav_tools,
+      href: localePath("/herramientas"),
+      dropdown: [
+        { label: t.nav_wine_analyzer, href: "/wine-list-analyzer" },
+        { label: t.nav_margin_calc, href: "/calculadora-margen-vino" },
+        { label: t.nav_glass_price, href: "/herramientas/calculadora-precio-vino-por-copa" },
+        { label: t.nav_pairing_generator, href: "/wine-pairing-generator" },
+        { label: t.nav_pricing_tool, href: "/wine-pricing-tool" },
+        { label: t.nav_see_all, href: localePath("/herramientas") },
+      ],
+    },
+    { label: t.nav_blog, href: localePath("/blog") },
+    { label: t.nav_guides, href: localePath("/guias-y-recursos") },
+    { label: t.nav_contact, href: localePath("/contacto") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -91,7 +83,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between h-16 sm:h-20">
-        <Link to="/" className="shrink-0">
+        <Link to={localePath("/")} className="shrink-0">
           <img src={winerimLogo} alt="Winerim" className="h-6 sm:h-7" />
         </Link>
 
@@ -116,7 +108,6 @@ const Navbar = () => {
                 {item.dropdown && <ChevronDown size={12} className="opacity-60" />}
               </Link>
 
-              {/* Dropdown */}
               <AnimatePresence>
                 {item.dropdown && openDropdown === item.label && (
                   <motion.div
@@ -148,21 +139,27 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <Link
-          to="/demo"
-          className="hidden lg:inline-flex bg-gradient-wine text-primary-foreground px-5 xl:px-6 py-2.5 rounded text-xs xl:text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
-        >
-          Prueba Gratis
-        </Link>
+        <div className="hidden lg:flex items-center gap-3">
+          <LanguageSwitcher />
+          <Link
+            to={localePath("/demo")}
+            className="bg-gradient-wine text-primary-foreground px-5 xl:px-6 py-2.5 rounded text-xs xl:text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+          >
+            {t.nav_cta}
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-foreground p-2 -mr-2"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-foreground p-2 -mr-2"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -246,11 +243,11 @@ const Navbar = () => {
                 className="mt-6"
               >
                 <Link
-                  to="/demo"
+                  to={localePath("/demo")}
                   className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Prueba Gratis
+                  {t.nav_cta}
                 </Link>
               </motion.div>
             </nav>

@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -79,6 +80,127 @@ const PageLoader = () => (
   </div>
 );
 
+// Spanish routes (also used for shared routes)
+const esRoutes = (
+  <>
+    <Route path="/" element={<Index />} />
+    <Route path="/blog" element={<Blog />} />
+    <Route path="/sommelier-corner" element={<SommelierCorner />} />
+    <Route path="/afiliate" element={<Afiliate />} />
+    <Route path="/contacto" element={<Contacto />} />
+    <Route path="/demo" element={<Demo />} />
+    <Route path="/article/:slug" element={<ArticlePage />} />
+    <Route path="/admin/login" element={<AdminLogin />} />
+    <Route path="/admin" element={<Admin />} />
+    <Route path="/privacidad" element={<Privacidad />} />
+    <Route path="/terminos" element={<Terminos />} />
+    <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
+    <Route path="/analisis-carta" element={<AnalizaCarta />} />
+    <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
+    <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
+    <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
+    <Route path="/wine-list-management-software" element={<WineListSoftware />} />
+    <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
+    <Route path="/que-es-winerim" element={<QueEsWinerim />} />
+    <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
+    <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
+    <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
+    <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
+    <Route path="/casos-exito" element={<CasosExito />} />
+    <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
+    <Route path="/carta-papel-vs-digital" element={<CartaPapelVsDigital />} />
+    <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
+    <Route path="/wine-roi-calculator" element={<WineROICalculator />} />
+    <Route path="/wine-pairing-generator" element={<WinePairingGenerator />} />
+    <Route path="/wine-pricing-tool" element={<WinePricingTool />} />
+    <Route path="/wine-list-benchmark" element={<WineListBenchmark />} />
+    <Route path="/precios" element={<Precios />} />
+    <Route path="/integraciones" element={<Integraciones />} />
+    <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
+    <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
+    <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
+    <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
+    <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
+    <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
+    <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
+    <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
+    <Route path="/recursos/checklist-carta-de-vinos-rentable" element={<ChecklistCartaRentable />} />
+    <Route path="/recursos/guia-vino-por-copa-para-restaurantes" element={<GuiaVinoPorCopa />} />
+    <Route path="/recursos/plantilla-wine-mapping-restaurante" element={<PlantillaWineMapping />} />
+    <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
+    <Route path="/ai-wine-software" element={<AiWineSoftware />} />
+    <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
+    <Route path="/problemas/carta-de-vinos-no-vende" element={<CartaNoVende />} />
+    <Route path="/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" element={<RotacionVinos />} />
+    <Route path="/guias/como-crear-una-estrategia-de-maridaje-en-restauracion" element={<EstrategiaMaridaje />} />
+    <Route path="/herramientas" element={<Herramientas />} />
+    <Route path="/soluciones" element={<Soluciones />} />
+    <Route path="/problemas" element={<Problemas />} />
+    <Route path="/clientes" element={<Clientes />} />
+    <Route path="/funcionalidades" element={<Funcionalidades />} />
+    {/* Dynamic programmatic SEO pages */}
+    <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
+    <Route path="/software-vino-*" element={<SeoPage />} />
+    <Route path="/wine-list-software-*" element={<SeoPage />} />
+  </>
+);
+
+// Language routes — reuse same components (they read lang from URL via LanguageProvider)
+const langRoutes = (prefix: string) => (
+  <>
+    <Route path={`${prefix}`} element={<Index />} />
+    <Route path={`${prefix}/blog`} element={<Blog />} />
+    <Route path={`${prefix}/demo`} element={<Demo />} />
+    <Route path={`${prefix}/contact`} element={<Contacto />} />
+    <Route path={`${prefix}/contatto`} element={<Contacto />} />
+    <Route path={`${prefix}/pricing`} element={<Precios />} />
+    <Route path={`${prefix}/prezzi`} element={<Precios />} />
+    <Route path={`${prefix}/tarifs`} element={<Precios />} />
+    <Route path={`${prefix}/features`} element={<Funcionalidades />} />
+    <Route path={`${prefix}/funzionalita`} element={<Funcionalidades />} />
+    <Route path={`${prefix}/fonctionnalites`} element={<Funcionalidades />} />
+    <Route path={`${prefix}/clients`} element={<Clientes />} />
+    <Route path={`${prefix}/clienti`} element={<Clientes />} />
+    <Route path={`${prefix}/integrations`} element={<Integraciones />} />
+    <Route path={`${prefix}/integrazioni`} element={<Integraciones />} />
+    <Route path={`${prefix}/case-studies`} element={<CasosExito />} />
+    <Route path={`${prefix}/casi-di-successo`} element={<CasosExito />} />
+    <Route path={`${prefix}/cas-clients`} element={<CasosExito />} />
+    <Route path={`${prefix}/tools`} element={<Herramientas />} />
+    <Route path={`${prefix}/strumenti`} element={<Herramientas />} />
+    <Route path={`${prefix}/outils`} element={<Herramientas />} />
+    <Route path={`${prefix}/guides`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/guide`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/solutions`} element={<Soluciones />} />
+    <Route path={`${prefix}/soluzioni`} element={<Soluciones />} />
+    <Route path={`${prefix}/challenges`} element={<Problemas />} />
+    <Route path={`${prefix}/sfide`} element={<Problemas />} />
+    <Route path={`${prefix}/defis`} element={<Problemas />} />
+    <Route path={`${prefix}/sommelier-corner`} element={<SommelierCorner />} />
+    <Route path={`${prefix}/affiliate`} element={<Afiliate />} />
+    <Route path={`${prefix}/affiliati`} element={<Afiliate />} />
+    <Route path={`${prefix}/affilies`} element={<Afiliate />} />
+    <Route path={`${prefix}/wine-list-management-software`} element={<WineListSoftware />} />
+    <Route path={`${prefix}/software-carta-vini`} element={<SoftwareCartaVinos />} />
+    <Route path={`${prefix}/logiciel-carte-des-vins`} element={<SoftwareCartaVinos />} />
+    <Route path={`${prefix}/what-is-winerim`} element={<WhatIsWinerim />} />
+    <Route path={`${prefix}/cose-winerim`} element={<QueEsWinerim />} />
+    <Route path={`${prefix}/quest-ce-que-winerim`} element={<QueEsWinerim />} />
+    <Route path={`${prefix}/privacy`} element={<Privacidad />} />
+    <Route path={`${prefix}/confidentialite`} element={<Privacidad />} />
+    <Route path={`${prefix}/terms`} element={<Terminos />} />
+    <Route path={`${prefix}/termini`} element={<Terminos />} />
+    <Route path={`${prefix}/conditions`} element={<Terminos />} />
+    <Route path={`${prefix}/solutions/restaurant-groups`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/soluzioni/gruppi-ristorazione`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/solutions/groupes-restauration`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/solutions/increase-average-ticket`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/soluzioni/aumentare-scontrino-medio`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/solutions/augmenter-ticket-moyen`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/article/:slug`} element={<ArticlePage />} />
+  </>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
@@ -86,74 +208,21 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/sommelier-corner" element={<SommelierCorner />} />
-              <Route path="/afiliate" element={<Afiliate />} />
-              <Route path="/contacto" element={<Contacto />} />
-              <Route path="/demo" element={<Demo />} />
-              <Route path="/article/:slug" element={<ArticlePage />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/privacidad" element={<Privacidad />} />
-              <Route path="/terminos" element={<Terminos />} />
-              <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
-              <Route path="/analisis-carta" element={<AnalizaCarta />} />
-              <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
-              <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
-              <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
-              <Route path="/wine-list-management-software" element={<WineListSoftware />} />
-              <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
-              <Route path="/que-es-winerim" element={<QueEsWinerim />} />
-              <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
-              <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
-              <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
-              <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
-              <Route path="/casos-exito" element={<CasosExito />} />
-              <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
-              <Route path="/carta-papel-vs-digital" element={<CartaPapelVsDigital />} />
-              <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
-              <Route path="/wine-roi-calculator" element={<WineROICalculator />} />
-              <Route path="/wine-pairing-generator" element={<WinePairingGenerator />} />
-              <Route path="/wine-pricing-tool" element={<WinePricingTool />} />
-              <Route path="/wine-list-benchmark" element={<WineListBenchmark />} />
-              <Route path="/precios" element={<Precios />} />
-              <Route path="/integraciones" element={<Integraciones />} />
-              <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
-              <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
-              <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
-              <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
-              <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
-              <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
-              <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
-              <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
-              <Route path="/recursos/checklist-carta-de-vinos-rentable" element={<ChecklistCartaRentable />} />
-              <Route path="/recursos/guia-vino-por-copa-para-restaurantes" element={<GuiaVinoPorCopa />} />
-              <Route path="/recursos/plantilla-wine-mapping-restaurante" element={<PlantillaWineMapping />} />
-              <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
-              <Route path="/ai-wine-software" element={<AiWineSoftware />} />
-              <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
-              <Route path="/problemas/carta-de-vinos-no-vende" element={<CartaNoVende />} />
-              <Route path="/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" element={<RotacionVinos />} />
-              <Route path="/guias/como-crear-una-estrategia-de-maridaje-en-restauracion" element={<EstrategiaMaridaje />} />
-              <Route path="/herramientas" element={<Herramientas />} />
-              <Route path="/soluciones" element={<Soluciones />} />
-              <Route path="/problemas" element={<Problemas />} />
-              <Route path="/clientes" element={<Clientes />} />
-              <Route path="/funcionalidades" element={<Funcionalidades />} />
-              {/* Dynamic programmatic SEO pages - must be before NotFound */}
-              <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
-              <Route path="/software-vino-*" element={<SeoPage />} />
-              <Route path="/wine-list-software-*" element={<SeoPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          <WhatsAppButton />
-          <BackToTop />
-          <CookieConsent />
+          <LanguageProvider>
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                {esRoutes}
+                {langRoutes("/en")}
+                {langRoutes("/it")}
+                {langRoutes("/fr")}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            <WhatsAppButton />
+            <BackToTop />
+            <CookieConsent />
+          </LanguageProvider>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>

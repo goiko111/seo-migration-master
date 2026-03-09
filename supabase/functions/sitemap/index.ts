@@ -79,6 +79,54 @@ const STATIC_ROUTES = [
   { loc: '/terminos', priority: '0.2', changefreq: 'yearly' },
 ];
 
+// i18n routes: core pages in EN, IT, FR
+const LANG_ROUTES = [
+  // English
+  { loc: '/en', priority: '0.9', changefreq: 'weekly' },
+  { loc: '/en/blog', priority: '0.7', changefreq: 'weekly' },
+  { loc: '/en/demo', priority: '0.8', changefreq: 'monthly' },
+  { loc: '/en/pricing', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/en/contact', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/features', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/en/clients', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/integrations', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/case-studies', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/tools', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/guides', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/solutions', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/en/wine-list-management-software', priority: '0.7', changefreq: 'monthly' },
+
+  // Italian
+  { loc: '/it', priority: '0.9', changefreq: 'weekly' },
+  { loc: '/it/blog', priority: '0.7', changefreq: 'weekly' },
+  { loc: '/it/demo', priority: '0.8', changefreq: 'monthly' },
+  { loc: '/it/prezzi', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/it/contatto', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/funzionalita', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/it/clienti', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/integrazioni', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/casi-di-successo', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/strumenti', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/guide', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/soluzioni', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/it/software-carta-vini', priority: '0.7', changefreq: 'monthly' },
+
+  // French
+  { loc: '/fr', priority: '0.9', changefreq: 'weekly' },
+  { loc: '/fr/blog', priority: '0.7', changefreq: 'weekly' },
+  { loc: '/fr/demo', priority: '0.8', changefreq: 'monthly' },
+  { loc: '/fr/tarifs', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/fr/contact', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/fonctionnalites', priority: '0.7', changefreq: 'monthly' },
+  { loc: '/fr/clients', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/integrations', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/cas-clients', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/outils', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/guides', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/solutions', priority: '0.6', changefreq: 'monthly' },
+  { loc: '/fr/logiciel-carte-des-vins', priority: '0.7', changefreq: 'monthly' },
+];
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -90,7 +138,6 @@ Deno.serve(async (req) => {
 
     const now = new Date().toISOString().split('T')[0];
 
-    // Fetch published articles and seo_pages in parallel
     const [articlesRes, seoPagesRes] = await Promise.all([
       fetch(`${supabaseUrl}/rest/v1/articles?published=eq.true&select=slug,updated_at&order=updated_at.desc`, {
         headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` },
@@ -104,11 +151,12 @@ Deno.serve(async (req) => {
     const seoPages = await seoPagesRes.json();
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 `;
 
     // Static routes
-    for (const route of STATIC_ROUTES) {
+    for (const route of [...STATIC_ROUTES, ...LANG_ROUTES]) {
       xml += `  <url>
     <loc>${SITE_URL}${route.loc}</loc>
     <lastmod>${now}</lastmod>

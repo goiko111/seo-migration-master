@@ -74,7 +74,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("twitter:title", fullTitle);
     setMeta("og:type", type);
     setMeta("og:site_name", "Winerim");
-    setMeta("og:locale", "es_ES");
+    setMeta("og:locale", hreflang?.find(h => h.lang !== "x-default")?.lang === "en" ? "en_GB" : hreflang?.find(h => h.lang !== "x-default")?.lang === "it" ? "it_IT" : hreflang?.find(h => h.lang !== "x-default")?.lang === "fr" ? "fr_FR" : "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
     // Always set og:image (use default if none provided)
