@@ -79,8 +79,8 @@ const QueEsWinerim = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
-          <div className="max-w-3xl">
-            <motion.div
+           <div className="max-w-3xl">
+            <Breadcrumbs items={[{ label: "Qué es Winerim" }]} />
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
