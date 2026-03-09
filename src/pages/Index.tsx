@@ -1,37 +1,35 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import LogoStrip from "@/components/LogoStrip";
-import WhatIsWinerim from "@/components/WhatIsWinerim";
-import Features from "@/components/Features";
-import Quote from "@/components/Quote";
-import Benefits from "@/components/Benefits";
-import Capabilities from "@/components/Capabilities";
-import VideoSection from "@/components/VideoSection";
-import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import { PageContentProvider } from "@/contexts/PageContentContext";
 import SEOHead from "@/components/SEOHead";
+import HeroSection from "@/components/landing/HeroSection";
+import LogoStrip from "@/components/LogoStrip";
+import ProblemSection from "@/components/landing/ProblemSection";
+import SolutionSection from "@/components/landing/SolutionSection";
+import ResultsSection from "@/components/landing/ResultsSection";
+import HowItWorksSection from "@/components/landing/HowItWorksSection";
+import VideoSection from "@/components/VideoSection";
+import FinalCTASection from "@/components/landing/FinalCTASection";
+import { PageContentProvider } from "@/contexts/PageContentContext";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Carta de Vinos Digital | Recomendador Inteligente"
-        description="Winerim transforma la experiencia gastronómica de tu restaurante con una carta de vinos digital y un recomendador inteligente que potencia tus ventas."
+        title="Carta de Vinos Digital con IA | Vende Más Vino"
+        description="Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomendaciones automáticas, maridajes y analítica para aumentar las ventas de vino en tu restaurante."
         url="https://winerim.wine"
       />
       <Navbar />
       <PageContentProvider page="home">
         <main>
-          <Hero />
+          <HeroSection />
           <LogoStrip />
-          <WhatIsWinerim />
-          <Features />
-          <Quote />
-          <Benefits />
-          <Capabilities />
+          <ProblemSection />
+          <SolutionSection />
+          <ResultsSection />
+          <HowItWorksSection />
           <VideoSection />
-          <CTASection />
+          <FinalCTASection />
         </main>
       </PageContentProvider>
       <Footer />
