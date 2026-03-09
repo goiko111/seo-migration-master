@@ -163,6 +163,7 @@ const AnalizaCarta = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Análisis de carta" }]} />
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/5 mb-8">
                   <Zap size={14} className="text-accent" />
                   <span className="text-xs font-semibold tracking-widest uppercase text-accent">100 % gratuito</span>

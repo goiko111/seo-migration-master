@@ -54,7 +54,7 @@ const Footer = () => {
                 { label: "Blog", href: "/blog" },
                 { label: "Sommelier Corner", href: "/sommelier-corner" },
                 { label: "Guías y recursos", href: "/guias-y-recursos" },
-                { label: "Soluciones", href: "/soluciones/grupos-restauracion" },
+                { label: "Problemas comunes", href: "/problemas" },
                 { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>
