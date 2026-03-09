@@ -5,6 +5,7 @@ const fr: TranslationDict = {
   nav_product: "Produit",
   nav_tools: "Outils",
   nav_blog: "Blog",
+  nav_sommelier: "Sommelier Corner",
   nav_guides: "Guides",
   nav_contact: "Contact",
   nav_cta: "Essai Gratuit",

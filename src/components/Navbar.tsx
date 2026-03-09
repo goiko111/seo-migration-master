@@ -42,7 +42,14 @@ const Navbar = () => {
         { label: t.nav_see_all, href: localePath("/herramientas") },
       ],
     },
-    { label: t.nav_blog, href: localePath("/blog") },
+    {
+      label: t.nav_blog,
+      href: localePath("/blog"),
+      dropdown: [
+        { label: "Blog", href: localePath("/blog") },
+        { label: t.nav_sommelier, href: localePath("/sommelier-corner") },
+      ],
+    },
     { label: t.nav_guides, href: localePath("/guias-y-recursos") },
     { label: t.nav_contact, href: localePath("/contacto") },
   ];
