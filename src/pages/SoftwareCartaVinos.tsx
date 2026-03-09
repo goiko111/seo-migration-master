@@ -30,6 +30,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import FAQSection from "@/components/seo/FAQSection";
 import mockupImg from "@/assets/winerim-mockup.png";
 
 /* ── Intro problems ── */
