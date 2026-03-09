@@ -1,26 +1,29 @@
 import { motion } from "framer-motion";
 import { AlertTriangle, Users, HelpCircle, TrendingDown, Package } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const problems = [
-  { icon: Users, text: "El personal no tiene tiempo ni conocimiento para recomendar vinos." },
-  { icon: HelpCircle, text: "Los clientes no entienden la carta." },
-  { icon: TrendingDown, text: "La mayoría acaba pidiendo el vino más barato." },
-  { icon: Package, text: "Muchos vinos se quedan sin rotación." },
-];
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const ProblemSection = () => {
+  const { t } = useLanguage();
+
+  const problems = [
+    { icon: Users, text: t.problem_1 },
+    { icon: HelpCircle, text: t.problem_2 },
+    { icon: TrendingDown, text: t.problem_3 },
+    { icon: Package, text: t.problem_4 },
+  ];
+
   return (
     <section className="section-padding">
       <div className="max-w-5xl mx-auto">
         <ScrollReveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 mb-6">
             <AlertTriangle size={14} className="text-accent" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-accent">El problema</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-accent">{t.problem_badge}</span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            El vino debería ser tu mayor margen…{" "}
-            <span className="text-gradient-wine italic">pero rara vez lo es.</span>
+            {t.problem_title_1}
+            <span className="text-gradient-wine italic">{t.problem_title_highlight}</span>
           </h2>
         </ScrollReveal>
 
@@ -44,7 +47,7 @@ const ProblemSection = () => {
           <div className="text-center">
             <div className="inline-block bg-gradient-card rounded-2xl border border-wine/20 px-8 py-6 glow-wine">
               <p className="font-heading text-xl md:text-2xl font-semibold text-foreground/90 italic">
-                "La carta informa, pero <span className="text-gradient-wine">no vende.</span>"
+                "{t.problem_quote}<span className="text-gradient-wine">{t.problem_quote_highlight}</span>"
               </p>
             </div>
           </div>
