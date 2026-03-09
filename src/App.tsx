@@ -55,6 +55,7 @@ const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
 const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
 const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
+const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -117,6 +118,10 @@ const App = () => (
               <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
               <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
               <Route path="/ai-wine-software" element={<AiWineSoftware />} />
+              {/* Dynamic programmatic SEO pages - must be before NotFound */}
+              <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
+              <Route path="/software-vino-*" element={<SeoPage />} />
+              <Route path="/wine-list-software-*" element={<SeoPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
