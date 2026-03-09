@@ -53,6 +53,8 @@ const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
+const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
+const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -113,6 +115,8 @@ const App = () => (
               <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
               <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
               <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
+              <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
+              <Route path="/ai-wine-software" element={<AiWineSoftware />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
