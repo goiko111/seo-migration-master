@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const FeaturesPreview = () => {
-  const { t, localePath } = useLanguage();
+  const { t, lang, localePath } = useLanguage();
 
   const features = [
     { icon: Sparkles, title: t.lang === "es" ? "Recomendaciones IA" : t.lang === "en" ? "AI Recommendations" : t.lang === "it" ? "Raccomandazioni IA" : "Recommandations IA", desc: t.lang === "es" ? "Sugerencias inteligentes para cada comensal." : t.lang === "en" ? "Smart suggestions for every diner." : t.lang === "it" ? "Suggerimenti intelligenti per ogni commensale." : "Suggestions intelligentes pour chaque convive." },
