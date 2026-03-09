@@ -45,6 +45,7 @@ const WinePricingTool = lazy(() => import("./pages/WinePricingTool"));
 const WineListBenchmark = lazy(() => import("./pages/WineListBenchmark"));
 const Precios = lazy(() => import("./pages/Precios"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
+const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
