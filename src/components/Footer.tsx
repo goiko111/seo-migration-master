@@ -15,8 +15,8 @@ const Footer = () => {
   return (
     <footer className="border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          <ScrollReveal direction="up" className="md:col-span-1">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+          <ScrollReveal direction="up" className="sm:col-span-2 lg:col-span-1">
             <img src={winerimLogo} alt="Winerim" className="h-7 mb-4" />
             <p className="text-sm text-muted-foreground leading-relaxed">
               {get("general", "description", "La carta de vinos digital que revoluciona la hostelería.")}
@@ -25,13 +25,14 @@ const Footer = () => {
 
           <ScrollReveal delay={0.1}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              {get("columns", "col1_title", "Producto")}
+              Producto
             </h4>
             <ul className="space-y-3">
               {[
                 { label: "Funcionalidades", href: "/afiliate" },
                 { label: "Precios", href: "/precios" },
                 { label: "Integraciones", href: "/integraciones" },
+                { label: "Casos de éxito", href: "/casos-exito" },
                 { label: "Demo gratuita", href: "/demo" },
               ].map((item) => (
                 <li key={item.label}>
@@ -45,13 +46,14 @@ const Footer = () => {
 
           <ScrollReveal delay={0.15}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              {get("columns", "col2_title", "Contenido")}
+              Contenido
             </h4>
             <ul className="space-y-3">
               {[
                 { label: "Blog", href: "/blog" },
                 { label: "Sommelier Corner", href: "/sommelier-corner" },
                 { label: "Guías y recursos", href: "/guias-y-recursos" },
+                { label: "Soluciones", href: "/soluciones/grupos-restauracion" },
                 { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>
@@ -65,7 +67,29 @@ const Footer = () => {
 
           <ScrollReveal delay={0.2}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              {get("columns", "col3_title", "Legal")}
+              Herramientas
+            </h4>
+            <ul className="space-y-3">
+              {[
+                { label: "Analizador de carta", href: "/wine-list-analyzer" },
+                { label: "Calculadora margen", href: "/calculadora-margen-vino" },
+                { label: "Precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
+                { label: "Generador maridajes", href: "/wine-pairing-generator" },
+                { label: "Pricing tool", href: "/wine-pricing-tool" },
+                { label: "Ver todas", href: "/herramientas" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link to={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.25}>
+            <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
+              Legal
             </h4>
             <ul className="space-y-3">
               {[

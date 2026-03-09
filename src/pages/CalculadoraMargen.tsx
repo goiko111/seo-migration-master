@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const multiplierPresets = [2, 2.5, 3, 3.5, 4];
 
@@ -52,22 +53,8 @@ const CalculadoraMargen = () => {
     });
     document.head.appendChild(schema);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "calc-breadcrumb-jsonld";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Calculadora de margen del vino", item: "https://winerim.wine/calculadora-margen-vino" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
     return () => {
       document.getElementById("calc-jsonld")?.remove();
-      document.getElementById("calc-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
@@ -85,6 +72,7 @@ const CalculadoraMargen = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full text-center">
+          <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Calculadora de margen" }]} />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
