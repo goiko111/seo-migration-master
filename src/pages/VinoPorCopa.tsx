@@ -409,6 +409,12 @@ const VinoPorCopa = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora precio por copa", type: "tool" },
+        { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
+        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

@@ -305,6 +305,12 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/soluciones/aumentar-ticket-medio-restaurante", label: "Aumentar ticket medio", type: "guide" },
+        { to: "/wine-list-benchmark", label: "Wine List Benchmark", type: "tool" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

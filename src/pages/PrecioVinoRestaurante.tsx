@@ -412,6 +412,12 @@ const PrecioVinoRestaurante = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/wine-pricing-tool", label: "Wine Pricing Optimizer", type: "tool" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Carta de vinos rentable", type: "guide" },
+        { to: "/demo", label: "Solicitar demo", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

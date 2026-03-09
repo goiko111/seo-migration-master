@@ -357,51 +357,14 @@ const WhatIsWinerim = () => {
         </div>
       </section>
 
-      {/* 8. FAQ */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
-        <ScrollReveal>
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">FAQ</span>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes sobre Winerim</h2>
-        </ScrollReveal>
+      <FAQSection faqs={faqs} schemaId="what-is-winerim" title="Frequently Asked Questions" />
 
-        <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 0.05}>
-              <div className="p-6 rounded-xl border border-border bg-gradient-card">
-                <div className="flex items-start gap-3 mb-3">
-                  <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                  <h3 className="font-heading font-bold">{faq.q}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <Sparkles size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              Descubre cómo Winerim puede transformar tu carta de vinos
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Solicita una demo personalizada y te mostramos cómo Winerim puede ayudar a tu restaurante a vender más vino.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/demo" className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                Solicitar demo <ArrowRight size={16} />
-              </Link>
-              <Link to="/analisis-carta" className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-                Analizar mi carta gratis
-              </Link>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
-
+      <InternalLinks links={[
+        { to: "/wine-list-management-software", label: "Wine List Software", type: "solution" },
+        { to: "/wine-list-analyzer", label: "Wine List Analyzer", type: "tool" },
+        { to: "/wine-pairing-generator", label: "Wine Pairing Generator", type: "tool" },
+        { to: "/precios", label: "Pricing Plans", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

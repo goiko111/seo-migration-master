@@ -359,6 +359,12 @@ const QueEsWinerim = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

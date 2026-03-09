@@ -55,6 +55,7 @@ const Contacto = () => {
       <SEOHead title="Contacto" description="Contacta con Winerim. Analizamos tu carta de vinos gratis y te ayudamos a optimizarla." url="https://winerim.wine/contacto" />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
+          <div className="max-w-2xl mx-auto"><Breadcrumbs items={[{ label: "Contacto" }]} /></div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="font-heading text-4xl md:text-6xl font-bold mb-6">
             {get("hero", "title", "¿Quieres aumentar tus ventas")}{" "}

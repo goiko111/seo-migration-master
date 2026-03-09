@@ -96,6 +96,12 @@ const Demo = () => {
           </div>
         </section>
       </main>
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+        { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );
