@@ -380,32 +380,7 @@ const VenderMasVino = () => {
           </div>
         </section>
 
-        {/* ═══════════ FAQ ═══════════ */}
-        <section className="section-padding bg-gradient-dark">
-          <div className="max-w-3xl mx-auto">
-            <ScrollReveal className="text-center mb-14">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                Preguntas frecuentes
-              </h2>
-            </ScrollReveal>
-
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.06}>
-                  <details className="group bg-gradient-card rounded-xl border border-border hover:border-wine/20 transition-colors">
-                    <summary className="flex items-center justify-between cursor-pointer p-6 text-foreground font-semibold">
-                      <span className="pr-4">{faq.q}</span>
-                      <ChevronDown size={18} className="text-muted-foreground flex-shrink-0 transition-transform group-open:rotate-180" />
-                    </summary>
-                    <div className="px-6 pb-6">
-                      <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
-                    </div>
-                  </details>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FAQSection faqs={faqs} schemaId="vender-mas-vino" />
 
         {/* ═══════════ 7. CTA FINAL ═══════════ */}
         <section className="section-padding">
