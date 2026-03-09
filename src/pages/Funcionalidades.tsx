@@ -268,7 +268,12 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      <InternalLinks currentPath="/funcionalidades" />
+      <InternalLinks links={[
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+        { to: "/integraciones", label: "Integraciones con TPV y ERP", type: "tool" },
+        { to: "/clientes", label: "Restaurantes que usan Winerim", type: "solution" },
+        { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "guide" },
+      ]} />
       <Footer />
     </div>
   );

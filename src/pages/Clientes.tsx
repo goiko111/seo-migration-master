@@ -169,7 +169,12 @@ const Clientes = () => {
         </div>
       </section>
 
-      <InternalLinks currentPath="/clientes" />
+      <InternalLinks links={[
+        { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "solution" },
+        { to: "/casos-exito", label: "Casos de éxito detallados", type: "guide" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+        { to: "/integraciones", label: "Integraciones con TPV y ERP", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );
