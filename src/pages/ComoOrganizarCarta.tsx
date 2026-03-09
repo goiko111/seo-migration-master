@@ -181,7 +181,7 @@ const ComoOrganizarCarta = () => {
                   <p className="text-xs text-wine font-medium mb-3">{m.examples}</p>
                   <div className="space-y-2">
                     <div className="flex items-start gap-2">
-                      <CheckCircle size={14} className="text-green-500 shrink-0 mt-0.5" />
+                      <CheckCircle size={14} className="text-wine shrink-0 mt-0.5" />
                       <p className="text-sm text-muted-foreground">{m.pros}</p>
                     </div>
                     <div className="flex items-start gap-2">
