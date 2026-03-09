@@ -121,6 +121,10 @@ const SoftwareCartaVinos = () => {
         title="Software para Carta de Vinos en Restaurantes | Winerim"
         description="El mejor software para gestionar tu carta de vinos: recomendaciones con IA, maridajes automáticos, analítica y carta digital interactiva para restaurantes."
         url="https://winerim.wine/software-carta-de-vinos"
+        hreflang={[
+          { lang: "es", url: "https://winerim.wine/software-carta-de-vinos" },
+          { lang: "en", url: "https://winerim.wine/wine-list-management-software" },
+        ]}
       />
       <Navbar />
 
