@@ -427,18 +427,18 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 6. TECNOLOGÍA */}
+      {/* TECH */}
       <section className="section-padding">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Tecnología</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.techLabel}</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">
-              Cómo Winerim te ayuda a <span className="text-gradient-wine italic">vender más</span>
+              {t.techTitle1}<span className="text-gradient-wine italic">{t.techHighlight}</span>
             </h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-5">
-            {techBenefits.map((tb, i) => {
-              const Icon = tb.icon;
+            {t.techBenefits.map((tb, i) => {
+              const Icon = techIcons[i] || Sparkles;
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <div className="bg-gradient-card rounded-xl border border-border p-6 h-full">
@@ -455,18 +455,18 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 7. RESULTADOS */}
+      {/* RESULTS */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Impacto</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{t.impactLabel}</p>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">
-              Resultados <span className="text-gradient-wine italic">reales</span>
+              {t.impactTitle1}<span className="text-gradient-wine italic">{t.impactHighlight}</span>
             </h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-5">
-            {metrics.map((m, i) => {
-              const Icon = m.icon;
+            {t.metrics.map((m, i) => {
+              const Icon = metricIcons[i] || TrendingUp;
               return (
                 <ScrollReveal key={i} delay={i * 0.08}>
                   <div className="bg-gradient-card rounded-xl border border-border p-8 text-center">
@@ -483,27 +483,20 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
-      {/* 8. CTA FINAL */}
+      {/* CTA FINAL */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden"
-          >
+          <motion.div initial={{ opacity: 0, y: 30, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
-              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">Da el siguiente paso</p>
+              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">{t.ctaFinalLabel}</p>
               <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                Descubre cuánto más podrías <span className="text-gradient-wine italic">vender</span> con tu carta de vinos
+                {t.ctaFinalTitle1}<span className="text-gradient-wine italic">{t.ctaFinalHighlight}</span>
               </h2>
-              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base">
-                Analizamos tu carta de vinos y te mostramos oportunidades concretas para aumentar tu ticket medio.
-              </p>
-              <Link to="/wine-list-analyzer" className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
-                Solicitar análisis de carta <ArrowRight size={16} />
+              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base">{t.ctaFinalDesc}</p>
+              <Link to={localePath("/wine-list-analyzer")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+                {t.ctaFinalButton} <ArrowRight size={16} />
               </Link>
             </div>
           </motion.div>
@@ -511,10 +504,10 @@ const AumentarTicketMedio = () => {
       </section>
 
       <InternalLinks links={[
-        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
-        { to: "/vino-por-copa-restaurante", label: "Vino por copa en restaurantes", type: "guide" },
-        { to: "/wine-roi-calculator", label: "Calculadora ROI vino", type: "tool" },
-        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: localePath("/como-vender-mas-vino-en-un-restaurante"), label: t.links[0].label, type: "guide" },
+        { to: localePath("/vino-por-copa-restaurante"), label: t.links[1].label, type: "guide" },
+        { to: localePath("/wine-roi-calculator"), label: t.links[2].label, type: "tool" },
+        { to: localePath("/software-carta-de-vinos"), label: t.links[3].label, type: "solution" },
       ]} />
       <Footer />
     </div>
