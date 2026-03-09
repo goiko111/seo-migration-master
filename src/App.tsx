@@ -90,6 +90,7 @@ const App = () => (
               <Route path="/wine-list-analyzer" element={<WineListAnalyzer />} />
               <Route path="/wine-roi-calculator" element={<WineROICalculator />} />
               <Route path="/wine-pairing-generator" element={<WinePairingGenerator />} />
+              <Route path="/wine-pricing-tool" element={<WinePricingTool />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
