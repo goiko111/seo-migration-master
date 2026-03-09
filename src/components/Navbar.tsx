@@ -22,9 +22,11 @@ const navItems: NavItem[] = [
     href: "/software-carta-de-vinos",
     dropdown: [
       { label: "Software carta de vinos", href: "/software-carta-de-vinos" },
+      { label: "Funcionalidades", href: "/funcionalidades" },
       { label: "Integraciones", href: "/integraciones" },
       { label: "Precios", href: "/precios" },
       { label: "Casos de éxito", href: "/casos-exito" },
+      { label: "Clientes", href: "/clientes" },
       { label: "Soluciones para grupos", href: "/soluciones/grupos-restauracion" },
     ],
   },
