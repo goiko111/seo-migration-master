@@ -48,6 +48,7 @@ const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
+const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
