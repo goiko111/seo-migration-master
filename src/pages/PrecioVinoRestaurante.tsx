@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const priceRanges = [
   { range: "20 – 30 €", label: "Entrada", desc: "Vinos accesibles que invitan a probar. Deben ser atractivos y fáciles de entender.", color: "bg-wine/10" },
@@ -411,6 +412,12 @@ const PrecioVinoRestaurante = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/wine-pricing-tool", label: "Wine Pricing Optimizer", type: "tool" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Carta de vinos rentable", type: "guide" },
+        { to: "/demo", label: "Solicitar demo", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

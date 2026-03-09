@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const problems = [
   { icon: Layers, text: "Cada restaurante gestiona el vino de forma diferente: cartas distintas, criterios distintos, calidades distintas." },
@@ -304,6 +305,12 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/soluciones/aumentar-ticket-medio-restaurante", label: "Aumentar ticket medio", type: "guide" },
+        { to: "/wine-list-benchmark", label: "Wine List Benchmark", type: "tool" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

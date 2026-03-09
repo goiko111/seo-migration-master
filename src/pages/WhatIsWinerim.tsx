@@ -11,6 +11,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import FAQSection from "@/components/seo/FAQSection";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const useCases = [
   { icon: Wine, title: "Gestionar cartas de vinos", desc: "Crea, organiza y actualiza tu carta de vinos digital en tiempo real. Categorías, descripciones, precios y disponibilidad desde un solo panel." },
@@ -156,6 +159,7 @@ const WhatIsWinerim = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
+          <Breadcrumbs items={[{ label: "What is Winerim" }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <Wine size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine">Wine Intelligence Platform</span>
@@ -353,51 +357,14 @@ const WhatIsWinerim = () => {
         </div>
       </section>
 
-      {/* 8. FAQ */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
-        <ScrollReveal>
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">FAQ</span>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes sobre Winerim</h2>
-        </ScrollReveal>
+      <FAQSection faqs={faqs} schemaId="what-is-winerim" title="Frequently Asked Questions" />
 
-        <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 0.05}>
-              <div className="p-6 rounded-xl border border-border bg-gradient-card">
-                <div className="flex items-start gap-3 mb-3">
-                  <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                  <h3 className="font-heading font-bold">{faq.q}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <Sparkles size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              Descubre cómo Winerim puede transformar tu carta de vinos
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Solicita una demo personalizada y te mostramos cómo Winerim puede ayudar a tu restaurante a vender más vino.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/demo" className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                Solicitar demo <ArrowRight size={16} />
-              </Link>
-              <Link to="/analisis-carta" className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-                Analizar mi carta gratis
-              </Link>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
-
+      <InternalLinks links={[
+        { to: "/wine-list-management-software", label: "Wine List Software", type: "solution" },
+        { to: "/wine-list-analyzer", label: "Wine List Analyzer", type: "tool" },
+        { to: "/wine-pairing-generator", label: "Wine Pairing Generator", type: "tool" },
+        { to: "/precios", label: "Pricing Plans", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

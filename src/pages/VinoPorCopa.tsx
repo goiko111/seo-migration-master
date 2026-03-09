@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const introBenefits = [
   { icon: Users, text: "Reduce el miedo del cliente a elegir mal" },
@@ -408,6 +409,12 @@ const VinoPorCopa = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora precio por copa", type: "tool" },
+        { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
+        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { articles as staticArticles } from "@/data/articles";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 
 interface BlogPost {
@@ -72,6 +73,7 @@ const Blog = () => {
       <SEOHead title="Blog" description="Descubre toda la actualidad del mundo del vino de la mano de Winerim." url="https://winerim.wine/blog" />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
+          <div className="max-w-2xl mx-auto"><Breadcrumbs items={[{ label: "Blog" }]} /></div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="font-heading text-4xl md:text-6xl font-bold mb-6">
             {get("hero", "title", "Blog")}

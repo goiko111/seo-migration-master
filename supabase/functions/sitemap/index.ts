@@ -66,6 +66,9 @@ const STATIC_ROUTES = [
   { loc: '/soluciones/grupos-restauracion', priority: '0.7', changefreq: 'monthly' },
   { loc: '/soluciones/aumentar-ticket-medio-restaurante', priority: '0.7', changefreq: 'monthly' },
 
+  // Library
+  { loc: '/biblioteca-vino', priority: '0.6', changefreq: 'weekly' },
+
   // Problems
   { loc: '/problemas/carta-de-vinos-no-vende', priority: '0.6', changefreq: 'monthly' },
 

@@ -9,6 +9,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const defaultBenefits = [
   "Configuración en menos de 24 horas",
@@ -50,6 +52,7 @@ const Demo = () => {
         <section className="pt-32 pb-24 section-padding">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+              <Breadcrumbs items={[{ label: "Demo gratuita" }]} />
               <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
                 {get("hero", "label", "Prueba gratuita")}
               </span>
@@ -93,6 +96,12 @@ const Demo = () => {
           </div>
         </section>
       </main>
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/precios", label: "Planes y precios", type: "resource" },
+        { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

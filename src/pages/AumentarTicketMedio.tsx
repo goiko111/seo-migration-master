@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const wineAdvantages = [
   { icon: DollarSign, title: "Mayor margen que otros productos", desc: "El vino ofrece márgenes del 65-75%, superiores a la mayoría de productos de la carta. Cada copa vendida mejora directamente la rentabilidad." },
@@ -310,6 +311,12 @@ const AumentarTicketMedio = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
+        { to: "/vino-por-copa-restaurante", label: "Vino por copa en restaurantes", type: "guide" },
+        { to: "/wine-roi-calculator", label: "Calculadora ROI vino", type: "tool" },
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

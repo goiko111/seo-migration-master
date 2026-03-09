@@ -10,6 +10,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import FAQSection from "@/components/seo/FAQSection";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const plans = [
   {
@@ -145,6 +148,7 @@ const Precios = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-center">
+          <Breadcrumbs items={[{ label: "Precios" }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <Sparkles size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Planes y precios</span>
@@ -299,32 +303,7 @@ const Precios = () => {
         </div>
       </section>
 
-      {/* 6. FAQ */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-3xl mx-auto">
-          <ScrollReveal className="text-center mb-12">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">Preguntas frecuentes</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold">
-              Todo lo que necesitas <span className="text-gradient-wine italic">saber</span>
-            </h2>
-          </ScrollReveal>
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <ScrollReveal key={i} delay={i * 0.04}>
-                <details className="group bg-gradient-card rounded-xl border border-border overflow-hidden">
-                  <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                    <span className="font-medium text-sm pr-4">{faq.q}</span>
-                    <ChevronDown size={16} className="text-muted-foreground shrink-0 transition-transform group-open:rotate-180" />
-                  </summary>
-                  <div className="px-5 pb-5 -mt-1">
-                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
-                  </div>
-                </details>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} schemaId="precios" />
 
       {/* 7. CTA FINAL */}
       <section className="section-padding">
@@ -353,6 +332,12 @@ const Precios = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },
+        { to: "/casos-exito", label: "Casos de éxito", type: "resource" },
+        { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );
