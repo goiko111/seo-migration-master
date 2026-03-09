@@ -64,22 +64,8 @@ const PrecioVinoRestaurante = () => {
     });
     document.head.appendChild(faqSchema);
 
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "precio-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Cómo fijar el precio del vino en un restaurante", item: "https://winerim.wine/precio-vino-restaurante" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
     return () => {
       document.getElementById("precio-faq-jsonld")?.remove();
-      document.getElementById("precio-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
