@@ -11,6 +11,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const commonProblems = [
   { icon: DollarSign, text: "Precios mal estructurados con saltos bruscos que desorientan al cliente" },
@@ -117,6 +119,7 @@ const CartaVinosRentable = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
+          <Breadcrumbs items={[{ label: "Blog", href: "/blog" }, { label: "Carta de vinos rentable" }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <DollarSign size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine">Rentabilidad</span>
@@ -357,6 +360,12 @@ const CartaVinosRentable = () => {
         </ScrollReveal>
       </section>
 
+      <InternalLinks links={[
+        { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino", type: "guide" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+        { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

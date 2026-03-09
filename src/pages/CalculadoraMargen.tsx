@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const multiplierPresets = [2, 2.5, 3, 3.5, 4];
 
@@ -363,6 +364,12 @@ const CalculadoraMargen = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino", type: "guide" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
+        { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
+        { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+      ]} />
       <Footer />
     </div>
   );

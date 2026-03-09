@@ -9,6 +9,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 interface WineExample {
   category: string;
@@ -223,6 +225,7 @@ const EjemplosCarta = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+          <Breadcrumbs items={[{ label: "Guías", href: "/guias-y-recursos" }, { label: "Ejemplos de carta de vinos" }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <Wine size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Plantillas y modelos</span>
@@ -368,6 +371,12 @@ const EjemplosCarta = () => {
         </div>
       </section>
 
+      <InternalLinks links={[
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta de vinos", type: "guide" },
+        { to: "/como-hacer-una-carta-de-vinos", label: "Cómo hacer una carta de vinos", type: "guide" },
+        { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
+        { to: "/wine-list-analyzer", label: "Analizador de carta", type: "tool" },
+      ]} />
       <Footer />
     </div>
   );

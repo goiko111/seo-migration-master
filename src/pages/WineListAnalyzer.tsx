@@ -12,6 +12,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 
 /* ───── types ───── */
@@ -595,6 +597,12 @@ const WineListAnalyzer = () => {
         </section>
       )}
 
+      <InternalLinks links={[
+        { to: "/blog/como-organizar-carta-de-vinos", label: "Cómo organizar una carta de vinos", type: "guide" },
+        { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
+        { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist carta rentable", type: "resource" },
+        { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );

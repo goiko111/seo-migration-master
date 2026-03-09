@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -250,6 +251,12 @@ const CalculadoraPrecioCopa = () => {
         </ScrollReveal>
       </section>
 
+      <InternalLinks links={[
+        { to: "/vino-por-copa-restaurante", label: "Vino por copa en restaurantes", type: "guide" },
+        { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
+        { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
+        { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
+      ]} />
       <Footer />
     </div>
   );
