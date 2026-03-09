@@ -100,6 +100,7 @@ const guides = [
 ];
 
 const tools = [
+  { to: "/recursos/plantilla-carta-de-vinos", title: "Plantilla de carta de vinos", desc: "Descarga una plantilla profesional para diseñar tu carta de vinos." },
   { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Analiza tu carta y recibe recomendaciones de mejora." },
   { to: "/calculadora-margen-vino", title: "Calculadora de márgenes", desc: "Calcula el margen óptimo para cada referencia." },
   { to: "/wine-pricing-tool", title: "Herramienta de pricing", desc: "Optimiza la estructura de precios de tu carta." },

@@ -52,6 +52,7 @@ const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
+const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -111,6 +112,7 @@ const App = () => (
               <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
               <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
               <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
+              <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
