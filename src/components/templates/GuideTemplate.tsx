@@ -1,0 +1,269 @@
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight, BookOpen, CheckCircle, HelpCircle,
+  Sparkles, Lightbulb, AlertTriangle, ListChecks
+} from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import RelatedPages from "@/components/seo/RelatedPages";
+import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+
+interface GuideSection {
+  heading: string;
+  content: string;
+  tips?: string[];
+  icon?: "check" | "lightbulb" | "alert" | "list";
+}
+
+interface GuideLink {
+  label: string;
+  url: string;
+}
+
+export interface GuidePageData {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  heroBadge?: string;
+  breadcrumbParent?: { label: string; href: string };
+  tableOfContents?: string[];
+  sections: GuideSection[];
+  faqs: { q: string; a: string }[];
+  relatedTools?: GuideLink[];
+  relatedGuides?: GuideLink[];
+  ctaPrimaryText?: string;
+  ctaPrimaryUrl?: string;
+  ctaSecondaryText?: string;
+  ctaSecondaryUrl?: string;
+  ctaFinalTitle?: string;
+  ctaFinalDescription?: string;
+}
+
+const iconMap = {
+  check: CheckCircle,
+  lightbulb: Lightbulb,
+  alert: AlertTriangle,
+  list: ListChecks,
+};
+
+const GuideTemplate = ({ data }: { data: GuidePageData }) => {
+  const ctaPrimary = data.ctaPrimaryText || "Solicitar demo";
+  const ctaPrimaryUrl = data.ctaPrimaryUrl || "/demo";
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title={data.metaTitle}
+        description={data.metaDescription}
+        url={`https://winerim.wine/${data.slug}`}
+        type="article"
+      />
+      <DynamicSchemaMarkup
+        id={data.slug}
+        type="Article"
+        title={data.heroTitle}
+        description={data.metaDescription}
+        url={`https://winerim.wine/${data.slug}`}
+        faqs={data.faqs}
+        breadcrumbs={[
+          { name: "Inicio", url: "https://winerim.wine/" },
+          ...(data.breadcrumbParent
+            ? [{ name: data.breadcrumbParent.label, url: `https://winerim.wine${data.breadcrumbParent.href}` }]
+            : []),
+          { name: data.heroTitle, url: `https://winerim.wine/${data.slug}` },
+        ]}
+      />
+      <Navbar />
+
+      {/* HERO */}
+      <section className="relative flex items-center overflow-hidden pt-32 pb-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
+          <Breadcrumbs items={[
+            ...(data.breadcrumbParent ? [data.breadcrumbParent] : [{ label: "Guías", href: "/guias-y-recursos" }]),
+            { label: data.heroTitle },
+          ]} />
+          {data.heroBadge && (
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
+              <BookOpen size={14} className="text-wine" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine">{data.heroBadge}</span>
+            </motion.div>
+          )}
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            {data.heroTitle}
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
+            {data.heroSubtitle}
+          </motion.p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+            className="flex flex-wrap gap-4">
+            <Link to={ctaPrimaryUrl}
+              className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+              {ctaPrimary} <ArrowRight size={16} />
+            </Link>
+            {data.ctaSecondaryText && (
+              <Link to={data.ctaSecondaryUrl || "/analisis-carta"}
+                className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+                {data.ctaSecondaryText}
+              </Link>
+            )}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* TABLE OF CONTENTS */}
+      {data.tableOfContents && data.tableOfContents.length > 0 && (
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+          <div className="p-6 rounded-xl border border-border bg-gradient-card">
+            <h2 className="font-heading font-bold text-sm uppercase tracking-widest text-accent mb-4">Contenido</h2>
+            <ol className="space-y-2">
+              {data.tableOfContents.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <span className="text-wine font-semibold shrink-0">{i + 1}.</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
+      {/* SECTIONS */}
+      {data.sections.map((section, i) => {
+        const Icon = section.icon ? iconMap[section.icon] : CheckCircle;
+        const isAlt = i % 2 === 1;
+        return (
+          <section key={i} className={isAlt ? "bg-gradient-card border-y border-border py-16" : "py-16"}>
+            <div className="max-w-4xl mx-auto px-6 md:px-12">
+              <ScrollReveal>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">{section.heading}</h2>
+                <p className="text-muted-foreground leading-relaxed text-lg mb-8 whitespace-pre-line">{section.content}</p>
+                {section.tips && section.tips.length > 0 && (
+                  <div className="space-y-3">
+                    {section.tips.map((tip, j) => (
+                      <div key={j} className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background">
+                        <Icon size={16} className="text-wine shrink-0 mt-0.5" />
+                        <p className="text-sm text-muted-foreground leading-relaxed">{tip}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </ScrollReveal>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* MID CTA */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
+        <ScrollReveal>
+          <div className="flex flex-col sm:flex-row items-center gap-6 p-8 rounded-xl border border-wine/20 bg-wine/5">
+            <div className="flex-1">
+              <h3 className="font-heading font-bold text-lg mb-1">¿Quieres optimizar tu carta de vinos?</h3>
+              <p className="text-sm text-muted-foreground">Winerim te ayuda a vender más vino con tecnología e inteligencia artificial.</p>
+            </div>
+            <Link to={ctaPrimaryUrl}
+              className="shrink-0 inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+              {ctaPrimary} <ArrowRight size={16} />
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* RELATED TOOLS */}
+      {data.relatedTools && data.relatedTools.length > 0 && (
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl font-bold mb-6">Herramientas relacionadas</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {data.relatedTools.map((tool, i) => (
+                <Link key={i} to={tool.url}
+                  className="flex items-center gap-3 p-5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-colors group">
+                  <Sparkles size={16} className="text-wine shrink-0" />
+                  <span className="text-sm font-medium group-hover:text-foreground transition-colors">{tool.label}</span>
+                  <ArrowRight size={14} className="ml-auto text-muted-foreground group-hover:text-wine transition-colors" />
+                </Link>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+      )}
+
+      {/* RELATED GUIDES */}
+      {data.relatedGuides && data.relatedGuides.length > 0 && (
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl font-bold mb-6">Guías relacionadas</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {data.relatedGuides.map((guide, i) => (
+                <Link key={i} to={guide.url}
+                  className="flex items-center gap-3 p-5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-colors group">
+                  <BookOpen size={16} className="text-wine shrink-0" />
+                  <span className="text-sm font-medium group-hover:text-foreground transition-colors">{guide.label}</span>
+                  <ArrowRight size={14} className="ml-auto text-muted-foreground group-hover:text-wine transition-colors" />
+                </Link>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+      )}
+
+      {/* FAQ */}
+      {data.faqs.length > 0 && (
+        <section className="bg-gradient-card border-y border-border py-20">
+          <div className="max-w-4xl mx-auto px-6 md:px-12">
+            <ScrollReveal>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+            </ScrollReveal>
+            <div className="space-y-6">
+              {data.faqs.map((faq, i) => (
+                <ScrollReveal key={i} delay={i * 0.05}>
+                  <div className="p-6 rounded-xl border border-border bg-background">
+                    <div className="flex items-start gap-3 mb-3">
+                      <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
+                      <h3 className="font-heading font-bold">{faq.q}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA FINAL */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
+        <ScrollReveal>
+          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
+            <Sparkles size={32} className="text-wine mx-auto mb-6" />
+            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
+              {data.ctaFinalTitle || "Optimiza tu carta de vinos con Winerim"}
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
+              {data.ctaFinalDescription || "Descubre cómo Winerim puede ayudarte a vender más vino y mejorar la experiencia de tus clientes."}
+            </p>
+            <Link to={ctaPrimaryUrl}
+              className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+              {ctaPrimary} <ArrowRight size={16} />
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default GuideTemplate;
