@@ -80,6 +80,7 @@ const App = () => (
               <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
               <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
               <Route path="/casos-exito" element={<CasosExito />} />
+              <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
