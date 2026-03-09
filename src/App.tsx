@@ -118,6 +118,10 @@ const App = () => (
               <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
               <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
               <Route path="/ai-wine-software" element={<AiWineSoftware />} />
+              {/* Dynamic programmatic SEO pages - must be before NotFound */}
+              <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
+              <Route path="/software-vino-*" element={<SeoPage />} />
+              <Route path="/wine-list-software-*" element={<SeoPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
