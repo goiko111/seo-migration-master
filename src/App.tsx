@@ -78,6 +78,7 @@ const App = () => (
               <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
               <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
               <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
+              <Route path="/casos-exito" element={<CasosExito />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
