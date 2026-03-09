@@ -140,17 +140,19 @@ const ArticlePage = () => {
 
         <section className="max-w-3xl mx-auto px-6 md:px-12 pb-24">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="prose prose-lg prose-invert max-w-none
+            className="article-body prose prose-lg prose-invert max-w-none
               prose-headings:font-heading prose-headings:text-foreground
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-strong:text-foreground prose-strong:font-semibold
-              prose-blockquote:border-l-accent prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground/80 prose-blockquote:font-heading prose-blockquote:text-xl
-              prose-li:text-muted-foreground
+              prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pt-8 prose-h2:border-t prose-h2:border-border
+              prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4
+              prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-3 prose-h4:text-accent
+              prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:text-base prose-p:md:text-lg prose-p:mb-6
+              prose-strong:text-foreground prose-strong:font-bold
+              prose-blockquote:border-l-accent prose-blockquote:border-l-4 prose-blockquote:pl-8 prose-blockquote:py-4 prose-blockquote:my-10 prose-blockquote:italic prose-blockquote:text-foreground/80 prose-blockquote:font-heading prose-blockquote:text-xl prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-xl
+              prose-li:text-muted-foreground prose-li:leading-[1.85] prose-li:mb-2
+              prose-ul:my-8 prose-ol:my-8
               prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-              prose-img:rounded-xl prose-img:my-8
-              prose-hr:border-border">
+              prose-img:rounded-xl prose-img:my-12
+              prose-hr:border-border prose-hr:my-12">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
           </motion.div>
 
