@@ -26,6 +26,7 @@ const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Terminos = lazy(() => import("./pages/Terminos"));
 const VenderMasVino = lazy(() => import("./pages/VenderMasVino"));
 const AnalizaCarta = lazy(() => import("./pages/AnalizaCarta"));
+const SoftwareCartaVinos = lazy(() => import("./pages/SoftwareCartaVinos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
               <Route path="/terminos" element={<Terminos />} />
               <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
               <Route path="/analisis-carta" element={<AnalizaCarta />} />
+              <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
