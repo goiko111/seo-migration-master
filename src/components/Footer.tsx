@@ -30,8 +30,9 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { label: "Funcionalidades", href: "/afiliate" },
+                { label: "Precios", href: "/precios" },
+                { label: "Integraciones", href: "/integraciones" },
                 { label: "Demo gratuita", href: "/demo" },
-                { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link to={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -44,13 +45,13 @@ const Footer = () => {
 
           <ScrollReveal delay={0.15}>
             <h4 className="font-heading text-sm font-semibold tracking-wider uppercase mb-4">
-              {get("columns", "col2_title", "Empresa")}
+              {get("columns", "col2_title", "Contenido")}
             </h4>
             <ul className="space-y-3">
               {[
                 { label: "Blog", href: "/blog" },
                 { label: "Sommelier Corner", href: "/sommelier-corner" },
-                { label: "Afíliate", href: "/afiliate" },
+                { label: "Guías y recursos", href: "/guias-y-recursos" },
                 { label: "Contacto", href: "/contacto" },
               ].map((item) => (
                 <li key={item.label}>
