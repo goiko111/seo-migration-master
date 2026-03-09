@@ -53,22 +53,8 @@ const CalculadoraMargen = () => {
     });
     document.head.appendChild(schema);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "calc-breadcrumb-jsonld";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Calculadora de margen del vino", item: "https://winerim.wine/calculadora-margen-vino" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
     return () => {
       document.getElementById("calc-jsonld")?.remove();
-      document.getElementById("calc-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
