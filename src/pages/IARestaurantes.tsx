@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import mockupImg from "@/assets/winerim-mockup.png";
 
 const problems = [
@@ -70,22 +71,8 @@ const IARestaurantes = () => {
     });
     document.head.appendChild(faqSchema);
 
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "ia-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Inteligencia artificial para restaurantes", item: "https://winerim.wine/inteligencia-artificial-restaurantes" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
     return () => {
       document.getElementById("ia-faq-jsonld")?.remove();
-      document.getElementById("ia-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
@@ -106,6 +93,7 @@ const IARestaurantes = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
+              <Breadcrumbs items={[{ label: "IA para restaurantes" }]} />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

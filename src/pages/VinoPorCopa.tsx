@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const introBenefits = [
   { icon: Users, text: "Reduce el miedo del cliente a elegir mal" },
@@ -70,22 +71,8 @@ const VinoPorCopa = () => {
     });
     document.head.appendChild(faqSchema);
 
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "copa-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Cómo vender vino por copa en un restaurante", item: "https://winerim.wine/vino-por-copa-restaurante" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
     return () => {
       document.getElementById("copa-faq-jsonld")?.remove();
-      document.getElementById("copa-breadcrumb-jsonld")?.remove();
     };
   }, []);
 
@@ -105,6 +92,7 @@ const VinoPorCopa = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
           <div className="max-w-3xl">
+            <Breadcrumbs items={[{ label: "Guías", href: "/guias-y-recursos" }, { label: "Vino por copa" }]} />
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

@@ -28,6 +28,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import mockupImg from "@/assets/winerim-mockup.png";
 
 /* ── Intro problems ── */
@@ -111,20 +112,7 @@ const SoftwareCartaVinos = () => {
     });
     document.head.appendChild(faqScript);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "breadcrumb-jsonld-software";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine" },
-        { "@type": "ListItem", position: 2, name: "Software para Carta de Vinos", item: "https://winerim.wine/software-carta-de-vinos" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
-    return () => { faqScript.remove(); breadcrumb.remove(); };
+    return () => { faqScript.remove(); };
   }, []);
 
   return (
@@ -133,6 +121,10 @@ const SoftwareCartaVinos = () => {
         title="Software para Carta de Vinos en Restaurantes | Winerim"
         description="El mejor software para gestionar tu carta de vinos: recomendaciones con IA, maridajes automáticos, analítica y carta digital interactiva para restaurantes."
         url="https://winerim.wine/software-carta-de-vinos"
+        hreflang={[
+          { lang: "es", url: "https://winerim.wine/software-carta-de-vinos" },
+          { lang: "en", url: "https://winerim.wine/wine-list-management-software" },
+        ]}
       />
       <Navbar />
 
@@ -145,6 +137,7 @@ const SoftwareCartaVinos = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                <Breadcrumbs items={[{ label: "Software carta de vinos" }]} />
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
                   <Monitor size={14} className="text-wine" />
                   <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Software para hostelería</span>

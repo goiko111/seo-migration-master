@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import {
@@ -127,22 +128,8 @@ const VenderMasVino = () => {
     });
     document.head.appendChild(script);
 
-    const breadcrumb = document.createElement("script");
-    breadcrumb.id = "breadcrumb-jsonld";
-    breadcrumb.type = "application/ld+json";
-    breadcrumb.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine" },
-        { "@type": "ListItem", position: 2, name: "Cómo vender más vino en un restaurante", item: "https://winerim.wine/como-vender-mas-vino-en-un-restaurante" },
-      ],
-    });
-    document.head.appendChild(breadcrumb);
-
     return () => {
       script.remove();
-      breadcrumb.remove();
     };
   }, []);
 
@@ -169,6 +156,7 @@ const VenderMasVino = () => {
             transition={{ duration: 0.7 }}
             className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center"
           >
+            <Breadcrumbs items={[{ label: "Guías", href: "/guias-y-recursos" }, { label: "Vender más vino" }]} />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
               <Wine size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Guía para hostelería</span>

@@ -144,6 +144,10 @@ const WhatIsWinerim = () => {
         description="Winerim is a wine intelligence platform that helps restaurants manage wine lists, recommend wines, analyze sales and optimize pricing using AI technology."
         url="https://winerim.wine/what-is-winerim"
         type="website"
+        hreflang={[
+          { lang: "en", url: "https://winerim.wine/what-is-winerim" },
+          { lang: "es", url: "https://winerim.wine/que-es-winerim" },
+        ]}
       />
       <Navbar />
 

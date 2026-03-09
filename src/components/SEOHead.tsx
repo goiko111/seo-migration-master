@@ -2,6 +2,11 @@ import { useEffect } from "react";
 
 const DEFAULT_OG_IMAGE = "https://winerim.wine/og-image.png";
 
+interface HreflangLink {
+  lang: string;
+  url: string;
+}
+
 interface SEOHeadProps {
   title: string;
   description?: string;
@@ -11,9 +16,10 @@ interface SEOHeadProps {
   publishedAt?: string;
   author?: string;
   noindex?: boolean;
+  hreflang?: HreflangLink[];
 }
 
-const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex }: SEOHeadProps) => {
+const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex, hreflang }: SEOHeadProps) => {
   useEffect(() => {
     const fullTitle = title.length > 55 ? title : `${title} | Winerim`;
     document.title = fullTitle;
@@ -43,6 +49,19 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     // Noindex
     if (noindex) {
       setMeta("robots", "noindex, nofollow", true);
+    }
+
+    // Hreflang
+    const hreflangEls: HTMLLinkElement[] = [];
+    if (hreflang && hreflang.length > 0) {
+      hreflang.forEach((link) => {
+        const el = document.createElement("link");
+        el.rel = "alternate";
+        el.hreflang = link.lang;
+        el.href = link.url;
+        document.head.appendChild(el);
+        hreflangEls.push(el);
+      });
     }
 
     if (description) {
@@ -148,8 +167,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       if (scriptEl) scriptEl.remove();
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
+      hreflangEls.forEach((el) => el.remove());
     };
-  }, [title, description, image, url, type, publishedAt, author, noindex]);
+  }, [title, description, image, url, type, publishedAt, author, noindex, hreflang]);
 
   return null;
 };
