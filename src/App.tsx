@@ -33,6 +33,7 @@ const WineListSoftware = lazy(() => import("./pages/WineListSoftware"));
 const VinoPorCopa = lazy(() => import("./pages/VinoPorCopa"));
 const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
 const CalculadoraMargen = lazy(() => import("./pages/CalculadoraMargen"));
+const CalculadoraPrecioCopa = lazy(() => import("./pages/CalculadoraPrecioCopa"));
 const BibliotecaVino = lazy(() => import("./pages/BibliotecaVino"));
 const BibliotecaDetalle = lazy(() => import("./pages/BibliotecaDetalle"));
 const CasosExito = lazy(() => import("./pages/CasosExito"));
