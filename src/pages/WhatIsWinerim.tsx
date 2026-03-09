@@ -11,6 +11,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import FAQSection from "@/components/seo/FAQSection";
+import InternalLinks from "@/components/seo/InternalLinks";
 
 const useCases = [
   { icon: Wine, title: "Gestionar cartas de vinos", desc: "Crea, organiza y actualiza tu carta de vinos digital en tiempo real. Categorías, descripciones, precios y disponibilidad desde un solo panel." },
