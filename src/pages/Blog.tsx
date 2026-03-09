@@ -9,6 +9,7 @@ import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface BlogPost {
   title: string;
@@ -18,10 +19,19 @@ interface BlogPost {
   slug: string;
 }
 
+const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string; guidesQ: string; guidesBtn: string }> = {
+  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer más →", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →" },
+  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read more →", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →" },
+  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi di più →", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →" },
+  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire la suite →", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →" },
+};
+
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("blog");
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const t = i18n[lang] || i18n.es;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -70,7 +80,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title="Blog" description="Descubre toda la actualidad del mundo del vino de la mano de Winerim." url="https://winerim.wine/blog" />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/blog")}`} hreflang={allLangPaths("/blog")} />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
           <div className="max-w-2xl mx-auto"><Breadcrumbs items={[{ label: "Blog" }]} /></div>
@@ -80,7 +90,7 @@ const Blog = () => {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {get("hero", "subtitle", "Descubre toda la actualidad del mundo del vino de la mano de Winerim.")}
+            {t.seoDesc}
           </motion.p>
         </section>
 
@@ -98,7 +108,7 @@ const Blog = () => {
                     <span className="text-xs font-semibold tracking-widest uppercase text-accent mb-4">{blogPosts[0].category}</span>
                     <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4 group-hover:text-gradient-wine transition-colors">{blogPosts[0].title}</h2>
                     <p className="text-muted-foreground leading-relaxed">{blogPosts[0].excerpt}</p>
-                    <span className="mt-6 text-sm font-semibold tracking-widest uppercase text-accent">Leer más →</span>
+                    <span className="mt-6 text-sm font-semibold tracking-widest uppercase text-accent">{t.readMore}</span>
                   </div>
                 </Link>
               </motion.div>
@@ -126,13 +136,12 @@ const Blog = () => {
               </div>
             </section>
 
-            {/* Link to Guías y Recursos */}
             <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24 text-center">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <p className="text-muted-foreground mb-4">¿Buscas guías prácticas para optimizar tu carta de vinos?</p>
-                <Link to="/guias-y-recursos"
+                <p className="text-muted-foreground mb-4">{t.guidesQ}</p>
+                <Link to={localePath("/guias-y-recursos")}
                   className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                  Ver guías y recursos →
+                  {t.guidesBtn}
                 </Link>
               </motion.div>
             </section>

@@ -8,96 +8,112 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const solutions = [
-  {
-    to: "/soluciones/grupos-restauracion",
-    icon: Building2,
-    title: "Winerim para grupos de restauración",
-    desc: "Gestión centralizada del vino para grupos con múltiples restaurantes. Control de cartas, precios y stock desde un solo panel.",
+const content: Record<string, {
+  seoTitle: string; seoDesc: string; badge: string; h1: string; subtitle: string;
+  solutions: { title: string; desc: string; esPath: string }[];
+  diagTitle: string; diagDesc: string; diagLink: string;
+  linksTitle: string;
+}> = {
+  es: {
+    seoTitle: "Soluciones para Restaurantes | Winerim",
+    seoDesc: "Soluciones específicas de gestión de carta de vinos: grupos de restauración, aumento de ticket medio y más.",
+    badge: "Por caso de uso", h1: "Soluciones Winerim",
+    subtitle: "Cada restaurante tiene necesidades distintas. Descubre cómo Winerim se adapta a tu tipo de negocio y tus objetivos.",
+    solutions: [
+      { title: "Winerim para grupos de restauración", desc: "Gestión centralizada del vino para grupos con múltiples restaurantes. Control de cartas, precios y stock desde un solo panel.", esPath: "/soluciones/grupos-restauracion" },
+      { title: "Aumentar el ticket medio", desc: "Estrategias basadas en datos para aumentar el gasto medio por cliente usando el vino como palanca de rentabilidad.", esPath: "/soluciones/aumentar-ticket-medio-restaurante" },
+    ],
+    diagTitle: "¿Tu carta de vinos no vende?", diagDesc: "Diagnóstico gratuito de los problemas más comunes que frenan las ventas de vino en restaurantes.",
+    diagLink: "Ver diagnóstico", linksTitle: "Contenido relacionado",
   },
-  {
-    to: "/soluciones/aumentar-ticket-medio-restaurante",
-    icon: BarChart3,
-    title: "Aumentar el ticket medio",
-    desc: "Estrategias basadas en datos para aumentar el gasto medio por cliente usando el vino como palanca de rentabilidad.",
+  en: {
+    seoTitle: "Solutions for Restaurants | Winerim",
+    seoDesc: "Specific wine list management solutions: restaurant groups, average ticket increase and more.",
+    badge: "By use case", h1: "Winerim Solutions",
+    subtitle: "Every restaurant has different needs. Discover how Winerim adapts to your business type and goals.",
+    solutions: [
+      { title: "Winerim for restaurant groups", desc: "Centralized wine management for groups with multiple restaurants. Control menus, pricing and stock from a single dashboard.", esPath: "/soluciones/grupos-restauracion" },
+      { title: "Increase average ticket", desc: "Data-driven strategies to increase average spend per customer using wine as a profitability lever.", esPath: "/soluciones/aumentar-ticket-medio-restaurante" },
+    ],
+    diagTitle: "Is your wine list not selling?", diagDesc: "Free diagnosis of the most common problems that hold back wine sales in restaurants.",
+    diagLink: "View diagnosis", linksTitle: "Related content",
   },
-];
+  it: {
+    seoTitle: "Soluzioni per Ristoranti | Winerim",
+    seoDesc: "Soluzioni specifiche per la gestione della carta dei vini: gruppi di ristorazione, aumento dello scontrino medio e altro.",
+    badge: "Per caso d'uso", h1: "Soluzioni Winerim",
+    subtitle: "Ogni ristorante ha esigenze diverse. Scopri come Winerim si adatta al tuo tipo di attività e ai tuoi obiettivi.",
+    solutions: [
+      { title: "Winerim per gruppi di ristorazione", desc: "Gestione centralizzata del vino per gruppi con più ristoranti. Controllo delle carte, prezzi e stock da un unico pannello.", esPath: "/soluciones/grupos-restauracion" },
+      { title: "Aumentare lo scontrino medio", desc: "Strategie basate sui dati per aumentare la spesa media per cliente usando il vino come leva di redditività.", esPath: "/soluciones/aumentar-ticket-medio-restaurante" },
+    ],
+    diagTitle: "La tua carta dei vini non vende?", diagDesc: "Diagnosi gratuita dei problemi più comuni che frenano le vendite di vino nei ristoranti.",
+    diagLink: "Vedi diagnosi", linksTitle: "Contenuti correlati",
+  },
+  fr: {
+    seoTitle: "Solutions pour Restaurants | Winerim",
+    seoDesc: "Solutions spécifiques de gestion de carte des vins : groupes de restauration, augmentation du ticket moyen et plus.",
+    badge: "Par cas d'usage", h1: "Solutions Winerim",
+    subtitle: "Chaque restaurant a des besoins différents. Découvrez comment Winerim s'adapte à votre type d'établissement et vos objectifs.",
+    solutions: [
+      { title: "Winerim pour les groupes de restauration", desc: "Gestion centralisée du vin pour les groupes multi-restaurants. Contrôle des cartes, prix et stocks depuis un seul tableau de bord.", esPath: "/soluciones/grupos-restauracion" },
+      { title: "Augmenter le ticket moyen", desc: "Stratégies basées sur les données pour augmenter la dépense moyenne par client en utilisant le vin comme levier de rentabilité.", esPath: "/soluciones/aumentar-ticket-medio-restaurante" },
+    ],
+    diagTitle: "Votre carte des vins ne vend pas ?", diagDesc: "Diagnostic gratuit des problèmes les plus courants qui freinent les ventes de vin dans les restaurants.",
+    diagLink: "Voir le diagnostic", linksTitle: "Contenu associé",
+  },
+};
+
+const solutionIcons = [Building2, BarChart3];
 
 const Soluciones = () => {
-  useEffect(() => {
-    const schema = document.createElement("script");
-    schema.id = "soluciones-jsonld";
-    schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      name: "Soluciones Winerim para restaurantes",
-      description: "Soluciones específicas de gestión de carta de vinos para distintos tipos de negocio y objetivos.",
-      url: "https://winerim.wine/soluciones",
-      publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-    });
-    document.head.appendChild(schema);
-    return () => { schema.remove(); };
-  }, []);
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const t = content[lang] || content.es;
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Soluciones para Restaurantes | Winerim"
-        description="Soluciones específicas de gestión de carta de vinos: grupos de restauración, aumento de ticket medio y más."
-        url="https://winerim.wine/soluciones"
+        title={t.seoTitle}
+        description={t.seoDesc}
+        url={`https://winerim.wine${localePath("/soluciones")}`}
+        hreflang={allLangPaths("/soluciones")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Soluciones" }]} />
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block"
-            >
-              Por caso de uso
+            <Breadcrumbs items={[{ label: t.h1 }]} />
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
+              {t.badge}
             </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            >
-              Soluciones Winerim
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              {t.h1}
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-lg text-muted-foreground max-w-3xl leading-relaxed"
-            >
-              Cada restaurante tiene necesidades distintas. Descubre cómo Winerim se adapta a tu tipo de negocio y tus objetivos.
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+              {t.subtitle}
             </motion.p>
           </div>
         </section>
 
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <div className="grid md:grid-cols-2 gap-6">
-            {solutions.map((item, i) => {
-              const Icon = item.icon;
+            {t.solutions.map((item, i) => {
+              const Icon = solutionIcons[i];
               return (
-                <ScrollReveal key={item.to} delay={i * 0.05}>
+                <ScrollReveal key={i} delay={i * 0.05}>
                   <Link
-                    to={item.to}
+                    to={localePath(item.esPath)}
                     className="group bg-gradient-card rounded-2xl border border-border hover:border-wine/50 transition-all block p-8 h-full hover:shadow-lg hover:shadow-wine/5"
                   >
                     <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5">
                       <Icon size={22} className="text-wine" />
                     </div>
-                    <h2 className="font-heading text-xl font-bold mb-3 group-hover:text-wine transition-colors">
-                      {item.title}
-                    </h2>
+                    <h2 className="font-heading text-xl font-bold mb-3 group-hover:text-wine transition-colors">{item.title}</h2>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.desc}</p>
                     <span className="inline-flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-accent">
-                      Ver solución <ArrowRight size={12} />
+                      <ArrowRight size={12} />
                     </span>
                   </Link>
                 </ScrollReveal>
@@ -113,15 +129,13 @@ const Soluciones = () => {
                 <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-4">
                   <TrendingUp size={18} className="text-wine" />
                 </div>
-                <h2 className="font-heading text-xl font-bold mb-2">¿Tu carta de vinos no vende?</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  Diagnóstico gratuito de los problemas más comunes que frenan las ventas de vino en restaurantes.
-                </p>
+                <h2 className="font-heading text-xl font-bold mb-2">{t.diagTitle}</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{t.diagDesc}</p>
                 <Link
                   to="/problemas/carta-de-vinos-no-vende"
                   className="inline-flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-accent hover:text-wine transition-colors"
                 >
-                  Ver diagnóstico <ArrowRight size={12} />
+                  {t.diagLink} <ArrowRight size={12} />
                 </Link>
               </div>
             </div>
@@ -129,12 +143,11 @@ const Soluciones = () => {
         </section>
 
         <InternalLinks
-          title="Contenido relacionado"
+          title={t.linksTitle}
           links={[
-            { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
-            { to: "/inteligencia-artificial-restaurantes", label: "IA para restaurantes", type: "guide" },
-            { to: "/wine-roi-calculator", label: "Calculadora de ROI", type: "tool" },
-            { to: "/casos-exito", label: "Casos de éxito", type: "guide" },
+            { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+            { to: "/wine-roi-calculator", label: "Wine ROI Calculator", type: "tool" },
+            { to: localePath("/casos-exito") || "/casos-exito", label: lang === "es" ? "Casos de éxito" : "Case studies", type: "guide" },
           ]}
         />
       </main>
