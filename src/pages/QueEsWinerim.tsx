@@ -53,56 +53,12 @@ const audiences = [
 ];
 
 const QueEsWinerim = () => {
-  useEffect(() => {
-    const faqSchema = document.createElement("script");
-    faqSchema.id = "quees-faq-jsonld";
-    faqSchema.type = "application/ld+json";
-    faqSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "¿Qué es Winerim?",
-          acceptedAnswer: { "@type": "Answer", text: "Winerim es una plataforma inteligente de gestión de cartas de vino para restaurantes. Combina carta digital interactiva, recomendaciones con IA, analítica de ventas y herramientas de optimización de precios para ayudar a los restaurantes a vender más vino." },
-        },
-        {
-          "@type": "Question",
-          name: "¿Qué problema resuelve Winerim?",
-          acceptedAnswer: { "@type": "Answer", text: "Winerim resuelve los problemas más comunes en la venta de vino en restaurantes: cartas difíciles de entender, falta de recomendaciones, vinos que no rotan, y decisiones de compra basadas en intuición en lugar de datos." },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo funciona Winerim?",
-          acceptedAnswer: { "@type": "Answer", text: "El restaurante carga su carta de vinos, Winerim organiza y optimiza la información, los clientes interactúan con una carta digital inteligente con filtros y recomendaciones, y el restaurante obtiene analítica y sugerencias de mejora continua." },
-        },
-        {
-          "@type": "Question",
-          name: "¿Para quién está pensado Winerim?",
-          acceptedAnswer: { "@type": "Answer", text: "Winerim está diseñado para restaurantes independientes, wine bars, hoteles y grupos de restauración que quieran profesionalizar su oferta de vinos, aumentar ventas y optimizar su bodega." },
-        },
-      ],
-    });
-    document.head.appendChild(faqSchema);
-
-    const breadcrumbSchema = document.createElement("script");
-    breadcrumbSchema.id = "quees-breadcrumb-jsonld";
-    breadcrumbSchema.type = "application/ld+json";
-    breadcrumbSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Qué es Winerim", item: "https://winerim.wine/que-es-winerim" },
-      ],
-    });
-    document.head.appendChild(breadcrumbSchema);
-
-    return () => {
-      document.getElementById("quees-faq-jsonld")?.remove();
-      document.getElementById("quees-breadcrumb-jsonld")?.remove();
-    };
-  }, []);
+  const faqs = [
+    { q: "¿Qué es Winerim?", a: "Winerim es una plataforma inteligente de gestión de cartas de vino para restaurantes. Combina carta digital interactiva, recomendaciones con IA, analítica de ventas y herramientas de optimización de precios para ayudar a los restaurantes a vender más vino." },
+    { q: "¿Qué problema resuelve Winerim?", a: "Winerim resuelve los problemas más comunes en la venta de vino en restaurantes: cartas difíciles de entender, falta de recomendaciones, vinos que no rotan, y decisiones de compra basadas en intuición en lugar de datos." },
+    { q: "¿Cómo funciona Winerim?", a: "El restaurante carga su carta de vinos, Winerim organiza y optimiza la información, los clientes interactúan con una carta digital inteligente con filtros y recomendaciones, y el restaurante obtiene analítica y sugerencias de mejora continua." },
+    { q: "¿Para quién está pensado Winerim?", a: "Winerim está diseñado para restaurantes independientes, wine bars, hoteles y grupos de restauración que quieran profesionalizar su oferta de vinos, aumentar ventas y optimizar su bodega." },
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
