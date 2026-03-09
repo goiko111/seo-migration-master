@@ -229,42 +229,6 @@ const translations: Record<string, T> = {
   },
 };
 
-const wineAdvantages = [
-  { icon: DollarSign, title: "Mayor margen que otros productos", desc: "El vino ofrece márgenes del 65-75%, superiores a la mayoría de productos de la carta. Cada copa vendida mejora directamente la rentabilidad." },
-  { icon: Users, title: "Fácil de compartir", desc: "Una botella se comparte entre toda la mesa, facilitando la venta. No necesitas convencer a cada comensal individualmente." },
-  { icon: Utensils, title: "Acompaña toda la comida", desc: "A diferencia de otros productos, el vino puede estar presente desde el aperitivo hasta el postre, multiplicando las oportunidades de venta." },
-  { icon: Target, title: "Múltiples opciones de precio", desc: "Desde copas a 5€ hasta botellas premium, el vino permite adaptarse al presupuesto de cada mesa y maximizar el gasto." },
-];
-
-const strategies = [
-  { icon: GlassWater, title: "Ofrecer vinos por copa", desc: "La venta por copas reduce la barrera de entrada. Un cliente que no pediría una botella sí probará una copa. Ofrece al menos 6-8 referencias por copa." },
-  { icon: Utensils, title: "Crear maridajes con platos", desc: "Sugiere un vino específico para cada plato destacado. Los maridajes aumentan la percepción de valor y facilitan la decisión del cliente." },
-  { icon: BookOpen, title: "Recomendar vinos desde la carta", desc: "Una carta bien estructurada con descripciones claras y recomendaciones destacadas guía al cliente hacia vinos de mayor valor." },
-  { icon: Users, title: "Explicar el vino al cliente", desc: "Cuando el cliente entiende lo que bebe, está dispuesto a pagar más. Fichas de vino con notas de cata, origen y maridajes marcan la diferencia." },
-  { icon: Target, title: "Mejorar la estructura de la carta", desc: "Organiza por estilos, no solo por regiones. Destaca 2-3 vinos por categoría. Posiciona los vinos con mejor margen en zonas de alta visibilidad." },
-];
-
-const mistakes = [
-  "Cartas de vinos difíciles de entender con terminología excesivamente técnica",
-  "Demasiadas referencias que paralizan la decisión del cliente",
-  "Precios mal distribuidos con saltos grandes entre opciones",
-  "Falta de recomendaciones que dejan al cliente sin orientación",
-  "No ofrecer vino por copa, perdiendo ventas de mesas pequeñas",
-  "Personal sin formación para recomendar vino con confianza",
-];
-
-const techBenefits = [
-  { icon: Sparkles, title: "Recomendar vinos automáticamente", desc: "Algoritmos que sugieren el vino ideal según el plato elegido, las preferencias del cliente y el momento del día." },
-  { icon: BookOpen, title: "Explicar el vino al cliente", desc: "Fichas digitales con notas de cata, maridajes, origen y puntuaciones. El cliente se siente informado y seguro al elegir." },
-  { icon: Target, title: "Guiar la decisión de compra", desc: "Filtros interactivos, comparador de vinos y recomendaciones destacadas que simplifican la elección y aumentan el ticket." },
-  { icon: BarChart3, title: "Optimizar la carta con datos", desc: "Analítica de ventas que muestra qué vinos funcionan, cuáles rotan poco y dónde están las oportunidades de mejora." },
-];
-
-const metrics = [
-  { value: "+15%", label: "Ticket medio", icon: TrendingUp },
-  { value: "+20%", label: "Ventas de vino", icon: Wine },
-  { value: "+30%", label: "Rotación de referencias", icon: BarChart3 },
-];
 
 const wineAdvIcons = [DollarSign, Users, Utensils, Target];
 const stratIcons = [GlassWater, Utensils, BookOpen, Users, Target];
