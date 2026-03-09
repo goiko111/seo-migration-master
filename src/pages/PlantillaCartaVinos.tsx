@@ -136,6 +136,7 @@ const PlantillaCartaVinos = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-12 items-center">
           <div>
+            <Breadcrumbs items={[{ label: "Recursos", href: "/guias-y-recursos" }, { label: "Plantilla carta de vinos" }]} />
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
               <Download size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine">Recurso gratuito</span>
