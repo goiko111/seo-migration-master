@@ -32,6 +32,7 @@ const PrecioVinoRestaurante = lazy(() => import("./pages/PrecioVinoRestaurante")
 const WineListSoftware = lazy(() => import("./pages/WineListSoftware"));
 const VinoPorCopa = lazy(() => import("./pages/VinoPorCopa"));
 const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
+const CalculadoraMargen = lazy(() => import("./pages/CalculadoraMargen"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -71,6 +72,7 @@ const App = () => (
               <Route path="/wine-list-management-software" element={<WineListSoftware />} />
               <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
               <Route path="/que-es-winerim" element={<QueEsWinerim />} />
+              <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
