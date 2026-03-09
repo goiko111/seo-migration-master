@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const defaultProblems = [
   "Siempre vendes los mismos vinos",
