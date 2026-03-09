@@ -50,6 +50,7 @@ const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
 const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
+const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -108,6 +109,7 @@ const App = () => (
               <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
               <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
               <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
+              <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
               <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

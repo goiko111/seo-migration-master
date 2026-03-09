@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BookOpen, TrendingUp, Building2, Globe, Laptop, Wine, BarChart3, Utensils, Calculator, Brain } from "lucide-react";
+import { BookOpen, TrendingUp, Building2, Globe, Laptop, Wine, BarChart3, Utensils, Calculator, Brain, DollarSign } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -18,6 +18,13 @@ const guides = [
     icon: Wine,
     title: "Cuántos vinos debe tener una carta",
     desc: "Define el número ideal de referencias según tu tipo de restaurante, cocina y perfil de cliente.",
+    tag: "Guía",
+  },
+  {
+    to: "/blog/como-disenar-carta-vinos-rentable",
+    icon: DollarSign,
+    title: "Cómo diseñar una carta de vinos rentable",
+    desc: "Estrategias de pricing, wine mapping y selección para maximizar ventas y márgenes.",
     tag: "Guía",
   },
   {
