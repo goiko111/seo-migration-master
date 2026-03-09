@@ -107,3 +107,44 @@
     @apply py-20 md:py-32 px-6 md:px-12 lg:px-20;
   }
 }
+
+/* Article body — editorial styling */
+.article-body h2:first-of-type {
+  border-top: none !important;
+  padding-top: 0 !important;
+  margin-top: 2rem !important;
+}
+
+.article-body h3 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.article-body h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  border-radius: 2px;
+  background: hsl(var(--accent));
+}
+
+/* Interview question styling — bold paragraphs that start with a number */
+.article-body p > strong:first-child:only-child {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  line-height: 1.4;
+  color: hsl(var(--foreground));
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.article-body p:first-of-type > strong:first-child:only-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 1rem;
+}
