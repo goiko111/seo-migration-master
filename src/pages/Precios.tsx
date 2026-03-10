@@ -125,7 +125,7 @@ const content: Record<string, {
     capabilities: ["Carte digitale interactive", "Accords intelligents", "Comparateur de vins", "Analytique des ventes", "Optimisation des prix", "Gestion de cave"],
     included_badge: "Tout inclus", included_title: "Ce que <em>Winerim</em> inclut",
     impact_badge: "Impact réel", impact_title: "Résultats obtenus par nos <em>clients</em>",
-    metrics: [{ value: "+30%", label: "Ventes de vin" }, { value: "+20%", label: "Ticket moyen" }, { value: "+35%", label: "Rotation des références" }],
+    metrics: [{ value: "Plus de ventes", label: "Clients explorant plus de références" }, { value: "Meilleure marge", label: "Contrôle des prix et optimisation" }, { value: "Moins de temps", label: "Gestion automatisée de la carte" }],
     cta_badge: "Faites le pas", cta_title: "Découvrez combien vous pourriez vendre de plus avec votre <em>carte des vins</em>", cta_sub: "Nous vous montrons le potentiel d'amélioration avec une démo personnalisée. Sans engagement.", cta_btn: "Demander démo",
     faqs: [
       { q: "Combien de temps prend l'implémentation ?", a: "La plupart des restaurants sont opérationnels en moins de 48 heures." },
