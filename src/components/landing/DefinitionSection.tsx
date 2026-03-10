@@ -284,7 +284,7 @@ const homeFaqs = {
     { q: "How does Winerim work?", a: "The restaurant sends its current wine list in any format. Winerim digitizes all references, generates descriptions, pairings, and automatic recommendations. Guests access the list via QR or the restaurant's website." },
     { q: "How much does Winerim cost?", a: "Winerim offers plans for individual restaurants to restaurant groups. Pricing is available at winerim.wine/en/pricing or request a free personalized demo." },
     { q: "How is it different from a QR with PDF?", a: "A QR with PDF is a static file: no real-time updates, no recommendations, no filters, no analytics. Winerim is an interactive AI-powered platform." },
-    { q: "Do I need to install an app?", a: "No. Neither the restaurant nor the guest needs to install any app. Winerim works directly in the web browser." },
+    { q: "How does the guest access the wine list?", a: "Winerim is multi-platform. Guests can access the digital wine list via a QR code at the table (opens in the browser), from the restaurant's website, or from the native Winerim app on iOS and Android." },
     { q: "Does Winerim replace the sommelier?", a: "No. Winerim complements the front-of-house team. It acts as an intelligent assistant that helps staff recommend wine with confidence." },
     { q: "What results do restaurants get with Winerim?", a: "Restaurants using Winerim report an average 30% increase in wine sales, 20% increase in average ticket, and 35% improvement in wine rotation." },
     { q: "Does it work in multiple languages?", a: "Yes. Winerim's digital wine list supports Spanish, English, Italian, and French. The system detects the guest's device language automatically." },
