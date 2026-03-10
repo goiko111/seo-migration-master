@@ -82,14 +82,11 @@ const Contacto = () => {
     const fd = new FormData(e.currentTarget);
     const { error } = await supabase.from("contact_leads").insert({
       form_type: "contacto",
+      restaurant: fd.get("restaurant") as string || null,
       name: fd.get("name") as string || null,
       position: fd.get("position") as string || null,
-      email: fd.get("email") as string || null,
       phone: fd.get("phone") as string || null,
-      restaurant: fd.get("restaurant") as string || null,
-      city: fd.get("city") as string || null,
-      references_count: fd.get("references") as string || null,
-      menu_link: fd.get("menu_link") as string || null,
+      email: fd.get("email") as string || null,
       message: fd.get("message") as string || null,
     });
     if (error) toast.error(c.error);
