@@ -162,9 +162,21 @@ const InteligenciaDinamica = () => {
   return (
     <>
       <SEOHead
-        title="Inteligencia dinámica para cartas de vino | Winerim"
-        description="La capa de IA táctica de Winerim que adapta la carta de vinos en tiempo real para aumentar facturación, margen, rotación y experiencia del comensal."
-        url="/producto/inteligencia-dinamica"
+        title="Inteligencia Dinámica para Cartas de Vino | IA para Restaurantes | Winerim"
+        description="Software de inteligencia artificial para restaurantes que optimiza tu carta de vinos en tiempo real. Aumenta margen, mejora rotación de stock y vende más vino con la carta digital dinámica de Winerim."
+        url="https://winerim.wine/producto/inteligencia-dinamica"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Winerim Inteligencia Dinámica",
+          "applicationCategory": "BusinessApplication",
+          "description": "Capa de IA táctica para cartas de vino que adapta visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivos del restaurante.",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "category": "Software para hostelería"
+          }
+        }}
       />
       <Navbar />
       <main className="min-h-screen bg-background overflow-hidden">
