@@ -73,11 +73,11 @@ const Demo = () => {
     const fd = new FormData(e.currentTarget);
     const { error } = await supabase.from("contact_leads").insert({
       form_type: "demo",
-      name: fd.get("name") as string || null,
-      email: fd.get("email") as string || null,
-      phone: fd.get("phone") as string || null,
       restaurant: fd.get("restaurant") as string || null,
-      city: fd.get("city") as string || null,
+      name: fd.get("name") as string || null,
+      position: fd.get("position") as string || null,
+      phone: fd.get("phone") as string || null,
+      email: fd.get("email") as string || null,
     });
     if (error) toast.error(c.error);
     else {
