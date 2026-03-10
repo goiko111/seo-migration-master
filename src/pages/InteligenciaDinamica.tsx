@@ -24,14 +24,68 @@ const fadeUp = {
 
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
-/* ── Section 4: Objetivos ── */
-const objectives = [
-  { icon: DollarSign, title: "Maximizar facturación", desc: "Priorizar vinos y posiciones que generan más ingresos brutos." },
-  { icon: TrendingUp, title: "Mejorar margen", desc: "Reequilibrar la carta para que los vinos más rentables ganen visibilidad." },
-  { icon: RefreshCw, title: "Optimizar rotación", desc: "Dar salida a stock parado y prevenir obsolescencia antes de que ocurra." },
-  { icon: Users, title: "Elevar la experiencia", desc: "Recomendar según contexto, ocasión y perfil del comensal." },
-  { icon: Gauge, title: "Reducir complejidad", desc: "Simplificar la operativa diaria del equipo de sala y compras." },
-  { icon: Target, title: "Alinear estrategia", desc: "Que cada decisión sobre la carta responda a un objetivo de negocio medible." },
+/* ── Section 4: Objetivos (high impact) ── */
+const objectiveCards = [
+  {
+    icon: DollarSign,
+    title: "Aumentar facturación",
+    desc: "Empuja referencias rentables y mejora la venta guiada en momentos clave.",
+    modules: ["FocusRIM™", "BoostRIM™", "SmartRIM™"],
+    gradient: "from-emerald-500/20 via-emerald-500/5 to-transparent",
+    iconColor: "text-emerald-400",
+    iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
+    borderHover: "hover:border-emerald-500/30",
+  },
+  {
+    icon: TrendingUp,
+    title: "Aumentar ticket medio",
+    desc: "Prioriza vinos premium, en prime y con mejor capacidad de upselling.",
+    modules: ["PrimeRIM™", "UpRIM™", "SmartRIM™"],
+    gradient: "from-amber-500/20 via-amber-500/5 to-transparent",
+    iconColor: "text-amber-400",
+    iconBg: "bg-amber-500/10 group-hover:bg-amber-500/20",
+    borderHover: "hover:border-amber-500/30",
+  },
+  {
+    icon: Target,
+    title: "Maximizar margen",
+    desc: "Reordena y destaca referencias con mayor contribución al negocio.",
+    modules: ["MarginRIM™", "FocusRIM™", "PriceRIM™"],
+    gradient: "from-wine/20 via-wine/5 to-transparent",
+    iconColor: "text-wine",
+    iconBg: "bg-wine/10 group-hover:bg-wine/20",
+    borderHover: "hover:border-wine/30",
+  },
+  {
+    icon: RefreshCw,
+    title: "Aumentar rotación",
+    desc: "Da salida a vinos lentos, sobrestock o referencias con riesgo de quedar paradas.",
+    modules: ["RotaRIM™", "BoostRIM™", "StockRIM™"],
+    gradient: "from-blue-500/20 via-blue-500/5 to-transparent",
+    iconColor: "text-blue-400",
+    iconBg: "bg-blue-500/10 group-hover:bg-blue-500/20",
+    borderHover: "hover:border-blue-500/30",
+  },
+  {
+    icon: Activity,
+    title: "Limpiar bodega",
+    desc: "Activa acciones específicas para mover últimas unidades, vinos fuera de foco o stock inmovilizado.",
+    modules: ["CleanRIM™", "StockRIM™", "RotaRIM™"],
+    gradient: "from-rose-500/20 via-rose-500/5 to-transparent",
+    iconColor: "text-rose-400",
+    iconBg: "bg-rose-500/10 group-hover:bg-rose-500/20",
+    borderHover: "hover:border-rose-500/30",
+  },
+  {
+    icon: Zap,
+    title: "Carta viva / dinámica",
+    desc: "Hace que la carta evolucione con ritmo, equilibrio y sensación de descubrimiento continuo.",
+    modules: ["SmartRIM™", "FocusRIM™", "SeasonRIM™"],
+    gradient: "from-violet-500/20 via-violet-500/5 to-transparent",
+    iconColor: "text-violet-400",
+    iconBg: "bg-violet-500/10 group-hover:bg-violet-500/20",
+    borderHover: "hover:border-violet-500/30",
+  },
 ];
 
 /* ── Section 5: RIMs principales ── */
