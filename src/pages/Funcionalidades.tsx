@@ -185,7 +185,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "En desarrollo",
     changelog_badge: "Changelog", changelog_title: "Últimas <em>novedades</em>", changelog_sub: "Winerim evoluciona constantemente.",
-    roadmap_badge: "Roadmap", roadmap_title: "Lo que viene en <em>Winerim</em>", roadmap_sub: "Nuestro plan de desarrollo para los próximos meses.",
+    roadmap_badge: "Capacidades en expansión", roadmap_title: "Próximas <em>capacidades</em>", roadmap_sub: "Además de su núcleo de gestión e inteligencia, Winerim sigue ampliando la experiencia del comensal y del equipo de sala con nuevas capacidades.",
     cta_badge: "Empieza hoy", cta_title: "Descubre Winerim en <em>acción</em>", cta_sub: "Prueba todas estas funcionalidades gratis durante 14 días. Sin compromiso.", cta_btn: "Prueba Gratis",
     changelog: [
       { date: "Feb 2026", title: "Filtros sensoriales v2", desc: "Nueva interfaz de filtrado por perfil aromático.", tag: "new" },
@@ -196,9 +196,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Integración Revo TPV", desc: "Sincronización bidireccional con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Solicitar al sumiller desde la carta", "Compartir selección por QR/link", "Recomendaciones por historial"] },
-      { quarter: "Q3 2026", items: ["Modo educación con tips de vino", "FocusRIM – módulos IA para empujar referencias rentables", "App nativa para comensales"] },
-      { quarter: "Q4 2026", items: ["IA predictiva de tendencias", "Carta con realidad aumentada", "API pública v2"] },
+      { quarter: "Experiencia comensal", items: ["Solicitar al sumiller desde la carta", "Compartir selección por QR/link", "Recomendaciones por historial"] },
+      { quarter: "Formación y sala", items: ["Modo educación con tips de vino", "Guías de servicio para el equipo", "App nativa para comensales"] },
+      { quarter: "Tecnología avanzada", items: ["IA predictiva de tendencias", "Carta con realidad aumentada", "API pública v2"] },
     ],
     tag_labels: { new: "Nuevo", improvement: "Mejora", fix: "Corrección" },
   },
