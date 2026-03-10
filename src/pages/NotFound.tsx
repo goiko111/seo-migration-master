@@ -25,6 +25,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title={`${t.title} | Winerim`} description={t.desc} noindex />
       <Navbar />
       <main className="flex items-center justify-center py-32 section-padding">
         <div className="text-center">
