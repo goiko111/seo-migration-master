@@ -150,8 +150,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/funcionalidades': {
     meta: {
-      title: 'Funcionalidades | Carta de Vinos Digital Winerim',
-      description: 'Descubre todas las funcionalidades de Winerim: carta digital, recomendador IA, gestión de stock, analytics de ventas y automatizaciones.',
+      title: 'Funcionalidades | Carta Inteligente de Vinos Winerim',
+      description: 'Descubre todas las funcionalidades de Winerim: carta inteligente, recomendador IA, gestión de stock, analytics de ventas y automatizaciones.',
       canonical: `${SITE}/funcionalidades`,
       ogImage: OG_IMAGE,
       lang: 'es',
