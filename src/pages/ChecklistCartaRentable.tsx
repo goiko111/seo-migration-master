@@ -101,9 +101,11 @@ const ChecklistCartaRentable = () => {
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_leads").insert({
-        name: data.name,
-        email: data.email,
         restaurant: data.restaurant,
+        name: data.name,
+        position: data.position,
+        phone: data.phone,
+        email: data.email,
         form_type: "checklist-carta-rentable",
       });
       if (error) throw error;
