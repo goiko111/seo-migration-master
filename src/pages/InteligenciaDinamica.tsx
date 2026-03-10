@@ -373,9 +373,12 @@ const InteligenciaDinamica = () => {
             <ScrollReveal>
               <div className="text-center mb-16">
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  De una carta digital a un{" "}
-                  <span className="text-gradient-wine">sistema de decisión comercial</span>
+                  Carta de vinos inteligente vs.{" "}
+                  <span className="text-gradient-wine">carta digital tradicional</span>
                 </h2>
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto mt-5">
+                  Una carta digital dinámica no solo muestra vinos: toma decisiones de negocio en tiempo real.
+                </p>
               </div>
             </ScrollReveal>
 
