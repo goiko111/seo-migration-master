@@ -359,9 +359,9 @@ const VenderMasVino = () => {
 
             <div className="grid sm:grid-cols-3 gap-6">
               {[
-                { value: "+20 %", label: "Incremento medio en ventas de vino", icon: Wine },
-                { value: "+15 %", label: "Aumento del ticket medio", icon: TrendingUp },
-                { value: "+30 %", label: "Mayor rotación de referencias", icon: BarChart3 },
+                { value: "+30 %", label: "Incremento medio en ventas de vino", icon: Wine },
+                { value: "+20 %", label: "Aumento del ticket medio", icon: TrendingUp },
+                { value: "+35 %", label: "Mayor rotación de referencias", icon: BarChart3 },
               ].map((m, i) => {
                 const Icon = m.icon;
                 return (
