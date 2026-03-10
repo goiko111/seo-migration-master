@@ -25,7 +25,7 @@ const en: TranslationDict = {
   nav_pricing_tool: "Wine pricing tool",
   nav_see_all: "See all →",
 
-  footer_description: "The digital wine list that revolutionizes hospitality.",
+  footer_description: "The smart wine list that revolutionizes hospitality.",
   footer_product: "Product",
   footer_content: "Content",
   footer_tools: "Tools",
