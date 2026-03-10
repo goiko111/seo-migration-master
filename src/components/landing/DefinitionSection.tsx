@@ -322,6 +322,7 @@ const DefinitionSection = () => {
   const nf = notForData[lang] || notForData.es;
   const faqs = homeFaqs[lang] || homeFaqs.es;
   const faqTitle = faqTitles[lang] || faqTitles.es;
+  const compet = competitorData[lang] || competitorData.es;
 
   return (
     <>
@@ -338,7 +339,7 @@ const DefinitionSection = () => {
         </div>
       </section>
 
-      {/* Comparison table */}
+      {/* Comparison table: Winerim vs formats */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ComparisonTable
@@ -359,6 +360,19 @@ const DefinitionSection = () => {
             notFor={nf.notFor}
             titleIdeal={nf.titleIdeal}
             titleNot={nf.titleNot}
+          />
+        </div>
+      </section>
+
+      {/* Competitor comparison table */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto">
+          <ComparisonTable
+            title={compet.title}
+            subtitle={compet.subtitle}
+            columns={compet.columns}
+            rows={compet.rows}
+            highlightColumn={3}
           />
         </div>
       </section>
