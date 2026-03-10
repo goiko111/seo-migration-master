@@ -181,6 +181,26 @@ const RestaurantTypeTemplate = ({ page, related }: Props) => {
         </section>
       )}
 
+      {/* BENEFITS */}
+      {benefits.length > 0 && (
+        <section className="max-w-5xl mx-auto px-6 md:px-12 py-20">
+          <ScrollReveal>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Beneficios</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Ventajas clave</h2>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-2 gap-4">
+            {benefits.map((ben, i) => (
+              <ScrollReveal key={i} delay={i * 0.05}>
+                <div className="flex items-start gap-3 p-5 rounded-xl border border-border bg-gradient-card">
+                  <CheckCircle size={18} className="text-wine shrink-0 mt-0.5" />
+                  <p className="text-sm text-muted-foreground leading-relaxed">{ben}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       {page.faqs.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
@@ -197,6 +217,8 @@ const RestaurantTypeTemplate = ({ page, related }: Props) => {
           </div>
         </section>
       )}
+
+      {internalLinks.length > 0 && <InternalLinks links={internalLinks} />}
 
       <RelatedPages pages={related} />
 
