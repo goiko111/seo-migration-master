@@ -43,7 +43,7 @@ const allTestimonials: Testimonial[] = [
   { quote: "Winerim me ayuda en la inmediatez. Podemos modificar el stock, el formato de venta, la añada, etc… Al momento. Un lujo y una ventaja para el cliente.", name: "Jordi Subirós", role: "Responsable de Vinos", restaurant: "Motel Restaurant", initials: "JS", highlight: "Cambios en tiempo real" },
 ];
 
-/* ─── Case studies (kept from original) ─── */
+/* ─── Scenario profiles — based on real client patterns, not fabricated case studies ─── */
 interface CaseStudy {
   restaurant: string; city: string; cuisine: string; references: number;
   situation: string; problems: string[]; implementation: string; results: string;
