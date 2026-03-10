@@ -30,6 +30,7 @@ const logoItems: LogoItem[] = [
   { name: "Cocina del Sol", logo: logoCocinaDelSol },
   { name: "Cañabota", logo: logoCanabota },
   { name: "Alejandra", logo: logoAlejandra },
+  { name: "Ment", logo: logoMent },
   { name: "Meliá Hotels" },
   { name: "Hyatt" },
   { name: "Marriott" },
