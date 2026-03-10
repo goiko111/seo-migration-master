@@ -82,7 +82,7 @@ const PlantillaCartaVinos = () => {
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("contact_leads").insert({
+      const leadData = {
         restaurant: data.restaurant,
         name: data.name,
         position: data.position,
@@ -91,10 +91,12 @@ const PlantillaCartaVinos = () => {
         city: data.city,
         references_count: data.references_count,
         form_type: "plantilla-carta-vinos",
-      });
+      };
+      const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
       toast.success("¡Plantilla enviada! Revisa tu email.");
+      notifyLead(leadData);
     } catch {
       toast.error("Ha ocurrido un error. Inténtalo de nuevo.");
     } finally {

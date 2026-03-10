@@ -103,7 +103,7 @@ const GuiaVinoPorCopa = () => {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_leads").insert({
+      const leadData = {
         restaurant: data.restaurant,
         name: data.name,
         position: data.position,
@@ -112,10 +112,12 @@ const GuiaVinoPorCopa = () => {
         city: data.city,
         references_count: data.references_count,
         form_type: "guia-vino-por-copa",
-      });
+      };
+      const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
       toast.success("¡Guía enviada! Revisa tu email.");
+      notifyLead(leadData);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
