@@ -12,6 +12,7 @@ import logoLaCarboneria from "@/assets/logos/lacarboneria.png";
 import logoCocinaDelSol from "@/assets/logos/cocinadelsol.png";
 import logoCanabota from "@/assets/logos/canabota.png";
 import logoAlejandra from "@/assets/logos/alejandra.png";
+import logoMent from "@/assets/logos/ment.png";
 
 interface LogoItem {
   name: string;
@@ -29,6 +30,7 @@ const logoItems: LogoItem[] = [
   { name: "Cocina del Sol", logo: logoCocinaDelSol },
   { name: "Cañabota", logo: logoCanabota },
   { name: "Alejandra", logo: logoAlejandra },
+  { name: "Ment", logo: logoMent },
   { name: "Meliá Hotels" },
   { name: "Hyatt" },
   { name: "Marriott" },
