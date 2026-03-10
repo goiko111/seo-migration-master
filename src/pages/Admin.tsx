@@ -91,11 +91,11 @@ const Admin = () => {
       related_links: editingArticle.related_links.length > 0 ? editingArticle.related_links : [],
     };
     if (editingArticle.id) {
-      const { error } = await supabase.from("articles").update(payload).eq("id", editingArticle.id);
+      const { error } = await supabase.from("articles").update(payload as any).eq("id", editingArticle.id);
       if (error) toast.error("Error al guardar");
       else toast.success("Artículo actualizado");
     } else {
-      const { error } = await supabase.from("articles").insert(payload);
+      const { error } = await supabase.from("articles").insert(payload as any);
       if (error) toast.error("Error al crear: " + error.message);
       else toast.success("Artículo creado");
     }
