@@ -70,7 +70,6 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
-const ScreenshotReviewPage = lazy(() => import("./pages/ScreenshotReview"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
