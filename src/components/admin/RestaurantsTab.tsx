@@ -108,11 +108,26 @@ const RestaurantsTab = () => {
         <div>
           <Label htmlFor="logo-upload" className="cursor-pointer">
             <div className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity">
-              <Upload size={16} /> {uploading ? "Subiendo..." : "Subir logos"}
+              <Upload size={16} /> {uploading ? "Subiendo..." : "Subir carpeta"}
             </div>
           </Label>
           <input
             id="logo-upload"
+            type="file"
+            multiple
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileUpload}
+            disabled={uploading}
+            {...{ webkitdirectory: "", directory: "" } as any}
+          />
+          <Label htmlFor="logo-upload-files" className="cursor-pointer ml-2">
+            <div className="inline-flex items-center gap-2 border border-border text-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:bg-accent/10 transition-opacity">
+              <Upload size={16} /> Subir archivos
+            </div>
+          </Label>
+          <input
+            id="logo-upload-files"
             type="file"
             multiple
             accept="image/*"
