@@ -14,6 +14,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import InternalLinks from "@/components/seo/InternalLinks";
+import SummaryBox from "@/components/seo/SummaryBox";
+import FactsBox from "@/components/seo/FactsBox";
+import NotForSection from "@/components/seo/NotForSection";
 
 const useCases = [
   { icon: Wine, title: "Gestionar cartas de vinos", desc: "Crea, organiza y actualiza tu carta de vinos digital en tiempo real. Categorías, descripciones, precios y disponibilidad desde un solo panel." },
@@ -184,6 +187,62 @@ const WhatIsWinerim = () => {
             </Link>
           </motion.div>
         </div>
+      </section>
+
+      {/* SUMMARY BOX */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pb-6">
+        <ScrollReveal>
+          <SummaryBox
+            label="¿Qué es Winerim? — Resumen"
+            definition="Winerim es un software especializado en la gestión y optimización de cartas de vinos para restaurantes. Combina carta digital interactiva, recomendaciones con IA, maridajes automáticos y analítica de ventas. No es un simple QR a un PDF: es una plataforma completa diseñada para convertir la carta de vinos en un motor activo de ventas."
+            bullets={[
+              "Carta digital interactiva accesible por QR desde el móvil del comensal",
+              "Motor de recomendaciones de vino basado en inteligencia artificial",
+              "Maridajes automáticos con cada plato del menú, actualizados en tiempo real",
+              "Dashboard de analítica con KPIs de ventas, rotación y margen",
+              "Herramientas de optimización de precios y escalado de gama",
+              "Gestión centralizada para grupos con múltiples restaurantes",
+            ]}
+          />
+        </ScrollReveal>
+      </section>
+
+      {/* FACTS BOX */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pb-6">
+        <ScrollReveal>
+          <FactsBox
+            title="Datos clave de Winerim"
+            facts={[
+              { label: "Tipo", value: "Software SaaS para hostelería" },
+              { label: "Especialización", value: "Gestión de cartas de vinos" },
+              { label: "Tecnología", value: "Inteligencia artificial + carta digital interactiva" },
+              { label: "Acceso", value: "Web — sin descarga de app" },
+              { label: "Idiomas", value: "Español, inglés, italiano, francés" },
+              { label: "Público", value: "Restaurantes, wine bars, hoteles, grupos de restauración" },
+              { label: "Resultado medio", value: "+30% ventas de vino, +20% ticket medio" },
+              { label: "Integraciones", value: "TPV, PMS, sistemas de reservas" },
+            ]}
+          />
+        </ScrollReveal>
+      </section>
+
+      {/* NOT FOR SECTION */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+        <NotForSection
+          idealFor={[
+            "Restaurantes con 15 o más referencias de vino en carta",
+            "Wine bars y vinotecas con alta rotación de referencias",
+            "Hoteles con servicio de vino en restaurante, room service y eventos",
+            "Grupos de restauración que necesitan gestión centralizada del vino",
+            "Establecimientos que quieren aumentar el ticket medio con vino",
+          ]}
+          notFor={[
+            "Bares sin carta de vinos estructurada",
+            "Establecimientos con menos de 10 referencias de vino",
+            "Negocios que no sirven vino (cervecerías, coctelerías)",
+            "Restaurantes que no buscan optimizar sus ventas de vino",
+          ]}
+        />
       </section>
 
       {/* 2. DEFINICIÓN CLARA */}

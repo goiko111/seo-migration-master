@@ -10,6 +10,7 @@ import ResultsSection from "@/components/landing/ResultsSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import VideoSection from "@/components/VideoSection";
+import DefinitionSection from "@/components/landing/DefinitionSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import { PageContentProvider } from "@/contexts/PageContentContext";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -36,6 +37,7 @@ const Index = () => {
           <ResultsSection />
           <HowItWorksSection />
           <TestimonialsSection />
+          <DefinitionSection />
           <VideoSection />
           <FinalCTASection />
         </main>
