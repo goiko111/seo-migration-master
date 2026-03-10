@@ -125,10 +125,10 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       schemaType: 'SoftwareApplication',
     },
     content: {
-      h1: 'Software de carta de vinos digital para restaurantes',
-      subtitle: 'Gestiona, optimiza y digitaliza tu carta de vinos con inteligencia artificial.',
+      h1: 'Software de carta inteligente de vinos para restaurantes',
+      subtitle: 'Gestiona, optimiza y potencia tu carta de vinos con inteligencia artificial.',
       sections: [
-        { heading: 'Carta digital interactiva', content: 'Tu carta de vinos disponible en tablet, móvil o QR. Actualizable en tiempo real, con fichas detalladas y maridajes inteligentes.' },
+        { heading: 'Carta inteligente interactiva', content: 'Tu carta de vinos disponible en tablet, móvil o QR. Actualizable en tiempo real, con fichas detalladas y maridajes inteligentes.' },
         { heading: 'Recomendador inteligente', content: 'Winerim sugiere el vino perfecto según el plato, las preferencias del comensal y tu stock disponible.' },
         { heading: 'Gestión de bodega', content: 'Control de stock, alertas de rotación, análisis de rendimiento por referencia y optimización automática de precios.' },
       ],
