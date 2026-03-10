@@ -229,7 +229,7 @@ const competitorData = {
       { feature: "Stock & obsolescence alerts", options: [false, false, false, true] },
       { feature: "Visual & interactive mobile experience", options: ["partial" as const, true, false, true] },
       { feature: "100% hospitality-focused", options: [false, false, "partial" as const, true] },
-      { feature: "No app download for guests", options: ["partial" as const, false, "partial" as const, true] },
+      { feature: "Multi-platform: web, tablet & app", options: [false, false, "partial" as const, true] },
     ],
   },
   it: {
