@@ -290,10 +290,10 @@ const InteligenciaDinamica = () => {
                 custom={1}
                 className="font-heading text-center text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08] mb-8"
               >
-                La carta ya no solo informa.
+                Inteligencia artificial para restaurantes:
                 <br />
                 <span className="text-gradient-wine">
-                  Ahora decide cómo vender mejor.
+                  la carta de vinos que vende mejor.
                 </span>
               </motion.h1>
 
