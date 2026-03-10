@@ -1106,12 +1106,12 @@ const InteligenciaDinamica = () => {
 
                 <div className="relative">
                   <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 leading-tight">
-                    Activa la inteligencia
+                    El software para vender más vino
                     <br />
-                    de tu carta de vinos
+                    con inteligencia artificial aplicada
                   </h2>
                   <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Descubre cómo la inteligencia dinámica puede transformar la rentabilidad y experiencia de tu carta. Sin compromiso.
+                    Descubre cómo la inteligencia dinámica optimiza el margen en restaurantes y transforma la experiencia de tu carta. Sin compromiso.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
