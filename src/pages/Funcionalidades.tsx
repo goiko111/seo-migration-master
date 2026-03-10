@@ -818,6 +818,72 @@ const Funcionalidades = () => {
         </div>
       </section>
 
+      {/* ─── Inteligencia Dinámica highlight ─── */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-wine/6 rounded-full blur-[140px]" />
+        </div>
+        <div className="relative max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="relative rounded-3xl border border-wine/20 bg-gradient-to-br from-card via-card/95 to-wine/5 p-8 sm:p-12 md:p-16 overflow-hidden">
+              <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-wine/8 via-transparent to-transparent pointer-events-none rounded-3xl" />
+
+              <div className="relative flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-14">
+                <div className="flex-1">
+                  <span className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase bg-wine/15 text-wine border border-wine/20 rounded-full px-3.5 py-1 mb-5">
+                    Nuevo
+                  </span>
+                  <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+                    La nueva capa de{" "}
+                    <span className="text-gradient-wine">inteligencia táctica</span>{" "}
+                    de Winerim
+                  </h2>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
+                    Más allá de digitalizar la carta, Winerim empieza a adaptar visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivo del restaurante.
+                  </p>
+                  <ul className="space-y-3 mb-8">
+                    {[
+                      "Activa estrategias según el momento del servicio",
+                      "Empuja referencias más rentables o prioritarias",
+                      "Ayuda a equilibrar stock, rotación y experiencia",
+                    ].map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
+                        <CheckCircle className="w-4 h-4 text-wine mt-0.5 shrink-0" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/producto/inteligencia-dinamica"
+                    className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/25 hover:-translate-y-0.5"
+                  >
+                    Descubrir Inteligencia dinámica
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+
+                <div className="hidden lg:flex flex-col items-center gap-3 w-44 shrink-0">
+                  {["MarginRIM™", "FocusRIM™", "SmartRIM™"].map((rim, i) => (
+                    <motion.div
+                      key={rim}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
+                      className="w-full text-center py-2.5 px-4 rounded-lg border border-wine/15 bg-wine/5 text-xs font-mono font-semibold text-wine/80 tracking-wide"
+                    >
+                      {rim}
+                    </motion.div>
+                  ))}
+                  <span className="text-[10px] text-muted-foreground/40 mt-1">+8 módulos RIM™</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ─── Changelog ─── */}
       <section className="section-padding bg-gradient-dark" id="changelog">
         <div className="max-w-4xl mx-auto">
