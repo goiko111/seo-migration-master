@@ -54,6 +54,7 @@ const ArticlePage = () => {
           type: data.category === "interview" ? "interview" : "blog",
           author: data.author || undefined,
           publishedAt: data.published_at || undefined,
+          relatedLinks: Array.isArray(data.related_links) ? (data.related_links as RelatedLink[]) : null,
         });
       } else {
         const staticArticle = getArticleBySlug(slug);
