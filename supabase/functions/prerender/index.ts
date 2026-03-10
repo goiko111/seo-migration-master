@@ -59,8 +59,8 @@ interface PageContent {
 const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   '/': {
     meta: {
-      title: 'Winerim – Carta de Vinos Digital | Recomendador Inteligente',
-      description: 'Winerim es la carta de vinos digital y recomendador inteligente para restaurantes. Potencia ventas, gestiona tu bodega y mejora la experiencia del comensal.',
+      title: 'Winerim – Carta Inteligente de Vinos para Restaurantes',
+      description: 'Winerim es la carta inteligente de vinos para restaurantes. Recomendaciones con IA, maridajes automáticos, analítica de ventas y gestión de bodega.',
       canonical: `${SITE}/`,
       ogImage: OG_IMAGE,
       lang: 'es',
