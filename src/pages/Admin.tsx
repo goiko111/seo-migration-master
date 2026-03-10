@@ -88,6 +88,7 @@ const Admin = () => {
       author: editingArticle.author || null, author_role: editingArticle.author_role || null,
       author_image: editingArticle.author_image || null, published: editingArticle.published,
       published_at: editingArticle.published ? new Date().toISOString() : null,
+      related_links: editingArticle.related_links.length > 0 ? editingArticle.related_links : [],
     };
     if (editingArticle.id) {
       const { error } = await supabase.from("articles").update(payload).eq("id", editingArticle.id);
