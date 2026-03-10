@@ -132,13 +132,22 @@ const Navbar = () => {
                         <Link
                           key={sub.href}
                           to={sub.href}
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
-                            location.pathname === sub.href
-                              ? "text-foreground bg-wine/5"
-                              : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
+                          className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors ${
+                            sub.badge
+                              ? location.pathname === sub.href
+                                ? "text-foreground bg-wine/8 font-medium"
+                                : "text-foreground/90 hover:text-foreground hover:bg-wine/8 font-medium"
+                              : location.pathname === sub.href
+                                ? "text-foreground bg-wine/5"
+                                : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
                           }`}
                         >
                           {sub.label}
+                          {sub.badge && (
+                            <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                              {sub.badge}
+                            </Badge>
+                          )}
                         </Link>
                       ))}
                     </div>
