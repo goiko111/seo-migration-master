@@ -279,52 +279,89 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            2. PROBLEMA / CAMBIO DE PARADIGMA
+            2. CAMBIO DE PARADIGMA — COMPARATIVA
         ════════════════════════════════════════════════ */}
         <section className="section-padding relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/40 to-background pointer-events-none" />
           <div className="relative max-w-5xl mx-auto">
             <ScrollReveal>
-              <div className="grid md:grid-cols-2 gap-16 items-center">
-                {/* Left: Problem */}
-                <div>
-                  <Badge className="bg-destructive/10 text-destructive border-destructive/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
-                    El problema
-                  </Badge>
-                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-                    Las cartas de vinos se gestionan con{" "}
-                    <span className="text-muted-foreground/60 line-through decoration-wine/40">intuición</span>
-                  </h2>
-                  <div className="space-y-4 text-muted-foreground">
-                    <p className="leading-relaxed">
-                      La mayoría de restaurantes revisan su carta cada trimestre —o menos—. Las decisiones sobre qué vinos incluir, a qué precio y en qué orden se toman por costumbre, no por datos.
-                    </p>
-                    <p className="leading-relaxed">
-                      El resultado: vinos que no rotan, márgenes que se erosionan y oportunidades de venta que se pierden cada noche.
-                    </p>
+              <div className="text-center mb-16">
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                  De una carta digital a un{" "}
+                  <span className="text-gradient-wine">sistema de decisión comercial</span>
+                </h2>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal>
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {/* LEFT — Traditional */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-border bg-card/40">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                      <Wine size={16} className="text-muted-foreground" />
+                    </div>
+                    <h3 className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">
+                      Carta digital tradicional
+                    </h3>
                   </div>
+                  <ul className="space-y-5">
+                    {[
+                      "Muestra vinos",
+                      "Orden fijo",
+                      "Recomendación estática",
+                      "No reacciona al contexto",
+                      "No prioriza negocio ni rotación",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3.5">
+                        <span className="mt-1.5 w-2 h-2 rounded-full bg-muted-foreground/25 shrink-0" />
+                        <span className="text-muted-foreground/70 text-[15px] leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Right: Paradigm shift */}
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-wine/5 to-transparent rounded-2xl" />
-                  <div className="relative p-8 md:p-10 rounded-2xl border border-wine/15">
-                    <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
-                      El cambio
-                    </Badge>
-                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">
-                      De carta estática a{" "}
-                      <span className="text-gradient-wine">sistema vivo</span>
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      La inteligencia dinámica convierte tu carta en un organismo que se adapta al contexto. Cada dato genera una acción, cada acción genera un resultado medible.
-                    </p>
-                    <div className="flex items-center gap-3 text-sm text-accent">
-                      <Lightbulb size={18} />
-                      <span className="font-medium">No es un informe. Es un copiloto que actúa.</span>
+                {/* RIGHT — Winerim */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-wine/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wine/6 via-wine/3 to-transparent pointer-events-none" />
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-8 h-8 rounded-lg bg-wine/15 flex items-center justify-center">
+                        <Brain size={16} className="text-wine" />
+                      </div>
+                      <h3 className="text-sm font-semibold tracking-widest uppercase text-wine">
+                        Winerim con Inteligencia dinámica
+                      </h3>
                     </div>
+                    <ul className="space-y-5">
+                      {[
+                        "Reordena con intención",
+                        "Prioriza según objetivo",
+                        "Activa estrategias por contexto real",
+                        "Empuja referencias clave",
+                        "Equilibra margen, stock y experiencia",
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-3.5">
+                          <CheckCircle size={16} className="mt-0.5 text-wine shrink-0" />
+                          <span className="text-foreground text-[15px] leading-relaxed font-medium">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Closing statement */}
+            <ScrollReveal>
+              <div className="mt-12 md:mt-16 text-center max-w-3xl mx-auto">
+                <p className="font-heading text-xl md:text-2xl text-foreground/90 leading-snug italic">
+                  "Winerim no solo enseña vinos.{" "}
+                  <span className="text-gradient-wine not-italic font-semibold">
+                    Decide cuándo conviene mostrar, impulsar, simplificar o rotar
+                  </span>{" "}
+                  cada referencia."
+                </p>
               </div>
             </ScrollReveal>
           </div>
