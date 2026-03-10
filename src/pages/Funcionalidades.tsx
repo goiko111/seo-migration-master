@@ -453,7 +453,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "In sviluppo",
     changelog_badge: "Changelog", changelog_title: "Ultime <em>novità</em>", changelog_sub: "Winerim si evolve costantemente.",
-    roadmap_badge: "Roadmap", roadmap_title: "Cosa arriva su <em>Winerim</em>", roadmap_sub: "Il nostro piano di sviluppo.",
+    roadmap_badge: "Capacità in espansione", roadmap_title: "Prossime <em>capacità</em>", roadmap_sub: "Oltre al suo nucleo di gestione e intelligenza, Winerim continua ad ampliare l'esperienza del cliente e del team di sala con nuove capacità.",
     cta_badge: "Inizia oggi", cta_title: "Scopri Winerim in <em>azione</em>", cta_sub: "Prova tutte le funzionalità gratis per 14 giorni.", cta_btn: "Prova Gratis",
     changelog: [
       { date: "Feb 2026", title: "Filtri sensoriali v2", desc: "Nuova interfaccia filtri.", tag: "new" },
@@ -464,9 +464,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Set 2025", title: "Integrazione Revo", desc: "Sincronizzazione con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Richiedere sommelier dalla carta", "Condividere selezione via QR/link", "Raccomandazioni per storico"] },
-      { quarter: "Q3 2026", items: ["Modalità educazione con tips", "FocusRIM – moduli IA per referenze redditizie", "App nativa"] },
-      { quarter: "Q4 2026", items: ["IA predittiva tendenze", "Carta in realtà aumentata", "API pubblica v2"] },
+      { quarter: "Esperienza cliente", items: ["Richiedere sommelier dalla carta", "Condividere selezione via QR/link", "Raccomandazioni per storico"] },
+      { quarter: "Formazione e sala", items: ["Modalità educazione con tips", "Guide di servizio per il team", "App nativa"] },
+      { quarter: "Tecnologia avanzata", items: ["IA predittiva tendenze", "Carta in realtà aumentata", "API pubblica v2"] },
     ],
     tag_labels: { new: "Nuovo", improvement: "Miglioramento", fix: "Correzione" },
   },
