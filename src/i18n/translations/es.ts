@@ -25,7 +25,7 @@ const es: TranslationDict = {
   nav_pricing_tool: "Wine pricing tool",
   nav_see_all: "Ver todas →",
 
-  footer_description: "La carta de vinos digital que revoluciona la hostelería.",
+  footer_description: "La carta inteligente de vinos que revoluciona la hostelería.",
   footer_product: "Producto",
   footer_content: "Contenido",
   footer_tools: "Herramientas",
@@ -82,7 +82,7 @@ const es: TranslationDict = {
   common_see_more: "Ver más",
   common_back: "Volver",
 
-  seo_home_title: "Carta de Vinos Digital con IA | Vende Más Vino",
+  seo_home_title: "Carta Inteligente de Vinos con IA | Vende Más Vino",
   seo_home_description: "Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomendaciones automáticas, maridajes y analítica para aumentar las ventas de vino en tu restaurante.",
 
   contact_title: "Contacto",

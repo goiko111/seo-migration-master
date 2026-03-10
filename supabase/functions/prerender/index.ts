@@ -59,8 +59,8 @@ interface PageContent {
 const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   '/': {
     meta: {
-      title: 'Winerim – Carta de Vinos Digital | Recomendador Inteligente',
-      description: 'Winerim es la carta de vinos digital y recomendador inteligente para restaurantes. Potencia ventas, gestiona tu bodega y mejora la experiencia del comensal.',
+      title: 'Winerim – Carta Inteligente de Vinos para Restaurantes',
+      description: 'Winerim es la carta inteligente de vinos para restaurantes. Recomendaciones con IA, maridajes automáticos, analítica de ventas y gestión de bodega.',
       canonical: `${SITE}/`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -68,15 +68,15 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       schemaType: 'SoftwareApplication',
     },
     content: {
-      h1: 'Carta de vinos digital con recomendador inteligente',
-      subtitle: 'Winerim digitaliza tu carta de vinos con inteligencia artificial. Recomienda el vino perfecto, optimiza márgenes y transforma la experiencia del comensal.',
+      h1: 'Carta inteligente de vinos con recomendador IA',
+      subtitle: 'Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomienda el vino perfecto, optimiza márgenes y transforma la experiencia del comensal.',
       sections: [
         { heading: 'El problema', content: 'La mayoría de restaurantes pierden ventas de vino por cartas desactualizadas, falta de recomendaciones y márgenes mal calculados.' },
         { heading: 'La solución', content: 'Winerim automatiza la gestión de tu carta de vinos con IA: recomendaciones personalizadas, precios óptimos y análisis en tiempo real.' },
         { heading: 'Resultados', content: 'Restaurantes que usan Winerim aumentan su ticket medio en vino un 23%, reducen el stock muerto un 40% y ahorran más de 10 horas semanales en gestión.' },
       ],
       faqs: [
-        { q: '¿Qué es Winerim?', a: 'Winerim es un software de carta de vinos digital con recomendador inteligente para restaurantes, hoteles y vinotecas.' },
+        { q: '¿Qué es Winerim?', a: 'Winerim es una carta inteligente de vinos con recomendador IA para restaurantes, hoteles y vinotecas.' },
         { q: '¿Cómo funciona el recomendador?', a: 'Analiza las preferencias del comensal, el plato elegido y el contexto para sugerir el vino ideal de tu carta.' },
       ],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }],
@@ -116,8 +116,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/software-carta-de-vinos': {
     meta: {
-      title: 'Software Carta de Vinos Digital para Restaurantes | Winerim',
-      description: 'Winerim es el software de carta de vinos digital líder para restaurantes. Gestión inteligente, recomendador IA y análisis de rendimiento en una sola plataforma.',
+      title: 'Software Carta Inteligente de Vinos para Restaurantes | Winerim',
+      description: 'Winerim es el software de carta inteligente de vinos líder para restaurantes. Gestión inteligente, recomendador IA y análisis de rendimiento en una sola plataforma.',
       canonical: `${SITE}/software-carta-de-vinos`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -125,10 +125,10 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       schemaType: 'SoftwareApplication',
     },
     content: {
-      h1: 'Software de carta de vinos digital para restaurantes',
-      subtitle: 'Gestiona, optimiza y digitaliza tu carta de vinos con inteligencia artificial.',
+      h1: 'Software de carta inteligente de vinos para restaurantes',
+      subtitle: 'Gestiona, optimiza y potencia tu carta de vinos con inteligencia artificial.',
       sections: [
-        { heading: 'Carta digital interactiva', content: 'Tu carta de vinos disponible en tablet, móvil o QR. Actualizable en tiempo real, con fichas detalladas y maridajes inteligentes.' },
+        { heading: 'Carta inteligente interactiva', content: 'Tu carta de vinos disponible en tablet, móvil o QR. Actualizable en tiempo real, con fichas detalladas y maridajes inteligentes.' },
         { heading: 'Recomendador inteligente', content: 'Winerim sugiere el vino perfecto según el plato, las preferencias del comensal y tu stock disponible.' },
         { heading: 'Gestión de bodega', content: 'Control de stock, alertas de rotación, análisis de rendimiento por referencia y optimización automática de precios.' },
       ],
@@ -150,8 +150,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/funcionalidades': {
     meta: {
-      title: 'Funcionalidades | Carta de Vinos Digital Winerim',
-      description: 'Descubre todas las funcionalidades de Winerim: carta digital, recomendador IA, gestión de stock, analytics de ventas y automatizaciones.',
+      title: 'Funcionalidades | Carta Inteligente de Vinos Winerim',
+      description: 'Descubre todas las funcionalidades de Winerim: carta inteligente, recomendador IA, gestión de stock, analytics de ventas y automatizaciones.',
       canonical: `${SITE}/funcionalidades`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -162,7 +162,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       h1: 'Funcionalidades de Winerim',
       subtitle: 'Todo lo que necesitas para gestionar y potenciar tu carta de vinos en una sola plataforma.',
       sections: [
-        { heading: 'Carta digital interactiva', content: 'Carta de vinos accesible desde tablet, móvil o QR con fichas completas, notas de cata y maridajes.' },
+        { heading: 'Carta inteligente interactiva', content: 'Carta de vinos accesible desde tablet, móvil o QR con fichas completas, notas de cata y maridajes.' },
         { heading: 'Recomendador inteligente', content: 'IA que sugiere vinos según el plato, presupuesto y preferencias del comensal.' },
         { heading: 'Analytics y rendimiento', content: 'Dashboards en tiempo real: ventas por referencia, márgenes, rotación y tendencias.' },
         { heading: 'Gestión de stock', content: 'Control automático de inventario con alertas de reposición y detección de vinos muertos.' },
@@ -232,7 +232,7 @@ function generateHTML(meta: PageMeta, content: PageContent): string {
     name: 'Winerim',
     url: SITE,
     logo: OG_IMAGE,
-    description: 'Carta de vinos digital y recomendador inteligente para restaurantes, hoteles y vinotecas.',
+    description: 'Carta inteligente de vinos con IA para restaurantes, hoteles y vinotecas.',
     sameAs: [
       'https://www.instagram.com/winerim/',
       'https://www.youtube.com/@Winerim',
@@ -316,7 +316,7 @@ function generateHTML(meta: PageMeta, content: PageContent): string {
   </main>
   
   <footer>
-    <p>&copy; ${new Date().getFullYear()} Winerim. Carta de vinos digital y recomendador inteligente.</p>
+    <p>&copy; ${new Date().getFullYear()} Winerim. Carta inteligente de vinos para restaurantes.</p>
     <nav>
       <a href="${SITE}/privacidad">Privacidad</a> |
       <a href="${SITE}/terminos">Términos</a>
