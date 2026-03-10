@@ -152,13 +152,7 @@ const rimCards = [
   },
 ];
 
-/* ── Section 8: Impacto ── */
-const impacts = [
-  { metric: "+18%", label: "Ticket medio en vino", icon: TrendingUp },
-  { metric: "−40%", label: "Vinos sin rotación", icon: RefreshCw },
-  { metric: "+12%", label: "Margen bruto en carta", icon: DollarSign },
-  { metric: "3×", label: "Velocidad de decisión", icon: Gauge },
-];
+/* ── (impacts data removed — now inline) ── */
 
 const InteligenciaDinamica = () => {
   const { t, localePath } = useLanguage();
@@ -961,51 +955,98 @@ const InteligenciaDinamica = () => {
             8. IMPACTO ESTIMADO
         ════════════════════════════════════════════════ */}
         <section className="section-padding relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-wine/3 to-background pointer-events-none" />
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-wine/5 rounded-full blur-[120px]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+          </div>
+
           <div className="relative max-w-5xl mx-auto">
             <ScrollReveal>
-              <div className="text-center mb-16">
-                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+              <div className="text-center mb-16 md:mb-20">
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
                   Impacto
                 </Badge>
-                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  Resultados que se{" "}
-                  <span className="text-gradient-wine">miden</span>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 leading-tight">
+                  Una capa pensada para generar{" "}
+                  <span className="text-gradient-wine">impacto real</span>
                 </h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Datos promedio de restaurantes que utilizan la inteligencia dinámica durante los primeros 90 días.
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                  Según el objetivo activado, la configuración de la carta y el contexto del restaurante, Winerim puede ayudar a mejorar distintas métricas clave.
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {impacts.map((item, i) => (
-                <ScrollReveal key={item.label}>
+            <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
+              {[
+                {
+                  title: "Facturación vino",
+                  desc: "Potencial de mejora en visibilidad, conversión y empuje de referencias estratégicas.",
+                  icon: DollarSign,
+                  iconColor: "text-emerald-400",
+                  iconBg: "bg-emerald-500/10",
+                  borderHover: "hover:border-emerald-500/25",
+                  gradient: "from-emerald-500/15 to-transparent",
+                },
+                {
+                  title: "Margen medio",
+                  desc: "Priorización de vinos con mejor contribución y menor canibalización.",
+                  icon: TrendingUp,
+                  iconColor: "text-wine",
+                  iconBg: "bg-wine/10",
+                  borderHover: "hover:border-wine/25",
+                  gradient: "from-wine/15 to-transparent",
+                },
+                {
+                  title: "Rotación",
+                  desc: "Mejor salida de referencias lentas, sobrestock o vinos con menor visibilidad.",
+                  icon: RefreshCw,
+                  iconColor: "text-amber-400",
+                  iconBg: "bg-amber-500/10",
+                  borderHover: "hover:border-amber-500/25",
+                  gradient: "from-amber-500/15 to-transparent",
+                },
+                {
+                  title: "Tiempo de decisión",
+                  desc: "Carta más enfocada y útil en momentos de alto volumen o servicio rápido.",
+                  icon: Gauge,
+                  iconColor: "text-blue-400",
+                  iconBg: "bg-blue-500/10",
+                  borderHover: "hover:border-blue-500/25",
+                  gradient: "from-blue-500/15 to-transparent",
+                },
+              ].map((item, i) => (
+                <ScrollReveal key={item.title}>
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className="text-center p-8 rounded-2xl border border-border bg-card hover:border-wine/20 transition-all duration-300"
+                    className={`group relative h-full p-8 md:p-10 rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${item.borderHover} transition-all duration-500`}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mx-auto mb-5">
-                      <item.icon className="w-6 h-6 text-wine" />
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                    <div className="relative">
+                      <div className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center mb-6 transition-colors duration-300`}>
+                        <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                      </div>
+
+                      <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-3">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                    <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">
-                      {item.metric}
-                    </div>
-                    <p className="text-muted-foreground text-sm">
-                      {item.label}
-                    </p>
                   </motion.div>
                 </ScrollReveal>
               ))}
             </div>
 
             <ScrollReveal>
-              <p className="text-center text-muted-foreground/50 text-xs mt-8">
-                * Datos agregados de restaurantes en programa beta. Resultados individuales pueden variar según tipología y volumen.
+              <p className="text-center text-muted-foreground/40 text-xs mt-10 max-w-xl mx-auto leading-relaxed">
+                El impacto real depende del tipo de restaurante, la configuración de objetivos, el volumen de la carta y el uso activo de la plataforma. Los resultados se miden dentro de Winerim.
               </p>
             </ScrollReveal>
           </div>
