@@ -138,6 +138,7 @@ const esRoutes = (
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
+    <Route path="/ss-review" element={<Suspense fallback={<PageLoader />}><ScreenshotReviewPage /></Suspense>} />
     {/* Dynamic programmatic SEO pages */}
     <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
     <Route path="/software-vino-*" element={<SeoPage />} />
