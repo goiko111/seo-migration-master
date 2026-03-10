@@ -109,6 +109,15 @@ const LogoStrip = () => {
         viewport={{ once: true }}
         className="text-center mt-8"
       >
+        <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold">Estrellas Michelin</p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mt-8"
+      >
         <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold">Soles Repsol</p>
       </motion.div>
 
