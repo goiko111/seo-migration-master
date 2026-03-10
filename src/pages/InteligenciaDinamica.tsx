@@ -1186,6 +1186,13 @@ const InteligenciaDinamica = () => {
           </div>
         </section>
       </main>
+      <InternalLinks links={[
+        { to: "/funcionalidades", label: "Todas las funcionalidades", type: "solution" },
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/integraciones", label: "Integraciones", type: "tool" },
+        { to: "/soluciones/grupos-restauracion", label: "Soluciones para grupos", type: "solution" },
+        { to: "/demo", label: "Solicitar demo gratuita", type: "resource" },
+      ]} />
       <Footer />
     </>
   );
