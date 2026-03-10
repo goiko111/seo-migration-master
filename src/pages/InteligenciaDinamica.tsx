@@ -303,7 +303,7 @@ const InteligenciaDinamica = () => {
                 custom={2}
                 className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-14 leading-relaxed"
               >
-                Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, contexto, clima, afluencia y objetivo del restaurante.
+                Inteligencia dinámica es la capa de IA táctica de Winerim: un software para vender más vino que adapta visibilidad, recomendación, rotación de stock y optimización de margen en restaurantes según el contexto real del negocio.
               </motion.p>
 
               {/* Highlights strip */}
