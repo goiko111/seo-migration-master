@@ -2,11 +2,17 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ImageUpload from "./ImageUpload";
 import MarkdownToolbar from "./MarkdownToolbar";
+
+interface RelatedLink {
+  to: string;
+  label: string;
+  type: "tool" | "guide" | "resource" | "solution";
+}
 
 interface ArticleForm {
   id?: string;
@@ -20,6 +26,7 @@ interface ArticleForm {
   author_role: string;
   author_image: string;
   published: boolean;
+  related_links: RelatedLink[];
 }
 
 interface ArticleEditorProps {
