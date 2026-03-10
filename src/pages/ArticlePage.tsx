@@ -210,6 +210,9 @@ const ArticlePage = () => {
         </div>
       ))}
 
+      {/* RELATED CONTENT */}
+      <ArticleRelatedContent slug={slug || ""} body={article.body} manualLinks={article.relatedLinks} />
+
       {/* CTA FINAL */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
         <ScrollReveal>
