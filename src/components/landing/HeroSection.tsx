@@ -89,6 +89,10 @@ const HeroSection = () => {
                 alt="Winerim digital wine list on tablet"
                 className="relative w-full max-w-2xl mx-auto drop-shadow-2xl rounded-2xl"
                 loading="eager"
+                fetchPriority="high"
+                width={800}
+                height={600}
+                decoding="async"
               />
             </div>
           </motion.div>
