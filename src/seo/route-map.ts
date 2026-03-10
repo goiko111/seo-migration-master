@@ -30,7 +30,8 @@ export interface SeoRouteEntry {
   noindex?: boolean;
 }
 
-const BASE = "https://winerim.wine";
+import { CANONICAL_DOMAIN } from "./config";
+const BASE = CANONICAL_DOMAIN;
 
 export const seoRouteMap: SeoRouteEntry[] = [
   // ─────────────────────────────────────────────
