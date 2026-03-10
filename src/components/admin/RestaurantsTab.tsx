@@ -55,43 +55,47 @@ const RestaurantsTab = () => {
       ? Math.max(...restaurants.map(r => r.display_order)) + 1
       : 0;
 
+    const BATCH_SIZE = 6;
     let added = 0;
-    for (let i = 0; i < imageFiles.length; i++) {
-      const file = imageFiles[i];
-      const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-      const safeName = `${Date.now()}-${i}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
 
-      // Extract category from subfolder path (e.g., "Root/Michelin/logo.png" → "Michelin")
-      const relativePath = (file as any).webkitRelativePath || "";
-      const pathParts = relativePath.split("/").filter(Boolean);
-      // Use the parent folder name (skip root folder and filename)
-      const category = pathParts.length > 2 ? pathParts.slice(1, -1).join(" / ") : null;
+    for (let start = 0; start < imageFiles.length; start += BATCH_SIZE) {
+      const batch = imageFiles.slice(start, start + BATCH_SIZE);
+      const results = await Promise.allSettled(
+        batch.map(async (file, idx) => {
+          const i = start + idx;
+          const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+          const safeName = `${Date.now()}-${i}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
 
-      const { error: uploadError } = await supabase.storage
-        .from(BUCKET)
-        .upload(safeName, file, { upsert: true });
+          const relativePath = (file as any).webkitRelativePath || "";
+          const pathParts = relativePath.split("/").filter(Boolean);
+          const category = pathParts.length > 2 ? pathParts.slice(1, -1).join(" / ") : null;
 
-      if (uploadError) {
-        toast.error(`Error subiendo ${file.name}: ${uploadError.message}`);
-        continue;
-      }
+          const { error: uploadError } = await supabase.storage
+            .from(BUCKET)
+            .upload(safeName, file, { upsert: true });
 
-      const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(safeName);
+          if (uploadError) throw new Error(`Storage: ${file.name} - ${uploadError.message}`);
 
-      const { error: insertError } = await supabase.from("restaurants").insert({
-        name: nameWithoutExt,
-        logo_url: urlData.publicUrl,
-        display_order: maxOrder + i,
-        visible: true,
-        featured: false,
-        category,
+          const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(safeName);
+
+          const { error: insertError } = await supabase.from("restaurants").insert({
+            name: nameWithoutExt,
+            logo_url: urlData.publicUrl,
+            display_order: maxOrder + i,
+            visible: true,
+            featured: false,
+            category,
+          });
+
+          if (insertError) throw new Error(`DB: ${nameWithoutExt} - ${insertError.message}`);
+          return true;
+        })
+      );
+
+      results.forEach(r => {
+        if (r.status === "fulfilled") added++;
+        else toast.error(r.reason?.message || "Error en subida");
       });
-
-      if (insertError) {
-        toast.error(`Error guardando ${nameWithoutExt}: ${insertError.message}`);
-      } else {
-        added++;
-      }
     }
 
     toast.success(`${added} restaurante(s) añadido(s)`);
