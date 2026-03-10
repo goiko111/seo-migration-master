@@ -108,7 +108,7 @@ const RestaurantsTab = () => {
         <div>
           <Label htmlFor="logo-upload" className="cursor-pointer">
             <div className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity">
-              <Upload size={16} /> {uploading ? "Subiendo..." : "Subir logos"}
+              <Upload size={16} /> {uploading ? "Subiendo..." : "Subir carpeta"}
             </div>
           </Label>
           <input
