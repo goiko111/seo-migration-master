@@ -704,65 +704,116 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            6. SISTEMA DE PRIORIDADES Y ORQUESTACIÓN
+            6. JERARQUÍA DE MÓDULOS
         ════════════════════════════════════════════════ */}
         <section className="section-padding relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
-          <div className="relative max-w-5xl mx-auto">
+          <div className="relative max-w-4xl mx-auto">
             <ScrollReveal>
-              <div className="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                  <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
-                    Orquestación
-                  </Badge>
-                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-                    No todo se ejecuta a la vez.{" "}
-                    <span className="text-gradient-wine">Hay un orden.</span>
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    Cada recomendación se clasifica por urgencia, impacto potencial y esfuerzo de implementación.
-                    El sistema prioriza lo que más importa en cada momento y evita saturar al equipo con cambios innecesarios.
-                  </p>
-
-                  <div className="space-y-4">
-                    {[
-                      { label: "Crítica", desc: "Impacto alto, ejecución inmediata", color: "bg-red-500/80" },
-                      { label: "Alta", desc: "Oportunidad relevante esta semana", color: "bg-amber-500/80" },
-                      { label: "Media", desc: "Mejora progresiva, sin urgencia", color: "bg-blue-500/80" },
-                      { label: "Baja", desc: "Optimización marginal, a revisar", color: "bg-muted-foreground/40" },
-                    ].map((p) => (
-                      <div key={p.label} className="flex items-center gap-4">
-                        <div className={`w-3 h-3 rounded-full ${p.color} shrink-0`} />
-                        <div>
-                          <span className="text-foreground font-medium text-sm">{p.label}</span>
-                          <span className="text-muted-foreground text-sm ml-2">— {p.desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Visual: Priority card mock */}
-                <div className="relative">
-                  <div className="absolute inset-0 bg-wine/5 rounded-2xl blur-xl" />
-                  <div className="relative space-y-4">
-                    {[
-                      { priority: "Crítica", code: "RIM-P", action: "Subir precio de Albariño Pazo Señorans de 38€ a 44€", impact: "+15% margen", color: "border-red-500/40 bg-red-500/5" },
-                      { priority: "Alta", code: "RIM-R", action: "Retirar Verdejo Rueda 2019 (0 ventas en 60 días)", impact: "Liberar posición", color: "border-amber-500/40 bg-amber-500/5" },
-                      { priority: "Media", code: "RIM-V", action: "Destacar Ribera del Duero Crianza en posición 3", impact: "+8% visibilidad", color: "border-blue-500/40 bg-blue-500/5" },
-                    ].map((card) => (
-                      <div key={card.action} className={`p-5 rounded-xl border ${card.color} backdrop-blur-sm`}>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-[10px] font-mono text-wine/60 tracking-wider">{card.code}</span>
-                          <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{card.priority}</span>
-                        </div>
-                        <p className="text-foreground text-sm font-medium mb-2">{card.action}</p>
-                        <p className="text-accent text-xs font-medium">{card.impact}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="text-center mb-16 md:mb-20">
+                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
+                  Arquitectura
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 leading-tight">
+                  Un sistema jerarquizado,{" "}
+                  <span className="text-gradient-wine">no una suma de automatizaciones</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Winerim prioriza según protección del negocio, contexto real y estrategia comercial.
+                </p>
               </div>
+            </ScrollReveal>
+
+            {/* Pyramid / Stack */}
+            <ScrollReveal>
+              <div className="space-y-3">
+                {[
+                  {
+                    level: 1,
+                    label: "Protección del negocio",
+                    modules: ["MarginRIM™", "StockRIM™", "CleanRIM™"],
+                    width: "max-w-full",
+                    bg: "bg-wine/8 border-wine/20",
+                    levelColor: "text-wine",
+                    barColor: "bg-wine/60",
+                  },
+                  {
+                    level: 2,
+                    label: "Contexto",
+                    modules: ["FocusRIM™", "ClimateRIM™", "CalendarRIM™"],
+                    width: "max-w-[90%]",
+                    bg: "bg-amber-500/6 border-amber-500/15",
+                    levelColor: "text-amber-400",
+                    barColor: "bg-amber-500/50",
+                  },
+                  {
+                    level: 3,
+                    label: "Estrategia de carta",
+                    modules: ["PrimeRIM™", "MixRIM™", "LocalRIM™"],
+                    width: "max-w-[78%]",
+                    bg: "bg-blue-500/6 border-blue-500/15",
+                    levelColor: "text-blue-400",
+                    barColor: "bg-blue-500/50",
+                  },
+                  {
+                    level: 4,
+                    label: "Orquestación",
+                    modules: ["SmartRIM™", "ClientRIM™"],
+                    width: "max-w-[64%]",
+                    bg: "bg-violet-500/6 border-violet-500/15",
+                    levelColor: "text-violet-400",
+                    barColor: "bg-violet-500/50",
+                  },
+                ].map((tier) => (
+                  <motion.div
+                    key={tier.level}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: tier.level * 0.1, duration: 0.5 }}
+                    className={`${tier.width} mx-auto`}
+                  >
+                    <div className={`relative flex items-center gap-5 md:gap-6 px-6 md:px-8 py-5 md:py-6 rounded-xl border ${tier.bg} backdrop-blur-sm overflow-hidden`}>
+                      {/* Left accent bar */}
+                      <div className={`absolute left-0 top-0 bottom-0 w-1 ${tier.barColor} rounded-l-xl`} />
+
+                      {/* Level indicator */}
+                      <div className="shrink-0 text-center">
+                        <span className={`block text-[10px] uppercase tracking-[0.2em] font-semibold ${tier.levelColor}`}>
+                          Nivel
+                        </span>
+                        <span className={`font-heading text-2xl font-bold ${tier.levelColor}`}>
+                          {tier.level}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm md:text-base font-semibold text-foreground mb-2">
+                          {tier.label}
+                        </h3>
+                        <div className="flex flex-wrap gap-1.5">
+                          {tier.modules.map((mod) => (
+                            <span
+                              key={mod}
+                              className="inline-flex items-center px-2 py-0.5 rounded bg-background/60 text-[11px] font-mono font-medium text-muted-foreground tracking-wide"
+                            >
+                              {mod}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* Supporting text */}
+            <ScrollReveal>
+              <p className="text-center text-muted-foreground text-sm md:text-base leading-relaxed mt-12 max-w-2xl mx-auto">
+                Cuando varios módulos pueden actuar a la vez, Winerim resuelve prioridades para que la carta siga siendo coherente y útil para el negocio.
+              </p>
             </ScrollReveal>
           </div>
         </section>
