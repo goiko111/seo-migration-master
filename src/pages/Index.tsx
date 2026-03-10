@@ -35,6 +35,7 @@ const Index = () => {
           <FeaturesPreview />
           <ResultsSection />
           <HowItWorksSection />
+          <TestimonialsSection />
           <VideoSection />
           <FinalCTASection />
         </main>
