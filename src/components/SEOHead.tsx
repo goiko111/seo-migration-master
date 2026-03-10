@@ -46,9 +46,11 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       canonical.href = url;
     }
 
-    // Noindex
+    // Robots
     if (noindex) {
       setMeta("robots", "noindex, follow", true);
+    } else {
+      setMeta("robots", "index, follow", true);
     }
 
     // Hreflang
