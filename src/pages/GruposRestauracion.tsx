@@ -68,9 +68,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impacto", impactTitle1: "Resultados para ", impactTitleHighlight: "grupos",
     results: [
       { value: "Control total", desc: "Sobre la oferta de vino en todos los locales" },
-      { value: "+22%", desc: "Mejora media de márgenes en vino" },
-      { value: "+18%", desc: "Aumento medio de ventas de vino" },
-      { value: "100%", desc: "Cartas estandarizadas y siempre actualizadas" },
+      { value: "Centralizado", desc: "Gestión de cartas, precios y stock desde un único panel" },
+      { value: "En tiempo real", desc: "Cambios aplicados al instante en todos los restaurantes" },
+      { value: "Multi-idioma", desc: "Cartas traducidas automáticamente para clientes internacionales" },
     ],
     scaleLabel: "Escalabilidad", scaleTitle1: "Winerim crece ", scaleTitleHighlight: "contigo",
     useCases: [
@@ -117,9 +117,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impact", impactTitle1: "Results for ", impactTitleHighlight: "groups",
     results: [
       { value: "Full control", desc: "Over the wine offer across all venues" },
-      { value: "+22%", desc: "Average margin improvement on wine" },
-      { value: "+18%", desc: "Average increase in wine sales" },
-      { value: "100%", desc: "Standardized and always up-to-date lists" },
+      { value: "Centralized", desc: "Manage lists, pricing, and stock from a single panel" },
+      { value: "Real-time", desc: "Changes applied instantly across all restaurants" },
+      { value: "Multi-language", desc: "Lists automatically translated for international guests" },
     ],
     scaleLabel: "Scalability", scaleTitle1: "Winerim grows ", scaleTitleHighlight: "with you",
     useCases: [
@@ -166,9 +166,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impatto", impactTitle1: "Risultati per i ", impactTitleHighlight: "gruppi",
     results: [
       { value: "Controllo totale", desc: "Sull'offerta di vino in tutti i locali" },
-      { value: "+22%", desc: "Miglioramento medio dei margini sul vino" },
-      { value: "+18%", desc: "Aumento medio delle vendite di vino" },
-      { value: "100%", desc: "Carte standardizzate e sempre aggiornate" },
+      { value: "Centralizzato", desc: "Gestione carte, prezzi e stock da un unico pannello" },
+      { value: "In tempo reale", desc: "Modifiche applicate istantaneamente in tutti i ristoranti" },
+      { value: "Multilingua", desc: "Carte tradotte automaticamente per ospiti internazionali" },
     ],
     scaleLabel: "Scalabilità", scaleTitle1: "Winerim cresce ", scaleTitleHighlight: "con te",
     useCases: [
@@ -215,9 +215,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impact", impactTitle1: "Résultats pour les ", impactTitleHighlight: "groupes",
     results: [
       { value: "Contrôle total", desc: "Sur l'offre de vin dans tous les établissements" },
-      { value: "+22%", desc: "Amélioration moyenne des marges sur le vin" },
-      { value: "+18%", desc: "Augmentation moyenne des ventes de vin" },
-      { value: "100%", desc: "Cartes standardisées et toujours à jour" },
+      { value: "Centralisé", desc: "Gestion des cartes, prix et stocks depuis un seul panneau" },
+      { value: "En temps réel", desc: "Modifications appliquées instantanément dans tous les restaurants" },
+      { value: "Multilingue", desc: "Cartes traduites automatiquement pour les clients internationaux" },
     ],
     scaleLabel: "Évolutivité", scaleTitle1: "Winerim grandit ", scaleTitleHighlight: "avec vous",
     useCases: [

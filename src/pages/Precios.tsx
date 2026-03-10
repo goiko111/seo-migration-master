@@ -44,7 +44,7 @@ const content: Record<string, {
     capabilities: ["Carta digital interactiva", "Maridajes inteligentes", "Comparador de vinos", "Analítica de ventas", "Optimización de precios", "Gestión de bodega"],
     included_badge: "Todo incluido", included_title: "Qué incluye <em>Winerim</em>",
     impact_badge: "Impacto real", impact_title: "Resultados que obtienen nuestros <em>clientes</em>",
-    metrics: [{ value: "+30%", label: "Ventas de vino" }, { value: "+20%", label: "Ticket medio" }, { value: "+35%", label: "Rotación de referencias" }],
+    metrics: [{ value: "Más ventas", label: "Clientes que exploran más referencias" }, { value: "Mejor margen", label: "Control de precios y escalado de gama" }, { value: "Menos tiempo", label: "Gestión automatizada de la carta" }],
     cta_badge: "Da el paso", cta_title: "Descubre cuánto más podrías vender con tu <em>carta de vinos</em>", cta_sub: "Te mostramos el potencial de mejora de tu carta con una demo personalizada. Sin compromiso.", cta_btn: "Solicitar demo",
     faqs: [
       { q: "¿Cuánto tarda la implementación?", a: "La mayoría de restaurantes están operativos en menos de 48 horas." },
@@ -71,7 +71,7 @@ const content: Record<string, {
     capabilities: ["Interactive digital list", "Smart pairings", "Wine comparator", "Sales analytics", "Price optimization", "Cellar management"],
     included_badge: "All included", included_title: "What <em>Winerim</em> includes",
     impact_badge: "Real impact", impact_title: "Results our <em>clients</em> achieve",
-    metrics: [{ value: "+30%", label: "Wine sales" }, { value: "+20%", label: "Average ticket" }, { value: "+35%", label: "Reference rotation" }],
+    metrics: [{ value: "More sales", label: "Customers exploring more references" }, { value: "Better margins", label: "Price control and range optimization" }, { value: "Less time", label: "Automated wine list management" }],
     cta_badge: "Take the step", cta_title: "Discover how much more you could sell with your <em>wine list</em>", cta_sub: "We show you the improvement potential of your wine list with a personalized demo. No commitment.", cta_btn: "Request demo",
     faqs: [
       { q: "How long does implementation take?", a: "Most restaurants are up and running in under 48 hours." },
@@ -98,7 +98,7 @@ const content: Record<string, {
     capabilities: ["Carta digitale interattiva", "Abbinamenti intelligenti", "Comparatore vini", "Analisi vendite", "Ottimizzazione prezzi", "Gestione cantina"],
     included_badge: "Tutto incluso", included_title: "Cosa include <em>Winerim</em>",
     impact_badge: "Impatto reale", impact_title: "Risultati ottenuti dai nostri <em>clienti</em>",
-    metrics: [{ value: "+30%", label: "Vendite di vino" }, { value: "+20%", label: "Scontrino medio" }, { value: "+35%", label: "Rotazione referenze" }],
+    metrics: [{ value: "Più vendite", label: "Clienti che esplorano più referenze" }, { value: "Margine migliore", label: "Controllo prezzi e ottimizzazione" }, { value: "Meno tempo", label: "Gestione automatizzata della carta" }],
     cta_badge: "Fai il passo", cta_title: "Scopri quanto di più potresti vendere con la tua <em>carta dei vini</em>", cta_sub: "Ti mostriamo il potenziale di miglioramento con una demo personalizzata. Senza impegno.", cta_btn: "Richiedi demo",
     faqs: [
       { q: "Quanto tempo richiede l'implementazione?", a: "La maggior parte dei ristoranti è operativa in meno di 48 ore." },
@@ -125,7 +125,7 @@ const content: Record<string, {
     capabilities: ["Carte digitale interactive", "Accords intelligents", "Comparateur de vins", "Analytique des ventes", "Optimisation des prix", "Gestion de cave"],
     included_badge: "Tout inclus", included_title: "Ce que <em>Winerim</em> inclut",
     impact_badge: "Impact réel", impact_title: "Résultats obtenus par nos <em>clients</em>",
-    metrics: [{ value: "+30%", label: "Ventes de vin" }, { value: "+20%", label: "Ticket moyen" }, { value: "+35%", label: "Rotation des références" }],
+    metrics: [{ value: "Plus de ventes", label: "Clients explorant plus de références" }, { value: "Meilleure marge", label: "Contrôle des prix et optimisation" }, { value: "Moins de temps", label: "Gestion automatisée de la carte" }],
     cta_badge: "Faites le pas", cta_title: "Découvrez combien vous pourriez vendre de plus avec votre <em>carte des vins</em>", cta_sub: "Nous vous montrons le potentiel d'amélioration avec une démo personnalisée. Sans engagement.", cta_btn: "Demander démo",
     faqs: [
       { q: "Combien de temps prend l'implémentation ?", a: "La plupart des restaurants sont opérationnels en moins de 48 heures." },

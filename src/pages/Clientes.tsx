@@ -45,28 +45,28 @@ const i18n: Record<string, {
 }> = {
   es: {
     seo_title: "Clientes de Winerim | Restaurantes que confían en nosotros", seo_desc: "Más de 1.000 restaurantes confían en Winerim para gestionar su carta de vinos.", breadcrumb: "Clientes", badge: "Nuestros clientes", title: "Los mejores restaurantes ya usan <em>Winerim</em>", subtitle: "Más de 1.000 establecimientos confían en nuestra tecnología para transformar su carta de vinos.",
-    stats: [{ value: "1.000+", label: "Bodegas gestionadas" }, { value: "300.000+", label: "Referencias únicas de vino" }, { value: "30%", label: "Incremento medio en ventas" }, { value: "15", label: "Países" }],
+    stats: [{ value: "1.000+", label: "Bodegas gestionadas" }, { value: "500.000+", label: "Referencias en nuestra base de datos" }, { value: "18", label: "Testimonios verificados de profesionales" }, { value: "España y Europa", label: "Presencia geográfica" }],
     featured_badge: "Destacados", featured_title: "Lo que dicen nuestros <em>clientes</em>",
     all_title: "Todos nuestros <em>clientes</em>", all_sub: "Restaurantes de toda España, Portugal, Italia y más confían en Winerim.",
     cta_badge: "Únete", cta_title: "¿Listo para ser el <em>siguiente?</em>", cta_sub: "Prueba Winerim gratis y descubre por qué más de 1.000 restaurantes ya confían en nosotros.", cta_btn: "Solicitar demo",
   },
   en: {
     seo_title: "Winerim Clients | Restaurants that trust us", seo_desc: "Over 1,000 restaurants trust Winerim to manage their wine list.", breadcrumb: "Clients", badge: "Our clients", title: "The best restaurants already use <em>Winerim</em>", subtitle: "Over 1,000 establishments trust our technology to transform their wine list.",
-    stats: [{ value: "1,000+", label: "Cellars managed" }, { value: "300,000+", label: "Unique wine references" }, { value: "30%", label: "Average sales increase" }, { value: "15", label: "Countries" }],
+    stats: [{ value: "1,000+", label: "Cellars managed" }, { value: "500,000+", label: "References in our database" }, { value: "18", label: "Verified professional testimonials" }, { value: "Spain & Europe", label: "Geographic presence" }],
     featured_badge: "Featured", featured_title: "What our <em>clients</em> say",
     all_title: "All our <em>clients</em>", all_sub: "Restaurants across Spain, Portugal, Italy and more trust Winerim.",
     cta_badge: "Join us", cta_title: "Ready to be <em>next?</em>", cta_sub: "Try Winerim free and discover why over 1,000 restaurants already trust us.", cta_btn: "Request demo",
   },
   it: {
     seo_title: "Clienti Winerim | Ristoranti che si fidano di noi", seo_desc: "Oltre 1.000 ristoranti si fidano di Winerim.", breadcrumb: "Clienti", badge: "I nostri clienti", title: "I migliori ristoranti usano già <em>Winerim</em>", subtitle: "Oltre 1.000 ristoranti si fidano della nostra tecnologia.",
-    stats: [{ value: "1.000+", label: "Cantine gestite" }, { value: "300.000+", label: "Referenze uniche di vino" }, { value: "30%", label: "Incremento medio vendite" }, { value: "15", label: "Paesi" }],
+    stats: [{ value: "1.000+", label: "Cantine gestite" }, { value: "500.000+", label: "Referenze nel nostro database" }, { value: "18", label: "Testimonianze verificate" }, { value: "Spagna e Europa", label: "Presenza geografica" }],
     featured_badge: "In evidenza", featured_title: "Cosa dicono i nostri <em>clienti</em>",
     all_title: "Tutti i nostri <em>clienti</em>", all_sub: "Ristoranti in Spagna, Portogallo, Italia e oltre si fidano di Winerim.",
     cta_badge: "Unisciti", cta_title: "Pronto ad essere il <em>prossimo?</em>", cta_sub: "Prova Winerim gratis e scopri perché oltre 1.000 ristoranti si fidano di noi.", cta_btn: "Richiedi demo",
   },
   fr: {
     seo_title: "Clients Winerim | Restaurants qui nous font confiance", seo_desc: "Plus de 1 000 restaurants font confiance à Winerim.", breadcrumb: "Clients", badge: "Nos clients", title: "Les meilleurs restaurants utilisent déjà <em>Winerim</em>", subtitle: "Plus de 1 000 établissements font confiance à notre technologie.",
-    stats: [{ value: "1 000+", label: "Caves gérées" }, { value: "300 000+", label: "Références uniques de vin" }, { value: "30%", label: "Augmentation moyenne ventes" }, { value: "15", label: "Pays" }],
+    stats: [{ value: "1 000+", label: "Caves gérées" }, { value: "500 000+", label: "Références dans notre base" }, { value: "18", label: "Témoignages professionnels vérifiés" }, { value: "Espagne et Europe", label: "Présence géographique" }],
     featured_badge: "En vedette", featured_title: "Ce que disent nos <em>clients</em>",
     all_title: "Tous nos <em>clients</em>", all_sub: "Restaurants en Espagne, Portugal, Italie et ailleurs font confiance à Winerim.",
     cta_badge: "Rejoignez-nous", cta_title: "Prêt à être le <em>prochain ?</em>", cta_sub: "Essayez Winerim gratuitement et découvrez pourquoi plus de 1 000 restaurants nous font confiance.", cta_btn: "Demander démo",
