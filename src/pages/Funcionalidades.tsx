@@ -13,6 +13,14 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
+import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
+import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
+import tabletPairingImg from "@/assets/winerim-tablet-pairing.png";
+import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
+import mobileListImg from "@/assets/winerim-mobile-list.png";
+import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
+import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
 
 const coreIcons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart, QrCode, Filter, Search, Wine, FileText, Languages, Palette];
 const mgmtIcons = [RefreshCw, Bell, TrendingUp, Globe, Smartphone, Zap];
