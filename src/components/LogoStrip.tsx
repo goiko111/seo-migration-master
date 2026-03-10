@@ -83,6 +83,8 @@ const LogoStrip = () => {
         </h2>
       </motion.div>
 
+      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-4">Estrellas Michelin</p>
+
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
@@ -103,16 +105,9 @@ const LogoStrip = () => {
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mt-8"
-      >
-        <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold">Soles Repsol</p>
-      </motion.div>
+      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mt-10 mb-4">Soles Repsol</p>
 
-      <div className="relative mt-4">
+      <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
@@ -120,14 +115,13 @@ const LogoStrip = () => {
           {[...repsolLogos, ...repsolLogos].map((item, i) => (
             <div
               key={`${item.name}-repsol-${i}`}
-              className="flex-shrink-0 flex flex-col items-center justify-center min-w-40 sm:min-w-48 px-3"
+              className="flex-shrink-0 flex items-center justify-center h-20 sm:h-28 md:h-32 px-6 sm:px-10"
             >
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-12 sm:h-16 md:h-20 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
               />
-              <p className="mt-2 text-xs sm:text-sm font-medium text-foreground/85 tracking-wide">{item.name}</p>
             </div>
           ))}
         </div>
