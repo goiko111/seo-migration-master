@@ -8,6 +8,7 @@ import SolutionSection from "@/components/landing/SolutionSection";
 import FeaturesPreview from "@/components/landing/FeaturesPreview";
 import ResultsSection from "@/components/landing/ResultsSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import VideoSection from "@/components/VideoSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import { PageContentProvider } from "@/contexts/PageContentContext";
