@@ -673,11 +673,11 @@ const InteligenciaDinamica = () => {
                   Módulos RIM™
                 </Badge>
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
-                  Los módulos que hacen que la carta{" "}
-                  <span className="text-gradient-wine">reaccione</span>
+                  Módulos RIM™: la IA para hostelería{" "}
+                  <span className="text-gradient-wine">que actúa por ti</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                  Cada RIM™ responde a una lógica distinta. Juntos convierten la carta en un sistema táctico.
+                  Cada módulo responde a una lógica de negocio distinta. Juntos convierten la carta en un software de optimización de margen en restaurantes.
                 </p>
               </div>
             </ScrollReveal>
