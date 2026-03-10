@@ -10,6 +10,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import RelatedPages from "@/components/seo/RelatedPages";
+import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import type { SeoPage, RelatedPageInfo } from "@/hooks/useSeoPage";
 
@@ -24,10 +25,16 @@ const CityTemplate = ({ page, related }: Props) => {
   const benefits: string[] = b.benefits || [];
   const features: { title: string; desc: string }[] = b.features || [];
   const stats: { value: string; label: string }[] = b.stats || [];
+  const internalLinks = (b.internal_links || []).map((l: any) => ({
+    to: l.url || l.to || "#",
+    label: l.label || l.title || "",
+    type: l.type || "guide" as const,
+  }));
+  const canonical = page.canonical_url || `https://winerim.wine/${page.slug}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={page.meta_title} description={page.meta_description} url={`https://winerim.wine/${page.slug}`} type="article" />
+      <SEOHead title={page.meta_title} description={page.meta_description} url={canonical} type="article" image={page.og_image || undefined} noindex={page.isThinContent} />
       <DynamicSchemaMarkup
         id={page.slug}
         type={page.schema_type || "Article"}
@@ -156,6 +163,26 @@ const CityTemplate = ({ page, related }: Props) => {
         </section>
       )}
 
+      {/* BENEFITS */}
+      {benefits.length > 0 && (
+        <section className="max-w-5xl mx-auto px-6 md:px-12 py-20">
+          <ScrollReveal>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Beneficios</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Ventajas de digitalizar tu carta en {b.city_name}</h2>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-2 gap-4">
+            {benefits.map((ben, i) => (
+              <ScrollReveal key={i} delay={i * 0.05}>
+                <div className="flex items-start gap-3 p-5 rounded-xl border border-border bg-gradient-card">
+                  <CheckCircle size={18} className="text-wine shrink-0 mt-0.5" />
+                  <p className="text-sm text-muted-foreground leading-relaxed">{ben}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       {page.faqs.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
@@ -177,6 +204,9 @@ const CityTemplate = ({ page, related }: Props) => {
           </div>
         </section>
       )}
+
+      {/* INTERNAL LINKS */}
+      {internalLinks.length > 0 && <InternalLinks links={internalLinks} />}
 
       {/* RELATED */}
       <RelatedPages pages={related} />
