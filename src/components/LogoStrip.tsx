@@ -26,6 +26,14 @@ import logoElMotel from "@/assets/logos/elmotel.png";
 import logoDamaso from "@/assets/logos/damaso.png";
 import logoCasamar from "@/assets/logos/casamar.png";
 import logoBocaatti from "@/assets/logos/bocaatti.png";
+import logoMelia from "@/assets/logos/melia.png";
+import logoHyatt from "@/assets/logos/hyatt.png";
+import logoMarriott from "@/assets/logos/marriott.png";
+import logoWyndham from "@/assets/logos/wyndham.png";
+import logoMyr from "@/assets/logos/myr.webp";
+import logoFourSeasons from "@/assets/logos/fourseasons.png";
+import logoPalladium from "@/assets/logos/palladium.jpeg";
+import logoEm from "@/assets/logos/em.png";
 
 interface LogoItem {
   name: string;
@@ -62,7 +70,16 @@ const repsolLogos: LogoItem[] = [
   { name: "Bocaatti", logo: logoBocaatti },
 ];
 
-const hotelGroups = ["Meliá Hotels", "Hyatt", "Marriott"];
+const hotelLogos: LogoItem[] = [
+  { name: "Meliá Hotels International", logo: logoMelia },
+  { name: "Hyatt", logo: logoHyatt },
+  { name: "Marriott", logo: logoMarriott },
+  { name: "Wyndham Hotel Group", logo: logoWyndham },
+  { name: "MYR Hotels", logo: logoMyr },
+  { name: "Four Seasons", logo: logoFourSeasons },
+  { name: "Palladium Hotel Group", logo: logoPalladium },
+  { name: "EM Hotels", logo: logoEm },
+];
 
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
@@ -139,18 +156,24 @@ const LogoStrip = () => {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex items-center justify-center gap-6 sm:gap-10 mt-8 sm:mt-10 px-6"
+        className="mt-8 sm:mt-10 px-6"
       >
-        <span className="text-xs text-muted-foreground/60 tracking-widest uppercase whitespace-nowrap">Grupos hoteleros</span>
-        <div className="h-px w-8 bg-border/50" />
-        {hotelGroups.map((hotel) => (
-          <span
-            key={hotel}
-            className="text-base sm:text-lg md:text-xl font-heading font-semibold tracking-wider text-muted-foreground/70 hover:text-foreground transition-colors duration-300 whitespace-nowrap"
-          >
-            {hotel}
-          </span>
-        ))}
+        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-6">Grupos hoteleros</span>
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
+          {hotelLogos.map((item) => (
+            <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 px-2">
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-8 sm:h-12 md:h-14 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+                decoding="async"
+                width={120}
+                height={56}
+              />
+            </div>
+          ))}
+        </div>
       </motion.div>
 
       <div className="text-center mt-6 sm:mt-8 px-6">
