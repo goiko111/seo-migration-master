@@ -246,7 +246,7 @@ const competitorData = {
       { feature: "Alert stock e obsolescenza", options: [false, false, false, true] },
       { feature: "Esperienza mobile visiva e interattiva", options: ["partial" as const, true, false, true] },
       { feature: "100% focalizzato sulla ristorazione", options: [false, false, "partial" as const, true] },
-      { feature: "Nessuna app da scaricare per il cliente", options: ["partial" as const, false, "partial" as const, true] },
+      { feature: "Multipiattaforma: web, tablet e app", options: [false, false, "partial" as const, true] },
     ],
   },
   fr: {
