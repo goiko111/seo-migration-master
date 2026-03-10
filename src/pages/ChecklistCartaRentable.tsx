@@ -93,6 +93,7 @@ const ChecklistCartaRentable = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
+  const [referencesCount, setReferencesCount] = useState("");
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
