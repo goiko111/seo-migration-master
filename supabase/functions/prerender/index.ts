@@ -76,7 +76,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { heading: 'Resultados', content: 'Restaurantes que usan Winerim aumentan su ticket medio en vino un 23%, reducen el stock muerto un 40% y ahorran más de 10 horas semanales en gestión.' },
       ],
       faqs: [
-        { q: '¿Qué es Winerim?', a: 'Winerim es un software de carta de vinos digital con recomendador inteligente para restaurantes, hoteles y vinotecas.' },
+        { q: '¿Qué es Winerim?', a: 'Winerim es una carta inteligente de vinos con recomendador IA para restaurantes, hoteles y vinotecas.' },
         { q: '¿Cómo funciona el recomendador?', a: 'Analiza las preferencias del comensal, el plato elegido y el contexto para sugerir el vino ideal de tu carta.' },
       ],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }],
