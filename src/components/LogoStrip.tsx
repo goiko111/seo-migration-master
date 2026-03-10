@@ -99,7 +99,7 @@ const LogoStrip = () => {
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-16 sm:h-22 md:h-28 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="h-16 sm:h-22 md:h-28 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 brightness-110"
               />
             </div>
           ))}
