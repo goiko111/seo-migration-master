@@ -14,5 +14,17 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/login
+Disallow: /wp-content/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-login.php
+Disallow: /feed/
+Disallow: /author/
+Disallow: /category/
+Disallow: /tag/
 
 Sitemap: https://winerim.wine/sitemap.xml
+
+# Block staging/preview domains from indexing
+# (handled via meta robots noindex in SEOHead, but belt-and-suspenders)
+# Host: https://winerim.wine

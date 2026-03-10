@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { CANONICAL_DOMAIN, DEFAULT_OG_IMAGE } from "@/seo/config";
 
 interface FAQ {
   q: string;
@@ -27,8 +28,8 @@ const DynamicSchemaMarkup = ({ id, type, title, description, url, faqs, breadcru
         name: "Winerim",
         applicationCategory: "BusinessApplication",
         description,
-        url: "https://winerim.wine",
-        offers: { "@type": "Offer", url: "https://winerim.wine/precios", priceCurrency: "EUR" },
+        url: CANONICAL_DOMAIN,
+        offers: { "@type": "Offer", url: `${CANONICAL_DOMAIN}/precios`, priceCurrency: "EUR" },
       });
     } else {
       schemas.push({
@@ -36,8 +37,8 @@ const DynamicSchemaMarkup = ({ id, type, title, description, url, faqs, breadcru
         "@type": type,
         headline: title,
         description,
-        author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-        publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine", logo: { "@type": "ImageObject", url: "https://winerim.wine/og-image.png" } },
+        author: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN },
+        publisher: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN, logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE } },
         mainEntityOfPage: url,
         inLanguage: url.includes("/en/") ? "en" : "es",
       });
