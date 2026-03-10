@@ -32,7 +32,7 @@ import logoMarriott from "@/assets/logos/marriott.png";
 import logoWyndham from "@/assets/logos/wyndham.png";
 import logoMyr from "@/assets/logos/myr.webp";
 import logoFourSeasons from "@/assets/logos/fourseasons.png";
-import logoPalladium from "@/assets/logos/palladium.jpeg";
+import logoPalladium from "@/assets/logos/palladium.png";
 import logoEm from "@/assets/logos/em.png";
 
 interface LogoItem {
@@ -165,7 +165,7 @@ const LogoStrip = () => {
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 sm:h-12 md:h-14 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                className="h-8 sm:h-12 md:h-14 w-auto object-contain grayscale invert opacity-80 hover:opacity-100 transition-opacity duration-300"
                 loading="lazy"
                 decoding="async"
                 width={120}
