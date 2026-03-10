@@ -200,6 +200,10 @@ const Admin = () => {
             )}
           </TabsContent>
 
+          <TabsContent value="restaurants">
+            <RestaurantsTab />
+          </TabsContent>
+
           <TabsContent value="pages">
             <PageContentEditor />
           </TabsContent>
