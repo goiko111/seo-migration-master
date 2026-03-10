@@ -13,6 +13,14 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
+import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
+import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
+import tabletPairingImg from "@/assets/winerim-tablet-pairing.png";
+import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
+import mobileListImg from "@/assets/winerim-mobile-list.png";
+import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
+import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
 
 const coreIcons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart, QrCode, Filter, Search, Wine, FileText, Languages, Palette];
 const mgmtIcons = [RefreshCw, Bell, TrendingUp, Globe, Smartphone, Zap];
@@ -240,6 +248,55 @@ const Funcionalidades = () => {
             <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.core_badge}</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.core_title) }} />
           </ScrollReveal>
+
+          {/* Product screenshots showcase */}
+          <ScrollReveal className="mb-16">
+            <div className="grid md:grid-cols-3 gap-6 items-start">
+              <div className="space-y-6">
+                <div className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tabletHeroImg} alt="Carta de vinos digital en tablet" className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Carta interactiva</p>
+                </div>
+                <div className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tabletPairingImg} alt="Maridajes automáticos Winerim" className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Maridajes automáticos</p>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tabletDetailImg} alt="Ficha de vino detallada" className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Ficha del vino</p>
+                </div>
+                <div className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tabletFichaImg} alt="Información visual del vino" className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Información visual</p>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tabletComparatorImg} alt="Comparador de vinos Winerim" className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Comparador de vinos</p>
+                </div>
+                <div className="flex gap-4 justify-center">
+                  <div className="relative group w-1/3">
+                    <img src={mobileListImg} alt="Carta de vinos en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
+                  </div>
+                  <div className="relative group w-1/3">
+                    <img src={mobileDetailImg} alt="Detalle de vino en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
+                  </div>
+                  <div className="relative group w-1/3">
+                    <img src={mobileComparatorImg} alt="Comparador en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {c.core.map((feat, i) => { const Icon = coreIcons[i]; return (
               <ScrollReveal key={i} delay={i * 0.05}>

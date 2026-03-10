@@ -31,7 +31,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
-import mockupImg from "@/assets/winerim-mockup.png";
+import dashboardImg from "@/assets/winerim-dashboard-insights.png";
 
 /* ── Intro problems ── */
 const problems = [
@@ -181,9 +181,9 @@ const SoftwareCartaVinos = () => {
                 <div className="relative">
                   <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.15),transparent_70%)] blur-2xl" />
                   <img
-                    src={mockupImg}
-                    alt="Software carta de vinos digital Winerim en tablet y móvil"
-                    className="relative w-full max-w-lg mx-auto drop-shadow-2xl"
+                    src={dashboardImg}
+                    alt="Dashboard de gestión de carta de vinos Winerim - Insights y analítica"
+                    className="relative w-full max-w-2xl mx-auto drop-shadow-2xl rounded-xl"
                     loading="eager"
                   />
                 </div>
