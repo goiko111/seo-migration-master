@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ArticleSection from "@/components/article/ArticleSection";
 import ArticleTableOfContents from "@/components/article/ArticleTableOfContents";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import ArticleRelatedContent, { type RelatedLink } from "@/components/article/ArticleRelatedContent";
 import { parseMarkdownSections, type ParsedSection } from "@/components/article/parseMarkdownSections";
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
