@@ -819,66 +819,141 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            7. EXPLICABILIDAD
+            7. EXPLICABILIDAD — POR QUÉ ACTUÓ
         ════════════════════════════════════════════════ */}
         <section className="section-padding">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+              <div className="text-center mb-16 md:mb-20">
+                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
                   Transparencia
                 </Badge>
-                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  Siempre sabes{" "}
-                  <span className="text-gradient-wine">por qué</span>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+                  Cada acción tiene una{" "}
+                  <span className="text-gradient-wine">razón visible</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Cada recomendación incluye su justificación. Sin cajas negras.
+                  Winerim no solo actúa. También explica por qué lo ha hecho.
                 </p>
               </div>
             </ScrollReveal>
 
-            <ScrollReveal>
-              <div className="relative p-8 md:p-12 rounded-2xl border border-border bg-card">
-                <div className="absolute top-0 left-8 md:left-12 w-px h-full bg-gradient-to-b from-wine/30 via-wine/10 to-transparent" />
+            {/* 3 Log-style explainability cards */}
+            <div className="space-y-5">
+              {[
+                {
+                  module: "FocusRIM™",
+                  moduleColor: "text-blue-400",
+                  moduleBg: "bg-blue-500/10",
+                  moduleBorder: "border-blue-500/20",
+                  accentBar: "bg-blue-500/60",
+                  timestamp: "Hoy · 13:42 · Servicio de mediodía",
+                  reasons: [
+                    "Ocupación alta detectada (87%)",
+                    "Tiempo de decisión elevado (+40% vs media)",
+                    "Varias referencias rentables con stock suficiente",
+                  ],
+                  actions: [
+                    "Simplificación de opciones visibles",
+                    "Subida de primeras posiciones con mayor margen",
+                    "Menor visibilidad de copas con bajo ROI",
+                  ],
+                },
+                {
+                  module: "StockRIM™",
+                  moduleColor: "text-amber-400",
+                  moduleBg: "bg-amber-500/10",
+                  moduleBorder: "border-amber-500/20",
+                  accentBar: "bg-amber-500/60",
+                  timestamp: "Hoy · 09:15 · Revisión de inventario",
+                  reasons: [
+                    "Exceso de stock en 4 referencias (>30 días sin movimiento)",
+                    "Rotación por debajo del umbral esperado en tintos jóvenes",
+                  ],
+                  actions: [
+                    "Entrada en sección Novedades",
+                    "Visibilidad adicional en búsquedas por tipo",
+                    "Activación de estrategia por copa",
+                  ],
+                },
+                {
+                  module: "ClimateRIM™",
+                  moduleColor: "text-cyan-400",
+                  moduleBg: "bg-cyan-500/10",
+                  moduleBorder: "border-cyan-500/20",
+                  accentBar: "bg-cyan-500/60",
+                  timestamp: "Hoy · 08:00 · Previsión meteorológica",
+                  reasons: [
+                    "Aumento de temperatura previsto (+8 °C vs ayer)",
+                    "Mayor afinidad de estilos frescos con el momento",
+                  ],
+                  actions: [
+                    "Subida de blancos, rosados y espumosos",
+                    "Refuerzo de recomendaciones estacionales",
+                  ],
+                },
+              ].map((log, i) => (
+                <ScrollReveal key={log.module}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className={`relative rounded-2xl border ${log.moduleBorder} bg-card/60 backdrop-blur-sm overflow-hidden`}
+                  >
+                    {/* Left accent bar */}
+                    <div className={`absolute left-0 top-0 bottom-0 w-1 ${log.accentBar}`} />
 
-                <div className="space-y-10 pl-8">
-                  {[
-                    {
-                      icon: AlertTriangle,
-                      title: "Detección",
-                      text: "El Albariño Pazo Señorans tiene un margen del 48%, un 22% por debajo de la media de blancos premium de tu carta.",
-                    },
-                    {
-                      icon: BarChart3,
-                      title: "Análisis",
-                      text: "Su velocidad de venta (3,2 copas/semana) indica elasticidad baja: el comensal lo elige por calidad, no por precio.",
-                    },
-                    {
-                      icon: Lightbulb,
-                      title: "Recomendación",
-                      text: "Subir de 38€ a 44€ (+15,8%) mantendría la demanda estimada y generaría +840€/mes en margen adicional.",
-                    },
-                    {
-                      icon: CheckCircle,
-                      title: "Confianza",
-                      text: "Basado en 12 semanas de datos de venta, benchmarking de 340 restaurantes similares y análisis de elasticidad-precio.",
-                    },
-                  ].map((step, i) => (
-                    <div key={step.title} className="relative flex gap-5">
-                      <div className="absolute -left-8 top-1 w-3 h-3 rounded-full bg-wine/60 border-2 border-background" />
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <step.icon size={16} className="text-wine/70" />
-                          <span className="text-xs uppercase tracking-widest text-wine/70 font-semibold">{step.title}</span>
+                    <div className="p-6 md:p-8 pl-7 md:pl-10">
+                      {/* Header */}
+                      <div className="flex flex-wrap items-center gap-3 mb-6">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md ${log.moduleBg} font-mono text-xs font-bold ${log.moduleColor} tracking-wide`}>
+                          <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+                          {log.module}
+                        </span>
+                        <span className="text-[11px] text-muted-foreground/50 font-mono tracking-wide">
+                          {log.timestamp}
+                        </span>
+                      </div>
+
+                      {/* Two columns: Reasons + Actions */}
+                      <div className="grid md:grid-cols-2 gap-6 md:gap-10">
+                        {/* Reasons */}
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50 font-semibold mb-3">
+                            Detectado
+                          </p>
+                          <ul className="space-y-2.5">
+                            {log.reasons.map((r) => (
+                              <li key={r} className="flex items-start gap-2.5">
+                                <AlertTriangle size={13} className="mt-0.5 text-muted-foreground/40 shrink-0" />
+                                <span className="text-sm text-muted-foreground leading-relaxed">{r}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        <p className="text-foreground/90 leading-relaxed">{step.text}</p>
+
+                        {/* Actions */}
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50 font-semibold mb-3">
+                            Acción aplicada
+                          </p>
+                          <ul className="space-y-2.5">
+                            {log.actions.map((a) => (
+                              <li key={a} className="flex items-start gap-2.5">
+                                <CheckCircle size={13} className={`mt-0.5 ${log.moduleColor} shrink-0`} />
+                                <span className="text-sm text-foreground/90 font-medium leading-relaxed">{a}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
         </section>
 
