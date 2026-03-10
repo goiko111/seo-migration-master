@@ -137,6 +137,42 @@ export type Database = {
         }
         Relationships: []
       }
+      restaurants: {
+        Row: {
+          category: string | null
+          city: string | null
+          created_at: string
+          display_order: number | null
+          featured: boolean | null
+          id: string
+          logo_url: string | null
+          name: string
+          visible: boolean | null
+        }
+        Insert: {
+          category?: string | null
+          city?: string | null
+          created_at?: string
+          display_order?: number | null
+          featured?: boolean | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          visible?: boolean | null
+        }
+        Update: {
+          category?: string | null
+          city?: string | null
+          created_at?: string
+          display_order?: number | null
+          featured?: boolean | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          visible?: boolean | null
+        }
+        Relationships: []
+      }
       seo_pages: {
         Row: {
           body: Json

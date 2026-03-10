@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Quote } from "lucide-react";
@@ -8,26 +9,31 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
-const featuredClients = [
+interface Restaurant {
+  id: string;
+  name: string;
+  logo_url: string | null;
+  city: string | null;
+  category: string | null;
+  featured: boolean;
+}
+
+const featuredTestimonials = [
   { name: "Miramar", location: "Llançà, Girona", type: "Alta Gastronomía", quote: { es: "Winerim nos ha permitido digitalizar nuestra bodega de más de 600 referencias.", en: "Winerim has allowed us to digitize our cellar of over 600 references.", it: "Winerim ci ha permesso di digitalizzare la nostra cantina di oltre 600 referenze.", fr: "Winerim nous a permis de digitaliser notre cave de plus de 600 références." } },
   { name: "Zortziko", location: "Bilbao", type: "Restaurante Gastronómico", quote: { es: "La gestión de nuestra carta de vinos nunca había sido tan ágil.", en: "Managing our wine list has never been so agile.", it: "La gestione della nostra carta dei vini non è mai stata così agile.", fr: "La gestion de notre carte n'a jamais été aussi agile." } },
   { name: "Cañabota", location: "Sevilla", type: "Gastrobar", quote: { es: "Nuestros clientes interactúan con el vino de una forma completamente nueva.", en: "Our customers interact with wine in a completely new way.", it: "I nostri clienti interagiscono con il vino in modo completamente nuovo.", fr: "Nos clients interagissent avec le vin d'une manière totalement nouvelle." } },
   { name: "Roig Robí", location: "Barcelona", type: "Cocina Catalana", quote: { es: "La IA de Winerim recomienda vinos que realmente encajan con cada plato.", en: "Winerim's AI recommends wines that truly match each dish.", it: "L'IA di Winerim consiglia vini che si abbinano davvero a ogni piatto.", fr: "L'IA de Winerim recommande des vins qui correspondent vraiment à chaque plat." } },
 ];
 
-const allClients = [
+// Keep as fallback when DB is empty
+const fallbackClients = [
   "Miramar", "Zortziko", "Tres", "Santé", "Sacla", "La Parra",
   "Ment", "La Carbonería", "Cocina del Sol", "Cañabota", "Alejandra",
   "Bidea", "Tribeca", "Taverna", "Serrano", "Roig Robí",
   "Ríos do Freixo", "Remigio", "La Fábrica", "Jauregibarria",
   "El Motel", "Dámaso", "Casamar", "Bocaatti", "Alameda",
-  "Antonio Zahara", "La Vecchia Griglia", "Vinoteca Jaleo",
-  "Travieso Bar", "Bodega del Marqués", "Casa Vicente",
-  "El Rincón del Vino", "La Mesa Redonda", "Taberna del Puerto",
-  "Restaurante Mirador", "Brasserie du Vin", "Ostería del Mare",
-  "Viña y Mesa", "La Barrica", "El Sommelier", "Terraza del Lago",
-  "Mesón del Vino", "Casa de las Cepas", "El Lagar", "La Cepa de Oro",
 ];
 
 const i18n: Record<string, {
@@ -72,6 +78,20 @@ const emToGradient = (html: string) => html.replace(/<em>/g, '<span class="text-
 const Clientes = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = i18n[lang] || i18n.es;
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("restaurants")
+      .select("id, name, logo_url, city, category, featured")
+      .eq("visible", true)
+      .order("display_order", { ascending: true })
+      .then(({ data }) => {
+        if (data && data.length > 0) setRestaurants(data as Restaurant[]);
+      });
+  }, []);
+
+  const hasLogos = restaurants.length > 0;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -109,7 +129,7 @@ const Clientes = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.featured_title) }} />
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6">
-            {featuredClients.map((client, i) => (
+            {featuredTestimonials.map((client, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <div className="bg-gradient-card rounded-xl border border-border p-8 h-full flex flex-col">
                   <div className="flex items-start gap-3 mb-4">
@@ -143,13 +163,39 @@ const Clientes = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4" dangerouslySetInnerHTML={{ __html: emToGradient(c.all_title) }} />
             <p className="text-muted-foreground max-w-2xl mx-auto">{c.all_sub}</p>
           </ScrollReveal>
-          <div className="flex flex-wrap justify-center gap-3">
-            {allClients.map((name, i) => (
-              <ScrollReveal key={i} delay={Math.min(i * 0.02, 0.5)}>
-                <div className="px-5 py-3 rounded-lg border border-border bg-card text-muted-foreground text-sm font-medium tracking-wider whitespace-nowrap hover:border-wine/30 hover:text-foreground transition-all duration-300">{name}</div>
-              </ScrollReveal>
-            ))}
-          </div>
+
+          {hasLogos ? (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+              {restaurants.map((r, i) => (
+                <ScrollReveal key={r.id} delay={Math.min(i * 0.02, 0.6)}>
+                  <div className="group bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-wine/30 transition-all duration-300 aspect-square">
+                    {r.logo_url ? (
+                      <img
+                        src={r.logo_url}
+                        alt={r.name}
+                        className="w-full h-16 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center">
+                        <span className="font-heading text-lg font-bold text-wine">{r.name.charAt(0)}</span>
+                      </div>
+                    )}
+                    <p className="text-[11px] text-muted-foreground text-center font-medium leading-tight mt-1">{r.name}</p>
+                    {r.city && <p className="text-[10px] text-muted-foreground/60 text-center">{r.city}</p>}
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-wrap justify-center gap-3">
+              {fallbackClients.map((name, i) => (
+                <ScrollReveal key={i} delay={Math.min(i * 0.02, 0.5)}>
+                  <div className="px-5 py-3 rounded-lg border border-border bg-card text-muted-foreground text-sm font-medium tracking-wider whitespace-nowrap hover:border-wine/30 hover:text-foreground transition-all duration-300">{name}</div>
+                </ScrollReveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

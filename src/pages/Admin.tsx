@@ -12,6 +12,7 @@ import ArticleList from "@/components/admin/ArticleList";
 import LeadsTab from "@/components/admin/LeadsTab";
 import PageContentEditor from "@/components/admin/PageContentEditor";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
+import RestaurantsTab from "@/components/admin/RestaurantsTab";
 
 interface Article {
   id: string;
@@ -162,6 +163,7 @@ const Admin = () => {
           <TabsList className="mb-8">
             <TabsTrigger value="analytics">Dashboard</TabsTrigger>
             <TabsTrigger value="articles">Artículos</TabsTrigger>
+            <TabsTrigger value="restaurants">Restaurantes</TabsTrigger>
             <TabsTrigger value="pages">Textos de páginas</TabsTrigger>
             <TabsTrigger value="leads">Leads ({leads.length})</TabsTrigger>
           </TabsList>
@@ -196,6 +198,10 @@ const Admin = () => {
                 onTogglePublish={togglePublish}
               />
             )}
+          </TabsContent>
+
+          <TabsContent value="restaurants">
+            <RestaurantsTab />
           </TabsContent>
 
           <TabsContent value="pages">
