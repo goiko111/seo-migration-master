@@ -101,9 +101,11 @@ const GuiaVinoPorCopa = () => {
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_leads").insert({
-        name: data.name,
-        email: data.email,
         restaurant: data.restaurant,
+        name: data.name,
+        position: data.position,
+        phone: data.phone,
+        email: data.email,
         form_type: "guia-vino-por-copa",
       });
       if (error) throw error;
