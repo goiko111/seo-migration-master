@@ -20,9 +20,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
+  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
+  position: z.string().trim().min(1, "Selecciona tu cargo"),
+  phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
-  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(100),
 });
 
 type FormData = z.infer<typeof formSchema>;
