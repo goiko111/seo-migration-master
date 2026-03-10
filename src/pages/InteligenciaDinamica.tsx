@@ -48,7 +48,6 @@ const InteligenciaDinamica = () => {
       <SEOHead
         title="Inteligencia Dinámica | Winerim – IA táctica para tu carta de vinos"
         description="La capa de inteligencia artificial que analiza, predice y optimiza tu carta de vinos en tiempo real. Vende más, con menos esfuerzo."
-        canonical="/producto/inteligencia-dinamica"
       />
       <Navbar />
       <main className="min-h-screen bg-background pt-24 md:pt-32">
