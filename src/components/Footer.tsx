@@ -72,11 +72,11 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: t.nav_wine_analyzer, href: "/wine-list-analyzer" },
-                { label: t.nav_margin_calc, href: "/calculadora-margen-vino" },
-                { label: t.nav_glass_price, href: "/herramientas/calculadora-precio-vino-por-copa" },
-                { label: t.nav_pairing_generator, href: "/wine-pairing-generator" },
-                { label: t.nav_pricing_tool, href: "/wine-pricing-tool" },
+                { label: t.nav_wine_analyzer, href: localePath("/analisis-carta") },
+                { label: t.nav_margin_calc, href: localePath("/calculadora-margen-vino") },
+                { label: t.nav_glass_price, href: localePath("/herramientas/calculadora-precio-vino-por-copa") },
+                { label: t.nav_pairing_generator, href: localePath("/herramientas") },
+                { label: t.nav_pricing_tool, href: localePath("/herramientas") },
                 { label: t.nav_see_all, href: localePath("/herramientas") },
               ].map((item) => (
                 <li key={item.label}>
