@@ -27,6 +27,7 @@ export type Database = {
           image_url: string | null
           published: boolean
           published_at: string | null
+          related_links: Json | null
           slug: string
           title: string
           updated_at: string
@@ -43,6 +44,7 @@ export type Database = {
           image_url?: string | null
           published?: boolean
           published_at?: string | null
+          related_links?: Json | null
           slug: string
           title: string
           updated_at?: string
@@ -59,6 +61,7 @@ export type Database = {
           image_url?: string | null
           published?: boolean
           published_at?: string | null
+          related_links?: Json | null
           slug?: string
           title?: string
           updated_at?: string
