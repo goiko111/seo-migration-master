@@ -587,7 +587,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "En développement",
     changelog_badge: "Changelog", changelog_title: "Dernières <em>nouveautés</em>", changelog_sub: "Winerim évolue constamment.",
-    roadmap_badge: "Roadmap", roadmap_title: "Ce qui arrive sur <em>Winerim</em>", roadmap_sub: "Notre plan de développement.",
+    roadmap_badge: "Capacités en expansion", roadmap_title: "Prochaines <em>capacités</em>", roadmap_sub: "Au-delà de son noyau de gestion et d'intelligence, Winerim continue d'enrichir l'expérience du client et de l'équipe de salle avec de nouvelles capacités.",
     cta_badge: "Commencez aujourd'hui", cta_title: "Découvrez Winerim en <em>action</em>", cta_sub: "Essayez toutes les fonctionnalités gratuitement pendant 14 jours.", cta_btn: "Essai Gratuit",
     changelog: [
       { date: "Fév 2026", title: "Filtres sensoriels v2", desc: "Nouvelle interface de filtrage.", tag: "new" },
@@ -598,9 +598,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Intégration Revo", desc: "Synchronisation avec Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Demander le sommelier depuis la carte", "Partager sélection via QR/lien", "Recommandations par historique"] },
-      { quarter: "Q3 2026", items: ["Mode éducation avec tips vin", "FocusRIM – modules IA pour références rentables", "App native"] },
-      { quarter: "Q4 2026", items: ["IA prédictive tendances", "Carte en réalité augmentée", "API publique v2"] },
+      { quarter: "Expérience client", items: ["Demander le sommelier depuis la carte", "Partager sélection via QR/lien", "Recommandations par historique"] },
+      { quarter: "Formation et salle", items: ["Mode éducation avec tips vin", "Guides de service pour l'équipe", "App native"] },
+      { quarter: "Technologie avancée", items: ["IA prédictive tendances", "Carte en réalité augmentée", "API publique v2"] },
     ],
     tag_labels: { new: "Nouveau", improvement: "Amélioration", fix: "Correction" },
   },
