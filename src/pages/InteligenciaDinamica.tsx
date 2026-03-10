@@ -514,28 +514,33 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            4. OBJETIVOS QUE PUEDE PERSEGUIR EL RESTAURANTE
+            4. OBJETIVOS — HIGH IMPACT
         ════════════════════════════════════════════════ */}
         <section className="section-padding relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          {/* Ambient background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-wine/6 rounded-full blur-[140px]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+          </div>
+
           <div className="relative max-w-6xl mx-auto">
             <ScrollReveal>
-              <div className="text-center mb-16">
-                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+              <div className="text-center mb-16 md:mb-20">
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
                   Objetivos
                 </Badge>
-                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  Tú defines el objetivo.{" "}
-                  <span className="text-gradient-wine">El sistema ejecuta.</span>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 leading-tight">
+                  Elige el objetivo.{" "}
+                  <span className="text-gradient-wine">Winerim activa la estrategia.</span>
                 </h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Configura qué quieres conseguir y la inteligencia dinámica alinea cada recomendación con tu estrategia.
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                  Cada objetivo combina automáticamente módulos RIM™, perfiles de rotación y zonas de la carta para mover el negocio en la dirección correcta.
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {objectives.map((obj, i) => (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {objectiveCards.map((obj, i) => (
                 <ScrollReveal key={obj.title}>
                   <motion.div
                     initial="hidden"
@@ -543,17 +548,44 @@ const InteligenciaDinamica = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className="group p-7 rounded-xl border border-border bg-card/50 hover:bg-card hover:border-wine/20 transition-all duration-300"
+                    className={`group relative h-full p-7 md:p-8 rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${obj.borderHover} transition-all duration-500 hover:shadow-lg hover:shadow-black/10`}
                   >
-                    <div className="w-10 h-10 rounded-lg bg-wine/8 flex items-center justify-center mb-4 group-hover:bg-wine/15 transition-colors">
-                      <obj.icon className="w-5 h-5 text-wine" />
+                    {/* Hover gradient overlay */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${obj.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                    <div className="relative flex flex-col h-full">
+                      {/* Icon */}
+                      <div className={`w-12 h-12 rounded-xl ${obj.iconBg} flex items-center justify-center mb-5 transition-colors duration-300`}>
+                        <obj.icon className={`w-6 h-6 ${obj.iconColor}`} />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-3">
+                        {obj.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+                        {obj.desc}
+                      </p>
+
+                      {/* Activated modules */}
+                      <div className="pt-4 border-t border-border/60">
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/50 font-semibold mb-2.5">
+                          Activa
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {obj.modules.map((mod) => (
+                            <span
+                              key={mod}
+                              className="inline-flex items-center px-2.5 py-1 rounded-md bg-wine/8 border border-wine/15 text-[11px] font-mono font-medium text-wine/80 tracking-wide"
+                            >
+                              {mod}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
-                      {obj.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {obj.desc}
-                    </p>
                   </motion.div>
                 </ScrollReveal>
               ))}
