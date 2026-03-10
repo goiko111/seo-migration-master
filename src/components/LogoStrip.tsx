@@ -2,17 +2,41 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 
-const defaultRestaurants = [
-  "Miramar", "Zortziko", "Tres", "Santé", "Sacla", "La Parra",
-  "Ment", "La Carbonería", "Cocina del Sol", "Cañabota", "Alejandra",
-  "Bidea", "Tribeca", "Taverna", "Serrano", "Roig Robí",
-  "Ríos do Freixo", "Remigio", "La Fábrica", "Jauregibarria",
-  "El Motel", "Dámaso", "Casamar", "Bocaatti",
+import logoMiramar from "@/assets/logos/miramar.png";
+import logoZortziko from "@/assets/logos/zortziko.png";
+import logoTres from "@/assets/logos/tres.png";
+import logoSante from "@/assets/logos/sante.png";
+import logoSacla from "@/assets/logos/sacla.png";
+import logoLaParra from "@/assets/logos/laparra.png";
+import logoLaCarboneria from "@/assets/logos/lacarboneria.png";
+import logoCocinaDelSol from "@/assets/logos/cocinadelsol.png";
+import logoCanabota from "@/assets/logos/canabota.png";
+import logoAlejandra from "@/assets/logos/alejandra.png";
+
+interface LogoItem {
+  name: string;
+  logo?: string;
+}
+
+const logoItems: LogoItem[] = [
+  { name: "Miramar", logo: logoMiramar },
+  { name: "Zortziko", logo: logoZortziko },
+  { name: "Tres", logo: logoTres },
+  { name: "Santé", logo: logoSante },
+  { name: "Sa Clastra", logo: logoSacla },
+  { name: "La Parra", logo: logoLaParra },
+  { name: "La Carbonería", logo: logoLaCarboneria },
+  { name: "Cocina del Sol", logo: logoCocinaDelSol },
+  { name: "Cañabota", logo: logoCanabota },
+  { name: "Alejandra", logo: logoAlejandra },
+  { name: "Meliá Hotels" },
+  { name: "Hyatt" },
+  { name: "Marriott" },
 ];
 
 const LogoStrip = () => {
-  const { get, getJson } = useSharedPageContent();
-  const restaurants = getJson<string[]>("logostrip", "restaurants", defaultRestaurants);
+  const { get } = useSharedPageContent();
+  const doubled = [...logoItems, ...logoItems];
 
   return (
     <section className="py-12 sm:py-16 md:py-20 overflow-hidden">
@@ -35,13 +59,23 @@ const LogoStrip = () => {
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        <div className="flex animate-scroll-left gap-4 sm:gap-6 md:gap-8 items-center">
-          {[...restaurants, ...restaurants].map((name, i) => (
+        <div className="flex animate-scroll-left gap-6 sm:gap-10 items-center">
+          {doubled.map((item, i) => (
             <div
-              key={`${name}-${i}`}
-              className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded border border-border bg-card text-muted-foreground text-xs sm:text-sm font-medium tracking-wider whitespace-nowrap hover:border-wine/30 hover:text-foreground transition-all duration-300"
+              key={`${item.name}-${i}`}
+              className="flex-shrink-0 flex items-center justify-center h-16 sm:h-20 px-6 sm:px-8 rounded-lg border border-border/50 bg-card/50 hover:border-wine/30 transition-all duration-300"
             >
-              {name}
+              {item.logo ? (
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="h-10 sm:h-14 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                />
+              ) : (
+                <span className="text-muted-foreground text-sm sm:text-base font-heading font-semibold tracking-wider whitespace-nowrap hover:text-foreground transition-colors duration-300">
+                  {item.name}
+                </span>
+              )}
             </div>
           ))}
         </div>
