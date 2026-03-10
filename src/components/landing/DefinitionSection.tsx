@@ -129,7 +129,7 @@ const comparisonData = {
 const notForData = {
   es: {
     idealFor: [
-      "Restaurantes con 15 o más referencias de vino en carta",
+      "Restaurantes con 50 o más referencias de vino en carta",
       "Wine bars y vinotecas con alta rotación",
       "Hoteles con servicio de vino en restaurante, room service y eventos",
       "Grupos de restauración que necesitan gestión centralizada",
@@ -137,7 +137,7 @@ const notForData = {
     ],
     notFor: [
       "Bares sin carta de vinos estructurada",
-      "Establecimientos con menos de 10 referencias de vino",
+      "Establecimientos con menos de 50 referencias de vino",
       "Negocios que no sirven vino (cervecerías, coctelerías puras)",
       "Restaurantes que no buscan optimizar sus ventas de vino",
     ],
@@ -146,7 +146,7 @@ const notForData = {
   },
   en: {
     idealFor: [
-      "Restaurants with 15+ wine references on their list",
+      "Restaurants with 50+ wine references on their list",
       "Wine bars with high rotation",
       "Hotels with wine service across multiple outlets",
       "Restaurant groups needing centralized management",
@@ -154,7 +154,7 @@ const notForData = {
     ],
     notFor: [
       "Bars without a structured wine list",
-      "Venues with fewer than 10 wine references",
+      "Venues with fewer than 50 wine references",
       "Businesses that don't serve wine (brewpubs, cocktail bars)",
       "Restaurants not interested in optimizing wine sales",
     ],
@@ -163,7 +163,7 @@ const notForData = {
   },
   it: {
     idealFor: [
-      "Ristoranti con 15+ referenze di vino in carta",
+      "Ristoranti con 50+ referenze di vino in carta",
       "Wine bar con alta rotazione",
       "Hotel con servizio vini in più punti vendita",
       "Gruppi di ristorazione con gestione centralizzata",
@@ -171,7 +171,7 @@ const notForData = {
     ],
     notFor: [
       "Bar senza carta dei vini strutturata",
-      "Locali con meno di 10 referenze",
+      "Locali con meno di 50 referenze",
       "Attività che non servono vino",
       "Ristoranti non interessati a ottimizzare le vendite",
     ],
@@ -180,7 +180,7 @@ const notForData = {
   },
   fr: {
     idealFor: [
-      "Restaurants avec 15+ références de vin",
+      "Restaurants avec 50+ références de vin",
       "Bars à vin avec rotation élevée",
       "Hôtels avec service de vin multi-points",
       "Groupes de restauration avec gestion centralisée",
@@ -188,12 +188,83 @@ const notForData = {
     ],
     notFor: [
       "Bars sans carte des vins structurée",
-      "Établissements avec moins de 10 références",
+      "Établissements avec moins de 50 références",
       "Commerces ne servant pas de vin",
       "Restaurants non intéressés par l'optimisation",
     ],
     titleIdeal: "Winerim est idéal pour",
     titleNot: "Winerim n'est pas pour",
+  },
+};
+
+const competitorData = {
+  es: {
+    title: "Winerim vs. otras plataformas de carta digital de vinos",
+    subtitle: "Comparativa funcional con las soluciones de gestión de carta de vinos más habituales del mercado.",
+    columns: ["Cartas digitales genéricas", "Plataformas de vino B2C", "Software sommelier básico", "Winerim"],
+    rows: [
+      { feature: "Recomendaciones IA personalizadas al comensal", options: [false, false, "partial" as const, true] },
+      { feature: "Maridajes automáticos con cada plato", options: [false, false, false, true] },
+      { feature: "Analítica de ventas y rotación en tiempo real", options: [false, false, "partial" as const, true] },
+      { feature: "Optimización de precios y márgenes", options: [false, false, false, true] },
+      { feature: "Comparador de vinos para el comensal", options: [false, "partial" as const, false, true] },
+      { feature: "Gestión centralizada multi-local", options: ["partial" as const, false, false, true] },
+      { feature: "Alertas de stock y obsolescencia", options: [false, false, false, true] },
+      { feature: "Experiencia visual e interactiva en móvil", options: ["partial" as const, true, false, true] },
+      { feature: "Especializado 100% en hostelería", options: [false, false, "partial" as const, true] },
+      { feature: "Sin descarga de app para el cliente", options: ["partial" as const, false, "partial" as const, true] },
+    ],
+  },
+  en: {
+    title: "Winerim vs. other digital wine list platforms",
+    subtitle: "Functional comparison with the most common wine list management solutions on the market.",
+    columns: ["Generic digital menus", "B2C wine platforms", "Basic sommelier software", "Winerim"],
+    rows: [
+      { feature: "AI-powered guest recommendations", options: [false, false, "partial" as const, true] },
+      { feature: "Automatic food-wine pairings", options: [false, false, false, true] },
+      { feature: "Real-time sales & rotation analytics", options: [false, false, "partial" as const, true] },
+      { feature: "Price & margin optimization", options: [false, false, false, true] },
+      { feature: "Wine comparator for guests", options: [false, "partial" as const, false, true] },
+      { feature: "Centralized multi-venue management", options: ["partial" as const, false, false, true] },
+      { feature: "Stock & obsolescence alerts", options: [false, false, false, true] },
+      { feature: "Visual & interactive mobile experience", options: ["partial" as const, true, false, true] },
+      { feature: "100% hospitality-focused", options: [false, false, "partial" as const, true] },
+      { feature: "No app download for guests", options: ["partial" as const, false, "partial" as const, true] },
+    ],
+  },
+  it: {
+    title: "Winerim vs. altre piattaforme di carta dei vini digitale",
+    subtitle: "Confronto funzionale con le soluzioni di gestione più comuni sul mercato.",
+    columns: ["Menu digitali generici", "Piattaforme vino B2C", "Software sommelier base", "Winerim"],
+    rows: [
+      { feature: "Raccomandazioni IA personalizzate", options: [false, false, "partial" as const, true] },
+      { feature: "Abbinamenti automatici per ogni piatto", options: [false, false, false, true] },
+      { feature: "Analisi vendite e rotazione in tempo reale", options: [false, false, "partial" as const, true] },
+      { feature: "Ottimizzazione prezzi e margini", options: [false, false, false, true] },
+      { feature: "Comparatore vini per ospiti", options: [false, "partial" as const, false, true] },
+      { feature: "Gestione centralizzata multi-locale", options: ["partial" as const, false, false, true] },
+      { feature: "Alert stock e obsolescenza", options: [false, false, false, true] },
+      { feature: "Esperienza mobile visiva e interattiva", options: ["partial" as const, true, false, true] },
+      { feature: "100% focalizzato sulla ristorazione", options: [false, false, "partial" as const, true] },
+      { feature: "Nessuna app da scaricare per il cliente", options: ["partial" as const, false, "partial" as const, true] },
+    ],
+  },
+  fr: {
+    title: "Winerim vs. autres plateformes de carte des vins digitale",
+    subtitle: "Comparaison fonctionnelle avec les solutions de gestion les plus courantes du marché.",
+    columns: ["Menus digitaux génériques", "Plateformes vin B2C", "Logiciel sommelier basique", "Winerim"],
+    rows: [
+      { feature: "Recommandations IA personnalisées", options: [false, false, "partial" as const, true] },
+      { feature: "Accords mets-vins automatiques", options: [false, false, false, true] },
+      { feature: "Analytique ventes & rotation en temps réel", options: [false, false, "partial" as const, true] },
+      { feature: "Optimisation prix et marges", options: [false, false, false, true] },
+      { feature: "Comparateur de vins pour convives", options: [false, "partial" as const, false, true] },
+      { feature: "Gestion centralisée multi-sites", options: ["partial" as const, false, false, true] },
+      { feature: "Alertes stock et obsolescence", options: [false, false, false, true] },
+      { feature: "Expérience mobile visuelle interactive", options: ["partial" as const, true, false, true] },
+      { feature: "100% dédié à la restauration", options: [false, false, "partial" as const, true] },
+      { feature: "Sans téléchargement d'app", options: ["partial" as const, false, "partial" as const, true] },
+    ],
   },
 };
 
@@ -251,6 +322,7 @@ const DefinitionSection = () => {
   const nf = notForData[lang] || notForData.es;
   const faqs = homeFaqs[lang] || homeFaqs.es;
   const faqTitle = faqTitles[lang] || faqTitles.es;
+  const compet = competitorData[lang] || competitorData.es;
 
   return (
     <>
@@ -267,7 +339,7 @@ const DefinitionSection = () => {
         </div>
       </section>
 
-      {/* Comparison table */}
+      {/* Comparison table: Winerim vs formats */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ComparisonTable
@@ -288,6 +360,19 @@ const DefinitionSection = () => {
             notFor={nf.notFor}
             titleIdeal={nf.titleIdeal}
             titleNot={nf.titleNot}
+          />
+        </div>
+      </section>
+
+      {/* Competitor comparison table */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto">
+          <ComparisonTable
+            title={compet.title}
+            subtitle={compet.subtitle}
+            columns={compet.columns}
+            rows={compet.rows}
+            highlightColumn={3}
           />
         </div>
       </section>
