@@ -1,3 +1,4 @@
+// Hero section with tablet showcase
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
