@@ -181,9 +181,9 @@ const SoftwareCartaVinos = () => {
                 <div className="relative">
                   <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.15),transparent_70%)] blur-2xl" />
                   <img
-                    src={mockupImg}
-                    alt="Software carta de vinos digital Winerim en tablet y móvil"
-                    className="relative w-full max-w-lg mx-auto drop-shadow-2xl"
+                    src={dashboardImg}
+                    alt="Dashboard de gestión de carta de vinos Winerim - Insights y analítica"
+                    className="relative w-full max-w-2xl mx-auto drop-shadow-2xl rounded-xl"
                     loading="eager"
                   />
                 </div>
