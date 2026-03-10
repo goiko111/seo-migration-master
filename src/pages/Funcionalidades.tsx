@@ -249,8 +249,20 @@ const Funcionalidades = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.core_title) }} />
           </ScrollReveal>
 
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {c.core.map((feat, i) => { const Icon = coreIcons[i]; return (
+              <ScrollReveal key={i} delay={i * 0.05}>
+                <div className="group bg-gradient-card rounded-xl border border-border p-7 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full">
+                  <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300"><Icon size={24} className="text-wine" /></div>
+                  <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+                </div>
+              </ScrollReveal>
+            ); })}
+          </div>
+
           {/* Tablet screenshots */}
-          <ScrollReveal className="mb-10">
+          <ScrollReveal className="mt-16 mb-10">
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 { img: tabletHeroImg, alt: "Carta de vinos digital en tablet", label: "Carta interactiva" },
@@ -281,16 +293,16 @@ const Funcionalidades = () => {
             </div>
           </ScrollReveal>
 
-          {/* Mobile screenshots – phone-sized with labels */}
-          <ScrollReveal className="mb-16">
-            <p className="text-center text-sm text-muted-foreground mb-6 font-medium tracking-wide uppercase">También en móvil</p>
-            <div className="flex justify-center gap-8 md:gap-12">
+          {/* Mobile screenshots */}
+          <ScrollReveal>
+            <p className="text-center text-sm text-muted-foreground mb-8 font-medium tracking-wide uppercase">También en móvil</p>
+            <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
               {[
                 { img: mobileListImg, alt: "Carta de vinos en móvil", label: "Carta" },
                 { img: mobileDetailImg, alt: "Detalle de vino en móvil", label: "Ficha del vino" },
                 { img: mobileComparatorImg, alt: "Comparador en móvil", label: "Comparador" },
               ].map((item, i) => (
-                <div key={i} className="relative group w-40 md:w-48">
+                <div key={i} className="relative group">
                   <div className="absolute -inset-3 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.12),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative rounded-2xl border-2 border-border/60 overflow-hidden shadow-xl bg-background/50 group-hover:border-wine/30 transition-colors">
                     <img src={item.img} alt={item.alt} className="w-full" />
@@ -300,18 +312,6 @@ const Funcionalidades = () => {
               ))}
             </div>
           </ScrollReveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {c.core.map((feat, i) => { const Icon = coreIcons[i]; return (
-              <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="group bg-gradient-card rounded-xl border border-border p-7 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300"><Icon size={24} className="text-wine" /></div>
-                  <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
-                </div>
-              </ScrollReveal>
-            ); })}
-          </div>
         </div>
       </section>
 
