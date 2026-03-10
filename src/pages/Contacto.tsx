@@ -4,6 +4,7 @@ import { Mail, Phone, MessageCircle } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ContactFormFields from "@/components/ContactFormFields";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
