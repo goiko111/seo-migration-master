@@ -28,6 +28,7 @@ const Navbar = () => {
         { label: t.nav_case_studies, href: localePath("/casos-exito") },
         { label: t.nav_clients, href: localePath("/clientes") },
         { label: t.nav_solutions_groups, href: localePath("/soluciones/grupos-restauracion") },
+        { label: t.footer_common_problems, href: localePath("/problemas") },
       ],
     },
     {
