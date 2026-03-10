@@ -18,9 +18,9 @@ const definitionData = {
     summaryLabel: "¿Qué es Winerim?",
   },
   en: {
-    definition: "Winerim is a wine list management software for restaurants that uses artificial intelligence to recommend wines, generate automatic pairings, analyze sales and optimize pricing. It works as an interactive digital wine list accessible via QR from the guest's phone.",
+    definition: "Winerim is a smart wine list for restaurants that uses artificial intelligence to recommend wines, generate automatic pairings, analyze sales and optimize pricing. Accessible via QR from the guest's phone, tablet or native app.",
     bullets: [
-      "Interactive digital wine list with QR access",
+      "Smart interactive wine list with QR access",
       "AI-powered personalized wine recommendations",
       "Automatic food and wine pairings for every dish",
       "Real-time wine sales analytics",
