@@ -24,6 +24,8 @@ const formSchema = z.object({
   position: z.string().trim().min(1, "Selecciona tu cargo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
+  city: z.string().trim().min(1, "La ciudad es obligatoria").max(100),
+  references_count: z.string().trim().min(1, "Selecciona el número de referencias"),
 });
 
 type FormData = z.infer<typeof formSchema>;
