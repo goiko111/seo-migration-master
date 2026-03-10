@@ -915,25 +915,25 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      {/* ─── Roadmap ─── */}
+      {/* ─── Capacidades en expansión (discreto) ─── */}
       <section className="section-padding" id="roadmap">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.roadmap_badge}</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.roadmap_title) }} />
-            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">{c.roadmap_sub}</p>
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-3">{c.roadmap_badge}</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground/80" dangerouslySetInnerHTML={{ __html: emToGradient(c.roadmap_title) }} />
+            <p className="text-muted-foreground/60 mt-3 max-w-2xl mx-auto text-sm leading-relaxed">{c.roadmap_sub}</p>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {c.roadmap.map((q, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-gradient-card rounded-xl border border-border p-7 h-full">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-wine/30 bg-wine/5 mb-5">
-                    <Rocket size={12} className="text-wine" />
-                    <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{q.quarter}</span>
-                  </div>
-                  <ul className="space-y-3">
+              <ScrollReveal key={i} delay={i * 0.08}>
+                <div className="rounded-xl border border-border/60 bg-card/40 p-6 h-full">
+                  <span className="text-[11px] font-medium tracking-widest uppercase text-muted-foreground/50 mb-4 block">{q.quarter}</span>
+                  <ul className="space-y-2.5">
                     {q.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-sm text-muted-foreground"><CheckCircle size={16} className="text-wine/50 shrink-0 mt-0.5" />{item}</li>
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground/70 leading-relaxed">
+                        <span className="w-1 h-1 rounded-full bg-muted-foreground/30 mt-1.5 shrink-0" />
+                        {item}
+                      </li>
                     ))}
                   </ul>
                 </div>
