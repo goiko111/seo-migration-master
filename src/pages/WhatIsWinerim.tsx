@@ -230,7 +230,7 @@ const WhatIsWinerim = () => {
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
         <NotForSection
           idealFor={[
-            "Restaurantes con 15 o más referencias de vino en carta",
+            "Restaurantes con 50 o más referencias de vino en carta",
             "Wine bars y vinotecas con alta rotación de referencias",
             "Hoteles con servicio de vino en restaurante, room service y eventos",
             "Grupos de restauración que necesitan gestión centralizada del vino",
@@ -238,7 +238,7 @@ const WhatIsWinerim = () => {
           ]}
           notFor={[
             "Bares sin carta de vinos estructurada",
-            "Establecimientos con menos de 10 referencias de vino",
+            "Establecimientos con menos de 50 referencias de vino",
             "Negocios que no sirven vino (cervecerías, coctelerías)",
             "Restaurantes que no buscan optimizar sus ventas de vino",
           ]}
