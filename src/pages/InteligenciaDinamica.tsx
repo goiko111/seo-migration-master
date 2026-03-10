@@ -1092,6 +1092,61 @@ const InteligenciaDinamica = () => {
             </ScrollReveal>
           </div>
         </section>
+
+        {/* ════════════════════════════════════════════════
+            CIERRE — CONVERSIÓN FINAL
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative overflow-hidden">
+          {/* Ambient glow */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-wine/8 rounded-full blur-[160px]" />
+            <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] bg-wine/5 rounded-full blur-[100px]" />
+          </div>
+
+          <div className="relative max-w-4xl mx-auto">
+            <ScrollReveal>
+              <div className="relative rounded-3xl border border-wine/15 bg-gradient-to-br from-card via-card/95 to-wine/5 p-10 sm:p-14 md:p-20 text-center overflow-hidden">
+                {/* Decorative border glow */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-wine/10 via-transparent to-wine/5 pointer-events-none" />
+                <div className="absolute -top-px -left-px -right-px h-px bg-gradient-to-r from-transparent via-wine/40 to-transparent" />
+
+                <div className="relative">
+                  <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-3">
+                    No necesitas una carta más bonita.
+                  </h2>
+                  <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-8">
+                    Necesitas una carta{" "}
+                    <span className="text-gradient-wine">más inteligente.</span>
+                  </h2>
+
+                  <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Winerim convierte la carta en una capa táctica que ayuda a vender mejor, proteger margen, rotar stock y guiar al comensal con mucha más intención.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <Link
+                      to="/demo"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/25 hover:-translate-y-0.5"
+                    >
+                      Quiero ver Inteligencia dinámica en una demo
+                      <ArrowRight size={16} />
+                    </Link>
+                    <Link
+                      to="/contacto"
+                      className="inline-flex items-center justify-center px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all hover:-translate-y-0.5"
+                    >
+                      Hablar con el equipo
+                    </Link>
+                  </div>
+
+                  <p className="text-muted-foreground/50 text-xs max-w-lg mx-auto leading-relaxed">
+                    Ideal para restaurantes con cartas amplias, grupos hosteleros y proyectos que quieren profesionalizar la venta de vino con IA aplicada al negocio.
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
