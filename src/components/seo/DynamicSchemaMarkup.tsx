@@ -37,8 +37,8 @@ const DynamicSchemaMarkup = ({ id, type, title, description, url, faqs, breadcru
         "@type": type,
         headline: title,
         description,
-        author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-        publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine", logo: { "@type": "ImageObject", url: "https://winerim.wine/og-image.png" } },
+        author: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN },
+        publisher: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN, logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE } },
         mainEntityOfPage: url,
         inLanguage: url.includes("/en/") ? "en" : "es",
       });
