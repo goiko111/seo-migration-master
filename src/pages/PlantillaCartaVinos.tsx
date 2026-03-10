@@ -87,6 +87,8 @@ const PlantillaCartaVinos = () => {
         position: data.position,
         phone: data.phone,
         email: data.email,
+        city: data.city,
+        references_count: data.references_count,
         form_type: "plantilla-carta-vinos",
       });
       if (error) throw error;
