@@ -45,6 +45,7 @@ const Index = () => {
             <ProblemSection />
             <SolutionSection />
             <FeaturesPreview />
+            <DynamicIntelligenceTeaser />
             <ResultsSection />
             <HowItWorksSection />
             <TestimonialsSection />
