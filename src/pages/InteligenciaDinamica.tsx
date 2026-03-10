@@ -155,7 +155,33 @@ const rimCards = [
   },
 ];
 
-/* ── (impacts data removed — now inline) ── */
+/* ── JSON-LD Schema ── */
+const JsonLdSchema = () => {
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Winerim Inteligencia Dinámica",
+      applicationCategory: "BusinessApplication",
+      description: "Capa de IA táctica para cartas de vino que adapta visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivos del restaurante.",
+      operatingSystem: "Web",
+      url: "https://winerim.wine/producto/inteligencia-dinamica",
+      offers: { "@type": "Offer", category: "Software para hostelería" },
+    };
+    const id = "jsonld-inteligencia-dinamica";
+    let el = document.getElementById(id) as HTMLScriptElement | null;
+    if (!el) {
+      el = document.createElement("script");
+      el.id = id;
+      el.type = "application/ld+json";
+      document.head.appendChild(el);
+    }
+    el.textContent = JSON.stringify(schema);
+    return () => { el?.remove(); };
+  }, []);
+  return null;
+};
+
 
 const InteligenciaDinamica = () => {
   const { t, localePath } = useLanguage();
