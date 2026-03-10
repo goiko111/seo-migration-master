@@ -38,6 +38,7 @@ import logoEm from "@/assets/logos/em.png";
 interface LogoItem {
   name: string;
   logo: string;
+  isWhite?: boolean;
 }
 
 const michelinLogos: LogoItem[] = [
