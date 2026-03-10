@@ -37,7 +37,7 @@ const definitionData = {
       "Abbinamenti automatici per ogni piatto del menu",
       "Analisi delle vendite in tempo reale",
       "Ottimizzazione prezzi e margini",
-      "Nessuna app da scaricare",
+      "Multipiattaforma: web, tablet e app nativa",
     ],
     summaryLabel: "Cos'è Winerim?",
   },
