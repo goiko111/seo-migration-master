@@ -45,7 +45,7 @@ const i18n: Record<string, {
 }> = {
   es: {
     seo_title: "Clientes de Winerim | Restaurantes que confían en nosotros", seo_desc: "Más de 1.000 restaurantes confían en Winerim para gestionar su carta de vinos.", breadcrumb: "Clientes", badge: "Nuestros clientes", title: "Los mejores restaurantes ya usan <em>Winerim</em>", subtitle: "Más de 1.000 establecimientos confían en nuestra tecnología para transformar su carta de vinos.",
-    stats: [{ value: "1.000+", label: "Bodegas gestionadas" }, { value: "45.000+", label: "Referencias de vino" }, { value: "30%", label: "Incremento medio en ventas" }, { value: "12", label: "Países" }],
+    stats: [{ value: "1.000+", label: "Bodegas gestionadas" }, { value: "300.000+", label: "Referencias únicas de vino" }, { value: "30%", label: "Incremento medio en ventas" }, { value: "15", label: "Países" }],
     featured_badge: "Destacados", featured_title: "Lo que dicen nuestros <em>clientes</em>",
     all_title: "Todos nuestros <em>clientes</em>", all_sub: "Restaurantes de toda España, Portugal, Italia y más confían en Winerim.",
     cta_badge: "Únete", cta_title: "¿Listo para ser el <em>siguiente?</em>", cta_sub: "Prueba Winerim gratis y descubre por qué más de 1.000 restaurantes ya confían en nosotros.", cta_btn: "Solicitar demo",
