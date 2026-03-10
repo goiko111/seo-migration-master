@@ -13,7 +13,7 @@ const definitionData = {
       "Maridajes automáticos para cada plato del menú",
       "Analítica de ventas de vino en tiempo real",
       "Optimización de precios y márgenes",
-      "Sin descarga de app — funciona en el navegador del cliente",
+      "Multiplataforma: web, tablet y app nativa",
     ],
     summaryLabel: "¿Qué es Winerim?",
   },
