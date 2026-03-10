@@ -88,6 +88,8 @@ const Contacto = () => {
       position: fd.get("position") as string || null,
       phone: fd.get("phone") as string || null,
       email: fd.get("email") as string || null,
+      city: fd.get("city") as string || null,
+      references_count: fd.get("references_count") as string || null,
       message: fd.get("message") as string || null,
     });
     if (error) toast.error(c.error);
