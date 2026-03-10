@@ -1,34 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const AnimatedNumber = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-    const duration = 1500;
-    const steps = 40;
-    const stepTime = duration / steps;
-    const increment = target / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        clearInterval(timer);
-        setDisplay(target);
-      } else {
-        setDisplay(Math.floor(current));
-      }
-    }, stepTime);
-
-    return () => clearInterval(timer);
-  }, [isInView, target]);
-
-  return <span ref={ref}>+{display}{suffix}</span>;
-};
 
 const metricsByLang: Record<string, { label: string; desc: string; color: string }[]> = {
   es: [
