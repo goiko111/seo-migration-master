@@ -1,43 +1,109 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Brain, TrendingUp, BarChart3, Zap, Target, RefreshCw,
+  Layers, Eye, ShieldCheck, ArrowRight, Gauge, DollarSign,
+  Users, Wine, Activity, Lightbulb, CheckCircle, AlertTriangle,
+  Settings, Cpu, MessageSquare, ChevronRight
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { useLanguage } from "@/i18n/LanguageContext";
+import ScrollReveal from "@/components/ScrollReveal";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { Brain, TrendingUp, BarChart3, Zap, Target, RefreshCw } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const features = [
+/* ── Animation helpers ── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
+
+/* ── Section 3: 4 Capas ── */
+const layers = [
   {
-    icon: Brain,
-    title: "IA táctica aplicada al vino",
-    description: "Algoritmos que analizan el comportamiento de tu carta en tiempo real y sugieren acciones concretas para maximizar ventas.",
+    num: "01",
+    title: "Observar",
+    subtitle: "Lectura continua del contexto",
+    desc: "El sistema analiza en tiempo real los datos de tu carta: ventas, márgenes, rotación, estacionalidad y comportamiento del comensal.",
+    icon: Eye,
+    accent: "from-blue-500/20 to-blue-600/5",
   },
   {
-    icon: TrendingUp,
-    title: "Predicción de demanda",
-    description: "Anticipa qué vinos van a venderse más según temporada, tendencias y el historial de tu restaurante.",
-  },
-  {
-    icon: Target,
-    title: "Recomendaciones dinámicas",
-    description: "La carta se adapta automáticamente destacando los vinos con mayor potencial de venta en cada momento.",
-  },
-  {
+    num: "02",
+    title: "Evaluar",
+    subtitle: "Diagnóstico inteligente",
+    desc: "Cruza más de 20 variables para identificar oportunidades ocultas, cuellos de botella y vinos que no están rindiendo al nivel esperado.",
     icon: BarChart3,
-    title: "Optimización de márgenes",
-    description: "Identifica oportunidades de pricing y posicionamiento para mejorar la rentabilidad de cada referencia.",
+    accent: "from-emerald-500/20 to-emerald-600/5",
   },
   {
-    icon: RefreshCw,
-    title: "Rotación inteligente",
-    description: "Detecta vinos estancados y propone estrategias para reactivar su venta antes de que se conviertan en stock muerto.",
+    num: "03",
+    title: "Decidir",
+    subtitle: "Generación de recomendaciones tácticas",
+    desc: "Produce acciones específicas —los RIMs— con prioridad, impacto estimado y justificación clara. No son alertas genéricas: son decisiones operativas.",
+    icon: Brain,
+    accent: "from-wine/20 to-wine/5",
   },
   {
+    num: "04",
+    title: "Actuar",
+    subtitle: "Ejecución asistida o automática",
+    desc: "Dependiendo de la configuración, el sistema ejecuta los cambios o los presenta al responsable para aprobación con un solo clic.",
     icon: Zap,
-    title: "Alertas proactivas",
-    description: "Recibe notificaciones cuando hay oportunidades de mejora o cuando un vino necesita atención.",
+    accent: "from-amber-500/20 to-amber-600/5",
   },
+];
+
+/* ── Section 4: Objetivos ── */
+const objectives = [
+  { icon: DollarSign, title: "Maximizar facturación", desc: "Priorizar vinos y posiciones que generan más ingresos brutos." },
+  { icon: TrendingUp, title: "Mejorar margen", desc: "Reequilibrar la carta para que los vinos más rentables ganen visibilidad." },
+  { icon: RefreshCw, title: "Optimizar rotación", desc: "Dar salida a stock parado y prevenir obsolescencia antes de que ocurra." },
+  { icon: Users, title: "Elevar la experiencia", desc: "Recomendar según contexto, ocasión y perfil del comensal." },
+  { icon: Gauge, title: "Reducir complejidad", desc: "Simplificar la operativa diaria del equipo de sala y compras." },
+  { icon: Target, title: "Alinear estrategia", desc: "Que cada decisión sobre la carta responda a un objetivo de negocio medible." },
+];
+
+/* ── Section 5: RIMs principales ── */
+const rims = [
+  {
+    code: "RIM-P",
+    name: "Pricing Optimizer",
+    desc: "Detecta desajustes de precio respecto al mercado, competencia y escalado interno. Propone correcciones con impacto estimado en margen.",
+    icon: DollarSign,
+  },
+  {
+    code: "RIM-R",
+    name: "Rotation Accelerator",
+    desc: "Identifica vinos con baja rotación y diseña estrategias de reactivación: reposicionamiento, descuento táctico o sustitución sugerida.",
+    icon: RefreshCw,
+  },
+  {
+    code: "RIM-V",
+    name: "Visibility Engine",
+    desc: "Reordena y destaca referencias en la carta digital para maximizar la probabilidad de venta de los vinos estratégicos.",
+    icon: Eye,
+  },
+  {
+    code: "RIM-S",
+    name: "Stock Guardian",
+    desc: "Monitoriza niveles de inventario, anticipa roturas y coordina con el catálogo para mantener la carta siempre actualizada.",
+    icon: Activity,
+  },
+];
+
+/* ── Section 8: Impacto ── */
+const impacts = [
+  { metric: "+18%", label: "Ticket medio en vino", icon: TrendingUp },
+  { metric: "−40%", label: "Vinos sin rotación", icon: RefreshCw },
+  { metric: "+12%", label: "Margen bruto en carta", icon: DollarSign },
+  { metric: "3×", label: "Velocidad de decisión", icon: Gauge },
 ];
 
 const InteligenciaDinamica = () => {
@@ -46,89 +112,530 @@ const InteligenciaDinamica = () => {
   return (
     <>
       <SEOHead
-        title="Inteligencia Dinámica | Winerim – IA táctica para tu carta de vinos"
-        description="La capa de inteligencia artificial que analiza, predice y optimiza tu carta de vinos en tiempo real. Vende más, con menos esfuerzo."
+        title="Inteligencia dinámica para cartas de vino | Winerim"
+        description="La capa de IA táctica de Winerim que adapta la carta de vinos en tiempo real para aumentar facturación, margen, rotación y experiencia del comensal."
+        url="/producto/inteligencia-dinamica"
       />
       <Navbar />
-      <main className="min-h-screen bg-background pt-24 md:pt-32">
-        {/* Hero */}
-        <section className="max-w-5xl mx-auto px-6 text-center mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge className="bg-wine/10 text-wine border-wine/20 mb-6">
-              Nuevo
-            </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6">
-              Inteligencia{" "}
-              <span className="bg-gradient-wine bg-clip-text text-transparent">
-                dinámica
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-              La capa de IA táctica que convierte los datos de tu carta en decisiones inteligentes. 
-              Analiza, predice y optimiza en tiempo real para que cada vino trabaje al máximo.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to={localePath("/demo")}
-                className="bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
-              >
-                Solicitar demo
-              </Link>
-              <Link
-                to={localePath("/funcionalidades")}
-                className="border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:bg-muted/50 transition-all"
-              >
-                Ver funcionalidades
-              </Link>
-            </div>
-          </motion.div>
-        </section>
+      <main className="min-h-screen bg-background overflow-hidden">
 
-        {/* Features grid */}
-        <section className="max-w-6xl mx-auto px-6 mb-24">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="group p-8 rounded-2xl border border-border bg-card hover:border-wine/30 hover:shadow-lg hover:shadow-wine/5 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/20 transition-colors">
-                  <feature.icon className="w-6 h-6 text-wine" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+        {/* ════════════════════════════════════════════════
+            1. HERO
+        ════════════════════════════════════════════════ */}
+        <section className="relative pt-28 md:pt-40 pb-20 md:pb-32 px-6">
+          {/* Ambient glow */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-wine/8 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/20 to-transparent" />
+          </div>
+
+          <div className="relative max-w-5xl mx-auto text-center">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+            >
+              <motion.div variants={fadeUp} custom={0}>
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-8 text-xs tracking-widest uppercase px-4 py-1.5">
+                  Nuevo · Inteligencia Táctica
+                </Badge>
               </motion.div>
-            ))}
+
+              <motion.h1
+                variants={fadeUp}
+                custom={1}
+                className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-8"
+              >
+                Tu carta de vinos{" "}
+                <span className="block mt-2">
+                  <span className="text-gradient-wine">piensa por ti</span>
+                </span>
+              </motion.h1>
+
+              <motion.p
+                variants={fadeUp}
+                custom={2}
+                className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed"
+              >
+                La inteligencia dinámica de Winerim observa, evalúa y actúa sobre tu carta en tiempo real.
+                Cada vino, precio y posición se optimiza automáticamente para que vendas más, con más margen y menos esfuerzo.
+              </motion.p>
+
+              <motion.div
+                variants={fadeUp}
+                custom={3}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Link
+                  to={localePath("/demo")}
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+                >
+                  Solicitar demo
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to={localePath("/funcionalidades")}
+                  className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:bg-muted/50 transition-all"
+                >
+                  Ver funcionalidades
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="max-w-4xl mx-auto px-6 text-center mb-24">
-          <div className="p-12 rounded-2xl border border-wine/20 bg-gradient-to-br from-wine/5 to-transparent">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              ¿Listo para activar la inteligencia de tu carta?
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Descubre cómo la inteligencia dinámica puede transformar la rentabilidad de tu carta de vinos.
-            </p>
-            <Link
-              to={localePath("/demo")}
-              className="inline-block bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
-            >
-              {t.cta_button}
-            </Link>
+        {/* ════════════════════════════════════════════════
+            2. PROBLEMA / CAMBIO DE PARADIGMA
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background pointer-events-none" />
+          <div className="relative max-w-5xl mx-auto">
+            <ScrollReveal>
+              <div className="grid md:grid-cols-2 gap-16 items-center">
+                {/* Left: Problem */}
+                <div>
+                  <Badge className="bg-destructive/10 text-destructive border-destructive/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                    El problema
+                  </Badge>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
+                    Las cartas de vinos se gestionan con{" "}
+                    <span className="text-muted-foreground/60 line-through decoration-wine/40">intuición</span>
+                  </h2>
+                  <div className="space-y-4 text-muted-foreground">
+                    <p className="leading-relaxed">
+                      La mayoría de restaurantes revisan su carta cada trimestre —o menos—. Las decisiones sobre qué vinos incluir, a qué precio y en qué orden se toman por costumbre, no por datos.
+                    </p>
+                    <p className="leading-relaxed">
+                      El resultado: vinos que no rotan, márgenes que se erosionan y oportunidades de venta que se pierden cada noche.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: Paradigm shift */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wine/5 to-transparent rounded-2xl" />
+                  <div className="relative p-8 md:p-10 rounded-2xl border border-wine/15">
+                    <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                      El cambio
+                    </Badge>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">
+                      De carta estática a{" "}
+                      <span className="text-gradient-wine">sistema vivo</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      La inteligencia dinámica convierte tu carta en un organismo que se adapta al contexto. Cada dato genera una acción, cada acción genera un resultado medible.
+                    </p>
+                    <div className="flex items-center gap-3 text-sm text-accent">
+                      <Lightbulb size={18} />
+                      <span className="font-medium">No es un informe. Es un copiloto que actúa.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            3. CÓMO FUNCIONA — 4 CAPAS
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-16">
+                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                  Arquitectura
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Cuatro capas,{" "}
+                  <span className="text-gradient-wine">un sistema</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Cada capa alimenta la siguiente en un ciclo continuo de mejora.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {layers.map((layer, i) => (
+                <ScrollReveal key={layer.num}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className="group relative p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-wine/25 transition-all duration-500"
+                  >
+                    {/* Subtle gradient on hover */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${layer.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                    <div className="relative">
+                      <div className="flex items-start justify-between mb-6">
+                        <span className="text-wine/30 font-heading text-5xl font-bold leading-none">
+                          {layer.num}
+                        </span>
+                        <div className="w-12 h-12 rounded-xl bg-wine/8 flex items-center justify-center group-hover:bg-wine/15 transition-colors">
+                          <layer.icon className="w-6 h-6 text-wine" />
+                        </div>
+                      </div>
+                      <h3 className="font-heading text-2xl font-bold text-foreground mb-1">
+                        {layer.title}
+                      </h3>
+                      <p className="text-accent text-sm font-medium mb-4">
+                        {layer.subtitle}
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {layer.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Connecting line */}
+            <div className="hidden md:flex justify-center my-8">
+              <div className="flex items-center gap-2 text-muted-foreground/40">
+                <div className="w-16 h-px bg-current" />
+                <RefreshCw size={14} />
+                <span className="text-xs uppercase tracking-widest">Ciclo continuo</span>
+                <div className="w-16 h-px bg-current" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            4. OBJETIVOS QUE PUEDE PERSEGUIR EL RESTAURANTE
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-16">
+                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                  Objetivos
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Tú defines el objetivo.{" "}
+                  <span className="text-gradient-wine">El sistema ejecuta.</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Configura qué quieres conseguir y la inteligencia dinámica alinea cada recomendación con tu estrategia.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {objectives.map((obj, i) => (
+                <ScrollReveal key={obj.title}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className="group p-7 rounded-xl border border-border bg-card/50 hover:bg-card hover:border-wine/20 transition-all duration-300"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-wine/8 flex items-center justify-center mb-4 group-hover:bg-wine/15 transition-colors">
+                      <obj.icon className="w-5 h-5 text-wine" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
+                      {obj.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {obj.desc}
+                    </p>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            5. MÓDULOS RIM™ PRINCIPALES
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding">
+          <div className="max-w-5xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-16">
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                  Módulos RIM™
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Inteligencia{" "}
+                  <span className="text-gradient-wine">especializada</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Cada módulo RIM aborda un área clave de la gestión del vino con lógica propia y métricas dedicadas.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="space-y-5">
+              {rims.map((rim, i) => (
+                <ScrollReveal key={rim.code}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className="group relative flex flex-col md:flex-row md:items-center gap-6 p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-wine/25 transition-all duration-500"
+                  >
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-wine/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="relative flex items-center gap-5 md:w-72 shrink-0">
+                      <div className="w-14 h-14 rounded-xl bg-wine/10 flex items-center justify-center group-hover:bg-wine/20 transition-colors">
+                        <rim.icon className="w-7 h-7 text-wine" />
+                      </div>
+                      <div>
+                        <span className="text-xs text-wine/60 font-mono tracking-wider">{rim.code}</span>
+                        <h3 className="font-heading text-xl font-bold text-foreground">
+                          {rim.name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <p className="relative text-muted-foreground leading-relaxed flex-1">
+                      {rim.desc}
+                    </p>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            <ScrollReveal>
+              <p className="text-center text-muted-foreground/60 text-sm mt-8 italic">
+                Más módulos en desarrollo: RIM-M (Maridaje Dinámico), RIM-T (Tendencias), RIM-C (Competencia).
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            6. SISTEMA DE PRIORIDADES Y ORQUESTACIÓN
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          <div className="relative max-w-5xl mx-auto">
+            <ScrollReveal>
+              <div className="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                  <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                    Orquestación
+                  </Badge>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
+                    No todo se ejecuta a la vez.{" "}
+                    <span className="text-gradient-wine">Hay un orden.</span>
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-8">
+                    Cada recomendación se clasifica por urgencia, impacto potencial y esfuerzo de implementación.
+                    El sistema prioriza lo que más importa en cada momento y evita saturar al equipo con cambios innecesarios.
+                  </p>
+
+                  <div className="space-y-4">
+                    {[
+                      { label: "Crítica", desc: "Impacto alto, ejecución inmediata", color: "bg-red-500/80" },
+                      { label: "Alta", desc: "Oportunidad relevante esta semana", color: "bg-amber-500/80" },
+                      { label: "Media", desc: "Mejora progresiva, sin urgencia", color: "bg-blue-500/80" },
+                      { label: "Baja", desc: "Optimización marginal, a revisar", color: "bg-muted-foreground/40" },
+                    ].map((p) => (
+                      <div key={p.label} className="flex items-center gap-4">
+                        <div className={`w-3 h-3 rounded-full ${p.color} shrink-0`} />
+                        <div>
+                          <span className="text-foreground font-medium text-sm">{p.label}</span>
+                          <span className="text-muted-foreground text-sm ml-2">— {p.desc}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Visual: Priority card mock */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-wine/5 rounded-2xl blur-xl" />
+                  <div className="relative space-y-4">
+                    {[
+                      { priority: "Crítica", code: "RIM-P", action: "Subir precio de Albariño Pazo Señorans de 38€ a 44€", impact: "+15% margen", color: "border-red-500/40 bg-red-500/5" },
+                      { priority: "Alta", code: "RIM-R", action: "Retirar Verdejo Rueda 2019 (0 ventas en 60 días)", impact: "Liberar posición", color: "border-amber-500/40 bg-amber-500/5" },
+                      { priority: "Media", code: "RIM-V", action: "Destacar Ribera del Duero Crianza en posición 3", impact: "+8% visibilidad", color: "border-blue-500/40 bg-blue-500/5" },
+                    ].map((card) => (
+                      <div key={card.action} className={`p-5 rounded-xl border ${card.color} backdrop-blur-sm`}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-[10px] font-mono text-wine/60 tracking-wider">{card.code}</span>
+                          <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{card.priority}</span>
+                        </div>
+                        <p className="text-foreground text-sm font-medium mb-2">{card.action}</p>
+                        <p className="text-accent text-xs font-medium">{card.impact}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            7. EXPLICABILIDAD
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding">
+          <div className="max-w-4xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                  Transparencia
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Siempre sabes{" "}
+                  <span className="text-gradient-wine">por qué</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Cada recomendación incluye su justificación. Sin cajas negras.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal>
+              <div className="relative p-8 md:p-12 rounded-2xl border border-border bg-card">
+                <div className="absolute top-0 left-8 md:left-12 w-px h-full bg-gradient-to-b from-wine/30 via-wine/10 to-transparent" />
+
+                <div className="space-y-10 pl-8">
+                  {[
+                    {
+                      icon: AlertTriangle,
+                      title: "Detección",
+                      text: "El Albariño Pazo Señorans tiene un margen del 48%, un 22% por debajo de la media de blancos premium de tu carta.",
+                    },
+                    {
+                      icon: BarChart3,
+                      title: "Análisis",
+                      text: "Su velocidad de venta (3,2 copas/semana) indica elasticidad baja: el comensal lo elige por calidad, no por precio.",
+                    },
+                    {
+                      icon: Lightbulb,
+                      title: "Recomendación",
+                      text: "Subir de 38€ a 44€ (+15,8%) mantendría la demanda estimada y generaría +840€/mes en margen adicional.",
+                    },
+                    {
+                      icon: CheckCircle,
+                      title: "Confianza",
+                      text: "Basado en 12 semanas de datos de venta, benchmarking de 340 restaurantes similares y análisis de elasticidad-precio.",
+                    },
+                  ].map((step, i) => (
+                    <div key={step.title} className="relative flex gap-5">
+                      <div className="absolute -left-8 top-1 w-3 h-3 rounded-full bg-wine/60 border-2 border-background" />
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <step.icon size={16} className="text-wine/70" />
+                          <span className="text-xs uppercase tracking-widest text-wine/70 font-semibold">{step.title}</span>
+                        </div>
+                        <p className="text-foreground/90 leading-relaxed">{step.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            8. IMPACTO ESTIMADO
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-wine/3 to-background pointer-events-none" />
+          <div className="relative max-w-5xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-16">
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+                  Impacto
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Resultados que se{" "}
+                  <span className="text-gradient-wine">miden</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                  Datos promedio de restaurantes que utilizan la inteligencia dinámica durante los primeros 90 días.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {impacts.map((item, i) => (
+                <ScrollReveal key={item.label}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className="text-center p-8 rounded-2xl border border-border bg-card hover:border-wine/20 transition-all duration-300"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mx-auto mb-5">
+                      <item.icon className="w-6 h-6 text-wine" />
+                    </div>
+                    <div className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">
+                      {item.metric}
+                    </div>
+                    <p className="text-muted-foreground text-sm">
+                      {item.label}
+                    </p>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            <ScrollReveal>
+              <p className="text-center text-muted-foreground/50 text-xs mt-8">
+                * Datos agregados de restaurantes en programa beta. Resultados individuales pueden variar según tipología y volumen.
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            9. CTA FINAL
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding">
+          <div className="max-w-4xl mx-auto">
+            <ScrollReveal>
+              <div className="relative p-12 md:p-16 rounded-2xl overflow-hidden text-center">
+                {/* Background */}
+                <div className="absolute inset-0 bg-gradient-wine opacity-90" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_60%)]" />
+
+                <div className="relative">
+                  <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 leading-tight">
+                    Activa la inteligencia
+                    <br />
+                    de tu carta de vinos
+                  </h2>
+                  <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Descubre cómo la inteligencia dinámica puede transformar la rentabilidad y experiencia de tu carta. Sin compromiso.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link
+                      to={localePath("/demo")}
+                      className="inline-flex items-center justify-center gap-2 bg-primary-foreground text-wine px-8 py-4 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary-foreground/90 transition-all"
+                    >
+                      Solicitar demo gratuita
+                      <ArrowRight size={16} />
+                    </Link>
+                    <Link
+                      to={localePath("/contacto")}
+                      className="inline-flex items-center justify-center gap-2 border border-primary-foreground/30 text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:bg-primary-foreground/10 transition-all"
+                    >
+                      Contactar
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
       </main>
