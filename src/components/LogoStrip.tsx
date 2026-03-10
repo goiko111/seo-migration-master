@@ -38,6 +38,7 @@ import logoEm from "@/assets/logos/em.png";
 interface LogoItem {
   name: string;
   logo: string;
+  isWhite?: boolean;
 }
 
 const michelinLogos: LogoItem[] = [
@@ -78,7 +79,7 @@ const hotelLogos: LogoItem[] = [
   { name: "MYR Hotels", logo: logoMyr },
   { name: "Four Seasons", logo: logoFourSeasons },
   { name: "Palladium Hotel Group", logo: logoPalladium },
-  { name: "EM Hotels", logo: logoEm },
+  { name: "EM Hotels", logo: logoEm, isWhite: true },
 ];
 
 const LogoStrip = () => {
@@ -158,18 +159,20 @@ const LogoStrip = () => {
         viewport={{ once: true }}
         className="mt-8 sm:mt-10 px-6"
       >
-        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-6">Grupos hoteleros</span>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
+        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-8">Grupos hoteleros</span>
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14 lg:gap-16">
           {hotelLogos.map((item) => (
-            <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 px-2">
+            <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 md:h-20 px-1">
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 sm:h-12 md:h-14 w-auto object-contain grayscale invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className={`h-8 sm:h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 ${
+                  item.isWhite ? '' : 'invert mix-blend-screen'
+                }`}
                 loading="lazy"
                 decoding="async"
-                width={120}
-                height={56}
+                width={140}
+                height={64}
               />
             </div>
           ))}
