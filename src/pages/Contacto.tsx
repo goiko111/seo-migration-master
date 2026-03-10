@@ -83,7 +83,7 @@ const Contacto = () => {
     e.preventDefault();
     setSubmitting(true);
     const fd = new FormData(e.currentTarget);
-    const { error } = await supabase.from("contact_leads").insert({
+    const leadData = {
       form_type: "contacto",
       restaurant: fd.get("restaurant") as string || null,
       name: fd.get("name") as string || null,
@@ -93,11 +93,13 @@ const Contacto = () => {
       city: fd.get("city") as string || null,
       references_count: fd.get("references_count") as string || null,
       message: fd.get("message") as string || null,
-    });
+    };
+    const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
     else {
       toast.success(c.success);
       (e.target as HTMLFormElement).reset();
+      notifyLead(leadData);
     }
     setSubmitting(false);
   };
