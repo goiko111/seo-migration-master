@@ -831,8 +831,9 @@ const Funcionalidades = () => {
 
               <div className="relative flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-14">
                 <div className="flex-1">
-                  <span className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase bg-wine/15 text-wine border border-wine/20 rounded-full px-3.5 py-1 mb-5">
-                    Nuevo
+                  <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60 mb-5">
+                    <span className="w-1 h-1 rounded-full bg-wine/50" />
+                    Inteligencia dinámica
                   </span>
                   <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
                     La nueva capa de{" "}

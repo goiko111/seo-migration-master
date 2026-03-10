@@ -102,6 +102,7 @@ const rimCards = [
     iconBg: "bg-violet-500/12",
     iconColor: "text-violet-400",
     borderColor: "group-hover:border-violet-500/30",
+    featured: true,
   },
   {
     name: "MarginRIM™",
@@ -112,6 +113,7 @@ const rimCards = [
     iconBg: "bg-emerald-500/12",
     iconColor: "text-emerald-400",
     borderColor: "group-hover:border-emerald-500/30",
+    featured: true,
   },
   {
     name: "StockRIM™",
@@ -132,6 +134,7 @@ const rimCards = [
     iconBg: "bg-blue-500/12",
     iconColor: "text-blue-400",
     borderColor: "group-hover:border-blue-500/30",
+    featured: true,
   },
   {
     name: "ClimateRIM™",
@@ -276,10 +279,10 @@ const InteligenciaDinamica = () => {
 
               {/* Eyebrow */}
               <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-8">
-                <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/25 bg-wine/8 backdrop-blur-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-wine animate-pulse" />
-                  <span className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-wine">
-                    Nueva capa de IA táctica
+                <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/15 bg-wine/5 backdrop-blur-sm">
+                  <span className="w-1 h-1 rounded-full bg-wine/80" />
+                  <span className="text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase text-wine/70">
+                    Inteligencia dinámica
                   </span>
                 </span>
               </motion.div>
@@ -619,15 +622,15 @@ const InteligenciaDinamica = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className={`group relative h-full p-7 md:p-8 rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${obj.borderHover} transition-all duration-500 hover:shadow-lg hover:shadow-black/10`}
+                    className={`group relative h-full p-7 md:p-8 rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm ${obj.borderHover} transition-all duration-500 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-1 overflow-hidden`}
                   >
                     {/* Hover gradient overlay */}
-                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${obj.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${obj.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
                     <div className="relative flex flex-col h-full">
                       {/* Icon */}
-                      <div className={`w-12 h-12 rounded-xl ${obj.iconBg} flex items-center justify-center mb-5 transition-colors duration-300`}>
-                        <obj.icon className={`w-6 h-6 ${obj.iconColor}`} />
+                      <div className={`w-12 h-12 rounded-xl ${obj.iconBg} flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110`}>
+                        <obj.icon className={`w-6 h-6 ${obj.iconColor} transition-all duration-500`} />
                       </div>
 
                       {/* Title */}
@@ -641,15 +644,15 @@ const InteligenciaDinamica = () => {
                       </p>
 
                       {/* Activated modules */}
-                      <div className="pt-4 border-t border-border/60">
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/50 font-semibold mb-2.5">
+                      <div className="pt-4 border-t border-border/40 group-hover:border-border/60 transition-colors duration-500">
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/40 font-semibold mb-2.5">
                           Activa
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {obj.modules.map((mod) => (
                             <span
                               key={mod}
-                              className="inline-flex items-center px-2.5 py-1 rounded-md bg-wine/8 border border-wine/15 text-[11px] font-mono font-medium text-wine/80 tracking-wide"
+                              className="inline-flex items-center px-2.5 py-1 rounded-md bg-wine/6 border border-wine/10 text-[11px] font-mono font-medium text-wine/70 tracking-wide group-hover:bg-wine/10 group-hover:border-wine/20 group-hover:text-wine/90 transition-all duration-500"
                             >
                               {mod}
                             </span>
@@ -694,20 +697,30 @@ const InteligenciaDinamica = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className={`group relative h-full rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${rim.borderColor} transition-all duration-500 hover:shadow-lg hover:shadow-black/10 overflow-hidden`}
+                    className={`group relative h-full rounded-2xl border ${rim.featured ? 'border-border/80' : 'border-border/50'} bg-card/60 backdrop-blur-sm ${rim.borderColor} transition-all duration-500 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-1 overflow-hidden`}
                   >
+                    {/* Featured indicator — subtle top border glow */}
+                    {rim.featured && (
+                      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${rim.iconColor === 'text-violet-400' ? 'via-violet-400/40' : rim.iconColor === 'text-emerald-400' ? 'via-emerald-400/40' : 'via-blue-400/40'} to-transparent`} />
+                    )}
+
                     {/* Hover gradient */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${rim.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${rim.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
                     <div className="relative flex flex-col h-full p-7 md:p-8">
                       {/* Header: icon + name */}
                       <div className="flex items-center gap-4 mb-5">
-                        <div className={`w-11 h-11 rounded-xl ${rim.iconBg} flex items-center justify-center shrink-0 transition-colors duration-300`}>
-                          <rim.icon className={`w-5 h-5 ${rim.iconColor}`} />
+                        <div className={`w-11 h-11 rounded-xl ${rim.iconBg} flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110`}>
+                          <rim.icon className={`w-5 h-5 ${rim.iconColor} transition-all duration-500`} />
                         </div>
-                        <h3 className="font-mono text-base font-bold text-foreground tracking-wide">
-                          {rim.name}
-                        </h3>
+                        <div>
+                          <h3 className="font-mono text-base font-bold text-foreground tracking-wide">
+                            {rim.name}
+                          </h3>
+                          {rim.featured && (
+                            <span className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground/40 font-medium">Módulo principal</span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Description */}
@@ -716,10 +729,10 @@ const InteligenciaDinamica = () => {
                       </p>
 
                       {/* Micro-result */}
-                      <div className="pt-4 border-t border-border/50">
+                      <div className="pt-4 border-t border-border/40 group-hover:border-border/60 transition-colors duration-500">
                         <div className="flex items-center gap-2">
-                          <ArrowRight size={12} className={`${rim.iconColor} shrink-0`} />
-                          <span className="text-xs font-semibold text-foreground/80 tracking-wide uppercase">
+                          <ArrowRight size={12} className={`${rim.iconColor} shrink-0 transition-transform duration-300 group-hover:translate-x-0.5`} />
+                          <span className="text-xs font-semibold text-foreground/70 tracking-wide uppercase group-hover:text-foreground/90 transition-colors duration-300">
                             {rim.result}
                           </span>
                         </div>
