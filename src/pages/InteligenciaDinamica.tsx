@@ -122,64 +122,158 @@ const InteligenciaDinamica = () => {
         {/* ════════════════════════════════════════════════
             1. HERO
         ════════════════════════════════════════════════ */}
-        <section className="relative pt-28 md:pt-40 pb-20 md:pb-32 px-6">
-          {/* Ambient glow */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-wine/8 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/20 to-transparent" />
+        <section className="relative pt-32 md:pt-44 pb-24 md:pb-40 px-6 overflow-hidden">
+          {/* ── Layered background system ── */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Primary ambient glow */}
+            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[900px] h-[700px] bg-wine/10 rounded-full blur-[150px]" />
+            {/* Secondary glow — offset for depth */}
+            <div className="absolute top-[40%] right-[10%] w-[400px] h-[400px] bg-wine/6 rounded-full blur-[100px]" />
+            {/* Grid pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+                backgroundSize: "60px 60px",
+              }}
+            />
+            {/* Bottom separator */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/25 to-transparent" />
           </div>
 
-          <div className="relative max-w-5xl mx-auto text-center">
+          {/* ── Intelligence Engine Visual ── */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {/* Orbiting rings */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={stagger}
-            >
-              <motion.div variants={fadeUp} custom={0}>
-                <Badge className="bg-wine/10 text-wine border-wine/20 mb-8 text-xs tracking-widest uppercase px-4 py-1.5">
-                  Nuevo · Inteligencia Táctica
-                </Badge>
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full border border-wine/[0.06]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] md:w-[600px] md:h-[600px] rounded-full border border-wine/[0.08]"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full border border-wine/[0.10]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Floating data nodes on orbits */}
+            {[
+              { size: "w-2 h-2", orbit: "w-[600px] h-[600px] md:w-[800px] md:h-[800px]", duration: 90, startAngle: 45 },
+              { size: "w-1.5 h-1.5", orbit: "w-[600px] h-[600px] md:w-[800px] md:h-[800px]", duration: 90, startAngle: 200 },
+              { size: "w-2.5 h-2.5", orbit: "w-[450px] h-[450px] md:w-[600px] md:h-[600px]", duration: 70, startAngle: 120 },
+              { size: "w-1.5 h-1.5", orbit: "w-[300px] h-[300px] md:w-[400px] md:h-[400px]", duration: 50, startAngle: 300 },
+            ].map((node, i) => (
+              <motion.div
+                key={i}
+                className={`absolute top-1/2 left-1/2 ${node.orbit}`}
+                style={{ marginLeft: "-50%", marginTop: "-50%", transformOrigin: "center" }}
+                animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
+                transition={{ duration: node.duration, repeat: Infinity, ease: "linear" }}
+              >
+                <div
+                  className={`absolute ${node.size} rounded-full bg-wine/60 shadow-[0_0_8px_hsl(var(--wine)/0.4)]`}
+                  style={{
+                    top: `${50 + 50 * Math.sin((node.startAngle * Math.PI) / 180)}%`,
+                    left: `${50 + 50 * Math.cos((node.startAngle * Math.PI) / 180)}%`,
+                  }}
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* ── Content ── */}
+          <div className="relative max-w-5xl mx-auto">
+            <motion.div initial="hidden" animate="visible" variants={stagger}>
+
+              {/* Eyebrow */}
+              <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-8">
+                <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/25 bg-wine/8 backdrop-blur-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-wine animate-pulse" />
+                  <span className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-wine">
+                    Nueva capa de IA táctica
+                  </span>
+                </span>
               </motion.div>
 
+              {/* Title */}
               <motion.h1
                 variants={fadeUp}
                 custom={1}
-                className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-8"
+                className="font-heading text-center text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08] mb-8"
               >
-                Tu carta de vinos{" "}
-                <span className="block mt-2">
-                  <span className="text-gradient-wine">piensa por ti</span>
+                La carta ya no solo informa.
+                <br />
+                <span className="text-gradient-wine">
+                  Ahora decide cómo vender mejor.
                 </span>
               </motion.h1>
 
+              {/* Subtitle */}
               <motion.p
                 variants={fadeUp}
                 custom={2}
-                className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed"
+                className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-14 leading-relaxed"
               >
-                La inteligencia dinámica de Winerim observa, evalúa y actúa sobre tu carta en tiempo real.
-                Cada vino, precio y posición se optimiza automáticamente para que vendas más, con más margen y menos esfuerzo.
+                Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, contexto, clima, afluencia y objetivo del restaurante.
               </motion.p>
 
+              {/* Highlights strip */}
               <motion.div
                 variants={fadeUp}
                 custom={3}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                className="flex flex-wrap justify-center gap-3 md:gap-4 mb-14"
+              >
+                {[
+                  { icon: DollarSign, label: "Más facturación" },
+                  { icon: TrendingUp, label: "Más margen" },
+                  { icon: RefreshCw, label: "Más rotación" },
+                  { icon: Activity, label: "Menos stock muerto" },
+                  { icon: Users, label: "Mejor experiencia" },
+                ].map((item) => (
+                  <span
+                    key={item.label}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card/60 backdrop-blur-sm text-sm text-foreground/90 font-medium"
+                  >
+                    <item.icon size={15} className="text-wine shrink-0" />
+                    {item.label}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div
+                variants={fadeUp}
+                custom={4}
+                className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
               >
                 <Link
                   to={localePath("/demo")}
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+                  className="inline-flex items-center justify-center gap-2.5 bg-gradient-wine text-primary-foreground px-9 py-4.5 rounded-lg text-sm font-bold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-xl hover:shadow-wine/25"
                 >
-                  Solicitar demo
+                  Quiero ver una demo
                   <ArrowRight size={16} />
                 </Link>
-                <Link
-                  to={localePath("/funcionalidades")}
+                <a
+                  href="#como-funciona"
                   className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:bg-muted/50 transition-all"
                 >
-                  Ver funcionalidades
-                </Link>
+                  Ver cómo funciona
+                  <ChevronRight size={16} className="opacity-60" />
+                </a>
               </motion.div>
+
+              {/* Microcopy */}
+              <motion.p
+                variants={fadeUp}
+                custom={5}
+                className="text-center text-xs text-muted-foreground/50 tracking-wide"
+              >
+                Disponible para pilotos y despliegues progresivos en restaurantes seleccionados.
+              </motion.p>
+
             </motion.div>
           </div>
         </section>
