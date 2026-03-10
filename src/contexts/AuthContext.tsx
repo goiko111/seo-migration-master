@@ -20,12 +20,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   const checkAdmin = async (userId: string) => {
-    const { data } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", userId)
-      .in("role", ["admin", "editor"]);
-    setIsAdmin(!!(data && data.length > 0));
+    try {
+      // Use the SECURITY DEFINER function to bypass RLS on user_roles
+      const { data: isAdminResult } = await supabase.rpc("has_role", {
+        _user_id: userId,
+        _role: "admin",
+      });
+      const { data: isEditorResult } = await supabase.rpc("has_role", {
+        _user_id: userId,
+        _role: "editor",
+      });
+      setIsAdmin(!!(isAdminResult || isEditorResult));
+    } catch {
+      setIsAdmin(false);
+    }
   };
 
   useEffect(() => {
