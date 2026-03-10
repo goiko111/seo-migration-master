@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { Play } from "lucide-react";
-import mockupImg from "@/assets/winerim-mockup.png";
+import heroTabletImg from "@/assets/winerim-tablet-hero.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const HeroSection = () => {
