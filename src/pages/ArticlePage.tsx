@@ -38,7 +38,7 @@ const ArticlePage = () => {
     const fetchArticle = async () => {
       const { data } = await supabase
         .from("articles")
-        .select("title, excerpt, body, image_url, category, author, author_role, published_at")
+        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links")
         .eq("slug", slug)
         .eq("published", true)
         .maybeSingle();
