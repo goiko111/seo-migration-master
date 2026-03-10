@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
