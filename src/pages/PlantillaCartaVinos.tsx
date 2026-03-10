@@ -16,15 +16,15 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import ContactFormFields from "@/components/ContactFormFields";
 
 const formSchema = z.object({
+  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
-  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(100),
+  position: z.string().trim().min(1, "Selecciona tu cargo"),
+  phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
-  city: z.string().trim().min(1, "La ciudad es obligatoria").max(100),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -69,8 +69,9 @@ const optimizationBenefits = [
 const PlantillaCartaVinos = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [position, setPosition] = useState("");
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
@@ -78,10 +79,11 @@ const PlantillaCartaVinos = () => {
     setSubmitting(true);
     try {
       const { error } = await supabase.from("contact_leads").insert({
-        name: data.name,
         restaurant: data.restaurant,
+        name: data.name,
+        position: data.position,
+        phone: data.phone,
         email: data.email,
-        city: data.city,
         form_type: "plantilla-carta-vinos",
       });
       if (error) throw error;
@@ -337,26 +339,7 @@ const PlantillaCartaVinos = () => {
             </ScrollReveal>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div>
-                <Label htmlFor="name">Nombre</Label>
-                <Input id="name" placeholder="Tu nombre" {...register("name")} className="mt-1.5" />
-                {errors.name && <p className="text-sm text-destructive mt-1">{errors.name.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="restaurant">Restaurante</Label>
-                <Input id="restaurant" placeholder="Nombre del restaurante" {...register("restaurant")} className="mt-1.5" />
-                {errors.restaurant && <p className="text-sm text-destructive mt-1">{errors.restaurant.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="tu@email.com" {...register("email")} className="mt-1.5" />
-                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="city">Ciudad</Label>
-                <Input id="city" placeholder="Tu ciudad" {...register("city")} className="mt-1.5" />
-                {errors.city && <p className="text-sm text-destructive mt-1">{errors.city.message}</p>}
-              </div>
+              <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
               <Button type="submit" disabled={submitting}
                 className="w-full bg-gradient-wine text-primary-foreground hover:opacity-90 py-6 text-sm font-semibold tracking-wider uppercase">
                 {submitting ? "Enviando..." : "Descargar plantilla"}

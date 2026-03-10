@@ -16,14 +16,15 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import ContactFormFields from "@/components/ContactFormFields";
 
 const formSchema = z.object({
+  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
+  position: z.string().trim().min(1, "Selecciona tu cargo"),
+  phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
-  restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(100),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -89,8 +90,9 @@ const checklistItems = [
 const ChecklistCartaRentable = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [position, setPosition] = useState("");
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
@@ -98,9 +100,11 @@ const ChecklistCartaRentable = () => {
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_leads").insert({
-        name: data.name,
-        email: data.email,
         restaurant: data.restaurant,
+        name: data.name,
+        position: data.position,
+        phone: data.phone,
+        email: data.email,
         form_type: "checklist-carta-rentable",
       });
       if (error) throw error;
@@ -170,21 +174,7 @@ const ChecklistCartaRentable = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga la checklist gratis</h3>
                   <p className="text-sm text-muted-foreground mb-4">Rellena el formulario y recíbela al instante.</p>
-                  <div>
-                    <Label htmlFor="name" className="text-sm font-medium">Nombre</Label>
-                    <Input id="name" placeholder="Tu nombre" {...register("name")} className="mt-1.5 bg-background" />
-                    {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-                    <Input id="email" type="email" placeholder="tu@restaurante.com" {...register("email")} className="mt-1.5 bg-background" />
-                    {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
-                  </div>
-                  <div>
-                    <Label htmlFor="restaurant" className="text-sm font-medium">Restaurante</Label>
-                    <Input id="restaurant" placeholder="Nombre del restaurante" {...register("restaurant")} className="mt-1.5 bg-background" />
-                    {errors.restaurant && <p className="text-xs text-destructive mt-1">{errors.restaurant.message}</p>}
-                  </div>
+                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
                     {loading ? "Enviando..." : "Descargar checklist"}

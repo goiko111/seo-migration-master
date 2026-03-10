@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MessageCircle } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import ContactFormFields from "@/components/ContactFormFields";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,14 +83,11 @@ const Contacto = () => {
     const fd = new FormData(e.currentTarget);
     const { error } = await supabase.from("contact_leads").insert({
       form_type: "contacto",
+      restaurant: fd.get("restaurant") as string || null,
       name: fd.get("name") as string || null,
       position: fd.get("position") as string || null,
-      email: fd.get("email") as string || null,
       phone: fd.get("phone") as string || null,
-      restaurant: fd.get("restaurant") as string || null,
-      city: fd.get("city") as string || null,
-      references_count: fd.get("references") as string || null,
-      menu_link: fd.get("menu_link") as string || null,
+      email: fd.get("email") as string || null,
       message: fd.get("message") as string || null,
     });
     if (error) toast.error(c.error);
@@ -119,22 +116,7 @@ const Contacto = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-3">
               <h2 className="font-heading text-2xl font-bold mb-8">{c.form_title}</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="name" placeholder={c.name} required className="bg-card border-border" />
-                  <Input name="position" placeholder={c.position} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="email" type="email" placeholder={c.email} required className="bg-card border-border" />
-                  <Input name="phone" type="tel" placeholder={c.phone} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="restaurant" placeholder={c.restaurant} className="bg-card border-border" />
-                  <Input name="city" placeholder={c.city} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="references" placeholder={c.references} className="bg-card border-border" />
-                  <Input name="menu_link" placeholder={c.menu_link} className="bg-card border-border" />
-                </div>
+                <ContactFormFields native />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
                 <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}
