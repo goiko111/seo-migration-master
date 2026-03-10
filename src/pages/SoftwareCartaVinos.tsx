@@ -332,9 +332,9 @@ const SoftwareCartaVinos = () => {
 
             <div className="grid sm:grid-cols-3 gap-6">
               {[
-                { value: "+20 %", label: "Incremento medio en ventas de vino", icon: Wine },
-                { value: "+15 %", label: "Aumento del ticket medio", icon: TrendingUp },
-                { value: "+30 %", label: "Mayor rotación de referencias", icon: BarChart3 },
+                { value: "Más vino vendido", label: "Los clientes exploran y piden más referencias con la carta digital", icon: Wine },
+                { value: "Mayor ticket", label: "Las recomendaciones inteligentes impulsan ventas de mayor valor", icon: TrendingUp },
+                { value: "Mejor rotación", label: "La analítica identifica qué vinos funcionan y cuáles no", icon: BarChart3 },
               ].map((m, i) => {
                 const Icon = m.icon;
                 return (
