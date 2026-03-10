@@ -48,7 +48,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
 
     // Noindex
     if (noindex) {
-      setMeta("robots", "noindex, nofollow", true);
+      setMeta("robots", "noindex, follow", true);
     }
 
     // Hreflang

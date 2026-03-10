@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const content: Record<string, { label: string; title: string; desc: string; cta: string }> = {
@@ -22,6 +23,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title={`${t.title} | Winerim`} description={t.desc} noindex />
       <Navbar />
       <main className="flex items-center justify-center py-32 section-padding">
         <div className="text-center">
