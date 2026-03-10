@@ -71,6 +71,7 @@ const Soluciones = lazy(() => import("./pages/Soluciones"));
 const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
+const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
