@@ -13,6 +13,16 @@ import logoCocinaDelSol from "@/assets/logos/cocinadelsol.png";
 import logoCanabota from "@/assets/logos/canabota.png";
 import logoAlejandra from "@/assets/logos/alejandra.png";
 import logoMent from "@/assets/logos/ment.png";
+import logoBidea from "@/assets/logos/bidea.png";
+import logoTribeca from "@/assets/logos/tribeca.png";
+import logoTaverna from "@/assets/logos/taverna.png";
+import logoSerrano from "@/assets/logos/serrano.png";
+import logoRoig from "@/assets/logos/roig.png";
+import logoRiosFreixo from "@/assets/logos/riosfreixo.png";
+import logoRemigio from "@/assets/logos/remigio.png";
+import logoLaFabrica from "@/assets/logos/lafabrica.png";
+import logoJauregibarria from "@/assets/logos/jauregibarria.png";
+import logoElMotel from "@/assets/logos/elmotel.png";
 
 interface LogoItem {
   name: string;
@@ -31,6 +41,16 @@ const logoItems: LogoItem[] = [
   { name: "Cañabota", logo: logoCanabota },
   { name: "Alejandra", logo: logoAlejandra },
   { name: "Ment", logo: logoMent },
+  { name: "Bidea", logo: logoBidea },
+  { name: "Tribeca", logo: logoTribeca },
+  { name: "Taverna", logo: logoTaverna },
+  { name: "Serrano", logo: logoSerrano },
+  { name: "Roig Robí", logo: logoRoig },
+  { name: "Ríos do Freixo", logo: logoRiosFreixo },
+  { name: "Remigio", logo: logoRemigio },
+  { name: "La Fábrica", logo: logoLaFabrica },
+  { name: "Jauregibarria", logo: logoJauregibarria },
+  { name: "El Motel", logo: logoElMotel },
   { name: "Meliá Hotels" },
   { name: "Hyatt" },
   { name: "Marriott" },
