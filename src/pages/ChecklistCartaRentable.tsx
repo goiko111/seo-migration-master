@@ -108,6 +108,8 @@ const ChecklistCartaRentable = () => {
         position: data.position,
         phone: data.phone,
         email: data.email,
+        city: data.city,
+        references_count: data.references_count,
         form_type: "checklist-carta-rentable",
       });
       if (error) throw error;
