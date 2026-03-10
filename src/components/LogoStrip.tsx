@@ -26,6 +26,14 @@ import logoElMotel from "@/assets/logos/elmotel.png";
 import logoDamaso from "@/assets/logos/damaso.png";
 import logoCasamar from "@/assets/logos/casamar.png";
 import logoBocaatti from "@/assets/logos/bocaatti.png";
+import logoMelia from "@/assets/logos/melia.png";
+import logoHyatt from "@/assets/logos/hyatt.png";
+import logoMarriott from "@/assets/logos/marriott.png";
+import logoWyndham from "@/assets/logos/wyndham.png";
+import logoMyr from "@/assets/logos/myr.webp";
+import logoFourSeasons from "@/assets/logos/fourseasons.png";
+import logoPalladium from "@/assets/logos/palladium.jpeg";
+import logoEm from "@/assets/logos/em.png";
 
 interface LogoItem {
   name: string;
@@ -62,7 +70,16 @@ const repsolLogos: LogoItem[] = [
   { name: "Bocaatti", logo: logoBocaatti },
 ];
 
-const hotelGroups = ["Meliá Hotels", "Hyatt", "Marriott"];
+const hotelLogos: LogoItem[] = [
+  { name: "Meliá Hotels International", logo: logoMelia },
+  { name: "Hyatt", logo: logoHyatt },
+  { name: "Marriott", logo: logoMarriott },
+  { name: "Wyndham Hotel Group", logo: logoWyndham },
+  { name: "MYR Hotels", logo: logoMyr },
+  { name: "Four Seasons", logo: logoFourSeasons },
+  { name: "Palladium Hotel Group", logo: logoPalladium },
+  { name: "EM Hotels", logo: logoEm },
+];
 
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
