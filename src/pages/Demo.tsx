@@ -113,11 +113,7 @@ const Demo = () => {
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="bg-gradient-card border border-border rounded-2xl p-8 md:p-10">
               <h2 className="font-heading text-2xl font-bold mb-6">{c.form_title}</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <Input name="name" placeholder={c.name} required className="bg-background border-border" />
-                <Input name="email" type="email" placeholder={c.email} required className="bg-background border-border" />
-                <Input name="phone" type="tel" placeholder={c.phone} className="bg-background border-border" />
-                <Input name="restaurant" placeholder={c.restaurant} required className="bg-background border-border" />
-                <Input name="city" placeholder={c.city} className="bg-background border-border" />
+                <ContactFormFields native />
                 <Button type="submit" disabled={submitting} className="w-full bg-gradient-wine text-primary-foreground py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity">
                   {submitting ? c.sending : c.button}
                 </Button>
