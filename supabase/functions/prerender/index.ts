@@ -232,7 +232,7 @@ function generateHTML(meta: PageMeta, content: PageContent): string {
     name: 'Winerim',
     url: SITE,
     logo: OG_IMAGE,
-    description: 'Carta de vinos digital y recomendador inteligente para restaurantes, hoteles y vinotecas.',
+    description: 'Carta inteligente de vinos con IA para restaurantes, hoteles y vinotecas.',
     sameAs: [
       'https://www.instagram.com/winerim/',
       'https://www.youtube.com/@Winerim',
