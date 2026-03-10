@@ -80,10 +80,11 @@ const PlantillaCartaVinos = () => {
     setSubmitting(true);
     try {
       const { error } = await supabase.from("contact_leads").insert({
-        name: data.name,
         restaurant: data.restaurant,
+        name: data.name,
+        position: data.position,
+        phone: data.phone,
         email: data.email,
-        city: data.city,
         form_type: "plantilla-carta-vinos",
       });
       if (error) throw error;
