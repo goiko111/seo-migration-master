@@ -360,12 +360,12 @@ const CasosExito = () => {
 
                     {/* Quote */}
                     <Quote size={20} className="text-wine/25 mb-3" />
-                    <p className="text-sm leading-relaxed text-muted-foreground mb-6">
+                    <p className="text-sm leading-relaxed text-muted-foreground mb-6 flex-1">
                       {testimonial.quote}
                     </p>
 
                     {/* Author */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-border">
+                    <div className="flex items-center gap-3 pt-4 border-t border-border mt-auto">
                       <div className="w-10 h-10 rounded-full bg-wine flex items-center justify-center text-xs font-bold text-white shrink-0">
                         {testimonial.initials}
                       </div>

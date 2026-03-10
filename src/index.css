@@ -88,11 +88,11 @@
   }
 
   .bg-gradient-dark {
-    background: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 7%));
+    background: linear-gradient(180deg, hsl(140 2% 10%), hsl(140 2% 13%));
   }
 
   .bg-gradient-card {
-    background: linear-gradient(145deg, hsl(0 0% 8%), hsl(0 0% 5%));
+    background: linear-gradient(145deg, hsl(140 2% 14%), hsl(140 2% 11%));
   }
 
   .border-wine {
