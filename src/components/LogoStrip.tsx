@@ -166,7 +166,9 @@ const LogoStrip = () => {
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 sm:h-14 md:h-16 w-auto object-contain invert mix-blend-screen opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className={`h-8 sm:h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 ${
+                  item.isWhite ? '' : 'invert mix-blend-screen'
+                }`}
                 loading="lazy"
                 decoding="async"
                 width={140}
