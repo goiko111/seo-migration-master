@@ -34,24 +34,24 @@ const AnimatedNumber = ({ target, suffix = "" }: { target: number; suffix?: stri
 
 const metricsByLang: Record<string, { value: number; suffix: string; label: string; color: string }[]> = {
   es: [
-    { value: 20, suffix: "%", label: "Incremento medio en ventas de vino", color: "from-wine to-wine-light" },
-    { value: 15, suffix: "%", label: "Aumento del ticket medio", color: "from-accent to-gold-light" },
-    { value: 30, suffix: "%", label: "Más rotación de referencias", color: "from-wine-light to-accent" },
+    { value: 30, suffix: "%", label: "Incremento medio en ventas de vino", color: "from-wine to-wine-light" },
+    { value: 20, suffix: "%", label: "Aumento del ticket medio", color: "from-accent to-gold-light" },
+    { value: 35, suffix: "%", label: "Más rotación de referencias", color: "from-wine-light to-accent" },
   ],
   en: [
-    { value: 20, suffix: "%", label: "Average increase in wine sales", color: "from-wine to-wine-light" },
-    { value: 15, suffix: "%", label: "Average ticket increase", color: "from-accent to-gold-light" },
-    { value: 30, suffix: "%", label: "More reference rotation", color: "from-wine-light to-accent" },
+    { value: 30, suffix: "%", label: "Average increase in wine sales", color: "from-wine to-wine-light" },
+    { value: 20, suffix: "%", label: "Average ticket increase", color: "from-accent to-gold-light" },
+    { value: 35, suffix: "%", label: "More reference rotation", color: "from-wine-light to-accent" },
   ],
   it: [
-    { value: 20, suffix: "%", label: "Incremento medio nelle vendite di vino", color: "from-wine to-wine-light" },
-    { value: 15, suffix: "%", label: "Aumento dello scontrino medio", color: "from-accent to-gold-light" },
-    { value: 30, suffix: "%", label: "Più rotazione delle referenze", color: "from-wine-light to-accent" },
+    { value: 30, suffix: "%", label: "Incremento medio nelle vendite di vino", color: "from-wine to-wine-light" },
+    { value: 20, suffix: "%", label: "Aumento dello scontrino medio", color: "from-accent to-gold-light" },
+    { value: 35, suffix: "%", label: "Più rotazione delle referenze", color: "from-wine-light to-accent" },
   ],
   fr: [
-    { value: 20, suffix: "%", label: "Augmentation moyenne des ventes de vin", color: "from-wine to-wine-light" },
-    { value: 15, suffix: "%", label: "Augmentation du ticket moyen", color: "from-accent to-gold-light" },
-    { value: 30, suffix: "%", label: "Plus de rotation des références", color: "from-wine-light to-accent" },
+    { value: 30, suffix: "%", label: "Augmentation moyenne des ventes de vin", color: "from-wine to-wine-light" },
+    { value: 20, suffix: "%", label: "Augmentation du ticket moyen", color: "from-accent to-gold-light" },
+    { value: 35, suffix: "%", label: "Plus de rotation des références", color: "from-wine-light to-accent" },
   ],
 };
 
