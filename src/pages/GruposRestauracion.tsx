@@ -166,9 +166,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impatto", impactTitle1: "Risultati per i ", impactTitleHighlight: "gruppi",
     results: [
       { value: "Controllo totale", desc: "Sull'offerta di vino in tutti i locali" },
-      { value: "+22%", desc: "Miglioramento medio dei margini sul vino" },
-      { value: "+18%", desc: "Aumento medio delle vendite di vino" },
-      { value: "100%", desc: "Carte standardizzate e sempre aggiornate" },
+      { value: "Centralizzato", desc: "Gestione carte, prezzi e stock da un unico pannello" },
+      { value: "In tempo reale", desc: "Modifiche applicate istantaneamente in tutti i ristoranti" },
+      { value: "Multilingua", desc: "Carte tradotte automaticamente per ospiti internazionali" },
     ],
     scaleLabel: "Scalabilità", scaleTitle1: "Winerim cresce ", scaleTitleHighlight: "con te",
     useCases: [
