@@ -362,52 +362,118 @@ const Funcionalidades = () => {
             ); })}
           </div>
 
-          {/* Management screenshots showcase */}
-          <ScrollReveal className="mt-16 mb-10">
-            <div className="grid md:grid-cols-3 gap-6">
+          {/* ─── Stock & Inventario ─── */}
+          <ScrollReveal className="mt-16">
+            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Stock & Inventario</p>
+            <div className="grid md:grid-cols-3 gap-5">
               {[
-                { img: mgmtCartaImg, alt: "Gestión de carta de vinos Winerim", label: "Gestión de carta" },
-                { img: mgmtInsightsImg, alt: "Dashboard de Insights Winerim", label: "Insights & Resumen" },
-                { img: mgmtRendimientoImg, alt: "Rendimiento de carta de vinos", label: "Rendimiento" },
+                { img: ss01, alt: "Inventario de vinos Winerim", label: "Inventario" },
+                { img: ss02, alt: "Importar ventas en Winerim", label: "Importar ventas" },
+                { img: ss03, alt: "Historial de ventas Winerim", label: "Historial de ventas" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
                   <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
                   <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
                 </div>
               ))}
             </div>
           </ScrollReveal>
 
-          <ScrollReveal className="mb-10">
-            <div className="grid md:grid-cols-3 gap-6">
+          {/* ─── Pedidos & Proveedores ─── */}
+          <ScrollReveal className="mt-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Pedidos & Proveedores</p>
+            <div className="grid md:grid-cols-3 gap-5">
               {[
-                { img: mgmtStockImg, alt: "Control de stock e inventario Winerim", label: "Stock & Inventario" },
-                { img: mgmtPedidosImg, alt: "Gestión de pedidos a proveedores", label: "Pedidos" },
-                { img: mgmtAutomatizacionesImg, alt: "Automatizaciones con IA Winerim", label: "Automatizaciones IA" },
+                { img: ss04, alt: "Gestión de pedidos Winerim", label: "Pedidos" },
+                { img: ss05, alt: "Detalle de pedido a proveedor", label: "Detalle de pedido" },
+                { img: ss06, alt: "Gestión de proveedores Winerim", label: "Proveedores" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
                   <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
                   <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
                 </div>
               ))}
             </div>
           </ScrollReveal>
 
-          <ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-6">
+          {/* ─── Insights & Analítica ─── */}
+          <ScrollReveal className="mt-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Insights & Analítica</p>
+            <div className="grid md:grid-cols-3 gap-5">
               {[
-                { img: mgmtRotacionImg, alt: "Baja rotación de vinos Winerim", label: "Baja rotación" },
-                { img: mgmtRecomendadosImg, alt: "Gestionar vinos recomendados", label: "Recomendados" },
-                { img: mgmtObsolescenciaImg, alt: "Obsolescencia de vinos Winerim", label: "Obsolescencia" },
+                { img: ss14, alt: "Dashboard Insights Winerim", label: "Insights – Resumen" },
+                { img: ss15, alt: "Probabilidad de venta por vino", label: "Probabilidad de venta" },
+                { img: ss19, alt: "Rendimiento de la carta", label: "Rendimiento de la carta" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
                   <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
                   <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
                 </div>
               ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal className="mt-6">
+            <div className="grid md:grid-cols-3 gap-5">
+              {[
+                { img: ss17, alt: "Vinos en obsolescencia Winerim", label: "Obsolescencia" },
+                { img: ss16, alt: "Vinos populares Big Data", label: "Vinos populares (Big Data)" },
+                { img: ss18, alt: "Benchmark vs restaurantes similares", label: "Benchmark vs mercado" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* ─── Ajustes & Configuración ─── */}
+          <ScrollReveal className="mt-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Ajustes & Configuración</p>
+            <div className="grid md:grid-cols-3 gap-5">
+              {[
+                { img: ss07, alt: "Ajustes generales Winerim", label: "Ajustes generales" },
+                { img: ss08, alt: "Automatizaciones IA Winerim", label: "Automatizaciones IA" },
+                { img: ss10, alt: "IA de Winerim configuración", label: "IA de Winerim" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal className="mt-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { img: ss09, alt: "Ajustes de copas Winerim", label: "Ajustes de copas" },
+                { img: ss11, alt: "Configuración obsolescencia", label: "Config. obsolescencia" },
+                { img: ss12, alt: "Datos de servicio Winerim", label: "Datos de servicio" },
+                { img: ss13, alt: "Historial datos de servicio", label: "Historial de datos" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* ─── Catálogo de distribuidores ─── */}
+          <ScrollReveal className="mt-12 mb-4">
+            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Catálogo de distribuidores</p>
+            <div className="max-w-3xl mx-auto relative group">
+              <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img src={ss20} alt="Catálogo de distribuidores Winerim" className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
+              <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Catálogo con +500K referencias</p>
             </div>
           </ScrollReveal>
         </div>
