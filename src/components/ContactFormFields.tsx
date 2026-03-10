@@ -1,16 +1,8 @@
-import { Search, User, Phone, Mail } from "lucide-react";
+import { Search, User, Phone, Mail, MapPin, Wine } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-
-export const contactFormSchema = {
-  restaurant: { required: true, maxLength: 255 },
-  name: { required: true, maxLength: 100 },
-  position: { required: true },
-  phone: { required: true, maxLength: 30 },
-  email: { required: true, maxLength: 255 },
-};
 
 export const positionOptions = [
   { value: "propietario", label: "Propietario/a" },
@@ -23,13 +15,23 @@ export const positionOptions = [
   { value: "otro", label: "Otro" },
 ];
 
+export const referencesOptions = [
+  { value: "20-40", label: "20–40 referencias" },
+  { value: "40-80", label: "40–80 referencias" },
+  { value: "80-150", label: "80–150 referencias" },
+  { value: "150-300", label: "150–300 referencias" },
+  { value: "300-500", label: "300–500 referencias" },
+  { value: "500+", label: "+500 referencias" },
+];
+
 interface ContactFormFieldsProps {
   register?: any;
   errors?: any;
   inputClassName?: string;
   position?: string;
   onPositionChange?: (value: string) => void;
-  /** Use native HTML form (no react-hook-form) */
+  referencesCount?: string;
+  onReferencesCountChange?: (value: string) => void;
   native?: boolean;
 }
 
@@ -41,6 +43,8 @@ const ContactFormFields = ({
   inputClassName = "",
   position,
   onPositionChange,
+  referencesCount,
+  onReferencesCountChange,
   native,
 }: ContactFormFieldsProps) => {
   const cls = cn("pl-10 bg-background border-border", inputClassName);
@@ -86,13 +90,9 @@ const ContactFormFields = ({
         </Label>
         <div className="mt-1.5">
           {native ? (
-            <select
-              id="position"
-              name="position"
-              required
+            <select id="position" name="position" required
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              defaultValue=""
-            >
+              defaultValue="">
               <option value="" disabled>Selecciona tu cargo</option>
               {positionOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -144,6 +144,53 @@ const ContactFormFields = ({
           )}
         </div>
         {errors?.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
+      </div>
+
+      {/* City */}
+      <div>
+        <Label htmlFor="city" className="text-sm font-medium">
+          Ciudad <span className="text-destructive">*</span>
+        </Label>
+        <div className="relative mt-1.5">
+          <MapPin size={16} className={iconWrap} />
+          {native ? (
+            <Input id="city" name="city" placeholder="Tu ciudad" required className={cls} />
+          ) : (
+            <Input id="city" placeholder="Tu ciudad" {...register("city")} className={cls} />
+          )}
+        </div>
+        {errors?.city && <p className="text-xs text-destructive mt-1">{errors.city.message}</p>}
+      </div>
+
+      {/* References count (dropdown) */}
+      <div>
+        <Label htmlFor="references_count" className="text-sm font-medium">
+          Nº de referencias en carta <span className="text-destructive">*</span>
+        </Label>
+        <div className="mt-1.5">
+          {native ? (
+            <select id="references_count" name="references_count" required
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              defaultValue="">
+              <option value="" disabled>Selecciona un rango</option>
+              {referencesOptions.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          ) : (
+            <Select value={referencesCount} onValueChange={onReferencesCountChange}>
+              <SelectTrigger className="bg-background border-border">
+                <SelectValue placeholder="Selecciona un rango" />
+              </SelectTrigger>
+              <SelectContent>
+                {referencesOptions.map((o) => (
+                  <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </div>
+        {errors?.references_count && <p className="text-xs text-destructive mt-1">{errors.references_count.message}</p>}
       </div>
     </>
   );

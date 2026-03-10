@@ -25,6 +25,8 @@ const formSchema = z.object({
   position: z.string().trim().min(1, "Selecciona tu cargo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
+  city: z.string().trim().min(1, "La ciudad es obligatoria").max(100),
+  references_count: z.string().trim().min(1, "Selecciona el número de referencias"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -91,6 +93,7 @@ const GuiaVinoPorCopa = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
+  const [referencesCount, setReferencesCount] = useState("");
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -105,6 +108,8 @@ const GuiaVinoPorCopa = () => {
         position: data.position,
         phone: data.phone,
         email: data.email,
+        city: data.city,
+        references_count: data.references_count,
         form_type: "guia-vino-por-copa",
       });
       if (error) throw error;
@@ -174,7 +179,7 @@ const GuiaVinoPorCopa = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga la guía gratis</h3>
                   <p className="text-sm text-muted-foreground mb-4">Rellena el formulario y recíbela al instante.</p>
-                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
+                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
                     {loading ? "Enviando..." : "Descargar guía"}
