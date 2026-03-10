@@ -249,51 +249,55 @@ const Funcionalidades = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.core_title) }} />
           </ScrollReveal>
 
-          {/* Product screenshots showcase */}
+          {/* Tablet screenshots */}
+          <ScrollReveal className="mb-10">
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { img: tabletHeroImg, alt: "Carta de vinos digital en tablet", label: "Carta interactiva" },
+                { img: tabletDetailImg, alt: "Ficha de vino detallada", label: "Ficha del vino" },
+                { img: tabletComparatorImg, alt: "Comparador de vinos Winerim", label: "Comparador de vinos" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal className="mb-10">
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { img: tabletPairingImg, alt: "Maridajes automáticos Winerim", label: "Maridajes automáticos" },
+                { img: tabletFichaImg, alt: "Información visual del vino", label: "Información visual" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Mobile screenshots – phone-sized with labels */}
           <ScrollReveal className="mb-16">
-            <div className="grid md:grid-cols-3 gap-6 items-start">
-              <div className="space-y-6">
-                <div className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={tabletHeroImg} alt="Carta de vinos digital en tablet" className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Carta interactiva</p>
-                </div>
-                <div className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={tabletPairingImg} alt="Maridajes automáticos Winerim" className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Maridajes automáticos</p>
-                </div>
-              </div>
-              <div className="space-y-6">
-                <div className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={tabletDetailImg} alt="Ficha de vino detallada" className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Ficha del vino</p>
-                </div>
-                <div className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={tabletFichaImg} alt="Información visual del vino" className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Información visual</p>
-                </div>
-              </div>
-              <div className="space-y-6">
-                <div className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={tabletComparatorImg} alt="Comparador de vinos Winerim" className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Comparador de vinos</p>
-                </div>
-                <div className="flex gap-4 justify-center">
-                  <div className="relative group w-1/3">
-                    <img src={mobileListImg} alt="Carta de vinos en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
+            <p className="text-center text-sm text-muted-foreground mb-6 font-medium tracking-wide uppercase">También en móvil</p>
+            <div className="flex justify-center gap-8 md:gap-12">
+              {[
+                { img: mobileListImg, alt: "Carta de vinos en móvil", label: "Carta" },
+                { img: mobileDetailImg, alt: "Detalle de vino en móvil", label: "Ficha del vino" },
+                { img: mobileComparatorImg, alt: "Comparador en móvil", label: "Comparador" },
+              ].map((item, i) => (
+                <div key={i} className="relative group w-40 md:w-48">
+                  <div className="absolute -inset-3 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.12),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative rounded-2xl border-2 border-border/60 overflow-hidden shadow-xl bg-background/50 group-hover:border-wine/30 transition-colors">
+                    <img src={item.img} alt={item.alt} className="w-full" />
                   </div>
-                  <div className="relative group w-1/3">
-                    <img src={mobileDetailImg} alt="Detalle de vino en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
-                  </div>
-                  <div className="relative group w-1/3">
-                    <img src={mobileComparatorImg} alt="Comparador en móvil" className="relative w-full rounded-lg border border-border shadow-lg" />
-                  </div>
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
                 </div>
-              </div>
+              ))}
             </div>
           </ScrollReveal>
 
