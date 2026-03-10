@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -10,6 +11,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -152,7 +155,33 @@ const rimCards = [
   },
 ];
 
-/* ── (impacts data removed — now inline) ── */
+/* ── JSON-LD Schema ── */
+const JsonLdSchema = () => {
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Winerim Inteligencia Dinámica",
+      applicationCategory: "BusinessApplication",
+      description: "Capa de IA táctica para cartas de vino que adapta visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivos del restaurante.",
+      operatingSystem: "Web",
+      url: "https://winerim.wine/producto/inteligencia-dinamica",
+      offers: { "@type": "Offer", category: "Software para hostelería" },
+    };
+    const id = "jsonld-inteligencia-dinamica";
+    let el = document.getElementById(id) as HTMLScriptElement | null;
+    if (!el) {
+      el = document.createElement("script");
+      el.id = id;
+      el.type = "application/ld+json";
+      document.head.appendChild(el);
+    }
+    el.textContent = JSON.stringify(schema);
+    return () => { el?.remove(); };
+  }, []);
+  return null;
+};
+
 
 const InteligenciaDinamica = () => {
   const { t, localePath } = useLanguage();
@@ -160,10 +189,11 @@ const InteligenciaDinamica = () => {
   return (
     <>
       <SEOHead
-        title="Inteligencia dinámica para cartas de vino | Winerim"
-        description="La capa de IA táctica de Winerim que adapta la carta de vinos en tiempo real para aumentar facturación, margen, rotación y experiencia del comensal."
-        url="/producto/inteligencia-dinamica"
+        title="Inteligencia Dinámica para Cartas de Vino | IA para Restaurantes | Winerim"
+        description="Software de inteligencia artificial para restaurantes que optimiza tu carta de vinos en tiempo real. Aumenta margen, mejora rotación de stock y vende más vino con la carta digital dinámica de Winerim."
+        url="https://winerim.wine/producto/inteligencia-dinamica"
       />
+      <JsonLdSchema />
       <Navbar />
       <main className="min-h-screen bg-background overflow-hidden">
 
@@ -236,6 +266,14 @@ const InteligenciaDinamica = () => {
           <div className="relative max-w-5xl mx-auto">
             <motion.div initial="hidden" animate="visible" variants={stagger}>
 
+              {/* Breadcrumbs */}
+              <motion.div variants={fadeUp} custom={0} className="mb-6">
+                <Breadcrumbs items={[
+                  { label: "Producto", href: "/funcionalidades" },
+                  { label: "Inteligencia dinámica" },
+                ]} />
+              </motion.div>
+
               {/* Eyebrow */}
               <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-8">
                 <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/25 bg-wine/8 backdrop-blur-sm">
@@ -252,10 +290,10 @@ const InteligenciaDinamica = () => {
                 custom={1}
                 className="font-heading text-center text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08] mb-8"
               >
-                La carta ya no solo informa.
+                Inteligencia artificial para restaurantes:
                 <br />
                 <span className="text-gradient-wine">
-                  Ahora decide cómo vender mejor.
+                  la carta de vinos que vende mejor.
                 </span>
               </motion.h1>
 
@@ -265,7 +303,7 @@ const InteligenciaDinamica = () => {
                 custom={2}
                 className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-14 leading-relaxed"
               >
-                Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, contexto, clima, afluencia y objetivo del restaurante.
+                Inteligencia dinámica es la capa de IA táctica de Winerim: un software para vender más vino que adapta visibilidad, recomendación, rotación de stock y optimización de margen en restaurantes según el contexto real del negocio.
               </motion.p>
 
               {/* Highlights strip */}
@@ -335,9 +373,12 @@ const InteligenciaDinamica = () => {
             <ScrollReveal>
               <div className="text-center mb-16">
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  De una carta digital a un{" "}
-                  <span className="text-gradient-wine">sistema de decisión comercial</span>
+                  Carta de vinos inteligente vs.{" "}
+                  <span className="text-gradient-wine">carta digital tradicional</span>
                 </h2>
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto mt-5">
+                  Una carta digital dinámica no solo muestra vinos: toma decisiones de negocio en tiempo real.
+                </p>
               </div>
             </ScrollReveal>
 
@@ -635,11 +676,11 @@ const InteligenciaDinamica = () => {
                   Módulos RIM™
                 </Badge>
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
-                  Los módulos que hacen que la carta{" "}
-                  <span className="text-gradient-wine">reaccione</span>
+                  Módulos RIM™: la IA para hostelería{" "}
+                  <span className="text-gradient-wine">que actúa por ti</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                  Cada RIM™ responde a una lógica distinta. Juntos convierten la carta en un sistema táctico.
+                  Cada módulo responde a una lógica de negocio distinta. Juntos convierten la carta en un software de optimización de margen en restaurantes.
                 </p>
               </div>
             </ScrollReveal>
@@ -1065,12 +1106,12 @@ const InteligenciaDinamica = () => {
 
                 <div className="relative">
                   <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 leading-tight">
-                    Activa la inteligencia
+                    El software para vender más vino
                     <br />
-                    de tu carta de vinos
+                    con inteligencia artificial aplicada
                   </h2>
                   <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Descubre cómo la inteligencia dinámica puede transformar la rentabilidad y experiencia de tu carta. Sin compromiso.
+                    Descubre cómo la inteligencia dinámica optimiza el margen en restaurantes y transforma la experiencia de tu carta. Sin compromiso.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
@@ -1148,6 +1189,13 @@ const InteligenciaDinamica = () => {
           </div>
         </section>
       </main>
+      <InternalLinks links={[
+        { to: "/funcionalidades", label: "Todas las funcionalidades", type: "solution" },
+        { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+        { to: "/integraciones", label: "Integraciones", type: "tool" },
+        { to: "/soluciones/grupos-restauracion", label: "Soluciones para grupos", type: "solution" },
+        { to: "/demo", label: "Solicitar demo gratuita", type: "resource" },
+      ]} />
       <Footer />
     </>
   );
