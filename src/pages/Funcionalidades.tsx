@@ -21,6 +21,15 @@ import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
 import mobileListImg from "@/assets/winerim-mobile-list.png";
 import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
 import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
+import mgmtCartaImg from "@/assets/mgmt-carta.png";
+import mgmtStockImg from "@/assets/mgmt-stock.png";
+import mgmtInsightsImg from "@/assets/mgmt-insights.png";
+import mgmtRendimientoImg from "@/assets/mgmt-rendimiento.png";
+import mgmtPedidosImg from "@/assets/mgmt-pedidos.png";
+import mgmtAutomatizacionesImg from "@/assets/mgmt-automatizaciones.png";
+import mgmtRotacionImg from "@/assets/mgmt-rotacion.png";
+import mgmtRecomendadosImg from "@/assets/mgmt-recomendados.png";
+import mgmtObsolescenciaImg from "@/assets/mgmt-obsolescencia.png";
 
 const coreIcons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart, QrCode, Filter, Search, Wine, FileText, Languages, Palette];
 const mgmtIcons = [RefreshCw, Bell, TrendingUp, Globe, Smartphone, Zap];
@@ -332,6 +341,55 @@ const Funcionalidades = () => {
               </ScrollReveal>
             ); })}
           </div>
+
+          {/* Management screenshots showcase */}
+          <ScrollReveal className="mt-16 mb-10">
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { img: mgmtCartaImg, alt: "Gestión de carta de vinos Winerim", label: "Gestión de carta" },
+                { img: mgmtInsightsImg, alt: "Dashboard de Insights Winerim", label: "Insights & Resumen" },
+                { img: mgmtRendimientoImg, alt: "Rendimiento de carta de vinos", label: "Rendimiento" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal className="mb-10">
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { img: mgmtStockImg, alt: "Control de stock e inventario Winerim", label: "Stock & Inventario" },
+                { img: mgmtPedidosImg, alt: "Gestión de pedidos a proveedores", label: "Pedidos" },
+                { img: mgmtAutomatizacionesImg, alt: "Automatizaciones con IA Winerim", label: "Automatizaciones IA" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { img: mgmtRotacionImg, alt: "Baja rotación de vinos Winerim", label: "Baja rotación" },
+                { img: mgmtRecomendadosImg, alt: "Gestionar vinos recomendados", label: "Recomendados" },
+                { img: mgmtObsolescenciaImg, alt: "Obsolescencia de vinos Winerim", label: "Obsolescencia" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
+                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
