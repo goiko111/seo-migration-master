@@ -622,15 +622,15 @@ const InteligenciaDinamica = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className={`group relative h-full p-7 md:p-8 rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${obj.borderHover} transition-all duration-500 hover:shadow-lg hover:shadow-black/10`}
+                    className={`group relative h-full p-7 md:p-8 rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm ${obj.borderHover} transition-all duration-500 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-1 overflow-hidden`}
                   >
                     {/* Hover gradient overlay */}
-                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${obj.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${obj.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
                     <div className="relative flex flex-col h-full">
                       {/* Icon */}
-                      <div className={`w-12 h-12 rounded-xl ${obj.iconBg} flex items-center justify-center mb-5 transition-colors duration-300`}>
-                        <obj.icon className={`w-6 h-6 ${obj.iconColor}`} />
+                      <div className={`w-12 h-12 rounded-xl ${obj.iconBg} flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110`}>
+                        <obj.icon className={`w-6 h-6 ${obj.iconColor} transition-all duration-500`} />
                       </div>
 
                       {/* Title */}
@@ -644,15 +644,15 @@ const InteligenciaDinamica = () => {
                       </p>
 
                       {/* Activated modules */}
-                      <div className="pt-4 border-t border-border/60">
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/50 font-semibold mb-2.5">
+                      <div className="pt-4 border-t border-border/40 group-hover:border-border/60 transition-colors duration-500">
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/40 font-semibold mb-2.5">
                           Activa
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {obj.modules.map((mod) => (
                             <span
                               key={mod}
-                              className="inline-flex items-center px-2.5 py-1 rounded-md bg-wine/8 border border-wine/15 text-[11px] font-mono font-medium text-wine/80 tracking-wide"
+                              className="inline-flex items-center px-2.5 py-1 rounded-md bg-wine/6 border border-wine/10 text-[11px] font-mono font-medium text-wine/70 tracking-wide group-hover:bg-wine/10 group-hover:border-wine/20 group-hover:text-wine/90 transition-all duration-500"
                             >
                               {mod}
                             </span>
