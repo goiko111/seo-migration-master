@@ -70,8 +70,9 @@ const optimizationBenefits = [
 const PlantillaCartaVinos = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [position, setPosition] = useState("");
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
