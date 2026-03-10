@@ -164,8 +164,8 @@ const Contacto = () => {
 
               <div className="pt-4 border-t border-border">
                 <h3 className="font-heading text-lg font-semibold mb-4">Winerim {lang === "es" ? "en un minuto" : lang === "en" ? "in one minute" : lang === "it" ? "in un minuto" : "en une minute"}</h3>
-                <div className="aspect-video rounded-xl overflow-hidden border border-border">
-                  <iframe src="https://www.youtube.com/embed/-PleM286zeY" title="Winerim" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" loading="lazy" />
+                <div className="rounded-xl overflow-hidden border border-border">
+                  <YouTubeFacade videoId="-PleM286zeY" title="Winerim en un minuto" />
                 </div>
               </div>
             </motion.div>
