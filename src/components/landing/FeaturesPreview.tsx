@@ -1,19 +1,46 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Utensils, Filter, BarChart3, QrCode, Wine, ArrowRight } from "lucide-react";
+import { QrCode, Utensils, Package, DollarSign, BarChart3, Sparkles, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+const featuresByLang: Record<string, { icon: typeof QrCode; title: string; desc: string }[]> = {
+  es: [
+    { icon: QrCode, title: "Carta digital interactiva", desc: "Acceso por QR/link, filtros dinámicos, comparador y navegación multiidioma." },
+    { icon: Utensils, title: "Maridajes automáticos con IA", desc: "Recomendaciones inteligentes vino-plato para cada comensal y contexto." },
+    { icon: Package, title: "Stock e inventario", desc: "Control de botellas, disponibilidad, rotación y alertas automáticas." },
+    { icon: DollarSign, title: "Pricing y márgenes", desc: "Análisis de precios, márgenes por botella/copa y detección de referencias poco rentables." },
+    { icon: BarChart3, title: "Analítica avanzada", desc: "Informes de comportamiento, KPIs de venta, métricas para dirección y compras." },
+    { icon: Sparkles, title: "IA aplicada al vino", desc: "Generación de fichas, descriptores sensoriales, recomendaciones comerciales y acciones dinámicas." },
+  ],
+  en: [
+    { icon: QrCode, title: "Interactive digital wine list", desc: "QR/link access, dynamic filters, comparator, and multi-language navigation." },
+    { icon: Utensils, title: "AI-powered auto pairings", desc: "Smart wine-dish recommendations for every diner and context." },
+    { icon: Package, title: "Stock & inventory", desc: "Bottle control, availability, rotation, and automatic alerts." },
+    { icon: DollarSign, title: "Pricing & margins", desc: "Price analysis, per-bottle/glass margins, and detection of underperforming references." },
+    { icon: BarChart3, title: "Advanced analytics", desc: "Behavior reports, sales KPIs, metrics for management and purchasing." },
+    { icon: Sparkles, title: "AI for wine", desc: "Wine sheet generation, sensory descriptors, commercial recommendations, and dynamic actions." },
+  ],
+  it: [
+    { icon: QrCode, title: "Carta digitale interattiva", desc: "Accesso QR/link, filtri dinamici, comparatore e navigazione multilingua." },
+    { icon: Utensils, title: "Abbinamenti automatici con IA", desc: "Raccomandazioni intelligenti vino-piatto per ogni commensale e contesto." },
+    { icon: Package, title: "Stock e inventario", desc: "Controllo bottiglie, disponibilità, rotazione e avvisi automatici." },
+    { icon: DollarSign, title: "Pricing e margini", desc: "Analisi prezzi, margini per bottiglia/calice e rilevamento referenze poco redditizie." },
+    { icon: BarChart3, title: "Analisi avanzata", desc: "Report comportamento, KPI vendite, metriche per direzione e acquisti." },
+    { icon: Sparkles, title: "IA applicata al vino", desc: "Generazione schede, descrittori sensoriali, raccomandazioni commerciali e azioni dinamiche." },
+  ],
+  fr: [
+    { icon: QrCode, title: "Carte digitale interactive", desc: "Accès QR/lien, filtres dynamiques, comparateur et navigation multilingue." },
+    { icon: Utensils, title: "Accords automatiques par IA", desc: "Recommandations intelligentes vin-plat pour chaque convive et contexte." },
+    { icon: Package, title: "Stock & inventaire", desc: "Contrôle des bouteilles, disponibilité, rotation et alertes automatiques." },
+    { icon: DollarSign, title: "Pricing & marges", desc: "Analyse des prix, marges par bouteille/verre et détection des références peu rentables." },
+    { icon: BarChart3, title: "Analytique avancée", desc: "Rapports comportement, KPIs vente, métriques pour direction et achats." },
+    { icon: Sparkles, title: "IA appliquée au vin", desc: "Génération de fiches, descripteurs sensoriels, recommandations commerciales et actions dynamiques." },
+  ],
+};
+
 const FeaturesPreview = () => {
   const { t, lang, localePath } = useLanguage();
-
-  const features = [
-    { icon: Sparkles, title: lang === "es" ? "Recomendaciones IA" : lang === "en" ? "AI Recommendations" : lang === "it" ? "Raccomandazioni IA" : "Recommandations IA", desc: lang === "es" ? "Sugerencias inteligentes para cada comensal." : lang === "en" ? "Smart suggestions for every diner." : lang === "it" ? "Suggerimenti intelligenti per ogni commensale." : "Suggestions intelligentes pour chaque convive." },
-    { icon: Utensils, title: lang === "es" ? "Maridajes automáticos" : lang === "en" ? "Auto pairings" : lang === "it" ? "Abbinamenti automatici" : "Accords automatiques", desc: lang === "es" ? "Propuestas instantáneas para cada plato." : lang === "en" ? "Instant pairing suggestions for every dish." : lang === "it" ? "Proposte istantanee per ogni piatto." : "Propositions instantanées pour chaque plat." },
-    { icon: Filter, title: lang === "es" ? "Filtros sensoriales" : lang === "en" ? "Sensory filters" : lang === "it" ? "Filtri sensoriali" : "Filtres sensoriels", desc: lang === "es" ? "Busca por sabor, cuerpo o intensidad." : lang === "en" ? "Search by taste, body, or intensity." : lang === "it" ? "Cerca per gusto, corpo o intensità." : "Recherche par goût, corps ou intensité." },
-    { icon: BarChart3, title: lang === "es" ? "Analítica de ventas" : lang === "en" ? "Sales analytics" : lang === "it" ? "Analisi vendite" : "Analytique des ventes", desc: lang === "es" ? "KPIs de tu carta de vinos en tiempo real." : lang === "en" ? "Real-time KPIs for your wine list." : lang === "it" ? "KPI della tua carta in tempo reale." : "KPIs de votre carte en temps réel." },
-    { icon: QrCode, title: lang === "es" ? "Acceso por QR" : lang === "en" ? "QR access" : lang === "it" ? "Accesso QR" : "Accès QR", desc: lang === "es" ? "También disponible como app nativa." : lang === "en" ? "Also available as a native app." : lang === "it" ? "Disponibile anche come app nativa." : "Également disponible en app native." },
-    { icon: Wine, title: lang === "es" ? "Gestión de bodega" : lang === "en" ? "Cellar management" : lang === "it" ? "Gestione cantina" : "Gestion de cave", desc: lang === "es" ? "Stock, rotación y alertas automáticas." : lang === "en" ? "Stock, rotation, and automatic alerts." : lang === "it" ? "Stock, rotazione e avvisi automatici." : "Stock, rotation et alertes automatiques." },
-  ];
+  const features = featuresByLang[lang] || featuresByLang.es;
 
   return (
     <section className="section-padding">

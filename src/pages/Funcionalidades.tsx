@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Sparkles, Utensils, BarChart3, Eye, ShoppingCart,
-  QrCode, Smartphone, Globe, Palette, Wine, Filter, Search,
-  RefreshCw, Bell, TrendingUp, FileText, Languages, Zap,
-  Rocket, CheckCircle, Calendar
+  ArrowRight, Sparkles, Utensils, BarChart3, QrCode, Wine, Filter, Search,
+  RefreshCw, Bell, TrendingUp, FileText, Languages, Palette, Globe, Smartphone,
+  Zap, Rocket, CheckCircle, Calendar, Package, DollarSign, ShoppingCart,
+  Eye, Image, BookOpen, Settings, Users, ClipboardList, History, BellRing,
+  Headphones, LayoutDashboard, Database, Link2, Cpu, MessageSquare, Share2,
+  GraduationCap, Target, Lightbulb
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +15,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+
+// ─── Screenshots ───
 import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
 import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
 import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
@@ -21,15 +25,6 @@ import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
 import mobileListImg from "@/assets/winerim-mobile-list.png";
 import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
 import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
-import mgmtCartaImg from "@/assets/mgmt-carta.png";
-import mgmtStockImg from "@/assets/mgmt-stock.png";
-import mgmtInsightsImg from "@/assets/mgmt-insights.png";
-import mgmtRendimientoImg from "@/assets/mgmt-rendimiento.png";
-import mgmtPedidosImg from "@/assets/mgmt-pedidos.png";
-import mgmtAutomatizacionesImg from "@/assets/mgmt-automatizaciones.png";
-import mgmtRotacionImg from "@/assets/mgmt-rotacion.png";
-import mgmtRecomendadosImg from "@/assets/mgmt-recomendados.png";
-import mgmtObsolescenciaImg from "@/assets/mgmt-obsolescencia.png";
 import ss01 from "@/assets/screenshots/ss-01.png";
 import ss02 from "@/assets/screenshots/ss-02.png";
 import ss03 from "@/assets/screenshots/ss-03.png";
@@ -51,49 +46,147 @@ import ss18 from "@/assets/screenshots/ss-18.png";
 import ss19 from "@/assets/screenshots/ss-19.png";
 import ss20 from "@/assets/screenshots/ss-20.png";
 
-const coreIcons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart, QrCode, Filter, Search, Wine, FileText, Languages, Palette];
-const mgmtIcons = [RefreshCw, Bell, TrendingUp, Globe, Smartphone, Zap];
+// ─── Types ───
+interface CategoryItem { icon: typeof Wine; title: string; desc: string }
+interface Category { title: string; items: CategoryItem[] }
+interface Block { badge: string; title: string; categories: Category[] }
 
-const i18n: Record<string, {
+interface LangContent {
   seo_title: string; seo_desc: string; breadcrumb: string; badge: string; title: string; subtitle: string;
-  core_badge: string; core_title: string; mgmt_badge: string; mgmt_title: string;
+  blocks: Block[];
   changelog_badge: string; changelog_title: string; changelog_sub: string;
   roadmap_badge: string; roadmap_title: string; roadmap_sub: string;
   cta_badge: string; cta_title: string; cta_sub: string; cta_btn: string;
-  core: { title: string; desc: string }[];
-  mgmt: { title: string; desc: string }[];
   changelog: { date: string; title: string; desc: string; tag: "new" | "improvement" | "fix" }[];
   roadmap: { quarter: string; items: string[] }[];
   tag_labels: Record<string, string>;
-}> = {
+  coming_soon: string;
+}
+
+// ─── i18n ───
+const i18n: Record<string, LangContent> = {
   es: {
-    seo_title: "Funcionalidades de Winerim | Carta de Vinos Inteligente", seo_desc: "Descubre todas las funcionalidades de Winerim: recomendaciones IA, maridajes automáticos, filtros sensoriales, analítica y más.", breadcrumb: "Funcionalidades", badge: "Todo en uno", title: "Todo lo que <em>Winerim</em> puede hacer por ti", subtitle: "Una plataforma completa para transformar tu carta de vinos en una herramienta de venta inteligente.",
-    core_badge: "Para el comensal", core_title: "Experiencia del <em>cliente</em>", mgmt_badge: "Para el restaurante", mgmt_title: "Gestión y <em>analítica</em>",
+    seo_title: "Funcionalidades de Winerim | Carta de Vinos Inteligente",
+    seo_desc: "Descubre todas las funcionalidades de Winerim: carta digital interactiva, maridajes IA, gestión de stock, pricing, analítica avanzada y más.",
+    breadcrumb: "Funcionalidades", badge: "Todo en uno",
+    title: "Todo lo que <em>Winerim</em> puede hacer por ti",
+    subtitle: "Una plataforma completa para transformar tu carta de vinos en una herramienta de venta inteligente.",
+    blocks: [
+      {
+        badge: "Para el comensal", title: "Experiencia del <em>cliente</em>",
+        categories: [
+          {
+            title: "Carta digital interactiva",
+            items: [
+              { icon: QrCode, title: "Acceso por QR/link", desc: "El comensal accede escaneando un QR o desde un enlace." },
+              { icon: Eye, title: "Visualización atractiva", desc: "Diseño más claro y visual que una carta tradicional." },
+              { icon: Filter, title: "Filtros dinámicos", desc: "Filtros que se alimentan entre sí: tipo, país, región, uva, precio, estilo." },
+              { icon: Search, title: "Búsqueda avanzada", desc: "Busca por cualquier criterio en segundos." },
+              { icon: BarChart3, title: "Comparador de vinos", desc: "El comensal compara opciones con información clara." },
+              { icon: Sparkles, title: "Recomendaciones IA", desc: "Sugerencias inteligentes personalizadas para cada comensal." },
+              { icon: Utensils, title: "Maridajes automáticos", desc: "Propuestas de maridaje instantáneas con los platos de la carta." },
+              { icon: Languages, title: "Multiidioma", desc: "Navegación automática en el idioma del comensal." },
+            ],
+          },
+          {
+            title: "Información avanzada de cada vino",
+            items: [
+              { icon: FileText, title: "Ficha técnica completa", desc: "Uvas, zona, productor, añada, estilo y más." },
+              { icon: Sparkles, title: "Atributos asistidos por IA", desc: "Descriptores sensoriales generados automáticamente." },
+              { icon: Image, title: "Fotografías de botella", desc: "Imágenes de cada referencia para decisión visual." },
+              { icon: BookOpen, title: "Lenguaje accesible", desc: "Explicación del vino comprensible para cualquier cliente." },
+            ],
+          },
+          {
+            title: "Maridaje e inteligencia gastronómica",
+            items: [
+              { icon: Utensils, title: "Maridajes automáticos vino-plato", desc: "Relación directa entre los platos y vinos de tu carta." },
+              { icon: Sparkles, title: "Recomendación contextual", desc: "Sugerencias que ayudan a vender mejor." },
+              { icon: Target, title: "Estrategias de pairing", desc: "Herramientas para construir estrategias de maridaje rentables." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Para el restaurante", title: "Gestión y <em>analítica</em>",
+        categories: [
+          {
+            title: "Gestión de carta",
+            items: [
+              { icon: Wine, title: "Alta y edición de vinos", desc: "Añade y edita referencias de forma rápida." },
+              { icon: ClipboardList, title: "Organización de la carta", desc: "Estructura por categorías, secciones y orden personalizado." },
+              { icon: Palette, title: "Personalización visual", desc: "Adapta colores, logo, tipografía y estilo." },
+              { icon: Settings, title: "Configuración avanzada", desc: "Ajustes específicos por restaurante." },
+              { icon: Languages, title: "Gestión multiidioma", desc: "Traducciones automáticas y edición manual." },
+              { icon: Database, title: "Base de datos de vinos", desc: "Catálogo con +500.000 referencias para alta instantánea." },
+            ],
+          },
+          {
+            title: "Stock e inventario",
+            items: [
+              { icon: Package, title: "Gestión de stock", desc: "Control de botellas y unidades disponibles." },
+              { icon: RefreshCw, title: "Descuento de stock", desc: "Actualización automática al vender." },
+              { icon: Bell, title: "Alertas de disponibilidad", desc: "Notificaciones cuando un vino está por agotarse." },
+              { icon: TrendingUp, title: "Apoyo a rotación", desc: "Identifica vinos parados y sugiere acciones." },
+            ],
+          },
+          {
+            title: "Pricing, márgenes y estrategia comercial",
+            items: [
+              { icon: DollarSign, title: "Análisis de precios y márgenes", desc: "Visualiza rentabilidad por referencia." },
+              { icon: Wine, title: "Pricing por botella y copa", desc: "Herramientas para fijar precios óptimos." },
+              { icon: TrendingUp, title: "Optimización de ticket medio", desc: "Estrategias basadas en datos para subir el ticket." },
+              { icon: Target, title: "Detección de referencias mal posicionadas", desc: "Identifica vinos poco rentables o sin demanda." },
+            ],
+          },
+          {
+            title: "Analítica y datos",
+            items: [
+              { icon: BarChart3, title: "Analítica avanzada", desc: "Dashboard con informes automáticos." },
+              { icon: Eye, title: "Comportamiento del comensal", desc: "Qué vinos se consultan, qué categorías interesan más." },
+              { icon: TrendingUp, title: "Métricas de conversión", desc: "Qué referencias convierten mejor y a qué precios." },
+              { icon: Globe, title: "Big Data de la carta", desc: "Visión global para dirección y compras." },
+            ],
+          },
+          {
+            title: "Operativa del restaurante",
+            items: [
+              { icon: ShoppingCart, title: "Gestión de pedidos", desc: "Pedidos a proveedores integrados en el flujo." },
+              { icon: History, title: "Historial completo", desc: "Registro de cambios, ventas y movimientos." },
+              { icon: Users, title: "Usuarios y roles", desc: "Permisos por persona y nivel de acceso." },
+              { icon: BellRing, title: "Notificaciones", desc: "Alertas inteligentes sobre stock, ventas y carta." },
+              { icon: LayoutDashboard, title: "Panel de administración", desc: "Control centralizado de toda la operativa." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Tecnología e IA", title: "Inteligencia <em>artificial</em>",
+        categories: [
+          {
+            title: "IA aplicada al vino y a la venta",
+            items: [
+              { icon: Sparkles, title: "Generación de fichas con IA", desc: "Fichas de vino completas generadas automáticamente." },
+              { icon: Cpu, title: "Atributos asistidos por IA", desc: "Descriptores sensoriales y categorización inteligente." },
+              { icon: Utensils, title: "Maridajes con IA", desc: "Recomendaciones de maridaje basadas en machine learning." },
+              { icon: TrendingUp, title: "Recomendación comercial", desc: "IA que apoya decisiones de sala y dirección." },
+              { icon: Zap, title: "Acciones dinámicas en tiempo real", desc: "Ajustes automáticos sobre la carta según el momento." },
+            ],
+          },
+          {
+            title: "Integración y capa operativa",
+            items: [
+              { icon: Link2, title: "Carta + stock + venta conectados", desc: "Visión unificada de carta, comportamiento y gestión." },
+              { icon: Database, title: "Base para integraciones", desc: "Preparado para conectar con TPV, comandas y cava." },
+            ],
+          },
+        ],
+      },
+    ],
+    coming_soon: "En desarrollo",
     changelog_badge: "Changelog", changelog_title: "Últimas <em>novedades</em>", changelog_sub: "Winerim evoluciona constantemente.",
     roadmap_badge: "Roadmap", roadmap_title: "Lo que viene en <em>Winerim</em>", roadmap_sub: "Nuestro plan de desarrollo para los próximos meses.",
     cta_badge: "Empieza hoy", cta_title: "Descubre Winerim en <em>acción</em>", cta_sub: "Prueba todas estas funcionalidades gratis durante 14 días. Sin compromiso.", cta_btn: "Prueba Gratis",
-    core: [
-      { title: "Recomendaciones IA", desc: "La inteligencia artificial sugiere vinos según las preferencias del comensal." },
-      { title: "Maridajes automáticos", desc: "Propuestas de maridaje instantáneas para cada plato del menú." },
-      { title: "Comparador de vinos", desc: "El comensal compara opciones con información clara y detallada." },
-      { title: "Información visual", desc: "Notas de cata accesibles, sin tecnicismos, con imágenes." },
-      { title: "Venta guiada", desc: "La carta conduce al cliente hacia mejores decisiones de compra." },
-      { title: "Acceso por QR", desc: "El comensal accede escaneando un QR desde su móvil." },
-      { title: "Filtros sensoriales", desc: "Busca vinos por sabor, cuerpo o intensidad." },
-      { title: "Buscador inteligente", desc: "Encuentra cualquier referencia en segundos." },
-      { title: "Gestión de bodega", desc: "Control total de stock con alertas." },
-      { title: "Notas de cata IA", desc: "Generación automática de descripciones atractivas." },
-      { title: "Multiidioma", desc: "Carta traducida automáticamente." },
-      { title: "Personalización total", desc: "Adapta colores, logo y tipografía." },
-    ],
-    mgmt: [
-      { title: "Rotación automática", desc: "Destaca vinos diferentes cada semana." },
-      { title: "Alertas de stock", desc: "Notificaciones cuando un vino está por agotarse." },
-      { title: "Analítica de ventas", desc: "Dashboard con datos de venta por vino y periodo." },
-      { title: "Multirestaurante", desc: "Gestiona la carta de varios locales desde un panel." },
-      { title: "App de gestión", desc: "Actualiza la carta desde cualquier dispositivo." },
-      { title: "Alta instantánea", desc: "Añade vinos en segundos con +500.000 referencias." },
-    ],
     changelog: [
       { date: "Feb 2026", title: "Filtros sensoriales v2", desc: "Nueva interfaz de filtrado por perfil aromático.", tag: "new" },
       { date: "Ene 2026", title: "Comparador mejorado", desc: "Compara hasta 4 vinos con gráficos radar.", tag: "improvement" },
@@ -103,40 +196,131 @@ const i18n: Record<string, {
       { date: "Sep 2025", title: "Integración Revo TPV", desc: "Sincronización bidireccional con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Recomendaciones por historial", "Integración con reservas", "Widget embebido para web"] },
-      { quarter: "Q3 2026", items: ["App nativa para comensales", "Programa de fidelización", "Marketplace de bodegas"] },
+      { quarter: "Q2 2026", items: ["Solicitar al sumiller desde la carta", "Compartir selección por QR/link", "Recomendaciones por historial"] },
+      { quarter: "Q3 2026", items: ["Modo educación con tips de vino", "FocusRIM – módulos IA para empujar referencias rentables", "App nativa para comensales"] },
       { quarter: "Q4 2026", items: ["IA predictiva de tendencias", "Carta con realidad aumentada", "API pública v2"] },
     ],
     tag_labels: { new: "Nuevo", improvement: "Mejora", fix: "Corrección" },
   },
   en: {
-    seo_title: "Winerim Features | Smart Wine List", seo_desc: "Discover all Winerim features: AI recommendations, auto pairings, sensory filters, analytics and more.", breadcrumb: "Features", badge: "All in one", title: "Everything <em>Winerim</em> can do for you", subtitle: "A complete platform to transform your wine list into a smart sales tool.",
-    core_badge: "For the diner", core_title: "Customer <em>experience</em>", mgmt_badge: "For the restaurant", mgmt_title: "Management & <em>analytics</em>",
+    seo_title: "Winerim Features | Smart Wine List", seo_desc: "Discover all Winerim features: interactive digital wine list, AI pairings, stock management, pricing, advanced analytics and more.",
+    breadcrumb: "Features", badge: "All in one", title: "Everything <em>Winerim</em> can do for you", subtitle: "A complete platform to transform your wine list into a smart sales tool.",
+    blocks: [
+      {
+        badge: "For the diner", title: "Customer <em>experience</em>",
+        categories: [
+          {
+            title: "Interactive digital wine list",
+            items: [
+              { icon: QrCode, title: "QR/link access", desc: "Guests access by scanning a QR or link." },
+              { icon: Eye, title: "Attractive display", desc: "Clearer, more visual design than a traditional list." },
+              { icon: Filter, title: "Dynamic filters", desc: "Interconnected filters: type, country, region, grape, price, style." },
+              { icon: Search, title: "Advanced search", desc: "Search by any criteria in seconds." },
+              { icon: BarChart3, title: "Wine comparator", desc: "Guests compare options with clear info." },
+              { icon: Sparkles, title: "AI recommendations", desc: "Personalized smart suggestions for each diner." },
+              { icon: Utensils, title: "Auto pairings", desc: "Instant pairing suggestions with menu dishes." },
+              { icon: Languages, title: "Multi-language", desc: "Automatic navigation in the guest's language." },
+            ],
+          },
+          {
+            title: "Advanced wine information",
+            items: [
+              { icon: FileText, title: "Complete tech sheet", desc: "Grapes, region, producer, vintage, style and more." },
+              { icon: Sparkles, title: "AI-assisted attributes", desc: "Automatically generated sensory descriptors." },
+              { icon: Image, title: "Bottle photos", desc: "Images for each reference for visual decision-making." },
+              { icon: BookOpen, title: "Accessible language", desc: "Wine explanations understandable for any guest." },
+            ],
+          },
+          {
+            title: "Pairing & gastronomic intelligence",
+            items: [
+              { icon: Utensils, title: "Auto wine-dish pairings", desc: "Direct relationship between your dishes and wines." },
+              { icon: Sparkles, title: "Contextual recommendations", desc: "Suggestions that help sell better." },
+              { icon: Target, title: "Pairing strategies", desc: "Tools to build profitable pairing strategies." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "For the restaurant", title: "Management & <em>analytics</em>",
+        categories: [
+          {
+            title: "Wine list management",
+            items: [
+              { icon: Wine, title: "Add & edit wines", desc: "Add and edit references quickly." },
+              { icon: ClipboardList, title: "List organization", desc: "Structure by categories, sections and custom order." },
+              { icon: Palette, title: "Visual customization", desc: "Adapt colors, logo, typography and style." },
+              { icon: Settings, title: "Advanced settings", desc: "Restaurant-specific configurations." },
+              { icon: Languages, title: "Multi-language management", desc: "Auto translations and manual editing." },
+              { icon: Database, title: "Wine database", desc: "Catalog with 500K+ references for instant adding." },
+            ],
+          },
+          {
+            title: "Stock & inventory",
+            items: [
+              { icon: Package, title: "Stock management", desc: "Control bottles and available units." },
+              { icon: RefreshCw, title: "Stock deduction", desc: "Automatic update on sale." },
+              { icon: Bell, title: "Availability alerts", desc: "Notifications when a wine is running low." },
+              { icon: TrendingUp, title: "Rotation support", desc: "Identify stagnant wines and suggest actions." },
+            ],
+          },
+          {
+            title: "Pricing, margins & commercial strategy",
+            items: [
+              { icon: DollarSign, title: "Price & margin analysis", desc: "Visualize profitability per reference." },
+              { icon: Wine, title: "Bottle & glass pricing", desc: "Tools to set optimal prices." },
+              { icon: TrendingUp, title: "Average ticket optimization", desc: "Data-driven strategies to increase the ticket." },
+              { icon: Target, title: "Poorly positioned reference detection", desc: "Identify unprofitable or low-demand wines." },
+            ],
+          },
+          {
+            title: "Analytics & data",
+            items: [
+              { icon: BarChart3, title: "Advanced analytics", desc: "Dashboard with automatic reports." },
+              { icon: Eye, title: "Diner behavior", desc: "Which wines are viewed, which categories interest most." },
+              { icon: TrendingUp, title: "Conversion metrics", desc: "Which references convert best and at what prices." },
+              { icon: Globe, title: "Wine list Big Data", desc: "Global vision for management and purchasing." },
+            ],
+          },
+          {
+            title: "Restaurant operations",
+            items: [
+              { icon: ShoppingCart, title: "Order management", desc: "Supplier orders integrated into the workflow." },
+              { icon: History, title: "Complete history", desc: "Record of changes, sales and movements." },
+              { icon: Users, title: "Users & roles", desc: "Permissions by person and access level." },
+              { icon: BellRing, title: "Notifications", desc: "Smart alerts about stock, sales and list." },
+              { icon: LayoutDashboard, title: "Admin panel", desc: "Centralized control of all operations." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Technology & AI", title: "Artificial <em>intelligence</em>",
+        categories: [
+          {
+            title: "AI for wine and sales",
+            items: [
+              { icon: Sparkles, title: "AI wine sheet generation", desc: "Complete wine sheets generated automatically." },
+              { icon: Cpu, title: "AI-assisted attributes", desc: "Intelligent sensory descriptors and categorization." },
+              { icon: Utensils, title: "AI pairings", desc: "Pairing recommendations based on machine learning." },
+              { icon: TrendingUp, title: "Commercial recommendations", desc: "AI supporting floor and management decisions." },
+              { icon: Zap, title: "Real-time dynamic actions", desc: "Automatic adjustments on the list based on context." },
+            ],
+          },
+          {
+            title: "Integration & operational layer",
+            items: [
+              { icon: Link2, title: "List + stock + sales connected", desc: "Unified view of list, behavior and management." },
+              { icon: Database, title: "Integration-ready", desc: "Prepared to connect with POS, orders and cellar." },
+            ],
+          },
+        ],
+      },
+    ],
+    coming_soon: "Coming soon",
     changelog_badge: "Changelog", changelog_title: "Latest <em>updates</em>", changelog_sub: "Winerim is constantly evolving.",
     roadmap_badge: "Roadmap", roadmap_title: "What's coming to <em>Winerim</em>", roadmap_sub: "Our development plan for the coming months.",
     cta_badge: "Start today", cta_title: "See Winerim in <em>action</em>", cta_sub: "Try all these features free for 14 days. No commitment.", cta_btn: "Try Free",
-    core: [
-      { title: "AI Recommendations", desc: "AI suggests wines based on diner preferences." },
-      { title: "Auto pairings", desc: "Instant pairing suggestions for every dish." },
-      { title: "Wine comparator", desc: "Guests compare options with clear, detailed info." },
-      { title: "Visual information", desc: "Accessible tasting notes with images." },
-      { title: "Guided selling", desc: "The list guides customers toward better purchases." },
-      { title: "QR access", desc: "Guests access by scanning a QR from their phone." },
-      { title: "Sensory filters", desc: "Search wines by taste, body, or intensity." },
-      { title: "Smart search", desc: "Find any reference in seconds." },
-      { title: "Cellar management", desc: "Full stock control with alerts." },
-      { title: "AI tasting notes", desc: "Auto-generated attractive descriptions." },
-      { title: "Multi-language", desc: "Automatically translated wine list." },
-      { title: "Full customization", desc: "Adapt colors, logo, and typography." },
-    ],
-    mgmt: [
-      { title: "Auto rotation", desc: "Feature different wines each week." },
-      { title: "Stock alerts", desc: "Notifications when a wine is running low." },
-      { title: "Sales analytics", desc: "Dashboard with sales data by wine and period." },
-      { title: "Multi-restaurant", desc: "Manage lists for multiple locations from one panel." },
-      { title: "Management app", desc: "Update your list from any device." },
-      { title: "Instant adding", desc: "Add wines in seconds from 500K+ references." },
-    ],
     changelog: [
       { date: "Feb 2026", title: "Sensory filters v2", desc: "New filtering UI by aromatic profile.", tag: "new" },
       { date: "Jan 2026", title: "Improved comparator", desc: "Compare up to 4 wines with radar charts.", tag: "improvement" },
@@ -146,40 +330,131 @@ const i18n: Record<string, {
       { date: "Sep 2025", title: "Revo POS integration", desc: "Bidirectional sync with Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["History-based recommendations", "Reservation platform integration", "Embeddable web widget"] },
-      { quarter: "Q3 2026", items: ["Native diner app", "Wine loyalty program", "Winery marketplace"] },
+      { quarter: "Q2 2026", items: ["Request sommelier from the list", "Share selection via QR/link", "History-based recommendations"] },
+      { quarter: "Q3 2026", items: ["Education mode with wine tips", "FocusRIM – AI modules to push profitable references", "Native diner app"] },
       { quarter: "Q4 2026", items: ["Predictive trend AI", "AR wine list", "Public API v2"] },
     ],
     tag_labels: { new: "New", improvement: "Improvement", fix: "Fix" },
   },
   it: {
-    seo_title: "Funzionalità di Winerim | Carta dei Vini Intelligente", seo_desc: "Scopri tutte le funzionalità di Winerim.", breadcrumb: "Funzionalità", badge: "Tutto in uno", title: "Tutto ciò che <em>Winerim</em> può fare per te", subtitle: "Una piattaforma completa per trasformare la tua carta dei vini.",
-    core_badge: "Per il commensale", core_title: "Esperienza del <em>cliente</em>", mgmt_badge: "Per il ristorante", mgmt_title: "Gestione e <em>analisi</em>",
+    seo_title: "Funzionalità di Winerim | Carta dei Vini Intelligente", seo_desc: "Scopri tutte le funzionalità di Winerim: carta digitale, abbinamenti IA, gestione stock, pricing e analisi avanzata.",
+    breadcrumb: "Funzionalità", badge: "Tutto in uno", title: "Tutto ciò che <em>Winerim</em> può fare per te", subtitle: "Una piattaforma completa per trasformare la tua carta dei vini.",
+    blocks: [
+      {
+        badge: "Per il commensale", title: "Esperienza del <em>cliente</em>",
+        categories: [
+          {
+            title: "Carta digitale interattiva",
+            items: [
+              { icon: QrCode, title: "Accesso QR/link", desc: "Il commensale accede scansionando un QR o da un link." },
+              { icon: Eye, title: "Visualizzazione attrattiva", desc: "Design più chiaro e visivo di una carta tradizionale." },
+              { icon: Filter, title: "Filtri dinamici", desc: "Filtri interconnessi: tipo, paese, regione, uva, prezzo, stile." },
+              { icon: Search, title: "Ricerca avanzata", desc: "Cerca per qualsiasi criterio in secondi." },
+              { icon: BarChart3, title: "Comparatore vini", desc: "Il cliente confronta opzioni con info chiare." },
+              { icon: Sparkles, title: "Raccomandazioni IA", desc: "Suggerimenti intelligenti personalizzati." },
+              { icon: Utensils, title: "Abbinamenti automatici", desc: "Proposte istantanee con i piatti del menu." },
+              { icon: Languages, title: "Multilingua", desc: "Navigazione automatica nella lingua del cliente." },
+            ],
+          },
+          {
+            title: "Informazioni avanzate di ogni vino",
+            items: [
+              { icon: FileText, title: "Scheda tecnica completa", desc: "Uve, zona, produttore, annata, stile e altro." },
+              { icon: Sparkles, title: "Attributi assistiti da IA", desc: "Descrittori sensoriali generati automaticamente." },
+              { icon: Image, title: "Foto bottiglia", desc: "Immagini per ogni referenza." },
+              { icon: BookOpen, title: "Linguaggio accessibile", desc: "Spiegazione comprensibile per qualsiasi cliente." },
+            ],
+          },
+          {
+            title: "Abbinamento e intelligenza gastronomica",
+            items: [
+              { icon: Utensils, title: "Abbinamenti automatici vino-piatto", desc: "Relazione diretta tra piatti e vini." },
+              { icon: Sparkles, title: "Raccomandazione contestuale", desc: "Suggerimenti che aiutano a vendere meglio." },
+              { icon: Target, title: "Strategie di pairing", desc: "Strumenti per costruire strategie redditizie." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Per il ristorante", title: "Gestione e <em>analisi</em>",
+        categories: [
+          {
+            title: "Gestione carta",
+            items: [
+              { icon: Wine, title: "Inserimento e modifica vini", desc: "Aggiungi e modifica referenze rapidamente." },
+              { icon: ClipboardList, title: "Organizzazione carta", desc: "Struttura per categorie, sezioni e ordine personalizzato." },
+              { icon: Palette, title: "Personalizzazione visiva", desc: "Adatta colori, logo, tipografia e stile." },
+              { icon: Settings, title: "Configurazione avanzata", desc: "Impostazioni specifiche per ristorante." },
+              { icon: Languages, title: "Gestione multilingua", desc: "Traduzioni automatiche e modifica manuale." },
+              { icon: Database, title: "Database vini", desc: "Catalogo con +500K referenze per inserimento istantaneo." },
+            ],
+          },
+          {
+            title: "Stock e inventario",
+            items: [
+              { icon: Package, title: "Gestione stock", desc: "Controllo bottiglie e unità disponibili." },
+              { icon: RefreshCw, title: "Scarico stock", desc: "Aggiornamento automatico alla vendita." },
+              { icon: Bell, title: "Avvisi disponibilità", desc: "Notifiche quando un vino sta per esaurirsi." },
+              { icon: TrendingUp, title: "Supporto rotazione", desc: "Identifica vini fermi e suggerisce azioni." },
+            ],
+          },
+          {
+            title: "Pricing, margini e strategia commerciale",
+            items: [
+              { icon: DollarSign, title: "Analisi prezzi e margini", desc: "Visualizza redditività per referenza." },
+              { icon: Wine, title: "Pricing bottiglia e calice", desc: "Strumenti per fissare prezzi ottimali." },
+              { icon: TrendingUp, title: "Ottimizzazione scontrino medio", desc: "Strategie basate sui dati." },
+              { icon: Target, title: "Rilevamento referenze mal posizionate", desc: "Identifica vini poco redditizi." },
+            ],
+          },
+          {
+            title: "Analisi e dati",
+            items: [
+              { icon: BarChart3, title: "Analisi avanzata", desc: "Dashboard con report automatici." },
+              { icon: Eye, title: "Comportamento del cliente", desc: "Quali vini si consultano, quali categorie interessano." },
+              { icon: TrendingUp, title: "Metriche di conversione", desc: "Quali referenze convertono meglio." },
+              { icon: Globe, title: "Big Data della carta", desc: "Visione globale per direzione e acquisti." },
+            ],
+          },
+          {
+            title: "Operatività del ristorante",
+            items: [
+              { icon: ShoppingCart, title: "Gestione ordini", desc: "Ordini fornitori integrati nel flusso." },
+              { icon: History, title: "Storico completo", desc: "Registro di cambiamenti, vendite e movimenti." },
+              { icon: Users, title: "Utenti e ruoli", desc: "Permessi per persona e livello di accesso." },
+              { icon: BellRing, title: "Notifiche", desc: "Avvisi intelligenti su stock, vendite e carta." },
+              { icon: LayoutDashboard, title: "Pannello admin", desc: "Controllo centralizzato di tutta l'operatività." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Tecnologia e IA", title: "Intelligenza <em>artificiale</em>",
+        categories: [
+          {
+            title: "IA applicata al vino e alla vendita",
+            items: [
+              { icon: Sparkles, title: "Generazione schede con IA", desc: "Schede complete generate automaticamente." },
+              { icon: Cpu, title: "Attributi assistiti da IA", desc: "Descrittori sensoriali e categorizzazione intelligente." },
+              { icon: Utensils, title: "Abbinamenti con IA", desc: "Raccomandazioni basate su machine learning." },
+              { icon: TrendingUp, title: "Raccomandazione commerciale", desc: "IA a supporto delle decisioni di sala e direzione." },
+              { icon: Zap, title: "Azioni dinamiche in tempo reale", desc: "Aggiustamenti automatici sulla carta." },
+            ],
+          },
+          {
+            title: "Integrazione e livello operativo",
+            items: [
+              { icon: Link2, title: "Carta + stock + vendita connessi", desc: "Visione unificata di carta, comportamento e gestione." },
+              { icon: Database, title: "Pronto per integrazioni", desc: "Preparato per connettere con POS, comande e cantina." },
+            ],
+          },
+        ],
+      },
+    ],
+    coming_soon: "In sviluppo",
     changelog_badge: "Changelog", changelog_title: "Ultime <em>novità</em>", changelog_sub: "Winerim si evolve costantemente.",
     roadmap_badge: "Roadmap", roadmap_title: "Cosa arriva su <em>Winerim</em>", roadmap_sub: "Il nostro piano di sviluppo.",
     cta_badge: "Inizia oggi", cta_title: "Scopri Winerim in <em>azione</em>", cta_sub: "Prova tutte le funzionalità gratis per 14 giorni.", cta_btn: "Prova Gratis",
-    core: [
-      { title: "Raccomandazioni IA", desc: "L'IA suggerisce vini in base alle preferenze." },
-      { title: "Abbinamenti automatici", desc: "Proposte istantanee per ogni piatto." },
-      { title: "Comparatore vini", desc: "Il cliente confronta opzioni con info dettagliate." },
-      { title: "Info visiva", desc: "Note di degustazione accessibili con immagini." },
-      { title: "Vendita guidata", desc: "La carta guida verso decisioni migliori." },
-      { title: "Accesso QR", desc: "Accesso scansionando un QR dal telefono." },
-      { title: "Filtri sensoriali", desc: "Cerca vini per gusto, corpo o intensità." },
-      { title: "Ricerca intelligente", desc: "Trova qualsiasi referenza in secondi." },
-      { title: "Gestione cantina", desc: "Controllo totale stock con avvisi." },
-      { title: "Note IA", desc: "Descrizioni attrattive auto-generate." },
-      { title: "Multilingua", desc: "Carta tradotta automaticamente." },
-      { title: "Personalizzazione", desc: "Adatta colori, logo e tipografia." },
-    ],
-    mgmt: [
-      { title: "Rotazione auto", desc: "Evidenzia vini diversi ogni settimana." },
-      { title: "Avvisi stock", desc: "Notifiche quando un vino sta per esaurirsi." },
-      { title: "Analisi vendite", desc: "Dashboard con dati vendita per vino." },
-      { title: "Multi-ristorante", desc: "Gestisci più locali da un pannello." },
-      { title: "App gestione", desc: "Aggiorna la carta da qualsiasi dispositivo." },
-      { title: "Inserimento rapido", desc: "Aggiungi vini in secondi da +500K referenze." },
-    ],
     changelog: [
       { date: "Feb 2026", title: "Filtri sensoriali v2", desc: "Nuova interfaccia filtri.", tag: "new" },
       { date: "Gen 2026", title: "Comparatore migliorato", desc: "Confronta fino a 4 vini.", tag: "improvement" },
@@ -189,40 +464,131 @@ const i18n: Record<string, {
       { date: "Set 2025", title: "Integrazione Revo", desc: "Sincronizzazione con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Raccomandazioni per storico", "Integrazione prenotazioni", "Widget per sito web"] },
-      { quarter: "Q3 2026", items: ["App nativa", "Programma fedeltà vini", "Marketplace cantine"] },
+      { quarter: "Q2 2026", items: ["Richiedere sommelier dalla carta", "Condividere selezione via QR/link", "Raccomandazioni per storico"] },
+      { quarter: "Q3 2026", items: ["Modalità educazione con tips", "FocusRIM – moduli IA per referenze redditizie", "App nativa"] },
       { quarter: "Q4 2026", items: ["IA predittiva tendenze", "Carta in realtà aumentata", "API pubblica v2"] },
     ],
     tag_labels: { new: "Nuovo", improvement: "Miglioramento", fix: "Correzione" },
   },
   fr: {
-    seo_title: "Fonctionnalités Winerim | Carte des Vins Intelligente", seo_desc: "Découvrez toutes les fonctionnalités de Winerim.", breadcrumb: "Fonctionnalités", badge: "Tout en un", title: "Tout ce que <em>Winerim</em> peut faire pour vous", subtitle: "Une plateforme complète pour transformer votre carte des vins.",
-    core_badge: "Pour le client", core_title: "Expérience <em>client</em>", mgmt_badge: "Pour le restaurant", mgmt_title: "Gestion et <em>analytique</em>",
+    seo_title: "Fonctionnalités Winerim | Carte des Vins Intelligente", seo_desc: "Découvrez toutes les fonctionnalités de Winerim: carte digitale, accords IA, gestion de stock, pricing et analytique avancée.",
+    breadcrumb: "Fonctionnalités", badge: "Tout en un", title: "Tout ce que <em>Winerim</em> peut faire pour vous", subtitle: "Une plateforme complète pour transformer votre carte des vins.",
+    blocks: [
+      {
+        badge: "Pour le client", title: "Expérience <em>client</em>",
+        categories: [
+          {
+            title: "Carte digitale interactive",
+            items: [
+              { icon: QrCode, title: "Accès QR/lien", desc: "Le client accède en scannant un QR ou un lien." },
+              { icon: Eye, title: "Affichage attractif", desc: "Design plus clair et visuel qu'une carte traditionnelle." },
+              { icon: Filter, title: "Filtres dynamiques", desc: "Filtres interconnectés : type, pays, région, cépage, prix, style." },
+              { icon: Search, title: "Recherche avancée", desc: "Recherche par n'importe quel critère en secondes." },
+              { icon: BarChart3, title: "Comparateur de vins", desc: "Le client compare les options avec des infos claires." },
+              { icon: Sparkles, title: "Recommandations IA", desc: "Suggestions intelligentes personnalisées." },
+              { icon: Utensils, title: "Accords automatiques", desc: "Suggestions instantanées avec les plats du menu." },
+              { icon: Languages, title: "Multilingue", desc: "Navigation automatique dans la langue du client." },
+            ],
+          },
+          {
+            title: "Informations avancées de chaque vin",
+            items: [
+              { icon: FileText, title: "Fiche technique complète", desc: "Cépages, région, producteur, millésime, style et plus." },
+              { icon: Sparkles, title: "Attributs assistés par IA", desc: "Descripteurs sensoriels générés automatiquement." },
+              { icon: Image, title: "Photos de bouteille", desc: "Images pour chaque référence." },
+              { icon: BookOpen, title: "Langage accessible", desc: "Explication du vin compréhensible pour tout client." },
+            ],
+          },
+          {
+            title: "Accord & intelligence gastronomique",
+            items: [
+              { icon: Utensils, title: "Accords automatiques vin-plat", desc: "Relation directe entre vos plats et vos vins." },
+              { icon: Sparkles, title: "Recommandation contextuelle", desc: "Suggestions qui aident à mieux vendre." },
+              { icon: Target, title: "Stratégies d'accord", desc: "Outils pour construire des stratégies rentables." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Pour le restaurant", title: "Gestion et <em>analytique</em>",
+        categories: [
+          {
+            title: "Gestion de carte",
+            items: [
+              { icon: Wine, title: "Ajout et édition de vins", desc: "Ajoutez et éditez des références rapidement." },
+              { icon: ClipboardList, title: "Organisation de la carte", desc: "Structure par catégories, sections et ordre personnalisé." },
+              { icon: Palette, title: "Personnalisation visuelle", desc: "Adaptez couleurs, logo, typographie et style." },
+              { icon: Settings, title: "Configuration avancée", desc: "Paramètres spécifiques par restaurant." },
+              { icon: Languages, title: "Gestion multilingue", desc: "Traductions automatiques et édition manuelle." },
+              { icon: Database, title: "Base de données vins", desc: "Catalogue de +500K références pour ajout instantané." },
+            ],
+          },
+          {
+            title: "Stock & inventaire",
+            items: [
+              { icon: Package, title: "Gestion de stock", desc: "Contrôle des bouteilles et unités disponibles." },
+              { icon: RefreshCw, title: "Déduction de stock", desc: "Mise à jour automatique à la vente." },
+              { icon: Bell, title: "Alertes de disponibilité", desc: "Notifications quand un vin est presque épuisé." },
+              { icon: TrendingUp, title: "Support rotation", desc: "Identifiez les vins stagnants et suggérez des actions." },
+            ],
+          },
+          {
+            title: "Pricing, marges et stratégie commerciale",
+            items: [
+              { icon: DollarSign, title: "Analyse prix et marges", desc: "Visualisez la rentabilité par référence." },
+              { icon: Wine, title: "Pricing bouteille et verre", desc: "Outils pour fixer des prix optimaux." },
+              { icon: TrendingUp, title: "Optimisation ticket moyen", desc: "Stratégies basées sur les données." },
+              { icon: Target, title: "Détection de références mal positionnées", desc: "Identifiez les vins peu rentables." },
+            ],
+          },
+          {
+            title: "Analytique et données",
+            items: [
+              { icon: BarChart3, title: "Analytique avancée", desc: "Dashboard avec rapports automatiques." },
+              { icon: Eye, title: "Comportement du client", desc: "Quels vins sont consultés, quelles catégories intéressent." },
+              { icon: TrendingUp, title: "Métriques de conversion", desc: "Quelles références convertissent le mieux." },
+              { icon: Globe, title: "Big Data de la carte", desc: "Vision globale pour direction et achats." },
+            ],
+          },
+          {
+            title: "Opérations du restaurant",
+            items: [
+              { icon: ShoppingCart, title: "Gestion des commandes", desc: "Commandes fournisseurs intégrées au flux." },
+              { icon: History, title: "Historique complet", desc: "Registre des changements, ventes et mouvements." },
+              { icon: Users, title: "Utilisateurs et rôles", desc: "Permissions par personne et niveau d'accès." },
+              { icon: BellRing, title: "Notifications", desc: "Alertes intelligentes sur stock, ventes et carte." },
+              { icon: LayoutDashboard, title: "Panneau admin", desc: "Contrôle centralisé de toutes les opérations." },
+            ],
+          },
+        ],
+      },
+      {
+        badge: "Technologie et IA", title: "Intelligence <em>artificielle</em>",
+        categories: [
+          {
+            title: "IA appliquée au vin et à la vente",
+            items: [
+              { icon: Sparkles, title: "Génération de fiches par IA", desc: "Fiches complètes générées automatiquement." },
+              { icon: Cpu, title: "Attributs assistés par IA", desc: "Descripteurs sensoriels et catégorisation intelligente." },
+              { icon: Utensils, title: "Accords par IA", desc: "Recommandations basées sur le machine learning." },
+              { icon: TrendingUp, title: "Recommandation commerciale", desc: "IA au service des décisions de salle et direction." },
+              { icon: Zap, title: "Actions dynamiques en temps réel", desc: "Ajustements automatiques sur la carte." },
+            ],
+          },
+          {
+            title: "Intégration et couche opérationnelle",
+            items: [
+              { icon: Link2, title: "Carte + stock + vente connectés", desc: "Vision unifiée de la carte, du comportement et de la gestion." },
+              { icon: Database, title: "Prêt pour intégrations", desc: "Préparé pour connecter avec TPV, commandes et cave." },
+            ],
+          },
+        ],
+      },
+    ],
+    coming_soon: "En développement",
     changelog_badge: "Changelog", changelog_title: "Dernières <em>nouveautés</em>", changelog_sub: "Winerim évolue constamment.",
     roadmap_badge: "Roadmap", roadmap_title: "Ce qui arrive sur <em>Winerim</em>", roadmap_sub: "Notre plan de développement.",
     cta_badge: "Commencez aujourd'hui", cta_title: "Découvrez Winerim en <em>action</em>", cta_sub: "Essayez toutes les fonctionnalités gratuitement pendant 14 jours.", cta_btn: "Essai Gratuit",
-    core: [
-      { title: "Recommandations IA", desc: "L'IA suggère des vins selon les préférences." },
-      { title: "Accords automatiques", desc: "Suggestions instantanées pour chaque plat." },
-      { title: "Comparateur de vins", desc: "Le client compare avec des infos détaillées." },
-      { title: "Info visuelle", desc: "Notes de dégustation accessibles avec images." },
-      { title: "Vente guidée", desc: "La carte guide vers de meilleurs achats." },
-      { title: "Accès QR", desc: "Accès en scannant un QR depuis le téléphone." },
-      { title: "Filtres sensoriels", desc: "Recherche par goût, corps ou intensité." },
-      { title: "Recherche intelligente", desc: "Trouvez n'importe quelle référence en secondes." },
-      { title: "Gestion de cave", desc: "Contrôle total du stock avec alertes." },
-      { title: "Notes IA", desc: "Descriptions attractives auto-générées." },
-      { title: "Multilingue", desc: "Carte traduite automatiquement." },
-      { title: "Personnalisation", desc: "Adaptez couleurs, logo et typographie." },
-    ],
-    mgmt: [
-      { title: "Rotation auto", desc: "Mettez en avant des vins différents chaque semaine." },
-      { title: "Alertes stock", desc: "Notifications quand un vin est presque épuisé." },
-      { title: "Analytique ventes", desc: "Dashboard avec données de vente par vin." },
-      { title: "Multi-restaurant", desc: "Gérez plusieurs établissements depuis un panneau." },
-      { title: "App de gestion", desc: "Mettez à jour depuis n'importe quel appareil." },
-      { title: "Ajout instantané", desc: "Ajoutez des vins en secondes depuis +500K références." },
-    ],
     changelog: [
       { date: "Fév 2026", title: "Filtres sensoriels v2", desc: "Nouvelle interface de filtrage.", tag: "new" },
       { date: "Jan 2026", title: "Comparateur amélioré", desc: "Comparez jusqu'à 4 vins.", tag: "improvement" },
@@ -232,13 +598,16 @@ const i18n: Record<string, {
       { date: "Sep 2025", title: "Intégration Revo", desc: "Synchronisation avec Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Recommandations par historique", "Intégration réservations", "Widget pour site web"] },
-      { quarter: "Q3 2026", items: ["App native", "Programme fidélité vins", "Marketplace caves"] },
+      { quarter: "Q2 2026", items: ["Demander le sommelier depuis la carte", "Partager sélection via QR/lien", "Recommandations par historique"] },
+      { quarter: "Q3 2026", items: ["Mode éducation avec tips vin", "FocusRIM – modules IA pour références rentables", "App native"] },
       { quarter: "Q4 2026", items: ["IA prédictive tendances", "Carte en réalité augmentée", "API publique v2"] },
     ],
     tag_labels: { new: "Nouveau", improvement: "Amélioration", fix: "Correction" },
   },
 };
+
+// ─── Screenshot maps per category ───
+const screenshotsByCategory: Record<string, { img: string; alt: string; label: string }[]> = {};
 
 const tagColors: Record<string, string> = {
   new: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
@@ -247,6 +616,19 @@ const tagColors: Record<string, string> = {
 };
 
 const emToGradient = (html: string) => html.replace(/<em>/g, '<span class="text-gradient-wine italic">').replace(/<\/em>/g, '</span>');
+
+// ─── Screenshot sections component ───
+const ScreenshotGrid = ({ items, cols = 3 }: { items: { img: string; alt: string; label: string }[]; cols?: number }) => (
+  <div className={`grid ${cols === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : cols === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-5`}>
+    {items.map((item, i) => (
+      <div key={i} className="relative group">
+        <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
+        <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+      </div>
+    ))}
+  </div>
+);
 
 const Funcionalidades = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
@@ -257,6 +639,7 @@ const Funcionalidades = () => {
       <SEOHead title={c.seo_title} description={c.seo_desc} url="https://winerim.wine/funcionalidades" hreflang={allLangPaths("/funcionalidades")} />
       <Navbar />
 
+      {/* ─── Hero ─── */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
@@ -271,215 +654,172 @@ const Funcionalidades = () => {
         </div>
       </section>
 
+      {/* ─── Content blocks ─── */}
+      {c.blocks.map((block, blockIdx) => (
+        <section key={blockIdx} className={`section-padding ${blockIdx % 2 === 1 ? 'bg-gradient-dark' : ''}`}>
+          <div className="max-w-7xl mx-auto">
+            <ScrollReveal className="text-center mb-14">
+              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{block.badge}</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(block.title) }} />
+            </ScrollReveal>
+
+            {block.categories.map((cat, catIdx) => (
+              <div key={catIdx} className="mb-16 last:mb-0">
+                <ScrollReveal>
+                  <h3 className="font-heading text-xl md:text-2xl font-bold mb-8 text-center">
+                    {cat.title}
+                  </h3>
+                </ScrollReveal>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {cat.items.map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                      <ScrollReveal key={i} delay={i * 0.04}>
+                        <div className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full">
+                          <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-4 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300">
+                            <Icon size={20} className="text-wine" />
+                          </div>
+                          <h4 className="font-heading font-semibold mb-1.5 text-sm">{item.title}</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                        </div>
+                      </ScrollReveal>
+                    );
+                  })}
+                </div>
+
+                {/* ─── Screenshots after specific categories ─── */}
+                {blockIdx === 0 && catIdx === 0 && (
+                  <>
+                    <ScrollReveal className="mt-12">
+                      <ScreenshotGrid items={[
+                        { img: tabletHeroImg, alt: "Carta de vinos digital en tablet", label: "Carta interactiva" },
+                        { img: tabletDetailImg, alt: "Ficha de vino detallada", label: "Ficha del vino" },
+                        { img: tabletComparatorImg, alt: "Comparador de vinos Winerim", label: "Comparador de vinos" },
+                      ]} />
+                    </ScrollReveal>
+                    <ScrollReveal className="mt-8">
+                      <ScreenshotGrid items={[
+                        { img: tabletPairingImg, alt: "Maridajes automáticos Winerim", label: "Maridajes automáticos" },
+                        { img: tabletFichaImg, alt: "Información visual del vino", label: "Información visual" },
+                      ]} cols={2} />
+                    </ScrollReveal>
+                    <ScrollReveal className="mt-8">
+                      <p className="text-center text-sm text-muted-foreground mb-6 font-medium tracking-wide uppercase">
+                        {lang === "es" ? "También en móvil" : lang === "en" ? "Also on mobile" : lang === "it" ? "Anche su mobile" : "Aussi sur mobile"}
+                      </p>
+                      <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
+                        {[
+                          { img: mobileListImg, alt: "Carta de vinos en móvil", label: "Carta" },
+                          { img: mobileDetailImg, alt: "Detalle de vino en móvil", label: "Ficha" },
+                          { img: mobileComparatorImg, alt: "Comparador en móvil", label: "Comparador" },
+                        ].map((item, i) => (
+                          <div key={i} className="relative group">
+                            <div className="relative rounded-2xl border-2 border-border/60 overflow-hidden shadow-xl bg-background/50 group-hover:border-wine/30 transition-colors">
+                              <img src={item.img} alt={item.alt} className="w-full" />
+                            </div>
+                            <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </ScrollReveal>
+                  </>
+                )}
+
+                {/* Stock screenshots */}
+                {blockIdx === 1 && catIdx === 1 && (
+                  <ScrollReveal className="mt-12">
+                    <ScreenshotGrid items={[
+                      { img: ss01, alt: "Inventario de vinos Winerim", label: "Inventario" },
+                      { img: ss02, alt: "Importar ventas en Winerim", label: "Importar ventas" },
+                      { img: ss03, alt: "Historial de ventas Winerim", label: "Historial de ventas" },
+                    ]} />
+                  </ScrollReveal>
+                )}
+
+                {/* Pricing screenshots */}
+                {blockIdx === 1 && catIdx === 2 && (
+                  <ScrollReveal className="mt-12">
+                    <ScreenshotGrid items={[
+                      { img: ss19, alt: "Rendimiento de la carta", label: "Rendimiento" },
+                      { img: ss17, alt: "Vinos en obsolescencia", label: "Obsolescencia" },
+                      { img: ss15, alt: "Probabilidad de venta", label: "Probabilidad venta" },
+                    ]} />
+                  </ScrollReveal>
+                )}
+
+                {/* Analytics screenshots */}
+                {blockIdx === 1 && catIdx === 3 && (
+                  <ScrollReveal className="mt-12">
+                    <ScreenshotGrid items={[
+                      { img: ss14, alt: "Dashboard Insights Winerim", label: "Insights" },
+                      { img: ss16, alt: "Vinos populares Big Data", label: "Big Data" },
+                      { img: ss18, alt: "Benchmark vs restaurantes", label: "Benchmark" },
+                    ]} />
+                  </ScrollReveal>
+                )}
+
+                {/* Operations screenshots */}
+                {blockIdx === 1 && catIdx === 4 && (
+                  <>
+                    <ScrollReveal className="mt-12">
+                      <ScreenshotGrid items={[
+                        { img: ss04, alt: "Gestión de pedidos", label: "Pedidos" },
+                        { img: ss05, alt: "Detalle de pedido", label: "Detalle pedido" },
+                        { img: ss06, alt: "Proveedores", label: "Proveedores" },
+                      ]} />
+                    </ScrollReveal>
+                    <ScrollReveal className="mt-8">
+                      <ScreenshotGrid items={[
+                        { img: ss07, alt: "Ajustes generales", label: "Ajustes" },
+                        { img: ss08, alt: "Automatizaciones IA", label: "Automatizaciones" },
+                        { img: ss10, alt: "IA de Winerim", label: "IA Winerim" },
+                        { img: ss20, alt: "Catálogo distribuidores", label: "Catálogo +500K" },
+                      ]} cols={4} />
+                    </ScrollReveal>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      {/* ─── Coming soon ─── */}
       <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.core_badge}</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.core_title) }} />
-          </ScrollReveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {c.core.map((feat, i) => { const Icon = coreIcons[i]; return (
-              <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="group bg-gradient-card rounded-xl border border-border p-7 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300"><Icon size={24} className="text-wine" /></div>
-                  <h3 className="font-heading text-lg font-semibold mb-2">{feat.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
-                </div>
-              </ScrollReveal>
-            ); })}
-          </div>
-
-          {/* Tablet screenshots */}
-          <ScrollReveal className="mt-16 mb-10">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { img: tabletHeroImg, alt: "Carta de vinos digital en tablet", label: "Carta interactiva" },
-                { img: tabletDetailImg, alt: "Ficha de vino detallada", label: "Ficha del vino" },
-                { img: tabletComparatorImg, alt: "Comparador de vinos Winerim", label: "Comparador de vinos" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 mb-6">
+              <Lightbulb size={14} className="text-accent" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-accent">{c.coming_soon}</span>
             </div>
           </ScrollReveal>
-
-          <ScrollReveal className="mb-10">
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                { img: tabletPairingImg, alt: "Maridajes automáticos Winerim", label: "Maridajes automáticos" },
-                { img: tabletFichaImg, alt: "Información visual del vino", label: "Información visual" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* Mobile screenshots */}
-          <ScrollReveal>
-            <p className="text-center text-sm text-muted-foreground mb-8 font-medium tracking-wide uppercase">También en móvil</p>
-            <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
-              {[
-                { img: mobileListImg, alt: "Carta de vinos en móvil", label: "Carta" },
-                { img: mobileDetailImg, alt: "Detalle de vino en móvil", label: "Ficha del vino" },
-                { img: mobileComparatorImg, alt: "Comparador en móvil", label: "Comparador" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-3 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.12),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative rounded-2xl border-2 border-border/60 overflow-hidden shadow-xl bg-background/50 group-hover:border-wine/30 transition-colors">
-                    <img src={item.img} alt={item.alt} className="w-full" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { icon: MessageSquare, title: lang === "es" ? "Solicitar al sumiller" : lang === "en" ? "Request sommelier" : lang === "it" ? "Richiedere sommelier" : "Demander sommelier", desc: lang === "es" ? "Pide ayuda al sumiller directamente desde la carta." : lang === "en" ? "Ask the sommelier for help right from the list." : lang === "it" ? "Chiedi aiuto al sommelier dalla carta." : "Demandez au sommelier depuis la carte." },
+              { icon: Share2, title: lang === "es" ? "Compartir selección" : lang === "en" ? "Share selection" : lang === "it" ? "Condividere selezione" : "Partager sélection", desc: lang === "es" ? "Comparte tu selección de vinos por QR o link." : lang === "en" ? "Share your wine selection via QR or link." : lang === "it" ? "Condividi la tua selezione via QR o link." : "Partagez votre sélection via QR ou lien." },
+              { icon: GraduationCap, title: lang === "es" ? "Modo educación" : lang === "en" ? "Education mode" : lang === "it" ? "Modalità educazione" : "Mode éducation", desc: lang === "es" ? "Tips y curiosidades sobre cada vino mientras exploras." : lang === "en" ? "Tips and curiosities about each wine as you explore." : lang === "it" ? "Tips e curiosità su ogni vino mentre esplori." : "Tips et curiosités sur chaque vin en explorant." },
+              { icon: Target, title: "FocusRIM", desc: lang === "es" ? "Módulos de IA para empujar las referencias más rentables." : lang === "en" ? "AI modules to push the most profitable references." : lang === "it" ? "Moduli IA per spingere le referenze più redditizie." : "Modules IA pour pousser les références les plus rentables." },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <ScrollReveal key={i} delay={i * 0.06}>
+                  <div className="bg-gradient-card rounded-xl border border-dashed border-border p-6 h-full opacity-80">
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                      <Icon size={20} className="text-accent" />
+                    </div>
+                    <h4 className="font-heading font-semibold mb-1.5 text-sm">{item.title}</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.mgmt_badge}</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.mgmt_title) }} />
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {c.mgmt.map((feat, i) => { const Icon = mgmtIcons[i]; return (
-              <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="group bg-gradient-card rounded-xl border border-border p-7 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full">
-                  <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-4 group-hover:bg-wine/20 transition-all duration-300"><Icon size={20} className="text-wine" /></div>
-                  <h3 className="font-heading font-semibold mb-2">{feat.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
-                </div>
-              </ScrollReveal>
-            ); })}
+                </ScrollReveal>
+              );
+            })}
           </div>
-
-          {/* ─── Stock & Inventario ─── */}
-          <ScrollReveal className="mt-16">
-            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Stock & Inventario</p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                { img: ss01, alt: "Inventario de vinos Winerim", label: "Inventario" },
-                { img: ss02, alt: "Importar ventas en Winerim", label: "Importar ventas" },
-                { img: ss03, alt: "Historial de ventas Winerim", label: "Historial de ventas" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* ─── Pedidos & Proveedores ─── */}
-          <ScrollReveal className="mt-12">
-            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Pedidos & Proveedores</p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                { img: ss04, alt: "Gestión de pedidos Winerim", label: "Pedidos" },
-                { img: ss05, alt: "Detalle de pedido a proveedor", label: "Detalle de pedido" },
-                { img: ss06, alt: "Gestión de proveedores Winerim", label: "Proveedores" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* ─── Insights & Analítica ─── */}
-          <ScrollReveal className="mt-12">
-            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Insights & Analítica</p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                { img: ss14, alt: "Dashboard Insights Winerim", label: "Insights – Resumen" },
-                { img: ss15, alt: "Probabilidad de venta por vino", label: "Probabilidad de venta" },
-                { img: ss19, alt: "Rendimiento de la carta", label: "Rendimiento de la carta" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal className="mt-6">
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                { img: ss17, alt: "Vinos en obsolescencia Winerim", label: "Obsolescencia" },
-                { img: ss16, alt: "Vinos populares Big Data", label: "Vinos populares (Big Data)" },
-                { img: ss18, alt: "Benchmark vs restaurantes similares", label: "Benchmark vs mercado" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* ─── Ajustes & Configuración ─── */}
-          <ScrollReveal className="mt-12">
-            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Ajustes & Configuración</p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                { img: ss07, alt: "Ajustes generales Winerim", label: "Ajustes generales" },
-                { img: ss08, alt: "Automatizaciones IA Winerim", label: "Automatizaciones IA" },
-                { img: ss10, alt: "IA de Winerim configuración", label: "IA de Winerim" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal className="mt-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { img: ss09, alt: "Ajustes de copas Winerim", label: "Ajustes de copas" },
-                { img: ss11, alt: "Configuración obsolescencia", label: "Config. obsolescencia" },
-                { img: ss12, alt: "Datos de servicio Winerim", label: "Datos de servicio" },
-                { img: ss13, alt: "Historial datos de servicio", label: "Historial de datos" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* ─── Catálogo de distribuidores ─── */}
-          <ScrollReveal className="mt-12 mb-4">
-            <p className="text-xs tracking-[0.25em] uppercase text-accent font-semibold mb-6 text-center">Catálogo de distribuidores</p>
-            <div className="max-w-3xl mx-auto relative group">
-              <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img src={ss20} alt="Catálogo de distribuidores Winerim" className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-              <p className="text-xs text-muted-foreground text-center mt-3 font-medium">Catálogo con +500K referencias</p>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
-      <section className="section-padding" id="changelog">
+      {/* ─── Changelog ─── */}
+      <section className="section-padding bg-gradient-dark" id="changelog">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.changelog_badge}</p>
@@ -509,7 +849,8 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-dark" id="roadmap">
+      {/* ─── Roadmap ─── */}
+      <section className="section-padding" id="roadmap">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-14">
             <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.roadmap_badge}</p>
@@ -536,7 +877,8 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      <section className="section-padding">
+      {/* ─── CTA ─── */}
+      <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <div className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden">
