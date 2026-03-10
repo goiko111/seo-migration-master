@@ -179,7 +179,7 @@ const GuiaVinoPorCopa = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga la guía gratis</h3>
                   <p className="text-sm text-muted-foreground mb-4">Rellena el formulario y recíbela al instante.</p>
-                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
+                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
                     {loading ? "Enviando..." : "Descargar guía"}

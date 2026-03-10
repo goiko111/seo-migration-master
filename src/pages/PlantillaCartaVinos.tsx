@@ -344,7 +344,7 @@ const PlantillaCartaVinos = () => {
             </ScrollReveal>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
+              <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
               <Button type="submit" disabled={submitting}
                 className="w-full bg-gradient-wine text-primary-foreground hover:opacity-90 py-6 text-sm font-semibold tracking-wider uppercase">
                 {submitting ? "Enviando..." : "Descargar plantilla"}
