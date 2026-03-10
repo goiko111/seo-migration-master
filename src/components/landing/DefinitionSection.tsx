@@ -25,7 +25,7 @@ const definitionData = {
       "Automatic food and wine pairings for every dish",
       "Real-time wine sales analytics",
       "Price and margin optimization",
-      "No app download — works in the guest's browser",
+      "Multi-platform: web, tablet and native app",
     ],
     summaryLabel: "What is Winerim?",
   },
