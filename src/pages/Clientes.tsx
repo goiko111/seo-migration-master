@@ -52,7 +52,7 @@ const i18n: Record<string, {
   },
   en: {
     seo_title: "Winerim Clients | Restaurants that trust us", seo_desc: "Over 1,000 restaurants trust Winerim to manage their wine list.", breadcrumb: "Clients", badge: "Our clients", title: "The best restaurants already use <em>Winerim</em>", subtitle: "Over 1,000 establishments trust our technology to transform their wine list.",
-    stats: [{ value: "1,000+", label: "Cellars managed" }, { value: "45,000+", label: "Wine references" }, { value: "30%", label: "Average sales increase" }, { value: "12", label: "Countries" }],
+    stats: [{ value: "1,000+", label: "Cellars managed" }, { value: "300,000+", label: "Unique wine references" }, { value: "30%", label: "Average sales increase" }, { value: "15", label: "Countries" }],
     featured_badge: "Featured", featured_title: "What our <em>clients</em> say",
     all_title: "All our <em>clients</em>", all_sub: "Restaurants across Spain, Portugal, Italy and more trust Winerim.",
     cta_badge: "Join us", cta_title: "Ready to be <em>next?</em>", cta_sub: "Try Winerim free and discover why over 1,000 restaurants already trust us.", cta_btn: "Request demo",
