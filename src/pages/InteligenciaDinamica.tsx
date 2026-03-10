@@ -152,13 +152,7 @@ const rimCards = [
   },
 ];
 
-/* ── Section 8: Impacto ── */
-const impacts = [
-  { metric: "+18%", label: "Ticket medio en vino", icon: TrendingUp },
-  { metric: "−40%", label: "Vinos sin rotación", icon: RefreshCw },
-  { metric: "+12%", label: "Margen bruto en carta", icon: DollarSign },
-  { metric: "3×", label: "Velocidad de decisión", icon: Gauge },
-];
+/* ── (impacts data removed — now inline) ── */
 
 const InteligenciaDinamica = () => {
   const { t, localePath } = useLanguage();
