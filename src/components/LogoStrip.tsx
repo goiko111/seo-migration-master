@@ -158,18 +158,18 @@ const LogoStrip = () => {
         viewport={{ once: true }}
         className="mt-8 sm:mt-10 px-6"
       >
-        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-6">Grupos hoteleros</span>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
+        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-8">Grupos hoteleros</span>
+        <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-14 md:gap-20">
           {hotelLogos.map((item) => (
-            <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 px-2">
+            <div key={item.name} className="flex items-center justify-center h-14 sm:h-20 md:h-24 px-3">
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 sm:h-12 md:h-14 w-auto object-contain grayscale invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="h-10 sm:h-16 md:h-20 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
                 loading="lazy"
                 decoding="async"
-                width={120}
-                height={56}
+                width={160}
+                height={80}
               />
             </div>
           ))}
