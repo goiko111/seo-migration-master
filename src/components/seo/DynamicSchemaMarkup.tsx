@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { CANONICAL_DOMAIN, DEFAULT_OG_IMAGE } from "@/seo/config";
 
 interface FAQ {
   q: string;
