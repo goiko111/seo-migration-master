@@ -216,7 +216,7 @@ const WhatIsWinerim = () => {
               { label: "Tipo", value: "Software SaaS para hostelería" },
               { label: "Especialización", value: "Gestión de cartas de vinos" },
               { label: "Tecnología", value: "Inteligencia artificial + carta digital interactiva" },
-              { label: "Acceso", value: "Web — sin descarga de app" },
+              { label: "Acceso", value: "Multiplataforma: web, tablet y app nativa" },
               { label: "Idiomas", value: "Español, inglés, italiano, francés" },
               { label: "Público", value: "Restaurantes, wine bars, hoteles, grupos de restauración" },
               { label: "Resultado medio", value: "+30% ventas de vino, +20% ticket medio" },

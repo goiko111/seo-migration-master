@@ -263,7 +263,7 @@ const competitorData = {
       { feature: "Alertes stock et obsolescence", options: [false, false, false, true] },
       { feature: "Expérience mobile visuelle interactive", options: ["partial" as const, true, false, true] },
       { feature: "100% dédié à la restauration", options: [false, false, "partial" as const, true] },
-      { feature: "Sans téléchargement d'app", options: ["partial" as const, false, "partial" as const, true] },
+      { feature: "Multiplateforme : web, tablette et app", options: [false, false, "partial" as const, true] },
     ],
   },
 };
