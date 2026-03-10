@@ -170,6 +170,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
       hreflangEls.forEach((el) => el.remove());
+      // Clean up robots meta to prevent stale noindex on navigation
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) robotsMeta.remove();
     };
   }, [title, description, image, url, type, publishedAt, author, noindex, hreflang]);
 
