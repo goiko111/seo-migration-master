@@ -162,7 +162,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       h1: 'Funcionalidades de Winerim',
       subtitle: 'Todo lo que necesitas para gestionar y potenciar tu carta de vinos en una sola plataforma.',
       sections: [
-        { heading: 'Carta digital interactiva', content: 'Carta de vinos accesible desde tablet, móvil o QR con fichas completas, notas de cata y maridajes.' },
+        { heading: 'Carta inteligente interactiva', content: 'Carta de vinos accesible desde tablet, móvil o QR con fichas completas, notas de cata y maridajes.' },
         { heading: 'Recomendador inteligente', content: 'IA que sugiere vinos según el plato, presupuesto y preferencias del comensal.' },
         { heading: 'Analytics y rendimiento', content: 'Dashboards en tiempo real: ventas por referencia, márgenes, rotación y tendencias.' },
         { heading: 'Gestión de stock', content: 'Control automático de inventario con alertas de reposición y detección de vinos muertos.' },
