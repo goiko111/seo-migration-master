@@ -227,7 +227,7 @@ const Navbar = () => {
                                 <Link
                                   key={sub.href}
                                   to={sub.href}
-                                  className={`block py-2 text-base transition-colors ${
+                                  className={`flex items-center gap-2 py-2 text-base transition-colors ${
                                     location.pathname === sub.href
                                       ? "text-foreground"
                                       : "text-muted-foreground"
@@ -235,6 +235,11 @@ const Navbar = () => {
                                   onClick={() => setMobileOpen(false)}
                                 >
                                   {sub.label}
+                                  {sub.badge && (
+                                    <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                                      {sub.badge}
+                                    </Badge>
+                                  )}
                                 </Link>
                               ))}
                             </div>

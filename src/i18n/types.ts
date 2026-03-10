@@ -110,6 +110,7 @@ export interface TranslationDict {
   nav_case_studies: string;
   nav_clients: string;
   nav_solutions_groups: string;
+  nav_dynamic_intelligence?: string;
 
   // Nav dropdown - Tools
   nav_wine_analyzer: string;

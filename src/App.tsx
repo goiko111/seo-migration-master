@@ -149,6 +149,7 @@ const esRoutes = (
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
+    <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
     {/* Dynamic programmatic SEO pages */}
     <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
     <Route path="/software-vino-*" element={<SeoPage />} />
