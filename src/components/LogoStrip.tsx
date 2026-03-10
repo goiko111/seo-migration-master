@@ -32,7 +32,7 @@ import logoMarriott from "@/assets/logos/marriott.png";
 import logoWyndham from "@/assets/logos/wyndham.png";
 import logoMyr from "@/assets/logos/myr.webp";
 import logoFourSeasons from "@/assets/logos/fourseasons.png";
-import logoPalladium from "@/assets/logos/palladium.jpeg";
+import logoPalladium from "@/assets/logos/palladium.png";
 import logoEm from "@/assets/logos/em.png";
 
 interface LogoItem {
