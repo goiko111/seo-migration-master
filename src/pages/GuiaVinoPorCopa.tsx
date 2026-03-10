@@ -108,6 +108,8 @@ const GuiaVinoPorCopa = () => {
         position: data.position,
         phone: data.phone,
         email: data.email,
+        city: data.city,
+        references_count: data.references_count,
         form_type: "guia-vino-por-copa",
       });
       if (error) throw error;
