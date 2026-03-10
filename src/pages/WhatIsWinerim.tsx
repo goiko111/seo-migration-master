@@ -47,9 +47,9 @@ const features = [
 ];
 
 const results = [
-  { value: "+18%", label: "Ventas de vino", desc: "Incremento medio en ventas de vino gracias a recomendaciones inteligentes y una carta optimizada." },
-  { value: "+22%", label: "Ticket medio", desc: "Aumento del gasto medio por mesa con una estructura de precios estratégica y vinos ancla." },
-  { value: "x2", label: "Rotación", desc: "Duplicación de la rotación media al identificar y sustituir referencias de baja venta." },
+  { value: "+30%", label: "Ventas de vino", desc: "Incremento medio en ventas de vino gracias a recomendaciones inteligentes y una carta optimizada." },
+  { value: "+20%", label: "Ticket medio", desc: "Aumento del gasto medio por mesa con una estructura de precios estratégica y vinos ancla." },
+  { value: "+35%", label: "Rotación", desc: "Más rotación de referencias al identificar y sustituir vinos de baja venta." },
 ];
 
 const faqs = [
