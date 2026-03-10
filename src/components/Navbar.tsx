@@ -24,6 +24,7 @@ const Navbar = () => {
       dropdown: [
         { label: t.nav_software, href: localePath("/software-carta-de-vinos") },
         { label: t.nav_features, href: localePath("/funcionalidades") },
+        { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: "Nuevo" },
         { label: t.nav_integrations, href: localePath("/integraciones") },
         { label: t.nav_pricing, href: localePath("/precios") },
         { label: t.nav_case_studies, href: localePath("/casos-exito") },
