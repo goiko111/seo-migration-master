@@ -9,6 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import RelatedPages from "@/components/seo/RelatedPages";
+import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import type { SeoPage, RelatedPageInfo } from "@/hooks/useSeoPage";
 
@@ -22,10 +23,17 @@ const CountryTemplate = ({ page, related }: Props) => {
   const wine_culture: string[] = b.wine_culture_points || [];
   const features: { title: string; desc: string }[] = b.features || [];
   const stats: { value: string; label: string }[] = b.stats || [];
+  const benefits: string[] = b.benefits || [];
+  const internalLinks = (b.internal_links || []).map((l: any) => ({
+    to: l.url || l.to || "#",
+    label: l.label || l.title || "",
+    type: l.type || "guide" as const,
+  }));
+  const canonical = page.canonical_url || `https://winerim.wine/${page.slug}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={page.meta_title} description={page.meta_description} url={`https://winerim.wine/${page.slug}`} type="article" />
+      <SEOHead title={page.meta_title} description={page.meta_description} url={canonical} type="article" image={page.og_image || undefined} noindex={page.isThinContent} />
       <DynamicSchemaMarkup id={page.slug} type="Article" title={page.hero_title} description={page.meta_description} url={`https://winerim.wine/${page.slug}`} faqs={page.faqs}
         breadcrumbs={[
           { name: "Home", url: "https://winerim.wine/" },
