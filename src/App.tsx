@@ -7,12 +7,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
-import CookieConsent from "./components/CookieConsent";
-import WhatsAppButton from "./components/WhatsAppButton";
-import BackToTop from "./components/BackToTop";
 
 // Eager load home for fast first paint
 import Index from "./pages/Index";
+
+// Lazy load overlay components — not needed for FCP
+const CookieConsent = lazy(() => import("./components/CookieConsent"));
+const WhatsAppButton = lazy(() => import("./components/WhatsAppButton"));
+const BackToTop = lazy(() => import("./components/BackToTop"));
 
 // Lazy load other routes
 const Blog = lazy(() => import("./pages/Blog"));
@@ -72,7 +74,15 @@ const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Reduce unnecessary re-fetches
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -219,9 +229,12 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
-            <WhatsAppButton />
-            <BackToTop />
-            <CookieConsent />
+            {/* Overlay components — lazy loaded, non-critical */}
+            <Suspense fallback={null}>
+              <WhatsAppButton />
+              <BackToTop />
+              <CookieConsent />
+            </Suspense>
           </LanguageProvider>
         </BrowserRouter>
       </TooltipProvider>
