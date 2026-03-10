@@ -347,7 +347,7 @@ const CasosExito = () => {
               const cat = getCategory(testimonial);
               return (
                 <ScrollReveal key={i} delay={Math.min(i * 0.05, 0.3)}>
-                  <div className="break-inside-avoid bg-gradient-card rounded-2xl border border-border p-6 md:p-8 hover:border-wine/30 transition-all duration-300 group overflow-hidden relative">
+                  <div className="bg-gradient-card rounded-2xl border border-border p-6 md:p-8 hover:border-wine/30 transition-all duration-300 group overflow-hidden relative h-full flex flex-col">
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-wine to-wine-light opacity-30 group-hover:opacity-100 transition-opacity" />
 
