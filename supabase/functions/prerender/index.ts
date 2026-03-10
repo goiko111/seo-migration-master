@@ -116,8 +116,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/software-carta-de-vinos': {
     meta: {
-      title: 'Software Carta de Vinos Digital para Restaurantes | Winerim',
-      description: 'Winerim es el software de carta de vinos digital líder para restaurantes. Gestión inteligente, recomendador IA y análisis de rendimiento en una sola plataforma.',
+      title: 'Software Carta Inteligente de Vinos para Restaurantes | Winerim',
+      description: 'Winerim es el software de carta inteligente de vinos líder para restaurantes. Gestión inteligente, recomendador IA y análisis de rendimiento en una sola plataforma.',
       canonical: `${SITE}/software-carta-de-vinos`,
       ogImage: OG_IMAGE,
       lang: 'es',
