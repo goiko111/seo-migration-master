@@ -24,42 +24,6 @@ const fadeUp = {
 
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
-/* ── Section 3: 4 Capas ── */
-const layers = [
-  {
-    num: "01",
-    title: "Observar",
-    subtitle: "Lectura continua del contexto",
-    desc: "El sistema analiza en tiempo real los datos de tu carta: ventas, márgenes, rotación, estacionalidad y comportamiento del comensal.",
-    icon: Eye,
-    accent: "from-blue-500/20 to-blue-600/5",
-  },
-  {
-    num: "02",
-    title: "Evaluar",
-    subtitle: "Diagnóstico inteligente",
-    desc: "Cruza más de 20 variables para identificar oportunidades ocultas, cuellos de botella y vinos que no están rindiendo al nivel esperado.",
-    icon: BarChart3,
-    accent: "from-emerald-500/20 to-emerald-600/5",
-  },
-  {
-    num: "03",
-    title: "Decidir",
-    subtitle: "Generación de recomendaciones tácticas",
-    desc: "Produce acciones específicas —los RIMs— con prioridad, impacto estimado y justificación clara. No son alertas genéricas: son decisiones operativas.",
-    icon: Brain,
-    accent: "from-wine/20 to-wine/5",
-  },
-  {
-    num: "04",
-    title: "Actuar",
-    subtitle: "Ejecución asistida o automática",
-    desc: "Dependiendo de la configuración, el sistema ejecuta los cambios o los presenta al responsable para aprobación con un solo clic.",
-    icon: Zap,
-    accent: "from-amber-500/20 to-amber-600/5",
-  },
-];
-
 /* ── Section 4: Objetivos ── */
 const objectives = [
   { icon: DollarSign, title: "Maximizar facturación", desc: "Priorizar vinos y posiciones que generan más ingresos brutos." },
@@ -368,72 +332,130 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            3. CÓMO FUNCIONA — 4 CAPAS
+            3. CÓMO FUNCIONA — 4 CAPAS (nuevo diseño)
         ════════════════════════════════════════════════ */}
-        <section className="section-padding">
+        <section id="como-funciona" className="section-padding">
           <div className="max-w-6xl mx-auto">
             <ScrollReveal>
-              <div className="text-center mb-16">
+              <div className="text-center mb-16 md:mb-20">
                 <Badge className="bg-secondary text-secondary-foreground border-border mb-6 text-xs tracking-widest uppercase px-3 py-1">
-                  Arquitectura
+                  Cómo funciona
                 </Badge>
-                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  Cuatro capas,{" "}
-                  <span className="text-gradient-wine">un sistema</span>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+                  Un sistema de decisión en{" "}
+                  <span className="text-gradient-wine">4 capas</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Cada capa alimenta la siguiente en un ciclo continuo de mejora.
+                  Cada capa puede actuar por separado, pero el verdadero valor aparece cuando trabajan juntas.
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {layers.map((layer, i) => (
+            {/* 4 Layer Cards with flow arrows */}
+            <div className="relative">
+              {[
+                {
+                  num: "01",
+                  title: "Objetivos",
+                  desc: "Definen qué quiere conseguir el restaurante: más facturación, más margen, más rotación, carta viva, impulsar vinos locales o mejorar la experiencia premium.",
+                  icon: Target,
+                  color: "from-amber-500/15 to-amber-600/5",
+                  iconBg: "bg-amber-500/10 group-hover:bg-amber-500/20",
+                  iconColor: "text-amber-500",
+                },
+                {
+                  num: "02",
+                  title: "Perfiles de rotación",
+                  desc: "Seleccionan qué vinos son elegibles o prioritarios según margen, stock, velocidad de salida, prime, temporada, precio, localismo y otros criterios configurables.",
+                  icon: RefreshCw,
+                  color: "from-emerald-500/15 to-emerald-600/5",
+                  iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
+                  iconColor: "text-emerald-500",
+                },
+                {
+                  num: "03",
+                  title: "Módulos estructurales",
+                  desc: "Determinan dónde se aplican las estrategias dentro de la carta: recomendados, novedades, selección, maridajes, primeras posiciones o resultados tras filtrado.",
+                  icon: Layers,
+                  color: "from-blue-500/15 to-blue-600/5",
+                  iconBg: "bg-blue-500/10 group-hover:bg-blue-500/20",
+                  iconColor: "text-blue-500",
+                },
+                {
+                  num: "04",
+                  title: "Módulos RIM™",
+                  desc: "Deciden cuándo y por qué actuar según contexto real: hora, clima, calendario, ventas, afluencia, stock, rentabilidad o comportamiento del comensal.",
+                  icon: Brain,
+                  color: "from-wine/15 to-wine/5",
+                  iconBg: "bg-wine/10 group-hover:bg-wine/20",
+                  iconColor: "text-wine",
+                },
+              ].map((layer, i, arr) => (
                 <ScrollReveal key={layer.num}>
-                  <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeUp}
-                    custom={i}
-                    className="group relative p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-wine/25 transition-all duration-500"
-                  >
-                    {/* Subtle gradient on hover */}
-                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${layer.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                    <div className="relative">
-                      <div className="flex items-start justify-between mb-6">
-                        <span className="text-wine/30 font-heading text-5xl font-bold leading-none">
-                          {layer.num}
-                        </span>
-                        <div className="w-12 h-12 rounded-xl bg-wine/8 flex items-center justify-center group-hover:bg-wine/15 transition-colors">
-                          <layer.icon className="w-6 h-6 text-wine" />
+                  <div className="relative">
+                    <motion.div
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      custom={i}
+                      className="group relative grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start"
+                    >
+                      {/* Left: Number + vertical connector */}
+                      <div className="hidden md:flex flex-col items-center">
+                        <div className={`w-16 h-16 rounded-2xl ${layer.iconBg} flex items-center justify-center transition-colors duration-300 border border-border`}>
+                          <layer.icon className={`w-7 h-7 ${layer.iconColor}`} />
                         </div>
+                        {i < arr.length - 1 && (
+                          <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-border to-transparent mt-4" />
+                        )}
                       </div>
-                      <h3 className="font-heading text-2xl font-bold text-foreground mb-1">
-                        {layer.title}
-                      </h3>
-                      <p className="text-accent text-sm font-medium mb-4">
-                        {layer.subtitle}
-                      </p>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {layer.desc}
-                      </p>
-                    </div>
-                  </motion.div>
+
+                      {/* Right: Content card */}
+                      <div className={`relative p-7 md:p-9 rounded-2xl border border-border bg-card hover:border-wine/20 transition-all duration-500 ${i < arr.length - 1 ? "mb-6" : ""}`}>
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${layer.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                        <div className="relative">
+                          {/* Mobile icon */}
+                          <div className={`md:hidden w-12 h-12 rounded-xl ${layer.iconBg} flex items-center justify-center mb-5 transition-colors`}>
+                            <layer.icon className={`w-6 h-6 ${layer.iconColor}`} />
+                          </div>
+
+                          <div className="flex items-baseline gap-4 mb-3">
+                            <span className="text-wine/25 font-heading text-4xl font-bold leading-none">{layer.num}</span>
+                            <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                              {layer.title}
+                            </h3>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed text-[15px] md:max-w-xl">
+                            {layer.desc}
+                          </p>
+                        </div>
+
+                        {/* Flow arrow between cards (desktop) */}
+                        {i < arr.length - 1 && (
+                          <div className="hidden md:block absolute -bottom-6 left-12 z-10">
+                            <ChevronRight size={18} className="text-wine/30 rotate-90" />
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  </div>
                 </ScrollReveal>
               ))}
             </div>
 
-            {/* Connecting line */}
-            <div className="hidden md:flex justify-center my-8">
-              <div className="flex items-center gap-2 text-muted-foreground/40">
-                <div className="w-16 h-px bg-current" />
-                <RefreshCw size={14} />
-                <span className="text-xs uppercase tracking-widest">Ciclo continuo</span>
-                <div className="w-16 h-px bg-current" />
+            {/* Closing phrase */}
+            <ScrollReveal>
+              <div className="mt-14 md:mt-20 text-center">
+                <div className="inline-flex items-center gap-3 px-8 py-5 rounded-2xl border border-wine/15 bg-wine/5 backdrop-blur-sm">
+                  <Zap size={20} className="text-wine shrink-0" />
+                  <p className="text-foreground font-medium text-[15px] md:text-base leading-relaxed text-left">
+                    El resultado es una carta que se adapta sola para vender mejor sin perder coherencia.
+                  </p>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 
