@@ -40,15 +40,32 @@ const RestaurantsTab = () => {
     if (!files || files.length === 0) return;
     setUploading(true);
 
+    // Filter only image files (webkitdirectory includes all files from subfolders)
+    const imageFiles = Array.from(files).filter(f =>
+      /\.(png|jpe?g|gif|svg|webp|avif|ico)$/i.test(f.name)
+    );
+
+    if (imageFiles.length === 0) {
+      toast.error("No se encontraron imágenes en la carpeta");
+      setUploading(false);
+      return;
+    }
+
     const maxOrder = restaurants.length > 0
       ? Math.max(...restaurants.map(r => r.display_order)) + 1
       : 0;
 
     let added = 0;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+    for (let i = 0; i < imageFiles.length; i++) {
+      const file = imageFiles[i];
       const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
       const safeName = `${Date.now()}-${i}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+
+      // Extract category from subfolder path (e.g., "Root/Michelin/logo.png" → "Michelin")
+      const relativePath = (file as any).webkitRelativePath || "";
+      const pathParts = relativePath.split("/").filter(Boolean);
+      // Use the parent folder name (skip root folder and filename)
+      const category = pathParts.length > 2 ? pathParts.slice(1, -1).join(" / ") : null;
 
       const { error: uploadError } = await supabase.storage
         .from(BUCKET)
@@ -67,6 +84,7 @@ const RestaurantsTab = () => {
         display_order: maxOrder + i,
         visible: true,
         featured: false,
+        category,
       });
 
       if (insertError) {
