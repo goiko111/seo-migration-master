@@ -12,6 +12,7 @@ import logoLaCarboneria from "@/assets/logos/lacarboneria.png";
 import logoCocinaDelSol from "@/assets/logos/cocinadelsol.png";
 import logoCanabota from "@/assets/logos/canabota.png";
 import logoAlejandra from "@/assets/logos/alejandra.png";
+import logoMent from "@/assets/logos/ment.png";
 
 interface LogoItem {
   name: string;
