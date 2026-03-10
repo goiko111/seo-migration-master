@@ -71,7 +71,7 @@ const content: Record<string, {
     capabilities: ["Interactive digital list", "Smart pairings", "Wine comparator", "Sales analytics", "Price optimization", "Cellar management"],
     included_badge: "All included", included_title: "What <em>Winerim</em> includes",
     impact_badge: "Real impact", impact_title: "Results our <em>clients</em> achieve",
-    metrics: [{ value: "+30%", label: "Wine sales" }, { value: "+20%", label: "Average ticket" }, { value: "+35%", label: "Reference rotation" }],
+    metrics: [{ value: "More sales", label: "Customers exploring more references" }, { value: "Better margins", label: "Price control and range optimization" }, { value: "Less time", label: "Automated wine list management" }],
     cta_badge: "Take the step", cta_title: "Discover how much more you could sell with your <em>wine list</em>", cta_sub: "We show you the improvement potential of your wine list with a personalized demo. No commitment.", cta_btn: "Request demo",
     faqs: [
       { q: "How long does implementation take?", a: "Most restaurants are up and running in under 48 hours." },
