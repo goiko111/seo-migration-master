@@ -11,6 +11,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
 const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
+const DynamicIntelligenceTeaser = lazy(() => import("@/components/landing/DynamicIntelligenceTeaser"));
 const ResultsSection = lazy(() => import("@/components/landing/ResultsSection"));
 const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSection"));
 const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
@@ -44,6 +45,7 @@ const Index = () => {
             <ProblemSection />
             <SolutionSection />
             <FeaturesPreview />
+            <DynamicIntelligenceTeaser />
             <ResultsSection />
             <HowItWorksSection />
             <TestimonialsSection />
