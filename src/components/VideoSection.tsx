@@ -1,8 +1,12 @@
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 import ScrollReveal from "./ScrollReveal";
+import YouTubeFacade from "./YouTubeFacade";
 
 const VideoSection = () => {
   const { get } = useSharedPageContent();
+  const youtubeUrl = get("video", "youtube_url", "https://www.youtube.com/embed/-PleM286zeY");
+  // Extract video ID from various YouTube URL formats
+  const videoId = youtubeUrl.match(/(?:embed\/|v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1] || "-PleM286zeY";
 
   return (
     <section className="section-padding bg-gradient-dark">
@@ -17,14 +21,10 @@ const VideoSection = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <div className="relative rounded-2xl overflow-hidden border border-border glow-wine aspect-video">
-            <iframe
-              src={get("video", "youtube_url", "https://www.youtube.com/embed/-PleM286zeY")}
+          <div className="relative rounded-2xl overflow-hidden border border-border glow-wine">
+            <YouTubeFacade
+              videoId={videoId}
               title="Winerim, la revolución de la carta de vinos"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-              loading="lazy"
             />
           </div>
         </ScrollReveal>
