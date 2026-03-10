@@ -5,6 +5,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
