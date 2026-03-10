@@ -49,7 +49,7 @@ const definitionData = {
       "Accords mets-vins automatiques pour chaque plat",
       "Analytique des ventes en temps réel",
       "Optimisation des prix et des marges",
-      "Aucune application à télécharger",
+      "Multiplateforme : web, tablette et app native",
     ],
     summaryLabel: "Qu'est-ce que Winerim ?",
   },
