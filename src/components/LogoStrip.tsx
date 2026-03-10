@@ -29,10 +29,10 @@ import logoBocaatti from "@/assets/logos/bocaatti.png";
 
 interface LogoItem {
   name: string;
-  logo?: string;
+  logo: string;
 }
 
-const restaurantLogos: LogoItem[] = [
+const michelinLogos: LogoItem[] = [
   { name: "Miramar", logo: logoMiramar },
   { name: "Zortziko", logo: logoZortziko },
   { name: "Tres", logo: logoTres },
@@ -44,6 +44,9 @@ const restaurantLogos: LogoItem[] = [
   { name: "Cañabota", logo: logoCanabota },
   { name: "Alejandra", logo: logoAlejandra },
   { name: "Ment", logo: logoMent },
+];
+
+const repsolLogos: LogoItem[] = [
   { name: "Bidea", logo: logoBidea },
   { name: "Tribeca", logo: logoTribeca },
   { name: "Taverna", logo: logoTaverna },
@@ -59,15 +62,10 @@ const restaurantLogos: LogoItem[] = [
   { name: "Bocaatti", logo: logoBocaatti },
 ];
 
-const hotelGroups: LogoItem[] = [
-  { name: "Meliá Hotels" },
-  { name: "Hyatt" },
-  { name: "Marriott" },
-];
+const hotelGroups = ["Meliá Hotels", "Hyatt", "Marriott"];
 
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
-  const doubledRestaurants = [...restaurantLogos, ...restaurantLogos];
 
   return (
     <section className="py-12 sm:py-16 md:py-20 overflow-hidden">
@@ -85,44 +83,70 @@ const LogoStrip = () => {
         </h2>
       </motion.div>
 
-      {/* Restaurant logos scroll */}
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         <div className="flex animate-scroll-left gap-8 sm:gap-12 items-center">
-          {doubledRestaurants.map((item, i) => (
+          {[...michelinLogos, ...michelinLogos].map((item, i) => (
             <div
-              key={`${item.name}-${i}`}
+              key={`${item.name}-michelin-${i}`}
               className="flex-shrink-0 flex items-center justify-center h-20 sm:h-28 md:h-32 px-6 sm:px-10"
             >
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-16 sm:h-22 md:h-28 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 brightness-110"
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
               />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Hotel groups */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mt-8"
+      >
+        <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold">Soles Repsol</p>
+      </motion.div>
+
+      <div className="relative mt-4">
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+        <div className="flex animate-scroll-left gap-8 sm:gap-10 items-center" style={{ animationDuration: "20s" }}>
+          {[...repsolLogos, ...repsolLogos].map((item, i) => (
+            <div
+              key={`${item.name}-repsol-${i}`}
+              className="flex-shrink-0 flex flex-col items-center justify-center min-w-40 sm:min-w-48 px-3"
+            >
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-12 sm:h-16 md:h-20 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
+              />
+              <p className="mt-2 text-xs sm:text-sm font-medium text-foreground/85 tracking-wide">{item.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="flex items-center justify-center gap-6 sm:gap-10 mt-8 sm:mt-10 px-6"
       >
-        <span className="text-xs text-muted-foreground/60 tracking-widest uppercase whitespace-nowrap">
-          Grupos hoteleros
-        </span>
+        <span className="text-xs text-muted-foreground/60 tracking-widest uppercase whitespace-nowrap">Grupos hoteleros</span>
         <div className="h-px w-8 bg-border/50" />
         {hotelGroups.map((hotel) => (
           <span
-            key={hotel.name}
+            key={hotel}
             className="text-base sm:text-lg md:text-xl font-heading font-semibold tracking-wider text-muted-foreground/70 hover:text-foreground transition-colors duration-300 whitespace-nowrap"
           >
-            {hotel.name}
+            {hotel}
           </span>
         ))}
       </motion.div>
