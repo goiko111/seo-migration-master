@@ -185,7 +185,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "En desarrollo",
     changelog_badge: "Changelog", changelog_title: "Últimas <em>novedades</em>", changelog_sub: "Winerim evoluciona constantemente.",
-    roadmap_badge: "Roadmap", roadmap_title: "Lo que viene en <em>Winerim</em>", roadmap_sub: "Nuestro plan de desarrollo para los próximos meses.",
+    roadmap_badge: "Capacidades en expansión", roadmap_title: "Próximas <em>capacidades</em>", roadmap_sub: "Además de su núcleo de gestión e inteligencia, Winerim sigue ampliando la experiencia del comensal y del equipo de sala con nuevas capacidades.",
     cta_badge: "Empieza hoy", cta_title: "Descubre Winerim en <em>acción</em>", cta_sub: "Prueba todas estas funcionalidades gratis durante 14 días. Sin compromiso.", cta_btn: "Prueba Gratis",
     changelog: [
       { date: "Feb 2026", title: "Filtros sensoriales v2", desc: "Nueva interfaz de filtrado por perfil aromático.", tag: "new" },
@@ -196,9 +196,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Integración Revo TPV", desc: "Sincronización bidireccional con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Solicitar al sumiller desde la carta", "Compartir selección por QR/link", "Recomendaciones por historial"] },
-      { quarter: "Q3 2026", items: ["Modo educación con tips de vino", "FocusRIM – módulos IA para empujar referencias rentables", "App nativa para comensales"] },
-      { quarter: "Q4 2026", items: ["IA predictiva de tendencias", "Carta con realidad aumentada", "API pública v2"] },
+      { quarter: "Experiencia comensal", items: ["Solicitar al sumiller desde la carta", "Compartir selección por QR/link", "Recomendaciones por historial"] },
+      { quarter: "Formación y sala", items: ["Modo educación con tips de vino", "Guías de servicio para el equipo", "App nativa para comensales"] },
+      { quarter: "Tecnología avanzada", items: ["IA predictiva de tendencias", "Carta con realidad aumentada", "API pública v2"] },
     ],
     tag_labels: { new: "Nuevo", improvement: "Mejora", fix: "Corrección" },
   },
@@ -319,7 +319,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "Coming soon",
     changelog_badge: "Changelog", changelog_title: "Latest <em>updates</em>", changelog_sub: "Winerim is constantly evolving.",
-    roadmap_badge: "Roadmap", roadmap_title: "What's coming to <em>Winerim</em>", roadmap_sub: "Our development plan for the coming months.",
+    roadmap_badge: "Expanding capabilities", roadmap_title: "Upcoming <em>capabilities</em>", roadmap_sub: "Beyond its core management and intelligence engine, Winerim keeps expanding the diner and floor team experience with new capabilities.",
     cta_badge: "Start today", cta_title: "See Winerim in <em>action</em>", cta_sub: "Try all these features free for 14 days. No commitment.", cta_btn: "Try Free",
     changelog: [
       { date: "Feb 2026", title: "Sensory filters v2", desc: "New filtering UI by aromatic profile.", tag: "new" },
@@ -330,9 +330,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Revo POS integration", desc: "Bidirectional sync with Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Request sommelier from the list", "Share selection via QR/link", "History-based recommendations"] },
-      { quarter: "Q3 2026", items: ["Education mode with wine tips", "FocusRIM – AI modules to push profitable references", "Native diner app"] },
-      { quarter: "Q4 2026", items: ["Predictive trend AI", "AR wine list", "Public API v2"] },
+      { quarter: "Diner experience", items: ["Request sommelier from the list", "Share selection via QR/link", "History-based recommendations"] },
+      { quarter: "Training & floor", items: ["Education mode with wine tips", "Service guides for the team", "Native diner app"] },
+      { quarter: "Advanced technology", items: ["Predictive trend AI", "AR wine list", "Public API v2"] },
     ],
     tag_labels: { new: "New", improvement: "Improvement", fix: "Fix" },
   },
@@ -453,7 +453,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "In sviluppo",
     changelog_badge: "Changelog", changelog_title: "Ultime <em>novità</em>", changelog_sub: "Winerim si evolve costantemente.",
-    roadmap_badge: "Roadmap", roadmap_title: "Cosa arriva su <em>Winerim</em>", roadmap_sub: "Il nostro piano di sviluppo.",
+    roadmap_badge: "Capacità in espansione", roadmap_title: "Prossime <em>capacità</em>", roadmap_sub: "Oltre al suo nucleo di gestione e intelligenza, Winerim continua ad ampliare l'esperienza del cliente e del team di sala con nuove capacità.",
     cta_badge: "Inizia oggi", cta_title: "Scopri Winerim in <em>azione</em>", cta_sub: "Prova tutte le funzionalità gratis per 14 giorni.", cta_btn: "Prova Gratis",
     changelog: [
       { date: "Feb 2026", title: "Filtri sensoriali v2", desc: "Nuova interfaccia filtri.", tag: "new" },
@@ -464,9 +464,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Set 2025", title: "Integrazione Revo", desc: "Sincronizzazione con Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Richiedere sommelier dalla carta", "Condividere selezione via QR/link", "Raccomandazioni per storico"] },
-      { quarter: "Q3 2026", items: ["Modalità educazione con tips", "FocusRIM – moduli IA per referenze redditizie", "App nativa"] },
-      { quarter: "Q4 2026", items: ["IA predittiva tendenze", "Carta in realtà aumentata", "API pubblica v2"] },
+      { quarter: "Esperienza cliente", items: ["Richiedere sommelier dalla carta", "Condividere selezione via QR/link", "Raccomandazioni per storico"] },
+      { quarter: "Formazione e sala", items: ["Modalità educazione con tips", "Guide di servizio per il team", "App nativa"] },
+      { quarter: "Tecnologia avanzata", items: ["IA predittiva tendenze", "Carta in realtà aumentata", "API pubblica v2"] },
     ],
     tag_labels: { new: "Nuovo", improvement: "Miglioramento", fix: "Correzione" },
   },
@@ -587,7 +587,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "En développement",
     changelog_badge: "Changelog", changelog_title: "Dernières <em>nouveautés</em>", changelog_sub: "Winerim évolue constamment.",
-    roadmap_badge: "Roadmap", roadmap_title: "Ce qui arrive sur <em>Winerim</em>", roadmap_sub: "Notre plan de développement.",
+    roadmap_badge: "Capacités en expansion", roadmap_title: "Prochaines <em>capacités</em>", roadmap_sub: "Au-delà de son noyau de gestion et d'intelligence, Winerim continue d'enrichir l'expérience du client et de l'équipe de salle avec de nouvelles capacités.",
     cta_badge: "Commencez aujourd'hui", cta_title: "Découvrez Winerim en <em>action</em>", cta_sub: "Essayez toutes les fonctionnalités gratuitement pendant 14 jours.", cta_btn: "Essai Gratuit",
     changelog: [
       { date: "Fév 2026", title: "Filtres sensoriels v2", desc: "Nouvelle interface de filtrage.", tag: "new" },
@@ -598,9 +598,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Intégration Revo", desc: "Synchronisation avec Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Demander le sommelier depuis la carte", "Partager sélection via QR/lien", "Recommandations par historique"] },
-      { quarter: "Q3 2026", items: ["Mode éducation avec tips vin", "FocusRIM – modules IA pour références rentables", "App native"] },
-      { quarter: "Q4 2026", items: ["IA prédictive tendances", "Carte en réalité augmentée", "API publique v2"] },
+      { quarter: "Expérience client", items: ["Demander le sommelier depuis la carte", "Partager sélection via QR/lien", "Recommandations par historique"] },
+      { quarter: "Formation et salle", items: ["Mode éducation avec tips vin", "Guides de service pour l'équipe", "App native"] },
+      { quarter: "Technologie avancée", items: ["IA prédictive tendances", "Carte en réalité augmentée", "API publique v2"] },
     ],
     tag_labels: { new: "Nouveau", improvement: "Amélioration", fix: "Correction" },
   },
@@ -915,25 +915,25 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      {/* ─── Roadmap ─── */}
+      {/* ─── Capacidades en expansión (discreto) ─── */}
       <section className="section-padding" id="roadmap">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.roadmap_badge}</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: emToGradient(c.roadmap_title) }} />
-            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">{c.roadmap_sub}</p>
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-3">{c.roadmap_badge}</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground/80" dangerouslySetInnerHTML={{ __html: emToGradient(c.roadmap_title) }} />
+            <p className="text-muted-foreground/60 mt-3 max-w-2xl mx-auto text-sm leading-relaxed">{c.roadmap_sub}</p>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {c.roadmap.map((q, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-gradient-card rounded-xl border border-border p-7 h-full">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-wine/30 bg-wine/5 mb-5">
-                    <Rocket size={12} className="text-wine" />
-                    <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{q.quarter}</span>
-                  </div>
-                  <ul className="space-y-3">
+              <ScrollReveal key={i} delay={i * 0.08}>
+                <div className="rounded-xl border border-border/60 bg-card/40 p-6 h-full">
+                  <span className="text-[11px] font-medium tracking-widest uppercase text-muted-foreground/50 mb-4 block">{q.quarter}</span>
+                  <ul className="space-y-2.5">
                     {q.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-sm text-muted-foreground"><CheckCircle size={16} className="text-wine/50 shrink-0 mt-0.5" />{item}</li>
+                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground/70 leading-relaxed">
+                        <span className="w-1 h-1 rounded-full bg-muted-foreground/30 mt-1.5 shrink-0" />
+                        {item}
+                      </li>
                     ))}
                   </ul>
                 </div>
