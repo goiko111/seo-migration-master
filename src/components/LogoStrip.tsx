@@ -23,6 +23,9 @@ import logoRemigio from "@/assets/logos/remigio.png";
 import logoLaFabrica from "@/assets/logos/lafabrica.png";
 import logoJauregibarria from "@/assets/logos/jauregibarria.png";
 import logoElMotel from "@/assets/logos/elmotel.png";
+import logoDamaso from "@/assets/logos/damaso.png";
+import logoCasamar from "@/assets/logos/casamar.png";
+import logoBocaatti from "@/assets/logos/bocaatti.png";
 
 interface LogoItem {
   name: string;
@@ -51,6 +54,9 @@ const logoItems: LogoItem[] = [
   { name: "La Fábrica", logo: logoLaFabrica },
   { name: "Jauregibarria", logo: logoJauregibarria },
   { name: "El Motel", logo: logoElMotel },
+  { name: "Dámaso", logo: logoDamaso },
+  { name: "Casamar", logo: logoCasamar },
+  { name: "Bocaatti", logo: logoBocaatti },
   { name: "Meliá Hotels" },
   { name: "Hyatt" },
   { name: "Marriott" },
