@@ -48,7 +48,7 @@ interface Lead {
 
 const emptyArticle = {
   slug: "", title: "", excerpt: "", body: "", image_url: "",
-  category: "blog", author: "", author_role: "", author_image: "", published: false,
+  category: "blog", author: "", author_role: "", author_image: "", published: false, related_links: [] as { to: string; label: string; type: "tool" | "guide" | "resource" | "solution" }[],
 };
 
 const Admin = () => {
@@ -88,13 +88,14 @@ const Admin = () => {
       author: editingArticle.author || null, author_role: editingArticle.author_role || null,
       author_image: editingArticle.author_image || null, published: editingArticle.published,
       published_at: editingArticle.published ? new Date().toISOString() : null,
+      related_links: editingArticle.related_links.length > 0 ? editingArticle.related_links : [],
     };
     if (editingArticle.id) {
-      const { error } = await supabase.from("articles").update(payload).eq("id", editingArticle.id);
+      const { error } = await supabase.from("articles").update(payload as any).eq("id", editingArticle.id);
       if (error) toast.error("Error al guardar");
       else toast.success("Artículo actualizado");
     } else {
-      const { error } = await supabase.from("articles").insert(payload);
+      const { error } = await supabase.from("articles").insert(payload as any);
       if (error) toast.error("Error al crear: " + error.message);
       else toast.success("Artículo creado");
     }
@@ -193,6 +194,7 @@ const Admin = () => {
                   image_url: article.image_url || "", category: article.category,
                   author: article.author || "", author_role: article.author_role || "",
                   author_image: article.author_image || "", published: article.published,
+                  related_links: Array.isArray((article as any).related_links) ? (article as any).related_links : [],
                 })}
                 onDelete={deleteArticle}
                 onTogglePublish={togglePublish}

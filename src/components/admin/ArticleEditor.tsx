@@ -2,11 +2,17 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ImageUpload from "./ImageUpload";
 import MarkdownToolbar from "./MarkdownToolbar";
+
+interface RelatedLink {
+  to: string;
+  label: string;
+  type: "tool" | "guide" | "resource" | "solution";
+}
 
 interface ArticleForm {
   id?: string;
@@ -20,6 +26,7 @@ interface ArticleForm {
   author_role: string;
   author_image: string;
   published: boolean;
+  related_links: RelatedLink[];
 }
 
 interface ArticleEditorProps {
@@ -115,6 +122,56 @@ const ArticleEditor = ({ article, onChange, onSave, onCancel, saving }: ArticleE
               className="bg-background border-border min-h-[300px] font-mono text-sm rounded-t-none"
             />
           </div>
+        )}
+      </div>
+
+      {/* Related links editor */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-medium text-foreground">
+            Enlaces relacionados (vacío = automáticos por contenido)
+          </label>
+          <Button variant="ghost" size="sm" type="button"
+            onClick={() => update({ related_links: [...article.related_links, { to: "", label: "", type: "tool" }] })}>
+            <Plus className="w-4 h-4 mr-1" /> Añadir
+          </Button>
+        </div>
+        {article.related_links.map((link, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <select value={link.type}
+              onChange={e => {
+                const updated = [...article.related_links];
+                updated[i] = { ...updated[i], type: e.target.value as RelatedLink["type"] };
+                update({ related_links: updated });
+              }}
+              className="bg-background border border-border rounded-md px-2 py-2 text-xs text-foreground w-28">
+              <option value="tool">Herramienta</option>
+              <option value="guide">Guía</option>
+              <option value="resource">Recurso</option>
+              <option value="solution">Solución</option>
+            </select>
+            <Input placeholder="/ruta" value={link.to}
+              onChange={e => {
+                const updated = [...article.related_links];
+                updated[i] = { ...updated[i], to: e.target.value };
+                update({ related_links: updated });
+              }}
+              className="bg-background border-border flex-1 text-sm" />
+            <Input placeholder="Texto del enlace" value={link.label}
+              onChange={e => {
+                const updated = [...article.related_links];
+                updated[i] = { ...updated[i], label: e.target.value };
+                update({ related_links: updated });
+              }}
+              className="bg-background border-border flex-[2] text-sm" />
+            <Button variant="ghost" size="sm" type="button"
+              onClick={() => update({ related_links: article.related_links.filter((_, j) => j !== i) })}>
+              <Trash2 className="w-4 h-4 text-destructive" />
+            </Button>
+          </div>
+        ))}
+        {article.related_links.length === 0 && (
+          <p className="text-xs text-muted-foreground italic">Sin enlaces manuales — se mostrarán automáticamente según el contenido del artículo.</p>
         )}
       </div>
 

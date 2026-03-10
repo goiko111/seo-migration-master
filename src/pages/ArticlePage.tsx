@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ArticleSection from "@/components/article/ArticleSection";
 import ArticleTableOfContents from "@/components/article/ArticleTableOfContents";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import ArticleRelatedContent, { type RelatedLink } from "@/components/article/ArticleRelatedContent";
 import { parseMarkdownSections, type ParsedSection } from "@/components/article/parseMarkdownSections";
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
@@ -24,6 +25,7 @@ interface ArticleData {
   type: "interview" | "blog";
   author?: string;
   publishedAt?: string;
+  relatedLinks?: RelatedLink[] | null;
 }
 
 const ArticlePage = () => {
@@ -36,7 +38,7 @@ const ArticlePage = () => {
     const fetchArticle = async () => {
       const { data } = await supabase
         .from("articles")
-        .select("title, excerpt, body, image_url, category, author, author_role, published_at")
+        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links")
         .eq("slug", slug)
         .eq("published", true)
         .maybeSingle();
@@ -52,6 +54,7 @@ const ArticlePage = () => {
           type: data.category === "interview" ? "interview" : "blog",
           author: data.author || undefined,
           publishedAt: data.published_at || undefined,
+          relatedLinks: Array.isArray(data.related_links) ? (data.related_links as unknown as RelatedLink[]) : null,
         });
       } else {
         const staticArticle = getArticleBySlug(slug);
@@ -206,6 +209,9 @@ const ArticlePage = () => {
           {i === midIndex - 1 && <ArticleMidCTA />}
         </div>
       ))}
+
+      {/* RELATED CONTENT */}
+      <ArticleRelatedContent slug={slug || ""} body={article.body} manualLinks={article.relatedLinks} />
 
       {/* CTA FINAL */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
