@@ -102,6 +102,7 @@ const rimCards = [
     iconBg: "bg-violet-500/12",
     iconColor: "text-violet-400",
     borderColor: "group-hover:border-violet-500/30",
+    featured: true,
   },
   {
     name: "MarginRIM™",
@@ -112,6 +113,7 @@ const rimCards = [
     iconBg: "bg-emerald-500/12",
     iconColor: "text-emerald-400",
     borderColor: "group-hover:border-emerald-500/30",
+    featured: true,
   },
   {
     name: "StockRIM™",
@@ -132,6 +134,7 @@ const rimCards = [
     iconBg: "bg-blue-500/12",
     iconColor: "text-blue-400",
     borderColor: "group-hover:border-blue-500/30",
+    featured: true,
   },
   {
     name: "ClimateRIM™",
