@@ -12,6 +12,7 @@ import ArticleList from "@/components/admin/ArticleList";
 import LeadsTab from "@/components/admin/LeadsTab";
 import PageContentEditor from "@/components/admin/PageContentEditor";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
+import RestaurantsTab from "@/components/admin/RestaurantsTab";
 
 interface Article {
   id: string;
