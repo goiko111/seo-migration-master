@@ -99,6 +99,10 @@ const LogoStrip = () => {
                 src={item.logo}
                 alt={item.name}
                 className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
+                loading="lazy"
+                decoding="async"
+                width={120}
+                height={96}
               />
             </div>
           ))}
@@ -121,6 +125,10 @@ const LogoStrip = () => {
                 src={item.logo}
                 alt={item.name}
                 className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-100 contrast-125 brightness-125 saturate-125"
+                loading="lazy"
+                decoding="async"
+                width={120}
+                height={96}
               />
             </div>
           ))}

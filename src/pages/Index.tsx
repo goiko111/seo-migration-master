@@ -1,19 +1,26 @@
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import HeroSection from "@/components/landing/HeroSection";
 import LogoStrip from "@/components/LogoStrip";
-import ProblemSection from "@/components/landing/ProblemSection";
-import SolutionSection from "@/components/landing/SolutionSection";
-import FeaturesPreview from "@/components/landing/FeaturesPreview";
-import ResultsSection from "@/components/landing/ResultsSection";
-import HowItWorksSection from "@/components/landing/HowItWorksSection";
-import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import VideoSection from "@/components/VideoSection";
-import DefinitionSection from "@/components/landing/DefinitionSection";
-import FinalCTASection from "@/components/landing/FinalCTASection";
 import { PageContentProvider } from "@/contexts/PageContentContext";
 import { useLanguage } from "@/i18n/LanguageContext";
+
+// Lazy load below-fold sections — only render when needed
+const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
+const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
+const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
+const ResultsSection = lazy(() => import("@/components/landing/ResultsSection"));
+const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSection"));
+const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
+const VideoSection = lazy(() => import("@/components/VideoSection"));
+const DefinitionSection = lazy(() => import("@/components/landing/DefinitionSection"));
+const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
+
+const SectionFallback = () => (
+  <div className="min-h-[200px]" />
+);
 
 const Index = () => {
   const { t, allLangPaths } = useLanguage();
@@ -29,17 +36,21 @@ const Index = () => {
       <Navbar />
       <PageContentProvider page="home">
         <main>
+          {/* Above the fold — eagerly loaded */}
           <HeroSection />
           <LogoStrip />
-          <ProblemSection />
-          <SolutionSection />
-          <FeaturesPreview />
-          <ResultsSection />
-          <HowItWorksSection />
-          <TestimonialsSection />
-          <DefinitionSection />
-          <VideoSection />
-          <FinalCTASection />
+          {/* Below the fold — lazy loaded */}
+          <Suspense fallback={<SectionFallback />}>
+            <ProblemSection />
+            <SolutionSection />
+            <FeaturesPreview />
+            <ResultsSection />
+            <HowItWorksSection />
+            <TestimonialsSection />
+            <DefinitionSection />
+            <VideoSection />
+            <FinalCTASection />
+          </Suspense>
         </main>
       </PageContentProvider>
       <Footer />

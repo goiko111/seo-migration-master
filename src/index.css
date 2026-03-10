@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Fonts loaded via index.html with preload + media=print trick for non-blocking */
 
 @tailwind base;
 @tailwind components;
@@ -65,10 +65,18 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    /* Prevent CLS from font swap */
+    font-display: swap;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+
+  /* Reserve space for images to prevent CLS */
+  img {
+    height: auto;
+    max-width: 100%;
   }
 }
 
@@ -129,6 +137,11 @@
   width: 3px;
   border-radius: 2px;
   background: hsl(var(--accent));
+}
+
+/* Optimize animations for GPU compositing — avoid layout/paint */
+.animate-scroll-left {
+  will-change: transform;
 }
 
 /* Interview question styling — handled via ReactMarkdown components instead */
