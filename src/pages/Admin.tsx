@@ -163,6 +163,7 @@ const Admin = () => {
           <TabsList className="mb-8">
             <TabsTrigger value="analytics">Dashboard</TabsTrigger>
             <TabsTrigger value="articles">Artículos</TabsTrigger>
+            <TabsTrigger value="restaurants">Restaurantes</TabsTrigger>
             <TabsTrigger value="pages">Textos de páginas</TabsTrigger>
             <TabsTrigger value="leads">Leads ({leads.length})</TabsTrigger>
           </TabsList>
