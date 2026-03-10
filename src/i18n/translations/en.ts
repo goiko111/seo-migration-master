@@ -82,7 +82,7 @@ const en: TranslationDict = {
   common_see_more: "See more",
   common_back: "Back",
 
-  seo_home_title: "Digital Wine List with AI | Sell More Wine",
+  seo_home_title: "Smart Wine List with AI | Sell More Wine",
   seo_home_description: "Winerim turns your wine list into a smart seller with AI. Automatic recommendations, pairings, and analytics to increase wine sales in your restaurant.",
 
   contact_title: "Contact",

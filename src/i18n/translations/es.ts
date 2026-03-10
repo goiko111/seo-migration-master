@@ -82,7 +82,7 @@ const es: TranslationDict = {
   common_see_more: "Ver más",
   common_back: "Volver",
 
-  seo_home_title: "Carta de Vinos Digital con IA | Vende Más Vino",
+  seo_home_title: "Carta Inteligente de Vinos con IA | Vende Más Vino",
   seo_home_description: "Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomendaciones automáticas, maridajes y analítica para aumentar las ventas de vino en tu restaurante.",
 
   contact_title: "Contacto",
