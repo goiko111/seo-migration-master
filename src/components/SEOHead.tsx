@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-
-const DEFAULT_OG_IMAGE = "https://winerim.wine/og-image.png";
+import { CANONICAL_DOMAIN, DEFAULT_OG_IMAGE, isProduction } from "@/seo/config";
 
 interface HreflangLink {
   lang: string;
@@ -35,32 +34,42 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       el.content = content;
     };
 
-    // Canonical
+    // ── Environment-aware robots ──
+    // Staging/preview domains are ALWAYS noindex, regardless of the prop
+    const shouldNoindex = noindex || !isProduction();
+    if (shouldNoindex) {
+      setMeta("robots", "noindex, nofollow", true);
+    } else {
+      setMeta("robots", "index, follow", true);
+    }
+
+    // ── Canonical — always points to production domain ──
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (url) {
+      // Ensure canonical always uses production domain
+      const canonicalUrl = url.startsWith("http") && !url.includes("lovable.app")
+        ? url
+        : `${CANONICAL_DOMAIN}${url.startsWith("/") ? url : `/${url}`}`;
+
       if (!canonical) {
         canonical = document.createElement("link");
         canonical.rel = "canonical";
         document.head.appendChild(canonical);
       }
-      canonical.href = url;
+      canonical.href = canonicalUrl;
     }
 
-    // Robots
-    if (noindex) {
-      setMeta("robots", "noindex, follow", true);
-    } else {
-      setMeta("robots", "index, follow", true);
-    }
-
-    // Hreflang
+    // ── Hreflang — always uses production domain ──
     const hreflangEls: HTMLLinkElement[] = [];
     if (hreflang && hreflang.length > 0) {
       hreflang.forEach((link) => {
         const el = document.createElement("link");
         el.rel = "alternate";
         el.hreflang = link.lang;
-        el.href = link.url;
+        // Ensure hreflang URLs use production domain
+        el.href = link.url.includes("lovable.app")
+          ? link.url.replace(/https?:\/\/[^/]+/, CANONICAL_DOMAIN)
+          : link.url;
         document.head.appendChild(el);
         hreflangEls.push(el);
       });
@@ -79,7 +88,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("og:locale", hreflang?.find(h => h.lang !== "x-default")?.lang === "en" ? "en_GB" : hreflang?.find(h => h.lang !== "x-default")?.lang === "it" ? "it_IT" : hreflang?.find(h => h.lang !== "x-default")?.lang === "fr" ? "fr_FR" : "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
-    // Always set og:image (use default if none provided)
+    // OG image — always absolute with production domain
     const ogImage = image || DEFAULT_OG_IMAGE;
     setMeta("og:image", ogImage);
     setMeta("og:image:width", "1200");
@@ -87,10 +96,14 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("twitter:image", ogImage);
 
     if (url) {
-      setMeta("og:url", url);
+      // og:url always uses production domain
+      const ogUrl = url.startsWith("http") && !url.includes("lovable.app")
+        ? url
+        : `${CANONICAL_DOMAIN}${url.startsWith("/") ? url : `/${url}`}`;
+      setMeta("og:url", ogUrl);
     }
 
-    // JSON-LD: Page-specific
+    // ── JSON-LD: Page-specific ──
     let scriptEl = document.getElementById("seo-jsonld") as HTMLScriptElement | null;
     if (!scriptEl) {
       scriptEl = document.createElement("script");
@@ -111,8 +124,8 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         publisher: {
           "@type": "Organization",
           name: "Winerim",
-          url: "https://winerim.wine",
-          logo: { "@type": "ImageObject", url: "https://winerim.wine/og-image.png" },
+          url: CANONICAL_DOMAIN,
+          logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
         },
       });
     } else {
@@ -123,7 +136,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description: description || "Carta de vinos digital con recomendador inteligente para restaurantes y bodegas.",
-        url: url || "https://winerim.wine",
+        url: url || CANONICAL_DOMAIN,
         offers: {
           "@type": "Offer",
           category: "SaaS",
@@ -131,12 +144,12 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         publisher: {
           "@type": "Organization",
           name: "Winerim",
-          url: "https://winerim.wine",
+          url: CANONICAL_DOMAIN,
         },
       });
     }
 
-    // JSON-LD: Organization (always present)
+    // ── JSON-LD: Organization (always present) ──
     let orgScript = document.getElementById("seo-org-jsonld") as HTMLScriptElement | null;
     if (!orgScript) {
       orgScript = document.createElement("script");
@@ -148,8 +161,8 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Winerim",
-      url: "https://winerim.wine",
-      logo: "https://winerim.wine/og-image.png",
+      url: CANONICAL_DOMAIN,
+      logo: DEFAULT_OG_IMAGE,
       description: "Carta de vinos digital y recomendador inteligente para restaurantes, hoteles y vinotecas.",
       sameAs: [
         "https://www.instagram.com/winerim/",
@@ -159,7 +172,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "sales",
-        url: "https://winerim.wine/contacto",
+        url: `${CANONICAL_DOMAIN}/contacto`,
         availableLanguage: ["Spanish"],
       },
     });
@@ -170,7 +183,6 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
       hreflangEls.forEach((el) => el.remove());
-      // Clean up robots meta to prevent stale noindex on navigation
       const robotsMeta = document.querySelector('meta[name="robots"]');
       if (robotsMeta) robotsMeta.remove();
     };
