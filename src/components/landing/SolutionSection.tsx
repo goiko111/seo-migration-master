@@ -1,46 +1,46 @@
-import { Sparkles, Utensils, BarChart3, Eye, ShoppingCart } from "lucide-react";
+import { ShoppingCart, Sparkles, Settings, BarChart3, GraduationCap } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const benefitsByLang: Record<string, { title: string; desc: string }[]> = {
   es: [
-    { title: "Recomendaciones inteligentes", desc: "La IA sugiere vinos según preferencias, plato y contexto." },
-    { title: "Maridajes automáticos", desc: "Propuestas de maridaje instantáneas para cada plato del menú." },
-    { title: "Comparador de vinos", desc: "El comensal compara opciones con información clara y visual." },
-    { title: "Información visual y clara", desc: "Notas de cata accesibles, sin tecnicismos, con imágenes." },
-    { title: "Venta guiada", desc: "La carta conduce al cliente hacia mejores decisiones de compra." },
+    { title: "Herramienta de venta", desc: "La carta guía al comensal hacia mejores decisiones y convierte más." },
+    { title: "Herramienta de recomendación", desc: "IA + maridajes automáticos que aciertan con cada plato y perfil." },
+    { title: "Herramienta de gestión", desc: "Stock, pricing, rotación y disponibilidad desde un solo panel." },
+    { title: "Herramienta de análisis", desc: "Datos de comportamiento del comensal, KPIs y Big Data de tu carta." },
+    { title: "Herramienta de formación", desc: "El equipo de sala aprende mientras trabaja, sin depender del sumiller." },
   ],
   en: [
-    { title: "Smart recommendations", desc: "AI suggests wines based on preferences, dish, and context." },
-    { title: "Automatic pairings", desc: "Instant pairing suggestions for every dish on the menu." },
-    { title: "Wine comparator", desc: "Guests compare options with clear, visual information." },
-    { title: "Clear visual info", desc: "Accessible tasting notes, no jargon, with images." },
-    { title: "Guided selling", desc: "The list guides customers toward better purchasing decisions." },
+    { title: "Sales tool", desc: "The wine list guides diners toward better decisions and converts more." },
+    { title: "Recommendation tool", desc: "AI + auto pairings that match every dish and diner profile." },
+    { title: "Management tool", desc: "Stock, pricing, rotation, and availability from a single panel." },
+    { title: "Analytics tool", desc: "Diner behavior data, KPIs, and Big Data insights for your list." },
+    { title: "Training tool", desc: "Floor staff learn as they work, without depending on the sommelier." },
   ],
   it: [
-    { title: "Raccomandazioni intelligenti", desc: "L'IA suggerisce vini in base a preferenze, piatto e contesto." },
-    { title: "Abbinamenti automatici", desc: "Proposte di abbinamento istantanee per ogni piatto del menu." },
-    { title: "Comparatore vini", desc: "Il commensale confronta opzioni con informazioni chiare e visive." },
-    { title: "Informazioni visive e chiare", desc: "Note di degustazione accessibili, senza tecnicismi, con immagini." },
-    { title: "Vendita guidata", desc: "La carta guida il cliente verso decisioni d'acquisto migliori." },
+    { title: "Strumento di vendita", desc: "La carta guida il commensale verso decisioni migliori e converte di più." },
+    { title: "Strumento di raccomandazione", desc: "IA + abbinamenti automatici che azzeccano ogni piatto e profilo." },
+    { title: "Strumento di gestione", desc: "Stock, pricing, rotazione e disponibilità da un unico pannello." },
+    { title: "Strumento di analisi", desc: "Dati sul comportamento del cliente, KPI e Big Data della tua carta." },
+    { title: "Strumento di formazione", desc: "Il personale impara lavorando, senza dipendere dal sommelier." },
   ],
   fr: [
-    { title: "Recommandations intelligentes", desc: "L'IA suggère des vins selon les préférences, le plat et le contexte." },
-    { title: "Accords automatiques", desc: "Propositions d'accords instantanées pour chaque plat du menu." },
-    { title: "Comparateur de vins", desc: "Le client compare les options avec des informations claires et visuelles." },
-    { title: "Information visuelle et claire", desc: "Notes de dégustation accessibles, sans jargon, avec images." },
-    { title: "Vente guidée", desc: "La carte guide le client vers de meilleures décisions d'achat." },
+    { title: "Outil de vente", desc: "La carte guide le client vers de meilleurs choix et convertit davantage." },
+    { title: "Outil de recommandation", desc: "IA + accords automatiques adaptés à chaque plat et profil." },
+    { title: "Outil de gestion", desc: "Stock, pricing, rotation et disponibilité depuis un seul panneau." },
+    { title: "Outil d'analyse", desc: "Données comportement client, KPIs et Big Data de votre carte." },
+    { title: "Outil de formation", desc: "L'équipe de salle apprend en travaillant, sans dépendre du sommelier." },
   ],
 };
 
 const subtitleByLang: Record<string, { badge: string; title: string; subtitle: string }> = {
-  es: { badge: "La solución", title: "Una carta que <em>vende por ti</em>", subtitle: "Winerim transforma tu carta de vinos en una experiencia interactiva que guía al comensal hacia mejores decisiones." },
-  en: { badge: "The solution", title: "A wine list that <em>sells for you</em>", subtitle: "Winerim transforms your wine list into an interactive experience that guides diners toward better decisions." },
-  it: { badge: "La soluzione", title: "Una carta che <em>vende per te</em>", subtitle: "Winerim trasforma la tua carta dei vini in un'esperienza interattiva che guida il commensale verso decisioni migliori." },
-  fr: { badge: "La solution", title: "Une carte qui <em>vend pour vous</em>", subtitle: "Winerim transforme votre carte des vins en une expérience interactive qui guide les convives vers de meilleurs choix." },
+  es: { badge: "La solución", title: "Tu carta de vinos se convierte en <em>5 herramientas</em>", subtitle: "Winerim transforma tu carta en una herramienta de venta, recomendación, gestión, análisis y formación." },
+  en: { badge: "The solution", title: "Your wine list becomes <em>5 tools in one</em>", subtitle: "Winerim transforms your wine list into a sales, recommendation, management, analytics, and training tool." },
+  it: { badge: "La soluzione", title: "La tua carta dei vini diventa <em>5 strumenti in uno</em>", subtitle: "Winerim trasforma la tua carta in uno strumento di vendita, raccomandazione, gestione, analisi e formazione." },
+  fr: { badge: "La solution", title: "Votre carte des vins devient <em>5 outils en un</em>", subtitle: "Winerim transforme votre carte en outil de vente, recommandation, gestion, analyse et formation." },
 };
 
-const icons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart];
+const icons = [ShoppingCart, Sparkles, Settings, BarChart3, GraduationCap];
 
 const SolutionSection = () => {
   const { lang } = useLanguage();
