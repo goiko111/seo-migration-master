@@ -79,7 +79,7 @@ const hotelLogos: LogoItem[] = [
   { name: "MYR Hotels", logo: logoMyr },
   { name: "Four Seasons", logo: logoFourSeasons },
   { name: "Palladium Hotel Group", logo: logoPalladium },
-  { name: "EM Hotels", logo: logoEm },
+  { name: "EM Hotels", logo: logoEm, isWhite: true },
 ];
 
 const LogoStrip = () => {
