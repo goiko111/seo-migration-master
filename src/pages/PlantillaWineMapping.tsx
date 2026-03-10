@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { notifyLead } from "@/lib/notifyLead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -89,7 +90,7 @@ const PlantillaWineMapping = () => {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_leads").insert({
+      const leadData = {
         restaurant: data.restaurant,
         name: data.name,
         position: data.position,
@@ -98,10 +99,12 @@ const PlantillaWineMapping = () => {
         city: data.city,
         references_count: data.references_count,
         form_type: "plantilla-wine-mapping",
-      });
+      };
+      const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
       toast.success("¡Plantilla enviada! Revisa tu email.");
+      notifyLead(leadData);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {

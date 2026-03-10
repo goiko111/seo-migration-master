@@ -28,6 +28,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { notifyLead } from "@/lib/notifyLead";
 
 /* ── Data ── */
 const analysisPoints = [
@@ -127,14 +128,15 @@ const AnalizaCarta = () => {
 
     const finalLink = uploadedUrl || menuLink || null;
 
-    const { error } = await supabase.from("contact_leads").insert({
+    const leadData = {
       form_type: "analisis-carta",
       restaurant: restaurant || null,
       email: email || null,
       city: city || null,
       references_count: refsCount || null,
       menu_link: finalLink,
-    });
+    };
+    const { error } = await supabase.from("contact_leads").insert(leadData);
 
     if (error) {
       toast.error("Error al enviar. Inténtalo de nuevo.");
@@ -142,6 +144,7 @@ const AnalizaCarta = () => {
       toast.success("¡Carta recibida! Te enviaremos el análisis en menos de 48 h.");
       (e.target as HTMLFormElement).reset();
       setFileName(null);
+      notifyLead(leadData);
     }
     setSubmitting(false);
   };

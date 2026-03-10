@@ -123,13 +123,31 @@ Analiza: número de referencias, distribución de precios, equilibrio entre cate
       const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
       const supabase = createClient(supabaseUrl, supabaseKey);
 
-      await supabase.from("contact_leads").insert({
+      const leadData = {
         form_type: "wine-list-analyzer",
         email: email.substring(0, 255),
         restaurant: restaurant?.substring(0, 255) || null,
         city: city?.substring(0, 255) || null,
         message: JSON.stringify({ score: analysisResult.score, totalReferences: analysisResult.totalReferences }),
-      });
+      };
+      await supabase.from("contact_leads").insert(leadData);
+
+      // Fire notification email
+      const RESEND_KEY = Deno.env.get("RESEND_API_KEY");
+      if (RESEND_KEY) {
+        try {
+          await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${RESEND_KEY}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+              from: "Winerim Leads <leads@wine.winerim.wine>",
+              to: ["info@winerim.com"],
+              subject: `[Analizador de carta] ${restaurant || email}`,
+              html: `<p><strong>Nuevo análisis de carta</strong></p><p>Email: ${email}</p><p>Restaurante: ${restaurant || "-"}</p><p>Ciudad: ${city || "-"}</p><p>Score: ${analysisResult.score}/100</p>`,
+            }),
+          });
+        } catch (e) { console.error("Notification email failed:", e); }
+      }
     }
 
     return new Response(JSON.stringify(analysisResult), {
