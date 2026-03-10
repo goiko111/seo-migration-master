@@ -48,7 +48,7 @@ interface Lead {
 
 const emptyArticle = {
   slug: "", title: "", excerpt: "", body: "", image_url: "",
-  category: "blog", author: "", author_role: "", author_image: "", published: false,
+  category: "blog", author: "", author_role: "", author_image: "", published: false, related_links: [] as { to: string; label: string; type: "tool" | "guide" | "resource" | "solution" }[],
 };
 
 const Admin = () => {
