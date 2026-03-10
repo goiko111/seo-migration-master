@@ -162,21 +162,7 @@ const PlantillaWineMapping = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga la plantilla gratis</h3>
                   <p className="text-sm text-muted-foreground mb-4">Rellena el formulario y recíbela al instante.</p>
-                  <div>
-                    <Label htmlFor="name" className="text-sm font-medium">Nombre</Label>
-                    <Input id="name" placeholder="Tu nombre" {...register("name")} className="mt-1.5 bg-background" />
-                    {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-                    <Input id="email" type="email" placeholder="tu@restaurante.com" {...register("email")} className="mt-1.5 bg-background" />
-                    {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
-                  </div>
-                  <div>
-                    <Label htmlFor="restaurant" className="text-sm font-medium">Restaurante</Label>
-                    <Input id="restaurant" placeholder="Nombre del restaurante" {...register("restaurant")} className="mt-1.5 bg-background" />
-                    {errors.restaurant && <p className="text-xs text-destructive mt-1">{errors.restaurant.message}</p>}
-                  </div>
+                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
                     {loading ? "Enviando..." : "Descargar plantilla"}

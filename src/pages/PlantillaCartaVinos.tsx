@@ -340,26 +340,7 @@ const PlantillaCartaVinos = () => {
             </ScrollReveal>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div>
-                <Label htmlFor="name">Nombre</Label>
-                <Input id="name" placeholder="Tu nombre" {...register("name")} className="mt-1.5" />
-                {errors.name && <p className="text-sm text-destructive mt-1">{errors.name.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="restaurant">Restaurante</Label>
-                <Input id="restaurant" placeholder="Nombre del restaurante" {...register("restaurant")} className="mt-1.5" />
-                {errors.restaurant && <p className="text-sm text-destructive mt-1">{errors.restaurant.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="tu@email.com" {...register("email")} className="mt-1.5" />
-                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="city">Ciudad</Label>
-                <Input id="city" placeholder="Tu ciudad" {...register("city")} className="mt-1.5" />
-                {errors.city && <p className="text-sm text-destructive mt-1">{errors.city.message}</p>}
-              </div>
+              <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} />
               <Button type="submit" disabled={submitting}
                 className="w-full bg-gradient-wine text-primary-foreground hover:opacity-90 py-6 text-sm font-semibold tracking-wider uppercase">
                 {submitting ? "Enviando..." : "Descargar plantilla"}
