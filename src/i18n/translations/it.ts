@@ -25,7 +25,7 @@ const it: TranslationDict = {
   nav_pricing_tool: "Strumento pricing vino",
   nav_see_all: "Vedi tutti →",
 
-  footer_description: "La carta dei vini digitale che rivoluziona la ristorazione.",
+  footer_description: "La carta dei vini intelligente che rivoluziona la ristorazione.",
   footer_product: "Prodotto",
   footer_content: "Contenuti",
   footer_tools: "Strumenti",
