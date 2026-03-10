@@ -15,9 +15,8 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import ContactFormFields from "@/components/ContactFormFields";
 
 const formSchema = z.object({
   restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
