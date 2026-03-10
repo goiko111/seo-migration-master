@@ -117,9 +117,9 @@ const content: Record<string, Content> = {
     impactLabel: "Impact", impactTitle1: "Results for ", impactTitleHighlight: "groups",
     results: [
       { value: "Full control", desc: "Over the wine offer across all venues" },
-      { value: "+22%", desc: "Average margin improvement on wine" },
-      { value: "+18%", desc: "Average increase in wine sales" },
-      { value: "100%", desc: "Standardized and always up-to-date lists" },
+      { value: "Centralized", desc: "Manage lists, pricing, and stock from a single panel" },
+      { value: "Real-time", desc: "Changes applied instantly across all restaurants" },
+      { value: "Multi-language", desc: "Lists automatically translated for international guests" },
     ],
     scaleLabel: "Scalability", scaleTitle1: "Winerim grows ", scaleTitleHighlight: "with you",
     useCases: [
