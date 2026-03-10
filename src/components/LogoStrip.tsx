@@ -32,7 +32,7 @@ interface LogoItem {
   logo?: string;
 }
 
-const logoItems: LogoItem[] = [
+const restaurantLogos: LogoItem[] = [
   { name: "Miramar", logo: logoMiramar },
   { name: "Zortziko", logo: logoZortziko },
   { name: "Tres", logo: logoTres },
@@ -57,6 +57,9 @@ const logoItems: LogoItem[] = [
   { name: "Dámaso", logo: logoDamaso },
   { name: "Casamar", logo: logoCasamar },
   { name: "Bocaatti", logo: logoBocaatti },
+];
+
+const hotelGroups: LogoItem[] = [
   { name: "Meliá Hotels" },
   { name: "Hyatt" },
   { name: "Marriott" },
@@ -64,7 +67,7 @@ const logoItems: LogoItem[] = [
 
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
-  const doubled = [...logoItems, ...logoItems];
+  const doubledRestaurants = [...restaurantLogos, ...restaurantLogos];
 
   return (
     <section className="py-12 sm:py-16 md:py-20 overflow-hidden">
@@ -82,32 +85,47 @@ const LogoStrip = () => {
         </h2>
       </motion.div>
 
+      {/* Restaurant logos scroll */}
       <div className="relative">
-        {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        <div className="flex animate-scroll-left gap-6 sm:gap-10 items-center">
-          {doubled.map((item, i) => (
+        <div className="flex animate-scroll-left gap-8 sm:gap-12 items-center">
+          {doubledRestaurants.map((item, i) => (
             <div
               key={`${item.name}-${i}`}
-              className="flex-shrink-0 flex items-center justify-center h-16 sm:h-20 px-6 sm:px-8 rounded-lg border border-border/50 bg-card/50 hover:border-wine/30 transition-all duration-300"
+              className="flex-shrink-0 flex items-center justify-center h-20 sm:h-28 md:h-32 px-6 sm:px-10"
             >
-              {item.logo ? (
-                <img
-                  src={item.logo}
-                  alt={item.name}
-                  className="h-10 sm:h-14 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                />
-              ) : (
-                <span className="text-muted-foreground text-sm sm:text-base font-heading font-semibold tracking-wider whitespace-nowrap hover:text-foreground transition-colors duration-300">
-                  {item.name}
-                </span>
-              )}
+              <img
+                src={item.logo}
+                alt={item.name}
+                className="h-16 sm:h-22 md:h-28 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+              />
             </div>
           ))}
         </div>
       </div>
+
+      {/* Hotel groups */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex items-center justify-center gap-6 sm:gap-10 mt-8 sm:mt-10 px-6"
+      >
+        <span className="text-xs text-muted-foreground/60 tracking-widest uppercase whitespace-nowrap">
+          Grupos hoteleros
+        </span>
+        <div className="h-px w-8 bg-border/50" />
+        {hotelGroups.map((hotel) => (
+          <span
+            key={hotel.name}
+            className="text-base sm:text-lg md:text-xl font-heading font-semibold tracking-wider text-muted-foreground/70 hover:text-foreground transition-colors duration-300 whitespace-nowrap"
+          >
+            {hotel.name}
+          </span>
+        ))}
+      </motion.div>
 
       <div className="text-center mt-6 sm:mt-8 px-6">
         <p className="text-muted-foreground text-xs sm:text-sm mb-3">
