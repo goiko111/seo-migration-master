@@ -266,6 +266,14 @@ const InteligenciaDinamica = () => {
           <div className="relative max-w-5xl mx-auto">
             <motion.div initial="hidden" animate="visible" variants={stagger}>
 
+              {/* Breadcrumbs */}
+              <motion.div variants={fadeUp} custom={0} className="mb-6">
+                <Breadcrumbs items={[
+                  { label: "Producto", href: "/funcionalidades" },
+                  { label: "Inteligencia dinámica" },
+                ]} />
+              </motion.div>
+
               {/* Eyebrow */}
               <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-8">
                 <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/25 bg-wine/8 backdrop-blur-sm">
