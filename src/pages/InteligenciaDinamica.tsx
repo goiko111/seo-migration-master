@@ -279,10 +279,10 @@ const InteligenciaDinamica = () => {
 
               {/* Eyebrow */}
               <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-8">
-                <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/25 bg-wine/8 backdrop-blur-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-wine animate-pulse" />
-                  <span className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-wine">
-                    Nueva capa de IA táctica
+                <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/15 bg-wine/5 backdrop-blur-sm">
+                  <span className="w-1 h-1 rounded-full bg-wine/80" />
+                  <span className="text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase text-wine/70">
+                    Inteligencia dinámica
                   </span>
                 </span>
               </motion.div>
