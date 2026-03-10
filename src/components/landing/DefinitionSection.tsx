@@ -212,7 +212,7 @@ const competitorData = {
       { feature: "Alertas de stock y obsolescencia", options: [false, false, false, true] },
       { feature: "Experiencia visual e interactiva en móvil", options: ["partial" as const, true, false, true] },
       { feature: "Especializado 100% en hostelería", options: [false, false, "partial" as const, true] },
-      { feature: "Sin descarga de app para el cliente", options: ["partial" as const, false, "partial" as const, true] },
+      { feature: "Multiplataforma: web, tablet y app", options: [false, false, "partial" as const, true] },
     ],
   },
   en: {
