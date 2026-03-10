@@ -25,6 +25,7 @@ interface ArticleData {
   type: "interview" | "blog";
   author?: string;
   publishedAt?: string;
+  relatedLinks?: RelatedLink[] | null;
 }
 
 const ArticlePage = () => {
