@@ -456,6 +456,7 @@ const GruposRestauracion = () => {
       </section>
 
       <InternalLinks links={[
+        { to: localePath("/producto/inteligencia-dinamica"), label: "Inteligencia dinámica", type: "solution" },
         { to: localePath("/software-carta-de-vinos"), label: t.links[0].label, type: "solution" },
         { to: localePath("/soluciones/aumentar-ticket-medio-restaurante"), label: t.links[1].label, type: "guide" },
         { to: localePath("/wine-list-benchmark"), label: t.links[2].label, type: "tool" },

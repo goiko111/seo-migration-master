@@ -438,6 +438,7 @@ const SoftwareCartaVinos = () => {
       </main>
 
       <InternalLinks links={[
+        { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica: la capa de IA táctica", type: "solution" },
         { to: "/carta-papel-vs-digital", label: "Carta papel vs digital", type: "guide" },
         { to: "/inteligencia-artificial-restaurantes", label: "IA para restaurantes", type: "guide" },
         { to: "/wine-roi-calculator", label: "Calculadora de ROI", type: "tool" },
