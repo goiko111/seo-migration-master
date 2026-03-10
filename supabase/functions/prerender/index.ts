@@ -68,8 +68,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       schemaType: 'SoftwareApplication',
     },
     content: {
-      h1: 'Carta de vinos digital con recomendador inteligente',
-      subtitle: 'Winerim digitaliza tu carta de vinos con inteligencia artificial. Recomienda el vino perfecto, optimiza márgenes y transforma la experiencia del comensal.',
+      h1: 'Carta inteligente de vinos con recomendador IA',
+      subtitle: 'Winerim convierte tu carta de vinos en un vendedor inteligente con IA. Recomienda el vino perfecto, optimiza márgenes y transforma la experiencia del comensal.',
       sections: [
         { heading: 'El problema', content: 'La mayoría de restaurantes pierden ventas de vino por cartas desactualizadas, falta de recomendaciones y márgenes mal calculados.' },
         { heading: 'La solución', content: 'Winerim automatiza la gestión de tu carta de vinos con IA: recomendaciones personalizadas, precios óptimos y análisis en tiempo real.' },
