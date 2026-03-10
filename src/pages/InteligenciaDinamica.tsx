@@ -24,42 +24,6 @@ const fadeUp = {
 
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
-/* ── Section 3: 4 Capas ── */
-const layers = [
-  {
-    num: "01",
-    title: "Observar",
-    subtitle: "Lectura continua del contexto",
-    desc: "El sistema analiza en tiempo real los datos de tu carta: ventas, márgenes, rotación, estacionalidad y comportamiento del comensal.",
-    icon: Eye,
-    accent: "from-blue-500/20 to-blue-600/5",
-  },
-  {
-    num: "02",
-    title: "Evaluar",
-    subtitle: "Diagnóstico inteligente",
-    desc: "Cruza más de 20 variables para identificar oportunidades ocultas, cuellos de botella y vinos que no están rindiendo al nivel esperado.",
-    icon: BarChart3,
-    accent: "from-emerald-500/20 to-emerald-600/5",
-  },
-  {
-    num: "03",
-    title: "Decidir",
-    subtitle: "Generación de recomendaciones tácticas",
-    desc: "Produce acciones específicas —los RIMs— con prioridad, impacto estimado y justificación clara. No son alertas genéricas: son decisiones operativas.",
-    icon: Brain,
-    accent: "from-wine/20 to-wine/5",
-  },
-  {
-    num: "04",
-    title: "Actuar",
-    subtitle: "Ejecución asistida o automática",
-    desc: "Dependiendo de la configuración, el sistema ejecuta los cambios o los presenta al responsable para aprobación con un solo clic.",
-    icon: Zap,
-    accent: "from-amber-500/20 to-amber-600/5",
-  },
-];
-
 /* ── Section 4: Objetivos ── */
 const objectives = [
   { icon: DollarSign, title: "Maximizar facturación", desc: "Priorizar vinos y posiciones que generan más ingresos brutos." },
