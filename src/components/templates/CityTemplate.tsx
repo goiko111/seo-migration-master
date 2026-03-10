@@ -25,10 +25,16 @@ const CityTemplate = ({ page, related }: Props) => {
   const benefits: string[] = b.benefits || [];
   const features: { title: string; desc: string }[] = b.features || [];
   const stats: { value: string; label: string }[] = b.stats || [];
+  const internalLinks = (b.internal_links || []).map((l: any) => ({
+    to: l.url || l.to || "#",
+    label: l.label || l.title || "",
+    type: l.type || "guide" as const,
+  }));
+  const canonical = page.canonical_url || `https://winerim.wine/${page.slug}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={page.meta_title} description={page.meta_description} url={`https://winerim.wine/${page.slug}`} type="article" />
+      <SEOHead title={page.meta_title} description={page.meta_description} url={canonical} type="article" image={page.og_image || undefined} noindex={page.isThinContent} />
       <DynamicSchemaMarkup
         id={page.slug}
         type={page.schema_type || "Article"}
