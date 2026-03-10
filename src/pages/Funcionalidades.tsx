@@ -319,7 +319,7 @@ const i18n: Record<string, LangContent> = {
     ],
     coming_soon: "Coming soon",
     changelog_badge: "Changelog", changelog_title: "Latest <em>updates</em>", changelog_sub: "Winerim is constantly evolving.",
-    roadmap_badge: "Roadmap", roadmap_title: "What's coming to <em>Winerim</em>", roadmap_sub: "Our development plan for the coming months.",
+    roadmap_badge: "Expanding capabilities", roadmap_title: "Upcoming <em>capabilities</em>", roadmap_sub: "Beyond its core management and intelligence engine, Winerim keeps expanding the diner and floor team experience with new capabilities.",
     cta_badge: "Start today", cta_title: "See Winerim in <em>action</em>", cta_sub: "Try all these features free for 14 days. No commitment.", cta_btn: "Try Free",
     changelog: [
       { date: "Feb 2026", title: "Sensory filters v2", desc: "New filtering UI by aromatic profile.", tag: "new" },
@@ -330,9 +330,9 @@ const i18n: Record<string, LangContent> = {
       { date: "Sep 2025", title: "Revo POS integration", desc: "Bidirectional sync with Revo.", tag: "new" },
     ],
     roadmap: [
-      { quarter: "Q2 2026", items: ["Request sommelier from the list", "Share selection via QR/link", "History-based recommendations"] },
-      { quarter: "Q3 2026", items: ["Education mode with wine tips", "FocusRIM – AI modules to push profitable references", "Native diner app"] },
-      { quarter: "Q4 2026", items: ["Predictive trend AI", "AR wine list", "Public API v2"] },
+      { quarter: "Diner experience", items: ["Request sommelier from the list", "Share selection via QR/link", "History-based recommendations"] },
+      { quarter: "Training & floor", items: ["Education mode with wine tips", "Service guides for the team", "Native diner app"] },
+      { quarter: "Advanced technology", items: ["Predictive trend AI", "AR wine list", "Public API v2"] },
     ],
     tag_labels: { new: "New", improvement: "Improvement", fix: "Fix" },
   },
