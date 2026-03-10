@@ -115,22 +115,7 @@ const Contacto = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-3">
               <h2 className="font-heading text-2xl font-bold mb-8">{c.form_title}</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="name" placeholder={c.name} required className="bg-card border-border" />
-                  <Input name="position" placeholder={c.position} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="email" type="email" placeholder={c.email} required className="bg-card border-border" />
-                  <Input name="phone" type="tel" placeholder={c.phone} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="restaurant" placeholder={c.restaurant} className="bg-card border-border" />
-                  <Input name="city" placeholder={c.city} className="bg-card border-border" />
-                </div>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <Input name="references" placeholder={c.references} className="bg-card border-border" />
-                  <Input name="menu_link" placeholder={c.menu_link} className="bg-card border-border" />
-                </div>
+                <ContactFormFields native />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
                 <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}
