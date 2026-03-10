@@ -6,9 +6,9 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const definitionData = {
   es: {
-    definition: "Winerim es un software de gestión de cartas de vinos para restaurantes que utiliza inteligencia artificial para recomendar vinos, generar maridajes automáticos, analizar ventas y optimizar precios. Funciona como una carta digital interactiva accesible por QR desde el móvil del comensal.",
+    definition: "Winerim es una carta inteligente de vinos para restaurantes que utiliza inteligencia artificial para recomendar vinos, generar maridajes automáticos, analizar ventas y optimizar precios. Accesible por QR desde el móvil del comensal, tablet o app nativa.",
     bullets: [
-      "Carta de vinos digital interactiva con acceso por QR",
+      "Carta inteligente de vinos interactiva con acceso por QR",
       "Recomendaciones de vino personalizadas con IA",
       "Maridajes automáticos para cada plato del menú",
       "Analítica de ventas de vino en tiempo real",
