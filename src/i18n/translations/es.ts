@@ -17,6 +17,7 @@ const es: TranslationDict = {
   nav_case_studies: "Casos de éxito",
   nav_clients: "Clientes",
   nav_solutions_groups: "Soluciones para grupos",
+  nav_dynamic_intelligence: "Inteligencia dinámica",
 
   nav_wine_analyzer: "Analizador de carta",
   nav_margin_calc: "Calculadora de margen",

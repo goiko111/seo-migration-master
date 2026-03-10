@@ -5,6 +5,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,6 +24,7 @@ const Navbar = () => {
       dropdown: [
         { label: t.nav_software, href: localePath("/software-carta-de-vinos") },
         { label: t.nav_features, href: localePath("/funcionalidades") },
+        { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: "Nuevo" },
         { label: t.nav_integrations, href: localePath("/integraciones") },
         { label: t.nav_pricing, href: localePath("/precios") },
         { label: t.nav_case_studies, href: localePath("/casos-exito") },
@@ -130,13 +132,22 @@ const Navbar = () => {
                         <Link
                           key={sub.href}
                           to={sub.href}
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
-                            location.pathname === sub.href
-                              ? "text-foreground bg-wine/5"
-                              : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
+                          className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors ${
+                            sub.badge
+                              ? location.pathname === sub.href
+                                ? "text-foreground bg-wine/8 font-medium"
+                                : "text-foreground/90 hover:text-foreground hover:bg-wine/8 font-medium"
+                              : location.pathname === sub.href
+                                ? "text-foreground bg-wine/5"
+                                : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
                           }`}
                         >
                           {sub.label}
+                          {sub.badge && (
+                            <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                              {sub.badge}
+                            </Badge>
+                          )}
                         </Link>
                       ))}
                     </div>
@@ -216,7 +227,7 @@ const Navbar = () => {
                                 <Link
                                   key={sub.href}
                                   to={sub.href}
-                                  className={`block py-2 text-base transition-colors ${
+                                  className={`flex items-center gap-2 py-2 text-base transition-colors ${
                                     location.pathname === sub.href
                                       ? "text-foreground"
                                       : "text-muted-foreground"
@@ -224,6 +235,11 @@ const Navbar = () => {
                                   onClick={() => setMobileOpen(false)}
                                 >
                                   {sub.label}
+                                  {sub.badge && (
+                                    <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                                      {sub.badge}
+                                    </Badge>
+                                  )}
                                 </Link>
                               ))}
                             </div>
