@@ -21,6 +21,15 @@ import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
 import mobileListImg from "@/assets/winerim-mobile-list.png";
 import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
 import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
+import mgmtCartaImg from "@/assets/mgmt-carta.png";
+import mgmtStockImg from "@/assets/mgmt-stock.png";
+import mgmtInsightsImg from "@/assets/mgmt-insights.png";
+import mgmtRendimientoImg from "@/assets/mgmt-rendimiento.png";
+import mgmtPedidosImg from "@/assets/mgmt-pedidos.png";
+import mgmtAutomatizacionesImg from "@/assets/mgmt-automatizaciones.png";
+import mgmtRotacionImg from "@/assets/mgmt-rotacion.png";
+import mgmtRecomendadosImg from "@/assets/mgmt-recomendados.png";
+import mgmtObsolescenciaImg from "@/assets/mgmt-obsolescencia.png";
 
 const coreIcons = [Sparkles, Utensils, BarChart3, Eye, ShoppingCart, QrCode, Filter, Search, Wine, FileText, Languages, Palette];
 const mgmtIcons = [RefreshCw, Bell, TrendingUp, Globe, Smartphone, Zap];
