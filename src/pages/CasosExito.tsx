@@ -341,13 +341,13 @@ const CasosExito = () => {
             </h2>
           </ScrollReveal>
 
-          {/* Masonry-style grid */}
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {/* Aligned grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {allTestimonials.map((testimonial, i) => {
               const cat = getCategory(testimonial);
               return (
                 <ScrollReveal key={i} delay={Math.min(i * 0.05, 0.3)}>
-                  <div className="break-inside-avoid bg-gradient-card rounded-2xl border border-border p-6 md:p-8 hover:border-wine/30 transition-all duration-300 group overflow-hidden relative">
+                  <div className="bg-gradient-card rounded-2xl border border-border p-6 md:p-8 hover:border-wine/30 transition-all duration-300 group overflow-hidden relative h-full flex flex-col">
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-wine to-wine-light opacity-30 group-hover:opacity-100 transition-opacity" />
 
@@ -360,12 +360,12 @@ const CasosExito = () => {
 
                     {/* Quote */}
                     <Quote size={20} className="text-wine/25 mb-3" />
-                    <p className="text-sm leading-relaxed text-muted-foreground mb-6">
+                    <p className="text-sm leading-relaxed text-muted-foreground mb-6 flex-1">
                       {testimonial.quote}
                     </p>
 
                     {/* Author */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-border">
+                    <div className="flex items-center gap-3 pt-4 border-t border-border mt-auto">
                       <div className="w-10 h-10 rounded-full bg-wine flex items-center justify-center text-xs font-bold text-white shrink-0">
                         {testimonial.initials}
                       </div>
