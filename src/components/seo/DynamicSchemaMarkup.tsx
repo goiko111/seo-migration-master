@@ -28,8 +28,8 @@ const DynamicSchemaMarkup = ({ id, type, title, description, url, faqs, breadcru
         name: "Winerim",
         applicationCategory: "BusinessApplication",
         description,
-        url: "https://winerim.wine",
-        offers: { "@type": "Offer", url: "https://winerim.wine/precios", priceCurrency: "EUR" },
+        url: CANONICAL_DOMAIN,
+        offers: { "@type": "Offer", url: `${CANONICAL_DOMAIN}/precios`, priceCurrency: "EUR" },
       });
     } else {
       schemas.push({
