@@ -88,31 +88,67 @@ const objectiveCards = [
   },
 ];
 
-/* ── Section 5: RIMs principales ── */
-const rims = [
+/* ── Section 5: RIMs principales (new) ── */
+const rimCards = [
   {
-    code: "RIM-P",
-    name: "Pricing Optimizer",
-    desc: "Detecta desajustes de precio respecto al mercado, competencia y escalado interno. Propone correcciones con impacto estimado en margen.",
-    icon: DollarSign,
+    name: "SmartRIM™",
+    desc: "El cerebro que orquesta prioridades, resuelve conflictos y recalcula la mejor combinación de acciones.",
+    result: "Decisiones más inteligentes",
+    icon: Brain,
+    color: "from-violet-500/20 to-violet-500/5",
+    iconBg: "bg-violet-500/12",
+    iconColor: "text-violet-400",
+    borderColor: "group-hover:border-violet-500/30",
   },
   {
-    code: "RIM-R",
-    name: "Rotation Accelerator",
-    desc: "Identifica vinos con baja rotación y diseña estrategias de reactivación: reposicionamiento, descuento táctico o sustitución sugerida.",
-    icon: RefreshCw,
+    name: "MarginRIM™",
+    desc: "Impulsa referencias con mejor contribución económica sin romper la lógica comercial de la carta.",
+    result: "Más margen por servicio",
+    icon: TrendingUp,
+    color: "from-emerald-500/20 to-emerald-500/5",
+    iconBg: "bg-emerald-500/12",
+    iconColor: "text-emerald-400",
+    borderColor: "group-hover:border-emerald-500/30",
   },
   {
-    code: "RIM-V",
-    name: "Visibility Engine",
-    desc: "Reordena y destaca referencias en la carta digital para maximizar la probabilidad de venta de los vinos estratégicos.",
-    icon: Eye,
-  },
-  {
-    code: "RIM-S",
-    name: "Stock Guardian",
-    desc: "Monitoriza niveles de inventario, anticipa roturas y coordina con el catálogo para mantener la carta siempre actualizada.",
+    name: "StockRIM™",
+    desc: "Detecta sobrestock, lentitud de salida o riesgo de inmovilización y activa estrategias para moverlo.",
+    result: "Menos stock muerto",
     icon: Activity,
+    color: "from-amber-500/20 to-amber-500/5",
+    iconBg: "bg-amber-500/12",
+    iconColor: "text-amber-400",
+    borderColor: "group-hover:border-amber-500/30",
+  },
+  {
+    name: "FocusRIM™",
+    desc: "Simplifica la carta y prioriza referencias más rentables en momentos de alta afluencia o servicio rápido.",
+    result: "Menos tiempo de decisión",
+    icon: Target,
+    color: "from-blue-500/20 to-blue-500/5",
+    iconBg: "bg-blue-500/12",
+    iconColor: "text-blue-400",
+    borderColor: "group-hover:border-blue-500/30",
+  },
+  {
+    name: "ClimateRIM™",
+    desc: "Adapta la visibilidad de los vinos al clima real para mejorar conversión y adecuación al momento.",
+    result: "Mayor conversión contextual",
+    icon: Eye,
+    color: "from-cyan-500/20 to-cyan-500/5",
+    iconBg: "bg-cyan-500/12",
+    iconColor: "text-cyan-400",
+    borderColor: "group-hover:border-cyan-500/30",
+  },
+  {
+    name: "PrimeRIM™",
+    desc: "Da protagonismo a vinos en su mejor ventana de consumo y ayuda a aprovechar su momento óptimo.",
+    result: "Vinos en su punto ideal",
+    icon: Zap,
+    color: "from-wine/20 to-wine/5",
+    iconBg: "bg-wine/12",
+    iconColor: "text-wine",
+    borderColor: "group-hover:border-wine/30",
   },
 ];
 
@@ -596,60 +632,72 @@ const InteligenciaDinamica = () => {
         {/* ════════════════════════════════════════════════
             5. MÓDULOS RIM™ PRINCIPALES
         ════════════════════════════════════════════════ */}
-        <section className="section-padding">
-          <div className="max-w-5xl mx-auto">
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto">
             <ScrollReveal>
-              <div className="text-center mb-16">
-                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-3 py-1">
+              <div className="text-center mb-16 md:mb-20">
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
                   Módulos RIM™
                 </Badge>
-                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                  Inteligencia{" "}
-                  <span className="text-gradient-wine">especializada</span>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+                  Los módulos que hacen que la carta{" "}
+                  <span className="text-gradient-wine">reaccione</span>
                 </h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Cada módulo RIM aborda un área clave de la gestión del vino con lógica propia y métricas dedicadas.
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                  Cada RIM™ responde a una lógica distinta. Juntos convierten la carta en un sistema táctico.
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="space-y-5">
-              {rims.map((rim, i) => (
-                <ScrollReveal key={rim.code}>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {rimCards.map((rim, i) => (
+                <ScrollReveal key={rim.name}>
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i}
-                    className="group relative flex flex-col md:flex-row md:items-center gap-6 p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-wine/25 transition-all duration-500"
+                    className={`group relative h-full rounded-2xl border border-border bg-card/60 backdrop-blur-sm ${rim.borderColor} transition-all duration-500 hover:shadow-lg hover:shadow-black/10 overflow-hidden`}
                   >
-                    {/* Hover glow */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-wine/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Hover gradient */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${rim.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
-                    <div className="relative flex items-center gap-5 md:w-72 shrink-0">
-                      <div className="w-14 h-14 rounded-xl bg-wine/10 flex items-center justify-center group-hover:bg-wine/20 transition-colors">
-                        <rim.icon className="w-7 h-7 text-wine" />
-                      </div>
-                      <div>
-                        <span className="text-xs text-wine/60 font-mono tracking-wider">{rim.code}</span>
-                        <h3 className="font-heading text-xl font-bold text-foreground">
+                    <div className="relative flex flex-col h-full p-7 md:p-8">
+                      {/* Header: icon + name */}
+                      <div className="flex items-center gap-4 mb-5">
+                        <div className={`w-11 h-11 rounded-xl ${rim.iconBg} flex items-center justify-center shrink-0 transition-colors duration-300`}>
+                          <rim.icon className={`w-5 h-5 ${rim.iconColor}`} />
+                        </div>
+                        <h3 className="font-mono text-base font-bold text-foreground tracking-wide">
                           {rim.name}
                         </h3>
                       </div>
-                    </div>
 
-                    <p className="relative text-muted-foreground leading-relaxed flex-1">
-                      {rim.desc}
-                    </p>
+                      {/* Description */}
+                      <p className="text-muted-foreground text-sm leading-relaxed flex-1 mb-6">
+                        {rim.desc}
+                      </p>
+
+                      {/* Micro-result */}
+                      <div className="pt-4 border-t border-border/50">
+                        <div className="flex items-center gap-2">
+                          <ArrowRight size={12} className={`${rim.iconColor} shrink-0`} />
+                          <span className="text-xs font-semibold text-foreground/80 tracking-wide uppercase">
+                            {rim.result}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 </ScrollReveal>
               ))}
             </div>
 
             <ScrollReveal>
-              <p className="text-center text-muted-foreground/60 text-sm mt-8 italic">
-                Más módulos en desarrollo: RIM-M (Maridaje Dinámico), RIM-T (Tendencias), RIM-C (Competencia).
+              <p className="text-center text-muted-foreground/50 text-sm mt-10 italic">
+                Más módulos en desarrollo: PairingRIM™, TrendRIM™, CompetitorRIM™…
               </p>
             </ScrollReveal>
           </div>
