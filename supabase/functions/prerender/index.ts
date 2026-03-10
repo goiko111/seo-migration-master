@@ -316,7 +316,7 @@ function generateHTML(meta: PageMeta, content: PageContent): string {
   </main>
   
   <footer>
-    <p>&copy; ${new Date().getFullYear()} Winerim. Carta de vinos digital y recomendador inteligente.</p>
+    <p>&copy; ${new Date().getFullYear()} Winerim. Carta inteligente de vinos para restaurantes.</p>
     <nav>
       <a href="${SITE}/privacidad">Privacidad</a> |
       <a href="${SITE}/terminos">Términos</a>
