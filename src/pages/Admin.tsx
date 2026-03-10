@@ -194,7 +194,7 @@ const Admin = () => {
                   image_url: article.image_url || "", category: article.category,
                   author: article.author || "", author_role: article.author_role || "",
                   author_image: article.author_image || "", published: article.published,
-                  related_links: Array.isArray(article.related_links) ? (article.related_links as unknown as typeof emptyArticle["related_links"]) : [],
+                  related_links: Array.isArray((article as any).related_links) ? (article as any).related_links : [],
                 })}
                 onDelete={deleteArticle}
                 onTogglePublish={togglePublish}
