@@ -113,6 +113,7 @@ const solutions = [
   { to: "/soluciones/grupos-restauracion", icon: Building2, title: "Winerim para grupos de restauración", desc: "Gestión centralizada del vino para grupos con múltiples restaurantes." },
   { to: "/soluciones/aumentar-ticket-medio-restaurante", icon: BarChart3, title: "Aumentar el ticket medio", desc: "Estrategias para aumentar el gasto medio por cliente usando el vino." },
   { to: "/problemas/carta-de-vinos-no-vende", icon: TrendingUp, title: "Mi carta de vinos no vende", desc: "Diagnóstico y solución cuando tu carta de vinos no genera ventas." },
+  { to: "/benchmarks-playbooks", icon: BarChart3, title: "Benchmarks & Playbooks", desc: "Datos de referencia del sector y planes de acción prácticos para tu carta de vinos." },
 ];
 
 type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string };

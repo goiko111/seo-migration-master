@@ -174,6 +174,23 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", canonical: `${BASE}/guias/como-crear-una-estrategia-de-maridaje-en-restauracion`, lang: "es", type: "guide", intent: "estrategia maridaje restauración" },
 
   // ─────────────────────────────────────────────
+  // BENCHMARKS & PLAYBOOKS (ES)
+  // ─────────────────────────────────────────────
+  { path: "/benchmarks-playbooks", canonical: `${BASE}/benchmarks-playbooks`, lang: "es", type: "hub", intent: "benchmarks playbooks carta vinos restaurante" },
+  { path: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", canonical: `${BASE}/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante`, lang: "es", type: "guide", intent: "número referencias carta vinos tipo restaurante" },
+  { path: "/benchmarks-playbooks/benchmark-distribucion-rangos-precio", canonical: `${BASE}/benchmarks-playbooks/benchmark-distribucion-rangos-precio`, lang: "es", type: "guide", intent: "distribución precios carta vinos restaurante" },
+  { path: "/benchmarks-playbooks/benchmark-estrategia-por-copa", canonical: `${BASE}/benchmarks-playbooks/benchmark-estrategia-por-copa`, lang: "es", type: "guide", intent: "estrategia vino por copa restaurante" },
+  { path: "/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos", canonical: `${BASE}/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos`, lang: "es", type: "guide", intent: "equilibrio regiones estilos carta vinos" },
+  { path: "/benchmarks-playbooks/benchmark-peso-vino-ticket-medio", canonical: `${BASE}/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`, lang: "es", type: "guide", intent: "peso vino ticket medio restaurante" },
+  { path: "/benchmarks-playbooks/benchmark-margen-por-tipo-referencia", canonical: `${BASE}/benchmarks-playbooks/benchmark-margen-por-tipo-referencia`, lang: "es", type: "guide", intent: "margen vino tipo referencia restaurante" },
+  { path: "/benchmarks-playbooks/playbook-vender-mas-vino", canonical: `${BASE}/benchmarks-playbooks/playbook-vender-mas-vino`, lang: "es", type: "guide", intent: "cómo vender más vino restaurante playbook" },
+  { path: "/benchmarks-playbooks/playbook-mejorar-rotacion", canonical: `${BASE}/benchmarks-playbooks/playbook-mejorar-rotacion`, lang: "es", type: "guide", intent: "mejorar rotación vinos restaurante playbook" },
+  { path: "/benchmarks-playbooks/playbook-carta-rentable", canonical: `${BASE}/benchmarks-playbooks/playbook-carta-rentable`, lang: "es", type: "guide", intent: "carta vinos rentable playbook" },
+  { path: "/benchmarks-playbooks/playbook-optimizar-vino-copa", canonical: `${BASE}/benchmarks-playbooks/playbook-optimizar-vino-copa`, lang: "es", type: "guide", intent: "optimizar vino por copa playbook" },
+  { path: "/benchmarks-playbooks/playbook-formar-personal", canonical: `${BASE}/benchmarks-playbooks/playbook-formar-personal`, lang: "es", type: "guide", intent: "formar personal vino restaurante" },
+  { path: "/benchmarks-playbooks/playbook-decidir-compras-datos", canonical: `${BASE}/benchmarks-playbooks/playbook-decidir-compras-datos`, lang: "es", type: "guide", intent: "decidir compras vino datos restaurante" },
+
+  // ─────────────────────────────────────────────
   // LIBRARY (ES)
   // ─────────────────────────────────────────────
   { path: "/biblioteca-vino", canonical: `${BASE}/biblioteca-vino`, lang: "es", type: "hub", intent: "biblioteca vinos uvas regiones" },
