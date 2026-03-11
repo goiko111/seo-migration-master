@@ -890,6 +890,44 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       ],
     },
   },
+  '/sobre-winerim': {
+    meta: {
+      title: 'Sobre Winerim — Metodología, Equipo y Expertise',
+      description: 'Conoce quién está detrás de Winerim, nuestra metodología de trabajo, cómo medimos resultados y las áreas de expertise que avalan nuestra tecnología para restaurantes.',
+      canonical: `${SITE}/sobre-winerim`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'AboutPage',
+    },
+    content: {
+      h1: 'La tecnología detrás de cada copa vendida',
+      subtitle: 'Winerim nace de la intersección entre tecnología, hostelería y vino. Construimos herramientas que ayudan a restaurantes a tomar mejores decisiones sobre su carta, su bodega y sus ventas de vino.',
+      sections: [
+        { heading: '¿Qué es Winerim?', content: 'Winerim es una plataforma de gestión inteligente de cartas de vino para restaurantes, hoteles y grupos de restauración. Combina carta digital interactiva, recomendaciones con IA, analítica de ventas y herramientas de optimización de precios. Fundada en 2024, con presencia en 15 países, +1.000 bodegas gestionadas y +300.000 referencias únicas de vino en la base de datos.' },
+        { heading: 'Cómo trabajamos', content: 'Nuestra metodología combina rigor técnico con experiencia real en restauración. Integramos la carta existente, analizamos con benchmarks del sector, generamos recomendaciones con IA y medimos el impacto en tiempo real.' },
+        { heading: 'Cómo medimos resultados', content: 'Métricas clave: ticket medio de vino por mesa, ratio copa vs. botella, rotación de referencias, margen bruto y porcentaje de vinos muertos. Los potenciales de mejora se presentan como rangos, no cifras absolutas.' },
+        { heading: 'Áreas de expertise', content: 'Gestión de carta de vinos, analítica de ventas de vino, pricing y estrategia de precios, IA aplicada a restauración, gestión de bodega y stock, formación de equipos de sala.' },
+        { heading: 'Quién valida el contenido', content: 'Todo el contenido editorial es revisado por profesionales con experiencia en sommellerie, dirección de restaurantes, análisis de datos en hostelería y tecnología SaaS.' },
+      ],
+      faqs: [
+        { q: '¿Quién está detrás de Winerim?', a: 'Un equipo multidisciplinar con experiencia en tecnología, hostelería, sommellerie y análisis de datos.' },
+        { q: '¿Cómo se generan las recomendaciones?', a: 'Se basan en datos de la carta, preferencias de maridaje, patrones de venta y objetivos comerciales configurados.' },
+        { q: '¿Winerim vende datos de clientes finales?', a: 'No. Winerim no recopila datos personales de comensales. Trabaja exclusivamente con datos operativos del restaurante.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Sobre Winerim', url: `${SITE}/sobre-winerim` },
+      ],
+      internalLinks: [
+        { label: '¿Qué es Winerim?', url: '/que-es-winerim' },
+        { label: 'Funcionalidades', url: '/funcionalidades' },
+        { label: 'Integraciones', url: '/integraciones' },
+        { label: 'Clientes', url: '/clientes' },
+        { label: 'Benchmarks & Playbooks', url: '/benchmarks-playbooks' },
+      ],
+    },
+  },
 };
 
 // ── HTML Generator ──
