@@ -39,7 +39,7 @@ type Content = {
   intelCards: IntelCard[];
   pilotTitle: string; pilotSubtitle: string; pilotSteps: { title: string; desc: string }[]; pilotClosing: string;
   posTitle: string; posSubtitle: string; posBullets: string[]; posCta: string;
-  ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
+  ctaLabel: string; ctaTitle: string; ctaDesc: string; ctaPrimary: string; ctaSecondary: string; ctaMicro: string;
   links: { label: string }[];
 };
 
