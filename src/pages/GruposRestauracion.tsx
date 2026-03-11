@@ -513,86 +513,9 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
-      {/* CAPABILITIES FOR GROUPS */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
-              <Layers size={14} className="text-wine" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.capLabel}</span>
-            </div>
-            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-              {t.capTitle}
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
-              {t.capSubtitle}
-            </p>
-          </ScrollReveal>
+      <CapabilitiesBlock t={t} />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {t.capCards.map((card, i) => {
-              const icons = [GitCompare, ScanSearch, Copy, Sliders, ShieldCheck, Zap];
-              const Icon = icons[i] || Layers;
-              return (
-                <ScrollReveal key={i} delay={i * 0.06}>
-                  <div className="group h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm hover:border-wine/25 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-wine/5 p-6 md:p-7">
-                    <div className="w-11 h-11 rounded-xl bg-wine/10 flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110">
-                      <Icon size={22} className="text-wine" />
-                    </div>
-                    <h3 className="font-heading text-base font-bold text-foreground mb-2">{card.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-                  </div>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* BENCHMARKING */}
-      <section className="section-padding">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
-              <BarChart3 size={14} className="text-wine" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.benchLabel}</span>
-            </div>
-            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-              {t.benchTitle}
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
-              {t.benchSubtitle}
-            </p>
-          </ScrollReveal>
-
-          {/* Dashboard-style metrics grid */}
-          <div className="rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3">
-              {t.benchMetrics.map((metric, i) => {
-                const metricIcons = [DollarSign, TrendingUp, Wine, ScanSearch, Warehouse, GitCompare, BarChart3];
-                const Icon = metricIcons[i] || BarChart3;
-                const isLast = i === t.benchMetrics.length - 1;
-                return (
-                  <ScrollReveal key={i} delay={i * 0.04}>
-                    <div className={`flex items-center gap-4 p-5 md:p-6 border-b border-border/30 sm:border-r border-r-border/30 ${isLast ? 'border-b-0' : ''} ${(i + 1) % 3 === 0 ? 'lg:border-r-0' : ''} ${(i + 1) % 2 === 0 ? 'sm:border-r-0 lg:border-r' : ''} ${i >= t.benchMetrics.length - 1 ? 'sm:border-b-0' : ''} ${i >= t.benchMetrics.length - 2 ? 'lg:border-b-0' : ''}`}>
-                      <div className="w-9 h-9 rounded-lg bg-wine/8 flex items-center justify-center shrink-0">
-                        <Icon size={18} className="text-wine/70" />
-                      </div>
-                      <span className="text-sm font-medium text-foreground/85">{metric}</span>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
-            </div>
-          </div>
-
-          <ScrollReveal>
-            <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto text-sm leading-relaxed italic">
-              {t.benchClosing}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <BenchmarkingBlock t={t} />
 
       {/* FEATURES */}
       <section className="section-padding">
