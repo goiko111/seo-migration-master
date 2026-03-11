@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search } from "lucide-react";
+import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
