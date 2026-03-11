@@ -235,6 +235,11 @@ const content: Record<string, Content> = {
       { title: "Professionalizzare la categoria", desc: "Ridurre la dipendenza dal criterio individuale di ogni direttore o sommelier." },
       { title: "Attivare regole per brand o unità", desc: "Definire priorità diverse in base a obiettivo di business, marchio, città o tipo di cliente." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Benchmarking interno tra unità",
+    benchSubtitle: "Rileva quali locali vendono meglio il vino, quali strategie convertono di più e dove esistono opportunità di miglioramento o scaling.",
+    benchMetrics: ["Scontrino medio vino per unità", "Margine medio per categoria", "Referenze con migliore rotazione", "Vini con alta visibilità e bassa conversione", "Unità con stock più sano", "Differenze tra carte comparabili", "Formati o fasce di prezzo con migliore rendimento"],
+    benchClosing: "Non si tratta solo di vedere dati. Si tratta di decidere meglio cosa replicare, cosa correggere e cosa proteggere su scala gruppo.",
     featLabel: "Funzionalità", featTitle1: "Progettato per ", featTitleHighlight: "scalare",
     features: [
       { title: "Gestione multi-locale", desc: "Dashboard centrale con vista su tutti i ristoranti. Filtra, confronta e agisci da un unico pannello." },
