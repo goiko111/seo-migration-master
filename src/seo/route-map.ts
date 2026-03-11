@@ -47,6 +47,7 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/demo", canonical: `${BASE}/demo`, lang: "es", type: "product", intent: "demo carta vinos digital" },
   { path: "/afiliate", canonical: `${BASE}/afiliate`, lang: "es", type: "product", intent: "programa afiliados winerim" },
   { path: "/que-es-winerim", canonical: `${BASE}/que-es-winerim`, lang: "es", type: "product", intent: "qué es winerim", cannibalizationGroup: "what-is-winerim" },
+  { path: "/producto/inteligencia-dinamica", canonical: `${BASE}/producto/inteligencia-dinamica`, lang: "es", type: "product", intent: "inteligencia dinámica carta vinos IA" },
 
   // ─────────────────────────────────────────────
   // ENGLISH PAGES AT ROOT (⚠️ should migrate to /en/)
