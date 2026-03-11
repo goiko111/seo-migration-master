@@ -39,7 +39,7 @@ type Content = {
   intelCards: IntelCard[];
   pilotTitle: string; pilotSubtitle: string; pilotSteps: { title: string; desc: string }[]; pilotClosing: string;
   posTitle: string; posSubtitle: string; posBullets: string[]; posCta: string;
-  ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
+  ctaLabel: string; ctaTitle: string; ctaDesc: string; ctaPrimary: string; ctaSecondary: string; ctaMicro: string;
   links: { label: string }[];
 };
 
@@ -126,9 +126,12 @@ const content: Record<string, Content> = {
     posSubtitle: "Lo que hoy suele depender de intuición, hojas de cálculo o criterio desigual entre locales, Winerim lo transforma en una estrategia de grupo más medible, accionable y escalable.",
     posBullets: ["Más control multiunidad", "Más coherencia comercial", "Más visibilidad sobre margen y rotación", "Mejor toma de decisiones de surtido", "Menos dependencia del talento individual"],
     posCta: "Quiero ver cómo funciona para grupos",
-    ctaLabel: "Para grupos", ctaTitle1: "Optimiza la gestión del vino en ", ctaTitleHighlight: "todos tus restaurantes",
-    ctaDesc: "Te mostramos cómo Winerim se adapta a la estructura de tu grupo. Demo personalizada con tu equipo.",
-    ctaButton: "Solicitar demo",
+    ctaLabel: "Para grupos",
+    ctaTitle: "¿Quieres ver qué oportunidades tiene tu grupo en vino?",
+    ctaDesc: "Podemos analizar varias cartas o unidades y mostrarte dónde hay oportunidades de margen, rotación, escalado, estandarización o mejora comercial.",
+    ctaPrimary: "Quiero una demo para mi grupo",
+    ctaSecondary: "Analizar varias unidades",
+    ctaMicro: "Especialmente útil para grupos de restauración, hoteleros y operadores con múltiples cartas, marcas o ubicaciones.",
     links: [{ label: "Software carta de vinos" }, { label: "Aumentar ticket medio" }, { label: "Wine List Benchmark" }, { label: "Planes y precios" }],
   },
   en: {
@@ -213,9 +216,12 @@ const content: Record<string, Content> = {
     posSubtitle: "What today often depends on intuition, spreadsheets, or uneven judgment between venues, Winerim transforms into a more measurable, actionable, and scalable group strategy.",
     posBullets: ["More multi-unit control", "More commercial consistency", "More visibility on margin and rotation", "Better assortment decisions", "Less dependence on individual talent"],
     posCta: "See how it works for groups",
-    ctaLabel: "For groups", ctaTitle1: "Optimize wine management across ", ctaTitleHighlight: "all your restaurants",
-    ctaDesc: "We'll show you how Winerim adapts to your group's structure. Personalized demo with your team.",
-    ctaButton: "Request demo",
+    ctaLabel: "For groups",
+    ctaTitle: "Want to see what opportunities your group has in wine?",
+    ctaDesc: "We can analyze multiple lists or units and show you where margin, rotation, scaling, standardization, or commercial improvement opportunities lie.",
+    ctaPrimary: "I want a demo for my group",
+    ctaSecondary: "Analyze multiple units",
+    ctaMicro: "Especially useful for restaurant groups, hotel operators, and multi-unit businesses with multiple lists, brands, or locations.",
     links: [{ label: "Wine list software" }, { label: "Increase average ticket" }, { label: "Wine List Benchmark" }, { label: "Plans & pricing" }],
   },
   it: {
@@ -300,9 +306,12 @@ const content: Record<string, Content> = {
     posSubtitle: "Ciò che oggi spesso dipende dall'intuizione, fogli di calcolo o criteri disomogenei tra i locali, Winerim lo trasforma in una strategia di gruppo più misurabile, azionabile e scalabile.",
     posBullets: ["Più controllo multi-unità", "Più coerenza commerciale", "Più visibilità su margine e rotazione", "Migliori decisioni di assortimento", "Meno dipendenza dal talento individuale"],
     posCta: "Scopri come funziona per i gruppi",
-    ctaLabel: "Per i gruppi", ctaTitle1: "Ottimizza la gestione del vino in ", ctaTitleHighlight: "tutti i tuoi ristoranti",
-    ctaDesc: "Ti mostriamo come Winerim si adatta alla struttura del tuo gruppo. Demo personalizzata con il tuo team.",
-    ctaButton: "Richiedi demo",
+    ctaLabel: "Per i gruppi",
+    ctaTitle: "Vuoi vedere quali opportunità ha il tuo gruppo nel vino?",
+    ctaDesc: "Possiamo analizzare diverse carte o unità e mostrarti dove ci sono opportunità di margine, rotazione, scaling, standardizzazione o miglioramento commerciale.",
+    ctaPrimary: "Voglio una demo per il mio gruppo",
+    ctaSecondary: "Analizzare più unità",
+    ctaMicro: "Particolarmente utile per gruppi di ristorazione, operatori alberghieri e business multi-unità con più carte, marchi o sedi.",
     links: [{ label: "Software carta dei vini" }, { label: "Aumentare lo scontrino medio" }, { label: "Wine List Benchmark" }, { label: "Piani e prezzi" }],
   },
   fr: {
@@ -387,9 +396,12 @@ const content: Record<string, Content> = {
     posSubtitle: "Ce qui repose aujourd'hui souvent sur l'intuition, des tableurs ou un jugement inégal entre établissements, Winerim le transforme en une stratégie de groupe plus mesurable, actionnable et évolutive.",
     posBullets: ["Plus de contrôle multi-sites", "Plus de cohérence commerciale", "Plus de visibilité sur la marge et la rotation", "De meilleures décisions d'assortiment", "Moins de dépendance au talent individuel"],
     posCta: "Voir comment ça marche pour les groupes",
-    ctaLabel: "Pour les groupes", ctaTitle1: "Optimisez la gestion du vin dans ", ctaTitleHighlight: "tous vos restaurants",
-    ctaDesc: "Nous vous montrons comment Winerim s'adapte à la structure de votre groupe. Démo personnalisée avec votre équipe.",
-    ctaButton: "Demander une démo",
+    ctaLabel: "Pour les groupes",
+    ctaTitle: "Vous voulez voir quelles opportunités votre groupe a dans le vin ?",
+    ctaDesc: "Nous pouvons analyser plusieurs cartes ou établissements et vous montrer où se trouvent les opportunités de marge, rotation, scaling, standardisation ou amélioration commerciale.",
+    ctaPrimary: "Je veux une démo pour mon groupe",
+    ctaSecondary: "Analyser plusieurs unités",
+    ctaMicro: "Particulièrement utile pour les groupes de restauration, opérateurs hôteliers et entreprises multi-sites avec plusieurs cartes, marques ou emplacements.",
     links: [{ label: "Logiciel carte des vins" }, { label: "Augmenter le ticket moyen" }, { label: "Wine List Benchmark" }, { label: "Plans et tarifs" }],
   },
 };
@@ -813,13 +825,19 @@ const GruposRestauracion = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">{t.ctaLabel}</p>
-              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                {t.ctaTitle1}<span className="text-gradient-wine italic">{t.ctaTitleHighlight}</span>
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-5 leading-tight">
+                {t.ctaTitle}
               </h2>
-              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base">{t.ctaDesc}</p>
-              <Link to={localePath("/demo")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
-                {t.ctaButton} <ArrowRight size={16} />
-              </Link>
+              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">{t.ctaDesc}</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                <Link to={localePath("/demo")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+                  {t.ctaPrimary} <ArrowRight size={16} />
+                </Link>
+                <Link to={localePath("/contacto")} className="inline-flex items-center justify-center gap-2 border border-border hover:border-wine/30 px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all hover:-translate-y-0.5 text-muted-foreground hover:text-foreground">
+                  {t.ctaSecondary}
+                </Link>
+              </div>
+              <p className="text-xs text-muted-foreground/60 max-w-lg mx-auto">{t.ctaMicro}</p>
             </div>
           </motion.div>
         </div>
