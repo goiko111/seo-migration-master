@@ -69,6 +69,12 @@ const GuiaDetectarVinosMuertos = lazy(() => import("./pages/GuiaDetectarVinosMue
 const GuiaFormarEquipoSala = lazy(() => import("./pages/GuiaFormarEquipoSala"));
 const GuiaUsarDatosCompra = lazy(() => import("./pages/GuiaUsarDatosCompra"));
 const GuiaConectarCartaStockVentasMargen = lazy(() => import("./pages/GuiaConectarCartaStockVentasMargen"));
+const GuiaGestionarCartaGrupos = lazy(() => import("./pages/GuiaGestionarCartaGrupos"));
+const GuiaVinoPorCopaSinPerderMargen = lazy(() => import("./pages/GuiaVinoPorCopaSinPerderMargen"));
+const GuiaWinerimSinSumiller = lazy(() => import("./pages/GuiaWinerimSinSumiller"));
+const GuiaSurtidoTicketMedio = lazy(() => import("./pages/GuiaSurtidoTicketMedio"));
+const GuiaCanibalizacionVinos = lazy(() => import("./pages/GuiaCanibalizacionVinos"));
+const GuiaRevisarCartaCadaMes = lazy(() => import("./pages/GuiaRevisarCartaCadaMes"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
@@ -175,6 +181,12 @@ const esRoutes = (
     <Route path="/guias/como-formar-equipo-sala-para-vender-vino" element={<GuiaFormarEquipoSala />} />
     <Route path="/guias/como-usar-datos-para-decidir-que-vinos-comprar" element={<GuiaUsarDatosCompra />} />
     <Route path="/guias/como-conectar-carta-stock-ventas-margen" element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path="/guias/como-gestionar-carta-vinos-grupos-restauracion" element={<GuiaGestionarCartaGrupos />} />
+    <Route path="/guias/como-implantar-vino-por-copa-sin-perder-margen" element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path="/guias/como-usar-winerim-sin-sumiller" element={<GuiaWinerimSinSumiller />} />
+    <Route path="/guias/como-decidir-surtido-segun-ticket-medio-tipo-local" element={<GuiaSurtidoTicketMedio />} />
+    <Route path="/guias/como-detectar-canibalizacion-vinos-carta" element={<GuiaCanibalizacionVinos />} />
+    <Route path="/guias/como-revisar-carta-vinos-cada-mes" element={<GuiaRevisarCartaCadaMes />} />
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
