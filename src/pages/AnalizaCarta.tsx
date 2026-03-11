@@ -169,13 +169,14 @@ const AnalizaCarta = () => {
     }
 
     const finalLink = uploadedUrl || menuLink || null;
-    const leadData = {
+    const leadData: Record<string, string | null> = {
       form_type: "analisis-carta",
       restaurant: restaurant || null,
       email: email || null,
       city: city || null,
       references_count: refsCount || null,
       menu_link: finalLink,
+      business_type: (fd.get("business_type") as string)?.trim() || null,
     };
     const { error } = await supabase.from("contact_leads").insert(leadData);
 
