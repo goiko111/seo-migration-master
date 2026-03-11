@@ -15,6 +15,9 @@ import NotForSection from "@/components/seo/NotForSection";
 import FAQSection from "@/components/seo/FAQSection";
 import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import CTASection from "@/components/CTASection";
+import StickyCTA from "@/components/StickyCTA";
 import type { ComparisonData } from "@/data/comparisons";
 
 interface Props {
@@ -58,7 +61,15 @@ const ComparisonPageTemplate = ({ data }: Props) => {
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6">
             {data.h1} <span className="text-gradient-wine italic">{data.h1Highlight}</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">{data.subtitle}</p>
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-8">{data.subtitle}</p>
+          <div className="flex flex-wrap gap-4">
+            <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+              Prueba Winerim gratis <ArrowRight size={16} />
+            </Link>
+            <Link to="/analisis-carta" className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+              Analiza tu carta
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -84,6 +95,16 @@ const ComparisonPageTemplate = ({ data }: Props) => {
           rows={data.tableRows}
           highlightColumn={0}
         />
+
+        {/* ── MID CTA — BOFU ── */}
+        <div className="my-4">
+          <ArticleMidCTA
+            pageType="comparison"
+            title="¿Quieres ver la diferencia en tu restaurante?"
+            description="Solicita una demo y te mostramos cómo Winerim se compara con tu solución actual."
+            variant="highlight"
+          />
+        </div>
 
         {/* ── PROS / CONS ── */}
         <section className="my-12">
@@ -155,39 +176,21 @@ const ComparisonPageTemplate = ({ data }: Props) => {
       {/* ── INTERNAL LINKS ── */}
       <InternalLinks links={data.relatedLinks} title="Contenido relacionado" />
 
-      {/* ── CTA ── */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
-            <div className="relative z-10">
-              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">
-                Descubre el potencial de tu carta
-              </p>
-              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                Prueba Winerim con <span className="text-gradient-wine italic">tu carta real</span>
-              </h2>
-              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base">
-                Envíanos tu carta en cualquier formato y te preparamos una demo personalizada. Sin compromiso.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/demo"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5"
-                >
-                  Solicitar demo gratuita <ArrowRight size={16} />
-                </Link>
-                <Link
-                  to="/analisis-carta"
-                  className="px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all hover:-translate-y-0.5"
-                >
-                  Analizar mi carta
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── CTA FINAL — BOFU ── */}
+      <CTASection
+        pageType="comparison"
+        badge="Descubre el potencial de tu carta"
+        title="Prueba Winerim con tu carta real"
+        description="Envíanos tu carta en cualquier formato y te preparamos una demo personalizada. Sin compromiso."
+        primaryText="Solicitar demo personalizada"
+        primaryUrl="/demo"
+        secondaryText="Analizar mi carta"
+        secondaryUrl="/analisis-carta"
+        micro="Compruébalo tú mismo. Demo adaptada a tu restaurante."
+      />
+
+      {/* Sticky CTA */}
+      <StickyCTA pageType="comparison" />
 
       <Footer />
     </div>

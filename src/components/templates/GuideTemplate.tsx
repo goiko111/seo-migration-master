@@ -11,6 +11,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import RelatedPages from "@/components/seo/RelatedPages";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import CTASection from "@/components/CTASection";
+import StickyCTA from "@/components/StickyCTA";
 
 interface GuideSection {
   heading: string;
@@ -53,8 +56,8 @@ const iconMap = {
 };
 
 const GuideTemplate = ({ data }: { data: GuidePageData }) => {
-  const ctaPrimary = data.ctaPrimaryText || "Solicitar demo";
-  const ctaPrimaryUrl = data.ctaPrimaryUrl || "/demo";
+  const ctaPrimary = data.ctaPrimaryText || "Analiza tu carta gratis";
+  const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -112,7 +115,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
               {ctaPrimary} <ArrowRight size={16} />
             </Link>
             {data.ctaSecondaryText && (
-              <Link to={data.ctaSecondaryUrl || "/analisis-carta"}
+              <Link to={data.ctaSecondaryUrl || "/demo"}
                 className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
                 {data.ctaSecondaryText}
               </Link>
@@ -164,21 +167,8 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         );
       })}
 
-      {/* MID CTA */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
-        <ScrollReveal>
-          <div className="flex flex-col sm:flex-row items-center gap-6 p-8 rounded-xl border border-wine/20 bg-wine/5">
-            <div className="flex-1">
-              <h3 className="font-heading font-bold text-lg mb-1">¿Quieres optimizar tu carta de vinos?</h3>
-              <p className="text-sm text-muted-foreground">Winerim te ayuda a vender más vino con tecnología e inteligencia artificial.</p>
-            </div>
-            <Link to={ctaPrimaryUrl}
-              className="shrink-0 inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-              {ctaPrimary} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* MID CTA — MOFU contextual */}
+      <ArticleMidCTA pageType="guide" variant="subtle" />
 
       {/* RELATED TOOLS */}
       {data.relatedTools && data.relatedTools.length > 0 && (
@@ -242,24 +232,20 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         </section>
       )}
 
-      {/* CTA FINAL */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <Sparkles size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              {data.ctaFinalTitle || "Optimiza tu carta de vinos con Winerim"}
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              {data.ctaFinalDescription || "Descubre cómo Winerim puede ayudarte a vender más vino y mejorar la experiencia de tus clientes."}
-            </p>
-            <Link to={ctaPrimaryUrl}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              {ctaPrimary} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* CTA FINAL — MOFU */}
+      <CTASection
+        pageType="guide"
+        badge="Siguiente paso"
+        title={data.ctaFinalTitle || "Analiza tu carta de vinos sin compromiso"}
+        description={data.ctaFinalDescription || "Envía tu carta en cualquier formato y te devolvemos un diagnóstico con oportunidades reales de mejora."}
+        primaryText={ctaPrimary}
+        primaryUrl={ctaPrimaryUrl}
+        secondaryText="Solicitar demo"
+        secondaryUrl="/demo"
+      />
+
+      {/* Sticky CTA */}
+      <StickyCTA pageType="guide" />
 
       <Footer />
     </div>

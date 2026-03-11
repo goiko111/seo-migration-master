@@ -8,6 +8,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import InternalLinks from "@/components/seo/InternalLinks";
+import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import CTASection from "@/components/CTASection";
+import StickyCTA from "@/components/StickyCTA";
 import type { BPItem } from "@/data/benchmarksPlaybooks";
 import { getRelatedBPs } from "@/data/benchmarksPlaybooks";
 
@@ -18,7 +21,7 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
   const typeLabel = isBenchmark ? "Benchmark" : "Playbook";
   const related = getRelatedBPs(data.relatedSlugs);
   const url = `${CANONICAL}/benchmarks-playbooks/${data.slug}`;
-  const ctaText = data.ctaText || "Solicitar demo";
+  const ctaText = data.ctaText || "Solicitar demo personalizada";
   const ctaUrl = data.ctaUrl || "/demo";
 
   return (
@@ -82,7 +85,7 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
               {ctaText} <ArrowRight size={16} />
             </Link>
             <Link to="/analisis-carta" className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-              Analizar mi carta
+              Analiza tu carta gratis
             </Link>
           </motion.div>
         </div>
@@ -180,20 +183,13 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
         </div>
       </section>
 
-      {/* MID CTA */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
-        <ScrollReveal>
-          <div className="flex flex-col sm:flex-row items-center gap-6 p-8 rounded-xl border border-wine/20 bg-wine/5">
-            <div className="flex-1">
-              <h3 className="font-heading font-bold text-lg mb-1">¿Quieres aplicar esto a tu carta?</h3>
-              <p className="text-sm text-muted-foreground">Winerim te ayuda a optimizar tu carta de vinos con datos e inteligencia artificial.</p>
-            </div>
-            <Link to={ctaUrl} className="shrink-0 inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-              {ctaText} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* MID CTA — BOFU */}
+      <ArticleMidCTA
+        pageType="benchmark"
+        title="¿Quieres aplicar esto a tu carta?"
+        description="Solicita una demo y te mostramos cómo Winerim automatiza el análisis y la optimización de tu carta de vinos."
+        variant="highlight"
+      />
 
       {/* FAQs */}
       {data.faqs.length > 0 && (
@@ -265,23 +261,20 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
         ]}
       />
 
-      {/* FINAL CTA */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <BarChart3 size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              Aplica este {typeLabel.toLowerCase()} con Winerim
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Winerim automatiza el análisis, la optimización y el seguimiento de tu carta de vinos para que tomes decisiones basadas en datos.
-            </p>
-            <Link to={ctaUrl} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              {ctaText} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* FINAL CTA — BOFU */}
+      <CTASection
+        pageType="benchmark"
+        badge={`Aplica este ${typeLabel.toLowerCase()}`}
+        title={`Optimiza tu carta con datos e inteligencia artificial`}
+        description="Winerim automatiza el análisis, la optimización y el seguimiento de tu carta de vinos para que tomes decisiones basadas en datos."
+        primaryText={ctaText}
+        primaryUrl={ctaUrl}
+        secondaryText="Analiza tu carta gratis"
+        secondaryUrl="/analisis-carta"
+      />
+
+      {/* Sticky CTA */}
+      <StickyCTA pageType="benchmark" />
 
       <Footer />
     </div>
