@@ -226,6 +226,32 @@ const Herramientas = () => {
           </ScrollReveal>
         </section>
 
+        {/* Methodology */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+          <ScrollReveal>
+            <MethodologyBox
+              title={lang === "es" ? "Cómo funcionan las herramientas" : "How the tools work"}
+              intro={lang === "es"
+                ? "Cada herramienta sigue un proceso diseñado para generar resultados accionables sin necesidad de conocimientos técnicos."
+                : "Each tool follows a process designed to generate actionable results without technical knowledge."
+              }
+              steps={lang === "es" ? [
+                { title: "Introduces tus datos", description: "Cada herramienta pide los datos mínimos necesarios: referencias, precios, stock o tu carta actual." },
+                { title: "El algoritmo procesa", description: "Análisis automático basado en benchmarks del sector, buenas prácticas de sommellerie y datos de mercado." },
+                { title: "Recibes resultados accionables", description: "Recomendaciones concretas que puedes aplicar directamente o usar para solicitar una evaluación profesional." },
+              ] : [
+                { title: "Enter your data", description: "Each tool asks for the minimum data needed: references, prices, stock, or your current list." },
+                { title: "The algorithm processes", description: "Automatic analysis based on industry benchmarks, sommelier best practices, and market data." },
+                { title: "Get actionable results", description: "Concrete recommendations you can apply directly or use to request a professional evaluation." },
+              ]}
+              validatedBy={lang === "es"
+                ? "Metodología basada en prácticas de gestión de vino en restauración real."
+                : "Methodology based on real hospitality wine management practices."
+              }
+            />
+          </ScrollReveal>
+        </section>
+
         {/* CTA */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12 text-center">
           <ScrollReveal>
