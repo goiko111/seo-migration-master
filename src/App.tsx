@@ -49,6 +49,7 @@ const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const Hoteles = lazy(() => import("./pages/Hoteles"));
 const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller"));
+const Implantacion = lazy(() => import("./pages/Implantacion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
 const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
@@ -157,6 +158,7 @@ const esRoutes = (
     <Route path="/soluciones/hoteles" element={<Hoteles />} />
     <Route path="/soluciones/restaurantes-sin-sumiller" element={<RestauranteSinSumiller />} />
     <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
+    <Route path="/implantacion" element={<Implantacion />} />
     <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
     <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
     <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
