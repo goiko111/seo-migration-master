@@ -4,7 +4,7 @@ import ScrollReveal from "./ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
-  const { t, localePath } = useLanguage();
+  const { t, lang, localePath } = useLanguage();
 
   const socialLinks = [
     { label: "Instagram", url: "https://www.instagram.com/winerim/" },
