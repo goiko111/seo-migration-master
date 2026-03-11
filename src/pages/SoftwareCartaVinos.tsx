@@ -68,7 +68,7 @@ const features = [
 
 /* ── Benefits ── */
 const benefits = [
-  { icon: TrendingUp, title: "Aumentar el ticket medio", desc: "Las recomendaciones inteligentes y el upselling contextual incrementan el gasto medio en vino entre un 15 % y un 25 %." },
+  { icon: TrendingUp, title: "Aumentar el ticket medio", desc: "Las recomendaciones inteligentes y el upselling contextual pueden incrementar el gasto medio en vino entre un 15 % y un 25 %, según el tipo de restaurante y la implementación." },
   { icon: RefreshCw, title: "Mejorar la rotación de vinos", desc: "La analítica identifica vinos sin rotación y sugiere acciones para dar salida a stock parado." },
   { icon: Users, title: "Ayudar al personal de sala", desc: "El equipo no necesita ser sommelier: la carta digital hace el trabajo de recomendación por ellos." },
   { icon: ShoppingCart, title: "Facilitar la decisión del cliente", desc: "Una carta clara, visual y con recomendaciones reduce la indecisión y aumenta la satisfacción." },
