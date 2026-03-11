@@ -54,6 +54,7 @@ const Navbar = () => {
       ],
     },
     { label: t.nav_guides, href: localePath("/guias-y-recursos") },
+    { label: "Benchmarks", href: "/benchmarks-playbooks" },
     { label: t.nav_contact, href: localePath("/contacto") },
   ];
 

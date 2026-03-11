@@ -72,6 +72,8 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
+const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
+const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -150,6 +152,8 @@ const esRoutes = (
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
+    <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
+    <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     {/* Dynamic programmatic SEO pages */}
     <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
     <Route path="/software-vino-*" element={<SeoPage />} />

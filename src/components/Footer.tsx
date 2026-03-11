@@ -55,6 +55,7 @@ const Footer = () => {
                 { label: t.nav_blog, href: localePath("/blog") },
                 { label: "Sommelier Corner", href: localePath("/sommelier-corner") },
                 { label: t.nav_guides, href: localePath("/guias-y-recursos") },
+                { label: "Benchmarks & Playbooks", href: "/benchmarks-playbooks" },
                 { label: t.footer_common_problems, href: localePath("/problemas") },
                 { label: t.nav_contact, href: localePath("/contacto") },
               ].map((item) => (
