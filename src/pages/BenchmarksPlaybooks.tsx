@@ -81,12 +81,13 @@ const BenchmarksPlaybooks = () => {
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
         <ScrollReveal>
           <SummaryBox
-            title="¿Qué encontrarás aquí?"
-            items={[
+            definition="Esta sección reúne benchmarks del sector y playbooks prácticos para optimizar tu carta de vinos: datos de referencia, planes de acción y criterios expertos para restaurantes reales."
+            bullets={[
               "Benchmarks con rangos de referencia para dimensionar, estructurar y preciar tu carta de vinos.",
               "Playbooks con planes de acción paso a paso para resolver problemas concretos de venta, rotación y formación.",
               "Criterios prácticos, no teóricos: todo está pensado para aplicarse en restaurantes reales.",
             ]}
+            label="¿Qué encontrarás aquí?"
           />
         </ScrollReveal>
       </section>
