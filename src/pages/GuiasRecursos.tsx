@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   BookOpen, TrendingUp, Wine, BarChart3, Utensils, Calculator,
   Brain, DollarSign, Download, Search, FileText, CheckCircle,
-  Layers, Building2
+  Layers, Building2, Users
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -90,6 +90,12 @@ const guides = [
   { to: "/como-hacer-una-carta-de-vinos", icon: FileText, title: "Cómo hacer una carta de vinos", desc: "Guía paso a paso para crear una carta de vinos profesional desde cero." },
   { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", icon: Layers, title: "Cómo mejorar la rotación de vinos", desc: "Estrategias para eliminar stock muerto y mantener una bodega rentable." },
   { to: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", icon: Utensils, title: "Estrategia de maridaje en restauración", desc: "Diseña maridajes que aumenten ventas de vino y mejoren la experiencia del cliente." },
+  { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", icon: Layers, title: "Carta de vinos para grupos de restauración", desc: "Cómo gestionar cartas coherentes en múltiples locales con control centralizado." },
+  { to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", icon: Wine, title: "Estrategia rentable de vino por copa", desc: "Selección, pricing, merma y rotación para un programa de copa profesional." },
+  { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", icon: Search, title: "Detectar vinos muertos", desc: "Identifica referencias sin rotación, cuantifica el impacto y decide qué hacer." },
+  { to: "/guias/como-formar-equipo-sala-para-vender-vino", icon: Users, title: "Formar al equipo de sala en vino", desc: "Programa práctico para que tu equipo recomiende vino sin ser sumiller." },
+  { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", icon: BarChart3, title: "Usar datos para comprar vinos", desc: "Rotación, márgenes y tendencias: cómo decidir qué comprar con criterio." },
+  { to: "/guias/como-conectar-carta-stock-ventas-margen", icon: TrendingUp, title: "Conectar carta, stock, ventas y margen", desc: "Integra las 4 piezas de la gestión del vino en un sistema coherente." },
 ];
 
 const resources = [

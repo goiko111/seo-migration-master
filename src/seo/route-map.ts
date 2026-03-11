@@ -182,6 +182,12 @@ export const seoRouteMap: SeoRouteEntry[] = [
   // ─────────────────────────────────────────────
   { path: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", canonical: `${BASE}/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante`, lang: "es", type: "guide", intent: "mejorar rotación vinos restaurante" },
   { path: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", canonical: `${BASE}/guias/como-crear-una-estrategia-de-maridaje-en-restauracion`, lang: "es", type: "guide", intent: "estrategia maridaje restauración" },
+  { path: "/guias/como-estructurar-carta-vinos-grupo-restauracion", canonical: `${BASE}/guias/como-estructurar-carta-vinos-grupo-restauracion`, lang: "es", type: "guide", intent: "carta vinos grupo restauración múltiples locales" },
+  { path: "/guias/como-fijar-estrategia-rentable-vino-por-copa", canonical: `${BASE}/guias/como-fijar-estrategia-rentable-vino-por-copa`, lang: "es", type: "guide", intent: "estrategia rentable vino por copa restaurante" },
+  { path: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", canonical: `${BASE}/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad`, lang: "es", type: "guide", intent: "detectar vinos muertos stock sin rotación" },
+  { path: "/guias/como-formar-equipo-sala-para-vender-vino", canonical: `${BASE}/guias/como-formar-equipo-sala-para-vender-vino`, lang: "es", type: "guide", intent: "formar equipo sala vender vino sin sumiller" },
+  { path: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", canonical: `${BASE}/guias/como-usar-datos-para-decidir-que-vinos-comprar`, lang: "es", type: "guide", intent: "datos decidir comprar vinos restaurante" },
+  { path: "/guias/como-conectar-carta-stock-ventas-margen", canonical: `${BASE}/guias/como-conectar-carta-stock-ventas-margen`, lang: "es", type: "guide", intent: "conectar carta stock ventas margen restaurante" },
 
   // ─────────────────────────────────────────────
   // BENCHMARKS & PLAYBOOKS (ES)

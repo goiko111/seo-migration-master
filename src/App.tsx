@@ -66,6 +66,12 @@ const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
 const CartaNoVende = lazy(() => import("./pages/CartaNoVende"));
 const RotacionVinos = lazy(() => import("./pages/RotacionVinos"));
 const EstrategiaMaridaje = lazy(() => import("./pages/EstrategiaMaridaje"));
+const GuiaCartaGrupoRestauracion = lazy(() => import("./pages/GuiaCartaGrupoRestauracion"));
+const GuiaEstrategiaVinoPorCopa = lazy(() => import("./pages/GuiaEstrategiaVinoPorCopa"));
+const GuiaDetectarVinosMuertos = lazy(() => import("./pages/GuiaDetectarVinosMuertos"));
+const GuiaFormarEquipoSala = lazy(() => import("./pages/GuiaFormarEquipoSala"));
+const GuiaUsarDatosCompra = lazy(() => import("./pages/GuiaUsarDatosCompra"));
+const GuiaConectarCartaStockVentasMargen = lazy(() => import("./pages/GuiaConectarCartaStockVentasMargen"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
@@ -157,6 +163,12 @@ const esRoutes = (
     <Route path="/problemas/carta-de-vinos-no-vende" element={<CartaNoVende />} />
     <Route path="/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" element={<RotacionVinos />} />
     <Route path="/guias/como-crear-una-estrategia-de-maridaje-en-restauracion" element={<EstrategiaMaridaje />} />
+    <Route path="/guias/como-estructurar-carta-vinos-grupo-restauracion" element={<GuiaCartaGrupoRestauracion />} />
+    <Route path="/guias/como-fijar-estrategia-rentable-vino-por-copa" element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path="/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad" element={<GuiaDetectarVinosMuertos />} />
+    <Route path="/guias/como-formar-equipo-sala-para-vender-vino" element={<GuiaFormarEquipoSala />} />
+    <Route path="/guias/como-usar-datos-para-decidir-que-vinos-comprar" element={<GuiaUsarDatosCompra />} />
+    <Route path="/guias/como-conectar-carta-stock-ventas-margen" element={<GuiaConectarCartaStockVentasMargen />} />
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
