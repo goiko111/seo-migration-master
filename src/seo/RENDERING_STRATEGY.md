@@ -7,48 +7,94 @@ This project uses **Dynamic Rendering** — the Google-approved approach for SPA
 - **Human visitors** → Normal SPA (React hydration)
 - **Search engine bots** → Pre-rendered HTML via edge function
 - **AI crawlers** → Pre-rendered HTML with full structured data
+- **No-JS crawlers** → `<noscript>` fallback in index.html
 
-## Why Dynamic Rendering?
+## Render Mode per Route
 
-| Approach | Pros | Cons | Our stack? |
-|----------|------|------|-----------|
-| **SSR (Next.js)** | Best for SEO | Requires framework migration | ❌ Not Vite+React |
-| **SSG** | Fast, great SEO | Build-time only, no dynamic content | ❌ 100+ dynamic pages |
-| **Prerender at build** | Works with Vite | Needs headless browser at build | ❌ No Puppeteer in CI |
-| **Dynamic Rendering** | Works with any SPA, bot-specific | Two versions to maintain | ✅ Our approach |
-| **Client-side only** | Simple | Poor for AI crawlers, social | ❌ Current limitation |
+### Tier 1: Full Static Prerender (20+ pages)
+Instant HTML response for bots — no DB queries needed.
 
-## Route Rendering Map
+| Route | Content | Schema | Hreflang |
+|-------|---------|--------|----------|
+| `/` | Full: H1, sections, FAQs, internal links | SoftwareApplication + Organization + FAQ + Breadcrumb | ✅ ES/EN/IT/FR |
+| `/software-carta-de-vinos` | Full product page | SoftwareApplication | ✅ ES/EN/IT/FR |
+| `/funcionalidades` | All 7 features | WebPage | ✅ ES/EN/IT/FR |
+| `/precios` | Plans + FAQs | WebPage | ✅ ES/EN/IT/FR |
+| `/producto/inteligencia-dinamica` | AI features + FAQs | SoftwareApplication | — |
+| `/soluciones` | All solution types | WebPage | ✅ ES/EN/IT/FR |
+| `/soluciones/grupos-restauracion` | Multi-restaurant | WebPage | — |
+| `/soluciones/aumentar-ticket-medio-restaurante` | Ticket strategies | WebPage | — |
+| `/herramientas` | All 6 tools listed | WebPage | ✅ ES/EN/IT/FR |
+| `/guias-y-recursos` | Hub: guides + templates + checklists | CollectionPage | ✅ ES/EN |
+| `/benchmarks-playbooks` | Hub page | CollectionPage | — |
+| `/casos-exito` | Case studies | WebPage | ✅ ES/EN/IT/FR |
+| `/clientes` | Client list | WebPage | ✅ ES/EN/IT |
+| `/integraciones` | Integration info | WebPage | ✅ ES/EN/IT |
+| `/blog` | Blog hub | CollectionPage | — |
+| `/problemas` | Problem categories | WebPage | ✅ ES/EN/IT/FR |
+| `/como-vender-mas-vino-en-un-restaurante` | Full guide | Article | — |
+| `/vino-por-copa-restaurante` | Full guide | Article | — |
+| `/como-hacer-una-carta-de-vinos` | Full guide | Article | — |
+| `/analisis-carta` | Tool landing | WebPage | — |
+| `/que-es-winerim` | About page | WebPage | — |
+| `/contacto` | Contact page | WebPage | ✅ ES/EN/IT |
+| `/demo` | Demo form | WebPage | ✅ ES/EN/IT/FR |
 
-| Route | Render mode | Priority | Notes |
-|-------|------------|----------|-------|
-| `/` | **Prerender (static)** | P0 | Full HTML with all meta, schema, content |
-| `/software-carta-de-vinos` | **Prerender (static)** | P0 | Core product page |
-| `/funcionalidades` | **Prerender (static)** | P0 | Features page |
-| `/precios` | **Prerender (static)** | P0 | Pricing page |
-| `/blog` | Client-side + meta | P1 | List page, dynamic content |
-| `/article/:slug` | **Prerender (dynamic)** | P0 | Full article HTML from DB |
-| `/software-carta-de-vinos-*` | **Prerender (dynamic)** | P1 | Programmatic SEO from DB |
-| `/software-vino-*` | **Prerender (dynamic)** | P1 | Programmatic SEO from DB |
-| `/wine-list-software-*` | **Prerender (dynamic)** | P1 | Programmatic SEO from DB |
-| `/casos-exito` | Client-side + meta | P2 | Mostly static content |
-| `/guias-y-recursos` | Client-side + meta | P2 | Hub page |
-| `/herramientas` | Client-side + meta | P2 | Hub page |
-| `/demo` | Client-side | P3 | Form page, no SEO value in body |
-| `/admin/*` | Client-side + noindex | P4 | Never prerender |
+### Tier 2: Dynamic Prerender (DB-powered)
+Bot request triggers a Supabase query to generate full HTML.
 
-## How It Works
+| Route pattern | Source | Schema |
+|---------------|--------|--------|
+| `/software-carta-de-vinos-*` | `seo_pages` table | Dynamic per page |
+| `/software-vino-*` | `seo_pages` table | Dynamic per page |
+| `/wine-list-software-*` | `seo_pages` table | Dynamic per page |
+| `/article/:slug` | `articles` table | Article |
+| Any unknown slug | Falls back to `seo_pages` lookup | Dynamic |
 
-### Edge Function: `prerender`
+### Tier 3: Client-side with meta tags
+Pages with minimal SEO value or interactive-only content.
 
-1. Receives request with `?path=/some-route`
-2. Checks `User-Agent` against known bot patterns
-3. For bots:
-   - **Static pages** (/, /precios, etc.) → returns hardcoded HTML with full SEO
-   - **Dynamic pages** (articles, SEO pages) → fetches from Supabase and generates HTML
-4. For humans → returns `{ prerender: false }`, SPA loads normally
+| Route | Notes |
+|-------|-------|
+| `/admin/*` | Always `noindex` |
+| `/calculadora-margen-vino` | Tool — client-side meta |
+| `/herramientas/calculadora-*` | Tool — client-side meta |
+| `/herramientas/diagnostico-*` | Tool — client-side meta |
+| `/herramientas/wine-list-score` | Tool — client-side meta |
+| `/biblioteca-vino/*` | Client-side meta |
+| `/recursos/*` | Client-side meta (gated content) |
+| `/guias/*` | Client-side meta |
+| `/privacidad`, `/terminos` | Client-side meta |
 
-### Bot Detection
+### Tier 4: index.html baseline
+Every page gets these from the static HTML shell:
+
+- ✅ `<title>` (home default)
+- ✅ `<meta description>` (home default)
+- ✅ `<link rel="canonical">`
+- ✅ Hreflang links (ES/EN/IT/FR + x-default)
+- ✅ OG tags (title, description, image, url)
+- ✅ Twitter Card tags
+- ✅ JSON-LD: SoftwareApplication + Organization
+- ✅ `<noscript>` fallback with H1, sections, FAQs, internal links
+
+## What Bots See (Prerendered HTML)
+
+Complete HTML document with:
+- ✅ `<title>` and `<meta description>`
+- ✅ `<link rel="canonical">`
+- ✅ `<link rel="alternate" hreflang="...">`
+- ✅ Open Graph tags
+- ✅ Twitter Card tags
+- ✅ JSON-LD: page-specific + Organization + FAQ + Breadcrumb
+- ✅ `<h1>` with primary keyword
+- ✅ Semantic `<section>/<h2>` structure
+- ✅ FAQ in `<dl>/<dt>/<dd>` format
+- ✅ Breadcrumb navigation (`<nav aria-label="Breadcrumb">`)
+- ✅ Internal navigation links (`<nav aria-label="...">`)
+- ✅ Footer with legal links
+
+## Bot Detection
 
 Covers all major search + AI crawlers:
 - Google: `googlebot`, `google-extended`
@@ -57,39 +103,22 @@ Covers all major search + AI crawlers:
 - Social: `facebot`, `twitterbot`, `linkedinbot`, `whatsapp`
 - SEO tools: `semrushbot`, `ahrefsbot`
 
-### What Bots See
+## Performance
 
-Complete HTML document with:
-- ✅ `<title>` and `<meta description>`
-- ✅ `<link rel="canonical">`
-- ✅ Open Graph tags (og:title, og:description, og:image, og:url)
-- ✅ Twitter Card tags
-- ✅ JSON-LD structured data (SoftwareApplication, Article, FAQPage, BreadcrumbList, Organization)
-- ✅ `<h1>` with primary keyword
-- ✅ Semantic sections with `<h2>` headings
-- ✅ FAQ content in `<dl>/<dt>/<dd>` format
-- ✅ Internal navigation links
-- ✅ Breadcrumb navigation
-- ✅ Footer with legal links
-
-## Deployment
-
-The prerender edge function deploys automatically. To use it as a proxy:
-
-1. **Option A (Recommended)**: Configure your CDN/reverse proxy to route bot traffic to the edge function
-2. **Option B**: Use the edge function URL directly for testing: `GET /functions/v1/prerender?path=/software-carta-de-vinos`
+- Static pages: ~5ms (no DB query)
+- Dynamic pages: ~50-100ms (edge function + DB query)
+- Human visitors: 0ms overhead (prerender not triggered)
+- Cache: 1h browser, 24h CDN for bot responses
 
 ## Adding New Pages
 
-When adding a new SEO-critical page:
+1. **Static content**: Add entry to `STATIC_PAGES` in `prerender/index.ts` + optionally to `HREFLANG_MAP`
+2. **Dynamic content**: Ensure in `seo_pages` table with `published=true`
+3. **Article**: Ensure in `articles` table with `published=true`
+4. Update sitemap edge function if adding new static routes
 
-1. If **static content**: Add entry to `STATIC_PAGES` in `prerender/index.ts`
-2. If **dynamic content**: Ensure it's in `seo_pages` table with `published=true`
-3. If **article**: Ensure it's in `articles` table with `published=true`
-4. Update the sitemap edge function if adding new static routes
+## Environment Safety
 
-## Performance Impact
-
-- Bot requests: ~50-100ms (edge function + optional DB query)
-- Human requests: 0ms overhead (prerender not triggered)
-- Cache: 1h browser, 24h CDN for bot responses
+- Staging/preview domains always get `noindex` via `SEOHead` component
+- `index.html` canonical always points to `https://winerim.wine`
+- Prerender function only responds to bot UAs
