@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, Building2, AlertTriangle, CheckCircle, BarChart3,
   Layers, RefreshCw, DollarSign, TrendingUp, Users, Wine,
-  Warehouse, Globe, Sparkles, Store
+  Warehouse, Globe, Sparkles, Store, Search, GitCompare, Box, Expand
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
