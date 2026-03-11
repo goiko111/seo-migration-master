@@ -96,7 +96,7 @@ const rimCards = [
   {
     name: "SmartRIM™",
     desc: "El cerebro que orquesta prioridades, resuelve conflictos y recalcula la mejor combinación de acciones.",
-    result: "Decisiones más inteligentes",
+    result: "Orquestación inteligente",
     icon: Brain,
     color: "from-violet-500/20 to-violet-500/5",
     iconBg: "bg-violet-500/12",
@@ -139,7 +139,7 @@ const rimCards = [
   {
     name: "ClimateRIM™",
     desc: "Adapta la visibilidad de los vinos al clima real para mejorar conversión y adecuación al momento.",
-    result: "Mayor conversión contextual",
+    result: "Más afinidad contextual",
     icon: Eye,
     color: "from-cyan-500/20 to-cyan-500/5",
     iconBg: "bg-cyan-500/12",
@@ -149,7 +149,7 @@ const rimCards = [
   {
     name: "PrimeRIM™",
     desc: "Da protagonismo a vinos en su mejor ventana de consumo y ayuda a aprovechar su momento óptimo.",
-    result: "Vinos en su punto ideal",
+    result: "Mejor aprovechamiento del prime",
     icon: Zap,
     color: "from-wine/20 to-wine/5",
     iconBg: "bg-wine/12",
