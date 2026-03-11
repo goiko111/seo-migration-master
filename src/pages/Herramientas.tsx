@@ -89,7 +89,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calcolatrice prezzo al calice", desc: "Calcola il prezzo ideale al calice. Winerim lo calcola per te e ti avvisa quando conviene aggiustare i prezzi.", tag: "Pricing" },
       { to: "/wine-pricing-tool", title: "Strumento pricing vini", desc: "Ottimizza la struttura prezzi della tua carta. Con Winerim, il pricing intelligente si applica in tempo reale.", tag: "Pricing" },
       { to: "/wine-pairing-generator", title: "Generatore abbinamenti IA", desc: "Genera suggerimenti di abbinamento con IA. Con Winerim, il personale riceve raccomandazioni automatiche ad ogni servizio.", tag: "IA" },
-      { to: "/wine-roi-calculator", title: "Calcolatrice ROI", desc: "Calcola quanto puoi guadagnare digitalizzando la tua carta. I nostri clienti aumentano le vendite di vino del 30% in media.", tag: "ROI" },
+      { to: "/wine-roi-calculator", title: "Calcolatrice ROI", desc: "Calcola il potenziale di miglioramento digitalizzando la tua carta. I risultati variano in base al tipo di ristorante.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark carte dei vini", desc: "Confronta la tua carta con gli standard del settore. Winerim ti invia report automatici con la tua posizione competitiva.", tag: "Benchmark" },
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostica vino al calice", desc: "Valuta se la tua offerta al calice è equilibrata in stili, prezzi e redditività.", tag: "Diagnostica" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita la tua carta con un punteggio 0-100 su struttura, equilibrio, pricing e potenziale commerciale.", tag: "Audit" },
