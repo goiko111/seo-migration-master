@@ -129,7 +129,7 @@ const content: Record<string, {
   },
 };
 
-const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3];
+const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw];
 
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
