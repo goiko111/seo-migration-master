@@ -31,6 +31,10 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
+import SummaryBox from "@/components/seo/SummaryBox";
+import NotForSection from "@/components/seo/NotForSection";
+import QuickAnswer from "@/components/seo/QuickAnswer";
+import LimitationsBox from "@/components/seo/LimitationsBox";
 import dashboardImg from "@/assets/winerim-dashboard-insights.png";
 
 /* ── Intro problems ── */
