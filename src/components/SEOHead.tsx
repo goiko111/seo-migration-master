@@ -163,10 +163,18 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       name: "Winerim",
       legalName: "Winerim",
       url: CANONICAL_DOMAIN,
-      logo: DEFAULT_OG_IMAGE,
-      description: "Software de gestión y optimización de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos y analítica de ventas.",
+      logo: `${CANONICAL_DOMAIN}/favicon.png`,
+      image: DEFAULT_OG_IMAGE,
+      description: "Plataforma de gestión inteligente de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos, pricing dinámico y analítica de ventas.",
+      slogan: "La inteligencia artificial que vende más vino en tu restaurante",
       foundingDate: "2024",
-      areaServed: { "@type": "Place", name: "Europe" },
+      areaServed: [
+        { "@type": "Place", name: "Europe" },
+        { "@type": "Place", name: "Spain" },
+        { "@type": "Place", name: "Italy" },
+        { "@type": "Place", name: "France" },
+        { "@type": "Place", name: "United Kingdom" },
+      ],
       knowsAbout: [
         "Wine list management",
         "Restaurant wine sales optimization",
@@ -175,6 +183,14 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         "Wine pricing strategy",
         "Food and wine pairing",
         "Hospitality technology",
+        "Wine inventory management",
+        "Wine rotation analysis",
+        "Average ticket optimization",
+        "By-the-glass wine programs",
+        "Wine cellar management",
+        "Restaurant analytics",
+        "Wine margin optimization",
+        "Sommelier training tools",
       ],
       sameAs: [
         "https://www.instagram.com/winerim/",
@@ -186,6 +202,13 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         contactType: "sales",
         url: `${CANONICAL_DOMAIN}/contacto`,
         availableLanguage: ["Spanish", "English", "Italian", "French"],
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Winerim Plans",
+        itemListElement: [
+          { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "Winerim", applicationCategory: "BusinessApplication" } },
+        ],
       },
     });
 
