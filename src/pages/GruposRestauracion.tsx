@@ -36,6 +36,7 @@ type Content = {
   useCases: { size: string; scenario: string; howLabel: string; how: string; result: string }[];
   intelLabel: string; intelTitle1: string; intelTitleHighlight: string; intelSubtitle: string;
   intelCards: IntelCard[];
+  posTitle: string; posSubtitle: string; posBullets: string[]; posCta: string;
   ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
   links: { label: string }[];
 };
