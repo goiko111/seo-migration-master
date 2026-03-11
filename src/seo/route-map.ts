@@ -47,6 +47,7 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/demo", canonical: `${BASE}/demo`, lang: "es", type: "product", intent: "demo carta vinos digital" },
   { path: "/afiliate", canonical: `${BASE}/afiliate`, lang: "es", type: "product", intent: "programa afiliados winerim" },
   { path: "/que-es-winerim", canonical: `${BASE}/que-es-winerim`, lang: "es", type: "product", intent: "qué es winerim", cannibalizationGroup: "what-is-winerim" },
+  { path: "/producto/inteligencia-dinamica", canonical: `${BASE}/producto/inteligencia-dinamica`, lang: "es", type: "product", intent: "inteligencia dinámica carta vinos IA" },
 
   // ─────────────────────────────────────────────
   // ENGLISH PAGES AT ROOT (⚠️ should migrate to /en/)
@@ -113,10 +114,10 @@ export const seoRouteMap: SeoRouteEntry[] = [
   },
   {
     path: "/en/digital-wine-list",
-    canonical: `${BASE}/en/digital-wine-list`,
+    canonical: `${BASE}/en/wine-list-management-software`,
     lang: "en", type: "product",
     intent: "digital wine list restaurants",
-    notes: "✅ Correctly placed under /en/",
+    notes: "⚠️ Cannibalizes /en/wine-list-management-software. Canonical points to primary. Consider 301 redirect.",
     cannibalizationGroup: "software-carta-vinos",
   },
 
@@ -202,6 +203,17 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/guias/como-formar-equipo-sala-para-vender-vino", canonical: `${BASE}/guias/como-formar-equipo-sala-para-vender-vino`, lang: "es", type: "guide", intent: "formar equipo sala vender vino sin sumiller" },
   { path: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", canonical: `${BASE}/guias/como-usar-datos-para-decidir-que-vinos-comprar`, lang: "es", type: "guide", intent: "datos decidir comprar vinos restaurante" },
   { path: "/guias/como-conectar-carta-stock-ventas-margen", canonical: `${BASE}/guias/como-conectar-carta-stock-ventas-margen`, lang: "es", type: "guide", intent: "conectar carta stock ventas margen restaurante" },
+
+  // ─────────────────────────────────────────────
+  // NEW RESOURCES (ES)
+  // ─────────────────────────────────────────────
+  { path: "/recursos/plantilla-estrategia-vinos-por-copa", canonical: `${BASE}/recursos/plantilla-estrategia-vinos-por-copa`, lang: "es", type: "resource", intent: "plantilla estrategia vino por copa restaurante" },
+  { path: "/recursos/checklist-deteccion-vinos-muertos", canonical: `${BASE}/recursos/checklist-deteccion-vinos-muertos`, lang: "es", type: "resource", intent: "checklist detección vinos muertos baja rotación" },
+  { path: "/recursos/plantilla-formacion-equipo-sala", canonical: `${BASE}/recursos/plantilla-formacion-equipo-sala`, lang: "es", type: "resource", intent: "plantilla formación vino equipo sala" },
+  { path: "/recursos/plantilla-analisis-margenes", canonical: `${BASE}/recursos/plantilla-analisis-margenes`, lang: "es", type: "resource", intent: "plantilla análisis márgenes vino restaurante" },
+  { path: "/recursos/scorecard-rendimiento-carta", canonical: `${BASE}/recursos/scorecard-rendimiento-carta`, lang: "es", type: "resource", intent: "scorecard rendimiento carta vinos mensual" },
+  { path: "/recursos/checklist-carta-que-vende", canonical: `${BASE}/recursos/checklist-carta-que-vende`, lang: "es", type: "resource", intent: "checklist carta vinos que vende conversión" },
+  { path: "/recursos/plantilla-equilibrio-carta", canonical: `${BASE}/recursos/plantilla-equilibrio-carta`, lang: "es", type: "resource", intent: "plantilla equilibrio carta vinos estilos precios" },
 
   // ─────────────────────────────────────────────
   // BENCHMARKS & PLAYBOOKS (ES)

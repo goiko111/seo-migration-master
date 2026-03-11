@@ -25,35 +25,36 @@ export const redirects: RedirectEntry[] = [
   // ─────────────────────────────────────────────
   // 1. ENGLISH PAGES AT ROOT → /en/ PREFIX
   // Priority: CRITICAL (language signal confusion for Google)
+  // STATUS: ACTIVE — implemented in redirects edge function
   // ─────────────────────────────────────────────
   {
     from: "/wine-list-management-software",
     to: "/en/wine-list-management-software",
-    status: "pending",
+    status: "active",
     type: 301,
-    reason: "EN page at ES root. Confuses Googlebot language signals. Move to /en/ subdirectory.",
+    reason: "EN page at ES root. Confuses Googlebot language signals.",
     priority: "critical",
   },
   {
     from: "/what-is-winerim",
     to: "/en/what-is-winerim",
-    status: "pending",
+    status: "active",
     type: 301,
-    reason: "EN page at ES root. Already has /en/ equivalent via langRoutes.",
+    reason: "EN page at ES root.",
     priority: "critical",
   },
   {
     from: "/ai-wine-software",
     to: "/en/ai-wine-software",
-    status: "pending",
+    status: "active",
     type: 301,
-    reason: "EN page at ES root. Needs /en/ route created first.",
+    reason: "EN page at ES root.",
     priority: "critical",
   },
   {
     from: "/wine-list-analyzer",
     to: "/en/wine-list-analyzer",
-    status: "pending",
+    status: "active",
     type: 301,
     reason: "EN tool at root. Cannibalizes /analisis-carta.",
     priority: "critical",
@@ -61,7 +62,7 @@ export const redirects: RedirectEntry[] = [
   {
     from: "/wine-roi-calculator",
     to: "/en/wine-roi-calculator",
-    status: "pending",
+    status: "active",
     type: 301,
     reason: "EN tool at root.",
     priority: "critical",
@@ -69,7 +70,7 @@ export const redirects: RedirectEntry[] = [
   {
     from: "/wine-pairing-generator",
     to: "/en/wine-pairing-generator",
-    status: "pending",
+    status: "active",
     type: 301,
     reason: "EN tool at root.",
     priority: "critical",
@@ -77,42 +78,42 @@ export const redirects: RedirectEntry[] = [
   {
     from: "/wine-pricing-tool",
     to: "/en/wine-pricing-tool",
-    status: "pending",
+    status: "active",
     type: 301,
-    reason: "EN tool at root. Cannibalizes /calculadora-margen-vino for pricing intent.",
+    reason: "EN tool at root.",
     priority: "critical",
   },
   {
     from: "/wine-list-benchmark",
     to: "/en/wine-list-benchmark",
-    status: "pending",
+    status: "active",
     type: 301,
     reason: "EN tool at root.",
     priority: "critical",
   },
 
   // ─────────────────────────────────────────────
-  // 2. LEGACY / ORPHAN CONSOLIDATION
+  // 2. CANNIBALIZATION FIX
   // ─────────────────────────────────────────────
   {
     from: "/en/digital-wine-list",
     to: "/en/wine-list-management-software",
-    status: "blocked",
+    status: "active",
     type: 301,
-    reason: "Potential duplicate of /en/wine-list-management-software. Evaluate traffic before merging.",
-    priority: "medium",
+    reason: "Duplicate of /en/wine-list-management-software. Consolidate authority.",
+    priority: "high",
   },
 
   // ─────────────────────────────────────────────
   // 3. TRAILING SLASH NORMALIZATION
   // Global rule: strip trailing slashes (except root /)
-  // Implement as a global rewrite rule, not individual redirects.
+  // Implemented in redirects edge function globally.
   // ─────────────────────────────────────────────
 
   // ─────────────────────────────────────────────
   // 4. CASE NORMALIZATION
   // Global rule: lowercase all URLs.
-  // Implement as middleware/edge function.
+  // Implemented in redirects edge function globally.
   // ─────────────────────────────────────────────
 ];
 
