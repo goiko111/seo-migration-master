@@ -365,12 +365,14 @@ const labels: Record<string, {
 };
 
 const internalLinks = [
-  { to: "/demo", label: "Solicitar demo gratuita", type: "solution" as const },
-  { to: "/analisis-carta", label: "Analiza tu carta de vinos", type: "tool" as const },
-  { to: "/funcionalidades", label: "Todas las funcionalidades", type: "solution" as const },
-  { to: "/herramientas", label: "Herramientas gratuitas", type: "tool" as const },
-  { to: "/soluciones", label: "Soluciones por necesidad", type: "solution" as const },
-  { to: "/guias-y-recursos", label: "Guías y recursos", type: "guide" as const },
+  { to: "/demo", label: "Solicitar demo gratuita personalizada", type: "solution" as const },
+  { to: "/analisis-carta", label: "Analiza tu carta gratis y recibe un diagnóstico", type: "tool" as const },
+  { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "solution" as const },
+  { to: "/herramientas", label: "Herramientas gratuitas de análisis y pricing", type: "tool" as const },
+  { to: "/comparativas", label: "Compara Winerim con alternativas", type: "solution" as const },
+  { to: "/guias-y-recursos", label: "Guías prácticas y recursos descargables", type: "guide" as const },
+  { to: "/benchmarks-playbooks", label: "Benchmarks y playbooks del sector", type: "resource" as const },
+  { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica: IA táctica para carta", type: "solution" as const },
 ];
 
 /* ═══════════════════════════════════════════════════════

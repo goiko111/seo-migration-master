@@ -9,6 +9,8 @@ import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
+import NextSteps from "@/components/seo/NextSteps";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
@@ -193,6 +195,28 @@ const Blog = () => {
             ))}
           </div>
         </section>
+
+        {/* Next steps flow: MOFU → BOFU → conversion */}
+        <NextSteps
+          title="Profundiza y pasa a la acción"
+          subtitle="De lo informativo a lo práctico: herramientas, guías y soluciones."
+          steps={[
+            { to: "/analisis-carta", label: "Analiza tu carta gratis", description: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", type: "tool" },
+            { to: "/guias-y-recursos", label: "Guías y recursos prácticos", description: "Plantillas, checklists y guías paso a paso para mejorar tu carta.", type: "guide" },
+            { to: "/comparativas", label: "Compara Winerim con alternativas", description: "Comparativas claras para decidir qué solución encaja.", type: "solution" },
+            { to: "/demo", label: "Solicitar demo personalizada", description: "Demo con tu carta real. Sin compromiso.", type: "solution" },
+          ]}
+        />
+
+        <InternalLinks
+          title="Recursos complementarios"
+          links={[
+            { to: "/herramientas", label: "Herramientas gratuitas de análisis y pricing", type: "tool" },
+            { to: "/benchmarks-playbooks", label: "Benchmarks y playbooks del sector", type: "resource" },
+            { to: "/casos-exito", label: "Casos de éxito de restaurantes reales", type: "guide" },
+            { to: "/software-carta-de-vinos", label: "Software de carta de vinos inteligente", type: "solution" },
+          ]}
+        />
 
         {/* CTA bottom */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-24 text-center">

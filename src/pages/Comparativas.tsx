@@ -6,6 +6,8 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import InternalLinks from "@/components/seo/InternalLinks";
+import NextSteps from "@/components/seo/NextSteps";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import { comparisons } from "@/data/comparisons";
 
@@ -90,6 +92,29 @@ const Comparativas = () => {
           <FAQSection faqs={faqs} />
         </div>
       </section>
+
+      {/* Next steps: comparativa → solución → CTA */}
+      <NextSteps
+        title="Siguientes pasos"
+        subtitle="De la comparativa a la acción."
+        steps={[
+          { to: "/software-carta-de-vinos", label: "Descubre Winerim en detalle", description: "Todas las funcionalidades del software de carta de vinos.", type: "solution" },
+          { to: "/casos-exito", label: "Casos de éxito reales", description: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", type: "solution" },
+          { to: "/analisis-carta", label: "Analiza tu carta gratis", description: "Sube tu carta y recibe un diagnóstico con recomendaciones.", type: "tool" },
+          { to: "/demo", label: "Solicitar demo personalizada", description: "Demo con tu carta real. Sin compromiso.", type: "solution" },
+        ]}
+      />
+
+      <InternalLinks
+        title="Contenido relacionado"
+        links={[
+          { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "solution" },
+          { to: "/precios", label: "Planes y precios de Winerim", type: "resource" },
+          { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
+          { to: "/article/mejor-software-carta-vinos-restaurante", label: "Mejor software de carta de vinos 2025", type: "guide" },
+          { to: "/benchmarks-playbooks", label: "Benchmarks y playbooks del sector", type: "resource" },
+        ]}
+      />
 
       {/* CTA */}
       <section className="section-padding">

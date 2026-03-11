@@ -179,10 +179,12 @@ const BenchmarksPlaybooks = () => {
       <InternalLinks
         title="Recursos complementarios"
         links={[
-          { to: "/guias-y-recursos", label: "Guías y recursos", type: "guide" },
-          { to: "/herramientas", label: "Herramientas gratuitas", type: "tool" },
-          { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
-          { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
+          { to: "/guias-y-recursos", label: "Guías prácticas y recursos descargables", type: "guide" },
+          { to: "/herramientas", label: "Herramientas gratuitas de análisis y pricing", type: "tool" },
+          { to: "/software-carta-de-vinos", label: "Software de carta de vinos inteligente", type: "solution" },
+          { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica: IA para carta de vinos", type: "solution" },
+          { to: "/casos-exito", label: "Casos de éxito de restaurantes reales", type: "solution" },
+          { to: "/comparativas", label: "Compara Winerim con alternativas", type: "solution" },
         ]}
       />
 

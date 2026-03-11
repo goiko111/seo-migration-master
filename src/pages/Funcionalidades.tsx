@@ -1016,11 +1016,14 @@ const Funcionalidades = () => {
       />
 
       <InternalLinks links={[
-        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : "Pricing", type: "resource" },
-        { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones" : "Integrations", type: "tool" },
-        { to: localePath("/clientes"), label: lang === "es" ? "Clientes" : "Clients", type: "solution" },
-        { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas" : "Free tools", type: "tool" },
-        { to: "/guias-y-recursos", label: lang === "es" ? "Guías y recursos" : "Guides & resources", type: "guide" },
+        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios de Winerim" : "Winerim pricing", type: "resource" },
+        { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones con TPV y sistemas" : "POS & system integrations", type: "tool" },
+        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real case studies", type: "solution" },
+        { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas de análisis y pricing" : "Free analysis tools", type: "tool" },
+        { to: "/guias-y-recursos", label: lang === "es" ? "Guías prácticas y recursos descargables" : "Guides & resources", type: "guide" },
+        { to: "/comparativas", label: lang === "es" ? "Compara Winerim con alternativas" : "Compare Winerim", type: "solution" },
+        { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks", type: "resource" },
+        { to: "/producto/inteligencia-dinamica", label: lang === "es" ? "Inteligencia dinámica: IA táctica para carta" : "Dynamic intelligence", type: "solution" },
       ]} />
       <Footer />
     </div>
