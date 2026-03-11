@@ -139,6 +139,9 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/calculadora-margen-vino", canonical: `${BASE}/calculadora-margen-vino`, lang: "es", type: "tool", intent: "calculadora margen vino restaurante", cannibalizationGroup: "calculadora-margen" },
   { path: "/herramientas/calculadora-precio-vino-por-copa", canonical: `${BASE}/herramientas/calculadora-precio-vino-por-copa`, lang: "es", type: "tool", intent: "calculadora precio vino por copa" },
   { path: "/herramientas", canonical: `${BASE}/herramientas`, lang: "es", type: "hub", intent: "herramientas vino restaurante" },
+  { path: "/herramientas/diagnostico-vino-por-copa", canonical: `${BASE}/herramientas/diagnostico-vino-por-copa`, lang: "es", type: "tool", intent: "diagnóstico vino por copa restaurante" },
+  { path: "/herramientas/wine-list-score", canonical: `${BASE}/herramientas/wine-list-score`, lang: "es", type: "tool", intent: "wine list score auditoría carta vinos" },
+  { path: "/herramientas/calculadora-stock-muerto", canonical: `${BASE}/herramientas/calculadora-stock-muerto`, lang: "es", type: "tool", intent: "calculadora stock muerto vinos rotación" },
 
   // ─────────────────────────────────────────────
   // BLOG (ES)
