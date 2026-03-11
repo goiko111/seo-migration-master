@@ -991,6 +991,11 @@ const Funcionalidades = () => {
         </div>
       </section>
 
+      {/* Credibility */}
+      <section className="max-w-3xl mx-auto px-6 md:px-12 pb-8">
+        <CredibilitySection lang={lang} />
+      </section>
+
       {/* FAQs */}
       <FAQSection
         schemaId="funcionalidades"

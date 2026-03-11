@@ -185,6 +185,10 @@ const Soluciones = () => {
           ]}
         />
 
+        <section className="max-w-3xl mx-auto px-6 md:px-12 pb-8">
+          <CredibilitySection lang={lang} />
+        </section>
+
         <InternalLinks
           title={t.linksTitle}
           links={[
