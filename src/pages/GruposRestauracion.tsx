@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+type IntelCard = { title: string; desc: string };
 type Content = {
   metaTitle: string; metaDescription: string;
   badgeLabel: string; breadSolutions: string; breadLabel: string;
@@ -29,6 +30,8 @@ type Content = {
   results: { value: string; desc: string }[];
   scaleLabel: string; scaleTitle1: string; scaleTitleHighlight: string;
   useCases: { size: string; scenario: string; howLabel: string; how: string; result: string }[];
+  intelLabel: string; intelTitle1: string; intelTitleHighlight: string; intelSubtitle: string;
+  intelCards: IntelCard[];
   ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
   links: { label: string }[];
 };
