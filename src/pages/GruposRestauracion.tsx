@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Building2, AlertTriangle, CheckCircle,
-  Layers, RefreshCw, DollarSign, TrendingUp, Users,
-  Globe, Sparkles, Store
+  ArrowRight, Building2, AlertTriangle, CheckCircle, BarChart3,
+  Layers, RefreshCw, DollarSign, TrendingUp, Users, Wine,
+  Warehouse, Globe, Sparkles, Store
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
