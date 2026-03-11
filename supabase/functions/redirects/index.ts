@@ -56,6 +56,9 @@ const EXACT_REDIRECTS: Record<string, string> = {
   "/wine-pairing-generator": "/en/wine-pairing-generator",
   "/wine-pricing-tool": "/en/wine-pricing-tool",
   "/wine-list-benchmark": "/en/wine-list-benchmark",
+
+  // Cannibalization fix: consolidate EN product pages
+  "/en/digital-wine-list": "/en/wine-list-management-software",
 };
 
 // ─────────────────────────────────────────────
