@@ -48,6 +48,7 @@ const Precios = lazy(() => import("./pages/Precios"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const Hoteles = lazy(() => import("./pages/Hoteles"));
+const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
 const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
