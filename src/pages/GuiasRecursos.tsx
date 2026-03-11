@@ -171,6 +171,7 @@ const CardGrid = ({ items, cta }: { items: SectionItem[]; cta?: string }) => (
 const GuiasRecursos = () => {
   const { lang, localePath } = useLanguage();
   const t = langContent[lang] || langContent.es;
+  const [activeFilter, setActiveFilter] = useState("all");
 
   useEffect(() => {
     const schema = document.createElement("script");
