@@ -9,6 +9,8 @@ import { usePageContent } from "@/hooks/usePageContent";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
+import NextSteps from "@/components/seo/NextSteps";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
