@@ -398,9 +398,14 @@ const Problemas = () => {
         </section>
 
         <InternalLinks title={t.linksTitle} links={[
-          { to: localePath("/funcionalidades"), label: lang === "es" ? "Funcionalidades" : "Features", type: "solution" },
-          { to: localePath("/como-vender-mas-vino-en-un-restaurante"), label: lang === "es" ? "Cómo vender más vino" : "How to sell more wine", type: "guide" },
-          { to: "/wine-list-analyzer", label: "Wine List Analyzer", type: "tool" },
+          { to: localePath("/funcionalidades"), label: lang === "es" ? "Todas las funcionalidades de Winerim" : "All Winerim features", type: "solution" },
+          { to: localePath("/como-vender-mas-vino-en-un-restaurante"), label: lang === "es" ? "Guía: cómo vender más vino en un restaurante" : "Guide: how to sell more wine", type: "guide" },
+          { to: "/analisis-carta", label: lang === "es" ? "Analiza tu carta gratis y recibe un diagnóstico" : "Analyze your list free", type: "tool" },
+          { to: "/herramientas/calculadora-ticket-medio-vino", label: lang === "es" ? "Calculadora de impacto en ticket medio" : "Average ticket impact calculator", type: "tool" },
+          { to: "/guias/como-revisar-carta-vinos-cada-mes", label: lang === "es" ? "Guía: revisar la carta cada mes" : "Guide: monthly list review", type: "guide" },
+          { to: "/casos-exito", label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real case studies", type: "solution" },
+          { to: "/comparativas", label: lang === "es" ? "Comparativas: Winerim vs alternativas" : "Comparisons: Winerim vs alternatives", type: "solution" },
+          { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks & playbooks", type: "resource" },
         ]} />
       </main>
       <Footer />

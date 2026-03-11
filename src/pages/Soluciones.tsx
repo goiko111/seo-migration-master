@@ -192,11 +192,12 @@ const Soluciones = () => {
         <InternalLinks
           title={t.linksTitle}
           links={[
-            { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
-            { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas" : "Free tools", type: "tool" },
-            { to: "/guias-y-recursos", label: lang === "es" ? "Guías y recursos" : "Guides & resources", type: "guide" },
-            { to: "/wine-roi-calculator", label: "Wine ROI Calculator", type: "tool" },
-            { to: localePath("/casos-exito") || "/casos-exito", label: lang === "es" ? "Casos de éxito" : "Case studies", type: "guide" },
+            { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: lang === "es" ? "Software de carta de vinos inteligente" : "Smart wine list software", type: "solution" },
+            { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas de análisis y pricing" : "Free analysis & pricing tools", type: "tool" },
+            { to: "/guias-y-recursos", label: lang === "es" ? "Guías prácticas y recursos descargables" : "Practical guides & downloadable resources", type: "guide" },
+            { to: "/herramientas/calculadora-ticket-medio-vino", label: lang === "es" ? "Calculadora de impacto en ticket medio" : "Average ticket impact calculator", type: "tool" },
+            { to: localePath("/casos-exito") || "/casos-exito", label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real restaurant case studies", type: "guide" },
+            { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks & playbooks", type: "resource" },
           ]}
         />
       </main>
