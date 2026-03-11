@@ -14,6 +14,8 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import SummaryBox from "@/components/seo/SummaryBox";
+import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 // ─── Screenshots ───
