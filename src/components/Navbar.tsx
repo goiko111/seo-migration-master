@@ -14,7 +14,7 @@ const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
-  const { t, localePath } = useLanguage();
+  const { t, localePath, lang } = useLanguage();
 
   const navItems = [
     { label: t.nav_home, href: localePath("/") },
