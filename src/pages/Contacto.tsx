@@ -122,7 +122,7 @@ const Contacto = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-3">
               <h2 className="font-heading text-2xl font-bold mb-8">{c.form_title}</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <ContactFormFields native />
+                <ContactFormFields native variant="contact" />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
                 <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}
