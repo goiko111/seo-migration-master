@@ -130,9 +130,9 @@ const data: VerticalContent = {
 
   nextStepsTitle: "Siguientes pasos",
   nextSteps: [
-    { label: "Análisis gratuito", href: "/analisis-carta", desc: "Descubre oportunidades ocultas en tu carta por copas" },
-    { label: "Guía vino por copa", href: "/guias/como-fijar-estrategia-rentable-vino-por-copa", desc: "Estrategia completa para maximizar el vino por copa" },
-    { label: "Pricing tool", href: "/wine-pricing-tool", desc: "Calcula el precio óptimo para cada copa" },
+    { label: "Análisis gratuito", to: "/analisis-carta", description: "Descubre oportunidades ocultas en tu carta por copas", type: "tool" as const },
+    { label: "Guía vino por copa", to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", description: "Estrategia completa para maximizar el vino por copa", type: "guide" as const },
+    { label: "Pricing tool", to: "/wine-pricing-tool", description: "Calcula el precio óptimo para cada copa", type: "tool" as const },
   ],
   internalLinks: [
     { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },

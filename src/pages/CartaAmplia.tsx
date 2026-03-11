@@ -132,9 +132,9 @@ const data: VerticalContent = {
 
   nextStepsTitle: "Siguientes pasos",
   nextSteps: [
-    { label: "Análisis gratuito", href: "/analisis-carta", desc: "Detecta stock muerto y canibalización en tu carta" },
-    { label: "Guía: detectar vinos muertos", href: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", desc: "Metodología paso a paso" },
-    { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto", desc: "Estima cuánto capital tienes inmovilizado" },
+    { label: "Análisis gratuito", to: "/analisis-carta", description: "Detecta stock muerto y canibalización en tu carta", type: "tool" as const },
+    { label: "Guía: detectar vinos muertos", to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", description: "Metodología paso a paso", type: "guide" as const },
+    { label: "Calculadora de stock muerto", to: "/herramientas/calculadora-stock-muerto", description: "Estima cuánto capital tienes inmovilizado", type: "tool" as const },
   ],
   internalLinks: [
     { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },

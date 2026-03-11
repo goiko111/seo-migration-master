@@ -131,9 +131,9 @@ const data: VerticalContent = {
 
   nextStepsTitle: "Siguientes pasos",
   nextSteps: [
-    { label: "Análisis gratuito", href: "/analisis-carta", desc: "Descubre oportunidades ocultas en tu carta actual" },
-    { label: "Casos de éxito", href: "/casos-exito", desc: "Mira cómo otros gastronómicos han mejorado resultados" },
-    { label: "Funcionalidades", href: "/funcionalidades", desc: "Explora todo lo que Winerim puede hacer por tu restaurante" },
+    { label: "Análisis gratuito", to: "/analisis-carta", description: "Descubre oportunidades ocultas en tu carta actual", type: "tool" as const },
+    { label: "Casos de éxito", to: "/casos-exito", description: "Mira cómo otros gastronómicos han mejorado resultados", type: "resource" as const },
+    { label: "Funcionalidades", to: "/funcionalidades", description: "Explora todo lo que Winerim puede hacer por tu restaurante", type: "solution" as const },
   ],
   internalLinks: [
     { to: "/analisis-carta", label: "Análisis gratuito de carta", type: "tool" },
