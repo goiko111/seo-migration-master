@@ -114,10 +114,10 @@ export const seoRouteMap: SeoRouteEntry[] = [
   },
   {
     path: "/en/digital-wine-list",
-    canonical: `${BASE}/en/digital-wine-list`,
+    canonical: `${BASE}/en/wine-list-management-software`,
     lang: "en", type: "product",
     intent: "digital wine list restaurants",
-    notes: "✅ Correctly placed under /en/",
+    notes: "⚠️ Cannibalizes /en/wine-list-management-software. Canonical points to primary. Consider 301 redirect.",
     cannibalizationGroup: "software-carta-vinos",
   },
 
