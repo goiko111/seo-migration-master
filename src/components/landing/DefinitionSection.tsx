@@ -276,7 +276,7 @@ const homeFaqs = {
     { q: "¿En qué se diferencia de un QR con PDF?", a: "Un QR con PDF es un archivo estático: no se actualiza en tiempo real, no recomienda vinos, no ofrece filtros ni maridajes y no genera datos de venta. Winerim es una plataforma interactiva con inteligencia artificial que personaliza la experiencia del comensal y proporciona analítica al restaurante." },
     { q: "¿Cómo accede el comensal a la carta?", a: "Winerim es multiplataforma. El comensal puede acceder a la carta digital desde un QR en mesa (se abre en el navegador), desde la web del restaurante o desde la app nativa de Winerim disponible en iOS y Android." },
     { q: "¿Winerim sustituye al sommelier?", a: "No. Winerim complementa al equipo de sala. En restaurantes con sommelier, la herramienta enriquece la experiencia con datos y recomendaciones. En restaurantes sin sommelier, actúa como asistente inteligente para que el personal pueda recomendar vino con confianza." },
-    { q: "¿Qué resultados obtienen los restaurantes con Winerim?", a: "Los restaurantes que utilizan Winerim reportan incrementos medios del 15-30% en ventas de vino, mejoras del 10-20% en ticket medio y una reducción significativa del stock sin rotación. Estos resultados varían según el tipo de establecimiento, la estrategia de implementación y el punto de partida de cada negocio." },
+    { q: "¿Qué resultados obtienen los restaurantes con Winerim?", a: "Los restaurantes que implementan Winerim pueden experimentar mejoras en ventas de vino, ticket medio y rotación de bodega. Los resultados varían según el tipo de establecimiento, la estrategia de implementación y el punto de partida de cada negocio. El potencial estimado de mejora en ticket medio de vino oscila entre un 15 % y un 25 %, según contexto." },
     { q: "¿Funciona en varios idiomas?", a: "Sí. La carta digital de Winerim puede mostrarse en español, inglés, italiano y francés. El sistema detecta el idioma del dispositivo del comensal y adapta la interfaz automáticamente." },
   ],
   en: [
@@ -286,7 +286,7 @@ const homeFaqs = {
     { q: "How is it different from a QR with PDF?", a: "A QR with PDF is a static file: no real-time updates, no recommendations, no filters, no analytics. Winerim is an interactive AI-powered platform." },
     { q: "How does the guest access the wine list?", a: "Winerim is multi-platform. Guests can access the digital wine list via a QR code at the table (opens in the browser), from the restaurant's website, or from the native Winerim app on iOS and Android." },
     { q: "Does Winerim replace the sommelier?", a: "No. Winerim complements the front-of-house team. It acts as an intelligent assistant that helps staff recommend wine with confidence." },
-    { q: "What results do restaurants get with Winerim?", a: "Restaurants using Winerim report average increases of 15-30% in wine sales, 10-20% increase in average ticket, and significant improvement in wine rotation. Results vary by venue type and implementation strategy." },
+    { q: "What results do restaurants get with Winerim?", a: "Restaurants using Winerim can experience improvements in wine sales, average ticket and cellar rotation. Results vary by venue type and implementation strategy. Estimated potential improvement in wine average ticket ranges between 15% and 25%, depending on context." },
     { q: "Does it work in multiple languages?", a: "Yes. Winerim's digital wine list supports Spanish, English, Italian, and French. The system detects the guest's device language automatically." },
   ],
   it: [
