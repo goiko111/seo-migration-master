@@ -13,6 +13,10 @@ import ScrollReveal from "@/components/ScrollReveal";
 import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import NotForSection from "@/components/seo/NotForSection";
+import QuickAnswer from "@/components/seo/QuickAnswer";
+import LimitationsBox from "@/components/seo/LimitationsBox";
+import ComparisonTable from "@/components/seo/ComparisonTable";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 type QT = {
