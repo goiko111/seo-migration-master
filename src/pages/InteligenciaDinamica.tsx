@@ -368,7 +368,7 @@ const InteligenciaDinamica = () => {
                 custom={5}
                 className="text-center text-xs text-muted-foreground/50 tracking-wide"
               >
-                Disponible para pilotos y despliegues progresivos en restaurantes seleccionados.
+                Disponible para despliegues progresivos y pilotos seleccionados.
               </motion.p>
 
             </motion.div>
