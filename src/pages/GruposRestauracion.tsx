@@ -28,6 +28,7 @@ type Content = {
   advantages: { title: string; desc: string }[];
   capLabel: string; capTitle: string; capSubtitle: string;
   capCards: CapCard[];
+  benchLabel: string; benchTitle: string; benchSubtitle: string; benchMetrics: string[]; benchClosing: string;
   featLabel: string; featTitle1: string; featTitleHighlight: string;
   features: { title: string; desc: string }[];
   impactLabel: string; impactTitle1: string; impactTitleHighlight: string;
@@ -76,6 +77,11 @@ const content: Record<string, Content> = {
       { title: "Profesionalizar la categoría", desc: "Reducir dependencia del criterio individual de cada director o sumiller." },
       { title: "Activar reglas por marca o unidad", desc: "Definir prioridades distintas según objetivo de negocio, marca, ciudad o tipo de cliente." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Benchmarking interno entre unidades",
+    benchSubtitle: "Detecta qué locales están vendiendo mejor vino, qué estrategias convierten más y dónde existen oportunidades de mejora o escalado.",
+    benchMetrics: ["Ticket medio en vino por unidad", "Margen medio por categoría", "Referencias con mejor salida", "Vinos con alta visibilidad y baja conversión", "Unidades con stock más sano", "Diferencias entre cartas comparables", "Formatos o rangos de precio con mejor rendimiento"],
+    benchClosing: "No se trata solo de ver datos. Se trata de decidir mejor qué replicar, qué corregir y qué proteger a escala grupo.",
     featLabel: "Funcionalidades", featTitle1: "Diseñado para ", featTitleHighlight: "escalar",
     features: [
       { title: "Gestión multi-local", desc: "Dashboard central con vista de todos los restaurantes. Filtra, compara y actúa desde un solo panel." },
@@ -150,6 +156,11 @@ const content: Record<string, Content> = {
       { title: "Professionalize the category", desc: "Reduce dependence on individual judgment of each director or sommelier." },
       { title: "Activate rules by brand or unit", desc: "Define different priorities based on business objective, brand, city, or customer type." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Internal benchmarking across units",
+    benchSubtitle: "Detect which venues are selling wine better, which strategies convert more, and where improvement or scaling opportunities exist.",
+    benchMetrics: ["Average wine ticket per unit", "Average margin by category", "Best-performing references", "Wines with high visibility and low conversion", "Units with healthiest stock", "Differences between comparable lists", "Formats or price ranges with best performance"],
+    benchClosing: "It's not just about seeing data. It's about deciding better what to replicate, what to fix, and what to protect at group scale.",
     featLabel: "Features", featTitle1: "Designed to ", featTitleHighlight: "scale",
     features: [
       { title: "Multi-venue management", desc: "Central dashboard with a view of all restaurants. Filter, compare, and act from one panel." },
@@ -224,6 +235,11 @@ const content: Record<string, Content> = {
       { title: "Professionalizzare la categoria", desc: "Ridurre la dipendenza dal criterio individuale di ogni direttore o sommelier." },
       { title: "Attivare regole per brand o unità", desc: "Definire priorità diverse in base a obiettivo di business, marchio, città o tipo di cliente." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Benchmarking interno tra unità",
+    benchSubtitle: "Rileva quali locali vendono meglio il vino, quali strategie convertono di più e dove esistono opportunità di miglioramento o scaling.",
+    benchMetrics: ["Scontrino medio vino per unità", "Margine medio per categoria", "Referenze con migliore rotazione", "Vini con alta visibilità e bassa conversione", "Unità con stock più sano", "Differenze tra carte comparabili", "Formati o fasce di prezzo con migliore rendimento"],
+    benchClosing: "Non si tratta solo di vedere dati. Si tratta di decidere meglio cosa replicare, cosa correggere e cosa proteggere su scala gruppo.",
     featLabel: "Funzionalità", featTitle1: "Progettato per ", featTitleHighlight: "scalare",
     features: [
       { title: "Gestione multi-locale", desc: "Dashboard centrale con vista su tutti i ristoranti. Filtra, confronta e agisci da un unico pannello." },
@@ -298,6 +314,11 @@ const content: Record<string, Content> = {
       { title: "Professionnaliser la catégorie", desc: "Réduire la dépendance au jugement individuel de chaque directeur ou sommelier." },
       { title: "Activer des règles par marque ou unité", desc: "Définir des priorités différentes selon l'objectif business, la marque, la ville ou le type de client." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Benchmarking interne entre établissements",
+    benchSubtitle: "Détectez quels établissements vendent mieux le vin, quelles stratégies convertissent le plus et où se trouvent les opportunités d'amélioration ou de scaling.",
+    benchMetrics: ["Ticket moyen vin par unité", "Marge moyenne par catégorie", "Références avec meilleure rotation", "Vins à haute visibilité et faible conversion", "Unités avec le stock le plus sain", "Différences entre cartes comparables", "Formats ou gammes de prix les plus performants"],
+    benchClosing: "Il ne s'agit pas seulement de voir des données. Il s'agit de mieux décider quoi répliquer, quoi corriger et quoi protéger à l'échelle du groupe.",
     featLabel: "Fonctionnalités", featTitle1: "Conçu pour ", featTitleHighlight: "passer à l'échelle",
     features: [
       { title: "Gestion multi-sites", desc: "Tableau de bord central avec vue sur tous les restaurants. Filtrez, comparez et agissez depuis un seul panneau." },
@@ -480,6 +501,51 @@ const GruposRestauracion = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* BENCHMARKING */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
+              <BarChart3 size={14} className="text-wine" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.benchLabel}</span>
+            </div>
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              {t.benchTitle}
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
+              {t.benchSubtitle}
+            </p>
+          </ScrollReveal>
+
+          {/* Dashboard-style metrics grid */}
+          <div className="rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3">
+              {t.benchMetrics.map((metric, i) => {
+                const metricIcons = [DollarSign, TrendingUp, Wine, ScanSearch, Warehouse, GitCompare, BarChart3];
+                const Icon = metricIcons[i] || BarChart3;
+                const isLast = i === t.benchMetrics.length - 1;
+                return (
+                  <ScrollReveal key={i} delay={i * 0.04}>
+                    <div className={`flex items-center gap-4 p-5 md:p-6 border-b border-border/30 sm:border-r border-r-border/30 ${isLast ? 'border-b-0' : ''} ${(i + 1) % 3 === 0 ? 'lg:border-r-0' : ''} ${(i + 1) % 2 === 0 ? 'sm:border-r-0 lg:border-r' : ''} ${i >= t.benchMetrics.length - 1 ? 'sm:border-b-0' : ''} ${i >= t.benchMetrics.length - 2 ? 'lg:border-b-0' : ''}`}>
+                      <div className="w-9 h-9 rounded-lg bg-wine/8 flex items-center justify-center shrink-0">
+                        <Icon size={18} className="text-wine/70" />
+                      </div>
+                      <span className="text-sm font-medium text-foreground/85">{metric}</span>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
+            </div>
+          </div>
+
+          <ScrollReveal>
+            <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto text-sm leading-relaxed italic">
+              {t.benchClosing}
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
