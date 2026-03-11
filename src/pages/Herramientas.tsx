@@ -201,7 +201,32 @@ const Herramientas = () => {
           </div>
         </section>
 
-        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-24 text-center">
+        {/* Summary Box */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+          <ScrollReveal>
+            <SummaryBox
+              label={lang === "es" ? "¿Qué son las herramientas Winerim?" : "What are Winerim tools?"}
+              definition={lang === "es"
+                ? "Las herramientas gratuitas de Winerim son calculadoras, analizadores y generadores especializados en la gestión del vino en restauración. Permiten diagnosticar la carta, optimizar precios, calcular márgenes y generar maridajes — sin registro ni coste."
+                : "Winerim's free tools are calculators, analyzers and generators specialized in wine management for hospitality. They let you diagnose your list, optimize pricing, calculate margins and generate pairings — no signup required."
+              }
+              bullets={lang === "es" ? [
+                "Cada herramienta resuelve un problema concreto de gestión del vino",
+                "Resultados inmediatos, sin necesidad de registro",
+                "Como cliente de Winerim, todas estas funciones se ejecutan automáticamente",
+                "Diseñadas por profesionales del sector hostelero",
+              ] : [
+                "Each tool solves a specific wine management problem",
+                "Immediate results, no signup required",
+                "As a Winerim client, all these features run automatically",
+                "Designed by hospitality industry professionals",
+              ]}
+            />
+          </ScrollReveal>
+        </section>
+
+        {/* CTA */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12 text-center">
           <ScrollReveal>
             <div className="bg-gradient-card rounded-2xl border border-border p-12">
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{t.ctaTitle}</h2>
@@ -217,6 +242,23 @@ const Herramientas = () => {
             </div>
           </ScrollReveal>
         </section>
+
+        {/* FAQs */}
+        <FAQSection
+          schemaId="herramientas"
+          title={lang === "es" ? "Preguntas frecuentes sobre las herramientas" : "Frequently asked questions"}
+          faqs={lang === "es" ? [
+            { q: "¿Las herramientas son realmente gratuitas?", a: "Sí. Todas las herramientas son de acceso libre, sin registro ni coste. Están diseñadas para que cualquier restaurante pueda evaluar su carta y tomar mejores decisiones." },
+            { q: "¿Qué diferencia hay entre usar las herramientas y ser cliente de Winerim?", a: "Las herramientas ofrecen análisis puntuales. Como cliente de Winerim, estas funciones se ejecutan automáticamente y de forma continua, integradas con tus datos de venta y stock." },
+            { q: "¿Necesito conocimientos técnicos para usarlas?", a: "No. Cada herramienta está diseñada para ser intuitiva. Introduces los datos que te pide y recibes un resultado accionable con explicaciones claras." },
+            { q: "¿Puedo usar los resultados para mejorar mi carta?", a: "Absolutamente. Cada herramienta genera recomendaciones que puedes aplicar directamente. Si necesitas ayuda profesional, puedes solicitar un análisis completo o una demo." },
+          ] : [
+            { q: "Are the tools really free?", a: "Yes. All tools are free to use, no signup required. They're designed so any restaurant can evaluate its list and make better decisions." },
+            { q: "What's the difference between the tools and being a Winerim client?", a: "The tools offer one-time analyses. As a Winerim client, these functions run automatically and continuously, integrated with your sales and stock data." },
+            { q: "Do I need technical knowledge?", a: "No. Each tool is designed to be intuitive. Enter the requested data and receive actionable results with clear explanations." },
+            { q: "Can I use the results to improve my list?", a: "Absolutely. Each tool generates recommendations you can apply directly. For professional help, request a full analysis or demo." },
+          ]}
+        />
       </main>
       <Footer />
     </div>
