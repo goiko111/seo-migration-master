@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -23,8 +22,6 @@ const Afiliate = lazy(() => import("./pages/Afiliate"));
 const Contacto = lazy(() => import("./pages/Contacto"));
 const Demo = lazy(() => import("./pages/Demo"));
 const ArticlePage = lazy(() => import("./pages/ArticlePage"));
-const AdminLogin = lazy(() => import("./pages/AdminLogin"));
-const Admin = lazy(() => import("./pages/Admin"));
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Terminos = lazy(() => import("./pages/Terminos"));
 const VenderMasVino = lazy(() => import("./pages/VenderMasVino"));
@@ -81,18 +78,20 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
-// InteligenciaDinamica is also used in langRoutes below
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+// Admin routes — fully isolated chunk (AuthProvider only loads here)
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminShell = lazy(() => import("./components/admin/AdminShell"));
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // Reduce unnecessary re-fetches
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
       refetchOnWindowFocus: false,
     },
   },
@@ -115,7 +114,7 @@ const esRoutes = (
     <Route path="/demo" element={<Demo />} />
     <Route path="/article/:slug" element={<ArticlePage />} />
     <Route path="/admin/login" element={<AdminLogin />} />
-    <Route path="/admin" element={<Admin />} />
+    <Route path="/admin" element={<AdminShell />} />
     <Route path="/privacidad" element={<Privacidad />} />
     <Route path="/terminos" element={<Terminos />} />
     <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
@@ -249,32 +248,30 @@ const langRoutes = (prefix: string) => (
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <LanguageProvider>
-            <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                {esRoutes}
-                {langRoutes("/en")}
-                {langRoutes("/it")}
-                {langRoutes("/fr")}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-            {/* Overlay components — lazy loaded, non-critical */}
-            <Suspense fallback={null}>
-              <WhatsAppButton />
-              <BackToTop />
-              <CookieConsent />
-            </Suspense>
-          </LanguageProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <LanguageProvider>
+          <ScrollToTop />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              {esRoutes}
+              {langRoutes("/en")}
+              {langRoutes("/it")}
+              {langRoutes("/fr")}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+          {/* Overlay components — lazy loaded, non-critical */}
+          <Suspense fallback={null}>
+            <WhatsAppButton />
+            <BackToTop />
+            <CookieConsent />
+          </Suspense>
+        </LanguageProvider>
+      </BrowserRouter>
+    </TooltipProvider>
   </QueryClientProvider>
 );
 

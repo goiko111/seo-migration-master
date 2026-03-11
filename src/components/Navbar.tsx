@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Badge } from "@/components/ui/badge";
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -85,17 +85,14 @@ const Navbar = () => {
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between h-16 sm:h-20">
         <Link to={localePath("/")} className="shrink-0">
-          <img src={winerimLogo} alt="Winerim" className="h-6 sm:h-7" />
+          <img src={winerimLogo} alt="Winerim" className="h-6 sm:h-7" width={120} height={28} />
         </Link>
 
         {/* Desktop nav */}
@@ -193,13 +190,8 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 top-16 sm:top-20 bg-background/98 backdrop-blur-lg z-40 overflow-y-auto"
           >
             <nav className="flex flex-col gap-1 px-6 py-8">
-              {navItems.map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
+              {navItems.map((item) => (
+                <div key={item.label}>
                   {item.dropdown ? (
                     <div>
                       <button
@@ -214,39 +206,29 @@ const Navbar = () => {
                           className={`transition-transform ${mobileExpanded === item.label ? "rotate-180" : ""}`}
                         />
                       </button>
-                      <AnimatePresence>
-                        {mobileExpanded === item.label && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="pl-4 py-2 space-y-1">
-                              {item.dropdown.map((sub) => (
-                                <Link
-                                  key={sub.href}
-                                  to={sub.href}
-                                  className={`flex items-center gap-2 py-2 text-base transition-colors ${
-                                    location.pathname === sub.href
-                                      ? "text-foreground"
-                                      : "text-muted-foreground"
-                                  }`}
-                                  onClick={() => setMobileOpen(false)}
-                                >
-                                  {sub.label}
-                                  {sub.badge && (
-                                    <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
-                                      {sub.badge}
-                                    </Badge>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {mobileExpanded === item.label && (
+                        <div className="pl-4 py-2 space-y-1">
+                          {item.dropdown.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              to={sub.href}
+                              className={`flex items-center gap-2 py-2 text-base transition-colors ${
+                                location.pathname === sub.href
+                                  ? "text-foreground"
+                                  : "text-muted-foreground"
+                              }`}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {sub.label}
+                              {sub.badge && (
+                                <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                                  {sub.badge}
+                                </Badge>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <Link
@@ -259,14 +241,9 @@ const Navbar = () => {
                       {item.label}
                     </Link>
                   )}
-                </motion.div>
+                </div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-6"
-              >
+              <div className="mt-6">
                 <Link
                   to={localePath("/demo")}
                   className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
@@ -274,13 +251,15 @@ const Navbar = () => {
                 >
                   {t.nav_cta}
                 </Link>
-              </motion.div>
+              </div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;
