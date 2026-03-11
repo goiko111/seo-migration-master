@@ -5,15 +5,26 @@ import {
   ArrowRight, Upload, Link2, BarChart3, DollarSign, Layers,
   Utensils, Wine, TrendingUp, FileText, Target, Zap,
   CheckCircle2, AlertTriangle, ChevronRight, Users, Clock,
-  ShieldCheck, Eye, Lightbulb, XCircle, ArrowUpRight,
+  ShieldCheck, Eye, Lightbulb, XCircle,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import InternalLinks from "@/components/seo/InternalLinks";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import SummaryBox from "@/components/seo/SummaryBox";
+import ComparisonTable from "@/components/seo/ComparisonTable";
+import QuickAnswer from "@/components/seo/QuickAnswer";
+import FAQSection from "@/components/seo/FAQSection";
+import StickyCTA from "@/components/StickyCTA";
+import { referencesOptions, businessTypeOptions } from "@/components/ContactFormFields";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { notifyLead } from "@/lib/notifyLead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SummaryBox from "@/components/seo/SummaryBox";
 import ComparisonTable from "@/components/seo/ComparisonTable";
