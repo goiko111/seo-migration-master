@@ -36,6 +36,7 @@ type Content = {
   useCases: { size: string; scenario: string; howLabel: string; how: string; result: string }[];
   intelLabel: string; intelTitle1: string; intelTitleHighlight: string; intelSubtitle: string;
   intelCards: IntelCard[];
+  posTitle: string; posSubtitle: string; posBullets: string[]; posCta: string;
   ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
   links: { label: string }[];
 };
@@ -106,6 +107,10 @@ const content: Record<string, Content> = {
       { title: "Estandarización inteligente", desc: "Permite definir referencias core, referencias por cluster y vinos específicos por local sin caer en una uniformidad rígida." },
       { title: "Oportunidades de compra y escalado", desc: "Ayuda a decidir qué vinos merece la pena expandir a más unidades, cuáles retirar, cuáles testear en piloto y dónde hay oportunidades de margen o rotación." },
     ],
+    posTitle: "Convierte el vino en una unidad de negocio gobernable a escala.",
+    posSubtitle: "Lo que hoy suele depender de intuición, hojas de cálculo o criterio desigual entre locales, Winerim lo transforma en una estrategia de grupo más medible, accionable y escalable.",
+    posBullets: ["Más control multiunidad", "Más coherencia comercial", "Más visibilidad sobre margen y rotación", "Mejor toma de decisiones de surtido", "Menos dependencia del talento individual"],
+    posCta: "Quiero ver cómo funciona para grupos",
     ctaLabel: "Para grupos", ctaTitle1: "Optimiza la gestión del vino en ", ctaTitleHighlight: "todos tus restaurantes",
     ctaDesc: "Te mostramos cómo Winerim se adapta a la estructura de tu grupo. Demo personalizada con tu equipo.",
     ctaButton: "Solicitar demo",
@@ -176,6 +181,10 @@ const content: Record<string, Content> = {
       { title: "Smart standardization", desc: "Define core references, cluster-based selections, and venue-specific wines without falling into rigid uniformity." },
       { title: "Purchase & scaling opportunities", desc: "Decide which wines to expand to more units, which to retire, which to pilot-test, and where margin or rotation opportunities lie." },
     ],
+    posTitle: "Turn wine into a governable business unit at scale.",
+    posSubtitle: "What today often depends on intuition, spreadsheets, or uneven judgment between venues, Winerim transforms into a more measurable, actionable, and scalable group strategy.",
+    posBullets: ["More multi-unit control", "More commercial consistency", "More visibility on margin and rotation", "Better assortment decisions", "Less dependence on individual talent"],
+    posCta: "See how it works for groups",
     ctaLabel: "For groups", ctaTitle1: "Optimize wine management across ", ctaTitleHighlight: "all your restaurants",
     ctaDesc: "We'll show you how Winerim adapts to your group's structure. Personalized demo with your team.",
     ctaButton: "Request demo",
@@ -246,6 +255,10 @@ const content: Record<string, Content> = {
       { title: "Standardizzazione intelligente", desc: "Permette di definire referenze core, referenze per cluster e vini specifici per locale senza cadere in un'uniformità rigida." },
       { title: "Opportunità di acquisto e scaling", desc: "Aiuta a decidere quali vini espandere ad altri locali, quali ritirare, quali testare in pilota e dove ci sono opportunità di margine o rotazione." },
     ],
+    posTitle: "Trasforma il vino in un'unità di business governabile su scala.",
+    posSubtitle: "Ciò che oggi spesso dipende dall'intuizione, fogli di calcolo o criteri disomogenei tra i locali, Winerim lo trasforma in una strategia di gruppo più misurabile, azionabile e scalabile.",
+    posBullets: ["Più controllo multi-unità", "Più coerenza commerciale", "Più visibilità su margine e rotazione", "Migliori decisioni di assortimento", "Meno dipendenza dal talento individuale"],
+    posCta: "Scopri come funziona per i gruppi",
     ctaLabel: "Per i gruppi", ctaTitle1: "Ottimizza la gestione del vino in ", ctaTitleHighlight: "tutti i tuoi ristoranti",
     ctaDesc: "Ti mostriamo come Winerim si adatta alla struttura del tuo gruppo. Demo personalizzata con il tuo team.",
     ctaButton: "Richiedi demo",
@@ -316,6 +329,10 @@ const content: Record<string, Content> = {
       { title: "Standardisation intelligente", desc: "Permet de définir des références core, des références par cluster et des vins spécifiques par établissement sans tomber dans une uniformité rigide." },
       { title: "Opportunités d'achat et de scaling", desc: "Aide à décider quels vins étendre à d'autres établissements, lesquels retirer, lesquels tester en pilote et où se trouvent les opportunités de marge ou de rotation." },
     ],
+    posTitle: "Faites du vin une unité de gestion gouvernable à l'échelle.",
+    posSubtitle: "Ce qui repose aujourd'hui souvent sur l'intuition, des tableurs ou un jugement inégal entre établissements, Winerim le transforme en une stratégie de groupe plus mesurable, actionnable et évolutive.",
+    posBullets: ["Plus de contrôle multi-sites", "Plus de cohérence commerciale", "Plus de visibilité sur la marge et la rotation", "De meilleures décisions d'assortiment", "Moins de dépendance au talent individuel"],
+    posCta: "Voir comment ça marche pour les groupes",
     ctaLabel: "Pour les groupes", ctaTitle1: "Optimisez la gestion du vin dans ", ctaTitleHighlight: "tous vos restaurants",
     ctaDesc: "Nous vous montrons comment Winerim s'adapte à la structure de votre groupe. Démo personnalisée avec votre équipe.",
     ctaButton: "Demander une démo",
@@ -617,6 +634,36 @@ const GruposRestauracion = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* POSITIONING */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,hsl(var(--wine)/0.10),transparent_70%)]" />
+        </div>
+        <div className="relative max-w-4xl mx-auto">
+          <ScrollReveal>
+            <div className="rounded-3xl border border-wine/15 bg-gradient-to-br from-card/80 via-card/60 to-wine/[0.03] backdrop-blur-sm p-8 sm:p-12 md:p-16 text-center">
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold leading-tight mb-6">
+                {t.posTitle}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10 text-sm sm:text-base">
+                {t.posSubtitle}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 mb-10">
+                {t.posBullets.map((b, i) => (
+                  <div key={i} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border/60 bg-background/40 text-sm font-medium text-foreground/90">
+                    <CheckCircle size={14} className="text-wine shrink-0" />
+                    {b}
+                  </div>
+                ))}
+              </div>
+              <Link to={localePath("/demo")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+                {t.posCta} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
