@@ -262,7 +262,7 @@ const InteligenciaDinamica = () => {
               {/* Breadcrumbs */}
               <motion.div variants={fadeUp} custom={0} className="mb-6">
                 <Breadcrumbs items={[
-                  { label: "Producto", href: "/funcionalidades" },
+                  { label: "Software carta de vinos", href: "/software-carta-de-vinos" },
                   { label: "Inteligencia dinámica" },
                 ]} />
               </motion.div>
@@ -272,7 +272,7 @@ const InteligenciaDinamica = () => {
                 <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/15 bg-wine/5 backdrop-blur-sm">
                   <span className="w-1 h-1 rounded-full bg-wine/80" />
                   <span className="text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase text-wine/70">
-                    Inteligencia dinámica
+                    Nueva capa de IA táctica
                   </span>
                 </span>
               </motion.div>
@@ -283,10 +283,9 @@ const InteligenciaDinamica = () => {
                 custom={1}
                 className="font-heading text-center text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08] mb-8"
               >
-                Inteligencia artificial para restaurantes:
-                <br />
+                La carta que se adapta{" "}
                 <span className="text-gradient-wine">
-                  la carta de vinos que vende mejor.
+                  para vender mejor.
                 </span>
               </motion.h1>
 
@@ -294,9 +293,18 @@ const InteligenciaDinamica = () => {
               <motion.p
                 variants={fadeUp}
                 custom={2}
-                className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-14 leading-relaxed"
+                className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 leading-relaxed"
               >
-                Inteligencia dinámica es la capa de IA táctica de Winerim: un software para vender más vino que adapta visibilidad, recomendación, rotación de stock y optimización de margen en restaurantes según el contexto real del negocio.
+                Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, clima, afluencia y objetivo del restaurante.
+              </motion.p>
+
+              {/* Supporting phrase */}
+              <motion.p
+                variants={fadeUp}
+                custom={2}
+                className="text-center text-sm md:text-base text-wine/70 font-medium max-w-2xl mx-auto mb-14 italic"
+              >
+                No solo muestra vinos. Decide qué conviene impulsar en cada momento.
               </motion.p>
 
               {/* Highlights strip */}
