@@ -85,14 +85,14 @@ const Contacto = () => {
     const fd = new FormData(e.currentTarget);
     const leadData = {
       form_type: "contacto",
-      restaurant: fd.get("restaurant") as string || null,
-      name: fd.get("name") as string || null,
-      position: fd.get("position") as string || null,
-      phone: fd.get("phone") as string || null,
-      email: fd.get("email") as string || null,
-      city: fd.get("city") as string || null,
-      references_count: fd.get("references_count") as string || null,
-      message: fd.get("message") as string || null,
+      restaurant: (fd.get("restaurant") as string)?.trim() || null,
+      name: (fd.get("name") as string)?.trim() || null,
+      position: (fd.get("position") as string)?.trim() || null,
+      phone: (fd.get("phone") as string)?.trim() || null,
+      email: (fd.get("email") as string)?.trim() || null,
+      city: (fd.get("city") as string)?.trim() || null,
+      references_count: (fd.get("references_count") as string)?.trim() || null,
+      message: (fd.get("message") as string)?.trim() || null,
     };
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
@@ -122,7 +122,7 @@ const Contacto = () => {
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-3">
               <h2 className="font-heading text-2xl font-bold mb-8">{c.form_title}</h2>
               <form className="space-y-5" onSubmit={handleSubmit}>
-                <ContactFormFields native />
+                <ContactFormFields native variant="contact" />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
                 <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}

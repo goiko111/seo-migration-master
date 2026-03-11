@@ -5,9 +5,10 @@ import {
   ArrowRight, Upload, Link2, BarChart3, DollarSign, Layers,
   Utensils, Wine, TrendingUp, FileText, Target, Zap,
   CheckCircle2, AlertTriangle, ChevronRight, Users, Clock,
-  ShieldCheck, Eye, Lightbulb, XCircle, ArrowUpRight,
+  ShieldCheck, Eye, Lightbulb, XCircle,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,9 +21,12 @@ import ComparisonTable from "@/components/seo/ComparisonTable";
 import QuickAnswer from "@/components/seo/QuickAnswer";
 import FAQSection from "@/components/seo/FAQSection";
 import StickyCTA from "@/components/StickyCTA";
+import { referencesOptions, businessTypeOptions } from "@/components/ContactFormFields";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
+
+
 
 /* ── Data ── */
 const pains = [
@@ -158,13 +162,14 @@ const AnalizaCarta = () => {
     }
 
     const finalLink = uploadedUrl || menuLink || null;
-    const leadData = {
+    const leadData: Record<string, string | null> = {
       form_type: "analisis-carta",
       restaurant: restaurant || null,
       email: email || null,
       city: city || null,
       references_count: refsCount || null,
       menu_link: finalLink,
+      business_type: (fd.get("business_type") as string)?.trim() || null,
     };
     const { error } = await supabase.from("contact_leads").insert(leadData);
 
@@ -583,38 +588,82 @@ const AnalizaCarta = () => {
             <ScrollReveal delay={0.15}>
               <div className="bg-gradient-card rounded-2xl border border-border p-8 md:p-10 glow-wine">
                 <form className="space-y-5" onSubmit={handleSubmit}>
-                  <Input
-                    name="restaurant"
-                    placeholder="Nombre del restaurante *"
-                    required
-                    maxLength={100}
-                    className="bg-background border-border"
-                  />
-
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  {/* Restaurant */}
+                  <div>
+                    <Label htmlFor="restaurant" className="text-sm font-medium">
+                      Nombre del restaurante <span className="text-destructive">*</span>
+                    </Label>
                     <Input
-                      name="city"
-                      placeholder="Ciudad"
-                      maxLength={80}
-                      className="bg-background border-border"
-                    />
-                    <Input
-                      name="references_count"
-                      placeholder="Nº referencias aprox."
-                      maxLength={20}
-                      className="bg-background border-border"
+                      id="restaurant"
+                      name="restaurant"
+                      placeholder="Ej. Restaurante La Viña"
+                      required
+                      maxLength={100}
+                      className="bg-background border-border mt-1.5"
                     />
                   </div>
 
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="Email *"
-                    required
-                    maxLength={255}
-                    className="bg-background border-border"
-                  />
+                  {/* Email */}
+                  <div>
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Email <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="tu@restaurante.com"
+                      required
+                      maxLength={255}
+                      className="bg-background border-border mt-1.5"
+                    />
+                  </div>
 
+                  {/* City + References (optional but helpful) */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="city" className="text-sm font-medium">Ciudad</Label>
+                      <Input
+                        id="city"
+                        name="city"
+                        placeholder="Ej. Madrid"
+                        maxLength={80}
+                        className="bg-background border-border mt-1.5"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="references_count" className="text-sm font-medium">Nº de referencias</Label>
+                      <select
+                        id="references_count"
+                        name="references_count"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm mt-1.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        defaultValue=""
+                      >
+                        <option value="" disabled>Selecciona un rango</option>
+                        {referencesOptions.map(o => (
+                          <option key={o.value} value={o.value}>{o.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Business type (optional qualifier) */}
+                  <div>
+                    <Label htmlFor="business_type" className="text-sm font-medium">Tipo de negocio</Label>
+                    <select
+                      id="business_type"
+                      name="business_type"
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm mt-1.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>Selecciona tipo de negocio</option>
+                      {businessTypeOptions.map(o => (
+                        <option key={o.value} value={o.value}>{o.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Upload / Link toggle */}
                   <div className="flex gap-2">
                     <button
                       type="button"
@@ -664,13 +713,17 @@ const AnalizaCarta = () => {
                       />
                     </div>
                   ) : (
-                    <Input
-                      name="menu_link"
-                      type="url"
-                      placeholder="https://tu-restaurante.com/carta-de-vinos"
-                      maxLength={500}
-                      className="bg-background border-border"
-                    />
+                    <div>
+                      <Label htmlFor="menu_link" className="text-sm font-medium">URL de tu carta</Label>
+                      <Input
+                        id="menu_link"
+                        name="menu_link"
+                        type="url"
+                        placeholder="https://tu-restaurante.com/carta-de-vinos"
+                        maxLength={500}
+                        className="bg-background border-border mt-1.5"
+                      />
+                    </div>
                   )}
 
                   <Button

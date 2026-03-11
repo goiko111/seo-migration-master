@@ -70,42 +70,54 @@ export type Database = {
       }
       contact_leads: {
         Row: {
+          business_type: string | null
           city: string | null
           created_at: string
           email: string | null
           form_type: string
+          has_sommelier: string | null
           id: string
+          main_challenge: string | null
           menu_link: string | null
           message: string | null
           name: string | null
+          num_locations: string | null
           phone: string | null
           position: string | null
           references_count: string | null
           restaurant: string | null
         }
         Insert: {
+          business_type?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
           form_type?: string
+          has_sommelier?: string | null
           id?: string
+          main_challenge?: string | null
           menu_link?: string | null
           message?: string | null
           name?: string | null
+          num_locations?: string | null
           phone?: string | null
           position?: string | null
           references_count?: string | null
           restaurant?: string | null
         }
         Update: {
+          business_type?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
           form_type?: string
+          has_sommelier?: string | null
           id?: string
+          main_challenge?: string | null
           menu_link?: string | null
           message?: string | null
           name?: string | null
+          num_locations?: string | null
           phone?: string | null
           position?: string | null
           references_count?: string | null
