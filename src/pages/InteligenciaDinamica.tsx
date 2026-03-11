@@ -435,11 +435,11 @@ const InteligenciaDinamica = () => {
                     </div>
                     <ul className="space-y-5">
                       {[
-                        "Reordena con intención",
-                        "Prioriza según objetivo",
-                        "Activa estrategias por contexto real",
-                        "Empuja referencias clave",
-                        "Equilibra margen, stock y experiencia",
+                        "Prioriza con intención",
+                        "Reordena según objetivo",
+                        "Reacciona al servicio y al contexto",
+                        "Activa estrategias automáticamente",
+                        "Equilibra experiencia, margen y stock",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-3.5">
                           <CheckCircle size={16} className="mt-0.5 text-wine shrink-0" />
