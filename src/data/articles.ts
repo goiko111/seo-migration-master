@@ -830,6 +830,646 @@ Winerim transforma la carta de vinos en una experiencia visual, intuitiva e inte
 
 [**Solicita tu demo gratuita**](/demo)`,
   },
+  },
+
+  // ── BOFU cluster ──────────────────────────────────────────────
+
+  "mejor-software-carta-vinos-restaurante": {
+    slug: "mejor-software-carta-vinos-restaurante",
+    type: "blog",
+    category: "Software",
+    title: "Mejor software para carta de vinos de restaurante en 2025",
+    subtitle: "Análisis de las opciones disponibles, qué debe incluir un buen software de carta de vinos y cómo elegir según tu tipo de local.",
+    heroImage: "/src/assets/blog/carta-rentabilidad.jpg",
+    body: `¿Tu carta de vinos sigue siendo un PDF estático o una hoja de cálculo? En 2025, gestionar la carta con herramientas genéricas es perder dinero, tiempo y oportunidades de venta.
+
+## Qué es un software de carta de vinos
+
+Un software de carta de vinos es una herramienta digital diseñada específicamente para que restaurantes gestionen, presenten y optimicen su oferta de vinos. No es un menú digital genérico: es una solución vertical que entiende pricing, rotación, maridajes y stock vinícola.
+
+**En resumen:** es la diferencia entre una carta que informa y una carta que vende.
+
+## Qué debe incluir un buen software de carta de vinos
+
+No todos los softwares son iguales. Estos son los criterios mínimos para que la inversión tenga retorno:
+
+| Funcionalidad | Por qué importa |
+|---|---|
+| Carta digital interactiva | El cliente explora, filtra y descubre vinos sin depender del camarero |
+| Gestión de stock en tiempo real | Evita recomendar vinos agotados y controla la inversión en bodega |
+| Pricing dinámico | Calcula márgenes, detecta desfases y sugiere ajustes |
+| Maridajes automáticos | Conecta cada plato con vinos relevantes sin necesidad de sumiller |
+| Analítica de ventas | Saber qué se vende, qué no rota y dónde están las oportunidades |
+| Formación para sala | Fichas de producto y frases de venta para el equipo |
+
+## Tipos de solución disponibles
+
+### 1. Menús digitales genéricos
+Herramientas como QR menú o apps de carta digital que no distinguen entre un postre y un Gran Reserva. Sirven para mostrar, no para vender vino.
+
+**Limitación:** sin funcionalidades específicas de vino (maridajes, rotación, pricing por copa, stock).
+
+### 2. Software de gestión de bodega / inventario
+Herramientas de control de stock que gestionan entradas y salidas, pero no tienen capa de venta ni experiencia de cliente.
+
+**Limitación:** gestión interna sin impacto en la facturación.
+
+### 3. Software especializado en carta de vinos
+Soluciones verticales como Winerim que integran la gestión (stock, pricing, rotación) con la venta (carta digital, maridajes, recomendaciones) y la analítica (KPIs, rendimiento por referencia).
+
+**Ventaja:** cubren todo el ciclo del vino en el restaurante.
+
+## Cómo elegir según tu tipo de local
+
+- **Casual / gastrobar (15-25 referencias):** necesitas simplicidad y copa bien gestionada. Prioriza maridajes automáticos y control de merma.
+- **Restaurante medio (25-50 referencias):** necesitas analítica de rendimiento y pricing. El equipo de sala debe tener fichas de producto accesibles.
+- **Fine dining (50+ referencias):** necesitas profundidad en la carta digital, gestión de bodega avanzada y experiencia premium para el comensal.
+- **Grupos de restauración:** necesitas visibilidad multi-local, benchmarking y control centralizado de surtido.
+
+## Por qué Winerim es la referencia en software de carta de vinos
+
+Winerim es el único software del mercado que integra carta digital interactiva, gestión de stock, pricing dinámico, maridajes por IA, formación de equipo y analítica avanzada en una sola plataforma.
+
+No es un menú digital con extras. Es un sistema de gestión y venta de vino diseñado desde dentro del sector.
+
+## Preguntas frecuentes
+
+**¿Un software de carta de vinos sustituye al sumiller?**
+No sustituye la interacción humana, pero sí automatiza las tareas analíticas (selección, pricing, rotación) y potencia la recomendación en sala.
+
+**¿Cuánto cuesta un software de carta de vinos?**
+Depende de la solución. Los menús digitales genéricos cuestan entre 20-50€/mes pero no ofrecen funcionalidades de vino. Las soluciones especializadas como Winerim tienen planes adaptados al tamaño del local.
+
+**¿Necesito conocimientos técnicos para usarlo?**
+No. Winerim está diseñado para hosteleros, no para informáticos. La implementación es guiada y el equipo puede empezar a usarlo desde el primer día.
+
+**¿Funciona para restaurantes con pocas referencias?**
+Sí. De hecho, los restaurantes con 15-30 referencias son los que más se benefician, porque cada vino debe rendir al máximo.
+
+---
+
+→ [Solicitar demo gratuita de Winerim](/demo)
+→ [Analizar mi carta de vinos gratis](/analisis-carta)
+→ [Ver funcionalidades completas](/funcionalidades)
+→ [Comparativa: Winerim vs carta PDF](/comparativa/winerim-vs-carta-pdf-vinos)`,
+  },
+
+  "alternativa-carta-pdf-vinos-restaurante": {
+    slug: "alternativa-carta-pdf-vinos-restaurante",
+    type: "blog",
+    category: "Software",
+    title: "Alternativa a la carta PDF de vinos: por qué tu restaurante necesita algo mejor",
+    subtitle: "El PDF fue útil durante la pandemia. En 2025, es un freno para las ventas de vino. Analizamos las alternativas reales.",
+    heroImage: "/src/assets/blog/digital-vs-tradicional.jpg",
+    body: `La carta en PDF fue la solución de emergencia durante 2020. Cinco años después, muchos restaurantes siguen usándola como solución definitiva. Y eso tiene un coste directo en ventas de vino.
+
+## El problema con la carta PDF de vinos
+
+El PDF no fue diseñado para vender vino. Fue diseñado para compartir documentos. Cuando lo usas como carta de vinos, esto es lo que pasa:
+
+- **No es navegable:** el cliente hace scroll por un documento plano sin filtros, sin categorías, sin ayuda.
+- **No tiene maridajes:** el comensal no sabe qué vino pedir con su plato.
+- **No se actualiza en tiempo real:** cuando un vino se agota, sigue visible en el PDF hasta que alguien lo edite manualmente.
+- **No genera datos:** no sabes cuántos clientes lo abren, qué vinos miran o dónde abandonan.
+- **No vende:** informa, pero no recomienda, no guía, no convierte.
+
+**En resumen:** un PDF es una lista. No es una herramienta de venta.
+
+## Qué alternativas existen
+
+### 1. Carta impresa tradicional
+Ventaja: experiencia táctil, percepción premium.
+Limitación: no se actualiza, no tiene maridajes dinámicos, coste de impresión cada vez que cambias algo.
+
+### 2. Menú digital genérico (QR → web)
+Ventaja: se actualiza fácilmente, accesible desde el móvil.
+Limitación: diseñado para menús de comida, no entiende de vinos. Sin maridajes, sin filtros por estilo, sin pricing inteligente.
+
+### 3. Carta digital especializada en vinos (Winerim)
+Ventaja: diseñada desde cero para vender vino. Filtros por estilo, maridajes por plato, descripciones accesibles, stock en tiempo real, recomendaciones por IA.
+Limitación: requiere un cambio de mentalidad (de "informar" a "vender").
+
+## Comparativa rápida
+
+| Criterio | PDF | QR genérico | Winerim |
+|---|---|---|---|
+| Navegación y filtros | ✗ | Básica | Completa |
+| Maridajes automáticos | ✗ | ✗ | ✓ |
+| Stock en tiempo real | ✗ | ✗ | ✓ |
+| Analítica de uso | ✗ | Básica | Avanzada |
+| Pricing dinámico | ✗ | ✗ | ✓ |
+| Formación de equipo | ✗ | ✗ | ✓ |
+| Coste de mantenimiento | Bajo | Bajo | Medio |
+| Impacto en ventas | Nulo | Bajo | Alto |
+
+## Cuándo tiene sentido seguir con PDF
+
+Seamos honestos: el PDF puede tener sentido en casos muy concretos:
+- Restaurantes con menos de 10 referencias que cambian muy poco.
+- Locales donde la carta se entrega en mano y el camarero guía personalmente.
+- Negocios sin intención de optimizar la venta de vino.
+
+Si tu restaurante no encaja en estos perfiles, el PDF te está costando ventas.
+
+## Cómo migrar del PDF a una carta inteligente
+
+1. **Sube tu carta actual a Winerim:** en 24h tendrás tu carta digital con maridajes, filtros y descripciones.
+2. **Genera el QR:** coloca el QR en las mesas como ya hacías con el PDF.
+3. **Forma al equipo:** 15 minutos de briefing para que sepan explicar el cambio a los clientes.
+4. **Mide:** en una semana tendrás datos reales de qué vinos se consultan, cuáles se piden y cuáles se ignoran.
+
+## Preguntas frecuentes
+
+**¿Los clientes prefieren el PDF porque ya están acostumbrados?**
+Los clientes no prefieren el PDF. Prefieren encontrar rápido un buen vino. Si la alternativa es mejor, la adoptan inmediatamente.
+
+**¿Perderé la experiencia "premium" del papel?**
+Una carta digital bien diseñada transmite más profesionalidad que un PDF genérico. Y puedes mantener la carta impresa para quien la prefiera.
+
+**¿Cuánto tardo en migrar?**
+Con Winerim, menos de 48 horas. Subes tu carta, se genera la versión digital y compartes el QR.
+
+---
+
+→ [Solicitar demo gratuita](/demo)
+→ [Comparativa completa: Winerim vs PDF](/comparativa/winerim-vs-carta-pdf-vinos)
+→ [Ver funcionalidades de la carta digital](/funcionalidades)`,
+  },
+
+  "software-vino-por-copa-restaurantes": {
+    slug: "software-vino-por-copa-restaurantes",
+    type: "blog",
+    category: "Software",
+    title: "Software para gestionar vino por copa en restaurantes",
+    subtitle: "El vino por copa es la mayor oportunidad de venta en restauración. Pero sin control, es también la mayor fuente de pérdida. Un software especializado lo cambia todo.",
+    heroImage: "/src/assets/blog/vino-por-copa-botellas.jpg",
+    body: `El vino por copa puede representar entre el 30% y el 50% de la facturación de vino en un restaurante. Pero gestionarlo manualmente —pricing, merma, rotación, selección— convierte esa oportunidad en un riesgo financiero.
+
+## Por qué el vino por copa necesita software
+
+Gestionar copa no es lo mismo que gestionar botella. La copa introduce variables que la botella no tiene:
+
+- **Merma:** cada botella abierta pierde valor con el tiempo. Sin control, la merma puede llegar al 20%.
+- **Pricing complejo:** el PVP de la copa no es el precio de la botella dividido entre 5. Debe incluir merma, rotación y servicio.
+- **Rotación acelerada:** una copa que no se vende en 2-3 días se convierte en pérdida directa.
+- **Selección dinámica:** la oferta de copa debería cambiar cada 1-2 semanas para generar interés.
+
+Sin un sistema que controle estas variables, el margen del programa de copa se erosiona sin que nadie lo detecte.
+
+## Qué debe hacer un software de vino por copa
+
+| Funcionalidad | Sin software | Con Winerim |
+|---|---|---|
+| Calcular PVP por copa | Estimación manual | Automático (coste + merma + rotación) |
+| Controlar merma | No se mide | Registro de copas por botella |
+| Alertar rotación lenta | Nadie lo detecta | Alerta automática si < 3 copas/semana |
+| Sugerir selección | Criterio del sumiller | Basado en datos + perfil del local |
+| Comunicar al equipo | Briefing verbal | Fichas de producto + frase de venta |
+
+## El coste oculto de gestionar copa sin datos
+
+Ejemplo real: un restaurante con 6 copas abiertas, ticket medio de 4,50€/copa.
+
+- Si la merma es del 10% (estándar): margen bruto ~72%.
+- Si la merma es del 18% (habitual sin control): margen bruto ~61%.
+- Diferencia mensual en un restaurante con 40 servicios: **entre 400€ y 800€ de margen perdido.**
+
+Ese es el coste de no medir. No es catastrófico, pero acumulado en 12 meses supone entre 5.000€ y 10.000€ de margen que desaparece silenciosamente.
+
+## Cómo Winerim gestiona el vino por copa
+
+### Pricing automático
+Winerim calcula el PVP óptimo por copa considerando coste de botella, copas reales por botella (con merma), multiplicador objetivo y precio de la competencia.
+
+### Control de merma
+Registro de botellas abiertas y copas servidas. Winerim detecta cuándo la merma supera el umbral y alerta para investigar causas.
+
+### Rotación inteligente
+Alerta de copas con baja rotación (< 3 ventas/semana) y sugiere sustituciones basadas en el perfil del local y la estacionalidad.
+
+### Formación de equipo
+Ficha de producto para cada copa con descripción, maridaje y frase de venta sugerida. Actualizada automáticamente con cada cambio de selección.
+
+## Preguntas frecuentes
+
+**¿Necesito un sistema de preservación como Coravin para usar Winerim?**
+No es obligatorio, pero Winerim recomienda sistemas de preservación para copas premium (>12€/copa) donde la merma tiene más impacto financiero.
+
+**¿Cuántas copas debo tener abiertas?**
+Winerim recomienda entre 4 y 6 para empezar. Lo importante no es la cantidad, sino que cada copa rote y se venda.
+
+**¿El software detecta sobreservicio?**
+Sí. Si las copas servidas por botella son consistentemente inferiores a 4,5 (en botella de 75cl), Winerim alerta de posible sobreservicio.
+
+**¿Funciona para restaurantes sin programa de copa actual?**
+Especialmente. Winerim te ayuda a diseñar el programa desde cero: selección, pricing, formación y lanzamiento.
+
+---
+
+→ [Solicitar demo](/demo)
+→ [Calculadora de precio por copa](/herramientas/calculadora-precio-vino-por-copa)
+→ [Guía: vino por copa sin perder margen](/guias/como-implantar-vino-por-copa-sin-perder-margen)
+→ [Diagnóstico de vino por copa](/herramientas/diagnostico-vino-por-copa)`,
+  },
+
+  "como-mejorar-ticket-medio-vino-con-datos": {
+    slug: "como-mejorar-ticket-medio-vino-con-datos",
+    type: "blog",
+    category: "Estrategia",
+    title: "Cómo mejorar el ticket medio en vino con datos",
+    subtitle: "El ticket medio en vino no sube con presión comercial. Sube con datos que te dicen exactamente dónde están las oportunidades.",
+    heroImage: "/src/assets/blog/ticket-medio-vinos.jpg",
+    body: `El ticket medio en vino es el KPI más revelador de la salud comercial de tu carta. Y el más ignorado. La mayoría de restaurantes lo calculan de forma agregada (facturación de vino / número de mesas) y no profundizan más.
+
+Pero el ticket medio no es un número estático. Es el resultado de múltiples decisiones: qué vinos hay en carta, cómo están presentados, qué recomienda el equipo, qué precio tiene la copa, y si el comensal se siente cómodo pidiendo.
+
+## Qué datos necesitas para mejorar el ticket medio
+
+### 1. Ticket medio en vino por mesa (no global)
+El ticket medio global enmascara la realidad. Lo que necesitas es el ticket por mesa que pide vino. Si el 40% de tus mesas pide vino con un ticket de 18€, y el 60% no pide nada, tu media global será 7,20€. Pero el problema no es el ticket de 18€ — es el 60% que no pide.
+
+### 2. Distribución de ventas por tramo de precio
+¿Dónde se concentran las ventas? Si el 70% de tus ventas están en el tramo más barato de tu carta, tienes una oportunidad de redistribución.
+
+### 3. Ratio copa vs botella
+Las copas tienen un ticket unitario menor pero pueden aumentar el % de mesas que piden vino. El mix ideal depende de tu perfil de local.
+
+### 4. Top 5 y bottom 5 referencias
+Las 5 más vendidas definen tu ticket medio real. Las 5 menos vendidas te dicen dónde tienes capital inmovilizado sin retorno.
+
+### 5. Impacto de la recomendación
+¿Sube el ticket cuando el camarero recomienda? ¿Cuánto? Sin este dato, no sabes si tu equipo está ayudando o no.
+
+## 5 palancas basadas en datos para subir el ticket medio
+
+### Palanca 1: Ajustar la escalera de precios
+Si hay un hueco entre tu copa a 5€ y tu botella más barata a 22€, estás perdiendo al cliente que gastaría 8-10€ en una copa premium. Rellena el hueco.
+
+### Palanca 2: Copa premium como palanca
+Introduce una copa "especial" entre 8€ y 12€. No necesita venderse mucho: su función es anclar el valor percibido y hacer que la copa estándar de 5€ parezca una ganga.
+
+### Palanca 3: Maridaje sugerido
+Cada plato principal debería tener un vino sugerido. No como imposición, sino como facilitador. El dato: los restaurantes con maridajes visibles en carta venden un 15-25% más de vino.
+
+### Palanca 4: Recomendación activa del equipo
+Forma al equipo con una frase de venta por copa. "Con este plato va muy bien este Verdejo, ¿te sirvo una copa?" es más efectivo que cualquier otra acción de marketing.
+
+### Palanca 5: Eliminar barreras de entrada
+Si el vino más barato de tu carta es 18€/botella y tu ticket medio de comida es 25€/persona, estás pidiendo al cliente que gaste un 36% adicional solo en vino. Ofrece una copa de entrada a 4-5€ para captar mesas que hoy no piden.
+
+## Cómo Winerim te da estos datos
+
+Winerim calcula automáticamente el ticket medio por mesa, la distribución por tramo de precio, el ratio copa/botella y el rendimiento de cada referencia. Sin hojas de cálculo, sin estimaciones.
+
+Además, sugiere ajustes de pricing, selección de copa premium y maridajes basados en datos reales de tu restaurante.
+
+## Preguntas frecuentes
+
+**¿Cuál es un buen ticket medio en vino?**
+Depende del tipo de local. Como referencia: casual dining 6-10€/mesa, restaurante medio 12-20€/mesa, fine dining 25-50€/mesa. Lo importante no es el número absoluto, sino la tendencia.
+
+**¿Subir precios es la forma más rápida de subir el ticket?**
+No necesariamente. Subir precios sin dato puede bajar el volumen. La palanca más segura es aumentar el % de mesas que piden vino (a través de copa y recomendación).
+
+**¿Cuánto tarda en notarse el impacto?**
+Con ajustes de pricing y copa, en 2-4 semanas. Con formación de equipo, en 1-2 semanas. Los datos de Winerim permiten medir el impacto desde el primer día.
+
+---
+
+→ [Analizar mi carta gratis](/analisis-carta)
+→ [Solicitar demo de Winerim](/demo)
+→ [Guía: surtido según ticket medio](/guias/como-decidir-surtido-segun-ticket-medio-tipo-local)
+→ [Calculadora de margen de vino](/calculadora-margen-vino)`,
+  },
+
+  // ── MOFU cluster ──────────────────────────────────────────────
+
+  "errores-fijar-precios-vino-restaurante": {
+    slug: "errores-fijar-precios-vino-restaurante",
+    type: "blog",
+    category: "Pricing",
+    title: "7 errores al fijar precios del vino en un restaurante",
+    subtitle: "El pricing del vino es la decisión que más impacta en el margen de tu bodega. Y la que más restaurantes hacen por inercia.",
+    heroImage: "/src/assets/blog/precio-multiplicador.jpg",
+    body: `Fijar el precio del vino en un restaurante parece simple: coste × multiplicador = PVP. Pero esa simplicidad esconde errores que erosionan el margen sin que nadie lo detecte.
+
+Estos son los 7 errores más frecuentes que vemos en restaurantes reales.
+
+## Error 1: Usar un multiplicador único para toda la carta
+
+Aplicar el mismo ×3 a un vino de 4€ y a uno de 25€ genera resultados absurdos: el primero queda a 12€ (razonable) y el segundo a 75€ (probablemente invendible para tu perfil de local).
+
+**Qué hacer:** usa multiplicadores decrecientes por tramo. Los vinos de entrada pueden tener ×4-5; los premium, ×2-2,5. El margen absoluto es mayor en los caros incluso con multiplicador menor.
+
+## Error 2: No diferenciar pricing de copa y botella
+
+El precio de la copa NO es el precio de la botella ÷ 5. Debe incluir merma (10-15%), riesgo de oxidación y coste de servicio.
+
+**Regla práctica:** PVP copa = (coste botella / 4,5 copas reales) × multiplicador de copa (4x-5x).
+
+## Error 3: Ignorar la escalera de precios
+
+Si tu carta tiene vinos a 14€, 16€, 18€ y el siguiente a 38€, tienes un hueco que el cliente percibe como un salto injustificado. Las ventas se concentrarán en el tramo 14-18€ y el de 38€ no rotará.
+
+**Qué hacer:** construye tramos con incrementos progresivos del 30-40% entre cada escalón.
+
+## Error 4: No revisar los costes de compra periódicamente
+
+Los distribuidores ajustan precios sin avisar. Si tu coste de compra sube un 8% y no ajustas el PVP, tu margen bruto baja 2-3 puntos sin que lo notes.
+
+**Qué hacer:** verifica facturas mensualmente y recalcula márgenes de las referencias principales.
+
+## Error 5: Pricing emocional en lugar de analítico
+
+"Este vino me gusta mucho, lo dejo a buen precio." El pricing basado en preferencias personales ignora al cliente y al mercado. Un vino que te gusta pero tiene margen del 55% cuando tu objetivo es 68% te está costando dinero.
+
+## Error 6: No considerar el ticket medio del local
+
+Un restaurante con ticket medio de 30€/persona que pone vinos a 45€ está pidiéndole al cliente que gaste un 75% adicional solo en vino. Es desproporcionado para ese perfil de gasto.
+
+**Regla:** el vino más vendido debería costar entre el 30% y el 50% del ticket medio por persona.
+
+## Error 7: No tener vinos de entrada accesibles
+
+Eliminar los vinos "baratos" por percepción de calidad elimina también al cliente que habría empezado con una copa de 4€ y quizás habría acabado pidiendo una botella.
+
+**Qué hacer:** siempre ten 2-3 opciones de entrada atractivas. Su función no es generar margen, sino captar mesas que hoy no piden vino.
+
+## Cómo evitar estos errores
+
+Winerim calcula automáticamente el PVP óptimo de cada referencia considerando coste, multiplicador por tramo, ticket medio del local, escalera de precios y competencia. Sin hojas de cálculo, sin intuición.
+
+## Preguntas frecuentes
+
+**¿Cuál es el multiplicador ideal?**
+No hay uno único. Depende del tramo de precio, el tipo de local y la competencia. Como referencia: entrada ×4-5, medio ×3-3,5, premium ×2-2,5.
+
+**¿Cada cuánto debo revisar precios?**
+Mensualmente los costes de compra y trimestralmente la escalera completa de precios.
+
+**¿Cómo sé si un vino está demasiado caro para mi público?**
+Si vende menos de 3 unidades al mes y hay alternativas más baratas que sí rotan, probablemente el precio está por encima de lo que tu cliente acepta.
+
+---
+
+→ [Calculadora de margen de vino](/calculadora-margen-vino)
+→ [Guía: cómo poner precio al vino](/precio-vino-restaurante)
+→ [Analizador de carta gratuito](/analisis-carta)
+→ [Solicitar demo](/demo)`,
+  },
+
+  "como-saber-si-carta-vinos-esta-descompensada": {
+    slug: "como-saber-si-carta-vinos-esta-descompensada",
+    type: "blog",
+    category: "Analítica",
+    title: "Cómo saber si tu carta de vinos está descompensada",
+    subtitle: "Una carta descompensada no es una carta con malos vinos. Es una carta donde la distribución de estilos, precios o regiones no se ajusta a tu cliente real.",
+    heroImage: "/src/assets/blog/carta-sobrecargada.jpg",
+    body: `La mayoría de cartas de vinos se construyen por acumulación: se añaden vinos por relación con el distribuidor, por gusto personal, por tradición. Rara vez se diseñan con criterio de equilibrio.
+
+El resultado: cartas descompensadas que generan concentración de ventas en pocas referencias, stock muerto en las demás y una experiencia pobre para el cliente que no encuentra lo que busca.
+
+## Qué significa una carta descompensada
+
+Una carta descompensada tiene uno o más de estos desequilibrios:
+
+- **Por precio:** demasiados vinos en un tramo y huecos en otros. Ejemplo: 12 vinos entre 14-20€ y 2 vinos entre 25-35€.
+- **Por estilo:** exceso de un perfil (ej. tintos de crianza) y carencia de otro (ej. blancos frescos, rosados).
+- **Por región:** sobrerepresentación de una DO y ausencia de alternativas. 5 Ribera del Duero y 0 Bierzo.
+- **Por formato:** todo en botella, sin oferta de copa que capture al comensal indeciso.
+- **Por nivel de complejidad:** todo para expertos o todo para principiantes, sin gradación.
+
+## Los 6 síntomas de una carta descompensada
+
+Busca estas señales en tu carta:
+
+1. **Más del 60% de las ventas se concentran en menos del 20% de las referencias.** Esto indica que la mayoría de tu carta es invisible para el cliente.
+
+2. **Tienes referencias sin venta en más de 30 días.** Capital inmovilizado en vinos que nadie pide.
+
+3. **El equipo siempre recomienda los mismos 3-4 vinos.** Si tu carta tiene 40 referencias pero el equipo solo conoce 5, el resto no existe comercialmente.
+
+4. **Los clientes piden "el de la casa" o "el más barato".** No encuentran una opción que les encaje en la carta, así que eligen por defecto.
+
+5. **Tienes huecos de precio evidentes.** El salto entre la copa a 5€ y la botella más barata a 22€ deja fuera al cliente que gastaría 8-10€.
+
+6. **No hay estacionalidad.** La misma carta en enero que en julio. Sin adaptación a temperaturas, productos de temporada ni menús especiales.
+
+## Cómo diagnosticar el equilibrio de tu carta
+
+### Paso 1: Mapa de distribución por precio
+Clasifica todos tus vinos por tramo de precio (ej. 0-15€, 15-25€, 25-40€, 40€+). ¿La distribución se parece a una campana centrada en tu sweet spot? Si no, está descompensada.
+
+### Paso 2: Mapa de distribución por estilo
+¿Cuántos blancos, tintos, rosados, espumosos? ¿Dentro de los tintos, cuántos jóvenes vs crianza vs reserva? La distribución debería reflejar lo que tu cliente pide, no lo que tu distribuidor te ofrece.
+
+### Paso 3: Análisis de redundancia
+¿Hay 2+ vinos del mismo estilo, región y tramo de precio? Eso es canibalización, no diversidad.
+
+### Paso 4: Ratio copa vs botella
+¿Cuántas opciones de copa tienes? ¿Cubren los tramos de precio principales? La copa es la puerta de entrada al vino para el 40% de los comensales.
+
+## Cómo reequilibrar
+
+1. **Identifica los huecos:** ¿falta un blanco en el tramo 18-24€? ¿No hay copa premium? Cubre esos huecos primero.
+2. **Elimina redundancias:** si tienes 3 Ribera del Duero en el mismo rango, quédate con 1 y usa los otros huecos para diversificar.
+3. **Ajusta la estacionalidad:** más blancos y rosados en primavera/verano, más tintos estructurados en otoño/invierno.
+4. **Equilibra la complejidad:** asegura que hay opciones accesibles para el no-experto Y opciones interesantes para el entendido.
+
+## Preguntas frecuentes
+
+**¿Cuántas referencias debería tener por tramo de precio?**
+Depende del tamaño de tu carta. Como regla: 50-60% en el sweet spot, 20% en entrada, 15% en premium, 5-10% aspiracional.
+
+**¿Una carta descompensada siempre es un problema?**
+Si vendes todo lo que tienes con buenos márgenes, no. Pero eso casi nunca ocurre. La descompensación suele ir acompañada de stock muerto y concentración de ventas.
+
+**¿Winerim detecta desequilibrios automáticamente?**
+Sí. Winerim analiza tu carta por precio, estilo, región y formato, y te alerta de huecos, redundancias y oportunidades de reequilibrio.
+
+---
+
+→ [Analizador de carta gratuito](/analisis-carta)
+→ [Plantilla de equilibrio de carta](/recursos/plantilla-equilibrio-carta)
+→ [Guía: detectar canibalización](/guias/como-detectar-canibalizacion-vinos-carta)
+→ [Solicitar demo](/demo)`,
+  },
+
+  "que-vinos-ofrecer-por-copa-segun-tipo-local": {
+    slug: "que-vinos-ofrecer-por-copa-segun-tipo-local",
+    type: "blog",
+    category: "Copa",
+    title: "Qué vinos deberías ofrecer por copa según tu tipo de local",
+    subtitle: "La selección de copa no es un miniatura de tu carta de botellas. Es una oferta independiente que debe adaptarse a tu público, tu cocina y tu operativa.",
+    heroImage: "/src/assets/blog/vino-por-copa-botellas.jpg",
+    body: `No todos los restaurantes necesitan las mismas copas. Un gastrobar urbano con cocina de fusión no tiene los mismos clientes ni la misma operativa que un restaurante de mariscos en la costa. Sin embargo, la mayoría diseñan su oferta de copa por inercia: "el tinto de la casa, el blanco de la casa y poco más."
+
+## Por qué la selección de copa debe ser estratégica
+
+La copa es la puerta de entrada al vino para el 35-45% de los comensales que no pedirían botella. Si la selección no encaja con el perfil de tu local, pierdes esas ventas.
+
+Criterios que deben guiar la selección:
+- **Perfil de cliente:** ¿experto, curioso, indiferente? Cuanto menos experto, más accesible debe ser la copa.
+- **Tipo de cocina:** los maridajes naturales de tu carta de comida definen qué copas tienen más salida.
+- **Ticket medio:** determina el rango de precio aceptable para la copa.
+- **Operativa:** cuántos servicios haces, cuánto puedes controlar la merma, si tienes sistema de preservación.
+
+## Selección recomendada por tipo de local
+
+### Casual dining / gastrobar (ticket 20-35€)
+Perfil del cliente: joven-adulto, busca experiencia informal, sensible al precio.
+
+| Copa | Perfil | PVP sugerido |
+|---|---|---|
+| Espumoso | Cava brut o prosecco fresco | 4-5€ |
+| Blanco fresco | Verdejo, Albariño o Sauvignon Blanc | 4-5€ |
+| Tinto joven | Garnacha, Mencía o Monastrell | 4-5€ |
+| Copa especial rotativa | Referencia diferente cada 2 semanas | 6-8€ |
+
+**Total: 4 copas.** Prioriza rotación rápida y merma baja.
+
+### Restaurante de cocina de autor (ticket 40-65€)
+Perfil del cliente: foodie, abierto a descubrir, dispuesto a gastar más en experiencia.
+
+| Copa | Perfil | PVP sugerido |
+|---|---|---|
+| Espumoso | Corpinnat, Champagne de pequeño productor | 7-10€ |
+| Blanco con personalidad | Godello con crianza, Viognier, Riesling | 7-9€ |
+| Blanco fresco | Albariño, Txakoli, Picpoul | 6-7€ |
+| Tinto medio | Pinot Noir, Garnacha de altura, Nerello | 7-9€ |
+| Tinto con estructura | Tempranillo crianza, Syrah | 8-10€ |
+| Copa premium rotativa | Vino de autor, cosecha limitada | 12-16€ |
+
+**Total: 6 copas.** La copa premium justifica sistema de preservación.
+
+### Fine dining (ticket 70€+)
+Perfil del cliente: experto o aspiracional, valora la exclusividad.
+
+| Copa | Perfil | PVP sugerido |
+|---|---|---|
+| Champagne | Grower, vintage o cuvée | 14-22€ |
+| Blanco gran formato | Borgoña, Ribeiro con crianza | 10-14€ |
+| Blanco fresco | Chablis, Albariño premium | 8-11€ |
+| Tinto elegante | Borgoña, Rioja clásico, Barolo | 12-18€ |
+| Tinto potente | Ribera, Priorat, Napa | 10-16€ |
+| Copa de postre/generoso | Amontillado, Sauternes, PX | 8-12€ |
+| Copa del sommelier | Selección personal rotativa semanal | 15-25€ |
+
+**Total: 7 copas.** Sistema de preservación obligatorio para copas > 12€.
+
+### Hotel / resort
+Adapta la selección al perfil del restaurante dentro del hotel. El bar de piscina necesita copas frescas y fáciles (2-3 opciones). El restaurante gastronómico sigue el modelo de fine dining.
+
+## Errores comunes en la selección de copa
+
+- **Solo tinto y blanco "de la casa":** es como tener solo un primer plato y un segundo. Demasiado limitado.
+- **Copas idénticas a las botellas más baratas:** si el cliente puede pedir lo mismo en copa o en botella, la copa canibaliza la botella sin aportar valor.
+- **No rotar:** la misma copa durante 6 meses pierde todo interés narrativo.
+- **Copas que no maridajan con tu cocina:** un restaurante de sushi con copa de Ribera del Duero crianza es un desajuste evidente.
+
+## Preguntas frecuentes
+
+**¿Puedo ofrecer el mismo vino en copa y en botella?**
+Sí, pero con estrategia. La copa funciona como prueba: el cliente cata por copa y, si le gusta, pide botella. No pongas en copa tu botella más barata — pon una que quieras que el cliente descubra.
+
+**¿Cada cuánto debo rotar las copas?**
+Copa estándar: cada 2-4 semanas. Copa premium/especial: puede ser semanal. La rotación genera narrativa para el equipo y curiosidad para el cliente.
+
+**¿Cuántas copas son demasiadas?**
+Si tienes más copas abiertas de las que puedes vender en 2 días, son demasiadas. Empieza con 4 y sube según datos de rotación.
+
+---
+
+→ [Calculadora de precio por copa](/herramientas/calculadora-precio-vino-por-copa)
+→ [Guía: vino por copa sin perder margen](/guias/como-implantar-vino-por-copa-sin-perder-margen)
+→ [Diagnóstico de vino por copa](/herramientas/diagnostico-vino-por-copa)
+→ [Solicitar demo](/demo)`,
+  },
+
+  "cuando-carta-vinos-es-demasiado-larga": {
+    slug: "cuando-carta-vinos-es-demasiado-larga",
+    type: "blog",
+    category: "Analítica",
+    title: "Cuándo una carta de vinos es demasiado larga (y qué hacer al respecto)",
+    subtitle: "Más referencias no significa mejor carta. Significa más complejidad, más stock inmovilizado y más decisiones difíciles para tu cliente.",
+    heroImage: "/src/assets/blog/demasiadas-referencias.jpg",
+    body: `Existe un mito persistente en hostelería: cuantos más vinos tenga la carta, más profesional parece el restaurante. Pero los datos cuentan otra historia.
+
+## Cuándo una carta es demasiado larga
+
+No hay un número mágico, pero hay señales claras:
+
+- **Más del 25% de las referencias no se han vendido en 30 días.** Si 1 de cada 4 vinos no rota, tu carta tiene exceso de oferta.
+- **El equipo de sala solo conoce el 10-15% de la carta.** Si tienes 60 referencias y tu equipo conoce 8, las otras 52 son invisibles comercialmente.
+- **El comensal tarda más de 3 minutos en elegir y acaba pidiendo "lo de siempre."** La parálisis de elección es real y medible.
+- **Tu stock inmovilizado supera el 20% del valor total de bodega.** Capital que no rota es capital que no trabaja.
+
+## Los costes ocultos de una carta demasiado larga
+
+### Coste de stock
+Cada referencia adicional es capital inmovilizado. Si tienes 60 referencias con una media de 6 botellas cada una a 8€/botella de coste, son 2.880€ en bodega. Si el 25% no rota, son 720€ de capital muerto.
+
+### Coste de gestión
+Más referencias = más pedidos, más control de stock, más relación con distribuidores, más actualizaciones de carta. Tiempo que no dedicas a vender.
+
+### Coste de merma
+En vino por copa, cada referencia abierta es un reloj en marcha. Más copas abiertas sin rotación = más merma.
+
+### Coste de decisión del cliente
+La paradoja de la elección: con demasiadas opciones, el cliente no elige mejor — elige peor. Se refugia en lo seguro (el más barato, el que ya conoce) o directamente no pide vino.
+
+## Cuántas referencias necesitas realmente
+
+| Tipo de local | Referencias recomendadas |
+|---|---|
+| Casual / gastrobar | 15-25 |
+| Restaurante medio | 25-45 |
+| Restaurante gastronómico | 40-80 |
+| Fine dining con bodega | 80-150+ |
+
+**Importante:** estos números incluyen copa. Un casual con 20 botellas y 4 copas tiene 24 referencias totales.
+
+## El test de las 3 preguntas
+
+Para cada referencia de tu carta, hazte estas 3 preguntas:
+
+1. **¿Se ha vendido en los últimos 30 días?** Si no, es candidata a salir.
+2. **¿Mi equipo puede explicarla en 15 segundos?** Si no, es invisible.
+3. **¿Aporta algo que ninguna otra referencia aporta?** Si no, es redundante.
+
+Si la respuesta a las 3 preguntas es "no", esa referencia debería salir de tu carta.
+
+## Cómo reducir sin empobrecer
+
+Reducir la carta no es quitar vinos al azar. Es optimizar:
+
+1. **Elimina redundancias:** si tienes 3 Ribera del Duero crianza entre 20-28€, quédate con 1.
+2. **Cubre huecos:** usa los espacios liberados para cubrir estilos o tramos de precio que faltan.
+3. **Prioriza rotación:** cada referencia que quede debe venderse al menos 3-4 veces al mes.
+4. **Refuerza la copa:** menos botellas, más opciones de copa bien rotadas.
+5. **Estacionaliza:** rota 5-10 referencias cada temporada para mantener la carta viva sin inflarla.
+
+## Preguntas frecuentes
+
+**¿Reducir la carta no da imagen de menos profesionalidad?**
+Al contrario. Una carta curada, donde cada vino tiene una razón de estar, transmite más criterio que una carta inflada con vinos que nadie conoce.
+
+**¿Cuántos vinos debo quitar?**
+Empieza por los que no se han vendido en 60 días y no tienen justificación estratégica. Suele ser entre el 15% y el 25% de la carta.
+
+**¿Qué hago con el stock de los vinos que saco?**
+Liquídalos: copa especial, menú degustación, evento en el restaurante, oferta a empleados. No los dejes acumulando polvo.
+
+**¿Winerim me ayuda a decidir qué quitar?**
+Sí. Winerim identifica automáticamente las referencias con baja rotación, márgenes insuficientes y redundancias con otras referencias de tu carta.
+
+---
+
+→ [Analizador de carta gratuito](/analisis-carta)
+→ [Guía: detectar canibalización](/guias/como-detectar-canibalizacion-vinos-carta)
+→ [Guía: cuántos vinos debe tener una carta](/blog/cuantos-vinos-carta-restaurante)
+→ [Solicitar demo](/demo)`,
+  },
 };
 
 // Helper to get all articles as array
