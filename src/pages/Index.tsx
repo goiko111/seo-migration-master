@@ -1,13 +1,11 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import HeroSection from "@/components/landing/HeroSection";
-import LogoStrip from "@/components/LogoStrip";
-import { PageContentProvider } from "@/contexts/PageContentContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-// Lazy load below-fold sections — only render when needed
+// Lazy load everything below the fold
+const LogoStrip = lazy(() => import("@/components/LogoStrip"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
 const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
@@ -18,6 +16,7 @@ const TestimonialsSection = lazy(() => import("@/components/landing/Testimonials
 const VideoSection = lazy(() => import("@/components/VideoSection"));
 const DefinitionSection = lazy(() => import("@/components/landing/DefinitionSection"));
 const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const SectionFallback = () => (
   <div className="min-h-[200px]" />
@@ -35,27 +34,35 @@ const Index = () => {
         hreflang={allLangPaths("/")}
       />
       <Navbar />
-      <PageContentProvider page="home">
-        <main>
-          {/* Above the fold — eagerly loaded */}
-          <HeroSection />
+      <main>
+        {/* Above the fold — eagerly loaded, no framer-motion */}
+        <HeroSection />
+        {/* Below the fold — lazy loaded in groups */}
+        <Suspense fallback={<SectionFallback />}>
           <LogoStrip />
-          {/* Below the fold — lazy loaded */}
-          <Suspense fallback={<SectionFallback />}>
-            <ProblemSection />
-            <SolutionSection />
-            <FeaturesPreview />
-            <DynamicIntelligenceTeaser />
-            <ResultsSection />
-            <HowItWorksSection />
-            <TestimonialsSection />
-            <DefinitionSection />
-            <VideoSection />
-            <FinalCTASection />
-          </Suspense>
-        </main>
-      </PageContentProvider>
-      <Footer />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <ProblemSection />
+          <SolutionSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <FeaturesPreview />
+          <DynamicIntelligenceTeaser />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <ResultsSection />
+          <HowItWorksSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <TestimonialsSection />
+          <DefinitionSection />
+          <VideoSection />
+          <FinalCTASection />
+        </Suspense>
+      </main>
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
