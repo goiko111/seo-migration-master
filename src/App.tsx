@@ -49,6 +49,9 @@ const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const Hoteles = lazy(() => import("./pages/Hoteles"));
 const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller"));
+const RestaurantesGastronomicos = lazy(() => import("./pages/RestaurantesGastronomicos"));
+const WineBars = lazy(() => import("./pages/WineBars"));
+const CartaAmplia = lazy(() => import("./pages/CartaAmplia"));
 const Implantacion = lazy(() => import("./pages/Implantacion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
@@ -157,6 +160,9 @@ const esRoutes = (
     <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
     <Route path="/soluciones/hoteles" element={<Hoteles />} />
     <Route path="/soluciones/restaurantes-sin-sumiller" element={<RestauranteSinSumiller />} />
+    <Route path="/soluciones/restaurantes-gastronomicos" element={<RestaurantesGastronomicos />} />
+    <Route path="/soluciones/wine-bars" element={<WineBars />} />
+    <Route path="/soluciones/carta-amplia" element={<CartaAmplia />} />
     <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
     <Route path="/implantacion" element={<Implantacion />} />
     <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
