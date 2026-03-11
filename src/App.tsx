@@ -193,6 +193,8 @@ const esRoutes = (
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
+    <Route path="/herramientas/calculadora-ticket-medio-vino" element={<CalculadoraTicketMedio />} />
+    <Route path="/herramientas/auditor-carta-multilocal" element={<AuditorMultiLocal />} />
     <Route path="/soluciones" element={<Soluciones />} />
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
