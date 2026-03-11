@@ -204,6 +204,17 @@ const content: Record<string, Content> = {
       { title: "Ottimizzazione dell'offerta", desc: "Identifica duplicati, lacune e opportunità in ogni carta. Adatta la selezione al profilo di ogni locale." },
       { title: "Esperienza cliente migliorata", desc: "Carte digitali con abbinamenti, schede vino e raccomandazioni intelligenti in tutti i tuoi ristoranti." },
     ],
+    capLabel: "Capacità per gruppi",
+    capTitle: "Cosa può fare Winerim per un gruppo",
+    capSubtitle: "Un livello di intelligenza per governare il vino su larga scala, non come locali isolati.",
+    capCards: [
+      { title: "Confrontare le unità", desc: "Confrontare performance, rotazione, margini e comportamento del vino tra i locali." },
+      { title: "Rilevare opportunità invisibili", desc: "Trovare referenze sottoutilizzate, lacune di pricing, cannibalizzazione e stock immobilizzato." },
+      { title: "Decidere cosa replicare", desc: "Identificare quali vini, formati o strategie vale la pena scalare nel resto del gruppo." },
+      { title: "Adattare per tipologia di locale", desc: "Non applicare la stessa logica a fine dining, casual premium, hotel urbano o destinazione turistica." },
+      { title: "Professionalizzare la categoria", desc: "Ridurre la dipendenza dal criterio individuale di ogni direttore o sommelier." },
+      { title: "Attivare regole per brand o unità", desc: "Definire priorità diverse in base a obiettivo di business, marchio, città o tipo di cliente." },
+    ],
     featLabel: "Funzionalità", featTitle1: "Progettato per ", featTitleHighlight: "scalare",
     features: [
       { title: "Gestione multi-locale", desc: "Dashboard centrale con vista su tutti i ristoranti. Filtra, confronta e agisci da un unico pannello." },
