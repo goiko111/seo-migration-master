@@ -134,6 +134,17 @@ const content: Record<string, Content> = {
       { title: "Offer optimization", desc: "Identify duplicates, gaps, and opportunities in each list. Adapt selection to each venue's profile." },
       { title: "Enhanced customer experience", desc: "Digital lists with pairings, wine cards, and smart recommendations across all your restaurants." },
     ],
+    capLabel: "Capabilities for groups",
+    capTitle: "What Winerim can do for a group",
+    capSubtitle: "An intelligence layer to govern wine at scale, not as isolated venues.",
+    capCards: [
+      { title: "Compare units", desc: "Compare performance, rotation, margins, and wine behavior across venues." },
+      { title: "Detect invisible opportunities", desc: "Find underexploited references, pricing gaps, cannibalization, and immobilized stock." },
+      { title: "Decide what to replicate", desc: "Identify which wines, formats, or strategies are worth scaling across the group." },
+      { title: "Adapt by venue type", desc: "Don't apply the same logic to fine dining, casual premium, urban hotel, or tourist destination." },
+      { title: "Professionalize the category", desc: "Reduce dependence on individual judgment of each director or sommelier." },
+      { title: "Activate rules by brand or unit", desc: "Define different priorities based on business objective, brand, city, or customer type." },
+    ],
     featLabel: "Features", featTitle1: "Designed to ", featTitleHighlight: "scale",
     features: [
       { title: "Multi-venue management", desc: "Central dashboard with a view of all restaurants. Filter, compare, and act from one panel." },
