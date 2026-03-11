@@ -28,6 +28,7 @@ type Content = {
   advantages: { title: string; desc: string }[];
   capLabel: string; capTitle: string; capSubtitle: string;
   capCards: CapCard[];
+  benchLabel: string; benchTitle: string; benchSubtitle: string; benchMetrics: string[]; benchClosing: string;
   featLabel: string; featTitle1: string; featTitleHighlight: string;
   features: { title: string; desc: string }[];
   impactLabel: string; impactTitle1: string; impactTitleHighlight: string;
