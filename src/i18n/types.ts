@@ -90,6 +90,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/terminos": "/fr/conditions",
     "/soluciones/grupos-restauracion": "/fr/solutions/groupes-restauration",
     "/soluciones/aumentar-ticket-medio-restaurante": "/fr/solutions/augmenter-ticket-moyen",
+    "/producto/inteligencia-dinamica": "/fr/produit/intelligence-dynamique",
   },
 };
 

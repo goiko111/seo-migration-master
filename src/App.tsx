@@ -81,6 +81,7 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
+// InteligenciaDinamica is also used in langRoutes below
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));

@@ -743,7 +743,7 @@ const InteligenciaDinamica = () => {
 
             <ScrollReveal>
               <p className="text-center text-muted-foreground/50 text-sm mt-10 italic">
-                Más módulos en desarrollo: PairingRIM™, TrendRIM™, CompetitorRIM™…
+                Más módulos disponibles: CleanRIM™, CalendarRIM™, MixRIM™, LocalRIM™, ClientRIM™.
               </p>
             </ScrollReveal>
           </div>
