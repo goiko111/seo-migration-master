@@ -42,6 +42,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/terminos": "/en/terms",
     "/soluciones/grupos-restauracion": "/en/solutions/restaurant-groups",
     "/soluciones/aumentar-ticket-medio-restaurante": "/en/solutions/increase-average-ticket",
+    "/producto/inteligencia-dinamica": "/en/product/dynamic-intelligence",
   },
   it: {
     "/": "/it",
@@ -65,6 +66,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/terminos": "/it/termini",
     "/soluciones/grupos-restauracion": "/it/soluzioni/gruppi-ristorazione",
     "/soluciones/aumentar-ticket-medio-restaurante": "/it/soluzioni/aumentare-scontrino-medio",
+    "/producto/inteligencia-dinamica": "/it/prodotto/intelligenza-dinamica",
   },
   fr: {
     "/": "/fr",
@@ -88,6 +90,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/terminos": "/fr/conditions",
     "/soluciones/grupos-restauracion": "/fr/solutions/groupes-restauration",
     "/soluciones/aumentar-ticket-medio-restaurante": "/fr/solutions/augmenter-ticket-moyen",
+    "/producto/inteligencia-dinamica": "/fr/produit/intelligence-dynamique",
   },
 };
 

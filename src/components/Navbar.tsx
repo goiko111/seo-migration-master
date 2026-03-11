@@ -14,7 +14,7 @@ const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
-  const { t, localePath } = useLanguage();
+  const { t, localePath, lang } = useLanguage();
 
   const navItems = [
     { label: t.nav_home, href: localePath("/") },
@@ -24,7 +24,7 @@ const Navbar = () => {
       dropdown: [
         { label: t.nav_software, href: localePath("/software-carta-de-vinos") },
         { label: t.nav_features, href: localePath("/funcionalidades") },
-        { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: "Nuevo" },
+        { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: lang === "es" ? "Nuevo" : lang === "en" ? "New" : lang === "it" ? "Nuovo" : "Nouveau" },
         { label: t.nav_integrations, href: localePath("/integraciones") },
         { label: t.nav_pricing, href: localePath("/precios") },
         { label: t.nav_case_studies, href: localePath("/casos-exito") },

@@ -81,6 +81,7 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
+// InteligenciaDinamica is also used in langRoutes below
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
@@ -228,6 +229,9 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/what-is-winerim`} element={<WhatIsWinerim />} />
     <Route path={`${prefix}/cose-winerim`} element={<QueEsWinerim />} />
     <Route path={`${prefix}/quest-ce-que-winerim`} element={<QueEsWinerim />} />
+    <Route path={`${prefix}/product/dynamic-intelligence`} element={<InteligenciaDinamica />} />
+    <Route path={`${prefix}/prodotto/intelligenza-dinamica`} element={<InteligenciaDinamica />} />
+    <Route path={`${prefix}/produit/intelligence-dynamique`} element={<InteligenciaDinamica />} />
     <Route path={`${prefix}/privacy`} element={<Privacidad />} />
     <Route path={`${prefix}/confidentialite`} element={<Privacidad />} />
     <Route path={`${prefix}/terms`} element={<Terminos />} />

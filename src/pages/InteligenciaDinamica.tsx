@@ -33,7 +33,7 @@ const objectiveCards = [
     icon: DollarSign,
     title: "Aumentar facturación",
     desc: "Empuja referencias rentables y mejora la venta guiada en momentos clave.",
-    modules: ["FocusRIM™", "BoostRIM™", "SmartRIM™"],
+    modules: ["FocusRIM™", "MarginRIM™", "SmartRIM™"],
     gradient: "from-emerald-500/20 via-emerald-500/5 to-transparent",
     iconColor: "text-emerald-400",
     iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
@@ -43,27 +43,17 @@ const objectiveCards = [
     icon: TrendingUp,
     title: "Aumentar ticket medio",
     desc: "Prioriza vinos premium, en prime y con mejor capacidad de upselling.",
-    modules: ["PrimeRIM™", "UpRIM™", "SmartRIM™"],
+    modules: ["PrimeRIM™", "MarginRIM™", "SmartRIM™"],
     gradient: "from-amber-500/20 via-amber-500/5 to-transparent",
     iconColor: "text-amber-400",
     iconBg: "bg-amber-500/10 group-hover:bg-amber-500/20",
     borderHover: "hover:border-amber-500/30",
   },
   {
-    icon: Target,
-    title: "Maximizar margen",
-    desc: "Reordena y destaca referencias con mayor contribución al negocio.",
-    modules: ["MarginRIM™", "FocusRIM™", "PriceRIM™"],
-    gradient: "from-wine/20 via-wine/5 to-transparent",
-    iconColor: "text-wine",
-    iconBg: "bg-wine/10 group-hover:bg-wine/20",
-    borderHover: "hover:border-wine/30",
-  },
-  {
     icon: RefreshCw,
     title: "Aumentar rotación",
     desc: "Da salida a vinos lentos, sobrestock o referencias con riesgo de quedar paradas.",
-    modules: ["RotaRIM™", "BoostRIM™", "StockRIM™"],
+    modules: ["StockRIM™", "ClimateRIM™", "CleanRIM™"],
     gradient: "from-blue-500/20 via-blue-500/5 to-transparent",
     iconColor: "text-blue-400",
     iconBg: "bg-blue-500/10 group-hover:bg-blue-500/20",
@@ -73,7 +63,7 @@ const objectiveCards = [
     icon: Activity,
     title: "Limpiar bodega",
     desc: "Activa acciones específicas para mover últimas unidades, vinos fuera de foco o stock inmovilizado.",
-    modules: ["CleanRIM™", "StockRIM™", "RotaRIM™"],
+    modules: ["CleanRIM™", "StockRIM™", "SmartRIM™"],
     gradient: "from-rose-500/20 via-rose-500/5 to-transparent",
     iconColor: "text-rose-400",
     iconBg: "bg-rose-500/10 group-hover:bg-rose-500/20",
@@ -83,7 +73,7 @@ const objectiveCards = [
     icon: Zap,
     title: "Carta viva / dinámica",
     desc: "Hace que la carta evolucione con ritmo, equilibrio y sensación de descubrimiento continuo.",
-    modules: ["SmartRIM™", "FocusRIM™", "SeasonRIM™"],
+    modules: ["MixRIM™", "CalendarRIM™", "SmartRIM™"],
     gradient: "from-violet-500/20 via-violet-500/5 to-transparent",
     iconColor: "text-violet-400",
     iconBg: "bg-violet-500/10 group-hover:bg-violet-500/20",
@@ -272,7 +262,7 @@ const InteligenciaDinamica = () => {
               {/* Breadcrumbs */}
               <motion.div variants={fadeUp} custom={0} className="mb-6">
                 <Breadcrumbs items={[
-                  { label: "Producto", href: "/funcionalidades" },
+                  { label: "Software carta de vinos", href: "/software-carta-de-vinos" },
                   { label: "Inteligencia dinámica" },
                 ]} />
               </motion.div>
@@ -282,7 +272,7 @@ const InteligenciaDinamica = () => {
                 <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-wine/15 bg-wine/5 backdrop-blur-sm">
                   <span className="w-1 h-1 rounded-full bg-wine/80" />
                   <span className="text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase text-wine/70">
-                    Inteligencia dinámica
+                    Nueva capa de IA táctica
                   </span>
                 </span>
               </motion.div>
@@ -293,10 +283,9 @@ const InteligenciaDinamica = () => {
                 custom={1}
                 className="font-heading text-center text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08] mb-8"
               >
-                Inteligencia artificial para restaurantes:
-                <br />
+                La carta que se adapta{" "}
                 <span className="text-gradient-wine">
-                  la carta de vinos que vende mejor.
+                  para vender mejor.
                 </span>
               </motion.h1>
 
@@ -304,9 +293,18 @@ const InteligenciaDinamica = () => {
               <motion.p
                 variants={fadeUp}
                 custom={2}
-                className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-14 leading-relaxed"
+                className="text-center text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 leading-relaxed"
               >
-                Inteligencia dinámica es la capa de IA táctica de Winerim: un software para vender más vino que adapta visibilidad, recomendación, rotación de stock y optimización de margen en restaurantes según el contexto real del negocio.
+                Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, clima, afluencia y objetivo del restaurante.
+              </motion.p>
+
+              {/* Supporting phrase */}
+              <motion.p
+                variants={fadeUp}
+                custom={2}
+                className="text-center text-sm md:text-base text-wine/70 font-medium max-w-2xl mx-auto mb-14 italic"
+              >
+                No solo muestra vinos. Decide qué conviene impulsar en cada momento.
               </motion.p>
 
               {/* Highlights strip */}
@@ -745,7 +743,7 @@ const InteligenciaDinamica = () => {
 
             <ScrollReveal>
               <p className="text-center text-muted-foreground/50 text-sm mt-10 italic">
-                Más módulos en desarrollo: PairingRIM™, TrendRIM™, CompetitorRIM™…
+                Más módulos disponibles: CleanRIM™, CalendarRIM™, MixRIM™, LocalRIM™, ClientRIM™.
               </p>
             </ScrollReveal>
           </div>

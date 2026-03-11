@@ -796,12 +796,11 @@ const Funcionalidades = () => {
               <span className="text-xs font-semibold tracking-widest uppercase text-accent">{c.coming_soon}</span>
             </div>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
+          <div className="grid sm:grid-cols-3 gap-5">
+          {[
               { icon: MessageSquare, title: lang === "es" ? "Solicitar al sumiller" : lang === "en" ? "Request sommelier" : lang === "it" ? "Richiedere sommelier" : "Demander sommelier", desc: lang === "es" ? "Pide ayuda al sumiller directamente desde la carta." : lang === "en" ? "Ask the sommelier for help right from the list." : lang === "it" ? "Chiedi aiuto al sommelier dalla carta." : "Demandez au sommelier depuis la carte." },
               { icon: Share2, title: lang === "es" ? "Compartir selección" : lang === "en" ? "Share selection" : lang === "it" ? "Condividere selezione" : "Partager sélection", desc: lang === "es" ? "Comparte tu selección de vinos por QR o link." : lang === "en" ? "Share your wine selection via QR or link." : lang === "it" ? "Condividi la tua selezione via QR o link." : "Partagez votre sélection via QR ou lien." },
               { icon: GraduationCap, title: lang === "es" ? "Modo educación" : lang === "en" ? "Education mode" : lang === "it" ? "Modalità educazione" : "Mode éducation", desc: lang === "es" ? "Tips y curiosidades sobre cada vino mientras exploras." : lang === "en" ? "Tips and curiosities about each wine as you explore." : lang === "it" ? "Tips e curiosità su ogni vino mentre esplori." : "Tips et curiosités sur chaque vin en explorant." },
-              { icon: Target, title: "FocusRIM", desc: lang === "es" ? "Módulos de IA para empujar las referencias más rentables." : lang === "en" ? "AI modules to push the most profitable references." : lang === "it" ? "Moduli IA per spingere le referenze più redditizie." : "Modules IA pour pousser les références les plus rentables." },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
