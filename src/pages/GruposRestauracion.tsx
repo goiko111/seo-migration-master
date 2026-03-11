@@ -637,6 +637,36 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      {/* POSITIONING */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,hsl(var(--wine)/0.10),transparent_70%)]" />
+        </div>
+        <div className="relative max-w-4xl mx-auto">
+          <ScrollReveal>
+            <div className="rounded-3xl border border-wine/15 bg-gradient-to-br from-card/80 via-card/60 to-wine/[0.03] backdrop-blur-sm p-8 sm:p-12 md:p-16 text-center">
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold leading-tight mb-6">
+                {t.posTitle}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10 text-sm sm:text-base">
+                {t.posSubtitle}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 mb-10">
+                {t.posBullets.map((b, i) => (
+                  <div key={i} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border/60 bg-background/40 text-sm font-medium text-foreground/90">
+                    <CheckCircle size={14} className="text-wine shrink-0" />
+                    {b}
+                  </div>
+                ))}
+              </div>
+              <Link to={localePath("/demo")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+                {t.posCta} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto text-center">
