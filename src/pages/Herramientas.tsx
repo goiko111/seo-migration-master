@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search } from "lucide-react";
+import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -32,6 +32,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "Generador de maridajes con IA", desc: "Genera sugerencias de maridaje con IA. Con Winerim, tus camareros reciben recomendaciones automáticas en cada servicio.", tag: "IA" },
       { to: "/wine-roi-calculator", title: "Calculadora de ROI", desc: "Calcula cuánto puedes ganar digitalizando tu carta. Nuestros clientes incrementan sus ventas de vino una media del 30%.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark de cartas de vinos", desc: "Compara tu carta con los estándares del sector. Winerim te envía informes automáticos con tu posición competitiva.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vino por copa", desc: "Evalúa si tu oferta por copa está equilibrada en estilos, precios y rentabilidad. Con Winerim, esto se monitoriza en tiempo real.", tag: "Diagnóstico" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino en un restaurante" },
@@ -57,6 +60,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "AI Pairing Generator", desc: "Generate AI pairing suggestions. With Winerim, your waitstaff get automatic recommendations every service.", tag: "AI" },
       { to: "/wine-roi-calculator", title: "ROI Calculator", desc: "Calculate how much you can earn by digitizing your list. Our clients increase wine sales by an average of 30%.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Wine List Benchmark", desc: "Compare your list against industry standards. Winerim sends you automatic reports with your competitive position.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Dead Stock Calculator", desc: "Estimate tied-up capital in slow-moving wines. Winerim detects this automatically.", tag: "Management" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "How to price wine in a restaurant" },
@@ -82,6 +88,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "Generatore abbinamenti IA", desc: "Genera suggerimenti di abbinamento con IA. Con Winerim, il personale riceve raccomandazioni automatiche ad ogni servizio.", tag: "IA" },
       { to: "/wine-roi-calculator", title: "Calcolatrice ROI", desc: "Calcola quanto puoi guadagnare digitalizzando la tua carta. I nostri clienti aumentano le vendite di vino del 30% in media.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark carte dei vini", desc: "Confronta la tua carta con gli standard del settore. Winerim ti invia report automatici con la tua posizione competitiva.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostica vino al calice", desc: "Valuta se la tua offerta al calice è equilibrata in stili, prezzi e redditività.", tag: "Diagnostica" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita la tua carta con un punteggio 0-100 su struttura, equilibrio, pricing e potenziale commerciale.", tag: "Audit" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calcolatrice stock morto", desc: "Stima il capitale immobilizzato in vini a bassa rotazione.", tag: "Gestione" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Come prezzare il vino al ristorante" },
@@ -107,6 +116,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "Générateur d'accords IA", desc: "Générez des suggestions d'accords avec l'IA. Avec Winerim, votre personnel reçoit des recommandations automatiques à chaque service.", tag: "IA" },
       { to: "/wine-roi-calculator", title: "Calculateur de ROI", desc: "Calculez combien vous pouvez gagner en digitalisant votre carte. Nos clients augmentent leurs ventes de vin de 30% en moyenne.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark cartes des vins", desc: "Comparez votre carte aux standards du secteur. Winerim vous envoie des rapports automatiques avec votre position concurrentielle.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostic vin au verre", desc: "Évaluez si votre offre au verre est équilibrée en styles, prix et rentabilité.", tag: "Diagnostic" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditez votre carte avec un score de 0 à 100 sur la structure, l'équilibre, le pricing et le potentiel commercial.", tag: "Audit" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calculateur stock mort", desc: "Estimez le capital immobilisé dans les vins à faible rotation.", tag: "Gestion" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Comment fixer le prix du vin au restaurant" },
@@ -117,7 +129,7 @@ const content: Record<string, {
   },
 };
 
-const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3];
+const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw];
 
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
