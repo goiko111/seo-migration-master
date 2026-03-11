@@ -328,7 +328,7 @@ const InteligenciaDinamica = () => {
                   { icon: TrendingUp, label: "Más margen" },
                   { icon: RefreshCw, label: "Más rotación" },
                   { icon: Activity, label: "Menos stock muerto" },
-                  { icon: Users, label: "Mejor experiencia" },
+                  { icon: Users, label: "Mejor experiencia de elección" },
                 ].map((item) => (
                   <span
                     key={item.label}
