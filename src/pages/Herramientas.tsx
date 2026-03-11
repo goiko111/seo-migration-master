@@ -61,7 +61,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
       { to: "/wine-pricing-tool", title: "Wine Pricing Tool", desc: "Optimize your entire pricing structure. With Winerim, smart pricing is applied in real time.", tag: "Pricing" },
       { to: "/wine-pairing-generator", title: "AI Pairing Generator", desc: "Generate AI pairing suggestions. With Winerim, your waitstaff get automatic recommendations every service.", tag: "AI" },
-      { to: "/wine-roi-calculator", title: "ROI Calculator", desc: "Calculate how much you can earn by digitizing your list. Our clients increase wine sales by an average of 30%.", tag: "ROI" },
+      { to: "/wine-roi-calculator", title: "ROI Calculator", desc: "Calculate the potential improvement from digitizing your list. Results vary by restaurant type and implementation.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Wine List Benchmark", desc: "Compare your list against industry standards. Winerim sends you automatic reports with your competitive position.", tag: "Benchmark" },
       { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
