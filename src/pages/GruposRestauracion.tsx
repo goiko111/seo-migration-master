@@ -736,6 +736,45 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      {/* PILOT / PROGRESSIVE DEPLOYMENT */}
+      <section className="section-padding">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              {t.pilotTitle}
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
+              {t.pilotSubtitle}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {t.pilotSteps.map((step, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className="relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-7 text-center">
+                  <div className="w-10 h-10 rounded-full bg-wine/10 border border-wine/20 flex items-center justify-center mx-auto mb-5">
+                    <span className="text-sm font-bold text-wine">{i + 1}</span>
+                  </div>
+                  <h3 className="font-heading text-lg font-bold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                  {i < 2 && (
+                    <div className="hidden md:block absolute top-1/2 -right-3 -translate-y-1/2 text-muted-foreground/30">
+                      <ArrowRight size={18} />
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal>
+            <p className="text-center text-muted-foreground mt-8 text-sm font-medium italic">
+              {t.pilotClosing}
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* POSITIONING */}
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
