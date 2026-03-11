@@ -156,6 +156,11 @@ const content: Record<string, Content> = {
       { title: "Professionalize the category", desc: "Reduce dependence on individual judgment of each director or sommelier." },
       { title: "Activate rules by brand or unit", desc: "Define different priorities based on business objective, brand, city, or customer type." },
     ],
+    benchLabel: "Benchmarking",
+    benchTitle: "Internal benchmarking across units",
+    benchSubtitle: "Detect which venues are selling wine better, which strategies convert more, and where improvement or scaling opportunities exist.",
+    benchMetrics: ["Average wine ticket per unit", "Average margin by category", "Best-performing references", "Wines with high visibility and low conversion", "Units with healthiest stock", "Differences between comparable lists", "Formats or price ranges with best performance"],
+    benchClosing: "It's not just about seeing data. It's about deciding better what to replicate, what to fix, and what to protect at group scale.",
     featLabel: "Features", featTitle1: "Designed to ", featTitleHighlight: "scale",
     features: [
       { title: "Multi-venue management", desc: "Central dashboard with a view of all restaurants. Filter, compare, and act from one panel." },
