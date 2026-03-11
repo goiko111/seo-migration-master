@@ -184,6 +184,8 @@ const esRoutes = (
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
     <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
+    <Route path="/comparativas" element={<Comparativas />} />
+    <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
     {/* Dynamic programmatic SEO pages */}
     <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
     <Route path="/software-vino-*" element={<SeoPage />} />
