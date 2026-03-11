@@ -477,6 +477,73 @@ const QueEsWinerim = () => {
         </div>
       </section>
 
+      {/* CITABILITY BLOCKS */}
+      {lang === "es" && (
+        <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
+          <QuickAnswer
+            question="¿Qué es Winerim?"
+            answer="Winerim es una plataforma inteligente de gestión de cartas de vino para restaurantes. Combina carta digital interactiva, recomendaciones con IA, analítica de ventas y herramientas de optimización de precios para ayudar a los restaurantes a vender más vino y gestionar mejor su bodega."
+            details={[
+              "Funciona 100 % en la nube — no requiere instalación ni hardware especial",
+              "Se implementa en 1-5 días con la carta existente del restaurante",
+              "No sustituye al sommelier — lo complementa con datos e inteligencia",
+            ]}
+            source="Winerim opera desde 2024 con restaurantes, hoteles y grupos de restauración en España y Europa."
+          />
+          <QuickAnswer
+            question="¿Qué resultados puede generar Winerim?"
+            answer="Los restaurantes que implementan Winerim pueden experimentar mejoras en el ticket medio de vino, la rotación de referencias y la eficiencia de gestión. Los resultados varían según el tipo de restaurante, el tamaño de la carta y el nivel de implementación."
+            details={[
+              "Potencial de mejora del ticket medio en vino: entre un 15 % y un 25 %, según contexto",
+              "Reducción del tiempo de gestión de carta y bodega",
+              "Mayor visibilidad sobre qué vinos funcionan y cuáles no rotan",
+              "Mejora en la experiencia del comensal al elegir vino",
+            ]}
+            source="Datos estimados basados en implementaciones reales. Los resultados dependen del contexto operativo de cada restaurante."
+          />
+          <ComparisonTable
+            title="Winerim vs. alternativas tradicionales"
+            subtitle="Comparativa objetiva entre las formas más comunes de presentar una carta de vinos"
+            columns={["Carta en papel", "PDF / QR simple", "Winerim"]}
+            highlightColumn={2}
+            rows={[
+              { feature: "Actualización en tiempo real", options: [false, false, true] },
+              { feature: "Recomendaciones personalizadas", options: [false, false, true] },
+              { feature: "Maridajes automáticos", options: [false, false, true] },
+              { feature: "Filtros y búsqueda", options: [false, false, true] },
+              { feature: "Analítica de ventas", options: [false, false, true] },
+              { feature: "Gestión de stock", options: [false, false, true] },
+              { feature: "Información visual enriquecida", options: [false, "partial", true] },
+              { feature: "Coste de impresión", options: [true, false, false] },
+              { feature: "Funciona sin conexión", options: [true, "partial", false] },
+            ]}
+          />
+          <NotForSection
+            idealFor={[
+              "Restaurantes con 30+ referencias de vino",
+              "Wine bars y vinotecas con oferta amplia",
+              "Hoteles con restaurante y room service",
+              "Grupos de restauración con múltiples locales",
+              "Restaurantes que quieren datos reales sobre sus ventas de vino",
+            ]}
+            notFor={[
+              "Restaurantes con menos de 15 referencias",
+              "Negocios sin servicio de mesa",
+              "Establecimientos que no venden vino",
+              "Restaurantes que prefieren no digitalizar ningún proceso",
+            ]}
+          />
+          <LimitationsBox
+            limitations={[
+              "Requiere conexión a internet para funcionar — no opera offline",
+              "La base de datos de vinos es amplia pero puede no incluir todas las referencias artesanales o locales",
+              "Los resultados de mejora varían según el tipo de restaurante y la implementación",
+              "Actualmente disponible en español, inglés, italiano y francés",
+            ]}
+          />
+        </section>
+      )}
+
       <FAQSection faqs={t.faqs} schemaId="que-es-winerim" />
 
       {/* CTA */}
