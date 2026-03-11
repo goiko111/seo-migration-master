@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, Building2, AlertTriangle, CheckCircle, BarChart3,
   Layers, RefreshCw, DollarSign, TrendingUp, Users, Wine,
-  Warehouse, Globe, Sparkles, Store, Search, GitCompare, Box, Expand
+  Warehouse, Globe, Sparkles, Store, Search, GitCompare, Box, Expand,
+  ScanSearch, Copy, Sliders, ShieldCheck, Zap
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 type IntelCard = { title: string; desc: string };
+type CapCard = { title: string; desc: string };
 type Content = {
   metaTitle: string; metaDescription: string;
   badgeLabel: string; breadSolutions: string; breadLabel: string;
@@ -24,6 +26,8 @@ type Content = {
   problems: { text: string }[];
   solutionLabel: string; solutionTitle1: string; solutionTitleHighlight: string;
   advantages: { title: string; desc: string }[];
+  capLabel: string; capTitle: string; capSubtitle: string;
+  capCards: CapCard[];
   featLabel: string; featTitle1: string; featTitleHighlight: string;
   features: { title: string; desc: string }[];
   impactLabel: string; impactTitle1: string; impactTitleHighlight: string;
@@ -59,6 +63,17 @@ const content: Record<string, Content> = {
       { title: "Analítica de ventas por local", desc: "Compara el rendimiento de cada restaurante: qué vinos venden más, márgenes, rotación y ticket medio." },
       { title: "Optimización de la oferta", desc: "Identifica duplicados, huecos y oportunidades en cada carta. Adapta la selección al perfil de cada local." },
       { title: "Experiencia del cliente mejorada", desc: "Cartas digitales con maridajes, fichas de vino y recomendaciones inteligentes en todos tus restaurantes." },
+    ],
+    capLabel: "Capacidades para grupos",
+    capTitle: "Qué puede hacer Winerim por un grupo",
+    capSubtitle: "Una capa de inteligencia para gobernar el vino a escala, no como locales aislados.",
+    capCards: [
+      { title: "Comparar unidades", desc: "Comparar rendimiento, rotación, márgenes y comportamiento del vino entre locales." },
+      { title: "Detectar oportunidades invisibles", desc: "Encontrar referencias infraexplotadas, huecos de pricing, canibalización y stock inmovilizado." },
+      { title: "Decidir qué replicar", desc: "Identificar qué vinos, formatos o estrategias merece la pena escalar al resto del grupo." },
+      { title: "Adaptar por tipología de local", desc: "No aplicar la misma lógica a fine dining, casual premium, hotel urbano o destino turístico." },
+      { title: "Profesionalizar la categoría", desc: "Reducir dependencia del criterio individual de cada director o sumiller." },
+      { title: "Activar reglas por marca o unidad", desc: "Definir prioridades distintas según objetivo de negocio, marca, ciudad o tipo de cliente." },
     ],
     featLabel: "Funcionalidades", featTitle1: "Diseñado para ", featTitleHighlight: "escalar",
     features: [
@@ -119,6 +134,17 @@ const content: Record<string, Content> = {
       { title: "Offer optimization", desc: "Identify duplicates, gaps, and opportunities in each list. Adapt selection to each venue's profile." },
       { title: "Enhanced customer experience", desc: "Digital lists with pairings, wine cards, and smart recommendations across all your restaurants." },
     ],
+    capLabel: "Capabilities for groups",
+    capTitle: "What Winerim can do for a group",
+    capSubtitle: "An intelligence layer to govern wine at scale, not as isolated venues.",
+    capCards: [
+      { title: "Compare units", desc: "Compare performance, rotation, margins, and wine behavior across venues." },
+      { title: "Detect invisible opportunities", desc: "Find underexploited references, pricing gaps, cannibalization, and immobilized stock." },
+      { title: "Decide what to replicate", desc: "Identify which wines, formats, or strategies are worth scaling across the group." },
+      { title: "Adapt by venue type", desc: "Don't apply the same logic to fine dining, casual premium, urban hotel, or tourist destination." },
+      { title: "Professionalize the category", desc: "Reduce dependence on individual judgment of each director or sommelier." },
+      { title: "Activate rules by brand or unit", desc: "Define different priorities based on business objective, brand, city, or customer type." },
+    ],
     featLabel: "Features", featTitle1: "Designed to ", featTitleHighlight: "scale",
     features: [
       { title: "Multi-venue management", desc: "Central dashboard with a view of all restaurants. Filter, compare, and act from one panel." },
@@ -178,6 +204,17 @@ const content: Record<string, Content> = {
       { title: "Ottimizzazione dell'offerta", desc: "Identifica duplicati, lacune e opportunità in ogni carta. Adatta la selezione al profilo di ogni locale." },
       { title: "Esperienza cliente migliorata", desc: "Carte digitali con abbinamenti, schede vino e raccomandazioni intelligenti in tutti i tuoi ristoranti." },
     ],
+    capLabel: "Capacità per gruppi",
+    capTitle: "Cosa può fare Winerim per un gruppo",
+    capSubtitle: "Un livello di intelligenza per governare il vino su larga scala, non come locali isolati.",
+    capCards: [
+      { title: "Confrontare le unità", desc: "Confrontare performance, rotazione, margini e comportamento del vino tra i locali." },
+      { title: "Rilevare opportunità invisibili", desc: "Trovare referenze sottoutilizzate, lacune di pricing, cannibalizzazione e stock immobilizzato." },
+      { title: "Decidere cosa replicare", desc: "Identificare quali vini, formati o strategie vale la pena scalare nel resto del gruppo." },
+      { title: "Adattare per tipologia di locale", desc: "Non applicare la stessa logica a fine dining, casual premium, hotel urbano o destinazione turistica." },
+      { title: "Professionalizzare la categoria", desc: "Ridurre la dipendenza dal criterio individuale di ogni direttore o sommelier." },
+      { title: "Attivare regole per brand o unità", desc: "Definire priorità diverse in base a obiettivo di business, marchio, città o tipo di cliente." },
+    ],
     featLabel: "Funzionalità", featTitle1: "Progettato per ", featTitleHighlight: "scalare",
     features: [
       { title: "Gestione multi-locale", desc: "Dashboard centrale con vista su tutti i ristoranti. Filtra, confronta e agisci da un unico pannello." },
@@ -236,6 +273,17 @@ const content: Record<string, Content> = {
       { title: "Analytique des ventes par établissement", desc: "Comparez les performances de chaque restaurant : vins les plus vendus, marges, rotation et ticket moyen." },
       { title: "Optimisation de l'offre", desc: "Identifiez les doublons, les lacunes et les opportunités dans chaque carte. Adaptez la sélection au profil de chaque établissement." },
       { title: "Expérience client améliorée", desc: "Cartes digitales avec accords, fiches vins et recommandations intelligentes dans tous vos restaurants." },
+    ],
+    capLabel: "Capacités pour les groupes",
+    capTitle: "Ce que Winerim peut faire pour un groupe",
+    capSubtitle: "Une couche d'intelligence pour gouverner le vin à l'échelle, pas comme des établissements isolés.",
+    capCards: [
+      { title: "Comparer les unités", desc: "Comparer la performance, la rotation, les marges et le comportement du vin entre les établissements." },
+      { title: "Détecter les opportunités invisibles", desc: "Trouver des références sous-exploitées, des lacunes de pricing, la cannibalisation et le stock immobilisé." },
+      { title: "Décider quoi répliquer", desc: "Identifier quels vins, formats ou stratégies méritent d'être déployés dans le reste du groupe." },
+      { title: "Adapter par type d'établissement", desc: "Ne pas appliquer la même logique au fine dining, casual premium, hôtel urbain ou destination touristique." },
+      { title: "Professionnaliser la catégorie", desc: "Réduire la dépendance au jugement individuel de chaque directeur ou sommelier." },
+      { title: "Activer des règles par marque ou unité", desc: "Définir des priorités différentes selon l'objectif business, la marque, la ville ou le type de client." },
     ],
     featLabel: "Fonctionnalités", featTitle1: "Conçu pour ", featTitleHighlight: "passer à l'échelle",
     features: [
@@ -374,6 +422,42 @@ const GruposRestauracion = () => {
                     </div>
                     <h3 className="font-heading font-bold mb-2">{adv.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{adv.desc}</p>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CAPABILITIES FOR GROUPS */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
+              <Layers size={14} className="text-wine" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.capLabel}</span>
+            </div>
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              {t.capTitle}
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
+              {t.capSubtitle}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {t.capCards.map((card, i) => {
+              const icons = [GitCompare, ScanSearch, Copy, Sliders, ShieldCheck, Zap];
+              const Icon = icons[i] || Layers;
+              return (
+                <ScrollReveal key={i} delay={i * 0.06}>
+                  <div className="group h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm hover:border-wine/25 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-wine/5 p-6 md:p-7">
+                    <div className="w-11 h-11 rounded-xl bg-wine/10 flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110">
+                      <Icon size={22} className="text-wine" />
+                    </div>
+                    <h3 className="font-heading text-base font-bold text-foreground mb-2">{card.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                   </div>
                 </ScrollReveal>
               );
