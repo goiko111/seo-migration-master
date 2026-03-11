@@ -458,7 +458,7 @@ const InteligenciaDinamica = () => {
                 <p className="font-heading text-xl md:text-2xl text-foreground/90 leading-snug italic">
                   "Winerim no solo enseña vinos.{" "}
                   <span className="text-gradient-wine not-italic font-semibold">
-                    Decide cuándo conviene mostrar, impulsar, simplificar o rotar
+                    Decide cuándo conviene mostrar, simplificar, impulsar o rotar
                   </span>{" "}
                   cada referencia."
                 </p>
