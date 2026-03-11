@@ -32,6 +32,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "Generador de maridajes con IA", desc: "Genera sugerencias de maridaje con IA. Con Winerim, tus camareros reciben recomendaciones automáticas en cada servicio.", tag: "IA" },
       { to: "/wine-roi-calculator", title: "Calculadora de ROI", desc: "Calcula cuánto puedes ganar digitalizando tu carta. Nuestros clientes incrementan sus ventas de vino una media del 30%.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark de cartas de vinos", desc: "Compara tu carta con los estándares del sector. Winerim te envía informes automáticos con tu posición competitiva.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vino por copa", desc: "Evalúa si tu oferta por copa está equilibrada en estilos, precios y rentabilidad. Con Winerim, esto se monitoriza en tiempo real.", tag: "Diagnóstico" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino en un restaurante" },
