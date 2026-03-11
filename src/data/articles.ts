@@ -830,7 +830,6 @@ Winerim transforma la carta de vinos en una experiencia visual, intuitiva e inte
 
 [**Solicita tu demo gratuita**](/demo)`,
   },
-  },
 
   // ── BOFU cluster ──────────────────────────────────────────────
 
