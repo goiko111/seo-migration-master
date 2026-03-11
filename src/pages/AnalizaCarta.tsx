@@ -25,15 +25,8 @@ import { referencesOptions, businessTypeOptions } from "@/components/ContactForm
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
-import Breadcrumbs from "@/components/seo/Breadcrumbs";
-import SummaryBox from "@/components/seo/SummaryBox";
-import ComparisonTable from "@/components/seo/ComparisonTable";
-import QuickAnswer from "@/components/seo/QuickAnswer";
-import FAQSection from "@/components/seo/FAQSection";
-import StickyCTA from "@/components/StickyCTA";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { notifyLead } from "@/lib/notifyLead";
+
+
 
 /* ── Data ── */
 const pains = [
