@@ -478,6 +478,64 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      {/* ASSORTMENT INTELLIGENCE */}
+      <section className="section-padding relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-wine/6 rounded-full blur-[160px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
+              <Search size={14} className="text-wine" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.intelLabel}</span>
+            </div>
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              {t.intelTitle1}<span className="text-gradient-wine italic">{t.intelTitleHighlight}</span>
+            </h2>
+            <p className="text-muted-foreground mt-5 max-w-3xl mx-auto leading-relaxed">
+              {t.intelSubtitle}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+            {t.intelCards.map((card, i) => {
+              const icons = [Search, GitCompare, Box, Expand];
+              const colors = [
+                { gradient: "from-wine/15 to-wine/5", iconBg: "bg-wine/10", iconColor: "text-wine", border: "hover:border-wine/30" },
+                { gradient: "from-blue-500/15 to-blue-500/5", iconBg: "bg-blue-500/10", iconColor: "text-blue-400", border: "hover:border-blue-500/30" },
+                { gradient: "from-amber-500/15 to-amber-500/5", iconBg: "bg-amber-500/10", iconColor: "text-amber-400", border: "hover:border-amber-500/30" },
+                { gradient: "from-emerald-500/15 to-emerald-500/5", iconBg: "bg-emerald-500/10", iconColor: "text-emerald-400", border: "hover:border-emerald-500/30" },
+              ];
+              const Icon = icons[i] || Search;
+              const c = colors[i] || colors[0];
+              return (
+                <ScrollReveal key={i} delay={i * 0.08}>
+                  <div className={`group relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm ${c.border} transition-all duration-500 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-1 overflow-hidden`}>
+                    {/* Hover gradient */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+
+                    <div className="relative p-7 md:p-8 flex flex-col h-full">
+                      <div className={`w-12 h-12 rounded-xl ${c.iconBg} flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110`}>
+                        <Icon className={`w-6 h-6 ${c.iconColor}`} />
+                      </div>
+                      <h3 className="font-heading text-lg font-bold text-foreground mb-3">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto text-center">
