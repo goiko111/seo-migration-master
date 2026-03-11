@@ -21,8 +21,7 @@ export interface UseCase { title: string; scenario: string; result: string }
 export interface Advantage { title: string; desc: string }
 export interface Impact { label: string; desc: string }
 export interface FAQ { q: string; a: string }
-export interface InternalLink { to: string; label: string; type: "guide" | "tool" | "solution" | "resource" }
-export interface NextStep { label: string; href: string; desc: string }
+export type { NextStep } from "@/components/seo/NextSteps";
 
 export interface VerticalContent {
   metaTitle: string;
