@@ -83,6 +83,8 @@ const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDeta
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const SobreWinerim = lazy(() => import("./pages/SobreWinerim"));
+const Comparativas = lazy(() => import("./pages/Comparativas"));
+const ComparativaDetalle = lazy(() => import("./pages/ComparativaDetalle"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -182,6 +184,8 @@ const esRoutes = (
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
     <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
+    <Route path="/comparativas" element={<Comparativas />} />
+    <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
     {/* Dynamic programmatic SEO pages */}
     <Route path="/software-carta-de-vinos-*" element={<SeoPage />} />
     <Route path="/software-vino-*" element={<SeoPage />} />
