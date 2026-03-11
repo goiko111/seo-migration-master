@@ -42,6 +42,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/terminos": "/en/terms",
     "/soluciones/grupos-restauracion": "/en/solutions/restaurant-groups",
     "/soluciones/aumentar-ticket-medio-restaurante": "/en/solutions/increase-average-ticket",
+    "/producto/inteligencia-dinamica": "/en/product/dynamic-intelligence",
   },
   it: {
     "/": "/it",
