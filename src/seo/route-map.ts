@@ -157,6 +157,13 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/recursos/checklist-carta-de-vinos-rentable", canonical: `${BASE}/recursos/checklist-carta-de-vinos-rentable`, lang: "es", type: "resource", intent: "checklist carta vinos rentable" },
   { path: "/recursos/guia-vino-por-copa-para-restaurantes", canonical: `${BASE}/recursos/guia-vino-por-copa-para-restaurantes`, lang: "es", type: "resource", intent: "guía vino por copa restaurantes" },
   { path: "/recursos/plantilla-wine-mapping-restaurante", canonical: `${BASE}/recursos/plantilla-wine-mapping-restaurante`, lang: "es", type: "resource", intent: "plantilla wine mapping restaurante" },
+  { path: "/recursos/plantilla-estrategia-vinos-por-copa", canonical: `${BASE}/recursos/plantilla-estrategia-vinos-por-copa`, lang: "es", type: "resource", intent: "plantilla estrategia vino por copa restaurante" },
+  { path: "/recursos/checklist-deteccion-vinos-muertos", canonical: `${BASE}/recursos/checklist-deteccion-vinos-muertos`, lang: "es", type: "resource", intent: "checklist detección vinos muertos baja rotación" },
+  { path: "/recursos/plantilla-formacion-equipo-sala", canonical: `${BASE}/recursos/plantilla-formacion-equipo-sala`, lang: "es", type: "resource", intent: "plantilla formación vino equipo sala" },
+  { path: "/recursos/plantilla-analisis-margenes", canonical: `${BASE}/recursos/plantilla-analisis-margenes`, lang: "es", type: "resource", intent: "plantilla análisis márgenes vino restaurante" },
+  { path: "/recursos/scorecard-rendimiento-carta", canonical: `${BASE}/recursos/scorecard-rendimiento-carta`, lang: "es", type: "resource", intent: "scorecard rendimiento carta vinos mensual" },
+  { path: "/recursos/checklist-carta-que-vende", canonical: `${BASE}/recursos/checklist-carta-que-vende`, lang: "es", type: "resource", intent: "checklist carta vinos que vende conversión" },
+  { path: "/recursos/plantilla-equilibrio-carta", canonical: `${BASE}/recursos/plantilla-equilibrio-carta`, lang: "es", type: "resource", intent: "plantilla equilibrio carta vinos estilos precios" },
 
   // ─────────────────────────────────────────────
   // SOLUTIONS (ES)

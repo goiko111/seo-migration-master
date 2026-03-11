@@ -1,0 +1,717 @@
+import {
+  Wine, DollarSign, BarChart3, TrendingUp, RotateCcw, Users,
+  GlassWater, Download, ListChecks, Target, AlertTriangle,
+  Layers, Calendar, FileText, BookOpen, CheckCircle, PieChart,
+  ClipboardList, GraduationCap, ShieldAlert
+} from "lucide-react";
+import type { ResourcePageData } from "@/components/templates/ResourceTemplate";
+
+export const newResources: ResourcePageData[] = [
+  // 1. Plantilla de estrategia de vinos por copa
+  {
+    slug: "plantilla-estrategia-vinos-por-copa",
+    formType: "plantilla-estrategia-vinos-copa",
+    metaTitle: "Plantilla de Estrategia de Vinos por Copa | Winerim",
+    metaDescription: "Descarga gratis la plantilla para diseñar tu estrategia de vino por copa: selección, pricing, rotación, control de merma y objetivos de venta.",
+    badgeIcon: GlassWater,
+    badgeLabel: "Plantilla operativa",
+    heroTitle: "Plantilla de estrategia de vinos por copa",
+    heroDescription: "Diseña, ejecuta y controla tu programa de vino por copa con un documento operativo que cubre selección, pricing, rotación y objetivos.",
+    heroStats: [
+      { icon: Target, label: "Plan operativo completo" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Por qué necesitas una estrategia formal de vino por copa?",
+    problemDescription: "El vino por copa es una de las palancas de margen más potentes en restauración, pero sin un plan estructurado, se gestiona de forma reactiva: merma descontrolada, selección estancada y oportunidades de venta perdidas.",
+    problemPoints: [
+      { icon: AlertTriangle, text: "Merma invisible que erosiona el margen sin que se note en los números" },
+      { icon: RotateCcw, text: "Selección que no cambia durante semanas o meses" },
+      { icon: DollarSign, text: "Pricing calculado sin criterio, copiando márgenes de la botella" },
+      { icon: Users, text: "El equipo no sabe explicar ni recomendar los vinos por copa" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Un documento de trabajo completo para gestionar tu programa de vino por copa de forma profesional.",
+    sections: [
+      {
+        icon: Wine,
+        title: "Matriz de selección por copa",
+        points: [
+          "Campos para registrar cada referencia: nombre, bodega, estilo, coste y PVP",
+          "Distribución recomendada por tipo: espumosos, blancos, rosados, tintos",
+          "Criterios de selección: versatilidad, conservación, margen y maridaje",
+          "Espacio para referencias de rotación y referencias fijas",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Calculadora de pricing por copa",
+        points: [
+          "Fórmula de recuperación de coste en 2-3 copas",
+          "Tabla comparativa: precio copa vs porcentaje sobre botella",
+          "Escenarios de pricing: copa estándar, media copa y formato generoso",
+          "Guía de márgenes objetivo por tramo de precio",
+        ],
+      },
+      {
+        icon: RotateCcw,
+        title: "Plan de rotación",
+        points: [
+          "Calendario mensual con slots de entrada y salida de referencias",
+          "Criterios para decidir cuándo rotar: ventas, merma, estacionalidad",
+          "Protocolo de comunicación de cambios al equipo de sala",
+          "Registro histórico de referencias y rendimiento",
+        ],
+      },
+      {
+        icon: ClipboardList,
+        title: "Control de merma y KPIs",
+        points: [
+          "Registro de apertura con fecha, hora y responsable",
+          "Cálculo automático de merma por referencia y periodo",
+          "KPIs clave: copas vendidas por servicio, ticket medio en copa, ratio copa/botella",
+          "Objetivos mensuales y seguimiento de evolución",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Restaurantes que ofrecen o quieren ofrecer vino por copa",
+      "Jefes de sala que gestionan la oferta de copas",
+      "Sumilleres que quieren profesionalizar el programa",
+      "Wine bars y vinotecas con alta rotación de copas",
+      "Hoteles con servicio de vino por copa en múltiples puntos",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Al lanzar un nuevo programa de vino por copa",
+      "Cuando la merma supere el 15% del coste de copas abiertas",
+      "Si la oferta por copa lleva más de 6 semanas sin cambios",
+      "Al preparar la revisión estacional de la carta",
+      "Cuando quieras medir el rendimiento real de tu oferta por copa",
+    ],
+    benefits: [
+      { icon: DollarSign, title: "Márgenes bajo control", desc: "Pricing calculado con criterio y merma monitorizada para proteger el beneficio." },
+      { icon: TrendingUp, title: "Más ventas por copa", desc: "Selección atractiva, rotación constante y equipo preparado para recomendar." },
+      { icon: BarChart3, title: "Decisiones con datos", desc: "KPIs claros para saber qué funciona y qué necesita ajuste." },
+    ],
+    faqs: [
+      { q: "¿En qué se diferencia de la Guía de vino por copa?", a: "La guía explica los conceptos y buenas prácticas. Esta plantilla es un documento operativo que puedes rellenar y usar directamente para gestionar tu programa día a día." },
+      { q: "¿Cuántos vinos por copa debería ofrecer?", a: "Depende de tu tipo de restaurante. La plantilla incluye recomendaciones por categoría, pero entre 6 y 12 referencias es el rango habitual para la mayoría de restaurantes." },
+      { q: "¿Necesito un sistema de preservación?", a: "Para más de 8 referencias por copa, un sistema de preservación reduce significativamente la merma y suele compensar la inversión en pocas semanas." },
+    ],
+    ctaFinalTitle: "Gestiona tu vino por copa con Winerim",
+    ctaFinalDescription: "Winerim automatiza la gestión de vino por copa: pricing, rotación, control de merma y recomendaciones inteligentes para tu equipo.",
+    internalLinks: [
+      { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía de vino por copa para restaurantes", type: "guide" },
+      { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
+      { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
+      { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: estrategia por copa", type: "guide" },
+    ],
+  },
+
+  // 2. Checklist de detección de vinos muertos
+  {
+    slug: "checklist-deteccion-vinos-muertos",
+    formType: "checklist-vinos-muertos",
+    metaTitle: "Checklist: Detección de Vinos Muertos y Baja Rotación | Winerim",
+    metaDescription: "Descarga la checklist para identificar vinos sin rotación en tu carta. Detecta stock muerto, evalúa el impacto financiero y decide qué hacer con cada referencia.",
+    badgeIcon: ShieldAlert,
+    badgeLabel: "Checklist diagnóstica",
+    heroTitle: "Checklist de detección de vinos muertos y baja rotación",
+    heroDescription: "Identifica las referencias que no rotan, cuantifica el capital inmovilizado y toma decisiones informadas sobre qué mantener, promocionar o retirar.",
+    heroStats: [
+      { icon: ListChecks, label: "Diagnóstico completo" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "El coste oculto del stock muerto",
+    problemDescription: "Los vinos que no se venden no solo ocupan espacio en bodega: inmovilizan capital, generan costes de almacenaje y pueden deteriorarse. Muchos restaurantes desconocen cuánto dinero tienen 'dormido' en referencias sin movimiento.",
+    problemPoints: [
+      { icon: DollarSign, text: "Capital inmovilizado en botellas que llevan meses o años sin venderse" },
+      { icon: AlertTriangle, text: "Riesgo de deterioro que convierte stock en pérdida directa" },
+      { icon: Layers, text: "Carta sobredimensionada que confunde al cliente y complica al equipo" },
+      { icon: RotateCcw, text: "Falta de un sistema para detectar y actuar sobre la baja rotación" },
+    ],
+    contentTitle: "Qué incluye la checklist",
+    contentDescription: "Un proceso estructurado para auditar tu bodega e identificar las referencias que necesitan acción inmediata.",
+    sections: [
+      {
+        icon: ListChecks,
+        title: "Inventario de rotación",
+        points: [
+          "Plantilla para registrar cada referencia con fecha de última venta",
+          "Clasificación automática: activa (< 30 días), lenta (30-90 días), muerta (> 90 días)",
+          "Cálculo de capital inmovilizado por categoría de rotación",
+          "Identificación de patrones: ¿qué tipo de vinos tienden a no rotar?",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Criterios de decisión",
+        points: [
+          "Matriz de decisión: mantener / promocionar / reubicar / retirar",
+          "Factores a evaluar: margen, potencial de maridaje, estacionalidad, reemplazabilidad",
+          "Protocolo para vinos de añada especial vs vinos corrientes",
+          "Checklist de opciones de liquidación: copa, menú, eventos, devolución",
+        ],
+      },
+      {
+        icon: Calendar,
+        title: "Plan de prevención",
+        points: [
+          "Reglas de entrada: criterios mínimos para añadir nuevas referencias",
+          "Calendario de revisión mensual de rotación",
+          "Protocolo de alerta temprana: señales de que una referencia va a morir",
+          "Límites de stock máximo por referencia según tipo",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Sumilleres y jefes de compras responsables de la bodega",
+      "Controllers y directores financieros preocupados por el capital inmovilizado",
+      "Propietarios de restaurantes con bodegas de más de 50 referencias",
+      "Grupos de restauración con inventario centralizado",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Trimestralmente como auditoría rutinaria de rotación",
+      "Cuando detectes que la inversión en bodega crece pero las ventas de vino no",
+      "Antes de hacer un nuevo pedido al distribuidor",
+      "Al preparar la carta de temporada",
+    ],
+    benefits: [
+      { icon: DollarSign, title: "Libera capital", desc: "Identifica y mueve stock inmovilizado que no genera retorno." },
+      { icon: Layers, title: "Carta más limpia", desc: "Elimina referencias que no aportan valor y simplifica la navegación." },
+      { icon: BarChart3, title: "Compras más inteligentes", desc: "Previene la acumulación futura con reglas de entrada claras." },
+    ],
+    faqs: [
+      { q: "¿A partir de cuántos días sin venta se considera vino muerto?", a: "El criterio habitual es 90 días sin ninguna venta. Entre 30 y 90 días se considera rotación baja. Pero depende del tipo de restaurante y la frecuencia de servicio." },
+      { q: "¿Qué hago con los vinos que detecto como muertos?", a: "Las opciones principales son: ofrecerlos por copa a precio especial, incluirlos en menús degustación o maridajes, negociar devolución con el proveedor, o venderlos en un evento de liquidación." },
+      { q: "¿Con qué frecuencia debería hacer esta auditoría?", a: "Trimestralmente como mínimo. Si tu carta tiene más de 100 referencias, mensualmente es más efectivo." },
+    ],
+    ctaFinalTitle: "Controla la rotación con Winerim",
+    ctaFinalDescription: "Winerim monitoriza automáticamente la rotación de cada referencia y te alerta cuando un vino no se vende. Sin auditorías manuales.",
+    internalLinks: [
+      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación de vinos", type: "guide" },
+      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
+      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+    ],
+  },
+
+  // 3. Plantilla de formación exprés
+  {
+    slug: "plantilla-formacion-equipo-sala",
+    formType: "plantilla-formacion-sala",
+    metaTitle: "Plantilla de Formación Exprés en Vino para Equipos de Sala | Winerim",
+    metaDescription: "Descarga la plantilla para formar a tu equipo de sala en vino en menos de 2 semanas. Fichas de vino, guía de maridaje, frases de recomendación y plan de sesiones.",
+    badgeIcon: GraduationCap,
+    badgeLabel: "Plantilla formativa",
+    heroTitle: "Plantilla de formación exprés en vino para equipos de sala",
+    heroDescription: "Un programa de formación práctico para que tu equipo recomiende vino con confianza en menos de 2 semanas, sin necesidad de conocimientos previos.",
+    heroStats: [
+      { icon: Users, label: "4 módulos prácticos" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "El equipo no recomienda vino porque no se siente preparado",
+    problemDescription: "La falta de formación en vino no es un problema de voluntad, sino de herramientas. Sin una guía clara y práctica, el personal evita recomendar vino por miedo a equivocarse o no saber qué decir.",
+    problemPoints: [
+      { icon: Users, text: "El personal dice 'no sé de vinos' y evita la recomendación" },
+      { icon: AlertTriangle, text: "Los clientes preguntan y el equipo se limita a leer la carta" },
+      { icon: TrendingUp, text: "Oportunidades de venta perdidas en cada mesa, cada servicio" },
+      { icon: RotateCcw, text: "Alta rotación de personal hace que la formación se pierda" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Un programa completo de formación diseñado para sesiones cortas (30 min) antes del servicio.",
+    sections: [
+      {
+        icon: FileText,
+        title: "Fichas de vino simplificadas",
+        points: [
+          "Plantilla de ficha por referencia: nombre, estilo, 3 adjetivos clave, maridaje sugerido",
+          "Formato visual pensado para memorizar en 2 minutos",
+          "Espacio para los '3 vinos de confianza' de cada miembro del equipo",
+          "Versión imprimible para colocar en el office o la barra",
+        ],
+      },
+      {
+        icon: Wine,
+        title: "Guía de maridaje simplificada",
+        points: [
+          "5 reglas básicas que cubren el 80% de las situaciones",
+          "Tabla visual: tipo de plato → estilo de vino recomendado",
+          "Frases tipo: 'Con su plato le recomiendo…' adaptadas a cada situación",
+          "Maridajes estrella de la carta actual del restaurante",
+        ],
+      },
+      {
+        icon: BookOpen,
+        title: "Guion de recomendación",
+        points: [
+          "Frases de apertura naturales para ofrecer vino sin presionar",
+          "Técnica de la copa como puerta de entrada",
+          "Respuestas a objeciones habituales: 'solo agua', 'el más barato'",
+          "Cómo hacer upselling sutil de copa a botella",
+        ],
+      },
+      {
+        icon: Calendar,
+        title: "Plan de sesiones de formación",
+        points: [
+          "Calendario de 4 sesiones de 30 minutos distribuidas en 2 semanas",
+          "Guía del formador con objetivos y dinámica de cada sesión",
+          "Ejercicios prácticos de cata y recomendación",
+          "Test de autoevaluación para medir el progreso",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Jefes de sala y encargados responsables de la formación del equipo",
+      "Restaurantes sin sumiller que quieren que el personal venda vino",
+      "Grupos de restauración que necesitan un programa replicable",
+      "Hoteles con personal rotativo que necesita formación rápida",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Al incorporar nuevo personal al equipo de sala",
+      "Cuando cambies la carta de vinos",
+      "Como refuerzo trimestral para todo el equipo",
+      "Cuando las ventas de vino estén por debajo de tu potencial",
+    ],
+    benefits: [
+      { icon: TrendingUp, title: "Más recomendaciones", desc: "Un equipo que sabe qué decir recomienda con naturalidad en cada mesa." },
+      { icon: Users, title: "Confianza del equipo", desc: "Elimina el miedo a recomendar vino con conocimientos prácticos y simples." },
+      { icon: DollarSign, title: "Más ventas de vino", desc: "Cada recomendación es una oportunidad de venta que antes se perdía." },
+    ],
+    faqs: [
+      { q: "¿Cuánto tiempo lleva implementar el programa?", a: "El programa está diseñado para 2 semanas con sesiones de 30 minutos, pero puedes adaptarlo al ritmo de tu equipo. Lo importante es la práctica continuada." },
+      { q: "¿Sirve si mi equipo no sabe nada de vinos?", a: "Precisamente para eso está diseñado. No asume conocimientos previos. Parte de lo más básico y práctico." },
+      { q: "¿Y si tengo mucha rotación de personal?", a: "Las fichas y guiones están pensados para ser reutilizables. Un nuevo empleado puede autoformarse con el material y complementar con una sesión práctica." },
+    ],
+    ctaFinalTitle: "Forma a tu equipo con Winerim",
+    ctaFinalDescription: "Winerim genera automáticamente fichas de vino, maridajes y guías de recomendación personalizadas para tu carta. Tu equipo siempre preparado.",
+    internalLinks: [
+      { to: "/benchmarks-playbooks/playbook-formar-personal", label: "Playbook: formar al personal para recomendar vino", type: "guide" },
+      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
+      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
+    ],
+  },
+
+  // 4. Plantilla de análisis de márgenes
+  {
+    slug: "plantilla-analisis-margenes",
+    formType: "plantilla-analisis-margenes",
+    metaTitle: "Plantilla de Análisis de Márgenes por Referencia de Vino | Winerim",
+    metaDescription: "Descarga la plantilla para analizar el margen de cada vino de tu carta. Coste, PVP, multiplicador, contribución al margen global y ranking de rentabilidad.",
+    badgeIcon: PieChart,
+    badgeLabel: "Plantilla financiera",
+    heroTitle: "Plantilla de análisis de márgenes por referencia",
+    heroDescription: "Analiza la rentabilidad real de cada vino de tu carta: coste, PVP, multiplicador, margen bruto y contribución al resultado global.",
+    heroStats: [
+      { icon: PieChart, label: "Análisis por referencia" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Sabes cuánto ganas con cada vino de tu carta?",
+    problemDescription: "Muchos restaurantes conocen su margen bruto general de vino, pero no saben qué referencias contribuyen más (o menos) al resultado. Sin este detalle, las decisiones de pricing, compra y composición de carta se toman a ciegas.",
+    problemPoints: [
+      { icon: DollarSign, text: "Multiplicador uniforme que genera precios desproporcionados en gama alta" },
+      { icon: BarChart3, text: "Referencias con margen muy bajo que ocupan espacio sin contribuir" },
+      { icon: AlertTriangle, text: "Desconocimiento del impacto de cada vino en el resultado global" },
+      { icon: Layers, text: "Decisiones de compra basadas en coste, no en rentabilidad" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Una hoja de cálculo estructurada para analizar la rentabilidad de cada referencia de tu carta.",
+    sections: [
+      {
+        icon: FileText,
+        title: "Registro de referencias",
+        points: [
+          "Campos: nombre, bodega, categoría, coste unitario, PVP botella, PVP copa",
+          "Cálculo automático de multiplicador y margen bruto",
+          "Clasificación por categoría: entrada, media, premium, alta gama",
+          "Espacio para notas: proveedor, condiciones, última actualización",
+        ],
+      },
+      {
+        icon: PieChart,
+        title: "Análisis de contribución",
+        points: [
+          "Margen bruto por referencia en euros absolutos",
+          "Contribución porcentual de cada referencia al margen total",
+          "Ranking de referencias por rentabilidad",
+          "Identificación de referencias con margen por debajo del objetivo",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Estrategia de pricing",
+        points: [
+          "Tabla de multiplicadores recomendados por tramo de coste",
+          "Simulador: qué pasa si cambio el PVP de una referencia",
+          "Comparativa de margen: botella vs copa para cada referencia",
+          "Guía de ajuste estacional de precios",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Controllers y directores financieros de restauración",
+      "Sumilleres y jefes de compras responsables del pricing",
+      "Propietarios que quieren entender la rentabilidad de su carta",
+      "Grupos con necesidad de estandarizar los márgenes entre locales",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Al fijar precios para una carta nueva",
+      "Cuando los costes de compra cambien significativamente",
+      "En la revisión anual de pricing",
+      "Al negociar condiciones con proveedores",
+    ],
+    benefits: [
+      { icon: DollarSign, title: "Pricing inteligente", desc: "Aplica multiplicadores diferenciados basados en datos, no en intuición." },
+      { icon: BarChart3, title: "Visibilidad financiera", desc: "Conoce exactamente cuánto contribuye cada vino al resultado." },
+      { icon: Target, title: "Mejor negociación", desc: "Negocia con proveedores conociendo el impacto real de cada coste." },
+    ],
+    faqs: [
+      { q: "¿Qué margen debería tener un restaurante en vino?", a: "Depende del posicionamiento, pero un food cost del vino entre el 25% y el 40% se considera saludable en el sector. Lo importante es que sea diferenciado por tramo." },
+      { q: "¿Debería usar un multiplicador único?", a: "No. Los mejores restaurantes aplican multiplicadores descendentes: más alto en entrada (x3-4), más bajo en premium (x1.8-2.5). Esta plantilla te ayuda a calcular el óptimo para cada referencia." },
+    ],
+    ctaFinalTitle: "Optimiza tus márgenes con Winerim",
+    ctaFinalDescription: "Winerim calcula automáticamente el margen de cada referencia, sugiere ajustes de pricing y monitoriza la evolución del margen global.",
+    internalLinks: [
+      { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
+      { to: "/benchmarks-playbooks/benchmark-margen-por-tipo-referencia", label: "Benchmark: margen por tipo de referencia", type: "guide" },
+      { to: "/benchmarks-playbooks/benchmark-distribucion-rangos-precio", label: "Benchmark: distribución de precios", type: "guide" },
+      { to: "/benchmarks-playbooks/playbook-carta-rentable", label: "Playbook: carta más rentable", type: "guide" },
+    ],
+  },
+
+  // 5. Scorecard mensual de rendimiento
+  {
+    slug: "scorecard-rendimiento-carta",
+    formType: "scorecard-rendimiento-carta",
+    metaTitle: "Scorecard Mensual de Rendimiento de Carta de Vinos | Winerim",
+    metaDescription: "Descarga el scorecard para medir el rendimiento de tu carta de vinos cada mes. KPIs de venta, rotación, margen, copa y ticket medio en un solo documento.",
+    badgeIcon: BarChart3,
+    badgeLabel: "Scorecard mensual",
+    heroTitle: "Scorecard mensual de rendimiento de carta de vinos",
+    heroDescription: "Un cuadro de mando mensual con los KPIs esenciales para evaluar si tu carta de vinos está funcionando: ventas, rotación, margen y tendencia.",
+    heroStats: [
+      { icon: BarChart3, label: "KPIs esenciales" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Cómo sabes si tu carta de vinos funciona?",
+    problemDescription: "Sin métricas claras, la gestión de la carta se basa en sensaciones. El scorecard convierte la intuición en datos: te dice exactamente qué funciona, qué no y dónde están las oportunidades.",
+    problemPoints: [
+      { icon: BarChart3, text: "No se miden las ventas de vino de forma regular ni por referencia" },
+      { icon: TrendingUp, text: "Se desconoce la evolución mensual del ticket medio en vino" },
+      { icon: RotateCcw, text: "No hay seguimiento de la rotación de la bodega" },
+      { icon: DollarSign, text: "El margen real del vino no se calcula ni se compara con el objetivo" },
+    ],
+    contentTitle: "Qué incluye el scorecard",
+    contentDescription: "Un documento mensual que agrupa los indicadores más importantes de tu carta de vinos en un solo vistazo.",
+    sections: [
+      {
+        icon: TrendingUp,
+        title: "KPIs de venta",
+        points: [
+          "Facturación total de vino: botella + copa",
+          "Peso del vino en el ticket medio (%)",
+          "Ratio de mesas que piden vino (%)",
+          "Comparativa con mes anterior y mismo mes del año anterior",
+        ],
+      },
+      {
+        icon: RotateCcw,
+        title: "KPIs de rotación",
+        points: [
+          "Número de referencias vendidas vs total en carta",
+          "Referencias sin venta en los últimos 30 y 90 días",
+          "Stock total en bodega (unidades y valor)",
+          "Tasa de rotación de bodega",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "KPIs de margen",
+        points: [
+          "Margen bruto de vino (%)",
+          "Food cost del vino vs objetivo",
+          "Top 5 referencias por contribución al margen",
+          "Bottom 5 referencias por margen",
+        ],
+      },
+      {
+        icon: GlassWater,
+        title: "KPIs de vino por copa",
+        points: [
+          "Copas vendidas por servicio",
+          "Ticket medio en copa",
+          "Merma mensual (unidades y valor)",
+          "Ratio copa vs botella en facturación",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Directores de restaurante que quieren gestionar con datos",
+      "Controllers financieros de grupos de restauración",
+      "Sumilleres que necesitan justificar decisiones de carta",
+      "Propietarios que quieren visibilidad mensual del rendimiento",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "A final de cada mes como revisión rutinaria",
+      "En reuniones de dirección para reportar el rendimiento del vino",
+      "Al preparar la revisión trimestral de la carta",
+      "Antes de negociar con proveedores",
+    ],
+    benefits: [
+      { icon: BarChart3, title: "Visibilidad total", desc: "Todos los KPIs de tu carta en un solo documento cada mes." },
+      { icon: Target, title: "Decisiones informadas", desc: "Deja de gestionar por sensaciones y empieza a decidir con datos." },
+      { icon: TrendingUp, title: "Tendencias claras", desc: "Detecta mejoras o deterioros antes de que se conviertan en problemas." },
+    ],
+    faqs: [
+      { q: "¿Cuánto tiempo lleva rellenar el scorecard?", a: "Con los datos de tu TPV y tu sistema de bodega, entre 30 y 60 minutos al mes. Es una inversión mínima para la visibilidad que proporciona." },
+      { q: "¿Qué pasa si no tengo todos los datos?", a: "Empieza con lo que tengas. Incluso con datos parciales, el scorecard te da más visibilidad que no medir nada. Ve completando los campos a medida que mejores tu sistema de registro." },
+    ],
+    ctaFinalTitle: "Automatiza tu scorecard con Winerim",
+    ctaFinalDescription: "Winerim genera automáticamente el scorecard de tu carta cada mes: ventas, rotación, margen y copa en un panel en tiempo real.",
+    internalLinks: [
+      { to: "/benchmarks-playbooks/benchmark-peso-vino-ticket-medio", label: "Benchmark: peso del vino en ticket medio", type: "guide" },
+      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
+      { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
+      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+    ],
+  },
+
+  // 6. Checklist para revisar si una carta realmente vende
+  {
+    slug: "checklist-carta-que-vende",
+    formType: "checklist-carta-que-vende",
+    metaTitle: "Checklist: ¿Tu Carta de Vinos Realmente Vende? | Winerim",
+    metaDescription: "Descarga la checklist para evaluar si tu carta de vinos está diseñada para vender. 30 puntos de control sobre diseño, recomendación, experiencia y conversión.",
+    badgeIcon: ListChecks,
+    badgeLabel: "Checklist de conversión",
+    heroTitle: "Checklist: ¿Tu carta de vinos realmente vende?",
+    heroDescription: "30 puntos de control para evaluar si tu carta está diseñada para convertir: no solo para informar, sino para guiar al cliente hacia la compra.",
+    heroStats: [
+      { icon: ListChecks, label: "30 puntos de control" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "La diferencia entre una carta que informa y una carta que vende",
+    problemDescription: "Muchas cartas de vinos están técnicamente bien construidas — categorías correctas, precios razonables — pero no venden. ¿Por qué? Porque informan, pero no guían la decisión del cliente. Esta checklist evalúa la capacidad de conversión de tu carta.",
+    problemPoints: [
+      { icon: FileText, text: "Descripciones que no ayudan al cliente a imaginar el vino" },
+      { icon: Target, text: "Falta de recomendaciones destacadas que guíen la elección" },
+      { icon: Users, text: "Diseño que no facilita la navegación ni reduce la parálisis" },
+      { icon: TrendingUp, text: "Sin estrategia de ancla de precio ni upselling natural" },
+    ],
+    contentTitle: "Qué evalúa la checklist",
+    contentDescription: "6 dimensiones de conversión con 30 puntos de control para un diagnóstico completo de la capacidad de venta de tu carta.",
+    sections: [
+      {
+        icon: FileText,
+        title: "Diseño y navegación",
+        points: [
+          "La carta se puede leer y entender en menos de 60 segundos",
+          "Las categorías son intuitivas y no requieren conocimiento previo de vino",
+          "El flujo visual guía de copa → botella y de entrada → premium",
+          "Hay espacio visual suficiente: no es un muro de texto",
+          "Los precios están bien visibles pero no son lo primero que se ve",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Estrategia de recomendación",
+        points: [
+          "Hay al menos 3-5 referencias destacadas como recomendaciones",
+          "Las recomendaciones están repartidas por tramos de precio",
+          "Cada recomendación tiene una razón visible: 'favorito del chef', 'maridaje perfecto'",
+          "Las copas están al inicio de la carta, no al final",
+          "Hay al menos un maridaje sugerido visible en la carta",
+        ],
+      },
+      {
+        icon: BookOpen,
+        title: "Descripciones y lenguaje",
+        points: [
+          "Las descripciones usan lenguaje sensorial, no técnico",
+          "Cada vino tiene un descriptor de 1-2 líneas que ayuda a elegir",
+          "Se mencionan maridajes concretos, no genéricos",
+          "El tono es invitador, no intimidante ni pretencioso",
+          "Las descripciones diferencian claramente cada vino del siguiente",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Arquitectura de precios",
+        points: [
+          "Hay una escalera de precios sin saltos bruscos",
+          "Existen anclas de precio que hacen accesible el tramo medio",
+          "El sweet spot (donde quieres vender más) tiene más opciones",
+          "Los precios de copa son atractivos y visibles",
+          "No hay vinos 'trampa' demasiado baratos que atraigan toda la demanda",
+        ],
+      },
+      {
+        icon: Users,
+        title: "Experiencia del cliente",
+        points: [
+          "Un cliente sin conocimiento de vino puede elegir con confianza",
+          "Hay filtros o señales para diferentes perfiles: aventurero, clásico, valor",
+          "La carta no genera ansiedad de elección (decision fatigue)",
+          "El formato es cómodo: tamaño, peso, legibilidad",
+          "La versión digital (si existe) es rápida y fácil de navegar",
+        ],
+      },
+      {
+        icon: TrendingUp,
+        title: "Conversión y upselling",
+        points: [
+          "La carta incentiva probar copa antes de comprometerse con botella",
+          "Hay mecanismos de urgencia: 'edición limitada', 'última cosecha'",
+          "Se sugiere upgrade natural: 'si te gusta X, prueba Y'",
+          "La carta se actualiza al menos trimestralmente",
+          "El equipo de sala conoce las recomendaciones destacadas",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Propietarios que sienten que su carta no genera las ventas que debería",
+      "Directores de restaurante que quieren optimizar la conversión",
+      "Sumilleres que necesitan evaluar el impacto comercial de la carta",
+      "Consultores de restauración que auditan operaciones",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Cuando las ventas de vino estén por debajo de las expectativas",
+      "Antes de un rediseño de carta",
+      "Al evaluar el impacto de los últimos cambios en la carta",
+      "Como diagnóstico previo a implementar una carta digital",
+    ],
+    benefits: [
+      { icon: Target, title: "Diagnóstico de conversión", desc: "Identifica exactamente por qué tu carta no convierte como debería." },
+      { icon: TrendingUp, title: "Acciones concretas", desc: "Cada punto de la checklist sugiere una acción de mejora específica." },
+      { icon: DollarSign, title: "Más ventas de vino", desc: "Optimizar la conversión de la carta impacta directamente en la facturación." },
+    ],
+    faqs: [
+      { q: "¿En qué se diferencia de la Checklist carta rentable?", a: "La checklist de carta rentable evalúa la estructura, precios y composición. Esta checklist evalúa la capacidad de venta: diseño, lenguaje, recomendaciones, experiencia y conversión. Son complementarias." },
+      { q: "¿Puedo usarla para una carta digital?", a: "Sí. De hecho, la sección de experiencia del cliente incluye puntos específicos para formatos digitales. Las cartas digitales tienen ventajas adicionales de conversión que esta checklist te ayuda a aprovechar." },
+    ],
+    ctaFinalTitle: "Transforma tu carta en una herramienta de venta",
+    ctaFinalDescription: "Winerim convierte tu carta de vinos en un vendedor inteligente: recomendaciones personalizadas, diseño optimizado y analítica de conversión.",
+    internalLinks: [
+      { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: carta de vinos rentable", type: "resource" },
+      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
+      { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
+      { to: "/problemas/carta-de-vinos-no-vende", label: "Mi carta de vinos no vende", type: "solution" },
+    ],
+  },
+
+  // 7. Plantilla equilibrio carta
+  {
+    slug: "plantilla-equilibrio-carta",
+    formType: "plantilla-equilibrio-carta",
+    metaTitle: "Plantilla para Evaluar el Equilibrio de tu Carta de Vinos | Winerim",
+    metaDescription: "Descarga la plantilla para analizar el equilibrio de tu carta por estilos, regiones, precios y tipologías. Detecta desequilibrios y mejora la composición.",
+    badgeIcon: Layers,
+    badgeLabel: "Plantilla analítica",
+    heroTitle: "Plantilla para evaluar el equilibrio de tu carta de vinos",
+    heroDescription: "Analiza si tu carta está equilibrada por estilos, regiones, rangos de precio y tipologías. Detecta solapamientos, huecos y oportunidades de mejora.",
+    heroStats: [
+      { icon: Layers, label: "4 dimensiones de análisis" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Tu carta está realmente equilibrada?",
+    problemDescription: "Muchas cartas acumulan referencias por inercia: una región domina porque el distribuidor la empuja, un estilo está sobrerrepresentado porque es la zona de confort del comprador. Sin un análisis sistemático, los desequilibrios se acumulan sin que nadie los detecte.",
+    problemPoints: [
+      { icon: Layers, text: "Una región o denominación domina la carta sin justificación clara" },
+      { icon: Wine, text: "Faltan estilos que maridaran con la cocina del restaurante" },
+      { icon: DollarSign, text: "Desequilibrio en los rangos de precio: demasiados vinos en el mismo tramo" },
+      { icon: BarChart3, text: "Sin visión global: las decisiones se toman referencia a referencia" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Un análisis multidimensional de la composición de tu carta para detectar desequilibrios y oportunidades.",
+    sections: [
+      {
+        icon: Wine,
+        title: "Análisis por estilos",
+        points: [
+          "Clasificación de cada referencia por estilo: fresco, afrutado, estructurado, complejo, dulce",
+          "Distribución porcentual de estilos en tu carta",
+          "Comparativa con la distribución recomendada según tipo de cocina",
+          "Detección de estilos ausentes que podrían cubrir nichos de demanda",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Análisis por regiones",
+        points: [
+          "Mapa de regiones presentes en la carta con número de referencias",
+          "Ratio nacional vs internacional",
+          "Detección de regiones sobrerrepresentadas o ausentes",
+          "Coherencia de las regiones con la identidad gastronómica del restaurante",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Análisis por rangos de precio",
+        points: [
+          "Distribución de referencias por tramo: entrada, media, premium, alta gama",
+          "Detección de tramos con exceso o déficit de opciones",
+          "Análisis de la escalera de precios: ¿hay saltos bruscos?",
+          "Comparativa con la distribución recomendada (regla de los tercios)",
+        ],
+      },
+      {
+        icon: Layers,
+        title: "Análisis por tipologías",
+        points: [
+          "Distribución: blancos, tintos, rosados, espumosos, dulces",
+          "Proporción adaptada al tipo de cocina y estacionalidad",
+          "Detección de tipologías infrarrepresentadas con potencial de venta",
+          "Ratio vinos de crianza vs vinos jóvenes",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Sumilleres que quieren una visión global de la composición de su carta",
+      "Jefes de compras que necesitan detectar desequilibrios antes de pedir",
+      "Directores de F&B que supervisan múltiples cartas en un grupo",
+      "Propietarios que quieren evaluar si su carta refleja su posicionamiento",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "En la revisión anual de la carta",
+      "Al planificar los cambios estacionales",
+      "Cuando detectes que ciertas zonas de la carta no se venden",
+      "Antes de reunirte con distribuidores para definir compras",
+    ],
+    benefits: [
+      { icon: Layers, title: "Visión global", desc: "Entiende la composición de tu carta de un vistazo, no referencia a referencia." },
+      { icon: Target, title: "Huecos detectados", desc: "Identifica oportunidades de mejora que son invisibles mirando la carta página a página." },
+      { icon: Wine, title: "Coherencia garantizada", desc: "Asegura que tu carta refleja la identidad gastronómica de tu restaurante." },
+    ],
+    faqs: [
+      { q: "¿En qué se diferencia de la plantilla de wine mapping?", a: "El wine mapping cruza precio × estilo en una matriz. Esta plantilla analiza 4 dimensiones por separado: estilos, regiones, precios y tipologías. Son herramientas complementarias para un análisis más completo." },
+      { q: "¿Cuánto tiempo lleva completar el análisis?", a: "Depende del tamaño de tu carta. Para una carta de 50-80 referencias, entre 45 y 90 minutos. Es una inversión que se hace 2-4 veces al año." },
+    ],
+    ctaFinalTitle: "Analiza el equilibrio de tu carta con Winerim",
+    ctaFinalDescription: "Winerim analiza automáticamente la composición de tu carta y te muestra los desequilibrios con recomendaciones de mejora.",
+    internalLinks: [
+      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
+      { to: "/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos", label: "Benchmark: equilibrio de regiones y estilos", type: "guide" },
+      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
+      { to: "/analisis-carta", label: "Analizador de carta de vinos", type: "tool" },
+    ],
+  },
+];
+
+export function getResourceBySlug(slug: string): ResourcePageData | undefined {
+  return newResources.find(r => r.slug === slug);
+}

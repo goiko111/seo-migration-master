@@ -74,6 +74,7 @@ const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
+const ResourcePage = lazy(() => import("./pages/ResourcePage"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -140,6 +141,13 @@ const esRoutes = (
     <Route path="/recursos/checklist-carta-de-vinos-rentable" element={<ChecklistCartaRentable />} />
     <Route path="/recursos/guia-vino-por-copa-para-restaurantes" element={<GuiaVinoPorCopa />} />
     <Route path="/recursos/plantilla-wine-mapping-restaurante" element={<PlantillaWineMapping />} />
+    <Route path="/recursos/plantilla-estrategia-vinos-por-copa" element={<ResourcePage />} />
+    <Route path="/recursos/checklist-deteccion-vinos-muertos" element={<ResourcePage />} />
+    <Route path="/recursos/plantilla-formacion-equipo-sala" element={<ResourcePage />} />
+    <Route path="/recursos/plantilla-analisis-margenes" element={<ResourcePage />} />
+    <Route path="/recursos/scorecard-rendimiento-carta" element={<ResourcePage />} />
+    <Route path="/recursos/checklist-carta-que-vende" element={<ResourcePage />} />
+    <Route path="/recursos/plantilla-equilibrio-carta" element={<ResourcePage />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
     <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
