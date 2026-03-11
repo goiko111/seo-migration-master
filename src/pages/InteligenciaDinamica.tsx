@@ -407,11 +407,11 @@ const InteligenciaDinamica = () => {
                   </div>
                   <ul className="space-y-5">
                     {[
-                      "Muestra vinos",
                       "Orden fijo",
                       "Recomendación estática",
-                      "No reacciona al contexto",
-                      "No prioriza negocio ni rotación",
+                      "Sin reacción al contexto",
+                      "Misma lógica para cualquier momento",
+                      "Sin priorización de margen ni rotación",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3.5">
                         <span className="mt-1.5 w-2 h-2 rounded-full bg-muted-foreground/25 shrink-0" />
