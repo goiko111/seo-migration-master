@@ -151,6 +151,18 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/blog/como-organizar-carta-de-vinos", canonical: `${BASE}/blog/como-organizar-carta-de-vinos`, lang: "es", type: "blog", intent: "cómo organizar carta de vinos" },
   { path: "/blog/cuantos-vinos-carta-restaurante", canonical: `${BASE}/blog/cuantos-vinos-carta-restaurante`, lang: "es", type: "blog", intent: "cuántos vinos carta restaurante" },
   { path: "/blog/como-disenar-carta-vinos-rentable", canonical: `${BASE}/blog/como-disenar-carta-vinos-rentable`, lang: "es", type: "blog", intent: "cómo diseñar carta vinos rentable" },
+  // New BOFU articles
+  { path: "/article/software-carta-vinos-restaurante", canonical: `${BASE}/article/software-carta-vinos-restaurante`, lang: "es", type: "blog", intent: "software carta vinos restaurante" },
+  { path: "/article/alternativa-carta-pdf-vinos", canonical: `${BASE}/article/alternativa-carta-pdf-vinos`, lang: "es", type: "blog", intent: "alternativa carta PDF vinos restaurante" },
+  { path: "/article/software-vino-por-copa-restaurantes", canonical: `${BASE}/article/software-vino-por-copa-restaurantes`, lang: "es", type: "blog", intent: "software vino por copa restaurantes" },
+  { path: "/article/como-vender-mas-vino-en-sala-con-datos", canonical: `${BASE}/article/como-vender-mas-vino-en-sala-con-datos`, lang: "es", type: "blog", intent: "vender más vino sala datos" },
+  { path: "/article/como-mejorar-ticket-medio-vino-sin-ampliar-carta", canonical: `${BASE}/article/como-mejorar-ticket-medio-vino-sin-ampliar-carta`, lang: "es", type: "blog", intent: "mejorar ticket medio vino restaurante" },
+  // New MOFU articles
+  { path: "/article/errores-fijar-precios-vino-restaurante", canonical: `${BASE}/article/errores-fijar-precios-vino-restaurante`, lang: "es", type: "blog", intent: "errores precios vino restaurante" },
+  { path: "/article/como-saber-si-carta-vinos-descompensada", canonical: `${BASE}/article/como-saber-si-carta-vinos-descompensada`, lang: "es", type: "blog", intent: "carta vinos descompensada diagnóstico" },
+  { path: "/article/que-vinos-ofrecer-por-copa-segun-tipo-local", canonical: `${BASE}/article/que-vinos-ofrecer-por-copa-segun-tipo-local`, lang: "es", type: "blog", intent: "vinos por copa según tipo restaurante" },
+  { path: "/article/cuando-carta-vinos-demasiado-larga", canonical: `${BASE}/article/cuando-carta-vinos-demasiado-larga`, lang: "es", type: "blog", intent: "carta vinos demasiado larga referencias" },
+  { path: "/article/como-usar-ia-restaurantes-vender-vino", canonical: `${BASE}/article/como-usar-ia-restaurantes-vender-vino`, lang: "es", type: "blog", intent: "IA restaurantes vender vino inteligencia artificial" },
 
   // ─────────────────────────────────────────────
   // RESOURCES (ES)
