@@ -97,6 +97,12 @@ const guides = [
   { to: "/guias/como-formar-equipo-sala-para-vender-vino", icon: Users, title: "Formar al equipo de sala en vino", desc: "Programa práctico para que tu equipo recomiende vino sin ser sumiller." },
   { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", icon: BarChart3, title: "Usar datos para comprar vinos", desc: "Rotación, márgenes y tendencias: cómo decidir qué comprar con criterio." },
   { to: "/guias/como-conectar-carta-stock-ventas-margen", icon: TrendingUp, title: "Conectar carta, stock, ventas y margen", desc: "Integra las 4 piezas de la gestión del vino en un sistema coherente." },
+  { to: "/guias/como-gestionar-carta-vinos-grupos-restauracion", icon: Building2, title: "Gestionar carta en grupos de restauración", desc: "Governance, benchmarking entre locales y control centralizado del vino." },
+  { to: "/guias/como-implantar-vino-por-copa-sin-perder-margen", icon: Wine, title: "Vino por copa sin perder margen", desc: "Selección, pricing, control de merma y rotación para un programa de copa rentable." },
+  { to: "/guias/como-usar-winerim-sin-sumiller", icon: Users, title: "Usar Winerim sin sumiller en sala", desc: "Cómo Winerim suple la falta de expertise con recomendaciones automáticas y formación integrada." },
+  { to: "/guias/como-decidir-surtido-segun-ticket-medio-tipo-local", icon: DollarSign, title: "Surtido según ticket medio y tipo de local", desc: "Framework para elegir qué vinos tener en carta según tu perfil de cliente y restaurante." },
+  { to: "/guias/como-detectar-canibalizacion-vinos-carta", icon: Search, title: "Detectar canibalización entre vinos", desc: "Identifica referencias que compiten entre sí y optimiza la composición de tu carta." },
+  { to: "/guias/como-revisar-carta-vinos-cada-mes", icon: FileText, title: "Revisar la carta cada mes", desc: "Proceso de 90 minutos para mantener tu carta optimizada mes a mes con datos reales." },
 ];
 
 const resources = [

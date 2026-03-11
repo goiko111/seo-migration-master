@@ -181,6 +181,12 @@ const esRoutes = (
     <Route path="/guias/como-formar-equipo-sala-para-vender-vino" element={<GuiaFormarEquipoSala />} />
     <Route path="/guias/como-usar-datos-para-decidir-que-vinos-comprar" element={<GuiaUsarDatosCompra />} />
     <Route path="/guias/como-conectar-carta-stock-ventas-margen" element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path="/guias/como-gestionar-carta-vinos-grupos-restauracion" element={<GuiaGestionarCartaGrupos />} />
+    <Route path="/guias/como-implantar-vino-por-copa-sin-perder-margen" element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path="/guias/como-usar-winerim-sin-sumiller" element={<GuiaWinerimSinSumiller />} />
+    <Route path="/guias/como-decidir-surtido-segun-ticket-medio-tipo-local" element={<GuiaSurtidoTicketMedio />} />
+    <Route path="/guias/como-detectar-canibalizacion-vinos-carta" element={<GuiaCanibalizacionVinos />} />
+    <Route path="/guias/como-revisar-carta-vinos-cada-mes" element={<GuiaRevisarCartaCadaMes />} />
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
