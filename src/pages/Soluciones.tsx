@@ -99,6 +99,30 @@ const Soluciones = () => {
           </div>
         </section>
 
+        {/* Summary Box */}
+        <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
+          <ScrollReveal>
+            <SummaryBox
+              label={lang === "es" ? "¿Qué son las soluciones Winerim?" : "What are Winerim Solutions?"}
+              definition={lang === "es"
+                ? "Las soluciones Winerim son estrategias específicas de gestión del vino adaptadas a cada tipo de negocio. No son planes genéricos: cada solución aborda un problema concreto con herramientas, datos y metodología probada en restauración real."
+                : "Winerim Solutions are specific wine management strategies adapted to each business type. Not generic plans: each solution addresses a concrete problem with tools, data and methodology proven in real hospitality."
+              }
+              bullets={lang === "es" ? [
+                "Cada solución incluye diagnóstico, implementación y seguimiento",
+                "Basadas en datos reales de restaurantes, no en teoría",
+                "Adaptadas al tamaño y tipo de negocio: desde restaurantes individuales hasta grupos",
+                "Resultados medibles desde las primeras semanas de implementación",
+              ] : [
+                "Each solution includes diagnosis, implementation and follow-up",
+                "Based on real restaurant data, not theory",
+                "Adapted to business size and type: from individual restaurants to groups",
+                "Measurable results from the first weeks of implementation",
+              ]}
+            />
+          </ScrollReveal>
+        </section>
+
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <div className="grid md:grid-cols-2 gap-6">
             {t.solutions.map((item, i) => {
