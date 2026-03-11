@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -99,17 +100,19 @@ const guides = [
 ];
 
 const resources = [
-  { to: "/recursos/plantilla-carta-de-vinos", icon: Download, title: "Plantilla de carta de vinos", desc: "Descarga una plantilla profesional para diseñar tu carta de vinos." },
-  { to: "/recursos/checklist-carta-de-vinos-rentable", icon: CheckCircle, title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta de vinos está optimizada para vender." },
-  { to: "/recursos/guia-vino-por-copa-para-restaurantes", icon: Wine, title: "Guía vino por copa", desc: "Todo sobre cómo diseñar y rentabilizar tu oferta de vino por copa." },
-  { to: "/recursos/plantilla-wine-mapping-restaurante", icon: Layers, title: "Plantilla wine mapping", desc: "Plantilla para estructurar precios y distribución de vinos en tu carta." },
-  { to: "/recursos/plantilla-estrategia-vinos-por-copa", icon: Wine, title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseñar, ejecutar y controlar tu programa de vino por copa." },
-  { to: "/recursos/checklist-deteccion-vinos-muertos", icon: Search, title: "Detección de vinos muertos", desc: "Identifica referencias sin rotación, cuantifica capital inmovilizado y decide qué hacer." },
-  { to: "/recursos/plantilla-formacion-equipo-sala", icon: Brain, title: "Formación exprés para sala", desc: "Programa de formación en vino para tu equipo de sala en menos de 2 semanas." },
-  { to: "/recursos/plantilla-analisis-margenes", icon: DollarSign, title: "Análisis de márgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribución." },
-  { to: "/recursos/scorecard-rendimiento-carta", icon: BarChart3, title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotación, margen y vino por copa." },
-  { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos." },
-  { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías." },
+  { to: "/recursos/plantilla-carta-de-vinos", icon: Download, title: "Plantilla de carta de vinos", desc: "Descarga una plantilla profesional para diseñar tu carta de vinos.", tags: ["estructura", "restaurante", "inicio"] },
+  { to: "/recursos/checklist-carta-de-vinos-rentable", icon: CheckCircle, title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta de vinos está optimizada para vender.", tags: ["rentabilidad", "restaurante", "intermedio"] },
+  { to: "/recursos/guia-vino-por-copa-para-restaurantes", icon: Wine, title: "Guía vino por copa", desc: "Todo sobre cómo diseñar y rentabilizar tu oferta de vino por copa.", tags: ["copa", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-wine-mapping-restaurante", icon: Layers, title: "Plantilla wine mapping", desc: "Plantilla para estructurar precios y distribución de vinos en tu carta.", tags: ["pricing", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-estrategia-vinos-por-copa", icon: Wine, title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseñar, ejecutar y controlar tu programa de vino por copa.", tags: ["copa", "restaurante", "avanzado"] },
+  { to: "/recursos/checklist-deteccion-vinos-muertos", icon: Search, title: "Detección de vinos muertos", desc: "Identifica referencias sin rotación, cuantifica capital inmovilizado y decide qué hacer.", tags: ["rotación", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-formacion-equipo-sala", icon: Brain, title: "Formación exprés para sala", desc: "Programa de formación en vino para tu equipo de sala en menos de 2 semanas.", tags: ["equipo", "restaurante", "inicio"] },
+  { to: "/recursos/plantilla-analisis-margenes", icon: DollarSign, title: "Análisis de márgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribución.", tags: ["pricing", "restaurante", "avanzado"] },
+  { to: "/recursos/scorecard-rendimiento-carta", icon: BarChart3, title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotación, margen y vino por copa.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos.", tags: ["rentabilidad", "restaurante", "inicio"] },
+  { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías.", tags: ["estructura", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-revision-mensual-carta", icon: FileText, title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes: rendimiento, pricing, rotación y plan de acción.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/plantilla-control-grupo-restauracion", icon: Building2, title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking interno entre locales.", tags: ["analítica", "grupo", "avanzado"] },
 ];
 
 const tools = [
@@ -129,7 +132,19 @@ const solutions = [
   { to: "/benchmarks-playbooks", icon: BarChart3, title: "Benchmarks & Playbooks", desc: "Datos de referencia del sector y planes de acción prácticos para tu carta de vinos." },
 ];
 
-type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string };
+type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string; tags?: string[] };
+
+const taxonomyFilters = [
+  { key: "all", label: "Todos" },
+  { key: "pricing", label: "Pricing y márgenes" },
+  { key: "rotación", label: "Rotación y stock" },
+  { key: "copa", label: "Vino por copa" },
+  { key: "equipo", label: "Equipo de sala" },
+  { key: "estructura", label: "Estructura de carta" },
+  { key: "rentabilidad", label: "Rentabilidad" },
+  { key: "analítica", label: "Analítica y KPIs" },
+  { key: "grupo", label: "Grupos de restauración" },
+];
 
 const CardGrid = ({ items, cta }: { items: SectionItem[]; cta?: string }) => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -156,6 +171,7 @@ const CardGrid = ({ items, cta }: { items: SectionItem[]; cta?: string }) => (
 const GuiasRecursos = () => {
   const { lang, localePath } = useLanguage();
   const t = langContent[lang] || langContent.es;
+  const [activeFilter, setActiveFilter] = useState("all");
 
   useEffect(() => {
     const schema = document.createElement("script");
@@ -203,7 +219,26 @@ const GuiasRecursos = () => {
             <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.resourcesTitle}</h2>
             <p className="text-muted-foreground mt-1 text-sm">{t.resourcesDesc}</p>
           </ScrollReveal>
-          <CardGrid items={resources} cta={t.download} />
+          {/* Taxonomy filter pills */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {taxonomyFilters.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setActiveFilter(f.key)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
+                  activeFilter === f.key
+                    ? "bg-wine text-white border-wine"
+                    : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+          <CardGrid
+            items={activeFilter === "all" ? resources : resources.filter(r => r.tags?.includes(activeFilter))}
+            cta={t.download}
+          />
         </section>
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
