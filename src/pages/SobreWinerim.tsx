@@ -245,14 +245,14 @@ const SobreWinerim = () => {
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
           <InternalLinks
             links={[
-              { to: localePath("/que-es-winerim"), label: "¿Qué es Winerim?" },
-              { to: localePath("/funcionalidades"), label: "Funcionalidades" },
-              { to: localePath("/integraciones"), label: "Integraciones" },
-              { to: localePath("/clientes"), label: "Clientes" },
-              { to: localePath("/casos-exito"), label: "Casos de éxito" },
-              { to: "/benchmarks-playbooks", label: "Benchmarks & Playbooks" },
-              { to: localePath("/guias-y-recursos"), label: "Guías y recursos" },
-              { to: localePath("/herramientas"), label: "Herramientas" },
+              { to: localePath("/que-es-winerim"), label: "¿Qué es Winerim?", type: "solution" },
+              { to: localePath("/funcionalidades"), label: "Funcionalidades", type: "solution" },
+              { to: localePath("/integraciones"), label: "Integraciones", type: "solution" },
+              { to: localePath("/clientes"), label: "Clientes", type: "solution" },
+              { to: localePath("/casos-exito"), label: "Casos de éxito", type: "solution" },
+              { to: "/benchmarks-playbooks", label: "Benchmarks & Playbooks", type: "resource" },
+              { to: localePath("/guias-y-recursos"), label: "Guías y recursos", type: "guide" },
+              { to: localePath("/herramientas"), label: "Herramientas", type: "tool" },
             ]}
           />
         </section>
