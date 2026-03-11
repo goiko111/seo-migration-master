@@ -153,6 +153,7 @@ const esRoutes = (
     <Route path="/precios" element={<Precios />} />
     <Route path="/integraciones" element={<Integraciones />} />
     <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
+    <Route path="/soluciones/hoteles" element={<Hoteles />} />
     <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
     <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
     <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
