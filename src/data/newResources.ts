@@ -2,7 +2,7 @@ import {
   Wine, DollarSign, BarChart3, TrendingUp, RotateCcw, Users,
   GlassWater, Download, ListChecks, Target, AlertTriangle,
   Layers, Calendar, FileText, BookOpen, CheckCircle, PieChart,
-  ClipboardList, GraduationCap, ShieldAlert
+  ClipboardList, GraduationCap, ShieldAlert, Building2
 } from "lucide-react";
 import type { ResourcePageData } from "@/components/templates/ResourceTemplate";
 
