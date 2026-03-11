@@ -502,7 +502,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "02",
                   title: "Perfiles de rotación",
-                  desc: "Seleccionan qué vinos son elegibles o prioritarios según margen, stock, velocidad de salida, prime, temporada, precio, localismo y otros criterios configurables.",
+                  desc: "Seleccionan qué vinos deben recibir más atención según margen, stock, velocidad de salida, prime, temporada, localismo o precio.",
                   icon: RefreshCw,
                   color: "from-emerald-500/15 to-emerald-600/5",
                   iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
