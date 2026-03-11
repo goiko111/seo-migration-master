@@ -219,7 +219,26 @@ const GuiasRecursos = () => {
             <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.resourcesTitle}</h2>
             <p className="text-muted-foreground mt-1 text-sm">{t.resourcesDesc}</p>
           </ScrollReveal>
-          <CardGrid items={resources} cta={t.download} />
+          {/* Taxonomy filter pills */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {taxonomyFilters.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setActiveFilter(f.key)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
+                  activeFilter === f.key
+                    ? "bg-wine text-white border-wine"
+                    : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+          <CardGrid
+            items={activeFilter === "all" ? resources : resources.filter(r => r.tags?.includes(activeFilter))}
+            cta={t.download}
+          />
         </section>
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
