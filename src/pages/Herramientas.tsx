@@ -7,6 +7,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
+import MethodologyBox from "@/components/seo/MethodologyBox";
 import FAQSection from "@/components/seo/FAQSection";
 import { useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -32,7 +33,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
       { to: "/wine-pricing-tool", title: "Herramienta de pricing de vinos", desc: "Optimiza la estructura de precios de tu carta. Con Winerim, el pricing inteligente se aplica en tiempo real.", tag: "Pricing" },
       { to: "/wine-pairing-generator", title: "Generador de maridajes con IA", desc: "Genera sugerencias de maridaje con IA. Con Winerim, tus camareros reciben recomendaciones automáticas en cada servicio.", tag: "IA" },
-      { to: "/wine-roi-calculator", title: "Calculadora de ROI", desc: "Calcula cuánto puedes ganar digitalizando tu carta. Nuestros clientes incrementan sus ventas de vino una media del 30%.", tag: "ROI" },
+      { to: "/wine-roi-calculator", title: "Calculadora de ROI", desc: "Calcula el potencial de mejora al digitalizar tu carta. Los resultados varían según el tipo de restaurante y la implementación.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark de cartas de vinos", desc: "Compara tu carta con los estándares del sector. Winerim te envía informes automáticos con tu posición competitiva.", tag: "Benchmark" },
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vino por copa", desc: "Evalúa si tu oferta por copa está equilibrada en estilos, precios y rentabilidad. Con Winerim, esto se monitoriza en tiempo real.", tag: "Diagnóstico" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
@@ -60,7 +61,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
       { to: "/wine-pricing-tool", title: "Wine Pricing Tool", desc: "Optimize your entire pricing structure. With Winerim, smart pricing is applied in real time.", tag: "Pricing" },
       { to: "/wine-pairing-generator", title: "AI Pairing Generator", desc: "Generate AI pairing suggestions. With Winerim, your waitstaff get automatic recommendations every service.", tag: "AI" },
-      { to: "/wine-roi-calculator", title: "ROI Calculator", desc: "Calculate how much you can earn by digitizing your list. Our clients increase wine sales by an average of 30%.", tag: "ROI" },
+      { to: "/wine-roi-calculator", title: "ROI Calculator", desc: "Calculate the potential improvement from digitizing your list. Results vary by restaurant type and implementation.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Wine List Benchmark", desc: "Compare your list against industry standards. Winerim sends you automatic reports with your competitive position.", tag: "Benchmark" },
       { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
@@ -88,7 +89,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calcolatrice prezzo al calice", desc: "Calcola il prezzo ideale al calice. Winerim lo calcola per te e ti avvisa quando conviene aggiustare i prezzi.", tag: "Pricing" },
       { to: "/wine-pricing-tool", title: "Strumento pricing vini", desc: "Ottimizza la struttura prezzi della tua carta. Con Winerim, il pricing intelligente si applica in tempo reale.", tag: "Pricing" },
       { to: "/wine-pairing-generator", title: "Generatore abbinamenti IA", desc: "Genera suggerimenti di abbinamento con IA. Con Winerim, il personale riceve raccomandazioni automatiche ad ogni servizio.", tag: "IA" },
-      { to: "/wine-roi-calculator", title: "Calcolatrice ROI", desc: "Calcola quanto puoi guadagnare digitalizzando la tua carta. I nostri clienti aumentano le vendite di vino del 30% in media.", tag: "ROI" },
+      { to: "/wine-roi-calculator", title: "Calcolatrice ROI", desc: "Calcola il potenziale di miglioramento digitalizzando la tua carta. I risultati variano in base al tipo di ristorante.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark carte dei vini", desc: "Confronta la tua carta con gli standard del settore. Winerim ti invia report automatici con la tua posizione competitiva.", tag: "Benchmark" },
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostica vino al calice", desc: "Valuta se la tua offerta al calice è equilibrata in stili, prezzi e redditività.", tag: "Diagnostica" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita la tua carta con un punteggio 0-100 su struttura, equilibrio, pricing e potenziale commerciale.", tag: "Audit" },
@@ -221,6 +222,32 @@ const Herramientas = () => {
                 "As a Winerim client, all these features run automatically",
                 "Designed by hospitality industry professionals",
               ]}
+            />
+          </ScrollReveal>
+        </section>
+
+        {/* Methodology */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+          <ScrollReveal>
+            <MethodologyBox
+              title={lang === "es" ? "Cómo funcionan las herramientas" : "How the tools work"}
+              intro={lang === "es"
+                ? "Cada herramienta sigue un proceso diseñado para generar resultados accionables sin necesidad de conocimientos técnicos."
+                : "Each tool follows a process designed to generate actionable results without technical knowledge."
+              }
+              steps={lang === "es" ? [
+                { title: "Introduces tus datos", description: "Cada herramienta pide los datos mínimos necesarios: referencias, precios, stock o tu carta actual." },
+                { title: "El algoritmo procesa", description: "Análisis automático basado en benchmarks del sector, buenas prácticas de sommellerie y datos de mercado." },
+                { title: "Recibes resultados accionables", description: "Recomendaciones concretas que puedes aplicar directamente o usar para solicitar una evaluación profesional." },
+              ] : [
+                { title: "Enter your data", description: "Each tool asks for the minimum data needed: references, prices, stock, or your current list." },
+                { title: "The algorithm processes", description: "Automatic analysis based on industry benchmarks, sommelier best practices, and market data." },
+                { title: "Get actionable results", description: "Concrete recommendations you can apply directly or use to request a professional evaluation." },
+              ]}
+              validatedBy={lang === "es"
+                ? "Metodología basada en prácticas de gestión de vino en restauración real."
+                : "Methodology based on real hospitality wine management practices."
+              }
             />
           </ScrollReveal>
         </section>
