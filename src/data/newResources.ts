@@ -710,8 +710,221 @@ export const newResources: ResourcePageData[] = [
       { to: "/analisis-carta", label: "Analizador de carta de vinos", type: "tool" },
     ],
   },
+
+  // 8. Plantilla de revisión mensual de carta de vinos
+  {
+    slug: "plantilla-revision-mensual-carta",
+    formType: "plantilla-revision-mensual",
+    metaTitle: "Plantilla de Revisión Mensual de Carta de Vinos | Winerim",
+    metaDescription: "Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.",
+    badgeIcon: Calendar,
+    badgeLabel: "Plantilla operativa",
+    heroTitle: "Plantilla de revisión mensual de carta de vinos",
+    heroDescription: "Un proceso estructurado para revisar tu carta cada mes: qué funciona, qué no, qué cambiar y qué investigar. Pasa de gestionar por intuición a gestionar con método.",
+    heroStats: [
+      { icon: Calendar, label: "Revisión mensual completa" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Cada cuánto revisas tu carta de vinos de forma sistemática?",
+    problemDescription: "La mayoría de restaurantes revisan su carta solo cuando un proveedor deja de servir algo o cuando el sommelier lo decide. Sin un proceso periódico, los problemas se acumulan: vinos muertos, precios desactualizados, oportunidades perdidas y una carta que envejece sin que nadie lo note.",
+    problemPoints: [
+      { icon: Calendar, text: "No hay un calendario de revisión: se revisa 'cuando toca'" },
+      { icon: RotateCcw, text: "Referencias que llevan meses sin venderse siguen ocupando sitio" },
+      { icon: DollarSign, text: "Precios de compra que han cambiado pero el PVP no se ha actualizado" },
+      { icon: AlertTriangle, text: "Oportunidades estacionales que se pierden por falta de planificación" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Un documento de trabajo mensual con 5 bloques que cubren todo el ciclo de revisión de tu carta.",
+    sections: [
+      {
+        icon: BarChart3,
+        title: "Análisis de rendimiento",
+        points: [
+          "Top 10 y bottom 10 referencias por ventas del mes",
+          "Referencias sin movimiento en los últimos 30 y 60 días",
+          "Evolución del ticket medio en vino vs mes anterior",
+          "Ratio de mesas que piden vino y evolución",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Revisión de pricing",
+        points: [
+          "Verificación de costes de compra actualizados",
+          "Detección de márgenes fuera de objetivo por referencia",
+          "Análisis de coherencia de la escalera de precios",
+          "Ajustes recomendados para el mes siguiente",
+        ],
+      },
+      {
+        icon: RotateCcw,
+        title: "Rotación y composición",
+        points: [
+          "Referencias candidatas a salir de carta (baja rotación + bajo margen)",
+          "Huecos detectados: estilos, regiones o tramos de precio sin cubrir",
+          "Nuevas referencias candidatas a entrar (con criterios de selección)",
+          "Revisión del equilibrio copa vs botella",
+        ],
+      },
+      {
+        icon: Wine,
+        title: "Estacionalidad y oportunidades",
+        points: [
+          "Vinos de temporada a incorporar o destacar el mes próximo",
+          "Eventos, festivos o menús especiales que requieran ajustes",
+          "Maridajes estacionales para comunicar al equipo de sala",
+          "Oportunidades de rotación: liquidación de stock parado en eventos",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Plan de acción",
+        points: [
+          "Resumen de decisiones: qué entra, qué sale, qué cambia de precio",
+          "Responsable y fecha de ejecución de cada acción",
+          "Comunicación al equipo de sala: qué deben saber del nuevo mes",
+          "Objetivos para el mes siguiente: ticket medio, ventas, rotación",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Sumilleres y jefes de compras que quieren un proceso sistemático",
+      "Directores de restaurante que necesitan visibilidad mensual sobre la carta",
+      "Propietarios que quieren dejar de gestionar la carta por inercia",
+      "Grupos de restauración que necesitan un estándar de revisión para todos los locales",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "El primer lunes de cada mes, como rutina de gestión",
+      "Antes de hacer pedidos al distribuidor",
+      "Tras periodos de alta actividad (Navidad, verano, puentes)",
+      "Al incorporar nuevos vinos o cambiar la carta de temporada",
+    ],
+    benefits: [
+      { icon: Calendar, title: "Gestión proactiva", desc: "Deja de reaccionar a problemas y empieza a anticiparlos con un proceso mensual." },
+      { icon: BarChart3, title: "Datos, no intuición", desc: "Cada decisión de carta se basa en rendimiento real, no en sensaciones." },
+      { icon: DollarSign, title: "Margen protegido", desc: "Detecta desfases de coste y pricing antes de que erosionen el beneficio." },
+    ],
+    faqs: [
+      { q: "¿Cuánto tiempo lleva hacer la revisión mensual?", a: "Con los datos preparados, entre 45 y 90 minutos. Es una inversión mínima para evitar problemas mucho más costosos." },
+      { q: "¿Necesito un TPV para tener los datos?", a: "Es ideal, pero puedes empezar con registros manuales de ventas. Lo importante es medir, aunque sea de forma aproximada. Winerim automatiza toda esta recogida de datos." },
+      { q: "¿En qué se diferencia del scorecard mensual?", a: "El scorecard mide KPIs. Esta plantilla es un proceso de revisión completo que incluye análisis, decisiones y plan de acción. El scorecard alimenta esta revisión." },
+    ],
+    ctaFinalTitle: "Automatiza tu revisión mensual con Winerim",
+    ctaFinalDescription: "Winerim genera automáticamente los datos de rendimiento, rotación y pricing que necesitas para tu revisión mensual. Sin recopilar nada manualmente.",
+    internalLinks: [
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
+      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
+      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+    ],
+  },
+
+  // 9. Plantilla para grupos de restauración: control y análisis por local
+  {
+    slug: "plantilla-control-grupo-restauracion",
+    formType: "plantilla-control-grupo",
+    metaTitle: "Plantilla de Control de Carta de Vinos para Grupos de Restauración | Winerim",
+    metaDescription: "Descarga la plantilla para gestionar y comparar la carta de vinos en múltiples locales. KPIs por local, coherencia de surtido, pricing centralizado y benchmarking interno.",
+    badgeIcon: Building2,
+    badgeLabel: "Plantilla para grupos",
+    heroTitle: "Plantilla de control y análisis de carta de vinos para grupos de restauración",
+    heroDescription: "Gestiona, compara y optimiza la carta de vinos en todos tus locales con un framework de control centralizado: KPIs por punto de venta, coherencia de surtido y benchmarking interno.",
+    heroStats: [
+      { icon: Building2, label: "Multi-local" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Cómo comparas el rendimiento del vino entre locales?",
+    problemDescription: "En grupos de restauración, cada local gestiona el vino de forma diferente: distintos proveedores, precios inconsistentes, surtidos desequilibrados y sin visibilidad cruzada. Sin un framework centralizado, es imposible saber qué local lo hace bien y cuál necesita ayuda.",
+    problemPoints: [
+      { icon: Building2, text: "Cada local gestiona el vino de forma autónoma sin estándares comunes" },
+      { icon: DollarSign, text: "Precios inconsistentes para la misma referencia en distintos locales" },
+      { icon: BarChart3, text: "Sin comparativa de KPIs entre locales: no se sabe quién vende mejor" },
+      { icon: Layers, text: "Surtido desequilibrado: locales con demasiadas o pocas referencias" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Un framework completo para gestionar la carta de vinos de forma centralizada en grupos con múltiples locales.",
+    sections: [
+      {
+        icon: BarChart3,
+        title: "Dashboard comparativo por local",
+        points: [
+          "KPIs mensuales por local: ventas de vino, ticket medio, peso en facturación",
+          "Ranking de locales por rendimiento de carta",
+          "Evolución mensual de cada local vs media del grupo",
+          "Alertas de desviación: locales por debajo del objetivo",
+        ],
+      },
+      {
+        icon: Wine,
+        title: "Gestión de surtido centralizado",
+        points: [
+          "Catálogo corporativo: referencias comunes obligatorias para todos los locales",
+          "Margen de libertad por local: referencias opcionales según perfil",
+          "Control de precios: PVP objetivo por referencia y local",
+          "Detección de referencias no autorizadas o fuera de catálogo",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Análisis financiero consolidado",
+        points: [
+          "Margen bruto del vino por local y consolidado del grupo",
+          "Food cost del vino por local vs objetivo corporativo",
+          "Volumen de compra consolidado para negociación con proveedores",
+          "Detección de oportunidades de centralización de compras",
+        ],
+      },
+      {
+        icon: Target,
+        title: "Benchmarking interno",
+        points: [
+          "Comparativa de best practices entre locales",
+          "Identificación de locales referente por cada KPI",
+          "Programa de cross-learning: compartir las mejores estrategias",
+          "Objetivos diferenciados por perfil de local",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Directores de F&B de grupos de restauración",
+      "Controllers y directores financieros de cadenas de restaurantes",
+      "Responsables de compras centralizadas",
+      "Directores de operaciones que supervisan múltiples locales",
+      "Franquiciadores que quieren estandarizar la gestión del vino",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Al implementar un sistema de gestión centralizada del vino",
+      "En las reuniones mensuales de dirección del grupo",
+      "Al preparar la negociación anual con proveedores",
+      "Cuando detectes inconsistencias de precios entre locales",
+      "Al abrir un nuevo local y definir su carta inicial",
+    ],
+    benefits: [
+      { icon: Building2, title: "Visibilidad multi-local", desc: "Compara el rendimiento de todos tus locales en un solo documento." },
+      { icon: DollarSign, title: "Pricing coherente", desc: "Asegura que los precios del vino son consistentes con la estrategia del grupo." },
+      { icon: Target, title: "Benchmarking interno", desc: "Identifica qué locales lo hacen mejor y replica sus mejores prácticas." },
+    ],
+    faqs: [
+      { q: "¿A partir de cuántos locales tiene sentido esta plantilla?", a: "Desde 2 locales ya tiene valor, porque permite comparar y estandarizar. A partir de 5 locales se convierte en imprescindible." },
+      { q: "¿Puedo adaptarla a locales con cocinas diferentes?", a: "Sí. La plantilla incluye un campo de perfil de local que permite objetivos diferenciados. Los KPIs se comparan dentro del mismo perfil." },
+      { q: "¿Cómo gestiono las referencias locales vs las corporativas?", a: "La sección de surtido centralizado define un catálogo común obligatorio y un margen de libertad por local. Así mantienes coherencia sin rigidez." },
+    ],
+    ctaFinalTitle: "Gestiona tu grupo con Winerim",
+    ctaFinalDescription: "Winerim centraliza la gestión de carta, stock y analítica de todos tus locales en un solo panel. KPIs, benchmarking y control de surtido automatizados.",
+    internalLinks: [
+      { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos de restauración", type: "solution" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", label: "Guía: carta de vinos para grupos", type: "guide" },
+      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+    ],
+  },
 ];
 
 export function getResourceBySlug(slug: string): ResourcePageData | undefined {
   return newResources.find(r => r.slug === slug);
 }
+
