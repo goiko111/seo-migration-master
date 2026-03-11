@@ -85,14 +85,14 @@ const Contacto = () => {
     const fd = new FormData(e.currentTarget);
     const leadData = {
       form_type: "contacto",
-      restaurant: fd.get("restaurant") as string || null,
-      name: fd.get("name") as string || null,
-      position: fd.get("position") as string || null,
-      phone: fd.get("phone") as string || null,
-      email: fd.get("email") as string || null,
-      city: fd.get("city") as string || null,
-      references_count: fd.get("references_count") as string || null,
-      message: fd.get("message") as string || null,
+      restaurant: (fd.get("restaurant") as string)?.trim() || null,
+      name: (fd.get("name") as string)?.trim() || null,
+      position: (fd.get("position") as string)?.trim() || null,
+      phone: (fd.get("phone") as string)?.trim() || null,
+      email: (fd.get("email") as string)?.trim() || null,
+      city: (fd.get("city") as string)?.trim() || null,
+      references_count: (fd.get("references_count") as string)?.trim() || null,
+      message: (fd.get("message") as string)?.trim() || null,
     };
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
