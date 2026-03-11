@@ -50,9 +50,19 @@ const objectiveCards = [
     borderHover: "hover:border-amber-500/30",
   },
   {
+    icon: Target,
+    title: "Maximizar margen",
+    desc: "Reordena y destaca referencias con mayor contribución al negocio.",
+    modules: ["MarginRIM™", "FocusRIM™", "SmartRIM™"],
+    gradient: "from-wine/20 via-wine/5 to-transparent",
+    iconColor: "text-wine",
+    iconBg: "bg-wine/10 group-hover:bg-wine/20",
+    borderHover: "hover:border-wine/30",
+  },
+  {
     icon: RefreshCw,
     title: "Aumentar rotación",
-    desc: "Da salida a vinos lentos, sobrestock o referencias con riesgo de quedar paradas.",
+    desc: "Da salida a vinos lentos, sobrestock o referencias con riesgo de quedarse paradas.",
     modules: ["StockRIM™", "ClimateRIM™", "CleanRIM™"],
     gradient: "from-blue-500/20 via-blue-500/5 to-transparent",
     iconColor: "text-blue-400",
@@ -62,7 +72,7 @@ const objectiveCards = [
   {
     icon: Activity,
     title: "Limpiar bodega",
-    desc: "Activa acciones específicas para mover últimas unidades, vinos fuera de foco o stock inmovilizado.",
+    desc: "Activa acciones específicas para mover últimas unidades y stock inmovilizado.",
     modules: ["CleanRIM™", "StockRIM™", "SmartRIM™"],
     gradient: "from-rose-500/20 via-rose-500/5 to-transparent",
     iconColor: "text-rose-400",
@@ -86,7 +96,7 @@ const rimCards = [
   {
     name: "SmartRIM™",
     desc: "El cerebro que orquesta prioridades, resuelve conflictos y recalcula la mejor combinación de acciones.",
-    result: "Decisiones más inteligentes",
+    result: "Orquestación inteligente",
     icon: Brain,
     color: "from-violet-500/20 to-violet-500/5",
     iconBg: "bg-violet-500/12",
@@ -129,7 +139,7 @@ const rimCards = [
   {
     name: "ClimateRIM™",
     desc: "Adapta la visibilidad de los vinos al clima real para mejorar conversión y adecuación al momento.",
-    result: "Mayor conversión contextual",
+    result: "Más afinidad contextual",
     icon: Eye,
     color: "from-cyan-500/20 to-cyan-500/5",
     iconBg: "bg-cyan-500/12",
@@ -139,7 +149,7 @@ const rimCards = [
   {
     name: "PrimeRIM™",
     desc: "Da protagonismo a vinos en su mejor ventana de consumo y ayuda a aprovechar su momento óptimo.",
-    result: "Vinos en su punto ideal",
+    result: "Mejor aprovechamiento del prime",
     icon: Zap,
     color: "from-wine/20 to-wine/5",
     iconBg: "bg-wine/12",
@@ -318,7 +328,7 @@ const InteligenciaDinamica = () => {
                   { icon: TrendingUp, label: "Más margen" },
                   { icon: RefreshCw, label: "Más rotación" },
                   { icon: Activity, label: "Menos stock muerto" },
-                  { icon: Users, label: "Mejor experiencia" },
+                  { icon: Users, label: "Mejor experiencia de elección" },
                 ].map((item) => (
                   <span
                     key={item.label}
@@ -358,7 +368,7 @@ const InteligenciaDinamica = () => {
                 custom={5}
                 className="text-center text-xs text-muted-foreground/50 tracking-wide"
               >
-                Disponible para pilotos y despliegues progresivos en restaurantes seleccionados.
+                Disponible para despliegues progresivos y pilotos seleccionados.
               </motion.p>
 
             </motion.div>
@@ -374,11 +384,11 @@ const InteligenciaDinamica = () => {
             <ScrollReveal>
               <div className="text-center mb-16">
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  Carta de vinos inteligente vs.{" "}
-                  <span className="text-gradient-wine">carta digital tradicional</span>
+                  De carta digital a{" "}
+                  <span className="text-gradient-wine">sistema de decisión comercial</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto mt-5">
-                  Una carta digital dinámica no solo muestra vinos: toma decisiones de negocio en tiempo real.
+                  Una carta tradicional muestra vinos. Winerim con Inteligencia dinámica decide cómo priorizarlos según el negocio y el contexto.
                 </p>
               </div>
             </ScrollReveal>
@@ -397,11 +407,11 @@ const InteligenciaDinamica = () => {
                   </div>
                   <ul className="space-y-5">
                     {[
-                      "Muestra vinos",
                       "Orden fijo",
                       "Recomendación estática",
-                      "No reacciona al contexto",
-                      "No prioriza negocio ni rotación",
+                      "Sin reacción al contexto",
+                      "Misma lógica para cualquier momento",
+                      "Sin priorización de margen ni rotación",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3.5">
                         <span className="mt-1.5 w-2 h-2 rounded-full bg-muted-foreground/25 shrink-0" />
@@ -425,11 +435,11 @@ const InteligenciaDinamica = () => {
                     </div>
                     <ul className="space-y-5">
                       {[
-                        "Reordena con intención",
-                        "Prioriza según objetivo",
-                        "Activa estrategias por contexto real",
-                        "Empuja referencias clave",
-                        "Equilibra margen, stock y experiencia",
+                        "Prioriza con intención",
+                        "Reordena según objetivo",
+                        "Reacciona al servicio y al contexto",
+                        "Activa estrategias automáticamente",
+                        "Equilibra experiencia, margen y stock",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-3.5">
                           <CheckCircle size={16} className="mt-0.5 text-wine shrink-0" />
@@ -448,7 +458,7 @@ const InteligenciaDinamica = () => {
                 <p className="font-heading text-xl md:text-2xl text-foreground/90 leading-snug italic">
                   "Winerim no solo enseña vinos.{" "}
                   <span className="text-gradient-wine not-italic font-semibold">
-                    Decide cuándo conviene mostrar, impulsar, simplificar o rotar
+                    Decide cuándo conviene mostrar, simplificar, impulsar o rotar
                   </span>{" "}
                   cada referencia."
                 </p>
@@ -483,7 +493,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "01",
                   title: "Objetivos",
-                  desc: "Definen qué quiere conseguir el restaurante: más facturación, más margen, más rotación, carta viva, impulsar vinos locales o mejorar la experiencia premium.",
+                  desc: "Definen qué quiere conseguir el restaurante: más facturación, más margen, más rotación, carta viva o experiencia premium.",
                   icon: Target,
                   color: "from-amber-500/15 to-amber-600/5",
                   iconBg: "bg-amber-500/10 group-hover:bg-amber-500/20",
@@ -492,7 +502,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "02",
                   title: "Perfiles de rotación",
-                  desc: "Seleccionan qué vinos son elegibles o prioritarios según margen, stock, velocidad de salida, prime, temporada, precio, localismo y otros criterios configurables.",
+                  desc: "Seleccionan qué vinos deben recibir más atención según margen, stock, velocidad de salida, prime, temporada, localismo o precio.",
                   icon: RefreshCw,
                   color: "from-emerald-500/15 to-emerald-600/5",
                   iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
@@ -510,7 +520,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "04",
                   title: "Módulos RIM™",
-                  desc: "Deciden cuándo y por qué actuar según contexto real: hora, clima, calendario, ventas, afluencia, stock, rentabilidad o comportamiento del comensal.",
+                  desc: "Deciden cuándo y por qué actuar según clima, afluencia, ventas, stock, calendario o comportamiento real.",
                   icon: Brain,
                   color: "from-wine/15 to-wine/5",
                   iconBg: "bg-wine/10 group-hover:bg-wine/20",
@@ -677,11 +687,11 @@ const InteligenciaDinamica = () => {
                   Módulos RIM™
                 </Badge>
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
-                  Módulos RIM™: la IA para hostelería{" "}
-                  <span className="text-gradient-wine">que actúa por ti</span>
+                  Los módulos que hacen que{" "}
+                  <span className="text-gradient-wine">la carta reaccione</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                  Cada módulo responde a una lógica de negocio distinta. Juntos convierten la carta en un software de optimización de margen en restaurantes.
+                  Cada RIM™ responde a una lógica distinta. Juntos convierten la carta en un sistema táctico.
                 </p>
               </div>
             </ScrollReveal>
@@ -765,7 +775,7 @@ const InteligenciaDinamica = () => {
                   <span className="text-gradient-wine">no una suma de automatizaciones</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Winerim prioriza según protección del negocio, contexto real y estrategia comercial.
+                  Cuando varios módulos pueden actuar a la vez, Winerim resuelve prioridades para mantener coherencia comercial y utilidad real.
                 </p>
               </div>
             </ScrollReveal>
