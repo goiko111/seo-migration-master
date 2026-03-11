@@ -274,6 +274,17 @@ const content: Record<string, Content> = {
       { title: "Optimisation de l'offre", desc: "Identifiez les doublons, les lacunes et les opportunités dans chaque carte. Adaptez la sélection au profil de chaque établissement." },
       { title: "Expérience client améliorée", desc: "Cartes digitales avec accords, fiches vins et recommandations intelligentes dans tous vos restaurants." },
     ],
+    capLabel: "Capacités pour les groupes",
+    capTitle: "Ce que Winerim peut faire pour un groupe",
+    capSubtitle: "Une couche d'intelligence pour gouverner le vin à l'échelle, pas comme des établissements isolés.",
+    capCards: [
+      { title: "Comparer les unités", desc: "Comparer la performance, la rotation, les marges et le comportement du vin entre les établissements." },
+      { title: "Détecter les opportunités invisibles", desc: "Trouver des références sous-exploitées, des lacunes de pricing, la cannibalisation et le stock immobilisé." },
+      { title: "Décider quoi répliquer", desc: "Identifier quels vins, formats ou stratégies méritent d'être déployés dans le reste du groupe." },
+      { title: "Adapter par type d'établissement", desc: "Ne pas appliquer la même logique au fine dining, casual premium, hôtel urbain ou destination touristique." },
+      { title: "Professionnaliser la catégorie", desc: "Réduire la dépendance au jugement individuel de chaque directeur ou sommelier." },
+      { title: "Activer des règles par marque ou unité", desc: "Définir des priorités différentes selon l'objectif business, la marque, la ville ou le type de client." },
+    ],
     featLabel: "Fonctionnalités", featTitle1: "Conçu pour ", featTitleHighlight: "passer à l'échelle",
     features: [
       { title: "Gestion multi-sites", desc: "Tableau de bord central avec vue sur tous les restaurants. Filtrez, comparez et agissez depuis un seul panneau." },
