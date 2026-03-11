@@ -775,7 +775,7 @@ const InteligenciaDinamica = () => {
                   <span className="text-gradient-wine">no una suma de automatizaciones</span>
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Winerim prioriza según protección del negocio, contexto real y estrategia comercial.
+                  Cuando varios módulos pueden actuar a la vez, Winerim resuelve prioridades para mantener coherencia comercial y utilidad real.
                 </p>
               </div>
             </ScrollReveal>
