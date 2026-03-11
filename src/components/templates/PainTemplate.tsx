@@ -10,6 +10,9 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import CTASection from "@/components/CTASection";
+import StickyCTA from "@/components/StickyCTA";
 
 interface SolutionStep {
   step: string;
@@ -92,10 +95,15 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
             className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
             {data.heroSubtitle}
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+            className="flex flex-wrap gap-4">
             <Link to={ctaPrimaryUrl}
               className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
               {ctaPrimary} <ArrowRight size={16} />
+            </Link>
+            <Link to="/demo"
+              className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+              Solicitar demo
             </Link>
           </motion.div>
         </div>
@@ -157,6 +165,16 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
           </div>
         </ScrollReveal>
       </section>
+
+      {/* MID CTA — contextual for pain pages (MOFU → BOFU bridge) */}
+      <ArticleMidCTA
+        pageType="guide"
+        title="¿Quieres saber si tu carta tiene este problema?"
+        description="Analiza tu carta gratis y detecta oportunidades de mejora en margen, rotación y surtido."
+        buttonText="Analizar mi carta gratis"
+        buttonUrl="/analisis-carta"
+        variant="highlight"
+      />
 
       {/* SOLUCIÓN PASO A PASO */}
       <section className="bg-gradient-card border-y border-border py-20">
@@ -243,30 +261,21 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         </section>
       )}
 
-      {/* CTA FINAL */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <Sparkles size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              {data.ctaFinalTitle || "No dejes que tu carta de vinos pierda dinero"}
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              {data.ctaFinalDescription || "Winerim te ayuda a diagnosticar y corregir los problemas de tu carta de vinos con datos y tecnología."}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={ctaPrimaryUrl}
-                className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                {ctaPrimary} <ArrowRight size={16} />
-              </Link>
-              <Link to="/demo"
-                className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-                Solicitar demo
-              </Link>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* CTA FINAL — BOFU bridge */}
+      <CTASection
+        pageType="guide"
+        badge="Siguiente paso"
+        title={data.ctaFinalTitle || "No dejes que tu carta de vinos pierda dinero"}
+        description={data.ctaFinalDescription || "Analiza tu carta gratis. Te mostramos oportunidades reales de mejora en margen, rotación y surtido."}
+        primaryText={ctaPrimary}
+        primaryUrl={ctaPrimaryUrl}
+        secondaryText="Solicitar demo"
+        secondaryUrl="/demo"
+        micro="Sin compromiso. Envía tu carta en cualquier formato."
+      />
+
+      {/* Sticky CTA */}
+      <StickyCTA pageType="guide" text="Analiza tu carta gratis →" url="/analisis-carta" />
 
       <Footer />
     </div>

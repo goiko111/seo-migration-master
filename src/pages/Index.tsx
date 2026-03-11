@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
+import StickyCTA from "@/components/StickyCTA";
 import SEOHead from "@/components/SEOHead";
 import HeroSection from "@/components/landing/HeroSection";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -78,6 +79,7 @@ const Index = () => {
           </section>
           <VideoSection />
           <FinalCTASection />
+          <StickyCTA pageType="home" />
         </Suspense>
       </main>
       <Suspense fallback={null}>
