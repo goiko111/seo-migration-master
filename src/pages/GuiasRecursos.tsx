@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   BookOpen, TrendingUp, Wine, BarChart3, Utensils, Calculator,
   Brain, DollarSign, Download, Search, FileText, CheckCircle,
-  Layers, Building2
+  Layers, Building2, Users
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
