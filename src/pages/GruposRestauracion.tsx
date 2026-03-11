@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, Building2, AlertTriangle, CheckCircle, BarChart3,
   Layers, RefreshCw, DollarSign, TrendingUp, Users, Wine,
-  Warehouse, Globe, Sparkles, Store
+  Warehouse, Globe, Sparkles, Store, Search, GitCompare, Box, Expand
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+type IntelCard = { title: string; desc: string };
 type Content = {
   metaTitle: string; metaDescription: string;
   badgeLabel: string; breadSolutions: string; breadLabel: string;
@@ -29,6 +30,8 @@ type Content = {
   results: { value: string; desc: string }[];
   scaleLabel: string; scaleTitle1: string; scaleTitleHighlight: string;
   useCases: { size: string; scenario: string; howLabel: string; how: string; result: string }[];
+  intelLabel: string; intelTitle1: string; intelTitleHighlight: string; intelSubtitle: string;
+  intelCards: IntelCard[];
   ctaLabel: string; ctaTitle1: string; ctaTitleHighlight: string; ctaDesc: string; ctaButton: string;
   links: { label: string }[];
 };
@@ -77,6 +80,16 @@ const content: Record<string, Content> = {
       { size: "3 restaurantes", scenario: "Un grupo con un gastronómico, un casual y un wine bar.", howLabel: "Cómo funciona", how: "Cada local tiene su carta adaptada pero gestionada desde un mismo panel. Los precios se ajustan según el posicionamiento de cada restaurante.", result: "Consistencia de marca sin perder la personalidad de cada local." },
       { size: "10 restaurantes", scenario: "Cadena de restauración con locales en varias ciudades.", howLabel: "Cómo funciona", how: "Cartas base compartidas con variaciones locales. Analítica centralizada para identificar los vinos más rentables y replicar el éxito.", result: "Reducción del 40% en tiempo de gestión de cartas. +18% en ventas de vino." },
       { size: "50+ restaurantes", scenario: "Gran grupo de restauración con múltiples marcas y conceptos.", howLabel: "Cómo funciona", how: "API integrada con ERP y POS. Gestión por clusters de locales. Reporting automatizado para dirección. Account manager dedicado.", result: "Control total sobre la estrategia de vino en toda la organización." },
+    ],
+    intelLabel: "Inteligencia de surtido",
+    intelTitle1: "Decisiones de surtido y compra basadas en ",
+    intelTitleHighlight: "rendimiento real",
+    intelSubtitle: "Winerim ayuda a grupos de restauración y hoteleros a decidir qué referencias mantener, replicar, impulsar, retirar o testear según margen, rotación, ticket medio, tipo de unidad y comportamiento real de la carta.",
+    intelCards: [
+      { title: "Inteligencia de surtido", desc: "Detecta qué estilos, rangos de precio, formatos y referencias funcionan mejor según el tipo de unidad, perfil de cliente y contexto operativo." },
+      { title: "Benchmarking entre unidades", desc: "Compara locales, identifica diferencias de rendimiento y detecta qué cartas, vinos o estrategias están funcionando mejor y dónde." },
+      { title: "Estandarización inteligente", desc: "Permite definir referencias core, referencias por cluster y vinos específicos por local sin caer en una uniformidad rígida." },
+      { title: "Oportunidades de compra y escalado", desc: "Ayuda a decidir qué vinos merece la pena expandir a más unidades, cuáles retirar, cuáles testear en piloto y dónde hay oportunidades de margen o rotación." },
     ],
     ctaLabel: "Para grupos", ctaTitle1: "Optimiza la gestión del vino en ", ctaTitleHighlight: "todos tus restaurantes",
     ctaDesc: "Te mostramos cómo Winerim se adapta a la estructura de tu grupo. Demo personalizada con tu equipo.",
@@ -127,6 +140,16 @@ const content: Record<string, Content> = {
       { size: "10 restaurants", scenario: "Restaurant chain with venues in multiple cities.", howLabel: "How it works", how: "Shared base lists with local variations. Centralized analytics to identify the most profitable wines and replicate success.", result: "40% reduction in list management time. +18% in wine sales." },
       { size: "50+ restaurants", scenario: "Large restaurant group with multiple brands and concepts.", howLabel: "How it works", how: "API integrated with ERP and POS. Cluster-based venue management. Automated reporting for management. Dedicated account manager.", result: "Total control over the wine strategy across the organization." },
     ],
+    intelLabel: "Assortment intelligence",
+    intelTitle1: "Assortment and purchasing decisions based on ",
+    intelTitleHighlight: "real performance",
+    intelSubtitle: "Winerim helps restaurant groups and hotel operators decide which references to keep, replicate, push, retire, or test based on margin, rotation, average ticket, unit type, and actual wine list behavior.",
+    intelCards: [
+      { title: "Assortment intelligence", desc: "Detects which styles, price ranges, formats, and references perform best by unit type, customer profile, and operational context." },
+      { title: "Cross-unit benchmarking", desc: "Compare venues, identify performance gaps, and detect which lists, wines, or strategies are working best and where." },
+      { title: "Smart standardization", desc: "Define core references, cluster-based selections, and venue-specific wines without falling into rigid uniformity." },
+      { title: "Purchase & scaling opportunities", desc: "Decide which wines to expand to more units, which to retire, which to pilot-test, and where margin or rotation opportunities lie." },
+    ],
     ctaLabel: "For groups", ctaTitle1: "Optimize wine management across ", ctaTitleHighlight: "all your restaurants",
     ctaDesc: "We'll show you how Winerim adapts to your group's structure. Personalized demo with your team.",
     ctaButton: "Request demo",
@@ -176,6 +199,16 @@ const content: Record<string, Content> = {
       { size: "10 ristoranti", scenario: "Catena di ristorazione con locali in diverse città.", howLabel: "Come funziona", how: "Carte base condivise con variazioni locali. Analisi centralizzata per identificare i vini più redditizi e replicare il successo.", result: "Riduzione del 40% nel tempo di gestione delle carte. +18% nelle vendite di vino." },
       { size: "50+ ristoranti", scenario: "Grande gruppo di ristorazione con più marchi e concept.", howLabel: "Come funziona", how: "API integrata con ERP e POS. Gestione per cluster di locali. Reporting automatizzato per la direzione. Account manager dedicato.", result: "Controllo totale sulla strategia del vino in tutta l'organizzazione." },
     ],
+    intelLabel: "Intelligenza di assortimento",
+    intelTitle1: "Decisioni di assortimento e acquisto basate su ",
+    intelTitleHighlight: "performance reale",
+    intelSubtitle: "Winerim aiuta gruppi di ristorazione e operatori alberghieri a decidere quali referenze mantenere, replicare, spingere, ritirare o testare in base a margine, rotazione, scontrino medio, tipo di locale e comportamento reale della carta.",
+    intelCards: [
+      { title: "Intelligenza di assortimento", desc: "Rileva quali stili, fasce di prezzo, formati e referenze funzionano meglio per tipo di locale, profilo cliente e contesto operativo." },
+      { title: "Benchmarking tra unità", desc: "Confronta i locali, identifica differenze di performance e rileva quali carte, vini o strategie funzionano meglio e dove." },
+      { title: "Standardizzazione intelligente", desc: "Permette di definire referenze core, referenze per cluster e vini specifici per locale senza cadere in un'uniformità rigida." },
+      { title: "Opportunità di acquisto e scaling", desc: "Aiuta a decidere quali vini espandere ad altri locali, quali ritirare, quali testare in pilota e dove ci sono opportunità di margine o rotazione." },
+    ],
     ctaLabel: "Per i gruppi", ctaTitle1: "Ottimizza la gestione del vino in ", ctaTitleHighlight: "tutti i tuoi ristoranti",
     ctaDesc: "Ti mostriamo come Winerim si adatta alla struttura del tuo gruppo. Demo personalizzata con il tuo team.",
     ctaButton: "Richiedi demo",
@@ -224,6 +257,16 @@ const content: Record<string, Content> = {
       { size: "3 restaurants", scenario: "Un groupe avec un gastronomique, un casual et un bar à vins.", howLabel: "Comment ça marche", how: "Chaque établissement a sa carte adaptée mais gérée depuis un seul panneau. Les prix s'ajustent au positionnement de chaque restaurant.", result: "Cohérence de marque sans perdre la personnalité de chaque établissement." },
       { size: "10 restaurants", scenario: "Chaîne de restauration avec des établissements dans plusieurs villes.", howLabel: "Comment ça marche", how: "Cartes de base partagées avec variations locales. Analytique centralisée pour identifier les vins les plus rentables et reproduire le succès.", result: "Réduction de 40% du temps de gestion des cartes. +18% des ventes de vin." },
       { size: "50+ restaurants", scenario: "Grand groupe de restauration avec plusieurs marques et concepts.", howLabel: "Comment ça marche", how: "API intégrée avec ERP et POS. Gestion par clusters d'établissements. Reporting automatisé pour la direction. Account manager dédié.", result: "Contrôle total sur la stratégie vin dans toute l'organisation." },
+    ],
+    intelLabel: "Intelligence d'assortiment",
+    intelTitle1: "Décisions d'assortiment et d'achat basées sur la ",
+    intelTitleHighlight: "performance réelle",
+    intelSubtitle: "Winerim aide les groupes de restauration et les opérateurs hôteliers à décider quelles références garder, reproduire, pousser, retirer ou tester en fonction de la marge, de la rotation, du ticket moyen, du type d'établissement et du comportement réel de la carte.",
+    intelCards: [
+      { title: "Intelligence d'assortiment", desc: "Détecte quels styles, gammes de prix, formats et références fonctionnent le mieux selon le type d'établissement, le profil client et le contexte opérationnel." },
+      { title: "Benchmarking inter-établissements", desc: "Compare les établissements, identifie les écarts de performance et détecte quelles cartes, vins ou stratégies fonctionnent le mieux et où." },
+      { title: "Standardisation intelligente", desc: "Permet de définir des références core, des références par cluster et des vins spécifiques par établissement sans tomber dans une uniformité rigide." },
+      { title: "Opportunités d'achat et de scaling", desc: "Aide à décider quels vins étendre à d'autres établissements, lesquels retirer, lesquels tester en pilote et où se trouvent les opportunités de marge ou de rotation." },
     ],
     ctaLabel: "Pour les groupes", ctaTitle1: "Optimisez la gestion du vin dans ", ctaTitleHighlight: "tous vos restaurants",
     ctaDesc: "Nous vous montrons comment Winerim s'adapte à la structure de votre groupe. Démo personnalisée avec votre équipe.",
@@ -426,6 +469,64 @@ const GruposRestauracion = () => {
                     <div className="mt-auto flex items-start gap-2">
                       <Sparkles size={13} className="text-wine shrink-0 mt-0.5" />
                       <p className="text-xs font-medium">{uc.result}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ASSORTMENT INTELLIGENCE */}
+      <section className="section-padding relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-wine/6 rounded-full blur-[160px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/20 bg-wine/5 mb-6">
+              <Search size={14} className="text-wine" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.intelLabel}</span>
+            </div>
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              {t.intelTitle1}<span className="text-gradient-wine italic">{t.intelTitleHighlight}</span>
+            </h2>
+            <p className="text-muted-foreground mt-5 max-w-3xl mx-auto leading-relaxed">
+              {t.intelSubtitle}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+            {t.intelCards.map((card, i) => {
+              const icons = [Search, GitCompare, Box, Expand];
+              const colors = [
+                { gradient: "from-wine/15 to-wine/5", iconBg: "bg-wine/10", iconColor: "text-wine", border: "hover:border-wine/30" },
+                { gradient: "from-blue-500/15 to-blue-500/5", iconBg: "bg-blue-500/10", iconColor: "text-blue-400", border: "hover:border-blue-500/30" },
+                { gradient: "from-amber-500/15 to-amber-500/5", iconBg: "bg-amber-500/10", iconColor: "text-amber-400", border: "hover:border-amber-500/30" },
+                { gradient: "from-emerald-500/15 to-emerald-500/5", iconBg: "bg-emerald-500/10", iconColor: "text-emerald-400", border: "hover:border-emerald-500/30" },
+              ];
+              const Icon = icons[i] || Search;
+              const c = colors[i] || colors[0];
+              return (
+                <ScrollReveal key={i} delay={i * 0.08}>
+                  <div className={`group relative h-full rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm ${c.border} transition-all duration-500 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-1 overflow-hidden`}>
+                    {/* Hover gradient */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+
+                    <div className="relative p-7 md:p-8 flex flex-col h-full">
+                      <div className={`w-12 h-12 rounded-xl ${c.iconBg} flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110`}>
+                        <Icon className={`w-6 h-6 ${c.iconColor}`} />
+                      </div>
+                      <h3 className="font-heading text-lg font-bold text-foreground mb-3">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                        {card.desc}
+                      </p>
                     </div>
                   </div>
                 </ScrollReveal>
