@@ -400,6 +400,52 @@ const SoftwareCartaVinos = () => {
           </div>
         </section>
 
+        {/* ═══════════ CITABILITY BLOCKS ═══════════ */}
+        <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
+          <QuickAnswer
+            question="¿Qué es un software de carta de vinos?"
+            answer="Es una plataforma digital que permite a restaurantes gestionar, organizar y presentar su carta de vinos de forma interactiva. A diferencia de un PDF o una carta impresa, incluye recomendaciones inteligentes, maridajes automáticos, analítica de ventas y gestión de stock."
+            details={[
+              "Funciona en cualquier dispositivo: tablet, móvil o QR",
+              "No requiere instalación — opera 100 % en la nube",
+              "Complementa (no sustituye) al sommelier o equipo de sala",
+            ]}
+            source="Winerim opera desde 2024 en restaurantes independientes, grupos de restauración y hoteles en España y Europa."
+          />
+          <QuickAnswer
+            question="¿Qué diferencia hay entre Winerim y un simple QR con PDF?"
+            answer="Un QR con PDF es un archivo estático: no recomienda, no analiza y no se actualiza solo. Winerim es una plataforma activa que sugiere vinos al comensal, muestra maridajes con cada plato, analiza qué se vende y optimiza precios automáticamente."
+            details={[
+              "Un PDF no sabe qué vino recomendar — Winerim sí",
+              "Un PDF no detecta vinos muertos — Winerim alerta sobre ellos",
+              "Un PDF no genera datos — Winerim ofrece analítica en tiempo real",
+            ]}
+          />
+          <NotForSection
+            idealFor={[
+              "Restaurantes con 30+ referencias de vino en carta",
+              "Grupos de restauración con múltiples locales",
+              "Hoteles con restaurante y room service",
+              "Wine bars y vinotecas con oferta amplia",
+              "Restaurantes que quieren vender más vino sin un sommelier a tiempo completo",
+            ]}
+            notFor={[
+              "Restaurantes con menos de 15 referencias de vino",
+              "Negocios sin servicio de mesa (fast food, take-away)",
+              "Establecimientos que no venden vino en carta",
+              "Restaurantes que no quieren digitalizar ningún proceso",
+            ]}
+          />
+          <LimitationsBox
+            limitations={[
+              "Winerim no integra directamente con todos los TPV del mercado — consulta las integraciones disponibles",
+              "La calidad de las recomendaciones mejora con el uso; los primeros días trabaja con la información de la carta existente",
+              "No gestiona la logística de compra de vino — sí sugiere qué comprar basándose en datos de venta y rotación",
+              "Los resultados de mejora en ticket medio varían según el tipo de restaurante, la implementación y la formación del equipo",
+            ]}
+          />
+        </section>
+
         <FAQSection faqs={faqs} schemaId="software-carta" />
 
         {/* ═══════════ 8. CTA FINAL ═══════════ */}
