@@ -205,6 +205,17 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/guias/como-conectar-carta-stock-ventas-margen", canonical: `${BASE}/guias/como-conectar-carta-stock-ventas-margen`, lang: "es", type: "guide", intent: "conectar carta stock ventas margen restaurante" },
 
   // ─────────────────────────────────────────────
+  // NEW RESOURCES (ES)
+  // ─────────────────────────────────────────────
+  { path: "/recursos/plantilla-estrategia-vinos-por-copa", canonical: `${BASE}/recursos/plantilla-estrategia-vinos-por-copa`, lang: "es", type: "resource", intent: "plantilla estrategia vino por copa restaurante" },
+  { path: "/recursos/checklist-deteccion-vinos-muertos", canonical: `${BASE}/recursos/checklist-deteccion-vinos-muertos`, lang: "es", type: "resource", intent: "checklist detección vinos muertos baja rotación" },
+  { path: "/recursos/plantilla-formacion-equipo-sala", canonical: `${BASE}/recursos/plantilla-formacion-equipo-sala`, lang: "es", type: "resource", intent: "plantilla formación vino equipo sala" },
+  { path: "/recursos/plantilla-analisis-margenes", canonical: `${BASE}/recursos/plantilla-analisis-margenes`, lang: "es", type: "resource", intent: "plantilla análisis márgenes vino restaurante" },
+  { path: "/recursos/scorecard-rendimiento-carta", canonical: `${BASE}/recursos/scorecard-rendimiento-carta`, lang: "es", type: "resource", intent: "scorecard rendimiento carta vinos mensual" },
+  { path: "/recursos/checklist-carta-que-vende", canonical: `${BASE}/recursos/checklist-carta-que-vende`, lang: "es", type: "resource", intent: "checklist carta vinos que vende conversión" },
+  { path: "/recursos/plantilla-equilibrio-carta", canonical: `${BASE}/recursos/plantilla-equilibrio-carta`, lang: "es", type: "resource", intent: "plantilla equilibrio carta vinos estilos precios" },
+
+  // ─────────────────────────────────────────────
   // BENCHMARKS & PLAYBOOKS (ES)
   // ─────────────────────────────────────────────
   { path: "/benchmarks-playbooks", canonical: `${BASE}/benchmarks-playbooks`, lang: "es", type: "hub", intent: "benchmarks playbooks carta vinos restaurante" },
