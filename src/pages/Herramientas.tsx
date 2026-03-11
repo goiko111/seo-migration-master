@@ -7,6 +7,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
+import MethodologyBox from "@/components/seo/MethodologyBox";
 import FAQSection from "@/components/seo/FAQSection";
 import { useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
