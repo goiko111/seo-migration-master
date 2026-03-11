@@ -69,6 +69,12 @@ const GuiaDetectarVinosMuertos = lazy(() => import("./pages/GuiaDetectarVinosMue
 const GuiaFormarEquipoSala = lazy(() => import("./pages/GuiaFormarEquipoSala"));
 const GuiaUsarDatosCompra = lazy(() => import("./pages/GuiaUsarDatosCompra"));
 const GuiaConectarCartaStockVentasMargen = lazy(() => import("./pages/GuiaConectarCartaStockVentasMargen"));
+const GuiaGestionarCartaGrupos = lazy(() => import("./pages/GuiaGestionarCartaGrupos"));
+const GuiaVinoPorCopaSinPerderMargen = lazy(() => import("./pages/GuiaVinoPorCopaSinPerderMargen"));
+const GuiaWinerimSinSumiller = lazy(() => import("./pages/GuiaWinerimSinSumiller"));
+const GuiaSurtidoTicketMedio = lazy(() => import("./pages/GuiaSurtidoTicketMedio"));
+const GuiaCanibalizacionVinos = lazy(() => import("./pages/GuiaCanibalizacionVinos"));
+const GuiaRevisarCartaCadaMes = lazy(() => import("./pages/GuiaRevisarCartaCadaMes"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
