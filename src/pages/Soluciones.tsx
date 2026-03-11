@@ -8,6 +8,8 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import SummaryBox from "@/components/seo/SummaryBox";
+import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const content: Record<string, {
@@ -97,6 +99,30 @@ const Soluciones = () => {
           </div>
         </section>
 
+        {/* Summary Box */}
+        <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
+          <ScrollReveal>
+            <SummaryBox
+              label={lang === "es" ? "¿Qué son las soluciones Winerim?" : "What are Winerim Solutions?"}
+              definition={lang === "es"
+                ? "Las soluciones Winerim son estrategias específicas de gestión del vino adaptadas a cada tipo de negocio. No son planes genéricos: cada solución aborda un problema concreto con herramientas, datos y metodología probada en restauración real."
+                : "Winerim Solutions are specific wine management strategies adapted to each business type. Not generic plans: each solution addresses a concrete problem with tools, data and methodology proven in real hospitality."
+              }
+              bullets={lang === "es" ? [
+                "Cada solución incluye diagnóstico, implementación y seguimiento",
+                "Basadas en datos reales de restaurantes, no en teoría",
+                "Adaptadas al tamaño y tipo de negocio: desde restaurantes individuales hasta grupos",
+                "Resultados medibles desde las primeras semanas de implementación",
+              ] : [
+                "Each solution includes diagnosis, implementation and follow-up",
+                "Based on real restaurant data, not theory",
+                "Adapted to business size and type: from individual restaurants to groups",
+                "Measurable results from the first weeks of implementation",
+              ]}
+            />
+          </ScrollReveal>
+        </section>
+
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <div className="grid md:grid-cols-2 gap-6">
             {t.solutions.map((item, i) => {
@@ -142,10 +168,28 @@ const Soluciones = () => {
           </ScrollReveal>
         </section>
 
+        <FAQSection
+          schemaId="soluciones"
+          title={lang === "es" ? "Preguntas frecuentes" : "FAQ"}
+          faqs={lang === "es" ? [
+            { q: "¿Winerim sirve para cualquier tipo de restaurante?", a: "Winerim está diseñado para restaurantes, hoteles, wine bars y grupos de restauración que tengan al menos 30-40 referencias de vino en carta. Para establecimientos con menos de 20 referencias, las herramientas gratuitas pueden ser suficientes." },
+            { q: "¿Cuánto tiempo lleva implementar una solución?", a: "La implementación básica (digitalización de la carta y configuración inicial) se completa en 1-5 días. Los resultados de optimización empiezan a ser visibles en las primeras 2-4 semanas." },
+            { q: "¿Necesito cambiar mi carta actual?", a: "No. Winerim trabaja con tu carta actual. La plataforma analiza lo que ya tienes y sugiere mejoras basadas en datos, sin obligarte a cambiar tu selección." },
+            { q: "¿Puedo probar antes de comprometerme?", a: "Sí. Puedes usar las herramientas gratuitas para evaluar tu carta, solicitar un análisis sin coste o pedir una demo personalizada antes de decidir." },
+          ] : [
+            { q: "Does Winerim work for any type of restaurant?", a: "Winerim is designed for restaurants, hotels, wine bars and restaurant groups with at least 30-40 wine references. For smaller venues, the free tools may be sufficient." },
+            { q: "How long does implementation take?", a: "Basic implementation (list digitization and initial setup) is completed in 1-5 days. Optimization results become visible in the first 2-4 weeks." },
+            { q: "Do I need to change my current list?", a: "No. Winerim works with your current list. The platform analyzes what you have and suggests data-driven improvements." },
+            { q: "Can I try before committing?", a: "Yes. You can use the free tools, request a no-cost analysis, or ask for a personalized demo before deciding." },
+          ]}
+        />
+
         <InternalLinks
           title={t.linksTitle}
           links={[
             { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+            { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas" : "Free tools", type: "tool" },
+            { to: "/guias-y-recursos", label: lang === "es" ? "Guías y recursos" : "Guides & resources", type: "guide" },
             { to: "/wine-roi-calculator", label: "Wine ROI Calculator", type: "tool" },
             { to: localePath("/casos-exito") || "/casos-exito", label: lang === "es" ? "Casos de éxito" : "Case studies", type: "guide" },
           ]}

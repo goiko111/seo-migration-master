@@ -14,6 +14,8 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import SummaryBox from "@/components/seo/SummaryBox";
+import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 // ─── Screenshots ───
@@ -963,10 +965,57 @@ const Funcionalidades = () => {
         </div>
       </section>
 
+      {/* Summary Box */}
+      <section className="section-padding">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal>
+            <SummaryBox
+              label={lang === "es" ? "¿Qué incluye Winerim?" : "What does Winerim include?"}
+              definition={lang === "es"
+                ? "Winerim es un software de gestión de cartas de vinos para restaurantes que integra carta digital interactiva, recomendaciones con IA, maridajes automáticos, analítica de ventas, gestión de stock, optimización de precios y herramientas de formación para el equipo de sala."
+                : "Winerim is a wine list management software for restaurants that integrates interactive digital wine lists, AI recommendations, automatic pairings, sales analytics, stock management, price optimization and training tools for front-of-house teams."
+              }
+              bullets={lang === "es" ? [
+                "11 categorías de funcionalidades especializadas en vino",
+                "Diseñado para restaurantes, hoteles, wine bars y grupos de restauración",
+                "Multiplataforma: web, tablet y app nativa (iOS y Android)",
+                "Contenido validado por profesionales de la hostelería y la enología",
+              ] : [
+                "11 categories of wine-specialized features",
+                "Designed for restaurants, hotels, wine bars and restaurant groups",
+                "Multi-platform: web, tablet and native app (iOS and Android)",
+                "Content validated by hospitality and oenology professionals",
+              ]}
+            />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <FAQSection
+        schemaId="funcionalidades"
+        title={lang === "es" ? "Preguntas frecuentes sobre las funcionalidades" : "Feature FAQ"}
+        faqs={lang === "es" ? [
+          { q: "¿Winerim funciona con mi TPV actual?", a: "Winerim se integra con los principales TPVs del mercado. Si tu TPV no está en la lista de integraciones, el equipo técnico evalúa la viabilidad de conexión." },
+          { q: "¿Puedo gestionar varios locales desde un solo panel?", a: "Sí. La gestión centralizada multi-local es una de las funcionalidades clave de Winerim, especialmente diseñada para grupos de restauración y hoteles." },
+          { q: "¿Cómo se generan las recomendaciones de IA?", a: "El motor de recomendación analiza el plato elegido, las preferencias del comensal, el historial de ventas y el stock disponible para sugerir el vino más adecuado en cada contexto." },
+          { q: "¿Puedo personalizar el aspecto de la carta digital?", a: "Sí. La carta se adapta a la identidad visual de tu restaurante: colores, tipografía, logotipo y estilo fotográfico." },
+          { q: "¿Qué pasa si un vino se agota?", a: "El sistema actualiza la disponibilidad en tiempo real. Cuando un vino se agota, desaparece automáticamente de la carta visible para el comensal." },
+        ] : [
+          { q: "Does Winerim work with my current POS?", a: "Winerim integrates with major POS systems. If yours isn't listed, the technical team evaluates connection feasibility." },
+          { q: "Can I manage multiple venues from one dashboard?", a: "Yes. Centralized multi-venue management is a key Winerim feature, designed for restaurant groups and hotels." },
+          { q: "How are AI recommendations generated?", a: "The recommendation engine analyzes the chosen dish, guest preferences, sales history and available stock to suggest the most suitable wine." },
+          { q: "Can I customize the digital list design?", a: "Yes. The list adapts to your restaurant's visual identity: colors, typography, logo and photographic style." },
+          { q: "What happens when a wine runs out?", a: "The system updates availability in real time. When a wine runs out, it automatically disappears from the guest-facing list." },
+        ]}
+      />
+
       <InternalLinks links={[
         { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : "Pricing", type: "resource" },
         { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones" : "Integrations", type: "tool" },
         { to: localePath("/clientes"), label: lang === "es" ? "Clientes" : "Clients", type: "solution" },
+        { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas" : "Free tools", type: "tool" },
+        { to: "/guias-y-recursos", label: lang === "es" ? "Guías y recursos" : "Guides & resources", type: "guide" },
       ]} />
       <Footer />
     </div>

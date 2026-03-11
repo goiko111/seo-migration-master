@@ -161,9 +161,21 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Winerim",
+      legalName: "Winerim",
       url: CANONICAL_DOMAIN,
       logo: DEFAULT_OG_IMAGE,
-      description: "Carta de vinos digital y recomendador inteligente para restaurantes, hoteles y vinotecas.",
+      description: "Software de gestión y optimización de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos y analítica de ventas.",
+      foundingDate: "2024",
+      areaServed: { "@type": "Place", name: "Europe" },
+      knowsAbout: [
+        "Wine list management",
+        "Restaurant wine sales optimization",
+        "AI-powered wine recommendations",
+        "Digital wine menus",
+        "Wine pricing strategy",
+        "Food and wine pairing",
+        "Hospitality technology",
+      ],
       sameAs: [
         "https://www.instagram.com/winerim/",
         "https://www.youtube.com/@Winerim",
@@ -173,7 +185,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         "@type": "ContactPoint",
         contactType: "sales",
         url: `${CANONICAL_DOMAIN}/contacto`,
-        availableLanguage: ["Spanish"],
+        availableLanguage: ["Spanish", "English", "Italian", "French"],
       },
     });
 
