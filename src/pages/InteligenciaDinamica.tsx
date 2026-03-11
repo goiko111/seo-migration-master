@@ -520,7 +520,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "04",
                   title: "Módulos RIM™",
-                  desc: "Deciden cuándo y por qué actuar según contexto real: hora, clima, calendario, ventas, afluencia, stock, rentabilidad o comportamiento del comensal.",
+                  desc: "Deciden cuándo y por qué actuar según clima, afluencia, ventas, stock, calendario o comportamiento real.",
                   icon: Brain,
                   color: "from-wine/15 to-wine/5",
                   iconBg: "bg-wine/10 group-hover:bg-wine/20",
