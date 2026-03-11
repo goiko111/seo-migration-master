@@ -16,6 +16,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import SummaryBox from "@/components/seo/SummaryBox";
 import FAQSection from "@/components/seo/FAQSection";
+import CredibilitySection from "@/components/seo/CredibilitySection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 // ─── Screenshots ───
@@ -988,6 +989,11 @@ const Funcionalidades = () => {
             />
           </ScrollReveal>
         </div>
+      </section>
+
+      {/* Credibility */}
+      <section className="max-w-3xl mx-auto px-6 md:px-12 pb-8">
+        <CredibilitySection lang={lang} />
       </section>
 
       {/* FAQs */}

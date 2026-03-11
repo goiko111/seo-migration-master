@@ -4,7 +4,7 @@ import ScrollReveal from "./ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
-  const { t, localePath } = useLanguage();
+  const { t, lang, localePath } = useLanguage();
 
   const socialLinks = [
     { label: "Instagram", url: "https://www.instagram.com/winerim/" },
@@ -35,6 +35,7 @@ const Footer = () => {
                 { label: t.nav_integrations, href: localePath("/integraciones") },
                 { label: t.nav_case_studies, href: localePath("/casos-exito") },
                 { label: t.nav_clients, href: localePath("/clientes") },
+                { label: lang === "es" ? "Sobre Winerim" : "About Winerim", href: "/sobre-winerim" },
                 { label: t.footer_free_demo, href: localePath("/demo") },
               ].map((item) => (
                 <li key={item.label}>

@@ -82,6 +82,7 @@ const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
+const SobreWinerim = lazy(() => import("./pages/SobreWinerim"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -125,6 +126,7 @@ const esRoutes = (
     <Route path="/wine-list-management-software" element={<WineListSoftware />} />
     <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
     <Route path="/que-es-winerim" element={<QueEsWinerim />} />
+    <Route path="/sobre-winerim" element={<SobreWinerim />} />
     <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
     <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
     <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
