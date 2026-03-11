@@ -516,7 +516,7 @@ const CasosExito = () => {
       {l.faqs.length > 0 && (
         <section className="section-padding bg-gradient-dark">
           <div className="max-w-3xl mx-auto">
-            <FAQSection faqs={l.faqs.map(f => ({ question: f.q, answer: f.a }))} />
+            <FAQSection faqs={l.faqs} />
           </div>
         </section>
       )}
