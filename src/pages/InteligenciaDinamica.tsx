@@ -493,7 +493,7 @@ const InteligenciaDinamica = () => {
                 {
                   num: "01",
                   title: "Objetivos",
-                  desc: "Definen qué quiere conseguir el restaurante: más facturación, más margen, más rotación, carta viva, impulsar vinos locales o mejorar la experiencia premium.",
+                  desc: "Definen qué quiere conseguir el restaurante: más facturación, más margen, más rotación, carta viva o experiencia premium.",
                   icon: Target,
                   color: "from-amber-500/15 to-amber-600/5",
                   iconBg: "bg-amber-500/10 group-hover:bg-amber-500/20",
