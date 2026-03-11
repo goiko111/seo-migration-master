@@ -16,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 type IntelCard = { title: string; desc: string };
+type CapCard = { title: string; desc: string };
 type Content = {
   metaTitle: string; metaDescription: string;
   badgeLabel: string; breadSolutions: string; breadLabel: string;
@@ -25,6 +26,8 @@ type Content = {
   problems: { text: string }[];
   solutionLabel: string; solutionTitle1: string; solutionTitleHighlight: string;
   advantages: { title: string; desc: string }[];
+  capLabel: string; capTitle: string; capSubtitle: string;
+  capCards: CapCard[];
   featLabel: string; featTitle1: string; featTitleHighlight: string;
   features: { title: string; desc: string }[];
   impactLabel: string; impactTitle1: string; impactTitleHighlight: string;
