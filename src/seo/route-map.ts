@@ -186,6 +186,8 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/soluciones", canonical: `${BASE}/soluciones`, lang: "es", type: "hub", intent: "soluciones carta vinos restaurante" },
   { path: "/soluciones/grupos-restauracion", canonical: `${BASE}/soluciones/grupos-restauracion`, lang: "es", type: "solution", intent: "carta vinos grupos restauración" },
   { path: "/soluciones/aumentar-ticket-medio-restaurante", canonical: `${BASE}/soluciones/aumentar-ticket-medio-restaurante`, lang: "es", type: "solution", intent: "aumentar ticket medio restaurante vino" },
+  // FUTURE: Standalone page for group assortment intelligence
+  // { path: "/soluciones/inteligencia-surtido-grupos", canonical: `${BASE}/soluciones/inteligencia-surtido-grupos`, lang: "es", type: "solution", intent: "inteligencia surtido vino grupos restauración hoteleros" },
   { path: "/problemas", canonical: `${BASE}/problemas`, lang: "es", type: "hub", intent: "problemas carta vinos restaurante" },
   { path: "/problemas/carta-de-vinos-no-vende", canonical: `${BASE}/problemas/carta-de-vinos-no-vende`, lang: "es", type: "guide", intent: "carta vinos no vende solución" },
 
