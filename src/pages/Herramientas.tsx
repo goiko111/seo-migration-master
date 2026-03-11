@@ -116,6 +116,9 @@ const content: Record<string, {
       { to: "/wine-pairing-generator", title: "Générateur d'accords IA", desc: "Générez des suggestions d'accords avec l'IA. Avec Winerim, votre personnel reçoit des recommandations automatiques à chaque service.", tag: "IA" },
       { to: "/wine-roi-calculator", title: "Calculateur de ROI", desc: "Calculez combien vous pouvez gagner en digitalisant votre carte. Nos clients augmentent leurs ventes de vin de 30% en moyenne.", tag: "ROI" },
       { to: "/wine-list-benchmark", title: "Benchmark cartes des vins", desc: "Comparez votre carte aux standards du secteur. Winerim vous envoie des rapports automatiques avec votre position concurrentielle.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostic vin au verre", desc: "Évaluez si votre offre au verre est équilibrée en styles, prix et rentabilité.", tag: "Diagnostic" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditez votre carte avec un score de 0 à 100 sur la structure, l'équilibre, le pricing et le potentiel commercial.", tag: "Audit" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calculateur stock mort", desc: "Estimez le capital immobilisé dans les vins à faible rotation.", tag: "Gestion" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Comment fixer le prix du vin au restaurant" },
