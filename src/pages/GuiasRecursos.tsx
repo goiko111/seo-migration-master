@@ -132,7 +132,19 @@ const solutions = [
   { to: "/benchmarks-playbooks", icon: BarChart3, title: "Benchmarks & Playbooks", desc: "Datos de referencia del sector y planes de acción prácticos para tu carta de vinos." },
 ];
 
-type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string };
+type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string; tags?: string[] };
+
+const taxonomyFilters = [
+  { key: "all", label: "Todos" },
+  { key: "pricing", label: "Pricing y márgenes" },
+  { key: "rotación", label: "Rotación y stock" },
+  { key: "copa", label: "Vino por copa" },
+  { key: "equipo", label: "Equipo de sala" },
+  { key: "estructura", label: "Estructura de carta" },
+  { key: "rentabilidad", label: "Rentabilidad" },
+  { key: "analítica", label: "Analítica y KPIs" },
+  { key: "grupo", label: "Grupos de restauración" },
+];
 
 const CardGrid = ({ items, cta }: { items: SectionItem[]; cta?: string }) => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
