@@ -14,7 +14,7 @@ const FinalCTASection = () => {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden"
+          className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden glow-wine hover:border-wine/30 transition-all duration-500"
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
 
@@ -38,12 +38,15 @@ const FinalCTASection = () => {
                 <ArrowRight size={16} />
               </Link>
               <Link
-                to={localePath("/contacto")}
-                className="px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all hover:-translate-y-0.5"
+                to={localePath("/analisis-carta")}
+                className="px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary hover:border-wine/30 transition-all hover:-translate-y-0.5"
               >
-                {t.nav_contact}
+                {t.hero_cta_primary.length > 40 ? "Analiza tu carta" : t.hero_cta_primary}
               </Link>
             </div>
+            <p className="text-xs text-muted-foreground/60 mt-6 max-w-md mx-auto">
+              Sin compromiso. Te mostramos Winerim en 15 minutos.
+            </p>
           </div>
         </motion.div>
       </div>

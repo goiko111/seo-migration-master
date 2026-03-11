@@ -79,6 +79,7 @@ const Index = () => {
           </section>
           <VideoSection />
           <FinalCTASection />
+          <StickyCTA pageType="home" />
         </Suspense>
       </main>
       <Suspense fallback={null}>
