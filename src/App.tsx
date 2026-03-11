@@ -161,6 +161,8 @@ const esRoutes = (
     <Route path="/recursos/scorecard-rendimiento-carta" element={<ResourcePage />} />
     <Route path="/recursos/checklist-carta-que-vende" element={<ResourcePage />} />
     <Route path="/recursos/plantilla-equilibrio-carta" element={<ResourcePage />} />
+    <Route path="/recursos/plantilla-revision-mensual-carta" element={<ResourcePage />} />
+    <Route path="/recursos/plantilla-control-grupo-restauracion" element={<ResourcePage />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
     <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />

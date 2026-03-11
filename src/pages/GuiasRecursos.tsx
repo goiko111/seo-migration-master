@@ -99,17 +99,19 @@ const guides = [
 ];
 
 const resources = [
-  { to: "/recursos/plantilla-carta-de-vinos", icon: Download, title: "Plantilla de carta de vinos", desc: "Descarga una plantilla profesional para diseñar tu carta de vinos." },
-  { to: "/recursos/checklist-carta-de-vinos-rentable", icon: CheckCircle, title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta de vinos está optimizada para vender." },
-  { to: "/recursos/guia-vino-por-copa-para-restaurantes", icon: Wine, title: "Guía vino por copa", desc: "Todo sobre cómo diseñar y rentabilizar tu oferta de vino por copa." },
-  { to: "/recursos/plantilla-wine-mapping-restaurante", icon: Layers, title: "Plantilla wine mapping", desc: "Plantilla para estructurar precios y distribución de vinos en tu carta." },
-  { to: "/recursos/plantilla-estrategia-vinos-por-copa", icon: Wine, title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseñar, ejecutar y controlar tu programa de vino por copa." },
-  { to: "/recursos/checklist-deteccion-vinos-muertos", icon: Search, title: "Detección de vinos muertos", desc: "Identifica referencias sin rotación, cuantifica capital inmovilizado y decide qué hacer." },
-  { to: "/recursos/plantilla-formacion-equipo-sala", icon: Brain, title: "Formación exprés para sala", desc: "Programa de formación en vino para tu equipo de sala en menos de 2 semanas." },
-  { to: "/recursos/plantilla-analisis-margenes", icon: DollarSign, title: "Análisis de márgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribución." },
-  { to: "/recursos/scorecard-rendimiento-carta", icon: BarChart3, title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotación, margen y vino por copa." },
-  { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos." },
-  { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías." },
+  { to: "/recursos/plantilla-carta-de-vinos", icon: Download, title: "Plantilla de carta de vinos", desc: "Descarga una plantilla profesional para diseñar tu carta de vinos.", tags: ["estructura", "restaurante", "inicio"] },
+  { to: "/recursos/checklist-carta-de-vinos-rentable", icon: CheckCircle, title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta de vinos está optimizada para vender.", tags: ["rentabilidad", "restaurante", "intermedio"] },
+  { to: "/recursos/guia-vino-por-copa-para-restaurantes", icon: Wine, title: "Guía vino por copa", desc: "Todo sobre cómo diseñar y rentabilizar tu oferta de vino por copa.", tags: ["copa", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-wine-mapping-restaurante", icon: Layers, title: "Plantilla wine mapping", desc: "Plantilla para estructurar precios y distribución de vinos en tu carta.", tags: ["pricing", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-estrategia-vinos-por-copa", icon: Wine, title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseñar, ejecutar y controlar tu programa de vino por copa.", tags: ["copa", "restaurante", "avanzado"] },
+  { to: "/recursos/checklist-deteccion-vinos-muertos", icon: Search, title: "Detección de vinos muertos", desc: "Identifica referencias sin rotación, cuantifica capital inmovilizado y decide qué hacer.", tags: ["rotación", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-formacion-equipo-sala", icon: Brain, title: "Formación exprés para sala", desc: "Programa de formación en vino para tu equipo de sala en menos de 2 semanas.", tags: ["equipo", "restaurante", "inicio"] },
+  { to: "/recursos/plantilla-analisis-margenes", icon: DollarSign, title: "Análisis de márgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribución.", tags: ["pricing", "restaurante", "avanzado"] },
+  { to: "/recursos/scorecard-rendimiento-carta", icon: BarChart3, title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotación, margen y vino por copa.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos.", tags: ["rentabilidad", "restaurante", "inicio"] },
+  { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías.", tags: ["estructura", "restaurante", "intermedio"] },
+  { to: "/recursos/plantilla-revision-mensual-carta", icon: FileText, title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes: rendimiento, pricing, rotación y plan de acción.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/plantilla-control-grupo-restauracion", icon: Building2, title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking interno entre locales.", tags: ["analítica", "grupo", "avanzado"] },
 ];
 
 const tools = [
