@@ -11,6 +11,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-estrategia-vinos-por-copa",
     formType: "plantilla-estrategia-vinos-copa",
+    downloadFile: "/recursos/winerim_estrategia_vinos_por_copa_2026.xlsx",
     metaTitle: "Plantilla de Estrategia de Vinos por Copa | Winerim",
     metaDescription: "Descarga gratis la plantilla para diseñar tu estrategia de vino por copa: selección, pricing, rotación, control de merma y objetivos de venta.",
     badgeIcon: GlassWater,
@@ -113,6 +114,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "checklist-deteccion-vinos-muertos",
     formType: "checklist-vinos-muertos",
+    downloadFile: "/recursos/winerim_deteccion_vinos_muertos_2026.xlsx",
     metaTitle: "Checklist: Detección de Vinos Muertos y Baja Rotación | Winerim",
     metaDescription: "Descarga la checklist para identificar vinos sin rotación en tu carta. Detecta stock muerto, evalúa el impacto financiero y decide qué hacer con cada referencia.",
     badgeIcon: ShieldAlert,
@@ -203,6 +205,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-formacion-equipo-sala",
     formType: "plantilla-formacion-sala",
+    downloadFile: "/recursos/winerim_formacion_expres_sala_2026.xlsx",
     metaTitle: "Plantilla de Formación Exprés en Vino para Equipos de Sala | Winerim",
     metaDescription: "Descarga la plantilla para formar a tu equipo de sala en vino en menos de 2 semanas. Fichas de vino, guía de maridaje, frases de recomendación y plan de sesiones.",
     badgeIcon: GraduationCap,
@@ -392,6 +395,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "scorecard-rendimiento-carta",
     formType: "scorecard-rendimiento-carta",
+    downloadFile: "/recursos/winerim_scorecard_mensual_2026.xlsx",
     metaTitle: "Scorecard Mensual de Rendimiento de Carta de Vinos | Winerim",
     metaDescription: "Descarga el scorecard para medir el rendimiento de tu carta de vinos cada mes. KPIs de venta, rotación, margen, copa y ticket medio en un solo documento.",
     badgeIcon: BarChart3,
@@ -491,6 +495,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "checklist-carta-que-vende",
     formType: "checklist-carta-que-vende",
+    downloadFile: "/recursos/winerim_tu_carta_realmente_vende_2026.xlsx",
     metaTitle: "Checklist: ¿Tu Carta de Vinos Realmente Vende? | Winerim",
     metaDescription: "Descarga la checklist para evaluar si tu carta de vinos está diseñada para vender. 30 puntos de control sobre diseño, recomendación, experiencia y conversión.",
     badgeIcon: ListChecks,
@@ -616,6 +621,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-equilibrio-carta",
     formType: "plantilla-equilibrio-carta",
+    downloadFile: "/recursos/winerim_equilibrio_carta_2026.xlsx",
     metaTitle: "Plantilla para Evaluar el Equilibrio de tu Carta de Vinos | Winerim",
     metaDescription: "Descarga la plantilla para analizar el equilibrio de tu carta por estilos, regiones, precios y tipologías. Detecta desequilibrios y mejora la composición.",
     badgeIcon: Layers,
@@ -715,6 +721,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-revision-mensual-carta",
     formType: "plantilla-revision-mensual",
+    downloadFile: "/recursos/winerim_checklist_carta_rentable_2026.xlsx",
     metaTitle: "Plantilla de Revisión Mensual de Carta de Vinos | Winerim",
     metaDescription: "Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.",
     badgeIcon: Calendar,

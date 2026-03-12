@@ -80,6 +80,7 @@ export interface ResourcePageData {
   ctaFinalTitle: string;
   ctaFinalDescription: string;
   internalLinks: ResourceInternalLink[];
+  downloadFile?: string;
 }
 
 const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
@@ -109,8 +110,19 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
-      toast.success("¡Recurso enviado! Revisa tu email.");
+      toast.success("¡Recurso listo! La descarga comenzará en un momento.");
       notifyLead(leadData);
+      // Auto-download the file
+      if (data.downloadFile) {
+        setTimeout(() => {
+          const a = document.createElement("a");
+          a.href = data.downloadFile!;
+          a.download = "";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 800);
+      }
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
@@ -208,7 +220,14 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
                 <div className="text-center py-8">
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Recurso listo!</h3>
-                  <p className="text-muted-foreground mb-6">Revisa tu email para acceder al recurso completo.</p>
+                  <p className="text-muted-foreground mb-6">
+                    {data.downloadFile ? "La descarga debería haber comenzado automáticamente." : "Revisa tu email para acceder al recurso completo."}
+                  </p>
+                  {data.downloadFile && (
+                    <a href={data.downloadFile} download className="inline-flex items-center gap-2 text-wine text-sm font-semibold hover:underline mb-4">
+                      <Download size={16} /> Descargar de nuevo
+                    </a>
+                  )}
                   <Link to="/analisis-carta"
                     className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
                     Analizar mi carta <ArrowRight size={16} />

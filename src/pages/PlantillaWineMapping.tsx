@@ -103,8 +103,16 @@ const PlantillaWineMapping = () => {
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
-      toast.success("¡Plantilla enviada! Revisa tu email.");
+      toast.success("¡Plantilla lista! La descarga comenzará en un momento.");
       notifyLead(leadData);
+      setTimeout(() => {
+        const a = document.createElement("a");
+        a.href = "/recursos/winerim_plantilla_wine_mapping_2026.xlsx";
+        a.download = "";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 800);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
