@@ -280,11 +280,11 @@ const ContactFormFields = ({
       {showLocations && (
         <div>
           <Label htmlFor="num_locations" className="text-sm font-medium">
-            Número de locales
+            Locales que gestionas
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="num_locations" name="num_locations" options={numLocationsOptions} placeholder="¿Cuántos locales gestionas?" />
+              <NativeSelect id="num_locations" name="num_locations" options={numLocationsOptions} placeholder="¿Cuántos locales?" />
             ) : null}
           </div>
         </div>
