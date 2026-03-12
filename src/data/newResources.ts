@@ -306,6 +306,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-analisis-margenes",
     formType: "plantilla-analisis-margenes",
+    downloadFile: "/recursos/winerim_revision_mensual_margenes_2026.xlsx",
     metaTitle: "Plantilla de Análisis de Márgenes por Referencia de Vino | Winerim",
     metaDescription: "Descarga la plantilla para analizar el margen de cada vino de tu carta. Coste, PVP, multiplicador, contribución al margen global y ranking de rentabilidad.",
     badgeIcon: PieChart,
@@ -721,7 +722,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-revision-mensual-carta",
     formType: "plantilla-revision-mensual",
-    downloadFile: "/recursos/winerim_checklist_carta_rentable_2026.xlsx",
+    downloadFile: "/recursos/winerim_plantilla_revision_mensual_carta_2026.xlsx",
     metaTitle: "Plantilla de Revisión Mensual de Carta de Vinos | Winerim",
     metaDescription: "Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.",
     badgeIcon: Calendar,
@@ -832,6 +833,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-control-grupo-restauracion",
     formType: "plantilla-control-grupo",
+    downloadFile: "/recursos/winerim_control_grupo_restauracion_2026.xlsx",
     metaTitle: "Plantilla de Control de Carta de Vinos para Grupos de Restauración | Winerim",
     metaDescription: "Descarga la plantilla para gestionar y comparar la carta de vinos en múltiples locales. KPIs por local, coherencia de surtido, pricing centralizado y benchmarking interno.",
     badgeIcon: Building2,
