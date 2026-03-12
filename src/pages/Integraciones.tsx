@@ -820,22 +820,22 @@ GET  /api/v1/analytics/rotation → Cellar rotation`}</pre>
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={lang === "es" ? "Siguientes pasos" : "Next steps"}
+        title={{ es: "Siguientes pasos", en: "Next steps", it: "Prossimi passi", fr: "Prochaines étapes" }[lang]}
         steps={[
-          { to: "/demo", label: lang === "es" ? "Solicitar demo" : "Request demo", description: lang === "es" ? "Te mostramos cómo se integra con tu ecosistema." : "We show you how it integrates with your stack.", type: "solution" },
-          { to: "/precios", label: lang === "es" ? "Planes y precios" : "Plans and pricing", description: lang === "es" ? "Las integraciones activas están en el plan Enterprise." : "Active integrations are in the Enterprise plan.", type: "solution" },
-          { to: "/soluciones/hoteles", label: lang === "es" ? "Winerim para hoteles" : "Winerim for hotels", description: lang === "es" ? "Integración con PMS y múltiples outlets." : "PMS integration and multiple outlets.", type: "solution" },
-          { to: "/soluciones/grupos-restauracion", label: lang === "es" ? "Winerim para grupos" : "Winerim for groups", description: lang === "es" ? "Integración centralizada multi-TPV." : "Centralized multi-POS integration.", type: "solution" },
+          { to: "/demo", label: { es: "Solicitar demo", en: "Request demo", it: "Richiedi demo", fr: "Demander démo" }[lang]!, description: { es: "Te mostramos cómo se integra con tu ecosistema.", en: "We show you how it integrates with your stack.", it: "Ti mostriamo come si integra con il tuo ecosistema.", fr: "Nous vous montrons comment il s'intègre à votre écosystème." }[lang]!, type: "solution" },
+          { to: "/precios", label: { es: "Planes y precios", en: "Plans and pricing", it: "Piani e prezzi", fr: "Plans et tarifs" }[lang]!, description: { es: "Las integraciones activas están en el plan Enterprise.", en: "Active integrations are in the Enterprise plan.", it: "Le integrazioni attive sono nel piano Enterprise.", fr: "Les intégrations actives sont dans le plan Enterprise." }[lang]!, type: "solution" },
+          { to: "/soluciones/hoteles", label: { es: "Winerim para hoteles", en: "Winerim for hotels", it: "Winerim per hotel", fr: "Winerim pour hôtels" }[lang]!, description: { es: "Integración con PMS y múltiples outlets.", en: "PMS integration and multiple outlets.", it: "Integrazione con PMS e molteplici punti vendita.", fr: "Intégration PMS et points de vente multiples." }[lang]!, type: "solution" },
+          { to: "/soluciones/grupos-restauracion", label: { es: "Winerim para grupos", en: "Winerim for groups", it: "Winerim per gruppi", fr: "Winerim pour groupes" }[lang]!, description: { es: "Integración centralizada multi-TPV.", en: "Centralized multi-POS integration.", it: "Integrazione centralizzata multi-POS.", fr: "Intégration centralisée multi-POS." }[lang]!, type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos" : "Wine list software", type: "solution" },
-        { to: localePath("/funcionalidades"), label: lang === "es" ? "Todas las funcionalidades" : "All features", type: "solution" },
-        { to: localePath("/producto/inteligencia-dinamica"), label: lang === "es" ? "Inteligencia dinámica" : "Dynamic intelligence", type: "solution" },
-        { to: localePath("/soluciones/restaurantes-sin-sumiller"), label: lang === "es" ? "Para restaurantes sin sumiller" : "For restaurants without sommelier", type: "solution" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : "Case studies", type: "solution" },
-        { to: localePath("/comparativas"), label: lang === "es" ? "Compara Winerim" : "Compare Winerim", type: "solution" },
+        { to: localePath("/software-carta-de-vinos"), label: { es: "Software de carta de vinos", en: "Wine list software", it: "Software carta dei vini", fr: "Logiciel carte des vins" }[lang]!, type: "solution" },
+        { to: localePath("/funcionalidades"), label: { es: "Todas las funcionalidades", en: "All features", it: "Tutte le funzionalità", fr: "Toutes les fonctionnalités" }[lang]!, type: "solution" },
+        { to: localePath("/producto/inteligencia-dinamica"), label: { es: "Inteligencia dinámica", en: "Dynamic intelligence", it: "Intelligenza dinamica", fr: "Intelligence dynamique" }[lang]!, type: "solution" },
+        { to: localePath("/soluciones/restaurantes-sin-sumiller"), label: { es: "Para restaurantes sin sumiller", en: "For restaurants without sommelier", it: "Per ristoranti senza sommelier", fr: "Pour restaurants sans sommelier" }[lang]!, type: "solution" },
+        { to: localePath("/casos-exito"), label: { es: "Casos de éxito", en: "Case studies", it: "Casi di successo", fr: "Cas clients" }[lang]!, type: "solution" },
+        { to: localePath("/comparativas"), label: { es: "Compara Winerim", en: "Compare Winerim", it: "Confronta Winerim", fr: "Comparez Winerim" }[lang]!, type: "solution" },
       ]} />
 
       <Footer />

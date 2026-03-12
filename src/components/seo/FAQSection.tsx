@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +13,13 @@ interface FAQ {
   a: string;
 }
 
+const defaultTitles: Record<string, string> = {
+  es: "Preguntas frecuentes",
+  en: "Frequently asked questions",
+  it: "Domande frequenti",
+  fr: "Questions fréquentes",
+};
+
 interface FAQSectionProps {
   faqs: FAQ[];
   title?: string;
@@ -19,7 +27,9 @@ interface FAQSectionProps {
   className?: string;
 }
 
-const FAQSection = ({ faqs, title = "Preguntas frecuentes", schemaId = "faq", className = "" }: FAQSectionProps) => {
+const FAQSection = ({ faqs, title, schemaId = "faq", className = "" }: FAQSectionProps) => {
+  const { lang } = useLanguage();
+
   useEffect(() => {
     if (!faqs.length) return;
     const script = document.createElement("script");
@@ -42,10 +52,12 @@ const FAQSection = ({ faqs, title = "Preguntas frecuentes", schemaId = "faq", cl
 
   if (!faqs.length) return null;
 
+  const resolvedTitle = title || defaultTitles[lang] || defaultTitles.es;
+
   return (
     <section className={`max-w-3xl mx-auto px-6 md:px-12 py-20 ${className}`}>
       <ScrollReveal className="text-center mb-10">
-        <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">{title}</h2>
+        <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold">{resolvedTitle}</h2>
       </ScrollReveal>
       <Accordion type="multiple" className="space-y-3">
         {faqs.map((faq, i) => (

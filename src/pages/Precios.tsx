@@ -520,9 +520,9 @@ const Precios = () => {
 
                     {plan.notIncluded && plan.notIncluded.length > 0 && (
                       <div className="mb-6 pt-3 border-t border-border/50">
-                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
-                          {lang === "es" ? "No incluido" : "Not included"}
-                        </p>
+                         <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
+                           {lang === "es" ? "No incluido" : lang === "it" ? "Non incluso" : lang === "fr" ? "Non inclus" : "Not included"}
+                         </p>
                         <ul className="space-y-1.5">
                           {plan.notIncluded.map((f, fi) => (
                             <li key={fi} className="flex items-start gap-2 text-sm">
@@ -564,9 +564,9 @@ const Precios = () => {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-card">
-                    <th className="text-left p-4 font-medium text-muted-foreground w-[40%]">
-                      {lang === "es" ? "Funcionalidad" : "Feature"}
-                    </th>
+                     <th className="text-left p-4 font-medium text-muted-foreground w-[40%]">
+                       {lang === "es" ? "Funcionalidad" : lang === "it" ? "Funzionalità" : lang === "fr" ? "Fonctionnalité" : "Feature"}
+                     </th>
                     {["Starter", "Pro", "Enterprise"].map((name, i) => (
                       <th key={name} className={`p-4 text-center font-heading font-bold ${i === 1 ? "text-wine" : ""}`}>
                         {name}
@@ -661,21 +661,21 @@ const Precios = () => {
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={lang === "es" ? "Explora más" : "Explore more"}
+        title={{ es: "Explora más", en: "Explore more", it: "Esplora di più", fr: "En savoir plus" }[lang] || "Explore more"}
         steps={[
-          { to: "/analisis-carta", label: lang === "es" ? "Analiza tu carta gratis" : "Analyze your list free", description: lang === "es" ? "Sube tu carta y recibe un diagnóstico con recomendaciones concretas." : "Upload your list and get a diagnostic with actionable recommendations.", type: "tool" },
-          { to: "/casos-exito", label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real restaurant case studies", description: lang === "es" ? "Cómo restaurantes reales usan Winerim y qué resultados obtienen." : "How real restaurants use Winerim and what results they achieve.", type: "solution" },
-          { to: "/funcionalidades", label: lang === "es" ? "Todas las funcionalidades de Winerim" : "All Winerim features", description: lang === "es" ? "11 categorías de funcionalidades especializadas en vino." : "11 categories of wine-specialized features.", type: "solution" },
-          { to: "/comparativas", label: lang === "es" ? "Compara Winerim con alternativas" : "Compare Winerim with alternatives", description: lang === "es" ? "Comparativas claras para decidir qué solución encaja." : "Clear comparisons to decide which solution fits.", type: "solution" },
+          { to: "/analisis-carta", label: { es: "Analiza tu carta gratis", en: "Analyze your list free", it: "Analizza la tua carta gratis", fr: "Analysez votre carte gratuitement" }[lang]!, description: { es: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", en: "Upload your list and get a diagnostic with actionable recommendations.", it: "Carica la tua carta e ricevi un report con raccomandazioni concrete.", fr: "Envoyez votre carte et recevez un diagnostic avec des recommandations concrètes." }[lang]!, type: "tool" },
+          { to: "/casos-exito", label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels" }[lang]!, description: { es: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", en: "How real restaurants use Winerim and what results they achieve.", it: "Come ristoranti reali usano Winerim e quali risultati ottengono.", fr: "Comment de vrais restaurants utilisent Winerim et quels résultats ils obtiennent." }[lang]!, type: "solution" },
+          { to: "/funcionalidades", label: { es: "Todas las funcionalidades de Winerim", en: "All Winerim features", it: "Tutte le funzionalità di Winerim", fr: "Toutes les fonctionnalités de Winerim" }[lang]!, description: { es: "11 categorías de funcionalidades especializadas en vino.", en: "11 categories of wine-specialized features.", it: "11 categorie di funzionalità specializzate nel vino.", fr: "11 catégories de fonctionnalités spécialisées dans le vin." }[lang]!, type: "solution" },
+          { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim with alternatives", it: "Confronta Winerim con le alternative", fr: "Comparez Winerim avec les alternatives" }[lang]!, description: { es: "Comparativas claras para decidir qué solución encaja.", en: "Clear comparisons to decide which solution fits.", it: "Confronti chiari per decidere quale soluzione fa per te.", fr: "Comparaisons claires pour choisir la bonne solution." }[lang]!, type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos inteligente" : "Smart wine list software", type: "solution" },
-        { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas de análisis y pricing" : "Free analysis & pricing tools", type: "tool" },
-        { to: "/guias-y-recursos", label: lang === "es" ? "Guías prácticas y recursos descargables" : "Practical guides & resources", type: "guide" },
-        { to: localePath("/soluciones/grupos-restauracion"), label: lang === "es" ? "Soluciones para grupos de restauración" : "Solutions for restaurant groups", type: "solution" },
-        { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks & playbooks", type: "resource" },
+        { to: localePath("/software-carta-de-vinos"), label: { es: "Software de carta de vinos inteligente", en: "Smart wine list software", it: "Software intelligente per carta dei vini", fr: "Logiciel intelligent de carte des vins" }[lang]!, type: "solution" },
+        { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification" }[lang]!, type: "tool" },
+        { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables" }[lang]!, type: "guide" },
+        { to: localePath("/soluciones/grupos-restauracion"), label: { es: "Soluciones para grupos de restauración", en: "Solutions for restaurant groups", it: "Soluzioni per gruppi di ristorazione", fr: "Solutions pour groupes de restauration" }[lang]!, type: "solution" },
+        { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur" }[lang]!, type: "resource" },
       ]} />
 
       <Footer />

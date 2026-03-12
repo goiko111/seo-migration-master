@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Calculator, Download, Lightbulb } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface InternalLink {
   to: string;
@@ -8,11 +9,32 @@ interface InternalLink {
   type: "guide" | "tool" | "resource" | "solution";
 }
 
-const typeConfig = {
-  guide: { icon: BookOpen, badge: "Guía", badgeClass: "text-accent" },
-  tool: { icon: Calculator, badge: "Herramienta", badgeClass: "text-wine" },
-  resource: { icon: Download, badge: "Recurso", badgeClass: "text-emerald-500" },
-  solution: { icon: Lightbulb, badge: "Solución", badgeClass: "text-amber-500" },
+const typeLabels: Record<string, Record<string, string>> = {
+  guide: { es: "Guía", en: "Guide", it: "Guida", fr: "Guide" },
+  tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil" },
+  resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource" },
+  solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution" },
+};
+
+const defaultTitles: Record<string, string> = {
+  es: "Contenido relacionado",
+  en: "Related content",
+  it: "Contenuti correlati",
+  fr: "Contenu associé",
+};
+
+const typeIcons = {
+  guide: BookOpen,
+  tool: Calculator,
+  resource: Download,
+  solution: Lightbulb,
+};
+
+const badgeClasses: Record<string, string> = {
+  guide: "text-accent",
+  tool: "text-wine",
+  resource: "text-emerald-500",
+  solution: "text-amber-500",
 };
 
 interface InternalLinksProps {
@@ -20,18 +42,22 @@ interface InternalLinksProps {
   title?: string;
 }
 
-const InternalLinks = ({ links, title = "Contenido relacionado" }: InternalLinksProps) => {
+const InternalLinks = ({ links, title }: InternalLinksProps) => {
+  const { lang } = useLanguage();
   if (!links.length) return null;
+
+  const resolvedTitle = title || defaultTitles[lang] || defaultTitles.es;
 
   return (
     <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
       <ScrollReveal>
-        <h2 className="font-heading text-xl md:text-2xl font-bold mb-6">{title}</h2>
+        <h2 className="font-heading text-xl md:text-2xl font-bold mb-6">{resolvedTitle}</h2>
       </ScrollReveal>
       <div className="grid sm:grid-cols-2 gap-3">
         {links.map((link, i) => {
-          const config = typeConfig[link.type];
-          const Icon = config.icon;
+          const Icon = typeIcons[link.type];
+          const badge = typeLabels[link.type]?.[lang] || typeLabels[link.type]?.es || link.type;
+          const cls = badgeClasses[link.type] || "text-wine";
           return (
             <ScrollReveal key={link.to} delay={i * 0.04}>
               <Link
@@ -42,8 +68,8 @@ const InternalLinks = ({ links, title = "Contenido relacionado" }: InternalLinks
                   <Icon size={14} className="text-wine" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className={`text-[10px] font-semibold tracking-widest uppercase ${config.badgeClass} block mb-0.5`}>
-                    {config.badge}
+                  <span className={`text-[10px] font-semibold tracking-widest uppercase ${cls} block mb-0.5`}>
+                    {badge}
                   </span>
                   <p className="text-sm font-medium group-hover:text-wine transition-colors truncate">
                     {link.label}
