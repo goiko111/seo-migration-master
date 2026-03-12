@@ -495,6 +495,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "checklist-carta-que-vende",
     formType: "checklist-carta-que-vende",
+    downloadFile: "/recursos/winerim_tu_carta_realmente_vende_2026.xlsx",
     metaTitle: "Checklist: ¿Tu Carta de Vinos Realmente Vende? | Winerim",
     metaDescription: "Descarga la checklist para evaluar si tu carta de vinos está diseñada para vender. 30 puntos de control sobre diseño, recomendación, experiencia y conversión.",
     badgeIcon: ListChecks,
