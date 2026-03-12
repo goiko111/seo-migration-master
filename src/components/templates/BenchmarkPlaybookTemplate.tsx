@@ -197,28 +197,25 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
         variant="highlight"
       />
 
-      {/* FAQs */}
+      {/* FAQs — accordion */}
       {data.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
             </ScrollReveal>
-            <div className="space-y-4">
+            <Accordion type="multiple" className="space-y-3">
               {data.faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.05}>
-                  <details className="group bg-background rounded-xl border border-border hover:border-wine/20 transition-colors">
-                    <summary className="flex items-center justify-between cursor-pointer p-6 font-semibold">
-                      <span className="pr-4">{faq.q}</span>
-                      <span className="text-muted-foreground flex-shrink-0 transition-transform group-open:rotate-180">▾</span>
-                    </summary>
-                    <div className="px-6 pb-6">
-                      <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
-                    </div>
-                  </details>
-                </ScrollReveal>
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-background px-6 data-[state=open]:border-wine/20">
+                  <AccordionTrigger className="text-left font-heading font-bold text-sm hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </section>
       )}

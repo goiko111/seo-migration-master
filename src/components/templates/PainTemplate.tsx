@@ -151,7 +151,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {/* IMPACTO ECONÓMICO */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
         <ScrollReveal>
-          <div className="p-8 rounded-2xl border border-accent/20 bg-accent/5">
+          <div className="p-6 md:p-8 rounded-xl border border-accent/20 bg-accent/5">
             <div className="flex items-start gap-4">
               <DollarSign size={24} className="text-accent shrink-0 mt-1" />
               <div>
