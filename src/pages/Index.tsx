@@ -65,7 +65,12 @@ const Index = () => {
             <ResultsSection />
           </Suspense>
 
-          {/* 7. Who it helps — role-based value */}
+          {/* 7. Business profiles — self-identification by visitor type */}
+          <Suspense fallback={<SectionFallback />}>
+            <BusinessProfilesSection />
+          </Suspense>
+
+          {/* 8. Who it helps — role-based value (complementary to profiles) */}
           <Suspense fallback={<SectionFallback />}>
             <WhoItHelpsSection />
           </Suspense>
