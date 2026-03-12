@@ -293,11 +293,11 @@ const ContactFormFields = ({
       {showChallenge && (
         <div>
           <Label htmlFor="main_challenge" className="text-sm font-medium">
-            Principal reto con tu carta de vinos
+            ¿Qué quieres mejorar de tu carta?
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="main_challenge" name="main_challenge" options={mainChallengeOptions} placeholder="¿Qué quieres mejorar?" />
+              <NativeSelect id="main_challenge" name="main_challenge" options={mainChallengeOptions} placeholder="Tu principal reto ahora mismo" />
             ) : null}
           </div>
         </div>
