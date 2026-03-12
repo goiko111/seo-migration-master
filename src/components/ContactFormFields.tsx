@@ -159,11 +159,11 @@ const ContactFormFields = ({
       {showPosition && (
         <div>
           <Label htmlFor="position" className="text-sm font-medium">
-            Tu cargo {positionRequired && <span className="text-destructive">*</span>}
+            Tu cargo en el negocio {positionRequired && <span className="text-destructive">*</span>}
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="position" name="position" required={positionRequired} options={positionOptions} placeholder="Selecciona tu cargo" />
+              <NativeSelect id="position" name="position" required={positionRequired} options={positionOptions} placeholder="¿Cuál es tu rol?" />
             ) : (
               <Select value={position} onValueChange={onPositionChange}>
                 <SelectTrigger className="bg-background border-border">
