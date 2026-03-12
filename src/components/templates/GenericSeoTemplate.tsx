@@ -155,30 +155,13 @@ const GenericSeoTemplate = ({ page, related }: Props) => {
         </section>
       )}
 
-      {/* SECTIONS (rich body content) */}
-      {sections.map((section, i) => {
-        const isAlt = i % 2 === (problems.length > 0 ? 0 : 1);
-        return (
-          <section key={i} className={isAlt ? "bg-gradient-card border-y border-border py-16" : "py-16"}>
-            <div className="max-w-4xl mx-auto px-6 md:px-12">
-              <ScrollReveal>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">{section.heading}</h2>
-                <p className="text-muted-foreground leading-relaxed text-lg mb-8 whitespace-pre-line">{section.content}</p>
-                {section.tips && section.tips.length > 0 && (
-                  <div className="space-y-3">
-                    {section.tips.map((tip, j) => (
-                      <div key={j} className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background">
-                        <CheckCircle size={16} className="text-wine shrink-0 mt-0.5" />
-                        <p className="text-sm text-muted-foreground leading-relaxed">{tip}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </ScrollReveal>
-            </div>
-          </section>
-        );
-      })}
+      {/* SECTIONS (rich body content) — enhanced with lead extraction */}
+      {sections.length > 0 && (
+        <EnhancedSections
+          sections={sections}
+          altOffset={problems.length > 0 ? 0 : 1}
+        />
+      )}
 
       {/* BENEFITS */}
       {benefits.length > 0 && (
