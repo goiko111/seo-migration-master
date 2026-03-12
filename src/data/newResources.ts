@@ -114,6 +114,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "checklist-deteccion-vinos-muertos",
     formType: "checklist-vinos-muertos",
+    downloadFile: "/recursos/winerim_deteccion_vinos_muertos_2026.xlsx",
     metaTitle: "Checklist: Detección de Vinos Muertos y Baja Rotación | Winerim",
     metaDescription: "Descarga la checklist para identificar vinos sin rotación en tu carta. Detecta stock muerto, evalúa el impacto financiero y decide qué hacer con cada referencia.",
     badgeIcon: ShieldAlert,
