@@ -453,8 +453,8 @@ const Precios = () => {
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <div className="bg-gradient-card rounded-xl border border-border p-6 h-full">
                     <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
-                        <Icon size={22} className="text-wine" />
+                      <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center shrink-0">
+                        <Icon size={20} className="text-wine" />
                       </div>
                       <div>
                         <h3 className="font-heading font-bold text-base mb-0.5">{p.name}</h3>
