@@ -11,6 +11,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-estrategia-vinos-por-copa",
     formType: "plantilla-estrategia-vinos-copa",
+    downloadFile: "/recursos/winerim_estrategia_vinos_por_copa_2026.xlsx",
     metaTitle: "Plantilla de Estrategia de Vinos por Copa | Winerim",
     metaDescription: "Descarga gratis la plantilla para diseñar tu estrategia de vino por copa: selección, pricing, rotación, control de merma y objetivos de venta.",
     badgeIcon: GlassWater,
