@@ -144,6 +144,7 @@ export interface TranslationDict {
 
   // Footer
   footer_description: string;
+  footer_tagline: string;
   footer_product: string;
   footer_content: string;
   footer_tools: string;
@@ -153,6 +154,10 @@ export interface TranslationDict {
   footer_privacy: string;
   footer_terms: string;
   footer_copyright: string;
+  footer_company: string;
+  footer_about: string;
+  footer_methodology: string;
+  footer_contact_email: string;
 
   // Hero
   hero_badge: string;
