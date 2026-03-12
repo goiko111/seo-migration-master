@@ -500,7 +500,7 @@ const Precios = () => {
                       </div>
                     )}
                     <div className="flex items-center gap-3 mb-2">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${highlight ? "bg-wine/15" : "bg-wine/10"}`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${highlight ? "bg-wine/15" : "bg-wine/10"}`}>
                         <Icon size={20} className="text-wine" />
                       </div>
                       <h3 className="font-heading text-xl font-bold">{plan.name}</h3>

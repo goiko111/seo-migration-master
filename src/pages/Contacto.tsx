@@ -124,9 +124,15 @@ const Contacto = () => {
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <ContactFormFields native variant="contact" />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
-                <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
+                <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}
                 </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {lang === "es" ? "Sin compromiso. Al enviar aceptas nuestra " : "No commitment. By submitting you accept our "}
+                  <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
+                    {lang === "es" ? "política de privacidad" : "privacy policy"}
+                  </Link>.
+                </p>
               </form>
             </motion.div>
 

@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           {testimonials.map((t, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="relative bg-gradient-card rounded-2xl border border-border p-8 h-full flex flex-col hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+              <div className="relative bg-gradient-card rounded-xl border border-border p-6 h-full flex flex-col hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden group">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-wine to-wine-light opacity-40 group-hover:opacity-100 transition-opacity" />
                 <Quote size={24} className="text-wine/30 mb-4 shrink-0" />
                 <p className="text-sm leading-relaxed text-muted-foreground flex-1 mb-6">{t.quote}</p>

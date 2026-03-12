@@ -151,9 +151,9 @@ const Soluciones = () => {
 
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>
-            <div className="bg-gradient-card rounded-2xl border border-border p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+            <div className="bg-gradient-card rounded-xl border border-border p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
-                <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center mb-4">
                   <TrendingUp size={18} className="text-wine" />
                 </div>
                 <h2 className="font-heading text-xl font-bold mb-2">{t.diagTitle}</h2>
