@@ -267,11 +267,11 @@ const ContactFormFields = ({
       {showBusinessType && (
         <div>
           <Label htmlFor="business_type" className="text-sm font-medium">
-            Tipo de negocio
+            Tipo de establecimiento
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="business_type" name="business_type" options={businessTypeOptions} placeholder="Selecciona tipo de negocio" />
+              <NativeSelect id="business_type" name="business_type" options={businessTypeOptions} placeholder="¿Qué tipo de negocio es?" />
             ) : null}
           </div>
         </div>
