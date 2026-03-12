@@ -722,7 +722,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-revision-mensual-carta",
     formType: "plantilla-revision-mensual",
-    downloadFile: "/recursos/winerim_checklist_carta_rentable_2026.xlsx",
+    downloadFile: "/recursos/winerim_plantilla_revision_mensual_carta_2026.xlsx",
     metaTitle: "Plantilla de Revisión Mensual de Carta de Vinos | Winerim",
     metaDescription: "Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.",
     badgeIcon: Calendar,
