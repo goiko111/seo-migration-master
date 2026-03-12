@@ -11,6 +11,7 @@ const LogoStrip = lazy(() => import("@/components/LogoStrip"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
 const WhoItHelpsSection = lazy(() => import("@/components/landing/WhoItHelpsSection"));
+const BusinessProfilesSection = lazy(() => import("@/components/landing/BusinessProfilesSection"));
 const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
 const DynamicIntelligenceTeaser = lazy(() => import("@/components/landing/DynamicIntelligenceTeaser"));
 const ResultsSection = lazy(() => import("@/components/landing/ResultsSection"));
@@ -64,7 +65,12 @@ const Index = () => {
             <ResultsSection />
           </Suspense>
 
-          {/* 7. Who it helps — role-based value */}
+          {/* 7. Business profiles — self-identification by visitor type */}
+          <Suspense fallback={<SectionFallback />}>
+            <BusinessProfilesSection />
+          </Suspense>
+
+          {/* 8. Who it helps — role-based value (complementary to profiles) */}
           <Suspense fallback={<SectionFallback />}>
             <WhoItHelpsSection />
           </Suspense>
