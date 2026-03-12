@@ -1,4 +1,4 @@
-import { AlertTriangle, Wine, Users, PackageX, BarChart3 } from "lucide-react";
+import { AlertTriangle, Wine, Users, PackageX, BarChart3 } from "lucide-react"; // v2
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
