@@ -1,7 +1,7 @@
-// Hero section — optimized for conversion, SEO, and AI citability
+// Hero section — above-the-fold, conversion-optimized
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { Play, Wine, TrendingUp, BarChart3, Users } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 import heroTabletImg from "@/assets/winerim-tablet-hero.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -9,187 +9,143 @@ const heroData: Record<string, {
   badge: string;
   title: string;
   titleHighlight: string;
-  titleEnd: string;
   subtitle: string;
+  forWhom: string;
   ctaPrimary: string;
+  ctaPrimaryMicro: string;
   ctaSecondary: string;
-  stats: { value: string; label: string }[];
-  proofLine: string;
+  proof: string;
 }> = {
   es: {
-    badge: "Software de IA para restaurantes",
-    title: "Convierte tu carta de vinos en ",
-    titleHighlight: "ventas, margen y control",
-    titleEnd: "",
-    subtitle: "Winerim es el software que ayuda a restaurantes a vender más vino, mejorar el ticket medio, optimizar márgenes y controlar la bodega — con inteligencia artificial, sin depender del sommelier.",
+    badge: "Software de gestión de carta de vinos",
+    title: "Vende más vino. Mejora márgenes. Controla tu bodega.",
+    titleHighlight: "",
+    subtitle: "Winerim es el software que convierte tu carta de vinos en una herramienta de venta, análisis y gestión — con IA, sin depender del sommelier.",
+    forWhom: "Para restaurantes, hoteles y grupos de restauración",
     ctaPrimary: "Solicitar demo gratuita",
+    ctaPrimaryMicro: "15 min · Sin compromiso · Adaptada a tu negocio",
     ctaSecondary: "Ver cómo funciona",
-    stats: [
-      { value: "+1.000", label: "Bodegas gestionadas" },
-      { value: "15", label: "Países" },
-      { value: "22+", label: "Integraciones TPV" },
-      { value: "4", label: "Idiomas" },
-    ],
-    proofLine: "Restaurantes, hoteles y grupos de restauración en toda Europa",
+    proof: "+1.000 bodegas gestionadas en 15 países",
   },
   en: {
-    badge: "AI software for restaurants",
-    title: "Turn your wine list into ",
-    titleHighlight: "sales, margin & control",
-    titleEnd: "",
-    subtitle: "Winerim helps restaurants sell more wine, increase average ticket, optimize margins and manage the cellar — with AI, without relying on a full-time sommelier.",
+    badge: "Wine list management software",
+    title: "Sell more wine. Improve margins. Control your cellar.",
+    titleHighlight: "",
+    subtitle: "Winerim is the software that turns your wine list into a sales, analytics, and management tool — with AI, without relying on a sommelier.",
+    forWhom: "For restaurants, hotels and restaurant groups",
     ctaPrimary: "Request free demo",
+    ctaPrimaryMicro: "15 min · No commitment · Tailored to your business",
     ctaSecondary: "See how it works",
-    stats: [
-      { value: "+1,000", label: "Cellars managed" },
-      { value: "15", label: "Countries" },
-      { value: "22+", label: "POS integrations" },
-      { value: "4", label: "Languages" },
-    ],
-    proofLine: "Restaurants, hotels and restaurant groups across Europe",
+    proof: "+1,000 cellars managed across 15 countries",
   },
   it: {
-    badge: "Software IA per ristoranti",
-    title: "Trasforma la tua carta dei vini in ",
-    titleHighlight: "vendite, margine e controllo",
-    titleEnd: "",
-    subtitle: "Winerim aiuta i ristoranti a vendere più vino, aumentare lo scontrino medio, ottimizzare i margini e gestire la cantina — con IA, senza dipendere dal sommelier.",
+    badge: "Software gestione carta dei vini",
+    title: "Vendi più vino. Migliora i margini. Controlla la cantina.",
+    titleHighlight: "",
+    subtitle: "Winerim è il software che trasforma la tua carta dei vini in uno strumento di vendita, analisi e gestione — con IA, senza dipendere dal sommelier.",
+    forWhom: "Per ristoranti, hotel e gruppi di ristorazione",
     ctaPrimary: "Richiedi demo gratuita",
+    ctaPrimaryMicro: "15 min · Senza impegno · Adattata al tuo business",
     ctaSecondary: "Scopri come funziona",
-    stats: [
-      { value: "+1.000", label: "Cantine gestite" },
-      { value: "15", label: "Paesi" },
-      { value: "22+", label: "Integrazioni POS" },
-      { value: "4", label: "Lingue" },
-    ],
-    proofLine: "Ristoranti, hotel e gruppi di ristorazione in tutta Europa",
+    proof: "+1.000 cantine gestite in 15 paesi",
   },
   fr: {
-    badge: "Logiciel IA pour restaurants",
-    title: "Transformez votre carte des vins en ",
-    titleHighlight: "ventes, marge et contrôle",
-    titleEnd: "",
-    subtitle: "Winerim aide les restaurants à vendre plus de vin, augmenter le ticket moyen, optimiser les marges et gérer la cave — avec l'IA, sans dépendre du sommelier.",
+    badge: "Logiciel de gestion de carte des vins",
+    title: "Vendez plus de vin. Améliorez vos marges. Contrôlez votre cave.",
+    titleHighlight: "",
+    subtitle: "Winerim est le logiciel qui transforme votre carte des vins en un outil de vente, d'analyse et de gestion — avec l'IA, sans dépendre du sommelier.",
+    forWhom: "Pour restaurants, hôtels et groupes de restauration",
     ctaPrimary: "Demander une démo gratuite",
+    ctaPrimaryMicro: "15 min · Sans engagement · Adaptée à votre activité",
     ctaSecondary: "Voir comment ça marche",
-    stats: [
-      { value: "+1 000", label: "Caves gérées" },
-      { value: "15", label: "Pays" },
-      { value: "22+", label: "Intégrations POS" },
-      { value: "4", label: "Langues" },
-    ],
-    proofLine: "Restaurants, hôtels et groupes de restauration à travers l'Europe",
+    proof: "+1 000 caves gérées dans 15 pays",
   },
-};
-
-const valueProps: Record<string, { icon: typeof Wine; text: string }[]> = {
-  es: [
-    { icon: Wine, text: "Vende más vino" },
-    { icon: TrendingUp, text: "Sube el ticket medio" },
-    { icon: BarChart3, text: "Controla margen y stock" },
-    { icon: Users, text: "Ayuda al equipo de sala" },
-  ],
-  en: [
-    { icon: Wine, text: "Sell more wine" },
-    { icon: TrendingUp, text: "Increase avg. ticket" },
-    { icon: BarChart3, text: "Control margin & stock" },
-    { icon: Users, text: "Empower floor staff" },
-  ],
-  it: [
-    { icon: Wine, text: "Vendi più vino" },
-    { icon: TrendingUp, text: "Aumenta lo scontrino" },
-    { icon: BarChart3, text: "Controlla margini e stock" },
-    { icon: Users, text: "Aiuta il personale" },
-  ],
-  fr: [
-    { icon: Wine, text: "Vendez plus de vin" },
-    { icon: TrendingUp, text: "Augmentez le ticket" },
-    { icon: BarChart3, text: "Contrôlez marges et stock" },
-    { icon: Users, text: "Aidez l'équipe de salle" },
-  ],
 };
 
 const HeroSection = memo(() => {
   const { lang, localePath } = useLanguage();
   const h = heroData[lang] || heroData.es;
-  const vp = valueProps[lang] || valueProps.es;
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-28 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left — copy */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6 animate-fade-in">
               <span className="w-2 h-2 rounded-full bg-wine animate-pulse" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{h.badge}</span>
             </div>
 
-            {/* H1 — keyword-rich, conversion-focused */}
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] mb-6 animate-fade-in-up">
-              {h.title}
-              <span className="text-gradient-wine italic">{h.titleHighlight}</span>
-              {h.titleEnd}
+            {/* H1 — 3 clear outcomes */}
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.1] mb-5 animate-fade-in-up">
+              <span className="text-gradient-wine">Vende más vino.</span>
+              <br className="hidden sm:block" />{" "}
+              Mejora márgenes.
+              <br className="hidden sm:block" />{" "}
+              Controla tu bodega.
             </h1>
 
-            {/* Subtitle — business value, not feature list */}
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-xl animate-fade-in-up animation-delay-200">
+            {/* Subtitle — what it is + how */}
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 max-w-xl animate-fade-in-up animation-delay-200">
               {h.subtitle}
             </p>
 
-            {/* Value prop pills */}
-            <div className="flex flex-wrap gap-2 mb-8 animate-fade-in-up animation-delay-200">
-              {vp.map((v, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-wine/5 border border-wine/10 text-xs font-medium text-foreground/80"
-                >
-                  <v.icon size={12} className="text-wine" />
-                  {v.text}
-                </span>
-              ))}
-            </div>
+            {/* For whom */}
+            <p className="text-xs font-medium tracking-wide text-foreground/50 uppercase mb-8 animate-fade-in-up animation-delay-200">
+              {h.forWhom}
+            </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up animation-delay-400">
+            <div className="flex flex-col sm:flex-row gap-3 mb-4 animate-fade-in-up animation-delay-400">
               <Link
                 to={localePath("/demo")}
-                className="bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:scale-[1.03] hover:shadow-lg hover:shadow-wine/20 transition-all duration-300 text-center"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:scale-[1.02] hover:shadow-lg hover:shadow-wine/20 transition-all duration-300"
               >
                 {h.ctaPrimary}
+                <ArrowRight size={16} />
               </Link>
               <a
                 href="https://youtu.be/-PleM286zeY"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary hover:border-wine/30 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary hover:border-wine/30 transition-all duration-300"
               >
-                <Play size={16} className="text-wine" />
+                <Play size={14} className="text-wine" />
                 {h.ctaSecondary}
               </a>
             </div>
 
-            {/* Social proof stats */}
-            <div className="animate-fade-in-up animation-delay-400">
-              <div className="grid grid-cols-4 gap-4 border-t border-border pt-6">
-                {h.stats.map((s, i) => (
-                  <div key={i} className="text-center">
-                    <p className="font-heading text-lg md:text-xl font-bold text-foreground">{s.value}</p>
-                    <p className="text-[10px] md:text-xs text-muted-foreground leading-tight mt-0.5">{s.label}</p>
+            {/* Micro-copy under CTA */}
+            <p className="text-[11px] text-muted-foreground/50 mb-10 animate-fade-in-up animation-delay-400">
+              {h.ctaPrimaryMicro}
+            </p>
+
+            {/* Inline social proof */}
+            <div className="flex items-center gap-3 animate-fade-in-up animation-delay-400">
+              <div className="flex -space-x-1.5">
+                {["ÁP", "NO", "JT", "MR"].map((initials) => (
+                  <div
+                    key={initials}
+                    className="w-7 h-7 rounded-full bg-wine/80 border-2 border-background flex items-center justify-center text-[9px] font-bold text-white"
+                  >
+                    {initials}
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground/60 text-center mt-3">{h.proofLine}</p>
+              <p className="text-xs text-muted-foreground">{h.proof}</p>
             </div>
           </div>
 
-          {/* Tablet mockup */}
+          {/* Right — Tablet mockup */}
           <div className="hidden lg:block">
             <div className="relative">
-              <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.15),transparent_70%)] blur-2xl" />
+              <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.12),transparent_70%)] blur-2xl" />
               <img
                 src={heroTabletImg}
                 alt="Winerim — carta de vinos inteligente en tablet para restaurantes"
@@ -205,7 +161,8 @@ const HeroSection = memo(() => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 });
