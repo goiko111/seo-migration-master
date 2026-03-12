@@ -247,7 +247,7 @@ const ContactFormFields = ({
                 ) : (
                   <Select value={referencesCount} onValueChange={onReferencesCountChange}>
                     <SelectTrigger className="bg-background border-border">
-                      <SelectValue placeholder="Selecciona un rango" />
+                      <SelectValue placeholder="¿Cuántas referencias tienes?" />
                     </SelectTrigger>
                     <SelectContent>
                       {referencesOptions.map((o) => (
