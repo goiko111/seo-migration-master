@@ -564,9 +564,9 @@ const Precios = () => {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-card">
-                    <th className="text-left p-4 font-medium text-muted-foreground w-[40%]">
-                      {lang === "es" ? "Funcionalidad" : "Feature"}
-                    </th>
+                     <th className="text-left p-4 font-medium text-muted-foreground w-[40%]">
+                       {lang === "es" ? "Funcionalidad" : lang === "it" ? "Funzionalità" : lang === "fr" ? "Fonctionnalité" : "Feature"}
+                     </th>
                     {["Starter", "Pro", "Enterprise"].map((name, i) => (
                       <th key={name} className={`p-4 text-center font-heading font-bold ${i === 1 ? "text-wine" : ""}`}>
                         {name}
