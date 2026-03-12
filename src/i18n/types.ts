@@ -123,6 +123,25 @@ export interface TranslationDict {
   nav_pricing_tool: string;
   nav_see_all: string;
 
+  // Nav - Solutions vertical
+  nav_solutions: string;
+  nav_sol_gastronomic: string;
+  nav_sol_wine_bars: string;
+  nav_sol_hotels: string;
+  nav_sol_groups: string;
+  nav_sol_no_sommelier: string;
+  nav_sol_large_list: string;
+
+  // Nav - Resources mega
+  nav_resources: string;
+  nav_resources_learn: string;
+  nav_resources_tools: string;
+  nav_benchmarks: string;
+
+  // Nav sections
+  nav_platform: string;
+  nav_results: string;
+
   // Footer
   footer_description: string;
   footer_product: string;

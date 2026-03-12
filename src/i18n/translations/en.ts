@@ -26,6 +26,22 @@ const en: TranslationDict = {
   nav_pricing_tool: "Wine pricing tool",
   nav_see_all: "See all →",
 
+  nav_solutions: "Solutions",
+  nav_sol_gastronomic: "Fine dining",
+  nav_sol_wine_bars: "Wine bars",
+  nav_sol_hotels: "Hotels & resorts",
+  nav_sol_groups: "Restaurant groups",
+  nav_sol_no_sommelier: "Without sommelier",
+  nav_sol_large_list: "Large wine lists",
+
+  nav_resources: "Resources",
+  nav_resources_learn: "Learn",
+  nav_resources_tools: "Tools",
+  nav_benchmarks: "Benchmarks & Playbooks",
+
+  nav_platform: "Platform",
+  nav_results: "Results",
+
   footer_description: "The smart wine list that revolutionizes hospitality.",
   footer_product: "Product",
   footer_content: "Content",
