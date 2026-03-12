@@ -4,6 +4,12 @@ import {
   ArrowRight, AlertTriangle, TrendingDown, CheckCircle,
   Sparkles, HelpCircle, Zap, DollarSign
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
