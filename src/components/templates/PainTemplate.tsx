@@ -4,6 +4,12 @@ import {
   ArrowRight, AlertTriangle, TrendingDown, CheckCircle,
   Sparkles, HelpCircle, Zap, DollarSign
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -112,7 +118,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {/* SÍNTOMA */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
         <ScrollReveal>
-          <div className="p-8 rounded-2xl border border-destructive/20 bg-destructive/5">
+          <div className="p-6 md:p-8 rounded-xl border border-destructive/20 bg-destructive/5">
             <div className="flex items-start gap-4 mb-4">
               <AlertTriangle size={24} className="text-destructive shrink-0 mt-1" />
               <div>
@@ -151,7 +157,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {/* IMPACTO ECONÓMICO */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
         <ScrollReveal>
-          <div className="p-8 rounded-2xl border border-accent/20 bg-accent/5">
+          <div className="p-6 md:p-8 rounded-xl border border-accent/20 bg-accent/5">
             <div className="flex items-start gap-4">
               <DollarSign size={24} className="text-accent shrink-0 mt-1" />
               <div>
@@ -237,26 +243,25 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         </section>
       )}
 
-      {/* FAQ */}
+      {/* FAQ — accordion */}
       {data.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
             </ScrollReveal>
-            <div className="space-y-6">
+            <Accordion type="multiple" className="space-y-3">
               {data.faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.05}>
-                  <div className="p-6 rounded-xl border border-border bg-background">
-                    <div className="flex items-start gap-3 mb-3">
-                      <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                      <h3 className="font-heading font-bold">{faq.q}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-                  </div>
-                </ScrollReveal>
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-background px-6 data-[state=open]:border-wine/20">
+                  <AccordionTrigger className="text-left font-heading font-bold text-sm hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </section>
       )}

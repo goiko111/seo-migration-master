@@ -271,8 +271,8 @@ const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <div className="bg-gradient-card rounded-xl border border-border p-6 h-full">
-                    <div className="w-11 h-11 rounded-xl bg-wine/10 flex items-center justify-center mb-4">
-                      <Icon size={22} className="text-wine" />
+                    <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center mb-4">
+                      <Icon size={20} className="text-wine" />
                     </div>
                     <h3 className="font-heading font-bold mb-2">{adv.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{adv.desc}</p>

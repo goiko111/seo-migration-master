@@ -177,9 +177,9 @@ const WhoItHelpsSection = () => {
             const Icon = role.icon;
             return (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-gradient-card rounded-2xl border border-border p-7 h-full hover:border-wine/20 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5">
-                    <Icon size={24} className="text-wine" />
+                <div className="bg-gradient-card rounded-xl border border-border p-6 h-full hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center mb-5">
+                    <Icon size={20} className="text-wine" />
                   </div>
                   <h3 className="font-heading text-lg font-bold mb-4">{role.title}</h3>
                   <ul className="space-y-2.5">

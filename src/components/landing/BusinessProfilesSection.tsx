@@ -255,12 +255,9 @@ const BusinessProfilesSection = () => {
             const Icon = profile.icon;
             return (
               <ScrollReveal key={i} delay={i * 0.08}>
-                <div className="group relative bg-gradient-card rounded-2xl border border-border p-6 h-full flex flex-col hover:border-wine/25 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
-                  {/* Top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
+                <div className="group relative bg-gradient-card rounded-xl border border-border p-6 h-full flex flex-col hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/15 transition-colors">
                       <Icon size={20} className="text-wine" />
                     </div>
                     <h3 className="font-heading text-base font-bold leading-tight">{profile.title}</h3>
