@@ -40,46 +40,57 @@ const Index = () => {
       <Navbar />
       <PageContentProvider page="home">
         <main>
-          {/* Above the fold — eagerly loaded, no framer-motion */}
+          {/* 1. Hero — value prop, stats, CTA */}
           <HeroSection />
 
-          {/* Social proof — logos */}
+          {/* 2. Social proof — logos */}
           <Suspense fallback={<SectionFallback />}>
             <LogoStrip />
           </Suspense>
 
-          {/* Problem → Solution → Who it helps (conversion funnel) */}
+          {/* 3–4. Problem → Solution (conversion funnel) */}
           <Suspense fallback={<SectionFallback />}>
             <ProblemSection />
             <SolutionSection />
           </Suspense>
 
+          {/* 5. How it works — reduce friction early */}
+          <Suspense fallback={<SectionFallback />}>
+            <HowItWorksSection />
+          </Suspense>
+
+          {/* 6. Results — outcomes before features */}
+          <Suspense fallback={<SectionFallback />}>
+            <ResultsSection />
+          </Suspense>
+
+          {/* 7. Who it helps — role-based value */}
           <Suspense fallback={<SectionFallback />}>
             <WhoItHelpsSection />
           </Suspense>
 
-          {/* Features + Dynamic Intelligence */}
+          {/* 8–9. Features depth + differentiator */}
           <Suspense fallback={<SectionFallback />}>
             <FeaturesPreview />
             <DynamicIntelligenceTeaser />
           </Suspense>
 
-          {/* Results + How it works */}
-          <Suspense fallback={<SectionFallback />}>
-            <ResultsSection />
-            <HowItWorksSection />
-          </Suspense>
-
-          {/* Testimonials + Definition (citability) + Credibility + Video + CTA */}
+          {/* 10–11. Testimonials + Video — trust builders */}
           <Suspense fallback={<SectionFallback />}>
             <TestimonialsSection />
-            <DefinitionSection />
+            <VideoSection />
           </Suspense>
+
+          {/* 12–13. Credibility + Definition — SEO/citability */}
           <Suspense fallback={<SectionFallback />}>
             <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
               <CredibilitySection lang={lang} />
             </section>
-            <VideoSection />
+            <DefinitionSection />
+          </Suspense>
+
+          {/* 14. Final CTA */}
+          <Suspense fallback={<SectionFallback />}>
             <FinalCTASection />
             <StickyCTA pageType="home" />
           </Suspense>
