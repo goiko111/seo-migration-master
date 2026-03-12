@@ -26,6 +26,22 @@ const es: TranslationDict = {
   nav_pricing_tool: "Wine pricing tool",
   nav_see_all: "Ver todas →",
 
+  nav_solutions: "Soluciones",
+  nav_sol_gastronomic: "Restaurantes gastronómicos",
+  nav_sol_wine_bars: "Wine bars",
+  nav_sol_hotels: "Hoteles",
+  nav_sol_groups: "Grupos de restauración",
+  nav_sol_no_sommelier: "Sin sumiller",
+  nav_sol_large_list: "Carta amplia",
+
+  nav_resources: "Recursos",
+  nav_resources_learn: "Aprende",
+  nav_resources_tools: "Herramientas",
+  nav_benchmarks: "Benchmarks & Playbooks",
+
+  nav_platform: "Plataforma",
+  nav_results: "Resultados",
+
   footer_description: "La carta inteligente de vinos que revoluciona la hostelería.",
   footer_product: "Producto",
   footer_content: "Contenido",
