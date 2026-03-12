@@ -167,7 +167,7 @@ const ContactFormFields = ({
             ) : (
               <Select value={position} onValueChange={onPositionChange}>
                 <SelectTrigger className="bg-background border-border">
-                  <SelectValue placeholder="Selecciona tu cargo" />
+                  <SelectValue placeholder="¿Cuál es tu rol?" />
                 </SelectTrigger>
                 <SelectContent>
                   {positionOptions.map((o) => (
