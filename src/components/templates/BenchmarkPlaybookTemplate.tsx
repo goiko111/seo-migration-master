@@ -100,7 +100,7 @@ const BenchmarkPlaybookTemplate = ({ data }: { data: BPItem }) => {
       {/* EXECUTIVE SUMMARY */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-16">
         <ScrollReveal>
-          <aside role="note" aria-label="Resumen ejecutivo" className="rounded-2xl border border-border bg-gradient-card p-6 md:p-8">
+          <aside role="note" aria-label="Resumen ejecutivo" className="rounded-xl border border-border bg-gradient-card p-6 md:p-8">
             <h2 className="font-heading text-lg font-bold mb-3 flex items-center gap-2">
               <Lightbulb size={18} className="text-wine" /> Resumen ejecutivo
             </h2>
