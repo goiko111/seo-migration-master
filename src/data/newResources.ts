@@ -621,6 +621,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-equilibrio-carta",
     formType: "plantilla-equilibrio-carta",
+    downloadFile: "/recursos/winerim_equilibrio_carta_2026.xlsx",
     metaTitle: "Plantilla para Evaluar el Equilibrio de tu Carta de Vinos | Winerim",
     metaDescription: "Descarga la plantilla para analizar el equilibrio de tu carta por estilos, regiones, precios y tipologías. Detecta desequilibrios y mejora la composición.",
     badgeIcon: Layers,
