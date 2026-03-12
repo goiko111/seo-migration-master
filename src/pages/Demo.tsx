@@ -149,9 +149,9 @@ const Demo = () => {
 
               {/* Trust signals */}
               <div className="flex flex-wrap gap-6 text-xs text-muted-foreground pt-6 border-t border-border">
-                <span className="flex items-center gap-1.5"><Clock size={12} /> Respuesta en 24 h</span>
-                <span className="flex items-center gap-1.5"><ShieldCheck size={12} /> Sin compromiso</span>
-                <span className="flex items-center gap-1.5"><Sparkles size={12} /> Demo de 15 min</span>
+                <span className="flex items-center gap-1.5"><Clock size={12} /> {c.trust_response}</span>
+                <span className="flex items-center gap-1.5"><ShieldCheck size={12} /> {c.trust_no_commitment}</span>
+                <span className="flex items-center gap-1.5"><Sparkles size={12} /> {c.trust_demo}</span>
               </div>
 
               {/* Social proof quote */}
@@ -182,11 +182,11 @@ const Demo = () => {
 
               {/* What happens next */}
               <div className="mt-6 pt-5 border-t border-border">
-                <p className="text-xs font-semibold text-foreground/70 mb-3 uppercase tracking-widest">¿Qué pasa después?</p>
+                <p className="text-xs font-semibold text-foreground/70 mb-3 uppercase tracking-widest">{c.what_next}</p>
                 <ol className="space-y-2 text-xs text-muted-foreground">
-                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">1.</span> Te contactamos en menos de 24 h para agendar la demo.</li>
-                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">2.</span> Preparamos la demo con tu carta real (si la envías).</li>
-                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">3.</span> En 15 min ves Winerim aplicado a tu caso. Sin compromiso.</li>
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">1.</span> {c.step1}</li>
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">2.</span> {c.step2}</li>
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">3.</span> {c.step3}</li>
                 </ol>
               </div>
             </motion.div>
@@ -194,10 +194,10 @@ const Demo = () => {
         </section>
       </main>
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software carta de vinos" : "Wine list software", type: "solution" },
-        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : "Plans & pricing", type: "resource" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : "Case studies", type: "resource" },
-        { to: localePath("/analisis-carta"), label: lang === "es" ? "Análisis gratuito de carta" : "Free wine list analysis", type: "tool" },
+        { to: localePath("/software-carta-de-vinos"), label: c.link_software, type: "solution" },
+        { to: localePath("/precios"), label: c.link_pricing, type: "resource" },
+        { to: localePath("/casos-exito"), label: c.link_cases, type: "resource" },
+        { to: localePath("/analisis-carta"), label: c.link_analysis, type: "tool" },
       ]} />
       <Footer />
     </div>
