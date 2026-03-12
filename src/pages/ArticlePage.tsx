@@ -227,6 +227,7 @@ const ArticlePage = () => {
         </Link>
       </section>
 
+      <StickyCTA pageType="article" />
       <Footer />
     </div>
   );
