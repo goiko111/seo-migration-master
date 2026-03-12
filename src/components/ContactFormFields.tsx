@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 
 export const positionOptions = [
   { value: "propietario", label: "Propietario/a" },
-  { value: "director", label: "Director/a" },
-  { value: "sommelier", label: "Sommelier" },
+  { value: "director", label: "Director/a de F&B" },
+  { value: "sommelier", label: "Sommelier / Jefe de bebidas" },
   { value: "jefe-sala", label: "Jefe/a de sala" },
-  { value: "chef", label: "Chef" },
-  { value: "responsable-bebidas", label: "Responsable de bebidas" },
-  { value: "gerente", label: "Gerente" },
-  { value: "otro", label: "Otro" },
+  { value: "chef", label: "Chef ejecutivo" },
+  { value: "responsable-bebidas", label: "Responsable de compras" },
+  { value: "gerente", label: "Gerente / Dirección general" },
+  { value: "otro", label: "Otro cargo" },
 ];
 
 export const referencesOptions = [
@@ -21,7 +21,7 @@ export const referencesOptions = [
   { value: "80-150", label: "80–150 referencias" },
   { value: "150-300", label: "150–300 referencias" },
   { value: "300-500", label: "300–500 referencias" },
-  { value: "500+", label: "+500 referencias" },
+  { value: "500+", label: "Más de 500 referencias" },
 ];
 
 export const businessTypeOptions = [
@@ -30,7 +30,7 @@ export const businessTypeOptions = [
   { value: "hotel", label: "Hotel / Resort" },
   { value: "wine-bar", label: "Wine bar / Vinoteca" },
   { value: "catering", label: "Catering / Eventos" },
-  { value: "otro", label: "Otro" },
+  { value: "otro", label: "Otro tipo de negocio" },
 ];
 
 export const numLocationsOptions = [
@@ -38,18 +38,18 @@ export const numLocationsOptions = [
   { value: "2-5", label: "2–5 locales" },
   { value: "6-15", label: "6–15 locales" },
   { value: "16-50", label: "16–50 locales" },
-  { value: "50+", label: "+50 locales" },
+  { value: "50+", label: "Más de 50 locales" },
 ];
 
 export const mainChallengeOptions = [
-  { value: "vender-mas-vino", label: "Vender más vino" },
-  { value: "mejorar-margenes", label: "Mejorar márgenes" },
-  { value: "rotacion-stock", label: "Mejorar rotación / stock muerto" },
-  { value: "formar-equipo", label: "Formar al equipo de sala" },
-  { value: "optimizar-carta", label: "Optimizar carta y surtido" },
-  { value: "digitalizar-carta", label: "Digitalizar la carta" },
-  { value: "gestionar-multi-local", label: "Gestionar varios locales" },
-  { value: "otro", label: "Otro" },
+  { value: "vender-mas-vino", label: "Aumentar ventas de vino" },
+  { value: "mejorar-margenes", label: "Mejorar márgenes por botella" },
+  { value: "rotacion-stock", label: "Reducir stock muerto / mejorar rotación" },
+  { value: "formar-equipo", label: "Formar al equipo de sala en vino" },
+  { value: "optimizar-carta", label: "Optimizar surtido y estructura de carta" },
+  { value: "digitalizar-carta", label: "Digitalizar la carta de vinos" },
+  { value: "gestionar-multi-local", label: "Centralizar gestión en varios locales" },
+  { value: "otro", label: "Otro reto" },
 ];
 
 /**
@@ -142,7 +142,7 @@ const ContactFormFields = ({
       {/* Name */}
       <div>
         <Label htmlFor="name" className="text-sm font-medium">
-          Tu nombre <span className="text-destructive">*</span>
+          Tu nombre completo <span className="text-destructive">*</span>
         </Label>
         <div className="relative mt-1.5">
           <User size={16} className={iconWrap} />
@@ -159,15 +159,15 @@ const ContactFormFields = ({
       {showPosition && (
         <div>
           <Label htmlFor="position" className="text-sm font-medium">
-            Tu cargo {positionRequired && <span className="text-destructive">*</span>}
+            Tu cargo en el negocio {positionRequired && <span className="text-destructive">*</span>}
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="position" name="position" required={positionRequired} options={positionOptions} placeholder="Selecciona tu cargo" />
+              <NativeSelect id="position" name="position" required={positionRequired} options={positionOptions} placeholder="¿Cuál es tu rol?" />
             ) : (
               <Select value={position} onValueChange={onPositionChange}>
                 <SelectTrigger className="bg-background border-border">
-                  <SelectValue placeholder="Selecciona tu cargo" />
+                  <SelectValue placeholder="¿Cuál es tu rol?" />
                 </SelectTrigger>
                 <SelectContent>
                   {positionOptions.map((o) => (
@@ -202,7 +202,7 @@ const ContactFormFields = ({
 
         <div>
           <Label htmlFor="email" className="text-sm font-medium">
-            Email <span className="text-destructive">*</span>
+            Email profesional <span className="text-destructive">*</span>
           </Label>
           <div className="relative mt-1.5">
             <Mail size={16} className={iconWrap} />
@@ -239,15 +239,15 @@ const ContactFormFields = ({
           {showReferences && (
             <div>
               <Label htmlFor="references_count" className="text-sm font-medium">
-                Nº de referencias en carta {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                Referencias en carta {(isDemo || isContact) && <span className="text-destructive">*</span>}
               </Label>
               <div className="mt-1.5">
                 {native ? (
-                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={referencesOptions} placeholder="Selecciona un rango" />
+                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={referencesOptions} placeholder="¿Cuántas referencias tienes?" />
                 ) : (
                   <Select value={referencesCount} onValueChange={onReferencesCountChange}>
                     <SelectTrigger className="bg-background border-border">
-                      <SelectValue placeholder="Selecciona un rango" />
+                      <SelectValue placeholder="¿Cuántas referencias tienes?" />
                     </SelectTrigger>
                     <SelectContent>
                       {referencesOptions.map((o) => (
@@ -267,11 +267,11 @@ const ContactFormFields = ({
       {showBusinessType && (
         <div>
           <Label htmlFor="business_type" className="text-sm font-medium">
-            Tipo de negocio
+            Tipo de establecimiento
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="business_type" name="business_type" options={businessTypeOptions} placeholder="Selecciona tipo de negocio" />
+              <NativeSelect id="business_type" name="business_type" options={businessTypeOptions} placeholder="¿Qué tipo de negocio es?" />
             ) : null}
           </div>
         </div>
@@ -280,11 +280,11 @@ const ContactFormFields = ({
       {showLocations && (
         <div>
           <Label htmlFor="num_locations" className="text-sm font-medium">
-            Número de locales
+            Locales que gestionas
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="num_locations" name="num_locations" options={numLocationsOptions} placeholder="¿Cuántos locales gestionas?" />
+              <NativeSelect id="num_locations" name="num_locations" options={numLocationsOptions} placeholder="¿Cuántos locales?" />
             ) : null}
           </div>
         </div>
@@ -293,11 +293,11 @@ const ContactFormFields = ({
       {showChallenge && (
         <div>
           <Label htmlFor="main_challenge" className="text-sm font-medium">
-            Principal reto con tu carta de vinos
+            ¿Qué quieres mejorar de tu carta?
           </Label>
           <div className="mt-1.5">
             {native ? (
-              <NativeSelect id="main_challenge" name="main_challenge" options={mainChallengeOptions} placeholder="¿Qué quieres mejorar?" />
+              <NativeSelect id="main_challenge" name="main_challenge" options={mainChallengeOptions} placeholder="Tu principal reto ahora mismo" />
             ) : null}
           </div>
         </div>
