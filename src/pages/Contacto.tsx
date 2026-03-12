@@ -50,8 +50,8 @@ const content: Record<string, {
   },
   it: {
     seo_title: "Contatto", seo_desc: "Contatta Winerim. Analizziamo la tua carta dei vini gratuitamente.", breadcrumb: "Contatto",
-    title: "Vuoi aumentare le tue vendite", highlight: "di oltre il 30%?",
-    subtitle: "Analizziamo la tua carta completamente gratis. Ti consigliamo come ottimizzarla.",
+    title: "Vuoi ottimizzare le vendite", highlight: "di vino?",
+    subtitle: "Analizziamo la tua carta completamente gratis. Ti mostriamo opportunità reali di miglioramento.",
     form_title: "Analizziamo la tua carta gratis",
     name: "Nome", position: "Ruolo nel ristorante", email: "Email", phone: "Telefono",
     restaurant: "Ristorante", city: "Città", references: "Numero di referenze", menu_link: "Link alla tua carta", message: "Messaggio (Cosa vorresti migliorare?)",
