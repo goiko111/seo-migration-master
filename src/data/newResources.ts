@@ -833,6 +833,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-control-grupo-restauracion",
     formType: "plantilla-control-grupo",
+    downloadFile: "/recursos/winerim_control_grupo_restauracion_2026.xlsx",
     metaTitle: "Plantilla de Control de Carta de Vinos para Grupos de Restauración | Winerim",
     metaDescription: "Descarga la plantilla para gestionar y comparar la carta de vinos en múltiples locales. KPIs por local, coherencia de surtido, pricing centralizado y benchmarking interno.",
     badgeIcon: Building2,
