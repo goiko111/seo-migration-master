@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   BookOpen, TrendingUp, Wine, BarChart3, Utensils, Calculator,
   Brain, DollarSign, Download, Search, FileText, CheckCircle,
-  Layers, Building2, Users
+  Layers, Building2, Users, ArrowRight, Wrench
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -23,6 +23,7 @@ type LangContent = {
   solutionsTitle: string; solutionsDesc: string;
   ctaTitle: string; ctaDesc: string; ctaPrimary: string; ctaSecondary: string;
   readMore: string; download: string; useTool: string; viewSolution: string;
+  all: string; items: string;
 };
 
 const langContent: Record<string, LangContent> = {
@@ -35,9 +36,10 @@ const langContent: Record<string, LangContent> = {
     resourcesTitle: "Recursos descargables", resourcesDesc: "Plantillas y checklists útiles. Como cliente de Winerim, ya están integradas en tu panel.",
     toolsTitle: "Herramientas gratuitas", toolsDesc: "Pruébalas gratis aquí. Como cliente de Winerim, las tienes todas integradas y automatizadas.", toolsAll: "Ver todas →",
     solutionsTitle: "Soluciones por caso de uso", solutionsDesc: "¿Reconoces tu situación? Winerim ya lo resuelve.",
-    ctaTitle: "¿Por qué hacerlo manual si Winerim lo automatiza?", ctaDesc: "Todo lo que ves en esta página — análisis, pricing, maridajes, rotación — Winerim lo hace automáticamente. Ahorra horas de gestión y vende más vino desde el primer día.",
+    ctaTitle: "¿Por qué hacerlo manual si Winerim lo automatiza?", ctaDesc: "Todo lo que ves en esta página — análisis, pricing, maridajes, rotación — Winerim lo hace automáticamente. Ahorra horas de gestión cada semana y aumenta tus ventas de vino.",
     ctaPrimary: "Analizar mi carta gratis", ctaSecondary: "Solicitar demo",
-    readMore: "Leer más →", download: "Descargar →", useTool: "Usar herramienta →", viewSolution: "Ver solución →",
+    readMore: "Leer guía", download: "Descargar", useTool: "Usar herramienta", viewSolution: "Ver solución",
+    all: "Todos", items: "recursos",
   },
   en: {
     metaTitle: "Guides & Resources for Restaurants | Winerim",
@@ -48,9 +50,10 @@ const langContent: Record<string, LangContent> = {
     resourcesTitle: "Downloadable Resources", resourcesDesc: "Useful templates and checklists. As a Winerim client, they're already built into your dashboard.",
     toolsTitle: "Free Tools", toolsDesc: "Try them free here. As a Winerim client, they're all integrated and automated.", toolsAll: "View all →",
     solutionsTitle: "Solutions by Use Case", solutionsDesc: "Recognize your situation? Winerim already solves it.",
-    ctaTitle: "Why do it manually when Winerim automates it?", ctaDesc: "Everything on this page — analysis, pricing, pairings, rotation — Winerim does it automatically. Save hours of management and sell more wine from day one.",
+    ctaTitle: "Why do it manually when Winerim automates it?", ctaDesc: "Everything on this page — analysis, pricing, pairings, rotation — Winerim does it automatically. Save hours of management every week and increase wine sales.",
     ctaPrimary: "Analyze my list free", ctaSecondary: "Request demo",
-    readMore: "Read more →", download: "Download →", useTool: "Use tool →", viewSolution: "View solution →",
+    readMore: "Read guide", download: "Download", useTool: "Use tool", viewSolution: "View solution",
+    all: "All", items: "resources",
   },
   it: {
     metaTitle: "Guide e Risorse per Ristoranti | Winerim",
@@ -61,9 +64,10 @@ const langContent: Record<string, LangContent> = {
     resourcesTitle: "Risorse scaricabili", resourcesDesc: "Template e checklist utili. Come cliente Winerim, sono già integrate nel tuo pannello.",
     toolsTitle: "Strumenti gratuiti", toolsDesc: "Provali gratis qui. Come cliente Winerim, li hai tutti integrati e automatizzati.", toolsAll: "Vedi tutti →",
     solutionsTitle: "Soluzioni per caso d'uso", solutionsDesc: "Riconosci la tua situazione? Winerim la risolve già.",
-    ctaTitle: "Perché farlo manualmente se Winerim lo automatizza?", ctaDesc: "Tutto quello che vedi in questa pagina — analisi, pricing, abbinamenti, rotazione — Winerim lo fa automaticamente. Risparmia ore di gestione e vendi più vino dal primo giorno.",
+    ctaTitle: "Perché farlo manualmente se Winerim lo automatizza?", ctaDesc: "Tutto quello che vedi in questa pagina — analisi, pricing, abbinamenti, rotazione — Winerim lo fa automaticamente. Risparmia ore di gestione ogni settimana e vendi più vino dal primo giorno.",
     ctaPrimary: "Analizza la mia carta gratis", ctaSecondary: "Richiedi demo",
-    readMore: "Leggi di più →", download: "Scarica →", useTool: "Usa strumento →", viewSolution: "Vedi soluzione →",
+    readMore: "Leggi guida", download: "Scarica", useTool: "Usa strumento", viewSolution: "Vedi soluzione",
+    all: "Tutti", items: "risorse",
   },
   fr: {
     metaTitle: "Guides et Ressources pour Restaurants | Winerim",
@@ -74,35 +78,50 @@ const langContent: Record<string, LangContent> = {
     resourcesTitle: "Ressources téléchargeables", resourcesDesc: "Modèles et checklists utiles. En tant que client Winerim, ils sont déjà intégrés à votre tableau de bord.",
     toolsTitle: "Outils gratuits", toolsDesc: "Essayez-les gratuitement ici. En tant que client Winerim, ils sont tous intégrés et automatisés.", toolsAll: "Voir tout →",
     solutionsTitle: "Solutions par cas d'usage", solutionsDesc: "Vous reconnaissez votre situation ? Winerim la résout déjà.",
-    ctaTitle: "Pourquoi le faire manuellement quand Winerim l'automatise ?", ctaDesc: "Tout ce que vous voyez sur cette page — analyse, pricing, accords, rotation — Winerim le fait automatiquement. Économisez des heures de gestion et vendez plus de vin dès le premier jour.",
+    ctaTitle: "Pourquoi le faire manuellement quand Winerim l'automatise ?", ctaDesc: "Tout ce que vous voyez sur cette page — analyse, pricing, accords, rotation — Winerim le fait automatiquement. Économisez des heures de gestion chaque semaine et vendez plus de vin dès le premier jour.",
     ctaPrimary: "Analyser ma carte gratuitement", ctaSecondary: "Demander une démo",
-    readMore: "En savoir plus →", download: "Télécharger →", useTool: "Utiliser l'outil →", viewSolution: "Voir la solution →",
+    readMore: "Lire le guide", download: "Télécharger", useTool: "Utiliser l'outil", viewSolution: "Voir la solution",
+    all: "Tous", items: "ressources",
   },
 };
 
-/* ── Data arrays (unchanged, Spanish labels — guides/resources/tools are internal) ── */
-const guides = [
-  { to: "/blog/como-organizar-carta-de-vinos", icon: BookOpen, title: "Cómo organizar una carta de vinos", desc: "Guía práctica para estructurar tu carta de forma clara, rentable y fácil de entender para tus clientes." },
-  { to: "/blog/cuantos-vinos-carta-restaurante", icon: Wine, title: "Cuántos vinos debe tener una carta", desc: "Define el número ideal de referencias según tu tipo de restaurante, cocina y perfil de cliente." },
-  { to: "/blog/como-disenar-carta-vinos-rentable", icon: DollarSign, title: "Cómo diseñar una carta de vinos rentable", desc: "Estrategias de pricing, wine mapping y selección para maximizar ventas y márgenes." },
-  { to: "/como-vender-mas-vino-en-un-restaurante", icon: TrendingUp, title: "Cómo vender más vino en un restaurante", desc: "Estrategias probadas para aumentar las ventas de vino y mejorar la experiencia del cliente." },
-  { to: "/vino-por-copa-restaurante", icon: Wine, title: "Vino por copa en restaurantes", desc: "Todo lo que necesitas saber para implementar y optimizar un programa de vino por copa." },
-  { to: "/precio-vino-restaurante", icon: Calculator, title: "Cómo poner precio al vino", desc: "Guía sobre márgenes, multiplicadores y estrategias de pricing para maximizar la rentabilidad." },
-  { to: "/como-hacer-una-carta-de-vinos", icon: FileText, title: "Cómo hacer una carta de vinos", desc: "Guía paso a paso para crear una carta de vinos profesional desde cero." },
-  { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", icon: Layers, title: "Cómo mejorar la rotación de vinos", desc: "Estrategias para eliminar stock muerto y mantener una bodega rentable." },
-  { to: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", icon: Utensils, title: "Estrategia de maridaje en restauración", desc: "Diseña maridajes que aumenten ventas de vino y mejoren la experiencia del cliente." },
-  { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", icon: Layers, title: "Carta de vinos para grupos de restauración", desc: "Cómo gestionar cartas coherentes en múltiples locales con control centralizado." },
-  { to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", icon: Wine, title: "Estrategia rentable de vino por copa", desc: "Selección, pricing, merma y rotación para un programa de copa profesional." },
-  { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", icon: Search, title: "Detectar vinos muertos", desc: "Identifica referencias sin rotación, cuantifica el impacto y decide qué hacer." },
-  { to: "/guias/como-formar-equipo-sala-para-vender-vino", icon: Users, title: "Formar al equipo de sala en vino", desc: "Programa práctico para que tu equipo recomiende vino sin ser sumiller." },
-  { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", icon: BarChart3, title: "Usar datos para comprar vinos", desc: "Rotación, márgenes y tendencias: cómo decidir qué comprar con criterio." },
-  { to: "/guias/como-conectar-carta-stock-ventas-margen", icon: TrendingUp, title: "Conectar carta, stock, ventas y margen", desc: "Integra las 4 piezas de la gestión del vino en un sistema coherente." },
-  { to: "/guias/como-gestionar-carta-vinos-grupos-restauracion", icon: Building2, title: "Gestionar carta en grupos de restauración", desc: "Governance, benchmarking entre locales y control centralizado del vino." },
-  { to: "/guias/como-implantar-vino-por-copa-sin-perder-margen", icon: Wine, title: "Vino por copa sin perder margen", desc: "Selección, pricing, control de merma y rotación para un programa de copa rentable." },
-  { to: "/guias/como-usar-winerim-sin-sumiller", icon: Users, title: "Usar Winerim sin sumiller en sala", desc: "Cómo Winerim suple la falta de expertise con recomendaciones automáticas y formación integrada." },
-  { to: "/guias/como-decidir-surtido-segun-ticket-medio-tipo-local", icon: DollarSign, title: "Surtido según ticket medio y tipo de local", desc: "Framework para elegir qué vinos tener en carta según tu perfil de cliente y restaurante." },
-  { to: "/guias/como-detectar-canibalizacion-vinos-carta", icon: Search, title: "Detectar canibalización entre vinos", desc: "Identifica referencias que compiten entre sí y optimiza la composición de tu carta." },
-  { to: "/guias/como-revisar-carta-vinos-cada-mes", icon: FileText, title: "Revisar la carta cada mes", desc: "Proceso de 90 minutos para mantener tu carta optimizada mes a mes con datos reales." },
+/* ── Guide topic tags for filtering ── */
+type GuideItem = { to: string; icon: React.ElementType; title: string; desc: string; topics: string[] };
+
+const guideTopicFilters = [
+  { key: "all", label: "Todos" },
+  { key: "estructura", label: "Estructura de carta" },
+  { key: "pricing", label: "Pricing" },
+  { key: "venta", label: "Ventas" },
+  { key: "copa", label: "Vino por copa" },
+  { key: "rotación", label: "Rotación" },
+  { key: "equipo", label: "Equipo de sala" },
+  { key: "datos", label: "Datos y analítica" },
+  { key: "grupo", label: "Grupos" },
+];
+
+const guides: GuideItem[] = [
+  { to: "/blog/como-organizar-carta-de-vinos", icon: BookOpen, title: "Cómo organizar una carta de vinos", desc: "Guía práctica para estructurar tu carta de forma clara, rentable y fácil de entender para tus clientes.", topics: ["estructura"] },
+  { to: "/blog/cuantos-vinos-carta-restaurante", icon: Wine, title: "Cuántos vinos debe tener una carta", desc: "Define el número ideal de referencias según tu tipo de restaurante, cocina y perfil de cliente.", topics: ["estructura"] },
+  { to: "/blog/como-disenar-carta-vinos-rentable", icon: DollarSign, title: "Cómo diseñar una carta de vinos rentable", desc: "Estrategias de pricing, wine mapping y selección para maximizar ventas y márgenes.", topics: ["pricing", "estructura"] },
+  { to: "/como-vender-mas-vino-en-un-restaurante", icon: TrendingUp, title: "Cómo vender más vino en un restaurante", desc: "Estrategias probadas para aumentar las ventas de vino y mejorar la experiencia del cliente.", topics: ["venta"] },
+  { to: "/vino-por-copa-restaurante", icon: Wine, title: "Vino por copa en restaurantes", desc: "Todo lo que necesitas saber para implementar y optimizar un programa de vino por copa.", topics: ["copa"] },
+  { to: "/precio-vino-restaurante", icon: Calculator, title: "Cómo poner precio al vino", desc: "Guía sobre márgenes, multiplicadores y estrategias de pricing para maximizar la rentabilidad.", topics: ["pricing"] },
+  { to: "/como-hacer-una-carta-de-vinos", icon: FileText, title: "Cómo hacer una carta de vinos", desc: "Guía paso a paso para crear una carta de vinos profesional desde cero.", topics: ["estructura"] },
+  { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", icon: Layers, title: "Cómo mejorar la rotación de vinos", desc: "Estrategias para eliminar stock muerto y mantener una bodega rentable.", topics: ["rotación"] },
+  { to: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", icon: Utensils, title: "Estrategia de maridaje en restauración", desc: "Diseña maridajes que aumenten ventas de vino y mejoren la experiencia del cliente.", topics: ["venta"] },
+  { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", icon: Layers, title: "Carta de vinos para grupos de restauración", desc: "Cómo gestionar cartas coherentes en múltiples locales con control centralizado.", topics: ["grupo", "estructura"] },
+  { to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", icon: Wine, title: "Estrategia rentable de vino por copa", desc: "Selección, pricing, merma y rotación para un programa de copa profesional.", topics: ["copa", "pricing"] },
+  { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", icon: Search, title: "Detectar vinos muertos", desc: "Identifica referencias sin rotación, cuantifica el impacto y decide qué hacer.", topics: ["rotación", "datos"] },
+  { to: "/guias/como-formar-equipo-sala-para-vender-vino", icon: Users, title: "Formar al equipo de sala en vino", desc: "Programa práctico para que tu equipo recomiende vino sin ser sumiller.", topics: ["equipo"] },
+  { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", icon: BarChart3, title: "Usar datos para comprar vinos", desc: "Rotación, márgenes y tendencias: cómo decidir qué comprar con criterio.", topics: ["datos"] },
+  { to: "/guias/como-conectar-carta-stock-ventas-margen", icon: TrendingUp, title: "Conectar carta, stock, ventas y margen", desc: "Integra las 4 piezas de la gestión del vino en un sistema coherente.", topics: ["datos", "rotación"] },
+  { to: "/guias/como-gestionar-carta-vinos-grupos-restauracion", icon: Building2, title: "Gestionar carta en grupos de restauración", desc: "Governance, benchmarking entre locales y control centralizado del vino.", topics: ["grupo"] },
+  { to: "/guias/como-implantar-vino-por-copa-sin-perder-margen", icon: Wine, title: "Vino por copa sin perder margen", desc: "Selección, pricing, control de merma y rotación para un programa de copa rentable.", topics: ["copa", "pricing"] },
+  { to: "/guias/como-usar-winerim-sin-sumiller", icon: Users, title: "Usar Winerim sin sumiller en sala", desc: "Cómo Winerim suple la falta de expertise con recomendaciones automáticas y formación integrada.", topics: ["equipo"] },
+  { to: "/guias/como-decidir-surtido-segun-ticket-medio-tipo-local", icon: DollarSign, title: "Surtido según ticket medio y tipo de local", desc: "Framework para elegir qué vinos tener en carta según tu perfil de cliente y restaurante.", topics: ["estructura", "pricing"] },
+  { to: "/guias/como-detectar-canibalizacion-vinos-carta", icon: Search, title: "Detectar canibalización entre vinos", desc: "Identifica referencias que compiten entre sí y optimiza la composición de tu carta.", topics: ["datos", "estructura"] },
+  { to: "/guias/como-revisar-carta-vinos-cada-mes", icon: FileText, title: "Revisar la carta cada mes", desc: "Proceso de 90 minutos para mantener tu carta optimizada mes a mes con datos reales.", topics: ["datos"] },
 ];
 
 const resources = [
@@ -138,8 +157,6 @@ const solutions = [
   { to: "/benchmarks-playbooks", icon: BarChart3, title: "Benchmarks & Playbooks", desc: "Datos de referencia del sector y planes de acción prácticos para tu carta de vinos." },
 ];
 
-type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string; tags?: string[] };
-
 const taxonomyFilters = [
   { key: "all", label: "Todos" },
   { key: "pricing", label: "Pricing y márgenes" },
@@ -152,32 +169,80 @@ const taxonomyFilters = [
   { key: "grupo", label: "Grupos de restauración" },
 ];
 
-const CardGrid = ({ items, cta }: { items: SectionItem[]; cta?: string }) => (
-  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-    {items.map((item, i) => {
-      const Icon = item.icon;
-      return (
-        <ScrollReveal key={item.to} delay={i * 0.03}>
-          <Link to={item.to} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-5 h-full hover:shadow-lg hover:shadow-wine/5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
-                <Icon size={18} className="text-wine" />
-              </div>
-            </div>
-            <h3 className="font-heading text-sm font-bold mb-1.5 group-hover:text-wine transition-colors">{item.title}</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-            <span className="mt-3 text-[10px] font-semibold tracking-widest uppercase text-accent block">{cta || "→"}</span>
-          </Link>
-        </ScrollReveal>
-      );
-    })}
+/* ── Type badge config for visual differentiation ── */
+const typeBadges: Record<string, { label: string; icon: React.ElementType; className: string }> = {
+  guide: { label: "Guía", icon: BookOpen, className: "bg-blue-500/10 text-blue-400 border-blue-500/20" },
+  resource: { label: "Descargable", icon: Download, className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+  tool: { label: "Herramienta", icon: Wrench, className: "bg-amber-500/10 text-amber-400 border-amber-500/20" },
+  solution: { label: "Solución", icon: CheckCircle, className: "bg-wine/10 text-wine border-wine/20" },
+};
+
+const FilterPills = ({ filters, active, onChange }: { filters: { key: string; label: string }[]; active: string; onChange: (k: string) => void }) => (
+  <div className="flex flex-wrap gap-2 mb-6">
+    {filters.map((f) => (
+      <button
+        key={f.key}
+        onClick={() => onChange(f.key)}
+        className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
+          active === f.key
+            ? "bg-wine text-white border-wine"
+            : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
+        }`}
+      >
+        {f.label}
+      </button>
+    ))}
   </div>
+);
+
+type SectionItem = { to: string; icon: React.ElementType; title: string; desc: string; tags?: string[]; topics?: string[] };
+
+const TypedCard = ({ item, type, cta }: { item: SectionItem; type: keyof typeof typeBadges; cta: string }) => {
+  const Icon = item.icon;
+  const badge = typeBadges[type];
+  const BadgeIcon = badge.icon;
+  return (
+    <Link to={item.to} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-5 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-9 h-9 rounded-lg bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/15 transition-colors">
+          <Icon size={18} className="text-wine" />
+        </div>
+        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-semibold tracking-wider uppercase ${badge.className}`}>
+          <BadgeIcon size={10} />
+          {badge.label}
+        </span>
+      </div>
+      <h3 className="font-heading text-sm font-bold mb-1.5 group-hover:text-wine transition-colors duration-300">{item.title}</h3>
+      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{item.desc}</p>
+      <span className="mt-3 inline-flex items-center gap-1 text-[10px] font-semibold tracking-widest uppercase text-accent group-hover:text-wine transition-colors">
+        {cta} <ArrowRight size={10} />
+      </span>
+    </Link>
+  );
+};
+
+const SectionHeader = ({ icon: HeaderIcon, title, desc, count }: { icon: React.ElementType; title: string; desc: string; count: number }) => (
+  <ScrollReveal className="mb-6">
+    <div className="flex items-center gap-3 mb-1">
+      <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center">
+        <HeaderIcon size={20} className="text-wine" />
+      </div>
+      <div>
+        <div className="flex items-center gap-3">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold">{title}</h2>
+          <span className="text-xs font-semibold text-muted-foreground bg-muted/50 px-2.5 py-1 rounded-full">{count}</span>
+        </div>
+      </div>
+    </div>
+    <p className="text-muted-foreground mt-2 text-sm max-w-2xl pl-[52px]">{desc}</p>
+  </ScrollReveal>
 );
 
 const GuiasRecursos = () => {
   const { lang, localePath } = useLanguage();
   const t = langContent[lang] || langContent.es;
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [guideFilter, setGuideFilter] = useState("all");
+  const [resourceFilter, setResourceFilter] = useState("all");
 
   useEffect(() => {
     const schema = document.createElement("script");
@@ -192,11 +257,15 @@ const GuiasRecursos = () => {
     return () => { schema.remove(); };
   }, [t]);
 
+  const filteredGuides = guideFilter === "all" ? guides : guides.filter(g => g.topics.includes(guideFilter));
+  const filteredResources = resourceFilter === "all" ? resources : resources.filter(r => r.tags?.includes(resourceFilter));
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/guias-y-recursos" />
       <main>
+        {/* HERO */}
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
             <Breadcrumbs items={[{ label: t.heroTitle }]} />
@@ -206,78 +275,100 @@ const GuiasRecursos = () => {
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               {t.heroTitle}
             </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed mb-8">
               {t.heroDesc}
             </motion.p>
+            {/* Quick jump nav */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-3">
+              {[
+                { href: "#guias", icon: BookOpen, label: t.guidesTitle, count: guides.length },
+                { href: "#recursos", icon: Download, label: t.resourcesTitle, count: resources.length },
+                { href: "#herramientas", icon: Wrench, label: t.toolsTitle, count: tools.length },
+                { href: "#soluciones", icon: CheckCircle, label: t.solutionsTitle, count: solutions.length },
+              ].map((nav) => (
+                <a key={nav.href} href={nav.href}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all text-sm group">
+                  <nav.icon size={14} className="text-wine" />
+                  <span className="font-medium group-hover:text-wine transition-colors">{nav.label}</span>
+                  <span className="text-[10px] font-semibold text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">{nav.count}</span>
+                </a>
+              ))}
+            </motion.div>
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-          <ScrollReveal className="mb-6">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.guidesTitle}</h2>
-            <p className="text-muted-foreground mt-1 text-sm">{t.guidesDesc}</p>
-          </ScrollReveal>
-          <CardGrid items={guides} cta={t.readMore} />
-        </section>
-
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-          <ScrollReveal className="mb-6">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.resourcesTitle}</h2>
-            <p className="text-muted-foreground mt-1 text-sm">{t.resourcesDesc}</p>
-          </ScrollReveal>
-          {/* Taxonomy filter pills */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {taxonomyFilters.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setActiveFilter(f.key)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
-                  activeFilter === f.key
-                    ? "bg-wine text-white border-wine"
-                    : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
-                }`}
-              >
-                {f.label}
-              </button>
+        {/* GUIDES */}
+        <section id="guias" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
+          <SectionHeader icon={BookOpen} title={t.guidesTitle} desc={t.guidesDesc} count={filteredGuides.length} />
+          <FilterPills filters={guideTopicFilters} active={guideFilter} onChange={setGuideFilter} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filteredGuides.map((item, i) => (
+              <ScrollReveal key={item.to} delay={i * 0.03}>
+                <TypedCard item={item} type="guide" cta={t.readMore} />
+              </ScrollReveal>
             ))}
           </div>
-          <CardGrid
-            items={activeFilter === "all" ? resources : resources.filter(r => r.tags?.includes(activeFilter))}
-            cta={t.download}
-          />
+          {filteredGuides.length === 0 && (
+            <p className="text-center text-muted-foreground text-sm py-12">No hay guías con este filtro. Prueba con otro tema.</p>
+          )}
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-          <ScrollReveal className="mb-6 flex items-end justify-between">
-            <div>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.toolsTitle}</h2>
-              <p className="text-muted-foreground mt-1 text-sm">{t.toolsDesc}</p>
-            </div>
-            <Link to={localePath("/herramientas")} className="hidden md:block text-xs font-semibold tracking-widest uppercase text-accent hover:text-wine transition-colors">
+        {/* RESOURCES */}
+        <section id="recursos" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
+          <SectionHeader icon={Download} title={t.resourcesTitle} desc={t.resourcesDesc} count={filteredResources.length} />
+          <FilterPills filters={taxonomyFilters} active={resourceFilter} onChange={setResourceFilter} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filteredResources.map((item, i) => (
+              <ScrollReveal key={item.to} delay={i * 0.03}>
+                <TypedCard item={item} type="resource" cta={t.download} />
+              </ScrollReveal>
+            ))}
+          </div>
+          {filteredResources.length === 0 && (
+            <p className="text-center text-muted-foreground text-sm py-12">No hay recursos con este filtro. Prueba con otra categoría.</p>
+          )}
+        </section>
+
+        {/* TOOLS */}
+        <section id="herramientas" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
+          <SectionHeader icon={Wrench} title={t.toolsTitle} desc={t.toolsDesc} count={tools.length} />
+          <div className="flex items-end justify-end mb-4">
+            <Link to={localePath("/herramientas")} className="text-xs font-semibold tracking-widest uppercase text-accent hover:text-wine transition-colors">
               {t.toolsAll}
             </Link>
-          </ScrollReveal>
-          <CardGrid items={tools} cta={t.useTool} />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {tools.map((item, i) => (
+              <ScrollReveal key={item.to} delay={i * 0.03}>
+                <TypedCard item={item} type="tool" cta={t.useTool} />
+              </ScrollReveal>
+            ))}
+          </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
-          <ScrollReveal className="mb-6">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.solutionsTitle}</h2>
-            <p className="text-muted-foreground mt-1 text-sm">{t.solutionsDesc}</p>
-          </ScrollReveal>
-          <CardGrid items={solutions} cta={t.viewSolution} />
+        {/* SOLUTIONS */}
+        <section id="soluciones" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
+          <SectionHeader icon={CheckCircle} title={t.solutionsTitle} desc={t.solutionsDesc} count={solutions.length} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {solutions.map((item, i) => (
+              <ScrollReveal key={item.to} delay={i * 0.03}>
+                <TypedCard item={item} type="solution" cta={t.viewSolution} />
+              </ScrollReveal>
+            ))}
+          </div>
         </section>
 
+        {/* CTA */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-24 text-center">
           <ScrollReveal>
             <div className="bg-gradient-card rounded-2xl border border-border p-12">
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{t.ctaTitle}</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t.ctaDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to={localePath("/analisis-carta")} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                  {t.ctaPrimary}
+                <Link to={localePath("/analisis-carta")} className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+                  {t.ctaPrimary} <ArrowRight size={16} />
                 </Link>
-                <Link to={localePath("/demo")} className="border border-border text-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+                <Link to={localePath("/demo")} className="border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
                   {t.ctaSecondary}
                 </Link>
               </div>

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList } from "lucide-react";
+import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -139,6 +140,16 @@ const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, B
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
+  const [activeTag, setActiveTag] = useState("all");
+
+  // Extract unique tags for filter pills
+  const allTags = Array.from(new Set(t.tools.map(tool => tool.tag)));
+  const tagFilters = [
+    { key: "all", label: lang === "es" ? "Todas" : "All" },
+    ...allTags.map(tag => ({ key: tag, label: tag })),
+  ];
+
+  const filteredTools = activeTag === "all" ? t.tools : t.tools.filter(tool => tool.tag === activeTag);
 
   return (
     <div className="min-h-screen bg-background">
@@ -166,26 +177,51 @@ const Herramientas = () => {
         </section>
 
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20">
+          {/* Tag filter pills */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {tagFilters.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setActiveTag(f.key)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
+                  activeTag === f.key
+                    ? "bg-wine text-white border-wine"
+                    : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+            <span className="self-center text-xs text-muted-foreground ml-2">{filteredTools.length} {lang === "es" ? "herramientas" : "tools"}</span>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.tools.map((tool, i) => {
-              const Icon = toolIcons[i] || Search;
+            {filteredTools.map((tool, i) => {
+              const Icon = toolIcons[t.tools.indexOf(tool)] || Search;
               return (
                 <ScrollReveal key={tool.to} delay={i * 0.04}>
-                  <Link to={tool.to} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5">
+                  <Link to={tool.to} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/15 transition-colors">
                         <Icon size={20} className="text-wine" />
                       </div>
-                      <span className="text-[10px] font-semibold tracking-widest uppercase text-accent">{tool.tag}</span>
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full border border-amber-500/20 bg-amber-500/10 text-[10px] font-semibold tracking-widest uppercase text-amber-400">{tool.tag}</span>
                     </div>
-                    <h2 className="font-heading font-bold mb-2 group-hover:text-wine transition-colors">{tool.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
-                    <span className="mt-4 text-xs font-semibold tracking-widest uppercase text-accent block">{t.useTool}</span>
+                    <h2 className="font-heading font-bold mb-2 group-hover:text-wine transition-colors duration-300">{tool.title}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{tool.desc}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-accent group-hover:text-wine transition-colors">
+                      {t.useTool} <ArrowRight size={12} />
+                    </span>
                   </Link>
                 </ScrollReveal>
               );
             })}
           </div>
+          {filteredTools.length === 0 && (
+            <p className="text-center text-muted-foreground text-sm py-12">
+              {lang === "es" ? "No hay herramientas con este filtro." : "No tools match this filter."}
+            </p>
+          )}
         </section>
 
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
