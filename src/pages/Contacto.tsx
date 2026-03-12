@@ -129,9 +129,9 @@ const Contacto = () => {
                   {submitting ? c.sending : c.button}
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">
-                  {lang === "es" ? "Sin compromiso. Al enviar aceptas nuestra " : "No commitment. By submitting you accept our "}
+                  {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre " }[lang]}
                   <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
-                    {lang === "es" ? "política de privacidad" : "privacy policy"}
+                    {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité" }[lang]}
                   </Link>.
                 </p>
               </form>
