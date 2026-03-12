@@ -12,6 +12,14 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import RelatedPages from "@/components/seo/RelatedPages";
 import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import EnhancedSections from "@/components/seo/EnhancedSections";
+import KeyTakeaway from "@/components/seo/KeyTakeaway";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import type { SeoPage, RelatedPageInfo } from "@/hooks/useSeoPage";
 
 interface Props {
