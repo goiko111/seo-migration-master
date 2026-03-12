@@ -14,6 +14,13 @@ import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
+import EnhancedSections from "@/components/seo/EnhancedSections";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface GuideSection {
   heading: string;
