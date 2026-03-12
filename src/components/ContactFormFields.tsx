@@ -243,7 +243,7 @@ const ContactFormFields = ({
               </Label>
               <div className="mt-1.5">
                 {native ? (
-                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={referencesOptions} placeholder="Selecciona un rango" />
+                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={referencesOptions} placeholder="¿Cuántas referencias tienes?" />
                 ) : (
                   <Select value={referencesCount} onValueChange={onReferencesCountChange}>
                     <SelectTrigger className="bg-background border-border">
