@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense } from "react";
 const YouTubeFacade = lazy(() => import("@/components/YouTubeFacade"));
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
