@@ -520,9 +520,9 @@ const Precios = () => {
 
                     {plan.notIncluded && plan.notIncluded.length > 0 && (
                       <div className="mb-6 pt-3 border-t border-border/50">
-                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
-                          {lang === "es" ? "No incluido" : "Not included"}
-                        </p>
+                         <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
+                           {lang === "es" ? "No incluido" : lang === "it" ? "Non incluso" : lang === "fr" ? "Non inclus" : "Not included"}
+                         </p>
                         <ul className="space-y-1.5">
                           {plan.notIncluded.map((f, fi) => (
                             <li key={fi} className="flex items-start gap-2 text-sm">
