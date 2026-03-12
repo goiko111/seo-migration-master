@@ -1016,14 +1016,14 @@ const Funcionalidades = () => {
       />
 
       <InternalLinks links={[
-        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios de Winerim" : "Winerim pricing", type: "resource" },
-        { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones con TPV y sistemas" : "POS & system integrations", type: "tool" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real case studies", type: "solution" },
-        { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas de análisis y pricing" : "Free analysis tools", type: "tool" },
-        { to: "/guias-y-recursos", label: lang === "es" ? "Guías prácticas y recursos descargables" : "Guides & resources", type: "guide" },
-        { to: "/comparativas", label: lang === "es" ? "Compara Winerim con alternativas" : "Compare Winerim", type: "solution" },
-        { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks", type: "resource" },
-        { to: "/producto/inteligencia-dinamica", label: lang === "es" ? "Inteligencia dinámica: IA táctica para carta" : "Dynamic intelligence", type: "solution" },
+        { to: localePath("/precios"), label: { es: "Planes y precios de Winerim", en: "Winerim pricing", it: "Piani e prezzi Winerim", fr: "Tarifs Winerim" }[lang]!, type: "resource" },
+        { to: localePath("/integraciones"), label: { es: "Integraciones con TPV y sistemas", en: "POS & system integrations", it: "Integrazioni con POS e sistemi", fr: "Intégrations POS et systèmes" }[lang]!, type: "tool" },
+        { to: localePath("/casos-exito"), label: { es: "Casos de éxito de restaurantes reales", en: "Real case studies", it: "Casi di successo reali", fr: "Cas clients réels" }[lang]!, type: "solution" },
+        { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis tools", it: "Strumenti gratuiti di analisi", fr: "Outils d'analyse gratuits" }[lang]!, type: "tool" },
+        { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Guides & resources", it: "Guide e risorse", fr: "Guides et ressources" }[lang]!, type: "guide" },
+        { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim", it: "Confronta Winerim", fr: "Comparez Winerim" }[lang]!, type: "solution" },
+        { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks", it: "Benchmark del settore", fr: "Benchmarks du secteur" }[lang]!, type: "resource" },
+        { to: "/producto/inteligencia-dinamica", label: { es: "Inteligencia dinámica: IA táctica para carta", en: "Dynamic intelligence", it: "Intelligenza dinamica", fr: "Intelligence dynamique" }[lang]!, type: "solution" },
       ]} />
       <Footer />
     </div>
