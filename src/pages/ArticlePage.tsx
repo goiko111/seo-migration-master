@@ -208,7 +208,7 @@ const ArticlePage = () => {
         <div key={i}>
           <ArticleSection heading={section.heading} content={section.content} index={i} />
           {/* Insert mid-article CTA after the middle section */}
-          {i === midIndex - 1 && <ArticleMidCTA />}
+          {i === midIndex - 1 && <ArticleMidCTA pageType="article" />}
         </div>
       ))}
 
