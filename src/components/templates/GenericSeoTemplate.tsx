@@ -12,6 +12,14 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import RelatedPages from "@/components/seo/RelatedPages";
 import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import EnhancedSections from "@/components/seo/EnhancedSections";
+import KeyTakeaway from "@/components/seo/KeyTakeaway";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import type { SeoPage, RelatedPageInfo } from "@/hooks/useSeoPage";
 
 interface Props {
@@ -147,30 +155,13 @@ const GenericSeoTemplate = ({ page, related }: Props) => {
         </section>
       )}
 
-      {/* SECTIONS (rich body content) */}
-      {sections.map((section, i) => {
-        const isAlt = i % 2 === (problems.length > 0 ? 0 : 1);
-        return (
-          <section key={i} className={isAlt ? "bg-gradient-card border-y border-border py-16" : "py-16"}>
-            <div className="max-w-4xl mx-auto px-6 md:px-12">
-              <ScrollReveal>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">{section.heading}</h2>
-                <p className="text-muted-foreground leading-relaxed text-lg mb-8 whitespace-pre-line">{section.content}</p>
-                {section.tips && section.tips.length > 0 && (
-                  <div className="space-y-3">
-                    {section.tips.map((tip, j) => (
-                      <div key={j} className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background">
-                        <CheckCircle size={16} className="text-wine shrink-0 mt-0.5" />
-                        <p className="text-sm text-muted-foreground leading-relaxed">{tip}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </ScrollReveal>
-            </div>
-          </section>
-        );
-      })}
+      {/* SECTIONS (rich body content) — enhanced with lead extraction */}
+      {sections.length > 0 && (
+        <EnhancedSections
+          sections={sections}
+          altOffset={problems.length > 0 ? 0 : 1}
+        />
+      )}
 
       {/* BENEFITS */}
       {benefits.length > 0 && (
@@ -272,26 +263,25 @@ const GenericSeoTemplate = ({ page, related }: Props) => {
         </ScrollReveal>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — accordion for scannability */}
       {page.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
             </ScrollReveal>
-            <div className="space-y-6">
+            <Accordion type="multiple" className="space-y-3">
               {page.faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.05}>
-                  <div className="p-6 rounded-xl border border-border bg-background">
-                    <div className="flex items-start gap-3 mb-3">
-                      <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                      <h3 className="font-heading font-bold">{faq.q}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-                  </div>
-                </ScrollReveal>
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-background px-6 data-[state=open]:border-wine/20">
+                  <AccordionTrigger className="text-left font-heading font-bold text-sm hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </section>
       )}
