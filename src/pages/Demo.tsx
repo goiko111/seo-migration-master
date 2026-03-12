@@ -126,9 +126,23 @@ const Demo = () => {
                 <span className="flex items-center gap-1.5"><ShieldCheck size={12} /> Sin compromiso</span>
                 <span className="flex items-center gap-1.5"><Sparkles size={12} /> Demo de 15 min</span>
               </div>
+
+              {/* Social proof quote */}
+              <div className="mt-8 p-4 rounded-xl border border-border bg-background">
+                <p className="text-sm text-muted-foreground italic leading-relaxed mb-3">
+                  "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos."
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-wine flex items-center justify-center text-[9px] font-bold text-white">NO</div>
+                  <div>
+                    <p className="text-xs font-semibold">Nacho Otamendi</p>
+                    <p className="text-[10px] text-muted-foreground">Propietario/Sommelier · Travieso Bar</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="bg-gradient-card border border-border rounded-2xl p-8 md:p-10">
+            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="bg-gradient-card border border-border rounded-xl p-8 md:p-10">
               <h2 className="font-heading text-2xl font-bold mb-2">{c.form_title}</h2>
               <p className="text-sm text-muted-foreground mb-6">{c.form_subtitle}</p>
               <form className="space-y-5" onSubmit={handleSubmit}>
@@ -138,6 +152,16 @@ const Demo = () => {
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">{c.disclaimer}</p>
               </form>
+
+              {/* What happens next */}
+              <div className="mt-6 pt-5 border-t border-border">
+                <p className="text-xs font-semibold text-foreground/70 mb-3 uppercase tracking-widest">¿Qué pasa después?</p>
+                <ol className="space-y-2 text-xs text-muted-foreground">
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">1.</span> Te contactamos en menos de 24 h para agendar la demo.</li>
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">2.</span> Preparamos la demo con tu carta real (si la envías).</li>
+                  <li className="flex items-start gap-2"><span className="font-bold text-wine shrink-0">3.</span> En 15 min ves Winerim aplicado a tu caso. Sin compromiso.</li>
+                </ol>
+              </div>
             </motion.div>
           </div>
         </section>

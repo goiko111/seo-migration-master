@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense } from "react";
 const YouTubeFacade = lazy(() => import("@/components/YouTubeFacade"));
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,8 +27,8 @@ const content: Record<string, {
 }> = {
   es: {
     seo_title: "Contacto", seo_desc: "Contacta con Winerim. Analizamos tu carta de vinos gratis y te ayudamos a optimizarla.", breadcrumb: "Contacto",
-    title: "¿Quieres aumentar tus ventas", highlight: "en más de un 30%?",
-    subtitle: "Analizamos tu carta de manera completamente gratuita. Te recomendamos cómo optimizarla y qué estrategias utilizar.",
+    title: "¿Quieres optimizar tus ventas", highlight: "de vino?",
+    subtitle: "Analizamos tu carta de manera completamente gratuita. Te mostramos oportunidades reales de mejora en margen, rotación y surtido.",
     form_title: "Analizamos tu carta gratis",
     name: "Nombre", position: "Cargo en el restaurante", email: "Email", phone: "Teléfono",
     restaurant: "Restaurante", city: "Ciudad", references: "Número de referencias", menu_link: "Link a tu carta", message: "Mensaje (¿Qué aspectos deseas mejorar?)",
@@ -38,8 +39,8 @@ const content: Record<string, {
   },
   en: {
     seo_title: "Contact", seo_desc: "Contact Winerim. We analyze your wine list for free and help you optimize it.", breadcrumb: "Contact",
-    title: "Want to increase your sales", highlight: "by over 30%?",
-    subtitle: "We analyze your wine list completely free. We recommend how to optimize it and what strategies to use.",
+    title: "Want to optimize your wine", highlight: "sales?",
+    subtitle: "We analyze your wine list completely free. We show you real opportunities to improve margin, rotation and assortment.",
     form_title: "Free wine list analysis",
     name: "Name", position: "Position at restaurant", email: "Email", phone: "Phone",
     restaurant: "Restaurant", city: "City", references: "Number of references", menu_link: "Link to your wine list", message: "Message (What would you like to improve?)",
@@ -50,8 +51,8 @@ const content: Record<string, {
   },
   it: {
     seo_title: "Contatto", seo_desc: "Contatta Winerim. Analizziamo la tua carta dei vini gratuitamente.", breadcrumb: "Contatto",
-    title: "Vuoi aumentare le tue vendite", highlight: "di oltre il 30%?",
-    subtitle: "Analizziamo la tua carta completamente gratis. Ti consigliamo come ottimizzarla.",
+    title: "Vuoi ottimizzare le vendite", highlight: "di vino?",
+    subtitle: "Analizziamo la tua carta completamente gratis. Ti mostriamo opportunità reali di miglioramento.",
     form_title: "Analizziamo la tua carta gratis",
     name: "Nome", position: "Ruolo nel ristorante", email: "Email", phone: "Telefono",
     restaurant: "Ristorante", city: "Città", references: "Numero di referenze", menu_link: "Link alla tua carta", message: "Messaggio (Cosa vorresti migliorare?)",
@@ -62,8 +63,8 @@ const content: Record<string, {
   },
   fr: {
     seo_title: "Contact", seo_desc: "Contactez Winerim. Nous analysons votre carte des vins gratuitement.", breadcrumb: "Contact",
-    title: "Vous voulez augmenter vos ventes", highlight: "de plus de 30% ?",
-    subtitle: "Nous analysons votre carte gratuitement. Nous recommandons comment l'optimiser.",
+    title: "Vous voulez optimiser vos ventes", highlight: "de vin ?",
+    subtitle: "Nous analysons votre carte gratuitement. Nous vous montrons des opportunités réelles d'amélioration.",
     form_title: "Analyse gratuite de votre carte",
     name: "Nom", position: "Poste au restaurant", email: "Email", phone: "Téléphone",
     restaurant: "Restaurant", city: "Ville", references: "Nombre de références", menu_link: "Lien vers votre carte", message: "Message (Que souhaitez-vous améliorer ?)",
@@ -124,9 +125,15 @@ const Contacto = () => {
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <ContactFormFields native variant="contact" />
                 <Textarea name="message" placeholder={c.message} className="bg-card border-border min-h-[120px]" />
-                <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
+                <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity w-full md:w-auto">
                   {submitting ? c.sending : c.button}
                 </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {lang === "es" ? "Sin compromiso. Al enviar aceptas nuestra " : "No commitment. By submitting you accept our "}
+                  <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
+                    {lang === "es" ? "política de privacidad" : "privacy policy"}
+                  </Link>.
+                </p>
               </form>
             </motion.div>
 

@@ -250,11 +250,11 @@ const AnalizaCarta = () => {
                 transition={{ delay: 0.3, duration: 0.7 }}
                 className="hidden lg:block"
               >
-                <div className="relative bg-gradient-card rounded-2xl border border-border p-8 glow-wine">
+                <div className="relative bg-gradient-card rounded-xl border border-border p-8 glow-wine">
                   <div className="absolute -inset-4 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl" />
                   <div className="relative space-y-4">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center">
                         <BarChart3 size={20} className="text-wine" />
                       </div>
                       <div>
