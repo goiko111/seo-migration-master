@@ -202,7 +202,7 @@ const ContactFormFields = ({
 
         <div>
           <Label htmlFor="email" className="text-sm font-medium">
-            Email <span className="text-destructive">*</span>
+            Email profesional <span className="text-destructive">*</span>
           </Label>
           <div className="relative mt-1.5">
             <Mail size={16} className={iconWrap} />
