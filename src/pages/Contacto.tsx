@@ -38,8 +38,8 @@ const content: Record<string, {
   },
   en: {
     seo_title: "Contact", seo_desc: "Contact Winerim. We analyze your wine list for free and help you optimize it.", breadcrumb: "Contact",
-    title: "Want to increase your sales", highlight: "by over 30%?",
-    subtitle: "We analyze your wine list completely free. We recommend how to optimize it and what strategies to use.",
+    title: "Want to optimize your wine", highlight: "sales?",
+    subtitle: "We analyze your wine list completely free. We show you real opportunities to improve margin, rotation and assortment.",
     form_title: "Free wine list analysis",
     name: "Name", position: "Position at restaurant", email: "Email", phone: "Phone",
     restaurant: "Restaurant", city: "City", references: "Number of references", menu_link: "Link to your wine list", message: "Message (What would you like to improve?)",
