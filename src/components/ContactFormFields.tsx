@@ -142,7 +142,7 @@ const ContactFormFields = ({
       {/* Name */}
       <div>
         <Label htmlFor="name" className="text-sm font-medium">
-          Tu nombre <span className="text-destructive">*</span>
+          Tu nombre completo <span className="text-destructive">*</span>
         </Label>
         <div className="relative mt-1.5">
           <User size={16} className={iconWrap} />
