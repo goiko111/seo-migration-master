@@ -263,26 +263,25 @@ const GenericSeoTemplate = ({ page, related }: Props) => {
         </ScrollReveal>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — accordion for scannability */}
       {page.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
             </ScrollReveal>
-            <div className="space-y-6">
+            <Accordion type="multiple" className="space-y-3">
               {page.faqs.map((faq, i) => (
-                <ScrollReveal key={i} delay={i * 0.05}>
-                  <div className="p-6 rounded-xl border border-border bg-background">
-                    <div className="flex items-start gap-3 mb-3">
-                      <HelpCircle size={18} className="text-wine shrink-0 mt-0.5" />
-                      <h3 className="font-heading font-bold">{faq.q}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed pl-7">{faq.a}</p>
-                  </div>
-                </ScrollReveal>
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-background px-6 data-[state=open]:border-wine/20">
+                  <AccordionTrigger className="text-left font-heading font-bold text-sm hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </section>
       )}
