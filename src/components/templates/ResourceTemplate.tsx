@@ -110,8 +110,19 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
       setSubmitted(true);
-      toast.success("¡Recurso enviado! Revisa tu email.");
+      toast.success("¡Recurso listo! La descarga comenzará en un momento.");
       notifyLead(leadData);
+      // Auto-download the file
+      if (data.downloadFile) {
+        setTimeout(() => {
+          const a = document.createElement("a");
+          a.href = data.downloadFile!;
+          a.download = "";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 800);
+      }
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
