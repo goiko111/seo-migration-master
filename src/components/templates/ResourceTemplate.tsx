@@ -80,6 +80,7 @@ export interface ResourcePageData {
   ctaFinalTitle: string;
   ctaFinalDescription: string;
   internalLinks: ResourceInternalLink[];
+  downloadFile?: string;
 }
 
 const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
