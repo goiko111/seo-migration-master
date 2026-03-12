@@ -132,10 +132,10 @@ const Soluciones = () => {
                 <ScrollReveal key={i} delay={i * 0.05}>
                   <Link
                     to={localePath(item.esPath)}
-                    className="group bg-gradient-card rounded-2xl border border-border hover:border-wine/50 transition-all block p-8 h-full hover:shadow-lg hover:shadow-wine/5"
+                    className="group bg-gradient-card rounded-xl border border-border hover:border-wine/30 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5">
-                      <Icon size={22} className="text-wine" />
+                    <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center mb-5">
+                      <Icon size={20} className="text-wine" />
                     </div>
                     <h2 className="font-heading text-xl font-bold mb-3 group-hover:text-wine transition-colors">{item.title}</h2>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.desc}</p>
