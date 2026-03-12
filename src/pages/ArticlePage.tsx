@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft, ArrowRight, BookOpen, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -12,6 +12,8 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ArticleSection from "@/components/article/ArticleSection";
 import ArticleTableOfContents from "@/components/article/ArticleTableOfContents";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import CTASection from "@/components/CTASection";
+import StickyCTA from "@/components/StickyCTA";
 import ArticleRelatedContent, { type RelatedLink } from "@/components/article/ArticleRelatedContent";
 import { parseMarkdownSections, type ParsedSection } from "@/components/article/parseMarkdownSections";
 import { supabase } from "@/integrations/supabase/client";
@@ -206,7 +208,7 @@ const ArticlePage = () => {
         <div key={i}>
           <ArticleSection heading={section.heading} content={section.content} index={i} />
           {/* Insert mid-article CTA after the middle section */}
-          {i === midIndex - 1 && <ArticleMidCTA />}
+          {i === midIndex - 1 && <ArticleMidCTA pageType="article" />}
         </div>
       ))}
 
@@ -214,23 +216,7 @@ const ArticlePage = () => {
       <ArticleRelatedContent slug={slug || ""} body={article.body} manualLinks={article.relatedLinks} />
 
       {/* CTA FINAL */}
-      <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">
-        <ScrollReveal>
-          <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
-            <Sparkles size={32} className="text-wine mx-auto mb-6" />
-            <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              ¿Quieres aplicar esto en tu restaurante?
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Descubre cómo Winerim puede ayudarte a vender más vino y mejorar la experiencia de tus clientes.
-            </p>
-            <Link to="/demo"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              Solicitar demo <ArrowRight size={16} />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </section>
+      <CTASection pageType="article" />
 
       {/* BACK LINK */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
@@ -241,6 +227,7 @@ const ArticlePage = () => {
         </Link>
       </section>
 
+      <StickyCTA pageType="article" />
       <Footer />
     </div>
   );

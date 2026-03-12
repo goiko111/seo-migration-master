@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getResolvedCTASet } from "@/data/ctas";
 
 const FinalCTASection = () => {
   const { t, localePath } = useLanguage();
+  const ctaSet = getResolvedCTASet("home");
 
   return (
     <section className="section-padding">
@@ -20,7 +22,7 @@ const FinalCTASection = () => {
 
           <div className="relative z-10">
             <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">
-              {t.cta_title_1}
+              {ctaSet.badge}
             </p>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               {t.cta_title_1}{" "}
@@ -31,22 +33,24 @@ const FinalCTASection = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to={localePath("/demo")}
+                to={localePath(ctaSet.primary.url)}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5"
               >
                 {t.cta_button}
                 <ArrowRight size={16} />
               </Link>
               <Link
-                to={localePath("/analisis-carta")}
+                to={localePath(ctaSet.secondary.url)}
                 className="px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary hover:border-wine/30 transition-all hover:-translate-y-0.5"
               >
-                {t.hero_cta_primary.length > 40 ? "Analiza tu carta" : t.hero_cta_primary}
+                {ctaSet.secondary.text}
               </Link>
             </div>
-            <p className="text-xs text-muted-foreground/60 mt-6 max-w-md mx-auto">
-              Sin compromiso. Te mostramos Winerim en 15 minutos.
-            </p>
+            {ctaSet.primary.micro && (
+              <p className="text-xs text-muted-foreground/60 mt-6 max-w-md mx-auto">
+                {ctaSet.primary.micro}
+              </p>
+            )}
           </div>
         </motion.div>
       </div>

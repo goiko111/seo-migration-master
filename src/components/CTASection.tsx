@@ -40,7 +40,7 @@ const CTASection = ({
 }: CTASectionProps) => {
   const ctaSet = getResolvedCTASet(pageType);
 
-  const resolvedBadge = badge || (pageType === "home" ? "Únete a Winerim" : "Da el siguiente paso");
+  const resolvedBadge = badge || ctaSet.badge;
   const resolvedTitle = title || ctaSet.finalTitle;
   const resolvedDesc = description || ctaSet.finalDesc;
   const resolvedPrimaryText = primaryText || ctaSet.primary.text;
