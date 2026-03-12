@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 
 export const positionOptions = [
   { value: "propietario", label: "Propietario/a" },
-  { value: "director", label: "Director/a" },
-  { value: "sommelier", label: "Sommelier" },
+  { value: "director", label: "Director/a de F&B" },
+  { value: "sommelier", label: "Sommelier / Jefe de bebidas" },
   { value: "jefe-sala", label: "Jefe/a de sala" },
-  { value: "chef", label: "Chef" },
-  { value: "responsable-bebidas", label: "Responsable de bebidas" },
-  { value: "gerente", label: "Gerente" },
-  { value: "otro", label: "Otro" },
+  { value: "chef", label: "Chef ejecutivo" },
+  { value: "responsable-bebidas", label: "Responsable de compras" },
+  { value: "gerente", label: "Gerente / Dirección general" },
+  { value: "otro", label: "Otro cargo" },
 ];
 
 export const referencesOptions = [
@@ -21,7 +21,7 @@ export const referencesOptions = [
   { value: "80-150", label: "80–150 referencias" },
   { value: "150-300", label: "150–300 referencias" },
   { value: "300-500", label: "300–500 referencias" },
-  { value: "500+", label: "+500 referencias" },
+  { value: "500+", label: "Más de 500 referencias" },
 ];
 
 export const businessTypeOptions = [
@@ -30,7 +30,7 @@ export const businessTypeOptions = [
   { value: "hotel", label: "Hotel / Resort" },
   { value: "wine-bar", label: "Wine bar / Vinoteca" },
   { value: "catering", label: "Catering / Eventos" },
-  { value: "otro", label: "Otro" },
+  { value: "otro", label: "Otro tipo de negocio" },
 ];
 
 export const numLocationsOptions = [
@@ -38,18 +38,18 @@ export const numLocationsOptions = [
   { value: "2-5", label: "2–5 locales" },
   { value: "6-15", label: "6–15 locales" },
   { value: "16-50", label: "16–50 locales" },
-  { value: "50+", label: "+50 locales" },
+  { value: "50+", label: "Más de 50 locales" },
 ];
 
 export const mainChallengeOptions = [
-  { value: "vender-mas-vino", label: "Vender más vino" },
-  { value: "mejorar-margenes", label: "Mejorar márgenes" },
-  { value: "rotacion-stock", label: "Mejorar rotación / stock muerto" },
-  { value: "formar-equipo", label: "Formar al equipo de sala" },
-  { value: "optimizar-carta", label: "Optimizar carta y surtido" },
-  { value: "digitalizar-carta", label: "Digitalizar la carta" },
-  { value: "gestionar-multi-local", label: "Gestionar varios locales" },
-  { value: "otro", label: "Otro" },
+  { value: "vender-mas-vino", label: "Aumentar ventas de vino" },
+  { value: "mejorar-margenes", label: "Mejorar márgenes por botella" },
+  { value: "rotacion-stock", label: "Reducir stock muerto / mejorar rotación" },
+  { value: "formar-equipo", label: "Formar al equipo de sala en vino" },
+  { value: "optimizar-carta", label: "Optimizar surtido y estructura de carta" },
+  { value: "digitalizar-carta", label: "Digitalizar la carta de vinos" },
+  { value: "gestionar-multi-local", label: "Centralizar gestión en varios locales" },
+  { value: "otro", label: "Otro reto" },
 ];
 
 /**
