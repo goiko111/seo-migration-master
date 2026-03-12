@@ -38,51 +38,53 @@ const Index = () => {
         hreflang={allLangPaths("/")}
       />
       <Navbar />
-      <main>
-        {/* Above the fold — eagerly loaded, no framer-motion */}
-        <HeroSection />
+      <PageContentProvider page="home">
+        <main>
+          {/* Above the fold — eagerly loaded, no framer-motion */}
+          <HeroSection />
 
-        {/* Social proof — logos */}
-        <Suspense fallback={<SectionFallback />}>
-          <LogoStrip />
-        </Suspense>
+          {/* Social proof — logos */}
+          <Suspense fallback={<SectionFallback />}>
+            <LogoStrip />
+          </Suspense>
 
-        {/* Problem → Solution → Who it helps (conversion funnel) */}
-        <Suspense fallback={<SectionFallback />}>
-          <ProblemSection />
-          <SolutionSection />
-        </Suspense>
+          {/* Problem → Solution → Who it helps (conversion funnel) */}
+          <Suspense fallback={<SectionFallback />}>
+            <ProblemSection />
+            <SolutionSection />
+          </Suspense>
 
-        <Suspense fallback={<SectionFallback />}>
-          <WhoItHelpsSection />
-        </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <WhoItHelpsSection />
+          </Suspense>
 
-        {/* Features + Dynamic Intelligence */}
-        <Suspense fallback={<SectionFallback />}>
-          <FeaturesPreview />
-          <DynamicIntelligenceTeaser />
-        </Suspense>
+          {/* Features + Dynamic Intelligence */}
+          <Suspense fallback={<SectionFallback />}>
+            <FeaturesPreview />
+            <DynamicIntelligenceTeaser />
+          </Suspense>
 
-        {/* Results + How it works */}
-        <Suspense fallback={<SectionFallback />}>
-          <ResultsSection />
-          <HowItWorksSection />
-        </Suspense>
+          {/* Results + How it works */}
+          <Suspense fallback={<SectionFallback />}>
+            <ResultsSection />
+            <HowItWorksSection />
+          </Suspense>
 
-        {/* Testimonials + Definition (citability) + Credibility + Video + CTA */}
-        <Suspense fallback={<SectionFallback />}>
-          <TestimonialsSection />
-          <DefinitionSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
-          <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
-            <CredibilitySection lang={lang} />
-          </section>
-          <VideoSection />
-          <FinalCTASection />
-          <StickyCTA pageType="home" />
-        </Suspense>
-      </main>
+          {/* Testimonials + Definition (citability) + Credibility + Video + CTA */}
+          <Suspense fallback={<SectionFallback />}>
+            <TestimonialsSection />
+            <DefinitionSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
+              <CredibilitySection lang={lang} />
+            </section>
+            <VideoSection />
+            <FinalCTASection />
+            <StickyCTA pageType="home" />
+          </Suspense>
+        </main>
+      </PageContentProvider>
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
