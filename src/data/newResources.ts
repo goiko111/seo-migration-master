@@ -205,6 +205,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-formacion-equipo-sala",
     formType: "plantilla-formacion-sala",
+    downloadFile: "/recursos/winerim_formacion_expres_sala_2026.xlsx",
     metaTitle: "Plantilla de Formación Exprés en Vino para Equipos de Sala | Winerim",
     metaDescription: "Descarga la plantilla para formar a tu equipo de sala en vino en menos de 2 semanas. Fichas de vino, guía de maridaje, frases de recomendación y plan de sesiones.",
     badgeIcon: GraduationCap,
