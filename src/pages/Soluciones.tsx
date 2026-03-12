@@ -192,12 +192,12 @@ const Soluciones = () => {
         <InternalLinks
           title={t.linksTitle}
           links={[
-            { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: lang === "es" ? "Software de carta de vinos inteligente" : "Smart wine list software", type: "solution" },
-            { to: "/herramientas", label: lang === "es" ? "Herramientas gratuitas de análisis y pricing" : "Free analysis & pricing tools", type: "tool" },
-            { to: "/guias-y-recursos", label: lang === "es" ? "Guías prácticas y recursos descargables" : "Practical guides & downloadable resources", type: "guide" },
-            { to: "/herramientas/calculadora-ticket-medio-vino", label: lang === "es" ? "Calculadora de impacto en ticket medio" : "Average ticket impact calculator", type: "tool" },
-            { to: localePath("/casos-exito") || "/casos-exito", label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real restaurant case studies", type: "guide" },
-            { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks & playbooks", type: "resource" },
+            { to: localePath("/software-carta-de-vinos") || "/software-carta-de-vinos", label: { es: "Software de carta de vinos inteligente", en: "Smart wine list software", it: "Software intelligente per carta dei vini", fr: "Logiciel intelligent de carte des vins" }[lang]!, type: "solution" },
+            { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification" }[lang]!, type: "tool" },
+            { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & downloadable resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables" }[lang]!, type: "guide" },
+            { to: "/herramientas/calculadora-ticket-medio-vino", label: { es: "Calculadora de impacto en ticket medio", en: "Average ticket impact calculator", it: "Calcolatrice impatto scontrino medio", fr: "Calculateur d'impact ticket moyen" }[lang]!, type: "tool" },
+            { to: localePath("/casos-exito") || "/casos-exito", label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels" }[lang]!, type: "guide" },
+            { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur" }[lang]!, type: "resource" },
           ]}
         />
       </main>
