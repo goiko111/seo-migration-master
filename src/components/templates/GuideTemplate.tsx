@@ -157,8 +157,10 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         } : undefined}
       />
 
-      {/* MID CTA — MOFU contextual */}
-      <ArticleMidCTA pageType="guide" variant="subtle" />
+      {/* MID CTA — only if sections are short (otherwise inserted inline above) */}
+      {data.sections.length <= 3 && (
+        <ArticleMidCTA pageType="guide" variant="subtle" />
+      )}
 
       {/* RELATED TOOLS */}
       {data.relatedTools && data.relatedTools.length > 0 && (
