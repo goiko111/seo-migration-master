@@ -306,6 +306,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "plantilla-analisis-margenes",
     formType: "plantilla-analisis-margenes",
+    downloadFile: "/recursos/winerim_revision_mensual_margenes_2026.xlsx",
     metaTitle: "Plantilla de Análisis de Márgenes por Referencia de Vino | Winerim",
     metaDescription: "Descarga la plantilla para analizar el margen de cada vino de tu carta. Coste, PVP, multiplicador, contribución al margen global y ranking de rentabilidad.",
     badgeIcon: PieChart,
