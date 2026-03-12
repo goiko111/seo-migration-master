@@ -19,6 +19,9 @@ const content: Record<string, {
   benefits: string[]; form_title: string; form_subtitle: string;
   button: string; sending: string; disclaimer: string;
   success: string; error: string;
+  trust_response: string; trust_no_commitment: string; trust_demo: string;
+  what_next: string; step1: string; step2: string; step3: string;
+  link_software: string; link_pricing: string; link_cases: string; link_analysis: string;
 }> = {
   es: {
     seo_title: "Demo Gratuita | Winerim", seo_desc: "Solicita una demostración personalizada de Winerim y descubre cómo aumentar tus ventas de vino.", breadcrumb: "Demo gratuita", label: "Prueba gratuita",
@@ -30,6 +33,12 @@ const content: Record<string, {
     button: "Solicitar demo gratuita", sending: "Enviando...",
     disclaimer: "Sin compromiso. Al enviar aceptas nuestra política de privacidad.",
     success: "¡Solicitud recibida! Te contactaremos en menos de 24 h para agendar tu demo.", error: "Error al enviar. Inténtalo de nuevo.",
+    trust_response: "Respuesta en 24 h", trust_no_commitment: "Sin compromiso", trust_demo: "Demo de 15 min",
+    what_next: "¿Qué pasa después?",
+    step1: "Te contactamos en menos de 24 h para agendar la demo.",
+    step2: "Preparamos la demo con tu carta real (si la envías).",
+    step3: "En 15 min ves Winerim aplicado a tu caso. Sin compromiso.",
+    link_software: "Software carta de vinos", link_pricing: "Planes y precios", link_cases: "Casos de éxito", link_analysis: "Análisis gratuito de carta",
   },
   en: {
     seo_title: "Free Demo | Winerim", seo_desc: "Request a personalized Winerim demo and discover how to increase your wine sales.", breadcrumb: "Free demo", label: "Free trial",
@@ -41,6 +50,12 @@ const content: Record<string, {
     button: "Request free demo", sending: "Sending...",
     disclaimer: "No commitment. By submitting you accept our privacy policy.",
     success: "Request received! We'll contact you within 24h to schedule your demo.", error: "Error sending. Please try again.",
+    trust_response: "Response within 24h", trust_no_commitment: "No commitment", trust_demo: "15-min demo",
+    what_next: "What happens next?",
+    step1: "We contact you within 24h to schedule the demo.",
+    step2: "We prepare the demo with your actual wine list (if you send it).",
+    step3: "In 15 min you see Winerim applied to your case. No commitment.",
+    link_software: "Wine list software", link_pricing: "Plans & pricing", link_cases: "Case studies", link_analysis: "Free wine list analysis",
   },
   it: {
     seo_title: "Demo Gratuita | Winerim", seo_desc: "Richiedi una demo personalizzata di Winerim e scopri come aumentare le vendite di vino.", breadcrumb: "Demo gratuita", label: "Prova gratuita",
@@ -52,6 +67,12 @@ const content: Record<string, {
     button: "Richiedi demo gratuita", sending: "Invio...",
     disclaimer: "Senza impegno. Inviando accetti la nostra privacy policy.",
     success: "Richiesta ricevuta! Ti contatteremo entro 24 ore.", error: "Errore nell'invio. Riprova.",
+    trust_response: "Risposta entro 24 h", trust_no_commitment: "Senza impegno", trust_demo: "Demo di 15 min",
+    what_next: "Cosa succede dopo?",
+    step1: "Ti contattiamo entro 24 h per fissare la demo.",
+    step2: "Prepariamo la demo con la tua carta reale (se la invii).",
+    step3: "In 15 min vedi Winerim applicato al tuo caso. Senza impegno.",
+    link_software: "Software carta dei vini", link_pricing: "Piani e prezzi", link_cases: "Casi di successo", link_analysis: "Analisi gratuita della carta",
   },
   fr: {
     seo_title: "Démo Gratuite | Winerim", seo_desc: "Demandez une démo personnalisée de Winerim et découvrez comment augmenter vos ventes de vin.", breadcrumb: "Démo gratuite", label: "Essai gratuit",
@@ -63,6 +84,12 @@ const content: Record<string, {
     button: "Demander démo gratuite", sending: "Envoi...",
     disclaimer: "Sans engagement. En envoyant vous acceptez notre politique de confidentialité.",
     success: "Demande reçue ! Nous vous contacterons sous 24h.", error: "Erreur d'envoi. Veuillez réessayer.",
+    trust_response: "Réponse sous 24 h", trust_no_commitment: "Sans engagement", trust_demo: "Démo de 15 min",
+    what_next: "Que se passe-t-il ensuite ?",
+    step1: "Nous vous contactons sous 24 h pour planifier la démo.",
+    step2: "Nous préparons la démo avec votre carte réelle (si vous l'envoyez).",
+    step3: "En 15 min, vous voyez Winerim appliqué à votre cas. Sans engagement.",
+    link_software: "Logiciel carte des vins", link_pricing: "Plans et tarifs", link_cases: "Cas clients", link_analysis: "Analyse gratuite de carte",
   },
 };
 
