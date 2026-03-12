@@ -42,7 +42,7 @@ const ResultsSection = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {metrics.map((metric, i) => (
             <ScrollReveal key={i} delay={i * 0.12}>
-              <div className="relative bg-gradient-card rounded-2xl border border-border p-8 text-center hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+              <div className="relative bg-gradient-card rounded-xl border border-border p-6 text-center hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden group">
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${metric.color} opacity-60 group-hover:opacity-100 transition-opacity`} />
                 <p className="font-heading text-2xl md:text-3xl font-bold text-gradient-wine mb-3">
                   {metric.label}

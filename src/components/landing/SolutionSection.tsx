@@ -63,9 +63,9 @@ const SolutionSection = () => {
             const Icon = icons[i];
             return (
               <ScrollReveal key={i} delay={i * 0.08}>
-                <div className="group bg-gradient-card rounded-xl border border-border p-7 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 hover:glow-wine h-full">
-                  <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/20 group-hover:scale-110 transition-all duration-300">
-                    <Icon size={24} className="text-wine" />
+                <div className="group bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 h-full">
+                  <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center mb-5 group-hover:bg-wine/15 transition-colors duration-300">
+                    <Icon size={20} className="text-wine" />
                   </div>
                   <h3 className="font-heading text-lg font-semibold mb-2">{benefit.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
