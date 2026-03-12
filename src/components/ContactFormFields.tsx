@@ -239,7 +239,7 @@ const ContactFormFields = ({
           {showReferences && (
             <div>
               <Label htmlFor="references_count" className="text-sm font-medium">
-                Nº de referencias en carta {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                Referencias en carta {(isDemo || isContact) && <span className="text-destructive">*</span>}
               </Label>
               <div className="mt-1.5">
                 {native ? (
