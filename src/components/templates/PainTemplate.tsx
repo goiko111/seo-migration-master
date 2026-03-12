@@ -112,7 +112,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {/* SÍNTOMA */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
         <ScrollReveal>
-          <div className="p-8 rounded-2xl border border-destructive/20 bg-destructive/5">
+          <div className="p-6 md:p-8 rounded-xl border border-destructive/20 bg-destructive/5">
             <div className="flex items-start gap-4 mb-4">
               <AlertTriangle size={24} className="text-destructive shrink-0 mt-1" />
               <div>
