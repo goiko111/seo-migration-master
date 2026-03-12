@@ -395,6 +395,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "scorecard-rendimiento-carta",
     formType: "scorecard-rendimiento-carta",
+    downloadFile: "/recursos/winerim_scorecard_mensual_2026.xlsx",
     metaTitle: "Scorecard Mensual de Rendimiento de Carta de Vinos | Winerim",
     metaDescription: "Descarga el scorecard para medir el rendimiento de tu carta de vinos cada mes. KPIs de venta, rotación, margen, copa y ticket medio en un solo documento.",
     badgeIcon: BarChart3,
