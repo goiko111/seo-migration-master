@@ -121,8 +121,8 @@ const WinerimCore = () => {
       {/* ─── Breadcrumbs ─── */}
       <div className="max-w-7xl mx-auto px-6 pt-24">
         <Breadcrumbs items={[
-          { label: "Inicio", to: "/" },
-          { label: "Funcionalidades", to: "/funcionalidades" },
+          { label: "Inicio", href: "/" },
+          { label: "Funcionalidades", href: "/funcionalidades" },
           { label: "Winerim Core" },
         ]} />
       </div>
