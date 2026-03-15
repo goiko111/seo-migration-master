@@ -113,7 +113,7 @@ const WinerimCore = () => {
       <SEOHead
         title="Winerim Core | 26 módulos de inteligencia analítica para tu carta de vinos"
         description="Winerim Core es el motor analítico que conecta márgenes, pricing, stock, rentabilidad, compras, arquitectura, benchmark y previsión en una sola capa. 26 módulos especializados."
-        path="/producto/winerim-core"
+        url="https://winerim.wine/producto/winerim-core"
       />
 
       <Navbar />
