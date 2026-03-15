@@ -106,6 +106,25 @@ const CalculadoraMargen = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Qué multiplicador aplicar según gama y tipo de referencia",
+          "Si tu pricing actual deja margen suficiente por copa y botella",
+          "Qué precio de venta es competitivo sin sacrificar rentabilidad",
+        ]}
+        avoids={[
+          "Aplicar el mismo multiplicador a toda la carta sin criterio",
+          "Dejar huecos de precio que bloquean la venta",
+          "Fijar precios que no cubren el coste por copa",
+        ]}
+        impact={[
+          "Mejora del margen bruto medio entre un 5-15%",
+          "Reducción de la percepción de 'caro' con escaleras de precio correctas",
+          "Pricing alineado con el posicionamiento real del restaurante",
+        ]}
+      />
+
       {/* CALCULATOR */}
       <section className="section-padding pt-8">
         <div className="max-w-5xl mx-auto">
