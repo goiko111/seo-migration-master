@@ -1024,6 +1024,7 @@ const Funcionalidades = () => {
         { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim", it: "Confronta Winerim", fr: "Comparez Winerim" }[lang]!, type: "solution" },
         { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks", it: "Benchmark del settore", fr: "Benchmarks du secteur" }[lang]!, type: "resource" },
         { to: "/producto/inteligencia-dinamica", label: { es: "Inteligencia dinámica: IA táctica para carta", en: "Dynamic intelligence", it: "Intelligenza dinamica", fr: "Intelligence dynamique" }[lang]!, type: "solution" },
+        { to: "/producto/winerim-core", label: { es: "Winerim Core: los 26 módulos analíticos", en: "Winerim Core: 26 analytical modules", it: "Winerim Core: 26 moduli analitici", fr: "Winerim Core: 26 modules analytiques" }[lang]!, type: "solution" },
       ]} />
       <Footer />
     </div>
