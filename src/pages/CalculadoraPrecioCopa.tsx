@@ -261,6 +261,7 @@ const CalculadoraPrecioCopa = () => {
         { to: "/vino-por-copa-restaurante", label: "Vino por copa en restaurantes", type: "guide" },
         { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
         { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
+        { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
         { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
       ]} />
       <Footer />

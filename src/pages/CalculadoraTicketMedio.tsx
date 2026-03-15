@@ -342,6 +342,7 @@ const CalculadoraTicketMedio = () => {
           { to: "/article/como-mejorar-ticket-medio-vino-con-datos", label: "Cómo mejorar el ticket medio con datos", type: "guide" },
           { to: "/guias/como-decidir-surtido-segun-ticket-medio-tipo-local", label: "Surtido según ticket medio", type: "guide" },
           { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
+          { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
           { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
         ]} />
       </div>

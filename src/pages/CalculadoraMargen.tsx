@@ -389,6 +389,7 @@ const CalculadoraMargen = () => {
         { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
         { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
         { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+        { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
       ]} />
       <Footer />
     </div>
