@@ -308,10 +308,32 @@ const InteligenciaDinamica = () => {
                 Inteligencia dinámica es la capa estratégica de Winerim que adapta visibilidad, recomendación, rotación y empuje comercial según margen, stock, clima, afluencia y objetivo del restaurante.
               </motion.p>
 
+              {/* Core bridge — brief reference */}
+              <motion.div
+                variants={fadeUp}
+                custom={2}
+                className="max-w-3xl mx-auto mb-10"
+              >
+                <div className="flex flex-col sm:flex-row items-center gap-3 justify-center px-6 py-4 rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm">
+                  <p className="text-sm text-muted-foreground text-center sm:text-left leading-relaxed">
+                    Los RIMs no operan en vacío. Se alimentan de la capa analítica de{" "}
+                    <Link to="/producto/winerim-core" className="text-wine hover:text-wine-light font-semibold underline underline-offset-4 transition-colors">
+                      Winerim Core
+                    </Link>, donde Winerim analiza márgenes, stock, pricing, previsión y estructura de carta en profundidad.
+                  </p>
+                  <Link
+                    to="/producto/winerim-core"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-wine hover:text-wine-light whitespace-nowrap transition-colors shrink-0"
+                  >
+                    Ver Winerim Core <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </motion.div>
+
               {/* Supporting phrase */}
               <motion.p
                 variants={fadeUp}
-                custom={2}
+                custom={3}
                 className="text-center text-sm md:text-base text-wine/70 font-medium max-w-2xl mx-auto mb-14 italic"
               >
                 No solo muestra vinos. Decide qué conviene impulsar en cada momento.
