@@ -829,6 +829,110 @@ const GruposRestauracion = () => {
       <IntelBlock t={t} />
       <PilotBlock t={t} localePath={localePath} />
 
+      {/* ── WINERIM CORE PARA GRUPOS ── */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="relative rounded-2xl border border-amber-500/20 bg-gradient-to-br from-card via-card/95 to-amber-500/5 p-8 md:p-12 overflow-hidden">
+              <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                    <BarChart3 size={20} className="text-amber-400" />
+                  </div>
+                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-amber-400/70">
+                    {lang === "es" ? "Capa analítica" : "Analytics layer"}
+                  </span>
+                </div>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
+                  {lang === "es" ? <>Winerim Core para <span className="text-gradient-wine">grupos</span></> : <>Winerim Core for <span className="text-gradient-wine">groups</span></>}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+                  {lang === "es"
+                    ? "Los grupos necesitan una capa analítica que les ayude a comparar unidades, detectar oportunidades, ajustar pricing, prever consumo y decidir mejor qué referencias merece la pena mantener, replicar o retirar."
+                    : "Groups need an analytics layer that helps compare units, detect opportunities, adjust pricing, forecast consumption, and decide which references to keep, replicate or retire."}
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {(lang === "es" ? [
+                    "Benchmark interno entre unidades del grupo",
+                    "Detección de desviaciones de pricing y margen por local",
+                    "Scoring de rendimiento por referencia y categoría",
+                    "Previsión de demanda agregada por cluster de locales",
+                    "Simulación de cambios de carta antes de desplegar",
+                  ] : [
+                    "Internal benchmarking across group units",
+                    "Pricing and margin deviation detection per venue",
+                    "Performance scoring per reference and category",
+                    "Aggregated demand forecasting per venue cluster",
+                    "Wine list change simulation before deployment",
+                  ]).map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <CheckCircle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/producto/winerim-core" className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors tracking-wider uppercase">
+                  {lang === "es" ? "Ver Winerim Core" : "See Winerim Core"} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── WINERIM SUPPLY PARA GRUPOS ── */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="relative rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-card via-card/95 to-emerald-500/5 p-8 md:p-12 overflow-hidden">
+              <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                    <Warehouse size={20} className="text-emerald-400" />
+                  </div>
+                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-400/70">
+                    {lang === "es" ? "Inteligencia de compras" : "Purchasing intelligence"}
+                  </span>
+                </div>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
+                  {lang === "es" ? <>Winerim Supply para <span className="text-gradient-wine">grupos</span></> : <>Winerim Supply for <span className="text-gradient-wine">groups</span></>}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+                  {lang === "es"
+                    ? "Winerim también ayuda a grupos a comprar con más criterio. Conecta datos de venta, stock y rendimiento con las decisiones de aprovisionamiento para que cada euro invertido en bodega tenga sentido."
+                    : "Winerim also helps groups purchase smarter. It connects sales, stock and performance data with procurement decisions so every euro invested in the cellar makes sense."}
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {(lang === "es" ? [
+                    "Comparar compras por unidad y detectar ineficiencias",
+                    "Detectar sobreprecios por proveedor frente a la red",
+                    "Revisar qué referencias inmovilizan capital sin retorno",
+                    "Decidir qué expandir a más locales y qué retirar",
+                    "Construir lógica de compra por cluster o tipo de local",
+                  ] : [
+                    "Compare purchases per unit and detect inefficiencies",
+                    "Detect supplier overpricing against the network",
+                    "Review which references tie up capital without return",
+                    "Decide what to expand to more venues and what to retire",
+                    "Build purchasing logic per cluster or venue type",
+                  ]).map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/producto/winerim-supply" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors tracking-wider uppercase">
+                  {lang === "es" ? "Ver Winerim Supply" : "See Winerim Supply"} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ── POSITIONING ── */}
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
