@@ -63,6 +63,25 @@ const CalculadoraPrecioCopa = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Qué precio poner a cada copa según coste y tipo de servicio",
+          "Cuántas copas necesitas vender para cubrir la botella",
+          "Si tu programa de copa es rentable o está generando pérdida",
+        ]}
+        avoids={[
+          "Vender copas por debajo del punto de equilibrio",
+          "Asumir un número de copas por botella que no se cumple en la práctica",
+          "Ignorar la merma como coste real del servicio por copa",
+        ]}
+        impact={[
+          "Margen por copa controlado y predecible",
+          "Reducción de pérdidas por botellas abiertas no terminadas",
+          "Mejor decisión sobre qué vinos ofrecer por copa",
+        ]}
+      />
+
       {/* CALCULATOR */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
         <div className="grid lg:grid-cols-2 gap-8">
