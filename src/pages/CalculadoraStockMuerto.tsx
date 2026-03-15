@@ -137,6 +137,25 @@ const CalculadoraStockMuerto = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock
+        layer="supply"
+        decides={[
+          "Qué referencias sacar de carta por falta de rotación",
+          "Cuánto capital real tienes inmovilizado en bodega",
+          "Qué vinos necesitan acción inmediata vs. seguimiento",
+        ]}
+        avoids={[
+          "Seguir comprando referencias que no se venden",
+          "Inmovilizar capital en stock sin retorno",
+          "Tomar decisiones de compra sin dato de rotación",
+        ]}
+        impact={[
+          "Liberación de capital bloqueado en stock sin rotación",
+          "Mejora de la rotación media de la bodega",
+          "Criterio objetivo para renegociar con distribuidores",
+        ]}
+      />
+
       {/* TOOL */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
