@@ -337,7 +337,7 @@ const PlantillaCartaVinos = () => {
               <Download size={32} className="text-wine mx-auto mb-4" />
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Descarga la plantilla gratuita</h2>
               <p className="text-muted-foreground">
-                Rellena el formulario y recibe la plantilla directamente en tu email.
+                Déjanos tus datos y descarga el recurso al instante.
               </p>
             </div>
           </ScrollReveal>
