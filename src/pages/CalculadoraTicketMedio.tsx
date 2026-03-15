@@ -5,6 +5,7 @@ import {
   ArrowRight, TrendingUp, Wine, DollarSign, Users,
   Calculator, Sparkles, Info, BarChart3, GlassWater
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -119,6 +120,25 @@ const CalculadoraTicketMedio = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Cuánto más podrías facturar en vino con mejoras realistas",
+          "Si la palanca es más mesas pidiendo vino o mayor gasto por mesa",
+          "Qué escenario de mejora es más alcanzable para tu tipo de negocio",
+        ]}
+        avoids={[
+          "Subir precios sin medir el impacto en volumen",
+          "Invertir en formación sin saber qué palanca mover primero",
+          "Tomar decisiones de carta sin una estimación de retorno",
+        ]}
+        impact={[
+          "Incremento de facturación mensual en vino estimado y accionable",
+          "Priorización de las palancas con mayor impacto potencial",
+          "Base cuantitativa para justificar inversiones en carta o formación",
+        ]}
+      />
 
       {/* SUMMARY BOX */}
       <div className="max-w-4xl mx-auto px-6 md:px-12">
@@ -322,6 +342,7 @@ const CalculadoraTicketMedio = () => {
           { to: "/article/como-mejorar-ticket-medio-vino-con-datos", label: "Cómo mejorar el ticket medio con datos", type: "guide" },
           { to: "/guias/como-decidir-surtido-segun-ticket-medio-tipo-local", label: "Surtido según ticket medio", type: "guide" },
           { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
+          { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
           { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
         ]} />
       </div>

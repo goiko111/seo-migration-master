@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
@@ -61,6 +62,25 @@ const CalculadoraPrecioCopa = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Qué precio poner a cada copa según coste y tipo de servicio",
+          "Cuántas copas necesitas vender para cubrir la botella",
+          "Si tu programa de copa es rentable o está generando pérdida",
+        ]}
+        avoids={[
+          "Vender copas por debajo del punto de equilibrio",
+          "Asumir un número de copas por botella que no se cumple en la práctica",
+          "Ignorar la merma como coste real del servicio por copa",
+        ]}
+        impact={[
+          "Margen por copa controlado y predecible",
+          "Reducción de pérdidas por botellas abiertas no terminadas",
+          "Mejor decisión sobre qué vinos ofrecer por copa",
+        ]}
+      />
 
       {/* CALCULATOR */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
@@ -241,6 +261,7 @@ const CalculadoraPrecioCopa = () => {
         { to: "/vino-por-copa-restaurante", label: "Vino por copa en restaurantes", type: "guide" },
         { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
         { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
+        { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
         { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
       ]} />
       <Footer />

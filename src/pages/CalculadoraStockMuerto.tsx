@@ -5,6 +5,7 @@ import {
   ArrowRight, RotateCcw, DollarSign, AlertTriangle, TrendingUp,
   Sparkles, CheckCircle, Layers, Wine, BarChart3, Plus, Trash2
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -135,6 +136,25 @@ const CalculadoraStockMuerto = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock
+        layer="supply"
+        decides={[
+          "Qué referencias sacar de carta por falta de rotación",
+          "Cuánto capital real tienes inmovilizado en bodega",
+          "Qué vinos necesitan acción inmediata vs. seguimiento",
+        ]}
+        avoids={[
+          "Seguir comprando referencias que no se venden",
+          "Inmovilizar capital en stock sin retorno",
+          "Tomar decisiones de compra sin dato de rotación",
+        ]}
+        impact={[
+          "Liberación de capital bloqueado en stock sin rotación",
+          "Mejora de la rotación media de la bodega",
+          "Criterio objetivo para renegociar con distribuidores",
+        ]}
+      />
 
       {/* TOOL */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
@@ -364,6 +384,7 @@ const CalculadoraStockMuerto = () => {
         { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
         { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación", type: "guide" },
         { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
+        { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
         { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
       ]} />
       <Footer />

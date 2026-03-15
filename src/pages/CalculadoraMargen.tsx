@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calculator, Wine, TrendingUp, Info } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -104,6 +105,25 @@ const CalculadoraMargen = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Qué multiplicador aplicar según gama y tipo de referencia",
+          "Si tu pricing actual deja margen suficiente por copa y botella",
+          "Qué precio de venta es competitivo sin sacrificar rentabilidad",
+        ]}
+        avoids={[
+          "Aplicar el mismo multiplicador a toda la carta sin criterio",
+          "Dejar huecos de precio que bloquean la venta",
+          "Fijar precios que no cubren el coste por copa",
+        ]}
+        impact={[
+          "Mejora del margen bruto medio entre un 5-15%",
+          "Reducción de la percepción de 'caro' con escaleras de precio correctas",
+          "Pricing alineado con el posicionamiento real del restaurante",
+        ]}
+      />
 
       {/* CALCULATOR */}
       <section className="section-padding pt-8">
@@ -369,6 +389,7 @@ const CalculadoraMargen = () => {
         { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
         { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
         { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+        { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
       ]} />
       <Footer />
     </div>
