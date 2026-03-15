@@ -895,6 +895,8 @@ const GruposRestauracion = () => {
 
       <InternalLinks links={[
         { to: localePath("/producto/inteligencia-dinamica"), label: lang === "es" ? "Inteligencia dinámica: IA táctica para carta" : "Dynamic intelligence", type: "solution" },
+        { to: "/producto/winerim-supply", label: lang === "es" ? "Winerim Supply: inteligencia de compras para grupos" : "Winerim Supply: purchasing intelligence", type: "solution" },
+        { to: "/producto/winerim-core", label: lang === "es" ? "Winerim Core: 26 módulos analíticos" : "Winerim Core: 26 analytical modules", type: "solution" },
         { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos inteligente" : "Wine list software", type: "solution" },
         { to: localePath("/soluciones/aumentar-ticket-medio-restaurante"), label: lang === "es" ? "Aumentar ticket medio con datos" : "Increase average ticket", type: "guide" },
         { to: localePath("/wine-list-benchmark"), label: "Wine List Benchmark", type: "tool" },

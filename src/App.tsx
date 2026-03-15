@@ -215,6 +215,7 @@ const esRoutes = (
     <Route path="/funcionalidades" element={<Funcionalidades />} />
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
     <Route path="/producto/winerim-core" element={<WinerimCore />} />
+    <Route path="/producto/winerim-supply" element={<WinerimSupply />} />
     <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     <Route path="/comparativas" element={<Comparativas />} />
