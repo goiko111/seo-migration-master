@@ -826,70 +826,158 @@ const Funcionalidades = () => {
         </div>
       </section>
 
-      {/* ─── Inteligencia Dinámica highlight ─── */}
+      {/* ─── 3 capas de la plataforma ─── */}
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-wine/6 rounded-full blur-[140px]" />
         </div>
-        <div className="relative max-w-5xl mx-auto">
-          <ScrollReveal>
-            <div className="relative rounded-3xl border border-wine/20 bg-gradient-to-br from-card via-card/95 to-wine/5 p-8 sm:p-12 md:p-16 overflow-hidden">
-              <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/50 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-br from-wine/8 via-transparent to-transparent pointer-events-none rounded-3xl" />
+        <div className="relative max-w-6xl mx-auto">
+          <ScrollReveal className="text-center mb-14">
+            <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
+              {lang === "es" ? "Arquitectura de producto" : lang === "en" ? "Product architecture" : lang === "it" ? "Architettura prodotto" : "Architecture produit"}
+            </Badge>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
+              {lang === "es" ? <>Tres capas. <span className="text-gradient-wine">Un sistema integrado.</span></> :
+               lang === "en" ? <>Three layers. <span className="text-gradient-wine">One integrated system.</span></> :
+               lang === "it" ? <>Tre livelli. <span className="text-gradient-wine">Un sistema integrato.</span></> :
+               <>Trois couches. <span className="text-gradient-wine">Un système intégré.</span></>}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {lang === "es" ? "Cada capa resuelve una parte del problema. Juntas, transforman la gestión del vino en un sistema de decisión completo." :
+               lang === "en" ? "Each layer solves part of the problem. Together, they transform wine management into a complete decision system." :
+               lang === "it" ? "Ogni livello risolve parte del problema. Insieme, trasformano la gestione del vino in un sistema decisionale completo." :
+               "Chaque couche résout une partie du problème. Ensemble, elles transforment la gestion du vin en un système de décision complet."}
+            </p>
+          </ScrollReveal>
 
-              <div className="relative flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-14">
-                <div className="flex-1">
-                  <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60 mb-5">
-                    <span className="w-1 h-1 rounded-full bg-wine/50" />
-                    Inteligencia dinámica
-                  </span>
-                  <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
-                    La nueva capa de{" "}
-                    <span className="text-gradient-wine">inteligencia táctica</span>{" "}
-                    de Winerim
-                  </h2>
-                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
-                    Más allá de digitalizar la carta, Winerim empieza a adaptar visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivo del restaurante.
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    {[
-                      "Activa estrategias según el momento del servicio",
-                      "Empuja referencias más rentables o prioritarias",
-                      "Ayuda a equilibrar stock, rotación y experiencia",
-                    ].map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <CheckCircle className="w-4 h-4 text-wine mt-0.5 shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    to="/producto/inteligencia-dinamica"
-                    className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/25 hover:-translate-y-0.5"
-                  >
-                    Descubrir Inteligencia dinámica
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
-
-                <div className="hidden lg:flex flex-col items-center gap-3 w-44 shrink-0">
-                  {["MarginRIM™", "FocusRIM™", "SmartRIM™"].map((rim, i) => (
-                    <motion.div
-                      key={rim}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
-                      className="w-full text-center py-2.5 px-4 rounded-lg border border-wine/15 bg-wine/5 text-xs font-mono font-semibold text-wine/80 tracking-wide"
-                    >
-                      {rim}
-                    </motion.div>
-                  ))}
-                  <span className="text-[10px] text-muted-foreground/40 mt-1">+8 módulos RIM™</span>
+          <div className="space-y-6">
+            {/* Winerim Core */}
+            <ScrollReveal>
+              <div className="relative rounded-2xl border border-amber-500/20 bg-gradient-to-br from-card via-card/95 to-amber-500/5 p-8 md:p-10 overflow-hidden group hover:border-amber-500/30 transition-all duration-500">
+                <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+                <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                        <BarChart3 size={20} className="text-amber-400" />
+                      </div>
+                      <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-amber-400/70">
+                        {lang === "es" ? "Capa analítica" : lang === "en" ? "Analytics layer" : lang === "it" ? "Livello analitico" : "Couche analytique"}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">Winerim Core</h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+                      {lang === "es" ? "26 módulos que analizan márgenes, pricing, stock, rotación, arquitectura de carta, benchmark y previsión. La base de datos y diagnóstico sobre la que se construyen todas las decisiones." :
+                       lang === "en" ? "26 modules analyzing margins, pricing, stock, rotation, list architecture, benchmarking, and forecasting. The data and diagnostic foundation for all decisions." :
+                       lang === "it" ? "26 moduli che analizzano margini, pricing, stock, rotazione, architettura della carta, benchmark e previsione. La base dati e diagnostica per tutte le decisioni." :
+                       "26 modules analysant marges, pricing, stock, rotation, architecture de carte, benchmark et prévision. La base de données et diagnostic pour toutes les décisions."}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {(lang === "es" ? ["Diagnóstico", "Pricing", "Benchmark", "Previsión", "Simulación"] :
+                        lang === "en" ? ["Diagnostics", "Pricing", "Benchmark", "Forecasting", "Simulation"] :
+                        lang === "it" ? ["Diagnostica", "Pricing", "Benchmark", "Previsione", "Simulazione"] :
+                        ["Diagnostic", "Pricing", "Benchmark", "Prévision", "Simulation"]
+                      ).map(tag => (
+                        <span key={tag} className="px-2.5 py-1 rounded-md bg-amber-500/8 border border-amber-500/15 text-[11px] font-medium text-amber-400/80">{tag}</span>
+                      ))}
+                    </div>
+                    <Link to="/producto/winerim-core" className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors">
+                      {lang === "es" ? "Explorar Winerim Core" : lang === "en" ? "Explore Winerim Core" : lang === "it" ? "Esplora Winerim Core" : "Explorer Winerim Core"} <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+
+            {/* Inteligencia Dinámica */}
+            <ScrollReveal>
+              <div className="relative rounded-2xl border border-wine/20 bg-gradient-to-br from-card via-card/95 to-wine/5 p-8 md:p-10 overflow-hidden group hover:border-wine/30 transition-all duration-500">
+                <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-wine/50 to-transparent" />
+                <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center">
+                        <Zap size={20} className="text-wine" />
+                      </div>
+                      <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60">
+                        {lang === "es" ? "Capa de acción" : lang === "en" ? "Action layer" : lang === "it" ? "Livello d'azione" : "Couche d'action"}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">
+                      {lang === "es" ? "Inteligencia Dinámica" : "Dynamic Intelligence"}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+                      {lang === "es" ? "Los módulos RIM™ convierten los diagnósticos de Core en acciones automáticas sobre la carta en tiempo real. Reordenan, destacan, ocultan y adaptan referencias según margen, stock, clima, afluencia y objetivos del negocio." :
+                       lang === "en" ? "RIM™ modules convert Core diagnostics into automatic real-time actions on the list. They reorder, highlight, hide, and adapt references based on margin, stock, weather, footfall, and business goals." :
+                       lang === "it" ? "I moduli RIM™ convertono le diagnosi di Core in azioni automatiche in tempo reale. Riordinano, evidenziano, nascondono e adattano le referenze secondo margine, stock, clima e obiettivi." :
+                       "Les modules RIM™ convertissent les diagnostics de Core en actions automatiques en temps réel. Ils réordonnent, mettent en avant, masquent et adaptent les références selon la marge, le stock, le climat et les objectifs."}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {["SmartRIM™", "MarginRIM™", "FocusRIM™", "StockRIM™", "ClimateRIM™"].map(tag => (
+                        <span key={tag} className="px-2.5 py-1 rounded-md bg-wine/8 border border-wine/15 text-[11px] font-mono font-semibold text-wine/80">{tag}</span>
+                      ))}
+                    </div>
+                    <Link to="/producto/inteligencia-dinamica" className="inline-flex items-center gap-2 text-sm font-semibold text-wine hover:text-wine-light transition-colors">
+                      {lang === "es" ? "Descubrir Inteligencia Dinámica" : lang === "en" ? "Discover Dynamic Intelligence" : lang === "it" ? "Scopri l'Intelligenza Dinamica" : "Découvrir l'Intelligence Dynamique"} <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                  <div className="hidden lg:flex flex-col items-center gap-3 w-44 shrink-0">
+                    {["MarginRIM™", "FocusRIM™", "SmartRIM™"].map((rim, i) => (
+                      <motion.div
+                        key={rim}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 + i * 0.12, duration: 0.5 }}
+                        className="w-full text-center py-2.5 px-4 rounded-lg border border-wine/15 bg-wine/5 text-xs font-mono font-semibold text-wine/80 tracking-wide"
+                      >
+                        {rim}
+                      </motion.div>
+                    ))}
+                    <span className="text-[10px] text-muted-foreground/40 mt-1">+8 {lang === "es" ? "módulos RIM™" : "RIM™ modules"}</span>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Winerim Supply */}
+            <ScrollReveal>
+              <div className="relative rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-card via-card/95 to-emerald-500/5 p-8 md:p-10 overflow-hidden group hover:border-emerald-500/30 transition-all duration-500">
+                <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
+                <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                        <ShoppingCart size={20} className="text-emerald-400" />
+                      </div>
+                      <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-400/70">
+                        {lang === "es" ? "Capa de compras" : lang === "en" ? "Purchasing layer" : lang === "it" ? "Livello acquisti" : "Couche achats"}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">Winerim Supply</h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+                      {lang === "es" ? "Inteligencia de compras que analiza precios, distribuidores, oportunidades y patrones de reposición. Conecta lo que vendes con lo que compras para que cada euro invertido en bodega tenga retorno medible." :
+                       lang === "en" ? "Purchasing intelligence analyzing prices, distributors, opportunities, and replenishment patterns. Connects what you sell with what you buy so every euro invested in your cellar has measurable return." :
+                       lang === "it" ? "Intelligenza acquisti che analizza prezzi, distributori, opportunità e pattern di riassortimento. Collega ciò che vendi con ciò che compri per un ritorno misurabile." :
+                       "Intelligence achats analysant prix, distributeurs, opportunités et modèles de réapprovisionnement. Connecte ce que vous vendez avec ce que vous achetez pour un retour mesurable."}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {(lang === "es" ? ["Comparativa de precios", "Scoring distribuidores", "Lista de compra", "Alertas sobreprecio"] :
+                        lang === "en" ? ["Price comparison", "Distributor scoring", "Smart purchase list", "Overprice alerts"] :
+                        lang === "it" ? ["Comparativa prezzi", "Scoring distributori", "Lista acquisti", "Avvisi sovrapprezzo"] :
+                        ["Comparatif prix", "Scoring distributeurs", "Liste d'achats", "Alertes surcoût"]
+                      ).map(tag => (
+                        <span key={tag} className="px-2.5 py-1 rounded-md bg-emerald-500/8 border border-emerald-500/15 text-[11px] font-medium text-emerald-400/80">{tag}</span>
+                      ))}
+                    </div>
+                    <Link to="/producto/winerim-supply" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+                      {lang === "es" ? "Explorar Winerim Supply" : lang === "en" ? "Explore Winerim Supply" : lang === "it" ? "Esplora Winerim Supply" : "Explorer Winerim Supply"} <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
