@@ -653,7 +653,13 @@ const Funcionalidades = () => {
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{c.badge}</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6 max-w-4xl" dangerouslySetInnerHTML={{ __html: emToGradient(c.title) }} />
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">{c.subtitle}</motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-4">{c.subtitle}</motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75 }} className="text-sm md:text-base text-wine/70 font-medium max-w-2xl italic">
+            {lang === "es" ? "Winerim combina una capa analítica profunda, una capa de acción dinámica y una nueva capa de inteligencia de compras." :
+             lang === "en" ? "Winerim combines a deep analytics layer, a dynamic action layer, and a new purchasing intelligence layer." :
+             lang === "it" ? "Winerim combina un livello analitico profondo, un livello d'azione dinamica e un nuovo livello di intelligenza acquisti." :
+             "Winerim combine une couche analytique profonde, une couche d'action dynamique et une nouvelle couche d'intelligence achats."}
+          </motion.p>
         </div>
       </section>
 
