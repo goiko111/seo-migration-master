@@ -70,6 +70,7 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Dead Stock Calculator", desc: "Estimate tied-up capital in slow-moving wines. Winerim detects this automatically.", tag: "Management" },
+      { to: "/herramientas/calculadora-compra-inteligente", title: "Smart Purchase Calculator", desc: "Analyze if a wine reference is worth buying: profitability, overpricing, tied-up stock and improvement opportunity. Winerim Supply demo.", tag: "Supply" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "How to price wine in a restaurant" },
