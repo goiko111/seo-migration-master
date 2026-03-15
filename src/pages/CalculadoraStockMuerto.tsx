@@ -5,6 +5,7 @@ import {
   ArrowRight, RotateCcw, DollarSign, AlertTriangle, TrendingUp,
   Sparkles, CheckCircle, Layers, Wine, BarChart3, Plus, Trash2
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
