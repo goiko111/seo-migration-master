@@ -92,6 +92,7 @@ const Problemas = lazy(() => import("./pages/Problemas"));
 const Clientes = lazy(() => import("./pages/Clientes"));
 const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
+const WinerimCore = lazy(() => import("./pages/WinerimCore"));
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
@@ -212,6 +213,7 @@ const esRoutes = (
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
+    <Route path="/producto/winerim-core" element={<WinerimCore />} />
     <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     <Route path="/comparativas" element={<Comparativas />} />
