@@ -128,6 +128,7 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostic vin au verre", desc: "Évaluez si votre offre au verre est équilibrée en styles, prix et rentabilité.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditez votre carte avec un score de 0 à 100 sur la structure, l'équilibre, le pricing et le potentiel commercial.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculateur stock mort", desc: "Estimez le capital immobilisé dans les vins à faible rotation.", tag: "Gestion" },
+      { to: "/herramientas/calculadora-compra-inteligente", title: "Calculateur achat intelligent", desc: "Analysez si une référence vaut la peine : rentabilité, surcoût, stock immobilisé et opportunité d'amélioration. Démo de Winerim Supply.", tag: "Supply" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Comment fixer le prix du vin au restaurant" },
