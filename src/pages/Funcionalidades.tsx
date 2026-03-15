@@ -18,6 +18,7 @@ import SummaryBox from "@/components/seo/SummaryBox";
 import FAQSection from "@/components/seo/FAQSection";
 import CredibilitySection from "@/components/seo/CredibilitySection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Badge } from "@/components/ui/badge";
 
 // ─── Screenshots ───
 import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
