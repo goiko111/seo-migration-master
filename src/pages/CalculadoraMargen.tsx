@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calculator, Wine, TrendingUp, Info } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
