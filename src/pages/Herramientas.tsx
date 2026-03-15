@@ -41,6 +41,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto en ticket medio", desc: "Estima cuánto más facturarías en vino mejorando el ratio de mesas, el ticket por mesa y la estrategia de copa.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compara la carta de vinos de tus locales: surtido, pricing, copa y ticket medio. Detecta inconsistencias y oportunidades.", tag: "Grupos" },
+      { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analiza si una referencia merece seguir comprándose: rentabilidad, sobreprecio, stock inmovilizado y oportunidad de mejora. Demo de Winerim Supply.", tag: "Supply" },
     ],
     guides: [
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino en un restaurante" },

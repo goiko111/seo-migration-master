@@ -210,6 +210,7 @@ const esRoutes = (
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
     <Route path="/herramientas/calculadora-ticket-medio-vino" element={<CalculadoraTicketMedio />} />
     <Route path="/herramientas/auditor-carta-multilocal" element={<AuditorMultiLocal />} />
+    <Route path="/herramientas/calculadora-compra-inteligente" element={<CalculadoraCompraInteligente />} />
     <Route path="/soluciones" element={<Soluciones />} />
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
