@@ -49,7 +49,9 @@ const Navbar = memo(() => {
           items: [
             { label: t.nav_software, href: localePath("/software-carta-de-vinos"), description: lang === "es" ? "Carta digital inteligente" : "Smart digital wine list" },
             { label: t.nav_features, href: localePath("/funcionalidades") },
-            { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: newBadge },
+            { label: "Winerim Core", href: localePath("/producto/winerim-core"), badge: newBadge },
+            { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica") },
+            { label: "Winerim Supply", href: localePath("/producto/winerim-supply"), badge: newBadge },
             { label: t.nav_integrations, href: localePath("/integraciones") },
           ],
         },

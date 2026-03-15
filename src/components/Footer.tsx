@@ -87,7 +87,9 @@ const Footer = () => {
               items={[
                 { label: t.nav_software, href: localePath("/software-carta-de-vinos") },
                 { label: t.nav_features, href: localePath("/funcionalidades") },
+                { label: "Winerim Core", href: localePath("/producto/winerim-core") },
                 { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica") },
+                { label: "Winerim Supply", href: localePath("/producto/winerim-supply") },
                 { label: t.nav_integrations, href: localePath("/integraciones") },
                 { label: t.nav_pricing, href: localePath("/precios") },
                 { label: t.nav_case_studies, href: localePath("/casos-exito") },
