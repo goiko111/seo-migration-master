@@ -1233,6 +1233,7 @@ const InteligenciaDinamica = () => {
         </section>
       </main>
       <InternalLinks links={[
+        { to: "/producto/winerim-core", label: "Winerim Core: los 26 módulos analíticos", type: "solution" },
         { to: "/funcionalidades", label: "Todas las funcionalidades", type: "solution" },
         { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
         { to: "/integraciones", label: "Integraciones", type: "tool" },
