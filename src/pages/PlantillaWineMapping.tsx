@@ -167,11 +167,17 @@ const PlantillaWineMapping = () => {
                 <div className="text-center py-8">
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Plantilla lista!</h3>
-                  <p className="text-muted-foreground mb-6">Revisa tu email para acceder a la plantilla de wine mapping.</p>
-                  <Link to="/analisis-carta"
-                    className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                    Analizar mi carta <ArrowRight size={16} />
-                  </Link>
+                  <p className="text-muted-foreground mb-4">La descarga debería haber comenzado automáticamente.</p>
+                  <a href="/recursos/winerim_plantilla_wine_mapping_2026.xlsx" download
+                    className="inline-flex items-center gap-2 text-wine text-sm font-semibold hover:underline mb-6">
+                    <Download size={16} /> Descargar de nuevo
+                  </a>
+                  <div>
+                    <Link to="/analisis-carta"
+                      className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+                      Analizar mi carta <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

@@ -337,7 +337,7 @@ const PlantillaCartaVinos = () => {
               <Download size={32} className="text-wine mx-auto mb-4" />
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Descarga la plantilla gratuita</h2>
               <p className="text-muted-foreground">
-                Rellena el formulario y recibe la plantilla directamente en tu email.
+                Déjanos tus datos y descarga el recurso al instante.
               </p>
             </div>
           </ScrollReveal>
@@ -346,11 +346,17 @@ const PlantillaCartaVinos = () => {
             <ScrollReveal>
               <div className="text-center p-8 rounded-xl border border-wine/30 bg-wine/5">
                 <CheckCircle size={40} className="text-wine mx-auto mb-4" />
-                <h3 className="font-heading text-xl font-bold mb-2">¡Plantilla enviada!</h3>
-                <p className="text-muted-foreground mb-6">Revisa tu bandeja de entrada. Si no lo encuentras, mira en la carpeta de spam.</p>
-                <Link to="/analisis-carta" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                  Analizar mi carta de vinos <ArrowRight size={16} />
-                </Link>
+                <h3 className="font-heading text-xl font-bold mb-2">¡Plantilla lista!</h3>
+                <p className="text-muted-foreground mb-4">La descarga debería haber comenzado automáticamente.</p>
+                <a href="/recursos/winerim_plantilla_carta_vinos_2026.xlsx" download
+                  className="inline-flex items-center gap-2 text-wine text-sm font-semibold hover:underline mb-6">
+                  <Download size={16} /> Descargar de nuevo
+                </a>
+                <div>
+                  <Link to="/analisis-carta" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+                    Analizar mi carta de vinos <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
             </ScrollReveal>
           ) : (
