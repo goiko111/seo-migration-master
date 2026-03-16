@@ -100,6 +100,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "decidir-entre-similares",
       title: "Cómo decidir entre referencias similares",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado pares de referencias que compiten en la misma franja de tu carta: mismo tipo, precio similar.", whyMatters: "Mantener dos vinos redundantes canibaliza ventas, divide atención y duplica stock. Consolidar libera espacio y mejora condiciones de compra.", riskIfIgnored: "Ambas venden poco en vez de una vender bien. Pierdes margen, eficiencia y la oportunidad de cubrir un hueco real." },
       queSignifica:
         "Cuando tienes dos o más vinos que compiten en la misma franja (mismo tipo, precio similar, perfil parecido), necesitas un criterio claro para elegir cuál se queda y cuál se va. Ese criterio debe combinar tres variables: margen (cuál deja más), rotación (cuál se vende más) y rol en carta (cuál cumple mejor la función que necesitas cubrir).",
       porQueImporta:
