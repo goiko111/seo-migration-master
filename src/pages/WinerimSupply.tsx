@@ -391,10 +391,11 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core : 26 modules analytiques", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Intelligence Dynamique : IA tactique pour la carte", type: "solution" },
-      { to: "/funcionalidades", label: "Toutes les fonctionnalités de Winerim", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculatrice achat intelligent", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculatrice stock mort", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Solution pour groupes de restauration", type: "solution" },
-      { to: "/demo", label: "Demander une démo personnalisée", type: "resource" },
-      { to: "/precios", label: "Plans et tarifs", type: "resource" },
+      { to: "/precios", label: "Plans et tarifs", type: "solution" },
+      { to: "/demo", label: "Demander une démo personnalisée", type: "solution" },
     ],
   },
 };
