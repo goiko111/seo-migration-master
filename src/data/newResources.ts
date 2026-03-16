@@ -295,10 +295,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Forma a tu equipo con Winerim",
     ctaFinalDescription: "Winerim genera automáticamente fichas de vino, maridajes y guías de recomendación personalizadas para tu carta. Tu equipo siempre preparado.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/playbook-formar-personal", label: "Playbook: formar al personal para recomendar vino", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
-      { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: fichas y recomendaciones IA", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: formación basada en datos", type: "solution" },
+      { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
