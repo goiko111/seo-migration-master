@@ -1,7 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, Wine, TrendingUp, Info } from "lucide-react";
+import {
+  ArrowRight, Calculator, Wine, TrendingUp, Info,
+  BarChart3, ShieldAlert, Sparkles, Target, AlertTriangle, Check,
+} from "lucide-react";
 import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,23 +13,52 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 
-const multiplierPresets = [2, 2.5, 3, 3.5, 4];
+/* ─── Wine type presets ─── */
+const wineTypes = [
+  { id: "entry", label: "Entrada", sublabel: "< 8 €", defaultMult: 3.5, icon: "🍷" },
+  { id: "mid", label: "Gama media", sublabel: "8–20 €", defaultMult: 2.8, icon: "🍷" },
+  { id: "premium", label: "Premium", sublabel: "20–50 €", defaultMult: 2.2, icon: "🥂" },
+  { id: "icon", label: "Icónico", sublabel: "> 50 €", defaultMult: 1.8, icon: "🏆" },
+];
 
 const CalculadoraMargen = () => {
   const [costPrice, setCostPrice] = useState(12);
   const [glassesPerBottle, setGlassesPerBottle] = useState(5);
-  const [multiplier, setMultiplier] = useState(3);
+  const [multiplier, setMultiplier] = useState(2.8);
+  const [wineType, setWineType] = useState("mid");
+  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
+
+  /* When wine type changes, apply its default multiplier */
+  const handleWineType = (id: string) => {
+    setWineType(id);
+    const preset = wineTypes.find((w) => w.id === id);
+    if (preset) setMultiplier(preset.defaultMult);
+  };
 
   const results = useMemo(() => {
     const bottlePrice = costPrice * multiplier;
     const glassPrice = bottlePrice / glassesPerBottle;
     const grossMargin = bottlePrice - costPrice;
-    const marginPercent = costPrice > 0 ? ((grossMargin / bottlePrice) * 100) : 0;
+    const marginPercent = costPrice > 0 ? (grossMargin / bottlePrice) * 100 : 0;
     const costPerGlass = costPrice / glassesPerBottle;
     const breakEvenGlasses = glassPrice > 0 ? Math.ceil(costPrice / glassPrice) : 0;
 
-    return { bottlePrice, glassPrice, grossMargin, marginPercent, costPerGlass, breakEvenGlasses };
-  }, [costPrice, glassesPerBottle, multiplier]);
+    /* Comparison with current price */
+    let currentMargin: number | null = null;
+    let currentMarginPct: number | null = null;
+    let priceDiff: number | null = null;
+    if (currentPrice && currentPrice > 0) {
+      currentMargin = currentPrice - costPrice;
+      currentMarginPct = (currentMargin / currentPrice) * 100;
+      priceDiff = bottlePrice - currentPrice;
+    }
+
+    return {
+      bottlePrice, glassPrice, grossMargin, marginPercent,
+      costPerGlass, breakEvenGlasses,
+      currentMargin, currentMarginPct, priceDiff,
+    };
+  }, [costPrice, glassesPerBottle, multiplier, currentPrice]);
 
   useEffect(() => {
     const schema = document.createElement("script");
@@ -54,17 +86,14 @@ const CalculadoraMargen = () => {
       ],
     });
     document.head.appendChild(schema);
-
-    return () => {
-      document.getElementById("calc-jsonld")?.remove();
-    };
+    return () => { document.getElementById("calc-jsonld")?.remove(); };
   }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Calculadora de Margen del Vino para Restaurantes"
-        description="Calcula el precio de venta y el margen de cada botella y copa de vino en tu restaurante. Herramienta gratuita para optimizar el pricing de tu carta de vinos."
+        title="Calculadora de Margen del Vino para Restaurantes | Demo Winerim Core"
+        description="Calcula el precio de venta y el margen de cada botella y copa de vino en tu restaurante. Demo del motor de pricing de Winerim Core."
         url="https://winerim.wine/calculadora-margen-vino"
       />
       <Navbar />
@@ -79,10 +108,10 @@ const CalculadoraMargen = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/5 mb-6"
           >
-            <Calculator size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Herramienta gratuita</span>
+            <BarChart3 size={14} className="text-amber-500" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-amber-500">Demo · Winerim Core</span>
           </motion.div>
 
           <motion.h1
@@ -104,6 +133,28 @@ const CalculadoraMargen = () => {
             Descubre cuánto deberías cobrar por cada botella y copa para mantener un margen rentable.
           </motion.p>
         </div>
+      </section>
+
+      {/* ── DEMO INTRO BLOCK ── */}
+      <section className="max-w-5xl mx-auto px-6 md:px-12 pb-4">
+        <ScrollReveal>
+          <div className="relative bg-gradient-card rounded-2xl border border-amber-500/20 p-6 md:p-8 overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,hsl(38_90%_55%/0.05),transparent_60%)]" />
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                <Sparkles size={18} className="text-amber-500" />
+              </div>
+              <div>
+                <h2 className="font-heading text-base font-bold text-foreground mb-1">
+                  Demo del motor de pricing y rentabilidad de Winerim Core
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Esta herramienta muestra una versión simplificada de cómo Winerim ayuda a definir precios con más criterio según coste, tipo de vino, margen objetivo y contexto del restaurante.
+                </p>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       <ToolStrategicBlock
@@ -142,6 +193,33 @@ const CalculadoraMargen = () => {
               </h2>
 
               <div className="space-y-6">
+                {/* Wine type selector */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Tipo de vino</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {wineTypes.map((w) => (
+                      <button
+                        key={w.id}
+                        onClick={() => handleWineType(w.id)}
+                        className={`flex items-center gap-2 px-3 py-3 rounded-lg border text-left text-sm font-semibold transition-all ${
+                          wineType === w.id
+                            ? "bg-wine/20 border-wine/50 text-wine"
+                            : "bg-secondary/50 border-border hover:border-wine/30"
+                        }`}
+                      >
+                        <span className="text-base">{w.icon}</span>
+                        <div>
+                          <span className="block text-xs leading-tight">{w.label}</span>
+                          <span className="block text-[10px] text-muted-foreground font-normal">{w.sublabel}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-muted-foreground mt-1.5">
+                    Multiplicador sugerido: ×{wineTypes.find((w) => w.id === wineType)?.defaultMult}
+                  </p>
+                </div>
+
                 {/* Cost price */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Precio de compra (€)</label>
@@ -171,6 +249,28 @@ const CalculadoraMargen = () => {
                   </div>
                 </div>
 
+                {/* Current price (optional) */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">
+                    Precio actual en carta (€) <span className="text-muted-foreground font-normal text-xs">— opcional</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      min={0}
+                      step={0.5}
+                      value={currentPrice ?? ""}
+                      placeholder="Deja vacío si no aplica"
+                      onChange={(e) => {
+                        const v = parseFloat(e.target.value);
+                        setCurrrentPrice(isNaN(v) || v === 0 ? null : v);
+                      }}
+                      className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-wine/50 focus:border-wine/50 transition-all placeholder:text-muted-foreground/40 placeholder:text-sm placeholder:font-normal"
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">€</span>
+                  </div>
+                </div>
+
                 {/* Glasses per bottle */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Copas por botella</label>
@@ -194,21 +294,6 @@ const CalculadoraMargen = () => {
                 {/* Multiplier */}
                 <div>
                   <label className="text-sm font-medium mb-2 block">Multiplicador (×)</label>
-                  <div className="flex gap-2 flex-wrap">
-                    {multiplierPresets.map((m) => (
-                      <button
-                        key={m}
-                        onClick={() => setMultiplier(m)}
-                        className={`px-4 py-3 rounded-lg border text-sm font-semibold transition-all ${
-                          multiplier === m
-                            ? "bg-wine/20 border-wine/50 text-wine"
-                            : "bg-secondary/50 border-border hover:border-wine/30"
-                        }`}
-                      >
-                        ×{m}
-                      </button>
-                    ))}
-                  </div>
                   <input
                     type="range"
                     min={1.5}
@@ -216,11 +301,11 @@ const CalculadoraMargen = () => {
                     step={0.1}
                     value={multiplier}
                     onChange={(e) => setMultiplier(parseFloat(e.target.value))}
-                    className="w-full mt-3 accent-[hsl(var(--wine))]"
+                    className="w-full accent-[hsl(var(--wine))]"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>×1.5</span>
-                    <span>×{multiplier.toFixed(1)}</span>
+                    <span className="font-semibold text-wine">×{multiplier.toFixed(1)}</span>
                     <span>×5</span>
                   </div>
                 </div>
@@ -241,12 +326,12 @@ const CalculadoraMargen = () => {
 
               <div className="space-y-4">
                 <ResultCard
-                  label="Precio recomendado por botella"
+                  label="PVP recomendado por botella"
                   value={`${results.bottlePrice.toFixed(2)} €`}
                   highlight
                 />
                 <ResultCard
-                  label="Precio recomendado por copa"
+                  label="PVP recomendado por copa"
                   value={`${results.glassPrice.toFixed(2)} €`}
                   highlight
                 />
@@ -264,6 +349,38 @@ const CalculadoraMargen = () => {
                   value={`${results.breakEvenGlasses} copas`}
                   sub={`De ${glassesPerBottle} copas totales`}
                 />
+
+                {/* Comparison with current price */}
+                {results.priceDiff !== null && currentPrice && (
+                  <div className={`rounded-xl border p-4 ${
+                    results.priceDiff > 0
+                      ? "bg-emerald-500/5 border-emerald-500/20"
+                      : results.priceDiff < 0
+                      ? "bg-amber-500/5 border-amber-500/20"
+                      : "bg-secondary/50 border-border"
+                  }`}>
+                    <p className="text-xs text-muted-foreground mb-1">Comparativa con tu precio actual</p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium">
+                          Tu precio: <span className="font-bold">{currentPrice.toFixed(2)} €</span>
+                          <span className="text-muted-foreground mx-1.5">→</span>
+                          Recomendado: <span className="font-bold text-wine">{results.bottlePrice.toFixed(2)} €</span>
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Tu margen actual: {results.currentMargin?.toFixed(2)} € ({results.currentMarginPct?.toFixed(0)}%)
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className={`font-heading text-lg font-bold ${
+                          results.priceDiff! > 0 ? "text-emerald-500" : results.priceDiff! < 0 ? "text-amber-500" : "text-foreground"
+                        }`}>
+                          {results.priceDiff! > 0 ? "+" : ""}{results.priceDiff!.toFixed(2)} €
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="mt-6 bg-wine/5 border border-wine/20 rounded-xl p-4">
@@ -342,7 +459,7 @@ const CalculadoraMargen = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── WINERIM CORE CTA ── */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -350,33 +467,34 @@ const CalculadoraMargen = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 md:p-16 overflow-hidden"
+            className="relative bg-gradient-card rounded-3xl border border-amber-500/20 p-8 sm:p-12 md:p-16 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(38_90%_55%/0.06),transparent_70%)]" />
             <div className="relative z-10">
-              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-6">
-                Análisis gratuito
-              </p>
-              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                ¿Tu carta está bien{" "}
-                <span className="text-gradient-wine italic">optimizada</span>?
+              <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-amber-500/70 mb-4">
+                <span className="w-1 h-1 rounded-full bg-amber-500/50" />
+                Winerim Core
+              </span>
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-5 leading-tight">
+                Esta calculadora es solo el{" "}
+                <span className="text-gradient-wine italic">principio</span>
               </h2>
-              <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-sm sm:text-base">
-                Envíanos tu carta de vinos y te mostramos cómo mejorar precios, estructura y rotación. Sin compromiso.
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+                Winerim Core analiza el pricing, los márgenes, la rotación y la arquitectura completa de tu carta — con 26 módulos especializados que trabajan con tus datos reales, no con fórmulas genéricas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/analisis-carta"
+                  to="/producto/winerim-core"
                   className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5"
                 >
-                  Analizar mi carta de vinos gratis
+                  Ver cómo lo resuelve Winerim Core
                   <ArrowRight size={16} />
                 </Link>
                 <Link
-                  to="/contacto"
-                  className="px-8 sm:px-10 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all hover:-translate-y-0.5"
+                  to="/analisis-carta"
+                  className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 hover:bg-wine/5 transition-all"
                 >
-                  Contactar
+                  Analizar mi carta gratis
                 </Link>
               </div>
             </div>
