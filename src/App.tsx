@@ -59,10 +59,6 @@ const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
-const PlantillaCartaVinos = lazy(() => import("./pages/PlantillaCartaVinos"));
-const ChecklistCartaRentable = lazy(() => import("./pages/ChecklistCartaRentable"));
-const GuiaVinoPorCopa = lazy(() => import("./pages/GuiaVinoPorCopa"));
-const PlantillaWineMapping = lazy(() => import("./pages/PlantillaWineMapping"));
 const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
 const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
@@ -173,19 +169,7 @@ const esRoutes = (
     <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
     <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
     <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
-    <Route path="/recursos/plantilla-carta-de-vinos" element={<PlantillaCartaVinos />} />
-    <Route path="/recursos/checklist-carta-de-vinos-rentable" element={<ChecklistCartaRentable />} />
-    <Route path="/recursos/guia-vino-por-copa-para-restaurantes" element={<GuiaVinoPorCopa />} />
-    <Route path="/recursos/plantilla-wine-mapping-restaurante" element={<PlantillaWineMapping />} />
-    <Route path="/recursos/plantilla-estrategia-vinos-por-copa" element={<ResourcePage />} />
-    <Route path="/recursos/checklist-deteccion-vinos-muertos" element={<ResourcePage />} />
-    <Route path="/recursos/plantilla-formacion-equipo-sala" element={<ResourcePage />} />
-    <Route path="/recursos/plantilla-analisis-margenes" element={<ResourcePage />} />
-    <Route path="/recursos/scorecard-rendimiento-carta" element={<ResourcePage />} />
-    <Route path="/recursos/checklist-carta-que-vende" element={<ResourcePage />} />
-    <Route path="/recursos/plantilla-equilibrio-carta" element={<ResourcePage />} />
-    <Route path="/recursos/plantilla-revision-mensual-carta" element={<ResourcePage />} />
-    <Route path="/recursos/plantilla-control-grupo-restauracion" element={<ResourcePage />} />
+    <Route path="/recursos/:slug" element={<ResourcePage />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
     <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
