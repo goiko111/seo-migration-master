@@ -32,7 +32,7 @@ const it: TranslationDict = {
   nav_sol_hotels: "Hotel e resort",
   nav_sol_groups: "Gruppi di ristorazione",
   nav_sol_no_sommelier: "Senza sommelier",
-  nav_sol_large_list: "Carta ampia (+100 rif.)",
+  nav_sol_large_list: "Carta ampia (+250 rif.)",
 
   nav_resources: "Risorse",
   nav_resources_learn: "Impara",

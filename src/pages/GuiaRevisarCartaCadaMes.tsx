@@ -115,7 +115,7 @@ const data: GuidePageData = {
   faqs: [
     { q: "¿Qué pasa si no tengo datos de ventas por referencia?", a: "Empieza con un registro manual: marca en una libreta qué botellas se abren cada día. En un mes tendrás datos suficientes para tu primera revisión seria." },
     { q: "¿Quién debe liderar la revisión?", a: "Idealmente, la persona que gestiona la carta (sumiller, jefe de sala). Si no hay nadie, el propietario o director con los datos que proporciona Winerim." },
-    { q: "¿Y si mi carta es pequeña (15-20 referencias)?", a: "Mejor. La revisión será más rápida (45 min) y cada decisión tiene más impacto. Una carta pequeña bien gestionada supera a una carta grande descuidada." },
+    { q: "¿Y si mi carta es pequeña (15-20 referencias)?", a: "Mejor. La revisión será más rápida (45 min) y cada decisión tiene más impacto. Una carta pequeña bien gestionada supera a una carta amplia y compleja descuidada." },
     { q: "¿Winerim automatiza esta revisión?", a: "Sí. Winerim genera un informe mensual con los 5 bloques prepoblados: rendimiento, alertas de pricing, candidatos a rotación, fichas para el equipo y seguimiento de objetivos." },
   ],
   relatedTools: [
