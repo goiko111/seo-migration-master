@@ -854,25 +854,51 @@ const Precios = () => {
             {c.plans.map((plan, i) => {
               const Icon = planIcons[i];
               const highlight = plan.popular;
+              const isLegacy = i === 0;
+              const isEnterprise = i === 2;
               return (
                 <ScrollReveal key={i} delay={i * 0.08}>
-                  <div className={`relative rounded-2xl border p-7 md:p-8 h-full flex flex-col ${highlight ? "border-wine bg-wine/[0.03] shadow-lg shadow-wine/5" : "border-border bg-gradient-card"}`}>
+                  <div className={`relative rounded-2xl border p-7 md:p-8 h-full flex flex-col ${
+                    highlight
+                      ? "border-wine bg-wine/[0.03] shadow-lg shadow-wine/5 lg:scale-[1.03] lg:-my-2"
+                      : isEnterprise
+                      ? "border-emerald-500/30 bg-gradient-card"
+                      : "border-border/60 bg-gradient-card opacity-90"
+                  }`}>
+                    {/* Top badge */}
                     {highlight && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <span className="px-4 py-1 rounded-full bg-gradient-wine text-primary-foreground text-xs font-semibold tracking-wider uppercase">
-                          {lang === "es" ? "Más popular" : lang === "it" ? "Più popolare" : lang === "fr" ? "Le plus populaire" : "Most popular"}
+                        <span className="px-4 py-1 rounded-full bg-gradient-wine text-primary-foreground text-xs font-semibold tracking-wider uppercase whitespace-nowrap">
+                          {lang === "es" ? "Plan comercial" : lang === "it" ? "Piano commerciale" : lang === "fr" ? "Plan commercial" : "Commercial plan"}
                         </span>
                       </div>
                     )}
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${highlight ? "bg-wine/15" : "bg-wine/10"}`}>
-                        <Icon size={20} className="text-wine" />
+                    {isEnterprise && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wider uppercase whitespace-nowrap">
+                          Intelligence Suite
+                        </span>
                       </div>
-                      <h3 className="font-heading text-xl font-bold">{plan.name}</h3>
+                    )}
+
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                        highlight ? "bg-wine/15" : isEnterprise ? "bg-emerald-500/10" : "bg-muted/50"
+                      }`}>
+                        <Icon size={20} className={highlight ? "text-wine" : isEnterprise ? "text-emerald-500" : "text-muted-foreground"} />
+                      </div>
+                      <div>
+                        <h3 className="font-heading text-xl font-bold">{plan.name}</h3>
+                        {isLegacy && (
+                          <span className="text-[10px] tracking-widest uppercase text-muted-foreground/60 font-medium">
+                            {plan.badge}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-sm font-medium text-foreground/80 mb-1">{plan.tagline}</p>
+                    <p className={`text-sm font-medium mb-1 ${highlight ? "text-foreground/90" : "text-foreground/70"}`}>{plan.tagline}</p>
                     <p className="text-xs text-muted-foreground italic mb-1">{plan.solves}</p>
-                    <p className="text-xs text-wine/80 font-medium mb-3">{plan.fits}</p>
+                    <p className={`text-xs font-medium mb-3 ${highlight ? "text-wine/80" : isEnterprise ? "text-emerald-500/80" : "text-muted-foreground/70"}`}>{plan.fits}</p>
 
                     {/* Positioning line + layer badge */}
                     {(() => {
@@ -890,7 +916,7 @@ const Precios = () => {
                     <ul className="space-y-2 mb-4 flex-1">
                       {plan.features.map((f, fi) => (
                         <li key={fi} className="flex items-start gap-2 text-sm">
-                          <Check size={14} className="text-wine shrink-0 mt-0.5" />
+                          <Check size={14} className={`shrink-0 mt-0.5 ${highlight ? "text-wine" : isEnterprise ? "text-emerald-500" : "text-muted-foreground"}`} />
                           <span className="text-muted-foreground">{f}</span>
                         </li>
                       ))}
@@ -914,7 +940,13 @@ const Precios = () => {
 
                     <Link
                       to={i === 2 ? localePath("/contacto") : localePath("/demo")}
-                      className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all ${highlight ? "bg-gradient-wine text-primary-foreground hover:opacity-90" : "border border-border hover:border-wine/50 hover:bg-wine/5"}`}
+                      className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all ${
+                        highlight
+                          ? "bg-gradient-wine text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-wine/20"
+                          : isEnterprise
+                          ? "border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/5 hover:border-emerald-500/50"
+                          : "border border-border hover:border-wine/30 hover:bg-wine/5"
+                      }`}
                     >
                       {i === 2
                         ? (lang === "es" ? "Contactar" : lang === "it" ? "Contattaci" : lang === "fr" ? "Nous contacter" : "Contact us")
