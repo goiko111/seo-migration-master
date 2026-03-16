@@ -38,6 +38,13 @@ export interface AreaNextStep {
   description: string;
 }
 
+export interface AreaMiniCase {
+  profile: string;
+  situation: string;
+  action: string;
+  result: string;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -46,6 +53,7 @@ export interface DeepAreaContent {
   accent: string;
   bg: string;
   topErrors?: AreaTopError[];
+  miniCases?: AreaMiniCase[];
   subtopics: SubTopic[];
   links: AreaLink[];
   nextStep: AreaNextStep;
