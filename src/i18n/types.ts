@@ -156,6 +156,10 @@ export interface TranslationDict {
   nav_res_checklist: string;
   nav_res_scorecard: string;
   nav_res_wine_mapping: string;
+  nav_res_estrategia_copa: string;
+  nav_res_vinos_muertos: string;
+  nav_res_formacion_sala: string;
+  nav_see_all_resources: string;
   nav_benchmarks: string;
 
   // Nav sections

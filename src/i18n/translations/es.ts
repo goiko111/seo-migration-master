@@ -42,6 +42,10 @@ const es: TranslationDict = {
   nav_res_checklist: "Checklist carta rentable",
   nav_res_scorecard: "Scorecard mensual",
   nav_res_wine_mapping: "Plantilla wine mapping",
+  nav_res_estrategia_copa: "Estrategia vino por copa",
+  nav_res_vinos_muertos: "Detección vinos muertos",
+  nav_res_formacion_sala: "Formación exprés sala",
+  nav_see_all_resources: "Todos los recursos →",
   nav_benchmarks: "Benchmarks & Playbooks",
 
   nav_platform: "Plataforma",
