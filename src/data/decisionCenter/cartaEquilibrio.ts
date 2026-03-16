@@ -16,12 +16,12 @@ const cartaEquilibrioContent: DeepAreaContent = {
     { error: "No mapear la carta antes de tomar decisiones", porQueOcurre: "Porque se trabaja con la lista de referencias sin visualizar la estructura. Las decisiones se toman una a una, sin ver el conjunto.", consecuencia: "Añades donde ya estás saturado y dejas huecos donde hay demanda. Es como reformar una casa sin mirar el plano." },
   ],
   links: [
-    { label: "Plantilla wine mapping", href: "/recursos/plantilla-wine-mapping-restaurante", description: "Mapea tu carta por tipo, precio, origen y rol comercial" },
-    { label: "Plantilla equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta", description: "Diagnostica saturaciones, huecos y canibalización por franja" },
-    { label: "Checklist carta rentable", href: "/recursos/checklist-carta-rentable", description: "Comprueba si tu carta cumple los criterios de una carta que vende" },
-    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que evalúa el equilibrio de tu carta automáticamente" },
-    { label: "Blog: ¿Tu carta está descompensada?", href: "/article/como-saber-si-carta-vinos-esta-descompensada", description: "Diagnóstico rápido para detectar desequilibrios en tu carta" },
-    { label: "Blog: ¿Tu carta es demasiado larga?", href: "/article/cuando-carta-vinos-es-demasiado-larga", description: "Señales de exceso de referencias y cómo actuar" },
+    { label: "Plantilla wine mapping", href: "/recursos/plantilla-wine-mapping-restaurante", description: "Mapea tu carta por tipo, precio, origen y rol comercial", type: "resource" as const },
+    { label: "Plantilla equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta", description: "Diagnostica saturaciones, huecos y canibalización por franja", type: "resource" as const },
+    { label: "Checklist carta rentable", href: "/recursos/checklist-carta-rentable", description: "Comprueba si tu carta cumple los criterios de una carta que vende", type: "resource" as const },
+    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que evalúa el equilibrio de tu carta automáticamente", type: "product" as const },
+    { label: "Blog: ¿Tu carta está descompensada?", href: "/article/como-saber-si-carta-vinos-esta-descompensada", description: "Diagnóstico rápido para detectar desequilibrios en tu carta", type: "article" as const },
+    { label: "Blog: ¿Tu carta es demasiado larga?", href: "/article/cuando-carta-vinos-es-demasiado-larga", description: "Señales de exceso de referencias y cómo actuar", type: "article" as const },
   ],
   subtopics: [
     {

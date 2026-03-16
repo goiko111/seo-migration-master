@@ -23,6 +23,15 @@ export interface AreaTopError {
   consecuencia: string;
 }
 
+export type LinkType = "tool" | "resource" | "product" | "article" | "guide" | "solution";
+
+export interface AreaLink {
+  label: string;
+  href: string;
+  description: string;
+  type?: LinkType;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -32,7 +41,7 @@ export interface DeepAreaContent {
   bg: string;
   topErrors?: AreaTopError[];
   subtopics: SubTopic[];
-  links: { label: string; href: string; description: string }[];
+  links: AreaLink[];
 }
 
 const margenesPricingContent: DeepAreaContent = {
@@ -50,12 +59,12 @@ const margenesPricingContent: DeepAreaContent = {
     { error: "Mantener un vino con buen margen pero sin ventas", porQueOcurre: "Porque el dato de margen parece positivo y da tranquilidad. Pero un vino que no se vende no genera ningún margen real.", consecuencia: "Capital inmovilizado que ocupa espacio en bodega y en carta sin generar retorno. El margen potencial nunca se materializa." },
   ],
   links: [
-    { label: "Calculadora de márgenes", href: "/calculadora-margen-vino", description: "Calcula el margen real de cualquier referencia en segundos" },
-    { label: "Plantilla: Revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes", description: "Proceso mensual para detectar desviaciones y oportunidades" },
-    { label: "Recurso: Análisis de márgenes", href: "/recursos/scorecard-mensual", description: "Scorecard para monitorizar la salud de tu pricing" },
-    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que automatiza todo esto por ti" },
-    { label: "Blog: 7 errores al fijar precios", href: "/article/errores-fijar-precios-vino-restaurante", description: "Los errores de pricing más frecuentes y cómo evitarlos" },
-    { label: "Blog: Palancas para mejorar margen", href: "/article/palancas-mejorar-margen-vino-sin-rehacer-carta", description: "Cómo mejorar el margen sin rehacer la carta de vinos" },
+    { label: "Calculadora de márgenes", href: "/calculadora-margen-vino", description: "Calcula el margen real de cualquier referencia en segundos", type: "tool" },
+    { label: "Plantilla: Revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes", description: "Proceso mensual para detectar desviaciones y oportunidades", type: "resource" },
+    { label: "Recurso: Análisis de márgenes", href: "/recursos/scorecard-mensual", description: "Scorecard para monitorizar la salud de tu pricing", type: "resource" },
+    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que automatiza todo esto por ti", type: "product" },
+    { label: "Blog: 7 errores al fijar precios", href: "/article/errores-fijar-precios-vino-restaurante", description: "Los errores de pricing más frecuentes y cómo evitarlos", type: "article" },
+    { label: "Blog: Palancas para mejorar margen", href: "/article/palancas-mejorar-margen-vino-sin-rehacer-carta", description: "Cómo mejorar el margen sin rehacer la carta de vinos", type: "article" },
     { label: "Blog: Métricas F&B de vino", href: "/article/metricas-fb-vino-restaurante", description: "Las métricas que todo F&B debería monitorizar" },
   ],
   subtopics: [

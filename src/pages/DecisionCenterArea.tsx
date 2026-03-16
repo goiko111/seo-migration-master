@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
   ArrowLeft, Lock, Shield, Info, Target, Lightbulb, AlertTriangle,
-  FileText, Clock, ChevronDown
+  FileText, Clock, ChevronDown, Calculator, Download, BookOpen, ArrowRight, Zap
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError } from "@/data/decisionCenter/margenesPricing";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError, type LinkType } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
@@ -41,6 +41,15 @@ const priorityConfig: Record<Priority, { label: string; color: string; bg: strin
   "esta semana":  { label: "Esta semana",  color: "text-amber-400",           bg: "bg-amber-500/10",  icon: "●" },
   "este mes":     { label: "Este mes",     color: "text-blue-400",            bg: "bg-blue-500/10",   icon: "●" },
   "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
+};
+
+const linkTypeConfig: Record<LinkType, { label: string; icon: typeof FileText; color: string; bg: string }> = {
+  tool:     { label: "Herramienta", icon: Calculator,  color: "text-wine",              bg: "bg-wine/10" },
+  resource: { label: "Recurso",     icon: Download,    color: "text-emerald-500",        bg: "bg-emerald-500/10" },
+  product:  { label: "Producto",    icon: Zap,         color: "text-amber-500",          bg: "bg-amber-500/10" },
+  article:  { label: "Artículo",    icon: FileText,    color: "text-violet-500",         bg: "bg-violet-500/10" },
+  guide:    { label: "Guía",        icon: BookOpen,    color: "text-blue-400",           bg: "bg-blue-500/10" },
+  solution: { label: "Solución",    icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
 };
 
 interface SimpleAreaContent {
@@ -359,26 +368,45 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
           </div>
         </section>
 
-        {/* Related resources */}
+        {/* Related resources — Aprender más */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
           <ScrollReveal>
             <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-5">
+              <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
                   <FileText size={18} className="text-blue-400" />
                 </div>
-                <h2 className="font-heading text-lg font-bold text-foreground">Recursos y herramientas</h2>
+                <div>
+                  <h2 className="font-heading text-lg font-bold text-foreground">Aprender más</h2>
+                  <p className="text-xs text-muted-foreground mt-0.5">Recursos, herramientas y contenido para profundizar</p>
+                </div>
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {content.links.map((link) => (
-                  <Link key={link.href} to={link.href}
-                    className="flex flex-col gap-1 rounded-lg border border-border p-4 hover:border-wine/30 hover:bg-wine/5 transition-all group">
-                    <p className="text-sm font-semibold text-foreground group-hover:text-wine transition-colors">
-                      {link.label}
-                    </p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{link.description}</p>
-                  </Link>
-                ))}
+              <div className="grid sm:grid-cols-2 gap-3 mt-5">
+                {content.links.map((link) => {
+                  const linkType = (link as any).type as LinkType | undefined;
+                  const typeCfg = linkType ? linkTypeConfig[linkType] : null;
+                  const TypeIcon = typeCfg?.icon || FileText;
+                  return (
+                    <Link key={link.href} to={link.href}
+                      className="flex items-start gap-3 rounded-lg border border-border p-4 hover:border-wine/30 hover:bg-wine/5 transition-all group">
+                      <div className={`w-9 h-9 rounded-lg ${typeCfg?.bg || "bg-muted/50"} flex items-center justify-center shrink-0 mt-0.5`}>
+                        <TypeIcon size={15} className={typeCfg?.color || "text-muted-foreground"} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        {typeCfg && (
+                          <span className={`text-[10px] font-semibold tracking-widest uppercase ${typeCfg.color}`}>
+                            {typeCfg.label}
+                          </span>
+                        )}
+                        <p className="text-sm font-semibold text-foreground group-hover:text-wine transition-colors">
+                          {link.label}
+                        </p>
+                        <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{link.description}</p>
+                      </div>
+                      <ArrowRight size={14} className="text-muted-foreground/30 group-hover:text-wine transition-colors shrink-0 mt-1" />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </ScrollReveal>
