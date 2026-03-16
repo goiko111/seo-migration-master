@@ -1,45 +1,29 @@
 /* ═══════════════════════════════════════════════════════════
-   CTA STRATEGY — Funnel-aware CTA system
-   ═══════════════════════════════════════════════════════════
-   
-   BOFU — Pricing, Comparativas, Soluciones, Verticales, Casos
-     → Primary: Demo personalizada / Propuesta
-     → Secondary: Ver planes / Analizar carta
-   
-   MOFU — Guías, Blog, Recursos, Herramientas, Biblioteca
-     → Primary: Análisis gratuito / Herramienta
-     → Secondary: Demo suave / Ver funcionalidades
-   
-   TOFU — Home, About, Funcionalidades, Qué es Winerim
-     → Primary: Ver cómo funciona / Demo
-     → Secondary: Explorar funcionalidades / Herramientas
+   CTA STRATEGY — Funnel-aware CTA system (i18n)
    ═══════════════════════════════════════════════════════════ */
+
+import { SupportedLang } from "@/i18n/types";
 
 export type FunnelStage = "tofu" | "mofu" | "bofu";
 
 export interface CTAConfig {
   text: string;
   url: string;
-  /** Optional subtitle shown below the button */
   micro?: string;
 }
 
 export interface CTASet {
   primary: CTAConfig;
   secondary: CTAConfig;
-  /** Badge / tagline above the CTA block */
   badge: string;
-  /** Mid-content CTA copy */
   midTitle: string;
   midDesc: string;
-  /** Final section CTA copy */
   finalTitle: string;
   finalDesc: string;
-  /** Sticky bar CTA copy */
   stickyText: string;
 }
 
-/* ─── Individual CTAs (backwards compatible) ─── */
+/* ─── Individual CTAs (backwards compat — ES default) ─── */
 export const CTA_DEMO = { text: "Solicitar demo", url: "/demo" };
 export const CTA_ANALYZE = { text: "Analizar mi carta gratis", url: "/analisis-carta" };
 export const CTA_CALCULATOR = { text: "Calcular mi margen", url: "/calculadora-margen-vino" };
@@ -48,39 +32,143 @@ export const CTA_CONTACT = { text: "Hablar con el equipo", url: "/contacto" };
 export const CTA_PRICING = { text: "Ver planes y precios", url: "/precios" };
 export const CTA_HOW_IT_WORKS = { text: "Cómo funciona Winerim", url: "/funcionalidades" };
 
-/* ─── Funnel-stage CTA sets ─── */
-export const CTA_SETS: Record<FunnelStage, CTASet> = {
-  tofu: {
-    primary: { text: "Ver Winerim en acción", url: "/demo", micro: "Demo personalizada de 15 min. Sin compromiso." },
-    secondary: { text: "Explorar funcionalidades", url: "/funcionalidades" },
-    badge: "Descubre Winerim",
-    midTitle: "¿Quieres ver cómo funciona en tu tipo de negocio?",
-    midDesc: "Te mostramos Winerim aplicado a restaurantes como el tuyo. 15 minutos, sin compromiso.",
-    finalTitle: "Descubre qué puede hacer Winerim por tu carta",
-    finalDesc: "Demo personalizada de 15 min. Te mostramos el impacto en tu tipo de negocio.",
-    stickyText: "Ver cómo funciona →",
+/* ─── Funnel-stage CTA sets per language ─── */
+const CTA_SETS_I18N: Record<SupportedLang, Record<FunnelStage, CTASet>> = {
+  es: {
+    tofu: {
+      primary: { text: "Ver Winerim en acción", url: "/demo", micro: "Demo personalizada de 15 min. Sin compromiso." },
+      secondary: { text: "Explorar funcionalidades", url: "/funcionalidades" },
+      badge: "Descubre Winerim",
+      midTitle: "¿Quieres ver cómo funciona en tu tipo de negocio?",
+      midDesc: "Te mostramos Winerim aplicado a restaurantes como el tuyo. 15 minutos, sin compromiso.",
+      finalTitle: "Descubre qué puede hacer Winerim por tu carta",
+      finalDesc: "Demo personalizada de 15 min. Te mostramos el impacto en tu tipo de negocio.",
+      stickyText: "Ver cómo funciona →",
+    },
+    mofu: {
+      primary: { text: "Analizar mi carta gratis", url: "/analisis-carta", micro: "Diagnóstico con oportunidades reales de mejora. Sin coste." },
+      secondary: { text: "Solicitar demo", url: "/demo" },
+      badge: "¿Tu carta rinde lo que debería?",
+      midTitle: "¿Tu carta de vinos rinde lo que debería?",
+      midDesc: "Analizamos tu carta y te mostramos oportunidades concretas de mejora en margen, rotación y ticket medio.",
+      finalTitle: "Análisis gratuito de tu carta de vinos",
+      finalDesc: "Envía tu carta y te devolvemos un diagnóstico con datos reales y propuestas de acción.",
+      stickyText: "Analizar mi carta gratis →",
+    },
+    bofu: {
+      primary: { text: "Solicitar demo personalizada", url: "/demo", micro: "Te mostramos Winerim aplicado a tu caso concreto." },
+      secondary: { text: "Ver planes y precios", url: "/precios" },
+      badge: "Da el siguiente paso",
+      midTitle: "¿Listo para optimizar tu carta de vinos?",
+      midDesc: "Solicita una demo y te mostramos cómo Winerim se adapta a tu operativa.",
+      finalTitle: "Tu carta de vinos puede rendir más",
+      finalDesc: "Demo personalizada en 15 min. Te mostramos cómo se integra con tu día a día.",
+      stickyText: "Solicitar demo →",
+    },
   },
-  mofu: {
-    primary: { text: "Analizar mi carta gratis", url: "/analisis-carta", micro: "Diagnóstico con oportunidades reales de mejora. Sin coste." },
-    secondary: { text: "Solicitar demo", url: "/demo" },
-    badge: "¿Tu carta rinde lo que debería?",
-    midTitle: "¿Tu carta de vinos rinde lo que debería?",
-    midDesc: "Analizamos tu carta y te mostramos oportunidades concretas de mejora en margen, rotación y ticket medio.",
-    finalTitle: "Análisis gratuito de tu carta de vinos",
-    finalDesc: "Envía tu carta y te devolvemos un diagnóstico con datos reales y propuestas de acción.",
-    stickyText: "Analizar mi carta gratis →",
+  en: {
+    tofu: {
+      primary: { text: "See Winerim in action", url: "/demo", micro: "15-min personalised demo. No commitment." },
+      secondary: { text: "Explore features", url: "/funcionalidades" },
+      badge: "Discover Winerim",
+      midTitle: "Want to see how it works for your type of business?",
+      midDesc: "We'll show you Winerim applied to restaurants like yours. 15 minutes, no commitment.",
+      finalTitle: "Discover what Winerim can do for your wine list",
+      finalDesc: "15-min personalised demo. We'll show you the impact for your type of business.",
+      stickyText: "See how it works →",
+    },
+    mofu: {
+      primary: { text: "Analyse my list for free", url: "/analisis-carta", micro: "Diagnosis with real improvement opportunities. No cost." },
+      secondary: { text: "Request demo", url: "/demo" },
+      badge: "Is your wine list delivering?",
+      midTitle: "Is your wine list performing as it should?",
+      midDesc: "We'll analyse your list and show you concrete improvement opportunities in margin, rotation and average ticket.",
+      finalTitle: "Free wine list analysis",
+      finalDesc: "Send your list and we'll return a diagnosis with real data and action proposals.",
+      stickyText: "Analyse my list for free →",
+    },
+    bofu: {
+      primary: { text: "Request personalised demo", url: "/demo", micro: "We'll show you Winerim applied to your specific case." },
+      secondary: { text: "See plans and pricing", url: "/precios" },
+      badge: "Take the next step",
+      midTitle: "Ready to optimise your wine list?",
+      midDesc: "Request a demo and we'll show you how Winerim adapts to your operations.",
+      finalTitle: "Your wine list can perform better",
+      finalDesc: "15-min personalised demo. We'll show you how it integrates with your day-to-day.",
+      stickyText: "Request demo →",
+    },
   },
-  bofu: {
-    primary: { text: "Solicitar demo personalizada", url: "/demo", micro: "Te mostramos Winerim aplicado a tu caso concreto." },
-    secondary: { text: "Ver planes y precios", url: "/precios" },
-    badge: "Da el siguiente paso",
-    midTitle: "¿Listo para optimizar tu carta de vinos?",
-    midDesc: "Solicita una demo y te mostramos cómo Winerim se adapta a tu operativa.",
-    finalTitle: "Tu carta de vinos puede rendir más",
-    finalDesc: "Demo personalizada en 15 min. Te mostramos cómo se integra con tu día a día.",
-    stickyText: "Solicitar demo →",
+  it: {
+    tofu: {
+      primary: { text: "Vedi Winerim in azione", url: "/demo", micro: "Demo personalizzata di 15 min. Senza impegno." },
+      secondary: { text: "Esplora le funzionalità", url: "/funcionalidades" },
+      badge: "Scopri Winerim",
+      midTitle: "Vuoi vedere come funziona per il tuo tipo di attività?",
+      midDesc: "Ti mostriamo Winerim applicato a ristoranti come il tuo. 15 minuti, senza impegno.",
+      finalTitle: "Scopri cosa può fare Winerim per la tua carta",
+      finalDesc: "Demo personalizzata di 15 min. Ti mostriamo l'impatto per il tuo tipo di attività.",
+      stickyText: "Scopri come funziona →",
+    },
+    mofu: {
+      primary: { text: "Analizza la mia carta gratis", url: "/analisis-carta", micro: "Diagnosi con opportunità reali di miglioramento. Senza costi." },
+      secondary: { text: "Richiedi demo", url: "/demo" },
+      badge: "La tua carta rende quanto dovrebbe?",
+      midTitle: "La tua carta dei vini rende quanto dovrebbe?",
+      midDesc: "Analizziamo la tua carta e ti mostriamo opportunità concrete di miglioramento in margine, rotazione e scontrino medio.",
+      finalTitle: "Analisi gratuita della tua carta dei vini",
+      finalDesc: "Invia la tua carta e ti restituiamo una diagnosi con dati reali e proposte d'azione.",
+      stickyText: "Analizza la mia carta gratis →",
+    },
+    bofu: {
+      primary: { text: "Richiedi demo personalizzata", url: "/demo", micro: "Ti mostriamo Winerim applicato al tuo caso specifico." },
+      secondary: { text: "Vedi piani e prezzi", url: "/precios" },
+      badge: "Fai il prossimo passo",
+      midTitle: "Pronto a ottimizzare la tua carta dei vini?",
+      midDesc: "Richiedi una demo e ti mostriamo come Winerim si adatta alla tua operatività.",
+      finalTitle: "La tua carta dei vini può rendere di più",
+      finalDesc: "Demo personalizzata di 15 min. Ti mostriamo come si integra con il tuo quotidiano.",
+      stickyText: "Richiedi demo →",
+    },
+  },
+  fr: {
+    tofu: {
+      primary: { text: "Voir Winerim en action", url: "/demo", micro: "Démo personnalisée de 15 min. Sans engagement." },
+      secondary: { text: "Explorer les fonctionnalités", url: "/funcionalidades" },
+      badge: "Découvrez Winerim",
+      midTitle: "Vous voulez voir comment ça fonctionne pour votre type d'établissement ?",
+      midDesc: "Nous vous montrons Winerim appliqué à des restaurants comme le vôtre. 15 minutes, sans engagement.",
+      finalTitle: "Découvrez ce que Winerim peut faire pour votre carte",
+      finalDesc: "Démo personnalisée de 15 min. Nous vous montrons l'impact pour votre type d'établissement.",
+      stickyText: "Voir comment ça marche →",
+    },
+    mofu: {
+      primary: { text: "Analyser ma carte gratuitement", url: "/analisis-carta", micro: "Diagnostic avec de vraies opportunités d'amélioration. Sans frais." },
+      secondary: { text: "Demander une démo", url: "/demo" },
+      badge: "Votre carte performe-t-elle ?",
+      midTitle: "Votre carte des vins performe-t-elle comme elle le devrait ?",
+      midDesc: "Nous analysons votre carte et vous montrons des opportunités concrètes d'amélioration en marge, rotation et ticket moyen.",
+      finalTitle: "Analyse gratuite de votre carte des vins",
+      finalDesc: "Envoyez votre carte et nous vous renverrons un diagnostic avec des données réelles et des propositions d'action.",
+      stickyText: "Analyser ma carte gratuitement →",
+    },
+    bofu: {
+      primary: { text: "Demander une démo personnalisée", url: "/demo", micro: "Nous vous montrons Winerim appliqué à votre cas concret." },
+      secondary: { text: "Voir les plans et tarifs", url: "/precios" },
+      badge: "Passez à l'étape suivante",
+      midTitle: "Prêt à optimiser votre carte des vins ?",
+      midDesc: "Demandez une démo et nous vous montrons comment Winerim s'adapte à votre fonctionnement.",
+      finalTitle: "Votre carte des vins peut mieux performer",
+      finalDesc: "Démo personnalisée de 15 min. Nous vous montrons comment elle s'intègre à votre quotidien.",
+      stickyText: "Demander une démo →",
+    },
   },
 };
+
+/* ─── Backward-compatible default (ES) ─── */
+export const CTA_SETS = CTA_SETS_I18N.es;
+
+/* ─── Get CTA sets by language ─── */
+export const getCTASetsForLang = (lang: SupportedLang): Record<FunnelStage, CTASet> => CTA_SETS_I18N[lang];
 
 /* ─── Contextual CTA sets by page type ─── */
 export type PageType =
@@ -123,13 +211,19 @@ export const PAGE_FUNNEL_MAP: Record<PageType, FunnelStage> = {
   vertical_large_list: "bofu",
 };
 
-/** Get the CTA set for a given page type */
+/** Get the CTA set for a given page type (default ES) */
 export const getCTASet = (pageType: PageType): CTASet => {
   const stage = PAGE_FUNNEL_MAP[pageType];
   return CTA_SETS[stage];
 };
 
-/* ─── Page-specific CTA overrides ─── */
+/** Get the CTA set for a given page type and language */
+export const getCTASetForLang = (pageType: PageType, lang: SupportedLang): CTASet => {
+  const stage = PAGE_FUNNEL_MAP[pageType];
+  return CTA_SETS_I18N[lang][stage];
+};
+
+/* ─── Page-specific CTA overrides (ES only for backward compat) ─── */
 export const PAGE_CTA_OVERRIDES: Partial<Record<PageType, Partial<CTASet>>> = {
   home: {
     badge: "Empieza hoy",
@@ -308,9 +402,24 @@ export const PAGE_CTA_OVERRIDES: Partial<Record<PageType, Partial<CTASet>>> = {
   },
 };
 
-/** Get resolved CTA set with overrides applied */
+/** Get resolved CTA set with overrides applied (ES default) */
 export const getResolvedCTASet = (pageType: PageType): CTASet => {
   const base = getCTASet(pageType);
+  const overrides = PAGE_CTA_OVERRIDES[pageType];
+  if (!overrides) return base;
+  return {
+    ...base,
+    ...overrides,
+    primary: { ...base.primary, ...overrides.primary },
+    secondary: { ...base.secondary, ...overrides.secondary },
+  };
+};
+
+/** Get resolved CTA set for a specific language */
+export const getResolvedCTASetForLang = (pageType: PageType, lang: SupportedLang): CTASet => {
+  const base = getCTASetForLang(pageType, lang);
+  // Overrides only apply to ES for now; other langs use base funnel sets
+  if (lang !== "es") return base;
   const overrides = PAGE_CTA_OVERRIDES[pageType];
   if (!overrides) return base;
   return {
