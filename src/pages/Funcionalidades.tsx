@@ -38,8 +38,26 @@ import mgmtPedidos from "@/assets/mgmt-pedidos.png";
 import mgmtRecomendados from "@/assets/mgmt-recomendados.png";
 import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.png";
 
+import ss01 from "@/assets/screenshots/ss-01.png";
+import ss02 from "@/assets/screenshots/ss-02.png";
+import ss03 from "@/assets/screenshots/ss-03.png";
+import ss04 from "@/assets/screenshots/ss-04.png";
+import ss05 from "@/assets/screenshots/ss-05.png";
+import ss06 from "@/assets/screenshots/ss-06.png";
+import ss07 from "@/assets/screenshots/ss-07.png";
+import ss08 from "@/assets/screenshots/ss-08.png";
+import ss09 from "@/assets/screenshots/ss-09.png";
+import ss10 from "@/assets/screenshots/ss-10.png";
+import ss11 from "@/assets/screenshots/ss-11.png";
+import ss12 from "@/assets/screenshots/ss-12.png";
+import ss13 from "@/assets/screenshots/ss-13.png";
 import ss14 from "@/assets/screenshots/ss-14.png";
+import ss15 from "@/assets/screenshots/ss-15.png";
+import ss16 from "@/assets/screenshots/ss-16.png";
+import ss17 from "@/assets/screenshots/ss-17.png";
+import ss18 from "@/assets/screenshots/ss-18.png";
 import ss19 from "@/assets/screenshots/ss-19.png";
+import ss20 from "@/assets/screenshots/ss-20.png";
 
 // Layer screenshot mapping
 const layerScreenshots = {
@@ -59,6 +77,94 @@ const layerScreenshots = {
     { img: mgmtPedidos, alt: "Winerim Supply — pedidos", label: "Gestión de pedidos" },
     { img: mgmtRotacion, alt: "Winerim Supply — rotación", label: "Rotación" },
     { img: mgmtObsolescencia, alt: "Winerim Supply — obsolescencia", label: "Obsolescencia" },
+  ],
+};
+
+// All 20 screenshots organized by category
+const screenshotCategories = {
+  es: [
+    {
+      title: "Gestión de carta y datos",
+      items: [
+        { img: ss01, label: "Mi carta — tabla de vinos" },
+        { img: ss02, label: "Importación de archivos" },
+        { img: ss07, label: "Ajustes generales" },
+        { img: ss09, label: "Configuración de copas" },
+      ],
+    },
+    {
+      title: "Analítica e insights",
+      items: [
+        { img: ss14, label: "Insights — resumen de KPIs" },
+        { img: ss15, label: "Probabilidad de venta" },
+        { img: ss16, label: "Vinos populares de mi carta" },
+        { img: ss19, label: "Rendimiento global de carta" },
+        { img: ss18, label: "Comparativa vs mercado" },
+      ],
+    },
+    {
+      title: "Ventas y pedidos",
+      items: [
+        { img: ss03, label: "Historial de ventas" },
+        { img: ss04, label: "Pedidos — vista rápida" },
+        { img: ss05, label: "Pedidos — detalle y estados" },
+        { img: ss06, label: "Agenda de proveedores" },
+        { img: ss20, label: "Catálogo de distribuidores" },
+      ],
+    },
+    {
+      title: "Inteligencia y automatización",
+      items: [
+        { img: ss08, label: "Motor de recomendación RIM" },
+        { img: ss10, label: "Configuración de IA y maridaje" },
+        { img: ss11, label: "Acciones automáticas" },
+        { img: ss12, label: "Automatización de obsolescencia" },
+        { img: ss13, label: "Historial de datos" },
+        { img: ss17, label: "Detección de obsolescencia" },
+      ],
+    },
+  ],
+  en: [
+    {
+      title: "Wine list & data management",
+      items: [
+        { img: ss01, label: "My wine list — table view" },
+        { img: ss02, label: "File import" },
+        { img: ss07, label: "General settings" },
+        { img: ss09, label: "By-the-glass configuration" },
+      ],
+    },
+    {
+      title: "Analytics & insights",
+      items: [
+        { img: ss14, label: "Insights — KPI summary" },
+        { img: ss15, label: "Sales probability" },
+        { img: ss16, label: "Popular wines on my list" },
+        { img: ss19, label: "Overall list performance" },
+        { img: ss18, label: "Market comparison" },
+      ],
+    },
+    {
+      title: "Sales & orders",
+      items: [
+        { img: ss03, label: "Sales history" },
+        { img: ss04, label: "Orders — quick view" },
+        { img: ss05, label: "Orders — detail & status" },
+        { img: ss06, label: "Supplier directory" },
+        { img: ss20, label: "Distributor catalog" },
+      ],
+    },
+    {
+      title: "Intelligence & automation",
+      items: [
+        { img: ss08, label: "RIM recommendation engine" },
+        { img: ss10, label: "AI & pairing configuration" },
+        { img: ss11, label: "Automatic actions" },
+        { img: ss12, label: "Obsolescence automation" },
+        { img: ss13, label: "Data history" },
+        { img: ss17, label: "Obsolescence detection" },
+      ],
+    },
   ],
 };
 
