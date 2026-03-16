@@ -619,22 +619,16 @@ const Funcionalidades = () => {
             </div>
           </ScrollReveal>
 
-          {/* Gestión y analítica */}
+          {/* Gestión de carta y configuración */}
           <ScrollReveal>
             <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
-              {lang === "es" ? "Gestión y analítica" : "Management & analytics"}
+              {lang === "es" ? "Gestión de carta" : "Wine list management"}
             </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <div className="grid md:grid-cols-3 gap-4 mb-12">
               {[
-                { img: mgmtCarta, alt: "Gestión de carta", label: "Carta" },
-                { img: mgmtRendimiento, alt: "Rendimiento", label: "Rendimiento" },
-                { img: mgmtInsights, alt: "Insights IA", label: "Insights IA" },
-                { img: mgmtStock, alt: "Control de stock", label: "Stock" },
-                { img: mgmtRotacion, alt: "Rotación", label: "Rotación" },
-                { img: mgmtObsolescencia, alt: "Obsolescencia", label: "Obsolescencia" },
-                { img: mgmtPedidos, alt: "Pedidos", label: "Pedidos" },
-                { img: mgmtRecomendados, alt: "Recomendados", label: "Recomendados" },
-                { img: mgmtAutomatizaciones, alt: "Automatizaciones", label: "Automatizaciones" },
+                { img: mgmtCarta, alt: "Gestión de carta de vinos", label: lang === "es" ? "Editor de carta" : "List editor" },
+                { img: mgmtRecomendados, alt: "Vinos recomendados", label: lang === "es" ? "Recomendados" : "Recommended" },
+                { img: mgmtAutomatizaciones, alt: "Automatizaciones", label: lang === "es" ? "Automatizaciones" : "Automations" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
                   <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
@@ -644,49 +638,42 @@ const Funcionalidades = () => {
             </div>
           </ScrollReveal>
 
-          {/* Capturas detalladas */}
+          {/* Analítica y rendimiento */}
           <ScrollReveal>
             <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
-              {lang === "es" ? "Más capturas de la plataforma" : "More platform screenshots"}
+              {lang === "es" ? "Analítica y rendimiento" : "Analytics & performance"}
             </p>
-            <div className="grid md:grid-cols-4 gap-3 mb-6">
+            <div className="grid md:grid-cols-3 gap-4 mb-12">
               {[
-                { img: ss01, alt: "Screenshot 1", label: "" },
-                { img: ss02, alt: "Screenshot 2", label: "" },
-                { img: ss03, alt: "Screenshot 3", label: "" },
-                { img: ss04, alt: "Screenshot 4", label: "" },
-                { img: ss05, alt: "Screenshot 5", label: "" },
-                { img: ss06, alt: "Screenshot 6", label: "" },
-                { img: ss07, alt: "Screenshot 7", label: "" },
-                { img: ss08, alt: "Screenshot 8", label: "" },
-                { img: ss09, alt: "Screenshot 9", label: "" },
-                { img: ss10, alt: "Screenshot 10", label: "" },
-                { img: ss11, alt: "Screenshot 11", label: "" },
-                { img: ss12, alt: "Screenshot 12", label: "" },
-                { img: ss13, alt: "Screenshot 13", label: "" },
-                { img: ss14, alt: "Dashboard analítico", label: "" },
-                { img: ss15, alt: "Screenshot 15", label: "" },
-                { img: ss16, alt: "Screenshot 16", label: "" },
-                { img: ss17, alt: "Screenshot 17", label: "" },
-                { img: ss18, alt: "Screenshot 18", label: "" },
-                { img: ss19, alt: "Rendimiento", label: "" },
-                { img: ss20, alt: "Screenshot 20", label: "" },
+                { img: mgmtRendimiento, alt: "Panel de rendimiento", label: lang === "es" ? "Rendimiento" : "Performance" },
+                { img: mgmtInsights, alt: "Insights de IA", label: "Insights IA" },
+                { img: dashboardInsightsImg, alt: "Dashboard de decisiones", label: lang === "es" ? "Panel de decisiones" : "Decision dashboard" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
-                  <img src={item.img} alt={item.alt} className="w-full rounded-lg border border-border/60 shadow-sm group-hover:shadow-md group-hover:border-wine/20 transition-all" loading="lazy" />
+                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
+                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
                 </div>
               ))}
             </div>
           </ScrollReveal>
 
-          {/* Dashboard hero */}
+          {/* Stock, rotación y compras */}
           <ScrollReveal>
-            <div className="relative group mt-8">
-              <div className="absolute -inset-4 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.08),transparent_70%)] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img src={dashboardInsightsImg} alt="Winerim dashboard insights" className="relative w-full rounded-xl border border-border shadow-xl" loading="lazy" />
-              <p className="text-xs text-muted-foreground text-center mt-3 font-medium">
-                {lang === "es" ? "Panel de insights y decisiones" : "Insights & decisions dashboard"}
-              </p>
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
+              {lang === "es" ? "Stock, rotación y compras" : "Stock, rotation & purchasing"}
+            </p>
+            <div className="grid md:grid-cols-4 gap-4">
+              {[
+                { img: mgmtStock, alt: "Control de stock", label: "Stock" },
+                { img: mgmtRotacion, alt: "Análisis de rotación", label: lang === "es" ? "Rotación" : "Rotation" },
+                { img: mgmtObsolescencia, alt: "Detección de obsolescencia", label: lang === "es" ? "Obsolescencia" : "Obsolescence" },
+                { img: mgmtPedidos, alt: "Gestión de pedidos", label: lang === "es" ? "Pedidos" : "Orders" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
+                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
+                </div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
