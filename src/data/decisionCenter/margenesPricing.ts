@@ -54,6 +54,7 @@ export interface DeepAreaContent {
   icon: typeof DollarSign;
   accent: string;
   bg: string;
+  audiences: UserProfile[];
   topErrors?: AreaTopError[];
   miniCases?: AreaMiniCase[];
   subtopics: SubTopic[];
