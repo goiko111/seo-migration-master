@@ -118,7 +118,7 @@ const data: VerticalContent = {
     { q: "¿Winerim me dice qué vinos retirar?", a: "Winerim te muestra un ranking de rendimiento basado en datos reales (margen, rotación, demanda). La decisión final siempre es tuya, pero ahora tienes argumentos objetivos." },
     { q: "¿Qué es la canibalización de vinos?", a: "Ocurre cuando dos o más referencias de perfil similar (misma región, estilo y franja de precio) compiten entre sí, diluyendo las ventas de ambas. Winerim cruza estos atributos para detectarlo automáticamente." },
     { q: "¿Puedo generar informes para dirección o propiedad?", a: "Sí. Winerim genera reportes con métricas claras de rendimiento por referencia, oportunidades de mejora y propuestas de acción, listos para presentar en reuniones de gestión." },
-    { q: "¿Cuánto tarda en implantarse?", a: "Depende del tamaño de la carta. Para cartas de 100–300 referencias, la implantación completa tarda entre 3 y 7 días. Ofrecemos soporte durante todo el proceso." },
+    { q: "¿Cuánto tarda en implantarse?", a: "Depende del tamaño de la carta. Para cartas de 250–500 referencias, la implantación completa tarda entre 5 y 10 días. Ofrecemos soporte durante todo el proceso." },
     { q: "¿Funciona con carta física o solo digital?", a: "Winerim funciona como sistema de análisis y gestión. Los datos alimentan tanto la carta digital como las decisiones sobre la carta física. No obliga a eliminar el soporte papel." },
     { q: "¿Puedo probar antes de contratar?", a: "Sí. Ofrecemos un análisis gratuito de tu carta actual donde identificamos stock muerto, canibalización y oportunidades de pricing. Es la mejor forma de ver el valor antes de decidir." },
   ],

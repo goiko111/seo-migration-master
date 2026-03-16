@@ -105,7 +105,7 @@ const data: GuidePageData = {
   faqs: [
     { q: "¿Cuánto tiempo lleva formar a un equipo en vino?", a: "Con un programa estructurado, 2 semanas (4 sesiones de 30 minutos) son suficientes para un cambio notable. La formación continua se mantiene con sesiones breves de 5-10 minutos antes de cada servicio." },
     { q: "¿Qué pasa si mi equipo no tiene interés en el vino?", a: "No necesitan tener interés — necesitan tener herramientas. Un guión de recomendación bien hecho permite vender vino sin ser apasionado del tema. La motivación viene cuando ven que las mesas responden positivamente." },
-    { q: "¿Es mejor contratar un sumiller o formar al equipo?", a: "Depende del volumen. Para la mayoría de restaurantes, formar al equipo es más efectivo y sostenible. Un sumiller añade valor en restaurantes con cartas grandes (100+ referencias) y público conocedor." },
+    { q: "¿Es mejor contratar un sumiller o formar al equipo?", a: "Depende del volumen. Para la mayoría de restaurantes, formar al equipo es más efectivo y sostenible. Un sumiller añade valor en restaurantes con cartas amplias y complejas (250+ referencias) y público conocedor." },
     { q: "¿Cómo mido si la formación funciona?", a: "Compara las ventas de vino por mesa (ticket medio en vino), el ratio de mesas que piden vino y el ratio copa/botella antes y después de la formación." },
   ],
   relatedTools: [

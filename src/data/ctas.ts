@@ -297,7 +297,7 @@ export const PAGE_CTA_OVERRIDES: Partial<Record<PageType, Partial<CTASet>>> = {
     stickyText: "Demo sin sumiller →",
   },
   vertical_large_list: {
-    badge: "Para cartas con +100 referencias",
+    badge: "Para cartas con +250 referencias",
     primary: { text: "Solicitar demo para carta amplia", url: "/demo", micro: "Te mostramos cómo detectar stock muerto y canibalización." },
     secondary: { text: "Analizar mi carta", url: "/analisis-carta" },
     midTitle: "¿Tienes referencias que nadie pide?",

@@ -28,7 +28,7 @@ const useCases = [
 
 const userTypes = [
   { icon: Utensils, title: "Restaurantes", desc: "Desde bistrós con 20 referencias hasta gastronómicos con 200. Winerim se adapta a cualquier formato y volumen de carta." },
-  { icon: GlassWater, title: "Wine bars y vinotecas", desc: "Gestión de cartas grandes con alta rotación, amplia oferta por copa y fichas detalladas de cada vino." },
+  { icon: GlassWater, title: "Wine bars y vinotecas", desc: "Gestión de cartas amplias y complejas con alta rotación, amplia oferta por copa y fichas detalladas de cada vino." },
   { icon: Building2, title: "Hoteles", desc: "Cartas para restaurante, room service y eventos. Gestión centralizada con múltiples puntos de venta." },
   { icon: Globe, title: "Grupos de restauración", desc: "Gestión centralizada del vino para grupos con múltiples restaurantes. Una plataforma, una estrategia, múltiples locales." },
 ];

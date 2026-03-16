@@ -279,7 +279,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       h1: 'Planes y precios de Winerim',
       subtitle: 'Encuentra el plan perfecto para tu restaurante. Sin permanencia, sin sorpresas.',
       sections: [
-        { heading: 'Plan para restaurantes independientes', content: 'Carta digital con recomendador inteligente, fichas de vino completas y maridajes automáticos. Ideal para restaurantes con hasta 100 referencias.' },
+        { heading: 'Plan para restaurantes independientes', content: 'Carta digital con recomendador inteligente, fichas de vino completas y maridajes automáticos. Ideal para restaurantes con hasta 250 referencias.' },
         { heading: 'Plan para grupos y cadenas', content: 'Todo lo anterior más gestión multi-restaurante, analytics avanzados, inteligencia dinámica y soporte prioritario.' },
       ],
       faqs: [

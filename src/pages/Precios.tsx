@@ -79,7 +79,7 @@ const ES_CONTENT = {
       name: "Pro",
       tagline: "Inteligencia para vender más vino",
       solves: "Resuelve: ticket medio bajo, rotación lenta, recomendaciones inconsistentes, falta de datos.",
-      fits: "Para restaurantes con carta amplia, gastronómicos u hoteles con F&B.",
+      fits: "Para restaurantes con alta profundidad de surtido, gastronómicos u hoteles con F&B.",
       popular: true,
       features: [
         "Todo lo del plan Starter",

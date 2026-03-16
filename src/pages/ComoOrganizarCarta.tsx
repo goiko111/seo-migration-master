@@ -62,7 +62,7 @@ const pricingConcepts = [
 
 const mistakes = [
   "Mezclar demasiados criterios de organización (región + uva + estilo) en la misma carta",
-  "Cartas demasiado largas con más de 80-100 referencias sin guía",
+  "Cartas demasiado largas con más de 250 referencias sin guía ni sistema de gestión",
   "No ofrecer vinos por copa, perdiendo ventas de mesas pequeñas o primeras citas con el vino",
   "Descripciones excesivamente técnicas que intimidan al cliente medio",
   "No actualizar la carta cuando cambian las añadas o se agotan referencias",
