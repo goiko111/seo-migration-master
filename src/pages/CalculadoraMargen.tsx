@@ -106,6 +106,7 @@ const i18n: Record<string, LangContent> = {
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
       { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: optimiza costes de compra", type: "solution" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: márgenes y pricing", type: "decision-center" },
       { to: "/precios", label: "Planes y precios", type: "solution" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],

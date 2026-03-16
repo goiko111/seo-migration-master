@@ -129,6 +129,7 @@ const i18n: Record<string, LangContent> = {
       { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/producto/winerim-core", label: "Winerim Core: detección de obsolescencia", type: "solution" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock y rotación", type: "decision-center" },
       { to: "/precios", label: "Planes y precios", type: "solution" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],

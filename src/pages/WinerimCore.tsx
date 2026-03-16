@@ -442,6 +442,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "Toutes les fonctionnalités Winerim", type: "resource" },
       { to: "/herramientas", label: "Outils gratuits d'analyse", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensuel de la carte", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center : marges et pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center : stock et rotation", type: "decision-center" },
       { to: "/precios", label: "Plans et tarifs", type: "solution" },
       { to: "/demo", label: "Demander démo personnalisée", type: "solution" },
     ],

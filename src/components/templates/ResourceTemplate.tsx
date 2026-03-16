@@ -52,7 +52,7 @@ export interface ResourceFaq {
 export interface ResourceInternalLink {
   to: string;
   label: string;
-  type: "guide" | "tool" | "resource" | "solution";
+  type: "guide" | "tool" | "resource" | "solution" | "decision-center";
 }
 
 export interface ResourcePageData {
