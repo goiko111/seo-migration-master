@@ -242,6 +242,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email non valida",
     toast_success: "Richiesta inviata! Ti contatteremo presto.",
     toast_file_error: "Impossibile leggere il file. Prova con formato .txt o .csv",
+    decides: ["Se la struttura della carta facilita o frena la vendita", "Quali gap di prezzo e stile esistono", "Quali vini sono candidati al servizio al calice"],
+    avoids: ["Mantenere una carta squilibrata senza saperlo", "Duplicare stili che competono tra loro", "Perdere vendite per mancata copertura in fasce chiave"],
+    impact: ["Scoprire opportunità di vendita nascoste nella carta", "Ridurre referenze senza impatto e liberare spazio", "Migliorare l'esperienza del cliente con una carta più chiara"],
   },
   fr: {
     seo_title: "Wine List Analyzer – Analysez votre carte des vins | Winerim",
