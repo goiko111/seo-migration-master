@@ -126,6 +126,17 @@ const ContentBlock = ({ blockKey, children }: { blockKey: keyof typeof blockConf
    DEEP AREA VIEW — used for "margenes-pricing"
    ══════════════════════════════════════════════════════ */
 
+const PriorityBadge = ({ priority }: { priority?: SubTopicPriority }) => {
+  if (!priority) return null;
+  const cfg = priorityConfig[priority];
+  return (
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase ${cfg.bg} ${cfg.color}`}>
+      <span className="text-[8px]">{cfg.icon}</span>
+      {cfg.label}
+    </span>
+  );
+};
+
 const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: number }) => {
   const [open, setOpen] = useState(false);
 
@@ -140,9 +151,14 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
           <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 text-sm font-bold shrink-0">
             {index + 1}
           </span>
-          <h3 className="font-heading text-base font-bold text-foreground flex-1 group-hover:text-wine transition-colors">
-            {subtopic.title}
-          </h3>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="font-heading text-base font-bold text-foreground group-hover:text-wine transition-colors">
+                {subtopic.title}
+              </h3>
+              <PriorityBadge priority={subtopic.priority} />
+            </div>
+          </div>
           <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
             <ChevronDown size={18} className="text-muted-foreground/50" />
           </motion.div>
