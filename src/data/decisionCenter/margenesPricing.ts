@@ -148,6 +148,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-compra",
       title: "Cuándo revisar la compra",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias con margen bajo cuyo coste de compra ha subido respecto al histórico.",
         whyMatters: "Cada euro que ahorras en compra es margen directo, invisible para el cliente pero muy visible en tu cuenta de resultados.",
