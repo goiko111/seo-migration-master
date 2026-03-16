@@ -691,10 +691,6 @@ const Funcionalidades = () => {
           </ScrollReveal>
         </div>
       </section>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* ─── Coming soon ─── */}
       <section className="section-padding">
