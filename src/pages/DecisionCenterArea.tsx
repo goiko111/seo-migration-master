@@ -10,6 +10,8 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { TranslationDict } from "@/i18n/types";
 import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError, type LinkType, type AreaNextStep, type AreaMiniCase, type UserProfile } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
@@ -34,38 +36,37 @@ const useGate = () => {
   return { granted, unlock };
 };
 
-/* ── Simple areas (non-deep) ── */
-type Priority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
+/* ── Config builders (take t for translations) ── */
+const getPriorityConfig = (t: TranslationDict): Record<SubTopicPriority, { label: string; color: string; bg: string; icon: string }> => ({
+  "inmediato":    { label: t.dc_priority_urgent,     color: "text-red-400",             bg: "bg-red-500/10",    icon: "●" },
+  "esta semana":  { label: t.dc_priority_this_week,  color: "text-amber-400",           bg: "bg-amber-500/10",  icon: "●" },
+  "este mes":     { label: t.dc_priority_this_month, color: "text-blue-400",            bg: "bg-blue-500/10",   icon: "●" },
+  "seguimiento":  { label: t.dc_priority_followup,   color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
+});
 
-const priorityConfig: Record<Priority, { label: string; color: string; bg: string; icon: string }> = {
-  "inmediato":    { label: "Urgente",      color: "text-red-400",             bg: "bg-red-500/10",    icon: "●" },
-  "esta semana":  { label: "Esta semana",  color: "text-amber-400",           bg: "bg-amber-500/10",  icon: "●" },
-  "este mes":     { label: "Este mes",     color: "text-blue-400",            bg: "bg-blue-500/10",   icon: "●" },
-  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
-};
+const getLinkTypeConfig = (t: TranslationDict): Record<LinkType, { label: string; icon: typeof FileText; color: string; bg: string }> => ({
+  tool:     { label: t.dc_type_tool,     icon: Calculator,  color: "text-wine",              bg: "bg-wine/10" },
+  resource: { label: t.dc_type_resource, icon: Download,    color: "text-emerald-500",        bg: "bg-emerald-500/10" },
+  product:  { label: t.dc_type_product,  icon: Zap,         color: "text-amber-500",          bg: "bg-amber-500/10" },
+  article:  { label: t.dc_type_article,  icon: FileText,    color: "text-violet-500",         bg: "bg-violet-500/10" },
+  guide:    { label: t.dc_type_guide,    icon: BookOpen,    color: "text-blue-400",           bg: "bg-blue-500/10" },
+  solution: { label: t.dc_type_solution, icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
+});
 
-const linkTypeConfig: Record<LinkType, { label: string; icon: typeof FileText; color: string; bg: string }> = {
-  tool:     { label: "Herramienta", icon: Calculator,  color: "text-wine",              bg: "bg-wine/10" },
-  resource: { label: "Recurso",     icon: Download,    color: "text-emerald-500",        bg: "bg-emerald-500/10" },
-  product:  { label: "Producto",    icon: Zap,         color: "text-amber-500",          bg: "bg-amber-500/10" },
-  article:  { label: "Artículo",    icon: FileText,    color: "text-violet-500",         bg: "bg-violet-500/10" },
-  guide:    { label: "Guía",        icon: BookOpen,    color: "text-blue-400",           bg: "bg-blue-500/10" },
-  solution: { label: "Solución",    icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
-};
+const getProfileConfig = (t: TranslationDict): Record<UserProfile, { label: string; icon: typeof User }> => ({
+  "direccion":  { label: t.dc_profile_management, icon: Briefcase },
+  "sala":       { label: t.dc_profile_floor,      icon: Store },
+  "compras-fb": { label: t.dc_profile_purchasing,  icon: ShoppingCart },
+  "grupo":      { label: t.dc_profile_group,       icon: Users },
+});
 
-const profileConfig: Record<UserProfile, { label: string; icon: typeof User }> = {
-  "direccion":  { label: "Dirección",     icon: Briefcase },
-  "sala":       { label: "Sala",          icon: Store },
-  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
-  "grupo":      { label: "Grupo",         icon: Users },
-};
-
-const ProfileBadges = ({ audiences }: { audiences?: UserProfile[] }) => {
+const ProfileBadges = ({ audiences, t }: { audiences?: UserProfile[]; t: TranslationDict }) => {
   if (!audiences || audiences.length === 0) return null;
+  const profileCfg = getProfileConfig(t);
   return (
     <div className="flex flex-wrap gap-1.5">
       {audiences.map((a) => {
-        const cfg = profileConfig[a];
+        const cfg = profileCfg[a];
         const Icon = cfg.icon;
         return (
           <span key={a} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
@@ -78,24 +79,8 @@ const ProfileBadges = ({ audiences }: { audiences?: UserProfile[] }) => {
   );
 };
 
-interface SimpleAreaContent {
-  name: string;
-  tagline: string;
-  icon: React.ElementType;
-  accent: string;
-  bg: string;
-  priority: Priority;
-  queSignifica: string[];
-  porQueImporta: string[];
-  queHacerAhora: string[];
-  erroresComunes: { mistake: string; consequence: string }[];
-  aprenderMas: { label: string; href: string }[];
-}
-
-const simpleAreas: Record<string, SimpleAreaContent> = {};
-
 /* ── Gate UI ── */
-const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
+const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: TranslationDict }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
@@ -113,57 +98,31 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
           <div className="w-16 h-16 rounded-2xl bg-wine/10 flex items-center justify-center mx-auto mb-6">
             <Lock size={28} className="text-wine" />
           </div>
-          <h1 className="font-heading text-2xl font-bold text-foreground mb-2">Decision Center</h1>
-          <p className="text-sm text-muted-foreground">Introduce tu clave de acceso para continuar.</p>
+          <h1 className="font-heading text-2xl font-bold text-foreground mb-2">{t.dc_gate_title}</h1>
+          <p className="text-sm text-muted-foreground">{t.dc_gate_subtitle}</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <input type="password" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Clave de acceso"
+            <input type="password" value={value} onChange={(e) => setValue(e.target.value)} placeholder={t.dc_gate_placeholder}
               className={`w-full px-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${error ? "border-destructive focus:ring-destructive/30" : "border-border focus:ring-wine/30 focus:border-wine/50"}`}
               autoFocus />
             <Shield size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30" />
           </div>
-          {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-destructive font-medium">Clave incorrecta.</motion.p>}
-          <button type="submit" className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">Acceder</button>
+          {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-destructive font-medium">{t.dc_gate_error}</motion.p>}
+          <button type="submit" className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">{t.dc_gate_submit}</button>
         </form>
       </motion.div>
     </div>
   );
 };
 
-/* ── Section block config ── */
-const blockConfig = {
-  queSignifica:    { title: "Qué significa",      icon: Info,           style: "bg-muted/50 text-muted-foreground" },
-  porQueImporta:   { title: "Por qué importa",    icon: Target,         style: "bg-wine/10 text-wine" },
-  queHacerAhora:   { title: "Qué hacer ahora",    icon: Lightbulb,      style: "bg-emerald-500/10 text-emerald-500" },
-  erroresComunes:  { title: "Errores comunes",     icon: AlertTriangle,  style: "bg-destructive/10 text-destructive" },
-  aprenderMas:     { title: "Aprender más",        icon: FileText,       style: "bg-blue-500/10 text-blue-400" },
-};
-
-/* ── Reusable content block ── */
-const ContentBlock = ({ blockKey, children }: { blockKey: keyof typeof blockConfig; children: React.ReactNode }) => {
-  const config = blockConfig[blockKey];
-  const BlockIcon = config.icon;
-  return (
-    <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
-      <div className="flex items-center gap-3 mb-5">
-        <div className={`w-10 h-10 rounded-lg ${config.style} flex items-center justify-center`}>
-          <BlockIcon size={18} />
-        </div>
-        <h3 className="font-heading text-lg font-bold text-foreground">{config.title}</h3>
-      </div>
-      {children}
-    </div>
-  );
-};
-
 /* ══════════════════════════════════════════════════════
-   DEEP AREA VIEW — used for "margenes-pricing"
+   DEEP AREA VIEW
    ══════════════════════════════════════════════════════ */
 
-const PriorityBadge = ({ priority }: { priority?: SubTopicPriority }) => {
+const PriorityBadge = ({ priority, t }: { priority?: SubTopicPriority; t: TranslationDict }) => {
   if (!priority) return null;
-  const cfg = priorityConfig[priority];
+  const cfg = getPriorityConfig(t)[priority];
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase ${cfg.bg} ${cfg.color}`}>
       <span className="text-[8px]">{cfg.icon}</span>
@@ -172,7 +131,7 @@ const PriorityBadge = ({ priority }: { priority?: SubTopicPriority }) => {
   );
 };
 
-const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: number }) => {
+const SubTopicAccordion = ({ subtopic, index, t }: { subtopic: SubTopic; index: number; t: TranslationDict }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -191,7 +150,7 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
               <h3 className="font-heading text-base font-bold text-foreground group-hover:text-wine transition-colors">
                 {subtopic.title}
               </h3>
-              <PriorityBadge priority={subtopic.priority} />
+              <PriorityBadge priority={subtopic.priority} t={t} />
             </div>
           </div>
           <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -216,7 +175,7 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
                     <div className="w-7 h-7 rounded-md bg-muted/50 flex items-center justify-center">
                       <Info size={13} className="text-muted-foreground" />
                     </div>
-                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Qué significa</h4>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">{t.dc_what_means}</h4>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{subtopic.queSignifica}</p>
                 </div>
@@ -227,7 +186,7 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
                     <div className="w-7 h-7 rounded-md bg-wine/10 flex items-center justify-center">
                       <Target size={13} className="text-wine" />
                     </div>
-                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Por qué importa</h4>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">{t.dc_why_matters}</h4>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{subtopic.porQueImporta}</p>
                 </div>
@@ -238,7 +197,7 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
                     <div className="w-7 h-7 rounded-md bg-emerald-500/10 flex items-center justify-center">
                       <Lightbulb size={13} className="text-emerald-500" />
                     </div>
-                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Qué hacer</h4>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">{t.dc_what_to_do}</h4>
                   </div>
                   <ol className="space-y-2.5">
                     {subtopic.queHacer.map((step, i) => (
@@ -258,7 +217,7 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
                     <div className="w-7 h-7 rounded-md bg-destructive/10 flex items-center justify-center">
                       <AlertTriangle size={13} className="text-destructive" />
                     </div>
-                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Errores frecuentes</h4>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">{t.dc_frequent_errors}</h4>
                   </div>
                   <div className="space-y-3">
                     {subtopic.errores.map((err, i) => (
@@ -283,8 +242,9 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
   );
 };
 
-const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
+const DeepAreaView = ({ content, t }: { content: DeepAreaContent; t: TranslationDict }) => {
   const Icon = content.icon;
+  const linkTypeCfg = getLinkTypeConfig(t);
 
   return (
     <div className="min-h-screen bg-background">
@@ -314,8 +274,8 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
             </div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mt-4">
-              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">Relevante para</p>
-              <ProfileBadges audiences={content.audiences} />
+              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">{t.dc_relevant_for}</p>
+              <ProfileBadges audiences={content.audiences} t={t} />
             </motion.div>
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
@@ -330,7 +290,7 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
           <ScrollReveal>
             <div className="rounded-xl border border-border bg-card/50 p-5 md:p-6">
               <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-3">
-                En esta sección
+                {t.dc_in_this_section}
               </p>
               <div className="grid sm:grid-cols-2 gap-2">
                 {content.subtopics.map((st, i) => (
@@ -339,7 +299,7 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                       {i + 1}
                     </span>
                     <span className="flex-1 min-w-0 truncate">{st.title}</span>
-                    <PriorityBadge priority={st.priority} />
+                    <PriorityBadge priority={st.priority} t={t} />
                   </span>
                 ))}
               </div>
@@ -357,8 +317,8 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                     <AlertTriangle size={18} className="text-destructive" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-lg font-bold text-foreground">Errores comunes</h2>
-                    <p className="text-xs text-muted-foreground mt-0.5">Los fallos más frecuentes en este área y cómo evitarlos</p>
+                    <h2 className="font-heading text-lg font-bold text-foreground">{t.dc_common_errors}</h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">{t.dc_common_errors_sub}</p>
                   </div>
                 </div>
                 <div className="space-y-5">
@@ -372,11 +332,11 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                           <p className="text-sm font-semibold text-foreground">{err.error}</p>
                           <div className="mt-3 grid sm:grid-cols-2 gap-3">
                             <div className="rounded-md bg-card/80 border border-border p-3">
-                              <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-1">Por qué ocurre</p>
+                              <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-1">{t.dc_why_happens}</p>
                               <p className="text-xs text-muted-foreground leading-relaxed">{err.porQueOcurre}</p>
                             </div>
                             <div className="rounded-md bg-card/80 border border-border p-3">
-                              <p className="text-[10px] font-semibold tracking-widest uppercase text-destructive/60 mb-1">Consecuencia</p>
+                              <p className="text-[10px] font-semibold tracking-widest uppercase text-destructive/60 mb-1">{t.dc_consequence}</p>
                               <p className="text-xs text-muted-foreground leading-relaxed">{err.consecuencia}</p>
                             </div>
                           </div>
@@ -400,8 +360,8 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                     <Lightbulb size={18} className="text-wine" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-lg font-bold text-foreground">Casos de uso</h2>
-                    <p className="text-xs text-muted-foreground mt-0.5">Ejemplos reales de cómo otros restaurantes lo resuelven</p>
+                    <h2 className="font-heading text-lg font-bold text-foreground">{t.dc_use_cases}</h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">{t.dc_use_cases_sub}</p>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4 mt-5">
@@ -410,15 +370,15 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                       <p className="text-xs font-semibold tracking-wider uppercase text-wine/70">{mc.profile}</p>
                       <div className="space-y-2">
                         <div>
-                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">Situación</p>
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">{t.dc_situation}</p>
                           <p className="text-sm text-muted-foreground leading-relaxed">{mc.situation}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">Qué hizo</p>
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">{t.dc_what_did}</p>
                           <p className="text-sm text-muted-foreground leading-relaxed">{mc.action}</p>
                         </div>
                         <div className="pt-1 border-t border-border">
-                          <p className="text-[10px] font-semibold tracking-widest uppercase text-emerald-500/70 mb-0.5">Resultado</p>
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-emerald-500/70 mb-0.5">{t.dc_result}</p>
                           <p className="text-sm font-medium text-foreground leading-relaxed">{mc.result}</p>
                         </div>
                       </div>
@@ -434,7 +394,7 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
           <div className="space-y-4">
             {content.subtopics.map((st, i) => (
-              <SubTopicAccordion key={st.id} subtopic={st} index={i} />
+              <SubTopicAccordion key={st.id} subtopic={st} index={i} t={t} />
             ))}
           </div>
         </section>
@@ -448,14 +408,14 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                   <FileText size={18} className="text-blue-400" />
                 </div>
                 <div>
-                  <h2 className="font-heading text-lg font-bold text-foreground">Aprender más</h2>
-                  <p className="text-xs text-muted-foreground mt-0.5">Recursos, herramientas y contenido para profundizar</p>
+                  <h2 className="font-heading text-lg font-bold text-foreground">{t.dc_learn_more}</h2>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t.dc_learn_more_sub}</p>
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-3 mt-5">
                 {content.links.map((link) => {
                   const linkType = (link as any).type as LinkType | undefined;
-                  const typeCfg = linkType ? linkTypeConfig[linkType] : null;
+                  const typeCfg = linkType ? linkTypeCfg[linkType] : null;
                   const TypeIcon = typeCfg?.icon || FileText;
                   return (
                     <Link key={link.href} to={link.href}
@@ -492,7 +452,7 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                 className="block rounded-xl border-2 border-wine/20 bg-gradient-to-r from-wine/5 to-transparent p-6 md:p-8 hover:border-wine/40 hover:from-wine/10 transition-all group"
               >
                 <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-wine/60 mb-2">
-                  Siguiente paso recomendado
+                  {t.dc_next_step}
                 </p>
                 <div className="flex items-center justify-between gap-4">
                   <div>
@@ -515,7 +475,7 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
         {/* Back */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20 text-center">
           <Link to="/decision-center" className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors">
-            <ArrowLeft size={14} /> Volver al Decision Center
+            <ArrowLeft size={14} /> {t.dc_back}
           </Link>
         </section>
       </main>
@@ -525,12 +485,54 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
 };
 
 /* ══════════════════════════════════════════════════════
-   SIMPLE AREA VIEW — used for other 5 areas
+   SIMPLE AREA VIEW (unused currently but kept for compat)
    ══════════════════════════════════════════════════════ */
 
-const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
+interface SimpleAreaContent {
+  name: string;
+  tagline: string;
+  icon: React.ElementType;
+  accent: string;
+  bg: string;
+  priority: SubTopicPriority;
+  queSignifica: string[];
+  porQueImporta: string[];
+  queHacerAhora: string[];
+  erroresComunes: { mistake: string; consequence: string }[];
+  aprenderMas: { label: string; href: string }[];
+}
+
+const simpleAreas: Record<string, SimpleAreaContent> = {};
+
+/* ── Block config (translated) ── */
+const getBlockConfig = (t: TranslationDict) => ({
+  queSignifica:    { title: t.dc_what_means,      icon: Info,           style: "bg-muted/50 text-muted-foreground" },
+  porQueImporta:   { title: t.dc_why_matters,      icon: Target,         style: "bg-wine/10 text-wine" },
+  queHacerAhora:   { title: t.dc_what_to_do,       icon: Lightbulb,      style: "bg-emerald-500/10 text-emerald-500" },
+  erroresComunes:  { title: t.dc_common_errors,     icon: AlertTriangle,  style: "bg-destructive/10 text-destructive" },
+  aprenderMas:     { title: t.dc_learn_more,        icon: FileText,       style: "bg-blue-500/10 text-blue-400" },
+});
+
+const ContentBlock = ({ blockKey, children, t }: { blockKey: string; children: React.ReactNode; t: TranslationDict }) => {
+  const config = getBlockConfig(t)[blockKey as keyof ReturnType<typeof getBlockConfig>];
+  if (!config) return null;
+  const BlockIcon = config.icon;
+  return (
+    <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+      <div className="flex items-center gap-3 mb-5">
+        <div className={`w-10 h-10 rounded-lg ${config.style} flex items-center justify-center`}>
+          <BlockIcon size={18} />
+        </div>
+        <h3 className="font-heading text-lg font-bold text-foreground">{config.title}</h3>
+      </div>
+      {children}
+    </div>
+  );
+};
+
+const SimpleAreaView = ({ area, t }: { area: SimpleAreaContent; t: TranslationDict }) => {
   const Icon = area.icon;
-  const prio = priorityConfig[area.priority];
+  const prio = getPriorityConfig(t)[area.priority];
 
   return (
     <div className="min-h-screen bg-background">
@@ -558,44 +560,44 @@ const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
             </div>
             <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${prio.bg} mt-2`}>
               <Clock size={12} className={prio.color} />
-              <span className={`text-xs font-semibold tracking-wider uppercase ${prio.color}`}>Prioridad: {prio.label}</span>
+              <span className={`text-xs font-semibold tracking-wider uppercase ${prio.color}`}>{t.dc_priority_label}: {prio.label}</span>
             </div>
           </div>
         </section>
 
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
           <div className="space-y-8">
-            <ScrollReveal><ContentBlock blockKey="queSignifica">
+            <ScrollReveal><ContentBlock blockKey="queSignifica" t={t}>
               <ul className="space-y-4">
-                {area.queSignifica.map((t, j) => (
+                {area.queSignifica.map((text, j) => (
                   <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-2 shrink-0" />{t}
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-2 shrink-0" />{text}
                   </li>
                 ))}
               </ul>
             </ContentBlock></ScrollReveal>
 
-            <ScrollReveal delay={0.06}><ContentBlock blockKey="porQueImporta">
+            <ScrollReveal delay={0.06}><ContentBlock blockKey="porQueImporta" t={t}>
               <ul className="space-y-4">
-                {area.porQueImporta.map((t, j) => (
+                {area.porQueImporta.map((text, j) => (
                   <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <Target size={14} className="text-wine/40 mt-0.5 shrink-0" />{t}
+                    <Target size={14} className="text-wine/40 mt-0.5 shrink-0" />{text}
                   </li>
                 ))}
               </ul>
             </ContentBlock></ScrollReveal>
 
-            <ScrollReveal delay={0.12}><ContentBlock blockKey="queHacerAhora">
+            <ScrollReveal delay={0.12}><ContentBlock blockKey="queHacerAhora" t={t}>
               <ol className="space-y-4">
-                {area.queHacerAhora.map((t, j) => (
+                {area.queHacerAhora.map((text, j) => (
                   <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold shrink-0 mt-0.5">{j + 1}</span>{t}
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold shrink-0 mt-0.5">{j + 1}</span>{text}
                   </li>
                 ))}
               </ol>
             </ContentBlock></ScrollReveal>
 
-            <ScrollReveal delay={0.18}><ContentBlock blockKey="erroresComunes">
+            <ScrollReveal delay={0.18}><ContentBlock blockKey="erroresComunes" t={t}>
               <div className="space-y-4">
                 {area.erroresComunes.map((err, j) => (
                   <div key={j} className="flex items-start gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
@@ -609,7 +611,7 @@ const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
               </div>
             </ContentBlock></ScrollReveal>
 
-            <ScrollReveal delay={0.24}><ContentBlock blockKey="aprenderMas">
+            <ScrollReveal delay={0.24}><ContentBlock blockKey="aprenderMas" t={t}>
               <div className="space-y-3">
                 {area.aprenderMas.map((link, j) => (
                   <Link key={j} to={link.href} className="flex items-center gap-3 text-sm text-blue-400 hover:text-blue-300 transition-colors group">
@@ -624,7 +626,7 @@ const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
 
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20 text-center">
           <Link to="/decision-center" className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors">
-            <ArrowLeft size={14} /> Volver al Decision Center
+            <ArrowLeft size={14} /> {t.dc_back}
           </Link>
         </section>
       </main>
@@ -640,8 +642,9 @@ const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
 const DecisionCenterArea = () => {
   const { areaSlug } = useParams<{ areaSlug: string }>();
   const { granted, unlock } = useGate();
+  const { t } = useLanguage();
 
-  if (!granted) return <PasswordGate onUnlock={unlock} />;
+  if (!granted) return <PasswordGate onUnlock={unlock} t={t} />;
 
   // Deep areas
   const deepAreas: Record<string, DeepAreaContent> = {
@@ -654,14 +657,14 @@ const DecisionCenterArea = () => {
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
-    return <DeepAreaView content={deepAreas[areaSlug]} />;
+    return <DeepAreaView content={deepAreas[areaSlug]} t={t} />;
   }
 
   // Simple areas
   const area = areaSlug ? simpleAreas[areaSlug] : undefined;
   if (!area) return <Navigate to="/decision-center" replace />;
 
-  return <SimpleAreaView area={area} />;
+  return <SimpleAreaView area={area} t={t} />;
 };
 
 export default DecisionCenterArea;
