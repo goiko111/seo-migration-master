@@ -61,6 +61,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/casos-exito": "/it/casi-di-successo",
     "/herramientas": "/it/strumenti",
     "/guias-y-recursos": "/it/guide",
+    "/recursos": "/it/risorse",
     "/soluciones": "/it/soluzioni",
     "/problemas": "/it/sfide",
     "/sommelier-corner": "/it/sommelier-corner",
