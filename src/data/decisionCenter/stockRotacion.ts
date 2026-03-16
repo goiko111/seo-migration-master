@@ -141,6 +141,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "evolucion-stock",
       title: "Cómo interpretar la evolución de stock",
+      porQueTeLoMostramos: {
+        detected: "Winerim monitoriza la tendencia de tu stock mes a mes: capital inmovilizado, referencias sin venta y rotación baja.",
+        whyMatters: "Lo que importa no es la foto de hoy, sino si la tendencia mejora o empeora.",
+        riskIfIgnored: "Un stock que empeora cada mes se convierte en crisis. Si no miras la tendencia, solo reaccionas cuando es tarde.",
+      },
       queSignifica:
         "La evolución de stock no es un snapshot: es una tendencia. Lo que importa no es cuánto stock tienes hoy, sino cómo ha cambiado respecto al mes pasado. ¿Ha subido el capital inmovilizado? ¿Han aparecido nuevas referencias sin venta? ¿El porcentaje de carta con rotación baja está mejorando o empeorando? Leer la evolución te permite anticipar problemas antes de que se conviertan en crisis.",
       porQueImporta:
