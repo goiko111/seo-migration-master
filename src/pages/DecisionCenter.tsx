@@ -314,14 +314,23 @@ const DecisionCenter = () => {
                       {area.description}
                     </p>
 
-                    {/* Audience */}
+                    {/* Audience — profile badges */}
                     <div className="border-t border-border pt-3 mb-4">
-                      <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1">
-                        Para quién
+                      <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">
+                        Relevante para
                       </p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        {area.audience}
-                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {area.profiles.map((p) => {
+                          const cfg = profileConfig[p];
+                          const PIcon = cfg.icon;
+                          return (
+                            <span key={p} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
+                              <PIcon size={10} />
+                              {cfg.label}
+                            </span>
+                          );
+                        })}
+                      </div>
                     </div>
 
                     {/* CTA */}
