@@ -830,6 +830,27 @@ const GruposRestauracion = () => {
       <IntelBlock t={t} />
       <PilotBlock t={t} localePath={localePath} />
 
+      {/* ── 3 CAPAS PARA GRUPOS — INTRO ── */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto text-center">
+          <ScrollReveal>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">
+              {lang === "es" ? "Plataforma completa" : "Complete platform"}
+            </p>
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+              {lang === "es"
+                ? <>Core + Supply + Dinámica: <span className="text-gradient-wine">la combinación que tiene sentido a escala</span></>
+                : <>Core + Supply + Dynamic: <span className="text-gradient-wine">the combination that makes sense at scale</span></>}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {lang === "es"
+                ? "Un grupo necesita analizar rendimiento (Core), decidir compras con dato (Supply) y activar la carta en tiempo real (Inteligencia Dinámica). Las tres capas trabajan juntas para que el vino se gestione como una categoría de negocio gobernable."
+                : "A group needs to analyze performance (Core), make data-driven purchase decisions (Supply), and activate the list in real time (Dynamic Intelligence). The three layers work together so wine is managed as a governable business category."}
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ── WINERIM CORE PARA GRUPOS ── */}
       <section className="section-padding">
         <div className="max-w-5xl mx-auto">
@@ -839,9 +860,9 @@ const GruposRestauracion = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                    <BarChart3 size={20} className="text-amber-400" />
+                    <BarChart3 size={20} className="text-amber-500" />
                   </div>
-                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-amber-400/70">
+                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-amber-500/70">
                     {lang === "es" ? "Capa analítica" : "Analytics layer"}
                   </span>
                 </div>
@@ -850,8 +871,8 @@ const GruposRestauracion = () => {
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
                   {lang === "es"
-                    ? "Los grupos necesitan una capa analítica que les ayude a comparar unidades, detectar oportunidades, ajustar pricing, prever consumo y decidir mejor qué referencias merece la pena mantener, replicar o retirar."
-                    : "Groups need an analytics layer that helps compare units, detect opportunities, adjust pricing, forecast consumption, and decide which references to keep, replicate or retire."}
+                    ? "Permite comparar unidades, detectar diferencias de rendimiento, ajustar pricing, prever consumo y decidir qué referencias merece la pena mantener, replicar o retirar."
+                    : "Compare units, detect performance differences, adjust pricing, forecast consumption, and decide which references to keep, replicate or retire."}
                 </p>
                 <ul className="space-y-3 mb-8">
                   {(lang === "es" ? [
@@ -868,12 +889,12 @@ const GruposRestauracion = () => {
                     "Wine list change simulation before deployment",
                   ]).map((b) => (
                     <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <CheckCircle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
                       <span>{b}</span>
                     </li>
                   ))}
                 </ul>
-                <Link to="/producto/winerim-core" className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors tracking-wider uppercase">
+                <Link to="/producto/winerim-core" className="inline-flex items-center gap-2 text-sm font-semibold text-amber-500 hover:text-amber-400 transition-colors tracking-wider uppercase">
                   {lang === "es" ? "Ver Winerim Core" : "See Winerim Core"} <ArrowRight size={14} />
                 </Link>
               </div>
@@ -891,9 +912,9 @@ const GruposRestauracion = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                    <Warehouse size={20} className="text-emerald-400" />
+                    <Warehouse size={20} className="text-emerald-500" />
                   </div>
-                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-400/70">
+                  <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-500/70">
                     {lang === "es" ? "Inteligencia de compras" : "Purchasing intelligence"}
                   </span>
                 </div>
@@ -902,8 +923,8 @@ const GruposRestauracion = () => {
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
                   {lang === "es"
-                    ? "Winerim también ayuda a grupos a comprar con más criterio. Conecta datos de venta, stock y rendimiento con las decisiones de aprovisionamiento para que cada euro invertido en bodega tenga sentido."
-                    : "Winerim also helps groups purchase smarter. It connects sales, stock and performance data with procurement decisions so every euro invested in the cellar makes sense."}
+                    ? "Ayuda a comparar compras por unidad, detectar sobreprecios, revisar capital inmovilizado y construir lógica de compra por cluster o tipo de local."
+                    : "Compare purchases per unit, detect overpricing, review tied-up capital, and build purchasing logic per cluster or venue type."}
                 </p>
                 <ul className="space-y-3 mb-8">
                   {(lang === "es" ? [
@@ -920,12 +941,12 @@ const GruposRestauracion = () => {
                     "Build purchasing logic per cluster or venue type",
                   ]).map((b) => (
                     <li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                       <span>{b}</span>
                     </li>
                   ))}
                 </ul>
-                <Link to="/producto/winerim-supply" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors tracking-wider uppercase">
+                <Link to="/producto/winerim-supply" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-500 hover:text-emerald-400 transition-colors tracking-wider uppercase">
                   {lang === "es" ? "Ver Winerim Supply" : "See Winerim Supply"} <ArrowRight size={14} />
                 </Link>
               </div>
