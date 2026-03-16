@@ -72,10 +72,15 @@ const i18n: Record<SupportedLang, {
   s8_badge: string; s8_title_1: string; s8_title_highlight: string; s8_subtitle: string;
   s8_metrics: { title: string; desc: string }[];
   s8_disclaimer: string;
-  // Section 9 — CTA Final
+  // Section 9 — Core vs ID comparison
+  s9b_title: string; s9b_subtitle: string;
+  s9b_core_label: string; s9b_core_items: string[];
+  s9b_id_label: string; s9b_id_items: string[];
+  s9b_closing: string; s9b_cta: string;
+  // Section 10 — CTA Final
   s9_title_1: string; s9_title_2: string; s9_subtitle: string;
   s9_cta_demo: string; s9_cta_contact: string;
-  // Section 10 — Closing
+  // Section 11 — Closing
   s10_title_1: string; s10_title_2: string; s10_title_highlight: string;
   s10_subtitle: string; s10_cta: string; s10_cta_contact: string; s10_microcopy: string;
   // Internal links
