@@ -311,22 +311,6 @@ const GuiasRecursos = () => {
           )}
         </section>
 
-        {/* RESOURCES */}
-        <section id="recursos" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
-          <SectionHeader icon={Download} title={t.resourcesTitle} desc={t.resourcesDesc} count={filteredResources.length} />
-          <FilterPills filters={taxonomyFilters} active={resourceFilter} onChange={setResourceFilter} />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredResources.map((item, i) => (
-              <ScrollReveal key={item.to} delay={i * 0.03}>
-                <TypedCard item={item} type="resource" cta={t.download} />
-              </ScrollReveal>
-            ))}
-          </div>
-          {filteredResources.length === 0 && (
-            <p className="text-center text-muted-foreground text-sm py-12">No hay recursos con este filtro. Prueba con otra categoría.</p>
-          )}
-        </section>
-
         {/* TOOLS */}
         <section id="herramientas" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
           <SectionHeader icon={Wrench} title={t.toolsTitle} desc={t.toolsDesc} count={tools.length} />
