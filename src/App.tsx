@@ -174,6 +174,8 @@ const esRoutes = (
     <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
     <Route path="/recursos" element={<Recursos />} />
     <Route path="/recursos/:slug" element={<ResourcePage />} />
+    <Route path="/decision-center" element={<DecisionCenter />} />
+    <Route path="/decision-center/:areaSlug" element={<DecisionCenterArea />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
     <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
