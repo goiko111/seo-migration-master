@@ -612,9 +612,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim convierte tu carta de vinos en un vendedor inteligente: recomendaciones personalizadas, diseño optimizado y analítica de conversión.",
     internalLinks: [
       { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: carta de vinos rentable", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
-      { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
-      { to: "/problemas/carta-de-vinos-no-vende", label: "Mi carta de vinos no vende", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: arquitectura y diagnóstico de carta", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: recomendaciones IA", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
