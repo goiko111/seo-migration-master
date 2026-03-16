@@ -1137,7 +1137,77 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            9. CTA FINAL
+            9b. CORE vs ID — COMPLEMENTARY LAYERS
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          <div className="relative max-w-5xl mx-auto">
+            <ScrollReveal className="text-center mb-14">
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4">
+                {tx.s9b_title}
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{tx.s9b_subtitle}</p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                {/* Core side */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                      <Gauge size={18} className="text-amber-400" />
+                    </div>
+                    <h3 className="text-sm font-bold tracking-widest uppercase text-amber-400">{tx.s9b_core_label}</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {tx.s9b_core_items.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <Lightbulb size={14} className="mt-0.5 text-amber-400/60 shrink-0" />
+                        <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* ID side */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-wine/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wine/6 via-wine/3 to-transparent pointer-events-none" />
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-wine/40 to-transparent" />
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-wine/15 flex items-center justify-center">
+                        <Brain size={18} className="text-wine" />
+                      </div>
+                      <h3 className="text-sm font-bold tracking-widest uppercase text-wine">{tx.s9b_id_label}</h3>
+                    </div>
+                    <ul className="space-y-4">
+                      {tx.s9b_id_items.map((item) => (
+                        <li key={item} className="flex items-start gap-3">
+                          <Zap size={14} className="mt-0.5 text-wine/60 shrink-0" />
+                          <span className="text-sm text-foreground font-medium leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="mt-10 text-center">
+                <p className="font-heading text-lg md:text-xl text-foreground/80 italic mb-6">{tx.s9b_closing}</p>
+                <Link to={localePath("/producto/winerim-core")}
+                  className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/40 transition-colors">
+                  {tx.s9b_cta} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            10. CTA FINAL
         ════════════════════════════════════════════════ */}
         <section className="section-padding">
           <div className="max-w-4xl mx-auto">
