@@ -10,6 +10,7 @@ export interface InsightDrawerData {
   porQueTeLoMostramos: string;
   queDeberias: string[];
   recurso: { label: string; href: string };
+  decisionCenterHref?: string;
 }
 
 interface InsightDrawerProps {
