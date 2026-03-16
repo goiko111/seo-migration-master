@@ -641,7 +641,20 @@ const Precios = () => {
                     </div>
                     <p className="text-sm font-medium text-foreground/80 mb-1">{plan.tagline}</p>
                     <p className="text-xs text-muted-foreground italic mb-1">{plan.solves}</p>
-                    <p className="text-xs text-wine/80 font-medium mb-5">{plan.fits}</p>
+                    <p className="text-xs text-wine/80 font-medium mb-3">{plan.fits}</p>
+
+                    {/* Positioning line + layer badge */}
+                    {(() => {
+                      const pos = (planPositioning[lang] || planPositioning.es)[i];
+                      return (
+                        <div className="mb-5 space-y-2">
+                          <p className="text-xs text-foreground/70 font-medium leading-relaxed">{pos.line}</p>
+                          <Link to={localePath(pos.link)} className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-semibold tracking-wider uppercase transition-colors hover:opacity-80 ${pos.badgeColor}`}>
+                            {pos.badge} <ArrowRight size={10} />
+                          </Link>
+                        </div>
+                      );
+                    })()}
 
                     <ul className="space-y-2 mb-4 flex-1">
                       {plan.features.map((f, fi) => (
