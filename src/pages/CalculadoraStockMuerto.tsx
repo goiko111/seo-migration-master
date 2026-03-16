@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, RotateCcw, DollarSign, AlertTriangle, TrendingUp,
-  Sparkles, CheckCircle, Layers, Wine, BarChart3, Plus, Trash2
+  Sparkles, CheckCircle, Layers, Wine, BarChart3, Plus, Trash2,
+  ShoppingCart, Info,
 } from "lucide-react";
 import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
@@ -32,6 +33,27 @@ const emptyItem = (): StockItem => ({ nombre: "", unidades: 1, costeUnidad: 10, 
 const CAT_LABELS: Record<string, string> = { entrada: "Entrada", media: "Gama media", premium: "Premium", alta: "Alta gama" };
 
 const formatEur = (n: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+
+/* ─── Recommendation logic ─── */
+type Recommendation = "impulsar" | "copa" | "retirar" | "no-reponer";
+const getRecommendation = (item: StockItem): { rec: Recommendation; label: string; color: string } => {
+  if (item.diasSinVenta > 365) return { rec: "retirar", label: "Retirar de carta", color: "text-destructive" };
+  if (item.diasSinVenta > 180 && item.categoria === "alta") return { rec: "copa", label: "Sacar por copa", color: "text-amber-500" };
+  if (item.diasSinVenta > 180) return { rec: "no-reponer", label: "No reponer", color: "text-destructive" };
+  if (item.diasSinVenta > 120) return { rec: "copa", label: "Sacar por copa", color: "text-amber-500" };
+  if (item.diasSinVenta > 90) return { rec: "impulsar", label: "Impulsar venta", color: "text-wine" };
+  return { rec: "impulsar", label: "Impulsar venta", color: "text-wine" };
+};
+
+const getPriority = (dias: number): { label: string; color: string; bg: string } => {
+  if (dias > 365) return { label: "Crítica", color: "text-destructive", bg: "bg-destructive/10" };
+  if (dias > 180) return { label: "Alta", color: "text-destructive", bg: "bg-destructive/10" };
+  if (dias > 90) return { label: "Media", color: "text-amber-500", bg: "bg-amber-500/10" };
+  return { label: "Baja", color: "text-wine", bg: "bg-wine/10" };
+};
+
+/* Annual opportunity cost rate (conservative) */
+const OPPORTUNITY_RATE = 0.08;
 
 const CalculadoraStockMuerto = () => {
   const [items, setItems] = useState<StockItem[]>([emptyItem(), emptyItem(), emptyItem()]);
@@ -71,27 +93,29 @@ const CalculadoraStockMuerto = () => {
         it.diasSinVenta > 180 ? "muerto" :
         it.diasSinVenta > 90 ? "lento" : "alerta";
       const riesgoDeterioro = it.diasSinVenta > 365 ? "alto" : it.diasSinVenta > 180 ? "medio" : "bajo";
-      return { ...it, capital, estado, riesgoDeterioro };
+      const opportunityCost = capital * OPPORTUNITY_RATE * (it.diasSinVenta / 365);
+      const recommendation = getRecommendation(it);
+      const priority = getPriority(it.diasSinVenta);
+      return { ...it, capital, estado, riesgoDeterioro, opportunityCost, recommendation, priority };
     });
 
     const totalCapital = classified.reduce((s, it) => s + it.capital, 0);
+    const totalOpportunityCost = classified.reduce((s, it) => s + it.opportunityCost, 0);
     const totalUnidades = classified.reduce((s, it) => s + it.unidades, 0);
     const muertos = classified.filter(it => it.estado === "muerto");
     const lentos = classified.filter(it => it.estado === "lento");
     const alerta = classified.filter(it => it.estado === "alerta");
+    const pctDormido = validItems.length > 0 ? ((muertos.length + lentos.length) / validItems.length * 100) : 0;
 
     const capitalMuerto = muertos.reduce((s, it) => s + it.capital, 0);
     const capitalLento = lentos.reduce((s, it) => s + it.capital, 0);
 
-    // By category
     const porCategoria = Object.entries(CAT_LABELS).map(([key, label]) => {
       const refs = classified.filter(it => it.categoria === key);
       return { key, label, count: refs.length, capital: refs.reduce((s, it) => s + it.capital, 0) };
     }).filter(c => c.count > 0);
 
-    // Actions
     const acciones: { icono: React.ElementType; texto: string; tipo: "urgente" | "recomendado" | "preventivo" }[] = [];
-
     if (muertos.length > 0) {
       acciones.push({ icono: AlertTriangle, tipo: "urgente", texto: `${muertos.length} referencia(s) con más de 6 meses sin venderse (${formatEur(capitalMuerto)} inmovilizados). Acción: ofrecerlas por copa, en menú degustación o negociar devolución.` });
     }
@@ -103,14 +127,14 @@ const CalculadoraStockMuerto = () => {
     }
     acciones.push({ icono: CheckCircle, tipo: "preventivo", texto: "Implementa una revisión trimestral de rotación para detectar vinos muertos antes de que acumulen meses sin movimiento." });
 
-    return { classified, totalCapital, totalUnidades, muertos, lentos, alerta, capitalMuerto, capitalLento, porCategoria, acciones };
+    return { classified, totalCapital, totalOpportunityCost, totalUnidades, muertos, lentos, alerta, capitalMuerto, capitalLento, porCategoria, acciones, pctDormido };
   }, [validItems]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Calculadora de Stock Muerto de Vinos | Winerim"
-        description="Calcula cuánto capital tienes inmovilizado en vinos sin rotación. Identifica referencias muertas, estima el impacto económico y recibe recomendaciones de acción."
+        title="Calculadora de Stock Muerto de Vinos | Demo Winerim Core + Supply"
+        description="Calcula cuánto capital tienes inmovilizado en vinos sin rotación. Demo del motor de detección de obsolescencia de Winerim Core y Winerim Supply."
         url={`${CANONICAL_DOMAIN}/herramientas/calculadora-stock-muerto`}
       />
       <Navbar />
@@ -122,9 +146,9 @@ const CalculadoraStockMuerto = () => {
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Calculadora de stock muerto" }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
-            <RotateCcw size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine">Herramienta gratuita</span>
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/5 mb-6">
+            <BarChart3 size={14} className="text-amber-500" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-amber-500">Demo · Winerim Core + Supply</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             className="font-heading text-3xl md:text-5xl font-bold leading-tight mb-6">
@@ -137,22 +161,44 @@ const CalculadoraStockMuerto = () => {
         </div>
       </section>
 
+      {/* ── DEMO INTRO BLOCK ── */}
+      <section className="max-w-5xl mx-auto px-6 md:px-12 pb-4">
+        <ScrollReveal>
+          <div className="relative bg-gradient-card rounded-2xl border border-amber-500/20 p-6 md:p-8 overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,hsl(38_90%_55%/0.05),transparent_60%)]" />
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                <Sparkles size={18} className="text-amber-500" />
+              </div>
+              <div>
+                <h2 className="font-heading text-base font-bold text-foreground mb-1">
+                  Detectar stock muerto es solo el principio
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Winerim ayuda a cuantificar capital inmovilizado, riesgo de obsolescencia y coste de oportunidad para tomar mejores decisiones de rotación y compra.
+                </p>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
       <ToolStrategicBlock
         layer="supply"
         decides={[
           "Qué referencias sacar de carta por falta de rotación",
-          "Cuánto capital real tienes inmovilizado en bodega",
-          "Qué vinos necesitan acción inmediata vs. seguimiento",
+          "Cuánto capital real tienes inmovilizado y su coste de oportunidad",
+          "Qué vinos impulsar, sacar por copa, retirar o no reponer",
         ]}
         avoids={[
           "Seguir comprando referencias que no se venden",
-          "Inmovilizar capital en stock sin retorno",
-          "Tomar decisiones de compra sin dato de rotación",
+          "Inmovilizar capital sin visibilidad del coste real",
+          "Tomar decisiones de compra sin dato de rotación ni prioridad",
         ]}
         impact={[
           "Liberación de capital bloqueado en stock sin rotación",
-          "Mejora de la rotación media de la bodega",
-          "Criterio objetivo para renegociar con distribuidores",
+          "Reducción del porcentaje de stock dormido por debajo del 15%",
+          "Criterio objetivo para renegociar, retirar o reconvertir referencias",
         ]}
       />
 
@@ -220,20 +266,42 @@ const CalculadoraStockMuerto = () => {
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
 
-            {/* Summary */}
-            <div className="text-center p-8 rounded-2xl border border-border bg-gradient-card">
-              <p className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-2">Capital inmovilizado total</p>
-              <div className="text-5xl md:text-6xl font-heading font-bold text-destructive">
-                {formatEur(analysis.totalCapital)}
+            {/* Summary KPIs */}
+            <div className="grid md:grid-cols-4 gap-4">
+              <div className="text-center p-6 rounded-2xl border border-border bg-gradient-card">
+                <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Capital inmovilizado</p>
+                <p className="text-3xl md:text-4xl font-heading font-bold text-destructive">{formatEur(analysis.totalCapital)}</p>
+                <p className="text-xs text-muted-foreground mt-1">{analysis.totalUnidades} uds · {validItems.length} refs</p>
               </div>
-              <p className="text-muted-foreground mt-2 text-sm">en {analysis.totalUnidades} unidades de {validItems.length} referencias</p>
+              <div className="text-center p-6 rounded-2xl border border-border bg-gradient-card">
+                <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Coste de oportunidad</p>
+                <p className="text-3xl md:text-4xl font-heading font-bold text-amber-500">{formatEur(analysis.totalOpportunityCost)}</p>
+                <p className="text-xs text-muted-foreground mt-1">estimado anualizado (8%)</p>
+              </div>
+              <div className="text-center p-6 rounded-2xl border border-border bg-gradient-card">
+                <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">% Stock dormido</p>
+                <p className={`text-3xl md:text-4xl font-heading font-bold ${analysis.pctDormido > 30 ? "text-destructive" : analysis.pctDormido > 15 ? "text-amber-500" : "text-wine"}`}>
+                  {analysis.pctDormido.toFixed(0)}%
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">{analysis.muertos.length + analysis.lentos.length} de {validItems.length} refs</p>
+              </div>
+              <div className="text-center p-6 rounded-2xl border border-border bg-gradient-card">
+                <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Prioridad general</p>
+                {(() => {
+                  const p = analysis.pctDormido > 30 ? { label: "Crítica", color: "text-destructive" }
+                    : analysis.pctDormido > 15 ? { label: "Alta", color: "text-amber-500" }
+                    : { label: "Bajo control", color: "text-emerald-500" };
+                  return <p className={`text-3xl md:text-4xl font-heading font-bold ${p.color}`}>{p.label}</p>;
+                })()}
+                <p className="text-xs text-muted-foreground mt-1">señal de acción</p>
+              </div>
             </div>
 
-            {/* Breakdown */}
+            {/* Breakdown by status */}
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { label: "Stock muerto (> 6 meses)", value: formatEur(analysis.capitalMuerto), count: analysis.muertos.length, color: "text-destructive" },
-                { label: "Rotación lenta (3-6 meses)", value: formatEur(analysis.capitalLento), count: analysis.lentos.length, color: "text-yellow-500" },
+                { label: "Rotación lenta (3-6 meses)", value: formatEur(analysis.capitalLento), count: analysis.lentos.length, color: "text-amber-500" },
                 { label: "En alerta (< 3 meses)", value: formatEur(analysis.alerta.reduce((s, it) => s + it.unidades * it.costeUnidad, 0)), count: analysis.alerta.length, color: "text-wine" },
               ].map((seg, i) => (
                 <div key={i} className="rounded-xl border border-border bg-gradient-card p-5 text-center">
@@ -259,7 +327,7 @@ const CalculadoraStockMuerto = () => {
               </div>
             )}
 
-            {/* Detail table */}
+            {/* Detail table with recommendation */}
             <div className="rounded-2xl border border-border bg-gradient-card p-6 overflow-x-auto">
               <h3 className="font-heading font-bold mb-4">Detalle por referencia</h3>
               <table className="w-full text-sm">
@@ -269,29 +337,44 @@ const CalculadoraStockMuerto = () => {
                     <th className="pb-3 font-medium text-right">Uds</th>
                     <th className="pb-3 font-medium text-right">Capital</th>
                     <th className="pb-3 font-medium text-right">Días</th>
-                    <th className="pb-3 font-medium text-center">Estado</th>
+                    <th className="pb-3 font-medium text-center">Prioridad</th>
+                    <th className="pb-3 font-medium text-center">Recomendación</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {analysis.classified.sort((a, b) => b.capital - a.capital).map((it, i) => (
+                  {analysis.classified.sort((a, b) => b.diasSinVenta - a.diasSinVenta).map((it, i) => (
                     <tr key={i} className="border-b border-border/50 last:border-0">
                       <td className="py-3">{it.nombre}</td>
                       <td className="py-3 text-right">{it.unidades}</td>
                       <td className="py-3 text-right font-medium">{formatEur(it.capital)}</td>
                       <td className="py-3 text-right">{it.diasSinVenta}d</td>
                       <td className="py-3 text-center">
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
-                          it.estado === "muerto" ? "bg-destructive/10 text-destructive" :
-                          it.estado === "lento" ? "bg-yellow-500/10 text-yellow-600" :
-                          "bg-wine/10 text-wine"
-                        }`}>
-                          {it.estado === "muerto" ? "Muerto" : it.estado === "lento" ? "Lento" : "Alerta"}
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${it.priority.bg} ${it.priority.color}`}>
+                          {it.priority.label}
+                        </span>
+                      </td>
+                      <td className="py-3 text-center">
+                        <span className={`text-xs font-semibold ${it.recommendation.color}`}>
+                          {it.recommendation.label}
                         </span>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Insight */}
+            <div className="bg-wine/5 border border-wine/20 rounded-xl p-4">
+              <p className="text-xs text-muted-foreground flex items-start gap-2">
+                <Info size={14} className="text-wine shrink-0 mt-0.5" />
+                {analysis.pctDormido > 30
+                  ? `Más del 30% de tus referencias analizadas están dormidas. Esto sugiere un problema de compra o de arquitectura de carta. Winerim Core detecta estas situaciones automáticamente y Winerim Supply ayuda a decidir qué no reponer.`
+                  : analysis.pctDormido > 15
+                  ? `Tienes un ${analysis.pctDormido.toFixed(0)}% de stock dormido. Es un nivel habitual pero mejorable. Una revisión de las referencias marcadas como "No reponer" puede liberar ${formatEur(analysis.capitalMuerto)} de capital.`
+                  : `Tu stock dormido está por debajo del 15%. Buen nivel de rotación. Mantén la revisión periódica para que no se acumule.`
+                }
+              </p>
             </div>
 
             {/* Actions */}
@@ -301,32 +384,15 @@ const CalculadoraStockMuerto = () => {
                 {analysis.acciones.map((a, i) => (
                   <div key={i} className={`flex items-start gap-3 p-4 rounded-xl border ${
                     a.tipo === "urgente" ? "border-destructive/20 bg-destructive/5" :
-                    a.tipo === "recomendado" ? "border-yellow-500/20 bg-yellow-500/5" :
-                    "border-green-500/20 bg-green-500/5"
+                    a.tipo === "recomendado" ? "border-amber-500/20 bg-amber-500/5" :
+                    "border-emerald-500/20 bg-emerald-500/5"
                   }`}>
                     <a.icono size={16} className={`shrink-0 mt-0.5 ${
-                      a.tipo === "urgente" ? "text-destructive" : a.tipo === "recomendado" ? "text-yellow-500" : "text-green-500"
+                      a.tipo === "urgente" ? "text-destructive" : a.tipo === "recomendado" ? "text-amber-500" : "text-emerald-500"
                     }`} />
                     <p className="text-sm leading-relaxed">{a.texto}</p>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center p-8 rounded-2xl border border-wine/20 bg-wine/5">
-              <Sparkles size={24} className="text-wine mx-auto mb-3" />
-              <h3 className="font-heading text-xl font-bold mb-2">Detecta stock muerto automáticamente</h3>
-              <p className="text-sm text-muted-foreground mb-6 max-w-lg mx-auto">
-                Winerim monitoriza la rotación de cada referencia y te alerta cuando un vino deja de venderse. Sin revisiones manuales.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link to="/analisis-carta" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                  Analizar mi carta <ArrowRight size={16} />
-                </Link>
-                <Link to="/demo" className="border border-border text-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-                  Solicitar demo
-                </Link>
               </div>
             </div>
           </motion.div>
@@ -379,6 +445,63 @@ const CalculadoraStockMuerto = () => {
         { q: "¿Cuánto stock debería tener un restaurante?", a: "Depende del tipo y volumen de negocio, pero como regla general, el stock debería poder rotarse completamente en 60-90 días. Si una referencia necesita más de 3 meses para agotarse, es probable que tengas exceso." },
         { q: "¿Los datos se envían a algún servidor?", a: "No. Todo el cálculo se realiza en tu navegador. No almacenamos ni enviamos ningún dato." },
       ]} schemaId="stock-muerto" />
+
+      {/* ── DUAL CTA: CORE + SUPPLY ── */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Core CTA */}
+            <ScrollReveal>
+              <div className="relative bg-gradient-card rounded-2xl border border-amber-500/20 p-8 overflow-hidden h-full flex flex-col">
+                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,hsl(38_90%_55%/0.05),transparent_60%)]" />
+                <div className="relative z-10 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                      <BarChart3 size={18} className="text-amber-500" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-amber-500/70 block">Winerim Core</span>
+                      <h3 className="font-heading text-sm font-bold text-foreground">Detección automática de obsolescencia</h3>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
+                    Winerim Core monitoriza la rotación de cada referencia, detecta stock muerto automáticamente y genera alertas antes de que el capital se inmovilice.
+                  </p>
+                  <Link to="/producto/winerim-core"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-amber-500 hover:text-amber-400 transition-colors">
+                    Ver Winerim Core <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Supply CTA */}
+            <ScrollReveal delay={0.08}>
+              <div className="relative bg-gradient-card rounded-2xl border border-emerald-500/20 p-8 overflow-hidden h-full flex flex-col">
+                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,hsl(152_60%_50%/0.05),transparent_60%)]" />
+                <div className="relative z-10 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+                      <ShoppingCart size={18} className="text-emerald-500" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-500/70 block">Winerim Supply</span>
+                      <h3 className="font-heading text-sm font-bold text-foreground">Decisiones de compra con criterio</h3>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
+                    Winerim Supply ayuda a decidir qué no reponer, qué renegociar con el distribuidor y qué referencias sustituir para liberar capital y mejorar la rotación.
+                  </p>
+                  <Link to="/producto/winerim-supply"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-emerald-500 hover:text-emerald-400 transition-colors">
+                    Ver Winerim Supply <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
 
       <InternalLinks links={[
         { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
