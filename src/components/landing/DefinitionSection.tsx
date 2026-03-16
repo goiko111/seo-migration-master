@@ -336,19 +336,6 @@ const DefinitionSection = () => {
         </div>
       </section>
 
-      {/* Comparison table: Winerim vs formats */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-4xl mx-auto">
-          <ComparisonTable
-            title={comp.title}
-            subtitle={comp.subtitle}
-            columns={comp.columns}
-            rows={comp.rows}
-            highlightColumn={2}
-          />
-        </div>
-      </section>
-
       {/* Not For section */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
