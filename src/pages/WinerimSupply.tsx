@@ -33,7 +33,7 @@ const i18n: Record<SupportedLang, {
   breadcrumbs: { label: string; href?: string }[];
   hero_badge: string;
   hero_title_1: string; hero_title_highlight: string;
-  hero_subtitle: string;
+  hero_subtitle: string; hero_journey: string;
   hero_cta_primary: string; hero_cta_secondary: string;
   // Section 2 — What is
   s2_eyebrow: string;
@@ -66,12 +66,13 @@ const i18n: Record<SupportedLang, {
     seo_desc: "Winerim Supply analiza precios de compra, distribuidores, rotación y oportunidades para ayudarte a decidir qué comprar, qué renegociar y qué no reponer. Compra mejor, vende mejor.",
     seo_url: "https://winerim.wine/producto/winerim-supply",
     breadcrumbs: [{ label: "Inicio", href: "/" }, { label: "Funcionalidades", href: "/funcionalidades" }, { label: "Winerim Supply" }],
-    hero_badge: "Inteligencia de compras",
-    hero_title_1: "No solo te ayudamos a vender mejor. ",
-    hero_title_highlight: "También a comprar mejor.",
-    hero_subtitle: "Winerim analiza precios de compra, stock, rotación, oportunidades y distribuidores para ayudarte a decidir qué merece la pena seguir comprando, qué renegociar y qué no reponer.",
+    hero_badge: "WINERIM SUPPLY",
+    hero_title_1: "La capa que te ayuda a comprar mejor, ",
+    hero_title_highlight: "no solo a vender mejor",
+    hero_subtitle: "Winerim Supply analiza precios de compra, stock, rotación, oportunidades y distribuidores para ayudarte a decidir qué merece la pena seguir comprando, qué renegociar y qué no reponer.",
+    hero_journey: "Comprar mejor → Analizar mejor → Vender mejor",
     hero_cta_primary: "Quiero ver Winerim Supply",
-    hero_cta_secondary: "Ver cómo se conecta con Core",
+    hero_cta_secondary: "Ver cómo se conecta con Winerim Core",
     s2_eyebrow: "Qué es Winerim Supply",
     s2_title_1: "La capa que conecta lo que ",
     s2_title_sells: "vendes",
@@ -148,12 +149,13 @@ const i18n: Record<SupportedLang, {
     seo_desc: "Winerim Supply analyses purchase prices, distributors, rotation and opportunities to help you decide what to buy, renegotiate and stop restocking. Buy better, sell better.",
     seo_url: "https://winerim.wine/en/product/winerim-supply",
     breadcrumbs: [{ label: "Home", href: "/" }, { label: "Features", href: "/funcionalidades" }, { label: "Winerim Supply" }],
-    hero_badge: "Purchasing intelligence",
-    hero_title_1: "We don't just help you sell better. ",
-    hero_title_highlight: "We help you buy better too.",
-    hero_subtitle: "Winerim analyses purchase prices, stock, rotation, opportunities and distributors to help you decide what's worth restocking, renegotiating or dropping.",
+    hero_badge: "WINERIM SUPPLY",
+    hero_title_1: "The layer that helps you buy better, ",
+    hero_title_highlight: "not just sell better",
+    hero_subtitle: "Winerim Supply analyses purchase prices, stock, rotation, opportunities and distributors to help you decide what's worth restocking, renegotiating or dropping.",
+    hero_journey: "Buy better → Analyse better → Sell better",
     hero_cta_primary: "I want to see Winerim Supply",
-    hero_cta_secondary: "See how it connects with Core",
+    hero_cta_secondary: "See how it connects with Winerim Core",
     s2_eyebrow: "What is Winerim Supply",
     s2_title_1: "The layer that connects what you ",
     s2_title_sells: "sell",
@@ -230,12 +232,13 @@ const i18n: Record<SupportedLang, {
     seo_desc: "Winerim Supply analizza prezzi d'acquisto, distributori, rotazione e opportunità per aiutarti a decidere cosa comprare, cosa rinegoziare e cosa non riordinare. Compra meglio, vendi meglio.",
     seo_url: "https://winerim.wine/it/prodotto/winerim-supply",
     breadcrumbs: [{ label: "Home", href: "/" }, { label: "Funzionalità", href: "/funcionalidades" }, { label: "Winerim Supply" }],
-    hero_badge: "Intelligenza degli acquisti",
-    hero_title_1: "Non ti aiutiamo solo a vendere meglio. ",
-    hero_title_highlight: "Anche a comprare meglio.",
-    hero_subtitle: "Winerim analizza prezzi d'acquisto, stock, rotazione, opportunità e distributori per aiutarti a decidere cosa vale la pena continuare a comprare, cosa rinegoziare e cosa non riordinare.",
+    hero_badge: "WINERIM SUPPLY",
+    hero_title_1: "Il livello che ti aiuta a comprare meglio, ",
+    hero_title_highlight: "non solo a vendere meglio",
+    hero_subtitle: "Winerim Supply analizza prezzi d'acquisto, stock, rotazione, opportunità e distributori per aiutarti a decidere cosa vale la pena continuare a comprare, cosa rinegoziare e cosa non riordinare.",
+    hero_journey: "Comprare meglio → Analizzare meglio → Vendere meglio",
     hero_cta_primary: "Voglio vedere Winerim Supply",
-    hero_cta_secondary: "Vedi come si connette con Core",
+    hero_cta_secondary: "Vedi come si connette con Winerim Core",
     s2_eyebrow: "Cos'è Winerim Supply",
     s2_title_1: "Il livello che collega ciò che ",
     s2_title_sells: "vendi",
@@ -312,12 +315,13 @@ const i18n: Record<SupportedLang, {
     seo_desc: "Winerim Supply analyse les prix d'achat, les distributeurs, la rotation et les opportunités pour vous aider à décider quoi acheter, renégocier et ne pas réapprovisionner. Achetez mieux, vendez mieux.",
     seo_url: "https://winerim.wine/fr/produit/winerim-supply",
     breadcrumbs: [{ label: "Accueil", href: "/" }, { label: "Fonctionnalités", href: "/funcionalidades" }, { label: "Winerim Supply" }],
-    hero_badge: "Intelligence des achats",
-    hero_title_1: "Nous ne vous aidons pas seulement à mieux vendre. ",
-    hero_title_highlight: "Nous vous aidons aussi à mieux acheter.",
-    hero_subtitle: "Winerim analyse les prix d'achat, le stock, la rotation, les opportunités et les distributeurs pour vous aider à décider ce qu'il vaut la peine de continuer à acheter, à renégocier et à ne pas réapprovisionner.",
+    hero_badge: "WINERIM SUPPLY",
+    hero_title_1: "La couche qui vous aide à mieux acheter, ",
+    hero_title_highlight: "pas seulement à mieux vendre",
+    hero_subtitle: "Winerim Supply analyse les prix d'achat, le stock, la rotation, les opportunités et les distributeurs pour vous aider à décider ce qu'il vaut la peine de continuer à acheter, à renégocier et à ne pas réapprovisionner.",
+    hero_journey: "Mieux acheter → Mieux analyser → Mieux vendre",
     hero_cta_primary: "Je veux voir Winerim Supply",
-    hero_cta_secondary: "Voir la connexion avec Core",
+    hero_cta_secondary: "Voir la connexion avec Winerim Core",
     s2_eyebrow: "Qu'est-ce que Winerim Supply",
     s2_title_1: "La couche qui relie ce que vous ",
     s2_title_sells: "vendez",
@@ -455,7 +459,8 @@ const WinerimSupply = () => {
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">{tx.hero_subtitle}</p>
+            <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-4">{tx.hero_subtitle}</p>
+            <p className="font-heading text-sm sm:text-base font-semibold tracking-[0.15em] uppercase text-emerald-400/80 mb-10">{tx.hero_journey}</p>
           </ScrollReveal>
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
