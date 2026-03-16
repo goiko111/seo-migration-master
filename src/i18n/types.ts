@@ -147,7 +147,9 @@ export interface TranslationDict {
   // Nav - Resources mega
   nav_resources: string;
   nav_resources_learn: string;
+  nav_resources_downloads: string;
   nav_resources_tools: string;
+  nav_downloadable_resources: string;
   nav_benchmarks: string;
 
   // Nav sections
