@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, Utensils, Flame, Globe, Loader2,
   Thermometer, MapPin, Grape, Lightbulb, Sparkles, RotateCcw
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
