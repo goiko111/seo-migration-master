@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { BarChart3, Zap, ShoppingCart } from "lucide-react";
 import {
   ArrowRight, Check, Zap, Crown, Building2,
   Sparkles, Clock, Headphones, Puzzle, GraduationCap,
