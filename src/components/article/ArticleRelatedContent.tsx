@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 export interface RelatedLink {
   to: string;
   label: string;
-  type: "tool" | "guide" | "resource" | "solution";
+  type: "tool" | "guide" | "resource" | "solution" | "decision-center";
 }
 
 const typeConfig = {
@@ -13,6 +13,7 @@ const typeConfig = {
   guide: { icon: BookOpen, badge: "Guía", badgeClass: "text-accent" },
   resource: { icon: Download, badge: "Recurso", badgeClass: "text-emerald-500" },
   solution: { icon: Lightbulb, badge: "Solución", badgeClass: "text-amber-500" },
+  "decision-center": { icon: Brain, badge: "Decision Center", badgeClass: "text-purple-500" },
 };
 
 /** Keyword → related links mapping for automatic suggestion */
