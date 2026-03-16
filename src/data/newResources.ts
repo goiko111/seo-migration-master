@@ -194,10 +194,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Controla la rotación con Winerim",
     ctaFinalDescription: "Winerim monitoriza automáticamente la rotación de cada referencia y te alerta cuando un vino no se vende. Sin auditorías manuales.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación de vinos", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
