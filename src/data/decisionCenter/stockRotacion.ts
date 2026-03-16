@@ -93,6 +93,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-sacar-por-copa",
       title: "Cuándo sacarla por copa",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha detectado referencias lentas que podrían funcionar por copa para acelerar la rotación.",
+        whyMatters: "La copa reduce la barrera de entrada del comensal y te permite recuperar capital en días en vez de meses.",
+        riskIfIgnored: "El stock sigue parado hasta que se deteriora o lo liquidar a pérdida.",
+      },
       queSignifica:
         "Mover una referencia lenta a copa es una estrategia de rescate: en vez de esperar a que alguien pida la botella, la ofreces por copa para acelerar la rotación y recuperar al menos parte de la inversión. Funciona bien con vinos que son buenos pero que el comensal no se atreve a pedir en botella (precio alto, uva desconocida, región poco habitual).",
       porQueImporta:
