@@ -44,6 +44,12 @@ export const GUIDES = {
   datosCompra: { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", label: "Usar datos para comprar vinos", description: "Rotación, márgenes y tendencias: compra con criterio.", type: "guide" as const },
 };
 
+export const PRODUCTS = {
+  core: { to: "/producto/winerim-core", label: "Winerim Core: motor analítico", description: "26 módulos de diagnóstico, pricing, stock, benchmark y arquitectura de carta.", type: "solution" as const },
+  supply: { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", description: "Comparativa de precios, alertas de sobreprecio y reposición inteligente.", type: "solution" as const },
+  id: { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: IA táctica", description: "Recomendaciones en tiempo real (RIMs™) para pricing, rotación y carta.", type: "solution" as const },
+};
+
 export const SOLUTIONS = {
   software: { to: "/software-carta-de-vinos", label: "Software de carta de vinos", description: "Plataforma completa para digitalizar y rentabilizar tu carta.", type: "solution" as const },
   funcionalidades: { to: "/funcionalidades", label: "Todas las funcionalidades", description: "11 categorías de funcionalidades especializadas en vino.", type: "solution" as const },
