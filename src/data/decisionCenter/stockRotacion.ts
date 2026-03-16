@@ -71,6 +71,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-impulsar",
       title: "Cuándo impulsar una referencia",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha encontrado vinos con buen margen y buena valoración pero baja rotación: no se venden, pero podrían.",
         whyMatters: "Muchos vinos no se venden por falta de visibilidad, no de calidad. Un impulso de 7-14 días puede reactivarlos.",
