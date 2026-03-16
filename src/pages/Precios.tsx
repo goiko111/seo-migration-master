@@ -5,7 +5,7 @@ import {
   ArrowRight, Check, Zap, Crown, Building2,
   Sparkles, Clock, Headphones, Puzzle, GraduationCap,
   TrendingUp, Shield, Wine, BarChart3, Users, Hotel,
-  UtensilsCrossed, ChefHat, Store, X
+  UtensilsCrossed, ChefHat, Store, X, ShoppingCart
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -436,6 +436,116 @@ const Precios = () => {
               {c.ctaBtn2}
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── PRODUCT ARCHITECTURE ── */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60 mb-4">
+              <span className="w-1 h-1 rounded-full bg-wine/50" />
+              {lang === "es" ? "Arquitectura de producto" : lang === "it" ? "Architettura di prodotto" : lang === "fr" ? "Architecture produit" : "Product architecture"}
+            </span>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-3">
+              {lang === "es" ? "Una plataforma, tres capas de " : lang === "it" ? "Una piattaforma, tre livelli di " : lang === "fr" ? "Une plateforme, trois couches de " : "One platform, three layers of "}
+              <span className="text-gradient-wine">{lang === "es" ? "valor" : lang === "it" ? "valore" : lang === "fr" ? "valeur" : "value"}</span>
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+              {lang === "es"
+                ? "Winerim combina una capa analítica profunda, una capa de acción dinámica y una nueva capa de inteligencia de compras."
+                : lang === "it"
+                ? "Winerim combina un livello analitico profondo, un livello di azione dinamica e un nuovo livello di intelligence degli acquisti."
+                : lang === "fr"
+                ? "Winerim combine une couche analytique profonde, une couche d'action dynamique et une nouvelle couche d'intelligence d'achats."
+                : "Winerim combines a deep analytical layer, a dynamic action layer and a new purchasing intelligence layer."}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-3 gap-4 md:gap-5 mb-8">
+            {[
+              {
+                name: "Winerim Core",
+                verb: lang === "es" ? "Analiza" : lang === "it" ? "Analizza" : lang === "fr" ? "Analyse" : "Analyses",
+                description: lang === "es"
+                  ? "Pricing, márgenes, stock, arquitectura y benchmark."
+                  : lang === "it" ? "Pricing, margini, stock, architettura e benchmark."
+                  : lang === "fr" ? "Pricing, marges, stock, architecture et benchmark."
+                  : "Pricing, margins, stock, architecture and benchmarking.",
+                icon: BarChart3,
+                href: "/producto/winerim-core",
+                accent: "text-amber-500",
+                bg: "bg-amber-500/10",
+                border: "border-amber-500/20",
+              },
+              {
+                name: lang === "es" ? "Inteligencia Dinámica" : lang === "it" ? "Intelligenza Dinamica" : lang === "fr" ? "Intelligence Dynamique" : "Dynamic Intelligence",
+                verb: lang === "es" ? "Actúa" : lang === "it" ? "Agisce" : lang === "fr" ? "Agit" : "Acts",
+                description: lang === "es"
+                  ? "Actúa sobre la carta en tiempo real según contexto y objetivos."
+                  : lang === "it" ? "Agisce sulla carta in tempo reale in base al contesto e agli obiettivi."
+                  : lang === "fr" ? "Agit sur la carte en temps réel selon le contexte et les objectifs."
+                  : "Acts on the wine list in real time based on context and goals.",
+                icon: Zap,
+                href: "/producto/inteligencia-dinamica",
+                accent: "text-wine",
+                bg: "bg-wine/10",
+                border: "border-wine/20",
+              },
+              {
+                name: "Winerim Supply",
+                verb: lang === "es" ? "Compra mejor" : lang === "it" ? "Compra meglio" : lang === "fr" ? "Achète mieux" : "Buy smarter",
+                description: lang === "es"
+                  ? "Ayuda a comprar mejor y reponer con más criterio."
+                  : lang === "it" ? "Aiuta a comprare meglio e rifornirsi con più criterio."
+                  : lang === "fr" ? "Aide à mieux acheter et à réapprovisionner avec plus de critère."
+                  : "Helps you buy smarter and restock with better criteria.",
+                icon: ShoppingCart,
+                href: "/producto/winerim-supply",
+                accent: "text-emerald-500",
+                bg: "bg-emerald-500/10",
+                border: "border-emerald-500/20",
+              },
+            ].map((layer, i) => (
+              <ScrollReveal key={layer.name} delay={i * 0.08}>
+                <Link
+                  to={localePath(layer.href)}
+                  className={`group relative flex flex-col items-center text-center p-6 md:p-8 rounded-xl border ${layer.border} bg-card/70 backdrop-blur-sm hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5`}
+                >
+                  <div className={`w-10 h-10 rounded-lg ${layer.bg} flex items-center justify-center mb-4`}>
+                    <layer.icon size={18} className={layer.accent} />
+                  </div>
+                  <h3 className="font-heading text-sm font-bold tracking-wide uppercase text-foreground mb-1">
+                    {layer.name}
+                  </h3>
+                  <span className={`text-xs font-semibold tracking-widest uppercase ${layer.accent} mb-2`}>
+                    {layer.verb}
+                  </span>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {layer.description}
+                  </p>
+                  <ArrowRight size={14} className="mt-3 text-muted-foreground group-hover:text-wine transition-colors" />
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Bottom phrase */}
+          <ScrollReveal delay={0.3}>
+            <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-muted-foreground">
+              <span className="text-emerald-500">
+                {lang === "es" ? "Comprar mejor" : lang === "it" ? "Comprare meglio" : lang === "fr" ? "Acheter mieux" : "Buy smarter"}
+              </span>
+              <span className="text-border">→</span>
+              <span className="text-amber-500">
+                {lang === "es" ? "Analizar mejor" : lang === "it" ? "Analizzare meglio" : lang === "fr" ? "Mieux analyser" : "Analyse better"}
+              </span>
+              <span className="text-border">→</span>
+              <span className="text-wine">
+                {lang === "es" ? "Vender mejor" : lang === "it" ? "Vendere meglio" : lang === "fr" ? "Mieux vendre" : "Sell better"}
+              </span>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
