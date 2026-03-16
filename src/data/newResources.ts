@@ -832,6 +832,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
       { to: "/producto/winerim-core", label: "Winerim Core: automatiza tu revisión mensual", type: "solution" },
       { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: márgenes y pricing", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
