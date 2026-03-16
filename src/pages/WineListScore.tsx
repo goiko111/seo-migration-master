@@ -409,6 +409,8 @@ const WineListScore = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* QUESTIONNAIRE */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
         <div className="space-y-8">
