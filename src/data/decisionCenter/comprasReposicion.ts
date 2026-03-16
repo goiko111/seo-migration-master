@@ -16,12 +16,12 @@ const comprasReposicionContent: DeepAreaContent = {
     { error: "Negociar solo cuando hay un problema", porQueOcurre: "Porque la relación con el proveedor se da por estable. Solo se revisa cuando hay un fallo o una subida de precio.", consecuencia: "Pierdes la oportunidad de mejorar condiciones de forma proactiva. El proveedor asume que estás conforme y no te ofrece nada mejor." },
   ],
   links: [
-    { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Inteligencia de compras: comparativa de precios, alertas de sobreprecio y reposición basada en datos" },
-    { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente", description: "Evalúa si una compra tiene sentido cruzando rotación, margen y stock actual" },
-    { label: "Plantilla: Control grupo restauración", href: "/recursos/plantilla-control-grupo-restauracion", description: "Coordina compras y surtido entre locales de un mismo grupo" },
-    { label: "Plantilla: Revisión mensual de carta", href: "/recursos/plantilla-revision-mensual-carta", description: "Proceso mensual para conectar rendimiento de carta con decisiones de compra" },
-    { label: "Blog: ¿Estás comprando mal vino?", href: "/blog/como-saber-si-estas-comprando-mal-vino-restaurante", description: "Señales de que tu proceso de compra necesita una revisión" },
-    { label: "Blog: ¿Qué vinos merece la pena reponer?", href: "/blog/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale de tu próximo pedido" },
+    { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Inteligencia de compras: comparativa de precios, alertas de sobreprecio y reposición basada en datos", type: "product" },
+    { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente", description: "Evalúa si una compra tiene sentido cruzando rotación, margen y stock actual", type: "tool" },
+    { label: "Plantilla: Control grupo restauración", href: "/recursos/plantilla-control-grupo-restauracion", description: "Coordina compras y surtido entre locales de un mismo grupo", type: "resource" },
+    { label: "Plantilla: Revisión mensual de carta", href: "/recursos/plantilla-revision-mensual-carta", description: "Proceso mensual para conectar rendimiento de carta con decisiones de compra", type: "resource" },
+    { label: "Blog: ¿Estás comprando mal vino?", href: "/blog/como-saber-si-estas-comprando-mal-vino-restaurante", description: "Señales de que tu proceso de compra necesita una revisión", type: "article" },
+    { label: "Blog: ¿Qué vinos merece la pena reponer?", href: "/blog/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale de tu próximo pedido", type: "article" },
   ],
   subtopics: [
     {

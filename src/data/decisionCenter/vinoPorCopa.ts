@@ -16,13 +16,13 @@ const vinoPorCopaContent: DeepAreaContent = {
     { error: "Dejar que el equipo de sala decida qué recomendar por copa", porQueOcurre: "Porque sin directriz clara, cada camarero recomienda lo que conoce o lo que más le gusta.", consecuencia: "La rotación se concentra en 1-2 copas mientras las otras se oxidan. La experiencia del cliente es inconsistente." },
   ],
   links: [
-    { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa", description: "Calcula el precio de copa incluyendo merma real y margen objetivo" },
-    { label: "Guía: Vino por copa", href: "/guias/como-implantar-vino-por-copa-sin-perder-margen", description: "Paso a paso para montar un programa de copa rentable" },
-    { label: "Plantilla: Estrategia de vinos por copa", href: "/recursos/plantilla-estrategia-vinos-por-copa", description: "Diseña tu selección de copas con criterio de negocio" },
-    { label: "Plantilla: Formación exprés para sala", href: "/recursos/plantilla-formacion-expres-sala", description: "Forma a tu equipo para recomendar copa con criterio en 30 minutos" },
-    { label: "Winerim Core", href: "/producto/winerim-core", description: "Monitoriza rotación, merma y rentabilidad por copa automáticamente" },
-    { label: "Blog: Precio por copa sin comerse el margen", href: "/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "Fórmula correcta para fijar precios de copa con merma real" },
-    { label: "Blog: Qué vinos ofrecer por copa", href: "/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Selección de copa según tipo de local y perfil de cliente" },
+    { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa", description: "Calcula el precio de copa incluyendo merma real y margen objetivo", type: "tool" },
+    { label: "Guía: Vino por copa", href: "/guias/como-implantar-vino-por-copa-sin-perder-margen", description: "Paso a paso para montar un programa de copa rentable", type: "guide" },
+    { label: "Plantilla: Estrategia de vinos por copa", href: "/recursos/plantilla-estrategia-vinos-por-copa", description: "Diseña tu selección de copas con criterio de negocio", type: "resource" },
+    { label: "Plantilla: Formación exprés para sala", href: "/recursos/plantilla-formacion-expres-sala", description: "Forma a tu equipo para recomendar copa con criterio en 30 minutos", type: "resource" },
+    { label: "Winerim Core", href: "/producto/winerim-core", description: "Monitoriza rotación, merma y rentabilidad por copa automáticamente", type: "product" },
+    { label: "Blog: Precio por copa sin comerse el margen", href: "/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "Fórmula correcta para fijar precios de copa con merma real", type: "article" },
+    { label: "Blog: Qué vinos ofrecer por copa", href: "/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Selección de copa según tipo de local y perfil de cliente", type: "article" },
   ],
   subtopics: [
     {

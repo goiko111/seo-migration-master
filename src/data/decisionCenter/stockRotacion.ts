@@ -16,13 +16,13 @@ const stockRotacionContent: DeepAreaContent = {
     { error: "Confundir 'vino caro' con 'stock muerto'", porQueOcurre: "Porque un vino de 60 € que tarda en venderse parece stock muerto, pero puede tener un rol de imagen o de ticket alto.", consecuencia: "Retiras vinos estratégicos que sí cumplen una función, y los sustituyes por más del mismo rango medio que ya tienes saturado." },
   ],
   links: [
-    { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto", description: "Cuantifica el capital inmovilizado en referencias sin venta" },
-    { label: "Checklist: Detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos", description: "Proceso paso a paso para identificar y actuar sobre stock parado" },
-    { label: "Scorecard mensual", href: "/recursos/scorecard-mensual", description: "Monitoriza la salud de tu stock cada mes con métricas clave" },
-    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que detecta rotación baja automáticamente" },
-    { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Conecta rotación con decisiones de compra y reposición" },
-    { label: "Blog: Cómo detectar stock muerto", href: "/article/como-detectar-stock-muerto-carta-vinos", description: "Señales de alerta y proceso para identificar vinos sin rotación" },
-    { label: "Blog: Qué vinos merece la pena reponer", href: "/article/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale del próximo pedido" },
+    { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto", description: "Cuantifica el capital inmovilizado en referencias sin venta", type: "tool" },
+    { label: "Checklist: Detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos", description: "Proceso paso a paso para identificar y actuar sobre stock parado", type: "resource" },
+    { label: "Scorecard mensual", href: "/recursos/scorecard-mensual", description: "Monitoriza la salud de tu stock cada mes con métricas clave", type: "resource" },
+    { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que detecta rotación baja automáticamente", type: "product" },
+    { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Conecta rotación con decisiones de compra y reposición", type: "product" },
+    { label: "Blog: Cómo detectar stock muerto", href: "/article/como-detectar-stock-muerto-carta-vinos", description: "Señales de alerta y proceso para identificar vinos sin rotación", type: "article" },
+    { label: "Blog: Qué vinos merece la pena reponer", href: "/article/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale del próximo pedido", type: "article" },
   ],
   subtopics: [
     {
