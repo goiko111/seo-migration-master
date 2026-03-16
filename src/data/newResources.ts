@@ -198,6 +198,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock y rotación", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
