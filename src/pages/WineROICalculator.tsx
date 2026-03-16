@@ -168,6 +168,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Demander une démo",
     months_short: ["Jan","Fév","Mar","Avr","Mai","Jun","Jul","Aoû","Sep","Oct","Nov","Déc"],
     locale: "fr-FR", yr: "/an",
+    decides: ["Si investir dans l'optimisation de la carte est rentable", "Quelle augmentation de CA est réaliste", "Où se trouve le plus grand potentiel : volume, prix ou pénétration"],
+    avoids: ["Prendre des décisions sans quantifier l'impact réel", "Sous-estimer le potentiel d'amélioration de la carte", "Investir sans projection de retour"],
+    impact: ["Quantifier le ROI potentiel de l'optimisation", "Justifier l'investissement en outils de gestion du vin", "Établir des objectifs de CA atteignables"],
   },
 };
 
