@@ -570,6 +570,33 @@ const WinerimCore = () => {
         </div>
       </section>
 
+      {/* ─── 2b. DEPTH PROOF ─── */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <ScrollReveal>
+            <div className="relative rounded-2xl border border-border bg-gradient-card overflow-hidden p-8 md:p-10">
+              {/* Subtle left accent */}
+              <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-wine/40 via-wine/15 to-transparent" />
+
+              <h2 className="font-heading text-xl md:text-2xl font-bold leading-tight mb-5 pl-4">
+                {t.depth_title}
+              </h2>
+              <div className="pl-4 space-y-4">
+                <p className="text-muted-foreground leading-relaxed text-[15px]">
+                  {t.depth_text}
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-[15px]">
+                  {t.depth_text2}
+                </p>
+                <p className="text-xs text-muted-foreground/60 italic pt-2 border-t border-border/50">
+                  {t.depth_micro}
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ─── 3. TOOLS = SIMPLIFIED DEMOS ─── */}
       <section className="py-20 md:py-28">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
