@@ -8,6 +8,13 @@ const stockRotacionContent: DeepAreaContent = {
   icon: Package,
   accent: "text-emerald-500",
   bg: "bg-emerald-500/10",
+  topErrors: [
+    { error: "Mantener referencias lentas 'porque algún día se venderán'", porQueOcurre: "Porque retirar un vino se siente como reconocer un error de compra. Es más cómodo esperar.", consecuencia: "El capital sigue inmovilizado, el vino pierde valor con el tiempo y ocupa un espacio en carta que podría generar ventas reales." },
+    { error: "No cuantificar el coste real del stock parado", porQueOcurre: "Porque el stock muerto no aparece como gasto en la cuenta de resultados. Solo lo ves cuando lo descartas.", consecuencia: "No percibes la urgencia. 20 botellas a 12 € de coste son 240 € que podrían estar invertidos en referencias que sí rotan." },
+    { error: "Impulsar una referencia sin medir el resultado", porQueOcurre: "Porque se le dice al equipo 'recomiéndalo' pero nadie hace seguimiento. Sin medición, no hay aprendizaje.", consecuencia: "No sabes si la acción funcionó o no. Repites el ciclo: impulsar sin medir, esperar sin datos, retirar demasiado tarde." },
+    { error: "Reponer automáticamente todo lo que se acaba", porQueOcurre: "Porque la reposición está en piloto automático. Se pide lo mismo cada semana sin revisar si la demanda ha cambiado.", consecuencia: "Financias stock que se va a quedar parado. El pedido debería basarse en rotación real, no en la lista del mes pasado." },
+    { error: "Confundir 'vino caro' con 'stock muerto'", porQueOcurre: "Porque un vino de 60 € que tarda en venderse parece stock muerto, pero puede tener un rol de imagen o de ticket alto.", consecuencia: "Retiras vinos estratégicos que sí cumplen una función, y los sustituyes por más del mismo rango medio que ya tienes saturado." },
+  ],
   links: [
     { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto", description: "Cuantifica el capital inmovilizado en referencias sin venta" },
     { label: "Checklist: Detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos", description: "Proceso paso a paso para identificar y actuar sobre stock parado" },

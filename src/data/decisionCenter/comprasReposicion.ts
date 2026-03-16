@@ -8,6 +8,13 @@ const comprasReposicionContent: DeepAreaContent = {
   icon: ShoppingCart,
   accent: "text-blue-500",
   bg: "bg-blue-500/10",
+  topErrors: [
+    { error: "Comprar por inercia o por presión del proveedor", porQueOcurre: "Porque el proveedor te llama cada semana y es más fácil repetir el pedido que revisarlo. La rutina sustituye al análisis.", consecuencia: "Tu bodega se llena de lo que te venden, no de lo que necesitas. El stock crece sin relación con la demanda real." },
+    { error: "Evaluar proveedores solo por precio de tarifa", porQueOcurre: "Porque el precio por botella es lo más visible. Pero ignoras portes, mínimos, rappels, plazos y devoluciones.", consecuencia: "Eliges al proveedor 'más barato' que en realidad te cuesta más por botella servida cuando sumas todo." },
+    { error: "No cruzar pedidos con datos de venta", porQueOcurre: "Porque compra y sala operan como departamentos separados. El que pide no mira lo que se vende.", consecuencia: "Compras lo que no se vende y te quedas sin lo que sí se pide. El desalineamiento crece pedido a pedido." },
+    { error: "Reponer sin revisar el stock actual en bodega", porQueOcurre: "Porque contar stock lleva tiempo y parece innecesario cuando 'siempre se necesita'. Pero muchas veces ya tienes suficiente.", consecuencia: "Acumulas exceso de stock en referencias que ya tenías cubiertas. El capital se duplica sin necesidad." },
+    { error: "Negociar solo cuando hay un problema", porQueOcurre: "Porque la relación con el proveedor se da por estable. Solo se revisa cuando hay un fallo o una subida de precio.", consecuencia: "Pierdes la oportunidad de mejorar condiciones de forma proactiva. El proveedor asume que estás conforme y no te ofrece nada mejor." },
+  ],
   links: [
     { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Inteligencia de compras: comparativa de precios, alertas de sobreprecio y reposición basada en datos" },
     { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente", description: "Evalúa si una compra tiene sentido cruzando rotación, margen y stock actual" },
