@@ -6,6 +6,7 @@ import {
   AlertTriangle, CheckCircle, Sparkles, Info, Plus, Trash2,
   Layers, Target
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
