@@ -23,7 +23,7 @@ const data: VerticalContent = {
   forLabel: "Encaja perfecto si…",
   notForLabel: "Quizá no sea para ti si…",
   forItems: [
-    "Tu carta tiene +100 referencias y sospechas que muchas no rotan",
+    "Tu carta tiene más de 250 referencias y sospechas que muchas no rotan",
     "No tienes datos claros de qué vinos generan margen real",
     "Has detectado vinos que se canibalizan entre sí en precio o estilo",
     "Quieres reducir la carta sin perder profundidad ni atractivo",
