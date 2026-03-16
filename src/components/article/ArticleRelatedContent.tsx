@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, BookOpen, Download, Lightbulb, Wine } from "lucide-react";
+import { ArrowRight, Calculator, BookOpen, Download, Lightbulb, Wine, Brain } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export interface RelatedLink {
