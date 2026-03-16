@@ -302,6 +302,8 @@ const WinePricingTool = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* CALCULATOR */}
       <section className="section-padding">
         <div className="max-w-5xl mx-auto">
