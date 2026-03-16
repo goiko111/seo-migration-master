@@ -94,6 +94,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Request demo",
     months_short: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     locale: "en-GB", yr: "/yr",
+    decides: ["Whether investing in wine list optimisation is profitable", "What revenue increase is realistic for your restaurant", "Where the biggest improvement potential lies: volume, price or penetration"],
+    avoids: ["Making decisions without quantifying real impact", "Underestimating the wine list's improvement potential", "Investing in actions without a return projection"],
+    impact: ["Quantify the potential ROI of optimising the list", "Justify investment in wine management tools", "Set achievable revenue targets"],
   },
   it: {
     seo_title: "Wine Sales ROI Calculator – Calcola il Potenziale di Vendita | Winerim",
