@@ -32,6 +32,12 @@ export interface AreaLink {
   type?: LinkType;
 }
 
+export interface AreaNextStep {
+  label: string;
+  href: string;
+  description: string;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -42,6 +48,7 @@ export interface DeepAreaContent {
   topErrors?: AreaTopError[];
   subtopics: SubTopic[];
   links: AreaLink[];
+  nextStep: AreaNextStep;
 }
 
 const margenesPricingContent: DeepAreaContent = {
