@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import { InsightCard, insightLibrary } from "@/components/decision";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
@@ -315,6 +316,27 @@ const DecisionCenter = () => {
                 </ScrollReveal>
               );
             })}
+          </div>
+        </section>
+
+        {/* Contextual insights preview */}
+        <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
+          <ScrollReveal>
+            <div className="mb-8">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
+                Contexto integrado en el producto
+              </h2>
+              <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                Cuando Winerim detecta una alerta o un insight, te explica qué significa, por qué importa y qué hacer. Sin salir de tu flujo de trabajo.
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {(["margen-bajo", "stock-muerto", "copa-poco-rentable", "baja-rotacion"] as const).map((key, i) => (
+              <ScrollReveal key={key} delay={i * 0.06}>
+                <InsightCard insight={insightLibrary[key]} />
+              </ScrollReveal>
+            ))}
           </div>
         </section>
 
