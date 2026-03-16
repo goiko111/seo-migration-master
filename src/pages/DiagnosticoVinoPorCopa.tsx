@@ -176,6 +176,7 @@ const i18n: Record<SupportedLang, {
     avoids: ["Offering only reds by the glass without diversity", "Same price for all by-the-glass wines", "Ignoring waste as a cost variable"],
     impact: ["Optimise glass programme profitability", "Balance the offer to capture more tables", "Reduce waste with controlled rotation"],
   },
+  it: {
     seo_title: "Diagnostica Vino al Calice per Ristoranti | Winerim",
     seo_desc: "Valuta gratis se la tua offerta al calice è ben impostata: copertura stili, equilibrio prezzi, margini e rotazione.",
     jsonld_name: "Diagnostica Vino al Calice", jsonld_desc: "Valuta se la tua offerta al calice è equilibrata per stili, prezzi e redditività.",
