@@ -101,6 +101,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "medir-rotacion-rentabilidad",
       title: "Cómo medir rotación y rentabilidad por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha cruzado botellas abiertas con copas servidas y ha calculado tu merma real por referencia.", whyMatters: "La copa puede parecer rentable en teoría (75% de margen) pero ser ruinosa en práctica (35% tras merma).", riskIfIgnored: "Operas a ciegas con el programa de copa. Sin medición, no sabes si ganas o pierdes con cada referencia." },
       queSignifica:
         "La rotación por copa mide cuántas botellas abiertas terminas en un periodo. Si abres 3 botellas a la semana y vendes todas las copas, tu rotación es excelente. Si abres 3 y tiras fondo de 2, tu rotación real es un desastre disfrazado de ventas. La rentabilidad por copa no es solo el margen teórico: es el margen menos la merma real, menos el coste de servicio, menos las copas que no vendes.",
       porQueImporta:
