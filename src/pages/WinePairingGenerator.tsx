@@ -87,6 +87,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Request demo",
     link_pairing: "Pairing strategy", link_sell: "How to sell more wine",
     link_analyzer: "Wine list analyser", link_demo: "Request Winerim demo",
+    decides: ["Which wine to recommend for each dish", "How to communicate the pairing to the guest", "Which styles suit your menu"],
+    avoids: ["Generic recommendations without criteria", "Relying solely on floor staff intuition", "Losing sales from lack of active suggestions"],
+    impact: ["Increase wine-food cross-selling", "Improve perception of professional service", "Raise average ticket with informed recommendations"],
   },
   it: {
     seo_title: "Wine Pairing Generator – Abbinamento Vini con IA | Winerim",
