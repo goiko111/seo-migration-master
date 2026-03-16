@@ -42,7 +42,7 @@ const data: VerticalContent = {
     { text: "Stock muerto invisible: referencias que llevan meses en carta sin venderse, ocupando capital y espacio sin retorno." },
     { text: "Canibalización silenciosa: vinos de perfil similar compitiendo entre sí, diluyendo ventas y confundiendo al comensal." },
     { text: "Parálisis de elección: el comensal se abruma ante demasiadas opciones y termina pidiendo 'el segundo más barato'." },
-    { text: "Imposibilidad de formar al equipo: nadie puede conocer 200+ referencias. El personal evita recomendar vino." },
+    { text: "Imposibilidad de formar al equipo: nadie puede conocer 250+ referencias. El personal evita recomendar vino." },
     { text: "Pricing inconsistente: multiplicadores genéricos aplicados a toda la carta, sin considerar el rol de cada vino." },
     { text: "Revisiones de carta a ciegas: se cambian referencias por intuición, relación con el proveedor o disponibilidad, no por rendimiento." },
     { text: "Coste de oportunidad: cada referencia que no funciona ocupa el lugar de una que podría generar margen y satisfacción." },
