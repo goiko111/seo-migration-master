@@ -17,6 +17,12 @@ export interface SubTopic {
   };
 }
 
+export interface AreaTopError {
+  error: string;
+  porQueOcurre: string;
+  consecuencia: string;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -24,6 +30,7 @@ export interface DeepAreaContent {
   icon: typeof DollarSign;
   accent: string;
   bg: string;
+  topErrors?: AreaTopError[];
   subtopics: SubTopic[];
   links: { label: string; href: string; description: string }[];
 }
