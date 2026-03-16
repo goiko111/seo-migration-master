@@ -613,9 +613,14 @@ const DecisionCenterArea = () => {
 
   if (!granted) return <PasswordGate onUnlock={unlock} />;
 
-  // Deep area: Márgenes y pricing
-  if (areaSlug === "margenes-pricing") {
-    return <DeepAreaView content={margenesPricingContent} />;
+  // Deep areas
+  const deepAreas: Record<string, DeepAreaContent> = {
+    "margenes-pricing": margenesPricingContent,
+    "stock-rotacion": stockRotacionContent,
+  };
+
+  if (areaSlug && deepAreas[areaSlug]) {
+    return <DeepAreaView content={deepAreas[areaSlug]} />;
   }
 
   // Simple areas
