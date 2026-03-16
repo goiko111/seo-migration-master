@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, TrendingUp, Calculator, DollarSign,
   Store, Tag, Layers, Info, BarChart3, CheckCircle
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from "recharts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
