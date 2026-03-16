@@ -485,10 +485,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Automatiza tu scorecard con Winerim",
     ctaFinalDescription: "Winerim genera automáticamente el scorecard de tu carta cada mes: ventas, rotación, margen y copa en un panel en tiempo real.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/benchmark-peso-vino-ticket-medio", label: "Benchmark: peso del vino en ticket medio", type: "guide" },
-      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", label: "Calculadora de ticket medio", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: KPIs y análisis de rendimiento", type: "solution" },
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
 
