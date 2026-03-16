@@ -3,13 +3,14 @@ import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
-  ArrowLeft, Lock, Shield, BookOpen, AlertTriangle, Lightbulb, FileText
+  ArrowLeft, Lock, Shield, BookOpen, AlertTriangle, Lightbulb, FileText,
+  Info, Target, Clock
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
-/* ── Password gate (shared logic) ── */
+/* ── Password gate ── */
 const GATE_KEY = "wdc_access";
 const GATE_PASSWORD = "winerim2026";
 
@@ -26,6 +27,16 @@ const useGate = () => {
   return { granted, unlock };
 };
 
+/* ── Priority type ── */
+type Priority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
+
+const priorityConfig: Record<Priority, { label: string; color: string; bg: string }> = {
+  "inmediato":    { label: "Inmediato",    color: "text-destructive",  bg: "bg-destructive/10" },
+  "esta semana":  { label: "Esta semana",  color: "text-amber-500",    bg: "bg-amber-500/10" },
+  "este mes":     { label: "Este mes",     color: "text-blue-500",     bg: "bg-blue-500/10" },
+  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground", bg: "bg-muted" },
+};
+
 /* ── Area content ── */
 interface AreaContent {
   name: string;
@@ -33,11 +44,12 @@ interface AreaContent {
   icon: React.ElementType;
   accent: string;
   bg: string;
-  sections: {
-    title: string;
-    icon: React.ElementType;
-    items: string[];
-  }[];
+  priority: Priority;
+  queSignifica: string[];
+  porQueImporta: string[];
+  queHacerAhora: string[];
+  erroresComunes: { mistake: string; consequence: string }[];
+  aprenderMas: { label: string; href: string }[];
 }
 
 const areaContent: Record<string, AreaContent> = {
@@ -47,30 +59,34 @@ const areaContent: Record<string, AreaContent> = {
     icon: DollarSign,
     accent: "text-amber-500",
     bg: "bg-amber-500/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Margen bruto vs. contribución por referencia",
-        "Multiplicador real vs. multiplicador declarado",
-        "Margen ponderado por ventas (no solo por referencia)",
-        "Distribución de precios por franja",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Revisa las 5 referencias con mayor volumen de venta y menor margen",
-        "Compara tu multiplicador medio con el benchmark del sector (×2.5–3.5)",
-        "Identifica oportunidades de repricing sin impacto en la percepción del cliente",
-        "Ajusta precios en las franjas con menor competencia interna",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Aplicar un multiplicador único a toda la carta",
-        "No revisar los márgenes tras cambios de coste del proveedor",
-        "Confundir margen porcentual con contribución absoluta",
-        "Ignorar el efecto del vino por copa en la rentabilidad global",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Calculadora de márgenes (/calculadora-margen-vino)",
-        "→ Plantilla de análisis de márgenes (/recursos/plantilla-analisis-margenes)",
-        "→ Guía: Cómo poner precio al vino (/precio-vino-restaurante)",
-      ]},
+    priority: "inmediato",
+    queSignifica: [
+      "El margen de un vino no es solo la diferencia entre lo que pagas y lo que cobras. Es lo que realmente te queda después de considerar rotación, merma y coste de oportunidad.",
+      "El multiplicador (×2.5, ×3, etc.) es una referencia útil, pero engañosa si se aplica igual a toda la carta. Un vino de 4 € con ×3 no genera lo mismo que uno de 15 € con ×2.5.",
+      "Lo que importa es la contribución absoluta: cuántos euros deja cada botella vendida, ponderado por cuántas vendes.",
+    ],
+    porQueImporta: [
+      "Un error de pricing de 2 € en tu vino más vendido puede costarte miles de euros al año.",
+      "Si no revisas márgenes tras cambios de coste del proveedor, vendes a pérdida sin saberlo.",
+      "Una carta con márgenes bien calibrados vende sola: el cliente elige sin fricción y tú ganas en cada elección.",
+      "El pricing define la percepción de tu restaurante. No es solo rentabilidad, es posicionamiento.",
+    ],
+    queHacerAhora: [
+      "Revisa las 5 referencias con mayor volumen de venta y calcula su contribución real (no solo el %).",
+      "Compara tu multiplicador medio con el benchmark del sector (×2.5–3.5 según segmento).",
+      "Identifica oportunidades de repricing en franjas con poca competencia interna.",
+      "Ajusta al menos una referencia esta semana y mide el impacto en 30 días.",
+    ],
+    erroresComunes: [
+      { mistake: "Aplicar un multiplicador único a toda la carta", consequence: "Pierdes margen en los vinos baratos y competitividad en los caros." },
+      { mistake: "No revisar márgenes tras subidas del proveedor", consequence: "Tu margen real baja sin que lo notes hasta el cierre del mes." },
+      { mistake: "Confundir margen porcentual con contribución absoluta", consequence: "Promocionas vinos que dan buen % pero pocos euros reales." },
+      { mistake: "Ignorar el efecto del vino por copa en la rentabilidad global", consequence: "La copa puede ser tu mayor palanca de margen y la estás desperdiciando." },
+    ],
+    aprenderMas: [
+      { label: "Calculadora de márgenes", href: "/calculadora-margen-vino" },
+      { label: "Guía: Cómo poner precio al vino", href: "/precio-vino-restaurante" },
+      { label: "Plantilla de revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes" },
     ],
   },
   "stock-rotacion": {
@@ -79,30 +95,34 @@ const areaContent: Record<string, AreaContent> = {
     icon: Package,
     accent: "text-emerald-500",
     bg: "bg-emerald-500/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Ratio de rotación por referencia (ventas / stock medio)",
-        "Días de inventario por referencia",
-        "Capital inmovilizado en referencias sin venta",
-        "% de carta con rotación < 1 vez/mes",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Identifica todas las referencias sin venta en los últimos 60 días",
-        "Calcula el capital inmovilizado total en vinos sin rotación",
-        "Decide: ¿promocionar, reubicar, retirar o liquidar?",
-        "Establece un proceso mensual de revisión de stock",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Esperar a que el vino se degrade para tomar acción",
-        "No diferenciar entre stock estratégico y stock muerto",
-        "Comprar por inercia sin revisar datos de rotación",
-        "Mantener referencias 'por si alguien las pide'",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Checklist detección de vinos muertos (/recursos/checklist-deteccion-vinos-muertos)",
-        "→ Calculadora de stock muerto (/herramientas/calculadora-stock-muerto)",
-        "→ Guía: Mejorar la rotación de vinos (/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante)",
-      ]},
+    priority: "esta semana",
+    queSignifica: [
+      "La rotación mide cuántas veces vendes tu stock medio en un periodo. Si un vino rota menos de 1 vez al mes, probablemente tienes un problema.",
+      "El stock muerto es dinero parado. Cada botella sin venta ocupa espacio, inmoviliza capital y genera coste de oportunidad.",
+      "No todo el stock lento es malo: un reserva puede justificar 3 meses de espera. Pero necesitas saber cuál es estratégico y cuál es simplemente olvidado.",
+    ],
+    porQueImporta: [
+      "Un restaurante medio tiene entre el 10% y el 25% de su carta sin venta real en los últimos 60 días.",
+      "Ese capital inmovilizado podría invertirse en referencias que sí rotan y generan margen.",
+      "Un stock desordenado genera errores de pedido, merma y una carta que no refleja lo que realmente vendes.",
+      "La rotación es el indicador más directo de si tu carta está alineada con lo que pide tu cliente.",
+    ],
+    queHacerAhora: [
+      "Identifica todas las referencias sin venta en los últimos 60 días.",
+      "Calcula el capital inmovilizado total en vinos sin rotación.",
+      "Clasifica cada referencia sin venta: ¿promocionar, reubicar en carta, retirar o liquidar?",
+      "Establece una revisión mensual de stock como rutina operativa.",
+    ],
+    erroresComunes: [
+      { mistake: "Esperar a que el vino se degrade para actuar", consequence: "Pierdes el valor del producto y la oportunidad de venderlo con margen." },
+      { mistake: "No diferenciar entre stock estratégico y stock muerto", consequence: "Retiras vinos que deberían quedarse o mantienes los que deberían irse." },
+      { mistake: "Comprar por inercia sin revisar datos de rotación", consequence: "Acumulas más de lo que no vendes y repites errores cada mes." },
+      { mistake: "Mantener referencias 'por si alguien las pide'", consequence: "Tu carta crece sin control y diluye la atención del comensal." },
+    ],
+    aprenderMas: [
+      { label: "Checklist detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos" },
+      { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto" },
+      { label: "Guía: Mejorar la rotación de vinos", href: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" },
     ],
   },
   "compras-reposicion": {
@@ -111,30 +131,34 @@ const areaContent: Record<string, AreaContent> = {
     icon: ShoppingCart,
     accent: "text-blue-500",
     bg: "bg-blue-500/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Coste medio de compra por referencia vs. precio de venta",
-        "Variación de coste por proveedor a lo largo del tiempo",
-        "Frecuencia de reposición por referencia",
-        "% del presupuesto concentrado en pocos proveedores",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Revisa si algún proveedor ha subido precios sin que lo hayas ajustado en carta",
-        "Cruza rotación con coste: ¿estás comprando mucho de lo que no vendes?",
-        "Evalúa si puedes consolidar proveedores para mejorar condiciones",
-        "Crea un calendario de revisión de compras mensual",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Comprar sin consultar datos de venta y rotación",
-        "No negociar condiciones por fidelidad al proveedor",
-        "Acumular stock por ofertas de volumen sin demanda real",
-        "No tener visibilidad del coste real de cada referencia",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Calculadora de compra inteligente (/herramientas/calculadora-compra-inteligente)",
-        "→ Guía: Usar datos para decidir qué vinos comprar (/guias/como-usar-datos-para-decidir-que-vinos-comprar)",
-        "→ Winerim Supply (/producto/winerim-supply)",
-      ]},
+    priority: "este mes",
+    queSignifica: [
+      "Comprar bien no es comprar barato. Es comprar lo que se va a vender, al precio adecuado, en la cantidad correcta y en el momento justo.",
+      "La reposición debe estar guiada por datos de venta y rotación, no por la agenda del comercial o la inercia del pedido anterior.",
+      "Cada decisión de compra impacta directamente en tu margen, tu stock y la coherencia de tu carta.",
+    ],
+    porQueImporta: [
+      "Si un proveedor sube precios y no lo ajustas en carta, tu margen baja sin que lo notes.",
+      "Comprar volumen por descuento sin demanda real genera stock muerto y cash-flow negativo.",
+      "La concentración en pocos proveedores te deja sin poder de negociación y con riesgo de desabastecimiento.",
+      "Conectar compras con rendimiento es la diferencia entre gestión reactiva y gestión estratégica.",
+    ],
+    queHacerAhora: [
+      "Revisa si algún proveedor ha subido precios sin que hayas ajustado tu carta.",
+      "Cruza rotación con coste: ¿estás comprando mucho de lo que no vendes?",
+      "Evalúa si puedes consolidar proveedores para mejorar condiciones.",
+      "Crea un calendario de revisión de compras mensual vinculado a datos de venta.",
+    ],
+    erroresComunes: [
+      { mistake: "Comprar sin consultar datos de venta y rotación", consequence: "Repones lo que no se vende y te quedas sin lo que sí se pide." },
+      { mistake: "No negociar condiciones por fidelidad al proveedor", consequence: "Pagas más de lo necesario sin obtener mejor servicio." },
+      { mistake: "Acumular stock por ofertas de volumen sin demanda real", consequence: "Inmovilizas capital y aumentas el riesgo de merma." },
+      { mistake: "No tener visibilidad del coste real de cada referencia", consequence: "Tomas decisiones de pricing sobre datos incorrectos." },
+    ],
+    aprenderMas: [
+      { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente" },
+      { label: "Guía: Usar datos para decidir qué vinos comprar", href: "/guias/como-usar-datos-para-decidir-que-vinos-comprar" },
+      { label: "Winerim Supply", href: "/producto/winerim-supply" },
     ],
   },
   "carta-equilibrio": {
@@ -143,30 +167,34 @@ const areaContent: Record<string, AreaContent> = {
     icon: BarChart3,
     accent: "text-wine",
     bg: "bg-wine/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Distribución por tipo de vino (tinto, blanco, rosado, espumoso)",
-        "Distribución por franja de precio",
-        "Concentración por región o denominación",
-        "Ratio de canibalización entre referencias similares",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Mapea tu carta por franjas de precio y detecta huecos o saturaciones",
-        "Identifica pares de referencias que compiten entre sí",
-        "Evalúa si la distribución por tipos refleja lo que pide tu cliente",
-        "Revisa si tu carta cuenta una historia coherente con tu concepto gastronómico",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Añadir referencias sin retirar otras (carta inflada)",
-        "No tener criterio de arquitectura: la carta crece por inercia",
-        "Sobrerepresentar una región o estilo por gustos personales",
-        "No adaptar el equilibrio al perfil real del cliente",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Plantilla de equilibrio de carta (/recursos/plantilla-equilibrio-carta)",
-        "→ Plantilla wine mapping (/recursos/plantilla-wine-mapping-restaurante)",
-        "→ Guía: Detectar canibalización (/guias/como-detectar-canibalizacion-vinos-carta)",
-      ]},
+    priority: "este mes",
+    queSignifica: [
+      "El equilibrio de una carta no es tener 'un poco de todo'. Es que cada referencia tenga un rol claro: atraer, vender, posicionar o completar.",
+      "La canibalización ocurre cuando dos o más vinos compiten por el mismo cliente en la misma franja. No solo no sumas: divides la atención y ralentizas la decisión.",
+      "Una carta equilibrada no es la más grande, sino la más coherente con tu concepto, tu cliente y tu operativa.",
+    ],
+    porQueImporta: [
+      "Una carta inflada ralentiza al comensal, reduce la conversión y aumenta el stock muerto.",
+      "Un desequilibrio por tipo (80% tinto, 5% espumoso) puede estar ignorando lo que realmente pide tu cliente.",
+      "La arquitectura de carta es una decisión estratégica: define tu posicionamiento, tu margen medio y tu experiencia de mesa.",
+      "Cada referencia que añades sin quitar otra diluye la atención y complica la operativa.",
+    ],
+    queHacerAhora: [
+      "Mapea tu carta por franjas de precio y detecta huecos o saturaciones.",
+      "Identifica pares de referencias que compiten entre sí (misma zona, mismo precio, mismo estilo).",
+      "Evalúa si la distribución por tipos refleja lo que realmente pide tu clientela.",
+      "Revisa si tu carta cuenta una historia coherente con tu concepto gastronómico.",
+    ],
+    erroresComunes: [
+      { mistake: "Añadir referencias sin retirar otras", consequence: "La carta crece por inercia y se convierte en un catálogo inmanejable." },
+      { mistake: "No tener criterio de arquitectura", consequence: "Cada cambio es reactivo y la carta pierde coherencia con el tiempo." },
+      { mistake: "Sobrerepresentar una región o estilo por gustos personales", consequence: "Tu carta habla de ti, no de tu cliente." },
+      { mistake: "No adaptar el equilibrio al perfil real del cliente", consequence: "Ofreces lo que no se pide y no ofreces lo que sí se vendería." },
+    ],
+    aprenderMas: [
+      { label: "Plantilla de equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta" },
+      { label: "Plantilla wine mapping", href: "/recursos/plantilla-wine-mapping-restaurante" },
+      { label: "Guía: Detectar canibalización", href: "/guias/como-detectar-canibalizacion-vinos-carta" },
     ],
   },
   "vino-por-copa": {
@@ -175,30 +203,34 @@ const areaContent: Record<string, AreaContent> = {
     icon: Wine,
     accent: "text-purple-500",
     bg: "bg-purple-500/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Ratio copa/botella en ventas",
-        "Margen por copa vs. margen por botella",
-        "Merma real por referencia (ml desperdiciados)",
-        "Rotación por copa (¿se termina la botella antes de que pierda calidad?)",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Revisa si tu pricing por copa cubre merma + margen objetivo",
-        "Analiza qué copas venden bien y cuáles generan merma",
-        "Evalúa si tu selección de copas refleja los estilos que más piden",
-        "Prueba formatos intermedios (medias botellas, catavinos)",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Calcular el precio de la copa dividiendo el precio de la botella entre 5",
-        "No contabilizar la merma como coste real",
-        "Ofrecer demasiadas copas sin capacidad de rotarlas",
-        "No formar al equipo de sala para recomendar copas",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Calculadora precio por copa (/herramientas/calculadora-precio-vino-por-copa)",
-        "→ Estrategia de vinos por copa (/recursos/plantilla-estrategia-vinos-por-copa)",
-        "→ Guía: Vino por copa sin perder margen (/guias/como-implantar-vino-por-copa-sin-perder-margen)",
-      ]},
+    priority: "esta semana",
+    queSignifica: [
+      "El vino por copa no es solo servir copas sueltas. Es un programa con lógica propia: selección, pricing, rotación y control de merma.",
+      "Bien ejecutado, es tu mayor palanca de margen. Mal ejecutado, es tu mayor fuente de pérdida invisible.",
+      "El ratio copa/botella es un indicador clave de comportamiento de consumo y de oportunidad comercial.",
+    ],
+    porQueImporta: [
+      "La copa permite al comensal explorar sin comprometerse. Eso aumenta la conversión y el ticket medio.",
+      "El margen por copa puede ser 2-3× superior al de la botella si se calcula bien.",
+      "La merma no contabilizada es el mayor enemigo silencioso de la rentabilidad por copa.",
+      "Un programa de copa bien diseñado posiciona tu restaurante como accesible y experto a la vez.",
+    ],
+    queHacerAhora: [
+      "Revisa si tu pricing por copa cubre merma + margen objetivo (no dividas la botella entre 5).",
+      "Analiza qué copas venden bien y cuáles generan merma recurrente.",
+      "Evalúa si tu selección de copas refleja los estilos que más pide tu clientela.",
+      "Forma a tu equipo de sala para recomendar copa con criterio, no solo como opción barata.",
+    ],
+    erroresComunes: [
+      { mistake: "Calcular el precio de la copa dividiendo la botella entre 5", consequence: "No cubres merma, servicio ni margen real. Vendes a pérdida sin saberlo." },
+      { mistake: "No contabilizar la merma como coste real", consequence: "Tu margen teórico no refleja lo que realmente ganas." },
+      { mistake: "Ofrecer demasiadas copas sin capacidad de rotarlas", consequence: "Abres botellas que no terminas y multiplicas la pérdida." },
+      { mistake: "No formar al equipo de sala para recomendar copas", consequence: "El comensal no sabe qué elegir y pide 'el más barato' o nada." },
+    ],
+    aprenderMas: [
+      { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
+      { label: "Estrategia de vinos por copa", href: "/recursos/plantilla-estrategia-vinos-por-copa" },
+      { label: "Guía: Vino por copa sin perder margen", href: "/guias/como-implantar-vino-por-copa-sin-perder-margen" },
     ],
   },
   "grupos-benchmarking": {
@@ -207,35 +239,39 @@ const areaContent: Record<string, AreaContent> = {
     icon: Building2,
     accent: "text-rose-500",
     bg: "bg-rose-500/10",
-    sections: [
-      { title: "Qué métricas importan", icon: BarChart3, items: [
-        "Desviación de pricing entre locales del mismo grupo",
-        "Diferencias de margen medio por local",
-        "Nivel de solapamiento de surtido entre establecimientos",
-        "Rendimiento comparado por categoría (tinto, blanco, copa, etc.)",
-      ]},
-      { title: "Qué hacer ahora", icon: Lightbulb, items: [
-        "Compara el top 10 de cada local: ¿venden lo mismo o hay divergencias?",
-        "Detecta locales con márgenes significativamente por debajo de la media",
-        "Evalúa si la política de compras centralizada se ejecuta con coherencia",
-        "Establece un scorecard mensual comparativo entre locales",
-      ]},
-      { title: "Errores frecuentes", icon: AlertTriangle, items: [
-        "Imponer la misma carta en todos los locales sin adaptar al contexto",
-        "No tener benchmarking interno: cada local opera como isla",
-        "Centralizar las compras sin visibilidad del rendimiento por local",
-        "No detectar desviaciones de pricing hasta que impactan en la cuenta de resultados",
-      ]},
-      { title: "Recursos relacionados", icon: FileText, items: [
-        "→ Control para grupos (/recursos/plantilla-control-grupo-restauracion)",
-        "→ Guía: Gestionar carta en grupos (/guias/como-gestionar-carta-vinos-grupos-restauracion)",
-        "→ Solución para grupos (/soluciones/grupos-restauracion)",
-      ]},
+    priority: "este mes",
+    queSignifica: [
+      "Gestionar la categoría vino en un grupo no es replicar la misma carta en todos los locales. Es establecer criterios comunes con margen de adaptación local.",
+      "El benchmarking interno permite detectar desviaciones de pricing, margen y surtido entre establecimientos antes de que impacten en la cuenta de resultados.",
+      "Sin datos comparativos, cada local opera como una isla. Con ellos, puedes gobernar la categoría con coherencia.",
+    ],
+    porQueImporta: [
+      "Una desviación de pricing del 15% entre locales del mismo grupo destruye la coherencia de marca.",
+      "Sin benchmarking interno, los problemas de un local no se detectan hasta el cierre trimestral.",
+      "Centralizar compras sin visibilidad de rendimiento por local es comprar a ciegas.",
+      "El control de la categoría vino a escala es una ventaja competitiva real para grupos de restauración.",
+    ],
+    queHacerAhora: [
+      "Compara el top 10 de cada local: ¿venden lo mismo o hay divergencias significativas?",
+      "Detecta locales con márgenes por debajo de la media del grupo.",
+      "Evalúa si la política de compras centralizada se ejecuta con coherencia en cada punto de venta.",
+      "Establece un scorecard mensual comparativo entre locales con métricas clave.",
+    ],
+    erroresComunes: [
+      { mistake: "Imponer la misma carta en todos los locales sin adaptar al contexto", consequence: "Pierdes relevancia local y generas stock muerto en locales que no necesitan esas referencias." },
+      { mistake: "No tener benchmarking interno", consequence: "Cada local toma decisiones aisladas y no puedes identificar mejores prácticas." },
+      { mistake: "Centralizar compras sin datos de rendimiento por local", consequence: "Compras para el grupo, pero no sabes si cada local realmente vende lo que recibe." },
+      { mistake: "No detectar desviaciones de pricing a tiempo", consequence: "Un local vende el mismo vino 3 € más barato y no lo sabes hasta que llega la queja." },
+    ],
+    aprenderMas: [
+      { label: "Control para grupos", href: "/recursos/plantilla-control-grupo-restauracion" },
+      { label: "Guía: Gestionar carta en grupos", href: "/guias/como-gestionar-carta-vinos-grupos-restauracion" },
+      { label: "Solución para grupos de restauración", href: "/soluciones/grupos-restauracion" },
     ],
   },
 };
 
-/* ── Gate UI (reused) ── */
+/* ── Gate UI ── */
 const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
@@ -272,12 +308,13 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
   );
 };
 
-/* ── Section icons mapping ── */
-const sectionIconStyles: Record<string, string> = {
-  "Qué métricas importan": "bg-amber-500/10 text-amber-500",
-  "Qué hacer ahora": "bg-emerald-500/10 text-emerald-500",
-  "Errores frecuentes": "bg-destructive/10 text-destructive",
-  "Recursos relacionados": "bg-blue-500/10 text-blue-400",
+/* ── Section block styles ── */
+const blockConfig = {
+  queSignifica:    { title: "Qué significa",      icon: Info,           style: "bg-muted/50 text-muted-foreground" },
+  porQueImporta:   { title: "Por qué importa",    icon: Target,         style: "bg-wine/10 text-wine" },
+  queHacerAhora:   { title: "Qué hacer ahora",    icon: Lightbulb,      style: "bg-emerald-500/10 text-emerald-500" },
+  erroresComunes:  { title: "Errores comunes",     icon: AlertTriangle,  style: "bg-destructive/10 text-destructive" },
+  aprenderMas:     { title: "Aprender más",        icon: BookOpen,       style: "bg-blue-500/10 text-blue-400" },
 };
 
 /* ── Area detail page ── */
@@ -291,6 +328,7 @@ const DecisionCenterArea = () => {
   if (!area) return <Navigate to="/decision-center" replace />;
 
   const Icon = area.icon;
+  const prio = priorityConfig[area.priority];
 
   return (
     <div className="min-h-screen bg-background">
@@ -306,8 +344,8 @@ const DecisionCenterArea = () => {
               <ArrowLeft size={12} /> Decision Center
             </Link>
 
-            <div className="flex items-center gap-4 mb-4">
-              <div className={`w-14 h-14 rounded-xl ${area.bg} flex items-center justify-center`}>
+            <div className="flex items-start gap-4 mb-4">
+              <div className={`w-14 h-14 rounded-xl ${area.bg} flex items-center justify-center shrink-0`}>
                 <Icon size={24} className={area.accent} />
               </div>
               <div>
@@ -315,55 +353,91 @@ const DecisionCenterArea = () => {
                   className="font-heading text-3xl md:text-4xl font-bold text-foreground">
                   {area.name}
                 </motion.h1>
-                <p className={`text-sm font-semibold tracking-wider ${area.accent}`}>{area.tagline}</p>
+                <p className={`text-sm font-semibold tracking-wider ${area.accent} mt-1`}>{area.tagline}</p>
               </div>
+            </div>
+
+            {/* Priority badge */}
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${prio.bg} mt-2`}>
+              <Clock size={12} className={prio.color} />
+              <span className={`text-xs font-semibold tracking-wider uppercase ${prio.color}`}>
+                Prioridad: {prio.label}
+              </span>
             </div>
           </div>
         </section>
 
-        {/* Content sections */}
+        {/* Content blocks */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
           <div className="space-y-8">
-            {area.sections.map((section, i) => {
-              const SectionIcon = section.icon;
-              const iconStyle = sectionIconStyles[section.title] || "bg-muted text-muted-foreground";
-              return (
-                <ScrollReveal key={section.title} delay={i * 0.06}>
-                  <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className={`w-10 h-10 rounded-lg ${iconStyle} flex items-center justify-center`}>
-                        <SectionIcon size={18} />
-                      </div>
-                      <h2 className="font-heading text-lg font-bold text-foreground">{section.title}</h2>
+
+            {/* 1. Qué significa */}
+            <ContentBlock blockKey="queSignifica" index={0}>
+              <ul className="space-y-4">
+                {area.queSignifica.map((text, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-2 shrink-0" />
+                    {text}
+                  </li>
+                ))}
+              </ul>
+            </ContentBlock>
+
+            {/* 2. Por qué importa */}
+            <ContentBlock blockKey="porQueImporta" index={1}>
+              <ul className="space-y-4">
+                {area.porQueImporta.map((text, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <Target size={14} className="text-wine/40 mt-0.5 shrink-0" />
+                    {text}
+                  </li>
+                ))}
+              </ul>
+            </ContentBlock>
+
+            {/* 3. Qué hacer ahora */}
+            <ContentBlock blockKey="queHacerAhora" index={2}>
+              <ol className="space-y-4">
+                {area.queHacerAhora.map((text, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold shrink-0 mt-0.5">
+                      {j + 1}
+                    </span>
+                    {text}
+                  </li>
+                ))}
+              </ol>
+            </ContentBlock>
+
+            {/* 4. Errores comunes */}
+            <ContentBlock blockKey="erroresComunes" index={3}>
+              <div className="space-y-4">
+                {area.erroresComunes.map((err, j) => (
+                  <div key={j} className="flex items-start gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive text-xs font-bold shrink-0 mt-0.5">
+                      {j + 1}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{err.mistake}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{err.consequence}</p>
                     </div>
-                    <ul className="space-y-3">
-                      {section.items.map((item, j) => {
-                        const isLink = item.startsWith("→");
-                        if (isLink) {
-                          const match = item.match(/→ (.+?) \((.+?)\)/);
-                          if (match) {
-                            return (
-                              <li key={j}>
-                                <Link to={match[2]} className="flex items-start gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors group">
-                                  <BookOpen size={14} className="mt-0.5 shrink-0" />
-                                  <span className="group-hover:underline">{match[1]}</span>
-                                </Link>
-                              </li>
-                            );
-                          }
-                        }
-                        return (
-                          <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
-                            <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-1.5 shrink-0" />
-                            {item}
-                          </li>
-                        );
-                      })}
-                    </ul>
                   </div>
-                </ScrollReveal>
-              );
-            })}
+                ))}
+              </div>
+            </ContentBlock>
+
+            {/* 5. Aprender más */}
+            <ContentBlock blockKey="aprenderMas" index={4}>
+              <div className="space-y-3">
+                {area.aprenderMas.map((link, j) => (
+                  <Link key={j} to={link.href}
+                    className="flex items-center gap-3 text-sm text-blue-400 hover:text-blue-300 transition-colors group">
+                    <FileText size={14} className="shrink-0" />
+                    <span className="group-hover:underline">{link.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </ContentBlock>
           </div>
         </section>
 
@@ -376,6 +450,25 @@ const DecisionCenterArea = () => {
       </main>
       <Footer />
     </div>
+  );
+};
+
+/* ── Reusable content block ── */
+const ContentBlock = ({ blockKey, index, children }: { blockKey: keyof typeof blockConfig; index: number; children: React.ReactNode }) => {
+  const config = blockConfig[blockKey];
+  const BlockIcon = config.icon;
+  return (
+    <ScrollReveal delay={index * 0.06}>
+      <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+        <div className="flex items-center gap-3 mb-5">
+          <div className={`w-10 h-10 rounded-lg ${config.style} flex items-center justify-center`}>
+            <BlockIcon size={18} />
+          </div>
+          <h2 className="font-heading text-lg font-bold text-foreground">{config.title}</h2>
+        </div>
+        {children}
+      </div>
+    </ScrollReveal>
   );
 };
 
