@@ -384,6 +384,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Ratio vin très faible (${v}% vs ${Math.round(a)}%). Opportunité d'amélioration.`,
     issue_glass_low: (n, v) => `Ratio verre inférieur à 15%. Opportunité de croissance via le verre.`,
     issue_glass_price_low: (n, v, a) => `Prix moyen verre inférieur à la moyenne (${v}€ vs ${a}€).`,
+    decides: ["Si la gestion du vin est cohérente entre les sites", "Quel site nécessite plus d'attention sur le pricing ou l'assortiment", "Si le groupe bénéficierait de standards centralisés"],
+    avoids: ["Que chaque site opère avec des critères différents sans contrôle", "Des écarts de prix qui érodent la marque", "Perdre du pouvoir de négociation par manque de vision consolidée"],
+    impact: ["Détecter les opportunités d'amélioration dans les sites sous-performants", "Standardiser la gestion et réduire les inefficacités", "Préparer les négociations fournisseurs avec des données de groupe"],
   },
 };
 
