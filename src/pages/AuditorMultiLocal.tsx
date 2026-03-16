@@ -74,6 +74,7 @@ const i18n: Record<SupportedLang, {
   issue_ratio_low: (name: string, val: number, avg: number) => string;
   issue_glass_low: (name: string, val: number) => string;
   issue_glass_price_low: (name: string, val: number, avg: string) => string;
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Auditor de Carta de Vinos para Grupos Multi-Local | Winerim",
