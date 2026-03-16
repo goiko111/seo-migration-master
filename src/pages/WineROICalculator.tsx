@@ -57,6 +57,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Solicitar demo",
     months_short: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
     locale: "es-ES", yr: "/año",
+    decides: ["Si invertir en optimizar la carta de vinos es rentable", "Qué incremento de facturación es realista para tu restaurante", "Dónde está el mayor potencial de mejora: volumen, precio o penetración"],
+    avoids: ["Tomar decisiones sin cuantificar el impacto real", "Subestimar el potencial de mejora de la carta", "Invertir en acciones sin proyección de retorno"],
+    impact: ["Cuantificar el ROI potencial de optimizar la carta", "Justificar la inversión en herramientas de gestión de vino", "Establecer objetivos de facturación alcanzables"],
   },
   en: {
     seo_title: "Wine Sales ROI Calculator – Calculate Your Sales Potential | Winerim",
