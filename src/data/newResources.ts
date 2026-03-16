@@ -1127,6 +1127,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico completo de carta", type: "solution" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/decision-center/carta-equilibrio", label: "Decision Center: carta y equilibrio", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
