@@ -98,9 +98,9 @@ const Navbar = memo(() => {
         {
           title: t.nav_resources_downloads ?? "Descargables",
           items: [
-            { label: t.nav_res_checklist ?? "Checklist carta rentable", href: localePath("/recursos/checklist-carta-de-vinos-rentable") },
-            { label: t.nav_res_scorecard ?? "Scorecard mensual", href: localePath("/recursos/scorecard-rendimiento-carta") },
-            { label: t.nav_res_wine_mapping ?? "Plantilla wine mapping", href: localePath("/recursos/plantilla-wine-mapping-restaurante") },
+            { label: t.nav_res_checklist, href: localePath("/recursos/checklist-carta-de-vinos-rentable") },
+            { label: t.nav_res_scorecard, href: localePath("/recursos/scorecard-rendimiento-carta") },
+            { label: t.nav_res_wine_mapping, href: localePath("/recursos/plantilla-wine-mapping-restaurante") },
             { label: t.nav_see_all, href: localePath("/recursos") },
           ],
         },
