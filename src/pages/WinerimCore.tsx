@@ -30,7 +30,6 @@ interface Capability {
   icon: typeof DollarSign;
   title: string;
   desc: string;
-  details: string[];
   accent: string;
   iconBg: string;
 }
