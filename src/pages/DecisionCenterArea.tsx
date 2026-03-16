@@ -523,6 +523,7 @@ const DecisionCenterArea = () => {
     "margenes-pricing": margenesPricingContent,
     "stock-rotacion": stockRotacionContent,
     "compras-reposicion": comprasReposicionContent,
+    "carta-equilibrio": cartaEquilibrioContent,
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
