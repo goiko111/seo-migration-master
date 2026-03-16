@@ -578,39 +578,32 @@ const Funcionalidades = () => {
             <h2 className="font-heading text-2xl md:text-3xl font-bold">{c.screenshotTitle}</h2>
           </ScrollReveal>
 
+          {/* Experiencia comensal — Tablet */}
           <ScrollReveal>
-            <div className="grid md:grid-cols-3 gap-5 mb-10">
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
+              {lang === "es" ? "Experiencia del comensal — Tablet" : "Guest experience — Tablet"}
+            </p>
+            <div className="grid md:grid-cols-5 gap-4 mb-12">
               {[
-                { img: tabletHeroImg, alt: "Winerim tablet wine list", label: "Carta interactiva" },
-                { img: tabletDetailImg, alt: "Winerim wine detail", label: "Ficha del vino" },
-                { img: tabletComparatorImg, alt: "Winerim wine comparator", label: "Comparador" },
+                { img: tabletHeroImg, alt: "Carta interactiva tablet", label: "Carta" },
+                { img: tabletDetailImg, alt: "Ficha del vino tablet", label: "Ficha" },
+                { img: tabletComparatorImg, alt: "Comparador tablet", label: "Comparador" },
+                { img: tabletFichaImg, alt: "Ficha técnica tablet", label: "Ficha técnica" },
+                { img: tabletPairingImg, alt: "Maridaje tablet", label: "Maridaje" },
               ].map((item, i) => (
                 <div key={i} className="relative group">
                   <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.1),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <img src={item.img} alt={item.alt} className="relative w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
                 </div>
               ))}
             </div>
           </ScrollReveal>
 
+          {/* Experiencia comensal — Móvil */}
           <ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-5">
-              {[
-                { img: ss19, alt: "Winerim performance dashboard", label: "Rendimiento" },
-                { img: ss14, alt: "Winerim insights dashboard", label: "Insights" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-lg" loading="lazy" />
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal className="mt-10">
-            <p className="text-center text-sm text-muted-foreground mb-6 font-medium tracking-wide uppercase">{c.screenshotMobile}</p>
-            <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <p className="text-center text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4">{c.screenshotMobile}</p>
+            <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
               {[
                 { img: mobileListImg, alt: "Mobile wine list", label: "Carta" },
                 { img: mobileDetailImg, alt: "Mobile wine detail", label: "Ficha" },
@@ -620,9 +613,84 @@ const Funcionalidades = () => {
                   <div className="relative rounded-2xl border-2 border-border/60 overflow-hidden shadow-xl bg-background/50 group-hover:border-wine/30 transition-colors">
                     <img src={item.img} alt={item.alt} className="w-full" loading="lazy" />
                   </div>
-                  <p className="text-xs text-muted-foreground text-center mt-3 font-medium">{item.label}</p>
+                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
                 </div>
               ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Gestión y analítica */}
+          <ScrollReveal>
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
+              {lang === "es" ? "Gestión y analítica" : "Management & analytics"}
+            </p>
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              {[
+                { img: mgmtCarta, alt: "Gestión de carta", label: "Carta" },
+                { img: mgmtRendimiento, alt: "Rendimiento", label: "Rendimiento" },
+                { img: mgmtInsights, alt: "Insights IA", label: "Insights IA" },
+                { img: mgmtStock, alt: "Control de stock", label: "Stock" },
+                { img: mgmtRotacion, alt: "Rotación", label: "Rotación" },
+                { img: mgmtObsolescencia, alt: "Obsolescencia", label: "Obsolescencia" },
+                { img: mgmtPedidos, alt: "Pedidos", label: "Pedidos" },
+                { img: mgmtRecomendados, alt: "Recomendados", label: "Recomendados" },
+                { img: mgmtAutomatizaciones, alt: "Automatizaciones", label: "Automatizaciones" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
+                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Capturas detalladas */}
+          <ScrollReveal>
+            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
+              {lang === "es" ? "Más capturas de la plataforma" : "More platform screenshots"}
+            </p>
+            <div className="grid md:grid-cols-4 gap-3 mb-6">
+              {[
+                { img: ss01, alt: "Screenshot 1", label: "" },
+                { img: ss02, alt: "Screenshot 2", label: "" },
+                { img: ss03, alt: "Screenshot 3", label: "" },
+                { img: ss04, alt: "Screenshot 4", label: "" },
+                { img: ss05, alt: "Screenshot 5", label: "" },
+                { img: ss06, alt: "Screenshot 6", label: "" },
+                { img: ss07, alt: "Screenshot 7", label: "" },
+                { img: ss08, alt: "Screenshot 8", label: "" },
+                { img: ss09, alt: "Screenshot 9", label: "" },
+                { img: ss10, alt: "Screenshot 10", label: "" },
+                { img: ss11, alt: "Screenshot 11", label: "" },
+                { img: ss12, alt: "Screenshot 12", label: "" },
+                { img: ss13, alt: "Screenshot 13", label: "" },
+                { img: ss14, alt: "Dashboard analítico", label: "" },
+                { img: ss15, alt: "Screenshot 15", label: "" },
+                { img: ss16, alt: "Screenshot 16", label: "" },
+                { img: ss17, alt: "Screenshot 17", label: "" },
+                { img: ss18, alt: "Screenshot 18", label: "" },
+                { img: ss19, alt: "Rendimiento", label: "" },
+                { img: ss20, alt: "Screenshot 20", label: "" },
+              ].map((item, i) => (
+                <div key={i} className="relative group">
+                  <img src={item.img} alt={item.alt} className="w-full rounded-lg border border-border/60 shadow-sm group-hover:shadow-md group-hover:border-wine/20 transition-all" loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Dashboard hero */}
+          <ScrollReveal>
+            <div className="relative group mt-8">
+              <div className="absolute -inset-4 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.08),transparent_70%)] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img src={dashboardInsightsImg} alt="Winerim dashboard insights" className="relative w-full rounded-xl border border-border shadow-xl" loading="lazy" />
+              <p className="text-xs text-muted-foreground text-center mt-3 font-medium">
+                {lang === "es" ? "Panel de insights y decisiones" : "Insights & decisions dashboard"}
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
             </div>
           </ScrollReveal>
         </div>
