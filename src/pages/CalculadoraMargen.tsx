@@ -263,7 +263,7 @@ const CalculadoraMargen = () => {
                       placeholder="Deja vacío si no aplica"
                       onChange={(e) => {
                         const v = parseFloat(e.target.value);
-                        setCurrrentPrice(isNaN(v) || v === 0 ? null : v);
+                        setCurrentPrice(isNaN(v) || v === 0 ? null : v);
                       }}
                       className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-wine/50 focus:border-wine/50 transition-all placeholder:text-muted-foreground/40 placeholder:text-sm placeholder:font-normal"
                     />
