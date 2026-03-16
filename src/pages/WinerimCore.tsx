@@ -4,7 +4,7 @@ import {
   ArrowRight, DollarSign, Package, ShoppingCart,
   BarChart3, Layers, Activity, Gauge,
   TrendingUp, RotateCcw, Sparkles, Zap, ChevronRight,
-  Calculator, GlassWater, Target, Brain
+  GlassWater, Target, Brain
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
