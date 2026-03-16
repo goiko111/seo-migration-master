@@ -141,6 +141,8 @@ const i18n: Record<SupportedLang, {
       { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
       { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
       { to: "/recursos/revision-mensual-margenes-y-compras", label: "Plantilla revisión mensual de márgenes", type: "resource" },
+      { to: "/decision-center/compras-reposicion", label: "Decision Center: compras y reposición", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock y rotación", type: "decision-center" },
       { to: "/soluciones/grupos-restauracion", label: "Solución para grupos de restauración", type: "solution" },
       { to: "/precios", label: "Planes y precios", type: "solution" },
       { to: "/demo", label: "Solicitar una demo personalizada", type: "solution" },
