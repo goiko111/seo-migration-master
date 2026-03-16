@@ -29,12 +29,22 @@ const useGate = () => {
 };
 
 /* ── Area data ── */
+type UserProfile = "direccion" | "sala" | "compras-fb" | "grupo";
+
+const profileConfig: Record<UserProfile, { label: string; icon: typeof Briefcase }> = {
+  "direccion":  { label: "Dirección",     icon: Briefcase },
+  "sala":       { label: "Sala",          icon: Store },
+  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
+  "grupo":      { label: "Grupo",         icon: Users },
+};
+
 interface Area {
   id: string;
   name: string;
   tagline: string;
   description: string;
   audience: string;
+  profiles: UserProfile[];
   icon: React.ElementType;
   accent: string;
   bg: string;
