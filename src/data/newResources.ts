@@ -1341,6 +1341,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: wine mapping automatizado", type: "solution" },
       { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
+      { to: "/decision-center/carta-equilibrio", label: "Decision Center: carta y equilibrio", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
