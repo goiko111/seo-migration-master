@@ -54,7 +54,7 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No diferenciar margen teórico de margen real", consequence: "Crees que un local tiene un 68% de margen, pero con merma y descuentos reales es un 52%." },
       ],
     },
-    { id: "referencias-que-funcionan", title: "Cómo detectar referencias que sí funcionan y dónde",
+    { id: "referencias-que-funcionan", title: "Cómo detectar referencias que sí funcionan y dónde", priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha cruzado rendimiento por referencia entre todos tus locales para identificar qué funciona y dónde.", whyMatters: "Escalar lo que funciona multiplica el impacto. Pero hacerlo sin contexto multiplica el error.", riskIfIgnored: "Replicas a ciegas o retiras sin criterio. Pierdes la oportunidad de entender a tu cliente por local." },
       queSignifica:
         "Una referencia 'que funciona' no es solo la que se vende: es la que se vende con buen margen, rota a un ritmo saludable y no canibaliza a otras. El benchmarking interno te permite identificar qué referencias cumplen esas tres condiciones en cada local. A veces un vino funciona en 3 de 5 locales: eso te dice algo sobre el perfil de cliente, no sobre el vino.",
