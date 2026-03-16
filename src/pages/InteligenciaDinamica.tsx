@@ -783,7 +783,7 @@ const InteligenciaDinamica = () => {
                 <p className="font-heading text-xl md:text-2xl text-foreground/90 leading-snug italic">
                   {tx.s2_closing}{" "}
                   <span className="text-gradient-wine not-italic font-semibold">{tx.s2_closing_highlight}</span>
-                  {" "}cada referencia.\""}
+                  {" "}{lang === "es" ? "cada referencia.\"" : lang === "en" ? "each reference.\"" : lang === "it" ? "ogni referenza.\"" : "chaque référence.\""}
                 </p>
               </div>
             </ScrollReveal>
