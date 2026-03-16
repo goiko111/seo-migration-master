@@ -9,6 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import SummaryBox from "@/components/seo/SummaryBox";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import FAQSection from "@/components/seo/FAQSection";
 import CredibilitySection from "@/components/seo/CredibilitySection";
 import { useLanguage } from "@/i18n/LanguageContext";
