@@ -54,39 +54,6 @@ interface SimpleAreaContent {
 }
 
 const simpleAreas: Record<string, SimpleAreaContent> = {
-  "stock-rotacion": {
-    name: "Stock y rotación",
-    tagline: "Detecta lo que no se mueve antes de que sea tarde",
-    icon: Package, accent: "text-emerald-500", bg: "bg-emerald-500/10", priority: "esta semana",
-    queSignifica: [
-      "La rotación mide cuántas veces vendes tu stock medio en un periodo. Si un vino rota menos de 1 vez al mes, probablemente tienes un problema.",
-      "El stock muerto es dinero parado. Cada botella sin venta ocupa espacio, inmoviliza capital y genera coste de oportunidad.",
-      "No todo el stock lento es malo: un reserva puede justificar 3 meses de espera. Pero necesitas saber cuál es estratégico y cuál es simplemente olvidado.",
-    ],
-    porQueImporta: [
-      "Un restaurante medio tiene entre el 10% y el 25% de su carta sin venta real en los últimos 60 días.",
-      "Ese capital inmovilizado podría invertirse en referencias que sí rotan y generan margen.",
-      "Un stock desordenado genera errores de pedido, merma y una carta que no refleja lo que realmente vendes.",
-      "La rotación es el indicador más directo de si tu carta está alineada con lo que pide tu cliente.",
-    ],
-    queHacerAhora: [
-      "Identifica todas las referencias sin venta en los últimos 60 días.",
-      "Calcula el capital inmovilizado total en vinos sin rotación.",
-      "Clasifica cada referencia sin venta: ¿promocionar, reubicar en carta, retirar o liquidar?",
-      "Establece una revisión mensual de stock como rutina operativa.",
-    ],
-    erroresComunes: [
-      { mistake: "Esperar a que el vino se degrade para actuar", consequence: "Pierdes el valor del producto y la oportunidad de venderlo con margen." },
-      { mistake: "No diferenciar entre stock estratégico y stock muerto", consequence: "Retiras vinos que deberían quedarse o mantienes los que deberían irse." },
-      { mistake: "Comprar por inercia sin revisar datos de rotación", consequence: "Acumulas más de lo que no vendes y repites errores cada mes." },
-      { mistake: "Mantener referencias 'por si alguien las pide'", consequence: "Tu carta crece sin control y diluye la atención del comensal." },
-    ],
-    aprenderMas: [
-      { label: "Checklist detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos" },
-      { label: "Calculadora de stock muerto", href: "/herramientas/calculadora-stock-muerto" },
-      { label: "Guía: Mejorar la rotación de vinos", href: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" },
-    ],
-  },
   "compras-reposicion": {
     name: "Compras y reposición", tagline: "Compra con datos, no con intuición",
     icon: ShoppingCart, accent: "text-blue-500", bg: "bg-blue-500/10", priority: "este mes",
