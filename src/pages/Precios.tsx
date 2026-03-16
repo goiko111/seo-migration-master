@@ -349,6 +349,30 @@ const iconMap: Record<string, typeof Wine> = {
 };
 const planIcons = [Zap, Crown, Building2];
 
+/* Per-plan positioning + layer badges */
+const planPositioning: Record<string, { line: string; badge: string; badgeColor: string; link: string }[]> = {
+  es: [
+    { line: "Para digitalizar la carta y empezar a vender mejor", badge: "Incluye base Winerim Core", badgeColor: "text-amber-500 border-amber-500/25 bg-amber-500/5", link: "/producto/winerim-core" },
+    { line: "Para analizar, optimizar y decidir mejor con Winerim Core", badge: "Añade Inteligencia Dinámica", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/inteligencia-dinamica" },
+    { line: "Para gobernar venta, compra y surtido con inteligencia completa", badge: "Incluye Winerim Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
+  en: [
+    { line: "To digitize your list and start selling better", badge: "Includes Winerim Core base", badgeColor: "text-amber-500 border-amber-500/25 bg-amber-500/5", link: "/producto/winerim-core" },
+    { line: "To analyze, optimize and decide better with Winerim Core", badge: "Adds Dynamic Intelligence", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/inteligencia-dinamica" },
+    { line: "To govern sales, purchasing and assortment with full intelligence", badge: "Includes Winerim Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
+  it: [
+    { line: "Per digitalizzare la carta e iniziare a vendere meglio", badge: "Include base Winerim Core", badgeColor: "text-amber-500 border-amber-500/25 bg-amber-500/5", link: "/producto/winerim-core" },
+    { line: "Per analizzare, ottimizzare e decidere meglio con Winerim Core", badge: "Aggiunge Intelligenza Dinamica", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/inteligencia-dinamica" },
+    { line: "Per governare vendita, acquisti e assortimento con intelligenza completa", badge: "Include Winerim Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
+  fr: [
+    { line: "Pour numériser la carte et commencer à mieux vendre", badge: "Inclut base Winerim Core", badgeColor: "text-amber-500 border-amber-500/25 bg-amber-500/5", link: "/producto/winerim-core" },
+    { line: "Pour analyser, optimiser et mieux décider avec Winerim Core", badge: "Ajoute Intelligence Dynamique", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/inteligencia-dinamica" },
+    { line: "Pour gouverner vente, achats et assortiment avec intelligence complète", badge: "Inclut Winerim Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
+};
+
 /* ─── Cell renderer ─── */
 const CellValue = ({ value }: { value: boolean | string }) => {
   if (value === true) return <Check size={16} className="text-wine mx-auto" />;
