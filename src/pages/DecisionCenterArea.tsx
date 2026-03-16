@@ -298,7 +298,8 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                     <span className="w-5 h-5 rounded-md bg-amber-500/10 text-amber-500 text-[10px] font-bold flex items-center justify-center shrink-0">
                       {i + 1}
                     </span>
-                    {st.title}
+                    <span className="flex-1 min-w-0 truncate">{st.title}</span>
+                    <PriorityBadge priority={st.priority} />
                   </span>
                 ))}
               </div>
