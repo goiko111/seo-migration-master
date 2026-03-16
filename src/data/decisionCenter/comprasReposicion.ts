@@ -83,6 +83,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "detectar-sobreprecio",
       title: "Cómo detectar sobreprecio",
+      priority: "inmediato",
       porQueTeLoMostramos: { detected: "Winerim ha comparado tus precios de compra con datos de mercado y ha detectado referencias donde podrías estar pagando más de lo necesario.", whyMatters: "El sobreprecio es invisible hasta que lo buscas. En un grupo, un 8% de más en 20 referencias puede suponer decenas de miles de euros al año.", riskIfIgnored: "Sigues pagando de más por no comparar. La lealtad al proveedor no debería ser incompatible con la gestión." },
       queSignifica:
         "Un sobreprecio es cuando pagas más de lo que el mercado pide por una referencia o por un vino de características equivalentes. No siempre es culpa del proveedor: a veces es porque no has comparado, porque llevas años comprando al mismo sin negociar, o porque tu volumen ha cambiado y tus condiciones no se han actualizado. Detectar sobreprecio requiere comparar, no intuir.",
