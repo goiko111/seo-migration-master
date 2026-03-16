@@ -241,7 +241,7 @@ i18n.en = {
     {
       name: "Pro", tagline: "Intelligence to sell more wine", popular: true,
       solves: "Solves: low average ticket, slow rotation, inconsistent recommendations, lack of data.",
-      fits: "For restaurants with extensive lists, fine dining or hotels with F&B.",
+      fits: "For restaurants with deep assortment, fine dining or hotels with F&B.",
       features: ["Everything in Starter", "Real-time wine sales analytics", "AI-powered list optimization", "Interactive Wine Mapping", "Context-aware smart recommendations", "Optimized by-the-glass sales", "Wine comparator for diners", "Rotation & dead stock alerts", "Pricing & margin management", "Priority support"],
       notIncluded: ["Centralized multi-location", "Advanced POS/PMS integrations"],
     },
