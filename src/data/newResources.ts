@@ -823,9 +823,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim genera automáticamente los datos de rendimiento, rotación y pricing que necesitas para tu revisión mensual. Sin recopilar nada manualmente.",
     internalLinks: [
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
-      { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: automatiza tu revisión mensual", type: "solution" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
