@@ -6,6 +6,7 @@ import {
   Layers, TrendingUp, Lightbulb, CheckCircle, AlertTriangle,
   Loader2, GlassWater, Send, X
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
