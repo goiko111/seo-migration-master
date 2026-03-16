@@ -550,6 +550,18 @@ const Funcionalidades = () => {
                           {layer.cta} <ArrowRight size={14} />
                         </Link>
                       </div>
+
+                      {/* Layer screenshots */}
+                      <div className="lg:w-[420px] shrink-0">
+                        <div className="grid grid-cols-2 gap-3">
+                          {(i === 0 ? layerScreenshots.core : i === 1 ? layerScreenshots.dinamica : layerScreenshots.supply).map((shot, j) => (
+                            <div key={j} className="relative group/img">
+                              <img src={shot.img} alt={shot.alt} className={`w-full rounded-lg border ${cm.border} shadow-md group-hover/img:shadow-lg transition-shadow`} loading="lazy" />
+                              <p className="text-[10px] text-muted-foreground/60 text-center mt-1.5 font-medium">{shot.label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </ScrollReveal>
