@@ -352,6 +352,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "Tutte le funzionalità Winerim", type: "resource" },
       { to: "/herramientas", label: "Strumenti gratuiti di analisi", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensile della carta", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: margini e pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock e rotazione", type: "decision-center" },
       { to: "/precios", label: "Piani e prezzi", type: "solution" },
       { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
     ],
