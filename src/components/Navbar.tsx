@@ -247,6 +247,12 @@ const Navbar = memo(() => {
         <div className="hidden lg:flex items-center gap-3">
           <LanguageSwitcher />
           <Link
+            to="/decision-center"
+            className="text-[11px] font-medium tracking-wider uppercase text-muted-foreground/60 hover:text-muted-foreground transition-colors px-2 py-2"
+          >
+            Área cliente
+          </Link>
+          <Link
             to={localePath("/contacto")}
             className="text-xs xl:text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
           >
