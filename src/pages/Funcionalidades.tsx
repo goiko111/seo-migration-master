@@ -38,26 +38,8 @@ import mgmtPedidos from "@/assets/mgmt-pedidos.png";
 import mgmtRecomendados from "@/assets/mgmt-recomendados.png";
 import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.png";
 
-import ss01 from "@/assets/screenshots/ss-01.png";
-import ss02 from "@/assets/screenshots/ss-02.png";
-import ss03 from "@/assets/screenshots/ss-03.png";
-import ss04 from "@/assets/screenshots/ss-04.png";
-import ss05 from "@/assets/screenshots/ss-05.png";
-import ss06 from "@/assets/screenshots/ss-06.png";
-import ss07 from "@/assets/screenshots/ss-07.png";
-import ss08 from "@/assets/screenshots/ss-08.png";
-import ss09 from "@/assets/screenshots/ss-09.png";
-import ss10 from "@/assets/screenshots/ss-10.png";
-import ss11 from "@/assets/screenshots/ss-11.png";
-import ss12 from "@/assets/screenshots/ss-12.png";
-import ss13 from "@/assets/screenshots/ss-13.png";
 import ss14 from "@/assets/screenshots/ss-14.png";
-import ss15 from "@/assets/screenshots/ss-15.png";
-import ss16 from "@/assets/screenshots/ss-16.png";
-import ss17 from "@/assets/screenshots/ss-17.png";
-import ss18 from "@/assets/screenshots/ss-18.png";
 import ss19 from "@/assets/screenshots/ss-19.png";
-import ss20 from "@/assets/screenshots/ss-20.png";
 
 // Layer screenshot mapping
 const layerScreenshots = {
