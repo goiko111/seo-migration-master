@@ -43,6 +43,15 @@ const priorityConfig: Record<Priority, { label: string; color: string; bg: strin
   "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
 };
 
+const linkTypeConfig: Record<LinkType, { label: string; icon: typeof FileText; color: string; bg: string }> = {
+  tool:     { label: "Herramienta", icon: Calculator,  color: "text-wine",              bg: "bg-wine/10" },
+  resource: { label: "Recurso",     icon: Download,    color: "text-emerald-500",        bg: "bg-emerald-500/10" },
+  product:  { label: "Producto",    icon: Zap,         color: "text-amber-500",          bg: "bg-amber-500/10" },
+  article:  { label: "Artículo",    icon: FileText,    color: "text-violet-500",         bg: "bg-violet-500/10" },
+  guide:    { label: "Guía",        icon: BookOpen,    color: "text-blue-400",           bg: "bg-blue-500/10" },
+  solution: { label: "Solución",    icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
+};
+
 interface SimpleAreaContent {
   name: string;
   tagline: string;
