@@ -1326,10 +1326,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres un análisis automático de tu carta?",
     ctaFinalDescription: "La plantilla te da la estructura. Winerim te da el análisis completo con datos reales, recomendaciones y optimización de precios.",
     internalLinks: [
-      { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
-      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: wine mapping automatizado", type: "solution" },
+      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 ];
