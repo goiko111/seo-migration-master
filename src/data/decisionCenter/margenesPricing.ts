@@ -1,8 +1,11 @@
 import { DollarSign } from "lucide-react";
 
+export type SubTopicPriority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
+
 export interface SubTopic {
   id: string;
   title: string;
+  priority?: SubTopicPriority;
   queSignifica: string;
   porQueImporta: string;
   queHacer: string[];
