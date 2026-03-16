@@ -21,6 +21,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "stock-muerto",
       title: "Qué se considera stock muerto",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha identificado referencias en tu carta con 0 ventas en más de 60 días.",
+        whyMatters: "Entre el 10% y el 25% de la carta de un restaurante medio está en stock muerto sin saberlo. Es capital que no trabaja.",
+        riskIfIgnored: "Cada mes que pasa, ese dinero sigue parado. No mejora con el tiempo: solo se acumula.",
+      },
       queSignifica:
         "Stock muerto es cualquier referencia que lleva más de 60 días sin venta y no tiene una justificación estratégica clara (reserva especial, vino de guarda para evento, etc.). No es lo mismo que stock lento: un vino que vende 2 botellas al mes es lento pero vivo. Uno que lleva 3 meses sin moverse es muerto. La diferencia importa porque la acción es distinta.",
       porQueImporta:
