@@ -122,6 +122,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Richiedi demo",
     link_pairing: "Strategia di abbinamento", link_sell: "Come vendere più vino",
     link_analyzer: "Analizzatore carta", link_demo: "Richiedi demo Winerim",
+    decides: ["Quale vino consigliare per ogni piatto", "Come comunicare l'abbinamento al cliente", "Quali stili si adattano al tuo menu"],
+    avoids: ["Raccomandazioni generiche senza criterio", "Affidarsi solo all'intuizione del personale di sala", "Perdere vendite per mancanza di suggerimenti attivi"],
+    impact: ["Aumentare il cross-selling vino-piatto", "Migliorare la percezione di servizio professionale", "Alzare lo scontrino medio con raccomandazioni fondate"],
   },
   fr: {
     seo_title: "Wine Pairing Generator – Accords Mets & Vins avec IA | Winerim",
