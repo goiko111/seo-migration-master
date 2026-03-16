@@ -1225,10 +1225,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Gestiona tu vino por copa con Winerim",
     ctaFinalDescription: "Selección, pricing, rotación y analítica de tu programa de vino por copa en una sola plataforma.",
     internalLinks: [
-      { to: "/recursos/plantilla-estrategia-vinos-por-copa", label: "Plantilla de estrategia por copa", type: "resource" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
-      { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
-      { to: "/vino-por-copa-restaurante", label: "Vino por copa: guía completa", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
+      { to: "/recursos/plantilla-estrategia-vinos-por-copa", label: "Plantilla de estrategia por copa", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
