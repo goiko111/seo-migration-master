@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
-  ArrowLeft, Lock, Shield, BookOpen, AlertTriangle, Lightbulb, FileText,
-  Info, Target, Clock
+  ArrowLeft, Lock, Shield, Info, Target, Lightbulb, AlertTriangle,
+  FileText, Clock, ChevronDown
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/data/decisionCenter/margenesPricing";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
@@ -27,7 +28,7 @@ const useGate = () => {
   return { granted, unlock };
 };
 
-/* ── Priority type ── */
+/* ── Simple areas (non-deep) ── */
 type Priority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
 
 const priorityConfig: Record<Priority, { label: string; color: string; bg: string }> = {
@@ -37,8 +38,7 @@ const priorityConfig: Record<Priority, { label: string; color: string; bg: strin
   "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground", bg: "bg-muted" },
 };
 
-/* ── Area content ── */
-interface AreaContent {
+interface SimpleAreaContent {
   name: string;
   tagline: string;
   icon: React.ElementType;
@@ -52,50 +52,11 @@ interface AreaContent {
   aprenderMas: { label: string; href: string }[];
 }
 
-const areaContent: Record<string, AreaContent> = {
-  "margenes-pricing": {
-    name: "Márgenes y pricing",
-    tagline: "Entiende la rentabilidad real de cada vino",
-    icon: DollarSign,
-    accent: "text-amber-500",
-    bg: "bg-amber-500/10",
-    priority: "inmediato",
-    queSignifica: [
-      "El margen de un vino no es solo la diferencia entre lo que pagas y lo que cobras. Es lo que realmente te queda después de considerar rotación, merma y coste de oportunidad.",
-      "El multiplicador (×2.5, ×3, etc.) es una referencia útil, pero engañosa si se aplica igual a toda la carta. Un vino de 4 € con ×3 no genera lo mismo que uno de 15 € con ×2.5.",
-      "Lo que importa es la contribución absoluta: cuántos euros deja cada botella vendida, ponderado por cuántas vendes.",
-    ],
-    porQueImporta: [
-      "Un error de pricing de 2 € en tu vino más vendido puede costarte miles de euros al año.",
-      "Si no revisas márgenes tras cambios de coste del proveedor, vendes a pérdida sin saberlo.",
-      "Una carta con márgenes bien calibrados vende sola: el cliente elige sin fricción y tú ganas en cada elección.",
-      "El pricing define la percepción de tu restaurante. No es solo rentabilidad, es posicionamiento.",
-    ],
-    queHacerAhora: [
-      "Revisa las 5 referencias con mayor volumen de venta y calcula su contribución real (no solo el %).",
-      "Compara tu multiplicador medio con el benchmark del sector (×2.5–3.5 según segmento).",
-      "Identifica oportunidades de repricing en franjas con poca competencia interna.",
-      "Ajusta al menos una referencia esta semana y mide el impacto en 30 días.",
-    ],
-    erroresComunes: [
-      { mistake: "Aplicar un multiplicador único a toda la carta", consequence: "Pierdes margen en los vinos baratos y competitividad en los caros." },
-      { mistake: "No revisar márgenes tras subidas del proveedor", consequence: "Tu margen real baja sin que lo notes hasta el cierre del mes." },
-      { mistake: "Confundir margen porcentual con contribución absoluta", consequence: "Promocionas vinos que dan buen % pero pocos euros reales." },
-      { mistake: "Ignorar el efecto del vino por copa en la rentabilidad global", consequence: "La copa puede ser tu mayor palanca de margen y la estás desperdiciando." },
-    ],
-    aprenderMas: [
-      { label: "Calculadora de márgenes", href: "/calculadora-margen-vino" },
-      { label: "Guía: Cómo poner precio al vino", href: "/precio-vino-restaurante" },
-      { label: "Plantilla de revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes" },
-    ],
-  },
+const simpleAreas: Record<string, SimpleAreaContent> = {
   "stock-rotacion": {
     name: "Stock y rotación",
     tagline: "Detecta lo que no se mueve antes de que sea tarde",
-    icon: Package,
-    accent: "text-emerald-500",
-    bg: "bg-emerald-500/10",
-    priority: "esta semana",
+    icon: Package, accent: "text-emerald-500", bg: "bg-emerald-500/10", priority: "esta semana",
     queSignifica: [
       "La rotación mide cuántas veces vendes tu stock medio en un periodo. Si un vino rota menos de 1 vez al mes, probablemente tienes un problema.",
       "El stock muerto es dinero parado. Cada botella sin venta ocupa espacio, inmoviliza capital y genera coste de oportunidad.",
@@ -126,22 +87,18 @@ const areaContent: Record<string, AreaContent> = {
     ],
   },
   "compras-reposicion": {
-    name: "Compras y reposición",
-    tagline: "Compra con datos, no con intuición",
-    icon: ShoppingCart,
-    accent: "text-blue-500",
-    bg: "bg-blue-500/10",
-    priority: "este mes",
+    name: "Compras y reposición", tagline: "Compra con datos, no con intuición",
+    icon: ShoppingCart, accent: "text-blue-500", bg: "bg-blue-500/10", priority: "este mes",
     queSignifica: [
       "Comprar bien no es comprar barato. Es comprar lo que se va a vender, al precio adecuado, en la cantidad correcta y en el momento justo.",
-      "La reposición debe estar guiada por datos de venta y rotación, no por la agenda del comercial o la inercia del pedido anterior.",
+      "La reposición debe estar guiada por datos de venta y rotación, no por la agenda del comercial.",
       "Cada decisión de compra impacta directamente en tu margen, tu stock y la coherencia de tu carta.",
     ],
     porQueImporta: [
       "Si un proveedor sube precios y no lo ajustas en carta, tu margen baja sin que lo notes.",
       "Comprar volumen por descuento sin demanda real genera stock muerto y cash-flow negativo.",
-      "La concentración en pocos proveedores te deja sin poder de negociación y con riesgo de desabastecimiento.",
-      "Conectar compras con rendimiento es la diferencia entre gestión reactiva y gestión estratégica.",
+      "La concentración en pocos proveedores te deja sin poder de negociación.",
+      "Conectar compras con rendimiento es la diferencia entre gestión reactiva y estratégica.",
     ],
     queHacerAhora: [
       "Revisa si algún proveedor ha subido precios sin que hayas ajustado tu carta.",
@@ -162,32 +119,28 @@ const areaContent: Record<string, AreaContent> = {
     ],
   },
   "carta-equilibrio": {
-    name: "Carta y equilibrio",
-    tagline: "Tu carta debe contar una historia coherente",
-    icon: BarChart3,
-    accent: "text-wine",
-    bg: "bg-wine/10",
-    priority: "este mes",
+    name: "Carta y equilibrio", tagline: "Tu carta debe contar una historia coherente",
+    icon: BarChart3, accent: "text-wine", bg: "bg-wine/10", priority: "este mes",
     queSignifica: [
-      "El equilibrio de una carta no es tener 'un poco de todo'. Es que cada referencia tenga un rol claro: atraer, vender, posicionar o completar.",
-      "La canibalización ocurre cuando dos o más vinos compiten por el mismo cliente en la misma franja. No solo no sumas: divides la atención y ralentizas la decisión.",
-      "Una carta equilibrada no es la más grande, sino la más coherente con tu concepto, tu cliente y tu operativa.",
+      "El equilibrio de una carta no es tener 'un poco de todo'. Es que cada referencia tenga un rol claro.",
+      "La canibalización ocurre cuando dos o más vinos compiten por el mismo cliente en la misma franja.",
+      "Una carta equilibrada no es la más grande, sino la más coherente con tu concepto.",
     ],
     porQueImporta: [
       "Una carta inflada ralentiza al comensal, reduce la conversión y aumenta el stock muerto.",
-      "Un desequilibrio por tipo (80% tinto, 5% espumoso) puede estar ignorando lo que realmente pide tu cliente.",
-      "La arquitectura de carta es una decisión estratégica: define tu posicionamiento, tu margen medio y tu experiencia de mesa.",
-      "Cada referencia que añades sin quitar otra diluye la atención y complica la operativa.",
+      "Un desequilibrio por tipo puede estar ignorando lo que realmente pide tu cliente.",
+      "La arquitectura de carta define tu posicionamiento, tu margen medio y tu experiencia de mesa.",
+      "Cada referencia que añades sin quitar otra diluye la atención.",
     ],
     queHacerAhora: [
       "Mapea tu carta por franjas de precio y detecta huecos o saturaciones.",
-      "Identifica pares de referencias que compiten entre sí (misma zona, mismo precio, mismo estilo).",
+      "Identifica pares de referencias que compiten entre sí.",
       "Evalúa si la distribución por tipos refleja lo que realmente pide tu clientela.",
       "Revisa si tu carta cuenta una historia coherente con tu concepto gastronómico.",
     ],
     erroresComunes: [
       { mistake: "Añadir referencias sin retirar otras", consequence: "La carta crece por inercia y se convierte en un catálogo inmanejable." },
-      { mistake: "No tener criterio de arquitectura", consequence: "Cada cambio es reactivo y la carta pierde coherencia con el tiempo." },
+      { mistake: "No tener criterio de arquitectura", consequence: "Cada cambio es reactivo y la carta pierde coherencia." },
       { mistake: "Sobrerepresentar una región o estilo por gustos personales", consequence: "Tu carta habla de ti, no de tu cliente." },
       { mistake: "No adaptar el equilibrio al perfil real del cliente", consequence: "Ofreces lo que no se pide y no ofreces lo que sí se vendería." },
     ],
@@ -198,31 +151,27 @@ const areaContent: Record<string, AreaContent> = {
     ],
   },
   "vino-por-copa": {
-    name: "Vino por copa",
-    tagline: "El programa de copa como motor de margen",
-    icon: Wine,
-    accent: "text-purple-500",
-    bg: "bg-purple-500/10",
-    priority: "esta semana",
+    name: "Vino por copa", tagline: "El programa de copa como motor de margen",
+    icon: Wine, accent: "text-purple-500", bg: "bg-purple-500/10", priority: "esta semana",
     queSignifica: [
-      "El vino por copa no es solo servir copas sueltas. Es un programa con lógica propia: selección, pricing, rotación y control de merma.",
-      "Bien ejecutado, es tu mayor palanca de margen. Mal ejecutado, es tu mayor fuente de pérdida invisible.",
-      "El ratio copa/botella es un indicador clave de comportamiento de consumo y de oportunidad comercial.",
+      "El vino por copa no es solo servir copas sueltas. Es un programa con lógica propia.",
+      "Bien ejecutado, es tu mayor palanca de margen. Mal ejecutado, tu mayor fuente de pérdida invisible.",
+      "El ratio copa/botella es un indicador clave de comportamiento de consumo.",
     ],
     porQueImporta: [
       "La copa permite al comensal explorar sin comprometerse. Eso aumenta la conversión y el ticket medio.",
       "El margen por copa puede ser 2-3× superior al de la botella si se calcula bien.",
       "La merma no contabilizada es el mayor enemigo silencioso de la rentabilidad por copa.",
-      "Un programa de copa bien diseñado posiciona tu restaurante como accesible y experto a la vez.",
+      "Un programa bien diseñado posiciona tu restaurante como accesible y experto a la vez.",
     ],
     queHacerAhora: [
-      "Revisa si tu pricing por copa cubre merma + margen objetivo (no dividas la botella entre 5).",
+      "Revisa si tu pricing por copa cubre merma + margen objetivo.",
       "Analiza qué copas venden bien y cuáles generan merma recurrente.",
       "Evalúa si tu selección de copas refleja los estilos que más pide tu clientela.",
-      "Forma a tu equipo de sala para recomendar copa con criterio, no solo como opción barata.",
+      "Forma a tu equipo de sala para recomendar copa con criterio.",
     ],
     erroresComunes: [
-      { mistake: "Calcular el precio de la copa dividiendo la botella entre 5", consequence: "No cubres merma, servicio ni margen real. Vendes a pérdida sin saberlo." },
+      { mistake: "Calcular el precio de la copa dividiendo la botella entre 5", consequence: "No cubres merma, servicio ni margen real." },
       { mistake: "No contabilizar la merma como coste real", consequence: "Tu margen teórico no refleja lo que realmente ganas." },
       { mistake: "Ofrecer demasiadas copas sin capacidad de rotarlas", consequence: "Abres botellas que no terminas y multiplicas la pérdida." },
       { mistake: "No formar al equipo de sala para recomendar copas", consequence: "El comensal no sabe qué elegir y pide 'el más barato' o nada." },
@@ -234,34 +183,30 @@ const areaContent: Record<string, AreaContent> = {
     ],
   },
   "grupos-benchmarking": {
-    name: "Grupos y benchmarking",
-    tagline: "Governa la categoría vino a escala",
-    icon: Building2,
-    accent: "text-rose-500",
-    bg: "bg-rose-500/10",
-    priority: "este mes",
+    name: "Grupos y benchmarking", tagline: "Governa la categoría vino a escala",
+    icon: Building2, accent: "text-rose-500", bg: "bg-rose-500/10", priority: "este mes",
     queSignifica: [
-      "Gestionar la categoría vino en un grupo no es replicar la misma carta en todos los locales. Es establecer criterios comunes con margen de adaptación local.",
-      "El benchmarking interno permite detectar desviaciones de pricing, margen y surtido entre establecimientos antes de que impacten en la cuenta de resultados.",
-      "Sin datos comparativos, cada local opera como una isla. Con ellos, puedes gobernar la categoría con coherencia.",
+      "Gestionar la categoría vino en un grupo no es replicar la misma carta en todos los locales.",
+      "El benchmarking interno permite detectar desviaciones antes de que impacten en resultados.",
+      "Sin datos comparativos, cada local opera como una isla.",
     ],
     porQueImporta: [
-      "Una desviación de pricing del 15% entre locales del mismo grupo destruye la coherencia de marca.",
-      "Sin benchmarking interno, los problemas de un local no se detectan hasta el cierre trimestral.",
-      "Centralizar compras sin visibilidad de rendimiento por local es comprar a ciegas.",
-      "El control de la categoría vino a escala es una ventaja competitiva real para grupos de restauración.",
+      "Una desviación de pricing del 15% entre locales destruye la coherencia de marca.",
+      "Sin benchmarking, los problemas no se detectan hasta el cierre trimestral.",
+      "Centralizar compras sin visibilidad de rendimiento es comprar a ciegas.",
+      "El control de la categoría vino a escala es una ventaja competitiva real.",
     ],
     queHacerAhora: [
-      "Compara el top 10 de cada local: ¿venden lo mismo o hay divergencias significativas?",
+      "Compara el top 10 de cada local: ¿venden lo mismo o hay divergencias?",
       "Detecta locales con márgenes por debajo de la media del grupo.",
-      "Evalúa si la política de compras centralizada se ejecuta con coherencia en cada punto de venta.",
-      "Establece un scorecard mensual comparativo entre locales con métricas clave.",
+      "Evalúa si la política de compras se ejecuta con coherencia en cada punto de venta.",
+      "Establece un scorecard mensual comparativo entre locales.",
     ],
     erroresComunes: [
-      { mistake: "Imponer la misma carta en todos los locales sin adaptar al contexto", consequence: "Pierdes relevancia local y generas stock muerto en locales que no necesitan esas referencias." },
-      { mistake: "No tener benchmarking interno", consequence: "Cada local toma decisiones aisladas y no puedes identificar mejores prácticas." },
-      { mistake: "Centralizar compras sin datos de rendimiento por local", consequence: "Compras para el grupo, pero no sabes si cada local realmente vende lo que recibe." },
-      { mistake: "No detectar desviaciones de pricing a tiempo", consequence: "Un local vende el mismo vino 3 € más barato y no lo sabes hasta que llega la queja." },
+      { mistake: "Imponer la misma carta en todos los locales sin adaptar", consequence: "Pierdes relevancia local y generas stock muerto." },
+      { mistake: "No tener benchmarking interno", consequence: "Cada local toma decisiones aisladas." },
+      { mistake: "Centralizar compras sin datos de rendimiento por local", consequence: "Compras para el grupo sin saber si cada local vende lo que recibe." },
+      { mistake: "No detectar desviaciones de pricing a tiempo", consequence: "Un local vende 3 € más barato y no lo sabes hasta la queja." },
     ],
     aprenderMas: [
       { label: "Control para grupos", href: "/recursos/plantilla-control-grupo-restauracion" },
@@ -308,27 +253,144 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
   );
 };
 
-/* ── Section block styles ── */
+/* ── Section block config ── */
 const blockConfig = {
   queSignifica:    { title: "Qué significa",      icon: Info,           style: "bg-muted/50 text-muted-foreground" },
   porQueImporta:   { title: "Por qué importa",    icon: Target,         style: "bg-wine/10 text-wine" },
   queHacerAhora:   { title: "Qué hacer ahora",    icon: Lightbulb,      style: "bg-emerald-500/10 text-emerald-500" },
   erroresComunes:  { title: "Errores comunes",     icon: AlertTriangle,  style: "bg-destructive/10 text-destructive" },
-  aprenderMas:     { title: "Aprender más",        icon: BookOpen,       style: "bg-blue-500/10 text-blue-400" },
+  aprenderMas:     { title: "Aprender más",        icon: FileText,       style: "bg-blue-500/10 text-blue-400" },
 };
 
-/* ── Area detail page ── */
-const DecisionCenterArea = () => {
-  const { areaSlug } = useParams<{ areaSlug: string }>();
-  const { granted, unlock } = useGate();
+/* ── Reusable content block ── */
+const ContentBlock = ({ blockKey, children }: { blockKey: keyof typeof blockConfig; children: React.ReactNode }) => {
+  const config = blockConfig[blockKey];
+  const BlockIcon = config.icon;
+  return (
+    <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+      <div className="flex items-center gap-3 mb-5">
+        <div className={`w-10 h-10 rounded-lg ${config.style} flex items-center justify-center`}>
+          <BlockIcon size={18} />
+        </div>
+        <h3 className="font-heading text-lg font-bold text-foreground">{config.title}</h3>
+      </div>
+      {children}
+    </div>
+  );
+};
 
-  if (!granted) return <PasswordGate onUnlock={unlock} />;
+/* ══════════════════════════════════════════════════════
+   DEEP AREA VIEW — used for "margenes-pricing"
+   ══════════════════════════════════════════════════════ */
 
-  const area = areaSlug ? areaContent[areaSlug] : undefined;
-  if (!area) return <Navigate to="/decision-center" replace />;
+const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: number }) => {
+  const [open, setOpen] = useState(false);
 
-  const Icon = area.icon;
-  const prio = priorityConfig[area.priority];
+  return (
+    <ScrollReveal delay={index * 0.04}>
+      <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm overflow-hidden">
+        {/* Header */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full flex items-center gap-4 p-5 md:p-6 text-left hover:bg-muted/20 transition-colors group"
+        >
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 text-sm font-bold shrink-0">
+            {index + 1}
+          </span>
+          <h3 className="font-heading text-base font-bold text-foreground flex-1 group-hover:text-wine transition-colors">
+            {subtopic.title}
+          </h3>
+          <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+            <ChevronDown size={18} className="text-muted-foreground/50" />
+          </motion.div>
+        </button>
+
+        {/* Expanded content */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="px-5 md:px-6 pb-6 space-y-6 border-t border-border pt-6">
+                {/* Qué significa */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-md bg-muted/50 flex items-center justify-center">
+                      <Info size={13} className="text-muted-foreground" />
+                    </div>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Qué significa</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{subtopic.queSignifica}</p>
+                </div>
+
+                {/* Por qué importa */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-md bg-wine/10 flex items-center justify-center">
+                      <Target size={13} className="text-wine" />
+                    </div>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Por qué importa</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{subtopic.porQueImporta}</p>
+                </div>
+
+                {/* Qué hacer */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-md bg-emerald-500/10 flex items-center justify-center">
+                      <Lightbulb size={13} className="text-emerald-500" />
+                    </div>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Qué hacer</h4>
+                  </div>
+                  <ol className="space-y-2.5">
+                    {subtopic.queHacer.map((step, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold shrink-0 mt-0.5">
+                          {i + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                {/* Errores frecuentes */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-md bg-destructive/10 flex items-center justify-center">
+                      <AlertTriangle size={13} className="text-destructive" />
+                    </div>
+                    <h4 className="text-xs font-semibold tracking-wider uppercase text-foreground">Errores frecuentes</h4>
+                  </div>
+                  <div className="space-y-3">
+                    {subtopic.errores.map((err, i) => (
+                      <div key={i} className="flex items-start gap-2.5 pb-3 border-b border-border last:border-0 last:pb-0">
+                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-destructive/10 text-destructive text-[10px] font-bold shrink-0 mt-0.5">
+                          ✕
+                        </span>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{err.mistake}</p>
+                          <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{err.consequence}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </ScrollReveal>
+  );
+};
+
+const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
+  const Icon = content.icon;
 
   return (
     <div className="min-h-screen bg-background">
@@ -345,103 +407,81 @@ const DecisionCenterArea = () => {
             </Link>
 
             <div className="flex items-start gap-4 mb-4">
-              <div className={`w-14 h-14 rounded-xl ${area.bg} flex items-center justify-center shrink-0`}>
-                <Icon size={24} className={area.accent} />
+              <div className={`w-14 h-14 rounded-xl ${content.bg} flex items-center justify-center shrink-0`}>
+                <Icon size={24} className={content.accent} />
               </div>
               <div>
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                   className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-                  {area.name}
+                  {content.name}
                 </motion.h1>
-                <p className={`text-sm font-semibold tracking-wider ${area.accent} mt-1`}>{area.tagline}</p>
+                <p className={`text-sm font-semibold tracking-wider ${content.accent} mt-1`}>{content.tagline}</p>
               </div>
             </div>
 
-            {/* Priority badge */}
-            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${prio.bg} mt-2`}>
-              <Clock size={12} className={prio.color} />
-              <span className={`text-xs font-semibold tracking-wider uppercase ${prio.color}`}>
-                Prioridad: {prio.label}
-              </span>
-            </div>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
+              className="text-sm text-muted-foreground leading-relaxed max-w-3xl mt-4">
+              {content.intro}
+            </motion.p>
           </div>
         </section>
 
-        {/* Content blocks */}
-        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
-          <div className="space-y-8">
-
-            {/* 1. Qué significa */}
-            <ContentBlock blockKey="queSignifica" index={0}>
-              <ul className="space-y-4">
-                {area.queSignifica.map((text, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-2 shrink-0" />
-                    {text}
-                  </li>
-                ))}
-              </ul>
-            </ContentBlock>
-
-            {/* 2. Por qué importa */}
-            <ContentBlock blockKey="porQueImporta" index={1}>
-              <ul className="space-y-4">
-                {area.porQueImporta.map((text, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <Target size={14} className="text-wine/40 mt-0.5 shrink-0" />
-                    {text}
-                  </li>
-                ))}
-              </ul>
-            </ContentBlock>
-
-            {/* 3. Qué hacer ahora */}
-            <ContentBlock blockKey="queHacerAhora" index={2}>
-              <ol className="space-y-4">
-                {area.queHacerAhora.map((text, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold shrink-0 mt-0.5">
-                      {j + 1}
+        {/* Table of contents */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-8">
+          <ScrollReveal>
+            <div className="rounded-xl border border-border bg-card/50 p-5 md:p-6">
+              <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-3">
+                En esta sección
+              </p>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {content.subtopics.map((st, i) => (
+                  <span key={st.id} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="w-5 h-5 rounded-md bg-amber-500/10 text-amber-500 text-[10px] font-bold flex items-center justify-center shrink-0">
+                      {i + 1}
                     </span>
-                    {text}
-                  </li>
-                ))}
-              </ol>
-            </ContentBlock>
-
-            {/* 4. Errores comunes */}
-            <ContentBlock blockKey="erroresComunes" index={3}>
-              <div className="space-y-4">
-                {area.erroresComunes.map((err, j) => (
-                  <div key={j} className="flex items-start gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive text-xs font-bold shrink-0 mt-0.5">
-                      {j + 1}
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{err.mistake}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{err.consequence}</p>
-                    </div>
-                  </div>
+                    {st.title}
+                  </span>
                 ))}
               </div>
-            </ContentBlock>
+            </div>
+          </ScrollReveal>
+        </section>
 
-            {/* 5. Aprender más */}
-            <ContentBlock blockKey="aprenderMas" index={4}>
-              <div className="space-y-3">
-                {area.aprenderMas.map((link, j) => (
-                  <Link key={j} to={link.href}
-                    className="flex items-center gap-3 text-sm text-blue-400 hover:text-blue-300 transition-colors group">
-                    <FileText size={14} className="shrink-0" />
-                    <span className="group-hover:underline">{link.label}</span>
+        {/* Subtopics */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+          <div className="space-y-4">
+            {content.subtopics.map((st, i) => (
+              <SubTopicAccordion key={st.id} subtopic={st} index={i} />
+            ))}
+          </div>
+        </section>
+
+        {/* Related resources */}
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
+          <ScrollReveal>
+            <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                  <FileText size={18} className="text-blue-400" />
+                </div>
+                <h2 className="font-heading text-lg font-bold text-foreground">Recursos y herramientas</h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {content.links.map((link) => (
+                  <Link key={link.href} to={link.href}
+                    className="flex flex-col gap-1 rounded-lg border border-border p-4 hover:border-wine/30 hover:bg-wine/5 transition-all group">
+                    <p className="text-sm font-semibold text-foreground group-hover:text-wine transition-colors">
+                      {link.label}
+                    </p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{link.description}</p>
                   </Link>
                 ))}
               </div>
-            </ContentBlock>
-          </div>
+            </div>
+          </ScrollReveal>
         </section>
 
-        {/* Back link */}
+        {/* Back */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20 text-center">
           <Link to="/decision-center" className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors">
             <ArrowLeft size={14} /> Volver al Decision Center
@@ -453,23 +493,135 @@ const DecisionCenterArea = () => {
   );
 };
 
-/* ── Reusable content block ── */
-const ContentBlock = ({ blockKey, index, children }: { blockKey: keyof typeof blockConfig; index: number; children: React.ReactNode }) => {
-  const config = blockConfig[blockKey];
-  const BlockIcon = config.icon;
+/* ══════════════════════════════════════════════════════
+   SIMPLE AREA VIEW — used for other 5 areas
+   ══════════════════════════════════════════════════════ */
+
+const SimpleAreaView = ({ area }: { area: SimpleAreaContent }) => {
+  const Icon = area.icon;
+  const prio = priorityConfig[area.priority];
+
   return (
-    <ScrollReveal delay={index * 0.06}>
-      <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className={`w-10 h-10 rounded-lg ${config.style} flex items-center justify-center`}>
-            <BlockIcon size={18} />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <section className="pt-32 pb-12 section-padding relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-wine/4 rounded-full blur-[140px]" />
           </div>
-          <h2 className="font-heading text-lg font-bold text-foreground">{config.title}</h2>
-        </div>
-        {children}
-      </div>
-    </ScrollReveal>
+          <div className="relative max-w-4xl mx-auto px-6 md:px-12">
+            <Link to="/decision-center" className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-muted-foreground hover:text-wine transition-colors mb-6">
+              <ArrowLeft size={12} /> Decision Center
+            </Link>
+            <div className="flex items-start gap-4 mb-4">
+              <div className={`w-14 h-14 rounded-xl ${area.bg} flex items-center justify-center shrink-0`}>
+                <Icon size={24} className={area.accent} />
+              </div>
+              <div>
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+                  {area.name}
+                </motion.h1>
+                <p className={`text-sm font-semibold tracking-wider ${area.accent} mt-1`}>{area.tagline}</p>
+              </div>
+            </div>
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${prio.bg} mt-2`}>
+              <Clock size={12} className={prio.color} />
+              <span className={`text-xs font-semibold tracking-wider uppercase ${prio.color}`}>Prioridad: {prio.label}</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
+          <div className="space-y-8">
+            <ScrollReveal><ContentBlock blockKey="queSignifica">
+              <ul className="space-y-4">
+                {area.queSignifica.map((t, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 mt-2 shrink-0" />{t}
+                  </li>
+                ))}
+              </ul>
+            </ContentBlock></ScrollReveal>
+
+            <ScrollReveal delay={0.06}><ContentBlock blockKey="porQueImporta">
+              <ul className="space-y-4">
+                {area.porQueImporta.map((t, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <Target size={14} className="text-wine/40 mt-0.5 shrink-0" />{t}
+                  </li>
+                ))}
+              </ul>
+            </ContentBlock></ScrollReveal>
+
+            <ScrollReveal delay={0.12}><ContentBlock blockKey="queHacerAhora">
+              <ol className="space-y-4">
+                {area.queHacerAhora.map((t, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold shrink-0 mt-0.5">{j + 1}</span>{t}
+                  </li>
+                ))}
+              </ol>
+            </ContentBlock></ScrollReveal>
+
+            <ScrollReveal delay={0.18}><ContentBlock blockKey="erroresComunes">
+              <div className="space-y-4">
+                {area.erroresComunes.map((err, j) => (
+                  <div key={j} className="flex items-start gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive text-xs font-bold shrink-0 mt-0.5">{j + 1}</span>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{err.mistake}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{err.consequence}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ContentBlock></ScrollReveal>
+
+            <ScrollReveal delay={0.24}><ContentBlock blockKey="aprenderMas">
+              <div className="space-y-3">
+                {area.aprenderMas.map((link, j) => (
+                  <Link key={j} to={link.href} className="flex items-center gap-3 text-sm text-blue-400 hover:text-blue-300 transition-colors group">
+                    <FileText size={14} className="shrink-0" />
+                    <span className="group-hover:underline">{link.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </ContentBlock></ScrollReveal>
+          </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20 text-center">
+          <Link to="/decision-center" className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors">
+            <ArrowLeft size={14} /> Volver al Decision Center
+          </Link>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
+};
+
+/* ══════════════════════════════════════════════════════
+   MAIN COMPONENT — routes to deep or simple view
+   ══════════════════════════════════════════════════════ */
+
+const DecisionCenterArea = () => {
+  const { areaSlug } = useParams<{ areaSlug: string }>();
+  const { granted, unlock } = useGate();
+
+  if (!granted) return <PasswordGate onUnlock={unlock} />;
+
+  // Deep area: Márgenes y pricing
+  if (areaSlug === "margenes-pricing") {
+    return <DeepAreaView content={margenesPricingContent} />;
+  }
+
+  // Simple areas
+  const area = areaSlug ? simpleAreas[areaSlug] : undefined;
+  if (!area) return <Navigate to="/decision-center" replace />;
+
+  return <SimpleAreaView area={area} />;
 };
 
 export default DecisionCenterArea;
