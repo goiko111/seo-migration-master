@@ -171,7 +171,7 @@ export const newResources: ResourcePageData[] = [
     audienceItems: [
       "Sumilleres y jefes de compras responsables de la bodega",
       "Controllers y directores financieros preocupados por el capital inmovilizado",
-      "Propietarios de restaurantes con bodegas de más de 50 referencias",
+      "Propietarios de restaurantes con bodegas de alta profundidad de surtido",
       "Grupos de restauración con inventario centralizado",
     ],
     whenToUseTitle: "Cuándo usarlo",
