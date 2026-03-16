@@ -535,6 +535,74 @@ const CalculadoraCompraInteligente = () => {
                 {t.insights[results.suggestion]}
               </p>
             </div>
+
+            {/* ── Winerim Action Plan ── */}
+            {(() => {
+              const al: Record<string, { title: string; timeline: string; action: string; when: string; week1: string; week2: string; month1: string; month2: string; capitalProjection: string; ifNoAction: string; ifAction: string; inMonths: (n: number) => string; saved: string }> = {
+                es: { title: "Plan de acción · Winerim", timeline: "Línea temporal", action: "Acción", when: "Cuándo", week1: "Semana 1", week2: "Semana 2", month1: "Mes 1", month2: "Mes 2", capitalProjection: "Proyección de capital", ifNoAction: "Sin actuar", ifAction: "Con acción", inMonths: (n) => `En ${n} meses`, saved: "Ahorro potencial" },
+                en: { title: "Action plan · Winerim", timeline: "Timeline", action: "Action", when: "When", week1: "Week 1", week2: "Week 2", month1: "Month 1", month2: "Month 2", capitalProjection: "Capital projection", ifNoAction: "No action", ifAction: "With action", inMonths: (n) => `In ${n} months`, saved: "Potential saving" },
+                it: { title: "Piano d'azione · Winerim", timeline: "Linea temporale", action: "Azione", when: "Quando", week1: "Settimana 1", week2: "Settimana 2", month1: "Mese 1", month2: "Mese 2", capitalProjection: "Proiezione del capitale", ifNoAction: "Senza agire", ifAction: "Con azione", inMonths: (n) => `In ${n} mesi`, saved: "Risparmio potenziale" },
+                fr: { title: "Plan d'action · Winerim", timeline: "Chronologie", action: "Action", when: "Quand", week1: "Semaine 1", week2: "Semaine 2", month1: "Mois 1", month2: "Mois 2", capitalProjection: "Projection du capital", ifNoAction: "Sans agir", ifAction: "Avec action", inMonths: (n) => `Dans ${n} mois`, saved: "Économie potentielle" },
+              };
+              const a = al[lang] || al.es;
+              const sg = results.suggestion;
+              const capitalInmo = results.capitalInmovilizado;
+              const oppCost6 = capitalInmo * 0.08 * 0.5;
+              const savedIfAction = sg === "mantener" ? 0 : sg === "renegociar" ? results.ahorroAnual * 0.5 : capitalInmo * 0.4;
+
+              const actionSteps: { when: string; action: string }[] = 
+                sg === "mantener" ? [
+                  { when: a.month1, action: lang === "es" ? "Mantener condiciones. Revisar en 90 días." : lang === "en" ? "Maintain conditions. Review in 90 days." : lang === "it" ? "Mantenere condizioni. Rivedere in 90 giorni." : "Maintenir les conditions. Réviser dans 90 jours." },
+                ] : sg === "renegociar" ? [
+                  { when: a.week1, action: lang === "es" ? "Pedir presupuesto a 2 proveedores alternativos" : lang === "en" ? "Request quotes from 2 alternative suppliers" : lang === "it" ? "Richiedere preventivo a 2 fornitori alternativi" : "Demander un devis à 2 fournisseurs alternatifs" },
+                  { when: a.week2, action: lang === "es" ? "Llamar al proveedor actual con los presupuestos y negociar mejora" : lang === "en" ? "Call current supplier with quotes and negotiate improvement" : lang === "it" ? "Chiamare il fornitore attuale con i preventivi e negoziare miglioramento" : "Appeler le fournisseur actuel avec les devis et négocier une amélioration" },
+                  { when: a.month1, action: lang === "es" ? "Si no iguala, reasignar volumen al proveedor con mejor precio" : lang === "en" ? "If not matched, reassign volume to supplier with best price" : lang === "it" ? "Se non eguaglia, riassegnare il volume al fornitore con prezzo migliore" : "Si non égalé, réassigner le volume au fournisseur le mieux-disant" },
+                ] : sg === "no-reponer" ? [
+                  { when: a.week1, action: lang === "es" ? "Sacar las unidades restantes por copa o menú degustación" : lang === "en" ? "Offer remaining units by the glass or tasting menu" : lang === "it" ? "Offrire le unità rimanenti al calice o in menu degustazione" : "Proposer les unités restantes au verre ou en menu dégustation" },
+                  { when: a.month1, action: lang === "es" ? "No incluir en el próximo pedido. Bloquear reposición automática" : lang === "en" ? "Do not include in next order. Block automatic replenishment" : lang === "it" ? "Non includere nel prossimo ordine. Bloccare il riassortimento automatico" : "Ne pas inclure dans la prochaine commande. Bloquer le réapprovisionnement automatique" },
+                  { when: a.month2, action: lang === "es" ? "Reasignar presupuesto a referencias con mejor rotación/margen" : lang === "en" ? "Reallocate budget to references with better rotation/margin" : lang === "it" ? "Riallocare il budget a referenze con migliore rotazione/margine" : "Réalloquer le budget aux références avec meilleure rotation/marge" },
+                ] : [
+                  { when: a.week1, action: lang === "es" ? "Buscar alternativa equivalente en catálogos de 2-3 distribuidores" : lang === "en" ? "Search for equivalent alternative in 2-3 distributor catalogues" : lang === "it" ? "Cercare alternativa equivalente nei cataloghi di 2-3 distributori" : "Rechercher une alternative équivalente dans les catalogues de 2-3 distributeurs" },
+                  { when: a.week2, action: lang === "es" ? "Probar la alternativa internamente. Comparar calidad/precio percibido" : lang === "en" ? "Test alternative internally. Compare quality/perceived price" : lang === "it" ? "Testare l'alternativa internamente. Confrontare qualità/prezzo percepito" : "Tester l'alternative en interne. Comparer qualité/prix perçu" },
+                  { when: a.month1, action: lang === "es" ? "Sustituir en carta y medir rotación/margen durante 30 días" : lang === "en" ? "Replace on list and measure rotation/margin for 30 days" : lang === "it" ? "Sostituire in carta e misurare rotazione/margine per 30 giorni" : "Remplacer sur la carte et mesurer rotation/marge pendant 30 jours" },
+                ];
+
+              return (
+                <div className="rounded-xl border border-emerald-500/20 bg-gradient-card p-5 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={14} className="text-emerald-500" />
+                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-emerald-500">{a.title}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    {actionSteps.map((step, i) => (
+                      <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-background">
+                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] font-semibold tracking-widest uppercase text-emerald-500">{step.when}</span>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{step.action}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {savedIfAction > 0 && (
+                    <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border">
+                      <div className="p-3 rounded-lg border border-destructive/20 bg-destructive/5 text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{a.ifNoAction} ({a.inMonths(6)})</p>
+                        <p className="font-heading text-lg font-bold text-destructive">{fmtEur(capitalInmo + oppCost6)}</p>
+                        <p className="text-[10px] text-muted-foreground">{a.capitalProjection}</p>
+                      </div>
+                      <div className="p-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{a.saved} ({a.inMonths(6)})</p>
+                        <p className="font-heading text-lg font-bold text-emerald-500">{fmtEur(savedIfAction)}</p>
+                        <p className="text-[10px] text-muted-foreground">{a.ifAction}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </motion.div>
         </section>
       )}

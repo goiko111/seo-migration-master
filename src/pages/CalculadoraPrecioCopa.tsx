@@ -529,6 +529,73 @@ const CalculadoraPrecioCopa = () => {
                 }
               </p>
             </div>
+
+            {/* ── Winerim Net Profitability Panel ── */}
+            {(() => {
+              const nl: Record<string, { title: string; wasteScenario: string; realistic: string; pessimistic: string; netProfit: string; netMargin: string; minRotation: string; glassesWeek: string; viability: string; viable: string; marginal: string; notViable: string; wasteNote: string; rotationNote: string; coravinNote: string }> = {
+                es: { title: "Rentabilidad neta · Winerim", wasteScenario: "Escenario de merma", realistic: "Realista", pessimistic: "Pesimista", netProfit: "Beneficio neto real", netMargin: "Margen neto", minRotation: "Rotación mínima semanal", glassesWeek: "copas/semana", viability: "Viabilidad por copa", viable: "Viable", marginal: "Marginal", notViable: "No viable", wasteNote: "Incluye 1 copa de merma (realista) o 2 copas (pesimista) por botella abierta.", rotationNote: "Para que la copa sea rentable, necesitas vender al menos esta cantidad por semana.", coravinNote: "Con Coravin/gas inerte la merma se reduce, pero el sobrecoste de preservación ya está incluido en el cálculo." },
+                en: { title: "Net Profitability · Winerim", wasteScenario: "Waste scenario", realistic: "Realistic", pessimistic: "Pessimistic", netProfit: "Real net profit", netMargin: "Net margin", minRotation: "Minimum weekly rotation", glassesWeek: "glasses/week", viability: "By-the-glass viability", viable: "Viable", marginal: "Marginal", notViable: "Not viable", wasteNote: "Includes 1 glass waste (realistic) or 2 glasses (pessimistic) per open bottle.", rotationNote: "For by-the-glass to be profitable, you need to sell at least this many per week.", coravinNote: "Coravin/inert gas reduces waste, but preservation cost is already included in the calculation." },
+                it: { title: "Redditività netta · Winerim", wasteScenario: "Scenario di scarto", realistic: "Realistico", pessimistic: "Pessimistico", netProfit: "Profitto netto reale", netMargin: "Margine netto", minRotation: "Rotazione minima settimanale", glassesWeek: "calici/settimana", viability: "Fattibilità al calice", viable: "Fattibile", marginal: "Marginale", notViable: "Non fattibile", wasteNote: "Include 1 calice di scarto (realistico) o 2 calici (pessimistico) per bottiglia aperta.", rotationNote: "Perché il calice sia redditizio, devi venderne almeno questa quantità a settimana.", coravinNote: "Con Coravin/gas inerte lo scarto si riduce, ma il sovraccosto di conservazione è già incluso nel calcolo." },
+                fr: { title: "Rentabilité nette · Winerim", wasteScenario: "Scénario de perte", realistic: "Réaliste", pessimistic: "Pessimiste", netProfit: "Bénéfice net réel", netMargin: "Marge nette", minRotation: "Rotation hebdomadaire minimum", glassesWeek: "verres/semaine", viability: "Viabilité au verre", viable: "Viable", marginal: "Marginal", notViable: "Non viable", wasteNote: "Inclut 1 verre de perte (réaliste) ou 2 verres (pessimiste) par bouteille ouverte.", rotationNote: "Pour que le verre soit rentable, vous devez en vendre au moins cette quantité par semaine.", coravinNote: "Coravin/gaz inerte réduit la perte, mais le surcoût de conservation est déjà inclus dans le calcul." },
+              };
+              const n = nl[lang] || nl.es;
+
+              const wasteRealistic = 1;
+              const wastePessimistic = 2;
+              const hasPreservation = preset.preservation > 0;
+
+              const effectiveGlassesRealistic = Math.max(copasPorBotella - wasteRealistic, 1);
+              const effectiveGlassesPessimistic = Math.max(copasPorBotella - wastePessimistic, 1);
+
+              const netProfitRealistic = results.precioCopa * effectiveGlassesRealistic - costeBotella - (preset.preservation * copasPorBotella);
+              const netProfitPessimistic = results.precioCopa * effectiveGlassesPessimistic - costeBotella - (preset.preservation * copasPorBotella);
+              const netMarginRealistic = results.ingresoTotal > 0 ? (netProfitRealistic / (results.precioCopa * effectiveGlassesRealistic)) * 100 : 0;
+
+              const minGlassesPerWeek = Math.ceil(copasPorBotella * 1.5);
+              const viability = netProfitRealistic > costeBotella * 0.3 ? "viable" : netProfitRealistic > 0 ? "marginal" : "not-viable";
+              const viabilityLabel = viability === "viable" ? n.viable : viability === "marginal" ? n.marginal : n.notViable;
+              const viabilityColor = viability === "viable" ? "text-emerald-500" : viability === "marginal" ? "text-amber-500" : "text-destructive";
+              const viabilityBg = viability === "viable" ? "bg-emerald-500/10" : viability === "marginal" ? "bg-amber-500/10" : "bg-destructive/10";
+
+              return (
+                <div className="mt-5 rounded-xl border border-amber-500/20 bg-gradient-card p-5 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={14} className="text-amber-500" />
+                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-amber-500">{n.title}</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 rounded-lg border border-border bg-background">
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.wasteScenario}: {n.realistic}</p>
+                      <p className="font-heading text-xl font-bold text-foreground">{netProfitRealistic.toFixed(2)} €</p>
+                      <p className="text-xs text-muted-foreground">{n.netMargin}: {netMarginRealistic.toFixed(0)}%</p>
+                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlassesRealistic}/{copasPorBotella} copas vendidas)</p>
+                    </div>
+                    <div className="p-3 rounded-lg border border-border bg-background">
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.wasteScenario}: {n.pessimistic}</p>
+                      <p className={`font-heading text-xl font-bold ${netProfitPessimistic > 0 ? "text-foreground" : "text-destructive"}`}>{netProfitPessimistic.toFixed(2)} €</p>
+                      <p className="text-xs text-muted-foreground">{n.netProfit}</p>
+                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlassesPessimistic}/{copasPorBotella} copas vendidas)</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 rounded-lg border border-border bg-background text-center">
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.minRotation}</p>
+                      <p className="font-heading text-lg font-bold">{minGlassesPerWeek} {n.glassesWeek}</p>
+                    </div>
+                    <div className="p-3 rounded-lg border border-border bg-background text-center">
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.viability}</p>
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${viabilityBg} ${viabilityColor}`}>{viabilityLabel}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    {hasPreservation ? n.coravinNote : n.wasteNote}
+                  </p>
+                </div>
+              );
+            })()}
           </motion.div>
         </div>
       </section>
