@@ -45,6 +45,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "capital-inmovilizado",
       title: "Cómo detectar capital inmovilizado",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha calculado el valor total de las botellas sin venta en tu bodega.",
+        whyMatters: "Es dinero real invertido que no genera retorno. Invisible en la cuenta de resultados, pero muy real en tu tesorería.",
+        riskIfIgnored: "Sin acción, el capital inmovilizado crece cada mes con cada nuevo pedido que no se ajusta a la demanda.",
+      },
       queSignifica:
         "El capital inmovilizado es el valor total de compra de todas las botellas que tienes en bodega y no se están vendiendo. No es un número abstracto: son euros reales que invertiste y que no están generando retorno. Para calcularlo, multiplica el coste de compra de cada referencia sin venta por el número de botellas en stock.",
       porQueImporta:
