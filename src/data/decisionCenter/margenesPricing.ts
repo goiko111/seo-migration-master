@@ -23,6 +23,15 @@ export interface AreaTopError {
   consecuencia: string;
 }
 
+export type LinkType = "tool" | "resource" | "product" | "article" | "guide" | "solution";
+
+export interface AreaLink {
+  label: string;
+  href: string;
+  description: string;
+  type?: LinkType;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -32,7 +41,7 @@ export interface DeepAreaContent {
   bg: string;
   topErrors?: AreaTopError[];
   subtopics: SubTopic[];
-  links: { label: string; href: string; description: string }[];
+  links: AreaLink[];
 }
 
 const margenesPricingContent: DeepAreaContent = {
