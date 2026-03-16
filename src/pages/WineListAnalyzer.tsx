@@ -461,6 +461,8 @@ const WineListAnalyzer = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* INPUT SECTION */}
       <AnimatePresence mode="wait">
         {!result && (
