@@ -459,7 +459,8 @@ const WinerimSupply = () => {
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">{tx.hero_subtitle}</p>
+            <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-4">{tx.hero_subtitle}</p>
+            <p className="font-heading text-sm sm:text-base font-semibold tracking-[0.15em] uppercase text-emerald-400/80 mb-10">{tx.hero_journey}</p>
           </ScrollReveal>
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
