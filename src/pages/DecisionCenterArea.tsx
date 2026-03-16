@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
+import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
