@@ -32,6 +32,12 @@ export interface AreaLink {
   type?: LinkType;
 }
 
+export interface AreaNextStep {
+  label: string;
+  href: string;
+  description: string;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -42,6 +48,7 @@ export interface DeepAreaContent {
   topErrors?: AreaTopError[];
   subtopics: SubTopic[];
   links: AreaLink[];
+  nextStep: AreaNextStep;
 }
 
 const margenesPricingContent: DeepAreaContent = {
@@ -244,6 +251,11 @@ const margenesPricingContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Abrir la calculadora de márgenes",
+    href: "/calculadora-margen-vino",
+    description: "Calcula el margen real de tus referencias y detecta las que necesitan ajuste de precio.",
+  },
 };
 
 export default margenesPricingContent;

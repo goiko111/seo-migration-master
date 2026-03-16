@@ -172,6 +172,11 @@ const cartaEquilibrioContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Revisar el equilibrio de tu carta",
+    href: "/recursos/plantilla-equilibrio-carta",
+    description: "Descarga la plantilla y diagnostica saturaciones, huecos y canibalización en tu carta actual.",
+  },
 };
 
 export default cartaEquilibrioContent;

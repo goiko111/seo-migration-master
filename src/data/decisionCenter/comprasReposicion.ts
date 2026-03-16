@@ -153,6 +153,11 @@ const comprasReposicionContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Evaluar tu próxima compra",
+    href: "/herramientas/calculadora-compra-inteligente",
+    description: "Cruza rotación, margen y stock actual para decidir si una compra tiene sentido antes de hacerla.",
+  },
 };
 
 export default comprasReposicionContent;
