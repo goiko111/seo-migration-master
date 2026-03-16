@@ -126,10 +126,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "Cómo interpretar los resultados",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core: detección de obsolescencia", type: "solution" },
+      { to: "/precios", label: "Planes y precios", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
   en: {
