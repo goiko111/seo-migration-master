@@ -125,6 +125,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-amplia-compleja",
       title: "Qué significa una carta amplia y compleja",
+      priority: "seguimiento",
       porQueTeLoMostramos: { detected: "Tu carta supera las 250 referencias: es un activo estratégico si se gestiona con datos, y un pasivo si se gestiona con intuición.", whyMatters: "La complejidad añade profundidad pero también fricción: más stock, más canibalización, más riesgo sin visibilidad.", riskIfIgnored: "Sin herramientas analíticas, la complejidad se convierte en caos. No ves qué se canibaliza ni dónde tienes huecos." },
       queSignifica:
         "Una carta amplia y compleja —a partir de 250 referencias— no es intrínsecamente buena ni mala. Es un activo estratégico si se gestiona con datos, y un pasivo operativo si se gestiona con intuición. La complejidad añade profundidad (más opciones para el comensal experto) pero también añade fricción (más difícil de gestionar, más stock, más riesgo de canibalización). Winerim está diseñado específicamente para este escenario.",
