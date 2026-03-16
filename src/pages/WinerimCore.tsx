@@ -381,6 +381,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "Santé et architecture de carte", desc: "Évaluez l'équilibre, l'escalier de prix, la profondeur de l'offre et la clarté commerciale de la carte." },
     ],
 
+    depth_title: "Une couche composée de dizaines de modules analytiques",
+    depth_text: "Winerim Core intègre 26 modules analytiques interconnectés qui travaillent sur le pricing, la marge, le stock, la rentabilité, les achats, la simulation, l'architecture et le benchmark.",
+    depth_text2: "Pas besoin de les voir comme des outils isolés. L'essentiel est qu'ensemble, ils permettent de mieux analyser la carte et de prendre des décisions plus solides.",
+    depth_micro: "Certains outils publics de Winerim sont des démos simplifiées de cette couche analytique.",
+
     tools_eyebrow: "Les outils publics ne sont que la surface",
     tools_title: "Chaque outil gratuit est une démo simplifiée de ce que ",
     tools_title_hl: "Core fait en profondeur",
