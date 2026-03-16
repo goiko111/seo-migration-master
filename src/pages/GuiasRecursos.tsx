@@ -280,16 +280,16 @@ const GuiasRecursos = () => {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-3">
               {[
                 { href: "#guias", icon: BookOpen, label: t.guidesTitle, count: guides.length },
-                { href: "#recursos", icon: Download, label: t.resourcesTitle, count: resources.length },
+                { href: localePath("/recursos"), icon: Download, label: t.resourcesTitle, count: resources.length },
                 { href: "#herramientas", icon: Wrench, label: t.toolsTitle, count: tools.length },
                 { href: "#soluciones", icon: CheckCircle, label: t.solutionsTitle, count: solutions.length },
               ].map((nav) => (
-                <a key={nav.href} href={nav.href}
+                <Link key={nav.href} to={nav.href}
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all text-sm group">
                   <nav.icon size={14} className="text-wine" />
                   <span className="font-medium group-hover:text-wine transition-colors">{nav.label}</span>
                   <span className="text-[10px] font-semibold text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">{nav.count}</span>
-                </a>
+                </Link>
               ))}
             </motion.div>
           </div>
