@@ -92,9 +92,9 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
 
 /** Default fallback links when no keywords match */
 const defaultLinks: RelatedLink[] = [
-  { to: "/wine-list-analyzer", label: "Analizador de carta de vinos", type: "tool" },
+  { to: "/analisis-carta", label: "Analiza tu carta de vinos gratis", type: "tool" },
+  { to: "/producto/winerim-core", label: "Winerim Core: motor analítico de carta", type: "solution" },
   { to: "/herramientas", label: "Herramientas gratuitas para carta de vinos", type: "tool" },
-  { to: "/como-hacer-carta-vinos", label: "Cómo hacer una carta de vinos", type: "guide" },
   { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
 ];
 
