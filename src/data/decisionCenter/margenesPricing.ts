@@ -123,6 +123,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-subir-precio",
       title: "Cuándo subir precio",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias con alto volumen de venta pero margen por debajo de la media de tu carta.",
         whyMatters: "Son candidatas claras a una subida de 1-2 € que rara vez impacta en la demanda pero mejora tu resultado cada día.",
