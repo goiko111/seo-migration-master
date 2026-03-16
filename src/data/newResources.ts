@@ -1239,6 +1239,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
       { to: "/recursos/plantilla-estrategia-vinos-por-copa", label: "Plantilla de estrategia por copa", type: "resource" },
+      { to: "/decision-center/vino-por-copa", label: "Decision Center: vino por copa", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
