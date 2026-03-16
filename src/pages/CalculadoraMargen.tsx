@@ -15,7 +15,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── i18n ─── */
-type LinkType = "guide" | "resource" | "solution" | "tool";
+type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
 interface WineTypeI18n { id: string; label: string; sublabel: string; defaultMult: number; icon: string }
 interface LangContent {
   seoTitle: string; seoDesc: string;

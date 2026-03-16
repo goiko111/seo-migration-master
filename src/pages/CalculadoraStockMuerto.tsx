@@ -22,7 +22,7 @@ import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── Types ─── */
-type LinkType = "guide" | "resource" | "solution" | "tool";
+type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
 type Categoria = "entrada" | "media" | "premium" | "alta";
 interface StockItem { nombre: string; unidades: number; costeUnidad: number; diasSinVenta: number; categoria: Categoria }
 

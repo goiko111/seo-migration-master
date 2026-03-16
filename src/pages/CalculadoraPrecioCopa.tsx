@@ -18,7 +18,7 @@ import { Slider } from "@/components/ui/slider";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── i18n ─── */
-type LinkType = "guide" | "resource" | "solution" | "tool";
+type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
 interface WinePreset { id: string; label: string; glasses: number; shelfLife: string; preservation: number; mult: number; icon: string }
 interface LangContent {
   seoTitle: string; seoDesc: string;
