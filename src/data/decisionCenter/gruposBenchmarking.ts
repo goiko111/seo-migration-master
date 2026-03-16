@@ -18,7 +18,7 @@ const gruposBenchmarkingContent: DeepAreaContent = {
     { label: "Auditor multi-local", href: "/herramientas/auditor-carta-multilocal", description: "Compara surtido, pricing y copa entre locales de un mismo grupo" },
   ],
   subtopics: [
-    { id: "comparar-unidades", title: "Cómo comparar unidades de forma útil",
+    { id: "comparar-unidades", title: "Cómo comparar unidades de forma útil", priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha normalizado las métricas de tus locales por tipología para que la comparación sea justa.", whyMatters: "Sin comparación normalizada, los datos engañan: el local que más factura puede ser el que peor margen tiene.", riskIfIgnored: "Cada director opera con su criterio sin detectar ni mejores prácticas ni problemas sistémicos." },
       queSignifica:
         "Comparar unidades no es ordenar locales de mejor a peor por facturación. Es cruzar métricas normalizadas (margen medio, rotación, ticket medio de vino, ratio copa/botella, % de vinos muertos) entre locales con contextos comparables. Un gastronómico y un casual no se comparan igual. Una unidad de hotel y una de calle tampoco. La comparación útil agrupa por tipología y mide desviaciones sobre la media del grupo, no valores absolutos.",
