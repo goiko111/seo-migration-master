@@ -3,8 +3,9 @@ import {
   TrendingUp, Users, DollarSign, Target, Layers, RefreshCw,
 } from "lucide-react";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const data: VerticalContent = {
+const ES: VerticalContent = {
   metaTitle: "Winerim para Wine Bars y Vinotecas | Gestión Inteligente de Carta",
   metaDescription: "Optimiza la gestión de tu wine bar con Winerim: rotación por copa, pricing dinámico, fichas para clientes curiosos y analítica de rendimiento por referencia.",
   canonicalUrl: "https://winerim.wine/soluciones/wine-bars",
@@ -144,5 +145,230 @@ const data: VerticalContent = {
   ],
 };
 
-const WineBars = () => <VerticalTemplate t={data} />;
+/* ═══ ENGLISH ═══ */
+const EN: VerticalContent = {
+  ...ES,
+  metaTitle: "Winerim for Wine Bars | Smart Wine List Management",
+  metaDescription: "Optimize your wine bar with Winerim: by-the-glass rotation, dynamic pricing, discovery profiles for curious clients and performance analytics per reference.",
+  badgeLabel: "Wine bars & enotecas",
+  breadSolutions: "Solutions",
+  breadLabel: "Wine bars",
+  heroTitle1: "Your by-the-glass list deserves ",
+  heroTitleHighlight: "intelligence, not intuition",
+  heroDesc: "Winerim transforms wine bar management: optimal glass rotation, margin-maximizing pricing and profiles that turn curious visitors into regulars.",
+  ctaDemo: "Request demo", ctaContact: "Talk to the team",
+  heroSummary: "In a wine bar, wine isn't a complement — it's the main product. Every poorly managed glass, every bottle that doesn't rotate and every reference without a profile is money lost. Winerim gives wine bars the analytical tools that exist in premium hospitality, adapted to by-the-glass operations.",
+
+  forTitle: "Is Winerim right for your wine bar?",
+  forLabel: "Perfect fit if…",
+  notForLabel: "Maybe not for you if…",
+  forItems: [
+    "You sell wine by the glass as your main business category",
+    "You have 40+ references and rotate frequently",
+    "You want to maximize margin per glass without blind pricing",
+    "Your clientele is curious and values discovering new wines",
+    "You need data to decide which wines enter and leave the list",
+  ],
+  notForItems: [
+    "Your business is a general bar where wine is residual",
+    "You sell fewer than 10 references",
+    "You have no interest in analyzing your list's performance",
+  ],
+
+  painLabel: "The problem",
+  painTitle1: "The specific challenges of a ",
+  painTitleHighlight: "wine bar",
+  pains: [
+    { text: "High reference rotation by the glass: deciding what to open each day is an economic risk without real demand data." },
+    { text: "Glass margin is set by generic multiplier, without considering waste, consumption speed or price elasticity." },
+    { text: "Clients who want to discover but lack context: without profiles or recommendations, they choose safe, lower-priced options." },
+    { text: "Opened bottles that don't finish in time: waste destroys the margin of by-the-glass operations." },
+    { text: "Difficulty knowing which references are truly performing and which generate more cost than benefit." },
+    { text: "Bar staff don't always have the wine knowledge to guide clients toward higher-value options." },
+  ],
+
+  tableLabel: "Comparison",
+  tableTitle: "Traditional management vs. Winerim in wine bars",
+  tableHeaders: ["Area", "Without Winerim", "With Winerim"],
+  tableRows: [
+    { area: "Glass selection", without: "Manager's intuition every morning", with_w: "Demand, margin and rotation data to decide what to open" },
+    { area: "Glass pricing", without: "Cost × fixed multiplier", with_w: "Optimized price per reference: margin + demand + waste" },
+    { area: "Waste", without: "Assumed as inevitable cost", with_w: "Open bottle alerts and consumption speed per reference" },
+    { area: "Discovery", without: "Depends on staff verbal recommendations", with_w: "Interactive profiles with notes, history and pairing suggestions" },
+    { area: "Rotation", without: "Reviewed when there's surplus or breakage", with_w: "Real-time dashboard with low-rotation alerts" },
+    { area: "Training", without: "Informal knowledge from bar staff", with_w: "Technical profiles that train the team with each interaction" },
+  ],
+
+  solLabel: "The solution",
+  solTitle1: "What Winerim brings to a ",
+  solTitleHighlight: "wine bar",
+  advantages: [
+    { title: "Smart glass management", desc: "Decide which bottles to open each day based on demand, margin and consumption speed data, not gut feeling." },
+    { title: "Dynamic glass pricing", desc: "Each reference has its optimal price based on cost, expected waste and willingness to pay. Abandon the ×3." },
+    { title: "Discovery profiles", desc: "Tasting notes, winery history, pairing suggestions and similar styles. Turn curious visitors into loyal clients." },
+    { title: "Waste control", desc: "Monitor open bottles, exposure time and service speed. Reduce waste with proactive alerts." },
+    { title: "Performance analytics", desc: "Visualize real margin per reference and per glass. Detect which wines are profitable and which drag results." },
+    { title: "Assisted rotation", desc: "Automatic alerts for underperforming references, substitution suggestions and cannibalization analysis." },
+  ],
+
+  howLabel: "In practice",
+  howTitle: "How it works in a wine bar",
+  useCases: [
+    { title: "Daily opening", scenario: "Monday morning: you need to decide which 8 wines to open by the glass for the week.", result: "Winerim suggests the 8 references with the best margin/demand ratio, considering stock and previous rotation." },
+    { title: "Indecisive client at the bar", scenario: "A client asks for 'something different but not too heavy' with no other guidance.", result: "The list filters by style and body, presents 3 options with profile and price, guiding without pressure." },
+    { title: "Private tasting event", scenario: "A group books a 6-wine tasting and you need a coherent, profitable selection.", result: "Winerim generates a tasting proposal with a narrative thread, downloadable profiles and optimized margin." },
+  ],
+
+  impactLabel: "Results",
+  impactTitle: "Measurable impact in wine bars",
+  impactSubtitle: "Based on by-the-glass establishments already using Winerim.",
+  impacts: [
+    { label: "Glass margin +15–22%", desc: "Individualized pricing and waste reduction increase profitability per glass served." },
+    { label: "Waste reduced −25–35%", desc: "Open bottle alerts and consumption speed management minimize waste." },
+    { label: "Average ticket +12–18%", desc: "Profiles and recommendations guide clients toward higher perceived value options." },
+    { label: "List rotation +40%", desc: "Performance analytics enable data-driven list renewal." },
+    { label: "Returning clients ↑", desc: "Guided discovery experience generates loyalty and referrals." },
+    { label: "Decision time −35%", desc: "Clients access context and filters that speed up choice without depending on staff." },
+  ],
+
+  doesLabel: "What Winerim does",
+  doesNotLabel: "What Winerim doesn't do",
+  doesTitle: "Clear expectations",
+  doesItems: [
+    "Optimizes which wines to open by the glass each day with data",
+    "Calculates optimal glass price considering waste",
+    "Generates interactive profiles that facilitate discovery",
+    "Monitors rotation and margin per reference in real time",
+    "Reduces waste with open bottle alerts",
+    "Trains bar staff with accessible information",
+  ],
+  doesNotItems: [
+    "Doesn't manage cellar stock or purchasing logistics",
+    "Is not a POS and doesn't invoice sales",
+    "Doesn't decide which wines to buy from distributors",
+    "Doesn't replace the human experience of bar service",
+  ],
+
+  faqs: [
+    { q: "Does Winerim manage open bottle stock?", a: "Winerim monitors open bottles and consumption speed to generate waste alerts, but it's not an inventory system. It complements your existing cellar management." },
+    { q: "Does it work for wine bars with weekly rotation?", a: "Yes. In fact, the more you rotate references, the more value Winerim adds. The system learns from demand patterns and helps you decide what to open with less risk." },
+    { q: "Can I use Winerim for events and tastings?", a: "Yes. You can generate themed selections with downloadable profiles, calculate tasting margins and offer the experience as a premium differentiator." },
+    { q: "How does it help with glass pricing?", a: "Winerim analyzes purchase cost, expected waste, historical demand and list position to suggest the optimal price per glass, maximizing margin without alienating clients." },
+    { q: "Do I need a sommelier to use Winerim?", a: "No. Winerim is designed to work with both specialized teams and bar staff without wine training. Profiles and recommendations make knowledge accessible." },
+    { q: "How much does implementation cost?", a: "Depends on your list size. We offer a free initial analysis and full implementation in under a week. Check our pricing page for details." },
+  ],
+
+  ctaLabel: "Take the next step",
+  ctaTitle: "Make every glass count",
+  ctaDesc: "Request a free analysis of your by-the-glass list and discover how much margin you're leaving on the bar.",
+  ctaPrimary: "Analyze my list free",
+  ctaSecondary: "Request demo",
+  ctaMicro: "No commitment. Personalized report in under 48 hours.",
+
+  nextStepsTitle: "Next steps",
+  nextSteps: [
+    { label: "Free analysis", to: "/analisis-carta", description: "Discover hidden opportunities in your by-the-glass list", type: "tool" as const },
+    { label: "By-the-glass guide", to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", description: "Complete strategy to maximize wine by the glass", type: "guide" as const },
+    { label: "Pricing tool", to: "/wine-pricing-tool", description: "Calculate the optimal price for each glass", type: "tool" as const },
+  ],
+  internalLinks: [
+    { to: "/analisis-carta", label: "Free wine list analysis", type: "tool" },
+    { to: "/guias/como-fijar-estrategia-rentable-vino-por-copa", label: "By-the-glass strategy", type: "guide" },
+    { to: "/guias/como-implantar-vino-por-copa-sin-perder-margen", label: "Glass without losing margin", type: "guide" },
+    { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Glass price calculator", type: "tool" },
+    { to: "/casos-exito", label: "Case studies", type: "resource" },
+    { to: "/soluciones/restaurantes-gastronomicos", label: "Fine dining restaurants", type: "solution" },
+  ],
+};
+
+/* ═══ ITALIAN ═══ */
+const IT: VerticalContent = {
+  ...EN,
+  metaTitle: "Winerim per Wine Bar ed Enoteche | Gestione Intelligente della Carta",
+  metaDescription: "Ottimizza il tuo wine bar con Winerim: rotazione al calice, pricing dinamico, schede per clienti curiosi e analytics per referenza.",
+  badgeLabel: "Wine bar ed enoteche",
+  breadSolutions: "Soluzioni",
+  breadLabel: "Wine bar",
+  heroTitle1: "La tua carta al calice merita ",
+  heroTitleHighlight: "intelligenza, non intuizione",
+  heroDesc: "Winerim trasforma la gestione del vino nei wine bar: rotazione ottimale al calice, pricing che massimizza il margine e schede che trasformano i curiosi in clienti abituali.",
+  ctaDemo: "Richiedi demo", ctaContact: "Parla con il team",
+  forTitle: "Winerim è giusto per il tuo wine bar?",
+  forLabel: "Perfetto se…",
+  notForLabel: "Forse non per te se…",
+  painLabel: "Il problema",
+  painTitle1: "Le sfide specifiche di un ",
+  painTitleHighlight: "wine bar",
+  tableLabel: "Confronto",
+  tableTitle: "Gestione tradizionale vs. Winerim nei wine bar",
+  tableHeaders: ["Area", "Senza Winerim", "Con Winerim"],
+  solLabel: "La soluzione",
+  solTitle1: "Cosa porta Winerim a un ",
+  solTitleHighlight: "wine bar",
+  howLabel: "In pratica",
+  howTitle: "Come funziona in un wine bar",
+  impactLabel: "Risultati",
+  impactTitle: "Impatto misurabile nei wine bar",
+  impactSubtitle: "Basato su locali al calice che già usano Winerim.",
+  doesLabel: "Cosa fa Winerim",
+  doesNotLabel: "Cosa non fa Winerim",
+  doesTitle: "Aspettative chiare",
+  ctaLabel: "Fai il passo successivo",
+  ctaTitle: "Fai contare ogni calice",
+  ctaDesc: "Richiedi un'analisi gratuita della tua carta al calice e scopri quanto margine stai lasciando sul bancone.",
+  ctaPrimary: "Analizza la mia carta gratis",
+  ctaSecondary: "Richiedi demo",
+  ctaMicro: "Senza impegno. Report personalizzato in meno di 48 ore.",
+  nextStepsTitle: "Prossimi passi",
+};
+
+/* ═══ FRENCH ═══ */
+const FR: VerticalContent = {
+  ...EN,
+  metaTitle: "Winerim pour Wine Bars | Gestion Intelligente de la Carte",
+  metaDescription: "Optimisez votre wine bar avec Winerim : rotation au verre, pricing dynamique, fiches pour clients curieux et analytique de performance par référence.",
+  badgeLabel: "Wine bars & bars à vins",
+  breadSolutions: "Solutions",
+  breadLabel: "Wine bars",
+  heroTitle1: "Votre carte au verre mérite de l'",
+  heroTitleHighlight: "intelligence, pas de l'intuition",
+  heroDesc: "Winerim transforme la gestion du vin dans les wine bars : rotation optimale au verre, pricing qui maximise la marge et fiches qui convertissent les curieux en habitués.",
+  ctaDemo: "Demander une démo", ctaContact: "Parler à l'équipe",
+  forTitle: "Winerim est-il fait pour votre wine bar ?",
+  forLabel: "Parfait si…",
+  notForLabel: "Peut-être pas pour vous si…",
+  painLabel: "Le problème",
+  painTitle1: "Les défis spécifiques d'un ",
+  painTitleHighlight: "wine bar",
+  tableLabel: "Comparaison",
+  tableTitle: "Gestion traditionnelle vs. Winerim dans les wine bars",
+  tableHeaders: ["Domaine", "Sans Winerim", "Avec Winerim"],
+  solLabel: "La solution",
+  solTitle1: "Ce que Winerim apporte à un ",
+  solTitleHighlight: "wine bar",
+  howLabel: "En pratique",
+  howTitle: "Comment ça fonctionne dans un wine bar",
+  impactLabel: "Résultats",
+  impactTitle: "Impact mesurable dans les wine bars",
+  impactSubtitle: "Basé sur des établissements au verre qui utilisent déjà Winerim.",
+  doesLabel: "Ce que Winerim fait",
+  doesNotLabel: "Ce que Winerim ne fait pas",
+  doesTitle: "Attentes claires",
+  ctaLabel: "Passez à l'étape suivante",
+  ctaTitle: "Faites compter chaque verre",
+  ctaDesc: "Demandez une analyse gratuite de votre carte au verre et découvrez combien de marge vous laissez sur le comptoir.",
+  ctaPrimary: "Analyser ma carte gratuitement",
+  ctaSecondary: "Demander une démo",
+  ctaMicro: "Sans engagement. Rapport personnalisé en moins de 48 heures.",
+  nextStepsTitle: "Prochaines étapes",
+};
+
+const i18n: Record<string, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+
+const WineBars = () => {
+  const { lang } = useLanguage();
+  const t = i18n[lang] || i18n.es;
+  return <VerticalTemplate t={t} />;
+};
+
 export default WineBars;
