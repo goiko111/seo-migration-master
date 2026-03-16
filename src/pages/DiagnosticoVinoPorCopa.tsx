@@ -112,6 +112,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: estrategia por copa", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
     ],
+    decides: ["Si tu programa de copa es equilibrado en estilos y precios", "Qué vinos por copa tienen mejor margen real", "Si la rotación justifica mantener cada referencia"],
+    avoids: ["Ofrecer solo tintos por copa sin diversidad", "Precio único para todos los vinos por copa", "Ignorar la merma como variable de coste"],
+    impact: ["Optimizar la rentabilidad del programa de copa", "Equilibrar la oferta para captar más mesas", "Reducir la merma con rotación controlada"],
   },
   en: {
     seo_title: "By-the-Glass Wine Diagnostic for Restaurants | Winerim",
