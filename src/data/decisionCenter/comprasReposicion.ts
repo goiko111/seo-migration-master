@@ -23,6 +23,20 @@ const comprasReposicionContent: DeepAreaContent = {
     { label: "Blog: ¿Estás comprando mal vino?", href: "/blog/como-saber-si-estas-comprando-mal-vino-restaurante", description: "Señales de que tu proceso de compra necesita una revisión", type: "article" },
     { label: "Blog: ¿Qué vinos merece la pena reponer?", href: "/blog/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale de tu próximo pedido", type: "article" },
   ],
+  miniCases: [
+    {
+      profile: "Grupo de 4 locales casual",
+      situation: "Cada local pedía al proveedor por separado, sin coordinar. El mismo vino se compraba a 3 precios distintos según quién negociara.",
+      action: "Centralizó la compra de las 15 referencias comunes. Negoció un precio único con volumen agregado y condiciones de portes incluidos.",
+      result: "Ahorro medio del 11% en coste de compra. 4.200 €/año solo en las referencias compartidas.",
+    },
+    {
+      profile: "Restaurante gastronómico independiente",
+      situation: "El sommelier compraba por intuición y catálogo. Nunca cruzaba el pedido con datos de venta. Resultado: 30% del pedido mensual eran referencias con rotación baja.",
+      action: "Antes de cada pedido, exporta el top 20 de rotación y el listado de stock muerto. Solo repone lo que rota y prueba 2 referencias nuevas al mes.",
+      result: "Redujo el pedido mensual un 20% sin perder ventas. La inversión se concentra en lo que funciona.",
+    },
+  ],
   subtopics: [
     {
       id: "comprando-mal",

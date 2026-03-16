@@ -38,6 +38,13 @@ export interface AreaNextStep {
   description: string;
 }
 
+export interface AreaMiniCase {
+  profile: string;
+  situation: string;
+  action: string;
+  result: string;
+}
+
 export interface DeepAreaContent {
   name: string;
   tagline: string;
@@ -46,6 +53,7 @@ export interface DeepAreaContent {
   accent: string;
   bg: string;
   topErrors?: AreaTopError[];
+  miniCases?: AreaMiniCase[];
   subtopics: SubTopic[];
   links: AreaLink[];
   nextStep: AreaNextStep;
@@ -73,6 +81,20 @@ const margenesPricingContent: DeepAreaContent = {
     { label: "Blog: 7 errores al fijar precios", href: "/article/errores-fijar-precios-vino-restaurante", description: "Los errores de pricing más frecuentes y cómo evitarlos", type: "article" },
     { label: "Blog: Palancas para mejorar margen", href: "/article/palancas-mejorar-margen-vino-sin-rehacer-carta", description: "Cómo mejorar el margen sin rehacer la carta de vinos", type: "article" },
     { label: "Blog: Métricas F&B de vino", href: "/article/metricas-fb-vino-restaurante", description: "Las métricas que todo F&B debería monitorizar" },
+  ],
+  miniCases: [
+    {
+      profile: "Gastronómico con carta de 60 referencias",
+      situation: "Margen medio del 58%, pero las 5 referencias más vendidas tenían un multiplicador de ×2.2 porque nunca se actualizaron tras la última subida del proveedor.",
+      action: "Recalculó precios de las 5 referencias top. Subió entre 1 € y 3 € según franja. Al equipo de sala le dio argumentario de valor para justificar el cambio.",
+      result: "Margen medio subió al 63% sin perder ni una venta en esas referencias. Impacto estimado: +1.800 €/mes.",
+    },
+    {
+      profile: "Casual dining con 35 referencias",
+      situation: "Aplicaba ×3 uniforme a toda la carta. Los vinos de entrada (coste <5 €) quedaban a 15 € y no se vendían; los de >15 € de coste quedaban a 45 € y tampoco.",
+      action: "Implementó multiplicador escalonado: ×3.5 en vinos de <8 € de coste, ×2.8 en la franja media, ×2.2 en los de imagen.",
+      result: "Ticket medio de vino subió un 12% porque los comensales dejaron de elegir siempre el más barato.",
+    },
   ],
   subtopics: [
     {

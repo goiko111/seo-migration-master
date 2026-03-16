@@ -24,6 +24,20 @@ const vinoPorCopaContent: DeepAreaContent = {
     { label: "Blog: Precio por copa sin comerse el margen", href: "/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "Fórmula correcta para fijar precios de copa con merma real", type: "article" },
     { label: "Blog: Qué vinos ofrecer por copa", href: "/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Selección de copa según tipo de local y perfil de cliente", type: "article" },
   ],
+  miniCases: [
+    {
+      profile: "Wine bar con 12 copas activas",
+      situation: "Tenía 12 copas pero solo 5 rotaban bien. Las 7 restantes generaban una merma del 35% que nadie medía.",
+      action: "Redujo a 7 copas. Eligió las de mejor ratio rotación/margen. Las 5 restantes las ofrece solo en botella.",
+      result: "Merma bajó del 35% al 12%. Margen real por copa subió un 22%. Menos trabajo para sala y menos desperdicio.",
+    },
+    {
+      profile: "Restaurante de menú ejecutivo",
+      situation: "Ofrecía 3 copas a precio fijo (4,50 €). No calculaba merma ni diferenciaba por coste. El vino más caro por copa le costaba 3,80 € y lo vendía a 4,50 €.",
+      action: "Diferenció precios por copa según coste real. Subió la copa premium a 6 €. Mantuvo una de entrada a 4,50 € con un vino de menor coste.",
+      result: "Margen medio por copa pasó de 18% a 52%. El comensal acepta pagar más si percibe diferencia de calidad.",
+    },
+  ],
   subtopics: [
     {
       id: "cuando-conviene-copa",

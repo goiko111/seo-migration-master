@@ -17,6 +17,20 @@ const gruposBenchmarkingContent: DeepAreaContent = {
     { label: "Blog: Estandarizar oferta en grupos", href: "/article/estandarizar-oferta-vino-grupo-restauracion", description: "Cómo estandarizar sin perder la identidad de cada local", type: "article" },
     { label: "Auditor multi-local", href: "/herramientas/auditor-carta-multilocal", description: "Compara surtido, pricing y copa entre locales de un mismo grupo", type: "tool" },
   ],
+  miniCases: [
+    {
+      profile: "Grupo de 6 restaurantes en 3 ciudades",
+      situation: "Cada local tenía carta propia. El mejor local tenía un margen del 64%; el peor, un 41%. Nadie lo sabía porque no comparaban.",
+      action: "Implementó un scorecard mensual unificado. Identificó que el peor local tenía 15 referencias que no vendía y precios un 15% por debajo del grupo.",
+      result: "En 4 meses, el local rezagado subió al 56% de margen. Solo replicando el mix de copas y el pricing del líder.",
+    },
+    {
+      profile: "Cadena de hoteles con F&B centralizado",
+      situation: "La compra era centralizada pero cada hotel fijaba precios libremente. Mismo vino a 28 € en un hotel y a 19 € en otro.",
+      action: "Definió bandas de precio por categoría y tipo de hotel (urbano vs resort). Cada hotel tiene margen de ±2 € dentro de la banda.",
+      result: "Coherencia de marca, margen homogéneo del 58% en todos los hoteles y negociación de compra más fuerte por volumen.",
+    },
+  ],
   subtopics: [
     { id: "comparar-unidades", title: "Cómo comparar unidades de forma útil", priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha normalizado las métricas de tus locales por tipología para que la comparación sea justa.", whyMatters: "Sin comparación normalizada, los datos engañan: el local que más factura puede ser el que peor margen tiene.", riskIfIgnored: "Cada director opera con su criterio sin detectar ni mejores prácticas ni problemas sistémicos." },
