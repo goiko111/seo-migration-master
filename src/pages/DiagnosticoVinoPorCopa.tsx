@@ -286,6 +286,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark : stratégie au verre", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook : optimiser le verre", type: "guide" },
     ],
+    decides: ["Si votre programme au verre est équilibré en styles et prix", "Quels vins au verre ont la meilleure marge réelle", "Si la rotation justifie de garder chaque référence"],
+    avoids: ["Ne proposer que des rouges au verre sans diversité", "Prix unique pour tous les vins au verre", "Ignorer la perte comme variable de coût"],
+    impact: ["Optimiser la rentabilité du programme au verre", "Équilibrer l'offre pour capter plus de tables", "Réduire la perte avec une rotation contrôlée"],
   },
 };
 
