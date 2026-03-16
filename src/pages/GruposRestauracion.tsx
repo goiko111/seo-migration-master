@@ -16,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import NextSteps from "@/components/seo/NextSteps";
 import FAQSection from "@/components/seo/FAQSection";
 import { CapabilitiesBlock, BenchmarkingBlock, IntelBlock, PilotBlock } from "@/components/groups/GroupStrategyBlocks";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── types ─── */
