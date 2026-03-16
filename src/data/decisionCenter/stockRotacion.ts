@@ -96,6 +96,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-sacar-por-copa",
       title: "Cuándo sacarla por copa",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias lentas que podrían funcionar por copa para acelerar la rotación.",
         whyMatters: "La copa reduce la barrera de entrada del comensal y te permite recuperar capital en días en vez de meses.",
