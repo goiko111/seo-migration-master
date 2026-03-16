@@ -69,6 +69,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-impulsar",
       title: "Cuándo impulsar una referencia",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha encontrado vinos con buen margen y buena valoración pero baja rotación: no se venden, pero podrían.",
+        whyMatters: "Muchos vinos no se venden por falta de visibilidad, no de calidad. Un impulso de 7-14 días puede reactivarlos.",
+        riskIfIgnored: "Retiras vinos potencialmente rentables sin haberles dado una oportunidad real de venta.",
+      },
       queSignifica:
         "Impulsar significa darle una segunda oportunidad activa a un vino que no se está vendiendo pero que tiene potencial. No es esperar: es poner al equipo de sala a trabajar con esa referencia durante un periodo concreto (7-14 días) y medir si responde. Si el vino es bueno, está bien posicionado y el comensal simplemente no lo conoce, un impulso de sala puede reactivarlo.",
       porQueImporta:
