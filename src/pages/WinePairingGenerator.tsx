@@ -226,6 +226,8 @@ const WinePairingGenerator = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* INPUT */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
