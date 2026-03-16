@@ -176,6 +176,11 @@ const stockRotacionContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Detectar stock muerto con la calculadora",
+    href: "/herramientas/calculadora-stock-muerto",
+    description: "Cuantifica el capital inmovilizado en referencias sin venta y decide qué retirar primero.",
+  },
 };
 
 export default stockRotacionContent;

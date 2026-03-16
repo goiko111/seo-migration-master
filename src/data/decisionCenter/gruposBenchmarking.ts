@@ -127,6 +127,11 @@ const gruposBenchmarkingContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Comparar tus locales con el auditor",
+    href: "/herramientas/auditor-carta-multilocal",
+    description: "Compara surtido, pricing y copa entre unidades para detectar desviaciones y mejores prácticas.",
+  },
 };
 
 export default gruposBenchmarkingContent;

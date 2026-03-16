@@ -412,6 +412,35 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
           </ScrollReveal>
         </section>
 
+        {/* Siguiente paso recomendado */}
+        {content.nextStep && (
+          <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+            <ScrollReveal>
+              <Link
+                to={content.nextStep.href}
+                className="block rounded-xl border-2 border-wine/20 bg-gradient-to-r from-wine/5 to-transparent p-6 md:p-8 hover:border-wine/40 hover:from-wine/10 transition-all group"
+              >
+                <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-wine/60 mb-2">
+                  Siguiente paso recomendado
+                </p>
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <h3 className="font-heading text-lg font-bold text-foreground group-hover:text-wine transition-colors">
+                      {content.nextStep.label}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                      {content.nextStep.description}
+                    </p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/20 transition-colors">
+                    <ArrowRight size={18} className="text-wine" />
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+          </section>
+        )}
+
         {/* Back */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20 text-center">
           <Link to="/decision-center" className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors">

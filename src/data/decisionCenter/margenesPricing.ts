@@ -251,6 +251,11 @@ const margenesPricingContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Abrir la calculadora de márgenes",
+    href: "/calculadora-margen-vino",
+    description: "Calcula el margen real de tus referencias y detecta las que necesitan ajuste de precio.",
+  },
 };
 
 export default margenesPricingContent;

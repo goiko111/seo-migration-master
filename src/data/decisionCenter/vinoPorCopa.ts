@@ -153,6 +153,11 @@ const vinoPorCopaContent: DeepAreaContent = {
       ],
     },
   ],
+  nextStep: {
+    label: "Calcular el precio correcto por copa",
+    href: "/herramientas/calculadora-precio-vino-por-copa",
+    description: "Incluye merma real y margen objetivo para fijar un precio de copa que sea rentable.",
+  },
 };
 
 export default vinoPorCopaContent;
