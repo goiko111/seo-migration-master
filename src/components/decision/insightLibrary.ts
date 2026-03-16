@@ -105,6 +105,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si tras 2 acciones no responde, planifica su salida de la carta.",
     ],
     recurso: { label: "Guía: Mejorar la rotación", href: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" },
+    decisionCenterHref: "/decision-center/stock-rotacion",
   },
 
   "exceso-profundidad": {
