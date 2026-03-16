@@ -242,7 +242,6 @@ const GuiasRecursos = () => {
   const { lang, localePath } = useLanguage();
   const t = langContent[lang] || langContent.es;
   const [guideFilter, setGuideFilter] = useState("all");
-  const [resourceFilter, setResourceFilter] = useState("all");
 
   useEffect(() => {
     const schema = document.createElement("script");
