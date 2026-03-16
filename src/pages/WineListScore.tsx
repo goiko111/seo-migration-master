@@ -70,6 +70,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: ¿tu carta realmente vende?",
     link_playbook: "Playbook: construir una carta rentable",
     link_software: "Software de carta de vinos",
+    decides: ["En qué áreas tu carta necesita mejora inmediata", "Si la estructura, pricing y equilibrio están alineados", "Qué bloque priorizar: copa, rotación o potencial comercial"],
+    avoids: ["Mantener puntos ciegos en la carta sin diagnosticar", "Invertir tiempo en áreas que ya funcionan bien", "Tomar decisiones de carta sin un marco de evaluación"],
+    impact: ["Obtener una visión 360° de la salud de tu carta", "Priorizar las mejoras con mayor impacto en ventas", "Establecer una línea base para medir progreso"],
     blocks: [
       { id: "estructura", title: "Estructura y organización", questions: [
         { text: "¿Cuántas referencias tiene tu carta?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
