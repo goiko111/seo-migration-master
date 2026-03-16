@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
-  ArrowRight, Lock, Shield, Sparkles
+  ArrowRight, Lock, Shield, Sparkles, Briefcase, Store, Users
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
