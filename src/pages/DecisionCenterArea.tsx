@@ -313,7 +313,12 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
               </div>
             </div>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mt-4">
+              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">Relevante para</p>
+              <ProfileBadges audiences={content.audiences} />
+            </motion.div>
+
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
               className="text-sm text-muted-foreground leading-relaxed max-w-3xl mt-4">
               {content.intro}
             </motion.p>
