@@ -189,6 +189,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Invalid email",
     toast_success: "Request sent! We'll be in touch soon.",
     toast_file_error: "Couldn't read the file. Try .txt or .csv format",
+    decides: ["Whether your list structure helps or hinders sales", "What price and style gaps exist", "Which wines are candidates for by-the-glass"],
+    avoids: ["Keeping an unbalanced list without knowing it", "Duplicating competing styles", "Losing sales due to uncovered price ranges"],
+    impact: ["Uncover hidden sales opportunities in the list", "Reduce low-impact references and free up space", "Improve the guest experience with a clearer list"],
   },
   it: {
     seo_title: "Wine List Analyzer – Analizza la tua carta vini | Winerim",
