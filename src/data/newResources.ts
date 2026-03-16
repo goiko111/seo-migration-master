@@ -391,6 +391,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: análisis de márgenes y pricing", type: "solution" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: optimiza costes de compra", type: "solution" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: márgenes y pricing", type: "decision-center" },
       { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
