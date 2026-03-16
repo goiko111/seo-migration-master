@@ -518,6 +518,8 @@ const AuditorMultiLocal = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* SUMMARY */}
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <SummaryBox label={t.summary_label} definition={t.summary_def} bullets={t.summary_bullets} />
