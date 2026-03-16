@@ -62,6 +62,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "Cómo poner precio al vino", link_margin: "Calculadora de márgenes",
     link_profitable: "Carta de vinos rentable", link_mapping: "Plantilla wine mapping",
     locale: "es-ES",
+    decides: ["Qué precio poner a cada vino de tu carta", "Qué multiplicador aplicar según tipo y posicionamiento", "Si tu precio actual está por encima o por debajo del óptimo"],
+    avoids: ["Usar un multiplicador fijo para toda la carta", "Fijar precios sin considerar la psicología del comensal", "Perder margen en vinos donde podrías cobrar más"],
+    impact: ["Optimizar márgenes sin perder rotación", "Crear una escalera de precios coherente y sin saltos", "Mejorar la percepción de valor de toda la carta"],
   },
   en: {
     seo_title: "Wine Pricing Optimizer – Optimal Wine Price | Winerim",
