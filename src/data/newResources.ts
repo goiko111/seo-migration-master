@@ -300,6 +300,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: fichas y recomendaciones IA", type: "solution" },
       { to: "/producto/winerim-core", label: "Winerim Core: formación basada en datos", type: "solution" },
       { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
+      { to: "/decision-center/vino-por-copa", label: "Decision Center: vino por copa", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
