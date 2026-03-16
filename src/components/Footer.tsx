@@ -94,7 +94,7 @@ const Footer = () => {
                 { label: t.nav_sol_wine_bars, href: localePath("/soluciones/wine-bars") },
                 { label: t.nav_sol_hotels, href: localePath("/soluciones/hoteles") },
                 { label: t.nav_sol_groups, href: localePath("/soluciones/grupos-restauracion") },
-                { label: t.nav_sol_no_sommelier, href: localePath("/soluciones/restaurante-sin-sumiller") },
+                { label: t.nav_sol_no_sommelier, href: localePath("/soluciones/restaurantes-sin-sumiller") },
                 { label: t.nav_sol_large_list, href: localePath("/soluciones/carta-amplia") },
               ]}
             />

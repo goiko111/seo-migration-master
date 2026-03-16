@@ -222,7 +222,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Votre équipe ne sait pas recommander et perd des ventes à chaque service.",
         benefit: "L'équipe recommande avec confiance dès le premier jour, guidée pas à pas.",
         cta: "Vendre sans sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
