@@ -32,6 +32,9 @@ const margenesPricingContent: DeepAreaContent = {
     { label: "Plantilla: Revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes", description: "Proceso mensual para detectar desviaciones y oportunidades" },
     { label: "Recurso: Análisis de márgenes", href: "/recursos/scorecard-mensual", description: "Scorecard para monitorizar la salud de tu pricing" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que automatiza todo esto por ti" },
+    { label: "Blog: 7 errores al fijar precios", href: "/article/errores-fijar-precios-vino-restaurante", description: "Los errores de pricing más frecuentes y cómo evitarlos" },
+    { label: "Blog: Palancas para mejorar margen", href: "/article/palancas-mejorar-margen-vino-sin-rehacer-carta", description: "Cómo mejorar el margen sin rehacer la carta de vinos" },
+    { label: "Blog: Métricas F&B de vino", href: "/article/metricas-fb-vino-restaurante", description: "Las métricas que todo F&B debería monitorizar" },
   ],
   subtopics: [
     {
