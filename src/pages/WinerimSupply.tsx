@@ -227,6 +227,8 @@ const i18n: Record<SupportedLang, {
       { to: "/producto/inteligencia-dinamica", label: "Dynamic Intelligence: tactical AI for your list", type: "solution" },
       { to: "/herramientas/calculadora-compra-inteligente", label: "Smart purchasing calculator", type: "tool" },
       { to: "/herramientas/calculadora-stock-muerto", label: "Dead stock calculator", type: "tool" },
+      { to: "/decision-center/compras-reposicion", label: "Decision Center: purchasing & restocking", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock & rotation", type: "decision-center" },
       { to: "/soluciones/grupos-restauracion", label: "Solution for restaurant groups", type: "solution" },
       { to: "/precios", label: "Plans and pricing", type: "solution" },
       { to: "/demo", label: "Request a personalised demo", type: "solution" },
