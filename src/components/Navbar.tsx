@@ -363,7 +363,14 @@ const Navbar = memo(() => {
                 </div>
               ))}
 
-              {/* Mobile contact + CTA */}
+              {/* Mobile contact + area cliente + CTA */}
+              <Link
+                to="/decision-center"
+                className="block py-3 text-base font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground/60"
+                onClick={() => setMobileOpen(false)}
+              >
+                Área cliente
+              </Link>
               <Link
                 to={localePath("/contacto")}
                 className="block py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground"
