@@ -39,6 +39,9 @@ const es: TranslationDict = {
   nav_resources_downloads: "Descargables",
   nav_resources_tools: "Herramientas",
   nav_downloadable_resources: "Recursos descargables",
+  nav_res_checklist: "Checklist carta rentable",
+  nav_res_scorecard: "Scorecard mensual",
+  nav_res_wine_mapping: "Plantilla wine mapping",
   nav_benchmarks: "Benchmarks & Playbooks",
 
   nav_platform: "Plataforma",

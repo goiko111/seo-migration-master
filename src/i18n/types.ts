@@ -153,6 +153,9 @@ export interface TranslationDict {
   nav_resources_downloads: string;
   nav_resources_tools: string;
   nav_downloadable_resources: string;
+  nav_res_checklist: string;
+  nav_res_scorecard: string;
+  nav_res_wine_mapping: string;
   nav_benchmarks: string;
 
   // Nav sections
