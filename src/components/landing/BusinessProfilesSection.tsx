@@ -57,7 +57,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Tu equipo no sabe recomendar vinos y pierde ventas cada servicio.",
         benefit: "El equipo recomienda con confianza desde el primer día, guiado paso a paso.",
         cta: "Vender sin sumiller",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
