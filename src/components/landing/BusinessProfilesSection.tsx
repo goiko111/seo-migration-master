@@ -57,7 +57,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Tu equipo no sabe recomendar vinos y pierde ventas cada servicio.",
         benefit: "El equipo recomienda con confianza desde el primer día, guiado paso a paso.",
         cta: "Vender sin sumiller",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
@@ -112,7 +112,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Your staff can't recommend wines and loses sales every service.",
         benefit: "Staff recommend with confidence from day one, guided step by step.",
         cta: "Sell without sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
@@ -167,7 +167,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Il tuo team non sa consigliare vini e perde vendite a ogni servizio.",
         benefit: "Il personale consiglia con sicurezza dal primo giorno, guidato passo dopo passo.",
         cta: "Vendere senza sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
@@ -222,7 +222,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Votre équipe ne sait pas recommander et perd des ventes à chaque service.",
         benefit: "L'équipe recommande avec confiance dès le premier jour, guidée pas à pas.",
         cta: "Vendre sans sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
