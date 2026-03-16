@@ -5,6 +5,7 @@ import {
   ArrowRight, AlertTriangle, Check, X, Wine,
   TrendingUp, Sparkles, type LucideIcon,
 } from "lucide-react";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
