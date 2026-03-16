@@ -521,7 +521,7 @@ const WinerimCore = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">{t.cap_subtitle}</p>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {t.capabilities.map((cap, i) => {
               const meta = capabilityMeta[i];
               const Icon = meta.icon;
@@ -529,30 +529,17 @@ const WinerimCore = () => {
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <motion.div
-                    className={`relative p-7 md:p-8 rounded-2xl border ${meta.accent} bg-background overflow-hidden group hover:border-wine/30 transition-all duration-300`}
-                    whileHover={{ y: -2 }}
+                    className={`relative h-full p-7 md:p-8 rounded-2xl border ${meta.accent} bg-background overflow-hidden group hover:border-wine/30 transition-all duration-500`}
+                    whileHover={{ y: -3 }}
                   >
-                    {/* Subtle top accent */}
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-wine/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-wine/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    <div className="flex items-start gap-4 mb-5">
-                      <div className={`w-11 h-11 rounded-xl ${meta.iconBg} flex items-center justify-center shrink-0`}>
-                        <Icon size={20} className={iconColor} />
-                      </div>
-                      <div>
-                        <h3 className="font-heading text-lg font-bold mb-1">{cap.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{cap.desc}</p>
-                      </div>
+                    <div className={`w-12 h-12 rounded-xl ${meta.iconBg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500`}>
+                      <Icon size={22} className={iconColor} />
                     </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      {cap.details.map((detail, j) => (
-                        <div key={j} className="flex items-start gap-2 text-xs text-muted-foreground/80">
-                          <span className="w-1 h-1 rounded-full bg-wine/40 shrink-0 mt-1.5" />
-                          {detail}
-                        </div>
-                      ))}
-                    </div>
+                    <h3 className="font-heading text-lg font-bold mb-3">{cap.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{cap.desc}</p>
                   </motion.div>
                 </ScrollReveal>
               );
