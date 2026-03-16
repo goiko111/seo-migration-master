@@ -112,7 +112,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Your staff can't recommend wines and loses sales every service.",
         benefit: "Staff recommend with confidence from day one, guided step by step.",
         cta: "Sell without sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
