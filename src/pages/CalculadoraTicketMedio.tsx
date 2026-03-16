@@ -710,6 +710,7 @@ const CalculadoraTicketMedio = () => {
           { to: localePath("/guias/como-decidir-surtido-segun-ticket-medio-tipo-local"), label: t.link_assortment, type: "guide" },
           { to: localePath("/calculadora-margen-vino"), label: t.link_margin, type: "tool" },
           { to: localePath("/producto/winerim-core"), label: t.link_core, type: "solution" },
+          { to: localePath("/decision-center/margenes-pricing"), label: lang === "es" ? "Decision Center: márgenes y pricing" : "Decision Center: margins & pricing", type: "decision-center" as any },
           { to: localePath("/demo"), label: t.link_demo, type: "solution" },
         ]} />
       </div>

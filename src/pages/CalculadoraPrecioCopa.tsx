@@ -18,7 +18,7 @@ import { Slider } from "@/components/ui/slider";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── i18n ─── */
-type LinkType = "guide" | "resource" | "solution" | "tool";
+type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
 interface WinePreset { id: string; label: string; glasses: number; shelfLife: string; preservation: number; mult: number; icon: string }
 interface LangContent {
   seoTitle: string; seoDesc: string;
@@ -114,6 +114,7 @@ const i18n: Record<string, LangContent> = {
       { to: "/calculadora-margen-vino", label: "Calculadora de márgenes", type: "tool" },
       { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía vino por copa", type: "resource" },
       { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
+      { to: "/decision-center/vino-por-copa", label: "Decision Center: vino por copa", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
     ],
   },

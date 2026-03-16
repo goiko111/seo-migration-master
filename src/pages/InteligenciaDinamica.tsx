@@ -1274,6 +1274,7 @@ const InteligenciaDinamica = () => {
         { to: localePath("/funcionalidades"), label: tx.il_features, type: "solution" },
         { to: localePath("/herramientas/wine-list-score"), label: lang === "es" ? "Wine List Score: evalúa tu carta" : lang === "en" ? "Wine List Score: evaluate your list" : lang === "it" ? "Wine List Score: valuta la tua carta" : "Wine List Score : évaluez votre carte", type: "tool" },
         { to: localePath("/recursos/checklist-carta-de-vinos-rentable"), label: lang === "es" ? "Checklist carta rentable" : lang === "en" ? "Profitable wine list checklist" : lang === "it" ? "Checklist carta redditizia" : "Checklist carte rentable", type: "resource" },
+        { to: localePath("/decision-center/margenes-pricing"), label: lang === "es" ? "Decision Center: márgenes y pricing" : lang === "en" ? "Decision Center: margins & pricing" : lang === "it" ? "Decision Center: margini e pricing" : "Decision Center : marges et pricing", type: "decision-center" },
         { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : lang === "en" ? "Plans & pricing" : lang === "it" ? "Piani e prezzi" : "Plans et tarifs", type: "solution" },
         { to: localePath("/demo"), label: tx.il_demo, type: "solution" },
       ]} />

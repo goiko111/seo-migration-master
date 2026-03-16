@@ -70,7 +70,7 @@ interface CoreI18n {
   faq_title: string;
   faqs: { q: string; a: string }[];
   // Links
-  links: { to: string; label: string; type: "solution" | "guide" | "tool" | "resource" }[];
+  links: { to: string; label: string; type: "solution" | "guide" | "tool" | "resource" | "decision-center" }[];
 }
 
 const capabilityMeta: Pick<Capability, "icon" | "accent" | "iconBg">[] = [
@@ -172,6 +172,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "resource" },
       { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de carta", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: márgenes y pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock y rotación", type: "decision-center" },
       { to: "/precios", label: "Planes y precios", type: "solution" },
       { to: "/demo", label: "Solicitar demo personalizada", type: "solution" },
     ],
@@ -260,6 +262,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "All Winerim features", type: "resource" },
       { to: "/herramientas", label: "Free analysis tools", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Monthly wine list scorecard", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: margins & pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock & rotation", type: "decision-center" },
       { to: "/precios", label: "Plans & pricing", type: "solution" },
       { to: "/demo", label: "Request personalised demo", type: "solution" },
     ],
@@ -348,6 +352,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "Tutte le funzionalità Winerim", type: "resource" },
       { to: "/herramientas", label: "Strumenti gratuiti di analisi", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensile della carta", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: margini e pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock e rotazione", type: "decision-center" },
       { to: "/precios", label: "Piani e prezzi", type: "solution" },
       { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
     ],
@@ -436,6 +442,8 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { to: "/funcionalidades", label: "Toutes les fonctionnalités Winerim", type: "resource" },
       { to: "/herramientas", label: "Outils gratuits d'analyse", type: "tool" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensuel de la carte", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center : marges et pricing", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center : stock et rotation", type: "decision-center" },
       { to: "/precios", label: "Plans et tarifs", type: "solution" },
       { to: "/demo", label: "Demander démo personnalisée", type: "solution" },
     ],

@@ -6,7 +6,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 interface InternalLink {
   to: string;
   label: string;
-  type: "guide" | "tool" | "resource" | "solution";
+  type: "guide" | "tool" | "resource" | "solution" | "decision-center";
 }
 
 const typeLabels: Record<string, Record<string, string>> = {
@@ -14,6 +14,7 @@ const typeLabels: Record<string, Record<string, string>> = {
   tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil" },
   resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource" },
   solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution" },
+  "decision-center": { es: "Decision Center", en: "Decision Center", it: "Decision Center", fr: "Decision Center" },
 };
 
 const defaultTitles: Record<string, string> = {
@@ -28,6 +29,7 @@ const typeIcons = {
   tool: Calculator,
   resource: Download,
   solution: Lightbulb,
+  "decision-center": Lightbulb,
 };
 
 const badgeClasses: Record<string, string> = {
@@ -35,6 +37,7 @@ const badgeClasses: Record<string, string> = {
   tool: "text-wine",
   resource: "text-emerald-500",
   solution: "text-amber-500",
+  "decision-center": "text-purple-500",
 };
 
 interface InternalLinksProps {
