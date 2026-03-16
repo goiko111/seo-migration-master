@@ -386,9 +386,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim calcula automáticamente el margen de cada referencia, sugiere ajustes de pricing y monitoriza la evolución del margen global.",
     internalLinks: [
       { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
-      { to: "/benchmarks-playbooks/benchmark-margen-por-tipo-referencia", label: "Benchmark: margen por tipo de referencia", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-distribucion-rangos-precio", label: "Benchmark: distribución de precios", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-carta-rentable", label: "Playbook: carta más rentable", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de márgenes y pricing", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: optimiza costes de compra", type: "solution" },
+      { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
 
