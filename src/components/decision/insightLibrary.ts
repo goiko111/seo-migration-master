@@ -122,6 +122,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Define un criterio de profundidad máxima por categoría y respétalo.",
     ],
     recurso: { label: "Guía: Detectar canibalización", href: "/guias/como-detectar-canibalizacion-vinos-carta" },
+    decisionCenterHref: "/decision-center/carta-equilibrio",
   },
 
   "proveedor-caro": {
