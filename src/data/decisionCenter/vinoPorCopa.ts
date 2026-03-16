@@ -63,6 +63,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "fijar-precio-copa",
       title: "Cómo fijar precio sin perder margen",
+      priority: "inmediato",
       porQueTeLoMostramos: { detected: "Winerim ha recalculado tus precios de copa incluyendo merma real y ha detectado desviaciones respecto al margen objetivo.", whyMatters: "Un error de 1 € por copa en 15 copas/semana son más de 1.100 €/año perdidos en una sola referencia.", riskIfIgnored: "Vendes copas a un precio que no cubre merma ni margen. Cada servicio es una pérdida invisible." },
       queSignifica:
         "El precio de copa NO se calcula dividiendo el precio de la botella entre 5. Esa fórmula ignora la merma (el vino que se pierde al final de la botella o por no vender todas las copas), el coste de servicio y el margen objetivo. La fórmula correcta parte del coste real por copa (coste de botella ÷ copas reales que vas a servir, incluyendo merma) y aplica el multiplicador objetivo sobre ese coste.",
