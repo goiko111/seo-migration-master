@@ -492,6 +492,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/herramientas/calculadora-ticket-medio-vino", label: "Calculadora de ticket medio", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: KPIs y análisis de rendimiento", type: "solution" },
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: márgenes y pricing", type: "decision-center" },
       { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
