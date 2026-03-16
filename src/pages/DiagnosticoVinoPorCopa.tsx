@@ -227,6 +227,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: strategia al calice", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: ottimizzare il calice", type: "guide" },
     ],
+    decides: ["Se il programma al calice è equilibrato in stili e prezzi", "Quali calici hanno il miglior margine reale", "Se la rotazione giustifica mantenere ogni referenza"],
+    avoids: ["Offrire solo rossi al calice senza diversità", "Prezzo unico per tutti i calici", "Ignorare lo scarto come variabile di costo"],
+    impact: ["Ottimizzare la redditività del programma al calice", "Equilibrare l'offerta per catturare più tavoli", "Ridurre lo scarto con rotazione controllata"],
   },
   fr: {
     seo_title: "Diagnostic Vin au Verre pour Restaurants | Winerim",
