@@ -344,9 +344,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Intelligenza Dinamica: il livello di IA tattica", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: intelligenza acquisti", type: "solution" },
       { to: "/funcionalidades", label: "Tutte le funzionalità Winerim", type: "resource" },
-      { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
       { to: "/herramientas", label: "Strumenti gratuiti di analisi", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensile della carta", type: "resource" },
+      { to: "/precios", label: "Piani e prezzi", type: "solution" },
+      { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
     ],
   },
   fr: {
