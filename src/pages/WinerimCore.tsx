@@ -30,7 +30,6 @@ interface Capability {
   icon: typeof DollarSign;
   title: string;
   desc: string;
-  details: string[];
   accent: string;
   iconBg: string;
 }
@@ -51,7 +50,7 @@ interface CoreI18n {
   // Section 2: Capabilities
   cap_eyebrow: string; cap_title: string; cap_title_hl: string;
   cap_subtitle: string;
-  capabilities: Omit<Capability, "icon" | "accent" | "iconBg">[];
+  capabilities: { title: string; desc: string }[];
   // Section 3: Public tools bridge
   tools_eyebrow: string; tools_title: string; tools_title_hl: string;
   tools_desc: string;
@@ -109,17 +108,17 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { label: "Recomienda", desc: "Propone acciones priorizadas, simulables y orientadas a resultado." },
     ],
 
-    cap_eyebrow: "Seis grandes capacidades",
-    cap_title: "Todo lo que tu carta necesita ",
-    cap_title_hl: "saber",
-    cap_subtitle: "Winerim Core no es un catálogo de módulos. Es un sistema integrado que organiza la inteligencia analítica en seis grandes capacidades de negocio.",
+    cap_eyebrow: "Capacidades de negocio",
+    cap_title: "Una capa analítica profunda para ",
+    cap_title_hl: "decidir mejor",
+    cap_subtitle: "Winerim Core agrupa la inteligencia del producto en capacidades que ayudan a gestionar mejor todo el negocio del vino.",
     capabilities: [
-      { title: "Pricing y rentabilidad", desc: "Controla márgenes, simula escenarios de precio, detecta referencias infrarentables y optimiza la contribución de cada vino al resultado global.", details: ["Margen bruto y ponderado por ventas", "Simulador de pricing y elasticidad", "Scoring de rentabilidad por referencia", "Análisis copa vs. botella"] },
-      { title: "Stock y rotación", desc: "Visibilidad en tiempo real del inventario. Detección automática de stock muerto, velocidad de salida por referencia y alertas de quiebre.", details: ["Estado de inventario en tiempo real", "Detección de stock muerto y obsolescencia", "Velocidad de rotación por referencia", "Alertas de sobrestock y rotura"] },
-      { title: "Compras y reposición", desc: "Inteligencia de compras basada en datos de venta, estacionalidad y margen objetivo. Decide cuándo reponer, cuánto pedir y a qué proveedor.", details: ["Recomendaciones de reposición inteligente", "Previsión de demanda a corto plazo", "Comparativa de condiciones de compra", "Alertas de sobreprecio en proveedor"] },
-      { title: "Benchmark y comparativa", desc: "Compara tus métricas con restaurantes de perfil similar. Entiende dónde estás por encima, por debajo y dónde hay oportunidad de mejora.", details: ["Benchmark sectorial por perfil", "Scorecard mensual automatizado", "Wine List Score global", "Diagnóstico multi-local para grupos"] },
-      { title: "Simulación y decisión", desc: "Prueba cambios antes de hacerlos. Simula qué pasaría si cambias precios, añades o retiras referencias, o modificas la estructura de la carta.", details: ["Simulador de carta con impacto estimado", "Comparador de escenarios A/B", "Análisis de tendencias y evolución de KPIs", "Plan de acción con recomendaciones priorizadas"] },
-      { title: "Salud y arquitectura de carta", desc: "Diagnostica la estructura de tu carta: equilibrio entre categorías, cobertura de rangos de precio, canibalización entre referencias y visibilidad.", details: ["Wine Mapping: radiografía completa de la carta", "Análisis de surtido y cobertura", "Detección de canibalización", "Auditoría de visibilidad y posicionamiento"] },
+      { title: "Pricing y rentabilidad", desc: "Calcula, compara y ajusta precios con más criterio para proteger margen y coherencia económica." },
+      { title: "Stock y rotación", desc: "Detecta referencias lentas, capital inmovilizado, sobrestock y oportunidades de activación o retirada." },
+      { title: "Compras y reposición", desc: "Conecta consumo, rentabilidad y evolución de stock para decidir mejor qué reponer y qué no." },
+      { title: "Benchmark y comparativa", desc: "Permite comparar mix, precios, márgenes y salud de carta frente a otros restaurantes o entre unidades." },
+      { title: "Simulación y decisión", desc: "Ayuda a probar escenarios antes de ejecutar cambios en pricing, surtido o estructura de carta." },
+      { title: "Salud y arquitectura de carta", desc: "Evalúa equilibrio, escalera de precios, profundidad de oferta y claridad comercial de la carta." },
     ],
 
     tools_eyebrow: "Las herramientas públicas son solo la superficie",
@@ -190,17 +189,17 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { label: "Recommends", desc: "Proposes prioritised, simulable, outcome-oriented actions." },
     ],
 
-    cap_eyebrow: "Six core capabilities",
-    cap_title: "Everything your list needs to ",
-    cap_title_hl: "know",
-    cap_subtitle: "Winerim Core is not a catalogue of modules. It's an integrated system that organises analytical intelligence across six major business capabilities.",
+    cap_eyebrow: "Business capabilities",
+    cap_title: "A deep analytical layer for ",
+    cap_title_hl: "better decisions",
+    cap_subtitle: "Winerim Core groups product intelligence into capabilities that help you manage the entire wine business more effectively.",
     capabilities: [
-      { title: "Pricing & profitability", desc: "Control margins, simulate price scenarios, detect under-performing references and optimise each wine's contribution to the overall result.", details: ["Gross and sales-weighted margin", "Pricing simulator with elasticity", "Profitability scoring per reference", "Glass vs. bottle analysis"] },
-      { title: "Stock & rotation", desc: "Real-time inventory visibility. Automatic dead stock detection, exit speed per reference and stockout alerts.", details: ["Real-time inventory status", "Dead stock and obsolescence detection", "Rotation speed per reference", "Overstock and stockout alerts"] },
-      { title: "Purchasing & replenishment", desc: "Purchasing intelligence based on sales data, seasonality and target margin. Decide when to reorder, how much and from which supplier.", details: ["Smart replenishment recommendations", "Short-term demand forecasting", "Purchase condition comparison", "Supplier overpricing alerts"] },
-      { title: "Benchmark & comparison", desc: "Compare your metrics with similar-profile restaurants. Understand where you're above, below and where there's room to improve.", details: ["Industry benchmark by profile", "Automated monthly scorecard", "Overall Wine List Score", "Multi-venue diagnostics for groups"] },
-      { title: "Simulation & decision", desc: "Test changes before making them. Simulate what would happen if you change prices, add or remove references, or restructure the list.", details: ["List simulator with estimated impact", "A/B scenario comparator", "Trend analysis and KPI evolution", "Action plan with prioritised recommendations"] },
-      { title: "List health & architecture", desc: "Diagnose your list's structure: category balance, price range coverage, cannibalisation between references and visibility.", details: ["Wine Mapping: complete list x-ray", "Assortment and coverage analysis", "Cannibalisation detection", "Visibility and positioning audit"] },
+      { title: "Pricing & profitability", desc: "Calculate, compare and adjust prices with better criteria to protect margins and economic consistency." },
+      { title: "Stock & rotation", desc: "Detect slow-moving references, tied-up capital, overstock and opportunities for activation or withdrawal." },
+      { title: "Purchasing & replenishment", desc: "Connect consumption, profitability and stock evolution to make better decisions on what to reorder and what not to." },
+      { title: "Benchmark & comparison", desc: "Compare mix, prices, margins and list health against other restaurants or across your own venues." },
+      { title: "Simulation & decision", desc: "Test scenarios before executing changes in pricing, assortment or list structure." },
+      { title: "List health & architecture", desc: "Evaluate balance, price ladder, offer depth and commercial clarity of the list." },
     ],
 
     tools_eyebrow: "Public tools are just the surface",
@@ -271,17 +270,17 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { label: "Raccomanda", desc: "Propone azioni prioritarie, simulabili e orientate al risultato." },
     ],
 
-    cap_eyebrow: "Sei grandi capacità",
-    cap_title: "Tutto ciò che la tua carta deve ",
-    cap_title_hl: "sapere",
-    cap_subtitle: "Winerim Core non è un catalogo di moduli. È un sistema integrato che organizza l'intelligenza analitica in sei grandi capacità di business.",
+    cap_eyebrow: "Capacità di business",
+    cap_title: "Un livello analitico profondo per ",
+    cap_title_hl: "decidere meglio",
+    cap_subtitle: "Winerim Core raggruppa l'intelligenza del prodotto in capacità che aiutano a gestire meglio l'intero business del vino.",
     capabilities: [
-      { title: "Pricing e redditività", desc: "Controlla margini, simula scenari di prezzo, rileva referenze sottoperformanti e ottimizza il contributo di ogni vino al risultato globale.", details: ["Margine lordo e ponderato per vendite", "Simulatore di pricing con elasticità", "Scoring di redditività per referenza", "Analisi calice vs. bottiglia"] },
-      { title: "Stock e rotazione", desc: "Visibilità in tempo reale dell'inventario. Rilevamento automatico di stock morto, velocità di uscita e alert di rottura.", details: ["Stato inventario in tempo reale", "Rilevamento stock morto e obsolescenza", "Velocità di rotazione per referenza", "Alert sovrascorta e rottura"] },
-      { title: "Acquisti e riordino", desc: "Intelligenza acquisti basata su dati di vendita, stagionalità e margine obiettivo. Decidi quando riordinare, quanto e da quale fornitore.", details: ["Raccomandazioni di riordino intelligente", "Previsione domanda a breve termine", "Comparativa condizioni di acquisto", "Alert di sovraprezzo fornitore"] },
-      { title: "Benchmark e comparativa", desc: "Confronta le tue metriche con ristoranti di profilo simile. Capisci dove sei sopra, sotto e dove c'è margine di miglioramento.", details: ["Benchmark settoriale per profilo", "Scorecard mensile automatizzato", "Wine List Score globale", "Diagnostica multi-locale per gruppi"] },
-      { title: "Simulazione e decisione", desc: "Prova i cambiamenti prima di farli. Simula cosa succederebbe cambiando prezzi, aggiungendo o togliendo referenze.", details: ["Simulatore carta con impatto stimato", "Comparatore scenari A/B", "Analisi tendenze ed evoluzione KPI", "Piano d'azione con raccomandazioni prioritarie"] },
-      { title: "Salute e architettura carta", desc: "Diagnostica la struttura della carta: equilibrio categorie, copertura fasce prezzo, cannibalizzazione e visibilità.", details: ["Wine Mapping: radiografia completa", "Analisi assortimento e copertura", "Rilevamento cannibalizzazione", "Audit visibilità e posizionamento"] },
+      { title: "Pricing e redditività", desc: "Calcola, confronta e adegua i prezzi con più criterio per proteggere margine e coerenza economica." },
+      { title: "Stock e rotazione", desc: "Rileva referenze lente, capitale immobilizzato, sovrascorta e opportunità di attivazione o ritiro." },
+      { title: "Acquisti e riordino", desc: "Connette consumo, redditività ed evoluzione dello stock per decidere meglio cosa riordinare e cosa no." },
+      { title: "Benchmark e comparativa", desc: "Permette di confrontare mix, prezzi, margini e salute della carta rispetto ad altri ristoranti o tra unità." },
+      { title: "Simulazione e decisione", desc: "Aiuta a testare scenari prima di eseguire cambiamenti in pricing, assortimento o struttura della carta." },
+      { title: "Salute e architettura carta", desc: "Valuta equilibrio, scala prezzi, profondità dell'offerta e chiarezza commerciale della carta." },
     ],
 
     tools_eyebrow: "Gli strumenti pubblici sono solo la superficie",
@@ -352,17 +351,17 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { label: "Recommande", desc: "Propose des actions priorisées, simulables et orientées résultat." },
     ],
 
-    cap_eyebrow: "Six grandes capacités",
-    cap_title: "Tout ce que votre carte doit ",
-    cap_title_hl: "savoir",
-    cap_subtitle: "Winerim Core n'est pas un catalogue de modules. C'est un système intégré qui organise l'intelligence analytique en six grandes capacités métier.",
+    cap_eyebrow: "Capacités métier",
+    cap_title: "Une couche analytique profonde pour ",
+    cap_title_hl: "mieux décider",
+    cap_subtitle: "Winerim Core regroupe l'intelligence produit en capacités qui aident à mieux gérer l'ensemble du business vinicole.",
     capabilities: [
-      { title: "Pricing et rentabilité", desc: "Contrôlez les marges, simulez des scénarios de prix, détectez les références sous-performantes et optimisez la contribution de chaque vin.", details: ["Marge brute et pondérée par les ventes", "Simulateur de pricing avec élasticité", "Scoring de rentabilité par référence", "Analyse verre vs. bouteille"] },
-      { title: "Stock et rotation", desc: "Visibilité en temps réel de l'inventaire. Détection automatique de stock mort, vitesse de sortie et alertes de rupture.", details: ["État de l'inventaire en temps réel", "Détection stock mort et obsolescence", "Vitesse de rotation par référence", "Alertes surstock et rupture"] },
-      { title: "Achats et réapprovisionnement", desc: "Intelligence d'achats basée sur les données de vente, la saisonnalité et la marge cible. Décidez quand réapprovisionner, combien et chez quel fournisseur.", details: ["Recommandations de réapprovisionnement intelligent", "Prévision de la demande à court terme", "Comparatif des conditions d'achat", "Alertes de surcoût fournisseur"] },
-      { title: "Benchmark et comparaison", desc: "Comparez vos métriques avec des restaurants au profil similaire. Comprenez où vous êtes au-dessus, en dessous et où il y a des opportunités.", details: ["Benchmark sectoriel par profil", "Scorecard mensuel automatisé", "Wine List Score global", "Diagnostic multi-site pour groupes"] },
-      { title: "Simulation et décision", desc: "Testez les changements avant de les appliquer. Simulez ce qui se passerait en modifiant prix, références ou structure de carte.", details: ["Simulateur de carte avec impact estimé", "Comparateur de scénarios A/B", "Analyse des tendances et évolution des KPIs", "Plan d'action avec recommandations priorisées"] },
-      { title: "Santé et architecture de carte", desc: "Diagnostiquez la structure de votre carte : équilibre des catégories, couverture des gammes de prix, cannibalisation et visibilité.", details: ["Wine Mapping : radiographie complète", "Analyse de l'assortiment et couverture", "Détection de cannibalisation", "Audit de visibilité et positionnement"] },
+      { title: "Pricing et rentabilité", desc: "Calculez, comparez et ajustez les prix avec plus de critères pour protéger la marge et la cohérence économique." },
+      { title: "Stock et rotation", desc: "Détectez les références lentes, le capital immobilisé, le surstock et les opportunités d'activation ou de retrait." },
+      { title: "Achats et réapprovisionnement", desc: "Connectez consommation, rentabilité et évolution du stock pour mieux décider quoi réapprovisionner et quoi non." },
+      { title: "Benchmark et comparaison", desc: "Comparez mix, prix, marges et santé de carte face à d'autres restaurants ou entre vos propres unités." },
+      { title: "Simulation et décision", desc: "Testez des scénarios avant d'exécuter des changements de pricing, d'assortiment ou de structure de carte." },
+      { title: "Santé et architecture de carte", desc: "Évaluez l'équilibre, l'escalier de prix, la profondeur de l'offre et la clarté commerciale de la carte." },
     ],
 
     tools_eyebrow: "Les outils publics ne sont que la surface",
@@ -522,7 +521,7 @@ const WinerimCore = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">{t.cap_subtitle}</p>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {t.capabilities.map((cap, i) => {
               const meta = capabilityMeta[i];
               const Icon = meta.icon;
@@ -530,30 +529,17 @@ const WinerimCore = () => {
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
                   <motion.div
-                    className={`relative p-7 md:p-8 rounded-2xl border ${meta.accent} bg-background overflow-hidden group hover:border-wine/30 transition-all duration-300`}
-                    whileHover={{ y: -2 }}
+                    className={`relative h-full p-7 md:p-8 rounded-2xl border ${meta.accent} bg-background overflow-hidden group hover:border-wine/30 transition-all duration-500`}
+                    whileHover={{ y: -3 }}
                   >
-                    {/* Subtle top accent */}
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-wine/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-wine/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    <div className="flex items-start gap-4 mb-5">
-                      <div className={`w-11 h-11 rounded-xl ${meta.iconBg} flex items-center justify-center shrink-0`}>
-                        <Icon size={20} className={iconColor} />
-                      </div>
-                      <div>
-                        <h3 className="font-heading text-lg font-bold mb-1">{cap.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{cap.desc}</p>
-                      </div>
+                    <div className={`w-12 h-12 rounded-xl ${meta.iconBg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500`}>
+                      <Icon size={22} className={iconColor} />
                     </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      {cap.details.map((detail, j) => (
-                        <div key={j} className="flex items-start gap-2 text-xs text-muted-foreground/80">
-                          <span className="w-1 h-1 rounded-full bg-wine/40 shrink-0 mt-1.5" />
-                          {detail}
-                        </div>
-                      ))}
-                    </div>
+                    <h3 className="font-heading text-lg font-bold mb-3">{cap.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{cap.desc}</p>
                   </motion.div>
                 </ScrollReveal>
               );
