@@ -136,6 +136,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email no válido",
     toast_success: "¡Solicitud enviada! Te contactaremos pronto.",
     toast_file_error: "No se pudo leer el archivo. Prueba con formato .txt o .csv",
+    decides: ["Si la estructura de la carta facilita o frena la venta", "Qué huecos de precio y estilo existen", "Qué vinos son candidatos a servirse por copa"],
+    avoids: ["Mantener una carta desequilibrada sin saberlo", "Duplicar estilos que compiten entre sí", "Perder ventas por falta de cobertura en rangos clave"],
+    impact: ["Detectar oportunidades de venta ocultas en la carta", "Reducir referencias sin impacto y liberar espacio", "Mejorar la experiencia del comensal con una carta más clara"],
   },
   en: {
     seo_title: "Wine List Analyzer – Analyse Your Wine List | Winerim",
