@@ -13,6 +13,7 @@ import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/d
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
+import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
@@ -56,38 +57,6 @@ interface SimpleAreaContent {
 }
 
 const simpleAreas: Record<string, SimpleAreaContent> = {
-  "vino-por-copa": {
-    name: "Vino por copa", tagline: "El programa de copa como motor de margen",
-    icon: Wine, accent: "text-purple-500", bg: "bg-purple-500/10", priority: "esta semana",
-    queSignifica: [
-      "El vino por copa no es solo servir copas sueltas. Es un programa con lógica propia.",
-      "Bien ejecutado, es tu mayor palanca de margen. Mal ejecutado, tu mayor fuente de pérdida invisible.",
-      "El ratio copa/botella es un indicador clave de comportamiento de consumo.",
-    ],
-    porQueImporta: [
-      "La copa permite al comensal explorar sin comprometerse. Eso aumenta la conversión y el ticket medio.",
-      "El margen por copa puede ser 2-3× superior al de la botella si se calcula bien.",
-      "La merma no contabilizada es el mayor enemigo silencioso de la rentabilidad por copa.",
-      "Un programa bien diseñado posiciona tu restaurante como accesible y experto a la vez.",
-    ],
-    queHacerAhora: [
-      "Revisa si tu pricing por copa cubre merma + margen objetivo.",
-      "Analiza qué copas venden bien y cuáles generan merma recurrente.",
-      "Evalúa si tu selección de copas refleja los estilos que más pide tu clientela.",
-      "Forma a tu equipo de sala para recomendar copa con criterio.",
-    ],
-    erroresComunes: [
-      { mistake: "Calcular el precio de la copa dividiendo la botella entre 5", consequence: "No cubres merma, servicio ni margen real." },
-      { mistake: "No contabilizar la merma como coste real", consequence: "Tu margen teórico no refleja lo que realmente ganas." },
-      { mistake: "Ofrecer demasiadas copas sin capacidad de rotarlas", consequence: "Abres botellas que no terminas y multiplicas la pérdida." },
-      { mistake: "No formar al equipo de sala para recomendar copas", consequence: "El comensal no sabe qué elegir y pide 'el más barato' o nada." },
-    ],
-    aprenderMas: [
-      { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
-      { label: "Estrategia de vinos por copa", href: "/recursos/plantilla-estrategia-vinos-por-copa" },
-      { label: "Guía: Vino por copa sin perder margen", href: "/guias/como-implantar-vino-por-copa-sin-perder-margen" },
-    ],
-  },
   "grupos-benchmarking": {
     name: "Grupos y benchmarking", tagline: "Governa la categoría vino a escala",
     icon: Building2, accent: "text-rose-500", bg: "bg-rose-500/10", priority: "este mes",
@@ -524,6 +493,7 @@ const DecisionCenterArea = () => {
     "stock-rotacion": stockRotacionContent,
     "compras-reposicion": comprasReposicionContent,
     "carta-equilibrio": cartaEquilibrioContent,
+    "vino-por-copa": vinoPorCopaContent,
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
