@@ -157,6 +157,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Demander une démo",
     link_pairing: "Stratégie d'accord", link_sell: "Comment vendre plus de vin",
     link_analyzer: "Analyseur de carte", link_demo: "Demander une démo Winerim",
+    decides: ["Quel vin recommander pour chaque plat", "Comment communiquer l'accord au client", "Quels styles conviennent à votre menu"],
+    avoids: ["Recommandations génériques sans critère", "Compter uniquement sur l'intuition du personnel de salle", "Perdre des ventes par manque de suggestions actives"],
+    impact: ["Augmenter la vente croisée vin-plat", "Améliorer la perception d'un service professionnel", "Augmenter le ticket moyen avec des recommandations fondées"],
   },
 };
 
