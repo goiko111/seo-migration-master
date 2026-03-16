@@ -60,6 +60,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "equilibrio-estilos",
       title: "Equilibrio por estilos",
+      porQueTeLoMostramos: { detected: "Winerim ha clasificado tu carta por perfil organoléptico y ha detectado concentración excesiva en ciertos estilos.", whyMatters: "Si todos tus tintos son potentes o todos tus blancos afrutados, limitas tu mercado potencial a un solo tipo de paladar.", riskIfIgnored: "Pierdes al comensal que quiere algo diferente. Y nunca lo sabrás, porque no pide: simplemente elige otra cosa o no pide vino." },
       queSignifica:
         "Más allá de tinto/blanco/rosado, el equilibrio por estilos mira la diversidad de perfiles organolépticos: ¿tienes vinos ligeros y frescos además de potentes? ¿Hay opciones jóvenes además de crianzas? ¿Tu carta ofrece variedad de uvas y elaboraciones, o todo suena parecido? El equilibrio por estilos determina si tu carta cubre la amplitud de gustos de tu clientela o si habla solo de un tipo de paladar.",
       porQueImporta:
