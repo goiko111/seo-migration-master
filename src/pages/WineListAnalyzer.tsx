@@ -86,6 +86,7 @@ const i18n: Record<SupportedLang, {
   links: { to: string; label: string; type: "guide" | "resource" | "solution" }[];
   toast_error_empty: string; toast_error_analyze: string; toast_error_send: string; toast_email_invalid: string; toast_success: string;
   toast_file_error: string;
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Wine List Analyzer – Analiza tu carta de vinos | Winerim",
