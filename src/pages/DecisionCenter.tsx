@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import { InsightCard, insightLibrary } from "@/components/decision";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
