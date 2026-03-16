@@ -4,7 +4,7 @@ import {
   ArrowRight, DollarSign, Package, ShoppingCart,
   BarChart3, Layers, Activity, Gauge,
   TrendingUp, RotateCcw, Sparkles, Zap, ChevronRight,
-  Calculator, GlassWater, Target, Brain
+  GlassWater, Target, Brain
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -53,10 +53,10 @@ interface CoreI18n {
   capabilities: { title: string; desc: string }[];
   // Section 2b: Depth proof
   depth_title: string; depth_text: string; depth_text2: string; depth_micro: string;
-  // Section 3: Public tools bridge
-  tools_eyebrow: string; tools_title: string; tools_title_hl: string;
-  tools_desc: string;
-  tools_examples: { tool: string; core_module: string }[];
+  // Section 3: Tools → Core bridge
+  tools_title: string; tools_subtitle: string;
+  tools_connections: { tool: string; link: string; core_label: string }[];
+  tools_closing: string;
   tools_cta: string;
   // Section 4: ID bridge
   bridge_eyebrow: string; bridge_title: string; bridge_title_hl: string;
@@ -128,17 +128,16 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     depth_text2: "No necesitas verlos como herramientas aisladas. Lo importante es que juntos permiten analizar mejor la carta y tomar decisiones más sólidas.",
     depth_micro: "Algunas herramientas públicas de Winerim son demos simplificadas de esta capa analítica.",
 
-    tools_eyebrow: "Las herramientas públicas son solo la superficie",
-    tools_title: "Cada herramienta gratuita es una demo simplificada de lo que ",
-    tools_title_hl: "Core hace a fondo",
-    tools_desc: "Las calculadoras y analizadores que ofrecemos gratis resuelven un problema puntual. Winerim Core los integra todos, los conecta entre sí y los ejecuta de forma continua y automatizada sobre tus datos reales.",
-    tools_examples: [
-      { tool: "Calculadora de margen", core_module: "Motor de pricing y rentabilidad completo" },
-      { tool: "Calculadora de precio por copa", core_module: "Análisis copa vs. botella con elasticidad" },
-      { tool: "Wine List Score", core_module: "Scorecard mensual con benchmark sectorial" },
-      { tool: "Analizador de carta", core_module: "Wine Mapping + arquitectura + surtido integrados" },
-      { tool: "Calculadora de stock muerto", core_module: "Rotación, obsolescencia y previsión de demanda" },
+    tools_title: "Herramientas visibles. Motor más profundo.",
+    tools_subtitle: "Algunas calculadoras y recursos públicos de Winerim muestran una parte de la lógica de Winerim Core en formato simplificado.",
+    tools_connections: [
+      { tool: "Calculadora de Márgenes", link: "/herramientas/calculadora-margen", core_label: "Demo simplificada de pricing y rentabilidad" },
+      { tool: "Calculadora de Precio por Copa", link: "/herramientas/calculadora-precio-copa", core_label: "Demo simplificada de lógica de copeo" },
+      { tool: "Calculadora de Stock Muerto", link: "/herramientas/calculadora-stock-muerto", core_label: "Demo simplificada de capital inmovilizado y rotación" },
+      { tool: "Calculadora de Ticket Medio", link: "/herramientas/calculadora-ticket-medio", core_label: "Demo simplificada de mix y penetración" },
+      { tool: "Calculadora de Compra Inteligente", link: "/herramientas/calculadora-compra-inteligente", core_label: "Demo simplificada de Winerim Supply conectada al Core" },
     ],
+    tools_closing: "Las herramientas ayudan a entender una parte. Winerim Core conecta todas las piezas.",
     tools_cta: "Explorar herramientas gratuitas",
 
     bridge_eyebrow: "Core + Inteligencia Dinámica",
@@ -214,17 +213,16 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     depth_text2: "You don't need to see them as isolated tools. What matters is that together they enable better list analysis and more solid decisions.",
     depth_micro: "Some of Winerim's public tools are simplified demos of this analytical layer.",
 
-    tools_eyebrow: "Public tools are just the surface",
-    tools_title: "Every free tool is a simplified demo of what ",
-    tools_title_hl: "Core does in depth",
-    tools_desc: "The calculators and analysers we offer for free solve a one-off problem. Winerim Core integrates them all, connects them together and runs them continuously and automatically on your real data.",
-    tools_examples: [
-      { tool: "Margin calculator", core_module: "Full pricing & profitability engine" },
-      { tool: "By-the-glass price calculator", core_module: "Glass vs. bottle analysis with elasticity" },
-      { tool: "Wine List Score", core_module: "Monthly scorecard with industry benchmark" },
-      { tool: "Wine list analyser", core_module: "Wine Mapping + architecture + assortment integrated" },
-      { tool: "Dead stock calculator", core_module: "Rotation, obsolescence & demand forecasting" },
+    tools_title: "Visible tools. Deeper engine.",
+    tools_subtitle: "Some of Winerim's public calculators and resources show a part of Winerim Core's logic in simplified format.",
+    tools_connections: [
+      { tool: "Margin Calculator", link: "/herramientas/calculadora-margen", core_label: "Simplified demo of pricing & profitability" },
+      { tool: "By-the-Glass Price Calculator", link: "/herramientas/calculadora-precio-copa", core_label: "Simplified demo of glass pricing logic" },
+      { tool: "Dead Stock Calculator", link: "/herramientas/calculadora-stock-muerto", core_label: "Simplified demo of tied-up capital & rotation" },
+      { tool: "Average Ticket Calculator", link: "/herramientas/calculadora-ticket-medio", core_label: "Simplified demo of mix & penetration" },
+      { tool: "Smart Purchase Calculator", link: "/herramientas/calculadora-compra-inteligente", core_label: "Simplified demo of Winerim Supply connected to Core" },
     ],
+    tools_closing: "The tools help you understand a part. Winerim Core connects all the pieces.",
     tools_cta: "Explore free tools",
 
     bridge_eyebrow: "Core + Dynamic Intelligence",
@@ -300,17 +298,16 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     depth_text2: "Non serve vederli come strumenti isolati. L'importante è che insieme permettono di analizzare meglio la carta e prendere decisioni più solide.",
     depth_micro: "Alcuni strumenti pubblici di Winerim sono demo semplificate di questo livello analitico.",
 
-    tools_eyebrow: "Gli strumenti pubblici sono solo la superficie",
-    tools_title: "Ogni strumento gratuito è una demo semplificata di ciò che ",
-    tools_title_hl: "Core fa in profondità",
-    tools_desc: "I calcolatori e analizzatori che offriamo gratis risolvono un problema puntuale. Winerim Core li integra tutti, li connette e li esegue in modo continuo e automatizzato sui tuoi dati reali.",
-    tools_examples: [
-      { tool: "Calcolatrice margine", core_module: "Motore completo di pricing e redditività" },
-      { tool: "Calcolatrice prezzo al calice", core_module: "Analisi calice vs. bottiglia con elasticità" },
-      { tool: "Wine List Score", core_module: "Scorecard mensile con benchmark settoriale" },
-      { tool: "Analizzatore carta", core_module: "Wine Mapping + architettura + assortimento integrati" },
-      { tool: "Calcolatrice stock morto", core_module: "Rotazione, obsolescenza e previsione domanda" },
+    tools_title: "Strumenti visibili. Motore più profondo.",
+    tools_subtitle: "Alcuni calcolatori e risorse pubbliche di Winerim mostrano una parte della logica di Winerim Core in formato semplificato.",
+    tools_connections: [
+      { tool: "Calcolatrice Margine", link: "/herramientas/calculadora-margen", core_label: "Demo semplificata di pricing e redditività" },
+      { tool: "Calcolatrice Prezzo al Calice", link: "/herramientas/calculadora-precio-copa", core_label: "Demo semplificata di logica al calice" },
+      { tool: "Calcolatrice Stock Morto", link: "/herramientas/calculadora-stock-muerto", core_label: "Demo semplificata di capitale immobilizzato e rotazione" },
+      { tool: "Calcolatrice Ticket Medio", link: "/herramientas/calculadora-ticket-medio", core_label: "Demo semplificata di mix e penetrazione" },
+      { tool: "Calcolatrice Acquisto Intelligente", link: "/herramientas/calculadora-compra-inteligente", core_label: "Demo semplificata di Winerim Supply connessa al Core" },
     ],
+    tools_closing: "Gli strumenti aiutano a capire una parte. Winerim Core connette tutti i pezzi.",
     tools_cta: "Esplora strumenti gratuiti",
 
     bridge_eyebrow: "Core + Intelligenza Dinamica",
@@ -386,17 +383,16 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     depth_text2: "Pas besoin de les voir comme des outils isolés. L'essentiel est qu'ensemble, ils permettent de mieux analyser la carte et de prendre des décisions plus solides.",
     depth_micro: "Certains outils publics de Winerim sont des démos simplifiées de cette couche analytique.",
 
-    tools_eyebrow: "Les outils publics ne sont que la surface",
-    tools_title: "Chaque outil gratuit est une démo simplifiée de ce que ",
-    tools_title_hl: "Core fait en profondeur",
-    tools_desc: "Les calculateurs et analyseurs gratuits résolvent un problème ponctuel. Winerim Core les intègre tous, les connecte entre eux et les exécute en continu sur vos données réelles.",
-    tools_examples: [
-      { tool: "Calculateur de marge", core_module: "Moteur complet de pricing et rentabilité" },
-      { tool: "Calculateur de prix au verre", core_module: "Analyse verre vs. bouteille avec élasticité" },
-      { tool: "Wine List Score", core_module: "Scorecard mensuel avec benchmark sectoriel" },
-      { tool: "Analyseur de carte", core_module: "Wine Mapping + architecture + assortiment intégrés" },
-      { tool: "Calculateur de stock mort", core_module: "Rotation, obsolescence et prévision de la demande" },
+    tools_title: "Outils visibles. Moteur plus profond.",
+    tools_subtitle: "Certains calculateurs et ressources publics de Winerim montrent une partie de la logique de Winerim Core en format simplifié.",
+    tools_connections: [
+      { tool: "Calculateur de Marge", link: "/herramientas/calculadora-margen", core_label: "Démo simplifiée du pricing et de la rentabilité" },
+      { tool: "Calculateur de Prix au Verre", link: "/herramientas/calculadora-precio-copa", core_label: "Démo simplifiée de la logique au verre" },
+      { tool: "Calculateur de Stock Mort", link: "/herramientas/calculadora-stock-muerto", core_label: "Démo simplifiée du capital immobilisé et de la rotation" },
+      { tool: "Calculateur de Ticket Moyen", link: "/herramientas/calculadora-ticket-medio", core_label: "Démo simplifiée du mix et de la pénétration" },
+      { tool: "Calculateur d'Achat Intelligent", link: "/herramientas/calculadora-compra-inteligente", core_label: "Démo simplifiée de Winerim Supply connectée au Core" },
     ],
+    tools_closing: "Les outils aident à comprendre une partie. Winerim Core connecte toutes les pièces.",
     tools_cta: "Explorer les outils gratuits",
 
     bridge_eyebrow: "Core + Intelligence Dynamique",
@@ -597,30 +593,29 @@ const WinerimCore = () => {
         </div>
       </section>
 
-      {/* ─── 3. TOOLS = SIMPLIFIED DEMOS ─── */}
+      {/* ─── 3. TOOLS → CORE BRIDGE ─── */}
       <section className="py-20 md:py-28">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-accent mb-4 block">{t.tools_eyebrow}</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold leading-tight mb-4 max-w-3xl">
-              {t.tools_title}<span className="text-gradient-wine italic">{t.tools_title_hl}</span>
+          <ScrollReveal className="mb-12">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold leading-tight mb-3">
+              {t.tools_title}
             </h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">{t.tools_desc}</p>
+            <p className="text-muted-foreground max-w-2xl">{t.tools_subtitle}</p>
           </ScrollReveal>
 
           <div className="space-y-3">
-            {t.tools_examples.map((ex, i) => (
+            {t.tools_connections.map((conn, i) => (
               <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl border border-border bg-gradient-card group hover:border-wine/20 transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center shrink-0">
-                    <Calculator size={16} className="text-muted-foreground" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-muted-foreground">{ex.tool}</p>
-                  </div>
-                  <ArrowRight size={14} className="text-wine/40 shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{ex.core_module}</p>
+                <div className="group relative rounded-xl border border-border bg-gradient-card hover:border-wine/20 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 left-0 w-[3px] h-full bg-wine/20 group-hover:bg-wine/40 transition-colors" />
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 p-5 pl-7">
+                    <Link to={localePath(conn.link)}
+                      className="font-heading text-sm font-bold text-foreground hover:text-wine transition-colors shrink-0 inline-flex items-center gap-1.5">
+                      {conn.tool}
+                      <ArrowRight size={12} className="text-wine/50" />
+                    </Link>
+                    <span className="hidden sm:block w-px h-4 bg-border" />
+                    <p className="text-sm text-muted-foreground leading-relaxed">{conn.core_label}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -628,7 +623,8 @@ const WinerimCore = () => {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="mt-8">
+            <p className="text-sm text-muted-foreground/70 italic mt-8 max-w-2xl">{t.tools_closing}</p>
+            <div className="mt-4">
               <Link to={localePath("/herramientas")}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-wine hover:text-wine-light transition-colors">
                 {t.tools_cta} <ArrowRight size={14} />
