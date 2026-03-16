@@ -209,6 +209,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "List health & architecture", desc: "Evaluate balance, price ladder, offer depth and commercial clarity of the list." },
     ],
 
+    depth_title: "A layer composed of dozens of analytical modules",
+    depth_text: "Winerim Core integrates 26 interconnected analytical modules that work across pricing, margin, stock, profitability, purchasing, simulation, architecture and benchmarking.",
+    depth_text2: "You don't need to see them as isolated tools. What matters is that together they enable better list analysis and more solid decisions.",
+    depth_micro: "Some of Winerim's public tools are simplified demos of this analytical layer.",
+
     tools_eyebrow: "Public tools are just the surface",
     tools_title: "Every free tool is a simplified demo of what ",
     tools_title_hl: "Core does in depth",
