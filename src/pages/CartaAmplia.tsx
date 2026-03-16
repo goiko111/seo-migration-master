@@ -5,7 +5,7 @@ import {
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 
 const data: VerticalContent = {
-  metaTitle: "Winerim para Cartas de Vinos Extensas | +100 Referencias bajo Control",
+  metaTitle: "Winerim para Cartas de Vinos Extensas | +250 Referencias bajo Control",
   metaDescription: "Gestiona cartas de vinos de alta complejidad con Winerim: detecta stock muerto, optimiza rotación, elimina canibalización y toma decisiones de surtido con datos reales.",
   canonicalUrl: "https://winerim.wine/soluciones/carta-amplia",
   schemaId: "carta-amplia",
@@ -15,9 +15,9 @@ const data: VerticalContent = {
   breadLabel: "Carta amplia",
   heroTitle1: "Más referencias no significa más ventas. Significa ",
   heroTitleHighlight: "más riesgo sin control",
-  heroDesc: "Winerim convierte cartas extensas y difíciles de gestionar en activos rentables: cada referencia justificada, cada precio optimizado, cada decisión basada en datos.",
+  heroDesc: "Winerim convierte cartas amplias y complejas en activos rentables: cada referencia justificada, cada precio optimizado, cada decisión basada en datos.",
   ctaDemo: "Solicitar demo", ctaContact: "Hablar con el equipo",
-  heroSummary: "Una carta con +100 referencias puede ser una ventaja competitiva o una trampa financiera. Sin analítica, muchas referencias no rotan, canibalizan entre sí y generan stock muerto. Winerim aporta la inteligencia para que cada vino en tu carta tenga una razón de estar ahí — y lo demuestre con datos.",
+  heroSummary: "Una carta con más de 250 referencias puede ser una ventaja competitiva o una trampa financiera. Sin analítica, muchas referencias no rotan, canibalizan entre sí y generan stock muerto. Winerim aporta la inteligencia para que cada vino en tu carta tenga una razón de estar ahí — y lo demuestre con datos.",
 
   forTitle: "¿Es Winerim para tu carta?",
   forLabel: "Encaja perfecto si…",
