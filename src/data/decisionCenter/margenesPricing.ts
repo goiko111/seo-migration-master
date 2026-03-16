@@ -73,6 +73,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-sano",
       title: "Qué margen es sano",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim ha comparado tu multiplicador medio ponderado con el benchmark de tu segmento.",
         whyMatters: "Si estás por debajo del rango saludable, tienes un problema estructural que no se arregla vendiendo más.",
