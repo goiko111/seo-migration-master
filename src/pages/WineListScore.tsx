@@ -6,6 +6,7 @@ import {
   Wine, DollarSign, Layers, Users, GlassWater, TrendingUp,
   Sparkles, RotateCcw, Info
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -69,6 +70,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: ¿tu carta realmente vende?",
     link_playbook: "Playbook: construir una carta rentable",
     link_software: "Software de carta de vinos",
+    decides: ["En qué áreas tu carta necesita mejora inmediata", "Si la estructura, pricing y equilibrio están alineados", "Qué bloque priorizar: copa, rotación o potencial comercial"],
+    avoids: ["Mantener puntos ciegos en la carta sin diagnosticar", "Invertir tiempo en áreas que ya funcionan bien", "Tomar decisiones de carta sin un marco de evaluación"],
+    impact: ["Obtener una visión 360° de la salud de tu carta", "Priorizar las mejoras con mayor impacto en ventas", "Establecer una línea base para medir progreso"],
     blocks: [
       { id: "estructura", title: "Estructura y organización", questions: [
         { text: "¿Cuántas referencias tiene tu carta?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
@@ -142,6 +146,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: does your list really sell?",
     link_playbook: "Playbook: building a profitable wine list",
     link_software: "Wine list software",
+    decides: ["Which areas of your list need immediate improvement", "Whether structure, pricing and balance are aligned", "Which block to prioritise: glass, rotation or commercial potential"],
+    avoids: ["Keeping blind spots in the list undiagnosed", "Spending time on areas already working well", "Making list decisions without an evaluation framework"],
+    impact: ["Get a 360° view of your list's health", "Prioritise improvements with the greatest sales impact", "Establish a baseline to measure progress"],
     blocks: [
       { id: "estructura", title: "Structure & organisation", questions: [
         { text: "How many references does your list have?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
@@ -215,6 +222,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: la tua carta vende davvero?",
     link_playbook: "Playbook: costruire una carta redditizia",
     link_software: "Software carta dei vini",
+    decides: ["Quali aree della carta necessitano miglioramento immediato", "Se struttura, pricing ed equilibrio sono allineati", "Quale blocco prioritizzare: calice, rotazione o potenziale commerciale"],
+    avoids: ["Mantenere punti ciechi nella carta senza diagnosi", "Investire tempo su aree che già funzionano", "Decidere sulla carta senza un framework di valutazione"],
+    impact: ["Ottenere una visione 360° della salute della carta", "Prioritizzare i miglioramenti con maggiore impatto sulle vendite", "Stabilire una linea base per misurare i progressi"],
     blocks: [
       { id: "estructura", title: "Struttura e organizzazione", questions: [
         { text: "Quante referenze ha la tua carta?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
@@ -288,6 +298,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist : votre carte vend-elle vraiment ?",
     link_playbook: "Playbook : construire une carte rentable",
     link_software: "Logiciel carte des vins",
+    decides: ["Quels domaines de votre carte nécessitent une amélioration immédiate", "Si structure, pricing et équilibre sont alignés", "Quel bloc prioriser : verre, rotation ou potentiel commercial"],
+    avoids: ["Garder des angles morts dans la carte sans diagnostic", "Investir du temps sur des domaines qui fonctionnent déjà", "Décider de la carte sans cadre d'évaluation"],
+    impact: ["Obtenir une vision 360° de la santé de votre carte", "Prioriser les améliorations avec le plus grand impact sur les ventes", "Établir une ligne de base pour mesurer les progrès"],
     blocks: [
       { id: "estructura", title: "Structure et organisation", questions: [
         { text: "Combien de références a votre carte ?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
@@ -395,6 +408,8 @@ const WineListScore = () => {
             className="text-lg text-muted-foreground max-w-2xl leading-relaxed">{t.subtitle(totalQuestions)}</motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* QUESTIONNAIRE */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">

@@ -6,6 +6,7 @@ import {
   AlertTriangle, CheckCircle, Sparkles, Info, Plus, Trash2,
   Layers, Target
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -73,6 +74,7 @@ const i18n: Record<SupportedLang, {
   issue_ratio_low: (name: string, val: number, avg: number) => string;
   issue_glass_low: (name: string, val: number) => string;
   issue_glass_price_low: (name: string, val: number, avg: string) => string;
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Auditor de Carta de Vinos para Grupos Multi-Local | Winerim",
@@ -148,6 +150,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Ratio de vino muy bajo (${v}% vs ${Math.round(a)}%). Oportunidad de mejora.`,
     issue_glass_low: (n, v) => `Ratio de copa inferior al 15%. Oportunidad de crecimiento a través de copa.`,
     issue_glass_price_low: (n, v, a) => `Precio medio de copa inferior a la media (${v}€ vs ${a}€).`,
+    decides: ["Si hay coherencia en la gestión del vino entre locales", "Qué local necesita más atención en pricing o surtido", "Si el grupo se beneficiaría de un estándar centralizado"],
+    avoids: ["Que cada local opere con criterios distintos sin control", "Desviaciones de precio que erosionan la marca", "Perder poder de negociación por falta de visión consolidada"],
+    impact: ["Detectar oportunidades de mejora en locales infrarrendidores", "Estandarizar la gestión y reducir ineficiencias", "Preparar negociaciones con distribuidores con datos de grupo"],
   },
   en: {
     seo_title: "Wine List Auditor for Multi-Location Groups | Winerim",
@@ -223,6 +228,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Wine ratio very low (${v}% vs ${Math.round(a)}%). Improvement opportunity.`,
     issue_glass_low: (n, v) => `Glass ratio below 15%. Growth opportunity through by-the-glass.`,
     issue_glass_price_low: (n, v, a) => `Average glass price below average (€${v} vs €${a}).`,
+    decides: ["Whether wine management is consistent across locations", "Which location needs more attention on pricing or assortment", "Whether the group would benefit from centralised standards"],
+    avoids: ["Each location operating with different criteria without oversight", "Price deviations that erode the brand", "Losing negotiation power due to lack of consolidated data"],
+    impact: ["Detect improvement opportunities in underperforming locations", "Standardise management and reduce inefficiencies", "Prepare supplier negotiations with group-level data"],
   },
   it: {
     seo_title: "Auditor Carta Vini per Gruppi Multi-Locale | Winerim",
@@ -298,6 +306,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Rapporto vino molto basso (${v}% vs ${Math.round(a)}%). Opportunità di miglioramento.`,
     issue_glass_low: (n, v) => `Rapporto calice inferiore al 15%. Opportunità di crescita tramite il calice.`,
     issue_glass_price_low: (n, v, a) => `Prezzo medio calice inferiore alla media (${v}€ vs ${a}€).`,
+    decides: ["Se la gestione del vino è coerente tra i locali", "Quale locale necessita più attenzione su pricing o assortimento", "Se il gruppo beneficerebbe di standard centralizzati"],
+    avoids: ["Che ogni locale operi con criteri diversi senza controllo", "Deviazioni di prezzo che erodono il brand", "Perdere potere negoziale per mancanza di visione consolidata"],
+    impact: ["Individuare opportunità di miglioramento nei locali sottoperformanti", "Standardizzare la gestione e ridurre le inefficienze", "Preparare le negoziazioni con dati di gruppo"],
   },
   fr: {
     seo_title: "Auditeur Carte des Vins pour Groupes Multi-Sites | Winerim",
@@ -373,6 +384,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Ratio vin très faible (${v}% vs ${Math.round(a)}%). Opportunité d'amélioration.`,
     issue_glass_low: (n, v) => `Ratio verre inférieur à 15%. Opportunité de croissance via le verre.`,
     issue_glass_price_low: (n, v, a) => `Prix moyen verre inférieur à la moyenne (${v}€ vs ${a}€).`,
+    decides: ["Si la gestion du vin est cohérente entre les sites", "Quel site nécessite plus d'attention sur le pricing ou l'assortiment", "Si le groupe bénéficierait de standards centralisés"],
+    avoids: ["Que chaque site opère avec des critères différents sans contrôle", "Des écarts de prix qui érodent la marque", "Perdre du pouvoir de négociation par manque de vision consolidée"],
+    impact: ["Détecter les opportunités d'amélioration dans les sites sous-performants", "Standardiser la gestion et réduire les inefficacités", "Préparer les négociations fournisseurs avec des données de groupe"],
   },
 };
 
@@ -503,6 +517,8 @@ const AuditorMultiLocal = () => {
             className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">{t.subtitle}</motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* SUMMARY */}
       <div className="max-w-5xl mx-auto px-6 md:px-12">

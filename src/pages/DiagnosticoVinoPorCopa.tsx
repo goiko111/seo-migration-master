@@ -5,6 +5,7 @@ import {
   ArrowRight, GlassWater, Wine, TrendingUp, AlertTriangle,
   CheckCircle, DollarSign, Layers, RotateCcw, Sparkles, Info
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -55,6 +56,7 @@ const i18n: Record<SupportedLang, {
   blocks: { title: string; points: string[] }[];
   faqs: { q: string; a: string }[];
   links: { to: string; label: string; type: "tool" | "resource" | "guide" }[];
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Diagnóstico de Vino por Copa para Restaurantes | Winerim",
@@ -111,6 +113,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: estrategia por copa", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
     ],
+    decides: ["Si tu programa de copa es equilibrado en estilos y precios", "Qué vinos por copa tienen mejor margen real", "Si la rotación justifica mantener cada referencia"],
+    avoids: ["Ofrecer solo tintos por copa sin diversidad", "Precio único para todos los vinos por copa", "Ignorar la merma como variable de coste"],
+    impact: ["Optimizar la rentabilidad del programa de copa", "Equilibrar la oferta para captar más mesas", "Reducir la merma con rotación controlada"],
   },
   en: {
     seo_title: "By-the-Glass Wine Diagnostic for Restaurants | Winerim",
@@ -167,6 +172,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: glass strategy", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimise by-the-glass", type: "guide" },
     ],
+    decides: ["Whether your glass programme is balanced in styles and prices", "Which by-the-glass wines have the best real margin", "Whether rotation justifies keeping each reference"],
+    avoids: ["Offering only reds by the glass without diversity", "Same price for all by-the-glass wines", "Ignoring waste as a cost variable"],
+    impact: ["Optimise glass programme profitability", "Balance the offer to capture more tables", "Reduce waste with controlled rotation"],
   },
   it: {
     seo_title: "Diagnostica Vino al Calice per Ristoranti | Winerim",
@@ -223,6 +231,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: strategia al calice", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: ottimizzare il calice", type: "guide" },
     ],
+    decides: ["Se il programma al calice è equilibrato in stili e prezzi", "Quali calici hanno il miglior margine reale", "Se la rotazione giustifica mantenere ogni referenza"],
+    avoids: ["Offrire solo rossi al calice senza diversità", "Prezzo unico per tutti i calici", "Ignorare lo scarto come variabile di costo"],
+    impact: ["Ottimizzare la redditività del programma al calice", "Equilibrare l'offerta per catturare più tavoli", "Ridurre lo scarto con rotazione controllata"],
   },
   fr: {
     seo_title: "Diagnostic Vin au Verre pour Restaurants | Winerim",
@@ -279,6 +290,9 @@ const i18n: Record<SupportedLang, {
       { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark : stratégie au verre", type: "guide" },
       { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook : optimiser le verre", type: "guide" },
     ],
+    decides: ["Si votre programme au verre est équilibré en styles et prix", "Quels vins au verre ont la meilleure marge réelle", "Si la rotation justifie de garder chaque référence"],
+    avoids: ["Ne proposer que des rouges au verre sans diversité", "Prix unique pour tous les vins au verre", "Ignorer la perte comme variable de coût"],
+    impact: ["Optimiser la rentabilité du programme au verre", "Équilibrer l'offre pour capter plus de tables", "Réduire la perte avec une rotation contrôlée"],
   },
 };
 
@@ -387,6 +401,8 @@ const DiagnosticoVinoPorCopa = () => {
             className="text-lg text-muted-foreground max-w-2xl leading-relaxed">{t.subtitle}</motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* TOOL */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">

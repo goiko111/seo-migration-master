@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, TrendingUp, Calculator, DollarSign,
   Store, Tag, Layers, Info, BarChart3, CheckCircle
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from "recharts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -61,6 +62,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "Cómo poner precio al vino", link_margin: "Calculadora de márgenes",
     link_profitable: "Carta de vinos rentable", link_mapping: "Plantilla wine mapping",
     locale: "es-ES",
+    decides: ["Qué precio poner a cada vino de tu carta", "Qué multiplicador aplicar según tipo y posicionamiento", "Si tu precio actual está por encima o por debajo del óptimo"],
+    avoids: ["Usar un multiplicador fijo para toda la carta", "Fijar precios sin considerar la psicología del comensal", "Perder margen en vinos donde podrías cobrar más"],
+    impact: ["Optimizar márgenes sin perder rotación", "Crear una escalera de precios coherente y sin saltos", "Mejorar la percepción de valor de toda la carta"],
   },
   en: {
     seo_title: "Wine Pricing Optimizer – Optimal Wine Price | Winerim",
@@ -106,6 +110,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "How to price wine", link_margin: "Margin calculator",
     link_profitable: "Profitable wine list", link_mapping: "Wine mapping template",
     locale: "en-GB",
+    decides: ["What price to set for each wine", "Which multiplier to apply by type and positioning", "Whether your current price is above or below optimal"],
+    avoids: ["Using a fixed multiplier for the entire list", "Setting prices without considering guest psychology", "Losing margin on wines where you could charge more"],
+    impact: ["Optimise margins without losing rotation", "Create a coherent price ladder without gaps", "Improve perceived value across the list"],
   },
   it: {
     seo_title: "Wine Pricing Optimizer – Prezzo Ottimale del Vino | Winerim",
@@ -151,6 +158,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "Come prezzare il vino", link_margin: "Calcolatrice margini",
     link_profitable: "Carta dei vini redditizia", link_mapping: "Template wine mapping",
     locale: "it-IT",
+    decides: ["Che prezzo dare a ciascun vino", "Quale moltiplicatore applicare per tipo e posizionamento", "Se il prezzo attuale è sopra o sotto l'ottimale"],
+    avoids: ["Usare un moltiplicatore fisso per tutta la carta", "Fissare prezzi senza considerare la psicologia del cliente", "Perdere margine su vini dove potresti guadagnare di più"],
+    impact: ["Ottimizzare i margini senza perdere rotazione", "Creare una scala prezzi coerente e senza salti", "Migliorare la percezione di valore di tutta la carta"],
   },
   fr: {
     seo_title: "Wine Pricing Optimizer – Prix Optimal du Vin | Winerim",
@@ -196,6 +206,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "Comment fixer le prix du vin", link_margin: "Calculateur de marges",
     link_profitable: "Carte des vins rentable", link_mapping: "Template wine mapping",
     locale: "fr-FR",
+    decides: ["Quel prix fixer pour chaque vin", "Quel multiplicateur appliquer selon le type et le positionnement", "Si votre prix actuel est au-dessus ou en dessous de l'optimal"],
+    avoids: ["Utiliser un multiplicateur fixe pour toute la carte", "Fixer les prix sans considérer la psychologie du client", "Perdre de la marge sur des vins où vous pourriez facturer plus"],
+    impact: ["Optimiser les marges sans perdre la rotation", "Créer une échelle de prix cohérente et sans sauts", "Améliorer la perception de valeur de toute la carte"],
   },
 };
 
@@ -288,6 +301,8 @@ const WinePricingTool = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* CALCULATOR */}
       <section className="section-padding">

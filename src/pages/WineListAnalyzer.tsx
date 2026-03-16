@@ -6,6 +6,7 @@ import {
   Layers, TrendingUp, Lightbulb, CheckCircle, AlertTriangle,
   Loader2, GlassWater, Send, X
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
@@ -85,6 +86,7 @@ const i18n: Record<SupportedLang, {
   links: { to: string; label: string; type: "guide" | "resource" | "solution" }[];
   toast_error_empty: string; toast_error_analyze: string; toast_error_send: string; toast_email_invalid: string; toast_success: string;
   toast_file_error: string;
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Wine List Analyzer – Analiza tu carta de vinos | Winerim",
@@ -135,6 +137,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email no válido",
     toast_success: "¡Solicitud enviada! Te contactaremos pronto.",
     toast_file_error: "No se pudo leer el archivo. Prueba con formato .txt o .csv",
+    decides: ["Si la estructura de la carta facilita o frena la venta", "Qué huecos de precio y estilo existen", "Qué vinos son candidatos a servirse por copa"],
+    avoids: ["Mantener una carta desequilibrada sin saberlo", "Duplicar estilos que compiten entre sí", "Perder ventas por falta de cobertura en rangos clave"],
+    impact: ["Detectar oportunidades de venta ocultas en la carta", "Reducir referencias sin impacto y liberar espacio", "Mejorar la experiencia del comensal con una carta más clara"],
   },
   en: {
     seo_title: "Wine List Analyzer – Analyse Your Wine List | Winerim",
@@ -185,6 +190,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Invalid email",
     toast_success: "Request sent! We'll be in touch soon.",
     toast_file_error: "Couldn't read the file. Try .txt or .csv format",
+    decides: ["Whether your list structure helps or hinders sales", "What price and style gaps exist", "Which wines are candidates for by-the-glass"],
+    avoids: ["Keeping an unbalanced list without knowing it", "Duplicating competing styles", "Losing sales due to uncovered price ranges"],
+    impact: ["Uncover hidden sales opportunities in the list", "Reduce low-impact references and free up space", "Improve the guest experience with a clearer list"],
   },
   it: {
     seo_title: "Wine List Analyzer – Analizza la tua carta vini | Winerim",
@@ -235,6 +243,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email non valida",
     toast_success: "Richiesta inviata! Ti contatteremo presto.",
     toast_file_error: "Impossibile leggere il file. Prova con formato .txt o .csv",
+    decides: ["Se la struttura della carta facilita o frena la vendita", "Quali gap di prezzo e stile esistono", "Quali vini sono candidati al servizio al calice"],
+    avoids: ["Mantenere una carta squilibrata senza saperlo", "Duplicare stili che competono tra loro", "Perdere vendite per mancata copertura in fasce chiave"],
+    impact: ["Scoprire opportunità di vendita nascoste nella carta", "Ridurre referenze senza impatto e liberare spazio", "Migliorare l'esperienza del cliente con una carta più chiara"],
   },
   fr: {
     seo_title: "Wine List Analyzer – Analysez votre carte des vins | Winerim",
@@ -285,6 +296,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email invalide",
     toast_success: "Demande envoyée ! Nous vous contacterons bientôt.",
     toast_file_error: "Impossible de lire le fichier. Essayez le format .txt ou .csv",
+    decides: ["Si la structure de la carte facilite ou freine la vente", "Quels trous de prix et de style existent", "Quels vins sont candidats au service au verre"],
+    avoids: ["Garder une carte déséquilibrée sans le savoir", "Dupliquer des styles qui se font concurrence", "Perdre des ventes par manque de couverture sur les gammes clés"],
+    impact: ["Révéler des opportunités de vente cachées dans la carte", "Réduire les références sans impact et libérer de l'espace", "Améliorer l'expérience client avec une carte plus claire"],
   },
 };
 
@@ -447,6 +461,8 @@ const WineListAnalyzer = () => {
           )}
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* INPUT SECTION */}
       <AnimatePresence mode="wait">

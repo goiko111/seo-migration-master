@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, Utensils, Flame, Globe, Loader2,
   Thermometer, MapPin, Grape, Lightbulb, Sparkles, RotateCcw
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -51,6 +52,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Solicitar demo",
     link_pairing: "Estrategia de maridaje", link_sell: "Cómo vender más vino",
     link_analyzer: "Analizador de carta", link_demo: "Solicitar demo de Winerim",
+    decides: ["Qué vino recomendar para cada plato", "Cómo comunicar el maridaje al comensal", "Qué estilos encajan con tu menú"],
+    avoids: ["Recomendaciones genéricas sin criterio", "Depender solo de la intuición del equipo de sala", "Perder ventas por falta de sugerencias activas"],
+    impact: ["Aumentar la venta cruzada vino-plato", "Mejorar la percepción de servicio profesional", "Elevar el ticket medio con recomendaciones fundamentadas"],
   },
   en: {
     seo_title: "Wine Pairing Generator – AI Wine Pairing | Winerim",
@@ -83,6 +87,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Request demo",
     link_pairing: "Pairing strategy", link_sell: "How to sell more wine",
     link_analyzer: "Wine list analyser", link_demo: "Request Winerim demo",
+    decides: ["Which wine to recommend for each dish", "How to communicate the pairing to the guest", "Which styles suit your menu"],
+    avoids: ["Generic recommendations without criteria", "Relying solely on floor staff intuition", "Losing sales from lack of active suggestions"],
+    impact: ["Increase wine-food cross-selling", "Improve perception of professional service", "Raise average ticket with informed recommendations"],
   },
   it: {
     seo_title: "Wine Pairing Generator – Abbinamento Vini con IA | Winerim",
@@ -115,6 +122,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Richiedi demo",
     link_pairing: "Strategia di abbinamento", link_sell: "Come vendere più vino",
     link_analyzer: "Analizzatore carta", link_demo: "Richiedi demo Winerim",
+    decides: ["Quale vino consigliare per ogni piatto", "Come comunicare l'abbinamento al cliente", "Quali stili si adattano al tuo menu"],
+    avoids: ["Raccomandazioni generiche senza criterio", "Affidarsi solo all'intuizione del personale di sala", "Perdere vendite per mancanza di suggerimenti attivi"],
+    impact: ["Aumentare il cross-selling vino-piatto", "Migliorare la percezione di servizio professionale", "Alzare lo scontrino medio con raccomandazioni fondate"],
   },
   fr: {
     seo_title: "Wine Pairing Generator – Accords Mets & Vins avec IA | Winerim",
@@ -147,6 +157,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     cta_btn: "Demander une démo",
     link_pairing: "Stratégie d'accord", link_sell: "Comment vendre plus de vin",
     link_analyzer: "Analyseur de carte", link_demo: "Demander une démo Winerim",
+    decides: ["Quel vin recommander pour chaque plat", "Comment communiquer l'accord au client", "Quels styles conviennent à votre menu"],
+    avoids: ["Recommandations génériques sans critère", "Compter uniquement sur l'intuition du personnel de salle", "Perdre des ventes par manque de suggestions actives"],
+    impact: ["Augmenter la vente croisée vin-plat", "Améliorer la perception d'un service professionnel", "Augmenter le ticket moyen avec des recommandations fondées"],
   },
 };
 
@@ -212,6 +225,8 @@ const WinePairingGenerator = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* INPUT */}
       <section className="section-padding">

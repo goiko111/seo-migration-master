@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, TrendingUp, Calculator, BarChart3,
   DollarSign, Users, RotateCcw, Layers
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, LineChart, Line
@@ -56,6 +57,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Solicitar demo",
     months_short: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
     locale: "es-ES", yr: "/año",
+    decides: ["Si invertir en optimizar la carta de vinos es rentable", "Qué incremento de facturación es realista para tu restaurante", "Dónde está el mayor potencial de mejora: volumen, precio o penetración"],
+    avoids: ["Tomar decisiones sin cuantificar el impacto real", "Subestimar el potencial de mejora de la carta", "Invertir en acciones sin proyección de retorno"],
+    impact: ["Cuantificar el ROI potencial de optimizar la carta", "Justificar la inversión en herramientas de gestión de vino", "Establecer objetivos de facturación alcanzables"],
   },
   en: {
     seo_title: "Wine Sales ROI Calculator – Calculate Your Sales Potential | Winerim",
@@ -90,6 +94,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Request demo",
     months_short: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     locale: "en-GB", yr: "/yr",
+    decides: ["Whether investing in wine list optimisation is profitable", "What revenue increase is realistic for your restaurant", "Where the biggest improvement potential lies: volume, price or penetration"],
+    avoids: ["Making decisions without quantifying real impact", "Underestimating the wine list's improvement potential", "Investing in actions without a return projection"],
+    impact: ["Quantify the potential ROI of optimising the list", "Justify investment in wine management tools", "Set achievable revenue targets"],
   },
   it: {
     seo_title: "Wine Sales ROI Calculator – Calcola il Potenziale di Vendita | Winerim",
@@ -124,6 +131,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Richiedi demo",
     months_short: ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
     locale: "it-IT", yr: "/anno",
+    decides: ["Se investire nell'ottimizzazione della carta è redditizio", "Quale incremento di fatturato è realistico", "Dove sta il maggior potenziale: volume, prezzo o penetrazione"],
+    avoids: ["Prendere decisioni senza quantificare l'impatto reale", "Sottovalutare il potenziale di miglioramento della carta", "Investire senza proiezione di ritorno"],
+    impact: ["Quantificare il ROI potenziale dell'ottimizzazione", "Giustificare l'investimento in strumenti di gestione", "Stabilire obiettivi di fatturato raggiungibili"],
   },
   fr: {
     seo_title: "Wine Sales ROI Calculator – Calculez Votre Potentiel de Ventes | Winerim",
@@ -158,6 +168,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_demo: "Demander une démo",
     months_short: ["Jan","Fév","Mar","Avr","Mai","Jun","Jul","Aoû","Sep","Oct","Nov","Déc"],
     locale: "fr-FR", yr: "/an",
+    decides: ["Si investir dans l'optimisation de la carte est rentable", "Quelle augmentation de CA est réaliste", "Où se trouve le plus grand potentiel : volume, prix ou pénétration"],
+    avoids: ["Prendre des décisions sans quantifier l'impact réel", "Sous-estimer le potentiel d'amélioration de la carte", "Investir sans projection de retour"],
+    impact: ["Quantifier le ROI potentiel de l'optimisation", "Justifier l'investissement en outils de gestion du vin", "Établir des objectifs de CA atteignables"],
   },
 };
 
@@ -256,6 +269,8 @@ const WineROICalculator = () => {
           </motion.p>
         </div>
       </section>
+
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
 
       {/* CALCULATOR */}
       <section className="section-padding">
