@@ -189,10 +189,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "How to interpret the results",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Dead wine detection checklist", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: improve rotation", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: data-driven purchasing", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Smart purchasing calculator", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: purchasing intelligence", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Monthly performance scorecard", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core: obsolescence detection", type: "solution" },
+      { to: "/precios", label: "Plans & pricing", type: "solution" },
+      { to: "/demo", label: "Request free demo", type: "solution" },
     ],
   },
   it: {
