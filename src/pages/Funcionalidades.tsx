@@ -707,63 +707,22 @@ const Funcionalidades = () => {
             </div>
           </ScrollReveal>
 
-          {/* Gestión de carta y configuración */}
-          <ScrollReveal>
-            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
-              {lang === "es" ? "Gestión de carta" : "Wine list management"}
-            </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-12">
-              {[
-                { img: mgmtCarta, alt: "Gestión de carta de vinos", label: lang === "es" ? "Editor de carta" : "List editor" },
-                { img: mgmtRecomendados, alt: "Vinos recomendados", label: lang === "es" ? "Recomendados" : "Recommended" },
-                { img: mgmtAutomatizaciones, alt: "Automatizaciones", label: lang === "es" ? "Automatizaciones" : "Automations" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
-                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* Analítica y rendimiento */}
-          <ScrollReveal>
-            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
-              {lang === "es" ? "Analítica y rendimiento" : "Analytics & performance"}
-            </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-12">
-              {[
-                { img: mgmtRendimiento, alt: "Panel de rendimiento", label: lang === "es" ? "Rendimiento" : "Performance" },
-                { img: mgmtInsights, alt: "Insights de IA", label: "Insights IA" },
-                { img: dashboardInsightsImg, alt: "Dashboard de decisiones", label: lang === "es" ? "Panel de decisiones" : "Decision dashboard" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
-                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* Stock, rotación y compras */}
-          <ScrollReveal>
-            <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
-              {lang === "es" ? "Stock, rotación y compras" : "Stock, rotation & purchasing"}
-            </p>
-            <div className="grid md:grid-cols-4 gap-4">
-              {[
-                { img: mgmtStock, alt: "Control de stock", label: "Stock" },
-                { img: mgmtRotacion, alt: "Análisis de rotación", label: lang === "es" ? "Rotación" : "Rotation" },
-                { img: mgmtObsolescencia, alt: "Detección de obsolescencia", label: lang === "es" ? "Obsolescencia" : "Obsolescence" },
-                { img: mgmtPedidos, alt: "Gestión de pedidos", label: lang === "es" ? "Pedidos" : "Orders" },
-              ].map((item, i) => (
-                <div key={i} className="relative group">
-                  <img src={item.img} alt={item.alt} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
-                  <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
+          {/* 20 screenshots organizados por categoría */}
+          {(screenshotCategories[lang as keyof typeof screenshotCategories] ?? screenshotCategories.es).map((cat, ci) => (
+            <ScrollReveal key={ci}>
+              <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground/60 font-medium mb-4 text-center">
+                {cat.title}
+              </p>
+              <div className={`grid gap-4 mb-12 ${cat.items.length <= 3 ? "md:grid-cols-3" : cat.items.length === 4 ? "md:grid-cols-4" : "md:grid-cols-5"}`}>
+                {cat.items.map((item, j) => (
+                  <div key={j} className="relative group">
+                    <img src={item.img} alt={item.label} className="w-full rounded-xl border border-border shadow-md group-hover:shadow-lg transition-shadow" loading="lazy" />
+                    <p className="text-[10px] text-muted-foreground text-center mt-2 font-medium">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
