@@ -55,38 +55,6 @@ interface SimpleAreaContent {
 }
 
 const simpleAreas: Record<string, SimpleAreaContent> = {
-  "compras-reposicion": {
-    name: "Compras y reposición", tagline: "Compra con datos, no con intuición",
-    icon: ShoppingCart, accent: "text-blue-500", bg: "bg-blue-500/10", priority: "este mes",
-    queSignifica: [
-      "Comprar bien no es comprar barato. Es comprar lo que se va a vender, al precio adecuado, en la cantidad correcta y en el momento justo.",
-      "La reposición debe estar guiada por datos de venta y rotación, no por la agenda del comercial.",
-      "Cada decisión de compra impacta directamente en tu margen, tu stock y la coherencia de tu carta.",
-    ],
-    porQueImporta: [
-      "Si un proveedor sube precios y no lo ajustas en carta, tu margen baja sin que lo notes.",
-      "Comprar volumen por descuento sin demanda real genera stock muerto y cash-flow negativo.",
-      "La concentración en pocos proveedores te deja sin poder de negociación.",
-      "Conectar compras con rendimiento es la diferencia entre gestión reactiva y estratégica.",
-    ],
-    queHacerAhora: [
-      "Revisa si algún proveedor ha subido precios sin que hayas ajustado tu carta.",
-      "Cruza rotación con coste: ¿estás comprando mucho de lo que no vendes?",
-      "Evalúa si puedes consolidar proveedores para mejorar condiciones.",
-      "Crea un calendario de revisión de compras mensual vinculado a datos de venta.",
-    ],
-    erroresComunes: [
-      { mistake: "Comprar sin consultar datos de venta y rotación", consequence: "Repones lo que no se vende y te quedas sin lo que sí se pide." },
-      { mistake: "No negociar condiciones por fidelidad al proveedor", consequence: "Pagas más de lo necesario sin obtener mejor servicio." },
-      { mistake: "Acumular stock por ofertas de volumen sin demanda real", consequence: "Inmovilizas capital y aumentas el riesgo de merma." },
-      { mistake: "No tener visibilidad del coste real de cada referencia", consequence: "Tomas decisiones de pricing sobre datos incorrectos." },
-    ],
-    aprenderMas: [
-      { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente" },
-      { label: "Guía: Usar datos para decidir qué vinos comprar", href: "/guias/como-usar-datos-para-decidir-que-vinos-comprar" },
-      { label: "Winerim Supply", href: "/producto/winerim-supply" },
-    ],
-  },
   "carta-equilibrio": {
     name: "Carta y equilibrio", tagline: "Tu carta debe contar una historia coherente",
     icon: BarChart3, accent: "text-wine", bg: "bg-wine/10", priority: "este mes",
