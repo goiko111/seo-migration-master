@@ -139,6 +139,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si no hay justificación, reasigna volumen al proveedor más competitivo.",
     ],
     recurso: { label: "Winerim Supply", href: "/producto/winerim-supply" },
+    decisionCenterHref: "/decision-center/compras-reposicion",
   },
 };
 
