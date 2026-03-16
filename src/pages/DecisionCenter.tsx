@@ -10,6 +10,8 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import { InsightCard, insightLibrary } from "@/components/decision";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { TranslationDict } from "@/i18n/types";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
@@ -31,19 +33,18 @@ const useGate = () => {
 /* ── Area data ── */
 type UserProfile = "direccion" | "sala" | "compras-fb" | "grupo";
 
-const profileConfig: Record<UserProfile, { label: string; icon: typeof Briefcase }> = {
-  "direccion":  { label: "Dirección",     icon: Briefcase },
-  "sala":       { label: "Sala",          icon: Store },
-  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
-  "grupo":      { label: "Grupo",         icon: Users },
-};
+const getProfileConfig = (t: TranslationDict): Record<UserProfile, { label: string; icon: typeof Briefcase }> => ({
+  "direccion":  { label: t.dc_profile_management, icon: Briefcase },
+  "sala":       { label: t.dc_profile_floor,      icon: Store },
+  "compras-fb": { label: t.dc_profile_purchasing,  icon: ShoppingCart },
+  "grupo":      { label: t.dc_profile_group,       icon: Users },
+});
 
 interface Area {
   id: string;
   name: string;
   tagline: string;
   description: string;
-  audience: string;
   profiles: UserProfile[];
   icon: React.ElementType;
   accent: string;
@@ -52,13 +53,12 @@ interface Area {
   href: string;
 }
 
-const areas: Area[] = [
+const getAreas = (t: TranslationDict): Area[] => [
   {
     id: "margenes",
-    name: "Márgenes y pricing",
-    tagline: "Entiende la rentabilidad real de cada vino",
-    description: "Qué significa cada métrica de margen, cómo interpretar desviaciones y qué palancas usar para mejorar la rentabilidad de tu carta sin tocar la experiencia del comensal.",
-    audience: "Dirección, F&B managers, responsables de compras",
+    name: t.locale === "es_ES" ? "Márgenes y pricing" : t.locale === "en_GB" ? "Margins & Pricing" : t.locale === "it_IT" ? "Margini e pricing" : "Marges et pricing",
+    tagline: t.locale === "es_ES" ? "Entiende la rentabilidad real de cada vino" : t.locale === "en_GB" ? "Understand the real profitability of each wine" : t.locale === "it_IT" ? "Comprendi la redditività reale di ogni vino" : "Comprenez la rentabilité réelle de chaque vin",
+    description: t.locale === "es_ES" ? "Qué significa cada métrica de margen, cómo interpretar desviaciones y qué palancas usar para mejorar la rentabilidad de tu carta sin tocar la experiencia del comensal." : t.locale === "en_GB" ? "What each margin metric means, how to interpret deviations and what levers to use to improve your wine list profitability without affecting the guest experience." : t.locale === "it_IT" ? "Cosa significa ogni metrica di margine, come interpretare le deviazioni e quali leve usare per migliorare la redditività della tua carta senza toccare l'esperienza del cliente." : "Ce que signifie chaque métrique de marge, comment interpréter les écarts et quels leviers utiliser pour améliorer la rentabilité de votre carte sans affecter l'expérience client.",
     profiles: ["direccion", "compras-fb"],
     icon: DollarSign,
     accent: "text-amber-500",
@@ -68,10 +68,9 @@ const areas: Area[] = [
   },
   {
     id: "stock",
-    name: "Stock y rotación",
-    tagline: "Detecta lo que no se mueve antes de que sea tarde",
-    description: "Cómo identificar vinos muertos, cuánto capital tienes inmovilizado, cuándo retirar una referencia y cómo mantener una bodega viva y rentable.",
-    audience: "Jefes de sala, sumilleres, F&B managers",
+    name: t.locale === "es_ES" ? "Stock y rotación" : t.locale === "en_GB" ? "Stock & Rotation" : t.locale === "it_IT" ? "Stock e rotazione" : "Stock et rotation",
+    tagline: t.locale === "es_ES" ? "Detecta lo que no se mueve antes de que sea tarde" : t.locale === "en_GB" ? "Spot what isn't moving before it's too late" : t.locale === "it_IT" ? "Individua ciò che non si muove prima che sia troppo tardi" : "Détectez ce qui ne bouge pas avant qu'il ne soit trop tard",
+    description: t.locale === "es_ES" ? "Cómo identificar vinos muertos, cuánto capital tienes inmovilizado, cuándo retirar una referencia y cómo mantener una bodega viva y rentable." : t.locale === "en_GB" ? "How to identify dead stock, how much capital is tied up, when to delist a reference and how to keep a live, profitable cellar." : t.locale === "it_IT" ? "Come identificare i vini morti, quanto capitale hai immobilizzato, quando ritirare un riferimento e come mantenere una cantina viva e redditizia." : "Comment identifier le stock mort, combien de capital est immobilisé, quand retirer une référence et comment maintenir une cave vivante et rentable.",
     profiles: ["sala", "compras-fb", "direccion"],
     icon: Package,
     accent: "text-emerald-500",
@@ -81,10 +80,9 @@ const areas: Area[] = [
   },
   {
     id: "compras",
-    name: "Compras y reposición",
-    tagline: "Compra con datos, no con intuición",
-    description: "Qué datos usar antes de comprar, cómo detectar sobrecostes, cuándo negociar condiciones y cómo conectar tus decisiones de compra con el rendimiento real de la carta.",
-    audience: "Responsables de compras, dirección, propietarios",
+    name: t.locale === "es_ES" ? "Compras y reposición" : t.locale === "en_GB" ? "Purchasing & Replenishment" : t.locale === "it_IT" ? "Acquisti e rifornimento" : "Achats et réapprovisionnement",
+    tagline: t.locale === "es_ES" ? "Compra con datos, no con intuición" : t.locale === "en_GB" ? "Buy with data, not intuition" : t.locale === "it_IT" ? "Acquista con i dati, non con l'intuizione" : "Achetez avec des données, pas à l'intuition",
+    description: t.locale === "es_ES" ? "Qué datos usar antes de comprar, cómo detectar sobrecostes, cuándo negociar condiciones y cómo conectar tus decisiones de compra con el rendimiento real de la carta." : t.locale === "en_GB" ? "What data to use before purchasing, how to detect overpricing, when to negotiate conditions and how to connect buying decisions with real wine list performance." : t.locale === "it_IT" ? "Quali dati usare prima di acquistare, come rilevare sovracosti, quando negoziare condizioni e come collegare le decisioni di acquisto al rendimento reale della carta." : "Quelles données utiliser avant d'acheter, comment détecter les surcoûts, quand négocier les conditions et comment relier vos décisions d'achat à la performance réelle de la carte.",
     profiles: ["compras-fb", "direccion"],
     icon: ShoppingCart,
     accent: "text-blue-500",
@@ -94,10 +92,9 @@ const areas: Area[] = [
   },
   {
     id: "carta",
-    name: "Carta y equilibrio",
-    tagline: "Tu carta debe contar una historia coherente",
-    description: "Cómo evaluar el equilibrio de tu carta por estilos, precios, regiones y tipologías. Qué canibaliza, qué falta y cómo construir una arquitectura de carta que venda sola.",
-    audience: "Sumilleres, directores de restaurante, F&B",
+    name: t.locale === "es_ES" ? "Carta y equilibrio" : t.locale === "en_GB" ? "Wine List & Balance" : t.locale === "it_IT" ? "Carta ed equilibrio" : "Carte et équilibre",
+    tagline: t.locale === "es_ES" ? "Tu carta debe contar una historia coherente" : t.locale === "en_GB" ? "Your wine list should tell a coherent story" : t.locale === "it_IT" ? "La tua carta deve raccontare una storia coerente" : "Votre carte doit raconter une histoire cohérente",
+    description: t.locale === "es_ES" ? "Cómo evaluar el equilibrio de tu carta por estilos, precios, regiones y tipologías. Qué canibaliza, qué falta y cómo construir una arquitectura de carta que venda sola." : t.locale === "en_GB" ? "How to assess your wine list balance by style, price, region and type. What cannibalises, what's missing and how to build a list architecture that sells itself." : t.locale === "it_IT" ? "Come valutare l'equilibrio della tua carta per stili, prezzi, regioni e tipologie. Cosa cannibalizza, cosa manca e come costruire un'architettura di carta che si venda da sola." : "Comment évaluer l'équilibre de votre carte par styles, prix, régions et typologies. Ce qui cannibalise, ce qui manque et comment construire une architecture de carte qui vend toute seule.",
     profiles: ["sala", "direccion", "compras-fb"],
     icon: BarChart3,
     accent: "text-wine",
@@ -107,10 +104,9 @@ const areas: Area[] = [
   },
   {
     id: "copa",
-    name: "Vino por copa",
-    tagline: "El programa de copa como motor de margen",
-    description: "Cómo diseñar, ejecutar y controlar un programa de vino por copa rentable: selección, pricing, merma, rotación y la relación entre copa y botella.",
-    audience: "Wine bars, restaurantes con copa, hoteles",
+    name: t.locale === "es_ES" ? "Vino por copa" : t.locale === "en_GB" ? "By the Glass" : t.locale === "it_IT" ? "Vino al calice" : "Vin au verre",
+    tagline: t.locale === "es_ES" ? "El programa de copa como motor de margen" : t.locale === "en_GB" ? "The by-the-glass programme as a margin driver" : t.locale === "it_IT" ? "Il programma al calice come motore di margine" : "Le programme au verre comme moteur de marge",
+    description: t.locale === "es_ES" ? "Cómo diseñar, ejecutar y controlar un programa de vino por copa rentable: selección, pricing, merma, rotación y la relación entre copa y botella." : t.locale === "en_GB" ? "How to design, run and control a profitable by-the-glass programme: selection, pricing, waste, rotation and the glass-to-bottle relationship." : t.locale === "it_IT" ? "Come progettare, gestire e controllare un programma di vino al calice redditizio: selezione, pricing, spreco, rotazione e il rapporto calice-bottiglia." : "Comment concevoir, exécuter et contrôler un programme de vin au verre rentable : sélection, tarification, perte, rotation et la relation verre-bouteille.",
     profiles: ["sala", "direccion"],
     icon: Wine,
     accent: "text-purple-500",
@@ -120,10 +116,9 @@ const areas: Area[] = [
   },
   {
     id: "grupos",
-    name: "Grupos y benchmarking",
-    tagline: "Governa la categoría vino a escala",
-    description: "Cómo comparar locales, detectar desviaciones, estandarizar criterios de compra y gestionar surtido de forma centralizada sin perder la identidad de cada restaurante.",
-    audience: "Directores de operaciones, F&B corporativo",
+    name: t.locale === "es_ES" ? "Grupos y benchmarking" : t.locale === "en_GB" ? "Groups & Benchmarking" : t.locale === "it_IT" ? "Gruppi e benchmarking" : "Groupes et benchmarking",
+    tagline: t.locale === "es_ES" ? "Gobierna la categoría vino a escala" : t.locale === "en_GB" ? "Govern the wine category at scale" : t.locale === "it_IT" ? "Governa la categoria vino su scala" : "Gouvernez la catégorie vin à grande échelle",
+    description: t.locale === "es_ES" ? "Cómo comparar locales, detectar desviaciones, estandarizar criterios de compra y gestionar surtido de forma centralizada sin perder la identidad de cada restaurante." : t.locale === "en_GB" ? "How to compare units, detect deviations, standardise purchasing criteria and manage assortment centrally without losing each restaurant's identity." : t.locale === "it_IT" ? "Come confrontare i locali, rilevare deviazioni, standardizzare i criteri di acquisto e gestire l'assortimento in modo centralizzato senza perdere l'identità di ogni ristorante." : "Comment comparer les établissements, détecter les écarts, standardiser les critères d'achat et gérer l'assortiment de manière centralisée sans perdre l'identité de chaque restaurant.",
     profiles: ["grupo", "direccion"],
     icon: Building2,
     accent: "text-rose-500",
@@ -134,7 +129,7 @@ const areas: Area[] = [
 ];
 
 /* ── Password Gate UI ── */
-const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
+const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: TranslationDict }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -159,10 +154,10 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
             <Lock size={28} className="text-wine" />
           </div>
           <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Winerim Decision Center
+            {t.dc_gate_title}
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Zona exclusiva para clientes. Introduce tu clave de acceso para continuar.
+            {t.dc_gate_subtitle}
           </p>
         </div>
 
@@ -172,7 +167,7 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
               type="password"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder="Clave de acceso"
+              placeholder={t.dc_gate_placeholder}
               className={`w-full px-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${
                 error
                   ? "border-destructive focus:ring-destructive/30"
@@ -188,21 +183,21 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
               animate={{ opacity: 1, y: 0 }}
               className="text-xs text-destructive font-medium"
             >
-              Clave incorrecta. Revisa tu email de bienvenida o contacta con tu account manager.
+              {t.dc_gate_error}
             </motion.p>
           )}
           <button
             type="submit"
             className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
           >
-            Acceder
+            {t.dc_gate_submit}
           </button>
         </form>
 
         <p className="text-center text-[11px] text-muted-foreground/50 mt-6">
-          ¿No tienes acceso?{" "}
+          {t.dc_gate_no_access}{" "}
           <Link to="/demo" className="text-wine hover:text-wine-light transition-colors">
-            Solicita una demo
+            {t.dc_gate_request_demo}
           </Link>
         </p>
       </motion.div>
@@ -213,14 +208,17 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
 /* ── Hub page ── */
 const DecisionCenter = () => {
   const { granted, unlock } = useGate();
+  const { t } = useLanguage();
+  const areas = getAreas(t);
+  const profileCfg = getProfileConfig(t);
 
-  if (!granted) return <PasswordGate onUnlock={unlock} />;
+  if (!granted) return <PasswordGate onUnlock={unlock} t={t} />;
 
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Winerim Decision Center | Zona de clientes"
-        description="Interpreta tus métricas, entiende tus datos y actúa con criterio. La capa de conocimiento estratégico de Winerim."
+        title="Winerim Decision Center"
+        description={t.dc_hub_subtitle}
         url="https://winerim.wine/decision-center"
       />
       <Navbar />
@@ -239,7 +237,7 @@ const DecisionCenter = () => {
             >
               <Sparkles size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine">
-                Zona de clientes
+                {t.dc_hub_badge}
               </span>
             </motion.div>
 
@@ -258,9 +256,7 @@ const DecisionCenter = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg text-muted-foreground max-w-3xl leading-relaxed mb-4"
             >
-              Entiende tus métricas, interpreta los insights y actúa con criterio.
-              Cada área te explica qué significan los datos, por qué importan,
-              qué hacer ahora y qué errores evitar.
+              {t.dc_hub_subtitle}
             </motion.p>
 
             <motion.div
@@ -271,11 +267,11 @@ const DecisionCenter = () => {
             >
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-wine" />
-                Software + Contexto + Acción
+                {t.dc_hub_pill_1}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
-                {areas.length} áreas estratégicas
+                {areas.length} {t.dc_hub_pill_2}
               </span>
             </motion.div>
           </div>
@@ -317,11 +313,11 @@ const DecisionCenter = () => {
                     {/* Audience — profile badges */}
                     <div className="border-t border-border pt-3 mb-4">
                       <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">
-                        Relevante para
+                        {t.dc_relevant_for}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {area.profiles.map((p) => {
-                          const cfg = profileConfig[p];
+                          const cfg = profileCfg[p];
                           const PIcon = cfg.icon;
                           return (
                             <span key={p} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
@@ -335,7 +331,7 @@ const DecisionCenter = () => {
 
                     {/* CTA */}
                     <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-wine/70 group-hover:text-wine transition-colors">
-                      Entrar <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                      {t.dc_enter} <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                     </span>
                   </Link>
                 </ScrollReveal>
@@ -349,10 +345,10 @@ const DecisionCenter = () => {
           <ScrollReveal>
             <div className="mb-8">
               <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
-                Contexto integrado en el producto
+                {t.dc_hub_insights_title}
               </h2>
               <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-                Cuando Winerim detecta una alerta o un insight, te explica qué significa, por qué importa y qué hacer. Sin salir de tu flujo de trabajo.
+                {t.dc_hub_insights_subtitle}
               </p>
             </div>
           </ScrollReveal>
@@ -370,9 +366,7 @@ const DecisionCenter = () => {
           <ScrollReveal>
             <div className="rounded-xl border border-border bg-card/50 p-8 text-center">
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mx-auto">
-                El Decision Center es una extensión estratégica de Winerim.
-                No es documentación: es contexto para actuar mejor.
-                Cada sección conecta con tus datos reales dentro de la plataforma.
+                {t.dc_hub_note}
               </p>
             </div>
           </ScrollReveal>
