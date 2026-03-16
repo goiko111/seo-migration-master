@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
   ArrowLeft, Lock, Shield, Info, Target, Lightbulb, AlertTriangle,
-  FileText, Clock, ChevronDown, Calculator, Download, BookOpen, ArrowRight, Zap
+  FileText, Clock, ChevronDown, Calculator, Download, BookOpen, ArrowRight, Zap,
+  User, Users, Briefcase, Store
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
