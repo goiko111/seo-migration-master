@@ -41,7 +41,7 @@ interface LangContent {
   errorsTitle: string; errors: string[];
   ctaBadge: string; ctaTitle: string; ctaTitleHighlight: string; ctaDesc: string;
   ctaPrimary: string; ctaSecondary: string;
-  internalLinks: { to: string; label: string; type: string }[];
+  internalLinks: { to: string; label: string; type: LinkType }[];
 }
 
 const i18n: Record<string, LangContent> = {

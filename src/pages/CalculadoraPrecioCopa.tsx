@@ -44,7 +44,7 @@ interface LangContent {
   faqs: { q: string; a: string }[];
   ctaBadge: string; ctaTitle: string; ctaTitleHighlight: string; ctaDesc: string;
   ctaPrimary: string; ctaSecondary: string;
-  internalLinks: { to: string; label: string; type: string }[];
+  internalLinks: { to: string; label: string; type: LinkType }[];
   notApplicable: string;
 }
 
