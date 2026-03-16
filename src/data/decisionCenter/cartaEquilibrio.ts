@@ -104,6 +104,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-demasiado-larga",
       title: "Cuándo una carta es demasiado larga",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha calculado tu ratio de efectividad: referencias con venta real vs. total de referencias en carta.", whyMatters: "El exceso de opciones paraliza al comensal, concentra las ventas en 15-20 referencias y convierte el resto en decoración con coste.", riskIfIgnored: "Acumulas complejidad, stock y gestión sin retorno. Tu equipo recomienda siempre lo mismo porque no puede conocer toda la carta." },
       queSignifica:
         "Una carta es demasiado larga cuando tiene más referencias de las que tu operativa puede gestionar, tu equipo puede conocer o tu comensal puede procesar. No hay un número mágico, pero hay señales claras: si más del 20% de tus referencias no se han vendido en 60 días, si tu equipo de sala no puede describir la mitad de la carta, o si el comensal tarda más de 5 minutos en elegir, tu carta es demasiado larga para tu contexto.",
