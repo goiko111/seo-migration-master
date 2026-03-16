@@ -712,9 +712,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim analiza automáticamente la composición de tu carta y te muestra los desequilibrios con recomendaciones de mejora.",
     internalLinks: [
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
-      { to: "/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos", label: "Benchmark: equilibrio de regiones y estilos", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
       { to: "/analisis-carta", label: "Analizador de carta de vinos", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico de composición", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
