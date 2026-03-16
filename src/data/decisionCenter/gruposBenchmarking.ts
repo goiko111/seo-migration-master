@@ -36,9 +36,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No normalizar por número de referencias o tamaño de carta", consequence: "Un local con 300 referencias y otro con 80 no se pueden leer igual sin ajustar." },
       ],
     },
-    {
-      id: "metricas-por-local",
-      title: "Qué métricas mirar por local",
+    { id: "metricas-por-local", title: "Qué métricas mirar por local",
+      porQueTeLoMostramos: { detected: "Winerim ha generado un dashboard de 6 KPIs homogéneos para cada uno de tus locales.", whyMatters: "Si cada local mide distinto, no puedes gobernar. Las decisiones de grupo se toman sobre datos comparables.", riskIfIgnored: "Cada local reporta lo que le conviene. No detectas desviaciones hasta que son crisis." },
       queSignifica:
         "Cada local debe ser legible con un conjunto mínimo de métricas que reveles su salud comercial en la categoría vino. No necesitas 30 indicadores: necesitas los 6 correctos. Margen medio ponderado (no el teórico, el real tras descuentos y merma), rotación media por referencia, porcentaje de vinos muertos (sin venta en 60+ días), ticket medio de vino por mesa, ratio copa/botella y coste medio de compra por referencia.",
       porQueImporta:
