@@ -9,7 +9,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority } from "@/data/decisionCenter/margenesPricing";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
