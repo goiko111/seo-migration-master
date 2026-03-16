@@ -20,6 +20,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-descompensada",
       title: "Cómo saber si una carta está descompensada",
+      porQueTeLoMostramos: { detected: "Winerim ha mapeado la distribución de tu carta por tipo, precio y origen, y ha encontrado zonas de saturación y huecos.", whyMatters: "Una carta descompensada pierde ventas (el comensal no encuentra lo que busca), canibaliza margen y acumula stock donde hay exceso.", riskIfIgnored: "Cada referencia nueva que añades sin criterio descompensa más la carta y amplifica el problema." },
       queSignifica:
         "Una carta descompensada es aquella donde la distribución de referencias no refleja lo que tu cliente realmente pide. Puede ser un exceso de tintos y casi ningún espumoso, una concentración exagerada en una franja de precio, o un 40% de la carta dedicada a una sola región. La descompensación no se ve a simple vista: se detecta cuando mapeas la carta por variables y comparas con tus datos de venta.",
       porQueImporta:
