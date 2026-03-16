@@ -76,9 +76,9 @@ const Index = () => {
             <WhoItHelpsSection />
           </Suspense>
 
-          {/* 8–9. Product architecture + Features + Dynamic Intelligence */}
+          {/* 8–9. Category leap + Features + Dynamic Intelligence */}
           <Suspense fallback={<SectionFallback />}>
-            <ProductArchitectureSection />
+            <CategoryLeapSection />
             <FeaturesPreview />
             <DynamicIntelligenceTeaser />
           </Suspense>
