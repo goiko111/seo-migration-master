@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, TrendingUp, Calculator, BarChart3,
   DollarSign, Users, RotateCcw, Layers
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, LineChart, Line
