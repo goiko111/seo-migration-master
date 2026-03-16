@@ -256,9 +256,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Dynamic Intelligence: the tactical AI layer", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: purchasing intelligence", type: "solution" },
       { to: "/funcionalidades", label: "All Winerim features", type: "resource" },
-      { to: "/demo", label: "Request personalised demo", type: "solution" },
       { to: "/herramientas", label: "Free analysis tools", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Monthly wine list scorecard", type: "resource" },
+      { to: "/precios", label: "Plans & pricing", type: "solution" },
+      { to: "/demo", label: "Request personalised demo", type: "solution" },
     ],
   },
   it: {
