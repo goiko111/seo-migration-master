@@ -223,10 +223,11 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core: 26 analytical modules", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Dynamic Intelligence: tactical AI for your list", type: "solution" },
-      { to: "/funcionalidades", label: "All Winerim features", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Smart purchasing calculator", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Dead stock calculator", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Solution for restaurant groups", type: "solution" },
-      { to: "/demo", label: "Request a personalised demo", type: "resource" },
-      { to: "/precios", label: "Plans and pricing", type: "resource" },
+      { to: "/precios", label: "Plans and pricing", type: "solution" },
+      { to: "/demo", label: "Request a personalised demo", type: "solution" },
     ],
   },
   it: {
