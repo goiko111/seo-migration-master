@@ -36,11 +36,11 @@ const useGate = () => {
 /* ── Simple areas (non-deep) ── */
 type Priority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
 
-const priorityConfig: Record<Priority, { label: string; color: string; bg: string }> = {
-  "inmediato":    { label: "Inmediato",    color: "text-destructive",  bg: "bg-destructive/10" },
-  "esta semana":  { label: "Esta semana",  color: "text-amber-500",    bg: "bg-amber-500/10" },
-  "este mes":     { label: "Este mes",     color: "text-blue-500",     bg: "bg-blue-500/10" },
-  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground", bg: "bg-muted" },
+const priorityConfig: Record<Priority, { label: string; color: string; bg: string; icon: string }> = {
+  "inmediato":    { label: "Urgente",      color: "text-red-400",             bg: "bg-red-500/10",    icon: "●" },
+  "esta semana":  { label: "Esta semana",  color: "text-amber-400",           bg: "bg-amber-500/10",  icon: "●" },
+  "este mes":     { label: "Este mes",     color: "text-blue-400",            bg: "bg-blue-500/10",   icon: "●" },
+  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
 };
 
 interface SimpleAreaContent {
