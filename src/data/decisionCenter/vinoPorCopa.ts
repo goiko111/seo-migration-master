@@ -121,6 +121,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "errores-tipicos-copeo",
       title: "Errores típicos en el copeo",
+      porQueTeLoMostramos: { detected: "Winerim ha identificado patrones operativos en tu programa de copa que coinciden con errores frecuentes del sector.", whyMatters: "Los errores de copeo se repiten cada día, cada turno. Un proceso sin control genera pérdidas acumulativas de miles de euros al año.", riskIfIgnored: "Los mismos errores se repiten servicio tras servicio. Sin protocolo, cada turno reinventa la gestión de copa." },
       queSignifica:
         "El copeo es una de las operaciones más delicadas de un restaurante: combina gestión de stock (botellas abiertas), control de merma (vino que se pierde), servicio de sala (recomendación y venta) y pricing (precio que cubre todo lo anterior). Los errores típicos no son de desconocimiento: son de falta de proceso. El equipo sabe que la merma existe, pero nadie la mide. Saben que el precio debería ser otro, pero nadie lo recalcula.",
       porQueImporta:
