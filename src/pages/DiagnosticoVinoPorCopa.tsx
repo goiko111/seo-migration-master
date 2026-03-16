@@ -5,6 +5,7 @@ import {
   ArrowRight, GlassWater, Wine, TrendingUp, AlertTriangle,
   CheckCircle, DollarSign, Layers, RotateCcw, Sparkles, Info
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
