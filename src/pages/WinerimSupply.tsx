@@ -138,10 +138,12 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core: 26 módulos analíticos", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: IA táctica para carta", type: "solution" },
-      { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/recursos/revision-mensual-margenes-y-compras", label: "Plantilla revisión mensual de márgenes", type: "resource" },
       { to: "/soluciones/grupos-restauracion", label: "Solución para grupos de restauración", type: "solution" },
-      { to: "/demo", label: "Solicitar una demo personalizada", type: "resource" },
-      { to: "/precios", label: "Planes y precios", type: "resource" },
+      { to: "/precios", label: "Planes y precios", type: "solution" },
+      { to: "/demo", label: "Solicitar una demo personalizada", type: "solution" },
     ],
   },
   en: {
@@ -221,10 +223,11 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core: 26 analytical modules", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Dynamic Intelligence: tactical AI for your list", type: "solution" },
-      { to: "/funcionalidades", label: "All Winerim features", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Smart purchasing calculator", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Dead stock calculator", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Solution for restaurant groups", type: "solution" },
-      { to: "/demo", label: "Request a personalised demo", type: "resource" },
-      { to: "/precios", label: "Plans and pricing", type: "resource" },
+      { to: "/precios", label: "Plans and pricing", type: "solution" },
+      { to: "/demo", label: "Request a personalised demo", type: "solution" },
     ],
   },
   it: {
@@ -304,10 +307,11 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core: 26 moduli analitici", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Intelligenza Dinamica: IA tattica per la carta", type: "solution" },
-      { to: "/funcionalidades", label: "Tutte le funzionalità di Winerim", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calcolatrice acquisto intelligente", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calcolatrice stock morto", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Soluzione per gruppi di ristorazione", type: "solution" },
-      { to: "/demo", label: "Richiedi una demo personalizzata", type: "resource" },
-      { to: "/precios", label: "Piani e prezzi", type: "resource" },
+      { to: "/precios", label: "Piani e prezzi", type: "solution" },
+      { to: "/demo", label: "Richiedi una demo personalizzata", type: "solution" },
     ],
   },
   fr: {
@@ -387,10 +391,11 @@ const i18n: Record<SupportedLang, {
     il: [
       { to: "/producto/winerim-core", label: "Winerim Core : 26 modules analytiques", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Intelligence Dynamique : IA tactique pour la carte", type: "solution" },
-      { to: "/funcionalidades", label: "Toutes les fonctionnalités de Winerim", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculatrice achat intelligent", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculatrice stock mort", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Solution pour groupes de restauration", type: "solution" },
-      { to: "/demo", label: "Demander une démo personnalisée", type: "resource" },
-      { to: "/precios", label: "Plans et tarifs", type: "resource" },
+      { to: "/precios", label: "Plans et tarifs", type: "solution" },
+      { to: "/demo", label: "Demander une démo personnalisée", type: "solution" },
     ],
   },
 };

@@ -1270,11 +1270,12 @@ const InteligenciaDinamica = () => {
       </main>
       <InternalLinks links={[
         { to: localePath("/producto/winerim-core"), label: tx.il_core, type: "solution" },
+        { to: localePath("/producto/winerim-supply"), label: lang === "es" ? "Winerim Supply: inteligencia de compras" : lang === "en" ? "Winerim Supply: purchasing intelligence" : lang === "it" ? "Winerim Supply: intelligenza acquisti" : "Winerim Supply : intelligence achats", type: "solution" },
         { to: localePath("/funcionalidades"), label: tx.il_features, type: "solution" },
-        { to: localePath("/software-carta-de-vinos"), label: tx.il_software, type: "solution" },
-        { to: localePath("/integraciones"), label: tx.il_integrations, type: "tool" },
-        { to: localePath("/soluciones/grupos-restauracion"), label: tx.il_groups, type: "solution" },
-        { to: localePath("/demo"), label: tx.il_demo, type: "resource" },
+        { to: localePath("/herramientas/wine-list-score"), label: lang === "es" ? "Wine List Score: evalúa tu carta" : lang === "en" ? "Wine List Score: evaluate your list" : lang === "it" ? "Wine List Score: valuta la tua carta" : "Wine List Score : évaluez votre carte", type: "tool" },
+        { to: localePath("/recursos/checklist-carta-de-vinos-rentable"), label: lang === "es" ? "Checklist carta rentable" : lang === "en" ? "Profitable wine list checklist" : lang === "it" ? "Checklist carta redditizia" : "Checklist carte rentable", type: "resource" },
+        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : lang === "en" ? "Plans & pricing" : lang === "it" ? "Piani e prezzi" : "Plans et tarifs", type: "solution" },
+        { to: localePath("/demo"), label: tx.il_demo, type: "solution" },
       ]} />
       <Footer />
     </>

@@ -44,6 +44,12 @@ export const GUIDES = {
   datosCompra: { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", label: "Usar datos para comprar vinos", description: "Rotación, márgenes y tendencias: compra con criterio.", type: "guide" as const },
 };
 
+export const PRODUCTS = {
+  core: { to: "/producto/winerim-core", label: "Winerim Core: motor analítico", description: "26 módulos de diagnóstico, pricing, stock, benchmark y arquitectura de carta.", type: "solution" as const },
+  supply: { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", description: "Comparativa de precios, alertas de sobreprecio y reposición inteligente.", type: "solution" as const },
+  id: { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: IA táctica", description: "Recomendaciones en tiempo real (RIMs™) para pricing, rotación y carta.", type: "solution" as const },
+};
+
 export const SOLUTIONS = {
   software: { to: "/software-carta-de-vinos", label: "Software de carta de vinos", description: "Plataforma completa para digitalizar y rentabilizar tu carta.", type: "solution" as const },
   funcionalidades: { to: "/funcionalidades", label: "Todas las funcionalidades", description: "11 categorías de funcionalidades especializadas en vino.", type: "solution" as const },
@@ -92,10 +98,10 @@ export const flowProblemaToDemo: NextStep[] = [
   SOLUTIONS.demo,
 ];
 
-/** blog MOFU → BOFU → demo */
+/** blog MOFU → product → demo */
 export const flowBlogToConversion: NextStep[] = [
-  ARTICLES.softwareCarta,
-  ARTICLES.ticketMedioDatos,
+  PRODUCTS.core,
+  TOOLS.analyzer,
   OTHER.comparativas,
   SOLUTIONS.demo,
 ];
@@ -108,10 +114,64 @@ export const flowFeatureToDemo: NextStep[] = [
   SOLUTIONS.demo,
 ];
 
-/** herramienta → guía → recurso → demo */
+/** herramienta → producto → recurso → demo */
 export const flowToolToDemo: NextStep[] = [
-  GUIDES.rentable,
+  PRODUCTS.core,
   RESOURCES.wineMapping,
   OTHER.casosExito,
+  SOLUTIONS.demo,
+];
+
+/** herramienta de análisis → Core → precios → demo */
+export const flowToolToCore: NextStep[] = [
+  PRODUCTS.core,
+  GUIDES.rentable,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** herramienta de compras → Supply → precios → demo */
+export const flowToolToSupply: NextStep[] = [
+  PRODUCTS.supply,
+  GUIDES.datosCompra,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** recurso → calculadora → producto → demo */
+export const flowResourceToProduct: NextStep[] = [
+  TOOLS.analyzer,
+  PRODUCTS.core,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** Core page → Supply + herramientas + recursos */
+export const flowCoreToEcosystem: NextStep[] = [
+  PRODUCTS.supply,
+  PRODUCTS.id,
+  TOOLS.analyzer,
+  RESOURCES.scorecard,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** Supply page → Core + herramientas + recursos */
+export const flowSupplyToEcosystem: NextStep[] = [
+  PRODUCTS.core,
+  PRODUCTS.id,
+  TOOLS.deadStock,
+  RESOURCES.revisionMensual,
+  SOLUTIONS.gruposPage,
+  SOLUTIONS.demo,
+];
+
+/** ID page → Core + Supply + herramientas */
+export const flowIDToEcosystem: NextStep[] = [
+  PRODUCTS.core,
+  PRODUCTS.supply,
+  TOOLS.score,
+  RESOURCES.checklistRentable,
+  SOLUTIONS.precios,
   SOLUTIONS.demo,
 ];

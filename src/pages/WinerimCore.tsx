@@ -168,9 +168,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: la capa de IA táctica", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/funcionalidades", label: "Todas las funcionalidades de Winerim", type: "resource" },
-      { to: "/demo", label: "Solicitar demo personalizada", type: "solution" },
       { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de carta", type: "resource" },
+      { to: "/precios", label: "Planes y precios", type: "solution" },
+      { to: "/demo", label: "Solicitar demo personalizada", type: "solution" },
     ],
   },
   en: {
@@ -253,9 +256,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Dynamic Intelligence: the tactical AI layer", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: purchasing intelligence", type: "solution" },
       { to: "/funcionalidades", label: "All Winerim features", type: "resource" },
-      { to: "/demo", label: "Request personalised demo", type: "solution" },
       { to: "/herramientas", label: "Free analysis tools", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Monthly wine list scorecard", type: "resource" },
+      { to: "/precios", label: "Plans & pricing", type: "solution" },
+      { to: "/demo", label: "Request personalised demo", type: "solution" },
     ],
   },
   it: {
@@ -338,9 +344,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Intelligenza Dinamica: il livello di IA tattica", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: intelligenza acquisti", type: "solution" },
       { to: "/funcionalidades", label: "Tutte le funzionalità Winerim", type: "resource" },
-      { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
       { to: "/herramientas", label: "Strumenti gratuiti di analisi", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensile della carta", type: "resource" },
+      { to: "/precios", label: "Piani e prezzi", type: "solution" },
+      { to: "/demo", label: "Richiedi demo personalizzata", type: "solution" },
     ],
   },
   fr: {
@@ -423,9 +432,12 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     ],
     links: [
       { to: "/producto/inteligencia-dinamica", label: "Intelligence Dynamique : la couche d'IA tactique", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply : intelligence achats", type: "solution" },
       { to: "/funcionalidades", label: "Toutes les fonctionnalités Winerim", type: "resource" },
-      { to: "/demo", label: "Demander démo personnalisée", type: "solution" },
       { to: "/herramientas", label: "Outils gratuits d'analyse", type: "tool" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensuel de la carte", type: "resource" },
+      { to: "/precios", label: "Plans et tarifs", type: "solution" },
+      { to: "/demo", label: "Demander démo personnalisée", type: "solution" },
     ],
   },
 };

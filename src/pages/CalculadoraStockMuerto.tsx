@@ -126,10 +126,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "Cómo interpretar los resultados",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core: detección de obsolescencia", type: "solution" },
+      { to: "/precios", label: "Planes y precios", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
   en: {
@@ -188,10 +189,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "How to interpret the results",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Dead wine detection checklist", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: improve rotation", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: data-driven purchasing", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Smart purchasing calculator", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: purchasing intelligence", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Monthly performance scorecard", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core: obsolescence detection", type: "solution" },
+      { to: "/precios", label: "Plans & pricing", type: "solution" },
+      { to: "/demo", label: "Request free demo", type: "solution" },
     ],
   },
   it: {
@@ -245,10 +247,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "Come interpretare i risultati",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist rilevamento vini morti", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: migliorare la rotazione", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: acquisti basati sui dati", type: "guide" },
-      { to: "/producto/winerim-supply", label: "Winerim Supply: intelligence acquisti", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensile rendimento", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calcolatrice acquisto intelligente", type: "tool" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: intelligenza acquisti", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: rilevamento obsolescenza", type: "solution" },
+      { to: "/precios", label: "Piani e prezzi", type: "solution" },
+      { to: "/demo", label: "Richiedi demo gratuita", type: "solution" },
     ],
   },
   fr: {
@@ -302,10 +305,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "Comment interpréter les résultats",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist détection vins morts", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook : améliorer la rotation", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook : achats basés sur les données", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculatrice achat intelligent", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply : intelligence achats", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensuel de performance", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core : détection obsolescence", type: "solution" },
+      { to: "/precios", label: "Plans et tarifs", type: "solution" },
+      { to: "/demo", label: "Demander démo gratuite", type: "solution" },
     ],
   },
 };

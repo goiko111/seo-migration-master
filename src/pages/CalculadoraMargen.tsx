@@ -103,10 +103,11 @@ const i18n: Record<string, LangContent> = {
     ctaPrimary: "Ver cómo lo resuelve Winerim Core", ctaSecondary: "Analizar mi carta gratis",
     internalLinks: [
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino", type: "guide" },
-      { to: "/blog/como-disenar-carta-vinos-rentable", label: "Cómo diseñar una carta rentable", type: "guide" },
-      { to: "/wine-pricing-tool", label: "Herramienta de pricing", type: "tool" },
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
       { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: optimiza costes de compra", type: "solution" },
+      { to: "/precios", label: "Planes y precios", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
   en: {

@@ -566,6 +566,8 @@ const CalculadoraCompraInteligente = () => {
         { to: localePath("/calculadora-margen-vino"), label: t.link_margin, type: "tool" },
         { to: localePath("/producto/winerim-supply"), label: t.link_supply, type: "solution" },
         { to: localePath("/producto/winerim-core"), label: t.link_core, type: "solution" },
+        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : lang === "en" ? "Plans & pricing" : lang === "it" ? "Piani e prezzi" : "Plans et tarifs", type: "solution" },
+        { to: localePath("/demo"), label: lang === "es" ? "Solicitar demo gratuita" : lang === "en" ? "Request free demo" : lang === "it" ? "Richiedi demo gratuita" : "Demander démo gratuite", type: "solution" },
       ]} />
       <Footer />
     </div>

@@ -105,8 +105,8 @@ export const newResources: ResourcePageData[] = [
     internalLinks: [
       { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía de vino por copa para restaurantes", type: "guide" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
-      { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: estrategia por copa", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -194,10 +194,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Controla la rotación con Winerim",
     ctaFinalDescription: "Winerim monitoriza automáticamente la rotación de cada referencia y te alerta cuando un vino no se vende. Sin auditorías manuales.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook: mejorar la rotación de vinos", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook: decidir compras con datos", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -295,10 +295,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Forma a tu equipo con Winerim",
     ctaFinalDescription: "Winerim genera automáticamente fichas de vino, maridajes y guías de recomendación personalizadas para tu carta. Tu equipo siempre preparado.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/playbook-formar-personal", label: "Playbook: formar al personal para recomendar vino", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
-      { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: fichas y recomendaciones IA", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: formación basada en datos", type: "solution" },
+      { to: "/herramientas", label: "Herramientas gratuitas de análisis", type: "tool" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -386,9 +386,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim calcula automáticamente el margen de cada referencia, sugiere ajustes de pricing y monitoriza la evolución del margen global.",
     internalLinks: [
       { to: "/calculadora-margen-vino", label: "Calculadora de margen de vino", type: "tool" },
-      { to: "/benchmarks-playbooks/benchmark-margen-por-tipo-referencia", label: "Benchmark: margen por tipo de referencia", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-distribucion-rangos-precio", label: "Benchmark: distribución de precios", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-carta-rentable", label: "Playbook: carta más rentable", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de márgenes y pricing", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: optimiza costes de compra", type: "solution" },
+      { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
 
@@ -485,10 +485,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Automatiza tu scorecard con Winerim",
     ctaFinalDescription: "Winerim genera automáticamente el scorecard de tu carta cada mes: ventas, rotación, margen y copa en un panel en tiempo real.",
     internalLinks: [
-      { to: "/benchmarks-playbooks/benchmark-peso-vino-ticket-medio", label: "Benchmark: peso del vino en ticket medio", type: "guide" },
-      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", label: "Calculadora de ticket medio", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: KPIs y análisis de rendimiento", type: "solution" },
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
     ],
   },
 
@@ -612,9 +612,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim convierte tu carta de vinos en un vendedor inteligente: recomendaciones personalizadas, diseño optimizado y analítica de conversión.",
     internalLinks: [
       { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: carta de vinos rentable", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-vender-mas-vino", label: "Playbook: vender más vino en sala", type: "guide" },
-      { to: "/software-carta-de-vinos", label: "Software carta de vinos", type: "solution" },
-      { to: "/problemas/carta-de-vinos-no-vende", label: "Mi carta de vinos no vende", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: arquitectura y diagnóstico de carta", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: recomendaciones IA", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -712,9 +712,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim analiza automáticamente la composición de tu carta y te muestra los desequilibrios con recomendaciones de mejora.",
     internalLinks: [
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
-      { to: "/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos", label: "Benchmark: equilibrio de regiones y estilos", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante", label: "Benchmark: referencias por tipo de restaurante", type: "guide" },
       { to: "/analisis-carta", label: "Analizador de carta de vinos", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico de composición", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -823,9 +823,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim genera automáticamente los datos de rendimiento, rotación y pricing que necesitas para tu revisión mensual. Sin recopilar nada manualmente.",
     internalLinks: [
       { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
-      { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist de detección de vinos muertos", type: "resource" },
-      { to: "/recursos/plantilla-analisis-margenes", label: "Plantilla de análisis de márgenes", type: "resource" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: automatiza tu revisión mensual", type: "solution" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -926,9 +926,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim centraliza la gestión de carta, stock y analítica de todos tus locales en un solo panel. KPIs, benchmarking y control de surtido automatizados.",
     internalLinks: [
       { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos de restauración", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
-      { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", label: "Guía: carta de vinos para grupos", type: "guide" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/herramientas/auditor-carta-multilocal", label: "Auditor multi-local de carta", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico multi-local", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -1013,10 +1013,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres saber si tu carta está optimizada?",
     ctaFinalDescription: "Winerim analiza tu carta de vinos y te da recomendaciones personalizadas para mejorar su estructura y rentabilidad.",
     internalLinks: [
-      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
-      { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: ¿tu carta es rentable?", type: "resource" },
-      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: arquitectura y diagnóstico", type: "solution" },
+      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -1114,10 +1114,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres un análisis completo de tu carta?",
     ctaFinalDescription: "La checklist te da el diagnóstico. Winerim te da la solución: carta digital, recomendaciones con IA y analítica de ventas.",
     internalLinks: [
-      { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico completo de carta", type: "solution" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -1225,10 +1225,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "Gestiona tu vino por copa con Winerim",
     ctaFinalDescription: "Selección, pricing, rotación y analítica de tu programa de vino por copa en una sola plataforma.",
     internalLinks: [
-      { to: "/recursos/plantilla-estrategia-vinos-por-copa", label: "Plantilla de estrategia por copa", type: "resource" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
-      { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
-      { to: "/vino-por-copa-restaurante", label: "Vino por copa: guía completa", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
+      { to: "/recursos/plantilla-estrategia-vinos-por-copa", label: "Plantilla de estrategia por copa", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
@@ -1326,10 +1326,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres un análisis automático de tu carta?",
     ctaFinalDescription: "La plantilla te da la estructura. Winerim te da el análisis completo con datos reales, recomendaciones y optimización de precios.",
     internalLinks: [
-      { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
-      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: wine mapping automatizado", type: "solution" },
+      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 ];

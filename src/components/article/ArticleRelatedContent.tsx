@@ -21,7 +21,7 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
     keywords: ["precio", "pricing", "margen", "coste", "rentab"],
     links: [
       { to: "/calculadora-margen-vino", label: "Calculadora de márgenes de vino", type: "tool" },
-      { to: "/wine-pricing-tool", label: "Herramienta de pricing de vinos", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: motor analítico de carta", type: "solution" },
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino en un restaurante", type: "guide" },
     ],
   },
@@ -29,14 +29,15 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
     keywords: ["copa", "glass", "calice", "verre"],
     links: [
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
       { to: "/vino-por-copa-restaurante", label: "Guía de vino por copa", type: "guide" },
     ],
   },
   {
     keywords: ["carta", "wine list", "diseñ", "organiz", "referencias"],
     links: [
-      { to: "/wine-list-analyzer", label: "Analizador de carta de vinos", type: "tool" },
-      { to: "/como-hacer-carta-vinos", label: "Cómo hacer una carta de vinos", type: "guide" },
+      { to: "/analisis-carta", label: "Analiza tu carta de vinos gratis", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico y arquitectura", type: "solution" },
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
     ],
   },
@@ -44,38 +45,56 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
     keywords: ["maridaje", "pairing", "abbinament", "accord"],
     links: [
       { to: "/wine-pairing-generator", label: "Generador de maridajes con IA", type: "tool" },
-      { to: "/estrategia-maridaje-restaurante", label: "Estrategia de maridaje en restaurantes", type: "guide" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: recomendaciones IA", type: "solution" },
     ],
   },
   {
-    keywords: ["rotación", "rotation", "stock", "inventario", "obsolesc"],
+    keywords: ["rotación", "rotation", "stock", "inventario", "obsolesc", "muerto", "dead"],
     links: [
-      { to: "/rotacion-vinos-restaurante", label: "Rotación de vinos en restaurantes", type: "guide" },
-      { to: "/wine-list-benchmark", label: "Benchmark de cartas de vinos", type: "tool" },
+      { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
+      { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", label: "Mejorar la rotación de vinos", type: "guide" },
+    ],
+  },
+  {
+    keywords: ["compra", "purchas", "proveedor", "distribuidor", "acquist", "achat"],
+    links: [
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: compra mejor, vende mejor", type: "solution" },
+      { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", label: "Usar datos para comprar vinos", type: "guide" },
     ],
   },
   {
     keywords: ["vender", "venta", "ticket", "revenue", "roi"],
     links: [
-      { to: "/wine-roi-calculator", label: "Calculadora de ROI", type: "tool" },
-      { to: "/aumentar-ticket-medio-vinos", label: "Cómo aumentar el ticket medio con vinos", type: "guide" },
-      { to: "/vender-mas-vino-restaurante", label: "Cómo vender más vino", type: "guide" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", label: "Calculadora de ticket medio", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de ventas y rentabilidad", type: "solution" },
+      { to: "/como-vender-mas-vino-en-un-restaurante", label: "Cómo vender más vino", type: "guide" },
     ],
   },
   {
     keywords: ["digital", "software", "tecnolog", "ia", "inteligencia"],
     links: [
-      { to: "/software-carta-vinos", label: "Software de carta de vinos", type: "solution" },
+      { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: IA táctica", type: "solution" },
       { to: "/herramientas", label: "Todas las herramientas gratuitas", type: "tool" },
+    ],
+  },
+  {
+    keywords: ["grupo", "multi", "cadena", "chain", "catena", "chaîne"],
+    links: [
+      { to: "/herramientas/auditor-carta-multilocal", label: "Auditor multi-local de carta", type: "tool" },
+      { to: "/soluciones/grupos-restauracion", label: "Soluciones para grupos de restauración", type: "solution" },
+      { to: "/guias/como-gestionar-carta-vinos-grupos-restauracion", label: "Gestionar carta en grupos", type: "guide" },
     ],
   },
 ];
 
 /** Default fallback links when no keywords match */
 const defaultLinks: RelatedLink[] = [
-  { to: "/wine-list-analyzer", label: "Analizador de carta de vinos", type: "tool" },
+  { to: "/analisis-carta", label: "Analiza tu carta de vinos gratis", type: "tool" },
+  { to: "/producto/winerim-core", label: "Winerim Core: motor analítico de carta", type: "solution" },
   { to: "/herramientas", label: "Herramientas gratuitas para carta de vinos", type: "tool" },
-  { to: "/como-hacer-carta-vinos", label: "Cómo hacer una carta de vinos", type: "guide" },
   { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
 ];
 
