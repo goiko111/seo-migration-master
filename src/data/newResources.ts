@@ -1114,10 +1114,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres un análisis completo de tu carta?",
     ctaFinalDescription: "La checklist te da el diagnóstico. Winerim te da la solución: carta digital, recomendaciones con IA y analítica de ventas.",
     internalLinks: [
-      { to: "/recursos/plantilla-carta-de-vinos", label: "Plantilla de carta de vinos", type: "resource" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico completo de carta", type: "solution" },
+      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
