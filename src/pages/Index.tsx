@@ -14,7 +14,7 @@ const WhoItHelpsSection = lazy(() => import("@/components/landing/WhoItHelpsSect
 const BusinessProfilesSection = lazy(() => import("@/components/landing/BusinessProfilesSection"));
 const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
 const DynamicIntelligenceTeaser = lazy(() => import("@/components/landing/DynamicIntelligenceTeaser"));
-const ProductArchitectureSection = lazy(() => import("@/components/landing/ProductArchitectureSection"));
+const CategoryLeapSection = lazy(() => import("@/components/landing/CategoryLeapSection"));
 const ResultsSection = lazy(() => import("@/components/landing/ResultsSection"));
 const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSection"));
 const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
