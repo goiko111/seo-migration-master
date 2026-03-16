@@ -105,8 +105,8 @@ export const newResources: ResourcePageData[] = [
     internalLinks: [
       { to: "/recursos/guia-vino-por-copa-para-restaurantes", label: "Guía de vino por copa para restaurantes", type: "guide" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
-      { to: "/benchmarks-playbooks/playbook-optimizar-vino-copa", label: "Playbook: optimizar vino por copa", type: "guide" },
-      { to: "/benchmarks-playbooks/benchmark-estrategia-por-copa", label: "Benchmark: estrategia por copa", type: "guide" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
