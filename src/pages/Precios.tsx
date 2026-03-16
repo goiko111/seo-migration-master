@@ -46,7 +46,7 @@ const ES_CONTENT = {
   whoSubtitle: "Winerim sirve a perfiles muy distintos. Encuentra el tuyo.",
   profiles: [
     { icon: "store", name: "Restaurante independiente", plan: "Starter o Pro", desc: "Carta de 30-80 referencias. Necesitas visibilidad y control sin complejidad." },
-    { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
+    { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia y compleja, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Múltiples puntos de venta, room service, bar. Necesitas consistencia y reporting." },
     { icon: "building", name: "Grupo de restauración", plan: "Enterprise", desc: "Multi-local, governance centralizada, benchmarking entre unidades y despliegue progresivo." },
   ],
