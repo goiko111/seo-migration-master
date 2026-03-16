@@ -348,19 +348,6 @@ const DefinitionSection = () => {
         </div>
       </section>
 
-      {/* Competitor comparison table */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-5xl mx-auto">
-          <ComparisonTable
-            title={compet.title}
-            subtitle={compet.subtitle}
-            columns={compet.columns}
-            rows={compet.rows}
-            highlightColumn={3}
-          />
-        </div>
-      </section>
-
       {/* FAQs */}
       <section className="bg-gradient-dark">
         <div className="max-w-3xl mx-auto px-6 md:px-12 py-20">
