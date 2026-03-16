@@ -305,10 +305,11 @@ const i18n: Record<string, LangContent> = {
     interpretTitle: "Comment interpréter les résultats",
     internalLinks: [
       { to: "/recursos/checklist-deteccion-vinos-muertos", label: "Checklist détection vins morts", type: "resource" },
-      { to: "/benchmarks-playbooks/playbook-mejorar-rotacion", label: "Playbook : améliorer la rotation", type: "guide" },
-      { to: "/benchmarks-playbooks/playbook-decidir-compras-datos", label: "Playbook : achats basés sur les données", type: "guide" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Calculatrice achat intelligent", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply : intelligence achats", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensuel de performance", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core : détection obsolescence", type: "solution" },
+      { to: "/precios", label: "Plans et tarifs", type: "solution" },
+      { to: "/demo", label: "Demander démo gratuite", type: "solution" },
     ],
   },
 };
