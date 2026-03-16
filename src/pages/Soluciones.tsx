@@ -150,6 +150,8 @@ const Soluciones = () => {
           </div>
         </section>
 
+        <WinerimSupplyBlock />
+
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>
             <div className="bg-gradient-card rounded-xl border border-border p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">

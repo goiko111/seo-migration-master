@@ -344,6 +344,10 @@ const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
         </div>
       </section>
 
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
+
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto">

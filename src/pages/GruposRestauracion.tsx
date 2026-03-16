@@ -959,6 +959,10 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
+
       {/* ── FAQs ── */}
       <FAQSection faqs={t.faqs} schemaId="grupos-restauracion" />
 

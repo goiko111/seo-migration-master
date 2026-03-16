@@ -721,6 +721,10 @@ const Hoteles = () => {
         </div>
       </section>
 
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
+
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding">
         <div className="max-w-5xl mx-auto">

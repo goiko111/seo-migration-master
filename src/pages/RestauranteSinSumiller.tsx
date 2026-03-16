@@ -565,6 +565,10 @@ const RestauranteSinSumiller = () => {
         </div>
       </section>
 
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
+
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto">
