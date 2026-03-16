@@ -68,7 +68,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
               <button
                 onClick={() => setDismissed(true)}
                 className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                aria-label="Cerrar"
+                aria-label="Close"
               >
                 <X size={16} />
               </button>

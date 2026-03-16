@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface BreadcrumbItem {
   label: string;
@@ -11,10 +12,12 @@ interface BreadcrumbsProps {
 }
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
+  const { t } = useLanguage();
+
   // Inject BreadcrumbList JSON-LD
   useEffect(() => {
     const breadcrumbItems = [
-      { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
+      { "@type": "ListItem", position: 1, name: t.breadcrumb_home, item: "https://winerim.wine/" },
       ...items.map((item, i) => ({
         "@type": "ListItem",
         position: i + 2,
@@ -38,13 +41,13 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
 
     document.head.appendChild(script);
     return () => { script.remove(); };
-  }, [items]);
+  }, [items, t.breadcrumb_home]);
 
   return (
     <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-6">
       <ol className="flex flex-wrap items-center gap-1.5">
         <li>
-          <Link to="/" className="hover:text-foreground transition-colors">Inicio</Link>
+          <Link to="/" className="hover:text-foreground transition-colors">{t.breadcrumb_home}</Link>
         </li>
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-1.5">

@@ -20,23 +20,11 @@ const Footer = () => {
       <div className="border-b border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="font-heading text-lg md:text-xl font-semibold text-foreground">
-              {lang === "es"
-                ? "¿Listo para optimizar tu carta de vinos?"
-                : lang === "en"
-                ? "Ready to optimize your wine list?"
-                : lang === "it"
-                ? "Pronto a ottimizzare la tua carta dei vini?"
-                : "Prêt à optimiser votre carte des vins ?"}
+          <h3 className="font-heading text-lg md:text-xl font-semibold text-foreground">
+              {t.footer_cta_title}
             </h3>
             <p className="text-sm text-muted-foreground mt-1">
-              {lang === "es"
-                ? "Análisis gratuito en 48 h. Sin compromiso."
-                : lang === "en"
-                ? "Free analysis within 48 h. No commitment."
-                : lang === "it"
-                ? "Analisi gratuita in 48 ore. Senza impegno."
-                : "Analyse gratuite sous 48 h. Sans engagement."}
+              {t.footer_cta_subtitle}
             </p>
           </div>
           <Link

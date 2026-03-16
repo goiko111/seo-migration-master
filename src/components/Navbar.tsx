@@ -70,7 +70,7 @@ const Navbar = memo(() => {
       href: localePath("/soluciones"),
       columns: [
         {
-          title: lang === "es" ? "Por tipo de negocio" : lang === "en" ? "By business type" : lang === "it" ? "Per tipo di attività" : "Par type d'établissement",
+          title: t.nav_by_business_type,
           items: [
             { label: t.nav_sol_gastronomic, href: localePath("/soluciones/restaurantes-gastronomicos") },
             { label: t.nav_sol_wine_bars, href: localePath("/soluciones/wine-bars") },
