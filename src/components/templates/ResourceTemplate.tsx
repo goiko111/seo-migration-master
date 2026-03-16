@@ -221,22 +221,25 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Recurso listo!</h3>
                   <p className="text-muted-foreground mb-6">
-                    {data.downloadFile ? "La descarga debería haber comenzado automáticamente." : "Revisa tu email para acceder al recurso completo."}
+                    {data.downloadFile ? "Tu descarga debería haber comenzado automáticamente." : "Revisa tu email para acceder al recurso completo."}
                   </p>
                   {data.downloadFile && (
-                    <a href={data.downloadFile} download className="inline-flex items-center gap-2 text-wine text-sm font-semibold hover:underline mb-4">
-                      <Download size={16} /> Descargar de nuevo
+                    <a href={data.downloadFile} download
+                      className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all mb-6">
+                      <Download size={16} /> Descargar ahora
                     </a>
                   )}
-                  <Link to="/analisis-carta"
-                    className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                    Analizar mi carta <ArrowRight size={16} />
-                  </Link>
+                  <div className="mt-4">
+                    <Link to="/analisis-carta"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-wine hover:underline transition-colors">
+                      Analizar mi carta <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga gratis</h3>
-                  <p className="text-sm text-muted-foreground mb-4">Rellena el formulario y recíbelo al instante.</p>
+                  <p className="text-sm text-muted-foreground mb-4">Déjanos tus datos y descarga el recurso al instante.</p>
                   <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
