@@ -20,6 +20,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si es una referencia estratégica (atracción, imagen), documéntalo como decisión consciente.",
     ],
     recurso: { label: "Calculadora de márgenes", href: "/calculadora-margen-vino" },
+    decisionCenterHref: "/decision-center/margenes-pricing",
   },
 
   "stock-muerto": {
