@@ -48,6 +48,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-bruto",
       title: "Qué es el margen bruto",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha calculado el margen bruto de cada referencia de tu carta cruzando PVP con coste de compra real.",
         whyMatters: "Si no distingues entre margen porcentual y contribución absoluta, puedes estar empujando los vinos equivocados.",
