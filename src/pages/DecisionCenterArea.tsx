@@ -53,6 +53,31 @@ const linkTypeConfig: Record<LinkType, { label: string; icon: typeof FileText; c
   solution: { label: "Solución",    icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
 };
 
+const profileConfig: Record<UserProfile, { label: string; icon: typeof User }> = {
+  "direccion":  { label: "Dirección",     icon: Briefcase },
+  "sala":       { label: "Sala",          icon: Store },
+  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
+  "grupo":      { label: "Grupo",         icon: Users },
+};
+
+const ProfileBadges = ({ audiences }: { audiences?: UserProfile[] }) => {
+  if (!audiences || audiences.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {audiences.map((a) => {
+        const cfg = profileConfig[a];
+        const Icon = cfg.icon;
+        return (
+          <span key={a} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
+            <Icon size={10} />
+            {cfg.label}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
 interface SimpleAreaContent {
   name: string;
   tagline: string;
