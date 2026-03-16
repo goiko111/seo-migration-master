@@ -90,7 +90,7 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "Replicar sin negociar condiciones para el nuevo local", consequence: "Compras al mismo proveedor pero sin el descuento por volumen. Tu margen en el local destino es peor." },
       ],
     },
-    { id: "cuando-retirar-compra", title: "Cuándo retirar una compra en una unidad",
+    { id: "cuando-retirar-compra", title: "Cuándo retirar una compra en una unidad", priority: "inmediato",
       porQueTeLoMostramos: { detected: "Winerim ha identificado referencias sin rendimiento en locales específicos: candidatas a retirada activa.", whyMatters: "En un grupo, una referencia muerta en 4 locales es 4 veces el problema. La retirada con datos es de las decisiones más rentables.", riskIfIgnored: "Mantienes stock muerto multiplicado por el número de locales. El capital inmovilizado del grupo se dispara." },
       queSignifica:
         "Retirar una compra significa dejar de reponer una referencia en un local concreto. No significa que el vino sea malo: significa que en ese local, con ese cliente, a ese precio, no rinde. Los indicadores de retirada son: más de 60 días sin venta, margen real por debajo del umbral mínimo, o existencia de una referencia mejor en la misma franja que la canibaliza.",
