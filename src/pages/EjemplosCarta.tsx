@@ -149,7 +149,7 @@ const tips = [
     title: "Cómo organizar los vinos",
     points: [
       "Agrupar por tipo (blanco, tinto, rosado, espumoso) en cartas pequeñas",
-      "Agrupar por región o estilo en cartas grandes",
+      "Agrupar por región o estilo en cartas amplias y complejas",
       "Separar la sección de vinos por copa",
       "Incluir una categoría destacada (recomendaciones, selección del chef)",
     ],
