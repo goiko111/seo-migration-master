@@ -390,7 +390,7 @@ const CalculadoraCompraInteligente = () => {
         </ScrollReveal>
       </section>
 
-      <ToolStrategicBlock lang={lang} layer="supply" decides={t.decides} avoids={t.avoids} impact={t.impact_items} />
+      <ToolStrategicBlock layer="supply" decides={t.decides} avoids={t.avoids} impact={t.impact_items} />
 
       {/* CALCULATOR */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
