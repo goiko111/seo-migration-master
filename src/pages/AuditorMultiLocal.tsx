@@ -150,6 +150,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Ratio de vino muy bajo (${v}% vs ${Math.round(a)}%). Oportunidad de mejora.`,
     issue_glass_low: (n, v) => `Ratio de copa inferior al 15%. Oportunidad de crecimiento a través de copa.`,
     issue_glass_price_low: (n, v, a) => `Precio medio de copa inferior a la media (${v}€ vs ${a}€).`,
+    decides: ["Si hay coherencia en la gestión del vino entre locales", "Qué local necesita más atención en pricing o surtido", "Si el grupo se beneficiaría de un estándar centralizado"],
+    avoids: ["Que cada local opere con criterios distintos sin control", "Desviaciones de precio que erosionan la marca", "Perder poder de negociación por falta de visión consolidada"],
+    impact: ["Detectar oportunidades de mejora en locales infrarrendidores", "Estandarizar la gestión y reducir ineficiencias", "Preparar negociaciones con distribuidores con datos de grupo"],
   },
   en: {
     seo_title: "Wine List Auditor for Multi-Location Groups | Winerim",
