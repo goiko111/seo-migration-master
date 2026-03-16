@@ -84,6 +84,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "evitar-canibalizacion-copa",
       title: "Cómo evitar canibalización entre copa y botella",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha detectado un cambio en tu ratio copa/botella que podría indicar canibalización.", whyMatters: "Si la copa le quita ventas a la botella sin aportar más margen, trabajas más para ganar menos.", riskIfIgnored: "Tu ticket medio baja sin que lo notes. Crees que tu programa de copa va bien porque se venden copas, pero el resultado total empeora." },
       queSignifica:
         "La canibalización ocurre cuando la copa le quita ventas a la botella sin aportar más margen. Si un comensal que habría pedido una botella de 28 € acaba pidiendo 2 copas de 8 € (16 € total), has perdido 12 € de venta y probablemente margen. El objetivo no es que la copa sustituya a la botella: es que capture ventas nuevas (el comensal que no habría pedido botella).",
