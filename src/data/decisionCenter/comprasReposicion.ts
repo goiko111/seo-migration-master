@@ -20,6 +20,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "comprando-mal",
       title: "Cómo saber si estás comprando mal",
+      porQueTeLoMostramos: { detected: "Winerim ha cruzado tus pedidos recientes con los datos de venta y ha detectado que parte de tu presupuesto va a referencias sin demanda real.", whyMatters: "Si compras mal, tu stock se infla, tu margen se comprime y tu carta se llena de lo que nadie pide.", riskIfIgnored: "Cada pedido por inercia financia un error recurrente que erosiona tu rentabilidad mes a mes." },
       queSignifica:
         "Comprar mal no es solo pagar demasiado. Es comprar lo que no se vende, en cantidades que no necesitas, a proveedores que no has comparado, o reponer por inercia sin mirar datos. La señal más clara de una mala compra es un stock que crece mientras las ventas no lo hacen. Si tu bodega está más llena cada mes pero tu ticket medio no sube, algo falla en la compra.",
       porQueImporta:
