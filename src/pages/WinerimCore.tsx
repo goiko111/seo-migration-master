@@ -51,6 +51,8 @@ interface CoreI18n {
   cap_eyebrow: string; cap_title: string; cap_title_hl: string;
   cap_subtitle: string;
   capabilities: { title: string; desc: string }[];
+  // Section 2b: Depth proof
+  depth_title: string; depth_text: string; depth_text2: string; depth_micro: string;
   // Section 3: Public tools bridge
   tools_eyebrow: string; tools_title: string; tools_title_hl: string;
   tools_desc: string;
