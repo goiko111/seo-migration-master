@@ -24,6 +24,20 @@ const stockRotacionContent: DeepAreaContent = {
     { label: "Blog: Cómo detectar stock muerto", href: "/article/como-detectar-stock-muerto-carta-vinos", description: "Señales de alerta y proceso para identificar vinos sin rotación", type: "article" },
     { label: "Blog: Qué vinos merece la pena reponer", href: "/article/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale del próximo pedido", type: "article" },
   ],
+  miniCases: [
+    {
+      profile: "Restaurante de hotel con 90 referencias",
+      situation: "22 referencias llevaban más de 90 días sin una sola venta. Capital inmovilizado: 3.400 €.",
+      action: "Retiró 15 referencias de carta. Sacó 5 por copa con precio agresivo. Las 2 restantes se devolvieron al proveedor.",
+      result: "Liberó 2.800 € de capital que reinvirtió en 8 referencias nuevas con demanda validada. Stock muerto bajó del 24% al 6%.",
+    },
+    {
+      profile: "Bistró urbano con 28 referencias",
+      situation: "Solo miraba ventas semanales. No detectó que 6 vinos llevaban 45 días sin rotación porque 'alguno se vendió hace poco'.",
+      action: "Configuró alerta automática en Winerim a los 30 días sin venta. Cada lunes revisa la lista y decide: impulso, copa o retirada.",
+      result: "En 3 meses pasó de 6 vinos muertos a 1. Rotación media de carta mejoró un 18%.",
+    },
+  ],
   subtopics: [
     {
       id: "stock-muerto",
