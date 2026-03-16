@@ -612,6 +612,68 @@ const CalculadoraStockMuerto = () => {
                 ))}
               </div>
             </div>
+
+            {/* ── Winerim Inaction Projection ── */}
+            {(() => {
+              const pl: Record<string, { title: string; subtitle: string; month3: string; month6: string; month12: string; capital: string; opportunity: string; total: string; liquidation: string; liqStep1: string; liqStep2: string; liqStep3: string; liqStep4: string; recoverable: string; ofCapital: string }> = {
+                es: { title: "Proyección de inacción · Winerim", subtitle: "Qué pasa si no actúas sobre este stock", month3: "En 3 meses", month6: "En 6 meses", month12: "En 12 meses", capital: "Capital inmovilizado", opportunity: "Coste oportunidad acumulado", total: "Coste total de inacción", liquidation: "Plan de liquidación recomendado", liqStep1: "Semana 1-2: Sacar las referencias de stock muerto por copa a precio especial", liqStep2: "Semana 3-4: Incluir en menú degustación o maridaje con descuento", liqStep3: "Mes 2: Contactar proveedor para devolución o canje de las que no se muevan", liqStep4: "Mes 3: Retirar de carta y no reponer. Reasignar presupuesto a top 5 por rotación", recoverable: "Recuperable estimado", ofCapital: "del capital" },
+                en: { title: "Inaction projection · Winerim", subtitle: "What happens if you don't act on this stock", month3: "In 3 months", month6: "In 6 months", month12: "In 12 months", capital: "Tied-up capital", opportunity: "Accumulated opportunity cost", total: "Total cost of inaction", liquidation: "Recommended liquidation plan", liqStep1: "Week 1-2: Offer dead stock references by the glass at a special price", liqStep2: "Week 3-4: Include in tasting menu or discounted pairing", liqStep3: "Month 2: Contact supplier for returns or exchanges for unsold items", liqStep4: "Month 3: Remove from list and don't restock. Reallocate budget to top 5 by rotation", recoverable: "Estimated recoverable", ofCapital: "of capital" },
+                it: { title: "Proiezione di inazione · Winerim", subtitle: "Cosa succede se non agisci su questo stock", month3: "In 3 mesi", month6: "In 6 mesi", month12: "In 12 mesi", capital: "Capitale immobilizzato", opportunity: "Costo opportunità accumulato", total: "Costo totale dell'inazione", liquidation: "Piano di liquidazione consigliato", liqStep1: "Settimana 1-2: Offrire le referenze morte al calice a prezzo speciale", liqStep2: "Settimana 3-4: Includere in menu degustazione o abbinamento scontato", liqStep3: "Mese 2: Contattare il fornitore per resi o cambi per gli invenduti", liqStep4: "Mese 3: Ritirare dalla carta e non riassortire. Riallocare il budget alle top 5 per rotazione", recoverable: "Recuperabile stimato", ofCapital: "del capitale" },
+                fr: { title: "Projection d'inaction · Winerim", subtitle: "Ce qui se passe si vous n'agissez pas sur ce stock", month3: "Dans 3 mois", month6: "Dans 6 mois", month12: "Dans 12 mois", capital: "Capital immobilisé", opportunity: "Coût d'opportunité accumulé", total: "Coût total de l'inaction", liquidation: "Plan de liquidation recommandé", liqStep1: "Semaine 1-2 : Proposer les références mortes au verre à prix spécial", liqStep2: "Semaine 3-4 : Inclure dans un menu dégustation ou accord avec remise", liqStep3: "Mois 2 : Contacter le fournisseur pour retours ou échanges des invendus", liqStep4: "Mois 3 : Retirer de la carte et ne pas réapprovisionner. Réalloquer le budget aux top 5 par rotation", recoverable: "Récupérable estimé", ofCapital: "du capital" },
+              };
+              const p = pl[lang] || pl.es;
+
+              const opp3 = analysis.totalCapital * OPPORTUNITY_RATE * 0.25;
+              const opp6 = analysis.totalCapital * OPPORTUNITY_RATE * 0.5;
+              const opp12 = analysis.totalCapital * OPPORTUNITY_RATE;
+              const total12 = analysis.totalCapital + opp12;
+              const recoverable = analysis.totalCapital * 0.4;
+
+              return (
+                <div className="rounded-2xl border border-amber-500/20 bg-gradient-card p-6 md:p-8 space-y-5">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Sparkles size={14} className="text-amber-500" />
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-amber-500">{p.title}</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{p.subtitle}</p>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: p.month3, opp: opp3, color: "text-amber-500" },
+                      { label: p.month6, opp: opp6, color: "text-amber-500" },
+                      { label: p.month12, opp: opp12, color: "text-destructive" },
+                    ].map((period, i) => (
+                      <div key={i} className="p-4 rounded-xl border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-2">{period.label}</p>
+                        <p className={`font-heading text-lg font-bold ${period.color}`}>{formatEur(analysis.totalCapital + period.opp)}</p>
+                        <p className="text-[10px] text-muted-foreground mt-1">{p.opportunity}: {formatEur(period.opp)}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-4 rounded-xl border border-destructive/20 bg-destructive/5 text-center">
+                    <p className="text-[10px] font-semibold tracking-widest uppercase text-destructive mb-1">{p.total} (12m)</p>
+                    <p className="font-heading text-2xl font-bold text-destructive">{formatEur(total12)}</p>
+                  </div>
+
+                  <div className="pt-4 border-t border-border space-y-3">
+                    <p className="text-xs font-semibold tracking-widest uppercase text-foreground">{p.liquidation}</p>
+                    {[p.liqStep1, p.liqStep2, p.liqStep3, p.liqStep4].map((step, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
+                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-wine/10 text-wine text-[10px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{step}</p>
+                      </div>
+                    ))}
+                    <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center">
+                      <p className="text-xs text-muted-foreground">{p.recoverable}</p>
+                      <p className="font-heading text-lg font-bold text-emerald-500">{formatEur(recoverable)} <span className="text-xs font-normal text-muted-foreground">(~40% {p.ofCapital})</span></p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
           </motion.div>
         </section>
       )}

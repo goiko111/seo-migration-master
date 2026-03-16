@@ -656,6 +656,75 @@ const CalculadoraTicketMedio = () => {
                   </div>
                 </div>
               </div>
+
+              {/* ── Winerim Executive Reading ── */}
+              {(() => {
+                const el: Record<string, { title: string; primaryLever: string; glassSplit: string; bottleSplit: string; glassRevenue: string; bottleRevenue: string; totalWineRevenue: string; perYear: string; penetrationLevel: string; low: string; moderate: string; good: string; high: string; lowAdvice: string; modAdvice: string; goodAdvice: string; highAdvice: string }> = {
+                  es: { title: "Lectura ejecutiva · Winerim", primaryLever: "Palanca prioritaria", glassSplit: "Copa", bottleSplit: "Botella", glassRevenue: "Facturación copa", bottleRevenue: "Facturación botella", totalWineRevenue: "Facturación vino total", perYear: "/año", penetrationLevel: "Nivel de penetración", low: "Bajo", moderate: "Moderado", good: "Bueno", high: "Alto", lowAdvice: "Prioridad: activar programa de copa para captar mesas que hoy no piden vino.", modAdvice: "Oportunidad: mejorar mix de gama media-alta para subir ticket sin cambiar penetración.", goodAdvice: "Foco: optimizar margen por copa y visibilidad de referencias premium.", highAdvice: "Excelente penetración. Foco en incrementar ticket medio con copa premium y maridaje visible." },
+                  en: { title: "Executive reading · Winerim", primaryLever: "Priority lever", glassSplit: "Glass", bottleSplit: "Bottle", glassRevenue: "Glass revenue", bottleRevenue: "Bottle revenue", totalWineRevenue: "Total wine revenue", perYear: "/yr", penetrationLevel: "Penetration level", low: "Low", moderate: "Moderate", good: "Good", high: "High", lowAdvice: "Priority: activate by-the-glass programme to capture tables not ordering wine.", modAdvice: "Opportunity: improve mid-high range mix to raise ticket without changing penetration.", goodAdvice: "Focus: optimise margin per glass and premium reference visibility.", highAdvice: "Excellent penetration. Focus on increasing average ticket with premium glass and visible pairings." },
+                  it: { title: "Lettura esecutiva · Winerim", primaryLever: "Leva prioritaria", glassSplit: "Calice", bottleSplit: "Bottiglia", glassRevenue: "Fatturato calice", bottleRevenue: "Fatturato bottiglia", totalWineRevenue: "Fatturato vino totale", perYear: "/anno", penetrationLevel: "Livello di penetrazione", low: "Basso", moderate: "Moderato", good: "Buono", high: "Alto", lowAdvice: "Priorità: attivare programma al calice per catturare tavoli che oggi non ordinano vino.", modAdvice: "Opportunità: migliorare il mix di gamma medio-alta per alzare lo scontrino senza cambiare la penetrazione.", goodAdvice: "Focus: ottimizzare il margine per calice e la visibilità delle referenze premium.", highAdvice: "Eccellente penetrazione. Focus sull'aumento dello scontrino medio con calice premium e abbinamento visibile." },
+                  fr: { title: "Lecture exécutive · Winerim", primaryLever: "Levier prioritaire", glassSplit: "Verre", bottleSplit: "Bouteille", glassRevenue: "CA verre", bottleRevenue: "CA bouteille", totalWineRevenue: "CA vin total", perYear: "/an", penetrationLevel: "Niveau de pénétration", low: "Bas", moderate: "Modéré", good: "Bon", high: "Élevé", lowAdvice: "Priorité : activer le programme au verre pour capter les tables qui ne commandent pas de vin.", modAdvice: "Opportunité : améliorer le mix milieu-haut de gamme pour monter le ticket sans changer la pénétration.", goodAdvice: "Focus : optimiser la marge par verre et la visibilité des références premium.", highAdvice: "Excellente pénétration. Focus sur l'augmentation du ticket moyen avec verre premium et accords visibles." },
+                };
+                const e = el[lang] || el.es;
+
+                const glassRev = results.facturacionActual * (ratioCopa / 100);
+                const bottleRev = results.facturacionActual - glassRev;
+                const annualRev = results.facturacionActual * 12;
+                const penetrationLevel = ratioVino < 25 ? "low" : ratioVino < 45 ? "moderate" : ratioVino < 65 ? "good" : "high";
+                const penetrationLabel = penetrationLevel === "low" ? e.low : penetrationLevel === "moderate" ? e.moderate : penetrationLevel === "good" ? e.good : e.high;
+                const penetrationColor = penetrationLevel === "low" ? "text-destructive" : penetrationLevel === "moderate" ? "text-amber-500" : "text-emerald-500";
+                const penetrationBg = penetrationLevel === "low" ? "bg-destructive/10" : penetrationLevel === "moderate" ? "bg-amber-500/10" : "bg-emerald-500/10";
+                const advice = penetrationLevel === "low" ? e.lowAdvice : penetrationLevel === "moderate" ? e.modAdvice : penetrationLevel === "good" ? e.goodAdvice : e.highAdvice;
+
+                const glassWidth = ratioCopa;
+                const bottleWidth = 100 - ratioCopa;
+
+                return (
+                  <div className="rounded-xl border border-amber-500/20 bg-gradient-card p-5 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Sparkles size={14} className="text-amber-500" />
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-amber-500">{e.title}</p>
+                    </div>
+
+                    {/* Glass vs Bottle split bar */}
+                    <div className="space-y-2">
+                      <div className="flex gap-0.5 h-8 rounded-lg overflow-hidden">
+                        <div className="bg-wine/30 flex items-center justify-center" style={{ width: `${Math.max(glassWidth, 5)}%` }}>
+                          <span className="text-[10px] font-bold text-foreground">{ratioCopa}%</span>
+                        </div>
+                        <div className="bg-amber-500/20 flex items-center justify-center" style={{ width: `${Math.max(bottleWidth, 5)}%` }}>
+                          <span className="text-[10px] font-bold text-foreground">{100 - ratioCopa}%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between text-[10px] text-muted-foreground">
+                        <span>{e.glassSplit}: {fmtEur(glassRev)}</span>
+                        <span>{e.bottleSplit}: {fmtEur(bottleRev)}</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="p-3 rounded-lg border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{e.totalWineRevenue}</p>
+                        <p className="font-heading text-lg font-bold">{fmtEur(results.facturacionActual)}</p>
+                        <p className="text-[10px] text-muted-foreground">{fmtEur(annualRev)}{e.perYear}</p>
+                      </div>
+                      <div className="p-3 rounded-lg border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{e.penetrationLevel}</p>
+                        <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-bold ${penetrationBg} ${penetrationColor}`}>{penetrationLabel}</span>
+                        <p className="text-[10px] text-muted-foreground mt-1">{ratioVino}%</p>
+                      </div>
+                      <div className="p-3 rounded-lg border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{e.primaryLever}</p>
+                        <p className="text-xs font-bold text-wine">{ratioVino < 40 ? e.glassSplit : e.bottleSplit + " mix"}</p>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-border">
+                      <p className="text-sm text-muted-foreground leading-relaxed"><span className="font-medium text-foreground">{e.primaryLever}:</span> {advice}</p>
+                    </div>
+                  </div>
+                );
+              })()}
             </motion.div>
           )}
         </div>

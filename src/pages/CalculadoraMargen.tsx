@@ -529,6 +529,67 @@ const CalculadoraMargen = () => {
                   {t.insightText(glassesPerBottle, results.glassPrice.toFixed(2), results.breakEvenGlasses)}
                 </p>
               </div>
+
+              {/* ── Winerim Diagnostic Panel ── */}
+              {(() => {
+                const diagLabels: Record<string, { title: string; health: string; deviation: string; advice: string; optimal: string; low: string; critical: string; yourMargin: string; target: string; aboveTarget: string; belowTarget: string; adjustUp: string; adjustDown: string; healthy: string }> = {
+                  es: { title: "Diagnóstico Winerim", health: "Salud del margen", deviation: "Desviación vs recomendado", advice: "Recomendación", optimal: "Óptimo", low: "Bajo", critical: "Crítico", yourMargin: "Tu margen", target: "Objetivo", aboveTarget: "Tu precio está por encima del recomendado. Verifica que la percepción del comensal no penalice la rotación.", belowTarget: "Tu precio está por debajo del recomendado. Estás dejando margen sobre la mesa.", adjustUp: "Sube el precio gradualmente (1-2 €) y mide el impacto en rotación durante 2 semanas.", adjustDown: "El margen actual es saludable. Mantén el precio y revisa trimestralmente.", healthy: "Margen alineado con el tipo de vino. Sin acción inmediata necesaria." },
+                  en: { title: "Winerim Diagnosis", health: "Margin health", deviation: "Deviation vs recommended", advice: "Recommendation", optimal: "Optimal", low: "Low", critical: "Critical", yourMargin: "Your margin", target: "Target", aboveTarget: "Your price is above recommended. Check that guest perception isn't penalising rotation.", belowTarget: "Your price is below recommended. You're leaving margin on the table.", adjustUp: "Raise price gradually (€1-2) and measure rotation impact over 2 weeks.", adjustDown: "Current margin is healthy. Maintain price and review quarterly.", healthy: "Margin aligned with wine type. No immediate action needed." },
+                  it: { title: "Diagnosi Winerim", health: "Salute del margine", deviation: "Deviazione vs consigliato", advice: "Raccomandazione", optimal: "Ottimale", low: "Basso", critical: "Critico", yourMargin: "Il tuo margine", target: "Obiettivo", aboveTarget: "Il tuo prezzo è sopra il consigliato. Verifica che la percezione del cliente non penalizzi la rotazione.", belowTarget: "Il tuo prezzo è sotto il consigliato. Stai lasciando margine sul tavolo.", adjustUp: "Alza il prezzo gradualmente (1-2 €) e misura l'impatto sulla rotazione per 2 settimane.", adjustDown: "Il margine attuale è sano. Mantieni il prezzo e rivedi trimestralmente.", healthy: "Margine allineato al tipo di vino. Nessuna azione immediata necessaria." },
+                  fr: { title: "Diagnostic Winerim", health: "Santé de la marge", deviation: "Écart vs recommandé", advice: "Recommandation", optimal: "Optimal", low: "Bas", critical: "Critique", yourMargin: "Votre marge", target: "Objectif", aboveTarget: "Votre prix est au-dessus du recommandé. Vérifiez que la perception client ne pénalise pas la rotation.", belowTarget: "Votre prix est en dessous du recommandé. Vous laissez de la marge sur la table.", adjustUp: "Augmentez le prix progressivement (1-2 €) et mesurez l'impact sur la rotation pendant 2 semaines.", adjustDown: "La marge actuelle est saine. Maintenez le prix et révisez trimestriellement.", healthy: "Marge alignée avec le type de vin. Aucune action immédiate nécessaire." },
+                };
+                const dl = diagLabels[lang] || diagLabels.es;
+                const marginHealth = results.marginPercent >= 70 ? "optimal" : results.marginPercent >= 55 ? "low" : "critical";
+                const healthColor = marginHealth === "optimal" ? "text-emerald-500" : marginHealth === "low" ? "text-amber-500" : "text-destructive";
+                const healthBg = marginHealth === "optimal" ? "bg-emerald-500/10" : marginHealth === "low" ? "bg-amber-500/10" : "bg-destructive/10";
+                const healthLabel = marginHealth === "optimal" ? dl.optimal : marginHealth === "low" ? dl.low : dl.critical;
+                const targetMargin = wineType === "entry" ? 72 : wineType === "mid" ? 65 : wineType === "premium" ? 55 : 45;
+                const marginDelta = results.marginPercent - targetMargin;
+                const hasComparison = currentPrice && currentPrice > 0;
+                const adviceText = !hasComparison ? dl.healthy : results.priceDiff! > 3 ? dl.aboveTarget : results.priceDiff! < -2 ? dl.belowTarget : dl.healthy;
+                const actionText = results.marginPercent < 55 ? dl.adjustUp : dl.adjustDown;
+
+                return (
+                  <div className="mt-6 rounded-xl border border-amber-500/20 bg-gradient-card p-5 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Sparkles size={14} className="text-amber-500" />
+                      <p className="text-xs font-semibold tracking-[0.2em] uppercase text-amber-500">{dl.title}</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3 rounded-lg border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{dl.health}</p>
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${healthBg} ${healthColor}`}>{healthLabel}</span>
+                        <p className="text-xs text-muted-foreground mt-1">{results.marginPercent.toFixed(0)}% — {dl.target}: {targetMargin}%</p>
+                      </div>
+                      <div className="p-3 rounded-lg border border-border bg-background text-center">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{dl.deviation}</p>
+                        <p className={`font-heading text-xl font-bold ${marginDelta >= 0 ? "text-emerald-500" : "text-amber-500"}`}>
+                          {marginDelta >= 0 ? "+" : ""}{marginDelta.toFixed(0)}pp
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">{dl.yourMargin} vs {dl.target.toLowerCase()}</p>
+                      </div>
+                    </div>
+
+                    {/* Margin bar */}
+                    <div className="space-y-1">
+                      <div className="h-3 rounded-full bg-muted/30 overflow-hidden relative">
+                        <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-destructive via-amber-500 to-emerald-500" style={{ width: `${Math.min(results.marginPercent, 100)}%` }} />
+                        <div className="absolute inset-y-0 w-0.5 bg-foreground/30" style={{ left: `${targetMargin}%` }} />
+                      </div>
+                      <div className="flex justify-between text-[10px] text-muted-foreground">
+                        <span>0%</span><span>{dl.target}: {targetMargin}%</span><span>100%</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-border">
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{dl.advice}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{adviceText}</p>
+                      <p className="text-sm text-foreground font-medium mt-1 leading-relaxed">{actionText}</p>
+                    </div>
+                  </div>
+                );
+              })()}
             </motion.div>
           </div>
         </div>
