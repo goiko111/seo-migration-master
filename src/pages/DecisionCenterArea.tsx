@@ -13,6 +13,7 @@ import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/d
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
+import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
