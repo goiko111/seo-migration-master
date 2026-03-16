@@ -83,6 +83,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "equilibrio-origen",
       title: "Equilibrio por origen",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha analizado la distribución de tu carta por denominación y origen y ha detectado sobreconcentración o dispersión.", whyMatters: "La concentración de origen genera riesgo de compra (dependencia de un mercado) y puede no reflejar lo que pide tu clientela.", riskIfIgnored: "Si tu DO principal sube precios, no tienes alternativas. Y tu carta cuenta una historia que quizás no coincide con tu cliente." },
       queSignifica:
         "El equilibrio por origen evalúa cómo se distribuyen tus referencias por denominación, región o país. Una concentración excesiva en un origen puede limitar tu oferta y crear dependencia de un mercado de compra. Una distribución demasiado dispersa puede generar una carta sin identidad. El punto óptimo depende de tu concepto: un restaurante de cocina regional tiene lógica de concentración; uno cosmopolita necesita amplitud.",
