@@ -56,38 +56,6 @@ interface SimpleAreaContent {
 }
 
 const simpleAreas: Record<string, SimpleAreaContent> = {
-  "carta-equilibrio": {
-    name: "Carta y equilibrio", tagline: "Tu carta debe contar una historia coherente",
-    icon: BarChart3, accent: "text-wine", bg: "bg-wine/10", priority: "este mes",
-    queSignifica: [
-      "El equilibrio de una carta no es tener 'un poco de todo'. Es que cada referencia tenga un rol claro.",
-      "La canibalización ocurre cuando dos o más vinos compiten por el mismo cliente en la misma franja.",
-      "Una carta equilibrada no es la más grande, sino la más coherente con tu concepto.",
-    ],
-    porQueImporta: [
-      "Una carta inflada ralentiza al comensal, reduce la conversión y aumenta el stock muerto.",
-      "Un desequilibrio por tipo puede estar ignorando lo que realmente pide tu cliente.",
-      "La arquitectura de carta define tu posicionamiento, tu margen medio y tu experiencia de mesa.",
-      "Cada referencia que añades sin quitar otra diluye la atención.",
-    ],
-    queHacerAhora: [
-      "Mapea tu carta por franjas de precio y detecta huecos o saturaciones.",
-      "Identifica pares de referencias que compiten entre sí.",
-      "Evalúa si la distribución por tipos refleja lo que realmente pide tu clientela.",
-      "Revisa si tu carta cuenta una historia coherente con tu concepto gastronómico.",
-    ],
-    erroresComunes: [
-      { mistake: "Añadir referencias sin retirar otras", consequence: "La carta crece por inercia y se convierte en un catálogo inmanejable." },
-      { mistake: "No tener criterio de arquitectura", consequence: "Cada cambio es reactivo y la carta pierde coherencia." },
-      { mistake: "Sobrerepresentar una región o estilo por gustos personales", consequence: "Tu carta habla de ti, no de tu cliente." },
-      { mistake: "No adaptar el equilibrio al perfil real del cliente", consequence: "Ofreces lo que no se pide y no ofreces lo que sí se vendería." },
-    ],
-    aprenderMas: [
-      { label: "Plantilla de equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta" },
-      { label: "Plantilla wine mapping", href: "/recursos/plantilla-wine-mapping-restaurante" },
-      { label: "Guía: Detectar canibalización", href: "/guias/como-detectar-canibalizacion-vinos-carta" },
-    ],
-  },
   "vino-por-copa": {
     name: "Vino por copa", tagline: "El programa de copa como motor de margen",
     icon: Wine, accent: "text-purple-500", bg: "bg-purple-500/10", priority: "esta semana",
