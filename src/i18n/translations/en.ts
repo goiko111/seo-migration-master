@@ -36,7 +36,9 @@ const en: TranslationDict = {
 
   nav_resources: "Resources",
   nav_resources_learn: "Learn",
+  nav_resources_downloads: "Downloads",
   nav_resources_tools: "Tools",
+  nav_downloadable_resources: "Downloadable resources",
   nav_benchmarks: "Benchmarks & Playbooks",
 
   nav_platform: "Platform",
