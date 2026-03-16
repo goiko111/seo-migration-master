@@ -14,6 +14,7 @@ import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
+import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
@@ -56,40 +57,7 @@ interface SimpleAreaContent {
   aprenderMas: { label: string; href: string }[];
 }
 
-const simpleAreas: Record<string, SimpleAreaContent> = {
-  "grupos-benchmarking": {
-    name: "Grupos y benchmarking", tagline: "Governa la categoría vino a escala",
-    icon: Building2, accent: "text-rose-500", bg: "bg-rose-500/10", priority: "este mes",
-    queSignifica: [
-      "Gestionar la categoría vino en un grupo no es replicar la misma carta en todos los locales.",
-      "El benchmarking interno permite detectar desviaciones antes de que impacten en resultados.",
-      "Sin datos comparativos, cada local opera como una isla.",
-    ],
-    porQueImporta: [
-      "Una desviación de pricing del 15% entre locales destruye la coherencia de marca.",
-      "Sin benchmarking, los problemas no se detectan hasta el cierre trimestral.",
-      "Centralizar compras sin visibilidad de rendimiento es comprar a ciegas.",
-      "El control de la categoría vino a escala es una ventaja competitiva real.",
-    ],
-    queHacerAhora: [
-      "Compara el top 10 de cada local: ¿venden lo mismo o hay divergencias?",
-      "Detecta locales con márgenes por debajo de la media del grupo.",
-      "Evalúa si la política de compras se ejecuta con coherencia en cada punto de venta.",
-      "Establece un scorecard mensual comparativo entre locales.",
-    ],
-    erroresComunes: [
-      { mistake: "Imponer la misma carta en todos los locales sin adaptar", consequence: "Pierdes relevancia local y generas stock muerto." },
-      { mistake: "No tener benchmarking interno", consequence: "Cada local toma decisiones aisladas." },
-      { mistake: "Centralizar compras sin datos de rendimiento por local", consequence: "Compras para el grupo sin saber si cada local vende lo que recibe." },
-      { mistake: "No detectar desviaciones de pricing a tiempo", consequence: "Un local vende 3 € más barato y no lo sabes hasta la queja." },
-    ],
-    aprenderMas: [
-      { label: "Control para grupos", href: "/recursos/plantilla-control-grupo-restauracion" },
-      { label: "Guía: Gestionar carta en grupos", href: "/guias/como-gestionar-carta-vinos-grupos-restauracion" },
-      { label: "Solución para grupos de restauración", href: "/soluciones/grupos-restauracion" },
-    ],
-  },
-};
+const simpleAreas: Record<string, SimpleAreaContent> = {};
 
 /* ── Gate UI ── */
 const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
@@ -494,6 +462,7 @@ const DecisionCenterArea = () => {
     "compras-reposicion": comprasReposicionContent,
     "carta-equilibrio": cartaEquilibrioContent,
     "vino-por-copa": vinoPorCopaContent,
+    "grupos-benchmarking": gruposBenchmarkingContent,
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
