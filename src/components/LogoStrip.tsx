@@ -82,6 +82,7 @@ const hotelLogos: LogoItem[] = [
   { name: "EM Hotels", logo: logoEm, isWhite: true },
 ];
 
+
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
 
