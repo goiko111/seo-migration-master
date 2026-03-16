@@ -53,10 +53,10 @@ interface CoreI18n {
   capabilities: { title: string; desc: string }[];
   // Section 2b: Depth proof
   depth_title: string; depth_text: string; depth_text2: string; depth_micro: string;
-  // Section 3: Public tools bridge
-  tools_eyebrow: string; tools_title: string; tools_title_hl: string;
-  tools_desc: string;
-  tools_examples: { tool: string; core_module: string }[];
+  // Section 3: Tools → Core bridge
+  tools_title: string; tools_subtitle: string;
+  tools_connections: { tool: string; link: string; core_label: string }[];
+  tools_closing: string;
   tools_cta: string;
   // Section 4: ID bridge
   bridge_eyebrow: string; bridge_title: string; bridge_title_hl: string;
