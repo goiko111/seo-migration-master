@@ -619,6 +619,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: carta de vinos rentable", type: "resource" },
       { to: "/producto/winerim-core", label: "Winerim Core: arquitectura y diagnóstico de carta", type: "solution" },
       { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: recomendaciones IA", type: "solution" },
+      { to: "/decision-center/carta-equilibrio", label: "Decision Center: carta y equilibrio", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
