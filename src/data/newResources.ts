@@ -926,9 +926,9 @@ export const newResources: ResourcePageData[] = [
     ctaFinalDescription: "Winerim centraliza la gestión de carta, stock y analítica de todos tus locales en un solo panel. KPIs, benchmarking y control de surtido automatizados.",
     internalLinks: [
       { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos de restauración", type: "solution" },
-      { to: "/recursos/scorecard-rendimiento-carta", label: "Scorecard mensual de rendimiento", type: "resource" },
-      { to: "/guias/como-estructurar-carta-vinos-grupo-restauracion", label: "Guía: carta de vinos para grupos", type: "guide" },
-      { to: "/funcionalidades", label: "Funcionalidades de Winerim", type: "solution" },
+      { to: "/herramientas/auditor-carta-multilocal", label: "Auditor multi-local de carta", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico multi-local", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
