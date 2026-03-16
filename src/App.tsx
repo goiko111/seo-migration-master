@@ -59,6 +59,7 @@ const ComoOrganizarCarta = lazy(() => import("./pages/ComoOrganizarCarta"));
 const CuantosVinosCarta = lazy(() => import("./pages/CuantosVinosCarta"));
 const CartaVinosRentable = lazy(() => import("./pages/CartaVinosRentable"));
 const GuiasRecursos = lazy(() => import("./pages/GuiasRecursos"));
+const Recursos = lazy(() => import("./pages/Recursos"));
 const WhatIsWinerim = lazy(() => import("./pages/WhatIsWinerim"));
 const AiWineSoftware = lazy(() => import("./pages/AiWineSoftware"));
 const ComoHacerCartaVinos = lazy(() => import("./pages/ComoHacerCartaVinos"));
@@ -169,6 +170,7 @@ const esRoutes = (
     <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
     <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
     <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
+    <Route path="/recursos" element={<Recursos />} />
     <Route path="/recursos/:slug" element={<ResourcePage />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
@@ -239,6 +241,9 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/outils`} element={<Herramientas />} />
     <Route path={`${prefix}/guides`} element={<GuiasRecursos />} />
     <Route path={`${prefix}/guide`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/resources`} element={<Recursos />} />
+    <Route path={`${prefix}/risorse`} element={<Recursos />} />
+    <Route path={`${prefix}/ressources`} element={<Recursos />} />
     <Route path={`${prefix}/solutions`} element={<Soluciones />} />
     <Route path={`${prefix}/soluzioni`} element={<Soluciones />} />
     <Route path={`${prefix}/challenges`} element={<Problemas />} />

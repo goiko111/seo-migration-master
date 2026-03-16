@@ -32,6 +32,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/casos-exito": "/en/case-studies",
     "/herramientas": "/en/tools",
     "/guias-y-recursos": "/en/guides",
+    "/recursos": "/en/resources",
     "/soluciones": "/en/solutions",
     "/problemas": "/en/challenges",
     "/sommelier-corner": "/en/sommelier-corner",
@@ -60,6 +61,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/casos-exito": "/it/casi-di-successo",
     "/herramientas": "/it/strumenti",
     "/guias-y-recursos": "/it/guide",
+    "/recursos": "/it/risorse",
     "/soluciones": "/it/soluzioni",
     "/problemas": "/it/sfide",
     "/sommelier-corner": "/it/sommelier-corner",
@@ -88,6 +90,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/casos-exito": "/fr/cas-clients",
     "/herramientas": "/fr/outils",
     "/guias-y-recursos": "/fr/guides",
+    "/recursos": "/fr/ressources",
     "/soluciones": "/fr/solutions",
     "/problemas": "/fr/defis",
     "/sommelier-corner": "/fr/sommelier-corner",
@@ -147,7 +150,9 @@ export interface TranslationDict {
   // Nav - Resources mega
   nav_resources: string;
   nav_resources_learn: string;
+  nav_resources_downloads: string;
   nav_resources_tools: string;
+  nav_downloadable_resources: string;
   nav_benchmarks: string;
 
   // Nav sections

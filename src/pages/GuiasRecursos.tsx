@@ -28,60 +28,60 @@ type LangContent = {
 
 const langContent: Record<string, LangContent> = {
   es: {
-    metaTitle: "Guías y recursos para restaurantes | Winerim",
-    metaDesc: "Guías prácticas, herramientas y recursos para optimizar tu carta de vinos. Todo esto lo automatiza Winerim: ahorra tiempo, reduce costes y vende más.",
-    heroLabel: "Centro de conocimiento", heroTitle: "Guías y recursos",
-    heroDesc: "Todo lo que necesitas saber para rentabilizar tu carta de vinos. Y la mejor parte: con Winerim, todo esto se automatiza para que tú te centres en vender.",
+    metaTitle: "Guías prácticas para restaurantes | Winerim",
+    metaDesc: "Guías prácticas y artículos para aprender a optimizar tu carta de vinos. Estrategia, pricing, rotación, equipo y más.",
+    heroLabel: "Centro de conocimiento", heroTitle: "Guías",
+    heroDesc: "Aprende las mejores prácticas para rentabilizar tu carta de vinos. Y la mejor parte: con Winerim, todo esto se automatiza.",
     guidesTitle: "Guías y artículos", guidesDesc: "Aprende las mejores prácticas — o deja que Winerim las aplique por ti automáticamente.",
     resourcesTitle: "Recursos descargables", resourcesDesc: "Plantillas y checklists útiles. Como cliente de Winerim, ya están integradas en tu panel.",
     toolsTitle: "Herramientas gratuitas", toolsDesc: "Pruébalas gratis aquí. Como cliente de Winerim, las tienes todas integradas y automatizadas.", toolsAll: "Ver todas →",
     solutionsTitle: "Soluciones por caso de uso", solutionsDesc: "¿Reconoces tu situación? Winerim ya lo resuelve.",
-    ctaTitle: "¿Por qué hacerlo manual si Winerim lo automatiza?", ctaDesc: "Todo lo que ves en esta página — análisis, pricing, maridajes, rotación — Winerim lo hace automáticamente. Ahorra horas de gestión cada semana y aumenta tus ventas de vino.",
+    ctaTitle: "¿Por qué hacerlo manual si Winerim lo automatiza?", ctaDesc: "Todo lo que ves en esta página — análisis, pricing, maridajes, rotación — Winerim lo hace automáticamente.",
     ctaPrimary: "Analizar mi carta gratis", ctaSecondary: "Solicitar demo",
     readMore: "Leer guía", download: "Descargar", useTool: "Usar herramienta", viewSolution: "Ver solución",
-    all: "Todos", items: "recursos",
+    all: "Todos", items: "guías",
   },
   en: {
-    metaTitle: "Guides & Resources for Restaurants | Winerim",
-    metaDesc: "Practical guides, free tools, and resources to optimize your wine list. Winerim automates all of this: save time, cut costs, and sell more.",
-    heroLabel: "Knowledge center", heroTitle: "Guides & Resources",
-    heroDesc: "Everything you need to know to monetize your wine list. The best part: Winerim automates it all so you can focus on selling.",
+    metaTitle: "Practical Guides for Restaurants | Winerim",
+    metaDesc: "Practical guides and articles to learn how to optimize your wine list. Strategy, pricing, rotation, team and more.",
+    heroLabel: "Knowledge center", heroTitle: "Guides",
+    heroDesc: "Learn best practices to monetize your wine list. The best part: Winerim automates it all.",
     guidesTitle: "Guides & Articles", guidesDesc: "Learn best practices — or let Winerim apply them automatically for you.",
-    resourcesTitle: "Downloadable Resources", resourcesDesc: "Useful templates and checklists. As a Winerim client, they're already built into your dashboard.",
-    toolsTitle: "Free Tools", toolsDesc: "Try them free here. As a Winerim client, they're all integrated and automated.", toolsAll: "View all →",
+    resourcesTitle: "Downloadable Resources", resourcesDesc: "Useful templates and checklists.",
+    toolsTitle: "Free Tools", toolsDesc: "Try them free here.", toolsAll: "View all →",
     solutionsTitle: "Solutions by Use Case", solutionsDesc: "Recognize your situation? Winerim already solves it.",
-    ctaTitle: "Why do it manually when Winerim automates it?", ctaDesc: "Everything on this page — analysis, pricing, pairings, rotation — Winerim does it automatically. Save hours of management every week and increase wine sales.",
+    ctaTitle: "Why do it manually when Winerim automates it?", ctaDesc: "Everything on this page — analysis, pricing, pairings, rotation — Winerim does it automatically.",
     ctaPrimary: "Analyze my list free", ctaSecondary: "Request demo",
     readMore: "Read guide", download: "Download", useTool: "Use tool", viewSolution: "View solution",
-    all: "All", items: "resources",
+    all: "All", items: "guides",
   },
   it: {
-    metaTitle: "Guide e Risorse per Ristoranti | Winerim",
-    metaDesc: "Guide pratiche, strumenti e risorse per ottimizzare la tua carta dei vini. Winerim automatizza tutto: risparmia tempo, riduci costi e vendi di più.",
-    heroLabel: "Centro conoscenze", heroTitle: "Guide e Risorse",
-    heroDesc: "Tutto ciò che devi sapere per rendere redditizia la tua carta dei vini. E il bello è che Winerim automatizza tutto per te.",
+    metaTitle: "Guide pratiche per ristoranti | Winerim",
+    metaDesc: "Guide pratiche e articoli per imparare a ottimizzare la tua carta dei vini.",
+    heroLabel: "Centro conoscenze", heroTitle: "Guide",
+    heroDesc: "Impara le best practice per rendere redditizia la tua carta dei vini. Il bello è che Winerim automatizza tutto.",
     guidesTitle: "Guide e Articoli", guidesDesc: "Impara le best practice — oppure lascia che Winerim le applichi automaticamente.",
-    resourcesTitle: "Risorse scaricabili", resourcesDesc: "Template e checklist utili. Come cliente Winerim, sono già integrate nel tuo pannello.",
-    toolsTitle: "Strumenti gratuiti", toolsDesc: "Provali gratis qui. Come cliente Winerim, li hai tutti integrati e automatizzati.", toolsAll: "Vedi tutti →",
+    resourcesTitle: "Risorse scaricabili", resourcesDesc: "Template e checklist utili.",
+    toolsTitle: "Strumenti gratuiti", toolsDesc: "Provali gratis qui.", toolsAll: "Vedi tutti →",
     solutionsTitle: "Soluzioni per caso d'uso", solutionsDesc: "Riconosci la tua situazione? Winerim la risolve già.",
-    ctaTitle: "Perché farlo manualmente se Winerim lo automatizza?", ctaDesc: "Tutto quello che vedi in questa pagina — analisi, pricing, abbinamenti, rotazione — Winerim lo fa automaticamente. Risparmia ore di gestione ogni settimana e vendi più vino dal primo giorno.",
+    ctaTitle: "Perché farlo manualmente se Winerim lo automatizza?", ctaDesc: "Tutto quello che vedi in questa pagina — analisi, pricing, abbinamenti, rotazione — Winerim lo fa automaticamente.",
     ctaPrimary: "Analizza la mia carta gratis", ctaSecondary: "Richiedi demo",
     readMore: "Leggi guida", download: "Scarica", useTool: "Usa strumento", viewSolution: "Vedi soluzione",
-    all: "Tutti", items: "risorse",
+    all: "Tutti", items: "guide",
   },
   fr: {
-    metaTitle: "Guides et Ressources pour Restaurants | Winerim",
-    metaDesc: "Guides pratiques, outils et ressources pour optimiser votre carte des vins. Winerim automatise tout : gagnez du temps, réduisez les coûts et vendez plus.",
-    heroLabel: "Centre de connaissances", heroTitle: "Guides et Ressources",
-    heroDesc: "Tout ce que vous devez savoir pour rentabiliser votre carte des vins. Et le meilleur : Winerim automatise tout pour que vous vous concentriez sur la vente.",
+    metaTitle: "Guides pratiques pour restaurants | Winerim",
+    metaDesc: "Guides pratiques et articles pour optimiser votre carte des vins.",
+    heroLabel: "Centre de connaissances", heroTitle: "Guides",
+    heroDesc: "Apprenez les bonnes pratiques pour rentabiliser votre carte des vins. Le meilleur : Winerim automatise tout.",
     guidesTitle: "Guides et Articles", guidesDesc: "Apprenez les bonnes pratiques — ou laissez Winerim les appliquer automatiquement.",
-    resourcesTitle: "Ressources téléchargeables", resourcesDesc: "Modèles et checklists utiles. En tant que client Winerim, ils sont déjà intégrés à votre tableau de bord.",
-    toolsTitle: "Outils gratuits", toolsDesc: "Essayez-les gratuitement ici. En tant que client Winerim, ils sont tous intégrés et automatisés.", toolsAll: "Voir tout →",
+    resourcesTitle: "Ressources téléchargeables", resourcesDesc: "Modèles et checklists utiles.",
+    toolsTitle: "Outils gratuits", toolsDesc: "Essayez-les gratuitement ici.", toolsAll: "Voir tout →",
     solutionsTitle: "Solutions par cas d'usage", solutionsDesc: "Vous reconnaissez votre situation ? Winerim la résout déjà.",
-    ctaTitle: "Pourquoi le faire manuellement quand Winerim l'automatise ?", ctaDesc: "Tout ce que vous voyez sur cette page — analyse, pricing, accords, rotation — Winerim le fait automatiquement. Économisez des heures de gestion chaque semaine et vendez plus de vin dès le premier jour.",
+    ctaTitle: "Pourquoi le faire manuellement quand Winerim l'automatise ?", ctaDesc: "Tout ce que vous voyez sur cette page — Winerim le fait automatiquement.",
     ctaPrimary: "Analyser ma carte gratuitement", ctaSecondary: "Demander une démo",
     readMore: "Lire le guide", download: "Télécharger", useTool: "Utiliser l'outil", viewSolution: "Voir la solution",
-    all: "Tous", items: "ressources",
+    all: "Tous", items: "guides",
   },
 };
 
@@ -242,7 +242,6 @@ const GuiasRecursos = () => {
   const { lang, localePath } = useLanguage();
   const t = langContent[lang] || langContent.es;
   const [guideFilter, setGuideFilter] = useState("all");
-  const [resourceFilter, setResourceFilter] = useState("all");
 
   useEffect(() => {
     const schema = document.createElement("script");
@@ -258,7 +257,6 @@ const GuiasRecursos = () => {
   }, [t]);
 
   const filteredGuides = guideFilter === "all" ? guides : guides.filter(g => g.topics.includes(guideFilter));
-  const filteredResources = resourceFilter === "all" ? resources : resources.filter(r => r.tags?.includes(resourceFilter));
 
   return (
     <div className="min-h-screen bg-background">
@@ -282,16 +280,16 @@ const GuiasRecursos = () => {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-3">
               {[
                 { href: "#guias", icon: BookOpen, label: t.guidesTitle, count: guides.length },
-                { href: "#recursos", icon: Download, label: t.resourcesTitle, count: resources.length },
+                { href: localePath("/recursos"), icon: Download, label: t.resourcesTitle, count: resources.length },
                 { href: "#herramientas", icon: Wrench, label: t.toolsTitle, count: tools.length },
                 { href: "#soluciones", icon: CheckCircle, label: t.solutionsTitle, count: solutions.length },
               ].map((nav) => (
-                <a key={nav.href} href={nav.href}
+                <Link key={nav.href} to={nav.href}
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all text-sm group">
                   <nav.icon size={14} className="text-wine" />
                   <span className="font-medium group-hover:text-wine transition-colors">{nav.label}</span>
                   <span className="text-[10px] font-semibold text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">{nav.count}</span>
-                </a>
+                </Link>
               ))}
             </motion.div>
           </div>
@@ -310,22 +308,6 @@ const GuiasRecursos = () => {
           </div>
           {filteredGuides.length === 0 && (
             <p className="text-center text-muted-foreground text-sm py-12">No hay guías con este filtro. Prueba con otro tema.</p>
-          )}
-        </section>
-
-        {/* RESOURCES */}
-        <section id="recursos" className="max-w-7xl mx-auto px-6 md:px-12 pb-16 scroll-mt-24">
-          <SectionHeader icon={Download} title={t.resourcesTitle} desc={t.resourcesDesc} count={filteredResources.length} />
-          <FilterPills filters={taxonomyFilters} active={resourceFilter} onChange={setResourceFilter} />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredResources.map((item, i) => (
-              <ScrollReveal key={item.to} delay={i * 0.03}>
-                <TypedCard item={item} type="resource" cta={t.download} />
-              </ScrollReveal>
-            ))}
-          </div>
-          {filteredResources.length === 0 && (
-            <p className="text-center text-muted-foreground text-sm py-12">No hay recursos con este filtro. Prueba con otra categoría.</p>
           )}
         </section>
 
