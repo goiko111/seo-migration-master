@@ -21,6 +21,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "cuando-conviene-copa",
       title: "Cuándo conviene sacar un vino por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha identificado referencias con demanda potencial por copa: buena valoración, baja rotación por botella y perfil resistente a la oxidación.", whyMatters: "La copa reduce la barrera de entrada del comensal. Un vino que nadie pide en botella a 35 € puede venderse fácilmente a 9 € la copa.", riskIfIgnored: "Pierdes conversión, ticket medio y exploración. El comensal que no se atreve con la botella simplemente no pide vino." },
       queSignifica:
         "Un vino es buen candidato para copa cuando cumple tres condiciones a la vez: tiene demanda potencial (el comensal lo pediría si pudiera probar sin comprometerse con una botella), aguanta abierto al menos 24-48 horas sin perder calidad, y su rotación esperada por copa permite terminar la botella antes de que se degrade. Si falla una de las tres, no es buen candidato.",
       porQueImporta:
