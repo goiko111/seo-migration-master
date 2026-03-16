@@ -41,6 +41,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "cuando-no-conviene-copa",
       title: "Cuándo no conviene sacar un vino por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado copas activas con rotación insuficiente o vinos que no aguantan bien abiertos.", whyMatters: "Un programa de 4 copas bien elegidas es mejor que uno de 10 donde 6 generan pérdida por merma.", riskIfIgnored: "Generas merma, servicio de mala calidad y una percepción negativa de todo tu programa de copa." },
       queSignifica:
         "No todo vino funciona por copa. No conviene cuando: el vino no aguanta abierto más de unas horas (vinos muy delicados, espumosos sin sistema de conservación), cuando la rotación esperada es tan baja que la merma se come el margen, cuando el precio de copa resultante es tan alto que el comensal no lo percibe como accesible, o cuando ya tienes otra copa en la misma franja que cubre esa necesidad.",
       porQueImporta:
