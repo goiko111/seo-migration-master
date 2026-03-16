@@ -54,6 +54,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Antes de añadir, retira. Una carta más corta y coherente vende más.",
     ],
     recurso: { label: "Plantilla de equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta" },
+    decisionCenterHref: "/decision-center/carta-equilibrio",
   },
 
   "copa-poco-rentable": {
