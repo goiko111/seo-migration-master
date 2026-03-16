@@ -1,8 +1,11 @@
 import { DollarSign } from "lucide-react";
 
+export type SubTopicPriority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
+
 export interface SubTopic {
   id: string;
   title: string;
+  priority?: SubTopicPriority;
   queSignifica: string;
   porQueImporta: string;
   queHacer: string[];
@@ -45,6 +48,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-bruto",
       title: "Qué es el margen bruto",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha calculado el margen bruto de cada referencia de tu carta cruzando PVP con coste de compra real.",
         whyMatters: "Si no distingues entre margen porcentual y contribución absoluta, puedes estar empujando los vinos equivocados.",
@@ -69,6 +73,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-sano",
       title: "Qué margen es sano",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim ha comparado tu multiplicador medio ponderado con el benchmark de tu segmento.",
         whyMatters: "Si estás por debajo del rango saludable, tienes un problema estructural que no se arregla vendiendo más.",
@@ -93,6 +98,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "referencias-mal-calibradas",
       title: "Cómo detectar referencias mal calibradas",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias cuyo precio no cuadra con su coste, su posición en carta o su papel comercial.",
         whyMatters: "Una sola referencia mal calibrada en tu top 5 puede costarte miles de euros al año sin que lo notes.",
@@ -117,6 +123,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-subir-precio",
       title: "Cuándo subir precio",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias con alto volumen de venta pero margen por debajo de la media de tu carta.",
         whyMatters: "Son candidatas claras a una subida de 1-2 € que rara vez impacta en la demanda pero mejora tu resultado cada día.",
@@ -141,6 +148,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-compra",
       title: "Cuándo revisar la compra",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias con margen bajo cuyo coste de compra ha subido respecto al histórico.",
         whyMatters: "Cada euro que ahorras en compra es margen directo, invisible para el cliente pero muy visible en tu cuenta de resultados.",
@@ -165,6 +173,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-copeo",
       title: "Cuándo revisar el copeo",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias por copa cuyo margen real difiere significativamente del margen teórico.",
         whyMatters: "La copa puede ser tu mejor palanca de margen o tu mayor fuente de pérdida invisible. Un error de 0,50 € por copa en 20 copas semanales son +500 €/año perdidos.",
@@ -189,6 +198,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "revision-mensual",
       title: "Cómo leer una revisión mensual de márgenes",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim genera automáticamente una comparativa mensual de márgenes para que detectes desviaciones antes de que se acumulen.",
         whyMatters: "Los proveedores suben precios, la merma varía por temporada y la demanda cambia. Sin revisión mensual, acumulas sorpresas.",

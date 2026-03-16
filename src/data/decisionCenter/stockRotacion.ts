@@ -21,6 +21,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "stock-muerto",
       title: "Qué se considera stock muerto",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias en tu carta con 0 ventas en más de 60 días.",
         whyMatters: "Entre el 10% y el 25% de la carta de un restaurante medio está en stock muerto sin saberlo. Es capital que no trabaja.",
@@ -45,6 +46,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "capital-inmovilizado",
       title: "Cómo detectar capital inmovilizado",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha calculado el valor total de las botellas sin venta en tu bodega.",
         whyMatters: "Es dinero real invertido que no genera retorno. Invisible en la cuenta de resultados, pero muy real en tu tesorería.",
@@ -69,6 +71,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-impulsar",
       title: "Cuándo impulsar una referencia",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha encontrado vinos con buen margen y buena valoración pero baja rotación: no se venden, pero podrían.",
         whyMatters: "Muchos vinos no se venden por falta de visibilidad, no de calidad. Un impulso de 7-14 días puede reactivarlos.",
@@ -93,6 +96,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-sacar-por-copa",
       title: "Cuándo sacarla por copa",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias lentas que podrían funcionar por copa para acelerar la rotación.",
         whyMatters: "La copa reduce la barrera de entrada del comensal y te permite recuperar capital en días en vez de meses.",
@@ -117,6 +121,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-retirar",
       title: "Cuándo retirar una referencia",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias que no han respondido ni a impulso ni a copa: candidatas claras a retirada.",
         whyMatters: "Cada referencia sin justificación le quita espacio físico y mental a otra que sí podría vender.",
@@ -141,6 +146,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "evolucion-stock",
       title: "Cómo interpretar la evolución de stock",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim monitoriza la tendencia de tu stock mes a mes: capital inmovilizado, referencias sin venta y rotación baja.",
         whyMatters: "Lo que importa no es la foto de hoy, sino si la tendencia mejora o empeora.",

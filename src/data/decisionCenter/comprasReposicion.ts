@@ -20,6 +20,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "comprando-mal",
       title: "Cómo saber si estás comprando mal",
+      priority: "inmediato",
       porQueTeLoMostramos: { detected: "Winerim ha cruzado tus pedidos recientes con los datos de venta y ha detectado que parte de tu presupuesto va a referencias sin demanda real.", whyMatters: "Si compras mal, tu stock se infla, tu margen se comprime y tu carta se llena de lo que nadie pide.", riskIfIgnored: "Cada pedido por inercia financia un error recurrente que erosiona tu rentabilidad mes a mes." },
       queSignifica:
         "Comprar mal no es solo pagar demasiado. Es comprar lo que no se vende, en cantidades que no necesitas, a proveedores que no has comparado, o reponer por inercia sin mirar datos. La señal más clara de una mala compra es un stock que crece mientras las ventas no lo hacen. Si tu bodega está más llena cada mes pero tu ticket medio no sube, algo falla en la compra.",
@@ -40,6 +41,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "cuando-no-reponer",
       title: "Cuándo no reponer una referencia",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha detectado referencias con rotación baja sostenida que siguen reponerse automáticamente.", whyMatters: "Reponer por inercia es la forma más común de acumular stock muerto. Cada reposición sin datos es dinero que no vuelve.", riskIfIgnored: "Financias un error recurrente cada mes, comprando lo que no se vende mientras lo que sí se pide se agota." },
       queSignifica:
         "No reponer es una decisión activa, no un olvido. Dejas de reponer cuando los datos te dicen que esa referencia ya no justifica su espacio: baja rotación sostenida, margen insuficiente, canibalización con otra referencia mejor, o cambio en el perfil de tu clientela. La clave es que la decisión sea consciente y documentada, no que simplemente se te acabe y no la pidas más.",
@@ -60,6 +62,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "precios-compra",
       title: "Cómo leer precios de compra",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha analizado tus costes de compra incluyendo transporte, mínimos y condiciones para calcular el coste total real.", whyMatters: "Cada euro de diferencia en compra es un euro directo en tu margen. 0,80 € de más en 50 botellas/mes son 480 €/año perdidos en una sola referencia.", riskIfIgnored: "Eliges proveedores por tarifa, no por coste real. Tu margen se erosiona sin que lo veas en el precio unitario." },
       queSignifica:
         "El precio de compra no es solo el número en la factura. Es ese número más el transporte, los mínimos de pedido, los rappels, los plazos de pago y las condiciones de devolución. Dos proveedores pueden ofrecerte el mismo vino a 'el mismo precio' con costes reales muy distintos. Leer bien un precio de compra significa entender el coste total de adquisición, no solo el precio unitario.",
@@ -80,6 +83,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "detectar-sobreprecio",
       title: "Cómo detectar sobreprecio",
+      priority: "inmediato",
       porQueTeLoMostramos: { detected: "Winerim ha comparado tus precios de compra con datos de mercado y ha detectado referencias donde podrías estar pagando más de lo necesario.", whyMatters: "El sobreprecio es invisible hasta que lo buscas. En un grupo, un 8% de más en 20 referencias puede suponer decenas de miles de euros al año.", riskIfIgnored: "Sigues pagando de más por no comparar. La lealtad al proveedor no debería ser incompatible con la gestión." },
       queSignifica:
         "Un sobreprecio es cuando pagas más de lo que el mercado pide por una referencia o por un vino de características equivalentes. No siempre es culpa del proveedor: a veces es porque no has comparado, porque llevas años comprando al mismo sin negociar, o porque tu volumen ha cambiado y tus condiciones no se han actualizado. Detectar sobreprecio requiere comparar, no intuir.",
@@ -100,6 +104,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "decidir-entre-similares",
       title: "Cómo decidir entre referencias similares",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha detectado pares de referencias que compiten en la misma franja de tu carta: mismo tipo, precio similar.", whyMatters: "Mantener dos vinos redundantes canibaliza ventas, divide atención y duplica stock. Consolidar libera espacio y mejora condiciones de compra.", riskIfIgnored: "Ambas venden poco en vez de una vender bien. Pierdes margen, eficiencia y la oportunidad de cubrir un hueco real." },
       queSignifica:
         "Cuando tienes dos o más vinos que compiten en la misma franja (mismo tipo, precio similar, perfil parecido), necesitas un criterio claro para elegir cuál se queda y cuál se va. Ese criterio debe combinar tres variables: margen (cuál deja más), rotación (cuál se vende más) y rol en carta (cuál cumple mejor la función que necesitas cubrir).",
@@ -120,6 +125,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "decision-compra-integrada",
       title: "Cómo combinar rotación, margen y stock en una decisión de compra",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim cruza automáticamente rotación, margen y nivel de stock para clasificar cada referencia en una matriz de decisión.", whyMatters: "Mirar un solo dato te lleva a decisiones parciales. Solo cuando cruzas los tres ves la realidad completa de cada referencia.", riskIfIgnored: "Compras lo que no necesitas, repones lo que no rota y te quedas sin lo que sí se vende." },
       queSignifica:
         "La mejor decisión de compra no mira un solo dato: cruza tres. Rotación te dice si el vino se vende. Margen te dice si vale la pena venderlo. Stock te dice si necesitas más o ya tienes de sobra. Cuando los tres datos apuntan en la misma dirección, la decisión es clara. Cuando se contradicen, necesitas priorizar según tu estrategia.",

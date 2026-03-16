@@ -20,6 +20,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-descompensada",
       title: "Cómo saber si una carta está descompensada",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha mapeado la distribución de tu carta por tipo, precio y origen, y ha encontrado zonas de saturación y huecos.", whyMatters: "Una carta descompensada pierde ventas (el comensal no encuentra lo que busca), canibaliza margen y acumula stock donde hay exceso.", riskIfIgnored: "Cada referencia nueva que añades sin criterio descompensa más la carta y amplifica el problema." },
       queSignifica:
         "Una carta descompensada es aquella donde la distribución de referencias no refleja lo que tu cliente realmente pide. Puede ser un exceso de tintos y casi ningún espumoso, una concentración exagerada en una franja de precio, o un 40% de la carta dedicada a una sola región. La descompensación no se ve a simple vista: se detecta cuando mapeas la carta por variables y comparas con tus datos de venta.",
@@ -40,6 +41,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "exceso-huecos-precio",
       title: "Exceso y huecos por rango de precio",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha analizado la distribución de tus referencias por franja de precio y ha encontrado zonas saturadas y franjas vacías.", whyMatters: "El precio es el primer filtro del comensal. Saturar una franja genera canibalización; dejar huecos pierde ventas que nunca ves.", riskIfIgnored: "Sigues saturando franjas donde ya compites contigo mismo mientras el cliente que busca algo diferente se va sin pedir." },
       queSignifica:
         "Los rangos de precio son las franjas en las que se distribuyen tus referencias: 10-15 €, 15-25 €, 25-40 €, etc. Un exceso en una franja significa que tienes demasiadas referencias compitiendo por el mismo comensal en el mismo rango. Un hueco significa que hay una franja donde el cliente busca y no encuentra. Ambos son problemas, pero el exceso es más caro (genera canibalización y stock) y el hueco es más invisible (pierdes ventas que nunca ves).",
@@ -60,6 +62,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "equilibrio-estilos",
       title: "Equilibrio por estilos",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha clasificado tu carta por perfil organoléptico y ha detectado concentración excesiva en ciertos estilos.", whyMatters: "Si todos tus tintos son potentes o todos tus blancos afrutados, limitas tu mercado potencial a un solo tipo de paladar.", riskIfIgnored: "Pierdes al comensal que quiere algo diferente. Y nunca lo sabrás, porque no pide: simplemente elige otra cosa o no pide vino." },
       queSignifica:
         "Más allá de tinto/blanco/rosado, el equilibrio por estilos mira la diversidad de perfiles organolépticos: ¿tienes vinos ligeros y frescos además de potentes? ¿Hay opciones jóvenes además de crianzas? ¿Tu carta ofrece variedad de uvas y elaboraciones, o todo suena parecido? El equilibrio por estilos determina si tu carta cubre la amplitud de gustos de tu clientela o si habla solo de un tipo de paladar.",
@@ -80,6 +83,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "equilibrio-origen",
       title: "Equilibrio por origen",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha analizado la distribución de tu carta por denominación y origen y ha detectado sobreconcentración o dispersión.", whyMatters: "La concentración de origen genera riesgo de compra (dependencia de un mercado) y puede no reflejar lo que pide tu clientela.", riskIfIgnored: "Si tu DO principal sube precios, no tienes alternativas. Y tu carta cuenta una historia que quizás no coincide con tu cliente." },
       queSignifica:
         "El equilibrio por origen evalúa cómo se distribuyen tus referencias por denominación, región o país. Una concentración excesiva en un origen puede limitar tu oferta y crear dependencia de un mercado de compra. Una distribución demasiado dispersa puede generar una carta sin identidad. El punto óptimo depende de tu concepto: un restaurante de cocina regional tiene lógica de concentración; uno cosmopolita necesita amplitud.",
@@ -100,6 +104,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-demasiado-larga",
       title: "Cuándo una carta es demasiado larga",
+      priority: "esta semana",
       porQueTeLoMostramos: { detected: "Winerim ha calculado tu ratio de efectividad: referencias con venta real vs. total de referencias en carta.", whyMatters: "El exceso de opciones paraliza al comensal, concentra las ventas en 15-20 referencias y convierte el resto en decoración con coste.", riskIfIgnored: "Acumulas complejidad, stock y gestión sin retorno. Tu equipo recomienda siempre lo mismo porque no puede conocer toda la carta." },
       queSignifica:
         "Una carta es demasiado larga cuando tiene más referencias de las que tu operativa puede gestionar, tu equipo puede conocer o tu comensal puede procesar. No hay un número mágico, pero hay señales claras: si más del 20% de tus referencias no se han vendido en 60 días, si tu equipo de sala no puede describir la mitad de la carta, o si el comensal tarda más de 5 minutos en elegir, tu carta es demasiado larga para tu contexto.",
@@ -120,6 +125,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "carta-amplia-compleja",
       title: "Qué significa una carta amplia y compleja",
+      priority: "seguimiento",
       porQueTeLoMostramos: { detected: "Tu carta supera las 250 referencias: es un activo estratégico si se gestiona con datos, y un pasivo si se gestiona con intuición.", whyMatters: "La complejidad añade profundidad pero también fricción: más stock, más canibalización, más riesgo sin visibilidad.", riskIfIgnored: "Sin herramientas analíticas, la complejidad se convierte en caos. No ves qué se canibaliza ni dónde tienes huecos." },
       queSignifica:
         "Una carta amplia y compleja —a partir de 250 referencias— no es intrínsecamente buena ni mala. Es un activo estratégico si se gestiona con datos, y un pasivo operativo si se gestiona con intuición. La complejidad añade profundidad (más opciones para el comensal experto) pero también añade fricción (más difícil de gestionar, más stock, más riesgo de canibalización). Winerim está diseñado específicamente para este escenario.",
@@ -140,6 +146,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "wine-mapping",
       title: "Cómo interpretar wine mapping y arquitectura de carta",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha generado automáticamente el wine mapping de tu carta cruzando tipo × precio × estilo.", whyMatters: "Sin un mapa visual, cada decisión (alta, baja, repricing) se toma sin contexto. El mapa te dice dónde actuar en 5 minutos.", riskIfIgnored: "Tomas decisiones sobre una lista sin ver la estructura. Es como reformar una casa sin plano." },
       queSignifica:
         "El wine mapping es la representación visual de tu carta en una matriz que cruza al menos dos variables: típicamente tipo de vino × franja de precio, o estilo × origen. La arquitectura de carta es el paso siguiente: asignar un rol comercial a cada zona del mapa (atracción, conversión, posicionamiento, exploración). Un mapa bien leído te dice dónde actuar. Una arquitectura bien definida te dice por qué.",

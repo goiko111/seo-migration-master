@@ -9,7 +9,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/data/decisionCenter/margenesPricing";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
@@ -36,11 +36,11 @@ const useGate = () => {
 /* ── Simple areas (non-deep) ── */
 type Priority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
 
-const priorityConfig: Record<Priority, { label: string; color: string; bg: string }> = {
-  "inmediato":    { label: "Inmediato",    color: "text-destructive",  bg: "bg-destructive/10" },
-  "esta semana":  { label: "Esta semana",  color: "text-amber-500",    bg: "bg-amber-500/10" },
-  "este mes":     { label: "Este mes",     color: "text-blue-500",     bg: "bg-blue-500/10" },
-  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground", bg: "bg-muted" },
+const priorityConfig: Record<Priority, { label: string; color: string; bg: string; icon: string }> = {
+  "inmediato":    { label: "Urgente",      color: "text-red-400",             bg: "bg-red-500/10",    icon: "●" },
+  "esta semana":  { label: "Esta semana",  color: "text-amber-400",           bg: "bg-amber-500/10",  icon: "●" },
+  "este mes":     { label: "Este mes",     color: "text-blue-400",            bg: "bg-blue-500/10",   icon: "●" },
+  "seguimiento":  { label: "Seguimiento",  color: "text-muted-foreground/70", bg: "bg-muted/50",      icon: "○" },
 };
 
 interface SimpleAreaContent {
@@ -126,6 +126,17 @@ const ContentBlock = ({ blockKey, children }: { blockKey: keyof typeof blockConf
    DEEP AREA VIEW — used for "margenes-pricing"
    ══════════════════════════════════════════════════════ */
 
+const PriorityBadge = ({ priority }: { priority?: SubTopicPriority }) => {
+  if (!priority) return null;
+  const cfg = priorityConfig[priority];
+  return (
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase ${cfg.bg} ${cfg.color}`}>
+      <span className="text-[8px]">{cfg.icon}</span>
+      {cfg.label}
+    </span>
+  );
+};
+
 const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: number }) => {
   const [open, setOpen] = useState(false);
 
@@ -140,9 +151,14 @@ const SubTopicAccordion = ({ subtopic, index }: { subtopic: SubTopic; index: num
           <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 text-sm font-bold shrink-0">
             {index + 1}
           </span>
-          <h3 className="font-heading text-base font-bold text-foreground flex-1 group-hover:text-wine transition-colors">
-            {subtopic.title}
-          </h3>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="font-heading text-base font-bold text-foreground group-hover:text-wine transition-colors">
+                {subtopic.title}
+              </h3>
+              <PriorityBadge priority={subtopic.priority} />
+            </div>
+          </div>
           <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
             <ChevronDown size={18} className="text-muted-foreground/50" />
           </motion.div>
@@ -282,7 +298,8 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
                     <span className="w-5 h-5 rounded-md bg-amber-500/10 text-amber-500 text-[10px] font-bold flex items-center justify-center shrink-0">
                       {i + 1}
                     </span>
-                    {st.title}
+                    <span className="flex-1 min-w-0 truncate">{st.title}</span>
+                    <PriorityBadge priority={st.priority} />
                   </span>
                 ))}
               </div>
