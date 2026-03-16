@@ -98,6 +98,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "referencias-mal-calibradas",
       title: "Cómo detectar referencias mal calibradas",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias cuyo precio no cuadra con su coste, su posición en carta o su papel comercial.",
         whyMatters: "Una sola referencia mal calibrada en tu top 5 puede costarte miles de euros al año sin que lo notes.",
