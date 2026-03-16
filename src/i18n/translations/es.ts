@@ -32,7 +32,7 @@ const es: TranslationDict = {
   nav_sol_hotels: "Hoteles y resorts",
   nav_sol_groups: "Grupos de restauración",
   nav_sol_no_sommelier: "Restaurantes sin sumiller",
-  nav_sol_large_list: "Carta amplia (+100 refs.)",
+  nav_sol_large_list: "Carta amplia (+250 refs.)",
 
   nav_resources: "Recursos",
   nav_resources_learn: "Aprende",

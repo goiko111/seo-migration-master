@@ -149,7 +149,7 @@ const tips = [
     title: "Cómo organizar los vinos",
     points: [
       "Agrupar por tipo (blanco, tinto, rosado, espumoso) en cartas pequeñas",
-      "Agrupar por región o estilo en cartas grandes",
+      "Agrupar por región o estilo en cartas amplias y complejas",
       "Separar la sección de vinos por copa",
       "Incluir una categoría destacada (recomendaciones, selección del chef)",
     ],
@@ -186,7 +186,7 @@ const EjemplosCarta = () => {
       "@type": "FAQPage",
       mainEntity: [
         { "@type": "Question", name: "¿Cuántas referencias debe tener una carta de vinos?", acceptedAnswer: { "@type": "Answer", text: "Depende del tipo de restaurante: 15-25 para un bistró, 40-60 para un wine bar y 80-150 para un restaurante gastronómico. Lo importante es que cada referencia tenga un propósito claro." } },
-        { "@type": "Question", name: "¿Cómo se organiza una carta de vinos?", acceptedAnswer: { "@type": "Answer", text: "Las cartas pequeñas se organizan por tipo (blanco, tinto, rosado). Las cartas grandes se organizan por región o estilo. Siempre conviene separar los vinos por copa y destacar recomendaciones." } },
+        { "@type": "Question", name: "¿Cómo se organiza una carta de vinos?", acceptedAnswer: { "@type": "Answer", text: "Las cartas pequeñas se organizan por tipo (blanco, tinto, rosado). Las cartas amplias y complejas se organizan por región o estilo. Siempre conviene separar los vinos por copa y destacar recomendaciones." } },
         { "@type": "Question", name: "¿Cómo se distribuyen los precios en una carta de vinos?", acceptedAnswer: { "@type": "Answer", text: "Con una escalera progresiva sin huecos, concentrando referencias en la zona media de precio y usando multiplicadores decrecientes para que los vinos premium mantengan precios competitivos." } },
       ],
     });

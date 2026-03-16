@@ -28,7 +28,7 @@ const data: GuidePageData = {
       heading: "1. Qué es un vino muerto y por qué importa",
       content: "Un vino muerto es una referencia que lleva más de 90 días sin venderse. No es un vino malo — puede ser un gran vino que simplemente no encaja con tu carta, tu público o tu pricing.\n\nEl problema no es tener uno o dos vinos lentos. El problema es no saberlo. Muchos restaurantes descubren que tienen entre el 15% y el 30% de su bodega en stock sin rotación — y no lo miden.\n\nEl coste es triple: capital inmovilizado que no genera retorno, espacio en bodega que podría dedicarse a referencias que sí rotan, y riesgo de deterioro si el vino pasa su ventana óptima de consumo.",
       tips: [
-        "Un restaurante con 100 referencias y un 20% de vinos muertos puede tener entre 5.000€ y 20.000€ de capital inmovilizado",
+        "Un restaurante con 250 referencias y un 20% de vinos muertos puede tener entre 15.000€ y 50.000€ de capital inmovilizado",
         "Los vinos jóvenes sin crianza pierden frescura con el tiempo — cada mes que pasan sin venderse, pierden valor real",
         "El stock muerto ocupa espacio que podrían usar referencias que sí generan ingresos",
         "Sin un sistema de detección, los vinos muertos se acumulan por inercia: nadie los pide, nadie los retira",

@@ -5,7 +5,7 @@ import {
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 
 const data: VerticalContent = {
-  metaTitle: "Winerim para Cartas de Vinos Extensas | +100 Referencias bajo Control",
+  metaTitle: "Winerim para Cartas de Vinos Extensas | +250 Referencias bajo Control",
   metaDescription: "Gestiona cartas de vinos de alta complejidad con Winerim: detecta stock muerto, optimiza rotación, elimina canibalización y toma decisiones de surtido con datos reales.",
   canonicalUrl: "https://winerim.wine/soluciones/carta-amplia",
   schemaId: "carta-amplia",
@@ -15,15 +15,15 @@ const data: VerticalContent = {
   breadLabel: "Carta amplia",
   heroTitle1: "Más referencias no significa más ventas. Significa ",
   heroTitleHighlight: "más riesgo sin control",
-  heroDesc: "Winerim convierte cartas extensas y difíciles de gestionar en activos rentables: cada referencia justificada, cada precio optimizado, cada decisión basada en datos.",
+  heroDesc: "Winerim convierte cartas amplias y complejas en activos rentables: cada referencia justificada, cada precio optimizado, cada decisión basada en datos.",
   ctaDemo: "Solicitar demo", ctaContact: "Hablar con el equipo",
-  heroSummary: "Una carta con +100 referencias puede ser una ventaja competitiva o una trampa financiera. Sin analítica, muchas referencias no rotan, canibalizan entre sí y generan stock muerto. Winerim aporta la inteligencia para que cada vino en tu carta tenga una razón de estar ahí — y lo demuestre con datos.",
+  heroSummary: "Una carta con más de 250 referencias puede ser una ventaja competitiva o una trampa financiera. Sin analítica, muchas referencias no rotan, canibalizan entre sí y generan stock muerto. Winerim aporta la inteligencia para que cada vino en tu carta tenga una razón de estar ahí — y lo demuestre con datos.",
 
   forTitle: "¿Es Winerim para tu carta?",
   forLabel: "Encaja perfecto si…",
   notForLabel: "Quizá no sea para ti si…",
   forItems: [
-    "Tu carta tiene +100 referencias y sospechas que muchas no rotan",
+    "Tu carta tiene más de 250 referencias y sospechas que muchas no rotan",
     "No tienes datos claros de qué vinos generan margen real",
     "Has detectado vinos que se canibalizan entre sí en precio o estilo",
     "Quieres reducir la carta sin perder profundidad ni atractivo",
@@ -42,7 +42,7 @@ const data: VerticalContent = {
     { text: "Stock muerto invisible: referencias que llevan meses en carta sin venderse, ocupando capital y espacio sin retorno." },
     { text: "Canibalización silenciosa: vinos de perfil similar compitiendo entre sí, diluyendo ventas y confundiendo al comensal." },
     { text: "Parálisis de elección: el comensal se abruma ante demasiadas opciones y termina pidiendo 'el segundo más barato'." },
-    { text: "Imposibilidad de formar al equipo: nadie puede conocer 200+ referencias. El personal evita recomendar vino." },
+    { text: "Imposibilidad de formar al equipo: nadie puede conocer 250+ referencias. El personal evita recomendar vino." },
     { text: "Pricing inconsistente: multiplicadores genéricos aplicados a toda la carta, sin considerar el rol de cada vino." },
     { text: "Revisiones de carta a ciegas: se cambian referencias por intuición, relación con el proveedor o disponibilidad, no por rendimiento." },
     { text: "Coste de oportunidad: cada referencia que no funciona ocupa el lugar de una que podría generar margen y satisfacción." },
@@ -84,7 +84,7 @@ const data: VerticalContent = {
 
   impactLabel: "Resultados",
   impactTitle: "Impacto medible en cartas extensas",
-  impactSubtitle: "Basado en restaurantes con +100 referencias que han optimizado su carta con Winerim.",
+  impactSubtitle: "Basado en restaurantes con más de 250 referencias que han optimizado su carta con Winerim.",
   impacts: [
     { label: "Stock muerto detectado: 15–30% de la carta", desc: "La mayoría de cartas extensas tienen un 15–30% de referencias que no rotan. Winerim las identifica con datos." },
     { label: "Margen global +10–18%", desc: "Al retirar referencias que no aportan y ajustar pricing, el margen de toda la categoría de vino mejora." },
@@ -114,11 +114,11 @@ const data: VerticalContent = {
   ],
 
   faqs: [
-    { q: "¿A partir de cuántas referencias tiene sentido usar Winerim?", a: "A partir de 50 referencias ya se pueden detectar patrones de canibalización y stock muerto significativos. El impacto crece con el tamaño de la carta: con +100 referencias, la optimización puede liberar un 15–30% de capital inmovilizado." },
+    { q: "¿A partir de cuántas referencias tiene sentido usar Winerim?", a: "A partir de 80 referencias ya se pueden detectar patrones de canibalización y stock muerto significativos. El impacto crece con el tamaño de la carta: con más de 250 referencias, la optimización puede liberar un 15–30% de capital inmovilizado." },
     { q: "¿Winerim me dice qué vinos retirar?", a: "Winerim te muestra un ranking de rendimiento basado en datos reales (margen, rotación, demanda). La decisión final siempre es tuya, pero ahora tienes argumentos objetivos." },
     { q: "¿Qué es la canibalización de vinos?", a: "Ocurre cuando dos o más referencias de perfil similar (misma región, estilo y franja de precio) compiten entre sí, diluyendo las ventas de ambas. Winerim cruza estos atributos para detectarlo automáticamente." },
     { q: "¿Puedo generar informes para dirección o propiedad?", a: "Sí. Winerim genera reportes con métricas claras de rendimiento por referencia, oportunidades de mejora y propuestas de acción, listos para presentar en reuniones de gestión." },
-    { q: "¿Cuánto tarda en implantarse?", a: "Depende del tamaño de la carta. Para cartas de 100–300 referencias, la implantación completa tarda entre 3 y 7 días. Ofrecemos soporte durante todo el proceso." },
+    { q: "¿Cuánto tarda en implantarse?", a: "Depende del tamaño de la carta. Para cartas de 250–500 referencias, la implantación completa tarda entre 5 y 10 días. Ofrecemos soporte durante todo el proceso." },
     { q: "¿Funciona con carta física o solo digital?", a: "Winerim funciona como sistema de análisis y gestión. Los datos alimentan tanto la carta digital como las decisiones sobre la carta física. No obliga a eliminar el soporte papel." },
     { q: "¿Puedo probar antes de contratar?", a: "Sí. Ofrecemos un análisis gratuito de tu carta actual donde identificamos stock muerto, canibalización y oportunidades de pricing. Es la mejor forma de ver el valor antes de decidir." },
   ],

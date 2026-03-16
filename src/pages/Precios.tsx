@@ -46,7 +46,7 @@ const ES_CONTENT = {
   whoSubtitle: "Winerim sirve a perfiles muy distintos. Encuentra el tuyo.",
   profiles: [
     { icon: "store", name: "Restaurante independiente", plan: "Starter o Pro", desc: "Carta de 30-80 referencias. Necesitas visibilidad y control sin complejidad." },
-    { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
+    { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia y compleja, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Múltiples puntos de venta, room service, bar. Necesitas consistencia y reporting." },
     { icon: "building", name: "Grupo de restauración", plan: "Enterprise", desc: "Multi-local, governance centralizada, benchmarking entre unidades y despliegue progresivo." },
   ],
@@ -79,7 +79,7 @@ const ES_CONTENT = {
       name: "Pro",
       tagline: "Inteligencia para vender más vino",
       solves: "Resuelve: ticket medio bajo, rotación lenta, recomendaciones inconsistentes, falta de datos.",
-      fits: "Para restaurantes con carta amplia, gastronómicos u hoteles con F&B.",
+      fits: "Para restaurantes con alta profundidad de surtido, gastronómicos u hoteles con F&B.",
       popular: true,
       features: [
         "Todo lo del plan Starter",
@@ -241,7 +241,7 @@ i18n.en = {
     {
       name: "Pro", tagline: "Intelligence to sell more wine", popular: true,
       solves: "Solves: low average ticket, slow rotation, inconsistent recommendations, lack of data.",
-      fits: "For restaurants with extensive lists, fine dining or hotels with F&B.",
+      fits: "For restaurants with deep assortment, fine dining or hotels with F&B.",
       features: ["Everything in Starter", "Real-time wine sales analytics", "AI-powered list optimization", "Interactive Wine Mapping", "Context-aware smart recommendations", "Optimized by-the-glass sales", "Wine comparator for diners", "Rotation & dead stock alerts", "Pricing & margin management", "Priority support"],
       notIncluded: ["Centralized multi-location", "Advanced POS/PMS integrations"],
     },
