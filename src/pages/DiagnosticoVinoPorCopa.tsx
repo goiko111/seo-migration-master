@@ -398,6 +398,8 @@ const DiagnosticoVinoPorCopa = () => {
         </div>
       </section>
 
+      <ToolStrategicBlock layer="core" decides={t.decides} avoids={t.avoids} impact={t.impact} />
+
       {/* TOOL */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
