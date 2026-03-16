@@ -228,6 +228,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Wine ratio very low (${v}% vs ${Math.round(a)}%). Improvement opportunity.`,
     issue_glass_low: (n, v) => `Glass ratio below 15%. Growth opportunity through by-the-glass.`,
     issue_glass_price_low: (n, v, a) => `Average glass price below average (€${v} vs €${a}).`,
+    decides: ["Whether wine management is consistent across locations", "Which location needs more attention on pricing or assortment", "Whether the group would benefit from centralised standards"],
+    avoids: ["Each location operating with different criteria without oversight", "Price deviations that erode the brand", "Losing negotiation power due to lack of consolidated data"],
+    impact: ["Detect improvement opportunities in underperforming locations", "Standardise management and reduce inefficiencies", "Prepare supplier negotiations with group-level data"],
   },
   it: {
     seo_title: "Auditor Carta Vini per Gruppi Multi-Locale | Winerim",
