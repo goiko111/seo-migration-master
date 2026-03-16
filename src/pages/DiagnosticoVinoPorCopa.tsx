@@ -56,6 +56,7 @@ const i18n: Record<SupportedLang, {
   blocks: { title: string; points: string[] }[];
   faqs: { q: string; a: string }[];
   links: { to: string; label: string; type: "tool" | "resource" | "guide" }[];
+  decides: string[]; avoids: string[]; impact: string[];
 }> = {
   es: {
     seo_title: "Diagnóstico de Vino por Copa para Restaurantes | Winerim",
