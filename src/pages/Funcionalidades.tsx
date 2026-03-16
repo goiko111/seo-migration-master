@@ -20,11 +20,65 @@ import { Badge } from "@/components/ui/badge";
 import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
 import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
 import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
+import tabletFichaImg from "@/assets/winerim-tablet-ficha.png";
+import tabletPairingImg from "@/assets/winerim-tablet-pairing.png";
 import mobileListImg from "@/assets/winerim-mobile-list.png";
 import mobileDetailImg from "@/assets/winerim-mobile-detail.png";
 import mobileComparatorImg from "@/assets/winerim-mobile-comparator.png";
+import dashboardInsightsImg from "@/assets/winerim-dashboard-insights.png";
+
+// Management screenshots
+import mgmtCarta from "@/assets/mgmt-carta.png";
+import mgmtRendimiento from "@/assets/mgmt-rendimiento.png";
+import mgmtInsights from "@/assets/mgmt-insights.png";
+import mgmtStock from "@/assets/mgmt-stock.png";
+import mgmtRotacion from "@/assets/mgmt-rotacion.png";
+import mgmtObsolescencia from "@/assets/mgmt-obsolescencia.png";
+import mgmtPedidos from "@/assets/mgmt-pedidos.png";
+import mgmtRecomendados from "@/assets/mgmt-recomendados.png";
+import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.png";
+
+import ss01 from "@/assets/screenshots/ss-01.png";
+import ss02 from "@/assets/screenshots/ss-02.png";
+import ss03 from "@/assets/screenshots/ss-03.png";
+import ss04 from "@/assets/screenshots/ss-04.png";
+import ss05 from "@/assets/screenshots/ss-05.png";
+import ss06 from "@/assets/screenshots/ss-06.png";
+import ss07 from "@/assets/screenshots/ss-07.png";
+import ss08 from "@/assets/screenshots/ss-08.png";
+import ss09 from "@/assets/screenshots/ss-09.png";
+import ss10 from "@/assets/screenshots/ss-10.png";
+import ss11 from "@/assets/screenshots/ss-11.png";
+import ss12 from "@/assets/screenshots/ss-12.png";
+import ss13 from "@/assets/screenshots/ss-13.png";
 import ss14 from "@/assets/screenshots/ss-14.png";
+import ss15 from "@/assets/screenshots/ss-15.png";
+import ss16 from "@/assets/screenshots/ss-16.png";
+import ss17 from "@/assets/screenshots/ss-17.png";
+import ss18 from "@/assets/screenshots/ss-18.png";
 import ss19 from "@/assets/screenshots/ss-19.png";
+import ss20 from "@/assets/screenshots/ss-20.png";
+
+// Layer screenshot mapping
+const layerScreenshots = {
+  core: [
+    { img: mgmtRendimiento, alt: "Winerim Core — rendimiento", label: "Rendimiento" },
+    { img: mgmtInsights, alt: "Winerim Core — insights IA", label: "Insights IA" },
+    { img: mgmtStock, alt: "Winerim Core — stock", label: "Control de stock" },
+    { img: ss14, alt: "Winerim Core — dashboard", label: "Dashboard analítico" },
+  ],
+  dinamica: [
+    { img: mgmtRecomendados, alt: "Inteligencia Dinámica — recomendados", label: "Recomendaciones" },
+    { img: mgmtAutomatizaciones, alt: "Inteligencia Dinámica — automatizaciones", label: "Automatizaciones" },
+    { img: mgmtCarta, alt: "Inteligencia Dinámica — carta", label: "Carta optimizada" },
+    { img: ss19, alt: "Inteligencia Dinámica — panel", label: "Panel de acción" },
+  ],
+  supply: [
+    { img: mgmtPedidos, alt: "Winerim Supply — pedidos", label: "Gestión de pedidos" },
+    { img: mgmtRotacion, alt: "Winerim Supply — rotación", label: "Rotación" },
+    { img: mgmtObsolescencia, alt: "Winerim Supply — obsolescencia", label: "Obsolescencia" },
+  ],
+};
 
 // ─── i18n (simplified — 3-layer focus) ───
 interface LayerContent {
