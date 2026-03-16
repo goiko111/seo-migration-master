@@ -72,10 +72,15 @@ const i18n: Record<SupportedLang, {
   s8_badge: string; s8_title_1: string; s8_title_highlight: string; s8_subtitle: string;
   s8_metrics: { title: string; desc: string }[];
   s8_disclaimer: string;
-  // Section 9 — CTA Final
+  // Section 9 — Core vs ID comparison
+  s9b_title: string; s9b_subtitle: string;
+  s9b_core_label: string; s9b_core_items: string[];
+  s9b_id_label: string; s9b_id_items: string[];
+  s9b_closing: string; s9b_cta: string;
+  // Section 10 — CTA Final
   s9_title_1: string; s9_title_2: string; s9_subtitle: string;
   s9_cta_demo: string; s9_cta_contact: string;
-  // Section 10 — Closing
+  // Section 11 — Closing
   s10_title_1: string; s10_title_2: string; s10_title_highlight: string;
   s10_subtitle: string; s10_cta: string; s10_cta_contact: string; s10_microcopy: string;
   // Internal links
@@ -179,6 +184,14 @@ const i18n: Record<SupportedLang, {
     s9_subtitle: "Descubre cómo la inteligencia dinámica optimiza el margen en restaurantes y transforma la experiencia de tu carta. Sin compromiso.",
     s9_cta_demo: "Solicitar demo gratuita",
     s9_cta_contact: "Contactar",
+    s9b_title: "Core entiende. Inteligencia Dinámica actúa.",
+    s9b_subtitle: "Dos capas complementarias que trabajan juntas para que tu carta no solo muestre vinos, sino que venda mejor.",
+    s9b_core_label: "Winerim Core",
+    s9b_core_items: ["Analiza márgenes, stock y rentabilidad", "Diagnostica desequilibrios y oportunidades", "Simula escenarios antes de ejecutar", "Genera recomendaciones priorizadas"],
+    s9b_id_label: "Inteligencia Dinámica",
+    s9b_id_items: ["Reordena la carta según el objetivo activo", "Reacciona al contexto en tiempo real", "Prioriza referencias con mayor impacto", "Ejecuta la estrategia sin intervención manual"],
+    s9b_closing: "Core pone la inteligencia. Inteligencia Dinámica pone la acción.",
+    s9b_cta: "Ver Winerim Core",
     s10_title_1: "No necesitas una carta más bonita.",
     s10_title_2: "Necesitas una carta ",
     s10_title_highlight: "más inteligente.",
@@ -291,6 +304,14 @@ const i18n: Record<SupportedLang, {
     s9_subtitle: "Discover how Dynamic Intelligence optimises margin in restaurants and transforms your wine list experience. No commitment.",
     s9_cta_demo: "Request free demo",
     s9_cta_contact: "Contact us",
+    s9b_title: "Core understands. Dynamic Intelligence acts.",
+    s9b_subtitle: "Two complementary layers that work together so your list doesn't just display wines — it sells better.",
+    s9b_core_label: "Winerim Core",
+    s9b_core_items: ["Analyses margins, stock and profitability", "Diagnoses imbalances and opportunities", "Simulates scenarios before execution", "Generates prioritised recommendations"],
+    s9b_id_label: "Dynamic Intelligence",
+    s9b_id_items: ["Reorders the list based on the active objective", "Reacts to context in real time", "Prioritises references with the greatest impact", "Executes strategy without manual intervention"],
+    s9b_closing: "Core provides the intelligence. Dynamic Intelligence provides the action.",
+    s9b_cta: "See Winerim Core",
     s10_title_1: "You don't need a prettier wine list.",
     s10_title_2: "You need a ",
     s10_title_highlight: "smarter one.",
@@ -403,6 +424,14 @@ const i18n: Record<SupportedLang, {
     s9_subtitle: "Scopri come l'intelligenza dinamica ottimizza il margine nei ristoranti e trasforma l'esperienza della tua carta. Senza impegno.",
     s9_cta_demo: "Richiedi demo gratuita",
     s9_cta_contact: "Contattaci",
+    s9b_title: "Core capisce. Intelligenza Dinamica agisce.",
+    s9b_subtitle: "Due livelli complementari che lavorano insieme affinché la tua carta non mostri solo vini, ma venda meglio.",
+    s9b_core_label: "Winerim Core",
+    s9b_core_items: ["Analizza margini, stock e redditività", "Diagnostica squilibri e opportunità", "Simula scenari prima dell'esecuzione", "Genera raccomandazioni prioritarie"],
+    s9b_id_label: "Intelligenza Dinamica",
+    s9b_id_items: ["Riordina la carta secondo l'obiettivo attivo", "Reagisce al contesto in tempo reale", "Dà priorità alle referenze con maggior impatto", "Esegue la strategia senza intervento manuale"],
+    s9b_closing: "Core mette l'intelligenza. Intelligenza Dinamica mette l'azione.",
+    s9b_cta: "Vedi Winerim Core",
     s10_title_1: "Non serve una carta più bella.",
     s10_title_2: "Serve una carta ",
     s10_title_highlight: "più intelligente.",
@@ -515,6 +544,14 @@ const i18n: Record<SupportedLang, {
     s9_subtitle: "Découvrez comment l'intelligence dynamique optimise la marge en restaurant et transforme l'expérience de votre carte. Sans engagement.",
     s9_cta_demo: "Demander une démo gratuite",
     s9_cta_contact: "Nous contacter",
+    s9b_title: "Core comprend. Intelligence Dynamique agit.",
+    s9b_subtitle: "Deux couches complémentaires qui travaillent ensemble pour que votre carte ne se contente pas d'afficher des vins, mais vende mieux.",
+    s9b_core_label: "Winerim Core",
+    s9b_core_items: ["Analyse marges, stock et rentabilité", "Diagnostique déséquilibres et opportunités", "Simule des scénarios avant exécution", "Génère des recommandations priorisées"],
+    s9b_id_label: "Intelligence Dynamique",
+    s9b_id_items: ["Réordonne la carte selon l'objectif actif", "Réagit au contexte en temps réel", "Priorise les références à plus fort impact", "Exécute la stratégie sans intervention manuelle"],
+    s9b_closing: "Core apporte l'intelligence. Intelligence Dynamique apporte l'action.",
+    s9b_cta: "Voir Winerim Core",
     s10_title_1: "Vous n'avez pas besoin d'une carte plus belle.",
     s10_title_2: "Vous avez besoin d'une carte ",
     s10_title_highlight: "plus intelligente.",
@@ -1100,7 +1137,77 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
-            9. CTA FINAL
+            9b. CORE vs ID — COMPLEMENTARY LAYERS
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background pointer-events-none" />
+          <div className="relative max-w-5xl mx-auto">
+            <ScrollReveal className="text-center mb-14">
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-4">
+                {tx.s9b_title}
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{tx.s9b_subtitle}</p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                {/* Core side */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                      <Gauge size={18} className="text-amber-400" />
+                    </div>
+                    <h3 className="text-sm font-bold tracking-widest uppercase text-amber-400">{tx.s9b_core_label}</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {tx.s9b_core_items.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <Lightbulb size={14} className="mt-0.5 text-amber-400/60 shrink-0" />
+                        <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* ID side */}
+                <div className="relative p-8 md:p-10 rounded-2xl border border-wine/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wine/6 via-wine/3 to-transparent pointer-events-none" />
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-wine/40 to-transparent" />
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-wine/15 flex items-center justify-center">
+                        <Brain size={18} className="text-wine" />
+                      </div>
+                      <h3 className="text-sm font-bold tracking-widest uppercase text-wine">{tx.s9b_id_label}</h3>
+                    </div>
+                    <ul className="space-y-4">
+                      {tx.s9b_id_items.map((item) => (
+                        <li key={item} className="flex items-start gap-3">
+                          <Zap size={14} className="mt-0.5 text-wine/60 shrink-0" />
+                          <span className="text-sm text-foreground font-medium leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="mt-10 text-center">
+                <p className="font-heading text-lg md:text-xl text-foreground/80 italic mb-6">{tx.s9b_closing}</p>
+                <Link to={localePath("/producto/winerim-core")}
+                  className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/40 transition-colors">
+                  {tx.s9b_cta} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
+            10. CTA FINAL
         ════════════════════════════════════════════════ */}
         <section className="section-padding">
           <div className="max-w-4xl mx-auto">
