@@ -70,7 +70,7 @@ interface CoreI18n {
   faq_title: string;
   faqs: { q: string; a: string }[];
   // Links
-  links: { to: string; label: string; type: "solution" | "guide" | "tool" | "resource" }[];
+  links: { to: string; label: string; type: "solution" | "guide" | "tool" | "resource" | "decision-center" }[];
 }
 
 const capabilityMeta: Pick<Capability, "icon" | "accent" | "iconBg">[] = [
