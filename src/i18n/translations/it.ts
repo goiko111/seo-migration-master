@@ -42,6 +42,9 @@ const it: TranslationDict = {
   nav_platform: "Piattaforma",
   nav_results: "Risultati",
 
+  nav_software_desc: "Carta digitale intelligente",
+  nav_by_business_type: "Per tipo di attività",
+
   footer_description: "Software di gestione carta dei vini con IA. Più vendite, margine migliore e controllo totale per la ristorazione professionale.",
   footer_tagline: "Vendite · Margine · Controllo",
   footer_product: "Prodotto",
@@ -57,6 +60,8 @@ const it: TranslationDict = {
   footer_about: "Chi è Winerim",
   footer_methodology: "Metodologia",
   footer_contact_email: "ciao@winerim.com",
+  footer_cta_title: "Pronto a ottimizzare la tua carta dei vini?",
+  footer_cta_subtitle: "Analisi gratuita in 48 ore. Senza impegno.",
 
   hero_badge: "Software per la carta dei vini con IA",
   hero_title_1: "Più vendite di vino, ",
@@ -121,6 +126,38 @@ const it: TranslationDict = {
 
   pricing_title: "Piani adatti a ogni tipo di attività",
   pricing_subtitle: "Dal ristorante indipendente ai grandi gruppi. Senza vincoli.",
+
+  cookie_title: "Utilizziamo i cookie",
+  cookie_desc: "Utilizziamo cookie propri e di terze parti per migliorare la tua esperienza e analizzare l'uso del sito.",
+  cookie_accept: "Accetta",
+  cookie_reject: "Rifiuta",
+  cookie_more_info: "Maggiori informazioni",
+
+  breadcrumb_home: "Home",
+
+  form_restaurant_label: "Nome del ristorante",
+  form_restaurant_placeholder: "Es. Ristorante Il Vigneto",
+  form_name_label: "Il tuo nome completo",
+  form_name_placeholder: "Nome e cognome",
+  form_position_label: "Il tuo ruolo",
+  form_position_placeholder: "Qual è il tuo ruolo?",
+  form_phone_label: "Telefono",
+  form_email_label: "Email professionale",
+  form_email_placeholder: "tu@ristorante.com",
+  form_city_label: "Città",
+  form_city_placeholder: "Es. Milano",
+  form_references_label: "Referenze in carta",
+  form_references_placeholder: "Quante referenze hai?",
+  form_business_type_label: "Tipo di attività",
+  form_business_type_placeholder: "Che tipo di attività è?",
+  form_locations_label: "Locali che gestisci",
+  form_locations_placeholder: "Quanti locali?",
+  form_challenge_label: "Cosa vuoi migliorare della tua carta?",
+  form_challenge_placeholder: "La tua sfida principale",
+
+  whatsapp_message: "Ciao, vorrei avere più informazioni su Winerim.",
+  common_close: "Chiudi",
+  faq_title_default: "Domande frequenti",
 
   locale: "it_IT",
 };

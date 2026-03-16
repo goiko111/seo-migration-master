@@ -43,6 +43,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/grupos-restauracion": "/en/solutions/restaurant-groups",
     "/soluciones/aumentar-ticket-medio-restaurante": "/en/solutions/increase-average-ticket",
     "/producto/inteligencia-dinamica": "/en/product/dynamic-intelligence",
+    "/producto/winerim-core": "/en/product/winerim-core",
+    "/producto/winerim-supply": "/en/product/winerim-supply",
+    "/analisis-carta": "/en/wine-list-analysis",
+    "/calculadora-margen-vino": "/en/wine-margin-calculator",
   },
   it: {
     "/": "/it",
@@ -67,6 +71,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/grupos-restauracion": "/it/soluzioni/gruppi-ristorazione",
     "/soluciones/aumentar-ticket-medio-restaurante": "/it/soluzioni/aumentare-scontrino-medio",
     "/producto/inteligencia-dinamica": "/it/prodotto/intelligenza-dinamica",
+    "/producto/winerim-core": "/it/prodotto/winerim-core",
+    "/producto/winerim-supply": "/it/prodotto/winerim-supply",
+    "/analisis-carta": "/it/analisi-carta",
+    "/calculadora-margen-vino": "/it/calcolatrice-margini-vino",
   },
   fr: {
     "/": "/fr",
@@ -91,6 +99,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/grupos-restauracion": "/fr/solutions/groupes-restauration",
     "/soluciones/aumentar-ticket-medio-restaurante": "/fr/solutions/augmenter-ticket-moyen",
     "/producto/inteligencia-dinamica": "/fr/produit/intelligence-dynamique",
+    "/producto/winerim-core": "/fr/produit/winerim-core",
+    "/producto/winerim-supply": "/fr/produit/winerim-supply",
+    "/analisis-carta": "/fr/analyse-carte",
+    "/calculadora-margen-vino": "/fr/calculateur-marge-vin",
   },
 };
 
@@ -142,6 +154,10 @@ export interface TranslationDict {
   nav_platform: string;
   nav_results: string;
 
+  // Nav descriptions
+  nav_software_desc: string;
+  nav_by_business_type: string;
+
   // Footer
   footer_description: string;
   footer_tagline: string;
@@ -158,6 +174,8 @@ export interface TranslationDict {
   footer_about: string;
   footer_methodology: string;
   footer_contact_email: string;
+  footer_cta_title: string;
+  footer_cta_subtitle: string;
 
   // Hero
   hero_badge: string;
@@ -234,6 +252,46 @@ export interface TranslationDict {
   // Pricing page
   pricing_title: string;
   pricing_subtitle: string;
+
+  // Cookie consent
+  cookie_title: string;
+  cookie_desc: string;
+  cookie_accept: string;
+  cookie_reject: string;
+  cookie_more_info: string;
+
+  // Breadcrumbs
+  breadcrumb_home: string;
+
+  // Forms
+  form_restaurant_label: string;
+  form_restaurant_placeholder: string;
+  form_name_label: string;
+  form_name_placeholder: string;
+  form_position_label: string;
+  form_position_placeholder: string;
+  form_phone_label: string;
+  form_email_label: string;
+  form_email_placeholder: string;
+  form_city_label: string;
+  form_city_placeholder: string;
+  form_references_label: string;
+  form_references_placeholder: string;
+  form_business_type_label: string;
+  form_business_type_placeholder: string;
+  form_locations_label: string;
+  form_locations_placeholder: string;
+  form_challenge_label: string;
+  form_challenge_placeholder: string;
+
+  // WhatsApp
+  whatsapp_message: string;
+
+  // Close / dismiss
+  common_close: string;
+
+  // FAQ
+  faq_title_default: string;
 
   // Locale
   locale: string;
