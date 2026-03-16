@@ -33,7 +33,7 @@ const i18n: Record<SupportedLang, {
   breadcrumbs: { label: string; href?: string }[];
   hero_badge: string;
   hero_title_1: string; hero_title_highlight: string;
-  hero_subtitle: string;
+  hero_subtitle: string; hero_journey: string;
   hero_cta_primary: string; hero_cta_secondary: string;
   // Section 2 — What is
   s2_eyebrow: string;
