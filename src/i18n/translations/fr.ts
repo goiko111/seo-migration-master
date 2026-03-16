@@ -42,6 +42,9 @@ const fr: TranslationDict = {
   nav_platform: "Plateforme",
   nav_results: "Résultats",
 
+  nav_software_desc: "Carte digitale intelligente",
+  nav_by_business_type: "Par type d'établissement",
+
   footer_description: "Logiciel de gestion de carte des vins avec IA. Plus de ventes, meilleure marge et contrôle total pour la restauration professionnelle.",
   footer_tagline: "Ventes · Marge · Contrôle",
   footer_product: "Produit",
@@ -57,6 +60,8 @@ const fr: TranslationDict = {
   footer_about: "À propos de Winerim",
   footer_methodology: "Méthodologie",
   footer_contact_email: "bonjour@winerim.com",
+  footer_cta_title: "Prêt à optimiser votre carte des vins ?",
+  footer_cta_subtitle: "Analyse gratuite sous 48 h. Sans engagement.",
 
   hero_badge: "Logiciel de carte des vins avec IA",
   hero_title_1: "Plus de ventes de vin, ",
@@ -121,6 +126,38 @@ const fr: TranslationDict = {
 
   pricing_title: "Des plans adaptés à chaque type d'établissement",
   pricing_subtitle: "Du restaurant indépendant aux grands groupes. Sans engagement.",
+
+  cookie_title: "Nous utilisons des cookies",
+  cookie_desc: "Nous utilisons des cookies propres et tiers pour améliorer votre expérience et analyser l'utilisation du site.",
+  cookie_accept: "Accepter",
+  cookie_reject: "Refuser",
+  cookie_more_info: "En savoir plus",
+
+  breadcrumb_home: "Accueil",
+
+  form_restaurant_label: "Nom du restaurant",
+  form_restaurant_placeholder: "Ex. Restaurant Le Vignoble",
+  form_name_label: "Votre nom complet",
+  form_name_placeholder: "Prénom et nom",
+  form_position_label: "Votre poste",
+  form_position_placeholder: "Quel est votre rôle ?",
+  form_phone_label: "Téléphone",
+  form_email_label: "Email professionnel",
+  form_email_placeholder: "vous@restaurant.com",
+  form_city_label: "Ville",
+  form_city_placeholder: "Ex. Paris",
+  form_references_label: "Références en carte",
+  form_references_placeholder: "Combien de références ?",
+  form_business_type_label: "Type d'établissement",
+  form_business_type_placeholder: "Quel type d'établissement ?",
+  form_locations_label: "Établissements gérés",
+  form_locations_placeholder: "Combien d'établissements ?",
+  form_challenge_label: "Que souhaitez-vous améliorer ?",
+  form_challenge_placeholder: "Votre défi principal",
+
+  whatsapp_message: "Bonjour, j'aimerais en savoir plus sur Winerim.",
+  common_close: "Fermer",
+  faq_title_default: "Questions fréquentes",
 
   locale: "fr_FR",
 };

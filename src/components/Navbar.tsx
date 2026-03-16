@@ -47,7 +47,7 @@ const Navbar = memo(() => {
         {
           title: t.nav_platform,
           items: [
-            { label: t.nav_software, href: localePath("/software-carta-de-vinos"), description: lang === "es" ? "Carta digital inteligente" : "Smart digital wine list" },
+            { label: t.nav_software, href: localePath("/software-carta-de-vinos"), description: t.nav_software_desc },
             { label: t.nav_features, href: localePath("/funcionalidades") },
             { label: "Winerim Core", href: localePath("/producto/winerim-core"), badge: newBadge },
             { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: newBadge },
@@ -70,7 +70,7 @@ const Navbar = memo(() => {
       href: localePath("/soluciones"),
       columns: [
         {
-          title: lang === "es" ? "Por tipo de negocio" : lang === "en" ? "By business type" : lang === "it" ? "Per tipo di attività" : "Par type d'établissement",
+          title: t.nav_by_business_type,
           items: [
             { label: t.nav_sol_gastronomic, href: localePath("/soluciones/restaurantes-gastronomicos") },
             { label: t.nav_sol_wine_bars, href: localePath("/soluciones/wine-bars") },

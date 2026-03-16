@@ -42,6 +42,9 @@ const en: TranslationDict = {
   nav_platform: "Platform",
   nav_results: "Results",
 
+  nav_software_desc: "Smart digital wine list",
+  nav_by_business_type: "By business type",
+
   footer_description: "AI-powered wine list management software. More sales, better margins and full control for professional hospitality.",
   footer_tagline: "Sales · Margin · Control",
   footer_product: "Product",
@@ -57,6 +60,8 @@ const en: TranslationDict = {
   footer_about: "About Winerim",
   footer_methodology: "Methodology",
   footer_contact_email: "hello@winerim.com",
+  footer_cta_title: "Ready to optimize your wine list?",
+  footer_cta_subtitle: "Free analysis within 48 h. No commitment.",
 
   hero_badge: "Wine list management software with AI",
   hero_title_1: "More wine sales, ",
@@ -121,6 +126,38 @@ const en: TranslationDict = {
 
   pricing_title: "Plans tailored to every type of business",
   pricing_subtitle: "From independent restaurants to large groups. No lock-in.",
+
+  cookie_title: "We use cookies",
+  cookie_desc: "We use our own and third-party cookies to improve your experience and analyse site usage.",
+  cookie_accept: "Accept",
+  cookie_reject: "Reject",
+  cookie_more_info: "More info",
+
+  breadcrumb_home: "Home",
+
+  form_restaurant_label: "Restaurant name",
+  form_restaurant_placeholder: "E.g. The Wine House",
+  form_name_label: "Your full name",
+  form_name_placeholder: "First and last name",
+  form_position_label: "Your role",
+  form_position_placeholder: "What's your role?",
+  form_phone_label: "Phone",
+  form_email_label: "Work email",
+  form_email_placeholder: "you@restaurant.com",
+  form_city_label: "City",
+  form_city_placeholder: "E.g. London",
+  form_references_label: "Wine references",
+  form_references_placeholder: "How many references?",
+  form_business_type_label: "Business type",
+  form_business_type_placeholder: "What type of business?",
+  form_locations_label: "Locations you manage",
+  form_locations_placeholder: "How many locations?",
+  form_challenge_label: "What do you want to improve?",
+  form_challenge_placeholder: "Your main challenge right now",
+
+  whatsapp_message: "Hi, I'd like to get more information about Winerim.",
+  common_close: "Close",
+  faq_title_default: "Frequently asked questions",
 
   locale: "en_GB",
 };

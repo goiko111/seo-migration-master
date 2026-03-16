@@ -25,7 +25,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
   const location = useLocation();
 
   // Don't show on demo/contact/admin pages
-  const excludedPaths = ["/demo", "/contacto", "/admin", "/analisis-carta"];
+  const excludedPaths = ["/demo", "/contacto", "/admin", "/analisis-carta", "/en/demo", "/en/contact", "/it/demo", "/it/contatto", "/fr/demo", "/fr/contact"];
   const isExcluded = excludedPaths.some(p => location.pathname.startsWith(p));
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
               <button
                 onClick={() => setDismissed(true)}
                 className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                aria-label="Cerrar"
+                aria-label="Close"
               >
                 <X size={16} />
               </button>
