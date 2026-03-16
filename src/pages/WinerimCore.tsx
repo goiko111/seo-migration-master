@@ -213,17 +213,16 @@ const i18n: Record<SupportedLang, CoreI18n> = {
     depth_text2: "You don't need to see them as isolated tools. What matters is that together they enable better list analysis and more solid decisions.",
     depth_micro: "Some of Winerim's public tools are simplified demos of this analytical layer.",
 
-    tools_eyebrow: "Public tools are just the surface",
-    tools_title: "Every free tool is a simplified demo of what ",
-    tools_title_hl: "Core does in depth",
-    tools_desc: "The calculators and analysers we offer for free solve a one-off problem. Winerim Core integrates them all, connects them together and runs them continuously and automatically on your real data.",
-    tools_examples: [
-      { tool: "Margin calculator", core_module: "Full pricing & profitability engine" },
-      { tool: "By-the-glass price calculator", core_module: "Glass vs. bottle analysis with elasticity" },
-      { tool: "Wine List Score", core_module: "Monthly scorecard with industry benchmark" },
-      { tool: "Wine list analyser", core_module: "Wine Mapping + architecture + assortment integrated" },
-      { tool: "Dead stock calculator", core_module: "Rotation, obsolescence & demand forecasting" },
+    tools_title: "Visible tools. Deeper engine.",
+    tools_subtitle: "Some of Winerim's public calculators and resources show a part of Winerim Core's logic in simplified format.",
+    tools_connections: [
+      { tool: "Margin Calculator", link: "/herramientas/calculadora-margen", core_label: "Simplified demo of pricing & profitability" },
+      { tool: "By-the-Glass Price Calculator", link: "/herramientas/calculadora-precio-copa", core_label: "Simplified demo of glass pricing logic" },
+      { tool: "Dead Stock Calculator", link: "/herramientas/calculadora-stock-muerto", core_label: "Simplified demo of tied-up capital & rotation" },
+      { tool: "Average Ticket Calculator", link: "/herramientas/calculadora-ticket-medio", core_label: "Simplified demo of mix & penetration" },
+      { tool: "Smart Purchase Calculator", link: "/herramientas/calculadora-compra-inteligente", core_label: "Simplified demo of Winerim Supply connected to Core" },
     ],
+    tools_closing: "The tools help you understand a part. Winerim Core connects all the pieces.",
     tools_cta: "Explore free tools",
 
     bridge_eyebrow: "Core + Dynamic Intelligence",
