@@ -553,6 +553,7 @@ const DecisionCenterArea = () => {
   const deepAreas: Record<string, DeepAreaContent> = {
     "margenes-pricing": margenesPricingContent,
     "stock-rotacion": stockRotacionContent,
+    "compras-reposicion": comprasReposicionContent,
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
