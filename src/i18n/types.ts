@@ -90,6 +90,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/casos-exito": "/fr/cas-clients",
     "/herramientas": "/fr/outils",
     "/guias-y-recursos": "/fr/guides",
+    "/recursos": "/fr/ressources",
     "/soluciones": "/fr/solutions",
     "/problemas": "/fr/defis",
     "/sommelier-corner": "/fr/sommelier-corner",
