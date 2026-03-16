@@ -146,6 +146,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "evolucion-stock",
       title: "Cómo interpretar la evolución de stock",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim monitoriza la tendencia de tu stock mes a mes: capital inmovilizado, referencias sin venta y rotación baja.",
         whyMatters: "Lo que importa no es la foto de hoy, sino si la tendencia mejora o empeora.",

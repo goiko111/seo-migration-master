@@ -125,6 +125,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "decision-compra-integrada",
       title: "Cómo combinar rotación, margen y stock en una decisión de compra",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim cruza automáticamente rotación, margen y nivel de stock para clasificar cada referencia en una matriz de decisión.", whyMatters: "Mirar un solo dato te lleva a decisiones parciales. Solo cuando cruzas los tres ves la realidad completa de cada referencia.", riskIfIgnored: "Compras lo que no necesitas, repones lo que no rota y te quedas sin lo que sí se vende." },
       queSignifica:
         "La mejor decisión de compra no mira un solo dato: cruza tres. Rotación te dice si el vino se vende. Margen te dice si vale la pena venderlo. Stock te dice si necesitas más o ya tienes de sobra. Cuando los tres datos apuntan en la misma dirección, la decisión es clara. Cuando se contradicen, necesitas priorizar según tu estrategia.",

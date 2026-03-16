@@ -146,6 +146,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "wine-mapping",
       title: "Cómo interpretar wine mapping y arquitectura de carta",
+      priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim ha generado automáticamente el wine mapping de tu carta cruzando tipo × precio × estilo.", whyMatters: "Sin un mapa visual, cada decisión (alta, baja, repricing) se toma sin contexto. El mapa te dice dónde actuar en 5 minutos.", riskIfIgnored: "Tomas decisiones sobre una lista sin ver la estructura. Es como reformar una casa sin plano." },
       queSignifica:
         "El wine mapping es la representación visual de tu carta en una matriz que cruza al menos dos variables: típicamente tipo de vino × franja de precio, o estilo × origen. La arquitectura de carta es el paso siguiente: asignar un rol comercial a cada zona del mapa (atracción, conversión, posicionamiento, exploración). Un mapa bien leído te dice dónde actuar. Una arquitectura bien definida te dice por qué.",

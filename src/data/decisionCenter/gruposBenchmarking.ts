@@ -108,7 +108,7 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No comunicar al equipo de sala los cambios en carta", consequence: "El camarero sigue recomendando un vino que ya no está. O peor: no recomienda nada porque no sabe qué hay nuevo." },
       ],
     },
-    { id: "benchmarking-interno-externo", title: "Cómo leer benchmarking interno y externo",
+    { id: "benchmarking-interno-externo", title: "Cómo leer benchmarking interno y externo", priority: "este mes",
       porQueTeLoMostramos: { detected: "Winerim compara tus locales entre sí (interno) y tu grupo con el mercado (externo) para darte perspectiva completa.", whyMatters: "Sin benchmarking interno no sabes quién lo hace bien. Sin externo, no sabes si tu mejor local es bueno o simplemente el menos malo.", riskIfIgnored: "Operas a ciegas dentro de tu grupo y sin referencia de mercado. Las desviaciones se detectan tarde." },
       queSignifica:
         "El benchmarking interno compara tus locales entre sí: quién rinde mejor en cada métrica y por qué. El benchmarking externo compara tu grupo con el mercado: ¿tu margen medio está por encima o por debajo de la media del sector? ¿Tu rotación es normal o excepcional? Ambos son necesarios. El interno te dice dónde mejorar dentro de tu grupo. El externo te dice si tu grupo en conjunto está bien posicionado.",
