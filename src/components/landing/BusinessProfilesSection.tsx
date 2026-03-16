@@ -167,7 +167,7 @@ const profilesByLang: Record<string, { badge: string; title: string; titleHighli
         pain: "Il tuo team non sa consigliare vini e perde vendite a ogni servizio.",
         benefit: "Il personale consiglia con sicurezza dal primo giorno, guidato passo dopo passo.",
         cta: "Vendere senza sommelier",
-        url: "/soluciones/restaurante-sin-sumiller",
+        url: "/soluciones/restaurantes-sin-sumiller",
       },
       {
         icon: BarChart3,
