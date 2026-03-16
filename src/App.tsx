@@ -170,6 +170,7 @@ const esRoutes = (
     <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
     <Route path="/blog/como-disenar-carta-vinos-rentable" element={<CartaVinosRentable />} />
     <Route path="/guias-y-recursos" element={<GuiasRecursos />} />
+    <Route path="/recursos" element={<Recursos />} />
     <Route path="/recursos/:slug" element={<ResourcePage />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
