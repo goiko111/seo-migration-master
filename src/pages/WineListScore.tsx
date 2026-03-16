@@ -146,6 +146,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: does your list really sell?",
     link_playbook: "Playbook: building a profitable wine list",
     link_software: "Wine list software",
+    decides: ["Which areas of your list need immediate improvement", "Whether structure, pricing and balance are aligned", "Which block to prioritise: glass, rotation or commercial potential"],
+    avoids: ["Keeping blind spots in the list undiagnosed", "Spending time on areas already working well", "Making list decisions without an evaluation framework"],
+    impact: ["Get a 360° view of your list's health", "Prioritise improvements with the greatest sales impact", "Establish a baseline to measure progress"],
     blocks: [
       { id: "estructura", title: "Structure & organisation", questions: [
         { text: "How many references does your list have?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
