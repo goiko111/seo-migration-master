@@ -198,6 +198,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "revision-mensual",
       title: "Cómo leer una revisión mensual de márgenes",
+      priority: "este mes",
       porQueTeLoMostramos: {
         detected: "Winerim genera automáticamente una comparativa mensual de márgenes para que detectes desviaciones antes de que se acumulen.",
         whyMatters: "Los proveedores suben precios, la merma varía por temporada y la demanda cambia. Sin revisión mensual, acumulas sorpresas.",
