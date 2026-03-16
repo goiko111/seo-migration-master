@@ -222,6 +222,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_checklist: "Checklist: la tua carta vende davvero?",
     link_playbook: "Playbook: costruire una carta redditizia",
     link_software: "Software carta dei vini",
+    decides: ["Quali aree della carta necessitano miglioramento immediato", "Se struttura, pricing ed equilibrio sono allineati", "Quale blocco prioritizzare: calice, rotazione o potenziale commerciale"],
+    avoids: ["Mantenere punti ciechi nella carta senza diagnosi", "Investire tempo su aree che già funzionano", "Decidere sulla carta senza un framework di valutazione"],
+    impact: ["Ottenere una visione 360° della salute della carta", "Prioritizzare i miglioramenti con maggiore impatto sulle vendite", "Stabilire una linea base per misurare i progressi"],
     blocks: [
       { id: "estructura", title: "Struttura e organizzazione", questions: [
         { text: "Quante referenze ha la tua carta?", options: [{ label: "< 20", score: 5 }, { label: "20-60", score: 10 }, { label: "60-120", score: 8 }, { label: "> 120", score: 4 }] },
