@@ -8,6 +8,7 @@ const stockRotacionContent: DeepAreaContent = {
   icon: Package,
   accent: "text-emerald-500",
   bg: "bg-emerald-500/10",
+  audiences: ["sala", "compras-fb", "direccion"],
   topErrors: [
     { error: "Mantener referencias lentas 'porque algún día se venderán'", porQueOcurre: "Porque retirar un vino se siente como reconocer un error de compra. Es más cómodo esperar.", consecuencia: "El capital sigue inmovilizado, el vino pierde valor con el tiempo y ocupa un espacio en carta que podría generar ventas reales." },
     { error: "No cuantificar el coste real del stock parado", porQueOcurre: "Porque el stock muerto no aparece como gasto en la cuenta de resultados. Solo lo ves cuando lo descartas.", consecuencia: "No percibes la urgencia. 20 botellas a 12 € de coste son 240 € que podrían estar invertidos en referencias que sí rotan." },

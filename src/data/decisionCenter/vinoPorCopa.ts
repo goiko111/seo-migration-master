@@ -8,6 +8,7 @@ const vinoPorCopaContent: DeepAreaContent = {
   icon: Wine,
   accent: "text-purple-500",
   bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion"],
   topErrors: [
     { error: "Sacar por copa vinos que destruyen margen por merma", porQueOcurre: "Porque se elige por calidad o por gusto personal, sin calcular si la rotación justifica abrir esa botella.", consecuencia: "El 30-40% de la botella se tira. Un vino con 70% de margen teórico pasa a un 25% real. Pierdes dinero con cada copa." },
     { error: "Tener demasiadas copas activas sin rotación suficiente", porQueOcurre: "Porque más copas parece mejor oferta. Pero cada copa abierta es una botella que tiene que terminarse en 24-48h.", consecuencia: "La merma se multiplica por cada referencia activa. 8 copas con baja rotación generan más pérdida que 4 copas bien elegidas." },
