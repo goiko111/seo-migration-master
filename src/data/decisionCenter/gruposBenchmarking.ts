@@ -14,6 +14,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
     { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Inteligencia de compras centralizada con alertas de sobreprecio por unidad" },
     { label: "Plantilla: Control grupo restauración", href: "/recursos/plantilla-control-grupo-restauracion", description: "Cuadro de mando para comparar métricas clave entre locales" },
     { label: "Plantilla: Scorecard mensual", href: "/recursos/plantilla-scorecard-mensual", description: "Revisión mensual estructurada de rendimiento por unidad" },
+    { label: "Blog: Estandarizar oferta en grupos", href: "/article/estandarizar-oferta-vino-grupo-restauracion", description: "Cómo estandarizar sin perder la identidad de cada local" },
+    { label: "Auditor multi-local", href: "/herramientas/auditor-carta-multilocal", description: "Compara surtido, pricing y copa entre locales de un mismo grupo" },
   ],
   subtopics: [
     {

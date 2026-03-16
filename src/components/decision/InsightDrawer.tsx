@@ -10,6 +10,7 @@ export interface InsightDrawerData {
   porQueTeLoMostramos: string;
   queDeberias: string[];
   recurso: { label: string; href: string };
+  decisionCenterHref?: string;
 }
 
 interface InsightDrawerProps {
@@ -106,6 +107,27 @@ const InsightDrawer = ({ insight, open, onClose }: InsightDrawerProps) => (
               </div>
               <ChevronRight size={14} className="text-muted-foreground/30 group-hover:text-wine transition-colors shrink-0" />
             </Link>
+
+            {/* Decision Center deep-dive */}
+            {insight.decisionCenterHref && (
+              <Link
+                to={insight.decisionCenterHref}
+                className="flex items-center gap-3 rounded-xl border border-purple-500/20 bg-purple-500/5 p-4 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
+                  <Lightbulb size={16} className="text-purple-500" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-semibold tracking-widest uppercase text-purple-500/60">
+                    Profundizar en Decision Center
+                  </p>
+                  <p className="text-sm font-medium text-foreground group-hover:text-purple-500 transition-colors truncate">
+                    Entender esta métrica a fondo
+                  </p>
+                </div>
+                <ChevronRight size={14} className="text-muted-foreground/30 group-hover:text-purple-500 transition-colors shrink-0" />
+              </Link>
+            )}
           </div>
         </motion.aside>
       </>

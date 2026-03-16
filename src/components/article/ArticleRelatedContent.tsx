@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, BookOpen, Download, Lightbulb, Wine } from "lucide-react";
+import { ArrowRight, Calculator, BookOpen, Download, Lightbulb, Wine, Brain } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export interface RelatedLink {
   to: string;
   label: string;
-  type: "tool" | "guide" | "resource" | "solution";
+  type: "tool" | "guide" | "resource" | "solution" | "decision-center";
 }
 
 const typeConfig = {
@@ -13,6 +13,7 @@ const typeConfig = {
   guide: { icon: BookOpen, badge: "Guía", badgeClass: "text-accent" },
   resource: { icon: Download, badge: "Recurso", badgeClass: "text-emerald-500" },
   solution: { icon: Lightbulb, badge: "Solución", badgeClass: "text-amber-500" },
+  "decision-center": { icon: Brain, badge: "Decision Center", badgeClass: "text-purple-500" },
 };
 
 /** Keyword → related links mapping for automatic suggestion */
@@ -23,6 +24,7 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
       { to: "/calculadora-margen-vino", label: "Calculadora de márgenes de vino", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: motor analítico de carta", type: "solution" },
       { to: "/precio-vino-restaurante", label: "Cómo poner precio al vino en un restaurante", type: "guide" },
+      { to: "/decision-center/margenes-pricing", label: "Decision Center: Márgenes y pricing", type: "decision-center" },
     ],
   },
   {
@@ -31,14 +33,16 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
       { to: "/herramientas/calculadora-precio-vino-por-copa", label: "Calculadora de precio por copa", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: análisis de copa y rentabilidad", type: "solution" },
       { to: "/vino-por-copa-restaurante", label: "Guía de vino por copa", type: "guide" },
+      { to: "/decision-center/vino-por-copa", label: "Decision Center: Vino por copa", type: "decision-center" },
     ],
   },
   {
-    keywords: ["carta", "wine list", "diseñ", "organiz", "referencias"],
+    keywords: ["carta", "wine list", "diseñ", "organiz", "referencias", "equilibr", "descompens"],
     links: [
       { to: "/analisis-carta", label: "Analiza tu carta de vinos gratis", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico y arquitectura", type: "solution" },
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla wine mapping", type: "resource" },
+      { to: "/decision-center/carta-equilibrio", label: "Decision Center: Carta y equilibrio", type: "decision-center" },
     ],
   },
   {
@@ -54,14 +58,16 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
       { to: "/herramientas/calculadora-stock-muerto", label: "Calculadora de stock muerto", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
       { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", label: "Mejorar la rotación de vinos", type: "guide" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: Stock y rotación", type: "decision-center" },
     ],
   },
   {
-    keywords: ["compra", "purchas", "proveedor", "distribuidor", "acquist", "achat"],
+    keywords: ["compra", "purchas", "proveedor", "distribuidor", "acquist", "achat", "repon"],
     links: [
       { to: "/herramientas/calculadora-compra-inteligente", label: "Calculadora de compra inteligente", type: "tool" },
       { to: "/producto/winerim-supply", label: "Winerim Supply: compra mejor, vende mejor", type: "solution" },
       { to: "/guias/como-usar-datos-para-decidir-que-vinos-comprar", label: "Usar datos para comprar vinos", type: "guide" },
+      { to: "/decision-center/compras-reposicion", label: "Decision Center: Compras y reposición", type: "decision-center" },
     ],
   },
   {
@@ -81,11 +87,12 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
     ],
   },
   {
-    keywords: ["grupo", "multi", "cadena", "chain", "catena", "chaîne"],
+    keywords: ["grupo", "multi", "cadena", "chain", "catena", "chaîne", "benchmark", "escala"],
     links: [
       { to: "/herramientas/auditor-carta-multilocal", label: "Auditor multi-local de carta", type: "tool" },
       { to: "/soluciones/grupos-restauracion", label: "Soluciones para grupos de restauración", type: "solution" },
       { to: "/guias/como-gestionar-carta-vinos-grupos-restauracion", label: "Gestionar carta en grupos", type: "guide" },
+      { to: "/decision-center/grupos-benchmarking", label: "Decision Center: Grupos y benchmarking", type: "decision-center" },
     ],
   },
 ];

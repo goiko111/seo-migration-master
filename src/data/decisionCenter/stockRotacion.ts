@@ -14,6 +14,8 @@ const stockRotacionContent: DeepAreaContent = {
     { label: "Scorecard mensual", href: "/recursos/scorecard-mensual", description: "Monitoriza la salud de tu stock cada mes con métricas clave" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que detecta rotación baja automáticamente" },
     { label: "Winerim Supply", href: "/producto/winerim-supply", description: "Conecta rotación con decisiones de compra y reposición" },
+    { label: "Blog: Cómo detectar stock muerto", href: "/article/como-detectar-stock-muerto-carta-vinos", description: "Señales de alerta y proceso para identificar vinos sin rotación" },
+    { label: "Blog: Qué vinos merece la pena reponer", href: "/article/que-vinos-merece-la-pena-reponer", description: "Criterios para decidir qué entra y qué sale del próximo pedido" },
   ],
   subtopics: [
     {

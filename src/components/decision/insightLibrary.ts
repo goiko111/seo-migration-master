@@ -20,6 +20,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si es una referencia estratégica (atracción, imagen), documéntalo como decisión consciente.",
     ],
     recurso: { label: "Calculadora de márgenes", href: "/calculadora-margen-vino" },
+    decisionCenterHref: "/decision-center/margenes-pricing",
   },
 
   "stock-muerto": {
@@ -36,6 +37,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si no rota tras la acción, retírala y libera el capital para comprar mejor.",
     ],
     recurso: { label: "Checklist detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos" },
+    decisionCenterHref: "/decision-center/stock-rotacion",
   },
 
   "carta-descompensada": {
@@ -52,6 +54,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Antes de añadir, retira. Una carta más corta y coherente vende más.",
     ],
     recurso: { label: "Plantilla de equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta" },
+    decisionCenterHref: "/decision-center/carta-equilibrio",
   },
 
   "copa-poco-rentable": {
@@ -68,6 +71,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Forma al equipo para recomendar esta copa activamente si decides mantenerla.",
     ],
     recurso: { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
+    decisionCenterHref: "/decision-center/vino-por-copa",
   },
 
   "compra-mal-calibrada": {
@@ -84,6 +88,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Ajusta las cantidades del próximo pedido en base a rotación real.",
     ],
     recurso: { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente" },
+    decisionCenterHref: "/decision-center/compras-reposicion",
   },
 
   "baja-rotacion": {
@@ -100,6 +105,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si tras 2 acciones no responde, planifica su salida de la carta.",
     ],
     recurso: { label: "Guía: Mejorar la rotación", href: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante" },
+    decisionCenterHref: "/decision-center/stock-rotacion",
   },
 
   "exceso-profundidad": {
@@ -116,6 +122,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Define un criterio de profundidad máxima por categoría y respétalo.",
     ],
     recurso: { label: "Guía: Detectar canibalización", href: "/guias/como-detectar-canibalizacion-vinos-carta" },
+    decisionCenterHref: "/decision-center/carta-equilibrio",
   },
 
   "proveedor-caro": {
@@ -132,6 +139,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si no hay justificación, reasigna volumen al proveedor más competitivo.",
     ],
     recurso: { label: "Winerim Supply", href: "/producto/winerim-supply" },
+    decisionCenterHref: "/decision-center/compras-reposicion",
   },
 };
 

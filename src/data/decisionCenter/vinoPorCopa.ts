@@ -14,6 +14,8 @@ const vinoPorCopaContent: DeepAreaContent = {
     { label: "Plantilla: Estrategia de vinos por copa", href: "/recursos/plantilla-estrategia-vinos-por-copa", description: "Diseña tu selección de copas con criterio de negocio" },
     { label: "Plantilla: Formación exprés para sala", href: "/recursos/plantilla-formacion-expres-sala", description: "Forma a tu equipo para recomendar copa con criterio en 30 minutos" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "Monitoriza rotación, merma y rentabilidad por copa automáticamente" },
+    { label: "Blog: Precio por copa sin comerse el margen", href: "/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "Fórmula correcta para fijar precios de copa con merma real" },
+    { label: "Blog: Qué vinos ofrecer por copa", href: "/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Selección de copa según tipo de local y perfil de cliente" },
   ],
   subtopics: [
     {

@@ -87,6 +87,15 @@ export const OTHER = {
   blog: { to: "/blog", label: "Blog de Winerim", description: "Artículos y análisis sobre gestión de vinos en restauración.", type: "article" as const },
 };
 
+export const DECISION_CENTER = {
+  margenes: { to: "/decision-center/margenes-pricing", label: "DC: Márgenes y pricing", description: "Entiende la rentabilidad real de cada vino y actúa con criterio.", type: "guide" as const },
+  stock: { to: "/decision-center/stock-rotacion", label: "DC: Stock y rotación", description: "Detecta lo que no se mueve antes de que sea tarde.", type: "guide" as const },
+  compras: { to: "/decision-center/compras-reposicion", label: "DC: Compras y reposición", description: "Compra con datos, no con intuición.", type: "guide" as const },
+  carta: { to: "/decision-center/carta-equilibrio", label: "DC: Carta y equilibrio", description: "Tu carta debe contar una historia coherente.", type: "guide" as const },
+  copa: { to: "/decision-center/vino-por-copa", label: "DC: Vino por copa", description: "El programa de copa como motor de margen.", type: "guide" as const },
+  grupos: { to: "/decision-center/grupos-benchmarking", label: "DC: Grupos y benchmarking", description: "Gobierna la categoría vino a escala.", type: "guide" as const },
+};
+
 
 /* ─── Pre-built step sets for common flows ─── */
 

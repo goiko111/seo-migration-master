@@ -13,6 +13,8 @@ const cartaEquilibrioContent: DeepAreaContent = {
     { label: "Plantilla equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta", description: "Diagnostica saturaciones, huecos y canibalización por franja" },
     { label: "Checklist carta rentable", href: "/recursos/checklist-carta-rentable", description: "Comprueba si tu carta cumple los criterios de una carta que vende" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "El motor analítico que evalúa el equilibrio de tu carta automáticamente" },
+    { label: "Blog: ¿Tu carta está descompensada?", href: "/article/como-saber-si-carta-vinos-esta-descompensada", description: "Diagnóstico rápido para detectar desequilibrios en tu carta" },
+    { label: "Blog: ¿Tu carta es demasiado larga?", href: "/article/cuando-carta-vinos-es-demasiado-larga", description: "Señales de exceso de referencias y cómo actuar" },
   ],
   subtopics: [
     {
