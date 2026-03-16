@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import margenesPricingContent, { type DeepAreaContent, type SubTopic } from "@/data/decisionCenter/margenesPricing";
+import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
