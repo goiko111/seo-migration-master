@@ -37,6 +37,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Si no rota tras la acción, retírala y libera el capital para comprar mejor.",
     ],
     recurso: { label: "Checklist detección de vinos muertos", href: "/recursos/checklist-deteccion-vinos-muertos" },
+    decisionCenterHref: "/decision-center/stock-rotacion",
   },
 
   "carta-descompensada": {
