@@ -88,6 +88,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Ajusta las cantidades del próximo pedido en base a rotación real.",
     ],
     recurso: { label: "Calculadora de compra inteligente", href: "/herramientas/calculadora-compra-inteligente" },
+    decisionCenterHref: "/decision-center/compras-reposicion",
   },
 
   "baja-rotacion": {
