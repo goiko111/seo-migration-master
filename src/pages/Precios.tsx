@@ -673,12 +673,12 @@ const Precios = () => {
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
               {lang === "es"
-                ? "Winerim combina una capa analítica profunda, una capa de acción dinámica y una nueva capa de inteligencia de compras."
+                ? "Winerim combina análisis, ejecución táctica e inteligencia de compras para gestionar mejor todo el negocio del vino."
                 : lang === "it"
-                ? "Winerim combina un livello analitico profondo, un livello di azione dinamica e un nuovo livello di intelligence degli acquisti."
+                ? "Winerim combina analisi, esecuzione tattica e intelligenza degli acquisti per gestire meglio l'intero business del vino."
                 : lang === "fr"
-                ? "Winerim combine une couche analytique profonde, une couche d'action dynamique et une nouvelle couche d'intelligence d'achats."
-                : "Winerim combines a deep analytical layer, a dynamic action layer and a new purchasing intelligence layer."}
+                ? "Winerim combine analyse, exécution tactique et intelligence d'achats pour mieux gérer l'ensemble du business du vin."
+                : "Winerim combines analytics, tactical execution and purchasing intelligence to better manage every aspect of the wine business."}
             </p>
           </ScrollReveal>
 
