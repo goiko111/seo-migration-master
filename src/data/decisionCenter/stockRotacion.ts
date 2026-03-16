@@ -117,6 +117,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-retirar",
       title: "Cuándo retirar una referencia",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha identificado referencias que no han respondido ni a impulso ni a copa: candidatas claras a retirada.",
+        whyMatters: "Cada referencia sin justificación le quita espacio físico y mental a otra que sí podría vender.",
+        riskIfIgnored: "Mantienes stock muerto indefinidamente, acumulando capital parado y complejidad sin retorno.",
+      },
       queSignifica:
         "Retirar es la última opción, pero a veces es la mejor. Un vino debe salir de carta cuando: ha pasado por impulso y copa sin resultado, su margen no justifica el esfuerzo, o simplemente ya no encaja con tu concepto. Retirar no es un fracaso: es gestión. Lo peor que puedes hacer es mantener una referencia que ocupa espacio sin generar nada.",
       porQueImporta:
