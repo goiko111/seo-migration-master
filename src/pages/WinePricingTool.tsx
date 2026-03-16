@@ -206,6 +206,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "Comment fixer le prix du vin", link_margin: "Calculateur de marges",
     link_profitable: "Carte des vins rentable", link_mapping: "Template wine mapping",
     locale: "fr-FR",
+    decides: ["Quel prix fixer pour chaque vin", "Quel multiplicateur appliquer selon le type et le positionnement", "Si votre prix actuel est au-dessus ou en dessous de l'optimal"],
+    avoids: ["Utiliser un multiplicateur fixe pour toute la carte", "Fixer les prix sans considérer la psychologie du client", "Perdre de la marge sur des vins où vous pourriez facturer plus"],
+    impact: ["Optimiser les marges sans perdre la rotation", "Créer une échelle de prix cohérente et sans sauts", "Améliorer la perception de valeur de toute la carte"],
   },
 };
 
