@@ -71,6 +71,7 @@ const insightLibrary: Record<string, InsightDrawerData> = {
       "Forma al equipo para recomendar esta copa activamente si decides mantenerla.",
     ],
     recurso: { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa" },
+    decisionCenterHref: "/decision-center/vino-por-copa",
   },
 
   "compra-mal-calibrada": {
