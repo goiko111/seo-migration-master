@@ -173,6 +173,7 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-copeo",
       title: "Cuándo revisar el copeo",
+      priority: "esta semana",
       porQueTeLoMostramos: {
         detected: "Winerim ha detectado referencias por copa cuyo margen real difiere significativamente del margen teórico.",
         whyMatters: "La copa puede ser tu mejor palanca de margen o tu mayor fuente de pérdida invisible. Un error de 0,50 € por copa en 20 copas semanales son +500 €/año perdidos.",
