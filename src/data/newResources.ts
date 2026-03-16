@@ -936,6 +936,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/soluciones/grupos-restauracion", label: "Winerim para grupos de restauración", type: "solution" },
       { to: "/herramientas/auditor-carta-multilocal", label: "Auditor multi-local de carta", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico multi-local", type: "solution" },
+      { to: "/decision-center/grupos-benchmarking", label: "Decision Center: grupos y benchmarking", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
