@@ -257,7 +257,6 @@ const GuiasRecursos = () => {
   }, [t]);
 
   const filteredGuides = guideFilter === "all" ? guides : guides.filter(g => g.topics.includes(guideFilter));
-  const filteredResources = resourceFilter === "all" ? resources : resources.filter(r => r.tags?.includes(resourceFilter));
 
   return (
     <div className="min-h-screen bg-background">
