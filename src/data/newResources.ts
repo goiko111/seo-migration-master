@@ -720,6 +720,7 @@ export const newResources: ResourcePageData[] = [
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
       { to: "/analisis-carta", label: "Analizador de carta de vinos", type: "tool" },
       { to: "/producto/winerim-core", label: "Winerim Core: diagnóstico de composición", type: "solution" },
+      { to: "/decision-center/carta-equilibrio", label: "Decision Center: carta y equilibrio", type: "decision-center" },
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
