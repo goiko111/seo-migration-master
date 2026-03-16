@@ -21,6 +21,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "cuando-conviene-copa",
       title: "Cuándo conviene sacar un vino por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha identificado referencias con demanda potencial por copa: buena valoración, baja rotación por botella y perfil resistente a la oxidación.", whyMatters: "La copa reduce la barrera de entrada del comensal. Un vino que nadie pide en botella a 35 € puede venderse fácilmente a 9 € la copa.", riskIfIgnored: "Pierdes conversión, ticket medio y exploración. El comensal que no se atreve con la botella simplemente no pide vino." },
       queSignifica:
         "Un vino es buen candidato para copa cuando cumple tres condiciones a la vez: tiene demanda potencial (el comensal lo pediría si pudiera probar sin comprometerse con una botella), aguanta abierto al menos 24-48 horas sin perder calidad, y su rotación esperada por copa permite terminar la botella antes de que se degrade. Si falla una de las tres, no es buen candidato.",
       porQueImporta:
@@ -40,6 +41,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "cuando-no-conviene-copa",
       title: "Cuándo no conviene sacar un vino por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado copas activas con rotación insuficiente o vinos que no aguantan bien abiertos.", whyMatters: "Un programa de 4 copas bien elegidas es mejor que uno de 10 donde 6 generan pérdida por merma.", riskIfIgnored: "Generas merma, servicio de mala calidad y una percepción negativa de todo tu programa de copa." },
       queSignifica:
         "No todo vino funciona por copa. No conviene cuando: el vino no aguanta abierto más de unas horas (vinos muy delicados, espumosos sin sistema de conservación), cuando la rotación esperada es tan baja que la merma se come el margen, cuando el precio de copa resultante es tan alto que el comensal no lo percibe como accesible, o cuando ya tienes otra copa en la misma franja que cubre esa necesidad.",
       porQueImporta:
@@ -59,6 +61,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "fijar-precio-copa",
       title: "Cómo fijar precio sin perder margen",
+      porQueTeLoMostramos: { detected: "Winerim ha recalculado tus precios de copa incluyendo merma real y ha detectado desviaciones respecto al margen objetivo.", whyMatters: "Un error de 1 € por copa en 15 copas/semana son más de 1.100 €/año perdidos en una sola referencia.", riskIfIgnored: "Vendes copas a un precio que no cubre merma ni margen. Cada servicio es una pérdida invisible." },
       queSignifica:
         "El precio de copa NO se calcula dividiendo el precio de la botella entre 5. Esa fórmula ignora la merma (el vino que se pierde al final de la botella o por no vender todas las copas), el coste de servicio y el margen objetivo. La fórmula correcta parte del coste real por copa (coste de botella ÷ copas reales que vas a servir, incluyendo merma) y aplica el multiplicador objetivo sobre ese coste.",
       porQueImporta:
@@ -78,6 +81,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "evitar-canibalizacion-copa",
       title: "Cómo evitar canibalización entre copa y botella",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado un cambio en tu ratio copa/botella que podría indicar canibalización.", whyMatters: "Si la copa le quita ventas a la botella sin aportar más margen, trabajas más para ganar menos.", riskIfIgnored: "Tu ticket medio baja sin que lo notes. Crees que tu programa de copa va bien porque se venden copas, pero el resultado total empeora." },
       queSignifica:
         "La canibalización ocurre cuando la copa le quita ventas a la botella sin aportar más margen. Si un comensal que habría pedido una botella de 28 € acaba pidiendo 2 copas de 8 € (16 € total), has perdido 12 € de venta y probablemente margen. El objetivo no es que la copa sustituya a la botella: es que capture ventas nuevas (el comensal que no habría pedido botella).",
       porQueImporta:
@@ -97,6 +101,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "medir-rotacion-rentabilidad",
       title: "Cómo medir rotación y rentabilidad por copa",
+      porQueTeLoMostramos: { detected: "Winerim ha cruzado botellas abiertas con copas servidas y ha calculado tu merma real por referencia.", whyMatters: "La copa puede parecer rentable en teoría (75% de margen) pero ser ruinosa en práctica (35% tras merma).", riskIfIgnored: "Operas a ciegas con el programa de copa. Sin medición, no sabes si ganas o pierdes con cada referencia." },
       queSignifica:
         "La rotación por copa mide cuántas botellas abiertas terminas en un periodo. Si abres 3 botellas a la semana y vendes todas las copas, tu rotación es excelente. Si abres 3 y tiras fondo de 2, tu rotación real es un desastre disfrazado de ventas. La rentabilidad por copa no es solo el margen teórico: es el margen menos la merma real, menos el coste de servicio, menos las copas que no vendes.",
       porQueImporta:
@@ -116,6 +121,7 @@ const vinoPorCopaContent: DeepAreaContent = {
     {
       id: "errores-tipicos-copeo",
       title: "Errores típicos en el copeo",
+      porQueTeLoMostramos: { detected: "Winerim ha identificado patrones operativos en tu programa de copa que coinciden con errores frecuentes del sector.", whyMatters: "Los errores de copeo se repiten cada día, cada turno. Un proceso sin control genera pérdidas acumulativas de miles de euros al año.", riskIfIgnored: "Los mismos errores se repiten servicio tras servicio. Sin protocolo, cada turno reinventa la gestión de copa." },
       queSignifica:
         "El copeo es una de las operaciones más delicadas de un restaurante: combina gestión de stock (botellas abiertas), control de merma (vino que se pierde), servicio de sala (recomendación y venta) y pricing (precio que cubre todo lo anterior). Los errores típicos no son de desconocimiento: son de falta de proceso. El equipo sabe que la merma existe, pero nadie la mide. Saben que el precio debería ser otro, pero nadie lo recalcula.",
       porQueImporta:

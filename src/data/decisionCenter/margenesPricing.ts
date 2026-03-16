@@ -7,6 +7,11 @@ export interface SubTopic {
   porQueImporta: string;
   queHacer: string[];
   errores: { mistake: string; consequence: string }[];
+  porQueTeLoMostramos?: {
+    detected: string;
+    whyMatters: string;
+    riskIfIgnored: string;
+  };
 }
 
 export interface DeepAreaContent {
@@ -40,6 +45,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-bruto",
       title: "Qué es el margen bruto",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha calculado el margen bruto de cada referencia de tu carta cruzando PVP con coste de compra real.",
+        whyMatters: "Si no distingues entre margen porcentual y contribución absoluta, puedes estar empujando los vinos equivocados.",
+        riskIfIgnored: "Sigues promocionando vinos que parecen rentables por porcentaje pero que en euros te dejan menos que otros que ni miras.",
+      },
       queSignifica:
         "El margen bruto es la diferencia entre lo que cobras por un vino y lo que te cuesta comprarlo. Se expresa en euros (contribución) o en porcentaje. Es la métrica más básica de rentabilidad, pero no la única que importa. Un vino con un 60% de margen puede dejarte menos dinero real que otro con un 45%, si el segundo se vende al doble de precio.",
       porQueImporta:
@@ -59,6 +69,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "margen-sano",
       title: "Qué margen es sano",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha comparado tu multiplicador medio ponderado con el benchmark de tu segmento.",
+        whyMatters: "Si estás por debajo del rango saludable, tienes un problema estructural que no se arregla vendiendo más.",
+        riskIfIgnored: "Cada mes que pasa con el margen desalineado, pierdes rentabilidad acumulada que ya no puedes recuperar.",
+      },
       queSignifica:
         "No hay un margen universal 'correcto'. Depende de tu segmento, tu ticket medio, tu volumen y tu estructura de costes. Pero hay referencias de mercado: la mayoría de restaurantes rentables operan con un multiplicador medio entre ×2.5 y ×3.5 sobre coste, lo que equivale a márgenes brutos del 60-72%. Lo importante no es un número fijo, sino que tu margen medio ponderado por ventas esté en línea con tu modelo de negocio.",
       porQueImporta:
@@ -78,6 +93,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "referencias-mal-calibradas",
       title: "Cómo detectar referencias mal calibradas",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha identificado referencias cuyo precio no cuadra con su coste, su posición en carta o su papel comercial.",
+        whyMatters: "Una sola referencia mal calibrada en tu top 5 puede costarte miles de euros al año sin que lo notes.",
+        riskIfIgnored: "El impacto se acumula día a día y solo lo ves cuando cierras el trimestre y el margen no da.",
+      },
       queSignifica:
         "Una referencia mal calibrada es un vino cuyo precio no refleja su coste real, su posición en carta o su papel comercial. Puede estar demasiado barato (pierdes margen), demasiado caro (no rota) o mal posicionado frente a otros vinos de la misma franja.",
       porQueImporta:
@@ -97,6 +117,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-subir-precio",
       title: "Cuándo subir precio",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha detectado referencias con alto volumen de venta pero margen por debajo de la media de tu carta.",
+        whyMatters: "Son candidatas claras a una subida de 1-2 € que rara vez impacta en la demanda pero mejora tu resultado cada día.",
+        riskIfIgnored: "Cada servicio que pasa sin corregir el precio es margen que pierdes y que ya no puedes recuperar.",
+      },
       queSignifica:
         "Subir precio no es siempre la respuesta, pero a menudo es la acción más directa para mejorar la rentabilidad. El momento adecuado para hacerlo es cuando tienes datos que lo justifican: un margen por debajo del benchmark, un coste que ha subido, una referencia que vende bien con margen bajo, o una franja de precio donde no tienes competencia interna.",
       porQueImporta:
@@ -116,6 +141,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-compra",
       title: "Cuándo revisar la compra",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha detectado referencias con margen bajo cuyo coste de compra ha subido respecto al histórico.",
+        whyMatters: "Cada euro que ahorras en compra es margen directo, invisible para el cliente pero muy visible en tu cuenta de resultados.",
+        riskIfIgnored: "Sigues pagando más de lo que deberías por lealtad al proveedor, no por valor recibido.",
+      },
       queSignifica:
         "Un margen bajo no siempre se arregla subiendo el precio. A veces el problema es que estás comprando caro. Revisar la compra significa comprobar si el coste de adquisición de una referencia sigue siendo competitivo, si hay alternativas más baratas con calidad equivalente, o si puedes negociar mejores condiciones.",
       porQueImporta:
@@ -135,6 +165,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "cuando-revisar-copeo",
       title: "Cuándo revisar el copeo",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha detectado referencias por copa cuyo margen real difiere significativamente del margen teórico.",
+        whyMatters: "La copa puede ser tu mejor palanca de margen o tu mayor fuente de pérdida invisible. Un error de 0,50 € por copa en 20 copas semanales son +500 €/año perdidos.",
+        riskIfIgnored: "Sigues sirviendo copas a precio deficitario sin saberlo, porque nunca cruzaste el dato de merma con el de pricing.",
+      },
       queSignifica:
         "Si una referencia tiene margen bajo y se sirve por copa, el problema puede estar en el copeo: precio de copa mal calculado, merma no contabilizada o rotación insuficiente. El copeo multiplica los errores de pricing porque cada botella se divide en 4-6 servicios, y cualquier desviación se repite en cada copa.",
       porQueImporta:
@@ -154,6 +189,11 @@ const margenesPricingContent: DeepAreaContent = {
     {
       id: "revision-mensual",
       title: "Cómo leer una revisión mensual de márgenes",
+      porQueTeLoMostramos: {
+        detected: "Winerim genera automáticamente una comparativa mensual de márgenes para que detectes desviaciones antes de que se acumulen.",
+        whyMatters: "Los proveedores suben precios, la merma varía por temporada y la demanda cambia. Sin revisión mensual, acumulas sorpresas.",
+        riskIfIgnored: "Las desviaciones se suman silenciosamente y solo las ves cuando el trimestre cierra peor de lo esperado.",
+      },
       queSignifica:
         "La revisión mensual de márgenes es el proceso de comprobar, cada mes, si tu carta sigue siendo rentable. Incluye comparar márgenes actuales con los del mes anterior, detectar desviaciones de coste, identificar referencias que han cambiado de rendimiento y decidir ajustes. No es un informe: es un proceso de decisión recurrente.",
       porQueImporta:

@@ -18,9 +18,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
     { label: "Auditor multi-local", href: "/herramientas/auditor-carta-multilocal", description: "Compara surtido, pricing y copa entre locales de un mismo grupo" },
   ],
   subtopics: [
-    {
-      id: "comparar-unidades",
-      title: "Cómo comparar unidades de forma útil",
+    { id: "comparar-unidades", title: "Cómo comparar unidades de forma útil",
+      porQueTeLoMostramos: { detected: "Winerim ha normalizado las métricas de tus locales por tipología para que la comparación sea justa.", whyMatters: "Sin comparación normalizada, los datos engañan: el local que más factura puede ser el que peor margen tiene.", riskIfIgnored: "Cada director opera con su criterio sin detectar ni mejores prácticas ni problemas sistémicos." },
       queSignifica:
         "Comparar unidades no es ordenar locales de mejor a peor por facturación. Es cruzar métricas normalizadas (margen medio, rotación, ticket medio de vino, ratio copa/botella, % de vinos muertos) entre locales con contextos comparables. Un gastronómico y un casual no se comparan igual. Una unidad de hotel y una de calle tampoco. La comparación útil agrupa por tipología y mide desviaciones sobre la media del grupo, no valores absolutos.",
       porQueImporta:
@@ -37,9 +36,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No normalizar por número de referencias o tamaño de carta", consequence: "Un local con 300 referencias y otro con 80 no se pueden leer igual sin ajustar." },
       ],
     },
-    {
-      id: "metricas-por-local",
-      title: "Qué métricas mirar por local",
+    { id: "metricas-por-local", title: "Qué métricas mirar por local",
+      porQueTeLoMostramos: { detected: "Winerim ha generado un dashboard de 6 KPIs homogéneos para cada uno de tus locales.", whyMatters: "Si cada local mide distinto, no puedes gobernar. Las decisiones de grupo se toman sobre datos comparables.", riskIfIgnored: "Cada local reporta lo que le conviene. No detectas desviaciones hasta que son crisis." },
       queSignifica:
         "Cada local debe ser legible con un conjunto mínimo de métricas que reveles su salud comercial en la categoría vino. No necesitas 30 indicadores: necesitas los 6 correctos. Margen medio ponderado (no el teórico, el real tras descuentos y merma), rotación media por referencia, porcentaje de vinos muertos (sin venta en 60+ días), ticket medio de vino por mesa, ratio copa/botella y coste medio de compra por referencia.",
       porQueImporta:
@@ -56,9 +54,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No diferenciar margen teórico de margen real", consequence: "Crees que un local tiene un 68% de margen, pero con merma y descuentos reales es un 52%." },
       ],
     },
-    {
-      id: "referencias-que-funcionan",
-      title: "Cómo detectar referencias que sí funcionan y dónde",
+    { id: "referencias-que-funcionan", title: "Cómo detectar referencias que sí funcionan y dónde",
+      porQueTeLoMostramos: { detected: "Winerim ha cruzado rendimiento por referencia entre todos tus locales para identificar qué funciona y dónde.", whyMatters: "Escalar lo que funciona multiplica el impacto. Pero hacerlo sin contexto multiplica el error.", riskIfIgnored: "Replicas a ciegas o retiras sin criterio. Pierdes la oportunidad de entender a tu cliente por local." },
       queSignifica:
         "Una referencia 'que funciona' no es solo la que se vende: es la que se vende con buen margen, rota a un ritmo saludable y no canibaliza a otras. El benchmarking interno te permite identificar qué referencias cumplen esas tres condiciones en cada local. A veces un vino funciona en 3 de 5 locales: eso te dice algo sobre el perfil de cliente, no sobre el vino.",
       porQueImporta:
@@ -75,9 +72,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No investigar por qué una referencia funciona en un sitio y no en otro", consequence: "Pierdes la oportunidad de entender a tu cliente por local. Ese dato vale más que la venta." },
       ],
     },
-    {
-      id: "cuando-replicar",
-      title: "Cuándo replicar una referencia en otros locales",
+    { id: "cuando-replicar", title: "Cuándo replicar una referencia en otros locales",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado referencias con rendimiento sostenido en un local que podrían funcionar en otros de perfil similar.", whyMatters: "Una replicación bien hecha multiplica el rendimiento. Mal hecha, multiplica stock parado en varios locales.", riskIfIgnored: "Pierdes oportunidades de escalar éxitos o, peor, replicas sin datos y generas problemas en múltiples unidades." },
       queSignifica:
         "Replicar una referencia significa incluirla en la carta de otro local porque ha demostrado rendimiento en uno o varios. Pero la decisión no es automática: requiere que el perfil de cliente sea comparable, que el precio encaje en la carta destino, que haya espacio sin generar canibalización y que el proveedor pueda servir a ese local con las mismas condiciones.",
       porQueImporta:
@@ -94,9 +90,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "Replicar sin negociar condiciones para el nuevo local", consequence: "Compras al mismo proveedor pero sin el descuento por volumen. Tu margen en el local destino es peor." },
       ],
     },
-    {
-      id: "cuando-retirar-compra",
-      title: "Cuándo retirar una compra en una unidad",
+    { id: "cuando-retirar-compra", title: "Cuándo retirar una compra en una unidad",
+      porQueTeLoMostramos: { detected: "Winerim ha identificado referencias sin rendimiento en locales específicos: candidatas a retirada activa.", whyMatters: "En un grupo, una referencia muerta en 4 locales es 4 veces el problema. La retirada con datos es de las decisiones más rentables.", riskIfIgnored: "Mantienes stock muerto multiplicado por el número de locales. El capital inmovilizado del grupo se dispara." },
       queSignifica:
         "Retirar una compra significa dejar de reponer una referencia en un local concreto. No significa que el vino sea malo: significa que en ese local, con ese cliente, a ese precio, no rinde. Los indicadores de retirada son: más de 60 días sin venta, margen real por debajo del umbral mínimo, o existencia de una referencia mejor en la misma franja que la canibaliza.",
       porQueImporta:
@@ -113,9 +108,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No comunicar al equipo de sala los cambios en carta", consequence: "El camarero sigue recomendando un vino que ya no está. O peor: no recomienda nada porque no sabe qué hay nuevo." },
       ],
     },
-    {
-      id: "benchmarking-interno-externo",
-      title: "Cómo leer benchmarking interno y externo",
+    { id: "benchmarking-interno-externo", title: "Cómo leer benchmarking interno y externo",
+      porQueTeLoMostramos: { detected: "Winerim compara tus locales entre sí (interno) y tu grupo con el mercado (externo) para darte perspectiva completa.", whyMatters: "Sin benchmarking interno no sabes quién lo hace bien. Sin externo, no sabes si tu mejor local es bueno o simplemente el menos malo.", riskIfIgnored: "Operas a ciegas dentro de tu grupo y sin referencia de mercado. Las desviaciones se detectan tarde." },
       queSignifica:
         "El benchmarking interno compara tus locales entre sí: quién rinde mejor en cada métrica y por qué. El benchmarking externo compara tu grupo con el mercado: ¿tu margen medio está por encima o por debajo de la media del sector? ¿Tu rotación es normal o excepcional? Ambos son necesarios. El interno te dice dónde mejorar dentro de tu grupo. El externo te dice si tu grupo en conjunto está bien posicionado.",
       porQueImporta:

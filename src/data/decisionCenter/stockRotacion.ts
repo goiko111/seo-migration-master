@@ -21,6 +21,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "stock-muerto",
       title: "Qué se considera stock muerto",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha identificado referencias en tu carta con 0 ventas en más de 60 días.",
+        whyMatters: "Entre el 10% y el 25% de la carta de un restaurante medio está en stock muerto sin saberlo. Es capital que no trabaja.",
+        riskIfIgnored: "Cada mes que pasa, ese dinero sigue parado. No mejora con el tiempo: solo se acumula.",
+      },
       queSignifica:
         "Stock muerto es cualquier referencia que lleva más de 60 días sin venta y no tiene una justificación estratégica clara (reserva especial, vino de guarda para evento, etc.). No es lo mismo que stock lento: un vino que vende 2 botellas al mes es lento pero vivo. Uno que lleva 3 meses sin moverse es muerto. La diferencia importa porque la acción es distinta.",
       porQueImporta:
@@ -40,6 +45,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "capital-inmovilizado",
       title: "Cómo detectar capital inmovilizado",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha calculado el valor total de las botellas sin venta en tu bodega.",
+        whyMatters: "Es dinero real invertido que no genera retorno. Invisible en la cuenta de resultados, pero muy real en tu tesorería.",
+        riskIfIgnored: "Sin acción, el capital inmovilizado crece cada mes con cada nuevo pedido que no se ajusta a la demanda.",
+      },
       queSignifica:
         "El capital inmovilizado es el valor total de compra de todas las botellas que tienes en bodega y no se están vendiendo. No es un número abstracto: son euros reales que invertiste y que no están generando retorno. Para calcularlo, multiplica el coste de compra de cada referencia sin venta por el número de botellas en stock.",
       porQueImporta:
@@ -59,6 +69,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-impulsar",
       title: "Cuándo impulsar una referencia",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha encontrado vinos con buen margen y buena valoración pero baja rotación: no se venden, pero podrían.",
+        whyMatters: "Muchos vinos no se venden por falta de visibilidad, no de calidad. Un impulso de 7-14 días puede reactivarlos.",
+        riskIfIgnored: "Retiras vinos potencialmente rentables sin haberles dado una oportunidad real de venta.",
+      },
       queSignifica:
         "Impulsar significa darle una segunda oportunidad activa a un vino que no se está vendiendo pero que tiene potencial. No es esperar: es poner al equipo de sala a trabajar con esa referencia durante un periodo concreto (7-14 días) y medir si responde. Si el vino es bueno, está bien posicionado y el comensal simplemente no lo conoce, un impulso de sala puede reactivarlo.",
       porQueImporta:
@@ -78,6 +93,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-sacar-por-copa",
       title: "Cuándo sacarla por copa",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha detectado referencias lentas que podrían funcionar por copa para acelerar la rotación.",
+        whyMatters: "La copa reduce la barrera de entrada del comensal y te permite recuperar capital en días en vez de meses.",
+        riskIfIgnored: "El stock sigue parado hasta que se deteriora o lo liquidar a pérdida.",
+      },
       queSignifica:
         "Mover una referencia lenta a copa es una estrategia de rescate: en vez de esperar a que alguien pida la botella, la ofreces por copa para acelerar la rotación y recuperar al menos parte de la inversión. Funciona bien con vinos que son buenos pero que el comensal no se atreve a pedir en botella (precio alto, uva desconocida, región poco habitual).",
       porQueImporta:
@@ -97,6 +117,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-retirar",
       title: "Cuándo retirar una referencia",
+      porQueTeLoMostramos: {
+        detected: "Winerim ha identificado referencias que no han respondido ni a impulso ni a copa: candidatas claras a retirada.",
+        whyMatters: "Cada referencia sin justificación le quita espacio físico y mental a otra que sí podría vender.",
+        riskIfIgnored: "Mantienes stock muerto indefinidamente, acumulando capital parado y complejidad sin retorno.",
+      },
       queSignifica:
         "Retirar es la última opción, pero a veces es la mejor. Un vino debe salir de carta cuando: ha pasado por impulso y copa sin resultado, su margen no justifica el esfuerzo, o simplemente ya no encaja con tu concepto. Retirar no es un fracaso: es gestión. Lo peor que puedes hacer es mantener una referencia que ocupa espacio sin generar nada.",
       porQueImporta:
@@ -116,6 +141,11 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "evolucion-stock",
       title: "Cómo interpretar la evolución de stock",
+      porQueTeLoMostramos: {
+        detected: "Winerim monitoriza la tendencia de tu stock mes a mes: capital inmovilizado, referencias sin venta y rotación baja.",
+        whyMatters: "Lo que importa no es la foto de hoy, sino si la tendencia mejora o empeora.",
+        riskIfIgnored: "Un stock que empeora cada mes se convierte en crisis. Si no miras la tendencia, solo reaccionas cuando es tarde.",
+      },
       queSignifica:
         "La evolución de stock no es un snapshot: es una tendencia. Lo que importa no es cuánto stock tienes hoy, sino cómo ha cambiado respecto al mes pasado. ¿Ha subido el capital inmovilizado? ¿Han aparecido nuevas referencias sin venta? ¿El porcentaje de carta con rotación baja está mejorando o empeorando? Leer la evolución te permite anticipar problemas antes de que se conviertan en crisis.",
       porQueImporta:
