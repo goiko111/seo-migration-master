@@ -40,6 +40,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
     {
       id: "exceso-huecos-precio",
       title: "Exceso y huecos por rango de precio",
+      porQueTeLoMostramos: { detected: "Winerim ha analizado la distribución de tus referencias por franja de precio y ha encontrado zonas saturadas y franjas vacías.", whyMatters: "El precio es el primer filtro del comensal. Saturar una franja genera canibalización; dejar huecos pierde ventas que nunca ves.", riskIfIgnored: "Sigues saturando franjas donde ya compites contigo mismo mientras el cliente que busca algo diferente se va sin pedir." },
       queSignifica:
         "Los rangos de precio son las franjas en las que se distribuyen tus referencias: 10-15 €, 15-25 €, 25-40 €, etc. Un exceso en una franja significa que tienes demasiadas referencias compitiendo por el mismo comensal en el mismo rango. Un hueco significa que hay una franja donde el cliente busca y no encuentra. Ambos son problemas, pero el exceso es más caro (genera canibalización y stock) y el hueco es más invisible (pierdes ventas que nunca ves).",
       porQueImporta:
