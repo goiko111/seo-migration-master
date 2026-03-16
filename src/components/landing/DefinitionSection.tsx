@@ -1,6 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
-import ComparisonTable from "@/components/seo/ComparisonTable";
 import NotForSection from "@/components/seo/NotForSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -52,77 +51,6 @@ const definitionData = {
       "Multiplateforme : web, tablette et app native",
     ],
     summaryLabel: "Qu'est-ce que Winerim ?",
-  },
-};
-
-const comparisonData = {
-  es: {
-    title: "Winerim vs. carta impresa, PDF y QR genérico",
-    subtitle: "Comparativa funcional entre los formatos más habituales de carta de vinos en restauración.",
-    columns: ["Carta impresa", "PDF / QR básico", "Winerim"],
-    rows: [
-      { feature: "Actualización en tiempo real", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Recomendaciones de vino personalizadas", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Maridajes automáticos con cada plato", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Filtros por tipo, precio, región o estilo", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Analítica de ventas de vino", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Comparador de vinos", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Sin coste de impresión", options: [false, true, true] as (boolean | "partial")[] },
-      { feature: "Accesible desde el móvil", options: [false, "partial" as const, true] },
-      { feature: "Experiencia visual e interactiva", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Gestión centralizada multi-local", options: [false, false, true] as (boolean | "partial")[] },
-    ],
-  },
-  en: {
-    title: "Winerim vs. printed list, PDF and basic QR",
-    subtitle: "Functional comparison between the most common wine list formats in hospitality.",
-    columns: ["Printed list", "PDF / Basic QR", "Winerim"],
-    rows: [
-      { feature: "Real-time updates", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Personalized wine recommendations", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Automatic pairings for each dish", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Filters by type, price, region or style", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Wine sales analytics", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Wine comparator", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "No printing costs", options: [false, true, true] as (boolean | "partial")[] },
-      { feature: "Mobile accessible", options: [false, "partial" as const, true] },
-      { feature: "Visual & interactive experience", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Centralized multi-venue management", options: [false, false, true] as (boolean | "partial")[] },
-    ],
-  },
-  it: {
-    title: "Winerim vs. carta stampata, PDF e QR generico",
-    subtitle: "Confronto funzionale tra i formati di carta dei vini più comuni nella ristorazione.",
-    columns: ["Carta stampata", "PDF / QR base", "Winerim"],
-    rows: [
-      { feature: "Aggiornamento in tempo reale", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Raccomandazioni personalizzate", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Abbinamenti automatici", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Filtri per tipo, prezzo, regione", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Analisi vendite", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Comparatore vini", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Nessun costo di stampa", options: [false, true, true] as (boolean | "partial")[] },
-      { feature: "Accessibile da mobile", options: [false, "partial" as const, true] },
-      { feature: "Esperienza visiva e interattiva", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Gestione centralizzata multi-locale", options: [false, false, true] as (boolean | "partial")[] },
-    ],
-  },
-  fr: {
-    title: "Winerim vs. carte imprimée, PDF et QR basique",
-    subtitle: "Comparaison fonctionnelle entre les formats de carte des vins les plus courants.",
-    columns: ["Carte imprimée", "PDF / QR basique", "Winerim"],
-    rows: [
-      { feature: "Mise à jour en temps réel", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Recommandations personnalisées", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Accords automatiques", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Filtres par type, prix, région", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Analytique des ventes", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Comparateur de vins", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Pas de frais d'impression", options: [false, true, true] as (boolean | "partial")[] },
-      { feature: "Accessible sur mobile", options: [false, "partial" as const, true] },
-      { feature: "Expérience visuelle interactive", options: [false, false, true] as (boolean | "partial")[] },
-      { feature: "Gestion centralisée multi-sites", options: [false, false, true] as (boolean | "partial")[] },
-    ],
   },
 };
 
@@ -197,77 +125,6 @@ const notForData = {
   },
 };
 
-const competitorData = {
-  es: {
-    title: "Winerim vs. otras plataformas de carta digital de vinos",
-    subtitle: "Comparativa funcional con las soluciones de gestión de carta de vinos más habituales del mercado.",
-    columns: ["Cartas digitales genéricas", "Plataformas de vino B2C", "Software sommelier básico", "Winerim"],
-    rows: [
-      { feature: "Recomendaciones IA personalizadas al comensal", options: [false, false, "partial" as const, true] },
-      { feature: "Maridajes automáticos con cada plato", options: [false, false, false, true] },
-      { feature: "Analítica de ventas y rotación en tiempo real", options: [false, false, "partial" as const, true] },
-      { feature: "Optimización de precios y márgenes", options: [false, false, false, true] },
-      { feature: "Comparador de vinos para el comensal", options: [false, "partial" as const, false, true] },
-      { feature: "Gestión centralizada multi-local", options: ["partial" as const, false, false, true] },
-      { feature: "Alertas de stock y obsolescencia", options: [false, false, false, true] },
-      { feature: "Experiencia visual e interactiva en móvil", options: ["partial" as const, true, false, true] },
-      { feature: "Especializado 100% en hostelería", options: [false, false, "partial" as const, true] },
-      { feature: "Multiplataforma: web, tablet y app", options: [false, false, "partial" as const, true] },
-    ],
-  },
-  en: {
-    title: "Winerim vs. other digital wine list platforms",
-    subtitle: "Functional comparison with the most common wine list management solutions on the market.",
-    columns: ["Generic digital menus", "B2C wine platforms", "Basic sommelier software", "Winerim"],
-    rows: [
-      { feature: "AI-powered guest recommendations", options: [false, false, "partial" as const, true] },
-      { feature: "Automatic food-wine pairings", options: [false, false, false, true] },
-      { feature: "Real-time sales & rotation analytics", options: [false, false, "partial" as const, true] },
-      { feature: "Price & margin optimization", options: [false, false, false, true] },
-      { feature: "Wine comparator for guests", options: [false, "partial" as const, false, true] },
-      { feature: "Centralized multi-venue management", options: ["partial" as const, false, false, true] },
-      { feature: "Stock & obsolescence alerts", options: [false, false, false, true] },
-      { feature: "Visual & interactive mobile experience", options: ["partial" as const, true, false, true] },
-      { feature: "100% hospitality-focused", options: [false, false, "partial" as const, true] },
-      { feature: "Multi-platform: web, tablet & app", options: [false, false, "partial" as const, true] },
-    ],
-  },
-  it: {
-    title: "Winerim vs. altre piattaforme di carta dei vini digitale",
-    subtitle: "Confronto funzionale con le soluzioni di gestione più comuni sul mercato.",
-    columns: ["Menu digitali generici", "Piattaforme vino B2C", "Software sommelier base", "Winerim"],
-    rows: [
-      { feature: "Raccomandazioni IA personalizzate", options: [false, false, "partial" as const, true] },
-      { feature: "Abbinamenti automatici per ogni piatto", options: [false, false, false, true] },
-      { feature: "Analisi vendite e rotazione in tempo reale", options: [false, false, "partial" as const, true] },
-      { feature: "Ottimizzazione prezzi e margini", options: [false, false, false, true] },
-      { feature: "Comparatore vini per ospiti", options: [false, "partial" as const, false, true] },
-      { feature: "Gestione centralizzata multi-locale", options: ["partial" as const, false, false, true] },
-      { feature: "Alert stock e obsolescenza", options: [false, false, false, true] },
-      { feature: "Esperienza mobile visiva e interattiva", options: ["partial" as const, true, false, true] },
-      { feature: "100% focalizzato sulla ristorazione", options: [false, false, "partial" as const, true] },
-      { feature: "Multipiattaforma: web, tablet e app", options: [false, false, "partial" as const, true] },
-    ],
-  },
-  fr: {
-    title: "Winerim vs. autres plateformes de carte des vins digitale",
-    subtitle: "Comparaison fonctionnelle avec les solutions de gestion les plus courantes du marché.",
-    columns: ["Menus digitaux génériques", "Plateformes vin B2C", "Logiciel sommelier basique", "Winerim"],
-    rows: [
-      { feature: "Recommandations IA personnalisées", options: [false, false, "partial" as const, true] },
-      { feature: "Accords mets-vins automatiques", options: [false, false, false, true] },
-      { feature: "Analytique ventes & rotation en temps réel", options: [false, false, "partial" as const, true] },
-      { feature: "Optimisation prix et marges", options: [false, false, false, true] },
-      { feature: "Comparateur de vins pour convives", options: [false, "partial" as const, false, true] },
-      { feature: "Gestion centralisée multi-sites", options: ["partial" as const, false, false, true] },
-      { feature: "Alertes stock et obsolescence", options: [false, false, false, true] },
-      { feature: "Expérience mobile visuelle interactive", options: ["partial" as const, true, false, true] },
-      { feature: "100% dédié à la restauration", options: [false, false, "partial" as const, true] },
-      { feature: "Multiplateforme : web, tablette et app", options: [false, false, "partial" as const, true] },
-    ],
-  },
-};
-
 const homeFaqs = {
   es: [
     { q: "¿Qué es Winerim?", a: "Winerim es un software de gestión de cartas de vinos para restaurantes. Combina una carta digital interactiva con recomendaciones de vino basadas en inteligencia artificial, maridajes automáticos, analítica de ventas y optimización de precios. No es un simple QR a un PDF: es una plataforma completa que convierte la carta de vinos en un motor de ventas." },
@@ -318,11 +175,9 @@ const DefinitionSection = () => {
   const { lang } = useLanguage();
 
   const def = definitionData[lang] || definitionData.es;
-  const comp = comparisonData[lang] || comparisonData.es;
   const nf = notForData[lang] || notForData.es;
   const faqs = homeFaqs[lang] || homeFaqs.es;
   const faqTitle = faqTitles[lang] || faqTitles.es;
-  const compet = competitorData[lang] || competitorData.es;
 
   return (
     <>
@@ -339,19 +194,6 @@ const DefinitionSection = () => {
         </div>
       </section>
 
-      {/* Comparison table: Winerim vs formats */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-4xl mx-auto">
-          <ComparisonTable
-            title={comp.title}
-            subtitle={comp.subtitle}
-            columns={comp.columns}
-            rows={comp.rows}
-            highlightColumn={2}
-          />
-        </div>
-      </section>
-
       {/* Not For section */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
@@ -360,19 +202,6 @@ const DefinitionSection = () => {
             notFor={nf.notFor}
             titleIdeal={nf.titleIdeal}
             titleNot={nf.titleNot}
-          />
-        </div>
-      </section>
-
-      {/* Competitor comparison table */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-5xl mx-auto">
-          <ComparisonTable
-            title={compet.title}
-            subtitle={compet.subtitle}
-            columns={compet.columns}
-            rows={compet.rows}
-            highlightColumn={3}
           />
         </div>
       </section>
