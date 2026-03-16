@@ -7,6 +7,11 @@ export interface SubTopic {
   porQueImporta: string;
   queHacer: string[];
   errores: { mistake: string; consequence: string }[];
+  porQueTeLoMostramos?: {
+    detected: string;
+    whyMatters: string;
+    riskIfIgnored: string;
+  };
 }
 
 export interface DeepAreaContent {
