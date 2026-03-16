@@ -21,6 +21,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "stock-muerto",
       title: "Qué se considera stock muerto",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias en tu carta con 0 ventas en más de 60 días.",
         whyMatters: "Entre el 10% y el 25% de la carta de un restaurante medio está en stock muerto sin saberlo. Es capital que no trabaja.",
