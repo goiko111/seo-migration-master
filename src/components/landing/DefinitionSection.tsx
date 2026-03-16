@@ -1,6 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
-import ComparisonTable from "@/components/seo/ComparisonTable";
 import NotForSection from "@/components/seo/NotForSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
