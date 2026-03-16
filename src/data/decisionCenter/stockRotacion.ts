@@ -46,6 +46,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "capital-inmovilizado",
       title: "Cómo detectar capital inmovilizado",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha calculado el valor total de las botellas sin venta en tu bodega.",
         whyMatters: "Es dinero real invertido que no genera retorno. Invisible en la cuenta de resultados, pero muy real en tu tesorería.",
