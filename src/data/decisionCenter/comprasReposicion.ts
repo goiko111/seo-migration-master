@@ -60,6 +60,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "precios-compra",
       title: "Cómo leer precios de compra",
+      porQueTeLoMostramos: { detected: "Winerim ha analizado tus costes de compra incluyendo transporte, mínimos y condiciones para calcular el coste total real.", whyMatters: "Cada euro de diferencia en compra es un euro directo en tu margen. 0,80 € de más en 50 botellas/mes son 480 €/año perdidos en una sola referencia.", riskIfIgnored: "Eliges proveedores por tarifa, no por coste real. Tu margen se erosiona sin que lo veas en el precio unitario." },
       queSignifica:
         "El precio de compra no es solo el número en la factura. Es ese número más el transporte, los mínimos de pedido, los rappels, los plazos de pago y las condiciones de devolución. Dos proveedores pueden ofrecerte el mismo vino a 'el mismo precio' con costes reales muy distintos. Leer bien un precio de compra significa entender el coste total de adquisición, no solo el precio unitario.",
       porQueImporta:
