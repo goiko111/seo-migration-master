@@ -84,7 +84,7 @@ const data: VerticalContent = {
 
   impactLabel: "Resultados",
   impactTitle: "Impacto medible en cartas extensas",
-  impactSubtitle: "Basado en restaurantes con +100 referencias que han optimizado su carta con Winerim.",
+  impactSubtitle: "Basado en restaurantes con más de 250 referencias que han optimizado su carta con Winerim.",
   impacts: [
     { label: "Stock muerto detectado: 15–30% de la carta", desc: "La mayoría de cartas extensas tienen un 15–30% de referencias que no rotan. Winerim las identifica con datos." },
     { label: "Margen global +10–18%", desc: "Al retirar referencias que no aportan y ajustar pricing, el margen de toda la categoría de vino mejora." },
