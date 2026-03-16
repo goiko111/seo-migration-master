@@ -72,9 +72,8 @@ const gruposBenchmarkingContent: DeepAreaContent = {
         { mistake: "No investigar por qué una referencia funciona en un sitio y no en otro", consequence: "Pierdes la oportunidad de entender a tu cliente por local. Ese dato vale más que la venta." },
       ],
     },
-    {
-      id: "cuando-replicar",
-      title: "Cuándo replicar una referencia en otros locales",
+    { id: "cuando-replicar", title: "Cuándo replicar una referencia en otros locales",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado referencias con rendimiento sostenido en un local que podrían funcionar en otros de perfil similar.", whyMatters: "Una replicación bien hecha multiplica el rendimiento. Mal hecha, multiplica stock parado en varios locales.", riskIfIgnored: "Pierdes oportunidades de escalar éxitos o, peor, replicas sin datos y generas problemas en múltiples unidades." },
       queSignifica:
         "Replicar una referencia significa incluirla en la carta de otro local porque ha demostrado rendimiento en uno o varios. Pero la decisión no es automática: requiere que el perfil de cliente sea comparable, que el precio encaje en la carta destino, que haya espacio sin generar canibalización y que el proveedor pueda servir a ese local con las mismas condiciones.",
       porQueImporta:
