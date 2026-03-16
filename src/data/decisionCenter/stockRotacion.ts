@@ -121,6 +121,7 @@ const stockRotacionContent: DeepAreaContent = {
     {
       id: "cuando-retirar",
       title: "Cuándo retirar una referencia",
+      priority: "inmediato",
       porQueTeLoMostramos: {
         detected: "Winerim ha identificado referencias que no han respondido ni a impulso ni a copa: candidatas claras a retirada.",
         whyMatters: "Cada referencia sin justificación le quita espacio físico y mental a otra que sí podría vender.",
