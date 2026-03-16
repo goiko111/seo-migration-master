@@ -593,30 +593,29 @@ const WinerimCore = () => {
         </div>
       </section>
 
-      {/* ─── 3. TOOLS = SIMPLIFIED DEMOS ─── */}
+      {/* ─── 3. TOOLS → CORE BRIDGE ─── */}
       <section className="py-20 md:py-28">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <ScrollReveal>
-            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-accent mb-4 block">{t.tools_eyebrow}</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold leading-tight mb-4 max-w-3xl">
-              {t.tools_title}<span className="text-gradient-wine italic">{t.tools_title_hl}</span>
+          <ScrollReveal className="mb-12">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold leading-tight mb-3">
+              {t.tools_title}
             </h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">{t.tools_desc}</p>
+            <p className="text-muted-foreground max-w-2xl">{t.tools_subtitle}</p>
           </ScrollReveal>
 
           <div className="space-y-3">
-            {t.tools_examples.map((ex, i) => (
+            {t.tools_connections.map((conn, i) => (
               <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl border border-border bg-gradient-card group hover:border-wine/20 transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center shrink-0">
-                    <Calculator size={16} className="text-muted-foreground" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-muted-foreground">{ex.tool}</p>
-                  </div>
-                  <ArrowRight size={14} className="text-wine/40 shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{ex.core_module}</p>
+                <div className="group relative rounded-xl border border-border bg-gradient-card hover:border-wine/20 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 left-0 w-[3px] h-full bg-wine/20 group-hover:bg-wine/40 transition-colors" />
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 p-5 pl-7">
+                    <Link to={localePath(conn.link)}
+                      className="font-heading text-sm font-bold text-foreground hover:text-wine transition-colors shrink-0 inline-flex items-center gap-1.5">
+                      {conn.tool}
+                      <ArrowRight size={12} className="text-wine/50" />
+                    </Link>
+                    <span className="hidden sm:block w-px h-4 bg-border" />
+                    <p className="text-sm text-muted-foreground leading-relaxed">{conn.core_label}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -624,7 +623,8 @@ const WinerimCore = () => {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="mt-8">
+            <p className="text-sm text-muted-foreground/70 italic mt-8 max-w-2xl">{t.tools_closing}</p>
+            <div className="mt-4">
               <Link to={localePath("/herramientas")}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-wine hover:text-wine-light transition-colors">
                 {t.tools_cta} <ArrowRight size={14} />
