@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, TrendingUp, Wine, DollarSign, Users,
-  Calculator, Sparkles, Info, BarChart3, GlassWater
+  Calculator, Sparkles, Info, BarChart3, GlassWater, Zap,
 } from "lucide-react";
 import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import Navbar from "@/components/Navbar";
@@ -19,13 +19,21 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 
+/* ─── Scenario presets ─── */
+const scenarios = [
+  { id: "base", label: "Sin cambios", deltaRatio: 0, deltaTicket: 0, deltaCopa: 0, desc: "Situación actual sin intervención." },
+  { id: "copa", label: "Más copa", deltaRatio: 5, deltaTicket: 0, deltaCopa: 15, desc: "Ampliar oferta de copa para captar mesas que no pedían vino." },
+  { id: "mix", label: "Mejor mix", deltaRatio: 0, deltaTicket: 15, deltaCopa: 0, desc: "Mejorar la escalera de precios y visibilidad de gama media-alta." },
+  { id: "full", label: "Copa + mix + sala", deltaRatio: 8, deltaTicket: 20, deltaCopa: 10, desc: "Combinación de copa, mix y recomendación activa del equipo." },
+];
+
 const CalculadoraTicketMedio = () => {
   const [cubiertos, setCubiertos] = useState(120);
   const [diasMes, setDiasMes] = useState(26);
   const [ratioVino, setRatioVino] = useState(35);
   const [ticketVinoActual, setTicketVinoActual] = useState(8);
   const [ratioCopa, setRatioCopa] = useState(40);
-  const [mejoraPct, setMejoraPct] = useState(20);
+  const [activeScenario, setActiveScenario] = useState<string | null>(null);
   const [calculated, setCalculated] = useState(false);
 
   useEffect(() => {
@@ -61,40 +69,40 @@ const CalculadoraTicketMedio = () => {
     const mesasConVino = Math.round(mesasMes * (ratioVino / 100));
     const facturacionActual = mesasConVino * ticketVinoActual;
 
-    // Scenario 1: increase ratio of tables ordering wine
-    const nuevoRatio = Math.min(ratioVino + (mejoraPct * 0.4), 85);
-    const mesasConVinoNuevo = Math.round(mesasMes * (nuevoRatio / 100));
+    const scenarioResults = scenarios.map(sc => {
+      const nuevoRatio = Math.min(ratioVino + sc.deltaRatio, 90);
+      const nuevoTicket = ticketVinoActual * (1 + sc.deltaTicket / 100);
+      const nuevoCopa = Math.min(ratioCopa + sc.deltaCopa, 100);
+      const mesasNuevo = Math.round(mesasMes * (nuevoRatio / 100));
+      const facNueva = mesasNuevo * nuevoTicket;
+      const incrementoMes = facNueva - facturacionActual;
+      const incrementoPct = facturacionActual > 0 ? (incrementoMes / facturacionActual) * 100 : 0;
+      return {
+        ...sc,
+        nuevoRatio,
+        nuevoTicket,
+        nuevoCopa,
+        mesasNuevo,
+        facNueva,
+        incrementoMes,
+        incrementoAnual: incrementoMes * 12,
+        incrementoPct,
+      };
+    });
 
-    // Scenario 2: increase ticket per table
-    const nuevoTicket = ticketVinoActual * (1 + mejoraPct / 100 * 0.6);
+    return { mesasMes, mesasConVino, facturacionActual, scenarioResults };
+  }, [cubiertos, diasMes, ratioVino, ticketVinoActual, ratioCopa]);
 
-    const facturacionNueva = mesasConVinoNuevo * nuevoTicket;
-    const incrementoMes = facturacionNueva - facturacionActual;
-    const incrementoAnual = incrementoMes * 12;
-    const incrementoPct = facturacionActual > 0 ? ((facturacionNueva - facturacionActual) / facturacionActual) * 100 : 0;
+  const fmt = (n: number) => n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+  const fmtEur = (n: number) => n.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + "€";
 
-    return {
-      mesasMes,
-      mesasConVino,
-      mesasConVinoNuevo,
-      facturacionActual,
-      facturacionNueva,
-      nuevoTicket,
-      nuevoRatio,
-      incrementoMes,
-      incrementoAnual,
-      incrementoPct,
-    };
-  }, [cubiertos, diasMes, ratioVino, ticketVinoActual, ratioCopa, mejoraPct]);
-
-  const fmt = (n: number) => n.toLocaleString("es-ES", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  const fmtEur = (n: number) => n.toLocaleString("es-ES", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + "€";
+  const selected = activeScenario ? results.scenarioResults.find(s => s.id === activeScenario) : null;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Calculadora de Impacto en Ticket Medio del Vino | Winerim"
-        description="Estima cuánto más podrías facturar en vino mejorando el ticket medio, el ratio de mesas que piden y la estrategia de copa. Herramienta gratuita."
+        title="Calculadora de Impacto en Ticket Medio del Vino | Demo Winerim"
+        description="Simula el impacto de la penetración del vino, copa vs botella y mix de referencias sobre el ticket medio de tu restaurante. Herramienta gratuita."
         url={`${CANONICAL_DOMAIN}/herramientas/calculadora-ticket-medio-vino`}
       />
       <Navbar />
@@ -105,10 +113,10 @@ const CalculadoraTicketMedio = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full text-center">
           <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Calculadora ticket medio vino" }]} />
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <TrendingUp size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine">Herramienta gratuita</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine">Demo · Winerim Core</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             className="font-heading text-3xl md:text-5xl font-bold leading-tight mb-4">
@@ -116,39 +124,61 @@ const CalculadoraTicketMedio = () => {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
             className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Estima cuánto más podrías facturar en vino al mes mejorando el ratio de mesas que piden, el ticket por mesa y la estrategia de copa. Introduce tus datos reales y obtén un resultado accionable.
+            Simula cómo cambia tu facturación mensual en vino al mejorar la penetración, el mix de referencias y la estrategia de copa.
           </motion.p>
         </div>
+      </section>
+
+      {/* ── DEMO INTRO BLOCK ── */}
+      <section className="max-w-4xl mx-auto px-6 md:px-12 pb-4">
+        <ScrollReveal>
+          <div className="relative bg-gradient-card rounded-2xl border border-wine/20 p-6 md:p-8 overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,hsl(var(--wine)/0.05),transparent_60%)]" />
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
+                <Sparkles size={18} className="text-wine" />
+              </div>
+              <div>
+                <h2 className="font-heading text-base font-bold text-foreground mb-1">
+                  El ticket medio no mejora solo con vender más. Mejora con mejor mix y mejor activación.
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Winerim ayuda a simular el impacto de la penetración del vino, la venta por copa, el mix de referencias y la visibilidad de la carta sobre el ticket medio del restaurante.
+                </p>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       <ToolStrategicBlock
         layer="core"
         decides={[
-          "Cuánto más podrías facturar en vino con mejoras realistas",
-          "Si la palanca es más mesas pidiendo vino o mayor gasto por mesa",
-          "Qué escenario de mejora es más alcanzable para tu tipo de negocio",
+          "Si la palanca prioritaria es más mesas pidiendo vino o mayor gasto por mesa",
+          "Qué escenario (copa, mix o combinado) genera más retorno con tu perfil",
+          "Cuánto impacto real tiene cada palanca sobre la facturación mensual",
         ]}
         avoids={[
-          "Subir precios sin medir el impacto en volumen",
+          "Subir precios sin dato de elasticidad ni visibilidad de impacto",
           "Invertir en formación sin saber qué palanca mover primero",
-          "Tomar decisiones de carta sin una estimación de retorno",
+          "Tomar decisiones de carta sin una estimación cuantificada de retorno",
         ]}
         impact={[
-          "Incremento de facturación mensual en vino estimado y accionable",
-          "Priorización de las palancas con mayor impacto potencial",
-          "Base cuantitativa para justificar inversiones en carta o formación",
+          "Incremento de facturación mensual estimado y accionable por escenario",
+          "Priorización de las palancas con mayor impacto para tu tipo de negocio",
+          "Base cuantitativa para justificar inversiones en carta, copa o formación",
         ]}
       />
 
       {/* SUMMARY BOX */}
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <SummaryBox
-          label="Qué calcula esta herramienta"
-          definition="Estima el incremento mensual y anual de facturación de vino al mejorar dos palancas: el % de mesas que piden vino y el gasto medio en vino por mesa."
+          label="Qué simula esta herramienta"
+          definition="Compara escenarios de mejora del ticket medio en vino combinando tres palancas: penetración (% de mesas que piden vino), mix (gasto medio por mesa) y copa (ratio copa vs botella)."
           bullets={[
-            "Combina mejoras en ratio de mesas + ticket medio por mesa.",
-            "Usa parámetros reales de tu restaurante (cubiertos, días, precios).",
-            "El resultado es una estimación orientativa, no una garantía. El impacto real depende de la implementación.",
+            "Cada escenario representa una estrategia distinta: más copa, mejor mix o acción combinada.",
+            "Usa tus datos reales de cubiertos, días de apertura y precios.",
+            "El resultado es una estimación orientativa. El impacto real depende de la implementación.",
           ]}
         />
       </div>
@@ -173,14 +203,14 @@ const CalculadoraTicketMedio = () => {
                 className="bg-background" min={1} max={31} />
             </div>
             <div>
-              <Label className="text-sm font-medium mb-1.5 block">% de mesas que piden vino actualmente</Label>
+              <Label className="text-sm font-medium mb-1.5 block">Penetración actual del vino (%)</Label>
               <div className="flex items-center gap-3">
                 <input type="range" min={5} max={90} value={ratioVino}
                   onChange={e => setRatioVino(Number(e.target.value))}
                   className="flex-1 accent-wine h-2" />
                 <span className="text-sm font-semibold w-12 text-right">{ratioVino}%</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">Estimación del % de mesas que piden al menos un vino.</p>
+              <p className="text-xs text-muted-foreground mt-1">% de mesas que piden al menos un vino (copa o botella).</p>
             </div>
             <div>
               <Label className="text-sm font-medium mb-1.5 block">Ticket medio en vino por mesa (€)</Label>
@@ -188,30 +218,21 @@ const CalculadoraTicketMedio = () => {
                 className="bg-background" min={1} step={0.5} />
               <p className="text-xs text-muted-foreground mt-1">Gasto medio en vino por mesa que sí pide (copas + botellas).</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium mb-1.5 block">% de ventas de vino que son por copa</Label>
+            <div className="md:col-span-2">
+              <Label className="text-sm font-medium mb-1.5 block">Ratio actual de venta por copa (%)</Label>
               <div className="flex items-center gap-3">
                 <input type="range" min={0} max={100} value={ratioCopa}
                   onChange={e => setRatioCopa(Number(e.target.value))}
                   className="flex-1 accent-wine h-2" />
                 <span className="text-sm font-semibold w-12 text-right">{ratioCopa}%</span>
               </div>
-            </div>
-            <div>
-              <Label className="text-sm font-medium mb-1.5 block">Mejora estimada (%)</Label>
-              <div className="flex items-center gap-3">
-                <input type="range" min={5} max={50} value={mejoraPct}
-                  onChange={e => setMejoraPct(Number(e.target.value))}
-                  className="flex-1 accent-wine h-2" />
-                <span className="text-sm font-semibold w-12 text-right">{mejoraPct}%</span>
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">% de mejora objetivo combinando más mesas + mayor ticket. 15-25% es un rango realista con optimización de carta.</p>
+              <p className="text-xs text-muted-foreground mt-1">% de la facturación de vino que corresponde a venta por copa.</p>
             </div>
           </div>
 
-          <Button onClick={() => setCalculated(true)}
+          <Button onClick={() => { setCalculated(true); setActiveScenario("full"); }}
             className="w-full bg-gradient-wine text-primary-foreground py-3 font-semibold tracking-wider uppercase hover:opacity-90">
-            Calcular impacto
+            Simular escenarios
           </Button>
 
           {/* RESULTS */}
@@ -219,58 +240,87 @@ const CalculadoraTicketMedio = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="mt-8 space-y-6">
               <h3 className="font-heading text-lg font-bold flex items-center gap-2">
-                <BarChart3 size={18} className="text-wine" /> Resultados estimados
+                <BarChart3 size={18} className="text-wine" /> Escenarios de mejora
               </h3>
 
-              {/* Current vs Projected */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="p-5 rounded-xl border border-border bg-background">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">Situación actual</p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-muted-foreground">Mesas con vino / mes</span><span className="font-semibold">{fmt(results.mesasConVino)}</span></div>
-                    <div className="flex justify-between"><span className="text-muted-foreground">Ticket medio vino / mesa</span><span className="font-semibold">{fmtEur(ticketVinoActual)}</span></div>
-                    <div className="flex justify-between border-t border-border pt-2 mt-2"><span className="font-medium">Facturación vino / mes</span><span className="font-bold text-foreground">{fmtEur(results.facturacionActual)}</span></div>
+              {/* Baseline */}
+              <div className="p-5 rounded-xl border border-border bg-background">
+                <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">Situación actual</p>
+                <div className="grid grid-cols-3 gap-4 text-sm text-center">
+                  <div>
+                    <p className="text-muted-foreground text-xs mb-1">Mesas con vino / mes</p>
+                    <p className="font-heading text-lg font-bold">{fmt(results.mesasConVino)}</p>
                   </div>
-                </div>
-                <div className="p-5 rounded-xl border border-wine/30 bg-wine/5">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-wine mb-3">Con optimización (+{mejoraPct}%)</p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-muted-foreground">Mesas con vino / mes</span><span className="font-semibold">{fmt(results.mesasConVinoNuevo)} <span className="text-wine text-xs">(+{Math.round(results.nuevoRatio - ratioVino)}pp)</span></span></div>
-                    <div className="flex justify-between"><span className="text-muted-foreground">Ticket medio vino / mesa</span><span className="font-semibold">{fmtEur(Math.round(results.nuevoTicket * 100) / 100)}</span></div>
-                    <div className="flex justify-between border-t border-wine/20 pt-2 mt-2"><span className="font-medium">Facturación vino / mes</span><span className="font-bold text-wine">{fmtEur(results.facturacionNueva)}</span></div>
+                  <div>
+                    <p className="text-muted-foreground text-xs mb-1">Ticket vino / mesa</p>
+                    <p className="font-heading text-lg font-bold">{fmtEur(ticketVinoActual)}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs mb-1">Facturación vino / mes</p>
+                    <p className="font-heading text-lg font-bold">{fmtEur(results.facturacionActual)}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Impact summary */}
-              <div className="p-6 rounded-xl border border-wine/30 bg-gradient-to-r from-wine/5 to-wine/10 text-center">
-                <p className="text-xs font-semibold tracking-widest uppercase text-wine mb-2">Incremento potencial</p>
-                <p className="font-heading text-3xl md:text-4xl font-bold text-wine mb-1">+{fmtEur(results.incrementoMes)}/mes</p>
-                <p className="text-sm text-muted-foreground">+{fmtEur(results.incrementoAnual)}/año · +{Math.round(results.incrementoPct)}% sobre facturación actual</p>
+              {/* Scenario selector */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {results.scenarioResults.filter(s => s.id !== "base").map(sc => (
+                  <button key={sc.id} onClick={() => setActiveScenario(sc.id)}
+                    className={`p-4 rounded-xl border text-left transition-all ${activeScenario === sc.id ? "border-wine/50 bg-wine/5 shadow-sm" : "border-border bg-background hover:border-wine/30"}`}>
+                    <p className="text-xs font-semibold tracking-wide uppercase text-wine mb-1">{sc.label}</p>
+                    <p className="font-heading text-xl font-bold text-foreground">
+                      {sc.incrementoMes > 0 ? "+" : ""}{fmtEur(sc.incrementoMes)}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground">/mes · +{sc.incrementoPct.toFixed(0)}%</p>
+                  </button>
+                ))}
               </div>
+
+              {/* Selected scenario detail */}
+              {selected && selected.id !== "base" && (
+                <motion.div key={selected.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                  className="p-6 rounded-2xl border border-wine/20 bg-wine/5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-semibold tracking-widest uppercase text-wine mb-1">Escenario: {selected.label}</p>
+                      <p className="text-sm text-muted-foreground">{selected.desc}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-heading text-3xl font-bold text-wine">+{fmtEur(selected.incrementoMes)}</p>
+                      <p className="text-xs text-muted-foreground">+{fmtEur(selected.incrementoAnual)}/año</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 pt-2 border-t border-wine/10">
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground mb-1">Penetración</p>
+                      <p className="font-heading text-lg font-bold">{selected.nuevoRatio}%</p>
+                      {selected.deltaRatio > 0 && <p className="text-[11px] text-wine">+{selected.deltaRatio}pp</p>}
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground mb-1">Ticket / mesa</p>
+                      <p className="font-heading text-lg font-bold">{fmtEur(Math.round(selected.nuevoTicket * 100) / 100)}</p>
+                      {selected.deltaTicket > 0 && <p className="text-[11px] text-wine">+{selected.deltaTicket}%</p>}
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground mb-1">Ratio copa</p>
+                      <p className="font-heading text-lg font-bold">{selected.nuevoCopa}%</p>
+                      {selected.deltaCopa > 0 && <p className="text-[11px] text-wine">+{selected.deltaCopa}pp</p>}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
               {/* Interpretation */}
               <div className="p-5 rounded-xl border border-border bg-background">
                 <div className="flex items-start gap-3">
                   <Info size={16} className="text-wine shrink-0 mt-0.5" />
                   <div className="text-sm text-muted-foreground leading-relaxed">
-                    <p className="font-medium text-foreground mb-1">Cómo interpretar este resultado</p>
-                    <p>Esta estimación combina dos palancas: aumentar el % de mesas que piden vino (40% del efecto) y aumentar el gasto medio por mesa (60% del efecto). El impacto real dependerá de tu implementación: pricing, copa, recomendación del equipo y experiencia de carta.</p>
+                    <p className="font-medium text-foreground mb-1">Cómo interpretar estos escenarios</p>
+                    <p><strong>Más copa</strong> aumenta la penetración: más mesas acceden al vino a través de la copa. <strong>Mejor mix</strong> sube el ticket medio por mesa optimizando la escalera de precios y la visibilidad de gama media-alta. <strong>Copa + mix + sala</strong> combina ambas palancas con recomendación activa del equipo.</p>
                     <p className="mt-2">Un 15-25% de mejora es un rango realista para restaurantes que optimizan su carta con datos. Resultados superiores al 30% requieren cambios estructurales significativos.</p>
                   </div>
                 </div>
-              </div>
-
-              {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Link to="/demo"
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                  Solicitar demo <ArrowRight size={16} />
-                </Link>
-                <Link to="/analisis-carta"
-                  className="flex-1 inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-                  Analizar mi carta gratis
-                </Link>
               </div>
             </motion.div>
           )}
@@ -347,21 +397,27 @@ const CalculadoraTicketMedio = () => {
         ]} />
       </div>
 
-      {/* CTA FINAL */}
+      {/* ── DUAL CTA: CORE + ID ── */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-16">
         <ScrollReveal>
           <div className="text-center bg-gradient-card rounded-2xl border border-border p-10 md:p-14">
             <Sparkles size={28} className="text-wine mx-auto mb-4" />
             <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
-              Con Winerim, no necesitas calcular manualmente
+              Winerim conecta análisis y acción en tiempo real
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-6 text-sm leading-relaxed">
-              Winerim monitoriza tu ticket medio en vino en tiempo real, detecta oportunidades de mejora y te dice exactamente qué hacer. Pricing, copa, maridajes y formación — todo automatizado.
+            <p className="text-muted-foreground max-w-xl mx-auto mb-8 text-sm leading-relaxed">
+              Winerim Core analiza penetración, mix y copa. La Inteligencia Dinámica activa las recomendaciones del equipo en sala para que el impacto se traduzca en facturación real.
             </p>
-            <Link to="/demo"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              Solicitar demo gratuita <ArrowRight size={16} />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/producto/winerim-core"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+                Ver Winerim Core <ArrowRight size={16} />
+              </Link>
+              <Link to="/producto/inteligencia-dinamica"
+                className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+                <Zap size={16} /> Inteligencia Dinámica
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
       </section>
