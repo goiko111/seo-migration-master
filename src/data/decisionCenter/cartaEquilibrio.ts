@@ -8,6 +8,13 @@ const cartaEquilibrioContent: DeepAreaContent = {
   icon: BarChart3,
   accent: "text-wine",
   bg: "bg-wine/10",
+  topErrors: [
+    { error: "Construir la carta por acumulación en vez de por diseño", porQueOcurre: "Porque cada vino nuevo se añade sin retirar otro. El proveedor ofrece, el sommelier acepta, la carta crece sin criterio.", consecuencia: "La carta se infla, se desequilibra y se llena de redundancias que canibalizan ventas y generan stock muerto." },
+    { error: "Saturar una franja de precio sin cubrir otras", porQueOcurre: "Porque se compra lo que gusta o lo que ofrece el proveedor habitual, que suele estar en la misma franja.", consecuencia: "Compites contigo mismo en 25-35 € mientras el comensal que busca algo a <20 € o >50 € no encuentra opciones." },
+    { error: "Desequilibrar por origen: 80% de una sola DO", porQueOcurre: "Porque la zona de confort del comprador o la proximidad geográfica concentran las compras en pocos orígenes.", consecuencia: "Dependencia de un mercado (riesgo de precios), falta de diversidad para el cliente y una carta que no cuenta una historia interesante." },
+    { error: "Añadir sin retirar: 'más opciones, mejor'", porQueOcurre: "Porque retirar parece perder, y añadir parece ganar. Pero a partir de cierto punto, cada referencia nueva diluye la atención.", consecuencia: "El comensal tarda más en decidir, el equipo no puede conocer toda la carta y las ventas se concentran en 15-20 referencias mientras el resto es decoración." },
+    { error: "No mapear la carta antes de tomar decisiones", porQueOcurre: "Porque se trabaja con la lista de referencias sin visualizar la estructura. Las decisiones se toman una a una, sin ver el conjunto.", consecuencia: "Añades donde ya estás saturado y dejas huecos donde hay demanda. Es como reformar una casa sin mirar el plano." },
+  ],
   links: [
     { label: "Plantilla wine mapping", href: "/recursos/plantilla-wine-mapping-restaurante", description: "Mapea tu carta por tipo, precio, origen y rol comercial" },
     { label: "Plantilla equilibrio de carta", href: "/recursos/plantilla-equilibrio-carta", description: "Diagnostica saturaciones, huecos y canibalización por franja" },

@@ -9,7 +9,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority } from "@/data/decisionCenter/margenesPricing";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
@@ -306,6 +306,49 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
             </div>
           </ScrollReveal>
         </section>
+
+        {/* Top errors — consolidated */}
+        {content.topErrors && content.topErrors.length > 0 && (
+          <section className="max-w-4xl mx-auto px-6 md:px-12 pb-10">
+            <ScrollReveal>
+              <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
+                    <AlertTriangle size={18} className="text-destructive" />
+                  </div>
+                  <div>
+                    <h2 className="font-heading text-lg font-bold text-foreground">Errores comunes</h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">Los fallos más frecuentes en este área y cómo evitarlos</p>
+                  </div>
+                </div>
+                <div className="space-y-5">
+                  {content.topErrors.map((err, i) => (
+                    <div key={i} className="rounded-lg border border-border bg-muted/20 p-5">
+                      <div className="flex items-start gap-3">
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-destructive/10 text-destructive text-[10px] font-bold shrink-0 mt-0.5">
+                          {i + 1}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-semibold text-foreground">{err.error}</p>
+                          <div className="mt-3 grid sm:grid-cols-2 gap-3">
+                            <div className="rounded-md bg-card/80 border border-border p-3">
+                              <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-1">Por qué ocurre</p>
+                              <p className="text-xs text-muted-foreground leading-relaxed">{err.porQueOcurre}</p>
+                            </div>
+                            <div className="rounded-md bg-card/80 border border-border p-3">
+                              <p className="text-[10px] font-semibold tracking-widest uppercase text-destructive/60 mb-1">Consecuencia</p>
+                              <p className="text-xs text-muted-foreground leading-relaxed">{err.consecuencia}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </section>
+        )}
 
         {/* Subtopics */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">

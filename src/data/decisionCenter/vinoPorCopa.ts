@@ -8,6 +8,13 @@ const vinoPorCopaContent: DeepAreaContent = {
   icon: Wine,
   accent: "text-purple-500",
   bg: "bg-purple-500/10",
+  topErrors: [
+    { error: "Sacar por copa vinos que destruyen margen por merma", porQueOcurre: "Porque se elige por calidad o por gusto personal, sin calcular si la rotación justifica abrir esa botella.", consecuencia: "El 30-40% de la botella se tira. Un vino con 70% de margen teórico pasa a un 25% real. Pierdes dinero con cada copa." },
+    { error: "Tener demasiadas copas activas sin rotación suficiente", porQueOcurre: "Porque más copas parece mejor oferta. Pero cada copa abierta es una botella que tiene que terminarse en 24-48h.", consecuencia: "La merma se multiplica por cada referencia activa. 8 copas con baja rotación generan más pérdida que 4 copas bien elegidas." },
+    { error: "Fijar precio de copa sin incluir merma real", porQueOcurre: "Porque el cálculo rápido es botella ÷ 5 copas. Pero la realidad es 4 copas (o menos) por la merma.", consecuencia: "Vendes a un precio que no cubre el coste real. Cuanto más vendes, más pierdes, pero parece que el negocio va bien." },
+    { error: "No medir la canibalización copa vs. botella", porQueOcurre: "Porque se asume que la copa añade ventas nuevas, nunca que le quita ventas a la botella.", consecuencia: "Tu ticket medio baja sin que lo notes. El cliente que habría pedido botella ahora pide 2 copas y el margen total es menor." },
+    { error: "Dejar que el equipo de sala decida qué recomendar por copa", porQueOcurre: "Porque sin directriz clara, cada camarero recomienda lo que conoce o lo que más le gusta.", consecuencia: "La rotación se concentra en 1-2 copas mientras las otras se oxidan. La experiencia del cliente es inconsistente." },
+  ],
   links: [
     { label: "Calculadora precio por copa", href: "/herramientas/calculadora-precio-vino-por-copa", description: "Calcula el precio de copa incluyendo merma real y margen objetivo" },
     { label: "Guía: Vino por copa", href: "/guias/como-implantar-vino-por-copa-sin-perder-margen", description: "Paso a paso para montar un programa de copa rentable" },
