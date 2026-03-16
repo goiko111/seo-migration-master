@@ -241,6 +241,9 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/outils`} element={<Herramientas />} />
     <Route path={`${prefix}/guides`} element={<GuiasRecursos />} />
     <Route path={`${prefix}/guide`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/resources`} element={<Recursos />} />
+    <Route path={`${prefix}/risorse`} element={<Recursos />} />
+    <Route path={`${prefix}/ressources`} element={<Recursos />} />
     <Route path={`${prefix}/solutions`} element={<Soluciones />} />
     <Route path={`${prefix}/soluzioni`} element={<Soluciones />} />
     <Route path={`${prefix}/challenges`} element={<Problemas />} />

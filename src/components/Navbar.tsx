@@ -96,6 +96,12 @@ const Navbar = memo(() => {
           ],
         },
         {
+          title: t.nav_resources_downloads ?? "Descargables",
+          items: [
+            { label: t.nav_downloadable_resources ?? "Recursos descargables", href: localePath("/recursos") },
+          ],
+        },
+        {
           title: t.nav_resources_tools,
           items: [
             { label: t.nav_wine_analyzer, href: localePath("/analisis-carta") },
