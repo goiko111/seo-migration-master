@@ -9,6 +9,7 @@ import {
   ClipboardList
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -719,6 +720,10 @@ const Hoteles = () => {
           </ScrollReveal>
         </div>
       </section>
+
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
 
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding">

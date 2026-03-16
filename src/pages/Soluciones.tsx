@@ -9,6 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import SummaryBox from "@/components/seo/SummaryBox";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import FAQSection from "@/components/seo/FAQSection";
 import CredibilitySection from "@/components/seo/CredibilitySection";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -148,6 +149,8 @@ const Soluciones = () => {
             })}
           </div>
         </section>
+
+        <WinerimSupplyBlock />
 
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>

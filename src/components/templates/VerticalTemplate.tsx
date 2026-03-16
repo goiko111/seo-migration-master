@@ -5,6 +5,7 @@ import {
   ArrowRight, AlertTriangle, Check, X, Wine,
   TrendingUp, Sparkles, type LucideIcon,
 } from "lucide-react";
+import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -342,6 +343,10 @@ const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
           </div>
         </div>
       </section>
+
+
+      {/* ── WINERIM SUPPLY ── */}
+      <WinerimSupplyBlock />
 
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding bg-gradient-dark">
