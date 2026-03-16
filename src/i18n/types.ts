@@ -307,4 +307,56 @@ export interface TranslationDict {
 
   // Locale
   locale: string;
+
+  // Decision Center
+  dc_gate_title: string;
+  dc_gate_subtitle: string;
+  dc_gate_placeholder: string;
+  dc_gate_error: string;
+  dc_gate_submit: string;
+  dc_gate_no_access: string;
+  dc_gate_request_demo: string;
+  dc_client_area: string;
+  dc_hub_badge: string;
+  dc_hub_subtitle: string;
+  dc_hub_pill_1: string;
+  dc_hub_pill_2: string;
+  dc_hub_insights_title: string;
+  dc_hub_insights_subtitle: string;
+  dc_hub_note: string;
+  dc_relevant_for: string;
+  dc_enter: string;
+  dc_in_this_section: string;
+  dc_common_errors: string;
+  dc_common_errors_sub: string;
+  dc_why_happens: string;
+  dc_consequence: string;
+  dc_use_cases: string;
+  dc_use_cases_sub: string;
+  dc_situation: string;
+  dc_what_did: string;
+  dc_result: string;
+  dc_what_means: string;
+  dc_why_matters: string;
+  dc_what_to_do: string;
+  dc_frequent_errors: string;
+  dc_learn_more: string;
+  dc_learn_more_sub: string;
+  dc_next_step: string;
+  dc_back: string;
+  dc_priority_urgent: string;
+  dc_priority_this_week: string;
+  dc_priority_this_month: string;
+  dc_priority_followup: string;
+  dc_profile_management: string;
+  dc_profile_floor: string;
+  dc_profile_purchasing: string;
+  dc_profile_group: string;
+  dc_type_tool: string;
+  dc_type_resource: string;
+  dc_type_product: string;
+  dc_type_article: string;
+  dc_type_guide: string;
+  dc_type_solution: string;
+  dc_priority_label: string;
 }
