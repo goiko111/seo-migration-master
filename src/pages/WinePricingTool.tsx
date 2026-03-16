@@ -110,6 +110,9 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
     link_pricing: "How to price wine", link_margin: "Margin calculator",
     link_profitable: "Profitable wine list", link_mapping: "Wine mapping template",
     locale: "en-GB",
+    decides: ["What price to set for each wine", "Which multiplier to apply by type and positioning", "Whether your current price is above or below optimal"],
+    avoids: ["Using a fixed multiplier for the entire list", "Setting prices without considering guest psychology", "Losing margin on wines where you could charge more"],
+    impact: ["Optimise margins without losing rotation", "Create a coherent price ladder without gaps", "Improve perceived value across the list"],
   },
   it: {
     seo_title: "Wine Pricing Optimizer – Prezzo Ottimale del Vino | Winerim",
