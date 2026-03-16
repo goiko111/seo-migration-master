@@ -1013,10 +1013,10 @@ export const newResources: ResourcePageData[] = [
     ctaFinalTitle: "¿Quieres saber si tu carta está optimizada?",
     ctaFinalDescription: "Winerim analiza tu carta de vinos y te da recomendaciones personalizadas para mejorar su estructura y rentabilidad.",
     internalLinks: [
-      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
-      { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist: ¿tu carta es rentable?", type: "resource" },
-      { to: "/recursos/plantilla-equilibrio-carta", label: "Plantilla de equilibrio de carta", type: "resource" },
       { to: "/analisis-carta", label: "Análisis de carta gratuito", type: "tool" },
+      { to: "/producto/winerim-core", label: "Winerim Core: arquitectura y diagnóstico", type: "solution" },
+      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Plantilla de wine mapping", type: "resource" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
 
