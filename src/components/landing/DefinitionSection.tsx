@@ -317,11 +317,9 @@ const DefinitionSection = () => {
   const { lang } = useLanguage();
 
   const def = definitionData[lang] || definitionData.es;
-  const comp = comparisonData[lang] || comparisonData.es;
   const nf = notForData[lang] || notForData.es;
   const faqs = homeFaqs[lang] || homeFaqs.es;
   const faqTitle = faqTitles[lang] || faqTitles.es;
-  const compet = competitorData[lang] || competitorData.es;
 
   return (
     <>
