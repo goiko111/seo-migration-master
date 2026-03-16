@@ -40,6 +40,7 @@ const comprasReposicionContent: DeepAreaContent = {
     {
       id: "cuando-no-reponer",
       title: "Cuándo no reponer una referencia",
+      porQueTeLoMostramos: { detected: "Winerim ha detectado referencias con rotación baja sostenida que siguen reponerse automáticamente.", whyMatters: "Reponer por inercia es la forma más común de acumular stock muerto. Cada reposición sin datos es dinero que no vuelve.", riskIfIgnored: "Financias un error recurrente cada mes, comprando lo que no se vende mientras lo que sí se pide se agota." },
       queSignifica:
         "No reponer es una decisión activa, no un olvido. Dejas de reponer cuando los datos te dicen que esa referencia ya no justifica su espacio: baja rotación sostenida, margen insuficiente, canibalización con otra referencia mejor, o cambio en el perfil de tu clientela. La clave es que la decisión sea consciente y documentada, no que simplemente se te acabe y no la pidas más.",
       porQueImporta:
