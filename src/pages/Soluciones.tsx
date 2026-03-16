@@ -313,7 +313,7 @@ const Soluciones = () => {
         </section>
 
         {/* ── CTA ────────────────────────────────── */}
-        <CTASection pageType="solution" />
+        <CTASection pageType="solutions" />
 
         {/* ── FAQ ────────────────────────────────── */}
         <FAQSection
