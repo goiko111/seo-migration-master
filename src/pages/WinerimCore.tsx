@@ -50,7 +50,7 @@ interface CoreI18n {
   // Section 2: Capabilities
   cap_eyebrow: string; cap_title: string; cap_title_hl: string;
   cap_subtitle: string;
-  capabilities: Omit<Capability, "icon" | "accent" | "iconBg">[];
+  capabilities: { title: string; desc: string }[];
   // Section 3: Public tools bridge
   tools_eyebrow: string; tools_title: string; tools_title_hl: string;
   tools_desc: string;
