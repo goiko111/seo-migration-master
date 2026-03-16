@@ -3,8 +3,9 @@ import {
   TrendingUp, Users, DollarSign, Target, Layers, Award,
 } from "lucide-react";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const data: VerticalContent = {
+const ES: VerticalContent = {
   metaTitle: "Winerim para Restaurantes Gastronómicos | Carta de Vinos con IA",
   metaDescription: "Maximiza el rendimiento de tu carta de vinos gastronómica con Winerim: análisis de rotación, pricing inteligente, fichas enriquecidas y recomendaciones por IA para comensales exigentes.",
   canonicalUrl: "https://winerim.wine/soluciones/restaurantes-gastronomicos",
@@ -106,7 +107,7 @@ const data: VerticalContent = {
     "Se integra con el flujo de sala sin sustituir al sumiller",
   ],
   doesNotItems: [
-    "No sustituye la labor del sumiller — la potencia y escala",
+    "No sustituye la labor del sumiller — la potencia y escale",
     "No gestiona pedidos a proveedores ni logística de bodega",
     "No modifica la carta sin tu aprobación",
     "No es un TPV ni un sistema de facturación",
@@ -145,5 +146,231 @@ const data: VerticalContent = {
   ],
 };
 
-const RestaurantesGastronomicos = () => <VerticalTemplate t={data} />;
+/* ═══ ENGLISH ═══ */
+const EN: VerticalContent = {
+  ...ES,
+  metaTitle: "Winerim for Fine Dining Restaurants | AI-Powered Wine List",
+  metaDescription: "Maximize your fine dining wine list performance with Winerim: rotation analytics, smart pricing, enriched profiles and AI recommendations for discerning diners.",
+  badgeLabel: "Fine dining",
+  breadSolutions: "Solutions",
+  breadLabel: "Fine dining restaurants",
+  heroTitle1: "Your wine list deserves the same excellence as ",
+  heroTitleHighlight: "your cuisine",
+  heroDesc: "Winerim transforms extensive, complex wine lists into discovery experiences that elevate ticket, build loyalty with gourmet diners and optimize every reference.",
+  ctaDemo: "Request demo", ctaContact: "Talk to the team",
+  heroSummary: "A fine dining restaurant with 200+ references needs much more than a wine listing. Winerim provides enriched profiles with tasting notes, contextual pairings and performance analytics per reference. The result: a list that informs, sells and educates.",
+
+  forTitle: "Is Winerim right for your restaurant?",
+  forLabel: "Perfect fit if…",
+  notForLabel: "Maybe not for you if…",
+  forItems: [
+    "You have 80+ references and want to maximize rotation",
+    "Your floor team needs support recommending premium wines",
+    "You want to increase wine ticket without pressuring diners",
+    "You want real data on which wines work and which don't",
+    "You care about coherence between cuisine, list and experience",
+  ],
+  notForItems: [
+    "Your list has fewer than 30 references",
+    "You don't sell wine or it's residual in your business",
+    "You have no interest in data or performance analytics",
+  ],
+
+  painLabel: "The problem",
+  painTitle1: "Wine challenges in ",
+  painTitleHighlight: "fine dining",
+  pains: [
+    { text: "Lists of 200+ references where 40% don't rotate: tied-up capital and management complexity without return." },
+    { text: "Diners get overwhelmed by too many options, choose by price or familiar region and don't explore higher-value references." },
+    { text: "The sommelier or floor manager can't be at every table: recommendations depend on timing and workload." },
+    { text: "Pricing is set by generic multiplier, without analyzing elasticity or real margin per reference." },
+    { text: "Pairings exist in the sommelier's mind but don't reach the diner proactively and contextually." },
+    { text: "No data to decide which references to add, retire or reposition in the next list review." },
+  ],
+
+  tableLabel: "Comparison",
+  tableTitle: "Traditional management vs. Winerim in fine dining",
+  tableHeaders: ["Area", "Without Winerim", "With Winerim"],
+  tableRows: [
+    { area: "Recommendations", without: "Depends on sommelier availability", with_w: "AI recommends pairings by dish in real time" },
+    { area: "Rotation", without: "Reviewed sporadically by intuition", with_w: "Per-reference rotation dashboard with automatic alerts" },
+    { area: "Pricing", without: "Fixed multiplier (×2.5 – ×3.5)", with_w: "Dynamic pricing based on margin, demand and position" },
+    { area: "Experience", without: "PDF or paper list without context", with_w: "Enriched profiles with notes, history and pairing" },
+    { area: "Decisions", without: "Based on distributor relationships", with_w: "Based on real performance: margin, rotation and satisfaction" },
+    { area: "Training", without: "Informal briefings before service", with_w: "Accessible technical profiles that train the team with each sale" },
+  ],
+
+  solLabel: "The solution",
+  solTitle1: "What Winerim brings to a ",
+  solTitleHighlight: "fine dining restaurant",
+  advantages: [
+    { title: "Premium enriched profiles", desc: "Tasting notes, temperature, winery, history and suggested pairing accessible from the digital list. Diners discover without needing the sommelier." },
+    { title: "Contextual AI pairings", desc: "Automatic recommendations based on menu dishes and diner preferences. Every table gets a personalized suggestion." },
+    { title: "Advanced list analytics", desc: "Visualize which references generate margin, which don't rotate and where up-selling opportunities exist with real service data." },
+    { title: "Per-reference pricing", desc: "Abandon the generic multiplier. Set prices based on target margin, elasticity and positioning of each wine." },
+    { title: "Smart rotation management", desc: "Dead stock alerts, cannibalization detection between similar references and performance-based substitution suggestions." },
+    { title: "Service integration", desc: "Winerim adapts to your restaurant's rhythm: accessible to diners at the table and to floor staff as a support tool." },
+  ],
+
+  howLabel: "In practice",
+  howTitle: "How it works in fine dining",
+  useCases: [
+    { title: "Table with tasting menu", scenario: "A diner orders the 7-course tasting menu. The sommelier isn't available.", result: "The list suggests an optimized glass pairing for the menu, with bottle options for key courses." },
+    { title: "Quarterly list review", scenario: "The chef renews seasonal dishes and you need to adapt the wine list.", result: "Winerim shows which references pair with new dishes and which to retire due to low rotation." },
+    { title: "Exploring diner", scenario: "A client wants to discover something new but doesn't know what to order from 250 references.", result: "The system filters by style, region or pairing and presents 3 contextualized options with full profile." },
+  ],
+
+  impactLabel: "Results",
+  impactTitle: "Measurable impact in fine dining",
+  impactSubtitle: "Based on fine dining restaurants already using Winerim.",
+  impacts: [
+    { label: "Wine ticket +18–25%", desc: "Contextual recommendations guide diners toward higher-value references without perception of pressure." },
+    { label: "List rotation +30%", desc: "Dead stock alerts and substitution suggestions keep the list alive and profitable." },
+    { label: "Gross wine margin +12–20%", desc: "Per-reference pricing and dead stock reduction increase overall category margin." },
+    { label: "Decision time −40%", desc: "Diners access profiles and pairings directly, reducing sommelier dependence." },
+    { label: "Diner satisfaction ↑", desc: "A guided discovery experience generates memorability, positive reviews and return visits." },
+    { label: "Data-driven purchasing", desc: "Every addition or removal is supported by real performance, not intuition." },
+  ],
+
+  doesLabel: "What Winerim does",
+  doesNotLabel: "What Winerim doesn't do",
+  doesTitle: "Clear expectations",
+  doesItems: [
+    "Recommends wines by pairing, style and diner preference",
+    "Analyzes rotation, margin and performance per reference",
+    "Optimizes pricing with real service data",
+    "Generates enriched profiles accessible to diners and staff",
+    "Detects dead stock and cannibalization between references",
+    "Integrates with floor service without replacing the sommelier",
+  ],
+  doesNotItems: [
+    "Doesn't replace the sommelier — it amplifies and scales their work",
+    "Doesn't manage supplier orders or cellar logistics",
+    "Doesn't modify the list without your approval",
+    "Is not a POS or billing system",
+  ],
+
+  faqs: [
+    { q: "Does Winerim replace the sommelier?", a: "No. Winerim amplifies the sommelier's work, covering tables they can't reach and providing data for better list decisions. The sommelier remains the key service piece." },
+    { q: "Does it work with 300+ reference lists?", a: "Yes. Winerim is designed for extensive lists, detecting which references add value and which are dispensable. More references = greater optimization impact." },
+    { q: "How does it improve the gourmet diner experience?", a: "Diners access enriched profiles with tasting notes, winery history and contextual pairings. It's a discovery layer that complements the sommelier's personal recommendation." },
+    { q: "Can I analyze real margin per reference?", a: "Yes. Winerim crosses purchase price, sale price, rotation and demand to calculate real profitability, not just theoretical margin." },
+    { q: "Does it integrate with my physical list?", a: "Winerim works as an interactive digital list, but also generates reports and data that feed physical list decisions. It doesn't force you to eliminate paper." },
+    { q: "How long does implementation take?", a: "Between 48 hours and a week, depending on list size. We load your references, configure profiles and pairings and train you on the management panel." },
+    { q: "Can I try before committing?", a: "Yes. We offer a free analysis of your current list showing improvement opportunities before deciding." },
+  ],
+
+  ctaLabel: "Take the next step",
+  ctaTitle: "Ready for your wine list to perform at the level of your cuisine?",
+  ctaDesc: "Request a free list analysis and discover the opportunities you're missing today.",
+  ctaPrimary: "Analyze my list free",
+  ctaSecondary: "Request demo",
+  ctaMicro: "No commitment. Personalized report in under 48 hours.",
+
+  nextStepsTitle: "Next steps",
+  nextSteps: [
+    { label: "Free analysis", to: "/analisis-carta", description: "Discover hidden opportunities in your current list", type: "tool" as const },
+    { label: "Case studies", to: "/casos-exito", description: "See how other fine dining restaurants improved results", type: "resource" as const },
+    { label: "Features", to: "/funcionalidades", description: "Explore everything Winerim can do for your restaurant", type: "solution" as const },
+  ],
+  internalLinks: [
+    { to: "/analisis-carta", label: "Free wine list analysis", type: "tool" },
+    { to: "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante", label: "Wine rotation guide", type: "guide" },
+    { to: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", label: "Pairing strategy", type: "guide" },
+    { to: "/casos-exito", label: "Case studies", type: "resource" },
+    { to: "/software-carta-de-vinos", label: "Wine list software", type: "solution" },
+    { to: "/soluciones/restaurantes-sin-sumiller", label: "Restaurants without sommelier", type: "solution" },
+  ],
+};
+
+/* ═══ ITALIAN ═══ */
+const IT: VerticalContent = {
+  ...EN,
+  metaTitle: "Winerim per Ristoranti Gourmet | Carta dei Vini con IA",
+  metaDescription: "Massimizza le performance della tua carta dei vini gourmet con Winerim: analisi rotazione, pricing intelligente, schede arricchite e raccomandazioni IA.",
+  badgeLabel: "Alta gastronomia",
+  breadSolutions: "Soluzioni",
+  breadLabel: "Ristoranti gourmet",
+  heroTitle1: "La tua carta dei vini merita la stessa eccellenza della ",
+  heroTitleHighlight: "tua cucina",
+  heroDesc: "Winerim trasforma carte complesse in esperienze di scoperta che aumentano lo scontrino, fidelizzano il cliente gourmet e ottimizzano ogni referenza.",
+  ctaDemo: "Richiedi demo", ctaContact: "Parla con il team",
+  forTitle: "Winerim è giusto per il tuo ristorante?",
+  forLabel: "Perfetto se…",
+  notForLabel: "Forse non per te se…",
+  painLabel: "Il problema",
+  painTitle1: "Le sfide del vino nell'",
+  painTitleHighlight: "alta gastronomia",
+  tableLabel: "Confronto",
+  tableTitle: "Gestione tradizionale vs. Winerim nei ristoranti gourmet",
+  tableHeaders: ["Area", "Senza Winerim", "Con Winerim"],
+  solLabel: "La soluzione",
+  solTitle1: "Cosa porta Winerim a un ",
+  solTitleHighlight: "ristorante gourmet",
+  howLabel: "In pratica",
+  howTitle: "Come funziona in un ristorante gourmet",
+  impactLabel: "Risultati",
+  impactTitle: "Impatto misurabile nei ristoranti gourmet",
+  impactSubtitle: "Basato su ristoranti gourmet che già utilizzano Winerim.",
+  doesLabel: "Cosa fa Winerim",
+  doesNotLabel: "Cosa non fa Winerim",
+  doesTitle: "Aspettative chiare",
+  ctaLabel: "Fai il passo successivo",
+  ctaTitle: "Pronto a far rendere la tua carta al livello della tua cucina?",
+  ctaDesc: "Richiedi un'analisi gratuita della tua carta e scopri le opportunità che stai perdendo.",
+  ctaPrimary: "Analizza la mia carta gratis",
+  ctaSecondary: "Richiedi demo",
+  ctaMicro: "Senza impegno. Report personalizzato in meno di 48 ore.",
+  nextStepsTitle: "Prossimi passi",
+};
+
+/* ═══ FRENCH ═══ */
+const FR: VerticalContent = {
+  ...EN,
+  metaTitle: "Winerim pour Restaurants Gastronomiques | Carte des Vins avec IA",
+  metaDescription: "Maximisez la performance de votre carte des vins gastronomique avec Winerim : analyse de rotation, pricing intelligent, fiches enrichies et recommandations IA.",
+  badgeLabel: "Haute gastronomie",
+  breadSolutions: "Solutions",
+  breadLabel: "Restaurants gastronomiques",
+  heroTitle1: "Votre carte des vins mérite la même excellence que ",
+  heroTitleHighlight: "votre cuisine",
+  heroDesc: "Winerim transforme des cartes complexes en expériences de découverte qui élèvent le ticket, fidélisent le convive gourmet et optimisent chaque référence.",
+  ctaDemo: "Demander une démo", ctaContact: "Parler à l'équipe",
+  forTitle: "Winerim est-il fait pour votre restaurant ?",
+  forLabel: "Parfait si…",
+  notForLabel: "Peut-être pas pour vous si…",
+  painLabel: "Le problème",
+  painTitle1: "Les défis du vin en ",
+  painTitleHighlight: "haute gastronomie",
+  tableLabel: "Comparaison",
+  tableTitle: "Gestion traditionnelle vs. Winerim en gastronomie",
+  tableHeaders: ["Domaine", "Sans Winerim", "Avec Winerim"],
+  solLabel: "La solution",
+  solTitle1: "Ce que Winerim apporte à un ",
+  solTitleHighlight: "restaurant gastronomique",
+  howLabel: "En pratique",
+  howTitle: "Comment ça fonctionne en gastronomie",
+  impactLabel: "Résultats",
+  impactTitle: "Impact mesurable en restauration gastronomique",
+  impactSubtitle: "Basé sur des restaurants gastronomiques qui utilisent déjà Winerim.",
+  doesLabel: "Ce que Winerim fait",
+  doesNotLabel: "Ce que Winerim ne fait pas",
+  doesTitle: "Attentes claires",
+  ctaLabel: "Passez à l'étape suivante",
+  ctaTitle: "Prêt à ce que votre carte performe au niveau de votre cuisine ?",
+  ctaDesc: "Demandez une analyse gratuite de votre carte et découvrez les opportunités que vous manquez aujourd'hui.",
+  ctaPrimary: "Analyser ma carte gratuitement",
+  ctaSecondary: "Demander une démo",
+  ctaMicro: "Sans engagement. Rapport personnalisé en moins de 48 heures.",
+  nextStepsTitle: "Prochaines étapes",
+};
+
+const i18n: Record<string, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+
+const RestaurantesGastronomicos = () => {
+  const { lang } = useLanguage();
+  const t = i18n[lang] || i18n.es;
+  return <VerticalTemplate t={t} />;
+};
+
 export default RestaurantesGastronomicos;
