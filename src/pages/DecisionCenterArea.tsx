@@ -359,6 +359,46 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
           </section>
         )}
 
+        {/* Mini casos de uso */}
+        {content.miniCases && content.miniCases.length > 0 && (
+          <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
+            <ScrollReveal>
+              <div className="rounded-xl border border-border bg-card/70 backdrop-blur-sm p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center">
+                    <Lightbulb size={18} className="text-wine" />
+                  </div>
+                  <div>
+                    <h2 className="font-heading text-lg font-bold text-foreground">Casos de uso</h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">Ejemplos reales de cómo otros restaurantes lo resuelven</p>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4 mt-5">
+                  {content.miniCases.map((mc, i) => (
+                    <div key={i} className="rounded-lg border border-border bg-muted/20 p-5 space-y-3">
+                      <p className="text-xs font-semibold tracking-wider uppercase text-wine/70">{mc.profile}</p>
+                      <div className="space-y-2">
+                        <div>
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">Situación</p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{mc.situation}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-0.5">Qué hizo</p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{mc.action}</p>
+                        </div>
+                        <div className="pt-1 border-t border-border">
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-emerald-500/70 mb-0.5">Resultado</p>
+                          <p className="text-sm font-medium text-foreground leading-relaxed">{mc.result}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </section>
+        )}
+
         {/* Subtopics */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
           <div className="space-y-4">
