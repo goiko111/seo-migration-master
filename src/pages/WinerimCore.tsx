@@ -51,6 +51,8 @@ interface CoreI18n {
   cap_eyebrow: string; cap_title: string; cap_title_hl: string;
   cap_subtitle: string;
   capabilities: { title: string; desc: string }[];
+  // Section 2b: Depth proof
+  depth_title: string; depth_text: string; depth_text2: string; depth_micro: string;
   // Section 3: Public tools bridge
   tools_eyebrow: string; tools_title: string; tools_title_hl: string;
   tools_desc: string;
@@ -120,6 +122,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "Simulación y decisión", desc: "Ayuda a probar escenarios antes de ejecutar cambios en pricing, surtido o estructura de carta." },
       { title: "Salud y arquitectura de carta", desc: "Evalúa equilibrio, escalera de precios, profundidad de oferta y claridad comercial de la carta." },
     ],
+
+    depth_title: "Una capa compuesta por decenas de módulos analíticos",
+    depth_text: "Winerim Core integra 26 módulos analíticos interconectados que trabajan sobre pricing, margen, stock, rentabilidad, compras, simulación, arquitectura y benchmark.",
+    depth_text2: "No necesitas verlos como herramientas aisladas. Lo importante es que juntos permiten analizar mejor la carta y tomar decisiones más sólidas.",
+    depth_micro: "Algunas herramientas públicas de Winerim son demos simplificadas de esta capa analítica.",
 
     tools_eyebrow: "Las herramientas públicas son solo la superficie",
     tools_title: "Cada herramienta gratuita es una demo simplificada de lo que ",
@@ -202,6 +209,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "List health & architecture", desc: "Evaluate balance, price ladder, offer depth and commercial clarity of the list." },
     ],
 
+    depth_title: "A layer composed of dozens of analytical modules",
+    depth_text: "Winerim Core integrates 26 interconnected analytical modules that work across pricing, margin, stock, profitability, purchasing, simulation, architecture and benchmarking.",
+    depth_text2: "You don't need to see them as isolated tools. What matters is that together they enable better list analysis and more solid decisions.",
+    depth_micro: "Some of Winerim's public tools are simplified demos of this analytical layer.",
+
     tools_eyebrow: "Public tools are just the surface",
     tools_title: "Every free tool is a simplified demo of what ",
     tools_title_hl: "Core does in depth",
@@ -283,6 +295,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "Salute e architettura carta", desc: "Valuta equilibrio, scala prezzi, profondità dell'offerta e chiarezza commerciale della carta." },
     ],
 
+    depth_title: "Un livello composto da decine di moduli analitici",
+    depth_text: "Winerim Core integra 26 moduli analitici interconnessi che lavorano su pricing, margine, stock, redditività, acquisti, simulazione, architettura e benchmark.",
+    depth_text2: "Non serve vederli come strumenti isolati. L'importante è che insieme permettono di analizzare meglio la carta e prendere decisioni più solide.",
+    depth_micro: "Alcuni strumenti pubblici di Winerim sono demo semplificate di questo livello analitico.",
+
     tools_eyebrow: "Gli strumenti pubblici sono solo la superficie",
     tools_title: "Ogni strumento gratuito è una demo semplificata di ciò che ",
     tools_title_hl: "Core fa in profondità",
@@ -363,6 +380,11 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "Simulation et décision", desc: "Testez des scénarios avant d'exécuter des changements de pricing, d'assortiment ou de structure de carte." },
       { title: "Santé et architecture de carte", desc: "Évaluez l'équilibre, l'escalier de prix, la profondeur de l'offre et la clarté commerciale de la carte." },
     ],
+
+    depth_title: "Une couche composée de dizaines de modules analytiques",
+    depth_text: "Winerim Core intègre 26 modules analytiques interconnectés qui travaillent sur le pricing, la marge, le stock, la rentabilité, les achats, la simulation, l'architecture et le benchmark.",
+    depth_text2: "Pas besoin de les voir comme des outils isolés. L'essentiel est qu'ensemble, ils permettent de mieux analyser la carte et de prendre des décisions plus solides.",
+    depth_micro: "Certains outils publics de Winerim sont des démos simplifiées de cette couche analytique.",
 
     tools_eyebrow: "Les outils publics ne sont que la surface",
     tools_title: "Chaque outil gratuit est une démo simplifiée de ce que ",
@@ -545,6 +567,33 @@ const WinerimCore = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ─── 2b. DEPTH PROOF ─── */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-12">
+          <ScrollReveal>
+            <div className="relative rounded-2xl border border-border bg-gradient-card overflow-hidden p-8 md:p-10">
+              {/* Subtle left accent */}
+              <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-wine/40 via-wine/15 to-transparent" />
+
+              <h2 className="font-heading text-xl md:text-2xl font-bold leading-tight mb-5 pl-4">
+                {t.depth_title}
+              </h2>
+              <div className="pl-4 space-y-4">
+                <p className="text-muted-foreground leading-relaxed text-[15px]">
+                  {t.depth_text}
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-[15px]">
+                  {t.depth_text2}
+                </p>
+                <p className="text-xs text-muted-foreground/60 italic pt-2 border-t border-border/50">
+                  {t.depth_micro}
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
