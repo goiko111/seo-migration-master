@@ -171,7 +171,7 @@ export const newResources: ResourcePageData[] = [
     audienceItems: [
       "Sumilleres y jefes de compras responsables de la bodega",
       "Controllers y directores financieros preocupados por el capital inmovilizado",
-      "Propietarios de restaurantes con bodegas de más de 50 referencias",
+      "Propietarios de restaurantes con bodegas de alta profundidad de surtido",
       "Grupos de restauración con inventario centralizado",
     ],
     whenToUseTitle: "Cuándo usarlo",
@@ -189,7 +189,7 @@ export const newResources: ResourcePageData[] = [
     faqs: [
       { q: "¿A partir de cuántos días sin venta se considera vino muerto?", a: "El criterio habitual es 90 días sin ninguna venta. Entre 30 y 90 días se considera rotación baja. Pero depende del tipo de restaurante y la frecuencia de servicio." },
       { q: "¿Qué hago con los vinos que detecto como muertos?", a: "Las opciones principales son: ofrecerlos por copa a precio especial, incluirlos en menús degustación o maridajes, negociar devolución con el proveedor, o venderlos en un evento de liquidación." },
-      { q: "¿Con qué frecuencia debería hacer esta auditoría?", a: "Trimestralmente como mínimo. Si tu carta tiene más de 100 referencias, mensualmente es más efectivo." },
+      { q: "¿Con qué frecuencia debería hacer esta auditoría?", a: "Trimestralmente como mínimo. Si tu carta tiene más de 250 referencias, mensualmente es más efectivo." },
     ],
     ctaFinalTitle: "Controla la rotación con Winerim",
     ctaFinalDescription: "Winerim monitoriza automáticamente la rotación de cada referencia y te alerta cuando un vino no se vende. Sin auditorías manuales.",
