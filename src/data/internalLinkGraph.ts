@@ -98,10 +98,10 @@ export const flowProblemaToDemo: NextStep[] = [
   SOLUTIONS.demo,
 ];
 
-/** blog MOFU → BOFU → demo */
+/** blog MOFU → product → demo */
 export const flowBlogToConversion: NextStep[] = [
-  ARTICLES.softwareCarta,
-  ARTICLES.ticketMedioDatos,
+  PRODUCTS.core,
+  TOOLS.analyzer,
   OTHER.comparativas,
   SOLUTIONS.demo,
 ];
@@ -114,10 +114,64 @@ export const flowFeatureToDemo: NextStep[] = [
   SOLUTIONS.demo,
 ];
 
-/** herramienta → guía → recurso → demo */
+/** herramienta → producto → recurso → demo */
 export const flowToolToDemo: NextStep[] = [
-  GUIDES.rentable,
+  PRODUCTS.core,
   RESOURCES.wineMapping,
   OTHER.casosExito,
+  SOLUTIONS.demo,
+];
+
+/** herramienta de análisis → Core → precios → demo */
+export const flowToolToCore: NextStep[] = [
+  PRODUCTS.core,
+  GUIDES.rentable,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** herramienta de compras → Supply → precios → demo */
+export const flowToolToSupply: NextStep[] = [
+  PRODUCTS.supply,
+  GUIDES.datosCompra,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** recurso → calculadora → producto → demo */
+export const flowResourceToProduct: NextStep[] = [
+  TOOLS.analyzer,
+  PRODUCTS.core,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** Core page → Supply + herramientas + recursos */
+export const flowCoreToEcosystem: NextStep[] = [
+  PRODUCTS.supply,
+  PRODUCTS.id,
+  TOOLS.analyzer,
+  RESOURCES.scorecard,
+  SOLUTIONS.precios,
+  SOLUTIONS.demo,
+];
+
+/** Supply page → Core + herramientas + recursos */
+export const flowSupplyToEcosystem: NextStep[] = [
+  PRODUCTS.core,
+  PRODUCTS.id,
+  TOOLS.deadStock,
+  RESOURCES.revisionMensual,
+  SOLUTIONS.gruposPage,
+  SOLUTIONS.demo,
+];
+
+/** ID page → Core + Supply + herramientas */
+export const flowIDToEcosystem: NextStep[] = [
+  PRODUCTS.core,
+  PRODUCTS.supply,
+  TOOLS.score,
+  RESOURCES.checklistRentable,
+  SOLUTIONS.precios,
   SOLUTIONS.demo,
 ];
