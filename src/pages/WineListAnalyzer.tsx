@@ -295,6 +295,9 @@ const i18n: Record<SupportedLang, {
     toast_email_invalid: "Email invalide",
     toast_success: "Demande envoyée ! Nous vous contacterons bientôt.",
     toast_file_error: "Impossible de lire le fichier. Essayez le format .txt ou .csv",
+    decides: ["Si la structure de la carte facilite ou freine la vente", "Quels trous de prix et de style existent", "Quels vins sont candidats au service au verre"],
+    avoids: ["Garder une carte déséquilibrée sans le savoir", "Dupliquer des styles qui se font concurrence", "Perdre des ventes par manque de couverture sur les gammes clés"],
+    impact: ["Révéler des opportunités de vente cachées dans la carte", "Réduire les références sans impact et libérer de l'espace", "Améliorer l'expérience client avec une carte plus claire"],
   },
 };
 
