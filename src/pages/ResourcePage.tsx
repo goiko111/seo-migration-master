@@ -6,7 +6,7 @@ const ResourcePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? getResourceBySlug(slug) : undefined;
 
-  if (!data) return <Navigate to="/guias-y-recursos" replace />;
+  if (!data) return <Navigate to="/recursos" replace />;
 
   return <ResourceTemplate data={data} />;
 };
