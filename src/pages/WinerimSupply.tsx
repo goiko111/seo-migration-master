@@ -313,6 +313,8 @@ const i18n: Record<SupportedLang, {
       { to: "/producto/inteligencia-dinamica", label: "Intelligenza Dinamica: IA tattica per la carta", type: "solution" },
       { to: "/herramientas/calculadora-compra-inteligente", label: "Calcolatrice acquisto intelligente", type: "tool" },
       { to: "/herramientas/calculadora-stock-muerto", label: "Calcolatrice stock morto", type: "tool" },
+      { to: "/decision-center/compras-reposicion", label: "Decision Center: acquisti e rifornimento", type: "decision-center" },
+      { to: "/decision-center/stock-rotacion", label: "Decision Center: stock e rotazione", type: "decision-center" },
       { to: "/soluciones/grupos-restauracion", label: "Soluzione per gruppi di ristorazione", type: "solution" },
       { to: "/precios", label: "Piani e prezzi", type: "solution" },
       { to: "/demo", label: "Richiedi una demo personalizzata", type: "solution" },
