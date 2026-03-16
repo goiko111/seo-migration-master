@@ -42,6 +42,13 @@ const margenesPricingContent: DeepAreaContent = {
   icon: DollarSign,
   accent: "text-amber-500",
   bg: "bg-amber-500/10",
+  topErrors: [
+    { error: "Subir precio sin revisar antes el coste de compra", porQueOcurre: "Porque es más fácil tocar el PVP que negociar con el proveedor. Se asume que el margen bajo es un problema de precio, pero muchas veces el origen está en la compra.", consecuencia: "Subes el precio al cliente (que sí lo nota) cuando podrías haber mejorado el margen de forma invisible renegociando la compra." },
+    { error: "Aplicar un multiplicador único a toda la carta", porQueOcurre: "Porque simplifica la gestión y parece 'justo'. Un ×3 a todo suena razonable.", consecuencia: "Pierdes margen en los vinos baratos (donde el comensal es más sensible al precio) y eres poco competitivo en los caros (donde el multiplicador debería ser menor)." },
+    { error: "No revisar márgenes cada mes", porQueOcurre: "Porque el día a día absorbe todo el tiempo y los márgenes parecen estables. Pero los costes suben, la merma varía y la demanda cambia.", consecuencia: "Las desviaciones se acumulan silenciosamente. Solo las ves cuando cierras el trimestre y el resultado no cuadra." },
+    { error: "Fijar precio de copa dividiendo la botella entre 5", porQueOcurre: "Porque es el cálculo mental más rápido. Pero ignora la merma, el servicio y el margen adicional que la copa debería generar.", consecuencia: "Vendes copas a pérdida sin saberlo. Un 25% de merma real convierte tu margen teórico del 70% en un 35% real." },
+    { error: "Mantener un vino con buen margen pero sin ventas", porQueOcurre: "Porque el dato de margen parece positivo y da tranquilidad. Pero un vino que no se vende no genera ningún margen real.", consecuencia: "Capital inmovilizado que ocupa espacio en bodega y en carta sin generar retorno. El margen potencial nunca se materializa." },
+  ],
   links: [
     { label: "Calculadora de márgenes", href: "/calculadora-margen-vino", description: "Calcula el margen real de cualquier referencia en segundos" },
     { label: "Plantilla: Revisión mensual de márgenes", href: "/recursos/plantilla-revision-mensual-margenes", description: "Proceso mensual para detectar desviaciones y oportunidades" },
