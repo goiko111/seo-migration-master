@@ -1,11 +1,13 @@
 import { DollarSign } from "lucide-react";
 
 export type SubTopicPriority = "inmediato" | "esta semana" | "este mes" | "seguimiento";
+export type UserProfile = "direccion" | "sala" | "compras-fb" | "grupo";
 
 export interface SubTopic {
   id: string;
   title: string;
   priority?: SubTopicPriority;
+  audiences?: UserProfile[];
   queSignifica: string;
   porQueImporta: string;
   queHacer: string[];
@@ -52,6 +54,7 @@ export interface DeepAreaContent {
   icon: typeof DollarSign;
   accent: string;
   bg: string;
+  audiences: UserProfile[];
   topErrors?: AreaTopError[];
   miniCases?: AreaMiniCase[];
   subtopics: SubTopic[];
@@ -66,6 +69,7 @@ const margenesPricingContent: DeepAreaContent = {
   icon: DollarSign,
   accent: "text-amber-500",
   bg: "bg-amber-500/10",
+  audiences: ["direccion", "compras-fb"],
   topErrors: [
     { error: "Subir precio sin revisar antes el coste de compra", porQueOcurre: "Porque es más fácil tocar el PVP que negociar con el proveedor. Se asume que el margen bajo es un problema de precio, pero muchas veces el origen está en la compra.", consecuencia: "Subes el precio al cliente (que sí lo nota) cuando podrías haber mejorado el margen de forma invisible renegociando la compra." },
     { error: "Aplicar un multiplicador único a toda la carta", porQueOcurre: "Porque simplifica la gestión y parece 'justo'. Un ×3 a todo suena razonable.", consecuencia: "Pierdes margen en los vinos baratos (donde el comensal es más sensible al precio) y eres poco competitivo en los caros (donde el multiplicador debería ser menor)." },

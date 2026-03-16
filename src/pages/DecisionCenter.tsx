@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
-  ArrowRight, Lock, Shield, Sparkles
+  ArrowRight, Lock, Shield, Sparkles, Briefcase, Store, Users
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,12 +29,22 @@ const useGate = () => {
 };
 
 /* ── Area data ── */
+type UserProfile = "direccion" | "sala" | "compras-fb" | "grupo";
+
+const profileConfig: Record<UserProfile, { label: string; icon: typeof Briefcase }> = {
+  "direccion":  { label: "Dirección",     icon: Briefcase },
+  "sala":       { label: "Sala",          icon: Store },
+  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
+  "grupo":      { label: "Grupo",         icon: Users },
+};
+
 interface Area {
   id: string;
   name: string;
   tagline: string;
   description: string;
   audience: string;
+  profiles: UserProfile[];
   icon: React.ElementType;
   accent: string;
   bg: string;
@@ -49,6 +59,7 @@ const areas: Area[] = [
     tagline: "Entiende la rentabilidad real de cada vino",
     description: "Qué significa cada métrica de margen, cómo interpretar desviaciones y qué palancas usar para mejorar la rentabilidad de tu carta sin tocar la experiencia del comensal.",
     audience: "Dirección, F&B managers, responsables de compras",
+    profiles: ["direccion", "compras-fb"],
     icon: DollarSign,
     accent: "text-amber-500",
     bg: "bg-amber-500/10",
@@ -61,6 +72,7 @@ const areas: Area[] = [
     tagline: "Detecta lo que no se mueve antes de que sea tarde",
     description: "Cómo identificar vinos muertos, cuánto capital tienes inmovilizado, cuándo retirar una referencia y cómo mantener una bodega viva y rentable.",
     audience: "Jefes de sala, sumilleres, F&B managers",
+    profiles: ["sala", "compras-fb", "direccion"],
     icon: Package,
     accent: "text-emerald-500",
     bg: "bg-emerald-500/10",
@@ -73,6 +85,7 @@ const areas: Area[] = [
     tagline: "Compra con datos, no con intuición",
     description: "Qué datos usar antes de comprar, cómo detectar sobrecostes, cuándo negociar condiciones y cómo conectar tus decisiones de compra con el rendimiento real de la carta.",
     audience: "Responsables de compras, dirección, propietarios",
+    profiles: ["compras-fb", "direccion"],
     icon: ShoppingCart,
     accent: "text-blue-500",
     bg: "bg-blue-500/10",
@@ -85,6 +98,7 @@ const areas: Area[] = [
     tagline: "Tu carta debe contar una historia coherente",
     description: "Cómo evaluar el equilibrio de tu carta por estilos, precios, regiones y tipologías. Qué canibaliza, qué falta y cómo construir una arquitectura de carta que venda sola.",
     audience: "Sumilleres, directores de restaurante, F&B",
+    profiles: ["sala", "direccion", "compras-fb"],
     icon: BarChart3,
     accent: "text-wine",
     bg: "bg-wine/10",
@@ -97,6 +111,7 @@ const areas: Area[] = [
     tagline: "El programa de copa como motor de margen",
     description: "Cómo diseñar, ejecutar y controlar un programa de vino por copa rentable: selección, pricing, merma, rotación y la relación entre copa y botella.",
     audience: "Wine bars, restaurantes con copa, hoteles",
+    profiles: ["sala", "direccion"],
     icon: Wine,
     accent: "text-purple-500",
     bg: "bg-purple-500/10",
@@ -109,6 +124,7 @@ const areas: Area[] = [
     tagline: "Governa la categoría vino a escala",
     description: "Cómo comparar locales, detectar desviaciones, estandarizar criterios de compra y gestionar surtido de forma centralizada sin perder la identidad de cada restaurante.",
     audience: "Directores de operaciones, F&B corporativo",
+    profiles: ["grupo", "direccion"],
     icon: Building2,
     accent: "text-rose-500",
     bg: "bg-rose-500/10",
@@ -298,14 +314,23 @@ const DecisionCenter = () => {
                       {area.description}
                     </p>
 
-                    {/* Audience */}
+                    {/* Audience — profile badges */}
                     <div className="border-t border-border pt-3 mb-4">
-                      <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1">
-                        Para quién
+                      <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">
+                        Relevante para
                       </p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        {area.audience}
-                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {area.profiles.map((p) => {
+                          const cfg = profileConfig[p];
+                          const PIcon = cfg.icon;
+                          return (
+                            <span key={p} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
+                              <PIcon size={10} />
+                              {cfg.label}
+                            </span>
+                          );
+                        })}
+                      </div>
                     </div>
 
                     {/* CTA */}

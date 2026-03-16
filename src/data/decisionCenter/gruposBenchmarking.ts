@@ -8,6 +8,7 @@ const gruposBenchmarkingContent: DeepAreaContent = {
   icon: Building2,
   accent: "text-rose-500",
   bg: "bg-rose-500/10",
+  audiences: ["grupo", "direccion"],
   links: [
     { label: "Soluciones para grupos", href: "/soluciones/grupos-restauracion", description: "Cómo Winerim ayuda a grupos multiunidad a gobernar la categoría vino", type: "solution" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "Motor analítico con benchmarking interno, desviaciones y scoring por local", type: "product" },

@@ -8,6 +8,7 @@ const cartaEquilibrioContent: DeepAreaContent = {
   icon: BarChart3,
   accent: "text-wine",
   bg: "bg-wine/10",
+  audiences: ["sala", "direccion", "compras-fb"],
   topErrors: [
     { error: "Construir la carta por acumulación en vez de por diseño", porQueOcurre: "Porque cada vino nuevo se añade sin retirar otro. El proveedor ofrece, el sommelier acepta, la carta crece sin criterio.", consecuencia: "La carta se infla, se desequilibra y se llena de redundancias que canibalizan ventas y generan stock muerto." },
     { error: "Saturar una franja de precio sin cubrir otras", porQueOcurre: "Porque se compra lo que gusta o lo que ofrece el proveedor habitual, que suele estar en la misma franja.", consecuencia: "Compites contigo mismo en 25-35 € mientras el comensal que busca algo a <20 € o >50 € no encuentra opciones." },

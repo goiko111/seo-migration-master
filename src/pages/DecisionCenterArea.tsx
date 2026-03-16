@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
   ArrowLeft, Lock, Shield, Info, Target, Lightbulb, AlertTriangle,
-  FileText, Clock, ChevronDown, Calculator, Download, BookOpen, ArrowRight, Zap
+  FileText, Clock, ChevronDown, Calculator, Download, BookOpen, ArrowRight, Zap,
+  User, Users, Briefcase, Store
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError, type LinkType, type AreaNextStep, type AreaMiniCase } from "@/data/decisionCenter/margenesPricing";
+import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTopicPriority, type AreaTopError, type LinkType, type AreaNextStep, type AreaMiniCase, type UserProfile } from "@/data/decisionCenter/margenesPricing";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
@@ -50,6 +51,31 @@ const linkTypeConfig: Record<LinkType, { label: string; icon: typeof FileText; c
   article:  { label: "Artículo",    icon: FileText,    color: "text-violet-500",         bg: "bg-violet-500/10" },
   guide:    { label: "Guía",        icon: BookOpen,    color: "text-blue-400",           bg: "bg-blue-500/10" },
   solution: { label: "Solución",    icon: Lightbulb,   color: "text-rose-400",           bg: "bg-rose-500/10" },
+};
+
+const profileConfig: Record<UserProfile, { label: string; icon: typeof User }> = {
+  "direccion":  { label: "Dirección",     icon: Briefcase },
+  "sala":       { label: "Sala",          icon: Store },
+  "compras-fb": { label: "Compras / F&B", icon: ShoppingCart },
+  "grupo":      { label: "Grupo",         icon: Users },
+};
+
+const ProfileBadges = ({ audiences }: { audiences?: UserProfile[] }) => {
+  if (!audiences || audiences.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {audiences.map((a) => {
+        const cfg = profileConfig[a];
+        const Icon = cfg.icon;
+        return (
+          <span key={a} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wider uppercase bg-muted/50 text-muted-foreground">
+            <Icon size={10} />
+            {cfg.label}
+          </span>
+        );
+      })}
+    </div>
+  );
 };
 
 interface SimpleAreaContent {
@@ -287,7 +313,12 @@ const DeepAreaView = ({ content }: { content: DeepAreaContent }) => {
               </div>
             </div>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mt-4">
+              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 mb-1.5">Relevante para</p>
+              <ProfileBadges audiences={content.audiences} />
+            </motion.div>
+
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
               className="text-sm text-muted-foreground leading-relaxed max-w-3xl mt-4">
               {content.intro}
             </motion.p>
