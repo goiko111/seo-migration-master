@@ -306,6 +306,9 @@ const i18n: Record<SupportedLang, {
     issue_ratio_low: (n, v, a) => `Rapporto vino molto basso (${v}% vs ${Math.round(a)}%). Opportunità di miglioramento.`,
     issue_glass_low: (n, v) => `Rapporto calice inferiore al 15%. Opportunità di crescita tramite il calice.`,
     issue_glass_price_low: (n, v, a) => `Prezzo medio calice inferiore alla media (${v}€ vs ${a}€).`,
+    decides: ["Se la gestione del vino è coerente tra i locali", "Quale locale necessita più attenzione su pricing o assortimento", "Se il gruppo beneficerebbe di standard centralizzati"],
+    avoids: ["Che ogni locale operi con criteri diversi senza controllo", "Deviazioni di prezzo che erodono il brand", "Perdere potere negoziale per mancanza di visione consolidata"],
+    impact: ["Individuare opportunità di miglioramento nei locali sottoperformanti", "Standardizzare la gestione e ridurre le inefficienze", "Preparare le negoziazioni con dati di gruppo"],
   },
   fr: {
     seo_title: "Auditeur Carte des Vins pour Groupes Multi-Sites | Winerim",
