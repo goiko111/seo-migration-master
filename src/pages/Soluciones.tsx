@@ -81,7 +81,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Every business type has different needs. These are the most in-demand.",
     solutions: [
       { title: "Restaurant groups", desc: "Centralised management: list control, pricing, assortment and internal benchmarking across locations.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for 100+ references.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for 250+ references.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Growing wine lists", desc: "Differentiated pricing, balanced rotation and strategic by-the-glass for lists of 80–250 references.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing & margins", desc: "Differentiated multipliers, coherent price ladder and deviation vs. optimal by wine type.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Wine by the glass", desc: "Glass strategy: pricing, waste, rotation, shelf life and net profitability per reference.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock & rotation", desc: "Immobilised capital, opportunity cost, liquidation plan and obsolescence alerts.", path: "/rotacion-de-vinos", icon: "package" },
