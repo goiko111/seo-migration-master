@@ -30,7 +30,7 @@ const data: VerticalContent = {
     "Necesitas justificar ante dirección o propiedad cada decisión de surtido",
   ],
   notForItems: [
-    "Tu carta tiene menos de 40 referencias y la gestionas sin dificultad",
+    "Tu carta tiene menos de 80 referencias y la gestionas sin dificultad",
     "No consideras el vino como una categoría estratégica del negocio",
     "Prefieres decidir el surtido exclusivamente por relación con distribuidores",
   ],
