@@ -346,7 +346,7 @@ const VerticalTemplate = ({ t, hideSupplyBlock }: { t: VerticalContent; hideSupp
 
 
       {/* ── WINERIM SUPPLY ── */}
-      <WinerimSupplyBlock />
+      {!hideSupplyBlock && <WinerimSupplyBlock />}
 
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding bg-gradient-dark">
