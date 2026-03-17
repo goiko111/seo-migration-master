@@ -57,7 +57,7 @@ const i18n: Record<string, {
     linksTitle: "Contenido relacionado",
     faqTitle: "Preguntas frecuentes",
     faqs: [
-      { q: "¿Winerim sirve para cualquier tipo de restaurante?", a: "Winerim está diseñado para restaurantes, hoteles, wine bars y grupos de restauración con al menos 30-40 referencias de vino. Para establecimientos con menos de 20 referencias, las herramientas gratuitas pueden ser suficientes." },
+      { q: "¿Winerim sirve para cualquier tipo de restaurante?", a: "Winerim está diseñado para restaurantes, hoteles, wine bars y grupos de restauración con cartas de al menos 80 referencias. Para establecimientos con cartas más contenidas (menos de 80 referencias), las herramientas gratuitas pueden ser un buen punto de partida." },
       { q: "¿Cuánto tiempo lleva implementar una solución?", a: "La implementación básica se completa en 1-5 días. Los resultados de optimización empiezan a ser visibles en las primeras 2-4 semanas." },
       { q: "¿Qué diferencia hay entre Core, Inteligencia Dinámica y Supply?", a: "Core es el motor analítico que diagnostica tu carta. Inteligencia Dinámica es la capa de IA que ejecuta acciones tácticas en tiempo real. Supply se centra en las decisiones de compra y relación con distribuidores. Las tres capas trabajan juntas." },
       { q: "¿Puedo probar antes de comprometerme?", a: "Sí. Puedes usar las herramientas gratuitas, solicitar un análisis sin coste o pedir una demo personalizada antes de decidir." },
