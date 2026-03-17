@@ -66,6 +66,7 @@ function useScrollDepthTracker(): void {
         if (percent >= t && !fired.current.has(t)) {
           fired.current.add(t);
           trackAction("scroll_depth", classification.category, `scroll_${t}`, t);
+          ga.scrollDepth(t);
         }
       }
     };
