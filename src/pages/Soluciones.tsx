@@ -44,8 +44,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Cada tipo de negocio tiene necesidades distintas. Estas son las más demandadas.",
     solutions: [
       { title: "Grupos de restauración", desc: "Gestión centralizada: control de cartas, precios, surtido y benchmarking interno entre locales.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura de carta para +250 referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Carta con ambición de crecimiento", desc: "Pricing diferenciado, rotación equilibrada y vino por copa estratégico para cartas de 80–250 referencias.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura para cartas con alta densidad de referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartas con profundidad", desc: "Pricing diferenciado, rotación equilibrada y vino por copa estratégico para cartas que ya tienen complejidad real.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing y márgenes", desc: "Multiplicadores diferenciados, escalera de precios coherente y desviación vs. óptimo por tipología.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino por copa", desc: "Estrategia de copeo: pricing, merma, rotación, vida útil y rentabilidad neta por referencia.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock y rotación", desc: "Capital inmovilizado, coste de oportunidad, plan de liquidación y alertas de obsolescencia.", path: "/rotacion-de-vinos", icon: "package" },
