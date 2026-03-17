@@ -254,12 +254,6 @@ const Navbar = memo(() => {
             Área cliente
           </Link>
           <Link
-            to={localePath("/contacto")}
-            className="text-xs xl:text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
-          >
-            {t.nav_contact}
-          </Link>
-          <Link
             to={localePath("/demo")}
             className="bg-gradient-wine text-primary-foreground px-5 xl:px-6 py-2.5 rounded text-xs xl:text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
           >
