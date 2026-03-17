@@ -178,7 +178,6 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/guias/como-conectar-carta-stock-ventas-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
 
   // Tools (ES-only)
-  { esPath: '/calculadora-margen-vino', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: false },
