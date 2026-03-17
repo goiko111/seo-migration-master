@@ -19,6 +19,8 @@ import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
 interface SolutionStep {
   step: string;
@@ -52,8 +54,137 @@ export interface PainPageData {
   ctaFinalDescription?: string;
 }
 
+const labels: Record<SupportedLang, {
+  problems: string;
+  commonProblem: string;
+  requestDemo: string;
+  symptomTitle: string;
+  diagnosis: string;
+  whyHappens: string;
+  whyHappensDesc: string;
+  economicImpact: string;
+  midCtaTitle: string;
+  midCtaDesc: string;
+  midCtaBtn: string;
+  solution: string;
+  howToFix: string;
+  winerimLabel: string;
+  howWinerimSolves: string;
+  relatedContent: string;
+  faqTitle: string;
+  nextStep: string;
+  defaultCtaTitle: string;
+  defaultCtaDesc: string;
+  noCommitment: string;
+  stickyText: string;
+  defaultCtaPrimary: string;
+}> = {
+  es: {
+    problems: "Problemas",
+    commonProblem: "Problema común",
+    requestDemo: "Solicitar demo",
+    symptomTitle: "El síntoma",
+    diagnosis: "Diagnóstico",
+    whyHappens: "¿Por qué ocurre?",
+    whyHappensDesc: "Las causas más comunes de este problema en restaurantes.",
+    economicImpact: "Impacto económico",
+    midCtaTitle: "¿Quieres saber si tu carta tiene este problema?",
+    midCtaDesc: "Analiza tu carta gratis y detecta oportunidades de mejora en margen, rotación y surtido.",
+    midCtaBtn: "Analizar mi carta gratis",
+    solution: "Solución",
+    howToFix: "Cómo corregirlo",
+    winerimLabel: "Winerim",
+    howWinerimSolves: "Cómo lo resuelve Winerim",
+    relatedContent: "Contenido relacionado",
+    faqTitle: "Preguntas frecuentes",
+    nextStep: "Siguiente paso",
+    defaultCtaTitle: "No dejes que tu carta de vinos pierda dinero",
+    defaultCtaDesc: "Analiza tu carta gratis. Te mostramos oportunidades reales de mejora en margen, rotación y surtido.",
+    noCommitment: "Sin compromiso. Envía tu carta en cualquier formato.",
+    stickyText: "Analiza tu carta gratis →",
+    defaultCtaPrimary: "Diagnostica tu carta",
+  },
+  en: {
+    problems: "Problems",
+    commonProblem: "Common problem",
+    requestDemo: "Request demo",
+    symptomTitle: "The symptom",
+    diagnosis: "Diagnosis",
+    whyHappens: "Why does this happen?",
+    whyHappensDesc: "The most common causes of this problem in restaurants.",
+    economicImpact: "Economic impact",
+    midCtaTitle: "Want to know if your wine list has this problem?",
+    midCtaDesc: "Analyze your list for free and discover opportunities to improve margin, rotation and assortment.",
+    midCtaBtn: "Analyze my list for free",
+    solution: "Solution",
+    howToFix: "How to fix it",
+    winerimLabel: "Winerim",
+    howWinerimSolves: "How Winerim solves it",
+    relatedContent: "Related content",
+    faqTitle: "Frequently asked questions",
+    nextStep: "Next step",
+    defaultCtaTitle: "Don't let your wine list lose money",
+    defaultCtaDesc: "Analyze your list for free. We'll show you real opportunities to improve margin, rotation and assortment.",
+    noCommitment: "No commitment. Send your list in any format.",
+    stickyText: "Analyze your list for free →",
+    defaultCtaPrimary: "Diagnose your list",
+  },
+  it: {
+    problems: "Problemi",
+    commonProblem: "Problema comune",
+    requestDemo: "Richiedi demo",
+    symptomTitle: "Il sintomo",
+    diagnosis: "Diagnosi",
+    whyHappens: "Perché succede?",
+    whyHappensDesc: "Le cause più comuni di questo problema nei ristoranti.",
+    economicImpact: "Impatto economico",
+    midCtaTitle: "Vuoi sapere se la tua carta dei vini ha questo problema?",
+    midCtaDesc: "Analizza la tua carta gratuitamente e scopri opportunità di miglioramento su margine, rotazione e assortimento.",
+    midCtaBtn: "Analizza la mia carta gratis",
+    solution: "Soluzione",
+    howToFix: "Come correggerlo",
+    winerimLabel: "Winerim",
+    howWinerimSolves: "Come lo risolve Winerim",
+    relatedContent: "Contenuti correlati",
+    faqTitle: "Domande frequenti",
+    nextStep: "Passo successivo",
+    defaultCtaTitle: "Non lasciare che la tua carta dei vini perda soldi",
+    defaultCtaDesc: "Analizza la tua carta gratuitamente. Ti mostriamo opportunità reali di miglioramento su margine, rotazione e assortimento.",
+    noCommitment: "Senza impegno. Invia la tua carta in qualsiasi formato.",
+    stickyText: "Analizza la tua carta gratis →",
+    defaultCtaPrimary: "Diagnostica la tua carta",
+  },
+  fr: {
+    problems: "Problèmes",
+    commonProblem: "Problème courant",
+    requestDemo: "Demander une démo",
+    symptomTitle: "Le symptôme",
+    diagnosis: "Diagnostic",
+    whyHappens: "Pourquoi cela se produit-il ?",
+    whyHappensDesc: "Les causes les plus fréquentes de ce problème en restauration.",
+    economicImpact: "Impact économique",
+    midCtaTitle: "Votre carte des vins a-t-elle ce problème ?",
+    midCtaDesc: "Analysez votre carte gratuitement et détectez des opportunités d'amélioration sur la marge, la rotation et l'assortiment.",
+    midCtaBtn: "Analyser ma carte gratuitement",
+    solution: "Solution",
+    howToFix: "Comment y remédier",
+    winerimLabel: "Winerim",
+    howWinerimSolves: "Comment Winerim le résout",
+    relatedContent: "Contenu connexe",
+    faqTitle: "Questions fréquentes",
+    nextStep: "Prochaine étape",
+    defaultCtaTitle: "Ne laissez plus votre carte des vins perdre de l'argent",
+    defaultCtaDesc: "Analysez votre carte gratuitement. Nous vous montrons des opportunités réelles d'amélioration sur la marge, la rotation et l'assortiment.",
+    noCommitment: "Sans engagement. Envoyez votre carte dans n'importe quel format.",
+    stickyText: "Analysez votre carte gratuitement →",
+    defaultCtaPrimary: "Diagnostiquez votre carte",
+  },
+};
+
 const PainTemplate = ({ data }: { data: PainPageData }) => {
-  const ctaPrimary = data.ctaPrimaryText || "Diagnostica tu carta";
+  const { lang } = useLanguage();
+  const l = labels[lang];
+  const ctaPrimary = data.ctaPrimaryText || l.defaultCtaPrimary;
   const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
 
   return (
@@ -73,7 +204,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         faqs={data.faqs}
         breadcrumbs={[
           { name: "Inicio", url: "https://winerim.wine/" },
-          { name: "Problemas", url: "https://winerim.wine/guias-y-recursos" },
+          { name: l.problems, url: "https://winerim.wine/guias-y-recursos" },
           { name: data.heroTitle, url: `https://winerim.wine/${data.slug}` },
         ]}
       />
@@ -85,13 +216,13 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Problemas", href: "/guias-y-recursos" },
+            { label: l.problems, href: "/guias-y-recursos" },
             { label: data.heroTitle },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-destructive/30 bg-destructive/5 mb-6">
             <AlertTriangle size={14} className="text-destructive" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-destructive">{data.heroBadge || "Problema común"}</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-destructive">{data.heroBadge || l.commonProblem}</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -109,7 +240,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
             </Link>
             <Link to="/demo"
               className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-              Solicitar demo
+              {l.requestDemo}
             </Link>
           </motion.div>
         </div>
@@ -122,7 +253,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
             <div className="flex items-start gap-4 mb-4">
               <AlertTriangle size={24} className="text-destructive shrink-0 mt-1" />
               <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">El síntoma</h2>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{l.symptomTitle}</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">{data.symptom}</p>
                 {data.symptomDetails && (
                   <p className="text-muted-foreground leading-relaxed mt-3">{data.symptomDetails}</p>
@@ -137,9 +268,9 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       <section className="bg-gradient-card border-y border-border py-20">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Diagnóstico</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">¿Por qué ocurre?</h2>
-            <p className="text-muted-foreground max-w-2xl mb-12">Las causas más comunes de este problema en restaurantes.</p>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">{l.diagnosis}</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{l.whyHappens}</h2>
+            <p className="text-muted-foreground max-w-2xl mb-12">{l.whyHappensDesc}</p>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-4">
             {data.causes.map((cause, i) => (
@@ -161,7 +292,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
             <div className="flex items-start gap-4">
               <DollarSign size={24} className="text-accent shrink-0 mt-1" />
               <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Impacto económico</h2>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{l.economicImpact}</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">{data.economicImpact}</p>
                 {data.economicImpactDetails && (
                   <p className="text-muted-foreground leading-relaxed mt-3">{data.economicImpactDetails}</p>
@@ -172,12 +303,11 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         </ScrollReveal>
       </section>
 
-      {/* MID CTA — contextual for pain pages (MOFU → BOFU bridge) */}
       <ArticleMidCTA
         pageType="guide"
-        title="¿Quieres saber si tu carta tiene este problema?"
-        description="Analiza tu carta gratis y detecta oportunidades de mejora en margen, rotación y surtido."
-        buttonText="Analizar mi carta gratis"
+        title={l.midCtaTitle}
+        description={l.midCtaDesc}
+        buttonText={l.midCtaBtn}
         buttonUrl="/analisis-carta"
         variant="highlight"
       />
@@ -186,8 +316,8 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       <section className="bg-gradient-card border-y border-border py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Solución</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Cómo corregirlo</h2>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">{l.solution}</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">{l.howToFix}</h2>
           </ScrollReveal>
           <div className="space-y-6">
             {data.solution.map((s, i) => (
@@ -208,8 +338,8 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {/* CÓMO LO RESUELVE WINERIM */}
       <section className="max-w-5xl mx-auto px-6 md:px-12 py-20">
         <ScrollReveal>
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-wine block mb-3">Winerim</span>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Cómo lo resuelve Winerim</h2>
+          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-wine block mb-3">{l.winerimLabel}</span>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">{l.howWinerimSolves}</h2>
         </ScrollReveal>
         <div className="grid md:grid-cols-2 gap-6">
           {data.winerimModules.map((m, i) => (
@@ -228,7 +358,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
       {data.relatedLinks && data.relatedLinks.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-bold mb-6">Contenido relacionado</h2>
+            <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedContent}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedLinks.map((link, i) => (
                 <Link key={i} to={link.url}
@@ -243,12 +373,12 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         </section>
       )}
 
-      {/* FAQ — accordion */}
+      {/* FAQ */}
       {data.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{l.faqTitle}</h2>
             </ScrollReveal>
             <Accordion type="multiple" className="space-y-3">
               {data.faqs.map((faq, i) => (
@@ -266,21 +396,19 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         </section>
       )}
 
-      {/* CTA FINAL — BOFU bridge */}
       <CTASection
         pageType="guide"
-        badge="Siguiente paso"
-        title={data.ctaFinalTitle || "No dejes que tu carta de vinos pierda dinero"}
-        description={data.ctaFinalDescription || "Analiza tu carta gratis. Te mostramos oportunidades reales de mejora en margen, rotación y surtido."}
+        badge={l.nextStep}
+        title={data.ctaFinalTitle || l.defaultCtaTitle}
+        description={data.ctaFinalDescription || l.defaultCtaDesc}
         primaryText={ctaPrimary}
         primaryUrl={ctaPrimaryUrl}
-        secondaryText="Solicitar demo"
+        secondaryText={l.requestDemo}
         secondaryUrl="/demo"
-        micro="Sin compromiso. Envía tu carta en cualquier formato."
+        micro={l.noCommitment}
       />
 
-      {/* Sticky CTA */}
-      <StickyCTA pageType="guide" text="Analiza tu carta gratis →" url="/analisis-carta" />
+      <StickyCTA pageType="guide" text={l.stickyText} url="/analisis-carta" />
 
       <Footer />
     </div>
