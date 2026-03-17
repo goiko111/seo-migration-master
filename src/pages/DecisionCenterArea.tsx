@@ -32,6 +32,9 @@ import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 import vinoPorCopaEN from "@/data/decisionCenter/vinoPorCopa.en";
 import vinoPorCopaIT from "@/data/decisionCenter/vinoPorCopa.it";
 import vinoPorCopaFR from "@/data/decisionCenter/vinoPorCopa.fr";
+import gruposBenchmarkingEN from "@/data/decisionCenter/gruposBenchmarking.en";
+import gruposBenchmarkingIT from "@/data/decisionCenter/gruposBenchmarking.it";
+import gruposBenchmarkingFR from "@/data/decisionCenter/gruposBenchmarking.fr";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */

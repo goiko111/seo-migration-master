@@ -1,0 +1,177 @@
+import { Building2 } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const gruposBenchmarkingIT: DeepAreaContent = {
+  name: "Gruppi e benchmarking",
+  tagline: "Governa la categoria vino su scala",
+  intro: "Questa sezione ti aiuta a prendere decisioni sulla categoria vino quando gestisci più di un locale. Non si tratta di standardizzare per standardizzare: si tratta di individuare cosa funziona, dove funziona e perché, per decidere con i dati cosa vale la pena scalare, cosa correggere e cosa ritirare. Il benchmarking interno non è una classifica: è uno strumento di governance.",
+  icon: Building2,
+  accent: "text-rose-500",
+  bg: "bg-rose-500/10",
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Confrontare locali che non sono confrontabili", porQueOcurre: "Perché si mettono tutti i locali nella stessa classifica senza raggruppare per tipologia (casual, gastronomico, hotel, terrazza). Un gastronomico e un casual non operano allo stesso modo.", consecuencia: "Penalizzi il gastronomico per minor rotazione o il casual per scontrino inferiore. Le conclusioni sono inutili e i direttori di locale si disinteressano del processo." },
+    { error: "Replicare carte tra locali senza considerare il contesto", porQueOcurre: "Perché se qualcosa funziona in un locale, sembra logico copiarlo. Ma il contesto (clientela, posizione, concept, team) determina il risultato.", consecuencia: "Stock morto moltiplicato per il numero di locali destinatari. Capitale immobilizzato e una carta che non corrisponde al profilo dell'ospite di quel locale." },
+    { error: "Mantenere referenze per inerzia in tutte le unità", porQueOcurre: "Perché togliere un vino dalla carta aziendale sembra rischioso. Nessuno vuole essere quello che toglie 'il solito Barolo'.", consecuencia: "Referenze che non vendono in 3 locali su 5 continuano a occupare spazio, stock e attenzione. Il costo dell'inerzia si moltiplica per il numero di unità." },
+    { error: "Standardizzare troppo e perdere la logica commerciale di ogni locale", porQueOcurre: "Perché la standardizzazione semplifica la gestione centrale. Ma una carta identica in un resort costiero e un locale urbano business non ha senso commerciale.", consecuencia: "Il locale perde identità, l'ospite non trova ciò che si aspetta e le vendite calano dove la carta non corrisponde al profilo del cliente." },
+    { error: "Non usare dati per decisioni di espansione o ritiro", porQueOcurre: "Perché le decisioni sull'assortimento si prendono per relazione con i fornitori, per inerzia o per criterio personale dell'F&B, non per rendimento misurato.", consecuencia: "Acquisti senza criterio, carte gonfiate e opportunità di miglioramento invisibili. Il gruppo opera come somma di locali indipendenti, non come sistema." },
+  ],
+  links: [
+    { label: "Soluzioni per gruppi", href: "/it/soluzioni/gruppi-ristorazione", description: "Come Winerim aiuta i gruppi multi-unità a governare la categoria vino", type: "solution" },
+    { label: "Winerim Core", href: "/it/prodotto/winerim-core", description: "Motore analitico con benchmarking interno, deviazioni e scoring per locale", type: "product" },
+    { label: "Winerim Supply", href: "/it/prodotto/winerim-supply", description: "Intelligenza acquisti centralizzata con alert di sovrapprezzo per unità", type: "product" },
+    { label: "Modello: Controllo gruppo ristorazione", href: "/it/risorse/modello-controllo-gruppo-ristorazione", description: "Cruscotto per confrontare metriche chiave tra locali", type: "resource" },
+    { label: "Modello: Scorecard mensile", href: "/it/risorse/modello-scorecard-mensile", description: "Revisione mensile strutturata delle prestazioni per unità", type: "resource" },
+    { label: "Blog: Standardizzare l'offerta nei gruppi", href: "/it/article/estandarizar-oferta-vino-grupo-restauracion", description: "Come standardizzare senza perdere l'identità di ogni locale", type: "article" },
+    { label: "Auditor multi-locale", href: "/it/strumenti/auditor-carta-multilocale", description: "Confronta assortimento, pricing e calice tra locali dello stesso gruppo", type: "tool" },
+  ],
+  miniCases: [
+    {
+      profile: "Gruppo di 6 ristoranti in 3 città",
+      situation: "Ogni locale aveva la propria carta. Il migliore aveva un margine del 64%; il peggiore, il 41%. Nessuno lo sapeva perché non confrontavano.",
+      action: "Implementato uno scorecard mensile unificato. Scoperto che il locale più debole aveva 15 referenze che non vendeva e prezzi del 15% sotto la media del gruppo.",
+      result: "In 4 mesi il locale in ritardo è salito al 56% di margine — semplicemente replicando il mix di calici e il pricing del leader.",
+    },
+    {
+      profile: "Catena di hotel con F&B centralizzato",
+      situation: "Gli acquisti erano centralizzati ma ogni hotel fissava i prezzi liberamente. Stesso vino a 28 € in un hotel e a 19 € in un altro.",
+      action: "Definite fasce di prezzo per categoria e tipo di hotel (urbano vs resort). Ogni hotel ha ±2 € di flessibilità nella fascia.",
+      result: "Coerenza di brand, margine uniforme del 58% in tutti gli hotel e maggiore potere negoziale grazie agli acquisti per volume.",
+    },
+    {
+      profile: "Gruppo di 4 ristoranti casual-premium",
+      situation: "Ogni locale acquistava autonomamente dal fornitore più vicino. Lo stesso vino costava tra 5,20 € e 7,80 € a seconda del locale. Nessuno incrociava i dati d'acquisto.",
+      action: "Centralizzati gli acquisti per le 20 referenze aziendali, negoziando sul volume totale del gruppo. Usato Winerim Supply per rilevare sovrapprezzi per locale.",
+      result: "Risparmio medio del 14% sui costi d'acquisto. Capitale liberato: 6.400 €/trimestre. I locali mantengono libertà per il 30% della carta locale.",
+    },
+    {
+      profile: "Gruppo di 8 locali mix casual e gastronomico",
+      situation: "I 3 gastronomici avevano il 62% di margine, ma i 5 casual erano tra il 38% e il 51%. L'F&B aziendale non capiva la dispersione.",
+      action: "Separato il benchmarking in due cluster (casual e gastronomico). Scoperto che i casual con peggior margine applicavano lo stesso moltiplicatore del gastronomico invece di uno adattato alla loro fascia di prezzo.",
+      result: "Regolando i moltiplicatori per tipologia, i casual sono saliti al 54-58% di margine in 2 mesi — senza toccare la carta, solo il pricing.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "comparar-unidades",
+      title: "Come confrontare le unità in modo utile",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim ha normalizzato le metriche dei tuoi locali per tipologia in modo che il confronto sia equo.", whyMatters: "Senza confronto normalizzato, i dati ingannano: il locale che fattura di più potrebbe avere il peggior margine.", riskIfIgnored: "Ogni direttore opera con il proprio criterio senza individuare best practice né problemi sistemici." },
+      queSignifica: "Confrontare le unità non significa ordinare i locali dal migliore al peggiore per fatturato. Significa incrociare metriche normalizzate (margine medio, rotazione, scontrino medio vino, rapporto calice/bottiglia, % vini morti) tra locali con contesti comparabili. Un gastronomico e un casual non si confrontano allo stesso modo. Un'unità hotel e una su strada nemmeno. Il confronto utile raggruppa per tipologia e misura deviazioni sulla media del gruppo, non valori assoluti.",
+      porQueImporta: "Perché senza confronto normalizzato, i dati ingannano. Il locale che fattura di più potrebbe avere il peggior margine. Quello che vende meno potrebbe essere il più efficiente. Senza benchmarking interno, ogni direttore opera con il proprio criterio e non c'è modo di individuare le best practice né i problemi sistemici.",
+      queHacer: [
+        "Raggruppa i tuoi locali per tipologia (casual, gastronomico, hotel, terrazza) prima di confrontare.",
+        "Definisci 5-6 KPI comuni: margine medio, rotazione, % vini morti, scontrino medio vino, rapporto calice/bottiglia, costo medio d'acquisto.",
+        "Calcola la media del gruppo per tipologia e misura la deviazione di ogni locale rispetto a quella media.",
+        "Usa il Modello di Controllo del Gruppo per strutturare il confronto mensilmente.",
+      ],
+      errores: [
+        { mistake: "Confrontare locali di tipologia diversa con gli stessi parametri", consequence: "Penalizzi il gastronomico per minor rotazione rispetto al casual. Non sono confrontabili." },
+        { mistake: "Usare solo il fatturato come metrica di confronto", consequence: "Il locale che fattura di più potrebbe generare il peggior margine. Fatturare non è guadagnare." },
+        { mistake: "Non normalizzare per numero di referenze o dimensione della carta", consequence: "Un locale con 300 referenze e uno con 80 non si possono leggere allo stesso modo senza aggiustamento." },
+      ],
+    },
+    {
+      id: "metricas-por-local",
+      title: "Quali metriche monitorare per locale",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim ha generato un cruscotto con 6 KPI omogenei per ciascuno dei tuoi locali.", whyMatters: "Se ogni locale misura in modo diverso, non puoi governare. Le decisioni di gruppo si prendono su dati comparabili.", riskIfIgnored: "Ogni locale riporta ciò che gli conviene. Non rilevi le deviazioni finché non diventano crisi." },
+      queSignifica: "Ogni locale deve essere leggibile attraverso un set minimo di metriche che ne rivelino la salute commerciale nella categoria vino. Non servono 30 indicatori: servono i 6 giusti. Margine medio ponderato (non teorico — reale, al netto di sconti e spreco), rotazione media per referenza, percentuale di vini morti (senza vendita da 60+ giorni), scontrino medio vino per tavolo, rapporto calice/bottiglia e costo medio d'acquisto per referenza.",
+      porQueImporta: "Perché se ogni locale riporta metriche diverse o non ne riporta nessuna, non puoi governare. Le decisioni di gruppo si prendono su dati comparabili. Se un locale misura il margine lordo e un altro il margine netto, il confronto è inutile. Il primo passo per gestire un gruppo è omogeneizzare cosa si misura e come.",
+      queHacer: [
+        "Definisci un cruscotto minimo di 6 KPI identici per tutti i locali.",
+        "Assicurati che tutti calcolino il margine nello stesso modo (stesso criterio di costo).",
+        "Rivedi questi KPI mensilmente con lo Scorecard mensile.",
+        "Identifica i 2-3 locali che più si discostano dalla media su ogni metrica e analizza perché.",
+      ],
+      errores: [
+        { mistake: "Lasciare che ogni locale definisca le proprie metriche", consequence: "Non puoi confrontare. Ognuno misura ciò che gli conviene e i dati non sono incrociabili." },
+        { mistake: "Misurare troppi indicatori senza dare priorità", consequence: "Paralisi da analisi. 30 KPI che nessuno guarda equivalgono a 0 KPI." },
+        { mistake: "Non distinguere margine teorico da margine reale", consequence: "Credi che un locale abbia il 68% di margine, ma con spreco e sconti reali è il 52%." },
+      ],
+    },
+    {
+      id: "referencias-que-funcionan",
+      title: "Come individuare le referenze che funzionano davvero e dove",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim ha incrociato il rendimento per referenza tra tutti i tuoi locali per identificare cosa funziona e dove.", whyMatters: "Scalare ciò che funziona moltiplica l'impatto. Ma farlo senza contesto moltiplica l'errore.", riskIfIgnored: "Replichi alla cieca o ritiri senza criterio. Perdi l'opportunità di capire il tuo cliente per locale." },
+      queSignifica: "Una referenza 'che funziona' non è solo quella che si vende: è quella che si vende con buon margine, ruota a un ritmo sano e non cannibalizza le altre. Il benchmarking interno ti permette di identificare quali referenze soddisfano tutte e tre le condizioni in ogni locale. A volte un vino funziona in 3 locali su 5: questo ti dice qualcosa sul profilo del cliente, non sul vino.",
+      porQueImporta: "Perché scalare una referenza che funziona in un locale ma non in un altro è una decisione che richiede contesto. Se un Verdicchio a 22 € funziona nei tuoi locali costieri ma non in quelli urbani, la conclusione non è 'il Verdicchio non funziona': è che il tuo cliente urbano ha preferenze diverse. Senza questa analisi, replichi alla cieca o ritiri senza criterio.",
+      queHacer: [
+        "Incrocia le 10 referenze più vendute di ogni locale con il loro margine e la rotazione.",
+        "Identifica quelle che appaiono nel top di più locali: sono candidate a referenza aziendale.",
+        "Analizza quelle che funzionano solo in un locale: è per il cliente, il team, il prezzo o la carta?",
+        "Usa Winerim Core per visualizzare il rendimento incrociato per referenza e locale.",
+      ],
+      errores: [
+        { mistake: "Presumere che ciò che funziona in un locale funzioni in tutti", consequence: "Scali una referenza che non si adatta a 3 dei tuoi 5 locali. Stock morto moltiplicato per 3." },
+        { mistake: "Misurare solo le vendite senza incrociare con il margine", consequence: "La tua referenza stella potrebbe essere quella con il peggior margine. Vendere molto non è vendere bene." },
+        { mistake: "Non indagare perché una referenza funziona in un posto e non in un altro", consequence: "Perdi l'opportunità di capire il tuo cliente per locale. Quel dato vale più della vendita." },
+      ],
+    },
+    {
+      id: "cuando-replicar",
+      title: "Quando replicare una referenza in altri locali",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim ha rilevato referenze con rendimento sostenuto in un locale che potrebbero funzionare in altri con profilo simile.", whyMatters: "Una replicazione ben fatta moltiplica il rendimento. Mal fatta, moltiplica stock fermo in più locali.", riskIfIgnored: "Perdi opportunità di scalare i successi o, peggio, replichi senza dati e crei problemi in più unità." },
+      queSignifica: "Replicare una referenza significa includerla nella carta di un altro locale perché ha dimostrato rendimento in uno o più. Ma la decisione non è automatica: richiede che il profilo del cliente sia comparabile, che il prezzo si inserisca nella carta destinataria, che ci sia spazio senza generare cannibalizzazione e che il fornitore possa servire quel locale alle stesse condizioni.",
+      porQueImporta: "Perché una replicazione ben fatta moltiplica il rendimento di una buona decisione. Ma una replicazione mal fatta moltiplica il problema: stock fermo in più locali, capitale immobilizzato e una referenza che 'dovrebbe funzionare' ma non funziona perché il contesto è diverso.",
+      queHacer: [
+        "Conferma che la referenza ha almeno 3 mesi di buon rendimento (margine + rotazione) nel locale d'origine.",
+        "Verifica che il profilo del cliente del locale destinatario sia comparabile a quello d'origine.",
+        "Controlla che il prezzo si inserisca nell'architettura della carta del locale destinatario senza duplicare la fascia.",
+        "Negozia le stesse condizioni d'acquisto per il locale destinatario prima di incorporare.",
+      ],
+      errores: [
+        { mistake: "Replicare dopo un solo mese positivo", consequence: "Potrebbe essere stagionalità o un grande tavolo che l'ha ordinato. Un mese non è una tendenza." },
+        { mistake: "Non verificare se la fascia di prezzo è già coperta nel locale destinatario", consequence: "Crei cannibalizzazione. Ora hai due referenze che competono per lo stesso ospite." },
+        { mistake: "Replicare senza negoziare condizioni per il nuovo locale", consequence: "Acquisti dallo stesso fornitore ma senza lo sconto volume. Il tuo margine nel locale destinatario è peggiore." },
+      ],
+    },
+    {
+      id: "cuando-retirar-compra",
+      title: "Quando ritirare un acquisto da un'unità",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim ha identificato referenze senza rendimento in locali specifici: candidate al ritiro attivo.", whyMatters: "In un gruppo, una referenza morta in 4 locali è 4 volte il problema. Il ritiro basato sui dati è tra le decisioni più redditizie.", riskIfIgnored: "Mantieni stock morto moltiplicato per il numero di locali. Il capitale immobilizzato del gruppo esplode." },
+      queSignifica: "Ritirare un acquisto significa smettere di riordinare una referenza in un locale specifico. Non significa che il vino sia cattivo: significa che in quel locale, con quel cliente, a quel prezzo, non rende. Gli indicatori di ritiro sono: più di 60 giorni senza vendita, margine reale sotto la soglia minima, o esistenza di una referenza migliore nella stessa fascia che la cannibalizza.",
+      porQueImporta: "Perché ogni referenza che non rende occupa spazio in carta, capitale in stock e attenzione del team. In un gruppo, una referenza morta in 4 locali è 4 volte il problema. Il ritiro attivo (deciso con i dati, non per inerzia) è una delle decisioni più redditizie che un F&B di gruppo possa prendere.",
+      queHacer: [
+        "Rivedi mensilmente le referenze con più di 45 giorni senza vendita in ogni locale.",
+        "Incrocia con il margine: se oltre a non ruotare ha basso margine, è candidata immediata al ritiro.",
+        "Prima di ritirare, verifica se il problema è il vino o la carta (è ben posizionato? Il team lo conosce?).",
+        "Comunica il ritiro al team di sala con contesto: perché esce e cosa lo sostituisce.",
+      ],
+      errores: [
+        { mistake: "Aspettare che lo stock si esaurisca prima di ritirare", consequence: "Mentre aspetti, il capitale resta immobilizzato e la carta resta squilibrata." },
+        { mistake: "Ritirare senza analizzare perché non ha funzionato", consequence: "Introduci un'altra referenza nella stessa fascia che può fallire per lo stesso motivo." },
+        { mistake: "Non comunicare al team di sala i cambi in carta", consequence: "Il cameriere continua a raccomandare un vino che non c'è più. O peggio: non raccomanda nulla perché non sa cosa c'è di nuovo." },
+      ],
+    },
+    {
+      id: "benchmarking-interno-externo",
+      title: "Come leggere il benchmarking interno ed esterno",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim confronta i tuoi locali tra loro (interno) e il tuo gruppo con il mercato (esterno) per una prospettiva completa.", whyMatters: "Senza benchmarking interno non sai chi performa bene. Senza quello esterno, non sai se il tuo miglior locale è buono o semplicemente il meno cattivo.", riskIfIgnored: "Operi alla cieca nel tuo gruppo e senza riferimento di mercato. Le deviazioni si rilevano tardi." },
+      queSignifica: "Il benchmarking interno confronta i tuoi locali tra loro: chi performa meglio su ogni metrica e perché. Il benchmarking esterno confronta il tuo gruppo con il mercato: il tuo margine medio è sopra o sotto la media del settore? La tua rotazione è normale o eccezionale? Entrambi sono necessari. L'interno ti dice dove migliorare nel tuo gruppo. L'esterno ti dice se il tuo gruppo nel complesso è ben posizionato.",
+      porQueImporta: "Perché senza benchmarking interno operi alla cieca nel tuo stesso gruppo: non sai chi performa bene né chi ha bisogno di aiuto. E senza benchmarking esterno non sai se il tuo 'miglior locale' è davvero buono o semplicemente il meno cattivo. La combinazione dei due ti dà una visione completa: miglioramento interno con prospettiva di mercato.",
+      queHacer: [
+        "Esegui il benchmarking interno mensilmente con lo Scorecard mensile: confronta i 6 KPI tra locali.",
+        "Identifica i locali che guidano su ogni metrica e analizza cosa fanno di diverso.",
+        "Usa Winerim Core per accedere al benchmarking esterno: confronta le tue metriche con la media del settore.",
+        "Incrocia entrambi: se il tuo miglior locale è sotto la media di mercato, hai un problema sistemico, non locale.",
+      ],
+      errores: [
+        { mistake: "Fare solo benchmarking interno senza riferimento esterno", consequence: "Il tuo miglior locale potrebbe essere sotto la media di mercato. Senza contesto esterno, non lo sai." },
+        { mistake: "Usare il benchmarking come strumento punitivo", consequence: "I direttori di locale smettono di condividere dati. Il benchmarking smette di funzionare." },
+        { mistake: "Confrontare solo una volta all'anno", consequence: "Le deviazioni si rilevano tardi. Un problema che dura 6 mesi costa 6 volte di più di uno rilevato in 30 giorni." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Confronta i tuoi locali con l'auditor",
+    href: "/it/strumenti/auditor-carta-multilocale",
+    description: "Confronta assortimento, pricing e calice tra unità per individuare deviazioni e best practice.",
+  },
+};
+
+export default gruposBenchmarkingIT;
