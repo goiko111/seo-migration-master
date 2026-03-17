@@ -84,6 +84,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/precio-vino-restaurante": "/en/wine-pricing-restaurant",
     "/vino-por-copa-restaurante": "/en/wine-by-glass-restaurant",
     "/inteligencia-artificial-restaurantes": "/en/artificial-intelligence-restaurants",
+    "/ejemplos-carta-vinos": "/en/wine-list-examples",
+    "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/en/guides/wine-pairing-strategy-restaurants",
+    "/problemas/carta-de-vinos-no-vende": "/en/problems/wine-list-not-selling",
+    "/cuantos-vinos-en-una-carta-de-restaurante": "/en/how-many-wines-restaurant-list",
   },
   it: {
     "/": "/it",
