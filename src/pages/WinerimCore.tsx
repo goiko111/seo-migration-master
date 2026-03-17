@@ -305,9 +305,9 @@ const i18n: Record<SupportedLang, CoreI18n> = {
       { title: "Salute e architettura carta", desc: "Valuta equilibrio, scala prezzi, profondità dell'offerta e chiarezza commerciale della carta." },
     ],
 
-    depth_title: "Un livello composto da decine di moduli analitici",
-    depth_text: "Winerim Core integra 26 moduli analitici interconnessi che lavorano su pricing, margine, stock, redditività, acquisti, simulazione, architettura e benchmark.",
-    depth_text2: "Non serve vederli come strumenti isolati. L'importante è che insieme permettono di analizzare meglio la carta e prendere decisioni più solide.",
+    depth_title: "Profondità analitica reale, non feature isolate",
+    depth_text: "Ogni capacità di Winerim Core è supportata da una rete di moduli analitici interconnessi — oltre 26 — che incrociano dati di pricing, margine, stock, redditività, acquisti, simulazione, architettura e benchmark.",
+    depth_text2: "Non serve vederli come strumenti isolati. Ciò che conta è che lavorano insieme perché ogni decisione sulla carta si prenda con più contesto e più criterio.",
     depth_micro: "Alcuni strumenti pubblici di Winerim sono demo semplificate di questo livello analitico.",
 
     tools_title: "Strumenti visibili. Motore più profondo.",
