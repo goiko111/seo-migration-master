@@ -103,7 +103,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
         position: formData.position,
         phone: formData.phone,
         email: formData.email,
-        city: formData.city,
+        city: formData.city || null,
         references_count: formData.references_count,
         form_type: data.formType,
       };
