@@ -90,7 +90,12 @@ const Index = () => {
             <VideoSection />
           </Suspense>
 
-          {/* 12–13. Credibility + Definition — SEO/citability */}
+          {/* 12. Decision Center teaser — premium value layer */}
+          <Suspense fallback={<SectionFallback />}>
+            <DecisionCenterTeaser lang={lang} />
+          </Suspense>
+
+          {/* 13–14. Credibility + Definition — SEO/citability */}
           <Suspense fallback={<SectionFallback />}>
             <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
               <CredibilitySection lang={lang} />

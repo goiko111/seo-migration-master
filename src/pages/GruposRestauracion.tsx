@@ -1012,6 +1012,9 @@ const GruposRestauracion = () => {
         </div>
       </section>
 
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
+
       {/* ── Next Steps ── */}
       <NextSteps
         title={lang === "es" ? "Siguientes pasos" : "Next steps"}

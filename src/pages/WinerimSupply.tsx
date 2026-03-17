@@ -627,6 +627,9 @@ const WinerimSupply = () => {
         </div>
       </section>
 
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
+
       {/* ═══ 6. CTA FINAL ═══ */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto text-center">

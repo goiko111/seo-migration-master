@@ -697,6 +697,9 @@ const WinerimCore = () => {
         </div>
       </section>
 
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
+
       {/* ─── 5. FINAL CTA ─── */}
       <section className="py-24 md:py-32">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">

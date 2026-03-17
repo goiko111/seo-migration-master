@@ -831,6 +831,9 @@ const Funcionalidades = () => {
         </div>
       </section>
 
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
+
       {/* Summary Box */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
