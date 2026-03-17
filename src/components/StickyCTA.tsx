@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getResolvedCTASet, type PageType } from "@/data/ctas";
+import { trackAction } from "@/lib/intentTracking";
 
 interface StickyCTAProps {
   /** Page type to determine CTA copy */
