@@ -29,6 +29,9 @@ import cartaEquilibrioEN from "@/data/decisionCenter/cartaEquilibrio.en";
 import cartaEquilibrioIT from "@/data/decisionCenter/cartaEquilibrio.it";
 import cartaEquilibrioFR from "@/data/decisionCenter/cartaEquilibrio.fr";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
+import vinoPorCopaEN from "@/data/decisionCenter/vinoPorCopa.en";
+import vinoPorCopaIT from "@/data/decisionCenter/vinoPorCopa.it";
+import vinoPorCopaFR from "@/data/decisionCenter/vinoPorCopa.fr";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */
@@ -684,6 +687,12 @@ const DecisionCenterArea = () => {
     it: cartaEquilibrioIT,
     fr: cartaEquilibrioFR,
   };
+  const copaByLang: Record<string, DeepAreaContent> = {
+    es: vinoPorCopaContent,
+    en: vinoPorCopaEN,
+    it: vinoPorCopaIT,
+    fr: vinoPorCopaFR,
+  };
 
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
@@ -691,7 +700,7 @@ const DecisionCenterArea = () => {
     "stock-rotacion": stockByLang[lang] || stockRotacionContent,
     "compras-reposicion": comprasByLang[lang] || comprasReposicionContent,
     "carta-equilibrio": cartaByLang[lang] || cartaEquilibrioContent,
-    "vino-por-copa": vinoPorCopaContent,
+    "vino-por-copa": copaByLang[lang] || vinoPorCopaContent,
     "grupos-benchmarking": gruposBenchmarkingContent,
   };
 

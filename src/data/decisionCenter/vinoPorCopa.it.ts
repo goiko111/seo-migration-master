@@ -1,0 +1,178 @@
+import { Wine } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const vinoPorCopaIT: DeepAreaContent = {
+  name: "Vino al calice",
+  tagline: "Il programma al calice come motore di margine",
+  intro: "Questa sezione ti aiuta a progettare, gestire e controllare un programma di vino al calice redditizio. Il calice non è semplicemente 'servire in porzioni più piccole': è una leva di margine, uno strumento di conversione e un test di mercato in tempo reale. Gestito male, però, diventa la principale fonte di perdita invisibile in un ristorante.",
+  icon: Wine,
+  accent: "text-purple-500",
+  bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Offrire al calice vini che distruggono il margine per spreco", porQueOcurre: "Perché si sceglie per qualità o gusto personale, senza verificare se la rotazione giustifica l'apertura della bottiglia.", consecuencia: "Il 30-40% della bottiglia viene scartato. Un vino con margine teorico del 70% scende al 25% reale. Perdi denaro con ogni calice." },
+    { error: "Avere troppi calici attivi senza rotazione sufficiente", porQueOcurre: "Perché più calici sembra un'offerta migliore. Ma ogni calice aperto è una bottiglia che deve essere finita in 24-48 h.", consecuencia: "Lo spreco si moltiplica per ogni referenza. 8 calici con bassa rotazione generano più perdite di 4 ben scelti." },
+    { error: "Fissare il prezzo al calice senza includere lo spreco reale", porQueOcurre: "Perché il calcolo rapido è bottiglia ÷ 5 calici. Ma la realtà è 4 calici (o meno) considerando lo spreco.", consecuencia: "Vendi a un prezzo che non copre il costo reale. Più vendi, più perdi — ma sembra che gli affari vadano bene." },
+    { error: "Non misurare la cannibalizzazione calice vs. bottiglia", porQueOcurre: "Perché si presume che il calice aggiunga vendite nuove, mai che sottragga vendite alla bottiglia.", consecuencia: "Il tuo scontrino medio scende senza che tu te ne accorga. L'ospite che avrebbe ordinato una bottiglia ora ordina 2 calici e il margine totale è inferiore." },
+    { error: "Lasciare che il personale di sala decida cosa raccomandare al calice", porQueOcurre: "Perché senza una direttiva chiara, ogni cameriere raccomanda ciò che conosce o che preferisce.", consecuencia: "La rotazione si concentra su 1-2 calici mentre gli altri si ossidano. L'esperienza dell'ospite è incoerente." },
+  ],
+  links: [
+    { label: "Calcolatore prezzo al calice", href: "/it/strumenti/calcolatore-prezzo-vino", description: "Calcola il prezzo al calice includendo spreco reale e margine obiettivo", type: "tool" },
+    { label: "Guida: Vino al calice", href: "/it/guide/come-implementare-vino-al-calice-senza-perdere-margine", description: "Passo a passo per costruire un programma al calice redditizio", type: "guide" },
+    { label: "Modello: Strategia vino al calice", href: "/it/risorse/modello-strategia-vino-al-calice", description: "Progetta la tua selezione al calice con criteri di business", type: "resource" },
+    { label: "Modello: Formazione rapida per la sala", href: "/it/risorse/modello-formazione-rapida-sala", description: "Forma il tuo team per raccomandare al calice con criterio in 30 minuti", type: "resource" },
+    { label: "Winerim Core", href: "/it/prodotto/winerim-core", description: "Monitora rotazione, spreco e redditività per calice automaticamente", type: "product" },
+    { label: "Blog: Prezzo al calice senza mangiarsi il margine", href: "/it/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "La formula corretta per fissare i prezzi al calice con spreco reale", type: "article" },
+    { label: "Blog: Quali vini offrire al calice", href: "/it/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Selezione al calice per tipo di locale e profilo dell'ospite", type: "article" },
+  ],
+  miniCases: [
+    {
+      profile: "Wine bar con 12 calici attivi",
+      situation: "Aveva 12 calici ma solo 5 ruotavano bene. I 7 rimanenti generavano uno spreco del 35% che nessuno misurava.",
+      action: "Ridotto a 7 calici, scegliendo quelli con il miglior rapporto rotazione/margine. Gli altri 5 offerti solo in bottiglia.",
+      result: "Lo spreco è sceso dal 35% al 12%. Il margine reale per calice è salito del 22%. Meno lavoro per la sala e meno sprechi.",
+    },
+    {
+      profile: "Ristorante con menù business",
+      situation: "Offriva 3 calici a prezzo fisso (4,50 €). Non calcolava lo spreco né differenziava per costo. Il calice più caro costava 3,80 € e veniva venduto a 4,50 €.",
+      action: "Ha differenziato i prezzi al calice in base al costo reale. Ha alzato il calice premium a 6 €. Ha mantenuto un'opzione d'ingresso a 4,50 € con un vino a costo inferiore.",
+      result: "Il margine medio per calice è passato dal 18% al 52%. Gli ospiti accettano di pagare di più quando percepiscono una differenza di qualità.",
+    },
+    {
+      profile: "Ristorante gastronomico con 120 referenze",
+      situation: "Aveva 8 calici attivi ma 4 erano rossi molto simili (Rioja crianza tra 7 € e 9 € al calice). Il personale non sapeva differenziarli e raccomandava sempre lo stesso.",
+      action: "Ridotto i rossi al calice a 2 (uno giovane, uno crianza). Aggiunto un bianco minerale e uno spumante. Formato il team con il modello di formazione rapida.",
+      result: "La diversità dei calici venduti è passata da 2 referenze all'80% del programma. Lo scontrino medio al calice è salito di 1,80 € perché lo spumante apriva la vendita.",
+    },
+    {
+      profile: "Hotel resort con 3 punti vendita",
+      situation: "Ogni punto vendita (ristorante, pool bar, lobby bar) aveva calici diversi senza criteri comuni. Il pool bar usava vini premium che nessuno ordinava; il ristorante aveva calici d'ingresso che non si adattavano alla sua cucina.",
+      action: "Definito un programma al calice per punto vendita: 3 calici al pool bar (ingresso, freschi, rotazione rapida), 5 al ristorante (progressione di prezzo, abbinamento), 4 al lobby (esplorazione, conversazione). Usato Winerim Core per monitorare lo spreco per punto vendita.",
+      result: "Lo spreco globale è sceso dal 28% al 14%. Ogni punto vendita ha un programma coerente con il suo pubblico. Il ristorante ha raddoppiato le vendite di calice premium.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "cuando-conviene-copa",
+      title: "Quando conviene il vino al calice",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim ha identificato referenze con potenziale al calice: buone valutazioni, bassa rotazione in bottiglia e profili resistenti all'ossidazione.", whyMatters: "Il calice abbassa la barriera d'impegno dell'ospite. Un vino che nessuno ordina a 35 € in bottiglia si vende facilmente a 9 € al calice.", riskIfIgnored: "Perdi conversione, scontrino medio ed esplorazione. L'ospite che non osa con la bottiglia semplicemente non ordina vino." },
+      queSignifica: "Un vino è un buon candidato al calice quando soddisfa tre condizioni simultaneamente: ha domanda potenziale (l'ospite lo ordinerebbe se potesse provarlo senza impegnarsi con una bottiglia intera), regge almeno 24-48 ore una volta aperto senza perdere qualità, e la sua rotazione attesa al calice permette di finire la bottiglia prima che si degradi. Se manca una delle tre, non è un buon candidato.",
+      porQueImporta: "Perché il calice abbassa la barriera d'impegno dell'ospite. L'ospite che non rischia una bottiglia da 35 € ordina un calice da 9 €. Questo aumenta la conversione, lo scontrino medio e l'esplorazione. Inoltre, il calice ti permette di ruotare referenze che in bottiglia sarebbero lente. Ben scelto, un calice è il tuo miglior venditore silenzioso.",
+      queHacer: [
+        "Rivedi le referenze con buone valutazioni ma bassa rotazione in bottiglia — sono candidate naturali al calice.",
+        "Verifica che il vino regga almeno 24 h una volta aperto (chiedi al fornitore o provalo tu stesso).",
+        "Stima quanti calici puoi vendere a settimana di quella referenza. Se sono meno di 3, probabilmente non conviene.",
+        "Inizia con 4-6 calici ben selezionati prima di ampliare. Meglio pochi che ruotano che molti che si perdono.",
+      ],
+      errores: [
+        { mistake: "Mettere al calice il vino più economico della carta", consequence: "L'ospite associa il calice a bassa qualità. Perdi l'opportunità di vendere margine." },
+        { mistake: "Scegliere i calici senza pensare alla rotazione", consequence: "Apri bottiglie che non finisci. Ogni bottiglia a metà è denaro sprecato." },
+        { mistake: "Non testare se il vino regge prima di metterlo al calice", consequence: "Servi il terzo calice da una bottiglia che ha già perso qualità. L'ospite non torna." },
+      ],
+    },
+    {
+      id: "cuando-no-conviene-copa",
+      title: "Quando non conviene il vino al calice",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim ha rilevato calici attivi con rotazione insufficiente o vini che non reggono bene una volta aperti.", whyMatters: "Un programma di 4 calici ben scelti è meglio di uno di 10 dove 6 generano perdite per spreco.", riskIfIgnored: "Generi spreco, servizio di scarsa qualità e una percezione negativa dell'intero programma al calice." },
+      queSignifica: "Non tutti i vini funzionano al calice. Non conviene quando: il vino non regge più di qualche ora una volta aperto (vini molto delicati, spumanti senza sistema di conservazione), quando la rotazione attesa è così bassa che lo spreco divora il margine, quando il prezzo al calice risultante è così alto che l'ospite non lo percepisce come accessibile, o quando hai già un altro calice nella stessa fascia che copre quella necessità.",
+      porQueImporta: "Perché mettere al calice un vino che non dovrebbe esserci è peggio che non avere il programma al calice. Generi spreco, servizio di scarsa qualità (vino ossidato) e una percezione negativa dell'intero programma. Un programma di 4 calici ben scelti è infinitamente meglio di uno di 10 dove 6 generano perdite.",
+      queHacer: [
+        "Scarta qualsiasi vino che non regga almeno 24 h una volta aperto, a meno che tu non abbia un sistema di conservazione (Coravin, argon).",
+        "Scarta referenze con prezzo al calice > 15 € a meno che la tua clientela lo giustifichi (alta gastronomia, hotel premium).",
+        "Se hai già un calice nella stessa fascia (stesso tipo, ±2 € di differenza), non duplicare. Scegli uno.",
+        "Non mettere al calice un vino solo perché vuoi smaltire stock morto: il calice non è un canale di sconto.",
+      ],
+      errores: [
+        { mistake: "Usare il calice come canale di liquidazione dello stock morto", consequence: "Servi vino mediocre al calice e l'ospite associa il tuo programma a bassa qualità." },
+        { mistake: "Offrire spumante al calice senza sistema di conservazione", consequence: "Al secondo calice ha già perso le bollicine. Stai vendendo un prodotto inferiore." },
+        { mistake: "Avere troppi calici attivi 'per avere varietà'", consequence: "La varietà genera spreco. Se apri 10 bottiglie e vendi 3 calici di ognuna, perdi 7 fondi di bottiglia." },
+      ],
+    },
+    {
+      id: "fijar-precio-copa",
+      title: "Come fissare il prezzo senza perdere margine",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim ha ricalcolato i tuoi prezzi al calice includendo lo spreco reale e ha rilevato deviazioni rispetto al margine obiettivo.", whyMatters: "Un errore di 1 € per calice su 15 calici/settimana significa oltre 1.100 €/anno persi su una singola referenza.", riskIfIgnored: "Vendi calici a un prezzo che non copre spreco né margine. Ogni servizio è una perdita invisibile." },
+      queSignifica: "Il prezzo al calice NON si calcola dividendo il prezzo della bottiglia per 5. Quella formula ignora lo spreco (il vino perso alla fine della bottiglia o per calici non venduti), il costo del servizio e il margine obiettivo. La formula corretta parte dal costo reale per calice (costo bottiglia ÷ calici reali che servirai, incluso lo spreco) e applica il moltiplicatore obiettivo su quel costo.",
+      porQueImporta: "Perché un errore di 1 € nel prezzo al calice si moltiplica con ogni calice che servi. Se vendi 15 calici a settimana di una referenza e il tuo prezzo è 1,50 € sotto il dovuto, perdi oltre 1.100 € all'anno su quella sola referenza. Con 6 calici mal calcolati, l'impatto può superare i 5.000 € annui.",
+      queHacer: [
+        "Calcola il costo reale per calice: (prezzo bottiglia ÷ 4 calici reali) + 25% di spreco = costo reale.",
+        "Applica il tuo moltiplicatore obiettivo (minimo ×3 sul costo reale per calice).",
+        "Confronta il risultato con il prezzo del calice più vicino nella tua carta: è coerente?",
+        "Usa il Calcolatore Prezzo al Calice per simulare scenari con diversi livelli di spreco.",
+      ],
+      errores: [
+        { mistake: "Dividere il prezzo della bottiglia per 5 calici", consequence: "Non copri lo spreco. Da una bottiglia ricavi 4-4,5 calici reali, non 5. Vendi in perdita dal primo calice." },
+        { mistake: "Non contabilizzare lo spreco nel calcolo", consequence: "Il tuo margine teorico non esiste. La realtà è un 20-30% peggiore di quello che credi." },
+        { mistake: "Fissare tutti i prezzi al calice con lo stesso moltiplicatore", consequence: "Un vino da 8 € e uno da 30 € richiedono strategie al calice diverse." },
+      ],
+    },
+    {
+      id: "evitar-canibalizacion-copa",
+      title: "Come evitare la cannibalizzazione tra calice e bottiglia",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim ha rilevato un cambiamento nel tuo rapporto calice/bottiglia che potrebbe indicare cannibalizzazione.", whyMatters: "Se il calice sottrae vendite alla bottiglia senza aggiungere margine, lavori di più per guadagnare di meno.", riskIfIgnored: "Il tuo scontrino medio scende senza che tu te ne accorga. Pensi che il programma al calice funzioni perché si vendono calici, ma il risultato totale peggiora." },
+      queSignifica: "La cannibalizzazione si verifica quando il calice sottrae vendite alla bottiglia senza aggiungere margine. Se un ospite che avrebbe ordinato una bottiglia da 28 € finisce per ordinare 2 calici da 8 € (16 € totali), hai perso 12 € di fatturato e probabilmente margine. L'obiettivo non è che il calice sostituisca la bottiglia: è catturare vendite nuove (l'ospite che non avrebbe ordinato una bottiglia).",
+      porQueImporta: "Perché se il tuo programma al calice cannibalizza la bottiglia, stai lavorando di più per guadagnare di meno. L'obiettivo è che il calice aumenti lo scontrino medio totale, non che lo ridistribuisca. La cannibalizzazione è il rischio meno visibile di un programma al calice: non te ne accorgi finché non guardi i dati.",
+      queHacer: [
+        "Monitora il rapporto calice/bottiglia mese per mese. Se le vendite in bottiglia calano all'introduzione del calice, indaga.",
+        "Posiziona il calice come esplorazione e la bottiglia come impegno: non competono, si completano.",
+        "Evita di mettere al calice le tue referenze più vendute in bottiglia. Il calice deve coprire uno spazio diverso.",
+        "Forma il team per suggerire la bottiglia quando un tavolo ordina 3+ calici dello stesso vino.",
+      ],
+      errores: [
+        { mistake: "Mettere al calice lo stesso vino più venduto in bottiglia", consequence: "Dai all'ospite un motivo per spendere meno. La tua migliore bottiglia ora si vende a pezzi." },
+        { mistake: "Non formare il team per gestire la transizione calice → bottiglia", consequence: "Due ospiti ordinano 2 calici ciascuno dello stesso vino. Nessuno suggerisce la bottiglia. Perdi la vendita." },
+        { mistake: "Non misurare se il calice aggiunge o sottrae allo scontrino medio globale", consequence: "Pensi che il programma al calice funzioni perché si vendono calici, ma lo scontrino medio è sceso." },
+      ],
+    },
+    {
+      id: "medir-rotacion-rentabilidad",
+      title: "Come misurare rotazione e redditività per calice",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim ha incrociato bottiglie aperte con calici serviti e ha calcolato il tuo spreco reale per referenza.", whyMatters: "Il calice può sembrare redditizio in teoria (margine del 75%) ma essere rovinoso in pratica (35% dopo lo spreco).", riskIfIgnored: "Operi il programma al calice alla cieca. Senza misurazione non sai se guadagni o perdi con ogni referenza." },
+      queSignifica: "La rotazione al calice misura quante bottiglie aperte finisci in un periodo. Se apri 3 bottiglie a settimana e vendi tutti i calici, la tua rotazione è eccellente. Se ne apri 3 e butti il fondo di 2, la tua rotazione reale è un disastro mascherato da vendite. La redditività al calice non è solo il margine teorico: è il margine meno lo spreco reale, meno il costo del servizio, meno i calici che non vendi.",
+      porQueImporta: "Perché il calice può sembrare redditizio sulla carta ed essere rovinoso in pratica. Il margine teorico per calice può essere del 75%, ma se perdi il 30% in spreco e il 10% in costi aggiuntivi di servizio, il tuo margine reale è del 35%. Senza misurazione operi alla cieca. Con la misurazione ottimizzi ogni settimana.",
+      queHacer: [
+        "Registra ogni bottiglia aperta per il servizio al calice e il numero di calici effettivamente serviti (non quelli teorici).",
+        "Calcola il tuo spreco reale settimanale: (calici teorici − calici serviti) × costo per calice.",
+        "Confronta il margine reale al calice (deducendo lo spreco) con il margine in bottiglia della stessa referenza.",
+        "Se il margine reale al calice è inferiore a quello della bottiglia, hai un problema di rotazione o di pricing.",
+      ],
+      errores: [
+        { mistake: "Misurare solo i calici venduti senza contare le bottiglie aperte", consequence: "Vendi 20 calici ma apri 8 bottiglie. Il tuo spreco è del 37% e non lo sai." },
+        { mistake: "Presumere che ogni bottiglia aperta si venda interamente al calice", consequence: "Il tuo calcolo di redditività è finzione. La realtà è un 20-30% peggiore." },
+        { mistake: "Non confrontare la redditività al calice con quella della bottiglia", consequence: "Potresti vendere al calice un vino che ti renderebbe di più in bottiglia." },
+      ],
+    },
+    {
+      id: "errores-tipicos-copeo",
+      title: "Errori tipici nel servizio al calice",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim ha identificato pattern operativi nel tuo programma al calice che coincidono con errori frequenti del settore.", whyMatters: "Gli errori nel servizio al calice si ripetono ogni giorno, ogni turno. Un processo senza controllo genera perdite cumulative di migliaia di euro all'anno.", riskIfIgnored: "Gli stessi errori si ripetono servizio dopo servizio. Senza protocollo, ogni turno reinventa la gestione del calice." },
+      queSignifica: "Il servizio al calice è una delle operazioni più delicate di un ristorante: combina gestione dello stock (bottiglie aperte), controllo dello spreco (vino perso), servizio di sala (raccomandazione e vendita) e pricing (un prezzo che copra tutto il resto). Gli errori tipici non derivano dall'ignoranza — derivano dalla mancanza di processo. Il team sa che lo spreco esiste, ma nessuno lo misura. Sanno che il prezzo dovrebbe essere diverso, ma nessuno lo ricalcola.",
+      porQueImporta: "Perché gli errori nel servizio al calice sono ricorrenti: si ripetono ogni giorno, ogni turno, ogni servizio. Un errore puntuale di pricing si corregge. Ma un processo al calice senza controllo genera perdite cumulative che a fine anno possono ammontare a migliaia di euro. I ristoranti che gestiscono meglio il calice non sono quelli con i vini migliori: sono quelli con i processi migliori.",
+      queHacer: [
+        "Stabilisci un protocollo di apertura bottiglia per il servizio al calice: chi decide quando aprire, numero massimo di bottiglie attive.",
+        "Definisci un momento di revisione giornaliero: alla chiusura, quante bottiglie aperte rimangono? Quante sono state finite?",
+        "Forma il team ogni trimestre con il Modello di Formazione Rapida: 30 minuti bastano.",
+        "Rivedi il pricing al calice ogni volta che cambia un costo o almeno ogni 3 mesi.",
+      ],
+      errores: [
+        { mistake: "Non avere un protocollo di apertura bottiglie per il servizio al calice", consequence: "Ogni cameriere apre quando vuole. A fine turno ci sono 6 bottiglie aperte con 2 calici serviti da ciascuna." },
+        { mistake: "Non formare il team per vendere al calice", consequence: "Il cameriere dice 'abbiamo vino al calice' senza convinzione. L'ospite ordina una bibita." },
+        { mistake: "Non rivedere i prezzi al calice dopo variazioni di costo", consequence: "Il tuo fornitore ha alzato i prezzi dell'8% quattro mesi fa. I tuoi calici sono ancora al vecchio prezzo. Vendi in perdita." },
+        { mistake: "Non misurare mai lo spreco", consequence: "Non sai quanto perdi. E ciò che non misuri, non puoi migliorarlo." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Calcola il prezzo corretto al calice",
+    href: "/it/strumenti/calcolatore-prezzo-vino",
+    description: "Include spreco reale e margine obiettivo per fissare un prezzo al calice effettivamente redditizio.",
+  },
+};
+
+export default vinoPorCopaIT;

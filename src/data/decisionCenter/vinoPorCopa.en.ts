@@ -1,0 +1,178 @@
+import { Wine } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const vinoPorCopaEN: DeepAreaContent = {
+  name: "Wine by the Glass",
+  tagline: "The glass programme as a margin driver",
+  intro: "This section helps you design, run and control a profitable by-the-glass programme. Serving wine by the glass is not simply 'pouring smaller portions': it is a margin lever, a conversion tool and a real-time market test. Poorly managed, however, it becomes the largest source of invisible loss in a restaurant.",
+  icon: Wine,
+  accent: "text-purple-500",
+  bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Offering wines by the glass that destroy margin through waste", porQueOcurre: "Because wines are chosen for quality or personal taste without checking whether turnover justifies opening the bottle.", consecuencia: "30–40 % of the bottle is discarded. A wine with a theoretical 70 % margin drops to 25 % in practice. You lose money on every glass." },
+    { error: "Having too many active glasses without sufficient turnover", porQueOcurre: "Because more glasses looks like a better offer. But every open glass is a bottle that must be finished within 24–48 h.", consecuencia: "Waste multiplies with each reference. Eight glasses with low turnover generate more loss than four well-chosen ones." },
+    { error: "Setting the glass price without accounting for real waste", porQueOcurre: "Because the quick calculation is bottle ÷ 5 glasses. But reality is 4 glasses (or fewer) once waste is factored in.", consecuencia: "You sell at a price that does not cover real cost. The more you sell, the more you lose — yet it looks like business is good." },
+    { error: "Not measuring cannibalisation between glass and bottle", porQueOcurre: "Because it is assumed the glass adds new sales, never that it takes sales away from the bottle.", consecuencia: "Your average ticket drops without you noticing. The guest who would have ordered a bottle now orders two glasses, and total margin is lower." },
+    { error: "Letting the floor team decide what to recommend by the glass", porQueOcurre: "Because without a clear guideline each server recommends what they know or prefer.", consecuencia: "Turnover concentrates on 1–2 glasses while the rest oxidise. The guest experience is inconsistent." },
+  ],
+  links: [
+    { label: "Glass price calculator", href: "/en/tools/wine-pricing-tool", description: "Calculate the glass price including real waste and target margin", type: "tool" },
+    { label: "Guide: Wine by the glass", href: "/en/guides/how-to-implement-wine-by-the-glass-without-losing-margin", description: "Step-by-step guide to building a profitable glass programme", type: "guide" },
+    { label: "Template: Wine-by-the-glass strategy", href: "/en/resources/wine-by-the-glass-strategy-template", description: "Design your glass selection with business criteria", type: "resource" },
+    { label: "Template: Express floor training", href: "/en/resources/express-floor-training-template", description: "Train your team to recommend glasses with purpose in 30 minutes", type: "resource" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Monitor turnover, waste and profitability per glass automatically", type: "product" },
+    { label: "Blog: Glass pricing without eating your margin", href: "/en/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "The correct formula for setting glass prices with real waste", type: "article" },
+    { label: "Blog: Which wines to offer by the glass", href: "/en/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Glass selection by venue type and guest profile", type: "article" },
+  ],
+  miniCases: [
+    {
+      profile: "Wine bar with 12 active glasses",
+      situation: "Had 12 glasses but only 5 rotated well. The remaining 7 generated 35 % waste that nobody measured.",
+      action: "Reduced to 7 glasses, choosing those with the best turnover/margin ratio. The other 5 were offered by the bottle only.",
+      result: "Waste dropped from 35 % to 12 %. Real margin per glass rose by 22 %. Less work for the floor and less waste.",
+    },
+    {
+      profile: "Executive lunch restaurant",
+      situation: "Offered 3 glasses at a flat price (€4.50). Did not calculate waste or differentiate by cost. The most expensive glass cost €3.80 and was sold at €4.50.",
+      action: "Differentiated glass prices by real cost. Raised the premium glass to €6. Kept an entry-level option at €4.50 with a lower-cost wine.",
+      result: "Average margin per glass went from 18 % to 52 %. Guests accept paying more when they perceive a quality difference.",
+    },
+    {
+      profile: "Fine-dining restaurant with 120 references",
+      situation: "Had 8 active glasses but 4 were very similar reds (Rioja crianza between €7 and €9 per glass). The floor team could not differentiate them and always recommended the same one.",
+      action: "Reduced reds by the glass to 2 (one young, one crianza). Added a mineral white and a sparkling option. Trained the team with the express training template.",
+      result: "Diversity of glasses sold went from 2 references to 80 % of the programme. Average glass ticket rose by €1.80 because the sparkling option opened the sale.",
+    },
+    {
+      profile: "Resort hotel with 3 outlets",
+      situation: "Each outlet (restaurant, pool bar, lobby bar) had different glasses with no common criteria. The pool bar used premium wines nobody ordered; the restaurant had entry-level glasses that did not match its cuisine.",
+      action: "Defined a glass programme per outlet: 3 glasses at the pool bar (entry, fresh, fast rotation), 5 in the restaurant (price progression, pairing), 4 in the lobby (exploration, conversation). Used Winerim Core to monitor waste per outlet.",
+      result: "Overall waste dropped from 28 % to 14 %. Each outlet has a programme coherent with its audience. The restaurant doubled premium glass sales.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "cuando-conviene-copa",
+      title: "When is wine by the glass a good idea",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim has identified references with glass potential: good ratings, low bottle turnover and oxidation-resistant profiles.", whyMatters: "The glass lowers the guest's commitment barrier. A wine nobody orders at €35 per bottle can sell easily at €9 per glass.", riskIfIgnored: "You lose conversion, average ticket and exploration. The guest who does not dare with the bottle simply does not order wine." },
+      queSignifica: "A wine is a good glass candidate when it meets three conditions simultaneously: it has potential demand (the guest would order it if they could try without committing to a full bottle), it holds up for at least 24–48 hours once opened without losing quality, and its expected glass turnover allows the bottle to be finished before it degrades. If any of the three fails, it is not a good candidate.",
+      porQueImporta: "Because the glass lowers the guest's commitment barrier. The guest who will not risk a €35 bottle will order a €9 glass. That increases conversion, average ticket and exploration. Moreover, the glass lets you rotate references that would be slow by the bottle. Well chosen, a glass is your best silent salesperson.",
+      queHacer: [
+        "Review references with good ratings but low bottle turnover — they are natural glass candidates.",
+        "Check that the wine holds up for at least 24 h once opened (ask the supplier or test it yourself).",
+        "Estimate how many glasses you can sell per week of that reference. If fewer than 3, it probably is not worth it.",
+        "Start with 4–6 well-selected glasses before expanding. Better a few that rotate than many that spoil.",
+      ],
+      errores: [
+        { mistake: "Putting the cheapest wine on the list by the glass", consequence: "The guest associates glass with low quality. You miss the opportunity to sell margin." },
+        { mistake: "Choosing glasses without thinking about turnover", consequence: "You open bottles you do not finish. Every half-empty bottle is money wasted." },
+        { mistake: "Not testing whether the wine holds up before putting it by the glass", consequence: "You serve the third glass from a bottle that has already lost quality. The guest does not come back." },
+      ],
+    },
+    {
+      id: "cuando-no-conviene-copa",
+      title: "When wine by the glass is not a good idea",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim has detected active glasses with insufficient turnover or wines that do not hold up well once opened.", whyMatters: "A programme of 4 well-chosen glasses is better than one of 10 where 6 generate waste-driven losses.", riskIfIgnored: "You generate waste, poor-quality service and a negative perception of your entire glass programme." },
+      queSignifica: "Not every wine works by the glass. It is not advisable when: the wine does not hold up more than a few hours once opened (very delicate wines, sparkling without a preservation system), when expected turnover is so low that waste eats the margin, when the resulting glass price is so high the guest does not see it as accessible, or when you already have another glass in the same bracket covering that need.",
+      porQueImporta: "Because putting the wrong wine by the glass is worse than having no glass programme at all. You generate waste, poor-quality service (oxidised wine) and a negative perception of the whole programme. A programme of 4 well-chosen glasses is infinitely better than one of 10 where 6 generate losses.",
+      queHacer: [
+        "Discard any wine that does not hold up for at least 24 h once opened, unless you have a preservation system (Coravin, argon).",
+        "Discard references with a glass price > €15 unless your clientele justifies it (high-end fine dining, premium hotel).",
+        "If you already have a glass in the same bracket (same type, ±€2 difference), do not duplicate. Choose one.",
+        "Do not put a wine by the glass just because you want to clear dead stock: the glass is not a discount channel.",
+      ],
+      errores: [
+        { mistake: "Using the glass as a channel to liquidate dead stock", consequence: "You serve mediocre wine by the glass and the guest associates your programme with low quality." },
+        { mistake: "Offering sparkling by the glass without a preservation system", consequence: "By the second glass it has already lost its bubbles. You are selling an inferior product." },
+        { mistake: "Having too many active glasses 'for variety'", consequence: "Variety generates waste. If you open 10 bottles and sell 3 glasses of each, you lose 7 leftover portions." },
+      ],
+    },
+    {
+      id: "fijar-precio-copa",
+      title: "How to set glass prices without losing margin",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim has recalculated your glass prices including real waste and has detected deviations from the target margin.", whyMatters: "A €1 error per glass on 15 glasses/week means over €1,100/year lost on a single reference.", riskIfIgnored: "You sell glasses at a price that does not cover waste or margin. Every pour is an invisible loss." },
+      queSignifica: "The glass price is NOT calculated by dividing the bottle price by 5. That formula ignores waste (the wine lost at the end of the bottle or from unsold glasses), the cost of service and the target margin. The correct formula starts from the real cost per glass (bottle cost ÷ actual glasses you will serve, including waste) and applies the target multiplier to that cost.",
+      porQueImporta: "Because a €1 error in the glass price multiplies with every glass you serve. If you sell 15 glasses a week of one reference and your price is €1.50 below where it should be, you lose over €1,100 a year on that reference alone. With 6 miscalculated glasses, the impact can exceed €5,000 annually.",
+      queHacer: [
+        "Calculate real cost per glass: (bottle price ÷ 4 actual glasses) + 25 % waste = real cost.",
+        "Apply your target multiplier (minimum ×3 on real cost for glass).",
+        "Compare the result with the nearest glass price on your list: is it coherent?",
+        "Use the Glass Price Calculator to simulate scenarios with different waste levels.",
+      ],
+      errores: [
+        { mistake: "Dividing the bottle price by 5 glasses", consequence: "You do not cover waste. You get 4–4.5 real glasses from a bottle, not 5. You sell at a loss from the first glass." },
+        { mistake: "Not accounting for waste in the calculation", consequence: "Your theoretical margin does not exist. Reality is 20–30 % worse than you think." },
+        { mistake: "Setting all glass prices with the same multiplier", consequence: "An €8 wine and a €30 wine need different glass strategies." },
+      ],
+    },
+    {
+      id: "evitar-canibalizacion-copa",
+      title: "How to avoid cannibalisation between glass and bottle",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim has detected a shift in your glass/bottle ratio that could indicate cannibalisation.", whyMatters: "If the glass takes sales from the bottle without adding more margin, you work harder to earn less.", riskIfIgnored: "Your average ticket drops without you noticing. You think your glass programme is working because glasses sell, but the total result is worse." },
+      queSignifica: "Cannibalisation occurs when the glass takes sales from the bottle without adding more margin. If a guest who would have ordered a €28 bottle ends up ordering 2 glasses at €8 (€16 total), you have lost €12 in revenue and probably margin. The goal is not for the glass to replace the bottle: it is to capture new sales (the guest who would not have ordered a bottle).",
+      porQueImporta: "Because if your glass programme cannibalises the bottle, you are working harder to earn less. The goal is for the glass to increase the total average ticket, not redistribute it. Cannibalisation is the least visible risk of a glass programme: you do not notice it until you look at the data.",
+      queHacer: [
+        "Monitor the glass/bottle ratio month by month. If bottle sales drop when you introduce glass, investigate.",
+        "Position the glass as exploration and the bottle as commitment: they do not compete, they complement each other.",
+        "Avoid putting your best-selling bottle references by the glass. The glass should cover a different space.",
+        "Train the team to suggest the bottle when a table orders 3+ glasses of the same wine.",
+      ],
+      errores: [
+        { mistake: "Putting your best-selling bottle wine by the glass", consequence: "You give the guest a reason to spend less. Your best bottle is now sold in pieces." },
+        { mistake: "Not training the team to manage the glass → bottle transition", consequence: "Two guests each order 2 glasses of the same wine. Nobody suggests the bottle. You lose the sale." },
+        { mistake: "Not measuring whether the glass adds to or subtracts from the overall average ticket", consequence: "You think your glass programme is working because glasses sell, but the average ticket has dropped." },
+      ],
+    },
+    {
+      id: "medir-rotacion-rentabilidad",
+      title: "How to measure turnover and profitability per glass",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim has cross-referenced opened bottles with glasses served and calculated your real waste per reference.", whyMatters: "The glass can look profitable in theory (75 % margin) but be ruinous in practice (35 % after waste).", riskIfIgnored: "You operate the glass programme blindly. Without measurement you do not know if you are making or losing money on each reference." },
+      queSignifica: "Glass turnover measures how many opened bottles you finish in a period. If you open 3 bottles a week and sell all the glasses, your turnover is excellent. If you open 3 and discard the remainder of 2, your real turnover is a disaster disguised as sales. Glass profitability is not just the theoretical margin: it is the margin minus real waste, minus service cost, minus unsold glasses.",
+      porQueImporta: "Because the glass can look profitable on paper and be ruinous in practice. The theoretical margin per glass can be 75 %, but if you lose 30 % to waste and 10 % to additional service costs, your real margin is 35 %. Without measurement you operate blindly. With measurement you optimise every week.",
+      queHacer: [
+        "Record every bottle opened for glass service and the number of glasses actually served (not the theoretical count).",
+        "Calculate your real weekly waste: (theoretical glasses − glasses served) × cost per glass.",
+        "Compare the real glass margin (after waste) with the bottle margin for the same reference.",
+        "If the real glass margin is lower than the bottle margin, you have a turnover or pricing problem.",
+      ],
+      errores: [
+        { mistake: "Measuring only glasses sold without counting bottles opened", consequence: "You sell 20 glasses but open 8 bottles. Your waste is 37 % and you do not know it." },
+        { mistake: "Assuming every opened bottle is fully sold by the glass", consequence: "Your profitability calculation is fiction. Reality is 20–30 % worse." },
+        { mistake: "Not comparing glass profitability with bottle profitability", consequence: "You may be selling by the glass a wine that would yield more by the bottle." },
+      ],
+    },
+    {
+      id: "errores-tipicos-copeo",
+      title: "Common mistakes in glass service",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim has identified operational patterns in your glass programme that match frequent industry mistakes.", whyMatters: "Glass-service mistakes repeat every day, every shift. An uncontrolled process generates cumulative losses of thousands of euros per year.", riskIfIgnored: "The same mistakes repeat service after service. Without a protocol, every shift reinvents glass management." },
+      queSignifica: "Glass service is one of the most delicate operations in a restaurant: it combines stock management (open bottles), waste control (lost wine), floor service (recommendation and selling) and pricing (a price that covers all of the above). The typical mistakes are not from ignorance — they stem from a lack of process. The team knows waste exists, but nobody measures it. They know the price should be different, but nobody recalculates.",
+      porQueImporta: "Because glass-service mistakes are recurrent: they repeat every day, every shift, every service. A one-off pricing mistake can be corrected. But an uncontrolled glass process generates cumulative losses that by year-end can amount to thousands of euros. The restaurants that manage glass service best do not have better wines: they have better processes.",
+      queHacer: [
+        "Establish a bottle-opening protocol for glass service: who decides when to open, maximum number of active bottles.",
+        "Define a daily review moment: at closing, how many open bottles remain? How many were finished?",
+        "Train the team quarterly with the Express Training Template: 30 minutes is enough.",
+        "Review glass pricing every time a cost changes or at least every 3 months.",
+      ],
+      errores: [
+        { mistake: "Having no protocol for opening bottles for glass service", consequence: "Each server opens at will. By the end of the shift there are 6 open bottles with 2 glasses served from each." },
+        { mistake: "Not training the team to sell by the glass", consequence: "The server says 'we have wine by the glass' without conviction. The guest orders a soft drink." },
+        { mistake: "Not reviewing glass prices after cost changes", consequence: "Your supplier raised prices 8 % four months ago. Your glasses are still at the old price. You sell at a loss." },
+        { mistake: "Never measuring waste", consequence: "You do not know how much you lose. And what you do not measure, you cannot improve." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Calculate the correct glass price",
+    href: "/en/tools/wine-pricing-tool",
+    description: "Includes real waste and target margin to set a glass price that is actually profitable.",
+  },
+};
+
+export default vinoPorCopaEN;
