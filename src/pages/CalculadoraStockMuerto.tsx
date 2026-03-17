@@ -385,7 +385,13 @@ const CalculadoraStockMuerto = () => {
       const opportunityCost = capital * OPPORTUNITY_RATE * (it.diasSinVenta / 365);
       const recommendation = getRecommendation(it, t);
       const priority = getPriority(it.diasSinVenta, t);
-      return { ...it, capital, estado, opportunityCost, recommendation, priority };
+      // Depreciation
+      const depRate = DEPRECIATION_RATES[it.categoria];
+      const depPct = depRate * (it.diasSinVenta / 365);
+      const currentValue = Math.max(capital * (1 - depPct), 0);
+      const valueLost = capital - currentValue;
+      const depStatus = it.diasSinVenta < 60 ? "fresh" : it.diasSinVenta < 180 ? "aging" : it.diasSinVenta < 365 ? "declining" : "critical";
+      return { ...it, capital, estado, opportunityCost, recommendation, priority, depPct, currentValue, valueLost, depStatus: depStatus as keyof typeof t.deprecLabels };
     });
     const totalCapital = classified.reduce((s, it) => s + it.capital, 0);
     const totalOpportunityCost = classified.reduce((s, it) => s + it.opportunityCost, 0);
