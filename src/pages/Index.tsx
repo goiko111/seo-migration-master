@@ -20,6 +20,7 @@ const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSect
 const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
 const VideoSection = lazy(() => import("@/components/VideoSection"));
 const DefinitionSection = lazy(() => import("@/components/landing/DefinitionSection"));
+const DecisionCenterTeaser = lazy(() => import("@/components/DecisionCenterTeaser"));
 const CredibilitySection = lazy(() => import("@/components/seo/CredibilitySection"));
 const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
 const Footer = lazy(() => import("@/components/Footer"));
