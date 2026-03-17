@@ -684,7 +684,7 @@ const DecisionCenterArea = () => {
     "margenes-pricing": margenesByLang[lang] || margenesPricingContent,
     "stock-rotacion": stockByLang[lang] || stockRotacionContent,
     "compras-reposicion": comprasByLang[lang] || comprasReposicionContent,
-    "carta-equilibrio": cartaEquilibrioContent,
+    "carta-equilibrio": cartaByLang[lang] || cartaEquilibrioContent,
     "vino-por-copa": vinoPorCopaContent,
     "grupos-benchmarking": gruposBenchmarkingContent,
   };
