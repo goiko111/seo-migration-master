@@ -96,6 +96,32 @@ const PATH_INTENT_MAP: Record<string, { category: IntentCategory; level: IntentL
   "/recursos": { category: "resource_download", level: "medium" },
 };
 
+/* ── Commercial blog slug overrides ────────────────── */
+const COMMERCIAL_BLOG_SLUGS = new Set([
+  // BOFU — product/software comparison
+  "mejor-software-carta-vinos-restaurante",
+  "alternativa-carta-pdf-vinos-restaurante",
+  "software-vino-por-copa-restaurantes",
+  "como-mejorar-ticket-medio-vino-con-datos",
+  // MOFU — pricing, stock, purchasing, groups
+  "errores-fijar-precios-vino-restaurante",
+  "como-saber-si-carta-vinos-esta-descompensada",
+  "que-vinos-ofrecer-por-copa-segun-tipo-local",
+  "cuando-carta-vinos-es-demasiado-larga",
+  "como-saber-si-estas-comprando-mal-vino-restaurante",
+  "que-vinos-merece-la-pena-reponer",
+  "como-detectar-stock-muerto-carta-vinos",
+  "metricas-fb-vino-restaurante",
+  "estandarizar-oferta-vino-grupo-restauracion",
+  "vender-mejor-vs-comprar-mejor-vino",
+  "como-calcular-precio-por-copa-sin-comerte-margen",
+  "diferencia-carta-digital-carta-vinos-inteligente",
+  "palancas-mejorar-margen-vino-sin-rehacer-carta",
+  // Rentability / strategy
+  "como-disenar-carta-vinos-rentable",
+  "como-hacer-una-carta-de-vinos-perfecta-para-tu-restaurante",
+]);
+
 /* ── Scoring weights ───────────────────────────────── */
 const SCORE_WEIGHTS: Record<IntentCategory, number> = {
   product_core: 15,
