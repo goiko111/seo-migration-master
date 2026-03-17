@@ -4,6 +4,7 @@ import winerimLogo from "@/assets/winerim-logo.png";
 import ScrollReveal from "./ScrollReveal";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { ga } from "@/lib/analytics";
 
 const Footer = () => {
   const { t, lang, localePath } = useLanguage();
