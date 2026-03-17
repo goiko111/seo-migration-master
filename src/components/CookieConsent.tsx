@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cookie } from "lucide-react";
+import { Cookie, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { updateConsent } from "@/lib/analytics";
+import { updateConsent, hasConsentDecision } from "@/lib/analytics";
 
 const CONSENT_KEY = "winerim_cookie_consent";
 
@@ -12,10 +12,9 @@ const CookieConsent = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === "accepted") {
-      updateConsent(true);
-    } else if (!consent) {
+    // Consent was already restored synchronously in index.html <head>.
+    // Here we only handle showing the banner if no decision has been made.
+    if (!hasConsentDecision()) {
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
@@ -62,6 +61,10 @@ const CookieConsent = () => {
                 {t.cookie_reject}
               </Button>
             </div>
+            <p className="text-[10px] text-muted-foreground/60 mt-3 flex items-center gap-1">
+              <Shield size={10} />
+              {t.cookie_consent_note ?? "Sin cookies hasta que aceptes. Cumplimos con el RGPD."}
+            </p>
           </div>
         </motion.div>
       )}

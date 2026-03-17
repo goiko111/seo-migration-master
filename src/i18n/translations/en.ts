@@ -142,6 +142,7 @@ const en: TranslationDict = {
   cookie_accept: "Accept",
   cookie_reject: "Reject",
   cookie_more_info: "More info",
+  cookie_consent_note: "No cookies until you accept. GDPR compliant.",
 
   breadcrumb_home: "Home",
 
