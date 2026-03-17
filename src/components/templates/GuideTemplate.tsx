@@ -21,6 +21,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
 interface GuideSection {
   heading: string;
@@ -62,8 +64,67 @@ const iconMap = {
   list: ListChecks,
 };
 
+const labels: Record<SupportedLang, {
+  toc: string;
+  relatedTools: string;
+  relatedGuides: string;
+  faqTitle: string;
+  nextStep: string;
+  defaultCtaTitle: string;
+  defaultCtaDesc: string;
+  defaultPrimary: string;
+  requestDemo: string;
+}> = {
+  es: {
+    toc: "Contenido",
+    relatedTools: "Herramientas relacionadas",
+    relatedGuides: "Guías relacionadas",
+    faqTitle: "Preguntas frecuentes",
+    nextStep: "Siguiente paso",
+    defaultCtaTitle: "Analiza tu carta de vinos sin compromiso",
+    defaultCtaDesc: "Envía tu carta en cualquier formato y te devolvemos un diagnóstico con oportunidades reales de mejora.",
+    defaultPrimary: "Analiza tu carta gratis",
+    requestDemo: "Solicitar demo",
+  },
+  en: {
+    toc: "Contents",
+    relatedTools: "Related tools",
+    relatedGuides: "Related guides",
+    faqTitle: "Frequently asked questions",
+    nextStep: "Next step",
+    defaultCtaTitle: "Analyze your wine list — no commitment",
+    defaultCtaDesc: "Send your list in any format and we'll return a diagnosis with real improvement opportunities.",
+    defaultPrimary: "Analyze your list for free",
+    requestDemo: "Request demo",
+  },
+  it: {
+    toc: "Contenuto",
+    relatedTools: "Strumenti correlati",
+    relatedGuides: "Guide correlate",
+    faqTitle: "Domande frequenti",
+    nextStep: "Passo successivo",
+    defaultCtaTitle: "Analizza la tua carta dei vini senza impegno",
+    defaultCtaDesc: "Invia la tua carta in qualsiasi formato e ti restituiamo una diagnosi con opportunità reali di miglioramento.",
+    defaultPrimary: "Analizza la tua carta gratis",
+    requestDemo: "Richiedi demo",
+  },
+  fr: {
+    toc: "Sommaire",
+    relatedTools: "Outils connexes",
+    relatedGuides: "Guides connexes",
+    faqTitle: "Questions fréquentes",
+    nextStep: "Prochaine étape",
+    defaultCtaTitle: "Analysez votre carte des vins sans engagement",
+    defaultCtaDesc: "Envoyez votre carte dans n'importe quel format et nous vous renvoyons un diagnostic avec des opportunités réelles d'amélioration.",
+    defaultPrimary: "Analysez votre carte gratuitement",
+    requestDemo: "Demander une démo",
+  },
+};
+
 const GuideTemplate = ({ data }: { data: GuidePageData }) => {
-  const ctaPrimary = data.ctaPrimaryText || "Analiza tu carta gratis";
+  const { lang } = useLanguage();
+  const l = labels[lang];
+  const ctaPrimary = data.ctaPrimaryText || l.defaultPrimary;
   const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
 
   return (
@@ -97,7 +158,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            ...(data.breadcrumbParent ? [data.breadcrumbParent] : [{ label: "Guías", href: "/guias-y-recursos" }]),
+            ...(data.breadcrumbParent ? [data.breadcrumbParent] : [{ label: l.relatedGuides.split(" ")[0], href: "/guias-y-recursos" }]),
             { label: data.heroTitle },
           ]} />
           {data.heroBadge && (
@@ -135,7 +196,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
       {data.tableOfContents && data.tableOfContents.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
           <div className="p-6 rounded-xl border border-border bg-gradient-card">
-            <h2 className="font-heading font-bold text-sm uppercase tracking-widest text-accent mb-4">Contenido</h2>
+            <h2 className="font-heading font-bold text-sm uppercase tracking-widest text-accent mb-4">{l.toc}</h2>
             <ol className="space-y-2">
               {data.tableOfContents.map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -148,7 +209,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         </section>
       )}
 
-      {/* SECTIONS — enhanced with lead paragraph extraction */}
+      {/* SECTIONS */}
       <EnhancedSections
         sections={data.sections}
         insertAfter={data.sections.length > 3 ? {
@@ -157,7 +218,6 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         } : undefined}
       />
 
-      {/* MID CTA — only if sections are short (otherwise inserted inline above) */}
       {data.sections.length <= 3 && (
         <ArticleMidCTA pageType="guide" variant="subtle" />
       )}
@@ -166,7 +226,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
       {data.relatedTools && data.relatedTools.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-bold mb-6">Herramientas relacionadas</h2>
+            <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedTools}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedTools.map((tool, i) => (
                 <Link key={i} to={tool.url}
@@ -185,7 +245,7 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
       {data.relatedGuides && data.relatedGuides.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-16">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl font-bold mb-6">Guías relacionadas</h2>
+            <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedGuides}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedGuides.map((guide, i) => (
                 <Link key={i} to={guide.url}
@@ -200,12 +260,12 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         </section>
       )}
 
-      {/* FAQ — accordion */}
+      {/* FAQ */}
       {data.faqs.length > 0 && (
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{l.faqTitle}</h2>
             </ScrollReveal>
             <Accordion type="multiple" className="space-y-3">
               {data.faqs.map((faq, i) => (
@@ -223,19 +283,18 @@ const GuideTemplate = ({ data }: { data: GuidePageData }) => {
         </section>
       )}
 
-      {/* CTA FINAL — MOFU */}
+      {/* CTA FINAL */}
       <CTASection
         pageType="guide"
-        badge="Siguiente paso"
-        title={data.ctaFinalTitle || "Analiza tu carta de vinos sin compromiso"}
-        description={data.ctaFinalDescription || "Envía tu carta en cualquier formato y te devolvemos un diagnóstico con oportunidades reales de mejora."}
+        badge={l.nextStep}
+        title={data.ctaFinalTitle || l.defaultCtaTitle}
+        description={data.ctaFinalDescription || l.defaultCtaDesc}
         primaryText={ctaPrimary}
         primaryUrl={ctaPrimaryUrl}
-        secondaryText="Solicitar demo"
+        secondaryText={l.requestDemo}
         secondaryUrl="/demo"
       />
 
-      {/* Sticky CTA */}
       <StickyCTA pageType="guide" />
 
       <Footer />
