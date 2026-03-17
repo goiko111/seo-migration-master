@@ -72,7 +72,7 @@ const i18n: Record<string, {
     platformTitle: "Three layers, one system",
     platformSubtitle: "Each layer solves part of the problem. Together, they cover the full wine cycle in your restaurant.",
     layers: [
-      { tag: "Analytical engine", name: "Winerim Core", desc: "26 modules connecting pricing, rotation, stock and list balance into a unified decision system.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Analytical engine", name: "Winerim Core", desc: "A deep analytical layer connecting pricing, rotation, stock and list balance into a unified decision system.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "Tactical AI", name: "Dynamic Intelligence", desc: "The layer that adapts your list in real time: recommendations, highlights and automated actions based on your data.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Purchasing intelligence", name: "Winerim Supply", desc: "Decide what to keep buying, renegotiate or delist. Price comparison, overpricing alerts and smart restocking.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
