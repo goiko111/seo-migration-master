@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { trackAction } from "@/lib/intentTracking";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
