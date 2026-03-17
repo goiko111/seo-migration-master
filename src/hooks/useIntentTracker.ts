@@ -21,6 +21,16 @@ export function usePageIntentTracker(): void {
     // Small delay to let page render (better for scroll depth tracking later)
     const timer = setTimeout(() => {
       trackPageIntent(location.pathname, lang);
+
+      // GA4: track high-intent page visits
+      const classification = classifyPath(location.pathname);
+      if (classification) {
+        const contentGroup = classification.category.replace(/_/g, " ");
+        ga.pageView({ content_group: contentGroup });
+        if (classification.level === "high") {
+          ga.highIntentPageView(classification.category);
+        }
+      }
     }, 300);
 
     return () => clearTimeout(timer);
