@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import { SupportedLang } from "@/i18n/types";
+import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
 const fadeUp = {
@@ -478,7 +479,7 @@ const WinerimSupply = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={localePath("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+              <Link to={localePath("/demo")} onClick={() => trackAction("cta_click", "product_supply", "hero_supply_primary")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
                 {tx.hero_cta_primary} <ArrowRight size={16} />
               </Link>
               <Link to={localePath("/producto/winerim-core")} className="inline-flex items-center gap-2 border border-border text-foreground/80 px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/40 hover:text-foreground transition-all">

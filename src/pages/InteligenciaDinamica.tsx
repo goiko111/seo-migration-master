@@ -16,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { SupportedLang } from "@/i18n/types";
+import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
 const fadeUp = {
@@ -749,7 +750,7 @@ const InteligenciaDinamica = () => {
               </motion.div>
 
               <motion.div variants={fadeUp} custom={4} className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-                <Link to={localePath("/demo")} className="inline-flex items-center justify-center gap-2.5 bg-gradient-wine text-primary-foreground px-9 py-4.5 rounded-lg text-sm font-bold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-xl hover:shadow-wine/25">
+                <Link to={localePath("/demo")} onClick={() => trackAction("cta_click", "product_id", "hero_id_primary")} className="inline-flex items-center justify-center gap-2.5 bg-gradient-wine text-primary-foreground px-9 py-4.5 rounded-lg text-sm font-bold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-xl hover:shadow-wine/25">
                   {tx.cta_demo} <ArrowRight size={16} />
                 </Link>
                 <a href="#como-funciona" className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:bg-muted/50 transition-all">
