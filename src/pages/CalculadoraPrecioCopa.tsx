@@ -571,12 +571,12 @@ const CalculadoraPrecioCopa = () => {
               const effectiveGlasses = Math.max(copasPorBotella - wasteGlasses, 1);
               const effectiveGlassesWorst = Math.max(copasPorBotella - Math.min(wasteGlasses + 1, copasPorBotella - 1), 1);
 
-              const netProfitRealistic = results.precioCopa * effectiveGlassesRealistic - costeBotella - (preset.preservation * copasPorBotella);
-              const netProfitPessimistic = results.precioCopa * effectiveGlassesPessimistic - costeBotella - (preset.preservation * copasPorBotella);
-              const netMarginRealistic = results.ingresoTotal > 0 ? (netProfitRealistic / (results.precioCopa * effectiveGlassesRealistic)) * 100 : 0;
+              const netProfit = results.precioCopa * effectiveGlasses - costeBotella - (preset.preservation * copasPorBotella);
+              const netProfitWorst = results.precioCopa * effectiveGlassesWorst - costeBotella - (preset.preservation * copasPorBotella);
+              const netMarginPct = results.ingresoTotal > 0 ? (netProfit / (results.precioCopa * effectiveGlasses)) * 100 : 0;
 
               const minGlassesPerWeek = Math.ceil(copasPorBotella * 1.5);
-              const viability = netProfitRealistic > costeBotella * 0.3 ? "viable" : netProfitRealistic > 0 ? "marginal" : "not-viable";
+              const viability = netProfit > costeBotella * 0.3 ? "viable" : netProfit > 0 ? "marginal" : "not-viable";
               const viabilityLabel = viability === "viable" ? n.viable : viability === "marginal" ? n.marginal : n.notViable;
               const viabilityColor = viability === "viable" ? "text-emerald-500" : viability === "marginal" ? "text-amber-500" : "text-destructive";
               const viabilityBg = viability === "viable" ? "bg-emerald-500/10" : viability === "marginal" ? "bg-amber-500/10" : "bg-destructive/10";
@@ -590,16 +590,16 @@ const CalculadoraPrecioCopa = () => {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-3 rounded-lg border border-border bg-background">
-                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.wasteScenario}: {n.realistic}</p>
-                      <p className="font-heading text-xl font-bold text-foreground">{netProfitRealistic.toFixed(2)} €</p>
-                      <p className="text-xs text-muted-foreground">{n.netMargin}: {netMarginRealistic.toFixed(0)}%</p>
-                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlassesRealistic}/{copasPorBotella} copas vendidas)</p>
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.withWaste} ({wasteGlasses} {t.glassesUnit})</p>
+                      <p className="font-heading text-xl font-bold text-foreground">{netProfit.toFixed(2)} €</p>
+                      <p className="text-xs text-muted-foreground">{n.netMargin}: {netMarginPct.toFixed(0)}%</p>
+                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlasses}/{copasPorBotella} {n.effectiveSold})</p>
                     </div>
                     <div className="p-3 rounded-lg border border-border bg-background">
-                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.wasteScenario}: {n.pessimistic}</p>
-                      <p className={`font-heading text-xl font-bold ${netProfitPessimistic > 0 ? "text-foreground" : "text-destructive"}`}>{netProfitPessimistic.toFixed(2)} €</p>
+                      <p className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground mb-1">{n.withWaste} ({wasteGlasses + 1} {t.glassesUnit})</p>
+                      <p className={`font-heading text-xl font-bold ${netProfitWorst > 0 ? "text-foreground" : "text-destructive"}`}>{netProfitWorst.toFixed(2)} €</p>
                       <p className="text-xs text-muted-foreground">{n.netProfit}</p>
-                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlassesPessimistic}/{copasPorBotella} copas vendidas)</p>
+                      <p className="text-[10px] text-muted-foreground mt-1">({effectiveGlassesWorst}/{copasPorBotella} {n.effectiveSold})</p>
                     </div>
                   </div>
 
