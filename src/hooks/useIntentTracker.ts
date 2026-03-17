@@ -2,6 +2,8 @@ import { useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { trackPageIntent, trackAction, classifyPath, type IntentCategory } from "@/lib/intentTracking";
+import { trackSessionPage, trackSessionToolUse, trackSessionResourceDownload } from "@/lib/sessionJourney";
+import { startEngagementTimer } from "@/lib/engagementTimer";
 import { ga, ads } from "@/lib/analytics";
 
 /**
@@ -12,15 +14,25 @@ export function usePageIntentTracker(): void {
   const location = useLocation();
   const { lang } = useLanguage();
   const prevPath = useRef<string>("");
+  const engagementCleanup = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // Avoid duplicate tracking on same path
     if (location.pathname === prevPath.current) return;
     prevPath.current = location.pathname;
 
-    // Small delay to let page render (better for scroll depth tracking later)
+    // Clean up previous engagement timer
+    engagementCleanup.current?.();
+
+    // Small delay to let page render
     const timer = setTimeout(() => {
       trackPageIntent(location.pathname, lang);
+
+      // Session journey tracking (B2B intent)
+      trackSessionPage(location.pathname);
+
+      // Engagement timer (B2B + Smart Bidding signal)
+      engagementCleanup.current = startEngagementTimer(location.pathname);
 
       // GA4: track high-intent page visits
       const classification = classifyPath(location.pathname);
@@ -49,7 +61,10 @@ export function usePageIntentTracker(): void {
       }
     }, 300);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      engagementCleanup.current?.();
+    };
   }, [location.pathname, lang]);
 
   // Scroll depth tracking — fires once per threshold per page
