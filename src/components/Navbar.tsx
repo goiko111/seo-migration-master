@@ -366,13 +366,6 @@ const Navbar = memo(() => {
               >
                 Área cliente
               </Link>
-              <Link
-                to={localePath("/contacto")}
-                className="block py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground"
-                onClick={() => setMobileOpen(false)}
-              >
-                {t.nav_contact}
-              </Link>
               <div className="mt-6">
                 <Link
                   to={localePath("/demo")}
@@ -380,6 +373,13 @@ const Navbar = memo(() => {
                   onClick={() => setMobileOpen(false)}
                 >
                   {t.nav_cta}
+                </Link>
+                <Link
+                  to={localePath("/contacto")}
+                  className="block text-center text-sm text-muted-foreground mt-3 py-2 hover:text-foreground transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {t.nav_contact}
                 </Link>
               </div>
             </nav>
