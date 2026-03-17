@@ -46,7 +46,7 @@ const ES_CONTENT = {
   whoTitle: "¿Qué plan encaja con <em>tu negocio</em>?",
   whoSubtitle: "Winerim sirve a perfiles muy distintos. Encuentra el tuyo.",
   profiles: [
-    { icon: "store", name: "Restaurante independiente", plan: "Starter o Pro", desc: "Carta de 30-80 referencias. Necesitas visibilidad y control sin complejidad." },
+    { icon: "store", name: "Restaurante independiente", plan: "Starter o Pro", desc: "Carta de 80–150 referencias. Necesitas visibilidad y control sin complejidad." },
     { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia y compleja, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Múltiples puntos de venta, room service, bar. Necesitas consistencia y reporting." },
     { icon: "building", name: "Grupo de restauración", plan: "Enterprise", desc: "Multi-local, governance centralizada, benchmarking entre unidades y despliegue progresivo." },
@@ -208,7 +208,7 @@ const ES_CONTENT = {
   /* FAQs */
   faqs: [
     { q: "¿Hay permanencia?", a: "No. Puedes cancelar cuando quieras, sin penalizaciones ni letra pequeña." },
-    { q: "¿Cuántas referencias admite cada plan?", a: "No hay un límite rígido. El precio se ajusta al volumen de tu carta. Desde 30 hasta más de 500 referencias." },
+    { q: "¿Cuántas referencias admite cada plan?", a: "No hay un límite rígido. El precio se ajusta al volumen de tu carta. Desde 80 hasta más de 500 referencias." },
     { q: "¿Los comensales necesitan descargar una app?", a: "No. La carta digital se abre desde el navegador del móvil escaneando un QR. Sin descargas." },
     { q: "¿Puedo probar Winerim antes de contratar?", a: "Sí. Ofrecemos un análisis gratuito de tu carta de vinos y una demo personalizada con tu carta real." },
     { q: "¿Qué necesito para empezar?", a: "Tu carta de vinos actual (en cualquier formato) y 15 minutos para una llamada de configuración. Nosotros nos encargamos del resto." },
@@ -244,7 +244,7 @@ i18n.en = {
   whoTitle: "Which plan fits <em>your business</em>?",
   whoSubtitle: "Winerim serves very different profiles. Find yours.",
   profiles: [
-    { icon: "store", name: "Independent restaurant", plan: "Starter or Pro", desc: "30-80 references. You need visibility and control without complexity." },
+    { icon: "store", name: "Independent restaurant", plan: "Starter or Pro", desc: "80–150 references. You need visibility and control without complexity." },
     { icon: "chef", name: "Fine dining restaurant", plan: "Pro", desc: "Extensive list, pairings, by-the-glass. You need smart recommendations and analytics." },
     { icon: "hotel", name: "Hotel with F&B", plan: "Pro or Enterprise", desc: "Multiple outlets, room service, bar. You need consistency and reporting." },
     { icon: "building", name: "Restaurant group", plan: "Enterprise", desc: "Multi-location, centralized governance, unit benchmarking and progressive rollout." },
@@ -326,7 +326,7 @@ i18n.en = {
   ],
   faqs: [
     { q: "Is there a lock-in?", a: "No. Cancel anytime, no penalties." },
-    { q: "How many references per plan?", a: "No rigid limit. Pricing adjusts to your list volume, from 30 to 500+ references." },
+    { q: "How many references per plan?", a: "No rigid limit. Pricing adjusts to your list volume, from 80 to 500+ references." },
     { q: "Do diners need an app?", a: "No. The digital list opens from the mobile browser via QR scan." },
     { q: "Can I try before subscribing?", a: "Yes. We offer a free wine list analysis and a personalized demo with your actual list." },
     { q: "What do I need to start?", a: "Your current wine list (any format) and 15 minutes for a setup call." },
@@ -358,7 +358,7 @@ i18n.it = {
   whoTitle: "Quale piano è adatto al <em>tuo business</em>?",
   whoSubtitle: "Winerim serve profili molto diversi. Trova il tuo.",
   profiles: [
-    { icon: "store", name: "Ristorante indipendente", plan: "Starter o Pro", desc: "Carta di 30-80 referenze. Hai bisogno di visibilità e controllo senza complessità." },
+    { icon: "store", name: "Ristorante indipendente", plan: "Starter o Pro", desc: "Carta di 80–150 referenze. Hai bisogno di visibilità e controllo senza complessità." },
     { icon: "chef", name: "Ristorante gastronomico", plan: "Pro", desc: "Carta ampia e complessa, abbinamenti, vino al calice. Hai bisogno di raccomandazioni intelligenti e analisi." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Più punti vendita, room service, bar. Hai bisogno di coerenza e reportistica." },
     { icon: "building", name: "Gruppo di ristorazione", plan: "Enterprise", desc: "Multi-locale, governance centralizzata, benchmark tra unità e roll-out progressivo." },
@@ -442,7 +442,7 @@ i18n.it = {
   ],
   faqs: [
     { q: "C'è un vincolo di permanenza?", a: "No. Puoi cancellare quando vuoi, senza penali né clausole nascoste." },
-    { q: "Quante referenze ammette ogni piano?", a: "Non c'è un limite rigido. Il prezzo si adatta al volume della tua carta, da 30 a oltre 500 referenze." },
+    { q: "Quante referenze ammette ogni piano?", a: "Non c'è un limite rigido. Il prezzo si adatta al volume della tua carta, da 80 a oltre 500 referenze." },
     { q: "I commensali devono scaricare un'app?", a: "No. La carta digitale si apre dal browser del cellulare scansionando un QR. Senza download." },
     { q: "Posso provare Winerim prima di acquistare?", a: "Sì. Offriamo un'analisi gratuita della tua carta dei vini e una demo personalizzata con la tua carta reale." },
     { q: "Cosa serve per iniziare?", a: "La tua carta dei vini attuale (in qualsiasi formato) e 15 minuti per una chiamata di configurazione." },
@@ -474,7 +474,7 @@ i18n.fr = {
   whoTitle: "Quel plan correspond à <em>votre établissement</em> ?",
   whoSubtitle: "Winerim sert des profils très différents. Trouvez le vôtre.",
   profiles: [
-    { icon: "store", name: "Restaurant indépendant", plan: "Starter ou Pro", desc: "Carte de 30-80 références. Vous avez besoin de visibilité et de contrôle sans complexité." },
+    { icon: "store", name: "Restaurant indépendant", plan: "Starter ou Pro", desc: "Carte de 80–150 références. Vous avez besoin de visibilité et de contrôle sans complexité." },
     { icon: "chef", name: "Restaurant gastronomique", plan: "Pro", desc: "Carte étendue, accords, vin au verre. Vous avez besoin de recommandations intelligentes et d'analytique." },
     { icon: "hotel", name: "Hôtel avec F&B", plan: "Pro ou Enterprise", desc: "Plusieurs points de vente, room service, bar. Vous avez besoin de cohérence et de reporting." },
     { icon: "building", name: "Groupe de restauration", plan: "Enterprise", desc: "Multi-sites, gouvernance centralisée, benchmarking inter-unités et déploiement progressif." },
@@ -558,7 +558,7 @@ i18n.fr = {
   ],
   faqs: [
     { q: "Y a-t-il un engagement ?", a: "Non. Annulez quand vous voulez, sans pénalités ni petites lignes." },
-    { q: "Combien de références par plan ?", a: "Pas de limite rigide. Le prix s'ajuste au volume de votre carte, de 30 à plus de 500 références." },
+    { q: "Combien de références par plan ?", a: "Pas de limite rigide. Le prix s'ajuste au volume de votre carte, de 80 à plus de 500 références." },
     { q: "Les convives doivent-ils télécharger une app ?", a: "Non. La carte digitale s'ouvre depuis le navigateur mobile en scannant un QR. Sans téléchargement." },
     { q: "Puis-je essayer avant de m'abonner ?", a: "Oui. Nous proposons une analyse gratuite de votre carte des vins et une démo personnalisée avec votre carte réelle." },
     { q: "De quoi ai-je besoin pour commencer ?", a: "Votre carte des vins actuelle (tout format) et 15 minutes pour un appel de configuration." },

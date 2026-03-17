@@ -30,7 +30,7 @@ const data: VerticalContent = {
     "Necesitas justificar ante dirección o propiedad cada decisión de surtido",
   ],
   notForItems: [
-    "Tu carta tiene menos de 40 referencias y la gestionas sin dificultad",
+    "Tu carta tiene menos de 80 referencias y la gestionas sin dificultad",
     "No consideras el vino como una categoría estratégica del negocio",
     "Prefieres decidir el surtido exclusivamente por relación con distribuidores",
   ],
@@ -114,7 +114,7 @@ const data: VerticalContent = {
   ],
 
   faqs: [
-    { q: "¿A partir de cuántas referencias tiene sentido usar Winerim?", a: "A partir de 80 referencias ya se pueden detectar patrones de canibalización y stock muerto significativos. El impacto crece con el tamaño de la carta: con más de 250 referencias, la optimización puede liberar un 15–30% de capital inmovilizado." },
+    { q: "¿A partir de cuántas referencias tiene sentido usar Winerim?", a: "A partir de 80 referencias ya se pueden detectar patrones de canibalización y rotación desigual. La solución de carta amplia está especialmente diseñada para cartas de 250+ referencias, donde el stock muerto y la canibalización tienen mayor impacto. Para cartas de 80–250 referencias, existe una solución específica enfocada en pricing, equilibrio y crecimiento." },
     { q: "¿Winerim me dice qué vinos retirar?", a: "Winerim te muestra un ranking de rendimiento basado en datos reales (margen, rotación, demanda). La decisión final siempre es tuya, pero ahora tienes argumentos objetivos." },
     { q: "¿Qué es la canibalización de vinos?", a: "Ocurre cuando dos o más referencias de perfil similar (misma región, estilo y franja de precio) compiten entre sí, diluyendo las ventas de ambas. Winerim cruza estos atributos para detectarlo automáticamente." },
     { q: "¿Puedo generar informes para dirección o propiedad?", a: "Sí. Winerim genera reportes con métricas claras de rendimiento por referencia, oportunidades de mejora y propuestas de acción, listos para presentar en reuniones de gestión." },

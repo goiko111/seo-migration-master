@@ -30,7 +30,7 @@ const data: VerticalContent = {
     "Quieres crecer en referencias con criterio, sin desordenar la carta",
   ],
   notForItems: [
-    "Tu carta tiene menos de 40 referencias y la controlas sin dificultad",
+    "Tu carta tiene menos de 80 referencias y la controlas sin dificultad",
     "No consideras el vino como una categoría estratégica del negocio",
     "No tienes intención de optimizar pricing ni rotación",
   ],
