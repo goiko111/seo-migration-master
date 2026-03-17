@@ -56,7 +56,8 @@ interface LangContent {
   alertLabel: string; alertLabelFull: string;
   refs: string; ref: string;
   breakdownCat: string; detailRef: string;
-  thWine: string; thUnits: string; thCapital: string; thDays: string; thPriority: string; thRecommendation: string;
+  thWine: string; thUnits: string; thCapital: string; thDays: string; thPriority: string; thRecommendation: string; thDepreciation: string; thCurrentValue: string;
+  deprecLabels: { fresh: string; aging: string; declining: string; critical: string };
   priorityLabels: { critical: string; high: string; medium: string; low: string };
   recLabels: { remove: string; glass: string; noRestock: string; boost: string };
   insightHigh: (pct: string, capital: string) => string;
