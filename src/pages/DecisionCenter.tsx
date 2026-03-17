@@ -216,56 +216,125 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-32 pb-24">
+      <main className="pt-28 md:pt-32 pb-20">
         {/* Ambient glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-wine/4 rounded-full blur-[140px]" />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-6 md:px-12">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-14"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
-              <Shield size={14} className="text-wine" />
-              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-wine">
-                {c.for_desc.split(" ").slice(0, 3).join(" ")}
-              </span>
-            </div>
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-              {c.title}
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {c.subtitle}
-            </p>
-          </motion.div>
+        <div className="relative max-w-6xl mx-auto px-6 md:px-12">
+          {/* ── Hero split: pitch left + access right ── */}
+          <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-start mb-16 lg:mb-20">
+            {/* Left column — Value pitch */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="lg:col-span-3"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-5">
+                <Shield size={14} className="text-wine" />
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-wine">
+                  {c.for_desc.split(" ").slice(0, 3).join(" ")}
+                </span>
+              </div>
+              <h1 className="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold mb-4 text-foreground leading-tight">
+                {c.title}
+              </h1>
+              <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-8">
+                {c.subtitle}
+              </p>
 
-          {/* 4 value cards */}
-          <div className="grid sm:grid-cols-2 gap-4 mb-12">
-            {c.cards.map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.07 }}
-                className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-6"
-              >
-                <span className="text-xl mb-3 block">{card.emoji}</span>
-                <h3 className="font-heading text-sm font-bold mb-2 text-foreground">{card.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-              </motion.div>
-            ))}
+              {/* Inline feature highlights */}
+              <div className="space-y-3">
+                {c.cards.map((card, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + i * 0.06 }}
+                    className="flex items-start gap-3"
+                  >
+                    <span className="text-lg mt-0.5 shrink-0">{card.emoji}</span>
+                    <div>
+                      <span className="text-sm font-semibold text-foreground">{card.title}</span>
+                      <span className="text-sm text-muted-foreground"> — {card.desc}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right column — Access form */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="lg:col-span-2"
+            >
+              <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-sm p-7 md:p-8 shadow-xl shadow-black/5">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-wine/10 flex items-center justify-center shrink-0">
+                    <Lock size={20} className="text-wine" />
+                  </div>
+                  <div>
+                    <h2 className="font-heading text-base font-bold text-foreground">
+                      {lang === "es" ? "Accede a tu zona" : lang === "en" ? "Access your area" : lang === "it" ? "Accedi alla tua zona" : "Accédez à votre espace"}
+                    </h2>
+                    <p className="text-[11px] text-muted-foreground/60">
+                      {lang === "es" ? "Solo para clientes y equipos autorizados" : lang === "en" ? "For clients and authorised teams only" : lang === "it" ? "Solo per clienti e team autorizzati" : "Pour clients et équipes autorisées uniquement"}
+                    </p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="relative">
+                    <input
+                      type="password"
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      placeholder={t.dc_gate_placeholder}
+                      className={`w-full px-4 py-3.5 rounded-xl border bg-background text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${
+                        error
+                          ? "border-destructive focus:ring-destructive/30"
+                          : "border-border focus:ring-wine/30 focus:border-wine/50"
+                      }`}
+                      autoFocus
+                    />
+                    <Shield size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30" />
+                  </div>
+                  {error && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-xs text-destructive font-medium"
+                    >
+                      {t.dc_gate_error}
+                    </motion.p>
+                  )}
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+                  >
+                    {t.dc_gate_submit}
+                  </button>
+                </form>
+
+                <p className="text-center text-[11px] text-muted-foreground/50 mt-4">
+                  {c.no_client}{" "}
+                  <Link to="/demo" className="text-wine hover:text-wine-light transition-colors font-medium">
+                    {c.request_demo}
+                  </Link>
+                </p>
+              </div>
+            </motion.div>
           </div>
 
-          {/* What it's not + Who it's for */}
+          {/* ── Bottom context blocks ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="grid sm:grid-cols-2 gap-4 mb-14"
+            className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto"
           >
             <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
               <h4 className="text-xs font-bold tracking-wider uppercase text-muted-foreground mb-2">{c.not_title}</h4>
@@ -275,60 +344,6 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
               <h4 className="text-xs font-bold tracking-wider uppercase text-muted-foreground mb-2">{c.for_title}</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">{c.for_desc}</p>
             </div>
-          </motion.div>
-
-          {/* Access form */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="max-w-sm mx-auto"
-          >
-            <div className="text-center mb-5">
-              <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mx-auto mb-4">
-                <Lock size={22} className="text-wine" />
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="relative">
-                <input
-                  type="password"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  placeholder={t.dc_gate_placeholder}
-                  className={`w-full px-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${
-                    error
-                      ? "border-destructive focus:ring-destructive/30"
-                      : "border-border focus:ring-wine/30 focus:border-wine/50"
-                  }`}
-                  autoFocus
-                />
-                <Shield size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30" />
-              </div>
-              {error && (
-                <motion.p
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-xs text-destructive font-medium"
-                >
-                  {t.dc_gate_error}
-                </motion.p>
-              )}
-              <button
-                type="submit"
-                className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
-              >
-                {t.dc_gate_submit}
-              </button>
-            </form>
-
-            <p className="text-center text-[11px] text-muted-foreground/50 mt-5">
-              {c.no_client}{" "}
-              <Link to="/demo" className="text-wine hover:text-wine-light transition-colors font-medium">
-                {c.request_demo}
-              </Link>
-            </p>
           </motion.div>
         </div>
       </main>
