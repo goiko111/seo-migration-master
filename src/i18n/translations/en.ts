@@ -34,6 +34,7 @@ const en: TranslationDict = {
   nav_sol_no_sommelier: "Without sommelier",
   nav_sol_growing_list: "Growing wine lists",
   nav_sol_large_list: "Large & complex lists",
+  nav_sol_purchasing: "Purchasing intelligence",
 
   nav_resources: "Resources",
   nav_resources_learn: "Learn",
