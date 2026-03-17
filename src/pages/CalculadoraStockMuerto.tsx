@@ -30,6 +30,14 @@ interface StockItem { nombre: string; unidades: number; costeUnidad: number; dia
 const emptyItem = (): StockItem => ({ nombre: "", unidades: 1, costeUnidad: 10, diasSinVenta: 90, categoria: "media" });
 const OPPORTUNITY_RATE = 0.08;
 
+/* Depreciation rates per category (annual %) — young wines lose freshness faster */
+const DEPRECIATION_RATES: Record<Categoria, number> = {
+  entrada: 0.15,  // 15%/year — young wines lose freshness quickly
+  media: 0.10,    // 10%/year
+  premium: 0.05,  // 5%/year — structured wines hold better
+  alta: 0.02,     // 2%/year — can appreciate, minimal depreciation
+};
+
 /* ─── i18n ─── */
 interface LangContent {
   seoTitle: string; seoDesc: string;
