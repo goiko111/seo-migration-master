@@ -385,6 +385,9 @@ const VerticalTemplate = ({ t, hideSupplyBlock, children }: { t: VerticalContent
         </div>
       </section>
 
+      {/* ── Custom blocks ── */}
+      {children}
+
       {/* ── FAQs ── */}
       <FAQSection faqs={t.faqs} schemaId={t.schemaId} />
 
