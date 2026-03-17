@@ -25,6 +25,9 @@ import comprasReposicionEN from "@/data/decisionCenter/comprasReposicion.en";
 import comprasReposicionIT from "@/data/decisionCenter/comprasReposicion.it";
 import comprasReposicionFR from "@/data/decisionCenter/comprasReposicion.fr";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
+import cartaEquilibrioEN from "@/data/decisionCenter/cartaEquilibrio.en";
+import cartaEquilibrioIT from "@/data/decisionCenter/cartaEquilibrio.it";
+import cartaEquilibrioFR from "@/data/decisionCenter/cartaEquilibrio.fr";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
