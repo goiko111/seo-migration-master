@@ -151,6 +151,15 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/sobre-winerim": "/fr/a-propos",
     "/benchmarks-playbooks": "/fr/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/fr/outils/calculateur-prix-vin-au-verre",
+    "/herramientas/calculadora-stock-muerto": "/fr/outils/calculateur-stock-mort",
+    "/herramientas/calculadora-ticket-medio-vino": "/fr/outils/calculateur-ticket-moyen",
+    "/herramientas/calculadora-compra-inteligente": "/fr/outils/calculateur-achat-intelligent",
+    "/herramientas/diagnostico-vino-por-copa": "/fr/outils/diagnostic-vin-au-verre",
+    "/herramientas/wine-list-score": "/fr/outils/wine-list-score",
+    "/herramientas/auditor-carta-multilocal": "/fr/outils/auditeur-carte-multi-sites",
+    "/comparativas": "/fr/comparatifs",
+    "/decision-center": "/fr/decision-center",
+    "/implantacion": "/fr/implementation",
   },
 };
 
