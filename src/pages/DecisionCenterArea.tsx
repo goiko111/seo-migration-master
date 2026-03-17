@@ -669,12 +669,18 @@ const DecisionCenterArea = () => {
     it: stockRotacionIT,
     fr: stockRotacionFR,
   };
+  const comprasByLang: Record<string, DeepAreaContent> = {
+    es: comprasReposicionContent,
+    en: comprasReposicionEN,
+    it: comprasReposicionIT,
+    fr: comprasReposicionFR,
+  };
 
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
     "margenes-pricing": margenesByLang[lang] || margenesPricingContent,
     "stock-rotacion": stockByLang[lang] || stockRotacionContent,
-    "compras-reposicion": comprasReposicionContent,
+    "compras-reposicion": comprasByLang[lang] || comprasReposicionContent,
     "carta-equilibrio": cartaEquilibrioContent,
     "vino-por-copa": vinoPorCopaContent,
     "grupos-benchmarking": gruposBenchmarkingContent,
