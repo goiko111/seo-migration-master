@@ -102,6 +102,7 @@ const SeoPage = lazy(() => import("./pages/SeoPage"));
 const SobreWinerim = lazy(() => import("./pages/SobreWinerim"));
 const Comparativas = lazy(() => import("./pages/Comparativas"));
 const ComparativaDetalle = lazy(() => import("./pages/ComparativaDetalle"));
+const InteligenciaCompras = lazy(() => import("./pages/InteligenciaCompras"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
