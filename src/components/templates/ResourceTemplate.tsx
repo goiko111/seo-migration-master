@@ -113,6 +113,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       setSubmitted(true);
       toast.success("¡Recurso listo! La descarga comenzará en un momento.");
       notifyLead(leadData);
+      trackFormSubmit("resource");
+      trackResourceDownload(data.formType);
       // Auto-download the file
       if (data.downloadFile) {
         setTimeout(() => {
