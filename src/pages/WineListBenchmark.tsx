@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, BarChart3, Globe, TrendingUp,
   GlassWater, Layers, MapPin
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line
@@ -244,6 +245,25 @@ const WineListBenchmark = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      <ToolStrategicBlock
+        layer="core"
+        decides={[
+          "Si tu carta está equilibrada frente al mercado en estilos, países y rangos de precio",
+          "Qué franjas de precio o estilos están infrarrepresentados respecto a la media del sector",
+          "Si tu oferta de vino por copa es competitiva comparada con otros restaurantes similares",
+        ]}
+        avoids={[
+          "Montar una carta sin referencia de mercado ni datos comparativos",
+          "Sobrecargar un estilo o rango de precio por inercia sin saber qué hace la competencia",
+          "Ignorar tendencias de consumo que están ganando tracción en tu segmento",
+        ]}
+        impact={[
+          "Carta alineada con la demanda real del mercado y no solo con la oferta del distribuidor",
+          "Detección de huecos y oportunidades de diferenciación por franja de precio o estilo",
+          "Decisiones de surtido basadas en datos comparativos, no en intuición",
+        ]}
+      />
 
       {/* CTA */}
       <section className="section-padding bg-gradient-dark">
