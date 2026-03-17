@@ -350,6 +350,48 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/implementation`} element={<Implantacion />} />
     <Route path={`${prefix}/implementazione`} element={<Implantacion />} />
     <Route path={`${prefix}/article/:slug`} element={<ArticlePage />} />
+    {/* Guides — EN */}
+    <Route path={`${prefix}/guides/how-to-structure-wine-list-restaurant-group`} element={<GuiaCartaGrupoRestauracion />} />
+    <Route path={`${prefix}/guides/how-to-set-profitable-wine-by-glass-strategy`} element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path={`${prefix}/guides/how-to-detect-dead-stock-wines`} element={<GuiaDetectarVinosMuertos />} />
+    <Route path={`${prefix}/guides/how-to-train-staff-to-sell-wine`} element={<GuiaFormarEquipoSala />} />
+    <Route path={`${prefix}/guides/how-to-use-data-to-decide-which-wines-to-buy`} element={<GuiaUsarDatosCompra />} />
+    <Route path={`${prefix}/guides/how-to-connect-wine-list-stock-sales-margin`} element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path={`${prefix}/guides/how-to-manage-wine-list-restaurant-groups`} element={<GuiaGestionarCartaGrupos />} />
+    <Route path={`${prefix}/guides/how-to-implement-wine-by-glass-without-losing-margin`} element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path={`${prefix}/guides/how-to-use-winerim-without-sommelier`} element={<GuiaWinerimSinSumiller />} />
+    <Route path={`${prefix}/guides/how-to-choose-wine-selection-by-average-ticket`} element={<GuiaSurtidoTicketMedio />} />
+    <Route path={`${prefix}/guides/how-to-detect-wine-cannibalization`} element={<GuiaCanibalizacionVinos />} />
+    <Route path={`${prefix}/guides/how-to-review-wine-list-monthly`} element={<GuiaRevisarCartaCadaMes />} />
+    <Route path={`${prefix}/guides/how-to-improve-wine-rotation-in-restaurants`} element={<RotacionVinos />} />
+    {/* Guides — IT */}
+    <Route path={`${prefix}/guide/come-strutturare-carta-vini-gruppo-ristorazione`} element={<GuiaCartaGrupoRestauracion />} />
+    <Route path={`${prefix}/guide/come-fissare-strategia-redditizia-vino-al-calice`} element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path={`${prefix}/guide/come-rilevare-vini-morti`} element={<GuiaDetectarVinosMuertos />} />
+    <Route path={`${prefix}/guide/come-formare-personale-sala-vendere-vino`} element={<GuiaFormarEquipoSala />} />
+    <Route path={`${prefix}/guide/come-usare-dati-per-decidere-quali-vini-acquistare`} element={<GuiaUsarDatosCompra />} />
+    <Route path={`${prefix}/guide/come-collegare-carta-stock-vendite-margine`} element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path={`${prefix}/guide/come-gestire-carta-vini-gruppi-ristorazione`} element={<GuiaGestionarCartaGrupos />} />
+    <Route path={`${prefix}/guide/come-implementare-vino-al-calice-senza-perdere-margine`} element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path={`${prefix}/guide/come-usare-winerim-senza-sommelier`} element={<GuiaWinerimSinSumiller />} />
+    <Route path={`${prefix}/guide/come-scegliere-selezione-vini-per-scontrino-medio`} element={<GuiaSurtidoTicketMedio />} />
+    <Route path={`${prefix}/guide/come-rilevare-cannibalizzazione-vini`} element={<GuiaCanibalizacionVinos />} />
+    <Route path={`${prefix}/guide/come-revisionare-carta-vini-ogni-mese`} element={<GuiaRevisarCartaCadaMes />} />
+    <Route path={`${prefix}/guide/come-migliorare-rotazione-vini-ristorante`} element={<RotacionVinos />} />
+    {/* Guides — FR */}
+    <Route path={`${prefix}/guides/comment-structurer-carte-vins-groupe-restauration`} element={<GuiaCartaGrupoRestauracion />} />
+    <Route path={`${prefix}/guides/comment-fixer-strategie-rentable-vin-au-verre`} element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path={`${prefix}/guides/comment-detecter-vins-morts`} element={<GuiaDetectarVinosMuertos />} />
+    <Route path={`${prefix}/guides/comment-former-equipe-salle-vendre-vin`} element={<GuiaFormarEquipoSala />} />
+    <Route path={`${prefix}/guides/comment-utiliser-donnees-pour-choisir-vins`} element={<GuiaUsarDatosCompra />} />
+    <Route path={`${prefix}/guides/comment-connecter-carte-stock-ventes-marge`} element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path={`${prefix}/guides/comment-gerer-carte-vins-groupes-restauration`} element={<GuiaGestionarCartaGrupos />} />
+    <Route path={`${prefix}/guides/comment-implanter-vin-au-verre-sans-perdre-marge`} element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path={`${prefix}/guides/comment-utiliser-winerim-sans-sommelier`} element={<GuiaWinerimSinSumiller />} />
+    <Route path={`${prefix}/guides/comment-choisir-selection-vins-par-ticket-moyen`} element={<GuiaSurtidoTicketMedio />} />
+    <Route path={`${prefix}/guides/comment-detecter-cannibalisation-vins`} element={<GuiaCanibalizacionVinos />} />
+    <Route path={`${prefix}/guides/comment-reviser-carte-vins-chaque-mois`} element={<GuiaRevisarCartaCadaMes />} />
+    <Route path={`${prefix}/guides/comment-ameliorer-rotation-vins-restaurant`} element={<RotacionVinos />} />
   </>
 );
 
