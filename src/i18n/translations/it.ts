@@ -34,6 +34,7 @@ const it: TranslationDict = {
   nav_sol_no_sommelier: "Senza sommelier",
   nav_sol_growing_list: "Carte con profondità",
   nav_sol_large_list: "Carte ampie e complesse",
+  nav_sol_purchasing: "Intelligenza acquisti",
 
   nav_resources: "Risorse",
   nav_resources_learn: "Impara",
