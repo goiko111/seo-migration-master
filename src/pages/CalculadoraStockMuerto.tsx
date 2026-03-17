@@ -30,6 +30,14 @@ interface StockItem { nombre: string; unidades: number; costeUnidad: number; dia
 const emptyItem = (): StockItem => ({ nombre: "", unidades: 1, costeUnidad: 10, diasSinVenta: 90, categoria: "media" });
 const OPPORTUNITY_RATE = 0.08;
 
+/* Depreciation rates per category (annual %) — young wines lose freshness faster */
+const DEPRECIATION_RATES: Record<Categoria, number> = {
+  entrada: 0.15,  // 15%/year — young wines lose freshness quickly
+  media: 0.10,    // 10%/year
+  premium: 0.05,  // 5%/year — structured wines hold better
+  alta: 0.02,     // 2%/year — can appreciate, minimal depreciation
+};
+
 /* ─── i18n ─── */
 interface LangContent {
   seoTitle: string; seoDesc: string;
@@ -48,7 +56,8 @@ interface LangContent {
   alertLabel: string; alertLabelFull: string;
   refs: string; ref: string;
   breakdownCat: string; detailRef: string;
-  thWine: string; thUnits: string; thCapital: string; thDays: string; thPriority: string; thRecommendation: string;
+  thWine: string; thUnits: string; thCapital: string; thDays: string; thPriority: string; thRecommendation: string; thDepreciation: string; thCurrentValue: string;
+  deprecLabels: { fresh: string; aging: string; declining: string; critical: string };
   priorityLabels: { critical: string; high: string; medium: string; low: string };
   recLabels: { remove: string; glass: string; noRestock: string; boost: string };
   insightHigh: (pct: string, capital: string) => string;
@@ -91,7 +100,8 @@ const i18n: Record<string, LangContent> = {
     alertLabel: "En alerta", alertLabelFull: "En alerta (< 3 meses)",
     refs: "referencia(s)", ref: "refs",
     breakdownCat: "Desglose por categoría", detailRef: "Detalle por referencia",
-    thWine: "Vino", thUnits: "Uds", thCapital: "Capital", thDays: "Días", thPriority: "Prioridad", thRecommendation: "Recomendación",
+    thWine: "Vino", thUnits: "Uds", thCapital: "Capital", thDays: "Días", thPriority: "Prioridad", thRecommendation: "Recomendación", thDepreciation: "Depreciación", thCurrentValue: "Valor actual est.",
+    deprecLabels: { fresh: "Fresco", aging: "Envejeciendo", declining: "En declive", critical: "Deterioro" },
     priorityLabels: { critical: "Crítica", high: "Alta", medium: "Media", low: "Baja" },
     recLabels: { remove: "Retirar de carta", glass: "Sacar por copa", noRestock: "No reponer", boost: "Impulsar venta" },
     insightHigh: (pct, capital) => `Más del 30% de tus referencias analizadas están dormidas. Esto sugiere un problema de compra o de arquitectura de carta. Winerim Core detecta estas situaciones automáticamente y Winerim Supply ayuda a decidir qué no reponer.`,
@@ -155,7 +165,8 @@ const i18n: Record<string, LangContent> = {
     alertLabel: "Alert", alertLabelFull: "Alert (< 3 months)",
     refs: "reference(s)", ref: "refs",
     breakdownCat: "Breakdown by category", detailRef: "Detail by reference",
-    thWine: "Wine", thUnits: "Units", thCapital: "Capital", thDays: "Days", thPriority: "Priority", thRecommendation: "Recommendation",
+    thWine: "Wine", thUnits: "Units", thCapital: "Capital", thDays: "Days", thPriority: "Priority", thRecommendation: "Recommendation", thDepreciation: "Depreciation", thCurrentValue: "Est. current value",
+    deprecLabels: { fresh: "Fresh", aging: "Aging", declining: "Declining", critical: "Deteriorating" },
     priorityLabels: { critical: "Critical", high: "High", medium: "Medium", low: "Low" },
     recLabels: { remove: "Remove from list", glass: "Serve by the glass", noRestock: "Do not restock", boost: "Boost sales" },
     insightHigh: () => `Over 30% of your analysed references are sleeping. This suggests a purchasing or list architecture problem. Winerim Core detects these situations automatically and Winerim Supply helps decide what not to restock.`,
@@ -218,7 +229,8 @@ const i18n: Record<string, LangContent> = {
     alertLabel: "In allerta", alertLabelFull: "In allerta (< 3 mesi)",
     refs: "referenza/e", ref: "refs",
     breakdownCat: "Ripartizione per categoria", detailRef: "Dettaglio per referenza",
-    thWine: "Vino", thUnits: "Ud", thCapital: "Capitale", thDays: "Giorni", thPriority: "Priorità", thRecommendation: "Raccomandazione",
+    thWine: "Vino", thUnits: "Ud", thCapital: "Capitale", thDays: "Giorni", thPriority: "Priorità", thRecommendation: "Raccomandazione", thDepreciation: "Deprezzamento", thCurrentValue: "Valore attuale st.",
+    deprecLabels: { fresh: "Fresco", aging: "Invecchiamento", declining: "In declino", critical: "Deterioramento" },
     priorityLabels: { critical: "Critica", high: "Alta", medium: "Media", low: "Bassa" },
     recLabels: { remove: "Ritirare dalla carta", glass: "Servire al calice", noRestock: "Non riassortire", boost: "Incentivare vendita" },
     insightHigh: () => `Oltre il 30% delle referenze analizzate è dormiente. Questo suggerisce un problema di acquisti o architettura della carta.`,
@@ -276,7 +288,8 @@ const i18n: Record<string, LangContent> = {
     alertLabel: "En alerte", alertLabelFull: "En alerte (< 3 mois)",
     refs: "référence(s)", ref: "réfs",
     breakdownCat: "Répartition par catégorie", detailRef: "Détail par référence",
-    thWine: "Vin", thUnits: "Unités", thCapital: "Capital", thDays: "Jours", thPriority: "Priorité", thRecommendation: "Recommandation",
+    thWine: "Vin", thUnits: "Unités", thCapital: "Capital", thDays: "Jours", thPriority: "Priorité", thRecommendation: "Recommandation", thDepreciation: "Dépréciation", thCurrentValue: "Valeur actuelle est.",
+    deprecLabels: { fresh: "Frais", aging: "Vieillissant", declining: "En déclin", critical: "Détérioration" },
     priorityLabels: { critical: "Critique", high: "Haute", medium: "Moyenne", low: "Basse" },
     recLabels: { remove: "Retirer de la carte", glass: "Servir au verre", noRestock: "Ne pas réapprovisionner", boost: "Pousser la vente" },
     insightHigh: () => `Plus de 30% de vos références analysées sont dormantes. Cela suggère un problème d'achat ou d'architecture de carte.`,
@@ -372,7 +385,13 @@ const CalculadoraStockMuerto = () => {
       const opportunityCost = capital * OPPORTUNITY_RATE * (it.diasSinVenta / 365);
       const recommendation = getRecommendation(it, t);
       const priority = getPriority(it.diasSinVenta, t);
-      return { ...it, capital, estado, opportunityCost, recommendation, priority };
+      // Depreciation
+      const depRate = DEPRECIATION_RATES[it.categoria];
+      const depPct = depRate * (it.diasSinVenta / 365);
+      const currentValue = Math.max(capital * (1 - depPct), 0);
+      const valueLost = capital - currentValue;
+      const depStatus = it.diasSinVenta < 60 ? "fresh" : it.diasSinVenta < 180 ? "aging" : it.diasSinVenta < 365 ? "declining" : "critical";
+      return { ...it, capital, estado, opportunityCost, recommendation, priority, depPct, currentValue, valueLost, depStatus: depStatus as keyof typeof t.deprecLabels };
     });
     const totalCapital = classified.reduce((s, it) => s + it.capital, 0);
     const totalOpportunityCost = classified.reduce((s, it) => s + it.opportunityCost, 0);
@@ -567,18 +586,32 @@ const CalculadoraStockMuerto = () => {
                     <th className="pb-3 font-medium">{t.thWine}</th>
                     <th className="pb-3 font-medium text-right">{t.thUnits}</th>
                     <th className="pb-3 font-medium text-right">{t.thCapital}</th>
+                    <th className="pb-3 font-medium text-right">{t.thCurrentValue}</th>
                     <th className="pb-3 font-medium text-right">{t.thDays}</th>
+                    <th className="pb-3 font-medium text-center">{t.thDepreciation}</th>
                     <th className="pb-3 font-medium text-center">{t.thPriority}</th>
                     <th className="pb-3 font-medium text-center">{t.thRecommendation}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {analysis.classified.sort((a, b) => b.diasSinVenta - a.diasSinVenta).map((it, i) => (
+                  {analysis.classified.sort((a, b) => b.diasSinVenta - a.diasSinVenta).map((it, i) => {
+                    const depColor = it.depStatus === "fresh" ? "text-emerald-500" : it.depStatus === "aging" ? "text-amber-500" : "text-destructive";
+                    const depBg = it.depStatus === "fresh" ? "bg-emerald-500/10" : it.depStatus === "aging" ? "bg-amber-500/10" : "bg-destructive/10";
+                    return (
                     <tr key={i} className="border-b border-border/50 last:border-0">
                       <td className="py-3">{it.nombre}</td>
                       <td className="py-3 text-right">{it.unidades}</td>
                       <td className="py-3 text-right font-medium">{formatEur(it.capital)}</td>
+                      <td className="py-3 text-right">
+                        <span className={it.valueLost > 0 ? "text-amber-500" : ""}>{formatEur(it.currentValue)}</span>
+                        {it.valueLost > 0 && <span className="block text-[10px] text-destructive">-{formatEur(it.valueLost)}</span>}
+                      </td>
                       <td className="py-3 text-right">{it.diasSinVenta}d</td>
+                      <td className="py-3 text-center">
+                        <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${depBg} ${depColor}`}>
+                          {t.deprecLabels[it.depStatus]} ({(it.depPct * 100).toFixed(0)}%)
+                        </span>
+                      </td>
                       <td className="py-3 text-center">
                         <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${it.priority.bg} ${it.priority.color}`}>{it.priority.label}</span>
                       </td>
@@ -586,7 +619,8 @@ const CalculadoraStockMuerto = () => {
                         <span className={`text-xs font-semibold ${it.recommendation.color}`}>{it.recommendation.label}</span>
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
