@@ -210,6 +210,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-detectar-canibalizacion-vinos-carta": "/fr/guides/comment-detecter-cannibalisation-vins",
     "/guias/como-revisar-carta-vinos-cada-mes": "/fr/guides/comment-reviser-carte-vins-chaque-mois",
     "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante": "/fr/guides/comment-ameliorer-rotation-vins-restaurant",
+    "/como-vender-mas-vino-en-un-restaurante": "/fr/comment-vendre-plus-vin-restaurant",
+    "/precio-vino-restaurante": "/fr/prix-vin-restaurant",
+    "/vino-por-copa-restaurante": "/fr/vin-au-verre-restaurant",
+    "/inteligencia-artificial-restaurantes": "/fr/intelligence-artificielle-restaurants",
   },
 };
 
