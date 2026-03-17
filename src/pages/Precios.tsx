@@ -358,7 +358,7 @@ i18n.it = {
   whoTitle: "Quale piano è adatto al <em>tuo business</em>?",
   whoSubtitle: "Winerim serve profili molto diversi. Trova il tuo.",
   profiles: [
-    { icon: "store", name: "Ristorante indipendente", plan: "Starter o Pro", desc: "Carta di 30-80 referenze. Hai bisogno di visibilità e controllo senza complessità." },
+    { icon: "store", name: "Ristorante indipendente", plan: "Starter o Pro", desc: "Carta di 80–150 referenze. Hai bisogno di visibilità e controllo senza complessità." },
     { icon: "chef", name: "Ristorante gastronomico", plan: "Pro", desc: "Carta ampia e complessa, abbinamenti, vino al calice. Hai bisogno di raccomandazioni intelligenti e analisi." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Più punti vendita, room service, bar. Hai bisogno di coerenza e reportistica." },
     { icon: "building", name: "Gruppo di ristorazione", plan: "Enterprise", desc: "Multi-locale, governance centralizzata, benchmark tra unità e roll-out progressivo." },
