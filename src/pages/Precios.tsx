@@ -244,7 +244,7 @@ i18n.en = {
   whoTitle: "Which plan fits <em>your business</em>?",
   whoSubtitle: "Winerim serves very different profiles. Find yours.",
   profiles: [
-    { icon: "store", name: "Independent restaurant", plan: "Starter or Pro", desc: "30-80 references. You need visibility and control without complexity." },
+    { icon: "store", name: "Independent restaurant", plan: "Starter or Pro", desc: "80–150 references. You need visibility and control without complexity." },
     { icon: "chef", name: "Fine dining restaurant", plan: "Pro", desc: "Extensive list, pairings, by-the-glass. You need smart recommendations and analytics." },
     { icon: "hotel", name: "Hotel with F&B", plan: "Pro or Enterprise", desc: "Multiple outlets, room service, bar. You need consistency and reporting." },
     { icon: "building", name: "Restaurant group", plan: "Enterprise", desc: "Multi-location, centralized governance, unit benchmarking and progressive rollout." },
