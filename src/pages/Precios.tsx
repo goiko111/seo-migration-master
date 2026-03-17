@@ -208,7 +208,7 @@ const ES_CONTENT = {
   /* FAQs */
   faqs: [
     { q: "¿Hay permanencia?", a: "No. Puedes cancelar cuando quieras, sin penalizaciones ni letra pequeña." },
-    { q: "¿Cuántas referencias admite cada plan?", a: "No hay un límite rígido. El precio se ajusta al volumen de tu carta. Desde 30 hasta más de 500 referencias." },
+    { q: "¿Cuántas referencias admite cada plan?", a: "No hay un límite rígido. El precio se ajusta al volumen de tu carta. Desde 80 hasta más de 500 referencias." },
     { q: "¿Los comensales necesitan descargar una app?", a: "No. La carta digital se abre desde el navegador del móvil escaneando un QR. Sin descargas." },
     { q: "¿Puedo probar Winerim antes de contratar?", a: "Sí. Ofrecemos un análisis gratuito de tu carta de vinos y una demo personalizada con tu carta real." },
     { q: "¿Qué necesito para empezar?", a: "Tu carta de vinos actual (en cualquier formato) y 15 minutos para una llamada de configuración. Nosotros nos encargamos del resto." },
