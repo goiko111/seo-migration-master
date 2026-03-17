@@ -16,6 +16,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import InternalLinks from "@/components/seo/InternalLinks";
 import NextSteps from "@/components/seo/NextSteps";
 import { useLanguage } from "@/i18n/LanguageContext";
+import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 
 /* ─── helpers ─── */
 const em = (html: string) => html.replace(/<em>/g, '<span class="text-gradient-wine italic">').replace(/<\/em>/g, '</span>');
