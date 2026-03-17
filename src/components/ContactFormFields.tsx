@@ -429,7 +429,7 @@ const ContactFormFields = ({
           {showCity && (
             <div>
               <Label htmlFor="city" className="text-sm font-medium">
-                {l.city} {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                {l.city} {cityRequired && <span className="text-destructive">*</span>}
               </Label>
               <div className="relative mt-1.5">
                 <MapPin size={16} className={iconWrap} />
