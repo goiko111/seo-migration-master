@@ -100,7 +100,7 @@ const Navbar = memo(() => {
           items: [
             { label: t.nav_res_estrategia_copa, href: localePath("/recursos/plantilla-estrategia-vinos-por-copa") },
             { label: t.nav_res_vinos_muertos, href: localePath("/recursos/checklist-deteccion-vinos-muertos") },
-            { label: t.nav_res_formacion_sala, href: localePath("/recursos/plantilla-formacion-expres-sala") },
+            { label: t.nav_res_formacion_sala, href: localePath("/recursos/plantilla-formacion-equipo-sala") },
             { label: t.nav_see_all_resources, href: localePath("/recursos") },
           ],
         },
