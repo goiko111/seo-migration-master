@@ -129,6 +129,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/hoteles": "/fr/solutions/hotels",
     "/soluciones/restaurantes-sin-sumiller": "/fr/solutions/sans-sommelier",
     "/soluciones/carta-amplia": "/fr/solutions/grande-carte-des-vins",
+    "/soluciones/carta-crecimiento": "/fr/solutions/carte-en-croissance",
     "/sobre-winerim": "/fr/a-propos",
     "/benchmarks-playbooks": "/fr/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/fr/outils/calculateur-prix-vin-au-verre",

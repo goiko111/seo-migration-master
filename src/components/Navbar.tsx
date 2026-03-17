@@ -77,6 +77,7 @@ const Navbar = memo(() => {
             { label: t.nav_sol_hotels, href: localePath("/soluciones/hoteles") },
             { label: t.nav_sol_groups, href: localePath("/soluciones/grupos-restauracion") },
             { label: t.nav_sol_no_sommelier, href: localePath("/soluciones/restaurantes-sin-sumiller") },
+            { label: t.nav_sol_growing_list, href: localePath("/soluciones/carta-crecimiento") },
             { label: t.nav_sol_large_list, href: localePath("/soluciones/carta-amplia") },
           ],
         },
