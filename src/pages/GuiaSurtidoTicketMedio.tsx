@@ -1,7 +1,7 @@
 import GuideTemplate from "@/components/templates/GuideTemplate";
 import type { GuidePageData } from "@/components/templates/GuideTemplate";
 
-const data: GuidePageData = {
+const es: GuidePageData = {
   slug: "guias/como-decidir-surtido-segun-ticket-medio-tipo-local",
   metaTitle: "Cómo Decidir el Surtido de Vinos Según Ticket Medio y Tipo de Local | Winerim",
   metaDescription: "Guía para seleccionar el surtido de vinos ideal según el ticket medio de tu restaurante, el perfil del cliente y el tipo de cocina. Framework práctico con ejemplos.",
@@ -112,5 +112,334 @@ const data: GuidePageData = {
   ctaFinalDescription: "Análisis de surtido, escalera de precios, detección de huecos y redundancias. Todo basado en datos reales de tu restaurante.",
 };
 
-const GuiaSurtidoTicketMedio = () => <GuideTemplate data={data} />;
+const en: GuidePageData = {
+  slug: "en/guides/how-to-choose-wine-assortment-by-average-check",
+  metaTitle: "How to Choose Wine Assortment by Average Check & Restaurant Type | Winerim",
+  metaDescription: "Guide to selecting the ideal wine assortment based on your restaurant's average check, guest profile and cuisine type. Practical framework with examples.",
+  heroTitle: "How to choose your wine assortment by average check and restaurant type",
+  heroSubtitle: "There's no perfect wine list. There's the perfect list for your restaurant. Assortment should reflect who dines in your room, how much they spend and what they expect.",
+  heroBadge: "Strategic guide",
+  breadcrumbParent: { label: "Guides", href: "/en/guides" },
+  tableOfContents: [
+    "Why assortment depends on average check",
+    "4 restaurant profiles and their ideal assortment",
+    "Framework: from average check to price ladder",
+    "How many references per price tier",
+    "Common assortment composition mistakes",
+    "Assortment validation checklist",
+  ],
+  sections: [
+    {
+      heading: "Why assortment depends on average check",
+      content: "The average check is the most reliable indicator of your guests' spending power and expectations. A diner spending €25 per person doesn't expect the same as one spending €80.\n\nIf your average check is €30 and you list wines at €60, those wines won't sell — not because they're bad, but because they cost twice what your guest spends on the entire meal.\n\nRule of thumb: your best-selling wine should cost between 30% and 50% of your per-person average check. That's the price sweet spot where most guests feel comfortable.",
+      tips: [
+        "Average check €25-35/person → best-seller between €8-16 (glass €4-6).",
+        "Average check €40-60/person → best-seller between €18-28 (glass €6-10).",
+        "Average check €70+/person → best-seller between €25-40 (glass €8-14).",
+        "If your best-seller isn't in that range, your assortment is misaligned with your audience.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4 restaurant profiles and their ideal assortment",
+      content: "Not all restaurants with the same average check need the same assortment. Cuisine type, location and guest profile also matter.",
+      tips: [
+        "Casual dining / gastrobar (check €20-35): 15-25 references, 60% reds, glass focus, max 2 price tiers, nothing above €35/bottle. Guests want simplicity.",
+        "Chef-driven restaurant (check €40-65): 30-50 references, white/red balance, 3 price tiers, premium glass as lever, small-producer wines for differentiation.",
+        "Fine dining (check €70+): 60-120+ references, depth by region/style, list as experience, minimum 4 price tiers, pairing suggestions, iconic wines as aspirational anchors.",
+        "Hotel / resort (variable check): dual list — simplified for casual outlet and in-depth for the gastronomic. Minibar and room service need separate curation.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Framework: from average check to price ladder",
+      content: "The price ladder is the distribution of your wines by retail-price tiers. A well-designed assortment has a clear ladder that guides the guest from accessible to premium.\n\nHow to build it:\n1. Calculate your sweet spot (30-50% of average check).\n2. Define 3-4 price tiers:\n   • Entry: 60-70% of sweet spot → for price-sensitive guests.\n   • Sweet spot: the range where you expect 50% of sales.\n   • Premium: 150-200% of sweet spot → for special occasions.\n   • Aspirational (optional): 300%+ of sweet spot → 2-3 iconic references.\n3. Distribute references: concentrate on the sweet spot, fewer at extremes.\n\nExample for €45 average check:\n• Entry: €14-18 (5 references)\n• Sweet spot: €20-28 (12 references)\n• Premium: €32-45 (6 references)\n• Aspirational: €55-90 (3 references)\n• Total: 26 well-distributed references.",
+      tips: [
+        "50-60% of your references should sit in the sweet-spot tier.",
+        "The entry tier exists so guests don't feel forced. Don't eliminate it.",
+        "Aspirational references don't need to sell much. Their job is to anchor the perceived value of your list.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "How many references per price tier",
+      content: "More references doesn't mean a better list. It means more management complexity, more tied-up stock and harder decisions for the guest.\n\nRule of thumb by venue type:\n• Casual / gastrobar: 15-25 total references\n• Mid-range restaurant: 25-45 references\n• Gastronomic restaurant: 40-80 references\n• Fine dining with cellar: 80-150+ references\n\nWithin each price tier:\n• Entry tier: 3-5 references (few but good)\n• Sweet spot: 8-15 references (highest concentration)\n• Premium: 4-8 references\n• Aspirational: 2-4 references\n\nKey criterion: every reference must have a reason to be there. If you can't explain in one sentence why a wine is on your list, it probably shouldn't be.",
+      tips: [
+        "If you have more than 5 by-the-glass options, you're managing too much waste.",
+        "Every reference you add dilutes attention from the rest. More is not better.",
+        "Check: if any tier has over 40% of references with no sale in 30 days, you have too many.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Common assortment composition mistakes",
+      content: "These are the most common mistakes we see in assortment composition, regardless of restaurant type.",
+      tips: [
+        "Ego assortment: choosing wines the owner or sommelier likes instead of wines suited to the guest. Your list is not a personal collection.",
+        "Price gap: nothing between €18 and €35 when your sweet spot is right there. The guest goes for the cheapest option or skips wine entirely.",
+        "Redundancy: 4 Ribera del Duero Crianza in the same price range. They don't compete with competitors — they compete with each other.",
+        "No glass option: a restaurant with a €30 average check offering bottles only. The guest doesn't want to commit to €25 of wine.",
+        "Static list: the same assortment for 12 months. No seasonality, no novelty, no reason for guests to explore.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Assortment validation checklist",
+      content: "Before finalizing your list, run this 8-point checklist to validate balance.",
+      tips: [
+        "✓ Is your best-seller in the sweet-spot price tier (30-50% of average check)?",
+        "✓ Do you have at least 2 glass options in the entry tier?",
+        "✓ Does each price tier have enough options without redundancies?",
+        "✓ Have fewer than 20% of references gone unsold for 60+ days?",
+        "✓ Is there at least 1 white and 1 red per price tier?",
+        "✓ Are aspirational references recognizable to your audience?",
+        "✓ Can you explain in one sentence why each wine is on the list?",
+        "✓ Is the total number of references manageable for your team and storage?",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    { q: "What if my average check varies a lot between lunch and dinner?", a: "Consider a slightly different list or, at minimum, different glass selections. If dinner runs 40% higher, premium wines will sell more at night." },
+    { q: "Should I include wines I know are great but don't sell?", a: "A wine that doesn't sell isn't 'good' for your list, however excellent it may be objectively. Give it 3 months with active recommendation. If it still doesn't work, replace it." },
+    { q: "How do I know if I have too many references?", a: "If more than 25% of your list hasn't sold in 30 days, you have too many. Trim and focus." },
+    { q: "Can Winerim help me define my assortment?", a: "Yes. Winerim analyses your average check, guest profile and historical performance to suggest the ideal list composition." },
+  ],
+  relatedTools: [
+    { label: "Wine list analyzer", url: "/en/wine-list-analyzer" },
+    { label: "Margin calculator", url: "/en/wine-margin-calculator" },
+    { label: "Wine mapping template", url: "/en/resources/wine-mapping-template" },
+  ],
+  relatedGuides: [
+    { label: "How to design a profitable wine list", url: "/en/blog/how-to-design-profitable-wine-list" },
+    { label: "How many wines should a list have", url: "/en/blog/how-many-wines-restaurant-list" },
+    { label: "How to detect cannibalization", url: "/en/guides/how-to-detect-wine-cannibalization" },
+  ],
+  ctaPrimaryText: "Analyze my list for free",
+  ctaPrimaryUrl: "/en/wine-list-analyzer",
+  ctaSecondaryText: "Request demo",
+  ctaSecondaryUrl: "/en/demo",
+  ctaFinalTitle: "Winerim tells you exactly which wines your list needs",
+  ctaFinalDescription: "Assortment analysis, price ladder, gap and redundancy detection. All based on real data from your restaurant.",
+};
+
+const it: GuidePageData = {
+  slug: "it/guide/come-scegliere-assortimento-vini-scontrino-medio",
+  metaTitle: "Come Scegliere l'Assortimento Vini in Base allo Scontrino Medio | Winerim",
+  metaDescription: "Guida per selezionare l'assortimento ideale di vini in base allo scontrino medio del tuo ristorante, al profilo del cliente e al tipo di cucina.",
+  heroTitle: "Come scegliere l'assortimento vini in base allo scontrino medio e al tipo di locale",
+  heroSubtitle: "Non esiste la carta dei vini perfetta. Esiste quella perfetta per il tuo ristorante. L'assortimento deve riflettere chi mangia nella tua sala, quanto spende e cosa si aspetta.",
+  heroBadge: "Guida strategica",
+  breadcrumbParent: { label: "Guide", href: "/it/guide" },
+  tableOfContents: [
+    "Perché l'assortimento dipende dallo scontrino medio",
+    "4 profili di ristorante e il loro assortimento ideale",
+    "Framework: dallo scontrino medio alla scala dei prezzi",
+    "Quante referenze per fascia di prezzo",
+    "Errori frequenti nella composizione dell'assortimento",
+    "Checklist di validazione dell'assortimento",
+  ],
+  sections: [
+    {
+      heading: "Perché l'assortimento dipende dallo scontrino medio",
+      content: "Lo scontrino medio è l'indicatore più affidabile del potere d'acquisto e delle aspettative dei tuoi clienti. Un commensale che spende 25€ a persona non si aspetta lo stesso di uno che ne spende 80.\n\nSe il tuo scontrino medio è 30€ e hai vini da 60€ in carta, quei vini non si venderanno. Non perché sono cattivi, ma perché costano il doppio di quanto il cliente spende per l'intero pasto.\n\nRegola generale: il vino più venduto della tua carta dovrebbe costare tra il 30% e il 50% dello scontrino medio per persona.",
+      tips: [
+        "Scontrino medio 25-35€/persona → vino più venduto tra 8-16€ (calice 4-6€).",
+        "Scontrino medio 40-60€/persona → vino più venduto tra 18-28€ (calice 6-10€).",
+        "Scontrino medio 70€+/persona → vino più venduto tra 25-40€ (calice 8-14€).",
+        "Se il tuo vino più venduto non rientra in quella fascia, il tuo assortimento è disallineato con il tuo pubblico.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4 profili di ristorante e il loro assortimento ideale",
+      content: "Non tutti i ristoranti con lo stesso scontrino medio hanno bisogno dello stesso assortimento. Il tipo di cucina, la posizione e il profilo del cliente contano.",
+      tips: [
+        "Casual dining / gastrobar (scontrino 20-35€): 15-25 referenze, 60% rossi, focus calici, max 2 fasce di prezzo, niente sopra 35€/bottiglia.",
+        "Ristorante d'autore (scontrino 40-65€): 30-50 referenze, equilibrio bianco/rosso, 3 fasce, calice premium come leva, piccoli produttori come differenziazione.",
+        "Fine dining (scontrino 70€+): 60-120+ referenze, profondità per regione/stile, carta come esperienza, minimo 4 fasce, abbinamenti suggeriti.",
+        "Hotel / resort (scontrino variabile): carta doppia — semplificata per il casual e approfondita per il gastronomico.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Framework: dallo scontrino medio alla scala dei prezzi",
+      content: "La scala dei prezzi è la distribuzione dei vini per fasce di PVP. Un assortimento ben progettato ha una scala chiara che guida il commensale dall'opzione accessibile alla premium.\n\nCome costruirla:\n1. Calcola il tuo sweet spot (30-50% dello scontrino medio).\n2. Definisci 3-4 fasce di prezzo:\n   • Ingresso: 60-70% del sweet spot\n   • Sweet spot: la fascia dove ti aspetti il 50% delle vendite\n   • Premium: 150-200% del sweet spot\n   • Aspirazionale (opzionale): 300%+ del sweet spot\n3. Distribuisci le referenze: più concentrazione nel sweet spot.\n\nEsempio per scontrino medio 45€:\n• Ingresso: 14-18€ (5 referenze)\n• Sweet spot: 20-28€ (12 referenze)\n• Premium: 32-45€ (6 referenze)\n• Aspirazionale: 55-90€ (3 referenze)\n• Totale: 26 referenze ben distribuite.",
+      tips: [
+        "Il 50-60% delle referenze dovrebbe stare nella fascia sweet spot.",
+        "La fascia d'ingresso esiste perché il cliente non si senta forzato. Non eliminarla.",
+        "Le referenze aspirazionali non devono vendere molto. La loro funzione è ancorare il valore percepito della carta.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Quante referenze per fascia di prezzo",
+      content: "Più referenze non significa carta migliore. Significa più complessità gestionale, più stock immobilizzato e più decisioni difficili per il commensale.\n\nRegola d'oro per tipo di locale:\n• Casual / gastrobar: 15-25 referenze totali\n• Ristorante medio: 25-45 referenze\n• Ristorante gastronomico: 40-80 referenze\n• Fine dining con cantina: 80-150+ referenze\n\nAll'interno di ogni fascia:\n• Fascia d'ingresso: 3-5 referenze\n• Sweet spot: 8-15 referenze\n• Premium: 4-8 referenze\n• Aspirazionale: 2-4 referenze",
+      tips: [
+        "Se hai più di 5 referenze al calice, stai gestendo troppo spreco.",
+        "Ogni referenza aggiunta diluisce l'attenzione sulle altre. Di più non è meglio.",
+        "Verifica: se una fascia ha oltre il 40% di referenze senza vendita in 30 giorni, ne hai troppe.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Errori frequenti nella composizione dell'assortimento",
+      content: "Questi sono gli errori più comuni nella composizione dell'assortimento, indipendentemente dal tipo di ristorante.",
+      tips: [
+        "Assortimento d'ego: scegliere vini che piacciono al titolare o al sommelier invece di vini adatti al cliente.",
+        "Buco di prezzo: niente tra 18€ e 35€ quando il tuo sweet spot è proprio lì.",
+        "Ridondanza: 4 Chianti Classico Riserva nella stessa fascia di prezzo. Non competono col mercato, competono tra loro.",
+        "Manca il calice: un ristorante con scontrino medio 30€ che offre solo bottiglie.",
+        "Carta statica: lo stesso assortimento per 12 mesi. Nessuna stagionalità, nessuna novità.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Checklist di validazione dell'assortimento",
+      content: "Prima di chiudere la carta, fai questo checklist di 8 punti per verificare l'equilibrio.",
+      tips: [
+        "✓ Il tuo vino più venduto è nella fascia sweet spot (30-50% dello scontrino medio)?",
+        "✓ Hai almeno 2 opzioni al calice nella fascia d'ingresso?",
+        "✓ Ogni fascia di prezzo ha abbastanza opzioni senza ridondanze?",
+        "✓ Meno del 20% delle referenze è invenduto da oltre 60 giorni?",
+        "✓ C'è almeno 1 bianco e 1 rosso per fascia?",
+        "✓ Le referenze aspirazionali sono riconoscibili dal tuo pubblico?",
+        "✓ Puoi spiegare in una frase perché ogni vino è in carta?",
+        "✓ Il totale delle referenze è gestibile per il tuo team e il tuo magazzino?",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    { q: "E se lo scontrino medio varia molto tra pranzo e cena?", a: "Considera una carta leggermente diversa o, almeno, calici diversi. Se la cena ha uno scontrino 40% superiore, i vini premium venderanno di più la sera." },
+    { q: "Devo includere vini che so essere ottimi ma che non vendono?", a: "Un vino che non vende non è 'buono' per la tua carta. Dagli 3 mesi con raccomandazione attiva. Se non funziona, sostituiscilo." },
+    { q: "Come so se ho troppe referenze?", a: "Se più del 25% della carta non ha venduto in 30 giorni, ne hai troppe. Riduci e concentra." },
+    { q: "Winerim mi aiuta a definire l'assortimento?", a: "Sì. Winerim analizza scontrino medio, profilo cliente e performance storica per suggerirti la composizione ideale." },
+  ],
+  relatedTools: [
+    { label: "Analizzatore di carta", url: "/it/analisi-carta" },
+    { label: "Calcolatore margine", url: "/it/calcolatore-margine-vino" },
+  ],
+  relatedGuides: [
+    { label: "Come progettare una carta redditizia", url: "/it/blog/come-progettare-carta-vini-redditizia" },
+    { label: "Come rilevare la cannibalizzazione", url: "/it/guide/come-rilevare-cannibalizzazione-vini" },
+  ],
+  ctaPrimaryText: "Analizza la mia carta gratis",
+  ctaPrimaryUrl: "/it/analisi-carta",
+  ctaSecondaryText: "Richiedi demo",
+  ctaSecondaryUrl: "/it/demo",
+  ctaFinalTitle: "Winerim ti dice esattamente quali vini servono alla tua carta",
+  ctaFinalDescription: "Analisi dell'assortimento, scala dei prezzi, rilevamento di buchi e ridondanze. Tutto basato su dati reali del tuo ristorante.",
+};
+
+const fr: GuidePageData = {
+  slug: "fr/guides/comment-choisir-assortiment-vins-ticket-moyen",
+  metaTitle: "Comment Choisir l'Assortiment de Vins Selon le Ticket Moyen | Winerim",
+  metaDescription: "Guide pour sélectionner l'assortiment de vins idéal selon le ticket moyen de votre restaurant, le profil du client et le type de cuisine.",
+  heroTitle: "Comment choisir l'assortiment de vins selon le ticket moyen et le type d'établissement",
+  heroSubtitle: "Il n'existe pas de carte des vins parfaite. Il existe la carte parfaite pour votre restaurant. L'assortiment doit refléter qui mange dans votre salle, combien il dépense et ce qu'il attend.",
+  heroBadge: "Guide stratégique",
+  breadcrumbParent: { label: "Guides", href: "/fr/guides" },
+  tableOfContents: [
+    "Pourquoi l'assortiment dépend du ticket moyen",
+    "4 profils de restaurant et leur assortiment idéal",
+    "Framework : du ticket moyen à l'échelle de prix",
+    "Combien de références par tranche de prix",
+    "Erreurs fréquentes dans la composition de l'assortiment",
+    "Checklist de validation de l'assortiment",
+  ],
+  sections: [
+    {
+      heading: "Pourquoi l'assortiment dépend du ticket moyen",
+      content: "Le ticket moyen est l'indicateur le plus fiable du pouvoir d'achat et des attentes de vos clients. Un convive qui dépense 25€ par personne n'attend pas la même chose qu'un convive à 80€.\n\nSi votre ticket moyen est de 30€ et que vous proposez des vins à 60€, ces vins ne se vendront pas. Non parce qu'ils sont mauvais, mais parce qu'ils coûtent le double de ce que votre client dépense pour tout le repas.\n\nRègle générale : votre vin le plus vendu devrait coûter entre 30% et 50% de votre ticket moyen par personne.",
+      tips: [
+        "Ticket moyen 25-35€/personne → vin le plus vendu entre 8-16€ (verre 4-6€).",
+        "Ticket moyen 40-60€/personne → vin le plus vendu entre 18-28€ (verre 6-10€).",
+        "Ticket moyen 70€+/personne → vin le plus vendu entre 25-40€ (verre 8-14€).",
+        "Si votre vin le plus vendu n'est pas dans cette fourchette, votre assortiment est désaligné avec votre clientèle.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4 profils de restaurant et leur assortiment idéal",
+      content: "Tous les restaurants avec le même ticket moyen n'ont pas besoin du même assortiment. Le type de cuisine, la localisation et le profil client comptent aussi.",
+      tips: [
+        "Casual dining / bistrot (ticket 20-35€) : 15-25 références, 60% rouges, focus verres, max 2 tranches de prix.",
+        "Restaurant de cuisine d'auteur (ticket 40-65€) : 30-50 références, équilibre blanc/rouge, 3 tranches, verre premium comme levier.",
+        "Fine dining (ticket 70€+) : 60-120+ références, profondeur par région/style, carte comme expérience, minimum 4 tranches.",
+        "Hôtel / resort (ticket variable) : carte double — simplifiée pour le restaurant casual et approfondie pour le gastronomique.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Framework : du ticket moyen à l'échelle de prix",
+      content: "L'échelle de prix est la distribution de vos vins par tranches de PVC. Un assortiment bien conçu a une échelle claire qui guide le convive de l'option accessible vers la premium.\n\nComment la construire :\n1. Calculez votre sweet spot (30-50% du ticket moyen).\n2. Définissez 3-4 tranches :\n   • Entrée : 60-70% du sweet spot\n   • Sweet spot : la tranche où vous attendez 50% des ventes\n   • Premium : 150-200% du sweet spot\n   • Aspirationnel (optionnel) : 300%+ du sweet spot\n3. Distribuez les références : plus de concentration sur le sweet spot.\n\nExemple pour un ticket moyen de 45€ :\n• Entrée : 14-18€ (5 références)\n• Sweet spot : 20-28€ (12 références)\n• Premium : 32-45€ (6 références)\n• Aspirationnel : 55-90€ (3 références)\n• Total : 26 références bien distribuées.",
+      tips: [
+        "50-60% de vos références devraient se situer dans la tranche sweet spot.",
+        "La tranche d'entrée existe pour que le client ne se sente pas contraint. Ne l'éliminez pas.",
+        "Les références aspirationnelles n'ont pas besoin de beaucoup vendre. Leur fonction est d'ancrer la valeur perçue de votre carte.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Combien de références par tranche de prix",
+      content: "Plus de références ne signifie pas meilleure carte. Cela signifie plus de complexité de gestion, plus de stock immobilisé et plus de choix difficiles pour le convive.\n\nRègle d'or par type d'établissement :\n• Casual / bistrot : 15-25 références totales\n• Restaurant moyen : 25-45 références\n• Restaurant gastronomique : 40-80 références\n• Fine dining avec cave : 80-150+ références\n\nDans chaque tranche :\n• Tranche d'entrée : 3-5 références\n• Sweet spot : 8-15 références\n• Premium : 4-8 références\n• Aspirationnel : 2-4 références",
+      tips: [
+        "Si vous avez plus de 5 références au verre, vous gérez trop de perte.",
+        "Chaque référence ajoutée dilue l'attention sur les autres. Plus n'est pas mieux.",
+        "Vérifiez : si une tranche a plus de 40% de références sans vente en 30 jours, vous en avez trop.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Erreurs fréquentes dans la composition de l'assortiment",
+      content: "Voici les erreurs les plus courantes dans la composition de l'assortiment, quel que soit le type de restaurant.",
+      tips: [
+        "Assortiment d'ego : choisir des vins qui plaisent au propriétaire ou au sommelier plutôt que des vins adaptés au client.",
+        "Trou de prix : rien entre 18€ et 35€ alors que votre sweet spot est là.",
+        "Redondance : 4 Bordeaux Supérieur dans la même gamme de prix. Ils ne concurrencent pas la concurrence, ils se concurrencent entre eux.",
+        "Pas de verre : un restaurant avec un ticket moyen de 30€ qui ne propose que des bouteilles.",
+        "Carte statique : le même assortiment pendant 12 mois. Aucune saisonnalité, aucune nouveauté.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Checklist de validation de l'assortiment",
+      content: "Avant de finaliser votre carte, passez cette checklist en 8 points pour valider l'équilibre.",
+      tips: [
+        "✓ Votre vin le plus vendu est-il dans la tranche sweet spot (30-50% du ticket moyen) ?",
+        "✓ Avez-vous au moins 2 options au verre dans la tranche d'entrée ?",
+        "✓ Chaque tranche de prix a-t-elle suffisamment d'options sans redondances ?",
+        "✓ Moins de 20% des références sont-elles invendues depuis plus de 60 jours ?",
+        "✓ Y a-t-il au moins 1 blanc et 1 rouge par tranche ?",
+        "✓ Les références aspirationnelles sont-elles reconnaissables par votre clientèle ?",
+        "✓ Pouvez-vous expliquer en une phrase pourquoi chaque vin est sur la carte ?",
+        "✓ Le nombre total de références est-il gérable pour votre équipe et votre stockage ?",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    { q: "Et si mon ticket moyen varie beaucoup entre le déjeuner et le dîner ?", a: "Envisagez une carte légèrement différente ou, au minimum, des verres différents. Si le dîner a un ticket 40% supérieur, les vins premium se vendront mieux le soir." },
+    { q: "Dois-je inclure des vins que je sais excellents mais qui ne se vendent pas ?", a: "Un vin qui ne se vend pas n'est pas 'bon' pour votre carte. Donnez-lui 3 mois avec recommandation active. S'il ne fonctionne pas, remplacez-le." },
+    { q: "Comment savoir si j'ai trop de références ?", a: "Si plus de 25% de votre carte n'a pas vendu en 30 jours, vous en avez trop. Réduisez et concentrez." },
+    { q: "Winerim m'aide-t-il à définir l'assortiment ?", a: "Oui. Winerim analyse votre ticket moyen, profil client et performance historique pour vous suggérer la composition idéale." },
+  ],
+  relatedTools: [
+    { label: "Analyseur de carte", url: "/fr/analyse-carte" },
+    { label: "Calculateur de marge", url: "/fr/calculateur-marge-vin" },
+  ],
+  relatedGuides: [
+    { label: "Comment concevoir une carte rentable", url: "/fr/blog/comment-concevoir-carte-vins-rentable" },
+    { label: "Comment détecter la cannibalisation", url: "/fr/guides/comment-detecter-cannibalisation-vins" },
+  ],
+  ctaPrimaryText: "Analyser ma carte gratuitement",
+  ctaPrimaryUrl: "/fr/analyse-carte",
+  ctaSecondaryText: "Demander une démo",
+  ctaSecondaryUrl: "/fr/demo",
+  ctaFinalTitle: "Winerim vous dit exactement quels vins votre carte a besoin",
+  ctaFinalDescription: "Analyse d'assortiment, échelle de prix, détection de trous et redondances. Tout basé sur les données réelles de votre restaurant.",
+};
+
+const GuiaSurtidoTicketMedio = () => <GuideTemplate data={{ es, en, it, fr }} />;
 export default GuiaSurtidoTicketMedio;
