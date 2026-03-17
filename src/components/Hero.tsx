@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
+import { trackAction } from "@/lib/intentTracking";
 
 const Hero = () => {
   const { get } = useSharedPageContent();
