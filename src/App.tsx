@@ -52,6 +52,7 @@ const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller
 const RestaurantesGastronomicos = lazy(() => import("./pages/RestaurantesGastronomicos"));
 const WineBars = lazy(() => import("./pages/WineBars"));
 const CartaAmplia = lazy(() => import("./pages/CartaAmplia"));
+const CartaCrecimiento = lazy(() => import("./pages/CartaCrecimiento"));
 const Implantacion = lazy(() => import("./pages/Implantacion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
