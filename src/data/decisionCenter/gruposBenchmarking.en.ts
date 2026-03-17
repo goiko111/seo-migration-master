@@ -1,0 +1,177 @@
+import { Building2 } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const gruposBenchmarkingEN: DeepAreaContent = {
+  name: "Groups & Benchmarking",
+  tagline: "Govern the wine category at scale",
+  intro: "This section helps you make decisions about the wine category when you manage more than one venue. It is not about standardising for standardisation's sake: it is about detecting what works, where it works and why, so you can decide with data what is worth scaling, what needs correcting and what should be removed. Internal benchmarking is not a ranking: it is a governance tool.",
+  icon: Building2,
+  accent: "text-rose-500",
+  bg: "bg-rose-500/10",
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Comparing venues that are not comparable", porQueOcurre: "Because all venues are placed in the same ranking without grouping by type (casual, fine-dining, hotel, terrace). A fine-dining venue and a casual one do not operate the same way.", consecuencia: "You penalise the fine-dining venue for lower turnover or the casual for a lower ticket. The conclusions are useless and venue managers disengage from the process." },
+    { error: "Replicating wine lists between venues without considering context", porQueOcurre: "Because if something works in one venue it seems logical to copy it. But context (clientele, location, concept, team) determines the result.", consecuencia: "Dead stock multiplied by the number of target venues. Tied-up capital and a list that does not match the guest profile of that venue." },
+    { error: "Keeping references by inertia across all units", porQueOcurre: "Because removing a wine from the corporate list feels risky. Nobody wants to be the one who drops 'the usual Rioja'.", consecuencia: "References that do not sell in 3 out of 5 venues keep taking up space, stock and attention. The cost of inertia multiplies by the number of units." },
+    { error: "Over-standardising and losing the commercial logic of each venue", porQueOcurre: "Because standardisation simplifies central management. But an identical list in a coastal resort and an urban business venue makes no commercial sense.", consecuencia: "The venue loses its identity, the guest does not find what they expect and sales drop wherever the list does not match the guest profile." },
+    { error: "Not using data for expansion or withdrawal decisions", porQueOcurre: "Because assortment decisions are made based on supplier relationships, inertia or the F&B director's personal judgement, not on measured performance.", consecuencia: "Purchasing without criteria, bloated lists and invisible improvement opportunities. The group operates as a sum of independent venues, not as a system." },
+  ],
+  links: [
+    { label: "Solutions for groups", href: "/en/solutions/restaurant-groups", description: "How Winerim helps multi-unit operators govern the wine category", type: "solution" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Analytics engine with internal benchmarking, deviations and scoring per venue", type: "product" },
+    { label: "Winerim Supply", href: "/en/product/winerim-supply", description: "Centralised purchasing intelligence with overpricing alerts per unit", type: "product" },
+    { label: "Template: Restaurant group control", href: "/en/resources/restaurant-group-control-template", description: "Dashboard to compare key metrics across venues", type: "resource" },
+    { label: "Template: Monthly scorecard", href: "/en/resources/monthly-scorecard-template", description: "Structured monthly performance review per unit", type: "resource" },
+    { label: "Blog: Standardising wine across groups", href: "/en/article/estandarizar-oferta-vino-grupo-restauracion", description: "How to standardise without losing each venue's identity", type: "article" },
+    { label: "Multi-venue auditor", href: "/en/tools/multi-venue-wine-list-auditor", description: "Compare assortment, pricing and glass across venues within the same group", type: "tool" },
+  ],
+  miniCases: [
+    {
+      profile: "Group of 6 restaurants in 3 cities",
+      situation: "Each venue had its own list. The best venue had a 64 % margin; the worst, 41 %. Nobody knew because they were not comparing.",
+      action: "Implemented a unified monthly scorecard. Discovered that the weakest venue had 15 references that did not sell and prices 15 % below the group average.",
+      result: "In 4 months the lagging venue climbed to 56 % margin — simply by replicating the glass mix and pricing of the leader.",
+    },
+    {
+      profile: "Hotel chain with centralised F&B",
+      situation: "Purchasing was centralised but each hotel set prices freely. The same wine was €28 in one hotel and €19 in another.",
+      action: "Defined price bands by category and hotel type (urban vs resort). Each hotel has ±€2 flexibility within the band.",
+      result: "Brand consistency, a uniform 58 % margin across all hotels and stronger negotiation leverage through volume purchasing.",
+    },
+    {
+      profile: "Group of 4 casual-premium restaurants",
+      situation: "Each venue bought independently from the nearest supplier. The same wine cost between €5.20 and €7.80 depending on the venue. Nobody cross-referenced purchasing data.",
+      action: "Centralised purchasing for the 20 corporate references, negotiating on total group volume. Used Winerim Supply to detect overpricing per venue.",
+      result: "Average 14 % saving on purchasing costs. Capital freed: €6,400/quarter. Venues retain freedom for 30 % of the local list.",
+    },
+    {
+      profile: "Group of 8 venues mixing casual and fine-dining",
+      situation: "The 3 fine-dining venues had 62 % margin, but the 5 casual ones ranged from 38 % to 51 %. Corporate F&B did not understand the dispersion.",
+      action: "Separated benchmarking into two clusters (casual and fine-dining). Found that the worst-performing casual venues applied the same multiplier as the fine-dining instead of one adapted to their price range.",
+      result: "By adjusting multipliers per venue type, casual venues rose to 54–58 % margin in 2 months — without touching the list, only pricing.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "comparar-unidades",
+      title: "How to compare units effectively",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim has normalised your venue metrics by type so the comparison is fair.", whyMatters: "Without normalised comparison, data misleads: the highest-grossing venue may have the worst margin.", riskIfIgnored: "Each manager operates by their own criteria without detecting best practices or systemic issues." },
+      queSignifica: "Comparing units is not ordering venues from best to worst by revenue. It is cross-referencing normalised metrics (average margin, turnover, average wine ticket, glass/bottle ratio, % dead wines) between venues with comparable contexts. A fine-dining venue and a casual one are not compared the same way. A hotel unit and a street venue are different too. Useful comparison groups by type and measures deviations from the group average, not absolute values.",
+      porQueImporta: "Because without normalised comparison, data misleads. The highest-grossing venue may have the worst margin. The lowest seller may be the most efficient. Without internal benchmarking, each venue manager operates by their own criteria and there is no way to detect best practices or systemic issues.",
+      queHacer: [
+        "Group your venues by type (casual, fine-dining, hotel, terrace) before comparing.",
+        "Define 5–6 common KPIs: average margin, turnover, % dead wines, average wine ticket, glass/bottle ratio, average purchasing cost.",
+        "Calculate the group average by type and measure each venue's deviation from it.",
+        "Use the Group Control Template to structure the comparison monthly.",
+      ],
+      errores: [
+        { mistake: "Comparing venues of different types using the same benchmarks", consequence: "You penalise the fine-dining venue for lower turnover than the casual. They are not comparable." },
+        { mistake: "Using revenue alone as the comparison metric", consequence: "The highest-grossing venue may generate the worst margin. Revenue is not profit." },
+        { mistake: "Not normalising by number of references or list size", consequence: "A venue with 300 references and one with 80 cannot be read the same way without adjustment." },
+      ],
+    },
+    {
+      id: "metricas-por-local",
+      title: "Which metrics to track per venue",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim has generated a uniform 6-KPI dashboard for each of your venues.", whyMatters: "If each venue measures differently, you cannot govern. Group decisions require comparable data.", riskIfIgnored: "Each venue reports what suits it. You do not detect deviations until they become crises." },
+      queSignifica: "Each venue must be readable through a minimum set of metrics that reveal its commercial health in the wine category. You do not need 30 indicators: you need the right 6. Weighted average margin (not theoretical — real, after discounts and waste), average turnover per reference, percentage of dead wines (no sale in 60+ days), average wine ticket per table, glass/bottle ratio and average purchasing cost per reference.",
+      porQueImporta: "Because if each venue reports different metrics or none at all, you cannot govern. Group decisions require comparable data. If one venue measures gross margin and another net margin, the comparison is useless. The first step in managing a group is standardising what is measured and how.",
+      queHacer: [
+        "Define a minimum dashboard of 6 identical KPIs for all venues.",
+        "Make sure everyone calculates margin the same way (same cost criteria).",
+        "Review these KPIs monthly with the Monthly Scorecard.",
+        "Identify the 2–3 venues that deviate most from the average on each metric and investigate why.",
+      ],
+      errores: [
+        { mistake: "Letting each venue define its own metrics", consequence: "You cannot compare. Each measures what suits them and the data cannot be cross-referenced." },
+        { mistake: "Measuring too many indicators without prioritising", consequence: "Analysis paralysis. 30 KPIs nobody looks at equal 0 KPIs." },
+        { mistake: "Not distinguishing theoretical margin from real margin", consequence: "You think a venue has 68 % margin, but with real waste and discounts it is 52 %." },
+      ],
+    },
+    {
+      id: "referencias-que-funcionan",
+      title: "How to detect references that actually work and where",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim has cross-referenced performance by reference across all your venues to identify what works and where.", whyMatters: "Scaling what works multiplies the impact. But doing it without context multiplies the error.", riskIfIgnored: "You replicate blindly or withdraw without criteria. You miss the chance to understand your guest per venue." },
+      queSignifica: "A reference 'that works' is not just one that sells: it is one that sells with good margin, rotates at a healthy pace and does not cannibalise others. Internal benchmarking lets you identify which references meet all three conditions at each venue. Sometimes a wine works in 3 out of 5 venues: that tells you something about the guest profile, not about the wine.",
+      porQueImporta: "Because scaling a reference that works in one venue but not another is a decision that requires context. If a Verdejo at €22 works in your coastal venues but not in urban ones, the conclusion is not 'the Verdejo does not work': it is that your urban guest has different preferences. Without this analysis, you replicate blindly or withdraw without criteria.",
+      queHacer: [
+        "Cross-reference the top 10 references at each venue with their margin and turnover.",
+        "Identify those that appear in the top across multiple venues: they are corporate reference candidates.",
+        "Analyse those that work only in one venue: is it the guest, the team, the price or the list?",
+        "Use Winerim Core to visualise cross-performance by reference and venue.",
+      ],
+      errores: [
+        { mistake: "Assuming what works in one venue works in all", consequence: "You scale a reference that does not fit 3 of your 5 venues. Dead stock multiplied by 3." },
+        { mistake: "Measuring only sales without cross-referencing with margin", consequence: "Your star reference may be the one with the worst margin. Selling a lot is not selling well." },
+        { mistake: "Not investigating why a reference works in one place and not another", consequence: "You miss the chance to understand your guest per venue. That insight is worth more than the sale." },
+      ],
+    },
+    {
+      id: "cuando-replicar",
+      title: "When to replicate a reference to other venues",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim has detected references with sustained performance in one venue that could work in others with a similar profile.", whyMatters: "A well-executed replication multiplies returns. A poor one multiplies dead stock across multiple venues.", riskIfIgnored: "You miss opportunities to scale successes or, worse, replicate without data and create problems in multiple units." },
+      queSignifica: "Replicating a reference means adding it to another venue's list because it has demonstrated performance in one or more locations. But the decision is not automatic: it requires that the guest profile is comparable, the price fits the target list, there is room without creating cannibalisation and the supplier can serve that venue on the same terms.",
+      porQueImporta: "Because a well-executed replication multiplies the return of a good decision. But a poorly executed one multiplies the problem: dead stock across multiple venues, tied-up capital and a reference that 'should work' but does not because the context is different.",
+      queHacer: [
+        "Confirm that the reference has at least 3 months of good performance (margin + turnover) at the source venue.",
+        "Verify that the guest profile at the target venue is comparable to the source.",
+        "Check that the price fits the target venue's list architecture without duplicating a bracket.",
+        "Negotiate the same purchasing terms for the target venue before incorporating.",
+      ],
+      errores: [
+        { mistake: "Replicating after just one good month", consequence: "It may be seasonality or a large party that ordered it. One month is not a trend." },
+        { mistake: "Not checking whether the price bracket is already covered at the target venue", consequence: "You create cannibalisation. Now you have two references competing for the same guest." },
+        { mistake: "Replicating without negotiating terms for the new venue", consequence: "You buy from the same supplier but without the volume discount. Your margin at the target venue is worse." },
+      ],
+    },
+    {
+      id: "cuando-retirar-compra",
+      title: "When to withdraw a purchase from a unit",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim has identified references with no performance at specific venues: candidates for active withdrawal.", whyMatters: "In a group, a dead reference across 4 venues is 4 times the problem. Data-driven withdrawal is one of the most profitable decisions.", riskIfIgnored: "You maintain dead stock multiplied by the number of venues. The group's tied-up capital escalates." },
+      queSignifica: "Withdrawing a purchase means stopping replenishment of a reference at a specific venue. It does not mean the wine is bad: it means that at that venue, with that guest, at that price, it does not perform. Withdrawal indicators are: more than 60 days without a sale, real margin below the minimum threshold, or the existence of a better reference in the same bracket that is cannibalising it.",
+      porQueImporta: "Because every underperforming reference takes up list space, stock capital and team attention. In a group, a dead reference across 4 venues is 4 times the problem. Active withdrawal (data-driven, not inertia-driven) is one of the most profitable decisions a group F&B director can make.",
+      queHacer: [
+        "Review references with more than 45 days without a sale at each venue monthly.",
+        "Cross-reference with margin: if it also has low margin besides not rotating, it is an immediate withdrawal candidate.",
+        "Before withdrawing, check whether the problem is the wine or the list (is it well positioned? Does the team know it?).",
+        "Communicate the withdrawal to the floor team with context: why it is leaving and what replaces it.",
+      ],
+      errores: [
+        { mistake: "Waiting for stock to run out before withdrawing", consequence: "While you wait, capital remains tied up and the list stays unbalanced." },
+        { mistake: "Withdrawing without analysing why it did not work", consequence: "You introduce another reference in the same bracket that may fail for the same reason." },
+        { mistake: "Not communicating list changes to the floor team", consequence: "The server keeps recommending a wine that is no longer there. Or worse: recommends nothing because they do not know what is new." },
+      ],
+    },
+    {
+      id: "benchmarking-interno-externo",
+      title: "How to read internal and external benchmarking",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim compares your venues against each other (internal) and your group against the market (external) for full perspective.", whyMatters: "Without internal benchmarking you do not know who performs well. Without external, you do not know if your best venue is good or just the least bad.", riskIfIgnored: "You operate blind within your group and without market reference. Deviations are detected late." },
+      queSignifica: "Internal benchmarking compares your venues against each other: who performs best on each metric and why. External benchmarking compares your group against the market: is your average margin above or below the industry average? Is your turnover normal or exceptional? Both are necessary. Internal tells you where to improve within your group. External tells you whether your group as a whole is well positioned.",
+      porQueImporta: "Because without internal benchmarking you operate blind within your own group: you do not know who performs well or who needs help. And without external benchmarking you do not know if your 'best venue' is truly good or simply the least bad. The combination gives you a complete picture: internal improvement with market perspective.",
+      queHacer: [
+        "Run internal benchmarking monthly with the Monthly Scorecard: compare 6 KPIs across venues.",
+        "Identify the venues that lead on each metric and analyse what they do differently.",
+        "Use Winerim Core to access external benchmarking: compare your metrics with the industry average.",
+        "Cross both: if your best venue is below the market average, you have a systemic problem, not a local one.",
+      ],
+      errores: [
+        { mistake: "Running only internal benchmarking without external reference", consequence: "Your best venue may be below the market average. Without external context, you do not know." },
+        { mistake: "Using benchmarking as a punitive tool", consequence: "Venue managers stop sharing data. Benchmarking stops working." },
+        { mistake: "Comparing only once a year", consequence: "Deviations are detected late. A problem that lasts 6 months costs 6 times more than one detected in 30 days." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Compare your venues with the auditor",
+    href: "/en/tools/multi-venue-wine-list-auditor",
+    description: "Compare assortment, pricing and glass across units to detect deviations and best practices.",
+  },
+};
+
+export default gruposBenchmarkingEN;

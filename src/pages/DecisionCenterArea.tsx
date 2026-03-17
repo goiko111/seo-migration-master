@@ -32,6 +32,9 @@ import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 import vinoPorCopaEN from "@/data/decisionCenter/vinoPorCopa.en";
 import vinoPorCopaIT from "@/data/decisionCenter/vinoPorCopa.it";
 import vinoPorCopaFR from "@/data/decisionCenter/vinoPorCopa.fr";
+import gruposBenchmarkingEN from "@/data/decisionCenter/gruposBenchmarking.en";
+import gruposBenchmarkingIT from "@/data/decisionCenter/gruposBenchmarking.it";
+import gruposBenchmarkingFR from "@/data/decisionCenter/gruposBenchmarking.fr";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */
@@ -693,6 +696,12 @@ const DecisionCenterArea = () => {
     it: vinoPorCopaIT,
     fr: vinoPorCopaFR,
   };
+  const gruposByLang: Record<string, DeepAreaContent> = {
+    es: gruposBenchmarkingContent,
+    en: gruposBenchmarkingEN,
+    it: gruposBenchmarkingIT,
+    fr: gruposBenchmarkingFR,
+  };
 
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
@@ -701,7 +710,7 @@ const DecisionCenterArea = () => {
     "compras-reposicion": comprasByLang[lang] || comprasReposicionContent,
     "carta-equilibrio": cartaByLang[lang] || cartaEquilibrioContent,
     "vino-por-copa": copaByLang[lang] || vinoPorCopaContent,
-    "grupos-benchmarking": gruposBenchmarkingContent,
+    "grupos-benchmarking": gruposByLang[lang] || gruposBenchmarkingContent,
   };
 
   if (areaSlug && deepAreas[areaSlug]) {
