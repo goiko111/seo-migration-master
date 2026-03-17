@@ -247,11 +247,17 @@ export function classifyPath(pathname: string): { category: IntentCategory; leve
   // Exact match first
   if (PATH_INTENT_MAP[clean]) return PATH_INTENT_MAP[clean];
 
+  // Blog slug overrides — commercial intent articles
+  if (clean.startsWith("/blog/")) {
+    const slug = clean.replace("/blog/", "");
+    if (COMMERCIAL_BLOG_SLUGS.has(slug)) return { category: "blog_commercial", level: "medium" };
+    return { category: "blog_editorial", level: "low" };
+  }
+
   // Prefix match for dynamic routes
   if (clean.startsWith("/recursos/")) return { category: "resource_download", level: "medium" };
   if (clean.startsWith("/comparativa/")) return { category: "blog_commercial", level: "medium" };
   if (clean.startsWith("/benchmarks-playbooks/")) return { category: "blog_commercial", level: "medium" };
-  if (clean.startsWith("/blog/")) return { category: "blog_editorial", level: "low" };
   if (clean.startsWith("/guias/")) return { category: "blog_commercial", level: "low" };
   if (clean.startsWith("/herramientas/")) return { category: "tool", level: "medium" };
   if (clean.startsWith("/soluciones/")) return { category: "solution_vertical", level: "medium" };
