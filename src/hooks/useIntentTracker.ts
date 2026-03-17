@@ -105,6 +105,7 @@ export function useCTAClickTracker() {
  */
 export function trackResourceDownload(resourceSlug: string): void {
   trackAction("resource_download", "resource_download" as IntentCategory, resourceSlug);
+  ga.resourceDownload(resourceSlug);
 }
 
 /**
