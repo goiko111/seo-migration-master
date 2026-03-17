@@ -678,6 +678,12 @@ const DecisionCenterArea = () => {
     it: comprasReposicionIT,
     fr: comprasReposicionFR,
   };
+  const cartaByLang: Record<string, DeepAreaContent> = {
+    es: cartaEquilibrioContent,
+    en: cartaEquilibrioEN,
+    it: cartaEquilibrioIT,
+    fr: cartaEquilibrioFR,
+  };
 
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
