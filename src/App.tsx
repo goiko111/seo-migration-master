@@ -407,6 +407,19 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/prix-vin-restaurant`} element={<PrecioVinoRestaurante />} />
     <Route path={`${prefix}/vin-au-verre-restaurant`} element={<VinoPorCopa />} />
     <Route path={`${prefix}/intelligence-artificielle-restaurants`} element={<IARestaurantes />} />
+    {/* Editorial blog pages — all languages */}
+    <Route path={`${prefix}/how-to-create-a-wine-list`} element={<ComoHacerCartaVinos />} />
+    <Route path={`${prefix}/come-creare-una-carta-dei-vini`} element={<ComoHacerCartaVinos />} />
+    <Route path={`${prefix}/comment-creer-une-carte-des-vins`} element={<ComoHacerCartaVinos />} />
+    <Route path={`${prefix}/how-to-organize-wine-list`} element={<ComoOrganizarCarta />} />
+    <Route path={`${prefix}/come-organizzare-carta-vini`} element={<ComoOrganizarCarta />} />
+    <Route path={`${prefix}/comment-organiser-carte-des-vins`} element={<ComoOrganizarCarta />} />
+    <Route path={`${prefix}/how-to-design-profitable-wine-list`} element={<CartaVinosRentable />} />
+    <Route path={`${prefix}/come-progettare-carta-vini-redditizia`} element={<CartaVinosRentable />} />
+    <Route path={`${prefix}/comment-concevoir-carte-vins-rentable`} element={<CartaVinosRentable />} />
+    <Route path={`${prefix}/paper-vs-digital-wine-list`} element={<CartaPapelVsDigital />} />
+    <Route path={`${prefix}/carta-cartacea-vs-digitale`} element={<CartaPapelVsDigital />} />
+    <Route path={`${prefix}/carte-papier-vs-digitale`} element={<CartaPapelVsDigital />} />
   </>
 );
 
