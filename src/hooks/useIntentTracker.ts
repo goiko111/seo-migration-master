@@ -113,8 +113,10 @@ export function trackResourceDownload(resourceSlug: string): void {
  */
 export function trackFormStart(formType: string): void {
   trackAction("form_start", formType === "demo" ? "demo" : "contact", formType);
+  ga.formStart(formType);
 }
 
 export function trackFormSubmit(formType: string): void {
   trackAction("form_submit", formType === "demo" ? "demo" : "contact", formType);
+  ga.formSubmit(formType);
 }

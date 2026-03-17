@@ -30,6 +30,7 @@ const Footer = () => {
           </div>
           <Link
             to={localePath("/demo")}
+            onClick={() => ga.ctaClick("footer_demo", "/demo", "footer")}
             className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-7 py-3 rounded text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 shrink-0"
           >
             {t.footer_free_demo}

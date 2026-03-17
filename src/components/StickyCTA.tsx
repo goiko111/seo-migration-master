@@ -63,7 +63,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
             <div className="bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-lg shadow-black/10 px-4 py-3 flex items-center gap-3">
               <Link
                 to={ctaUrl}
-                onClick={() => trackAction("cta_click", "demo", `sticky_${pageType}`)}
+                onClick={() => { trackAction("cta_click", "demo", `sticky_${pageType}`); ga.ctaClick(`sticky_${pageType}`, ctaUrl, "sticky_bar"); }}
                 className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-wine/20 hover:shadow-md"
               >
                 {ctaText} <ArrowRight size={14} />

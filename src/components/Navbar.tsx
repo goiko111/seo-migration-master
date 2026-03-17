@@ -372,7 +372,7 @@ const Navbar = memo(() => {
                 <Link
                   to={localePath("/demo")}
                   className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => { setMobileOpen(false); ga.ctaClick("mobile_nav_demo", "/demo", "navbar_mobile"); }}
                 >
                   {t.nav_cta}
                 </Link>
