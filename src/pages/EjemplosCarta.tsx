@@ -104,7 +104,7 @@ const examples: CardExample[] = [
     icon: Star,
     title: "Restaurante gastronómico",
     type: "Alta cocina / Fine dining",
-    references: "80 – 150 referencias",
+    references: "80 – 200+ referencias",
     description: "Carta extensa organizada por regiones y subregiones, con secciones premium y selección del sommelier. Diseñada para ofrecer una experiencia completa de descubrimiento.",
     structure: [
       "Organizar por región principal y subapartados",

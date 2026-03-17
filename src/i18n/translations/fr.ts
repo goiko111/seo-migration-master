@@ -32,8 +32,8 @@ const fr: TranslationDict = {
   nav_sol_hotels: "Hôtels et resorts",
   nav_sol_groups: "Groupes de restauration",
   nav_sol_no_sommelier: "Sans sommelier",
-  nav_sol_growing_list: "Carte moyenne-haute (80–250 réf.)",
-  nav_sol_large_list: "Carte étendue (+250 réf.)",
+  nav_sol_growing_list: "Cartes avec profondeur",
+  nav_sol_large_list: "Cartes larges et complexes",
 
   nav_resources: "Ressources",
   nav_resources_learn: "Apprendre",
