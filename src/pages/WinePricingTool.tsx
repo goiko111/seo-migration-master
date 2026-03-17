@@ -231,6 +231,8 @@ const WinePricingTool = () => {
   const [restType, setRestType] = useState("casual");
   const [ticketRange, setTicketRange] = useState("mid");
   const [wineType, setWineType] = useState("mid");
+  const tracked = useRef(false);
+  const trackOnce = () => { if (!tracked.current) { tracked.current = true; trackAction("tool_use", "tool", "wine-pricing-tool"); } };
 
   useEffect(() => {
     const ld = document.createElement("script");
