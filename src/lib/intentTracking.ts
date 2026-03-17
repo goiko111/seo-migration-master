@@ -165,10 +165,13 @@ interface IntentScore {
   topCategories: IntentCategory[];
 }
 
-/* ── Check consent ─────────────────────────────────── */
+/* ── Check consent (uses shared analytics helper) ── */
 function hasAnalyticsConsent(): boolean {
-  const consent = localStorage.getItem("winerim_cookie_consent");
-  return consent === "accepted";
+  try {
+    return localStorage.getItem("winerim_cookie_consent") === "accepted";
+  } catch {
+    return false;
+  }
 }
 
 /* ── Push to dataLayer (GTM/HubSpot/Dealfront compatible) */
