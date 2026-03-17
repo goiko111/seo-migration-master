@@ -434,7 +434,7 @@ const ContactFormFields = ({
               <div className="relative mt-1.5">
                 <MapPin size={16} className={iconWrap} />
                 {native ? (
-                  <Input id="city" name="city" placeholder={l.cityPh} required={isDemo || isContact} maxLength={80} className={cls} />
+                  <Input id="city" name="city" placeholder={l.cityPh} required={cityRequired} maxLength={80} className={cls} />
                 ) : (
                   <Input id="city" placeholder={l.cityPh} {...register("city")} className={cls} />
                 )}
