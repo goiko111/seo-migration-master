@@ -16,16 +16,80 @@
 
 ---
 
-## 2. Consentimiento de Cookies
+## 2. Consentimiento de Cookies — Arquitectura
 
-Flujo implementado:
+### 2.1 Flujo de Consentimiento
 
-1. **index.html**: `gtag('consent', 'default', { analytics_storage: 'denied', ... })` antes del snippet GTM
-2. **CookieConsent.tsx**: al aceptar → `updateConsent(true)` → `gtag('consent', 'update', { analytics_storage: 'granted', ... })`
-3. **CookieConsent.tsx**: al rechazar → `updateConsent(false)` → storage sigue denegado
-4. **CookieConsent.tsx**: si ya aceptó previamente → `updateConsent(true)` en mount
+```
+┌─ Carga de página ────────────────────────────────────────────────┐
+│                                                                   │
+│  index.html <head> (síncrono, antes de GTM):                     │
+│    1. Lee localStorage("winerim_cookie_consent")                 │
+│    2. Si "accepted" → gtag('consent','default', {granted})       │
+│       Si otro/null → gtag('consent','default', {denied})         │
+│    3. wait_for_update: 0 si ya decidió, 500ms si pendiente       │
+│    4. ads_data_redaction: true, url_passthrough: true             │
+│    5. GTM se carga con el estado correcto desde el primer tag    │
+│                                                                   │
+│  React app (asíncrono):                                          │
+│    6. CookieConsent.tsx monta:                                    │
+│       - Si no hay decisión → muestra banner tras 1.5s            │
+│       - Si ya decidió → no hace nada (estado ya restaurado)      │
+│    7. Usuario acepta → localStorage + gtag('consent','update')   │
+│    8. Usuario rechaza → localStorage + gtag('consent','update')  │
+│                                                                   │
+│  dataLayer:                                                       │
+│    9. Todos los push() llegan a GTM siempre                      │
+│   10. GTM respeta consent mode → solo dispara tags si granted    │
+│   11. intentTracking.ts: localStorage score solo si accepted     │
+│                                                                   │
+└──────────────────────────────────────────────────────────────────┘
+```
 
-Compatibilidad: GA4 respeta Consent Mode v2. Los hits se envían en modo "cookieless" cuando está denegado (sin cookies, sin IDs de usuario). Al conceder, GA4 modela las conversiones retroactivamente.
+### 2.2 Estados de Consentimiento
+
+| Estado | localStorage | analytics_storage | ad_storage | Comportamiento |
+|---|---|---|---|---|
+| **Pendiente** | `null` | `denied` | `denied` | Banner visible. GTM cargado pero sin cookies. Hits cookieless con modelado. |
+| **Aceptado** | `"accepted"` | `granted` | `granted` | Tracking completo. Cookies GA4 + Ads. Enhanced conversions activas. |
+| **Rechazado** | `"rejected"` | `denied` | `denied` | Sin cookies. Pings básicos para modelado. No remarketing. |
+
+### 2.3 Qué funciona sin consentimiento
+
+| Funcionalidad | Sin consentimiento | Con consentimiento |
+|---|---|---|
+| dataLayer push (eventos) | ✅ Se envían | ✅ Se envían |
+| GA4 page_view | ✅ Cookieless (modelado) | ✅ Completo con cookies |
+| GA4 generate_lead | ✅ Cookieless (modelado) | ✅ Completo |
+| Google Ads conversions | ✅ Modelado (~70% precisión) | ✅ Completo + enhanced |
+| Enhanced conversions (email/phone hash) | ❌ No se envían | ✅ Se envían |
+| Remarketing / audiencias | ❌ No se crean | ✅ Se crean |
+| Intent scoring (localStorage) | ❌ No se almacena | ✅ Se almacena |
+| winerim_intent event | ✅ Se envía a dataLayer | ✅ Se envía a dataLayer |
+| Dealfront / Leadfeeder | ✅ Lee dataLayer siempre | ✅ Lee dataLayer siempre |
+
+### 2.4 Dependencia de Tags GTM por Consentimiento
+
+| Tag GTM | Requiere consent | Consent type |
+|---|---|---|
+| GA4 Configuration | Sí | `analytics_storage` |
+| GA4 Events (generate_lead, cta_click, etc.) | Sí | `analytics_storage` |
+| Google Ads Remarketing | Sí | `ad_storage` + `ad_personalization` |
+| Google Ads Conversions | Sí | `ad_storage` + `ad_user_data` |
+| Enhanced Conversions | Sí | `ad_user_data` |
+| Custom HTML (Dealfront, etc.) | No* | *(manejan consent internamente)* |
+
+### 2.5 RGPD: Notas de Cumplimiento
+
+- ✅ Default `denied` antes de cualquier tag (no se ponen cookies sin consentimiento)
+- ✅ `ads_data_redaction: true` redacta datos de anuncios cuando no hay consent
+- ✅ `url_passthrough: true` mantiene atribución sin cookies (gclid en URL)
+- ✅ Banner visible con opciones claras de Aceptar / Rechazar
+- ✅ Enlace a política de privacidad
+- ✅ Nota de cumplimiento RGPD en el banner
+- ✅ El rechazo se persiste y respeta en recargas
+- ✅ No se almacena PII en localStorage sin consentimiento
+- ⬜ Considerar añadir opción de "Preferencias" para consentimiento granular (analytics vs ads) si se requiere por DPA
 
 ---
 
