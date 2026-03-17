@@ -462,11 +462,9 @@ const InteligenciaCompras = () => {
   const sb = supplyBridge[lang] || supplyBridge.es;
 
   return (
-    <>
-      <VerticalTemplate t={t} hideSupplyBlock />
-
+    <VerticalTemplate t={t} hideSupplyBlock>
       {/* ── Visual connection to Winerim Supply ── */}
-      <section className="section-padding -mt-8">
+      <section className="section-padding">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="relative rounded-2xl border border-emerald-500/20 bg-gradient-card p-8 md:p-10 overflow-hidden">
@@ -490,7 +488,7 @@ const InteligenciaCompras = () => {
           </ScrollReveal>
         </div>
       </section>
-    </>
+    </VerticalTemplate>
   );
 };
 export default InteligenciaCompras;
