@@ -8,7 +8,14 @@ const gruposBenchmarkingContent: DeepAreaContent = {
   icon: Building2,
   accent: "text-rose-500",
   bg: "bg-rose-500/10",
-  audiences: ["grupo", "direccion"],
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Comparar locales que no son comparables", porQueOcurre: "Porque se mete a todos los locales en el mismo ranking sin agrupar por tipología (casual, gastro, hotel, terraza). Un gastronómico y un casual no operan igual.", consecuencia: "Penalizas al gastronómico por tener menos rotación o al casual por menor ticket. Las conclusiones no sirven y los directores de local se desconectan del proceso." },
+    { error: "Replicar cartas entre locales sin tener en cuenta el contexto", porQueOcurre: "Porque si algo funciona en un local, parece lógico copiarlo. Pero el contexto (cliente, ubicación, concepto, equipo) determina el resultado.", consecuencia: "Stock muerto multiplicado por el número de locales destino. Capital inmovilizado y una carta que no encaja con el comensal de ese local." },
+    { error: "Mantener referencias por inercia en todas las unidades", porQueOcurre: "Porque retirar un vino de la carta corporativa parece arriesgado. Nadie quiere ser quien quite 'el Rioja de siempre'.", consecuencia: "Referencias que no venden en 3 de 5 locales siguen ocupando espacio, stock y atención. El coste de inercia se multiplica por el número de unidades." },
+    { error: "Estandarizar demasiado y perder la lógica comercial de cada local", porQueOcurre: "Porque la estandarización simplifica la gestión central. Pero una carta idéntica en un resort de costa y un urbano de negocio no tiene sentido comercial.", consecuencia: "El local pierde identidad, el comensal no encuentra lo que espera y las ventas bajan donde la carta no encaja con el perfil de cliente." },
+    { error: "No usar datos para decisiones de expansión o retirada", porQueOcurre: "Porque las decisiones de surtido se toman por relación con proveedores, por inercia o por criterio personal del F&B, no por rendimiento medido.", consecuencia: "Compras sin criterio, cartas infladas y oportunidades de mejora invisibles. El grupo opera como suma de locales independientes, no como sistema." },
+  ],
   links: [
     { label: "Soluciones para grupos", href: "/soluciones/grupos-restauracion", description: "Cómo Winerim ayuda a grupos multiunidad a gobernar la categoría vino", type: "solution" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "Motor analítico con benchmarking interno, desviaciones y scoring por local", type: "product" },
