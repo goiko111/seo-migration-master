@@ -266,6 +266,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/product/dynamic-intelligence`} element={<InteligenciaDinamica />} />
     <Route path={`${prefix}/prodotto/intelligenza-dinamica`} element={<InteligenciaDinamica />} />
     <Route path={`${prefix}/produit/intelligence-dynamique`} element={<InteligenciaDinamica />} />
+    <Route path={`${prefix}/product/winerim-core`} element={<WinerimCore />} />
+    <Route path={`${prefix}/prodotto/winerim-core`} element={<WinerimCore />} />
+    <Route path={`${prefix}/produit/winerim-core`} element={<WinerimCore />} />
+    <Route path={`${prefix}/product/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/prodotto/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/produit/winerim-supply`} element={<WinerimSupply />} />
     <Route path={`${prefix}/privacy`} element={<Privacidad />} />
     <Route path={`${prefix}/confidentialite`} element={<Privacidad />} />
     <Route path={`${prefix}/terms`} element={<Terminos />} />
