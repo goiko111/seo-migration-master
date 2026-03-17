@@ -80,6 +80,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-detectar-canibalizacion-vinos-carta": "/en/guides/how-to-detect-wine-cannibalization",
     "/guias/como-revisar-carta-vinos-cada-mes": "/en/guides/how-to-review-wine-list-monthly",
     "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante": "/en/guides/how-to-improve-wine-rotation-in-restaurants",
+    "/como-vender-mas-vino-en-un-restaurante": "/en/how-to-sell-more-wine-in-restaurants",
+    "/precio-vino-restaurante": "/en/wine-pricing-restaurant",
+    "/vino-por-copa-restaurante": "/en/wine-by-glass-restaurant",
+    "/inteligencia-artificial-restaurantes": "/en/artificial-intelligence-restaurants",
   },
   it: {
     "/": "/it",
