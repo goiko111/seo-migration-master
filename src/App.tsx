@@ -432,6 +432,13 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/guides/wine-pairing-strategy-restaurants`} element={<EstrategiaMaridaje />} />
     <Route path={`${prefix}/guide/strategia-abbinamento-vino-ristorante`} element={<EstrategiaMaridaje />} />
     <Route path={`${prefix}/guides/strategie-accords-mets-vins-restaurant`} element={<EstrategiaMaridaje />} />
+    {/* CartaNoVende */}
+    <Route path={`${prefix}/problems/wine-list-not-selling`} element={<CartaNoVende />} />
+    <Route path={`${prefix}/problemi/carta-vini-non-vende`} element={<CartaNoVende />} />
+    <Route path={`${prefix}/problemes/carte-des-vins-ne-vend-pas`} element={<CartaNoVende />} />
+    {/* SoftwareCartaVinos */}
+    <Route path={`${prefix}/software-carta-vini`} element={<SoftwareCartaVinos />} />
+    <Route path={`${prefix}/logiciel-carte-des-vins`} element={<SoftwareCartaVinos />} />
     {/* Resources — localized slug routes */}
     <Route path={`${prefix}/resources/:slug`} element={<ResourcePage />} />
     <Route path={`${prefix}/risorse/:slug`} element={<ResourcePage />} />
