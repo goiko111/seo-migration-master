@@ -48,6 +48,32 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/afiliate", canonical: `${BASE}/afiliate`, lang: "es", type: "product", intent: "programa afiliados winerim" },
   { path: "/que-es-winerim", canonical: `${BASE}/que-es-winerim`, lang: "es", type: "product", intent: "qué es winerim", cannibalizationGroup: "what-is-winerim" },
   { path: "/producto/inteligencia-dinamica", canonical: `${BASE}/producto/inteligencia-dinamica`, lang: "es", type: "product", intent: "inteligencia dinámica carta vinos IA" },
+  { path: "/producto/winerim-core", canonical: `${BASE}/producto/winerim-core`, lang: "es", type: "product", intent: "motor analítico carta vinos 26 módulos" },
+  { path: "/producto/winerim-supply", canonical: `${BASE}/producto/winerim-supply`, lang: "es", type: "product", intent: "inteligencia compras vino distribuidores" },
+  { path: "/sobre-winerim", canonical: `${BASE}/sobre-winerim`, lang: "es", type: "product", intent: "sobre winerim equipo metodología" },
+  { path: "/implantacion", canonical: `${BASE}/implantacion`, lang: "es", type: "product", intent: "implantación onboarding winerim" },
+
+  // ─────────────────────────────────────────────
+  // PRODUCT PAGES — LOCALIZED (EN / IT / FR)
+  // ─────────────────────────────────────────────
+  // Winerim Core
+  { path: "/en/product/winerim-core", canonical: `${BASE}/en/product/winerim-core`, lang: "en", type: "product", intent: "wine analytics engine 26 modules" },
+  { path: "/it/prodotto/winerim-core", canonical: `${BASE}/it/prodotto/winerim-core`, lang: "it", type: "product", intent: "motore analitico carta vini 26 moduli" },
+  { path: "/fr/produit/winerim-core", canonical: `${BASE}/fr/produit/winerim-core`, lang: "fr", type: "product", intent: "moteur analytique carte des vins 26 modules" },
+  // Winerim Supply
+  { path: "/en/product/winerim-supply", canonical: `${BASE}/en/product/winerim-supply`, lang: "en", type: "product", intent: "wine purchasing intelligence distributors" },
+  { path: "/it/prodotto/winerim-supply", canonical: `${BASE}/it/prodotto/winerim-supply`, lang: "it", type: "product", intent: "intelligenza acquisti vino distributori" },
+  { path: "/fr/produit/winerim-supply", canonical: `${BASE}/fr/produit/winerim-supply`, lang: "fr", type: "product", intent: "intelligence achats vin distributeurs" },
+  // Dynamic Intelligence
+  { path: "/en/product/dynamic-intelligence", canonical: `${BASE}/en/product/dynamic-intelligence`, lang: "en", type: "product", intent: "dynamic intelligence wine list AI" },
+  { path: "/it/prodotto/intelligenza-dinamica", canonical: `${BASE}/it/prodotto/intelligenza-dinamica`, lang: "it", type: "product", intent: "intelligenza dinamica carta vini IA" },
+  { path: "/fr/produit/intelligence-dynamique", canonical: `${BASE}/fr/produit/intelligence-dynamique`, lang: "fr", type: "product", intent: "intelligence dynamique carte des vins IA" },
+
+  // ─────────────────────────────────────────────
+  // DECISION CENTER (noindex — private client area)
+  // ─────────────────────────────────────────────
+  { path: "/decision-center", canonical: `${BASE}/decision-center`, lang: "es", type: "product", intent: "decision center clientes", noindex: true, notes: "Zona privada para clientes. No indexar." },
+  { path: "/decision-center/:areaSlug", canonical: `${BASE}/decision-center/:areaSlug`, lang: "es", type: "product", intent: "decision center área", noindex: true, notes: "Sub-páginas privadas del Decision Center." },
 
   // ─────────────────────────────────────────────
   // ENGLISH PAGES AT ROOT (⚠️ should migrate to /en/)
