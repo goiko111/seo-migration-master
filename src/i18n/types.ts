@@ -91,6 +91,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/hoteles": "/it/soluzioni/hotel",
     "/soluciones/restaurantes-sin-sumiller": "/it/soluzioni/senza-sommelier",
     "/soluciones/carta-amplia": "/it/soluzioni/carta-vini-ampia",
+    "/soluciones/carta-crecimiento": "/it/soluzioni/carta-vini-crescita",
     "/sobre-winerim": "/it/chi-siamo",
     "/benchmarks-playbooks": "/it/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/it/strumenti/calcolatrice-prezzo-vino-al-calice",
