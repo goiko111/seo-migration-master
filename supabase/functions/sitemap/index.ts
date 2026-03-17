@@ -33,6 +33,10 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/soluciones/grupos-restauracion': '/en/solutions/restaurant-groups',
     '/soluciones/aumentar-ticket-medio-restaurante': '/en/solutions/increase-average-ticket',
     '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
+    '/producto/winerim-core': '/en/product/winerim-core',
+    '/producto/winerim-supply': '/en/product/winerim-supply',
+    '/analisis-carta': '/en/wine-list-analysis',
+    '/calculadora-margen-vino': '/en/wine-margin-calculator',
   },
   it: {
     '/': '/it',
@@ -57,6 +61,10 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/soluciones/grupos-restauracion': '/it/soluzioni/gruppi-ristorazione',
     '/soluciones/aumentar-ticket-medio-restaurante': '/it/soluzioni/aumentare-scontrino-medio',
     '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
+    '/producto/winerim-core': '/it/prodotto/winerim-core',
+    '/producto/winerim-supply': '/it/prodotto/winerim-supply',
+    '/analisis-carta': '/it/analisi-carta',
+    '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
   },
   fr: {
     '/': '/fr',
@@ -81,6 +89,10 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
     '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
+    '/producto/winerim-core': '/fr/produit/winerim-core',
+    '/producto/winerim-supply': '/fr/produit/winerim-supply',
+    '/analisis-carta': '/fr/analyse-carte',
+    '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
   },
 };
 
@@ -136,7 +148,10 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/software-carta-de-vinos', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/que-es-winerim', priority: '0.6', changefreq: 'monthly', multilang: true },
   { esPath: '/producto/inteligencia-dinamica', priority: '0.7', changefreq: 'monthly', multilang: true },
-  { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: false },
+  { esPath: '/producto/winerim-core', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/producto/winerim-supply', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/calculadora-margen-vino', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/inteligencia-artificial-restaurantes', priority: '0.8', changefreq: 'monthly', multilang: false },
 
   // Solutions
@@ -163,7 +178,6 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/guias/como-conectar-carta-stock-ventas-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
 
   // Tools (ES-only)
-  { esPath: '/calculadora-margen-vino', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: false },

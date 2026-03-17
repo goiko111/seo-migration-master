@@ -220,6 +220,7 @@ const DecisionCenter = () => {
         title="Winerim Decision Center"
         description={t.dc_hub_subtitle}
         url="https://winerim.wine/decision-center"
+        noindex
       />
       <Navbar />
       <main>
