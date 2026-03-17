@@ -109,7 +109,7 @@ const Footer = () => {
                 { label: t.nav_sommelier, href: localePath("/sommelier-corner") },
                 { label: t.nav_guides, href: localePath("/guias-y-recursos") },
                 { label: t.nav_downloadable_resources ?? "Recursos descargables", href: localePath("/recursos") },
-                { label: t.nav_benchmarks, href: "/benchmarks-playbooks" },
+                { label: t.nav_benchmarks, href: localePath("/benchmarks-playbooks") },
                 { label: t.nav_wine_analyzer, href: localePath("/analisis-carta") },
                 { label: t.nav_margin_calc, href: localePath("/calculadora-margen-vino") },
               ]}
