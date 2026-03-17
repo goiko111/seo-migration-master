@@ -378,6 +378,15 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
 
 const AnalizaCarta = () => {
+  const { lang } = useLanguage();
+  const t = {
+    seo: seo[lang], hero: hero[lang], vc: visualCard[lang], summary: summaryI[lang],
+    pains: painsI[lang], painsSection: painsSectionI[lang], qa: quickAnswerI[lang],
+    comp: comparisonI[lang], analysis: analysisPointsI[lang], report: reportI[lang],
+    steps: stepsI[lang], disc: discoveriesI[lang], who: whoFitsI[lang], after: afterI[lang],
+    form: formI[lang], faqs: faqsI[lang], ctaFinal: ctaFinalI[lang], links: linksI[lang],
+  };
+
   const [submitting, setSubmitting] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [mode, setMode] = useState<"upload" | "link">("upload");
@@ -387,13 +396,13 @@ const AnalizaCarta = () => {
     const file = e.target.files?.[0];
     if (!file) { setFileName(null); return; }
     if (!ALLOWED_TYPES.includes(file.type)) {
-      toast.error("Formato no soportado. Sube un PDF o imagen (JPG, PNG, WebP).");
+      toast.error(t.form.errFormat);
       e.target.value = "";
       setFileName(null);
       return;
     }
     if (file.size > MAX_FILE_SIZE) {
-      toast.error("El archivo es demasiado grande. Máximo 10 MB.");
+      toast.error(t.form.errSize);
       e.target.value = "";
       setFileName(null);
       return;
