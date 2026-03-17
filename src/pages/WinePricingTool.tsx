@@ -327,7 +327,7 @@ const WinePricingTool = () => {
                     <label className="text-sm font-medium mb-2 block flex items-center gap-1.5"><Store size={13} className="text-wine" /> {t.rest_label}</label>
                     <div className="space-y-1.5">
                       {t.rest_types.map((r: any) => (
-                        <button key={r.value} onClick={() => setRestType(r.value)} className={`w-full text-left px-3 py-2 rounded-lg border text-xs transition-all ${restType === r.value ? "border-wine bg-wine/5 font-semibold" : "border-border hover:border-wine/40"}`}>
+                        <button key={r.value} onClick={() => { setRestType(r.value); trackOnce(); }} className={`w-full text-left px-3 py-2 rounded-lg border text-xs transition-all ${restType === r.value ? "border-wine bg-wine/5 font-semibold" : "border-border hover:border-wine/40"}`}>
                           {r.label} <span className="text-muted-foreground ml-1">x{restaurantMultipliers[r.value][0]}–{restaurantMultipliers[r.value][1]}</span>
                         </button>
                       ))}
