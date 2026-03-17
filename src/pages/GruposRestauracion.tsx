@@ -18,6 +18,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { CapabilitiesBlock, BenchmarkingBlock, IntelBlock, PilotBlock } from "@/components/groups/GroupStrategyBlocks";
 import WinerimSupplyBlock from "@/components/WinerimSupplyBlock";
 import { useLanguage } from "@/i18n/LanguageContext";
+import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 
 /* ─── types ─── */
 type IntelCard = { title: string; desc: string };
@@ -1011,6 +1012,9 @@ const GruposRestauracion = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
 
       {/* ── Next Steps ── */}
       <NextSteps

@@ -20,6 +20,7 @@ const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSect
 const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
 const VideoSection = lazy(() => import("@/components/VideoSection"));
 const DefinitionSection = lazy(() => import("@/components/landing/DefinitionSection"));
+const DecisionCenterTeaser = lazy(() => import("@/components/DecisionCenterTeaser"));
 const CredibilitySection = lazy(() => import("@/components/seo/CredibilitySection"));
 const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -89,7 +90,12 @@ const Index = () => {
             <VideoSection />
           </Suspense>
 
-          {/* 12–13. Credibility + Definition — SEO/citability */}
+          {/* 12. Decision Center teaser — premium value layer */}
+          <Suspense fallback={<SectionFallback />}>
+            <DecisionCenterTeaser lang={lang} />
+          </Suspense>
+
+          {/* 13–14. Credibility + Definition — SEO/citability */}
           <Suspense fallback={<SectionFallback />}>
             <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
               <CredibilitySection lang={lang} />

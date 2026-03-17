@@ -14,6 +14,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
+import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import { SupportedLang } from "@/i18n/types";
 
 /* ── Animation helpers ── */
@@ -626,6 +627,9 @@ const WinerimSupply = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} />
 
       {/* ═══ 6. CTA FINAL ═══ */}
       <section className="section-padding bg-gradient-dark">
