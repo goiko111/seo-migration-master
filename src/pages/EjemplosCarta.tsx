@@ -57,7 +57,7 @@ const i18n: Record<SupportedLang, {
   ctaBtn: string;
   examples: CardExample[];
   tips: Tip[];
-  links: { to: string; label: string; type: string }[];
+  links: { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" }[];
   faqData: { q: string; a: string }[];
 }> = {
   es: {
