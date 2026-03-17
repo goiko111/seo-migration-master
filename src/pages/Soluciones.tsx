@@ -109,7 +109,7 @@ const i18n: Record<string, {
     platformTitle: "Tre livelli, un sistema",
     platformSubtitle: "Ogni livello risolve una parte del problema. Insieme, coprono l'intero ciclo del vino nel tuo ristorante.",
     layers: [
-      { tag: "Motore analitico", name: "Winerim Core", desc: "26 moduli che collegano pricing, rotazione, stock ed equilibrio della carta in un sistema decisionale unificato.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Motore analitico", name: "Winerim Core", desc: "Un livello analitico profondo che collega pricing, rotazione, stock ed equilibrio della carta in un sistema decisionale unificato.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "IA tattica", name: "Intelligenza Dinamica", desc: "Il livello che adatta la carta in tempo reale: raccomandazioni, evidenziazioni e azioni automatiche basate sui tuoi dati.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Intelligenza acquisti", name: "Winerim Supply", desc: "Decidi cosa continuare a comprare, cosa rinegoziare e cosa ritirare. Confronto prezzi, alert sovrapprezzi e riassortimento intelligente.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
