@@ -205,6 +205,7 @@ const esRoutes = (
     <Route path="/herramientas/auditor-carta-multilocal" element={<AuditorMultiLocal />} />
     <Route path="/herramientas/calculadora-compra-inteligente" element={<CalculadoraCompraInteligente />} />
     <Route path="/soluciones" element={<Soluciones />} />
+    <Route path="/soluciones/inteligencia-de-compras" element={<InteligenciaCompras />} />
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
