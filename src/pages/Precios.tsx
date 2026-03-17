@@ -474,7 +474,7 @@ i18n.fr = {
   whoTitle: "Quel plan correspond à <em>votre établissement</em> ?",
   whoSubtitle: "Winerim sert des profils très différents. Trouvez le vôtre.",
   profiles: [
-    { icon: "store", name: "Restaurant indépendant", plan: "Starter ou Pro", desc: "Carte de 30-80 références. Vous avez besoin de visibilité et de contrôle sans complexité." },
+    { icon: "store", name: "Restaurant indépendant", plan: "Starter ou Pro", desc: "Carte de 80–150 références. Vous avez besoin de visibilité et de contrôle sans complexité." },
     { icon: "chef", name: "Restaurant gastronomique", plan: "Pro", desc: "Carte étendue, accords, vin au verre. Vous avez besoin de recommandations intelligentes et d'analytique." },
     { icon: "hotel", name: "Hôtel avec F&B", plan: "Pro ou Enterprise", desc: "Plusieurs points de vente, room service, bar. Vous avez besoin de cohérence et de reporting." },
     { icon: "building", name: "Groupe de restauration", plan: "Enterprise", desc: "Multi-sites, gouvernance centralisée, benchmarking inter-unités et déploiement progressif." },
