@@ -8,7 +8,7 @@ const vinoPorCopaContent: DeepAreaContent = {
   icon: Wine,
   accent: "text-purple-500",
   bg: "bg-purple-500/10",
-  audiences: ["sala", "direccion"],
+  audiences: ["sala", "direccion", "compras-fb"],
   topErrors: [
     { error: "Sacar por copa vinos que destruyen margen por merma", porQueOcurre: "Porque se elige por calidad o por gusto personal, sin calcular si la rotación justifica abrir esa botella.", consecuencia: "El 30-40% de la botella se tira. Un vino con 70% de margen teórico pasa a un 25% real. Pierdes dinero con cada copa." },
     { error: "Tener demasiadas copas activas sin rotación suficiente", porQueOcurre: "Porque más copas parece mejor oferta. Pero cada copa abierta es una botella que tiene que terminarse en 24-48h.", consecuencia: "La merma se multiplica por cada referencia activa. 8 copas con baja rotación generan más pérdida que 4 copas bien elegidas." },
@@ -37,6 +37,18 @@ const vinoPorCopaContent: DeepAreaContent = {
       situation: "Ofrecía 3 copas a precio fijo (4,50 €). No calculaba merma ni diferenciaba por coste. El vino más caro por copa le costaba 3,80 € y lo vendía a 4,50 €.",
       action: "Diferenció precios por copa según coste real. Subió la copa premium a 6 €. Mantuvo una de entrada a 4,50 € con un vino de menor coste.",
       result: "Margen medio por copa pasó de 18% a 52%. El comensal acepta pagar más si percibe diferencia de calidad.",
+    },
+    {
+      profile: "Gastronómico con carta de 120 referencias",
+      situation: "Tenía 8 copas activas pero 4 eran tintos de perfil muy similar (Rioja crianza entre 7 € y 9 € la copa). El equipo de sala no sabía diferenciarlas y siempre recomendaba la misma.",
+      action: "Redujo tintos por copa a 2 (uno joven, uno crianza). Añadió un blanco mineral y un espumoso que no tenía. Formó al equipo con la plantilla de formación exprés.",
+      result: "La diversidad de copas vendidas pasó de 2 referencias al 80 % del programa. El ticket medio de copa subió 1,80 € porque el espumoso abría la venta.",
+    },
+    {
+      profile: "Hotel resort con 3 puntos de venta",
+      situation: "Cada punto de venta (restaurante, pool bar, lobby bar) tenía copas distintas sin criterio común. El pool bar usaba vinos premium que nadie pedía; el restaurante tenía copas de entrada que no encajaban con su cocina.",
+      action: "Definió un programa de copa por punto de venta: 3 copas en pool bar (entrada, frescas, rotación rápida), 5 en restaurante (progresión de precio, maridaje), 4 en lobby (exploración, conversación). Usó Winerim Core para monitorizar merma por punto de venta.",
+      result: "Merma global bajó del 28 % al 14 %. Cada punto de venta tiene un programa coherente con su público. El restaurante duplicó la venta de copa premium.",
     },
   ],
   subtopics: [
