@@ -420,6 +420,18 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/paper-vs-digital-wine-list`} element={<CartaPapelVsDigital />} />
     <Route path={`${prefix}/carta-cartacea-vs-digitale`} element={<CartaPapelVsDigital />} />
     <Route path={`${prefix}/carte-papier-vs-digitale`} element={<CartaPapelVsDigital />} />
+    {/* CuantosVinosCarta */}
+    <Route path={`${prefix}/how-many-wines-restaurant-list`} element={<CuantosVinosCarta />} />
+    <Route path={`${prefix}/quanti-vini-carta-ristorante`} element={<CuantosVinosCarta />} />
+    <Route path={`${prefix}/combien-de-vins-carte-restaurant`} element={<CuantosVinosCarta />} />
+    {/* EjemplosCarta */}
+    <Route path={`${prefix}/wine-list-examples`} element={<EjemplosCarta />} />
+    <Route path={`${prefix}/esempi-carta-vini`} element={<EjemplosCarta />} />
+    <Route path={`${prefix}/exemples-carte-vins`} element={<EjemplosCarta />} />
+    {/* EstrategiaMaridaje */}
+    <Route path={`${prefix}/guides/wine-pairing-strategy-restaurants`} element={<EstrategiaMaridaje />} />
+    <Route path={`${prefix}/guide/strategia-abbinamento-vino-ristorante`} element={<EstrategiaMaridaje />} />
+    <Route path={`${prefix}/guides/strategie-accords-mets-vins-restaurant`} element={<EstrategiaMaridaje />} />
   </>
 );
 

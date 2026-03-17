@@ -242,6 +242,38 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/recursos/plantilla-equilibrio-carta", canonical: `${BASE}/recursos/plantilla-equilibrio-carta`, lang: "es", type: "resource", intent: "plantilla equilibrio carta vinos estilos precios" },
 
   // ─────────────────────────────────────────────
+  // LOCALIZED EDITORIAL PAGES (EN / IT / FR)
+  // ─────────────────────────────────────────────
+  // ComoHacerCartaVinos
+  { path: "/en/how-to-create-a-wine-list", canonical: `${BASE}/en/how-to-create-a-wine-list`, lang: "en", type: "guide", intent: "how to create a wine list" },
+  { path: "/it/come-creare-una-carta-dei-vini", canonical: `${BASE}/it/come-creare-una-carta-dei-vini`, lang: "it", type: "guide", intent: "come creare carta dei vini" },
+  { path: "/fr/comment-creer-une-carte-des-vins", canonical: `${BASE}/fr/comment-creer-une-carte-des-vins`, lang: "fr", type: "guide", intent: "comment créer carte des vins" },
+  // ComoOrganizarCarta
+  { path: "/en/how-to-organize-wine-list", canonical: `${BASE}/en/how-to-organize-wine-list`, lang: "en", type: "guide", intent: "how to organize wine list" },
+  { path: "/it/come-organizzare-carta-vini", canonical: `${BASE}/it/come-organizzare-carta-vini`, lang: "it", type: "guide", intent: "come organizzare carta vini" },
+  { path: "/fr/comment-organiser-carte-des-vins", canonical: `${BASE}/fr/comment-organiser-carte-des-vins`, lang: "fr", type: "guide", intent: "comment organiser carte des vins" },
+  // CartaVinosRentable
+  { path: "/en/how-to-design-profitable-wine-list", canonical: `${BASE}/en/how-to-design-profitable-wine-list`, lang: "en", type: "guide", intent: "how to design profitable wine list" },
+  { path: "/it/come-progettare-carta-vini-redditizia", canonical: `${BASE}/it/come-progettare-carta-vini-redditizia`, lang: "it", type: "guide", intent: "come progettare carta vini redditizia" },
+  { path: "/fr/comment-concevoir-carte-vins-rentable", canonical: `${BASE}/fr/comment-concevoir-carte-vins-rentable`, lang: "fr", type: "guide", intent: "comment concevoir carte vins rentable" },
+  // CartaPapelVsDigital
+  { path: "/en/paper-vs-digital-wine-list", canonical: `${BASE}/en/paper-vs-digital-wine-list`, lang: "en", type: "guide", intent: "paper vs digital wine list" },
+  { path: "/it/carta-cartacea-vs-digitale", canonical: `${BASE}/it/carta-cartacea-vs-digitale`, lang: "it", type: "guide", intent: "carta cartacea vs digitale" },
+  { path: "/fr/carte-papier-vs-digitale", canonical: `${BASE}/fr/carte-papier-vs-digitale`, lang: "fr", type: "guide", intent: "carte papier vs digitale" },
+  // CuantosVinosCarta
+  { path: "/en/how-many-wines-restaurant-list", canonical: `${BASE}/en/how-many-wines-restaurant-list`, lang: "en", type: "guide", intent: "how many wines restaurant wine list" },
+  { path: "/it/quanti-vini-carta-ristorante", canonical: `${BASE}/it/quanti-vini-carta-ristorante`, lang: "it", type: "guide", intent: "quanti vini carta ristorante" },
+  { path: "/fr/combien-de-vins-carte-restaurant", canonical: `${BASE}/fr/combien-de-vins-carte-restaurant`, lang: "fr", type: "guide", intent: "combien de vins carte restaurant" },
+  // EjemplosCarta
+  { path: "/en/wine-list-examples", canonical: `${BASE}/en/wine-list-examples`, lang: "en", type: "guide", intent: "wine list examples restaurants" },
+  { path: "/it/esempi-carta-vini", canonical: `${BASE}/it/esempi-carta-vini`, lang: "it", type: "guide", intent: "esempi carta vini ristorante" },
+  { path: "/fr/exemples-carte-vins", canonical: `${BASE}/fr/exemples-carte-vins`, lang: "fr", type: "guide", intent: "exemples carte des vins restaurant" },
+  // EstrategiaMaridaje
+  { path: "/en/guides/wine-pairing-strategy-restaurants", canonical: `${BASE}/en/guides/wine-pairing-strategy-restaurants`, lang: "en", type: "guide", intent: "wine pairing strategy restaurants" },
+  { path: "/it/guide/strategia-abbinamento-vino-ristorante", canonical: `${BASE}/it/guide/strategia-abbinamento-vino-ristorante`, lang: "it", type: "guide", intent: "strategia abbinamento vino ristorante" },
+  { path: "/fr/guides/strategie-accords-mets-vins-restaurant", canonical: `${BASE}/fr/guides/strategie-accords-mets-vins-restaurant`, lang: "fr", type: "guide", intent: "stratégie accords mets vins restaurant" },
+
+  // ─────────────────────────────────────────────
   // BENCHMARKS & PLAYBOOKS (ES)
   // ─────────────────────────────────────────────
   { path: "/benchmarks-playbooks", canonical: `${BASE}/benchmarks-playbooks`, lang: "es", type: "hub", intent: "benchmarks playbooks carta vinos restaurante" },
