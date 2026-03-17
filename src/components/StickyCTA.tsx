@@ -4,6 +4,7 @@ import { X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getResolvedCTASet, type PageType } from "@/data/ctas";
 import { trackAction } from "@/lib/intentTracking";
+import { ga } from "@/lib/analytics";
 
 interface StickyCTAProps {
   /** Page type to determine CTA copy */
