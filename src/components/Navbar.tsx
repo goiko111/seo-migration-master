@@ -92,7 +92,7 @@ const Navbar = memo(() => {
             { label: "Blog", href: localePath("/blog") },
             { label: t.nav_sommelier, href: localePath("/sommelier-corner") },
             { label: t.nav_guides, href: localePath("/guias-y-recursos") },
-            { label: t.nav_benchmarks, href: "/benchmarks-playbooks" },
+            { label: t.nav_benchmarks, href: localePath("/benchmarks-playbooks") },
           ],
         },
         {

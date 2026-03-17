@@ -122,6 +122,14 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/producto/winerim-supply": "/fr/produit/winerim-supply",
     "/analisis-carta": "/fr/analyse-carte",
     "/calculadora-margen-vino": "/fr/calculateur-marge-vin",
+    "/soluciones/restaurantes-gastronomicos": "/fr/solutions/restaurants-gastronomiques",
+    "/soluciones/wine-bars": "/fr/solutions/bars-a-vin",
+    "/soluciones/hoteles": "/fr/solutions/hotels",
+    "/soluciones/restaurantes-sin-sumiller": "/fr/solutions/sans-sommelier",
+    "/soluciones/carta-amplia": "/fr/solutions/grande-carte-des-vins",
+    "/sobre-winerim": "/fr/a-propos",
+    "/benchmarks-playbooks": "/fr/benchmarks-playbooks",
+    "/herramientas/calculadora-precio-vino-por-copa": "/fr/outils/calculateur-prix-vin-au-verre",
   },
 };
 
