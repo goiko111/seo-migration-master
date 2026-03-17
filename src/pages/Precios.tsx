@@ -442,7 +442,7 @@ i18n.it = {
   ],
   faqs: [
     { q: "C'è un vincolo di permanenza?", a: "No. Puoi cancellare quando vuoi, senza penali né clausole nascoste." },
-    { q: "Quante referenze ammette ogni piano?", a: "Non c'è un limite rigido. Il prezzo si adatta al volume della tua carta, da 30 a oltre 500 referenze." },
+    { q: "Quante referenze ammette ogni piano?", a: "Non c'è un limite rigido. Il prezzo si adatta al volume della tua carta, da 80 a oltre 500 referenze." },
     { q: "I commensali devono scaricare un'app?", a: "No. La carta digitale si apre dal browser del cellulare scansionando un QR. Senza download." },
     { q: "Posso provare Winerim prima di acquistare?", a: "Sì. Offriamo un'analisi gratuita della tua carta dei vini e una demo personalizzata con la tua carta reale." },
     { q: "Cosa serve per iniziare?", a: "La tua carta dei vini attuale (in qualsiasi formato) e 15 minuti per una chiamata di configurazione." },
