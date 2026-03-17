@@ -118,8 +118,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Ogni tipo di attività ha esigenze diverse. Queste sono le più richieste.",
     solutions: [
       { title: "Gruppi di ristorazione", desc: "Gestione centralizzata: controllo carte, prezzi, assortimento e benchmarking interno tra locali.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura carta per +250 referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Carta in crescita", desc: "Pricing differenziato, rotazione equilibrata e calice strategico per carte da 80–250 referenze.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura per carte ad alta densità di referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carte con profondità", desc: "Pricing differenziato, rotazione equilibrata e calice strategico per carte con complessità reale.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing e margini", desc: "Moltiplicatori differenziati, scala prezzi coerente e deviazione vs. ottimale per tipologia.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino al calice", desc: "Strategia al calice: pricing, scarto, rotazione, vita utile e redditività netta per referenza.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock e rotazione", desc: "Capitale immobilizzato, costo opportunità, piano di liquidazione e alert di obsolescenza.", path: "/rotacion-de-vinos", icon: "package" },
