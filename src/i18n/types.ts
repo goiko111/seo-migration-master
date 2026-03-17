@@ -54,6 +54,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/restaurantes-sin-sumiller": "/en/solutions/no-sommelier",
     "/soluciones/carta-amplia": "/en/solutions/large-wine-list",
     "/soluciones/carta-crecimiento": "/en/solutions/growing-wine-list",
+    "/soluciones/inteligencia-de-compras": "/en/solutions/purchasing-intelligence",
     "/sobre-winerim": "/en/about-winerim",
     "/benchmarks-playbooks": "/en/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/en/tools/wine-by-glass-price-calculator",
