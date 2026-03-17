@@ -18,14 +18,76 @@ import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 import type { ComparisonData } from "@/data/comparisons";
+
+const chrome: Record<SupportedLang, {
+  breadComparativas: string; summaryLabel: string; tableTitle: string;
+  midCtaTitle: string; midCtaDesc: string; prosConsTitle: string; prosLabel: string; consLabel: string;
+  whenTitle: string; idealTitle: string; notTitle: (alt: string) => string;
+  ctaBadge: string; ctaTitle: string; ctaDesc: string; ctaPrimary: string; ctaSecondary: string; ctaMicro: string;
+  relatedTitle: string; tryFree: string; analyzeList: string;
+  breadHome: string;
+}> = {
+  es: {
+    breadComparativas: "Comparativas", summaryLabel: "Resumen de la comparativa", tableTitle: "Comparativa por criterios",
+    midCtaTitle: "¿Quieres ver la diferencia en tu restaurante?", midCtaDesc: "Solicita una demo y te mostramos cómo Winerim se compara con tu solución actual.",
+    prosConsTitle: "Ventajas y limitaciones", prosLabel: "Ventajas", consLabel: "Limitaciones",
+    whenTitle: "¿Cuándo tiene más sentido Winerim?",
+    idealTitle: "Winerim encaja mejor si…", notTitle: (alt) => `${alt} puede ser suficiente si…`,
+    ctaBadge: "Descubre el potencial de tu carta", ctaTitle: "Prueba Winerim con tu carta real",
+    ctaDesc: "Envíanos tu carta en cualquier formato y te preparamos una demo personalizada. Sin compromiso.",
+    ctaPrimary: "Solicitar demo personalizada", ctaSecondary: "Analizar mi carta", ctaMicro: "Compruébalo tú mismo. Demo adaptada a tu restaurante.",
+    relatedTitle: "Contenido relacionado", tryFree: "Prueba Winerim gratis", analyzeList: "Analiza tu carta",
+    breadHome: "Inicio",
+  },
+  en: {
+    breadComparativas: "Comparisons", summaryLabel: "Comparison summary", tableTitle: "Comparison by criteria",
+    midCtaTitle: "Want to see the difference in your restaurant?", midCtaDesc: "Request a demo and we'll show you how Winerim compares with your current solution.",
+    prosConsTitle: "Advantages and limitations", prosLabel: "Advantages", consLabel: "Limitations",
+    whenTitle: "When does Winerim make more sense?",
+    idealTitle: "Winerim fits best if…", notTitle: (alt) => `${alt} may be enough if…`,
+    ctaBadge: "Discover your list's potential", ctaTitle: "Try Winerim with your real wine list",
+    ctaDesc: "Send us your wine list in any format and we'll prepare a personalised demo. No commitment.",
+    ctaPrimary: "Request personalised demo", ctaSecondary: "Analyse my list", ctaMicro: "See for yourself. Demo tailored to your restaurant.",
+    relatedTitle: "Related content", tryFree: "Try Winerim free", analyzeList: "Analyse your list",
+    breadHome: "Home",
+  },
+  it: {
+    breadComparativas: "Confronti", summaryLabel: "Riepilogo del confronto", tableTitle: "Confronto per criteri",
+    midCtaTitle: "Vuoi vedere la differenza nel tuo ristorante?", midCtaDesc: "Richiedi una demo e ti mostreremo come Winerim si confronta con la tua soluzione attuale.",
+    prosConsTitle: "Vantaggi e limitazioni", prosLabel: "Vantaggi", consLabel: "Limitazioni",
+    whenTitle: "Quando Winerim ha più senso?",
+    idealTitle: "Winerim è più adatto se…", notTitle: (alt) => `${alt} può essere sufficiente se…`,
+    ctaBadge: "Scopri il potenziale della tua carta", ctaTitle: "Prova Winerim con la tua carta reale",
+    ctaDesc: "Inviaci la tua carta in qualsiasi formato e prepareremo una demo personalizzata. Senza impegno.",
+    ctaPrimary: "Richiedi demo personalizzata", ctaSecondary: "Analizza la mia carta", ctaMicro: "Verificalo tu stesso. Demo adattata al tuo ristorante.",
+    relatedTitle: "Contenuti correlati", tryFree: "Prova Winerim gratis", analyzeList: "Analizza la tua carta",
+    breadHome: "Home",
+  },
+  fr: {
+    breadComparativas: "Comparatifs", summaryLabel: "Résumé du comparatif", tableTitle: "Comparatif par critères",
+    midCtaTitle: "Vous voulez voir la différence dans votre restaurant ?", midCtaDesc: "Demandez une démo et nous vous montrerons comment Winerim se compare à votre solution actuelle.",
+    prosConsTitle: "Avantages et limites", prosLabel: "Avantages", consLabel: "Limites",
+    whenTitle: "Quand Winerim a-t-il plus de sens ?",
+    idealTitle: "Winerim convient mieux si…", notTitle: (alt) => `${alt} peut suffire si…`,
+    ctaBadge: "Découvrez le potentiel de votre carte", ctaTitle: "Essayez Winerim avec votre vraie carte",
+    ctaDesc: "Envoyez-nous votre carte dans n'importe quel format et nous préparerons une démo personnalisée. Sans engagement.",
+    ctaPrimary: "Demander une démo personnalisée", ctaSecondary: "Analyser ma carte", ctaMicro: "Vérifiez par vous-même. Démo adaptée à votre restaurant.",
+    relatedTitle: "Contenu associé", tryFree: "Essayez Winerim gratuitement", analyzeList: "Analysez votre carte",
+    breadHome: "Accueil",
+  },
+};
 
 interface Props {
   data: ComparisonData;
 }
 
 const ComparisonPageTemplate = ({ data }: Props) => {
-  const url = `https://winerim.wine/comparativa/${data.slug}`;
+  const { lang, localePath } = useLanguage();
+  const t = chrome[lang] || chrome.es;
+  const url = `https://winerim.wine${localePath(`/comparativa/${data.slug}`)}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -38,8 +100,8 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         url={url}
         faqs={data.faqs}
         breadcrumbs={[
-          { name: "Inicio", url: "https://winerim.wine" },
-          { name: "Comparativas", url: "https://winerim.wine/comparativas" },
+          { name: t.breadHome, url: "https://winerim.wine" },
+          { name: t.breadComparativas, url: `https://winerim.wine${localePath("/comparativas")}` },
           { name: data.h1 + " " + data.h1Highlight, url },
         ]}
       />
@@ -51,7 +113,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Comparativas", href: "/comparativas" },
+            { label: t.breadComparativas, href: localePath("/comparativas") },
             { label: data.h1 + " " + data.h1Highlight },
           ]} />
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
@@ -63,11 +125,11 @@ const ComparisonPageTemplate = ({ data }: Props) => {
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-8">{data.subtitle}</p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              Prueba Winerim gratis <ArrowRight size={16} />
+            <Link to={localePath("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+              {t.tryFree} <ArrowRight size={16} />
             </Link>
-            <Link to="/analisis-carta" className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
-              Analiza tu carta
+            <Link to={localePath("/analisis-carta")} className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
+              {t.analyzeList}
             </Link>
           </div>
         </div>
@@ -82,7 +144,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         {/* ── SUMMARY BOX ── */}
         <ScrollReveal>
           <SummaryBox
-            label="Resumen de la comparativa"
+            label={t.summaryLabel}
             definition={data.summary.definition}
             bullets={data.summary.bullets}
           />
@@ -90,7 +152,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
 
         {/* ── COMPARISON TABLE ── */}
         <ComparisonTable
-          title="Comparativa por criterios"
+          title={t.tableTitle}
           columns={data.tableColumns}
           rows={data.tableRows}
           highlightColumn={0}
@@ -100,8 +162,8 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         <div className="my-4">
           <ArticleMidCTA
             pageType="comparison"
-            title="¿Quieres ver la diferencia en tu restaurante?"
-            description="Solicita una demo y te mostramos cómo Winerim se compara con tu solución actual."
+            title={t.midCtaTitle}
+            description={t.midCtaDesc}
             variant="highlight"
           />
         </div>
@@ -109,7 +171,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         {/* ── PROS / CONS ── */}
         <section className="my-12">
           <ScrollReveal className="text-center mb-8">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Ventajas y limitaciones</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.prosConsTitle}</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6">
             {data.prosConsSections.map((section, i) => (
@@ -117,7 +179,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
                 <div className="bg-gradient-card rounded-2xl border border-border p-6 h-full">
                   <h3 className="font-heading text-lg font-bold mb-4">{section.title}</h3>
                   <div className="mb-4">
-                    <p className="text-xs font-semibold tracking-wider uppercase text-wine mb-2">Ventajas</p>
+                    <p className="text-xs font-semibold tracking-wider uppercase text-wine mb-2">{t.prosLabel}</p>
                     <ul className="space-y-1.5">
                       {section.pros.map((p, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -127,7 +189,7 @@ const ComparisonPageTemplate = ({ data }: Props) => {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-2">Limitaciones</p>
+                    <p className="text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-2">{t.consLabel}</p>
                     <ul className="space-y-1.5">
                       {section.cons.map((c, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -146,17 +208,15 @@ const ComparisonPageTemplate = ({ data }: Props) => {
         <NotForSection
           idealFor={data.whoFits.winerimIdeal}
           notFor={data.whoFits.alternativeOk}
-          titleIdeal="Winerim encaja mejor si…"
-          titleNot={`${data.whoFits.alternativeLabel} puede ser suficiente si…`}
+          titleIdeal={t.idealTitle}
+          titleNot={t.notTitle(data.whoFits.alternativeLabel)}
         />
 
         {/* ── WHEN WINERIM ── */}
         <section className="my-12">
           <ScrollReveal>
             <div className="rounded-2xl border border-wine/20 bg-wine/5 p-6 md:p-8">
-              <h2 className="font-heading text-xl md:text-2xl font-bold mb-4">
-                ¿Cuándo tiene más sentido Winerim?
-              </h2>
+              <h2 className="font-heading text-xl md:text-2xl font-bold mb-4">{t.whenTitle}</h2>
               <ul className="space-y-3">
                 {data.whenWinerim.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-foreground/90 leading-relaxed">
@@ -174,19 +234,19 @@ const ComparisonPageTemplate = ({ data }: Props) => {
       </div>
 
       {/* ── INTERNAL LINKS ── */}
-      <InternalLinks links={data.relatedLinks} title="Contenido relacionado" />
+      <InternalLinks links={data.relatedLinks} title={t.relatedTitle} />
 
       {/* ── CTA FINAL — BOFU ── */}
       <CTASection
         pageType="comparison"
-        badge="Descubre el potencial de tu carta"
-        title="Prueba Winerim con tu carta real"
-        description="Envíanos tu carta en cualquier formato y te preparamos una demo personalizada. Sin compromiso."
-        primaryText="Solicitar demo personalizada"
-        primaryUrl="/demo"
-        secondaryText="Analizar mi carta"
-        secondaryUrl="/analisis-carta"
-        micro="Compruébalo tú mismo. Demo adaptada a tu restaurante."
+        badge={t.ctaBadge}
+        title={t.ctaTitle}
+        description={t.ctaDesc}
+        primaryText={t.ctaPrimary}
+        primaryUrl={localePath("/demo")}
+        secondaryText={t.ctaSecondary}
+        secondaryUrl={localePath("/analisis-carta")}
+        micro={t.ctaMicro}
       />
 
       {/* Sticky CTA */}
