@@ -44,8 +44,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Cada tipo de negocio tiene necesidades distintas. Estas son las más demandadas.",
     solutions: [
       { title: "Grupos de restauración", desc: "Gestión centralizada: control de cartas, precios, surtido y benchmarking interno entre locales.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura de carta para +250 referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Carta con ambición de crecimiento", desc: "Pricing diferenciado, rotación equilibrada y vino por copa estratégico para cartas de 80–250 referencias.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura para cartas con alta densidad de referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartas con profundidad", desc: "Pricing diferenciado, rotación equilibrada y vino por copa estratégico para cartas que ya tienen complejidad real.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing y márgenes", desc: "Multiplicadores diferenciados, escalera de precios coherente y desviación vs. óptimo por tipología.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino por copa", desc: "Estrategia de copeo: pricing, merma, rotación, vida útil y rentabilidad neta por referencia.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock y rotación", desc: "Capital inmovilizado, coste de oportunidad, plan de liquidación y alertas de obsolescencia.", path: "/rotacion-de-vinos", icon: "package" },
@@ -72,7 +72,7 @@ const i18n: Record<string, {
     platformTitle: "Three layers, one system",
     platformSubtitle: "Each layer solves part of the problem. Together, they cover the full wine cycle in your restaurant.",
     layers: [
-      { tag: "Analytical engine", name: "Winerim Core", desc: "26 modules connecting pricing, rotation, stock and list balance into a unified decision system.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Analytical engine", name: "Winerim Core", desc: "A deep analytical layer connecting pricing, rotation, stock and list balance into a unified decision system.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "Tactical AI", name: "Dynamic Intelligence", desc: "The layer that adapts your list in real time: recommendations, highlights and automated actions based on your data.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Purchasing intelligence", name: "Winerim Supply", desc: "Decide what to keep buying, renegotiate or delist. Price comparison, overpricing alerts and smart restocking.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
@@ -81,8 +81,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Every business type has different needs. These are the most in-demand.",
     solutions: [
       { title: "Restaurant groups", desc: "Centralised management: list control, pricing, assortment and internal benchmarking across locations.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for 250+ references.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Growing wine lists", desc: "Differentiated pricing, balanced rotation and strategic by-the-glass for lists of 80–250 references.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for high-density wine lists.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Growing wine lists", desc: "Differentiated pricing, balanced rotation and strategic by-the-glass for lists with real complexity.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing & margins", desc: "Differentiated multipliers, coherent price ladder and deviation vs. optimal by wine type.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Wine by the glass", desc: "Glass strategy: pricing, waste, rotation, shelf life and net profitability per reference.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock & rotation", desc: "Immobilised capital, opportunity cost, liquidation plan and obsolescence alerts.", path: "/rotacion-de-vinos", icon: "package" },
@@ -109,7 +109,7 @@ const i18n: Record<string, {
     platformTitle: "Tre livelli, un sistema",
     platformSubtitle: "Ogni livello risolve una parte del problema. Insieme, coprono l'intero ciclo del vino nel tuo ristorante.",
     layers: [
-      { tag: "Motore analitico", name: "Winerim Core", desc: "26 moduli che collegano pricing, rotazione, stock ed equilibrio della carta in un sistema decisionale unificato.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Motore analitico", name: "Winerim Core", desc: "Un livello analitico profondo che collega pricing, rotazione, stock ed equilibrio della carta in un sistema decisionale unificato.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "IA tattica", name: "Intelligenza Dinamica", desc: "Il livello che adatta la carta in tempo reale: raccomandazioni, evidenziazioni e azioni automatiche basate sui tuoi dati.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Intelligenza acquisti", name: "Winerim Supply", desc: "Decidi cosa continuare a comprare, cosa rinegoziare e cosa ritirare. Confronto prezzi, alert sovrapprezzi e riassortimento intelligente.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
@@ -118,8 +118,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Ogni tipo di attività ha esigenze diverse. Queste sono le più richieste.",
     solutions: [
       { title: "Gruppi di ristorazione", desc: "Gestione centralizzata: controllo carte, prezzi, assortimento e benchmarking interno tra locali.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura carta per +250 referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Carta in crescita", desc: "Pricing differenziato, rotazione equilibrata e calice strategico per carte da 80–250 referenze.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura per carte ad alta densità di referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carte con profondità", desc: "Pricing differenziato, rotazione equilibrata e calice strategico per carte con complessità reale.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing e margini", desc: "Moltiplicatori differenziati, scala prezzi coerente e deviazione vs. ottimale per tipologia.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino al calice", desc: "Strategia al calice: pricing, scarto, rotazione, vita utile e redditività netta per referenza.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock e rotazione", desc: "Capitale immobilizzato, costo opportunità, piano di liquidazione e alert di obsolescenza.", path: "/rotacion-de-vinos", icon: "package" },
@@ -146,7 +146,7 @@ const i18n: Record<string, {
     platformTitle: "Trois couches, un système",
     platformSubtitle: "Chaque couche résout une partie du problème. Ensemble, elles couvrent tout le cycle du vin dans votre restaurant.",
     layers: [
-      { tag: "Moteur analytique", name: "Winerim Core", desc: "26 modules reliant pricing, rotation, stock et équilibre de la carte dans un système décisionnel unifié.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Moteur analytique", name: "Winerim Core", desc: "Une couche analytique profonde reliant pricing, rotation, stock et équilibre de la carte dans un système décisionnel unifié.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "IA tactique", name: "Intelligence Dynamique", desc: "La couche qui adapte la carte en temps réel : recommandations, mises en avant et actions automatiques basées sur vos données.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Intelligence d'achats", name: "Winerim Supply", desc: "Décidez quoi continuer d'acheter, quoi renégocier et quoi retirer. Comparatif de prix, alertes de surcoût et réapprovisionnement intelligent.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
@@ -155,8 +155,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Chaque type d'établissement a des besoins différents. Voici les plus demandées.",
     solutions: [
       { title: "Groupes de restauration", desc: "Gestion centralisée : contrôle des cartes, prix, assortiment et benchmarking interne entre sites.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture de carte pour +250 références.", path: "/soluciones/carta-amplia", icon: "layers" },
-      { title: "Carte en croissance", desc: "Pricing différencié, rotation équilibrée et verre stratégique pour cartes de 80–250 références.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
+      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture pour cartes à haute densité de références.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartes avec profondeur", desc: "Pricing différencié, rotation équilibrée et verre stratégique pour cartes avec une complexité réelle.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing et marges", desc: "Multiplicateurs différenciés, échelle de prix cohérente et écart vs. optimal par type de vin.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vin au verre", desc: "Stratégie au verre : pricing, perte, rotation, durée de vie et rentabilité nette par référence.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock et rotation", desc: "Capital immobilisé, coût d'opportunité, plan de liquidation et alertes d'obsolescence.", path: "/rotacion-de-vinos", icon: "package" },
