@@ -89,6 +89,10 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
     '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
+    '/producto/winerim-core': '/fr/produit/winerim-core',
+    '/producto/winerim-supply': '/fr/produit/winerim-supply',
+    '/analisis-carta': '/fr/analyse-carte',
+    '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
   },
 };
 
