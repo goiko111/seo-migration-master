@@ -319,6 +319,13 @@ const langRoutes = (prefix: string) => (
   </>
 );
 
+/* ── Intent tracker wrapper (must be inside Router + LanguageProvider) ── */
+const IntentTracker = lazy(() =>
+  import("@/hooks/useIntentTracker").then((m) => ({
+    default: () => { m.usePageIntentTracker(); return null; },
+  }))
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -341,6 +348,7 @@ const App = () => (
             <WhatsAppButton />
             <BackToTop />
             <CookieConsent />
+            <IntentTracker />
           </Suspense>
         </LanguageProvider>
       </BrowserRouter>
