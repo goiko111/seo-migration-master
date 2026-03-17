@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
+import { ads } from "@/lib/analytics";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
