@@ -1,115 +1,226 @@
 import PainTemplate from "@/components/templates/PainTemplate";
 import type { PainPageData } from "@/components/templates/PainTemplate";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
-const data: PainPageData = {
-  slug: "problemas/carta-de-vinos-no-vende",
-  metaTitle: "¿Tu Carta de Vinos No Vende? Diagnóstico y Solución",
-  metaDescription: "¿Tu carta de vinos no genera ventas? Descubre las 5 causas más comunes y cómo solucionarlas con datos, estrategia y tecnología.",
-  heroTitle: "Tu carta de vinos no vende",
-  heroSubtitle: "Es uno de los problemas más frecuentes en restauración. La buena noticia: tiene solución. Te explicamos por qué ocurre y cómo corregirlo.",
-  heroBadge: "Diagnóstico",
-  ctaPrimaryText: "Analiza tu carta gratis",
-  ctaPrimaryUrl: "/analisis-carta",
-  ctaFinalTitle: "No dejes que tu carta siga perdiendo dinero",
-  ctaFinalDescription: "Con Winerim puedes diagnosticar tu carta de vinos en minutos y recibir recomendaciones accionables para mejorar tus ventas.",
-
-  symptom: "Tienes una carta de vinos con buenas referencias, pero las ventas de vino son bajas. Los comensales piden ʻel vino de la casaʼ o directamente no piden vino. El ticket medio en vino está estancado.",
-  symptomDetails: "Este problema afecta a más del 60% de los restaurantes. No se trata de la calidad de los vinos, sino de cómo se presentan, se estructuran y se recomiendan.",
-
-  causes: [
-    "La carta tiene demasiadas referencias y el cliente se bloquea ante tanta elección. La parálisis de decisión hace que elija lo más barato o no pida nada.",
-    "Los precios no están bien estructurados. No hay una franja de precio clara que invite a comprar, o el vino más barato es demasiado caro.",
-    "La carta no ofrece orientación. Sin notas de cata, maridajes o categorías claras, el cliente no sabe qué elegir y depende de un camarero que no siempre puede recomendar.",
-    "El personal de sala no tiene formación ni herramientas para recomendar vino. Sin confianza, evitan la recomendación.",
-    "La carta no se actualiza. Vinos sin rotación, precios desactualizados y referencias que no encajan con el menú actual.",
-  ],
-
-  economicImpact: "Un restaurante con 100 cubiertos diarios que mejore su ratio de venta de vino del 30% al 50% puede generar entre 3.000€ y 8.000€ adicionales al mes solo en vino.",
-  economicImpactDetails: "El impacto no es solo en ingresos. El vino tiene un margen bruto superior al de la comida (60-75% vs 30-40%), por lo que cada botella vendida contribuye desproporcionadamente al beneficio del restaurante.",
-
-  solution: [
-    {
-      step: "Audita tu carta actual",
-      description: "Analiza cuántas referencias tienes, cuáles se venden y cuáles no. Identifica los vinos con más de 90 días sin venta y elimínalos o sustitúyelos. Usa datos reales, no intuición.",
-    },
-    {
-      step: "Reestructura por estilo, no por región",
-      description: "Organiza la carta en categorías que el cliente entienda: blancos frescos, tintos elegantes, espumosos... Evita la jerga técnica. El objetivo es que cualquier comensal pueda elegir sin sentirse perdido.",
-    },
-    {
-      step: "Optimiza el pricing",
-      description: "Revisa la curva de precios. Asegúrate de tener opciones atractivas en la franja de 20-35€ que es la más vendida. Aplica márgenes escalonados, no un multiplicador fijo.",
-    },
-    {
-      step: "Añade orientación a la carta",
-      description: "Incluye notas de cata breves, iconos de intensidad, sugerencias de maridaje y destacados del sommelier. Cada elemento que ayude al cliente a decidir es una oportunidad de venta.",
-    },
-    {
-      step: "Implementa herramientas digitales",
-      description: "Una carta digital con filtros, recomendaciones y maridajes automáticos multiplica la conversión. El cliente puede explorar sin depender exclusivamente del personal de sala.",
-    },
-    {
-      step: "Mide y optimiza continuamente",
-      description: "Establece KPIs: ratio de mesas que piden vino, ticket medio en vino, rotación de referencias. Revisa estos datos mensualmente y ajusta la carta en consecuencia.",
-    },
-  ],
-
-  winerimModules: [
-    {
-      name: "Carta digital interactiva",
-      description: "Permite al comensal explorar la carta con filtros por estilo, precio, maridaje y región. Elimina la parálisis de elección.",
-    },
-    {
-      name: "Recomendador inteligente",
-      description: "Sugiere vinos basándose en las preferencias del cliente y el menú elegido. Funciona como un sommelier digital disponible 24/7.",
-    },
-    {
-      name: "Maridajes automáticos",
-      description: "Vincula cada plato del menú con los vinos más adecuados de la carta. Facilita la venta cruzada sin depender de la formación del personal.",
-    },
-    {
-      name: "Analítica de ventas",
-      description: "Dashboard con datos reales de qué se vende, qué no rota, qué márgenes genera cada referencia y cómo evoluciona el ticket medio.",
-    },
-    {
-      name: "Gestión de vino por copa",
-      description: "Módulo específico para gestionar la oferta de vino por copa, optimizar precios y rotar referencias de forma inteligente.",
-    },
-    {
-      name: "Optimización de precios",
-      description: "Herramientas de pricing inteligente que analizan tu carta y sugieren ajustes para maximizar el margen bruto sin perder competitividad.",
-    },
-  ],
-
-  faqs: [
-    {
-      q: "¿Cómo sé si mi carta de vinos no está funcionando?",
-      a: "Los indicadores principales son: menos del 40% de las mesas piden vino, más del 30% de las referencias no se venden en 90 días, y el ticket medio en vino lleva 6+ meses estancado.",
-    },
-    {
-      q: "¿Cuánto tiempo tarda en verse el impacto de optimizar la carta?",
-      a: "Los cambios en estructura, pricing y presentación suelen mostrar resultados en 4-8 semanas. Los restaurantes que implementan carta digital suelen ver un aumento del 15-25% en ventas de vino en el primer trimestre.",
-    },
-    {
-      q: "¿Necesito un sommelier para tener una buena carta?",
-      a: "No necesariamente. Con las herramientas adecuadas (como Winerim), cualquier restaurante puede tener una carta profesional con recomendaciones, maridajes y pricing optimizado sin depender de un sommelier a tiempo completo.",
-    },
-    {
-      q: "¿Cuántas referencias debería tener mi carta?",
-      a: "Depende de tu tipo de restaurante, pero la regla general es: mejor 50 referencias bien seleccionadas y que roten que 150 que generan confusión y stock muerto. Cada vino debe justificar su presencia con datos de venta.",
-    },
-  ],
-
-  relatedLinks: [
-    { label: "Cómo hacer una carta de vinos rentable", url: "/como-hacer-una-carta-de-vinos" },
-    { label: "Cómo vender más vino en un restaurante", url: "/como-vender-mas-vino-en-un-restaurante" },
-    { label: "Calculadora de margen de vino", url: "/calculadora-margen-vino" },
-    { label: "Analizador de carta de vinos", url: "/analisis-carta" },
-    { label: "Carta papel vs carta digital", url: "/carta-papel-vs-digital" },
-    { label: "Software de carta de vinos", url: "/software-carta-de-vinos" },
-  ],
+const i18n: Record<SupportedLang, PainPageData> = {
+  es: {
+    slug: "problemas/carta-de-vinos-no-vende",
+    metaTitle: "¿Tu Carta de Vinos No Vende? Diagnóstico y Solución",
+    metaDescription: "¿Tu carta de vinos no genera ventas? Descubre las 5 causas más comunes y cómo solucionarlas con datos, estrategia y tecnología.",
+    heroTitle: "Tu carta de vinos no vende",
+    heroSubtitle: "Es uno de los problemas más frecuentes en restauración. La buena noticia: tiene solución. Te explicamos por qué ocurre y cómo corregirlo.",
+    heroBadge: "Diagnóstico",
+    ctaPrimaryText: "Analiza tu carta gratis",
+    ctaPrimaryUrl: "/analisis-carta",
+    ctaFinalTitle: "No dejes que tu carta siga perdiendo dinero",
+    ctaFinalDescription: "Con Winerim puedes diagnosticar tu carta de vinos en minutos y recibir recomendaciones accionables para mejorar tus ventas.",
+    symptom: "Tienes una carta de vinos con buenas referencias, pero las ventas de vino son bajas. Los comensales piden ʻel vino de la casaʼ o directamente no piden vino. El ticket medio en vino está estancado.",
+    symptomDetails: "Este problema afecta a más del 60% de los restaurantes. No se trata de la calidad de los vinos, sino de cómo se presentan, se estructuran y se recomiendan.",
+    causes: [
+      "La carta tiene demasiadas referencias y el cliente se bloquea ante tanta elección. La parálisis de decisión hace que elija lo más barato o no pida nada.",
+      "Los precios no están bien estructurados. No hay una franja de precio clara que invite a comprar, o el vino más barato es demasiado caro.",
+      "La carta no ofrece orientación. Sin notas de cata, maridajes o categorías claras, el cliente no sabe qué elegir y depende de un camarero que no siempre puede recomendar.",
+      "El personal de sala no tiene formación ni herramientas para recomendar vino. Sin confianza, evitan la recomendación.",
+      "La carta no se actualiza. Vinos sin rotación, precios desactualizados y referencias que no encajan con el menú actual.",
+    ],
+    economicImpact: "Un restaurante con 100 cubiertos diarios que mejore su ratio de venta de vino del 30% al 50% puede generar entre 3.000€ y 8.000€ adicionales al mes solo en vino.",
+    economicImpactDetails: "El impacto no es solo en ingresos. El vino tiene un margen bruto superior al de la comida (60-75% vs 30-40%), por lo que cada botella vendida contribuye desproporcionadamente al beneficio del restaurante.",
+    solution: [
+      { step: "Audita tu carta actual", description: "Analiza cuántas referencias tienes, cuáles se venden y cuáles no. Identifica los vinos con más de 90 días sin venta y elimínalos o sustitúyelos. Usa datos reales, no intuición." },
+      { step: "Reestructura por estilo, no por región", description: "Organiza la carta en categorías que el cliente entienda: blancos frescos, tintos elegantes, espumosos... Evita la jerga técnica. El objetivo es que cualquier comensal pueda elegir sin sentirse perdido." },
+      { step: "Optimiza el pricing", description: "Revisa la curva de precios. Asegúrate de tener opciones atractivas en la franja de 20-35€ que es la más vendida. Aplica márgenes escalonados, no un multiplicador fijo." },
+      { step: "Añade orientación a la carta", description: "Incluye notas de cata breves, iconos de intensidad, sugerencias de maridaje y destacados del sommelier. Cada elemento que ayude al cliente a decidir es una oportunidad de venta." },
+      { step: "Implementa herramientas digitales", description: "Una carta digital con filtros, recomendaciones y maridajes automáticos multiplica la conversión. El cliente puede explorar sin depender exclusivamente del personal de sala." },
+      { step: "Mide y optimiza continuamente", description: "Establece KPIs: ratio de mesas que piden vino, ticket medio en vino, rotación de referencias. Revisa estos datos mensualmente y ajusta la carta en consecuencia." },
+    ],
+    winerimModules: [
+      { name: "Carta digital interactiva", description: "Permite al comensal explorar la carta con filtros por estilo, precio, maridaje y región. Elimina la parálisis de elección." },
+      { name: "Recomendador inteligente", description: "Sugiere vinos basándose en las preferencias del cliente y el menú elegido. Funciona como un sommelier digital disponible 24/7." },
+      { name: "Maridajes automáticos", description: "Vincula cada plato del menú con los vinos más adecuados de la carta. Facilita la venta cruzada sin depender de la formación del personal." },
+      { name: "Analítica de ventas", description: "Dashboard con datos reales de qué se vende, qué no rota, qué márgenes genera cada referencia y cómo evoluciona el ticket medio." },
+      { name: "Gestión de vino por copa", description: "Módulo específico para gestionar la oferta de vino por copa, optimizar precios y rotar referencias de forma inteligente." },
+      { name: "Optimización de precios", description: "Herramientas de pricing inteligente que analizan tu carta y sugieren ajustes para maximizar el margen bruto sin perder competitividad." },
+    ],
+    faqs: [
+      { q: "¿Cómo sé si mi carta de vinos no está funcionando?", a: "Los indicadores principales son: menos del 40% de las mesas piden vino, más del 30% de las referencias no se venden en 90 días, y el ticket medio en vino lleva 6+ meses estancado." },
+      { q: "¿Cuánto tiempo tarda en verse el impacto de optimizar la carta?", a: "Los cambios en estructura, pricing y presentación suelen mostrar resultados en 4-8 semanas. Los restaurantes que implementan carta digital suelen ver un aumento del 15-25% en ventas de vino en el primer trimestre." },
+      { q: "¿Necesito un sommelier para tener una buena carta?", a: "No necesariamente. Con las herramientas adecuadas (como Winerim), cualquier restaurante puede tener una carta profesional con recomendaciones, maridajes y pricing optimizado sin depender de un sommelier a tiempo completo." },
+      { q: "¿Cuántas referencias debería tener mi carta?", a: "Depende de tu tipo de restaurante, pero la regla general es: mejor 50 referencias bien seleccionadas y que roten que 150 que generan confusión y stock muerto. Cada vino debe justificar su presencia con datos de venta." },
+    ],
+    relatedLinks: [
+      { label: "Cómo hacer una carta de vinos rentable", url: "/como-hacer-una-carta-de-vinos" },
+      { label: "Cómo vender más vino en un restaurante", url: "/como-vender-mas-vino-en-un-restaurante" },
+      { label: "Calculadora de margen de vino", url: "/calculadora-margen-vino" },
+      { label: "Analizador de carta de vinos", url: "/analisis-carta" },
+      { label: "Carta papel vs carta digital", url: "/carta-papel-vs-digital" },
+      { label: "Software de carta de vinos", url: "/software-carta-de-vinos" },
+    ],
+  },
+  en: {
+    slug: "problems/wine-list-not-selling",
+    metaTitle: "Your Wine List Isn't Selling? Diagnosis & Solution",
+    metaDescription: "Is your wine list failing to generate sales? Discover the 5 most common causes and how to fix them with data, strategy and technology.",
+    heroTitle: "Your wine list isn't selling",
+    heroSubtitle: "It's one of the most frequent problems in hospitality. The good news: it has a solution. We explain why it happens and how to fix it.",
+    heroBadge: "Diagnosis",
+    ctaPrimaryText: "Analyze your list for free",
+    ctaPrimaryUrl: "/en/wine-list-analyzer",
+    ctaFinalTitle: "Don't let your wine list keep losing money",
+    ctaFinalDescription: "With Winerim you can diagnose your wine list in minutes and receive actionable recommendations to boost your sales.",
+    symptom: "You have a wine list with good references, but wine sales are low. Guests order 'the house wine' or skip wine altogether. The average wine ticket is stagnant.",
+    symptomDetails: "This problem affects over 60% of restaurants. It's not about wine quality — it's about how wines are presented, structured and recommended.",
+    causes: [
+      "The list has too many references and the guest freezes with decision paralysis. They pick the cheapest option or nothing at all.",
+      "Prices aren't well structured. There's no clear price bracket that encourages buying, or the cheapest wine is still too expensive.",
+      "The list offers no guidance. Without tasting notes, pairings or clear categories, the guest doesn't know what to choose and depends on staff who may not be able to recommend.",
+      "Floor staff lack the training and tools to recommend wine. Without confidence, they avoid making suggestions.",
+      "The list isn't updated. Wines with no rotation, outdated prices and references that don't match the current menu.",
+    ],
+    economicImpact: "A restaurant with 100 daily covers that improves its wine ordering ratio from 30% to 50% can generate €3,000–€8,000 extra per month in wine alone.",
+    economicImpactDetails: "The impact isn't just on revenue. Wine has a higher gross margin than food (60-75% vs 30-40%), so every bottle sold contributes disproportionately to the restaurant's profit.",
+    solution: [
+      { step: "Audit your current list", description: "Analyze how many references you have, which sell and which don't. Identify wines with 90+ days without a sale and remove or replace them. Use real data, not intuition." },
+      { step: "Restructure by style, not region", description: "Organize the list into categories the guest understands: fresh whites, elegant reds, sparkling... Avoid technical jargon. The goal is that any diner can choose without feeling lost." },
+      { step: "Optimize pricing", description: "Review the price curve. Make sure you have attractive options in the €20-35 bracket — the best-selling range. Apply tiered margins, not a fixed multiplier." },
+      { step: "Add guidance to the list", description: "Include brief tasting notes, intensity icons, pairing suggestions and sommelier picks. Every element that helps the guest decide is a sales opportunity." },
+      { step: "Implement digital tools", description: "A digital wine list with filters, recommendations and automatic pairings multiplies conversion. Guests can explore without relying solely on floor staff." },
+      { step: "Measure and optimize continuously", description: "Set KPIs: ratio of tables ordering wine, average wine ticket, reference rotation. Review these monthly and adjust the list accordingly." },
+    ],
+    winerimModules: [
+      { name: "Interactive digital list", description: "Lets guests explore the list with filters by style, price, pairing and region. Eliminates decision paralysis." },
+      { name: "Smart recommender", description: "Suggests wines based on guest preferences and the chosen menu. Works like a 24/7 digital sommelier." },
+      { name: "Automatic pairings", description: "Links each menu dish with the most suitable wines from the list. Facilitates cross-selling without depending on staff training." },
+      { name: "Sales analytics", description: "Dashboard with real data on what sells, what doesn't rotate, what margins each reference generates and how the average ticket evolves." },
+      { name: "By-the-glass management", description: "Dedicated module to manage the by-the-glass offering, optimize prices and rotate references intelligently." },
+      { name: "Price optimization", description: "Smart pricing tools that analyze your list and suggest adjustments to maximize gross margin without losing competitiveness." },
+    ],
+    faqs: [
+      { q: "How do I know if my wine list isn't working?", a: "Key indicators: fewer than 40% of tables order wine, over 30% of references haven't sold in 90 days, and the average wine ticket has been flat for 6+ months." },
+      { q: "How long does it take to see the impact of optimizing the list?", a: "Changes in structure, pricing and presentation usually show results in 4-8 weeks. Restaurants that implement a digital list typically see a 15-25% increase in wine sales in the first quarter." },
+      { q: "Do I need a sommelier to have a good wine list?", a: "Not necessarily. With the right tools (like Winerim), any restaurant can have a professional list with recommendations, pairings and optimized pricing — without a full-time sommelier." },
+      { q: "How many references should my list have?", a: "It depends on your restaurant type, but the general rule is: 50 well-selected, rotating references are better than 150 that create confusion and dead stock. Every wine must justify its place with sales data." },
+    ],
+    relatedLinks: [
+      { label: "How to create a profitable wine list", url: "/en/how-to-create-wine-list" },
+      { label: "How to sell more wine in a restaurant", url: "/en/sell-more-wine-restaurant" },
+      { label: "Wine margin calculator", url: "/en/wine-margin-calculator" },
+      { label: "Wine list analyzer", url: "/en/wine-list-analyzer" },
+      { label: "Paper vs digital wine list", url: "/en/paper-vs-digital-wine-list" },
+      { label: "Wine list software", url: "/en/wine-list-software" },
+    ],
+  },
+  it: {
+    slug: "problemi/carta-vini-non-vende",
+    metaTitle: "La Tua Carta dei Vini Non Vende? Diagnosi e Soluzione",
+    metaDescription: "La tua carta dei vini non genera vendite? Scopri le 5 cause più comuni e come risolverle con dati, strategia e tecnologia.",
+    heroTitle: "La tua carta dei vini non vende",
+    heroSubtitle: "È uno dei problemi più frequenti nella ristorazione. La buona notizia: ha una soluzione. Ti spieghiamo perché succede e come correggerlo.",
+    heroBadge: "Diagnosi",
+    ctaPrimaryText: "Analizza la tua carta gratis",
+    ctaPrimaryUrl: "/it/analizzatore-carta-vini",
+    ctaFinalTitle: "Non lasciare che la tua carta continui a perdere soldi",
+    ctaFinalDescription: "Con Winerim puoi diagnosticare la tua carta dei vini in pochi minuti e ricevere raccomandazioni operative per migliorare le vendite.",
+    symptom: "Hai una carta dei vini con buone referenze, ma le vendite di vino sono basse. I commensali ordinano 'il vino della casa' o non ordinano affatto. Lo scontrino medio sul vino è stagnante.",
+    symptomDetails: "Questo problema colpisce oltre il 60% dei ristoranti. Non è questione di qualità dei vini, ma di come vengono presentati, strutturati e raccomandati.",
+    causes: [
+      "La carta ha troppe referenze e il cliente si blocca di fronte alla scelta. La paralisi decisionale lo porta a scegliere il più economico o a non ordinare nulla.",
+      "I prezzi non sono ben strutturati. Non c'è una fascia di prezzo chiara che inviti all'acquisto, o il vino più economico è comunque troppo caro.",
+      "La carta non offre orientamento. Senza note di degustazione, abbinamenti o categorie chiare, il cliente non sa cosa scegliere e dipende dal cameriere che non sempre può consigliare.",
+      "Il personale di sala non ha formazione né strumenti per raccomandare il vino. Senza sicurezza, evitano la raccomandazione.",
+      "La carta non viene aggiornata. Vini senza rotazione, prezzi obsoleti e referenze che non si adattano al menu attuale.",
+    ],
+    economicImpact: "Un ristorante con 100 coperti giornalieri che migliori il suo tasso di vendita di vino dal 30% al 50% può generare tra 3.000€ e 8.000€ in più al mese solo con il vino.",
+    economicImpactDetails: "L'impatto non è solo sui ricavi. Il vino ha un margine lordo superiore al cibo (60-75% vs 30-40%), quindi ogni bottiglia venduta contribuisce in modo sproporzionato al profitto del ristorante.",
+    solution: [
+      { step: "Controlla la tua carta attuale", description: "Analizza quante referenze hai, quali si vendono e quali no. Identifica i vini con più di 90 giorni senza vendita ed eliminali o sostituiscili. Usa dati reali, non l'intuizione." },
+      { step: "Ristruttura per stile, non per regione", description: "Organizza la carta in categorie che il cliente comprenda: bianchi freschi, rossi eleganti, spumanti... Evita il gergo tecnico. L'obiettivo è che qualsiasi commensale possa scegliere senza sentirsi perso." },
+      { step: "Ottimizza il pricing", description: "Rivedi la curva dei prezzi. Assicurati di avere opzioni attraenti nella fascia 20-35€, la più venduta. Applica margini scalati, non un moltiplicatore fisso." },
+      { step: "Aggiungi orientamento alla carta", description: "Includi brevi note di degustazione, icone di intensità, suggerimenti di abbinamento e selezioni del sommelier. Ogni elemento che aiuta il cliente a decidere è un'opportunità di vendita." },
+      { step: "Implementa strumenti digitali", description: "Una carta digitale con filtri, raccomandazioni e abbinamenti automatici moltiplica la conversione. Il cliente può esplorare senza dipendere esclusivamente dal personale di sala." },
+      { step: "Misura e ottimizza continuamente", description: "Stabilisci KPI: percentuale di tavoli che ordinano vino, scontrino medio sul vino, rotazione delle referenze. Rivedi questi dati mensilmente e adatta la carta di conseguenza." },
+    ],
+    winerimModules: [
+      { name: "Carta digitale interattiva", description: "Permette al commensale di esplorare la carta con filtri per stile, prezzo, abbinamento e regione. Elimina la paralisi della scelta." },
+      { name: "Raccomandatore intelligente", description: "Suggerisce vini in base alle preferenze del cliente e al menu scelto. Funziona come un sommelier digitale disponibile 24/7." },
+      { name: "Abbinamenti automatici", description: "Collega ogni piatto del menu con i vini più adatti della carta. Facilita il cross-selling senza dipendere dalla formazione del personale." },
+      { name: "Analitica delle vendite", description: "Dashboard con dati reali su cosa si vende, cosa non ruota, quali margini genera ogni referenza e come si evolve lo scontrino medio." },
+      { name: "Gestione vino al calice", description: "Modulo dedicato per gestire l'offerta al calice, ottimizzare i prezzi e ruotare le referenze in modo intelligente." },
+      { name: "Ottimizzazione dei prezzi", description: "Strumenti di pricing intelligente che analizzano la tua carta e suggeriscono aggiustamenti per massimizzare il margine lordo senza perdere competitività." },
+    ],
+    faqs: [
+      { q: "Come faccio a sapere se la mia carta dei vini non funziona?", a: "Gli indicatori principali sono: meno del 40% dei tavoli ordina vino, più del 30% delle referenze non si vendono in 90 giorni, e lo scontrino medio sul vino è fermo da 6+ mesi." },
+      { q: "Quanto tempo ci vuole per vedere l'impatto dell'ottimizzazione?", a: "I cambiamenti in struttura, pricing e presentazione mostrano risultati in 4-8 settimane. I ristoranti che implementano una carta digitale vedono un aumento del 15-25% nelle vendite di vino nel primo trimestre." },
+      { q: "Ho bisogno di un sommelier per avere una buona carta?", a: "Non necessariamente. Con gli strumenti giusti (come Winerim), qualsiasi ristorante può avere una carta professionale con raccomandazioni, abbinamenti e pricing ottimizzato senza un sommelier a tempo pieno." },
+      { q: "Quante referenze dovrebbe avere la mia carta?", a: "Dipende dal tipo di ristorante, ma la regola generale è: meglio 50 referenze ben selezionate che ruotano che 150 che creano confusione e stock morto. Ogni vino deve giustificare la sua presenza con dati di vendita." },
+    ],
+    relatedLinks: [
+      { label: "Come creare una carta dei vini redditizia", url: "/it/come-creare-carta-vini" },
+      { label: "Come vendere più vino al ristorante", url: "/it/vendere-piu-vino-ristorante" },
+      { label: "Calcolatore margine vino", url: "/it/calcolatore-margine-vino" },
+      { label: "Analizzatore carta dei vini", url: "/it/analizzatore-carta-vini" },
+      { label: "Carta cartacea vs digitale", url: "/it/carta-cartacea-vs-digitale" },
+      { label: "Software carta dei vini", url: "/it/software-carta-vini" },
+    ],
+  },
+  fr: {
+    slug: "problemes/carte-des-vins-ne-vend-pas",
+    metaTitle: "Votre Carte des Vins Ne Vend Pas ? Diagnostic et Solution",
+    metaDescription: "Votre carte des vins ne génère pas de ventes ? Découvrez les 5 causes les plus courantes et comment les résoudre avec données, stratégie et technologie.",
+    heroTitle: "Votre carte des vins ne vend pas",
+    heroSubtitle: "C'est l'un des problèmes les plus fréquents en restauration. La bonne nouvelle : il a une solution. Nous vous expliquons pourquoi et comment y remédier.",
+    heroBadge: "Diagnostic",
+    ctaPrimaryText: "Analysez votre carte gratuitement",
+    ctaPrimaryUrl: "/fr/analyseur-carte-des-vins",
+    ctaFinalTitle: "Ne laissez plus votre carte perdre de l'argent",
+    ctaFinalDescription: "Avec Winerim, diagnostiquez votre carte des vins en quelques minutes et recevez des recommandations actionnables pour améliorer vos ventes.",
+    symptom: "Vous avez une carte des vins avec de bonnes références, mais les ventes de vin sont faibles. Les convives commandent « le vin maison » ou ne commandent pas du tout. Le ticket moyen vin stagne.",
+    symptomDetails: "Ce problème touche plus de 60% des restaurants. Ce n'est pas une question de qualité des vins, mais de la façon dont ils sont présentés, structurés et recommandés.",
+    causes: [
+      "La carte comporte trop de références et le client se bloque face au choix. La paralysie décisionnelle le pousse à choisir le moins cher ou à ne rien commander.",
+      "Les prix ne sont pas bien structurés. Il n'y a pas de gamme de prix claire qui incite à l'achat, ou le vin le moins cher est encore trop cher.",
+      "La carte n'offre aucune orientation. Sans notes de dégustation, accords mets-vins ou catégories claires, le client ne sait pas quoi choisir et dépend d'un serveur qui ne peut pas toujours conseiller.",
+      "Le personnel de salle n'a ni la formation ni les outils pour recommander du vin. Sans confiance, ils évitent la recommandation.",
+      "La carte n'est pas mise à jour. Vins sans rotation, prix obsolètes et références qui ne correspondent pas au menu actuel.",
+    ],
+    economicImpact: "Un restaurant servant 100 couverts par jour qui améliore son taux de commande de vin de 30% à 50% peut générer entre 3 000€ et 8 000€ supplémentaires par mois rien qu'en vin.",
+    economicImpactDetails: "L'impact ne se limite pas au chiffre d'affaires. Le vin a une marge brute supérieure à celle de la cuisine (60-75% vs 30-40%), chaque bouteille vendue contribue donc de manière disproportionnée au bénéfice du restaurant.",
+    solution: [
+      { step: "Auditez votre carte actuelle", description: "Analysez combien de références vous avez, lesquelles se vendent et lesquelles non. Identifiez les vins sans vente depuis plus de 90 jours et supprimez-les ou remplacez-les. Utilisez des données réelles, pas l'intuition." },
+      { step: "Restructurez par style, pas par région", description: "Organisez la carte en catégories compréhensibles : blancs frais, rouges élégants, effervescents... Évitez le jargon technique. L'objectif est que chaque convive puisse choisir sans se sentir perdu." },
+      { step: "Optimisez le pricing", description: "Révisez la courbe des prix. Assurez-vous d'avoir des options attractives dans la gamme 20-35€, la plus vendue. Appliquez des marges échelonnées, pas un multiplicateur fixe." },
+      { step: "Ajoutez de l'orientation à la carte", description: "Incluez de brèves notes de dégustation, des icônes d'intensité, des suggestions d'accords et des coups de cœur du sommelier. Chaque élément aidant le client à décider est une opportunité de vente." },
+      { step: "Implémentez des outils numériques", description: "Une carte digitale avec filtres, recommandations et accords automatiques multiplie la conversion. Le client peut explorer sans dépendre exclusivement du personnel de salle." },
+      { step: "Mesurez et optimisez en continu", description: "Définissez des KPI : ratio de tables commandant du vin, ticket moyen vin, rotation des références. Révisez ces données mensuellement et ajustez la carte en conséquence." },
+    ],
+    winerimModules: [
+      { name: "Carte digitale interactive", description: "Permet au convive d'explorer la carte avec des filtres par style, prix, accord et région. Élimine la paralysie du choix." },
+      { name: "Recommandeur intelligent", description: "Suggère des vins basés sur les préférences du client et le menu choisi. Fonctionne comme un sommelier digital disponible 24h/24." },
+      { name: "Accords automatiques", description: "Associe chaque plat du menu aux vins les plus adaptés de la carte. Facilite la vente croisée sans dépendre de la formation du personnel." },
+      { name: "Analytique des ventes", description: "Tableau de bord avec des données réelles sur ce qui se vend, ce qui ne tourne pas, quels marges génère chaque référence et comment évolue le ticket moyen." },
+      { name: "Gestion du vin au verre", description: "Module dédié pour gérer l'offre au verre, optimiser les prix et faire tourner les références intelligemment." },
+      { name: "Optimisation des prix", description: "Outils de pricing intelligent qui analysent votre carte et suggèrent des ajustements pour maximiser la marge brute sans perdre en compétitivité." },
+    ],
+    faqs: [
+      { q: "Comment savoir si ma carte des vins ne fonctionne pas ?", a: "Les indicateurs clés : moins de 40% des tables commandent du vin, plus de 30% des références ne se vendent pas en 90 jours, et le ticket moyen vin stagne depuis 6+ mois." },
+      { q: "Combien de temps faut-il pour voir l'impact de l'optimisation ?", a: "Les changements de structure, pricing et présentation montrent des résultats en 4-8 semaines. Les restaurants qui implémentent une carte digitale voient une augmentation de 15-25% des ventes de vin au premier trimestre." },
+      { q: "Ai-je besoin d'un sommelier pour avoir une bonne carte ?", a: "Pas nécessairement. Avec les bons outils (comme Winerim), tout restaurant peut avoir une carte professionnelle avec recommandations, accords et pricing optimisé sans sommelier à temps plein." },
+      { q: "Combien de références ma carte devrait-elle avoir ?", a: "Cela dépend du type de restaurant, mais la règle générale : 50 références bien sélectionnées qui tournent valent mieux que 150 qui créent confusion et stock mort. Chaque vin doit justifier sa présence par des données de vente." },
+    ],
+    relatedLinks: [
+      { label: "Comment créer une carte des vins rentable", url: "/fr/comment-creer-carte-des-vins" },
+      { label: "Comment vendre plus de vin au restaurant", url: "/fr/vendre-plus-vin-restaurant" },
+      { label: "Calculateur de marge vinicole", url: "/fr/calculateur-marge-vin" },
+      { label: "Analyseur de carte des vins", url: "/fr/analyseur-carte-des-vins" },
+      { label: "Carte papier vs carte digitale", url: "/fr/carte-papier-vs-digitale" },
+      { label: "Logiciel de carte des vins", url: "/fr/logiciel-carte-des-vins" },
+    ],
+  },
 };
 
-const CartaNoVende = () => <PainTemplate data={data} />;
+const CartaNoVende = () => {
+  const { lang } = useLanguage();
+  return <PainTemplate data={i18n[lang]} />;
+};
 
 export default CartaNoVende;
