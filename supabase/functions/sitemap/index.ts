@@ -148,7 +148,10 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/software-carta-de-vinos', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/que-es-winerim', priority: '0.6', changefreq: 'monthly', multilang: true },
   { esPath: '/producto/inteligencia-dinamica', priority: '0.7', changefreq: 'monthly', multilang: true },
-  { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: false },
+  { esPath: '/producto/winerim-core', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/producto/winerim-supply', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/calculadora-margen-vino', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/inteligencia-artificial-restaurantes', priority: '0.8', changefreq: 'monthly', multilang: false },
 
   // Solutions
