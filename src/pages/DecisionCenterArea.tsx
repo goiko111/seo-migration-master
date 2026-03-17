@@ -17,6 +17,9 @@ import margenesPricingEN from "@/data/decisionCenter/margenesPricing.en";
 import margenesPricingIT from "@/data/decisionCenter/margenesPricing.it";
 import margenesPricingFR from "@/data/decisionCenter/margenesPricing.fr";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
+import stockRotacionEN from "@/data/decisionCenter/stockRotacion.en";
+import stockRotacionIT from "@/data/decisionCenter/stockRotacion.it";
+import stockRotacionFR from "@/data/decisionCenter/stockRotacion.fr";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
@@ -657,10 +660,17 @@ const DecisionCenterArea = () => {
     fr: margenesPricingFR,
   };
 
+  const stockByLang: Record<string, DeepAreaContent> = {
+    es: stockRotacionContent,
+    en: stockRotacionEN,
+    it: stockRotacionIT,
+    fr: stockRotacionFR,
+  };
+
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
     "margenes-pricing": margenesByLang[lang] || margenesPricingContent,
-    "stock-rotacion": stockRotacionContent,
+    "stock-rotacion": stockByLang[lang] || stockRotacionContent,
     "compras-reposicion": comprasReposicionContent,
     "carta-equilibrio": cartaEquilibrioContent,
     "vino-por-copa": vinoPorCopaContent,
