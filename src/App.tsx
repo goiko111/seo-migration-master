@@ -432,6 +432,10 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/guides/wine-pairing-strategy-restaurants`} element={<EstrategiaMaridaje />} />
     <Route path={`${prefix}/guide/strategia-abbinamento-vino-ristorante`} element={<EstrategiaMaridaje />} />
     <Route path={`${prefix}/guides/strategie-accords-mets-vins-restaurant`} element={<EstrategiaMaridaje />} />
+    {/* Resources — localized slug routes */}
+    <Route path={`${prefix}/resources/:slug`} element={<ResourcePage />} />
+    <Route path={`${prefix}/risorse/:slug`} element={<ResourcePage />} />
+    <Route path={`${prefix}/ressources/:slug`} element={<ResourcePage />} />
   </>
 );
 
