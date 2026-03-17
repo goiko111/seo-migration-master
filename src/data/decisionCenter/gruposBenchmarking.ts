@@ -38,6 +38,18 @@ const gruposBenchmarkingContent: DeepAreaContent = {
       action: "Definió bandas de precio por categoría y tipo de hotel (urbano vs resort). Cada hotel tiene margen de ±2 € dentro de la banda.",
       result: "Coherencia de marca, margen homogéneo del 58% en todos los hoteles y negociación de compra más fuerte por volumen.",
     },
+    {
+      profile: "Grupo de 4 restaurantes casual-premium",
+      situation: "Cada local compraba por su cuenta al proveedor más cercano. El mismo vino costaba entre 5,20 € y 7,80 € según el local. Nadie cruzaba datos de compra.",
+      action: "Centralizó la compra de las 20 referencias corporativas negociando por volumen total del grupo. Usó Winerim Supply para detectar sobreprecios por local.",
+      result: "Ahorro medio del 14 % en coste de compra. Capital liberado: 6.400 €/trimestre. Los locales mantienen libertad para el 30 % de la carta local.",
+    },
+    {
+      profile: "Grupo de 8 locales con mix casual y gastro",
+      situation: "Los 3 gastronómicos tenían un 62 % de margen, pero los 5 casuales estaban entre el 38 % y el 51 %. El F&B corporativo no entendía la dispersión.",
+      action: "Separó el benchmarking en dos clusters (casual y gastro). Detectó que los casuales con peor margen aplicaban el mismo multiplicador que el gastro en vez de uno adaptado a su franja de precio.",
+      result: "Ajustando multiplicadores por tipología, los casuales subieron al 54-58 % de margen en 2 meses. Sin tocar la carta, solo el pricing.",
+    },
   ],
   subtopics: [
     { id: "comparar-unidades", title: "Cómo comparar unidades de forma útil", priority: "este mes",
