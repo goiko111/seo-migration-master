@@ -94,7 +94,7 @@ export interface VerticalContent {
   nextStepsTitle: string;
 }
 
-const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
+const VerticalTemplate = ({ t, hideSupplyBlock }: { t: VerticalContent; hideSupplyBlock?: boolean }) => {
   const { localePath } = useLanguage();
   const BadgeIcon = t.badgeIcon;
 
