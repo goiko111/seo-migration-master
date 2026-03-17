@@ -4,10 +4,16 @@
  * Centralized event dispatcher. All analytics events flow through here.
  * Consent-aware: respects Google Consent Mode v2 + cookie banner state.
  * 
+ * Consent architecture:
+ * 1. index.html reads localStorage BEFORE GTM loads → sets gtag defaults
+ * 2. CookieConsent.tsx calls updateConsent() on user action → gtag('consent','update')
+ * 3. analytics.ts push() always fires to dataLayer (GTM respects consent mode)
+ * 4. ads.conversion() includes enhanced_conversion_data only when consent granted
+ * 5. intentTracking.ts stores localStorage score only with consent
+ * 
  * Usage:
- *   import { ga, ads } from "@/lib/analytics";
+ *   import { ga, ads, hasConsent } from "@/lib/analytics";
  *   ga.ctaClick("hero_home", "/demo");
- *   ga.formSubmit("demo", { business_type: "hotel" });
  *   ads.conversion("demo", { email: "a@b.com" });
  */
 
@@ -24,6 +30,10 @@ interface EnhancedConversionData {
   country?: string;
 }
 
+/* ── Constants ─────────────────────────────────── */
+
+const CONSENT_KEY = "winerim_cookie_consent";
+
 /* ── Helpers ───────────────────────────────────── */
 
 function push(event: string, params: GAEventParams = {}): void {
@@ -36,25 +46,52 @@ function getPagePath(): string {
   return typeof window !== "undefined" ? window.location.pathname : "/";
 }
 
-/* ── Consent helpers ───────────────────────────── */
+/* ── Consent state ─────────────────────────────── */
 
+/** Check if user has granted analytics/ads consent */
+export function hasConsent(): boolean {
+  try {
+    return localStorage.getItem(CONSENT_KEY) === "accepted";
+  } catch {
+    return false;
+  }
+}
+
+/** Check if user has made any consent choice (not pending) */
+export function hasConsentDecision(): boolean {
+  try {
+    const v = localStorage.getItem(CONSENT_KEY);
+    return v === "accepted" || v === "rejected";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Update consent state in Google Consent Mode v2.
+ * Called by CookieConsent component on user action.
+ * Also called on mount if user previously accepted.
+ */
 export function updateConsent(granted: boolean): void {
+  const state = granted ? "granted" : "denied";
+
+  // Push to dataLayer for GTM-based consent triggers
   push("consent_update", {
-    analytics_storage: granted ? "granted" : "denied",
-    ad_storage: granted ? "granted" : "denied",
-    ad_user_data: granted ? "granted" : "denied",
-    ad_personalization: granted ? "granted" : "denied",
+    consent_analytics: state,
+    consent_ads: state,
+    consent_ad_user_data: state,
+    consent_ad_personalization: state,
   });
 
-  // Also push gtag consent update for GA4 consent mode v2
+  // Update gtag consent mode (direct API, not via dataLayer)
   if (typeof window !== "undefined") {
     const gtag = (window as any).gtag;
     if (typeof gtag === "function") {
       gtag("consent", "update", {
-        analytics_storage: granted ? "granted" : "denied",
-        ad_storage: granted ? "granted" : "denied",
-        ad_user_data: granted ? "granted" : "denied",
-        ad_personalization: granted ? "granted" : "denied",
+        analytics_storage: state,
+        ad_storage: state,
+        ad_user_data: state,
+        ad_personalization: state,
       });
     }
   }

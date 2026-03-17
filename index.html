@@ -46,20 +46,28 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
 
-    <!-- Google Consent Mode v2 — default denied until user accepts -->
+    <!-- Google Consent Mode v2 — initialised BEFORE GTM loads -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+
+      // 1. Read stored consent BEFORE GTM fires any tags
+      var _storedConsent = null;
+      try { _storedConsent = localStorage.getItem('winerim_cookie_consent'); } catch(e){}
+
+      var _consentState = _storedConsent === 'accepted' ? 'granted' : 'denied';
+
+      // 2. Set consent defaults — uses stored value if available
       gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'wait_for_update': 500
+        'analytics_storage': _consentState,
+        'ad_storage': _consentState,
+        'ad_user_data': _consentState,
+        'ad_personalization': _consentState,
+        'wait_for_update': _storedConsent ? 0 : 500
       });
-      // Redact ads data when consent not granted (privacy-safe remarketing)
+
+      // 3. Privacy-safe settings for when consent is denied
       gtag('set', 'ads_data_redaction', true);
-      // URL passthrough for cross-domain measurement without cookies
       gtag('set', 'url_passthrough', true);
     </script>
 
