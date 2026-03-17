@@ -316,12 +316,14 @@ const ContactFormFields = ({
   const isResource = variant === "resource";
   const isContact = variant === "contact";
 
-  const phoneRequired = isDemo || isContact;
-  const positionRequired = isDemo || isContact;
-  const showPosition = !isResource;
-  const showPhone = !isResource;
-  const showCity = !isResource;
-  const showReferences = !isResource;
+  const phoneRequired = isDemo || isContact || isResource;
+  const positionRequired = isDemo || isContact || isResource;
+  const showPosition = true;
+  const showPhone = true;
+  const showCity = true;
+  const showReferences = true;
+  const cityRequired = isDemo || isContact;
+  const referencesRequired = isDemo || isContact || isResource;
   const showBusinessType = isDemo;
   const showLocations = isDemo;
   const showChallenge = isDemo;
