@@ -315,6 +315,34 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/wine-margin-calculator`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/calcolatrice-margini-vino`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/calculateur-marge-vin`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/tools/dead-stock-calculator`} element={<CalculadoraStockMuerto />} />
+    <Route path={`${prefix}/strumenti/calcolatrice-stock-morto`} element={<CalculadoraStockMuerto />} />
+    <Route path={`${prefix}/outils/calculateur-stock-mort`} element={<CalculadoraStockMuerto />} />
+    <Route path={`${prefix}/tools/average-ticket-calculator`} element={<CalculadoraTicketMedio />} />
+    <Route path={`${prefix}/strumenti/calcolatrice-scontrino-medio`} element={<CalculadoraTicketMedio />} />
+    <Route path={`${prefix}/outils/calculateur-ticket-moyen`} element={<CalculadoraTicketMedio />} />
+    <Route path={`${prefix}/tools/smart-purchasing-calculator`} element={<CalculadoraCompraInteligente />} />
+    <Route path={`${prefix}/strumenti/calcolatrice-acquisto-intelligente`} element={<CalculadoraCompraInteligente />} />
+    <Route path={`${prefix}/outils/calculateur-achat-intelligent`} element={<CalculadoraCompraInteligente />} />
+    <Route path={`${prefix}/tools/by-glass-diagnostic`} element={<DiagnosticoVinoPorCopa />} />
+    <Route path={`${prefix}/strumenti/diagnostico-vino-al-calice`} element={<DiagnosticoVinoPorCopa />} />
+    <Route path={`${prefix}/outils/diagnostic-vin-au-verre`} element={<DiagnosticoVinoPorCopa />} />
+    <Route path={`${prefix}/tools/wine-list-score`} element={<WineListScore />} />
+    <Route path={`${prefix}/strumenti/wine-list-score`} element={<WineListScore />} />
+    <Route path={`${prefix}/outils/wine-list-score`} element={<WineListScore />} />
+    <Route path={`${prefix}/tools/multi-unit-auditor`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/strumenti/auditor-carta-multilocale`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/outils/auditeur-carte-multi-sites`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/comparisons`} element={<Comparativas />} />
+    <Route path={`${prefix}/confronti`} element={<Comparativas />} />
+    <Route path={`${prefix}/comparatifs`} element={<Comparativas />} />
+    <Route path={`${prefix}/comparisons/:slug`} element={<ComparativaDetalle />} />
+    <Route path={`${prefix}/confronti/:slug`} element={<ComparativaDetalle />} />
+    <Route path={`${prefix}/comparatifs/:slug`} element={<ComparativaDetalle />} />
+    <Route path={`${prefix}/decision-center`} element={<DecisionCenter />} />
+    <Route path={`${prefix}/decision-center/:areaSlug`} element={<DecisionCenterArea />} />
+    <Route path={`${prefix}/implementation`} element={<Implantacion />} />
+    <Route path={`${prefix}/implementazione`} element={<Implantacion />} />
     <Route path={`${prefix}/article/:slug`} element={<ArticlePage />} />
   </>
 );
