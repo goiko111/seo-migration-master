@@ -39,7 +39,7 @@ const i18n: Record<SupportedLang, {
   ctaDesc: string;
   ctaBtn: string;
   comparisons: ComparisonRow[];
-  links: { to: string; label: string; type: string }[];
+  links: { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" }[];
 }> = {
   es: {
     metaTitle: "Carta de Vinos en Papel vs Carta Digital | Comparativa | Winerim",
