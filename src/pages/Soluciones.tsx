@@ -146,7 +146,7 @@ const i18n: Record<string, {
     platformTitle: "Trois couches, un système",
     platformSubtitle: "Chaque couche résout une partie du problème. Ensemble, elles couvrent tout le cycle du vin dans votre restaurant.",
     layers: [
-      { tag: "Moteur analytique", name: "Winerim Core", desc: "26 modules reliant pricing, rotation, stock et équilibre de la carte dans un système décisionnel unifié.", path: "/producto/winerim-core", accent: "wine" },
+      { tag: "Moteur analytique", name: "Winerim Core", desc: "Une couche analytique profonde reliant pricing, rotation, stock et équilibre de la carte dans un système décisionnel unifié.", path: "/producto/winerim-core", accent: "wine" },
       { tag: "IA tactique", name: "Intelligence Dynamique", desc: "La couche qui adapte la carte en temps réel : recommandations, mises en avant et actions automatiques basées sur vos données.", path: "/producto/inteligencia-dinamica", accent: "amber" },
       { tag: "Intelligence d'achats", name: "Winerim Supply", desc: "Décidez quoi continuer d'acheter, quoi renégocier et quoi retirer. Comparatif de prix, alertes de surcoût et réapprovisionnement intelligent.", path: "/producto/winerim-supply", accent: "emerald" },
     ],
