@@ -84,6 +84,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/precio-vino-restaurante": "/en/wine-pricing-restaurant",
     "/vino-por-copa-restaurante": "/en/wine-by-glass-restaurant",
     "/inteligencia-artificial-restaurantes": "/en/artificial-intelligence-restaurants",
+    "/ejemplos-carta-vinos": "/en/wine-list-examples",
+    "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/en/guides/wine-pairing-strategy-restaurants",
+    "/problemas/carta-de-vinos-no-vende": "/en/problems/wine-list-not-selling",
+    "/cuantos-vinos-en-una-carta-de-restaurante": "/en/how-many-wines-restaurant-list",
   },
   it: {
     "/": "/it",
@@ -149,6 +153,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/precio-vino-restaurante": "/it/prezzo-vino-ristorante",
     "/vino-por-copa-restaurante": "/it/vino-al-calice-ristorante",
     "/inteligencia-artificial-restaurantes": "/it/intelligenza-artificiale-ristoranti",
+    "/ejemplos-carta-vinos": "/it/esempi-carta-vini",
+    "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/it/guide/strategia-abbinamento-vino-ristorante",
+    "/problemas/carta-de-vinos-no-vende": "/it/problemi/carta-vini-non-vende",
+    "/cuantos-vinos-en-una-carta-de-restaurante": "/it/quanti-vini-carta-ristorante",
   },
   fr: {
     "/": "/fr",
@@ -214,6 +222,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/precio-vino-restaurante": "/fr/prix-vin-restaurant",
     "/vino-por-copa-restaurante": "/fr/vin-au-verre-restaurant",
     "/inteligencia-artificial-restaurantes": "/fr/intelligence-artificielle-restaurants",
+    "/ejemplos-carta-vinos": "/fr/exemples-carte-vins",
+    "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/fr/guides/strategie-accords-mets-vins-restaurant",
+    "/problemas/carta-de-vinos-no-vende": "/fr/problemes/carte-des-vins-ne-vend-pas",
+    "/cuantos-vinos-en-una-carta-de-restaurante": "/fr/combien-de-vins-carte-restaurant",
   },
 };
 
