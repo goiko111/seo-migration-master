@@ -309,6 +309,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/tools/wine-by-glass-price-calculator`} element={<CalculadoraPrecioCopa />} />
     <Route path={`${prefix}/strumenti/calcolatrice-prezzo-vino-al-calice`} element={<CalculadoraPrecioCopa />} />
     <Route path={`${prefix}/outils/calculateur-prix-vin-au-verre`} element={<CalculadoraPrecioCopa />} />
+    <Route path={`${prefix}/wine-list-analysis`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/analisi-carta`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/analyse-carte`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/wine-margin-calculator`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/calcolatrice-margini-vino`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/calculateur-marge-vin`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/tools/dead-stock-calculator`} element={<CalculadoraStockMuerto />} />
     <Route path={`${prefix}/strumenti/calcolatrice-stock-morto`} element={<CalculadoraStockMuerto />} />
     <Route path={`${prefix}/outils/calculateur-stock-mort`} element={<CalculadoraStockMuerto />} />
