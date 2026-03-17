@@ -26,7 +26,7 @@ const formSchema = z.object({
   position: z.string().trim().min(1, "Selecciona tu cargo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
   email: z.string().trim().email("Introduce un email válido").max(255),
-  city: z.string().trim().min(1, "La ciudad es obligatoria").max(100),
+  city: z.string().trim().max(100).optional().or(z.literal("")),
   references_count: z.string().trim().min(1, "Selecciona el número de referencias"),
 });
 
@@ -103,7 +103,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
         position: formData.position,
         phone: formData.phone,
         email: formData.email,
-        city: formData.city,
+        city: formData.city || null,
         references_count: formData.references_count,
         form_type: data.formType,
       };
@@ -240,7 +240,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <h3 className="font-heading text-xl font-bold mb-1">Descarga gratis</h3>
                   <p className="text-sm text-muted-foreground mb-4">Déjanos tus datos y descarga el recurso al instante.</p>
-                  <ContactFormFields register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
+                  <ContactFormFields variant="resource" register={register} errors={errors} position={position} onPositionChange={(v) => { setPosition(v); setValue("position", v); }} referencesCount={referencesCount} onReferencesCountChange={(v) => { setReferencesCount(v); setValue("references_count", v); }} />
                   <Button type="submit" disabled={loading}
                     className="w-full bg-gradient-wine text-primary-foreground py-3 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
                     {loading ? "Enviando..." : "Descargar recurso"}

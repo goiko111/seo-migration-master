@@ -316,12 +316,14 @@ const ContactFormFields = ({
   const isResource = variant === "resource";
   const isContact = variant === "contact";
 
-  const phoneRequired = isDemo || isContact;
-  const positionRequired = isDemo || isContact;
-  const showPosition = !isResource;
-  const showPhone = !isResource;
-  const showCity = !isResource;
-  const showReferences = !isResource;
+  const phoneRequired = isDemo || isContact || isResource;
+  const positionRequired = isDemo || isContact || isResource;
+  const showPosition = true;
+  const showPhone = true;
+  const showCity = true;
+  const showReferences = true;
+  const cityRequired = isDemo || isContact;
+  const referencesRequired = isDemo || isContact || isResource;
   const showBusinessType = isDemo;
   const showLocations = isDemo;
   const showChallenge = isDemo;
@@ -427,12 +429,12 @@ const ContactFormFields = ({
           {showCity && (
             <div>
               <Label htmlFor="city" className="text-sm font-medium">
-                {l.city} {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                {l.city} {cityRequired && <span className="text-destructive">*</span>}
               </Label>
               <div className="relative mt-1.5">
                 <MapPin size={16} className={iconWrap} />
                 {native ? (
-                  <Input id="city" name="city" placeholder={l.cityPh} required={isDemo || isContact} maxLength={80} className={cls} />
+                  <Input id="city" name="city" placeholder={l.cityPh} required={cityRequired} maxLength={80} className={cls} />
                 ) : (
                   <Input id="city" placeholder={l.cityPh} {...register("city")} className={cls} />
                 )}
@@ -444,11 +446,11 @@ const ContactFormFields = ({
           {showReferences && (
             <div>
               <Label htmlFor="references_count" className="text-sm font-medium">
-                {l.references} {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                {l.references} {referencesRequired && <span className="text-destructive">*</span>}
               </Label>
               <div className="mt-1.5">
                 {native ? (
-                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={fi.references} placeholder={l.referencesPh} />
+                  <NativeSelect id="references_count" name="references_count" required={referencesRequired} options={fi.references} placeholder={l.referencesPh} />
                 ) : (
                   <Select value={referencesCount} onValueChange={onReferencesCountChange}>
                     <SelectTrigger className="bg-background border-border">
