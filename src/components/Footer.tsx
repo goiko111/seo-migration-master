@@ -109,7 +109,7 @@ const Footer = () => {
                 { label: t.nav_sommelier, href: localePath("/sommelier-corner") },
                 { label: t.nav_guides, href: localePath("/guias-y-recursos") },
                 { label: t.nav_downloadable_resources ?? "Recursos descargables", href: localePath("/recursos") },
-                { label: t.nav_benchmarks, href: "/benchmarks-playbooks" },
+                { label: t.nav_benchmarks, href: localePath("/benchmarks-playbooks") },
                 { label: t.nav_wine_analyzer, href: localePath("/analisis-carta") },
                 { label: t.nav_margin_calc, href: localePath("/calculadora-margen-vino") },
               ]}
@@ -121,7 +121,7 @@ const Footer = () => {
             <FooterHeading>{t.footer_company}</FooterHeading>
             <FooterLinks
               items={[
-                { label: t.footer_about, href: "/sobre-winerim" },
+                { label: t.footer_about, href: localePath("/sobre-winerim") },
                 { label: t.nav_clients, href: localePath("/clientes") },
                 { label: t.nav_contact, href: localePath("/contacto") },
                 { label: "Área cliente", href: "/decision-center" },
