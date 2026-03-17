@@ -16,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { SupportedLang } from "@/i18n/types";
+import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
 const fadeUp = {
