@@ -3,7 +3,9 @@ import {
   TrendingUp, DollarSign, RefreshCw, Search, BarChart3,
   Layers, Target, Users, Sparkles, type LucideIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
+import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang } from "@/i18n/types";
 
@@ -426,9 +428,67 @@ const FR: VerticalContent = {
 
 const i18n: Record<SupportedLang, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
+/* ─── Supply connection block i18n ─── */
+const supplyBridge: Record<string, { tag: string; title: string; desc: string; cta: string }> = {
+  es: {
+    tag: "Conexión directa",
+    title: "Esta solución se alimenta de Winerim Supply",
+    desc: "Todo lo que ves en esta página — comparativas de precio, alertas de sobreprecio, listas de reposición — es posible gracias al motor de inteligencia de compras de Winerim Supply. Conecta tus datos y deja que el sistema trabaje por ti.",
+    cta: "Descubre Winerim Supply",
+  },
+  en: {
+    tag: "Direct connection",
+    title: "This solution is powered by Winerim Supply",
+    desc: "Everything on this page — price comparisons, overpricing alerts, restocking lists — is powered by the purchasing intelligence engine of Winerim Supply. Connect your data and let the system work for you.",
+    cta: "Discover Winerim Supply",
+  },
+  it: {
+    tag: "Connessione diretta",
+    title: "Questa soluzione è alimentata da Winerim Supply",
+    desc: "Tutto ciò che vedi in questa pagina — confronti di prezzo, alert di sovrapprezzi, liste di riassortimento — è reso possibile dal motore di intelligenza acquisti di Winerim Supply. Collega i tuoi dati e lascia che il sistema lavori per te.",
+    cta: "Scopri Winerim Supply",
+  },
+  fr: {
+    tag: "Connexion directe",
+    title: "Cette solution est alimentée par Winerim Supply",
+    desc: "Tout ce que vous voyez sur cette page — comparaisons de prix, alertes de surcoût, listes de réapprovisionnement — est rendu possible par le moteur d'intelligence d'achats de Winerim Supply. Connectez vos données et laissez le système travailler pour vous.",
+    cta: "Découvrir Winerim Supply",
+  },
+};
+
 const InteligenciaCompras = () => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const t = i18n[lang] || i18n.es;
-  return <VerticalTemplate t={t} />;
+  const sb = supplyBridge[lang] || supplyBridge.es;
+
+  return (
+    <VerticalTemplate t={t} hideSupplyBlock>
+      {/* ── Visual connection to Winerim Supply ── */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="relative rounded-2xl border border-emerald-500/20 bg-gradient-card p-8 md:p-10 overflow-hidden">
+              <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_left,hsl(152_60%_50%/0.08),transparent_60%)]" />
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+                <div className="flex-1 min-w-0">
+                  <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-emerald-500/80 mb-3">
+                    <ShoppingCart size={14} /> {sb.tag}
+                  </span>
+                  <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-3">{sb.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{sb.desc}</p>
+                </div>
+                <Link
+                  to={localePath("/producto/winerim-supply")}
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-5 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/20 transition-colors shrink-0"
+                >
+                  {sb.cta} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </VerticalTemplate>
+  );
 };
 export default InteligenciaCompras;

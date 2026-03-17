@@ -94,7 +94,7 @@ export interface VerticalContent {
   nextStepsTitle: string;
 }
 
-const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
+const VerticalTemplate = ({ t, hideSupplyBlock, children }: { t: VerticalContent; hideSupplyBlock?: boolean; children?: React.ReactNode }) => {
   const { localePath } = useLanguage();
   const BadgeIcon = t.badgeIcon;
 
@@ -346,7 +346,7 @@ const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
 
 
       {/* ── WINERIM SUPPLY ── */}
-      <WinerimSupplyBlock />
+      {!hideSupplyBlock && <WinerimSupplyBlock />}
 
       {/* ── DOES / DOESN'T ── */}
       <section className="section-padding bg-gradient-dark">
@@ -384,6 +384,9 @@ const VerticalTemplate = ({ t }: { t: VerticalContent }) => {
           </div>
         </div>
       </section>
+
+      {/* ── Custom blocks ── */}
+      {children}
 
       {/* ── FAQs ── */}
       <FAQSection faqs={t.faqs} schemaId={t.schemaId} />
