@@ -1069,6 +1069,9 @@ const Precios = () => {
         </div>
       </section>
 
+      {/* Decision Center teaser */}
+      <DecisionCenterTeaser lang={lang} compact />
+
       {/* ── Next Steps ── */}
       <NextSteps
         title={{ es: "Explora más", en: "Explore more", it: "Esplora di più", fr: "En savoir plus" }[lang] || "Explore more"}
