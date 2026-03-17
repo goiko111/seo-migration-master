@@ -179,7 +179,7 @@ const i18n: Record<string, {
 /* ── Icon resolver ──────────────────────────────────── */
 const iconMap: Record<string, typeof Building2> = {
   building: Building2, layers: Layers, target: Target,
-  glass: GlassWater, package: Package, trending: TrendingUp,
+  glass: GlassWater, package: Package, trending: TrendingUp, sprout: Sprout,
 };
 
 const layerIcons = [Brain, Zap, ShoppingCart];
