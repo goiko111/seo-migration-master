@@ -173,6 +173,32 @@ const cartaEquilibrioContent: DeepAreaContent = {
       ],
     },
   ],
+  miniCases: [
+    {
+      profile: "Gastronómico con carta de 180 referencias",
+      situation: "El 65 % de la carta eran tintos de Rioja y Ribera, concentrados entre 25 € y 35 €. Blancos y espumosos representaban solo un 12 %. El equipo de sala reconocía que muchos comensales pedían 'algo fresco' y no encontraban opciones.",
+      action: "Mapeó la carta por tipo × precio. Retiró 14 tintos redundantes en la franja saturada y añadió 6 blancos y 3 espumosos en franjas vacías (15-25 € y 35-50 €). Redistribuyó sin tocar el total de referencias.",
+      result: "Ventas de blanco subieron un 28 % en el primer mes. El ticket medio de vino aumentó 2,40 € porque los comensales encontraban opciones donde antes no las había.",
+    },
+    {
+      profile: "Hotel boutique con carta de 310 referencias",
+      situation: "Carta amplia y compleja que se gestionaba como lista, sin wine mapping. El 22 % de las referencias no se había vendido en 90 días. El equipo de compras no sabía qué retirar porque 'todo podía venderse'.",
+      action: "Implementó Winerim Core para generar el wine mapping automático. Identificó 68 referencias en zonas de saturación y 4 franjas de precio sin cobertura. Retiró 35 referencias en 3 fases mensuales.",
+      result: "Ratio de efectividad pasó del 72 % al 89 %. Capital liberado en stock: 8.200 €. El equipo de sala pasó de recomendar siempre lo mismo a poder cubrir peticiones diversas.",
+    },
+    {
+      profile: "Wine bar con 95 referencias y alta rotación",
+      situation: "Todos los vinos estaban entre 18 € y 30 €. No había nada por debajo de 15 € (entrada) ni por encima de 45 € (especial). El comensal casual se iba sin pedir y el entendido no encontraba profundidad.",
+      action: "Creó tres franjas nuevas: entrada (<15 €, 4 vinos), exploración (35-45 €, 5 vinos) e imagen (>50 €, 3 vinos). Redujo la franja central de 95 a 83 referencias.",
+      result: "Penetración de vino por mesa subió del 62 % al 74 %. Los vinos de imagen abrieron conversaciones que el equipo aprovechaba para vender la franja de exploración.",
+    },
+    {
+      profile: "Grupo de 5 locales casual-premium",
+      situation: "Cada local tenía una carta distinta creada por su jefe de sala. No había un estándar de equilibrio por tipo ni por precio. Dos locales no tenían espumosos; uno tenía 40 % de rosados sin demanda.",
+      action: "Definió una arquitectura de carta común: distribución objetivo por tipo (50 % tinto, 25 % blanco, 15 % espumoso, 10 % otros) con margen de adaptación local del ±10 %. Usó Winerim Core para monitorizar desviaciones mensuales.",
+      result: "En 3 meses, los 5 locales convergieron en equilibrio sin perder identidad. El local con exceso de rosado redujo stock muerto un 60 %. El benchmarking entre locales permitió detectar buenas prácticas replicables.",
+    },
+  ],
   nextStep: {
     label: "Revisar el equilibrio de tu carta",
     href: "/recursos/plantilla-equilibrio-carta",
