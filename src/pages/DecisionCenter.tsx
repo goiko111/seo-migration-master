@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import { InsightCard, insightLibrary } from "@/components/decision";
+import DCWelcome from "@/components/decision/DCWelcome";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { TranslationDict } from "@/i18n/types";
 
