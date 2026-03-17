@@ -6,6 +6,7 @@ import winerimLogo from "@/assets/winerim-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Badge } from "@/components/ui/badge";
+import { ga } from "@/lib/analytics";
 
 /* ── Types ─────────────────────────────────────── */
 interface SubLink {
@@ -255,6 +256,7 @@ const Navbar = memo(() => {
           </Link>
           <Link
             to={localePath("/demo")}
+            onClick={() => ga.ctaClick("nav_demo", "/demo", "navbar")}
             className="bg-gradient-wine text-primary-foreground px-5 xl:px-6 py-2.5 rounded text-xs xl:text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
           >
             {t.nav_cta}
@@ -370,7 +372,7 @@ const Navbar = memo(() => {
                 <Link
                   to={localePath("/demo")}
                   className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => { setMobileOpen(false); ga.ctaClick("mobile_nav_demo", "/demo", "navbar_mobile"); }}
                 >
                   {t.nav_cta}
                 </Link>

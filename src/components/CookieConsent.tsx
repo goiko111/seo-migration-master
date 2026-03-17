@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Cookie } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { updateConsent } from "@/lib/analytics";
 
 const CONSENT_KEY = "winerim_cookie_consent";
 
@@ -12,7 +13,9 @@ const CookieConsent = () => {
 
   useEffect(() => {
     const consent = localStorage.getItem(CONSENT_KEY);
-    if (!consent) {
+    if (consent === "accepted") {
+      updateConsent(true);
+    } else if (!consent) {
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
@@ -20,11 +23,13 @@ const CookieConsent = () => {
 
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
+    updateConsent(true);
     setVisible(false);
   };
 
   const reject = () => {
     localStorage.setItem(CONSENT_KEY, "rejected");
+    updateConsent(false);
     setVisible(false);
   };
 

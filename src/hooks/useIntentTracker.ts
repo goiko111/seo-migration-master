@@ -2,6 +2,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { trackPageIntent, trackAction, classifyPath, type IntentCategory } from "@/lib/intentTracking";
+import { ga } from "@/lib/analytics";
 
 /**
  * Hook that automatically tracks pageview intent on route change.
@@ -20,6 +21,16 @@ export function usePageIntentTracker(): void {
     // Small delay to let page render (better for scroll depth tracking later)
     const timer = setTimeout(() => {
       trackPageIntent(location.pathname, lang);
+
+      // GA4: track high-intent page visits
+      const classification = classifyPath(location.pathname);
+      if (classification) {
+        const contentGroup = classification.category.replace(/_/g, " ");
+        ga.pageView({ content_group: contentGroup });
+        if (classification.level === "high") {
+          ga.highIntentPageView(classification.category);
+        }
+      }
     }, 300);
 
     return () => clearTimeout(timer);
@@ -55,6 +66,7 @@ function useScrollDepthTracker(): void {
         if (percent >= t && !fired.current.has(t)) {
           fired.current.add(t);
           trackAction("scroll_depth", classification.category, `scroll_${t}`, t);
+          ga.scrollDepth(t);
         }
       }
     };
@@ -93,6 +105,7 @@ export function useCTAClickTracker() {
  */
 export function trackResourceDownload(resourceSlug: string): void {
   trackAction("resource_download", "resource_download" as IntentCategory, resourceSlug);
+  ga.resourceDownload(resourceSlug);
 }
 
 /**
@@ -100,8 +113,10 @@ export function trackResourceDownload(resourceSlug: string): void {
  */
 export function trackFormStart(formType: string): void {
   trackAction("form_start", formType === "demo" ? "demo" : "contact", formType);
+  ga.formStart(formType);
 }
 
 export function trackFormSubmit(formType: string): void {
   trackAction("form_submit", formType === "demo" ? "demo" : "contact", formType);
+  ga.formSubmit(formType);
 }

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
 import { trackAction } from "@/lib/intentTracking";
+import { ga } from "@/lib/analytics";
 
 const Hero = () => {
   const { get } = useSharedPageContent();
@@ -71,7 +72,7 @@ const Hero = () => {
           >
             <Link
               to="/demo"
-              onClick={() => trackAction("cta_click", "demo", "hero_home_primary")}
+              onClick={() => { trackAction("cta_click", "demo", "hero_home_primary"); ga.ctaClick("hero_home_primary", "/demo", "hero"); }}
               className="bg-gradient-wine text-primary-foreground px-8 py-4 rounded text-sm font-semibold tracking-wider uppercase hover:scale-[1.03] hover:shadow-lg hover:shadow-wine/20 transition-all duration-300 text-center"
             >
               {get("hero", "cta_primary", "Descubre Winerim")}
