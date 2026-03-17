@@ -446,7 +446,7 @@ const ContactFormFields = ({
           {showReferences && (
             <div>
               <Label htmlFor="references_count" className="text-sm font-medium">
-                {l.references} {(isDemo || isContact) && <span className="text-destructive">*</span>}
+                {l.references} {referencesRequired && <span className="text-destructive">*</span>}
               </Label>
               <div className="mt-1.5">
                 {native ? (
