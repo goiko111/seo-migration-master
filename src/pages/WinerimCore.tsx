@@ -501,6 +501,7 @@ const WinerimCore = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
             className="flex flex-col sm:flex-row gap-4">
             <Link to={localePath("/demo")}
+              onClick={() => trackAction("cta_click", "product_core", "hero_core_primary")}
               className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
               {t.cta_primary} <ArrowRight size={16} />
             </Link>
