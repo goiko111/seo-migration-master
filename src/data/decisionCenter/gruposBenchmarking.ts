@@ -8,7 +8,14 @@ const gruposBenchmarkingContent: DeepAreaContent = {
   icon: Building2,
   accent: "text-rose-500",
   bg: "bg-rose-500/10",
-  audiences: ["grupo", "direccion"],
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Comparar locales que no son comparables", porQueOcurre: "Porque se mete a todos los locales en el mismo ranking sin agrupar por tipología (casual, gastro, hotel, terraza). Un gastronómico y un casual no operan igual.", consecuencia: "Penalizas al gastronómico por tener menos rotación o al casual por menor ticket. Las conclusiones no sirven y los directores de local se desconectan del proceso." },
+    { error: "Replicar cartas entre locales sin tener en cuenta el contexto", porQueOcurre: "Porque si algo funciona en un local, parece lógico copiarlo. Pero el contexto (cliente, ubicación, concepto, equipo) determina el resultado.", consecuencia: "Stock muerto multiplicado por el número de locales destino. Capital inmovilizado y una carta que no encaja con el comensal de ese local." },
+    { error: "Mantener referencias por inercia en todas las unidades", porQueOcurre: "Porque retirar un vino de la carta corporativa parece arriesgado. Nadie quiere ser quien quite 'el Rioja de siempre'.", consecuencia: "Referencias que no venden en 3 de 5 locales siguen ocupando espacio, stock y atención. El coste de inercia se multiplica por el número de unidades." },
+    { error: "Estandarizar demasiado y perder la lógica comercial de cada local", porQueOcurre: "Porque la estandarización simplifica la gestión central. Pero una carta idéntica en un resort de costa y un urbano de negocio no tiene sentido comercial.", consecuencia: "El local pierde identidad, el comensal no encuentra lo que espera y las ventas bajan donde la carta no encaja con el perfil de cliente." },
+    { error: "No usar datos para decisiones de expansión o retirada", porQueOcurre: "Porque las decisiones de surtido se toman por relación con proveedores, por inercia o por criterio personal del F&B, no por rendimiento medido.", consecuencia: "Compras sin criterio, cartas infladas y oportunidades de mejora invisibles. El grupo opera como suma de locales independientes, no como sistema." },
+  ],
   links: [
     { label: "Soluciones para grupos", href: "/soluciones/grupos-restauracion", description: "Cómo Winerim ayuda a grupos multiunidad a gobernar la categoría vino", type: "solution" },
     { label: "Winerim Core", href: "/producto/winerim-core", description: "Motor analítico con benchmarking interno, desviaciones y scoring por local", type: "product" },
@@ -30,6 +37,18 @@ const gruposBenchmarkingContent: DeepAreaContent = {
       situation: "La compra era centralizada pero cada hotel fijaba precios libremente. Mismo vino a 28 € en un hotel y a 19 € en otro.",
       action: "Definió bandas de precio por categoría y tipo de hotel (urbano vs resort). Cada hotel tiene margen de ±2 € dentro de la banda.",
       result: "Coherencia de marca, margen homogéneo del 58% en todos los hoteles y negociación de compra más fuerte por volumen.",
+    },
+    {
+      profile: "Grupo de 4 restaurantes casual-premium",
+      situation: "Cada local compraba por su cuenta al proveedor más cercano. El mismo vino costaba entre 5,20 € y 7,80 € según el local. Nadie cruzaba datos de compra.",
+      action: "Centralizó la compra de las 20 referencias corporativas negociando por volumen total del grupo. Usó Winerim Supply para detectar sobreprecios por local.",
+      result: "Ahorro medio del 14 % en coste de compra. Capital liberado: 6.400 €/trimestre. Los locales mantienen libertad para el 30 % de la carta local.",
+    },
+    {
+      profile: "Grupo de 8 locales con mix casual y gastro",
+      situation: "Los 3 gastronómicos tenían un 62 % de margen, pero los 5 casuales estaban entre el 38 % y el 51 %. El F&B corporativo no entendía la dispersión.",
+      action: "Separó el benchmarking en dos clusters (casual y gastro). Detectó que los casuales con peor margen aplicaban el mismo multiplicador que el gastro en vez de uno adaptado a su franja de precio.",
+      result: "Ajustando multiplicadores por tipología, los casuales subieron al 54-58 % de margen en 2 meses. Sin tocar la carta, solo el pricing.",
     },
   ],
   subtopics: [
