@@ -1,18 +1,28 @@
 /**
- * GA4 / GTM Analytics Layer — Winerim
+ * GA4 / GTM / Google Ads Analytics Layer — Winerim
  * 
- * Centralized event dispatcher. All GA4 events flow through here.
+ * Centralized event dispatcher. All analytics events flow through here.
  * Consent-aware: respects Google Consent Mode v2 + cookie banner state.
  * 
  * Usage:
- *   import { ga } from "@/lib/analytics";
+ *   import { ga, ads } from "@/lib/analytics";
  *   ga.ctaClick("hero_home", "/demo");
  *   ga.formSubmit("demo", { business_type: "hotel" });
+ *   ads.conversion("demo", { email: "a@b.com" });
  */
 
 /* ── Types ─────────────────────────────────────── */
 
 type GAEventParams = Record<string, string | number | boolean | undefined>;
+
+interface EnhancedConversionData {
+  email?: string;
+  phone?: string;
+  first_name?: string;
+  last_name?: string;
+  city?: string;
+  country?: string;
+}
 
 /* ── Helpers ───────────────────────────────────── */
 
@@ -54,7 +64,6 @@ export function updateConsent(granted: boolean): void {
 
 export const ga = {
   /* ── Page views ─────────────────────── */
-  /** Enhanced page_view (GTM auto-tracks, but this allows custom params) */
   pageView(params?: { page_title?: string; content_group?: string }) {
     push("page_view", {
       page_path: getPagePath(),
@@ -149,5 +158,99 @@ export const ga = {
   /* ── Generic custom event ───────────── */
   event(name: string, params?: GAEventParams) {
     push(name, { page_path: getPagePath(), ...params });
+  },
+};
+
+/* ── Google Ads Conversion API ─────────────────── */
+
+/**
+ * Conversion labels — placeholder values.
+ * Replace with real AW-XXXXXXXXX/XXXX labels from Google Ads UI.
+ * 
+ * In GTM-based setup, these are used as dataLayer event identifiers.
+ * GTM triggers fire the actual Google Ads conversion tags.
+ */
+const ADS_CONVERSION_LABELS: Record<string, string> = {
+  demo: "AW-XXXXXXXXX/demo_submit",
+  contact: "AW-XXXXXXXXX/contact_submit",
+  resource: "AW-XXXXXXXXX/resource_download",
+};
+
+const ADS_MICRO_LABELS: Record<string, string> = {
+  cta_click_demo: "AW-XXXXXXXXX/cta_click_demo",
+  tool_used: "AW-XXXXXXXXX/tool_used",
+  pricing_visit: "AW-XXXXXXXXX/pricing_visit",
+  supply_visit: "AW-XXXXXXXXX/supply_visit",
+  groups_visit: "AW-XXXXXXXXX/groups_visit",
+  resource_download: "AW-XXXXXXXXX/resource_download_micro",
+};
+
+export const ads = {
+  /**
+   * Fire a primary Google Ads conversion.
+   * Pushes to dataLayer for GTM to pick up and fire the Ads tag.
+   * Includes enhanced conversion data (hashed by Google) when available.
+   */
+  conversion(
+    form_type: "demo" | "contact" | "resource",
+    userData?: EnhancedConversionData,
+  ) {
+    const conversionLabel = ADS_CONVERSION_LABELS[form_type] || "";
+
+    // Push enhanced conversion user data to dataLayer
+    // GTM handles hashing — we send plain text, gtag.js SHA-256 hashes it
+    if (userData) {
+      const enhancedData: Record<string, string> = {};
+      if (userData.email) enhancedData.email = userData.email.trim().toLowerCase();
+      if (userData.phone) enhancedData.phone_number = userData.phone.trim();
+      if (userData.first_name) enhancedData.first_name = userData.first_name.trim();
+      if (userData.last_name) enhancedData.last_name = userData.last_name.trim();
+      if (userData.city) enhancedData.city = userData.city.trim();
+      if (userData.country) enhancedData.country = userData.country.trim();
+
+      push("enhanced_conversion_data", enhancedData as any);
+    }
+
+    // Fire conversion event for GTM
+    push("ads_conversion", {
+      conversion_type: form_type,
+      conversion_label: conversionLabel,
+      page_path: getPagePath(),
+      value: form_type === "demo" ? 50 : form_type === "contact" ? 30 : 10,
+      currency: "EUR",
+    });
+  },
+
+  /**
+   * Fire a microconversion for Google Ads optimization signals.
+   * These are imported as secondary conversions in Google Ads.
+   */
+  microConversion(action: string, extra?: GAEventParams) {
+    const label = ADS_MICRO_LABELS[action] || "";
+    push("ads_micro_conversion", {
+      micro_action: action,
+      micro_label: label,
+      page_path: getPagePath(),
+      ...extra,
+    });
+  },
+
+  /**
+   * Push remarketing parameters for dynamic audience building.
+   * GTM uses these to populate Google Ads remarketing lists.
+   */
+  remarketing(params: {
+    page_type: string;
+    content_category?: string;
+    business_type?: string;
+    intent_level?: string;
+  }) {
+    push("remarketing_event", {
+      page_type: params.page_type,
+      content_category: params.content_category || "",
+      business_type: params.business_type || "",
+      intent_level: params.intent_level || "",
+      page_path: getPagePath(),
+    });
   },
 };

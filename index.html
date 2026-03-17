@@ -57,6 +57,10 @@
         'ad_personalization': 'denied',
         'wait_for_update': 500
       });
+      // Redact ads data when consent not granted (privacy-safe remarketing)
+      gtag('set', 'ads_data_redaction', true);
+      // URL passthrough for cross-domain measurement without cookies
+      gtag('set', 'url_passthrough', true);
     </script>
 
     <!-- Google Tag Manager -->
