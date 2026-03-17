@@ -52,6 +52,7 @@ const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller
 const RestaurantesGastronomicos = lazy(() => import("./pages/RestaurantesGastronomicos"));
 const WineBars = lazy(() => import("./pages/WineBars"));
 const CartaAmplia = lazy(() => import("./pages/CartaAmplia"));
+const CartaCrecimiento = lazy(() => import("./pages/CartaCrecimiento"));
 const Implantacion = lazy(() => import("./pages/Implantacion"));
 const AumentarTicketMedio = lazy(() => import("./pages/AumentarTicketMedio"));
 const DigitalWineList = lazy(() => import("./pages/DigitalWineList"));
@@ -165,6 +166,7 @@ const esRoutes = (
     <Route path="/soluciones/restaurantes-gastronomicos" element={<RestaurantesGastronomicos />} />
     <Route path="/soluciones/wine-bars" element={<WineBars />} />
     <Route path="/soluciones/carta-amplia" element={<CartaAmplia />} />
+    <Route path="/soluciones/carta-crecimiento" element={<CartaCrecimiento />} />
     <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
     <Route path="/implantacion" element={<Implantacion />} />
     <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
@@ -294,6 +296,9 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/solutions/large-wine-list`} element={<CartaAmplia />} />
     <Route path={`${prefix}/soluzioni/carta-vini-ampia`} element={<CartaAmplia />} />
     <Route path={`${prefix}/solutions/grande-carte-des-vins`} element={<CartaAmplia />} />
+    <Route path={`${prefix}/solutions/growing-wine-list`} element={<CartaCrecimiento />} />
+    <Route path={`${prefix}/soluzioni/carta-vini-crescita`} element={<CartaCrecimiento />} />
+    <Route path={`${prefix}/solutions/carte-en-croissance`} element={<CartaCrecimiento />} />
     <Route path={`${prefix}/solutions/increase-average-ticket`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/soluzioni/aumentare-scontrino-medio`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/solutions/augmenter-ticket-moyen`} element={<AumentarTicketMedio />} />

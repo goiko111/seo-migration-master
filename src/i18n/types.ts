@@ -53,6 +53,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/hoteles": "/en/solutions/hotels",
     "/soluciones/restaurantes-sin-sumiller": "/en/solutions/no-sommelier",
     "/soluciones/carta-amplia": "/en/solutions/large-wine-list",
+    "/soluciones/carta-crecimiento": "/en/solutions/growing-wine-list",
     "/sobre-winerim": "/en/about-winerim",
     "/benchmarks-playbooks": "/en/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/en/tools/wine-by-glass-price-calculator",
@@ -90,6 +91,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/hoteles": "/it/soluzioni/hotel",
     "/soluciones/restaurantes-sin-sumiller": "/it/soluzioni/senza-sommelier",
     "/soluciones/carta-amplia": "/it/soluzioni/carta-vini-ampia",
+    "/soluciones/carta-crecimiento": "/it/soluzioni/carta-vini-crescita",
     "/sobre-winerim": "/it/chi-siamo",
     "/benchmarks-playbooks": "/it/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/it/strumenti/calcolatrice-prezzo-vino-al-calice",
@@ -127,6 +129,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/hoteles": "/fr/solutions/hotels",
     "/soluciones/restaurantes-sin-sumiller": "/fr/solutions/sans-sommelier",
     "/soluciones/carta-amplia": "/fr/solutions/grande-carte-des-vins",
+    "/soluciones/carta-crecimiento": "/fr/solutions/carte-en-croissance",
     "/sobre-winerim": "/fr/a-propos",
     "/benchmarks-playbooks": "/fr/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/fr/outils/calculateur-prix-vin-au-verre",
@@ -169,6 +172,7 @@ export interface TranslationDict {
   nav_sol_hotels: string;
   nav_sol_groups: string;
   nav_sol_no_sommelier: string;
+  nav_sol_growing_list: string;
   nav_sol_large_list: string;
 
   // Nav - Resources mega

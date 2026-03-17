@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Building2, BarChart3, TrendingUp, ArrowRight, Brain, Zap, ShoppingCart,
-  Wine, GlassWater, Package, Layers, Target, LineChart, ArrowUpRight,
+  Wine, GlassWater, Package, Layers, Target, LineChart, ArrowUpRight, Sprout,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -44,7 +44,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Cada tipo de negocio tiene necesidades distintas. Estas son las más demandadas.",
     solutions: [
       { title: "Grupos de restauración", desc: "Gestión centralizada: control de cartas, precios, surtido y benchmarking interno entre locales.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura de carta para +100 referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartas amplias y complejas", desc: "Detección de stock muerto, equilibrio de surtido y arquitectura de carta para +250 referencias.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carta con ambición de crecimiento", desc: "Pricing diferenciado, rotación equilibrada y vino por copa estratégico para cartas de 80–250 referencias.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing y márgenes", desc: "Multiplicadores diferenciados, escalera de precios coherente y desviación vs. óptimo por tipología.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino por copa", desc: "Estrategia de copeo: pricing, merma, rotación, vida útil y rentabilidad neta por referencia.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock y rotación", desc: "Capital inmovilizado, coste de oportunidad, plan de liquidación y alertas de obsolescencia.", path: "/rotacion-de-vinos", icon: "package" },
@@ -80,7 +81,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Every business type has different needs. These are the most in-demand.",
     solutions: [
       { title: "Restaurant groups", desc: "Centralised management: list control, pricing, assortment and internal benchmarking across locations.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for 100+ references.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Large & complex lists", desc: "Dead stock detection, assortment balance and list architecture for 250+ references.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Growing wine lists", desc: "Differentiated pricing, balanced rotation and strategic by-the-glass for lists of 80–250 references.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing & margins", desc: "Differentiated multipliers, coherent price ladder and deviation vs. optimal by wine type.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Wine by the glass", desc: "Glass strategy: pricing, waste, rotation, shelf life and net profitability per reference.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock & rotation", desc: "Immobilised capital, opportunity cost, liquidation plan and obsolescence alerts.", path: "/rotacion-de-vinos", icon: "package" },
@@ -116,7 +118,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Ogni tipo di attività ha esigenze diverse. Queste sono le più richieste.",
     solutions: [
       { title: "Gruppi di ristorazione", desc: "Gestione centralizzata: controllo carte, prezzi, assortimento e benchmarking interno tra locali.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura carta per +100 referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carte ampie e complesse", desc: "Rilevamento stock morto, equilibrio assortimento e architettura carta per +250 referenze.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carta in crescita", desc: "Pricing differenziato, rotazione equilibrata e calice strategico per carte da 80–250 referenze.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing e margini", desc: "Moltiplicatori differenziati, scala prezzi coerente e deviazione vs. ottimale per tipologia.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vino al calice", desc: "Strategia al calice: pricing, scarto, rotazione, vita utile e redditività netta per referenza.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock e rotazione", desc: "Capitale immobilizzato, costo opportunità, piano di liquidazione e alert di obsolescenza.", path: "/rotacion-de-vinos", icon: "package" },
@@ -152,7 +155,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Chaque type d'établissement a des besoins différents. Voici les plus demandées.",
     solutions: [
       { title: "Groupes de restauration", desc: "Gestion centralisée : contrôle des cartes, prix, assortiment et benchmarking interne entre sites.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture de carte pour +100 références.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture de carte pour +250 références.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carte en croissance", desc: "Pricing différencié, rotation équilibrée et verre stratégique pour cartes de 80–250 références.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing et marges", desc: "Multiplicateurs différenciés, échelle de prix cohérente et écart vs. optimal par type de vin.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vin au verre", desc: "Stratégie au verre : pricing, perte, rotation, durée de vie et rentabilité nette par référence.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock et rotation", desc: "Capital immobilisé, coût d'opportunité, plan de liquidation et alertes d'obsolescence.", path: "/rotacion-de-vinos", icon: "package" },
@@ -175,7 +179,7 @@ const i18n: Record<string, {
 /* ── Icon resolver ──────────────────────────────────── */
 const iconMap: Record<string, typeof Building2> = {
   building: Building2, layers: Layers, target: Target,
-  glass: GlassWater, package: Package, trending: TrendingUp,
+  glass: GlassWater, package: Package, trending: TrendingUp, sprout: Sprout,
 };
 
 const layerIcons = [Brain, Zap, ShoppingCart];
