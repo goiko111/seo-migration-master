@@ -5,6 +5,7 @@ import {
   ArrowRight, Wine, BarChart3, Globe, TrendingUp,
   GlassWater, Layers, MapPin
 } from "lucide-react";
+import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line
