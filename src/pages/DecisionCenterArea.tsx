@@ -29,6 +29,9 @@ import cartaEquilibrioEN from "@/data/decisionCenter/cartaEquilibrio.en";
 import cartaEquilibrioIT from "@/data/decisionCenter/cartaEquilibrio.it";
 import cartaEquilibrioFR from "@/data/decisionCenter/cartaEquilibrio.fr";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
+import vinoPorCopaEN from "@/data/decisionCenter/vinoPorCopa.en";
+import vinoPorCopaIT from "@/data/decisionCenter/vinoPorCopa.it";
+import vinoPorCopaFR from "@/data/decisionCenter/vinoPorCopa.fr";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */
