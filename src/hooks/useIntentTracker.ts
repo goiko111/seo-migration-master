@@ -136,6 +136,7 @@ export function useCTAClickTracker() {
  */
 export function trackResourceDownload(resourceSlug: string): void {
   trackAction("resource_download", "resource_download" as IntentCategory, resourceSlug);
+  trackSessionResourceDownload(resourceSlug);
   ga.resourceDownload(resourceSlug);
 }
 
@@ -150,4 +151,13 @@ export function trackFormStart(formType: string): void {
 export function trackFormSubmit(formType: string): void {
   trackAction("form_submit", formType === "demo" ? "demo" : "contact", formType);
   ga.formSubmit(formType);
+}
+
+/**
+ * Track tool usage with session journey.
+ */
+export function trackToolUse(toolName: string, extra?: Record<string, string | number | boolean | undefined>): void {
+  trackAction("tool_use", "tool", toolName);
+  trackSessionToolUse(toolName);
+  ga.toolUsed(toolName, extra);
 }
