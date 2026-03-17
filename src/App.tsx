@@ -102,6 +102,7 @@ const SeoPage = lazy(() => import("./pages/SeoPage"));
 const SobreWinerim = lazy(() => import("./pages/SobreWinerim"));
 const Comparativas = lazy(() => import("./pages/Comparativas"));
 const ComparativaDetalle = lazy(() => import("./pages/ComparativaDetalle"));
+const InteligenciaCompras = lazy(() => import("./pages/InteligenciaCompras"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -204,6 +205,7 @@ const esRoutes = (
     <Route path="/herramientas/auditor-carta-multilocal" element={<AuditorMultiLocal />} />
     <Route path="/herramientas/calculadora-compra-inteligente" element={<CalculadoraCompraInteligente />} />
     <Route path="/soluciones" element={<Soluciones />} />
+    <Route path="/soluciones/inteligencia-de-compras" element={<InteligenciaCompras />} />
     <Route path="/problemas" element={<Problemas />} />
     <Route path="/clientes" element={<Clientes />} />
     <Route path="/funcionalidades" element={<Funcionalidades />} />
@@ -299,6 +301,10 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/solutions/growing-wine-list`} element={<CartaCrecimiento />} />
     <Route path={`${prefix}/soluzioni/carta-vini-crescita`} element={<CartaCrecimiento />} />
     <Route path={`${prefix}/solutions/carte-en-croissance`} element={<CartaCrecimiento />} />
+    <Route path="/soluciones/inteligencia-de-compras" element={<InteligenciaCompras />} />
+    <Route path={`${prefix}/solutions/purchasing-intelligence`} element={<InteligenciaCompras />} />
+    <Route path={`${prefix}/soluzioni/intelligenza-acquisti`} element={<InteligenciaCompras />} />
+    <Route path={`${prefix}/solutions/intelligence-achats`} element={<InteligenciaCompras />} />
     <Route path={`${prefix}/solutions/increase-average-ticket`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/soluzioni/aumentare-scontrino-medio`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/solutions/augmenter-ticket-moyen`} element={<AumentarTicketMedio />} />
