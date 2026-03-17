@@ -121,9 +121,13 @@ const labels: Record<SupportedLang, {
   },
 };
 
-const GuideTemplate = ({ data }: { data: GuidePageData }) => {
+const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string, GuidePageData> }) => {
   const { lang } = useLanguage();
   const l = labels[lang];
+  // Support both single GuidePageData and multilingual Record
+  const data: GuidePageData = "slug" in rawData
+    ? rawData as GuidePageData
+    : ((rawData as Record<string, GuidePageData>)[lang] || (rawData as Record<string, GuidePageData>).es);
   const ctaPrimary = data.ctaPrimaryText || l.defaultPrimary;
   const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
 
