@@ -392,6 +392,21 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/guides/comment-detecter-cannibalisation-vins`} element={<GuiaCanibalizacionVinos />} />
     <Route path={`${prefix}/guides/comment-reviser-carte-vins-chaque-mois`} element={<GuiaRevisarCartaCadaMes />} />
     <Route path={`${prefix}/guides/comment-ameliorer-rotation-vins-restaurant`} element={<RotacionVinos />} />
+    {/* Secondary SEO pages — EN */}
+    <Route path={`${prefix}/how-to-sell-more-wine-in-restaurants`} element={<VenderMasVino />} />
+    <Route path={`${prefix}/wine-pricing-restaurant`} element={<PrecioVinoRestaurante />} />
+    <Route path={`${prefix}/wine-by-glass-restaurant`} element={<VinoPorCopa />} />
+    <Route path={`${prefix}/artificial-intelligence-restaurants`} element={<IARestaurantes />} />
+    {/* Secondary SEO pages — IT */}
+    <Route path={`${prefix}/come-vendere-piu-vino-ristorante`} element={<VenderMasVino />} />
+    <Route path={`${prefix}/prezzo-vino-ristorante`} element={<PrecioVinoRestaurante />} />
+    <Route path={`${prefix}/vino-al-calice-ristorante`} element={<VinoPorCopa />} />
+    <Route path={`${prefix}/intelligenza-artificiale-ristoranti`} element={<IARestaurantes />} />
+    {/* Secondary SEO pages — FR */}
+    <Route path={`${prefix}/comment-vendre-plus-vin-restaurant`} element={<VenderMasVino />} />
+    <Route path={`${prefix}/prix-vin-restaurant`} element={<PrecioVinoRestaurante />} />
+    <Route path={`${prefix}/vin-au-verre-restaurant`} element={<VinoPorCopa />} />
+    <Route path={`${prefix}/intelligence-artificielle-restaurants`} element={<IARestaurantes />} />
   </>
 );
 

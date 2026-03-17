@@ -80,6 +80,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-detectar-canibalizacion-vinos-carta": "/en/guides/how-to-detect-wine-cannibalization",
     "/guias/como-revisar-carta-vinos-cada-mes": "/en/guides/how-to-review-wine-list-monthly",
     "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante": "/en/guides/how-to-improve-wine-rotation-in-restaurants",
+    "/como-vender-mas-vino-en-un-restaurante": "/en/how-to-sell-more-wine-in-restaurants",
+    "/precio-vino-restaurante": "/en/wine-pricing-restaurant",
+    "/vino-por-copa-restaurante": "/en/wine-by-glass-restaurant",
+    "/inteligencia-artificial-restaurantes": "/en/artificial-intelligence-restaurants",
   },
   it: {
     "/": "/it",
@@ -141,6 +145,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-detectar-canibalizacion-vinos-carta": "/it/guide/come-rilevare-cannibalizzazione-vini",
     "/guias/como-revisar-carta-vinos-cada-mes": "/it/guide/come-revisionare-carta-vini-ogni-mese",
     "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante": "/it/guide/come-migliorare-rotazione-vini-ristorante",
+    "/como-vender-mas-vino-en-un-restaurante": "/it/come-vendere-piu-vino-ristorante",
+    "/precio-vino-restaurante": "/it/prezzo-vino-ristorante",
+    "/vino-por-copa-restaurante": "/it/vino-al-calice-ristorante",
+    "/inteligencia-artificial-restaurantes": "/it/intelligenza-artificiale-ristoranti",
   },
   fr: {
     "/": "/fr",
@@ -202,6 +210,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-detectar-canibalizacion-vinos-carta": "/fr/guides/comment-detecter-cannibalisation-vins",
     "/guias/como-revisar-carta-vinos-cada-mes": "/fr/guides/comment-reviser-carte-vins-chaque-mois",
     "/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante": "/fr/guides/comment-ameliorer-rotation-vins-restaurant",
+    "/como-vender-mas-vino-en-un-restaurante": "/fr/comment-vendre-plus-vin-restaurant",
+    "/precio-vino-restaurante": "/fr/prix-vin-restaurant",
+    "/vino-por-copa-restaurante": "/fr/vin-au-verre-restaurant",
+    "/inteligencia-artificial-restaurantes": "/fr/intelligence-artificielle-restaurants",
   },
 };
 
