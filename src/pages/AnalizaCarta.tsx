@@ -423,7 +423,7 @@ const AnalizaCarta = () => {
     const menuLink = (fd.get("menu_link") as string)?.trim();
 
     if (!restaurant || !email) {
-      toast.error("Por favor completa los campos obligatorios.");
+      toast.error(t.form.errRequired);
       setSubmitting(false);
       return;
     }
@@ -437,7 +437,7 @@ const AnalizaCarta = () => {
         .from("admin-uploads")
         .upload(path, file);
       if (uploadError) {
-        toast.error("Error al subir el archivo. Inténtalo de nuevo.");
+        toast.error(t.form.errUpload);
         setSubmitting(false);
         return;
       }
@@ -458,9 +458,9 @@ const AnalizaCarta = () => {
     const { error } = await supabase.from("contact_leads").insert(leadData);
 
     if (error) {
-      toast.error("Error al enviar. Inténtalo de nuevo.");
+      toast.error(t.form.errSubmit);
     } else {
-      toast.success("¡Carta recibida! Te enviaremos el análisis en menos de 48 h.");
+      toast.success(t.form.success);
       (e.target as HTMLFormElement).reset();
       setFileName(null);
       notifyLead(leadData);
