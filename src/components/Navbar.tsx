@@ -6,6 +6,7 @@ import winerimLogo from "@/assets/winerim-logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Badge } from "@/components/ui/badge";
+import { ga } from "@/lib/analytics";
 
 /* ── Types ─────────────────────────────────────── */
 interface SubLink {
