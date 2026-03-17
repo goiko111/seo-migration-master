@@ -586,23 +586,42 @@ const CalculadoraStockMuerto = () => {
                     <th className="pb-3 font-medium">{t.thWine}</th>
                     <th className="pb-3 font-medium text-right">{t.thUnits}</th>
                     <th className="pb-3 font-medium text-right">{t.thCapital}</th>
+                    <th className="pb-3 font-medium text-right">{t.thCurrentValue}</th>
                     <th className="pb-3 font-medium text-right">{t.thDays}</th>
+                    <th className="pb-3 font-medium text-center">{t.thDepreciation}</th>
                     <th className="pb-3 font-medium text-center">{t.thPriority}</th>
                     <th className="pb-3 font-medium text-center">{t.thRecommendation}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {analysis.classified.sort((a, b) => b.diasSinVenta - a.diasSinVenta).map((it, i) => (
+                  {analysis.classified.sort((a, b) => b.diasSinVenta - a.diasSinVenta).map((it, i) => {
+                    const depColor = it.depStatus === "fresh" ? "text-emerald-500" : it.depStatus === "aging" ? "text-amber-500" : "text-destructive";
+                    const depBg = it.depStatus === "fresh" ? "bg-emerald-500/10" : it.depStatus === "aging" ? "bg-amber-500/10" : "bg-destructive/10";
+                    return (
                     <tr key={i} className="border-b border-border/50 last:border-0">
                       <td className="py-3">{it.nombre}</td>
                       <td className="py-3 text-right">{it.unidades}</td>
                       <td className="py-3 text-right font-medium">{formatEur(it.capital)}</td>
+                      <td className="py-3 text-right">
+                        <span className={it.valueLost > 0 ? "text-amber-500" : ""}>{formatEur(it.currentValue)}</span>
+                        {it.valueLost > 0 && <span className="block text-[10px] text-destructive">-{formatEur(it.valueLost)}</span>}
+                      </td>
                       <td className="py-3 text-right">{it.diasSinVenta}d</td>
+                      <td className="py-3 text-center">
+                        <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${depBg} ${depColor}`}>
+                          {t.deprecLabels[it.depStatus]} ({(it.depPct * 100).toFixed(0)}%)
+                        </span>
+                      </td>
                       <td className="py-3 text-center">
                         <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${it.priority.bg} ${it.priority.color}`}>{it.priority.label}</span>
                       </td>
                       <td className="py-3 text-center">
                         <span className={`text-xs font-semibold ${it.recommendation.color}`}>{it.recommendation.label}</span>
+                      </td>
+                    </tr>
+                    );
+                  })}
+                </tbody>
                       </td>
                     </tr>
                   ))}
