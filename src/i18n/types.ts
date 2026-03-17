@@ -299,6 +299,7 @@ export interface TranslationDict {
   cookie_accept: string;
   cookie_reject: string;
   cookie_more_info: string;
+  cookie_consent_note: string;
 
   // Breadcrumbs
   breadcrumb_home: string;
