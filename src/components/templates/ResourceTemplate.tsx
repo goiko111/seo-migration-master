@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackResourceDownload, trackFormSubmit } from "@/hooks/useIntentTracker";
+import { ads } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -115,6 +116,13 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       notifyLead(leadData);
       trackFormSubmit("resource");
       trackResourceDownload(data.formType);
+      ads.conversion("resource", {
+        email: leadData.email || undefined,
+        phone: leadData.phone || undefined,
+        first_name: leadData.name?.split(" ")[0] || undefined,
+        last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
+        city: leadData.city || undefined,
+      });
       // Auto-download the file
       if (data.downloadFile) {
         setTimeout(() => {

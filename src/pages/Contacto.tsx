@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
+import { ads } from "@/lib/analytics";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -103,6 +104,13 @@ const Contacto = () => {
       (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
       trackFormSubmit("contact");
+      ads.conversion("contact", {
+        email: leadData.email || undefined,
+        phone: leadData.phone || undefined,
+        first_name: leadData.name?.split(" ")[0] || undefined,
+        last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
+        city: leadData.city || undefined,
+      });
     }
     setSubmitting(false);
   };

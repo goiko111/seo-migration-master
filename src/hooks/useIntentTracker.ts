@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { trackPageIntent, trackAction, classifyPath, type IntentCategory } from "@/lib/intentTracking";
-import { ga } from "@/lib/analytics";
+import { ga, ads } from "@/lib/analytics";
 
 /**
  * Hook that automatically tracks pageview intent on route change.
@@ -29,6 +29,22 @@ export function usePageIntentTracker(): void {
         ga.pageView({ content_group: contentGroup });
         if (classification.level === "high") {
           ga.highIntentPageView(classification.category);
+
+          // Google Ads: fire micro-conversions for key pages
+          const microMap: Record<string, string> = {
+            pricing: "pricing_visit",
+            product_supply: "supply_visit",
+            solution_groups: "groups_visit",
+          };
+          if (microMap[classification.category]) {
+            ads.microConversion(microMap[classification.category]);
+          }
+
+          // Remarketing: push audience signals
+          ads.remarketing({
+            page_type: classification.category,
+            intent_level: classification.level,
+          });
         }
       }
     }, 300);

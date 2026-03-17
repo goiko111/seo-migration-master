@@ -186,22 +186,139 @@ Derivados de `IntentCategory`:
 
 ---
 
-## 7. Compatibilidad con Campañas
+## 7. Google Ads — Configuración Completa
 
-### 7.1 Google Ads
+### 7.1 Arquitectura
 
-- Los eventos `generate_lead` se marcan como conversión en GA4
-- GA4 enlazado a Google Ads importa conversiones automáticamente
-- `cta_click` se puede usar como conversión secundaria (señal de calidad)
-- Consent Mode v2 permite modelado de conversiones con datos denegados
+```
+index.html → Consent Mode v2 (default denied)
+           → GTM container
+           
+GTM        → GA4 Config tag
+           → Google Ads Conversion tags (fired via dataLayer events)
+           → Google Ads Remarketing tag (fired on all pages)
+           → Enhanced Conversions (user data from dataLayer)
 
-### 7.2 Meta / LinkedIn Ads
+analytics.ts → ads.conversion() → pushes "ads_conversion" + "enhanced_conversion_data"
+             → ads.microConversion() → pushes "ads_micro_conversion"  
+             → ads.remarketing() → pushes "remarketing_event"
+```
+
+### 7.2 Conversiones Principales
+
+| Conversión | Evento dataLayer | Valor | Categoría Ads |
+|---|---|---|---|
+| Demo solicitada | `ads_conversion` (conversion_type=demo) | 50 EUR | Primary |
+| Contacto enviado | `ads_conversion` (conversion_type=contact) | 30 EUR | Primary |
+| Recurso descargado | `ads_conversion` (conversion_type=resource) | 10 EUR | Primary |
+
+### 7.3 Microconversiones (Secondary)
+
+| Acción | Evento dataLayer | Variable clave |
+|---|---|---|
+| Click CTA demo | `ads_micro_conversion` (micro_action=cta_click_demo) | cta_id |
+| Uso de calculadora | `ads_micro_conversion` (micro_action=tool_used) | tool_name |
+| Visita a Precios | `ads_micro_conversion` (micro_action=pricing_visit) | — |
+| Visita a Winerim Supply | `ads_micro_conversion` (micro_action=supply_visit) | — |
+| Visita a Soluciones grupos | `ads_micro_conversion` (micro_action=groups_visit) | — |
+| Descarga de recurso | `ads_micro_conversion` (micro_action=resource_download) | resource_name |
+
+### 7.4 Enhanced Conversions
+
+Datos enviados al dataLayer para enhanced conversions (GTM los hashea con SHA-256):
+
+| Campo | Variable DL | Origen |
+|---|---|---|
+| Email | `email` (via `enhanced_conversion_data`) | Formulario |
+| Teléfono | `phone_number` | Formulario |
+| Nombre | `first_name` | Formulario (split) |
+| Apellido | `last_name` | Formulario (split) |
+| Ciudad | `city` | Formulario |
+
+**Configuración en GTM:**
+1. Activar "Enhanced conversions" en el tag de Google Ads
+2. Seleccionar "Data layer" como fuente de datos
+3. Mapear el evento `enhanced_conversion_data` como User-Provided Data Event
+
+### 7.5 Remarketing
+
+| Señal | Evento dataLayer | Uso en audiencias |
+|---|---|---|
+| Tipo de página | `remarketing_event` → `page_type` | Segmentar por interés |
+| Nivel de intención | `remarketing_event` → `intent_level` | Hot leads vs exploradores |
+| Content group | `page_view` → `content_group` | Audiencias por tema |
+
+**Audiencias sugeridas para Google Ads:**
+
+| Audiencia | Condición | Ventana |
+|---|---|---|
+| Hot leads | `intent_level = high` + ≥2 páginas producto | 30 días |
+| Pricing visitors | `page_type = pricing` | 14 días |
+| Tool users | `micro_action = tool_used` | 30 días |
+| Resource downloaders | `conversion_type = resource` | 60 días |
+| Demo abandonadores | Visitó /demo pero no convirtió | 7 días |
+| Blog engaged | `scroll_depth ≥ 75%` en blog | 30 días |
+
+### 7.6 Consent Mode v2 para Ads
+
+Implementado en `index.html`:
+
+```javascript
+// Default: todo denegado
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500
+});
+
+// Redacción de datos cuando no hay consent
+gtag('set', 'ads_data_redaction', true);
+
+// URL passthrough para medición cross-domain sin cookies
+gtag('set', 'url_passthrough', true);
+```
+
+**Comportamiento:**
+- Sin consentimiento: Google modela conversiones (~70% precisión)
+- Con consentimiento: tracking completo con cookies + enhanced conversions
+- `ads_data_redaction`: redacta datos de clic en ads cuando `ad_storage=denied`
+- `url_passthrough`: mantiene gclid/dclid en URLs para atribución sin cookies
+
+### 7.7 Tags GTM para Google Ads (Checklist)
+
+| Tag | Tipo | Trigger | Notas |
+|---|---|---|---|
+| Google Ads Remarketing | Remarketing | All Pages | Usar AW-XXXXXXXXX |
+| Ads Conv — Demo | Conversion | CE = `ads_conversion` + `conversion_type=demo` | Primary, valor 50€ |
+| Ads Conv — Contact | Conversion | CE = `ads_conversion` + `conversion_type=contact` | Primary, valor 30€ |
+| Ads Conv — Resource | Conversion | CE = `ads_conversion` + `conversion_type=resource` | Primary, valor 10€ |
+| Ads Micro — CTA click | Conversion | CE = `ads_micro_conversion` + `micro_action=cta_click_demo` | Secondary |
+| Ads Micro — Tool used | Conversion | CE = `ads_micro_conversion` + `micro_action=tool_used` | Secondary |
+| Ads Micro — Pricing | Conversion | CE = `ads_micro_conversion` + `micro_action=pricing_visit` | Secondary |
+
+**Variables DL adicionales para Ads:**
+
+| Variable | Nombre DL |
+|---|---|
+| `dlv_conversion_type` | `conversion_type` |
+| `dlv_conversion_label` | `conversion_label` |
+| `dlv_micro_action` | `micro_action` |
+| `dlv_value` | `value` |
+| `dlv_currency` | `currency` |
+
+---
+
+## 8. Compatibilidad con Otras Plataformas
+
+### 8.1 Meta / LinkedIn Ads
 
 - Instalar píxeles vía GTM
 - Mapear `generate_lead` → Lead event
 - Mapear `high_intent_page` con `page_name=pricing` → ViewContent
 
-### 7.3 Dealfront / Leadfeeder
+### 8.2 Dealfront / Leadfeeder
 
 - Lee `dataLayer` nativamente
 - El evento `winerim_intent` con `intent_level=high` sirve como señal de cuenta calificada
@@ -209,11 +326,16 @@ Derivados de `IntentCategory`:
 
 ---
 
-## 8. Próximos Pasos
+## 9. Próximos Pasos
 
 - [ ] Crear propiedad GA4 y obtener Measurement ID
+- [ ] Crear cuenta Google Ads y obtener Conversion ID (AW-XXXXXXXXX)
 - [ ] Reemplazar `GTM-XXXXXXX` en index.html con ID real
-- [ ] Configurar tags/triggers/variables en GTM según §6
+- [ ] Reemplazar `AW-XXXXXXXXX` en analytics.ts con Conversion ID + Labels reales
+- [ ] Configurar tags/triggers/variables en GTM según §6 y §7.7
 - [ ] Marcar `generate_lead` como conversión en GA4
+- [ ] Activar Enhanced Conversions en Google Ads → Settings → Conversions
+- [ ] Crear audiencias de remarketing en Google Ads según §7.6
+- [ ] Enlazar GA4 ↔ Google Ads en Admin → Product links
+- [ ] Importar conversiones GA4 en Google Ads como secondary conversions
 - [ ] Crear audiencias en GA4: visitantes de pricing, usuarios de herramientas, leads
-- [ ] Enlazar GA4 con Google Ads cuando se activen campañas
