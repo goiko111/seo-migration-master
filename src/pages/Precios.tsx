@@ -558,7 +558,7 @@ i18n.fr = {
   ],
   faqs: [
     { q: "Y a-t-il un engagement ?", a: "Non. Annulez quand vous voulez, sans pénalités ni petites lignes." },
-    { q: "Combien de références par plan ?", a: "Pas de limite rigide. Le prix s'ajuste au volume de votre carte, de 30 à plus de 500 références." },
+    { q: "Combien de références par plan ?", a: "Pas de limite rigide. Le prix s'ajuste au volume de votre carte, de 80 à plus de 500 références." },
     { q: "Les convives doivent-ils télécharger une app ?", a: "Non. La carte digitale s'ouvre depuis le navigateur mobile en scannant un QR. Sans téléchargement." },
     { q: "Puis-je essayer avant de m'abonner ?", a: "Oui. Nous proposons une analyse gratuite de votre carte des vins et une démo personnalisée avec votre carte réelle." },
     { q: "De quoi ai-je besoin pour commencer ?", a: "Votre carte des vins actuelle (tout format) et 15 minutes pour un appel de configuration." },
