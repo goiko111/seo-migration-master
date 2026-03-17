@@ -283,6 +283,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/solutions/increase-average-ticket`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/soluzioni/aumentare-scontrino-medio`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/solutions/augmenter-ticket-moyen`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/wine-list-analysis`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/analisi-carta`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/analyse-carte`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/wine-margin-calculator`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/calcolatrice-margini-vino`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/calculateur-marge-vin`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/article/:slug`} element={<ArticlePage />} />
   </>
 );
