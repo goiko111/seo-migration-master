@@ -21,38 +21,31 @@ import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 /* ─── helpers ─── */
 const em = (html: string) => html.replace(/<em>/g, '<span class="text-gradient-wine italic">').replace(/<\/em>/g, '</span>');
 
-/* ─── i18n content (ES primary, others follow same structure) ─── */
+/* ─── i18n content ─── */
 const i18n: Record<string, typeof ES_CONTENT> = {};
 
 const ES_CONTENT = {
   seo_title: "Planes y Precios de Winerim | Software de Carta de Vinos para Restaurantes",
   seo_desc: "Descubre qué plan de Winerim encaja con tu restaurante, hotel o grupo. Sin permanencia, con implementación en 48h y soporte dedicado.",
   breadcrumb: "Precios",
-
-  /* Hero */
   badge: "Planes y precios",
   title: "Un plan para cada tipo de <em>restaurante</em>",
   subtitle: "Winerim se adapta a tu tamaño, tu nivel de ambición y tu tipo de operación. Sin sorpresas, sin permanencia.",
-
-  /* Value prop strip */
   valuePillars: [
     { icon: "clock", text: "Operativo en menos de 48 horas" },
     { icon: "shield", text: "Sin permanencia ni penalizaciones" },
     { icon: "headphones", text: "Soporte humano en cada plan" },
     { icon: "puzzle", text: "Compatible con cualquier POS" },
   ],
-
-  /* Who fits */
   whoTitle: "¿Qué plan encaja con <em>tu negocio</em>?",
   whoSubtitle: "Winerim sirve a perfiles muy distintos. Encuentra el tuyo.",
   profiles: [
     { icon: "store", name: "Restaurante independiente", plan: "Starter o Pro", desc: "Carta de 80–150 referencias. Necesitas visibilidad y control sin complejidad." },
     { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta amplia y compleja, maridajes, vino por copa. Necesitas recomendaciones inteligentes y analítica." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Múltiples puntos de venta, room service, bar. Necesitas consistencia y reporting." },
+    { icon: "wine", name: "Wine Bar / Enoteca", plan: "Pro", desc: "Alta rotación por copa, gestión de mermas, carta dinámica. Necesitas control fino del servicio por copa y rentabilidad." },
     { icon: "building", name: "Grupo de restauración", plan: "Enterprise", desc: "Multi-local, governance centralizada, benchmarking entre unidades y despliegue progresivo." },
   ],
-
-  /* Plans */
   plansTitle: "Compara los <em>planes</em>",
   plansBadge: "Estructura clara",
   plans: [
@@ -131,69 +124,53 @@ const ES_CONTENT = {
       notIncluded: [],
     },
   ],
-
-  /* Pricing model note */
   pricingNote: "Los precios de Winerim se adaptan al número de referencias de tu carta y al número de locales. Solicita una propuesta personalizada sin compromiso.",
-
-  /* Comparison table */
-  compTitle: "Comparativa detallada entre <em>planes</em>",
-  compBadge: "Feature por feature",
+  compTitle: "Qué incluye cada <em>plan</em>",
+  compBadge: "Comparativa estratégica",
   compCategories: [
     {
-      name: "Carta digital",
+      name: "Carta y experiencia del comensal",
       rows: [
-        { feature: "Carta digital interactiva", starter: true, pro: true, enterprise: true },
-        { feature: "Filtros por tipo, región, precio", starter: true, pro: true, enterprise: true },
+        { feature: "Carta digital interactiva con filtros y QR", starter: true, pro: true, enterprise: true },
         { feature: "Fichas de vino completas", starter: true, pro: true, enterprise: true },
-        { feature: "QR personalizado", starter: true, pro: true, enterprise: true },
-        { feature: "Comparador de vinos", starter: false, pro: true, enterprise: true },
+        { feature: "Comparador de vinos y maridajes", starter: false, pro: true, enterprise: true },
       ],
     },
     {
-      name: "Inteligencia y analítica (Winerim Core)",
+      name: "Inteligencia de producto",
       rows: [
-        { feature: "Analítica de ventas en tiempo real", starter: false, pro: true, enterprise: true },
-        { feature: "Optimización de precios y márgenes", starter: false, pro: true, enterprise: true },
-        { feature: "Wine Mapping interactivo", starter: false, pro: true, enterprise: true },
-        { feature: "Recomendaciones inteligentes", starter: false, pro: "Básicas", enterprise: true },
+        { feature: "Analítica de ventas y pricing", starter: false, pro: true, enterprise: true },
+        { feature: "Wine Mapping y salud de carta", starter: false, pro: "Esencial" as string | boolean, enterprise: "Completo" as string | boolean },
         { feature: "Alertas de rotación y stock muerto", starter: false, pro: true, enterprise: true },
-        { feature: "Salud de carta", starter: false, pro: "Básica", enterprise: true },
-        { feature: "Optimización vino por copa", starter: false, pro: true, enterprise: true },
-        { feature: "Winerim Core Full (26 módulos)", starter: false, pro: false, enterprise: true },
+        { feature: "Inteligencia Dinámica (RIMs™)", starter: false, pro: false, enterprise: true },
+        { feature: "Inteligencia de compras (Supply)", starter: false, pro: false, enterprise: true },
       ],
     },
     {
-      name: "Inteligencia Dinámica y Supply",
+      name: "Operaciones y soporte",
       rows: [
-        { feature: "Inteligencia Dinámica completa", starter: false, pro: false, enterprise: true },
-        { feature: "Winerim Supply (compras)", starter: false, pro: false, enterprise: true },
-        { feature: "Benchmarking entre unidades", starter: false, pro: false, enterprise: true },
-        { feature: "Reporting ejecutivo consolidado", starter: false, pro: false, enterprise: true },
-      ],
-    },
-    {
-      name: "Operaciones",
-      rows: [
-        { feature: "Panel de gestión", starter: true, pro: true, enterprise: true },
-        { feature: "Multi-local centralizado", starter: false, pro: false, enterprise: true },
-        { feature: "Integraciones POS/PMS avanzadas", starter: false, pro: false, enterprise: true },
-        { feature: "API personalizada", starter: false, pro: false, enterprise: true },
-        { feature: "Despliegue progresivo", starter: false, pro: false, enterprise: true },
-      ],
-    },
-    {
-      name: "Soporte",
-      rows: [
-        { feature: "Soporte básico / email", starter: true, pro: true, enterprise: true },
+        { feature: "Multi-local y benchmarking", starter: false, pro: false, enterprise: true },
+        { feature: "Integraciones POS / PMS y API", starter: false, pro: false, enterprise: true },
         { feature: "Soporte prioritario", starter: false, pro: true, enterprise: true },
-        { feature: "Onboarding dedicado con formación", starter: false, pro: false, enterprise: true },
-        { feature: "Account manager asignado", starter: false, pro: false, enterprise: true },
-        { feature: "SLA garantizado", starter: false, pro: false, enterprise: true },
+        { feature: "Onboarding, account manager y SLA", starter: false, pro: false, enterprise: true },
       ],
     },
   ],
-
-  /* Objection busters */
+  roiTitle: "Impacto estimado por <em>plan</em>",
+  roiBadge: "ROI orientativo",
+  roiNote: "Datos basados en la experiencia con clientes activos. El impacto real depende del punto de partida, la carta y el perfil del restaurante.",
+  roi: [
+    { plan: "Starter", metric: "Visibilidad", value: "Carta profesional online", desc: "El comensal explora tu carta completa y entiende tu propuesta de vinos." },
+    { plan: "Pro", metric: "Rentabilidad", value: "+15–25 % ticket medio de vino", desc: "Pricing optimizado, copa inteligente y recomendaciones que suben el ticket." },
+    { plan: "Enterprise", metric: "Gobierno", value: "+20–35 % margen neto grupo", desc: "Control centralizado de compras, surtido y benchmarking entre unidades." },
+  ],
+  layerTitle: "Qué capa de inteligencia incluye cada <em>plan</em>",
+  layerBadge: "Arquitectura de capas",
+  layers: [
+    { plan: "Starter", stack: ["Carta Digital"], desc: "Digitalización profesional sin analítica." },
+    { plan: "Pro", stack: ["Carta Digital", "Core Essentials"], desc: "Análisis, pricing y optimización del vino." },
+    { plan: "Enterprise", stack: ["Carta Digital", "Core Full", "Inteligencia Dinámica", "Supply"], desc: "Suite completa: analiza, actúa y compra mejor." },
+  ],
   objectionsTitle: "Lo que nos preguntan <em>antes de empezar</em>",
   objectionsBadge: "Sin fricciones",
   objections: [
@@ -204,8 +181,6 @@ const ES_CONTENT = {
     { icon: "trending", title: "¿Cuánto puedo mejorar mis ventas?", answer: "Depende de tu punto de partida. Nuestros clientes mejoran la exploración de referencias por parte del comensal, optimizan márgenes y reducen stock muerto. El impacto se mide en semanas, no en meses." },
     { icon: "shield", title: "¿Puedo personalizar la apariencia?", answer: "Sí. La carta digital se adapta a tu marca: colores, logo, tipografía y estilo visual. En Enterprise, la personalización es completa." },
   ],
-
-  /* FAQs */
   faqs: [
     { q: "¿Hay permanencia?", a: "No. Puedes cancelar cuando quieras, sin penalizaciones ni letra pequeña." },
     { q: "¿Cuántas referencias admite cada plan?", a: "No hay un límite rígido. El precio se ajusta al volumen de tu carta. Desde 80 hasta más de 500 referencias." },
@@ -216,8 +191,6 @@ const ES_CONTENT = {
     { q: "¿Cómo se calcula el precio exacto?", a: "El precio depende del número de referencias y del número de locales. Solicita una propuesta personalizada y te enviamos un presupuesto claro en 24h." },
     { q: "¿Puedo cambiar de plan?", a: "Sí. Puedes escalar de Starter a Pro o de Pro a Enterprise en cualquier momento. Sin interrupciones." },
   ],
-
-  /* Final CTA */
   ctaBadge: "Da el paso",
   ctaTitle: "Descubre cuánto más podrías vender con tu <em>carta de vinos</em>",
   ctaSub: "Demo personalizada con tu carta real. Sin compromiso. En 15 minutos entenderás el potencial.",
@@ -227,7 +200,7 @@ const ES_CONTENT = {
 
 i18n.es = ES_CONTENT;
 
-/* EN translation */
+/* EN */
 i18n.en = {
   seo_title: "Winerim Plans & Pricing | Wine List Software for Restaurants",
   seo_desc: "Find the right Winerim plan for your restaurant, hotel or group. No lock-in, 48h setup, dedicated support.",
@@ -247,6 +220,7 @@ i18n.en = {
     { icon: "store", name: "Independent restaurant", plan: "Starter or Pro", desc: "80–150 references. You need visibility and control without complexity." },
     { icon: "chef", name: "Fine dining restaurant", plan: "Pro", desc: "Extensive list, pairings, by-the-glass. You need smart recommendations and analytics." },
     { icon: "hotel", name: "Hotel with F&B", plan: "Pro or Enterprise", desc: "Multiple outlets, room service, bar. You need consistency and reporting." },
+    { icon: "wine", name: "Wine Bar / Enoteca", plan: "Pro", desc: "High glass rotation, shrinkage management, dynamic list. You need fine control over by-the-glass service and profitability." },
     { icon: "building", name: "Restaurant group", plan: "Enterprise", desc: "Multi-location, centralized governance, unit benchmarking and progressive rollout." },
   ],
   plansTitle: "Compare the <em>plans</em>",
@@ -275,45 +249,42 @@ i18n.en = {
     },
   ],
   pricingNote: "Winerim pricing adapts to the number of references and locations. Request a personalized quote with no commitment.",
-  compTitle: "Detailed <em>plan</em> comparison", compBadge: "Feature by feature",
+  compTitle: "What each <em>plan</em> includes",
+  compBadge: "Strategic comparison",
   compCategories: [
-    { name: "Digital list", rows: [
-      { feature: "Interactive digital list", starter: true, pro: true, enterprise: true },
-      { feature: "Filters by type, region, price", starter: true, pro: true, enterprise: true },
+    { name: "List & guest experience", rows: [
+      { feature: "Interactive digital list with filters & QR", starter: true, pro: true, enterprise: true },
       { feature: "Complete wine profiles", starter: true, pro: true, enterprise: true },
-      { feature: "Custom QR", starter: true, pro: true, enterprise: true },
-      { feature: "Wine comparator", starter: false, pro: true, enterprise: true },
+      { feature: "Wine comparator & pairings", starter: false, pro: true, enterprise: true },
     ]},
-    { name: "Intelligence & analytics (Winerim Core)", rows: [
-      { feature: "Real-time sales analytics", starter: false, pro: true, enterprise: true },
-      { feature: "Pricing & margin optimization", starter: false, pro: true, enterprise: true },
-      { feature: "Interactive Wine Mapping", starter: false, pro: true, enterprise: true },
-      { feature: "Smart recommendations", starter: false, pro: "Basic", enterprise: true },
+    { name: "Product intelligence", rows: [
+      { feature: "Sales analytics & pricing", starter: false, pro: true, enterprise: true },
+      { feature: "Wine Mapping & list health", starter: false, pro: "Essential", enterprise: "Full" },
       { feature: "Rotation & dead stock alerts", starter: false, pro: true, enterprise: true },
-      { feature: "List health", starter: false, pro: "Basic", enterprise: true },
-      { feature: "By-the-glass optimization", starter: false, pro: true, enterprise: true },
-      { feature: "Winerim Core Full (26 modules)", starter: false, pro: false, enterprise: true },
+      { feature: "Dynamic Intelligence (RIMs™)", starter: false, pro: false, enterprise: true },
+      { feature: "Purchasing intelligence (Supply)", starter: false, pro: false, enterprise: true },
     ]},
-    { name: "Dynamic Intelligence & Supply", rows: [
-      { feature: "Full Dynamic Intelligence", starter: false, pro: false, enterprise: true },
-      { feature: "Winerim Supply (purchasing)", starter: false, pro: false, enterprise: true },
-      { feature: "Cross-unit benchmarking", starter: false, pro: false, enterprise: true },
-      { feature: "Executive consolidated reporting", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Operations", rows: [
-      { feature: "Management panel", starter: true, pro: true, enterprise: true },
-      { feature: "Centralized multi-location", starter: false, pro: false, enterprise: true },
-      { feature: "Advanced POS/PMS integrations", starter: false, pro: false, enterprise: true },
-      { feature: "Custom API", starter: false, pro: false, enterprise: true },
-      { feature: "Progressive rollout", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Support", rows: [
-      { feature: "Basic / email support", starter: true, pro: true, enterprise: true },
+    { name: "Operations & support", rows: [
+      { feature: "Multi-location & benchmarking", starter: false, pro: false, enterprise: true },
+      { feature: "POS / PMS integrations & API", starter: false, pro: false, enterprise: true },
       { feature: "Priority support", starter: false, pro: true, enterprise: true },
-      { feature: "Dedicated onboarding with training", starter: false, pro: false, enterprise: true },
-      { feature: "Assigned account manager", starter: false, pro: false, enterprise: true },
-      { feature: "Guaranteed SLA", starter: false, pro: false, enterprise: true },
+      { feature: "Onboarding, account manager & SLA", starter: false, pro: false, enterprise: true },
     ]},
+  ],
+  roiTitle: "Estimated impact per <em>plan</em>",
+  roiBadge: "Indicative ROI",
+  roiNote: "Based on active client experience. Actual impact depends on starting point, list and restaurant profile.",
+  roi: [
+    { plan: "Starter", metric: "Visibility", value: "Professional online list", desc: "Guests explore your full list and understand your wine proposition." },
+    { plan: "Pro", metric: "Profitability", value: "+15–25 % wine ticket", desc: "Optimized pricing, smart by-the-glass and recommendations that raise the ticket." },
+    { plan: "Enterprise", metric: "Governance", value: "+20–35 % group net margin", desc: "Centralized purchasing, assortment and cross-unit benchmarking control." },
+  ],
+  layerTitle: "Which intelligence layer each <em>plan</em> includes",
+  layerBadge: "Layer architecture",
+  layers: [
+    { plan: "Starter", stack: ["Digital List"], desc: "Professional digitization without analytics." },
+    { plan: "Pro", stack: ["Digital List", "Core Essentials"], desc: "Analysis, pricing and wine optimization." },
+    { plan: "Enterprise", stack: ["Digital List", "Core Full", "Dynamic Intelligence", "Supply"], desc: "Full suite: analyse, act and buy better." },
   ],
   objectionsTitle: "What people ask <em>before starting</em>", objectionsBadge: "Frictionless",
   objections: [
@@ -361,6 +332,7 @@ i18n.it = {
     { icon: "store", name: "Ristorante indipendente", plan: "Starter o Pro", desc: "Carta di 80–150 referenze. Hai bisogno di visibilità e controllo senza complessità." },
     { icon: "chef", name: "Ristorante gastronomico", plan: "Pro", desc: "Carta ampia e complessa, abbinamenti, vino al calice. Hai bisogno di raccomandazioni intelligenti e analisi." },
     { icon: "hotel", name: "Hotel con F&B", plan: "Pro o Enterprise", desc: "Più punti vendita, room service, bar. Hai bisogno di coerenza e reportistica." },
+    { icon: "wine", name: "Wine Bar / Enoteca", plan: "Pro", desc: "Alta rotazione al calice, gestione perdite, carta dinamica. Hai bisogno di controllo fine del servizio al calice e redditività." },
     { icon: "building", name: "Gruppo di ristorazione", plan: "Enterprise", desc: "Multi-locale, governance centralizzata, benchmark tra unità e roll-out progressivo." },
   ],
   plansTitle: "Confronta i <em>piani</em>",
@@ -389,46 +361,42 @@ i18n.it = {
     },
   ],
   pricingNote: "I prezzi di Winerim si adattano al numero di referenze della carta e al numero di locali. Richiedi una proposta personalizzata senza impegno.",
-  compTitle: "Confronto dettagliato tra <em>piani</em>",
-  compBadge: "Funzionalità per funzionalità",
+  compTitle: "Cosa include ogni <em>piano</em>",
+  compBadge: "Confronto strategico",
   compCategories: [
-    { name: "Carta digitale", rows: [
-      { feature: "Carta digitale interattiva", starter: true, pro: true, enterprise: true },
-      { feature: "Filtri per tipo, regione, prezzo", starter: true, pro: true, enterprise: true },
+    { name: "Carta ed esperienza del commensale", rows: [
+      { feature: "Carta digitale interattiva con filtri e QR", starter: true, pro: true, enterprise: true },
       { feature: "Schede vino complete", starter: true, pro: true, enterprise: true },
-      { feature: "QR personalizzato", starter: true, pro: true, enterprise: true },
-      { feature: "Comparatore vini", starter: false, pro: true, enterprise: true },
+      { feature: "Comparatore vini e abbinamenti", starter: false, pro: true, enterprise: true },
     ]},
-    { name: "Intelligenza e analisi (Winerim Core)", rows: [
-      { feature: "Analisi vendite in tempo reale", starter: false, pro: true, enterprise: true },
-      { feature: "Ottimizzazione prezzi e margini", starter: false, pro: true, enterprise: true },
-      { feature: "Wine Mapping interattivo", starter: false, pro: true, enterprise: true },
-      { feature: "Raccomandazioni intelligenti", starter: false, pro: "Base", enterprise: true },
+    { name: "Intelligenza di prodotto", rows: [
+      { feature: "Analisi vendite e pricing", starter: false, pro: true, enterprise: true },
+      { feature: "Wine Mapping e salute carta", starter: false, pro: "Essenziale", enterprise: "Completo" },
       { feature: "Avvisi rotazione e stock morto", starter: false, pro: true, enterprise: true },
-      { feature: "Salute della carta", starter: false, pro: "Base", enterprise: true },
-      { feature: "Ottimizzazione vino al calice", starter: false, pro: true, enterprise: true },
-      { feature: "Winerim Core Full (26 moduli)", starter: false, pro: false, enterprise: true },
+      { feature: "Intelligenza Dinamica (RIMs™)", starter: false, pro: false, enterprise: true },
+      { feature: "Intelligenza acquisti (Supply)", starter: false, pro: false, enterprise: true },
     ]},
-    { name: "Intelligenza Dinamica e Supply", rows: [
-      { feature: "Intelligenza Dinamica completa", starter: false, pro: false, enterprise: true },
-      { feature: "Winerim Supply (acquisti)", starter: false, pro: false, enterprise: true },
-      { feature: "Benchmark tra unità", starter: false, pro: false, enterprise: true },
-      { feature: "Reportistica esecutiva consolidata", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Operazioni", rows: [
-      { feature: "Pannello di gestione", starter: true, pro: true, enterprise: true },
-      { feature: "Multi-locale centralizzato", starter: false, pro: false, enterprise: true },
-      { feature: "Integrazioni POS/PMS avanzate", starter: false, pro: false, enterprise: true },
-      { feature: "API personalizzata", starter: false, pro: false, enterprise: true },
-      { feature: "Roll-out progressivo", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Supporto", rows: [
-      { feature: "Supporto base / email", starter: true, pro: true, enterprise: true },
+    { name: "Operazioni e supporto", rows: [
+      { feature: "Multi-locale e benchmark", starter: false, pro: false, enterprise: true },
+      { feature: "Integrazioni POS / PMS e API", starter: false, pro: false, enterprise: true },
       { feature: "Supporto prioritario", starter: false, pro: true, enterprise: true },
-      { feature: "Onboarding dedicato con formazione", starter: false, pro: false, enterprise: true },
-      { feature: "Account manager assegnato", starter: false, pro: false, enterprise: true },
-      { feature: "SLA garantito", starter: false, pro: false, enterprise: true },
+      { feature: "Onboarding, account manager e SLA", starter: false, pro: false, enterprise: true },
     ]},
+  ],
+  roiTitle: "Impatto stimato per <em>piano</em>",
+  roiBadge: "ROI indicativo",
+  roiNote: "Dati basati sull'esperienza con clienti attivi. L'impatto reale dipende dal punto di partenza, dalla carta e dal profilo del ristorante.",
+  roi: [
+    { plan: "Starter", metric: "Visibilità", value: "Carta professionale online", desc: "Il commensale esplora la tua carta completa e comprende la tua proposta enologica." },
+    { plan: "Pro", metric: "Redditività", value: "+15–25 % scontrino medio vino", desc: "Pricing ottimizzato, calice intelligente e raccomandazioni che alzano lo scontrino." },
+    { plan: "Enterprise", metric: "Governance", value: "+20–35 % margine netto gruppo", desc: "Controllo centralizzato acquisti, assortimento e benchmark tra unità." },
+  ],
+  layerTitle: "Quale livello di intelligenza include ogni <em>piano</em>",
+  layerBadge: "Architettura a livelli",
+  layers: [
+    { plan: "Starter", stack: ["Carta Digitale"], desc: "Digitalizzazione professionale senza analisi." },
+    { plan: "Pro", stack: ["Carta Digitale", "Core Essentials"], desc: "Analisi, pricing e ottimizzazione del vino." },
+    { plan: "Enterprise", stack: ["Carta Digitale", "Core Full", "Intelligenza Dinamica", "Supply"], desc: "Suite completa: analizza, agisci e compra meglio." },
   ],
   objectionsTitle: "Cosa ci chiedono <em>prima di iniziare</em>",
   objectionsBadge: "Senza frizioni",
@@ -477,6 +445,7 @@ i18n.fr = {
     { icon: "store", name: "Restaurant indépendant", plan: "Starter ou Pro", desc: "Carte de 80–150 références. Vous avez besoin de visibilité et de contrôle sans complexité." },
     { icon: "chef", name: "Restaurant gastronomique", plan: "Pro", desc: "Carte étendue, accords, vin au verre. Vous avez besoin de recommandations intelligentes et d'analytique." },
     { icon: "hotel", name: "Hôtel avec F&B", plan: "Pro ou Enterprise", desc: "Plusieurs points de vente, room service, bar. Vous avez besoin de cohérence et de reporting." },
+    { icon: "wine", name: "Wine Bar / Enoteca", plan: "Pro", desc: "Forte rotation au verre, gestion des pertes, carte dynamique. Vous avez besoin d'un contrôle fin du service au verre et de la rentabilité." },
     { icon: "building", name: "Groupe de restauration", plan: "Enterprise", desc: "Multi-sites, gouvernance centralisée, benchmarking inter-unités et déploiement progressif." },
   ],
   plansTitle: "Comparez les <em>plans</em>",
@@ -505,46 +474,42 @@ i18n.fr = {
     },
   ],
   pricingNote: "Les prix de Winerim s'adaptent au nombre de références de votre carte et au nombre de sites. Demandez une proposition personnalisée sans engagement.",
-  compTitle: "Comparaison détaillée des <em>plans</em>",
-  compBadge: "Fonctionnalité par fonctionnalité",
+  compTitle: "Ce que chaque <em>plan</em> inclut",
+  compBadge: "Comparaison stratégique",
   compCategories: [
-    { name: "Carte digitale", rows: [
-      { feature: "Carte digitale interactive", starter: true, pro: true, enterprise: true },
-      { feature: "Filtres par type, région, prix", starter: true, pro: true, enterprise: true },
+    { name: "Carte et expérience convive", rows: [
+      { feature: "Carte digitale interactive avec filtres et QR", starter: true, pro: true, enterprise: true },
       { feature: "Fiches vin complètes", starter: true, pro: true, enterprise: true },
-      { feature: "QR personnalisé", starter: true, pro: true, enterprise: true },
-      { feature: "Comparateur de vins", starter: false, pro: true, enterprise: true },
+      { feature: "Comparateur de vins et accords", starter: false, pro: true, enterprise: true },
     ]},
-    { name: "Intelligence et analytique (Winerim Core)", rows: [
-      { feature: "Analytique des ventes en temps réel", starter: false, pro: true, enterprise: true },
-      { feature: "Optimisation prix et marges", starter: false, pro: true, enterprise: true },
-      { feature: "Wine Mapping interactif", starter: false, pro: true, enterprise: true },
-      { feature: "Recommandations intelligentes", starter: false, pro: "Basiques", enterprise: true },
+    { name: "Intelligence produit", rows: [
+      { feature: "Analytique ventes et pricing", starter: false, pro: true, enterprise: true },
+      { feature: "Wine Mapping et santé carte", starter: false, pro: "Essentiel", enterprise: "Complet" },
       { feature: "Alertes rotation et stock mort", starter: false, pro: true, enterprise: true },
-      { feature: "Santé de la carte", starter: false, pro: "Basique", enterprise: true },
-      { feature: "Optimisation vin au verre", starter: false, pro: true, enterprise: true },
-      { feature: "Winerim Core Full (26 modules)", starter: false, pro: false, enterprise: true },
+      { feature: "Intelligence Dynamique (RIMs™)", starter: false, pro: false, enterprise: true },
+      { feature: "Intelligence achats (Supply)", starter: false, pro: false, enterprise: true },
     ]},
-    { name: "Intelligence Dynamique et Supply", rows: [
-      { feature: "Intelligence Dynamique complète", starter: false, pro: false, enterprise: true },
-      { feature: "Winerim Supply (achats)", starter: false, pro: false, enterprise: true },
-      { feature: "Benchmarking inter-unités", starter: false, pro: false, enterprise: true },
-      { feature: "Reporting exécutif consolidé", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Opérations", rows: [
-      { feature: "Panneau de gestion", starter: true, pro: true, enterprise: true },
-      { feature: "Multi-sites centralisé", starter: false, pro: false, enterprise: true },
-      { feature: "Intégrations POS/PMS avancées", starter: false, pro: false, enterprise: true },
-      { feature: "API personnalisée", starter: false, pro: false, enterprise: true },
-      { feature: "Déploiement progressif", starter: false, pro: false, enterprise: true },
-    ]},
-    { name: "Support", rows: [
-      { feature: "Support basique / email", starter: true, pro: true, enterprise: true },
+    { name: "Opérations et support", rows: [
+      { feature: "Multi-sites et benchmarking", starter: false, pro: false, enterprise: true },
+      { feature: "Intégrations POS / PMS et API", starter: false, pro: false, enterprise: true },
       { feature: "Support prioritaire", starter: false, pro: true, enterprise: true },
-      { feature: "Onboarding dédié avec formation", starter: false, pro: false, enterprise: true },
-      { feature: "Account manager assigné", starter: false, pro: false, enterprise: true },
-      { feature: "SLA garanti", starter: false, pro: false, enterprise: true },
+      { feature: "Onboarding, account manager et SLA", starter: false, pro: false, enterprise: true },
     ]},
+  ],
+  roiTitle: "Impact estimé par <em>plan</em>",
+  roiBadge: "ROI indicatif",
+  roiNote: "Données basées sur l'expérience avec des clients actifs. L'impact réel dépend du point de départ, de la carte et du profil du restaurant.",
+  roi: [
+    { plan: "Starter", metric: "Visibilité", value: "Carte professionnelle en ligne", desc: "Le convive explore votre carte complète et comprend votre proposition de vins." },
+    { plan: "Pro", metric: "Rentabilité", value: "+15–25 % ticket moyen vin", desc: "Pricing optimisé, verre intelligent et recommandations qui augmentent le ticket." },
+    { plan: "Enterprise", metric: "Gouvernance", value: "+20–35 % marge nette groupe", desc: "Contrôle centralisé des achats, assortiment et benchmarking inter-unités." },
+  ],
+  layerTitle: "Quelle couche d'intelligence chaque <em>plan</em> inclut",
+  layerBadge: "Architecture en couches",
+  layers: [
+    { plan: "Starter", stack: ["Carte Digitale"], desc: "Numérisation professionnelle sans analytique." },
+    { plan: "Pro", stack: ["Carte Digitale", "Core Essentials"], desc: "Analyse, pricing et optimisation du vin." },
+    { plan: "Enterprise", stack: ["Carte Digitale", "Core Full", "Intelligence Dynamique", "Supply"], desc: "Suite complète : analyser, agir et mieux acheter." },
   ],
   objectionsTitle: "Ce qu'on nous demande <em>avant de commencer</em>",
   objectionsBadge: "Sans friction",
@@ -577,7 +542,7 @@ i18n.fr = {
 const iconMap: Record<string, typeof Wine> = {
   clock: Clock, shield: Shield, headphones: Headphones, puzzle: Puzzle,
   graduation: GraduationCap, trending: TrendingUp, store: Store,
-  chef: ChefHat, hotel: Hotel, building: Building2,
+  chef: ChefHat, hotel: Hotel, building: Building2, wine: Wine,
 };
 const planIcons = [Zap, Crown, Building2];
 
@@ -611,6 +576,22 @@ const CellValue = ({ value }: { value: boolean | string }) => {
   if (value === false) return <X size={14} className="text-muted-foreground/40 mx-auto" />;
   return <span className="text-xs text-accent font-medium">{value}</span>;
 };
+
+/* Layer stack colors */
+const layerColors: Record<string, { bg: string; text: string; border: string }> = {
+  "Carta Digital": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
+  "Digital List": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
+  "Carte Digitale": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
+  "Core Essentials": { bg: "bg-wine/10", text: "text-wine", border: "border-wine/25" },
+  "Core Full": { bg: "bg-amber-500/10", text: "text-amber-500", border: "border-amber-500/25" },
+  "Inteligencia Dinámica": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Dynamic Intelligence": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Intelligence Dynamique": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Intelligenza Dinamica": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Supply": { bg: "bg-emerald-500/10", text: "text-emerald-500", border: "border-emerald-500/25" },
+};
+
+const getLayerColor = (name: string) => layerColors[name] || { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" };
 
 /* ═══════════════════════════════════════════════ */
 
@@ -812,7 +793,7 @@ const Precios = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-3" dangerouslySetInnerHTML={{ __html: em(c.whoTitle) }} />
             <p className="text-muted-foreground max-w-xl mx-auto">{c.whoSubtitle}</p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {c.profiles.map((p, i) => {
               const Icon = iconMap[p.icon] || Users;
               return (
@@ -962,7 +943,82 @@ const Precios = () => {
         </div>
       </section>
 
-      {/* ── COMPARISON TABLE ── */}
+      {/* ── LAYER ARCHITECTURE ── */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-12">
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.layerBadge}</p>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: em(c.layerTitle) }} />
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {c.layers.map((layer, i) => {
+              const isHighlight = i === 1;
+              const isEnterprise = i === 2;
+              return (
+                <ScrollReveal key={i} delay={i * 0.08}>
+                  <div className={`relative rounded-xl border p-6 h-full ${
+                    isHighlight ? "border-wine/40 bg-wine/[0.03]" : isEnterprise ? "border-emerald-500/30 bg-emerald-500/[0.02]" : "border-border bg-card/50"
+                  }`}>
+                    <h3 className={`font-heading text-lg font-bold mb-1 ${
+                      isHighlight ? "text-wine" : isEnterprise ? "text-emerald-400" : "text-muted-foreground"
+                    }`}>{layer.plan}</h3>
+                    <p className="text-xs text-muted-foreground mb-4">{layer.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {layer.stack.map((s, si) => {
+                        const col = getLayerColor(s);
+                        return (
+                          <span key={si} className={`inline-flex items-center px-3 py-1.5 rounded-lg border text-xs font-semibold tracking-wide ${col.bg} ${col.text} ${col.border}`}>
+                            {s}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ROI BLOCK ── */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal className="text-center mb-10">
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-4">{c.roiBadge}</p>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: em(c.roiTitle) }} />
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-6">
+            {c.roi.map((r, i) => {
+              const isHighlight = i === 1;
+              const isEnterprise = i === 2;
+              return (
+                <ScrollReveal key={i} delay={i * 0.08}>
+                  <div className={`rounded-xl border p-6 text-center ${
+                    isHighlight ? "border-wine/30 bg-wine/[0.03]" : isEnterprise ? "border-emerald-500/20 bg-gradient-card" : "border-border bg-gradient-card"
+                  }`}>
+                    <span className={`text-[10px] font-semibold tracking-[0.25em] uppercase ${
+                      isHighlight ? "text-wine" : isEnterprise ? "text-emerald-500" : "text-muted-foreground"
+                    }`}>{r.plan} · {r.metric}</span>
+                    <p className={`font-heading text-xl md:text-2xl font-bold mt-2 mb-2 ${
+                      isHighlight ? "text-wine" : isEnterprise ? "text-emerald-400" : "text-foreground"
+                    }`}>{r.value}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+          <ScrollReveal delay={0.3}>
+            <p className="text-center text-xs text-muted-foreground/60 max-w-2xl mx-auto italic">{c.roiNote}</p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE (simplified) ── */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-12">
