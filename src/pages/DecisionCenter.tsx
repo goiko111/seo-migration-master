@@ -129,7 +129,7 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
 ];
 
-/* ── Password Gate UI ── */
+/* ── Password Gate UI — Mini landing ── */
 const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: TranslationDict }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
@@ -142,66 +142,197 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
     }
   };
 
+  const lang = t.locale === "es_ES" ? "es" : t.locale === "en_GB" ? "en" : t.locale === "it_IT" ? "it" : "fr";
+
+  const copy = {
+    es: {
+      title: "Zona cliente Winerim",
+      subtitle: "Accede al entorno privado donde tus datos, insights y recomendaciones se convierten en decisiones más claras.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "Una capa para entender mejor lo que Winerim detecta en tu carta y saber qué hacer ahora." },
+        { emoji: "📊", title: "Lectura contextual de tus insights", desc: "No solo ves métricas: entiendes por qué importan, qué prioridad tienen y qué impacto pueden tener." },
+        { emoji: "🎯", title: "Prioridad y acción", desc: "Accede a recomendaciones, siguientes pasos y seguimiento para avanzar con más criterio." },
+        { emoji: "🔒", title: "Entorno privado para sacar más valor", desc: "Un espacio pensado para clientes y equipos autorizados, conectado a su caso real." },
+      ],
+      not_title: "Qué no es esta zona",
+      not_desc: "No es una biblioteca pública ni una simple recopilación de recursos. Es un entorno privado pensado para ayudarte a interpretar mejor tu realidad dentro de Winerim.",
+      for_title: "Para quién es",
+      for_desc: "Esta zona está pensada para clientes de Winerim y equipos autorizados.",
+      no_client: "¿Aún no eres cliente?",
+      request_demo: "Solicitar demo",
+    },
+    en: {
+      title: "Winerim Client Area",
+      subtitle: "Access the private environment where your data, insights and recommendations become clearer decisions.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "A layer to better understand what Winerim detects in your wine list and know what to do now." },
+        { emoji: "📊", title: "Contextual reading of your insights", desc: "You don't just see metrics: you understand why they matter, their priority and potential impact." },
+        { emoji: "🎯", title: "Priority and action", desc: "Access recommendations, next steps and follow-up to move forward with more confidence." },
+        { emoji: "🔒", title: "Private environment for more value", desc: "A space designed for clients and authorised teams, connected to their real case." },
+      ],
+      not_title: "What this area is not",
+      not_desc: "It's not a public library or a simple collection of resources. It's a private environment designed to help you better interpret your reality within Winerim.",
+      for_title: "Who it's for",
+      for_desc: "This area is designed for Winerim clients and authorised teams.",
+      no_client: "Not a client yet?",
+      request_demo: "Request demo",
+    },
+    it: {
+      title: "Area clienti Winerim",
+      subtitle: "Accedi all'ambiente privato dove i tuoi dati, insight e raccomandazioni si trasformano in decisioni più chiare.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "Un livello per capire meglio cosa Winerim rileva nella tua carta e sapere cosa fare ora." },
+        { emoji: "📊", title: "Lettura contestuale dei tuoi insight", desc: "Non vedi solo metriche: capisci perché sono importanti, la loro priorità e il potenziale impatto." },
+        { emoji: "🎯", title: "Priorità e azione", desc: "Accedi a raccomandazioni, prossimi passi e follow-up per avanzare con più criterio." },
+        { emoji: "🔒", title: "Ambiente privato per più valore", desc: "Uno spazio pensato per clienti e team autorizzati, connesso al loro caso reale." },
+      ],
+      not_title: "Cosa non è questa zona",
+      not_desc: "Non è una biblioteca pubblica né una semplice raccolta di risorse. È un ambiente privato pensato per aiutarti a interpretare meglio la tua realtà dentro Winerim.",
+      for_title: "Per chi è",
+      for_desc: "Questa zona è pensata per i clienti Winerim e i team autorizzati.",
+      no_client: "Non sei ancora cliente?",
+      request_demo: "Richiedi demo",
+    },
+    fr: {
+      title: "Espace client Winerim",
+      subtitle: "Accédez à l'environnement privé où vos données, insights et recommandations se transforment en décisions plus claires.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "Une couche pour mieux comprendre ce que Winerim détecte dans votre carte et savoir quoi faire maintenant." },
+        { emoji: "📊", title: "Lecture contextuelle de vos insights", desc: "Vous ne voyez pas que des métriques : vous comprenez pourquoi elles comptent, leur priorité et leur impact potentiel." },
+        { emoji: "🎯", title: "Priorité et action", desc: "Accédez aux recommandations, prochaines étapes et suivi pour avancer avec plus de discernement." },
+        { emoji: "🔒", title: "Environnement privé pour plus de valeur", desc: "Un espace conçu pour les clients et équipes autorisées, connecté à leur cas réel." },
+      ],
+      not_title: "Ce que cette zone n'est pas",
+      not_desc: "Ce n'est ni une bibliothèque publique ni une simple collection de ressources. C'est un environnement privé conçu pour mieux interpréter votre réalité au sein de Winerim.",
+      for_title: "Pour qui",
+      for_desc: "Cette zone est conçue pour les clients Winerim et les équipes autorisées.",
+      no_client: "Pas encore client ?",
+      request_demo: "Demander une démo",
+    },
+  };
+
+  const c = copy[lang] || copy.es;
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full mx-4"
-      >
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-wine/10 flex items-center justify-center mx-auto mb-6">
-            <Lock size={28} className="text-wine" />
-          </div>
-          <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">
-            {t.dc_gate_title}
-          </h1>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {t.dc_gate_subtitle}
-          </p>
+      <main className="pt-32 pb-24">
+        {/* Ambient glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-wine/4 rounded-full blur-[140px]" />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="relative">
-            <input
-              type="password"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder={t.dc_gate_placeholder}
-              className={`w-full px-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${
-                error
-                  ? "border-destructive focus:ring-destructive/30"
-                  : "border-border focus:ring-wine/30 focus:border-wine/50"
-              }`}
-              autoFocus
-            />
-            <Shield size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30" />
-          </div>
-          {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs text-destructive font-medium"
-            >
-              {t.dc_gate_error}
-            </motion.p>
-          )}
-          <button
-            type="submit"
-            className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+        <div className="relative max-w-3xl mx-auto px-6 md:px-12">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-14"
           >
-            {t.dc_gate_submit}
-          </button>
-        </form>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
+              <Shield size={14} className="text-wine" />
+              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-wine">
+                {c.for_desc.split(" ").slice(0, 3).join(" ")}
+              </span>
+            </div>
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+              {c.title}
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {c.subtitle}
+            </p>
+          </motion.div>
 
-        <p className="text-center text-[11px] text-muted-foreground/50 mt-6">
-          {t.dc_gate_no_access}{" "}
-          <Link to="/demo" className="text-wine hover:text-wine-light transition-colors">
-            {t.dc_gate_request_demo}
-          </Link>
-        </p>
-      </motion.div>
+          {/* 4 value cards */}
+          <div className="grid sm:grid-cols-2 gap-4 mb-12">
+            {c.cards.map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.07 }}
+                className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-6"
+              >
+                <span className="text-xl mb-3 block">{card.emoji}</span>
+                <h3 className="font-heading text-sm font-bold mb-2 text-foreground">{card.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* What it's not + Who it's for */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="grid sm:grid-cols-2 gap-4 mb-14"
+          >
+            <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
+              <h4 className="text-xs font-bold tracking-wider uppercase text-muted-foreground mb-2">{c.not_title}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.not_desc}</p>
+            </div>
+            <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
+              <h4 className="text-xs font-bold tracking-wider uppercase text-muted-foreground mb-2">{c.for_title}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.for_desc}</p>
+            </div>
+          </motion.div>
+
+          {/* Access form */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="max-w-sm mx-auto"
+          >
+            <div className="text-center mb-5">
+              <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center mx-auto mb-4">
+                <Lock size={22} className="text-wine" />
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="relative">
+                <input
+                  type="password"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  placeholder={t.dc_gate_placeholder}
+                  className={`w-full px-4 py-3.5 rounded-xl border bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 transition-all ${
+                    error
+                      ? "border-destructive focus:ring-destructive/30"
+                      : "border-border focus:ring-wine/30 focus:border-wine/50"
+                  }`}
+                  autoFocus
+                />
+                <Shield size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/30" />
+              </div>
+              {error && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs text-destructive font-medium"
+                >
+                  {t.dc_gate_error}
+                </motion.p>
+              )}
+              <button
+                type="submit"
+                className="w-full bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-xl text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
+              >
+                {t.dc_gate_submit}
+              </button>
+            </form>
+
+            <p className="text-center text-[11px] text-muted-foreground/50 mt-5">
+              {c.no_client}{" "}
+              <Link to="/demo" className="text-wine hover:text-wine-light transition-colors font-medium">
+                {c.request_demo}
+              </Link>
+            </p>
+          </motion.div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };
