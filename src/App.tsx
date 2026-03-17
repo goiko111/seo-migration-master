@@ -280,9 +280,30 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/solutions/restaurant-groups`} element={<GruposRestauracion />} />
     <Route path={`${prefix}/soluzioni/gruppi-ristorazione`} element={<GruposRestauracion />} />
     <Route path={`${prefix}/solutions/groupes-restauration`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/solutions/fine-dining`} element={<RestaurantesGastronomicos />} />
+    <Route path={`${prefix}/soluzioni/ristoranti-gourmet`} element={<RestaurantesGastronomicos />} />
+    <Route path={`${prefix}/solutions/restaurants-gastronomiques`} element={<RestaurantesGastronomicos />} />
+    <Route path={`${prefix}/solutions/wine-bars`} element={<WineBars />} />
+    <Route path={`${prefix}/soluzioni/wine-bar`} element={<WineBars />} />
+    <Route path={`${prefix}/solutions/bars-a-vin`} element={<WineBars />} />
+    <Route path={`${prefix}/solutions/hotels`} element={<Hoteles />} />
+    <Route path={`${prefix}/soluzioni/hotel`} element={<Hoteles />} />
+    <Route path={`${prefix}/solutions/no-sommelier`} element={<RestauranteSinSumiller />} />
+    <Route path={`${prefix}/soluzioni/senza-sommelier`} element={<RestauranteSinSumiller />} />
+    <Route path={`${prefix}/solutions/sans-sommelier`} element={<RestauranteSinSumiller />} />
+    <Route path={`${prefix}/solutions/large-wine-list`} element={<CartaAmplia />} />
+    <Route path={`${prefix}/soluzioni/carta-vini-ampia`} element={<CartaAmplia />} />
+    <Route path={`${prefix}/solutions/grande-carte-des-vins`} element={<CartaAmplia />} />
     <Route path={`${prefix}/solutions/increase-average-ticket`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/soluzioni/aumentare-scontrino-medio`} element={<AumentarTicketMedio />} />
     <Route path={`${prefix}/solutions/augmenter-ticket-moyen`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/about-winerim`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/chi-siamo`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/a-propos`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/benchmarks-playbooks`} element={<BenchmarksPlaybooks />} />
+    <Route path={`${prefix}/tools/wine-by-glass-price-calculator`} element={<CalculadoraPrecioCopa />} />
+    <Route path={`${prefix}/strumenti/calcolatrice-prezzo-vino-al-calice`} element={<CalculadoraPrecioCopa />} />
+    <Route path={`${prefix}/outils/calculateur-prix-vin-au-verre`} element={<CalculadoraPrecioCopa />} />
     <Route path={`${prefix}/wine-list-analysis`} element={<AnalizaCarta />} />
     <Route path={`${prefix}/analisi-carta`} element={<AnalizaCarta />} />
     <Route path={`${prefix}/analyse-carte`} element={<AnalizaCarta />} />
