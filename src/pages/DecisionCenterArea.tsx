@@ -645,13 +645,21 @@ const SimpleAreaView = ({ area, t }: { area: SimpleAreaContent; t: TranslationDi
 const DecisionCenterArea = () => {
   const { areaSlug } = useParams<{ areaSlug: string }>();
   const { granted, unlock } = useGate();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   if (!granted) return <PasswordGate onUnlock={unlock} t={t} />;
 
-  // Deep areas
+  // Language-aware content maps
+  const margenesByLang: Record<string, DeepAreaContent> = {
+    es: margenesPricingContent,
+    en: margenesPricingEN,
+    it: margenesPricingIT,
+    fr: margenesPricingFR,
+  };
+
+  // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
-    "margenes-pricing": margenesPricingContent,
+    "margenes-pricing": margenesByLang[lang] || margenesPricingContent,
     "stock-rotacion": stockRotacionContent,
     "compras-reposicion": comprasReposicionContent,
     "carta-equilibrio": cartaEquilibrioContent,
