@@ -621,6 +621,7 @@ const CalculadoraStockMuerto = () => {
                     </tr>
                     );
                   })}
+                </tbody>
               </table>
             </div>
 
