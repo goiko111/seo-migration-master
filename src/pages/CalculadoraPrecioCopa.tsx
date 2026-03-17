@@ -333,6 +333,7 @@ const CalculadoraPrecioCopa = () => {
   const [costeBotella, setCosteBotella] = useState(12);
   const [copasPorBotella, setCopasPorBotella] = useState(5);
   const [multiplicador, setMultiplicador] = useState(3.2);
+  const [wasteGlasses, setWasteGlasses] = useState(1);
 
   const preset = t.wineTypes.find((w) => w.id === wineType)!;
 
@@ -342,6 +343,8 @@ const CalculadoraPrecioCopa = () => {
     setWineType(id);
     setCopasPorBotella(p.glasses);
     setMultiplicador(p.mult);
+    // Auto-set waste based on type
+    setWasteGlasses(id === "sparkling" ? 2 : id === "premium" ? 0 : 1);
     if (!tracked.current) { tracked.current = true; trackAction("tool_use", "tool", "calculadora-precio-copa"); }
   };
 
