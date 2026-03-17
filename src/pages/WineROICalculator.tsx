@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { trackAction } from "@/lib/intentTracking";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -304,7 +305,7 @@ const WineROICalculator = () => {
                   })}
                 </div>
                 {!calculated && (
-                  <button onClick={() => setCalculated(true)}
+                  <button onClick={() => { setCalculated(true); trackAction("tool_use", "tool", "wine-roi-calculator"); }}
                     className="w-full mt-6 inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-6 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
                     <Calculator size={16} /> {t.calc_btn}
                   </button>

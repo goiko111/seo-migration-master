@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { trackAction } from "@/lib/intentTracking";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -315,10 +316,12 @@ const CalculadoraMargen = () => {
   const [wineType, setWineType] = useState("mid");
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
 
+  const tracked = useRef(false);
   const handleWineType = (id: string) => {
     setWineType(id);
     const preset = t.wineTypes.find((w) => w.id === id);
     if (preset) setMultiplier(preset.defaultMult);
+    if (!tracked.current) { tracked.current = true; trackAction("tool_use", "tool", "calculadora-margen"); }
   };
 
   const results = useMemo(() => {

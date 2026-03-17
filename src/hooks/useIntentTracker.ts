@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { trackPageIntent, trackAction, type IntentCategory } from "@/lib/intentTracking";
+import { trackPageIntent, trackAction, classifyPath, type IntentCategory } from "@/lib/intentTracking";
 
 /**
  * Hook that automatically tracks pageview intent on route change.
@@ -24,6 +24,44 @@ export function usePageIntentTracker(): void {
 
     return () => clearTimeout(timer);
   }, [location.pathname, lang]);
+
+  // Scroll depth tracking — fires once per threshold per page
+  useScrollDepthTracker();
+}
+
+/**
+ * Track scroll depth at 25%, 50%, 75%, 100% thresholds.
+ * Only fires on classified (high-intent) pages.
+ */
+function useScrollDepthTracker(): void {
+  const location = useLocation();
+  const fired = useRef<Set<number>>(new Set());
+
+  useEffect(() => {
+    fired.current = new Set();
+
+    const classification = classifyPath(location.pathname);
+    if (!classification || classification.level === "low") return;
+
+    const thresholds = [25, 50, 75, 100];
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+      const percent = Math.round((scrollTop / docHeight) * 100);
+
+      for (const t of thresholds) {
+        if (percent >= t && !fired.current.has(t)) {
+          fired.current.add(t);
+          trackAction("scroll_depth", classification.category, `scroll_${t}`, t);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
 }
 
 /**
@@ -35,6 +73,19 @@ export function usePageIntentTracker(): void {
  */
 export function useIntentAction() {
   return trackAction;
+}
+
+/**
+ * Track CTA clicks. Returns a click handler wrapper.
+ * 
+ * @example
+ * const trackCTA = useCTAClickTracker();
+ * <Link to="/demo" onClick={trackCTA("demo_hero")}>Demo</Link>
+ */
+export function useCTAClickTracker() {
+  return useCallback((label: string) => {
+    return () => trackAction("cta_click", "demo", label);
+  }, []);
 }
 
 /**

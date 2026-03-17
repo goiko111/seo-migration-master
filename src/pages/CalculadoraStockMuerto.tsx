@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { trackAction } from "@/lib/intentTracking";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -488,7 +489,7 @@ const CalculadoraStockMuerto = () => {
           </div>
           <div className="flex gap-3">
             <Button variant="outline" onClick={addItem} className="text-sm"><Plus size={16} className="mr-1" /> {t.addRef}</Button>
-            <Button onClick={() => setCalculated(true)} disabled={validItems.length === 0}
+            <Button onClick={() => { setCalculated(true); trackAction("tool_use", "tool", "calculadora-stock-muerto"); }} disabled={validItems.length === 0}
               className="bg-gradient-wine text-primary-foreground text-sm font-semibold tracking-wider uppercase hover:opacity-90">
               {t.calculate}
             </Button>
