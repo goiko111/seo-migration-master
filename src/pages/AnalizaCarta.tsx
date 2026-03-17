@@ -25,7 +25,8 @@ import { referencesOptions, businessTypeOptions } from "@/components/ContactForm
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
-import { useLanguage, type SupportedLang } from "@/i18n/LanguageContext";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
 type L = SupportedLang;
 
