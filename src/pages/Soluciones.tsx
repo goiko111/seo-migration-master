@@ -94,7 +94,7 @@ const i18n: Record<string, {
     linksTitle: "Related content",
     faqTitle: "FAQ",
     faqs: [
-      { q: "Does Winerim work for any type of restaurant?", a: "Winerim is designed for restaurants, hotels, wine bars and restaurant groups with at least 30-40 wine references. For smaller venues, the free tools may be sufficient." },
+      { q: "Does Winerim work for any type of restaurant?", a: "Winerim is designed for restaurants, hotels, wine bars and restaurant groups with wine lists of at least 80 references. For smaller venues, the free tools can be a good starting point." },
       { q: "How long does implementation take?", a: "Basic implementation is completed in 1-5 days. Optimisation results become visible in the first 2-4 weeks." },
       { q: "What's the difference between Core, Dynamic Intelligence and Supply?", a: "Core is the analytical engine that diagnoses your list. Dynamic Intelligence is the AI layer executing tactical actions in real time. Supply focuses on purchasing decisions and distributor management. All three layers work together." },
       { q: "Can I try before committing?", a: "Yes. You can use the free tools, request a no-cost analysis, or ask for a personalised demo." },
