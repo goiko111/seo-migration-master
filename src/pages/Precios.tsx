@@ -326,7 +326,7 @@ i18n.en = {
   ],
   faqs: [
     { q: "Is there a lock-in?", a: "No. Cancel anytime, no penalties." },
-    { q: "How many references per plan?", a: "No rigid limit. Pricing adjusts to your list volume, from 30 to 500+ references." },
+    { q: "How many references per plan?", a: "No rigid limit. Pricing adjusts to your list volume, from 80 to 500+ references." },
     { q: "Do diners need an app?", a: "No. The digital list opens from the mobile browser via QR scan." },
     { q: "Can I try before subscribing?", a: "Yes. We offer a free wine list analysis and a personalized demo with your actual list." },
     { q: "What do I need to start?", a: "Your current wine list (any format) and 15 minutes for a setup call." },
