@@ -466,6 +466,27 @@ const CalculadoraPrecioCopa = () => {
                 <span>×2</span><span>×{multiplicador.toFixed(1)}</span><span>×6</span>
               </div>
             </div>
+
+            {/* Waste / Merma */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-medium">
+                  {lang === "es" ? "Merma estimada" : lang === "en" ? "Estimated waste" : lang === "it" ? "Scarto stimato" : "Perte estimée"}
+                </label>
+                <span className="text-sm font-bold text-amber-500">{wasteGlasses} {wasteGlasses === 1 ? t.glassUnit : t.glassesUnit}</span>
+              </div>
+              <Slider value={[wasteGlasses]} onValueChange={([v]) => setWasteGlasses(v)} min={0} max={3} step={1} />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>0 ({lang === "es" ? "sin merma" : lang === "en" ? "no waste" : lang === "it" ? "senza scarti" : "sans perte"})</span>
+                <span>3 ({lang === "es" ? "alta merma" : lang === "en" ? "high waste" : lang === "it" ? "alto scarto" : "forte perte"})</span>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-1.5">
+                {lang === "es" ? "Copas que se pierden por botella abierta no terminada. Con Coravin: 0. Espumoso sin tapón: 2-3."
+                  : lang === "en" ? "Glasses lost per unfinished open bottle. With Coravin: 0. Sparkling without stopper: 2-3."
+                  : lang === "it" ? "Calici persi per bottiglia aperta non finita. Con Coravin: 0. Spumante senza tappo: 2-3."
+                  : "Verres perdus par bouteille ouverte non terminée. Avec Coravin : 0. Effervescent sans bouchon : 2-3."}
+              </p>
+            </div>
           </motion.div>
 
           {/* OUTPUTS */}
