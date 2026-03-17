@@ -222,6 +222,10 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/precio-vino-restaurante": "/fr/prix-vin-restaurant",
     "/vino-por-copa-restaurante": "/fr/vin-au-verre-restaurant",
     "/inteligencia-artificial-restaurantes": "/fr/intelligence-artificielle-restaurants",
+    "/ejemplos-carta-vinos": "/fr/exemples-carte-vins",
+    "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/fr/guides/strategie-accords-mets-vins-restaurant",
+    "/problemas/carta-de-vinos-no-vende": "/fr/problemes/carte-des-vins-ne-vend-pas",
+    "/cuantos-vinos-en-una-carta-de-restaurante": "/fr/combien-de-vins-carte-restaurant",
   },
 };
 

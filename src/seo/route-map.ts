@@ -314,6 +314,30 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/software-carta-de-vinos-*", canonical: "dynamic", lang: "es", type: "seo-programmatic", intent: "carta vinos digital {ciudad/tipo}" },
   { path: "/software-vino-*", canonical: "dynamic", lang: "es", type: "seo-programmatic", intent: "software vino {variante}" },
   { path: "/wine-list-software-*", canonical: "dynamic", lang: "en", type: "seo-programmatic", intent: "wine list software {variant}" },
+
+  // ─────────────────────────────────────────────
+  // LOCALIZED EDITORIAL PAGES
+  // ─────────────────────────────────────────────
+  // EjemplosCarta
+  { path: "/ejemplos-carta-vinos", canonical: `${BASE}/ejemplos-carta-vinos`, lang: "es", type: "guide", intent: "ejemplos carta vinos restaurante" },
+  { path: "/en/wine-list-examples", canonical: `${BASE}/en/wine-list-examples`, lang: "en", type: "guide", intent: "wine list examples restaurant" },
+  { path: "/it/esempi-carta-vini", canonical: `${BASE}/it/esempi-carta-vini`, lang: "it", type: "guide", intent: "esempi carta vini ristorante" },
+  { path: "/fr/exemples-carte-vins", canonical: `${BASE}/fr/exemples-carte-vins`, lang: "fr", type: "guide", intent: "exemples carte des vins restaurant" },
+  // EstrategiaMaridaje
+  { path: "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion", canonical: `${BASE}/guias/como-crear-una-estrategia-de-maridaje-en-restauracion`, lang: "es", type: "guide", intent: "estrategia maridaje restaurante" },
+  { path: "/en/guides/wine-pairing-strategy-restaurants", canonical: `${BASE}/en/guides/wine-pairing-strategy-restaurants`, lang: "en", type: "guide", intent: "wine pairing strategy restaurants" },
+  { path: "/it/guide/strategia-abbinamento-vino-ristorante", canonical: `${BASE}/it/guide/strategia-abbinamento-vino-ristorante`, lang: "it", type: "guide", intent: "strategia abbinamento vino ristorante" },
+  { path: "/fr/guides/strategie-accords-mets-vins-restaurant", canonical: `${BASE}/fr/guides/strategie-accords-mets-vins-restaurant`, lang: "fr", type: "guide", intent: "stratégie accords mets-vins restaurant" },
+  // CartaNoVende
+  { path: "/problemas/carta-de-vinos-no-vende", canonical: `${BASE}/problemas/carta-de-vinos-no-vende`, lang: "es", type: "guide", intent: "carta vinos no vende" },
+  { path: "/en/problems/wine-list-not-selling", canonical: `${BASE}/en/problems/wine-list-not-selling`, lang: "en", type: "guide", intent: "wine list not selling" },
+  { path: "/it/problemi/carta-vini-non-vende", canonical: `${BASE}/it/problemi/carta-vini-non-vende`, lang: "it", type: "guide", intent: "carta vini non vende" },
+  { path: "/fr/problemes/carte-des-vins-ne-vend-pas", canonical: `${BASE}/fr/problemes/carte-des-vins-ne-vend-pas`, lang: "fr", type: "guide", intent: "carte des vins ne vend pas" },
+  // CuantosVinosCarta
+  { path: "/cuantos-vinos-en-una-carta-de-restaurante", canonical: `${BASE}/cuantos-vinos-en-una-carta-de-restaurante`, lang: "es", type: "guide", intent: "cuántos vinos carta restaurante" },
+  { path: "/en/how-many-wines-restaurant-list", canonical: `${BASE}/en/how-many-wines-restaurant-list`, lang: "en", type: "guide", intent: "how many wines restaurant list" },
+  { path: "/it/quanti-vini-carta-ristorante", canonical: `${BASE}/it/quanti-vini-carta-ristorante`, lang: "it", type: "guide", intent: "quanti vini carta ristorante" },
+  { path: "/fr/combien-de-vins-carte-restaurant", canonical: `${BASE}/fr/combien-de-vins-carte-restaurant`, lang: "fr", type: "guide", intent: "combien de vins carte restaurant" },
 ];
 
 /**
