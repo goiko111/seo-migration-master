@@ -155,7 +155,8 @@ const i18n: Record<string, {
     useCaseSubtitle: "Chaque type d'établissement a des besoins différents. Voici les plus demandées.",
     solutions: [
       { title: "Groupes de restauration", desc: "Gestion centralisée : contrôle des cartes, prix, assortiment et benchmarking interne entre sites.", path: "/soluciones/grupos-restauracion", icon: "building" },
-      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture de carte pour +100 références.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Cartes larges et complexes", desc: "Détection de stock mort, équilibre d'assortiment et architecture de carte pour +250 références.", path: "/soluciones/carta-amplia", icon: "layers" },
+      { title: "Carte en croissance", desc: "Pricing différencié, rotation équilibrée et verre stratégique pour cartes de 80–250 références.", path: "/soluciones/carta-crecimiento", icon: "sprout" },
       { title: "Pricing et marges", desc: "Multiplicateurs différenciés, échelle de prix cohérente et écart vs. optimal par type de vin.", path: "/carta-de-vinos-rentable", icon: "target" },
       { title: "Vin au verre", desc: "Stratégie au verre : pricing, perte, rotation, durée de vie et rentabilité nette par référence.", path: "/vino-por-copa", icon: "glass" },
       { title: "Stock et rotation", desc: "Capital immobilisé, coût d'opportunité, plan de liquidation et alertes d'obsolescence.", path: "/rotacion-de-vinos", icon: "package" },
