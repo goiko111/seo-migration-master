@@ -16,6 +16,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import type { SupportedLang } from "@/i18n/types";
+import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation ── */
 const fadeUp = {
