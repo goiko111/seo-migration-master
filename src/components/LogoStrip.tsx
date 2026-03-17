@@ -72,10 +72,10 @@ const repsolLogos: LogoItem[] = [
 ];
 
 const hotelLogos: LogoItem[] = [
-  { name: "Meliá Hotels International", logo: logoMelia },
   { name: "Hyatt", logo: logoHyatt },
   { name: "Marriott", logo: logoMarriott },
   { name: "Wyndham Hotel Group", logo: logoWyndham },
+  { name: "Meliá Hotels International", logo: logoMelia },
   { name: "MYR Hotels", logo: logoMyr },
   { name: "Four Seasons", logo: logoFourSeasons },
   { name: "Palladium Hotel Group", logo: logoPalladium },
