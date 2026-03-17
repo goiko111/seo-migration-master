@@ -450,7 +450,7 @@ const ContactFormFields = ({
               </Label>
               <div className="mt-1.5">
                 {native ? (
-                  <NativeSelect id="references_count" name="references_count" required={isDemo || isContact} options={fi.references} placeholder={l.referencesPh} />
+                  <NativeSelect id="references_count" name="references_count" required={referencesRequired} options={fi.references} placeholder={l.referencesPh} />
                 ) : (
                   <Select value={referencesCount} onValueChange={onReferencesCountChange}>
                     <SelectTrigger className="bg-background border-border">
