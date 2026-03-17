@@ -279,8 +279,44 @@ const DecisionCenter = () => {
           </div>
         </section>
 
+        {/* Welcome / Onboarding */}
+        <DCWelcome
+          firstAreaHref={areas[0]?.href || "/decision-center/margenes-pricing"}
+          t={{
+            welcome_title: t.dcw_title,
+            welcome_subtitle: t.dcw_subtitle,
+            welcome_what_is_title: t.dcw_what_is_title,
+            welcome_what_is_desc: t.dcw_what_is_desc,
+            welcome_how_title: t.dcw_how_title,
+            welcome_how_desc: t.dcw_how_desc,
+            welcome_topics_title: t.dcw_topics_title,
+            welcome_topics_desc: t.dcw_topics_desc,
+            welcome_usage_title: t.dcw_usage_title,
+            welcome_usage_desc: t.dcw_usage_desc,
+            pillar_meaning_title: t.dcw_pillar_meaning_title,
+            pillar_meaning_desc: t.dcw_pillar_meaning_desc,
+            pillar_impact_title: t.dcw_pillar_impact_title,
+            pillar_impact_desc: t.dcw_pillar_impact_desc,
+            pillar_action_title: t.dcw_pillar_action_title,
+            pillar_action_desc: t.dcw_pillar_action_desc,
+            pillar_next_title: t.dcw_pillar_next_title,
+            pillar_next_desc: t.dcw_pillar_next_desc,
+            howto_title: t.dcw_howto_title,
+            howto_step1: t.dcw_howto_step1,
+            howto_step1_desc: t.dcw_howto_step1_desc,
+            howto_step2: t.dcw_howto_step2,
+            howto_step2_desc: t.dcw_howto_step2_desc,
+            howto_step3: t.dcw_howto_step3,
+            howto_step3_desc: t.dcw_howto_step3_desc,
+            howto_step4: t.dcw_howto_step4,
+            howto_step4_desc: t.dcw_howto_step4_desc,
+            cta_primary: t.dcw_cta_primary,
+            cta_secondary: t.dcw_cta_secondary,
+          }}
+        />
+
         {/* Area cards grid */}
-        <section className="max-w-6xl mx-auto px-6 md:px-12 pb-24">
+        <section id="areas" className="max-w-6xl mx-auto px-6 md:px-12 pb-24">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {areas.map((area, i) => {
               const Icon = area.icon;
