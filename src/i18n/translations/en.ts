@@ -32,6 +32,7 @@ const en: TranslationDict = {
   nav_sol_hotels: "Hotels & resorts",
   nav_sol_groups: "Restaurant groups",
   nav_sol_no_sommelier: "Without sommelier",
+  nav_sol_growing_list: "Mid-size lists (80–250 refs)",
   nav_sol_large_list: "Large wine lists (250+ refs)",
 
   nav_resources: "Resources",

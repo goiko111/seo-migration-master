@@ -172,6 +172,7 @@ export interface TranslationDict {
   nav_sol_hotels: string;
   nav_sol_groups: string;
   nav_sol_no_sommelier: string;
+  nav_sol_growing_list: string;
   nav_sol_large_list: string;
 
   // Nav - Resources mega
