@@ -8,29 +8,89 @@ const corsHeaders = {
 
 const RESEND_API = "https://api.resend.com/emails";
 const NOTIFY_TO = "info@winerim.com";
+const SITE = "https://winerim.wine";
 
-/* Human-readable labels for each form_type */
-const FORM_LABELS: Record<string, { label: string; resource?: string }> = {
+/* ──────── Human-readable labels + download paths for every form_type ──────── */
+const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPath?: string }> = {
+  // Non-resource forms
   demo: { label: "Solicitud de demo gratuita" },
   contacto: { label: "Formulario de contacto" },
   "analisis-carta": { label: "Análisis gratuito de carta de vinos" },
-  "guia-vino-por-copa": {
-    label: "Descarga: Guía de vino por copa",
-    resource: "Guía completa de vino por copa para restaurantes",
+  "wine-list-analyzer": { label: "Analizador de carta de vinos (herramienta)" },
+
+  // Resource downloads — 13 resources
+  "plantilla-estrategia-vinos-copa": {
+    label: "Descarga: Plantilla estrategia vinos por copa",
+    resource: "Plantilla de Estrategia de Vinos por Copa",
+    downloadPath: "/recursos/plantilla-estrategia-vinos-por-copa",
+  },
+  "checklist-vinos-muertos": {
+    label: "Descarga: Checklist detección vinos muertos",
+    resource: "Checklist de Detección de Vinos Muertos",
+    downloadPath: "/recursos/checklist-deteccion-vinos-muertos",
+  },
+  "plantilla-formacion-sala": {
+    label: "Descarga: Plantilla formación exprés sala",
+    resource: "Plantilla de Formación Exprés para Equipos de Sala",
+    downloadPath: "/recursos/plantilla-formacion-equipo-sala",
+  },
+  "plantilla-analisis-margenes": {
+    label: "Descarga: Plantilla análisis de márgenes",
+    resource: "Plantilla de Análisis de Márgenes por Referencia",
+    downloadPath: "/recursos/plantilla-analisis-margenes",
+  },
+  "scorecard-rendimiento-carta": {
+    label: "Descarga: Scorecard mensual de rendimiento",
+    resource: "Scorecard Mensual de Rendimiento de Carta",
+    downloadPath: "/recursos/scorecard-rendimiento-carta",
+  },
+  "checklist-carta-que-vende": {
+    label: "Descarga: Checklist ¿tu carta realmente vende?",
+    resource: "Checklist: ¿Tu Carta de Vinos Realmente Vende?",
+    downloadPath: "/recursos/checklist-carta-que-vende",
+  },
+  "plantilla-equilibrio-carta": {
+    label: "Descarga: Plantilla equilibrio de carta",
+    resource: "Plantilla para Evaluar el Equilibrio de tu Carta",
+    downloadPath: "/recursos/plantilla-equilibrio-carta",
+  },
+  "plantilla-revision-mensual": {
+    label: "Descarga: Plantilla revisión mensual de carta",
+    resource: "Plantilla de Revisión Mensual de Carta de Vinos",
+    downloadPath: "/recursos/plantilla-revision-mensual-carta",
+  },
+  "plantilla-control-grupo": {
+    label: "Descarga: Plantilla control grupo restauración",
+    resource: "Plantilla de Control para Grupos de Restauración",
+    downloadPath: "/recursos/plantilla-control-grupo-restauracion",
   },
   "plantilla-carta-vinos": {
     label: "Descarga: Plantilla de carta de vinos",
-    resource: "Plantilla profesional de carta de vinos",
-  },
-  "plantilla-wine-mapping": {
-    label: "Descarga: Plantilla Wine Mapping",
-    resource: "Plantilla de Wine Mapping para restaurantes",
+    resource: "Plantilla Profesional de Carta de Vinos",
+    downloadPath: "/recursos/plantilla-carta-de-vinos",
   },
   "checklist-carta-rentable": {
     label: "Descarga: Checklist carta rentable",
-    resource: "Checklist: ¿Tu carta de vinos es rentable?",
+    resource: "Checklist: ¿Tu Carta de Vinos es Rentable?",
+    downloadPath: "/recursos/checklist-carta-de-vinos-rentable",
   },
-  "wine-list-analyzer": { label: "Analizador de carta de vinos (herramienta)" },
+  "guia-vino-por-copa": {
+    label: "Descarga: Guía de vino por copa",
+    resource: "Guía Completa de Vino por Copa para Restaurantes",
+    downloadPath: "/recursos/guia-vino-por-copa-para-restaurantes",
+  },
+  "plantilla-wine-mapping": {
+    label: "Descarga: Plantilla Wine Mapping",
+    resource: "Plantilla Wine Mapping para Restaurantes",
+    downloadPath: "/recursos/plantilla-wine-mapping-restaurante",
+  },
+
+  // Legacy form_type aliases (keep for backwards compat)
+  "plantilla-formacion-expres-sala": {
+    label: "Descarga: Plantilla formación exprés sala",
+    resource: "Plantilla de Formación Exprés para Equipos de Sala",
+    downloadPath: "/recursos/plantilla-formacion-equipo-sala",
+  },
 };
 
 /* ──────── Internal notification email to info@winerim.com ──────── */
@@ -44,7 +104,11 @@ function buildNotificationHtml(lead: Record<string, string | null>) {
     ["Email", lead.email],
     ["Teléfono", lead.phone],
     ["Ciudad", lead.city],
+    ["Tipo de negocio", lead.business_type],
+    ["Nº locales", lead.num_locations],
     ["Nº referencias", lead.references_count],
+    ["¿Tiene sumiller?", lead.has_sommelier],
+    ["Desafío principal", lead.main_challenge],
     ["Mensaje", lead.message],
     ["Link carta", lead.menu_link],
   ]
@@ -65,13 +129,14 @@ function buildNotificationHtml(lead: Record<string, string | null>) {
 </div></body></html>`;
 }
 
-/* ──────── Confirmation / resource email to the lead ──────── */
+/* ──────── Confirmation email to the lead ──────── */
 function buildLeadConfirmationHtml(lead: Record<string, string | null>) {
   const formInfo = FORM_LABELS[lead.form_type || ""] || { label: lead.form_type };
   const name = lead.name?.split(" ")[0] || "Hola";
 
-  // Determine what to say based on form_type
   let bodyContent = "";
+  let ctaUrl = SITE;
+  let ctaLabel = "Visitar Winerim";
 
   if (lead.form_type === "demo") {
     bodyContent = `
@@ -86,8 +151,8 @@ function buildLeadConfirmationHtml(lead: Record<string, string | null>) {
     `;
   } else if (lead.form_type === "contacto") {
     bodyContent = `
-      <p>Hemos recibido tu solicitud de <strong>análisis gratuito de carta de vinos</strong> para <strong>${lead.restaurant || "tu restaurante"}</strong>.</p>
-      <p>Nuestro equipo revisará tu mensaje y te responderá en menos de <strong>24 horas</strong>.</p>
+      <p>Hemos recibido tu mensaje para <strong>${lead.restaurant || "tu restaurante"}</strong>.</p>
+      <p>Nuestro equipo revisará tu solicitud y te responderá en menos de <strong>24 horas</strong>.</p>
     `;
   } else if (lead.form_type === "analisis-carta") {
     bodyContent = `
@@ -101,11 +166,18 @@ function buildLeadConfirmationHtml(lead: Record<string, string | null>) {
       </ul>
     `;
   } else if (formInfo.resource) {
+    // ── Resource download confirmation ──
+    const downloadUrl = formInfo.downloadPath ? `${SITE}${formInfo.downloadPath}` : null;
     bodyContent = `
-      <p>Gracias por solicitar nuestro recurso: <strong>${formInfo.resource}</strong>.</p>
-      <p>Nuestro equipo te enviará el recurso a este email en las próximas <strong>24 horas</strong>.</p>
-      <p>Mientras tanto, puedes explorar más herramientas gratuitas en <a href="https://winerim.wine/herramientas" style="color:#722F37">winerim.wine/herramientas</a>.</p>
+      <p>Ya tienes disponible tu recurso: <strong>${formInfo.resource}</strong>.</p>
+      <p>La descarga se ha iniciado automáticamente desde la web. Este email sirve como <strong>confirmación y respaldo</strong> para que puedas acceder de nuevo en cualquier momento.</p>
+      ${downloadUrl ? `<p>Si necesitas descargarlo otra vez, puedes hacerlo aquí:</p>` : ""}
+      <p style="margin-top:8px">Mientras tanto, explora más herramientas gratuitas en <a href="${SITE}/herramientas" style="color:#722F37;font-weight:600">winerim.wine/herramientas</a>.</p>
     `;
+    if (downloadUrl) {
+      ctaUrl = downloadUrl;
+      ctaLabel = "Acceder al recurso";
+    }
   } else {
     bodyContent = `
       <p>Hemos recibido tu solicitud correctamente. Te contactaremos lo antes posible.</p>
@@ -122,7 +194,7 @@ function buildLeadConfirmationHtml(lead: Record<string, string | null>) {
   <h2 style="font-size:18px;color:#1a1a1a;margin:0 0 16px">¡Gracias, ${name}!</h2>
   <div style="font-size:14px;color:#444;line-height:1.7">${bodyContent}</div>
   <div style="margin-top:28px;text-align:center">
-    <a href="https://winerim.wine" style="display:inline-block;background:#722F37;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600">Visitar Winerim</a>
+    <a href="${ctaUrl}" style="display:inline-block;background:#722F37;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600">${ctaLabel}</a>
   </div>
   <p style="margin-top:24px;font-size:11px;color:#aaa;text-align:center">
     Si no has solicitado esto, puedes ignorar este mensaje.<br/>
@@ -165,6 +237,10 @@ Deno.serve(async (req) => {
 
     // 2) Send confirmation to the lead (if they provided email)
     if (lead.email) {
+      const subjectLine = formInfo.resource
+        ? `Tu recurso: ${formInfo.resource} — Winerim`
+        : "Hemos recibido tu solicitud — Winerim";
+
       const confirmRes = await fetch(RESEND_API, {
         method: "POST",
         headers: {
@@ -174,9 +250,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           from: "Winerim <info@wine.winerim.wine>",
           to: [lead.email],
-          subject: formInfo.resource
-            ? `Tu recurso: ${formInfo.resource} — Winerim`
-            : "Hemos recibido tu solicitud — Winerim",
+          subject: subjectLine,
           html: buildLeadConfirmationHtml(lead),
         }),
       });
