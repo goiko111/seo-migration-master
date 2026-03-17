@@ -1,0 +1,178 @@
+import { Wine } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const vinoPorCopaFR: DeepAreaContent = {
+  name: "Vin au verre",
+  tagline: "Le programme au verre comme levier de marge",
+  intro: "Cette section vous aide à concevoir, exécuter et contrôler un programme de vin au verre rentable. Le verre n'est pas simplement « servir en plus petites quantités » : c'est un levier de marge, un outil de conversion et un test de marché en temps réel. Mal géré, cependant, il devient la plus grande source de perte invisible dans un restaurant.",
+  icon: Wine,
+  accent: "text-purple-500",
+  bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Proposer au verre des vins qui détruisent la marge par la casse", porQueOcurre: "Parce qu'on choisit par qualité ou goût personnel, sans vérifier si la rotation justifie l'ouverture de la bouteille.", consecuencia: "30 à 40 % de la bouteille est jetée. Un vin avec 70 % de marge théorique tombe à 25 % réel. Vous perdez de l'argent sur chaque verre." },
+    { error: "Avoir trop de verres actifs sans rotation suffisante", porQueOcurre: "Parce que plus de verres semble être une meilleure offre. Mais chaque verre ouvert est une bouteille qui doit être terminée en 24-48 h.", consecuencia: "La casse se multiplie par chaque référence. 8 verres avec faible rotation génèrent plus de pertes que 4 bien choisis." },
+    { error: "Fixer le prix du verre sans inclure la casse réelle", porQueOcurre: "Parce que le calcul rapide est bouteille ÷ 5 verres. Mais la réalité est 4 verres (ou moins) en tenant compte de la casse.", consecuencia: "Vous vendez à un prix qui ne couvre pas le coût réel. Plus vous vendez, plus vous perdez — mais ça a l'air de bien marcher." },
+    { error: "Ne pas mesurer la cannibalisation verre vs. bouteille", porQueOcurre: "Parce qu'on suppose que le verre ajoute des ventes nouvelles, jamais qu'il en retire à la bouteille.", consecuencia: "Votre ticket moyen baisse sans que vous le remarquiez. Le convive qui aurait commandé une bouteille commande 2 verres et la marge totale est inférieure." },
+    { error: "Laisser l'équipe de salle décider quoi recommander au verre", porQueOcurre: "Parce que sans directive claire, chaque serveur recommande ce qu'il connaît ou préfère.", consecuencia: "La rotation se concentre sur 1-2 verres pendant que les autres s'oxydent. L'expérience du convive est incohérente." },
+  ],
+  links: [
+    { label: "Calculateur prix au verre", href: "/fr/outils/calculateur-prix-vin", description: "Calculez le prix au verre en incluant la casse réelle et la marge cible", type: "tool" },
+    { label: "Guide : Vin au verre", href: "/fr/guides/comment-mettre-en-place-le-vin-au-verre-sans-perdre-de-marge", description: "Étape par étape pour monter un programme au verre rentable", type: "guide" },
+    { label: "Modèle : Stratégie vin au verre", href: "/fr/ressources/modele-strategie-vin-au-verre", description: "Concevez votre sélection au verre avec des critères business", type: "resource" },
+    { label: "Modèle : Formation express salle", href: "/fr/ressources/modele-formation-express-salle", description: "Formez votre équipe pour recommander au verre avec pertinence en 30 minutes", type: "resource" },
+    { label: "Winerim Core", href: "/fr/produit/winerim-core", description: "Suivez rotation, casse et rentabilité par verre automatiquement", type: "product" },
+    { label: "Blog : Prix au verre sans rogner la marge", href: "/fr/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "La bonne formule pour fixer les prix au verre avec la casse réelle", type: "article" },
+    { label: "Blog : Quels vins proposer au verre", href: "/fr/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Sélection au verre selon le type d'établissement et le profil du convive", type: "article" },
+  ],
+  miniCases: [
+    {
+      profile: "Bar à vins avec 12 verres actifs",
+      situation: "Avait 12 verres mais seulement 5 tournaient bien. Les 7 restants généraient une casse de 35 % que personne ne mesurait.",
+      action: "Réduit à 7 verres en choisissant ceux avec le meilleur ratio rotation/marge. Les 5 autres proposés uniquement en bouteille.",
+      result: "La casse est passée de 35 % à 12 %. La marge réelle par verre a augmenté de 22 %. Moins de travail pour la salle et moins de gaspillage.",
+    },
+    {
+      profile: "Restaurant de déjeuner d'affaires",
+      situation: "Proposait 3 verres à prix fixe (4,50 €). Ne calculait ni la casse ni la différenciation par coût. Le verre le plus cher coûtait 3,80 € et était vendu 4,50 €.",
+      action: "A différencié les prix au verre selon le coût réel. A relevé le verre premium à 6 €. A maintenu une option d'entrée à 4,50 € avec un vin à moindre coût.",
+      result: "La marge moyenne par verre est passée de 18 % à 52 %. Les convives acceptent de payer plus quand ils perçoivent une différence de qualité.",
+    },
+    {
+      profile: "Restaurant gastronomique avec 120 références",
+      situation: "Avait 8 verres actifs mais 4 étaient des rouges très similaires (Rioja crianza entre 7 € et 9 € le verre). L'équipe de salle ne savait pas les différencier et recommandait toujours le même.",
+      action: "Réduit les rouges au verre à 2 (un jeune, un crianza). Ajouté un blanc minéral et un effervescent. Formé l'équipe avec le modèle de formation express.",
+      result: "La diversité des verres vendus est passée de 2 références à 80 % du programme. Le ticket moyen au verre a augmenté de 1,80 € car l'effervescent ouvrait la vente.",
+    },
+    {
+      profile: "Hôtel resort avec 3 points de vente",
+      situation: "Chaque point de vente (restaurant, pool bar, lobby bar) avait des verres différents sans critères communs. Le pool bar utilisait des vins premium que personne ne commandait ; le restaurant avait des verres d'entrée qui ne correspondaient pas à sa cuisine.",
+      action: "Défini un programme au verre par point de vente : 3 verres au pool bar (entrée, frais, rotation rapide), 5 au restaurant (progression de prix, accords), 4 au lobby (exploration, conversation). Utilisé Winerim Core pour suivre la casse par point de vente.",
+      result: "La casse globale est passée de 28 % à 14 %. Chaque point de vente a un programme cohérent avec son public. Le restaurant a doublé les ventes de verre premium.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "cuando-conviene-copa",
+      title: "Quand le vin au verre est pertinent",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim a identifié des références avec un potentiel au verre : bonnes évaluations, faible rotation en bouteille et profils résistants à l'oxydation.", whyMatters: "Le verre abaisse la barrière d'engagement du convive. Un vin que personne ne commande à 35 € en bouteille se vend facilement à 9 € le verre.", riskIfIgnored: "Vous perdez en conversion, ticket moyen et exploration. Le convive qui n'ose pas la bouteille ne commande tout simplement pas de vin." },
+      queSignifica: "Un vin est un bon candidat au verre quand il réunit trois conditions simultanément : il a une demande potentielle (le convive le commanderait s'il pouvait goûter sans s'engager sur une bouteille entière), il tient au moins 24-48 heures une fois ouvert sans perdre en qualité, et sa rotation attendue au verre permet de terminer la bouteille avant qu'elle ne se dégrade. Si l'une des trois manque, ce n'est pas un bon candidat.",
+      porQueImporta: "Parce que le verre abaisse la barrière d'engagement du convive. Le client qui ne risquera pas une bouteille à 35 € commandera un verre à 9 €. Cela augmente la conversion, le ticket moyen et l'exploration. De plus, le verre vous permet de faire tourner des références qui seraient lentes en bouteille. Bien choisi, un verre est votre meilleur vendeur silencieux.",
+      queHacer: [
+        "Passez en revue les références avec de bonnes évaluations mais une faible rotation en bouteille — ce sont des candidates naturelles au verre.",
+        "Vérifiez que le vin tient au moins 24 h une fois ouvert (demandez au fournisseur ou testez-le vous-même).",
+        "Estimez combien de verres vous pouvez vendre par semaine de cette référence. Si c'est moins de 3, ça ne vaut probablement pas le coup.",
+        "Commencez avec 4-6 verres bien sélectionnés avant d'élargir. Mieux vaut peu qui tournent que beaucoup qui se perdent.",
+      ],
+      errores: [
+        { mistake: "Mettre au verre le vin le moins cher de la carte", consequence: "Le convive associe le verre à une qualité médiocre. Vous ratez l'opportunité de vendre de la marge." },
+        { mistake: "Choisir les verres sans penser à la rotation", consequence: "Vous ouvrez des bouteilles que vous ne finissez pas. Chaque bouteille à moitié pleine est de l'argent jeté." },
+        { mistake: "Ne pas tester si le vin tient avant de le proposer au verre", consequence: "Vous servez le troisième verre d'une bouteille qui a déjà perdu en qualité. Le convive ne revient pas." },
+      ],
+    },
+    {
+      id: "cuando-no-conviene-copa",
+      title: "Quand le vin au verre n'est pas pertinent",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim a détecté des verres actifs avec une rotation insuffisante ou des vins qui ne tiennent pas bien une fois ouverts.", whyMatters: "Un programme de 4 verres bien choisis vaut mieux qu'un programme de 10 dont 6 génèrent des pertes par casse.", riskIfIgnored: "Vous générez de la casse, un service de mauvaise qualité et une perception négative de l'ensemble de votre programme au verre." },
+      queSignifica: "Tous les vins ne fonctionnent pas au verre. Ce n'est pas pertinent quand : le vin ne tient pas plus de quelques heures une fois ouvert (vins très délicats, effervescents sans système de conservation), quand la rotation attendue est si faible que la casse absorbe la marge, quand le prix au verre résultant est si élevé que le convive ne le perçoit pas comme accessible, ou quand vous avez déjà un autre verre dans la même gamme couvrant ce besoin.",
+      porQueImporta: "Parce que proposer au verre un vin qui ne devrait pas y être est pire que de ne pas avoir de programme au verre du tout. Vous générez de la casse, un service de mauvaise qualité (vin oxydé) et une perception négative du programme entier. Un programme de 4 verres bien choisis est infiniment mieux qu'un programme de 10 dont 6 génèrent des pertes.",
+      queHacer: [
+        "Écartez tout vin qui ne tient pas au moins 24 h une fois ouvert, sauf si vous avez un système de conservation (Coravin, argon).",
+        "Écartez les références avec un prix au verre > 15 € sauf si votre clientèle le justifie (gastronomique haut de gamme, hôtel premium).",
+        "Si vous avez déjà un verre dans la même gamme (même type, ±2 € de différence), ne dupliquez pas. Choisissez-en un.",
+        "Ne proposez pas un vin au verre juste pour écouler du stock mort : le verre n'est pas un canal de déstockage.",
+      ],
+      errores: [
+        { mistake: "Utiliser le verre comme canal de liquidation du stock mort", consequence: "Vous servez un vin médiocre au verre et le convive associe votre programme à une qualité médiocre." },
+        { mistake: "Proposer de l'effervescent au verre sans système de conservation", consequence: "Au deuxième verre, il n'a plus de bulles. Vous vendez un produit inférieur." },
+        { mistake: "Avoir trop de verres actifs « pour la variété »", consequence: "La variété génère de la casse. Si vous ouvrez 10 bouteilles et vendez 3 verres de chacune, vous perdez 7 fonds de bouteille." },
+      ],
+    },
+    {
+      id: "fijar-precio-copa",
+      title: "Comment fixer le prix sans perdre de marge",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim a recalculé vos prix au verre en incluant la casse réelle et a détecté des écarts par rapport à la marge cible.", whyMatters: "Une erreur de 1 € par verre sur 15 verres/semaine représente plus de 1 100 €/an perdus sur une seule référence.", riskIfIgnored: "Vous vendez des verres à un prix qui ne couvre ni la casse ni la marge. Chaque service est une perte invisible." },
+      queSignifica: "Le prix au verre NE se calcule PAS en divisant le prix de la bouteille par 5. Cette formule ignore la casse (le vin perdu en fin de bouteille ou par verres non vendus), le coût du service et la marge cible. La bonne formule part du coût réel par verre (coût de la bouteille ÷ verres réels que vous allez servir, casse incluse) et applique le multiplicateur cible à ce coût.",
+      porQueImporta: "Parce qu'une erreur de 1 € dans le prix au verre se multiplie à chaque verre servi. Si vous vendez 15 verres par semaine d'une référence et que votre prix est 1,50 € en dessous du niveau requis, vous perdez plus de 1 100 € par an sur cette seule référence. Avec 6 verres mal calculés, l'impact peut dépasser 5 000 € par an.",
+      queHacer: [
+        "Calculez le coût réel par verre : (prix bouteille ÷ 4 verres réels) + 25 % de casse = coût réel.",
+        "Appliquez votre multiplicateur cible (minimum ×3 sur le coût réel pour le verre).",
+        "Comparez le résultat avec le prix du verre le plus proche sur votre carte : est-ce cohérent ?",
+        "Utilisez le Calculateur de Prix au Verre pour simuler des scénarios avec différents niveaux de casse.",
+      ],
+      errores: [
+        { mistake: "Diviser le prix de la bouteille par 5 verres", consequence: "Vous ne couvrez pas la casse. D'une bouteille vous tirez 4 à 4,5 verres réels, pas 5. Vous vendez à perte dès le premier verre." },
+        { mistake: "Ne pas comptabiliser la casse dans le calcul", consequence: "Votre marge théorique n'existe pas. La réalité est 20 à 30 % pire que ce que vous croyez." },
+        { mistake: "Fixer tous les prix au verre avec le même multiplicateur", consequence: "Un vin à 8 € et un vin à 30 € nécessitent des stratégies au verre différentes." },
+      ],
+    },
+    {
+      id: "evitar-canibalizacion-copa",
+      title: "Comment éviter la cannibalisation entre verre et bouteille",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim a détecté un changement dans votre ratio verre/bouteille qui pourrait indiquer une cannibalisation.", whyMatters: "Si le verre prend des ventes à la bouteille sans ajouter plus de marge, vous travaillez plus pour gagner moins.", riskIfIgnored: "Votre ticket moyen baisse sans que vous le remarquiez. Vous pensez que votre programme au verre fonctionne parce que les verres se vendent, mais le résultat total est pire." },
+      queSignifica: "La cannibalisation survient quand le verre prend des ventes à la bouteille sans ajouter plus de marge. Si un convive qui aurait commandé une bouteille à 28 € finit par commander 2 verres à 8 € (16 € au total), vous avez perdu 12 € de chiffre d'affaires et probablement de la marge. L'objectif n'est pas que le verre remplace la bouteille : c'est de capter des ventes nouvelles (le convive qui n'aurait pas commandé de bouteille).",
+      porQueImporta: "Parce que si votre programme au verre cannibalise la bouteille, vous travaillez plus pour gagner moins. L'objectif est que le verre augmente le ticket moyen total, pas qu'il le redistribue. La cannibalisation est le risque le moins visible d'un programme au verre : vous ne le remarquez pas tant que vous ne regardez pas les données.",
+      queHacer: [
+        "Suivez le ratio verre/bouteille mois par mois. Si les ventes en bouteille baissent à l'introduction du verre, enquêtez.",
+        "Positionnez le verre comme exploration et la bouteille comme engagement : ils ne se font pas concurrence, ils se complètent.",
+        "Évitez de proposer au verre vos meilleures ventes en bouteille. Le verre doit couvrir un espace différent.",
+        "Formez l'équipe pour suggérer la bouteille quand une table commande 3+ verres du même vin.",
+      ],
+      errores: [
+        { mistake: "Proposer au verre le même vin que votre meilleure vente en bouteille", consequence: "Vous donnez au convive une raison de dépenser moins. Votre meilleure bouteille se vend maintenant au détail." },
+        { mistake: "Ne pas former l'équipe pour gérer la transition verre → bouteille", consequence: "Deux convives commandent 2 verres chacun du même vin. Personne ne suggère la bouteille. Vous perdez la vente." },
+        { mistake: "Ne pas mesurer si le verre ajoute ou retranche au ticket moyen global", consequence: "Vous pensez que votre programme au verre fonctionne parce que les verres se vendent, mais le ticket moyen a baissé." },
+      ],
+    },
+    {
+      id: "medir-rotacion-rentabilidad",
+      title: "Comment mesurer la rotation et la rentabilité par verre",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim a croisé bouteilles ouvertes et verres servis et a calculé votre casse réelle par référence.", whyMatters: "Le verre peut sembler rentable en théorie (marge de 75 %) mais être ruineux en pratique (35 % après la casse).", riskIfIgnored: "Vous gérez le programme au verre à l'aveugle. Sans mesure, vous ne savez pas si vous gagnez ou perdez sur chaque référence." },
+      queSignifica: "La rotation au verre mesure combien de bouteilles ouvertes vous terminez sur une période. Si vous ouvrez 3 bouteilles par semaine et vendez tous les verres, votre rotation est excellente. Si vous en ouvrez 3 et jetez le fond de 2, votre rotation réelle est un désastre déguisé en ventes. La rentabilité au verre n'est pas seulement la marge théorique : c'est la marge moins la casse réelle, moins le coût du service, moins les verres que vous ne vendez pas.",
+      porQueImporta: "Parce que le verre peut sembler rentable sur le papier et être ruineux en pratique. La marge théorique par verre peut être de 75 %, mais si vous perdez 30 % en casse et 10 % en coûts de service supplémentaires, votre marge réelle est de 35 %. Sans mesure, vous opérez à l'aveugle. Avec la mesure, vous optimisez chaque semaine.",
+      queHacer: [
+        "Enregistrez chaque bouteille ouverte pour le service au verre et le nombre de verres réellement servis (pas le compte théorique).",
+        "Calculez votre casse réelle hebdomadaire : (verres théoriques − verres servis) × coût par verre.",
+        "Comparez la marge réelle au verre (après casse) avec la marge en bouteille de la même référence.",
+        "Si la marge réelle au verre est inférieure à celle de la bouteille, vous avez un problème de rotation ou de pricing.",
+      ],
+      errores: [
+        { mistake: "Ne mesurer que les verres vendus sans compter les bouteilles ouvertes", consequence: "Vous vendez 20 verres mais ouvrez 8 bouteilles. Votre casse est de 37 % et vous ne le savez pas." },
+        { mistake: "Supposer que chaque bouteille ouverte se vend entièrement au verre", consequence: "Votre calcul de rentabilité est une fiction. La réalité est 20 à 30 % pire." },
+        { mistake: "Ne pas comparer la rentabilité au verre avec celle de la bouteille", consequence: "Vous vendez peut-être au verre un vin qui vous rapporterait plus en bouteille." },
+      ],
+    },
+    {
+      id: "errores-tipicos-copeo",
+      title: "Erreurs courantes dans le service au verre",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim a identifié des schémas opérationnels dans votre programme au verre qui correspondent à des erreurs fréquentes du secteur.", whyMatters: "Les erreurs de service au verre se répètent chaque jour, chaque service. Un processus sans contrôle génère des pertes cumulatives de milliers d'euros par an.", riskIfIgnored: "Les mêmes erreurs se répètent service après service. Sans protocole, chaque service réinvente la gestion du verre." },
+      queSignifica: "Le service au verre est l'une des opérations les plus délicates d'un restaurant : il combine la gestion des stocks (bouteilles ouvertes), le contrôle de la casse (vin perdu), le service en salle (recommandation et vente) et le pricing (un prix qui couvre tout le reste). Les erreurs typiques ne viennent pas de l'ignorance — elles viennent d'un manque de processus. L'équipe sait que la casse existe, mais personne ne la mesure. Ils savent que le prix devrait être différent, mais personne ne le recalcule.",
+      porQueImporta: "Parce que les erreurs de service au verre sont récurrentes : elles se répètent chaque jour, chaque service. Une erreur ponctuelle de pricing se corrige. Mais un processus au verre sans contrôle génère des pertes cumulatives qui en fin d'année peuvent représenter des milliers d'euros. Les restaurants qui gèrent le mieux le service au verre n'ont pas les meilleurs vins : ils ont les meilleurs processus.",
+      queHacer: [
+        "Établissez un protocole d'ouverture de bouteille pour le service au verre : qui décide quand ouvrir, nombre maximum de bouteilles actives.",
+        "Définissez un moment de révision quotidien : à la fermeture, combien de bouteilles ouvertes restent ? Combien ont été terminées ?",
+        "Formez l'équipe chaque trimestre avec le Modèle de Formation Express : 30 minutes suffisent.",
+        "Révisez le pricing au verre à chaque changement de coût ou au minimum tous les 3 mois.",
+      ],
+      errores: [
+        { mistake: "Ne pas avoir de protocole d'ouverture de bouteilles pour le service au verre", consequence: "Chaque serveur ouvre quand il veut. En fin de service, il y a 6 bouteilles ouvertes avec 2 verres servis de chacune." },
+        { mistake: "Ne pas former l'équipe pour vendre au verre", consequence: "Le serveur dit « nous avons du vin au verre » sans conviction. Le convive commande un soda." },
+        { mistake: "Ne pas réviser les prix au verre après des changements de coûts", consequence: "Votre fournisseur a augmenté de 8 % il y a 4 mois. Vos verres sont toujours à l'ancien prix. Vous vendez à perte." },
+        { mistake: "Ne jamais mesurer la casse", consequence: "Vous ne savez pas combien vous perdez. Et ce que vous ne mesurez pas, vous ne pouvez pas l'améliorer." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Calculer le bon prix au verre",
+    href: "/fr/outils/calculateur-prix-vin",
+    description: "Inclut la casse réelle et la marge cible pour fixer un prix au verre réellement rentable.",
+  },
+};
+
+export default vinoPorCopaFR;

@@ -687,6 +687,12 @@ const DecisionCenterArea = () => {
     it: cartaEquilibrioIT,
     fr: cartaEquilibrioFR,
   };
+  const copaByLang: Record<string, DeepAreaContent> = {
+    es: vinoPorCopaContent,
+    en: vinoPorCopaEN,
+    it: vinoPorCopaIT,
+    fr: vinoPorCopaFR,
+  };
 
   // Deep areas — pick translated version when available, fallback to ES
   const deepAreas: Record<string, DeepAreaContent> = {
@@ -694,7 +700,7 @@ const DecisionCenterArea = () => {
     "stock-rotacion": stockByLang[lang] || stockRotacionContent,
     "compras-reposicion": comprasByLang[lang] || comprasReposicionContent,
     "carta-equilibrio": cartaByLang[lang] || cartaEquilibrioContent,
-    "vino-por-copa": vinoPorCopaContent,
+    "vino-por-copa": copaByLang[lang] || vinoPorCopaContent,
     "grupos-benchmarking": gruposBenchmarkingContent,
   };
 
