@@ -104,7 +104,7 @@ const ES: Content = {
     "Tu dirección necesita reporting de la categoría vino",
   ],
   notForItems: [
-    "Tienes un solo restaurante con menos de 30 referencias",
+    "Tienes un solo restaurante con una carta contenida (menos de 80 referencias)",
     "No necesitas comparar ni estandarizar entre locales",
     "Buscas solo un diseño de carta, sin analítica ni control",
   ],
