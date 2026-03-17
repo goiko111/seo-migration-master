@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Building2, BarChart3, TrendingUp, ArrowRight, Brain, Zap, ShoppingCart,
-  Wine, GlassWater, Package, Layers, Target, LineChart, ArrowUpRight,
+  Wine, GlassWater, Package, Layers, Target, LineChart, ArrowUpRight, Sprout,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
