@@ -442,7 +442,7 @@ const CalculadoraCompraInteligente = () => {
             </div>
           </div>
 
-          <Button onClick={() => setCalculated(true)}
+          <Button onClick={() => { setCalculated(true); trackAction("tool_use", "tool", "calculadora-compra-inteligente"); }}
             className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-primary-foreground py-3 font-semibold tracking-wider uppercase hover:opacity-90">
             {t.analyze_btn}
           </Button>

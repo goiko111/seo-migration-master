@@ -450,7 +450,7 @@ const WineListScore = () => {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground mb-4">{t.answered_of(answeredQuestions, totalQuestions)}</p>
-          <Button onClick={() => setCalculated(true)} disabled={!allAnswered}
+          <Button onClick={() => { setCalculated(true); trackAction("tool_use", "tool", "wine-list-score"); }} disabled={!allAnswered}
             className="bg-gradient-wine text-primary-foreground px-10 py-4 text-sm font-semibold tracking-wider uppercase hover:opacity-90">
             {t.calc_btn}
           </Button>

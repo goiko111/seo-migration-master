@@ -572,7 +572,7 @@ const CalculadoraTicketMedio = () => {
             </div>
           </div>
 
-          <Button onClick={() => { setCalculated(true); setActiveScenario("full"); }}
+          <Button onClick={() => { setCalculated(true); setActiveScenario("full"); trackAction("tool_use", "tool", "calculadora-ticket-medio"); }}
             className="w-full bg-gradient-wine text-primary-foreground py-3 font-semibold tracking-wider uppercase hover:opacity-90">
             {t.simulate_btn}
           </Button>
