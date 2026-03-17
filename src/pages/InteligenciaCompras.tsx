@@ -3,7 +3,9 @@ import {
   TrendingUp, DollarSign, RefreshCw, Search, BarChart3,
   Layers, Target, Users, Sparkles, type LucideIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
+import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang } from "@/i18n/types";
 
