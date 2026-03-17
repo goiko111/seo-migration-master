@@ -122,6 +122,7 @@ const Demo = () => {
       toast.success(c.success);
       (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
+      trackFormSubmit("demo");
     }
     setSubmitting(false);
   };
