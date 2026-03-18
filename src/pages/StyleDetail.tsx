@@ -26,7 +26,7 @@ const levelLabels: Record<string, string> = {
   ligero: "Ligero", medio: "Medio", alto: "Alto", "muy-alto": "Muy alto",
   sencillo: "Sencillo", complejo: "Complejo", "muy-complejo": "Muy complejo",
   ninguna: "Ninguna", sutil: "Sutil", marcada: "Marcada",
-  "muy-alto": "Muy alto", bajo: "Bajo", nicho: "Nicho",
+  bajo: "Bajo", nicho: "Nicho",
   seguro: "Seguro", diferencial: "Diferencial", premium: "Premium", descubrimiento: "Descubrimiento", tendencia: "Tendencia",
 };
 
