@@ -251,6 +251,7 @@ export const styleEntries: StyleEntry[] = [
       { name: "Sekt", slug: "sekt", description: "Espumoso alemán. Los mejores con Riesling." },
       { name: "Franciacorta", slug: "franciacorta", description: "Método tradicional de Lombardía (Italia). Comparable al Champagne." },
       { name: "Pét-Nat", slug: "pet-nat", description: "Método ancestral. Una sola fermentación se completa en botella. Turbio, natural, tendencia actual." },
+      { name: "Espumante", slug: "espumante", description: "Espumosos portugueses y brasileños. Método tradicional o Charmat." },
     ],
     relatedStyles: ["blanco", "rosado"],
     clientRecognition: "muy-alto",
