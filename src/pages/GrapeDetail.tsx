@@ -89,8 +89,29 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
             <span>{colorLabels[data.color].emoji}</span>
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabels[data.color].label}</span>
           </span>
-          <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize">{levelLabels[data.scope] || data.scope}</span>
-          <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full">Reconocimiento: {levelLabels[data.clientRecognition] || data.clientRecognition}</span>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize cursor-help">{levelLabels[data.scope] || data.scope}</span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs text-xs">
+              {data.scope === "internacional" && "Variedad reconocida y cultivada en todo el mundo. Fácil de identificar para cualquier comensal."}
+              {data.scope === "nacional" && "Variedad reconocida principalmente en su país de origen. Apela al público local y conocedor."}
+              {data.scope === "local" && "Variedad de alcance regional. Ideal para diferenciación y storytelling de territorio."}
+              {data.scope === "diferencial" && "Variedad que destaca por su singularidad. Permite posicionar la carta como experta."}
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full cursor-help">Reconocimiento: {levelLabels[data.clientRecognition] || data.clientRecognition}</span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs text-xs">
+              {data.clientRecognition === "muy-alto" && "La mayoría de comensales la reconocen por nombre. Se vende sola."}
+              {data.clientRecognition === "alto" && "Reconocida por el público aficionado. No requiere explicación."}
+              {data.clientRecognition === "medio" && "Conocida por quien sabe de vino. Puede necesitar una breve descripción en carta."}
+              {data.clientRecognition === "bajo" && "Poco conocida fuera de su zona. Requiere storytelling o recomendación de sala."}
+              {data.clientRecognition === "nicho" && "Variedad de culto. Solo la reconocen expertos. Gran potencial diferenciador."}
+            </TooltipContent>
+          </Tooltip>
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
