@@ -3431,7 +3431,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Limón", "Lima", "Manzana verde", "Mineral", "Flores de azahar"],
     clientRecognition: "bajo",
     commercialDifficulty: "media",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["valor", "descubrimiento"],
     cartaPerception: "Desconocida internacionalmente pero indispensable en Portugal. Aporta frescura imbatible.",
     whenItHelps: "Como blanco fresco y mineral a buen precio. Bucelas es una DOC por descubrir.",
