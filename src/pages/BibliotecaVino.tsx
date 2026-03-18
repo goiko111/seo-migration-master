@@ -140,6 +140,7 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
+        </div>
       </section>
 
       {/* CATEGORIES */}
