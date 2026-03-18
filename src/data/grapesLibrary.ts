@@ -3637,7 +3637,7 @@ export const grapeEntries: GrapeEntry[] = [
     intro: "Koshu es la uva que representa el vino japonés en el mundo. Cultivada desde hace más de 1.000 años en la prefectura de Yamanashi (cerca del Monte Fuji), produce blancos de una sutileza y delicadeza que reflejan la estética japonesa del menos es más. Su perfil ligero, mineral y con acidez suave la convierte en el complemento perfecto para la cocina japonesa.",
     acidity: "media",
     body: "ligero",
-    aromaticIntensity: "baja",
+    aromaticIntensity: "sutil",
     aromas: ["Cítricos sutiles", "Pera asiática", "Flores de cerezo", "Mineral", "Umami sutil"],
     clientRecognition: "bajo",
     commercialDifficulty: "muy-difícil",
