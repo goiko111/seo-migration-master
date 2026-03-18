@@ -3221,7 +3221,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Almendra", "Limón", "Manzanilla", "Flores blancas", "Melocotón", "Piedra volcánica"],
     clientRecognition: "bajo",
     commercialDifficulty: "media",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["valor", "descubrimiento"],
     cartaPerception: "Soave tiene reputación mixta por la masificación. Las versiones Classico premium sorprenden.",
     whenItHelps: "Como blanco italiano elegante y asequible. Soave Classico es una de las mejores relaciones calidad-precio.",
