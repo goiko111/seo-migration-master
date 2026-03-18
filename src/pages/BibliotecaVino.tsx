@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Wine, MapPin, Palette, Utensils, ArrowRight } from "lucide-react";
+import { Wine, MapPin, Palette, Utensils, ArrowRight, Grape } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
