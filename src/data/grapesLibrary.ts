@@ -3094,7 +3094,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Mora", "Violeta", "Chocolate negro", "Pimienta", "Cereza negra", "Regaliz"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "descubrimiento"],
     cartaPerception: "Exótica incluso en Italia. Se percibe como curiosidad altoatesina de calidad.",
     whenItHelps: "Cuando tienes cocina tirolesa o alpina. Es la tinta que nace entre montañas.",
