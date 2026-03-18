@@ -121,7 +121,25 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
-        </div>
+          <ScrollReveal>
+            <Link
+              to="/biblioteca-vino/maridajes"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Utensils size={20} className="text-wine" />
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold group-hover:text-wine transition-colors">
+                    Maridajes
+                  </h2>
+                </div>
+                <ArrowRight size={18} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="text-muted-foreground max-w-2xl">
+                10 categorías gastronómicas, 80+ combinaciones plato + vino. Principios, errores y lectura comercial para hostelería.
+              </p>
+            </Link>
+          </ScrollReveal>
       </section>
 
       {/* CATEGORIES */}
