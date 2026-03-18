@@ -3389,7 +3389,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Melocotón maduro", "Piña", "Mango", "Flores blancas", "Mantequilla", "Miel"],
     clientRecognition: "bajo",
     commercialDifficulty: "media",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["valor", "descubrimiento"],
     cartaPerception: "Desconocida pero su estilo generoso y frutal la hace accesible al gran público.",
     whenItHelps: "Cuando buscas un blanco con cuerpo a buen precio. Es la alternativa portuguesa a Chardonnay de clima cálido.",
