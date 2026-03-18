@@ -136,7 +136,7 @@ const GrapesHub = () => {
               { label: "Variedades", value: String(grapeCatalog.length) },
               { label: "Tintas", value: String(tintas) },
               { label: "Blancas", value: String(blancas) },
-              { label: "Países", value: "30" },
+              { label: "Países", value: String(uniqueCountries) },
             ].map((stat) => (
               <div key={stat.label} className="bg-gradient-card rounded-xl border border-border p-4 text-center">
                 <p className="font-heading text-2xl font-bold text-wine">{stat.value}</p>
