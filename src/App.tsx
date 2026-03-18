@@ -108,6 +108,8 @@ const RegionCountry = lazy(() => import("./pages/RegionCountry"));
 const RegionDetail = lazy(() => import("./pages/RegionDetail"));
 const GrapesHub = lazy(() => import("./pages/GrapesHub"));
 const GrapeDetail = lazy(() => import("./pages/GrapeDetail"));
+const StylesHub = lazy(() => import("./pages/StylesHub"));
+const StyleDetail = lazy(() => import("./pages/StyleDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
