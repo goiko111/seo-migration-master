@@ -3347,7 +3347,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Cítricos", "Flores blancas", "Mineral granítico", "Melocotón", "Hierbas aromáticas", "Avellana (con barrica)"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "premium", "descubrimiento"],
     cartaPerception: "Desconocida pero impresiona enormemente cuando se prueba. Es la revelación para enófilos.",
     whenItHelps: "Cuando quieres sorprender con un blanco que no esperan. Es el 'Borgoña portugués'.",
