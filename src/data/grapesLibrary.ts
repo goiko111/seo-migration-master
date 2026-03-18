@@ -3179,7 +3179,7 @@ export const grapeEntries: GrapeEntry[] = [
     clientRecognition: "medio",
     commercialDifficulty: "fácil",
     scope: "internacional",
-    cartaRole: ["copa", "valor", "entrada"],
+    cartaRole: ["valor", "conocida"],
     cartaPerception: "Altísimo reconocimiento como 'Prosecco'. El nombre comercial vende más que la variedad.",
     whenItHelps: "Como espumoso por copa accesible. Es la alternativa democrática al Champagne.",
     clientProfile: "Público amplio. Desde millennials hasta cenas informales. Bajo umbral de decisión.",
