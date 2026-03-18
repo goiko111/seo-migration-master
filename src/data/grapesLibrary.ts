@@ -3263,7 +3263,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Pera", "Almendra", "Flores blancas", "Melocotón", "Hierbas aromáticas", "Miel sutil"],
     clientRecognition: "bajo",
     commercialDifficulty: "media",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "descubrimiento"],
     cartaPerception: "Desconocida pero encanta cuando se prueba. Se posiciona como 'el secreto blanco del Piamonte'.",
     whenItHelps: "Si tu carta tiene Barolo o Barbaresco, Arneis es el blanco lógico de la región.",
