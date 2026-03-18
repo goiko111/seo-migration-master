@@ -3052,7 +3052,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Cereza negra", "Ciruela", "Regaliz", "Hierro", "Garriga", "Especias oscuras"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "premium"],
     cartaPerception: "Desconocida como monovarietal. Se percibe como rústica salvo en versiones de cepas viejas de Priorat o Languedoc.",
     whenItHelps: "Como historia de cepas centenarias y viticultura heroica. Los viejos Carignan del Languedoc son únicos.",
