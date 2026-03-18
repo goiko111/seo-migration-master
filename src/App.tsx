@@ -153,6 +153,9 @@ const esRoutes = (
     <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
     <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
     <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
+    <Route path="/biblioteca-vino/regiones" element={<RegionsHub />} />
+    <Route path="/biblioteca-vino/regiones/:country" element={<RegionCountry />} />
+    <Route path="/biblioteca-vino/regiones/:country/:region" element={<RegionDetail />} />
     <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
     <Route path="/casos-exito" element={<CasosExito />} />
     <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
