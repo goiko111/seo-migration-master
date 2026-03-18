@@ -3515,7 +3515,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Manzana verde", "Pera", "Humo", "Piedra de fuego", "Miel (Aszú)", "Azafrán"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "premium", "descubrimiento"],
     cartaPerception: "El Aszú es legendario entre conocedores. El seco es una revelación por descubrir.",
     whenItHelps: "Como postre con Aszú (insuperable). Como seco para sorprender a enófilos.",
