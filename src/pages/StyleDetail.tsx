@@ -6,6 +6,7 @@ import {
   Users, TrendingUp, Target, Lightbulb, AlertTriangle, Utensils,
   MapPin, Grape, ShieldCheck
 } from "lucide-react";
+import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
