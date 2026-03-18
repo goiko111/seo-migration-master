@@ -162,6 +162,8 @@ const esRoutes = (
     <Route path="/biblioteca-vino/regiones/:country/:region" element={<RegionDetail />} />
     <Route path="/biblioteca-vino/uvas" element={<GrapesHub />} />
     <Route path="/biblioteca-vino/uvas/:grape" element={<GrapeDetail />} />
+    <Route path="/biblioteca-vino/estilos" element={<StylesHub />} />
+    <Route path="/biblioteca-vino/estilos/:style" element={<StyleDetail />} />
     <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
     <Route path="/casos-exito" element={<CasosExito />} />
     <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
