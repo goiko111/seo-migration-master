@@ -301,6 +301,8 @@ export const styleEntries: StyleEntry[] = [
       { name: "Oporto Tawny", slug: "oporto-tawny", description: "Crianza oxidativa en barricas pequeñas. Ámbar, frutos secos, caramelo." },
       { name: "Oporto Vintage", slug: "oporto-vintage", description: "De una sola añada excepcional. Gran capacidad de guarda (50+ años)." },
       { name: "Madeira", slug: "madeira", description: "Fortificado de la isla de Madeira. Prácticamente inmortal." },
+      { name: "Marsala", slug: "marsala", description: "Fortificado siciliano. Desde seco a dulce. Usado también en cocina (salsa Marsala)." },
+      { name: "Moscatel de Setúbal", slug: "moscatel-de-setubal", description: "Fortificado portugués de uva Moscatel. Dulce, aromático, floral." },
     ],
     relatedStyles: ["dulce", "tinto"],
     clientRecognition: "medio",
