@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Wine, MapPin, Palette, Utensils, ArrowRight } from "lucide-react";
+import { Wine, MapPin, Palette, Utensils, ArrowRight, Grape } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -80,6 +80,25 @@ const BibliotecaVino = () => {
               </div>
               <p className="text-muted-foreground max-w-2xl">
                 Explora más de 3.700 denominaciones de 41 países. Con criterio Winerim: consulta, interpretación y aplicación comercial.
+              </p>
+            </Link>
+          </ScrollReveal>
+          <ScrollReveal>
+            <Link
+              to="/biblioteca-vino/uvas"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Grape size={20} className="text-wine" />
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold group-hover:text-wine transition-colors">
+                    Variedades de uva
+                  </h2>
+                </div>
+                <ArrowRight size={18} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="text-muted-foreground max-w-2xl">
+                87 variedades de 30 países. Perfil sensorial, rol en carta y criterio comercial para hostelería.
               </p>
             </Link>
           </ScrollReveal>
