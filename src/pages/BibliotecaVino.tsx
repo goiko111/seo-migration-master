@@ -61,6 +61,31 @@ const BibliotecaVino = () => {
         </div>
       </section>
 
+      {/* REGIONS HUB HIGHLIGHT */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <Link
+              to="/biblioteca-vino/regiones"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <MapPin size={20} className="text-wine" />
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold group-hover:text-wine transition-colors">
+                    Regiones vinícolas del mundo
+                  </h2>
+                </div>
+                <ArrowRight size={18} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="text-muted-foreground max-w-2xl">
+                Explora más de 3.700 denominaciones de 41 países. Con criterio Winerim: consulta, interpretación y aplicación comercial.
+              </p>
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* CATEGORIES */}
       {categoryOrder.map((cat) => {
         const meta = categoryMeta[cat];
