@@ -137,6 +137,7 @@ const resources = [
   { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos.", tags: ["rentabilidad", "restaurante", "inicio"] },
   { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías.", tags: ["estructura", "restaurante", "intermedio"] },
   { to: "/recursos/plantilla-revision-mensual-carta", icon: FileText, title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes: rendimiento, pricing, rotación y plan de acción.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/revision-mensual-margenes", icon: DollarSign, title: "Revisión mensual de márgenes", desc: "Revisa cada mes si tu carta está perdiendo margen y decide qué corregir antes de que el problema crezca.", tags: ["pricing", "restaurante", "avanzado"] },
   { to: "/recursos/plantilla-control-grupo-restauracion", icon: Building2, title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking interno entre locales.", tags: ["analítica", "grupo", "avanzado"] },
 ];
 

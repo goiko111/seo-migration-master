@@ -195,6 +195,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/recursos/scorecard-rendimiento-carta', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/recursos/checklist-carta-que-vende', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/recursos/plantilla-equilibrio-carta', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/recursos/revision-mensual-margenes', priority: '0.6', changefreq: 'monthly', multilang: false },
 
   // Benchmarks & Playbooks
   { esPath: '/benchmarks-playbooks', priority: '0.7', changefreq: 'monthly', multilang: false },
