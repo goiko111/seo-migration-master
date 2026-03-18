@@ -2,12 +2,14 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Grape, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, MapPin } from "lucide-react";
+import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   getGrapeBySlug,
   getCatalogEntry,
@@ -87,8 +89,29 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
             <span>{colorLabels[data.color].emoji}</span>
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabels[data.color].label}</span>
           </span>
-          <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize">{levelLabels[data.scope] || data.scope}</span>
-          <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full">Reconocimiento: {levelLabels[data.clientRecognition] || data.clientRecognition}</span>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize cursor-help">{levelLabels[data.scope] || data.scope}</span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs text-xs">
+              {data.scope === "internacional" && "Variedad reconocida y cultivada en todo el mundo. Fácil de identificar para cualquier comensal."}
+              {data.scope === "nacional" && "Variedad reconocida principalmente en su país de origen. Apela al público local y conocedor."}
+              {data.scope === "local" && "Variedad de alcance regional. Ideal para diferenciación y storytelling de territorio."}
+              {data.scope === "diferencial" && "Variedad que destaca por su singularidad. Permite posicionar la carta como experta."}
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full cursor-help">Reconocimiento: {levelLabels[data.clientRecognition] || data.clientRecognition}</span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs text-xs">
+              {data.clientRecognition === "muy-alto" && "La mayoría de comensales la reconocen por nombre. Se vende sola."}
+              {data.clientRecognition === "alto" && "Reconocida por el público aficionado. No requiere explicación."}
+              {data.clientRecognition === "medio" && "Conocida por quien sabe de vino. Puede necesitar una breve descripción en carta."}
+              {data.clientRecognition === "bajo" && "Poco conocida fuera de su zona. Requiere storytelling o recomendación de sala."}
+              {data.clientRecognition === "nicho" && "Variedad de culto. Solo la reconocen expertos. Gran potencial diferenciador."}
+            </TooltipContent>
+          </Tooltip>
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
@@ -161,7 +184,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
             <h2 className="font-heading text-xl font-semibold mb-4">Regiones clave</h2>
             <div className="flex flex-wrap gap-2">
               {data.keyRegions.map((r) => (
-                <span key={r} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{r}</span>
+                <LinkedTag key={r} name={r} hint="region" />
               ))}
             </div>
           </ScrollReveal>
@@ -191,9 +214,26 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
         <ScrollReveal delay={0.25} className="mt-8">
           <h3 className="font-heading text-lg font-semibold mb-3">Rol habitual en carta</h3>
           <div className="flex flex-wrap gap-3">
-            {data.cartaRole.map((role) => (
-              <span key={role} className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize">{role}</span>
-            ))}
+            {data.cartaRole.map((role) => {
+              const tooltips: Record<string, string> = {
+                conocida: "Variedad que el comensal identifica sin ayuda. Aporta seguridad a la carta.",
+                diferencial: "Variedad que distingue tu carta de la competencia. Genera curiosidad.",
+                premium: "Variedad asociada a vinos de alta gama. Eleva la percepción de la carta.",
+                descubrimiento: "Variedad poco conocida que sorprende. Ideal para clientes aventureros.",
+                valor: "Variedad que ofrece buena relación calidad-precio. Ancla de la carta.",
+                identitaria: "Variedad que conecta con un territorio o tradición. Aporta autenticidad.",
+              };
+              return (
+                <Tooltip key={role}>
+                  <TooltipTrigger asChild>
+                    <span className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize cursor-help">{role}</span>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="max-w-xs text-xs">
+                    {tooltips[role] || role}
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
           </div>
         </ScrollReveal>
 
@@ -395,7 +435,7 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
             <h2 className="font-heading text-xl font-semibold mb-4">Regiones clave</h2>
             <div className="flex flex-wrap gap-2">
               {data.keyRegions.map((r) => (
-                <span key={r} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{r}</span>
+                <LinkedTag key={r} name={r} hint="region" />
               ))}
             </div>
           </div>

@@ -6,6 +6,7 @@ import {
   Users, TrendingUp, Target, Lightbulb, AlertTriangle, Utensils,
   MapPin, Grape, ShieldCheck
 } from "lucide-react";
+import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -186,7 +187,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map(g => (
-                  <span key={g} className="text-sm bg-wine/10 text-wine px-3 py-1 rounded-full">{g}</span>
+                  <LinkedTag key={g} name={g} hint="grape" />
                 ))}
               </div>
             </div>
@@ -199,7 +200,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.keyRegions.map(r => (
-                  <span key={r} className="text-sm bg-wine/10 text-wine px-3 py-1 rounded-full">{r}</span>
+                  <LinkedTag key={r} name={r} hint="region" />
                 ))}
               </div>
             </div>

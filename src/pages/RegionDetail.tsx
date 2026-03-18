@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, Grape } from "lucide-react";
+import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -173,7 +174,7 @@ const RegionDetail = () => {
               <h2 className="font-heading text-xl font-semibold mb-4">Uvas principales</h2>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map((g) => (
-                  <span key={g} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{g}</span>
+                  <LinkedTag key={g} name={g} hint="grape" />
                 ))}
               </div>
             </ScrollReveal>

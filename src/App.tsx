@@ -112,6 +112,8 @@ const StylesHub = lazy(() => import("./pages/StylesHub"));
 const StyleDetail = lazy(() => import("./pages/StyleDetail"));
 const PairingsHub = lazy(() => import("./pages/PairingsHub"));
 const PairingDetail = lazy(() => import("./pages/PairingDetail"));
+const GuiaServicio = lazy(() => import("./pages/GuiaServicio"));
+const GlosarioVino = lazy(() => import("./pages/GlosarioVino"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -168,6 +170,8 @@ const esRoutes = (
     <Route path="/biblioteca-vino/estilos/:style" element={<StyleDetail />} />
     <Route path="/biblioteca-vino/maridajes" element={<PairingsHub />} />
     <Route path="/biblioteca-vino/maridajes/:pairing" element={<PairingDetail />} />
+    <Route path="/biblioteca-vino/guia-servicio" element={<GuiaServicio />} />
+    <Route path="/biblioteca-vino/glosario" element={<GlosarioVino />} />
     <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
     <Route path="/casos-exito" element={<CasosExito />} />
     <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
