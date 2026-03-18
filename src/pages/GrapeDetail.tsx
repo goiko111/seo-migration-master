@@ -19,7 +19,6 @@ const levelLabels: Record<string, string> = {
   baja: "Baja", media: "Media", alta: "Alta", "muy-alta": "Muy alta",
   ligero: "Ligero", medio: "Medio", alto: "Alto", "muy-alto": "Muy alto",
   sutil: "Sutil",
-  "muy-alto": "Muy alto",
   fácil: "Fácil", difícil: "Difícil", "muy-difícil": "Muy difícil",
   internacional: "Internacional", nacional: "Nacional", local: "Local", diferencial: "Diferencial",
 };
