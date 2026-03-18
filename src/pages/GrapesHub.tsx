@@ -103,7 +103,7 @@ const GrapesHub = () => {
           >
             <Grape size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">
-              {grapeCatalog.length} variedades · 30 países
+              {grapeCatalog.length} variedades · {uniqueCountries} países
             </span>
           </motion.div>
 
