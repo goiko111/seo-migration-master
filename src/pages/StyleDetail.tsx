@@ -186,7 +186,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map(g => (
-                  <span key={g} className="text-sm bg-wine/10 text-wine px-3 py-1 rounded-full">{g}</span>
+                  <LinkedTag key={g} name={g} hint="grape" />
                 ))}
               </div>
             </div>
