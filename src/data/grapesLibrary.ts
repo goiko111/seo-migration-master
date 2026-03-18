@@ -3557,7 +3557,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Limón", "Mineral volcánico", "Sal marina", "Pedernal", "Cítricos", "Hierbas secas"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "premium", "descubrimiento"],
     cartaPerception: "Desconocida pero impresiona enormemente. La historia de Santorini vende sola.",
     whenItHelps: "Cuando quieres un blanco que no se parezca a nada. Es el más singular del mundo.",
