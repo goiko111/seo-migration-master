@@ -259,10 +259,10 @@ const GrapesHub = () => {
             </h2>
           </ScrollReveal>
 
-          {/* Group by color when no filters active */}
+          {/* Group by color when no filters active — exclude already-shown grapes */}
           {!hasActiveFilters ? (
-            (["tinta", "blanca", "rosada"] as GrapeColor[]).map((color) => {
-              const grapes = filtered.filter((g) => g.color === color);
+            (["tinta", "blanca"] as GrapeColor[]).map((color) => {
+              const grapes = filtered.filter((g) => g.color === color && !shownSlugs.has(g.slug));
               if (grapes.length === 0) return null;
               return (
                 <div key={color} className="mb-12 last:mb-0">
