@@ -151,7 +151,7 @@ const PairingDetail = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {entry.recommendedStyles.map(s => (
-                  <span key={s} className="text-sm bg-wine/10 text-wine px-3 py-1 rounded-full">{s}</span>
+                  <LinkedTag key={s} name={s} hint="style" />
                 ))}
               </div>
             </div>
