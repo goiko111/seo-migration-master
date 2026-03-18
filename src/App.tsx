@@ -103,6 +103,9 @@ const SobreWinerim = lazy(() => import("./pages/SobreWinerim"));
 const Comparativas = lazy(() => import("./pages/Comparativas"));
 const ComparativaDetalle = lazy(() => import("./pages/ComparativaDetalle"));
 const InteligenciaCompras = lazy(() => import("./pages/InteligenciaCompras"));
+const RegionsHub = lazy(() => import("./pages/RegionsHub"));
+const RegionCountry = lazy(() => import("./pages/RegionCountry"));
+const RegionDetail = lazy(() => import("./pages/RegionDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -150,6 +153,9 @@ const esRoutes = (
     <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
     <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
     <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
+    <Route path="/biblioteca-vino/regiones" element={<RegionsHub />} />
+    <Route path="/biblioteca-vino/regiones/:country" element={<RegionCountry />} />
+    <Route path="/biblioteca-vino/regiones/:country/:region" element={<RegionDetail />} />
     <Route path="/biblioteca-vino/:slug" element={<BibliotecaDetalle />} />
     <Route path="/casos-exito" element={<CasosExito />} />
     <Route path="/ejemplos-carta-vinos" element={<EjemplosCarta />} />
