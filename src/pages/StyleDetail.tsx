@@ -199,7 +199,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.keyRegions.map(r => (
-                  <span key={r} className="text-sm bg-wine/10 text-wine px-3 py-1 rounded-full">{r}</span>
+                  <LinkedTag key={r} name={r} hint="region" />
                 ))}
               </div>
             </div>
