@@ -102,6 +102,25 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
+          <ScrollReveal>
+            <Link
+              to="/biblioteca-vino/estilos"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Palette size={20} className="text-wine" />
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold group-hover:text-wine transition-colors">
+                    Estilos de vino
+                  </h2>
+                </div>
+                <ArrowRight size={18} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="text-muted-foreground max-w-2xl">
+                8 grandes familias, más de 50 subtipos. Elaboración, servicio, maridajes y criterio comercial para cada estilo.
+              </p>
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
 
