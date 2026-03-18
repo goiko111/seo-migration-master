@@ -6,6 +6,7 @@ import {
   AlertTriangle, TrendingUp, ShieldCheck, MapPin, Grape,
   MessageSquare, Palette
 } from "lucide-react";
+import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
