@@ -162,7 +162,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
             <h2 className="font-heading text-xl font-semibold mb-4">Regiones clave</h2>
             <div className="flex flex-wrap gap-2">
               {data.keyRegions.map((r) => (
-                <span key={r} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{r}</span>
+                <LinkedTag key={r} name={r} hint="region" />
               ))}
             </div>
           </ScrollReveal>
