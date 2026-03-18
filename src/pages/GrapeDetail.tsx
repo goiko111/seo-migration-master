@@ -214,9 +214,26 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
         <ScrollReveal delay={0.25} className="mt-8">
           <h3 className="font-heading text-lg font-semibold mb-3">Rol habitual en carta</h3>
           <div className="flex flex-wrap gap-3">
-            {data.cartaRole.map((role) => (
-              <span key={role} className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize">{role}</span>
-            ))}
+            {data.cartaRole.map((role) => {
+              const tooltips: Record<string, string> = {
+                conocida: "Variedad que el comensal identifica sin ayuda. Aporta seguridad a la carta.",
+                diferencial: "Variedad que distingue tu carta de la competencia. Genera curiosidad.",
+                premium: "Variedad asociada a vinos de alta gama. Eleva la percepción de la carta.",
+                descubrimiento: "Variedad poco conocida que sorprende. Ideal para clientes aventureros.",
+                valor: "Variedad que ofrece buena relación calidad-precio. Ancla de la carta.",
+                identitaria: "Variedad que conecta con un territorio o tradición. Aporta autenticidad.",
+              };
+              return (
+                <Tooltip key={role}>
+                  <TooltipTrigger asChild>
+                    <span className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize cursor-help">{role}</span>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="max-w-xs text-xs">
+                    {tooltips[role] || role}
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
           </div>
         </ScrollReveal>
 
