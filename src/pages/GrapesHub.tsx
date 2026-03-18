@@ -61,9 +61,18 @@ const GrapesHub = () => {
 
   const tintas = grapeCatalog.filter((g) => g.color === "tinta").length;
   const blancas = grapeCatalog.filter((g) => g.color === "blanca").length;
+  const uniqueCountries = [...new Set(grapeCatalog.flatMap((g) => g.countries))].length;
 
   const featured = grapeEntries.filter((g) => g.clientRecognition === "muy-alto" || g.clientRecognition === "alto");
   const differential = grapeEntries.filter((g) => g.scope === "diferencial" || g.cartaRole.includes("descubrimiento"));
+
+  // Slugs already shown in featured/differential to avoid duplicates
+  const shownSlugs = useMemo(() => {
+    const slugs = new Set<string>();
+    featured.forEach((g) => slugs.add(g.slug));
+    differential.forEach((g) => slugs.add(g.slug));
+    return slugs;
+  }, [featured, differential]);
 
   const hasActiveFilters = colorFilter !== "all" || !!countryFilter || !!search.trim();
 
