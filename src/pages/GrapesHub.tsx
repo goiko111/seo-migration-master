@@ -30,7 +30,6 @@ const colorFilters: { key: GrapeColor | "all"; label: string }[] = [
   { key: "all", label: "Todas" },
   { key: "tinta", label: "🍷 Tintas" },
   { key: "blanca", label: "🥂 Blancas" },
-  { key: "rosada", label: "🌸 Rosadas" },
 ];
 
 const countryOptions = [...new Set(grapeCatalog.flatMap((g) => g.countries))].sort();
