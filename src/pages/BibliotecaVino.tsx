@@ -5,16 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
-import { wineLibrary, categoryMeta, type WineEntry } from "@/data/wineLibrary";
-
-const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
-  uva: Wine,
-  region: MapPin,
-  estilo: Palette,
-  maridaje: Utensils,
-};
-
-const categoryOrder: WineEntry["category"][] = ["uva", "region", "estilo", "maridaje"];
 
 const BibliotecaVino = () => {
   return (
@@ -61,9 +51,9 @@ const BibliotecaVino = () => {
         </div>
       </section>
 
-      {/* REGIONS HUB HIGHLIGHT */}
+      {/* HUB CARDS */}
       <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto space-y-6">
           <ScrollReveal>
             <Link
               to="/biblioteca-vino/regiones"
@@ -83,10 +73,11 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
+
           <ScrollReveal>
             <Link
               to="/biblioteca-vino/uvas"
-              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -102,10 +93,11 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
+
           <ScrollReveal>
             <Link
               to="/biblioteca-vino/estilos"
-              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -121,10 +113,11 @@ const BibliotecaVino = () => {
               </p>
             </Link>
           </ScrollReveal>
+
           <ScrollReveal>
             <Link
               to="/biblioteca-vino/maridajes"
-              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300 mt-6"
+              className="group block bg-gradient-card rounded-xl border border-border p-8 hover:border-wine/30 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -142,52 +135,6 @@ const BibliotecaVino = () => {
           </ScrollReveal>
         </div>
       </section>
-
-      {/* CATEGORIES */}
-      {categoryOrder.map((cat) => {
-        const meta = categoryMeta[cat];
-        const Icon = categoryIcons[cat];
-        const entries = wineLibrary.filter((e) => e.category === cat);
-
-        return (
-          <section key={cat} className={`section-padding ${categoryOrder.indexOf(cat) % 2 === 1 ? "bg-gradient-dark" : ""}`}>
-            <div className="max-w-7xl mx-auto">
-              <ScrollReveal className="mb-10">
-                <div className="flex items-center gap-3 mb-2">
-                  <Icon size={20} className="text-wine" />
-                  <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{meta.title}</p>
-                </div>
-                <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-                  {meta.plural}
-                </h2>
-                <p className="text-muted-foreground max-w-2xl">{meta.description}</p>
-              </ScrollReveal>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {entries.map((entry, i) => (
-                  <ScrollReveal key={entry.slug} delay={i * 0.06}>
-                    <Link
-                      to={`/biblioteca-vino/${entry.slug}`}
-                      className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-heading text-lg font-semibold group-hover:text-wine transition-colors">{entry.name}</h3>
-                        <ArrowRight size={16} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{entry.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {entry.aromas.slice(0, 3).map((a) => (
-                          <span key={a} className="text-xs bg-wine/10 text-wine px-2 py-1 rounded-md">{a}</span>
-                        ))}
-                      </div>
-                    </Link>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })}
 
       {/* CTA */}
       <section className="section-padding">
