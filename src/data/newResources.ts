@@ -1345,6 +1345,121 @@ export const newResources: ResourcePageData[] = [
       { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
     ],
   },
+
+  // 14. Revisión mensual de márgenes
+  {
+    slug: "revision-mensual-margenes",
+    formType: "revision-mensual-margenes",
+    downloadFile: "/recursos/winerim_revision_mensual_margenes_2026.xlsx",
+    metaTitle: "Revisión Mensual de Márgenes para Restaurantes | Plantilla Gratis | Winerim",
+    metaDescription: "Descarga la plantilla para revisar cada mes el margen de tu carta de vinos. Detecta erosión de rentabilidad, compara meses y define acciones de pricing y compra.",
+    badgeIcon: Calendar,
+    badgeLabel: "Revisión periódica",
+    heroTitle: "Revisión mensual de márgenes",
+    heroDescription: "Una plantilla práctica para revisar cada mes cómo evoluciona el margen real de tu carta, detectar referencias problemáticas y tomar decisiones antes de que la rentabilidad se deteriore.",
+    heroStats: [
+      { icon: TrendingUp, label: "Seguimiento mensual" },
+      { icon: Download, label: "Descarga inmediata" },
+    ],
+    problemTitle: "¿Por qué revisar márgenes cada mes?",
+    problemDescription: "Muchos restaurantes detectan tarde que están perdiendo margen por subida de costes, mala calibración de precios o referencias que ya no defienden bien su rentabilidad. Esta plantilla ayuda a revisarlo cada mes con criterio.",
+    problemPoints: [
+      { icon: AlertTriangle, text: "Subidas de coste que erosionan el margen sin que se perciban hasta final de trimestre" },
+      { icon: DollarSign, text: "Precios de carta que no se han actualizado tras la última negociación con distribuidores" },
+      { icon: RotateCcw, text: "Referencias con rentabilidad decreciente que permanecen en carta por inercia" },
+      { icon: Layers, text: "Falta de un proceso estructurado para comparar evolución mes a mes" },
+    ],
+    contentTitle: "Qué incluye la plantilla",
+    contentDescription: "Revisar márgenes una vez no basta. Esta plantilla te ayuda a convertir la revisión mensual en una rutina útil para pricing, compras, copeo y rentabilidad real.",
+    sections: [
+      {
+        icon: BarChart3,
+        title: "Resumen mensual",
+        points: [
+          "Vista consolidada del margen medio de la carta vs. mes anterior",
+          "Número de referencias con deterioro de margen",
+          "Impacto económico estimado de las desviaciones detectadas",
+          "Indicadores clave: margen medio, coste medio, PVP medio",
+        ],
+      },
+      {
+        icon: FileText,
+        title: "Detalle por referencia",
+        points: [
+          "Comparación referencia a referencia: coste actual vs. anterior",
+          "Variación de margen bruto y porcentual",
+          "Detección automática de referencias con deterioro significativo",
+          "Espacio para anotar acciones por referencia",
+        ],
+      },
+      {
+        icon: Wine,
+        title: "Análisis por tipo de vino",
+        points: [
+          "Margen medio por categoría: blancos, tintos, espumosos, rosados",
+          "Detección de tipos que están por debajo del objetivo",
+          "Comparativa mensual por categoría",
+          "Identificación de oportunidades de mejora por tipo",
+        ],
+      },
+      {
+        icon: DollarSign,
+        title: "Análisis por tramo de precio",
+        points: [
+          "Margen por franja: entrada, media, premium, alta gama",
+          "Distribución del volumen de venta por tramo",
+          "Detección de franjas con margen insuficiente",
+          "Recomendaciones de reequilibrio de carta",
+        ],
+      },
+      {
+        icon: ClipboardList,
+        title: "Plan de acción mensual",
+        points: [
+          "Tabla de decisiones: qué subir de precio, qué renegociar, qué retirar",
+          "Priorización de acciones por impacto económico",
+          "Columna de responsable y plazo",
+          "Seguimiento del plan del mes anterior",
+        ],
+      },
+    ],
+    audienceTitle: "Para quién es este recurso",
+    audienceItems: [
+      "Restaurantes con carta viva que cambian o rotan referencias con frecuencia",
+      "Negocios que revisan precios periódicamente y quieren un proceso estructurado",
+      "Equipos de compras o dirección que necesitan control financiero de la carta",
+      "Grupos de restauración que requieren seguimiento periódico de márgenes por local",
+    ],
+    whenToUseTitle: "Cuándo usarlo",
+    whenToUseItems: [
+      "Cada mes como parte del cierre o revisión operativa",
+      "Después de recibir nuevas tarifas de distribuidores",
+      "Cuando se detecta un descenso en la rentabilidad general",
+      "Antes de decidir cambios en la carta o en el pricing",
+      "Como base para reuniones mensuales de dirección o compras",
+    ],
+    benefits: [
+      { icon: TrendingUp, title: "Detección temprana", desc: "Identifica erosión de margen antes de que impacte en el resultado del trimestre." },
+      { icon: DollarSign, title: "Pricing con criterio", desc: "Datos reales para decidir qué precios ajustar, qué renegociar y qué retirar." },
+      { icon: BarChart3, title: "Rutina de control", desc: "Convierte la revisión de márgenes en un proceso mensual con datos comparables." },
+    ],
+    faqs: [
+      { q: "¿En qué se diferencia de la plantilla de Análisis de márgenes?", a: "La plantilla de Análisis de márgenes es un diagnóstico puntual para entender la rentabilidad de cada referencia. Esta plantilla está diseñada para seguimiento periódico: compara mes a mes, detecta tendencias y cierra un plan de acción recurrente." },
+      { q: "¿Cuánto tiempo lleva completarla cada mes?", a: "Con los datos de coste y venta actualizados, unos 30-45 minutos. Si ya usas un sistema como Winerim, los datos se pueden extraer automáticamente." },
+      { q: "¿Sirve para grupos con varios locales?", a: "Sí. Puedes replicar la plantilla por local y consolidar los resultados. La plantilla de Control para grupos complementa esta revisión a nivel corporativo." },
+      { q: "¿Qué hago si detecto varias referencias con margen deteriorado?", a: "La plantilla incluye un plan de acción con campos para priorizar: subir precio, renegociar coste, sustituir referencia o retirar. El objetivo es que cada revisión cierre con decisiones concretas." },
+    ],
+    ctaFinalTitle: "¿Quieres que la revisión de márgenes sea automática?",
+    ctaFinalDescription: "Todo lo que ofrece esta plantilla — comparación mensual, detección de erosión, plan de acción — Winerim lo automatiza con datos en tiempo real.",
+    internalLinks: [
+      { to: "/recursos/plantilla-analisis-margenes", label: "Análisis de márgenes: diagnóstico puntual", type: "resource" },
+      { to: "/recursos/checklist-carta-de-vinos-rentable", label: "Checklist de carta rentable", type: "resource" },
+      { to: "/recursos/plantilla-revision-mensual-carta", label: "Revisión mensual de carta", type: "resource" },
+      { to: "/producto/winerim-core", label: "Winerim Core: análisis de márgenes automatizado", type: "solution" },
+      { to: "/producto/winerim-supply", label: "Winerim Supply: inteligencia de compras", type: "solution" },
+      { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
+    ],
+  },
 ];
 
 export function getResourceBySlug(slug: string): ResourcePageData | undefined {
