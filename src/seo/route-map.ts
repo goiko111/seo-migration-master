@@ -206,6 +206,7 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/recursos/scorecard-rendimiento-carta", canonical: `${BASE}/recursos/scorecard-rendimiento-carta`, lang: "es", type: "resource", intent: "scorecard rendimiento carta vinos mensual" },
   { path: "/recursos/checklist-carta-que-vende", canonical: `${BASE}/recursos/checklist-carta-que-vende`, lang: "es", type: "resource", intent: "checklist carta vinos que vende conversión" },
   { path: "/recursos/plantilla-equilibrio-carta", canonical: `${BASE}/recursos/plantilla-equilibrio-carta`, lang: "es", type: "resource", intent: "plantilla equilibrio carta vinos estilos precios" },
+  { path: "/recursos/revision-mensual-margenes", canonical: `${BASE}/recursos/revision-mensual-margenes`, lang: "es", type: "resource", intent: "revisión mensual márgenes carta vinos restaurante" },
 
   // ─────────────────────────────────────────────
   // SOLUTIONS (ES)

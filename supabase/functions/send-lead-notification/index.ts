@@ -64,6 +64,11 @@ const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPa
     resource: "Plantilla de Control para Grupos de Restauración",
     downloadPath: "/recursos/plantilla-control-grupo-restauracion",
   },
+  "revision-mensual-margenes": {
+    label: "Descarga: Revisión mensual de márgenes",
+    resource: "Plantilla de Revisión Mensual de Márgenes",
+    downloadPath: "/recursos/revision-mensual-margenes",
+  },
   "plantilla-carta-vinos": {
     label: "Descarga: Plantilla de carta de vinos",
     resource: "Plantilla Profesional de Carta de Vinos",

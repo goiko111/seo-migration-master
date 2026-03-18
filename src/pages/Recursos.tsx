@@ -108,6 +108,7 @@ const resources: ResourceItem[] = [
   { to: "/recursos/checklist-carta-que-vende", icon: TrendingUp, title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos.", type: "checklist", tags: ["rentabilidad", "inicio"] },
   { to: "/recursos/plantilla-equilibrio-carta", icon: Layers, title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías.", type: "plantilla", tags: ["estructura", "intermedio"] },
   { to: "/recursos/plantilla-revision-mensual-carta", icon: FileText, title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes con datos reales.", type: "revision", tags: ["analítica", "avanzado"] },
+  { to: "/recursos/revision-mensual-margenes", icon: DollarSign, title: "Revisión mensual de márgenes", desc: "Una plantilla para revisar cada mes si tu carta está perdiendo margen y decidir qué corregir antes de que el problema crezca.", type: "revision", tags: ["pricing", "rentabilidad", "avanzado"] },
   { to: "/recursos/plantilla-control-grupo-restauracion", icon: Building2, title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking entre locales.", type: "control", tags: ["grupo", "avanzado"] },
 ];
 
