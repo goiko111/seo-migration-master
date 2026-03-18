@@ -3974,7 +3974,8 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
   { slug: "saperavi", name: "Saperavi", synonyms: [], color: "tinta", countries: ["Georgia", "Moldavia"], keyRegions: ["Kakheti", "Kartli"], tastingNotes: "Teinturier georgiana. 8.000 años de historia." },
   { slug: "xinomavro", name: "Xinomavro", synonyms: [], color: "tinta", countries: ["Grecia"], keyRegions: ["Naoussa", "Amyntaio"], tastingNotes: "La 'Nebbiolo griega'. Alta acidez, taninos firmes." },
   { slug: "pinot-meunier", name: "Pinot Meunier", synonyms: ["Meunier"], color: "tinta", countries: ["Francia"], keyRegions: ["Champagne"], tastingNotes: "La tercera uva del Champagne. Frutal, suave." },
-
+  { slug: "prieto-picudo", name: "Prieto Picudo", synonyms: [], color: "tinta", countries: ["España"], keyRegions: ["Tierra de León"], tastingNotes: "Autóctona leonesa. Rosados de madreo excepcionales." },
+  { slug: "listan-negro", name: "Listán Negro", synonyms: ["Almuñeco"], color: "tinta", countries: ["España"], keyRegions: ["Tenerife", "Lanzarote", "La Palma"], tastingNotes: "Volcánica canaria. Fresca, mineral, tendencia." },
   // BLANCAS (45)
   { slug: "albarino", name: "Albariño", synonyms: ["Alvarinho"], color: "blanca", countries: ["España", "Portugal"], keyRegions: ["Rías Baixas", "Vinho Verde"], tastingNotes: "Melocotón, cítricos, salina. Perfecta con marisco." },
   { slug: "verdejo", name: "Verdejo", synonyms: [], color: "blanca", countries: ["España"], keyRegions: ["Rueda", "Cigales"], tastingNotes: "Herbácea, cítrica, almendra. Estrella de Castilla." },
