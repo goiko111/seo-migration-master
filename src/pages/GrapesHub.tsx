@@ -20,7 +20,7 @@ import {
 } from "@/data/grapesLibrary";
 
 const faqs = [
-  { q: "¿Cuántas variedades de uva cubre Winerim?", a: "El catálogo de Winerim incluye 87 variedades de uva de 30 países: 41 tintas, 45 blancas y 1 rosada, con información sobre sinonimias, regiones clave y notas de cata." },
+  { q: "¿Cuántas variedades de uva cubre Winerim?", a: "El catálogo de Winerim incluye más de 85 variedades de uva de más de 30 países, con información sobre sinonimias, regiones clave y notas de cata." },
   { q: "¿Por qué importa conocer las uvas para gestionar una carta?", a: "La variedad de uva es uno de los principales ejes de decisión del comensal. Entender qué comunica cada uva, cómo se percibe y con qué se marida permite diseñar cartas más efectivas y vender mejor." },
   { q: "¿Qué es una variedad internacional vs. una local?", a: "Las variedades internacionales (Cabernet Sauvignon, Chardonnay, Sauvignon Blanc) se cultivan globalmente y tienen alto reconocimiento. Las locales (Mencía, Godello, Nerello Mascalese) son exclusivas de zonas concretas y aportan diferenciación." },
   { q: "¿Qué son los sinónimos de una uva?", a: "Muchas variedades reciben diferentes nombres según el país o región. Tempranillo es Tinto Fino en Ribera del Duero, Cencibel en La Mancha y Tinta Roriz en Portugal. Son la misma uva." },
@@ -30,7 +30,6 @@ const colorFilters: { key: GrapeColor | "all"; label: string }[] = [
   { key: "all", label: "Todas" },
   { key: "tinta", label: "🍷 Tintas" },
   { key: "blanca", label: "🥂 Blancas" },
-  { key: "rosada", label: "🌸 Rosadas" },
 ];
 
 const countryOptions = [...new Set(grapeCatalog.flatMap((g) => g.countries))].sort();
@@ -62,9 +61,18 @@ const GrapesHub = () => {
 
   const tintas = grapeCatalog.filter((g) => g.color === "tinta").length;
   const blancas = grapeCatalog.filter((g) => g.color === "blanca").length;
+  const uniqueCountries = [...new Set(grapeCatalog.flatMap((g) => g.countries))].length;
 
   const featured = grapeEntries.filter((g) => g.clientRecognition === "muy-alto" || g.clientRecognition === "alto");
   const differential = grapeEntries.filter((g) => g.scope === "diferencial" || g.cartaRole.includes("descubrimiento"));
+
+  // Slugs already shown in featured/differential to avoid duplicates
+  const shownSlugs = useMemo(() => {
+    const slugs = new Set<string>();
+    featured.forEach((g) => slugs.add(g.slug));
+    differential.forEach((g) => slugs.add(g.slug));
+    return slugs;
+  }, [featured, differential]);
 
   const hasActiveFilters = colorFilter !== "all" || !!countryFilter || !!search.trim();
 
@@ -95,7 +103,7 @@ const GrapesHub = () => {
           >
             <Grape size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">
-              {grapeCatalog.length} variedades · 30 países
+              {grapeCatalog.length} variedades · {uniqueCountries} países
             </span>
           </motion.div>
 
@@ -128,7 +136,7 @@ const GrapesHub = () => {
               { label: "Variedades", value: String(grapeCatalog.length) },
               { label: "Tintas", value: String(tintas) },
               { label: "Blancas", value: String(blancas) },
-              { label: "Países", value: "30" },
+              { label: "Países", value: String(uniqueCountries) },
             ].map((stat) => (
               <div key={stat.label} className="bg-gradient-card rounded-xl border border-border p-4 text-center">
                 <p className="font-heading text-2xl font-bold text-wine">{stat.value}</p>
@@ -251,10 +259,10 @@ const GrapesHub = () => {
             </h2>
           </ScrollReveal>
 
-          {/* Group by color when no filters active */}
+          {/* Group by color when no filters active — exclude already-shown grapes */}
           {!hasActiveFilters ? (
-            (["tinta", "blanca", "rosada"] as GrapeColor[]).map((color) => {
-              const grapes = filtered.filter((g) => g.color === color);
+            (["tinta", "blanca"] as GrapeColor[]).map((color) => {
+              const grapes = filtered.filter((g) => g.color === color && !shownSlugs.has(g.slug));
               if (grapes.length === 0) return null;
               return (
                 <div key={color} className="mb-12 last:mb-0">
