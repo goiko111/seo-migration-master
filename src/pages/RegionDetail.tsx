@@ -174,7 +174,7 @@ const RegionDetail = () => {
               <h2 className="font-heading text-xl font-semibold mb-4">Uvas principales</h2>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map((g) => (
-                  <span key={g} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{g}</span>
+                  <LinkedTag key={g} name={g} hint="grape" />
                 ))}
               </div>
             </ScrollReveal>
