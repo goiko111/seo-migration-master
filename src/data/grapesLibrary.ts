@@ -3725,7 +3725,7 @@ export const grapeEntries: GrapeEntry[] = [
     aromas: ["Rosa", "Pétalos", "Fresa", "Frambuesa", "Lichi", "Geranio"],
     clientRecognition: "bajo",
     commercialDifficulty: "difícil",
-    scope: "regional",
+    scope: "local",
     cartaRole: ["diferencial", "descubrimiento"],
     cartaPerception: "Exótica y fascinante. Los dulces de Moscato Rosa del Alto Adige son joyas de coleccionista.",
     whenItHelps: "Como dulce de postre ultra-aromático o como rosado de aperitivo único.",
