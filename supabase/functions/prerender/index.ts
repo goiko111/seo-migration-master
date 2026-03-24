@@ -988,6 +988,409 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       ],
     },
   },
+  '/producto/winerim-core': {
+    meta: { title: 'Winerim Core — Carta Digital Inteligente | Winerim', description: 'Winerim Core es el módulo central: carta digital interactiva, recomendador IA, fichas de vino, maridajes automáticos y experiencia de comensal personalizada.', canonical: `${SITE}/producto/winerim-core`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim Core — Carta digital inteligente para restaurantes',
+      subtitle: 'El módulo central de Winerim: transforma tu carta de vinos en una experiencia interactiva que vende.',
+      sections: [
+        { heading: 'Carta digital interactiva', content: 'Carta accesible por QR, tablet o web con fichas completas, imágenes, notas de cata y filtros inteligentes por estilo, región y precio.' },
+        { heading: 'Recomendador IA integrado', content: 'Motor de recomendación que sugiere vinos según plato, perfil del comensal y stock disponible. Aumenta el ticket medio de forma natural.' },
+        { heading: 'Maridajes automáticos', content: 'Cada plato de tu carta recibe sugerencias de maridaje generadas por IA, actualizadas automáticamente al cambiar el menú.' },
+      ],
+      faqs: [{ q: '¿Qué incluye Winerim Core?', a: 'Carta digital interactiva, recomendador IA, fichas de vino completas, maridajes automáticos y panel de gestión básico.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Producto', url: `${SITE}/software-carta-de-vinos` }, { name: 'Winerim Core', url: `${SITE}/producto/winerim-core` }],
+      internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/producto/winerim-supply': {
+    meta: { title: 'Winerim Supply — Gestión de Compras y Bodega | Winerim', description: 'Winerim Supply optimiza compras, stock y bodega con datos de rotación, alertas de reposición y análisis de margen por referencia.', canonical: `${SITE}/producto/winerim-supply`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim Supply — Gestión inteligente de compras y bodega',
+      subtitle: 'Controla tu stock, optimiza las compras y maximiza el margen de cada referencia con datos reales.',
+      sections: [
+        { heading: 'Control de stock inteligente', content: 'Inventario en tiempo real con alertas de reposición, detección de vinos muertos y análisis de rotación por referencia.' },
+        { heading: 'Inteligencia de compras', content: 'Datos de rotación, margen y estacionalidad para decidir qué vinos comprar, cuánto y cuándo. Reduce capital inmovilizado.' },
+        { heading: 'Análisis de margen', content: 'Margen real por referencia considerando coste de compra, precio de venta, merma y coste de bodega.' },
+      ],
+      faqs: [{ q: '¿Winerim Supply sustituye mi ERP?', a: 'No. Se integra con tu sistema actual para enriquecer los datos de gestión de vinos con inteligencia de negocio.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Producto', url: `${SITE}/software-carta-de-vinos` }, { name: 'Winerim Supply', url: `${SITE}/producto/winerim-supply` }],
+      internalLinks: [{ label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/biblioteca-vino': {
+    meta: { title: 'Biblioteca de Vino — Uvas, Regiones, Estilos y Maridajes | Winerim', description: 'Explora la biblioteca de vino de Winerim: variedades de uva, regiones vinícolas, estilos de vino, maridajes y glosario para profesionales de restauración.', canonical: `${SITE}/biblioteca-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Biblioteca de vino para profesionales de restauración',
+      subtitle: 'Conocimiento vinícola estructurado para equipos de sala, sommeliers y responsables de compras.',
+      sections: [
+        { heading: 'Variedades de uva', content: 'Fichas completas de las principales variedades: perfil aromático, regiones de origen, maridajes y potencial de guarda.' },
+        { heading: 'Regiones vinícolas', content: 'Guía por países y denominaciones de origen: clima, suelos, variedades principales y estilos característicos.' },
+        { heading: 'Estilos de vino', content: 'Clasificación por estilos (crianza, joven, espumoso, dulce) con perfiles de sabor y sugerencias de servicio.' },
+        { heading: 'Maridajes', content: 'Base de datos de maridajes por tipo de cocina, ingrediente y técnica culinaria.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Biblioteca de vino', url: `${SITE}/biblioteca-vino` }],
+      internalLinks: [{ label: 'Uvas', url: '/biblioteca-vino/uvas' }, { label: 'Regiones', url: '/biblioteca-vino/regiones' }, { label: 'Estilos', url: '/biblioteca-vino/estilos' }, { label: 'Maridajes', url: '/biblioteca-vino/maridajes' }, { label: 'Glosario', url: '/biblioteca-vino/glosario' }],
+    },
+  },
+  '/calculadora-margen-vino': {
+    meta: { title: 'Calculadora de Margen de Vino para Restaurantes | Winerim', description: 'Calcula el margen real de cada vino de tu carta: coste, precio de venta, merma y rentabilidad. Herramienta gratuita para restauradores.', canonical: `${SITE}/calculadora-margen-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de margen de vino para restaurantes',
+      subtitle: 'Calcula el margen real de cada referencia de tu carta en segundos.',
+      sections: [
+        { heading: 'Cómo funciona', content: 'Introduce el coste de compra y precio de venta. La calculadora muestra el margen bruto, porcentaje y comparativa con benchmarks del sector.' },
+        { heading: 'Por qué importa el margen real', content: 'Muchos restaurantes fijan precios por intuición. Conocer el margen real permite optimizar la carta para maximizar ingresos sin sacrificar calidad.' },
+      ],
+      faqs: [{ q: '¿Es gratuita?', a: 'Sí. La calculadora de margen es 100% gratuita y no requiere registro.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de margen', url: `${SITE}/calculadora-margen-vino` }],
+      internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Calculadora precio por copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/inteligencia-artificial-restaurantes': {
+    meta: { title: 'Inteligencia Artificial para Restaurantes | Winerim', description: 'Cómo la IA transforma la gestión de restaurantes: cartas inteligentes, recomendaciones personalizadas, optimización de precios y analítica predictiva.', canonical: `${SITE}/inteligencia-artificial-restaurantes`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Inteligencia artificial para restaurantes',
+      subtitle: 'Cómo la IA está transformando la gestión, la venta y la experiencia del comensal en restauración.',
+      sections: [
+        { heading: 'IA aplicada a cartas de vinos', content: 'La IA permite crear cartas dinámicas que se adaptan al comensal, optimizan precios según datos de venta y detectan oportunidades de mejora automáticamente.' },
+        { heading: 'Recomendaciones personalizadas', content: 'Motores de recomendación que sugieren vinos según el plato, perfil del comensal y contexto (hora, día, temporada).' },
+        { heading: 'Analítica predictiva', content: 'Modelos que anticipan tendencias de demanda, estacionalidad y rotación para optimizar compras y reducir stock muerto.' },
+      ],
+      faqs: [{ q: '¿Qué restaurantes pueden usar IA?', a: 'Cualquier restaurante con carta de vinos puede beneficiarse. Winerim es apto desde restaurantes con 20 referencias hasta grupos con miles.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'IA para restaurantes', url: `${SITE}/inteligencia-artificial-restaurantes` }],
+      internalLinks: [{ label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/precio-vino-restaurante': {
+    meta: { title: 'Precio del Vino en Restaurantes: Guía de Pricing | Winerim', description: 'Guía completa de pricing de vino en restaurantes: cómo fijar precios, márgenes de referencia, estrategias por copa y botella, y errores comunes.', canonical: `${SITE}/precio-vino-restaurante`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Precio del vino en restaurantes: guía de pricing',
+      subtitle: 'Estrategias de fijación de precios de vino basadas en datos, márgenes y percepción de valor.',
+      sections: [
+        { heading: 'Factores que determinan el precio', content: 'Coste de compra, posicionamiento del restaurante, competencia, elasticidad de demanda y margen objetivo.' },
+        { heading: 'Márgenes de referencia del sector', content: 'El margen bruto medio en vino en restauración oscila entre el 65% y el 75%. Los vinos por copa permiten márgenes superiores al 80%.' },
+        { heading: 'Errores comunes de pricing', content: 'Aplicar multiplicador fijo a todas las referencias, no diferenciar entre copa y botella, no revisar precios periódicamente.' },
+      ],
+      faqs: [{ q: '¿Cuál es el margen ideal en vino?', a: 'Depende del tipo de restaurante. El rango habitual es 65%-75% en botella y 75%-85% en copa.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Precio vino restaurante', url: `${SITE}/precio-vino-restaurante` }],
+      internalLinks: [{ label: 'Calculadora de margen', url: '/calculadora-margen-vino' }, { label: 'Calculadora precio por copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/carta-papel-vs-digital': {
+    meta: { title: 'Carta de Vinos en Papel vs Digital | Winerim', description: 'Comparativa entre carta de vinos en papel y digital: ventajas, inconvenientes, costes y cuándo elegir cada formato.', canonical: `${SITE}/carta-papel-vs-digital`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Carta de vinos en papel vs digital',
+      subtitle: 'Análisis objetivo de ventajas e inconvenientes de cada formato para tu restaurante.',
+      sections: [
+        { heading: 'Ventajas de la carta digital', content: 'Actualización instantánea, cero costes de impresión, datos de interacción, recomendaciones inteligentes y maridajes automáticos.' },
+        { heading: 'Cuándo tiene sentido el papel', content: 'En restaurantes de alta gama donde la carta física forma parte de la experiencia de marca y el nivel de servicio.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Carta papel vs digital', url: `${SITE}/carta-papel-vs-digital` }],
+      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Ejemplos carta', url: '/ejemplos-carta-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/ejemplos-carta-vinos': {
+    meta: { title: 'Ejemplos de Cartas de Vinos para Restaurantes | Winerim', description: 'Ejemplos reales de cartas de vinos bien diseñadas: estructura, categorías, precios y presentación para diferentes tipos de restaurante.', canonical: `${SITE}/ejemplos-carta-vinos`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Ejemplos de cartas de vinos para restaurantes',
+      subtitle: 'Inspiración y buenas prácticas para diseñar tu carta de vinos.',
+      sections: [
+        { heading: 'Carta para restaurante casual', content: 'Estructura sencilla con 30-50 referencias, organización por estilo y rango de precio accesible.' },
+        { heading: 'Carta para gastronómico', content: 'Carta amplia con 100-300+ referencias, organización por región/denominación y selección premium.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Ejemplos carta vinos', url: `${SITE}/ejemplos-carta-vinos` }],
+      internalLinks: [{ label: 'Cómo hacer una carta', url: '/como-hacer-una-carta-de-vinos' }, { label: 'Plantilla carta', url: '/recursos/plantilla-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/problemas/carta-de-vinos-no-vende': {
+    meta: { title: 'Mi Carta de Vinos No Vende — Diagnóstico y Solución | Winerim', description: 'Tu carta de vinos no genera ventas? Diagnóstico de los problemas más comunes y soluciones prácticas para convertir tu carta en herramienta de venta.', canonical: `${SITE}/problemas/carta-de-vinos-no-vende`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Mi carta de vinos no vende — diagnóstico y solución',
+      subtitle: 'Identifica por qué tu carta no genera ventas y cómo solucionarlo.',
+      sections: [
+        { heading: 'Síntomas de una carta que no vende', content: 'Bajo ticket medio en vino, comensales que no piden vino, vinos caros que nunca se venden y equipo de sala que no recomienda.' },
+        { heading: 'Causas habituales', content: 'Carta demasiado larga, mal organizada, sin descripciones atractivas, precios desalineados y falta de recomendaciones activas.' },
+        { heading: 'Soluciones concretas', content: 'Reducir referencias, mejorar descripciones, activar recomendaciones inteligentes, optimizar precios y formar al equipo.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Problemas', url: `${SITE}/problemas` }, { name: 'Carta no vende', url: `${SITE}/problemas/carta-de-vinos-no-vende` }],
+      internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Cómo vender más vino', url: '/como-vender-mas-vino-en-un-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/implantacion': {
+    meta: { title: 'Implantación de Winerim — Cómo Empezar | Winerim', description: 'Proceso de implantación de Winerim en tu restaurante: onboarding, digitalización de carta, formación del equipo y puesta en marcha.', canonical: `${SITE}/implantacion`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Cómo implantar Winerim en tu restaurante',
+      subtitle: 'Un proceso sencillo y acompañado para que empieces a vender más vino desde el primer día.',
+      sections: [
+        { heading: 'Onboarding personalizado', content: 'Analizamos tu carta actual, tu modelo de negocio y tus objetivos para configurar Winerim a medida.' },
+        { heading: 'Digitalización de carta', content: 'Transformamos tu carta actual en una carta digital inteligente con fichas, maridajes y recomendaciones.' },
+        { heading: 'Formación del equipo', content: 'Formamos a tu equipo de sala para que aproveche al máximo las herramientas de recomendación y venta.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Implantación', url: `${SITE}/implantacion` }],
+      internalLinks: [{ label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Precios', url: '/precios' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/comparativas': {
+    meta: { title: 'Comparativas de Software de Carta de Vinos | Winerim', description: 'Compara Winerim con otras soluciones de gestión de cartas de vinos. Análisis objetivo de funcionalidades, precios y resultados.', canonical: `${SITE}/comparativas`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Comparativas de software de carta de vinos',
+      subtitle: 'Análisis objetivo para elegir la mejor solución para tu restaurante.',
+      sections: [
+        { heading: 'Qué comparamos', content: 'Funcionalidades, precio, facilidad de uso, integraciones, soporte y resultados medidos en restaurantes reales.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Comparativas', url: `${SITE}/comparativas` }],
+      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/blog/como-organizar-carta-de-vinos': {
+    meta: { title: 'Cómo Organizar una Carta de Vinos | Winerim Blog', description: 'Guía para organizar tu carta de vinos: por regiones, estilos, precios o momentos. Mejora la experiencia del comensal y aumenta las ventas.', canonical: `${SITE}/blog/como-organizar-carta-de-vinos`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo organizar una carta de vinos',
+      sections: [
+        { heading: 'Organización por regiones', content: 'La clasificación geográfica facilita la navegación para comensales con preferencias regionales claras.' },
+        { heading: 'Organización por estilos', content: 'Agrupar por estilo (ligeros, con cuerpo, dulces) facilita la elección a comensales menos expertos.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Blog', url: `${SITE}/blog` }, { name: 'Cómo organizar carta', url: `${SITE}/blog/como-organizar-carta-de-vinos` }],
+      internalLinks: [{ label: 'Cómo hacer una carta', url: '/como-hacer-una-carta-de-vinos' }, { label: 'Ejemplos carta', url: '/ejemplos-carta-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/blog/cuantos-vinos-carta-restaurante': {
+    meta: { title: 'Cuántos Vinos Debe Tener una Carta de Restaurante | Winerim Blog', description: 'Guía para definir el número óptimo de referencias en tu carta de vinos según tipo de restaurante, público y modelo de negocio.', canonical: `${SITE}/blog/cuantos-vinos-carta-restaurante`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cuántos vinos debe tener una carta de restaurante',
+      sections: [
+        { heading: 'El problema de la carta excesiva', content: 'Más referencias no significa más ventas. A partir de cierto punto, la parálisis de elección reduce el ticket medio.' },
+        { heading: 'Rangos recomendados', content: 'Casual: 30-50 referencias. Gastronómico: 80-200. Vinoteca: 200+. El número óptimo depende del servicio y el público.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Blog', url: `${SITE}/blog` }, { name: 'Cuántos vinos', url: `${SITE}/blog/cuantos-vinos-carta-restaurante` }],
+      internalLinks: [{ label: 'Cómo hacer una carta', url: '/como-hacer-una-carta-de-vinos' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/blog/como-disenar-carta-vinos-rentable': {
+    meta: { title: 'Cómo Diseñar una Carta de Vinos Rentable | Winerim Blog', description: 'Claves para diseñar una carta de vinos que maximice ingresos y margen: selección, precios, estructura y análisis de rendimiento.', canonical: `${SITE}/blog/como-disenar-carta-vinos-rentable`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo diseñar una carta de vinos rentable',
+      sections: [
+        { heading: 'Selección estratégica', content: 'Elige referencias que cubran rangos de precio, estilos y ocasiones sin redundancia. Cada vino debe tener un rol claro.' },
+        { heading: 'Pricing inteligente', content: 'Diferencia márgenes por rango de precio: mayor margen porcentual en vinos económicos, mayor margen absoluto en premium.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Blog', url: `${SITE}/blog` }, { name: 'Carta rentable', url: `${SITE}/blog/como-disenar-carta-vinos-rentable` }],
+      internalLinks: [{ label: 'Calculadora de margen', url: '/calculadora-margen-vino' }, { label: 'Checklist carta rentable', url: '/recursos/checklist-carta-de-vinos-rentable' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante': {
+    meta: { title: 'Cómo Mejorar la Rotación de Vinos en Restaurantes | Winerim', description: 'Estrategias para mejorar la rotación de vinos: detección de stock muerto, ajuste de carta, promoción por copa y análisis de datos.', canonical: `${SITE}/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo mejorar la rotación de vinos en un restaurante',
+      sections: [
+        { heading: 'Diagnóstico de rotación', content: 'Clasifica cada referencia por frecuencia de venta. Las que no se venden en 30 días necesitan acción inmediata.' },
+        { heading: 'Estrategias de activación', content: 'Vino por copa, recomendación activa del equipo, maridajes visibles y promociones temporales.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Rotación de vinos', url: `${SITE}/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante` }],
+      internalLinks: [{ label: 'Calculadora stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Guía detectar vinos muertos', url: '/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-crear-una-estrategia-de-maridaje-en-restauracion': {
+    meta: { title: 'Cómo Crear una Estrategia de Maridaje en Restauración | Winerim', description: 'Guía para desarrollar una estrategia de maridaje efectiva: selección, formación del equipo y herramientas tecnológicas.', canonical: `${SITE}/guias/como-crear-una-estrategia-de-maridaje-en-restauracion`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo crear una estrategia de maridaje en restauración',
+      sections: [
+        { heading: 'Por qué el maridaje vende', content: 'Un maridaje bien presentado elimina la barrera de elección y aumenta la probabilidad de pedido de vino con cada plato.' },
+        { heading: 'Diseñar maridajes rentables', content: 'Selecciona vinos que complementen los platos principales y tengan buen margen. Usa IA para automatizar sugerencias.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Estrategia maridaje', url: `${SITE}/guias/como-crear-una-estrategia-de-maridaje-en-restauracion` }],
+      internalLinks: [{ label: 'Biblioteca maridajes', url: '/biblioteca-vino/maridajes' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-estructurar-carta-vinos-grupo-restauracion': {
+    meta: { title: 'Cómo Estructurar la Carta de Vinos en Grupos de Restauración | Winerim', description: 'Guía para diseñar y gestionar cartas de vinos coherentes en grupos multi-restaurante: estandarización, diferenciación y control.', canonical: `${SITE}/guias/como-estructurar-carta-vinos-grupo-restauracion`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo estructurar la carta de vinos en grupos de restauración',
+      sections: [
+        { heading: 'Carta base vs diferenciación local', content: 'Define una estructura base común y permite adaptaciones locales controladas por zona, tipo de cocina o perfil de cliente.' },
+        { heading: 'Control centralizado', content: 'Panel único para gestionar precios, referencias y maridajes en todos los locales con coherencia de marca.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Carta grupos restauración', url: `${SITE}/guias/como-estructurar-carta-vinos-grupo-restauracion` }],
+      internalLinks: [{ label: 'Grupos restauración', url: '/soluciones/grupos-restauracion' }, { label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-fijar-estrategia-rentable-vino-por-copa': {
+    meta: { title: 'Cómo Fijar una Estrategia Rentable de Vino por Copa | Winerim', description: 'Guía para diseñar una oferta de vino por copa rentable: selección, pricing, rotación y control de merma.', canonical: `${SITE}/guias/como-fijar-estrategia-rentable-vino-por-copa`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo fijar una estrategia rentable de vino por copa',
+      sections: [
+        { heading: 'Selección de referencias por copa', content: 'Elige vinos con buena rotación, margen alto y complementariedad con tu carta de comidas.' },
+        { heading: 'Pricing por copa', content: 'El precio debe cubrir el coste de la botella con 3-4 copas. Las restantes son beneficio puro.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Estrategia vino por copa', url: `${SITE}/guias/como-fijar-estrategia-rentable-vino-por-copa` }],
+      internalLinks: [{ label: 'Calculadora precio copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Diagnóstico vino por copa', url: '/herramientas/diagnostico-vino-por-copa' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad': {
+    meta: { title: 'Cómo Detectar Vinos Muertos en tu Carta | Winerim', description: 'Guía para identificar vinos con baja rotación que inmovilizan capital y frenan la rentabilidad de tu carta.', canonical: `${SITE}/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo detectar vinos muertos que frenan tu rentabilidad',
+      sections: [
+        { heading: 'Qué es un vino muerto', content: 'Referencia con menos de 1 venta/mes que ocupa capital, espacio en bodega y complejidad en la gestión.' },
+        { heading: 'Protocolo de detección', content: 'Analiza rotación mensual por referencia. Clasifica en activos, lentos y muertos. Actúa sobre los muertos.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Detectar vinos muertos', url: `${SITE}/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad` }],
+      internalLinks: [{ label: 'Calculadora stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Rotación de vinos', url: '/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-formar-equipo-sala-para-vender-vino': {
+    meta: { title: 'Cómo Formar al Equipo de Sala para Vender Vino | Winerim', description: 'Guía de formación para equipos de sala: conocimiento básico, técnicas de recomendación y uso de herramientas digitales.', canonical: `${SITE}/guias/como-formar-equipo-sala-para-vender-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo formar al equipo de sala para vender vino',
+      sections: [
+        { heading: 'Conocimiento mínimo viable', content: 'Un camarero no necesita ser sommelier. Con conocer 5-10 vinos clave de la carta y sus maridajes principales, puede recomendar con confianza.' },
+        { heading: 'Herramientas de apoyo', content: 'El recomendador inteligente actúa como asistente digital: el equipo consulta en tiempo real y aprende mientras trabaja.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Formar equipo sala', url: `${SITE}/guias/como-formar-equipo-sala-para-vender-vino` }],
+      internalLinks: [{ label: 'Cómo vender más vino', url: '/como-vender-mas-vino-en-un-restaurante' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-usar-datos-para-decidir-que-vinos-comprar': {
+    meta: { title: 'Cómo Usar Datos para Decidir Qué Vinos Comprar | Winerim', description: 'Guía para tomar decisiones de compra de vino basadas en datos: rotación, margen, estacionalidad y tendencias de venta.', canonical: `${SITE}/guias/como-usar-datos-para-decidir-que-vinos-comprar`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo usar datos para decidir qué vinos comprar',
+      sections: [
+        { heading: 'Datos clave para decisiones de compra', content: 'Rotación por referencia, margen bruto, estacionalidad de demanda y análisis de categorías (tinto/blanco/rosado/espumoso).' },
+        { heading: 'De la intuición a los datos', content: 'Sustituye el criterio subjetivo por métricas objetivas. Los datos revelan qué vinos realmente se venden y cuáles ocupan espacio.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Datos compra vinos', url: `${SITE}/guias/como-usar-datos-para-decidir-que-vinos-comprar` }],
+      internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-conectar-carta-stock-ventas-margen': {
+    meta: { title: 'Cómo Conectar Carta, Stock, Ventas y Margen | Winerim', description: 'Guía para integrar carta de vinos con datos de stock, ventas y margen en un solo flujo de gestión inteligente.', canonical: `${SITE}/guias/como-conectar-carta-stock-ventas-margen`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo conectar carta, stock, ventas y margen',
+      sections: [
+        { heading: 'El problema de los silos', content: 'Carta, stock, ventas y margen suelen gestionarse por separado. Sin conexión, las decisiones son lentas e imprecisas.' },
+        { heading: 'Integración con Winerim', content: 'Winerim unifica los 4 pilares: la carta refleja el stock real, los datos de venta alimentan las recomendaciones y el margen se optimiza en tiempo real.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Conectar carta-stock-ventas', url: `${SITE}/guias/como-conectar-carta-stock-ventas-margen` }],
+      internalLinks: [{ label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-gestionar-carta-vinos-grupos-restauracion': {
+    meta: { title: 'Cómo Gestionar la Carta de Vinos en Grupos de Restauración | Winerim', description: 'Guía para la gestión eficiente de cartas de vinos en cadenas y grupos multi-restaurante.', canonical: `${SITE}/guias/como-gestionar-carta-vinos-grupos-restauracion`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo gestionar la carta de vinos en grupos de restauración',
+      sections: [
+        { heading: 'Retos específicos de grupos', content: 'Coherencia de marca, diferenciación por local, negociación con proveedores y reporting consolidado.' },
+        { heading: 'Solución multi-local', content: 'Panel centralizado con control de carta por local, analytics comparativos y gestión unificada de proveedores.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Gestionar carta grupos', url: `${SITE}/guias/como-gestionar-carta-vinos-grupos-restauracion` }],
+      internalLinks: [{ label: 'Grupos restauración', url: '/soluciones/grupos-restauracion' }, { label: 'Auditor multi-local', url: '/herramientas/auditor-carta-multilocal' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-implantar-vino-por-copa-sin-perder-margen': {
+    meta: { title: 'Cómo Implantar Vino por Copa sin Perder Margen | Winerim', description: 'Guía para implementar una oferta de vino por copa rentable controlando merma, rotación y pricing.', canonical: `${SITE}/guias/como-implantar-vino-por-copa-sin-perder-margen`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo implantar vino por copa sin perder margen',
+      sections: [
+        { heading: 'Control de merma', content: 'Sistemas de conservación, rotación diaria y seguimiento de botellas abiertas para minimizar pérdidas.' },
+        { heading: 'Pricing que protege el margen', content: 'Calcula precio por copa para recuperar coste de botella con 3 copas. Todo lo vendido después es beneficio.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Vino por copa sin perder margen', url: `${SITE}/guias/como-implantar-vino-por-copa-sin-perder-margen` }],
+      internalLinks: [{ label: 'Calculadora precio copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-usar-winerim-sin-sumiller': {
+    meta: { title: 'Cómo Usar Winerim sin Sumiller | Winerim', description: 'Guía para restaurantes sin sommelier: cómo Winerim actúa como asistente inteligente para que tu equipo recomiende vino con confianza.', canonical: `${SITE}/guias/como-usar-winerim-sin-sumiller`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo usar Winerim sin sumiller',
+      sections: [
+        { heading: 'El recomendador como sommelier digital', content: 'Winerim sugiere vinos al comensal basándose en plato, preferencias y stock. Tu equipo no necesita ser experto.' },
+        { heading: 'Formación progresiva', content: 'El equipo aprende sobre vinos mientras usa la herramienta. Las fichas y maridajes funcionan como material de formación continua.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Winerim sin sumiller', url: `${SITE}/guias/como-usar-winerim-sin-sumiller` }],
+      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Formar equipo sala', url: '/guias/como-formar-equipo-sala-para-vender-vino' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-decidir-surtido-segun-ticket-medio-tipo-local': {
+    meta: { title: 'Cómo Decidir el Surtido de Vinos según Ticket Medio | Winerim', description: 'Guía para seleccionar el surtido de vinos adecuado según el ticket medio y tipo de local.', canonical: `${SITE}/guias/como-decidir-surtido-segun-ticket-medio-tipo-local`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo decidir el surtido de vinos según ticket medio y tipo de local',
+      sections: [
+        { heading: 'Ticket medio y selección', content: 'El ticket medio determina el rango de precios aceptable. Un restaurante con ticket de 40€ no necesita vinos de 200€.' },
+        { heading: 'Adaptación por tipo de local', content: 'Casual, gastronómico, vinoteca y hotel requieren surtidos muy diferentes en profundidad y precio.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Surtido según ticket medio', url: `${SITE}/guias/como-decidir-surtido-segun-ticket-medio-tipo-local` }],
+      internalLinks: [{ label: 'Calculadora ticket medio', url: '/herramientas/calculadora-ticket-medio-vino' }, { label: 'Aumentar ticket medio', url: '/soluciones/aumentar-ticket-medio-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-detectar-canibalizacion-vinos-carta': {
+    meta: { title: 'Cómo Detectar Canibalización de Vinos en tu Carta | Winerim', description: 'Guía para identificar vinos que se canibalizan entre sí en tu carta y cómo optimizar la selección.', canonical: `${SITE}/guias/como-detectar-canibalizacion-vinos-carta`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo detectar canibalización de vinos en tu carta',
+      sections: [
+        { heading: 'Qué es la canibalización', content: 'Ocurre cuando dos o más referencias compiten por el mismo comensal: similar región, estilo y precio. Una vende, las otras no.' },
+        { heading: 'Cómo detectarla', content: 'Agrupa referencias por perfil (región + estilo + rango precio). Si hay más de 2-3 en el mismo grupo, hay riesgo de canibalización.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Canibalización vinos', url: `${SITE}/guias/como-detectar-canibalizacion-vinos-carta` }],
+      internalLinks: [{ label: 'Wine List Score', url: '/herramientas/wine-list-score' }, { label: 'Rotación de vinos', url: '/guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/guias/como-revisar-carta-vinos-cada-mes': {
+    meta: { title: 'Cómo Revisar tu Carta de Vinos Cada Mes | Winerim', description: 'Protocolo mensual para revisar y optimizar tu carta de vinos: métricas clave, acciones y calendario.', canonical: `${SITE}/guias/como-revisar-carta-vinos-cada-mes`, ogImage: OG_IMAGE, lang: 'es', type: 'article', schemaType: 'Article' },
+    content: {
+      h1: 'Cómo revisar tu carta de vinos cada mes',
+      sections: [
+        { heading: 'Métricas de revisión mensual', content: 'Ventas por referencia, rotación, margen bruto, vinos muertos y evolución del ticket medio en vino.' },
+        { heading: 'Acciones tras la revisión', content: 'Descatalogar vinos muertos, ajustar precios, incorporar novedades y actualizar recomendaciones.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Guías', url: `${SITE}/guias-y-recursos` }, { name: 'Revisión mensual carta', url: `${SITE}/guias/como-revisar-carta-vinos-cada-mes` }],
+      internalLinks: [{ label: 'Calculadora de margen', url: '/calculadora-margen-vino' }, { label: 'Detectar vinos muertos', url: '/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/afiliate': {
+    meta: { title: 'Programa de Afiliados Winerim', description: 'Únete al programa de afiliados de Winerim y gana comisiones recomendando la carta inteligente de vinos a restaurantes.', canonical: `${SITE}/afiliate`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Programa de afiliados Winerim',
+      sections: [{ heading: 'Cómo funciona', content: 'Recomienda Winerim a restaurantes de tu red. Por cada cliente que se convierta, recibes una comisión recurrente.' }],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Afíliate', url: `${SITE}/afiliate` }],
+      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/sommelier-corner': {
+    meta: { title: 'Sommelier Corner — Contenido para Profesionales del Vino | Winerim', description: 'Espacio dedicado a sommeliers y profesionales del vino: tendencias, análisis de mercado, herramientas y recursos premium.', canonical: `${SITE}/sommelier-corner`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Sommelier Corner',
+      subtitle: 'Contenido exclusivo para profesionales del vino en restauración.',
+      sections: [{ heading: 'Recursos para sommeliers', content: 'Análisis de tendencias, benchmarks del sector, herramientas de gestión y contenido editorial curado para profesionales.' }],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Sommelier Corner', url: `${SITE}/sommelier-corner` }],
+      internalLinks: [{ label: 'Biblioteca de vino', url: '/biblioteca-vino' }, { label: 'Benchmarks', url: '/benchmarks-playbooks' }, { label: 'Blog', url: '/blog' }],
+    },
+  },
 };
 
 // ── HTML Generator ──
