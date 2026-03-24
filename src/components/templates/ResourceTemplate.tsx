@@ -123,7 +123,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
-      // Auto-download the file
+      // Auto-download the file then redirect
       if (data.downloadFile) {
         setTimeout(() => {
           const a = document.createElement("a");
@@ -134,6 +134,10 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
           document.body.removeChild(a);
         }, 800);
       }
+      // Redirect to thank-you page after a short delay
+      setTimeout(() => {
+        navigate(`/gracias?tipo=${encodeURIComponent(data.formType)}`);
+      }, 1500);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
