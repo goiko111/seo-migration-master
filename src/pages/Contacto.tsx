@@ -102,8 +102,6 @@ const Contacto = () => {
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
     else {
-      toast.success(c.success);
-      (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
       trackFormSubmit("contact");
       ads.conversion("contact", {
@@ -113,6 +111,8 @@ const Contacto = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
+      navigate("/gracias?tipo=contacto");
+      return;
     }
     setSubmitting(false);
   };
