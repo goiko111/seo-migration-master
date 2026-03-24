@@ -388,6 +388,7 @@ const AnalizaCarta = () => {
     form: formI[lang], faqs: faqsI[lang], ctaFinal: ctaFinalI[lang], links: linksI[lang],
   };
 
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [mode, setMode] = useState<"upload" | "link">("upload");
