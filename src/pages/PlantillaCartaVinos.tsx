@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Wine, Download, CheckCircle, XCircle,
   Layers, DollarSign, List, GlassWater, FileText,
