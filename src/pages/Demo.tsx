@@ -98,6 +98,7 @@ const content: Record<string, {
 
 const Demo = () => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
   const { lang, allLangPaths, localePath } = useLanguage();
   const c = content[lang] || content.es;
 
