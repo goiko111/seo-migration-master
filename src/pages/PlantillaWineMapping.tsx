@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Download, CheckCircle, Map,
   DollarSign, Wine, Layers, Sparkles, BarChart3, Target
