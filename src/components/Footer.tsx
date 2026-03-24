@@ -56,17 +56,17 @@ const Footer = () => {
               {t.footer_tagline}
             </p>
             {/* Social */}
-            <div className="flex gap-4 mt-5">
+            <div className="flex gap-3 mt-5">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                   aria-label={`Winerim en ${link.label}`}
                 >
-                  {link.label}
+                  {link.icon}
                 </a>
               ))}
             </div>
