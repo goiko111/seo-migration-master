@@ -122,8 +122,6 @@ const Demo = () => {
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
     else {
-      toast.success(c.success);
-      (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
       trackFormSubmit("demo");
       ads.conversion("demo", {
@@ -133,6 +131,8 @@ const Demo = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
+      navigate("/gracias?tipo=demo");
+      return;
     }
     setSubmitting(false);
   };
