@@ -217,6 +217,24 @@ const STATIC_ROUTES: StaticRoute[] = [
 
   // Problems
   { esPath: '/problemas/carta-de-vinos-no-vende', priority: '0.6', changefreq: 'monthly', multilang: false },
+
+  // Missing strategic pages
+  { esPath: '/sobre-winerim', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/implantacion', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/comparativas', priority: '0.5', changefreq: 'monthly', multilang: false },
+
+  // Missing guides
+  { esPath: '/guias/como-gestionar-carta-vinos-grupos-restauracion', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/guias/como-implantar-vino-por-copa-sin-perder-margen', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/guias/como-usar-winerim-sin-sumiller', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/guias/como-decidir-surtido-segun-ticket-medio-tipo-local', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/guias/como-detectar-canibalizacion-vinos-carta', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/guias/como-revisar-carta-vinos-cada-mes', priority: '0.6', changefreq: 'monthly', multilang: false },
+
+  // Missing tools
+  { esPath: '/herramientas/calculadora-ticket-medio-vino', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/auditor-carta-multilocal', priority: '0.6', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/calculadora-compra-inteligente', priority: '0.6', changefreq: 'monthly', multilang: false },
 ];
 
 /** Build a <url> block with optional hreflang alternates */

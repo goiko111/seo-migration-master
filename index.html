@@ -76,7 +76,12 @@
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    })(window,document,'script','dataLayer',window.__GTM_ID||'GTM-XXXXXXX');
+    // ⚠️ PRODUCCIÓN: Antes de publicar, definir window.__GTM_ID con el ID real de GTM.
+    // Opción 1: Cambiar 'GTM-XXXXXXX' directamente por tu ID (ej: 'GTM-ABC1234')
+    // Opción 2: Definir window.__GTM_ID en un script previo o en tu CDN/proxy.
+    // Mientras sea GTM-XXXXXXX, GTM NO cargará ningún tag (ID inválido = no-op seguro).
+    </script>
     <!-- End Google Tag Manager -->
 
     <script type="application/ld+json">
@@ -114,7 +119,8 @@
 
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="about:blank" id="gtm-noscript" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- El iframe de GTM noscript se activa cuando se configure el ID real -->
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="root"></div>
