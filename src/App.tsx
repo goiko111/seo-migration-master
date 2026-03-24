@@ -114,6 +114,7 @@ const PairingsHub = lazy(() => import("./pages/PairingsHub"));
 const PairingDetail = lazy(() => import("./pages/PairingDetail"));
 const GuiaServicio = lazy(() => import("./pages/GuiaServicio"));
 const GlosarioVino = lazy(() => import("./pages/GlosarioVino"));
+const Gracias = lazy(() => import("./pages/Gracias"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -144,6 +145,7 @@ const esRoutes = (
     <Route path="/afiliate" element={<Afiliate />} />
     <Route path="/contacto" element={<Contacto />} />
     <Route path="/demo" element={<Demo />} />
+    <Route path="/gracias" element={<Gracias />} />
     <Route path="/article/:slug" element={<ArticlePage />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminShell />} />

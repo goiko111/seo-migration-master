@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Upload, Link2, BarChart3, DollarSign, Layers,
   Utensils, Wine, TrendingUp, FileText, Target, Zap,
@@ -388,6 +388,7 @@ const AnalizaCarta = () => {
     form: formI[lang], faqs: faqsI[lang], ctaFinal: ctaFinalI[lang], links: linksI[lang],
   };
 
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [mode, setMode] = useState<"upload" | "link">("upload");
@@ -459,13 +460,11 @@ const AnalizaCarta = () => {
 
     if (error) {
       toast.error(t.form.errSubmit);
+      setSubmitting(false);
     } else {
-      toast.success(t.form.success);
-      (e.target as HTMLFormElement).reset();
-      setFileName(null);
       notifyLead(leadData);
+      navigate("/gracias?tipo=analisis-carta");
     }
-    setSubmitting(false);
   };
 
   return (

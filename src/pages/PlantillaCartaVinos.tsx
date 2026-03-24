@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Wine, Download, CheckCircle, XCircle,
   Layers, DollarSign, List, GlassWater, FileText,
@@ -320,6 +320,7 @@ const PlantillaCartaVinos = () => {
   const { lang, localePath } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [position, setPosition] = useState("");
@@ -339,20 +340,16 @@ const PlantillaCartaVinos = () => {
       };
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
-      setSubmitted(true);
-      toast.success(t.toastSuccess);
       notifyLead(leadData);
-      setTimeout(() => {
-        const a = document.createElement("a");
-        a.href = "/recursos/winerim_plantilla_carta_vinos_2026.xlsx";
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 800);
+      const a = document.createElement("a");
+      a.href = "/recursos/winerim_plantilla_carta_vinos_2026.xlsx";
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => navigate("/gracias?tipo=plantilla-carta-vinos"), 1000);
     } catch {
       toast.error(t.toastError);
-    } finally {
       setSubmitting(false);
     }
   };

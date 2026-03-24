@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Download, CheckCircle, GlassWater,
   DollarSign, Wine, TrendingUp, Sparkles, BookOpen,
@@ -91,6 +91,7 @@ const guideChapters = [
 ];
 
 const GuiaVinoPorCopa = () => {
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
@@ -115,20 +116,17 @@ const GuiaVinoPorCopa = () => {
       };
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
-      setSubmitted(true);
-      toast.success("¡Guía lista! La descarga comenzará en un momento.");
       notifyLead(leadData);
-      setTimeout(() => {
-        const a = document.createElement("a");
-        a.href = "/recursos/winerim_guia_vino_por_copa_2026.xlsx";
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 800);
+      // Trigger download
+      const a = document.createElement("a");
+      a.href = "/recursos/winerim_guia_vino_por_copa_2026.xlsx";
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => navigate("/gracias?tipo=guia-vino-por-copa"), 1000);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
-    } finally {
       setLoading(false);
     }
   };

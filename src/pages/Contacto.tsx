@@ -1,4 +1,5 @@
 import { useState, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 const YouTubeFacade = lazy(() => import("@/components/YouTubeFacade"));
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -79,6 +80,7 @@ const content: Record<string, {
 
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
   const { lang, allLangPaths } = useLanguage();
   const c = content[lang] || content.es;
 
@@ -100,8 +102,6 @@ const Contacto = () => {
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
     else {
-      toast.success(c.success);
-      (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
       trackFormSubmit("contact");
       ads.conversion("contact", {
@@ -111,6 +111,8 @@ const Contacto = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
+      navigate("/gracias?tipo=contacto");
+      return;
     }
     setSubmitting(false);
   };

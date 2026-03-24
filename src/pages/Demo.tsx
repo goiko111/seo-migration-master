@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Clock, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -97,6 +98,7 @@ const content: Record<string, {
 
 const Demo = () => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
   const { lang, allLangPaths, localePath } = useLanguage();
   const c = content[lang] || content.es;
 
@@ -120,8 +122,6 @@ const Demo = () => {
     const { error } = await supabase.from("contact_leads").insert(leadData);
     if (error) toast.error(c.error);
     else {
-      toast.success(c.success);
-      (e.target as HTMLFormElement).reset();
       notifyLead(leadData);
       trackFormSubmit("demo");
       ads.conversion("demo", {
@@ -131,6 +131,8 @@ const Demo = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
+      navigate("/gracias?tipo=demo");
+      return;
     }
     setSubmitting(false);
   };

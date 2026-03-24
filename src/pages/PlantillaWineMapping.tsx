@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Download, CheckCircle, Map,
   DollarSign, Wine, Layers, Sparkles, BarChart3, Target
@@ -259,6 +259,7 @@ type FormData = z.infer<typeof formSchema>;
 const PlantillaWineMapping = () => {
   const { lang } = useLanguage();
   const t = i18n[lang];
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
@@ -274,20 +275,16 @@ const PlantillaWineMapping = () => {
       const leadData = { ...data, form_type: "plantilla-wine-mapping" };
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
-      setSubmitted(true);
-      toast.success(t.toastSuccess);
       notifyLead(leadData);
-      setTimeout(() => {
-        const a = document.createElement("a");
-        a.href = "/recursos/winerim_plantilla_wine_mapping_2026.xlsx";
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 800);
+      const a = document.createElement("a");
+      a.href = "/recursos/winerim_plantilla_wine_mapping_2026.xlsx";
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => navigate("/gracias?tipo=plantilla-wine-mapping"), 1000);
     } catch {
       toast.error(t.toastError);
-    } finally {
       setLoading(false);
     }
   };

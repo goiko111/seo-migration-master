@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Download, CheckCircle, Sparkles
 } from "lucide-react";
@@ -90,6 +90,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
   const [referencesCount, setReferencesCount] = useState("");
+  const navigate = useNavigate();
   const url = `${CANONICAL_DOMAIN}/recursos/${data.slug}`;
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
@@ -123,7 +124,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
-      // Auto-download the file
+      // Auto-download the file then redirect
       if (data.downloadFile) {
         setTimeout(() => {
           const a = document.createElement("a");
@@ -134,6 +135,10 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
           document.body.removeChild(a);
         }, 800);
       }
+      // Redirect to thank-you page after a short delay
+      setTimeout(() => {
+        navigate(`/gracias?tipo=${encodeURIComponent(data.formType)}`);
+      }, 1500);
     } catch {
       toast.error("Error al enviar. Inténtalo de nuevo.");
     } finally {
