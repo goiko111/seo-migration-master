@@ -1391,6 +1391,98 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Biblioteca de vino', url: '/biblioteca-vino' }, { label: 'Benchmarks', url: '/benchmarks-playbooks' }, { label: 'Blog', url: '/blog' }],
     },
   },
+  '/herramientas/calculadora-precio-vino-por-copa': {
+    meta: { title: 'Calculadora de Precio de Vino por Copa | Winerim', description: 'Calcula el precio óptimo por copa para maximizar la rentabilidad de tu oferta de vino por copa. Herramienta gratuita.', canonical: `${SITE}/herramientas/calculadora-precio-vino-por-copa`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de precio de vino por copa',
+      subtitle: 'Determina el precio óptimo por copa para maximizar la rentabilidad.',
+      sections: [
+        { heading: 'Cómo funciona', content: 'Introduce el coste de la botella, número de copas por botella y margen objetivo. La calculadora sugiere el precio por copa ideal.' },
+        { heading: 'Regla de las 3 copas', content: 'El precio debe permitir recuperar el coste total de la botella con las primeras 3 copas vendidas.' },
+      ],
+      faqs: [{ q: '¿Es gratuita?', a: 'Sí. 100% gratuita y sin registro.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora precio copa', url: `${SITE}/herramientas/calculadora-precio-vino-por-copa` }],
+      internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/diagnostico-vino-por-copa': {
+    meta: { title: 'Diagnóstico de Vino por Copa | Winerim', description: 'Analiza tu oferta actual de vino por copa e identifica oportunidades de mejora en selección, precio y presentación.', canonical: `${SITE}/herramientas/diagnostico-vino-por-copa`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Diagnóstico de vino por copa',
+      subtitle: 'Evalúa tu oferta actual de vino por copa y descubre oportunidades de mejora.',
+      sections: [
+        { heading: 'Qué evalúa', content: 'Diversidad de estilos, equilibrio de precios, rotación esperada, margen por copa y complementariedad con la carta de comidas.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Diagnóstico vino por copa', url: `${SITE}/herramientas/diagnostico-vino-por-copa` }],
+      internalLinks: [{ label: 'Calculadora precio copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/wine-list-score': {
+    meta: { title: 'Wine List Score — Evalúa tu Carta de Vinos | Winerim', description: 'Evalúa la calidad y completitud de tu carta de vinos con un análisis automático de diversidad, precios, maridajes y estructura.', canonical: `${SITE}/herramientas/wine-list-score`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Wine List Score — Evalúa tu carta de vinos',
+      subtitle: 'Puntuación automática de calidad, diversidad y rentabilidad de tu carta.',
+      sections: [
+        { heading: 'Cómo funciona', content: 'Sube tu carta y obtén una puntuación basada en diversidad, equilibrio de precios, cobertura de estilos y estructura general.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Wine List Score', url: `${SITE}/herramientas/wine-list-score` }],
+      internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Analizador de carta', url: '/analisis-carta' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/calculadora-stock-muerto': {
+    meta: { title: 'Calculadora de Stock Muerto en Bodega | Winerim', description: 'Identifica cuánto capital tienes inmovilizado en vinos con baja rotación y calcula el coste de oportunidad.', canonical: `${SITE}/herramientas/calculadora-stock-muerto`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de stock muerto en bodega',
+      subtitle: 'Descubre cuánto capital tienes parado en vinos que no se venden.',
+      sections: [
+        { heading: 'Qué calcula', content: 'Capital inmovilizado, coste de oportunidad mensual y proyección de pérdida si no se actúa.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora stock muerto', url: `${SITE}/herramientas/calculadora-stock-muerto` }],
+      internalLinks: [{ label: 'Detectar vinos muertos', url: '/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad' }, { label: 'Herramientas', url: '/herramientas' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/calculadora-ticket-medio-vino': {
+    meta: { title: 'Calculadora de Ticket Medio de Vino | Winerim', description: 'Calcula y optimiza el ticket medio de vino en tu restaurante. Herramienta gratuita con benchmarks del sector.', canonical: `${SITE}/herramientas/calculadora-ticket-medio-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de ticket medio de vino',
+      subtitle: 'Mide y mejora el gasto medio en vino por mesa.',
+      sections: [
+        { heading: 'Cómo funciona', content: 'Introduce ventas de vino y número de mesas. Obtén tu ticket medio actual y comparativa con benchmarks.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora ticket medio', url: `${SITE}/herramientas/calculadora-ticket-medio-vino` }],
+      internalLinks: [{ label: 'Aumentar ticket medio', url: '/soluciones/aumentar-ticket-medio-restaurante' }, { label: 'Herramientas', url: '/herramientas' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/auditor-carta-multilocal': {
+    meta: { title: 'Auditor de Carta Multi-Local | Winerim', description: 'Audita y compara las cartas de vinos de todos tus locales. Detecta inconsistencias y oportunidades de mejora.', canonical: `${SITE}/herramientas/auditor-carta-multilocal`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Auditor de carta de vinos multi-local',
+      subtitle: 'Compara y optimiza las cartas de vinos de todos tus restaurantes.',
+      sections: [
+        { heading: 'Qué detecta', content: 'Inconsistencias de precios entre locales, referencias duplicadas, gaps de cobertura y oportunidades de estandarización.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Auditor multi-local', url: `${SITE}/herramientas/auditor-carta-multilocal` }],
+      internalLinks: [{ label: 'Grupos restauración', url: '/soluciones/grupos-restauracion' }, { label: 'Herramientas', url: '/herramientas' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/calculadora-compra-inteligente': {
+    meta: { title: 'Calculadora de Compra Inteligente de Vino | Winerim', description: 'Optimiza tus compras de vino con datos de rotación, margen y estacionalidad. Herramienta gratuita para restauradores.', canonical: `${SITE}/herramientas/calculadora-compra-inteligente`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de compra inteligente de vino',
+      subtitle: 'Decide qué, cuánto y cuándo comprar basándote en datos reales.',
+      sections: [
+        { heading: 'Cómo funciona', content: 'Introduce rotación actual, margen objetivo y estacionalidad. Obtén recomendaciones de volumen de compra por referencia.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Compra inteligente', url: `${SITE}/herramientas/calculadora-compra-inteligente` }],
+      internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Guía compras con datos', url: '/guias/como-usar-datos-para-decidir-que-vinos-comprar' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
 };
 
 // ── HTML Generator ──
