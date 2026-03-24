@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight, Upload, Link2, BarChart3, DollarSign, Layers,
   Utensils, Wine, TrendingUp, FileText, Target, Zap,
