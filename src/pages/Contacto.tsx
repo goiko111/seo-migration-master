@@ -80,6 +80,7 @@ const content: Record<string, {
 
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
   const { lang, allLangPaths } = useLanguage();
   const c = content[lang] || content.es;
 
