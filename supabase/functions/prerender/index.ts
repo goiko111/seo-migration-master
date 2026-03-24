@@ -141,6 +141,62 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'fr', url: `${SITE}/fr/defis` },
     { lang: 'x-default', url: `${SITE}/problemas` },
   ],
+  '/producto/winerim-core': [
+    { lang: 'es', url: `${SITE}/producto/winerim-core` },
+    { lang: 'en', url: `${SITE}/en/product/winerim-core` },
+    { lang: 'it', url: `${SITE}/it/prodotto/winerim-core` },
+    { lang: 'fr', url: `${SITE}/fr/produit/winerim-core` },
+    { lang: 'x-default', url: `${SITE}/producto/winerim-core` },
+  ],
+  '/producto/winerim-supply': [
+    { lang: 'es', url: `${SITE}/producto/winerim-supply` },
+    { lang: 'en', url: `${SITE}/en/product/winerim-supply` },
+    { lang: 'it', url: `${SITE}/it/prodotto/winerim-supply` },
+    { lang: 'fr', url: `${SITE}/fr/produit/winerim-supply` },
+    { lang: 'x-default', url: `${SITE}/producto/winerim-supply` },
+  ],
+  '/producto/inteligencia-dinamica': [
+    { lang: 'es', url: `${SITE}/producto/inteligencia-dinamica` },
+    { lang: 'en', url: `${SITE}/en/product/dynamic-intelligence` },
+    { lang: 'it', url: `${SITE}/it/prodotto/intelligenza-dinamica` },
+    { lang: 'fr', url: `${SITE}/fr/produit/intelligence-dynamique` },
+    { lang: 'x-default', url: `${SITE}/producto/inteligencia-dinamica` },
+  ],
+  '/analisis-carta': [
+    { lang: 'es', url: `${SITE}/analisis-carta` },
+    { lang: 'en', url: `${SITE}/en/wine-list-analysis` },
+    { lang: 'it', url: `${SITE}/it/analisi-carta` },
+    { lang: 'fr', url: `${SITE}/fr/analyse-carte` },
+    { lang: 'x-default', url: `${SITE}/analisis-carta` },
+  ],
+  '/calculadora-margen-vino': [
+    { lang: 'es', url: `${SITE}/calculadora-margen-vino` },
+    { lang: 'en', url: `${SITE}/en/wine-margin-calculator` },
+    { lang: 'it', url: `${SITE}/it/calcolatrice-margini-vino` },
+    { lang: 'fr', url: `${SITE}/fr/calculateur-marge-vin` },
+    { lang: 'x-default', url: `${SITE}/calculadora-margen-vino` },
+  ],
+  '/afiliate': [
+    { lang: 'es', url: `${SITE}/afiliate` },
+    { lang: 'en', url: `${SITE}/en/affiliate` },
+    { lang: 'it', url: `${SITE}/it/affiliati` },
+    { lang: 'fr', url: `${SITE}/fr/affilies` },
+    { lang: 'x-default', url: `${SITE}/afiliate` },
+  ],
+  '/sommelier-corner': [
+    { lang: 'es', url: `${SITE}/sommelier-corner` },
+    { lang: 'en', url: `${SITE}/en/sommelier-corner` },
+    { lang: 'it', url: `${SITE}/it/sommelier-corner` },
+    { lang: 'fr', url: `${SITE}/fr/sommelier-corner` },
+    { lang: 'x-default', url: `${SITE}/sommelier-corner` },
+  ],
+  '/que-es-winerim': [
+    { lang: 'es', url: `${SITE}/que-es-winerim` },
+    { lang: 'en', url: `${SITE}/en/what-is-winerim` },
+    { lang: 'it', url: `${SITE}/it/cose-winerim` },
+    { lang: 'fr', url: `${SITE}/fr/quest-ce-que-winerim` },
+    { lang: 'x-default', url: `${SITE}/que-es-winerim` },
+  ],
 };
 
 // ── Static page definitions ──
