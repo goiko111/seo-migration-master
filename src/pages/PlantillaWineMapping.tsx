@@ -274,20 +274,16 @@ const PlantillaWineMapping = () => {
       const leadData = { ...data, form_type: "plantilla-wine-mapping" };
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
-      setSubmitted(true);
-      toast.success(t.toastSuccess);
       notifyLead(leadData);
-      setTimeout(() => {
-        const a = document.createElement("a");
-        a.href = "/recursos/winerim_plantilla_wine_mapping_2026.xlsx";
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 800);
+      const a = document.createElement("a");
+      a.href = "/recursos/winerim_plantilla_wine_mapping_2026.xlsx";
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => navigate("/gracias?tipo=plantilla-wine-mapping"), 1000);
     } catch {
       toast.error(t.toastError);
-    } finally {
       setLoading(false);
     }
   };

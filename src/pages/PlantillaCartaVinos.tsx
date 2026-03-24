@@ -339,20 +339,16 @@ const PlantillaCartaVinos = () => {
       };
       const { error } = await supabase.from("contact_leads").insert(leadData);
       if (error) throw error;
-      setSubmitted(true);
-      toast.success(t.toastSuccess);
       notifyLead(leadData);
-      setTimeout(() => {
-        const a = document.createElement("a");
-        a.href = "/recursos/winerim_plantilla_carta_vinos_2026.xlsx";
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 800);
+      const a = document.createElement("a");
+      a.href = "/recursos/winerim_plantilla_carta_vinos_2026.xlsx";
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => navigate("/gracias?tipo=plantilla-carta-vinos"), 1000);
     } catch {
       toast.error(t.toastError);
-    } finally {
       setSubmitting(false);
     }
   };
