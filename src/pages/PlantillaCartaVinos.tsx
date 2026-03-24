@@ -320,6 +320,7 @@ const PlantillaCartaVinos = () => {
   const { lang, localePath } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [position, setPosition] = useState("");

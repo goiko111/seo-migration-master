@@ -91,6 +91,7 @@ const guideChapters = [
 ];
 
 const GuiaVinoPorCopa = () => {
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");

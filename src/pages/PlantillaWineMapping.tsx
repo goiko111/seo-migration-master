@@ -259,6 +259,7 @@ type FormData = z.infer<typeof formSchema>;
 const PlantillaWineMapping = () => {
   const { lang } = useLanguage();
   const t = i18n[lang];
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
