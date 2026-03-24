@@ -90,6 +90,7 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("");
   const [referencesCount, setReferencesCount] = useState("");
+  const navigate = useNavigate();
   const url = `${CANONICAL_DOMAIN}/recursos/${data.slug}`;
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
