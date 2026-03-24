@@ -140,6 +140,9 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* ── Instagram feed ─────────────────────── */}
+      <InstagramFeed />
+
       {/* ── Bottom bar ────────────────────────── */}
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
