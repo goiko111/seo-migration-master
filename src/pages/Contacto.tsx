@@ -1,4 +1,5 @@
 import { useState, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 const YouTubeFacade = lazy(() => import("@/components/YouTubeFacade"));
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
