@@ -459,13 +459,11 @@ const AnalizaCarta = () => {
 
     if (error) {
       toast.error(t.form.errSubmit);
+      setSubmitting(false);
     } else {
-      toast.success(t.form.success);
-      (e.target as HTMLFormElement).reset();
-      setFileName(null);
       notifyLead(leadData);
+      navigate("/gracias?tipo=analisis-carta");
     }
-    setSubmitting(false);
   };
 
   return (
