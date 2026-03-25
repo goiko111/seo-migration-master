@@ -20,6 +20,15 @@ const WP = "https://winerim.wine/wp-content/uploads/2025/11";
 interface FAQ { q: string; a: string; images?: { src: string; alt: string }[] }
 interface FAQCategory { title: string; faqs: FAQ[] }
 
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[¿?¡!""''()]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
 const faqCategories: FAQCategory[] = [
   {
     title: "Panel general",
