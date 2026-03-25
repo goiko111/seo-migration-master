@@ -20,6 +20,15 @@ const WP = "https://winerim.wine/wp-content/uploads/2025/11";
 interface FAQ { q: string; a: string; images?: { src: string; alt: string }[] }
 interface FAQCategory { title: string; faqs: FAQ[] }
 
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[¿?¡!""''()]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
 const faqCategories: FAQCategory[] = [
   {
     title: "Panel general",
@@ -351,7 +360,8 @@ const FAQs = () => {
                     <AccordionItem
                       key={i}
                       value={`cat-${catIdx}-faq-${i}`}
-                      className="rounded-xl border border-border bg-gradient-card px-6 data-[state=open]:border-wine/20 transition-colors"
+                      id={slugify(faq.q)}
+                      className="scroll-mt-28 rounded-xl border border-border bg-gradient-card px-6 data-[state=open]:border-wine/20 transition-colors"
                     >
                       <AccordionTrigger className="text-left font-heading font-semibold text-sm hover:no-underline py-5 gap-4">
                         {faq.q}
