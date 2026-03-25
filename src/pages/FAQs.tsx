@@ -13,8 +13,11 @@ import {
 } from "@/components/ui/accordion";
 import { useEffect } from "react";
 
+/* ─── Image base ─── */
+const WP = "https://winerim.wine/wp-content/uploads/2025/11";
+
 /* ─── FAQ data by category ─── */
-interface FAQ { q: string; a: string }
+interface FAQ { q: string; a: string; images?: { src: string; alt: string }[] }
 interface FAQCategory { title: string; faqs: FAQ[] }
 
 const faqCategories: FAQCategory[] = [
@@ -32,22 +35,50 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Cómo utilizar los filtros del editor?",
         a: `Para localizar un vino dentro del listado que compone tu carta, puedes utilizar una serie de filtros:\n\n• Todos — Muestra todos los vinos que componen la carta, estén activos o inactivos. Filtro activado por defecto.\n• Activos — Muestra únicamente los vinos activos, visibles actualmente en la carta.\n• Inactivos — Muestra los vinos desactivados, no visibles pero que siguen en tu base de datos.\n• Con precio — Filtra y muestra solo aquellos vinos que tienen un precio asignado.\n• Sin precio — Muestra los vinos a los que todavía no se les ha asignado precio.\n• Sin stock — Muestra los vinos que no disponen de stock actualmente.\n• Agotados — Filtra los vinos etiquetados como agotados.\n• Copa — Muestra únicamente los vinos que pueden servirse por copa.\n• Últimos añadidos — Permite visualizar los últimos vinos incorporados a la carta.`,
+        images: [
+          { src: `${WP}/filtros-768x576.png`, alt: "Filtros del editor de carta de vinos en Winerim" },
+          { src: `${WP}/filtro_todos-300x126.png`, alt: "Filtro Todos" },
+          { src: `${WP}/filtro_activos-300x126.png`, alt: "Filtro Activos" },
+          { src: `${WP}/filtro_conprecio-300x126.png`, alt: "Filtro Con precio" },
+          { src: `${WP}/filtro_sinprecio-300x126.png`, alt: "Filtro Sin precio" },
+          { src: `${WP}/filtro_sinstock-300x126.png`, alt: "Filtro Sin stock" },
+          { src: `${WP}/filtro_agotados-300x126.png`, alt: "Filtro Agotados" },
+          { src: `${WP}/filtro_copa-300x126.png`, alt: "Filtro Copa" },
+          { src: `${WP}/filtro_ultimos-add-300x126.png`, alt: "Filtro Últimos añadidos" },
+        ],
       },
       {
         q: "¿Cómo utilizar el buscador del editor?",
         a: `Las cartas de vino suelen ser muy extensas, por lo que encontrar una referencia concreta puede resultar complicado. Además de los filtros, puedes utilizar el buscador:\n\n1. Accede al buscador: Haz clic en la barra superior de búsqueda situada en el editor de la carta.\n\n2. Escribe el nombre del vino: Introduce el nombre completo o parcial del vino que deseas localizar.\n\n3. Visualiza los resultados: A medida que escribas, el sistema mostrará automáticamente los resultados coincidentes dentro de la carta. Podrás acceder de forma inmediata a cualquier vino sin necesidad de recorrer toda la lista.`,
+        images: [
+          { src: `${WP}/listado-principal-busqueda-768x576.png`, alt: "Buscador del editor de carta de vinos" },
+        ],
       },
       {
         q: "¿Cómo gestionar los idiomas de la carta?",
         a: `La carta de vinos puede configurarse en múltiples idiomas, una función útil si recibes clientes internacionales.\n\n1. Idioma principal y gestión de idiomas: Siempre existirá un idioma principal predefinido, pero puedes añadir o modificar otros idiomas desde el panel del editor pulsando en "Gestionar idioma".\n\n2. Añadir nuevos idiomas: Al activar un idioma, se traducirán automáticamente todos los elementos gestionados por Winerim.\n\n3. Traducción de textos del restaurante: Los textos personalizados del restaurante deben traducirse manualmente. Dentro del editor, Winerim te indicará los textos pendientes de traducir mediante un destacado en rojo con el aviso "Faltan traducciones".\n\n4. Introducir traducciones: Al hacer clic sobre el icono de aviso, se desplegará un panel donde podrás introducir la traducción correspondiente.`,
+        images: [
+          { src: `${WP}/listado-principal-gestionar-idiomas-768x576.png`, alt: "Gestionar idiomas de la carta" },
+          { src: `${WP}/editar_idiomas-768x576.png`, alt: "Editar idiomas" },
+          { src: `${WP}/Gestionar-pairing-768x576.png`, alt: "Gestionar traducciones de secciones" },
+        ],
       },
       {
         q: "¿Qué es el módulo Pairing o Maridaje Avanzado?",
         a: `La versión básica de Winerim incluye un maridaje genérico entre la botella y tipos de alimentos estándar. Además, Winerim ofrece un módulo avanzado de maridaje (Pairing PRO), que permite vincular cada vino con los platos específicos de la carta del restaurante o con los menús degustación.\n\nActivación: En el menú lateral izquierdo del panel de control encontrarás el botón "Gestionar Pairing (PRO)". Si aún no tienes el módulo activado, podrás solicitar su activación.\n\nIntroducir tipos de plato: Comienza por los tipos de plato de tu carta (entrantes, primeros, segundos, postres). Haz clic en "Añadir tipo de plato".\n\nAñadir platos: Introduce el nombre del plato, selecciona su tipo, marca si está activo y selecciona los vinos con los que marida.\n\nMaridaje con menús degustación: Si tu restaurante ofrece menús degustación, también puedes configurar maridaje específico por menú desde la opción "Menús".`,
+        images: [
+          { src: `${WP}/listado-principal-gestionar-pairing-768x576.png`, alt: "Módulo Pairing avanzado" },
+          { src: `${WP}/Gestionar-pairing-768x576.png`, alt: "Gestionar Pairing PRO" },
+          { src: `${WP}/Nuevo-plato-768x576.png`, alt: "Añadir nuevo plato" },
+          { src: `${WP}/add-menu-768x576.png`, alt: "Añadir menú degustación" },
+        ],
       },
       {
         q: "¿Cómo imprimir la carta de vinos?",
         a: `Desde el panel de control puedes imprimir en PDF la carta actualizada.\n\n1. Generar el PDF: Haz clic en "Imprimir PDF". Configura: correo electrónico de destino, idioma de la carta, si incluir imágenes de las botellas y la sección del vino.\n\n2. Exportar en formato CSV: También puedes exportar las referencias en formato CSV haciendo clic en "Exportar CSV". Obtendrás un archivo ideal para gestión interna o análisis de datos.`,
+        images: [
+          { src: `${WP}/Imprimir-PDF-768x576.png`, alt: "Imprimir carta de vinos en PDF" },
+        ],
       },
     ],
   },
@@ -57,14 +88,34 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Qué acciones se pueden realizar sobre cada botella de vino?",
         a: `Al pasar el ratón por encima de una botella del listado, se muestran varios iconos de acción:\n\n1. Editar botella — Icono del lápiz para modificar la ficha de la botella.\n2. Duplicar vino — Para crear una nueva referencia basada en una existente (por ejemplo, otra añada).\n3. Eliminar botella — Icono de la papelera para eliminar definitivamente una referencia. ⚠️ Esta acción no se puede deshacer.\n4. Añadir a "Selección" — Incluye la botella en la lista de Selección, una categoría especial que agrupa los vinos más representativos del restaurante.\n5. Añadir a "Recomendados" — Icono de la estrella para destacar el vino en la sección de Recomendados.\n6. Marcar como "Novedad" — El vino aparecerá destacado como nueva referencia dentro de la carta.`,
+        images: [
+          { src: `${WP}/Listado-principal-acciones-wine-768x576.png`, alt: "Acciones sobre cada botella de vino" },
+          { src: `${WP}/icono-editar.png`, alt: "Icono editar botella" },
+          { src: `${WP}/icono-duplicar.png`, alt: "Icono duplicar vino" },
+          { src: `${WP}/icono-eliminar.png`, alt: "Icono eliminar botella" },
+          { src: `${WP}/icono-seleccion.png`, alt: "Icono añadir a Selección" },
+          { src: `${WP}/icono-destacado.png`, alt: "Icono añadir a Recomendados" },
+          { src: `${WP}/icono-novedad.png`, alt: "Icono marcar como Novedad" },
+        ],
       },
       {
         q: "¿Cómo funciona la sección de vinos recomendados?",
         a: `Puedes crear una selección especial de vinos recomendados para destacar referencias que desees sugerir al comensal.\n\n1. Marcar los vinos recomendados: Desde el panel del editor, marca el icono de la estrella en las referencias que quieras incluir.\n\n2. Configurar la visualización: Accede al menú "Mi cuenta" → "Ajustes" → "Etiquetas y secciones" para activar o desactivar la visualización de Recomendados.\n\n3. Personalizar el nombre de la sección: Puedes asignarle el nombre que desees (máximo 27 caracteres).\n\n4. Traducción: Si tu carta está en varios idiomas, recuerda traducir el nombre de la sección en todos los idiomas activos.`,
+        images: [
+          { src: `${WP}/icono-destacado.png`, alt: "Icono de Recomendados" },
+          { src: `${WP}/desplegable-perfil-ajustes-768x576.png`, alt: "Menú Mi cuenta – Ajustes" },
+          { src: `${WP}/ajustes-link-secciones-768x576.png`, alt: "Ajustes – Etiquetas y secciones" },
+          { src: `${WP}/ajustes-secciones-768x576.png`, alt: "Configurar sección Recomendados" },
+        ],
       },
       {
         q: "¿Cómo funciona el destacado de novedades?",
         a: `Cuando añades un vino nuevo, puedes marcarlo con la etiqueta de "Novedad" para que el comensal identifique las últimas incorporaciones.\n\n1. Marcar un vino como novedad: Desde el panel del editor, activa el botón o icono de novedades.\n\n2. Configurar la sección: Accede al menú "Mi cuenta" → "Ajustes" → "Etiquetas y secciones" para activar o desactivar la visualización de novedades.\n\n3. Personalizar el nombre: Puedes editar el nombre con el que se mostrará esta sección al comensal.`,
+        images: [
+          { src: `${WP}/icono-novedad.png`, alt: "Icono de Novedad" },
+          { src: `${WP}/ajustes-link-secciones-768x576.png`, alt: "Ajustes – Etiquetas y secciones" },
+          { src: `${WP}/ajustes-secciones-768x576.png`, alt: "Configurar sección Novedades" },
+        ],
       },
       {
         q: "¿Se puede cambiar la imagen de la botella?",
@@ -78,6 +129,9 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Cómo funciona el módulo de comparativa de precios?",
         a: `El módulo de comparativa de precios permite conocer el precio medio al que otros restaurantes de tu misma categoría están ofreciendo una determinada botella. Winerim muestra tres datos clave de cada referencia:\n\n• Precio medio\n• Precio mínimo\n• Precio máximo\n\nAdemás, con un simple vistazo podrás saber si el precio de tu carta está o no dentro de la media. Esta información es muy valiosa para ajustar los precios o para orientarte al incorporar nuevas referencias.\n\nEstos datos se obtienen mediante un algoritmo interno que tiene en cuenta criterios como el precio medio del cubierto o el tamaño de la bodega. Winerim categoriza los restaurantes para ofrecer siempre comparativas precisas.`,
+        images: [
+          { src: `${WP}/listado-principal-comparativa-de-precio-768x576.png`, alt: "Comparativa de precios de vinos en Winerim" },
+        ],
       },
     ],
   },
@@ -87,6 +141,12 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Cómo gestionar las valoraciones de críticos?",
         a: `Puedes añadir o gestionar las valoraciones de críticos de vino directamente desde la ficha de cada referencia.\n\nAccede al panel editor, selecciona el vino que deseas modificar y ve a la última sección: Valoraciones.\n\nPulsa en Editar para acceder a la lista de valoraciones. Desde ahí podrás gestionar las existentes, eliminar las que ya no sean relevantes o añadir nuevas puntuaciones de críticos reconocidos como Parker, Peñín u otros.\n\nEstas valoraciones aparecerán en la ficha del vino dentro de tu carta digital, aportando valor añadido a la presentación de cada referencia.`,
+        images: [
+          { src: `${WP}/editar-ficha-vino-1-768x576.png`, alt: "Ficha de vino – Secciones" },
+          { src: `${WP}/editar-ficha-vino-valoraciones-768x576.png`, alt: "Editar valoraciones de críticos" },
+          { src: `${WP}/editar-ficha-vino-lista-valoraciones-768x576.png`, alt: "Lista de valoraciones" },
+          { src: `${WP}/editar-ficha-vino-lista-valoraciones-add-768x576.png`, alt: "Añadir nueva valoración" },
+        ],
       },
     ],
   },
@@ -96,10 +156,17 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Qué modos de visualización existen?",
         a: `Winerim ofrece tres modos de visualización para mostrar tu carta de vinos:\n\n• Carrusel — Muestra las botellas de forma destacada, una a una, con desplazamiento horizontal.\n• Rejilla / Lista — Organiza los vinos en formato visual o en listado, facilitando la lectura rápida.\n• Carta tradicional — Reproduce el formato clásico de carta impresa, con un diseño elegante y estructurado.\n\nPuedes configurar el modo de visualización por defecto desde el panel editor, accediendo a la sección Ajustes del menú superior.`,
+        images: [
+          { src: `${WP}/desplegable-perfil-ajustes-768x576.png`, alt: "Menú Mi cuenta – Ajustes" },
+          { src: `${WP}/ajustes-general-seccion-vision-768x576.png`, alt: "Ajustes de modo de visualización" },
+        ],
       },
       {
         q: "¿Cómo compartir la carta con QR y enlace?",
         a: `Desde el menú superior del panel editor, accede a la sección Códigos QR. Encontrarás varias opciones:\n\n• Descarga de la app — Enlaces para descargar la aplicación en iOS y Android.\n• QR de descarga — Tus clientes podrán descargar directamente la app. Una vez instalada, solo deberán introducir el código de acceso.\n• Enlace público y QR directo — Un enlace web y su QR para acceder a la carta sin necesidad de app. Puedes utilizar este QR en soportes físicos como cartas impresas, mesas, etiquetas o displays.\n\nCon estas opciones podrás ofrecer la carta de forma cómoda y versátil, ya sea desde el dispositivo del comensal o mediante una tablet del restaurante.`,
+        images: [
+          { src: `${WP}/codigos-qr-768x576.png`, alt: "Códigos QR y enlace a la carta" },
+        ],
       },
     ],
   },
@@ -109,10 +176,21 @@ const faqCategories: FAQCategory[] = [
       {
         q: "¿Cómo funciona el control de stock?",
         a: `Desde el panel de control puedes acceder a la pestaña Stock para realizar un seguimiento detallado de las botellas disponibles.\n\nEncontrarás el listado completo de referencias con la posibilidad de:\n\n• Modificar el stock actual de cada vino.\n• Definir un umbral mínimo para que la referencia desaparezca automáticamente al agotarse.\n• Restar ventas manualmente cuando se produzcan.\n\nPara editar cualquiera de estos datos, pulsa sobre el icono del lápiz. Podrás introducir el número de botellas disponibles, establecer el umbral de aviso y ubicar la botella dentro de tu bodega para que cualquier miembro del equipo pueda localizarla rápidamente.`,
+        images: [
+          { src: `${WP}/listado-principal-stock-768x576.png`, alt: "Control de stock de vinos" },
+          { src: `${WP}/gestionar-stock-2-768x576.png`, alt: "Gestionar stock por referencia" },
+          { src: `${WP}/editar-stock-768x576.png`, alt: "Editar stock y ubicación de bodega" },
+        ],
       },
       {
         q: "¿Cómo registrar un pedido?",
         a: `Desde la pestaña Pedidos de la página Stock puedes llevar un seguimiento completo de las compras.\n\nAl acceder encontrarás: Listado de pedidos realizados, Pedidos en curso, Registrar un nuevo pedido y Agenda de distribuidores.\n\n📦 Seguimiento de pedidos en curso: Accede a la pestaña Pedidos en curso para ver el listado detallado.\n\n🧾 Agenda de proveedores: Antes de registrar un pedido, configura tu agenda de proveedores. Pulsa en "Agenda de distribuidores", haz clic en "Añadir" e introduce los datos del proveedor. Luego selecciona las referencias que te provee.\n\n🍷 Registrar un nuevo pedido: Selecciona el proveedor, haz clic en "Añadir vino", marca las referencias a reponer, introduce el número de botellas y el importe de compra.\n\nEl pedido quedará registrado y se sumará automáticamente al stock una vez recibido. El sistema contabiliza el importe total para analizar la rentabilidad de la bodega.`,
+        images: [
+          { src: `${WP}/pedidos-listado-768x576.png`, alt: "Listado de pedidos" },
+          { src: `${WP}/pedido-en-curso-768x576.png`, alt: "Pedidos en curso" },
+          { src: `${WP}/agenda-distribuidores-768x576.png`, alt: "Agenda de distribuidores" },
+          { src: `${WP}/nuevo-pedido-768x576.png`, alt: "Registrar nuevo pedido" },
+        ],
       },
     ],
   },
@@ -175,7 +253,6 @@ const faqCategories: FAQCategory[] = [
 const allFaqs = faqCategories.flatMap((c) => c.faqs);
 
 const FAQs = () => {
-  // Inject FAQPage schema
   useEffect(() => {
     const script = document.createElement("script");
     script.id = "faq-page-schema";
@@ -279,8 +356,22 @@ const FAQs = () => {
                       <AccordionTrigger className="text-left font-heading font-semibold text-sm hover:no-underline py-5 gap-4">
                         {faq.q}
                       </AccordionTrigger>
-                      <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5 whitespace-pre-line">
-                        {faq.a}
+                      <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                        <div className="whitespace-pre-line mb-4">{faq.a}</div>
+                        {faq.images && faq.images.length > 0 && (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                            {faq.images.map((img, imgIdx) => (
+                              <img
+                                key={imgIdx}
+                                src={img.src}
+                                alt={img.alt}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full rounded-lg border border-border object-cover"
+                              />
+                            ))}
+                          </div>
+                        )}
                       </AccordionContent>
                     </AccordionItem>
                   ))}
