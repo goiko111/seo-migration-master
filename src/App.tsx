@@ -147,6 +147,7 @@ const esRoutes = (
     <Route path="/contacto" element={<Contacto />} />
     <Route path="/demo" element={<Demo />} />
     <Route path="/gracias" element={<Gracias />} />
+    <Route path="/faqs" element={<FAQs />} />
     <Route path="/article/:slug" element={<ArticlePage />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminShell />} />
