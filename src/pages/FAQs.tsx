@@ -360,7 +360,8 @@ const FAQs = () => {
                     <AccordionItem
                       key={i}
                       value={`cat-${catIdx}-faq-${i}`}
-                      className="rounded-xl border border-border bg-gradient-card px-6 data-[state=open]:border-wine/20 transition-colors"
+                      id={slugify(faq.q)}
+                      className="scroll-mt-28 rounded-xl border border-border bg-gradient-card px-6 data-[state=open]:border-wine/20 transition-colors"
                     >
                       <AccordionTrigger className="text-left font-heading font-semibold text-sm hover:no-underline py-5 gap-4">
                         {faq.q}
