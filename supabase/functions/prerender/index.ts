@@ -1807,7 +1807,26 @@ Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
     const ua = req.headers.get('user-agent') || '';
-    const path = url.searchParams.get('path') || '/';
+
+    // Robust path extraction: try query param, then header, then URL path suffix
+    let path = url.searchParams.get('path')
+      || req.headers.get('x-original-path')
+      || req.headers.get('x-forwarded-path')
+      || null;
+
+    // If no explicit path, try to extract from URL pathname after /prerender
+    if (!path) {
+      const fnPath = url.pathname; // e.g. /functions/v1/prerender/biblioteca-vino
+      const match = fnPath.match(/\/prerender\/(.*)/);
+      if (match && match[1]) {
+        path = '/' + match[1];
+      }
+    }
+
+    // Final fallback
+    if (!path) path = '/';
+
+    console.log('Prerender request — path:', path, '| ua:', ua.substring(0, 60));
 
     // Only serve prerendered HTML to bots
     if (!isBot(ua)) {
