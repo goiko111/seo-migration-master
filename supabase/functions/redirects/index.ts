@@ -82,7 +82,7 @@ const GONE_PREFIXES = [
   "/tag/",
 ];
 
-const SITE = "https://wine.winerim.wine";
+const SITE = Deno.env.get("SITE_URL") || "https://winerim.wine";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
