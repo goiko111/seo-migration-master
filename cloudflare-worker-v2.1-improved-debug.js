@@ -227,9 +227,12 @@ export default {
 
     // ── 4. Human traffic (or bot fallback) → proxy to SPA origin ──
     const originUrl = new URL(path + url.search, env.ORIGIN);
+    // Strip the original Host header so Lovable origin accepts the request
+    const originHeaders = new Headers(request.headers);
+    originHeaders.set('Host', new URL(env.ORIGIN).host);
     const originRes = await fetch(originUrl, {
       method: request.method,
-      headers: request.headers,
+      headers: originHeaders,
     });
 
     // Clone response and add security headers
