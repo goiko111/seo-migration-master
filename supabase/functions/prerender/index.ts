@@ -1885,9 +1885,18 @@ Deno.serve(async (req) => {
       });
     }
 
-    // No content found — let the SPA handle it
-    return new Response(JSON.stringify({ prerender: false, reason: 'no-content' }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    // No specific content found — fallback to homepage HTML for bots
+    const fallbackPage = STATIC_PAGES['/'];
+    const fallbackHreflang = HREFLANG_MAP['/'];
+    html = generateHTML(fallbackPage.meta, fallbackPage.content, fallbackHreflang);
+    return new Response(html, {
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+        'X-Prerender': 'true',
+        'X-Prerender-Fallback': 'homepage',
+      },
     });
 
   } catch (error) {
