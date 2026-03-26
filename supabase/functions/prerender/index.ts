@@ -1808,19 +1808,31 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const ua = req.headers.get('user-agent') || '';
 
-    // Robust path extraction: try query param, then header, then URL path suffix
-    let path = url.searchParams.get('path')
-      || req.headers.get('x-original-path')
-      || req.headers.get('x-forwarded-path')
-      || null;
+    // Robust path extraction — supports ?url=, ?path=, headers, and URL suffix
+    let path: string | null = null;
 
-    // If no explicit path, try to extract from URL pathname after /prerender
-    if (!path) {
-      const fnPath = url.pathname; // e.g. /functions/v1/prerender/biblioteca-vino
-      const match = fnPath.match(/\/prerender\/(.*)/);
-      if (match && match[1]) {
-        path = '/' + match[1];
+    // 1. ?url=https://winerim.wine/biblioteca-vino → extract pathname
+    const urlParam = url.searchParams.get('url');
+    if (urlParam) {
+      try {
+        const parsed = new URL(urlParam);
+        path = parsed.pathname || '/';
+      } catch {
+        // If not a valid URL, treat it as a path
+        path = urlParam.startsWith('/') ? urlParam : '/' + urlParam;
       }
+    }
+
+    // 2. ?path=/biblioteca-vino
+    if (!path) path = url.searchParams.get('path');
+
+    // 3. Headers
+    if (!path) path = req.headers.get('x-original-path') || req.headers.get('x-forwarded-path');
+
+    // 4. URL pathname suffix: /functions/v1/prerender/biblioteca-vino
+    if (!path) {
+      const match = url.pathname.match(/\/prerender\/(.*)/);
+      if (match && match[1]) path = '/' + match[1];
     }
 
     // Final fallback
