@@ -1483,6 +1483,213 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Guía compras con datos', url: '/guias/como-usar-datos-para-decidir-que-vinos-comprar' }, { label: 'Demo', url: '/demo' }],
     },
   },
+  '/faqs': {
+    meta: { title: 'Preguntas Frecuentes sobre Winerim | FAQ', description: 'Respuestas a las preguntas más habituales sobre Winerim: funcionalidades, precios, implantación, soporte y más.', canonical: `${SITE}/faqs`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'FAQPage' },
+    content: {
+      h1: 'Preguntas frecuentes sobre Winerim',
+      subtitle: 'Todo lo que necesitas saber antes de empezar.',
+      sections: [
+        { heading: 'Sobre el producto', content: 'Winerim es un software de IA para gestionar la carta de vinos de restaurantes, hoteles y vinotecas.' },
+        { heading: 'Implantación', content: 'La implantación típica dura entre 1 y 3 semanas, con soporte dedicado.' },
+        { heading: 'Precios y planes', content: 'Ofrecemos planes adaptados al tamaño y tipo de negocio.' },
+      ],
+      faqs: [
+        { q: '¿Qué es Winerim?', a: 'Winerim es un software de IA que ayuda a restaurantes a vender más vino, optimizar márgenes y controlar la bodega.' },
+        { q: '¿Cuánto cuesta Winerim?', a: 'Ofrecemos planes desde 49€/mes. Consulta nuestra página de precios para más detalles.' },
+        { q: '¿Necesito un sumiller?', a: 'No. Winerim está diseñado para funcionar sin sumiller, proporcionando recomendaciones automáticas.' },
+        { q: '¿Cuánto tarda la implantación?', a: 'Entre 1 y 3 semanas, dependiendo del número de referencias y locales.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'FAQ', url: `${SITE}/faqs` }],
+      internalLinks: [{ label: 'Precios', url: '/precios' }, { label: 'Demo', url: '/demo' }, { label: 'Contacto', url: '/contacto' }],
+    },
+  },
+  '/what-is-winerim': {
+    meta: { title: 'What Is Winerim? AI Wine List Software for Restaurants', description: 'Winerim is an AI-powered wine list management platform that helps restaurants sell more wine, optimize margins, and control inventory.', canonical: `${SITE}/what-is-winerim`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'What is Winerim?',
+      subtitle: 'AI-powered wine list management for restaurants, hotels and wine bars.',
+      sections: [
+        { heading: 'The Problem', content: 'Most restaurants lose revenue because their wine list is static, unoptimized and disconnected from sales data.' },
+        { heading: 'The Solution', content: 'Winerim uses AI to create dynamic, data-driven wine lists that increase average ticket, optimize margins and reduce dead stock.' },
+        { heading: 'Key Features', content: 'Smart digital wine list, AI recommendations, food-wine pairing, margin analytics, stock rotation alerts, benchmarking and procurement intelligence.' },
+      ],
+      faqs: [
+        { q: 'How does Winerim work?', a: 'Winerim connects to your POS and inventory systems to provide real-time insights and automated recommendations for your wine program.' },
+        { q: 'Is Winerim available in English?', a: 'Yes. Winerim supports multiple languages including English, Spanish, Italian and French.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/` }, { name: 'What is Winerim', url: `${SITE}/what-is-winerim` }],
+      internalLinks: [{ label: 'Features', url: '/funcionalidades' }, { label: 'Pricing', url: '/precios' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/ai-wine-software': {
+    meta: { title: 'AI Wine Software for Restaurants | Winerim', description: 'Discover how AI wine software helps restaurants optimize wine lists, increase revenue and reduce waste.', canonical: `${SITE}/ai-wine-software`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'AI Wine Software for Restaurants',
+      subtitle: 'Optimize your wine program with artificial intelligence.',
+      sections: [
+        { heading: 'Why AI for Wine?', content: 'AI analyzes sales patterns, margins, rotation and guest preferences to recommend the optimal wine list composition.' },
+        { heading: 'What Winerim Does', content: 'Dynamic wine list management, automated pricing suggestions, dead stock alerts, food pairing engine and procurement intelligence.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/` }, { name: 'AI Wine Software', url: `${SITE}/ai-wine-software` }],
+      internalLinks: [{ label: 'What is Winerim', url: '/what-is-winerim' }, { label: 'Features', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/wine-list-management-software': {
+    meta: { title: 'Wine List Management Software | Winerim', description: 'Professional wine list management software for restaurants. Digital wine menus, AI recommendations, margin analytics and inventory control.', canonical: `${SITE}/wine-list-management-software`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Wine List Management Software',
+      subtitle: 'The complete platform for restaurant wine programs.',
+      sections: [
+        { heading: 'Digital Wine List', content: 'Create beautiful, interactive digital wine lists that update in real-time across all your locations.' },
+        { heading: 'Analytics & Insights', content: 'Track sales, margins, rotation and guest preferences with powerful analytics dashboards.' },
+        { heading: 'AI Recommendations', content: 'Get data-driven suggestions for pricing, promotions, food pairings and list composition.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/` }, { name: 'Wine List Software', url: `${SITE}/wine-list-management-software` }],
+      internalLinks: [{ label: 'What is Winerim', url: '/what-is-winerim' }, { label: 'Pricing', url: '/precios' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/hoteles': {
+    meta: { title: 'Software de Carta de Vinos para Hoteles | Winerim', description: 'Gestiona la carta de vinos de tu hotel con IA: room service, restaurante, bar y eventos, todo centralizado.', canonical: `${SITE}/soluciones/hoteles`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Carta de vinos inteligente para hoteles',
+      subtitle: 'Centraliza y optimiza el programa de vinos en todos los puntos de venta del hotel.',
+      sections: [
+        { heading: 'Múltiples puntos de venta', content: 'Restaurante, bar, room service y eventos: una sola plataforma para gestionar la carta en cada punto.' },
+        { heading: 'Experiencia de huésped', content: 'Carta digital interactiva con maridajes y recomendaciones personalizadas.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Hoteles', url: `${SITE}/soluciones/hoteles` }],
+      internalLinks: [{ label: 'Grupos restauración', url: '/soluciones/grupos-restauracion' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/restaurantes-sin-sumiller': {
+    meta: { title: 'Software de Vinos para Restaurantes sin Sumiller | Winerim', description: 'Winerim actúa como tu sumiller digital: recomendaciones automáticas, maridajes y control de carta sin necesidad de experto.', canonical: `${SITE}/soluciones/restaurantes-sin-sumiller`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Software de vinos para restaurantes sin sumiller',
+      subtitle: 'No necesitas un sumiller. Necesitas datos y automatización.',
+      sections: [
+        { heading: 'El problema', content: 'Sin sumiller, la carta se estanca, los márgenes bajan y el equipo de sala no sabe recomendar.' },
+        { heading: 'La solución', content: 'Winerim automatiza recomendaciones, maridajes y control de stock.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Sin sumiller', url: `${SITE}/soluciones/restaurantes-sin-sumiller` }],
+      internalLinks: [{ label: 'Guía sin sumiller', url: '/guias/como-usar-winerim-sin-sumiller' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/restaurantes-gastronomicos': {
+    meta: { title: 'Software de Carta de Vinos para Restaurantes Gastronómicos | Winerim', description: 'Gestiona cartas premium con cientos de referencias, control de añadas, maridajes de autor y analítica avanzada.', canonical: `${SITE}/soluciones/restaurantes-gastronomicos`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Carta de vinos para restaurantes gastronómicos',
+      subtitle: 'La herramienta que usan los mejores restaurantes.',
+      sections: [
+        { heading: 'Cartas extensas bajo control', content: 'Gestiona cientos de referencias con fichas detalladas, notas de cata, añadas y puntuaciones.' },
+        { heading: 'Maridajes de autor', content: 'Crea experiencias de maridaje únicas con el motor de IA de Winerim.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Gastronómicos', url: `${SITE}/soluciones/restaurantes-gastronomicos` }],
+      internalLinks: [{ label: 'Carta amplia', url: '/soluciones/carta-amplia' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/wine-bars': {
+    meta: { title: 'Software de Carta de Vinos para Wine Bars y Vinotecas | Winerim', description: 'Optimiza tu wine bar con carta digital, vino por copa inteligente, rotación controlada y recomendaciones.', canonical: `${SITE}/soluciones/wine-bars`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Carta de vinos inteligente para wine bars',
+      subtitle: 'Maximiza el vino por copa y la experiencia de cliente.',
+      sections: [
+        { heading: 'Vino por copa optimizado', content: 'Selecciona las mejores referencias para copa basándote en datos de rotación, margen y preferencias.' },
+        { heading: 'Experiencia interactiva', content: 'Carta digital con notas de cata, maridajes y recomendaciones personalizadas.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Wine Bars', url: `${SITE}/soluciones/wine-bars` }],
+      internalLinks: [{ label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/carta-amplia': {
+    meta: { title: 'Gestión de Carta de Vinos Amplia (+100 refs) | Winerim', description: 'Gestiona cartas con más de 100 referencias sin perder el control: rotación, márgenes, stock muerto y optimización.', canonical: `${SITE}/soluciones/carta-amplia`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Gestión de carta de vinos amplia',
+      subtitle: 'Más de 100 referencias bajo control con datos en tiempo real.',
+      sections: [
+        { heading: 'El reto', content: 'Con cartas grandes, el stock muerto crece y es difícil saber qué funciona.' },
+        { heading: 'La solución', content: 'Winerim analiza cada referencia y te dice cuáles potenciar, sustituir o eliminar.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Carta amplia', url: `${SITE}/soluciones/carta-amplia` }],
+      internalLinks: [{ label: 'Detectar vinos muertos', url: '/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/carta-crecimiento': {
+    meta: { title: 'Cómo Hacer Crecer tu Carta de Vinos de Forma Rentable | Winerim', description: 'Estrategias para ampliar tu carta sin disparar costes: análisis de demanda, márgenes y rotación con IA.', canonical: `${SITE}/soluciones/carta-crecimiento`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Haz crecer tu carta de vinos de forma rentable',
+      subtitle: 'Amplía con datos, no con intuición.',
+      sections: [
+        { heading: 'Crecer con criterio', content: 'Analiza gaps en tu oferta y oportunidades de margen antes de añadir referencias.' },
+        { heading: 'Winerim te guía', content: 'Recomendaciones basadas en benchmarking, ventas históricas y tendencias.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Carta en crecimiento', url: `${SITE}/soluciones/carta-crecimiento` }],
+      internalLinks: [{ label: 'Cuántos vinos tener', url: '/blog/cuantos-vinos-carta-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/soluciones/inteligencia-de-compras': {
+    meta: { title: 'Inteligencia de Compras para Restaurantes | Winerim', description: 'Optimiza las compras de vino con datos de rotación, margen, estacionalidad y benchmarking.', canonical: `${SITE}/soluciones/inteligencia-de-compras`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Inteligencia de compras para restaurantes',
+      subtitle: 'Compra mejor vino, en la cantidad justa, al mejor precio.',
+      sections: [
+        { heading: 'Datos para decidir', content: 'Rotación real, margen por referencia, estacionalidad y comparativa con el mercado.' },
+        { heading: 'Automatización', content: 'Alertas de reposición, sugerencias de sustitución y negociación informada.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Soluciones', url: `${SITE}/soluciones` }, { name: 'Inteligencia de compras', url: `${SITE}/soluciones/inteligencia-de-compras` }],
+      internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Guía compras', url: '/guias/como-usar-datos-para-decidir-que-vinos-comprar' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/decision-center': {
+    meta: { title: 'Decision Center — Centro de Decisiones para tu Carta | Winerim', description: 'Insights accionables sobre carta, márgenes, rotación, compras y vino por copa.', canonical: `${SITE}/decision-center`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Decision Center de Winerim',
+      subtitle: 'Insights accionables para cada área de tu programa de vinos.',
+      sections: [
+        { heading: 'Áreas de decisión', content: 'Carta y equilibrio, márgenes y pricing, stock y rotación, compras y reposición, vino por copa y benchmarking.' },
+        { heading: 'Cómo funciona', content: 'Selecciona un área, explora los insights y aplica las recomendaciones directamente.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Decision Center', url: `${SITE}/decision-center` }],
+      internalLinks: [{ label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/recursos': {
+    meta: { title: 'Recursos Descargables para Restaurantes | Winerim', description: 'Plantillas, checklists y herramientas descargables para optimizar la gestión de vinos.', canonical: `${SITE}/recursos`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Recursos descargables para restaurantes',
+      subtitle: 'Plantillas y herramientas prácticas para mejorar tu carta de vinos.',
+      sections: [
+        { heading: 'Plantillas', content: 'Descarga plantillas profesionales para diseñar y organizar tu carta.' },
+        { heading: 'Checklists', content: 'Listas de verificación para revisión mensual, auditoría y optimización de márgenes.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Recursos', url: `${SITE}/recursos` }],
+      internalLinks: [{ label: 'Guías y recursos', url: '/guias-y-recursos' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/digital-wine-list': {
+    meta: { title: 'Digital Wine List for Restaurants | Winerim', description: 'Create interactive digital wine lists with AI-powered recommendations, food pairings and real-time analytics.', canonical: `${SITE}/en/digital-wine-list`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Digital Wine List for Restaurants',
+      subtitle: 'Interactive, data-driven wine menus powered by AI.',
+      sections: [
+        { heading: 'Why Go Digital?', content: 'Digital wine lists update instantly, provide rich tasting notes and pair wines with your menu automatically.' },
+        { heading: 'Features', content: 'QR access, real-time updates, AI recommendations, food pairing engine, multi-language support.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/` }, { name: 'Digital Wine List', url: `${SITE}/en/digital-wine-list` }],
+      internalLinks: [{ label: 'What is Winerim', url: '/what-is-winerim' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
 };
 
 // ── HTML Generator ──
