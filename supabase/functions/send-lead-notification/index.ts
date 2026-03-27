@@ -240,7 +240,45 @@ Deno.serve(async (req) => {
       console.error("Resend notification error:", err);
     }
 
-    // 2) Send confirmation to the lead (if they provided email)
+    // 2) Forward lead to Winerim Connect (Lead Autopilot)
+    const CONNECT_URL = Deno.env.get("WINERIM_CONNECT_WEBHOOK_URL");
+    if (CONNECT_URL) {
+      try {
+        const connectRes = await fetch(CONNECT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: lead.name || null,
+            email: lead.email || null,
+            phone: lead.phone || null,
+            company: lead.restaurant || null,
+            city: lead.city || null,
+            position: lead.position || null,
+            business_type: lead.business_type || null,
+            num_locations: lead.num_locations || null,
+            references_count: lead.references_count || null,
+            has_sommelier: lead.has_sommelier || null,
+            main_challenge: lead.main_challenge || null,
+            message: lead.message || null,
+            menu_link: lead.menu_link || null,
+            form_type: lead.form_type || null,
+            form_label: formInfo.label,
+            resource: formInfo.resource || null,
+            source: "winerim_web",
+          }),
+        });
+        if (!connectRes.ok) {
+          const err = await connectRes.text();
+          console.error("Winerim Connect webhook error:", err);
+        } else {
+          console.log("Lead forwarded to Winerim Connect");
+        }
+      } catch (e) {
+        console.error("Winerim Connect webhook failed (non-blocking):", e);
+      }
+    }
+
+    // 3) Send confirmation to the lead (if they provided email)
     if (lead.email) {
       const subjectLine = formInfo.resource
         ? `Tu recurso: ${formInfo.resource} — Winerim`
