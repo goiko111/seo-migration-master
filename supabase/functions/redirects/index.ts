@@ -59,6 +59,12 @@ const EXACT_REDIRECTS: Record<string, string> = {
 
   // Cannibalization fix: consolidate EN product pages
   "/en/digital-wine-list": "/en/wine-list-management-software",
+
+  // Legacy standalone pages → consolidated /recursos/ equivalents
+  "/checklist-carta-rentable": "/recursos/checklist-carta-de-vinos-rentable",
+  "/plantilla-carta-vinos": "/recursos/plantilla-carta-de-vinos",
+  "/plantilla-wine-mapping": "/recursos/plantilla-wine-mapping-restaurante",
+  "/guia-vino-por-copa": "/recursos/guia-vino-por-copa-para-restaurantes",
 };
 
 // ─────────────────────────────────────────────
