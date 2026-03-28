@@ -2096,6 +2096,42 @@ function escapeAttr(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+function normalizeRequestedPath(input: string | null): string | null {
+  if (!input) return null;
+
+  let value = input.trim();
+  if (!value) return null;
+
+  try {
+    if (value.startsWith('http://') || value.startsWith('https://')) {
+      value = new URL(value).pathname || '/';
+    }
+  } catch {
+    // ignore malformed absolute URLs and continue normalizing as a path
+  }
+
+  if (!value.startsWith('/')) {
+    const slashIndex = value.indexOf('/');
+    value = slashIndex >= 0 ? value.slice(slashIndex) : `/${value}`;
+  }
+
+  try {
+    const parsed = new URL(value, SITE);
+    value = parsed.pathname || '/';
+  } catch {
+    // keep original value when it cannot be parsed as a relative path
+  }
+
+  try {
+    value = decodeURIComponent(value);
+  } catch {
+    // keep non-decodable values as-is
+  }
+
+  value = value.replace(/\/+$|\?.*$|#.*$/g, '');
+  return value || '/';
+}
+
 // ── Main handler ──
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -2111,39 +2147,18 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const ua = req.headers.get('user-agent') || '';
 
-    // Robust path extraction — supports ?url=, ?path=, headers, and URL suffix
-    let path: string | null = null;
+    let path = normalizeRequestedPath(url.searchParams.get('url'))
+      || normalizeRequestedPath(url.searchParams.get('path'))
+      || normalizeRequestedPath(req.headers.get('x-original-path'))
+      || normalizeRequestedPath(req.headers.get('x-forwarded-path'));
 
-    // 1. ?url=https://winerim.wine/biblioteca-vino → extract pathname
-    const urlParam = url.searchParams.get('url');
-    if (urlParam) {
-      try {
-        const parsed = new URL(urlParam);
-        path = parsed.pathname || '/';
-      } catch {
-        // If not a valid URL, treat it as a path
-        path = urlParam.startsWith('/') ? urlParam : '/' + urlParam;
-      }
-    }
-
-    // 2. ?path=/biblioteca-vino
-    if (!path) path = url.searchParams.get('path');
-
-    // 3. Headers
-    if (!path) path = req.headers.get('x-original-path') || req.headers.get('x-forwarded-path');
-
-    // 4. URL pathname suffix: /functions/v1/prerender/biblioteca-vino
     if (!path) {
       const match = url.pathname.match(/\/prerender\/(.*)/);
-      if (match && match[1]) path = '/' + match[1];
+      path = normalizeRequestedPath(match && match[1] ? '/' + match[1] : null) || '/';
     }
 
-    // Final fallback
-    if (!path) path = '/';
+    console.log('Prerender request — resolved path:', path, '| raw url:', url.toString(), '| ua:', ua.substring(0, 60));
 
-    console.log('Prerender request — path:', path, '| ua:', ua.substring(0, 60));
-
-    // Only serve prerendered HTML to bots
     if (!isBot(ua)) {
       return new Response(JSON.stringify({ prerender: false, reason: 'not-a-bot' }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -2152,26 +2167,22 @@ Deno.serve(async (req) => {
 
     let html: string | null = null;
 
-    // 1. Check static pages — instant, no DB query
     const staticPage = STATIC_PAGES[path];
     if (staticPage) {
       const hreflang = HREFLANG_MAP[path];
       html = generateHTML(staticPage.meta, staticPage.content, hreflang);
     }
 
-    // 2. Check dynamic SEO pages (programmatic)
     if (!html && (path.startsWith('/software-carta-de-vinos-') || path.startsWith('/software-vino-') || path.startsWith('/wine-list-software-'))) {
       const slug = path.replace(/^\//, '');
       html = await renderSeoPage(slug);
     }
 
-    // 3. Check any other SEO page by slug
     if (!html && !path.startsWith('/article/')) {
       const slug = path.replace(/^\//, '');
       if (slug) html = await renderSeoPage(slug);
     }
 
-    // 4. Check articles
     if (!html && path.startsWith('/article/')) {
       const slug = path.replace('/article/', '');
       html = await renderArticle(slug);
@@ -2184,11 +2195,11 @@ Deno.serve(async (req) => {
           'Content-Type': 'text/html; charset=utf-8',
           'Cache-Control': 'public, max-age=3600, s-maxage=86400',
           'X-Prerender': 'true',
+          'X-Prerender-Resolved-Path': path,
         },
       });
     }
 
-    // No specific content found — fallback to homepage HTML for bots
     const fallbackPage = STATIC_PAGES['/'];
     const fallbackHreflang = HREFLANG_MAP['/'];
     html = generateHTML(fallbackPage.meta, fallbackPage.content, fallbackHreflang);
@@ -2199,6 +2210,7 @@ Deno.serve(async (req) => {
         'Cache-Control': 'public, max-age=3600, s-maxage=86400',
         'X-Prerender': 'true',
         'X-Prerender-Fallback': 'homepage',
+        'X-Prerender-Resolved-Path': path,
       },
     });
 
