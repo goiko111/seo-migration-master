@@ -197,6 +197,20 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'fr', url: `${SITE}/fr/quest-ce-que-winerim` },
     { lang: 'x-default', url: `${SITE}/que-es-winerim` },
   ],
+  '/en/what-is-winerim': [
+    { lang: 'es', url: `${SITE}/que-es-winerim` },
+    { lang: 'en', url: `${SITE}/en/what-is-winerim` },
+    { lang: 'it', url: `${SITE}/it/cose-winerim` },
+    { lang: 'fr', url: `${SITE}/fr/quest-ce-que-winerim` },
+    { lang: 'x-default', url: `${SITE}/que-es-winerim` },
+  ],
+  '/en/wine-list-management-software': [
+    { lang: 'es', url: `${SITE}/software-carta-de-vinos` },
+    { lang: 'en', url: `${SITE}/en/wine-list-management-software` },
+    { lang: 'it', url: `${SITE}/it/software-carta-vini` },
+    { lang: 'fr', url: `${SITE}/fr/logiciel-carte-des-vins` },
+    { lang: 'x-default', url: `${SITE}/software-carta-de-vinos` },
+  ],
 };
 
 // ── Static page definitions ──
