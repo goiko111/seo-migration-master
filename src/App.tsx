@@ -117,6 +117,7 @@ const GlosarioVino = lazy(() => import("./pages/GlosarioVino"));
 const Gracias = lazy(() => import("./pages/Gracias"));
 const FAQs = lazy(() => import("./pages/FAQs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
