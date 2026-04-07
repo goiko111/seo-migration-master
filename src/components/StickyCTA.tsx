@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getResolvedCTASet, type PageType } from "@/data/ctas";
+import { getResolvedCTASetForLang, type PageType } from "@/data/ctas";
 import { trackAction } from "@/lib/intentTracking";
 import { ga } from "@/lib/analytics";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface StickyCTAProps {
   /** Page type to determine CTA copy */
@@ -25,6 +26,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const location = useLocation();
+  const { lang } = useLanguage();
 
   // Don't show on demo/contact/admin pages
   const excludedPaths = ["/demo", "/contacto", "/admin", "/analisis-carta", "/en/demo", "/en/contact", "/it/demo", "/it/contatto", "/fr/demo", "/fr/contact"];
@@ -45,7 +47,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
 
   if (isExcluded) return null;
 
-  const ctaSet = getResolvedCTASet(pageType);
+  const ctaSet = getResolvedCTASetForLang(pageType, lang);
   const ctaText = text || ctaSet.stickyText;
   const ctaUrl = url || ctaSet.primary.url;
 

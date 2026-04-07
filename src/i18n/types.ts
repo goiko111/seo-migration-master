@@ -511,4 +511,16 @@ export interface TranslationDict {
   dc_type_guide: string;
   dc_type_solution: string;
   dc_priority_label: string;
+
+  // LogoStrip
+  logostrip_label: string;
+  logostrip_title: string;
+  logostrip_michelin: string;
+  logostrip_repsol: string;
+  logostrip_hotels: string;
+  logostrip_footer: string;
+  logostrip_see_all: string;
+
+  // Client area
+  nav_client_area: string;
 }
