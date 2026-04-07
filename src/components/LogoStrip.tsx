@@ -85,6 +85,7 @@ const hotelLogos: LogoItem[] = [
 
 const LogoStrip = () => {
   const { get } = useSharedPageContent();
+  const { t, localePath } = useLanguage();
 
   return (
     <section className="py-12 sm:py-16 md:py-20 overflow-hidden">
@@ -95,14 +96,14 @@ const LogoStrip = () => {
         className="text-center mb-8 sm:mb-12 px-6"
       >
         <p className="text-xs sm:text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold mb-3">
-          {get("logostrip", "label", "La revolución de la hostelería")}
+          {get("logostrip", "label", t.logostrip_label)}
         </p>
         <h2 className="font-heading text-xl sm:text-2xl md:text-3xl">
-          {get("logostrip", "title", "Winerim, en los mejores restaurantes")}
+          {get("logostrip", "title", t.logostrip_title)}
         </h2>
       </motion.div>
 
-      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-4">Estrellas Michelin</p>
+      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-4">{t.logostrip_michelin}</p>
 
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -128,7 +129,7 @@ const LogoStrip = () => {
         </div>
       </div>
 
-      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mt-10 mb-4">Soles Repsol</p>
+      <p className="text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mt-10 mb-4">{t.logostrip_repsol}</p>
 
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -160,7 +161,7 @@ const LogoStrip = () => {
         viewport={{ once: true }}
         className="mt-8 sm:mt-10 px-6"
       >
-        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-8">Grupos hoteleros</span>
+        <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-8">{t.logostrip_hotels}</span>
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14 lg:gap-16">
           {hotelLogos.map((item) => (
             <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 md:h-20 px-1">
@@ -182,10 +183,10 @@ const LogoStrip = () => {
 
       <div className="text-center mt-6 sm:mt-8 px-6">
         <p className="text-muted-foreground text-xs sm:text-sm mb-3">
-          {get("logostrip", "footer", "Más de 1.000 bodegas de restaurantes ya confían en nosotros")}
+          {get("logostrip", "footer", t.logostrip_footer)}
         </p>
-        <Link to="/clientes" className="text-xs font-semibold tracking-widest uppercase text-accent hover:text-accent/80 transition-colors">
-          Ver todos los clientes →
+        <Link to={localePath("/clientes")} className="text-xs font-semibold tracking-widest uppercase text-accent hover:text-accent/80 transition-colors">
+          {t.logostrip_see_all}
         </Link>
       </div>
     </section>

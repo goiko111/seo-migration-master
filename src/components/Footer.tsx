@@ -131,7 +131,7 @@ const Footer = () => {
                 { label: t.nav_clients, href: localePath("/clientes") },
                 { label: t.nav_contact, href: localePath("/contacto") },
                 { label: "Partners", href: localePath("/afiliate") },
-                { label: "Área cliente", href: "/decision-center" },
+                { label: t.nav_client_area, href: "/decision-center" },
                 { label: t.footer_privacy, href: localePath("/privacidad") },
                 { label: t.footer_terms, href: localePath("/terminos") },
               ]}
