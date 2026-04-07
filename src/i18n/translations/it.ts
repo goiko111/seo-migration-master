@@ -253,6 +253,16 @@ const it: TranslationDict = {
   dc_type_guide: "Guida",
   dc_type_solution: "Soluzione",
   dc_priority_label: "Priorità",
+
+  logostrip_label: "La rivoluzione della ristorazione",
+  logostrip_title: "Winerim, nei migliori ristoranti",
+  logostrip_michelin: "Stelle Michelin",
+  logostrip_repsol: "Soles Repsol",
+  logostrip_hotels: "Gruppi alberghieri",
+  logostrip_footer: "Oltre 1.000 cantine di ristoranti si fidano già di noi",
+  logostrip_see_all: "Vedi tutti i clienti →",
+
+  nav_client_area: "Area clienti",
 };
 
 export default it;
