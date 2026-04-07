@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getResolvedCTASet } from "@/data/ctas";
+import { getResolvedCTASetForLang } from "@/data/ctas";
 
 const FinalCTASection = () => {
-  const { t, localePath } = useLanguage();
-  const ctaSet = getResolvedCTASet("home");
+  const { t, lang, localePath } = useLanguage();
+  const ctaSet = getResolvedCTASetForLang("home", lang);
 
   return (
     <section className="section-padding">
