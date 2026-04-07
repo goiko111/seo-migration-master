@@ -84,11 +84,12 @@ const HeroSection = memo(() => {
 
             {/* H1 — 3 clear outcomes */}
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.1] mb-5 animate-fade-in-up">
-              <span className="text-gradient-wine">Vende más vino.</span>
-              <br className="hidden sm:block" />{" "}
-              Mejora márgenes.
-              <br className="hidden sm:block" />{" "}
-              Controla tu bodega.
+              {h.title.split('. ').map((part, i, arr) => (
+                <span key={i}>
+                  {i === 0 ? <span className="text-gradient-wine">{part}.</span> : <>{" "}{part}{i < arr.length - 1 ? '.' : ''}</>}
+                  {i < arr.length - 1 && <br className="hidden sm:block" />}
+                </span>
+              ))}
             </h1>
 
             {/* Subtitle — what it is + how */}
