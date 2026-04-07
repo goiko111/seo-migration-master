@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSharedPageContent } from "@/contexts/PageContentContext";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 import logoMiramar from "@/assets/logos/miramar.png";
 import logoZortziko from "@/assets/logos/zortziko.png";
