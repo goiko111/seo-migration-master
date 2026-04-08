@@ -13,6 +13,7 @@ export interface RealCase {
   city?: string;
   cuisine?: string;
   references?: number;
+  badge?: string;
   situation: string;
   problem: string;
   implementation: string;
