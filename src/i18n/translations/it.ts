@@ -121,7 +121,7 @@ const it: TranslationDict = {
   common_back: "Indietro",
 
   seo_home_title: "Software Carta dei Vini con IA | Winerim — Vendite, Margine e Controllo",
-  seo_home_description: "Winerim è il software di gestione della carta dei vini con IA che aumenta le vendite, ottimizza il margine e dà il controllo totale a ristoranti, hotel e gruppi di ristorazione.",
+  seo_home_description: "Winerim: software per la carta dei vini con IA. Aumenta vendite, ottimizza margini e dà controllo totale a ristoranti, hotel e gruppi.",
 
   contact_title: "Parliamo della tua carta dei vini",
   contact_subtitle: "Raccontaci la tua situazione e ti rispondiamo entro 24 ore con una proposta su misura.",

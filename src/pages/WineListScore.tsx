@@ -31,7 +31,7 @@ interface Block {
 const i18n: Record<SupportedLang, Record<string, any>> = {
   es: {
     seo_title: "Wine List Score: Audita tu Carta de Vinos (0-100) | Winerim",
-    seo_desc: "Evalúa tu carta de vinos con un score global de 0 a 100. Diagnóstico gratuito por bloques: estructura, equilibrio, pricing, vino por copa, rotación y potencial comercial.",
+    seo_desc: "Evalúa tu carta de vinos con un score de 0 a 100. Diagnóstico gratuito: estructura, equilibrio, pricing, copa, rotación y potencial comercial.",
     badge: "Herramienta gratuita",
     h1: "Wine List Score",
     subtitle: (n: number) => `Responde a ${n} preguntas y obtén un score global de 0 a 100 con diagnóstico por bloques. Descubre en qué destaca tu carta y dónde pierde potencial.`,
@@ -107,7 +107,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
   },
   en: {
     seo_title: "Wine List Score: Audit Your Wine List (0-100) | Winerim",
-    seo_desc: "Evaluate your wine list with a global score from 0 to 100. Free block-by-block diagnostic: structure, balance, pricing, by-the-glass, rotation and commercial potential.",
+    seo_desc: "Evaluate your wine list with a score from 0 to 100. Free diagnostic: structure, balance, pricing, by-the-glass, rotation and commercial potential.",
     badge: "Free tool",
     h1: "Wine List Score",
     subtitle: (n: number) => `Answer ${n} questions and get a global score from 0 to 100 with block-by-block diagnosis. Discover where your list excels and where it's losing potential.`,
@@ -183,7 +183,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
   },
   it: {
     seo_title: "Wine List Score: Audita la Tua Carta dei Vini (0-100) | Winerim",
-    seo_desc: "Valuta la tua carta dei vini con un punteggio globale da 0 a 100. Diagnosi gratuita per blocchi: struttura, equilibrio, pricing, calice, rotazione e potenziale commerciale.",
+    seo_desc: "Valuta la tua carta dei vini con un punteggio da 0 a 100. Diagnosi gratuita: struttura, equilibrio, pricing, calice, rotazione e potenziale.",
     badge: "Strumento gratuito",
     h1: "Wine List Score",
     subtitle: (n: number) => `Rispondi a ${n} domande e ottieni un punteggio globale da 0 a 100 con diagnosi per blocchi. Scopri dove la tua carta eccelle e dove perde potenziale.`,
@@ -259,7 +259,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
   },
   fr: {
     seo_title: "Wine List Score : Auditez Votre Carte des Vins (0-100) | Winerim",
-    seo_desc: "Évaluez votre carte des vins avec un score global de 0 à 100. Diagnostic gratuit par blocs : structure, équilibre, pricing, verre, rotation et potentiel commercial.",
+    seo_desc: "Évaluez votre carte des vins avec un score de 0 à 100. Diagnostic gratuit : structure, équilibre, pricing, verre, rotation et potentiel.",
     badge: "Outil gratuit",
     h1: "Wine List Score",
     subtitle: (n: number) => `Répondez à ${n} questions et obtenez un score global de 0 à 100 avec diagnostic par blocs. Découvrez où votre carte excelle et où elle perd du potentiel.`,

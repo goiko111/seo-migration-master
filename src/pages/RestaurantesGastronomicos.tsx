@@ -7,7 +7,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Restaurantes Gastronómicos | Carta de Vinos con IA",
-  metaDescription: "Maximiza el rendimiento de tu carta de vinos gastronómica con Winerim: análisis de rotación, pricing inteligente, fichas enriquecidas y recomendaciones por IA para comensales exigentes.",
+  metaDescription: "Carta de vinos gastronómica con Winerim: rotación, pricing inteligente, fichas enriquecidas y recomendaciones IA para comensales exigentes.",
   canonicalUrl: "https://winerim.wine/soluciones/restaurantes-gastronomicos",
   schemaId: "gastronomico",
   badgeLabel: "Alta gastronomía",
@@ -150,7 +150,7 @@ const ES: VerticalContent = {
 const EN: VerticalContent = {
   ...ES,
   metaTitle: "Winerim for Fine Dining Restaurants | AI-Powered Wine List",
-  metaDescription: "Maximize your fine dining wine list performance with Winerim: rotation analytics, smart pricing, enriched profiles and AI recommendations for discerning diners.",
+  metaDescription: "Fine dining wine list with Winerim: rotation analytics, smart pricing, enriched profiles and AI recommendations for discerning diners.",
   badgeLabel: "Fine dining",
   breadSolutions: "Solutions",
   breadLabel: "Fine dining restaurants",
@@ -328,7 +328,7 @@ const IT: VerticalContent = {
 const FR: VerticalContent = {
   ...EN,
   metaTitle: "Winerim pour Restaurants Gastronomiques | Carte des Vins avec IA",
-  metaDescription: "Maximisez la performance de votre carte des vins gastronomique avec Winerim : analyse de rotation, pricing intelligent, fiches enrichies et recommandations IA.",
+  metaDescription: "Carte des vins gastronomique avec Winerim : rotation, pricing intelligent, fiches enrichies et recommandations IA pour vos convives.",
   badgeLabel: "Haute gastronomie",
   breadSolutions: "Solutions",
   breadLabel: "Restaurants gastronomiques",
