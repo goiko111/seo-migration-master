@@ -127,6 +127,7 @@ const ArticlePage = () => {
         type="article"
         author={article.author}
         publishedAt={article.publishedAt}
+        wordCount={article.body ? article.body.trim().split(/\s+/).length : undefined}
       />
 
       {/* HERO */}

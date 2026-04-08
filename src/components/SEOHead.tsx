@@ -13,12 +13,14 @@ interface SEOHeadProps {
   url?: string;
   type?: "website" | "article";
   publishedAt?: string;
+  modifiedAt?: string;
   author?: string;
+  wordCount?: number;
   noindex?: boolean;
   hreflang?: HreflangLink[];
 }
 
-const SEOHead = ({ title, description, image, url, type = "website", publishedAt, author, noindex, hreflang }: SEOHeadProps) => {
+const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang }: SEOHeadProps) => {
   useEffect(() => {
     const fullTitle = title.length > 55 ? title : `${title} | Winerim`;
     document.title = fullTitle;
@@ -113,20 +115,27 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     }
 
     if (type === "article") {
+      const canonicalArticleUrl = url && url.startsWith("http") && !url.includes("lovable.app")
+        ? url
+        : `${CANONICAL_DOMAIN}${url?.startsWith("/") ? url : `/${url || ""}`}`;
       scriptEl.textContent = JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
         headline: title,
         description: description || "",
         image: ogImage,
-        author: author ? { "@type": "Person", name: author } : undefined,
         datePublished: publishedAt || undefined,
+        dateModified: modifiedAt || publishedAt || undefined,
+        author: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN },
         publisher: {
           "@type": "Organization",
           name: "Winerim",
           url: CANONICAL_DOMAIN,
           logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
         },
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalArticleUrl },
+        wordCount: wordCount || undefined,
+        inLanguage: hreflang?.find(h => h.lang !== "x-default")?.lang || "es",
       });
     } else {
       scriptEl.textContent = JSON.stringify({
@@ -221,7 +230,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       const robotsMeta = document.querySelector('meta[name="robots"]');
       if (robotsMeta) robotsMeta.remove();
     };
-  }, [title, description, image, url, type, publishedAt, author, noindex, hreflang]);
+  }, [title, description, image, url, type, publishedAt, modifiedAt, author, wordCount, noindex, hreflang]);
 
   return null;
 };
