@@ -281,7 +281,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   it: {
     metaTitle: "Software per Carta dei Vini nei Ristoranti | Winerim",
-    metaDescription: "Il miglior software per gestire la tua carta dei vini: raccomandazioni con IA, abbinamenti automatici, analitica e carta digitale interattiva per ristoranti.",
+    metaDescription: "Il miglior software per gestire la tua carta dei vini: raccomandazioni con IA, abbinamenti automatici.",
     url: "https://winerim.wine/it/software-carta-vini",
     hreflang: [
       { lang: "es", url: "https://winerim.wine/software-carta-de-vinos" },

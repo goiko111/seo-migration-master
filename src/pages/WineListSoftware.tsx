@@ -58,7 +58,7 @@ const problemIcons = [Eye, AlertTriangle, TrendingUp, FileText, BarChart3];
 
 const es: WLT = {
   seoTitle: "Software de Carta de Vinos para Restaurantes | Winerim",
-  seoDesc: "Gestiona tu carta de vinos, optimiza tu bodega y aumenta las ventas con software inteligente diseñado para hostelería. Carta digital con filtros, maridajes e IA.",
+  seoDesc: "Gestiona tu carta de vinos, optimiza tu bodega y aumenta las ventas con software inteligente diseñado para hostelería.",
   seoUrl: "https://winerim.wine/software-carta-de-vinos",
   badge: "Software de carta de vinos",
   heroTitle1: "Software de Carta de Vinos para ",
@@ -158,7 +158,7 @@ const es: WLT = {
 
 const en: WLT = {
   seoTitle: "Wine List Management Software for Restaurants | Winerim",
-  seoDesc: "Manage your wine list, optimize your cellar and increase wine sales with intelligent software designed for hospitality. Digital wine lists with smart filters, food pairings and AI recommendations.",
+  seoDesc: "Manage your wine list, optimize your cellar and increase wine sales with intelligent software designed for hospitality.",
   seoUrl: "https://winerim.wine/wine-list-management-software",
   badge: "Wine List Software",
   heroTitle1: "Wine List Management Software for ",
@@ -253,7 +253,7 @@ const en: WLT = {
 
 const it: WLT = {
   seoTitle: "Software Carta dei Vini per Ristoranti | Winerim",
-  seoDesc: "Gestisci la tua carta dei vini, ottimizza la cantina e aumenta le vendite con un software intelligente progettato per la ristorazione. Carta digitale con filtri, abbinamenti e IA.",
+  seoDesc: "Gestisci la tua carta dei vini, ottimizza la cantina e aumenta le vendite con un software intelligente progettato per la ristorazione.",
   seoUrl: "https://winerim.wine/it/software-carta-vini",
   badge: "Software carta dei vini",
   heroTitle1: "Software Carta dei Vini per ",
@@ -342,7 +342,7 @@ const it: WLT = {
 
 const fr: WLT = {
   seoTitle: "Logiciel de Carte des Vins pour Restaurants | Winerim",
-  seoDesc: "Gérez votre carte des vins, optimisez votre cave et augmentez les ventes avec un logiciel intelligent conçu pour la restauration. Carte digitale avec filtres, accords mets-vins et IA.",
+  seoDesc: "Gérez votre carte des vins, optimisez votre cave et augmentez les ventes avec un logiciel intelligent conçu pour la restauration.",
   seoUrl: "https://winerim.wine/fr/logiciel-carte-des-vins",
   badge: "Logiciel carte des vins",
   heroTitle1: "Logiciel de Carte des Vins pour ",

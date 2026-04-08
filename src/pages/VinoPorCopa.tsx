@@ -44,7 +44,7 @@ interface PageContent {
 const i18n: Record<SupportedLang, PageContent> = {
   es: {
     metaTitle: "Cómo Vender Vino por Copa en un Restaurante | Guía Práctica",
-    metaDescription: "Guía práctica para diseñar una oferta de vinos por copa rentable en tu restaurante. Aprende cuántos vinos ofrecer, cómo fijar precios, qué referencias funcionan mejor y cómo aumentar ventas.",
+    metaDescription: "Guía práctica para diseñar una oferta de vinos por copa rentable en tu restaurante.",
     url: "https://winerim.wine/vino-por-copa-restaurante",
     breadcrumbLabel: "Vino por copa", badge: "Vino por copa",
     h1pre: "Cómo vender vino por copa en un", h1accent: "restaurante",
@@ -117,7 +117,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   en: {
     metaTitle: "How to Sell Wine by the Glass in a Restaurant | Practical Guide",
-    metaDescription: "Practical guide to designing a profitable wine-by-the-glass programme in your restaurant. Learn how many wines to offer, how to price them, which references work best and how to increase sales.",
+    metaDescription: "Practical guide to designing a profitable wine-by-the-glass programme in your restaurant.",
     url: "https://winerim.wine/en/wine-by-glass-restaurant",
     breadcrumbLabel: "Wine by the glass", badge: "Wine by the glass",
     h1pre: "How to sell wine by the glass in a", h1accent: "restaurant",
@@ -263,7 +263,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   fr: {
     metaTitle: "Comment Vendre du Vin au Verre au Restaurant | Guide Pratique",
-    metaDescription: "Guide pratique pour concevoir une offre de vins au verre rentable dans votre restaurant. Apprenez combien de vins proposer, comment fixer les prix, quelles références fonctionnent le mieux et comment augmenter les ventes.",
+    metaDescription: "Guide pratique pour concevoir une offre de vins au verre rentable dans votre restaurant.",
     url: "https://winerim.wine/fr/vin-au-verre-restaurant",
     breadcrumbLabel: "Vin au verre", badge: "Vin au verre",
     h1pre: "Comment vendre du vin au verre dans un", h1accent: "restaurant",

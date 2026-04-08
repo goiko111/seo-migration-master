@@ -62,7 +62,7 @@ const i18n: Record<SupportedLang, {
 }> = {
   es: {
     metaTitle: "Ejemplos de Carta de Vinos para Restaurantes | Modelos y Plantillas",
-    metaDescription: "Ejemplos reales de cartas de vinos bien estructuradas para restaurante pequeño, wine bar y restaurante gastronómico. Aprende a organizar vinos, distribuir precios y diseñar categorías.",
+    metaDescription: "Ejemplos reales de cartas de vinos bien estructuradas para restaurante pequeño, wine bar y restaurante gastronómico.",
     url: "https://winerim.wine/ejemplos-carta-vinos",
     breadcrumbParent: "Guías", breadcrumbCurrent: "Ejemplos de carta de vinos",
     badge: "Plantillas y modelos",
@@ -128,7 +128,7 @@ const i18n: Record<SupportedLang, {
   },
   en: {
     metaTitle: "Wine List Examples for Restaurants | Models & Templates",
-    metaDescription: "Real examples of well-structured wine lists for small restaurants, wine bars and fine dining. Learn to organize wines, distribute prices and design categories.",
+    metaDescription: "Real examples of well-structured wine lists for small restaurants, wine bars and fine dining.",
     url: "https://winerim.wine/en/wine-list-examples",
     breadcrumbParent: "Guides", breadcrumbCurrent: "Wine list examples",
     badge: "Templates & models",
@@ -194,7 +194,7 @@ const i18n: Record<SupportedLang, {
   },
   it: {
     metaTitle: "Esempi di Carta dei Vini per Ristoranti | Modelli e Template",
-    metaDescription: "Esempi reali di carte dei vini ben strutturate per ristorante piccolo, wine bar e ristorante gastronomico. Impara a organizzare i vini, distribuire i prezzi e progettare le categorie.",
+    metaDescription: "Esempi reali di carte dei vini ben strutturate per ristorante piccolo, wine bar e ristorante gastronomico.",
     url: "https://winerim.wine/it/esempi-carta-vini",
     breadcrumbParent: "Guide", breadcrumbCurrent: "Esempi di carta dei vini",
     badge: "Modelli e template",
@@ -260,7 +260,7 @@ const i18n: Record<SupportedLang, {
   },
   fr: {
     metaTitle: "Exemples de Carte des Vins pour Restaurants | Modèles et Templates",
-    metaDescription: "Exemples réels de cartes des vins bien structurées pour petit restaurant, bar à vins et restaurant gastronomique. Apprenez à organiser les vins, distribuer les prix et concevoir les catégories.",
+    metaDescription: "Exemples réels de cartes des vins bien structurées pour petit restaurant, bar à vins et restaurant gastronomique.",
     url: "https://winerim.wine/fr/exemples-carte-des-vins",
     breadcrumbParent: "Guides", breadcrumbCurrent: "Exemples de carte des vins",
     badge: "Modèles et templates",

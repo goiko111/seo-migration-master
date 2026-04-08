@@ -45,7 +45,7 @@ interface PageContent {
 const i18n: Record<SupportedLang, PageContent> = {
   es: {
     metaTitle: "Cuántos Vinos Debe Tener una Carta de Vinos | Guía por Tipo de Restaurante",
-    metaDescription: "Descubre cuántas referencias debe tener tu carta de vinos según el tipo de restaurante. Guía práctica con recomendaciones, errores comunes y cómo optimizar el tamaño de tu carta.",
+    metaDescription: "Descubre cuántas referencias debe tener tu carta de vinos según el tipo de restaurante.",
     url: "https://winerim.wine/blog/cuantos-vinos-carta-restaurante",
     breadcrumbParent: "Blog", breadcrumbCurrent: "Cuántos vinos en carta",
     badge: "Guía para restaurantes",
@@ -111,7 +111,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   en: {
     metaTitle: "How Many Wines Should a Wine List Have | Guide by Restaurant Type",
-    metaDescription: "Discover how many references your wine list should have based on restaurant type. Practical guide with recommendations, common mistakes and how to optimize your list size.",
+    metaDescription: "Discover how many references your wine list should have based on restaurant type. Practical guide with recommendations.",
     url: "https://winerim.wine/en/how-many-wines-restaurant-list",
     breadcrumbParent: "Blog", breadcrumbCurrent: "How many wines on a list",
     badge: "Restaurant guide",
@@ -177,7 +177,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   it: {
     metaTitle: "Quanti Vini Deve Avere una Carta dei Vini | Guida per Tipo di Ristorante",
-    metaDescription: "Scopri quante referenze dovrebbe avere la tua carta dei vini in base al tipo di ristorante. Guida pratica con raccomandazioni, errori comuni e come ottimizzare la dimensione della carta.",
+    metaDescription: "Scopri quante referenze dovrebbe avere la tua carta dei vini in base al tipo di ristorante.",
     url: "https://winerim.wine/it/quanti-vini-carta-ristorante",
     breadcrumbParent: "Blog", breadcrumbCurrent: "Quanti vini in carta",
     badge: "Guida per ristoranti",
@@ -243,7 +243,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   fr: {
     metaTitle: "Combien de Vins Doit Contenir une Carte des Vins | Guide par Type de Restaurant",
-    metaDescription: "Découvrez combien de références votre carte des vins devrait contenir selon le type de restaurant. Guide pratique avec recommandations, erreurs courantes et comment optimiser la taille de votre carte.",
+    metaDescription: "Découvrez combien de références votre carte des vins devrait contenir selon le type de restaurant.",
     url: "https://winerim.wine/fr/combien-de-vins-carte-restaurant",
     breadcrumbParent: "Blog", breadcrumbCurrent: "Combien de vins en carte",
     badge: "Guide pour restaurants",

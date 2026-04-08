@@ -89,7 +89,7 @@ const i18n: Record<SupportedLang, {
 }> = {
   es: {
     seo_title: "Inteligencia Dinámica para Cartas de Vino | IA para Restaurantes | Winerim",
-    seo_desc: "Software de inteligencia artificial para restaurantes que optimiza tu carta de vinos en tiempo real. Aumenta margen, mejora rotación de stock y vende más vino con la carta digital dinámica de Winerim.",
+    seo_desc: "Software de inteligencia artificial para restaurantes que optimiza tu carta de vinos en tiempo real.",
     seo_url: "https://winerim.wine/producto/inteligencia-dinamica",
     schema_desc: "Capa de IA táctica para cartas de vino que adapta visibilidad, recomendaciones y prioridades según margen, stock, contexto y objetivos del restaurante.",
     schema_category: "Software para hostelería",
@@ -329,7 +329,7 @@ const i18n: Record<SupportedLang, {
   },
   it: {
     seo_title: "Intelligenza Dinamica per Carte dei Vini | IA per Ristoranti | Winerim",
-    seo_desc: "Software di intelligenza artificiale per ristoranti che ottimizza la carta dei vini in tempo reale. Aumenta il margine, migliora la rotazione dello stock e vendi più vino con la carta digitale dinamica di Winerim.",
+    seo_desc: "Software di intelligenza artificiale per ristoranti che ottimizza la carta dei vini in tempo reale.",
     seo_url: "https://winerim.wine/it/prodotto/intelligenza-dinamica",
     schema_desc: "Livello tattico di IA per carte dei vini che adatta visibilità, raccomandazioni e priorità in base a margine, stock, contesto e obiettivi del ristorante.",
     schema_category: "Software per la ristorazione",

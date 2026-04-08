@@ -43,7 +43,7 @@ const i18n: Record<SupportedLang, {
 }> = {
   es: {
     metaTitle: "Carta de Vinos en Papel vs Carta Digital | Comparativa | Winerim",
-    metaDescription: "Comparativa entre carta de vinos en papel y carta digital. Descubre cómo una carta digital mejora la actualización, experiencia del cliente, recomendación, analítica y ventas de vino.",
+    metaDescription: "Comparativa entre carta de vinos en papel y carta digital. Descubre cómo una carta digital mejora la actualización, experiencia del cliente, recomendación.",
     url: "https://winerim.wine/carta-papel-vs-digital",
     breadcrumb: "Carta papel vs digital",
     badge: "Comparativa",
@@ -103,7 +103,7 @@ const i18n: Record<SupportedLang, {
   },
   it: {
     metaTitle: "Carta dei Vini Cartacea vs Digitale | Confronto | Winerim",
-    metaDescription: "Confronto tra carta dei vini cartacea e digitale. Scopri come una carta digitale migliora aggiornamento, esperienza cliente, raccomandazioni, analitica e vendite.",
+    metaDescription: "Confronto tra carta dei vini cartacea e digitale. Scopri come una carta digitale migliora aggiornamento, esperienza cliente, raccomandazioni.",
     url: "https://winerim.wine/it/carta-cartacea-vs-digitale",
     breadcrumb: "Carta cartacea vs digitale",
     badge: "Confronto",
