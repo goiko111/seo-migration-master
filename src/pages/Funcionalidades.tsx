@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Sparkles, BarChart3, Zap, ShoppingCart,
+  ArrowRight, BarChart3, Zap, ShoppingCart,
   CheckCircle2, GraduationCap, QrCode, Brain, Wine,
-  Layers, Eye, TrendingUp, Package, Filter, Globe,
-  Users, Shield, Gauge, Target, Database,
+  Layers, TrendingUp, Package, Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,8 +15,26 @@ import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 
+// ─── Screenshots ───
+import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
+import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
+import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
+import tabletPairingImg from "@/assets/winerim-tablet-pairing.png";
+import mgmtStock from "@/assets/mgmt-stock.png";
+import mgmtRendimiento from "@/assets/mgmt-rendimiento.png";
+import mgmtInsights from "@/assets/mgmt-insights.png";
+import mgmtRecomendados from "@/assets/mgmt-recomendados.png";
+import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.png";
+import mgmtRotacion from "@/assets/mgmt-rotacion.png";
+import mgmtObsolescencia from "@/assets/mgmt-obsolescencia.png";
+import dashboardInsightsImg from "@/assets/winerim-dashboard-insights.png";
+import ss08 from "@/assets/screenshots/ss-08.png";
+import ss10 from "@/assets/screenshots/ss-10.png";
+import ss14 from "@/assets/screenshots/ss-14.png";
+import ss19 from "@/assets/screenshots/ss-19.png";
+
 /* ─────────────────────────────────────────────
-   Feature definitions
+   Feature definitions with screenshots
    ───────────────────────────────────────────── */
 interface Feature {
   icon: typeof Wine;
@@ -26,6 +43,7 @@ interface Feature {
   benefits: string[];
   linkLabel: string;
   linkHref: string;
+  screenshots: { img: string; alt: string; label: string }[];
 }
 
 const features: Feature[] = [
@@ -41,11 +59,15 @@ const features: Feature[] = [
     ],
     linkLabel: "Ver cómo funciona la carta",
     linkHref: "/que-es-winerim",
+    screenshots: [
+      { img: tabletHeroImg, alt: "Carta interactiva de vinos en tablet", label: "Carta" },
+      { img: tabletComparatorImg, alt: "Comparador de vinos", label: "Comparador" },
+    ],
   },
   {
     icon: Brain,
     title: "Recomendaciones con IA y maridajes automáticos",
-    desc: "Motor de inteligencia artificial que genera recomendaciones personalizadas según el plato, el contexto del comensal y los objetivos comerciales del restaurante. Maridajes automáticos basados en la carta real, no en bases de datos genéricas. Cada sugerencia tiene un porqué.",
+    desc: "Motor de inteligencia artificial que genera recomendaciones personalizadas según el plato, el contexto del comensal y los objetivos comerciales del restaurante. Maridajes automáticos basados en la carta real, no en bases de datos genéricas.",
     benefits: [
       "Maridajes automáticos basados en tu carta y tu menú real",
       "Recomendaciones priorizadas por margen, stock y rotación",
@@ -54,11 +76,15 @@ const features: Feature[] = [
     ],
     linkLabel: "Explorar la IA de Winerim",
     linkHref: "/soluciones/ia-restaurantes",
+    screenshots: [
+      { img: tabletPairingImg, alt: "Maridaje automático de vinos", label: "Maridaje" },
+      { img: ss10, alt: "Configuración de IA y maridaje", label: "Config IA" },
+    ],
   },
   {
     icon: Package,
     title: "Gestión de stock e inventario",
-    desc: "Control de inventario en tiempo real conectado con ventas y carta. Detección automática de stock muerto, alertas de rotación lenta, prevención de rotura de stock y visibilidad total sobre el capital inmovilizado en bodega. Para que cada botella en la bodega tenga sentido.",
+    desc: "Control de inventario en tiempo real conectado con ventas y carta. Detección automática de stock muerto, alertas de rotación lenta, prevención de rotura de stock y visibilidad total sobre el capital inmovilizado en bodega.",
     benefits: [
       "Actualización automática de disponibilidad en la carta",
       "Detección de stock muerto y vinos con rotación lenta",
@@ -67,6 +93,10 @@ const features: Feature[] = [
     ],
     linkLabel: "Herramienta de stock muerto",
     linkHref: "/herramientas/calculadora-stock-muerto",
+    screenshots: [
+      { img: mgmtStock, alt: "Control de stock de vinos", label: "Stock" },
+      { img: mgmtObsolescencia, alt: "Detección de obsolescencia", label: "Obsolescencia" },
+    ],
   },
   {
     icon: TrendingUp,
@@ -80,6 +110,10 @@ const features: Feature[] = [
     ],
     linkLabel: "Calculadora de margen",
     linkHref: "/calculadora-margen-vino",
+    screenshots: [
+      { img: mgmtRendimiento, alt: "Análisis de rendimiento y márgenes", label: "Rendimiento" },
+      { img: mgmtRotacion, alt: "Rotación de vinos", label: "Rotación" },
+    ],
   },
   {
     icon: BarChart3,
@@ -93,6 +127,10 @@ const features: Feature[] = [
     ],
     linkLabel: "Explorar Winerim Core",
     linkHref: "/producto/winerim-core",
+    screenshots: [
+      { img: ss14, alt: "Dashboard de insights y KPIs", label: "Insights" },
+      { img: ss19, alt: "Rendimiento global de carta", label: "Rendimiento" },
+    ],
   },
   {
     icon: Sparkles,
@@ -106,6 +144,10 @@ const features: Feature[] = [
     ],
     linkLabel: "IA para restaurantes",
     linkHref: "/soluciones/ia-restaurantes",
+    screenshots: [
+      { img: tabletDetailImg, alt: "Ficha de vino detallada", label: "Ficha IA" },
+      { img: ss08, alt: "Motor de recomendación RIM", label: "Motor RIM" },
+    ],
   },
   {
     icon: Zap,
@@ -119,6 +161,10 @@ const features: Feature[] = [
     ],
     linkLabel: "Descubrir Inteligencia Dinámica",
     linkHref: "/producto/inteligencia-dinamica",
+    screenshots: [
+      { img: mgmtRecomendados, alt: "Recomendaciones dinámicas", label: "Recomendados" },
+      { img: mgmtAutomatizaciones, alt: "Automatizaciones", label: "Automatización" },
+    ],
   },
   {
     icon: GraduationCap,
@@ -132,6 +178,10 @@ const features: Feature[] = [
     ],
     linkLabel: "Guía para restaurantes sin sumiller",
     linkHref: "/guias/como-usar-winerim-sin-sumiller",
+    screenshots: [
+      { img: mgmtInsights, alt: "Insights para el equipo", label: "Insights" },
+      { img: dashboardInsightsImg, alt: "Dashboard de insights", label: "Dashboard" },
+    ],
   },
 ];
 
@@ -254,22 +304,23 @@ const Funcionalidades = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          2. FEATURE BLOCKS
+          2. FEATURE BLOCKS WITH SCREENSHOTS
           ═══════════════════════════════════════════════════════════ */}
       {features.map((feat, i) => {
         const Icon = feat.icon;
         const isAlt = i % 2 !== 0;
+        const reversed = i % 2 !== 0; // alternate image side
         return (
           <section
             key={i}
             id={`feat-${i}`}
             className={`section-padding ${isAlt ? "bg-gradient-dark" : ""}`}
           >
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <ScrollReveal>
-                <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start">
-                  {/* Content */}
-                  <div>
+                <div className={`grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 items-center ${reversed ? "lg:grid-cols-[380px_1fr]" : ""}`}>
+                  {/* Content — always first on mobile */}
+                  <div className={reversed ? "lg:order-2" : ""}>
                     <div className="flex items-center gap-3 mb-5">
                       <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center">
                         <Icon size={24} className="text-wine" />
@@ -302,6 +353,24 @@ const Funcionalidades = () => {
                     >
                       {feat.linkLabel} <ArrowRight size={14} />
                     </Link>
+                  </div>
+
+                  {/* Screenshots */}
+                  <div className={`${reversed ? "lg:order-1" : ""}`}>
+                    <div className="grid grid-cols-1 gap-4">
+                      {feat.screenshots.map((shot, j) => (
+                        <div key={j} className="relative group">
+                          <div className="absolute -inset-2 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.08),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <img
+                            src={shot.img}
+                            alt={shot.alt}
+                            className="relative w-full rounded-xl border border-border shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                            loading="lazy"
+                          />
+                          <p className="text-[10px] text-muted-foreground/60 text-center mt-2 font-medium">{shot.label}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>
