@@ -230,7 +230,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       const robotsMeta = document.querySelector('meta[name="robots"]');
       if (robotsMeta) robotsMeta.remove();
     };
-  }, [title, description, image, url, type, publishedAt, author, noindex, hreflang]);
+  }, [title, description, image, url, type, publishedAt, modifiedAt, author, wordCount, noindex, hreflang]);
 
   return null;
 };
