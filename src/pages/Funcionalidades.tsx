@@ -75,7 +75,7 @@ const features: Feature[] = [
       "Sugerencias adaptadas al perfil del comensal y la ocasión",
     ],
     linkLabel: "Explorar la IA de Winerim",
-    linkHref: "/soluciones/ia-restaurantes",
+    linkHref: "/inteligencia-artificial-restaurantes",
     screenshots: [
       { img: tabletPairingImg, alt: "Maridaje automático de vinos", label: "Maridaje" },
       { img: ss10, alt: "Configuración de IA y maridaje", label: "Config IA" },
@@ -143,7 +143,7 @@ const features: Feature[] = [
       "Actualización continua con datos del sector y tendencias",
     ],
     linkLabel: "IA para restaurantes",
-    linkHref: "/soluciones/ia-restaurantes",
+    linkHref: "/inteligencia-artificial-restaurantes",
     screenshots: [
       { img: tabletDetailImg, alt: "Ficha de vino detallada", label: "Ficha IA" },
       { img: ss08, alt: "Motor de recomendación RIM", label: "Motor RIM" },
