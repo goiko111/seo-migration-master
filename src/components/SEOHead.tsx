@@ -13,7 +13,9 @@ interface SEOHeadProps {
   url?: string;
   type?: "website" | "article";
   publishedAt?: string;
+  modifiedAt?: string;
   author?: string;
+  wordCount?: number;
   noindex?: boolean;
   hreflang?: HreflangLink[];
 }
