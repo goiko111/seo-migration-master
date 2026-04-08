@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { PageContentProvider } from "@/contexts/PageContentContext";
 import StickyCTA from "@/components/StickyCTA";
@@ -31,6 +31,33 @@ const SectionFallback = () => (
 
 const Index = () => {
   const { t, lang, allLangPaths } = useLanguage();
+
+  // Inject BreadcrumbList + WebPage schemas for Rich Results consistency
+  useEffect(() => {
+    const langNames: Record<string, string> = { es: "Inicio", en: "Home", it: "Home", fr: "Accueil" };
+    const schemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [{ "@type": "ListItem", position: 1, name: langNames[lang] || "Inicio", item: "https://winerim.wine/" }],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: t.seo_home_title,
+        description: t.seo_home_description,
+        url: "https://winerim.wine/",
+        inLanguage: lang,
+        isPartOf: { "@type": "WebSite", name: "Winerim", url: "https://winerim.wine/" },
+      },
+    ];
+    const el = document.createElement("script");
+    el.id = "schema-home-webpage";
+    el.type = "application/ld+json";
+    el.textContent = JSON.stringify(schemas);
+    document.head.appendChild(el);
+    return () => { document.getElementById("schema-home-webpage")?.remove(); };
+  }, [lang, t.seo_home_title, t.seo_home_description]);
 
   return (
     <div className="min-h-screen bg-background">
