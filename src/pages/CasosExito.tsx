@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BarChart3, Quote } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -6,6 +7,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import type { RealCase } from "@/components/cases/RealCaseCard";
 import InternalLinks from "@/components/seo/InternalLinks";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import RealCaseCard, { type RealCase } from "@/components/cases/RealCaseCard";
@@ -20,7 +22,7 @@ const realCases: Record<string, RealCase[]> = {
   es: [
     {
       name: "Álex Pardo", role: "Mejor Sommelier de España 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cocina de autor", references: 350,
+      city: "Madrid", cuisine: "Cocina de autor", references: 350, badge: "2 Estrellas Michelin",
       highlight: "Gestión de stocks y ventas",
       situation: "Bodega amplia con carta impresa que requería reimpresiones constantes y no permitía al equipo de sala explorar referencias menos conocidas.",
       problem: "Control de stocks manual, dificultad para actualizar precios y añadas, y falta de datos sobre qué referencias se vendían más.",
@@ -30,7 +32,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Nacho Otamendi", role: "Propietario/Sommelier", restaurant: "Travieso Bar", initials: "NO",
-      city: "España", cuisine: "Bar de vinos / Gastrobar",
+      city: "España", cuisine: "Bar de vinos / Gastrobar", badge: "Gastrobar",
       highlight: "Ahorro de tiempo en sala",
       situation: "Restaurante con carta de vinos rica pero con un solo sommelier que no podía atender todas las mesas durante los momentos de mayor afluencia.",
       problem: "10-15 minutos por mesa para explicar la carta, lo que limitaba la capacidad de servicio y las ventas de vino en horas punta.",
@@ -40,7 +42,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Juanfra", role: "Propietario", restaurant: "Puerta de Murcia", initials: "J",
-      city: "España", cuisine: "Restaurante sin sommelier",
+      city: "España", cuisine: "Restaurante sin sommelier", badge: "Sin sommelier",
       highlight: "Vender sin sommelier",
       situation: "Restaurante sin figura de sommelier donde la venta de vino dependía exclusivamente de la iniciativa del camarero.",
       problem: "El equipo de sala no tenía formación en vinos, lo que provocaba que los clientes eligieran siempre opciones seguras y de bajo valor.",
@@ -50,7 +52,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Mario Martínez Plaza", role: "Head Sommelier", restaurant: "Hotel La Zambra 5⭐ GL", initials: "MMP",
-      city: "Málaga", cuisine: "Hotel 5 estrellas Gran Lujo",
+      city: "Málaga", cuisine: "Hotel 5 estrellas Gran Lujo", badge: "Hotel 5⭐ GL",
       highlight: "Analítica de ventas",
       situation: "Hotel de lujo con una carta de vinos extensa donde la dirección no tenía visibilidad sobre qué vinos se vendían ni por qué.",
       problem: "Sin datos de ventas por referencia, sin métricas de rotación y decisiones de compra basadas en intuición en lugar de datos.",
@@ -60,7 +62,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Fernando Fernández Ríos", role: "Propietario", restaurant: "Ríos o Freixo", initials: "FFR",
-      city: "Galicia", cuisine: "Restaurante tradicional",
+      city: "Galicia", cuisine: "Restaurante tradicional", badge: "Restaurante tradicional",
       highlight: "Control de bodega",
       situation: "Restaurante con una carta de papel de más de 100 páginas que saturaba a los clientes y hacía imposible el control real de la bodega.",
       problem: "Los clientes se abrumaban con la carta. El propietario no tenía visibilidad sobre el gasto ni el número de botellas en bodega.",
@@ -70,7 +72,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Lorena Cuevas", role: "Sommelier", restaurant: "El Paladar By Zuriñe García", initials: "LC",
-      city: "España", cuisine: "Restaurante gastronómico",
+      city: "España", cuisine: "Restaurante gastronómico", badge: "Gastronómico",
       highlight: "Control de precios y márgenes",
       situation: "Restaurante donde el escandallo de vinos se hacía en hojas de cálculo dispersas y no había visibilidad inmediata del margen por referencia.",
       problem: "Calcular el precio de venta y controlar el margen era un proceso manual lento, con riesgo de errores en cada actualización.",
