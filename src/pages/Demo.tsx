@@ -191,6 +191,20 @@ const Demo = () => {
                 ))}
               </ul>
 
+              {/* Stats strip */}
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                {c.stats.map((s, i) => {
+                  const Icon = s.icon === "wine" ? Wine : s.icon === "zap" ? Zap : Users;
+                  return (
+                    <div key={i} className="text-center p-3 rounded-xl border border-border bg-background">
+                      <Icon size={16} className="text-wine mx-auto mb-1" />
+                      <p className="font-heading text-lg font-bold text-foreground">{s.value}</p>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{s.label}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
               {/* Trust signals */}
               <div className="flex flex-wrap gap-6 text-xs text-muted-foreground pt-6 border-t border-border">
                 <span className="flex items-center gap-1.5"><Clock size={12} /> {c.trust_response}</span>
@@ -236,6 +250,28 @@ const Demo = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* ── Call preference ── */}
+        <section className="section-padding bg-gradient-dark">
+          <div className="max-w-2xl mx-auto text-center">
+            <Phone size={24} className="text-wine mx-auto mb-4" />
+            <h2 className="font-heading text-2xl font-bold mb-3">{c.callTitle}</h2>
+            <p className="text-muted-foreground mb-6">{c.callDesc}</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="https://wa.me/34640000000" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
+                <MessageCircle size={16} /> WhatsApp
+              </a>
+              <a href="tel:+34640000000"
+                className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
+                <Phone size={16} /> +34 640 000 000
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQs ── */}
+        <FAQSection faqs={c.faqs} schemaId="demo" />
       </main>
       <InternalLinks links={[
         { to: localePath("/software-carta-de-vinos"), label: c.link_software, type: "solution" },
