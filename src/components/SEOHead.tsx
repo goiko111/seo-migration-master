@@ -115,20 +115,27 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     }
 
     if (type === "article") {
+      const canonicalArticleUrl = url && url.startsWith("http") && !url.includes("lovable.app")
+        ? url
+        : `${CANONICAL_DOMAIN}${url?.startsWith("/") ? url : `/${url || ""}`}`;
       scriptEl.textContent = JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
         headline: title,
         description: description || "",
         image: ogImage,
-        author: author ? { "@type": "Person", name: author } : undefined,
         datePublished: publishedAt || undefined,
+        dateModified: modifiedAt || publishedAt || undefined,
+        author: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN },
         publisher: {
           "@type": "Organization",
           name: "Winerim",
           url: CANONICAL_DOMAIN,
           logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
         },
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalArticleUrl },
+        wordCount: wordCount || undefined,
+        inLanguage: hreflang?.find(h => h.lang !== "x-default")?.lang || "es",
       });
     } else {
       scriptEl.textContent = JSON.stringify({
