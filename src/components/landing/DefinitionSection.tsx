@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
 import NotForSection from "@/components/seo/NotForSection";
@@ -178,6 +179,24 @@ const DefinitionSection = () => {
   const nf = notForData[lang] || notForData.es;
   const faqs = homeFaqs[lang] || homeFaqs.es;
   const faqTitle = faqTitles[lang] || faqTitles.es;
+
+  // Inject FAQPage schema for Rich Results validation
+  useEffect(() => {
+    const el = document.createElement("script");
+    el.id = "schema-home-faq";
+    el.type = "application/ld+json";
+    el.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+    document.head.appendChild(el);
+    return () => { document.getElementById("schema-home-faq")?.remove(); };
+  }, [faqs]);
 
   return (
     <>
