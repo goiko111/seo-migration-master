@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Clock, ShieldCheck, Sparkles } from "lucide-react";
+import { Check, Clock, ShieldCheck, Sparkles, Phone, MessageCircle, Wine, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,6 +12,7 @@ import { trackFormSubmit } from "@/hooks/useIntentTracker";
 import { ads } from "@/lib/analytics";
 import ContactFormFields from "@/components/ContactFormFields";
 import SEOHead from "@/components/SEOHead";
+import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -27,10 +28,17 @@ const content: Record<string, {
   link_software: string; link_pricing: string; link_cases: string; link_analysis: string;
 }> = {
   es: {
-    seo_title: "Demo Gratuita | Winerim", seo_desc: "Solicita una demostración personalizada de Winerim y descubre cómo aumentar tus ventas de vino.", breadcrumb: "Demo gratuita", label: "Prueba gratuita",
-    title: "Descubre cómo Winerim", highlight: "transforma tu carta de vinos",
-    subtitle: "Solicita una demostración personalizada de 15 minutos. Te mostramos Winerim aplicado a tu caso concreto.",
-    benefits: ["Demo adaptada a tu tipo de negocio", "Sin compromiso de permanencia", "Análisis gratuito de tu carta incluido", "Configuración en menos de 24 horas"],
+    seo_title: "Solicitar Demo Gratuita | Winerim", seo_desc: "Solicita tu demo personalizada de Winerim. 15 minutos, sin compromiso. Descubre cómo vender más vino en tu restaurante.", breadcrumb: "Demo gratuita", label: "Prueba gratuita",
+    title: "Solicita una demo gratuita de", highlight: "Winerim",
+    subtitle: "15 minutos · Sin compromiso · Adaptada a tu tipo de negocio",
+    benefits: ["Demo adaptada a tu tipo de negocio", "Sin compromiso de permanencia", "Análisis gratuito de tu carta incluido", "Configuración en menos de 48 horas"],
+    stats: [{ icon: "wine", value: "+1.000", label: "bodegas gestionadas" }, { icon: "zap", value: "48h", label: "implementación" }, { icon: "users", value: "0", label: "permanencia" }],
+    callTitle: "¿Prefieres que te llamemos?", callDesc: "Escríbenos por WhatsApp o llámanos directamente.",
+    faqs: [
+      { q: "¿Qué pasa en la demo?", a: "Te mostramos Winerim aplicado a tu carta real durante 15 minutos. Verás cómo funciona la carta digital, las recomendaciones, el panel de analítica y la gestión de stock. Sin compromiso." },
+      { q: "¿Es realmente gratis?", a: "Sí, 100% gratis. La demo y el análisis inicial de tu carta no tienen coste. Solo te proponemos un plan si encaja con tus necesidades." },
+      { q: "¿Cuánto tarda la implementación?", a: "La mayoría de restaurantes están operativos en menos de 48 horas. Subimos tu carta, configuramos filtros y personalizamos la experiencia." },
+    ],
     form_title: "Solicita tu demo personalizada",
     form_subtitle: "Cuanto más contexto nos des, mejor adaptaremos la demo a tu caso.",
     button: "Solicitar demo gratuita", sending: "Enviando...",
@@ -44,10 +52,17 @@ const content: Record<string, {
     link_software: "Software carta de vinos", link_pricing: "Planes y precios", link_cases: "Casos de éxito", link_analysis: "Análisis gratuito de carta",
   },
   en: {
-    seo_title: "Free Demo | Winerim", seo_desc: "Request a personalized Winerim demo and discover how to increase your wine sales.", breadcrumb: "Free demo", label: "Free trial",
-    title: "Discover how Winerim", highlight: "transforms your wine list",
-    subtitle: "Request a personalized 15-minute demo. We'll show you Winerim applied to your specific case.",
-    benefits: ["Demo tailored to your business", "No commitment required", "Free wine list analysis included", "Setup in under 24 hours"],
+    seo_title: "Free Demo | Winerim", seo_desc: "Request your personalized Winerim demo. 15 minutes, no commitment. Discover how to sell more wine.", breadcrumb: "Free demo", label: "Free trial",
+    title: "Request a free demo of", highlight: "Winerim",
+    subtitle: "15 minutes · No commitment · Tailored to your business",
+    benefits: ["Demo tailored to your business", "No commitment required", "Free wine list analysis included", "Setup in under 48 hours"],
+    stats: [{ icon: "wine", value: "+1,000", label: "cellars managed" }, { icon: "zap", value: "48h", label: "setup" }, { icon: "users", value: "0", label: "lock-in" }],
+    callTitle: "Prefer a call?", callDesc: "Contact us via WhatsApp or call us directly.",
+    faqs: [
+      { q: "What happens in the demo?", a: "We show you Winerim applied to your real list for 15 minutes. You'll see the digital list, recommendations, analytics panel and stock management. No commitment." },
+      { q: "Is it really free?", a: "Yes, 100% free. The demo and initial list analysis cost nothing. We only propose a plan if it fits your needs." },
+      { q: "How long does implementation take?", a: "Most restaurants are live in under 48 hours. We upload your list, configure filters and personalize the experience." },
+    ],
     form_title: "Request your personalized demo",
     form_subtitle: "The more context you give us, the better we'll tailor the demo to your case.",
     button: "Request free demo", sending: "Sending...",
@@ -61,10 +76,17 @@ const content: Record<string, {
     link_software: "Wine list software", link_pricing: "Plans & pricing", link_cases: "Case studies", link_analysis: "Free wine list analysis",
   },
   it: {
-    seo_title: "Demo Gratuita | Winerim", seo_desc: "Richiedi una demo personalizzata di Winerim e scopri come aumentare le vendite di vino.", breadcrumb: "Demo gratuita", label: "Prova gratuita",
-    title: "Scopri come Winerim", highlight: "trasforma la tua carta dei vini",
-    subtitle: "Richiedi una demo personalizzata di 15 minuti. Ti mostriamo Winerim applicato al tuo caso specifico.",
-    benefits: ["Demo adattata al tuo business", "Senza impegno", "Analisi gratuita della carta inclusa", "Configurazione in meno di 24 ore"],
+    seo_title: "Demo Gratuita | Winerim", seo_desc: "Richiedi la tua demo personalizzata di Winerim. 15 minuti, senza impegno.", breadcrumb: "Demo gratuita", label: "Prova gratuita",
+    title: "Richiedi una demo gratuita di", highlight: "Winerim",
+    subtitle: "15 minuti · Senza impegno · Adattata al tuo business",
+    benefits: ["Demo adattata al tuo business", "Senza impegno", "Analisi gratuita della carta inclusa", "Configurazione in meno di 48 ore"],
+    stats: [{ icon: "wine", value: "+1.000", label: "cantine gestite" }, { icon: "zap", value: "48h", label: "attivazione" }, { icon: "users", value: "0", label: "vincoli" }],
+    callTitle: "Preferisci una chiamata?", callDesc: "Scrivici su WhatsApp o chiamaci direttamente.",
+    faqs: [
+      { q: "Cosa succede nella demo?", a: "Ti mostriamo Winerim applicato alla tua carta reale in 15 minuti. Vedrai la carta digitale, le raccomandazioni, l'analisi e la gestione stock. Senza impegno." },
+      { q: "È davvero gratuita?", a: "Sì, 100% gratuita. La demo e l'analisi iniziale non hanno costi. Ti proponiamo un piano solo se fa al caso tuo." },
+      { q: "Quanto tempo richiede l'attivazione?", a: "La maggior parte dei ristoranti è operativa in meno di 48 ore." },
+    ],
     form_title: "Richiedi la tua demo personalizzata",
     form_subtitle: "Più contesto ci dai, meglio adatteremo la demo al tuo caso.",
     button: "Richiedi demo gratuita", sending: "Invio...",
@@ -78,10 +100,17 @@ const content: Record<string, {
     link_software: "Software carta dei vini", link_pricing: "Piani e prezzi", link_cases: "Casi di successo", link_analysis: "Analisi gratuita della carta",
   },
   fr: {
-    seo_title: "Démo Gratuite | Winerim", seo_desc: "Demandez une démo personnalisée de Winerim et découvrez comment augmenter vos ventes de vin.", breadcrumb: "Démo gratuite", label: "Essai gratuit",
-    title: "Découvrez comment Winerim", highlight: "transforme votre carte des vins",
-    subtitle: "Demandez une démo personnalisée de 15 minutes. Nous vous montrons Winerim appliqué à votre cas.",
-    benefits: ["Démo adaptée à votre business", "Sans engagement", "Analyse gratuite de votre carte incluse", "Configuration en moins de 24 heures"],
+    seo_title: "Démo Gratuite | Winerim", seo_desc: "Demandez votre démo personnalisée de Winerim. 15 minutes, sans engagement.", breadcrumb: "Démo gratuite", label: "Essai gratuit",
+    title: "Demandez une démo gratuite de", highlight: "Winerim",
+    subtitle: "15 minutes · Sans engagement · Adaptée à votre activité",
+    benefits: ["Démo adaptée à votre business", "Sans engagement", "Analyse gratuite de votre carte incluse", "Configuration en moins de 48 heures"],
+    stats: [{ icon: "wine", value: "+1 000", label: "caves gérées" }, { icon: "zap", value: "48h", label: "mise en place" }, { icon: "users", value: "0", label: "engagement" }],
+    callTitle: "Préférez-vous un appel ?", callDesc: "Contactez-nous par WhatsApp ou appelez-nous directement.",
+    faqs: [
+      { q: "Que se passe-t-il pendant la démo ?", a: "Nous vous montrons Winerim appliqué à votre carte réelle en 15 minutes. Vous verrez la carte digitale, les recommandations, l'analytique et la gestion des stocks. Sans engagement." },
+      { q: "Est-ce vraiment gratuit ?", a: "Oui, 100% gratuit. La démo et l'analyse initiale n'ont aucun coût. Nous ne proposons un plan que s'il correspond à vos besoins." },
+      { q: "Combien de temps prend la mise en place ?", a: "La plupart des restaurants sont opérationnels en moins de 48 heures." },
+    ],
     form_title: "Demandez votre démo personnalisée",
     form_subtitle: "Plus vous nous donnez de contexte, mieux nous adapterons la démo.",
     button: "Demander démo gratuite", sending: "Envoi...",
