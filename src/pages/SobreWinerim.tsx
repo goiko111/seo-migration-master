@@ -32,21 +32,44 @@ const SobreWinerim = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Sobre nosotros — Quiénes somos y por qué creamos Winerim"
-        description="Conoce al equipo, la misión y la metodología detrás de Winerim: la plataforma de gestión inteligente del vino en hostelería usada en 15 países."
+        title="Sobre Winerim | Equipo, Misión y Valores"
+        description="Conoce Winerim: el equipo detrás del software de carta de vinos con IA para restaurantes. Nuestra misión y trayectoria."
         url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
       />
       <DynamicSchemaMarkup
         id="sobre-nosotros"
         type="AboutPage"
-        title="Sobre nosotros — Winerim"
-        description="Equipo, misión y metodología de Winerim: plataforma de gestión inteligente del vino en hostelería."
+        title="Sobre Winerim | Equipo, Misión y Valores"
+        description="Conoce Winerim: el equipo detrás del software de carta de vinos con IA para restaurantes. Nuestra misión y trayectoria."
         url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
         faqs={faqs}
         breadcrumbs={[
           { name: "Inicio", url: CANONICAL_DOMAIN },
           { name: "Sobre nosotros", url: `${CANONICAL_DOMAIN}/sobre-nosotros` },
         ]}
+      />
+      {/* Organization schema for E-E-A-T */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Winerim",
+            url: CANONICAL_DOMAIN,
+            description: "Plataforma de gestión inteligente del vino en hostelería con IA.",
+            foundingDate: "2022",
+            areaServed: ["ES", "IT", "FR", "GB", "PT", "DE", "US"],
+            numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10 },
+            knowsAbout: ["Wine list management", "Restaurant technology", "AI for hospitality", "Wine pricing", "Sommelier tools"],
+            sameAs: [
+              "https://www.linkedin.com/company/winerim/",
+              "https://www.instagram.com/wine_rim/",
+              "https://www.youtube.com/@Winerim",
+              "https://www.facebook.com/Winerim",
+            ],
+          }),
+        }}
       />
       <Navbar />
 
@@ -66,9 +89,9 @@ const SobreWinerim = () => {
             </ScrollReveal>
             <ScrollReveal>
               <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-8 max-w-4xl">
-                Creemos que el vino merece{" "}
+                Sobre Winerim —{" "}
                 <span className="text-gradient-wine italic">
-                  mejores decisiones en hostelería.
+                  Tecnología al servicio del vino en restauración
                 </span>
               </h1>
             </ScrollReveal>
@@ -396,6 +419,30 @@ const SobreWinerim = () => {
                 </ScrollReveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            EQUIPO
+            ═══════════════════════════════════════════════════════════ */}
+        <section className="section-padding">
+          <div className="max-w-4xl mx-auto text-center">
+            <ScrollReveal>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-wine/10 text-wine text-xs font-semibold tracking-widest uppercase mb-4">
+                Nuestro equipo
+              </span>
+              <h2 className="font-heading text-2xl md:text-4xl font-bold tracking-tight mb-6">
+                Profesionales del vino, la hostelería y la tecnología
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed mb-4">
+                Somos un equipo de profesionales de hostelería, tecnología e inteligencia artificial
+                comprometidos con la transformación digital del vino. Combinamos experiencia real
+                en sala, sommellerie y dirección de F&B con ingeniería de producto de alto nivel.
+              </p>
+              <p className="text-sm text-muted-foreground/70 italic">
+                Próximamente: perfiles del equipo fundador y advisors.
+              </p>
+            </ScrollReveal>
           </div>
         </section>
 
