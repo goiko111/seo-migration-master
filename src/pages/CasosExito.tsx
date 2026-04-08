@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BarChart3, Quote } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -20,7 +21,7 @@ const realCases: Record<string, RealCase[]> = {
   es: [
     {
       name: "Álex Pardo", role: "Mejor Sommelier de España 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cocina de autor", references: 350,
+      city: "Madrid", cuisine: "Cocina de autor", references: 350, badge: "2 Estrellas Michelin",
       highlight: "Gestión de stocks y ventas",
       situation: "Bodega amplia con carta impresa que requería reimpresiones constantes y no permitía al equipo de sala explorar referencias menos conocidas.",
       problem: "Control de stocks manual, dificultad para actualizar precios y añadas, y falta de datos sobre qué referencias se vendían más.",
@@ -30,7 +31,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Nacho Otamendi", role: "Propietario/Sommelier", restaurant: "Travieso Bar", initials: "NO",
-      city: "España", cuisine: "Bar de vinos / Gastrobar",
+      city: "España", cuisine: "Bar de vinos / Gastrobar", badge: "Gastrobar",
       highlight: "Ahorro de tiempo en sala",
       situation: "Restaurante con carta de vinos rica pero con un solo sommelier que no podía atender todas las mesas durante los momentos de mayor afluencia.",
       problem: "10-15 minutos por mesa para explicar la carta, lo que limitaba la capacidad de servicio y las ventas de vino en horas punta.",
@@ -40,7 +41,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Juanfra", role: "Propietario", restaurant: "Puerta de Murcia", initials: "J",
-      city: "España", cuisine: "Restaurante sin sommelier",
+      city: "España", cuisine: "Restaurante sin sommelier", badge: "Sin sommelier",
       highlight: "Vender sin sommelier",
       situation: "Restaurante sin figura de sommelier donde la venta de vino dependía exclusivamente de la iniciativa del camarero.",
       problem: "El equipo de sala no tenía formación en vinos, lo que provocaba que los clientes eligieran siempre opciones seguras y de bajo valor.",
@@ -50,7 +51,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Mario Martínez Plaza", role: "Head Sommelier", restaurant: "Hotel La Zambra 5⭐ GL", initials: "MMP",
-      city: "Málaga", cuisine: "Hotel 5 estrellas Gran Lujo",
+      city: "Málaga", cuisine: "Hotel 5 estrellas Gran Lujo", badge: "Hotel 5⭐ GL",
       highlight: "Analítica de ventas",
       situation: "Hotel de lujo con una carta de vinos extensa donde la dirección no tenía visibilidad sobre qué vinos se vendían ni por qué.",
       problem: "Sin datos de ventas por referencia, sin métricas de rotación y decisiones de compra basadas en intuición en lugar de datos.",
@@ -60,7 +61,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Fernando Fernández Ríos", role: "Propietario", restaurant: "Ríos o Freixo", initials: "FFR",
-      city: "Galicia", cuisine: "Restaurante tradicional",
+      city: "Galicia", cuisine: "Restaurante tradicional", badge: "Restaurante tradicional",
       highlight: "Control de bodega",
       situation: "Restaurante con una carta de papel de más de 100 páginas que saturaba a los clientes y hacía imposible el control real de la bodega.",
       problem: "Los clientes se abrumaban con la carta. El propietario no tenía visibilidad sobre el gasto ni el número de botellas en bodega.",
@@ -70,7 +71,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Lorena Cuevas", role: "Sommelier", restaurant: "El Paladar By Zuriñe García", initials: "LC",
-      city: "España", cuisine: "Restaurante gastronómico",
+      city: "España", cuisine: "Restaurante gastronómico", badge: "Gastronómico",
       highlight: "Control de precios y márgenes",
       situation: "Restaurante donde el escandallo de vinos se hacía en hojas de cálculo dispersas y no había visibilidad inmediata del margen por referencia.",
       problem: "Calcular el precio de venta y controlar el margen era un proceso manual lento, con riesgo de errores en cada actualización.",
@@ -82,7 +83,7 @@ const realCases: Record<string, RealCase[]> = {
   en: [
     {
       name: "Álex Pardo", role: "Best Sommelier of Spain 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Author cuisine", references: 350,
+      city: "Madrid", cuisine: "Author cuisine", references: 350, badge: "2 Michelin Stars",
       highlight: "Stock & sales management",
       situation: "Large cellar with a printed list requiring constant reprints, making it hard for the floor team to explore lesser-known references.",
       problem: "Manual stock control, difficulty updating prices and vintages, and no data on which references sold best.",
@@ -92,7 +93,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Nacho Otamendi", role: "Owner/Sommelier", restaurant: "Travieso Bar", initials: "NO",
-      city: "Spain", cuisine: "Wine bar / Gastrobar",
+      city: "Spain", cuisine: "Wine bar / Gastrobar", badge: "Gastrobar",
       highlight: "Time saved on floor",
       situation: "Restaurant with a rich wine list but only one sommelier who couldn't attend every table during peak hours.",
       problem: "10-15 minutes per table to explain the list, limiting service capacity and wine sales at peak times.",
@@ -102,7 +103,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Mario Martínez Plaza", role: "Head Sommelier", restaurant: "Hotel La Zambra 5⭐ GL", initials: "MMP",
-      city: "Málaga", cuisine: "5-star Grand Luxury Hotel",
+      city: "Málaga", cuisine: "5-star Grand Luxury Hotel", badge: "Hotel 5⭐ GL",
       highlight: "Sales analytics",
       situation: "Luxury hotel with an extensive wine list where management had no visibility into which wines sold or why.",
       problem: "No sales data by reference, no rotation metrics, purchasing decisions based on intuition instead of data.",
@@ -114,7 +115,7 @@ const realCases: Record<string, RealCase[]> = {
   it: [
     {
       name: "Álex Pardo", role: "Miglior Sommelier di Spagna 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cucina d'autore", references: 350,
+      city: "Madrid", cuisine: "Cucina d'autore", references: 350, badge: "2 Stelle Michelin",
       highlight: "Gestione stock e vendite",
       situation: "Cantina ampia con carta stampata che richiedeva ristampe costanti.",
       problem: "Controllo stock manuale, aggiornamento prezzi e annate difficile, nessun dato sulle vendite.",
@@ -136,7 +137,7 @@ const realCases: Record<string, RealCase[]> = {
   fr: [
     {
       name: "Álex Pardo", role: "Meilleur Sommelier d'Espagne 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cuisine d'auteur", references: 350,
+      city: "Madrid", cuisine: "Cuisine d'auteur", references: 350, badge: "2 Étoiles Michelin",
       highlight: "Gestion des stocks et ventes",
       situation: "Grande cave avec carte imprimée nécessitant des réimpressions constantes.",
       problem: "Contrôle des stocks manuel, mise à jour des prix difficile, aucune donnée sur les ventes.",
@@ -260,12 +261,12 @@ const labels: Record<string, {
   faqs: { q: string; a: string }[];
 }> = {
   es: {
-    seoTitle: "Casos Reales y Escenarios Tipo | Winerim",
-    seoDesc: "Casos reales de restaurantes que usan Winerim con quotes verificadas, y escenarios tipo que muestran cómo Winerim puede ayudar a diferentes perfiles de negocio.",
-    badge: "Evidencia real + Escenarios tipo",
-    h1: "Casos reales y escenarios",
-    h1Highlight: "tipo",
-    subtitle: "Testimonios verificados de profesionales que usan Winerim y escenarios basados en patrones reales de restaurantes, hoteles y gastrobares.",
+    seoTitle: "Casos de Éxito | Restaurantes que Usan Winerim",
+    seoDesc: "Descubre cómo restaurantes con Estrella Michelin y grupos de restauración venden más vino con Winerim. Casos reales con resultados.",
+    badge: "Casos de éxito",
+    h1: "Casos de éxito — Restaurantes que venden más vino con",
+    h1Highlight: "Winerim",
+    subtitle: "Testimonios verificados de profesionales que usan Winerim. Descubre cómo restaurantes con Estrella Michelin, hoteles de lujo y gastrobares mejoran sus ventas de vino.",
     realTitle: "Casos reales con",
     realTitleHighlight: "testimonios verificados",
     realDesc: "Cada caso incluye la situación inicial, el problema, la implementación y el impacto observado, junto con una cita validada por el profesional.",
@@ -276,9 +277,9 @@ const labels: Record<string, {
     voicesTitleHighlight: "Winerim cada día",
     situation: "Situación", problem: "Problema", implementation: "Implementación", impact: "Impacto", refs: "referencias",
     scenarioBadge: "Escenario tipo", painLabel: "Dolor habitual", helpLabel: "Cómo ayuda Winerim", indicatorsLabel: "Indicadores que puede mejorar",
-    ctaBadge: "Tu restaurante puede ser el siguiente", ctaTitle: "Descubre el potencial de tu", ctaTitleHighlight: "carta de vinos",
-    ctaDesc: "Envíanos tu carta y te mostramos qué resultados podrías obtener. Sin compromiso.",
-    ctaBtn1: "Solicitar análisis de carta", ctaBtn2: "Solicitar demo",
+    ctaBadge: "Tu restaurante puede ser el siguiente", ctaTitle: "¿Quieres resultados similares? Solicita tu", ctaTitleHighlight: "análisis gratuito",
+    ctaDesc: "Envíanos tu carta y te mostramos qué resultados podrías obtener con Winerim. Sin compromiso.",
+    ctaBtn1: "Solicitar análisis gratuito", ctaBtn2: "Solicitar demo",
     faqs: [
       { q: "¿Los casos mostrados son de clientes reales?", a: "Sí. Los casos reales incluyen nombre, cargo y restaurante verificado, con citas textuales del profesional. Los escenarios tipo están etiquetados como tal y representan patrones frecuentes, no clientes individuales." },
       { q: "¿Qué resultados puedo esperar con Winerim?", a: "Los resultados varían según el restaurante. El potencial estimado de mejora en ticket medio de vino oscila entre un 15 % y un 25 %, según contexto e implementación. Los casos reales aquí ilustran resultados observados." },
@@ -400,6 +401,16 @@ const CasosExito = () => {
           { name: l.h1 + " " + l.h1Highlight, url },
         ]}
       />
+      {/* Review JSON-LD for each real case */}
+      {cases.map((c, i) => (
+        <script key={`review-ld-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Review",
+          author: { "@type": "Person", name: c.name, jobTitle: c.role },
+          reviewBody: c.quote,
+          itemReviewed: { "@type": "SoftwareApplication", name: "Winerim", applicationCategory: "BusinessApplication" },
+        }) }} />
+      ))}
       <Navbar />
 
       {/* ── HERO ── */}
