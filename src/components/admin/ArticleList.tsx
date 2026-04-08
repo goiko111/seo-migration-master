@@ -49,7 +49,7 @@ const ArticleList = ({ articles, filterCategory, onFilterChange, onNew, onEdit, 
         {filtered.map(article => (
           <div key={article.id} className="bg-card border border-border rounded-lg p-4 flex items-center gap-4">
             {article.image_url && (
-              <img src={article.image_url} alt="" className="w-16 h-16 rounded object-cover shrink-0" />
+              <img src={article.image_url} alt={article.title || "Imagen del artículo"} className="w-16 h-16 rounded object-cover shrink-0" loading="lazy" decoding="async" />
             )}
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm truncate">{article.title}</p>

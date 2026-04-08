@@ -394,7 +394,7 @@ const IARestaurantes = () => {
               className="hidden lg:block">
               <div className="relative">
                 <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.15),transparent_70%)] blur-2xl" />
-                <img src={mockupImg} alt="Winerim AI wine recommendation interface" className="relative w-full max-w-lg mx-auto drop-shadow-2xl" loading="eager" />
+                <img src={mockupImg} alt="Winerim AI wine recommendation interface showing personalized suggestions on tablet" className="relative w-full max-w-lg mx-auto drop-shadow-2xl" loading="eager" fetchPriority="high" width={800} height={600} />
               </div>
             </motion.div>
           </div>

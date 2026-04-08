@@ -90,7 +90,7 @@ const ImageUpload = ({ value, onChange, label = "Imagen" }: ImageUploadProps) =>
         )}
       </div>
       {value && (
-        <img src={value} alt="Preview" className="h-20 rounded-md object-cover border border-border" />
+        <img src={value} alt="Vista previa de la imagen subida" className="h-20 rounded-md object-cover border border-border" loading="lazy" decoding="async" />
       )}
     </div>
   );
