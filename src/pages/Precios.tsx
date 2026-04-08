@@ -1122,7 +1122,39 @@ const Precios = () => {
         </div>
       </section>
 
-      {/* ── OBJECTION BUSTERS ── */}
+      {/* ── COMMON FEATURES ── */}
+      <section className="section-padding">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal className="text-center mb-10">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{ __html: em(c.commonTitle) }} />
+          </ScrollReveal>
+          <ScrollReveal>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {c.commonFeatures.map((feat, i) => (
+                <div key={i} className="flex items-start gap-3 bg-gradient-card rounded-xl border border-border p-4">
+                  <Check size={16} className="text-wine shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted-foreground">{feat}</span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── HELP CHOOSING ── */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-3xl mx-auto text-center">
+          <ScrollReveal>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-4" dangerouslySetInnerHTML={{ __html: em(c.helpTitle) }} />
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{c.helpDesc}</p>
+            <Link to={localePath("/contacto")}
+              className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
+              {c.helpCta} <ArrowRight size={16} />
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+
       <section className="section-padding">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal className="text-center mb-12">
