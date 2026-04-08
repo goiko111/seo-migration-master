@@ -139,7 +139,7 @@ export const pairingEntries: PairingEntry[] = [
     ],
     seo: {
       title: "Maridaje con Carnes Rojas: Guía de Vinos por Plato | Winerim",
-      description: "Qué vino elegir con chuletón, cordero, solomillo y estofados. 8 combinaciones plato+vino, principios clave y errores frecuentes. Guía profesional para hostelería.",
+      description: "Qué vino elegir con chuletón, cordero, solomillo y estofados. 8 combinaciones plato+vino, principios clave y errores frecuentes.",
     },
   },
   {
