@@ -83,7 +83,7 @@ const realCases: Record<string, RealCase[]> = {
   en: [
     {
       name: "Álex Pardo", role: "Best Sommelier of Spain 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Author cuisine", references: 350,
+      city: "Madrid", cuisine: "Author cuisine", references: 350, badge: "2 Michelin Stars",
       highlight: "Stock & sales management",
       situation: "Large cellar with a printed list requiring constant reprints, making it hard for the floor team to explore lesser-known references.",
       problem: "Manual stock control, difficulty updating prices and vintages, and no data on which references sold best.",
@@ -93,7 +93,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Nacho Otamendi", role: "Owner/Sommelier", restaurant: "Travieso Bar", initials: "NO",
-      city: "Spain", cuisine: "Wine bar / Gastrobar",
+      city: "Spain", cuisine: "Wine bar / Gastrobar", badge: "Gastrobar",
       highlight: "Time saved on floor",
       situation: "Restaurant with a rich wine list but only one sommelier who couldn't attend every table during peak hours.",
       problem: "10-15 minutes per table to explain the list, limiting service capacity and wine sales at peak times.",
@@ -103,7 +103,7 @@ const realCases: Record<string, RealCase[]> = {
     },
     {
       name: "Mario Martínez Plaza", role: "Head Sommelier", restaurant: "Hotel La Zambra 5⭐ GL", initials: "MMP",
-      city: "Málaga", cuisine: "5-star Grand Luxury Hotel",
+      city: "Málaga", cuisine: "5-star Grand Luxury Hotel", badge: "Hotel 5⭐ GL",
       highlight: "Sales analytics",
       situation: "Luxury hotel with an extensive wine list where management had no visibility into which wines sold or why.",
       problem: "No sales data by reference, no rotation metrics, purchasing decisions based on intuition instead of data.",
@@ -115,7 +115,7 @@ const realCases: Record<string, RealCase[]> = {
   it: [
     {
       name: "Álex Pardo", role: "Miglior Sommelier di Spagna 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cucina d'autore", references: 350,
+      city: "Madrid", cuisine: "Cucina d'autore", references: 350, badge: "2 Stelle Michelin",
       highlight: "Gestione stock e vendite",
       situation: "Cantina ampia con carta stampata che richiedeva ristampe costanti.",
       problem: "Controllo stock manuale, aggiornamento prezzi e annate difficile, nessun dato sulle vendite.",
@@ -137,7 +137,7 @@ const realCases: Record<string, RealCase[]> = {
   fr: [
     {
       name: "Álex Pardo", role: "Meilleur Sommelier d'Espagne 2023", restaurant: "Restaurante Coque", initials: "ÁP",
-      city: "Madrid", cuisine: "Cuisine d'auteur", references: 350,
+      city: "Madrid", cuisine: "Cuisine d'auteur", references: 350, badge: "2 Étoiles Michelin",
       highlight: "Gestion des stocks et ventes",
       situation: "Grande cave avec carte imprimée nécessitant des réimpressions constantes.",
       problem: "Contrôle des stocks manuel, mise à jour des prix difficile, aucune donnée sur les ventes.",
