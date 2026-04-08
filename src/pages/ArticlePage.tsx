@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ArticleSection from "@/components/article/ArticleSection";
 import ArticleTableOfContents from "@/components/article/ArticleTableOfContents";
 import ArticleMidCTA from "@/components/article/ArticleMidCTA";
+import ArticleToolsSection from "@/components/article/ArticleToolsSection";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
 import ArticleRelatedContent, { type RelatedLink } from "@/components/article/ArticleRelatedContent";
@@ -212,6 +213,9 @@ const ArticlePage = () => {
           {i === midIndex - 1 && <ArticleMidCTA pageType="article" />}
         </div>
       ))}
+
+      {/* USEFUL TOOLS */}
+      <ArticleToolsSection body={article.body} />
 
       {/* RELATED CONTENT */}
       <ArticleRelatedContent slug={slug || ""} body={article.body} manualLinks={article.relatedLinks} />
