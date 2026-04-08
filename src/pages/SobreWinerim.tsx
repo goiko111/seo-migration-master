@@ -30,20 +30,20 @@ const SobreWinerim = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Sobre Winerim — Gestión inteligente del vino en hostelería"
+        title="Sobre nosotros — Gestión inteligente del vino en hostelería"
         description="Winerim ayuda a restaurantes, hoteles y grupos a vender más vino, decidir mejor y optimizar carta, pricing y stock con datos e inteligencia aplicada."
-        url={`${CANONICAL_DOMAIN}/sobre-winerim`}
+        url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
       />
       <DynamicSchemaMarkup
-        id="sobre-winerim"
+        id="sobre-nosotros"
         type="AboutPage"
-        title="Sobre Winerim"
+        title="Sobre nosotros"
         description="Plataforma de gestión inteligente del vino en hostelería: carta, analítica, pricing, stock e inteligencia de compras."
-        url={`${CANONICAL_DOMAIN}/sobre-winerim`}
+        url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
         faqs={faqs}
         breadcrumbs={[
           { name: "Inicio", url: CANONICAL_DOMAIN },
-          { name: "Sobre Winerim", url: `${CANONICAL_DOMAIN}/sobre-winerim` },
+          { name: "Sobre nosotros", url: `${CANONICAL_DOMAIN}/sobre-nosotros` },
         ]}
       />
       <Navbar />
@@ -425,7 +425,7 @@ const SobreWinerim = () => {
         {/* ═══════════════════════════════════════════════════════════
             FAQ
             ═══════════════════════════════════════════════════════════ */}
-        <FAQSection faqs={faqs} schemaId="sobre-winerim" />
+        <FAQSection faqs={faqs} schemaId="sobre-nosotros" />
 
         {/* ═══════════════════════════════════════════════════════════
             INTERNAL LINKS

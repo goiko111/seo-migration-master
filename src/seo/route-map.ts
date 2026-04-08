@@ -50,7 +50,7 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/producto/inteligencia-dinamica", canonical: `${BASE}/producto/inteligencia-dinamica`, lang: "es", type: "product", intent: "inteligencia dinámica carta vinos IA" },
   { path: "/producto/winerim-core", canonical: `${BASE}/producto/winerim-core`, lang: "es", type: "product", intent: "motor analítico carta vinos 26 módulos" },
   { path: "/producto/winerim-supply", canonical: `${BASE}/producto/winerim-supply`, lang: "es", type: "product", intent: "inteligencia compras vino distribuidores" },
-  { path: "/sobre-winerim", canonical: `${BASE}/sobre-winerim`, lang: "es", type: "product", intent: "sobre winerim equipo metodología" },
+  { path: "/sobre-nosotros", canonical: `${BASE}/sobre-nosotros`, lang: "es", type: "product", intent: "sobre winerim equipo metodología" },
   { path: "/implantacion", canonical: `${BASE}/implantacion`, lang: "es", type: "product", intent: "implantación onboarding winerim" },
 
   // ─────────────────────────────────────────────

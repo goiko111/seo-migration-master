@@ -127,7 +127,7 @@ const Footer = () => {
             <FooterHeading>{t.footer_company}</FooterHeading>
             <FooterLinks
               items={[
-                { label: t.footer_about, href: localePath("/sobre-winerim") },
+                { label: t.footer_about, href: localePath("/sobre-nosotros") },
                 { label: t.nav_clients, href: localePath("/clientes") },
                 { label: t.nav_contact, href: localePath("/contacto") },
                 { label: "Partners", href: localePath("/afiliate") },

@@ -162,7 +162,7 @@ const esRoutes = (
     <Route path="/wine-list-management-software" element={<WineListSoftware />} />
     <Route path="/vino-por-copa-restaurante" element={<VinoPorCopa />} />
     <Route path="/que-es-winerim" element={<QueEsWinerim />} />
-    <Route path="/sobre-winerim" element={<SobreWinerim />} />
+    <Route path="/sobre-nosotros" element={<SobreWinerim />} />
     <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
     <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
     <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
