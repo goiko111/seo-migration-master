@@ -167,6 +167,30 @@ const CategoryLeapSection = () => {
           ))}
         </div>
 
+        {/* Semantic comparison table for screen readers and bots */}
+        <table className="sr-only" aria-label="Comparativa Winerim vs alternativas">
+          <caption>Comparativa de soluciones de carta de vinos para restaurantes</caption>
+          <thead>
+            <tr>
+              <th scope="col">Característica</th>
+              <th scope="col">Carta QR / PDF</th>
+              <th scope="col">Carta digital básica</th>
+              <th scope="col">Herramientas sueltas</th>
+              <th scope="col">Gestión tradicional</th>
+              <th scope="col">Winerim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Recomendaciones con IA</td><td>No</td><td>No</td><td>Parcial</td><td>No</td><td>Sí</td></tr>
+            <tr><td>Maridajes automáticos</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
+            <tr><td>Analítica de ventas</td><td>No</td><td>Básica</td><td>Parcial</td><td>Manual</td><td>Avanzada</td></tr>
+            <tr><td>Control de stock</td><td>No</td><td>No</td><td>Parcial</td><td>Manual</td><td>Automático</td></tr>
+            <tr><td>Optimización de precios</td><td>No</td><td>No</td><td>No</td><td>Manual</td><td>Con datos</td></tr>
+            <tr><td>Multiidioma</td><td>No</td><td>Algunos</td><td>No</td><td>No</td><td>4 idiomas</td></tr>
+            <tr><td>Formación equipo</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Integrada</td></tr>
+          </tbody>
+        </table>
+
         {/* Flow phrase */}
         <ScrollReveal delay={0.3}>
           <div className="flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-10">
