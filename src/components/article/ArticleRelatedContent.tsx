@@ -105,6 +105,12 @@ const defaultLinks: RelatedLink[] = [
   { to: "/demo", label: "Solicitar demo de Winerim", type: "solution" },
 ];
 
+/** Links that should always appear at the bottom of related content */
+const mandatoryLinks: RelatedLink[] = [
+  { to: "/precios", label: "Planes y precios de Winerim", type: "solution" },
+  { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
+];
+
 function getAutoLinks(slug: string, body: string): RelatedLink[] {
   const text = `${slug} ${body}`.toLowerCase();
   const matched = new Map<string, RelatedLink>();
@@ -128,7 +134,16 @@ interface ArticleRelatedContentProps {
 }
 
 const ArticleRelatedContent = ({ slug, body, manualLinks }: ArticleRelatedContentProps) => {
-  const links = manualLinks && manualLinks.length > 0 ? manualLinks : getAutoLinks(slug, body);
+  const baseLinks = manualLinks && manualLinks.length > 0 ? manualLinks : getAutoLinks(slug, body);
+  // Ensure mandatory links (pricing, demo) are always present
+  const existingPaths = new Set(baseLinks.map(l => l.to));
+  const extras = mandatoryLinks.filter(l => !existingPaths.has(l.to));
+  // Also ensure at least one solution link
+  const hasSolution = baseLinks.some(l => l.type === "solution");
+  if (!hasSolution && !extras.some(l => l.to.startsWith("/soluciones"))) {
+    extras.unshift({ to: "/soluciones/restaurantes-gastronomicos", label: "Soluciones para restaurantes gastronómicos", type: "solution" });
+  }
+  const links = [...baseLinks, ...extras].slice(0, 8);
 
   if (!links.length) return null;
 
