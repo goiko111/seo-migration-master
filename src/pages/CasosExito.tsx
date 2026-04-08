@@ -401,6 +401,16 @@ const CasosExito = () => {
           { name: l.h1 + " " + l.h1Highlight, url },
         ]}
       />
+      {/* Review JSON-LD for each real case */}
+      {cases.map((c, i) => (
+        <script key={`review-ld-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Review",
+          author: { "@type": "Person", name: c.name, jobTitle: c.role },
+          reviewBody: c.quote,
+          itemReviewed: { "@type": "SoftwareApplication", name: "Winerim", applicationCategory: "BusinessApplication" },
+        }) }} />
+      ))}
       <Navbar />
 
       {/* ── HERO ── */}
