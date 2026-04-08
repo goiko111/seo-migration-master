@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-usar-winerim-sin-sumiller",
   metaTitle: "Cómo Usar Winerim Cuando No Hay Sumiller en Sala | Winerim",
-  metaDescription: "Guía para restaurantes sin sumiller: cómo Winerim suple la falta de expertise en vino con recomendaciones automáticas, formación integrada y carta inteligente.",
+  metaDescription: "Guía para restaurantes sin sumiller: cómo Winerim suple la falta de expertise en vino con recomendaciones automáticas.",
   heroTitle: "Cómo usar Winerim cuando no hay sumiller en sala",
   heroSubtitle: "El 85% de los restaurantes en España no tienen sumiller. Pero eso no significa que no puedan vender vino con criterio. Winerim actúa como tu sumiller digital.",
   heroBadge: "Guía de producto",
@@ -33,7 +33,7 @@ const es: GuidePageData = {
 const en: GuidePageData = {
   slug: "en/guides/how-to-use-winerim-without-sommelier",
   metaTitle: "How to Use Winerim When You Don't Have a Sommelier | Winerim",
-  metaDescription: "Guide for restaurants without a sommelier: how Winerim fills the expertise gap with automatic recommendations, integrated training and an intelligent wine list.",
+  metaDescription: "Guide for restaurants without a sommelier: how Winerim fills the expertise gap with automatic recommendations.",
   heroTitle: "How to use Winerim when you don't have a sommelier",
   heroSubtitle: "85% of restaurants don't have a sommelier. That doesn't mean they can't sell wine with criteria. Winerim acts as your digital sommelier.",
   heroBadge: "Product guide",
@@ -62,7 +62,7 @@ const en: GuidePageData = {
 const it: GuidePageData = {
   slug: "it/guide/come-usare-winerim-senza-sommelier",
   metaTitle: "Come Usare Winerim Quando Non Hai un Sommelier | Winerim",
-  metaDescription: "Guida per ristoranti senza sommelier: come Winerim supplisce la mancanza di expertise con raccomandazioni automatiche, formazione integrata e carta intelligente.",
+  metaDescription: "Guida per ristoranti senza sommelier: come Winerim supplisce la mancanza di expertise con raccomandazioni automatiche.",
   heroTitle: "Come usare Winerim quando non hai un sommelier in sala",
   heroSubtitle: "L'85% dei ristoranti non ha un sommelier. Ma questo non significa che non possano vendere vino con criterio. Winerim agisce come il tuo sommelier digitale.",
   heroBadge: "Guida prodotto",

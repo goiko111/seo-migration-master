@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-revisar-carta-vinos-cada-mes",
   metaTitle: "Cómo Revisar tu Carta de Vinos Cada Mes Sin Perder el Control | Winerim",
-  metaDescription: "Guía con proceso estructurado para revisar tu carta de vinos mensualmente: qué medir, qué decidir, qué comunicar al equipo y cómo hacerlo en menos de 90 minutos.",
+  metaDescription: "Guía con proceso estructurado para revisar tu carta de vinos mensualmente: qué medir, qué decidir.",
   heroTitle: "Cómo revisar una carta de vinos cada mes sin perder el control",
   heroSubtitle: "Las mejores cartas de vino no son las que tienen los mejores vinos. Son las que se revisan con disciplina. Un proceso mensual de 90 minutos puede transformar tu rentabilidad.",
   heroBadge: "Guía operativa",

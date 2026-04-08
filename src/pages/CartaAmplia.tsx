@@ -8,7 +8,7 @@ import type { SupportedLang } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Cartas de Vinos Extensas | +250 Referencias bajo Control",
-  metaDescription: "Gestiona cartas de vinos de alta complejidad con Winerim: detecta stock muerto, optimiza rotación, elimina canibalización y toma decisiones de surtido con datos reales.",
+  metaDescription: "Gestiona cartas de vinos de alta complejidad con Winerim: detecta stock muerto, optimiza rotación.",
   canonicalUrl: "https://winerim.wine/soluciones/carta-amplia",
   schemaId: "carta-amplia",
   badgeLabel: "Alta complejidad", badgeIcon: Layers,
@@ -124,7 +124,7 @@ const ES: VerticalContent = {
 const EN: VerticalContent = {
   ...ES,
   metaTitle: "Winerim for Large Wine Lists | 250+ References under Control",
-  metaDescription: "Manage high-complexity wine lists with Winerim: detect dead stock, optimise rotation, eliminate cannibalisation and make assortment decisions with real data.",
+  metaDescription: "Manage high-complexity wine lists with Winerim: detect dead stock, optimise rotation.",
   canonicalUrl: "https://winerim.wine/en/solutions/large-wine-list",
   badgeLabel: "High complexity",
   breadSolutions: "Solutions", breadLabel: "Large wine list",
@@ -236,7 +236,7 @@ const EN: VerticalContent = {
 const IT: VerticalContent = {
   ...ES,
   metaTitle: "Winerim per Carte dei Vini Ampie | +250 Referenze sotto Controllo",
-  metaDescription: "Gestisci carte dei vini ad alta complessità con Winerim: rileva stock morto, ottimizza rotazione, elimina cannibalizzazione e prendi decisioni con dati reali.",
+  metaDescription: "Gestisci carte dei vini ad alta complessità con Winerim: rileva stock morto, ottimizza rotazione.",
   canonicalUrl: "https://winerim.wine/it/soluzioni/carta-vini-ampia",
   badgeLabel: "Alta complessità",
   breadSolutions: "Soluzioni", breadLabel: "Carta ampia",
@@ -338,7 +338,7 @@ const IT: VerticalContent = {
 const FR: VerticalContent = {
   ...ES,
   metaTitle: "Winerim pour Grandes Cartes des Vins | +250 Références sous Contrôle",
-  metaDescription: "Gérez les cartes des vins complexes avec Winerim : détectez le stock mort, optimisez la rotation, éliminez la cannibalisation et prenez des décisions avec des données réelles.",
+  metaDescription: "Gérez les cartes des vins complexes avec Winerim : détectez le stock mort, optimisez la rotation.",
   canonicalUrl: "https://winerim.wine/fr/solutions/grande-carte-des-vins",
   badgeLabel: "Haute complexité",
   breadSolutions: "Solutions", breadLabel: "Grande carte",

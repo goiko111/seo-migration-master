@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-detectar-canibalizacion-vinos-carta",
   metaTitle: "Cómo Detectar Canibalización entre Vinos de la Carta | Winerim",
-  metaDescription: "Guía para identificar y resolver la canibalización entre referencias de tu carta de vinos: diagnóstico, metodología, decisiones y framework de optimización.",
+  metaDescription: "Guía para identificar y resolver la canibalización entre referencias de tu carta de vinos: diagnóstico, metodología.",
   heroTitle: "Cómo detectar canibalización entre vinos de la carta",
   heroSubtitle: "Si tienes 3 Ribera del Duero crianza en el mismo rango de precio, no están compitiendo con la competencia. Están compitiendo entre sí. La canibalización es el problema invisible que más cartas tienen y menos restaurantes diagnostican.",
   heroBadge: "Guía analítica",

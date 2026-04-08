@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-decidir-surtido-segun-ticket-medio-tipo-local",
   metaTitle: "Cómo Decidir el Surtido de Vinos Según Ticket Medio y Tipo de Local | Winerim",
-  metaDescription: "Guía para seleccionar el surtido de vinos ideal según el ticket medio de tu restaurante, el perfil del cliente y el tipo de cocina. Framework práctico con ejemplos.",
+  metaDescription: "Guía para seleccionar el surtido de vinos ideal según el ticket medio de tu restaurante, el perfil del cliente y el tipo de cocina.",
   heroTitle: "Cómo decidir el surtido según ticket medio y tipo de local",
   heroSubtitle: "No existe la carta de vinos perfecta. Existe la carta perfecta para tu restaurante. El surtido debe reflejar quién come en tu sala, cuánto gasta y qué espera. Esta guía te da el framework para acertarlo.",
   heroBadge: "Guía estratégica",

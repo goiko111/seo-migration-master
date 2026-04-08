@@ -77,7 +77,7 @@ const AiWineSoftware = () => {
         applicationCategory: "BusinessApplication",
         applicationSubCategory: "Wine List Management Software",
         operatingSystem: "Web",
-        description: "Winerim is a wine intelligence platform for restaurants that combines digital wine list management, AI wine recommendations, automatic food pairing, sales analytics and price optimization.",
+        description: "Winerim is a wine intelligence platform for restaurants that combines digital wine list management, AI wine recommendations, automatic food pairing.",
         url: "https://winerim.wine",
         offers: {
           "@type": "Offer",
