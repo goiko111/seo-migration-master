@@ -46,9 +46,16 @@ const RealCaseCard = ({ data, index, labels }: RealCaseCardProps) => (
 
       {/* Header: restaurant + meta */}
       <div className="mb-5">
-        <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-wine bg-wine/10 border border-wine/20 rounded-full px-3 py-1 mb-3">
-          {data.highlight}
-        </span>
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-wine bg-wine/10 border border-wine/20 rounded-full px-3 py-1">
+            {data.highlight}
+          </span>
+          {data.badge && (
+            <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1">
+              {data.badge}
+            </span>
+          )}
+        </div>
         <h3 className="font-heading text-xl md:text-2xl font-bold" itemProp="name">
           {data.restaurant}
         </h3>

@@ -261,12 +261,12 @@ const labels: Record<string, {
   faqs: { q: string; a: string }[];
 }> = {
   es: {
-    seoTitle: "Casos Reales y Escenarios Tipo | Winerim",
-    seoDesc: "Casos reales de restaurantes que usan Winerim con quotes verificadas, y escenarios tipo que muestran cómo Winerim puede ayudar a diferentes perfiles de negocio.",
-    badge: "Evidencia real + Escenarios tipo",
-    h1: "Casos reales y escenarios",
-    h1Highlight: "tipo",
-    subtitle: "Testimonios verificados de profesionales que usan Winerim y escenarios basados en patrones reales de restaurantes, hoteles y gastrobares.",
+    seoTitle: "Casos de Éxito | Restaurantes que Usan Winerim",
+    seoDesc: "Descubre cómo restaurantes con Estrella Michelin y grupos de restauración venden más vino con Winerim. Casos reales con resultados.",
+    badge: "Casos de éxito",
+    h1: "Casos de éxito — Restaurantes que venden más vino con",
+    h1Highlight: "Winerim",
+    subtitle: "Testimonios verificados de profesionales que usan Winerim. Descubre cómo restaurantes con Estrella Michelin, hoteles de lujo y gastrobares mejoran sus ventas de vino.",
     realTitle: "Casos reales con",
     realTitleHighlight: "testimonios verificados",
     realDesc: "Cada caso incluye la situación inicial, el problema, la implementación y el impacto observado, junto con una cita validada por el profesional.",
@@ -277,9 +277,9 @@ const labels: Record<string, {
     voicesTitleHighlight: "Winerim cada día",
     situation: "Situación", problem: "Problema", implementation: "Implementación", impact: "Impacto", refs: "referencias",
     scenarioBadge: "Escenario tipo", painLabel: "Dolor habitual", helpLabel: "Cómo ayuda Winerim", indicatorsLabel: "Indicadores que puede mejorar",
-    ctaBadge: "Tu restaurante puede ser el siguiente", ctaTitle: "Descubre el potencial de tu", ctaTitleHighlight: "carta de vinos",
-    ctaDesc: "Envíanos tu carta y te mostramos qué resultados podrías obtener. Sin compromiso.",
-    ctaBtn1: "Solicitar análisis de carta", ctaBtn2: "Solicitar demo",
+    ctaBadge: "Tu restaurante puede ser el siguiente", ctaTitle: "¿Quieres resultados similares? Solicita tu", ctaTitleHighlight: "análisis gratuito",
+    ctaDesc: "Envíanos tu carta y te mostramos qué resultados podrías obtener con Winerim. Sin compromiso.",
+    ctaBtn1: "Solicitar análisis gratuito", ctaBtn2: "Solicitar demo",
     faqs: [
       { q: "¿Los casos mostrados son de clientes reales?", a: "Sí. Los casos reales incluyen nombre, cargo y restaurante verificado, con citas textuales del profesional. Los escenarios tipo están etiquetados como tal y representan patrones frecuentes, no clientes individuales." },
       { q: "¿Qué resultados puedo esperar con Winerim?", a: "Los resultados varían según el restaurante. El potencial estimado de mejora en ticket medio de vino oscila entre un 15 % y un 25 %, según contexto e implementación. Los casos reales aquí ilustran resultados observados." },
