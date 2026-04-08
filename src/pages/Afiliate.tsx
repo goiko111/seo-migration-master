@@ -385,7 +385,7 @@ const Afiliate = () => {
               { to: localePath("/funcionalidades"), label: "Funcionalidades", type: "solution" },
               { to: localePath("/soluciones"), label: "Soluciones", type: "solution" },
               { to: localePath("/casos-exito"), label: "Casos de éxito", type: "solution" },
-              { to: localePath("/sobre-winerim"), label: "Sobre Winerim", type: "solution" },
+              { to: localePath("/sobre-nosotros"), label: "Sobre nosotros", type: "solution" },
               { to: localePath("/precios"), label: "Precios", type: "solution" },
             ]}
           />
