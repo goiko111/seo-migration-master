@@ -27,7 +27,7 @@ type Suggestion = "mantener" | "renegociar" | "no-reponer" | "buscar-alternativa
 const i18n: Record<SupportedLang, Record<string, any>> = {
   es: {
     seo_title: "Calculadora de Compra Inteligente | Demo Winerim Supply",
-    seo_desc: "Analiza si una referencia de vino merece la pena: rentabilidad, señal de reposición, sobreprecio y oportunidad de mejora. Demo simplificada de Winerim Supply.",
+    seo_desc: "Analiza si una referencia de vino merece la pena: rentabilidad, reposición, sobreprecio y oportunidad de mejora. Demo de Winerim Supply.",
     badge: "Demo · Winerim Supply",
     h1: "Calculadora de Compra Inteligente",
     subtitle: "Una demo simplificada para ayudarte a decidir si una referencia merece la pena reponerse, renegociarse o sustituirse.",
@@ -145,7 +145,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
   },
   it: {
     seo_title: "Calcolatrice di Acquisto Intelligente | Demo Winerim Supply",
-    seo_desc: "Analizza se una referenza di vino vale la pena: redditività, segnale di riordino, sovrapprezzo e opportunità di miglioramento. Demo semplificata di Winerim Supply.",
+    seo_desc: "Analizza se una referenza di vino vale la pena: redditività, riordino, sovrapprezzo e opportunità di miglioramento. Demo Winerim Supply.",
     badge: "Demo · Winerim Supply",
     h1: "Calcolatrice di Acquisto Intelligente",
     subtitle: "Una demo semplificata per aiutarti a decidere se una referenza vale la pena riordinare, rinegoziare o sostituire.",
@@ -204,7 +204,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
   },
   fr: {
     seo_title: "Calculateur d'Achat Intelligent | Démo Winerim Supply",
-    seo_desc: "Analysez si une référence de vin en vaut la peine : rentabilité, signal de réapprovisionnement, surcoût et opportunité d'amélioration. Démo simplifiée de Winerim Supply.",
+    seo_desc: "Analysez si une référence de vin en vaut la peine : rentabilité, réapprovisionnement, surcoût et opportunité d'amélioration. Démo Winerim Supply.",
     badge: "Démo · Winerim Supply",
     h1: "Calculateur d'Achat Intelligent",
     subtitle: "Une démo simplifiée pour vous aider à décider si une référence mérite d'être réapprovisionnée, renégociée ou remplacée.",

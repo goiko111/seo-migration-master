@@ -7,7 +7,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Wine Bars y Vinotecas | Gestión Inteligente de Carta",
-  metaDescription: "Optimiza la gestión de tu wine bar con Winerim: rotación por copa, pricing dinámico, fichas para clientes curiosos y analítica de rendimiento por referencia.",
+  metaDescription: "Optimiza la gestión de tu wine bar con Winerim: rotación por copa, pricing dinámico.",
   canonicalUrl: "https://winerim.wine/soluciones/wine-bars",
   schemaId: "wine-bar",
   badgeLabel: "Wine bars & vinotecas",
@@ -149,7 +149,7 @@ const ES: VerticalContent = {
 const EN: VerticalContent = {
   ...ES,
   metaTitle: "Winerim for Wine Bars | Smart Wine List Management",
-  metaDescription: "Optimize your wine bar with Winerim: by-the-glass rotation, dynamic pricing, discovery profiles for curious clients and performance analytics per reference.",
+  metaDescription: "Optimize your wine bar with Winerim: by-the-glass rotation, dynamic pricing, discovery profiles for curious clients and performance analytics per.",
   badgeLabel: "Wine bars & enotecas",
   breadSolutions: "Solutions",
   breadLabel: "Wine bars",

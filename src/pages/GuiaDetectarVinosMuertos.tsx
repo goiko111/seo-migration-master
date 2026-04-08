@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad",
   metaTitle: "Cómo Detectar Vinos Muertos y Referencias que Frenan tu Rentabilidad | Guía",
-  metaDescription: "Guía para identificar vinos sin rotación en tu carta. Aprende a detectar stock muerto, cuantificar el impacto y tomar decisiones para recuperar rentabilidad.",
+  metaDescription: "Guía para identificar vinos sin rotación en tu carta. Aprende a detectar stock muerto.",
   heroTitle: "Cómo detectar vinos muertos y referencias que frenan tu rentabilidad",
   heroSubtitle: "Cada referencia sin rotación es capital inmovilizado, espacio desperdiciado y una señal de que algo no funciona en tu selección, pricing o posicionamiento.",
   heroBadge: "Guía diagnóstica",

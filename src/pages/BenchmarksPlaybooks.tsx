@@ -45,7 +45,7 @@ interface PageChrome {
 const i18n: Record<SupportedLang, PageChrome> = {
   es: {
     seoTitle: "Benchmarks & Playbooks para Cartas de Vino | Winerim",
-    seoDesc: "Benchmarks del sector y playbooks prácticos para optimizar tu carta de vinos. Datos de referencia, planes de acción y criterios expertos para restaurantes, hoteles y grupos.",
+    seoDesc: "Benchmarks del sector y playbooks prácticos para optimizar tu carta de vinos. Datos de referencia, planes de acción y criterios expertos para restaurantes.",
     badge: "Conocimiento aplicado",
     h1: "Benchmarks & Playbooks",
     subtitle: "Datos de referencia del sector y planes de acción prácticos para optimizar tu carta de vinos, mejorar la rentabilidad y vender más vino en tu restaurante.",
@@ -86,7 +86,7 @@ const i18n: Record<SupportedLang, PageChrome> = {
   },
   en: {
     seoTitle: "Wine List Benchmarks & Playbooks | Winerim",
-    seoDesc: "Industry benchmarks and practical playbooks to optimise your wine list. Reference data, action plans and expert criteria for restaurants, hotels and groups.",
+    seoDesc: "Industry benchmarks and practical playbooks to optimise your wine list. Reference data, action plans and expert criteria for restaurants.",
     badge: "Applied knowledge",
     h1: "Benchmarks & Playbooks",
     subtitle: "Industry reference data and practical action plans to optimise your wine list, improve profitability and sell more wine in your restaurant.",

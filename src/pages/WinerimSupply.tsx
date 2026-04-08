@@ -65,7 +65,7 @@ const i18n: Record<SupportedLang, {
 }> = {
   es: {
     seo_title: "Winerim Supply | Inteligencia de compras para restaurantes",
-    seo_desc: "Winerim Supply analiza precios de compra, distribuidores, rotación y oportunidades para ayudarte a decidir qué comprar, qué renegociar y qué no reponer. Compra mejor, vende mejor.",
+    seo_desc: "Winerim Supply analiza precios de compra, distribuidores, rotación y oportunidades para ayudarte a decidir qué comprar, qué renegociar y qué no reponer.",
     seo_url: "https://winerim.wine/producto/winerim-supply",
     breadcrumbs: [{ label: "Inicio", href: "/" }, { label: "Funcionalidades", href: "/funcionalidades" }, { label: "Winerim Supply" }],
     hero_badge: "WINERIM SUPPLY",
@@ -152,7 +152,7 @@ const i18n: Record<SupportedLang, {
   },
   en: {
     seo_title: "Winerim Supply | Purchasing Intelligence for Restaurants",
-    seo_desc: "Winerim Supply analyses purchase prices, distributors, rotation and opportunities to help you decide what to buy, renegotiate and stop restocking. Buy better, sell better.",
+    seo_desc: "Winerim Supply analyses purchase prices, distributors, rotation and opportunities to help you decide what to buy, renegotiate and stop restocking.",
     seo_url: "https://winerim.wine/en/product/winerim-supply",
     breadcrumbs: [{ label: "Home", href: "/" }, { label: "Features", href: "/funcionalidades" }, { label: "Winerim Supply" }],
     hero_badge: "WINERIM SUPPLY",

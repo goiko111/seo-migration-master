@@ -39,7 +39,7 @@ export const benchmarksPlaybooks: BPItem[] = [
     type: "benchmark",
     title: "Número ideal de referencias según tipo de restaurante",
     metaTitle: "Benchmark: Número de Referencias en Carta de Vinos por Tipo de Restaurante",
-    metaDescription: "¿Cuántas referencias debe tener tu carta de vinos? Benchmark por tipo de restaurante: gastronómico, casual, hotel, vinoteca. Datos y criterios para decidir.",
+    metaDescription: "¿Cuántas referencias debe tener tu carta de vinos? Benchmark por tipo de restaurante: gastronómico, casual, hotel, vinoteca.",
     heroSubtitle: "Descubre cuántas referencias de vino debería tener tu carta según el tipo de establecimiento, el ticket medio y el perfil de cliente.",
     icon: BarChart3,
     audience: "Directores de restaurante, F&B managers, sumilleres y propietarios que quieren dimensionar correctamente su carta de vinos.",
@@ -159,7 +159,7 @@ export const benchmarksPlaybooks: BPItem[] = [
     summary: "El equilibrio no significa paridad. Significa que cada región, estilo y tipología presentes en la carta responden a una lógica: la cocina del restaurante, el perfil del cliente y la identidad del establecimiento.",
     methodology: "Análisis cualitativo basado en principios de composición de carta. No existen proporciones universales: cada carta debe responder a su propio contexto.",
     keyPoints: [
-      { title: "Coherencia con la cocina", description: "La carta debe reflejar la identidad gastronómica del restaurante. Un restaurante mediterráneo necesita más blancos y rosados que uno especializado en carnes." },
+      { title: "Coherencia con la cocina", description: "La carta debe reflejar la identidad gastronómica del restaurante. Un restaurante mediterráneo necesita más blancos y rosados que uno especializado en." },
       { title: "Regiones locales vs internacionales", description: "Un equilibrio habitual sitúa entre un 50-70% de vinos nacionales/locales y un 30-50% internacionales, según posicionamiento." },
       { title: "Diversidad de estilos", description: "Incluir estilos variados (frescos, estructurados, crianza, naturales) permite atender distintos perfiles de cliente." },
       { title: "Evitar redundancia", description: "Dos vinos que cumplen la misma función en la carta compiten entre sí. Cada referencia debe ser distinguible." },

@@ -51,7 +51,7 @@ interface PageContent {
 const i18n: Record<SupportedLang, PageContent> = {
   es: {
     metaTitle: "Cómo Diseñar una Carta de Vinos Rentable | Guía para Restaurantes",
-    metaDescription: "Aprende a diseñar una carta de vinos que maximice ventas y márgenes. Estrategias de pricing, wine mapping, selección de vinos y presentación para restaurantes.",
+    metaDescription: "Aprende a diseñar una carta de vinos que maximice ventas y márgenes. Estrategias de pricing, wine mapping.",
     url: "https://winerim.wine/blog/como-disenar-carta-vinos-rentable",
     breadcrumb: "Carta de vinos rentable", badge: "Rentabilidad",
     h1: "Cómo diseñar una carta de vinos rentable",
@@ -201,7 +201,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   it: {
     metaTitle: "Come Progettare una Carta dei Vini Redditizia | Guida per Ristoranti",
-    metaDescription: "Scopri come progettare una carta dei vini che massimizzi vendite e margini. Strategie di pricing, wine mapping, selezione vini e presentazione per ristoranti.",
+    metaDescription: "Scopri come progettare una carta dei vini che massimizzi vendite e margini. Strategie di pricing, wine mapping.",
     url: "https://winerim.wine/it/come-progettare-carta-vini-redditizia",
     breadcrumb: "Carta dei vini redditizia", badge: "Redditività",
     h1: "Come progettare una carta dei vini redditizia",
@@ -276,7 +276,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   fr: {
     metaTitle: "Comment Concevoir une Carte des Vins Rentable | Guide Restaurant",
-    metaDescription: "Apprenez à concevoir une carte des vins qui maximise ventes et marges. Stratégies de pricing, wine mapping, sélection de vins et présentation pour restaurants.",
+    metaDescription: "Apprenez à concevoir une carte des vins qui maximise ventes et marges. Stratégies de pricing, wine mapping.",
     url: "https://winerim.wine/fr/comment-concevoir-carte-vins-rentable",
     breadcrumb: "Carte des vins rentable", badge: "Rentabilité",
     h1: "Comment concevoir une carte des vins rentable",

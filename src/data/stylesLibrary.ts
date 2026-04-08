@@ -129,7 +129,7 @@ export const styleEntries: StyleEntry[] = [
     ],
     seo: {
       title: "Vino Tinto: Guía Completa de Estilos, Subtipos y Maridajes | Winerim",
-      description: "Todo sobre el vino tinto: elaboración, subtipos (joven, crianza, reserva), uvas principales, regiones destacadas y maridajes. Guía profesional para hostelería.",
+      description: "Todo sobre el vino tinto: elaboración, subtipos (joven, crianza, reserva), uvas principales, regiones destacadas y maridajes.",
     },
   },
   {

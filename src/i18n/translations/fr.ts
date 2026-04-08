@@ -121,7 +121,7 @@ const fr: TranslationDict = {
   common_back: "Retour",
 
   seo_home_title: "Logiciel Carte des Vins avec IA | Winerim — Ventes, Marge et Contrôle",
-  seo_home_description: "Winerim est le logiciel de gestion de carte des vins avec IA qui augmente les ventes, optimise la marge et offre un contrôle total aux restaurants, hôtels et groupes de restauration.",
+  seo_home_description: "Winerim : logiciel de carte des vins avec IA. Augmente les ventes, optimise les marges et donne le contrôle aux restaurants et hôtels.",
 
   contact_title: "Parlons de votre carte des vins",
   contact_subtitle: "Décrivez-nous votre situation et nous vous répondons sous 24 h avec une proposition adaptée.",

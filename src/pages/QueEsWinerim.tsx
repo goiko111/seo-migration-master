@@ -43,7 +43,7 @@ type QT = {
 const qt: Record<string, QT> = {
   es: {
     metaTitle: "Qué es Winerim | Software Inteligente de Carta de Vinos",
-    metaDesc: "Winerim es una plataforma inteligente que ayuda a restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente con carta digital, IA y analítica.",
+    metaDesc: "Winerim es una plataforma inteligente que ayuda a restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente con carta.",
     breadLabel: "Qué es Winerim", badge: "La plataforma",
     heroTitle1: "Qué es ", heroHighlight: "Winerim",
     heroDesc: "Winerim es una plataforma inteligente diseñada para ayudar a los restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente.",
@@ -98,7 +98,7 @@ const qt: Record<string, QT> = {
   },
   en: {
     metaTitle: "What is Winerim | Intelligent Wine List Software",
-    metaDesc: "Winerim is an intelligent platform that helps restaurants sell more wine, optimize their cellar, and improve customer experience with digital lists, AI, and analytics.",
+    metaDesc: "Winerim is an intelligent platform that helps restaurants sell more wine, optimize their cellar, and improve customer experience with digital lists, AI.",
     breadLabel: "What is Winerim", badge: "The platform",
     heroTitle1: "What is ", heroHighlight: "Winerim",
     heroDesc: "Winerim is an intelligent platform designed to help restaurants sell more wine, optimize their cellar, and improve the customer experience.",

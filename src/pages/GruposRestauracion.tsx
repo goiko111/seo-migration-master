@@ -85,7 +85,7 @@ type Content = {
 
 const ES: Content = {
   metaTitle: "Winerim para Grupos de Restauración y Hoteleros | Control Multiunidad del Vino",
-  metaDescription: "Gobierno del surtido, benchmarking interno, estandarización inteligente y decisiones de compra basadas en rendimiento real. Winerim para operadores multiunidad.",
+  metaDescription: "Gobierno del surtido, benchmarking interno y decisiones de compra basadas en rendimiento real. Winerim para operadores multiunidad.",
   badgeLabel: "Operadores multiunidad", breadSolutions: "Soluciones", breadLabel: "Grupos de restauración",
   heroTitle1: "Control, visibilidad y decisión sobre el vino en ", heroTitleHighlight: "todas tus unidades",
   heroDesc: "Winerim da a grupos de restauración y hoteleros una capa de gobierno sobre el surtido, el margen, la rotación y la coherencia comercial del vino a escala.",

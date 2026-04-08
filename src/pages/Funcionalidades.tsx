@@ -244,7 +244,7 @@ const Funcionalidades = () => {
         id="funcionalidades"
         type="SoftwareApplication"
         title="Funcionalidades de Winerim"
-        description="Carta digital interactiva, recomendaciones con IA, maridajes automáticos, gestión de stock, pricing, analítica avanzada e inteligencia dinámica para restaurantes."
+        description="Carta digital, IA, maridajes automáticos, gestión de stock, pricing, analítica e inteligencia dinámica para restaurantes y hoteles."
         url={`${CANONICAL_DOMAIN}/funcionalidades`}
         faqs={faqs}
         breadcrumbs={[

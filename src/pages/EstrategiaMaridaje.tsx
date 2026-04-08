@@ -85,7 +85,7 @@ const i18n: Record<SupportedLang, GuidePageData> = {
   it: {
     slug: "it/guide/strategia-abbinamento-vino-ristorante",
     metaTitle: "Come Creare una Strategia di Abbinamento nei Ristoranti | Guida",
-    metaDescription: "Guida pratica per progettare abbinamenti che aumentino le vendite di vino: selezione per piatto, presentazione nel menu, abbinamento al calice e impatto sullo scontrino medio.",
+    metaDescription: "Guida pratica per progettare abbinamenti che aumentino le vendite di vino: selezione per piatto, presentazione nel menu.",
     heroTitle: "Come creare una strategia di abbinamento al ristorante",
     heroSubtitle: "L'abbinamento ben eseguito è uno degli strumenti più efficaci per vendere più vino. Impara a progettare una strategia che colleghi il tuo menu alla tua carta dei vini.",
     heroBadge: "Guida strategica",
@@ -124,7 +124,7 @@ const i18n: Record<SupportedLang, GuidePageData> = {
   fr: {
     slug: "fr/guides/strategie-accords-mets-vins-restaurant",
     metaTitle: "Comment Créer une Stratégie d'Accords Mets-Vins en Restaurant | Guide",
-    metaDescription: "Guide pratique pour concevoir des accords mets-vins qui augmentent les ventes : sélection par plat, présentation sur le menu, accord au verre et impact sur le ticket moyen.",
+    metaDescription: "Guide pratique pour concevoir des accords mets-vins qui augmentent les ventes : sélection par plat, présentation sur le menu.",
     heroTitle: "Comment créer une stratégie d'accords mets-vins en restaurant",
     heroSubtitle: "L'accord bien exécuté est l'un des outils les plus efficaces pour vendre plus de vin. Apprenez à concevoir une stratégie qui relie votre menu à votre carte des vins.",
     heroBadge: "Guide stratégique",

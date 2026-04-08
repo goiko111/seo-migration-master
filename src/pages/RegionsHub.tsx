@@ -69,7 +69,7 @@ const RegionsHub = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title="Regiones Vinícolas del Mundo | Biblioteca del Vino"
-        description="Guía completa de regiones vinícolas, denominaciones de origen y su papel en hostelería. Más de 3.700 denominaciones de más de 40 países con criterio Winerim."
+        description="Guía de regiones vinícolas y denominaciones de origen para hostelería. Más de 3.700 denominaciones de 40+ países con criterio Winerim."
         url="https://winerim.wine/biblioteca-vino/regiones"
       />
       <Navbar />

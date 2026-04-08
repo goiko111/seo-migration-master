@@ -62,7 +62,7 @@ const i18n: Record<SupportedLang, {
 }> = {
   es: {
     metaTitle: "Ejemplos de Carta de Vinos para Restaurantes | Modelos y Plantillas",
-    metaDescription: "Ejemplos reales de cartas de vinos bien estructuradas para restaurante pequeño, wine bar y restaurante gastronómico. Aprende a organizar vinos, distribuir precios y diseñar categorías.",
+    metaDescription: "Ejemplos reales de cartas de vinos bien estructuradas para restaurante pequeño, wine bar y restaurante gastronómico.",
     url: "https://winerim.wine/ejemplos-carta-vinos",
     breadcrumbParent: "Guías", breadcrumbCurrent: "Ejemplos de carta de vinos",
     badge: "Plantillas y modelos",
@@ -99,7 +99,7 @@ const i18n: Record<SupportedLang, {
       },
       {
         icon: Star, title: "Restaurante gastronómico", type: "Alta cocina / Fine dining", references: "80 – 200+ referencias",
-        description: "Carta extensa organizada por regiones y subregiones, con secciones premium y selección del sommelier. Diseñada para ofrecer una experiencia completa de descubrimiento.",
+        description: "Carta extensa organizada por regiones y subregiones, con secciones premium y selección del sommelier.",
         structure: ["Organizar por región principal y subapartados", "Sección 'Selección del sommelier' destacada", "Incluir formatos grandes (Magnum)", "Maridajes sugeridos con menú degustación", "Vinos por copa premium (10-15 referencias)"],
         priceRange: "25 € – 300 €+",
         sections: [
@@ -128,7 +128,7 @@ const i18n: Record<SupportedLang, {
   },
   en: {
     metaTitle: "Wine List Examples for Restaurants | Models & Templates",
-    metaDescription: "Real examples of well-structured wine lists for small restaurants, wine bars and fine dining. Learn to organize wines, distribute prices and design categories.",
+    metaDescription: "Real examples of well-structured wine lists for small restaurants, wine bars and fine dining.",
     url: "https://winerim.wine/en/wine-list-examples",
     breadcrumbParent: "Guides", breadcrumbCurrent: "Wine list examples",
     badge: "Templates & models",
@@ -194,7 +194,7 @@ const i18n: Record<SupportedLang, {
   },
   it: {
     metaTitle: "Esempi di Carta dei Vini per Ristoranti | Modelli e Template",
-    metaDescription: "Esempi reali di carte dei vini ben strutturate per ristorante piccolo, wine bar e ristorante gastronomico. Impara a organizzare i vini, distribuire i prezzi e progettare le categorie.",
+    metaDescription: "Esempi reali di carte dei vini ben strutturate per ristorante piccolo, wine bar e ristorante gastronomico.",
     url: "https://winerim.wine/it/esempi-carta-vini",
     breadcrumbParent: "Guide", breadcrumbCurrent: "Esempi di carta dei vini",
     badge: "Modelli e template",
@@ -260,7 +260,7 @@ const i18n: Record<SupportedLang, {
   },
   fr: {
     metaTitle: "Exemples de Carte des Vins pour Restaurants | Modèles et Templates",
-    metaDescription: "Exemples réels de cartes des vins bien structurées pour petit restaurant, bar à vins et restaurant gastronomique. Apprenez à organiser les vins, distribuer les prix et concevoir les catégories.",
+    metaDescription: "Exemples réels de cartes des vins bien structurées pour petit restaurant, bar à vins et restaurant gastronomique.",
     url: "https://winerim.wine/fr/exemples-carte-des-vins",
     breadcrumbParent: "Guides", breadcrumbCurrent: "Exemples de carte des vins",
     badge: "Modèles et templates",
@@ -286,7 +286,7 @@ const i18n: Record<SupportedLang, {
       },
       {
         icon: Wine, title: "Bar à vins", type: "Bar à vins spécialisé", references: "40 – 60 références",
-        description: "Carte plus large organisée par style et profil sensoriel, pas seulement par type. Idéale pour les clients explorateurs qui veulent découvrir des vins différents.",
+        description: "Carte plus large organisée par style et profil sensoriel, pas seulement par type. Idéale pour les clients explorateurs qui veulent découvrir des vins.",
         structure: ["Organiser par style (frais, structurés, doux)", "Section dédiée vins au verre (8-12)", "Inclure des vins nature et d'auteur", "Ajouter de brèves notes de dégustation"],
         priceRange: "20 € – 70 €",
         sections: [
@@ -297,7 +297,7 @@ const i18n: Record<SupportedLang, {
       },
       {
         icon: Star, title: "Restaurant gastronomique", type: "Haute cuisine / Fine dining", references: "80 – 200+ références",
-        description: "Carte étendue organisée par régions et sous-régions, avec sections premium et sélection du sommelier. Conçue pour offrir une expérience complète de découverte.",
+        description: "Carte étendue organisée par régions et sous-régions, avec sections premium et sélection du sommelier.",
         structure: ["Organiser par région principale et sous-sections", "Section 'Sélection du sommelier' mise en avant", "Inclure des grands formats (Magnum)", "Accords suggérés avec le menu dégustation", "Vins au verre premium (10-15 références)"],
         priceRange: "25 € – 300 €+",
         sections: [

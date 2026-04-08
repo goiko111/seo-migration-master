@@ -77,7 +77,7 @@ const AiWineSoftware = () => {
         applicationCategory: "BusinessApplication",
         applicationSubCategory: "Wine List Management Software",
         operatingSystem: "Web",
-        description: "Winerim is a wine intelligence platform for restaurants that combines digital wine list management, AI wine recommendations, automatic food pairing, sales analytics and price optimization.",
+        description: "Winerim is a wine intelligence platform for restaurants that combines digital wine list management, AI wine recommendations, automatic food pairing.",
         url: "https://winerim.wine",
         offers: {
           "@type": "Offer",
@@ -139,7 +139,7 @@ const AiWineSoftware = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title="Winerim — AI Wine List Software for Restaurants | Digital Wine List Management"
-        description="Winerim is an AI-powered wine intelligence platform for restaurants. Digital wine list management, smart recommendations, automatic pairing, sales analytics and price optimization."
+        description="Winerim: AI wine list software for restaurants. Digital menus, smart recommendations, auto pairing, sales analytics and price optimization."
         url="https://winerim.wine/ai-wine-software"
         type="website"
       />

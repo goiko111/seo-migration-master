@@ -121,7 +121,7 @@ const en: TranslationDict = {
   common_back: "Back",
 
   seo_home_title: "Wine List Software with AI | Winerim — Sales, Margin & Control",
-  seo_home_description: "Winerim is the AI wine list management software that increases sales, optimises margins and gives full control to restaurants, hotels and restaurant groups.",
+  seo_home_description: "Winerim: AI wine list software that boosts sales, optimises margins and gives full control to restaurants, hotels and groups.",
 
   contact_title: "Let's talk about your wine list",
   contact_subtitle: "Tell us your situation and we'll get back to you within 24 h with a tailored proposal.",

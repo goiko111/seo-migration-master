@@ -92,7 +92,7 @@ const capabilityIconColors = [
 const i18n: Record<SupportedLang, CoreI18n> = {
   es: {
     seo_title: "Winerim Core — Motor analítico para cartas de vinos | Winerim",
-    seo_desc: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, benchmark y arquitectura de carta en una sola capa analítica. El cerebro de tu carta de vinos.",
+    seo_desc: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, benchmark y arquitectura de carta en una sola capa analítica.",
     bc_product: "Producto",
     eyebrow: "WINERIM CORE",
     h1: "El motor analítico que convierte tu carta en un sistema de decisión",
@@ -182,7 +182,7 @@ const i18n: Record<SupportedLang, CoreI18n> = {
   },
   en: {
     seo_title: "Winerim Core — Analytical Engine for Wine Lists | Winerim",
-    seo_desc: "Winerim Core connects pricing, margin, stock, profitability, purchasing, benchmarking and list architecture in a single analytical layer. The brain behind your wine list.",
+    seo_desc: "Winerim Core connects pricing, margin, stock, profitability, purchasing, benchmarking and list architecture in a single analytical layer.",
     bc_product: "Product",
     eyebrow: "WINERIM CORE",
     h1: "The analytical engine that turns your wine list into a decision system",

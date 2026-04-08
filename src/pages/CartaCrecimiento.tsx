@@ -8,7 +8,7 @@ import type { SupportedLang } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Cartas de 80–250 Referencias | Optimización con Criterio",
-  metaDescription: "Tu carta tiene la profundidad suficiente para beneficiarse de Winerim: mejor pricing, rotación equilibrada, vino por copa estratégico y crecimiento sin desorden.",
+  metaDescription: "Tu carta tiene la profundidad suficiente para beneficiarse de Winerim: mejor pricing, rotación equilibrada.",
   canonicalUrl: "https://winerim.wine/soluciones/carta-crecimiento",
   schemaId: "carta-crecimiento",
   badgeLabel: "Profundidad con criterio", badgeIcon: TrendingUp,
@@ -223,7 +223,7 @@ const EN: VerticalContent = {
 const IT: VerticalContent = {
   ...ES,
   metaTitle: "Winerim per Carte di 80–250 Referenze | Ottimizzazione con Criterio",
-  metaDescription: "La tua carta ha la profondità sufficiente per beneficiare di Winerim: pricing migliore, rotazione equilibrata, calice strategico e crescita senza disordine.",
+  metaDescription: "La tua carta ha la profondità sufficiente per beneficiare di Winerim: pricing migliore, rotazione equilibrata.",
   canonicalUrl: "https://winerim.wine/it/soluzioni/carta-vini-crescita",
   badgeLabel: "Profondità con criterio",
   breadSolutions: "Soluzioni", breadLabel: "Carta in crescita",

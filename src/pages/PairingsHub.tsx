@@ -54,7 +54,7 @@ const PairingsHub = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title="Maridajes: Guía Completa Vino + Plato para Hostelería | Winerim"
-        description="Guía profesional de maridaje: 10 categorías, 80+ combinaciones plato+vino. Principios, errores y lectura comercial para restaurantes, sumilleres y equipos de sala."
+        description="Guía de maridaje: 10 categorías, 80+ combinaciones plato+vino. Principios, errores y lectura comercial para restaurantes y equipos de sala."
         url="https://winerim.wine/biblioteca-vino/maridajes"
       />
       <Navbar />

@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-mejorar-la-rotacion-de-vinos-en-un-restaurante",
   metaTitle: "Cómo Mejorar la Rotación de Vinos en un Restaurante | Guía",
-  metaDescription: "Guía práctica para mejorar la rotación de vinos en tu restaurante: selección, posicionamiento en carta, vino por copa y uso de datos para eliminar stock muerto.",
+  metaDescription: "Guía práctica para mejorar la rotación de vinos en tu restaurante: selección, posicionamiento en carta.",
   heroTitle: "Cómo mejorar la rotación de vinos en un restaurante",
   heroSubtitle: "La rotación de vinos es uno de los indicadores más importantes de rentabilidad. Descubre cómo evitar que tus vinos se queden inmovilizados en bodega.",
   heroBadge: "Guía práctica",
@@ -51,7 +51,7 @@ const es: GuidePageData = {
 const en: GuidePageData = {
   slug: "en/guides/how-to-improve-wine-rotation-in-restaurants",
   metaTitle: "How to Improve Wine Rotation in a Restaurant | Guide",
-  metaDescription: "Practical guide to improving wine rotation in your restaurant: selection, list positioning, wine by the glass and data-driven decisions to eliminate dead stock.",
+  metaDescription: "Practical guide to improving wine rotation in your restaurant: selection, list positioning.",
   heroTitle: "How to improve wine rotation in a restaurant",
   heroSubtitle: "Wine rotation is one of the most important profitability indicators. Discover how to prevent wines from sitting idle in your cellar.",
   heroBadge: "Practical guide",
@@ -97,7 +97,7 @@ const en: GuidePageData = {
 const it: GuidePageData = {
   slug: "it/guide/come-migliorare-rotazione-vini-ristorante",
   metaTitle: "Come Migliorare la Rotazione dei Vini in un Ristorante | Guida",
-  metaDescription: "Guida pratica per migliorare la rotazione dei vini nel tuo ristorante: selezione, posizionamento in carta, vino al calice e uso dei dati per eliminare lo stock morto.",
+  metaDescription: "Guida pratica per migliorare la rotazione dei vini nel tuo ristorante: selezione, posizionamento in carta.",
   heroTitle: "Come migliorare la rotazione dei vini in un ristorante",
   heroSubtitle: "La rotazione dei vini è uno degli indicatori di redditività più importanti. Scopri come evitare che i tuoi vini restino immobilizzati in cantina.",
   heroBadge: "Guida pratica",
@@ -143,7 +143,7 @@ const it: GuidePageData = {
 const fr: GuidePageData = {
   slug: "fr/guides/comment-ameliorer-rotation-vins-restaurant",
   metaTitle: "Comment Améliorer la Rotation des Vins dans un Restaurant | Guide",
-  metaDescription: "Guide pratique pour améliorer la rotation des vins dans votre restaurant : sélection, positionnement en carte, vin au verre et utilisation des données pour éliminer le stock mort.",
+  metaDescription: "Guide pratique pour améliorer la rotation des vins dans votre restaurant : sélection, positionnement en carte.",
   heroTitle: "Comment améliorer la rotation des vins dans un restaurant",
   heroSubtitle: "La rotation des vins est l'un des indicateurs de rentabilité les plus importants. Découvrez comment éviter que vos vins restent immobilisés en cave.",
   heroBadge: "Guide pratique",

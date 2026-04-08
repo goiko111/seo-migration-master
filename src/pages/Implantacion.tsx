@@ -67,7 +67,7 @@ type Content = {
 
 const ES: Content = {
   seoTitle: "Cómo funciona la implantación de Winerim | Onboarding paso a paso",
-  seoDesc: "Descubre cómo se implanta Winerim en tu restaurante u hotel: fases, tiempos, qué necesitas aportar, formación del equipo y soporte continuo. Sin fricciones.",
+  seoDesc: "Cómo se implanta Winerim en tu restaurante u hotel: fases, tiempos, formación del equipo y soporte continuo. Sin fricciones.",
   badge: "Implantación",
   breadProduct: "Producto", breadLabel: "Implantación",
   h1: "Cómo funciona la ", h1Highlight: "implantación de Winerim",

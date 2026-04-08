@@ -60,7 +60,7 @@ const StylesHub = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title="Estilos de Vino: Guía Completa para Hostelería | Winerim"
-        description="Guía profesional de estilos de vino: tintos, blancos, rosados, espumosos, generosos, dulces, naranjas y naturales. 8 familias, 50+ subtipos. Criterio aplicado a carta y venta."
+        description="Guía de estilos de vino: tintos, blancos, rosados, espumosos, generosos, dulces, naranjas y naturales. 8 familias y 50+ subtipos para carta."
         url="https://winerim.wine/biblioteca-vino/estilos"
       />
       <Navbar />

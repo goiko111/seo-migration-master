@@ -189,7 +189,7 @@ const i18n: Record<string, LangContent> = {
   },
   it: {
     seoTitle: "Calcolatore Prezzo Vino al Calice | Demo Winerim Core",
-    seoDesc: "Calcola il prezzo ottimale del vino al calice nel tuo ristorante. Demo del motore di pricing di Winerim Core con logica di conservazione, scarti e tipo di vino.",
+    seoDesc: "Calcola il prezzo ottimale del vino al calice. Demo del motore di pricing Winerim Core con logica di conservazione, scarti e tipo di vino.",
     breadTools: "Strumenti", breadCalc: "Calcolatore prezzo al calice", demoBadge: "Demo · Winerim Core",
     h1a: "Calcolatore prezzo vino", h1b: "al calice",
     subtitle: "Calcola il prezzo ottimale, il margine per calice e il punto di pareggio per il tuo programma di mescita.",
@@ -257,7 +257,7 @@ const i18n: Record<string, LangContent> = {
   },
   fr: {
     seoTitle: "Calculateur de Prix du Vin au Verre | Démo Winerim Core",
-    seoDesc: "Calculez le prix optimal du vin au verre dans votre restaurant. Démo du moteur de pricing de Winerim Core avec logique de conservation, perte et type de vin.",
+    seoDesc: "Calculez le prix optimal du vin au verre. Démo du moteur de pricing Winerim Core avec logique de conservation, perte et type de vin.",
     breadTools: "Outils", breadCalc: "Calculateur prix au verre", demoBadge: "Démo · Winerim Core",
     h1a: "Calculateur de prix du vin", h1b: "au verre",
     subtitle: "Calculez le prix optimal, la marge par verre et le seuil de rentabilité pour votre programme de vente au verre.",

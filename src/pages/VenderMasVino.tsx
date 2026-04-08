@@ -40,7 +40,7 @@ interface PageContent {
 const i18n: Record<SupportedLang, PageContent> = {
   es: {
     metaTitle: "Cómo Vender Más Vino en un Restaurante | Guía Completa 2025",
-    metaDescription: "Descubre las estrategias más efectivas para aumentar las ventas de vino en tu restaurante: carta optimizada, maridajes, recomendaciones inteligentes y tecnología.",
+    metaDescription: "Descubre las estrategias más efectivas para aumentar las ventas de vino en tu restaurante: carta optimizada, maridajes.",
     url: "https://winerim.wine/como-vender-mas-vino-en-un-restaurante",
     breadcrumbLabel: "Vender más vino", badge: "Guía para hostelería",
     h1pre: "Cómo vender más vino", h1accent: "en un restaurante",
@@ -164,7 +164,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   it: {
     metaTitle: "Come Vendere Più Vino al Ristorante | Guida Completa 2025",
-    metaDescription: "Scopri le strategie più efficaci per aumentare le vendite di vino nel tuo ristorante: carta ottimizzata, abbinamenti, raccomandazioni intelligenti e tecnologia.",
+    metaDescription: "Scopri le strategie più efficaci per aumentare le vendite di vino nel tuo ristorante: carta ottimizzata, abbinamenti.",
     url: "https://winerim.wine/it/come-vendere-piu-vino-ristorante",
     breadcrumbLabel: "Vendere più vino", badge: "Guida per la ristorazione",
     h1pre: "Come vendere più vino", h1accent: "al ristorante",
@@ -226,7 +226,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   fr: {
     metaTitle: "Comment Vendre Plus de Vin au Restaurant | Guide Complet 2025",
-    metaDescription: "Découvrez les stratégies les plus efficaces pour augmenter les ventes de vin dans votre restaurant : carte optimisée, accords mets-vins, recommandations intelligentes et technologie.",
+    metaDescription: "Découvrez les stratégies les plus efficaces pour augmenter les ventes de vin dans votre restaurant : carte optimisée, accords mets-vins.",
     url: "https://winerim.wine/fr/comment-vendre-plus-vin-restaurant",
     breadcrumbLabel: "Vendre plus de vin", badge: "Guide restauration",
     h1pre: "Comment vendre plus de vin", h1accent: "au restaurant",

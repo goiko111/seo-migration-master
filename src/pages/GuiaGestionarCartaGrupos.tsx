@@ -51,7 +51,7 @@ const es: GuidePageData = {
 const en: GuidePageData = {
   slug: "en/guides/how-to-manage-wine-list-restaurant-groups",
   metaTitle: "How to Manage Wine Lists Across Restaurant Groups | Winerim",
-  metaDescription: "Operational guide for managing wine lists across multi-unit restaurant groups: governance, cross-venue benchmarking, assortment control and centralized pricing.",
+  metaDescription: "Operational guide for managing wine lists across multi-unit restaurant groups: governance, cross-venue benchmarking.",
   heroTitle: "How to manage a wine list across restaurant groups",
   heroSubtitle: "Wine management in restaurant groups can't depend on each venue manager alone. You need a governance layer, cross-venue visibility and operational standards that scale without losing identity.",
   heroBadge: "Operational guide — Groups",

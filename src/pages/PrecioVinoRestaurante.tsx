@@ -52,7 +52,7 @@ interface PageContent {
 const i18n: Record<SupportedLang, PageContent> = {
   es: {
     metaTitle: "Cómo Fijar el Precio del Vino en un Restaurante | Guía de Pricing",
-    metaDescription: "Guía práctica para definir precios de vino rentables en tu restaurante. Aprende a estructurar tu carta, equilibrar márgenes y aumentar el ticket medio con estrategias de pricing profesionales.",
+    metaDescription: "Guía práctica para definir precios de vino rentables en tu restaurante. Aprende a estructurar tu carta.",
     url: "https://winerim.wine/precio-vino-restaurante",
     breadcrumb: "Precio vino restaurante", badge: "Guía de pricing",
     h1pre: "Cómo fijar el precio del vino en un", h1accent: "restaurante",
@@ -119,7 +119,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   en: {
     metaTitle: "How to Price Wine in a Restaurant | Pricing Guide",
-    metaDescription: "Practical guide to setting profitable wine prices in your restaurant. Learn to structure your list, balance margins and increase average ticket with professional pricing strategies.",
+    metaDescription: "Practical guide to setting profitable wine prices in your restaurant. Learn to structure your list.",
     url: "https://winerim.wine/en/wine-pricing-restaurant",
     breadcrumb: "Wine pricing", badge: "Pricing guide",
     h1pre: "How to price wine in a", h1accent: "restaurant",
@@ -253,7 +253,7 @@ const i18n: Record<SupportedLang, PageContent> = {
   },
   fr: {
     metaTitle: "Comment Fixer le Prix du Vin au Restaurant | Guide Pricing",
-    metaDescription: "Guide pratique pour définir des prix de vin rentables dans votre restaurant. Apprenez à structurer votre carte, équilibrer les marges et augmenter le ticket moyen.",
+    metaDescription: "Guide pratique pour définir des prix de vin rentables dans votre restaurant. Apprenez à structurer votre carte.",
     url: "https://winerim.wine/fr/prix-vin-restaurant",
     breadcrumb: "Prix du vin restaurant", badge: "Guide pricing",
     h1pre: "Comment fixer le prix du vin au", h1accent: "restaurant",

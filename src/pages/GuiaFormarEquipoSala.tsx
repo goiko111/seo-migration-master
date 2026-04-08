@@ -4,7 +4,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 const es: GuidePageData = {
   slug: "guias/como-formar-equipo-sala-para-vender-vino",
   metaTitle: "Cómo Formar al Equipo de Sala para Vender Vino sin Ser Sumiller | Guía",
-  metaDescription: "Guía práctica para formar a tu equipo de sala en vino sin necesidad de ser sumiller. Técnicas de recomendación, fichas simplificadas y plan de formación en 2 semanas.",
+  metaDescription: "Guía práctica para formar a tu equipo de sala en vino sin necesidad de ser sumiller.",
   heroTitle: "Cómo formar al equipo de sala para vender vino sin ser sumiller",
   heroSubtitle: "Tu equipo no necesita ser experto en vino. Necesita saber lo suficiente para recomendar con confianza, resolver dudas del cliente y convertir cada mesa en una oportunidad de venta.",
   heroBadge: "Guía formativa",
@@ -66,7 +66,7 @@ const en: GuidePageData = {
 const it: GuidePageData = {
   slug: "guide/come-formare-staff-sala-vendere-vino",
   metaTitle: "Come Formare lo Staff di Sala per Vendere Vino senza Essere Sommelier | Guida",
-  metaDescription: "Guida pratica per formare il tuo staff di sala sul vino senza essere sommelier. Tecniche di raccomandazione, schede semplificate e piano di formazione in 2 settimane.",
+  metaDescription: "Guida pratica per formare il tuo staff di sala sul vino senza essere sommelier. Tecniche di raccomandazione.",
   heroTitle: "Come formare lo staff di sala per vendere vino senza essere sommelier",
   heroSubtitle: "Il tuo team non ha bisogno di essere esperto di vino. Ha bisogno di sapere abbastanza per raccomandare con fiducia e trasformare ogni tavolo in un'opportunità di vendita.",
   heroBadge: "Guida formativa",
@@ -97,7 +97,7 @@ const it: GuidePageData = {
 const fr: GuidePageData = {
   slug: "guides/comment-former-equipe-salle-vendre-vin",
   metaTitle: "Comment Former l'Équipe de Salle pour Vendre du Vin sans Être Sommelier | Guide",
-  metaDescription: "Guide pratique pour former votre équipe de salle au vin sans être sommelier. Techniques de recommandation, fiches simplifiées et plan de formation en 2 semaines.",
+  metaDescription: "Guide pratique pour former votre équipe de salle au vin sans être sommelier. Techniques de recommandation.",
   heroTitle: "Comment former l'équipe de salle pour vendre du vin sans être sommelier",
   heroSubtitle: "Votre équipe n'a pas besoin d'être experte en vin. Elle a besoin d'en savoir assez pour recommander avec confiance et transformer chaque table en opportunité de vente.",
   heroBadge: "Guide formation",

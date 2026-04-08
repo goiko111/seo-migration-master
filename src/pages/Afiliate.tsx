@@ -31,7 +31,7 @@ const Afiliate = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Programa de Partners Winerim — Colabora y genera ingresos"
-        description="Conviértete en partner de Winerim: recomienda la plataforma líder de gestión inteligente del vino a restaurantes, hoteles y grupos. Comisiones, materiales y soporte."
+        description="Hazte partner de Winerim: recomienda el software de carta de vinos con IA a restaurantes y hoteles. Comisiones, materiales y soporte."
         url={`${CANONICAL_DOMAIN}/afiliate`}
       />
       <DynamicSchemaMarkup
