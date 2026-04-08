@@ -20,7 +20,10 @@ import { useLanguage } from "@/i18n/LanguageContext";
 const content: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string; label: string;
   title: string; highlight: string; subtitle: string;
-  benefits: string[]; form_title: string; form_subtitle: string;
+  benefits: string[]; stats: { icon: string; value: string; label: string }[];
+  callTitle: string; callDesc: string;
+  faqs: { q: string; a: string }[];
+  form_title: string; form_subtitle: string;
   button: string; sending: string; disclaimer: string;
   success: string; error: string;
   trust_response: string; trust_no_commitment: string; trust_demo: string;
