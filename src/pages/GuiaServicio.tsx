@@ -21,7 +21,7 @@ const GuiaServicio = () => (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
       title="Guía de Servicio del Vino | Estándar Winerim (WSET)"
-      description="Medidas estándar de servicio por estilo de vino: ml por copa, copas por botella, temperatura y copa recomendada. Referencia WSET para hostelería profesional."
+      description="Medidas de servicio por estilo de vino: ml por copa, copas por botella, temperatura y copa recomendada. Referencia WSET para hostelería."
       url="https://winerim.wine/biblioteca-vino/guia-servicio"
     />
     <Navbar />
