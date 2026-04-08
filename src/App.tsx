@@ -1,11 +1,13 @@
 import { lazy, Suspense } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
+
+// Lazy load UI chrome — not needed for FCP
+const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
+const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+const TooltipProvider = lazy(() => import("@/components/ui/tooltip").then(m => ({ default: m.TooltipProvider })));
 
 // Eager load home for fast first paint
 import Index from "./pages/Index";
@@ -482,32 +484,36 @@ const IntentTracker = lazy(() =>
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <LanguageProvider>
-          <ScrollToTop />
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              {esRoutes}
-              {langRoutes("/en")}
-              {langRoutes("/it")}
-              {langRoutes("/fr")}
-              <Route path="/unsubscribe" element={<Unsubscribe />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          {/* Overlay components — lazy loaded, non-critical */}
-          <Suspense fallback={null}>
-            <WhatsAppButton />
-            <BackToTop />
-            <CookieConsent />
-            <IntentTracker />
-          </Suspense>
-        </LanguageProvider>
-      </BrowserRouter>
-    </TooltipProvider>
+    <Suspense fallback={null}>
+      <TooltipProvider>
+        <Suspense fallback={null}>
+          <Toaster />
+          <Sonner />
+        </Suspense>
+        <BrowserRouter>
+          <LanguageProvider>
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                {esRoutes}
+                {langRoutes("/en")}
+                {langRoutes("/it")}
+                {langRoutes("/fr")}
+                <Route path="/unsubscribe" element={<Unsubscribe />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            {/* Overlay components — lazy loaded, non-critical */}
+            <Suspense fallback={null}>
+              <WhatsAppButton />
+              <BackToTop />
+              <CookieConsent />
+              <IntentTracker />
+            </Suspense>
+          </LanguageProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </Suspense>
   </QueryClientProvider>
 );
 
