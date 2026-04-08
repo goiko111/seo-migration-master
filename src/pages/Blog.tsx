@@ -128,7 +128,7 @@ const Blog = () => {
                     <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
                       <img src={featured.image} alt={featured.title}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                        loading="eager" />
+                        loading="lazy" decoding="async" />
                     </div>
                   )}
                   <div className="p-8 md:p-12 flex flex-col justify-center">
@@ -167,7 +167,7 @@ const Blog = () => {
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={post.image} alt={post.title}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                        loading="lazy" />
+                        loading="lazy" decoding="async" />
                     </div>
                   )}
                   <div className="p-6 md:p-8">

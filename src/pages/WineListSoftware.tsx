@@ -509,7 +509,7 @@ const WineListSoftware = () => {
             <motion.div initial={{ opacity: 0, scale: 0.9, x: 40 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ delay: 0.6, duration: 0.8 }} className="hidden lg:block">
               <div className="relative">
                 <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.15),transparent_70%)] blur-2xl" />
-                <img src={mockupImg} alt="Winerim digital wine list software on tablet and mobile" className="relative w-full max-w-lg mx-auto drop-shadow-2xl" loading="eager" />
+                <img src={mockupImg} alt="Winerim digital wine list software showing analytics dashboard on tablet and mobile" className="relative w-full max-w-lg mx-auto drop-shadow-2xl" loading="eager" fetchPriority="high" width={800} height={600} />
               </div>
             </motion.div>
           </div>
