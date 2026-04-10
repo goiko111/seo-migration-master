@@ -263,6 +263,32 @@ const it: TranslationDict = {
   logostrip_see_all: "Vedi tutti i clienti →",
 
   nav_client_area: "Area clienti",
+
+  // Lavora con noi
+  empleo_footer_link: "Lavora con noi",
+  empleo_badge: "Stiamo assumendo",
+  empleo_hero_title: "Unisciti al team che sta trasformando il mondo del vino",
+  empleo_hero_subtitle: "In Winerim combiniamo tecnologia, dati e passione per il vino per aiutare i ristoranti di tutta Europa a prendere decisioni migliori.",
+  empleo_why_title: "Perché Winerim?",
+  empleo_why_subtitle: "Non siamo solo un'altra startup. Stiamo costruendo lo standard del settore.",
+  empleo_values_title: "Il nostro DNA",
+  empleo_values_subtitle: "I principi che guidano tutto ciò che facciamo.",
+  empleo_value_1: "Ossessione per il cliente: tutto inizia e finisce al ristorante.",
+  empleo_value_2: "Dati > opinioni: misuriamo, analizziamo e miglioriamo.",
+  empleo_value_3: "Velocità con criterio: eseguiamo velocemente, ma con senno.",
+  empleo_value_4: "Trasparenza radicale: condividiamo contesto, non solo compiti.",
+  empleo_form_title: "Invia la tua candidatura",
+  empleo_form_subtitle: "Vuoi farne parte? Parlaci di te.",
+  empleo_area_label: "Area di interesse",
+  empleo_area_placeholder: "Seleziona un'area",
+  empleo_message_label: "Perché vuoi unirti a Winerim?",
+  empleo_message_placeholder: "Raccontaci di te, della tua esperienza e della tua motivazione...",
+  empleo_submit: "Invia candidatura",
+  empleo_sending: "Invio in corso...",
+  empleo_success_title: "Candidatura inviata!",
+  empleo_success_desc: "Esamineremo il tuo profilo e ti contatteremo presto.",
+  empleo_meta_title: "Lavora in Winerim — Unisciti al team",
+  empleo_meta_desc: "Unisciti al team che sta trasformando la gestione del vino nella ristorazione. Scopri le opportunità di lavoro in Winerim.",
 };
 
 export default it;

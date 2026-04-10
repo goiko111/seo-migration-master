@@ -11,6 +11,7 @@ const SITE = "https://winerim.wine";
 /* ──────── Human-readable labels + download paths for every form_type ──────── */
 const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPath?: string }> = {
   demo: { label: "Solicitud de demo gratuita" },
+  empleo: { label: "Candidatura de empleo" },
   contacto: { label: "Formulario de contacto" },
   "analisis-carta": { label: "Análisis gratuito de carta de vinos" },
   "wine-list-analyzer": { label: "Analizador de carta de vinos (herramienta)" },

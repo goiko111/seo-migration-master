@@ -56,6 +56,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/carta-crecimiento": "/en/solutions/growing-wine-list",
     "/soluciones/inteligencia-de-compras": "/en/solutions/purchasing-intelligence",
     "/sobre-nosotros": "/en/about-winerim",
+    "/empleo": "/en/careers",
     "/benchmarks-playbooks": "/en/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/en/tools/wine-by-glass-price-calculator",
     "/herramientas/calculadora-stock-muerto": "/en/tools/dead-stock-calculator",
@@ -125,6 +126,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/carta-crecimiento": "/it/soluzioni/carta-vini-crescita",
     "/soluciones/inteligencia-de-compras": "/it/soluzioni/intelligenza-acquisti",
     "/sobre-nosotros": "/it/chi-siamo",
+    "/empleo": "/it/lavora-con-noi",
     "/benchmarks-playbooks": "/it/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/it/strumenti/calcolatrice-prezzo-vino-al-calice",
     "/herramientas/calculadora-stock-muerto": "/it/strumenti/calcolatrice-stock-morto",
@@ -194,6 +196,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/soluciones/carta-crecimiento": "/fr/solutions/carte-en-croissance",
     "/soluciones/inteligencia-de-compras": "/fr/solutions/intelligence-achats",
     "/sobre-nosotros": "/fr/a-propos",
+    "/empleo": "/fr/emploi",
     "/benchmarks-playbooks": "/fr/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/fr/outils/calculateur-prix-vin-au-verre",
     "/herramientas/calculadora-stock-muerto": "/fr/outils/calculateur-stock-mort",
@@ -523,4 +526,30 @@ export interface TranslationDict {
 
   // Client area
   nav_client_area: string;
+
+  // Empleo / Careers
+  empleo_footer_link: string;
+  empleo_badge: string;
+  empleo_hero_title: string;
+  empleo_hero_subtitle: string;
+  empleo_why_title: string;
+  empleo_why_subtitle: string;
+  empleo_values_title: string;
+  empleo_values_subtitle: string;
+  empleo_value_1: string;
+  empleo_value_2: string;
+  empleo_value_3: string;
+  empleo_value_4: string;
+  empleo_form_title: string;
+  empleo_form_subtitle: string;
+  empleo_area_label: string;
+  empleo_area_placeholder: string;
+  empleo_message_label: string;
+  empleo_message_placeholder: string;
+  empleo_submit: string;
+  empleo_sending: string;
+  empleo_success_title: string;
+  empleo_success_desc: string;
+  empleo_meta_title: string;
+  empleo_meta_desc: string;
 }

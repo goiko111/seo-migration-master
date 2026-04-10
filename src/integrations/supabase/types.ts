@@ -212,6 +212,39 @@ export type Database = {
         }
         Relationships: []
       }
+      job_applications: {
+        Row: {
+          area_of_interest: string | null
+          created_at: string
+          email: string
+          id: string
+          linkedin_url: string | null
+          message: string | null
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          area_of_interest?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          linkedin_url?: string | null
+          message?: string | null
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          area_of_interest?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          linkedin_url?: string | null
+          message?: string | null
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
       page_content: {
         Row: {
           content_key: string

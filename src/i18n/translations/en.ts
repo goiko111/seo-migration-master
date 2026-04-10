@@ -263,6 +263,32 @@ const en: TranslationDict = {
   logostrip_see_all: "See all clients →",
 
   nav_client_area: "Client area",
+
+  // Careers
+  empleo_footer_link: "Careers",
+  empleo_badge: "We're hiring",
+  empleo_hero_title: "Join the team transforming the world of wine",
+  empleo_hero_subtitle: "At Winerim we combine technology, data and a passion for wine to help restaurants across Europe make better decisions.",
+  empleo_why_title: "Why Winerim?",
+  empleo_why_subtitle: "We're not just another startup. We're building the industry standard.",
+  empleo_values_title: "Our DNA",
+  empleo_values_subtitle: "The principles that guide everything we do.",
+  empleo_value_1: "Customer obsession: everything starts and ends at the restaurant.",
+  empleo_value_2: "Data > opinions: we measure, analyse and improve.",
+  empleo_value_3: "Speed with judgement: we execute fast, but with purpose.",
+  empleo_value_4: "Radical transparency: we share context, not just tasks.",
+  empleo_form_title: "Submit your application",
+  empleo_form_subtitle: "Want to join? Tell us about yourself.",
+  empleo_area_label: "Area of interest",
+  empleo_area_placeholder: "Select an area",
+  empleo_message_label: "Why do you want to join Winerim?",
+  empleo_message_placeholder: "Tell us about yourself, your experience and your motivation...",
+  empleo_submit: "Submit application",
+  empleo_sending: "Sending...",
+  empleo_success_title: "Application sent!",
+  empleo_success_desc: "We'll review your profile and get back to you soon.",
+  empleo_meta_title: "Careers at Winerim — Join the team",
+  empleo_meta_desc: "Join the team transforming wine management in hospitality. Discover career opportunities at Winerim.",
 };
 
 export default en;

@@ -263,6 +263,32 @@ const es: TranslationDict = {
   logostrip_see_all: "Ver todos los clientes →",
 
   nav_client_area: "Área cliente",
+
+  // Empleo
+  empleo_footer_link: "Trabaja con nosotros",
+  empleo_badge: "Estamos contratando",
+  empleo_hero_title: "Únete al equipo que está transformando el mundo del vino",
+  empleo_hero_subtitle: "En Winerim combinamos tecnología, datos y pasión por el vino para ayudar a restaurantes de toda Europa a tomar mejores decisiones.",
+  empleo_why_title: "¿Por qué Winerim?",
+  empleo_why_subtitle: "No somos una startup más. Estamos construyendo el estándar de la industria.",
+  empleo_values_title: "Nuestro ADN",
+  empleo_values_subtitle: "Los principios que guían todo lo que hacemos.",
+  empleo_value_1: "Obsesión por el cliente: todo empieza y termina en el restaurante.",
+  empleo_value_2: "Datos > opiniones: medimos, analizamos y mejoramos.",
+  empleo_value_3: "Velocidad con criterio: ejecutamos rápido, pero con cabeza.",
+  empleo_value_4: "Transparencia radical: compartimos contexto, no solo tareas.",
+  empleo_form_title: "Envía tu candidatura",
+  empleo_form_subtitle: "¿Quieres formar parte? Cuéntanos sobre ti.",
+  empleo_area_label: "Área de interés",
+  empleo_area_placeholder: "Selecciona un área",
+  empleo_message_label: "¿Por qué quieres unirte a Winerim?",
+  empleo_message_placeholder: "Cuéntanos sobre ti, tu experiencia y tu motivación...",
+  empleo_submit: "Enviar candidatura",
+  empleo_sending: "Enviando...",
+  empleo_success_title: "¡Candidatura enviada!",
+  empleo_success_desc: "Revisaremos tu perfil y te contactaremos pronto.",
+  empleo_meta_title: "Trabaja en Winerim — Únete al equipo",
+  empleo_meta_desc: "Únete al equipo que está transformando la gestión del vino en hostelería. Descubre las oportunidades de empleo en Winerim.",
 };
 
 export default es;
