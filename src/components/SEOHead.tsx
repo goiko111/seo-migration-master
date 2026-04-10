@@ -22,7 +22,8 @@ interface SEOHeadProps {
 
 const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang }: SEOHeadProps) => {
   useEffect(() => {
-    const fullTitle = title.length > 55 ? title : `${title} | Winerim`;
+    const suffix = " | Winerim";
+    const fullTitle = title.endsWith(suffix) || title.length > 55 ? title : `${title}${suffix}`;
     document.title = fullTitle;
 
     const setMeta = (property: string, content: string, isName = false) => {
