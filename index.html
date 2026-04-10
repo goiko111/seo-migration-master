@@ -120,6 +120,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
+    <!-- Winerim Web Chat Widget -->
+    <script>
+      window.WinerimWebChatConfig = {
+        apiUrl: 'https://edwuzzmeunzgsrejlmwr.supabase.co/functions/v1/web-lead-chat',
+        primaryColor: '#9B000A',
+        welcomeMessage: '¡Hola! 👋 Soy Iñigo, del equipo de Winerim. ¿En qué puedo ayudarte?',
+        companyName: 'Winerim',
+        buttonText: 'Chat'
+      };
+    </script>
+    <script src="https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js"></script>
+
     <!-- Noscript fallback: critical content visible to crawlers that don't execute JS -->
     <noscript>
       <header>
