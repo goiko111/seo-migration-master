@@ -14,7 +14,7 @@ import Index from "./pages/Index";
 
 // Lazy load overlay components — not needed for FCP
 const CookieConsent = lazy(() => import("./components/CookieConsent"));
-const WhatsAppButton = lazy(() => import("./components/WhatsAppButton"));
+
 const BackToTop = lazy(() => import("./components/BackToTop"));
 
 // Lazy load other routes
@@ -510,7 +510,7 @@ const App = () => (
             </Suspense>
             {/* Overlay components — lazy loaded, non-critical */}
             <Suspense fallback={null}>
-              <WhatsAppButton />
+              
               <BackToTop />
               <CookieConsent />
               <IntentTracker />
