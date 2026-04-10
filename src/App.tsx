@@ -98,6 +98,7 @@ const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
 const WinerimCore = lazy(() => import("./pages/WinerimCore"));
 const WinerimSupply = lazy(() => import("./pages/WinerimSupply"));
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
+const Empleo = lazy(() => import("./pages/Empleo"));
 const BenchmarkPlaybookDetail = lazy(() => import("./pages/BenchmarkPlaybookDetail"));
 const ResourcePage = lazy(() => import("./pages/ResourcePage"));
 const SeoPage = lazy(() => import("./pages/SeoPage"));
@@ -199,6 +200,7 @@ const esRoutes = (
     <Route path="/soluciones/carta-crecimiento" element={<CartaCrecimiento />} />
     <Route path="/soluciones/aumentar-ticket-medio-restaurante" element={<AumentarTicketMedio />} />
     <Route path="/implantacion" element={<Implantacion />} />
+    <Route path="/empleo" element={<Empleo />} />
     <Route path="/en/digital-wine-list" element={<DigitalWineList />} />
     <Route path="/blog/como-organizar-carta-de-vinos" element={<ComoOrganizarCarta />} />
     <Route path="/blog/cuantos-vinos-carta-restaurante" element={<CuantosVinosCarta />} />
@@ -340,6 +342,9 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/about-winerim`} element={<SobreWinerim />} />
     <Route path={`${prefix}/chi-siamo`} element={<SobreWinerim />} />
     <Route path={`${prefix}/a-propos`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/careers`} element={<Empleo />} />
+    <Route path={`${prefix}/lavora-con-noi`} element={<Empleo />} />
+    <Route path={`${prefix}/emploi`} element={<Empleo />} />
     <Route path={`${prefix}/benchmarks-playbooks`} element={<BenchmarksPlaybooks />} />
     <Route path={`${prefix}/tools/wine-by-glass-price-calculator`} element={<CalculadoraPrecioCopa />} />
     <Route path={`${prefix}/strumenti/calcolatrice-prezzo-vino-al-calice`} element={<CalculadoraPrecioCopa />} />
