@@ -131,6 +131,7 @@ const Footer = () => {
                 { label: t.nav_clients, href: localePath("/clientes") },
                 { label: t.nav_contact, href: localePath("/contacto") },
                 { label: "Partners", href: localePath("/afiliate") },
+                { label: "Distribuidores", href: localePath("/distribuidor") },
                 { label: t.empleo_footer_link ?? "Trabaja con nosotros", href: localePath("/empleo") },
                 { label: t.nav_client_area, href: "/decision-center" },
                 { label: t.footer_privacy, href: localePath("/privacidad") },
