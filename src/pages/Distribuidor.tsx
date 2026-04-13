@@ -51,7 +51,7 @@ const Distribuidor = () => {
             </ScrollReveal>
             <ScrollReveal>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mb-10">
-                El software de carta inteligente que están adoptando los mejores restaurantes de Europa.
+                El software de carta inteligente que están adoptando los mejores restaurantes del mundo.
                 Llévalo a tu mercado con exclusividad territorial.
               </p>
             </ScrollReveal>
@@ -84,7 +84,7 @@ const Distribuidor = () => {
                 🌍 La oportunidad
               </span>
               <h2 className="font-heading text-2xl md:text-4xl font-bold tracking-tight mb-6">
-                Un mercado de 2M+ de restaurantes en Europa.{" "}
+                Un mercado global de 15M+ restaurantes.{" "}
                 <span className="text-gradient-wine italic">La mayoría sin digitalizar.</span>
               </h2>
             </ScrollReveal>
@@ -262,23 +262,29 @@ const Distribuidor = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal>
-              <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
                 {[
-                  { flag: "🇲🇽", country: "México", sector: "Distribución de vinos + HORECA" },
-                  { flag: "🇮🇹", country: "Italia", sector: "Integración TPV + hostelería" },
+                  { flag: "🇲🇽", country: "México" },
+                  { flag: "🇮🇹", country: "Italia" },
+                  { flag: "🇵🇷", country: "Puerto Rico" },
+                  { flag: "🇨🇭", country: "Suiza" },
                 ].map((d) => (
-                  <div key={d.country} className="bg-gradient-card rounded-xl border border-border p-5 text-left">
+                  <div key={d.country} className="bg-gradient-card rounded-xl border border-border p-5 text-center">
                     <span className="text-2xl">{d.flag}</span>
                     <p className="font-heading font-bold text-foreground mt-2">{d.country}</p>
-                    <p className="text-xs text-muted-foreground">{d.sector}</p>
                   </div>
                 ))}
               </div>
             </ScrollReveal>
             <ScrollReveal>
-              <p className="text-sm text-muted-foreground mt-8">
-                📍 Buscamos distribuidores en: <strong className="text-foreground">Portugal, Francia, Alemania, UK, USA, LATAM</strong>
-              </p>
+              <div className="mt-8 max-w-xl mx-auto">
+                <p className="text-sm text-muted-foreground mb-4">
+                  💡 <strong className="text-foreground">Perfil ideal:</strong> Distribuidores de vino, distribuidores de software para hostelería, o profesionales del canal HORECA con red consolidada.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  📍 Buscamos distribuidores en: <strong className="text-foreground">Portugal, Francia, Alemania, UK, USA, resto de LATAM</strong>
+                </p>
+              </div>
             </ScrollReveal>
           </div>
         </section>
