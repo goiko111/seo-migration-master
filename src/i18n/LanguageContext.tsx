@@ -5,8 +5,10 @@ import es from "./translations/es";
 import en from "./translations/en";
 import it from "./translations/it";
 import fr from "./translations/fr";
+import de from "./translations/de";
+import pt from "./translations/pt";
 
-const TRANSLATIONS: Record<SupportedLang, TranslationDict> = { es, en, it, fr };
+const TRANSLATIONS: Record<SupportedLang, TranslationDict> = { es, en, it, fr, de, pt };
 
 interface LanguageContextValue {
   lang: SupportedLang;
@@ -28,6 +30,8 @@ export function detectLangFromPath(pathname: string): SupportedLang {
   if (pathname.startsWith("/en/") || pathname === "/en") return "en";
   if (pathname.startsWith("/it/") || pathname === "/it") return "it";
   if (pathname.startsWith("/fr/") || pathname === "/fr") return "fr";
+  if (pathname.startsWith("/de/") || pathname === "/de") return "de";
+  if (pathname.startsWith("/pt/") || pathname === "/pt") return "pt";
   return "es";
 }
 
@@ -51,6 +55,8 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
         { lang: "en", url: `${SITE}${ROUTE_MAP.en[esPath] || `/en${esPath}`}` },
         { lang: "it", url: `${SITE}${ROUTE_MAP.it[esPath] || `/it${esPath}`}` },
         { lang: "fr", url: `${SITE}${ROUTE_MAP.fr[esPath] || `/fr${esPath}`}` },
+        { lang: "de", url: `${SITE}${ROUTE_MAP.de[esPath] || `/de${esPath}`}` },
+        { lang: "pt", url: `${SITE}${ROUTE_MAP.pt[esPath] || `/pt${esPath}`}` },
       ];
     },
   }), [lang, t]);
