@@ -6234,6 +6234,3201 @@ export const regionEntries: RegionEntry[] = [
     faqs: [{ q: "¿Cannonau es Garnacha?", a: "Sí, genéticamente es Garnacha. Sardos reclaman ser origen. En isla desarrolla perfil más salvaje." }],
     seo: { title: "Cannonau di Sardegna DOC", description: "Cannonau: Garnacha sarda, potencia, Mediterráneo." }
   },
+  // ── PORTUGAL — Regiones DOC restantes ─────────────────────────────────
+  {
+    id: "vinho-verde",
+    slug: "vinho-verde",
+    name: "Vinho Verde",
+    altNames: ["Região de Vinho Verde", "Minho"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 1200,
+    wineTypes: ["blanco", "tinto", "rosado"],
+    mainGrapes: ["Loureiro", "Trajadura", "Avesso", "Alvarinho", "Vinhão", "Espadeiro"],
+    styles: ["Blanco fresco y chispeante", "Tinto de baja graduación", "Rosado ligero", "Vinho Verde con gas natural", "Blanco mineral de viñedo viejo"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Los blancos más frescos y crujientes de Portugal, con una ligera efervescencia natural que los hace irresistibles. Vinho Verde es la opción refrescante perfecta para clientes que buscan algo diferente.",
+    intro: "Vinho Verde es la esencia de la frescura portuguesa. Producido en el norte de Portugal (región del Minho), estos blancos jóvenes tienen una acidez nerviosa y frecuentemente una leve carbonatación natural que los hace vibrantemente bebibles. A pesar del nombre, los mejores Vinho Verde no son vinos simples: algunos envejecen en barrica, otros provienen de viñedos viejos con complejidad sorprendente. Funcionan magistralmente por copa y son aliados en climas cálidos.",
+    cartaRole: ["segura", "valor", "descubrimiento"],
+    cartaReading: "Vinho Verde comunica frescura, juventud y accesibilidad. En una carta sofisticada dice que el restaurante no toma todo tan en serio. Por copa, es una venta fácil en verano.",
+    whenToHighlight: "Como aperitivo, como vino por copa de verano, con mariscos y pescados, en maridajes ligeros, en cartas que buscan portugueses alternativos a Douro.",
+    clientProfile: "Cliente que busca frescura, especialmente en meses cálidos. Atrae comensales jóvenes y a quien valora bebibilidad sobre complejidad. Muy popular en ambiente de gastro-bar.",
+    sellByStrategy: "Vende perfectamente por variedad (Alvarinho, Loureiro), por región, por concepto ('un fresco portugués'). La efervescencia natural es argumento de venta.",
+    competingRegions: ["Albariño", "Muscadet", "Pinot Grigio"],
+    commonMistakes: [
+      "Servir demasiado frío (pierde aromas)",
+      "No ofrecer los mejores Alvarinho de Vinho Verde, que rivalizan con Albariño",
+      "Olvidar que Vinho Verde no es solo blanco: los tintos son ligeros y divertidos"
+    ],
+    pairings: ["Ostra", "Vieira", "Marisco cocido", "Bacalao a Brás", "Sardinas a la parrilla", "Queso fresco"],
+    faqs: [
+      { q: "¿Por qué tiene gas Vinho Verde?", a: "La carbonatación es generalmente natural, resultado de una fermentación incompleta. Algunos productores añaden CO2, pero los mejores mantienen la efervescencia natural." },
+      { q: "¿Hay Vinho Verde serio, no solo ligero?", a: "Sí. Productores como Quinta de Aveleda y Anselmo Mendes crean Vinho Verde complejos, con cuerpo y envejecimiento, especialmente con Alvarinho." },
+      { q: "¿Es siempre joven y debe beberse rápido?", a: "La mayoría sí, pero los Vinho Verde de viñedo viejo o con crianza pueden guardarse 5+ años con beneficio." }
+    ],
+    seo: {
+      title: "Vinho Verde | Blancos frescos y por copa | Guía hostelería",
+      description: "Vinho Verde: fresco, chispeante, perfecto por copa. Guía comercial Winerim para restaurantes y bares de vinos."
+    }
+  },
+  {
+    id: "dao",
+    slug: "dao",
+    name: "Dão",
+    altNames: ["Região de Dão"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 380,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Touriga Nacional", "Alfrocheiro", "Jaen", "Encruzado", "Síria"],
+    styles: ["Tinto elegante y aromático", "Tinto de guarda estructurado", "Blanco mineral y complejo", "Tinto con notas florales"],
+    prestige: "premium",
+    clientRecognition: "medio",
+    description: "La región de tintos elegantes portugueses, donde la altitud y el granito producen vinos aromáticos, estructurados y envejecibles. Dão es el descubrimiento para quien busca Portugal más sofisticado.",
+    intro: "Dão es la región más elegante de Portugal continental. Ubicada en la meseta central de Portugal a mayor altitud, sus suelos graníticos y clima más fresco producen tintos con una aromática excepcional y una estructura que demanda 5+ años de guarda. La Touriga Nacional de Dão es diferente a la de Douro: más perfumada, menos potente, más elegante. Los blancos de Encruzado son inesperadamente complejos.",
+    cartaRole: ["diferencial", "premium", "descubrimiento"],
+    cartaReading: "Dão comunica sofisticación y conocimiento. Es la opción de quien entiende de vino pero busca huir de lo obvio. Funciona bien en cartas que quieren 'Portugal premium pero no Douro'.",
+    whenToHighlight: "En cartas de vino o bodega, como alternativa a Alentejo más elegante, en maridajes con carne roja, como propuesta para cliente aventurero.",
+    clientProfile: "Sommelier y aficionado que busca profundidad. Menos conocido por cliente general, requiere 'educación' en la venta pero satisface expectativas altas.",
+    sellByStrategy: "Vende por variedad (Touriga Nacional), por concepto de región mountain-wine, por envejecimiento. Requiere recomendación de sommelier.",
+    competingRegions: ["Ribera del Duero", "Toro", "Priorat"],
+    commonMistakes: [
+      "Ofrecer Dão joven: necesita mínimo 5 años. Buscar Dão de 2015 o anterior",
+      "No reconocer que Dão blanco es excelente: el Encruzado es uno de los blancos más interesantes de Iberia",
+      "Confundir con Douro: Dão es mucho más elegante, menos potente"
+    ],
+    pairings: ["Carne de caza mayor", "Cordero envejecido", "Setas", "Queso Sérena", "Jamón serrano envejecido"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Dão y Douro?", a: "Dão es más alto, granito, más frío. Produce tintos elegantes y aromáticos. Douro es más potente y potable joven. Dão requiere envejecimiento." },
+      { q: "¿Cuánto tiempo envejece Dão?", a: "Los mejores Dão alcanzan su plenitud a los 10-15 años. A los 5 años comienzan a abrirse. Buen envejecimiento potencial." },
+      { q: "¿Qué es Encruzado?", a: "Variedad blanca portuguesa clásica de Dão. Produce blancos minerales, con cuerpo, envejecibles. Es el Encruzado de Dão que distingue." }
+    ],
+    seo: {
+      title: "Dão | Tintos elegantes y buscador portugués",
+      description: "Dão: Touriga Nacional elegante, granito, Portugal mountain-wine. Guía Winerim para restaurantes premium."
+    }
+  },
+  {
+    id: "bairrada",
+    slug: "bairrada",
+    name: "Bairrada",
+    altNames: ["Região de Bairrada"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 140,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Baga", "Merlot", "Cabernet Sauvignon", "Maria Gomes", "Arinto"],
+    styles: ["Tinto potente y tánico de Baga", "Tinto moderno criado", "Blanco aromático", "Espumoso de Baga"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Región histórica portuguesa donde la variedad Baga produce tintos rústicos, estructura tánica y potencial de envejecimiento. Bairrada es para amantes de vinos sin filtrar y con carácter.",
+    intro: "Bairrada es la región de Baga, la variedad portuguesa más tánica. Históricamente sus tintos eran rústicos y recios, pero los productores modernos han encontrado elegancia dentro de la estructura. Los suelos de arcilla y clima templado crean vinos que necesitan tiempo pero tienen mucho que decir. Bairrada es especialmente interesante como opciones de descubrimiento en cartas portuguesas.",
+    cartaRole: ["diferencial", "descubrimiento", "valor"],
+    cartaReading: "Bairrada comunica autenticidad portuguesa. Dice que tu restaurante no sigue tendencias, que busca raíces. Es la opción para amantes de tánicos.",
+    whenToHighlight: "En cartas que buscan portugueses auténticos, con carne roja potente, como opción de descubrimiento en sección de buscador.",
+    clientProfile: "Aficionado que busca autenticidad, enólogo, cliente que disfruta estructura tánica. Menos para cliente casual.",
+    sellByStrategy: "Vende por variedad Baga, por concepto de autenticidad portuguesa, por envejecimiento. Requiere presentación técnica.",
+    competingRegions: ["Douro", "Dão", "Ribera del Duero"],
+    commonMistakes: [
+      "Servir Bairrada demasiado joven: necesita 8+ años mínimo",
+      "No airearlo suficientemente: los taninos son marcados",
+      "No pairear adecuadamente: necesita carne potente, no pescado"
+    ],
+    pairings: ["Carne roja asada", "Caza mayor", "Jamón ibérico", "Queso Barra", "Cordero estofado"],
+    faqs: [
+      { q: "¿Cuánto tiempo debo decantar Bairrada?", a: "30-45 minutos mínimo. Los taninos son rígidos y necesitan oxígeno para abrirse. Mejor abierto 1 hora." },
+      { q: "¿Baga es como Tannat?", a: "Ambos son muy tánicos, pero Baga es más elegante. Tannat es más brutal. Baga tiene más complejidad." },
+      { q: "¿Hay Bairrada blanco?", a: "Sí, con Maria Gomes y Arinto. Son frescos, minerales y subutilizados. Vale la pena explorar." }
+    ],
+    seo: {
+      title: "Bairrada | Baga tánica y autenticidad portuguesa",
+      description: "Bairrada: Baga estructurada, taninos, Portugal sin filtrar. Guía comercial Winerim."
+    }
+  },
+  {
+    id: "lisboa",
+    slug: "lisboa",
+    name: "Lisboa",
+    altNames: ["Región de Lisboa", "Setúbal Lisboa"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 220,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Castelao", "Touriga Nacional", "Alicante Bouschet", "Fernão Pires", "Vital"],
+    styles: ["Tinto moderno y frutal", "Blanco aromático", "Rosado delicado", "Tinto de crianza"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "La región emergente portuguesa cerca de Lisboa, donde productores modernos experimentan con viejas variedades autóctonas. Precios competitivos y vinos frescos, accesibles.",
+    intro: "Lisboa es la región moderna portuguesa. A los pies de la capital, productores jóvenes están revitalizando variedades olvidadas como Castelao y creando vinos frescos, fáciles de beber, a precios que no sacrifican calidad. Funciona magistralmente como punto de descubrimiento en cartas que buscan Portugal moderno y accesible.",
+    cartaRole: ["valor", "descubrimiento"],
+    cartaReading: "Lisboa es Portugal accesible y moderno. Comunica innovación respetando tradición. Por precio, es una oportunidad de márgenes en tinto.",
+    whenToHighlight: "Como tinto accesible portugués, en cartas de gastro-bar, por copa, como punto de entrada a Portugal para cliente casual.",
+    clientProfile: "Cliente joven, en ambiente moderno. Quien busca Portugal pero con acceso económico. Muy en cartas de vino natural/natural-leaning.",
+    sellByStrategy: "Vende por variedad, por concepto 'Portugal moderno', por precio. La presentación es importante: 'proyecto de joven productor'.",
+    competingRegions: ["Alentejo", "Vinho Verde", "Penedès"],
+    commonMistakes: [
+      "Subestimar la calidad: algunos Lisboa son realmente buenos",
+      "No ofertar rosados: el rosado de Lisboa es especialmente bueno",
+      "No buscar productores boutique: aquí están los más innovadores"
+    ],
+    pairings: ["Aperitivo", "Tapas", "Pescado blanco", "Queso fresco", "Charcutería"],
+    faqs: [
+      { q: "¿Lisboa es tan bueno como Alentejo?", a: "Diferente. Lisboa es más moderno, más accesible. Alentejo es más potente. Para beber joven: Lisboa." },
+      { q: "¿Quién es productor importante en Lisboa?", a: "Adega Mayor, Casal Branco, Quinta de Lemos. Busca estos para garantizar calidad." },
+      { q: "¿Vale la pena el rosado de Lisboa?", a: "Absolutamente. Es fresco, mineral, uno de los mejores rosados portugueses a buen precio." }
+    ],
+    seo: {
+      title: "Lisboa | Portugal moderno y accesible",
+      description: "Lisboa: región emergente, Castelao, vinos frescos. Guía Winerim para cartas modernas."
+    }
+  },
+  {
+    id: "tejo",
+    slug: "tejo",
+    name: "Tejo",
+    altNames: ["Región del Tejo", "Ribatejo"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 180,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Touriga Nacional", "Trincadeira", "Aragonez", "Fernão Pires", "Arinto"],
+    styles: ["Tinto potente y frutal", "Blanco fresco", "Tinto de guarda"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región histórica portuguesa del interior, donde variedades clásicas producen vinos de buen precio y calidad respetable. Tejo es la opción para márgenes en tintos internacionales.",
+    intro: "Tejo es la región interior de Portugal donde el clima continental produce tintos más potentes que sus vecinos. Con suelos aluviales y clima cálido, la región produce vinos maduros, alcohólicos, frescos en boca. Menos conocida que Alentejo, pero con propuestas excelentes a precio muy competitivo.",
+    cartaRole: ["valor"],
+    cartaReading: "Tejo comunica oportunidad. Calidad a precio inesperado. Es la región para maximizar márgenes sin sacrificar calidad respetable.",
+    whenToHighlight: "En cartas de valor, como tinto por copa, en maridajes informales, como apoyo comercial a Alentejo.",
+    clientProfile: "Cliente de precio sensible pero que valora calidad. Comercial, no sofisticado.",
+    sellByStrategy: "Vende por región y precio. El argumento es relación precio-calidad. Requiere buena selección de productor.",
+    competingRegions: ["Alentejo", "Toro", "Jumilla"],
+    commonMistakes: [
+      "Comprar genéricos: buscar pequeños productores con proyecto",
+      "No buscar blancos: hay buenos blancos de Tejo a precio muy bajo",
+      "Pensar que Tejo es siempre potente: algunos equilibrados existen"
+    ],
+    pairings: ["Carne asada", "Jamón", "Queso semicurado", "Tapa de embutidos"],
+    faqs: [
+      { q: "¿Es Tejo mejor que Alentejo?", a: "Diferente. Tejo es más potente, menos elegante. Alentejo es más equilibrado. Para precio: Tejo gana." },
+      { q: "¿Qué marca de Tejo recomiendan?", a: "Almaivo, Adega do Cantor, Herdade da Rocim produce excelentes Tejo. Busca pequeños con historia." },
+      { q: "¿Envejece bien Tejo?", a: "Algunos sí, pero la mayoría es para consumo joven (3-5 años). Busca criados si quieres envejecimiento." }
+    ],
+    seo: {
+      title: "Tejo | Tintos potentes y valor portugués",
+      description: "Tejo: región de oportunidad, márgenes, calidad. Guía comercial Winerim."
+    }
+  },
+  {
+    id: "setubal-palmela",
+    slug: "setubal-palmela",
+    name: "Setúbal/Palmela",
+    altNames: ["Região de Setúbal", "Palmela"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 150,
+    wineTypes: ["tinto", "blanco", "generoso"],
+    mainGrapes: ["Castelao", "Cabernet Sauvignon", "Merlot", "Moscatel", "Arinto"],
+    styles: ["Tinto de crianza moderno", "Moscatel de Setúbal dulce", "Blanco aromático"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Región histórica portuguesa conocida por sus Moscateles dulces envejecidos, pero hoy en día produce tintos modernos de calidad y blancos frescos.",
+    intro: "Setúbal tiene dos caras: la histórica de Moscatel dulce envejecido (algo olvidado hoy), y la moderna de tintos equilibrados y frescos. La proximidad a Lisboa ha atraído productores jóvenes que experimentan con Castelao, creando vinos con identidad. Los Moscateles de Setúbal, si encuentras crianzas, son joyas de postre.",
+    cartaRole: ["descubrimiento", "valor"],
+    cartaReading: "Setúbal comunica tradición con modernidad. Moscatel es opción única de postre. Tintos son descubrimiento.",
+    whenToHighlight: "Como Moscatel dulce en sección de postre, como tinto moderno de descubrimiento, en cartas que buscan portugueses alternativos.",
+    clientProfile: "Sommelier apreciando Moscatel, cliente de descubrimiento. Moscatel atrae cliente de postre buscando alternativa.",
+    sellByStrategy: "Tintos venden por región y precio. Moscatel vende por categoría (dulce de postre) e historia.",
+    competingRegions: ["Alentejo", "Moscato d'Asti", "Oporto"],
+    commonMistakes: [
+      "Olvidar que Setúbal también hace tintos modernos",
+      "Subestimar Moscatel: es un postre extraordinario si está bien criado",
+      "Confundir Setúbal tinto con sus versiones más viejas"
+    ],
+    pairings: ["Almendra", "Turrón", "Flan", "Queso Stilton", "Chocolate"],
+    faqs: [
+      { q: "¿Qué es Moscatel de Setúbal?", a: "Vino dulce envejecido hecho de uva Moscatel. Notas de miel, flores, nueces. Envejecimiento 5-30 años en barrica." },
+      { q: "¿Setúbal es siempre dulce?", a: "No. Los tintos de Setúbal son secos, modernos. Solo el Moscatel es dulce. Busca tintos para comida." },
+      { q: "¿Dónde comprar Moscatel de Setúbal envejecido?", a: "Productores como J.P. Vinhos mantienen crianzas. Es raro en distribución, requiere busca activa." }
+    ],
+    seo: {
+      title: "Setúbal Moscatel | Dulce envejecido y tintos modernos",
+      description: "Setúbal: Moscatel histórico, tintos contemporáneos. Guía Winerim de descubrimiento."
+    }
+  },
+  {
+    id: "algarve",
+    slug: "algarve",
+    name: "Algarve",
+    altNames: ["Região do Algarve"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 45,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Castelao", "Aragonez", "Trincadeira", "Negra Mole", "Síria"],
+    styles: ["Tinto potente y especiado", "Blanco fresco", "Rosado delicado"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "La región más meridional portuguesa, con clima cálido y soleado, produce tintos potentes para el turismo. Buscador potencial para cartistas aventureros.",
+    intro: "Algarve es la región más calurosa de Portugal, donde el sol productor tintos potentes y alcohólicos. Menos conocida internacionalmente, pero con productores emergentes que buscan identidad. El turismo es mercado principal, pero hay propuestas interesantes para cartas que buscan portugueses raros.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Algarve comunica aventura y rareza. 'Vino del extremo sur portugués'. Funciona mejor como descubrimiento que como propuesta seria.",
+    whenToHighlight: "En sección de buscador, en cartas temáticas de portuguesa rara, como anécdota.",
+    clientProfile: "Cliente de descubrimiento, sommelier aventurero, turista portugués.",
+    sellByStrategy: "Vende por concepto y geografía. 'De donde crece el sol en Portugal'.",
+    competingRegions: ["Tejo", "Lisboa"],
+    commonMistakes: [
+      "No buscar productores boutique",
+      "Asumir que todo Algarve es turístico",
+      "No explorar potencial de vinos naturales/orange en la región"
+    ],
+    pairings: ["Pargo a sal", "Marisco", "Carne especiada"],
+    faqs: [
+      { q: "¿Algarve produce buenos vinos?", a: "No es región premium, pero hay productores boutique con propuestas interesantes. Búsqueda activa requerida." },
+      { q: "¿Cómo es el clima de Algarve?", a: "El más cálido de Portugal. Produce vinos potentes, alcohólicos, para consumo joven principalmente." },
+      { q: "¿Es turístico todo vino de Algarve?", a: "No. Hay productores serios. Requiere búsqueda diferenciada de genéricos de supermercado." }
+    ],
+    seo: {
+      title: "Algarve | Vino raro del extremo sur portugués",
+      description: "Algarve: región cálida, tintos potentes, descubrimiento. Guía Winerim."
+    }
+  },
+  {
+    id: "madeira",
+    slug: "madeira",
+    name: "Madeira",
+    altNames: ["Vinho da Madeira"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 25,
+    wineTypes: ["generoso", "blanco", "tinto"],
+    mainGrapes: ["Tinta Negra", "Sercial", "Verdelho", "Bual", "Malmsey"],
+    styles: ["Madeira seco (Sercial)", "Madeira semiseco (Verdelho)", "Madeira semi-dulce (Bual)", "Madeira dulce (Malmsey)", "Madeira envejecido 5-50 años"],
+    prestige: "icónico",
+    clientRecognition: "medio",
+    description: "El vino fortificado histórico de la isla de Madeira, con método único de envejecimiento en cámaras calentadas que crea complejidad excepcional. Madeira es desconocida en cartas modernas pero es oportunidad enorme.",
+    intro: "Madeira es uno de los vinos más fascinantes y olvidados del mundo. Producido en la isla portuguesa de Madeira, sometido a calor durante años de envejecimiento (método estufagem), desarrolla notas caramelizadas, tostadas, de frutos secos que ningún otro vino reúne. Históricamente era el vino de sobremesa británico. Hoy es subutilizado, ofreciendo oportunidad en cartas que buscan postre diferencial.",
+    cartaRole: ["premium", "descubrimiento"],
+    cartaReading: "Madeira comunica sofisticación y conocimiento histórico. En sobremesa es única. Por copa abre diálogo con cliente.",
+    whenToHighlight: "En sección de postre, como vino por copa post-comida, como aperitivo pre-comida seco, en cartas de vino fino.",
+    clientProfile: "Sommelier, aficionado a historia vinícola, cliente sofisticado. Menos para cliente casual, requiere educación.",
+    sellByStrategy: "Vende por estilo envejecido (5, 10, 20 años), por variedad (Sercial seco, Malmsey dulce), por historia.",
+    competingRegions: ["Oporto", "Jerez", "Vin Santo Toscano"],
+    commonMistakes: [
+      "Servir como postre después de comida potente: mejor en frío como aperitivo o postre ligero",
+      "No ofrecer por copa: Madeira es cara por botella, por copa es accesible",
+      "Confundir con Puerto: son diferentes (Madeira envejecido en calor, Jerez en solera)"
+    ],
+    pairings: ["Queso Cheddar envejecido", "Frutos secos", "Chocolate oscuro", "Tarta de frutas", "Postre de almendra"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Sercial, Verdelho, Bual y Malmsey?", a: "Progresión de seco a dulce. Sercial es seco y mineral. Verdelho es semiseco. Bual es semi-dulce. Malmsey es dulce y rico." },
+      { q: "¿Por qué envejece Madeira en calor?", a: "Clima tropical. El calor acelera oxidación controlada que desarrolla notas de caramelo. Es lo que hace Madeira único." },
+      { q: "¿Vale la pena Madeira de 20 años?", a: "Absolutamente. Complejidad excepcional. Para cliente que busca postre serio, es imprescindible." }
+    ],
+    seo: {
+      title: "Madeira | Vino histórico envejecido y sofisticado",
+      description: "Madeira: generoso envejecido, Sercial, Malmsey. Guía Winerim premium de sobremesa."
+    }
+  },
+  {
+    id: "acores",
+    slug: "acores",
+    name: "Açores",
+    altNames: ["Región de Açores", "Islas Açores"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 15,
+    wineTypes: ["blanco", "tinto", "rosado"],
+    mainGrapes: ["Verdelho", "Arinto", "Bastardo", "Aragonez"],
+    styles: ["Blanco mineral", "Tinto joven", "Rosado delicado", "Blanco de viñedo viejo"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "La región más extrema de Portugal en las Islas Açores, con clima atlántico que produce blancos frescos y minerales de identidad insular única.",
+    intro: "Açores es Portugal insular en su extremo más atlántico. Con clima templado atlántico, los viñedos producen blancos frescos, minerales, con acidez vibrante. Menos conocida que Vinho Verde, pero con propuestas genuinas. Funcionan especialmente bien blancos frescos con mariscos.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Açores comunica autenticidad insular y rareza. 'Blanco del Atlántico portugués'.",
+    whenToHighlight: "En cartas de pescado/marisco, como blanco raro de descubrimiento.",
+    clientProfile: "Cliente aventurero, sommelier raro.",
+    sellByStrategy: "Vende por concepto geográfico y mineralidad.",
+    competingRegions: ["Vinho Verde", "Albariño"],
+    commonMistakes: [
+      "Difícil de conseguir: distribución limitada",
+      "No buscar activamente: requiere contacto directo con productores",
+      "Subestimar calidad: hay propuestas buenas"
+    ],
+    pairings: ["Marisco atlántico", "Vieira", "Pescado blanco"],
+    faqs: [
+      { q: "¿Dónde comprar vino de Açores?", a: "Distribución muy limitada. Requiere contacción directa a productores o importadores especializados." },
+      { q: "¿Cómo es el vino de Açores?", a: "Fresco, mineral, con carácter atlántico. Identidad clara pero pequeña escala de producción." },
+      { q: "¿Vale la pena explorar Açores?", a: "Para sommelier aventurero y cartas especializadas, sí. Para volumen: no." }
+    ],
+    seo: {
+      title: "Açores | Blanco atlántico portugués raro",
+      description: "Açores: vino insular, mineral, descubrimiento. Guía Winerim especialista."
+    }
+  },
+  {
+    id: "tras-os-montes",
+    slug: "tras-os-montes",
+    name: "Trás-os-Montes",
+    altNames: ["Região de Trás-os-Montes"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 50,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Touriga Nacional", "Bastardo", "Jampal", "Malvasia Fina", "Viosinho"],
+    styles: ["Tinto aromático", "Blanco fresco", "Tinto de guarda"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "La región más remota de Portugal en el noreste, con viticultura histórica y clima continental que produce vinos con carácter regional fuerte.",
+    intro: "Trás-os-Montes es la región más apartada de Portugal, al noreste contra la frontera con España. Con clima continental extremo, la región produce vinos con carácter definido: tintos aromáticos con estructura, blancos minerales. Es región de descubrimiento auténtica, sin marketing.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Trás-os-Montes comunica autenticidad extrema. Región olvidada, vino con historia real.",
+    whenToHighlight: "En cartas de buscador, como proposición de rareza portuguesa genuina.",
+    clientProfile: "Sommelier aventurero, cliente que busca autenticidad extrema.",
+    sellByStrategy: "Vende por concepto de región remota y autenticidad.",
+    competingRegions: ["Dão", "Douro"],
+    commonMistakes: [
+      "Muy difícil de obtener en distribución estándar",
+      "Requiere búsqueda de importadores especializados",
+      "Requiere educación activa del cliente"
+    ],
+    pairings: ["Carne de caza", "Jamón serrano"],
+    faqs: [
+      { q: "¿Dónde está Trás-os-Montes?", a: "Noreste de Portugal, región más remota. Frontera con España. Clima continental extremo." },
+      { q: "¿Hay distribución de Trás-os-Montes?", a: "Limitada. Requiere contacto directo o importadores portugueses especializados." },
+      { q: "¿Es bueno Trás-os-Montes?", a: "Para quien busca autenticidad regional: excelente. Para cliente casual: demasiado mineral y rústico." }
+    ],
+    seo: {
+      title: "Trás-os-Montes | Vino remoto y autenticidad portuguesa",
+      description: "Trás-os-Montes: región extrema, continental, rareza. Guía Winerim descubridor."
+    }
+  },
+  {
+    id: "tavora-varosa",
+    slug: "tavora-varosa",
+    name: "Távora-Varosa",
+    altNames: ["Región de Távora-Varosa"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 35,
+    wineTypes: ["blanco", "rosado", "espumoso"],
+    mainGrapes: ["Arinto", "Cerceal", "Jampal", "Pinot Noir", "Chardonnay"],
+    styles: ["Blanco fresco", "Espumoso por método tradicional", "Rosado delicado"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región especializada en espumosos portugueses por método tradicional, con altitud y clima que produce blancos frescos y espumosos de calidad.",
+    intro: "Távora-Varosa es la región portuguesa de espumosos por método tradicional. Con altitud de 400-600m y clima atlántico influenciado, produce espumosos frescos y blancos de acidez vibrante. Es región pequeña pero con producción creciente de espumosos que rivalizan con Cava a mejor precio.",
+    cartaRole: ["diferencial"],
+    cartaReading: "Távora-Varosa comunica 'espumoso portugués serio'. Alternativa a Cava con identidad propia.",
+    whenToHighlight: "Como espumoso de aperitivo portugués, como alternativa a Cava, en cartas que buscan espumosos diferenciados.",
+    clientProfile: "Cliente que busca espumoso alternativo, sommelier que valora método tradicional.",
+    sellByStrategy: "Vende por categoría (espumoso), por método (tradición), por precio (mejor que Champagne, similar a Cava).",
+    competingRegions: ["Cava", "Penedès", "Champagne"],
+    commonMistakes: [
+      "Confundir con Cava: método similar pero identidad portuguesa",
+      "No ofertar en aperitivo: es punto de venta fuerte",
+      "Olvidar blancos: también buenos"
+    ],
+    pairings: ["Ostra", "Jamón ibérico", "Queso fresco"],
+    faqs: [
+      { q: "¿Cómo se diferencia de Cava?", a: "Método similares pero clima diferente. Cava es más tostado. Távora-Varosa es más fresco y mineral." },
+      { q: "¿Es mejor que Champagne?", a: "Diferente, no comparable. Precio más accesible. Calidad respetable para método tradicional." },
+      { q: "¿Buena relación precio?", a: "Excelente. Espumoso por método tradicional a precio de Cava. Es oportunidad." }
+    ],
+    seo: {
+      title: "Távora-Varosa | Espumoso portugués método tradicional",
+      description: "Távora-Varosa: espumosos frescos, método tradicional, Portugal. Guía Winerim."
+    }
+  },
+  {
+    id: "beira-interior",
+    slug: "beira-interior",
+    name: "Beira Interior",
+    altNames: ["Região de Beira Interior"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 28,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Touriga Nacional", "Bastardo", "Arinto", "Síria"],
+    styles: ["Tinto aromático de montaña", "Blanco mineral", "Tinto de guarda"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "Región de interior portugués con altitud y clima continental que produce tintos aromáticos y blancos minerales con carácter robusto.",
+    intro: "Beira Interior es región de interior apartada, con altitud (400-800m) que crea clima continental extremo. La falta de influencia atlántica produce tintos más potentes, con tanninos más marcados, y blancos muy minerales. Es región de descubrimiento puro.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Beira Interior comunica autenticidad continental portuguesa.",
+    whenToHighlight: "En cartas de buscador, con carne potente.",
+    clientProfile: "Sommelier aventurero.",
+    sellByStrategy: "Vende por concepto de región continental.",
+    competingRegions: ["Dão", "Bairrada"],
+    commonMistakes: [
+      "Muy difícil de obtener",
+      "Requiere busca especializada de importadores",
+      "Poco conocimiento de región"
+    ],
+    pairings: ["Carne de caza", "Jamón ibérico"],
+    faqs: [
+      { q: "¿Dónde está Beira Interior?", a: "Interior apartado de Portugal, altitud alta, clima continental extremo." },
+      { q: "¿Es accesible Beira Interior?", a: "Muy difícil. Distribución casi inexistente. Requiere contacto directo o importador portugués." },
+      { q: "¿Vale la pena buscar?", a: "Para sommelier especialista: sí. Para carta comercial: no." }
+    ],
+    seo: {
+      title: "Beira Interior | Región extrema continental portuguesa",
+      description: "Beira Interior: rareza, Continental, autenticidad extrema. Guía Winerim especialista."
+    }
+  },
+  {
+    id: "colares",
+    slug: "colares",
+    name: "Colares",
+    altNames: ["Región de Colares"],
+    country: "portugal",
+    denominationType: "DOC",
+    bodegasCount: 12,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Ramisco"],
+    styles: ["Tinto mineral y salino", "Tinto de guarda", "Tinto con características únicas"],
+    prestige: "icónico",
+    clientRecognition: "bajo",
+    description: "La región más histórica de Portugal continental, junto a Lisboa, donde la variedad Ramisco produce tintos únicos, minerales y salinos en suelos de arenas de playa.",
+    intro: "Colares es región de arqueología vinícola portuguesa. Ubicada en acantilados junto al océano cerca de Lisboa, con suelos de arena marina virgen de filoxera, produce Ramisco: tinto único, mineral, salino, diferente a cualquier otro vino del mundo. Es región muy pequeña, producción limitada, pero de importancia histórica excepcional. Es descubrimiento genuino para quien busca rareza extrema.",
+    cartaRole: ["premium", "descubrimiento"],
+    cartaReading: "Colares comunica historia y singularidad extrema. Único en mundo por Ramisco y suelo único.",
+    whenToHighlight: "En cartas de vino fino o especialista, como propuesta de rareza histórica, con carne roja potente.",
+    clientProfile: "Sommelier experto, coleccionista, cliente que busca rareza extrema.",
+    sellByStrategy: "Vende por historia, por variedad única Ramisco, por característica mineral-salina única.",
+    competingRegions: ["Ninguno: Ramisco es único"],
+    commonMistakes: [
+      "Extremadamente difícil de obtener",
+      "Confundir con Vinho Verde: completamente diferentes",
+      "Asumir que es vino 'rústico': es complejo y envejecible"
+    ],
+    pairings: ["Ostra", "Anchoa", "Pargo a sal", "Carne roja potente"],
+    faqs: [
+      { q: "¿Qué es Ramisco?", a: "Variedad única de Colares. Produce tintos minerales, salinos, con característicos únicos. Genéticamente antigua." },
+      { q: "¿Por qué sabe a sal Colares?", a: "Suelos de arena marina con influencia salina del océano. Es característica genuina de terroir único." },
+      { q: "¿Dónde comprar Colares?", a: "Extremadamente raro. Solo especialistas en vino portugués raro. Requiere búsqueda muy activa o contacto directo." }
+    ],
+    seo: {
+      title: "Colares | Ramisco único y rareza histórica portuguesa",
+      description: "Colares: Ramisco, mineral-salino, arqueología vinícola. Guía Winerim experto."
+    }
+  },
+  // ── GERMANY — Regiones Anbaugebiete restantes ────────────────────────
+  {
+    id: "rheinhessen",
+    slug: "rheinhessen",
+    name: "Rheinhessen",
+    altNames: ["Hesse del Rin"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 1450,
+    wineTypes: ["blanco", "tinto", "rosado"],
+    mainGrapes: ["Müller-Thurgau", "Silvaner", "Dornfelder", "Riesling", "Scheurebe"],
+    styles: ["Blanco aromático joven", "Blanco de crianza en roble", "Tinto moderno Dornfelder", "Blanco dulce Süßwein"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "La región alemana más grande en volumen, donde viticultores modernos experimentan con blancos aromáticos frescos y tintos accesibles. Rheinhessen ofrece valor en vino alemán.",
+    intro: "Rheinhessen es la región alemana del volumen y la innovación. Con 1.450+ bodegas, produce blancos aromáticos frescos (Müller-Thurgau, Silvaner) de buen valor, tintos contemporáneos (Dornfelder) y experimentaciones. Menos prestigio que Mosel o Rheingau, pero más oportunidad de valor y rareza en pequeños productores.",
+    cartaRole: ["valor", "descubrimiento"],
+    cartaReading: "Rheinhessen comunica calidad-precio en blanco alemán. Es alternativa accesible a Mosel o Rheingau sin sacrificar carácter.",
+    whenToHighlight: "Como blanco alemán accesible, como tinto alemán alternativo a Spätburgunder de regiones premium, en cartas que buscan valor alemán.",
+    clientProfile: "Cliente que busca blanco alemán frescos a precio justo. Sommelier que busca pequeños productores con identidad.",
+    sellByStrategy: "Vende por variedad (Müller-Thurgau, Silvaner), por productor boutique, por concepto 'nueva Rheinhessen'.",
+    competingRegions: ["Mosel", "Rheingau", "Alsacia"],
+    commonMistakes: [
+      "Asumir que Rheinhessen es siempre genérico: hay productores boutique excelentes",
+      "No explorar Dornfelder: es tinto alemán contemporáneo bueno",
+      "Confundir todo bajo 12€ con mala calidad: hay buenos a precio bajo"
+    ],
+    pairings: ["Tapas", "Queso fresco", "Pollo asado", "Pescado blanco", "Puerro"],
+    faqs: [
+      { q: "¿Rheinhessen es siempre barato?", a: "Generalmente a buen precio, pero hay productores premium. La región es grande: todo existe dentro." },
+      { q: "¿Qué es Dornfelder?", a: "Variedad tinta alemana moderna, fácil de beber, con cuerpo moderado. Tinto alemán contemporáneo." },
+      { q: "¿Dónde está Rheinhessen?", a: "Región más grande Alemania, entre Rin y sus afluentes. Centro: Mainz, Nierstein, Oppenheim." }
+    ],
+    seo: {
+      title: "Rheinhessen | Blancos frescos y valor alemán",
+      description: "Rheinhessen: región grande, volumen, oportunidad. Guía Winerim comercial."
+    }
+  },
+  {
+    id: "baden",
+    slug: "baden",
+    name: "Baden",
+    altNames: ["Region of Baden"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 1100,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Müller-Thurgau", "Spätburgunder", "Grauburgunder", "Riesling", "Silvaner"],
+    styles: ["Tinto Spätburgunder elegante", "Blanco Grauburgunder mineral", "Tinto de crianza", "Blanco aromático"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "La región alemana más cálida en el sur, especializada en Spätburgunder (Pinot Noir) elegantes que rivalizan con Burgundia. Baden es donde Alemania produce tintos serios.",
+    intro: "Baden es Alemania diferente: caliente, meridional, especializada en tinto. Con clima más cálido que otras regiones alemanas, produce Spätburgunder (Pinot Noir) con cuerpo, elegancia y potencial de envejecimiento. También Grauburgunder (Pinot Gris) mineral y expresivo. Es la región donde buscar vino tinto alemán serio.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Baden comunica sofisticación en tinto alemán. Dice que tu restaurante entiende de Pinot Noir, que no se queda en Borgoña.",
+    whenToHighlight: "En cartas de vino fino, como Pinot Noir alternativo a Burgundia con identidad alemana, con carne roja elegante.",
+    clientProfile: "Sommelier que aprecia Pinot Noir, cliente sofisticado que busca alternativa a Burgundia.",
+    sellByStrategy: "Vende por variedad Spätburgunder, por concepto 'Pinot Noir alemán', por productor (Huber, Salwey, Ziereisen).",
+    competingRegions: ["Borgoña", "Elsacia", "Nueva Zelanda"],
+    commonMistakes: [
+      "No conocer que Baden es región de tinto serio",
+      "Confundir con Mosel o Rheingau que son blancos",
+      "No buscar Grauburgunder: es blanco mineral bueno"
+    ],
+    pairings: ["Pato asado", "Setas", "Cordero", "Queso Munster", "Ciruelas"],
+    faqs: [
+      { q: "¿Spätburgunder es igual a Pinot Noir?", a: "Sí, es el mismo. Spätburgunder es Pinot Noir alemán. Style diferente: más elegante, menos potente que Borgoña." },
+      { q: "¿Cómo es Spätburgunder de Baden?", a: "Elegante, mineral, con estructura. Envejecible 10+ años. Rivalizas con buenos Burgundia a mejor precio." },
+      { q: "¿Dónde está Baden?", a: "Sur Alemania, región más cálida, frontera con Alsacia francesa. Principales zonas: Kaiserstuhl, Markgräflerland." }
+    ],
+    seo: {
+      title: "Baden Spätburgunder | Pinot Noir alemán sofisticado",
+      description: "Baden: Spätburgunder, tinto serio, Alemania sur. Guía Winerim premium."
+    }
+  },
+  {
+    id: "franken",
+    slug: "franken",
+    name: "Franken",
+    altNames: ["Franconia"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 800,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Silvaner", "Müller-Thurgau", "Riesling", "Spätburgunder", "Bacchus"],
+    styles: ["Silvaner seco mineral", "Silvaner de viñedo viejo complejo", "Blanco terroso", "Tinto ligero"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Región histórica alemana en el norte, especializada en Silvaner: blanco seco, mineral, terroso, diferente a cualquier otro blanco. Franken es region de identity clara.",
+    intro: "Franken es región de Silvaner: blanco seco, mineral, con carácter terroso único. En clima continental del norte alemán, cerca de Bamberg y Würzburg, Silvaner produce blancos con estructura, acidez, complejidad que no encuentras en otros lugares. Es region menos conocida internacionalmente pero con identidad clara y productores devotos.",
+    cartaRole: ["diferencial", "descubrimiento"],
+    cartaReading: "Franken comunica sofisticación y rareza. Silvaner es propuesta seria de blanco seco alternativo.",
+    whenToHighlight: "Como blanco seco de descubrimiento, con platos salados, con carne blanca, en cartas que buscan Alemania rara.",
+    clientProfile: "Sommelier que aprecia Silvaner, cliente aventurero en blanco, enólogo.",
+    sellByStrategy: "Vende por variedad Silvaner, por concepto 'blanco alemán seco diferente', por terroir continental.",
+    competingRegions: ["Alsacia", "Loire", "Mosel"],
+    commonMistakes: [
+      "No conocer Silvaner como variedad seria",
+      "Asumir que es genérico: hay Silvaner de viñedo viejo complejos",
+      "No diferenciar entre joven y criado"
+    ],
+    pairings: ["Aspárago", "Jamón alemán", "Queso Cambozola", "Setas", "Caldo"],
+    faqs: [
+      { q: "¿Qué es Silvaner?", a: "Variedad blanca alemana antigua. En Franken produce blanco seco, mineral, con carácter terroso. Diferente a otros Silvaner." },
+      { q: "¿Cómo es Silvaner de Franken?", a: "Seco, mineral, terroso, con acidez viva. No aromático como Riesling. Más estructura." },
+      { q: "¿Dónde está Franken?", a: "Norte Alemania, región continental. Ciudades: Würzburg, Bamberg. Zona más septentrional de Alemania." }
+    ],
+    seo: {
+      title: "Franken Silvaner | Blanco seco mineral alemán raro",
+      description: "Franken: Silvaner, mineral, terroso, rareza alemana. Guía Winerim especialista."
+    }
+  },
+  {
+    id: "württemberg",
+    slug: "württemberg",
+    name: "Württemberg",
+    altNames: ["Württemberg region"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 1200,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Lemberger", "Riesling", "Müller-Thurgau", "Klevner", "Trollinger"],
+    styles: ["Tinto Lemberger moderno", "Rosado Klevner fresco", "Blanco Riesling seco", "Tinto Trollinger ligero"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Región alemana especializada en tinto contemporáneo Lemberger y rosado Klevner. Württemberg es donde Alemania produce tinto fácil de beber y rosado fresco.",
+    intro: "Württemberg es región de innovación alemana en tinto. Con Lemberger (Blaufränkisch austríaco), produce tintos modernos accesibles, con fruta y cuerpo moderado. También Klevner (Pinot Gris rosado) fresco y aromático. Menos conocida que Baden, pero con propuestas interesantes para cliente que busca tinto alemán contemporáneo.",
+    cartaRole: ["valor", "descubrimiento"],
+    cartaReading: "Württemberg comunica tinto alemán contemporáneo. Accesible, fresco, sin pretensiones.",
+    whenToHighlight: "Como tinto alemán accesible, como rosado fresco, en cartas que buscan tinto valor alemán.",
+    clientProfile: "Cliente de precio sensible, ambiente joven, sommelier que busca pequeños productores.",
+    sellByStrategy: "Vende por variedad (Lemberger, Klevner), por concepto 'tinto alemán joven', por precio.",
+    competingRegions: ["Rheinhessen", "Alsacia", "Austria"],
+    commonMistakes: [
+      "No conocer Lemberger como variedad seria",
+      "Confundir con Rheinhessen: más potente",
+      "Olvidar Klevner: rosado bueno a buen precio"
+    ],
+    pairings: ["Costilla de cerdo", "Bratwurst", "Queso semicurado", "Carne grasa"],
+    faqs: [
+      { q: "¿Qué es Lemberger?", a: "Variedad tinta de clima continental. En Württemberg produce tinto fresco, con cuerpo moderado, fácil de beber." },
+      { q: "¿Lemberger es Blaufränkisch?", a: "Sí, mismo nombre en Austria. En Württemberg es versión más suave que austriaca." },
+      { q: "¿Dónde está Württemberg?", a: "Sur Alemania, centro: Stuttgart. Región famosa por vino tinto, no blanco como otras alemanas." }
+    ],
+    seo: {
+      title: "Württemberg Lemberger | Tinto alemán moderno y accesible",
+      description: "Württemberg: Lemberger, tinto contemporáneo, valor. Guía Winerim comercial."
+    }
+  },
+  {
+    id: "nahe",
+    slug: "nahe",
+    name: "Nahe",
+    altNames: ["Región de Nahe"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 650,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Riesling", "Müller-Thurgau", "Silvaner", "Spätburgunder"],
+    styles: ["Riesling seco mineral", "Riesling dulce", "Blanco aromático", "Tinto ligero"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Región alemana subestimada entre Mosel y Rheingau, donde Riesling produce blancos minerales serios de buena relación precio. Nahe es oportunidad de descubrimiento.",
+    intro: "Nahe es región entre Mosel y Rheingau que produce Riesling mineral, fresco, con carácter. Menos famosa que sus vecinas, pero con identidad clara: suelos de pizarra y cuarcita producen blancos minerales y frescos. Pequeños productores con propuestas auténticas. Es descubrimiento bueno para cartas que buscan Riesling alternativo.",
+    cartaRole: ["diferencial", "descubrimiento"],
+    cartaReading: "Nahe comunica conocimiento de quien busca Riesling más allá de lo obvio. Mineralidad comparable a Mosel con precio mejor.",
+    whenToHighlight: "Como Riesling seco alternativo, en cartas de descubrimiento, como propuesta para cliente curioso.",
+    clientProfile: "Sommelier que busca pequeños productores, cliente aventurero en Riesling.",
+    sellByStrategy: "Vende por variedad Riesling, por concepto 'Riesling de descubrimiento', por mineralidad.",
+    competingRegions: ["Mosel", "Rheingau", "Alsacia"],
+    commonMistakes: [
+      "No conocer que Nahe es región seria: muy subestimada",
+      "Confundir con Mosel o Rheingau: tiene identidad propia",
+      "No buscar pequeños productores: es donde está la joya"
+    ],
+    pairings: ["Marisco", "Pescado blanco", "Queso cabra", "Espárrago"],
+    faqs: [
+      { q: "¿Cómo se diferencia Nahe de Mosel?", a: "Nahe es menos perfumado, más mineral y seco. Suelos diferentes producen expresión diferente." },
+      { q: "¿Es más barato Nahe que Mosel?", a: "Generalmente sí, a precio más accesible con calidad comparable. Es oportunidad." },
+      { q: "¿Dónde está Nahe?", a: "Entre Mosel y Rheingau, región pequeña alrededor del río Nahe. Centro: Bad Kreuznach." }
+    ],
+    seo: {
+      title: "Nahe Riesling | Blanco mineral y descubrimiento alemán",
+      description: "Nahe: Riesling mineral, rareza alemana subestimada. Guía Winerim descubridor."
+    }
+  },
+  {
+    id: "ahr",
+    slug: "ahr",
+    name: "Ahr",
+    altNames: ["Región del Ahr"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 180,
+    wineTypes: ["tinto", "rosado"],
+    mainGrapes: ["Spätburgunder", "Portugieser"],
+    styles: ["Tinto Spätburgunder ligero", "Rosado seco fresco", "Tinto joven frutal"],
+    prestige: "reconocido",
+    clientRecognition: "bajo",
+    description: "Pequeña región alemana especializada en rosado y tinto ligero Spätburgunder. Ahr es donde Alemania produce rosado seco y tinto no potente.",
+    intro: "Ahr es región pequeña del norte de Rheinhessen, especializada en rosado seco y tinto Spätburgunder ligero. Con clima continuental templado, produce vinos para beber joven, frescos, sin complejidad pero con carácter. Es región de especialización clara: no es Pinot Noir serio como Baden, es Spätburgunder ligero y rosado.",
+    cartaRole: ["valor", "diferencial"],
+    cartaReading: "Ahr comunica especialización: rosado seco y tinto ligero. Propuesta clara para cliente que busca estas categorías.",
+    whenToHighlight: "Como rosado seco alemán, como tinto ligero de beber joven, en ambiente joven casual.",
+    clientProfile: "Cliente que busca rosado seco, sommelier de ambiente moderno, cliente joven.",
+    sellByStrategy: "Vende por categoría (rosado seco, tinto ligero), por región, por concepto de especialización.",
+    competingRegions: ["Provenza", "Languedoc", "Penedès"],
+    commonMistakes: [
+      "No buscar en Ahr para rosado: es región de rosado seco excelente",
+      "Asumir que todo es barato: hay buena calidad",
+      "Confundir tinto de Ahr con Spätburgunder serio de Baden"
+    ],
+    pairings: ["Tapas", "Marisco cocido", "Queso fresco", "Ensalada"],
+    faqs: [
+      { q: "¿Ahr es región de rosado?", a: "Principalmente sí. Especializado en rosado seco moderno. Tinto es Spätburgunder ligero, no potente." },
+      { q: "¿Cómo es rosado de Ahr?", a: "Seco, fresco, mineral. Nada de azúcar residual. Es rosado para comida, no postre." },
+      { q: "¿Dónde está Ahr?", a: "Pequeña región norte de Alemania, cerca de Bonn. Centro: Altenahr. Muy septentrional." }
+    ],
+    seo: {
+      title: "Ahr Rosado | Vino rosado seco alemán especializado",
+      description: "Ahr: rosado seco, Spätburgunder ligero, Alemania. Guía Winerim moderno."
+    }
+  },
+  {
+    id: "mittelrhein",
+    slug: "mittelrhein",
+    name: "Mittelrhein",
+    altNames: ["Middle Rhine"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 390,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Riesling", "Müller-Thurgau", "Silvaner", "Spätburgunder"],
+    styles: ["Riesling seco mineral", "Riesling aromático", "Blanco de viñedo viejo", "Tinto ligero"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "Región histórica alemana en el Rin medio (Patrimonio de la Humanidad), con paisaje espectacular que produce Riesling mineral. Mittelrhein es para buscador de rareza.",
+    intro: "Mittelrhein es región de arqueología vinícola alemana. En el Rin medio, con terrazas espectaculares declaradas Patrimonio de la Humanidad, produce Riesling mineral, fresco, con acidez viva. Región muy pequeña, producción limitada, menos conocida, pero con historia vinícola profunda. Para quien busca genuina rareza alemana con paisaje detrás.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Mittelrhein comunica historia y rareza genuina. 'Riesling del Patrimonio de Humanidad del Rin'.",
+    whenToHighlight: "En cartas de vino fino, como Riesling de rareza con narrativa histórica.",
+    clientProfile: "Sommelier experto, coleccionista, cliente que busca rareza extrema.",
+    sellByStrategy: "Vende por historia, por característica de terrazas, por rareza.",
+    competingRegiones: ["Mosel", "Rheingau"],
+    commonMistakes: [
+      "Muy difícil de obtener: distribución limitada",
+      "Requiere búsqueda activa",
+      "Pequenez de producción limita disponibilidad"
+    ],
+    pairings: ["Marisco", "Pescado blanco", "Queso cabra joven"],
+    faqs: [
+      { q: "¿Dónde está Mittelrhein?", a: "Rin medio, entre Koblenz y Bingen. Terrazas espectaculares, Patrimonio de Humanidad UNESCO." },
+      { q: "¿Cómo es Riesling de Mittelrhein?", a: "Mineral, fresco, con acidez viva. Pequeña producción, variabilidad entre productores." },
+      { q: "¿Dónde comprar Mittelrhein?", a: "Muy raro en distribución. Requiere contacto directo o importadores alemanes especializados." }
+    ],
+    seo: {
+      title: "Mittelrhein | Riesling de Patrimonio Humanidad y rareza",
+      description: "Mittelrhein: región histórica, terrazas UNESCO, Riesling mineral. Guía Winerim experto."
+    }
+  },
+  {
+    id: "saale-unstrut",
+    slug: "saale-unstrut",
+    name: "Saale-Unstrut",
+    altNames: ["Región de Saale-Unstrut"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 120,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Müller-Thurgau", "Silvaner", "Riesling", "Spätburgunder"],
+    styles: ["Blanco mineral seco", "Blanco aromático joven", "Tinto ligero continental"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "La región más septentrional de Alemania (ex-Este), con clima continental extremo que produce blancos frescos, minerales, secos de carácter único.",
+    intro: "Saale-Unstrut es región de viticultura de frontera: clima continental extremo del norte, región histórica de Alemania Este (reviitalizada post-reunificación). Produce blancos frescos, minerales, con estructura y carácter continental único. Es región pequeña, poco conocida, pero con identidad clara y productores devotos que revitalizan tradición.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Saale-Unstrut comunica autenticidad regional y rareza. 'Blanco del norte extremo de Alemania'.",
+    whenToHighlight: "En cartas de descubrimiento, como blanco seco alternativo, en ambiente de vino natural/arte.",
+    clientProfile: "Sommelier aventurero, cliente que busca autenticidad regional extrema.",
+    sellByStrategy: "Vende por concepto de región continental extrema.",
+    competingRegions: ["Franken", "Loire"],
+    commonMistakes: [
+      "Muy difícil de obtener: distribución casi inexistente",
+      "Requiere búsqueda de importadores alemanes especializados",
+      "Poco conocimiento de región"
+    ],
+    pairings: ["Queso Cambozola", "Aspárago blanco"],
+    faqs: [
+      { q: "¿Dónde está Saale-Unstrut?", a: "Región más septentrional de Alemania, entre los ríos Saale y Unstrut. Ex-Alemania Este." },
+      { q: "¿Cómo es el vino de Saale-Unstrut?", a: "Blanco fresco, mineral, seco, con carácter continental. Pequeña producción, variabilidad entre productores." },
+      { q: "¿Es accesible Saale-Unstrut?", a: "Muy difícil. Prácticamente no está en distribución. Requiere contacto directo o importador especializado." }
+    ],
+    seo: {
+      title: "Saale-Unstrut | Blanco continental extremo alemán raro",
+      description: "Saale-Unstrut: región septentrional, continental, rareza. Guía Winerim especialista."
+    }
+  },
+  {
+    id: "sachsen",
+    slug: "sachsen",
+    name: "Sachsen",
+    altNames: ["Región de Sajonia"],
+    country: "alemania",
+    denominationType: "Anbaugebiet",
+    bodegasCount: 90,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Müller-Thurgau", "Riesling", "Silvaner", "Spätburgunder"],
+    styles: ["Blanco mineral seco", "Riesling aromático", "Blanco de viñedo viejo", "Tinto ligero"],
+    prestige: "local",
+    clientRecognition: "bajo",
+    description: "La región vinícola más oriental de Alemania (ex-Este), con clima continental que produce blancos frescos, minerales, de carácter regional único revitalizado.",
+    intro: "Sachsen (Sajonia) es región vinícola extrema oriental de Alemania, reconocible por su viticultura histórica abandonada post-Segunda Guerra Mundial y revitalizada tras reunificación. Con clima continental extremo, produce blancos frescos, minerales, con carácter regional único. Es región pequeña, producción muy limitada, pero con productores devotos buscando autenticidad regional.",
+    cartaRole: ["descubrimiento"],
+    cartaReading: "Sachsen comunica rareza regional extrema y autenticidad. 'Blanco del este alemán olvidado'.",
+    whenToHighlight: "En cartas especialista, como descubrimiento extremo, en ambiente de vino natural.",
+    clientProfile: "Sommelier muy aventurero, coleccionista de rarezas, cliente que busca autenticidad extrema.",
+    sellByStrategy: "Vende por narrativa de región recuperada, por rareza genuina.",
+    competingRegions: ["Ninguno: rareza única"],
+    commonMistakes: [
+      "Extremadamente difícil de obtener",
+      "Requiere búsqueda especializada",
+      "Casi ninguna distribución internacional"
+    ],
+    pairings: ["Caldo", "Queso cabra"],
+    faqs: [
+      { q: "¿Dónde está Sachsen?", a: "Este extremo de Alemania, región histórica de Sajonia. Ciudades vinícolas: Meissen, Radebeul." },
+      { q: "¿Cómo es vino de Sachsen?", a: "Blanco fresco, mineral, seco, con carácter continental. Producción muy pequeña, acceso limitado." },
+      { q: "¿Dónde comprar Sachsen?", a: "Casi imposible fuera Alemania. Contacto directo a productores o importadores muy especializados." }
+    ],
+    seo: {
+      title: "Sachsen | Blanco oriental alemán y rareza revitalizada",
+      description: "Sachsen: región extrema, historia, revitalización post-1990. Guía Winerim experto extremo."
+    }
+  },
+
+  // ─── USA ADDITIONAL REGIONS ────────────────────────────────────────────
+
+  {
+    id: "sonoma-county",
+    slug: "sonoma-county",
+    name: "Sonoma County",
+    altNames: ["Condado de Sonoma"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 425,
+    wineTypes: ["tinto", "blanco", "rosado", "espumoso"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Zinfandel", "Cabernet Sauvignon", "Sauvignon Blanc"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Zinfandel potente", "Espumoso de clase"],
+    prestige: "premium",
+    clientRecognition: "muy-alto",
+    description: "Sonoma es la región más versátil de California, con micro-terroirs que permiten producir Pinot Noir de clase mundial, Zinfandel estructurado y Chardonnay cremoso.",
+    intro: "Sonoma County es sinónima de diversidad vinícola. Con sub-AVA como Russian River Valley, Dry Creek Valley y Alexander Valley, ofrece estilos que van desde Pinot Noir elegante hasta Zinfandel potente. Su proximidad al Pacífico crea noches frías que preservan acidez y frescura.",
+    cartaRole: ["premium", "diferencial", "segura"],
+    cartaReading: "Sonoma comunica versatilidad y calidad. Funcionan Pinot Noir, Chardonnay y Zinfandel. Es más accesible que Napa pero mantiene la sofisticación.",
+    whenToHighlight: "En cartas con ambición de cobertura regional americana. Para Pinot Noir a mejor precio que Napa.",
+    clientProfile: "Atrae al cliente curioso, al viajero por California, al que aprecia variedad.",
+    sellByStrategy: "Vende por sub-zona (Russian River, Dry Creek) más que por Sonoma genérico.",
+    competingRegions: ["Napa Valley", "Central Coast", "Borgoña"],
+    commonMistakes: [
+      "Asumir que Sonoma es siempre más barato: hay Pinot Noir premium excepcionales",
+      "Ignorar los Zinfandel viejos, que son vinos de gran carácter",
+      "No explorar las sub-AVA que crean perfiles muy distintos"
+    ],
+    pairings: ["Pollo asado", "Salmón", "Hongos silvestres", "Jamón serrano", "Quesos frescos y semi-curados"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Sonoma y Napa?", a: "Sonoma es más diversa en estilos y más accesible en precio. Napa se enfoca en Cabernet premium." },
+      { q: "¿Qué es el Zinfandel?", a: "Uva tinta que produce vinos potentes, especiados, con mucha personalidad en Sonoma." },
+      { q: "¿Sonoma tiene blancos buenos?", a: "Excelentes Chardonnay y Sauvignon Blanc frescos. Los espumosos de Sonoma son muy competitivos." }
+    ],
+    seo: {
+      title: "Sonoma County | Pinot Noir, Zinfandel y Chardonnay",
+      description: "Guía completa de Sonoma County: Russian River Valley, Dry Creek Valley y rol estratégico en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "paso-robles",
+    slug: "paso-robles",
+    name: "Paso Robles",
+    altNames: ["Paseo de Robles"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 287,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Zinfandel", "Cabernet Sauvignon", "Syrah", "Grenache", "Chardonnay"],
+    styles: ["Zinfandel potente y especiado", "Syrah elegante", "Cabernet Sauvignon estructura", "Rhône blends"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Paso Robles es la región de Zinfandel y tintos especiados de California, con un terroir que produce vinos potentes con concentración.",
+    intro: "Paso Robles es sinónima de Zinfandel excepcional y tintos estructurados. Con suelos calizos y un clima continental cálido, produce vinos con mucha potencia. La región se ha posicionado como alternativa premium a Napa para quien busca tintos potentes a precio más razonable.",
+    cartaRole: ["premium", "diferencial", "valor"],
+    cartaReading: "Paso Robles comunica tintos potentes, sabrosos y con carácter. Zinfandel es su gran carta.",
+    whenToHighlight: "Para Zinfandel, para tintos potentes con precio competitivo, en cartas que buscan diferenciación americana.",
+    clientProfile: "Atrae al cliente que aprecia Zinfandel, al que busca tintos potentes.",
+    sellByStrategy: "Vende principalmente por Zinfandel, por variedad tinta.",
+    competingRegions: ["Napa Valley", "Sonoma", "Côtes-du-Rhône"],
+    commonMistakes: [
+      "Asumir que Paso Robles es siempre más barato: hay vinos premium excepcionales",
+      "Limitarse a Zinfandel: los Cabernet y Syrah son excelentes"
+    ],
+    pairings: ["Carnes asadas", "Costillas BBQ", "Quesos duros envejecidos", "Especias", "Chocolate oscuro"],
+    faqs: [
+      { q: "¿Por qué Paso Robles es tan bueno para Zinfandel?", a: "El terroir de suelos calizos y clima continental produce concentración y estructura." },
+      { q: "¿Cómo compara con Napa?", a: "Paso Robles produce tintos más especiados y directos. Napa es más elegante y sofisticado." }
+    ],
+    seo: {
+      title: "Paso Robles | Zinfandel y tintos potentes de California",
+      description: "Guía completa de Paso Robles: Zinfandel, terroir de caliza y rol estratégico en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "santa-barbara-county",
+    slug: "santa-barbara-county",
+    name: "Santa Barbara County",
+    altNames: ["Condado de Santa Bárbara"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 125,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Syrah", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Syrah especiado", "Sauvignon Blanc fresco"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Santa Barbara County es la región emergente de California, conocida por Pinot Noir elegante que rivaliza con Borgoña.",
+    intro: "Santa Barbara County es la región más cool del sur de California. Su influencia del Pacífico crea un clima ideal para Pinot Noir elegante y Chardonnay fino. Ofrece perfiles distintos que permiten exploración sofisticada.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Santa Barbara comunica tendencia y sofisticación. Pinot Noir rivaliza con Borgoña. Funciona como el California más europeo.",
+    whenToHighlight: "En cartas que buscan Pinot Noir americano de clase, para maridaje gastronómico.",
+    clientProfile: "Sommeliers, cliente viajero, conocedor que aprecia Pinot Noir.",
+    sellByStrategy: "Vende por región ('Santa Barbara') y por variedad ('Pinot Noir').",
+    competingRegions: ["Willamette Valley", "Borgoña", "Sonoma"],
+    commonMistakes: [
+      "Ignorar Santa Barbara: es probablemente la mejor relación Pinot Noir-precio de California",
+      "No explorar los Chardonnay, que son excelentes"
+    ],
+    pairings: ["Salmón a la parrilla", "Pollo con setas", "Langostinos", "Hongos silvestres", "Quesos suaves"],
+    faqs: [
+      { q: "¿Cómo compara Santa Barbara con Borgoña?", a: "Ambas producen Pinot Noir elegante. Borgoña tiene mayor complejidad; Santa Barbara es más directa y frutal." },
+      { q: "¿Por qué Santa Barbara es tan buena para Pinot Noir?", a: "Influencia directa del Pacífico crea un clima cool ideal. Las noches frías preservan acidez y delicadeza." }
+    ],
+    seo: {
+      title: "Santa Barbara County | Pinot Noir elegante de California",
+      description: "Guía completa de Santa Barbara County: Pinot Noir, Chardonnay y rol estratégico en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "russian-river-valley",
+    slug: "russian-river-valley",
+    name: "Russian River Valley",
+    altNames: ["Valle del Río Ruso"],
+    country: "estados-unidos",
+    parentRegion: "sonoma-county",
+    denominationType: "AVA",
+    bodegasCount: 189,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir elegante y mineral", "Chardonnay cremoso", "Espumoso de clase", "Sauvignon Blanc fresco"],
+    prestige: "premium",
+    clientRecognition: "muy-alto",
+    description: "Russian River Valley es la sub-AVA más prestigiosa de Sonoma, reconocida mundialmente por Pinot Noir que compite con Borgoña.",
+    intro: "Russian River Valley es el corazón frío de Sonoma. Influenciada directamente por el Pacífico, sus noches frías permiten vinos con elegancia y refinamiento únicos. Productores de clase mundial han demostrado que Russian River produce algunos de los mejores Pinot Noir del planeta.",
+    cartaRole: ["premium", "prestigio", "diferencial"],
+    cartaReading: "Russian River Valley comunica máxima sofisticación americana. Un Pinot Noir de Russian River compite con Borgoña.",
+    whenToHighlight: "En cartas premium, para Pinot Noir de clase, como alternativa a Borgoña a menor precio.",
+    clientProfile: "Sommelier, conocedor, cliente que busca Pinot Noir de máxima calidad.",
+    sellByStrategy: "Vende por productor más que por región. La mención de 'Russian River Valley' agrega prestigio inmediato.",
+    competingRegions: ["Willamette Valley", "Borgoña", "Santa Rita Hills"],
+    commonMistakes: [
+      "Limitar a Pinot Noir: los Chardonnay son excelentes",
+      "Ignorar que hay Russian River Valley accesible"
+    ],
+    pairings: ["Pato", "Hongos silvestres", "Salmón delicado", "Quesos blandos", "Pescado blanco"],
+    faqs: [
+      { q: "¿Russian River produce mejor Pinot Noir que Borgoña?", a: "Son estilos distintos. Borgoña es más mineral y ácida; Russian River es más sedosa y frutal." },
+      { q: "¿Todos los Pinot Noir de Russian River son caros?", a: "No. Hay excelentes opciones desde 25-40€." }
+    ],
+    seo: {
+      title: "Russian River Valley | Pinot Noir premium de Sonoma",
+      description: "Guía completa de Russian River Valley: Pinot Noir elegante, Chardonnay y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "alexander-valley",
+    slug: "alexander-valley",
+    name: "Alexander Valley",
+    altNames: ["Valle de Alexander"],
+    country: "estados-unidos",
+    parentRegion: "sonoma-county",
+    denominationType: "AVA",
+    bodegasCount: 98,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Zinfandel", "Merlot", "Chardonnay"],
+    styles: ["Cabernet Sauvignon estructura", "Zinfandel potente", "Merlot suave", "Chardonnay rico"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Alexander Valley es la sub-AVA de Sonoma especializada en Cabernet Sauvignon de potencia y Zinfandel estructurado.",
+    intro: "Alexander Valley es un valle cálido de Sonoma, ideal para Cabernet Sauvignon con estructura y Zinfandel potente. Con suelos ricos en minerales y clima mediterráneo, produce tintos de concentración que compiten con Napa a mejor precio.",
+    cartaRole: ["premium", "segura", "valor"],
+    cartaReading: "Alexander Valley comunica tintos potentes americanos a precio competitivo. Cabernet y Zinfandel son excelentes alternativas a Napa.",
+    whenToHighlight: "Para Cabernet a mejor precio que Napa, para Zinfandel.",
+    clientProfile: "Atrae al cliente que busca Cabernet americano de calidad a precio razonable.",
+    sellByStrategy: "Vende por variedad (Cabernet, Zinfandel) y por región.",
+    competingRegions: ["Napa Valley", "Paso Robles"],
+    commonMistakes: [
+      "Ignorar Alexander Valley: es una región seria con buenos productores",
+      "No explorar los Zinfandel, que son muy buenos"
+    ],
+    pairings: ["Carne vacuna asada", "Costillas", "Quesos duros", "Especias"],
+    faqs: [
+      { q: "¿Cómo compara Alexander Valley con Napa?", a: "Alexander Valley produce tintos más directos y potentes, a precio mejor. Napa es más refinado." }
+    ],
+    seo: {
+      title: "Alexander Valley | Cabernet y Zinfandel de Sonoma",
+      description: "Guía completa de Alexander Valley: Cabernet Sauvignon, Zinfandel y rol en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "dry-creek-valley",
+    slug: "dry-creek-valley",
+    name: "Dry Creek Valley",
+    altNames: ["Valle de Dry Creek"],
+    country: "estados-unidos",
+    parentRegion: "sonoma-county",
+    denominationType: "AVA",
+    bodegasCount: 87,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Zinfandel", "Cabernet Sauvignon", "Sauvignon Blanc"],
+    styles: ["Zinfandel especiado", "Cabernet estructura", "Sauvignon Blanc fresco", "Rosado seco"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Dry Creek Valley es la región icónica de Sonoma para Zinfandel de clase mundial y Sauvignon Blanc fresco.",
+    intro: "Dry Creek Valley es un pequeño valle de Sonoma que se ha convertido en referencia mundial de Zinfandel excepcional. Con suelos aluviales ricos y un clima moderado, produce Zinfandel con elegancia y complejidad, así como Sauvignon Blanc de frescura notable.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Dry Creek comunica conocimiento vinícola. Zinfandel es la carta de presentación.",
+    whenToHighlight: "Para Zinfandel de clase, para Sauvignon Blanc fresco.",
+    clientProfile: "Sommelier, cliente que aprecia Zinfandel, viajero por California.",
+    sellByStrategy: "Vende por región ('Dry Creek') y por variedad ('Zinfandel', 'Sauvignon Blanc').",
+    competingRegions: ["Paso Robles", "Santa Cruz"],
+    commonMistakes: [
+      "Asumir que Dry Creek es siempre barato: hay Zinfandel premium excepcionales",
+      "No explorar los Sauvignon Blanc, que son de gran calidad"
+    ],
+    pairings: ["Quesos blandos y semi-curados", "Especias", "Jamón", "Hongos", "Pollo"],
+    faqs: [
+      { q: "¿Por qué Dry Creek Valley es tan famoso?", a: "Produce algunos de los mejores Zinfandel del mundo. Su terroir es excepcional." }
+    ],
+    seo: {
+      title: "Dry Creek Valley | Zinfandel y Sauvignon Blanc de Sonoma",
+      description: "Guía completa de Dry Creek Valley: Zinfandel premium, Sauvignon Blanc fresco. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "walla-walla-valley",
+    slug: "walla-walla-valley",
+    name: "Walla Walla Valley",
+    altNames: ["Valle de Walla Walla"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 185,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Merlot", "Syrah", "Chardonnay"],
+    styles: ["Cabernet Sauvignon estructurado", "Merlot suave", "Syrah especiado", "Chardonnay mineral"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Walla Walla Valley es la región de Washington que ha demostrado capacidad de producir Cabernet Sauvignon y Syrah de clase mundial.",
+    intro: "Walla Walla Valley es un pequeño valle en Washington que ha conquistado reconocimiento mundial por Cabernet Sauvignon de estructura y Syrah elegante. Con un clima continental y suelos aluviales complejos, produce vinos con mineralidad y carácter.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Walla Walla comunica tendencia y sofisticación. Cabernet es competitivo con Burdeos a mejor precio.",
+    whenToHighlight: "Para Cabernet de clase, para Syrah elegante.",
+    clientProfile: "Sommelier, conocedor, viajero por Pacific Northwest.",
+    sellByStrategy: "Vende por región ('Walla Walla') y por variedad ('Cabernet', 'Syrah').",
+    competingRegions: ["Napa Valley", "Rhône"],
+    commonMistakes: [
+      "Ignorar Washington: produce vinos de clase mundial",
+      "Asumir que Walla Walla es siempre barato: hay vinos premium excepcionales"
+    ],
+    pairings: ["Carne vacuna", "Cordero", "Caza", "Quesos duros"],
+    faqs: [
+      { q: "¿Por qué Washington produce buenos tintos?", a: "Clima continental, suelos aluviales complejos y larga temporada de crecimiento." }
+    ],
+    seo: {
+      title: "Walla Walla Valley | Cabernet y Syrah de Washington",
+      description: "Guía completa de Walla Walla Valley: Cabernet Sauvignon, Syrah y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "columbia-valley",
+    slug: "columbia-valley",
+    name: "Columbia Valley",
+    altNames: ["Valle de Columbia"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 630,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Merlot", "Riesling", "Chardonnay"],
+    styles: ["Cabernet Sauvignon potente", "Merlot suave", "Riesling mineral", "Chardonnay cremoso"],
+    prestige: "premium",
+    clientRecognition: "muy-alto",
+    description: "Columbia Valley es la región más importante de Washington, responsable de la mayoría de vinos excepcionales del estado.",
+    intro: "Columbia Valley es el corazón vinícola de Washington. Con más de 630 bodegas y un territorio vasto, produce una diversidad de vinos excepcionales. Desde Riesling mineral que rivaliza con Alsacia hasta Cabernet potente que compite con Napa.",
+    cartaRole: ["segura", "premium", "diferencial"],
+    cartaReading: "Columbia Valley comunica calidad y variedad. Funciona para Cabernet, para Riesling, para exploración de Washington.",
+    whenToHighlight: "En cualquier carta que busque vinos de Washington.",
+    clientProfile: "Reconocimiento alto en círculos enológicos. Atrae al viajero por Pacific Northwest.",
+    sellByStrategy: "Vende por región ('Columbia Valley'), por variedad ('Riesling', 'Cabernet').",
+    competingRegions: ["Napa Valley", "Alsacia"],
+    commonMistakes: [
+      "Ignorar Columbia Valley: es una región seria de clase mundial",
+      "No explorar los Riesling, que son de gran calidad"
+    ],
+    pairings: ["Pescado blanco", "Mariscos", "Pollo", "Carne vacuna", "Especias"],
+    faqs: [
+      { q: "¿Washington es bueno para Riesling?", a: "Excelente. Columbia Valley produce Riesling mineral y elegante que compite con Alsacia." }
+    ],
+    seo: {
+      title: "Columbia Valley | Cabernet, Riesling y vinos de Washington",
+      description: "Guía completa de Columbia Valley: región más importante de Washington, Riesling mineral. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "finger-lakes",
+    slug: "finger-lakes",
+    name: "Finger Lakes",
+    altNames: ["Lagos de Finger"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 107,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Riesling", "Cabernet Franc", "Pinot Noir", "Chardonnay"],
+    styles: ["Riesling mineral y delicado", "Cabernet Franc elegante", "Espumoso seco", "Chardonnay fresco"],
+    prestige: "emergente",
+    clientRecognition: "medio",
+    description: "Finger Lakes es la región emergente de Nueva York, especializada en Riesling mineral y Cabernet Franc que están ganando reconocimiento mundial.",
+    intro: "Finger Lakes es una región en transformación. Sus lagos glaciales moderan el clima frío de Nueva York, permitiendo maduración completa de variedades europeas. Riesling es el gran orgullo, produciendo vinos minerales y elegantes.",
+    cartaRole: ["descubrimiento", "diferencial", "emergente"],
+    cartaReading: "Finger Lakes comunica tendencia y exploración. Riesling funciona como alternativa a Alsacia.",
+    whenToHighlight: "En cartas que buscan exploración americana, para Riesling seco.",
+    clientProfile: "Sommelier aventurero, cliente que busca exploración.",
+    sellByStrategy: "Vende por productor y por variedad ('Riesling', 'Cabernet Franc').",
+    competingRegions: ["Alsacia", "Loire Valley"],
+    commonMistakes: [
+      "Ignorar Finger Lakes: está produciendo vinos de muy buena calidad",
+      "Confundir con vinos dulces: hay excelentes secos"
+    ],
+    pairings: ["Pescado blanco", "Pollo", "Quesos frescos", "Mariscos"],
+    faqs: [
+      { q: "¿Por qué Finger Lakes produce buenos Riesling?", a: "Los lagos glaciales moderan el frío extremo de Nueva York, permitiendo maduración completa." }
+    ],
+    seo: {
+      title: "Finger Lakes | Riesling y Cabernet Franc de Nueva York",
+      description: "Guía completa de Finger Lakes: región emergente, Riesling mineral y Cabernet Franc. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "virginia",
+    slug: "virginia",
+    name: "Virginia",
+    altNames: ["Región vinícola de Virginia"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 73,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Franc", "Merlot", "Cabernet Sauvignon", "Viognier"],
+    styles: ["Cabernet Franc elegante", "Merlot suave", "Viognier aromático", "Blancos frescos"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Virginia es la región vinícola emergente de la costa este, conocida por Cabernet Franc elegante y blancos frescos.",
+    intro: "Virginia es la región más antigua de la costa este americana, con viñedos desde el siglo XVIII. Hoy, está en transformación hacia vinos de clase mundial, especialmente Cabernet Franc que rivaliza con Loire Valley.",
+    cartaRole: ["descubrimiento", "diferencial", "emergente"],
+    cartaReading: "Virginia comunica exploración de la costa este americana. Cabernet Franc funciona como alternativa elegante.",
+    whenToHighlight: "En cartas que buscan diferenciación americana, para Cabernet Franc.",
+    clientProfile: "Sommelier aventurero, cliente que busca exploración.",
+    sellByStrategy: "Vende por productor y por variedad ('Cabernet Franc').",
+    competingRegions: ["Loire Valley", "Finger Lakes"],
+    commonMistakes: [
+      "Ignorar Virginia: está produciendo vinos de muy buena calidad",
+      "No explorar Cabernet Franc, que es la estrella emergente"
+    ],
+    pairings: ["Pato", "Cordero", "Quesos semi-curados", "Pollo asado"],
+    faqs: [
+      { q: "¿Virginia tiene historia vinícola?", a: "Sí, es la región más antigua de EE.UU. Los primeros viñedos se plantaron en el siglo XVII." }
+    ],
+    seo: {
+      title: "Virginia | Cabernet Franc elegante de la costa este",
+      description: "Guía completa de Virginia: región emergente, Cabernet Franc y potencial de la costa este. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "texas-hill-country",
+    slug: "texas-hill-country",
+    name: "Texas Hill Country",
+    altNames: ["Región vinícola de Texas Hill Country"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 48,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Merlot", "Tempranillo", "Chardonnay"],
+    styles: ["Cabernet Sauvignon potente", "Tempranillo especiado", "Merlot suave", "Chardonnay cremoso"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Texas Hill Country es la región vinícola emergente de Texas, con potencial para producir Cabernet Sauvignon y Tempranillo de carácter único.",
+    intro: "Texas Hill Country es una región de transformación. Con altitud, suelos calizos y un clima continental cálido, está demostrando capacidad para producir Cabernet Sauvignon, Tempranillo y Merlot con carácter.",
+    cartaRole: ["descubrimiento", "emergente"],
+    cartaReading: "Texas Hill Country comunica exploración de una región americana insólita.",
+    whenToHighlight: "En cartas que buscan diferenciación extrema.",
+    clientProfile: "Cliente local de Texas, sommelier aventurero.",
+    sellByStrategy: "Vende por región ('Texas Hill Country') y por storytelling de región emergente.",
+    competingRegions: ["Otros emergentes americanos"],
+    commonMistakes: [
+      "Asumir que Texas no produce buenos vinos: está mejorando rápidamente"
+    ],
+    pairings: ["Carnes a la parrilla", "BBQ tejano", "Quesos", "Especias"],
+    faqs: [
+      { q: "¿Texas produce buenos vinos?", a: "Sí, Texas Hill Country está demostrando potencial real para Cabernet y Tempranillo." }
+    ],
+    seo: {
+      title: "Texas Hill Country | Cabernet y Tempranillo de Texas",
+      description: "Guía completa de Texas Hill Country: región emergente con potencial para tintos. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "lodi",
+    slug: "lodi",
+    name: "Lodi",
+    altNames: ["Región de Lodi"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 82,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Zinfandel", "Cabernet Sauvignon", "Chardonnay"],
+    styles: ["Zinfandel potente y frutal", "Cabernet Sauvignon estructura", "Chardonnay cremoso"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Lodi es la región vieja de California especializada en Zinfandel de carácter, con algunos de los viñedos más antiguos del país.",
+    intro: "Lodi es la región histórica de California, con viñedos que se remontan al siglo XIX. Es famosa por sus viejos Zinfandel, que producen vinos con mucha personalidad. A menudo sobrepasada por Napa y Sonoma, Lodi ofrece excelente relación calidad-precio.",
+    cartaRole: ["valor", "diferencial"],
+    cartaReading: "Lodi comunica vinos con historia y carácter a precio accesible. Zinfandel viejo es su carta.",
+    whenToHighlight: "Para Zinfandel accesible, para cliente que busca relación calidad-precio.",
+    clientProfile: "Cliente que aprecia Zinfandel, buscador de valor.",
+    sellByStrategy: "Vende por región ('Lodi') y por Zinfandel viejo.",
+    competingRegions: ["Paso Robles", "Dry Creek"],
+    commonMistakes: [
+      "Ignorar Lodi: tiene excelentes vinos a precio razonable",
+      "No explorar los Zinfandel viejos, que son excepcionales"
+    ],
+    pairings: ["Quesos", "Especias", "Carnes asadas"],
+    faqs: [
+      { q: "¿Por qué Lodi tiene Zinfandel tan bueno?", a: "Viñedos antiguos y suelos complejos. Los viejos Zinfandel tienen mucha complejidad." }
+    ],
+    seo: {
+      title: "Lodi | Zinfandel viejo de California",
+      description: "Guía completa de Lodi: Zinfandel histórico, viñedos antiguos y relación calidad-precio. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "central-coast",
+    slug: "central-coast",
+    name: "Central Coast",
+    altNames: ["Costa Central de California"],
+    country: "estados-unidos",
+    denominationType: "AVA",
+    bodegasCount: 314,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Syrah", "Zinfandel"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Syrah especiado", "Zinfandel potente"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Central Coast es la región más diversa de California, abarcando sub-zonas con perfiles muy distintos.",
+    intro: "Central Coast es una región vasta que abarca desde Monterey hasta San Luis Obispo. Con microclimas diversos y sub-AVA distintas, produce una diversidad de estilos. Pinot Noir y Chardonnay son las estrellas.",
+    cartaRole: ["premium", "diferencial", "segura"],
+    cartaReading: "Central Coast comunica versatilidad y descubrimiento. Cada sub-zona ofrece algo distinto.",
+    whenToHighlight: "En cartas que buscan cobertura regional amplia de California.",
+    clientProfile: "Sommelier, cliente curioso, viajero por California.",
+    sellByStrategy: "Vende por sub-zona más que por Central Coast genérico.",
+    competingRegions: ["Napa", "Sonoma"],
+    commonMistakes: [
+      "Tratar Central Coast como región genérica: las sub-zonas son muy distintas"
+    ],
+    pairings: ["Pescado blanco", "Mariscos", "Pollo", "Carnes moderadas"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre las sub-zonas de Central Coast?", a: "Varían enormemente. Santa Lucia Highlands es cool; Paso Robles es cálido." }
+    ],
+    seo: {
+      title: "Central Coast | Pinot Noir, Chardonnay y diversidad",
+      description: "Guía completa de Central Coast: región diversa, sub-zonas distintas y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "santa-rita-hills",
+    slug: "santa-rita-hills",
+    name: "Santa Rita Hills",
+    altNames: ["Colinas de Santa Rita"],
+    country: "estados-unidos",
+    parentRegion: "santa-barbara-county",
+    denominationType: "AVA",
+    bodegasCount: 71,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir elegante y mineral", "Chardonnay cremoso", "Sauvignon Blanc fresco"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Santa Rita Hills es la sub-AVA premium de Santa Barbara County, especializada en Pinot Noir que rivaliza con Borgoña.",
+    intro: "Santa Rita Hills es el corazón cool de Santa Barbara. Con influencia directa del Pacífico y suelos calizos, produce Pinot Noir con elegancia mineral que compite con los mejores del mundo.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Santa Rita Hills comunica máxima sofisticación. Pinot Noir rivaliza con Borgoña a precio mejor.",
+    whenToHighlight: "Para Pinot Noir de clase, en cartas premium.",
+    clientProfile: "Sommelier, conocedor, cliente que busca Pinot Noir de máxima calidad.",
+    sellByStrategy: "Vende por región ('Santa Rita Hills') y por productor.",
+    competingRegions: ["Willamette Valley", "Borgoña"],
+    commonMistakes: [
+      "Ignorar Santa Rita Hills: produce Pinot Noir de clase mundial"
+    ],
+    pairings: ["Pato", "Salmón", "Hongos", "Quesos blandos"],
+    faqs: [
+      { q: "¿Cómo compara Santa Rita Hills con Borgoña?", a: "Ambas producen Pinot Noir elegante. Borgoña tiene mayor complejidad histórica. Precio mucho mejor en Santa Rita." }
+    ],
+    seo: {
+      title: "Santa Rita Hills | Pinot Noir premium de Santa Barbara",
+      description: "Guía completa de Santa Rita Hills: Pinot Noir elegante, Chardonnay y rol en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "anderson-valley",
+    slug: "anderson-valley",
+    name: "Anderson Valley",
+    altNames: ["Valle de Anderson"],
+    country: "estados-unidos",
+    parentRegion: "sonoma-county",
+    denominationType: "AVA",
+    bodegasCount: 34,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Riesling"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Espumoso de clase", "Riesling mineral"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Anderson Valley es la sub-AVA de Sonoma especializada en Pinot Noir elegante y Chardonnay, con tradición de excelentes espumosos.",
+    intro: "Anderson Valley es un pequeño valle cool de Sonoma, ideal para Pinot Noir delicado y Chardonnay fino. Influenciada por el Pacífico, produce vinos con elegancia y mineralidad. Los espumosos tienen una reputación excelente.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Anderson Valley comunica sofisticación. Pinot Noir es alternativa elegante a Borgoña. Espumosos son de clase.",
+    whenToHighlight: "Para Pinot Noir elegante, para espumosos.",
+    clientProfile: "Sommelier, conocedor, cliente que busca elegancia.",
+    sellByStrategy: "Vende por región ('Anderson Valley') y por productor.",
+    competingRegions: ["Willamette Valley", "Borgoña"],
+    commonMistakes: [
+      "Ignorar Anderson Valley: es una región seria",
+      "No explorar los espumosos, que son excepcionales"
+    ],
+    pairings: ["Pato", "Salmón delicado", "Hongos", "Quesos blandos"],
+    faqs: [
+      { q: "¿Anderson Valley tiene espumosos?", a: "Excelentes. Los espumosos de Anderson Valley tienen reputación mundial." }
+    ],
+    seo: {
+      title: "Anderson Valley | Pinot Noir elegante y espumosos",
+      description: "Guía completa de Anderson Valley: Pinot Noir, Chardonnay, espumosos y rol. Criterio Winerim."
+    }
+  },
+
+  // ─── ARGENTINA ADDITIONAL REGIONS ───────────────────────────────────────
+
+  {
+    id: "salta-cafayate",
+    slug: "salta-cafayate",
+    name: "Salta / Cafayate",
+    altNames: ["Región de Salta", "Cafayate"],
+    country: "argentina",
+    denominationType: "IG",
+    bodegasCount: 67,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Torrontés", "Malbec", "Cabernet Franc", "Tannat"],
+    styles: ["Torrontés aromático y mineral", "Malbec de altura elegante", "Cabernet Franc estructura", "Tintos frescos"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Salta/Cafayate es la región argentina de mayor altitud y con Torrontés más aromático.",
+    intro: "Salta es la región argentina más septentrional, con viñedos entre 1.500 y 2.500 metros de altitud. Su clima único y suelos calizos crean vinos con mineralidad excepcional. El Torrontés es la estrella: aromático, fresco y mineral.",
+    cartaRole: ["diferencial", "descubrimiento", "premium"],
+    cartaReading: "Salta comunica diferenciación extrema. Torrontés es blanco único que sorprende al comensal.",
+    whenToHighlight: "Para exploración argentina, para Torrontés, para cliente curioso.",
+    clientProfile: "Sommelier, cliente que busca diferenciación, viajero.",
+    sellByStrategy: "Vende por región ('Salta', 'Cafayate') y por variedad ('Torrontés').",
+    competingRegions: ["Mendoza", "Loire Valley (para Torrontés)"],
+    commonMistakes: [
+      "Ignorar Salta: es la región más interesante de Argentina después de Mendoza",
+      "No explorar el Malbec de altura elegante"
+    ],
+    pairings: ["Mariscos frescos", "Ceviche", "Pescado blanco", "Especias", "Comida andina"],
+    faqs: [
+      { q: "¿Qué hace especial al Torrontés de Salta?", a: "Altitud y suelos calizos crean mineralidad excepcional. Aromático pero equilibrado." }
+    ],
+    seo: {
+      title: "Salta / Cafayate | Torrontés y Malbec de altura",
+      description: "Guía completa de Salta/Cafayate: Torrontés mineral, Malbec de altura. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "san-juan",
+    slug: "san-juan",
+    name: "San Juan",
+    altNames: ["Región de San Juan"],
+    country: "argentina",
+    denominationType: "IG",
+    bodegasCount: 89,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Syrah", "Bonarda", "Cabernet Sauvignon", "Chardonnay"],
+    styles: ["Syrah potente y especiado", "Bonarda frutal", "Cabernet Sauvignon estructura", "Chardonnay mineral"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "San Juan es la región argentina de Syrah y Bonarda, con vinos potentes y especiados.",
+    intro: "San Juan es la segunda región en importancia de Argentina después de Mendoza. Con un clima más cálido y seco, produce Syrah con mucha potencia y Bonarda frutal. Es una región en transformación.",
+    cartaRole: ["diferencial", "descubrimiento", "valor"],
+    cartaReading: "San Juan comunica potencia y descubrimiento. Syrah es la carta de presentación.",
+    whenToHighlight: "Para Syrah potente, para exploración argentina.",
+    clientProfile: "Cliente que busca diferenciación, sommelier aventurero.",
+    sellByStrategy: "Vende por región ('San Juan') y por variedad ('Syrah', 'Bonarda').",
+    competingRegions: ["Mendoza", "Rhône"],
+    commonMistakes: [
+      "Ignorar San Juan: está produciendo buenos vinos",
+      "No explorar Syrah, que es muy bueno"
+    ],
+    pairings: ["Carnes potentes", "Quesos duros", "Especias", "Caza"],
+    faqs: [
+      { q: "¿Qué hace especial al Syrah de San Juan?", a: "Clima cálido y suelos complejos crean Syrah potente con mucha personalidad." }
+    ],
+    seo: {
+      title: "San Juan | Syrah y Bonarda de Argentina",
+      description: "Guía completa de San Juan: Syrah potente, Bonarda frutal y rol en hostelería. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "patagonia-rio-negro",
+    slug: "patagonia-rio-negro",
+    name: "Patagonia / Río Negro",
+    altNames: ["Región de Patagonia", "Río Negro"],
+    country: "argentina",
+    denominationType: "IG",
+    bodegasCount: 42,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Merlot", "Riesling", "Chardonnay"],
+    styles: ["Pinot Noir elegante", "Merlot suave", "Riesling mineral", "Chardonnay fresco"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Patagonia/Río Negro es la región argentina más fría y austral, especializada en Pinot Noir elegante.",
+    intro: "Patagonia es la frontera sur del vino argentino. Con altitud, influencia atlántica y clima frío, produce Pinot Noir elegante que compite con Borgoña y Willamette Valley. Es la región argentina con mayor potencial de crecimiento.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Patagonia comunica máxima sofisticación y tendencia. Pinot Noir es alternativa elegante que sorprende.",
+    whenToHighlight: "Para Pinot Noir de clase, en cartas premium.",
+    clientProfile: "Sommelier, cliente sofisticado, viajero.",
+    sellByStrategy: "Vende por región ('Patagonia') y por variedad ('Pinot Noir').",
+    competingRegions: ["Willamette Valley", "Borgoña", "Santa Rita Hills"],
+    commonMistakes: [
+      "Ignorar Patagonia: está produciendo Pinot Noir de clase mundial",
+      "No explorar Riesling"
+    ],
+    pairings: ["Pato", "Cordero patagónico", "Salmón", "Hongos", "Quesos blandos"],
+    faqs: [
+      { q: "¿Patagonia es la próxima región argentina?", a: "Probablemente. Tiene potencial enorme y reconocimiento creciente." }
+    ],
+    seo: {
+      title: "Patagonia / Río Negro | Pinot Noir elegante",
+      description: "Guía completa de Patagonia: Pinot Noir, Riesling y región más prometedora. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "lujan-de-cuyo",
+    slug: "lujan-de-cuyo",
+    name: "Luján de Cuyo",
+    altNames: ["Región de Luján de Cuyo"],
+    country: "argentina",
+    parentRegion: "mendoza",
+    denominationType: "DOC",
+    bodegasCount: 180,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Malbec", "Cabernet Sauvignon", "Merlot", "Chardonnay"],
+    styles: ["Malbec elegante de altura", "Cabernet Sauvignon estructura", "Blends de montaña"],
+    prestige: "icónico",
+    clientRecognition: "muy-alto",
+    description: "Luján de Cuyo es la sub-región premium de Mendoza, especializada en Malbec de altura elegante.",
+    intro: "Luján de Cuyo es la denominación que define al Malbec argentino de máxima calidad. Con viñedos entre 900 y 1.200 metros de altitud, produce Malbec con elegancia, mineralidad y estructura que compite con Burdeos.",
+    cartaRole: ["premium", "prestigio", "identitaria"],
+    cartaReading: "Luján de Cuyo en carta es garantía de máxima calidad argentina. Comunica sofisticación.",
+    whenToHighlight: "Siempre que se busque máxima calidad argentina.",
+    clientProfile: "Reconocimiento altísimo. Comensal que busca lo mejor de Argentina.",
+    sellByStrategy: "Vende por región ('Luján de Cuyo') y por bodega/marca.",
+    competingRegions: ["Valle de Uco", "Burdeos"],
+    commonMistakes: [
+      "Asumir que Luján de Cuyo es siempre premium extremo: hay buenas opciones a precio razonable"
+    ],
+    pairings: ["Carne vacuna de alta calidad", "Cordero", "Caza", "Quesos duros", "Trufa"],
+    faqs: [
+      { q: "¿Luján de Cuyo es siempre caro?", a: "No. Hay Malbec de buena calidad desde 20€. Los ultra-premium alcanzan 100€+." }
+    ],
+    seo: {
+      title: "Luján de Cuyo | Malbec premium de Mendoza",
+      description: "Guía completa de Luján de Cuyo: Malbec de altura, DOC y máxima calidad. Criterio Winerim."
+    }
+  },
+
+  // ─── CHILE ADDITIONAL REGIONS ────────────────────────────────────────────
+
+  {
+    id: "rapel-valley",
+    slug: "rapel-valley",
+    name: "Rapel Valley",
+    altNames: ["Valle del Rapel"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 78,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Carménère", "Cabernet Sauvignon", "Merlot", "Sauvignon Blanc"],
+    styles: ["Carménère potente y especiado", "Cabernet Sauvignon estructura", "Merlot suave", "Sauvignon Blanc fresco"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Rapel Valley es el corazón de la región vinícola centro de Chile, especializado en Carménère potente.",
+    intro: "Rapel Valley comprende dos sub-valles: Colchagua (más cálido) y Curicó (más frío). Juntos producen algunos de los mejores Carménère y Cabernet de Chile.",
+    cartaRole: ["segura", "premium", "identitaria"],
+    cartaReading: "Rapel Valley comunica calidad y Carménère. Es la región de referencia para esta variedad.",
+    whenToHighlight: "Para Carménère, para Cabernet potente.",
+    clientProfile: "Muy alto reconocimiento. Viajero por Chile.",
+    sellByStrategy: "Vende principalmente por región y por variedad ('Carménère').",
+    competingRegions: ["Maipo", "Colchagua"],
+    commonMistakes: [
+      "Ignorar Merlot y Cabernet que son muy buenos"
+    ],
+    pairings: ["Carne vacuna", "Quesos duros", "Especias", "Carnes asadas"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Colchagua y Curicó?", a: "Colchagua es más cálido y produce Carménère potentes. Curicó es más frío y elegante." }
+    ],
+    seo: {
+      title: "Rapel Valley | Carménère y Cabernet de Chile central",
+      description: "Guía completa de Rapel Valley: Carménère, Cabernet y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "aconcagua",
+    slug: "aconcagua",
+    name: "Aconcagua",
+    altNames: ["Valle de Aconcagua"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 45,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Carménère", "Syrah", "Chardonnay"],
+    styles: ["Cabernet Sauvignon potente", "Carménère especiado", "Syrah elegante", "Chardonnay mineral"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Aconcagua es el valle septentrional de Chile, con altitud y proximidad a los Andes.",
+    intro: "Aconcagua es el reino del Cabernet Sauvignon y Carménère potentes. Con altitud y proximidad directa a los Andes, produce vinos con concentración excepcional.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Aconcagua comunica potencia y diferenciación. Carménère y Cabernet son vinos de carácter.",
+    whenToHighlight: "Para exploración chilena, para Carménère potente.",
+    clientProfile: "Sommelier aventurero, cliente que busca diferenciación.",
+    sellByStrategy: "Vende por región ('Aconcagua') y por variedad.",
+    competingRegions: ["Maipo", "Colchagua"],
+    commonMistakes: [
+      "Ignorar Aconcagua: es una región con vinos muy buenos"
+    ],
+    pairings: ["Carnes potentes", "Quesos duros", "Caza"],
+    faqs: [
+      { q: "¿Por qué Aconcagua produce Cabernet tan potente?", a: "Altitud, suelos y proximidad a los Andes crean concentración excepcional." }
+    ],
+    seo: {
+      title: "Aconcagua | Cabernet y Carménère potentes",
+      description: "Guía completa de Aconcagua: Cabernet, Carménère y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "leyda",
+    slug: "leyda",
+    name: "Leyda",
+    altNames: ["Valle de Leyda"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 38,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Sauvignon Blanc", "Pinot Noir", "Chardonnay"],
+    styles: ["Sauvignon Blanc mineral y fresco", "Pinot Noir elegante", "Chardonnay cremoso"],
+    prestige: "premium",
+    clientRecognition: "medio",
+    description: "Leyda es la región costera cool de Chile, especializada en Sauvignon Blanc mineral y Pinot Noir elegante.",
+    intro: "Leyda es el corazón cool de Chile, con influencia directa del Pacífico y noches frías que preservan acidez. Sauvignon Blanc es la estrella: mineral, fresco y tenso.",
+    cartaRole: ["diferencial", "descubrimiento", "premium"],
+    cartaReading: "Leyda comunica tendencia y diferenciación. Sauvignon Blanc es alternativa fresca.",
+    whenToHighlight: "Para Sauvignon Blanc fresco, para Pinot Noir elegante.",
+    clientProfile: "Sommelier, cliente que busca diferenciación.",
+    sellByStrategy: "Vende por región ('Leyda') y por variedad ('Sauvignon Blanc', 'Pinot Noir').",
+    competingRegions: ["Loire Valley (para Sauvignon)", "Willamette Valley (para Pinot)"],
+    commonMistakes: [
+      "Ignorar Leyda: es una región seria",
+      "No explorar Pinot Noir que es sorprendentemente bueno"
+    ],
+    pairings: ["Mariscos", "Pescado blanco", "Especias", "Quesos frescos"],
+    faqs: [
+      { q: "¿Por qué Leyda produce Sauvignon tan fresco?", a: "Influencia directa del Pacífico y noches frías preservan acidez y tensión mineral." }
+    ],
+    seo: {
+      title: "Leyda | Sauvignon Blanc mineral y Pinot Noir fresco",
+      description: "Guía completa de Leyda: Sauvignon Blanc, Pinot Noir y rol estratégico. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "bio-bio",
+    slug: "bio-bio",
+    name: "Bío-Bío",
+    altNames: ["Valle del Bío-Bío"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 29,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Sauvignon Blanc", "Riesling"],
+    styles: ["Pinot Noir elegante", "Chardonnay fresco", "Riesling mineral", "Sauvignon Blanc delicado"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Bío-Bío es la región más austral y cool de Chile, con potencial para producir Pinot Noir y Riesling de clase mundial.",
+    intro: "Bío-Bío es la frontera austral del vino chileno. Con clima cool atlántico y suelos complejos, está demostrando capacidad para Pinot Noir elegante y Riesling mineral.",
+    cartaRole: ["descubrimiento", "diferencial", "emergente"],
+    cartaReading: "Bío-Bío comunica tendencia extrema y exploración.",
+    whenToHighlight: "Para exploración chilena extrema.",
+    clientProfile: "Sommelier aventurero, cliente muy curioso.",
+    sellByStrategy: "Vende por región ('Bío-Bío') y por productor.",
+    competingRegions: ["Willamette Valley", "Patagonia"],
+    commonMistakes: [
+      "Ignorar Bío-Bío: está produciendo buenos vinos"
+    ],
+    pairings: ["Pescado blanco", "Mariscos", "Quesos frescos"],
+    faqs: [
+      { q: "¿Bío-Bío es región seria?", a: "Está en transformación, pero algunos productores hacen vinos de muy buena calidad." }
+    ],
+    seo: {
+      title: "Bío-Bío | Pinot Noir y Riesling emergente",
+      description: "Guía completa de Bío-Bío: región cool austral, Pinot Noir y potencial futuro. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "itata",
+    slug: "itata",
+    name: "Itata",
+    altNames: ["Valle de Itata"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 22,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pais", "Carignan", "Sauvignon Blanc", "Chardonnay"],
+    styles: ["Pais afrutado y delicado", "Carignan especiado", "Blancos frescos"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Itata es la región histórica chilena, redescubierta recientemente por su potencial para vinos naturales.",
+    intro: "Itata es la región más antigua de Chile, que casi desaparece del mapa vinícola pero está siendo redescubierta. Con viñedos viejos de Pais y Carignan, está produciendo vinos naturales excepcionales.",
+    cartaRole: ["descubrimiento", "diferencial", "emergente"],
+    cartaReading: "Itata comunica tendencia extrema y vanguardia.",
+    whenToHighlight: "Para cartas de vinos naturales, para cliente vanguardista.",
+    clientProfile: "Sommelier vanguardista, cliente que busca vinos naturales.",
+    sellByStrategy: "Vende por región ('Itata') y por productor.",
+    competingRegions: ["Otras regiones de vinos naturales"],
+    commonMistakes: [
+      "Ignorar Itata: es la región más vanguardista de Chile",
+      "Confundir Pais con vino de baja calidad: el Pais de Itata es muy interesante"
+    ],
+    pairings: ["Comida rústica", "Quesos frescos", "Charcutería"],
+    faqs: [
+      { q: "¿Qué es Pais?", a: "Variedad tinta chilena antigua, originaria de viñedos coloniales. En Itata produce vinos frescos e interesantes." }
+    ],
+    seo: {
+      title: "Itata | Pais y vinos naturales de Chile",
+      description: "Guía completa de Itata: región histórica, Pais, vinos naturales y vanguardia. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "limari",
+    slug: "limari",
+    name: "Limarí",
+    altNames: ["Valle de Limarí"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 18,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Chardonnay", "Sauvignon Blanc", "Syrah"],
+    styles: ["Chardonnay mineral", "Sauvignon Blanc fresco", "Syrah elegante"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Limarí es la región costera septentrional de Chile, especializada en Chardonnay mineral.",
+    intro: "Limarí es un pequeño valle costero de Chile, con influencia directa del Pacífico. Produce Chardonnay con mineralidad excepcional y Sauvignon Blanc fresco.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Limarí comunica exploración. Chardonnay mineral es la especialidad.",
+    whenToHighlight: "Para Chardonnay mineral fresco, para exploración chilena.",
+    clientProfile: "Sommelier curioso, cliente que busca exploración.",
+    sellByStrategy: "Vende por región ('Limarí') y por variedad.",
+    competingRegions: ["Leyda"],
+    commonMistakes: [
+      "Ignorar Limarí: es una región con buenos vinos"
+    ],
+    pairings: ["Mariscos", "Pescado blanco", "Quesos frescos"],
+    faqs: [
+      { q: "¿Por qué Limarí produce Chardonnay mineral?", a: "Influencia marina y suelos calizos crean mineralidad excepcional." }
+    ],
+    seo: {
+      title: "Limarí | Chardonnay mineral de Chile norte",
+      description: "Guía completa de Limarí: Chardonnay mineral, Sauvignon Blanc fresco. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "elqui",
+    slug: "elqui",
+    name: "Elqui",
+    altNames: ["Valle de Elqui"],
+    country: "chile",
+    denominationType: "DO",
+    bodegasCount: 21,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Syrah", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Syrah potente y especiado", "Chardonnay fresco", "Sauvignon Blanc delicado"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Elqui es el valle vinícola más septentrional de Chile, conocido tanto por vino como por pisco.",
+    intro: "Elqui es el norte extremo del vino chileno, con un clima seco y soleado excepcional. Produce Syrah con potencia y concentración, así como destilados de pisco de renombre.",
+    cartaRole: ["descubrimiento", "diferencial", "emergente"],
+    cartaReading: "Elqui comunica exploración norteña. Syrah potente es la carta de presentación.",
+    whenToHighlight: "Para exploración chilena extrema, para Syrah potente.",
+    clientProfile: "Sommelier aventurero, cliente muy curioso.",
+    sellByStrategy: "Vende por región ('Elqui') y por Syrah.",
+    competingRegions: ["Otras regiones norteñas"],
+    commonMistakes: [
+      "Ignorar Elqui: es una región con identidad única",
+      "Confundir solo con pisco, hay buenos vinos"
+    ],
+    pairings: ["Carnes potentes", "Quesos duros", "Especias"],
+    faqs: [
+      { q: "¿Elqui es más conocida por pisco?", a: "Sí, pero está emergiendo como región vinícola interesante." }
+    ],
+    seo: {
+      title: "Elqui | Syrah potente del norte de Chile",
+      description: "Guía completa de Elqui: Syrah, pisco y región única del norte. Criterio Winerim."
+    }
+  },
+
+  // ─── URUGUAY REGIONS ────────────────────────────────────────────────────
+
+  {
+    id: "canelones",
+    slug: "canelones",
+    name: "Canelones",
+    altNames: ["Región de Canelones"],
+    country: "uruguay",
+    denominationType: "IG",
+    bodegasCount: 156,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Tannat", "Cabernet Sauvignon", "Merlot", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Tannat potente", "Cabernet Sauvignon estructura", "Blancos frescos"],
+    prestige: "premium",
+    clientRecognition: "muy-alto",
+    description: "Canelones es la región vinícola principal de Uruguay, especializada en Tannat potente.",
+    intro: "Canelones es el corazón vinícola de Uruguay, cerca de Montevideo. Es la región de referencia para Tannat excepcional: potente, estructurado y mineral. Canelones ha consolidado a Uruguay en el mapa vinícola mundial.",
+    cartaRole: ["identitaria", "premium", "segura"],
+    cartaReading: "Canelones en carta es la referencia uruguaya. Tannat comunica potencia y carácter.",
+    whenToHighlight: "Como referencia de Uruguay, para Tannat potente.",
+    clientProfile: "Muy alto reconocimiento. Viajero por Uruguay, comensal que busca Tannat.",
+    sellByStrategy: "Vende principalmente por región ('Canelones') y por variedad ('Tannat').",
+    competingRegions: ["Maldonado"],
+    commonMistakes: [
+      "Asumir que todo Uruguay es Tannat: hay buenos Cabernet y Merlot",
+      "Ignorar que Tannat de Canelones es muy bueno"
+    ],
+    pairings: ["Carne vacuna asada", "Parrilla uruguaya", "Quesos duros", "Especias"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Canelones y Maldonado?", a: "Canelones es más cálida y produce Tannat más potente. Maldonado es más fresca y produce vinos más elegantes." }
+    ],
+    seo: {
+      title: "Canelones | Tannat y vinos de Uruguay",
+      description: "Guía completa de Canelones: Tannat potente, región icónica de Uruguay. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "maldonado",
+    slug: "maldonado",
+    name: "Maldonado",
+    altNames: ["Región de Maldonado"],
+    country: "uruguay",
+    denominationType: "IG",
+    bodegasCount: 89,
+    wineTypes: ["tinto", "blanco", "rosado"],
+    mainGrapes: ["Tannat", "Pinot Noir", "Merlot", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Tannat elegante", "Pinot Noir delicado", "Merlot suave", "Blancos frescos"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Maldonado es la región cool de Uruguay, especializada en Tannat más elegante y Pinot Noir emergente.",
+    intro: "Maldonado es el este de Uruguay, con influencia atlántica que crea un clima más cool. Produce Tannat más elegante y mineral que Canelones. Pinot Noir está emergiendo como una sorpresa grata.",
+    cartaRole: ["premium", "diferencial", "descubrimiento"],
+    cartaReading: "Maldonado comunica elegancia uruguaya. Tannat es más sofisticado que Canelones.",
+    whenToHighlight: "Para Tannat elegante, para Pinot Noir emergente.",
+    clientProfile: "Sommelier, cliente que busca diferenciación, viajero.",
+    sellByStrategy: "Vende por región ('Maldonado') y por variedad.",
+    competingRegions: ["Canelones", "Willamette Valley (para Pinot)"],
+    commonMistakes: [
+      "Ignorar Maldonado: es una región seria",
+      "No explorar Pinot Noir que es sorprendentemente bueno"
+    ],
+    pairings: ["Pato", "Salmón", "Cordero", "Quesos blandos"],
+    faqs: [
+      { q: "¿Cómo compara Maldonado con Canelones?", a: "Maldonado es más fresca y elegante. Canelones es más potente. Ambas producen Tannat excepcional." }
+    ],
+    seo: {
+      title: "Maldonado | Tannat elegante y Pinot Noir",
+      description: "Guía completa de Maldonado: Tannat cool, Pinot Noir emergente y rol. Criterio Winerim."
+    }
+  },
+
+  {
+    id: "rivera",
+    slug: "rivera",
+    name: "Rivera",
+    altNames: ["Región de Rivera"],
+    country: "uruguay",
+    denominationType: "IG",
+    bodegasCount: 34,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Tannat", "Cabernet Franc", "Merlot"],
+    styles: ["Tannat estructurado", "Cabernet Franc especiado", "Merlot suave"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Rivera es la región norteña de Uruguay, con potencial para producir Tannat potente y Cabernet Franc elegante.",
+    intro: "Rivera es el norte de Uruguay, aún poco conocida pero con potencial enorme. Produce Tannat con estructura y Cabernet Franc emergente. Es una región en transformación.",
+    cartaRole: ["descubrimiento", "emergente"],
+    cartaReading: "Rivera comunica exploración extrema. Perfecta para cliente aventurero.",
+    whenToHighlight: "Para exploración uruguaya extrema.",
+    clientProfile: "Sommelier muy aventurero, cliente explorador.",
+    sellByStrategy: "Vende por región ('Rivera') y por productor.",
+    competingRegions: ["Otras regiones emergentes"],
+    commonMistakes: [
+      "Ignorar Rivera: está produciendo buenos vinos"
+    ],
+    pairings: ["Carnes potentes", "Quesos duros"],
+    faqs: [
+      { q: "¿Qué potencial tiene Rivera?", a: "Altitud y clima crean potencial para Tannat y Cabernet Franc excepcionales." }
+    ],
+    seo: {
+      title: "Rivera | Tannat emergente del norte",
+      description: "Guía completa de Rivera: región norteña emergente, Tannat y potencial futuro. Criterio Winerim."
+    }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // AUSTRALIA - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "hunter-valley",
+    slug: "hunter-valley",
+    name: "Hunter Valley",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 150,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Shiraz", "Semillon", "Chardonnay", "Pinot Noir"],
+    styles: ["Shiraz elegante", "Semillon seco mineral", "Chardonnay cremoso"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Histórica región australiana, cuna del vino australiano moderno. Produce Shiraz de elegancia y Semillon único.",
+    intro: "Hunter Valley es la región vinícola más antigua de Australia. Sus viñedos fueron plantados en los años 1820 y hoy produce vinos emblemáticos: Shiraz con elegancia y estructura, Semillon blanco seco que mejora con años.",
+    cartaRole: ["premium", "segura"],
+    cartaReading: "Hunter Valley comunica tradición australiana y elegancia. Su Shiraz es menos potente que Barossa pero más refinado.",
+    whenToHighlight: "En cartas de vino australiano de nivel, como alternativa elegante a Barossa Valley.",
+    clientProfile: "Coleccionista de vino australiano, cliente que aprecia vinos históricos.",
+    sellByStrategy: "Vende por región y por variedad (Shiraz, Semillon). Las bodegas históricas (Lindemans, Tyrrell's) tienen mucho reconocimiento.",
+    competingRegions: ["Barossa Valley", "Margaret River"],
+    commonMistakes: ["Confundir con Barossa: Hunter Valley es más elegante y fresco", "Ignorar el Semillon blanco"],
+    pairings: ["Pollo asado", "Carnes blancas", "Pescado a la mantequilla"],
+    faqs: [
+      { q: "¿Hunter Valley es más fresco que Barossa?", a: "Sí. Hunter Valley está más al sur, con clima más moderado. Sus Shiraz tienen más elegancia que potencia." }
+    ],
+    seo: { title: "Hunter Valley: Tradición del vino australiano", description: "Hunter Valley: región histórica australiana, Shiraz elegante y Semillon." }
+  },
+  {
+    id: "mclaren-vale",
+    slug: "mclaren-vale",
+    name: "McLaren Vale",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 85,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Shiraz", "Grenache", "Cabernet Sauvignon", "Grenache Blanc"],
+    styles: ["Shiraz de cuerpo completo", "Grenache estructurado", "Mezclas mediterráneas"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región costera australiana que produce tintos estructurados y de carácter mediterráneo.",
+    intro: "McLaren Vale es clima cálido y vientos oceánicos. Sus tintos tienen un carácter más mediterráneo que continental: Shiraz con fruta concentrada pero con frescura salina.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "McLaren Vale en carta comunica tendencia australiana moderna. Sus vinos son más frescos que Barossa.",
+    whenToHighlight: "Como alternativa a Barossa Valley más costera y fresca.",
+    clientProfile: "Cliente que busca tintos australianos pero más frescos.",
+    sellByStrategy: "Vende por variedad (Shiraz, Grenache) y por concepto de terroir marino.",
+    competingRegions: ["Barossa Valley", "Margaret River"],
+    commonMistakes: ["Confundir con Barossa: tiene identidad propia"],
+    pairings: ["Carnes rojas medianas", "Pollo especiado", "Arroces"],
+    faqs: [
+      { q: "¿Qué hace especial a McLaren Vale?", a: "Su proximidad al mar proporciona frescura salina que diferencia sus vinos de otras regiones australianas." }
+    ],
+    seo: { title: "McLaren Vale: Shiraz costera australiana", description: "McLaren Vale: tintos estructurados con carácter marino." }
+  },
+  {
+    id: "coonawarra",
+    slug: "coonawarra",
+    name: "Coonawarra",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 72,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Cabernet Sauvignon", "Shiraz", "Merlot"],
+    styles: ["Cabernet de pizarra roja", "Shiraz estructurado"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Región australiana icónica por su suelo de tierra roja volcánica que produce Cabernet Sauvignon de clase mundial.",
+    intro: "Coonawarra es tierra roja: sus viñedos crecen sobre una franja de suelo volcánico que produce Cabernet Sauvignon de una definición y elegancia únicos. Los vinos de Coonawarra compiten con Cabernets del mundo a precio-calidad excepcional.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Coonawarra Cabernet es la alternativa australiana de prestigio al Cabernet francés.",
+    whenToHighlight: "En cartas de vino tinto premium, como alternativa al Cabernet de Burdeos.",
+    clientProfile: "Coleccionista, cliente que busca Cabernet de calidad mundial.",
+    sellByStrategy: "Vende por variedad (Cabernet) y por terroir de tierra roja.",
+    competingRegions: ["Burdeos", "Napa Valley"],
+    commonMistakes: ["Asumir que todos los Cabernets australianos son Barossa: Coonawarra es diferente"],
+    pairings: ["Carnes rojas asadas", "Cordero", "Quesos duros"],
+    faqs: [
+      { q: "¿Por qué Coonawarra produce buen Cabernet?", a: "Su suelo de tierra roja volcánica drena bien y proporciona minerales. El clima es más fresco, permitiendo Cabernet con elegancia." }
+    ],
+    seo: { title: "Coonawarra: Cabernet australiano de clase mundial", description: "Coonawarra: tierra roja, Cabernet Sauvignon premium." }
+  },
+  {
+    id: "margaret-river",
+    slug: "margaret-river",
+    name: "Margaret River",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 200,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Shiraz", "Chardonnay", "Semillon"],
+    styles: ["Cabernet de clase mundial", "Shiraz elegante", "Chardonnay cremoso"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Región australiana occidental de prestigio mundial, con clima mediterráneo templado que produce tintos y blancos de alta calidad.",
+    intro: "Margaret River en Western Australia es clima templado y terroir único. Sus viñedos producen vinos que compiten en presencia con los mejores del mundo: Cabernet Sauvignon estructurado, Shiraz elegante, Chardonnay de cuerpo completo.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Margaret River en carta comunica excelencia australiana. Sus vinos tienen presencia internacional.",
+    whenToHighlight: "En cartas premium internacionales, como referencia australiana.",
+    clientProfile: "Viajero, coleccionista, cliente que busca vino australiano de calidad mundial.",
+    sellByStrategy: "Vende por región y bodega (Leeuwin, Vasse Felix). Los Cabernets compiten con Burdeos.",
+    competingRegions: ["Burdeos", "Napa Valley", "Barossa Valley"],
+    commonMistakes: ["Asumir que es la única región australiana premium: hay otras"],
+    pairings: ["Carnes rojas premium", "Cordero", "Quesos variados"],
+    faqs: [
+      { q: "¿Margaret River es mejor que Barossa?", a: "Diferente. Margaret River es clima templado con Cabernets elegantes. Barossa es Shiraz potente. Ambas son premium." }
+    ],
+    seo: { title: "Margaret River: Excelencia vinícola australiana", description: "Margaret River: Cabernet y Shiraz de clase mundial." }
+  },
+  {
+    id: "yarra-valley",
+    slug: "yarra-valley",
+    name: "Yarra Valley",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 90,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Shiraz", "Cabernet Sauvignon"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Espumoso método tradicional", "Shiraz fresco"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región subtropical australiana que produce Pinot Noir y espumosos de elegancia comparable a Francia.",
+    intro: "Yarra Valley está cerca de Melbourne en clima más fresco. Produce Pinot Noir con elegancia, Chardonnay cremoso y espumosos que compiten con Champagne. Es la región australiana más orientada a estilos elegantes.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Yarra Valley en carta comunica elegancia australiana. Los Pinots y espumosos sorprenden.",
+    whenToHighlight: "Como alternativa australiana a Borgoña, como espumoso alternativo a Champagne.",
+    clientProfile: "Cliente refinado, viajero, quien aprecia elegancia.",
+    sellByStrategy: "Vende por variedad (Pinot Noir, Chardonnay) y por espumosos.",
+    competingRegions: ["Borgoña", "Champagne"],
+    commonMistakes: ["No explorar el Pinot Noir: es sorprendentemente bueno"],
+    pairings: ["Pollo cremoso", "Pescado mantequilla", "Setas"],
+    faqs: [
+      { q: "¿Yarra Valley produce vino elegante?", a: "Sí. Su clima más fresco permite Pinot Noir y Chardonnay con más elegancia que regiones más cálidas." }
+    ],
+    seo: { title: "Yarra Valley: Elegancia australiana", description: "Yarra Valley: Pinot Noir, Chardonnay y espumosos australianos." }
+  },
+  {
+    id: "eden-valley",
+    slug: "eden-valley",
+    name: "Eden Valley",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 80,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Riesling", "Shiraz", "Cabernet Sauvignon"],
+    styles: ["Riesling seco mineral", "Shiraz elegante", "Cabernet estructurado"],
+    prestige: "premium",
+    clientRecognition: "medio-alto",
+    description: "Región de montaña australiana conocida por Riesling de clase mundial y Shiraz elegante.",
+    intro: "Eden Valley son las colinas de Barossa: más fresco, más elevado. Sus viñedos producen Riesling seco de gran mineral y estructura, y Shiraz más elegante que el valle bajo.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Eden Valley Riesling es uno de los mejores blancos australianos.",
+    whenToHighlight: "Como blanco australiano de calidad, como Riesling diferencial.",
+    clientProfile: "Apreciador de vino blanco de calidad.",
+    sellByStrategy: "Vende principalmente por Riesling y por terroir montañoso.",
+    competingRegions: ["Alsacia Riesling", "Alemania Riesling"],
+    commonMistakes: ["Confundir con Barossa Valley: son distintos microclimas"],
+    pairings: ["Pescado blanco", "Mariscos", "Comida tailandesa"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Eden Valley y Barossa?", a: "Eden Valley está en las colinas, más fresco. Produce Riesling excepcional. Barossa es más cálido, más Shiraz potente." }
+    ],
+    seo: { title: "Eden Valley: Riesling australiano premium", description: "Eden Valley: Riesling seco y Shiraz elegante australiano." }
+  },
+  {
+    id: "clare-valley",
+    slug: "clare-valley",
+    name: "Clare Valley",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 60,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Riesling", "Shiraz", "Cabernet Sauvignon"],
+    styles: ["Riesling mineral", "Shiraz de montaña", "Cabernet crianza"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región histórica australiana, especializada en Riesling seco y tintos de estructura.",
+    intro: "Clare Valley es otra región de montaña australiana donde el Riesling brilla. Vinos secos, minerales, con acidez vibrante. Algunos de los Rieslings australianos de mayor clase están aquí.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Clare Valley Riesling es sorpresa para cliente: blanco seco australiano de clase.",
+    whenToHighlight: "Como alternativa a Alsacia Riesling, como blanco fresco australiano.",
+    clientProfile: "Apreciador de Riesling, cliente aventurero.",
+    sellByStrategy: "Vende por variedad (Riesling) y por narrativa de terroir mineral.",
+    competingRegions: ["Alsacia", "Alemania"],
+    commonMistakes: ["Asumir que el Riesling australiano es dulce: estos son secos"],
+    pairings: ["Pescado", "Mariscos", "Comida asiática"],
+    faqs: [
+      { q: "¿Clare Valley produce Riesling bueno?", a: "Excelente. Es una de las mejores zonas de Riesling seco en el mundo." }
+    ],
+    seo: { title: "Clare Valley: Riesling seco australiano", description: "Clare Valley: Riesling mineral y Shiraz de montaña." }
+  },
+  {
+    id: "adelaide-hills",
+    slug: "adelaide-hills",
+    name: "Adelaide Hills",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 75,
+    wineTypes: ["blanco", "tinto", "espumoso"],
+    mainGrapes: ["Chardonnay", "Pinot Noir", "Sauvignon Blanc", "Shiraz"],
+    styles: ["Chardonnay fresco", "Pinot Noir elegante", "Sauvignon Blanc herbáceo"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región de montaña subtropical produciendo vinos frescos y elegantes.",
+    intro: "Adelaide Hills es clima fresco, elevado, subtropical. Sus viñedos producen Chardonnay fresco, Pinot Noir elegante y Sauvignon Blanc expresivo.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Adelaide Hills comunica terroir fresco australiano.",
+    whenToHighlight: "Como blanco australiano fresco, como alternativa a Borgoña.",
+    clientProfile: "Cliente que busca vino fresco, apreciador de elegancia.",
+    sellByStrategy: "Vende por variedad (Chardonnay, Pinot Noir).",
+    competingRegions: ["Yarra Valley", "Borgoña"],
+    commonMistakes: ["No explorar: región menor pero de gran calidad"],
+    pairings: ["Pollo", "Pescado blanco", "Setas"],
+    faqs: [
+      { q: "¿Adelaide Hills es tan bueno como Yarra Valley?", a: "Es comparable pero menos conocido. Buena relación calidad-precio." }
+    ],
+    seo: { title: "Adelaide Hills: Vinos frescos australianos", description: "Adelaide Hills: Chardonnay, Pinot Noir y Sauvignon Blanc." }
+  },
+  {
+    id: "tasmania",
+    slug: "tasmania",
+    name: "Tasmania",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 50,
+    wineTypes: ["blanco", "tinto", "espumoso"],
+    mainGrapes: ["Chardonnay", "Pinot Noir", "Riesling"],
+    styles: ["Chardonnay mineral", "Pinot Noir elegante", "Espumoso método tradicional"],
+    prestige: "emergente",
+    clientRecognition: "medio",
+    description: "Isla australiana subtropical con potencial enorme en vinos frescos y elegantes.",
+    intro: "Tasmania es Australia más fría. Sus viñedos producen Chardonnay mineral, Pinot Noir elegante y espumosos de gran promesa. Es la frontera del vino australiano.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Tasmania comunica tendencia y terroir extremo en Australia.",
+    whenToHighlight: "Como descubrimiento australiano, como espumoso diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias.",
+    sellByStrategy: "Vende por narrativa de terroir austral extremo.",
+    competingRegions: ["Nueva Zelanda", "Borgoña"],
+    commonMistakes: ["Ignorar: región emergente pero muy promisoria"],
+    pairings: ["Pescado blanco", "Mariscos", "Setas"],
+    faqs: [
+      { q: "¿Qué hace especial a Tasmania?", a: "Es la región más fría de Australia, permitiendo vinos más frescos y elegantes, casi como Nueva Zelanda." }
+    ],
+    seo: { title: "Tasmania: Emergencia vinícola australiana", description: "Tasmania: Pinot Noir y Chardonnay de la isla más fría." }
+  },
+  {
+    id: "rutherglen",
+    slug: "rutherglen",
+    name: "Rutherglen",
+    country: "australia",
+    denominationType: "GI",
+    bodegasCount: 35,
+    wineTypes: ["dulce", "generoso"],
+    mainGrapes: ["Muscat", "Tawny"],
+    styles: ["Muscat fortificado", "Tawny envejecido"],
+    prestige: "icónico",
+    clientRecognition: "medio",
+    description: "Región australiana especializada en vinos generosos fortificados envejecidos.",
+    intro: "Rutherglen en Victoria es la región del vino generoso australiano. Sus bodegas producen Muscat y Tawny envejecidos en barril durante décadas, con un carácter único: melaza, rancio, frutos secos.",
+    cartaRole: ["prestigio", "identitaria"],
+    cartaReading: "Rutherglen comunica tradición y maestría en envejecimiento.",
+    whenToHighlight: "Como vino generoso diferencial, como postre, como experiencia.",
+    clientProfile: "Coleccionista, cliente entendido en vinos envejecidos.",
+    sellByStrategy: "Vende por edad, por bodega, por narrativa de envejecimiento tradicional.",
+    competingRegions: ["Oporto", "Jerez"],
+    commonMistakes: ["Ignorar: son vinos excepcionales para postre"],
+    pairings: ["Frutos secos", "Chocolate", "Pasteles"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Muscat y Tawny?", a: "Muscat es más dulce, aromático. Tawny es más seco, envejecido más tiempo en barril oxidativo." }
+    ],
+    seo: { title: "Rutherglen: Vinos generosos australianos", description: "Rutherglen: Muscat y Tawny envejecidos, tradición australiana." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // NEW ZEALAND - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "martinborough",
+    slug: "martinborough",
+    name: "Martinborough/Wairarapa",
+    altNames: ["Wairarapa", "Martinborough"],
+    country: "nueva-zelanda",
+    denominationType: "GI",
+    bodegasCount: 60,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Sauvignon Blanc", "Chardonnay"],
+    styles: ["Pinot Noir de suelo mineral", "Sauvignon Blanc expresivo"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región neozelandesa de la isla Norte, especializada en Pinot Noir de carácter único.",
+    intro: "Martinborough/Wairarapa está en clima fresco y terroir de suelo mineral. Su Pinot Noir tiene una definición y mineralidad única: más seco, más terroso que Marlborough.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Martinborough Pinot Noir comunica terroir mineral neozelandés.",
+    whenToHighlight: "Como Pinot Noir diferencial, como alternativa a Marlborough.",
+    clientProfile: "Apreciador de Pinot Noir, cliente que busca mineralidad.",
+    sellByStrategy: "Vende por variedad (Pinot Noir) y por narrativa mineral.",
+    competingRegions: ["Marlborough", "Central Otago"],
+    commonMistakes: ["Confundir con Marlborough: son regiones distintas"],
+    pairings: ["Carnes rojas medianas", "Pollo cremoso", "Hongos"],
+    faqs: [
+      { q: "¿Cómo es el Pinot Noir de Martinborough?", a: "Más mineral, más terroso que Marlborough. Refleja suelo de pizarra." }
+    ],
+    seo: { title: "Martinborough/Wairarapa: Pinot Noir neozelandés", description: "Martinborough: Pinot Noir mineral de Nueva Zelanda." }
+  },
+  {
+    id: "gisborne",
+    slug: "gisborne",
+    name: "Gisborne",
+    country: "nueva-zelanda",
+    denominationType: "GI",
+    bodegasCount: 45,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Chardonnay", "Sauvignon Blanc", "Pinot Noir"],
+    styles: ["Chardonnay tropical", "Sauvignon Blanc aromático"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región neozelandesa de la isla Norte, subtropical, especializada en blancos aromáticos.",
+    intro: "Gisborne es la región más tropical de Nueva Zelanda. Sus viñedos producen Chardonnay con cuerpo y fruta tropical, Sauvignon Blanc muy expresivo.",
+    cartaRole: ["valor", "diferencial"],
+    cartaReading: "Gisborne Chardonnay es alternativa tropical a Marlborough.",
+    whenToHighlight: "Como blanco fresco tropical, como alternativa a Marlborough.",
+    clientProfile: "Cliente que busca blanco aromático de carácter.",
+    sellByStrategy: "Vende por variedad (Chardonnay, Sauvignon Blanc).",
+    competingRegions: ["Marlborough", "Hawkes Bay"],
+    commonMistakes: ["Pensar que todos los Sauvignon Blanc neozelandeses son Marlborough"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida tropical"],
+    faqs: [
+      { q: "¿Gisborne es tropical?", a: "Sí. Es la región más cálida y tropical de Nueva Zelanda, lo que le da más cuerpo a los blancos." }
+    ],
+    seo: { title: "Gisborne: Blancos tropicales neozelandeses", description: "Gisborne: Chardonnay y Sauvignon Blanc tropical." }
+  },
+  {
+    id: "canterbury",
+    slug: "canterbury",
+    name: "Canterbury",
+    country: "nueva-zelanda",
+    denominationType: "GI",
+    bodegasCount: 40,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Pinot Noir", "Riesling", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir fresco", "Riesling mineral", "Sauvignon Blanc seco"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región neozelandesa de la isla Sur, clima fresco, con Pinot Noir y Riesling de carácter mineral.",
+    intro: "Canterbury en la isla Sur es clima fresco continental. Sus viñedos producen Pinot Noir seco, Riesling mineral, vinos con gran definición.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Canterbury comunica terroir fresco mineral neozelandés.",
+    whenToHighlight: "Como Riesling neozelandés, como Pinot Noir alternativo.",
+    clientProfile: "Apreciador de vinos frescos y minerales.",
+    sellByStrategy: "Vende por variedad (Pinot Noir, Riesling) y por terroir mineral.",
+    competingRegions: ["Central Otago", "Marlborough"],
+    commonMistakes: ["No explorar: región menos conocida pero excelente"],
+    pairings: ["Pescado blanco", "Mariscos", "Carnes blancas"],
+    faqs: [
+      { q: "¿Canterbury produce buen Riesling?", a: "Sí. Su clima fresco permite Riesling seco con mineralidad comparable a Alsacia." }
+    ],
+    seo: { title: "Canterbury: Vinos minerales neozelandeses", description: "Canterbury: Pinot Noir y Riesling fresco de Nueva Zelanda." }
+  },
+  {
+    id: "nelson",
+    slug: "nelson",
+    name: "Nelson",
+    country: "nueva-zelanda",
+    denominationType: "GI",
+    bodegasCount: 35,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Sauvignon Blanc", "Pinot Noir", "Chardonnay", "Riesling"],
+    styles: ["Sauvignon Blanc herbáceo", "Pinot Noir elegante", "Riesling fresco"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Región pequeña neozelandesa de clima fresco con potencial en vinos frescos.",
+    intro: "Nelson es región pequeña pero prometedora en la isla Sur. Clima fresco, vientos persistentes. Produce Sauvignon Blanc expresivo y Pinot Noir elegante.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Nelson comunica descubrimiento y terroir único neozelandés.",
+    whenToHighlight: "Como descubrimiento neozelandés, como vino diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias.",
+    sellByStrategy: "Vende por narrativa de región pequeña emergente.",
+    competingRegions: ["Marlborough", "Central Otago"],
+    commonMistakes: ["Ignorar: región pequeña pero con gran potencial"],
+    pairings: ["Pescado blanco", "Mariscos", "Vegetales"],
+    faqs: [
+      { q: "¿Nelson es tan bueno como Marlborough?", a: "Distinto pero de calidad. Menos conocido pero más fresco en algunos casos." }
+    ],
+    seo: { title: "Nelson: Descubrimiento neozelandés", description: "Nelson: Sauvignon Blanc y Pinot Noir de Nueva Zelanda." }
+  },
+  {
+    id: "waipara",
+    slug: "waipara",
+    name: "Waipara",
+    country: "nueva-zelanda",
+    denominationType: "GI",
+    bodegasCount: 50,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Riesling", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir de suelo calcáreo", "Riesling mineral", "Chardonnay cremoso"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región neozelandesa de la isla Sur, con suelo calcáreo especial que produce vinos minerales.",
+    intro: "Waipara está en la isla Sur sobre suelo calcáreo. Este terroir especial produce Pinot Noir con mineralidad, Riesling fresco y complejo.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Waipara Pinot Noir comunica terroir calcáreo único.",
+    whenToHighlight: "Como Pinot Noir diferencial, como vino mineral.",
+    clientProfile: "Apreciador de vinos con terroir mineral.",
+    sellByStrategy: "Vende por variedad (Pinot Noir) y por narrativa calcárea.",
+    competingRegions: ["Canterbury", "Central Otago"],
+    commonMistakes: ["No explorar: región pequeña pero con carácter"],
+    pairings: ["Carnes rojas", "Pollo", "Hongos"],
+    faqs: [
+      { q: "¿Qué hace especial a Waipara?", a: "Su suelo calcáreo confiere mineralidad particular a los vinos, especialmente Pinot Noir." }
+    ],
+    seo: { title: "Waipara: Pinot Noir mineral neozelandés", description: "Waipara: Pinot Noir y Riesling de suelo calcáreo." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // AUSTRIA - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "kamptal",
+    slug: "kamptal",
+    name: "Kamptal",
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 120,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Grüner Veltliner", "Riesling", "Zweigelt"],
+    styles: ["Grüner Veltliner mineral", "Riesling fresco", "Zweigelt elegante"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Región austriaca especializada en Grüner Veltliner de clase mundial con mineralidad y estructura.",
+    intro: "Kamptal es junto a Wachau la región estrella austriaca. Sus viñedos sobre suelo loess y terraza producen Grüner Veltliner de una mineralidad, estructura y elegancia incomparables.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Kamptal Grüner Veltliner es el blanco austriaco premium por excelencia.",
+    whenToHighlight: "Como Grüner Veltliner premium, como blanco austriaco en cartas internacionales.",
+    clientProfile: "Apreciador de blancos secos de calidad, coleccionista.",
+    sellByStrategy: "Vende por variedad (Grüner Veltliner) y por bodega histórica.",
+    competingRegions: ["Alsacia", "Loire Blanco"],
+    commonMistakes: ["Confundir Grüner Veltliner barato con Kamptal premium"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida asiática ligera"],
+    faqs: [
+      { q: "¿Kamptal vs Wachau: cuál es mejor?", a: "Ambas son premium. Wachau es más icónica, Kamptal es más variado y menos conocido pero excelente." }
+    ],
+    seo: { title: "Kamptal: Grüner Veltliner austriaco premium", description: "Kamptal: Grüner Veltliner de clase mundial." }
+  },
+  {
+    id: "kremstal",
+    slug: "kremstal",
+    name: "Kremstal",
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 90,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Grüner Veltliner", "Riesling", "Zweigelt"],
+    styles: ["Grüner Veltliner fresco", "Riesling mineral", "Zweigelt estructurado"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región austriaca cercana a Wachau, produciendo vinos similares pero con identidad propia.",
+    intro: "Kremstal está junto a Wachau en el Danubio. Sus viñedos producen Grüner Veltliner frescos, Riesling minerales, con carácter austriaco puro.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Kremstal comunica terroir danubeño austriaco con excelente relación calidad-precio.",
+    whenToHighlight: "Como alternativa a Wachau más accesible, como Grüner Veltliner de calidad.",
+    clientProfile: "Cliente que busca blanco austriaco de buena relación precio-calidad.",
+    sellByStrategy: "Vende por variedad y por región.",
+    competingRegions: ["Wachau", "Kamptal"],
+    commonMistakes: ["Confundir con Wachau: distinto pero cercano"],
+    pairings: ["Pescado blanco", "Mariscos", "Vegetales"],
+    faqs: [
+      { q: "¿Cuál es la diferencia entre Kremstal y Wachau?", a: "Cercanas en el Danubio pero Wachau es más icónica y cara. Kremstal ofrece mejor relación calidad-precio." }
+    ],
+    seo: { title: "Kremstal: Blanco austriaco accesible", description: "Kremstal: Grüner Veltliner y Riesling danubeño." }
+  },
+  {
+    id: "burgenland",
+    slug: "burgenland",
+    name: "Burgenland/Neusiedlersee",
+    altNames: ["Neusiedlersee", "Burgenland"],
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 150,
+    wineTypes: ["tinto", "blanco", "dulce"],
+    mainGrapes: ["Zweigelt", "Blaufränkisch", "Sauvignon Blanc", "Welschriesling"],
+    styles: ["Zweigelt estructurado", "Blaufränkisch potente", "Sauvignon Blanc fresco", "Vino dulce botrytis"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región austriaca de tintos y dulces, alrededor del lago Neusiedl, con clima cálido y especialidad en vinos complejos.",
+    intro: "Burgenland alrededor del lago Neusiedl es la región austriaca más cálida. Sus viñedos producen Zweigelt y Blaufränkisch estructurados, Sauvignon Blanc expresivo, y vinos dulces de botrytis excepcionales.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Burgenland en carta comunica tintos austriacos de carácter y vinos dulces nobles.",
+    whenToHighlight: "Como tinto austriaco, como vino dulce alternativo a Tokaj.",
+    clientProfile: "Apreciador de tintos austriacos, cliente que busca vino dulce distinto.",
+    sellByStrategy: "Vende por variedad (Zweigelt, Blaufränkisch) y por narrativa de botrytis.",
+    competingRegions: ["Tokaj", "Alsacia"],
+    commonMistakes: ["Ignorar los tintos y los dulces de Burgenland"],
+    pairings: ["Carnes rojas", "Caza", "Postres con miel"],
+    faqs: [
+      { q: "¿Burgenland produce solo vino dulce?", a: "No. También produce excelentes tintos Zweigelt y Blaufränkisch. Los dulces son especialidad pero no único." }
+    ],
+    seo: { title: "Burgenland: Tintos y dulces austriacos", description: "Burgenland: Zweigelt, vino dulce y Sauvignon Blanc austriaco." }
+  },
+  {
+    id: "thermenregion",
+    slug: "thermenregion",
+    name: "Thermenregion",
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 70,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Zweigelt", "Blaufränkisch", "Zierfandler", "Rotgipfler"],
+    styles: ["Zweigelt fresco", "Blaufränkisch estructurado", "Blanco mineral"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Pequeña región austriaca con bodegas especializadas en tintos frescos y blancos únicos.",
+    intro: "Thermenregion está al sur de Viena. Sus viñedos producen Zweigelt fresco, Blaufränkisch estructurado y blancos únicos.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Thermenregion comunica terroir austriaco emergente.",
+    whenToHighlight: "Como descubrimiento austriaco, como tinto fresco.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias.",
+    sellByStrategy: "Vende por narrativa de región pequeña y por variedad.",
+    competingRegions: ["Burgenland", "Kamptal"],
+    commonMistakes: ["Ignorar: región pequeña pero con potencial"],
+    pairings: ["Carnes blancas", "Pollo", "Pescado"],
+    faqs: [
+      { q: "¿Thermenregion es importante?", a: "Pequeña pero emergente. Los Zweigelt son frescos y accesibles." }
+    ],
+    seo: { title: "Thermenregion: Tintos austriacos frescos", description: "Thermenregion: Zweigelt y blanco austriaco." }
+  },
+  {
+    id: "sudsteiermark",
+    slug: "sudsteiermark",
+    name: "Südsteiermark",
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 80,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Sauvignon Blanc", "Chardonnay", "Traminer", "Zweigelt"],
+    styles: ["Sauvignon Blanc herbáceo", "Chardonnay cremoso", "Traminer aromático"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región austriaca al sur con especialidad en blancos aromáticos frescos.",
+    intro: "Südsteiermark al sureste de Austria produce blancos aromáticos: Sauvignon Blanc herbáceo, Chardonnay cremoso, Traminer expresivo. Vinos de carácter joven y vibrante.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Südsteiermark Sauvignon Blanc comunica blanco fresco austriaco con carácter.",
+    whenToHighlight: "Como blanco fresco austriaco, como Sauvignon Blanc diferencial.",
+    clientProfile: "Cliente que busca blanco aromático fresco.",
+    sellByStrategy: "Vende por variedad (Sauvignon Blanc, Chardonnay).",
+    competingRegions: ["Loire Blanco", "Estiria"],
+    commonMistakes: ["No explorar blancos austriacos del sur"],
+    pairings: ["Mariscos", "Pescado blanco", "Vegetales"],
+    faqs: [
+      { q: "¿Südsteiermark produce buen Sauvignon Blanc?", a: "Sí. Es una de las zonas austriacas mejores para Sauvignon Blanc fresco y herbáceo." }
+    ],
+    seo: { title: "Südsteiermark: Blancos austriacos frescos", description: "Südsteiermark: Sauvignon Blanc y Chardonnay del sur austriaco." }
+  },
+  {
+    id: "weinviertel",
+    slug: "weinviertel",
+    name: "Weinviertel",
+    country: "austria",
+    denominationType: "DAC",
+    bodegasCount: 250,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Grüner Veltliner", "Riesling", "Zweigelt"],
+    styles: ["Grüner Veltliner fresco", "Riesling mineral", "Zweigelt ligero"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región austriaca más grande al norte, especializada en Grüner Veltliner de valor y calidad.",
+    intro: "Weinviertel es la región vitivinícola más grande de Austria. Sus viñedos producen Grüner Veltliner fresco, accesible, de excelente relación calidad-precio, y Riesling mineral.",
+    cartaRole: ["segura", "valor"],
+    cartaReading: "Weinviertel Grüner Veltliner es la opción segura por excelencia para blanco austriaco asequible.",
+    whenToHighlight: "Como blanco austriaco accesible, como vino diario de calidad.",
+    clientProfile: "Cliente que busca blanco de buena relación calidad-precio.",
+    sellByStrategy: "Vende principalmente por Grüner Veltliner y por accesibilidad de precio.",
+    competingRegions: ["Loire Blanco", "Pinot Grigio"],
+    commonMistakes: ["Asumir que es básico: hay Grüner Veltliner excelente"],
+    pairings: ["Pescado blanco", "Pollo", "Queso ligero"],
+    faqs: [
+      { q: "¿Weinviertel es tan bueno como Kamptal?", a: "Distintos. Weinviertel es mayor, más accesible, fresco. Kamptal es más mineral y premium." }
+    ],
+    seo: { title: "Weinviertel: Grüner Veltliner austriaco accesible", description: "Weinviertel: blanco fresco austriaco de calidad." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // SOUTH AFRICA - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "franschhoek",
+    slug: "franschhoek",
+    name: "Franschhoek",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 85,
+    wineTypes: ["tinto", "blanco", "espumoso"],
+    mainGrapes: ["Cabernet Sauvignon", "Chardonnay", "Sauvignon Blanc", "Pinot Noir"],
+    styles: ["Cabernet estructurado", "Chardonnay cremoso", "Espumoso método tradicional"],
+    prestige: "premium",
+    clientRecognition: "alto",
+    description: "Región sudafricana de herencia francesa, especializada en tintos elegantes y vinos espumosos.",
+    intro: "Franschhoek es el corazón vinícola de Sudáfrica. Sus viñedos producen Cabernet Sauvignon elegante, Chardonnay cremoso y espumosos que compiten con Champagne. El terroir y la cultura francesa confieren presencia.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Franschhoek en carta comunica elegancia sudafricana con herencia francesa.",
+    whenToHighlight: "Como tinto sudafricano premium, como espumoso alternativo a Champagne.",
+    clientProfile: "Viajero a Sudáfrica, coleccionista, cliente que aprecia elegancia.",
+    sellByStrategy: "Vende por región, por bodega histórica y por espumosos.",
+    competingRegions: ["Burdeos", "Champagne"],
+    commonMistakes: ["Asumir que Franschhoek es parte de Stellenbosch: es región distinta"],
+    pairings: ["Carnes rojas elegantes", "Pollo cremoso", "Quesos variados"],
+    faqs: [
+      { q: "¿Franschhoek es la mejor región de Sudáfrica?", a: "Una de las mejores. Tiene herencia francesa, terroir único y grandes viticultores." }
+    ],
+    seo: { title: "Franschhoek: Elegancia sudafricana", description: "Franschhoek: Cabernet, Chardonnay y espumosos sudafricanos premium." }
+  },
+  {
+    id: "paarl",
+    slug: "paarl",
+    name: "Paarl",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 70,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Shiraz", "Chardonnay", "Chenin Blanc"],
+    styles: ["Cabernet estructurado", "Shiraz potente", "Chardonnay variado"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región sudafricana grande de tintos y blancos con carácter diverso.",
+    intro: "Paarl es región grande con viticultores variados. Sus viñedos producen Cabernet Sauvignon estructurado, Shiraz potente y blancos de carácter. Terroir cálido, vinos de concentración.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Paarl comunica Sudáfrica de tradición y variedad.",
+    whenToHighlight: "Como tinto sudafricano de carácter, como alternativa a Stellenbosch.",
+    clientProfile: "Cliente que busca tinto sudafricano de carácter.",
+    sellByStrategy: "Vende por variedad (Cabernet, Shiraz) y por bodega.",
+    competingRegions: ["Stellenbosch", "Franschhoek"],
+    commonMistakes: ["Ignorar Paarl: tiene bodegas excelentes"],
+    pairings: ["Carnes rojas asadas", "Barbecue", "Quesos duros"],
+    faqs: [
+      { q: "¿Paarl es tan bueno como Stellenbosch?", a: "Distinto. Paarl es más cálido, más Shiraz. Stellenbosch es más Cabernet elegante." }
+    ],
+    seo: { title: "Paarl: Tintos sudafricanos de carácter", description: "Paarl: Cabernet, Shiraz y vinos variados sudafricanos." }
+  },
+  {
+    id: "elgin",
+    slug: "elgin",
+    name: "Elgin",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 35,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Sauvignon Blanc", "Chardonnay", "Pinot Noir"],
+    styles: ["Sauvignon Blanc herbáceo", "Chardonnay mineral", "Pinot Noir elegante"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región sudafricana de clima fresco, especializada en blancos frescos y Pinot Noir.",
+    intro: "Elgin está en altitud, clima fresco. Sus viñedos producen Sauvignon Blanc herbáceo, Chardonnay mineral, Pinot Noir elegante. Es la región sudafricana más fresca.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Elgin comunica blanco fresco sudafricano con carácter.",
+    whenToHighlight: "Como Sauvignon Blanc sudafricano, como Pinot Noir alternativo.",
+    clientProfile: "Apreciador de blancos frescos, cliente aventurero.",
+    sellByStrategy: "Vende por variedad (Sauvignon Blanc, Pinot Noir) y por terroir fresco.",
+    competingRegions: ["Marlborough", "Loire"],
+    commonMistakes: ["No explorar: región fresca diferencial"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida ligera"],
+    faqs: [
+      { q: "¿Elgin es fresco?", a: "Sí. Es la región más fría de Sudáfrica, permitiendo blancos frescos y Pinot Noir con elegancia." }
+    ],
+    seo: { title: "Elgin: Blancos frescos sudafricanos", description: "Elgin: Sauvignon Blanc, Chardonnay y Pinot Noir fresco." }
+  },
+  {
+    id: "hemel-en-aarde",
+    slug: "hemel-en-aarde",
+    name: "Hemel-en-Aarde",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 30,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir fresco", "Chardonnay cremoso", "Sauvignon Blanc mineral"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Pequeña región sudafricana costera de emergencia, especializada en Pinot Noir y Chardonnay elegantes.",
+    intro: "Hemel-en-Aarde es pequeña, costera, con influencia marina. Sus viñedos producen Pinot Noir fresco, Chardonnay elegante. Nombre holandés que significa 'Cielo y Tierra'.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Hemel-en-Aarde comunica descubrimiento sudafricano costero.",
+    whenToHighlight: "Como descubrimiento sudafricano, como Pinot Noir diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias.",
+    sellByStrategy: "Vende por narrativa de región costera pequeña.",
+    competingRegions: ["Elgin", "Central Otago"],
+    commonMistakes: ["Ignorar: región pequeña pero muy promisoria"],
+    pairings: ["Mariscos", "Pescado blanco", "Setas"],
+    faqs: [
+      { q: "¿Hemel-en-Aarde es importante?", a: "Pequeña pero emergente y excelente. Sus Pinot Noir son frescos y de gran carácter." }
+    ],
+    seo: { title: "Hemel-en-Aarde: Pinot Noir sudafricano costero", description: "Hemel-en-Aarde: Pinot Noir fresco de Sudáfrica." }
+  },
+  {
+    id: "constantia",
+    slug: "constantia",
+    name: "Constantia",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 20,
+    wineTypes: ["tinto", "blanco", "dulce"],
+    mainGrapes: ["Cabernet Sauvignon", "Sauvignon Blanc", "Muscat"],
+    styles: ["Cabernet elegante", "Sauvignon Blanc fresco", "Vino dulce histórico"],
+    prestige: "icónico",
+    clientRecognition: "medio",
+    description: "Región histórica sudafricana, cuna del vino sudafricano, especializada en vinos de elegancia y tradición.",
+    intro: "Constantia es la región vinícola más antigua de Sudáfrica, con historia que se remonta al siglo XVII. Sus viñedos producen Cabernet Sauvignon elegante, Sauvignon Blanc fresco y vinos dulces históricos.",
+    cartaRole: ["prestigio", "identitaria"],
+    cartaReading: "Constantia en carta comunica historia y presencia sudafricana.",
+    whenToHighlight: "Como vino histórico sudafricano, como experiencia cultural.",
+    clientProfile: "Coleccionista, cliente interesado en historia del vino.",
+    sellByStrategy: "Vende por narrativa histórica y por bodega tradicional.",
+    competingRegions: ["Stellenbosch", "Franschhoek"],
+    commonMistakes: ["Ignorar: región histórica con bodegas excelentes"],
+    pairings: ["Carnes rojas elegantes", "Pescado blanco", "Postres"],
+    faqs: [
+      { q: "¿Constantia es importante históricamente?", a: "Sí. Es la región vinícola más antigua de Sudáfrica, con viticultores de siglos de tradición." }
+    ],
+    seo: { title: "Constantia: Historia sudafricana del vino", description: "Constantia: región histórica sudafricana." }
+  },
+  {
+    id: "robertson",
+    slug: "robertson",
+    name: "Robertson",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 50,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Chardonnay", "Chenin Blanc", "Shiraz", "Cabernet Sauvignon"],
+    styles: ["Chardonnay cremoso", "Chenin Blanc fresco", "Shiraz accesible"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región sudafricana interior con especialidad en blancos accesibles y tintos de carácter.",
+    intro: "Robertson es región interior, cálida, con suelo calizo. Sus viñedos producen Chardonnay cremoso, Chenin Blanc fresco, Shiraz accesible con buena relación calidad-precio.",
+    cartaRole: ["valor", "diferencial"],
+    cartaReading: "Robertson comunica vino sudafricano de buena relación calidad-precio.",
+    whenToHighlight: "Como blanco sudafricano accesible, como vino de valor.",
+    clientProfile: "Cliente que busca relación calidad-precio.",
+    sellByStrategy: "Vende por accesibilidad de precio y por variedad.",
+    competingRegions: ["Paarl", "Swartland"],
+    commonMistakes: ["Asumir que es básico: hay excelentes vinos"],
+    pairings: ["Pollo", "Comida ligera", "Queso"],
+    faqs: [
+      { q: "¿Robertson es tan bueno como Stellenbosch?", a: "Distinto perfil. Robertson es más accesible, fresco. Buena relación calidad-precio." }
+    ],
+    seo: { title: "Robertson: Vinos sudafricanos accesibles", description: "Robertson: Chardonnay y blancos sudafricanos de valor." }
+  },
+  {
+    id: "walker-bay",
+    slug: "walker-bay",
+    name: "Walker Bay",
+    country: "sudafrica",
+    denominationType: "GI",
+    bodegasCount: 40,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Sauvignon Blanc"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Sauvignon Blanc mineral"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región sudafricana costera con clima fresco, especializada en Pinot Noir y blancos elegantes.",
+    intro: "Walker Bay es costera, influenciada por corriente marina fría. Sus viñedos producen Pinot Noir elegante con carácter, Chardonnay cremoso, Sauvignon Blanc mineral.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Walker Bay Pinot Noir comunica elegancia sudafricana costera.",
+    whenToHighlight: "Como Pinot Noir sudafricano, como alternativa elegante.",
+    clientProfile: "Apreciador de Pinot Noir, cliente que busca elegancia.",
+    sellByStrategy: "Vende por variedad (Pinot Noir, Chardonnay) y por terroir marino.",
+    competingRegions: ["Elgin", "Hemel-en-Aarde"],
+    commonMistakes: ["No explorar: región costera diferencial"],
+    pairings: ["Mariscos", "Pescado blanco", "Carnes blancas"],
+    faqs: [
+      { q: "¿Walker Bay produce buen Pinot Noir?", a: "Sí. Su clima fresco marino permite Pinot Noir elegante y definido." }
+    ],
+    seo: { title: "Walker Bay: Pinot Noir sudafricano elegante", description: "Walker Bay: Pinot Noir y Chardonnay costera sudafricana." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // GREECE - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "naoussa",
+    slug: "naoussa",
+    name: "Naoussa",
+    country: "grecia",
+    denominationType: "PDO",
+    bodegasCount: 45,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Xinomavro"],
+    styles: ["Tinto estructurado de montaña", "Xinomavro envejecido"],
+    prestige: "premium",
+    clientRecognition: "medio",
+    description: "Región griega de montaña especializada en Xinomavro estructurado y envejecido.",
+    intro: "Naoussa en Macedonia es región de montaña. Sus viñedos de Xinomavro producen tintos estructurados, secos, con taninos firmes. Mejora con años. Es el Nebbiolo griego.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Naoussa Xinomavro comunica tinto griego de estructura y clase.",
+    whenToHighlight: "Como tinto griego premium, como Xinomavro diferencial.",
+    clientProfile: "Coleccionista griego, cliente que aprecia estructura.",
+    sellByStrategy: "Vende por variedad (Xinomavro) y por edad.",
+    competingRegions: ["Nebbiolo", "Barolo"],
+    commonMistakes: ["No explorar: Xinomavro es muy bueno envejecido"],
+    pairings: ["Carnes rojas asadas", "Caza", "Quesos duros"],
+    faqs: [
+      { q: "¿Xinomavro es comparable a Nebbiolo?", a: "Sí. Ambos producen tintos estructurados, secos, con taninos que mejoran con envejecimiento." }
+    ],
+    seo: { title: "Naoussa: Xinomavro griego premium", description: "Naoussa: tinto estructurado griego de montaña." }
+  },
+  {
+    id: "nemea",
+    slug: "nemea",
+    name: "Nemea",
+    country: "grecia",
+    denominationType: "PDO",
+    bodegasCount: 55,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Agiorgitiko"],
+    styles: ["Tinto fresco de Agiorgitiko", "Agiorgitiko envejecido"],
+    prestige: "reconocido",
+    clientRecognition: "alto",
+    description: "Región griega de tintos rojos frescos producidos con uva Agiorgitiko.",
+    intro: "Nemea es región griega central. Sus viñedos de Agiorgitiko producen tintos frescos, con cuerpo, fruta roja concentrada, excelente estructura. Es el tinto rojo griego clásico.",
+    cartaRole: ["segura", "valor"],
+    cartaReading: "Nemea Agiorgitiko es el tinto griego más reconocido y seguro.",
+    whenToHighlight: "Como tinto griego accesible, como vino rojo diario de calidad.",
+    clientProfile: "Cliente que busca tinto rojo griego con carácter.",
+    sellByStrategy: "Vende por variedad (Agiorgitiko) y por región.",
+    competingRegions: ["Burdeos tinto fresco", "Priorat"],
+    commonMistakes: ["Confundir con otros tintos griegos: Agiorgitiko es distinto"],
+    pairings: ["Carnes rojas", "Pollo especiado", "Pasta tomate"],
+    faqs: [
+      { q: "¿Nemea Agiorgitiko es bueno?", a: "Sí. Es el tinto rojo griego más importante, con fruta concentrada y buena estructura." }
+    ],
+    seo: { title: "Nemea: Agiorgitiko griego rojo", description: "Nemea: tinto fresco griego de Agiorgitiko." }
+  },
+  {
+    id: "creta",
+    slug: "creta",
+    name: "Creta",
+    country: "grecia",
+    denominationType: "PDO",
+    bodegasCount: 35,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Kotsifali", "Mandilari", "Vidiano", "Malvasia"],
+    styles: ["Tinto mediterráneo", "Blanco aromático", "Vino dulce"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Región insular griega con vinos únicos de variedades locales.",
+    intro: "Creta es isla griega con viticultoria centenaria. Sus viñedos producen tintos de variedades locales (Kotsifali, Mandilari), blancos únicos (Vidiano) y vinos dulces históricos.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Creta en carta comunica rareza insular griega.",
+    whenToHighlight: "Como descubrimiento griego, como vino diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de rareza.",
+    sellByStrategy: "Vende por narrativa de isla y por variedades locales.",
+    competingRegions: ["Santorini"],
+    commonMistakes: ["Ignorar: Creta tiene identidad vinícola propia"],
+    pairings: ["Mariscos", "Pescado", "Comida mediterránea"],
+    faqs: [
+      { q: "¿Creta produce buenos vinos?", a: "Sí. Sus variedades locales producen vinos únicos poco conocidos fuera de la isla." }
+    ],
+    seo: { title: "Creta: Vinos griegos únicos", description: "Creta: vinos únicos de isla griega." }
+  },
+  {
+    id: "macedonia",
+    slug: "macedonia",
+    name: "Macedonia",
+    country: "grecia",
+    denominationType: "PDO",
+    bodegasCount: 50,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Xinomavro", "Negoska", "Sauvignon Blanc", "Chardonnay"],
+    styles: ["Xinomavro estructurado", "Blanco mineral", "Tinto regional"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región griega de norte con vinos diversos de montaña y llanura.",
+    intro: "Macedonia griega es región grande con subregiones diversas. Produce Xinomavro estructurado de montaña, blancos minerales, tintos regionales. Gran diversidad.",
+    cartaRole: ["diferencial", "valor"],
+    cartaReading: "Macedonia comunica terroir griego de montaña y variedad.",
+    whenToHighlight: "Como tinto griego regional, como Xinomavro alternativo.",
+    clientProfile: "Cliente que busca tinto griego con carácter.",
+    sellByStrategy: "Vende por variedad y por región.",
+    competingRegions: ["Naoussa", "Nemea"],
+    commonMistakes: ["Confundir con Naoussa: Macedonia es más amplia"],
+    pairings: ["Carnes rojas", "Pollo", "Quesos variados"],
+    faqs: [
+      { q: "¿Macedonia es región importante?", a: "Sí. Es región grande griega del norte con viticultores y diversidad." }
+    ],
+    seo: { title: "Macedonia: Vinos griegos de montaña", description: "Macedonia: Xinomavro y vinos griegos del norte." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // HUNGARY - Additional Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "eger",
+    slug: "eger",
+    name: "Eger (Egri Bikavér)",
+    altNames: ["Egri Bikavér", "Eger"],
+    country: "hungria",
+    denominationType: "PDO",
+    bodegasCount: 75,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Kékfrankos", "Cabernet Sauvignon", "Merlot", "Kékoportó"],
+    styles: ["Tinto estructurado Egri Bikavér", "Egri Bikavér envejecido"],
+    prestige: "icónico",
+    clientRecognition: "medio",
+    description: "Región húngara de tintos legendarios, hogar del Egri Bikavér (Sangre de Toro).",
+    intro: "Eger es región histórica húngara. Su tinto legendario Egri Bikavér (Sangre de Toro) combina variedades locales con estructura, carácter histórico y misterio. Es uno de los grandes tintos de Europa del Este.",
+    cartaRole: ["prestigio", "identitaria", "descubrimiento"],
+    cartaReading: "Egri Bikavér en carta comunica tradición húngara y narrativa histórica.",
+    whenToHighlight: "Como tinto húngaro legendario, como experiencia histórica, como descubrimiento.",
+    clientProfile: "Coleccionista, cliente interesado en historia y rareza.",
+    sellByStrategy: "Vende por nombre legendario (Egri Bikavér), por bodega, por narrativa de 'Sangre de Toro'.",
+    competingRegions: ["Tokaj", "Rioja"],
+    commonMistakes: ["No explorar: Egri Bikavér tiene gran carácter y historia"],
+    pairings: ["Carnes rojas asadas", "Caza", "Quesos duros"],
+    faqs: [
+      { q: "¿Qué es Egri Bikavér?", a: "Literalmente 'Sangre de Toro'. Es mezcla de variedades húngaras que produce tinto legendario, envejecido en barril." },
+      { q: "¿Cuál es la historia de Egri Bikavér?", a: "Leyenda dice que los húngaros bebían Egri Bikavér antes de batallar contra los otomanos, dándoles valor." }
+    ],
+    seo: { title: "Eger (Egri Bikavér): Tinto legendario húngaro", description: "Eger: Egri Bikavér, tinto histórico y legendario de Hungría." }
+  },
+  {
+    id: "villany",
+    slug: "villany",
+    name: "Villány",
+    country: "hungria",
+    denominationType: "PDO",
+    bodegasCount: 65,
+    wineTypes: ["tinto"],
+    mainGrapes: ["Cabernet Sauvignon", "Merlot", "Kékfrankos", "Cabernet Franc"],
+    styles: ["Cabernet Sauvignon estructurado", "Mezclas tintas"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región húngara especializada en Cabernet Sauvignon y mezclas tintas de clase.",
+    intro: "Villány es región cálida del sur de Hungría. Sus viñedos producen Cabernet Sauvignon estructurado, Merlot potente, mezclas tintas que compiten a nivel europeo.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Villány Cabernet comunica tinto centroeuropeo de estructura y calidad.",
+    whenToHighlight: "Como tinto húngaro premium, como Cabernet alternativo.",
+    clientProfile: "Coleccionista, cliente que aprecia estructura.",
+    sellByStrategy: "Vende por variedad (Cabernet) y por bodega.",
+    competingRegions: ["Burdeos", "Rioja"],
+    commonMistakes: ["No explorar: Villány hace Cabernet excelente"],
+    pairings: ["Carnes rojas asadas", "Caza", "Quesos duros"],
+    faqs: [
+      { q: "¿Villány produce buen Cabernet?", a: "Excelente. Es la zona de Cabernet más importante de Hungría con vinos de clase mundial." }
+    ],
+    seo: { title: "Villány: Cabernet húngaro premium", description: "Villány: Cabernet Sauvignon de Hungría." }
+  },
+  {
+    id: "somlo",
+    slug: "somlo",
+    name: "Somló",
+    country: "hungria",
+    denominationType: "PDO",
+    bodegasCount: 40,
+    wineTypes: ["blanco"],
+    mainGrapes: ["Olaszriesling", "Furmint", "Hárslevelű"],
+    styles: ["Blanco mineral", "Blanco de montaña", "Blanco envejecido"],
+    prestige: "premium",
+    clientRecognition: "bajo-medio",
+    description: "Pequeña región húngara de montaña especializada en blancos minerales únicos.",
+    intro: "Somló es pequeña región de montaña con suelo volcánico. Sus viñedos producen blancos minerales únicos, secos, con estructura que mejoran con edad. Terroir extremo.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Somló comunica terroir volcánico mineral húngaro.",
+    whenToHighlight: "Como blanco mineral húngaro, como descubrimiento.",
+    clientProfile: "Apreciador de blancos minerales, coleccionista.",
+    sellByStrategy: "Vende por terroir (suelo volcánico) y por mineralidad.",
+    competingRegions: ["Alsacia", "Alemania"],
+    commonMistakes: ["Ignorar: región pequeña pero con identidad fuerte"],
+    pairings: ["Pescado blanco", "Mariscos", "Queso"],
+    faqs: [
+      { q: "¿Somló produce blanco bueno?", a: "Excelente. Su suelo volcánico confiere mineralidad única comparable a regiones clásicas europeas." }
+    ],
+    seo: { title: "Somló: Blanco mineral volcánico húngaro", description: "Somló: blanco mineral de montaña volcánica húngara." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // GEORGIA - Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "kakheti",
+    slug: "kakheti",
+    name: "Kakheti",
+    country: "georgia",
+    denominationType: "PDO",
+    bodegasCount: 150,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Saperavi", "Rkatsiteli", "Mtsvane"],
+    styles: ["Tinto Saperavi estructurado", "Blanco Rkatsiteli fresco", "Vino naranja"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región georgiana histórica, cuna de la vinicultura mundial, con vinos únicos de tradición milenaria.",
+    intro: "Kakheti en el este de Georgia es cuna de la vinicultura. Sus viñedos producen Saperavi tinto de carácter, Rkatsiteli blanco único. Georgia reclama 8000 años de viticultura aquí.",
+    cartaRole: ["identitaria", "descubrimiento", "diferencial"],
+    cartaReading: "Kakheti en carta comunica origen histórico mundial del vino.",
+    whenToHighlight: "Como descubrimiento georgiano, como experiencia histórica, como vino naranja.",
+    clientProfile: "Cliente aventurero, coleccionista de vinos raros, viajero.",
+    sellByStrategy: "Vende por narrativa histórica (cuna del vino), por variedad (Saperavi) y por método tradicional.",
+    competingRegions: ["Tokaj", "Oporto"],
+    commonMistakes: ["Ignorar Georgia: tiene vinicultura milenaria"],
+    pairings: ["Carnes especiadas", "Comida georgiana", "Quesos variados"],
+    faqs: [
+      { q: "¿Georgia es realmente la cuna del vino?", a: "Probablemente. Arqueología sugiere viticultura en Kakheti desde 6000 AC. Es región histórica vinícola." },
+      { q: "¿Qué es vino naranja?", a: "Blanco fermentado con hollejos (pieles). Georgia tiene tradición milenaria de este método." }
+    ],
+    seo: { title: "Kakheti: Cuna histórica del vino georgiano", description: "Kakheti: Saperavi, Rkatsiteli y vino naranja de Georgia." }
+  },
+  {
+    id: "kartli",
+    slug: "kartli",
+    name: "Kartli",
+    country: "georgia",
+    denominationType: "PDO",
+    bodegasCount: 80,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Saperavi", "Rkatsiteli", "Chinuri"],
+    styles: ["Tinto Saperavi fresco", "Blanco mineral", "Vino blanco envejecido"],
+    prestige: "reconocido",
+    clientRecognition: "bajo-medio",
+    description: "Región georgiana central con vinos variados de tradición histórica.",
+    intro: "Kartli en el centro de Georgia produce vinos diversos: Saperavi tinto, Rkatsiteli blanco, Chinuri blanco local. Región de montaña con carácter.",
+    cartaRole: ["diferencial", "descubrimiento"],
+    cartaReading: "Kartli comunica terroir montañoso georgiano.",
+    whenToHighlight: "Como vino georgiano alternativo a Kakheti.",
+    clientProfile: "Cliente aventurero, apreciador de vinos históricos.",
+    sellByStrategy: "Vende por variedad (Saperavi, Rkatsiteli) y por narrativa de montaña.",
+    competingRegions: ["Kakheti"],
+    commonMistakes: ["Confundir con Kakheti: son regiones distintas"],
+    pairings: ["Carnes especiadas", "Comida georgiana", "Quesos"],
+    faqs: [
+      { q: "¿Kartli es diferente a Kakheti?", a: "Sí. Kartli es región central de montaña con vinos más frescos y variados." }
+    ],
+    seo: { title: "Kartli: Vinos georgianos de montaña", description: "Kartli: Saperavi y Rkatsiteli de Georgia central." }
+  },
+  {
+    id: "imereti",
+    slug: "imereti",
+    name: "Imereti",
+    country: "georgia",
+    denominationType: "PDO",
+    bodegasCount: 60,
+    wineTypes: ["blanco"],
+    mainGrapes: ["Rkatsiteli", "Tsolikuri", "Krakhuna"],
+    styles: ["Blanco fresco de Rkatsiteli", "Blanco local aromático", "Vino blanco mineral"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región georgiana occidental especializada en blancos únicos de variedades locales.",
+    intro: "Imereti en el oeste de Georgia produce blancos: Rkatsiteli, Tsolikuri, Krakhuna. Vinos frescos, aromáticos, con identidad local fuerte. Menos conocida que Kakheti.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Imereti comunica blanco georgiano occidental raro.",
+    whenToHighlight: "Como blanco georgiano raro, como descubrimiento.",
+    clientProfile: "Cliente aventurero, coleccionista de rareza.",
+    sellByStrategy: "Vende por narrativa de región rara y variedades locales.",
+    competingRegions: ["Kakheti"],
+    commonMistakes: ["Ignorar: región pequeña con identidad propia"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida ligera"],
+    faqs: [
+      { q: "¿Imereti produce blancos buenos?", a: "Sí. Blancos frescos y aromáticos con variedades locales únicas." }
+    ],
+    seo: { title: "Imereti: Blanco georgiano raro", description: "Imereti: blancos únicos de Georgia occidental." }
+  },
+  // ═══════════════════════════════════════════════════════════════════════
+  // OTHER COUNTRIES - Key Regions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: "bekaa-valley",
+    slug: "bekaa-valley",
+    name: "Bekaa Valley",
+    altNames: ["Valle del Bekaa"],
+    country: "libano",
+    denominationType: "GI",
+    bodegasCount: 45,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Chardonnay", "Merlot", "Cinsault"],
+    styles: ["Cabernet estructurado", "Chardonnay cremoso", "Mezclas tintas"],
+    prestige: "premium",
+    clientRecognition: "medio",
+    description: "Región libanesa de montaña especializada en Cabernet Sauvignon y mezclas de clase mundial.",
+    intro: "Bekaa Valley es valle alto libanés con clima continental. Sus viñedos producen Cabernet Sauvignon estructurado, Chardonnay cremoso que compiten a nivel internacional. Viticultura a 1000m.",
+    cartaRole: ["premium", "diferencial"],
+    cartaReading: "Bekaa Valley Cabernet comunica Oriente Medio de clase vinícola.",
+    whenToHighlight: "Como Cabernet internacional premium, como descubrimiento de Oriente Medio.",
+    clientProfile: "Coleccionista, cliente aventurero.",
+    sellByStrategy: "Vende por bodega (Château Musar) y por narrativa de montaña oriental.",
+    competingRegions: ["Burdeos", "Napa Valley"],
+    commonMistakes: ["Pensar que es vino básico: es premium"],
+    pairings: ["Carnes rojas asadas", "Caza", "Quesos duros"],
+    faqs: [
+      { q: "¿Bekaa Valley produce vino de calidad?", a: "Sí. Algunos de los mejores vinos de Oriente Medio, especialmente Cabernet estructurado." }
+    ],
+    seo: { title: "Bekaa Valley: Cabernet libanés premium", description: "Bekaa Valley: vino de clase mundial de Líbano." }
+  },
+  {
+    id: "istria",
+    slug: "istria",
+    name: "Istria",
+    country: "croacia",
+    denominationType: "PDO",
+    bodegasCount: 50,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Malvazija", "Teran", "Istrian Cabernet"],
+    styles: ["Malvazija blanca mineral", "Teran tinto mineral", "Blanco mineral"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Región croata costera con vinos únicos de terroir mineral.",
+    intro: "Istria es península costera croata con terroir mineral único. Sus viñedos producen Malvazija blanca mineral, Teran tinto estructurado. Vinos Adriáticos.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Istria comunica Adriático y terroir mineral europeo raro.",
+    whenToHighlight: "Como descubrimiento croata, como vino mineral diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de minerales.",
+    sellByStrategy: "Vende por terroir mineral y por narrativa costera.",
+    competingRegions: ["Eslovenia"],
+    commonMistakes: ["Ignorar: región pequeña pero con carácter"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida mediterránea"],
+    faqs: [
+      { q: "¿Istria produce buenos vinos?", a: "Sí. Terroir mineral único confiere carácter especial a Malvazija y Teran." }
+    ],
+    seo: { title: "Istria: Vinos minerales croatas", description: "Istria: Malvazija y Teran del Adriático croata." }
+  },
+  {
+    id: "goriska-brda",
+    slug: "goriska-brda",
+    name: "Goriška Brda",
+    country: "eslovenia",
+    denominationType: "PDO",
+    bodegasCount: 40,
+    wineTypes: ["blanco", "tinto"],
+    mainGrapes: ["Rebula", "Vitovska", "Malvazija", "Merlot"],
+    styles: ["Rebula blanca mineral", "Vitovska aromática", "Merlot fresco"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región eslovena fronteriza con Italia especializada en blancos únicos.",
+    intro: "Goriška Brda es región fronteriza eslovena. Sus viñedos producen Rebula blanca mineral, Vitovska aromática. Vinos únicos con identidad balcánica.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Goriška Brda comunica blanco balcánico mineral raro.",
+    whenToHighlight: "Como descubrimiento esloveno, como blanco mineral.",
+    clientProfile: "Cliente aventurero, apreciador de rareza.",
+    sellByStrategy: "Vende por variedades locales y terroir mineral.",
+    competingRegions: ["Istria"],
+    commonMistakes: ["Ignorar: región pequeña pero emergente"],
+    pairings: ["Mariscos", "Pescado blanco", "Comida balcánica"],
+    faqs: [
+      { q: "¿Goriška Brda produce buenos vinos?", a: "Sí. Terroir mineral único con variedades locales Rebula y Vitovska." }
+    ],
+    seo: { title: "Goriška Brda: Blancos eslovenos minerales", description: "Goriška Brda: Rebula y Vitovska de Eslovenia." }
+  },
+  {
+    id: "dealu-mare",
+    slug: "dealu-mare",
+    name: "Dealu Mare",
+    country: "rumania",
+    denominationType: "PDO",
+    bodegasCount: 55,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Feteasca Neagra", "Cabernet Sauvignon", "Feteasca Alba", "Riesling"],
+    styles: ["Tinto Feteasca Neagra", "Cabernet estructurado", "Blanco mineral"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región rumana de montaña produciendo vinos de carácter con variedades locales.",
+    intro: "Dealu Mare es región de montaña rumana. Sus viñedos producen Feteasca Neagra tinto de carácter, Cabernet estructurado, blancos minerales. Viticultura balcánica auténtica.",
+    cartaRole: ["diferencial", "descubrimiento"],
+    cartaReading: "Dealu Mare comunica tinto balcánico de carácter.",
+    whenToHighlight: "Como tinto rumano, como Feteasca Neagra diferencial.",
+    clientProfile: "Cliente aventurero, apreciador de carácter.",
+    sellByStrategy: "Vende por variedades locales (Feteasca) y por terroir montañoso.",
+    competingRegions: ["Hungría", "Bulgaria"],
+    commonMistakes: ["Ignorar: región balcánica con carácter"],
+    pairings: ["Carnes rojas", "Carnes especiadas", "Quesos variados"],
+    faqs: [
+      { q: "¿Feteasca Neagra es buena?", a: "Sí. Variedad rumana que produce tinto de carácter, estructura, bien equilibrado." }
+    ],
+    seo: { title: "Dealu Mare: Tintos rumanos de carácter", description: "Dealu Mare: Feteasca Neagra y vinos de montaña rumana." }
+  },
+  {
+    id: "thracian-valley",
+    slug: "thracian-valley",
+    name: "Thracian Valley",
+    country: "bulgaria",
+    denominationType: "PDO",
+    bodegasCount: 60,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Mavrud", "Cabernet Sauvignon", "Chardonnay", "Misket"],
+    styles: ["Tinto Mavrud estructurado", "Cabernet potente", "Blanco aromático"],
+    prestige: "reconocido",
+    clientRecognition: "bajo-medio",
+    description: "Región búlgara histórica de tintos potentes y blancos aromáticos.",
+    intro: "Thracian Valley es región búlgara histórica. Sus viñedos producen Mavrud tinto estructurado, Cabernet potente, Misket blanco aromático. Viticultura tracia milenaria.",
+    cartaRole: ["valor", "diferencial"],
+    cartaReading: "Thracian Valley comunica tinto búlgaro de carácter y valor.",
+    whenToHighlight: "Como tinto búlgaro, como alternativa de valor.",
+    clientProfile: "Cliente que busca tinto de carácter a precio accesible.",
+    sellByStrategy: "Vende por variedad (Mavrud, Cabernet) y por precio.",
+    competingRegions: ["Rumania", "Hungría"],
+    commonMistakes: ["Asumir que es básico: hay Mavrud excelente"],
+    pairings: ["Carnes rojas", "Comida búlgara", "Quesos variados"],
+    faqs: [
+      { q: "¿Mavrud es bueno?", a: "Sí. Variedad búlgara que produce tinto estructurado, especiado, bien equilibrado." }
+    ],
+    seo: { title: "Thracian Valley: Tintos búlgaros", description: "Thracian Valley: Mavrud y vinos búlgaros históricos." }
+  },
+  {
+    id: "eastern-anatolia",
+    slug: "eastern-anatolia",
+    name: "Eastern Anatolia",
+    country: "turquia",
+    denominationType: "GI",
+    bodegasCount: 35,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Okuzgozu", "Bogazkere", "Narince", "Kalecik Karasi"],
+    styles: ["Tinto Okuzgozu estructurado", "Blanco Narince fresco", "Tinto mineral"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región turca de montaña con vinos únicos de variedades autóctonas.",
+    intro: "Anatolia Oriental es región de montaña turca. Sus viñedos producen Okuzgozu tinto de estructura, Narince blanco fresco. Viticultura turca auténtica milenaria.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Anatolia Oriental comunica Oriente Medio viejo desconocido.",
+    whenToHighlight: "Como descubrimiento turco, como vino histórico oriental.",
+    clientProfile: "Cliente muy aventurero, coleccionista de rareza.",
+    sellByStrategy: "Vende por narrativa histórica oriental y variedades autóctonas.",
+    competingRegions: ["Líbano", "Cáucaso"],
+    commonMistakes: ["Ignorar: región poco conocida pero con historia"],
+    pairings: ["Carnes especiadas", "Comida oriental", "Quesos variados"],
+    faqs: [
+      { q: "¿Turquía produce vino?", a: "Sí. Anatolia Oriental tiene viticultura milenaria con variedades únicas." }
+    ],
+    seo: { title: "Anatolia Oriental: Vinos turcos históricos", description: "Anatolia Oriental: vinos únicos de Turquía." }
+  },
+  {
+    id: "yamanashi",
+    slug: "yamanashi",
+    name: "Yamanashi",
+    country: "japon",
+    denominationType: "GI",
+    bodegasCount: 80,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Koshu", "Muscat Bailey A", "Chardonnay", "Cabernet Sauvignon"],
+    styles: ["Blanco Koshu mineral", "Tinto Bailey A fresco", "Chardonnay cremoso"],
+    prestige: "emergente",
+    clientRecognition: "bajo-medio",
+    description: "Región japonesa principal de vinos únicos con variedades locales.",
+    intro: "Yamanashi es región principal de vino japonés. Sus viñedos producen Koshu blanco mineral único, Muscat Bailey A tinto fresco, y vinos internacionales. Viticultura japonesa moderna.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Yamanashi comunica vino japonés moderno y diferencial.",
+    whenToHighlight: "Como descubrimiento japonés, como blanco mineral Koshu.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias asiáticas.",
+    sellByStrategy: "Vende por Koshu blanco mineral y narrativa japonesa.",
+    competingRegions: ["Nueva Zelanda", "Austria"],
+    commonMistakes: ["Ignorar: vino japonés emergente de calidad"],
+    pairings: ["Comida japonesa", "Sushi", "Pescado blanco"],
+    faqs: [
+      { q: "¿Yamanashi produce buen vino?", a: "Sí. Koshu blanco es mineral y único. Viticultura japonesa está creciendo rápido." }
+    ],
+    seo: { title: "Yamanashi: Vino japonés moderno", description: "Yamanashi: Koshu y vinos de Japón." }
+  },
+  {
+    id: "ningxia",
+    slug: "ningxia",
+    name: "Ningxia",
+    country: "china",
+    denominationType: "GI",
+    bodegasCount: 150,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Merlot", "Chardonnay"],
+    styles: ["Cabernet estructurado", "Merlot potente", "Chardonnay cremoso"],
+    prestige: "emergente",
+    clientRecognition: "bajo",
+    description: "Región vinícola china emergente con potencial importante en tintos estructurados.",
+    intro: "Ningxia es región emergente china con clima continental. Sus viñedos producen Cabernet Sauvignon y Merlot estructurados que están ganando reconocimiento internacional. Viticultura china moderna.",
+    cartaRole: ["descubrimiento", "diferencial"],
+    cartaReading: "Ningxia comunica vino chino emergente de calidad.",
+    whenToHighlight: "Como descubrimiento asiático, como tinto chino.",
+    clientProfile: "Cliente aventurero, apreciador de tendencias asiáticas.",
+    sellByStrategy: "Vende por narrativa china emergente y Cabernet estructurado.",
+    competingRegions: ["Australia", "Nueva Zelanda"],
+    commonMistakes: ["Ignorar: viticultura china está creciendo"],
+    pairings: ["Comida china", "Carnes especiadas", "Pato"],
+    faqs: [
+      { q: "¿Ningxia produce buen vino?", a: "Sí. Está emergiendo como región importante con Cabernet estructurado de calidad." }
+    ],
+    seo: { title: "Ningxia: Vino chino emergente", description: "Ningxia: Cabernet Sauvignon de China." }
+  },
+  {
+    id: "galilee",
+    slug: "galilee",
+    name: "Galilee",
+    country: "israel",
+    denominationType: "GI",
+    bodegasCount: 50,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Cabernet Sauvignon", "Chardonnay", "Sauvignon Blanc", "Merlot"],
+    styles: ["Cabernet estructurado", "Chardonnay cremoso", "Blanco mineral"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región israelí de montaña especializada en vinos de calidad internacional.",
+    intro: "Galilea es región montañosa israelí con clima templado. Sus viñedos producen Cabernet Sauvignon estructurado, Chardonnay cremoso que compiten internacionalmente. Viticultura israelí de calidad.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Galilea comunica vino israelí de clase internacional.",
+    whenToHighlight: "Como vino israelí premium, como Cabernet diferencial.",
+    clientProfile: "Coleccionista, cliente aventurero.",
+    sellByStrategy: "Vende por bodega israelí y por narrativa histórica.",
+    competingRegions: ["Bekaa Valley", "Nueva Zelanda"],
+    commonMistakes: ["No explorar: vino israelí tiene calidad"],
+    pairings: ["Carnes rojas", "Comida mediterránea", "Especiada"],
+    faqs: [
+      { q: "¿Israel produce buen vino?", a: "Sí. Galilea especialmente produce Cabernet y blancos de clase internacional." }
+    ],
+    seo: { title: "Galilea: Vino israelí premium", description: "Galilea: Cabernet Sauvignon de Israel." }
+  },
+  {
+    id: "okanagan-valley",
+    slug: "okanagan-valley",
+    name: "Okanagan Valley",
+    country: "canada",
+    denominationType: "GI",
+    bodegasCount: 100,
+    wineTypes: ["tinto", "blanco"],
+    mainGrapes: ["Pinot Noir", "Chardonnay", "Cabernet Sauvignon", "Riesling"],
+    styles: ["Pinot Noir elegante", "Chardonnay cremoso", "Riesling fresco", "Cabernet estructurado"],
+    prestige: "reconocido",
+    clientRecognition: "medio-alto",
+    description: "Región canadiense principal especializada en vinos de clase internacional.",
+    intro: "Okanagan Valley en Columbia Británica es región principal vinícola canadiense. Sus viñedos producen Pinot Noir elegante, Chardonnay cremoso, Riesling fresco que compiten con Borgoña. Viticultura canadiense de calidad.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Okanagan Valley Pinot Noir comunica vino canadiense de clase.",
+    whenToHighlight: "Como Pinot Noir canadiense, como blanco canadiense de calidad.",
+    clientProfile: "Coleccionista canadiense, cliente que aprecia elegancia.",
+    sellByStrategy: "Vende por variedad (Pinot Noir, Chardonnay) y por región.",
+    competingRegions: ["Borgoña", "Nueva Zelanda"],
+    commonMistakes: ["Ignorar: Okanagan produce vino excelente"],
+    pairings: ["Pollo cremoso", "Pescado blanco", "Setas", "Hongos"],
+    faqs: [
+      { q: "¿Okanagan Valley produce buen Pinot Noir?", a: "Excelente. Algunos de los mejores Pinot Noir de América del Norte después de Oregón." }
+    ],
+    seo: { title: "Okanagan Valley: Pinot Noir canadiense", description: "Okanagan Valley: vino de clase internacional canadiense." }
+  },
+  {
+    id: "niagara-peninsula",
+    slug: "niagara-peninsula",
+    name: "Niagara Peninsula",
+    country: "canada",
+    denominationType: "GI",
+    bodegasCount: 80,
+    wineTypes: ["blanco", "espumoso", "dulce"],
+    mainGrapes: ["Riesling", "Chardonnay", "Cabernet Franc", "Vidal"],
+    styles: ["Riesling mineral", "Chardonnay cremoso", "Cabernet Franc fresco", "Vino de hielo dulce"],
+    prestige: "reconocido",
+    clientRecognition: "medio",
+    description: "Región canadiense especializada en blancos frescos y vino de hielo (Icewine).",
+    intro: "Niágara Peninsula en Ontario es región canadiense especializada. Sus viñedos producen Riesling mineral, Chardonnay cremoso, y es famosa por Icewine (vino de hielo) dulce y complejo. Viticultura canadiense distintiva.",
+    cartaRole: ["diferencial", "premium"],
+    cartaReading: "Niagara comunica blanco canadiense mineral e Icewine único.",
+    whenToHighlight: "Como blanco canadiense fresco, como Icewine postre diferencial.",
+    clientProfile: "Apreciador de blancos frescos, cliente que busca dulces únicos.",
+    sellByStrategy: "Vende por Icewine (vino de hielo) como experiencia, por Riesling mineral.",
+    competingRegions: ["Alsacia Riesling", "Alemania"],
+    commonMistakes: ["Ignorar Icewine: es experiencia única canadiense"],
+    pairings: ["Pescado blanco", "Mariscos", "Postres"],
+    faqs: [
+      { q: "¿Qué es Icewine?", a: "Vino dulce elaborado con uvas congeladas en la vid. Canadá tiene clima y técnica únicos para esto." }
+    ],
+    seo: { title: "Niagara Peninsula: Blanco canadiense e Icewine", description: "Niagara Peninsula: Riesling y vino de hielo canadiense." }
+  },
 ];
 
 
