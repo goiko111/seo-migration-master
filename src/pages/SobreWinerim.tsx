@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom";
 
 const SobreWinerim = () => {
-  const { localePath } = useLanguage();
+  const { localePath, allLangPaths } = useLanguage();
 
   const faqs = [
     { q: "¿Quién está detrás de Winerim?", a: "Winerim nace de un equipo con experiencia directa en hostelería, sommellerie, gestión de F&B y tecnología aplicada. No es un proyecto de laboratorio: se construye desde dentro del sector, con personas que entienden los retos reales de gestionar vino en un restaurante, hotel o grupo." },
@@ -35,6 +35,7 @@ const SobreWinerim = () => {
         title="Sobre Winerim | Equipo, Misión y Valores"
         description="Conoce Winerim: el equipo detrás del software de carta de vinos con IA para restaurantes. Nuestra misión y trayectoria."
         url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
+        hreflang={allLangPaths("/sobre-nosotros")}
       />
       <DynamicSchemaMarkup
         id="sobre-nosotros"

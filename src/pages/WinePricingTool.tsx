@@ -221,7 +221,7 @@ const ticketAdjustments: Record<string, number> = { low: -0.2, mid: 0, high: 0.2
 const ticketLabels: Record<string, string> = { low: "< 25 €", mid: "25 – 45 €", high: "45 – 80 €", premium: "> 80 €" };
 
 const WinePricingTool = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const formatEur = (n: number) =>
@@ -283,7 +283,8 @@ const WinePricingTool = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-pricing-tool")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-pricing-tool")}`}
+        hreflang={allLangPaths("/wine-pricing-tool")} />
       <Navbar />
 
       {/* HERO */}

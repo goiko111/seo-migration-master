@@ -352,7 +352,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const CartaVinosRentable = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -372,7 +372,8 @@ const CartaVinosRentable = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article"
+        hreflang={allLangPaths("/blog/como-disenar-carta-vinos-rentable")} />
       <Navbar />
 
       {/* 1. HERO */}

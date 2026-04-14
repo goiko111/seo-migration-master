@@ -268,7 +268,7 @@ const linksI = i({
 });
 
 const WhatIsWinerim = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = {
     seo: seoI[lang], hero: heroI[lang], summary: summaryI[lang], facts: factsI[lang],
     ideal: idealI[lang], def: defI[lang], uc: useCasesI[lang], ut: userTypesI[lang],
@@ -305,7 +305,8 @@ const WhatIsWinerim = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo.title} description={t.seo.desc} url={t.seo.url} type="website" />
+      <SEOHead title={t.seo.title} description={t.seo.desc} url={t.seo.url} type="website"
+        hreflang={allLangPaths("/what-is-winerim")} />
       <Navbar />
 
       {/* 1. HERO */}

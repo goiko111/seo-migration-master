@@ -264,7 +264,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
 };
 
 const CalculadoraCompraInteligente = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const fmtEur = (n: number) =>
@@ -352,7 +352,8 @@ const CalculadoraCompraInteligente = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-compra-inteligente")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-compra-inteligente")}`}
+        hreflang={allLangPaths("/herramientas/calculadora-compra-inteligente")} />
       <Navbar />
 
       {/* HERO */}

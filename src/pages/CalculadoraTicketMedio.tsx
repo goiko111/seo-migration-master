@@ -617,7 +617,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
 
 /* ─── Component ─── */
 const CalculadoraTicketMedio = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   /* inputs */
@@ -771,7 +771,8 @@ const CalculadoraTicketMedio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-ticket-medio-vino")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-ticket-medio-vino")}`}
+        hreflang={allLangPaths("/herramientas/calculadora-ticket-medio-vino")} />
       <Navbar />
 
       {/* HERO */}

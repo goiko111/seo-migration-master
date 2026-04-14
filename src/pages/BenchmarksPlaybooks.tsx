@@ -210,7 +210,7 @@ const i18n: Record<SupportedLang, PageChrome> = {
 };
 
 const BenchmarksPlaybooks = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang];
   const benchmarks = getBPByType("benchmark");
   const playbooks = getBPByType("playbook");
@@ -221,6 +221,7 @@ const BenchmarksPlaybooks = () => {
         title={t.seoTitle}
         description={t.seoDesc}
         url={`${CANONICAL}${localePath("/benchmarks-playbooks")}`}
+        hreflang={allLangPaths("/benchmarks-playbooks")}
       />
       <DynamicSchemaMarkup
         id="benchmarks-playbooks"

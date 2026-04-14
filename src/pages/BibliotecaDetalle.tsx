@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Wine, MapPin, Utensils, Palette, Grape } from "l
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getBySlug, categoryMeta, type WineEntry } from "@/data/wineLibrary";
 
@@ -16,6 +17,7 @@ const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
 };
 
 const BibliotecaDetalle = () => {
+  const { allLangPaths } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
   const entry = getBySlug(slug || "");
 
@@ -78,6 +80,7 @@ const BibliotecaDetalle = () => {
         description={entry.description}
         url={`https://winerim.wine/biblioteca-vino/${entry.slug}`}
         type="article"
+        hreflang={allLangPaths("/biblioteca-vino")}
       />
       <Navbar />
 

@@ -457,7 +457,7 @@ const kpiIcons = [BarChart3, DollarSign, Users, RefreshCw, Warehouse, DollarSign
 /* ═══════════════════════════════════════════════════════════ */
 
 const GruposRestauracion = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
 
   useEffect(() => {
@@ -483,7 +483,8 @@ const GruposRestauracion = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/grupos-restauracion" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/grupos-restauracion"
+        hreflang={allLangPaths("/soluciones/grupos-restauracion")} />
       <Navbar />
 
       {/* ── HERO ── */}

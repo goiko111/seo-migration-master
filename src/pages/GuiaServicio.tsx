@@ -4,6 +4,7 @@ import { Wine, ArrowRight, Thermometer, GlassWater, Droplets } from "lucide-reac
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
@@ -23,6 +24,7 @@ const GuiaServicio = () => (
       title="Guía de Servicio del Vino | Estándar Winerim (WSET)"
       description="Medidas de servicio por estilo de vino: ml por copa, copas por botella, temperatura y copa recomendada. Referencia WSET para hostelería."
       url="https://winerim.wine/biblioteca-vino/guia-servicio"
+        hreflang={allLangPaths("/biblioteca-vino/guia-servicio")}
     />
     <Navbar />
 

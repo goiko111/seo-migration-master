@@ -164,7 +164,7 @@ const i18n: Record<SupportedLang, {
 };
 
 const CartaPapelVsDigital = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -184,7 +184,8 @@ const CartaPapelVsDigital = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url}
+        hreflang={allLangPaths("/carta-papel-vs-digital")} />
       <Navbar />
 
       {/* HERO */}

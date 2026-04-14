@@ -6,6 +6,7 @@ import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -28,6 +29,7 @@ const recognitionLabels: Record<string, string> = {
 };
 
 const RegionDetail = () => {
+  const { allLangPaths } = useLanguage();
   const { country, region } = useParams<{ country: string; region: string }>();
   const data = region ? getRegionBySlug(region) : undefined;
   const countryData = country ? getCountryBySlug(country) : undefined;
@@ -62,6 +64,7 @@ const RegionDetail = () => {
         description={data.seo.description}
         url={`https://winerim.wine/biblioteca-vino/regiones/${country}/${region}`}
         type="article"
+        hreflang={allLangPaths("/biblioteca-vino/regiones")}
       />
       <Navbar />
 

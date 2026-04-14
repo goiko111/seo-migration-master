@@ -9,6 +9,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const traditionalProblems = [
@@ -42,6 +43,7 @@ const guestBenefits = [
 ];
 
 const DigitalWineList = () => {
+  const { allLangPaths } = useLanguage();
   useEffect(() => {
     const ld = document.createElement("script");
     ld.id = "digital-wine-list-jsonld";
@@ -74,6 +76,7 @@ const DigitalWineList = () => {
         description="Discover what a digital wine list is and how interactive wine menus help restaurants increase wine sales, improve guest experience, and reduce costs."
         url="https://winerim.wine/en/digital-wine-list"
         type="article"
+        hreflang={allLangPaths("/en/digital-wine-list")}
       />
       <Navbar />
 

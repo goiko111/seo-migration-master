@@ -308,7 +308,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const ComoOrganizarCarta = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -331,7 +331,8 @@ const ComoOrganizarCarta = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article"
+        hreflang={allLangPaths("/blog/como-organizar-carta-de-vinos")} />
       <Navbar />
 
       {/* 1. HERO */}

@@ -5,6 +5,7 @@ import { Grape, Search, ArrowRight, Filter, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -35,6 +36,7 @@ const colorFilters: { key: GrapeColor | "all"; label: string }[] = [
 const countryOptions = [...new Set(grapeCatalog.flatMap((g) => g.countries))].sort();
 
 const GrapesHub = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
   const [colorFilter, setColorFilter] = useState<GrapeColor | "all">("all");
   const [countryFilter, setCountryFilter] = useState<string>("");
@@ -82,6 +84,7 @@ const GrapesHub = () => {
         title="Variedades de Uva | Guía Completa para Hostelería"
         description="Guía completa de 87 variedades de uva para hostelería. Perfil sensorial, rol en carta, criterio comercial y maridajes. Con enfoque Winerim."
         url="https://winerim.wine/biblioteca-vino/uvas"
+        hreflang={allLangPaths("/biblioteca-vino/uvas")}
       />
       <Navbar />
 

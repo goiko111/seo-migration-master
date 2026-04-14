@@ -310,7 +310,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const CuantosVinosCarta = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   useEffect(() => {
@@ -333,7 +333,8 @@ const CuantosVinosCarta = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article"
+        hreflang={allLangPaths("/blog/cuantos-vinos-carta-restaurante")} />
       <Navbar />
 
       {/* 1. HERO */}

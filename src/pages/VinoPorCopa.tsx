@@ -337,7 +337,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const VinoPorCopa = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -354,7 +354,8 @@ const VinoPorCopa = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url}
+        hreflang={allLangPaths("/vino-por-copa-restaurante")} />
       <Navbar />
 
       {/* HERO */}

@@ -299,7 +299,7 @@ const i18n: Record<SupportedLang, {
 const emptyWine = (): CopaDef => ({ nombre: "", estilo: "blanco", pvp: 0, coste: 0, ventasSemana: 0 });
 
 const DiagnosticoVinoPorCopa = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const [copas, setCopas] = useState<CopaDef[]>([emptyWine(), emptyWine(), emptyWine(), emptyWine()]);
@@ -381,7 +381,8 @@ const DiagnosticoVinoPorCopa = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/diagnostico-vino-por-copa`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/diagnostico-vino-por-copa`}
+        hreflang={allLangPaths("/herramientas/diagnostico-vino-por-copa")} />
       <Navbar />
 
       {/* HERO */}

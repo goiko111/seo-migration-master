@@ -176,7 +176,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
 };
 
 const WineROICalculator = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const formatEur = (n: number) =>
@@ -249,7 +249,7 @@ const WineROICalculator = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-roi-calculator")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-roi-calculator")}`} hreflang={allLangPaths("/wine-roi-calculator")} />
       <Navbar />
 
       {/* HERO */}

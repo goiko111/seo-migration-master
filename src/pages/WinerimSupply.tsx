@@ -431,7 +431,7 @@ const pillarIcons = [ShoppingCart, DollarSign, RefreshCw];
 const networkPillarIcons = [Shield, Users, TrendingUp];
 
 const WinerimSupply = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const tx = i18n[lang];
 
   const renderParagraph = (text: string) => {
@@ -454,7 +454,8 @@ const WinerimSupply = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={tx.seo_title} description={tx.seo_desc} url={tx.seo_url} />
+      <SEOHead title={tx.seo_title} description={tx.seo_desc} url={tx.seo_url}
+        hreflang={allLangPaths("/producto/winerim-supply")} />
       <Navbar />
 
       {/* ─── Breadcrumbs ─── */}

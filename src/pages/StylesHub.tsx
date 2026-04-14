@@ -5,6 +5,7 @@ import { Palette, Search, ArrowRight, Filter, X, Wine } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -36,6 +37,7 @@ const familyFilters: { key: StyleFamily | "all"; label: string }[] = [
 ];
 
 const StylesHub = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
   const [familyFilter, setFamilyFilter] = useState<StyleFamily | "all">("all");
   const [showFilters, setShowFilters] = useState(false);
@@ -62,6 +64,7 @@ const StylesHub = () => {
         title="Estilos de Vino: Guía Completa para Hostelería | Winerim"
         description="Guía de estilos de vino: tintos, blancos, rosados, espumosos, generosos, dulces, naranjas y naturales. 8 familias y 50+ subtipos para carta."
         url="https://winerim.wine/biblioteca-vino/estilos"
+        hreflang={allLangPaths("/biblioteca-vino/estilos")}
       />
       <Navbar />
 

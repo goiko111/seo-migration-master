@@ -340,7 +340,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const IARestaurantes = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -358,7 +358,8 @@ const IARestaurantes = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url}
+        hreflang={allLangPaths("/inteligencia-artificial-restaurantes")} />
       <Navbar />
 
       {/* HERO */}

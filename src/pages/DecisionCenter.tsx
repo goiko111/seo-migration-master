@@ -355,7 +355,7 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
 /* ── Hub page ── */
 const DecisionCenter = () => {
   const { granted, unlock } = useGate();
-  const { t } = useLanguage();
+  const { t, allLangPaths } = useLanguage();
   const areas = getAreas(t);
   const profileCfg = getProfileConfig(t);
 
@@ -368,6 +368,7 @@ const DecisionCenter = () => {
         description={t.dc_hub_subtitle}
         url="https://winerim.wine/decision-center"
         noindex
+        hreflang={allLangPaths("/decision-center")}
       />
       <Navbar />
       <main>

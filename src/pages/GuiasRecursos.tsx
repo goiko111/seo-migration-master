@@ -240,7 +240,7 @@ const SectionHeader = ({ icon: HeaderIcon, title, desc, count }: { icon: React.E
 );
 
 const GuiasRecursos = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
   const [guideFilter, setGuideFilter] = useState("all");
 
@@ -262,7 +262,7 @@ const GuiasRecursos = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/guias-y-recursos" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/guias-y-recursos" hreflang={allLangPaths("/guias-y-recursos")} />
       <main>
         {/* HERO */}
         <section className="pt-32 pb-12 section-padding">

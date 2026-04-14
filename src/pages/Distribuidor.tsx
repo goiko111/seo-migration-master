@@ -20,7 +20,7 @@ const Check = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Distribuidor = () => {
-  const { localePath } = useLanguage();
+  const { localePath, allLangPaths } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -28,6 +28,7 @@ const Distribuidor = () => {
         title="Sé Distribuidor Exclusivo de Winerim"
         description="Únete como distribuidor exclusivo de Winerim en tu territorio. Márgenes del 25-30%, soporte técnico, marketing co-branded y potencial de escalado real."
         url={`${CANONICAL_DOMAIN}/distribuidor`}
+        hreflang={allLangPaths("/distribuidor")}
       />
       <Navbar />
 

@@ -646,7 +646,7 @@ const JsonLdSchema = ({ t: tx }: { t: typeof i18n.es }) => {
 };
 
 const InteligenciaDinamica = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const tx = i18n[lang];
 
   return (
@@ -655,6 +655,7 @@ const InteligenciaDinamica = () => {
         title={tx.seo_title}
         description={tx.seo_desc}
         url={tx.seo_url}
+        hreflang={allLangPaths("/producto/inteligencia-dinamica")}
       />
       <JsonLdSchema t={tx} />
       <Navbar />

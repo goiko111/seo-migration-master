@@ -4,12 +4,14 @@ import { MapPin, ArrowRight, ArrowLeft, Wine, Star, Sparkles, BookOpen } from "l
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getCountryBySlug, getRegionsByCountry, type RegionEntry } from "@/data/regionsLibrary";
 
 const RegionCountry = () => {
+  const { allLangPaths } = useLanguage();
   const { country } = useParams<{ country: string }>();
   const data = country ? getCountryBySlug(country) : undefined;
   const regions = country ? getRegionsByCountry(country) : [];
@@ -28,6 +30,7 @@ const RegionCountry = () => {
         title={data.seo.title}
         description={data.seo.description}
         url={`https://winerim.wine/biblioteca-vino/regiones/${data.slug}`}
+        hreflang={allLangPaths("/biblioteca-vino/regiones")}
       />
       <Navbar />
 

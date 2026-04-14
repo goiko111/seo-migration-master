@@ -10,6 +10,7 @@ import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -32,6 +33,7 @@ const levelLabels: Record<string, string> = {
 };
 
 const StyleDetail = () => {
+  const { allLangPaths } = useLanguage();
   const { style: styleSlug } = useParams<{ style: string }>();
   const fullEntry = styleSlug ? getStyleBySlug(styleSlug) : undefined;
   const catalogEntry = styleSlug ? getStyleCatalogEntry(styleSlug) : undefined;
@@ -70,7 +72,8 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={data.seo.title} description={data.seo.description} url={`https://winerim.wine/biblioteca-vino/estilos/${data.slug}`} type="article" />
+      <SEOHead title={data.seo.title} description={data.seo.description} url={`https://winerim.wine/biblioteca-vino/estilos/${data.slug}`} type="article"
+        hreflang={allLangPaths("/biblioteca-vino/estilos")} />
       <Navbar />
 
       {/* HERO */}

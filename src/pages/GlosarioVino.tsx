@@ -5,6 +5,7 @@ import { BookOpen, ArrowRight, Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
@@ -58,6 +59,7 @@ const glossary: GlossaryTerm[] = [
 ];
 
 const GlosarioVino = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
 
   const letters = useMemo(() => {
@@ -87,6 +89,7 @@ const GlosarioVino = () => {
         title="Glosario del Vino | Términos Esenciales para Hostelería"
         description="Glosario con más de 35 términos clave del mundo del vino explicados con claridad para profesionales de hostelería. De acidez a vendimia tardía."
         url="https://winerim.wine/biblioteca-vino/glosario"
+        hreflang={allLangPaths("/biblioteca-vino/glosario")}
       />
       <Navbar />
 

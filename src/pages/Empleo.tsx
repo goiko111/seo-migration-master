@@ -35,7 +35,7 @@ const Check = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Empleo = () => {
-  const { t } = useLanguage();
+  const { t, allLangPaths } = useLanguage();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -87,6 +87,7 @@ const Empleo = () => {
       <SEOHead
         title={t.empleo_meta_title ?? "Trabaja en Winerim — Únete al equipo"}
         description={t.empleo_meta_desc ?? "Únete al equipo que está transformando la gestión del vino en hostelería. Descubre las oportunidades de empleo en Winerim."}
+        hreflang={allLangPaths("/empleo")}
       />
       <Navbar />
       <main className="min-h-screen bg-background">

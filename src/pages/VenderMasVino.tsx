@@ -289,7 +289,7 @@ const i18n: Record<SupportedLang, PageContent> = {
 };
 
 const VenderMasVino = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang];
 
   useEffect(() => {
@@ -306,7 +306,8 @@ const VenderMasVino = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article" author="Winerim" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url} type="article" author="Winerim"
+        hreflang={allLangPaths("/como-vender-mas-vino-en-un-restaurante")} />
       <Navbar />
 
       <main>

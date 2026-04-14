@@ -125,7 +125,7 @@ const taxonomyFilters = [
 ];
 
 const Recursos = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
   const [filter, setFilter] = useState("all");
 
@@ -134,7 +134,8 @@ const Recursos = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/recursos" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/recursos"
+        hreflang={allLangPaths("/recursos")} />
       <main>
         {/* ── Hero ── */}
         <section className="pt-32 pb-14 section-padding relative overflow-hidden">

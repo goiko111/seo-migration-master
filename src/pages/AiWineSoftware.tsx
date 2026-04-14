@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const capabilities = [
   { icon: Wine, title: "Digital Wine List Management", desc: "Create, organize and update your digital wine list in real time. Categories, descriptions, prices and availability from a single dashboard." },
@@ -65,6 +66,7 @@ const faqs = [
 ];
 
 const AiWineSoftware = () => {
+  const { allLangPaths } = useLanguage();
   useEffect(() => {
     const ld = document.createElement("script");
     ld.id = "ai-wine-software-jsonld";
@@ -142,6 +144,7 @@ const AiWineSoftware = () => {
         description="Winerim: AI wine list software for restaurants. Digital menus, smart recommendations, auto pairing, sales analytics and price optimization."
         url="https://winerim.wine/ai-wine-software"
         type="website"
+        hreflang={allLangPaths("/ai-wine-software")}
       />
       <Navbar />
 

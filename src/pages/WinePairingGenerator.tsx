@@ -164,7 +164,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
 };
 
 const WinePairingGenerator = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const [dishType, setDishType] = useState("");
@@ -204,7 +204,8 @@ const WinePairingGenerator = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-pairing-generator")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-pairing-generator")}`}
+        hreflang={allLangPaths("/wine-pairing-generator")} />
       <Navbar />
 
       {/* HERO */}

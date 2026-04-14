@@ -475,7 +475,7 @@ const execI18n: Record<string, {
 
 /* ─── Component ─── */
 const CalculadoraMargen = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
   const dl = execI18n[lang] || execI18n.es;
 
@@ -573,7 +573,8 @@ const CalculadoraMargen = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url="https://winerim.wine/calculadora-margen-vino" />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url="https://winerim.wine/calculadora-margen-vino"
+        hreflang={allLangPaths("/calculadora-margen-vino")} />
       <Navbar />
 
       {/* HERO */}

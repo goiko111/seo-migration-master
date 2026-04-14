@@ -5,6 +5,7 @@ import { Wine, MapPin, Palette, Utensils, ArrowRight, Grape, Search, BookOpen, G
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -70,6 +71,7 @@ const topGrapes = ["tempranillo", "garnacha", "cabernet-sauvignon", "pinot-noir"
 const topCountries = ["espana", "francia", "italia", "portugal", "estados-unidos", "alemania"];
 
 const BibliotecaVino = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const searchIndex = useMemo(() => buildSearchIndex(), []);
@@ -86,6 +88,7 @@ const BibliotecaVino = () => {
         title="Biblioteca del Vino | Guía Completa para Hostelería"
         description="Guía completa sobre uvas, regiones vinícolas, estilos de vino y maridajes. Conocimiento esencial para restaurantes que quieren vender más y mejor vino."
         url="https://winerim.wine/biblioteca-vino"
+        hreflang={allLangPaths("/biblioteca-vino")}
       />
       <Navbar />
 

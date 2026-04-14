@@ -304,7 +304,7 @@ const i18n: Record<SupportedLang, {
 
 /* ───── component ───── */
 const WineListAnalyzer = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const [inputMode, setInputMode] = useState<"file" | "url" | null>(null);
@@ -431,7 +431,8 @@ const WineListAnalyzer = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url="https://winerim.wine/wine-list-analyzer" />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url="https://winerim.wine/wine-list-analyzer"
+        hreflang={allLangPaths("/wine-list-analyzer")} />
       <Navbar />
 
       {/* HERO */}

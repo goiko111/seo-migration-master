@@ -270,12 +270,13 @@ const benefitIcons = [TrendingUp, ShoppingCart, RotateCcw, Users, Wine];
 const audienceIcons = [Store, Wine, Hotel, Building2];
 
 const QueEsWinerim = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = qt[lang] || qt.es;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/que-es-winerim" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/que-es-winerim"
+        hreflang={allLangPaths("/que-es-winerim")} />
       <Navbar />
 
       {/* HERO */}

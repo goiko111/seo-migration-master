@@ -353,7 +353,7 @@ const faqData: Record<SupportedLang, FAQCategory[]> = {
 
 /* ─── Component ─── */
 const FAQs = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const chrome = CHROME[lang];
   const categories = faqData[lang];
   const allFaqs = categories.flatMap((c) => c.faqs);
@@ -381,6 +381,7 @@ const FAQs = () => {
         title={chrome.seoTitle}
         description={chrome.seoDesc}
         url="https://winerim.wine/faqs"
+        hreflang={allLangPaths("/faqs")}
       />
       <Navbar />
 

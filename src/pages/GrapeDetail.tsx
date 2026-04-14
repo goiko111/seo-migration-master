@@ -6,6 +6,7 @@ import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -26,6 +27,7 @@ const levelLabels: Record<string, string> = {
 };
 
 const GrapeDetail = () => {
+  const { allLangPaths } = useLanguage();
   const { grape: grapeSlug } = useParams<{ grape: string }>();
   const fullEntry = grapeSlug ? getGrapeBySlug(grapeSlug) : undefined;
   const catalogEntry = grapeSlug ? getCatalogEntry(grapeSlug) : undefined;
@@ -69,6 +71,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       description={data.seo.description}
       url={`https://winerim.wine/biblioteca-vino/uvas/${data.slug}`}
       type="article"
+        hreflang={allLangPaths("/biblioteca-vino/uvas")}
     />
     <Navbar />
 

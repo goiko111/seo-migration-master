@@ -59,7 +59,7 @@ const SommelierCorner = () => {
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("sommelier");
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
 
   useEffect(() => {
@@ -104,7 +104,8 @@ const SommelierCorner = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/sommelier-corner" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/sommelier-corner"
+        hreflang={allLangPaths("/sommelier-corner")} />
       <main>
         {/* Hero */}
         <section className="pt-32 pb-16 section-padding">

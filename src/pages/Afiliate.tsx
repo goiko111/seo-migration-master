@@ -82,7 +82,7 @@ const EarningsCalculator = () => {
 };
 
 const Afiliate = () => {
-  const { localePath } = useLanguage();
+  const { localePath, allLangPaths } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -90,6 +90,7 @@ const Afiliate = () => {
         title="Programa de Partners Winerim — Colabora y genera ingresos"
         description="Hazte partner de Winerim: recomienda el software de carta de vinos con IA a restaurantes y hoteles. Comisiones, materiales y soporte."
         url={`${CANONICAL_DOMAIN}/afiliate`}
+        hreflang={allLangPaths("/afiliate")}
       />
       <DynamicSchemaMarkup
         id="partners"

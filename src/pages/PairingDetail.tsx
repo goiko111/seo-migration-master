@@ -10,6 +10,7 @@ import LinkedTag from "@/components/biblioteca/LinkedTag";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -21,6 +22,7 @@ import {
 } from "@/data/pairingsLibrary";
 
 const PairingDetail = () => {
+  const { allLangPaths } = useLanguage();
   const { pairing: pairingSlug } = useParams<{ pairing: string }>();
   const entry = pairingSlug ? getPairingBySlug(pairingSlug) : undefined;
 
@@ -48,7 +50,8 @@ const PairingDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={entry.seo.title} description={entry.seo.description} url={`https://winerim.wine/biblioteca-vino/maridajes/${entry.slug}`} type="article" />
+      <SEOHead title={entry.seo.title} description={entry.seo.description} url={`https://winerim.wine/biblioteca-vino/maridajes/${entry.slug}`} type="article"
+        hreflang={allLangPaths("/biblioteca-vino/maridajes")} />
       <Navbar />
 
       {/* HERO */}

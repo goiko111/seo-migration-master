@@ -338,7 +338,7 @@ const i18n: Record<SupportedLang, Record<string, any>> = {
 const BLOCK_ICONS = [Layers, Wine, DollarSign, GlassWater, RotateCcw, TrendingUp];
 
 const WineListScore = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
   const blocks: Block[] = t.blocks.map((b: any, i: number) => ({ ...b, icon: BLOCK_ICONS[i] }));
 
@@ -389,7 +389,8 @@ const WineListScore = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/wine-list-score")}`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}${localePath("/herramientas/wine-list-score")}`}
+        hreflang={allLangPaths("/herramientas/wine-list-score")} />
       <Navbar />
 
       {/* HERO */}

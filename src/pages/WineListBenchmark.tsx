@@ -281,7 +281,7 @@ const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent
 };
 
 const WineListBenchmark = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const priceByCountry = t.countries.map((country, i) => ({ country, price: priceValues[i], fill: fills[i] }));
@@ -304,7 +304,8 @@ const WineListBenchmark = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={t.seoUrl} />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={t.seoUrl}
+        hreflang={allLangPaths("/wine-list-benchmark")} />
       <Navbar />
 
       {/* HERO */}

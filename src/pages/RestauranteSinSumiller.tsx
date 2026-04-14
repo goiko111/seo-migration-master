@@ -314,7 +314,7 @@ const ucIcons = [Wine, Utensils, Globe];
 /* ═══════════════════════════════════════════════════════════ */
 
 const RestauranteSinSumiller = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
 
   useEffect(() => {
@@ -340,7 +340,8 @@ const RestauranteSinSumiller = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/restaurantes-sin-sumiller" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/restaurantes-sin-sumiller"
+        hreflang={allLangPaths("/soluciones/restaurantes-sin-sumiller")} />
       <Navbar />
 
       {/* ── HERO ── */}

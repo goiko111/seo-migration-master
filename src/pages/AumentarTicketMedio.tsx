@@ -236,7 +236,7 @@ const techIcons = [Sparkles, BookOpen, Target, BarChart3];
 const metricIcons = [TrendingUp, Wine, BarChart3];
 
 const AumentarTicketMedio = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = translations[lang] || translations.es;
 
   useEffect(() => {
@@ -255,7 +255,8 @@ const AumentarTicketMedio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante" type="article" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante" type="article"
+        hreflang={allLangPaths("/soluciones/aumentar-ticket-medio-restaurante")} />
       <Navbar />
 
       {/* HERO */}

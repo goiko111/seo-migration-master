@@ -349,7 +349,7 @@ const getPriority = (dias: number, t: LangContent): { label: string; color: stri
 const formatEur = (n: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
 const CalculadoraStockMuerto = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const [items, setItems] = useState<StockItem[]>([emptyItem(), emptyItem(), emptyItem()]);
@@ -418,7 +418,8 @@ const CalculadoraStockMuerto = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`${CANONICAL_DOMAIN}/herramientas/calculadora-stock-muerto`} />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`${CANONICAL_DOMAIN}/herramientas/calculadora-stock-muerto`}
+        hreflang={allLangPaths("/herramientas/calculadora-stock-muerto")} />
       <Navbar />
 
       {/* HERO */}

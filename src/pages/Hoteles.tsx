@@ -400,7 +400,7 @@ const decIcons = [Target, GlassWater, DollarSign, DollarSign, AlertTriangle, Ref
 /* ═══════════════════════════════════════════════════════════ */
 
 const Hoteles = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
 
   useEffect(() => {
@@ -426,7 +426,8 @@ const Hoteles = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/hoteles" />
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/hoteles"
+        hreflang={allLangPaths("/soluciones/hoteles")} />
       <Navbar />
 
       {/* ── HERO ── */}

@@ -5,6 +5,7 @@ import { Utensils, Search, ArrowRight, Filter, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -30,6 +31,7 @@ const intensityLabels: Record<string, string> = {
 };
 
 const PairingsHub = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<PairingCategory | "all">("all");
   const [showFilters, setShowFilters] = useState(false);
@@ -56,6 +58,7 @@ const PairingsHub = () => {
         title="Maridajes: Guía Completa Vino + Plato para Hostelería | Winerim"
         description="Guía de maridaje: 10 categorías, 80+ combinaciones plato+vino. Principios, errores y lectura comercial para restaurantes y equipos de sala."
         url="https://winerim.wine/biblioteca-vino/maridajes"
+        hreflang={allLangPaths("/biblioteca-vino/maridajes")}
       />
       <Navbar />
 

@@ -391,7 +391,7 @@ const i18n: Record<SupportedLang, {
 };
 
 const AuditorMultiLocal = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   const [locales, setLocales] = useState<LocalData[]>([
@@ -497,7 +497,8 @@ const AuditorMultiLocal = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/auditor-carta-multilocal`} />
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/auditor-carta-multilocal`}
+        hreflang={allLangPaths("/herramientas/auditor-carta-multilocal")} />
       <Navbar />
 
       {/* HERO */}

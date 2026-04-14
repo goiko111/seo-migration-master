@@ -379,7 +379,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
 
 const AnalizaCarta = () => {
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = {
     seo: seo[lang], hero: hero[lang], vc: visualCard[lang], summary: summaryI[lang],
     pains: painsI[lang], painsSection: painsSectionI[lang], qa: quickAnswerI[lang],
@@ -473,6 +473,7 @@ const AnalizaCarta = () => {
         title={t.seo.title}
         description={t.seo.desc}
         url={t.seo.url}
+        hreflang={allLangPaths("/analisis-carta")}
       />
       <Navbar />
 

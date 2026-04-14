@@ -5,6 +5,7 @@ import { MapPin, Globe, Search, ArrowRight, Filter, Wine } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -27,6 +28,7 @@ type SearchResult = {
 };
 
 const RegionsHub = () => {
+  const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
 
   const totalDenominations = wineCountries.reduce((acc, c) => acc + c.denominationsCount, 0);
@@ -71,6 +73,7 @@ const RegionsHub = () => {
         title="Regiones Vinícolas del Mundo | Biblioteca del Vino"
         description="Guía de regiones vinícolas y denominaciones de origen para hostelería. Más de 3.700 denominaciones de 40+ países con criterio Winerim."
         url="https://winerim.wine/biblioteca-vino/regiones"
+        hreflang={allLangPaths("/biblioteca-vino/regiones")}
       />
       <Navbar />
 

@@ -129,13 +129,14 @@ const i18n: Record<SupportedLang, {
 };
 
 const Comparativas = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = i18n[lang] || i18n.es;
   const url = `https://winerim.wine${localePath("/comparativas")}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={url} />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={url}
+        hreflang={allLangPaths("/comparativas")} />
       <DynamicSchemaMarkup
         id="comparativas"
         type="CollectionPage"
