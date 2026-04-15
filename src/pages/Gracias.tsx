@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
 
 /* ── Content per form_type ── */
 interface ThankYouContent {

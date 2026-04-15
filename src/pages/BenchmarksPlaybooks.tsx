@@ -12,7 +12,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import SummaryBox from "@/components/seo/SummaryBox";
 import { getBPByType } from "@/data/benchmarksPlaybooks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
 
 const CANONICAL = "https://winerim.wine";
 

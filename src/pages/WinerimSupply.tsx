@@ -15,7 +15,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
-import { SupportedLang } from "@/i18n/types";
+import { type SupportedLang, type I18nMap } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */

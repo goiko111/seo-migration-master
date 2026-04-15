@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Brain, BarChart3, Lightbulb, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
 
 /* ── i18n ── */
 const i18n: I18nMap<{

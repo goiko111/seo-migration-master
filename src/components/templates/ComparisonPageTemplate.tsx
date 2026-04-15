@@ -19,7 +19,7 @@ import ArticleMidCTA from "@/components/article/ArticleMidCTA";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
 import type { ComparisonData } from "@/data/comparisons";
 
 const chrome: I18nMap<{

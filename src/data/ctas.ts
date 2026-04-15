@@ -2,7 +2,7 @@
    CTA STRATEGY — Funnel-aware CTA system (i18n)
    ═══════════════════════════════════════════════════════════ */
 
-import { SupportedLang } from "@/i18n/types";
+import { type SupportedLang, type I18nMap } from "@/i18n/types";
 
 export type FunnelStage = "tofu" | "mofu" | "bofu";
 

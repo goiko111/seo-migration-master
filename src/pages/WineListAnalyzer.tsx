@@ -17,7 +17,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
 
 /* ───── types ───── */
 interface SectionResult {
