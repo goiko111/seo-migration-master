@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/accordion";
 import { useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ─── Image base ─── */
 const WP = "https://winerim.wine/wp-content/uploads/2025/11";

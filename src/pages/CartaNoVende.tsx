@@ -1,7 +1,7 @@
 import PainTemplate from "@/components/templates/PainTemplate";
 import type { PainPageData } from "@/components/templates/PainTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const i18n: I18nMap<PainPageData> = {
   es: {

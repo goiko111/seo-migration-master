@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ─── Season logic ─── */
 type Season = "summer" | "winter" | "spring" | "autumn";

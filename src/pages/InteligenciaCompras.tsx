@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Inteligencia de Compras para Restaurantes | Winerim",

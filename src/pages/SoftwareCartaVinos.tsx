@@ -19,7 +19,7 @@ import NotForSection from "@/components/seo/NotForSection";
 import LimitationsBox from "@/components/seo/LimitationsBox";
 import dashboardImg from "@/assets/winerim-dashboard-insights.png";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ── i18n content ── */
 interface PageContent {

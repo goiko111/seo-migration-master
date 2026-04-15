@@ -13,7 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface OrgMethod { title: string; examples: string; pros: string; cons: string; }
 interface TipItem { icon: typeof List; title: string; desc: string; }

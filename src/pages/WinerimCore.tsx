@@ -15,7 +15,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation ── */

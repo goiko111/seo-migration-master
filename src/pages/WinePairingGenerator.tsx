@@ -15,7 +15,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface WineRec { name: string; grape: string; region: string; why: string; style: string; servingTemp: string; }
 interface PairingResult { wines: WineRec[]; pairingExplanation: string; recommendedStyles: string[]; tips: string; }

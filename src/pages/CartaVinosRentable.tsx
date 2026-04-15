@@ -14,7 +14,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap, I18nMap } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface ProfitPrinciple { icon: typeof Scale; title: string; desc: string; }
 interface PriceRange { range: string; label: string; pct: string; desc: string; }
