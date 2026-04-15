@@ -122,6 +122,8 @@ const Gracias = lazy(() => import("./pages/Gracias"));
 const FAQs = lazy(() => import("./pages/FAQs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
+const CursosVino = lazy(() => import("./pages/CursosVino"));
+const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
@@ -212,6 +214,8 @@ const esRoutes = (
     <Route path="/recursos/:slug" element={<ResourcePage />} />
     <Route path="/decision-center" element={<DecisionCenter />} />
     <Route path="/decision-center/:areaSlug" element={<DecisionCenterArea />} />
+    <Route path="/decision-center/cursos" element={<CursosVino />} />
+    <Route path="/decision-center/cursos/:slug" element={<CursoDetalle />} />
     <Route path="/what-is-winerim" element={<WhatIsWinerim />} />
     <Route path="/ai-wine-software" element={<AiWineSoftware />} />
     <Route path="/como-hacer-una-carta-de-vinos" element={<ComoHacerCartaVinos />} />
