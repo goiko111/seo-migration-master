@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   DollarSign, Package, ShoppingCart, BarChart3, Wine, Building2,
-  ArrowRight, Lock, Shield, Sparkles, Briefcase, Store, Users
+  ArrowRight, Lock, Shield, Sparkles, Briefcase, Store, Users, BookOpen
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -126,6 +126,18 @@ const getAreas = (t: TranslationDict): Area[] => [
     bg: "bg-rose-500/10",
     border: "border-rose-500/20",
     href: "/decision-center/grupos-benchmarking",
+  },
+  {
+    id: "cursos",
+    name: t.locale === "es_ES" ? "Formación y Academia" : t.locale === "en_GB" ? "Training & Academy" : t.locale === "it_IT" ? "Formazione e Accademia" : "Formation et Académie",
+    tagline: t.locale === "es_ES" ? "Desarrolla el conocimiento de tu equipo" : t.locale === "en_GB" ? "Develop your team's knowledge" : t.locale === "it_IT" ? "Sviluppa la conoscenza del tuo team" : "Développez les connaissances de votre équipe",
+    description: t.locale === "es_ES" ? "Cursos, webinars y talleres para dominar la gestión de cartas de vinos, mejorar habilidades de sommelier y optimizar decisiones comerciales. Acceso a contenido exclusivo diseñado para cada rol." : t.locale === "en_GB" ? "Courses, webinars and workshops to master wine list management, improve sommelier skills and optimise business decisions. Access to exclusive content designed for each role." : t.locale === "it_IT" ? "Corsi, webinar e workshop per padroneggiare la gestione della carta dei vini, migliorare le competenze del sommelier e ottimizzare le decisioni commerciali. Accesso a contenuti esclusivi progettati per ogni ruolo." : "Cours, webinaires et ateliers pour maîtriser la gestion de la carte des vins, améliorer les compétences du sommelier et optimiser les décisions commerciales. Accès au contenu exclusif conçu pour chaque rôle.",
+    profiles: ["direccion", "sala", "compras-fb", "grupo"],
+    icon: BookOpen,
+    accent: "text-indigo-500",
+    bg: "bg-indigo-500/10",
+    border: "border-indigo-500/20",
+    href: "/decision-center/cursos",
   },
 ];
 

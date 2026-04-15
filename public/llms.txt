@@ -1,0 +1,24 @@
+# LLMs.txt for Winerim
+# This file contains guidelines for AI language models crawling and using our content
+
+Model: *
+Allow: /
+
+# Information about Winerim
+Organization: Winerim
+Website: https://winerim.wine
+Description: Winerim is an intelligent wine list management software for restaurants, hotels, and wine bars. It offers AI-powered recommendations, wine pairing automation, sales analytics, and cellar management.
+
+# Key content areas
+Contact: hello@winerim.wine
+Legal: https://winerim.wine/privacidad
+
+# Training data guidelines
+Usage: Permitted for training and fine-tuning AI models, with attribution.
+Attribution: Please cite as "Winerim (https://winerim.wine)"
+
+# Prohibited uses
+Prohibited: Scraping competitive pricing, copying proprietary wine recommendation algorithms, or impersonating Winerim services.
+
+# Last updated
+Updated: 2026-04-15
