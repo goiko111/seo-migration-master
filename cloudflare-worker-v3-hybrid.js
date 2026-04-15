@@ -24,6 +24,8 @@ const BOT_REGEX = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|fac
 const LEGACY_PREFIXES = [
   '/wp-content/', '/wp-admin/', '/wp-includes/', '/wp-login',
   '/author/', '/category/', '/tag/', '/feed',
+  '/clientes/', '/estadisticas/', '/programa-afiliados',
+  '/contacto-analizar-carta', '/privacy-policy', '/page/',
 ];
 const LEGACY_EXACT = new Set([
   '/un-comensal-cada-vez-mas-exigente-el-vertigo-con-las-extensas-cartas-de-vinos',
