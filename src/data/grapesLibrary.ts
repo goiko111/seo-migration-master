@@ -4300,7 +4300,7 @@ export const grapeEntries: GrapeEntry[] = [
 // CATALOG — Lightweight entries for all 87 grapes (for hub listing)
 // ═══════════════════════════════════════════════════════════════════════
 
-export const grapeCatalog: GrapeCatalogEntry[] = [
+export const grapeCatalog: (GrapeCatalogEntry | GrapeEntry)[] = [
   // TINTAS (41)
   { slug: "tempranillo", name: "Tempranillo", synonyms: ["Tinto Fino", "Cencibel", "Ull de Llebre", "Tinta de Toro", "Tinta Roriz", "Aragonez"], color: "tinta", countries: ["España", "Portugal", "Argentina"], keyRegions: ["Rioja", "Ribera del Duero", "Toro", "Douro"], tastingNotes: "Principal tinta española. Frutos rojos, cuero, vainilla." },
   { slug: "garnacha", name: "Garnacha", synonyms: ["Grenache", "Cannonau", "Garnatxa"], color: "tinta", countries: ["España", "Francia", "Italia", "Australia"], keyRegions: ["Priorat", "Campo de Borja", "Châteauneuf-du-Pape"], tastingNotes: "Alta graduación, frutos rojos maduros. Base de GSM." },
