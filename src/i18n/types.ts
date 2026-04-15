@@ -3,6 +3,17 @@ export type SupportedLang = "es" | "en" | "it" | "fr" | "de" | "pt";
 export const SUPPORTED_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
 export const DEFAULT_LANG: SupportedLang = "es";
 
+/**
+ * i18n record: requires es + en, other langs optional (falls back to en).
+ * Use with `getI18n(map, lang)` helper for safe access.
+ */
+export type I18nMap<T> = { es: T; en: T } & Partial<Record<SupportedLang, T>>;
+
+/** Safe accessor: returns the requested lang or falls back to en */
+export function getI18n<T>(map: I18nMap<T>, lang: SupportedLang): T {
+  return (map as Record<string, T>)[lang] ?? map.en;
+}
+
 export const LANG_LABELS: Record<SupportedLang, string> = {
   es: "Español",
   en: "English",
