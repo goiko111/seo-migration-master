@@ -4393,7 +4393,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
   // ROSADA (1)
   { slug: "moscatel-rosado", name: "Moscatel Rosado", synonyms: ["Muscat Rosé"], color: "rosada", countries: ["España", "Francia"], keyRegions: ["Valencia", "Languedoc"], tastingNotes: "Variante rosada del Moscatel. Muy aromática." },
   {
-    id: "malvasia",
     slug: "malvasia",
     name: "Malvasía",
     synonyms: ["Malmsey", "Malvasia Candida", "Malvasia del Lazio"],
@@ -4435,7 +4434,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
     },
   },
   {
-    id: "picpoul",
     slug: "picpoul",
     name: "Picpoul",
     synonyms: ["Piquepoul", "Piquepole"],
@@ -4477,7 +4475,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
     },
   },
   {
-    id: "falanghina",
     slug: "falanghina",
     name: "Falanghina",
     synonyms: ["Falerno"],

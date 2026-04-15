@@ -24,7 +24,7 @@ export interface StyleEntry {
   // Sensory
   body: BodyLevel;
   acidity: AcidityLevel;
-  fruitIntensity: "baja" | "media" | "alta";
+  fruitIntensity: "baja" | "media" | "alta" | "muy-alta";
   woodPresence: "ninguna" | "sutil" | "media" | "marcada";
   complexity: ComplexityLevel;
   servingTemp: string;
