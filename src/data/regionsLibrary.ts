@@ -6959,7 +6959,7 @@ export const regionEntries: RegionEntry[] = [
     whenToHighlight: "En cartas de vino fino, como Riesling de rareza con narrativa histórica.",
     clientProfile: "Sommelier experto, coleccionista, cliente que busca rareza extrema.",
     sellByStrategy: "Vende por historia, por característica de terrazas, por rareza.",
-    competingRegiones: ["Mosel", "Rheingau"],
+    competingRegions: ["Mosel", "Rheingau"],
     commonMistakes: [
       "Muy difícil de obtener: distribución limitada",
       "Requiere búsqueda activa",

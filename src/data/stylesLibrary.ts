@@ -5,7 +5,7 @@ export type BodyLevel = "ligero" | "medio" | "alto" | "muy-alto";
 export type AcidityLevel = "baja" | "media" | "alta" | "muy-alta";
 export type ComplexityLevel = "sencillo" | "medio" | "complejo" | "muy-complejo";
 export type CartaRole = "seguro" | "diferencial" | "premium" | "descubrimiento" | "tendencia";
-export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "nicho";
+export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "muy-bajo" | "nicho";
 
 export interface StyleSubtype {
   name: string;
