@@ -181,5 +181,6 @@ const GuiaServicio = () => {
     <Footer />
   </div>
 );
+}
 
 export default GuiaServicio;
