@@ -44,7 +44,7 @@ interface PageContent {
   faqData: { q: string; a: string }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Inteligencia Artificial para Restaurantes | IA para Vender Más Vino",
     metaDescription: "Descubre cómo la inteligencia artificial ayuda a los restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente.",

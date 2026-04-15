@@ -33,7 +33,7 @@ export const CTA_PRICING = { text: "Ver planes y precios", url: "/precios" };
 export const CTA_HOW_IT_WORKS = { text: "Cómo funciona Winerim", url: "/funcionalidades" };
 
 /* ─── Funnel-stage CTA sets per language ─── */
-const CTA_SETS_I18N: Record<SupportedLang, Record<FunnelStage, CTASet>> = {
+const CTA_SETS_I18N: I18nMap<Record<FunnelStage, CTASet>> = {
   es: {
     tofu: {
       primary: { text: "Ver Winerim en acción", url: "/demo", micro: "Demo personalizada de 15 min. Sin compromiso." },

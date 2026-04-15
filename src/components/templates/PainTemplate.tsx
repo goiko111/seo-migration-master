@@ -54,7 +54,7 @@ export interface PainPageData {
   ctaFinalDescription?: string;
 }
 
-const labels: Record<SupportedLang, {
+const labels: I18nMap<{
   problems: string;
   commonProblem: string;
   requestDemo: string;

@@ -37,7 +37,7 @@ interface PageContent {
   faqs: { q: string; a: string }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Vender Más Vino en un Restaurante | Guía Completa 2025",
     metaDescription: "Descubre las estrategias más efectivas para aumentar las ventas de vino en tu restaurante: carta optimizada, maridajes.",

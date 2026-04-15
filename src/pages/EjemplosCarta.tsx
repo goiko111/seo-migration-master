@@ -36,7 +36,7 @@ interface Tip {
   points: string[];
 }
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   metaTitle: string;
   metaDescription: string;
   url: string;

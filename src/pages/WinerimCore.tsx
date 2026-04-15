@@ -89,7 +89,7 @@ const capabilityIconColors = [
   "text-violet-400", "text-wine", "text-cyan-400",
 ];
 
-const i18n: Record<SupportedLang, CoreI18n> = {
+const i18n: I18nMap<CoreI18n> = {
   es: {
     seo_title: "Winerim Core — Motor analítico para cartas de vinos | Winerim",
     seo_desc: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, benchmark y arquitectura de carta en una sola capa analítica.",

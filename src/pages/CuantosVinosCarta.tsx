@@ -42,7 +42,7 @@ interface PageContent {
   links: { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cuántos Vinos Debe Tener una Carta de Vinos | Guía por Tipo de Restaurante",
     metaDescription: "Descubre cuántas referencias debe tener tu carta de vinos según el tipo de restaurante.",

@@ -3,7 +3,7 @@ import type { GuidePageData } from "@/components/templates/GuideTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang } from "@/i18n/types";
 
-const i18n: Record<SupportedLang, GuidePageData> = {
+const i18n: I18nMap<GuidePageData> = {
   es: {
     slug: "guias/como-crear-una-estrategia-de-maridaje-en-restauracion",
     metaTitle: "Cómo Crear una Estrategia de Maridaje en Restauración | Guía",

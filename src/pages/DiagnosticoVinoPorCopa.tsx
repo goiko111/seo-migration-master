@@ -31,7 +31,7 @@ interface CopaDef {
 
 const ESTILOS_RECOMENDADOS = ["espumoso", "blanco", "rosado", "tinto"] as const;
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string;
   jsonld_name: string; jsonld_desc: string;
   breadcrumb_tools: string; breadcrumb_page: string;

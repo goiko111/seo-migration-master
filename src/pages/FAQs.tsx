@@ -36,7 +36,7 @@ const slugify = (text: string) =>
     .replace(/[¿?¡!""''()]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
 
 /* ─── Page chrome i18n ─── */
-const CHROME: Record<SupportedLang, PageChrome> = {
+const CHROME: I18nMap<PageChrome> = {
   es: {
     seoTitle: "Preguntas Frecuentes (FAQs) | Winerim",
     seoDesc: "Resuelve todas tus dudas sobre Winerim: cómo añadir vinos, reorganizar la carta, gestionar stock, pedidos, maridajes, IA y mucho más.",
@@ -68,7 +68,7 @@ const CHROME: Record<SupportedLang, PageChrome> = {
 };
 
 /* ─── FAQ data by category & language ─── */
-const faqData: Record<SupportedLang, FAQCategory[]> = {
+const faqData: I18nMap<FAQCategory[]> = {
   es: [
     {
       title: "Panel general",

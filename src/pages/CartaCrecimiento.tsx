@@ -422,7 +422,7 @@ const FR: VerticalContent = {
   internalLinks: ES.internalLinks,
 };
 
-const i18n: Record<SupportedLang, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+const i18n: I18nMap<VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
 const CartaCrecimiento = () => {
   const { lang } = useLanguage();

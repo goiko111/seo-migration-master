@@ -82,7 +82,7 @@ const featureIcons = [Monitor, Filter, Utensils, Eye, Search, Sparkles];
 const benefitIcons = [TrendingUp, RefreshCw, Users, ShoppingCart, Wine];
 const resultIcons = [Wine, TrendingUp, BarChart3];
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Software para Carta de Vinos en Restaurantes | Winerim",
     metaDescription: "El mejor software para gestionar tu carta de vinos: recomendaciones con IA, maridajes automáticos, analítica y carta digital interactiva para restaurantes.",

@@ -64,7 +64,7 @@ const iconMap = {
   list: ListChecks,
 };
 
-const labels: Record<SupportedLang, {
+const labels: I18nMap<{
   toc: string;
   relatedTools: string;
   relatedGuides: string;

@@ -48,7 +48,7 @@ interface PageContent {
   links: { to: string; label: string; type: "guide" | "tool" | "resource" }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Diseñar una Carta de Vinos Rentable | Guía para Restaurantes",
     metaDescription: "Aprende a diseñar una carta de vinos que maximice ventas y márgenes. Estrategias de pricing, wine mapping.",

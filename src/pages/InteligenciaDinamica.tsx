@@ -32,7 +32,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 /* ══════════════════════════════════════════════════════════
    i18n — Full page translations
    ══════════════════════════════════════════════════════════ */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string; seo_url: string;
   schema_desc: string; schema_category: string;
   breadcrumb_parent: string; breadcrumb_current: string;

@@ -42,7 +42,7 @@ const emptyLocal = (): LocalData => ({
   precioMedioCopa: 6,
 });
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string;
   jsonld_name: string; jsonld_desc: string;
   bc_tools: string; bc_page: string; bc_home: string;

@@ -49,7 +49,7 @@ interface PageContent {
   faqData: { q: string; a: string }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Fijar el Precio del Vino en un Restaurante | Guía de Pricing",
     metaDescription: "Guía práctica para definir precios de vino rentables en tu restaurante. Aprende a estructurar tu carta.",

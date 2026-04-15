@@ -426,7 +426,7 @@ const FR: VerticalContent = {
   internalLinks: ES.internalLinks,
 };
 
-const i18n: Record<SupportedLang, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+const i18n: I18nMap<VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
 /* ─── Supply connection block i18n ─── */
 const supplyBridge: Record<string, { tag: string; title: string; desc: string; cta: string }> = {

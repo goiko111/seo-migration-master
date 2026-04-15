@@ -24,7 +24,7 @@ import type { SupportedLang } from "@/i18n/types";
 
 type Suggestion = "mantener" | "renegociar" | "no-reponer" | "buscar-alternativa";
 
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Calculadora de Compra Inteligente | Demo Winerim Supply",
     seo_desc: "Analiza si una referencia de vino merece la pena: rentabilidad, reposición, sobreprecio y oportunidad de mejora. Demo de Winerim Supply.",

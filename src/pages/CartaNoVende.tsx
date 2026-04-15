@@ -3,7 +3,7 @@ import type { PainPageData } from "@/components/templates/PainTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang } from "@/i18n/types";
 
-const i18n: Record<SupportedLang, PainPageData> = {
+const i18n: I18nMap<PainPageData> = {
   es: {
     slug: "problemas/carta-de-vinos-no-vende",
     metaTitle: "¿Tu Carta de Vinos No Vende? Diagnóstico y Solución",

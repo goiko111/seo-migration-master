@@ -30,7 +30,7 @@ const fadeUp = {
 /* ══════════════════════════════════════════════════════════
    i18n — Full page translations
    ══════════════════════════════════════════════════════════ */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string; seo_url: string;
   breadcrumbs: { label: string; href?: string }[];
   hero_badge: string;

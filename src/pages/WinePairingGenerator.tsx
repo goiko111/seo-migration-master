@@ -20,7 +20,7 @@ import type { SupportedLang } from "@/i18n/types";
 interface WineRec { name: string; grape: string; region: string; why: string; style: string; servingTemp: string; }
 interface PairingResult { wines: WineRec[]; pairingExplanation: string; recommendedStyles: string[]; tips: string; }
 
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Wine Pairing Generator – Maridaje de vinos con IA | Winerim",
     seo_desc: "Introduce un plato y obtén 3 recomendaciones de vino con explicación del maridaje. Herramienta gratuita potenciada por inteligencia artificial.",

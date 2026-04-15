@@ -41,7 +41,7 @@ interface PageContent {
   links: { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Vender Vino por Copa en un Restaurante | Guía Práctica",
     metaDescription: "Guía práctica para diseñar una oferta de vinos por copa rentable en tu restaurante.",

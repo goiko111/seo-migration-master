@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import type { SupportedLang } from "@/i18n/types";
 
 /* ── i18n ── */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   eyebrow: string;
   title_1: string;
   title_highlight: string;

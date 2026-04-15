@@ -22,7 +22,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang } from "@/i18n/types";
 import type { ComparisonData } from "@/data/comparisons";
 
-const chrome: Record<SupportedLang, {
+const chrome: I18nMap<{
   breadComparativas: string; summaryLabel: string; tableTitle: string;
   midCtaTitle: string; midCtaDesc: string; prosConsTitle: string; prosLabel: string; consLabel: string;
   whenTitle: string; idealTitle: string; notTitle: (alt: string) => string;
