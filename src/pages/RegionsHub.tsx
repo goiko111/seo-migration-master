@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Globe, Search, ArrowRight, Filter, Wine } from "lucide-react";
+import { MapPin, Globe, Search, ArrowRight, Filter, Wine, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -10,7 +10,9 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { wineCountries, regionEntries } from "@/data/regionsLibrary";
+import { regionCatalog, CATALOG_STATS, getRegionsByCountry, getRegionsByType } from "@/data/regionsCatalog";
 
 const faqs = [
   { q: "¿Cuántas regiones vinícolas cubre Winerim?", a: "El catálogo de Winerim incluye más de 3.700 denominaciones, regiones e indicaciones geográficas de más de 40 países, con información de más de 95.000 bodegas." },
@@ -30,8 +32,13 @@ type SearchResult = {
 const RegionsHub = () => {
   const { allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
+  const [filterCountry, setFilterCountry] = useState<string>("");
+  const [filterType, setFilterType] = useState<string>("");
 
   const totalDenominations = wineCountries.reduce((acc, c) => acc + c.denominationsCount, 0);
+
+  // Get unique types from catalog
+  const uniqueTypes = Array.from(new Set(regionCatalog.map(r => r.type))).sort();
 
   // Combined search across countries AND denominations
   const { filteredCountries, searchResults } = useMemo(() => {
@@ -66,6 +73,21 @@ const RegionsHub = () => {
 
     return { filteredCountries: countries, searchResults: denomResults };
   }, [search]);
+
+  // Filter catalog by country and type
+  const filteredCatalog = useMemo(() => {
+    let result = regionCatalog;
+    if (filterCountry) result = result.filter(r => r.country === filterCountry);
+    if (filterType) result = result.filter(r => r.type === filterType);
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(r =>
+        r.name.toLowerCase().includes(q) ||
+        r.aliases.some(a => a.toLowerCase().includes(q))
+      );
+    }
+    return result;
+  }, [filterCountry, filterType, search]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -308,6 +330,152 @@ const RegionsHub = () => {
           </div>
         </section>
       )}
+
+      {/* FULL CATALOG */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal className="mb-10">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
+                  Catálogo completo de denominaciones
+                </h2>
+                <p className="text-muted-foreground max-w-2xl">
+                  {CATALOG_STATS.totalDenominations.toLocaleString()}+ denominaciones del mundo con sus sistemas de clasificación
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Filters */}
+          <ScrollReveal className="mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+              <div className="relative flex-1">
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar denominación..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-10 bg-secondary/30 border-border"
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <select
+                  value={filterCountry}
+                  onChange={(e) => setFilterCountry(e.target.value)}
+                  className="px-4 py-2 rounded-lg bg-secondary/30 border border-border text-sm font-medium hover:bg-secondary/50 transition-colors cursor-pointer"
+                >
+                  <option value="">Todos los países</option>
+                  {Array.from(new Set(regionCatalog.map(r => r.country)))
+                    .sort()
+                    .map(country => (
+                      <option key={country} value={country}>
+                        {country.charAt(0).toUpperCase() + country.slice(1)}
+                      </option>
+                    ))}
+                </select>
+
+                <select
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className="px-4 py-2 rounded-lg bg-secondary/30 border border-border text-sm font-medium hover:bg-secondary/50 transition-colors cursor-pointer"
+                >
+                  <option value="">Todos los tipos</option>
+                  {uniqueTypes.map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+
+                {(filterCountry || filterType || search.trim()) && (
+                  <button
+                    onClick={() => {
+                      setFilterCountry("");
+                      setFilterType("");
+                      setSearch("");
+                    }}
+                    className="px-4 py-2 rounded-lg bg-wine/10 text-wine border border-wine/30 text-sm font-medium hover:bg-wine/20 transition-colors flex items-center gap-2"
+                  >
+                    <X size={14} />
+                    Limpiar filtros
+                  </button>
+                )}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Results count */}
+          <ScrollReveal className="mb-6">
+            <p className="text-sm text-muted-foreground">
+              Mostrando <span className="font-semibold text-foreground">{filteredCatalog.length.toLocaleString()}</span> de <span className="font-semibold text-foreground">{CATALOG_STATS.totalDenominations.toLocaleString()}</span> denominaciones
+            </p>
+          </ScrollReveal>
+
+          {/* Catalog Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredCatalog.map((region, i) => {
+              const country = wineCountries.find((c) => c.slug === region.country);
+              return (
+                <ScrollReveal key={region.id} delay={Math.min(i * 0.02, 0.3)}>
+                  <Link
+                    to={`/biblioteca-vino/regiones/${region.country}/${region.slug}`}
+                    className="group block bg-gradient-card rounded-lg border border-border p-4 hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 h-full"
+                  >
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading text-sm font-semibold group-hover:text-wine transition-colors truncate">
+                          {region.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {country?.flag} {region.country}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      <Badge variant="secondary" className="text-xs">
+                        {region.type}
+                      </Badge>
+                      {region.parentRegion && (
+                        <span className="text-xs bg-secondary/30 px-2 py-0.5 rounded text-muted-foreground">
+                          {region.parentRegion}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-xs text-muted-foreground">
+                      {region.bodegas.toLocaleString()} {region.bodegas === 1 ? "bodega" : "bodegas"}
+                    </p>
+
+                    {region.aliases.length > 0 && (
+                      <p className="text-xs text-muted-foreground mt-2 line-clamp-1">
+                        Alias: {region.aliases.slice(0, 2).join(", ")}
+                        {region.aliases.length > 2 && "..."}
+                      </p>
+                    )}
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+          {filteredCatalog.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground mb-4">No se encontraron denominaciones con los filtros aplicados</p>
+              <button
+                onClick={() => {
+                  setFilterCountry("");
+                  setFilterType("");
+                  setSearch("");
+                }}
+                className="text-wine text-sm font-medium hover:underline"
+              >
+                Limpiar filtros
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* FAQ */}
       <FAQSection faqs={faqs} schemaId="regions-hub" />

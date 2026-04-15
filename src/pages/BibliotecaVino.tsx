@@ -13,6 +13,7 @@ import { grapeCatalog } from "@/data/grapesLibrary";
 import { wineCountries } from "@/data/regionsLibrary";
 import { familyMeta, familyOrder, getAllStyles } from "@/data/stylesLibrary";
 import { categoryMeta, categoryOrder, pairingEntries } from "@/data/pairingsLibrary";
+import { regionCatalog, CATALOG_STATS } from "@/data/regionsCatalog";
 
 // ── Search index ──
 type SearchResult = { name: string; category: string; badge: string; path: string; emoji?: string };
@@ -27,6 +28,8 @@ const buildSearchIndex = (): SearchResult[] => {
   pairingEntries.forEach((p) => results.push({ name: p.name, category: "maridaje", badge: "Maridaje", path: `/biblioteca-vino/maridajes/${p.slug}`, emoji: categoryMeta[p.category]?.emoji }));
   // Countries
   wineCountries.forEach((c) => results.push({ name: c.name, category: "region", badge: "País", path: `/biblioteca-vino/regiones/${c.slug}`, emoji: c.flag }));
+  // Catalog regions/denominations
+  regionCatalog.slice(0, 100).forEach((r) => results.push({ name: r.name, category: "denominacion", badge: "Denominación", path: `/biblioteca-vino/regiones/${r.country}/${r.slug}`, emoji: "🍷" }));
   return results;
 };
 
@@ -146,7 +149,7 @@ const BibliotecaVino = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             <Counter end={85} label="variedades de uva" />
-            <Counter end={3714} label="denominaciones" />
+            <Counter end={CATALOG_STATS.totalDenominations} label="denominaciones" />
             <Counter end={41} label="países" />
             <Counter end={8} label="estilos de vino" />
             <Counter end={10} label="guías de maridaje" />
