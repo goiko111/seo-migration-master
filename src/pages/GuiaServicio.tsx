@@ -18,7 +18,9 @@ const serviceData = [
   { style: "Fortificado", ml: 75, cups: 10, temp: "6–18 °C (según tipo)", glass: "Catavino de Jerez o copa pequeña tulipa", emoji: "🏺", link: "/biblioteca-vino/estilos/vino-generoso-fortificado" },
 ];
 
-const GuiaServicio = () => (
+const GuiaServicio = () => {
+  const { allLangPaths } = useLanguage();
+  return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
       title="Guía de Servicio del Vino | Estándar Winerim (WSET)"
