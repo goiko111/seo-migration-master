@@ -1146,7 +1146,7 @@ export const styleEntries: StyleEntry[] = [
     relatedStyles: ["amontillado", "generoso"],
     clientRecognition: "bajo",
     cartaRole: ["premium", "descubrimiento"],
-    cartaCommunication: "Oloroso es para cerradores. Comunicar 'vino para después de comer, potente y reflexivo' genera momento.',
+    cartaCommunication: "Oloroso es para cerradores. Comunicar 'vino para después de comer, potente y reflexivo' genera momento.",
     clientProfile: "Gourmets, clientes de menú degustación, cigarristas.",
     sellByStrategy: "Por productor o por edad (Oloroso VOS/VORS).",
     whenSafe: "Para clientes con experiencia. No es opción casual.",
