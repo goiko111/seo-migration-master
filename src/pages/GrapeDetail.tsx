@@ -64,7 +64,9 @@ const GrapeDetail = () => {
 /* ═══════════════════════════════════════════════════════════════════════
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════════════ */
-const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrapeBySlug>> }) => (
+const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrapeBySlug>> }) => {
+  const { allLangPaths } = useLanguage();
+  return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
       title={data.seo.title}
@@ -378,6 +380,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
     <Footer />
   </div>
 );
+}
 
 /* ═══════════════════════════════════════════════════════════════════════
    CATALOG DETAIL — Simplified view for grapes without full Winerim layer

@@ -14,7 +14,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import mockupImg from "@/assets/winerim-dashboard-insights.png";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 type IconType = typeof Brain;
 
@@ -44,7 +44,7 @@ interface PageContent {
   faqData: { q: string; a: string }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Inteligencia Artificial para Restaurantes | IA para Vender Más Vino",
     metaDescription: "Descubre cómo la inteligencia artificial ayuda a los restaurantes a vender más vino, optimizar su bodega y mejorar la experiencia del cliente.",

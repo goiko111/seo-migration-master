@@ -12,7 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface WineExample {
   category: string;
@@ -36,7 +36,7 @@ interface Tip {
   points: string[];
 }
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   metaTitle: string;
   metaDescription: string;
   url: string;

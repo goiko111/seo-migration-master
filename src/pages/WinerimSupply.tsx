@@ -15,7 +15,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
-import { SupportedLang } from "@/i18n/types";
+import { type SupportedLang, type I18nMap } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
@@ -30,7 +30,7 @@ const fadeUp = {
 /* ══════════════════════════════════════════════════════════
    i18n — Full page translations
    ══════════════════════════════════════════════════════════ */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string; seo_url: string;
   breadcrumbs: { label: string; href?: string }[];
   hero_badge: string;

@@ -26,12 +26,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
-type L = SupportedLang;
+type L = SupportedLang; type LMap<T> = I18nMap<T>;
 
 /* ── i18n helpers ── */
-const i = <T,>(r: Record<L, T>): Record<L, T> => r;
+const i = <T,>(r: LMap<T>): LMap<T> => r;
 
 const seo = i({
   es: { title: "Análisis Gratuito de tu Carta de Vinos | Winerim", desc: "Envía tu carta de vinos y recibe un análisis profesional gratuito con recomendaciones para mejorar márgenes, rotación y ventas. Sin compromiso.", url: "https://winerim.wine/analisis-carta" },

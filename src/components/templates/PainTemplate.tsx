@@ -20,7 +20,7 @@ import ArticleMidCTA from "@/components/article/ArticleMidCTA";
 import CTASection from "@/components/CTASection";
 import StickyCTA from "@/components/StickyCTA";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface SolutionStep {
   step: string;
@@ -54,7 +54,7 @@ export interface PainPageData {
   ctaFinalDescription?: string;
 }
 
-const labels: Record<SupportedLang, {
+const labels: I18nMap<{
   problems: string;
   commonProblem: string;
   requestDemo: string;

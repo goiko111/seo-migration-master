@@ -12,7 +12,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import SummaryBox from "@/components/seo/SummaryBox";
 import { getBPByType } from "@/data/benchmarksPlaybooks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const CANONICAL = "https://winerim.wine";
 
@@ -42,7 +42,7 @@ interface PageChrome {
   links: { to: string; label: string; type: "guide" | "tool" | "solution" }[];
 }
 
-const i18n: Record<SupportedLang, PageChrome> = {
+const i18n: I18nMap<PageChrome> = {
   es: {
     seoTitle: "Benchmarks & Playbooks para Cartas de Vino | Winerim",
     seoDesc: "Benchmarks del sector y playbooks prácticos para optimizar tu carta de vinos. Datos de referencia, planes de acción y criterios expertos para restaurantes.",

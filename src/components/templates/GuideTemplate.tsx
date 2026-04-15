@@ -22,7 +22,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface GuideSection {
   heading: string;
@@ -64,7 +64,7 @@ const iconMap = {
   list: ListChecks,
 };
 
-const labels: Record<SupportedLang, {
+const labels: I18nMap<{
   toc: string;
   relatedTools: string;
   relatedGuides: string;

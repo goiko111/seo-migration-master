@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ─── Season logic ─── */
 type Season = "summer" | "winter" | "spring" | "autumn";
@@ -60,7 +60,7 @@ const defaultScenarios: Record<string, ScenarioDeltas> = {
 };
 
 /* ─── i18n ─── */
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Calculadora de Impacto en Ticket Medio del Vino | Demo Winerim",
     seo_desc: "Simula el impacto de la penetración del vino, copa vs botella y mix de referencias sobre el ticket medio de tu restaurante. Herramienta gratuita.",

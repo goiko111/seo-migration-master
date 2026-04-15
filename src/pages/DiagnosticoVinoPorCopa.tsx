@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface CopaDef {
   nombre: string;
@@ -31,7 +31,7 @@ interface CopaDef {
 
 const ESTILOS_RECOMENDADOS = ["espumoso", "blanco", "rosado", "tinto"] as const;
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string;
   jsonld_name: string; jsonld_desc: string;
   breadcrumb_tools: string; breadcrumb_page: string;

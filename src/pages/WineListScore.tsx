@@ -19,7 +19,7 @@ import SummaryBox from "@/components/seo/SummaryBox";
 import { Button } from "@/components/ui/button";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface Block {
   id: string;
@@ -28,7 +28,7 @@ interface Block {
   questions: { text: string; options: { label: string; score: number }[] }[];
 }
 
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Wine List Score: Audita tu Carta de Vinos (0-100) | Winerim",
     seo_desc: "Evalúa tu carta de vinos con un score de 0 a 100. Diagnóstico gratuito: estructura, equilibrio, pricing, copa, rotación y potencial comercial.",

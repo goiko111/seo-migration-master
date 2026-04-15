@@ -17,7 +17,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ───── types ───── */
 interface SectionResult {
@@ -64,7 +64,7 @@ const scoreBg = (s: number) =>
   s >= 75 ? "bg-emerald-500/10" : s >= 50 ? "bg-amber-500/10" : "bg-destructive/10";
 
 /* ───── i18n ───── */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string;
   jsonld_name: string; jsonld_desc: string;
   bc_tools: string; bc_page: string;

@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Cartas de 80–250 Referencias | Optimización con Criterio",
@@ -422,7 +422,7 @@ const FR: VerticalContent = {
   internalLinks: ES.internalLinks,
 };
 
-const i18n: Record<SupportedLang, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+const i18n: I18nMap<VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
 const CartaCrecimiento = () => {
   const { lang } = useLanguage();

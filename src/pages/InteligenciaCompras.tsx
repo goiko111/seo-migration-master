@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Inteligencia de Compras para Restaurantes | Winerim",
@@ -426,7 +426,7 @@ const FR: VerticalContent = {
   internalLinks: ES.internalLinks,
 };
 
-const i18n: Record<SupportedLang, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
+const i18n: I18nMap<VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
 /* ─── Supply connection block i18n ─── */
 const supplyBridge: Record<string, { tag: string; title: string; desc: string; cta: string }> = {

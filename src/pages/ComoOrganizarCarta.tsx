@@ -13,7 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface OrgMethod { title: string; examples: string; pros: string; cons: string; }
 interface TipItem { icon: typeof List; title: string; desc: string; }
@@ -44,7 +44,7 @@ interface PageContent {
   links: { to: string; label: string; type: "guide" | "tool" | "resource" }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Organizar una Carta de Vinos en un Restaurante",
     metaDescription: "Guía práctica para estructurar tu carta de vinos: métodos de organización, errores comunes, estructura de precios y cómo la tecnología puede ayudarte.",

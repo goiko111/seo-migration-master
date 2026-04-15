@@ -11,9 +11,9 @@ import NextSteps from "@/components/seo/NextSteps";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import { comparisons } from "@/data/comparisons";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seoTitle: string; seoDesc: string; badge: string; h1: string; h1h: string; subtitle: string;
   viewComp: string; nextTitle: string; nextSub: string; ctaTitle1: string; ctaTitleH: string; ctaSub: string; ctaBtn: string;
   breadComparativas: string; relatedTitle: string;

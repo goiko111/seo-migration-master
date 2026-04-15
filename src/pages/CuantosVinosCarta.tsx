@@ -14,7 +14,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 interface RestType { type: string; range: string; desc: string; tips: string[] }
 interface Problem { icon: typeof Wine; title: string; desc: string }
@@ -42,7 +42,7 @@ interface PageContent {
   links: { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cuántos Vinos Debe Tener una Carta de Vinos | Guía por Tipo de Restaurante",
     metaDescription: "Descubre cuántas referencias debe tener tu carta de vinos según el tipo de restaurante.",

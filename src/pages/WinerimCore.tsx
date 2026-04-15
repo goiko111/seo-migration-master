@@ -15,7 +15,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation ── */
@@ -89,7 +89,7 @@ const capabilityIconColors = [
   "text-violet-400", "text-wine", "text-cyan-400",
 ];
 
-const i18n: Record<SupportedLang, CoreI18n> = {
+const i18n: I18nMap<CoreI18n> = {
   es: {
     seo_title: "Winerim Core — Motor analítico para cartas de vinos | Winerim",
     seo_desc: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, benchmark y arquitectura de carta en una sola capa analítica.",

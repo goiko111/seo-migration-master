@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ── Content per form_type ── */
 interface ThankYouContent {
@@ -24,14 +24,14 @@ interface PageChrome {
   urgent: string;
 }
 
-const CHROME: Record<SupportedLang, PageChrome> = {
+const CHROME: I18nMap<PageChrome> = {
   es: { seoTitle: "Gracias | Winerim", seoDesc: "Tu solicitud ha sido recibida correctamente.", nextSteps: "Próximos pasos", urgent: "¿Necesitas algo urgente?" },
   en: { seoTitle: "Thank You | Winerim", seoDesc: "Your request has been received successfully.", nextSteps: "Next steps", urgent: "Need something urgently?" },
   it: { seoTitle: "Grazie | Winerim", seoDesc: "La tua richiesta è stata ricevuta correttamente.", nextSteps: "Prossimi passi", urgent: "Hai bisogno di qualcosa di urgente?" },
   fr: { seoTitle: "Merci | Winerim", seoDesc: "Votre demande a bien été reçue.", nextSteps: "Prochaines étapes", urgent: "Besoin de quelque chose d'urgent ?" },
 };
 
-const CONTENT: Record<SupportedLang, Record<string, ThankYouContent>> = {
+const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
   es: {
     demo: {
       title: "¡Solicitud de demo recibida!",

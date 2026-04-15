@@ -4,7 +4,7 @@ export type GrapeColor = "tinta" | "blanca" | "rosada";
 export type AcidityLevel = "baja" | "media" | "alta" | "muy-alta";
 export type BodyLevel = "ligero" | "medio" | "alto" | "muy-alto";
 export type AromaticIntensity = "sutil" | "media" | "alta" | "muy-alta";
-export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "nicho";
+export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "muy-bajo" | "nicho";
 export type CommercialDifficulty = "fácil" | "media" | "difícil" | "muy-difícil";
 export type GrapeScope = "internacional" | "nacional" | "local" | "diferencial";
 export type CartaRole = "conocida" | "diferencial" | "premium" | "descubrimiento" | "valor" | "identitaria";
@@ -4300,7 +4300,7 @@ export const grapeEntries: GrapeEntry[] = [
 // CATALOG — Lightweight entries for all 87 grapes (for hub listing)
 // ═══════════════════════════════════════════════════════════════════════
 
-export const grapeCatalog: GrapeCatalogEntry[] = [
+export const grapeCatalog: (GrapeCatalogEntry | GrapeEntry)[] = [
   // TINTAS (41)
   { slug: "tempranillo", name: "Tempranillo", synonyms: ["Tinto Fino", "Cencibel", "Ull de Llebre", "Tinta de Toro", "Tinta Roriz", "Aragonez"], color: "tinta", countries: ["España", "Portugal", "Argentina"], keyRegions: ["Rioja", "Ribera del Duero", "Toro", "Douro"], tastingNotes: "Principal tinta española. Frutos rojos, cuero, vainilla." },
   { slug: "garnacha", name: "Garnacha", synonyms: ["Grenache", "Cannonau", "Garnatxa"], color: "tinta", countries: ["España", "Francia", "Italia", "Australia"], keyRegions: ["Priorat", "Campo de Borja", "Châteauneuf-du-Pape"], tastingNotes: "Alta graduación, frutos rojos maduros. Base de GSM." },
@@ -4393,7 +4393,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
   // ROSADA (1)
   { slug: "moscatel-rosado", name: "Moscatel Rosado", synonyms: ["Muscat Rosé"], color: "rosada", countries: ["España", "Francia"], keyRegions: ["Valencia", "Languedoc"], tastingNotes: "Variante rosada del Moscatel. Muy aromática." },
   {
-    id: "malvasia",
     slug: "malvasia",
     name: "Malvasía",
     synonyms: ["Malmsey", "Malvasia Candida", "Malvasia del Lazio"],
@@ -4435,7 +4434,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
     },
   },
   {
-    id: "picpoul",
     slug: "picpoul",
     name: "Picpoul",
     synonyms: ["Piquepoul", "Piquepole"],
@@ -4477,7 +4475,6 @@ export const grapeCatalog: GrapeCatalogEntry[] = [
     },
   },
   {
-    id: "falanghina",
     slug: "falanghina",
     name: "Falanghina",
     synonyms: ["Falerno"],

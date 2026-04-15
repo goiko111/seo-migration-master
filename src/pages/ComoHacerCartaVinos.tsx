@@ -1,9 +1,9 @@
 import GuideTemplate from "@/components/templates/GuideTemplate";
 import type { GuidePageData } from "@/components/templates/GuideTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
-const i18n: Record<SupportedLang, GuidePageData> = {
+const i18n: I18nMap<GuidePageData> = {
   es: {
     slug: "como-hacer-una-carta-de-vinos",
     metaTitle: "Cómo Hacer una Carta de Vinos Rentable | Guía Completa",

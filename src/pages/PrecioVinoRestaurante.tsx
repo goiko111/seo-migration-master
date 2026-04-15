@@ -12,7 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 type IconType = typeof DollarSign;
 
@@ -49,7 +49,7 @@ interface PageContent {
   faqData: { q: string; a: string }[];
 }
 
-const i18n: Record<SupportedLang, PageContent> = {
+const i18n: I18nMap<PageContent> = {
   es: {
     metaTitle: "Cómo Fijar el Precio del Vino en un Restaurante | Guía de Pricing",
     metaDescription: "Guía práctica para definir precios de vino rentables en tu restaurante. Aprende a estructurar tu carta.",

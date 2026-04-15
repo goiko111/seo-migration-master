@@ -18,13 +18,13 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 const INCREMENTS = [10, 20, 30] as const;
 const DAYS_PER_MONTH = 26;
 const MONTHS_PER_YEAR = 12;
 
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Wine Sales ROI Calculator – Calcula tu potencial de ventas | Winerim",
     seo_desc: "Calcula cuánto puede ganar tu restaurante optimizando su carta de vinos. Simulador gratuito con proyecciones de incremento del 10%, 20% y 30%.",

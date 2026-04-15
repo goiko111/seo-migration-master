@@ -15,7 +15,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { SupportedLang } from "@/i18n/types";
+import { type SupportedLang, type I18nMap } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
@@ -32,7 +32,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 /* ══════════════════════════════════════════════════════════
    i18n — Full page translations
    ══════════════════════════════════════════════════════════ */
-const i18n: Record<SupportedLang, {
+const i18n: I18nMap<{
   seo_title: string; seo_desc: string; seo_url: string;
   schema_desc: string; schema_category: string;
   breadcrumb_parent: string; breadcrumb_current: string;

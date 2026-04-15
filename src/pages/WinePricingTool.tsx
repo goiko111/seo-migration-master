@@ -15,9 +15,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
-const i18n: Record<SupportedLang, Record<string, any>> = {
+const i18n: I18nMap<Record<string, any>> = {
   es: {
     seo_title: "Wine Pricing Optimizer – Precio óptimo de vino | Winerim",
     seo_desc: "Calcula el precio de venta óptimo para cada vino de tu carta. Herramienta gratuita con multiplicadores, posicionamiento y psicología de precios.",

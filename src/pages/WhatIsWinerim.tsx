@@ -18,10 +18,10 @@ import SummaryBox from "@/components/seo/SummaryBox";
 import FactsBox from "@/components/seo/FactsBox";
 import NotForSection from "@/components/seo/NotForSection";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
-type L = SupportedLang;
-const i = <T,>(r: Record<L, T>): Record<L, T> => r;
+type L = SupportedLang; type LMap<T> = I18nMap<T>;
+const i = <T,>(r: LMap<T>): LMap<T> => r;
 
 /* ── i18n data ── */
 const seoI = i({

@@ -1,14 +1,14 @@
 // ─── Wine Regions & Denominations Data Model ───────────────────────────
 
 export type DenominationType =
-  | "DOCa" | "DO" | "AOP" | "AVA" | "IGP" | "PDO" | "GI" | "DOCG" | "DOC" | "DOQ"
+  | "DOCa" | "DO" | "AOP" | "AVA" | "IGP" | "PDO" | "GI" | "IG" | "DOCG" | "DOC" | "DOQ"
   | "Grand Cru" | "Premier Cru" | "Cru" | "Zone" | "Subzona"
-  | "VP" | "IGT" | "VR" | "DAC" | "AOC" | "State" | "Region";
+  | "VP" | "IGT" | "VR" | "DAC" | "AOC" | "State" | "Region" | "WO" | "Anbaugebiet";
 
 export type PrestigeLevel = "icónico" | "premium" | "reconocido" | "emergente" | "local";
-export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "nicho";
-export type CartaRole = "segura" | "diferencial" | "premium" | "identitaria" | "prestigio" | "descubrimiento" | "valor";
-export type WineType = "tinto" | "blanco" | "rosado" | "espumoso" | "dulce" | "generoso" | "naranja";
+export type ClientRecognition = "muy-alto" | "alto" | "medio-alto" | "medio" | "bajo-medio" | "bajo" | "muy-bajo" | "nicho";
+export type CartaRole = "segura" | "diferencial" | "premium" | "identitaria" | "prestigio" | "descubrimiento" | "valor" | "aperitivo" | "blanco-mineral" | "emergente" | "rosado-estructurado" | "paisaje" | "variedad-autóctona" | "exclusividad" | "tinto-potente" | "mediterráneo" | "tinto-estructurado" | "blanco-altura" | "tradición" | "tinto-mineral" | "generoso" | "blanco-ligero" | "dulce-moscatel" | "tinto-garnacha" | "accesibilidad" | "tinto-accesible" | "bobal" | "experimental" | "local" | "volcánico" | "blanco-volcánico" | "terroir-extremo" | "moderno" | "elegancia";
+export type WineType = "tinto" | "blanco" | "rosado" | "espumoso" | "dulce" | "generoso" | "naranja" | "seco";
 
 // ─── Region Entry (individual denomination / region) ───────────────────
 export interface RegionEntry {
@@ -6959,7 +6959,7 @@ export const regionEntries: RegionEntry[] = [
     whenToHighlight: "En cartas de vino fino, como Riesling de rareza con narrativa histórica.",
     clientProfile: "Sommelier experto, coleccionista, cliente que busca rareza extrema.",
     sellByStrategy: "Vende por historia, por característica de terrazas, por rareza.",
-    competingRegiones: ["Mosel", "Rheingau"],
+    competingRegions: ["Mosel", "Rheingau"],
     commonMistakes: [
       "Muy difícil de obtener: distribución limitada",
       "Requiere búsqueda activa",
