@@ -68,6 +68,7 @@ const StyleDetail = () => {
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════ */
 const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
+  const { allLangPaths } = useLanguage();
   const familyInfo = familyMeta[data.family];
 
   return (
