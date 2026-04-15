@@ -6,8 +6,8 @@ export type DenominationType =
   | "VP" | "IGT" | "VR" | "DAC" | "AOC" | "State" | "Region";
 
 export type PrestigeLevel = "icónico" | "premium" | "reconocido" | "emergente" | "local";
-export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "nicho";
-export type CartaRole = "segura" | "diferencial" | "premium" | "identitaria" | "prestigio" | "descubrimiento" | "valor";
+export type ClientRecognition = "muy-alto" | "alto" | "medio" | "bajo" | "muy-bajo" | "nicho";
+export type CartaRole = "segura" | "diferencial" | "premium" | "identitaria" | "prestigio" | "descubrimiento" | "valor" | "aperitivo" | "blanco-mineral" | "emergente" | "rosado-estructurado" | "paisaje" | "variedad-autóctona" | "exclusividad" | "tinto-potente" | "mediterráneo" | "tinto-estructurado" | "blanco-altura" | "tradición" | "tinto-mineral" | "generoso" | "blanco-ligero" | "dulce-moscatel" | "tinto-garnacha" | "accesibilidad" | "tinto-accesible" | "bobal" | "experimental" | "local" | "volcánico" | "blanco-volcánico";
 export type WineType = "tinto" | "blanco" | "rosado" | "espumoso" | "dulce" | "generoso" | "naranja";
 
 // ─── Region Entry (individual denomination / region) ───────────────────

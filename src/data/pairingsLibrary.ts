@@ -13,7 +13,7 @@ export type PairingCategory =
   | "tapas-aperitivos";
 
 export type PairingLevel = "clasico" | "diferencial" | "premium";
-export type IntensityLevel = "suave" | "media" | "intensa" | "muy-intensa";
+export type IntensityLevel = "suave" | "suave-media" | "media" | "media-intensa" | "intensa" | "muy-intensa";
 
 export interface DishPairing {
   dish: string;
@@ -33,9 +33,9 @@ export interface PairingEntry {
   dishes: DishPairing[];
   // Sensory axes
   intensity: IntensityLevel;
-  fatLevel: "baja" | "media" | "alta";
-  spiceLevel: "ninguno" | "suave" | "medio" | "alto";
-  acidityInFood: "baja" | "media" | "alta";
+  fatLevel: "baja" | "media" | "media-alta" | "alta" | "muy-alta";
+  spiceLevel: "ninguno" | "suave" | "suave-medio" | "medio" | "alto" | "muy-alto";
+  acidityInFood: "baja" | "media" | "alta" | "muy-alta";
   // Relations
   recommendedStyles: string[];
   recommendedRegions: string[];
