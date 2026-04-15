@@ -148,21 +148,92 @@ const BibliotecaVino = () => {
       <section className="py-12 border-y border-border bg-gradient-dark">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            <Counter end={85} label="variedades de uva" />
             <Counter end={CATALOG_STATS.totalDenominations} label="denominaciones" />
-            <Counter end={41} label="países" />
-            <Counter end={8} label="estilos de vino" />
-            <Counter end={10} label="guías de maridaje" />
-            <Counter end={80} label="combinaciones plato-vino" />
+            <Counter end={CATALOG_STATS.totalCountries} label="países" />
+            <Counter end={grapeCatalog.length} label="variedades de uva" />
+            <Counter end={getAllStyles().length} label="estilos de vino" />
+            <Counter end={pairingEntries.length} label="guías de maridaje" />
+            <Counter end={wineCountries.length} label="países productores" />
           </div>
         </div>
       </section>
 
-      {/* ESTILOS PREVIEW */}
+      {/* 1. REGIONES — La sección más grande, va primero */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <MapPin size={20} className="text-wine" />
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">Regiones vinícolas</h2>
+              </div>
+              <Link to="/biblioteca-vino/regiones" className="text-wine text-sm font-medium hover:underline flex items-center gap-1">
+                Explorar {CATALOG_STATS.totalDenominations.toLocaleString()}+ denominaciones <ArrowRight size={14} />
+              </Link>
+            </div>
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+              {CATALOG_STATS.totalDenominations.toLocaleString()} denominaciones de {CATALOG_STATS.totalCountries} países: DOs, DOCs, DOCGs, AOPs, AVAs, Premier Crus, Grand Crus y más.
+            </p>
+          </ScrollReveal>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {topCountries.map((slug, i) => {
+              const country = wineCountries.find((c) => c.slug === slug);
+              if (!country) return null;
+              return (
+                <ScrollReveal key={slug} delay={i * 0.05}>
+                  <Link to={`/biblioteca-vino/regiones/${slug}`}
+                    className="group block bg-gradient-card rounded-xl border border-border p-5 hover:border-wine/30 transition-all h-full text-center">
+                    <span className="text-3xl block mb-2">{country.flag}</span>
+                    <p className="font-heading text-sm font-semibold group-hover:text-wine transition-colors">{country.name}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{country.denominationsCount.toLocaleString()} denominaciones</p>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 2. VARIEDADES DE UVA */}
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Grape size={20} className="text-wine" />
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">Variedades de uva</h2>
+              </div>
+              <Link to="/biblioteca-vino/uvas" className="text-wine text-sm font-medium hover:underline flex items-center gap-1">
+                Explorar {grapeCatalog.length} variedades <ArrowRight size={14} />
+              </Link>
+            </div>
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+              Perfil sensorial, reconocimiento comercial, estrategia de venta y maridajes de las {grapeCatalog.length} variedades más relevantes del mundo.
+            </p>
+          </ScrollReveal>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {topGrapes.map((slug, i) => {
+              const grape = grapeCatalog.find((g) => g.slug === slug);
+              if (!grape) return null;
+              return (
+                <ScrollReveal key={slug} delay={i * 0.05}>
+                  <Link to={`/biblioteca-vino/uvas/${slug}`}
+                    className="group block bg-gradient-card rounded-xl border border-border p-5 hover:border-wine/30 transition-all h-full">
+                    <p className="font-heading text-sm font-semibold group-hover:text-wine transition-colors mb-1">{grape.name}</p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{grape.tastingNotes}</p>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. ESTILOS DE VINO */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Palette size={20} className="text-wine" />
                 <h2 className="font-heading text-2xl md:text-3xl font-bold">Estilos de vino</h2>
@@ -171,6 +242,9 @@ const BibliotecaVino = () => {
                 Ver todos los estilos <ArrowRight size={14} />
               </Link>
             </div>
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+              Desde tintos jóvenes hasta Champagne, generosos de Jerez, vinos naranjas y dulces nobres. 8 familias, 50+ subtipos.
+            </p>
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
             {familyOrder.map((family, i) => {
@@ -193,11 +267,11 @@ const BibliotecaVino = () => {
         </div>
       </section>
 
-      {/* MARIDAJES PREVIEW */}
+      {/* 4. MARIDAJES */}
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Utensils size={20} className="text-wine" />
                 <h2 className="font-heading text-2xl md:text-3xl font-bold">Maridajes</h2>
@@ -206,6 +280,9 @@ const BibliotecaVino = () => {
                 Ver todas las guías <ArrowRight size={14} />
               </Link>
             </div>
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+              Guías de maridaje por categoría y plato individual. Desde solomillo hasta sushi, con recomendaciones de uva, región y estilo.
+            </p>
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {categoryOrder.map((cat, i) => {
@@ -219,71 +296,6 @@ const BibliotecaVino = () => {
                   >
                     <span className="text-2xl block mb-2">{meta.emoji}</span>
                     <span className="text-xs font-semibold group-hover:text-wine transition-colors leading-tight block">{meta.label}</span>
-                  </Link>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* VARIEDADES PREVIEW */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-3">
-                <Grape size={20} className="text-wine" />
-                <h2 className="font-heading text-2xl md:text-3xl font-bold">Variedades de uva</h2>
-              </div>
-              <Link to="/biblioteca-vino/uvas" className="text-wine text-sm font-medium hover:underline flex items-center gap-1">
-                Explorar 85 variedades <ArrowRight size={14} />
-              </Link>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {topGrapes.map((slug, i) => {
-              const grape = grapeCatalog.find((g) => g.slug === slug);
-              if (!grape) return null;
-              return (
-                <ScrollReveal key={slug} delay={i * 0.05}>
-                  <Link to={`/biblioteca-vino/uvas/${slug}`}
-                    className="group block bg-gradient-card rounded-xl border border-border p-5 hover:border-wine/30 transition-all h-full">
-                    <p className="font-heading text-sm font-semibold group-hover:text-wine transition-colors mb-1">{grape.name}</p>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{grape.tastingNotes}</p>
-                  </Link>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* REGIONES PREVIEW */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-3">
-                <MapPin size={20} className="text-wine" />
-                <h2 className="font-heading text-2xl md:text-3xl font-bold">Regiones vinícolas</h2>
-              </div>
-              <Link to="/biblioteca-vino/regiones" className="text-wine text-sm font-medium hover:underline flex items-center gap-1">
-                Explorar 41 países <ArrowRight size={14} />
-              </Link>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {topCountries.map((slug, i) => {
-              const country = wineCountries.find((c) => c.slug === slug);
-              if (!country) return null;
-              return (
-                <ScrollReveal key={slug} delay={i * 0.05}>
-                  <Link to={`/biblioteca-vino/regiones/${slug}`}
-                    className="group block bg-gradient-card rounded-xl border border-border p-5 hover:border-wine/30 transition-all h-full text-center">
-                    <span className="text-3xl block mb-2">{country.flag}</span>
-                    <p className="font-heading text-sm font-semibold group-hover:text-wine transition-colors">{country.name}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{country.denominationsCount.toLocaleString()} denominaciones</p>
                   </Link>
                 </ScrollReveal>
               );
