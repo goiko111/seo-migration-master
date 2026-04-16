@@ -168,7 +168,7 @@ const CTA_SETS_I18N: I18nMap<Record<FunnelStage, CTASet>> = {
 export const CTA_SETS = CTA_SETS_I18N.es;
 
 /* ─── Get CTA sets by language ─── */
-export const getCTASetsForLang = (lang: SupportedLang): Record<FunnelStage, CTASet> => CTA_SETS_I18N[lang];
+export const getCTASetsForLang = (lang: SupportedLang): Record<FunnelStage, CTASet> => CTA_SETS_I18N[lang] ?? CTA_SETS_I18N.en;
 
 /* ─── Contextual CTA sets by page type ─── */
 export type PageType =
