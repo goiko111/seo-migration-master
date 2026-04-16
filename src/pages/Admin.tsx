@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogOut } from "lucide-react";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import { toast } from "sonner";
 import ArticleEditor from "@/components/admin/ArticleEditor";
 import ArticleList from "@/components/admin/ArticleList";

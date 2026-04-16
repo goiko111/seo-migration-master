@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import ScrollReveal from "./ScrollReveal";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";

@@ -10,7 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
-import mockupImg from "@/assets/winerim-mockup.png";
+import mockupImg from "@/assets/winerim-mockup.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n } from "@/i18n/types";
 

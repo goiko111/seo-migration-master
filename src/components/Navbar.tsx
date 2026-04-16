@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Badge } from "@/components/ui/badge";

@@ -12,7 +12,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
-import mockupImg from "@/assets/winerim-dashboard-insights.png";
+import mockupImg from "@/assets/winerim-dashboard-insights.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
 import { getI18n } from "@/i18n/types";

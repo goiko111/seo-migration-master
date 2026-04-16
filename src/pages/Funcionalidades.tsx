@@ -16,22 +16,22 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 
 // ─── Screenshots ───
-import tabletHeroImg from "@/assets/winerim-tablet-hero.png";
-import tabletDetailImg from "@/assets/winerim-tablet-detail.png";
-import tabletComparatorImg from "@/assets/winerim-tablet-comparator.png";
-import tabletPairingImg from "@/assets/winerim-tablet-pairing.png";
-import mgmtStock from "@/assets/mgmt-stock.png";
-import mgmtRendimiento from "@/assets/mgmt-rendimiento.png";
-import mgmtInsights from "@/assets/mgmt-insights.png";
-import mgmtRecomendados from "@/assets/mgmt-recomendados.png";
-import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.png";
-import mgmtRotacion from "@/assets/mgmt-rotacion.png";
-import mgmtObsolescencia from "@/assets/mgmt-obsolescencia.png";
-import dashboardInsightsImg from "@/assets/winerim-dashboard-insights.png";
-import ss08 from "@/assets/screenshots/ss-08.png";
-import ss10 from "@/assets/screenshots/ss-10.png";
-import ss14 from "@/assets/screenshots/ss-14.png";
-import ss19 from "@/assets/screenshots/ss-19.png";
+import tabletHeroImg from "@/assets/winerim-tablet-hero.webp";
+import tabletDetailImg from "@/assets/winerim-tablet-detail.webp";
+import tabletComparatorImg from "@/assets/winerim-tablet-comparator.webp";
+import tabletPairingImg from "@/assets/winerim-tablet-pairing.webp";
+import mgmtStock from "@/assets/mgmt-stock.webp";
+import mgmtRendimiento from "@/assets/mgmt-rendimiento.webp";
+import mgmtInsights from "@/assets/mgmt-insights.webp";
+import mgmtRecomendados from "@/assets/mgmt-recomendados.webp";
+import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.webp";
+import mgmtRotacion from "@/assets/mgmt-rotacion.webp";
+import mgmtObsolescencia from "@/assets/mgmt-obsolescencia.webp";
+import dashboardInsightsImg from "@/assets/winerim-dashboard-insights.webp";
+import ss08 from "@/assets/screenshots/ss-08.webp";
+import ss10 from "@/assets/screenshots/ss-10.webp";
+import ss14 from "@/assets/screenshots/ss-14.webp";
+import ss19 from "@/assets/screenshots/ss-19.webp";
 
 /* ─────────────────────────────────────────────
    Feature definitions with screenshots
