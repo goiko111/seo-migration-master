@@ -595,6 +595,260 @@ i18n.fr = {
   ctaBtn2: "Analyser ma carte gratuitement",
 };
 
+/* DE */
+i18n.de = {
+  seo_title: "Winerim Pläne und Preise | Weinkarten-Software für Restaurants",
+  seo_desc: "Finden Sie den passenden Winerim-Plan für Ihr Restaurant, Hotel oder Ihre Gruppe. Ohne Bindung, Einrichtung in 48h und dedizierter Support.",
+  breadcrumb: "Preise",
+  badge: "Pläne und Preise",
+  title: "Winerim Pläne und Preise — Wählen Sie den passenden für Ihren <em>Betrieb</em>",
+  subtitle: "Ohne Bindung. Einrichtung in 48 Stunden. Dedizierter Support in allen Plänen enthalten.",
+  valuePillars: [
+    { icon: "clock", text: "In weniger als 48 Stunden einsatzbereit" },
+    { icon: "shield", text: "Ohne Bindung oder Vertragsstrafen" },
+    { icon: "headphones", text: "Menschlicher Support in jedem Plan" },
+    { icon: "puzzle", text: "Kompatibel mit jedem Kassensystem" },
+  ],
+  whoTitle: "Welcher Plan passt zu <em>Ihrem Betrieb</em>?",
+  whoSubtitle: "Winerim bedient sehr unterschiedliche Profile. Finden Sie Ihres.",
+  profiles: [
+    { icon: "store", name: "Unabhängiges Restaurant", plan: "Starter oder Pro", desc: "Weinkarte mit 80–150 Positionen. Sie benötigen Sichtbarkeit und Kontrolle ohne Komplexität." },
+    { icon: "chef", name: "Gastronomisches Restaurant", plan: "Pro", desc: "Umfangreiche Weinkarte, Speisenbegleitung, Glaswein. Sie benötigen intelligente Empfehlungen und Analytik." },
+    { icon: "hotel", name: "Hotel mit F&B", plan: "Pro oder Enterprise", desc: "Mehrere Outlets, Room Service, Bar. Sie benötigen Konsistenz und Reporting." },
+    { icon: "wine", name: "Weinbar / Enoteca", plan: "Pro", desc: "Hohe Rotation im Glas, Verlustmanagement, dynamische Weinkarte. Sie benötigen feine Kontrolle über Glasservice und Rentabilität." },
+    { icon: "building", name: "Gastronomiegruppe", plan: "Enterprise", desc: "Mehrere Standorte, zentrale Steuerung, Benchmarking zwischen Einheiten und schrittweiser Rollout." },
+  ],
+  plansTitle: "Vergleichen Sie die <em>Pläne</em>",
+  plansBadge: "Klare Struktur",
+  plans: [
+    {
+      name: "Starter", badge: "LEGACY-PLAN", tagline: "Ihre Weinkarte, digitalisiert und professionell",
+      solves: "Löst: statische Weinkarte, verstreute Informationen, schwaches Weinimage.",
+      fits: "Für Legacy-Kunden und Restaurants mit einfachem Betrieb.",
+      features: ["Interaktive digitale Weinkarte mit Filtern", "Vollständige Weinfiches mit Foto und Notizen", "Individueller QR-Code für den Saal", "Mobiler Gastzugriff", "Einfaches Verwaltungspanel", "Basis-Support"],
+      notIncluded: ["Erweiterte Weinanalytik", "Preis- und Margenoptimierung", "Wine Mapping", "Rotations- und Totbestandswarnungen", "Multi-Standort", "Einkaufsintelligenz"],
+    },
+    {
+      name: "Pro", badge: "INKL. WINERIM CORE ESSENTIALS", tagline: "Besser analysieren. Besser verkaufen.", popular: true,
+      solves: "Löst: niedriger Durchschnittsbon, langsame Rotation, schwaches Pricing, uninformierte Entscheidungen.",
+      fits: "Für ambitionierte Restaurants, umfangreiche Weinkarten und Betriebe, die wirklich optimieren wollen.",
+      features: ["Alles aus dem Starter-Plan", "Weinverkaufsanalytik in Echtzeit", "Preis- und Margenoptimierung", "Interaktives Wine Mapping", "Weinvergleich für den Gast", "Glasweinoptimierung", "Rotations- und Totbestandswarnungen", "Basis-Gesundheitscheck der Weinkarte", "Grundlegende kontextbasierte intelligente Empfehlungen", "Vorrangiger Support"],
+      notIncluded: ["Zentrale Multi-Standort-Verwaltung", "Benchmarking zwischen Einheiten", "Vollständige Dynamische Intelligenz", "Vollständiges Winerim Supply", "Erweiterte POS/PMS-Integrationen", "Executive Reporting"],
+    },
+    {
+      name: "Enterprise", badge: "INKL. CORE FULL + DYNAMIK + SUPPLY", tagline: "Steuern Sie Verkauf, Einkauf und Sortiment mit vollständiger Intelligenz",
+      solves: "Löst: Inkonsistenz zwischen Standorten, fehlendes Benchmarking, schwache Einkaufsentscheidungen, Sortimentsabweichung und fragmentiertes Reporting.",
+      fits: "Für Gastronomiegruppen, Hotelketten und Multi-Standort-Betriebe.",
+      features: ["Alles aus dem Pro-Plan", "Winerim Core Full", "Vollständige Dynamische Intelligenz", "Vollständiges Winerim Supply", "Zentrale Multi-Standort-Verwaltung", "Benchmarking zwischen Einheiten", "Erweiterte POS- und PMS-Integrationen", "Konsolidierte Analytik und Executive Reporting", "Schrittweiser Rollout nach Cluster oder Einheit", "Individuelle API", "Dediziertes Onboarding mit Schulung", "Zugeordneter Account Manager", "Garantiertes SLA"],
+      notIncluded: [],
+    },
+  ],
+  pricingNote: "Die Preise von Winerim richten sich nach der Anzahl der Positionen Ihrer Weinkarte und der Anzahl der Standorte. Fordern Sie ein unverbindliches, individuelles Angebot an.",
+  compTitle: "Was jeder <em>Plan</em> enthält",
+  compBadge: "Strategischer Vergleich",
+  compCategories: [
+    { name: "Weinkarte und Gasterlebnis", rows: [
+      { feature: "Interaktive digitale Weinkarte mit Filtern und QR", starter: true, pro: true, enterprise: true },
+      { feature: "Vollständige Weinfiches", starter: true, pro: true, enterprise: true },
+      { feature: "Weinvergleich und Speisenbegleitung", starter: false, pro: true, enterprise: true },
+    ]},
+    { name: "Produktintelligenz", rows: [
+      { feature: "Verkaufsanalytik und Pricing", starter: false, pro: true, enterprise: true },
+      { feature: "Wine Mapping und Kartengesundheit", starter: false, pro: "Essentials", enterprise: "Vollständig" },
+      { feature: "Rotations- und Totbestandswarnungen", starter: false, pro: true, enterprise: true },
+      { feature: "Dynamische Intelligenz (RIMs™)", starter: false, pro: false, enterprise: true },
+      { feature: "Einkaufsintelligenz (Supply)", starter: false, pro: false, enterprise: true },
+    ]},
+    { name: "Betrieb und Support", rows: [
+      { feature: "Multi-Standort und Benchmarking", starter: false, pro: false, enterprise: true },
+      { feature: "POS / PMS-Integrationen und API", starter: false, pro: false, enterprise: true },
+      { feature: "Vorrangiger Support", starter: false, pro: true, enterprise: true },
+      { feature: "Onboarding, Account Manager und SLA", starter: false, pro: false, enterprise: true },
+    ]},
+  ],
+  roiTitle: "Geschätzte Wirkung pro <em>Plan</em>",
+  roiBadge: "Indikativer ROI",
+  roiNote: "Daten basierend auf Erfahrung mit aktiven Kunden. Der tatsächliche Einfluss hängt vom Ausgangspunkt, der Weinkarte und dem Restaurantprofil ab.",
+  roi: [
+    { plan: "Starter", metric: "Sichtbarkeit", value: "Professionelle Weinkarte online", desc: "Der Gast erkundet Ihre vollständige Weinkarte und versteht Ihr Weinangebot." },
+    { plan: "Pro", metric: "Rentabilität", value: "+15–25 % Wein-Durchschnittsbon", desc: "Optimiertes Pricing, intelligenter Glasservice und Empfehlungen, die den Bon erhöhen." },
+    { plan: "Enterprise", metric: "Governance", value: "+20–35 % Netto-Marge Gruppe", desc: "Zentrale Kontrolle von Einkauf, Sortiment und Benchmarking zwischen Einheiten." },
+  ],
+  layerTitle: "Welche Intelligenzschicht jeder <em>Plan</em> enthält",
+  layerBadge: "Schichtenarchitektur",
+  layers: [
+    { plan: "Starter", stack: ["Digitale Weinkarte"], desc: "Professionelle Digitalisierung ohne Analytik." },
+    { plan: "Pro", stack: ["Digitale Weinkarte", "Core Essentials"], desc: "Analyse, Pricing und Weinoptimierung." },
+    { plan: "Enterprise", stack: ["Digitale Weinkarte", "Core Full", "Dynamische Intelligenz", "Supply"], desc: "Vollständige Suite: analysieren, handeln und besser einkaufen." },
+  ],
+  objectionsTitle: "Was wir <em>vor dem Start</em> oft gefragt werden",
+  objectionsBadge: "Reibungslos",
+  objections: [
+    { icon: "clock", title: "Wie lange dauert die Implementierung?", answer: "Die meisten Restaurants sind in weniger als 48 Stunden einsatzbereit. Wir laden Ihre Weinkarte, konfigurieren die Filter und personalisieren das Erlebnis." },
+    { icon: "graduation", title: "Braucht man einen Sommelier?", answer: "Nein. Winerim enthält automatische Speisenbegleitungen, intelligente Empfehlungen und vollständige Datenblätter. Ihr Team kann Wein mit Vertrauen empfehlen." },
+    { icon: "puzzle", title: "Kompatibel mit meinem POS/PMS?", answer: "Ja. Winerim integriert sich in die wichtigsten POS- und Hotelmanagementsysteme. Enterprise bietet individuelle Integrationen über API." },
+    { icon: "headphones", title: "Welcher Support ist enthalten?", answer: "Alle Pläne enthalten menschlichen Support. Pro fügt Priorität hinzu, Enterprise einen dedizierten Account Manager mit garantiertem SLA." },
+    { icon: "trending", title: "Um wie viel kann ich meine Verkäufe verbessern?", answer: "Das hängt von Ihrem Ausgangspunkt ab. Unsere Kunden verbessern die Exploration der Positionen, optimieren Margen und reduzieren Totbestand. Die Wirkung wird in Wochen messbar." },
+    { icon: "shield", title: "Kann ich das Erscheinungsbild anpassen?", answer: "Ja. Die digitale Weinkarte passt sich Ihrer Marke an: Farben, Logo, Typografie und visueller Stil." },
+  ],
+  commonTitle: "Was ist in <em>allen</em> Plänen enthalten?",
+  commonFeatures: [
+    "Interaktive digitale Weinkarte, zugänglich von jedem Gerät",
+    "Individuelle QR-Codes für jeden Tisch oder Servicepunkt",
+    "Vollständige Weinfiches mit Foto, Notizen und Deskriptoren",
+    "Verwaltungspanel zum Aktualisieren der Weinkarte in Echtzeit",
+    "Dedizierter menschlicher Support (keine Chatbots)",
+    "Ohne Bindung oder Kündigungsgebühren",
+    "Einrichtung in weniger als 48 Stunden",
+    "Kompatibel mit jedem Kassensystem",
+  ],
+  helpTitle: "Unsicher? <em>Wir helfen</em> Ihnen bei der Wahl",
+  helpDesc: "Beschreiben Sie Ihre Situation, und wir empfehlen den passenden Plan für Ihr Restaurant, Hotel oder Ihre Gruppe. Ohne Bindung.",
+  helpCta: "Mit einem Berater sprechen",
+  faqs: [
+    { q: "Gibt es eine Vertragsbindung?", a: "Nein. Kündigen Sie jederzeit, ohne Strafen oder Kleingedrucktes." },
+    { q: "Wie lange dauert die Einrichtung?", a: "Die meisten Restaurants sind in weniger als 48 Stunden einsatzbereit. Wir laden Ihre Weinkarte, konfigurieren die Filter und personalisieren das Erlebnis." },
+    { q: "Kann ich später den Plan wechseln?", a: "Ja. Wechseln Sie jederzeit von Starter zu Pro oder Enterprise, ohne Serviceunterbrechung." },
+    { q: "Gibt es einen Jahresrabatt?", a: "Ja. Wir bieten besondere Konditionen für Jahresverträge. Fordern Sie für Details ein individuelles Angebot an." },
+    { q: "Was passiert, wenn ich kündige?", a: "Ihre Weinkarte geht offline, aber wir bewahren Ihre Daten 90 Tage auf, falls Sie zurückkehren. Ohne Strafen." },
+    { q: "Ist der Support inbegriffen?", a: "Alle Pläne enthalten menschlichen Support. Pro fügt Priorität hinzu, Enterprise einen dedizierten Account Manager mit garantiertem SLA." },
+    { q: "Wie wird der genaue Preis berechnet?", a: "Der Preis hängt von der Anzahl der Positionen und Standorte ab. Fordern Sie ein Angebot an und erhalten Sie innerhalb von 24 Stunden einen klaren Vorschlag." },
+    { q: "Kann ich es vor dem Abo testen?", a: "Ja. Wir bieten eine kostenlose Analyse Ihrer Weinkarte und eine personalisierte Demo mit Ihrer echten Karte." },
+  ],
+  ctaBadge: "Jetzt aktiv werden",
+  ctaTitle: "Entdecken Sie, wie viel mehr Sie mit Ihrer <em>Weinkarte</em> verkaufen könnten",
+  ctaSub: "Personalisierte Demo mit Ihrer echten Weinkarte. Ohne Bindung. In 15 Minuten verstehen Sie das Potenzial.",
+  ctaBtn: "Demo anfordern",
+  ctaBtn2: "Meine Weinkarte kostenlos analysieren",
+};
+
+/* PT */
+i18n.pt = {
+  seo_title: "Planos e Preços Winerim | Software de Carta de Vinhos para Restaurantes",
+  seo_desc: "Encontre o plano Winerim adequado ao seu restaurante, hotel ou grupo. Sem compromisso, implementação em 48h e apoio dedicado.",
+  breadcrumb: "Preços",
+  badge: "Planos e preços",
+  title: "Planos e preços Winerim — Escolha o que se adapta ao seu <em>estabelecimento</em>",
+  subtitle: "Sem compromisso. Implementação em 48 horas. Apoio dedicado incluído em todos os planos.",
+  valuePillars: [
+    { icon: "clock", text: "Operacional em menos de 48 horas" },
+    { icon: "shield", text: "Sem compromisso nem penalizações" },
+    { icon: "headphones", text: "Apoio humano em cada plano" },
+    { icon: "puzzle", text: "Compatível com qualquer POS" },
+  ],
+  whoTitle: "Que plano se ajusta ao <em>seu estabelecimento</em>?",
+  whoSubtitle: "A Winerim serve perfis muito diferentes. Encontre o seu.",
+  profiles: [
+    { icon: "store", name: "Restaurante independente", plan: "Starter ou Pro", desc: "Carta com 80–150 referências. Precisa de visibilidade e controlo sem complexidade." },
+    { icon: "chef", name: "Restaurante gastronómico", plan: "Pro", desc: "Carta extensa, harmonizações, vinho a copo. Precisa de recomendações inteligentes e analítica." },
+    { icon: "hotel", name: "Hotel com F&B", plan: "Pro ou Enterprise", desc: "Vários pontos de venda, room service, bar. Precisa de coerência e reporting." },
+    { icon: "wine", name: "Wine Bar / Garrafeira", plan: "Pro", desc: "Forte rotação a copo, gestão de perdas, carta dinâmica. Precisa de controlo fino do serviço a copo e da rentabilidade." },
+    { icon: "building", name: "Grupo de restauração", plan: "Enterprise", desc: "Multi-unidades, governance centralizada, benchmarking entre unidades e rollout progressivo." },
+  ],
+  plansTitle: "Compare os <em>planos</em>",
+  plansBadge: "Estrutura clara",
+  plans: [
+    {
+      name: "Starter", badge: "PLANO LEGACY", tagline: "A sua carta, digitalizada e profissional",
+      solves: "Resolve: carta estática, informação dispersa, imagem fraca do vinho.",
+      fits: "Para clientes legacy e restaurantes com operação simples.",
+      features: ["Carta digital interativa com filtros", "Fichas de vinho completas com foto e notas", "QR personalizado para a sala", "Acesso móvel do cliente", "Painel de gestão simples", "Apoio básico"],
+      notIncluded: ["Analítica avançada do vinho", "Otimização de preços e margens", "Wine Mapping", "Alertas de rotação e stock morto", "Multi-unidades", "Inteligência de compras"],
+    },
+    {
+      name: "Pro", badge: "INCLUI WINERIM CORE ESSENTIALS", tagline: "Analise melhor. Venda melhor.", popular: true,
+      solves: "Resolve: bilhete médio baixo, rotação lenta, pricing fraco, decisões pouco informadas.",
+      fits: "Para restaurantes ambiciosos, cartas com profundidade e operações prontas para otimizar a sério.",
+      features: ["Tudo do plano Starter", "Analítica de vendas de vinho em tempo real", "Otimização de preços e margens", "Wine Mapping interativo", "Comparador de vinhos para o cliente", "Otimização do vinho a copo", "Alertas de rotação e stock morto", "Saúde básica da carta", "Recomendações inteligentes contextuais básicas", "Apoio prioritário"],
+      notIncluded: ["Multi-unidades centralizado", "Benchmarking entre unidades", "Inteligência Dinâmica completa", "Winerim Supply completo", "Integrações POS/PMS avançadas", "Reporting executivo"],
+    },
+    {
+      name: "Enterprise", badge: "INCLUI CORE FULL + DINÂMICA + SUPPLY", tagline: "Governe venda, compras e sortido com inteligência completa",
+      solves: "Resolve: incoerência entre unidades, falta de benchmarking, decisões de compra fracas, desvios de sortido e reporting fragmentado.",
+      fits: "Para grupos de restauração, cadeias hoteleiras e operações multi-unidade.",
+      features: ["Tudo do plano Pro", "Winerim Core Full", "Inteligência Dinâmica completa", "Winerim Supply completo", "Multi-unidades centralizado", "Benchmarking entre unidades", "Integrações POS e PMS avançadas", "Analítica consolidada e reporting executivo", "Rollout progressivo por cluster ou unidade", "API personalizada", "Onboarding dedicado com formação", "Account manager atribuído", "SLA garantido"],
+      notIncluded: [],
+    },
+  ],
+  pricingNote: "Os preços da Winerim adaptam-se ao número de referências da sua carta e ao número de unidades. Peça uma proposta personalizada sem compromisso.",
+  compTitle: "O que cada <em>plano</em> inclui",
+  compBadge: "Comparação estratégica",
+  compCategories: [
+    { name: "Carta e experiência do cliente", rows: [
+      { feature: "Carta digital interativa com filtros e QR", starter: true, pro: true, enterprise: true },
+      { feature: "Fichas de vinho completas", starter: true, pro: true, enterprise: true },
+      { feature: "Comparador de vinhos e harmonizações", starter: false, pro: true, enterprise: true },
+    ]},
+    { name: "Inteligência de produto", rows: [
+      { feature: "Analítica de vendas e pricing", starter: false, pro: true, enterprise: true },
+      { feature: "Wine Mapping e saúde da carta", starter: false, pro: "Essencial", enterprise: "Completo" },
+      { feature: "Alertas de rotação e stock morto", starter: false, pro: true, enterprise: true },
+      { feature: "Inteligência Dinâmica (RIMs™)", starter: false, pro: false, enterprise: true },
+      { feature: "Inteligência de compras (Supply)", starter: false, pro: false, enterprise: true },
+    ]},
+    { name: "Operações e apoio", rows: [
+      { feature: "Multi-unidades e benchmarking", starter: false, pro: false, enterprise: true },
+      { feature: "Integrações POS / PMS e API", starter: false, pro: false, enterprise: true },
+      { feature: "Apoio prioritário", starter: false, pro: true, enterprise: true },
+      { feature: "Onboarding, account manager e SLA", starter: false, pro: false, enterprise: true },
+    ]},
+  ],
+  roiTitle: "Impacto estimado por <em>plano</em>",
+  roiBadge: "ROI indicativo",
+  roiNote: "Dados baseados na experiência com clientes ativos. O impacto real depende do ponto de partida, da carta e do perfil do restaurante.",
+  roi: [
+    { plan: "Starter", metric: "Visibilidade", value: "Carta profissional online", desc: "O cliente explora a sua carta completa e percebe a sua proposta de vinhos." },
+    { plan: "Pro", metric: "Rentabilidade", value: "+15–25 % bilhete médio de vinho", desc: "Pricing otimizado, copo inteligente e recomendações que fazem subir o bilhete." },
+    { plan: "Enterprise", metric: "Governance", value: "+20–35 % margem líquida do grupo", desc: "Controlo centralizado de compras, sortido e benchmarking entre unidades." },
+  ],
+  layerTitle: "Que camada de inteligência cada <em>plano</em> inclui",
+  layerBadge: "Arquitetura em camadas",
+  layers: [
+    { plan: "Starter", stack: ["Carta Digital"], desc: "Digitalização profissional sem analítica." },
+    { plan: "Pro", stack: ["Carta Digital", "Core Essentials"], desc: "Análise, pricing e otimização do vinho." },
+    { plan: "Enterprise", stack: ["Carta Digital", "Core Full", "Inteligência Dinâmica", "Supply"], desc: "Suite completa: analisar, agir e comprar melhor." },
+  ],
+  objectionsTitle: "O que nos perguntam <em>antes de começar</em>",
+  objectionsBadge: "Sem fricção",
+  objections: [
+    { icon: "clock", title: "Quanto tempo leva a implementação?", answer: "A maioria dos restaurantes fica operacional em menos de 48 horas. Carregamos a sua carta, configuramos os filtros e personalizamos a experiência." },
+    { icon: "graduation", title: "É preciso ter escanção?", answer: "Não. A Winerim inclui harmonizações automáticas, recomendações inteligentes e fichas completas. A sua equipa pode recomendar vinho com confiança." },
+    { icon: "puzzle", title: "Compatível com o meu POS/PMS?", answer: "Sim. A Winerim integra-se com os principais sistemas POS e de gestão hoteleira. Enterprise inclui integrações personalizadas via API." },
+    { icon: "headphones", title: "Que apoio está incluído?", answer: "Todos os planos incluem apoio humano. Pro acrescenta prioridade, Enterprise inclui um account manager dedicado com SLA garantido." },
+    { icon: "trending", title: "Quanto posso melhorar as vendas?", answer: "Depende do seu ponto de partida. Os nossos clientes melhoram a exploração das referências, otimizam margens e reduzem stock morto. O impacto mede-se em semanas." },
+    { icon: "shield", title: "Posso personalizar a aparência?", answer: "Sim. A carta digital adapta-se à sua marca: cores, logótipo, tipografia e estilo visual." },
+  ],
+  commonTitle: "O que está incluído em <em>todos</em> os planos?",
+  commonFeatures: [
+    "Carta digital interativa acessível a partir de qualquer dispositivo",
+    "Códigos QR personalizados para cada mesa ou ponto de serviço",
+    "Fichas de vinho completas com foto, notas e descritores",
+    "Painel de gestão para atualizar a carta em tempo real",
+    "Apoio humano dedicado (sem chatbots)",
+    "Sem compromisso nem penalizações de cancelamento",
+    "Implementação em menos de 48 horas",
+    "Compatível com qualquer sistema POS",
+  ],
+  helpTitle: "Em dúvida? <em>Ajudamos</em> a escolher",
+  helpDesc: "Descreva a sua situação e recomendamos o plano mais adequado ao seu restaurante, hotel ou grupo. Sem compromisso.",
+  helpCta: "Falar com um consultor",
+  faqs: [
+    { q: "Existe compromisso?", a: "Não. Cancele quando quiser, sem penalizações nem letras pequenas." },
+    { q: "Quanto tempo leva a implementação?", a: "A maioria dos restaurantes fica operacional em menos de 48 horas. Carregamos a sua carta, configuramos os filtros e personalizamos a experiência." },
+    { q: "Posso mudar de plano depois?", a: "Sim. Mude de Starter para Pro ou Enterprise a qualquer momento, sem interrupção de serviço." },
+    { q: "Há desconto anual?", a: "Sim. Oferecemos condições especiais para compromissos anuais. Peça uma proposta personalizada para mais detalhes." },
+    { q: "O que acontece se cancelar?", a: "A sua carta fica offline, mas guardamos os seus dados 90 dias caso queira voltar. Sem penalizações." },
+    { q: "O apoio está incluído?", a: "Todos os planos incluem apoio humano. Pro acrescenta prioridade, Enterprise inclui um account manager dedicado com SLA garantido." },
+    { q: "Como se calcula o preço exato?", a: "O preço depende do número de referências e de unidades. Peça um orçamento e receba uma proposta clara em 24h." },
+    { q: "Posso experimentar antes de subscrever?", a: "Sim. Oferecemos uma análise gratuita da sua carta de vinhos e uma demo personalizada com a sua carta real." },
+  ],
+  ctaBadge: "Passe à ação",
+  ctaTitle: "Descubra quanto mais pode vender com a sua <em>carta de vinhos</em>",
+  ctaSub: "Demo personalizada com a sua carta real. Sem compromisso. Em 15 minutos percebe o potencial.",
+  ctaBtn: "Pedir demo",
+  ctaBtn2: "Analisar a minha carta gratuitamente",
+};
+
 /* ─── icon lookup ─── */
 const iconMap: Record<string, typeof Wine> = {
   clock: Clock, shield: Shield, headphones: Headphones, puzzle: Puzzle,
@@ -625,6 +879,16 @@ const planPositioning: Record<string, { line: string; badge: string; badgeColor:
     { line: "Pour analyser, optimiser et mieux décider avec Winerim Core Essentials", badge: "Inclut Winerim Core Essentials", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/winerim-core" },
     { line: "Pour gouverner vente, achats et assortiment avec Winerim Intelligence Suite", badge: "Core Full + Dynamique + Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
   ],
+  de: [
+    { line: "Für die Digitalisierung der Weinkarte und den Aufbau einer professionellen Basis", badge: "Legacy-Plan", badgeColor: "text-muted-foreground border-border bg-muted/30", link: "/producto/winerim-core" },
+    { line: "Für bessere Analyse, Optimierung und Entscheidungen mit Winerim Core Essentials", badge: "Inkl. Winerim Core Essentials", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/winerim-core" },
+    { line: "Für die Steuerung von Verkauf, Einkauf und Sortiment mit der Winerim Intelligence Suite", badge: "Core Full + Dynamik + Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
+  pt: [
+    { line: "Para digitalizar a carta e manter uma base profissional", badge: "Plano legacy", badgeColor: "text-muted-foreground border-border bg-muted/30", link: "/producto/winerim-core" },
+    { line: "Para analisar, otimizar e decidir melhor com Winerim Core Essentials", badge: "Inclui Winerim Core Essentials", badgeColor: "text-wine border-wine/25 bg-wine/5", link: "/producto/winerim-core" },
+    { line: "Para governar venda, compras e sortido com Winerim Intelligence Suite", badge: "Core Full + Dinâmica + Supply", badgeColor: "text-emerald-500 border-emerald-500/25 bg-emerald-500/5", link: "/producto/winerim-supply" },
+  ],
 };
 
 /* ─── Cell renderer ─── */
@@ -639,12 +903,15 @@ const layerColors: Record<string, { bg: string; text: string; border: string }> 
   "Carta Digital": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
   "Digital List": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
   "Carte Digitale": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
+  "Digitale Weinkarte": { bg: "bg-muted/40", text: "text-muted-foreground", border: "border-border" },
   "Core Essentials": { bg: "bg-wine/10", text: "text-wine", border: "border-wine/25" },
   "Core Full": { bg: "bg-amber-500/10", text: "text-amber-500", border: "border-amber-500/25" },
   "Inteligencia Dinámica": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
   "Dynamic Intelligence": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
   "Intelligence Dynamique": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
   "Intelligenza Dinamica": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Dynamische Intelligenz": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
+  "Inteligência Dinâmica": { bg: "bg-wine/10", text: "text-wine-light", border: "border-wine/25" },
   "Supply": { bg: "bg-emerald-500/10", text: "text-emerald-500", border: "border-emerald-500/25" },
 };
 
@@ -739,11 +1006,11 @@ const Precios = () => {
           <ScrollReveal className="text-center mb-10">
             <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60 mb-4">
               <span className="w-1 h-1 rounded-full bg-wine/50" />
-              {lang === "es" ? "Arquitectura de producto" : lang === "it" ? "Architettura di prodotto" : lang === "fr" ? "Architecture produit" : "Product architecture"}
+              {lang === "es" ? "Arquitectura de producto" : lang === "it" ? "Architettura di prodotto" : lang === "fr" ? "Architecture produit" : lang === "de" ? "Produktarchitektur" : lang === "pt" ? "Arquitetura de produto" : "Product architecture"}
             </span>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-3">
-              {lang === "es" ? "Una plataforma, tres capas de " : lang === "it" ? "Una piattaforma, tre livelli di " : lang === "fr" ? "Une plateforme, trois couches de " : "One platform, three layers of "}
-              <span className="text-gradient-wine">{lang === "es" ? "valor" : lang === "it" ? "valore" : lang === "fr" ? "valeur" : "value"}</span>
+              {lang === "es" ? "Una plataforma, tres capas de " : lang === "it" ? "Una piattaforma, tre livelli di " : lang === "fr" ? "Une plateforme, trois couches de " : lang === "de" ? "Eine Plattform, drei Schichten " : lang === "pt" ? "Uma plataforma, três camadas de " : "One platform, three layers of "}
+              <span className="text-gradient-wine">{lang === "es" ? "valor" : lang === "it" ? "valore" : lang === "fr" ? "valeur" : lang === "de" ? "Wert" : lang === "pt" ? "valor" : "value"}</span>
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
               {lang === "es"
@@ -752,6 +1019,10 @@ const Precios = () => {
                 ? "Winerim combina analisi, esecuzione tattica e intelligenza degli acquisti per gestire meglio l'intero business del vino."
                 : lang === "fr"
                 ? "Winerim combine analyse, exécution tactique et intelligence d'achats pour mieux gérer l'ensemble du business du vin."
+                : lang === "de"
+                ? "Winerim kombiniert Analyse, taktische Ausführung und Einkaufsintelligenz, um das gesamte Weingeschäft besser zu steuern."
+                : lang === "pt"
+                ? "A Winerim combina análise, execução tática e inteligência de compras para gerir melhor todo o negócio do vinho."
                 : "Winerim combines analytics, tactical execution and purchasing intelligence to better manage every aspect of the wine business."}
             </p>
           </ScrollReveal>
@@ -760,11 +1031,13 @@ const Precios = () => {
             {[
               {
                 name: "Winerim Core",
-                verb: lang === "es" ? "Analiza" : lang === "it" ? "Analizza" : lang === "fr" ? "Analyse" : "Analyses",
+                verb: lang === "es" ? "Analiza" : lang === "it" ? "Analizza" : lang === "fr" ? "Analyse" : lang === "de" ? "Analysiert" : lang === "pt" ? "Analisa" : "Analyses",
                 description: lang === "es"
                   ? "Pricing, márgenes, stock, arquitectura y benchmark."
                   : lang === "it" ? "Pricing, margini, stock, architettura e benchmark."
                   : lang === "fr" ? "Pricing, marges, stock, architecture et benchmark."
+                  : lang === "de" ? "Pricing, Margen, Bestand, Architektur und Benchmark."
+                  : lang === "pt" ? "Pricing, margens, stock, arquitetura e benchmark."
                   : "Pricing, margins, stock, architecture and benchmarking.",
                 icon: BarChart3,
                 href: "/producto/winerim-core",
@@ -773,12 +1046,14 @@ const Precios = () => {
                 border: "border-amber-500/20",
               },
               {
-                name: lang === "es" ? "Inteligencia Dinámica" : lang === "it" ? "Intelligenza Dinamica" : lang === "fr" ? "Intelligence Dynamique" : "Dynamic Intelligence",
-                verb: lang === "es" ? "Actúa" : lang === "it" ? "Agisce" : lang === "fr" ? "Agit" : "Acts",
+                name: lang === "es" ? "Inteligencia Dinámica" : lang === "it" ? "Intelligenza Dinamica" : lang === "fr" ? "Intelligence Dynamique" : lang === "de" ? "Dynamische Intelligenz" : lang === "pt" ? "Inteligência Dinâmica" : "Dynamic Intelligence",
+                verb: lang === "es" ? "Actúa" : lang === "it" ? "Agisce" : lang === "fr" ? "Agit" : lang === "de" ? "Handelt" : lang === "pt" ? "Atua" : "Acts",
                 description: lang === "es"
                   ? "Actúa sobre la carta en tiempo real según contexto y objetivos."
                   : lang === "it" ? "Agisce sulla carta in tempo reale in base al contesto e agli obiettivi."
                   : lang === "fr" ? "Agit sur la carte en temps réel selon le contexte et les objectifs."
+                  : lang === "de" ? "Handelt in Echtzeit auf der Weinkarte je nach Kontext und Zielen."
+                  : lang === "pt" ? "Atua sobre a carta em tempo real consoante contexto e objetivos."
                   : "Acts on the wine list in real time based on context and goals.",
                 icon: Zap,
                 href: "/producto/inteligencia-dinamica",
@@ -788,11 +1063,13 @@ const Precios = () => {
               },
               {
                 name: "Winerim Supply",
-                verb: lang === "es" ? "Compra mejor" : lang === "it" ? "Compra meglio" : lang === "fr" ? "Achète mieux" : "Buy smarter",
+                verb: lang === "es" ? "Compra mejor" : lang === "it" ? "Compra meglio" : lang === "fr" ? "Achète mieux" : lang === "de" ? "Kauft klüger" : lang === "pt" ? "Compra melhor" : "Buy smarter",
                 description: lang === "es"
                   ? "Ayuda a comprar mejor y reponer con más criterio."
                   : lang === "it" ? "Aiuta a comprare meglio e rifornirsi con più criterio."
                   : lang === "fr" ? "Aide à mieux acheter et à réapprovisionner avec plus de critère."
+                  : lang === "de" ? "Hilft Ihnen, klüger einzukaufen und mit mehr Kriterium nachzubestellen."
+                  : lang === "pt" ? "Ajuda a comprar melhor e a repor com mais critério."
                   : "Helps you buy smarter and restock with better criteria.",
                 icon: ShoppingCart,
                 href: "/producto/winerim-supply",
@@ -828,15 +1105,15 @@ const Precios = () => {
           <ScrollReveal delay={0.3}>
             <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-muted-foreground">
               <span className="text-emerald-500">
-                {lang === "es" ? "Comprar mejor" : lang === "it" ? "Comprare meglio" : lang === "fr" ? "Acheter mieux" : "Buy smarter"}
+                {lang === "es" ? "Comprar mejor" : lang === "it" ? "Comprare meglio" : lang === "fr" ? "Acheter mieux" : lang === "de" ? "Klüger kaufen" : lang === "pt" ? "Comprar melhor" : "Buy smarter"}
               </span>
               <span className="text-border">→</span>
               <span className="text-amber-500">
-                {lang === "es" ? "Analizar mejor" : lang === "it" ? "Analizzare meglio" : lang === "fr" ? "Mieux analyser" : "Analyse better"}
+                {lang === "es" ? "Analizar mejor" : lang === "it" ? "Analizzare meglio" : lang === "fr" ? "Mieux analyser" : lang === "de" ? "Besser analysieren" : lang === "pt" ? "Analisar melhor" : "Analyse better"}
               </span>
               <span className="text-border">→</span>
               <span className="text-wine">
-                {lang === "es" ? "Vender mejor" : lang === "it" ? "Vendere meglio" : lang === "fr" ? "Mieux vendre" : "Sell better"}
+                {lang === "es" ? "Vender mejor" : lang === "it" ? "Vendere meglio" : lang === "fr" ? "Mieux vendre" : lang === "de" ? "Besser verkaufen" : lang === "pt" ? "Vender melhor" : "Sell better"}
               </span>
             </div>
           </ScrollReveal>
@@ -908,7 +1185,7 @@ const Precios = () => {
                     {highlight && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                         <span className="px-4 py-1 rounded-full bg-gradient-wine text-primary-foreground text-xs font-semibold tracking-wider uppercase whitespace-nowrap">
-                          {lang === "es" ? "Plan comercial" : lang === "it" ? "Piano commerciale" : lang === "fr" ? "Plan commercial" : "Commercial plan"}
+                          {lang === "es" ? "Plan comercial" : lang === "it" ? "Piano commerciale" : lang === "fr" ? "Plan commercial" : lang === "de" ? "Kommerzieller Plan" : lang === "pt" ? "Plano comercial" : "Commercial plan"}
                         </span>
                       </div>
                     )}
@@ -964,7 +1241,7 @@ const Precios = () => {
                     {plan.notIncluded && plan.notIncluded.length > 0 && (
                       <div className="mb-6 pt-3 border-t border-border/50">
                          <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">
-                           {lang === "es" ? "No incluido" : lang === "it" ? "Non incluso" : lang === "fr" ? "Non inclus" : "Not included"}
+                           {lang === "es" ? "No incluido" : lang === "it" ? "Non incluso" : lang === "fr" ? "Non inclus" : lang === "de" ? "Nicht enthalten" : lang === "pt" ? "Não incluído" : "Not included"}
                          </p>
                         <ul className="space-y-1.5">
                           {plan.notIncluded.map((f, fi) => (
@@ -988,7 +1265,7 @@ const Precios = () => {
                       }`}
                     >
                       {i === 2
-                        ? (lang === "es" ? "Contactar" : lang === "it" ? "Contattaci" : lang === "fr" ? "Nous contacter" : "Contact us")
+                        ? (lang === "es" ? "Contactar" : lang === "it" ? "Contattaci" : lang === "fr" ? "Nous contacter" : lang === "de" ? "Kontakt aufnehmen" : lang === "pt" ? "Contactar" : "Contact us")
                         : c.ctaBtn
                       } <ArrowRight size={14} />
                     </Link>
@@ -1089,7 +1366,7 @@ const Precios = () => {
                 <thead>
                   <tr className="border-b border-border bg-card">
                      <th className="text-left p-4 font-medium text-muted-foreground w-[40%]">
-                       {lang === "es" ? "Funcionalidad" : lang === "it" ? "Funzionalità" : lang === "fr" ? "Fonctionnalité" : "Feature"}
+                       {lang === "es" ? "Funcionalidad" : lang === "it" ? "Funzionalità" : lang === "fr" ? "Fonctionnalité" : lang === "de" ? "Funktion" : lang === "pt" ? "Funcionalidade" : "Feature"}
                      </th>
                     {["Starter", "Pro", "Enterprise"].map((name, i) => (
                       <th key={name} className={`p-4 text-center font-heading font-bold ${i === 1 ? "text-wine" : ""}`}>
@@ -1220,21 +1497,21 @@ const Precios = () => {
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={{ es: "Explora más", en: "Explore more", it: "Esplora di più", fr: "En savoir plus" }[lang] || "Explore more"}
+        title={{ es: "Explora más", en: "Explore more", it: "Esplora di più", fr: "En savoir plus", de: "Mehr entdecken", pt: "Explorar mais" }[lang] || "Explore more"}
         steps={[
-          { to: "/analisis-carta", label: { es: "Analiza tu carta gratis", en: "Analyze your list free", it: "Analizza la tua carta gratis", fr: "Analysez votre carte gratuitement" }[lang]!, description: { es: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", en: "Upload your list and get a diagnostic with actionable recommendations.", it: "Carica la tua carta e ricevi un report con raccomandazioni concrete.", fr: "Envoyez votre carte et recevez un diagnostic avec des recommandations concrètes." }[lang]!, type: "tool" },
-          { to: "/casos-exito", label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels" }[lang]!, description: { es: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", en: "How real restaurants use Winerim and what results they achieve.", it: "Come ristoranti reali usano Winerim e quali risultati ottengono.", fr: "Comment de vrais restaurants utilisent Winerim et quels résultats ils obtiennent." }[lang]!, type: "solution" },
-          { to: "/funcionalidades", label: { es: "Todas las funcionalidades de Winerim", en: "All Winerim features", it: "Tutte le funzionalità di Winerim", fr: "Toutes les fonctionnalités de Winerim" }[lang]!, description: { es: "11 categorías de funcionalidades especializadas en vino.", en: "11 categories of wine-specialized features.", it: "11 categorie di funzionalità specializzate nel vino.", fr: "11 catégories de fonctionnalités spécialisées dans le vin." }[lang]!, type: "solution" },
-          { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim with alternatives", it: "Confronta Winerim con le alternative", fr: "Comparez Winerim avec les alternatives" }[lang]!, description: { es: "Comparativas claras para decidir qué solución encaja.", en: "Clear comparisons to decide which solution fits.", it: "Confronti chiari per decidere quale soluzione fa per te.", fr: "Comparaisons claires pour choisir la bonne solution." }[lang]!, type: "solution" },
+          { to: "/analisis-carta", label: { es: "Analiza tu carta gratis", en: "Analyze your list free", it: "Analizza la tua carta gratis", fr: "Analysez votre carte gratuitement", de: "Weinkarte kostenlos analysieren", pt: "Analisar a carta grátis" }[lang]!, description: { es: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", en: "Upload your list and get a diagnostic with actionable recommendations.", it: "Carica la tua carta e ricevi un report con raccomandazioni concrete.", fr: "Envoyez votre carte et recevez un diagnostic avec des recommandations concrètes.", de: "Laden Sie Ihre Weinkarte hoch und erhalten Sie eine Diagnose mit konkreten Empfehlungen.", pt: "Carregue a sua carta e receba um diagnóstico com recomendações concretas." }[lang]!, type: "tool" },
+          { to: "/casos-exito", label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels", de: "Erfolgsgeschichten echter Restaurants", pt: "Casos de sucesso de restaurantes reais" }[lang]!, description: { es: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", en: "How real restaurants use Winerim and what results they achieve.", it: "Come ristoranti reali usano Winerim e quali risultati ottengono.", fr: "Comment de vrais restaurants utilisent Winerim et quels résultats ils obtiennent.", de: "Wie echte Restaurants Winerim einsetzen und welche Ergebnisse sie erzielen.", pt: "Como restaurantes reais usam a Winerim e que resultados obtêm." }[lang]!, type: "solution" },
+          { to: "/funcionalidades", label: { es: "Todas las funcionalidades de Winerim", en: "All Winerim features", it: "Tutte le funzionalità di Winerim", fr: "Toutes les fonctionnalités de Winerim", de: "Alle Winerim-Funktionen", pt: "Todas as funcionalidades Winerim" }[lang]!, description: { es: "11 categorías de funcionalidades especializadas en vino.", en: "11 categories of wine-specialized features.", it: "11 categorie di funzionalità specializzate nel vino.", fr: "11 catégories de fonctionnalités spécialisées dans le vin.", de: "11 Kategorien weinspezialisierter Funktionen.", pt: "11 categorias de funcionalidades especializadas em vinho." }[lang]!, type: "solution" },
+          { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim with alternatives", it: "Confronta Winerim con le alternative", fr: "Comparez Winerim avec les alternatives", de: "Winerim mit Alternativen vergleichen", pt: "Comparar a Winerim com alternativas" }[lang]!, description: { es: "Comparativas claras para decidir qué solución encaja.", en: "Clear comparisons to decide which solution fits.", it: "Confronti chiari per decidere quale soluzione fa per te.", fr: "Comparaisons claires pour choisir la bonne solution.", de: "Klare Vergleiche, um die passende Lösung zu wählen.", pt: "Comparações claras para escolher a solução certa." }[lang]!, type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: { es: "Software de carta de vinos inteligente", en: "Smart wine list software", it: "Software intelligente per carta dei vini", fr: "Logiciel intelligent de carte des vins" }[lang]!, type: "solution" },
-        { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification" }[lang]!, type: "tool" },
-        { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables" }[lang]!, type: "guide" },
-        { to: localePath("/soluciones/grupos-restauracion"), label: { es: "Soluciones para grupos de restauración", en: "Solutions for restaurant groups", it: "Soluzioni per gruppi di ristorazione", fr: "Solutions pour groupes de restauration" }[lang]!, type: "solution" },
-        { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur" }[lang]!, type: "resource" },
+        { to: localePath("/software-carta-de-vinos"), label: { es: "Software de carta de vinos inteligente", en: "Smart wine list software", it: "Software intelligente per carta dei vini", fr: "Logiciel intelligent de carte des vins", de: "Intelligente Weinkarten-Software", pt: "Software inteligente de carta de vinhos" }[lang]!, type: "solution" },
+        { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification", de: "Kostenlose Analyse- und Pricing-Tools", pt: "Ferramentas gratuitas de análise e pricing" }[lang]!, type: "tool" },
+        { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables", de: "Praktische Leitfäden und Ressourcen", pt: "Guias práticos e recursos" }[lang]!, type: "guide" },
+        { to: localePath("/soluciones/grupos-restauracion"), label: { es: "Soluciones para grupos de restauración", en: "Solutions for restaurant groups", it: "Soluzioni per gruppi di ristorazione", fr: "Solutions pour groupes de restauration", de: "Lösungen für Gastronomiegruppen", pt: "Soluções para grupos de restauração" }[lang]!, type: "solution" },
+        { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur", de: "Branchen-Benchmarks und Playbooks", pt: "Benchmarks e playbooks do setor" }[lang]!, type: "resource" },
       ]} />
 
       <Footer />
