@@ -29,6 +29,8 @@ const CHROME: I18nMap<PageChrome> = {
   en: { seoTitle: "Thank You | Winerim", seoDesc: "Your request has been received successfully.", nextSteps: "Next steps", urgent: "Need something urgently?" },
   it: { seoTitle: "Grazie | Winerim", seoDesc: "La tua richiesta è stata ricevuta correttamente.", nextSteps: "Prossimi passi", urgent: "Hai bisogno di qualcosa di urgente?" },
   fr: { seoTitle: "Merci | Winerim", seoDesc: "Votre demande a bien été reçue.", nextSteps: "Prochaines étapes", urgent: "Besoin de quelque chose d'urgent ?" },
+  de: { seoTitle: "Vielen Dank | Winerim", seoDesc: "Ihre Anfrage wurde erfolgreich empfangen.", nextSteps: "Nächste Schritte", urgent: "Benötigen Sie etwas dringend?" },
+  pt: { seoTitle: "Obrigado | Winerim", seoDesc: "O seu pedido foi recebido com sucesso.", nextSteps: "Próximos passos", urgent: "Precisa de algo urgente?" },
 };
 
 const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
@@ -170,6 +172,76 @@ const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
       subtitle: "Nous avons enregistré votre demande. Nous vous contacterons dès que possible.",
       steps: ["Votre demande a été enregistrée", "Notre équipe l'examinera", "Nous vous contacterons sous peu"],
       cta: { label: "Retour à l'accueil", href: "/fr" },
+    },
+  },
+  de: {
+    demo: {
+      title: "Demo-Anfrage erhalten!",
+      subtitle: "Unser Team wird Sie innerhalb von 24 Stunden kontaktieren, um Ihre persönliche Vorführung zu vereinbaren.",
+      steps: ["Wir prüfen Ihr Profil und Ihre Weinkarte", "Wir kontaktieren Sie zur Terminvereinbarung", "Wir zeigen Ihnen Winerim in Aktion mit echten Daten"],
+      cta: { label: "Funktionen entdecken", href: "/de/funktionen" },
+      secondaryCta: { label: "Erfolgsgeschichten ansehen", href: "/de/erfolgsgeschichten" },
+    },
+    contacto: {
+      title: "Nachricht erhalten!",
+      subtitle: "Wir haben Ihre Anfrage erhalten. Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      steps: ["Ihre Nachricht wurde erfasst", "Ein Spezialist wird Ihre Anfrage prüfen", "Sie erhalten eine Antwort per E-Mail oder Telefon"],
+      cta: { label: "Entdecken Sie Winerim", href: "/de/was-ist-winerim" },
+    },
+    "analisis-carta": {
+      title: "Weinkarte zur Analyse erhalten!",
+      subtitle: "Unser Team arbeitet bereits an Ihrer persönlichen Analyse. Sie erhalten den Bericht innerhalb von 48 Stunden.",
+      steps: ["Wir analysieren Struktur, Preise und Vielfalt", "Wir identifizieren Verbesserungsmöglichkeiten", "Wir senden Ihnen einen Bericht mit konkreten Empfehlungen"],
+      cta: { label: "Unsere Werkzeuge entdecken", href: "/de/werkzeuge" },
+      secondaryCta: { label: "Preise ansehen", href: "/de/preise" },
+    },
+    resource: {
+      title: "Ressource heruntergeladen!",
+      subtitle: "Der Download hat automatisch begonnen. Sie erhalten außerdem eine Bestätigungs-E-Mail mit dem Zugriffslink.",
+      steps: ["Ihre Ressource wird heruntergeladen", "Prüfen Sie Ihre E-Mail für späteren Zugriff", "Entdecken Sie weitere kostenlose Winerim-Werkzeuge"],
+      cta: { label: "Weitere Ressourcen ansehen", href: "/de/ratgeber" },
+      secondaryCta: { label: "Werkzeuge ausprobieren", href: "/de/werkzeuge" },
+    },
+    default: {
+      title: "Erfolgreich empfangen!",
+      subtitle: "Wir haben Ihre Anfrage erfasst. Wir werden Sie schnellstmöglich kontaktieren.",
+      steps: ["Ihre Anfrage wurde erfasst", "Unser Team wird sie prüfen", "Wir melden uns in Kürze"],
+      cta: { label: "Zurück zur Startseite", href: "/de" },
+    },
+  },
+  pt: {
+    demo: {
+      title: "Pedido de demo recebido!",
+      subtitle: "A nossa equipa entrará em contacto consigo nas próximas 24 horas para agendar a sua demonstração personalizada.",
+      steps: ["Analisamos o seu perfil e carta de vinhos", "Contactamo-lo para agendar a demo", "Mostramos-lhe o Winerim em ação com dados reais"],
+      cta: { label: "Explorar funcionalidades", href: "/pt/funcionalidades" },
+      secondaryCta: { label: "Ver casos de sucesso", href: "/pt/casos-de-sucesso" },
+    },
+    contacto: {
+      title: "Mensagem recebida!",
+      subtitle: "Recebemos a sua consulta. Responderemos em menos de 24 horas.",
+      steps: ["A sua mensagem foi registada", "Um especialista analisará a sua consulta", "Receberá resposta por e-mail ou telefone"],
+      cta: { label: "Entretanto, explore o Winerim", href: "/pt/o-que-e-winerim" },
+    },
+    "analisis-carta": {
+      title: "Carta de vinhos recebida para análise!",
+      subtitle: "A nossa equipa já está a trabalhar na sua análise personalizada. Receberá o relatório em menos de 48 horas.",
+      steps: ["Analisamos estrutura, preços e variedade", "Identificamos oportunidades de melhoria", "Enviamos-lhe um relatório com recomendações concretas"],
+      cta: { label: "Descubra as nossas ferramentas", href: "/pt/ferramentas" },
+      secondaryCta: { label: "Ver preços", href: "/pt/precos" },
+    },
+    resource: {
+      title: "Recurso descarregado!",
+      subtitle: "O download começou automaticamente. Receberá também um e-mail de confirmação com o link de acesso.",
+      steps: ["O seu recurso está a ser descarregado", "Verifique o seu e-mail para aceder novamente", "Explore mais ferramentas gratuitas do Winerim"],
+      cta: { label: "Ver mais recursos", href: "/pt/guias" },
+      secondaryCta: { label: "Experimentar ferramentas", href: "/pt/ferramentas" },
+    },
+    default: {
+      title: "Recebido com sucesso!",
+      subtitle: "Registámos o seu pedido. Entraremos em contacto o mais brevemente possível.",
+      steps: ["O seu pedido foi registado", "A nossa equipa irá analisá-lo", "Contactaremos em breve"],
+      cta: { label: "Voltar ao início", href: "/pt" },
     },
   },
 };

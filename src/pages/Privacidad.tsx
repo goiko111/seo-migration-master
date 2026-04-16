@@ -57,6 +57,30 @@ const i18n: Record<string, {
       { heading: "7. Conservation", key: "retention", fallback: "Les données seront conservées tant qu'il existe un intérêt mutuel et pendant les délais légalement établis." },
     ],
   },
+  de: {
+    seoTitle: "Datenschutzrichtlinie", seoDesc: "Datenschutzrichtlinie von Winerim.", title: "Datenschutzrichtlinie",
+    sections: [
+      { heading: "1. Verantwortlicher", key: "responsible", fallback: "Winerim S.L. ist verantwortlich für die Verarbeitung der über diese Website erhobenen personenbezogenen Daten." },
+      { heading: "2. Erhobene Daten", key: "data_collected", fallback: "Wir erheben Daten, die Sie uns freiwillig über unsere Kontakt- und Demo-Formulare zur Verfügung stellen." },
+      { heading: "3. Zweck", key: "purpose", fallback: "Die Daten werden ausschließlich zur Bearbeitung von Informationsanfragen, Demos und geschäftlichen Kontakten verwendet." },
+      { heading: "4. Rechtsgrundlage", key: "legal_basis", fallback: "Die Verarbeitung basiert auf der Einwilligung der betroffenen Person bei Absendung des Formulars." },
+      { heading: "5. Rechte", key: "rights", fallback: "Sie können Ihre Rechte auf Auskunft, Berichtigung und Löschung per E-Mail an info@winerim.com ausüben." },
+      { heading: "6. Cookies", key: "cookies", fallback: "Diese Website verwendet eigene und Drittanbieter-Cookies zur Verbesserung des Nutzererlebnisses." },
+      { heading: "7. Speicherdauer", key: "retention", fallback: "Die Daten werden aufbewahrt, solange ein beiderseitiges Interesse besteht, sowie für die gesetzlich vorgeschriebenen Fristen." },
+    ],
+  },
+  pt: {
+    seoTitle: "Política de Privacidade", seoDesc: "Política de privacidade da Winerim.", title: "Política de Privacidade",
+    sections: [
+      { heading: "1. Responsável pelo tratamento", key: "responsible", fallback: "A Winerim S.L. é responsável pelo tratamento dos dados pessoais recolhidos através deste website." },
+      { heading: "2. Dados recolhidos", key: "data_collected", fallback: "Recolhemos os dados que nos fornece voluntariamente através dos nossos formulários de contacto e demo." },
+      { heading: "3. Finalidade", key: "purpose", fallback: "Os dados são utilizados exclusivamente para gerir pedidos de informação, demos e contacto comercial." },
+      { heading: "4. Base legal", key: "legal_basis", fallback: "O tratamento baseia-se no consentimento do titular dos dados ao enviar o formulário." },
+      { heading: "5. Direitos", key: "rights", fallback: "Pode exercer os seus direitos de acesso, retificação e eliminação enviando um e-mail para info@winerim.com." },
+      { heading: "6. Cookies", key: "cookies", fallback: "Este website utiliza cookies próprios e de terceiros para melhorar a experiência de navegação." },
+      { heading: "7. Conservação", key: "retention", fallback: "Os dados serão conservados enquanto existir interesse mútuo e durante os prazos legalmente estabelecidos." },
+    ],
+  },
 };
 
 const Privacidad = () => {

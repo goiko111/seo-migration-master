@@ -53,6 +53,28 @@ const i18n: Record<string, {
       { heading: "6. Droit applicable", key: "jurisdiction", fallback: "Ces conditions sont régies par le droit espagnol." },
     ],
   },
+  de: {
+    seoTitle: "Nutzungsbedingungen", seoDesc: "Nutzungsbedingungen von Winerim.", title: "Nutzungsbedingungen",
+    sections: [
+      { heading: "1. Eigentum", key: "ownership", fallback: "Diese Website ist Eigentum von Winerim S.L. Der Zugang und die Nutzung der Website setzen die Annahme dieser Bedingungen voraus." },
+      { heading: "2. Nutzung des Dienstes", key: "usage", fallback: "Der Nutzer verpflichtet sich, die Website und ihre Dienste rechtmäßig zu nutzen." },
+      { heading: "3. Geistiges Eigentum", key: "ip", fallback: "Alle Inhalte der Website sind Eigentum von Winerim oder ihrer Lizenzgeber." },
+      { heading: "4. Haftungsbeschränkung", key: "liability", fallback: "Winerim haftet nicht für Schäden, die aus der Nutzung dieser Website entstehen können." },
+      { heading: "5. Änderungen", key: "modifications", fallback: "Winerim behält sich das Recht vor, diese Bedingungen jederzeit zu ändern." },
+      { heading: "6. Anwendbares Recht", key: "jurisdiction", fallback: "Diese Bedingungen unterliegen dem spanischen Recht." },
+    ],
+  },
+  pt: {
+    seoTitle: "Termos de Utilização", seoDesc: "Termos e condições de utilização da Winerim.", title: "Termos de Utilização",
+    sections: [
+      { heading: "1. Titularidade", key: "ownership", fallback: "Este website é propriedade da Winerim S.L. O acesso e utilização do website implica a aceitação destes termos." },
+      { heading: "2. Utilização do serviço", key: "usage", fallback: "O utilizador compromete-se a utilizar o website e os seus serviços de forma lícita." },
+      { heading: "3. Propriedade intelectual", key: "ip", fallback: "Todos os conteúdos do website são propriedade da Winerim ou dos seus licenciadores." },
+      { heading: "4. Limitação de responsabilidade", key: "liability", fallback: "A Winerim não se responsabiliza pelos danos que possam resultar da utilização deste website." },
+      { heading: "5. Alterações", key: "modifications", fallback: "A Winerim reserva-se o direito de alterar estes termos a qualquer momento." },
+      { heading: "6. Legislação aplicável", key: "jurisdiction", fallback: "Estes termos regem-se pela legislação espanhola." },
+    ],
+  },
 };
 
 const Terminos = () => {
