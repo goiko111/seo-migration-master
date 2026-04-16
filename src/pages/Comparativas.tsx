@@ -12,6 +12,7 @@ import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
 import { comparisons } from "@/data/comparisons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const i18n: I18nMap<{
   seoTitle: string; seoDesc: string; badge: string; h1: string; h1h: string; subtitle: string;
@@ -130,7 +131,7 @@ const i18n: I18nMap<{
 
 const Comparativas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   const url = `https://winerim.wine${localePath("/comparativas")}`;
 
   return (

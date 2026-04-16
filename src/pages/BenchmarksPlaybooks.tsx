@@ -13,6 +13,7 @@ import SummaryBox from "@/components/seo/SummaryBox";
 import { getBPByType } from "@/data/benchmarksPlaybooks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const CANONICAL = "https://winerim.wine";
 
@@ -211,7 +212,7 @@ const i18n: I18nMap<PageChrome> = {
 
 const BenchmarksPlaybooks = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang];
+  const t = getI18n(i18n, lang);
   const benchmarks = getBPByType("benchmark");
   const playbooks = getBPByType("playbook");
 

@@ -14,6 +14,7 @@ import {
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 type IconType = typeof Wine;
 
@@ -290,7 +291,7 @@ const i18n: I18nMap<PageContent> = {
 
 const VenderMasVino = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang];
+  const t = getI18n(i18n, lang);
 
   useEffect(() => {
     const script = document.createElement("script");

@@ -16,6 +16,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 interface WineRec { name: string; grape: string; region: string; why: string; style: string; servingTemp: string; }
 interface PairingResult { wines: WineRec[]; pairingExplanation: string; recommendedStyles: string[]; tips: string; }
@@ -165,7 +166,7 @@ const i18n: I18nMap<Record<string, any>> = {
 
 const WinePairingGenerator = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const [dishType, setDishType] = useState("");
   const [mainIngredient, setMainIngredient] = useState("");

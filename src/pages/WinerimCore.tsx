@@ -16,6 +16,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation ── */
@@ -455,7 +456,7 @@ const i18n: I18nMap<CoreI18n> = {
 /* ── Component ── */
 const WinerimCore = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   return (
     <div className="min-h-screen bg-background text-foreground">

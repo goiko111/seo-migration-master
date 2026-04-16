@@ -18,6 +18,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 /* ───── types ───── */
 interface SectionResult {
@@ -305,7 +306,7 @@ const i18n: I18nMap<{
 /* ───── component ───── */
 const WineListAnalyzer = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const [inputMode, setInputMode] = useState<"file" | "url" | null>(null);
   const [wineText, setWineText] = useState("");

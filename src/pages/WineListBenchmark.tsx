@@ -17,6 +17,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ─── i18n ─── */
 type T = {
@@ -282,7 +283,7 @@ const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent
 
 const WineListBenchmark = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const priceByCountry = t.countries.map((country, i) => ({ country, price: priceValues[i], fill: fills[i] }));
   const styleDistribution = t.styles.map((name, i) => ({ name, value: styleValues[i], fill: styleFills[i] }));

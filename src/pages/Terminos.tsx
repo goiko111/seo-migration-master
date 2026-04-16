@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { usePageContent } from "@/hooks/usePageContent";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 const i18n: Record<string, {
   seoTitle: string; seoDesc: string; title: string;
@@ -57,7 +58,7 @@ const i18n: Record<string, {
 const Terminos = () => {
   const { get } = usePageContent("legal");
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   return (
     <div className="min-h-screen bg-background">

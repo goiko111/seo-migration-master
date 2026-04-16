@@ -17,6 +17,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import ToolStrategicBlock from "@/components/tools/ToolStrategicBlock";
 import { Slider } from "@/components/ui/slider";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ─── i18n ─── */
 type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
@@ -327,7 +328,7 @@ const i18n: Record<string, LangContent> = {
 
 const CalculadoraPrecioCopa = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const [wineType, setWineType] = useState("still-red");
   const [costeBotella, setCosteBotella] = useState(12);

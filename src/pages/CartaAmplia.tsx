@@ -5,6 +5,7 @@ import {
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Cartas de Vinos Extensas | +250 Referencias bajo Control",
@@ -441,7 +442,7 @@ const i18n: I18nMap<VerticalContent> = { es: ES, en: EN, it: IT, fr: FR };
 
 const CartaAmplia = () => {
   const { lang } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   return <VerticalTemplate t={t} />;
 };
 export default CartaAmplia;

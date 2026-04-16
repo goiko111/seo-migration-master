@@ -15,7 +15,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
-import { type SupportedLang, type I18nMap } from "@/i18n/types";
+import { type SupportedLang, type I18nMap, getI18n} from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
@@ -432,7 +432,7 @@ const networkPillarIcons = [Shield, Users, TrendingUp];
 
 const WinerimSupply = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const tx = i18n[lang];
+  const tx = getI18n(i18n, lang);
 
   const renderParagraph = (text: string) => {
     if (text.includes("<link>")) {

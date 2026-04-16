@@ -20,6 +20,7 @@ import LimitationsBox from "@/components/seo/LimitationsBox";
 import dashboardImg from "@/assets/winerim-dashboard-insights.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 /* ── i18n content ── */
 interface PageContent {
@@ -485,7 +486,7 @@ const CellIcon = ({ value }: { value: boolean | string }) => {
 
 const SoftwareCartaVinos = () => {
   const { lang } = useLanguage();
-  const t = i18n[lang];
+  const t = getI18n(i18n, lang);
 
   useEffect(() => {
     const faqScript = document.createElement("script");

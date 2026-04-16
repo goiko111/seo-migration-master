@@ -14,6 +14,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
+import { getI18n } from "@/i18n/types";
 
 interface BlogPost {
   title: string;
@@ -42,7 +43,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("blog");
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   useEffect(() => {
     const fetchPosts = async () => {

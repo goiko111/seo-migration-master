@@ -23,6 +23,7 @@ import { Slider } from "@/components/ui/slider";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 /* ─── Season logic ─── */
 type Season = "summer" | "winter" | "spring" | "autumn";
@@ -618,7 +619,7 @@ const i18n: I18nMap<Record<string, any>> = {
 /* ─── Component ─── */
 const CalculadoraTicketMedio = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   /* inputs */
   const [cubiertos, setCubiertos] = useState(120);

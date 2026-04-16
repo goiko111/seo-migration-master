@@ -19,6 +19,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const INCREMENTS = [10, 20, 30] as const;
 const DAYS_PER_MONTH = 26;
@@ -177,7 +178,7 @@ const i18n: I18nMap<Record<string, any>> = {
 
 const WineROICalculator = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const formatEur = (n: number) =>
     new Intl.NumberFormat(t.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);

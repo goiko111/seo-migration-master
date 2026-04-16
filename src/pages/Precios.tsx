@@ -17,6 +17,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import NextSteps from "@/components/seo/NextSteps";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
+import { getI18n } from "@/i18n/types";
 
 /* ─── helpers ─── */
 const em = (html: string) => html.replace(/<em>/g, '<span class="text-gradient-wine italic">').replace(/<\/em>/g, '</span>');
@@ -653,7 +654,7 @@ const getLayerColor = (name: string) => layerColors[name] || { bg: "bg-muted/40"
 
 const Precios = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const c = i18n[lang] || i18n.es;
+  const c = getI18n(i18n, lang) || i18n.es;
 
   useEffect(() => {
     const ld = document.createElement("script");

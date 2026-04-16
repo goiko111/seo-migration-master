@@ -12,6 +12,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import mockupImg from "@/assets/winerim-mockup.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ─── i18n ─── */
 type WLT = {
@@ -439,7 +440,7 @@ const ComparisonIcon = ({ value }: { value: boolean | string }) => {
 
 const WineListSoftware = () => {
   const { lang, localePath } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   useEffect(() => {
     const faqSchema = document.createElement("script");

@@ -15,7 +15,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { type SupportedLang, type I18nMap } from "@/i18n/types";
+import { type SupportedLang, type I18nMap, getI18n} from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 
 /* ── Animation helpers ── */
@@ -647,7 +647,7 @@ const JsonLdSchema = ({ t: tx }: { t: typeof i18n.es }) => {
 
 const InteligenciaDinamica = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const tx = i18n[lang];
+  const tx = getI18n(i18n, lang);
 
   return (
     <>

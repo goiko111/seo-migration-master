@@ -15,6 +15,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 interface RestType { type: string; range: string; desc: string; tips: string[] }
 interface Problem { icon: typeof Wine; title: string; desc: string }
@@ -311,7 +312,7 @@ const i18n: I18nMap<PageContent> = {
 
 const CuantosVinosCarta = () => {
   const { lang, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   useEffect(() => {
     const ld = document.createElement("script");

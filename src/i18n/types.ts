@@ -9,9 +9,13 @@ export const DEFAULT_LANG: SupportedLang = "es";
  */
 export type I18nMap<T> = { es: T; en: T } & Partial<Record<SupportedLang, T>>;
 
-/** Safe accessor: returns the requested lang or falls back to en */
-export function getI18n<T>(map: I18nMap<T>, lang: SupportedLang): T {
-  return (map as Record<string, T>)[lang] ?? map.en;
+/** Safe accessor: returns the requested lang or falls back to en (then es) */
+export function getI18n<T>(
+  map: I18nMap<T> | Record<string, T> | Partial<Record<SupportedLang, T>>,
+  lang: SupportedLang
+): T {
+  const m = map as Record<string, T>;
+  return m[lang] ?? m.en ?? m.es;
 }
 
 export const LANG_LABELS: Record<SupportedLang, string> = {

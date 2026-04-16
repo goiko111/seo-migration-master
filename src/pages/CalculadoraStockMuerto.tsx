@@ -21,6 +21,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ─── Types ─── */
 type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
@@ -350,7 +351,7 @@ const formatEur = (n: number) => new Intl.NumberFormat("es-ES", { style: "curren
 
 const CalculadoraStockMuerto = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   const [items, setItems] = useState<StockItem[]>([emptyItem(), emptyItem(), emptyItem()]);
   const [calculated, setCalculated] = useState(false);

@@ -10,6 +10,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { getI18n } from "@/i18n/types";
 
 interface Restaurant {
   id: string;
@@ -77,7 +78,7 @@ const emToGradient = (html: string) => html.replace(/<em>/g, '<span class="text-
 
 const Clientes = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const c = i18n[lang] || i18n.es;
+  const c = getI18n(i18n, lang) || i18n.es;
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
   useEffect(() => {

@@ -15,6 +15,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ─── Types ─── */
 type LinkType = "guide" | "resource" | "solution" | "tool" | "decision-center";
@@ -476,7 +477,7 @@ const execI18n: Record<string, {
 /* ─── Component ─── */
 const CalculadoraMargen = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   const dl = execI18n[lang] || execI18n.es;
 
   const [wineCat, setWineCat] = useState<WineCat>("still");

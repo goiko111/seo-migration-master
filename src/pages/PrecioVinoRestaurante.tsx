@@ -13,6 +13,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 type IconType = typeof DollarSign;
 
@@ -322,7 +323,7 @@ const i18n: I18nMap<PageContent> = {
 
 const PrecioVinoRestaurante = () => {
   const { lang, allLangPaths } = useLanguage();
-  const t = i18n[lang];
+  const t = getI18n(i18n, lang);
 
   useEffect(() => {
     const faqSchema = document.createElement("script");

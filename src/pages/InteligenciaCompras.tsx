@@ -8,6 +8,7 @@ import VerticalTemplate, { type VerticalContent } from "@/components/templates/V
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Inteligencia de Compras para Restaurantes | Winerim",
@@ -458,7 +459,7 @@ const supplyBridge: Record<string, { tag: string; title: string; desc: string; c
 
 const InteligenciaCompras = () => {
   const { lang, localePath } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   const sb = supplyBridge[lang] || supplyBridge.es;
 
   return (

@@ -2,6 +2,7 @@ import PainTemplate from "@/components/templates/PainTemplate";
 import type { PainPageData } from "@/components/templates/PainTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const i18n: I18nMap<PainPageData> = {
   es: {
@@ -220,7 +221,7 @@ const i18n: I18nMap<PainPageData> = {
 
 const CartaNoVende = () => {
   const { lang } = useLanguage();
-  return <PainTemplate data={i18n[lang]} />;
+  return <PainTemplate data={getI18n(i18n, lang)} />;
 };
 
 export default CartaNoVende;

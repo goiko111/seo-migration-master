@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 interface Block {
   id: string;
@@ -339,7 +340,7 @@ const BLOCK_ICONS = [Layers, Wine, DollarSign, GlassWater, RotateCcw, TrendingUp
 
 const WineListScore = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   const blocks: Block[] = t.blocks.map((b: any, i: number) => ({ ...b, icon: BLOCK_ICONS[i] }));
 
   const [answers, setAnswers] = useState<Record<string, number[]>>({});

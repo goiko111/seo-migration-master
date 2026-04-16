@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import VerticalTemplate, { type VerticalContent } from "@/components/templates/VerticalTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 const ES: VerticalContent = {
   metaTitle: "Winerim para Restaurantes Gastronómicos | Carta de Vinos con IA",
@@ -369,7 +370,7 @@ const i18n: Record<string, VerticalContent> = { es: ES, en: EN, it: IT, fr: FR }
 
 const RestaurantesGastronomicos = () => {
   const { lang } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
   return <VerticalTemplate t={t} />;
 };
 

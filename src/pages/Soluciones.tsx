@@ -13,6 +13,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import CTASection from "@/components/CTASection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n } from "@/i18n/types";
 
 /* ── i18n ──────────────────────────────────────────── */
 const i18n: Record<string, {
@@ -192,7 +193,7 @@ const layerAccentClasses: Record<string, { bg: string; text: string; border: str
 /* ── Component ──────────────────────────────────────── */
 const Soluciones = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
 
   return (
     <div className="min-h-screen bg-background">

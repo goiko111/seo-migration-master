@@ -2,6 +2,7 @@ import GuideTemplate from "@/components/templates/GuideTemplate";
 import type { GuidePageData } from "@/components/templates/GuideTemplate";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 const i18n: I18nMap<GuidePageData> = {
   es: {
@@ -492,7 +493,7 @@ const i18n: I18nMap<GuidePageData> = {
 
 const ComoHacerCartaVinos = () => {
   const { lang } = useLanguage();
-  return <GuideTemplate data={i18n[lang]} />;
+  return <GuideTemplate data={getI18n(i18n, lang)} />;
 };
 
 export default ComoHacerCartaVinos;
