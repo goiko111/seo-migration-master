@@ -262,6 +262,124 @@ const i18n: I18nMap<Record<string, any>> = {
     link_supply: "Winerim Supply : intelligence achats", link_core: "Winerim Core : analytics complète",
     locale: "fr-FR", currency: "EUR",
   },
+  de: {
+    seo_title: "Rechner für intelligenten Einkauf | Winerim Supply Demo",
+    seo_desc: "Analysieren Sie, ob sich eine Weinreferenz lohnt: Rentabilität, Nachbestellung, Überpreis und Verbesserungspotenzial. Winerim Supply Demo.",
+    badge: "Demo · Winerim Supply",
+    h1: "Rechner für intelligenten Einkauf",
+    subtitle: "Eine vereinfachte Demo, die Ihnen hilft zu entscheiden, ob eine Referenz nachbestellt, neu verhandelt oder ersetzt werden sollte.",
+    bread_tools: "Werkzeuge", bread_self: "Rechner für intelligenten Einkauf",
+    intro_title: "Gut einkaufen ist die erste Rentabilitätsentscheidung",
+    intro_desc: "Winerim Supply analysiert jede Referenz, indem Einkaufskosten, Rotation, Bestand, Zielmarge und Marktalternativen verknüpft werden, um zu entscheiden, ob behalten, neu verhandelt, nicht nachbestellt oder ersetzt werden soll.",
+    ref_title: "Referenzdaten",
+    ref_label: "Referenz", ref_placeholder: "Z. B. Ribera del Duero Crianza",
+    cost_label: "Aktuelle Kosten (€/Einheit)", pvp_label: "Aktueller Verkaufspreis (€)",
+    sales_label: "Monatliche Verkäufe (Einheiten)", stock_label: "Aktueller Bestand (Einheiten)",
+    days_label: "Tage seit dem letzten Verkauf", days_help: "Wie viele Tage seit dem letzten verkauften Exemplar vergangen sind.",
+    alt_cost_label: "Geschätzte Alternativkosten (€/Einheit)", alt_cost_help: "Kosten einer gleichwertigen Referenz bei einem anderen Lieferanten.",
+    margin_label: "Zielmarge (%)", margin_help: "Zielmarge auf den Verkaufspreis für diese Kategorie.",
+    analyze_btn: "Referenz analysieren",
+    suggestion_for: "Empfehlung für",
+    suggestions: {
+      mantener: { label: "Behalten", desc: "Rentable Referenz mit guter Rotation und wettbewerbsfähigen Kosten." },
+      renegociar: { label: "Neu verhandeln", desc: "Akzeptable Rotation, aber Kosten verbesserungswürdig. Kontaktieren Sie den Lieferanten mit den Daten." },
+      "no-reponer": { label: "Nicht nachbestellen", desc: "Überschüssiger Bestand oder unzureichende Rotation. Aktuellen Bestand aufbrauchen, ohne nachzubestellen." },
+      "buscar-alternativa": { label: "Alternative suchen", desc: "Zu hohe Kosten und/oder Marge unter dem Ziel. Suchen Sie eine gleichwertige Referenz." },
+    },
+    profitability: "Aktuelle Rentabilität", tied_capital: "Gebundenes Kapital",
+    repo_signal: "Nachbestell-Signal", overprice_signal: "Überpreis-Signal",
+    repo: { ok: "Unter Kontrolle", revisar: "Prüfen", urgente: "Überbestand" },
+    sobre: { ok: "Wettbewerbsfähig", revisar: "Verbesserungspotenzial", alto: "Wahrscheinlich überteuert" },
+    opportunity: "Verbesserungschance",
+    saving_unit: "Ersparnis pro Einheit", saving_month: "Monatliche Ersparnis", saving_year: "Geschätzte jährliche Ersparnis",
+    alt_margin_text: (costAlt: string, from: string, to: string) => `Mit der Alternative zu ${costAlt}/Einheit steigt die Marge von ${from}% auf ${to}%, bei gleichem Verkaufspreis.`,
+    summary_title: "Operative Monatsübersicht",
+    monthly_rev: "Monatsumsatz", monthly_profit: "Monatlicher Bruttogewinn",
+    margin_vs_target: "Aktuelle Marge vs. Ziel", days_since: "Tage seit letztem Verkauf",
+    months: "Monate", days_short: "T ohne Verkauf", competitive: "Wettbewerbsfähige Kosten",
+    vs_alt: "/Einheit vs. Alt.",
+    insights: {
+      mantener: "Diese Referenz hat gute Rotation, wettbewerbsfähige Kosten und eine Marge innerhalb des Ziels. Behalten Sie die aktuellen Bedingungen und prüfen Sie regelmäßig.",
+      renegociar: "Die Referenz hat Potenzial, aber Kosten oder Marge sind nicht am Ziel ausgerichtet. Nutzen Sie diese Daten, um mit dem Lieferanten neu zu verhandeln.",
+      "no-reponer": "Die Rotation ist zu langsam oder der angesammelte Bestand zu hoch. Aktuellen Bestand abverkaufen (Glaswein oder Aktion erwägen) und nicht nachbestellen, bis sich die Daten verbessern.",
+      "buscar-alternativa": "Die Einkaufskosten sind deutlich zu hoch und/oder die Marge liegt weit unter dem Ziel. Suchen Sie eine gleichwertige Referenz, um den Verkaufspreis bei besserer Rentabilität zu halten.",
+    },
+    cta_badge: "Vereinfachte Demo",
+    cta_title: "Dieses Werkzeug ist eine vereinfachte Demo von Winerim Supply",
+    cta_desc: "Die komplette Plattform analysiert alle Ihre Referenzen parallel, verknüpft Verkaufs-, Bestands- und Händlerdaten und erzeugt automatische Empfehlungen für Einkauf, Neuverhandlung und Rückzug.",
+    cta_btn: "Winerim Supply ansehen",
+    faqs: [
+      { q: "Was ist der Unterschied zwischen diesem Rechner und dem Totbestand-Rechner?", a: "Der Totbestand-Rechner bewertet das in Referenzen ohne Rotation gebundene Kapital. Dieses Werkzeug geht weiter: Es analysiert, ob eine konkrete Referenz weiterhin eingekauft werden sollte, und vergleicht Rentabilität, Rotation und Kosten mit Alternativen." },
+      { q: "Was sind die 'geschätzten Alternativkosten'?", a: "Der Preis, zu dem Sie eine gleichwertige Referenz (gleiche Kategorie, gleicher Stil und gleiche wahrgenommene Qualität) bei einem anderen Lieferanten oder Jahrgang erhalten könnten. So erkennen Sie, ob Sie zu viel bezahlen." },
+      { q: "Wann sollte ich mit meinem Lieferanten neu verhandeln?", a: "Wenn das Überpreis-Signal 'Verbesserungspotenzial' oder 'Wahrscheinlich überteuert' anzeigt. Auch wenn die aktuelle Marge unter Ihrem Ziel liegt und die Rotation die Kosten nicht rechtfertigt." },
+      { q: "Macht Winerim Supply das automatisch?", a: "Ja. Winerim Supply analysiert alle Ihre Referenzen parallel, verknüpft Einkaufsdaten mit Verkäufen und Rotation und erzeugt automatische Warnungen und Empfehlungen. Dieser Rechner ist eine vereinfachte Demo dieser Fähigkeit." },
+    ],
+    decides: ["Ob eine Referenz ihre aktuellen Einkaufskosten rechtfertigt", "Ob nachbestellt, neu verhandelt oder durch eine Alternative ersetzt werden soll", "Wie viel Kapital gebunden ist und ob Sie Ihre Zielmarge erreichen"],
+    avoids: ["Referenzen nachzubestellen, die nicht genug rotieren", "Über Marktpreis für dieselbe Referenz zu bezahlen", "Kapital in Bestand ohne klare Rendite zu binden"],
+    impact_items: ["Senkung der durchschnittlichen Einkaufskosten pro Referenz", "Freisetzung von in Totbestand gebundenem Kapital", "Einkaufsentscheidungen auf Basis von Daten statt Trägheit"],
+    link_dead_stock: "Totbestand-Rechner", link_margin: "Margen-Rechner",
+    link_supply: "Winerim Supply: Einkaufsintelligenz", link_core: "Winerim Core: Vollständige Analytik",
+    locale: "de-DE", currency: "EUR",
+  },
+  pt: {
+    seo_title: "Calculadora de Compra Inteligente | Demo Winerim Supply",
+    seo_desc: "Analise se uma referência de vinho vale a pena: rentabilidade, reposição, sobrepreço e oportunidade de melhoria. Demo Winerim Supply.",
+    badge: "Demo · Winerim Supply",
+    h1: "Calculadora de Compra Inteligente",
+    subtitle: "Uma demo simplificada para o ajudar a decidir se uma referência vale a pena repor, renegociar ou substituir.",
+    bread_tools: "Ferramentas", bread_self: "Calculadora de compra inteligente",
+    intro_title: "Comprar bem é a primeira decisão de rentabilidade",
+    intro_desc: "A Winerim Supply analisa cada referência cruzando custo de compra, rotação, stock, margem objetivo e alternativas de mercado para decidir se manter, renegociar, não repor ou procurar substituto.",
+    ref_title: "Dados da referência",
+    ref_label: "Referência", ref_placeholder: "Ex: Ribera del Duero Crianza",
+    cost_label: "Custo atual (€/un)", pvp_label: "PVP atual (€)",
+    sales_label: "Vendas mensais (un)", stock_label: "Stock atual (un)",
+    days_label: "Dias desde a última venda", days_help: "Quantos dias sem vender uma unidade.",
+    alt_cost_label: "Custo alternativo estimado (€/un)", alt_cost_help: "Custo de uma referência equivalente de outro fornecedor.",
+    margin_label: "Margem desejada (%)", margin_help: "Margem sobre PVP que considera objetivo para esta categoria.",
+    analyze_btn: "Analisar referência",
+    suggestion_for: "Sugestão para",
+    suggestions: {
+      mantener: { label: "Manter", desc: "Referência rentável com boa rotação e custo competitivo." },
+      renegociar: { label: "Renegociar", desc: "Rotação aceitável mas custo melhorável. Contacte o fornecedor com dados." },
+      "no-reponer": { label: "Não repor", desc: "Stock excessivo ou rotação insuficiente. Esgote o stock atual sem repor." },
+      "buscar-alternativa": { label: "Procurar alternativa", desc: "Custo demasiado alto e/ou margem abaixo do objetivo. Procure uma referência equivalente." },
+    },
+    profitability: "Rentabilidade atual", tied_capital: "Capital imobilizado",
+    repo_signal: "Sinal de reposição", overprice_signal: "Sinal de sobrepreço",
+    repo: { ok: "Sob controlo", revisar: "Rever", urgente: "Excesso de stock" },
+    sobre: { ok: "Competitivo", revisar: "Margem de melhoria", alto: "Sobrepreço provável" },
+    opportunity: "Oportunidade de melhoria",
+    saving_unit: "Poupança por unidade", saving_month: "Poupança mensal", saving_year: "Poupança anual estimada",
+    alt_margin_text: (costAlt: string, from: string, to: string) => `Com a alternativa a ${costAlt}/un, a margem sobe de ${from}% para ${to}% mantendo o mesmo PVP.`,
+    summary_title: "Resumo operacional mensal",
+    monthly_rev: "Faturação mensal", monthly_profit: "Lucro bruto mensal",
+    margin_vs_target: "Margem atual vs objetivo", days_since: "Dias desde a última venda",
+    months: "meses", days_short: "d sem venda", competitive: "Custo competitivo",
+    vs_alt: "/un vs alt.",
+    insights: {
+      mantener: "Esta referência tem boa rotação, custo competitivo e margem dentro do objetivo. Mantenha as condições atuais e reveja periodicamente.",
+      renegociar: "A referência tem potencial mas o custo ou a margem não estão alinhados com o seu objetivo. Use estes dados como argumento para renegociar condições com o fornecedor.",
+      "no-reponer": "A rotação é demasiado lenta ou o stock acumulado é excessivo. Esgote o stock atual (considere copo ou promoção) e não reponha até os dados melhorarem.",
+      "buscar-alternativa": "O custo de compra é significativamente alto e/ou a margem está muito abaixo do objetivo. Procure uma referência equivalente que lhe permita manter o PVP com melhor rentabilidade.",
+    },
+    cta_badge: "Demo simplificada",
+    cta_title: "Esta ferramenta é uma demo simplificada da Winerim Supply",
+    cta_desc: "A plataforma completa analisa todas as suas referências em paralelo, cruza dados de vendas, stock e distribuidores e gera recomendações automáticas de compra, renegociação e retirada.",
+    cta_btn: "Ver Winerim Supply",
+    faqs: [
+      { q: "Qual a diferença entre esta calculadora e a de stock morto?", a: "A calculadora de stock morto avalia o capital imobilizado em referências sem rotação. Esta ferramenta vai mais além: analisa se uma referência concreta vale a pena continuar a comprar, comparando a sua rentabilidade, rotação e custo face a alternativas." },
+      { q: "O que é o 'custo alternativo estimado'?", a: "É o preço a que poderia obter uma referência equivalente (mesma categoria, estilo e qualidade percebida) de outro fornecedor ou de outra colheita. Serve para detetar se está a pagar mais do que o necessário." },
+      { q: "Quando devo renegociar com o meu fornecedor?", a: "Quando o sinal de sobrepreço indica 'Margem de melhoria' ou 'Sobrepreço provável'. Também quando a margem atual está abaixo do seu objetivo e a rotação não justifica o custo." },
+      { q: "A Winerim Supply faz isto automaticamente?", a: "Sim. A Winerim Supply analisa todas as suas referências em paralelo, cruza dados de compra com vendas e rotação, e gera alertas e recomendações automáticas. Esta calculadora é uma demo simplificada dessa capacidade." },
+    ],
+    decides: ["Se uma referência justifica o seu custo de compra atual", "Se convém repor, renegociar ou substituir por alternativa", "Quanto capital tem bloqueado e se cumpre a margem objetivo"],
+    avoids: ["Repor referências que não rodam o suficiente", "Pagar mais que o mercado pela mesma referência", "Imobilizar capital em stock sem retorno claro"],
+    impact_items: ["Redução do custo médio de compra por referência", "Libertação de capital bloqueado em stock sem saída", "Decisões de compra baseadas em dados, não em inércia"],
+    link_dead_stock: "Calculadora de stock morto", link_margin: "Calculadora de margens",
+    link_supply: "Winerim Supply: inteligência de compras", link_core: "Winerim Core: analítica completa",
+    locale: "pt-PT", currency: "EUR",
+  },
 };
 
 const CalculadoraCompraInteligente = () => {
@@ -546,6 +664,8 @@ const CalculadoraCompraInteligente = () => {
                 en: { title: "Action plan · Winerim", timeline: "Timeline", action: "Action", when: "When", week1: "Week 1", week2: "Week 2", month1: "Month 1", month2: "Month 2", capitalProjection: "Capital projection", ifNoAction: "No action", ifAction: "With action", inMonths: (n) => `In ${n} months`, saved: "Potential saving" },
                 it: { title: "Piano d'azione · Winerim", timeline: "Linea temporale", action: "Azione", when: "Quando", week1: "Settimana 1", week2: "Settimana 2", month1: "Mese 1", month2: "Mese 2", capitalProjection: "Proiezione del capitale", ifNoAction: "Senza agire", ifAction: "Con azione", inMonths: (n) => `In ${n} mesi`, saved: "Risparmio potenziale" },
                 fr: { title: "Plan d'action · Winerim", timeline: "Chronologie", action: "Action", when: "Quand", week1: "Semaine 1", week2: "Semaine 2", month1: "Mois 1", month2: "Mois 2", capitalProjection: "Projection du capital", ifNoAction: "Sans agir", ifAction: "Avec action", inMonths: (n) => `Dans ${n} mois`, saved: "Économie potentielle" },
+                de: { title: "Aktionsplan · Winerim", timeline: "Zeitleiste", action: "Aktion", when: "Wann", week1: "Woche 1", week2: "Woche 2", month1: "Monat 1", month2: "Monat 2", capitalProjection: "Kapitalprojektion", ifNoAction: "Ohne Handeln", ifAction: "Mit Handeln", inMonths: (n) => `In ${n} Monaten`, saved: "Mögliche Ersparnis" },
+                pt: { title: "Plano de ação · Winerim", timeline: "Linha temporal", action: "Ação", when: "Quando", week1: "Semana 1", week2: "Semana 2", month1: "Mês 1", month2: "Mês 2", capitalProjection: "Projeção de capital", ifNoAction: "Sem ação", ifAction: "Com ação", inMonths: (n) => `Em ${n} meses`, saved: "Poupança potencial" },
               };
               const a = al[lang] || al.es;
               const sg = results.suggestion;
@@ -553,22 +673,117 @@ const CalculadoraCompraInteligente = () => {
               const oppCost6 = capitalInmo * 0.08 * 0.5;
               const savedIfAction = sg === "mantener" ? 0 : sg === "renegociar" ? results.ahorroAnual * 0.5 : capitalInmo * 0.4;
 
-              const actionSteps: { when: string; action: string }[] = 
-                sg === "mantener" ? [
-                  { when: a.month1, action: lang === "es" ? "Mantener condiciones. Revisar en 90 días." : lang === "en" ? "Maintain conditions. Review in 90 days." : lang === "it" ? "Mantenere condizioni. Rivedere in 90 giorni." : "Maintenir les conditions. Réviser dans 90 jours." },
-                ] : sg === "renegociar" ? [
-                  { when: a.week1, action: lang === "es" ? "Pedir presupuesto a 2 proveedores alternativos" : lang === "en" ? "Request quotes from 2 alternative suppliers" : lang === "it" ? "Richiedere preventivo a 2 fornitori alternativi" : "Demander un devis à 2 fournisseurs alternatifs" },
-                  { when: a.week2, action: lang === "es" ? "Llamar al proveedor actual con los presupuestos y negociar mejora" : lang === "en" ? "Call current supplier with quotes and negotiate improvement" : lang === "it" ? "Chiamare il fornitore attuale con i preventivi e negoziare miglioramento" : "Appeler le fournisseur actuel avec les devis et négocier une amélioration" },
-                  { when: a.month1, action: lang === "es" ? "Si no iguala, reasignar volumen al proveedor con mejor precio" : lang === "en" ? "If not matched, reassign volume to supplier with best price" : lang === "it" ? "Se non eguaglia, riassegnare il volume al fornitore con prezzo migliore" : "Si non égalé, réassigner le volume au fournisseur le mieux-disant" },
-                ] : sg === "no-reponer" ? [
-                  { when: a.week1, action: lang === "es" ? "Sacar las unidades restantes por copa o menú degustación" : lang === "en" ? "Offer remaining units by the glass or tasting menu" : lang === "it" ? "Offrire le unità rimanenti al calice o in menu degustazione" : "Proposer les unités restantes au verre ou en menu dégustation" },
-                  { when: a.month1, action: lang === "es" ? "No incluir en el próximo pedido. Bloquear reposición automática" : lang === "en" ? "Do not include in next order. Block automatic replenishment" : lang === "it" ? "Non includere nel prossimo ordine. Bloccare il riassortimento automatico" : "Ne pas inclure dans la prochaine commande. Bloquer le réapprovisionnement automatique" },
-                  { when: a.month2, action: lang === "es" ? "Reasignar presupuesto a referencias con mejor rotación/margen" : lang === "en" ? "Reallocate budget to references with better rotation/margin" : lang === "it" ? "Riallocare il budget a referenze con migliore rotazione/margine" : "Réalloquer le budget aux références avec meilleure rotation/marge" },
-                ] : [
-                  { when: a.week1, action: lang === "es" ? "Buscar alternativa equivalente en catálogos de 2-3 distribuidores" : lang === "en" ? "Search for equivalent alternative in 2-3 distributor catalogues" : lang === "it" ? "Cercare alternativa equivalente nei cataloghi di 2-3 distributori" : "Rechercher une alternative équivalente dans les catalogues de 2-3 distributeurs" },
-                  { when: a.week2, action: lang === "es" ? "Probar la alternativa internamente. Comparar calidad/precio percibido" : lang === "en" ? "Test alternative internally. Compare quality/perceived price" : lang === "it" ? "Testare l'alternativa internamente. Confrontare qualità/prezzo percepito" : "Tester l'alternative en interne. Comparer qualité/prix perçu" },
-                  { when: a.month1, action: lang === "es" ? "Sustituir en carta y medir rotación/margen durante 30 días" : lang === "en" ? "Replace on list and measure rotation/margin for 30 days" : lang === "it" ? "Sostituire in carta e misurare rotazione/margine per 30 giorni" : "Remplacer sur la carte et mesurer rotation/marge pendant 30 jours" },
-                ];
+              const stepsByLang: Record<string, Record<Suggestion, { when: string; action: string }[]>> = {
+                es: {
+                  mantener: [{ when: a.month1, action: "Mantener condiciones. Revisar en 90 días." }],
+                  renegociar: [
+                    { when: a.week1, action: "Pedir presupuesto a 2 proveedores alternativos" },
+                    { when: a.week2, action: "Llamar al proveedor actual con los presupuestos y negociar mejora" },
+                    { when: a.month1, action: "Si no iguala, reasignar volumen al proveedor con mejor precio" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Sacar las unidades restantes por copa o menú degustación" },
+                    { when: a.month1, action: "No incluir en el próximo pedido. Bloquear reposición automática" },
+                    { when: a.month2, action: "Reasignar presupuesto a referencias con mejor rotación/margen" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Buscar alternativa equivalente en catálogos de 2-3 distribuidores" },
+                    { when: a.week2, action: "Probar la alternativa internamente. Comparar calidad/precio percibido" },
+                    { when: a.month1, action: "Sustituir en carta y medir rotación/margen durante 30 días" },
+                  ],
+                },
+                en: {
+                  mantener: [{ when: a.month1, action: "Maintain conditions. Review in 90 days." }],
+                  renegociar: [
+                    { when: a.week1, action: "Request quotes from 2 alternative suppliers" },
+                    { when: a.week2, action: "Call current supplier with quotes and negotiate improvement" },
+                    { when: a.month1, action: "If not matched, reassign volume to supplier with best price" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Offer remaining units by the glass or tasting menu" },
+                    { when: a.month1, action: "Do not include in next order. Block automatic replenishment" },
+                    { when: a.month2, action: "Reallocate budget to references with better rotation/margin" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Search for equivalent alternative in 2-3 distributor catalogues" },
+                    { when: a.week2, action: "Test alternative internally. Compare quality/perceived price" },
+                    { when: a.month1, action: "Replace on list and measure rotation/margin for 30 days" },
+                  ],
+                },
+                it: {
+                  mantener: [{ when: a.month1, action: "Mantenere condizioni. Rivedere in 90 giorni." }],
+                  renegociar: [
+                    { when: a.week1, action: "Richiedere preventivo a 2 fornitori alternativi" },
+                    { when: a.week2, action: "Chiamare il fornitore attuale con i preventivi e negoziare miglioramento" },
+                    { when: a.month1, action: "Se non eguaglia, riassegnare il volume al fornitore con prezzo migliore" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Offrire le unità rimanenti al calice o in menu degustazione" },
+                    { when: a.month1, action: "Non includere nel prossimo ordine. Bloccare il riassortimento automatico" },
+                    { when: a.month2, action: "Riallocare il budget a referenze con migliore rotazione/margine" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Cercare alternativa equivalente nei cataloghi di 2-3 distributori" },
+                    { when: a.week2, action: "Testare l'alternativa internamente. Confrontare qualità/prezzo percepito" },
+                    { when: a.month1, action: "Sostituire in carta e misurare rotazione/margine per 30 giorni" },
+                  ],
+                },
+                fr: {
+                  mantener: [{ when: a.month1, action: "Maintenir les conditions. Réviser dans 90 jours." }],
+                  renegociar: [
+                    { when: a.week1, action: "Demander un devis à 2 fournisseurs alternatifs" },
+                    { when: a.week2, action: "Appeler le fournisseur actuel avec les devis et négocier une amélioration" },
+                    { when: a.month1, action: "Si non égalé, réassigner le volume au fournisseur le mieux-disant" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Proposer les unités restantes au verre ou en menu dégustation" },
+                    { when: a.month1, action: "Ne pas inclure dans la prochaine commande. Bloquer le réapprovisionnement automatique" },
+                    { when: a.month2, action: "Réallouer le budget aux références avec meilleure rotation/marge" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Rechercher une alternative équivalente dans les catalogues de 2-3 distributeurs" },
+                    { when: a.week2, action: "Tester l'alternative en interne. Comparer qualité/prix perçu" },
+                    { when: a.month1, action: "Remplacer sur la carte et mesurer rotation/marge pendant 30 jours" },
+                  ],
+                },
+                de: {
+                  mantener: [{ when: a.month1, action: "Bedingungen beibehalten. In 90 Tagen prüfen." }],
+                  renegociar: [
+                    { when: a.week1, action: "Angebote von 2 alternativen Lieferanten einholen" },
+                    { when: a.week2, action: "Aktuellen Lieferanten mit den Angeboten kontaktieren und Verbesserung verhandeln" },
+                    { when: a.month1, action: "Wenn nicht angeglichen, Volumen dem Lieferanten mit bestem Preis zuweisen" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Restliche Einheiten im Glasweinverkauf oder Degustationsmenü ausschenken" },
+                    { when: a.month1, action: "Nicht in die nächste Bestellung aufnehmen. Automatische Nachbestellung sperren" },
+                    { when: a.month2, action: "Budget auf Referenzen mit besserer Rotation/Marge umverteilen" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Gleichwertige Alternative in den Katalogen von 2-3 Händlern suchen" },
+                    { when: a.week2, action: "Alternative intern testen. Qualität/wahrgenommenen Preis vergleichen" },
+                    { when: a.month1, action: "Auf der Karte ersetzen und Rotation/Marge 30 Tage lang messen" },
+                  ],
+                },
+                pt: {
+                  mantener: [{ when: a.month1, action: "Manter condições. Rever em 90 dias." }],
+                  renegociar: [
+                    { when: a.week1, action: "Pedir orçamento a 2 fornecedores alternativos" },
+                    { when: a.week2, action: "Ligar ao fornecedor atual com os orçamentos e negociar melhoria" },
+                    { when: a.month1, action: "Se não igualar, reatribuir volume ao fornecedor com melhor preço" },
+                  ],
+                  "no-reponer": [
+                    { when: a.week1, action: "Escoar as unidades restantes a copo ou em menu de degustação" },
+                    { when: a.month1, action: "Não incluir no próximo pedido. Bloquear reposição automática" },
+                    { when: a.month2, action: "Reatribuir orçamento a referências com melhor rotação/margem" },
+                  ],
+                  "buscar-alternativa": [
+                    { when: a.week1, action: "Procurar alternativa equivalente em catálogos de 2-3 distribuidores" },
+                    { when: a.week2, action: "Testar a alternativa internamente. Comparar qualidade/preço percebido" },
+                    { when: a.month1, action: "Substituir na carta e medir rotação/margem durante 30 dias" },
+                  ],
+                },
+              };
+              const actionSteps: { when: string; action: string }[] = (stepsByLang[lang] || stepsByLang.es)[sg];
 
               return (
                 <div className="rounded-xl border border-emerald-500/20 bg-gradient-card p-5 space-y-4">
@@ -637,9 +852,9 @@ const CalculadoraCompraInteligente = () => {
         { to: localePath("/calculadora-margen-vino"), label: t.link_margin, type: "tool" },
         { to: localePath("/producto/winerim-supply"), label: t.link_supply, type: "solution" },
         { to: localePath("/producto/winerim-core"), label: t.link_core, type: "solution" },
-        { to: localePath("/decision-center/compras-reposicion"), label: lang === "es" ? "Decision Center: compras y reposición" : lang === "en" ? "Decision Center: purchasing & restocking" : lang === "it" ? "Decision Center: acquisti e rifornimento" : "Decision Center : achats et réapprovisionnement", type: "decision-center" as any },
-        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : lang === "en" ? "Plans & pricing" : lang === "it" ? "Piani e prezzi" : "Plans et tarifs", type: "solution" },
-        { to: localePath("/demo"), label: lang === "es" ? "Solicitar demo gratuita" : lang === "en" ? "Request free demo" : lang === "it" ? "Richiedi demo gratuita" : "Demander démo gratuite", type: "solution" },
+        { to: localePath("/decision-center/compras-reposicion"), label: ({ es: "Decision Center: compras y reposición", en: "Decision Center: purchasing & restocking", it: "Decision Center: acquisti e rifornimento", fr: "Decision Center : achats et réapprovisionnement", de: "Decision Center: Einkauf und Nachschub", pt: "Decision Center: compras e reposição" } as Record<string, string>)[lang] || "Decision Center", type: "decision-center" as any },
+        { to: localePath("/precios"), label: ({ es: "Planes y precios", en: "Plans & pricing", it: "Piani e prezzi", fr: "Plans et tarifs", de: "Pläne und Preise", pt: "Planos e preços" } as Record<string, string>)[lang] || "Planes y precios", type: "solution" },
+        { to: localePath("/demo"), label: ({ es: "Solicitar demo gratuita", en: "Request free demo", it: "Richiedi demo gratuita", fr: "Demander démo gratuite", de: "Kostenlose Demo anfordern", pt: "Pedir demo gratuita" } as Record<string, string>)[lang] || "Solicitar demo gratuita", type: "solution" },
       ]} />
       <Footer />
     </div>
