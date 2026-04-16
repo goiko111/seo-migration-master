@@ -76,6 +76,30 @@ const content: Record<string, {
     problems: ["Vous vendez toujours les mêmes vins", "Votre équipe en salle ne suit pas", "Des vins stagnants", "Manque de variété", "Gestion en temps réel"],
     success: "Demande envoyée ! Nous vous contacterons bientôt.", error: "Erreur d'envoi. Veuillez réessayer.",
   },
+  de: {
+    seo_title: "Kontakt", seo_desc: "Kontaktieren Sie Winerim. Wir analysieren Ihre Weinkarte kostenlos und helfen Ihnen, sie zu optimieren.", breadcrumb: "Kontakt",
+    title: "Möchten Sie Ihren Weinumsatz", highlight: "optimieren?",
+    subtitle: "Wir analysieren Ihre Weinkarte völlig kostenlos. Wir zeigen Ihnen echte Chancen zur Verbesserung von Marge, Rotation und Sortiment.",
+    form_title: "Kostenlose Weinkartenanalyse",
+    name: "Name", position: "Position im Restaurant", email: "E-Mail", phone: "Telefon",
+    restaurant: "Restaurant", city: "Stadt", references: "Anzahl der Referenzen", menu_link: "Link zu Ihrer Weinkarte", message: "Nachricht (Was möchten Sie verbessern?)",
+    button: "Anfrage senden", sending: "Wird gesendet...",
+    problems_title: "Haben Sie eine dieser Herausforderungen?",
+    problems: ["Sie verkaufen immer die gleichen Weine", "Ihr Serviceteam kommt nicht hinterher", "Weine bleiben liegen", "Zu wenig Vielfalt", "Verwaltung in Echtzeit"],
+    success: "Anfrage gesendet! Wir melden uns in Kürze.", error: "Fehler beim Senden. Bitte erneut versuchen.",
+  },
+  pt: {
+    seo_title: "Contacto", seo_desc: "Contacte a Winerim. Analisamos a sua carta de vinhos gratuitamente e ajudamos a otimizá-la.", breadcrumb: "Contacto",
+    title: "Quer otimizar as suas vendas", highlight: "de vinho?",
+    subtitle: "Analisamos a sua carta de forma completamente gratuita. Mostramos oportunidades reais de melhoria em margem, rotação e sortido.",
+    form_title: "Análise gratuita da sua carta",
+    name: "Nome", position: "Cargo no restaurante", email: "Email", phone: "Telefone",
+    restaurant: "Restaurante", city: "Cidade", references: "Número de referências", menu_link: "Link para a sua carta", message: "Mensagem (O que gostaria de melhorar?)",
+    button: "Enviar pedido", sending: "A enviar...",
+    problems_title: "Tem algum destes problemas?",
+    problems: ["Vende sempre os mesmos vinhos", "A sua equipa de sala não chega", "Tem vinhos parados", "Falta-lhe variedade", "Gestão em tempo real"],
+    success: "Pedido enviado! Entraremos em contacto em breve.", error: "Erro ao enviar. Tente novamente.",
+  },
 };
 
 const Contacto = () => {
