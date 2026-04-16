@@ -125,5 +125,67 @@ const fr: GuidePageData = {
   ctaFinalTitle: "Avec Winerim, la révision mensuelle se prépare toute seule", ctaFinalDescription: "Performance, pricing, rotation, formation et objectifs. Winerim génère le rapport mensuel automatiquement.",
 };
 
-const GuiaRevisarCartaCadaMes = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/weinkarte-monatlich-ueberpruefen",
+  metaTitle: "Wie Sie Ihre Weinkarte monatlich überprüfen, ohne die Kontrolle zu verlieren | Winerim",
+  metaDescription: "Strukturierter Prozess zur monatlichen Überprüfung Ihrer Weinkarte: was messen, was entscheiden, was dem Team kommunizieren — in weniger als 90 Minuten.",
+  heroTitle: "Wie Sie Ihre Weinkarte monatlich überprüfen, ohne die Kontrolle zu verlieren",
+  heroSubtitle: "Die besten Weinkarten haben nicht die besten Weine. Es sind die, die mit Disziplin überprüft werden. Ein monatlicher Prozess von 90 Minuten kann Ihre Rentabilität verändern.",
+  heroBadge: "Operativer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  tableOfContents: ["Warum monatliche Überprüfung unverzichtbar ist","Die 5 Blöcke einer vollständigen Monatsüberprüfung","Block 1: Leistung","Block 2: Pricing","Block 3: Rotation","Block 4: Team","Block 5: Ziele","Vorlage des 90-Minuten-Meetings"],
+  sections: [
+    { heading: "Warum monatliche Überprüfung unverzichtbar ist", content: "Eine nicht überprüfte Weinkarte ist eine Karte, die sich verschlechtert. Jeder Monat ohne Überprüfung bedeutet:\n\n• Tote Weine binden Kapital.\n• Einkaufskosten ändern sich, ohne dass der Verkaufspreis angepasst wird.\n• Saisonale Chancen werden verpasst.\n• Das Team wiederholt dieselben Empfehlungen, ohne zu wissen, was funktioniert.\n\nDie monatliche Überprüfung macht aus Ihrer Karte ein dynamisches Asset, das sich Monat für Monat verbessert.", tips: ["Ein Restaurant, das seine Karte monatlich überprüft, generiert 12–18 % mehr Bruttomarge beim Wein.", "Am ersten Montag des Monats. Blockieren Sie 90 Minuten im Kalender.", "Wenn Sie keine Daten haben, beginnen Sie mit manueller Erfassung, welche Weine sich jede Woche verkaufen."], icon: "lightbulb" },
+    { heading: "Die 5 Blöcke einer vollständigen Monatsüberprüfung", content: "Eine wirksame Überprüfung deckt 5 Bereiche in dieser Reihenfolge ab:\n\n1. Leistung: was bei den Zahlen passiert ist.\n2. Pricing: welche Preise angepasst werden müssen.\n3. Rotation: welche Referenzen rein oder raus sollen.\n4. Team: was das Servicepersonal wissen muss.\n5. Ziele: was für den nächsten Monat zu erwarten ist.\n\nGeschätzte Zeit: 15–20 Minuten pro Block.", tips: ["Halten Sie immer dieselbe Reihenfolge ein.", "Treffen Sie Entscheidungen während des Meetings, nicht danach.", "Dokumentieren Sie Entscheidungen in einer Standardvorlage."], icon: "list" },
+    { heading: "Block 1: Leistung — was diesen Monat passiert ist", content: "Widmen Sie die ersten 20 Minuten dem Verständnis, was passiert ist. Keine Meinungen — Messungen.", tips: ["Top 5 und Bottom 5 Referenzen nach Verkäufen.", "Durchschnittlicher Weinumsatz pro Tisch.", "% der Tische, die Wein bestellen.", "Verhältnis Glas vs Flasche.", "Referenzen ohne Verkauf in den letzten 30 Tagen.", "Vergleich zum Vormonat."], icon: "check" },
+    { heading: "Block 2: Pricing — was anzupassen ist", content: "Pricing ist der Faktor mit der größten Auswirkung auf die Marge und der am seltensten überprüfte.", tips: ["Prüfen Sie, ob sich Einkaufskosten verändert haben.", "Berechnen Sie die reale Marge Ihrer Top-10-Referenzen.", "Überprüfen Sie die Kohärenz der Preistreppe.", "Identifizieren Sie Chancen, 1–2 € zu erhöhen, ohne die Nachfrage zu beeinträchtigen.", "Gläser: berechnen Sie den Verkaufspreis unter Berücksichtigung der realen Verluste neu."], icon: "lightbulb" },
+    { heading: "Block 3: Rotation — was reinkommt, was rausgeht", content: "Die Karte ist ein lebendiger Organismus. Jeder Monat sollte mindestens eine Änderung aufweisen.", tips: ["Austrittskandidaten: weniger als 3 Verkäufe in 30 Tagen UND Marge unter Ziel.", "Eintrittskandidaten: gibt es eine Lücke in der Preistreppe?", "Saisonalität: erfordert der nächste Monat Anpassungen?", "Vor dem Hinzufügen: prüfen, dass keine bestehende Referenz kannibalisiert wird.", "Maximal 2–3 Änderungen pro Monat."], icon: "alert" },
+    { heading: "Block 4: Team — was kommuniziert werden muss", content: "Die besten Kartenentscheidungen nützen nichts, wenn das Team sie nicht kennt.", tips: ["Welche Weine neu sind und wie sie in 15 Sekunden beschrieben werden.", "Was das Glas der Woche ist.", "Welche Weine die Karte verlassen haben und warum.", "Ein motivierender Datenpunkt.", "Format: 5-Minuten-Briefing vor dem Montagsservice."], icon: "check" },
+    { heading: "Block 5: Ziele — was für nächsten Monat zu erwarten ist", content: "Beenden Sie die Überprüfung mit 3–5 konkreten Zielen für den Folgemonat.", tips: ["Ziel für Wein-Durchschnittsbon.", "Ziel für Rotation.", "Ziel für das Glas-Verhältnis.", "Ziel für das Team.", "Maximal 5 Ziele. Weniger ist mehr."], icon: "list" },
+    { heading: "Vorlage des 90-Minuten-Meetings", content: "Verwenden Sie diese Struktur:\n\n0:00–0:05 — Überblick über die Ziele des Vormonats\n0:05–0:25 — Block 1: Leistung\n0:25–0:40 — Block 2: Pricing\n0:40–0:55 — Block 3: Rotation\n0:55–1:05 — Block 4: Team\n1:05–1:15 — Block 5: Ziele\n1:15–1:20 — Aktionsübersicht\n1:20–1:30 — Puffer für Unvorhergesehenes", tips: ["Bringen Sie die Daten vorbereitet ins Meeting mit.", "Dokumentieren Sie alles in einer Standardvorlage.", "Wenn Sie keine 90 Minuten haben, machen Sie 45: Block 1 + Block 3 + Block 5."], icon: "list" },
+  ],
+  faqs: [
+    { q: "Was, wenn ich keine Verkaufsdaten je Referenz habe?", a: "Beginnen Sie mit einer manuellen Erfassung. In einem Monat haben Sie genug Daten." },
+    { q: "Wer sollte die Überprüfung leiten?", a: "Die Person, die die Karte verwaltet. Wenn niemand da ist, der Inhaber mit den Winerim-Daten." },
+    { q: "Und wenn meine Karte klein ist (15–20 Referenzen)?", a: "Umso besser. Die Überprüfung wird schneller (45 Minuten) und jede Entscheidung hat mehr Wirkung." },
+    { q: "Automatisiert Winerim diese Überprüfung?", a: "Ja. Winerim erstellt einen monatlichen Bericht mit allen 5 Blöcken vorausgefüllt." },
+  ],
+  relatedTools: [{ label: "Monatliche Scorecard", url: "/de/ressourcen/scorecard-leistung-weinkarte" }, { label: "Vorlage für Monatsüberprüfung", url: "/de/ressourcen/vorlage-monatsueberpruefung-karte" }],
+  relatedGuides: [{ label: "Karte, Bestand, Verkauf und Marge verbinden", url: "/de/ratgeber/weinkarte-bestand-verkauf-marge-verbinden" }, { label: "Tote Weine erkennen", url: "/de/ratgeber/tote-weine-erkennen" }],
+  ctaPrimaryText: "Demo anfragen", ctaPrimaryUrl: "/de/demo", ctaSecondaryText: "Überprüfungsvorlage herunterladen", ctaSecondaryUrl: "/de/ressourcen/vorlage-monatsueberpruefung-karte",
+  ctaFinalTitle: "Mit Winerim bereitet sich die Monatsüberprüfung von selbst vor", ctaFinalDescription: "Leistung, Pricing, Rotation, Schulung und Ziele. Winerim erstellt den Monatsbericht automatisch.",
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-rever-carta-vinhos-todos-meses",
+  metaTitle: "Como Rever a sua Carta de Vinhos Todos os Meses sem Perder o Controlo | Winerim",
+  metaDescription: "Processo estruturado para rever a sua carta de vinhos mensalmente: o que medir, o que decidir, o que comunicar à equipa — tudo em menos de 90 minutos.",
+  heroTitle: "Como rever uma carta de vinhos todos os meses sem perder o controlo",
+  heroSubtitle: "As melhores cartas de vinho não são as que têm os melhores vinhos. São as que se revêem com disciplina. Um processo mensal de 90 minutos pode transformar a sua rentabilidade.",
+  heroBadge: "Guia operacional",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  tableOfContents: ["Porque a revisão mensal é imprescindível","Os 5 blocos de uma revisão mensal completa","Bloco 1: Desempenho","Bloco 2: Preço","Bloco 3: Rotação","Bloco 4: Equipa","Bloco 5: Objetivos","Template da reunião de 90 minutos"],
+  sections: [
+    { heading: "Porque a revisão mensal é imprescindível", content: "Uma carta de vinhos não revista é uma carta que se degrada. Cada mês sem revisão significa:\n\n• Os vinhos mortos acumulam capital imobilizado.\n• Os preços de compra mudam sem que o PVP se ajuste.\n• As oportunidades sazonais perdem-se.\n• A equipa repete as mesmas recomendações sem saber o que funciona.\n\nA revisão mensal transforma a sua carta num ativo dinâmico que melhora a cada mês.", tips: ["Um restaurante que revê a carta todos os meses gera 12-18 % mais margem bruta em vinho.", "A primeira segunda-feira de cada mês. Bloqueie 90 minutos no calendário.", "Se não tem dados, comece por registar manualmente que vinhos se vendem cada semana."], icon: "lightbulb" },
+    { heading: "Os 5 blocos de uma revisão mensal completa", content: "Uma revisão eficaz cobre 5 áreas por ordem:\n\n1. Desempenho: o que aconteceu com os números.\n2. Preço: que preços precisam de ajuste.\n3. Rotação: que referências devem entrar ou sair.\n4. Equipa: o que a equipa de sala deve saber.\n5. Objetivos: o que esperar do mês seguinte.\n\nTempo estimado: 15-20 min por bloco.", tips: ["Siga sempre a mesma ordem.", "Tome decisões durante a reunião, não depois.", "Documente as decisões num template padrão."], icon: "list" },
+    { heading: "Bloco 1: Desempenho — o que aconteceu este mês", content: "Dedique os primeiros 20 minutos a perceber o que aconteceu. Não opiniões — medições.", tips: ["Top 5 e bottom 5 referências por vendas.", "Bilhete médio em vinho por mesa.", "% de mesas que pedem vinho.", "Rácio copo vs garrafa.", "Referências sem venda nos últimos 30 dias.", "Comparação com o mês anterior."], icon: "check" },
+    { heading: "Bloco 2: Preço — o que ajustar", content: "O preço é o fator que mais impacta a margem e o menos revisto.", tips: ["Verifique se algum custo de compra mudou.", "Calcule a margem real das suas top 10 referências.", "Reveja a coerência da escala de preços.", "Identifique oportunidades de subir 1-2 € sem afetar a procura.", "Copos: recalcule o PVP considerando a quebra real."], icon: "lightbulb" },
+    { heading: "Bloco 3: Rotação — o que entra, o que sai", content: "A carta é um organismo vivo. Cada mês deveria ter pelo menos uma alteração.", tips: ["Candidatos a sair: menos de 3 vendas em 30 dias E margem inferior ao objetivo.", "Candidatos a entrar: há um buraco na escala de preços?", "Sazonalidade: o próximo mês exige ajustes?", "Antes de adicionar: verifique que não canibaliza uma existente.", "Máximo 2-3 mudanças por mês."], icon: "alert" },
+    { heading: "Bloco 4: Equipa — o que comunicar", content: "As melhores decisões de carta não servem se a equipa não as conhecer.", tips: ["Que vinhos são novos e como descrevê-los em 15 segundos.", "Qual é o copo da semana.", "Que vinhos saíram da carta e porquê.", "Um dado motivador.", "Formato: briefing de 5 minutos antes do serviço de segunda-feira."], icon: "check" },
+    { heading: "Bloco 5: Objetivos — o que esperar do próximo mês", content: "Termine a revisão com 3-5 objetivos concretos para o mês seguinte.", tips: ["Objetivo de bilhete médio em vinho.", "Objetivo de rotação.", "Objetivo de copo.", "Objetivo de equipa.", "Máximo 5 objetivos. Menos é mais."], icon: "list" },
+    { heading: "Template da reunião de 90 minutos", content: "Use esta estrutura:\n\n0:00-0:05 — Revisão dos objetivos do mês anterior\n0:05-0:25 — Bloco 1: Desempenho\n0:25-0:40 — Bloco 2: Preço\n0:40-0:55 — Bloco 3: Rotação\n0:55-1:05 — Bloco 4: Equipa\n1:05-1:15 — Bloco 5: Objetivos\n1:15-1:20 — Resumo de ações\n1:20-1:30 — Margem para imprevistos", tips: ["Leve os dados preparados antes da reunião.", "Documente tudo num template padrão.", "Se não puder fazer 90 minutos, faça 45: bloco 1 + bloco 3 + bloco 5."], icon: "list" },
+  ],
+  faqs: [
+    { q: "E se não tiver dados de vendas por referência?", a: "Comece com um registo manual. Num mês terá dados suficientes." },
+    { q: "Quem deve liderar a revisão?", a: "A pessoa que gere a carta. Se não há ninguém, o proprietário com os dados Winerim." },
+    { q: "E se a minha carta é pequena (15-20 referências)?", a: "Melhor. A revisão será mais rápida (45 min) e cada decisão tem mais impacto." },
+    { q: "O Winerim automatiza esta revisão?", a: "Sim. O Winerim gera um relatório mensal com os 5 blocos pré-preenchidos." },
+  ],
+  relatedTools: [{ label: "Scorecard mensal", url: "/pt/recursos/scorecard-desempenho-carta" }, { label: "Template de revisão mensal", url: "/pt/recursos/template-revisao-mensal-carta" }],
+  relatedGuides: [{ label: "Conectar carta, stock, vendas e margem", url: "/pt/guias/como-conectar-carta-stock-vendas-margem" }, { label: "Detetar vinhos mortos", url: "/pt/guias/como-detetar-vinhos-mortos" }],
+  ctaPrimaryText: "Solicitar demo", ctaPrimaryUrl: "/pt/demo", ctaSecondaryText: "Descarregar template de revisão", ctaSecondaryUrl: "/pt/recursos/template-revisao-mensal-carta",
+  ctaFinalTitle: "Com o Winerim, a revisão mensal prepara-se sozinha", ctaFinalDescription: "Desempenho, preço, rotação, formação e objetivos. O Winerim gera o relatório mensal automaticamente.",
+};
+
+const GuiaRevisarCartaCadaMes = () => <GuideTemplate data={{ es, en, it, fr, de, pt }} />;
 export default GuiaRevisarCartaCadaMes;

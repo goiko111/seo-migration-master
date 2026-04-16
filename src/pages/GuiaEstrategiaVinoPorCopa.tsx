@@ -113,5 +113,61 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Template stratégie verre", url: "/fr/ressources/template-strategie-vin-verre" }, { label: "Benchmark : stratégie verre", url: "/fr/benchmarks-playbooks/benchmark-strategie-verre" }],
 };
 
-const GuiaEstrategiaVinoPorCopa = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/rentable-glaswein-strategie-festlegen",
+  metaTitle: "Wie Sie eine rentable Glaswein-Strategie festlegen | Ratgeber",
+  metaDescription: "Vollständiger Ratgeber zur Gestaltung eines rentablen Glaswein-Programms: Auswahl, Preisgestaltung, Verlustkontrolle, Rotation und Teamschulung.",
+  heroTitle: "Wie Sie eine rentable Glaswein-Strategie festlegen",
+  heroSubtitle: "Glaswein ist einer der stärksten Margenhebel in der Gastronomie. Aber ohne klare Strategie wird er zur Verlustquelle.",
+  heroBadge: "Strategischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Meine Karte analysieren", ctaPrimaryUrl: "/wine-list-analyzer", ctaSecondaryText: "Demo anfragen", ctaSecondaryUrl: "/de/demo",
+  ctaFinalTitle: "Automatisieren Sie Ihr Glaswein-Programm", ctaFinalDescription: "Winerim verwaltet automatisch Auswahl, Preisgestaltung und Rotation Ihres Glasangebots.",
+  tableOfContents: ["Warum Glaswein ein strategischer Hebel ist","Fehler, die die Rentabilität zerstören","Wie Sie die Glasweinauswahl gestalten","Preisgestaltung pro Glas: die Formel","Verlustkontrolle","Rotation und Saisonalität"],
+  sections: [
+    { heading: "1. Warum Glaswein ein strategischer Hebel ist", content: "Das Glas erlaubt es Gästen, ohne Verpflichtung zu experimentieren. Restaurants mit einem guten Glaswein-Programm verkaufen 20–40 % mehr Wein.", tips: ["Das Glas beseitigt die Flaschenbarriere.", "Die Margen pro Glas übertreffen die der Flasche.", "Zielverhältnis Glas/Flasche: 30–45 % des Weinumsatzes."], icon: "lightbulb" },
+    { heading: "2. Fehler, die die Rentabilität des Glases zerstören", content: "Die meisten begehen mindestens zwei dieser Fehler.", tips: ["Stagnierende Auswahl: monatelang dieselben Gläser.", "Preisgestaltung von der Flasche kopiert: das ist keine Strategie.", "Verluste ignoriert: können ohne Kontrolle 20–30 % erreichen.", "Zu viele offene Flaschen ohne Konservierungssystem.", "Nur Rotweine im Offenausschank.", "Das Team empfiehlt nicht."], icon: "alert" },
+    { heading: "3. Wie Sie die Glasweinauswahl gestalten", content: "Die Auswahl sollte Vielfalt, Speisenbegleitung und Rentabilität abdecken. Zwischen 6 und 10 Referenzen:", tips: ["1–2 Schaumweine.", "2–3 Weißweine.", "1 Rosé.", "2–3 Rotweine.", "0–1 Süß-/Likörwein.", "Jedes Glas muss eine eigene Funktion erfüllen."], icon: "check" },
+    { heading: "4. Preisgestaltung pro Glas: die Formel, die funktioniert", content: "Glaspreis = (Flaschenkosten / Break-Even-Gläser) × Margenziel. Ziel: Kosten mit den ersten 2–3 Gläsern decken.", tips: ["Effektiver Multiplikator ×3,5 bis ×5.", "Keine exakten runden Preise verwenden.", "Preisgestaltung monatlich überprüfen."], icon: "lightbulb" },
+    { heading: "5. Verlustkontrolle: die unsichtbaren Kosten", content: "Verluste haben drei Ursachen: Oxidation, Überschenkung und unverkauftes Produkt.", tips: ["Jede Öffnung protokollieren.", "Konservierungsprotokoll: Weißwein 2–3 Tage, Rotwein 3–5 Tage.", "Verluste wöchentlich messen.", "Standardisieren: 150 ml pro Glas.", "Verlustziel: < 10 %."], icon: "alert" },
+    { heading: "6. Rotation und Saisonalität", content: "60–70 % feste Referenzen + 30–40 % rotierend alle 2–4 Wochen.", tips: ["Im Sommer mehr Weißweine, Rosés und Schaumweine.", "Nutzen Sie die Rotation, um neue Weine zu testen.", "Kommunizieren Sie Änderungen an das Team.", "Erfassen Sie die Leistung jedes rotierenden Glases."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Wie viele Glasweine sollte ich anbieten?", a: "Zwischen 6 und 10. Weniger als 4 schränkt ein; mehr als 12 erzeugt schwer kontrollierbare Verluste." },
+    { q: "Ist es ohne Konservierungssystem rentabel?", a: "Ja, begrenzt auf 6–8 Gläser mit striktem Protokoll." },
+    { q: "Kannibalisiert Glaswein den Flaschenverkauf?", a: "Nein. Das Glas fungiert als Türöffner." },
+  ],
+  relatedTools: [{ label: "Rechner für Glasweinpreis", url: "/de/tools/rechner-glasweinpreis" }, { label: "Margenrechner", url: "/de/tools/rechner-weinmarge" }],
+  relatedGuides: [{ label: "Vorlage Glaswein-Strategie", url: "/de/ressourcen/vorlage-glaswein-strategie" }, { label: "Benchmark: Glaswein-Strategie", url: "/de/benchmarks-playbooks/benchmark-glaswein-strategie" }],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-definir-estrategia-rentavel-vinho-a-copo",
+  metaTitle: "Como Definir uma Estratégia Rentável de Vinho a Copo | Guia",
+  metaDescription: "Guia completo para desenhar um programa de vinho a copo rentável: seleção, preço, controlo de quebra, rotação e formação da equipa.",
+  heroTitle: "Como definir uma estratégia rentável de vinho a copo",
+  heroSubtitle: "O vinho a copo é uma das alavancas de margem mais potentes na restauração. Mas sem estratégia clara, transforma-se numa fonte de quebra.",
+  heroBadge: "Guia estratégico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/wine-list-analyzer", ctaSecondaryText: "Solicitar demo", ctaSecondaryUrl: "/pt/demo",
+  ctaFinalTitle: "Automatize o seu programa de vinho a copo", ctaFinalDescription: "O Winerim gere automaticamente seleção, preço e rotação da sua oferta a copo.",
+  tableOfContents: ["Porque o vinho a copo é uma alavanca estratégica","Erros que destroem a rentabilidade","Como desenhar a seleção a copo","Preço a copo: a fórmula","Controlo de quebra","Rotação e sazonalidade"],
+  sections: [
+    { heading: "1. Porque o vinho a copo é uma alavanca estratégica", content: "O copo permite experimentar sem compromisso. Reduz a barreira de entrada e aumenta o número de mesas que consomem vinho. Os restaurantes com bom programa a copo vendem 20-40 % mais vinho.", tips: ["O copo elimina a barreira da garrafa.", "A margem a copo é superior à da garrafa.", "Rácio copo/garrafa objetivo: 30-45 % da faturação de vinho."], icon: "lightbulb" },
+    { heading: "2. Erros que destroem a rentabilidade a copo", content: "A maioria comete pelo menos dois destes erros.", tips: ["Seleção estagnada: os mesmos copos durante meses.", "Preço copiado da garrafa: não é estratégia.", "Quebra ignorada: pode chegar aos 20-30 % sem controlo.", "Demasiadas garrafas abertas sem sistema de preservação.", "Só tintos a copo.", "A equipa não recomenda."], icon: "alert" },
+    { heading: "3. Como desenhar a seleção a copo", content: "A seleção deve cobrir variedade, harmonização e rentabilidade. Entre 6 e 10 referências:", tips: ["1-2 espumantes.", "2-3 brancos.", "1 rosé.", "2-3 tintos.", "0-1 doce/generoso.", "Cada copo deve cumprir uma função distinta."], icon: "check" },
+    { heading: "4. Preço a copo: a fórmula que funciona", content: "PVP copo = (Custo garrafa / copos de equilíbrio) × margem objetivo. Objetivo: cobrir o custo com os primeiros 2-3 copos.", tips: ["Multiplicador efetivo ×3,5 a ×5.", "Não use preços redondos exatos.", "Reveja o preço mensalmente."], icon: "lightbulb" },
+    { heading: "5. Controlo de quebra: o custo invisível", content: "A quebra tem três causas: oxidação, serviço excessivo e produto não vendido.", tips: ["Registe cada abertura.", "Protocolo de conservação: branco 2-3 dias, tinto 3-5 dias.", "Meça a quebra semanalmente.", "Padronize: 150 ml por copo.", "Objetivo de quebra: < 10 %."], icon: "alert" },
+    { heading: "6. Rotação e sazonalidade", content: "60-70 % referências fixas + 30-40 % rotativas a cada 2-4 semanas.", tips: ["No verão, mais brancos, rosés e espumantes.", "Use a rotação para testar novos vinhos.", "Comunique as mudanças à equipa.", "Registe o desempenho de cada copo rotativo."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Quantos vinhos a copo devo oferecer?", a: "Entre 6 e 10. Menos de 4 limita; mais de 12 gera quebra difícil de controlar." },
+    { q: "É rentável sem sistema de preservação?", a: "Sim, limitando a 6-8 copos com protocolo rigoroso." },
+    { q: "O vinho a copo canibaliza a garrafa?", a: "Não. O copo funciona como porta de entrada." },
+  ],
+  relatedTools: [{ label: "Calculadora de preço a copo", url: "/pt/ferramentas/calculadora-preco-vinho-copo" }, { label: "Calculadora de margem", url: "/pt/ferramentas/calculadora-margem-vinho" }],
+  relatedGuides: [{ label: "Template estratégia a copo", url: "/pt/recursos/template-estrategia-vinho-copo" }, { label: "Benchmark: estratégia a copo", url: "/pt/benchmarks-playbooks/benchmark-estrategia-copo" }],
+};
+
+const GuiaEstrategiaVinoPorCopa = () => <GuideTemplate data={{ es, en, it, fr, de, pt }} />;
 export default GuiaEstrategiaVinoPorCopa;

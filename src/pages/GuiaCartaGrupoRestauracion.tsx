@@ -113,5 +113,61 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Connecter carte, stock, ventes et marge", url: "/fr/guides/comment-connecter-carte-stock-ventes-marge" }, { label: "Solutions pour groupes", url: "/fr/solutions/groupes-restauration" }],
 };
 
-const GuiaCartaGrupoRestauracion = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/weinkarte-restaurantgruppe-strukturieren",
+  metaTitle: "Weinkarte für eine Restaurantgruppe strukturieren | Ratgeber",
+  metaDescription: "Ratgeber für kohärente Weinkarten in Restaurantgruppen: Standardisierung, lokale Anpassung, Margensteuerung und zentrale Verwaltung.",
+  heroTitle: "Wie Sie eine Weinkarte für eine Restaurantgruppe strukturieren",
+  heroSubtitle: "Eine einzelne Weinkarte zu führen ist schon komplex. Für 5, 10 oder 50 Standorte erfordert es ein System.",
+  heroBadge: "Strategischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Demo anfragen", ctaPrimaryUrl: "/de/demo", ctaSecondaryText: "Meine Karte analysieren", ctaSecondaryUrl: "/de/weinkarten-analyse",
+  ctaFinalTitle: "Verwalten Sie alle Karten an einem Ort", ctaFinalDescription: "Winerim ermöglicht Gruppen, die Kartenverwaltung zu zentralisieren, Margen zu standardisieren und das Angebot je Standort anzupassen.",
+  tableOfContents: ["Die Herausforderung, mehrere Karten zu verwalten","Typische Fehler in Gruppen","Das Stamm-Modell + lokale Anpassung","Margen standardisieren","Zentrale Lieferantenverwaltung","Framework für neue Standorte"],
+  sections: [
+    { heading: "1. Die Herausforderung, mehrere Weinkarten zu verwalten", content: "Eine Gruppe ist kein mit N multipliziertes Restaurant. Jeder Standort kann andere Küche, anderes Publikum und eigene Positionierung haben.", tips: ["Ohne gemeinsame Kriterien preist jeder Standort unterschiedlich.", "Lieferantenduplizierung verhindert Volumenverhandlungen.", "Ohne zentrale Sicht wissen Sie nicht, wie viel Kapital im Keller gebunden ist."], icon: "alert" },
+    { heading: "2. Typische Fehler bei der Kartenverwaltung in Gruppen", content: "Fehler, die sich in Gruppen ohne definierte Weinstrategie wiederholen.", tips: ["Einheitliche Karte für alle: ignoriert Unterschiede.", "Völlige lokale Freiheit: operatives Chaos.", "Zu viele Lieferanten: reduziert Verhandlungsmacht.", "Keine Messung der Leistung je Standort."], icon: "alert" },
+    { heading: "3. Das Stamm-Modell + lokale Anpassung", content: "Die Stamm-Karte definiert gemeinsame Kriterien. Jeder Standort passt sich innerhalb dieser Kriterien an.", tips: ["Gemeinsame Kategoriestruktur.", "Zentraler Katalog zugelassener Weine.", "20-30 % lokale Referenzen erlaubt.", "Preisranges pro Sektion.", "Referenzlimits nach Standorttyp."], icon: "check" },
+    { heading: "4. Wie Sie Margen standardisieren, ohne Identität zu verlieren", content: "Gestaffelte Multiplikatoren verwenden, die an die Positionierung jedes Standorts angepasst sind.", tips: ["Multiplikatoren pro Kostenstufe.", "Nach Positionierung anpassen.", "Bruttomargenziel pro Standort: 65-72 %.", "Vierteljährlich überprüfen.", "Internes Benchmarking zwischen Standorten."], icon: "lightbulb" },
+    { heading: "5. Zentrale Lieferanten- und Bestandsverwaltung", content: "Hauptlieferant (60-70 %), ergänzende (20-30 %), lokale (10-20 %).", tips: ["Verhandeln Sie über das Gesamtvolumen der Gruppe.", "Zentralisieren Sie das Bestandsmonitoring.", "Min/Max-Bestandsalarme.", "Überprüfen Sie die Rotation je Standort monatlich."], icon: "list" },
+    { heading: "6. Entscheidungs-Framework für neue Standorte", content: "Strukturierter Prozess zur Gestaltung der Karte eines neuen Standorts.", tips: ["Schritt 1: Positionierung definieren.", "Schritt 2: Aus dem Stammkatalog auswählen.", "Schritt 3: Lokale Referenzen hinzufügen.", "Schritt 4: Struktur validieren.", "Schritt 5: Team schulen.", "Schritt 6: Erste 90 Tage überwachen."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Wie viele Referenzen pro Standort?", a: "40-60 casual, 60-100 gastronomisch, 100-150 fine dining." },
+    { q: "Braucht jeder Standort einen Sommelier?", a: "Nicht zwingend. Ein Gruppen-Sommelier kann 3-5 Standorte betreuen." },
+    { q: "Lohnt sich die Einkaufszentralisierung?", a: "Ja. 5-15 % Ersparnis und bessere Konditionen." },
+  ],
+  relatedTools: [{ label: "Weinkarten-Analyzer", url: "/de/weinkarten-analyzer" }, { label: "Margen-Rechner", url: "/de/wein-margen-rechner" }],
+  relatedGuides: [{ label: "Karte, Bestand, Verkauf und Marge verbinden", url: "/de/ratgeber/weinkarte-bestand-verkauf-marge-verbinden" }, { label: "Lösungen für Gruppen", url: "/de/loesungen/restaurant-gruppen" }],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-estruturar-carta-vinhos-grupo-restauracao",
+  metaTitle: "Como Estruturar uma Carta de Vinhos para um Grupo de Restauração | Guia",
+  metaDescription: "Guia para desenhar cartas de vinhos coerentes em grupos de restauração: padronização, adaptação local, controlo de margens e gestão centralizada.",
+  heroTitle: "Como estruturar uma carta de vinhos para um grupo de restauração",
+  heroSubtitle: "Gerir a carta de um restaurante já é complexo. Fazê-lo para 5, 10 ou 50 locais exige um sistema.",
+  heroBadge: "Guia estratégico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Solicitar demo", ctaPrimaryUrl: "/pt/demo", ctaSecondaryText: "Analisar a minha carta", ctaSecondaryUrl: "/pt/analise-carta",
+  ctaFinalTitle: "Gere todas as suas cartas a partir de um só lugar", ctaFinalDescription: "A Winerim permite aos grupos centralizar a gestão de cartas, padronizar margens e adaptar a oferta por local.",
+  tableOfContents: ["O desafio de gerir várias cartas","Erros comuns em grupos","O modelo troncal + adaptação local","Como padronizar margens","Gestão centralizada de fornecedores","Framework para novos locais"],
+  sections: [
+    { heading: "1. O desafio de gerir várias cartas de vinhos", content: "Um grupo não é um restaurante multiplicado por N. Cada local pode ter cozinha diferente, público distinto e posicionamento próprio.", tips: ["Sem critérios comuns, cada local fixa preços de forma diferente.", "A duplicação de fornecedores impede negociar volumes.", "Sem visibilidade centralizada, não se sabe quanto capital há em garrafeira."], icon: "alert" },
+    { heading: "2. Erros comuns na gestão de cartas de grupo", content: "Erros que se repetem em grupos sem estratégia de vinho definida.", tips: ["Carta única para todos: ignora diferenças.", "Liberdade total por local: caos operativo.", "Demasiados distribuidores: reduz poder negocial.", "Não medir desempenho por local."], icon: "alert" },
+    { heading: "3. O modelo troncal + adaptação local", content: "A carta troncal define critérios comuns. Cada local adapta-se dentro desses critérios.", tips: ["Estrutura de categorias comum.", "Catálogo de vinhos homologados centralizado.", "20-30% de referências locais permitidas.", "Gamas de preço por secção.", "Limite de referências por tipo de local."], icon: "check" },
+    { heading: "4. Como padronizar margens sem perder identidade", content: "Usar multiplicadores escalonados adaptados ao posicionamento de cada local.", tips: ["Multiplicadores por escalão de custo.", "Ajustar consoante o posicionamento.", "Margem bruta objetivo por local: 65-72%.", "Rever trimestralmente.", "Benchmarking interno entre locais."], icon: "lightbulb" },
+    { heading: "5. Gestão centralizada de fornecedores e stock", content: "Fornecedor principal (60-70%), complementares (20-30%), locais (10-20%).", tips: ["Negoceie com o volume total do grupo.", "Centralize o acompanhamento de stock.", "Alertas de stock mínimo e máximo.", "Reveja a rotação por local mensalmente."], icon: "list" },
+    { heading: "6. Framework de decisão para novos locais", content: "Processo estruturado para desenhar a carta de um novo local.", tips: ["Passo 1: Definir posicionamento.", "Passo 2: Selecionar do catálogo troncal.", "Passo 3: Adicionar referências locais.", "Passo 4: Validar estrutura.", "Passo 5: Formar a equipa.", "Passo 6: Monitorizar os primeiros 90 dias."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Quantas referências por local?", a: "40-60 casual, 60-100 gastronómico, 100-150 fine dining." },
+    { q: "Cada local precisa de escanção?", a: "Não necessariamente. Um escanção de grupo pode supervisionar 3-5 locais." },
+    { q: "Vale a pena centralizar compras?", a: "Sim. 5-15% de poupança e melhores condições." },
+  ],
+  relatedTools: [{ label: "Analisador de carta", url: "/pt/analisador-carta-vinhos" }, { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" }],
+  relatedGuides: [{ label: "Conectar carta, stock, vendas e margem", url: "/pt/guias/como-conectar-carta-stock-vendas-margem" }, { label: "Soluções para grupos", url: "/pt/solucoes/grupos-restauracao" }],
+};
+
+const GuiaCartaGrupoRestauracion = () => <GuideTemplate data={{ es, en, it, fr, de, pt }} />;
 export default GuiaCartaGrupoRestauracion;

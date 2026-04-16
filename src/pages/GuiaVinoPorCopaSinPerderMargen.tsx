@@ -125,7 +125,257 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Stratégie rentable au verre", url: "/fr/guides/strategie-rentable-verre" }, { label: "Détecter la cannibalisation entre vins", url: "/fr/guides/comment-detecter-cannibalisation-vins-carte" }],
 };
 
-const data: Record<string, GuidePageData> = { es, en, it, fr };
+const de: GuidePageData = {
+  slug: "de/ratgeber/glaswein-einfuehren-ohne-marge-zu-verlieren",
+  metaTitle: "Glaswein einführen, ohne Marge zu verlieren | Winerim",
+  metaDescription:
+    "Praxisleitfaden für ein profitables Glaswein-Programm: Auswahl, Pricing, Schwundkontrolle, Rotation und Schulung des Serviceteams.",
+  heroTitle: "Glaswein einführen, ohne Marge zu verlieren",
+  heroSubtitle:
+    "Glaswein ist die größte Verkaufschance der Gastronomie — und die größte Verlustquelle, wenn er nicht richtig gemanagt wird. Dieser Leitfaden liefert das komplette Framework.",
+  heroBadge: "Operativer Leitfaden — Glas",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Demo anfordern",
+  ctaPrimaryUrl: "/de/demo",
+  ctaSecondaryText: "Meine Karte analysieren",
+  ctaSecondaryUrl: "/de/weinkarten-analyse",
+  ctaFinalTitle: "Winerim optimiert Ihr Glaswein-Programm automatisch",
+  ctaFinalDescription:
+    "Dynamisches Pricing, Schwundkontrolle, Rotationsalarme und datenbasierte Auswahl-Empfehlungen.",
+  tableOfContents: [
+    "Warum Glaswein eine riesige Chance ist",
+    "Die 5 Fehler, die die Marge zerstören",
+    "Wie Sie die richtigen Weine fürs Glas auswählen",
+    "Pricing-Framework: die Balance-Formel",
+    "Schwundkontrolle: der unsichtbare Faktor",
+    "Launch-Checkliste",
+  ],
+  sections: [
+    {
+      heading: "Warum Glaswein eine riesige Chance ist",
+      content:
+        "Glaswein nimmt dem Gast die größte Hemmschwelle: die Verpflichtung. Ein Glas erlaubt es, ohne Risiko zu probieren.\n\nEin gut gestaltetes Glaswein-Angebot kann den Durchschnittsbon um 15-25 % erhöhen.",
+      tips: [
+        "35-45 % der Tische, die keinen Wein bestellen, würden es tun, wenn das Glasangebot sichtbarer wäre.",
+        "Ein gut positioniertes Glas hat eine höhere Bruttomarge als die Flasche, wenn der Schwund unter Kontrolle ist.",
+        "Restaurants, die am besten Glasweine verkaufen, haben bessere Rotation — nicht mehr Positionen.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Die 5 Fehler, die die Marge zerstören",
+      content:
+        "Die meisten Restaurants, die Glaswein 'probieren' und wieder aufgeben, haben mindestens 2 dieser Fehler gemacht.",
+      tips: [
+        "Zu viele offene Positionen: starten Sie mit 4-6 Weinen",
+        "Pricing nach Bauchgefühl: der Glaspreis muss separat kalkuliert werden",
+        "Kein Schwund-Tracking: ohne Erfassung, wie viele Gläser pro Flasche ausgeschenkt werden",
+        "Statische Auswahl: häufige Rotation erzeugt Neugier",
+        "Nicht geschultes Team: wenn der Service nicht erklärt, warum man dieses Glas wählen soll, verkauft es sich nicht",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Wie Sie die richtigen Weine fürs Glas auswählen",
+      content:
+        "Die Glaswein-Auswahl ist keine Mini-Version Ihrer Flaschen-Karte.\n\nEmpfohlene Struktur: 1 Schaumwein, 2 Weißweine, 2-3 Rotweine, 1 rotierender Premium-Glaswein.",
+      tips: [
+        "Bevorzugen Sie Weine, die 2-3 Tage geöffnet ohne Qualitätsverlust durchhalten.",
+        "Der rotierende Glaswein 'des Monats' erzeugt Geschichte und Dringlichkeit.",
+        "Testen Sie jede Position 3 Tage offen, bevor Sie sie aufnehmen.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Pricing-Framework: die Balance-Formel",
+      content:
+        "Formel: Glaspreis = (Flaschenkosten / reale Gläser) × Multiplikator\n\nMultiplikator: Standard 4x-5x, Premium 3,5x-4x, Einstieg 5x-6x.\n\nRegel: Glaspreis zwischen 25 % und 35 % des Flaschenpreises.",
+      tips: [
+        "Kostet ein Glas 2 € und Sie verkaufen es für 8 €, liegt Ihre Bruttomarge bei 75 %. Aber wenn 1 Glas als Schwund verloren geht, sinkt sie auf 60 %.",
+        "Überprüfen Sie das Glaswein-Pricing monatlich.",
+        "Winerim berechnet den optimalen Glaspreis unter Berücksichtigung des realen Schwunds und der Rotation.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Schwundkontrolle: der unsichtbare Faktor",
+      content:
+        "Schwund ist die Differenz zwischen dem, was Sie ausschenken sollten, und dem, was Sie tatsächlich ausschenken. Dieser Faktor hat den größten Einfluss auf die Rentabilität des Glasprogramms.",
+      tips: [
+        "15 % Schwund statt 10 % reduzieren die Bruttomarge um 8-10 Punkte.",
+        "Überschenken ist die häufigste Ursache. Schulen Sie das Team mit Markierungen am Glas.",
+        "Erfassen Sie Gratisgläser als Marketingausgabe.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Launch-Checkliste",
+      content: "Ein profitables Glaswein-Programm wird in 3 Wochen gestartet.",
+      tips: [
+        "Woche 1: Auswahl festlegen (4-6 Positionen), Pricing berechnen, Produktkarten vorbereiten",
+        "Woche 2: Team schulen (15 min/Tag × 5 Tage)",
+        "Woche 3: Start mit täglichem Tracking",
+        "Monat 1: komplette Revision — was funktioniert, Schwund, Anpassungen",
+        "Ausstiegsregel: verkauft eine Position weniger als 3 Gläser/Woche, wird sie ersetzt",
+        "Ziel Monat 3: Schwund <12 %, wöchentliche Rotation, autonomes Team",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "Mit wie vielen Gläsern sollte ich starten?",
+      a: "Zwischen 4 und 6 Positionen. Genug, um Profile abzudecken, ohne unbeherrschbaren Schwund.",
+    },
+    {
+      q: "Kannibalisiert Glaswein den Flaschenverkauf?",
+      a: "Nein, er ergänzt ihn. Tische, die mit einem Glas starten, bestellen hinterher mehr Wein.",
+    },
+    {
+      q: "Brauche ich ein Weinkonservierungssystem?",
+      a: "Nicht zwingend, aber für Premium-Gläser (ab 15 €) sehr zu empfehlen.",
+    },
+    {
+      q: "Wie oft sollten Glasweine rotieren?",
+      a: "Standard alle 2-4 Wochen. Premium-Glas kann wöchentlich wechseln.",
+    },
+  ],
+  relatedTools: [
+    { label: "Glaswein-Preisrechner", url: "/de/werkzeuge/glaswein-preisrechner" },
+    { label: "Glaswein-Diagnose", url: "/de/werkzeuge/glaswein-diagnose" },
+  ],
+  relatedGuides: [
+    { label: "Rentable Glaswein-Strategie", url: "/de/ratgeber/rentable-glaswein-strategie-festlegen" },
+    { label: "Wein-Kannibalisierung erkennen", url: "/de/ratgeber/wein-kannibalisierung-auf-der-karte-erkennen" },
+  ],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-implementar-vinho-a-copo-sem-perder-margem",
+  metaTitle: "Como Implementar Vinho a Copo Sem Perder Margem | Winerim",
+  metaDescription:
+    "Guia prático para lançar um programa de vinho a copo rentável: seleção, pricing, controlo de quebras, rotação e formação da equipa de sala.",
+  heroTitle: "Como implementar vinho a copo sem perder margem",
+  heroSubtitle:
+    "O vinho a copo é a maior oportunidade de venda na restauração — e a maior fonte de perda se for mal gerido. Este guia dá-lhe o framework completo.",
+  heroBadge: "Guia operacional — Copo",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Pedir demo",
+  ctaPrimaryUrl: "/pt/demo",
+  ctaSecondaryText: "Analisar a minha carta",
+  ctaSecondaryUrl: "/pt/analise-carta",
+  ctaFinalTitle: "A Winerim otimiza o seu programa a copo automaticamente",
+  ctaFinalDescription:
+    "Pricing dinâmico, controlo de quebras, alertas de rotação e recomendações de seleção baseadas em dados reais.",
+  tableOfContents: [
+    "Porque o vinho a copo é uma enorme oportunidade",
+    "Os 5 erros que destroem a margem",
+    "Como selecionar os vinhos a copo certos",
+    "Framework de pricing: a fórmula do equilíbrio",
+    "Controlo de quebras: o fator invisível",
+    "Checklist de lançamento",
+  ],
+  sections: [
+    {
+      heading: "Porque o vinho a copo é uma enorme oportunidade",
+      content:
+        "O vinho a copo elimina o principal travão do cliente: o compromisso. Um copo permite explorar sem risco.\n\nUma oferta a copo bem desenhada pode aumentar o bilhete médio em 15-25 %.",
+      tips: [
+        "35-45 % das mesas que não pedem vinho fá-lo-iam se a oferta a copo fosse mais visível.",
+        "Um copo bem posicionado tem margem bruta superior à da garrafa se as quebras estiverem controladas.",
+        "Os restaurantes que melhor vendem a copo têm melhor rotação, não mais referências.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Os 5 erros que destroem a margem",
+      content:
+        "A maioria dos restaurantes que 'experimenta' o vinho a copo e desiste cometeu pelo menos 2 destes erros.",
+      tips: [
+        "Demasiadas referências abertas: comece com 4-6",
+        "Pricing por intuição: o preço a copo deve ser calculado em separado",
+        "Não medir quebras: sem registar quantos copos saem por garrafa",
+        "Seleção estática: a rotação frequente gera curiosidade",
+        "Equipa sem formação: se o empregado não explica porque pedir aquele copo, ele não vende",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Como selecionar os vinhos a copo certos",
+      content:
+        "A seleção a copo não é uma versão reduzida da sua carta de garrafas.\n\nEstrutura recomendada: 1 espumante, 2 brancos, 2-3 tintos, 1 copo premium rotativo.",
+      tips: [
+        "Dê prioridade a vinhos que aguentem 2-3 dias abertos sem deterioração.",
+        "O copo rotativo 'do mês' gera narrativa e urgência.",
+        "Prove cada referência aberta durante 3 dias antes de a incluir.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Framework de pricing: a fórmula do equilíbrio",
+      content:
+        "Fórmula: PVP copo = (Custo garrafa / copos reais) × multiplicador\n\nMultiplicador: padrão 4x-5x, premium 3,5x-4x, entrada 5x-6x.\n\nRegra: PVP copo entre 25 % e 35 % do PVP da garrafa.",
+      tips: [
+        "Se um copo custa 2 € e o vende a 8 €, a margem bruta é 75 %. Se estragar 1 copo, desce para 60 %.",
+        "Reveja o pricing dos copos todos os meses.",
+        "A Winerim calcula o PVP ótimo tendo em conta a quebra real e a rotação.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Controlo de quebras: o fator invisível",
+      content:
+        "A quebra é a diferença entre o que deveria servir e o que realmente serve. É o fator que mais impacta a rentabilidade do programa a copo.",
+      tips: [
+        "Quebra de 15 % em vez de 10 % reduz a margem bruta em 8-10 pontos.",
+        "O excesso de serviço é a causa mais comum. Forme a equipa com marcas no copo.",
+        "Registe os copos de cortesia como despesa de marketing.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Checklist de lançamento",
+      content: "Um programa a copo rentável lança-se em 3 semanas.",
+      tips: [
+        "Semana 1: Definir seleção (4-6 refs.), calcular pricing, preparar fichas",
+        "Semana 2: Formar a equipa (15 min/dia × 5 dias)",
+        "Semana 3: Lançamento com acompanhamento diário",
+        "Mês 1: Revisão completa — o que funciona, quebras, ajustes",
+        "Regra de saída: se vender <3 copos/semana, substitua-a",
+        "Objetivo mês 3: quebra <12 %, rotação semanal, equipa autónoma",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "Quantos copos devo oferecer para começar?",
+      a: "Entre 4 e 6 referências. Chega para cobrir perfis sem quebras incontroláveis.",
+    },
+    {
+      q: "O vinho a copo canibaliza a venda da garrafa?",
+      a: "Não, complementa-a. As mesas que começam com copo acabam por pedir mais vinho.",
+    },
+    {
+      q: "Preciso de um sistema de preservação?",
+      a: "Não é obrigatório, mas muito recomendado para copos premium (+15 €).",
+    },
+    {
+      q: "Com que frequência rodar os vinhos a copo?",
+      a: "Padrão a cada 2-4 semanas. O copo premium pode ser semanal.",
+    },
+  ],
+  relatedTools: [
+    { label: "Calculadora de preço a copo", url: "/pt/ferramentas/calculadora-preco-vinho-copo" },
+    { label: "Diagnóstico de vinho a copo", url: "/pt/ferramentas/diagnostico-vinho-copo" },
+  ],
+  relatedGuides: [
+    { label: "Estratégia rentável a copo", url: "/pt/guias/como-definir-estrategia-rentavel-vinho-a-copo" },
+    { label: "Detetar canibalização entre vinhos", url: "/pt/guias/como-detetar-canibalizacao-vinhos-carta" },
+  ],
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
 
 const GuiaVinoPorCopaSinPerderMargen = () => <GuideTemplate data={data} />;
 export default GuiaVinoPorCopaSinPerderMargen;

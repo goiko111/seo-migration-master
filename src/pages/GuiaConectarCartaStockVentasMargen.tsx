@@ -113,5 +113,61 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Scorecard mensuel", url: "/fr/ressources/scorecard-performance-carte" }, { label: "Comment utiliser les données pour acheter", url: "/fr/guides/comment-utiliser-donnees-pour-acheter-vins" }],
 };
 
-const GuiaConectarCartaStockVentasMargen = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/weinkarte-bestand-verkauf-marge-verbinden",
+  metaTitle: "Weinkarte, Bestand, Verkauf und Marge verbinden | Ratgeber",
+  metaDescription: "Ratgeber zur Integration von Weinkarten-, Bestands-, Verkaufs- und Margenmanagement in ein kohärentes System.",
+  heroTitle: "Wie Sie Weinkarte, Bestand, Verkauf und Marge verbinden",
+  heroSubtitle: "Karte, Bestand, Verkauf und Marge sind vier Teile desselben Puzzles. Verbunden werden Entscheidungen klar.",
+  heroBadge: "Management-Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Demo anfragen", ctaPrimaryUrl: "/de/demo", ctaSecondaryText: "Meine Karte analysieren", ctaSecondaryUrl: "/de/weinkarten-analyse",
+  ctaFinalTitle: "Verbinden Sie alles mit Winerim", ctaFinalDescription: "Winerim integriert Karte, Bestand, Verkauf und Marge in einer einzigen Oberfläche.",
+  tableOfContents: ["Das Silo-Problem","Die 4 Teile und wie sie sich verbinden","Karte → Bestand","Bestand → Verkauf","Verkauf → Marge","Der vollständige Zyklus"],
+  sections: [
+    { heading: "1. Das Problem der Informationssilos", content: "Die Karte in einem Dokument, der Bestand in einer Tabelle, die Verkäufe im POS und die Marge im Controller-Report. Ohne Datenabgleich bleiben Entscheidungen lückenhaft.", tips: ["Die Karte wird ohne Verkaufsdaten entworfen.", "Der Bestand wird ohne Rotationsdaten verwaltet.", "Die Verkäufe werden ohne Margendaten betrachtet.", "Kosten dieser Trennung: 5-15 % des Weinumsatzes."], icon: "alert" },
+    { heading: "2. Die 4 Teile und wie sie sich verbinden", content: "Die Karte definiert, was Sie verkaufen. Der Bestand stützt die Karte. Die Verkäufe sind das Ergebnis. Die Marge ist die Konsequenz.", tips: ["Karte → Bestand: gestalten Sie unter Berücksichtigung dessen, was Sie vorrätig halten können.", "Bestand → Karte: was Sie nicht nachbestellen können, heben Sie nicht hervor.", "Verkauf → Karte: die Daten zeigen, was funktioniert.", "Marge → Einkauf: steuert, was und wie viel gekauft wird."], icon: "lightbulb" },
+    { heading: "3. Karte → Bestand: der Einkaufsfluss", content: "Jede Referenz auf der Karte bedeutet eine Einkaufsentscheidung und eine finanzielle Verpflichtung.", tips: ["Jede Referenz ist eine Bestandsverpflichtung.", "Berechnen Sie den Mindestbestand für 60-90 Tage.", "Berechnen Sie das im Keller gebundene Gesamtkapital.", "Priorisieren Sie zuverlässige Lieferanten mit häufigen Lieferungen."], icon: "list" },
+    { heading: "4. Bestand → Verkauf: die Rotation als Brücke", content: "Der Bestand ist eine finanzielle Ressource, die Rendite erzeugen muss. Die Rotation verbindet Bestand und Verkauf.", tips: ["Rotationsziel: 8-12 pro Jahr.", "Rotation < 4: prüfen, ob die Referenz bleiben soll.", "Weine mit hohem Bestand in sichtbaren Positionen.", "Inventur zusammen mit Verkaufsdaten prüfen."], icon: "check" },
+    { heading: "5. Verkauf → Marge: die reale Rentabilität", content: "Hoher Umsatz garantiert keine Rentabilität. Entscheidend ist die reale Marge.", tips: ["Berechnen Sie die reale Marge monatlich.", "Vergleichen Sie mit der theoretischen Marge: Abweichung > 5 % = untersuchen.", "Analysieren Sie die Marge pro Referenz, nicht nur global.", "Margenbeitrag: Stückmarge × verkaufte Einheiten."], icon: "lightbulb" },
+    { heading: "6. Der vollständige Zyklus: integrierte Steuerung", content: "Wenn die vier Teile verbunden sind, wechselt das Management von reaktiv zu proaktiv.", tips: ["Schritt 1: Monatliches Scorecard prüfen.", "Schritt 2: Anomalien identifizieren.", "Schritt 3: Maßnahmen beschließen.", "Schritt 4: Änderungen umsetzen.", "Schritt 5: Wirkung im nächsten Scorecard messen."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Brauche ich eine Software, um diese Daten zu verbinden?", a: "Nicht zwingend, aber sehr empfehlenswert. Winerim automatisiert das vollständig." },
+    { q: "Gilt das nur für große Restaurants?", a: "Nein. Kleine Restaurants profitieren gleichermaßen." },
+    { q: "Was ist der erste Schritt?", a: "Beginnen Sie mit einem monatlichen Scorecard: Verkauf, Rotation und Marge." },
+  ],
+  relatedTools: [{ label: "Wine List Score", url: "/de/tools/wine-list-score" }, { label: "Margen-Rechner", url: "/de/wein-margen-rechner" }],
+  relatedGuides: [{ label: "Monatliches Scorecard", url: "/de/ressourcen/scorecard-weinkarten-leistung" }, { label: "Wie Sie Daten für den Einkauf nutzen", url: "/de/ratgeber/daten-nutzen-weinkauf-entscheiden" }],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-conectar-carta-stock-vendas-margem",
+  metaTitle: "Como Conectar Carta, Stock, Vendas e Margem | Guia",
+  metaDescription: "Guia para integrar a gestão da carta de vinhos, stock, vendas e margens num sistema coerente.",
+  heroTitle: "Como conectar carta, stock, vendas e margem",
+  heroSubtitle: "Carta, stock, vendas e margem são quatro peças do mesmo puzzle. Ligadas, as decisões tornam-se claras.",
+  heroBadge: "Guia de gestão",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Solicitar demo", ctaPrimaryUrl: "/pt/demo", ctaSecondaryText: "Analisar a minha carta", ctaSecondaryUrl: "/pt/analise-carta",
+  ctaFinalTitle: "Ligue tudo com a Winerim", ctaFinalDescription: "A Winerim integra carta, stock, vendas e margem num único painel.",
+  tableOfContents: ["O problema dos silos","As 4 peças e como se ligam","Carta → Stock","Stock → Vendas","Vendas → Margem","O ciclo completo"],
+  sections: [
+    { heading: "1. O problema dos silos de informação", content: "A carta num documento, o stock numa folha, as vendas no TPV e a margem no relatório do controller. Sem cruzar dados, as decisões são parciais.", tips: ["A carta desenha-se sem dados de venda.", "O stock gere-se sem dados de rotação.", "As vendas olham-se sem dados de margem.", "Custo desta desconexão: 5-15% da faturação de vinho."], icon: "alert" },
+    { heading: "2. As 4 peças e como se ligam", content: "A carta define o que vende. O stock suporta a carta. As vendas são o resultado. A margem é a consequência.", tips: ["Carta → Stock: desenhe consoante o que consegue ter em stock.", "Stock → Carta: se não consegue repor, não destaque.", "Vendas → Carta: os dados dizem o que funciona.", "Margem → Compras: orienta o que comprar e quanto."], icon: "lightbulb" },
+    { heading: "3. Carta → Stock: o fluxo de compras", content: "Cada referência em carta implica uma decisão de compra e um compromisso financeiro.", tips: ["Cada referência é um compromisso de stock.", "Calcule o stock mínimo para 60-90 dias.", "Calcule o capital total necessário na garrafeira.", "Priorize fornecedores fiáveis com entregas frequentes."], icon: "list" },
+    { heading: "4. Stock → Vendas: a rotação como ponte", content: "O stock é um recurso financeiro que tem de gerar retorno. A rotação liga stock e vendas.", tips: ["Taxa de rotação objetivo: 8-12 por ano.", "Rotação < 4: avaliar se deve manter-se.", "Os vinhos com mais stock em posições visíveis.", "O inventário deve ser revisto em conjunto com os dados de venda."], icon: "check" },
+    { heading: "5. Vendas → Margem: a rentabilidade real", content: "Faturar muito não garante rentabilidade. O que importa é a margem real.", tips: ["Calcule a margem real mensalmente.", "Compare com a margem teórica: diferença > 5% = investigar.", "Analise a margem por referência, não só global.", "Contribuição para a margem: margem unitária × unidades vendidas."], icon: "lightbulb" },
+    { heading: "6. O ciclo completo: gestão integrada", content: "Quando as quatro peças se ligam, a gestão passa de reativa a proativa.", tips: ["Passo 1: Rever scorecard mensal.", "Passo 2: Identificar anomalias.", "Passo 3: Decidir ações.", "Passo 4: Executar alterações.", "Passo 5: Medir o impacto no scorecard seguinte."], icon: "check" },
+  ],
+  faqs: [
+    { q: "Preciso de software para ligar estes dados?", a: "Não é imprescindível, mas é recomendável. A Winerim automatiza-o totalmente." },
+    { q: "Isto é só para restaurantes grandes?", a: "Não. Os restaurantes pequenos beneficiam igualmente." },
+    { q: "Qual é o primeiro passo?", a: "Comece pelo scorecard mensal: vendas, rotação e margem." },
+  ],
+  relatedTools: [{ label: "Wine List Score", url: "/pt/ferramentas/wine-list-score" }, { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" }],
+  relatedGuides: [{ label: "Scorecard mensal", url: "/pt/recursos/scorecard-desempenho-carta" }, { label: "Como usar dados para comprar", url: "/pt/guias/como-usar-dados-para-decidir-que-vinhos-comprar" }],
+};
+
+const GuiaConectarCartaStockVentasMargen = () => <GuideTemplate data={{ es, en, it, fr, de, pt }} />;
 export default GuiaConectarCartaStockVentasMargen;

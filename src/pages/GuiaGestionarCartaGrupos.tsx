@@ -189,5 +189,99 @@ const fr: GuidePageData = {
   ctaFinalDescription: "Winerim centralise la gestion des cartes, du stock et de l'analytique de tous vos établissements. Benchmarking automatisé, alertes de déviation et contrôle d'assortiment en temps réel.",
 };
 
-const GuiaGestionarCartaGrupos = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/weinkarte-in-restaurantgruppen-managen",
+  metaTitle: "Wie Sie die Weinkarte in Restaurantgruppen managen | Winerim",
+  metaDescription: "Operativer Ratgeber zur Verwaltung von Weinkarten in Multi-Standort-Restaurantgruppen: Governance, Benchmarking zwischen Standorten, Sortimentskontrolle und zentrales Pricing.",
+  heroTitle: "Wie Sie eine Weinkarte in Restaurantgruppen managen",
+  heroSubtitle: "Die Weinführung in Restaurantgruppen kann nicht allein vom jeweiligen Betriebsleiter abhängen. Sie brauchen eine Governance-Ebene, standortübergreifende Sichtbarkeit und operative Standards, die Skalierung ohne Identitätsverlust ermöglichen.",
+  heroBadge: "Operativer Ratgeber — Gruppen",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  tableOfContents: [
+    "Warum Wein-Management in einer Gruppe anders ist",
+    "Die 4 häufigsten operativen Fehler",
+    "Das Governance-Modell: flexible Zentralisierung",
+    "Wie Sie standardisieren, ohne zu homogenisieren",
+    "Benchmarking-Framework zwischen Standorten",
+    "Checkliste für progressive Umsetzung",
+  ],
+  sections: [
+    { heading: "Warum Wein-Management in einer Gruppe anders ist", content: "Ein unabhängiges Restaurant verwaltet eine Karte. Eine Gruppe verwaltet ein System. Der Unterschied ist nicht Volumen, sondern Komplexität: mehrere Standortprofile, unterschiedliche Teams, verschiedene Lieferanten und die Notwendigkeit von Kohärenz ohne Rigidität.\n\nOhne ein klares Governance-Modell trifft jeder Standort isolierte Entscheidungen. Das Ergebnis: inkonsistente Preise, unausgewogene Sortimente, verpasste zentrale Einkaufsmöglichkeiten und keine standortübergreifende Sichtbarkeit.", tips: ["Eine Gruppe mit 5 Standorten kann ohne Pricing-Framework bis zu 5 verschiedene Preise für denselben Wein haben.", "Totale Zentralisierung tötet die lokale Identität. Totale Autonomie verhindert Kontrolle. Das Ziel ist flexible Zentralisierung.", "Die rentabelsten Weingruppen sind nicht die, die am günstigsten einkaufen, sondern die, die am besten messen."], icon: "lightbulb" },
+    { heading: "Die 4 häufigsten operativen Fehler", content: "Bevor Sie ein System aufbauen, identifizieren Sie, ob Sie einen dieser Fehler begehen, die die Weinrentabilität in Ihrer Gruppe lautlos erodieren.", tips: ["Totale Autonomie ohne Reporting: jeder Standort führt Wein, wie er will, und niemand vergleicht Ergebnisse.", "Starre Unternehmenskartei: dieselben 40 Referenzen in Standorten mit unterschiedlichen Küchen und Publikumsprofilen vorgeben.", "Fehlende Pricing-Standards: ohne Multiplikator oder Referenzrahmen setzt jeder Betriebsleiter Preise nach eigenem Ermessen.", "Kein internes Benchmarking: nicht wissen, welcher Standort mehr Wein pro Tisch verkauft, welcher die beste Rotation hat oder welcher den meisten Totbestand ansammelt."], icon: "alert" },
+    { heading: "Das Governance-Modell: flexible Zentralisierung", content: "Das Framework, das in Restaurantgruppen am besten funktioniert, ist die flexible Zentralisierung. Es definiert, was auf Unternehmensebene entschieden und was an jeden Standort delegiert wird.\n\nUnternehmensebene (nicht verhandelbar):\n• Bereiche für Pricing-Multiplikatoren je Kategorie\n• Mindest-KPIs für monatliches Monitoring\n• Basiskatalog gemeinsamer Referenzen\n• Quartalsweiser Überprüfungsprozess\n\nStandortebene (delegiert):\n• Auswahl lokaler Referenzen innerhalb der Parameter\n• Empfehlungen des Serviceteams\n• Saisonale Kartenanpassungen\n• Glasweine je nach Gastprofil", tips: ["Definieren Sie maximal 5 Unternehmensregeln. Mehr erzeugt Bürokratie und Ablehnung.", "Der Basiskatalog sollte 40 % der Referenzen jedes Standorts nicht überschreiten.", "Jeder Standort braucht einen identifizierten Weinverantwortlichen, auch wenn er kein Sommelier ist."], icon: "list" },
+    { heading: "Wie Sie standardisieren, ohne zu homogenisieren", content: "Der Schlüssel ist nicht, dass alle Standorte dieselbe Karte haben, sondern dass alle dieselbe Strenge anwenden. Das erreicht man durch Standardisierung der Prozesse, nicht der Produkte.\n\nZu standardisierende Prozesse:\n• Wie eine Referenz bewertet wird, bevor sie auf die Karte kommt\n• Wie der Verkaufspreis festgelegt wird\n• Wann und wie die Karte überprüft wird\n• Welche Daten monatlich gemeldet werden\n• Wie stehender Bestand verwaltet wird", tips: ["Ein Standort in Berlin und einer in München können denselben monatlichen Überprüfungsprozess teilen, aber völlig unterschiedliche Karten haben.", "Der Pricing-Standard ist nicht 'dieser Wein kostet X', sondern 'der Multiplikator für diese Kategorie liegt zwischen 2,5x und 3,2x'."], icon: "check" },
+    { heading: "Benchmarking-Framework zwischen Standorten", content: "Internes Benchmarking ist das stärkste Verbesserungswerkzeug einer Gruppe.\n\nKPIs zum Vergleich von Standorten:\n• % der Tische, die Wein bestellen\n• Durchschnittlicher Weinumsatz pro Tisch\n• Verhältnis Glas vs Flasche\n• Durchschnittliche Rotation der Referenzen\n• % toter Weine (kein Verkauf in 60 Tagen)\n• Bruttomarge des Weins vs Ziel", tips: ["Vergleichen Sie keine Feinschmecker-Restaurants mit einer Gastrobar. Gruppieren Sie Standorte nach Profil.", "Der Standort mit der besten Rotation hat vermutlich replizierbare Servicepraktiken.", "Winerim automatisiert dieses Benchmarking mit einem Echtzeit-Multi-Standort-Dashboard."], icon: "list" },
+    { heading: "Checkliste für progressive Umsetzung", content: "Versuchen Sie nicht, alles auf einmal umzusetzen. Ein progressiver Rollout reduziert Risiken und erzeugt Team-Buy-in.", tips: ["Monat 1–2: Audit des aktuellen Zustands jedes Standorts.", "Monat 2–3: Governance-Modell mit den 5 Unternehmensstandards definieren.", "Monat 3–4: Pilot in 2–3 Standorten.", "Monat 4–6: Erster Benchmarking-Zyklus.", "Monat 6+: Skalierung auf die restlichen Standorte.", "Jedes Quartal: Überprüfung des Modells."], icon: "list" },
+  ],
+  faqs: [
+    { q: "Wie viele Standorte brauche ich, damit das Sinn ergibt?", a: "Ab 2 Standorten hat es bereits Wert. Ab 5 wird es unverzichtbar." },
+    { q: "Kann ich Standorte mit sehr unterschiedlichen Küchen managen?", a: "Ja. Flexible Zentralisierung erlaubt die Anpassung von Sortiment und Pricing je Standortprofil." },
+    { q: "Was ist, wenn ein Standort keinen Sommelier hat?", a: "Das Modell funktioniert mit jeder Struktur. Wichtig ist, einen identifizierten Weinverantwortlichen zu haben." },
+    { q: "Wie verwalte ich zentrale Einkäufe?", a: "Definieren Sie einen Basiskatalog des Unternehmens (maximal 40 %) und verhandeln Sie Volumen. Den Rest kauft jeder Standort selbst." },
+  ],
+  relatedTools: [
+    { label: "Monatliche Leistungs-Scorecard", url: "/de/ressourcen/scorecard-leistung-weinkarte" },
+    { label: "Vorlage für Gruppenkontrolle", url: "/de/ressourcen/vorlage-kontrolle-restaurantgruppe" },
+  ],
+  relatedGuides: [
+    { label: "Weinkarte für Restaurantgruppen", url: "/de/ratgeber/weinkarte-restaurantgruppe-strukturieren" },
+    { label: "Karte, Bestand, Verkauf und Marge verbinden", url: "/de/ratgeber/weinkarte-bestand-verkauf-marge-verbinden" },
+    { label: "Wie Sie die Karte monatlich überprüfen", url: "/de/ratgeber/weinkarte-monatlich-ueberpruefen" },
+  ],
+  ctaPrimaryText: "Demo für Gruppen anfragen",
+  ctaPrimaryUrl: "/de/demo",
+  ctaSecondaryText: "Lösungen für Gruppen ansehen",
+  ctaSecondaryUrl: "/de/loesungen/restaurantgruppen",
+  ctaFinalTitle: "Verwalten Sie den Wein Ihrer gesamten Gruppe über ein einziges Panel",
+  ctaFinalDescription: "Winerim zentralisiert die Verwaltung von Karten, Beständen und Analysen aller Ihrer Standorte. Automatisiertes Benchmarking, Abweichungswarnungen und Sortimentskontrolle in Echtzeit.",
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-gerir-carta-vinhos-grupos-restauracao",
+  metaTitle: "Como Gerir a Carta de Vinhos em Grupos de Restauração | Winerim",
+  metaDescription: "Guia operacional para gerir cartas de vinhos em grupos multi-unidade: governance, benchmarking entre espaços, controlo de sortido e preço centralizado.",
+  heroTitle: "Como gerir uma carta de vinhos em grupos de restauração",
+  heroSubtitle: "A gestão do vinho em grupos de restauração não pode depender apenas de cada chefe de sala. Precisa de uma camada de governance, visibilidade cruzada e padrões operacionais que permitam escalar sem perder identidade.",
+  heroBadge: "Guia operacional — Grupos",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  tableOfContents: [
+    "Porque gerir vinho num grupo é diferente",
+    "Os 4 erros operacionais mais frequentes",
+    "O modelo de governance: centralização flexível",
+    "Como padronizar sem homogeneizar",
+    "Framework de benchmarking entre espaços",
+    "Checklist de implementação progressiva",
+  ],
+  sections: [
+    { heading: "Porque gerir vinho num grupo é diferente", content: "Um restaurante independente gere uma carta. Um grupo gere um sistema. A diferença não é de volume, mas de complexidade: múltiplos perfis de espaço, diferentes equipas, fornecedores distintos e a necessidade de coerência sem rigidez.\n\nSem um modelo de governance claro, cada espaço toma decisões isoladas. O resultado: preços inconsistentes, sortidos desequilibrados, oportunidades de compra centralizada perdidas e nenhuma visibilidade cruzada.", tips: ["Um grupo com 5 espaços pode ter até 5 preços diferentes para o mesmo vinho sem um framework de preço.", "A centralização total mata a identidade local. A autonomia total impede o controlo. O objetivo é centralização flexível.", "Os grupos mais rentáveis em vinho não são os que compram mais barato, mas os que medem melhor."], icon: "lightbulb" },
+    { heading: "Os 4 erros operacionais mais frequentes", content: "Antes de construir um sistema, identifique se está a cometer algum destes erros que erodem silenciosamente a rentabilidade do vinho no seu grupo.", tips: ["Autonomia total sem reporte: cada espaço gere o vinho como quer e ninguém compara resultados.", "Catálogo corporativo rígido: impor as mesmas 40 referências em espaços com cozinhas e públicos diferentes.", "Falta de padrões de preço: sem um multiplicador ou gama de referência, cada chefe de sala define preços pelo seu critério.", "Sem benchmarking interno: não saber qual espaço vende mais vinho por mesa, qual tem melhor rotação ou qual acumula mais stock morto."], icon: "alert" },
+    { heading: "O modelo de governance: centralização flexível", content: "O framework que funciona melhor em grupos de restauração é a centralização flexível. Define o que se decide ao nível corporativo e o que se delega a cada espaço.\n\nNível corporativo (não negociável):\n• Gama de multiplicadores de preço por categoria\n• KPIs mínimos de monitorização mensal\n• Catálogo base de referências comuns\n• Processo de revisão trimestral\n\nNível local (delegado):\n• Seleção de referências locais dentro dos parâmetros\n• Recomendações da equipa de sala\n• Ajustes sazonais da carta\n• Vinhos a copo consoante o perfil de cliente", tips: ["Defina no máximo 5 regras corporativas. Mais do que isso gera burocracia e rejeição.", "O catálogo base não deve ultrapassar 40 % das referências de cada espaço.", "Cada espaço deve ter um responsável de vinho identificado, ainda que não seja escanção."], icon: "list" },
+    { heading: "Como padronizar sem homogeneizar", content: "A chave não é que todos os espaços tenham a mesma carta, mas que todos apliquem o mesmo rigor. Isto consegue-se padronizando processos, não produtos.\n\nProcessos a padronizar:\n• Como se avalia uma referência antes de entrar na carta\n• Como se define o PVP\n• Quando e como se revê a carta\n• Que dados se reportam mensalmente\n• Como se gere o stock parado", tips: ["Um espaço em Lisboa e outro no Porto podem partilhar o processo de revisão mensal mas ter cartas totalmente diferentes.", "O padrão de preço não é 'este vinho vale X', mas 'o multiplicador para esta categoria fica entre 2,5x e 3,2x'."], icon: "check" },
+    { heading: "Framework de benchmarking entre espaços", content: "O benchmarking interno é a ferramenta mais potente de um grupo para melhorar.\n\nKPIs para comparar espaços:\n• % de mesas que pedem vinho\n• Bilhete médio em vinho por mesa\n• Rácio copo vs garrafa\n• Rotação média das referências\n• % de vinhos mortos (sem venda em 60 dias)\n• Margem bruta do vinho vs objetivo", tips: ["Não compare um fine dining com um gastrobar. Agrupe espaços por perfil.", "O espaço com melhor rotação provavelmente tem práticas de sala replicáveis.", "O Winerim automatiza este benchmarking com um dashboard multi-espaço em tempo real."], icon: "list" },
+    { heading: "Checklist de implementação progressiva", content: "Não tente implementar tudo de uma vez. Um lançamento progressivo reduz riscos e gera adesão da equipa.", tips: ["Mês 1-2: Auditoria do estado atual de cada espaço.", "Mês 2-3: Defina o modelo de governance com os 5 padrões corporativos.", "Mês 3-4: Piloto em 2-3 espaços.", "Mês 4-6: Primeiro ciclo de benchmarking.", "Mês 6+: Escalar aos restantes espaços.", "Cada trimestre: revisão do modelo."], icon: "list" },
+  ],
+  faqs: [
+    { q: "Quantos espaços preciso para isto fazer sentido?", a: "Desde 2 espaços já tem valor. A partir de 5 torna-se imprescindível." },
+    { q: "Posso gerir espaços com cozinhas muito diferentes?", a: "Sim. O modelo de centralização flexível permite adaptar sortido e preço por perfil de espaço." },
+    { q: "E se um espaço não tiver escanção?", a: "O modelo funciona com qualquer estrutura. O importante é ter um responsável de vinho identificado." },
+    { q: "Como gerir as compras centralizadas?", a: "Defina um catálogo base corporativo (40 % máximo) e negoceie volume. O resto compra cada espaço." },
+  ],
+  relatedTools: [
+    { label: "Scorecard mensal de desempenho", url: "/pt/recursos/scorecard-desempenho-carta" },
+    { label: "Template de controlo para grupos", url: "/pt/recursos/template-controlo-grupo-restauracao" },
+  ],
+  relatedGuides: [
+    { label: "Carta de vinhos para grupos de restauração", url: "/pt/guias/como-estruturar-carta-vinhos-grupo-restauracao" },
+    { label: "Conectar carta, stock, vendas e margem", url: "/pt/guias/como-conectar-carta-stock-vendas-margem" },
+    { label: "Como rever a carta todos os meses", url: "/pt/guias/como-rever-carta-vinhos-todos-meses" },
+  ],
+  ctaPrimaryText: "Solicitar demo para grupos",
+  ctaPrimaryUrl: "/pt/demo",
+  ctaSecondaryText: "Ver soluções para grupos",
+  ctaSecondaryUrl: "/pt/solucoes/grupos-restauracao",
+  ctaFinalTitle: "Gira o vinho de todo o seu grupo num só painel",
+  ctaFinalDescription: "O Winerim centraliza a gestão de cartas, stock e analítica de todos os seus espaços. Benchmarking automatizado, alertas de desvio e controlo de sortido em tempo real.",
+};
+
+const GuiaGestionarCartaGrupos = () => <GuideTemplate data={{ es, en, it, fr, de, pt }} />;
 export default GuiaGestionarCartaGrupos;

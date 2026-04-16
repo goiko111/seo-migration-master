@@ -117,5 +117,255 @@ const fr: GuidePageData = {
   ctaFinalTitle: "Vendez plus de vin sans sommelier. Commencez avec Winerim.", ctaFinalDescription: "Recommandations automatiques, formation intégrée et analytique en temps réel.",
 };
 
-const GuiaWinerimSinSumiller = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/winerim-ohne-sommelier-nutzen",
+  metaTitle: "Wie Sie Winerim nutzen, wenn kein Sommelier im Service arbeitet | Winerim",
+  metaDescription:
+    "Leitfaden für Restaurants ohne Sommelier: Wie Winerim fehlendes Weinwissen mit automatischen Empfehlungen, integrierter Schulung und einer intelligenten Karte ersetzt.",
+  heroTitle: "Wie Sie Winerim nutzen, wenn kein Sommelier im Service arbeitet",
+  heroSubtitle:
+    "85 % der Restaurants haben keinen Sommelier. Das heißt aber nicht, dass sie Wein nicht mit Kompetenz verkaufen können. Winerim fungiert als Ihr digitaler Sommelier.",
+  heroBadge: "Produkt-Leitfaden",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  tableOfContents: [
+    "Das eigentliche Problem: nicht der Wein, sondern die Empfehlung",
+    "Welche Sommelier-Aufgaben Winerim übernimmt",
+    "Wie die automatische Empfehlung funktioniert",
+    "Integrierte Schulung für das Servicepersonal",
+    "Von der passiven zur aktiven Karte",
+    "Checkliste: was Sie für den Start brauchen",
+  ],
+  sections: [
+    {
+      heading: "Das eigentliche Problem: nicht der Wein, sondern die Empfehlung",
+      content:
+        "Die meisten Restaurants ohne Sommelier haben kein Produktproblem. Das Problem ist, dass niemand diese Weine empfehlen kann.\n\nOhne aktive Empfehlung entscheidet der Gast nach Preis, Vertrautheit oder Gewohnheit. Ergebnis: Verkäufe konzentrieren sich auf 3-4 Positionen, der Durchschnittsbon bleibt niedrig.",
+      tips: [
+        "In Restaurants ohne Sommelier konzentrieren sich 60-70 % der Verkäufe auf weniger als 20 % der Positionen.",
+        "Der durchschnittliche Servicemitarbeiter kennt 3-5 Weine seiner Karte.",
+        "Das Problem ist keine fehlende Schulung, sondern ein System, das in Echtzeit unterstützt.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Welche Sommelier-Aufgaben Winerim übernimmt",
+      content:
+        "Winerim ersetzt den Sommelier nicht als Gastgeberfigur. Es ersetzt die operativen und analytischen Aufgaben.\n\nAutomatisierte Aufgaben:\n• Sortimentsgestaltung\n• Kontextuelle Empfehlungen\n• Pricing\n• Schulung\n• Auswertungen\n\nAufgaben, die menschlich bleiben:\n• Persönliche Gäste-Interaktion\n• Das Lesen des Tisches\n• Öffnen und Servieren im richtigen Moment",
+      tips: [
+        "Das Team muss kein Weinexperte sein. Es muss eine 15-Sekunden-Geschichte erzählen können.",
+        "Die Produktkarten enthalten Beschreibung, ideale Speisenbegleitung und empfohlenen Verkaufssatz.",
+        "Ein neuer Mitarbeiter kann bereits in der ersten Woche kompetent Wein empfehlen.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Wie die automatische Empfehlung funktioniert",
+      content:
+        "Winerim nutzt KI, um kontextuelle Weinempfehlungen zu generieren. Jeder Vorschlag berücksichtigt das Gericht, das Restaurantprofil, die Gäste-Präferenzen und den verfügbaren Bestand.\n\nAblauf:\n1. Der Gast wählt ein Gericht.\n2. Winerim schlägt 2-3 Weine vor.\n3. Der Mitarbeiter präsentiert die Empfehlung.\n4. Die digitale Karte enthält alle Details.",
+      tips: [
+        "Empfehlungen priorisieren Weine mit guter Marge UND gutem Bestand.",
+        "Der Algorithmus lernt aus dem tatsächlichen Verhalten Ihres Restaurants.",
+        "Restaurants mit aktiver Empfehlung verkaufen 20-30 % mehr Wein pro Tisch.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Integrierte Schulung für das Servicepersonal",
+      content:
+        "Winerim beinhaltet kontinuierliche Schulungen für Teams ohne Weinhintergrund.\n\n• Produktkarte für jede Position\n• Wöchentliche Kurzquiz\n• 'Wein der Woche'-Alerts\n• Empfehlungs-Historie pro Teammitglied",
+      tips: [
+        "15 Minuten pro Tag über 5 Tage reichen, um sich sicher zu fühlen.",
+        "Der empfohlene Verkaufssatz ist die am meisten geschätzte Ressource.",
+        "Spielerisch motivieren: belohnen Sie denjenigen, der die meisten Gläser des hervorgehobenen Weins verkauft.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Von der passiven zur aktiven Karte",
+      content:
+        "Eine klassische Karte ist passiv: der Gast liest sie und entscheidet sich für das Sichere. Eine intelligente Karte ist aktiv: sie führt, schlägt vor, bildet und überzeugt.\n\nPassive Karte: Weinliste nach Typ/Region sortiert.\nAktive Karte (Winerim): Stil-Filter, vorgeschlagene Speisenbegleitungen, zugängliche Beschreibungen, 'Empfohlen'-Tags, Etiketten-Fotos.",
+      tips: [
+        "Restaurants, die von passiver auf aktive Karte wechseln, steigern den Weinumsatz um 18 %.",
+        "Das Tag 'Empfehlung des Chefs' verdreifacht die Bestellwahrscheinlichkeit.",
+        "Preis-Filter nehmen die Hemmung, nach günstigen Optionen zu fragen.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Checkliste: was Sie für den Start brauchen",
+      content:
+        "Wenn Sie keinen Sommelier haben und mit Winerim mehr Wein verkaufen möchten:",
+      tips: [
+        "Schritt 1: Laden Sie Ihre aktuelle Karte in Winerim hoch.",
+        "Schritt 2: Aktivieren Sie die digitale Karte und teilen Sie Link/QR.",
+        "Schritt 3: Teilen Sie die Produktkarten mit Ihrem Team.",
+        "Schritt 4: Bestimmen Sie ein 'Glas der Woche'.",
+        "Schritt 5: Prüfen Sie das wöchentliche Dashboard.",
+        "Schritt 6: Anpassen. Jede Woche eine datenbasierte Entscheidung treffen.",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "Ersetzt Winerim den Sommelier?",
+      a: "Es ersetzt die menschliche Interaktion nicht, automatisiert aber die analytischen und operativen Aufgaben.",
+    },
+    {
+      q: "Muss mein Team Weinkenntnisse haben?",
+      a: "Nein. Die Produktkarten und Verkaufssätze ermöglichen sichere Empfehlungen ab dem ersten Tag.",
+    },
+    {
+      q: "Funktioniert es auch bei wenigen Positionen?",
+      a: "Ja. Restaurants mit 15-30 Positionen profitieren am meisten.",
+    },
+    {
+      q: "Was kostet Winerim im Vergleich zu einem Sommelier?",
+      a: "Nur einen Bruchteil eines Sommelier-Gehalts. Unsere Tarife finden Sie auf der Preisseite.",
+    },
+  ],
+  relatedTools: [
+    { label: "Weinkarten-Analyse", url: "/de/weinkarten-analyse" },
+    { label: "Food-Pairing-Generator", url: "/de/pairing-generator" },
+  ],
+  relatedGuides: [
+    { label: "Servicepersonal für Weinverkauf schulen", url: "/de/ratgeber/servicepersonal-fuer-weinverkauf-schulen" },
+    { label: "Glaswein ohne Margenverlust einführen", url: "/de/ratgeber/glaswein-einfuehren-ohne-marge-zu-verlieren" },
+  ],
+  ctaPrimaryText: "Demo anfordern",
+  ctaPrimaryUrl: "/de/demo",
+  ctaSecondaryText: "Meine Karte kostenlos analysieren",
+  ctaSecondaryUrl: "/de/weinkarten-analyse",
+  ctaFinalTitle: "Mehr Wein verkaufen — auch ohne Sommelier. Starten Sie mit Winerim.",
+  ctaFinalDescription:
+    "Automatische Empfehlungen, integrierte Schulung und Analytik in Echtzeit.",
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-usar-winerim-sem-escancao",
+  metaTitle: "Como Usar a Winerim Quando Não Tem Escanção | Winerim",
+  metaDescription:
+    "Guia para restaurantes sem escanção: como a Winerim supre a falta de expertise em vinho com recomendações automáticas, formação integrada e uma carta inteligente.",
+  heroTitle: "Como usar a Winerim quando não tem escanção em sala",
+  heroSubtitle:
+    "85 % dos restaurantes não têm escanção. Mas isso não significa que não consigam vender vinho com critério. A Winerim atua como o seu escanção digital.",
+  heroBadge: "Guia de produto",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  tableOfContents: [
+    "O verdadeiro problema: não é o vinho, é a recomendação",
+    "Que tarefas de escanção a Winerim cobre",
+    "Como funciona a recomendação automática",
+    "Formação integrada para a equipa de sala",
+    "Da carta passiva à carta ativa",
+    "Checklist: o que precisa para começar",
+  ],
+  sections: [
+    {
+      heading: "O verdadeiro problema: não é o vinho, é a recomendação",
+      content:
+        "A maioria dos restaurantes sem escanção não tem um problema de produto. O problema é que ninguém sabe recomendar esses vinhos.\n\nSem recomendação ativa, o cliente escolhe pelo preço, pela familiaridade ou por inércia. Resultado: vendas concentradas em 3-4 referências e um bilhete médio baixo.",
+      tips: [
+        "Em restaurantes sem escanção, 60-70 % das vendas concentram-se em menos de 20 % das referências.",
+        "O empregado médio conhece 3-5 vinhos da sua carta.",
+        "O problema não é falta de formação, é a ausência de um sistema que apoie em tempo real.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Que tarefas de escanção a Winerim cobre",
+      content:
+        "A Winerim não substitui o escanção enquanto figura de sala. Substitui as tarefas operacionais e analíticas.\n\nTarefas automatizadas:\n• Curadoria da carta\n• Recomendação contextual\n• Pricing\n• Formação\n• Análises\n\nTarefas que continuam humanas:\n• A interação pessoal\n• A leitura da mesa\n• O momento de abrir e servir",
+      tips: [
+        "A equipa não precisa de ser especialista em vinho. Precisa de saber contar uma história de 15 segundos.",
+        "As fichas incluem descrição, harmonização ideal e frase de venda recomendada.",
+        "Um empregado novo consegue recomendar vinho com critério desde a primeira semana.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Como funciona a recomendação automática",
+      content:
+        "A Winerim usa IA para gerar recomendações contextuais. Cada sugestão tem em conta o prato, o perfil do restaurante, as preferências do cliente e o stock disponível.\n\nFluxo:\n1. O cliente escolhe um prato.\n2. A Winerim sugere 2-3 vinhos.\n3. O empregado apresenta a recomendação.\n4. A ficha digital tem toda a informação.",
+      tips: [
+        "As recomendações priorizam vinhos com boa margem E bom stock.",
+        "O algoritmo aprende com o comportamento real do seu restaurante.",
+        "Restaurantes com recomendação ativa vendem 20-30 % mais vinho por mesa.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Formação integrada para a equipa de sala",
+      content:
+        "A Winerim inclui formação contínua desenhada para equipas sem background em vinho.\n\n• Ficha de produto para cada referência\n• Quizzes rápidos semanais\n• Alertas 'vinho da semana'\n• Histórico de recomendações por membro da equipa",
+      tips: [
+        "15 minutos por dia durante 5 dias bastam para se sentir confortável.",
+        "A frase de venda recomendada é o recurso mais valorizado.",
+        "Gamifique: premeie quem vender mais copos da referência destacada.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Da carta passiva à carta ativa",
+      content:
+        "Uma carta tradicional é passiva: o cliente lê e escolhe o seguro. Uma carta inteligente é ativa: guia, sugere, educa e converte.\n\nCarta passiva: lista de vinhos ordenada por tipo/região.\nCarta ativa (Winerim): filtros por estilo, harmonizações sugeridas, descrições acessíveis, etiquetas 'recomendado', fotografias de rótulos.",
+      tips: [
+        "Restaurantes que migram de carta passiva para ativa veem um aumento de 18 % nas vendas.",
+        "A etiqueta 'recomendado pelo chef' triplica a probabilidade de venda.",
+        "Os filtros por preço eliminam a vergonha de perguntar 'o que há mais acessível'.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Checklist: o que precisa para começar",
+      content:
+        "Se não tem escanção e quer vender mais vinho com a Winerim:",
+      tips: [
+        "Passo 1: Carregue a sua carta atual na Winerim.",
+        "Passo 2: Ative a carta digital e partilhe o link/QR.",
+        "Passo 3: Partilhe as fichas de produto com a sua equipa.",
+        "Passo 4: Designe um 'copo da semana'.",
+        "Passo 5: Reveja o dashboard semanal.",
+        "Passo 6: Ajuste. Todas as semanas tome uma decisão baseada em dados.",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "A Winerim substitui a figura do escanção?",
+      a: "Não substitui a interação humana, mas automatiza as tarefas analíticas e operacionais.",
+    },
+    {
+      q: "A minha equipa precisa de saber de vinho?",
+      a: "Não. As fichas e as frases de venda permitem recomendar com confiança desde o primeiro dia.",
+    },
+    {
+      q: "Funciona para restaurantes com poucas referências?",
+      a: "Sim. Restaurantes com 15-30 referências são os que mais beneficiam.",
+    },
+    {
+      q: "Quanto custa a Winerim face a um escanção?",
+      a: "Uma fração do salário de um escanção. Consulte os nossos planos na página de preços.",
+    },
+  ],
+  relatedTools: [
+    { label: "Analisador de carta", url: "/pt/analise-carta" },
+    { label: "Gerador de harmonizações", url: "/pt/gerador-harmonizacoes-vinho" },
+  ],
+  relatedGuides: [
+    { label: "Formar equipa de sala para vender vinho", url: "/pt/guias/como-formar-equipa-sala-vender-vinho" },
+    { label: "Vinho a copo sem perder margem", url: "/pt/guias/como-implementar-vinho-a-copo-sem-perder-margem" },
+  ],
+  ctaPrimaryText: "Pedir demo",
+  ctaPrimaryUrl: "/pt/demo",
+  ctaSecondaryText: "Analisar a minha carta grátis",
+  ctaSecondaryUrl: "/pt/analise-carta",
+  ctaFinalTitle: "Venda mais vinho sem escanção. Comece com a Winerim.",
+  ctaFinalDescription:
+    "Recomendações automáticas, formação integrada e analítica em tempo real.",
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
+
+const GuiaWinerimSinSumiller = () => <GuideTemplate data={data} />;
 export default GuiaWinerimSinSumiller;

@@ -113,5 +113,242 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Scorecard mensuel", url: "/fr/ressources/scorecard-performance-carte" }, { label: "Comment détecter les vins morts", url: "/fr/guides/comment-detecter-vins-morts" }],
 };
 
-const GuiaUsarDatosCompra = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/daten-nutzen-um-zu-entscheiden-welche-weine-einkaufen",
+  metaTitle: "Mit Daten entscheiden, welche Weine Sie einkaufen | Ratgeber",
+  metaDescription:
+    "Leitfaden für datengestützte Einkaufsentscheidungen bei Wein: Rotation, Margen, Saisonalität, Trends und Performance pro Position.",
+  heroTitle: "Mit Daten entscheiden, welche Weine Sie einkaufen",
+  heroSubtitle:
+    "Aus dem Bauch heraus einzukaufen führt zu Lageraufbau. Datenbasiert einzukaufen erzeugt Rotation, Marge und eine Weinkarte, die sich weiterentwickelt.",
+  heroBadge: "Analytischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Demo anfordern",
+  ctaPrimaryUrl: "/de/demo",
+  ctaSecondaryText: "Meine Karte analysieren",
+  ctaSecondaryUrl: "/de/weinkarten-analyse",
+  ctaFinalTitle: "Mit Intelligenz einkaufen, nicht mit Intuition",
+  ctaFinalDescription:
+    "Winerim wertet Ihre Verkaufs-, Rotations- und Margendaten aus und empfiehlt Ihnen genau, welche Weine Sie einkaufen sollten.",
+  tableOfContents: [
+    "Warum Intuition beim Weineinkauf nicht reicht",
+    "Die 5 Kennzahlen, die Sie vor jedem Einkauf prüfen sollten",
+    "Wie Sie die Performance Ihrer aktuellen Karte analysieren",
+    "Aufnahmekriterien für neue Positionen",
+    "Wie viel kaufen: die Regel für den optimalen Bestand",
+    "Der datenbasierte Einkaufszyklus",
+  ],
+  sections: [
+    {
+      heading: "1. Warum Intuition beim Weineinkauf nicht reicht",
+      content:
+        "Einkaufsentscheidungen basieren meist auf Messen, Lieferanten und Trägheit. Keine davon berücksichtigt, was auf Ihrer Karte tatsächlich funktioniert.",
+      tips: [
+        "Messen führen zu emotionalen Käufen.",
+        "Der Lieferant priorisiert seinen Katalog, nicht Ihre Karte.",
+        "Trägheit erzeugt Bequemlichkeit.",
+        "Wie viele der letzten 10 Neueinlistungen stehen noch auf Ihrer Karte und verkaufen sich?",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "2. Die 5 Kennzahlen, die Sie vor jedem Einkauf prüfen sollten",
+      content: "Bevor Sie irgendetwas bestellen, prüfen Sie diese fünf Indikatoren.",
+      tips: [
+        "Rotation pro Position: weniger als 2 Einheiten/Monat rechtfertigen meist keine Nachbestellung.",
+        "Marge pro Position: absolute Marge in Euro, nicht nur in %.",
+        "Aktueller Bestand: kaufen Sie nicht mehr ein, als Sie in 60-90 Tagen verkaufen können.",
+        "Verkaufstrend: geht es nach oben oder nach unten?",
+        "Lücken in der Karte: Käufe sollen Lücken füllen, nicht doppeln.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "3. Wie Sie die Performance Ihrer aktuellen Karte analysieren",
+      content:
+        "Bevor Sie Neues einkaufen, bewerten Sie das Bestehende mit einer BCG-Analyse, angewandt auf Weine.",
+      tips: [
+        "Stars (hohe Rotation + hohe Marge): schützen.",
+        "Cash Cows (hohe Rotation + geringe Marge): Preisgestaltung optimieren.",
+        "Potenziale (geringe Rotation + hohe Marge): prüfen, warum sie nicht rotieren.",
+        "Ballast (geringe Rotation + geringe Marge): Kandidaten zum Auslisten.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4. Aufnahmekriterien für neue Positionen",
+      content: "Jede neue Position muss einen Mindest-Filter bestehen.",
+      tips: [
+        "Welche Funktion erfüllt sie?",
+        "Welche Position ersetzt sie? 'Einer rein, einer raus'-Regel.",
+        "Welche Marge bringt sie?",
+        "Maximal 6-12 Einheiten zu Beginn.",
+        "Kann das Team sie verkaufen?",
+        "Passt sie zur aktuellen Küche?",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "5. Wie viel kaufen: die Regel für den optimalen Bestand",
+      content: "Optimaler Bestand = Monatsverkauf × Reichweite in Monaten + Sicherheitsbestand.",
+      tips: [
+        "Neue Position: maximal 6-12 Einheiten.",
+        "Etabliert (8+ Einheiten/Monat): Bestand für 60-90 Tage.",
+        "Star (15+ Einheiten/Monat): automatische monatliche Lieferungen.",
+        "Langsam (< 3 Einheiten/Monat): maximal 30 Tage Reichweite.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "6. Der datenbasierte Einkaufszyklus",
+      content: "Einkauf sollte ein geplanter Zyklus sein, keine Reaktion.",
+      tips: [
+        "Woche 1: Scorecard des Vormonats durchgehen.",
+        "Woche 2: Bestand und Rotation prüfen.",
+        "Woche 3: Bestellungen datenbasiert aufgeben.",
+        "Woche 4: Annahme, Einlagerung und Teambriefing.",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "Welche Daten brauche ich zum Start?",
+      a: "Verkäufe pro Position, aktueller Bestand und Einkaufspreise.",
+    },
+    {
+      q: "Sollte ich nicht mehr auf Weinmessen gehen?",
+      a: "Doch. Trennen Sie nur Verkostung und Einkauf: notieren Sie die Weine und wenden Sie später Ihre Kriterien an.",
+    },
+    {
+      q: "Wie oft sollte die Analyse laufen?",
+      a: "Mindestens quartalsweise. Monatlich bei mehr als 80 Positionen.",
+    },
+  ],
+  relatedTools: [
+    { label: "Margen-Rechner", url: "/de/wein-margen-rechner" },
+    { label: "Totbestand-Rechner", url: "/de/werkzeuge/totbestand-rechner" },
+  ],
+  relatedGuides: [
+    { label: "Monats-Scorecard", url: "/de/ressourcen/scorecard-weinkarten-performance" },
+    { label: "Tote Weine erkennen", url: "/de/ratgeber/tote-weine-erkennen" },
+  ],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-usar-dados-para-decidir-que-vinhos-comprar",
+  metaTitle: "Como Usar Dados para Decidir Que Vinhos Comprar | Guia",
+  metaDescription:
+    "Guia para tomar decisões de compra de vinhos baseadas em dados: rotação, margens, sazonalidade, tendências e desempenho por referência.",
+  heroTitle: "Como usar dados para decidir que vinhos comprar",
+  heroSubtitle:
+    "Comprar vinho a partir da intuição gera acumulação de stock. Comprar com dados gera rotação, margem e uma carta que evolui.",
+  heroBadge: "Guia analítico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Pedir demo",
+  ctaPrimaryUrl: "/pt/demo",
+  ctaSecondaryText: "Analisar a minha carta",
+  ctaSecondaryUrl: "/pt/analise-carta",
+  ctaFinalTitle: "Comprar com inteligência, não com intuição",
+  ctaFinalDescription:
+    "A Winerim analisa os seus dados de venda, rotação e margem para lhe recomendar exatamente que vinhos comprar.",
+  tableOfContents: [
+    "Porque a intuição não chega para comprar vinho",
+    "Os 5 dados que deve olhar antes de cada compra",
+    "Como analisar o desempenho da sua carta atual",
+    "Critérios de entrada para novas referências",
+    "Quanto comprar: a regra do stock ótimo",
+    "O ciclo de compra baseado em dados",
+  ],
+  sections: [
+    {
+      heading: "1. Porque a intuição não chega para comprar vinho",
+      content:
+        "As decisões de compra costumam basear-se em feiras, distribuidores e inércia. Nenhuma tem em conta o que efetivamente funciona na sua carta.",
+      tips: [
+        "As feiras geram compras emocionais.",
+        "O distribuidor prioriza o seu catálogo, não a sua carta.",
+        "A inércia gera complacência.",
+        "Quantas das últimas 10 referências novas continuam na carta e a rodar?",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "2. Os 5 dados que deve olhar antes de cada compra",
+      content: "Antes de qualquer encomenda, consulte estes cinco indicadores.",
+      tips: [
+        "Rotação por referência: menos de 2 un./mês dificilmente justifica reposição.",
+        "Margem por referência: margem absoluta em euros, não só %.",
+        "Stock atual: não compre mais do que consegue vender em 60-90 dias.",
+        "Tendência de vendas: está a subir ou a descer?",
+        "Lacunas na carta: as compras devem tapar buracos, não duplicar.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "3. Como analisar o desempenho da sua carta atual",
+      content:
+        "Antes de comprar novo, avalie o que já tem com uma análise BCG aplicada aos vinhos.",
+      tips: [
+        "Estrelas (alta rotação + alta margem): proteger.",
+        "Vacas (alta rotação + baixa margem): otimizar preços.",
+        "Potencial (baixa rotação + alta margem): investigar porque não rodam.",
+        "Pesos mortos (baixa rotação + baixa margem): candidatos a retirar.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4. Critérios de entrada para novas referências",
+      content: "Cada referência nova deve passar um filtro mínimo.",
+      tips: [
+        "Que função cumpre?",
+        "Que referência substitui? Regra 'um entra, um sai'.",
+        "Que margem oferece?",
+        "Máximo 6-12 unidades iniciais.",
+        "A equipa consegue vendê-la?",
+        "Encaixa na cozinha atual?",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "5. Quanto comprar: a regra do stock ótimo",
+      content: "Stock ótimo = Venda mensal × meses de cobertura + stock de segurança.",
+      tips: [
+        "Referência nova: máximo 6-12 unidades.",
+        "Consolidada (8+ un./mês): stock para 60-90 dias.",
+        "Estrela (15+ un./mês): entregas mensais automáticas.",
+        "Lenta (< 3 un./mês): stock máximo para 30 dias.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "6. O ciclo de compra baseado em dados",
+      content: "A compra deve ser um ciclo planeado, não uma reação.",
+      tips: [
+        "Semana 1: rever scorecard do mês anterior.",
+        "Semana 2: rever stock e rotação.",
+        "Semana 3: colocar encomendas com base em dados.",
+        "Semana 4: rececionar, arrumar e comunicar à equipa.",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    { q: "Que dados preciso para começar?", a: "Vendas por referência, stock atual e preços de compra." },
+    { q: "Devo deixar de ir a feiras de vinho?", a: "Não. Separe a prova da compra: aponte e aplique depois os critérios." },
+    { q: "Com que frequência devo fazer a análise?", a: "Trimestralmente no mínimo. Mensalmente com mais de 80 referências." },
+  ],
+  relatedTools: [
+    { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" },
+    { label: "Calculadora de stock morto", url: "/pt/ferramentas/calculadora-stock-morto" },
+  ],
+  relatedGuides: [
+    { label: "Scorecard mensal", url: "/pt/recursos/scorecard-desempenho-carta" },
+    { label: "Como detetar vinhos mortos", url: "/pt/guias/como-detetar-vinhos-mortos" },
+  ],
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
+
+const GuiaUsarDatosCompra = () => <GuideTemplate data={data} />;
 export default GuiaUsarDatosCompra;

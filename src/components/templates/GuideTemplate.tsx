@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 interface GuideSection {
   heading: string;
@@ -119,11 +120,33 @@ const labels: I18nMap<{
     defaultPrimary: "Analysez votre carte gratuitement",
     requestDemo: "Demander une démo",
   },
+  de: {
+    toc: "Inhalt",
+    relatedTools: "Verwandte Werkzeuge",
+    relatedGuides: "Verwandte Ratgeber",
+    faqTitle: "Häufig gestellte Fragen",
+    nextStep: "Nächster Schritt",
+    defaultCtaTitle: "Analysieren Sie Ihre Weinkarte unverbindlich",
+    defaultCtaDesc: "Senden Sie Ihre Karte in beliebigem Format und Sie erhalten eine Diagnose mit konkreten Verbesserungspotenzialen.",
+    defaultPrimary: "Weinkarte kostenlos analysieren",
+    requestDemo: "Demo anfragen",
+  },
+  pt: {
+    toc: "Índice",
+    relatedTools: "Ferramentas relacionadas",
+    relatedGuides: "Guias relacionados",
+    faqTitle: "Perguntas frequentes",
+    nextStep: "Próximo passo",
+    defaultCtaTitle: "Analise a sua carta de vinhos sem compromisso",
+    defaultCtaDesc: "Envie a sua carta em qualquer formato e devolvemos-lhe um diagnóstico com oportunidades reais de melhoria.",
+    defaultPrimary: "Analise a sua carta grátis",
+    requestDemo: "Solicitar demo",
+  },
 };
 
 const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string, GuidePageData> }) => {
   const { lang } = useLanguage();
-  const l = labels[lang];
+  const l = getI18n(labels, lang);
   // Support both single GuidePageData and multilingual Record
   const data: GuidePageData = "slug" in rawData
     ? rawData as GuidePageData
