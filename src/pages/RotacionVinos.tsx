@@ -186,7 +186,99 @@ const fr: GuidePageData = {
   ],
 };
 
-const data: Record<string, GuidePageData> = { es, en, it, fr };
+const de: GuidePageData = {
+  slug: "de/ratgeber/wie-man-die-weinrotation-im-restaurant-verbessert",
+  metaTitle: "Wie man die Weinrotation im Restaurant verbessert | Ratgeber",
+  metaDescription: "Praktischer Ratgeber zur Verbesserung der Weinrotation in Ihrem Restaurant: Auswahl, Positionierung auf der Karte.",
+  heroTitle: "Wie man die Weinrotation im Restaurant verbessert",
+  heroSubtitle: "Die Weinrotation ist einer der wichtigsten Rentabilitätsindikatoren. Erfahren Sie, wie Sie verhindern, dass Ihre Weine ungenutzt im Keller liegen bleiben.",
+  heroBadge: "Praktischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Meine Karte analysieren", ctaPrimaryUrl: "/de/weinkarten-analyse",
+  ctaSecondaryText: "Demo anfordern", ctaSecondaryUrl: "/de/demo",
+  ctaFinalTitle: "Lassen Sie nicht zu, dass Ihr Weinkeller Totbestand anhäuft",
+  ctaFinalDescription: "Winerim liefert Ihnen die Daten, um zu wissen, welche Weine rotieren, welche überflüssig sind und wie Sie Ihre Auswahl für maximale Rentabilität optimieren.",
+  tableOfContents: [
+    "Warum die Rotation entscheidend für die Rentabilität ist",
+    "Häufige Probleme, die die Rotation bremsen",
+    "Strategien zur Verbesserung der Rotation",
+    "Wie man Daten für Entscheidungen nutzt",
+    "Wie Winerim hilft",
+  ],
+  sections: [
+    { heading: "1. Warum die Weinrotation entscheidend für die Rentabilität ist", content: "Jede Flasche in Ihrem Keller ist gebundenes Kapital. Wenn sich ein Wein innerhalb von 60-90 Tagen nicht verkauft, nimmt er nicht nur Platz weg — er vernichtet Wert.\n\nDie Weinrotation misst, wie oft der Bestand jeder Referenz pro Jahr erneuert wird. Ein Restaurant mit guter Rotation verkauft und bestellt seine Weine 8-12 Mal im Jahr nach. Eines mit schlechter Rotation nur 3-4 Mal.\n\nDer Rentabilitätsunterschied ist enorm. Bei gleicher Bestandsinvestition erwirtschaftet das rotierende Restaurant den doppelten oder dreifachen Weinumsatz.", tips: ["Ein Wein, der 90 Tage unverkauft ist, sollte ohne Ausnahme von der Karte verschwinden", "Das in nicht rotierenden Weinen gebundene Kapital könnte in verkaufsstarke Referenzen investiert werden", "Weine, die im Keller verderben, verursachen direkte Verluste, nicht nur Opportunitätskosten", "Die ideale Durchschnittsrotation liegt für die meisten Referenzen bei 8-12 Mal pro Jahr"], icon: "alert" },
+    { heading: "2. Zu viele Referenzen", content: "Der erste Feind der Rotation ist der Überschuss an Referenzen. Je mehr Weine Sie haben, desto schwieriger ist es, dass jeder einzelne regelmäßig verkauft wird.\n\nEine Karte mit 180 Referenzen, von denen sich monatlich nur 60 verkaufen, bedeutet 120 Weine, die Staub ansetzen. Das ist das häufigste Muster, das wir in Restaurants mit Rotationsproblemen sehen.", tips: ["Überprüfen Sie, wie viele Referenzen Sie haben im Vergleich zu denen, die sich tatsächlich monatlich verkaufen", "Wenden Sie die 80/20-Regel an: 80 % Ihrer Verkäufe stammen von 20 % Ihrer Referenzen", "Reduzieren Sie auf 50-80 gut ausgewählte Referenzen in mittelgroßen Restaurants", "Jeder Wein muss eine klare Rolle erfüllen: Einstieg, Volumen, Premium oder Entdeckung"], icon: "list" },
+    { heading: "3. Schlecht positionierte Weine auf der Karte", content: "Viele Weine verkaufen sich nicht, weil der Gast sie nicht findet oder nicht versteht. Die Positionierung auf der Karte ist genauso wichtig wie die Auswahl.\n\nEin großartiger Wein, versteckt auf Seite 3 in einer verwirrenden Kategorie ohne Beschreibung, ist ein unsichtbarer Wein. Ein mittelmäßiger Wein im ersten Abschnitt, hervorgehoben als Sommelier-Empfehlung, verkauft sich viel besser.", tips: ["Weine, die Sie verkaufen möchten, sollten an den sichtbarsten Positionen stehen", "Die ersten und letzten Positionen jedes Abschnitts werden am häufigsten gelesen", "Verwenden Sie \"Empfohlen\"- oder \"Chef-Auswahl\"-Abzeichen, um Aufmerksamkeit zu lenken", "Fügen Sie kurze Verkostungsnotizen hinzu, die dem Gast helfen, ohne Kellner zu entscheiden"], icon: "lightbulb" },
+    { heading: "4. Fehlende aktive Empfehlung", content: "Wenn das Servicepersonal keinen Wein empfiehlt, verkaufen sich weniger bekannte Referenzen einfach nicht. Die Gäste wählen, was sie kennen, oder das Günstigste.\n\nDie aktive Empfehlung ist der Motor der Rotation. Wenn ein Kellner einen Wein mit Überzeugung vorschlägt, vervielfacht sich die Verkaufswahrscheinlichkeit.", tips: ["Schulen Sie das Personal so, dass es 3-5 Weine kennt und mit einem klaren Satz empfehlen kann", "Führen Sie einen \"Wein der Woche\" ein, den das gesamte Team verkostet hat", "Verknüpfen Sie Empfehlungen mit Gerichten auf der Speisekarte, damit der Vorschlag natürlich wirkt", "Wenn Sie das Team nicht schulen können, nutzen Sie digitale Tools, die für Sie empfehlen"], icon: "check" },
+    { heading: "5. Strategien zur Verbesserung der Rotation", content: "Die Verbesserung der Rotation erfordert gleichzeitiges Handeln an drei Fronten: Auswahl, Positionierung und Promotion.\n\nEs reicht nicht, Weine zu entfernen, die sich nicht verkaufen. Man muss die Bedingungen schaffen, damit die verbleibenden sich besser und schneller verkaufen.", tips: ["Auswahl: Wählen Sie Weine, die zu Ihrer Küche, Ihrem Publikum und Ihrem Durchschnittsbon passen", "Positionierung: Platzieren Sie rotationsstarke Weine an privilegierten Stellen der Karte", "Glaswein: das wirkungsvollste Instrument zur Rotation von Referenzen. Bieten Sie 6-8 Optionen an, die alle 2-4 Wochen wechseln", "Saisonalität: Passen Sie die Karte an die Jahreszeit an. Frische Weißweine im Sommer, kräftige Rotweine im Winter", "Intelligente Aktionen: Ein Wein, der nicht rotiert, kann als empfohlene Speisenbegleitung oder Glas des Tages verkauft werden"], icon: "check" },
+    { heading: "6. Wie man Daten für Entscheidungen nutzt", content: "Der Unterschied zwischen einem Restaurant, das seine Rotation verbessert, und einem, das es nicht tut, liegt in einem Wort: Daten.\n\nOhne Daten basieren Entscheidungen auf Intuition. Mit Daten können Sie genau identifizieren, was funktioniert und was nicht, und Korrekturmaßnahmen ergreifen, bevor sich der Bestand anhäuft.", tips: ["Messen Sie die Rotation jeder Referenz monatlich: verkaufte Einheiten / durchschnittlicher Bestand", "Identifizieren Sie Weine mit mehr als 60 Tagen ohne Verkauf und entscheiden Sie, ob Sie sie ersetzen oder bewerben", "Analysieren Sie, welche Preisklasse die beste Rotation aufweist, und stärken Sie diese Zone", "Vergleichen Sie die Rotation zwischen Kategorien: Wenn Weißweine mehr rotieren als Rotweine, haben Sie vielleicht zu viele Rotweine", "Richten Sie automatische Warnungen für Weine ein, die 30+ Tage unverkauft sind"], icon: "lightbulb" },
+    { heading: "7. Wie Winerim hilft", content: "Winerim wurde entwickelt, um genau dieses Problem zu lösen. Die Plattform bietet Ihnen vollständige Sichtbarkeit über die Rotation Ihrer Karte und Werkzeuge zum Handeln.\n\nEs geht nicht um mehr Berichte. Es geht um umsetzbare Empfehlungen, die Sie in wenigen Minuten implementieren können.", tips: ["Rotations-Dashboard: visualisieren Sie, welche Weine sich verkaufen, welche nicht und seit wann", "Totbestand-Warnungen: automatische Benachrichtigungen, wenn ein Wein zu lange unverkauft ist", "Intelligenter Empfehlungsassistent: das System empfiehlt unterverkaufte Weine den passenden Gästen", "Automatische Speisenbegleitungen: verknüpfen Sie Weine mit niedriger Rotation mit Gerichten der Karte, um ihnen Sichtbarkeit zu geben", "Glaswein-Management: optimieren Sie Auswahl und Rotation Ihres Glaswein-Programms"], icon: "check" },
+  ],
+  faqs: [
+    { q: "Was ist eine gute Weinrotationsrate für ein Restaurant?", a: "Für die meisten Restaurants ist eine Rotation von 8-12 Mal pro Jahr gesund. Das bedeutet, dass sich jede Referenz alle 4-6 Wochen verkauft und nachbestellt wird. Glasweine sollten schneller rotieren: alle 1-2 Wochen." },
+    { q: "Wie oft sollte ich meine Weinkarte überprüfen?", a: "Idealerweise monatlich auf Datenebene (was sich verkauft, was nicht) und vierteljährlich auf Auswahlebene (Referenzen entfernen, hinzufügen oder ersetzen). Glasweine sollten alle 2-4 Wochen überprüft werden." },
+    { q: "Was mache ich mit Weinen, die sich nicht verkaufen?", a: "Drei Optionen: 1) Repositionieren Sie sie auf der Karte mit besserer Sichtbarkeit und Beschreibung. 2) Nehmen Sie sie als Glaswein oder empfohlene Speisenbegleitung auf. 3) Wenn sie sich nach weiteren 30 Tagen immer noch nicht verkaufen, nehmen Sie sie von der Karte und verwerten Sie sie bei Events oder Aktionen." },
+    { q: "Verbessert eine kleinere Weinauswahl die Rotation automatisch?", a: "Die Reduzierung der Referenzen ist notwendig, aber nicht ausreichend. Sie benötigen auch gute Positionierung, aktive Empfehlungen und angemessenes Pricing. Aber ja, eine kleinere Karte bündelt die Nachfrage auf weniger Referenzen und verbessert die Durchschnittsrotation." },
+  ],
+  relatedTools: [
+    { label: "Weinmargen-Rechner", url: "/de/weinmargen-rechner" },
+    { label: "Glasweinpreis-Rechner", url: "/de/tools/glasweinpreis-rechner" },
+    { label: "Weinkarten-Analyzer", url: "/de/weinkarten-analyse" },
+  ],
+  relatedGuides: [
+    { label: "Mehr Wein im Restaurant verkaufen", url: "/de/mehr-wein-verkaufen-restaurant" },
+    { label: "Glaswein im Restaurant", url: "/de/glaswein-restaurant" },
+    { label: "Totbestand erkennen", url: "/de/ratgeber/totbestand-erkennen" },
+  ],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-melhorar-a-rotacao-de-vinhos-num-restaurante",
+  metaTitle: "Como Melhorar a Rotação de Vinhos num Restaurante | Guia",
+  metaDescription: "Guia prático para melhorar a rotação de vinhos no seu restaurante: seleção, posicionamento na carta.",
+  heroTitle: "Como melhorar a rotação de vinhos num restaurante",
+  heroSubtitle: "A rotação de vinhos é um dos indicadores de rentabilidade mais importantes. Descubra como evitar que os seus vinhos fiquem imobilizados na garrafeira.",
+  heroBadge: "Guia prático",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/pt/analisador-carta-de-vinhos",
+  ctaSecondaryText: "Pedir demonstração", ctaSecondaryUrl: "/pt/demo",
+  ctaFinalTitle: "Não deixe a sua garrafeira acumular stock morto",
+  ctaFinalDescription: "A Winerim dá-lhe os dados para saber que vinhos rodam, quais estão a mais e como otimizar a sua seleção para maximizar a rentabilidade.",
+  tableOfContents: [
+    "Porque a rotação é crucial para a rentabilidade",
+    "Problemas comuns que travam a rotação",
+    "Estratégias para melhorar a rotação",
+    "Como usar dados para decidir",
+    "Como a Winerim ajuda",
+  ],
+  sections: [
+    { heading: "1. Porque a rotação de vinhos é crucial para a rentabilidade", content: "Cada garrafa na sua garrafeira é capital imobilizado. Se um vinho não se vende em 60-90 dias, não só ocupa espaço — está a destruir valor.\n\nA rotação de vinhos mede quantas vezes o stock de cada referência se renova por ano. Um restaurante com boa rotação vende e repõe os seus vinhos 8-12 vezes por ano. Um com má rotação, 3-4 vezes.\n\nA diferença de rentabilidade é enorme. Com o mesmo investimento em stock, o restaurante que roda bem gera o dobro ou o triplo das receitas de vinho.", tips: ["Um vinho por vender há 90 dias deve sair da carta sem exceção", "O capital imobilizado em vinhos sem rotação poderia ser investido em referências que se vendem", "Os vinhos que se deterioram na garrafeira geram perdas diretas, não apenas custo de oportunidade", "A rotação média ideal é de 8-12 vezes por ano para a maioria das referências"], icon: "alert" },
+    { heading: "2. Demasiadas referências", content: "O primeiro inimigo da rotação é o excesso de referências. Quantos mais vinhos tem, mais difícil é que cada um se venda regularmente.\n\nUma carta com 180 referências em que só 60 se vendem mensalmente significa 120 vinhos a ganhar pó. É o padrão mais comum que vemos em restaurantes com problemas de rotação.", tips: ["Verifique quantas referências tem face às que realmente se vendem todos os meses", "Aplique a regra 80/20: 80 % das vendas vêm de 20 % das referências", "Reduza para 50-80 referências bem selecionadas em restaurantes médios", "Cada vinho deve cumprir uma função clara: entrada, volume, premium ou descoberta"], icon: "list" },
+    { heading: "3. Vinhos mal posicionados na carta", content: "Muitos vinhos não se vendem porque o cliente não os encontra ou não os percebe. O posicionamento na carta é tão importante como a seleção.\n\nUm grande vinho escondido na página 3, numa categoria confusa e sem descrição, é um vinho invisível. Um vinho médio na primeira secção, destacado como escolha do escanção, vende-se muito mais.", tips: ["Os vinhos que quer vender devem estar nas posições de maior visibilidade", "As primeiras e últimas posições de cada secção são as mais consultadas", "Use selos \"Recomendado\" ou \"Seleção do chef\" para dirigir a atenção", "Inclua notas de prova breves que ajudem o cliente a decidir sem depender do empregado"], icon: "lightbulb" },
+    { heading: "4. Falta de recomendação ativa", content: "Se o pessoal de sala não recomenda vinho, as referências menos conhecidas simplesmente não se vendem. Os comensais escolhem o que conhecem ou o mais barato.\n\nA recomendação ativa é o motor da rotação. Quando um empregado sugere um vinho com convicção, a probabilidade de venda multiplica-se.", tips: ["Forme o pessoal para que conheça 3-5 vinhos e os possa recomendar com uma frase clara", "Implemente um \"vinho da semana\" que toda a equipa tenha provado", "Ligue as recomendações aos pratos da ementa para que a sugestão seja natural", "Se não puder formar a equipa, use ferramentas digitais que recomendam por si"], icon: "check" },
+    { heading: "5. Estratégias para melhorar a rotação", content: "Melhorar a rotação exige atuar em três frentes em simultâneo: seleção, posicionamento e promoção.\n\nNão basta retirar vinhos que não se vendem. Há que criar as condições para que os que ficam se vendam melhor e mais depressa.", tips: ["Seleção: escolha vinhos que encaixem na sua cozinha, público e bilhete médio", "Posicionamento: coloque vinhos de alta rotação em posições privilegiadas da carta", "Vinho a copo: a ferramenta mais poderosa para rodar referências. Inclua 6-8 opções que mudem a cada 2-4 semanas", "Sazonalidade: adapte a carta à estação. Brancos frescos no verão, tintos potentes no inverno", "Promoções inteligentes: um vinho que não roda pode ser vendido como harmonização recomendada ou copo do dia"], icon: "check" },
+    { heading: "6. Como usar dados para decidir", content: "A diferença entre um restaurante que melhora a rotação e outro que não é uma: dados.\n\nSem dados, as decisões baseiam-se na intuição. Com dados, pode identificar exatamente o que funciona e o que não, e agir antes que o stock se acumule.", tips: ["Meça a rotação de cada referência mensalmente: unidades vendidas / stock médio", "Identifique os vinhos com mais de 60 dias sem venda e decida se os substitui ou promove", "Analise que gama de preço tem melhor rotação e reforce essa zona", "Compare a rotação entre categorias: se os brancos rodam mais que os tintos, talvez tenha tintos a mais", "Configure alertas automáticos para vinhos por vender há 30+ dias"], icon: "lightbulb" },
+    { heading: "7. Como a Winerim ajuda", content: "A Winerim foi concebida para resolver exatamente este problema. A plataforma dá-lhe visibilidade completa sobre a rotação da sua carta e ferramentas para agir.\n\nNão se trata de mais relatórios. Trata-se de recomendações acionáveis que pode implementar em minutos.", tips: ["Dashboard de rotação: visualize que vinhos se vendem, quais não e desde quando", "Alertas de stock morto: notificações automáticas quando um vinho está sem vender há demasiado tempo", "Recomendador inteligente: o sistema sugere vinhos subvalorizados aos comensais adequados", "Harmonizações automáticas: ligue vinhos de baixa rotação aos pratos da ementa para lhes dar visibilidade", "Gestão de vinho a copo: otimize a seleção e rotação do seu programa a copo"], icon: "check" },
+  ],
+  faqs: [
+    { q: "Qual é uma boa taxa de rotação para o vinho num restaurante?", a: "Para a maioria dos restaurantes, uma rotação de 8-12 vezes por ano é saudável. Significa que cada referência se vende e repõe a cada 4-6 semanas. Os vinhos a copo devem rodar mais depressa: a cada 1-2 semanas." },
+    { q: "Com que frequência devo rever a minha carta de vinhos?", a: "Idealmente todos os meses ao nível dos dados (o que se vende, o que não) e a cada trimestre ao nível da seleção (retirar, adicionar ou substituir referências). Os vinhos a copo devem ser revistos a cada 2-4 semanas." },
+    { q: "O que faço com os vinhos que não se vendem?", a: "Três opções: 1) Reposicione-os na carta com melhor visibilidade e descrição. 2) Inclua-os como vinho a copo ou harmonização recomendada. 3) Se em mais 30 dias não se venderem, retire-os e liquide-os em eventos ou promoções." },
+    { q: "Ter menos vinhos melhora automaticamente a rotação?", a: "Reduzir referências é condição necessária mas não suficiente. Também precisa de bom posicionamento, recomendações ativas e pricing adequado. Mas sim, uma carta mais reduzida concentra a procura em menos referências e melhora a rotação média." },
+  ],
+  relatedTools: [
+    { label: "Calculadora de margem de vinho", url: "/pt/calculadora-margem-vinho" },
+    { label: "Calculadora preço vinho a copo", url: "/pt/ferramentas/calculadora-preco-vinho-a-copo" },
+    { label: "Analisador de carta de vinhos", url: "/pt/analisador-carta-de-vinhos" },
+  ],
+  relatedGuides: [
+    { label: "Como vender mais vinho no restaurante", url: "/pt/como-vender-mais-vinho-restaurante" },
+    { label: "Vinho a copo no restaurante", url: "/pt/vinho-a-copo-restaurante" },
+    { label: "Como detetar vinhos mortos", url: "/pt/guias/como-detetar-vinhos-mortos" },
+  ],
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
 
 const RotacionVinos = () => <GuideTemplate data={data} />;
 
