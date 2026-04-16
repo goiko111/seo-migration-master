@@ -486,6 +486,166 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/resources/:slug`} element={<ResourcePage />} />
     <Route path={`${prefix}/risorse/:slug`} element={<ResourcePage />} />
     <Route path={`${prefix}/ressources/:slug`} element={<ResourcePage />} />
+    <Route path={`${prefix}/ressourcen/:slug`} element={<ResourcePage />} />
+    <Route path={`${prefix}/recursos/:slug`} element={<ResourcePage />} />
+    {/* ── DE slugs ── */}
+    <Route path={`${prefix}/kontakt`} element={<Contacto />} />
+    <Route path={`${prefix}/preise`} element={<Precios />} />
+    <Route path={`${prefix}/funktionen`} element={<Funcionalidades />} />
+    <Route path={`${prefix}/kunden`} element={<Clientes />} />
+    <Route path={`${prefix}/integrationen`} element={<Integraciones />} />
+    <Route path={`${prefix}/erfolgsgeschichten`} element={<CasosExito />} />
+    <Route path={`${prefix}/ratgeber`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/ressourcen`} element={<Recursos />} />
+    <Route path={`${prefix}/loesungen`} element={<Soluciones />} />
+    <Route path={`${prefix}/herausforderungen`} element={<Problemas />} />
+    <Route path={`${prefix}/partner`} element={<Afiliate />} />
+    <Route path={`${prefix}/weinkarten-software`} element={<SoftwareCartaVinos />} />
+    <Route path={`${prefix}/was-ist-winerim`} element={<QueEsWinerim />} />
+    <Route path={`${prefix}/produkt/dynamische-intelligenz`} element={<InteligenciaDinamica />} />
+    <Route path={`${prefix}/produkt/winerim-core`} element={<WinerimCore />} />
+    <Route path={`${prefix}/produkt/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/datenschutz`} element={<Privacidad />} />
+    <Route path={`${prefix}/agb`} element={<Terminos />} />
+    <Route path={`${prefix}/loesungen/restaurant-gruppen`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/loesungen/fine-dining`} element={<RestaurantesGastronomicos />} />
+    <Route path={`${prefix}/loesungen/weinbars`} element={<WineBars />} />
+    <Route path={`${prefix}/loesungen/hotels`} element={<Hoteles />} />
+    <Route path={`${prefix}/loesungen/ohne-sommelier`} element={<RestauranteSinSumiller />} />
+    <Route path={`${prefix}/loesungen/grosse-weinkarte`} element={<CartaAmplia />} />
+    <Route path={`${prefix}/loesungen/wachsende-weinkarte`} element={<CartaCrecimiento />} />
+    <Route path={`${prefix}/loesungen/einkaufsintelligenz`} element={<InteligenciaCompras />} />
+    <Route path={`${prefix}/loesungen/durchschnittsbon-erhoehen`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/ueber-uns`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/karriere`} element={<Empleo />} />
+    <Route path={`${prefix}/haendler`} element={<Distribuidor />} />
+    <Route path={`${prefix}/weinkarten-analyse`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/wein-margen-rechner`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/vergleiche`} element={<Comparativas />} />
+    <Route path={`${prefix}/vergleiche/:slug`} element={<ComparativaDetalle />} />
+    <Route path={`${prefix}/implementierung`} element={<Implantacion />} />
+    <Route path={`${prefix}/tools/glaspreis-rechner`} element={<CalculadoraPrecioCopa />} />
+    <Route path={`${prefix}/tools/totbestand-rechner`} element={<CalculadoraStockMuerto />} />
+    <Route path={`${prefix}/tools/durchschnittsbon-rechner`} element={<CalculadoraTicketMedio />} />
+    <Route path={`${prefix}/tools/intelligenter-einkauf-rechner`} element={<CalculadoraCompraInteligente />} />
+    <Route path={`${prefix}/tools/glasausschank-diagnose`} element={<DiagnosticoVinoPorCopa />} />
+    <Route path={`${prefix}/tools/multi-standort-auditor`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/ratgeber/weinkarte-restaurantgruppe-strukturieren`} element={<GuiaCartaGrupoRestauracion />} />
+    <Route path={`${prefix}/ratgeber/rentable-glasausschank-strategie`} element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path={`${prefix}/ratgeber/totbestand-weine-erkennen`} element={<GuiaDetectarVinosMuertos />} />
+    <Route path={`${prefix}/ratgeber/service-team-wein-verkaufen-trainieren`} element={<GuiaFormarEquipoSala />} />
+    <Route path={`${prefix}/ratgeber/daten-nutzen-weinkauf-entscheiden`} element={<GuiaUsarDatosCompra />} />
+    <Route path={`${prefix}/ratgeber/weinkarte-bestand-verkauf-marge-verbinden`} element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path={`${prefix}/ratgeber/weinkarten-restaurantgruppen-verwalten`} element={<GuiaGestionarCartaGrupos />} />
+    <Route path={`${prefix}/ratgeber/glasausschank-ohne-margenverlust`} element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path={`${prefix}/ratgeber/winerim-ohne-sommelier-nutzen`} element={<GuiaWinerimSinSumiller />} />
+    <Route path={`${prefix}/ratgeber/weinauswahl-nach-durchschnittsbon`} element={<GuiaSurtidoTicketMedio />} />
+    <Route path={`${prefix}/ratgeber/wein-kannibalisierung-erkennen`} element={<GuiaCanibalizacionVinos />} />
+    <Route path={`${prefix}/ratgeber/weinkarte-monatlich-ueberpruefen`} element={<GuiaRevisarCartaCadaMes />} />
+    <Route path={`${prefix}/ratgeber/weinrotation-im-restaurant-verbessern`} element={<RotacionVinos />} />
+    <Route path={`${prefix}/ratgeber/speisen-wein-kombinationsstrategie-restaurant`} element={<EstrategiaMaridaje />} />
+    <Route path={`${prefix}/wie-man-mehr-wein-im-restaurant-verkauft`} element={<VenderMasVino />} />
+    <Route path={`${prefix}/weinpreise-im-restaurant`} element={<PrecioVinoRestaurante />} />
+    <Route path={`${prefix}/wein-im-glas-restaurant`} element={<VinoPorCopa />} />
+    <Route path={`${prefix}/kuenstliche-intelligenz-restaurants`} element={<IARestaurantes />} />
+    <Route path={`${prefix}/weinkarten-beispiele`} element={<EjemplosCarta />} />
+    <Route path={`${prefix}/wie-viele-weine-auf-der-restaurantkarte`} element={<CuantosVinosCarta />} />
+    <Route path={`${prefix}/probleme/weinkarte-verkauft-nicht`} element={<CartaNoVende />} />
+    {/* ── PT slugs ── */}
+    <Route path={`${prefix}/contacto`} element={<Contacto />} />
+    <Route path={`${prefix}/precos`} element={<Precios />} />
+    <Route path={`${prefix}/funcionalidades`} element={<Funcionalidades />} />
+    <Route path={`${prefix}/clientes`} element={<Clientes />} />
+    <Route path={`${prefix}/integracoes`} element={<Integraciones />} />
+    <Route path={`${prefix}/casos-de-sucesso`} element={<CasosExito />} />
+    <Route path={`${prefix}/ferramentas`} element={<Herramientas />} />
+    <Route path={`${prefix}/guias`} element={<GuiasRecursos />} />
+    <Route path={`${prefix}/recursos`} element={<Recursos />} />
+    <Route path={`${prefix}/solucoes`} element={<Soluciones />} />
+    <Route path={`${prefix}/desafios`} element={<Problemas />} />
+    <Route path={`${prefix}/afiliados`} element={<Afiliate />} />
+    <Route path={`${prefix}/software-carta-vinhos`} element={<SoftwareCartaVinos />} />
+    <Route path={`${prefix}/o-que-e-winerim`} element={<QueEsWinerim />} />
+    <Route path={`${prefix}/produto/inteligencia-dinamica`} element={<InteligenciaDinamica />} />
+    <Route path={`${prefix}/produto/winerim-core`} element={<WinerimCore />} />
+    <Route path={`${prefix}/produto/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/privacidade`} element={<Privacidad />} />
+    <Route path={`${prefix}/termos`} element={<Terminos />} />
+    <Route path={`${prefix}/solucoes/grupos-restauracao`} element={<GruposRestauracion />} />
+    <Route path={`${prefix}/solucoes/restaurantes-gastronomicos`} element={<RestaurantesGastronomicos />} />
+    <Route path={`${prefix}/solucoes/wine-bars`} element={<WineBars />} />
+    <Route path={`${prefix}/solucoes/hoteis`} element={<Hoteles />} />
+    <Route path={`${prefix}/solucoes/sem-sommelier`} element={<RestauranteSinSumiller />} />
+    <Route path={`${prefix}/solucoes/carta-vinhos-extensa`} element={<CartaAmplia />} />
+    <Route path={`${prefix}/solucoes/carta-vinhos-crescimento`} element={<CartaCrecimiento />} />
+    <Route path={`${prefix}/solucoes/inteligencia-compras`} element={<InteligenciaCompras />} />
+    <Route path={`${prefix}/solucoes/aumentar-ticket-medio`} element={<AumentarTicketMedio />} />
+    <Route path={`${prefix}/sobre-nos`} element={<SobreWinerim />} />
+    <Route path={`${prefix}/carreiras`} element={<Empleo />} />
+    <Route path={`${prefix}/distribuidor`} element={<Distribuidor />} />
+    <Route path={`${prefix}/analise-carta`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/calculadora-margem-vinho`} element={<CalculadoraMargen />} />
+    <Route path={`${prefix}/comparativos`} element={<Comparativas />} />
+    <Route path={`${prefix}/comparativos/:slug`} element={<ComparativaDetalle />} />
+    <Route path={`${prefix}/implementacao`} element={<Implantacion />} />
+    <Route path={`${prefix}/ferramentas/calculadora-preco-vinho-por-copo`} element={<CalculadoraPrecioCopa />} />
+    <Route path={`${prefix}/ferramentas/calculadora-stock-morto`} element={<CalculadoraStockMuerto />} />
+    <Route path={`${prefix}/ferramentas/calculadora-ticket-medio`} element={<CalculadoraTicketMedio />} />
+    <Route path={`${prefix}/ferramentas/calculadora-compra-inteligente`} element={<CalculadoraCompraInteligente />} />
+    <Route path={`${prefix}/ferramentas/diagnostico-vinho-por-copo`} element={<DiagnosticoVinoPorCopa />} />
+    <Route path={`${prefix}/ferramentas/wine-list-score`} element={<WineListScore />} />
+    <Route path={`${prefix}/ferramentas/auditor-carta-multilocal`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/guias/como-estruturar-carta-vinhos-grupo-restauracao`} element={<GuiaCartaGrupoRestauracion />} />
+    <Route path={`${prefix}/guias/estrategia-rentavel-vinho-por-copo`} element={<GuiaEstrategiaVinoPorCopa />} />
+    <Route path={`${prefix}/guias/como-detectar-vinhos-mortos`} element={<GuiaDetectarVinosMuertos />} />
+    <Route path={`${prefix}/guias/como-formar-equipa-sala-vender-vinho`} element={<GuiaFormarEquipoSala />} />
+    <Route path={`${prefix}/guias/como-usar-dados-para-decidir-que-vinhos-comprar`} element={<GuiaUsarDatosCompra />} />
+    <Route path={`${prefix}/guias/como-conectar-carta-stock-vendas-margem`} element={<GuiaConectarCartaStockVentasMargen />} />
+    <Route path={`${prefix}/guias/como-gerir-carta-vinhos-grupos-restauracao`} element={<GuiaGestionarCartaGrupos />} />
+    <Route path={`${prefix}/guias/como-implementar-vinho-por-copo-sem-perder-margem`} element={<GuiaVinoPorCopaSinPerderMargen />} />
+    <Route path={`${prefix}/guias/como-usar-winerim-sem-sommelier`} element={<GuiaWinerimSinSumiller />} />
+    <Route path={`${prefix}/guias/como-escolher-selecao-vinhos-por-ticket-medio`} element={<GuiaSurtidoTicketMedio />} />
+    <Route path={`${prefix}/guias/como-detectar-canibalizacao-vinhos`} element={<GuiaCanibalizacionVinos />} />
+    <Route path={`${prefix}/guias/como-rever-carta-vinhos-todos-meses`} element={<GuiaRevisarCartaCadaMes />} />
+    <Route path={`${prefix}/guias/como-melhorar-rotacao-vinhos-restaurante`} element={<RotacionVinos />} />
+    <Route path={`${prefix}/guias/estrategia-harmonizacao-vinhos-restaurante`} element={<EstrategiaMaridaje />} />
+    <Route path={`${prefix}/como-vender-mais-vinho-restaurante`} element={<VenderMasVino />} />
+    <Route path={`${prefix}/preco-vinho-restaurante`} element={<PrecioVinoRestaurante />} />
+    <Route path={`${prefix}/vinho-por-copo-restaurante`} element={<VinoPorCopa />} />
+    <Route path={`${prefix}/inteligencia-artificial-restaurantes`} element={<IARestaurantes />} />
+    <Route path={`${prefix}/exemplos-carta-vinhos`} element={<EjemplosCarta />} />
+    <Route path={`${prefix}/quantos-vinhos-carta-restaurante`} element={<CuantosVinosCarta />} />
+    <Route path={`${prefix}/problemas/carta-vinhos-nao-vende`} element={<CartaNoVende />} />
+    {/* ── Legacy wine-* tools prefixed across all languages ── */}
+    <Route path={`${prefix}/wine-list-analyzer`} element={<WineListAnalyzer />} />
+    <Route path={`${prefix}/wine-roi-calculator`} element={<WineROICalculator />} />
+    <Route path={`${prefix}/wine-pairing-generator`} element={<WinePairingGenerator />} />
+    <Route path={`${prefix}/wine-pricing-tool`} element={<WinePricingTool />} />
+    <Route path={`${prefix}/wine-list-benchmark`} element={<WineListBenchmark />} />
+    {/* IT slugs of legacy tools */}
+    <Route path={`${prefix}/analizzatore-carta-vini`} element={<WineListAnalyzer />} />
+    <Route path={`${prefix}/calcolatrice-roi-vini`} element={<WineROICalculator />} />
+    <Route path={`${prefix}/generatore-abbinamenti-ia`} element={<WinePairingGenerator />} />
+    <Route path={`${prefix}/strumento-pricing-vini`} element={<WinePricingTool />} />
+    <Route path={`${prefix}/benchmark-carta-vini`} element={<WineListBenchmark />} />
+    {/* FR slugs of legacy tools */}
+    <Route path={`${prefix}/analyseur-carte-vins`} element={<WineListAnalyzer />} />
+    <Route path={`${prefix}/calculateur-roi-vins`} element={<WineROICalculator />} />
+    <Route path={`${prefix}/generateur-accords-ia`} element={<WinePairingGenerator />} />
+    <Route path={`${prefix}/outil-pricing-vins`} element={<WinePricingTool />} />
+    <Route path={`${prefix}/benchmark-carte-vins`} element={<WineListBenchmark />} />
+    {/* DE slugs of legacy tools */}
+    <Route path={`${prefix}/weinkarten-analyzer`} element={<WineListAnalyzer />} />
+    <Route path={`${prefix}/wein-roi-rechner`} element={<WineROICalculator />} />
+    <Route path={`${prefix}/weinbegleitung-generator`} element={<WinePairingGenerator />} />
+    <Route path={`${prefix}/wein-pricing-tool`} element={<WinePricingTool />} />
+    <Route path={`${prefix}/weinkarten-benchmark`} element={<WineListBenchmark />} />
+    {/* PT slugs of legacy tools */}
+    <Route path={`${prefix}/analisador-carta-vinhos`} element={<WineListAnalyzer />} />
+    <Route path={`${prefix}/calculadora-roi-vinhos`} element={<WineROICalculator />} />
+    <Route path={`${prefix}/gerador-harmonizacoes-ia`} element={<WinePairingGenerator />} />
+    <Route path={`${prefix}/ferramenta-pricing-vinhos`} element={<WinePricingTool />} />
+    <Route path={`${prefix}/benchmark-carta-vinhos`} element={<WineListBenchmark />} />
   </>
 );
 
@@ -513,6 +673,8 @@ const App = () => (
                 {langRoutes("/en")}
                 {langRoutes("/it")}
                 {langRoutes("/fr")}
+                {langRoutes("/de")}
+                {langRoutes("/pt")}
                 <Route path="/unsubscribe" element={<Unsubscribe />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
