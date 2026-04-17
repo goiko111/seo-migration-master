@@ -5,9 +5,9 @@
 
 ## Estado general
 
-**Build**: ✅ Pasa limpio (7.9s) — sin warnings de duplicate keys
+**Build**: ✅ Pasa limpio (7.6s) — sin warnings
 **Branch**: `main` — todo empujado a `origin/main`
-**Último commit**: `5061513` — "fix: remove duplicate de keys in 4 pages; add city page SQL for DE/PT"
+**Último commit**: `b6fb7a3` — "seo: add DE/PT to sitemap, hreflang, org schema and og:locale"
 
 ## i18n: Estado de traducciones por componente
 
@@ -82,8 +82,10 @@ En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que
 
 - [ ] Aspecto visual de las traducciones en producción (no hay preview local)
 - [ ] Calidad de las traducciones (no revisadas por nativo)
-- [ ] SEO: hreflang tags para DE/PT en todas las páginas
-- [ ] SEO: sitemaps incluyen URLs DE/PT
+- [x] SEO: hreflang tags para DE/PT — ya estaban en allLangPaths (client-side)
+- [x] SEO: sitemap edge function actualizado con DE/PT routes y hreflang
+- [x] SEO: Organization schema incluye DE/PT en availableLanguage y areaServed
+- [x] SEO: og:locale soporta de_DE y pt_PT
 - [x] Templates SEO tienen chrome traducido a 6 idiomas
 - [x] Duplicate de key warnings limpiados (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos)
 - [x] SQL para city pages DE/PT preparado (sql/city-pages-de-pt.sql)

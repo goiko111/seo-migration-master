@@ -65,6 +65,16 @@
 
 ---
 
+## 2026-04-17 — Sitemap: rutas DE/PT solo para paginas multilang del ROUTE_MAP
+
+**Decisión**: En el sitemap, solo las rutas marcadas como `multilang: true` generan versiones DE/PT. Las guías, herramientas, benchmarks, etc. marcadas como `multilang: false` siguen solo en ES.
+
+**Razón**: El sitemap refleja lo que realmente existe en producción. Incluir URLs DE/PT en el sitemap para páginas que no tienen traducción generaría 404s o contenido en español con URL alemana/portuguesa, lo cual es peor para SEO que no listarlas.
+
+**Nota**: Cuando se traduzcan más guías/herramientas a DE/PT, habrá que cambiar su `multilang` a `true` y añadir sus rutas al ROUTE_MAP del sitemap.
+
+---
+
 ## 2026-04-17 — City pages SQL: contenido unico por ciudad
 
 **Decisión**: Cada city page tiene contenido contextualizado (intro, problemas, FAQs) que refleja el mercado local, no solo un swap de nombre de ciudad.

@@ -27,17 +27,15 @@
 
 ## Prioridad media
 
-### 3. Verificar hreflang tags
+### 3. ~~Verificar hreflang tags~~ ✅ HECHO
 
-**Qué**: Asegurar que todas las páginas emiten `<link rel="alternate" hreflang="de" href="...">` y `hreflang="pt"` correctamente.
+Client-side: `allLangPaths` ya incluía DE/PT. Sitemap: actualizado en commit `b6fb7a3`.
 
-**Cómo**: Revisar el componente `SEOHead` y verificar que usa `allLangPaths` para generar los hreflang. Luego comprobar en producción con herramienta SEO.
+### 4. ~~Verificar sitemaps~~ ✅ HECHO
 
-### 4. Verificar sitemaps
+Sitemap edge function (`supabase/functions/sitemap/index.ts`) actualizado con ROUTE_MAP para DE y PT. Hreflang en sitemap ahora incluye 5 idiomas + x-default.
 
-**Qué**: Confirmar que las URLs DE/PT aparecen en el sitemap.xml.
-
-**Cómo**: Depende de cómo se genera el sitemap — puede ser estático, generado en build, o servido por Supabase/función edge.
+**NOTA**: La edge function necesita ser redeployada en Supabase para que los cambios surtan efecto. Hacer `supabase functions deploy sitemap` o push al repo si hay CI/CD configurado.
 
 ### 5. Revisión visual en producción
 
@@ -78,6 +76,8 @@
 - ✅ i18n para los 4 SEO templates (CityTemplate, RestaurantTypeTemplate, CountryTemplate, GenericSeoTemplate) — commit `04334e2`
 - ✅ Fix duplicate `de` keys en 4 páginas (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos) — commit `5061513`
 - ✅ SQL para 15 city pages DE/PT generado (`sql/city-pages-de-pt.sql`) — commit `5061513`
+- ✅ Sitemap edge function actualizado con DE/PT routes y hreflang — commit `b6fb7a3`
+- ✅ SEOHead: Organization schema, og:locale, areaServed para DE/PT — commit `b6fb7a3`
 
 ## Para retomar la próxima sesión
 
