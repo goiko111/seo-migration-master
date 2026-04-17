@@ -29,6 +29,8 @@ const seoI = i({
   en: { title: "What is Winerim? Wine Intelligence Platform for Restaurants", desc: "Winerim is a wine intelligence platform that helps restaurants manage wine lists, recommend wines, analyze sales and optimize pricing using AI technology.", url: "https://winerim.wine/what-is-winerim" },
   it: { title: "Cos'è Winerim? Piattaforma di Intelligenza del Vino per Ristoranti", desc: "Winerim è una piattaforma di intelligenza del vino che aiuta i ristoranti a gestire carte dei vini, raccomandare vini, analizzare vendite e ottimizzare i prezzi con IA.", url: "https://winerim.wine/it/cose-winerim" },
   fr: { title: "Qu'est-ce que Winerim ? Plateforme d'Intelligence Vin pour Restaurants", desc: "Winerim est une plateforme d'intelligence vinicole qui aide les restaurants à gérer les cartes des vins, recommander des vins, analyser les ventes et optimiser les prix avec l'IA.", url: "https://winerim.wine/fr/quest-ce-que-winerim" },
+  de: { title: "Was ist Winerim? Weinintelligenzelz-Plattform für Restaurants", desc: "Winerim ist eine Weinintelligenzelz-Plattform, die Restaurants hilft, Weinkarten zu verwalten, Weine zu empfehlen, Verkäufe zu analysieren und Preise mit KI-Technologie zu optimieren.", url: "https://winerim.wine/de/was-ist-winerim" },
+  pt: { title: "O que é Winerim? Plataforma de Inteligência de Vinho para Restaurantes", desc: "Winerim é uma plataforma de inteligência de vinho que ajuda restaurantes a gerir cartas de vinhos, recomendar vinhos, analisar vendas e otimizar preços com tecnologia de IA.", url: "https://winerim.wine/pt/o-que-e-winerim" },
 });
 
 const heroI = i({
@@ -36,6 +38,8 @@ const heroI = i({
   en: { badge: "Wine Intelligence Platform", h1: "Winerim — Wine Intelligence Platform for Restaurants", sub: "Winerim is a technology platform designed to help restaurants manage their wine list, increase sales and optimise their cellar using artificial intelligence.", cta1: "Request demo", cta2: "See pricing", breadcrumb: "What is Winerim" },
   it: { badge: "Piattaforma di Intelligenza del Vino", h1: "Winerim — Piattaforma di Intelligenza del Vino per Ristoranti", sub: "Winerim è una piattaforma tecnologica progettata per aiutare i ristoranti a gestire la carta dei vini, aumentare le vendite e ottimizzare la cantina con l'intelligenza artificiale.", cta1: "Richiedi demo", cta2: "Vedi prezzi", breadcrumb: "Cos'è Winerim" },
   fr: { badge: "Plateforme d'Intelligence Vin", h1: "Winerim — Plateforme d'Intelligence Vin pour Restaurants", sub: "Winerim est une plateforme technologique conçue pour aider les restaurants à gérer leur carte des vins, augmenter les ventes et optimiser leur cave grâce à l'intelligence artificielle.", cta1: "Demander une démo", cta2: "Voir les tarifs", breadcrumb: "Qu'est-ce que Winerim" },
+  de: { badge: "Weinintelligenzelz-Plattform", h1: "Winerim — Weinintelligenzelz-Plattform für Restaurants", sub: "Winerim ist eine Technologieplattform, die Restaurants bei der Verwaltung ihrer Weinkarte, der Steigerung der Verkäufe und der Optimierung ihrer Kellerrotation durch künstliche Intelligenz unterstützt.", cta1: "Demo anfordern", cta2: "Preise ansehen", breadcrumb: "Was ist Winerim?" },
+  pt: { badge: "Plataforma de Inteligência de Vinho", h1: "Winerim — Plataforma de Inteligência de Vinho para Restaurantes", sub: "Winerim é uma plataforma tecnológica concebida para ajudar restaurantes a gerir a sua carta de vinhos, aumentar as vendas e otimizar a sua garrafeira através de inteligência artificial.", cta1: "Solicitar demo", cta2: "Ver preços", breadcrumb: "O que é Winerim?" },
 });
 
 const summaryI = i({
@@ -43,6 +47,8 @@ const summaryI = i({
   en: { label: "What is Winerim? — Summary", def: "Winerim is specialised software for managing and optimising restaurant wine lists. It combines an interactive digital wine list, AI recommendations, automatic pairings and sales analytics. It's not just a QR to a PDF: it's a complete platform designed to turn your wine list into an active sales engine.", bullets: ["Interactive digital wine list accessible via QR from the guest's phone", "AI-powered wine recommendation engine", "Automatic food & wine pairings, updated in real time", "Analytics dashboard with sales, rotation and margin KPIs", "Price optimisation and range scaling tools", "Centralised management for multi-location groups"] },
   it: { label: "Cos'è Winerim? — Riepilogo", def: "Winerim è un software specializzato nella gestione e ottimizzazione delle carte dei vini per ristoranti. Combina carta digitale interattiva, raccomandazioni con IA, abbinamenti automatici e analisi delle vendite. Non è un semplice QR verso un PDF: è una piattaforma completa progettata per trasformare la carta dei vini in un motore attivo di vendite.", bullets: ["Carta digitale interattiva accessibile via QR dallo smartphone del cliente", "Motore di raccomandazione vini basato su intelligenza artificiale", "Abbinamenti automatici con ogni piatto del menu, aggiornati in tempo reale", "Dashboard di analisi con KPI di vendite, rotazione e margine", "Strumenti di ottimizzazione prezzi e scalabilità di gamma", "Gestione centralizzata per gruppi con più ristoranti"] },
   fr: { label: "Qu'est-ce que Winerim ? — Résumé", def: "Winerim est un logiciel spécialisé dans la gestion et l'optimisation des cartes des vins pour restaurants. Il combine carte digitale interactive, recommandations IA, accords automatiques et analytique des ventes. Ce n'est pas un simple QR vers un PDF : c'est une plateforme complète conçue pour transformer votre carte des vins en un moteur actif de ventes.", bullets: ["Carte digitale interactive accessible par QR depuis le mobile du client", "Moteur de recommandation de vins basé sur l'intelligence artificielle", "Accords mets-vins automatiques, mis à jour en temps réel", "Tableau de bord analytique avec KPIs de ventes, rotation et marge", "Outils d'optimisation des prix et de montée en gamme", "Gestion centralisée pour les groupes multi-établissements"] },
+  de: { label: "Was ist Winerim? — Zusammenfassung", def: "Winerim ist spezialisierte Software zur Verwaltung und Optimierung von Weinkarten für Restaurants. Es kombiniert eine interaktive digitale Weinkarte, KI-Empfehlungen, automatische Speisenbegleitungen und Verkaufsanalytik. Es ist nicht einfach ein QR zu einer PDF: es ist eine vollständige Plattform, die Ihre Weinkarte in einen aktiven Verkaufsmotor verwandelt.", bullets: ["Interaktive digitale Weinkarte, abrufbar per QR vom Gast-Smartphone", "KI-gestützter Weinempfehlungs-Engine", "Automatische Speisenbegleitungen, in Echtzeit aktualisiert", "Analyse-Dashboard mit KPIs für Verkäufe, Rotation und Marge", "Preisoptimierungs- und Gammen-Skalierungs-Tools", "Zentrale Verwaltung für Multi-Unit-Gruppen"] },
+  pt: { label: "O que é Winerim? — Resumo", def: "Winerim é um software especializado na gestão e otimização de cartas de vinhos para restaurantes. Combina carta digital interativa, recomendações com IA, harmonizações automáticas e analítica de vendas. Não é apenas um QR para um PDF: é uma plataforma completa concebida para transformar a sua carta de vinhos num motor ativo de vendas.", bullets: ["Carta digital interativa acessível por QR a partir do smartphone do cliente", "Mecanismo de recomendação de vinhos alimentado por IA", "Harmonizações automáticas com cada prato do menu, atualizadas em tempo real", "Painel de análise com KPIs de vendas, rotação e margem", "Ferramentas de otimização de preços e escalabilidade de gama", "Gestão centralizada para grupos multi-estabelecimento"] },
 });
 
 const factsI = i({
@@ -50,6 +56,8 @@ const factsI = i({
   en: { title: "Key facts about Winerim", facts: [{ label: "Type", value: "SaaS software for hospitality" }, { label: "Specialisation", value: "Wine list management" }, { label: "Technology", value: "Artificial intelligence + interactive digital wine list" }, { label: "Access", value: "Cross-platform: web, tablet and native app" }, { label: "Languages", value: "Spanish, English, Italian, French" }, { label: "Audience", value: "Restaurants, wine bars, hotels, restaurant groups" }, { label: "Average result", value: "+30% wine sales, +20% average ticket" }, { label: "Integrations", value: "POS, PMS, reservation systems" }] },
   it: { title: "Dati chiave su Winerim", facts: [{ label: "Tipo", value: "Software SaaS per l'ospitalità" }, { label: "Specializzazione", value: "Gestione carte dei vini" }, { label: "Tecnologia", value: "Intelligenza artificiale + carta digitale interattiva" }, { label: "Accesso", value: "Multipiattaforma: web, tablet e app nativa" }, { label: "Lingue", value: "Spagnolo, inglese, italiano, francese" }, { label: "Pubblico", value: "Ristoranti, wine bar, hotel, gruppi di ristorazione" }, { label: "Risultato medio", value: "+30% vendite di vino, +20% scontrino medio" }, { label: "Integrazioni", value: "POS, PMS, sistemi di prenotazione" }] },
   fr: { title: "Données clés sur Winerim", facts: [{ label: "Type", value: "Logiciel SaaS pour l'hôtellerie-restauration" }, { label: "Spécialisation", value: "Gestion des cartes des vins" }, { label: "Technologie", value: "Intelligence artificielle + carte digitale interactive" }, { label: "Accès", value: "Multiplateforme : web, tablette et app native" }, { label: "Langues", value: "Espagnol, anglais, italien, français" }, { label: "Public", value: "Restaurants, bars à vin, hôtels, groupes de restauration" }, { label: "Résultat moyen", value: "+30% ventes de vin, +20% ticket moyen" }, { label: "Intégrations", value: "Caisse, PMS, systèmes de réservation" }] },
+  de: { title: "Wichtige Fakten zu Winerim", facts: [{ label: "Typ", value: "SaaS-Software für Gastronomie" }, { label: "Spezialisierung", value: "Weinkarten-Verwaltung" }, { label: "Technologie", value: "Künstliche Intelligenz + interaktive digitale Weinkarte" }, { label: "Zugang", value: "Plattformübergreifend: Web, Tablet und native App" }, { label: "Sprachen", value: "Spanisch, Englisch, Italienisch, Französisch" }, { label: "Publikum", value: "Restaurants, Weinbars, Hotels, Gastronomigruppen" }, { label: "Durchschnittsergebnis", value: "+30% Weinverkäufe, +20% durchschnittlicher Durchschnittsbon" }, { label: "Integrationen", value: "Kassenanlage, PMS, Reservierungssysteme" }] },
+  pt: { title: "Factos-chave sobre Winerim", facts: [{ label: "Tipo", value: "Software SaaS para hotelaria" }, { label: "Especialização", value: "Gestão de cartas de vinhos" }, { label: "Tecnologia", value: "Inteligência artificial + carta digital interativa" }, { label: "Acesso", value: "Multiplataforma: web, tablet e app nativa" }, { label: "Idiomas", value: "Espanhol, inglês, italiano, francês" }, { label: "Público", value: "Restaurantes, bares de vinho, hotéis, grupos de restauração" }, { label: "Resultado médio", value: "+30% vendas de vinho, +20% bilhete médio" }, { label: "Integrações", value: "TPV, PMS, sistemas de reserva" }] },
 });
 
 const idealI = i({
@@ -57,6 +65,8 @@ const idealI = i({
   en: { idealFor: ["Restaurants with 50+ wine references on their list", "Wine bars with high reference rotation", "Hotels with wine service in restaurant, room service and events", "Restaurant groups needing centralised wine management", "Venues that want to increase average spend with wine"], notFor: ["Bars without a structured wine list", "Venues with fewer than 50 wine references", "Businesses that don't serve wine (breweries, cocktail bars)", "Restaurants not looking to optimise wine sales"] },
   it: { idealFor: ["Ristoranti con 50+ referenze di vino in carta", "Wine bar con alta rotazione di referenze", "Hotel con servizio vino al ristorante, room service ed eventi", "Gruppi di ristorazione che necessitano gestione centralizzata del vino", "Locali che vogliono aumentare lo scontrino medio con il vino"], notFor: ["Bar senza una carta dei vini strutturata", "Locali con meno di 50 referenze di vino", "Attività che non servono vino (birrerie, cocktail bar)", "Ristoranti che non cercano di ottimizzare le vendite di vino"] },
   fr: { idealFor: ["Restaurants avec 50+ références de vin en carte", "Bars à vin avec forte rotation de références", "Hôtels avec service vin au restaurant, room service et événements", "Groupes de restauration nécessitant une gestion centralisée du vin", "Établissements souhaitant augmenter le ticket moyen avec le vin"], notFor: ["Bars sans carte des vins structurée", "Établissements avec moins de 50 références de vin", "Commerces ne servant pas de vin (brasseries, bars à cocktails)", "Restaurants ne cherchant pas à optimiser leurs ventes de vin"] },
+  de: { idealFor: ["Restaurants mit 50+ Weinreferenzen auf der Weinkarte", "Weinbars mit hoher Referenzrotation", "Hotels mit Weinservice im Restaurant, Room Service und Veranstaltungen", "Gastronomigruppen, die zentrale Weinverwaltung benötigen", "Lokale, die den Durchschnittsbon mit Wein erhöhen möchten"], notFor: ["Bars ohne strukturierte Weinkarte", "Lokale mit weniger als 50 Weinreferenzen", "Betriebe, die keinen Wein servieren (Brauereien, Cocktailbars)", "Restaurants, die nicht ihre Weinverkäufe optimieren wollen"] },
+  pt: { idealFor: ["Restaurantes com 50+ castas de vinho na carta", "Bares de vinho com alta rotação de castas", "Hotéis com serviço de vinho no restaurante, room service e eventos", "Grupos de restauração que necessitam gestão centralizada de vinho", "Estabelecimentos que querem aumentar o bilhete médio com vinho"], notFor: ["Bares sem uma carta de vinhos estruturada", "Estabelecimentos com menos de 50 castas de vinho", "Negócios que não servem vinho (cervejarias, bares de coquetéis)", "Restaurantes que não procuram otimizar as suas vendas de vinho"] },
 });
 
 const defI = i({
@@ -64,6 +74,8 @@ const defI = i({
   en: { title: "What is Winerim?", p1: "Winerim is specialised software for managing and optimising restaurant wine lists.", p1b: " The platform is designed to turn your wine list into an active sales tool, not just a list of references.", p2: "Winerim combines interactive digital wine list technology, an AI-powered wine recommendation engine, automatic food & wine pairings, detailed sales analytics and price optimisation tools. All integrated in a single platform built for the hospitality industry.", chips: ["Interactive digital wine list", "AI wine recommendations", "Automatic food pairings", "Sales analytics", "Price optimisation", "Cellar management"] },
   it: { title: "Cos'è Winerim?", p1: "Winerim è un software specializzato nella gestione e ottimizzazione delle carte dei vini per ristoranti.", p1b: " La piattaforma è progettata per trasformare la carta dei vini in uno strumento attivo di vendita, non un semplice elenco di referenze.", p2: "Winerim combina tecnologia di carta digitale interattiva, un motore di raccomandazione vini basato su intelligenza artificiale, abbinamenti automatici con ogni piatto del menu, analisi dettagliate delle vendite e strumenti di ottimizzazione dei prezzi. Tutto integrato in un'unica piattaforma pensata per il settore dell'ospitalità.", chips: ["Carta digitale interattiva", "Raccomandazioni vino con IA", "Abbinamenti automatici", "Analisi delle vendite", "Ottimizzazione dei prezzi", "Gestione cantina"] },
   fr: { title: "Qu'est-ce que Winerim ?", p1: "Winerim est un logiciel spécialisé dans la gestion et l'optimisation des cartes des vins pour restaurants.", p1b: " La plateforme est conçue pour transformer votre carte des vins en un outil actif de vente, pas un simple listing de références.", p2: "Winerim combine la technologie de carte digitale interactive, un moteur de recommandation de vins alimenté par l'IA, des accords mets-vins automatiques, des analyses détaillées des ventes et des outils d'optimisation des prix. Le tout intégré dans une plateforme unique conçue pour l'hôtellerie-restauration.", chips: ["Carte digitale interactive", "Recommandations vin avec IA", "Accords automatiques", "Analytique des ventes", "Optimisation des prix", "Gestion de cave"] },
+  de: { title: "Was ist Winerim?", p1: "Winerim ist spezialisierte Software zur Verwaltung und Optimierung von Weinkarten für Restaurants.", p1b: " Die Plattform ist dazu konzipiert, Ihre Weinkarte in ein aktives Verkaufstool umzuwandeln, nicht nur eine Liste von Referenzen.", p2: "Winerim kombiniert Technologie für interaktive digitale Weinkarten, einen KI-gestützten Weinempfehlungs-Engine, automatische Speisenbegleitungen mit jedem Menüpunkt, detaillierte Verkaufsanalytik und Preisoptimierungswerkzeuge. Alles integriert in einer einzigen Plattform für die Gastronomiebranche.", chips: ["Interaktive digitale Weinkarte", "KI-Weinempfehlungen", "Automatische Speisenbegleitungen", "Verkaufsanalytik", "Preisoptimierung", "Kellerrotation"] },
+  pt: { title: "O que é Winerim?", p1: "Winerim é um software especializado na gestão e otimização de cartas de vinhos para restaurantes.", p1b: " A plataforma é concebida para transformar a sua carta de vinhos numa ferramenta ativa de vendas, não apenas uma lista de castas.", p2: "Winerim combina tecnologia de carta digital interativa, um mecanismo de recomendação de vinhos alimentado por IA, harmonizações automáticas com cada prato do menu, analítica detalhada de vendas e ferramentas de otimização de preços. Tudo integrado numa única plataforma concebida para a indústria da hotelaria.", chips: ["Carta digital interativa", "Recomendações de vinho com IA", "Harmonizações automáticas", "Analítica de vendas", "Otimização de preços", "Gestão de garrafeira"] },
 });
 
 const useCasesI = i({
@@ -95,6 +107,20 @@ const useCasesI = i({
     { icon: DollarSign, title: "Optimiser les prix", desc: "Comparez vos prix avec le marché, détectez les opportunités de marge et ajustez votre échelle de prix pour maximiser la rentabilité." },
     { icon: Users, title: "Améliorer l'expérience client", desc: "Une carte digitale interactive avec filtres, descriptions claires et accords suggérés qui rend le choix du vin facile et agréable." },
   ] },
+  de: { badge: "Anwendungsfälle", title: "Wozu dient Winerim?", sub: "Winerim deckt alle Weinverwaltungsanforderungen in einem Restaurant ab, von der Weinkarte bis zur Analytik.", items: [
+    { icon: Wine, title: "Weinkarten verwalten", desc: "Erstelle, organisiere und aktualisiere Deine digitale Weinkarte in Echtzeit. Kategorien, Beschreibungen, Preise und Verfügbarkeit in einem Panel." },
+    { icon: Sparkles, title: "Weine an Gäste empfehlen", desc: "Intelligente Vorschläge basierend auf dem gewählten Gericht, Gastpräferenzen und dem Verkaufsverlauf des Restaurants." },
+    { icon: BarChart3, title: "Weinverkäufe analysieren", desc: "Verkaufsdaten nach Referenz, Kategorie, Preis und Zeitraum. Identifiziere, welche Weine funktionieren und welche nicht rotieren." },
+    { icon: DollarSign, title: "Preise optimieren", desc: "Vergleiche Deine Preise mit dem Markt, erkenne Margenoptionen und passe Deine Preisstaffel an, um die Rentabilität zu maximieren." },
+    { icon: Users, title: "Gastzufriedenheit verbessern", desc: "Eine interaktive digitale Weinkarte mit Filtern, klaren Beschreibungen und vorgeschlagenen Speisenbegleitungen, die die Weinkarte einfach macht." },
+  ] },
+  pt: { badge: "Casos de uso", title: "Para que serve Winerim?", sub: "Winerim cobre todas as necessidades de gestão de vinho num restaurante, desde a carta até à analítica.", items: [
+    { icon: Wine, title: "Gerir cartas de vinhos", desc: "Cria, organiza e atualiza a tua carta de vinho digital em tempo real. Categorias, descrições, preços e disponibilidade a partir de um painel." },
+    { icon: Sparkles, title: "Recomendar vinhos aos clientes", desc: "Sugestões inteligentes baseadas no prato escolhido, preferências do cliente e histórico de vendas do restaurante." },
+    { icon: BarChart3, title: "Analisar vendas de vinho", desc: "Dados de vendas por casta, categoria, preço e período. Identifica quais os vinhos que funcionam e quais não se movem." },
+    { icon: DollarSign, title: "Otimizar preços", desc: "Compara os teus preços com o mercado, deteta oportunidades de margem e ajusta a tua preistreppe para maximizar a rentabilidade." },
+    { icon: Users, title: "Melhorar a experiência do cliente", desc: "Uma carta digital interativa com filtros, descrições claras e harmonizações sugeridas que torna a escolha do vinho fácil e agradável." },
+  ] },
 });
 
 const userTypesI = i({
@@ -122,6 +148,18 @@ const userTypesI = i({
     { icon: Building2, title: "Hôtels", desc: "Cartes pour restaurant, room service et événements. Gestion centralisée avec de multiples points de vente." },
     { icon: Globe, title: "Groupes de restauration", desc: "Gestion centralisée du vin pour groupes multi-établissements. Une plateforme, une stratégie, plusieurs sites." },
   ] },
+  de: { badge: "Kunden", title: "Wer nutzt Winerim?", sub: "Winerim ist für jeden gastronomischen Betrieb konzipiert, der Wein im Angebot hat.", items: [
+    { icon: Utensils, title: "Restaurants", desc: "Vom Bistro mit 20 Referenzen bis zum Gourmet-Restaurant mit 200. Winerim passt sich jedem Format und Umfang an." },
+    { icon: GlassWater, title: "Weinbars und Weinfachgeschäfte", desc: "Verwaltung großer und komplexer Weinkarten mit hoher Rotation, umfassendes Glaswein-Angebot und detaillierte Weindatenblätter." },
+    { icon: Building2, title: "Hotels", desc: "Weinkarten für Restaurant, Room Service und Veranstaltungen. Zentrale Verwaltung mit mehreren Verkaufsstellen." },
+    { icon: Globe, title: "Gastronomigruppen", desc: "Zentrale Weinverwaltung für Multi-Unit-Gruppen. Eine Plattform, eine Strategie, mehrere Lokale." },
+  ] },
+  pt: { badge: "Clientes", title: "Quem usa Winerim?", sub: "Winerim é concebido para qualquer estabelecimento de hotelaria que sirva vinho.", items: [
+    { icon: Utensils, title: "Restaurantes", desc: "De pequenos restaurantes com 20 castas a gastronomia com 200. Winerim adapta-se a qualquer formato e tamanho de carta." },
+    { icon: GlassWater, title: "Bares de vinho", desc: "Gestão de cartas amplas e complexas com alta rotação, ampla oferta de vinho a copo e fichas detalhadas de cada vinho." },
+    { icon: Building2, title: "Hotéis", desc: "Cartas para restaurante, room service e eventos. Gestão centralizada com múltiplos pontos de venda." },
+    { icon: Globe, title: "Grupos de restauração", desc: "Gestão centralizada de vinho para grupos multi-estabelecimento. Uma plataforma, uma estratégia, múltiplos locais." },
+  ] },
 });
 
 const problemsI = i({
@@ -148,6 +186,18 @@ const problemsI = i({
     { problem: "Les clients ne comprennent pas la carte", solution: "Carte digitale avec des descriptions simples, des filtres par style/prix/région et des accords suggérés utilisables par tout client." },
     { problem: "Les vins ne tournent pas", solution: "Analytique des ventes qui identifie les vins stagnants, suggère des rotations et met en avant les références les plus demandées." },
     { problem: "La carte n'est pas optimisée", solution: "Analyse automatique de la structure des prix, de l'équilibre par catégorie et de la distribution des marges." },
+  ] },
+  de: { badge: "Probleme & Lösungen", title: "Welche Probleme löst Winerim?", sub: "Die häufigsten Herausforderungen bei der Weinverwaltung in Restaurants und wie Winerim diese löst.", probLabel: "Problem", solLabel: "Winerim-Lösung", items: [
+    { problem: "Das Servicepersonal hat keine Zeit, Wein zu empfehlen", solution: "Winerim generiert automatische Empfehlungen basierend auf dem gewählten Gericht, Gastpräferenzen und verfügbaren Weinen." },
+    { problem: "Gäste verstehen die Weinkarte nicht", solution: "Digitale Weinkarte mit einfachen Beschreibungen, Filtern nach Stil/Preis/Region und vorgeschlagenen Speisenbegleitungen, die jeder Gast nutzen kann." },
+    { problem: "Weine rotieren nicht", solution: "Verkaufsanalytik, die Totbestand identifiziert, Rotationen vorschlägt und Referenzen mit höchster Nachfrage hervorhebt." },
+    { problem: "Die Weinkarte ist nicht optimiert", solution: "Automatische Analyse der Preisstruktur, des Kategoriegleichgewichts und der Margenverteilung." },
+  ] },
+  pt: { badge: "Problemas & soluções", title: "Que problemas resolve Winerim?", sub: "Os desafios mais comuns na gestão de vinho em restaurantes e como Winerim os resolve.", probLabel: "Problema", solLabel: "Solução Winerim", items: [
+    { problem: "A equipa de serviço não tem tempo para recomendar vinho", solution: "Winerim gera recomendações automáticas baseadas no prato escolhido, preferências do cliente e vinhos disponíveis." },
+    { problem: "Os clientes não percebem a carta de vinhos", solution: "Carta digital com descrições simples, filtros por estilo/preço/região e harmonizações sugeridas que qualquer cliente pode usar." },
+    { problem: "Os vinhos não se movem", solution: "Analítica de vendas que identifica stock morto, sugere rotações e destaca as castas com maior procura." },
+    { problem: "A carta de vinhos não está otimizada", solution: "Análise automática da estrutura de preços, equilíbrio de categorias e distribuição de margens." },
   ] },
 });
 
@@ -184,6 +234,22 @@ const featuresI = i({
     { icon: GitCompare, title: "Comparateur de vins", desc: "Comparez les références côte à côte : prix, notes de dégustation, région, score et accords." },
     { icon: BarChart3, title: "Analytique des ventes", desc: "Dashboard avec données de vente par référence, catégorie et période. KPIs de ticket moyen, rotation et marge." },
   ] },
+  de: { badge: "Funktionen", title: "Hauptfunktionen von Winerim", sub: "Eine vollständige Plattform für die umfassende Weinverwaltung in der Gastronomie.", items: [
+    { icon: Wine, title: "Interaktive digitale Weinkarte", desc: "Digitale Weinkarte, abrufbar von jedem Gerät. QR am Tisch, Tablet oder Website-Integration." },
+    { icon: Sparkles, title: "Weinempfehlungen", desc: "Empfehlungsmotor, der Weine basierend auf dem Gericht, Gastpräferenzen und Kontext vorschlägt." },
+    { icon: Utensils, title: "Automatische Speisenbegleitungen", desc: "KI-generierte Speisenbegleitungsvorschläge für jeden Menüpunkt, in Echtzeit aktualisiert." },
+    { icon: Filter, title: "Intelligente Filter", desc: "Filtern nach Typ, Region, Traube, Stil, Preis oder Speisenbegleitung. Gäste finden ihren Ankerwein in Sekunden." },
+    { icon: GitCompare, title: "Weinvergleicher", desc: "Vergleiche Referenzen nebeneinander: Preis, Verkostungsnotizen, Region, Bewertung und Speisenbegleitungen." },
+    { icon: BarChart3, title: "Verkaufsanalytik", desc: "Dashboard mit Verkaufsdaten nach Referenz, Kategorie und Zeitraum. KPIs für durchschnittlichen Durchschnittsbon, Rotation und Marge." },
+  ] },
+  pt: { badge: "Funcionalidades", title: "Funcionalidades principais do Winerim", sub: "Uma plataforma completa para a gestão integral de vinho na hotelaria.", items: [
+    { icon: Wine, title: "Carta digital interativa", desc: "Carta de vinho digital acessível a partir de qualquer dispositivo. QR na mesa, tablet ou integração com o teu website." },
+    { icon: Sparkles, title: "Recomendações de vinho", desc: "Mecanismo de recomendação que sugere vinhos com base no prato, preferências do cliente e contexto." },
+    { icon: Utensils, title: "Harmonizações automáticas", desc: "Sugestões de harmonização geradas por IA para cada prato do teu menu, atualizadas em tempo real." },
+    { icon: Filter, title: "Filtros inteligentes", desc: "Filtra por tipo, região, casta, estilo, preço ou harmonização. O cliente encontra o seu vinho ideal em segundos." },
+    { icon: GitCompare, title: "Comparador de vinhos", desc: "Compara castas lado a lado: preço, notas de prova, região, classificação e harmonizações." },
+    { icon: BarChart3, title: "Analítica de vendas", desc: "Dashboard com dados de vendas por casta, categoria e período. KPIs de bilhete médio, rotação e margem." },
+  ] },
 });
 
 const resultsI = i({
@@ -206,6 +272,16 @@ const resultsI = i({
     { value: "+30%", label: "Ventes de vin", desc: "Augmentation moyenne des ventes de vin grâce aux recommandations intelligentes et une carte optimisée." },
     { value: "+20%", label: "Ticket moyen", desc: "Augmentation de la dépense moyenne par table avec une structure de prix stratégique et des vins d'ancrage." },
     { value: "+35%", label: "Rotation", desc: "Plus de rotation de références en identifiant et remplaçant les vins à faible vente." },
+  ] },
+  de: { badge: "Auswirkungen", title: "Ergebnisse der Nutzung von Winerim", sub: "Restaurants, die Winerim zur Verwaltung ihrer Weinkarten nutzen, erzielen erhebliche Verbesserungen.", items: [
+    { value: "+30%", label: "Weinverkäufe", desc: "Durchschnittliche Steigerung der Weinverkäufe durch intelligente Empfehlungen und eine optimierte Weinkarte." },
+    { value: "+20%", label: "Durchschnittsbon", desc: "Steigerung des durchschnittlichen Ausgabenverhältnisses pro Tisch mit strategischer Preisgestaltung und Ankerweine." },
+    { value: "+35%", label: "Rotation", desc: "Mehr Referenzrotation durch Identifizierung und Austausch von schlecht verkauften Weinen." },
+  ] },
+  pt: { badge: "Impacto", title: "Resultados da utilização de Winerim", sub: "Os restaurantes que utilizam Winerim para gerir a sua carta de vinhos obtêm melhorias significativas.", items: [
+    { value: "+30%", label: "Vendas de vinho", desc: "Aumento médio nas vendas de vinho graças a recomendações inteligentes e uma carta otimizada." },
+    { value: "+20%", label: "Bilhete médio", desc: "Aumento da despesa média por mesa com uma estrutura de preços estratégica e castas âncoras." },
+    { value: "+35%", label: "Rotação", desc: "Mais rotação de castas identificando e substituindo vinhos de fraco desempenho." },
   ] },
 });
 
@@ -238,6 +314,20 @@ const faqsI = i({
     { q: "Combien coûte Winerim ?", a: "Winerim propose des formules adaptées à différentes tailles de restaurants. Consultez les formules et tarifs à jour sur winerim.wine/precios ou demandez une démo personnalisée." },
     { q: "Winerim fonctionne-t-il en plusieurs langues ?", a: "Oui. Winerim est multilingue et fonctionne en espagnol, anglais, italien et français. La carte digitale est présentée au client dans sa langue préférée." },
   ] },
+  de: { title: "Häufig gestellte Fragen", items: [
+    { q: "Was ist Winerim?", a: "Winerim ist eine Technologieplattform, die sich auf die Verwaltung und Optimierung von Weinkarten für Restaurants spezialisiert. Sie kombiniert eine interaktive digitale Weinkarte, KI-Weinempfehlungen, automatische Speisenbegleitungen und Verkaufsanalytik, um Restaurants dabei zu helfen, mehr Wein zu verkaufen und das Gasterlebnis zu verbessern." },
+    { q: "Wozu dient Winerim?", a: "Winerim hilft Restaurants, ihre Weinkarte digital zu verwalten, Weine basierend auf dem gewählten Gericht zu empfehlen, Weinverkäufe zu analysieren, Preise zu optimieren und die Referenzrotation zu verbessern." },
+    { q: "Wie hilft Winerim, mehr Wein zu verkaufen?", a: "Durch intelligente Empfehlungen, eine interaktive digitale Weinkarte, die die Erkundung erleichtert, und Verkaufsanalytik, die es ermöglicht, Preise, Rotation und Referenzauswahl zu optimieren." },
+    { q: "Wie viel kostet Winerim?", a: "Winerim bietet Pläne, die sich an verschiedene Restaurantgrößen angepasst. Überprüfe aktuelle Pläne und Preise auf winerim.wine/de/preise oder fordere eine personalisierte Demo an." },
+    { q: "Funktioniert Winerim in mehreren Sprachen?", a: "Ja. Winerim ist mehrsprachig und funktioniert auf Deutsch, Englisch, Italienisch und Französisch. Die digitale Weinkarte wird dem Gast in seiner bevorzugten Sprache präsentiert." },
+  ] },
+  pt: { title: "Perguntas frequentes", items: [
+    { q: "O que é Winerim?", a: "Winerim é uma plataforma tecnológica especializada na gestão e otimização de cartas de vinhos para restaurantes. Combina uma carta digital interativa, recomendações de vinho com inteligência artificial, harmonizações automáticas e analítica de vendas para ajudar os restaurantes a vender mais vinho e melhorar a experiência do cliente." },
+    { q: "Para que serve Winerim?", a: "Winerim serve para gerir a carta de vinho de um restaurante de forma digital, recomendar vinhos aos clientes consoante o prato escolhido, analisar as vendas de vinho, otimizar os preços e melhorar a rotação de castas." },
+    { q: "Como ajuda Winerim a vender mais vinho?", a: "Através de recomendações inteligentes, uma carta digital interativa que facilita a exploração e analítica de vendas que permite otimizar preços, rotação e seleção de castas." },
+    { q: "Quanto custa Winerim?", a: "Winerim oferece planos adaptados a diferentes tamanhos de restaurante. Consulta os planos e preços atualizados em winerim.wine/pt/precos ou solicita uma demo personalizada." },
+    { q: "Winerim funciona em vários idiomas?", a: "Sim. Winerim é multilingue e funciona em português, inglês, italiano e francês. A carta digital é apresentada ao cliente no seu idioma preferido." },
+  ] },
 });
 
 const linksI = i({
@@ -264,6 +354,18 @@ const linksI = i({
     { to: "/fr/analyse-carte-des-vins", label: "Analyseur de carte", type: "tool" as const },
     { to: "/fr/generateur-accords", label: "Générateur d'accords", type: "tool" as const },
     { to: "/fr/tarifs", label: "Plans et tarifs", type: "resource" as const },
+  ],
+  de: [
+    { to: "/de/weinkarten-analysator", label: "Weinkarten-Software", type: "solution" as const },
+    { to: "/de/weinkarten-analysator", label: "Weinkarten-Analysator", type: "tool" as const },
+    { to: "/de/speisenbegleitungs-generator", label: "Speisenbegleitungs-Generator", type: "tool" as const },
+    { to: "/de/preise", label: "Pläne und Preise", type: "resource" as const },
+  ],
+  pt: [
+    { to: "/pt/analisador-carta-vinhos", label: "Software de carta de vinhos", type: "solution" as const },
+    { to: "/pt/analisador-carta-vinhos", label: "Analisador de carta", type: "tool" as const },
+    { to: "/pt/gerador-harmonizacoes", label: "Gerador de harmonizações", type: "tool" as const },
+    { to: "/pt/precos", label: "Planos e preços", type: "resource" as const },
   ],
 });
 
