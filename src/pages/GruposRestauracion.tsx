@@ -442,7 +442,27 @@ const FR: Content = { ...EN,
   ctaPrimary: "Je veux une démo pour mon groupe", ctaSecondary: "Analyser plusieurs unités",
 };
 
-const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR };
+const DE: Content = { ...EN,
+  metaTitle: "Winerim für Restaurantgruppen | Zentralisierte Weinkartenverwaltung",
+  metaDescription: "Zentralisieren Sie die Weinkartenverwaltung, optimieren Sie Preise und steigern Sie Umsätze in allen Ihren Locations.",
+  badgeLabel: "Restaurantgruppen", breadSolutions: "Lösungen", breadLabel: "Restaurantgruppen",
+  heroTitle1: "Intelligente Weinkartenverwaltung für ", heroTitleHighlight: "Restaurantgruppen",
+  heroDesc: "Zentralisieren Sie Weinkarten, Preisgestaltung und Performance über alle Ihre Lokale hinweg.",
+  ctaDemo: "Demo anfragen", ctaContact: "Mit Spezialisten sprechen",
+  ctaPrimary: "Ich möchte eine Demo für meine Gruppe", ctaSecondary: "Mehrere Units analysieren",
+};
+
+const PT: Content = { ...EN,
+  metaTitle: "Winerim para Grupos de Restauração | Gestão Centralizada de Vinhos",
+  metaDescription: "Centralize a gestão das cartas de vinho, otimize preços e aumente vendas em todos os seus estabelecimentos.",
+  badgeLabel: "Grupos de restauração", breadSolutions: "Soluções", breadLabel: "Grupos de restauração",
+  heroTitle1: "Gestão inteligente de vinho para ", heroTitleHighlight: "grupos de restauração",
+  heroDesc: "Centralize cartas, preços e performance de vinho em todos os seus estabelecimentos.",
+  ctaDemo: "Solicitar demonstração", ctaContact: "Falar com um especialista",
+  ctaPrimary: "Quero uma demonstração para meu grupo", ctaSecondary: "Analisar várias unidades",
+};
+
+const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR, de: DE, pt: PT };
 
 /* ─── icon maps ─── */
 const advantageIcons = [Building2, DollarSign, BarChart3, Wine, Users];

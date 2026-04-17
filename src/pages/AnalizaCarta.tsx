@@ -38,6 +38,8 @@ const seo = i({
   en: { title: "Free Wine List Analysis | Winerim", desc: "Submit your wine list and receive a free professional analysis with actionable recommendations to improve margins, rotation and sales. No commitment.", url: "https://winerim.wine/en/wine-list-analysis" },
   it: { title: "Analisi Gratuita della Carta dei Vini | Winerim", desc: "Invia la tua carta dei vini e ricevi un'analisi professionale gratuita con raccomandazioni per migliorare margini, rotazione e vendite. Senza impegno.", url: "https://winerim.wine/it/analisi-carta-vini" },
   fr: { title: "Analyse Gratuite de votre Carte des Vins | Winerim", desc: "Envoyez votre carte des vins et recevez une analyse professionnelle gratuite avec des recommandations pour améliorer marges, rotation et ventes. Sans engagement.", url: "https://winerim.wine/fr/analyse-carte-des-vins" },
+  de: { title: "Kostenlose Weinkarten-Analyse | Winerim", desc: "Senden Sie Ihre Weinkarte und erhalten Sie eine kostenlose professionelle Analyse mit praktischen Empfehlungen zur Verbesserung von Margen, Rotation und Verkäufen. Unverbindlich.", url: "https://winerim.wine/de/weinkarten-analyse" },
+  pt: { title: "Análise Gratuita da Sua Carta de Vinhos | Winerim", desc: "Envie a sua carta de vinhos e receba uma análise profissional gratuita com recomendações para melhorar margens, rotação e vendas. Sem compromisso.", url: "https://winerim.wine/pt/analise-carta-de-vinhos" },
 });
 
 const hero = i({
@@ -45,6 +47,8 @@ const hero = i({
   en: { badge: "100% free · No commitment", breadcrumb: "Tools", breadcrumb2: "Wine list analysis", h1_1: "Discover how much more you could ", h1_hl: "sell", h1_2: " with your wine list", sub: "We analyse your wine list and show you concrete opportunities to improve margins, rotation and sales. Free. In 48 h.", cta1: "Submit my wine list for analysis", cta2: "Paste my wine list link", tag1: "Report in 48 h", tag2: "No commitment", tag3: "100% free" },
   it: { badge: "100% gratuito · Senza impegno", breadcrumb: "Strumenti", breadcrumb2: "Analisi carta", h1_1: "Scopri quanto di più potresti ", h1_hl: "vendere", h1_2: " con la tua carta dei vini", sub: "Analizziamo la tua carta dei vini e ti mostriamo opportunità concrete per migliorare margini, rotazione e vendite. Gratis. In 48 h.", cta1: "Invia la mia carta per l'analisi", cta2: "Incolla il link della mia carta", tag1: "Report in 48 h", tag2: "Senza impegno", tag3: "100% gratuito" },
   fr: { badge: "100% gratuit · Sans engagement", breadcrumb: "Outils", breadcrumb2: "Analyse de carte", h1_1: "Découvrez combien vous pourriez ", h1_hl: "vendre", h1_2: " de plus avec votre carte des vins", sub: "Nous analysons votre carte des vins et vous montrons des opportunités concrètes pour améliorer marges, rotation et ventes. Gratuit. En 48 h.", cta1: "Envoyer ma carte pour analyse", cta2: "Coller le lien de ma carte", tag1: "Rapport en 48 h", tag2: "Sans engagement", tag3: "100% gratuit" },
+  de: { badge: "100% kostenlos · Unverbindlich", breadcrumb: "Werkzeuge", breadcrumb2: "Weinkarten-Analyse", h1_1: "Entdecken Sie, wie viel mehr Sie ", h1_hl: "verkaufen", h1_2: " könnten mit Ihrer Weinkarte", sub: "Wir analysieren Ihre Weinkarte und zeigen Ihnen konkrete Möglichkeiten zur Verbesserung von Margen, Rotation und Umsatz. Kostenlos. In 48 h.", cta1: "Weinkarte zur Analyse senden", cta2: "Weinkarten-Link einfügen", tag1: "Bericht in 48 h", tag2: "Unverbindlich", tag3: "100% kostenlos" },
+  pt: { badge: "100% gratuito · Sem compromisso", breadcrumb: "Ferramentas", breadcrumb2: "Análise de carta", h1_1: "Descubra quanto mais poderia ", h1_hl: "vender", h1_2: " com a sua carta de vinhos", sub: "Analisamos a sua carta de vinhos e mostramos-lhe oportunidades concretas para melhorar margens, rotação e vendas. Grátis. Em 48 h.", cta1: "Enviar a minha carta para análise", cta2: "Colar o link da minha carta", tag1: "Relatório em 48 h", tag2: "Sem compromisso", tag3: "100% gratuito" },
 });
 
 const visualCard = i({
@@ -52,6 +56,8 @@ const visualCard = i({
   en: { title: "Analysis report", sub: "Wine list · Example restaurant", bars: ["Structure", "Pricing", "Balance", "Rotation", "Pairings"], potential: "Estimated improvement potential", result: "+23% wine sales" },
   it: { title: "Rapporto di analisi", sub: "Carta dei vini · Ristorante esempio", bars: ["Struttura", "Prezzi", "Equilibrio", "Rotazione", "Abbinamenti"], potential: "Potenziale di miglioramento stimato", result: "+23% vendite di vino" },
   fr: { title: "Rapport d'analyse", sub: "Carte des vins · Restaurant exemple", bars: ["Structure", "Prix", "Équilibre", "Rotation", "Accords"], potential: "Potentiel d'amélioration estimé", result: "+23% ventes de vin" },
+  de: { title: "Analysebericht", sub: "Weinkarte · Beispielrestaurant", bars: ["Struktur", "Preise", "Gleichgewicht", "Rotation", "Speisebegleitung"], potential: "Geschätztes Verbesserungspotenzial", result: "+23% Weinverkäufe" },
+  pt: { title: "Relatório de análise", sub: "Carta de vinhos · Restaurante exemplo", bars: ["Estrutura", "Preços", "Equilíbrio", "Rotação", "Harmonizações"], potential: "Potencial de melhoria estimado", result: "+23% vendas de vinho" },
 });
 
 const summaryI = i({
@@ -59,6 +65,8 @@ const summaryI = i({
   en: { label: "Summary", def: "Winerim's wine list analysis is a free professional diagnostic that evaluates the structure, pricing, balance and improvement opportunities of your wine list to increase margins, rotation and sales.", bullets: ["Free and no commitment. No hidden costs.", "Report delivered within 48 hours.", "Combines algorithmic analysis with expert review.", "Actionable recommendations you can implement on your own.", "Designed for restaurants with 50+ wine references."] },
   it: { label: "Riepilogo", def: "L'analisi della carta di Winerim è una diagnosi professionale e gratuita che valuta struttura, prezzi, equilibrio e opportunità di miglioramento della tua carta dei vini per aumentare margini, rotazione e vendite.", bullets: ["Gratuita e senza impegno. Nessun costo nascosto.", "Report consegnato in meno di 48 ore.", "Combina analisi algoritmica con revisione esperta.", "Raccomandazioni attuabili che puoi implementare autonomamente.", "Progettata per ristoranti con 50+ referenze."] },
   fr: { label: "Résumé", def: "L'analyse de carte de Winerim est un diagnostic professionnel et gratuit qui évalue la structure, les prix, l'équilibre et les opportunités d'amélioration de votre carte des vins pour augmenter marges, rotation et ventes.", bullets: ["Gratuit et sans engagement. Aucun coût caché.", "Rapport livré en moins de 48 heures.", "Combine analyse algorithmique et expertise humaine.", "Recommandations actionnables que vous pouvez appliquer seul.", "Conçu pour les restaurants avec 50+ références."] },
+  de: { label: "Zusammenfassung", def: "Die Weinkarten-Analyse von Winerim ist eine kostenlose professionelle Diagnose, die die Struktur, Preise, das Gleichgewicht und Verbesserungsmöglichkeiten Ihrer Weinkarte bewertet, um Margen, Rotation und Umsatz zu erhöhen.", bullets: ["Kostenlos und unverbindlich. Keine versteckten Kosten.", "Bericht innerhalb von 48 Stunden geliefert.", "Kombiniert algorithmische Analyse mit Fachprüfung.", "Umsetzbare Empfehlungen, die Sie eigenständig anwenden können.", "Entworfen für Restaurants mit 50+ Weinreferenzen."] },
+  pt: { label: "Resumo", def: "A análise de carta da Winerim é um diagnóstico profissional gratuito que avalia a estrutura, preços, equilíbrio e oportunidades de melhoria da sua carta de vinhos para aumentar margens, rotação e vendas.", bullets: ["Gratuito e sem compromisso. Sem custos ocultos.", "Relatório entregue em menos de 48 horas.", "Combina análise algorítmica com revisão especializada.", "Recomendações acionáveis que pode implementar por conta própria.", "Pensado para restaurantes com 50+ referências."] },
 });
 
 const painsI = i({
@@ -94,6 +102,22 @@ const painsI = i({
     { icon: Target, text: "Vous avez des vins qui se cannibalisent sans apporter de variété réelle." },
     { icon: TrendingUp, text: "Vous ne profitez pas des opportunités de vente au verre qui multiplieraient votre ticket." },
   ],
+  de: [
+    { icon: AlertTriangle, text: "Sie wissen nicht, wie viele Weine auf Ihrer Karte seit Monaten nicht verkauft wurden." },
+    { icon: DollarSign, text: "Ihre Preise sind nicht darauf abgestimmt, was Gäste zahlen möchten." },
+    { icon: Layers, text: "Die Karte spiegelt nicht die Identität Ihres Restaurants oder das gastronomische Angebot wider." },
+    { icon: Eye, text: "Gäste verlieren sich, verstehen die Karte nicht und wählen die billigste Option." },
+    { icon: Target, text: "Sie haben Weine, die sich gegenseitig kannibalisieren, ohne echte Vielfalt zu bieten." },
+    { icon: TrendingUp, text: "Sie nutzen Glaseweise-Verkaufsmöglichkeiten nicht, die Ihren Durchschnittspreis vervielfachen könnten." },
+  ],
+  pt: [
+    { icon: AlertTriangle, text: "Não sabe quantos vinhos da sua carta não se vendem há meses." },
+    { icon: DollarSign, text: "Os seus preços não estão alinhados com o que o cliente está disposto a pagar." },
+    { icon: Layers, text: "A carta não reflete a identidade do seu restaurante ou a sua oferta gastronómica." },
+    { icon: Eye, text: "O cliente perde-se, não percebe a carta e acaba a escolher a opção mais barata." },
+    { icon: Target, text: "Tem vinhos que se canibalizam entre si sem adicionar variedade real." },
+    { icon: TrendingUp, text: "Não aproveita oportunidades de venda a copo que multiplicariam o seu bilhete." },
+  ],
 });
 
 const painsSectionI = i({
@@ -101,6 +125,8 @@ const painsSectionI = i({
   en: { badge: "Sound familiar?", title1: "Problems most wine lists ", titleHl: "fail to detect", sub: "These issues are very common and, without rigorous analysis, go unnoticed for months or years." },
   it: { badge: "Ti suona familiare?", title1: "I problemi che la maggior parte delle carte ", titleHl: "non rileva", sub: "Questi problemi sono molto comuni e, senza un'analisi rigorosa, passano inosservati per mesi o anni." },
   fr: { badge: "Ça vous parle ?", title1: "Les problèmes que la plupart des cartes ", titleHl: "ne détectent pas", sub: "Ces problèmes sont très courants et, sans une analyse rigoureuse, passent inaperçus pendant des mois ou des années." },
+  de: { badge: "Kommt Ihnen bekannt vor?", title1: "Probleme, die die meisten Weinkarten ", titleHl: "nicht erkennen", sub: "Diese Probleme sind sehr verbreitet und werden ohne eine gründliche Analyse Monate oder Jahre lang übersehen." },
+  pt: { badge: "Isto soa-lhe familiar?", title1: "Os problemas que a maioria das cartas ", titleHl: "não detetar", sub: "Estes problemas são muito comuns e, sem uma análise rigorosa, passam despercebidos durante meses ou anos." },
 });
 
 const quickAnswerI = i({
@@ -108,6 +134,8 @@ const quickAnswerI = i({
   en: { q: "Why analyse the list before changing it?", a: "Changing a wine list without data is like operating without a diagnosis. Prior analysis enables evidence-based decisions: what to remove, add, highlight and at what price. Without it, changes are intuitive and results unpredictable.", details: ["You avoid removing a wine that sells well or adding one that cannibalises another.", "You discover whether the issue is assortment, price, structure or communication.", "You prioritise highest-impact actions with least operational effort.", "You build a dataset to measure the outcome of changes."], source: "Winerim wine list optimisation methodology, based on the analysis of 500+ wine lists." },
   it: { q: "Perché analizzare la carta prima di modificarla?", a: "Cambiare una carta dei vini senza dati è come operare senza diagnosi. L'analisi preventiva permette decisioni basate su evidenze: cosa eliminare, aggiungere, evidenziare e a quale prezzo. Senza, i cambiamenti sono intuitivi e i risultati imprevedibili.", details: ["Eviti di eliminare un vino che vende bene o aggiungerne uno che cannibalizza un altro.", "Scopri se il problema è l'assortimento, il prezzo, la struttura o la comunicazione.", "Dai priorità alle azioni a maggiore impatto con minore sforzo operativo.", "Costruisci una base dati per misurare il risultato del cambiamento."], source: "Metodologia di ottimizzazione delle carte di Winerim, basata sull'analisi di oltre 500 carte dei vini." },
   fr: { q: "Pourquoi analyser la carte avant de la modifier ?", a: "Modifier une carte des vins sans données, c'est comme opérer sans diagnostic. L'analyse préalable permet de prendre des décisions fondées sur des preuves : quoi supprimer, ajouter, mettre en avant et à quel prix. Sans elle, les changements sont intuitifs et les résultats imprévisibles.", details: ["Vous évitez de supprimer un vin qui se vend bien ou d'en ajouter un qui cannibalise un autre.", "Vous découvrez si le problème vient de l'assortiment, du prix, de la structure ou de la communication.", "Vous priorisez les actions à plus fort impact avec le moindre effort opérationnel.", "Vous construisez une base de données pour mesurer le résultat du changement."], source: "Méthodologie d'optimisation de carte Winerim, basée sur l'analyse de plus de 500 cartes des vins." },
+  de: { q: "Warum die Weinkarte vor einer Änderung analysieren?", a: "Eine Weinkarte ohne Daten zu ändern ist wie eine Operation ohne Diagnose. Vorherige Analyse ermöglicht datengestützte Entscheidungen: was entfernen, hinzufügen, hervorheben und zu welchem Preis. Ohne sie sind Änderungen intuitiv und Ergebnisse unvorhersehbar.", details: ["Sie vermeiden, einen gut verkauften Wein zu entfernen oder einen hinzuzufügen, der einen anderen kannibalisiert.", "Sie entdecken, ob das Problem im Sortiment, Preis, Struktur oder Kommunikation liegt.", "Sie priorisieren Maßnahmen mit höchster Auswirkung mit minimalem operativem Aufwand.", "Sie erstellen einen Datensatz, um das Ergebnis von Änderungen zu messen."], source: "Winerim-Optimierungsmethodik für Weinkarten, basierend auf der Analyse von über 500 Weinkarten." },
+  pt: { q: "Porque analisar a carta antes de a modificar?", a: "Mudar uma carta de vinhos sem dados é como operar sem diagnóstico. A análise prévia permite decisões baseadas em evidências: o que remover, adicionar, destacar e a que preço. Sem ela, as mudanças são intuitivas e os resultados imprevisíveis.", details: ["Evita remover um vinho que vende bem ou adicionar um que canibaliza outro.", "Descobre se o problema está no sortimento, preço, estrutura ou comunicação.", "Prioriza ações de maior impacto com mínimo esforço operacional.", "Cria um conjunto de dados para medir o resultado das mudanças."], source: "Metodologia de otimização de cartas Winerim, baseada na análise de mais de 500 cartas de vinhos." },
 });
 
 const comparisonI = i({
@@ -115,6 +143,8 @@ const comparisonI = i({
   en: { title: "Intuition vs. data-driven analysis", sub: "The difference between changing your list and optimising it.", cols: ["Intuition", "Data analysis"], rows: [{ feature: "Detect non-rotating wines", options: ["partial" as const, true] }, { feature: "Identify reference cannibalisation", options: [false, true] }, { feature: "Optimise price distribution", options: ["partial" as const, true] }, { feature: "Measure impact of changes", options: [false, true] }, { feature: "Prioritise actions by economic impact", options: [false, true] }, { feature: "Detect by-the-glass opportunities", options: ["partial" as const, true] }, { feature: "Align list with gastronomic profile", options: ["partial" as const, true] }, { feature: "Replicable and scalable across locations", options: [false, true] }] },
   it: { title: "Intuizione vs. analisi con dati", sub: "La differenza tra cambiare la carta e ottimizzarla.", cols: ["Intuizione", "Analisi con dati"], rows: [{ feature: "Rilevare vini senza rotazione", options: ["partial" as const, true] }, { feature: "Identificare cannibalizzazione di referenze", options: [false, true] }, { feature: "Ottimizzare distribuzione dei prezzi", options: ["partial" as const, true] }, { feature: "Misurare l'impatto dei cambiamenti", options: [false, true] }, { feature: "Prioritizzare azioni per impatto economico", options: [false, true] }, { feature: "Rilevare opportunità di vendita al calice", options: ["partial" as const, true] }, { feature: "Allineare carta con profilo gastronomico", options: ["partial" as const, true] }, { feature: "Replicabile e scalabile su più locali", options: [false, true] }] },
   fr: { title: "Intuition vs. analyse par les données", sub: "La différence entre changer la carte et l'optimiser.", cols: ["Intuition", "Analyse par données"], rows: [{ feature: "Détecter les vins sans rotation", options: ["partial" as const, true] }, { feature: "Identifier la cannibalisation de références", options: [false, true] }, { feature: "Optimiser la distribution des prix", options: ["partial" as const, true] }, { feature: "Mesurer l'impact des changements", options: [false, true] }, { feature: "Prioriser les actions par impact économique", options: [false, true] }, { feature: "Détecter les opportunités de vente au verre", options: ["partial" as const, true] }, { feature: "Aligner la carte avec le profil gastronomique", options: ["partial" as const, true] }, { feature: "Réplicable et évolutif sur plusieurs établissements", options: [false, true] }] },
+  de: { title: "Intuition vs. datengestützte Analyse", sub: "Der Unterschied zwischen Änderung und Optimierung der Weinkarte.", cols: ["Intuition", "Datenanalyse"], rows: [{ feature: "Weine ohne Rotation erkennen", options: ["partial" as const, true] }, { feature: "Kannibalisierung von Referenzen identifizieren", options: [false, true] }, { feature: "Preisverteilung optimieren", options: ["partial" as const, true] }, { feature: "Auswirkungen von Änderungen messen", options: [false, true] }, { feature: "Maßnahmen nach wirtschaftlicher Auswirkung priorisieren", options: [false, true] }, { feature: "Glaseweise-Verkaufsmöglichkeiten erkennen", options: ["partial" as const, true] }, { feature: "Weinkarte mit gastronomischem Profil abstimmen", options: ["partial" as const, true] }, { feature: "Replizierbar und skalierbar über mehrere Standorte", options: [false, true] }] },
+  pt: { title: "Intuição vs. análise orientada por dados", sub: "A diferença entre alterar a carta e otimizá-la.", cols: ["Intuição", "Análise de dados"], rows: [{ feature: "Detetar vinhos sem rotação", options: ["partial" as const, true] }, { feature: "Identificar cannibalização de referências", options: [false, true] }, { feature: "Otimizar distribuição de preços", options: ["partial" as const, true] }, { feature: "Medir impacto das alterações", options: [false, true] }, { feature: "Priorizar ações por impacto económico", options: [false, true] }, { feature: "Detetar oportunidades de venda a copo", options: ["partial" as const, true] }, { feature: "Alinhar carta com perfil gastronómico", options: ["partial" as const, true] }, { feature: "Replicável e escalável em múltiplos locais", options: [false, true] }] },
 });
 
 const analysisPointsI = i({
@@ -158,6 +188,26 @@ const analysisPointsI = i({
     { icon: TrendingUp, title: "Positionnement stratégique", desc: "Nous évaluons quels vins devraient être mis en avant pour maximiser la marge." },
     { icon: FileText, title: "Structure et ergonomie", desc: "Nous examinons comment la carte est organisée et si elle facilite le choix du client." },
   ] },
+  de: { badge: "Was wir analysieren", title1: "8 Dimensionen Ihrer ", titleHl: "Weinkarte", sub: "Jede Karte wird aus mehreren Winkeln analysiert, um alle Verbesserungsmöglichkeiten aufzudecken.", items: [
+    { icon: DollarSign, title: "Preisverteilung", desc: "Wir analysieren, wie Preisbereiche verteilt sind und ob Lücken den Verkauf behindern." },
+    { icon: Layers, title: "Kartenengleichgewicht", desc: "Wir bewerten das Verhältnis von Rot-, Weiß-, Rosé- und Schaumweinen zu Ihrem gastronomischen Profil." },
+    { icon: Wine, title: "Glaseweise-Verkaufsmöglichkeiten", desc: "Wir identifizieren Weine, die ideal für den Glasverkauf sind, um die durchschnittliche Ausgabe zu erhöhen." },
+    { icon: BarChart3, title: "Rotationspotenzial", desc: "Wir erkennen Referenzen mit niedriger Rotationswahrscheinlichkeit anhand von Preis, Typ und Positionierung." },
+    { icon: Target, title: "Doppelte oder kannibalisierte Weine", desc: "Wir finden Referenzen, die miteinander konkurrieren, ohne echte Vielfalt zu bieten." },
+    { icon: Utensils, title: "Speisebegleitungs-Möglichkeiten", desc: "Wir schlagen Kombinationen mit Ihrer Speisekarte vor, um Querverk aufe zu fördern." },
+    { icon: TrendingUp, title: "Strategische Positionierung", desc: "Wir bewerten, welche Weine hervorgehoben werden sollten, um die Marge zu maximieren." },
+    { icon: FileText, title: "Struktur und Benutzerfreundlichkeit", desc: "Wir überprüfen, wie die Karte organisiert ist und ob sie Gästeentscheidungen erleichtert." },
+  ] },
+  pt: { badge: "O que analisamos", title1: "8 dimensões da ", titleHl: "sua carta", sub: "Cada carta é analisada de múltiplos ângulos para descobrir todas as oportunidades de melhoria.", items: [
+    { icon: DollarSign, title: "Distribuição de preços", desc: "Analisamos como os intervalos de preço são distribuídos e se as lacunas estão impedindo vendas." },
+    { icon: Layers, title: "Equilíbrio da carta", desc: "Avaliamos a proporção de vinhos tinto, branco, rosé e espumante em relação ao seu perfil gastronómico." },
+    { icon: Wine, title: "Oportunidades de venda a copo", desc: "Identificamos vinhos ideais para venda a copo para aumentar a despesa média." },
+    { icon: BarChart3, title: "Potencial de rotação", desc: "Detetamos referências com baixa probabilidade de rotação com base no preço, tipo e posicionamento." },
+    { icon: Target, title: "Vinhos duplicados ou canibalizados", desc: "Encontramos referências que competem entre si sem adicionar variedade real." },
+    { icon: Utensils, title: "Oportunidades de harmonização", desc: "Sugerimos combinações com o seu menu para impulsionar vendas cruzadas." },
+    { icon: TrendingUp, title: "Posicionamento estratégico", desc: "Avaliamos quais vinhos devem ser destacados para maximizar a margem." },
+    { icon: FileText, title: "Estrutura e usabilidade", desc: "Revisamos como a carta está organizada e se facilita as decisões do cliente." },
+  ] },
 });
 
 const reportI = i({
@@ -193,6 +243,22 @@ const reportI = i({
     { icon: TrendingUp, title: "Potentiel de ventes", desc: "Estimation de l'augmentation possible des ventes de vin." },
     { icon: BarChart3, title: "Impact économique estimé", desc: "Projection de l'impact sur le ticket moyen et le chiffre d'affaires mensuel." },
   ] },
+  de: { badge: "Ihr Bericht", title1: "Was in ", titleHl: "Ihrem Bericht enthalten ist", items: [
+    { icon: FileText, title: "Strukturanalyse", desc: "Organisation, Kategorien und Hierarchie der Weinkarte." },
+    { icon: DollarSign, title: "Bewertung der Preisbereiche", desc: "Preispositionierung, Skalierung und Ankereffekt." },
+    { icon: Layers, title: "Sortimentsoptimierung", desc: "Empfehlungen zu hinzuzufügenden, zu entfernenden oder hervorzuhebenden Referenzen." },
+    { icon: Zap, title: "Konkrete Empfehlungen", desc: "Spezifische Maßnahmen zur Verbesserung von Marge, Rotation und Erlebnis." },
+    { icon: TrendingUp, title: "Verkaufspotenzial", desc: "Schätzung möglicher Steigerung des Weinverkaufs." },
+    { icon: BarChart3, title: "Geschätzter wirtschaftlicher Auswirkungen", desc: "Projektion der Auswirkung auf Durchschnittspreis und monatliche Einnahmen." },
+  ] },
+  pt: { badge: "Seu relatório", title1: "O que está incluído no ", titleHl: "seu relatório", items: [
+    { icon: FileText, title: "Análise de estrutura", desc: "Organização, categorias e hierarquia da carta de vinhos." },
+    { icon: DollarSign, title: "Avaliação dos intervalos de preço", desc: "Posicionamento de preços, escala e efeito de âncora." },
+    { icon: Layers, title: "Otimização do sortimento", desc: "Recomendações sobre referências a adicionar, remover ou destacar." },
+    { icon: Zap, title: "Recomendações concretas", desc: "Ações específicas para melhorar margem, rotação e experiência." },
+    { icon: TrendingUp, title: "Potencial de vendas", desc: "Estimativa de aumento possível nas vendas de vinho." },
+    { icon: BarChart3, title: "Impacto económico estimado", desc: "Projeção do impacto no bilhete médio e receita mensal." },
+  ] },
 });
 
 const stepsI = i({
@@ -216,6 +282,16 @@ const stepsI = i({
     { num: "2", title: "Notre équipe l'analyse", desc: "Nous examinons structure, prix, équilibre, rotation et opportunités d'amélioration avec des données." },
     { num: "3", title: "Vous recevez votre rapport", desc: "En moins de 48 h vous recevrez un rapport détaillé avec des recommandations actionnables." },
   ] },
+  de: { title1: "So ", titleHl: "einfach", items: [
+    { num: "1", title: "Laden Sie Ihre Karte oder Ihren Link hoch", desc: "Fügen Sie das PDF Ihrer Weinkarte bei oder geben Sie die URL ein, falls sie digital vorliegt. Beliebiges Format." },
+    { num: "2", title: "Unser Team analysiert sie", desc: "Wir überprüfen Struktur, Preise, Gleichgewicht, Rotation und Verbesserungsmöglichkeiten mit Daten." },
+    { num: "3", title: "Sie erhalten Ihren Bericht", desc: "Innerhalb von 48 h erhalten Sie einen detaillierten Bericht mit umsetzbaren Empfehlungen." },
+  ] },
+  pt: { title1: "É tão ", titleHl: "simples", items: [
+    { num: "1", title: "Envie a sua carta ou link", desc: "Anexe o PDF da sua carta de vinhos ou cole a URL se for digital. Qualquer formato." },
+    { num: "2", title: "A nossa equipa analisa-a", desc: "Revisamos estrutura, preços, equilíbrio, rotação e oportunidades de melhoria com dados." },
+    { num: "3", title: "Recebe o seu relatório", desc: "Em menos de 48 h receberá um relatório detalhado com recomendações acionáveis." },
+  ] },
 });
 
 const discoveriesI = i({
@@ -223,6 +299,8 @@ const discoveriesI = i({
   en: { badge: "Real findings", title1: "What our analyses ", titleHl: "uncover", sub: "These are real findings detected in wine lists from restaurants like yours.", items: ["35% of references in the same price bracket, causing cannibalisation and confusion.", "Wines with high purchase price and margins below the market average.", "Obvious gaps in the offer: no accessible sparkling wines, no whites by the glass, no local options.", "Untapped by-the-glass opportunities that could increase the average ticket by 15-25%.", "Natural pairings with the food menu that are neither communicated nor suggested.", "References that haven't rotated in over 6 months, taking up space on the list and in the cellar."] },
   it: { badge: "Scoperte reali", title1: "Cosa scoprono le nostre ", titleHl: "analisi", sub: "Queste sono scoperte reali rilevate in carte di ristoranti come il tuo.", items: ["Il 35% delle referenze nella stessa fascia di prezzo, generando cannibalizzazione e confusione.", "Vini con prezzo d'acquisto alto e margine sotto la media di mercato.", "Lacune evidenti nell'offerta: nessuno spumante accessibile, nessun bianco al calice, nessuna opzione locale.", "Opportunità di vendita al calice non sfruttate che potrebbero aumentare lo scontrino medio del 15-25%.", "Abbinamenti naturali con il menu gastronomico non comunicati né suggeriti.", "Referenze che non ruotano da oltre 6 mesi, occupando spazio in carta e in cantina."] },
   fr: { badge: "Découvertes réelles", title1: "Ce que nos analyses ", titleHl: "révèlent", sub: "Voici des découvertes réelles détectées dans des cartes de restaurants comme le vôtre.", items: ["35% des références dans la même tranche de prix, générant cannibalisation et confusion.", "Des vins avec un prix d'achat élevé et une marge inférieure à la moyenne du marché.", "Des lacunes évidentes dans l'offre : pas d'effervescents accessibles, pas de blancs au verre, pas d'options locales.", "Des opportunités de vente au verre inexploitées qui pourraient augmenter le ticket moyen de 15-25%.", "Des accords naturels avec la carte gastronomique ni communiqués ni suggérés.", "Des références sans rotation depuis plus de 6 mois, occupant de l'espace en carte et en cave."] },
+  de: { badge: "Echte Erkenntnisse", title1: "Was unsere Analysen ", titleHl: "enthüllen", sub: "Dies sind echte Erkenntnisse, die in Weinkarten von Restaurants wie Ihrem erkannt wurden.", items: ["35% der Referenzen in derselben Preisrange, was zu Kannibalisierung und Verwirrung führt.", "Weine mit hohem Einkaufspreis und Marge unter dem Marktdurchschnitt.", "Offensichtliche Lücken im Angebot: keine zugänglichen Schaumweine, keine Weißweine nach Glas, keine lokalen Optionen.", "Ungenutzte Glaseweise-Verkaufsmöglichkeiten, die das Durchschnittticket um 15-25% erhöhen könnten.", "Natürliche Speisen­begleitungen mit der Speisekarte, die weder kommuniziert noch vorgeschlagen werden.", "Referenzen, die seit über 6 Monaten nicht rotiert sind und Platz auf der Karte und im Weinkeller belegen."] },
+  pt: { badge: "Descobertas reais", title1: "O que as nossas análises ", titleHl: "revelam", sub: "Estas são descobertas reais detetadas em cartas de restaurantes como o seu.", items: ["35% das referências no mesmo intervalo de preço, causando canibalizacao e confusão.", "Vinhos com preço de compra elevado e margem abaixo da média do mercado.", "Lacunas óbvias na oferta: sem espumantes acessíveis, sem brancos a copo, sem opções locais.", "Oportunidades de venda a copo não exploradas que poderiam aumentar o bilhete médio em 15-25%.", "Harmonizações naturais com o menu de comida que não são comunicadas nem sugeridas.", "Referências que não rodam há mais de 6 meses, ocupando espaço na carta e na garrafeira."] },
 });
 
 const whoFitsI = i({
@@ -250,6 +328,18 @@ const whoFitsI = i({
     { profile: "Hôtels avec F&B", desc: "Plusieurs points de vente avec des cartes à aligner." },
     { profile: "Restaurants qui veulent vendre plus de vin", desc: "Si votre carte 'informe' mais ne 'vend' pas, c'est pour vous." },
   ], note: "si votre carte a moins de 20 références, l'analyse sera moins révélatrice. Elle peut néanmoins vous donner des idées utiles sur la structure et le pricing." },
+  de: { badge: "Wofür ist es geeignet?", title1: "Welche Profile ", titleHl: "profitieren am meisten?", items: [
+    { profile: "Restaurants mit 50+ Referenzen", desc: "Je größer die Karte, desto mehr Optimierungsmöglichkeiten." },
+    { profile: "Restaurantgruppen", desc: "Kohärenzanalyse zwischen Standorten und Zentralisierungsmöglichkeiten." },
+    { profile: "Hotels mit F&B", desc: "Mehrere Verkaufsstellen mit Weinkarten, die abgestimmt werden müssen." },
+    { profile: "Restaurants, die mehr Wein verkaufen möchten", desc: "Wenn Ihre Karte 'informiert', aber nicht 'verkauft', ist dies für Sie." },
+  ], note: "Wenn Ihre Karte weniger als 20 Weinreferenzen hat, ist die Analyse weniger aufschlussreich. Sie kann Ihnen aber immer noch nützliche Ideen zu Struktur und Preisgestaltung geben." },
+  pt: { badge: "Para quem é", title1: "Quais perfis ", titleHl: "beneficiam mais?", items: [
+    { profile: "Restaurantes com 50+ referências", desc: "Quanto maior a carta, mais oportunidades de otimização." },
+    { profile: "Grupos de restauração", desc: "Análise de coerência entre locais e oportunidades de centralização." },
+    { profile: "Hotéis com F&B", desc: "Múltiplos pontos de venda com cartas que precisam de alinhamento." },
+    { profile: "Restaurantes que querem vender mais vinho", desc: "Se a sua carta 'informa' mas não 'vende', isto é para si." },
+  ], note: "se a sua carta tem menos de 20 referências de vinho, a análise será menos reveladora. Ainda pode dar-lhe ideias úteis sobre estrutura e preços." },
 });
 
 const afterI = i({
@@ -277,6 +367,18 @@ const afterI = i({
     { title: "Vous décidez sans pression", desc: "L'analyse est à vous. Vous pouvez l'appliquer seul ou avec notre aide." },
     { title: "Si ça correspond, nous vous proposons Winerim", desc: "Nous vous montrons comment Winerim automatise les améliorations détectées, adapté à votre cas." },
   ] },
+  de: { badge: "Nach der Analyse", title1: "Was kommt ", titleHl: "danach", items: [
+    { title: "Sie erhalten den Bericht", desc: "Ein klares Dokument mit Diagnose, Möglichkeiten und priorisierten Empfehlungen." },
+    { title: "Wir überprüfen die Ergebnisse gemeinsam", desc: "Wenn gewünscht, planen wir einen 20-minütigen Anruf, um die wichtigsten Punkte zu erklären." },
+    { title: "Sie entscheiden ohne Druck", desc: "Die Analyse gehört Ihnen. Sie können sie eigenständig oder mit unserer Hilfe umsetzen." },
+    { title: "Wenn es passt, schlagen wir Winerim vor", desc: "Wir zeigen Ihnen, wie Winerim die erkannten Verbesserungen automatisiert, angepasst an Ihren Fall." },
+  ] },
+  pt: { badge: "Após a análise", title1: "O que acontece ", titleHl: "depois", items: [
+    { title: "Recebe o relatório", desc: "Um documento claro com diagnóstico, oportunidades e recomendações priorizadas." },
+    { title: "Revisamos os resultados juntos", desc: "Se desejar, agendamos uma chamada de 20 min para explicar os pontos-chave." },
+    { title: "Decide sem pressão", desc: "A análise é sua. Pode aplicá-la sozinho ou com a nossa ajuda." },
+    { title: "Se se ajustar, propomos Winerim", desc: "Mostramos como Winerim automatiza as melhorias detetadas, adaptado ao seu caso." },
+  ] },
 });
 
 const formI = i({
@@ -284,6 +386,8 @@ const formI = i({
   en: { badge: "Submit your list", title1: "Analyse your wine list ", titleHl: "now", sub: "Complete the form and you'll receive your report within 48 hours. Free.", restaurantLabel: "Restaurant name", restaurantPh: "E.g. The Wine House", emailLabel: "Email", cityLabel: "City", cityPh: "E.g. London", refsLabel: "No. of references", refsPh: "Select a range", bizLabel: "Business type", bizPh: "Select business type", uploadBtn: "Upload file", linkBtn: "Paste link", dropText: "Click or drag your wine list", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Wine list URL", linkPh: "https://your-restaurant.com/wine-list", submit: "Submit wine list for free analysis", submitting: "Submitting…", disclaimer: "No commitment. Report within 48 h.", errRequired: "Please complete the required fields.", errFormat: "Unsupported format. Upload a PDF or image (JPG, PNG, WebP).", errSize: "File is too large. Maximum 10 MB.", errUpload: "Error uploading file. Please try again.", errSubmit: "Error submitting. Please try again.", success: "Wine list received! We'll send you the analysis within 48 h." },
   it: { badge: "Invia la tua carta", title1: "Analizza la tua carta dei vini ", titleHl: "adesso", sub: "Compila il modulo e riceverai il tuo report in meno di 48 ore. Gratis.", restaurantLabel: "Nome del ristorante", restaurantPh: "Es. Ristorante La Vigna", emailLabel: "Email", cityLabel: "Città", cityPh: "Es. Milano", refsLabel: "N° di referenze", refsPh: "Seleziona un range", bizLabel: "Tipo di attività", bizPh: "Seleziona tipo di attività", uploadBtn: "Carica file", linkBtn: "Incolla link", dropText: "Clicca o trascina la tua carta dei vini", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "URL della tua carta", linkPh: "https://il-tuo-ristorante.com/carta-vini", submit: "Invia carta per analisi gratuita", submitting: "Invio in corso…", disclaimer: "Senza impegno. Report in meno di 48 h.", errRequired: "Compila i campi obbligatori.", errFormat: "Formato non supportato. Carica un PDF o immagine (JPG, PNG, WebP).", errSize: "Il file è troppo grande. Massimo 10 MB.", errUpload: "Errore durante il caricamento. Riprova.", errSubmit: "Errore durante l'invio. Riprova.", success: "Carta ricevuta! Ti invieremo l'analisi in meno di 48 h." },
   fr: { badge: "Envoyez votre carte", title1: "Analysez votre carte des vins ", titleHl: "maintenant", sub: "Remplissez le formulaire et vous recevrez votre rapport en moins de 48 heures. Gratuit.", restaurantLabel: "Nom du restaurant", restaurantPh: "Ex. Restaurant La Vigne", emailLabel: "Email", cityLabel: "Ville", cityPh: "Ex. Paris", refsLabel: "Nb de références", refsPh: "Sélectionnez une tranche", bizLabel: "Type d'établissement", bizPh: "Sélectionnez le type", uploadBtn: "Télécharger fichier", linkBtn: "Coller le lien", dropText: "Cliquez ou glissez votre carte des vins", dropSub: "PDF, JPG, PNG · Max 10 Mo", linkLabel: "URL de votre carte", linkPh: "https://votre-restaurant.com/carte-des-vins", submit: "Envoyer la carte pour analyse gratuite", submitting: "Envoi en cours…", disclaimer: "Sans engagement. Rapport en moins de 48 h.", errRequired: "Veuillez compléter les champs obligatoires.", errFormat: "Format non supporté. Envoyez un PDF ou une image (JPG, PNG, WebP).", errSize: "Le fichier est trop volumineux. Maximum 10 Mo.", errUpload: "Erreur lors de l'envoi du fichier. Réessayez.", errSubmit: "Erreur lors de l'envoi. Réessayez.", success: "Carte reçue ! Nous vous enverrons l'analyse en moins de 48 h." },
+  de: { badge: "Weinkarte senden", title1: "Analysieren Sie Ihre Weinkarte ", titleHl: "jetzt", sub: "Füllen Sie das Formular aus und Sie erhalten Ihren Bericht in weniger als 48 Stunden. Kostenlos.", restaurantLabel: "Restaurantname", restaurantPh: "Z.B. Restaurant Zum Wein", emailLabel: "Email", cityLabel: "Stadt", cityPh: "Z.B. Berlin", refsLabel: "Anzahl der Referenzen", refsPh: "Wählen Sie einen Bereich", bizLabel: "Geschäftstyp", bizPh: "Wählen Sie den Geschäftstyp", uploadBtn: "Datei hochladen", linkBtn: "Link einfügen", dropText: "Klicken Sie auf oder ziehen Sie Ihre Weinkarte", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Weinkarten-URL", linkPh: "https://ihr-restaurant.com/weinkarte", submit: "Weinkarte zur kostenlosen Analyse senden", submitting: "Wird gesendet…", disclaimer: "Unverbindlich. Bericht in weniger als 48 h.", errRequired: "Bitte füllen Sie die erforderlichen Felder aus.", errFormat: "Nicht unterstütztes Format. Laden Sie ein PDF oder Bild (JPG, PNG, WebP) hoch.", errSize: "Datei ist zu groß. Maximum 10 MB.", errUpload: "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut.", errSubmit: "Fehler beim Senden. Bitte versuchen Sie es erneut.", success: "Weinkarte empfangen! Wir senden Ihnen die Analyse in weniger als 48 h." },
+  pt: { badge: "Envie a sua carta", title1: "Analise a sua carta de vinhos ", titleHl: "agora", sub: "Preencha o formulário e receberá o seu relatório em menos de 48 horas. Gratuitamente.", restaurantLabel: "Nome do restaurante", restaurantPh: "Ex. Restaurante Os Vinhos", emailLabel: "Email", cityLabel: "Cidade", cityPh: "Ex. Lisboa", refsLabel: "N.º de referências", refsPh: "Seleccione um intervalo", bizLabel: "Tipo de negócio", bizPh: "Seleccione o tipo de negócio", uploadBtn: "Fazer upload do ficheiro", linkBtn: "Colar link", dropText: "Clique ou arraste a sua carta de vinhos", dropSub: "PDF, JPG, PNG · Máx 10 MB", linkLabel: "URL da carta de vinhos", linkPh: "https://seu-restaurante.com/carta-de-vinhos", submit: "Enviar carta para análise gratuita", submitting: "Enviando…", disclaimer: "Sem compromisso. Relatório em menos de 48 h.", errRequired: "Por favor, preencha os campos obrigatórios.", errFormat: "Formato não suportado. Envie um PDF ou imagem (JPG, PNG, WebP).", errSize: "O ficheiro é muito grande. Máximo 10 MB.", errUpload: "Erro ao fazer upload do ficheiro. Tente novamente.", errSubmit: "Erro ao enviar. Tente novamente.", success: "Carta de vinhos recebida! Enviaremos a análise em menos de 48 h." },
 });
 
 const faqsI = i({
@@ -317,7 +421,7 @@ const faqsI = i({
     { q: "Quanto tempo ci vuole per il report?", a: "Meno di 48 ore lavorative dal ricevimento della tua carta." },
     { q: "Quali informazioni vi servono?", a: "Solo la tua carta dei vini, il nome del ristorante e la tua email. Il resto è opzionale ma ci aiuta a personalizzare l'analisi." },
     { q: "Cercherete di vendermi qualcosa?", a: "No. Il report è tuo e puoi applicarlo autonomamente. Se è adatto, ti spiegheremo come Winerim può automatizzare i miglioramenti — senza pressione." },
-    { q: "Quali ristoranti ne traggono più vantaggio?", a: "Ristoranti con 50+ referenze, gruppi di ristorazione e hotel con F&B. Con meno di 50 referenze, l'analisi è comunque utile ma l'impatto sarà minore." },
+    { q: "Quali ristoranti ne traggono più vantaggio?", a: "Ristoranti con 50+ referenze, gruppi di ristorazione e hotel con F&B. Con meno di 50 referenze, l'analisi è comunque utile ma l'impacto sarà minore." },
     { q: "È un'analisi automatica o fatta da una persona?", a: "Combiniamo analisi algoritmica con revisione esperta. Il risultato è un report professionale, non un output generico di IA." },
     { q: "Posso applicare le raccomandazioni senza assumere Winerim?", a: "Sì, al 100%. Il report include raccomandazioni attuabili che puoi implementare in modo indipendente." },
     { q: "I miei dati sono al sicuro?", a: "Sì. Usiamo la tua carta solo per l'analisi. Non condividiamo dati con terzi. Consulta la nostra privacy policy." },
@@ -335,6 +439,30 @@ const faqsI = i({
     { q: "Mes données sont-elles en sécurité ?", a: "Oui. Nous utilisons votre carte uniquement pour l'analyse. Nous ne partageons pas de données avec des tiers. Consultez notre politique de confidentialité." },
     { q: "Puis-je analyser plusieurs cartes si j'ai plusieurs établissements ?", a: "Oui. Vous pouvez envoyer autant de cartes que vous voulez. Nous analysons chacune indépendamment." },
   ] },
+  de: { title: "Häufig gestellte Fragen zur Analyse", items: [
+    { q: "Wie viel kostet die Weinkarten-Analyse?", a: "Sie ist völlig kostenlos. Keine versteckten Kosten oder Verpflichtungen." },
+    { q: "Welche Formate akzeptieren Sie?", a: "PDF, Bild (JPG, PNG, WebP) oder Link zu Ihrer digitalen Weinkarte. Beliebiges Format." },
+    { q: "Wie lange dauert der Bericht?", a: "Weniger als 48 Geschäftsstunden ab dem Zeitpunkt, an dem wir Ihre Karte erhalten." },
+    { q: "Welche Informationen benötigen Sie von mir?", a: "Nur Ihre Weinkarte, Restaurantname und E-Mail. Der Rest ist optional, hilft uns aber, die Analyse zu personalisieren." },
+    { q: "Werden Sie versuchen, mir etwas zu verkaufen?", a: "Nein. Der Bericht gehört Ihnen und Sie können ihn eigenständig umsetzen. Falls angebracht, erklären wir Ihnen, wie Winerim die Verbesserungen automatisieren kann — ohne Druck." },
+    { q: "Welche Art von Restaurants profitieren am meisten?", a: "Restaurants mit 50+ Referenzen, Restaurantgruppen und Hotels mit F&B. Mit weniger als 50 Referenzen ist die Analyse immer noch nützlich, aber die Auswirkung wird geringer sein." },
+    { q: "Ist es eine automatisierte Analyse oder von einer Person durchgeführt?", a: "Wir kombinieren algorithmische Analyse mit Fachprüfung. Das Ergebnis ist ein professioneller Bericht, kein generischer KI-Output." },
+    { q: "Kann ich die Empfehlungen anwenden, ohne Winerim zu beauftragen?", a: "Ja, zu 100%. Der Bericht enthält umsetzbare Empfehlungen, die Sie eigenständig implementieren können." },
+    { q: "Sind meine Daten sicher?", a: "Ja. Wir verwenden Ihre Karte nur für die Analyse. Wir geben Daten nicht an Dritte weiter. Siehe unsere Datenschutzrichtlinie." },
+    { q: "Kann ich mehrere Weinkarten analysieren, wenn ich mehrere Standorte habe?", a: "Ja. Sie können so viele Karten einreichen, wie Sie möchten. Wir analysieren jede eigenständig." },
+  ] },
+  pt: { title: "Perguntas frequentes sobre a análise", items: [
+    { q: "Quanto custa a análise da carta?", a: "É completamente gratuita. Sem custos ocultos ou compromisso." },
+    { q: "Que formatos aceitam?", a: "PDF, imagem (JPG, PNG, WebP) ou link para a sua carta digital. Qualquer formato." },
+    { q: "Quanto tempo demora o relatório?", a: "Menos de 48 horas úteis desde que recebemos a sua carta." },
+    { q: "Que informação precisa de mim?", a: "Apenas a sua carta de vinhos, nome do restaurante e email. O resto é opcional mas ajuda-nos a personalizar a análise." },
+    { q: "Vão tentar vender-me algo?", a: "Não. O relatório é seu e pode aplicá-lo por conta própria. Se for adequado, explicaremos como a Winerim pode automatizar as melhorias — sem pressão." },
+    { q: "Que tipo de restaurantes se beneficia mais?", a: "Restaurantes com 50+ referências, grupos de restauração e hotéis com F&B. Com menos de 50 referências, a análise ainda é útil mas o impacto será menor." },
+    { q: "É uma análise automatizada ou feita por uma pessoa?", a: "Combinamos análise algorítmica com revisão especializada. O resultado é um relatório profissional, não um output de IA genérico." },
+    { q: "Posso aplicar as recomendações sem contratar a Winerim?", a: "Sim, 100%. O relatório inclui recomendações acionáveis que pode implementar de forma independente." },
+    { q: "Os meus dados estão seguros?", a: "Sim. Usamos a sua carta apenas para a análise. Não partilhamos dados com terceiros. Consulte a nossa política de privacidade." },
+    { q: "Posso analisar várias cartas se tenho vários locais?", a: "Sim. Pode enviar quantas cartas quiser. Analisamos cada uma de forma independente." },
+  ] },
 });
 
 const ctaFinalI = i({
@@ -342,6 +470,8 @@ const ctaFinalI = i({
   en: { badge: "Free and no commitment", title1: "Your wine list has hidden potential. ", titleHl: "Discover it.", sub: "Send us your wine list and we'll show you what to improve, how much you can gain and where to start. No cost. No commitment.", cta1: "Submit wine list for analysis", cta2: "Request demo", micro: "500+ wine lists analysed. Report in 48 h." },
   it: { badge: "Gratuito e senza impegno", title1: "La tua carta ha un potenziale nascosto. ", titleHl: "Scoprilo.", sub: "Inviaci la tua carta dei vini e ti mostriamo cosa migliorare, quanto puoi guadagnare e da dove iniziare. Senza costi. Senza impegno.", cta1: "Invia carta per analisi", cta2: "Richiedi demo", micro: "Oltre 500 carte analizzate. Report in 48 h." },
   fr: { badge: "Gratuit et sans engagement", title1: "Votre carte a un potentiel caché. ", titleHl: "Découvrez-le.", sub: "Envoyez-nous votre carte des vins et nous vous montrons quoi améliorer, combien vous pouvez gagner et par où commencer. Sans coût. Sans engagement.", cta1: "Envoyer la carte pour analyse", cta2: "Demander une démo", micro: "Plus de 500 cartes analysées. Rapport en 48 h." },
+  de: { badge: "Kostenlos und unverbindlich", title1: "Ihre Weinkarte hat ein verborgenes Potenzial. ", titleHl: "Entdecken Sie es.", sub: "Senden Sie uns Ihre Weinkarte und wir zeigen Ihnen, was Sie verbessern können, wie viel Sie gewinnen können und wo Sie anfangen. Kostenlos. Unverbindlich.", cta1: "Weinkarte zur Analyse senden", cta2: "Demo anfragen", micro: "Über 500 Weinkarten analysiert. Bericht in 48 h." },
+  pt: { badge: "Gratuito e sem compromisso", title1: "A sua carta tem potencial oculto. ", titleHl: "Descubra-o.", sub: "Envie-nos a sua carta de vinhos e mostramos o que melhorar, quanto pode ganhar e por onde começar. Sem custos. Sem compromisso.", cta1: "Enviar carta para análise", cta2: "Pedir demo", micro: "Mais de 500 cartas analisadas. Relatório em 48 h." },
 });
 
 const linksI = i({
@@ -372,6 +502,20 @@ const linksI = i({
     { to: "/fr/ressources/checklist-carte-rentable", label: "Checklist carte rentable", type: "resource" as const },
     { to: "/fr/logiciel-carte-des-vins", label: "Logiciel carte des vins", type: "solution" as const },
     { to: "/fr/outils", label: "Tous les outils", type: "tool" as const },
+  ],
+  de: [
+    { to: "/de/blog/wie-man-weinkarte-organisiert", label: "Wie man eine Weinkarte organisiert", type: "guide" as const },
+    { to: "/de/blog/rentable-weinkarte", label: "Rentable Weinkarte", type: "guide" as const },
+    { to: "/de/ressourcen/checkliste-rentable-weinkarte", label: "Checkliste rentable Karte", type: "resource" as const },
+    { to: "/de/software-weinkarte", label: "Weinkarten-Software", type: "solution" as const },
+    { to: "/de/werkzeuge", label: "Alle Werkzeuge", type: "tool" as const },
+  ],
+  pt: [
+    { to: "/pt/blog/como-organizar-carta-de-vinhos", label: "Como organizar uma carta de vinhos", type: "guide" as const },
+    { to: "/pt/blog/carta-de-vinhos-rentavel", label: "Carta de vinhos rentável", type: "guide" as const },
+    { to: "/pt/recursos/checklist-carta-de-vinhos-rentavel", label: "Checklist carta rentável", type: "resource" as const },
+    { to: "/pt/software-carta-de-vinhos", label: "Software de carta de vinhos", type: "solution" as const },
+    { to: "/pt/ferramentas", label: "Todas as ferramentas", type: "tool" as const },
   ],
 });
 

@@ -387,7 +387,27 @@ const FR: Content = { ...EN,
   ctaPrimary: "Je veux une démo pour mon hôtel", ctaSecondary: "Analyser ma carte",
 };
 
-const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR };
+const DE: Content = { ...EN,
+  metaTitle: "Winerim für Hotels | Intelligente Weinkarte für Gastronomie",
+  metaDescription: "Optimieren Sie Wein in Restaurants, Bars, Lounges und Zimmerservice Ihres Hotels. Mehrsprachige digitale Karte mit KI und Analytik.",
+  badgeLabel: "Premium-Hospitality", breadSolutions: "Lösungen", breadLabel: "Hotels",
+  heroTitle1: "Wein in Ihrem Hotel verwaltet als ", heroTitleHighlight: "Premium-Kategorie",
+  heroDesc: "Winerim hilft Hotels, das Weinangebot an jedem Service-Punkt zu professionalisieren.",
+  ctaDemo: "Demo anfragen", ctaContact: "Mit Spezialisten sprechen",
+  ctaPrimary: "Ich möchte eine Demo für mein Hotel", ctaSecondary: "Meine Karte analysieren",
+};
+
+const PT: Content = { ...EN,
+  metaTitle: "Winerim para Hotéis | Carta de Vinhos Inteligente para F&B",
+  metaDescription: "Otimize o vinho em restaurantes, bares, lounges e room service do seu hotel. Carta digital multiidioma com IA e análise.",
+  badgeLabel: "Hospitalidade premium", breadSolutions: "Soluções", breadLabel: "Hotéis",
+  heroTitle1: "Vinho no seu hotel, gerido como uma ", heroTitleHighlight: "categoria premium",
+  heroDesc: "Winerim ajuda hotéis a profissionalizar a oferta de vinho em cada ponto de serviço.",
+  ctaDemo: "Solicitar demonstração", ctaContact: "Falar com um especialista",
+  ctaPrimary: "Quero uma demonstração para meu hotel", ctaSecondary: "Analisar minha carta",
+};
+
+const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR, de: DE, pt: PT };
 
 /* ─── icon maps ─── */
 const advIcons = [Globe, Layers, Sparkles, BarChart3, GraduationCap];
