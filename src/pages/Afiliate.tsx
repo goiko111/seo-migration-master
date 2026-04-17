@@ -60,7 +60,11 @@ const faqs = {
     { q: "Tambem pode ser usado para recomendar Winerim a grupos de restauracao e hoteis?", a: "Especialmente. Grupos de restauracao e hoteis com F&B sao perfis ideais para Winerim. As oportunidades de maior valor tipicamente vem destes tipos de contas." },
   ],
 };
-const currentFaqs = faqs[lang as keyof typeof faqs] || faqs.es;
+
+const WA_MSG_BY_LANG: Record<string, string> = {
+  es: WA_MSG_ES, en: WA_MSG_EN, de: WA_MSG_DE, pt: WA_MSG_PT,
+};
+
 
 const EarningsCalculator = () => {
   const [clients, setClients] = useState([10]);
@@ -116,6 +120,8 @@ const EarningsCalculator = () => {
 
 const Afiliate = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
+  const currentFaqs = faqs[lang as keyof typeof faqs] || faqs.es;
+  const WA_MSG = WA_MSG_BY_LANG[lang] || WA_MSG_ES;
 
   return (
     <div className="min-h-screen bg-background">
@@ -131,7 +137,7 @@ const Afiliate = () => {
         title="Programa de Partners Winerim"
         description="Programa de colaboración para prescriptores, distribuidores, sumilleres y consultores que quieran recomendar Winerim."
         url={`${CANONICAL_DOMAIN}/afiliate`}
-        faqs={faqs}
+        faqs={currentFaqs}
         breadcrumbs={[
           { name: "Inicio", url: CANONICAL_DOMAIN },
           { name: "Partners", url: `${CANONICAL_DOMAIN}/afiliate` },
