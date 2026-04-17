@@ -237,7 +237,107 @@ const fr: T = {
   ],
 };
 
-const i18n: Record<string, T> = { es, en, it, fr };
+const de: T = {
+  seoTitle: "Wine List Benchmark – Weinkarten-Marktstatistiken | Winerim",
+  seoDesc: "Aggregierte Daten des Weinkarten-Marktes: durchschnittliche Referenzen, Flaschen- und Glaspreise, Stilverteilung und Preise nach Land.",
+  seoUrl: "https://winerim.wine/de/wine-list-benchmark",
+  breadTools: "Werkzeuge", breadLabel: "Wine List Benchmark",
+  badge: "Marktdaten",
+  heroTitle1: "Wine List ", heroHighlight: "Benchmark",
+  heroDesc: "Aggregierte Weinkarten-Statistiken aus Restaurants. Vergleichen Sie Ihre Weinkarte mit dem Markt und erkennen Sie Chancen.",
+  stats: [
+    { label: "Durchschnittliche Referenzen", value: "42", sub: "pro Restaurant" },
+    { label: "Durchschnittlicher Flaschenprice", value: "32 €", sub: "in der Karte" },
+    { label: "Durchschnittlicher Glasprice", value: "7,50 €", sub: "Wein nach Glas" },
+    { label: "% Wein nach Glas", value: "18%", sub: "der Referenzen" },
+  ],
+  countries: ["Spanien", "Frankreich", "Italien", "Portugal", "Argentinien", "Chile"],
+  styles: ["Rot", "Weiß", "Schaumwein", "Rosé", "Süß/Verstärkt"],
+  chartLabel: "Detaillierte Analyse",
+  chartTitle1: "Daten des ", chartHighlight: "Weinkarten-Marktes",
+  chartCountry: "Durchschnittsprice nach Herkunftsland",
+  chartStyle: "Verteilung nach Stil",
+  chartRange: "Verteilung nach Preisbereich",
+  chartTrend: "Jahrestrend",
+  priceMean: "Durchschnittsprice", percentage: "Prozentsatz",
+  ctaLabel: "Vergleichen Sie Ihre Weinkarte",
+  ctaTitle1: "Analysieren Sie Ihre Weinkarte gegen den ", ctaHighlight: "Markt",
+  ctaDesc: "Laden Sie Ihre Weinkarte hoch und vergleichen Sie sie mit Branchenstatistiken. Finden Sie heraus, wo Sie über oder unter dem Durchschnitt liegen.",
+  ctaCta: "Meine Weinkarte analysieren",
+  stratDecides: [
+    "Ob Ihre Weinkarte im Vergleich zum Markt in Bezug auf Stile, Länder und Preisbereiche ausgewogen ist",
+    "Welche Preisbereiche oder Stile unterrepräsentiert sind im Vergleich zum Branchendurchschnitt",
+    "Ob Ihr Weinglas-Angebot wettbewerbsfähig im Vergleich zu ähnlichen Restaurants ist",
+  ],
+  stratAvoids: [
+    "Eine Weinkarte ohne Marktbenchmarks oder Vergleichsdaten aufbauen",
+    "Aus Trägheit einen Stil oder Preisbereich überlasten, ohne die Konkurrenz zu kennen",
+    "Konsumtrends ignorieren, die in Ihrem Segment an Fahrt gewinnen",
+  ],
+  stratImpact: [
+    "Weinkarte abgestimmt auf echte Marktnachfrage, nicht nur auf das Angebot des Distribuors",
+    "Erkennung von Lücken und Differenzierungschancen nach Preisbereich oder Stil",
+    "Sortimentsentscheidungen basierend auf Vergleichsdaten, nicht auf Intuition",
+  ],
+  links: [
+    { to: "/blog/cuantos-vinos-carta-restaurante", label: "Wie viele Weine auf einer Karte", type: "guide" },
+    { to: "/blog/como-organizar-carta-de-vinos", label: "So organisieren Sie eine Weinkarte", type: "guide" },
+    { to: "/wine-list-analyzer", label: "Weinkarten-Analysator", type: "tool" },
+    { to: "/calculadora-margen-vino", label: "Margin-Rechner", type: "tool" },
+  ],
+};
+
+const pt: T = {
+  seoTitle: "Wine List Benchmark – Estatísticas de Mercado de Cartas de Vinhos | Winerim",
+  seoDesc: "Dados agregados do mercado de cartas de vinhos: referências médias, preços por garrafa e copo, distribuição de estilos e preços por país.",
+  seoUrl: "https://winerim.wine/pt/wine-list-benchmark",
+  breadTools: "Ferramentas", breadLabel: "Wine List Benchmark",
+  badge: "Dados de mercado",
+  heroTitle1: "Wine List ", heroHighlight: "Benchmark",
+  heroDesc: "Estatísticas agregadas de cartas de vinhos em restaurantes. Compare sua carta com o mercado e detecte oportunidades.",
+  stats: [
+    { label: "Referências médias", value: "42", sub: "por restaurante" },
+    { label: "Preço médio da garrafa", value: "32 €", sub: "na carta" },
+    { label: "Preço médio do copo", value: "7,50 €", sub: "vinho a copo" },
+    { label: "% vinho a copo", value: "18%", sub: "das referências" },
+  ],
+  countries: ["Espanha", "França", "Itália", "Portugal", "Argentina", "Chile"],
+  styles: ["Tinto", "Branco", "Espumante", "Rosé", "Doce/Fortificado"],
+  chartLabel: "Análise detalhada",
+  chartTitle1: "Dados do mercado de ", chartHighlight: "cartas de vinhos",
+  chartCountry: "Preço médio por país de origem",
+  chartStyle: "Distribuição por estilo",
+  chartRange: "Distribuição por faixa de preço",
+  chartTrend: "Tendência anual",
+  priceMean: "Preço médio", percentage: "Percentual",
+  ctaLabel: "Compare sua carta",
+  ctaTitle1: "Analise sua carta em relação ao ", ctaHighlight: "mercado",
+  ctaDesc: "Envie sua carta de vinhos e compare-a com as estatísticas do setor. Descubra onde você está acima ou abaixo da média.",
+  ctaCta: "Analisar minha carta",
+  stratDecides: [
+    "Se sua carta está equilibrada em relação ao mercado em estilos, países e faixas de preço",
+    "Quais faixas de preço ou estilos estão subrepresentados em relação à média do setor",
+    "Se sua oferta de vinho a copo é competitiva em relação a restaurantes similares",
+  ],
+  stratAvoids: [
+    "Construir uma carta sem referência de mercado nem dados comparativos",
+    "Sobrecarregar um estilo ou faixa de preço por inércia sem conhecer a concorrência",
+    "Ignorar tendências de consumo que estão ganhando tração em seu segmento",
+  ],
+  stratImpact: [
+    "Carta alinhada com a demanda real do mercado e não apenas com a oferta do distribuidor",
+    "Detecção de lacunas e oportunidades de diferenciação por faixa de preço ou estilo",
+    "Decisões de sortimento baseadas em dados comparativos, não em intuição",
+  ],
+  links: [
+    { to: "/blog/cuantos-vinos-carta-restaurante", label: "Quantos vinhos em uma carta", type: "guide" },
+    { to: "/blog/como-organizar-carta-de-vinos", label: "Como organizar uma carta", type: "guide" },
+    { to: "/wine-list-analyzer", label: "Analisador de cartas", type: "tool" },
+    { to: "/calculadora-margen-vino", label: "Calculadora de margens", type: "tool" },
+  ],
+};
+
+const i18n: Record<string, T> = { es, en, it, fr, de, pt };
 
 /* ─── Chart data (prices are language-independent) ─── */
 const priceValues = [28, 42, 35, 24, 26, 22];

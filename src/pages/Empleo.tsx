@@ -16,16 +16,45 @@ import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const WA_NUMBER = "34658718350";
-const WA_MSG = encodeURIComponent("Hola, me interesa trabajar en Winerim. ¿Puedo saber más?");
+const WA_MSG_ES = encodeURIComponent("Hola, me interesa trabajar en Winerim. Puedo saber mas?");
+const WA_MSG_EN = encodeURIComponent("Hi, I am interested in working at Winerim. Can I learn more?");
+const WA_MSG_DE = encodeURIComponent("Hallo, ich bin daran interessiert, bei Winerim zu arbeiten. Kann ich mehr erfahren?");
+const WA_MSG_PT = encodeURIComponent("Ola, estou interessado em trabalhar na Winerim. Posso saber mais?");
 
-const AREAS = [
-  { value: "tech", label: "Tecnología / Desarrollo" },
-  { value: "product", label: "Producto / Diseño" },
-  { value: "sales", label: "Ventas / Comercial" },
-  { value: "marketing", label: "Marketing / Contenidos" },
-  { value: "ops", label: "Operaciones / Customer Success" },
-  { value: "other", label: "Otro" },
-];
+const AREAS = {
+  es: [
+    { value: "tech", label: "Tecnologia / Desarrollo" },
+    { value: "product", label: "Producto / Diseno" },
+    { value: "sales", label: "Ventas / Comercial" },
+    { value: "marketing", label: "Marketing / Contenidos" },
+    { value: "ops", label: "Operaciones / Customer Success" },
+    { value: "other", label: "Otro" },
+  ],
+  en: [
+    { value: "tech", label: "Technology / Development" },
+    { value: "product", label: "Product / Design" },
+    { value: "sales", label: "Sales / Business" },
+    { value: "marketing", label: "Marketing / Content" },
+    { value: "ops", label: "Operations / Customer Success" },
+    { value: "other", label: "Other" },
+  ],
+  de: [
+    { value: "tech", label: "Technologie / Entwicklung" },
+    { value: "product", label: "Produkt / Design" },
+    { value: "sales", label: "Vertrieb / Business" },
+    { value: "marketing", label: "Marketing / Inhalt" },
+    { value: "ops", label: "Betrieb / Customer Success" },
+    { value: "other", label: "Sonstiges" },
+  ],
+  pt: [
+    { value: "tech", label: "Tecnologia / Desenvolvimento" },
+    { value: "product", label: "Produto / Design" },
+    { value: "sales", label: "Vendas / Negocios" },
+    { value: "marketing", label: "Marketing / Conteudo" },
+    { value: "ops", label: "Operacoes / Sucesso do Cliente" },
+    { value: "other", label: "Outro" },
+  ],
+};
 
 const Check = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-start gap-3">
@@ -35,7 +64,7 @@ const Check = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Empleo = () => {
-  const { t, allLangPaths } = useLanguage();
+  const { lang, t, allLangPaths } = useLanguage();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -47,6 +76,16 @@ const Empleo = () => {
     area_of_interest: "",
     message: "",
   });
+  const currentAreas = AREAS[lang as keyof typeof AREAS] || AREAS.es;
+  const getWAMessage = () => {
+    const messages: Record<string, string> = {
+      es: WA_MSG_ES,
+      en: WA_MSG_EN,
+      de: WA_MSG_DE,
+      pt: WA_MSG_PT,
+    };
+    return messages[lang] || WA_MSG_ES;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -348,7 +387,7 @@ const Empleo = () => {
               {/* Multi-channel CTAs */}
               <div className="flex flex-wrap justify-center gap-3 mb-10">
                 <a
-                  href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
+                  href={`https://wa.me/${WA_NUMBER}?text=${getWAMessage()}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-wine transition-colors"
@@ -435,13 +474,13 @@ const Empleo = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>{t.empleo_area_label ?? "Área de interés"}</Label>
+                  <Label>{t.empleo_area_label ?? "Area de interes"}</Label>
                   <Select value={form.area_of_interest} onValueChange={(v) => setForm({ ...form, area_of_interest: v })}>
                     <SelectTrigger>
-                      <SelectValue placeholder={t.empleo_area_placeholder ?? "Selecciona un área"} />
+                      <SelectValue placeholder={t.empleo_area_placeholder ?? "Selecciona un area"} />
                     </SelectTrigger>
                     <SelectContent>
-                      {AREAS.map((a) => (
+                      {currentAreas.map((a) => (
                         <SelectItem key={a.value} value={a.value}>{a.label}</SelectItem>
                       ))}
                     </SelectContent>

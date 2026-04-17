@@ -1,0 +1,177 @@
+import { Building2 } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const gruposBenchmarkingDE: DeepAreaContent = {
+  name: "Gruppen & Benchmarking",
+  tagline: "Steuern Sie die Weinkategorie im grossen Massstab",
+  intro: "Dieser Bereich hilft Ihnen, Entscheidungen zur Weinkategorie zu treffen, wenn Sie mehrere Betriebstaetten verwalten. Es geht nicht darum, um der Standardisierung willen zu standardisieren: Es geht darum, zu erkennen, was funktioniert, wo es funktioniert und warum, damit Sie mit Daten entscheiden koennen, was skaliert werden soll, was korrigiert werden muss und was geloescht werden sollte. Internes Benchmarking ist keine Rangliste: Es ist ein Steuerinstrument.",
+  icon: Building2,
+  accent: "text-rose-500",
+  bg: "bg-rose-500/10",
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Betriebstaetten vergleichen, die nicht vergleichbar sind", porQueOcurre: "Weil alle Betriebstaetten in dieselbe Rangliste gestellt werden, ohne sie nach Typ zu gruppieren (casual, Fine-Dining, Hotel, Terrasse). Eine Fine-Dining-Betriebstaette und eine casual arbeiten nicht auf dieselbe Weise.", consecuencia: "Sie benachteiligen die Fine-Dining-Betriebstaette fuer niedrigeren Umsatz oder die casual fuer niedrigeres Ticket. Die Schluesse sind nutzlos und Betriebstaetten-Manager disengagieren sich vom Prozess." },
+    { error: "Weinkarte zwischen Betriebstaetten replizieren, ohne Kontext zu beruecksichtigen", porQueOcurre: "Weil, wenn etwas in einer Betriebstaette funktioniert, es logisch erscheint, es zu kopieren. Aber Kontext (Klientel, Lage, Konzept, Team) bestimmt das Ergebnis.", consecuencia: "Totbestand vervielfacht mit der Anzahl der Ziel-Betriebstaetten. Gebundenes Kapital und eine Karte, die nicht zum Gaesteprofil dieser Betriebstaette passt." },
+    { error: "Referenzen durch Traegheit ueber alle Einheiten hinweg halten", porQueOcurre: "Weil eine Referenz aus der Unternehmens-Karte zu entfernen sich riskant anfuehlt. Niemand moechte derjenige sein, der die 'uebliche Rioja' ablehnt.", consecuencia: "Referenzen, die in 3 von 5 Betriebstaetten nicht verkaufen, belegen weiterhin Platz, Bestand und Aufmerksamkeit. Die Kosten der Traegheit vervielfachen sich mit der Anzahl der Einheiten." },
+    { error: "Uebermaessige Standardisierung und Verlust der kommerziellen Logik jeder Betriebstaette", porQueOcurre: "Weil Standardisierung die zentrale Verwaltung vereinfacht. Aber eine identische Karte an einem Kuestenstrand-Resort und einer staedtischen Business-Betriebstaette macht kommerziell keinen Sinn.", consecuencia: "Die Betriebstaette verliert ihre Identitaet, der Gast findet nicht, was er erwartet, und Umsaetze fallen, wo die Karte nicht zum Gaesteprofil passt." },
+    { error: "Daten nicht fuer Expansions- oder Rueckzugsentscheidungen nutzen", porQueOcurre: "Weil Sortimentsentscheidungen basierend auf Lieferantenbeziehungen, Traegheit oder dem persoenlichen Urteil des F&B-Direktors getroffen werden, nicht auf gemessener Leistung.", consecuencia: "Einkaufen ohne Kriterien, aufgeblasene Karten und unsichtbare Verbesserungschancen. Die Gruppe funktioniert als Summe unabhaengiger Betriebstaetten, nicht als System." },
+  ],
+  links: [
+    { label: "Loesungen fuer Gruppen", href: "/en/solutions/restaurant-groups", description: "Wie Winerim Multi-Unit-Operatoren hilft, die Weinkategorie zu steuern", type: "solution" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Analytics-Engine mit internem Benchmarking, Abweichungen und Scoring pro Betriebstaette", type: "product" },
+    { label: "Winerim Supply", href: "/en/product/winerim-supply", description: "Zentralisierte Einkaufs-Intelligenz mit Ueberpreisungs-Warnungen pro Einheit", type: "product" },
+    { label: "Vorlage: Restaurant-Gruppen-Kontrolle", href: "/en/resources/restaurant-group-control-template", description: "Dashboard zum Vergleich von Schluesseln-Metriken ueber Betriebstaetten", type: "resource" },
+    { label: "Vorlage: Monatliche Scorecard", href: "/en/resources/monthly-scorecard-template", description: "Strukturierte monatliche Leistungs-Review pro Einheit", type: "resource" },
+    { label: "Blog: Wein ueber Gruppen standardisieren", href: "/en/article/estandarizar-oferta-vino-grupo-restauracion", description: "Wie man standardisiert, ohne die Identitaet jeder Betriebstaette zu verlieren", type: "article" },
+    { label: "Multi-Betriebstaetten-Auditor", href: "/en/tools/multi-venue-wine-list-auditor", description: "Vergleichen Sie Sortiment, Preisgestaltung und Glaswein ueber Betriebstaetten in derselben Gruppe", type: "tool" },
+  ],
+  miniCases: [
+    {
+      profile: "Gruppe von 6 Restaurants in 3 Staedten",
+      situation: "Jede Betriebstaette hatte ihre eigene Karte. Die beste Betriebstaette hatte 64-%-Marge; die schlechteste, 41-%. Niemand wusste es, weil sie nicht verglichen.",
+      action: "Implementierte eine einheitliche monatliche Scorecard. Entdeckte, dass die schwache Betriebstaette 15 Referenzen hatte, die nicht verkauften, und Preise 15-% unter dem Gruppen-Durchschnitt.",
+      result: "In 4 Monaten kletterte die hangende Betriebstaette auf 56-%-Marge - einfach durch Replikation des Glass-Mix und der Preisgestaltung des Leaders.",
+    },
+    {
+      profile: "Hotel-Kette mit zentralisiertem F&B",
+      situation: "Einkauf war zentralisiert, aber jedes Hotel setzte Preise frei. Der gleiche Wein war 28 EUR in einem Hotel und 19 EUR in einem anderen.",
+      action: "Definierte Preisbaender nach Kategorie und Hotel-Typ (urban vs resort). Jedes Hotel hat ±2-EUR-Flexibilitaet innerhalb der Spanne.",
+      result: "Marken-Konsistenz, einheitliche 58-%-Marge ueber alle Hotels und staerkere Verhandlungs-Hebelwirkung durch Volumen-Einkauf.",
+    },
+    {
+      profile: "Gruppe von 4 casual-premium Restaurants",
+      situation: "Jede Betriebstaette kaufte unabhaengig vom naechsten Lieferanten. Der gleiche Wein kostete zwischen 5,20 EUR und 7,80 EUR je nach Betriebstaette. Niemand verglich Einkaufs-Daten.",
+      action: "Zentralisierte Einkauf fuer die 20 Unternehmens-Referenzen und verhandelte das gesamte Gruppen-Volumen. Nutzte Winerim Supply, um Ueberpreisungen pro Betriebstaette zu erkennen.",
+      result: "Durchschnittliche 14-%-Ersparnis bei Einkaufskosten. Befreites Kapital: 6.400 EUR/Quartal. Betriebstaetten behalten Freiheit fuer 30-% der lokalen Karte.",
+    },
+    {
+      profile: "Gruppe von 8 Betriebstaetten, die casual und fine-dining mischen",
+      situation: "Die 3 Fine-Dining-Betriebstaetten hatten 62-%-Marge, aber die 5 casual reichten von 38-% bis 51-%. Unternehmens F&B verstand die Streuung nicht.",
+      action: "Trennter Benchmarking in zwei Cluster (casual und fine-dining). Fand heraus, dass die schlechtesten casual-Betriebstaetten denselben Multiplikator wie die fine-dining anwendeten, statt einen an ihre Preisrange angepassten.",
+      result: "Durch Anpassung von Multiplikatoren pro Betriebstaetten-Typ stiegen casual-Betriebstaetten in 2 Monaten auf 54-58-%-Marge - ohne die Karte zu beruehren, nur Preisgestaltung.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "comparar-unidades",
+      title: "Wie man Betriebstaetten effektiv vergleicht",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim hat Ihre Betriebstaetten-Metriken nach Typ normalisiert, damit der Vergleich fair ist.", whyMatters: "Ohne normalisiertem Vergleich verfuehrt Daten: die umsatzstaerkste Betriebstaette kann die schlechteste Marge haben.", riskIfIgnored: "Jeder Manager arbeitet nach seinen eigenen Kriterien, ohne beste Praktiken oder systemische Probleme zu erkennen." },
+      queSignifica: "Betriebstaetten zu vergleichen ist nicht, sie von beste zu schlechteste Umsatz zu ordnen. Es ist Cross-Referenzierung normalisierter Metriken (Durchschnitts-Marge, Umsatz, Durchschnitts-Wein-Ticket, Glas-/Flaschen-Verhaeltnis, % tote Weine) zwischen Betriebstaetten mit vergleichbaren Kontexten. Eine Fine-Dining-Betriebstaette und eine casual werden nicht auf dieselbe Weise verglichen. Eine Hotel-Einheit und eine Strassen-Betriebstaette sind auch unterschiedlich. Nuetzliche Vergleichsgruppen nach Typ und Abweichungen vom Gruppen-Durchschnitt messen, nicht absolute Werte.",
+      porQueImporta: "Weil ohne normalisiertem Vergleich Daten verfuehrt. Die umsatzstaerkste Betriebstaette kann die schlechteste Marge haben. Die niedrigste Verkaeufer kann die effizienteste sein. Ohne internes Benchmarking arbeitet jeder Betriebstaetten-Manager nach seinen eigenen Kriterien und es gibt keine Moeglichkeit, beste Praktiken oder systemische Probleme zu erkennen.",
+      queHacer: [
+        "Gruppieren Sie Ihre Betriebstaetten nach Typ (casual, fine-dining, hotel, terrasse), bevor Sie vergleichen.",
+        "Definieren Sie 5-6 gemeinsame KPIs: Durchschnitts-Marge, Umsatz, % tote Weine, Durchschnitts-Wein-Ticket, Glas-/Flaschen-Verhaeltnis, durchschnittliche Einkaufs-Kosten.",
+        "Berechnen Sie den Gruppen-Durchschnitt nach Typ und messen Sie die Abweichung jeder Betriebstaette davon.",
+        "Nutzen Sie die Gruppen-Kontroll-Vorlage, um den Vergleich monatlich zu strukturieren.",
+      ],
+      errores: [
+        { mistake: "Betriebstaetten verschiedener Typen mit denselben Benchmarks vergleichen", consequence: "Sie benachteiligen die Fine-Dining-Betriebstaette fuer niedrigeren Umsatz als die casual. Sie sind nicht vergleichbar." },
+        { mistake: "Nur Umsatz als Vergleichs-Metrik nutzen", consequence: "Die umsatzstaerkste Betriebstaette kann die schlechteste Marge erzeugen. Umsatz ist nicht Gewinn." },
+        { mistake: "Nicht normalisieren nach Anzahl der Referenzen oder Karten-Groesse", consequence: "Eine Betriebstaette mit 300 Referenzen und eine mit 80 koennen nicht auf dieselbe Weise gelesen werden, ohne Anpassung." },
+      ],
+    },
+    {
+      id: "metricas-por-local",
+      title: "Welche Metriken pro Betriebstaette zu verfol gen",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim hat ein einheitliches 6-KPI-Dashboard fuer jede Ihrer Betriebstaetten generiert.", whyMatters: "Wenn jede Betriebstaette unterschiedlich misst, koennen Sie nicht steuern. Gruppen-Entscheidungen erfordern vergleichbare Daten.", riskIfIgnored: "Jede Betriebstaette berichtet, was ihr passt. Sie erkennen Abweichungen erst, wenn sie zu Krisen werden." },
+      queSignifica: "Jede Betriebstaette muss durch einen minimalen Satz von Metriken lesbar sein, die ihre kommerzielle Gesundheit in der Weinkategorie offenbaren. Sie brauchen nicht 30 Indikatoren: Sie brauchen die richtigen 6. Gewichtete Durchschnitts-Marge (nicht theoretisch - real, nach Rabatten und Schwund), Durchschnitts-Umsatz pro Referenz, Prozentsatz toter Weine (kein Verkauf in 60+ Tagen), Durchschnitts-Wein-Ticket pro Tisch, Glas-/Flaschen-Verhaeltnis und durchschnittliche Einkaufs-Kosten pro Referenz.",
+      porQueImporta: "Weil, wenn jede Betriebstaette unterschiedliche Metriken oder keine berichtet, koennen Sie nicht steuern. Gruppen-Entscheidungen erfordern vergleichbare Daten. Wenn eine Betriebstaette Gross-Marge misst und eine andere Netto-Marge, ist der Vergleich nutzlos. Der erste Schritt zur Verwaltung einer Gruppe ist die Standardisierung, was gemessen wird und wie.",
+      queHacer: [
+        "Definieren Sie ein minimales Dashboard von 6 identischen KPIs fuer alle Betriebstaetten.",
+        "Stellen Sie sicher, dass alle Marge auf dieselbe Weise berechnen (gleiche Kosten-Kriterien).",
+        "Ueberpruefen Sie diese KPIs monatlich mit der Monatlichen Scorecard.",
+        "Identifizieren Sie die 2-3 Betriebstaetten, die am meisten vom Durchschnitt auf jeder Metrik abweichen, und untersuchen Sie warum.",
+      ],
+      errores: [
+        { mistake: "Lassen Sie jede Betriebstaette ihre eigenen Metriken definieren", consequence: "Sie koennen nicht vergleichen. Jede misst, was ihr passt, und die Daten koennen nicht cross-referenced werden." },
+        { mistake: "Zu viele Indikatoren messen, ohne Prioritaeten zu setzen", consequence: "Analyse-Laehmung. 30 KPIs, die niemand anschaut, entspricht 0 KPIs." },
+        { mistake: "Nicht zwischen theoretischer und realer Marge unterscheiden", consequence: "Sie denken, eine Betriebstaette hat 68-%-Marge, aber mit realem Schwund und Rabatten sind es 52-%-." },
+      ],
+    },
+    {
+      id: "referencias-que-funcionan",
+      title: "Wie man Referenzen erkennt, die tatsaechlich funktionieren und wo",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim hat Leistung nach Referenz ueber alle Ihre Betriebstaetten cross-referenced, um zu erkennen, was funktioniert und wo.", whyMatters: "Skalierung von dem, was funktioniert, vervielfacht die Auswirkung. Aber es ohne Kontext zu tun, vervielfacht den Fehler.", riskIfIgnored: "Sie replizieren blind oder ziehen sich ohne Kriterien zurueck. Sie verpassen die Chance, Ihren Gast pro Betriebstaette zu verstehen." },
+      queSignifica: "Eine Referenz, die 'funktioniert', ist nicht nur eine, die verkauft: Sie ist eine, die mit guter Marge verkauft, mit gesunder Geschwindigkeit rotiert und andere nicht kanibalisiert. Internes Benchmarking laesst Sie erkennen, welche Referenzen alle drei Bedingungen an jeder Betriebstaette erfuellen. Manchmal funktioniert ein Wein in 3 von 5 Betriebstaetten: Das sagt etwas ueber das Gaeste-Profil, nicht ueber den Wein.",
+      porQueImporta: "Weil Skalierung einer Referenz, die in einer Betriebstaette funktioniert aber nicht in einer anderen, eine Entscheidung ist, die Kontext erfordert. Wenn ein Verdejo bei 22 EUR in Ihren Kuestenbetriebstaetten funktioniert, aber nicht in staedtischen, ist die Schlusfolgerung nicht 'der Verdejo funktioniert nicht': Es ist, dass Ihr staedtischer Gast unterschiedliche Vorlieben hat. Ohne diese Analyse replizieren Sie blind oder ziehen sich ohne Kriterien zurueck.",
+      queHacer: [
+        "Cross-reference die Top-10-Referenzen an jeder Betriebstaette mit ihrer Marge und ihrem Umsatz.",
+        "Identifizieren Sie diejenigen, die in der Top ueber mehrere Betriebstaetten erscheinen: Sie sind Unternehmens-Referenz-Kandidaten.",
+        "Analysieren Sie diejenigen, die nur in einer Betriebstaette funktionieren: Ist es der Gast, das Team, der Preis oder die Karte?",
+        "Nutzen Sie Winerim Core, um Cross-Leistung nach Referenz und Betriebstaette zu visualisieren.",
+      ],
+      errores: [
+        { mistake: "Annehmen, was in einer Betriebstaette funktioniert, funktioniert in allen", consequence: "Sie skalieren eine Referenz, die in 3 von 5 Betriebstaetten nicht passt. Totbestand vervielfacht mit 3." },
+        { mistake: "Nur Verkaufe messen, ohne mit Marge cross-zu-referenzieren", consequence: "Ihre Star-Referenz kann die mit der schlechtesten Marge sein. Viel zu verkaufen bedeutet nicht, gut zu verkaufen." },
+        { mistake: "Nicht untersuchen, warum eine Referenz an einem Ort funktioniert und nicht an einem anderen", consequence: "Sie verpassen die Chance, Ihren Gast pro Betriebstaette zu verstehen. Diese Einsicht ist mehr wert als der Verkauf." },
+      ],
+    },
+    {
+      id: "cuando-replicar",
+      title: "Wann eine Referenz zu anderen Betriebstaetten replizieren",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim hat Referenzen mit anhaltender Leistung in einer Betriebstaette erkannt, die in anderen mit aehnlichem Profil funktionieren koennten.", whyMatters: "Eine gut ausgefuehrte Replikation vervielfacht Renditen. Eine schlechte vervielfacht Totbestand ueber mehrere Betriebstaetten.", riskIfIgnored: "Sie verpassen Chancen, Erfolge zu skalieren, oder, schlimmer, replizieren ohne Daten und erzeugen Probleme in mehreren Einheiten." },
+      queSignifica: "Eine Referenz zu replizieren bedeutet, sie zur Karte einer anderen Betriebstaette hinzuzufuegen, weil sie Leistung an einem oder mehreren Orten nachgewiesen hat. Aber die Entscheidung ist nicht automatisch: Sie erfordert, dass das Gaeste-Profil vergleichbar ist, der Preis in die Ziel-Karte passt, es Platz ohne Kanibalisierung gibt und der Lieferant diese Betriebstaette unter denselben Bedingungen bedienen kann.",
+      porQueImporta: "Weil eine gut ausgefuehrte Replikation die Rendite einer guten Entscheidung vervielfacht. Aber eine schlechte vervielfacht das Problem: Totbestand ueber mehrere Betriebstaetten, gebundenes Kapital und eine Referenz, die 'funktionieren sollte', aber nicht, weil der Kontext unterschiedlich ist.",
+      queHacer: [
+        "Bestaetigen Sie, dass die Referenz an der Quell-Betriebstaette mindestens 3 Monate gute Leistung (Marge + Umsatz) hat.",
+        "Verifizieren Sie, dass das Gaeste-Profil an der Ziel-Betriebstaette mit der Quelle vergleichbar ist.",
+        "Pruefen Sie, dass der Preis in die Karten-Architektur der Ziel-Betriebstaette passt, ohne einen Preis-Punkt zu duplizieren.",
+        "Verhandeln Sie dieselben Einkaufs-Bedingungen fuer die Ziel-Betriebstaette vor der Eingliederung.",
+      ],
+      errores: [
+        { mistake: "Replizieren nach nur einem guten Monat", consequence: "Es kann Saisonalitaet oder eine grosse Party sein, die es bestellt hat. Ein Monat ist kein Trend." },
+        { mistake: "Nicht pruefen, ob die Preis-Spanne an der Ziel-Betriebstaette bereits abgedeckt ist", consequence: "Sie erzeugen Kanibalisierung. Jetzt haben Sie zwei Referenzen, die um denselben Gast konkurrieren." },
+        { mistake: "Replizieren ohne Verhandlung der Bedingungen fuer die neue Betriebstaette", consequence: "Sie kaufen vom gleichen Lieferanten, aber ohne Volumen-Rabatt. Ihre Marge an der Ziel-Betriebstaette ist schlechter." },
+      ],
+    },
+    {
+      id: "cuando-retirar-compra",
+      title: "Wann einen Einkauf aus einer Einheit zurueckziehen",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim hat Referenzen mit keiner Leistung an bestimmten Betriebstaetten identifiziert: Kandidaten fuer aktiven Rueckzug.", whyMatters: "In einer Gruppe ist eine tote Referenz ueber 4 Betriebstaetten 4-mal das Problem. Daten-gesteuerte Rueckkehr ist eine der profitabelsten Entscheidungen.", riskIfIgnored: "Sie halten Totbestand vervielfacht mit der Anzahl der Betriebstaetten. Das gebundene Kapital der Gruppe eskaliert." },
+      queSignifica: "Einkauf zurueckziehen bedeutet, die Neubestaendigung einer Referenz an einer bestimmten Betriebstaette zu beenden. Es bedeutet nicht, dass der Wein schlecht ist: Es bedeutet, dass an dieser Betriebstaette, mit diesem Gast, zu diesem Preis, er nicht funktioniert. Rueckzugs-Indikatoren sind: mehr als 60 Tage ohne Verkauf, echte Marge unter der minimalen Schwelle, oder die Existenz einer besseren Referenz in derselben Spanne, die sie kanibalisiert.",
+      porQueImporta: "Weil jede unterliegende Referenz Listen-Platz, Bestands-Kapital und Team-Aufmerksamkeit belegt. In einer Gruppe ist eine tote Referenz ueber 4 Betriebstaetten 4-mal das Problem. Aktiver Rueckzug (daten-gesteuert, nicht traegheit-gesteuert) ist eine der profitabelsten Entscheidungen, die ein Gruppen-F&B-Direktor treffen kann.",
+      queHacer: [
+        "Ueberpruefen Sie monatliche Referenzen mit mehr als 45 Tagen ohne Verkauf an jeder Betriebstaette.",
+        "Cross-reference mit Marge: Wenn es auch neben nicht-Rotation niedrige Marge hat, ist es ein unmittelbarer Rueckzugs-Kandidat.",
+        "Vor Rueckzug pruefen Sie, ob das Problem der Wein oder die Karte ist (ist er gut positioniert? Kennt das Team ihn?).",
+        "Kommunizieren Sie den Rueckzug zum Bodenpersonal mit Kontext: Warum es geht und was es ersetzt.",
+      ],
+      errores: [
+        { mistake: "Warten, bis Bestand aus ist, bevor Rueckzug", consequence: "Waehrend Sie warten, bleibt Kapital gebunden und die Karte bleibt unausgeglichen." },
+        { mistake: "Rueckzug ohne Analyse, warum es nicht funktioniert hat", consequence: "Sie fuehren eine andere Referenz in derselben Spanne ein, die aus demselben Grund fehlschlagen kann." },
+        { mistake: "Listen-Aenderungen nicht dem Bodenpersonal mitteilen", consequence: "Der Server haelt weiterhin einen Wein zu empfehlen, der nicht mehr da ist. Oder schlimmer: Empfiehlt nichts, weil er nicht weiss, was neu ist." },
+      ],
+    },
+    {
+      id: "benchmarking-interno-externo",
+      title: "Wie internes und externes Benchmarking gelesen wird",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim vergleicht Ihre Betriebstaetten untereinander (intern) und Ihre Gruppe gegen den Markt (extern) fuer volle Perspektive.", whyMatters: "Ohne internes Benchmarking wissen Sie nicht, wer gut funktioniert. Ohne extern wissen Sie nicht, ob Ihre beste Betriebstaette gut oder nur am wenigsten schlecht ist.", riskIfIgnored: "Sie betreiben blind innerhalb Ihrer Gruppe und ohne Markt-Bezug. Abweichungen werden spaet erkannt." },
+      queSignifica: "Internes Benchmarking vergleicht Ihre Betriebstaetten untereinander: Wer funktioniert am besten auf jeder Metrik und warum. Externes Benchmarking vergleicht Ihre Gruppe gegen den Markt: Ist Ihre Durchschnitts-Marge ueber oder unter dem Branchen-Durchschnitt? Ist Ihr Umsatz normal oder aussergewoehnlich? Beide sind notwendig. Intern sagt Ihnen, wo Sie innerhalb Ihrer Gruppe verbessern koennen. Extern sagt Ihnen, ob Ihre Gruppe insgesamt gut positioniert ist.",
+      porQueImporta: "Weil ohne internes Benchmarking Sie blind innerhalb Ihrer eigenen Gruppe betreiben: Sie wissen nicht, wer funktioniert oder wem geholfen werden muss. Und ohne externes Benchmarking wissen Sie nicht, ob Ihre 'beste Betriebstaette' wirklich gut oder nur am wenigsten schlecht ist. Die Kombination gibt Ihnen ein vollstaendiges Bild: interne Verbesserung mit Markt-Perspektive.",
+      queHacer: [
+        "Fuehren Sie monatlich internes Benchmarking mit der Monatlichen Scorecard durch: Vergleichen Sie 6 KPIs ueber Betriebstaetten.",
+        "Identifizieren Sie die Betriebstaetten, die auf jeder Metrik fuehren, und analysieren Sie, was sie anders machen.",
+        "Nutzen Sie Winerim Core, um auf externes Benchmarking zuzugreifen: Vergleichen Sie Ihre Metriken mit dem Branchen-Durchschnitt.",
+        "Cross beide: Wenn Ihre beste Betriebstaette unter dem Markt-Durchschnitt liegt, haben Sie ein systemisches Problem, kein lokales.",
+      ],
+      errores: [
+        { mistake: "Nur internes Benchmarking ohne externe Bezugnahme ausfuehren", consequence: "Ihre beste Betriebstaette kann unter dem Markt-Durchschnitt liegen. Ohne externe Kontext wissen Sie nicht." },
+        { mistake: "Benchmarking als punitives Werkzeug nutzen", consequence: "Betriebstaetten-Manager stoppen Daten-Teilen. Benchmarking stopp zu funktionieren." },
+        { mistake: "Nur einmal pro Jahr vergleichen", consequence: "Abweichungen werden spaet erkannt. Ein Problem, das 6 Monate andauert, kostet 6-mal mehr als eines, das in 30 Tagen erkannt wird." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Vergleichen Sie Ihre Betriebstaetten mit dem Auditor",
+    href: "/en/tools/multi-venue-wine-list-auditor",
+    description: "Vergleichen Sie Sortiment, Preisgestaltung und Glaswein ueber Einheiten, um Abweichungen und beste Praktiken zu erkennen.",
+  },
+};
+
+export default gruposBenchmarkingDE;

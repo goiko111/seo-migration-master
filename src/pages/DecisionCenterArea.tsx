@@ -16,25 +16,37 @@ import margenesPricingContent, { type DeepAreaContent, type SubTopic, type SubTo
 import margenesPricingEN from "@/data/decisionCenter/margenesPricing.en";
 import margenesPricingIT from "@/data/decisionCenter/margenesPricing.it";
 import margenesPricingFR from "@/data/decisionCenter/margenesPricing.fr";
+import margenesPricingDE from "@/data/decisionCenter/margenesPricing.de";
+import margenesPricingPT from "@/data/decisionCenter/margenesPricing.pt";
 import stockRotacionContent from "@/data/decisionCenter/stockRotacion";
 import stockRotacionEN from "@/data/decisionCenter/stockRotacion.en";
 import stockRotacionIT from "@/data/decisionCenter/stockRotacion.it";
 import stockRotacionFR from "@/data/decisionCenter/stockRotacion.fr";
+import stockRotacionDE from "@/data/decisionCenter/stockRotacion.de";
+import stockRotacionPT from "@/data/decisionCenter/stockRotacion.pt";
 import comprasReposicionContent from "@/data/decisionCenter/comprasReposicion";
 import comprasReposicionEN from "@/data/decisionCenter/comprasReposicion.en";
 import comprasReposicionIT from "@/data/decisionCenter/comprasReposicion.it";
 import comprasReposicionFR from "@/data/decisionCenter/comprasReposicion.fr";
+import comprasReposicionDE from "@/data/decisionCenter/comprasReposicion.de";
+import comprasReposicionPT from "@/data/decisionCenter/comprasReposicion.pt";
 import cartaEquilibrioContent from "@/data/decisionCenter/cartaEquilibrio";
 import cartaEquilibrioEN from "@/data/decisionCenter/cartaEquilibrio.en";
 import cartaEquilibrioIT from "@/data/decisionCenter/cartaEquilibrio.it";
 import cartaEquilibrioFR from "@/data/decisionCenter/cartaEquilibrio.fr";
+import cartaEquilibrioDE from "@/data/decisionCenter/cartaEquilibrio.de";
+import cartaEquilibrioPT from "@/data/decisionCenter/cartaEquilibrio.pt";
 import vinoPorCopaContent from "@/data/decisionCenter/vinoPorCopa";
 import vinoPorCopaEN from "@/data/decisionCenter/vinoPorCopa.en";
 import vinoPorCopaIT from "@/data/decisionCenter/vinoPorCopa.it";
 import vinoPorCopaFR from "@/data/decisionCenter/vinoPorCopa.fr";
+import vinoPorCopaDE from "@/data/decisionCenter/vinoPorCopa.de";
+import vinoPorCopaPT from "@/data/decisionCenter/vinoPorCopa.pt";
 import gruposBenchmarkingEN from "@/data/decisionCenter/gruposBenchmarking.en";
 import gruposBenchmarkingIT from "@/data/decisionCenter/gruposBenchmarking.it";
 import gruposBenchmarkingFR from "@/data/decisionCenter/gruposBenchmarking.fr";
+import gruposBenchmarkingDE from "@/data/decisionCenter/gruposBenchmarking.de";
+import gruposBenchmarkingPT from "@/data/decisionCenter/gruposBenchmarking.pt";
 import gruposBenchmarkingContent from "@/data/decisionCenter/gruposBenchmarking";
 
 /* ── Password gate ── */
@@ -670,6 +682,8 @@ const DecisionCenterArea = () => {
     en: margenesPricingEN,
     it: margenesPricingIT,
     fr: margenesPricingFR,
+    de: margenesPricingDE,
+    pt: margenesPricingPT,
   };
 
   const stockByLang: Record<string, DeepAreaContent> = {
@@ -677,30 +691,40 @@ const DecisionCenterArea = () => {
     en: stockRotacionEN,
     it: stockRotacionIT,
     fr: stockRotacionFR,
+    de: stockRotacionDE,
+    pt: stockRotacionPT,
   };
   const comprasByLang: Record<string, DeepAreaContent> = {
     es: comprasReposicionContent,
     en: comprasReposicionEN,
     it: comprasReposicionIT,
     fr: comprasReposicionFR,
+    de: comprasReposicionDE,
+    pt: comprasReposicionPT,
   };
   const cartaByLang: Record<string, DeepAreaContent> = {
     es: cartaEquilibrioContent,
     en: cartaEquilibrioEN,
     it: cartaEquilibrioIT,
     fr: cartaEquilibrioFR,
+    de: cartaEquilibrioDE,
+    pt: cartaEquilibrioPT,
   };
   const copaByLang: Record<string, DeepAreaContent> = {
     es: vinoPorCopaContent,
     en: vinoPorCopaEN,
     it: vinoPorCopaIT,
     fr: vinoPorCopaFR,
+    de: vinoPorCopaDE,
+    pt: vinoPorCopaPT,
   };
   const gruposByLang: Record<string, DeepAreaContent> = {
     es: gruposBenchmarkingContent,
     en: gruposBenchmarkingEN,
     it: gruposBenchmarkingIT,
     fr: gruposBenchmarkingFR,
+    de: gruposBenchmarkingDE,
+    pt: gruposBenchmarkingPT,
   };
 
   // Deep areas — pick translated version when available, fallback to ES

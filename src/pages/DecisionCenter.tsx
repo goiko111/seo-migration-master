@@ -57,9 +57,9 @@ interface Area {
 const getAreas = (t: TranslationDict): Area[] => [
   {
     id: "margenes",
-    name: t.locale === "es_ES" ? "Márgenes y pricing" : t.locale === "en_GB" ? "Margins & Pricing" : t.locale === "it_IT" ? "Margini e pricing" : "Marges et pricing",
-    tagline: t.locale === "es_ES" ? "Entiende la rentabilidad real de cada vino" : t.locale === "en_GB" ? "Understand the real profitability of each wine" : t.locale === "it_IT" ? "Comprendi la redditività reale di ogni vino" : "Comprenez la rentabilité réelle de chaque vin",
-    description: t.locale === "es_ES" ? "Qué significa cada métrica de margen, cómo interpretar desviaciones y qué palancas usar para mejorar la rentabilidad de tu carta sin tocar la experiencia del comensal." : t.locale === "en_GB" ? "What each margin metric means, how to interpret deviations and what levers to use to improve your wine list profitability without affecting the guest experience." : t.locale === "it_IT" ? "Cosa significa ogni metrica di margine, come interpretare le deviazioni e quali leve usare per migliorare la redditività della tua carta senza toccare l'esperienza del cliente." : "Ce que signifie chaque métrique de marge, comment interpréter les écarts et quels leviers utiliser pour améliorer la rentabilité de votre carte sans affecter l'expérience client.",
+    name: t.locale === "es_ES" ? "Márgenes y pricing" : t.locale === "en_GB" ? "Margins & Pricing" : t.locale === "it_IT" ? "Margini e pricing" : t.locale === "de_DE" ? "Margen und Preisgestaltung" : t.locale === "pt_PT" ? "Margens e definição de preços" : "Marges et pricing",
+    tagline: t.locale === "es_ES" ? "Entiende la rentabilidad real de cada vino" : t.locale === "en_GB" ? "Understand the real profitability of each wine" : t.locale === "it_IT" ? "Comprendi la redditività reale di ogni vino" : t.locale === "de_DE" ? "Verstehen Sie die tatsächliche Rentabilität jedes Weins" : t.locale === "pt_PT" ? "Compreenda a rentabilidade real de cada vinho" : "Comprenez la rentabilité réelle de chaque vin",
+    description: t.locale === "es_ES" ? "Qué significa cada métrica de margen, cómo interpretar desviaciones y qué palancas usar para mejorar la rentabilidad de tu carta sin tocar la experiencia del comensal." : t.locale === "en_GB" ? "What each margin metric means, how to interpret deviations and what levers to use to improve your wine list profitability without affecting the guest experience." : t.locale === "it_IT" ? "Cosa significa ogni metrica di margine, come interpretare le deviazioni e quali leve usare per migliorare la redditività della tua carta senza toccare l'esperienza del cliente." : t.locale === "de_DE" ? "Was jede Margenkennzahl bedeutet, wie man Abweichungen interpretiert und welche Hebel man nutzen kann, um die Rentabilität Ihrer Weinkarte zu verbessern, ohne das Gasterlebnis zu beeinträchtigen." : t.locale === "pt_PT" ? "O que cada métrica de margem significa, como interpretar desvios e quais alavancas usar para melhorar a rentabilidade da sua carta de vinhos sem afetar a experiência do cliente." : "Ce que signifie chaque métrique de marge, comment interpréter les écarts et quels leviers utiliser pour améliorer la rentabilité de votre carte sans affecter l'expérience client.",
     profiles: ["direccion", "compras-fb"],
     icon: DollarSign,
     accent: "text-amber-500",
@@ -69,9 +69,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "stock",
-    name: t.locale === "es_ES" ? "Stock y rotación" : t.locale === "en_GB" ? "Stock & Rotation" : t.locale === "it_IT" ? "Stock e rotazione" : "Stock et rotation",
-    tagline: t.locale === "es_ES" ? "Detecta lo que no se mueve antes de que sea tarde" : t.locale === "en_GB" ? "Spot what isn't moving before it's too late" : t.locale === "it_IT" ? "Individua ciò che non si muove prima che sia troppo tardi" : "Détectez ce qui ne bouge pas avant qu'il ne soit trop tard",
-    description: t.locale === "es_ES" ? "Cómo identificar vinos muertos, cuánto capital tienes inmovilizado, cuándo retirar una referencia y cómo mantener una bodega viva y rentable." : t.locale === "en_GB" ? "How to identify dead stock, how much capital is tied up, when to delist a reference and how to keep a live, profitable cellar." : t.locale === "it_IT" ? "Come identificare i vini morti, quanto capitale hai immobilizzato, quando ritirare un riferimento e come mantenere una cantina viva e redditizia." : "Comment identifier le stock mort, combien de capital est immobilisé, quand retirer une référence et comment maintenir une cave vivante et rentable.",
+    name: t.locale === "es_ES" ? "Stock y rotación" : t.locale === "en_GB" ? "Stock & Rotation" : t.locale === "it_IT" ? "Stock e rotazione" : t.locale === "de_DE" ? "Bestand und Rotation" : t.locale === "pt_PT" ? "Stock e rotação" : "Stock et rotation",
+    tagline: t.locale === "es_ES" ? "Detecta lo que no se mueve antes de que sea tarde" : t.locale === "en_GB" ? "Spot what isn't moving before it's too late" : t.locale === "it_IT" ? "Individua ciò che non si muove prima che sia troppo tardi" : t.locale === "de_DE" ? "Erkennen Sie, was sich nicht bewegt, bevor es zu spät ist" : t.locale === "pt_PT" ? "Identifique o que não se move antes que seja tarde" : "Détectez ce qui ne bouge pas avant qu'il ne soit trop tard",
+    description: t.locale === "es_ES" ? "Cómo identificar vinos muertos, cuánto capital tienes inmovilizado, cuándo retirar una referencia y cómo mantener una bodega viva y rentable." : t.locale === "en_GB" ? "How to identify dead stock, how much capital is tied up, when to delist a reference and how to keep a live, profitable cellar." : t.locale === "it_IT" ? "Come identificare i vini morti, quanto capitale hai immobilizzato, quando ritirare un riferimento e come mantenere una cantina viva e redditizia." : t.locale === "de_DE" ? "Wie Sie Totbestand identifizieren, wie viel Kapital gebunden ist, wann Sie einen Artikel auslisten und wie Sie eine lebendige und rentable Weingarderobe pflegen." : t.locale === "pt_PT" ? "Como identificar stock morto, quanto capital está imobilizado, quando remover uma referência e como manter uma adega viva e rentável." : "Comment identifier le stock mort, combien de capital est immobilisé, quand retirer une référence et comment maintenir une cave vivante et rentable.",
     profiles: ["sala", "compras-fb", "direccion"],
     icon: Package,
     accent: "text-emerald-500",
@@ -81,9 +81,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "compras",
-    name: t.locale === "es_ES" ? "Compras y reposición" : t.locale === "en_GB" ? "Purchasing & Replenishment" : t.locale === "it_IT" ? "Acquisti e rifornimento" : "Achats et réapprovisionnement",
-    tagline: t.locale === "es_ES" ? "Compra con datos, no con intuición" : t.locale === "en_GB" ? "Buy with data, not intuition" : t.locale === "it_IT" ? "Acquista con i dati, non con l'intuizione" : "Achetez avec des données, pas à l'intuition",
-    description: t.locale === "es_ES" ? "Qué datos usar antes de comprar, cómo detectar sobrecostes, cuándo negociar condiciones y cómo conectar tus decisiones de compra con el rendimiento real de la carta." : t.locale === "en_GB" ? "What data to use before purchasing, how to detect overpricing, when to negotiate conditions and how to connect buying decisions with real wine list performance." : t.locale === "it_IT" ? "Quali dati usare prima di acquistare, come rilevare sovracosti, quando negoziare condizioni e come collegare le decisioni di acquisto al rendimento reale della carta." : "Quelles données utiliser avant d'acheter, comment détecter les surcoûts, quand négocier les conditions et comment relier vos décisions d'achat à la performance réelle de la carte.",
+    name: t.locale === "es_ES" ? "Compras y reposición" : t.locale === "en_GB" ? "Purchasing & Replenishment" : t.locale === "it_IT" ? "Acquisti e rifornimento" : t.locale === "de_DE" ? "Einkauf und Nachschub" : t.locale === "pt_PT" ? "Compras e reposição" : "Achats et réapprovisionnement",
+    tagline: t.locale === "es_ES" ? "Compra con datos, no con intuición" : t.locale === "en_GB" ? "Buy with data, not intuition" : t.locale === "it_IT" ? "Acquista con i dati, non con l'intuizione" : t.locale === "de_DE" ? "Kaufen Sie mit Daten, nicht mit Intuition" : t.locale === "pt_PT" ? "Compre com dados, não com intuição" : "Achetez avec des données, pas à l'intuition",
+    description: t.locale === "es_ES" ? "Qué datos usar antes de comprar, cómo detectar sobrecostes, cuándo negociar condiciones y cómo conectar tus decisiones de compra con el rendimiento real de la carta." : t.locale === "en_GB" ? "What data to use before purchasing, how to detect overpricing, when to negotiate conditions and how to connect buying decisions with real wine list performance." : t.locale === "it_IT" ? "Quali dati usare prima di acquistare, come rilevare sovracosti, quando negoziare condizioni e come collegare le decisioni di acquisto al rendimento reale della carta." : t.locale === "de_DE" ? "Welche Daten vor dem Kauf zu verwenden sind, wie Überpreisungen erkannt werden, wann Bedingungen verhandelt werden und wie Kaufentscheidungen mit der tatsächlichen Weinkarten-Performance verbunden werden." : t.locale === "pt_PT" ? "Que dados usar antes de comprar, como detectar sobrecustos, quando negociar condições e como conectar decisões de compra com o desempenho real da carta." : "Quelles données utiliser avant d'acheter, comment détecter les surcoûts, quand négocier les conditions et comment relier vos décisions d'achat à la performance réelle de la carte.",
     profiles: ["compras-fb", "direccion"],
     icon: ShoppingCart,
     accent: "text-blue-500",
@@ -93,9 +93,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "carta",
-    name: t.locale === "es_ES" ? "Carta y equilibrio" : t.locale === "en_GB" ? "Wine List & Balance" : t.locale === "it_IT" ? "Carta ed equilibrio" : "Carte et équilibre",
-    tagline: t.locale === "es_ES" ? "Tu carta debe contar una historia coherente" : t.locale === "en_GB" ? "Your wine list should tell a coherent story" : t.locale === "it_IT" ? "La tua carta deve raccontare una storia coerente" : "Votre carte doit raconter une histoire cohérente",
-    description: t.locale === "es_ES" ? "Cómo evaluar el equilibrio de tu carta por estilos, precios, regiones y tipologías. Qué canibaliza, qué falta y cómo construir una arquitectura de carta que venda sola." : t.locale === "en_GB" ? "How to assess your wine list balance by style, price, region and type. What cannibalises, what's missing and how to build a list architecture that sells itself." : t.locale === "it_IT" ? "Come valutare l'equilibrio della tua carta per stili, prezzi, regioni e tipologie. Cosa cannibalizza, cosa manca e come costruire un'architettura di carta che si venda da sola." : "Comment évaluer l'équilibre de votre carte par styles, prix, régions et typologies. Ce qui cannibalise, ce qui manque et comment construire une architecture de carte qui vend toute seule.",
+    name: t.locale === "es_ES" ? "Carta y equilibrio" : t.locale === "en_GB" ? "Wine List & Balance" : t.locale === "it_IT" ? "Carta ed equilibrio" : t.locale === "de_DE" ? "Weinkarte und Ausgewogenheit" : t.locale === "pt_PT" ? "Carta de vinhos e equilíbrio" : "Carte et équilibre",
+    tagline: t.locale === "es_ES" ? "Tu carta debe contar una historia coherente" : t.locale === "en_GB" ? "Your wine list should tell a coherent story" : t.locale === "it_IT" ? "La tua carta deve raccontare una storia coerente" : t.locale === "de_DE" ? "Ihre Weinkarte sollte eine kohärente Geschichte erzählen" : t.locale === "pt_PT" ? "Sua carta de vinhos deve contar uma história coerente" : "Votre carte doit raconter une histoire cohérente",
+    description: t.locale === "es_ES" ? "Cómo evaluar el equilibrio de tu carta por estilos, precios, regiones y tipologías. Qué canibaliza, qué falta y cómo construir una arquitectura de carta que venda sola." : t.locale === "en_GB" ? "How to assess your wine list balance by style, price, region and type. What cannibalises, what's missing and how to build a list architecture that sells itself." : t.locale === "it_IT" ? "Come valutare l'equilibrio della tua carta per stili, prezzi, regioni e tipologie. Cosa cannibalizza, cosa manca e come costruire un'architettura di carta che si venda da sola." : t.locale === "de_DE" ? "Wie Sie die Ausgewogenheit Ihrer Weinkarte nach Stilen, Preisen, Regionen und Typen bewerten. Was kannibaliert, was fehlt und wie Sie eine Weinkarten-Architektur aufbauen, die sich selbst verkauft." : t.locale === "pt_PT" ? "Como avaliar o equilíbrio da sua carta de vinhos por estilos, preços, regiões e tipologias. O que canibaliza, o que falta e como construir uma arquitetura de carta que se venda sozinha." : "Comment évaluer l'équilibre de votre carte par styles, prix, régions et typologies. Ce qui cannibalise, ce qui manque et comment construire une architecture de carte qui vend toute seule.",
     profiles: ["sala", "direccion", "compras-fb"],
     icon: BarChart3,
     accent: "text-wine",
@@ -105,9 +105,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "copa",
-    name: t.locale === "es_ES" ? "Vino por copa" : t.locale === "en_GB" ? "By the Glass" : t.locale === "it_IT" ? "Vino al calice" : "Vin au verre",
-    tagline: t.locale === "es_ES" ? "El programa de copa como motor de margen" : t.locale === "en_GB" ? "The by-the-glass programme as a margin driver" : t.locale === "it_IT" ? "Il programma al calice come motore di margine" : "Le programme au verre comme moteur de marge",
-    description: t.locale === "es_ES" ? "Cómo diseñar, ejecutar y controlar un programa de vino por copa rentable: selección, pricing, merma, rotación y la relación entre copa y botella." : t.locale === "en_GB" ? "How to design, run and control a profitable by-the-glass programme: selection, pricing, waste, rotation and the glass-to-bottle relationship." : t.locale === "it_IT" ? "Come progettare, gestire e controllare un programma di vino al calice redditizio: selezione, pricing, spreco, rotazione e il rapporto calice-bottiglia." : "Comment concevoir, exécuter et contrôler un programme de vin au verre rentable : sélection, tarification, perte, rotation et la relation verre-bouteille.",
+    name: t.locale === "es_ES" ? "Vino por copa" : t.locale === "en_GB" ? "By the Glass" : t.locale === "it_IT" ? "Vino al calice" : t.locale === "de_DE" ? "Wein nach Glas" : t.locale === "pt_PT" ? "Vinho a copo" : "Vin au verre",
+    tagline: t.locale === "es_ES" ? "El programa de copa como motor de margen" : t.locale === "en_GB" ? "The by-the-glass programme as a margin driver" : t.locale === "it_IT" ? "Il programma al calice come motore di margine" : t.locale === "de_DE" ? "Das Glas-Programm als Marginen-Treiber" : t.locale === "pt_PT" ? "O programa de vinho a copo como motor de margem" : "Le programme au verre comme moteur de marge",
+    description: t.locale === "es_ES" ? "Cómo diseñar, ejecutar y controlar un programa de vino por copa rentable: selección, pricing, merma, rotación y la relación entre copa y botella." : t.locale === "en_GB" ? "How to design, run and control a profitable by-the-glass programme: selection, pricing, waste, rotation and the glass-to-bottle relationship." : t.locale === "it_IT" ? "Come progettare, gestire e controllare un programma di vino al calice redditizio: selezione, pricing, spreco, rotazione e il rapporto calice-bottiglia." : t.locale === "de_DE" ? "Wie Sie ein rentables Glas-Programm gestalten, führen und kontrollieren: Auswahl, Preisgestaltung, Verschwendung, Rotation und das Glas-zu-Flasche-Verhältnis." : t.locale === "pt_PT" ? "Como projetar, executar e controlar um programa de vinho a copo rentável: seleção, definição de preços, desperdício, rotação e a relação entre copo e garrafa." : "Comment concevoir, exécuter et contrôler un programme de vin au verre rentable : sélection, tarification, perte, rotation et la relation verre-bouteille.",
     profiles: ["sala", "direccion"],
     icon: Wine,
     accent: "text-purple-500",
@@ -117,9 +117,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "grupos",
-    name: t.locale === "es_ES" ? "Grupos y benchmarking" : t.locale === "en_GB" ? "Groups & Benchmarking" : t.locale === "it_IT" ? "Gruppi e benchmarking" : "Groupes et benchmarking",
-    tagline: t.locale === "es_ES" ? "Gobierna la categoría vino a escala" : t.locale === "en_GB" ? "Govern the wine category at scale" : t.locale === "it_IT" ? "Governa la categoria vino su scala" : "Gouvernez la catégorie vin à grande échelle",
-    description: t.locale === "es_ES" ? "Cómo comparar locales, detectar desviaciones, estandarizar criterios de compra y gestionar surtido de forma centralizada sin perder la identidad de cada restaurante." : t.locale === "en_GB" ? "How to compare units, detect deviations, standardise purchasing criteria and manage assortment centrally without losing each restaurant's identity." : t.locale === "it_IT" ? "Come confrontare i locali, rilevare deviazioni, standardizzare i criteri di acquisto e gestire l'assortimento in modo centralizzato senza perdere l'identità di ogni ristorante." : "Comment comparer les établissements, détecter les écarts, standardiser les critères d'achat et gérer l'assortiment de manière centralisée sans perdre l'identité de chaque restaurant.",
+    name: t.locale === "es_ES" ? "Grupos y benchmarking" : t.locale === "en_GB" ? "Groups & Benchmarking" : t.locale === "it_IT" ? "Gruppi e benchmarking" : t.locale === "de_DE" ? "Gruppen und Benchmarking" : t.locale === "pt_PT" ? "Grupos e benchmarking" : "Groupes et benchmarking",
+    tagline: t.locale === "es_ES" ? "Gobierna la categoría vino a escala" : t.locale === "en_GB" ? "Govern the wine category at scale" : t.locale === "it_IT" ? "Governa la categoria vino su scala" : t.locale === "de_DE" ? "Kontrollieren Sie die Weinkategorie im großen Maßstab" : t.locale === "pt_PT" ? "Governe a categoria de vinho em escala" : "Gouvernez la catégorie vin à grande échelle",
+    description: t.locale === "es_ES" ? "Cómo comparar locales, detectar desviaciones, estandarizar criterios de compra y gestionar surtido de forma centralizada sin perder la identidad de cada restaurante." : t.locale === "en_GB" ? "How to compare units, detect deviations, standardise purchasing criteria and manage assortment centrally without losing each restaurant's identity." : t.locale === "it_IT" ? "Come confrontare i locali, rilevare deviazioni, standardizzare i criteri di acquisto e gestire l'assortimento in modo centralizzato senza perdere l'identità di ogni ristorante." : t.locale === "de_DE" ? "Wie Sie Restaurants vergleichen, Abweichungen erkennen, Kaufkriterien standardisieren und die Auswahl zentral verwalten, ohne die Identität jedes Restaurants zu verlieren." : t.locale === "pt_PT" ? "Como comparar unidades, detectar desvios, padronizar critérios de compra e gerenciar sortimento centralmente sem perder a identidade de cada restaurante." : "Comment comparer les établissements, détecter les écarts, standardiser les critères d'achat et gérer l'assortiment de manière centralisée sans perdre l'identité de chaque restaurant.",
     profiles: ["grupo", "direccion"],
     icon: Building2,
     accent: "text-rose-500",
@@ -129,9 +129,9 @@ const getAreas = (t: TranslationDict): Area[] => [
   },
   {
     id: "cursos",
-    name: t.locale === "es_ES" ? "Formación y Academia" : t.locale === "en_GB" ? "Training & Academy" : t.locale === "it_IT" ? "Formazione e Accademia" : "Formation et Académie",
-    tagline: t.locale === "es_ES" ? "Desarrolla el conocimiento de tu equipo" : t.locale === "en_GB" ? "Develop your team's knowledge" : t.locale === "it_IT" ? "Sviluppa la conoscenza del tuo team" : "Développez les connaissances de votre équipe",
-    description: t.locale === "es_ES" ? "Cursos, webinars y talleres para dominar la gestión de cartas de vinos, mejorar habilidades de sommelier y optimizar decisiones comerciales. Acceso a contenido exclusivo diseñado para cada rol." : t.locale === "en_GB" ? "Courses, webinars and workshops to master wine list management, improve sommelier skills and optimise business decisions. Access to exclusive content designed for each role." : t.locale === "it_IT" ? "Corsi, webinar e workshop per padroneggiare la gestione della carta dei vini, migliorare le competenze del sommelier e ottimizzare le decisioni commerciali. Accesso a contenuti esclusivi progettati per ogni ruolo." : "Cours, webinaires et ateliers pour maîtriser la gestion de la carte des vins, améliorer les compétences du sommelier et optimiser les décisions commerciales. Accès au contenu exclusif conçu pour chaque rôle.",
+    name: t.locale === "es_ES" ? "Formación y Academia" : t.locale === "en_GB" ? "Training & Academy" : t.locale === "it_IT" ? "Formazione e Accademia" : t.locale === "de_DE" ? "Schulung und Akademie" : t.locale === "pt_PT" ? "Treinamento e Academia" : "Formation et Académie",
+    tagline: t.locale === "es_ES" ? "Desarrolla el conocimiento de tu equipo" : t.locale === "en_GB" ? "Develop your team's knowledge" : t.locale === "it_IT" ? "Sviluppa la conoscenza del tuo team" : t.locale === "de_DE" ? "Entwickeln Sie das Wissen Ihres Teams" : t.locale === "pt_PT" ? "Desenvolva o conhecimento da sua equipe" : "Développez les connaissances de votre équipe",
+    description: t.locale === "es_ES" ? "Cursos, webinars y talleres para dominar la gestión de cartas de vinos, mejorar habilidades de sommelier y optimizar decisiones comerciales. Acceso a contenido exclusivo diseñado para cada rol." : t.locale === "en_GB" ? "Courses, webinars and workshops to master wine list management, improve sommelier skills and optimise business decisions. Access to exclusive content designed for each role." : t.locale === "it_IT" ? "Corsi, webinar e workshop per padroneggiare la gestione della carta dei vini, migliorare le competenze del sommelier e ottimizzare le decisioni commerciali. Accesso a contenuti esclusivi progettati per ogni ruolo." : t.locale === "de_DE" ? "Kurse, Webinare und Workshops zur Beherrschung der Weinkarten-Verwaltung, Verbesserung der Sommelier-Fähigkeiten und Optimierung von Geschäftsentscheidungen. Zugang zu exklusivem Inhalt, der für jede Rolle entworfen wurde." : t.locale === "pt_PT" ? "Cursos, webinars e workshops para dominar o gerenciamento de cartas de vinhos, melhorar habilidades de sommelier e otimizar decisões comerciais. Acesso a conteúdo exclusivo projetado para cada função." : "Cours, webinaires et ateliers pour maîtriser la gestion de la carte des vins, améliorer les compétences du sommelier et optimiser les décisions commerciales. Accès au contenu exclusif conçu pour chaque rôle.",
     profiles: ["direccion", "sala", "compras-fb", "grupo"],
     icon: BookOpen,
     accent: "text-indigo-500",
@@ -154,7 +154,7 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
     }
   };
 
-  const lang = t.locale === "es_ES" ? "es" : t.locale === "en_GB" ? "en" : t.locale === "it_IT" ? "it" : "fr";
+  const lang = t.locale === "es_ES" ? "es" : t.locale === "en_GB" ? "en" : t.locale === "it_IT" ? "it" : t.locale === "de_DE" ? "de" : t.locale === "pt_PT" ? "pt" : "fr";
 
   const copy = {
     es: {
@@ -220,6 +220,38 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
       for_desc: "Cette zone est conçue pour les clients Winerim et les équipes autorisées.",
       no_client: "Pas encore client ?",
       request_demo: "Demander une démo",
+    },
+    de: {
+      title: "Winerim Kundenbreich",
+      subtitle: "Greifen Sie auf die private Umgebung zu, in der Ihre Daten, Erkenntnisse und Empfehlungen sich in klarere Entscheidungen verwandeln.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "Eine Schicht, um besser zu verstehen, was Winerim in Ihrer Weinkarte erkennt und was Sie jetzt tun sollten." },
+        { emoji: "📊", title: "Kontextuelle Lektüre Ihrer Erkenntnisse", desc: "Sie sehen nicht nur Metriken: Sie verstehen, warum sie wichtig sind, ihre Priorität und mögliche Auswirkungen." },
+        { emoji: "🎯", title: "Priorität und Aktion", desc: "Greifen Sie auf Empfehlungen, nächste Schritte und Nachverfolgung zu, um mit mehr Urteilskraft voranzukommen." },
+        { emoji: "🔒", title: "Private Umgebung für mehr Wert", desc: "Ein Raum, der für Kunden und autorisierte Teams konzipiert ist und mit ihrem realen Fall verbunden ist." },
+      ],
+      not_title: "Was dieser Bereich nicht ist",
+      not_desc: "Es ist weder eine öffentliche Bibliothek noch eine einfache Ressourcensammlung. Es ist eine private Umgebung, die entwickelt wurde, um Ihre Realität innerhalb von Winerim besser zu interpretieren.",
+      for_title: "Für wen",
+      for_desc: "Dieser Bereich ist für Winerim-Kunden und autorisierte Teams konzipiert.",
+      no_client: "Noch kein Kunde?",
+      request_demo: "Demo anfordern",
+    },
+    pt: {
+      title: "Área do Cliente Winerim",
+      subtitle: "Acesse o ambiente privado onde seus dados, insights e recomendações se transformam em decisões mais claras.",
+      cards: [
+        { emoji: "🧠", title: "Decision Center", desc: "Uma camada para entender melhor o que Winerim detecta em sua carta de vinhos e saber o que fazer agora." },
+        { emoji: "📊", title: "Leitura contextual de seus insights", desc: "Você não vê apenas métricas: você entende por que são importantes, sua prioridade e impacto potencial." },
+        { emoji: "🎯", title: "Prioridade e ação", desc: "Acesse recomendações, próximas etapas e acompanhamento para avançar com mais critério." },
+        { emoji: "🔒", title: "Ambiente privado para mais valor", desc: "Um espaço projetado para clientes e equipes autorizadas, conectado ao seu caso real." },
+      ],
+      not_title: "O que esta área não é",
+      not_desc: "Não é uma biblioteca pública nem uma simples coleção de recursos. É um ambiente privado projetado para ajudá-lo a interpretar melhor sua realidade dentro do Winerim.",
+      for_title: "Para quem",
+      for_desc: "Esta área é projetada para clientes Winerim e equipes autorizadas.",
+      no_client: "Ainda não é cliente?",
+      request_demo: "Solicitar demo",
     },
   };
 
@@ -290,10 +322,10 @@ const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: 
                   </div>
                   <div>
                     <h2 className="font-heading text-base font-bold text-foreground">
-                      {lang === "es" ? "Accede a tu zona" : lang === "en" ? "Access your area" : lang === "it" ? "Accedi alla tua zona" : "Accédez à votre espace"}
+                      {lang === "es" ? "Accede a tu zona" : lang === "en" ? "Access your area" : lang === "it" ? "Accedi alla tua zona" : lang === "de" ? "Greifen Sie auf Ihren Bereich zu" : lang === "pt" ? "Acesse sua area" : "Accédez à votre espace"}
                     </h2>
                     <p className="text-[11px] text-muted-foreground/60">
-                      {lang === "es" ? "Solo para clientes y equipos autorizados" : lang === "en" ? "For clients and authorised teams only" : lang === "it" ? "Solo per clienti e team autorizzati" : "Pour clients et équipes autorisées uniquement"}
+                      {lang === "es" ? "Solo para clientes y equipos autorizados" : lang === "en" ? "For clients and authorised teams only" : lang === "it" ? "Solo per clienti e team autorizzati" : lang === "de" ? "Nur für Kunden und autorisierte Teams" : lang === "pt" ? "Apenas para clientes e equipes autorizadas" : "Pour clients et équipes autorisées uniquement"}
                     </p>
                   </div>
                 </div>

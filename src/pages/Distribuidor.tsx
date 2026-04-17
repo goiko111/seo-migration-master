@@ -10,7 +10,10 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 
 const WA_NUMBER = "34658718350";
-const WA_MSG = encodeURIComponent("Hola, me interesa ser distribuidor de Winerim. ¿Podemos hablar?");
+const WA_MSG_ES = encodeURIComponent("Hola, me interesa ser distribuidor de Winerim. Podemos hablar?");
+const WA_MSG_EN = encodeURIComponent("Hi, I am interested in becoming a Winerim distributor. Can we talk?");
+const WA_MSG_DE = encodeURIComponent("Hallo, ich bin daran interessiert, Winerim-Distributor zu werden. Konnen wir sprechen?");
+const WA_MSG_PT = encodeURIComponent("Ola, estou interessado em me tornar um distribuidor da Winerim. Podemos conversar?");
 
 const Check = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-start gap-3">

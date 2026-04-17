@@ -38,35 +38,116 @@ const benefits = [
   { value: "70%+", label: "By-the-Glass Margin", desc: "Premium margins on by-the-glass offerings with intelligent selection and pricing." },
 ];
 
-const faqs = [
-  {
-    q: "What is Winerim?",
-    a: "Winerim is a wine intelligence platform designed for restaurants. It combines digital wine list management, AI-powered wine recommendations, automatic food and wine pairing, sales analytics and price optimization in a single platform built for the hospitality industry.",
-  },
-  {
-    q: "What does wine list management software do?",
-    a: "Wine list management software helps restaurants digitize, organize and optimize their wine offering. It typically includes features like digital wine lists accessible via QR code, search filters, pairing suggestions, sales analytics and pricing tools. Winerim is a comprehensive wine list management solution that integrates artificial intelligence.",
-  },
-  {
-    q: "How can technology help restaurants sell more wine?",
-    a: "Technology helps restaurants sell more wine in three key ways: first, through intelligent recommendations that suggest the ideal wine for each dish and guest; second, with interactive digital wine lists that make exploration easy and remove friction from choosing; third, with sales analytics that enable data-driven decisions on pricing, rotation and selection.",
-  },
-  {
-    q: "What is a digital wine list?",
-    a: "A digital wine list is an electronic version of a restaurant's wine offering that guests can access from their phone, a tablet, or the restaurant's website. Unlike a paper list, a digital wine list can include filters, search, tasting notes, food pairing suggestions and real-time availability. Winerim provides a fully interactive digital wine list with AI-powered features.",
-  },
-  {
-    q: "How does AI improve wine sales in restaurants?",
-    a: "AI improves wine sales by analyzing patterns in guest preferences, dish selections and historical sales data to generate personalized wine recommendations. It also enables automatic food and wine pairing, identifies underperforming wines that should be rotated, and suggests optimal pricing strategies based on market data.",
-  },
-  {
-    q: "Is Winerim available in multiple languages?",
-    a: "Yes. Winerim is a multilingual platform that operates in Spanish and English. The digital wine list can be presented to guests in their preferred language, which is especially useful for restaurants with international clientele.",
-  },
-];
+const faqs = {
+  es: [
+    {
+      q: "Que es Winerim?",
+      a: "Winerim es una plataforma de inteligencia del vino disenada para restaurantes. Combina gestion de carta digital, recomendaciones de vino impulsadas por IA, emparejamiento automatico de vino con comida, analitica de ventas y optimizacion de precios en una sola plataforma construida para la industria hotelera.",
+    },
+    {
+      q: "Que hace el software de gestion de cartas de vino?",
+      a: "El software de gestion de cartas ayuda a los restaurantes a digitalizar, organizar y optimizar su oferta de vino. Normalmente incluye funciones como cartas digitales accesibles via codigo QR, filtros de busqueda, sugerencias de emparejamiento, analitica de ventas y herramientas de pricing. Winerim es una solucion integral de gestion de cartas que integra inteligencia artificial.",
+    },
+    {
+      q: "Como puede la tecnologia ayudar a los restaurantes a vender mas vino?",
+      a: "La tecnologia ayuda a los restaurantes a vender mas vino de tres formas clave: primero, mediante recomendaciones inteligentes que sugieren el vino ideal para cada plato y comensal; segundo, con cartas digitales interactivas que facilitan la exploracion; tercero, con analitica de ventas que permiten decisiones basadas en datos sobre pricing, rotacion y seleccion.",
+    },
+    {
+      q: "Que es una carta digital de vinos?",
+      a: "Una carta digital de vinos es una version electronica de la oferta de vino de un restaurante que los comensales pueden acceder desde su telefono, tablet o sitio web. A diferencia de una carta en papel, una carta digital puede incluir filtros, busqueda, notas de degustacion, sugerencias de emparejamiento y disponibilidad en tiempo real. Winerim proporciona una carta digital totalmente interactiva con caracteristicas impulsadas por IA.",
+    },
+    {
+      q: "Como mejora la IA las ventas de vino en restaurantes?",
+      a: "La IA mejora las ventas de vino analizando patrones en las preferencias de los comensales, selecciones de platos y datos historicos de ventas para generar recomendaciones de vino personalizadas. Tambien permite emparejamiento automatico de vino con comida, identifica vinos con bajo rendimiento que deben rotarse y sugiere estrategias de pricing optimo basadas en datos de mercado.",
+    },
+    {
+      q: "Winerim esta disponible en multiples idiomas?",
+      a: "Si. Winerim es una plataforma multilingue que funciona en espanol, ingles, italiano, frances, aleman y portugues europeo. La carta digital de vinos puede presentarse a los comensales en su idioma preferido, lo que es especialmente util para restaurantes con clientela internacional.",
+    },
+  ],
+  en: [
+    {
+      q: "What is Winerim?",
+      a: "Winerim is a wine intelligence platform designed for restaurants. It combines digital wine list management, AI-powered wine recommendations, automatic food and wine pairing, sales analytics and price optimization in a single platform built for the hospitality industry.",
+    },
+    {
+      q: "What does wine list management software do?",
+      a: "Wine list management software helps restaurants digitize, organize and optimize their wine offering. It typically includes features like digital wine lists accessible via QR code, search filters, pairing suggestions, sales analytics and pricing tools. Winerim is a comprehensive wine list management solution that integrates artificial intelligence.",
+    },
+    {
+      q: "How can technology help restaurants sell more wine?",
+      a: "Technology helps restaurants sell more wine in three key ways: first, through intelligent recommendations that suggest the ideal wine for each dish and guest; second, with interactive digital wine lists that make exploration easy and remove friction from choosing; third, with sales analytics that enable data-driven decisions on pricing, rotation and selection.",
+    },
+    {
+      q: "What is a digital wine list?",
+      a: "A digital wine list is an electronic version of a restaurant's wine offering that guests can access from their phone, a tablet, or the restaurant's website. Unlike a paper list, a digital wine list can include filters, search, tasting notes, food pairing suggestions and real-time availability. Winerim provides a fully interactive digital wine list with AI-powered features.",
+    },
+    {
+      q: "How does AI improve wine sales in restaurants?",
+      a: "AI improves wine sales by analyzing patterns in guest preferences, dish selections and historical sales data to generate personalized wine recommendations. It also enables automatic food and wine pairing, identifies underperforming wines that should be rotated, and suggests optimal pricing strategies based on market data.",
+    },
+    {
+      q: "Is Winerim available in multiple languages?",
+      a: "Yes. Winerim is a multilingual platform that operates in Spanish, English, Italian, French, German and European Portuguese. The digital wine list can be presented to guests in their preferred language, which is especially useful for restaurants with international clientele.",
+    },
+  ],
+  de: [
+    {
+      q: "Was ist Winerim?",
+      a: "Winerim ist eine Wein-Intelligenzplattform fur Restaurants. Sie verbindet digitale Weinkartenverwaltung, KI-gestutzte Weinempfehlungen, automatische Wein- und Speisenpaarungen, Verkaufsanalysen und Preisoptimierung auf einer einzigen Plattform fur die Gastgewerbeindustrie.",
+    },
+    {
+      q: "Was leistet Software zur Verwaltung von Weinkarten?",
+      a: "Software zur Verwaltung von Weinkarten hilft Restaurants, ihre Weinangebote zu digitalisieren, zu organisieren und zu optimieren. Sie umfasst typischerweise Funktionen wie digital verfugbare Weinkarten uber QR-Code, Suchfilter, Paarungsvorschlage, Verkaufsanalysen und Preistools. Winerim ist eine umfassende Losung zur Verwaltung von Weinkarten, die kunstliche Intelligenz integriert.",
+    },
+    {
+      q: "Wie kann Technologie Restaurants helfen, mehr Wein zu verkaufen?",
+      a: "Technologie hilft Restaurants auf drei Arten, mehr Wein zu verkaufen: erstens durch intelligente Empfehlungen, die den idealen Wein fur jedes Gericht und jeden Gast vorschlagen; zweitens durch interaktive digitale Weinkarten, die Erkundung erleichtern; drittens durch Verkaufsanalysen, die datengestutzte Entscheidungen zu Pricing, Rotation und Auswahl ermoglichen.",
+    },
+    {
+      q: "Was ist eine digitale Weinkarte?",
+      a: "Eine digitale Weinkarte ist eine elektronische Fassung des Weinangebots eines Restaurants, auf die Gaste uber ihr Telefon, Tablet oder die Website des Restaurants zugreifen konnen. Im Gegensatz zu einer Papierkarte kann eine digitale Weinkarte Filter, Suche, Verkostungsnotizen, Speisen-Paarungsvorschlage und Verfugbarkeit in Echtzeit enthalten. Winerim bietet eine vollstandig interaktive digitale Weinkarte mit KI-gestutzen Funktionen.",
+    },
+    {
+      q: "Wie verbessert KI die Weinverkaufe in Restaurants?",
+      a: "KI verbessert die Weinverkaufe durch Analyse von Mustern in Gastepraferenzen, Gerichtauswahlen und historischen Verkaufsdaten zur Generierung personalisierter Weinempfehlungen. Sie ermoglicht auch automatische Wein- und Speisenpaarungen, identifiziert unterdurchschnittliche Weine, die rotiert werden sollten, und schlagt optimale Preisstrategien auf Grundlage von Marktdaten vor.",
+    },
+    {
+      q: "Ist Winerim in mehreren Sprachen verfugbar?",
+      a: "Ja. Winerim ist eine mehrsprachige Plattform, die auf Deutsch, Spanisch, Englisch, Italienisch, Franzosisch und Europaisch-Portugiesisch funktioniert. Die digitale Weinkarte kann Gasten in ihrer bevorzugten Sprache prasentiert werden, was besonders fur Restaurants mit internationalem Publikum nutzlich ist.",
+    },
+  ],
+  pt: [
+    {
+      q: "O que e Winerim?",
+      a: "Winerim e uma plataforma de inteligencia do vinho concebida para restaurantes. Combina gestao de carta digital, recomendacoes de vinho alimentadas por IA, emparelhamento automatico de comida e vinho, analitica de vendas e otimizacao de precos numa unica plataforma construida para a industria hoteleira.",
+    },
+    {
+      q: "O que faz o software de gestao de cartas de vinho?",
+      a: "O software de gestao de cartas ajuda os restaurantes a digitalizar, organizar e otimizar a sua oferta de vinho. Tipicamente inclui recursos como cartas digitais acessiveis via codigo QR, filtros de busca, sugestoes de emparelhamento, analitica de vendas e ferramentas de pricing. Winerim e uma solucao abrangente de gestao de cartas que integra inteligencia artificial.",
+    },
+    {
+      q: "Como pode a tecnologia ajudar os restaurantes a vender mais vinho?",
+      a: "A tecnologia ajuda os restaurantes a vender mais vinho de tres formas chave: primeiro, atraves de recomendacoes inteligentes que sugerem o vinho ideal para cada prato e comensal; segundo, com cartas digitais interativas que facilitam a exploracao; terceiro, com analitica de vendas que permitem decisoes baseadas em dados sobre pricing, rotacao e seleccao.",
+    },
+    {
+      q: "O que e uma carta digital de vinho?",
+      a: "Uma carta digital de vinho e uma versao eletronica da oferta de vinho de um restaurante que os comensais podem aceder a partir do seu telemovel, tablet ou website do restaurante. Ao contrario de uma carta em papel, uma carta digital pode incluir filtros, busca, notas de prova, sugestoes de emparelhamento e disponibilidade em tempo real. Winerim fornece uma carta digital completamente interativa com recursos alimentados por IA.",
+    },
+    {
+      q: "Como a IA melhora as vendas de vinho nos restaurantes?",
+      a: "A IA melhora as vendas de vinho analisando padroes nas preferencias dos comensais, seleccoes de pratos e dados de vendas historicos para gerar recomendacoes de vinho personalizadas. Tambem permite emparelhamento automatico de comida e vinho, identifica vinhos com baixo desempenho que devem ser rotacionados e sugere estrategias de pricing otimas baseadas em dados de mercado.",
+    },
+    {
+      q: "Winerim esta disponivel em multiplos idiomas?",
+      a: "Sim. Winerim e uma plataforma multilingue que funciona em Portugues Europeu, Espanhol, Ingles, Italiano, Frances e Aleman. A carta digital de vinho pode ser apresentada aos comensais no seu idioma preferido, o que e especialmente util para restaurantes com clientela internacional.",
+    },
+  ],
+};
 
 const AiWineSoftware = () => {
-  const { allLangPaths } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
+  const currentFaqs = faqs[lang as keyof typeof faqs] || faqs.es;
   useEffect(() => {
     const ld = document.createElement("script");
     ld.id = "ai-wine-software-jsonld";
@@ -113,7 +194,7 @@ const AiWineSoftware = () => {
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
+        mainEntity: currentFaqs.map(f => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -273,7 +354,7 @@ const AiWineSoftware = () => {
         </ScrollReveal>
 
         <div className="space-y-6">
-          {faqs.map((faq, i) => (
+          {currentFaqs.map((faq, i) => (
             <ScrollReveal key={i} delay={i * 0.05}>
               <div className="p-6 rounded-xl border border-border bg-gradient-card">
                 <div className="flex items-start gap-3 mb-3">

@@ -17,17 +17,47 @@ import {
 import { Link } from "react-router-dom";
 
 const SobreWinerim = () => {
-  const { localePath, allLangPaths } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
 
-  const faqs = [
-    { q: "¿Quién está detrás de Winerim?", a: "Winerim nace de un equipo con experiencia directa en hostelería, sommellerie, gestión de F&B y tecnología aplicada. No es un proyecto de laboratorio: se construye desde dentro del sector, con personas que entienden los retos reales de gestionar vino en un restaurante, hotel o grupo." },
-    { q: "¿Qué problema resuelve Winerim?", a: "Winerim resuelve la desconexión entre carta, bodega, sala y negocio. Conecta datos de venta, stock, pricing y comportamiento del comensal para que cada decisión sobre vino esté basada en información real, no en intuición o inercia." },
-    { q: "¿Winerim sustituye al sumiller?", a: "No. Winerim potencia al sumiller dándole datos, criterio y herramientas para decidir mejor. Y en restaurantes sin sumiller, cubre el hueco con recomendaciones inteligentes y guías para el equipo de sala." },
-    { q: "¿Qué tipo de restaurante encaja con Winerim?", a: "Restaurantes gastronómicos, hoteles con F&B, grupos de restauración, wine bars y cualquier negocio donde el vino sea una categoría relevante. Desde cartas de 30 referencias hasta cartas de más de 500." },
-    { q: "¿En qué países opera Winerim?", a: "Winerim tiene presencia activa en 15 países, con foco principal en España, Italia, Francia y Reino Unido. La plataforma está disponible en español, inglés, italiano y francés." },
-    { q: "¿Qué diferencia a Winerim de una carta digital estándar?", a: "Una carta digital muestra vinos. Winerim analiza la carta, detecta desequilibrios, sugiere cambios de pricing, alerta sobre stock muerto, activa recomendaciones por contexto y mide el impacto comercial de cada decisión." },
-    { q: "¿Cómo puedo probar Winerim?", a: "Puedes solicitar una demo personalizada donde te mostramos cómo funciona Winerim con datos reales adaptados a tu tipo de negocio, sin compromiso." },
-  ];
+  const faqs = {
+    es: [
+      { q: "Quien esta detras de Winerim?", a: "Winerim nace de un equipo con experiencia directa en hoteleria, sommellerie, gestion de F&B y tecnologia aplicada. No es un proyecto de laboratorio: se construye desde dentro del sector, con personas que entienden los retos reales de gestionar vino en un restaurante, hotel o grupo." },
+      { q: "Que problema resuelve Winerim?", a: "Winerim resuelve la desconexion entre carta, bodega, sala y negocio. Conecta datos de venta, stock, pricing y comportamiento del comensal para que cada decision sobre vino este basada en informacion real, no en intuicion o inercia." },
+      { q: "Winerim sustituye al sommelier?", a: "No. Winerim potencia al sommelier dandole datos, criterio y herramientas para decidir mejor. Y en restaurantes sin sommelier, cubre el hueco con recomendaciones inteligentes y guias para el equipo de sala." },
+      { q: "Que tipo de restaurante encaja con Winerim?", a: "Restaurantes gastronomicos, hoteles con F&B, grupos de restauracion, wine bars y cualquier negocio donde el vino sea una categoria relevante. Desde cartas de 30 referencias hasta cartas de mas de 500." },
+      { q: "En que paises opera Winerim?", a: "Winerim tiene presencia activa en 15 paises, con foco principal en Espana, Italia, Francia y Reino Unido. La plataforma esta disponible en espanol, ingles, italiano y frances." },
+      { q: "Que diferencia a Winerim de una carta digital estandar?", a: "Una carta digital muestra vinos. Winerim analiza la carta, detecta desequilibrios, sugiere cambios de pricing, alerta sobre stock muerto, activa recomendaciones por contexto y mide el impacto comercial de cada decision." },
+      { q: "Como puedo probar Winerim?", a: "Puedes solicitar una demo personalizada donde te mostramos como funciona Winerim con datos reales adaptados a tu tipo de negocio, sin compromiso." },
+    ],
+    en: [
+      { q: "Who is behind Winerim?", a: "Winerim comes from a team with direct experience in hospitality, sommellerie, F&B management and applied technology. It is not a lab project: we build from within the industry, with people who understand the real challenges of managing wine in a restaurant, hotel or group." },
+      { q: "What problem does Winerim solve?", a: "Winerim solves the disconnect between wine list, cellar, floor and business. It connects sales data, stock, pricing and customer behavior so every wine decision is based on real information, not intuition or inertia." },
+      { q: "Does Winerim replace the sommelier?", a: "No. Winerim empowers the sommelier by giving them data, criteria and tools to make better decisions. In restaurants without a sommelier, it fills the gap with intelligent recommendations and guides for the floor team." },
+      { q: "What type of restaurant fits Winerim?", a: "Fine dining, hotels with F&B, restaurant groups, wine bars and any business where wine is a relevant category. From wine lists of 30 references to lists of over 500." },
+      { q: "In which countries does Winerim operate?", a: "Winerim has active presence in 15 countries, with main focus on Spain, Italy, France and UK. The platform is available in Spanish, English, Italian and French." },
+      { q: "What sets Winerim apart from a standard digital wine list?", a: "A digital list shows wines. Winerim analyzes the list, detects imbalances, suggests pricing changes, alerts on dead stock, activates context-based recommendations and measures the commercial impact of each decision." },
+      { q: "How can I try Winerim?", a: "You can request a personalized demo where we show you how Winerim works with real data adapted to your business type, with no commitment." },
+    ],
+    de: [
+      { q: "Wer steckt hinter Winerim?", a: "Winerim stammt von einem Team mit direkter Erfahrung in Gaststattenwesen, Sommellerie, F&B-Management und angewandter Technologie. Es ist kein Laborprojekt: Wir bauen von innen heraus auf, mit Menschen, die die echten Herausforderungen verstehen, Wein in einem Restaurant, Hotel oder Konzern zu verwalten." },
+      { q: "Welches Problem lost Winerim?", a: "Winerim lost die Diskonnektivitat zwischen Weinkarte, Weinkeller, Gaststatten und Geschaft. Es verbindet Verkaufsdaten, Bestand, Preisgestaltung und Kundenverhalten, sodass jede Weinentscheidung auf echten Informationen basiert, nicht auf Intuition oder Tragheit." },
+      { q: "Ersetzt Winerim den Sommelier?", a: "Nein. Winerim ermoglicht dem Sommelier durch die Bereitstellung von Daten, Kriterien und Tools bessere Entscheidungen zu treffen. In Restaurants ohne Sommelier fullt es die Lucke mit intelligenten Empfehlungen und Leitfaden fur das Servicepersonal." },
+      { q: "Welche Art von Restaurant passt zu Winerim?", a: "Feinschmecker-Restaurants, Hotels mit F&B, Restaurantketten, Weinbars und jedes Geschaft, in dem Wein eine relevante Kategorie ist. Von Weinkarten mit 30 Positionen bis zu Karten mit uber 500." },
+      { q: "In welchen Landern ist Winerim tatig?", a: "Winerim ist in 15 Landern praesent, mit Fokus auf Spanien, Italien, Frankreich und UK. Die Plattform ist auf Deutsch, Spanisch, Englisch, Italienisch und Franzosisch verfugbar." },
+      { q: "Was unterscheidet Winerim von einer Standard-Digitalweinkarte?", a: "Eine Digital-Liste zeigt Weine. Winerim analysiert die Karte, erkennt Ungleichgewichte, schlagt Preisanderungen vor, warnt vor Totbestand, aktiviert kontextbasierte Empfehlungen und misst die kommerzielle Auswirkung jeder Entscheidung." },
+      { q: "Wie kann ich Winerim ausprobieren?", a: "Sie konnen eine personalisierte Demo anfordern, in der wir Ihnen zeigen, wie Winerim mit echten Daten funktioniert, die an Ihren Geschaftstyp angepasst sind, ohne Verpflichtung." },
+    ],
+    pt: [
+      { q: "Quem esta por tras do Winerim?", a: "Winerim vem de uma equipa com experiencia direta em hotelaria, escanciada, gestao de F&B e tecnologia aplicada. Nao e um projeto de laboratorio: construimos de dentro da industria, com pessoas que entendem os desafios reais de gerir vinho num restaurante, hotel ou grupo." },
+      { q: "Que problema Winerim resolve?", a: "Winerim resolve a desconexao entre carta de vinhos, garrafeira, sala e negocio. Conecta dados de vendas, inventario, pricing e comportamento do cliente para que cada decisao sobre vinho seja baseada em informacao real, nao em intuicao ou inercia." },
+      { q: "Winerim substitui o escanção?", a: "Nao. Winerim capacita o escanção, dando-lhe dados, criterios e ferramentas para tomar melhores decisoes. Em restaurantes sem escanção, preenche a lacuna com recomendacoes inteligentes e guias para a equipa de sala." },
+      { q: "Que tipo de restaurante se adequa ao Winerim?", a: "Restaurantes gastronomicos, hoteis com F&B, grupos de restauracao, bares de vinho e qualquer negocio onde o vinho seja uma categoria relevante. De cartas de 30 referencias ate cartas com mais de 500." },
+      { q: "Em que paises Winerim opera?", a: "Winerim tem presenca ativa em 15 paises, com foco principal em Espanha, Italia, Franca e UK. A plataforma esta disponivel em Portugues Europeu, Espanhol, Ingles, Italiano e Frances." },
+      { q: "O que distingue Winerim de uma carta digital padrão?", a: "Uma carta digital mostra vinhos. Winerim analisa a carta, detecta desequilibrios, sugere alteracoes de preço, alerta sobre stock morto, ativa recomendacoes baseadas em contexto e mede o impacto comercial de cada decisao." },
+      { q: "Como posso experimentar o Winerim?", a: "Pode solicitar uma demo personalizada onde mostramos como Winerim funciona com dados reais adaptados ao seu tipo de negocio, sem compromisso." },
+    ],
+  };
+  const currentFaqs = faqs[lang as keyof typeof faqs] || faqs.es;
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,7 +73,7 @@ const SobreWinerim = () => {
         title="Sobre Winerim | Equipo, Misión y Valores"
         description="Conoce Winerim: el equipo detrás del software de carta de vinos con IA para restaurantes. Nuestra misión y trayectoria."
         url={`${CANONICAL_DOMAIN}/sobre-nosotros`}
-        faqs={faqs}
+        faqs={currentFaqs}
         breadcrumbs={[
           { name: "Inicio", url: CANONICAL_DOMAIN },
           { name: "Sobre nosotros", url: `${CANONICAL_DOMAIN}/sobre-nosotros` },
@@ -450,7 +480,7 @@ const SobreWinerim = () => {
         {/* ═══════════════════════════════════════════════════════════
             FAQ
             ═══════════════════════════════════════════════════════════ */}
-        <FAQSection faqs={faqs} schemaId="sobre-nosotros" />
+        <FAQSection faqs={currentFaqs} schemaId="sobre-nosotros" />
 
         {/* ═══════════════════════════════════════════════════════════
             INTERNAL LINKS

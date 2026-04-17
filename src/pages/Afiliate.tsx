@@ -17,17 +17,50 @@ import { CANONICAL_DOMAIN } from "@/seo/config";
 import { Slider } from "@/components/ui/slider";
 
 const WA_NUMBER = "34658718350";
-const WA_MSG = encodeURIComponent("Hola, me interesa el programa de partners de Winerim.");
+const WA_MSG_ES = encodeURIComponent("Hola, me interesa el programa de partners de Winerim.");
+const WA_MSG_EN = encodeURIComponent("Hi, I am interested in Winerim's partner program.");
+const WA_MSG_DE = encodeURIComponent("Hallo, ich bin an Winerims Partnerprogramm interessiert.");
+const WA_MSG_PT = encodeURIComponent("Ola, estou interessado no programa de parceiros da Winerim.");
 
-const faqs = [
-  { q: "¿Quién puede ser partner de Winerim?", a: "Distribuidores, importadores, sumilleres, consultores de hostelería, formadores, agencias especializadas, partners tecnológicos y cualquier profesional con acceso real a restaurantes, hoteles o grupos de restauración donde el vino sea una categoría relevante." },
-  { q: "¿Cómo se remunera a los partners?", a: "Cada oportunidad cerrada genera una comisión. El modelo exacto se detalla durante el proceso de onboarding y depende del tipo de colaboración y el perfil del partner." },
-  { q: "¿Cuándo se cobra la comisión?", a: "La comisión se genera cuando la oportunidad recomendada se convierte en cliente activo de Winerim. Los plazos y condiciones se acuerdan durante el onboarding." },
-  { q: "¿Hace falta exclusividad?", a: "No. Puedes colaborar con Winerim de forma complementaria a tu actividad principal. No pedimos exclusividad, pedimos encaje y compromiso profesional." },
-  { q: "¿Se facilita material comercial?", a: "Sí. Los partners reciben materiales de apoyo, documentación de producto, casos de uso y soporte del equipo comercial de Winerim para acompañar cada oportunidad." },
-  { q: "¿Se puede colaborar desde otros países?", a: "Sí. Winerim tiene presencia en 15 países y soporta 4 idiomas. El programa de partners está abierto a colaboraciones internacionales." },
-  { q: "¿También sirve para recomendar Winerim a grupos y hoteles?", a: "Especialmente. Grupos de restauración y hoteles con F&B son perfiles ideales para Winerim. Las oportunidades de mayor valor suelen venir de este tipo de cuentas." },
-];
+const faqs = {
+  es: [
+    { q: "Quien puede ser partner de Winerim?", a: "Distribuidores, importadores, sumilleres, consultores de hoteleria, formadores, agencias especializadas, partners tecnologicos y cualquier profesional con acceso real a restaurantes, hoteles o grupos de restauracion donde el vino sea una categoria relevante." },
+    { q: "Como se remunera a los partners?", a: "Cada oportunidad cerrada genera una comision. El modelo exacto se detalla durante el proceso de onboarding y depende del tipo de colaboracion y el perfil del partner." },
+    { q: "Cuando se cobra la comision?", a: "La comision se genera cuando la oportunidad recomendada se convierte en cliente activo de Winerim. Los plazos y condiciones se acuerdan durante el onboarding." },
+    { q: "Hace falta exclusividad?", a: "No. Puedes colaborar con Winerim de forma complementaria a tu actividad principal. No pedimos exclusividad, pedimos encaje y compromiso profesional." },
+    { q: "Se facilita material comercial?", a: "Si. Los partners reciben materiales de apoyo, documentacion de producto, casos de uso y soporte del equipo comercial de Winerim para acompanar cada oportunidad." },
+    { q: "Se puede colaborar desde otros paises?", a: "Si. Winerim tiene presencia en 15 paises y soporta 4 idiomas. El programa de partners esta abierto a colaboraciones internacionales." },
+    { q: "Tambien sirve para recomendar Winerim a grupos y hoteles?", a: "Especialmente. Grupos de restauracion y hoteles con F&B son perfiles ideales para Winerim. Las oportunidades de mayor valor suelen venir de este tipo de cuentas." },
+  ],
+  en: [
+    { q: "Who can be a Winerim partner?", a: "Distributors, importers, sommeliers, hospitality consultants, trainers, specialized agencies, technology partners and any professional with real access to restaurants, hotels or restaurant groups where wine is a relevant category." },
+    { q: "How are partners compensated?", a: "Each closed opportunity generates a commission. The exact model is detailed during the onboarding process and depends on the type of collaboration and the partner profile." },
+    { q: "When is the commission paid?", a: "The commission is generated when the recommended opportunity becomes an active Winerim customer. Terms and conditions are agreed during onboarding." },
+    { q: "Is exclusivity required?", a: "No. You can collaborate with Winerim in addition to your main activity. We don't require exclusivity, we require fit and professional commitment." },
+    { q: "Is sales material provided?", a: "Yes. Partners receive support materials, product documentation, case studies and support from Winerim's sales team to support each opportunity." },
+    { q: "Can we collaborate from other countries?", a: "Yes. Winerim has presence in 15 countries and supports 4 languages. The partner program is open to international collaborations." },
+    { q: "Can it also be used to recommend Winerim to restaurant groups and hotels?", a: "Especially. Restaurant groups and hotels with F&B are ideal profiles for Winerim. The highest-value opportunities typically come from these types of accounts." },
+  ],
+  de: [
+    { q: "Wer kann Partner von Winerim sein?", a: "Distributoren, Importeure, Sommelier, Gaststatten-Berater, Trainer, spezialisierte Agenturen, Technologie-Partner und alle Fachleute mit echtem Zugang zu Restaurants, Hotels oder Restaurantketten, wo Wein eine relevante Kategorie ist." },
+    { q: "Wie werden Partner vergutet?", a: "Jede abgeschlossene Gelegenheit generiert eine Provision. Das exakte Modell wird wahrend des Onboarding-Prozesses erklart und hangt von der Art der Zusammenarbeit und dem Partner-Profil ab." },
+    { q: "Wann wird die Provision bezahlt?", a: "Die Provision wird generiert, wenn die empfohhlene Gelegenheit zu einem aktiven Winerim-Kunden wird. Bedingungen werden wahrend des Onboarding vereinbart." },
+    { q: "Ist Exklusivitat erforderlich?", a: "Nein. Sie konnen mit Winerim zusatzlich zu Ihrer Haupttatigkeit zusammenarbeiten. Wir fordern keine Exklusivitat, wir fordern Passform und berufliches Engagement." },
+    { q: "Wird Verkaufsmaterial bereitgestellt?", a: "Ja. Partner erhalten Unterstutzungsmaterialien, Produktdokumentation, Fallstudien und Unterstutzung vom Winerim-Vertriebsteam fur jede Gelegenheit." },
+    { q: "Konnen wir aus anderen Landern zusammenarbeiten?", a: "Ja. Winerim ist in 15 Landern praesent und unterstutzt 4 Sprachen. Das Partnerprogramm ist fur internationale Zusammenarbeit offen." },
+    { q: "Kann es auch verwendet werden, um Winerim Restaurantketten und Hotels zu empfehlen?", a: "Besonders. Restaurantketten und Hotels mit F&B sind ideale Profile fur Winerim. Die wertvollsten Gelegenheiten kommen typischerweise von diesen Arten von Konten." },
+  ],
+  pt: [
+    { q: "Quem pode ser parceiro da Winerim?", a: "Distribuidores, importadores, escancioes, consultores de hotelaria, formadores, agencias especializadas, parceiros tecnologicos e qualquer profissional com acesso real a restaurantes, hoteis ou grupos de restauracao onde o vinho seja uma categoria relevante." },
+    { q: "Como sao remunerados os parceiros?", a: "Cada oportunidade fechada gera uma comissao. O modelo exato e detalhado durante o processo de onboarding e depende do tipo de colaboracao e do perfil do parceiro." },
+    { q: "Quando e paga a comissao?", a: "A comissao e gerada quando a oportunidade recomendada se torna um cliente ativo da Winerim. Os prazos e condicoes sao acordados durante o onboarding." },
+    { q: "A exclusividade e obrigatoria?", a: "Nao. Pode colaborar com Winerim alem da sua atividade principal. Nao requeremos exclusividade, requeremos adequacao e compromisso profissional." },
+    { q: "Material de vendas e fornecido?", a: "Sim. Os parceiros recebem materiais de apoio, documentacao do produto, estudos de caso e apoio da equipa de vendas da Winerim para cada oportunidade." },
+    { q: "Podemos colaborar de outros paises?", a: "Sim. Winerim tem presenca em 15 paises e suporta 4 idiomas. O programa de parceiros esta aberto a colaboracoes internacionais." },
+    { q: "Tambem pode ser usado para recomendar Winerim a grupos de restauracao e hoteis?", a: "Especialmente. Grupos de restauracao e hoteis com F&B sao perfis ideais para Winerim. As oportunidades de maior valor tipicamente vem destes tipos de contas." },
+  ],
+};
+const currentFaqs = faqs[lang as keyof typeof faqs] || faqs.es;
 
 const EarningsCalculator = () => {
   const [clients, setClients] = useState([10]);
@@ -82,7 +115,7 @@ const EarningsCalculator = () => {
 };
 
 const Afiliate = () => {
-  const { localePath, allLangPaths } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -367,7 +400,7 @@ const Afiliate = () => {
         </section>
 
         {/* ═══ FAQ ═══ */}
-        <FAQSection faqs={faqs} schemaId="partners" />
+        <FAQSection faqs={currentFaqs} schemaId="partners" />
 
         {/* ═══ INTERNAL LINKS ═══ */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
