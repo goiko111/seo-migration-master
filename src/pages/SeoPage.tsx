@@ -67,13 +67,14 @@ function slugFromPathname(pathname: string): string {
   return path;
 }
 
-const SeoPage = () => {
+const SeoPage = ({ fallback }: { fallback?: React.ReactNode }) => {
   const { pathname } = useLocation();
   const slug = slugFromPathname(pathname);
   const { page, related, loading, notFound } = useSeoPage(slug);
 
   if (loading) return <SeoPageLoader />;
-  if (notFound || !page) return <SeoPageNotFound />;
+  // If a fallback was provided (catch-all route), use it instead of SeoPageNotFound
+  if (notFound || !page) return fallback ? <>{fallback}</> : <SeoPageNotFound />;
 
   // Dedicated template
   const Template = templateMap[page.cluster];

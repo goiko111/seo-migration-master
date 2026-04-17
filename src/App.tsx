@@ -253,10 +253,6 @@ const esRoutes = (
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     <Route path="/comparativas" element={<Comparativas />} />
     <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
-    {/* Dynamic programmatic SEO pages — :city param captures the city slug */}
-    <Route path="/software-carta-de-vinos-:city" element={<SeoPage />} />
-    <Route path="/software-vino-:city" element={<SeoPage />} />
-    <Route path="/wine-list-software-:city" element={<SeoPage />} />
   </>
 );
 
@@ -646,12 +642,6 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/gerador-harmonizacoes-ia`} element={<WinePairingGenerator />} />
     <Route path={`${prefix}/ferramenta-pricing-vinhos`} element={<WinePricingTool />} />
     <Route path={`${prefix}/benchmark-carta-vinhos`} element={<WineListBenchmark />} />
-    {/* Dynamic programmatic SEO pages — :city param captures the city slug */}
-    <Route path={`${prefix}/software-carta-de-vinos-:city`} element={<SeoPage />} />
-    <Route path={`${prefix}/software-vino-:city`} element={<SeoPage />} />
-    <Route path={`${prefix}/wine-list-software-:city`} element={<SeoPage />} />
-    <Route path={`${prefix}/weinkarten-software-:city`} element={<SeoPage />} />
-    <Route path={`${prefix}/software-carta-vinhos-:city`} element={<SeoPage />} />
   </>
 );
 
@@ -682,7 +672,7 @@ const App = () => (
                 {langRoutes("/de")}
                 {langRoutes("/pt")}
                 <Route path="/unsubscribe" element={<Unsubscribe />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<SeoPage fallback={<NotFound />} />} />
               </Routes>
             </Suspense>
             {/* Overlay components — lazy loaded, non-critical */}
