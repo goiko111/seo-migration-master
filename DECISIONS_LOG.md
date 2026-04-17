@@ -65,6 +65,26 @@
 
 ---
 
+## 2026-04-17 — SEO templates: i18n via page.lang, no useLanguage()
+
+**Decisión**: Los 4 SEO templates (City, RestaurantType, Country, Generic) usan `page.lang` del objeto Supabase para seleccionar el idioma del chrome, en vez de `useLanguage()` del contexto React.
+
+**Razón**: `page.lang` ya está disponible en el prop y refleja el idioma correcto para esa página. Evita añadir un import adicional y mantiene el template autocontenido.
+
+**Patrón**: `const t = templateI18n[page.lang] || templateI18n.es` (o `.en` para CountryTemplate que era originalmente inglés).
+
+---
+
+## 2026-04-17 — GenericSeoTemplate clusterConfig: labels como Record<string, string>
+
+**Decisión**: Refactorizar `breadcrumbParent` y `badge` en `clusterConfig` de `string` a `Record<string, string>` (keyed by lang).
+
+**Razón**: El clusterConfig define labels visibles al usuario (ej: "Guías", "Maridajes") que necesitan traducción. Hacerlos Record<string, string> es el cambio mínimo que permite i18n sin reestructurar todo el objeto.
+
+**Uso**: `config.breadcrumbParent[lang] || config.breadcrumbParent.es`
+
+---
+
 ## 2026-04-17 — Documentación del proyecto con 4 archivos de estado
 
 **Decisión**: Mantener 4 documentos como fuente de verdad:

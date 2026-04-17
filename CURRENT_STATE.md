@@ -1,13 +1,13 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-04-17
+> Última actualización: 2026-04-17 (sesión 2)
 
 ## Estado general
 
-**Build**: ✅ Pasa limpio (7.4s)
+**Build**: ✅ Pasa limpio (7.8s)
 **Branch**: `main` — todo empujado a `origin/main`
-**Último commit**: `7303ef3` — "i18n: add DE/PT translations to shared CTA system and VideoSection"
+**Último commit**: `04334e2` — "i18n: add 6-language support to SEO template chrome (City, RestaurantType, Country, Generic)"
 
 ## i18n: Estado de traducciones por componente
 
@@ -37,9 +37,19 @@ Todas las páginas con contenido traducible tienen DE y PT. Detalle:
 | `src/data/decisionCenter/*.ts` (36 archivos, 6 áreas × 6 idiomas) | ✅ 12 archivos nuevos (.de.ts y .pt.ts) |
 | `src/components/VideoSection.tsx` | ✅ DE/PT añadidos |
 
-### Templates — ✅ YA TENÍAN DE/PT
+### SEO Templates (src/components/templates/) — ✅ COMPLETO
 
-GuideTemplate, PainTemplate, ComparisonPageTemplate, VerticalTemplate, ToolStrategicBlock — todos ya incluían DE/PT en su chrome (labels de secciones, botones, etc.)
+| Template | Estado i18n |
+|----------|-------------|
+| CityTemplate | ✅ i18n object con 6 idiomas (antes hardcoded ES) |
+| RestaurantTypeTemplate | ✅ i18n object con 6 idiomas (antes hardcoded ES) |
+| CountryTemplate | ✅ i18n object con 6 idiomas (antes hardcoded EN) |
+| GenericSeoTemplate | ✅ i18n object + clusterConfig refactored con 6 idiomas (antes hardcoded ES) |
+| GuideTemplate | ✅ Ya tenía DE/PT |
+| PainTemplate | ✅ Ya tenía DE/PT |
+| ComparisonPageTemplate | ✅ Ya tenía DE/PT |
+| VerticalTemplate | ✅ Ya tenía DE/PT |
+| ToolStrategicBlock | ✅ Ya tenía DE/PT |
 
 ### Routing — ✅ COMPLETO
 
@@ -71,5 +81,6 @@ En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que
 - [ ] Calidad de las traducciones (no revisadas por nativo)
 - [ ] SEO: hreflang tags para DE/PT en todas las páginas
 - [ ] SEO: sitemaps incluyen URLs DE/PT
+- [x] Templates SEO tienen chrome traducido a 6 idiomas
 - [ ] City pages DE/PT en Supabase
 - [ ] Chat widget FOUC fix funciona en producción

@@ -1,7 +1,7 @@
 # NEXT_STEPS.md — winerim.wine
 
 > Tareas pendientes priorizadas. Se reescribe al final de cada sesión.
-> Última actualización: 2026-04-17
+> Última actualización: 2026-04-17 (sesión 2)
 
 ## Prioridad alta
 
@@ -79,8 +79,13 @@
 
 ---
 
+## Completado en esta sesión
+
+- ✅ i18n para los 4 SEO templates (CityTemplate, RestaurantTypeTemplate, CountryTemplate, GenericSeoTemplate) — commit `04334e2`
+
 ## Para retomar la próxima sesión
 
 1. Leer los 4 documentos: `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md`, `NEXT_STEPS.md`
 2. Elegir la tarea prioritaria
 3. Si se trabaja en city pages: necesitaremos acceso a Supabase para leer las existentes y crear las nuevas
+4. Los 4 warnings de "Duplicate key de" en VenderMasVino, VinoPorCopa, GuiasRecursos y ComoHacerCartaVinos son inofensivos (esbuild warning, no error) pero conviene limpiarlos cuando se toquen esos archivos
