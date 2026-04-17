@@ -23,7 +23,7 @@ type TableRow = { area: string; without: string; with_w: string };
 type UseCase = { title: string; scenario: string; result: string };
 
 type Content = {
-  metaTitle: string; metaDescription: string;
+  metaTitle: string; metaDescription: string; url?: string;
   badgeLabel: string; breadSolutions: string; breadLabel: string;
   heroTitle1: string; heroTitleHighlight: string;
   heroDesc: string; ctaDemo: string; ctaContact: string;
@@ -64,6 +64,7 @@ type Content = {
 const ES: Content = {
   metaTitle: "Winerim para Restaurantes sin Sumiller | Vende Más Vino sin Experto en Sala",
   metaDescription: "Tu equipo de sala recomienda vino con confianza gracias a fichas, maridajes e IA. Sin necesidad de sumiller. Más ventas, mejor experiencia, menos fricción.",
+  url: "https://winerim.wine/soluciones/restaurantes-sin-sumiller",
   badgeLabel: "Sin sumiller, con criterio", breadSolutions: "Soluciones", breadLabel: "Restaurantes sin sumiller",
   heroTitle1: "Vende más vino sin depender de ", heroTitleHighlight: "un sumiller en cada mesa",
   heroDesc: "Winerim convierte tu carta de vinos en un asistente de venta que guía al equipo de sala y al comensal. Recomendaciones inteligentes, maridajes automáticos y fichas claras para que cualquier camarero recomiende con confianza.",
@@ -303,7 +304,209 @@ const FR: Content = { ...EN,
   ctaPrimary: "Demander une analyse gratuite", ctaSecondary: "Voir la démo",
 };
 
-const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR };
+const DE: Content = { ...EN,
+  metaTitle: "Winerim für Restaurants ohne Sommelier | Verkaufen Sie mehr Wein ohne Experten",
+  metaDescription: "Ihr Serviceteam empfiehlt Wein mit Sicherheit dank Profile, Speisenbegleitungen und KI. Ohne Sommelier.",
+  url: "https://winerim.wine/de/losungen/restaurants-ohne-sommelier",
+  badgeLabel: "Ohne Sommelier, mit Kriterium", breadSolutions: "Lösungen", breadLabel: "Restaurants ohne Sommelier",
+  heroTitle1: "Verkaufen Sie mehr Wein, ohne auf ", heroTitleHighlight: "einen Sommelier an jedem Tisch angewiesen zu sein",
+  heroDesc: "Winerim verwandelt Ihre Weinkarte in einen Verkaufsassistenten, der Ihr Team und Ihre Gäste leitet. Intelligente Empfehlungen, automatische Speisenbegleitungen und klare Profile, damit jeder Kellner mit Sicherheit empfehlen kann.",
+  ctaDemo: "Demo anfordern", ctaContact: "Mit dem Team sprechen",
+  heroSummary: "80 % der Restaurants mit einer Weinkarte haben keinen Sommelier. Winerim füllt diese Lücke: Es gibt dem Serviceteam die Werkzeuge, um Wein professionell zu empfehlen, das durchschnittliche Ticket zu erhöhen und das Gastes ohne vorherige Ausbildung in Weinologie zu verbessern.",
+  forTitle: "Ist Winerim für Ihr Restaurant geeignet?", forLabel: "Es ist für Sie, wenn...", notForLabel: "Wahrscheinlich nicht für Sie, wenn...",
+  forItems: [
+    "Sie eine Weinkarte haben, aber keinen Sommelier Vollzeit",
+    "Ihr Serviceteam sich unsicher fühlt, Wein zu empfehlen",
+    "Viele Gäste das Hausweinen oder die billigste Option mangels Orientierung wählen",
+    "Sie mehr Wein verkaufen möchten, ohne die Abläufe zu komplizieren",
+    "Sie 50 oder mehr Referenzen haben und eine bessere Rotation benötigen",
+    "Sie das Erlebnis verbessern möchten, ohne mehr Spezialisten einzustellen",
+  ],
+  notForItems: [
+    "Sie haben einen permanenten Sommelier und benötigen keine zusätzliche Unterstützung",
+    "Ihre Karte hat weniger als 50 Referenzen und Sie möchten sie nicht optimieren",
+    "Sie benötigen nur ein schönes PDF ohne Verkaufs- oder Verwaltungsfunktionen",
+  ],
+  painLabel: "Das Problem", painTitle1: "Wein bleibt auf der Karte, weil ", painTitleHighlight: "niemand weiß, wie man ihn verkauft",
+  pains: [
+    { text: "Das Serviceteam hat nicht die Zeit oder das Wissen, um Weine zu empfehlen. Wenn Gäste fragen, ist die Antwort vage oder ausweichend." },
+    { text: "Unsicherheit beim Empfehlen führt dazu, dass Kellner Wein nicht vorschlagen. Wenn sie nicht wissen, was sie sagen sollen, sagen sie nichts. Jeder Tisch ohne Empfehlung ist ein verlorener Verkauf." },
+    { text: "Gäste sehen sich einer Karte gegenüber, die sie nicht verstehen: zu viele Referenzen, kein Kontext, keine Speisenbegleitungen, keine Anleitung. Sie bestellen das Billigste oder verzichten ganz auf Wein." },
+    { text: "Das Restaurant verliert Marge, weil es weniger Wein verkauft, als es könnte, teurere Referenzen verkauft und die Karte nicht als aktives Verkaufsinstrument nutzt." },
+    { text: "Weinschulung ist teuer, zeitaufwändig und geht durch Personalwechsel verloren. Jeder neue Kellner fängt wieder bei Null an." },
+    { text: "Es gibt keine Daten über welche Weine funktionieren, welche stagnieren oder welchen Einfluss jede Referenz hat. Kaufentscheidungen basieren auf Intuition." },
+  ],
+  tableLabel: "Vergleich", tableTitle: "Statische Karte vs. Winerim",
+  tableHeaders: ["Situation", "Mit statischer Karte", "Mit Winerim"],
+  tableRows: [
+    { area: "Gast bittet um Hilfe", without: "Kellner improvisiert oder sagt, sie seien alle gut", with_w: "Die Karte schlägt nach Gericht, Stil oder Budget vor" },
+    { area: "Neuer Kellner fängt an", without: "Wochen zum Lernen der Karte (wenn überhaupt)", with_w: "Profile, Speisenbegleitungen und Verkaufsargumente von Tag eins" },
+    { area: "Tisch ohne Weinbestellung", without: "Niemand schlägt vor, Tisch bleibt ohne Wein", with_w: "Intelligente Empfehlungen laden zum Erkunden ein" },
+    { area: "Nicht rotierende Weine", without: "Niemand weiß, welche bis es zu spät ist", with_w: "Rotations- und Leistungswarnungen in Echtzeit" },
+    { area: "Internationaler Gast", without: "Versteht die Karte nicht, bestellt Bier", with_w: "Karte in seiner Sprache mit klaren Beschreibungen" },
+    { area: "Kaufentscheidungen", without: "Wird nach Intuition oder Lieferantenverhältnis gekauft", with_w: "Rotations-, Gewinnspannen- und echte Leistungsdaten" },
+    { area: "Weinmarge", without: "Echte Marge pro Referenz unbekannt", with_w: "Marge nach Wein, Kategorie und Zeitraum sichtbar" },
+    { area: "Gastes Erlebnis", without: "Generisch, keine Personalisierung", with_w: "Personalisiert, lehrreich, unvergesslich" },
+  ],
+  solLabel: "Die Lösung", solTitle1: "Ihre Weinkarte wird ", solTitleHighlight: "Ihr bester Verkäufer",
+  advantages: [
+    { title: "Empfehlungen ohne Sommelier", desc: "Die Karte schlägt Weine für Gäste nach Gericht, Profil oder Moment vor. Ihr Team muss kein Experte sein." },
+    { title: "Wein-Profile für Ihr Team", desc: "Jede Referenz hat Verkostungsnotizen, Herkunft, Stil und Verkaufsargumente in klarer Sprache. Kellner wissen von Tag eins, was sie sagen sollen." },
+    { title: "Automatische Speisenbegleitungen", desc: "Nach Menügericht, Küchenart oder Gastevorliebe. Kein Auswendiglernen nötig." },
+    { title: "Karte in der Sprache des Gastes", desc: "Automatisch mehrsprachig. Internationale Gäste sehen die Karte in ihrer Sprache." },
+    { title: "Daten für bessere Entscheidungen", desc: "Welche Weine verkaufen, welche nicht rotieren, welche Marge jede generiert. Datengestützte Einkäufe." },
+    { title: "Reibungslose Abläufe", desc: "Integriert sich in Ihren Arbeitsablauf. Ersetzt das Team nicht: Es stattet es aus. Keine Schulung, keine Komplexität." },
+  ],
+  howLabel: "Beispiele", howTitle: "So funktioniert es im täglichen Betrieb",
+  useCases: [
+    { title: "Gehobenes Restaurant ohne festen Sommelier", scenario: "Karte mit 80 Referenzen, wechselndes Serviceteam. Kellner kennen nicht jeden Wein.", result: "Winerim gibt Gästen Gericht-Paarungen und Kellnern Verkaufsargumente. Das Wein-Ticket steigt ohne intensive Schulung." },
+    { title: "Casual Restaurant mit guter Karte", scenario: "60 Referenzen, Marktküche. Wein ist auf der Karte, wird aber nicht aktiv vorgeschlagen.", result: "Die digitale Karte lädt zum Erkunden ein: Stilempfehlungen, klare Beschreibungen und automatische Speisenbegleitungen. Mehr Tische bestellen Wein." },
+    { title: "Hotel- oder Resort-Restaurant", scenario: "Internationale Gästeschaft, mehrere Schichten. Unmöglich, einen Sommelier pro Schicht zu haben.", result: "Mehrsprachige Karte mit intelligenten Empfehlungen. Gäste verstehen das Angebot und das Team hat Unterstützung für jeden Tisch." },
+  ],
+  impactLabel: "Erwartete Auswirkungen", impactTitle: "Was sich ändert, wenn Wein aktiv verkauft wird",
+  impactSubtitle: "Ergebnisse, die Restaurants, die Winerim nutzen, in den ersten Wochen beobachten.",
+  impacts: [
+    { label: "Mehr Tische bestellen Wein", desc: "Intelligente Empfehlungen laden zum Erkunden ein. Wein ist keine schwierige Entscheidung mehr." },
+    { label: "Durchschnittliches Ticket steigt", desc: "Gäste entdecken Optionen, die sie allein nicht gewählt hätten. Weniger Hauswein, mehr Wertkauf." },
+    { label: "Team empfiehlt mit Sicherheit", desc: "Klare Profile und zugängliche Speisenbegleitungen reduzieren Unsicherheit. Keine Expertise erforderlich." },
+    { label: "Weniger stagnierende Weine", desc: "Rotationswarnungen und Leistungsdaten helfen, den Bestand zu bewegen und die Karte mit Kriterium zu erneuern." },
+    { label: "Besseres Gastes-Erlebnis", desc: "Eine Karte, die anleitet, lehrt und personalisiert, hebt die Wahrnehmung des Restaurants." },
+    { label: "Intelligentere Kaufentscheidungen", desc: "Echte Daten über Funktionierendes und Nicht-Funktionierendes. Weniger Intuition, mehr Geschäftskriterium." },
+  ],
+  doesLabel: "Was es macht", doesTitle: "Winerim ohne Sommelier: vollständige Transparenz",
+  doesItems: [
+    "Schlägt Weine für Gäste nach Gericht, Stil oder Budget vor",
+    "Gibt dem Serviceteam klare Profile, Speisenbegleitungen und Verkaufsargumente",
+    "Zeigt die Karte automatisch in der Sprache des Gastes an",
+    "Generiert Rotations-, Gewinnspannen- und Leistungsdaten pro Referenz",
+    "Integriert sich ohne Änderung der Restaurantabläufe",
+    "Funktioniert von Tag eins ohne vorherige Schulung",
+  ],
+  doesNotLabel: "Was es nicht macht",
+  doesNotItems: [
+    "Ersetzt nicht das menschliche Urteil: das Team bleibt zentral",
+    "Entscheidet nicht, welche Weine zu kaufen sind: liefert Daten, damit Sie entscheiden",
+    "Ist kein Weinkurs: es ist ein Verkaufs- und Verwaltungswerkzeug",
+  ],
+  ctaLabel: "Ohne Sommelier, mit Winerim",
+  ctaTitle: "Möchten Sie, dass Ihre Weinkarte von selbst verkauft?",
+  ctaDesc: "Wir analysieren Ihre Karte und zeigen Ihnen, wo Verkaufs-, Gewinnspannen- und Erlebnis-Chancen sind. Unverbindlich.",
+  ctaPrimary: "Kostenlose Analyse anfordern", ctaSecondary: "Demo ansehen",
+  ctaMicro: "Besonders nützlich für Restaurants mit 50+ Referenzen, keinem festen Sommelier oder wechselndem Serviceteam.",
+  faqs: [
+    { q: "Ersetzt Winerim den Sommelier?", a: "Nein. Winerim ersetzt den Sommelier nicht – es füllt die Lücke, wenn es keinen gibt. Es gibt dem Serviceteam Werkzeuge, um Wein mit Sicherheit zu empfehlen: klare Profile, automatische Speisenbegleitungen und intelligente Empfehlungen." },
+    { q: "Benötigt das Team vorherige Weinausbildung?", a: "Nein. Winerim funktioniert von Tag eins. Jedes Wein-Profil enthält Verkaufsargumente, Verkostungsnotizen in klarer Sprache und Speisenbegleitungen. Ein neuer Kellner kann ab der ersten Schicht mit Sicherheit empfehlen." },
+    { q: "Wie viele Referenzen brauche ich, damit es sinnvoll ist?", a: "Ab 50 Referenzen bietet Winerim einen klaren Mehrwert. Kleinere Karten können manuell verwaltet werden, aber ab 50 wächst die Komplexität und das Werkzeug macht den Unterschied." },
+    { q: "Welche echte Auswirkung hat es auf den Umsatz?", a: "Restaurants, die Winerim nutzen, sehen mehr Tische, die Wein bestellen, ein höheres durchschnittliches Ticket und weniger stagnierende Weine. Die Auswirkung hängt vom Kontext ab, aber Verbesserungen sind normalerweise in den ersten Wochen sichtbar." },
+    { q: "Ist es schwer umzusetzen?", a: "Nein. Aktiviert in weniger als 48 Stunden. Karte hochladen, Speisenbegleitungen konfigurieren und es läuft. Keine technischen Installationen oder Änderungen an der Arbeitsweise." },
+    { q: "Sieht der Gast die Karte in seiner Sprache?", a: "Ja. Automatisch auf Spanisch, Englisch, Italienisch, Französisch und Deutsch, mit weiteren Sprachen in Entwicklung." },
+    { q: "Welche Leistungsdaten kann ich sehen?", a: "Wein-Ticket, Gewinnspanne pro Referenz und Kategorie, Rotation, Quote der Tische, die Wein bestellen, und monatliche Entwicklung. Daten, um zu entscheiden, was zu kaufen, zu entfernen und zu verstärken ist." },
+    { q: "Gibt es eine Bindung?", a: "Keine Bindung oder Strafen. Beginnen Sie monatlich und skalieren oder kündigen Sie jederzeit." },
+  ],
+};
+
+const PT: Content = { ...EN,
+  metaTitle: "Winerim para Restaurantes sem Escanção | Venda Mais Vinho sem Especialista",
+  metaDescription: "A sua equipa de sala recomenda vinho com confiança graças a fichas, harmonizações e IA. Sem escanção.",
+  url: "https://winerim.wine/pt/solucoes/restaurantes-sem-escancao",
+  badgeLabel: "Sem escanção, com critério", breadSolutions: "Soluções", breadLabel: "Restaurantes sem escanção",
+  heroTitle1: "Venda mais vinho sem depender de ", heroTitleHighlight: "um escanção em cada mesa",
+  heroDesc: "Winerim transforma a sua carta de vinhos num assistente de venda que guia a sua equipa e os seus clientes. Recomendações inteligentes, harmonizações automáticas e fichas claras para que qualquer empregado possa recomendar com confiança.",
+  ctaDemo: "Pedir demonstração", ctaContact: "Falar com a equipa",
+  heroSummary: "80% dos restaurantes com carta de vinhos não têm escanção. Winerim preenche esse vazio: dá à equipa de sala as ferramentas para recomendar vinho profissionalmente, aumentar o bilhete médio e melhorar a experiência do cliente sem necessidade de formação anterior em enologia.",
+  forTitle: "Winerim é para o seu restaurante?", forLabel: "É para si se...", notForLabel: "Provavelmente não é para si se...",
+  forItems: [
+    "Tem uma carta de vinhos mas não tem escanção a tempo inteiro",
+    "A sua equipa de sala não se sente segura a recomendar vinho",
+    "Muitos clientes pedem o vinho da casa ou o mais barato por falta de orientação",
+    "Quer vender mais vinho sem complicar a operativa",
+    "Tem 50 ou mais referências e precisa de melhor rotação",
+    "Quer elevar a experiência sem contratar mais pessoal especializado",
+  ],
+  notForItems: [
+    "Tem um escanção permanente e não precisa de apoio adicional",
+    "A sua carta tem menos de 50 referências e não quer otimizá-la",
+    "Só precisa de um PDF bonito sem funcionalidades de venda ou gestão",
+  ],
+  painLabel: "O problema", painTitle1: "O vinho fica na carta porque ", painTitleHighlight: "ninguém sabe como vendê-lo",
+  pains: [
+    { text: "A equipa de sala não tem tempo nem conhecimento para recomendar vinhos. Quando o cliente pergunta, a resposta é vaga ou evasiva." },
+    { text: "A insegurança ao recomendar faz com que o empregado evite sugerir vinho. Se não sabe o que dizer, não diz nada. Cada mesa sem recomendação é uma venda perdida." },
+    { text: "O cliente enfrenta uma carta que não compreende: demasiadas referências, sem contexto, sem harmonizações, sem guia. Acaba a pedir o mais barato ou diretamente não pede vinho." },
+    { text: "O restaurante perde margem porque vende menos vinho do que poderia, vende referências de baixo valor e não aproveita a carta como ferramenta de venda ativa." },
+    { text: "A formação em vinho é cara, lenta e perde-se com a rotação de pessoal. Cada empregado novo volta a começar do zero." },
+    { text: "Não há dados sobre que vinhos funcionam, quais ficam parados nem que impacto tem cada referência. As decisões de compra baseiam-se em intuição." },
+  ],
+  tableLabel: "Comparativa", tableTitle: "Carta estática vs Winerim",
+  tableHeaders: ["Situação", "Com carta estática", "Com Winerim"],
+  tableRows: [
+    { area: "Cliente pede ajuda", without: "O empregado improvisa ou diz que todos são bons", with_w: "A carta sugere por prato, estilo ou orçamento" },
+    { area: "Novo empregado começa", without: "Semanas para aprender a carta (se o fizer)", with_w: "Fichas, harmonizações e pontos-chave de venda desde o primeiro dia" },
+    { area: "Mesa sem pedido de vinho", without: "Ninguém sugere, mesa fica sem vinho", with_w: "As recomendações inteligentes convidam a explorar" },
+    { area: "Vinhos que não rodam", without: "Ninguém sabe quais são até ser tarde", with_w: "Alertas de rotação e rendimento em tempo real" },
+    { area: "Cliente internacional", without: "Não compreende a carta, pede cerveja", with_w: "Carta no seu idioma com descrições claras" },
+    { area: "Decisões de compra", without: "Compram-se por intuição ou relação com fornecedor", with_w: "Dados de rotação, margem e rendimento real" },
+    { area: "Margem do vinho", without: "Desconhece-se a margem real por referência", with_w: "Margem por vinho, categoria e período visível" },
+    { area: "Experiência do cliente", without: "Genérica, sem personalização", with_w: "Personalizada, educativa, memorável" },
+  ],
+  solLabel: "A solução", solTitle1: "A sua carta de vinhos torna-se ", solTitleHighlight: "o seu melhor vendedor",
+  advantages: [
+    { title: "Recomendações sem escanção", desc: "A carta sugere vinhos ao cliente consoante prato, perfil ou momento. A sua equipa não precisa ser especialista." },
+    { title: "Fichas de vinho para a equipa", desc: "Cada referência tem notas de prova, origem, estilo e pontos-chave de venda em linguagem clara. O empregado sabe o que dizer desde o primeiro dia." },
+    { title: "Harmonizações automáticas", desc: "Por prato do menu, tipo de cozinha ou preferência do cliente. Sem necessidade de memorizar nada." },
+    { title: "Carta no idioma do cliente", desc: "Multiidioma automático. O visitante internacional vê a carta no seu idioma com descrições adaptadas." },
+    { title: "Dados para decidir melhor", desc: "Que vinhos se vendem, quais não rodam, que margem gera cada referência. Decisões de compra baseadas em rendimento real." },
+    { title: "Operativa sem atritos", desc: "Integra-se com a sua forma de trabalhar. Não substitui a equipa: equipa-a. Sem formação anterior, sem complicações técnicas." },
+  ],
+  howLabel: "Exemplos de uso", howTitle: "Como funciona no dia a dia",
+  useCases: [
+    { title: "Restaurante gastronómico sem escanção fixo", scenario: "Carta de 80 referências, equipa de sala rotativa. Os empregados não conhecem todos os vinhos.", result: "Winerim dá ao cliente harmonizações por prato e ao empregado fichas com pontos-chave de venda. O bilhete médio em vinho sobe sem necessidade de formação intensiva." },
+    { title: "Restaurante casual com boa carta", scenario: "Carta de 60 referências, cozinha de mercado. O vinho está na carta mas ninguém o sugere ativamente.", result: "A carta digital convida a explorar: recomendações por estilo, descrições claras e harmonizações automáticas. Mais mesas pedem vinho." },
+    { title: "Restaurante de hotel ou resort", scenario: "Clientela internacional, vários turnos de serviço. Impossível ter um escanção em cada turno.", result: "Carta multiidioma com recomendações inteligentes. O hóspede compreende a oferta e a equipa tem apoio para cada mesa." },
+  ],
+  impactLabel: "Impacto esperado", impactTitle: "O que muda quando o vinho se vende ativamente",
+  impactSubtitle: "Resultados que os restaurantes que usam Winerim observam desde as primeiras semanas.",
+  impacts: [
+    { label: "Mais mesas pedem vinho", desc: "As recomendações inteligentes convidam a explorar. O vinho deixa de ser uma decisão difícil." },
+    { label: "Sobe o bilhete médio", desc: "O cliente descobre opções que não teria escolhido sozinho. Menos vinho da casa, mais venda de valor." },
+    { label: "A equipa recomenda com confiança", desc: "Fichas claras e harmonizações acessíveis reduzem a insegurança. Não precisam de ser especialistas." },
+    { label: "Menos vinhos parados", desc: "Alertas de rotação e dados de rendimento ajudam a mexer o stock e renovar a carta com critério." },
+    { label: "Melhor experiência do cliente", desc: "Uma carta que guia, educa e personaliza eleva a perceção do restaurante." },
+    { label: "Decisões de compra mais inteligentes", desc: "Dados reais do que funciona e do que não. Menos intuição, mais critério de negócio." },
+  ],
+  doesLabel: "O que faz", doesTitle: "Winerim sem escanção: transparência total",
+  doesItems: [
+    "Sugere vinhos ao cliente consoante prato, estilo ou orçamento",
+    "Dá à equipa de sala fichas claras, harmonizações e pontos-chave de venda",
+    "Mostra a carta no idioma do cliente automaticamente",
+    "Gera dados de rotação, margem e rendimento por referência",
+    "Integra-se sem mudar a operativa do restaurante",
+    "Funciona desde o primeiro dia sem formação anterior",
+  ],
+  doesNotLabel: "O que não faz",
+  doesNotItems: [
+    "Não substitui o critério humano: a equipa continua a ser fundamental",
+    "Não decide que vinhos comprar: fornece dados para si decidir",
+    "Não é um curso de enologia: é uma ferramenta de venda e gestão",
+  ],
+  ctaLabel: "Sem escanção, com Winerim",
+  ctaTitle: "Quer que a sua carta de vinhos venda por si mesma?",
+  ctaDesc: "Analisamos a sua carta e mostramos-lhe onde há oportunidades de venda, margem e experiência. Sem compromisso.",
+  ctaPrimary: "Pedir análise gratuita", ctaSecondary: "Ver demonstração",
+  ctaMicro: "Especialmente útil para restaurantes com 50+ referências, sem escanção fixo ou com equipa de sala rotativa.",
+  faqs: [
+    { q: "Winerim substitui o escanção?", a: "Não. Winerim não pretende substituir o escanção, mas sim preencher o vazio quando não o há. Dá à equipa de sala ferramentas para recomendar vinho com confiança: fichas claras, harmonizações automáticas e recomendações inteligentes." },
+    { q: "A equipa de sala precisa de formação anterior em vinho?", a: "Não. Winerim funciona desde o primeiro dia. As fichas de cada vinho incluem pontos-chave de venda, notas de prova em linguagem clara e harmonizações. Um empregado novo pode recomendar com solvência desde o primeiro turno." },
+    { q: "Quantas referências preciso na carta para que faça sentido?", a: "A partir de 50 referências, Winerim oferece um valor claro. Com cartas mais pequenas, a equipa pode geri-las manualmente, mas a partir de 50 a complexidade cresce e a ferramenta faz a diferença." },
+    { q: "Que impacto real tem nas vendas?", a: "Os restaurantes que usam Winerim observam mais mesas a pedir vinho, um bilhete médio mais alto na categoria e menos vinhos parados. O impacto depende do contexto, mas as melhorias são normalmente visíveis nas primeiras semanas." },
+    { q: "É difícil de implementar?", a: "Não. Ativa-se em menos de 48 horas. Carrega-se a carta, configuram-se as harmonizações e já está operativa. Sem instalações técnicas nem mudanças na forma de trabalhar." },
+    { q: "O cliente vê a carta no seu idioma?", a: "Sim. Winerim mostra a carta automaticamente em português, inglês, italiano, francês e alemão, com mais idiomas em desenvolvimento." },
+    { q: "Que dados posso ver sobre o rendimento do vinho?", a: "Bilhete médio em vinho, margem por referência e categoria, rotação, ratio de mesas que pedem vinho e evolução mensal. Dados para decidir o que comprar, o que retirar e o que potenciar." },
+    { q: "Há contrato de permanência?", a: "Não. Sem permanência nem penalizações. Pode começar com um plano mensal e escalar ou cancelar quando quiser." },
+  ],
+};
+
+const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR, de: DE, pt: PT };
 
 const advIcons = [Sparkles, BookOpen, Utensils, Globe, BarChart3, CheckCircle];
 const impactIcons = [Wine, TrendingUp, Users, Target, MessageSquare, DollarSign];
@@ -340,7 +543,7 @@ const RestauranteSinSumiller = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/restaurantes-sin-sumiller"
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={t.url || "https://winerim.wine/soluciones/restaurantes-sin-sumiller"}
         hreflang={allLangPaths("/soluciones/restaurantes-sin-sumiller")} />
       <Navbar />
 

@@ -148,7 +148,7 @@ const i18n: Record<string, LangContent> = {
       { id: "casual", label: "Casual", icon: "🍴" },
       { id: "gastro", label: "Gastronómico", icon: "⭐" },
       { id: "hotel", label: "Hotel", icon: "🏨" },
-      { id: "winebar", label: "Wine bar", icon: "🍷" },
+      { id: "winebar", label: "Bar de vinos", icon: "🍷" },
     ],
     decides: [
       "Qué multiplicador aplicar según tipo de vino, precio de coste y contexto del restaurante",
@@ -298,7 +298,7 @@ const i18n: Record<string, LangContent> = {
       { id: "casual", label: "Casual", icon: "🍴" },
       { id: "gastro", label: "Gastronomico", icon: "⭐" },
       { id: "hotel", label: "Hotel", icon: "🏨" },
-      { id: "winebar", label: "Wine bar", icon: "🍷" },
+      { id: "winebar", label: "Enoteca", icon: "🍷" },
     ],
     decides: [
       "Quale moltiplicatore applicare in base al tipo di vino, prezzo di costo e contesto del ristorante",
@@ -470,7 +470,7 @@ const i18n: Record<string, LangContent> = {
     bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "Gefährdet", bcDanger: "Kritisch",
     compareLabel: "Vergleich mit Ihrem aktuellen Preis", yourPrice: "Ihr Preis", recommended: "Empfohlen", yourMargin: "Ihre aktuelle Marge",
     deviationLabel: "Abweichung",
-    execTitle: "Executive Reading",
+    execTitle: "Executive-Zusammenfassung",
     pricingGuide: "Pricing-Leitfaden", pricingTitle: "Wie man den Weinpreis in einem", pricingTitleHighlight: "Restaurant berechnet",
     multMethodTitle: "Die Methode des interpolierten Multiplikators",
     multMethodDesc: "Statt einen festen Faktor pro Preisklasse anzuwenden, nutzt Winerim kontinuierliche Interpolation: Der Multiplikator passt sich progressiv an den Einkaufspreis an und vermeidet künstliche Sprünge an den Grenzen jeder Klasse.",
@@ -513,7 +513,7 @@ const i18n: Record<string, LangContent> = {
       { id: "casual", label: "Casual", icon: "🍴" },
       { id: "gastro", label: "Gastronómico", icon: "⭐" },
       { id: "hotel", label: "Hotel", icon: "🏨" },
-      { id: "winebar", label: "Wine bar", icon: "🍷" },
+      { id: "winebar", label: "Garrafeira", icon: "🍷" },
     ],
     decides: [
       "Que multiplicador aplicar consoante o tipo de vinho, preço de custo e contexto do restaurante",
