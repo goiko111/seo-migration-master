@@ -65,6 +65,16 @@
 
 ---
 
+## 2026-04-17 — City pages SQL: contenido unico por ciudad
+
+**Decisión**: Cada city page tiene contenido contextualizado (intro, problemas, FAQs) que refleja el mercado local, no solo un swap de nombre de ciudad.
+
+**Razón**: Google penaliza contenido thin/duplicado. Las city pages necesitan contenido sustancial y diferenciado para rankear. Cada ciudad tiene un mercado gastronómico con particularidades reales (Berlin: escena internacional; Porto: herencia del Douro; München: poder adquisitivo alto, etc.)
+
+**Slugs**: `de/weinkarten-software-{city}` y `pt/software-carta-vinhos-{city}` — siguen el patron SEO de keyword + localidad.
+
+---
+
 ## 2026-04-17 — SEO templates: i18n via page.lang, no useLanguage()
 
 **Decisión**: Los 4 SEO templates (City, RestaurantType, Country, Generic) usan `page.lang` del objeto Supabase para seleccionar el idioma del chrome, en vez de `useLanguage()` del contexto React.

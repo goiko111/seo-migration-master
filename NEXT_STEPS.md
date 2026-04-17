@@ -5,21 +5,15 @@
 
 ## Prioridad alta
 
-### 1. City pages DE/PT en Supabase
+### 1. Ejecutar SQL de city pages DE/PT en Supabase
 
-**Qué**: Insertar filas en `seo_pages` (cluster="city") para ciudades alemanas y portuguesas.
-
-**Ciudades candidatas**:
-- DE: Berlin, München, Hamburg, Frankfurt, Düsseldorf, Köln, Stuttgart, Wien (Austria), Zürich (Suiza)
-- PT: Lisboa, Porto, Faro, Coimbra, Funchal, Braga
+**Qué**: Ejecutar `sql/city-pages-de-pt.sql` en Supabase para crear 15 city pages (9 DE + 6 PT).
 
 **Cómo**: 
-1. Primero extraer una city page existente (ej: Madrid) como plantilla del JSON body
-2. Adaptar: city_name, country, problems, benefits, features, stats, FAQs, internal_links, CTAs
-3. Generar SQL INSERTs
-4. Ejecutar en Supabase (dashboard o CLI)
-
-**Prerrequisito**: Acceso a Supabase (credenciales en `.env` del proyecto)
+1. Abrir el Supabase SQL Editor (dashboard)
+2. Copiar y pegar el contenido de `sql/city-pages-de-pt.sql`
+3. Ejecutar
+4. Verificar que las páginas aparecen: `SELECT slug, lang FROM seo_pages WHERE cluster='city' AND lang IN ('de','pt')`
 
 **Nota del usuario**: También faltan city pages ES para muchas ciudades españolas. Considerar si ampliar el scope a TODAS las ciudades de TODOS los idiomas.
 
@@ -82,10 +76,12 @@
 ## Completado en esta sesión
 
 - ✅ i18n para los 4 SEO templates (CityTemplate, RestaurantTypeTemplate, CountryTemplate, GenericSeoTemplate) — commit `04334e2`
+- ✅ Fix duplicate `de` keys en 4 páginas (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos) — commit `5061513`
+- ✅ SQL para 15 city pages DE/PT generado (`sql/city-pages-de-pt.sql`) — commit `5061513`
 
 ## Para retomar la próxima sesión
 
 1. Leer los 4 documentos: `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md`, `NEXT_STEPS.md`
 2. Elegir la tarea prioritaria
 3. Si se trabaja en city pages: necesitaremos acceso a Supabase para leer las existentes y crear las nuevas
-4. Los 4 warnings de "Duplicate key de" en VenderMasVino, VinoPorCopa, GuiasRecursos y ComoHacerCartaVinos son inofensivos (esbuild warning, no error) pero conviene limpiarlos cuando se toquen esos archivos
+4. Los warnings de "Duplicate key de" ya fueron corregidos en el commit `5061513`

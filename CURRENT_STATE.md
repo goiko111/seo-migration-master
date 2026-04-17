@@ -5,9 +5,9 @@
 
 ## Estado general
 
-**Build**: ✅ Pasa limpio (7.8s)
+**Build**: ✅ Pasa limpio (7.9s) — sin warnings de duplicate keys
 **Branch**: `main` — todo empujado a `origin/main`
-**Último commit**: `04334e2` — "i18n: add 6-language support to SEO template chrome (City, RestaurantType, Country, Generic)"
+**Último commit**: `5061513` — "fix: remove duplicate de keys in 4 pages; add city page SQL for DE/PT"
 
 ## i18n: Estado de traducciones por componente
 
@@ -55,13 +55,16 @@ Todas las páginas con contenido traducible tienen DE y PT. Detalle:
 
 `ROUTE_MAP` en `src/i18n/types.ts` tiene entradas para los 6 idiomas. `SUPPORTED_LANGS`, `LANG_FLAGS`, `LANG_LABELS` incluyen DE y PT.
 
-## Páginas SEO dinámicas (Supabase) — ❌ PENDIENTE
+## Páginas SEO dinámicas (Supabase) — ⏳ SQL LISTO, PENDIENTE EJECUCIÓN
 
-La tabla `seo_pages` en Supabase tiene páginas para ES/EN/IT/FR pero **NO tiene city pages para DE ni PT**. Tampoco se ha verificado si hay otros clusters (restaurant_type, country) en DE/PT.
+La tabla `seo_pages` en Supabase tiene páginas para ES/EN/IT/FR pero **NO tiene city pages para DE ni PT**.
 
-Ciudades candidatas:
-- **DE**: Berlin, München, Hamburg, Frankfurt, Düsseldorf, Köln, Wien, Zürich
-- **PT**: Lisboa, Porto, Faro, Coimbra, Funchal
+**SQL preparado**: `sql/city-pages-de-pt.sql` — 15 INSERTs listos para ejecutar en Supabase SQL Editor:
+- **DE (9)**: Berlin, München, Hamburg, Frankfurt, Düsseldorf, Köln, Stuttgart, Wien, Zürich
+- **PT (6)**: Lisboa, Porto, Faro, Coimbra, Funchal, Braga
+
+**Pendiente**: Ejecutar el SQL en Supabase (dashboard o CLI). No se puede desde el sandbox (proxy bloquea).
+**Pendiente**: Verificar si otros clusters (restaurant_type, country) necesitan entries DE/PT.
 
 ## Chat widget FOUC fix
 
@@ -82,5 +85,7 @@ En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que
 - [ ] SEO: hreflang tags para DE/PT en todas las páginas
 - [ ] SEO: sitemaps incluyen URLs DE/PT
 - [x] Templates SEO tienen chrome traducido a 6 idiomas
+- [x] Duplicate de key warnings limpiados (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos)
+- [x] SQL para city pages DE/PT preparado (sql/city-pages-de-pt.sql)
 - [ ] City pages DE/PT en Supabase
 - [ ] Chat widget FOUC fix funciona en producción
