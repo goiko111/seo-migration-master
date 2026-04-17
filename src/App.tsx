@@ -646,6 +646,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/gerador-harmonizacoes-ia`} element={<WinePairingGenerator />} />
     <Route path={`${prefix}/ferramenta-pricing-vinhos`} element={<WinePricingTool />} />
     <Route path={`${prefix}/benchmark-carta-vinhos`} element={<WineListBenchmark />} />
+    {/* Dynamic programmatic SEO pages — city pages per language */}
+    <Route path={`${prefix}/software-carta-de-vinos-*`} element={<SeoPage />} />
+    <Route path={`${prefix}/software-vino-*`} element={<SeoPage />} />
+    <Route path={`${prefix}/wine-list-software-*`} element={<SeoPage />} />
+    <Route path={`${prefix}/weinkarten-software-*`} element={<SeoPage />} />
+    <Route path={`${prefix}/software-carta-vinhos-*`} element={<SeoPage />} />
   </>
 );
 
