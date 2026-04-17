@@ -639,7 +639,7 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
             </div>
             <div className="bg-gradient-card border border-border rounded-xl p-4">
               <Grape size={16} className="text-wine mb-2" />
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t.commonGrapes}</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t.mainGrapes}</p>
               <p className="text-sm font-medium">{data.mainGrapes.join(", ")}</p>
             </div>
             <div className="bg-gradient-card border border-border rounded-xl p-4">

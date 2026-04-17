@@ -1073,8 +1073,8 @@ const Funcionalidades = () => {
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-12">
         <InternalLinks
           links={[
-            ...c.internalLinks.map(l => ({ to: l.to, label: l.label, type: l.type })),
-            { to: "/herramientas", label: lang === "de" ? "Kostenlose Werkzeuge" : lang === "pt" ? "Ferramentas gratuitas" : lang === "en" ? "Free tools" : lang === "it" ? "Strumenti gratuiti" : lang === "fr" ? "Outils gratuits" : "Herramientas gratuitas", type: "tool" },
+            ...c.internalLinks.map(l => ({ to: l.to, label: l.label, type: l.type as "decision-center" | "guide" | "resource" | "solution" | "tool" })),
+            { to: "/herramientas", label: lang === "de" ? "Kostenlose Werkzeuge" : lang === "pt" ? "Ferramentas gratuitas" : lang === "en" ? "Free tools" : lang === "it" ? "Strumenti gratuiti" : lang === "fr" ? "Outils gratuits" : "Herramientas gratuitas", type: "tool" as const },
           ]}
         />
       </section>
