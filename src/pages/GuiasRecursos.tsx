@@ -143,6 +143,36 @@ const langContent: Record<string, LangContent> = {
     all: "Todos",
     items: "guias",
   },
+  de: {
+    metaTitle: "Praktische Ratgeber für Restaurants | Winerim",
+    metaDesc:
+      "Praktische Ratgeber und Artikel zur Optimierung Ihrer Weinkarte. Strategie, Pricing, Rotation, Team und mehr.",
+    heroLabel: "Wissenszentrum",
+    heroTitle: "Ratgeber",
+    heroDesc:
+      "Lernen Sie Best Practices, um Ihre Weinkarte rentabel zu machen. Das Beste: Mit Winerim automatisiert sich alles.",
+    guidesTitle: "Ratgeber & Artikel",
+    guidesDesc:
+      "Lernen Sie Best Practices — oder lassen Sie Winerim sie automatisch für Sie anwenden.",
+    resourcesTitle: "Downloadbare Ressourcen",
+    resourcesDesc: "Nützliche Vorlagen und Checklisten.",
+    toolsTitle: "Kostenlose Werkzeuge",
+    toolsDesc: "Testen Sie sie hier kostenlos.",
+    toolsAll: "Alle ansehen →",
+    solutionsTitle: "Lösungen nach Anwendungsfall",
+    solutionsDesc: "Erkennen Sie Ihre Situation wieder? Winerim löst sie bereits.",
+    ctaTitle: "Warum manuell, wenn Winerim es automatisiert?",
+    ctaDesc:
+      "Alles, was Sie auf dieser Seite sehen — Analyse, Pricing, Speisenbegleitung, Rotation — Winerim erledigt es automatisch.",
+    ctaPrimary: "Meine Karte kostenlos analysieren",
+    ctaSecondary: "Demo anfordern",
+    readMore: "Ratgeber lesen",
+    download: "Herunterladen",
+    useTool: "Werkzeug nutzen",
+    viewSolution: "Lösung ansehen",
+    all: "Alle",
+    items: "Ratgeber",
+  },
 };
 
 /* ── Guide topic tags for filtering ── */
