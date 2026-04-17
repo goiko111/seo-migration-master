@@ -165,9 +165,9 @@ const Contacto = () => {
                   {submitting ? c.sending : c.button}
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">
-                  {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre " }[lang]}
+                  {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre ", de: "Unverbindlich. Mit dem Absenden akzeptieren Sie unsere ", pt: "Sem compromisso. Ao enviar aceita a nossa " }[lang]}
                   <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
-                    {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité" }[lang]}
+                    {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité", de: "Datenschutzrichtlinie", pt: "política de privacidade" }[lang]}
                   </Link>.
                 </p>
               </form>
@@ -203,14 +203,14 @@ const Contacto = () => {
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">{lang === "es" ? "Llamadas" : lang === "it" ? "Chiamate" : lang === "fr" ? "Appels" : "Calls"}</p>
+                    <p className="text-sm font-medium">{lang === "es" ? "Llamadas" : lang === "it" ? "Chiamate" : lang === "fr" ? "Appels" : lang === "de" ? "Anrufe" : lang === "pt" ? "Chamadas" : "Calls"}</p>
                     <a href="tel:+34722180348" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 722 180 348</a>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-border">
-                <h3 className="font-heading text-lg font-semibold mb-4">Winerim {lang === "es" ? "en un minuto" : lang === "en" ? "in one minute" : lang === "it" ? "in un minuto" : "en une minute"}</h3>
+                <h3 className="font-heading text-lg font-semibold mb-4">Winerim {lang === "es" ? "en un minuto" : lang === "en" ? "in one minute" : lang === "it" ? "in un minuto" : lang === "de" ? "in einer Minute" : lang === "pt" ? "num minuto" : "en une minute"}</h3>
                 <div className="rounded-xl overflow-hidden border border-border">
                   <Suspense fallback={<div className="aspect-video bg-muted rounded-xl" />}>
                     <YouTubeFacade videoId="-PleM286zeY" title="Winerim en un minuto" />
