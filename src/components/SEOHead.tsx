@@ -88,7 +88,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("twitter:title", fullTitle);
     setMeta("og:type", type);
     setMeta("og:site_name", "Winerim");
-    setMeta("og:locale", hreflang?.find(h => h.lang !== "x-default")?.lang === "en" ? "en_GB" : hreflang?.find(h => h.lang !== "x-default")?.lang === "it" ? "it_IT" : hreflang?.find(h => h.lang !== "x-default")?.lang === "fr" ? "fr_FR" : "es_ES");
+    const localeMap: Record<string, string> = { en: "en_GB", it: "it_IT", fr: "fr_FR", de: "de_DE", pt: "pt_PT", es: "es_ES" };
+    const currentLang = hreflang?.find(h => h.lang !== "x-default")?.lang || "es";
+    setMeta("og:locale", localeMap[currentLang] || "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
     // OG image — always absolute with production domain
@@ -184,6 +186,10 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         { "@type": "Place", name: "Italy" },
         { "@type": "Place", name: "France" },
         { "@type": "Place", name: "United Kingdom" },
+        { "@type": "Place", name: "Germany" },
+        { "@type": "Place", name: "Austria" },
+        { "@type": "Place", name: "Switzerland" },
+        { "@type": "Place", name: "Portugal" },
       ],
       knowsAbout: [
         "Wine list management",
@@ -211,7 +217,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         "@type": "ContactPoint",
         contactType: "sales",
         url: `${CANONICAL_DOMAIN}/contacto`,
-        availableLanguage: ["Spanish", "English", "Italian", "French"],
+        availableLanguage: ["Spanish", "English", "Italian", "French", "German", "Portuguese"],
       },
       hasOfferCatalog: {
         "@type": "OfferCatalog",

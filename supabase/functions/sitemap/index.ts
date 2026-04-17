@@ -94,11 +94,67 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/analisis-carta': '/fr/analyse-carte',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
   },
+  de: {
+    '/': '/de',
+    '/blog': '/de/blog',
+    '/demo': '/de/demo',
+    '/precios': '/de/preise',
+    '/contacto': '/de/kontakt',
+    '/funcionalidades': '/de/funktionen',
+    '/clientes': '/de/kunden',
+    '/integraciones': '/de/integrationen',
+    '/casos-exito': '/de/erfolgsgeschichten',
+    '/herramientas': '/de/tools',
+    '/guias-y-recursos': '/de/ratgeber',
+    '/soluciones': '/de/loesungen',
+    '/problemas': '/de/herausforderungen',
+    '/sommelier-corner': '/de/sommelier-corner',
+    '/afiliate': '/de/partner',
+    '/software-carta-de-vinos': '/de/weinkarten-software',
+    '/que-es-winerim': '/de/was-ist-winerim',
+    '/privacidad': '/de/datenschutz',
+    '/terminos': '/de/agb',
+    '/soluciones/grupos-restauracion': '/de/loesungen/restaurant-gruppen',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/de/loesungen/durchschnittsbon-erhoehen',
+    '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
+    '/producto/winerim-core': '/de/produkt/winerim-core',
+    '/producto/winerim-supply': '/de/produkt/winerim-supply',
+    '/analisis-carta': '/de/weinkarten-analyse',
+    '/calculadora-margen-vino': '/de/wein-margen-rechner',
+  },
+  pt: {
+    '/': '/pt',
+    '/blog': '/pt/blog',
+    '/demo': '/pt/demo',
+    '/precios': '/pt/precos',
+    '/contacto': '/pt/contacto',
+    '/funcionalidades': '/pt/funcionalidades',
+    '/clientes': '/pt/clientes',
+    '/integraciones': '/pt/integracoes',
+    '/casos-exito': '/pt/casos-de-sucesso',
+    '/herramientas': '/pt/ferramentas',
+    '/guias-y-recursos': '/pt/guias',
+    '/soluciones': '/pt/solucoes',
+    '/problemas': '/pt/desafios',
+    '/sommelier-corner': '/pt/sommelier-corner',
+    '/afiliate': '/pt/afiliados',
+    '/software-carta-de-vinos': '/pt/software-carta-vinhos',
+    '/que-es-winerim': '/pt/o-que-e-winerim',
+    '/privacidad': '/pt/privacidade',
+    '/terminos': '/pt/termos',
+    '/soluciones/grupos-restauracion': '/pt/solucoes/grupos-restauracao',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/pt/solucoes/aumentar-ticket-medio',
+    '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
+    '/producto/winerim-core': '/pt/produto/winerim-core',
+    '/producto/winerim-supply': '/pt/produto/winerim-supply',
+    '/analisis-carta': '/pt/analise-carta',
+    '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
+  },
 };
 
 /** Generate hreflang alternate XML links for a given ES path */
 function hreflangBlock(esPath: string): string {
-  const langs = ['en', 'it', 'fr'];
+  const langs = ['en', 'it', 'fr', 'de', 'pt'];
   const esUrl = `${SITE}${esPath}`;
   let xml = '';
   // x-default → ES
@@ -278,7 +334,7 @@ Deno.serve(async (req) => {
 
       // Localized versions (only if multilang)
       if (route.multilang) {
-        for (const lang of ['en', 'it', 'fr']) {
+        for (const lang of ['en', 'it', 'fr', 'de', 'pt']) {
           const localizedPath = ROUTE_MAP[lang]?.[route.esPath];
           if (localizedPath) {
             // Localized pages get same hreflang set, slightly lower priority
