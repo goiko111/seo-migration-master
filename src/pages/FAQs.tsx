@@ -65,6 +65,20 @@ const CHROME: I18nMap<PageChrome> = {
     h1pre: "Questions", h1accent: "fréquentes",
     subtitle: "Tout ce que vous devez savoir sur le panneau de gestion, la carte des vins, le stock, les commandes et l'intelligence artificielle de Winerim.",
   },
+  de: {
+    seoTitle: "Häufig gestellte Fragen (FAQ) | Winerim",
+    seoDesc: "Alle Antworten rund um Winerim: Weine hinzufügen, Karte reorganisieren, Bestand verwalten, Bestellungen, Speisenbegleitungen, KI und mehr.",
+    badge: "Hilfe-Center",
+    h1pre: "Häufig gestellte", h1accent: "Fragen",
+    subtitle: "Alles, was Sie über das Verwaltungspanel, die Weinkarte, Bestand, Bestellungen und künstliche Intelligenz in Winerim wissen müssen.",
+  },
+  pt: {
+    seoTitle: "Perguntas Frequentes (FAQ) | Winerim",
+    seoDesc: "Esclareça todas as suas dúvidas sobre o Winerim: como adicionar vinhos, reorganizar a carta, gerir stock, encomendas, harmonizações, IA e muito mais.",
+    badge: "Centro de ajuda",
+    h1pre: "Perguntas", h1accent: "frequentes",
+    subtitle: "Tudo o que precisa de saber sobre o painel de gestão, a carta de vinhos, stock, encomendas e inteligência artificial do Winerim.",
+  },
 };
 
 /* ─── FAQ data by category & language ─── */
@@ -346,6 +360,146 @@ const faqData: I18nMap<FAQCategory[]> = {
         { q: "L'IA remplace-t-elle le sommelier ?", a: `Non, elle l'assiste. Elle est conçue pour accélérer le travail quotidien et offrir des descriptions cohérentes. L'expertise humaine reste essentielle.` },
         { q: "Faut-il des compétences techniques pour utiliser l'IA ?", a: `Non. Tout est intégré au panneau avec des boutons visibles et des actions guidées. Il suffit de sélectionner et cliquer.` },
         { q: "Peut-on utiliser l'IA en plusieurs langues ?", a: `Oui. L'IA est prête à générer du contenu en plusieurs langues selon la configuration de votre carte. Vous pouvez maintenir une carte multilingue sans traduction manuelle.` },
+      ],
+    },
+  ],
+  de: [
+    {
+      title: "Allgemeines Panel",
+      faqs: [
+        { q: "Wie füge ich einen neuen Wein zur Karte hinzu?", a: `So fügen Sie einen neuen Wein hinzu:\n\n1. Neuen Wein hinzufügen: Klicken Sie auf „Wein hinzufügen". Geben Sie den Weinnamen ein und wählen Sie das +-Symbol. Tragen Sie die Preisvariablen ein und speichern Sie.\n\n2. Wein anfragen: Ist der Wein nicht in der Datenbank, klicken Sie auf „Wein anfragen". Falls das System ihn findet, vervollständigen Sie nur die Preisvariablen.\n\n💡 Tipp: Winerim zeigt Ihnen Referenzpreise vergleichbarer Restaurants.\n\n3. Manuelle Anfrage: Füllen Sie aus: Weinname, Weingut, Weintyp, Jahrgang und Preisvariablen. Klicken Sie „Anfrage senden".` },
+        { q: "Wie reorganisiere ich die Weine auf meiner Karte?", a: `1. Gehen Sie zur gewünschten Kategorie (Schaumwein, Weißwein, Rotwein, Rosé oder Likörwein).\n2. Aktivieren Sie den Sortiermodus über die Schaltfläche oben rechts.\n3. Ziehen und Ablegen: Verschieben Sie jeden Wein an die gewünschte Position.\n4. Automatisch sortieren: Nutzen Sie „Sortieren nach:" (Name, Weingut, Region, Land oder Preis).\n5. Speichern Sie die Änderungen.` },
+        { q: "Wie nutze ich die Editor-Filter?", a: `Verfügbare Filter:\n\n• Alle — Zeigt alle Weine, aktiv oder inaktiv.\n• Aktiv — Nur sichtbare Weine.\n• Inaktiv — Deaktivierte Weine.\n• Mit Preis — Nur Weine mit Preis.\n• Ohne Preis — Weine ohne Preisangabe.\n• Kein Bestand — Weine ohne verfügbaren Bestand.\n• Ausverkauft — Als ausverkauft gekennzeichnete Weine.\n• Glasweise — Nur glasweise erhältliche Weine.\n• Zuletzt hinzugefügt — Die neuesten Ergänzungen.` },
+        { q: "Wie nutze ich die Editor-Suche?", a: `Neben den Filtern können Sie die Suchleiste verwenden:\n\n1. Klicken Sie auf die Suchleiste oben im Editor.\n2. Geben Sie den Weinnamen ein.\n3. Das System zeigt automatisch passende Ergebnisse an.` },
+        { q: "Wie verwalte ich die Sprachen der Karte?", a: `Die Karte kann in mehreren Sprachen konfiguriert werden.\n\n1. Hauptsprache: Klicken Sie auf „Sprachen verwalten", um Sprachen hinzuzufügen.\n2. Neue Sprachen: Bei Aktivierung werden alle von Winerim verwalteten Elemente automatisch übersetzt.\n3. Individuelle Texte: Restauranttexte müssen manuell übersetzt werden. Winerim markiert fehlende Übersetzungen rot.\n4. Übersetzungen eingeben: Klicken Sie auf das Warnsymbol, um das Übersetzungspanel zu öffnen.` },
+        { q: "Was ist das erweiterte Pairing-Modul?", a: `Die Basisversion enthält generische Speisenbegleitungen. Das erweiterte Modul (Pairing PRO) verknüpft jeden Wein mit den spezifischen Gerichten Ihres Restaurants oder Degustationsmenüs.\n\nAktivierung: Button „Pairing (PRO) verwalten" im seitlichen Menü.\nGerichtarten: Beginnen Sie mit den Kategorien (Vorspeisen, Hauptgerichte, Desserts).\nGerichte hinzufügen: Name, Typ, Status und passende Weine auswählen.\nDegustationsmenüs: Spezifische Pairings je Menü konfigurieren.` },
+        { q: "Wie drucke ich die Weinkarte?", a: `Aus dem Panel können Sie die aktuelle Karte als PDF drucken.\n\n1. PDF erzeugen: Klicken Sie „PDF drucken". Konfigurieren Sie: E-Mail-Adresse, Sprache, Flaschenbilder und Weinbereich.\n\n2. Als CSV exportieren: Klicken Sie „CSV exportieren" für interne Verwaltung.` },
+      ],
+    },
+    {
+      title: "Anzeige der Referenzen",
+      faqs: [
+        { q: "Welche Aktionen gibt es pro Wein?", a: `Beim Überfahren eines Weins erscheinen Aktionssymbole:\n\n1. Bearbeiten — Stiftsymbol zum Ändern der Weinkarte.\n2. Duplizieren — Neue Referenz basierend auf einer bestehenden erstellen.\n3. Löschen — Papierkorb-Symbol. ⚠️ Nicht rückgängig machbar.\n4. Zu „Auswahl" hinzufügen — Spezielle Kategorie Ihrer repräsentativsten Weine.\n5. Zu „Empfohlen" hinzufügen — Sternsymbol zum Hervorheben.\n6. Als „Neuheit" markieren — Der Wein erscheint als Neuergänzung.` },
+        { q: "Wie funktioniert der Bereich ‚Empfohlene Weine'?", a: `Erstellen Sie eine Auswahl empfohlener Weine.\n\n1. Markieren Sie Weine mit dem Sternsymbol.\n2. Konfigurieren Sie die Anzeige unter „Mein Konto" → „Einstellungen" → „Labels und Bereiche".\n3. Passen Sie den Namen an (max. 27 Zeichen).\n4. Übersetzen Sie den Namen in alle aktiven Sprachen.` },
+        { q: "Wie funktionieren Neuheiten?", a: `Markieren Sie einen neuen Wein als „Neuheit".\n\n1. Aktivieren Sie das Neuheiten-Label im Editor.\n2. Konfigurieren Sie den Bereich in den Einstellungen.\n3. Passen Sie den angezeigten Namen an.` },
+        { q: "Kann ich das Flaschenbild ändern?", a: `Nein. Dies gewährleistet eine einheitliche visuelle Darstellung und ästhetische Konsistenz über alle Referenzen hinweg – für einen professionellen Gesamteindruck.` },
+      ],
+    },
+    {
+      title: "Preisvergleich",
+      faqs: [
+        { q: "Wie funktioniert das Preisvergleichsmodul?", a: `Das Modul zeigt den Durchschnittspreis, zu dem andere Restaurants Ihrer Kategorie einen bestimmten Wein anbieten. Winerim zeigt:\n\n• Durchschnittspreis\n• Mindestpreis\n• Höchstpreis\n\nAuf einen Blick sehen Sie, ob Ihr Preis im Durchschnitt liegt. Die Daten stammen von einem internen Algorithmus, der Faktoren wie durchschnittlichen Gedeckpreis und Kellergröße berücksichtigt.` },
+      ],
+    },
+    {
+      title: "Kritikerbewertungen",
+      faqs: [
+        { q: "Wie verwalte ich Kritikerbewertungen?", a: `Fügen Sie Kritikerbewertungen direkt in der Weinkarte hinzu.\n\nGehen Sie zum Editor, wählen Sie den Wein und navigieren Sie zum Bereich Bewertungen. Klicken Sie auf Bearbeiten, um die Liste zu öffnen. Sie können bestehende verwalten oder neue Bewertungen von Kritikern wie Parker, Peñín u. a. hinzufügen.` },
+      ],
+    },
+    {
+      title: "Kartenanzeige",
+      faqs: [
+        { q: "Welche Anzeigemodi gibt es?", a: `Winerim bietet drei Anzeigemodi:\n\n• Karussell — Zeigt Flaschen einzeln mit horizontalem Scrollen.\n• Raster / Liste — Visuelle oder Listen-Darstellung.\n• Traditionelle Karte — Reproduziert das klassische Druckformat.\n\nDen Standardmodus legen Sie in den Einstellungen fest.` },
+        { q: "Wie teile ich die Karte per QR und Link?", a: `Im oberen Menü gehen Sie zu QR-Codes. Optionen:\n\n• App-Download — Links für iOS und Android.\n• Download-QR — Gäste laden die App direkt herunter.\n• Öffentlicher Link und Direkt-QR — Weblink und QR für App-losen Zugriff. Nutzbar auf Druckmaterialien, Tischen etc.` },
+      ],
+    },
+    {
+      title: "Bestand und Bestellungen",
+      faqs: [
+        { q: "Wie funktioniert die Bestandsverwaltung?", a: `Im Panel rufen Sie den Reiter Bestand auf.\n\nSie können:\n• Den aktuellen Bestand pro Wein ändern.\n• Einen Mindestschwellenwert für automatisches Entfernen festlegen.\n• Verkäufe manuell abbuchen.\n\nKlicken Sie das Stiftsymbol zum Bearbeiten. Geben Sie Flaschenanzahl, Warnschwelle und Lagerort im Keller ein.` },
+        { q: "Wie erfasse ich eine Bestellung?", a: `Im Reiter Bestellungen auf der Bestandsseite.\n\nVerfügbar: Bestellliste, Laufende Bestellungen, Neue Bestellung und Händlerverzeichnis.\n\n📦 Laufende Bestellungen im zugehörigen Reiter verfolgen.\n🧾 Lieferantenverzeichnis: Richten Sie Lieferanten ein, bevor Sie bestellen.\n🍷 Neue Bestellung: Lieferant wählen, Weine hinzufügen, Menge und Betrag eingeben.\n\nDie Bestellung wird erfasst und bei Eingang automatisch zum Bestand addiert.` },
+      ],
+    },
+    {
+      title: "Personal und Verkauf",
+      faqs: [
+        { q: "Wie erfasse ich Verkäufe pro Kellner?", a: `Auf dem Personal-Bildschirm können Sie alle Mitarbeitenden erfassen, die mit Wein arbeiten. Bei einem Verkauf geben sie ihren Code ein und der Verkauf wird dieser Person zugeordnet.\n\nIm Verkaufsverlauf sehen Sie, was verkauft wurde und wer bedient hat.` },
+      ],
+    },
+    {
+      title: "Künstliche Intelligenz (KI) in Winerim",
+      faqs: [
+        { q: "Was genau macht die KI in Winerim?", a: `Die KI von Winerim hilft Ihnen, Informationen zu Ihrer Weinkarte und Ihren Gerichten automatisch zu generieren, zu vervollständigen und zu verbessern. Sie analysiert Daten wie Weintyp, Weingut, Verkostungsnotizen und Speisenbegleitungen und schlägt veröffentlichungsfertige professionelle Texte vor.` },
+        { q: "Wo finde ich die KI-Tools?", a: `An mehreren Stellen:\n\n• Unter Einstellungen → KI-Automatisierungen finden Sie alle Module.\n• Im Bereich Pairing Pro automatisiert die KI die Speisenbegleitungen.\n• In jeder Wein- oder Gerichtkarte sehen Sie die Stern-Symbole ✨.` },
+        { q: "Wie funktioniert die automatische Inhaltsgenerierung?", a: `Klicken Sie den Stern-Button ✨ neben einem Textblock. Die KI erzeugt automatisch angepassten Inhalt. Sie können den Text beliebig oft bearbeiten, umschreiben oder neu generieren.` },
+        { q: "Was sind automatische KI-Speisenbegleitungen?", a: `Beim Import Ihrer Karte oder Hinzufügen eines Gerichts analysiert die KI Zutaten, Kochstil und Weineigenschaften, um perfekte Kombinationen vorzuschlagen.` },
+        { q: "Was machen die ‚KI-Automatisierungen'?", a: `KI-Automatisierungen halten Ihre Karte dynamisch und aktuell.\n\n🔄 Empfehlungsrotation — Die KI wechselt regelmäßig hervorgehobene Weine.\n🍷 Pairing-Rotation — Automatische Erneuerung der Speisenbegleitungen.\n🆕 Neuheiten-Automatisierung — Neue Weine werden automatisch hinzugefügt und nach der konfigurierten Dauer entfernt.` },
+        { q: "Kann ich KI-generierte Texte bearbeiten?", a: `Ja, selbstverständlich. Alles, was die KI erzeugt, kann bearbeitet, erweitert oder manuell umgeschrieben werden. Sie behalten die volle Kontrolle.` },
+        { q: "Welche Inhalte kann die KI erzeugen?", a: `Die KI kann erzeugen:\n\n• Vollständige Weinkarten (Eigenschaften, Verkostungsnotizen, Weingut-Info etc.).\n• Quick Sheets mit kompakten Service-Daten.\n• Vorschläge für Speisenbegleitungen.\n• Automatische Gerichtbeschreibungen beim Import.` },
+        { q: "Ersetzt die KI den Sommelier?", a: `Nein, sie unterstützt ihn. Sie ist darauf ausgelegt, die tägliche Arbeit zu beschleunigen und die Karte stets aktuell zu halten. Menschliche Expertise bleibt unverzichtbar für Feinheiten und die Persönlichkeit jeder Karte.` },
+        { q: "Brauche ich technische Kenntnisse für die KI?", a: `Nein. Alles ist im Panel integriert, mit sichtbaren Buttons und geführten Aktionen. Wählen Sie einfach aus, wo Sie die KI anwenden möchten, und klicken Sie.` },
+        { q: "Kann ich die KI in mehreren Sprachen nutzen?", a: `Ja. Die KI von Winerim kann Inhalte in verschiedenen Sprachen generieren, basierend auf Ihrer Kartenkonfiguration. So pflegen Sie eine mehrsprachige Karte, ohne jeden Text manuell zu übersetzen.` },
+      ],
+    },
+  ],
+  pt: [
+    {
+      title: "Painel geral",
+      faqs: [
+        { q: "Como adicionar um novo vinho à carta?", a: `Para adicionar um novo vinho, siga estes passos no painel de controlo:\n\n1. Adicionar um vinho: Clique em "Adicionar vinho". Na barra de pesquisa, escreva o nome e selecione o ícone + quando aparecer o resultado correto. Introduza as variáveis de preço e guarde.\n\n2. Solicitar um vinho não listado: Se o vinho não está na base de dados, clique em "Solicitar vinho". Se o sistema o encontrar, só precisará de completar as variáveis de preço.\n\n💡 Dica: O Winerim mostra-lhe preços de referência usados por restaurantes da sua categoria.\n\n3. Pedido manual: Preencha: Nome do vinho, Adega, Tipo, Colheita e Variáveis de preço. Clique "Enviar pedido".` },
+        { q: "Como reorganizar os vinhos da carta?", a: `1. Vá à categoria desejada (Espumantes, Brancos, Tintos, Rosés ou Generosos).\n2. Ative o modo de ordenação com o botão no canto superior direito.\n3. Arrastar e largar: Arraste cada vinho para a posição pretendida.\n4. Ordenar automaticamente: Use "Ordenar por:" (Nome, Adega, Região, País ou Preço).\n5. Guarde as alterações.` },
+        { q: "Como usar os filtros do editor?", a: `Filtros disponíveis:\n\n• Todos — Mostra todos os vinhos, ativos ou inativos.\n• Ativos — Apenas vinhos visíveis na carta.\n• Inativos — Vinhos desativados mas ainda na base de dados.\n• Com preço — Apenas vinhos com preço atribuído.\n• Sem preço — Vinhos sem preço.\n• Sem stock — Vinhos sem stock disponível.\n• Esgotados — Vinhos marcados como esgotados.\n• A copo — Apenas vinhos disponíveis a copo.\n• Últimos adicionados — Os vinhos mais recentes.` },
+        { q: "Como usar a pesquisa do editor?", a: `Além dos filtros, pode usar a barra de pesquisa:\n\n1. Clique na barra de pesquisa no topo do editor.\n2. Escreva o nome do vinho.\n3. O sistema mostra automaticamente os resultados correspondentes.` },
+        { q: "Como gerir os idiomas da carta?", a: `A carta pode ser configurada em vários idiomas.\n\n1. Idioma principal: Clique em "Gerir idiomas" para adicionar ou modificar.\n2. Novos idiomas: Ao ativar, todos os elementos geridos pelo Winerim são traduzidos automaticamente.\n3. Textos personalizados: Os textos do restaurante devem ser traduzidos manualmente. O Winerim sinaliza traduções em falta a vermelho.\n4. Introduzir traduções: Clique no ícone de aviso para abrir o painel de tradução.` },
+        { q: "O que é o módulo Pairing Avançado?", a: `A versão base inclui harmonizações genéricas. O módulo avançado (Pairing PRO) permite ligar cada vinho aos pratos específicos do restaurante ou menus de degustação.\n\nAtivação: Botão "Gerir Pairing (PRO)" no menu lateral.\nTipos de prato: Comece pelos tipos (entradas, pratos principais, sobremesas).\nAdicionar pratos: Nome, tipo, estado e vinhos associados.\nMenus de degustação: Configure harmonizações específicas por menu.` },
+        { q: "Como imprimir a carta de vinhos?", a: `No painel pode imprimir a carta atualizada em PDF.\n\n1. Gerar PDF: Clique "Imprimir PDF". Configure: e-mail, idioma, imagens das garrafas e secção.\n\n2. Exportar em CSV: Clique "Exportar CSV" para gestão interna.` },
+      ],
+    },
+    {
+      title: "Visualização das referências",
+      faqs: [
+        { q: "Que ações posso fazer em cada vinho?", a: `Ao passar o rato sobre um vinho, aparecem ícones de ação:\n\n1. Editar — Ícone de lápis para alterar a ficha.\n2. Duplicar — Criar nova referência baseada numa existente.\n3. Eliminar — Ícone de caixote. ⚠️ Ação irreversível.\n4. Adicionar a "Seleção" — Categoria especial dos vinhos mais representativos.\n5. Adicionar a "Recomendados" — Ícone de estrela.\n6. Marcar como "Novidade" — O vinho aparece como adição recente.` },
+        { q: "Como funciona a secção de vinhos recomendados?", a: `Crie uma seleção especial de vinhos recomendados.\n\n1. Marque os vinhos com o ícone de estrela.\n2. Configure a visualização em "A minha conta" → "Definições" → "Etiquetas e secções".\n3. Personalize o nome (máx. 27 caracteres).\n4. Traduza o nome em todos os idiomas ativos.` },
+        { q: "Como funcionam as novidades?", a: `Marque um novo vinho como "Novidade".\n\n1. Ative a etiqueta no editor.\n2. Configure a secção nas Definições.\n3. Personalize o nome mostrado ao cliente.` },
+        { q: "Posso alterar a imagem da garrafa?", a: `Não. Isto garante uniformidade visual e coerência estética em toda a carta, preservando um estilo homogéneo e profissional.` },
+      ],
+    },
+    {
+      title: "Comparação de preços",
+      faqs: [
+        { q: "Como funciona o módulo de comparação de preços?", a: `O módulo mostra o preço médio a que outros restaurantes da sua categoria oferecem um determinado vinho. O Winerim mostra:\n\n• Preço médio\n• Preço mínimo\n• Preço máximo\n\nNum relance, verifica se o seu preço está dentro da média. Os dados provêm de um algoritmo que considera preço médio do talher e dimensão da garrafeira.` },
+      ],
+    },
+    {
+      title: "Avaliações de críticos",
+      faqs: [
+        { q: "Como gerir as avaliações de críticos?", a: `Pode adicionar ou gerir avaliações de críticos diretamente na ficha de cada vinho.\n\nVá ao editor, selecione o vinho e navegue até à secção Avaliações. Clique em Editar para aceder à lista. Pode gerir as existentes ou adicionar novas pontuações de críticos como Parker, Peñín e outros.` },
+      ],
+    },
+    {
+      title: "Visualização da carta",
+      faqs: [
+        { q: "Que modos de visualização existem?", a: `O Winerim oferece três modos:\n\n• Carrossel — Mostra garrafas uma a uma com deslocamento horizontal.\n• Grelha / Lista — Organização visual ou em lista.\n• Carta tradicional — Reproduz o formato clássico impresso.\n\nDefina o modo predefinido nas Definições.` },
+        { q: "Como partilhar a carta com QR e link?", a: `No menu superior, vá a Códigos QR. Encontrará:\n\n• Download da app — Links para iOS e Android.\n• QR de download — Os clientes descarregam a app diretamente.\n• Link público e QR direto — Um link web e o seu QR para aceder sem app. Pode usar o QR em suportes físicos.` },
+      ],
+    },
+    {
+      title: "Stock e encomendas",
+      faqs: [
+        { q: "Como funciona o controlo de stock?", a: `No painel, aceda ao separador Stock.\n\nPode:\n• Modificar o stock atual de cada vinho.\n• Definir um limiar mínimo para remoção automática.\n• Subtrair vendas manualmente.\n\nClique no ícone de lápis para editar. Introduza o número de garrafas, limiar de alerta e localização na garrafeira.` },
+        { q: "Como registar uma encomenda?", a: `No separador Encomendas na página Stock.\n\nDisponível: Lista de encomendas, Encomendas em curso, Nova encomenda e Agenda de distribuidores.\n\n📦 Acompanhe encomendas em curso no separador dedicado.\n🧾 Agenda de fornecedores: Configure os fornecedores antes de encomendar.\n🍷 Nova encomenda: Selecione o fornecedor, adicione vinhos, quantidades e montante.\n\nA encomenda é registada e adicionada automaticamente ao stock após receção.` },
+      ],
+    },
+    {
+      title: "Pessoal e vendas",
+      faqs: [
+        { q: "Como registar vendas por empregado?", a: `No ecrã de pessoal pode adicionar todos os profissionais que trabalham com vinho. Ao efetuarem uma venda, inserem o seu código e a venda fica registada.\n\nNo separador histórico de vendas, pode ver o que foi vendido e quem serviu.` },
+      ],
+    },
+    {
+      title: "Inteligência Artificial (IA) no Winerim",
+      faqs: [
+        { q: "O que faz exatamente a IA no Winerim?", a: `A IA do Winerim ajuda-o a gerar, completar e melhorar automaticamente as informações da sua carta de vinhos e pratos. Analisa dados como tipo de vinho, adega, notas de prova e harmonizações, propondo textos profissionais prontos a publicar.` },
+        { q: "Onde posso aceder às ferramentas de IA?", a: `Em vários locais:\n\n• Em Definições → Automatizações IA encontra todos os módulos.\n• Na secção Pairing Pro, a IA automatiza as harmonizações.\n• Dentro de cada vinho ou prato, verá os ícones de estrela ✨.` },
+        { q: "Como funciona a geração automática de conteúdo?", a: `Clique no botão estrela ✨ junto a qualquer bloco de texto. A IA gera conteúdo adaptado ao seu vinho ou prato. Pode editar, reescrever ou regenerar quantas vezes quiser.` },
+        { q: "O que são as harmonizações automáticas com IA?", a: `Ao importar a carta ou adicionar um prato, a IA analisa ingredientes, estilo culinário e características dos vinhos para propor combinações perfeitas.` },
+        { q: "O que fazem as 'Automatizações IA'?", a: `Mantêm a sua carta dinâmica e atualizada automaticamente.\n\n🔄 Rotação de recomendados — A IA altera periodicamente os vinhos em destaque.\n🍷 Rotação de harmonizações — Renovação automática das harmonizações.\n🆕 Automatização de novidades — Novos vinhos são adicionados e removidos da secção Novidades automaticamente.` },
+        { q: "Posso editar os textos gerados pela IA?", a: `Sim, sem dúvida. Tudo o que a IA gera pode ser editado, ampliado ou reescrito manualmente. Tem o controlo total.` },
+        { q: "Que tipo de conteúdo pode a IA gerar?", a: `A IA pode gerar:\n\n• Fichas de vinho completas.\n• Quick Sheets com dados resumidos para o serviço.\n• Sugestões de harmonização.\n• Descrições automáticas de pratos ao importá-los.` },
+        { q: "A IA substitui o escanção?", a: `Não, assiste-o. Foi concebida para agilizar o trabalho diário e oferecer descrições coerentes e profissionais. O conhecimento humano continua a ser essencial para ajustar os matizes e a personalidade de cada carta.` },
+        { q: "Preciso de conhecimentos técnicos para usar a IA?", a: `Não. Tudo está integrado no painel, com botões visíveis e ações guiadas. Basta selecionar onde quer aplicar a IA e clicar.` },
+        { q: "Posso usar a IA em vários idiomas?", a: `Sim. A IA do Winerim está preparada para gerar conteúdo em vários idiomas consoante a configuração da sua carta. Assim, pode manter uma carta multilingue sem traduzir manualmente cada texto.` },
       ],
     },
   ],
