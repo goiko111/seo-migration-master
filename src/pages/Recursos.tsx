@@ -75,6 +75,32 @@ const langContent: Record<string, LangContent> = {
     ctaPrimary: "Demander une démo", ctaSecondary: "Analyser ma carte gratuitement",
     alsoLabel: "Vous aimerez aussi", guidesLink: "Guides pour apprendre", toolsLink: "Outils interactifs",
   },
+  de: {
+    metaTitle: "Herunterladbare Ressourcen für Restaurants | Vorlagen, Checklisten & Scorecards | Winerim",
+    metaDesc: "Laden Sie professionelle Vorlagen, Checklisten und Scorecards zur Optimierung Ihrer Weinkarte herunter. Sofort anwendbare Ressourcen.",
+    heroLabel: "Ressourcenbibliothek",
+    heroTitle: "Umsetzbare Werkzeuge zum ",
+    heroHighlight: "sofortigen Anwenden",
+    heroDesc: "Professionelle Vorlagen, Checklisten und Scorecards, die Ihre Weinkarte vom ersten Tag an verbessern. Keine Theorie, nur Aktion.",
+    filterAll: "Alle", download: "Ressource herunterladen", items: "Ressourcen",
+    ctaTitle: "Möchten Sie, dass all dies automatisch geschieht?",
+    ctaDesc: "Alles, was diese Ressourcen bieten — Margenanalyse, Rotationskontrolle, monatliches Scoring — Winerim automatisiert es für Sie.",
+    ctaPrimary: "Demo anfordern", ctaSecondary: "Meine Karte kostenlos analysieren",
+    alsoLabel: "Das könnte Sie auch interessieren", guidesLink: "Ratgeber zum Lernen", toolsLink: "Interaktive Werkzeuge",
+  },
+  pt: {
+    metaTitle: "Recursos descarregáveis para restaurantes | Modelos, checklists e scorecards | Winerim",
+    metaDesc: "Descarregue modelos, checklists e scorecards profissionais para otimizar a sua carta de vinhos. Recursos acionáveis prontos a aplicar hoje.",
+    heroLabel: "Biblioteca de recursos",
+    heroTitle: "Ferramentas acionáveis para ",
+    heroHighlight: "aplicar hoje mesmo",
+    heroDesc: "Modelos, checklists e scorecards profissionais concebidos para melhorar a sua carta de vinhos desde o primeiro dia. Sem teoria, só ação.",
+    filterAll: "Todos", download: "Descarregar recurso", items: "recursos",
+    ctaTitle: "Quer que tudo isto seja feito automaticamente?",
+    ctaDesc: "Tudo o que estes recursos oferecem — análise de margens, controlo de rotação, scoring mensal — o Winerim automatiza por si.",
+    ctaPrimary: "Pedir demo", ctaSecondary: "Analisar a minha carta grátis",
+    alsoLabel: "Também lhe pode interessar", guidesLink: "Guias para aprender", toolsLink: "Ferramentas interativas",
+  },
 };
 
 /* ── Resource type config ── */

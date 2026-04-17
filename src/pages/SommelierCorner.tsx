@@ -47,6 +47,18 @@ const langContent: Record<string, LangContent> = {
     subtitle: "À la Winerim Academy, tous nos experts s'expriment. Sommeliers et responsables vins des restaurants, hôtels, bars à vins, distributeurs et domaines les plus importants.",
     readCta: "Lire l'interview", featured: "À la une", interviewLabel: "Interview",
   },
+  de: {
+    metaTitle: "Sommelier Corner", metaDesc: "Interviews mit den besten Sommeliers und Weinexperten.",
+    label: "Winerim Academy", title: "Sommelier Corner",
+    subtitle: "In der Winerim Academy kommen alle unsere Experten zu Wort. Sommeliers und Weinverantwortliche der wichtigsten Restaurants, Hotels, Weinbars, Distributoren und Weingüter.",
+    readCta: "Interview lesen", featured: "Empfohlen", interviewLabel: "Interview",
+  },
+  pt: {
+    metaTitle: "Sommelier Corner", metaDesc: "Entrevistas com os melhores sommeliers e especialistas em vinho.",
+    label: "Winerim Academy", title: "Sommelier Corner",
+    subtitle: "Na Winerim Academy, falam todos os nossos especialistas. Escanções e responsáveis de vinhos dos restaurantes, hotéis, garrafeiras, distribuidores e adegas mais importantes.",
+    readCta: "Ler entrevista", featured: "Destaque", interviewLabel: "Entrevista",
+  },
 };
 
 const formatDate = (dateStr: string | null) => {

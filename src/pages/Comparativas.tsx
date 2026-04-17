@@ -127,6 +127,58 @@ const i18n: I18nMap<{
       { to: "/benchmarks-playbooks", label: "Benchmarks et playbooks du secteur", type: "resource" },
     ],
   },
+  de: {
+    seoTitle: "Vergleiche — Winerim vs Alternativen | Winerim",
+    seoDesc: "Vergleichen Sie Winerim mit PDF-Karten, einfachen QR-Codes, gedruckten Listen, manueller Verwaltung und generischen digitalen Menüs. Klare Daten für Ihre Entscheidung.",
+    badge: "BOFU-Vergleiche", h1: "Winerim vs ", h1h: "Alternativen",
+    subtitle: "Klare, ehrliche Vergleiche, damit Sie entscheiden können, welche Lösung am besten zu Ihrem Restaurant passt. Keine leeren Angriffe, echte Daten.",
+    viewComp: "Vergleich ansehen", nextTitle: "Nächste Schritte", nextSub: "Vom Vergleich zur Aktion.",
+    ctaTitle1: "Möchten Sie Winerim mit ", ctaTitleH: "Ihrer echten Weinkarte", ctaSub: "Kostenlose persönliche Demo. Unverbindlich.", ctaBtn: "Demo anfordern",
+    breadComparativas: "Vergleiche", relatedTitle: "Verwandte Inhalte",
+    faqs: [
+      { q: "Warum Winerim mit anderen Optionen vergleichen?", a: "Damit Sie eine fundierte Entscheidung treffen können. Jedes Restaurant hat unterschiedliche Bedürfnisse und braucht nicht immer das umfangreichste Werkzeug. Diese Vergleiche helfen Ihnen, das Passende zu finden." },
+      { q: "Ersetzt Winerim den Sommelier?", a: "Nein. Winerim ergänzt das Serviceteam. Mit Sommelier verstärkt es dessen Reichweite. Ohne Sommelier fungiert es als intelligenter Assistent." },
+      { q: "Kann ich Winerim vor einer Entscheidung testen?", a: "Ja. Wir bieten eine kostenlose persönliche Demo mit Ihrer echten Weinkarte, damit Sie sehen, wie es in Ihrem konkreten Fall funktioniert." },
+    ],
+    steps: [
+      { to: "/software-carta-de-vinos", label: "Winerim im Detail entdecken", description: "Alle Funktionen der Weinkarten-Software.", type: "solution" },
+      { to: "/casos-exito", label: "Echte Erfolgsgeschichten", description: "Wie echte Restaurants Winerim nutzen und welche Ergebnisse sie erzielen.", type: "solution" },
+      { to: "/analisis-carta", label: "Karte kostenlos analysieren", description: "Laden Sie Ihre Karte hoch und erhalten Sie eine Diagnose mit Empfehlungen.", type: "tool" },
+      { to: "/demo", label: "Persönliche Demo anfordern", description: "Demo mit Ihrer echten Karte. Unverbindlich.", type: "solution" },
+    ],
+    links: [
+      { to: "/funcionalidades", label: "Alle Funktionen von Winerim", type: "solution" },
+      { to: "/precios", label: "Pläne und Preise von Winerim", type: "resource" },
+      { to: "/herramientas", label: "Kostenlose Analyse-Werkzeuge", type: "tool" },
+      { to: "/benchmarks-playbooks", label: "Branchen-Benchmarks und Playbooks", type: "resource" },
+    ],
+  },
+  pt: {
+    seoTitle: "Comparações — Winerim vs Alternativas | Winerim",
+    seoDesc: "Compare o Winerim com cartas PDF, QR simples, cartas impressas, gestão manual e menus digitais genéricos. Dados claros para decidir.",
+    badge: "Comparações BOFU", h1: "Winerim vs ", h1h: "alternativas",
+    subtitle: "Comparações claras e honestas para que possa decidir qual solução se adequa melhor ao seu restaurante. Sem ataques vazios, com dados reais.",
+    viewComp: "Ver comparação", nextTitle: "Próximos passos", nextSub: "Da comparação à ação.",
+    ctaTitle1: "Quer ver o Winerim com ", ctaTitleH: "a sua carta real", ctaSub: "Demo personalizada gratuita. Sem compromisso.", ctaBtn: "Pedir demo",
+    breadComparativas: "Comparações", relatedTitle: "Conteúdo relacionado",
+    faqs: [
+      { q: "Porquê comparar o Winerim com outras opções?", a: "Para que possa tomar uma decisão informada. Cada restaurante tem necessidades diferentes e nem sempre precisa da ferramenta mais completa. Estas comparações ajudam-no a decidir o que melhor se adapta ao seu caso." },
+      { q: "O Winerim substitui o escanção?", a: "Não. O Winerim complementa a equipa de sala. Com escanção, amplifica o seu alcance. Sem escanção, funciona como assistente inteligente." },
+      { q: "Posso experimentar o Winerim antes de decidir?", a: "Sim. Oferecemos uma demo personalizada gratuita com a sua carta real para que veja como funciona no seu caso concreto." },
+    ],
+    steps: [
+      { to: "/software-carta-de-vinos", label: "Descubra o Winerim em detalhe", description: "Todas as funcionalidades do software de carta de vinhos.", type: "solution" },
+      { to: "/casos-exito", label: "Casos de sucesso reais", description: "Como restaurantes reais usam o Winerim e que resultados obtêm.", type: "solution" },
+      { to: "/analisis-carta", label: "Analise a sua carta grátis", description: "Envie a sua carta e receba um diagnóstico com recomendações.", type: "tool" },
+      { to: "/demo", label: "Pedir demo personalizada", description: "Demo com a sua carta real. Sem compromisso.", type: "solution" },
+    ],
+    links: [
+      { to: "/funcionalidades", label: "Todas as funcionalidades do Winerim", type: "solution" },
+      { to: "/precios", label: "Planos e preços do Winerim", type: "resource" },
+      { to: "/herramientas", label: "Ferramentas de análise gratuitas", type: "tool" },
+      { to: "/benchmarks-playbooks", label: "Benchmarks e playbooks do setor", type: "resource" },
+    ],
+  },
 };
 
 const Comparativas = () => {
