@@ -120,7 +120,6 @@ const GuiaServicio = lazy(() => import("./pages/GuiaServicio"));
 const GlosarioVino = lazy(() => import("./pages/GlosarioVino"));
 const Gracias = lazy(() => import("./pages/Gracias"));
 const FAQs = lazy(() => import("./pages/FAQs"));
-const NotFound = lazy(() => import("./pages/NotFound"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const CursosVino = lazy(() => import("./pages/CursosVino"));
 const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
@@ -672,7 +671,7 @@ const App = () => (
                 {langRoutes("/de")}
                 {langRoutes("/pt")}
                 <Route path="/unsubscribe" element={<Unsubscribe />} />
-                <Route path="*" element={<SeoPage fallback={<NotFound />} />} />
+                <Route path="*" element={<SeoPage />} />
               </Routes>
             </Suspense>
             {/* Overlay components — lazy loaded, non-critical */}
