@@ -23,6 +23,220 @@ import {
   type StyleCatalogEntry,
 } from "@/data/stylesLibrary";
 
+/* i18n translations */
+const i18n = {
+  es: {
+    biblioteca: "Biblioteca del Vino",
+    styles: "Estilos",
+    serviceAndSensory: "Servicio y perfil sensorial",
+    temperature: "Temperatura",
+    glass: "Copa",
+    agingPotential: "Potencial de guarda",
+    body: "Cuerpo",
+    sensoryProfile: "Perfil sensorial",
+    acidity: "Acidez",
+    fruit: "Fruta",
+    wood: "Madera",
+    complexity: "Complejidad",
+    elaboration: "Elaboración",
+    mainGrapes: "Uvas principales",
+    highlightedRegions: "Regiones destacadas",
+    pairings: "Maridajes",
+    subtypesAndVariants: "Subtipos y variantes",
+    winerimReading: "Lectura Winerim",
+    howPerceivedThisStyle: "Cómo se percibe este estilo en carta",
+    whatCommunicates: "Qué comunica en carta",
+    clientType: "Qué tipo de cliente lo pide",
+    howSellBetter: "Cómo venderlo mejor",
+    whenSafe: "Cuándo es opción segura",
+    whenDifferential: "Cuándo funciona como diferencial",
+    whenPremium: "Cuándo funciona como premium",
+    competesWithLabel: "Compite con",
+    bestForConcepts: "Mejor para estos conceptos",
+    relatedStyles: "Estilos relacionados",
+    frequentQuestions: "Preguntas frecuentes",
+    discoverWinerimOrganizes: "Descubre cómo Winerim organiza tu carta",
+    requestDemo: "Solicitar demo",
+    wantChartWorkThisIntelligence: "¿Quieres que tu carta trabaje con esta inteligencia?",
+    winerimOrganizes: "Winerim organiza, activa y optimiza tu carta de vinos con criterio profesional.",
+  },
+  en: {
+    biblioteca: "Wine Library",
+    styles: "Styles",
+    serviceAndSensory: "Service and Sensory Profile",
+    temperature: "Temperature",
+    glass: "Glass",
+    agingPotential: "Aging Potential",
+    body: "Body",
+    sensoryProfile: "Sensory Profile",
+    acidity: "Acidity",
+    fruit: "Fruit",
+    wood: "Wood",
+    complexity: "Complexity",
+    elaboration: "Elaboration",
+    mainGrapes: "Main Grapes",
+    highlightedRegions: "Highlighted Regions",
+    pairings: "Pairings",
+    subtypesAndVariants: "Subtypes and Variants",
+    winerimReading: "Winerim Reading",
+    howPerceivedThisStyle: "How This Style Is Perceived on Wine Lists",
+    whatCommunicates: "What It Communicates on Wine Lists",
+    clientType: "Type of Client Who Orders It",
+    howSellBetter: "How to Sell It Better",
+    whenSafe: "When It Is a Safe Option",
+    whenDifferential: "When It Functions as Differential",
+    whenPremium: "When It Functions as Premium",
+    competesWithLabel: "Competes With",
+    bestForConcepts: "Best for These Concepts",
+    relatedStyles: "Related Styles",
+    frequentQuestions: "Frequently Asked Questions",
+    discoverWinerimOrganizes: "Discover How Winerim Organizes Your Wine List",
+    requestDemo: "Request Demo",
+    wantChartWorkThisIntelligence: "Do You Want Your Wine List to Work with This Intelligence?",
+    winerimOrganizes: "Winerim organizes, activates, and optimizes your wine list with professional criteria.",
+  },
+  it: {
+    biblioteca: "Biblioteca del Vino",
+    styles: "Stili",
+    serviceAndSensory: "Servizio e Profilo Sensoriale",
+    temperature: "Temperatura",
+    glass: "Calice",
+    agingPotential: "Potenziale di Invecchiamento",
+    body: "Corpo",
+    sensoryProfile: "Profilo Sensoriale",
+    acidity: "Acidita",
+    fruit: "Frutta",
+    wood: "Legno",
+    complexity: "Complessita",
+    elaboration: "Elaborazione",
+    mainGrapes: "Uve Principali",
+    highlightedRegions: "Regioni in Evidenza",
+    pairings: "Abbinamenti",
+    subtypesAndVariants: "Sottotipi e Varianti",
+    winerimReading: "Lettura Winerim",
+    howPerceivedThisStyle: "Come Viene Percepito questo Stile sulla Carta",
+    whatCommunicates: "Cosa Comunica sulla Carta",
+    clientType: "Tipo di Cliente che lo Ordina",
+    howSellBetter: "Come Venderlo Meglio",
+    whenSafe: "Quando e un'Opzione Sicura",
+    whenDifferential: "Quando Funziona come Differenziale",
+    whenPremium: "Quando Funziona come Premium",
+    competesWithLabel: "Compete Con",
+    bestForConcepts: "Migliore per Questi Concetti",
+    relatedStyles: "Stili Correlati",
+    frequentQuestions: "Domande Frequenti",
+    discoverWinerimOrganizes: "Scopri Come Winerim Organizza la Tua Carta",
+    requestDemo: "Richiedi Demo",
+    wantChartWorkThisIntelligence: "Vuoi che la tua carta funzioni con questa intelligenza?",
+    winerimOrganizes: "Winerim organizza, attiva e ottimizza la tua carta dei vini con criterio professionale.",
+  },
+  fr: {
+    biblioteca: "Bibliotheque du Vin",
+    styles: "Styles",
+    serviceAndSensory: "Service et Profil Sensoriel",
+    temperature: "Temperature",
+    glass: "Verre",
+    agingPotential: "Potentiel de Vieillissement",
+    body: "Corps",
+    sensoryProfile: "Profil Sensoriel",
+    acidity: "Acidite",
+    fruit: "Fruit",
+    wood: "Bois",
+    complexity: "Complexite",
+    elaboration: "Elaboration",
+    mainGrapes: "Cepages Principaux",
+    highlightedRegions: "Regions Mises en Avant",
+    pairings: "Accords",
+    subtypesAndVariants: "Sous-types et Variantes",
+    winerimReading: "Lecture Winerim",
+    howPerceivedThisStyle: "Comment ce Style est Percu sur la Carte",
+    whatCommunicates: "Ce qu'il Communique sur la Carte",
+    clientType: "Type de Client qui le Commande",
+    howSellBetter: "Comment le Vendre Mieux",
+    whenSafe: "Quand c'est une Option Securisee",
+    whenDifferential: "Quand il Fonctionne comme Differentiel",
+    whenPremium: "Quand il Fonctionne comme Premium",
+    competesWithLabel: "Concurrence Avec",
+    bestForConcepts: "Meilleur pour Ces Concepts",
+    relatedStyles: "Styles Associes",
+    frequentQuestions: "Questions Frequentes",
+    discoverWinerimOrganizes: "Decouvrez Comment Winerim Organise Votre Carte",
+    requestDemo: "Demander une Demonstration",
+    wantChartWorkThisIntelligence: "Voulez-vous que votre carte fonctionne avec cette intelligence?",
+    winerimOrganizes: "Winerim organise, active et optimise votre carte des vins avec des criteres professionnels.",
+  },
+  de: {
+    biblioteca: "Weinbibliothek",
+    styles: "Weinstile",
+    serviceAndSensory: "Ausschank und sensorisches Profil",
+    temperature: "Temperatur",
+    glass: "Glas",
+    agingPotential: "Lagerungspotential",
+    body: "Korper",
+    sensoryProfile: "Sensorisches Profil",
+    acidity: "Saure",
+    fruit: "Frucht",
+    wood: "Holz",
+    complexity: "Komplexitat",
+    elaboration: "Herstellung",
+    mainGrapes: "Wichtigste Rebsorten",
+    highlightedRegions: "Hervorgehobene Weinregionen",
+    pairings: "Speisebegleitungen",
+    subtypesAndVariants: "Untertypen und Varianten",
+    winerimReading: "Winerim-Lesung",
+    howPerceivedThisStyle: "Wie dieser Weinstil auf der Weinkarte wahrgenommen wird",
+    whatCommunicates: "Was es auf der Weinkarte mitteilt",
+    clientType: "Kundentyp, der ihn bestellt",
+    howSellBetter: "Wie man ihn besser verkauft",
+    whenSafe: "Wenn es eine sichere Option ist",
+    whenDifferential: "Wenn es als Differentiator fungiert",
+    whenPremium: "Wenn es als Premium fungiert",
+    competesWithLabel: "Konkurriert Mit",
+    bestForConcepts: "Am besten fur diese Konzepte",
+    relatedStyles: "Verwandte Weinstile",
+    frequentQuestions: "Haufig gestellte Fragen",
+    discoverWinerimOrganizes: "Entdecken Sie, wie Winerim Ihre Weinkarte organisiert",
+    requestDemo: "Demo anfordern",
+    wantChartWorkThisIntelligence: "Mochten Sie, dass Ihre Weinkarte mit dieser Intelligenz funktioniert?",
+    winerimOrganizes: "Winerim organisiert, aktiviert und optimiert Ihre Weinkarte mit professionellen Kriterien.",
+  },
+  pt: {
+    biblioteca: "Biblioteca do Vinho",
+    styles: "Estilos",
+    serviceAndSensory: "Servico e Perfil Sensorial",
+    temperature: "Temperatura",
+    glass: "Taça",
+    agingPotential: "Potencial de Envelhecimento",
+    body: "Corpo",
+    sensoryProfile: "Perfil Sensorial",
+    acidity: "Acidez",
+    fruit: "Fruta",
+    wood: "Madeira",
+    complexity: "Complexidade",
+    elaboration: "Elaboracao",
+    mainGrapes: "Castas Principais",
+    highlightedRegions: "Regioes em Destaque",
+    pairings: "Harmonizacoes",
+    subtypesAndVariants: "Subtipos e Variantes",
+    winerimReading: "Leitura Winerim",
+    howPerceivedThisStyle: "Como este Estilo e Percebido na Carta",
+    whatCommunicates: "O que Comunica na Carta",
+    clientType: "Tipo de Cliente que o Pede",
+    howSellBetter: "Como Vender Melhor",
+    whenSafe: "Quando e uma Opcao Segura",
+    whenDifferential: "Quando Funciona como Diferencial",
+    whenPremium: "Quando Funciona como Premium",
+    competesWithLabel: "Compete Com",
+    bestForConcepts: "Melhor para Estes Conceitos",
+    relatedStyles: "Estilos Relacionados",
+    frequentQuestions: "Perguntas Frequentes",
+    discoverWinerimOrganizes: "Descubra Como Winerim Organiza sua Carta",
+    requestDemo: "Solicitar Demo",
+    wantChartWorkThisIntelligence: "Quer que sua carta funcione com esta inteligencia?",
+    winerimOrganizes: "Winerim organiza, ativa e otimiza sua carta de vinhos com criterio profissional.",
+  },
+};
+
 const levelLabels: Record<string, string> = {
   baja: "Baja", media: "Media", alta: "Alta", "muy-alta": "Muy alta",
   ligero: "Ligero", medio: "Medio", alto: "Alto", "muy-alto": "Muy alto",
@@ -68,7 +282,8 @@ const StyleDetail = () => {
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════ */
 const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
-  const { allLangPaths } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
+  const t = i18n[lang as keyof typeof i18n] ?? i18n.es;
   const familyInfo = familyMeta[data.family];
 
   return (
@@ -83,8 +298,8 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Estilos", href: "/biblioteca-vino/estilos" },
+            { label: t.biblioteca, href: "/biblioteca-vino" },
+            { label: t.styles, href: "/biblioteca-vino/estilos" },
             { label: data.name },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -121,14 +336,14 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Servicio y perfil sensorial</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{t.serviceAndSensory}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Thermometer, label: "Temperatura", value: data.servingTemp },
-              { icon: GlassWater, label: "Copa", value: data.glassRecommendation },
-              { icon: Clock, label: "Potencial de guarda", value: data.agingPotential },
-              { icon: Wine, label: "Cuerpo", value: levelLabels[data.body] || data.body },
+              { icon: Thermometer, label: t.temperature, value: data.servingTemp },
+              { icon: GlassWater, label: t.glass, value: data.glassRecommendation },
+              { icon: Clock, label: t.agingPotential, value: data.agingPotential },
+              { icon: Wine, label: t.body, value: levelLabels[data.body] || data.body },
             ].map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 0.08}>
                 <div className="bg-gradient-card border border-border rounded-xl p-5 h-full">
@@ -143,14 +358,14 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
           {/* Sensory bars */}
           <ScrollReveal className="mt-8">
             <div className="bg-gradient-card border border-border rounded-xl p-6">
-              <h3 className="font-heading text-lg font-semibold mb-4">Perfil sensorial</h3>
+              <h3 className="font-heading text-lg font-semibold mb-4">{t.sensoryProfile}</h3>
               <div className="space-y-3">
                 {[
-                  { label: "Cuerpo", value: data.body, levels: ["ligero", "medio", "alto", "muy-alto"] },
-                  { label: "Acidez", value: data.acidity, levels: ["baja", "media", "alta", "muy-alta"] },
-                  { label: "Fruta", value: data.fruitIntensity, levels: ["baja", "media", "alta"] },
-                  { label: "Madera", value: data.woodPresence, levels: ["ninguna", "sutil", "media", "marcada"] },
-                  { label: "Complejidad", value: data.complexity, levels: ["sencillo", "medio", "complejo", "muy-complejo"] },
+                  { label: t.body, value: data.body, levels: ["ligero", "medio", "alto", "muy-alto"] },
+                  { label: t.acidity, value: data.acidity, levels: ["baja", "media", "alta", "muy-alta"] },
+                  { label: t.fruit, value: data.fruitIntensity, levels: ["baja", "media", "alta"] },
+                  { label: t.wood, value: data.woodPresence, levels: ["ninguna", "sutil", "media", "marcada"] },
+                  { label: t.complexity, value: data.complexity, levels: ["sencillo", "medio", "complejo", "muy-complejo"] },
                 ].map(bar => {
                   const idx = bar.levels.indexOf(bar.value);
                   const pct = ((idx + 1) / bar.levels.length) * 100;
@@ -174,7 +389,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
       <section className="section-padding">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">Elaboración</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{t.elaboration}</h2>
             <p className="text-muted-foreground leading-relaxed">{data.elaboration}</p>
           </ScrollReveal>
         </div>
@@ -187,7 +402,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
             <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
               <div className="flex items-center gap-2 mb-4">
                 <Grape size={18} className="text-wine" />
-                <h3 className="font-heading text-lg font-semibold">Uvas principales</h3>
+                <h3 className="font-heading text-lg font-semibold">{t.mainGrapes}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map(g => (
@@ -200,7 +415,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
             <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
               <div className="flex items-center gap-2 mb-4">
                 <MapPin size={18} className="text-wine" />
-                <h3 className="font-heading text-lg font-semibold">Regiones destacadas</h3>
+                <h3 className="font-heading text-lg font-semibold">{t.highlightedRegions}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {data.keyRegions.map(r => (
@@ -218,7 +433,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
           <ScrollReveal>
             <div className="flex items-center gap-2 mb-4">
               <Utensils size={18} className="text-wine" />
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">Maridajes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.pairings}</h2>
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               {data.pairings.map(p => (
@@ -237,7 +452,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
         <section className="section-padding bg-gradient-dark">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Subtipos y variantes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{t.subtypesAndVariants}</h2>
             </ScrollReveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {data.subtypes.map((sub, i) => (
@@ -259,19 +474,19 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
               <Wine size={14} className="text-wine" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Lectura Winerim</span>
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.winerimReading}</span>
             </div>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Cómo se percibe este estilo en carta</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{t.howPerceivedThisStyle}</h2>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { icon: Target, title: "Qué comunica en carta", text: data.cartaCommunication },
-              { icon: Users, title: "Qué tipo de cliente lo pide", text: data.clientProfile },
-              { icon: Lightbulb, title: "Cómo venderlo mejor", text: data.sellByStrategy },
-              { icon: ShieldCheck, title: "Cuándo es opción segura", text: data.whenSafe },
-              { icon: TrendingUp, title: "Cuándo funciona como diferencial", text: data.whenDifferential },
-              { icon: Wine, title: "Cuándo funciona como premium", text: data.whenPremium },
+              { icon: Target, title: t.whatCommunicates, text: data.cartaCommunication },
+              { icon: Users, title: t.clientType, text: data.clientProfile },
+              { icon: Lightbulb, title: t.howSellBetter, text: data.sellByStrategy },
+              { icon: ShieldCheck, title: t.whenSafe, text: data.whenSafe },
+              { icon: TrendingUp, title: t.whenDifferential, text: data.whenDifferential },
+              { icon: Wine, title: t.whenPremium, text: data.whenPremium },
             ].map((block, i) => (
               <ScrollReveal key={block.title} delay={i * 0.06}>
                 <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
@@ -291,7 +506,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
                 <div className="flex items-center gap-3 mb-3">
                   <AlertTriangle size={18} className="text-wine shrink-0" />
-                  <h3 className="font-heading text-base font-semibold">Compite con</h3>
+                  <h3 className="font-heading text-base font-semibold">{t.competesWithLabel}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {data.competingStyles.map(s => (
@@ -302,7 +517,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
             </ScrollReveal>
             <ScrollReveal delay={0.08}>
               <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
-                <h3 className="font-heading text-base font-semibold mb-3">Mejor para estos conceptos</h3>
+                <h3 className="font-heading text-base font-semibold mb-3">{t.bestForConcepts}</h3>
                 <div className="flex flex-wrap gap-2">
                   {data.bestConcepts.map(c => (
                     <span key={c} className="text-sm bg-accent/50 px-3 py-1 rounded-full">{c}</span>
@@ -315,7 +530,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
           {/* Related styles */}
           {data.relatedStyles.length > 0 && (
             <ScrollReveal className="mt-8">
-              <h3 className="font-heading text-lg font-semibold mb-4">Estilos relacionados</h3>
+              <h3 className="font-heading text-lg font-semibold mb-4">{t.relatedStyles}</h3>
               <div className="flex flex-wrap gap-3">
                 {data.relatedStyles.map(slug => {
                   const related = styleEntries.find(e => e.slug === slug || e.id === slug);
@@ -343,7 +558,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
         <section className="section-padding bg-gradient-dark">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{t.frequentQuestions}</h2>
             </ScrollReveal>
             <FAQSection faqs={data.faqs} />
           </div>
@@ -358,13 +573,13 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
               <div className="relative z-10">
                 <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-                  ¿Quieres que tu carta trabaje con esta <span className="text-gradient-wine italic">inteligencia</span>?
+                  {t.wantChartWorkThisIntelligence}
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
-                  Winerim organiza, activa y optimiza tu carta de vinos con criterio profesional.
+                  {t.winerimOrganizes}
                 </p>
                 <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                  Solicitar demo <ArrowRight size={16} />
+                  {t.requestDemo} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
@@ -381,6 +596,8 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
    CATALOG DETAIL — Simplified view for subtypes
    ═══════════════════════════════════════════════════════════════ */
 const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
+  const { lang } = useLanguage();
+  const t = i18n[lang as keyof typeof i18n] ?? i18n.es;
   const familyInfo = familyMeta[data.family];
   // Find parent style
   const parent = styleEntries.find(e => e.family === data.family);
@@ -399,8 +616,8 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Estilos", href: "/biblioteca-vino/estilos" },
+            { label: t.biblioteca, href: "/biblioteca-vino" },
+            { label: t.styles, href: "/biblioteca-vino/estilos" },
             ...(parent ? [{ label: parent.name, href: `/biblioteca-vino/estilos/${parent.slug}` }] : []),
             { label: data.name },
           ]} />
@@ -417,17 +634,17 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
           <div className="grid sm:grid-cols-3 gap-4 mb-8">
             <div className="bg-gradient-card border border-border rounded-xl p-4">
               <Thermometer size={16} className="text-wine mb-2" />
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Temperatura</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t.temperature}</p>
               <p className="text-sm font-medium">{data.servingTemp}</p>
             </div>
             <div className="bg-gradient-card border border-border rounded-xl p-4">
               <Grape size={16} className="text-wine mb-2" />
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Uvas frecuentes</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t.commonGrapes}</p>
               <p className="text-sm font-medium">{data.mainGrapes.join(", ")}</p>
             </div>
             <div className="bg-gradient-card border border-border rounded-xl p-4">
               <MapPin size={16} className="text-wine mb-2" />
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Regiones</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{t.highlightedRegions}</p>
               <p className="text-sm font-medium">{data.keyRegions.join(", ")}</p>
             </div>
           </div>
@@ -448,9 +665,9 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
           <div className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">Descubre cómo Winerim organiza tu carta</h2>
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">{t.discoverWinerimOrganizes}</h2>
               <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-                Solicitar demo <ArrowRight size={16} />
+                {t.requestDemo} <ArrowRight size={16} />
               </Link>
             </div>
           </div>

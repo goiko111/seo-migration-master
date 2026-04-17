@@ -15,6 +15,250 @@ import { familyMeta, familyOrder, getAllStyles } from "@/data/stylesLibrary";
 import { categoryMeta, categoryOrder, pairingEntries } from "@/data/pairingsLibrary";
 import { regionCatalog, CATALOG_STATS } from "@/data/regionsCatalog";
 
+// ── i18n ──
+const i18n = {
+  es: {
+    seoTitle: "Biblioteca del Vino | Guía Completa para Hostelería",
+    seoDescription: "Guía completa sobre uvas, regiones vinícolas, estilos de vino y maridajes. Conocimiento esencial para restaurantes que quieren vender más y mejor vino.",
+    knowledge: "Conocimiento",
+    title: "Biblioteca del",
+    titleSpan: "vino",
+    description: "Todo lo que necesitas saber sobre uvas, regiones, estilos y maridajes para ofrecer una experiencia de vino excepcional en tu restaurante.",
+    searchPlaceholder: "Busca variedades, regiones, estilos, maridajes...",
+    denominaciones: "denominaciones",
+    paises: "países",
+    variedades: "variedades de uva",
+    estilos: "estilos de vino",
+    maridajes: "guías de maridaje",
+    paisesProductores: "países productores",
+    regionesTitle: "Regiones vinícolas",
+    regionesDesc: "denominaciones de ",
+    denominacionesWithColon: ": DOs, DOCs, DOCGs, AOPs, AVAs, Premier Crus, Grand Crus y más.",
+    variedadesTitle: "Variedades de uva",
+    variedadesDesc: "Perfil sensorial, reconocimiento comercial, estrategia de venta y maridajes de las ",
+    variedadesVar: " variedades más relevantes del mundo.",
+    estilosTitle: "Estilos de vino",
+    estilosDesc: "Desde tintos jóvenes hasta Champagne, generosos de Jerez, vinos naranjas y dulces nobres. 8 familias, 50+ subtipos.",
+    maridajesTitle: "Maridajes",
+    maridajesDesc: "Guías de maridaje por categoría y plato individual. Desde solomillo hasta sushi, con recomendaciones de uva, región y estilo.",
+    herramientas: "Herramientas de consulta",
+    servicioTitle: "Guía de servicio",
+    servicioDesc: "Temperatura, copa, ml por servicio y copas por botella para cada estilo de vino.",
+    glosarioTitle: "Glosario del vino",
+    glosarioDesc: "Más de 35 términos esenciales explicados con claridad para profesionales de hostelería.",
+    calculadoraTitle: "Calculadora por copa",
+    calculadoraDesc: "Calcula el margen y el precio óptimo de cada copa de vino en tu carta.",
+    ctaTitle: "¿Quieres que tu carta refleje este",
+    ctaSpan: "conocimiento",
+    ctaDesc: "Winerim lleva toda esta información directamente a tu carta digital, ayudando a tus clientes a descubrir y elegir mejor.",
+    ctaButton: "Solicitar demo",
+    exploreDenominations: "Explorar ",
+    explorarVar: " variedades",
+    verTodos: "Ver todos los estilos",
+    verGuias: "Ver todas las guías",
+  },
+  en: {
+    seoTitle: "Wine Library | Complete Hospitality Guide",
+    seoDescription: "Complete guide to grapes, wine regions, wine styles and food pairings. Essential knowledge for restaurants that want to sell more and better wine.",
+    knowledge: "Knowledge",
+    title: "Wine",
+    titleSpan: "Library",
+    description: "Everything you need to know about grapes, regions, styles and pairings to offer an exceptional wine experience in your restaurant.",
+    searchPlaceholder: "Search varieties, regions, styles, pairings...",
+    denominaciones: "designations",
+    paises: "countries",
+    variedades: "grape varieties",
+    estilos: "wine styles",
+    maridajes: "pairing guides",
+    paisesProductores: "producing countries",
+    regionesTitle: "Wine regions",
+    regionesDesc: "designations from ",
+    denominacionesWithColon: ": DOs, DOCs, DOCGs, AOPs, AVAs, Premier Crus, Grand Crus and more.",
+    variedadesTitle: "Grape varieties",
+    variedadesDesc: "Sensory profile, commercial recognition, sales strategy and pairings from the ",
+    variedadesVar: " most relevant grape varieties in the world.",
+    estilosTitle: "Wine styles",
+    estilosDesc: "From young reds to Champagne, Sherry wines, orange wines and noble sweet wines. 8 families, 50+ subtypes.",
+    maridajesTitle: "Pairings",
+    maridajesDesc: "Pairing guides by category and individual dish. From sirloin to sushi, with recommendations for grape, region and style.",
+    herramientas: "Reference tools",
+    servicioTitle: "Serving guide",
+    servicioDesc: "Temperature, glass, ml per serving and glasses per bottle for each wine style.",
+    glosarioTitle: "Wine glossary",
+    glosarioDesc: "Over 35 essential terms explained clearly for hospitality professionals.",
+    calculadoraTitle: "Glass price calculator",
+    calculadoraDesc: "Calculate the margin and optimal price for each glass of wine on your menu.",
+    ctaTitle: "Want your menu to reflect this",
+    ctaSpan: "knowledge",
+    ctaDesc: "Winerim brings all this information directly to your digital menu, helping your customers discover and choose better.",
+    ctaButton: "Request demo",
+    exploreDenominations: "Explore ",
+    explorarVar: " varieties",
+    verTodos: "See all styles",
+    verGuias: "See all guides",
+  },
+  it: {
+    seoTitle: "Biblioteca del Vino | Guida Completa per l'Ospitalità",
+    seoDescription: "Guida completa su vitigni, regioni vinicole, stili di vino e abbinamenti. Conoscenze essenziali per ristoranti che vogliono vendere più e meglio.",
+    knowledge: "Conoscenza",
+    title: "Biblioteca del",
+    titleSpan: "vino",
+    description: "Tutto quello che devi sapere su vitigni, regioni, stili e abbinamenti per offrire un'esperienza vino eccezionale nel tuo ristorante.",
+    searchPlaceholder: "Cerca vitigni, regioni, stili, abbinamenti...",
+    denominazioni: "denominazioni",
+    paises: "paesi",
+    variedades: "vitigni",
+    estilos: "stili di vino",
+    maridajes: "guide di abbinamento",
+    paisesProductores: "paesi produttori",
+    regionesTitle: "Regioni vinicole",
+    regionesDesc: "denominazioni da ",
+    denominacionesWithColon: ": DO, DOC, DOCG, AOP, AVA, Premier Cru, Grand Cru e altro.",
+    variedadesTitle: "Vitigni",
+    variedadesDesc: "Profilo sensoriale, riconoscimento commerciale, strategia di vendita e abbinamenti da ",
+    variedadesVar: " vitigni più rilevanti del mondo.",
+    estilosTitle: "Stili di vino",
+    estilosDesc: "Da rossi giovani a Champagne, vini di Jerez, vini arancioni e dolci nobili. 8 famiglie, 50+ sottotipi.",
+    maridajesTitle: "Abbinamenti",
+    maridajesDesc: "Guide di abbinamento per categoria e singolo piatto. Da bistecca a sushi, con consigli su vitigno, regione e stile.",
+    herramientas: "Strumenti di consultazione",
+    servicioTitle: "Guida al servizio",
+    servicioDesc: "Temperatura, bicchiere, ml per servizio e bicchieri per bottiglia per ogni stile di vino.",
+    glosarioTitle: "Glossario del vino",
+    glosarioDesc: "Oltre 35 termini essenziali spiegati chiaramente per professionisti dell'ospitalità.",
+    calculadoraTitle: "Calcolatore prezzo per bicchiere",
+    calculadoraDesc: "Calcola il margine e il prezzo ottimale per ogni bicchiere di vino della tua carta.",
+    ctaTitle: "Vuoi che la tua carta rispecchi questa",
+    ctaSpan: "conoscenza",
+    ctaDesc: "Winerim porta tutte queste informazioni direttamente nella tua carta digitale, aiutando i tuoi clienti a scoprire e scegliere meglio.",
+    ctaButton: "Richiedi demo",
+    exploreDenominations: "Esplora ",
+    explorarVar: " vitigni",
+    verTodos: "Vedi tutti gli stili",
+    verGuias: "Vedi tutte le guide",
+  },
+  fr: {
+    seoTitle: "Bibliothèque du Vin | Guide Complet pour l'Hôtellerie",
+    seoDescription: "Guide complet sur les cépages, régions viticoles, styles de vin et accords mets-vins. Connaissances essentielles pour les restaurants qui veulent vendre plus et mieux.",
+    knowledge: "Connaissance",
+    title: "Bibliothèque du",
+    titleSpan: "vin",
+    description: "Tout ce que tu as besoin de savoir sur les cépages, régions, styles et accords pour offrir une expérience vinicole exceptionnelle dans ton restaurant.",
+    searchPlaceholder: "Cherche cépages, régions, styles, accords...",
+    denominazioni: "appellations",
+    paises: "pays",
+    variedades: "cépages",
+    estilos: "styles de vin",
+    maridajes: "guides d'accords",
+    paisesProductores: "pays producteurs",
+    regionesTitle: "Régions viticoles",
+    regionesDesc: "appellations de ",
+    denominacionesWithColon: ": DO, DOC, DOCG, AOP, AVA, Premier Cru, Grand Cru et plus.",
+    variedadesTitle: "Cépages",
+    variedadesDesc: "Profil sensoriel, reconnaissance commerciale, stratégie de vente et accords des ",
+    variedadesVar: " cépages les plus pertinents du monde.",
+    estilosTitle: "Styles de vin",
+    estilosDesc: "Des jeunes rouges à Champagne, vins de Xérès, vins oranges et doux nobles. 8 familles, 50+ sous-types.",
+    maridajesTitle: "Accords",
+    maridajesDesc: "Guides d'accords par catégorie et plat individuel. Du filet au sushi, avec recommandations de cépage, région et style.",
+    herramientas: "Outils de consultation",
+    servicioTitle: "Guide de service",
+    servicioDesc: "Température, verre, ml par service et verres par bouteille pour chaque style de vin.",
+    glosarioTitle: "Glossaire du vin",
+    glosarioDesc: "Plus de 35 termes essentiels expliqués clairement pour les professionnels de l'hôtellerie.",
+    calculadoraTitle: "Calculatrice prix par verre",
+    calculadoraDesc: "Calcule la marge et le prix optimal pour chaque verre de vin de ta carte.",
+    ctaTitle: "Veux-tu que ta carte reflète cette",
+    ctaSpan: "connaissance",
+    ctaDesc: "Winerim apporte toutes ces informations directement à ta carte numérique, aidant tes clients à découvrir et choisir mieux.",
+    ctaButton: "Demander une démo",
+    exploreDenominations: "Explore ",
+    explorarVar: " cépages",
+    verTodos: "Voir tous les styles",
+    verGuias: "Voir tous les guides",
+  },
+  de: {
+    seoTitle: "Weinbibliothek | Vollständiger Leitfaden für Gastronomie",
+    seoDescription: "Vollständiger Leitfaden zu Rebsorten, Weinregionen, Weinstilen und Speisebegleitungen. Wesentliches Wissen für Restaurants, die mehr und besser verkaufen wollen.",
+    knowledge: "Wissen",
+    title: "Weinbibliothek",
+    titleSpan: "Wein",
+    description: "Alles, was Sie über Rebsorten, Regionen, Stile und Speisebegleitungen wissen müssen, um Ihren Gästen ein außergewöhnliches Weinerlebnis zu bieten.",
+    searchPlaceholder: "Suchen Sie nach Rebsorten, Regionen, Stilen, Speisebegleitungen...",
+    denominazioni: "Herkunftsbezeichnungen",
+    paises: "Länder",
+    variedades: "Rebsorten",
+    estilos: "Weinstile",
+    maridajes: "Speisebegleitungsleitfäden",
+    paisesProductores: "Produzentenländer",
+    regionesTitle: "Weinregionen",
+    regionesDesc: "Herkunftsbezeichnungen aus ",
+    denominacionesWithColon: ": DO, DOC, DOCG, AOP, AVA, Premier Cru, Grand Cru und mehr.",
+    variedadesTitle: "Rebsorten",
+    variedadesDesc: "Sensorisches Profil, kommerzielle Anerkennung, Verkaufsstrategie und Speisebegleitungen der ",
+    variedadesVar: " wichtigsten Rebsorten der Welt.",
+    estilosTitle: "Weinstile",
+    estilosDesc: "Von jungen Rotweinen bis Champagner, Jerez-Weine, Naturweine und edle Süßweine. 8 Familien, 50+ Untertypen.",
+    maridajesTitle: "Speisebegleitungen",
+    maridajesDesc: "Speisebegleitungsleitfäden nach Kategorie und einzelnem Gericht. Von Filet bis Sushi mit Empfehlungen für Rebsorte, Region und Stil.",
+    herramientas: "Konsultationswerkzeuge",
+    servicioTitle: "Serviceleitfaden",
+    servicioDesc: "Temperatur, Glas, ml pro Serviette und Gläser pro Flasche für jeden Weinstil.",
+    glosarioTitle: "Weinglexikon",
+    glosarioDesc: "Über 35 wesentliche Begriffe klar erklärt für Gastronomie-Profis.",
+    calculadoraTitle: "Glaspreisrechner",
+    calculadoraDesc: "Berechnen Sie die Marge und den optimalen Preis für jedes Glas Wein auf Ihrer Karte.",
+    ctaTitle: "Möchten Sie, dass Ihre Karte dieses",
+    ctaSpan: "Wissen",
+    ctaDesc: "Winerim bringt alle diese Informationen direkt in Ihre digitale Karte und hilft Ihren Gästen, besser zu entdecken und zu wählen.",
+    ctaButton: "Demo anfordern",
+    exploreDenominations: "Erkunden Sie ",
+    explorarVar: " Rebsorten",
+    verTodos: "Alle Stile anzeigen",
+    verGuias: "Alle Leitfäden anzeigen",
+  },
+  pt: {
+    seoTitle: "Biblioteca do Vinho | Guia Completo para Hotelaria",
+    seoDescription: "Guia completo sobre castas, regiões vinícolas, estilos de vinho e harmonizações. Conhecimento essencial para restaurantes que querem vender mais e melhor.",
+    knowledge: "Conhecimento",
+    title: "Biblioteca do",
+    titleSpan: "vinho",
+    description: "Tudo que você precisa saber sobre castas, regiões, estilos e harmonizações para oferecer uma experiência de vinho excepcional em seu restaurante.",
+    searchPlaceholder: "Procure por castas, regiões, estilos, harmonizações...",
+    denominazioni: "denominações",
+    paises: "países",
+    variedades: "castas de uva",
+    estilos: "estilos de vinho",
+    maridajes: "guias de harmonização",
+    paisesProductores: "países produtores",
+    regionesTitle: "Regiões vinícolas",
+    regionesDesc: "denominações de ",
+    denominacionesWithColon: ": DO, DOC, DOCG, AOP, AVA, Premier Cru, Grand Cru e mais.",
+    variedadesTitle: "Castas de uva",
+    variedadesDesc: "Perfil sensorial, reconhecimento comercial, estratégia de venda e harmonizações das ",
+    variedadesVar: " castas mais relevantes do mundo.",
+    estilosTitle: "Estilos de vinho",
+    estilosDesc: "De tintos jovens a Champagne, vinhos do Porto, vinhos laranja e doces nobres. 8 famílias, 50+ subtipos.",
+    maridajesTitle: "Harmonizações",
+    maridajesDesc: "Guias de harmonização por categoria e prato individual. De bife a sushi, com recomendações de casta, região e estilo.",
+    herramientas: "Ferramentas de consulta",
+    servicioTitle: "Guia de serviço",
+    servicioDesc: "Temperatura, taça, ml por serviço e taças por garrafa para cada estilo de vinho.",
+    glosarioTitle: "Glossário do vinho",
+    glosarioDesc: "Mais de 35 termos essenciais explicados com clareza para profissionais de hotelaria.",
+    calculadoraTitle: "Calculadora de preço por taça",
+    calculadoraDesc: "Calcule a margem e o preço ideal para cada taça de vinho em sua carta.",
+    ctaTitle: "Quer que sua carta reflita este",
+    ctaSpan: "conhecimento",
+    ctaDesc: "Winerim traz todas essas informações diretamente para sua carta digital, ajudando seus clientes a descobrir e escolher melhor.",
+    ctaButton: "Solicitar demo",
+    exploreDenominations: "Explore ",
+    explorarVar: " castas",
+    verTodos: "Ver todos os estilos",
+    verGuias: "Ver todos os guias",
+  },
+};
+
 // ── Search index ──
 type SearchResult = { name: string; category: string; badge: string; path: string; emoji?: string };
 
@@ -74,7 +318,7 @@ const topGrapes = ["tempranillo", "garnacha", "cabernet-sauvignon", "pinot-noir"
 const topCountries = ["espana", "francia", "italia", "portugal", "estados-unidos", "alemania"];
 
 const BibliotecaVino = () => {
-  const { allLangPaths } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const searchIndex = useMemo(() => buildSearchIndex(), []);
@@ -88,8 +332,8 @@ const BibliotecaVino = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Biblioteca del Vino | Guía Completa para Hostelería"
-        description="Guía completa sobre uvas, regiones vinícolas, estilos de vino y maridajes. Conocimiento esencial para restaurantes que quieren vender más y mejor vino."
+        title={i18n[lang as keyof typeof i18n]?.seoTitle ?? i18n.es.seoTitle}
+        description={i18n[lang as keyof typeof i18n]?.seoDescription ?? i18n.es.seoDescription}
         url="https://winerim.wine/biblioteca-vino"
         hreflang={allLangPaths("/biblioteca-vino")}
       />
@@ -103,17 +347,17 @@ const BibliotecaVino = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <Wine size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Conocimiento</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{i18n[lang as keyof typeof i18n]?.knowledge ?? i18n.es.knowledge}</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6 max-w-3xl">
-            Biblioteca del <span className="text-gradient-wine italic">vino</span>
+            {i18n[lang as keyof typeof i18n]?.title ?? i18n.es.title} <span className="text-gradient-wine italic">{i18n[lang as keyof typeof i18n]?.titleSpan ?? i18n.es.titleSpan}</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
-            Todo lo que necesitas saber sobre uvas, regiones, estilos y maridajes para ofrecer una experiencia de vino excepcional en tu restaurante.
+            {i18n[lang as keyof typeof i18n]?.description ?? i18n.es.description}
           </motion.p>
 
           {/* GLOBAL SEARCH */}

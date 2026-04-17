@@ -10,6 +10,201 @@ import coursesLibrary from "@/data/coursesLibrary";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { TranslationDict } from "@/i18n/types";
 
+const i18n = {
+  es: {
+    academyTitle: "Academia Winerim",
+    passwordPrompt: "Accede al programa de formacion en vino para tu equipo.",
+    passwordPlaceholder: "Contrasena",
+    accessButton: "Acceder",
+    wrongPassword: "Contrasena incorrecta",
+    seoTitle: "Academia Winerim - Cursos de Vino para Equipos",
+    seoDescription: "Programa de formacion completo en vino para camareros, jefes de sala y directores de F&B. Desde fundamentos hasta estrategia avanzada.",
+    heroTitle: "Academia Winerim",
+    heroSubtitle: "Programa de formacion completo en vino para tu equipo. De camarero sin experiencia a director de F&B.",
+    levels: "4 niveles",
+    totalHours: "14 horas totales",
+    certificates: "Certificados",
+    viewCourse: "Ver curso",
+    aboutTitle: "Sobre Academia Winerim",
+    designedForRestaurants: "Diseñado para restaurantes",
+    designedText: "Cada curso esta diseñado especificamente para profesionales de la hosteleria. Los contenidos son practicos, aplicables en la mesa, y se basan en situaciones reales.",
+    clearProgression: "Progresion clara",
+    progressionText: "Desde camarero principiante hasta director de F&B. Cada nivel se basa en el anterior, creando un camino claro de aprendizaje.",
+    recognizedCertificates: "Certificados reconocidos",
+    certificatesText: "Al completar cada nivel, tu equipo recibe un certificado que verifica su competencia en vino.",
+    videosQuizzes: "Videos + Quizzes",
+    quizzesText: "Cada modulo combina videos explicativos con quizzes interactivos para asegurar comprension y retencion.",
+    level: "Nivel",
+    of4: "de 4",
+    audience: "Audiencia:",
+    duration: "Duracion:",
+    hours: "horas",
+    modules: "Modulos:",
+    lessons: "lecciones",
+    requirement: "Requisito:",
+  },
+  en: {
+    academyTitle: "Winerim Academy",
+    passwordPrompt: "Access the wine training program for your team.",
+    passwordPlaceholder: "Password",
+    accessButton: "Access",
+    wrongPassword: "Incorrect password",
+    seoTitle: "Winerim Academy - Wine Courses for Teams",
+    seoDescription: "Complete wine training program for servers, head waiters and F&B directors. From fundamentals to advanced strategy.",
+    heroTitle: "Winerim Academy",
+    heroSubtitle: "Complete wine training program for your team. From inexperienced server to F&B director.",
+    levels: "4 levels",
+    totalHours: "14 total hours",
+    certificates: "Certificates",
+    viewCourse: "View Course",
+    aboutTitle: "About Winerim Academy",
+    designedForRestaurants: "Designed for Restaurants",
+    designedText: "Each course is designed specifically for hospitality professionals. Content is practical, applicable at the table, and based on real situations.",
+    clearProgression: "Clear Progression",
+    progressionText: "From beginner server to F&B director. Each level builds on the previous one, creating a clear learning path.",
+    recognizedCertificates: "Recognized Certificates",
+    certificatesText: "Upon completing each level, your team receives a certificate that verifies their wine competency.",
+    videosQuizzes: "Videos + Quizzes",
+    quizzesText: "Each module combines explanatory videos with interactive quizzes to ensure understanding and retention.",
+    level: "Level",
+    of4: "of 4",
+    audience: "Audience:",
+    duration: "Duration:",
+    hours: "hours",
+    modules: "Modules:",
+    lessons: "lessons",
+    requirement: "Requirement:",
+  },
+  it: {
+    academyTitle: "Accademia Winerim",
+    passwordPrompt: "Accedi al programma di formazione sul vino per il tuo team.",
+    passwordPlaceholder: "Password",
+    accessButton: "Accedi",
+    wrongPassword: "Password errata",
+    seoTitle: "Accademia Winerim - Corsi di Vino per Team",
+    seoDescription: "Programma di formazione completo sul vino per camerieri, capi sala e direttori F&B. Dai fondamenti alla strategia avanzata.",
+    heroTitle: "Accademia Winerim",
+    heroSubtitle: "Programma di formazione completo sul vino per il tuo team. Da cameriere inesperto a direttore F&B.",
+    levels: "4 livelli",
+    totalHours: "14 ore totali",
+    certificates: "Certificati",
+    viewCourse: "Visualizza Corso",
+    aboutTitle: "Informazioni su Accademia Winerim",
+    designedForRestaurants: "Progettato per Ristoranti",
+    designedText: "Ogni corso e progettato specificamente per professionisti dell'ospitalita. I contenuti sono pratici, applicabili al tavolo e basati su situazioni reali.",
+    clearProgression: "Progressione Chiara",
+    progressionText: "Da cameriere principiante a direttore F&B. Ogni livello si basa sul precedente, creando un percorso di apprendimento trasparente.",
+    recognizedCertificates: "Certificati Riconosciuti",
+    certificatesText: "Dopo aver completato ogni livello, il tuo team riceve un certificato che verifica la sua competenza nel vino.",
+    videosQuizzes: "Video + Quiz",
+    quizzesText: "Ogni modulo combina video esplicativi con quiz interattivi per garantire la comprensione e la memorizzazione.",
+    level: "Livello",
+    of4: "di 4",
+    audience: "Pubblico:",
+    duration: "Durata:",
+    hours: "ore",
+    modules: "Moduli:",
+    lessons: "lezioni",
+    requirement: "Requisito:",
+  },
+  fr: {
+    academyTitle: "Academie Winerim",
+    passwordPrompt: "Accdez au programme de formation sur le vin pour votre equipe.",
+    passwordPlaceholder: "Mot de passe",
+    accessButton: "Acceder",
+    wrongPassword: "Mot de passe incorrect",
+    seoTitle: "Academie Winerim - Cours de Vin pour Equipes",
+    seoDescription: "Programme de formation complet sur le vin pour serveurs, chefs de salle et directeurs F&B. Des fondamentaux a la strategie avancee.",
+    heroTitle: "Academie Winerim",
+    heroSubtitle: "Programme de formation complet sur le vin pour votre equipe. Du serveur inexpérimente au directeur F&B.",
+    levels: "4 niveaux",
+    totalHours: "14 heures au total",
+    certificates: "Certificats",
+    viewCourse: "Voir le Cours",
+    aboutTitle: "A propos de l'Academie Winerim",
+    designedForRestaurants: "Concu pour les Restaurants",
+    designedText: "Chaque cours est concu specifiquement pour les professionnels de l'hospitalite. Le contenu est pratique, applicable a table et base sur des situations reelles.",
+    clearProgression: "Progression Claire",
+    progressionText: "Du serveur debutant au directeur F&B. Chaque niveau s'appuie sur le precedent, creant un parcours d'apprentissage clair.",
+    recognizedCertificates: "Certificats Reconnus",
+    certificatesText: "Une fois chaque niveau termine, votre equipe reçoit un certificat attestant de ses competences en matieres de vin.",
+    videosQuizzes: "Videos + Quiz",
+    quizzesText: "Chaque module combine des videos explicatives avec des quiz interactifs pour assurer la comprehension et la retention.",
+    level: "Niveau",
+    of4: "sur 4",
+    audience: "Public:",
+    duration: "Duree:",
+    hours: "heures",
+    modules: "Modules:",
+    lessons: "leçons",
+    requirement: "Prerequis:",
+  },
+  de: {
+    academyTitle: "Winerim Akademie",
+    passwordPrompt: "Greifen Sie auf das Weinschulungsprogramm fur Ihr Team zu.",
+    passwordPlaceholder: "Passwort",
+    accessButton: "Zugriff",
+    wrongPassword: "Falsches Passwort",
+    seoTitle: "Winerim Akademie - Weinkurse fur Teams",
+    seoDescription: "Umfassendes Weinschulungsprogramm fur Kellner, Oberkellner und F&B-Direktoren. Von Grundlagen bis zu fortgeschrittener Strategie.",
+    heroTitle: "Winerim Akademie",
+    heroSubtitle: "Umfassendes Weinschulungsprogramm fur Ihr Team. Vom unerfahrenen Kellner zum F&B-Direktor.",
+    levels: "4 Stufen",
+    totalHours: "14 Stunden insgesamt",
+    certificates: "Zertifikate",
+    viewCourse: "Kurs anzeigen",
+    aboutTitle: "Uber die Winerim Akademie",
+    designedForRestaurants: "Fur Restaurants konzipiert",
+    designedText: "Jeder Kurs ist speziell fur Hospitality-Profis konzipiert. Die Inhalte sind praktisch, am Tisch anwendbar und basieren auf realen Situationen.",
+    clearProgression: "Klare Progression",
+    progressionText: "Vom Anfanger-Kellner zum F&B-Direktor. Jede Stufe baut auf der vorherigen auf und schafft einen klaren Lernpfad.",
+    recognizedCertificates: "Anerkannte Zertifikate",
+    certificatesText: "Nach Abschluss jeder Stufe erhalten Ihre Mitarbeiter ein Zertifikat, das ihre Weinkompetenz bestatigt.",
+    videosQuizzes: "Videos + Quiz",
+    quizzesText: "Jedes Modul kombiniert erklarende Videos mit interaktiven Quiz, um Verstandnis und Merkfahigkeit zu gewahrleisten.",
+    level: "Stufe",
+    of4: "von 4",
+    audience: "Zielgruppe:",
+    duration: "Dauer:",
+    hours: "Stunden",
+    modules: "Module:",
+    lessons: "Lektionen",
+    requirement: "Voraussetzung:",
+  },
+  pt: {
+    academyTitle: "Academia Winerim",
+    passwordPrompt: "Acesse o programa de treinamento em vinho para sua equipe.",
+    passwordPlaceholder: "Senha",
+    accessButton: "Acessar",
+    wrongPassword: "Senha incorreta",
+    seoTitle: "Academia Winerim - Cursos de Vinho para Equipes",
+    seoDescription: "Programa de treinamento completo em vinho para garcons, chefes de sala e diretores de F&B. Dos fundamentos a estrategia avancada.",
+    heroTitle: "Academia Winerim",
+    heroSubtitle: "Programa de treinamento completo em vinho para sua equipe. De garcom inexperiente a diretor de F&B.",
+    levels: "4 niveis",
+    totalHours: "14 horas totais",
+    certificates: "Certificados",
+    viewCourse: "Ver Curso",
+    aboutTitle: "Sobre a Academia Winerim",
+    designedForRestaurants: "Projetado para Restaurantes",
+    designedText: "Cada curso e projetado especificamente para profissionais de hospitalidade. Os conteudos sao praticos, aplicaveis a mesa e baseados em situacoes reais.",
+    clearProgression: "Progressao Clara",
+    progressionText: "De garcom principiante a diretor de F&B. Cada nivel se baseia no anterior, criando um caminho claro de aprendizado.",
+    recognizedCertificates: "Certificados Reconhecidos",
+    certificatesText: "Apos completar cada nivel, sua equipe recebe um certificado que verifica sua competencia em vinho.",
+    videosQuizzes: "Videos + Quizzes",
+    quizzesText: "Cada modulo combina videos explicativos com quizzes interativos para garantir compreensao e retencao.",
+    level: "Nivel",
+    of4: "de 4",
+    audience: "Publico:",
+    duration: "Duracao:",
+    hours: "horas",
+    modules: "Modulos:",
+    lessons: "licoes",
+    requirement: "Requisito:",
+  },
+};
+
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
 const GATE_PASSWORD = "winerim2026";
@@ -27,7 +222,7 @@ const useGate = () => {
   return { granted, unlock };
 };
 
-const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
+const PasswordGate = ({ onUnlock, t }: { onUnlock: (pwd: string) => boolean; t: (typeof i18n)["es"] }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -50,14 +245,14 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
           <div className="flex justify-center mb-6">
             <Lock size={32} className="text-wine" />
           </div>
-          <h1 className="text-2xl font-bold text-center mb-2">Academia Winerim</h1>
+          <h1 className="text-2xl font-bold text-center mb-2">{t.academyTitle}</h1>
           <p className="text-muted-foreground text-center text-sm mb-6">
-            Accede al programa de formación en vino para tu equipo.
+            {t.passwordPrompt}
           </p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="password"
-              placeholder="Contraseña"
+              placeholder={t.passwordPlaceholder}
               value={value}
               onChange={(e) => setValue(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-border bg-muted focus:outline-none focus:ring-2 focus:ring-wine/50"
@@ -66,10 +261,10 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
               type="submit"
               className="w-full py-2 rounded-lg bg-wine text-white font-semibold hover:bg-wine/90 transition"
             >
-              Acceder
+              {t.accessButton}
             </button>
             {error && (
-              <p className="text-red-500 text-xs text-center">Contraseña incorrecta</p>
+              <p className="text-red-500 text-xs text-center">{t.wrongPassword}</p>
             )}
           </form>
         </motion.div>
@@ -80,17 +275,18 @@ const PasswordGate = ({ onUnlock }: { onUnlock: (pwd: string) => boolean }) => {
 
 export default function CursosVino() {
   const { granted, unlock } = useGate();
-  const { t } = useLanguage();
+  const { lang } = useLanguage();
+  const t = i18n[lang as keyof typeof i18n];
 
   if (!granted) {
-    return <PasswordGate onUnlock={unlock} />;
+    return <PasswordGate onUnlock={unlock} t={t} />;
   }
 
   return (
     <>
       <SEOHead
-        title="Academia Winerim - Cursos de Vino para Equipos"
-        description="Programa de formación completo en vino para camareros, jefes de sala y directores de F&B. Desde fundamentos hasta estrategia avanzada."
+        title={t.seoTitle}
+        description={t.seoDescription}
       />
       <Navbar />
 
@@ -104,20 +300,20 @@ export default function CursosVino() {
         >
           <div className="text-center mb-12">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
-              Academia Winerim
+              {t.heroTitle}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-              Programa de formación completo en vino para tu equipo. De camarero sin experiencia a director de F&B.
+              {t.heroSubtitle}
             </p>
             <div className="flex justify-center gap-4 text-sm text-muted-foreground flex-wrap">
               <span className="flex items-center gap-2">
-                <BookOpen size={16} /> 4 niveles
+                <BookOpen size={16} /> {t.levels}
               </span>
               <span className="flex items-center gap-2">
-                <Clock size={16} /> 14 horas totales
+                <Clock size={16} /> {t.totalHours}
               </span>
               <span className="flex items-center gap-2">
-                <Award size={16} /> Certificados
+                <Award size={16} /> {t.certificates}
               </span>
             </div>
           </div>
@@ -145,7 +341,7 @@ export default function CursosVino() {
                             {level.title}
                           </h3>
                           <p className="text-wine font-semibold text-sm mb-2">
-                            Nivel {level.level} de 4
+                            {t.level} {level.level} {t.of4}
                           </p>
                         </div>
                         <ArrowRight className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition" />
@@ -162,19 +358,19 @@ export default function CursosVino() {
                       {/* Meta info */}
                       <div className="space-y-2 mb-6 pt-6 border-t border-border">
                         <div className="flex items-center text-sm text-muted-foreground">
-                          <span className="w-24 font-semibold">Audiencia:</span>
+                          <span className="w-24 font-semibold">{t.audience}</span>
                           <span>{level.targetAudience}</span>
                         </div>
                         <div className="flex items-center text-sm text-muted-foreground">
-                          <span className="w-24 font-semibold">Duración:</span>
-                          <span>{level.estimatedHours} horas</span>
+                          <span className="w-24 font-semibold">{t.duration}</span>
+                          <span>{level.estimatedHours} {t.hours}</span>
                         </div>
                         <div className="flex items-center text-sm text-muted-foreground">
-                          <span className="w-24 font-semibold">Módulos:</span>
-                          <span>{level.modules.length} lecciones</span>
+                          <span className="w-24 font-semibold">{t.modules}</span>
+                          <span>{level.modules.length} {t.lessons}</span>
                         </div>
                         <div className="flex items-start text-sm text-muted-foreground">
-                          <span className="w-24 font-semibold flex-shrink-0">Requisito:</span>
+                          <span className="w-24 font-semibold flex-shrink-0">{t.requirement}</span>
                           <span>{level.prerequisites}</span>
                         </div>
                       </div>
@@ -185,7 +381,7 @@ export default function CursosVino() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full py-3 rounded-lg bg-wine text-white font-semibold hover:bg-wine/90 transition flex items-center justify-center gap-2"
                       >
-                        Ver curso
+                        {t.viewCourse}
                         <ArrowRight size={16} />
                       </motion.button>
                     </div>
@@ -205,30 +401,30 @@ export default function CursosVino() {
             viewport={{ once: true }}
             className="rounded-xl border border-border bg-card p-8 md:p-12"
           >
-            <h2 className="text-2xl font-bold mb-6 text-foreground">Sobre Academia Winerim</h2>
+            <h2 className="text-2xl font-bold mb-6 text-foreground">{t.aboutTitle}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-semibold mb-3 text-foreground">Diseñado para restaurantes</h3>
+                <h3 className="font-semibold mb-3 text-foreground">{t.designedForRestaurants}</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Cada curso está diseñado específicamente para profesionales de la hostelería. Los contenidos son prácticos, aplicables en la mesa, y se basan en situaciones reales.
+                  {t.designedText}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-3 text-foreground">Progresión clara</h3>
+                <h3 className="font-semibold mb-3 text-foreground">{t.clearProgression}</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Desde camarero principiante hasta director de F&B. Cada nivel se basa en el anterior, creando un camino claro de aprendizaje.
+                  {t.progressionText}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-3 text-foreground">Certificados reconocidos</h3>
+                <h3 className="font-semibold mb-3 text-foreground">{t.recognizedCertificates}</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Al completar cada nivel, tu equipo recibe un certificado que verifica su competencia en vino.
+                  {t.certificatesText}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-3 text-foreground">Videos + Quizzes</h3>
+                <h3 className="font-semibold mb-3 text-foreground">{t.videosQuizzes}</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  Cada módulo combina videos explicativos con quizzes interactivos para asegurar comprensión y retención.
+                  {t.quizzesText}
                 </p>
               </div>
             </div>

@@ -10,6 +10,99 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
 
+const i18n = {
+  es: {
+    glossaryTitle: "Glosario del Vino | Terminos Esenciales para Hosteleria",
+    glossaryDescription: "Glosario con mas de 35 terminos clave del mundo del vino explicados con claridad para profesionales de hosteleria. De acidez a vendimia tardia.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Biblioteca del Vino",
+    breadcrumbGlossary: "Glosario",
+    reference: "Referencia",
+    title: "Glosario del vino",
+    subtitle: "Mas de 35 terminos esenciales del mundo del vino, explicados con claridad para profesionales de hosteleria.",
+    searchPlaceholder: "Buscar termino...",
+    noResults: 'No se encontraron terminos para',
+    ctaHeading: "Quieres que tu equipo domine este vocabulario?",
+    ctaText: "Winerim integra el conocimiento del vino directamente en la carta digital, haciendo que cada referencia sea autoexplicativa.",
+    requestDemo: "Solicitar demo",
+  },
+  en: {
+    glossaryTitle: "Wine Glossary | Essential Terms for Hospitality",
+    glossaryDescription: "Glossary with over 35 key wine terms explained clearly for hospitality professionals. From acidity to late harvest.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Wine Library",
+    breadcrumbGlossary: "Glossary",
+    reference: "Reference",
+    title: "Wine glossary",
+    subtitle: "Over 35 essential wine terms, explained clearly for hospitality professionals.",
+    searchPlaceholder: "Search term...",
+    noResults: "No terms found for",
+    ctaHeading: "Do you want your team to master this vocabulary?",
+    ctaText: "Winerim integrates wine knowledge directly into the digital menu, making each reference self-explanatory.",
+    requestDemo: "Request Demo",
+  },
+  it: {
+    glossaryTitle: "Glossario del Vino | Termini Essenziali per l'Ospitalita",
+    glossaryDescription: "Glossario con oltre 35 termini chiave del mondo del vino spiegati chiaramente per professionisti dell'ospitalita. Da acidita a vendemmia tardiva.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Biblioteca del Vino",
+    breadcrumbGlossary: "Glossario",
+    reference: "Riferimento",
+    title: "Glossario del vino",
+    subtitle: "Oltre 35 termini essenziali del mondo del vino, spiegati chiaramente per professionisti dell'ospitalita.",
+    searchPlaceholder: "Cerca termine...",
+    noResults: "Nessun termine trovato per",
+    ctaHeading: "Vuoi che il tuo team domini questo vocabolario?",
+    ctaText: "Winerim integra la conoscenza del vino direttamente nel menu digitale, rendendo ogni riferimento autoesplicativo.",
+    requestDemo: "Richiedi Demo",
+  },
+  fr: {
+    glossaryTitle: "Glossaire du Vin | Termes Essentiels pour l'Hospice",
+    glossaryDescription: "Glossaire avec plus de 35 termes cles du monde du vin expliques clairement pour les professionnels de l'ospitalite. De l'acidite aux vendanges tardives.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Bibliotheque du Vin",
+    breadcrumbGlossary: "Glossaire",
+    reference: "Reference",
+    title: "Glossaire du vin",
+    subtitle: "Plus de 35 termes essentiels du monde du vin, expliques clairement pour les professionnels de l'ospitalite.",
+    searchPlaceholder: "Rechercher un terme...",
+    noResults: "Aucun terme trouve pour",
+    ctaHeading: "Voulez-vous que votre equipe maitrise ce vocabulaire?",
+    ctaText: "Winerim integre les connaissances sur le vin directement dans le menu numerique, rendant chaque reference auto-explicative.",
+    requestDemo: "Demander une Demo",
+  },
+  de: {
+    glossaryTitle: "Weinglossar | Wesentliche Begriffe fur Gastgewerbe",
+    glossaryDescription: "Glossar mit uber 35 Schlusselworten aus der Weinwelt, die fur Fachleute des Gastgewerbes verstandlich erklart werden. Von Sauerheit bis Spatlese.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Weinbibliothek",
+    breadcrumbGlossary: "Glossar",
+    reference: "Referenz",
+    title: "Weinglossar",
+    subtitle: "Uber 35 wesentliche Weinbegriffe, klar erklart fur Fachleute des Gastgewerbes.",
+    searchPlaceholder: "Suchbegriff eingeben...",
+    noResults: "Keine Begriffe gefunden fur",
+    ctaHeading: "Mochten Sie, dass Ihr Team dieses Vokabular beherrscht?",
+    ctaText: "Winerim integriert Weinwissen direkt in die digitale Speisekarte und macht jeden Eintrag selbsterklaerend.",
+    requestDemo: "Demo anfordern",
+  },
+  pt: {
+    glossaryTitle: "Glossario de Vinhos | Termos Essenciais para Hospitalidade",
+    glossaryDescription: "Glossario com mais de 35 termos-chave do mundo do vinho explicados claramente para profissionais de hospitalidade. Da acidez a colheita tardia.",
+    glossaryUrl: "https://winerim.wine/biblioteca-vino/glosario",
+    breadcrumbLibrary: "Biblioteca de Vinhos",
+    breadcrumbGlossary: "Glossario",
+    reference: "Referencia",
+    title: "Glossario de vinhos",
+    subtitle: "Mais de 35 termos essenciais do mundo do vinho, explicados claramente para profissionais de hospitalidade.",
+    searchPlaceholder: "Pesquisar termo...",
+    noResults: "Nenhum termo encontrado para",
+    ctaHeading: "Voce quer que seu time domine este vocabulario?",
+    ctaText: "Winerim integra o conhecimento do vinho diretamente no cardapio digital, tornando cada referencia auto-explicativa.",
+    requestDemo: "Solicitar Demo",
+  },
+};
+
 interface GlossaryTerm {
   term: string;
   definition: string;
@@ -59,8 +152,9 @@ const glossary: GlossaryTerm[] = [
 ];
 
 const GlosarioVino = () => {
-  const { allLangPaths } = useLanguage();
+  const { allLangPaths, lang } = useLanguage();
   const [search, setSearch] = useState("");
+  const t = i18n[lang as keyof typeof i18n];
 
   const letters = useMemo(() => {
     const set = new Set(glossary.map((t) => t.term[0].toUpperCase()));
@@ -86,9 +180,9 @@ const GlosarioVino = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Glosario del Vino | Términos Esenciales para Hostelería"
-        description="Glosario con más de 35 términos clave del mundo del vino explicados con claridad para profesionales de hostelería. De acidez a vendimia tardía."
-        url="https://winerim.wine/biblioteca-vino/glosario"
+        title={t.glossaryTitle}
+        description={t.glossaryDescription}
+        url={t.glossaryUrl}
         hreflang={allLangPaths("/biblioteca-vino/glosario")}
       />
       <Navbar />
@@ -99,24 +193,24 @@ const GlosarioVino = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Glosario" },
+            { label: t.breadcrumbLibrary, href: "/biblioteca-vino" },
+            { label: t.breadcrumbGlossary },
           ]} />
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6 mt-6">
             <BookOpen size={14} className="text-wine" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Referencia</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.reference}</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
             className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.08] mb-6">
-            Glosario del <span className="text-gradient-wine italic">vino</span>
+            {t.title}
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
             className="text-lg text-muted-foreground leading-relaxed max-w-2xl mb-8">
-            Más de 35 términos esenciales del mundo del vino, explicados con claridad para profesionales de hostelería.
+            {t.subtitle}
           </motion.p>
 
           {/* SEARCH */}
@@ -125,7 +219,7 @@ const GlosarioVino = () => {
             <div className="relative">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Buscar término..."
+                placeholder={t.searchPlaceholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 bg-secondary/30 border-border"
@@ -182,7 +276,7 @@ const GlosarioVino = () => {
 
           {filtered.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-muted-foreground">No se encontraron términos para "{search}"</p>
+              <p className="text-muted-foreground">{t.noResults} "{search}"</p>
             </div>
           )}
         </div>
@@ -196,14 +290,14 @@ const GlosarioVino = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
               <div className="relative z-10">
                 <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-                  ¿Quieres que tu equipo domine este <span className="text-gradient-wine italic">vocabulario</span>?
+                  {t.ctaHeading}
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
-                  Winerim integra el conocimiento del vino directamente en la carta digital, haciendo que cada referencia sea autoexplicativa.
+                  {t.ctaText}
                 </p>
                 <Link to="/demo"
                   className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                  Solicitar demo <ArrowRight size={16} />
+                  {t.requestDemo} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>

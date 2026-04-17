@@ -12,6 +12,147 @@ import ScrollReveal from "@/components/ScrollReveal";
 import coursesLibrary, { type CourseModule } from "@/data/coursesLibrary";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+const i18n = {
+  es: {
+    backToCourses: "Volver a cursos",
+    accessRestricted: "Acceso restringido",
+    accessMessage: "Debes acceder a la Academia Winerim desde el Decision Center.",
+    backToDecisionCenter: "Volver al Decision Center",
+    courseModules: "Modulos del curso",
+    whatYouWillLearn: "Que aprenderas",
+    quiz: "Cuestionario",
+    markComplete: "Marcar como completado",
+    moduleCompleted: "Modulo completado",
+    correct: "Correcto!",
+    correctAnswer: "Respuesta correcta:",
+    courseProgress: "Progreso del curso",
+    of: "de",
+    duration: "Duracion",
+    certificate: "Certificado",
+    progress: "Progreso",
+    coming: "Proximamente",
+    questions: "preguntas",
+    congratulations: "Felicidades!",
+    completedMessage: "Has completado",
+    downloadCertificate: "Descargar certificado",
+  },
+  en: {
+    backToCourses: "Back to courses",
+    accessRestricted: "Access Restricted",
+    accessMessage: "You must access Winerim Academy from the Decision Center.",
+    backToDecisionCenter: "Back to Decision Center",
+    courseModules: "Course Modules",
+    whatYouWillLearn: "What You Will Learn",
+    quiz: "Quiz",
+    markComplete: "Mark as Completed",
+    moduleCompleted: "Module Completed",
+    correct: "Correct!",
+    correctAnswer: "Correct Answer:",
+    courseProgress: "Course Progress",
+    of: "of",
+    duration: "Duration",
+    certificate: "Certificate",
+    progress: "Progress",
+    coming: "Coming Soon",
+    questions: "questions",
+    congratulations: "Congratulations!",
+    completedMessage: "You have completed",
+    downloadCertificate: "Download Certificate",
+  },
+  it: {
+    backToCourses: "Torna ai corsi",
+    accessRestricted: "Accesso Limitato",
+    accessMessage: "Devi accedere all'Accademia Winerim dal Decision Center.",
+    backToDecisionCenter: "Torna al Decision Center",
+    courseModules: "Moduli del Corso",
+    whatYouWillLearn: "Cosa Imparerai",
+    quiz: "Quiz",
+    markComplete: "Segna come Completato",
+    moduleCompleted: "Modulo Completato",
+    correct: "Corretto!",
+    correctAnswer: "Risposta Corretta:",
+    courseProgress: "Progresso del Corso",
+    of: "di",
+    duration: "Durata",
+    certificate: "Certificato",
+    progress: "Progresso",
+    coming: "Prossimamente",
+    questions: "domande",
+    congratulations: "Congratulazioni!",
+    completedMessage: "Hai completato",
+    downloadCertificate: "Scarica Certificato",
+  },
+  fr: {
+    backToCourses: "Retour aux cours",
+    accessRestricted: "Acces Limite",
+    accessMessage: "Vous devez acceder a l'Academie Winerim depuis le Decision Center.",
+    backToDecisionCenter: "Retour au Decision Center",
+    courseModules: "Modules du Cours",
+    whatYouWillLearn: "Ce que Vous Apprendrez",
+    quiz: "Quiz",
+    markComplete: "Marquer comme Termine",
+    moduleCompleted: "Module Termine",
+    correct: "Correct!",
+    correctAnswer: "Bonne Reponse:",
+    courseProgress: "Progression du Cours",
+    of: "sur",
+    duration: "Duree",
+    certificate: "Certificat",
+    progress: "Progression",
+    coming: "Bientot",
+    questions: "questions",
+    congratulations: "Felicitations!",
+    completedMessage: "Vous avez termine",
+    downloadCertificate: "Telecharger le Certificat",
+  },
+  de: {
+    backToCourses: "Zuruck zu Kursen",
+    accessRestricted: "Zugriff Eingeschrankt",
+    accessMessage: "Sie mussen uber das Decision Center auf die Winerim Akademie zugreifen.",
+    backToDecisionCenter: "Zuruck zum Decision Center",
+    courseModules: "Kursmodule",
+    whatYouWillLearn: "Was Sie Lernen Werden",
+    quiz: "Quiz",
+    markComplete: "Als Abgeschlossen Markieren",
+    moduleCompleted: "Modul Abgeschlossen",
+    correct: "Korrekt!",
+    correctAnswer: "Richtige Antwort:",
+    courseProgress: "Kursfortschritt",
+    of: "von",
+    duration: "Dauer",
+    certificate: "Zertifikat",
+    progress: "Fortschritt",
+    coming: "In Kurze",
+    questions: "Fragen",
+    congratulations: "Herzlichen Gluckwunsch!",
+    completedMessage: "Sie haben abgeschlossen",
+    downloadCertificate: "Zertifikat Herunterladen",
+  },
+  pt: {
+    backToCourses: "Voltar para cursos",
+    accessRestricted: "Acesso Restrito",
+    accessMessage: "Voce deve acessar a Academia Winerim a partir do Decision Center.",
+    backToDecisionCenter: "Voltar para Decision Center",
+    courseModules: "Modulos do Curso",
+    whatYouWillLearn: "O Que Voce Aprendera",
+    quiz: "Quiz",
+    markComplete: "Marcar como Concluido",
+    moduleCompleted: "Modulo Concluido",
+    correct: "Correto!",
+    correctAnswer: "Resposta Correta:",
+    courseProgress: "Progresso do Curso",
+    of: "de",
+    duration: "Duracao",
+    certificate: "Certificado",
+    progress: "Progresso",
+    coming: "Em Breve",
+    questions: "perguntas",
+    congratulations: "Parabens!",
+    completedMessage: "Voce completou",
+    downloadCertificate: "Baixar Certificado",
+  },
+};
+
 /* ── Password gate ── */
 const GATE_KEY = "wdc_access";
 const GATE_PASSWORD = "winerim2026";
@@ -24,7 +165,8 @@ const useGate = () => {
 export default function CursoDetalle() {
   const { slug } = useParams<{ slug: string }>();
   const { granted } = useGate();
-  const { t } = useLanguage();
+  const { lang } = useLanguage();
+  const t = i18n[lang as keyof typeof i18n];
 
   const course = coursesLibrary.find((c) => c.slug === slug);
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
@@ -41,12 +183,12 @@ export default function CursoDetalle() {
         <div className="min-h-screen flex items-center justify-center px-4">
           <div className="max-w-md text-center">
             <Lock size={48} className="text-wine mx-auto mb-4" />
-            <h1 className="text-2xl font-bold mb-2">Acceso restringido</h1>
+            <h1 className="text-2xl font-bold mb-2">{t.accessRestricted}</h1>
             <p className="text-muted-foreground mb-4">
-              Debes acceder a la Academia Winerim desde el Decision Center.
+              {t.accessMessage}
             </p>
             <Link to="/decision-center" className="text-wine font-semibold hover:underline">
-              Volver al Decision Center
+              {t.backToDecisionCenter}
             </Link>
           </div>
         </div>
@@ -103,7 +245,7 @@ export default function CursoDetalle() {
               >
                 <div className="text-center">
                   <Play size={48} className="text-wine mx-auto mb-3" />
-                  <p className="text-sm text-muted-foreground font-medium">Próximamente</p>
+                  <p className="text-sm text-muted-foreground font-medium">{t.coming}</p>
                 </div>
               </motion.div>
               <p className="absolute bottom-4 left-4 right-4 text-xs text-muted-foreground italic">
@@ -115,7 +257,7 @@ export default function CursoDetalle() {
             <div>
               <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                 <Zap size={16} className="text-wine" />
-                Qué aprenderás
+                {t.whatYouWillLearn}
               </h4>
               <ul className="space-y-2">
                 {module.keyPoints.map((point, idx) => (
@@ -135,7 +277,7 @@ export default function CursoDetalle() {
 
             {/* Quiz */}
             <div className="bg-wine/5 border border-wine/20 rounded-lg p-6">
-              <h4 className="font-semibold text-foreground mb-4">Cuestionario</h4>
+              <h4 className="font-semibold text-foreground mb-4">{t.quiz}</h4>
               <div className="space-y-5">
                 {module.quiz.map((q, qIdx) => {
                   const userAnswer = getQuizAnswer(module.id, qIdx);
@@ -193,8 +335,8 @@ export default function CursoDetalle() {
                           <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
                           <span>
                             {isCorrect
-                              ? "¡Correcto!"
-                              : `Respuesta correcta: ${q.options[q.correct]}`}
+                              ? t.correct
+                              : `${t.correctAnswer} ${q.options[q.correct]}`}
                           </span>
                         </motion.div>
                       )}
@@ -213,13 +355,13 @@ export default function CursoDetalle() {
                 className="w-full py-3 rounded-lg bg-wine text-white font-semibold hover:bg-wine/90 transition flex items-center justify-center gap-2"
               >
                 <CheckCircle size={16} />
-                Marcar como completado
+                {t.markComplete}
               </motion.button>
             )}
             {isComplete && (
               <div className="w-full py-3 rounded-lg bg-emerald-500/10 text-emerald-700 font-semibold flex items-center justify-center gap-2 border border-emerald-500/20">
                 <CheckCircle size={16} />
-                Módulo completado
+                {t.moduleCompleted}
               </div>
             )}
           </div>
@@ -244,7 +386,7 @@ export default function CursoDetalle() {
             className="inline-flex items-center gap-2 text-wine hover:text-wine/80 transition text-sm"
           >
             <ArrowLeft size={16} />
-            Volver a cursos
+            {t.backToCourses}
           </Link>
         </div>
 
@@ -267,28 +409,28 @@ export default function CursoDetalle() {
               <div className="flex items-center gap-3 text-sm">
                 <Clock size={18} className="text-wine" />
                 <div>
-                  <p className="text-muted-foreground text-xs">Duración</p>
+                  <p className="text-muted-foreground text-xs">{t.duration}</p>
                   <p className="font-semibold text-foreground">{course.estimatedHours}h</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <BookOpen size={18} className="text-wine" />
                 <div>
-                  <p className="text-muted-foreground text-xs">Módulos</p>
+                  <p className="text-muted-foreground text-xs">{t.courseModules}</p>
                   <p className="font-semibold text-foreground">{course.modules.length}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Award size={18} className="text-wine" />
                 <div>
-                  <p className="text-muted-foreground text-xs">Certificado</p>
+                  <p className="text-muted-foreground text-xs">{t.certificate}</p>
                   <p className="font-semibold text-foreground text-xs">{course.certificate}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Zap size={18} className="text-wine" />
                 <div>
-                  <p className="text-muted-foreground text-xs">Progreso</p>
+                  <p className="text-muted-foreground text-xs">{t.progress}</p>
                   <p className="font-semibold text-foreground">{progress}%</p>
                 </div>
               </div>
@@ -297,9 +439,9 @@ export default function CursoDetalle() {
             {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Progreso del curso</span>
+                <span className="text-muted-foreground">{t.courseProgress}</span>
                 <span className="font-semibold text-foreground">
-                  {completedModules.length} de {course.modules.length}
+                  {completedModules.length} {t.of} {course.modules.length}
                 </span>
               </div>
               <div className="w-full h-2 rounded-full bg-muted overflow-hidden">
@@ -319,7 +461,7 @@ export default function CursoDetalle() {
 
         {/* Modules */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
-          <h2 className="text-2xl font-bold mb-6 text-foreground">Módulos del curso</h2>
+          <h2 className="text-2xl font-bold mb-6 text-foreground">{t.courseModules}</h2>
           <div className="space-y-3">
             {course.modules.map((module, idx) => {
               const isExpanded = expandedModule === module.id;
@@ -357,7 +499,7 @@ export default function CursoDetalle() {
                             </span>
                             <span className="flex items-center gap-1">
                               <AlertCircle size={12} />
-                              {module.quiz.length} preguntas
+                              {module.quiz.length} {t.questions}
                             </span>
                           </div>
                         </div>
@@ -388,17 +530,17 @@ export default function CursoDetalle() {
             <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-8 text-center">
               <Award size={48} className="text-emerald-500 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-foreground mb-2">
-                ¡Felicidades!
+                {t.congratulations}
               </h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Has completado "{course.title}". Descarga tu certificado y comparte tu logro con tu equipo.
+                {t.completedMessage} "{course.title}". Descarga tu certificado y comparte tu logro con tu equipo.
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-3 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition"
               >
-                Descargar certificado
+                {t.downloadCertificate}
               </motion.button>
             </div>
           </motion.section>

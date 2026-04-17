@@ -16,10 +16,104 @@ const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
   maridaje: Utensils,
 };
 
+const i18n = {
+  es: {
+    notFound: "Entrada no encontrada",
+    backToLibrary: "← Volver a la Biblioteca del vino",
+    libraryTitle: "Biblioteca del Vino",
+    characteristics: "Características",
+    typicalAromas: "Aromas típicos",
+    recommendedPairings: "Maridajes recomendados",
+    productionRegions: "Regiones de producción",
+    subzones: "Subzonas",
+    highlights: "Ejemplos destacados",
+    ctaHeading: "Lleva este conocimiento a tu carta de vinos",
+    ctaText: "Winerim integra información de uvas, regiones y maridajes directamente en la experiencia del comensal.",
+    requestDemo: "Solicitar demo",
+    exploreMore: "Explorar más",
+  },
+  en: {
+    notFound: "Entry not found",
+    backToLibrary: "← Back to Wine Library",
+    libraryTitle: "Wine Library",
+    characteristics: "Characteristics",
+    typicalAromas: "Typical Aromas",
+    recommendedPairings: "Recommended Pairings",
+    productionRegions: "Production Regions",
+    subzones: "Subzones",
+    highlights: "Featured Examples",
+    ctaHeading: "Bring this knowledge to your wine menu",
+    ctaText: "Winerim integrates information about grapes, regions and pairings directly into the dining experience.",
+    requestDemo: "Request Demo",
+    exploreMore: "Explore More",
+  },
+  it: {
+    notFound: "Voce non trovata",
+    backToLibrary: "← Torna a Biblioteca del Vino",
+    libraryTitle: "Biblioteca del Vino",
+    characteristics: "Caratteristiche",
+    typicalAromas: "Aromi Tipici",
+    recommendedPairings: "Abbinamenti Consigliati",
+    productionRegions: "Regioni di Produzione",
+    subzones: "Sottzone",
+    highlights: "Esempi in Evidenza",
+    ctaHeading: "Porta questa conoscenza al tuo menu vini",
+    ctaText: "Winerim integra informazioni su uve, regioni e abbinamenti direttamente nell'esperienza del commensale.",
+    requestDemo: "Richiedi Demo",
+    exploreMore: "Esplora di Piu",
+  },
+  fr: {
+    notFound: "Entree non trouvee",
+    backToLibrary: "← Retour a la Bibliotheque du Vin",
+    libraryTitle: "Bibliotheque du Vin",
+    characteristics: "Caracteristiques",
+    typicalAromas: "Aromes Typiques",
+    recommendedPairings: "Accords Recommandes",
+    productionRegions: "Regions de Production",
+    subzones: "Sous-zones",
+    highlights: "Exemples Phares",
+    ctaHeading: "Apportez ces connaissances a votre carte des vins",
+    ctaText: "Winerim integre les informations sur les cepages, les regions et les accords directement dans l'experience du client.",
+    requestDemo: "Demander une Demo",
+    exploreMore: "Explorer Plus",
+  },
+  de: {
+    notFound: "Eintrag nicht gefunden",
+    backToLibrary: "← Zuruck zur Weinbibliothek",
+    libraryTitle: "Weinbibliothek",
+    characteristics: "Charakteristiken",
+    typicalAromas: "Typische Aromen",
+    recommendedPairings: "Empfohlene Kombinationen",
+    productionRegions: "Produktionsregionen",
+    subzones: "Unterzonen",
+    highlights: "Ausgewahlte Beispiele",
+    ctaHeading: "Bringen Sie dieses Wissen auf Ihre Weinkarte",
+    ctaText: "Winerim integriert Informationen uber Rebsorten, Regionen und Kombinationen direkt in das Speiseerlebnis.",
+    requestDemo: "Demo anfordern",
+    exploreMore: "Mehr erforschen",
+  },
+  pt: {
+    notFound: "Entrada nao encontrada",
+    backToLibrary: "← Voltar a Biblioteca de Vinhos",
+    libraryTitle: "Biblioteca de Vinhos",
+    characteristics: "Caracteristicas",
+    typicalAromas: "Aromas Tipicos",
+    recommendedPairings: "Combinacoes Recomendadas",
+    productionRegions: "Regioes de Producao",
+    subzones: "Subzonas",
+    highlights: "Exemplos Destacados",
+    ctaHeading: "Leve este conhecimento para sua carta de vinhos",
+    ctaText: "Winerim integra informacoes sobre uvas, regioes e combinacoes diretamente na experiencia do comensal.",
+    requestDemo: "Solicitar Demo",
+    exploreMore: "Explorar Mais",
+  },
+};
+
 const BibliotecaDetalle = () => {
-  const { allLangPaths } = useLanguage();
+  const { allLangPaths, lang } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
   const entry = getBySlug(slug || "");
+  const t = i18n[lang as keyof typeof i18n];
 
   useEffect(() => {
     if (!entry) return;
@@ -62,8 +156,8 @@ const BibliotecaDetalle = () => {
       <div className="min-h-screen bg-background text-foreground">
         <Navbar />
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-6">
-          <h1 className="font-heading text-3xl font-bold mb-4">Entrada no encontrada</h1>
-          <Link to="/biblioteca-vino" className="text-wine hover:underline">← Volver a la Biblioteca del vino</Link>
+          <h1 className="font-heading text-3xl font-bold mb-4">{t.notFound}</h1>
+          <Link to="/biblioteca-vino" className="text-wine hover:underline">{t.backToLibrary}</Link>
         </div>
         <Footer />
       </div>
@@ -94,7 +188,7 @@ const BibliotecaDetalle = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-wine transition-colors mb-6"
           >
             <ArrowLeft size={14} />
-            Biblioteca del vino
+            {t.libraryTitle}
           </Link>
 
           <motion.div
@@ -140,7 +234,7 @@ const BibliotecaDetalle = () => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Características</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.characteristics}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {entry.characteristics.map((c, i) => (
@@ -159,7 +253,7 @@ const BibliotecaDetalle = () => {
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-8">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-2">Aromas típicos</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-2">{t.typicalAromas}</h2>
           </ScrollReveal>
           <ScrollReveal>
             <div className="flex flex-wrap gap-3">
@@ -177,7 +271,7 @@ const BibliotecaDetalle = () => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Maridajes recomendados</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.recommendedPairings}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {entry.pairings.map((p, i) => (
@@ -197,7 +291,7 @@ const BibliotecaDetalle = () => {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-8">
             <h2 className="font-heading text-2xl md:text-3xl font-bold mb-2">
-              {entry.category === "region" ? "Subzonas" : "Regiones de producción"}
+              {entry.category === "region" ? t.subzones : t.productionRegions}
             </h2>
           </ScrollReveal>
           <ScrollReveal>
@@ -217,7 +311,7 @@ const BibliotecaDetalle = () => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Ejemplos destacados</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.highlights}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {entry.examples.map((ex, i) => (
@@ -245,23 +339,23 @@ const BibliotecaDetalle = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-                Lleva este conocimiento a tu <span className="text-gradient-wine italic">carta de vinos</span>
+                {t.ctaHeading}
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
-                Winerim integra información de uvas, regiones y maridajes directamente en la experiencia del comensal.
+                {t.ctaText}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/demo"
                   className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all"
                 >
-                  Solicitar demo <ArrowRight size={16} />
+                  {t.requestDemo} <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/biblioteca-vino"
                   className="px-8 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all"
                 >
-                  Explorar más
+                  {t.exploreMore}
                 </Link>
               </div>
             </div>
