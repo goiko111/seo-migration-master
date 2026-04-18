@@ -589,6 +589,12 @@ const SPA_PREFIXES = [
   '/pt/guias/',
 ];
 
+// Localized SPA fallback trees that must reach the React router on origin
+const LOCALIZED_SPA_FALLBACK_PREFIXES = [
+  '/de/',
+  '/pt/',
+];
+
 // ─── SEO WILDCARD prefixes (programmatic SEO pages) ───
 const SEO_WILDCARD_PREFIXES = [
   '/software-carta-de-vinos-',
@@ -622,6 +628,8 @@ function isKnownRoute(path) {
   if (NOINDEX_ROUTES.has(path)) return true;
   // SPA prefix
   if (SPA_PREFIXES.some(p => path.startsWith(p))) return true;
+  // Localized SPA fallback trees
+  if (LOCALIZED_SPA_FALLBACK_PREFIXES.some(p => path.startsWith(p))) return true;
   // SEO wildcard
   if (SEO_WILDCARD_PREFIXES.some(p => path.startsWith(p))) return true;
   return false;
