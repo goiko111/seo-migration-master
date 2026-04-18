@@ -1,4 +1,4 @@
-// build trigger v5
+// build trigger v6
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Calculator, Download, Lightbulb, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
