@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Calculator, Download, Lightbulb } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Download, Lightbulb, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -10,11 +10,13 @@ interface InternalLink {
 }
 
 const typeLabels: Record<string, Record<string, string>> = {
-  guide: { es: "Guía", en: "Guide", it: "Guida", fr: "Guide" },
-  tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil" },
-  resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource" },
-  solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution" },
-  "decision-center": { es: "Decision Center", en: "Decision Center", it: "Decision Center", fr: "Decision Center" },
+  guide: { es: "Guía", en: "Guide", it: "Guida", fr: "Guide", de: "Ratgeber", pt: "Guia" },
+  tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil", de: "Werkzeug", pt: "Ferramenta" },
+  resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource", de: "Ressource", pt: "Recurso" },
+  solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution", de: "Lösung", pt: "Solução" },
+  "decision-center": { es: "Decision Center", en: "Decision Center", it: "Decision Center", fr: "Decision Center", de: "Decision Center", pt: "Decision Center" },
+  product: { es: "Producto", en: "Product", it: "Prodotto", fr: "Produit", de: "Produkt", pt: "Produto" },
+  case_study: { es: "Caso de éxito", en: "Case Study", it: "Caso studio", fr: "Étude de cas", de: "Fallstudie", pt: "Caso de estudo" },
 };
 
 const defaultTitles: Record<string, string> = {
@@ -22,14 +24,18 @@ const defaultTitles: Record<string, string> = {
   en: "Related content",
   it: "Contenuti correlati",
   fr: "Contenu associé",
+  de: "Verwandte Inhalte",
+  pt: "Conteúdo relacionado",
 };
 
-const typeIcons = {
+const typeIcons: Record<string, typeof BookOpen> = {
   guide: BookOpen,
   tool: Calculator,
   resource: Download,
   solution: Lightbulb,
   "decision-center": Lightbulb,
+  product: Sparkles,
+  case_study: BookOpen,
 };
 
 const badgeClasses: Record<string, string> = {
@@ -38,6 +44,8 @@ const badgeClasses: Record<string, string> = {
   resource: "text-emerald-500",
   solution: "text-amber-500",
   "decision-center": "text-purple-500",
+  product: "text-wine",
+  case_study: "text-blue-500",
 };
 
 interface InternalLinksProps {
@@ -58,7 +66,7 @@ const InternalLinks = ({ links, title }: InternalLinksProps) => {
       </ScrollReveal>
       <div className="grid sm:grid-cols-2 gap-3">
         {links.map((link, i) => {
-          const Icon = typeIcons[link.type];
+          const Icon = typeIcons[link.type] || Lightbulb;
           const badge = typeLabels[link.type]?.[lang] || typeLabels[link.type]?.es || link.type;
           const cls = badgeClasses[link.type] || "text-wine";
           return (

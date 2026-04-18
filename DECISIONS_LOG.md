@@ -114,3 +114,33 @@
 4. `NEXT_STEPS.md` — Tareas pendientes (se reescribe cada sesión)
 
 **Razón**: Las sesiones de Claude tienen contexto limitado. Estos archivos permiten retomar el trabajo sin perder estado. Separar hechos de decisiones de hipótesis de tareas.
+
+---
+
+## 2026-04-17 — Routing: catch-all con SeoPage en lugar de rutas específicas
+
+**Decisión**: Reemplazar todas las rutas SEO específicas (`software-carta-de-vinos-*`, `software-carta-de-vinos-:city`) con un único catch-all `<Route path="*" element={<SeoPage />} />`.
+
+**Razón**: React Router v6 usa matching basado en segmentos. Los wildcards (`*`) y params (`:param`) solo funcionan como segmentos completos después de `/`. Patrones inline como `software-carta-de-vinos-*` se tratan como strings literales y NUNCA hacen match con URLs dinámicas. Todas las rutas city page (ES, EN, IT, FR, DE, PT) estaban rotas.
+
+**Cómo funciona**: SeoPage usa `useLocation().pathname` → `slugFromPathname()` (quita solo el prefijo de idioma `/xx/`) → query a Supabase por slug → si existe, renderiza el template; si no, SeoPageNotFound.
+
+---
+
+## 2026-04-17 — Slugs en seo_pages: SIN prefijo de idioma
+
+**Decisión**: Los slugs en la tabla `seo_pages` NO incluyen el prefijo de idioma. Ej: `weinkarten-software-berlin`, NO `de/weinkarten-software-berlin`.
+
+**Razón**: `slugFromPathname()` quita el prefijo `/de/` de la URL antes de buscar en Supabase. Si el slug en DB tiene `de/`, nunca haría match. Las pages ES existentes (ej: `software-carta-de-vinos-madrid`) ya siguen este patrón sin `es/`.
+
+**Fix aplicado**: SQL `city-pages-de-pt.sql` corregido quitando prefijos `de/` y `pt/` de los 15 slugs.
+
+---
+
+## 2026-04-18 — InternalLinks: fallback para tipos desconocidos
+
+**Decisión**: Añadir `|| Lightbulb` como fallback al resolver `typeIcons[link.type]` en InternalLinks.tsx.
+
+**Razón**: Los datos de city pages DE/PT en Supabase usan `internal_links` con types `"product"` y `"case_study"`, pero InternalLinks solo definía icons para `guide`, `tool`, `resource`, `solution`, `decision-center`. Cuando `typeIcons[link.type]` devolvía `undefined` y se renderizaba como `<Icon />`, causaba React error #130 ("Element type is invalid: expected string or class/function but got: undefined"). Esta era la causa del crash en city pages alemanas.
+
+**Fix**: Añadir `product` y `case_study` a `typeIcons`, `typeLabels` y `badgeClasses`, más un fallback genérico para cualquier tipo futuro desconocido.

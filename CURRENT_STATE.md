@@ -1,13 +1,13 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-04-17 (sesión 2)
+> Última actualización: 2026-04-18 (sesión 3)
 
 ## Estado general
 
 **Build**: ✅ Pasa limpio (7.6s) — sin warnings
 **Branch**: `main` — todo empujado a `origin/main`
-**Último commit**: `b6fb7a3` — "seo: add DE/PT to sitemap, hreflang, org schema and og:locale"
+**Último commit**: `73816d4` — "fix: remove NotFound fallback to fix React error #130"
 
 ## i18n: Estado de traducciones por componente
 
@@ -55,6 +55,16 @@ Todas las páginas con contenido traducible tienen DE y PT. Detalle:
 
 `ROUTE_MAP` en `src/i18n/types.ts` tiene entradas para los 6 idiomas. `SUPPORTED_LANGS`, `LANG_FLAGS`, `LANG_LABELS` incluyen DE y PT.
 
+**Catch-all routing**: Todas las rutas SEO usan un solo `<Route path="*" element={<SeoPage />} />`. SeoPage extrae el slug con `useLocation().pathname` → `slugFromPathname()` (quita prefijo `/xx/` de idioma) → query Supabase → template según cluster.
+
+### Componentes SEO compartidos — ✅ COMPLETO (sesión 3)
+
+| Componente | Estado i18n |
+|------------|-------------|
+| InternalLinks.tsx | ✅ typeLabels, defaultTitles, typeIcons con 6 idiomas + types product/case_study + fallback para tipos desconocidos |
+| RelatedPages.tsx | ✅ clusterLabels y defaultTitles con 6 idiomas |
+| Breadcrumbs.tsx | ✅ Usa useLanguage() con t.breadcrumb_home |
+
 ## Páginas SEO dinámicas (Supabase) — ⏳ SQL LISTO, PENDIENTE EJECUCIÓN
 
 La tabla `seo_pages` en Supabase tiene páginas para ES/EN/IT/FR pero **NO tiene city pages para DE ni PT**.
@@ -63,7 +73,10 @@ La tabla `seo_pages` en Supabase tiene páginas para ES/EN/IT/FR pero **NO tiene
 - **DE (9)**: Berlin, München, Hamburg, Frankfurt, Düsseldorf, Köln, Stuttgart, Wien, Zürich
 - **PT (6)**: Lisboa, Porto, Faro, Coimbra, Funchal, Braga
 
+**Fix sesión 3**: Slugs corregidos quitando prefijos `de/` y `pt/` — ahora coinciden con lo que `slugFromPathname()` produce. También fix de data bug en Faro (`"a"` → `"desc"` en un feature).
+
 **Pendiente**: Ejecutar el SQL en Supabase (dashboard o CLI). No se puede desde el sandbox (proxy bloquea).
+**Pendiente**: Si el SQL ya se ejecutó con slugs incorrectos (`de/...`), hay que hacer UPDATE para quitarles el prefijo.
 **Pendiente**: Verificar si otros clusters (restaurant_type, country) necesitan entries DE/PT.
 
 ## Chat widget FOUC fix
@@ -89,5 +102,9 @@ En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que
 - [x] Templates SEO tienen chrome traducido a 6 idiomas
 - [x] Duplicate de key warnings limpiados (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos)
 - [x] SQL para city pages DE/PT preparado (sql/city-pages-de-pt.sql)
-- [ ] City pages DE/PT en Supabase
+- [x] React error #130 en city pages DE/PT: causa raíz encontrada y arreglada (InternalLinks types desconocidos)
+- [x] InternalLinks.tsx: DE/PT i18n + types product/case_study + fallback
+- [x] RelatedPages.tsx: DE/PT i18n para clusterLabels y título
+- [x] SQL slugs corregidos (sin prefijos de idioma)
+- [ ] City pages DE/PT en Supabase (SQL aún pendiente de ejecución)
 - [ ] Chat widget FOUC fix funciona en producción

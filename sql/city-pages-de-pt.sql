@@ -19,7 +19,7 @@
 -- German Cities: Berlin
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-berlin',
+  'weinkarten-software-berlin',
   'de',
   'city',
   'Weinkarten-Software für Berlins moderne Weinrestaurants',
@@ -37,7 +37,7 @@ VALUES (
 -- German Cities: München
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-munchen',
+  'weinkarten-software-munchen',
   'de',
   'city',
   'Weinkarten-Software für Münchens traditionelle und moderne Restaurants',
@@ -55,7 +55,7 @@ VALUES (
 -- German Cities: Hamburg
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-hamburg',
+  'weinkarten-software-hamburg',
   'de',
   'city',
   'Weinkarten-Software für Hamburgs maritime Gastronomieszene',
@@ -73,7 +73,7 @@ VALUES (
 -- German Cities: Frankfurt
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-frankfurt',
+  'weinkarten-software-frankfurt',
   'de',
   'city',
   'Weinkarten-Software für Frankfurts gehobene Dining-Szene',
@@ -91,7 +91,7 @@ VALUES (
 -- German Cities: Düsseldorf
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-dusseldorf',
+  'weinkarten-software-dusseldorf',
   'de',
   'city',
   'Weinkarten-Software für Düsseldorfs Gourmet-Restaurants',
@@ -109,7 +109,7 @@ VALUES (
 -- German Cities: Köln
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-koln',
+  'weinkarten-software-koln',
   'de',
   'city',
   'Weinkarten-Software für Kölns vielfältige Restaurantszene',
@@ -127,7 +127,7 @@ VALUES (
 -- German Cities: Stuttgart
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-stuttgart',
+  'weinkarten-software-stuttgart',
   'de',
   'city',
   'Weinkarten-Software für Stuttgarts Weinkultur und Restaurants',
@@ -145,7 +145,7 @@ VALUES (
 -- German Cities: Wien (Austria)
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-wien',
+  'weinkarten-software-wien',
   'de',
   'city',
   'Weinkarten-Software für Wiens traditionelle und moderne Restaurants',
@@ -163,7 +163,7 @@ VALUES (
 -- German Cities: Zürich (Switzerland)
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'de/weinkarten-software-zurich',
+  'weinkarten-software-zurich',
   'de',
   'city',
   'Weinkarten-Software für Zürichs Premium-Gastronomie',
@@ -181,7 +181,7 @@ VALUES (
 -- Portuguese Cities: Lisboa
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-lisboa',
+  'software-carta-vinhos-lisboa',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes em Lisboa',
@@ -199,7 +199,7 @@ VALUES (
 -- Portuguese Cities: Porto
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-porto',
+  'software-carta-vinhos-porto',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes no Porto',
@@ -217,7 +217,7 @@ VALUES (
 -- Portuguese Cities: Faro
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-faro',
+  'software-carta-vinhos-faro',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes no Algarve',
@@ -227,7 +227,7 @@ VALUES (
   'Solução de carta de vinhos para Faro: Restaurantes de praia, seafood e gastronomia algarvia com gestão profissional de vinho.',
   'Solicitar Demo',
   '/demo',
-  $${"city_name": "Faro", "country": "Portugal", "intro": "Faro e o Algarve são destinos turísticos globais com restaurantes focados em peixe, marisco e cozinha mediterrânea. Uma base de clientes internacional e sazonal exige cartas multilingues, acesso fácil a informações de vinho e recomendações rápidas. Restaurantes lidam com alta rotação, estações sazonais variáveis e necessidade de harmonizações com frutos do mar especializadas.", "ticket_medio": "28-45 EUR", "problems": ["Sazonalidade turística exige flexibilidade em estoque e preço", "Harmonizações especializadas para peixe, marisco e cozinha mediterrânea", "Base de clientes internacional requer cartas multilingues e informações simples", "Rotação rápida de vinho em alta temporada versus gestão de stock em baixa", "Acesso rápido a informações de vinho para cliente turista sem conhecimento prévio"], "features": [{"title": "Harmonizações Seafood", "desc": "Recomendações especializadas para peixe, marisco e especialidades algarvia com perfil de vinho apropriado"}, {"title": "Cartas Sazonais", "desc": "Gestão fácil de cartas sazonais com preços e disponibilidades variáveis por época"}, {"title": "Interface Simples para Turistas", "a": "Descrição clara em múltiplas línguas, ícones visuais e recomendações rápidas para clientes não-especialistas"}, {"title": "Gestão de Liquidação", "desc": "Ferramentas para liquidar stock em final de estação e planificar compras para próxima"}], "stats": [{"value": "48%", "label": "Melhoria nas recomendações seafood resultando em maiores gastos de vinho"}, {"value": "35%", "label": "Redução de stock morto em períodos baixa sazonal"}, {"value": "52%", "label": "Aumento na satisfação de turistas através de recomendações linguísticas claras"}], "benefits": ["Harmonizações inteligentes para especialidades de peixe e marisco", "Gestão eficiente de sazonalidade e stock", "Acesso fácil para clientes turistas", "Aumento de venda de vinho por recomendações simples e eficazes"], "internal_links": [{"url": "/pt/features/seasonal-management", "label": "Gestão Sazonal e Temporada", "type": "product"}, {"url": "/pt/case-studies/algarve", "label": "Casos: Restaurantes de Praia do Algarve", "type": "case_study"}]}$$,
+  $${"city_name": "Faro", "country": "Portugal", "intro": "Faro e o Algarve são destinos turísticos globais com restaurantes focados em peixe, marisco e cozinha mediterrânea. Uma base de clientes internacional e sazonal exige cartas multilingues, acesso fácil a informações de vinho e recomendações rápidas. Restaurantes lidam com alta rotação, estações sazonais variáveis e necessidade de harmonizações com frutos do mar especializadas.", "ticket_medio": "28-45 EUR", "problems": ["Sazonalidade turística exige flexibilidade em estoque e preço", "Harmonizações especializadas para peixe, marisco e cozinha mediterrânea", "Base de clientes internacional requer cartas multilingues e informações simples", "Rotação rápida de vinho em alta temporada versus gestão de stock em baixa", "Acesso rápido a informações de vinho para cliente turista sem conhecimento prévio"], "features": [{"title": "Harmonizações Seafood", "desc": "Recomendações especializadas para peixe, marisco e especialidades algarvia com perfil de vinho apropriado"}, {"title": "Cartas Sazonais", "desc": "Gestão fácil de cartas sazonais com preços e disponibilidades variáveis por época"}, {"title": "Interface Simples para Turistas", "desc": "Descrição clara em múltiplas línguas, ícones visuais e recomendações rápidas para clientes não-especialistas"}, {"title": "Gestão de Liquidação", "desc": "Ferramentas para liquidar stock em final de estação e planificar compras para próxima"}], "stats": [{"value": "48%", "label": "Melhoria nas recomendações seafood resultando em maiores gastos de vinho"}, {"value": "35%", "label": "Redução de stock morto em períodos baixa sazonal"}, {"value": "52%", "label": "Aumento na satisfação de turistas através de recomendações linguísticas claras"}], "benefits": ["Harmonizações inteligentes para especialidades de peixe e marisco", "Gestão eficiente de sazonalidade e stock", "Acesso fácil para clientes turistas", "Aumento de venda de vinho por recomendações simples e eficazes"], "internal_links": [{"url": "/pt/features/seasonal-management", "label": "Gestão Sazonal e Temporada", "type": "product"}, {"url": "/pt/case-studies/algarve", "label": "Casos: Restaurantes de Praia do Algarve", "type": "case_study"}]}$$,
   $$[{"q": "Como gerir preços diferentes por temporada?", "a": "Winerim permite múltiplas versões de preço. Pode ter preços de alta-temporada e baixa-temporada com mudanças automáticas."}, {"q": "Qual é a melhor forma de harmonizar com marisco?", "a": "Nossos curadores oferecem templates especializados para harmonizações de marisco, considerando tipo de peixe e preparação."}, {"q": "Como faço para atualizar a carta rapidamente?", "a": "A plataforma permite atualizar em minutos. Pode adicionar/remover vinhos, mudar preços e notas com poucos cliques."}, {"q": "Posso criar cartas simples para turistas que não conhecem vinho?", "a": "Sim, Winerim oferece cartas simplificadas com descrições em linguagem acessível, ícones e recomendações rápidas."}]$$,
   true
 );
@@ -235,7 +235,7 @@ VALUES (
 -- Portuguese Cities: Coimbra
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-coimbra',
+  'software-carta-vinhos-coimbra',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes em Coimbra',
@@ -253,7 +253,7 @@ VALUES (
 -- Portuguese Cities: Funchal
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-funchal',
+  'software-carta-vinhos-funchal',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes em Funchal',
@@ -271,7 +271,7 @@ VALUES (
 -- Portuguese Cities: Braga
 INSERT INTO seo_pages (slug, lang, cluster, hero_title, hero_subtitle, hero_badge, meta_title, meta_description, cta_primary_text, cta_primary_url, body, faqs, published)
 VALUES (
-  'pt/software-carta-vinhos-braga',
+  'software-carta-vinhos-braga',
   'pt',
   'city',
   'Software de Carta de Vinhos para Restaurantes em Braga',
