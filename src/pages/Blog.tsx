@@ -151,12 +151,12 @@ const Blog = () => {
           <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
             <ScrollReveal>
               <Link to={featured.slug}
-                className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/5">
+                className="group block rounded-2xl border border-border/60 overflow-hidden bg-gradient-card hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/10">
                 <div className="grid md:grid-cols-2">
                   {featured.image && (
                     <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
                       <img src={featured.image} alt={featured.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}
@@ -191,11 +191,11 @@ const Blog = () => {
             {rest.map((post, i) => (
               <ScrollReveal key={post.slug} delay={i * 0.04}>
                 <Link to={post.slug}
-                  className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/5">
+                  className="group block rounded-2xl border border-border/60 overflow-hidden bg-gradient-card hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/10">
                   {post.image && (
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={post.image} alt={post.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}

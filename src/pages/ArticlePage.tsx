@@ -203,7 +203,7 @@ const ArticlePage = () => {
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="rounded-2xl overflow-hidden">
-            <img src={article.heroImage} alt={article.title} className="w-full max-h-[500px] object-cover grayscale" loading="lazy" decoding="async" />
+            <img src={article.heroImage} alt={article.title} className="w-full max-h-[500px] object-cover" loading="lazy" decoding="async" />
           </motion.div>
         </section>
       )}
