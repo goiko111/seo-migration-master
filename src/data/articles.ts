@@ -839,7 +839,7 @@ Winerim transforma la carta de vinos en una experiencia visual, intuitiva e inte
     category: "Software",
     title: "Mejor software para carta de vinos de restaurante en 2025",
     subtitle: "Análisis de las opciones disponibles, qué debe incluir un buen software de carta de vinos y cómo elegir según tu tipo de local.",
-    heroImage: "/src/assets/blog/carta-rentabilidad.jpg",
+    heroImage: "/blog/carta-rentabilidad.jpg",
     body: `¿Tu carta de vinos sigue siendo un PDF estático o una hoja de cálculo? En 2025, gestionar la carta con herramientas genéricas es perder dinero, tiempo y oportunidades de venta.
 
 ## Qué es un software de carta de vinos
@@ -919,7 +919,7 @@ Sí. De hecho, los restaurantes con 15-30 referencias son los que más se benefi
     category: "Software",
     title: "Alternativa a la carta PDF de vinos: por qué tu restaurante necesita algo mejor",
     subtitle: "El PDF fue útil durante la pandemia. En 2025, es un freno para las ventas de vino. Analizamos las alternativas reales.",
-    heroImage: "/src/assets/blog/digital-vs-tradicional.jpg",
+    heroImage: "/blog/digital-vs-tradicional.jpg",
     body: `La carta en PDF fue la solución de emergencia durante 2020. Cinco años después, muchos restaurantes siguen usándola como solución definitiva. Y eso tiene un coste directo en ventas de vino.
 
 ## El problema con la carta PDF de vinos
@@ -1001,7 +1001,7 @@ Con Winerim, menos de 48 horas. Subes tu carta, se genera la versión digital y 
     category: "Software",
     title: "Software para gestionar vino por copa en restaurantes",
     subtitle: "El vino por copa es la mayor oportunidad de venta en restauración. Pero sin control, es también la mayor fuente de pérdida. Un software especializado lo cambia todo.",
-    heroImage: "/src/assets/blog/vino-por-copa-botellas.jpg",
+    heroImage: "/blog/vino-por-copa-botellas.jpg",
     body: `El vino por copa puede representar entre el 30% y el 50% de la facturación de vino en un restaurante. Pero gestionarlo manualmente —pricing, merma, rotación, selección— convierte esa oportunidad en un riesgo financiero.
 
 ## Por qué el vino por copa necesita software
@@ -1077,7 +1077,7 @@ Especialmente. Winerim te ayuda a diseñar el programa desde cero: selección, p
     category: "Estrategia",
     title: "Cómo mejorar el ticket medio en vino con datos",
     subtitle: "El ticket medio en vino no sube con presión comercial. Sube con datos que te dicen exactamente dónde están las oportunidades.",
-    heroImage: "/src/assets/blog/ticket-medio-vinos.jpg",
+    heroImage: "/blog/ticket-medio-vinos.jpg",
     body: `El ticket medio en vino es el KPI más revelador de la salud comercial de tu carta. Y el más ignorado. La mayoría de restaurantes lo calculan de forma agregada (facturación de vino / número de mesas) y no profundizan más.
 
 Pero el ticket medio no es un número estático. Es el resultado de múltiples decisiones: qué vinos hay en carta, cómo están presentados, qué recomienda el equipo, qué precio tiene la copa, y si el comensal se siente cómodo pidiendo.
@@ -1149,7 +1149,7 @@ Con ajustes de pricing y copa, en 2-4 semanas. Con formación de equipo, en 1-2 
     category: "Pricing",
     title: "7 errores al fijar precios del vino en un restaurante",
     subtitle: "El pricing del vino es la decisión que más impacta en el margen de tu bodega. Y la que más restaurantes hacen por inercia.",
-    heroImage: "/src/assets/blog/precio-multiplicador.jpg",
+    heroImage: "/blog/precio-multiplicador.jpg",
     body: `Fijar el precio del vino en un restaurante parece simple: coste × multiplicador = PVP. Pero esa simplicidad esconde errores que erosionan el margen sin que nadie lo detecte.
 
 Estos son los 7 errores más frecuentes que vemos en restaurantes reales.
@@ -1223,7 +1223,7 @@ Si vende menos de 3 unidades al mes y hay alternativas más baratas que sí rota
     category: "Analítica",
     title: "Cómo saber si tu carta de vinos está descompensada",
     subtitle: "Una carta descompensada no es una carta con malos vinos. Es una carta donde la distribución de estilos, precios o regiones no se ajusta a tu cliente real.",
-    heroImage: "/src/assets/blog/carta-sobrecargada.jpg",
+    heroImage: "/blog/carta-sobrecargada.jpg",
     body: `La mayoría de cartas de vinos se construyen por acumulación: se añaden vinos por relación con el distribuidor, por gusto personal, por tradición. Rara vez se diseñan con criterio de equilibrio.
 
 El resultado: cartas descompensadas que generan concentración de ventas en pocas referencias, stock muerto en las demás y una experiencia pobre para el cliente que no encuentra lo que busca.
@@ -1300,7 +1300,7 @@ Sí. Winerim analiza tu carta por precio, estilo, región y formato, y te alerta
     category: "Copa",
     title: "Qué vinos deberías ofrecer por copa según tu tipo de local",
     subtitle: "La selección de copa no es un miniatura de tu carta de botellas. Es una oferta independiente que debe adaptarse a tu público, tu cocina y tu operativa.",
-    heroImage: "/src/assets/blog/vino-por-copa-botellas.jpg",
+    heroImage: "/blog/vino-por-copa-botellas.jpg",
     body: `No todos los restaurantes necesitan las mismas copas. Un gastrobar urbano con cocina de fusión no tiene los mismos clientes ni la misma operativa que un restaurante de mariscos en la costa. Sin embargo, la mayoría diseñan su oferta de copa por inercia: "el tinto de la casa, el blanco de la casa y poco más."
 
 ## Por qué la selección de copa debe ser estratégica
@@ -1391,7 +1391,7 @@ Si tienes más copas abiertas de las que puedes vender en 2 días, son demasiada
     category: "Analítica",
     title: "Cuándo una carta de vinos es demasiado larga (y qué hacer al respecto)",
     subtitle: "Más referencias no significa mejor carta. Significa más complejidad, más stock inmovilizado y más decisiones difíciles para tu cliente.",
-    heroImage: "/src/assets/blog/demasiadas-referencias.jpg",
+    heroImage: "/blog/demasiadas-referencias.jpg",
     body: `Existe un mito persistente en hostelería: cuantos más vinos tenga la carta, más profesional parece el restaurante. Pero los datos cuentan otra historia.
 
 ## Cuándo una carta es demasiado larga
