@@ -1,6 +1,6 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState, useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { SupportedLang, DEFAULT_LANG, ROUTE_MAP, TranslationDict } from "./types";
+import { SupportedLang, DEFAULT_LANG, SUPPORTED_LANGS, ROUTE_MAP, TranslationDict } from "./types";
 import es from "./translations/es";
 import en from "./translations/en";
 import it from "./translations/it";
@@ -17,6 +17,8 @@ interface LanguageContextValue {
   localePath: (esPath: string) => string;
   /** Get the ES equivalent of the current path (for hreflang) */
   allLangPaths: (esPath: string) => { lang: string; url: string }[];
+  /** Override the detected language (used by SeoPage when DB lang differs from URL) */
+  setLangOverride: (lang: SupportedLang | null) => void;
 }
 
 const LanguageContext = createContext<LanguageContextValue>({
@@ -24,6 +26,7 @@ const LanguageContext = createContext<LanguageContextValue>({
   t: es,
   localePath: (p) => p,
   allLangPaths: () => [],
+  setLangOverride: () => {},
 });
 
 export function detectLangFromPath(pathname: string): SupportedLang {
@@ -37,8 +40,29 @@ export function detectLangFromPath(pathname: string): SupportedLang {
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useLocation();
-  const lang = detectLangFromPath(pathname);
+  const [langOverride, setLangOverrideState] = useState<SupportedLang | null>(null);
+
+  const detectedLang = detectLangFromPath(pathname);
+  const lang = langOverride || detectedLang;
   const t = TRANSLATIONS[lang];
+
+  // Reset override when pathname changes (navigating away from SEO page)
+  useEffect(() => {
+    setLangOverrideState(null);
+  }, [pathname]);
+
+  // Update <html lang> attribute whenever the effective language changes
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const setLangOverride = useCallback((newLang: SupportedLang | null) => {
+    if (newLang && SUPPORTED_LANGS.includes(newLang)) {
+      setLangOverrideState(newLang);
+    } else {
+      setLangOverrideState(null);
+    }
+  }, []);
 
   const value = useMemo<LanguageContextValue>(() => ({
     lang,
@@ -59,7 +83,8 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
         { lang: "pt", url: `${SITE}${ROUTE_MAP.pt[esPath] || `/pt${esPath}`}` },
       ];
     },
-  }), [lang, t]);
+    setLangOverride,
+  }), [lang, t, setLangOverride]);
 
   return (
     <LanguageContext.Provider value={value}>
