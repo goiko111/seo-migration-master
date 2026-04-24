@@ -151,7 +151,8 @@ const Blog = () => {
           <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
             <ScrollReveal>
               <Link to={featured.slug}
-                className="group block rounded-2xl border border-border/60 overflow-hidden bg-gradient-card hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/10">
+                className="group block rounded-2xl border border-white/10 overflow-hidden hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/10"
+                style={{ background: 'linear-gradient(145deg, hsl(140 2% 18%), hsl(140 2% 14%))' }}>
                 <div className="grid md:grid-cols-2">
                   {featured.image && (
                     <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
@@ -191,7 +192,8 @@ const Blog = () => {
             {rest.map((post, i) => (
               <ScrollReveal key={post.slug} delay={i * 0.04}>
                 <Link to={post.slug}
-                  className="group block rounded-2xl border border-border/60 overflow-hidden bg-gradient-card hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/10">
+                  className="group block rounded-2xl border border-white/10 overflow-hidden hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/10"
+                  style={{ background: 'linear-gradient(145deg, hsl(140 2% 18%), hsl(140 2% 14%))' }}>
                   {post.image && (
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={post.image} alt={post.title}
