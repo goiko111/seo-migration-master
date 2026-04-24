@@ -26,12 +26,12 @@ interface BlogPost {
 }
 
 const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string; heroLabel: string; heroSubtitle: string; guidesQ: string; guidesBtn: string; featured: string }> = {
-  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer artículo", heroLabel: "Centro de conocimiento", heroSubtitle: "Artículos, análisis y tendencias sobre la gestión de vinos en restauración.", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →", featured: "Destacado" },
-  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →", featured: "Featured" },
-  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →", featured: "In evidenza" },
-  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →", featured: "À la une" },
-  de: { seoTitle: "Blog", seoDesc: "Entdecken Sie die neuesten Trends der Weinwelt mit Winerim.", readMore: "Artikel lesen", heroLabel: "Wissenszentrum", heroSubtitle: "Artikel, Analysen und Trends zur Weinverwaltung in der Gastronomie.", guidesQ: "Suchen Sie praktische Leitfäden zur Optimierung Ihrer Weinkarte?", guidesBtn: "Ratgeber und Ressourcen ansehen →", featured: "Empfohlen" },
-  pt: { seoTitle: "Blog", seoDesc: "Descubra as últimas novidades do mundo do vinho com o Winerim.", readMore: "Ler artigo", heroLabel: "Centro de conhecimento", heroSubtitle: "Artigos, análises e tendências sobre a gestão de vinhos na restauração.", guidesQ: "Procura guias práticos para otimizar a sua carta de vinhos?", guidesBtn: "Ver guias e recursos →", featured: "Destaque" },
+  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer artÃ­culo", heroLabel: "Centro de conocimiento", heroSubtitle: "ArtÃ­culos, anÃ¡lisis y tendencias sobre la gestiÃ³n de vinos en restauraciÃ³n.", guidesQ: "Â¿Buscas guÃ­as prÃ¡cticas para optimizar tu carta de vinos?", guidesBtn: "Ver guÃ­as y recursos â", featured: "Destacado" },
+  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources â", featured: "Featured" },
+  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novitÃ  dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse â", featured: "In evidenza" },
+  fr: { seoTitle: "Blog", seoDesc: "DÃ©couvrez l'actualitÃ© du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources â", featured: "Ã la une" },
+  de: { seoTitle: "Blog", seoDesc: "Entdecken Sie die neuesten Trends der Weinwelt mit Winerim.", readMore: "Artikel lesen", heroLabel: "Wissenszentrum", heroSubtitle: "Artikel, Analysen und Trends zur Weinverwaltung in der Gastronomie.", guidesQ: "Suchen Sie praktische LeitfÃ¤den zur Optimierung Ihrer Weinkarte?", guidesBtn: "Ratgeber und Ressourcen ansehen â", featured: "Empfohlen" },
+  pt: { seoTitle: "Blog", seoDesc: "Descubra as Ãºltimas novidades do mundo do vinho com o Winerim.", readMore: "Ler artigo", heroLabel: "Centro de conhecimento", heroSubtitle: "Artigos, anÃ¡lises e tendÃªncias sobre a gestÃ£o de vinhos na restauraÃ§Ã£o.", guidesQ: "Procura guias prÃ¡ticos para otimizar a sua carta de vinhos?", guidesBtn: "Ver guias e recursos â", featured: "Destaque" },
 };
 
 const formatDate = (dateStr: string | null, locale = "es-ES") => {
@@ -40,12 +40,17 @@ const formatDate = (dateStr: string | null, locale = "es-ES") => {
   return d.toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 };
 
+const langToLocale: Record<string, string> = {
+  es: "es-ES", en: "en-US", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
+};
+
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("blog");
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
+  const locale = langToLocale[lang] || "es-ES";
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,6 +58,7 @@ const Blog = () => {
         .from("articles")
         .select("slug, title, excerpt, image_url, category, published_at")
         .eq("published", true)
+        .eq("lang", lang)
         .neq("category", "interview")
         .order("published_at", { ascending: false });
 
@@ -66,22 +72,42 @@ const Blog = () => {
           publishedAt: a.published_at,
         })));
       } else {
-        const staticPosts = Object.values(staticArticles)
-          .filter(a => a.type !== "interview")
-          .map(a => ({
+        // Fallback: if no articles in this language, show Spanish
+        const { data: fallbackData } = await supabase
+          .from("articles")
+          .select("slug, title, excerpt, image_url, category, published_at")
+          .eq("published", true)
+          .eq("lang", "es")
+          .neq("category", "interview")
+          .order("published_at", { ascending: false });
+
+        if (fallbackData && fallbackData.length > 0) {
+          setBlogPosts(fallbackData.map(a => ({
             title: a.title,
-            excerpt: a.subtitle || "",
-            image: a.heroImage,
+            excerpt: a.excerpt || "",
+            image: a.image_url || "",
             category: a.category,
             slug: `/article/${a.slug}`,
-            publishedAt: null,
-          }));
-        setBlogPosts(staticPosts);
+            publishedAt: a.published_at,
+          })));
+        } else {
+          const staticPosts = Object.values(staticArticles)
+            .filter(a => a.type !== "interview")
+            .map(a => ({
+              title: a.title,
+              excerpt: a.subtitle || "",
+              image: a.heroImage,
+              category: a.category,
+              slug: `/article/${a.slug}`,
+              publishedAt: null,
+            }));
+          setBlogPosts(staticPosts);
+        }
       }
       setLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, [lang]);
 
   if (loading) {
     return (
@@ -120,7 +146,7 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Featured article — full width card */}
+        {/* Featured article â full width card */}
         {featured && (
           <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
             <ScrollReveal>
@@ -140,7 +166,7 @@ const Blog = () => {
                         {t.featured}
                       </span>
                       {featured.publishedAt && (
-                        <span className="text-xs text-muted-foreground">{formatDate(featured.publishedAt)}</span>
+                        <span className="text-xs text-muted-foreground">{formatDate(featured.publishedAt, locale)}</span>
                       )}
                     </div>
                     <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4 group-hover:text-wine transition-colors leading-tight">
@@ -159,7 +185,7 @@ const Blog = () => {
           </section>
         )}
 
-        {/* Grid — spacious 2-col cards */}
+        {/* Grid â spacious 2-col cards */}
         <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
           <div className="grid md:grid-cols-2 gap-8">
             {rest.map((post, i) => (
@@ -178,8 +204,8 @@ const Blog = () => {
                       <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-accent">{post.category}</span>
                       {post.publishedAt && (
                         <>
-                          <span className="text-muted-foreground/30">·</span>
-                          <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt)}</span>
+                          <span className="text-muted-foreground/30">Â·</span>
+                          <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt, locale)}</span>
                         </>
                       )}
                     </div>
@@ -199,14 +225,14 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Next steps flow: MOFU → BOFU → conversion */}
+        {/* Next steps flow: MOFU â BOFU â conversion */}
         <NextSteps
-          title="Profundiza y pasa a la acción"
-          subtitle="De lo informativo a lo práctico: herramientas, guías y soluciones."
+          title="Profundiza y pasa a la acciÃ³n"
+          subtitle="De lo informativo a lo prÃ¡ctico: herramientas, guÃ­as y soluciones."
           steps={[
-            { to: "/analisis-carta", label: "Analiza tu carta gratis", description: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", type: "tool" },
-            { to: "/guias-y-recursos", label: "Guías y recursos prácticos", description: "Plantillas, checklists y guías paso a paso para mejorar tu carta.", type: "guide" },
-            { to: "/comparativas", label: "Compara Winerim con alternativas", description: "Comparativas claras para decidir qué solución encaja.", type: "solution" },
+            { to: "/analisis-carta", label: "Analiza tu carta gratis", description: "Sube tu carta y recibe un diagnÃ³stico con recomendaciones concretas.", type: "tool" },
+            { to: "/guias-y-recursos", label: "GuÃ­as y recursos prÃ¡cticos", description: "Plantillas, checklists y guÃ­as paso a paso para mejorar tu carta.", type: "guide" },
+            { to: "/comparativas", label: "Compara Winerim con alternativas", description: "Comparativas claras para decidir quÃ© soluciÃ³n encaja.", type: "solution" },
             { to: "/demo", label: "Solicitar demo personalizada", description: "Demo con tu carta real. Sin compromiso.", type: "solution" },
           ]}
         />
@@ -214,9 +240,9 @@ const Blog = () => {
         <InternalLinks
           title="Recursos complementarios"
           links={[
-            { to: "/herramientas", label: "Herramientas gratuitas de análisis y pricing", type: "tool" },
+            { to: "/herramientas", label: "Herramientas gratuitas de anÃ¡lisis y pricing", type: "tool" },
             { to: "/benchmarks-playbooks", label: "Benchmarks y playbooks del sector", type: "resource" },
-            { to: "/casos-exito", label: "Casos de éxito de restaurantes reales", type: "guide" },
+            { to: "/casos-exito", label: "Casos de Ã©xito de restaurantes reales", type: "guide" },
             { to: "/software-carta-de-vinos", label: "Software de carta de vinos inteligente", type: "solution" },
           ]}
         />
