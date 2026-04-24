@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSeoPage } from "@/hooks/useSeoPage";
 import CityTemplate from "@/components/templates/CityTemplate";
@@ -8,6 +9,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
 const SeoPageLoader = () => (
   <div className="min-h-screen bg-background">
@@ -24,12 +27,12 @@ const SeoPageLoader = () => (
 
 const SeoPageNotFound = () => (
   <div className="min-h-screen bg-background flex flex-col">
-    <SEOHead title="Página no encontrada | Winerim" description="Esta página no existe o no está disponible." noindex />
+    <SEOHead title="PÃ¡gina no encontrada | Winerim" description="Esta pÃ¡gina no existe o no estÃ¡ disponible." noindex />
     <Navbar />
     <div className="flex-1 flex items-center justify-center">
       <div className="text-center">
-        <h1 className="font-heading text-4xl font-bold mb-4">Página no encontrada</h1>
-        <p className="text-muted-foreground mb-8">Lo sentimos, esta página no existe o no está disponible.</p>
+        <h1 className="font-heading text-4xl font-bold mb-4">PÃ¡gina no encontrada</h1>
+        <p className="text-muted-foreground mb-8">Lo sentimos, esta pÃ¡gina no existe o no estÃ¡ disponible.</p>
         <Link to="/" className="bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase">
           Volver al inicio
         </Link>
@@ -60,17 +63,28 @@ const genericClusters = new Set([
 function slugFromPathname(pathname: string): string {
   // Remove leading slash
   const path = pathname.replace(/^\//, "");
-  // Language-prefixed routes: /de/weinkarten-software-berlin → de/weinkarten-software-berlin
+  // Language-prefixed routes: /de/weinkarten-software-berlin â de/weinkarten-software-berlin
   const langPrefixMatch = path.match(/^(en|it|fr|de|pt)\/(.*)/);
   if (langPrefixMatch) return langPrefixMatch[2];
-  // Root (es) route: /software-carta-de-vinos-madrid → software-carta-de-vinos-madrid
+  // Root (es) route: /software-carta-de-vinos-madrid â software-carta-de-vinos-madrid
   return path;
 }
+
+const VALID_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
 
 const SeoPage = () => {
   const { pathname } = useLocation();
   const slug = slugFromPathname(pathname);
   const { page, related, loading, notFound } = useSeoPage(slug);
+  const { setLangOverride } = useLanguage();
+
+  // Override language context with the page's actual language from Supabase
+  useEffect(() => {
+    if (page?.lang && VALID_LANGS.includes(page.lang as SupportedLang)) {
+      setLangOverride(page.lang as SupportedLang);
+    }
+    return () => setLangOverride(null);
+  }, [page?.lang, setLangOverride]);
 
   if (loading) return <SeoPageLoader />;
   if (notFound || !page) return <SeoPageNotFound />;
