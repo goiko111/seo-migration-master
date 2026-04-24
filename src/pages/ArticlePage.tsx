@@ -19,6 +19,8 @@ import ArticleRelatedContent, { type RelatedLink } from "@/components/article/Ar
 import { parseMarkdownSections, type ParsedSection } from "@/components/article/parseMarkdownSections";
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { SupportedLang } from "@/i18n/types";
 
 interface ArticleData {
   title: string;
@@ -29,11 +31,25 @@ interface ArticleData {
   author?: string;
   publishedAt?: string;
   relatedLinks?: RelatedLink[] | null;
+  lang?: string;
 }
+
+const VALID_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
+
+const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDesc: string; backToBlog: string; interview: string; article: string; backToCorner: string }> = {
+  es: { loading: "Cargando...", notFoundTitle: "ArtÃ­culo no encontrado", notFoundDesc: "El contenido que buscas no estÃ¡ disponible.", backToBlog: "Volver al blog", interview: "Entrevista", article: "ArtÃ­culo", backToCorner: "Sommelier Corner" },
+  en: { loading: "Loading...", notFoundTitle: "Article not found", notFoundDesc: "The content you're looking for is not available.", backToBlog: "Back to blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
+  it: { loading: "Caricamento...", notFoundTitle: "Articolo non trovato", notFoundDesc: "Il contenuto che cerchi non Ã¨ disponibile.", backToBlog: "Torna al blog", interview: "Intervista", article: "Articolo", backToCorner: "Sommelier Corner" },
+  fr: { loading: "Chargement...", notFoundTitle: "Article introuvable", notFoundDesc: "Le contenu que vous recherchez n'est pas disponible.", backToBlog: "Retour au blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
+  de: { loading: "Wird geladen...", notFoundTitle: "Artikel nicht gefunden", notFoundDesc: "Der gesuchte Inhalt ist nicht verfÃ¼gbar.", backToBlog: "ZurÃ¼ck zum Blog", interview: "Interview", article: "Artikel", backToCorner: "Sommelier Corner" },
+  pt: { loading: "A carregar...", notFoundTitle: "Artigo nÃ£o encontrado", notFoundDesc: "O conteÃºdo que procura nÃ£o estÃ¡ disponÃ­vel.", backToBlog: "Voltar ao blog", interview: "Entrevista", article: "Artigo", backToCorner: "Sommelier Corner" },
+};
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<ArticleData | null | undefined>(undefined);
+  const { lang, setLangOverride } = useLanguage();
+  const t = i18n[lang] || i18n.es;
 
   useEffect(() => {
     if (!slug) { setArticle(null); return; }
@@ -41,12 +57,17 @@ const ArticlePage = () => {
     const fetchArticle = async () => {
       const { data } = await supabase
         .from("articles")
-        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links")
+        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
         .eq("slug", slug)
         .eq("published", true)
         .maybeSingle();
 
       if (data) {
+        // Set language override based on article's lang
+        if (data.lang && VALID_LANGS.includes(data.lang as SupportedLang)) {
+          setLangOverride(data.lang as SupportedLang);
+        }
+
         setArticle({
           title: data.title,
           subtitle: data.category === "interview"
@@ -58,6 +79,7 @@ const ArticlePage = () => {
           author: data.author || undefined,
           publishedAt: data.published_at || undefined,
           relatedLinks: Array.isArray(data.related_links) ? (data.related_links as unknown as RelatedLink[]) : null,
+          lang: data.lang || "es",
         });
       } else {
         const staticArticle = getArticleBySlug(slug);
@@ -75,7 +97,9 @@ const ArticlePage = () => {
       }
     };
     fetchArticle();
-  }, [slug]);
+
+    return () => setLangOverride(null);
+  }, [slug, setLangOverride]);
 
   const sections = useMemo(() => {
     if (!article?.body) return [];
@@ -91,7 +115,7 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">Cargando...</p></main>
+        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">{t.loading}</p></main>
         <Footer />
       </div>
     );
@@ -101,11 +125,11 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <SEOHead title="Artículo no encontrado" />
+        <SEOHead title={t.notFoundTitle} />
         <main className="pt-32 pb-24 text-center section-padding">
-          <h1 className="font-heading text-4xl font-bold mb-4">Artículo no encontrado</h1>
-          <p className="text-muted-foreground mb-8">El contenido que buscas no está disponible.</p>
-          <Link to="/blog" className="text-accent underline">Volver al blog</Link>
+          <h1 className="font-heading text-4xl font-bold mb-4">{t.notFoundTitle}</h1>
+          <p className="text-muted-foreground mb-8">{t.notFoundDesc}</p>
+          <Link to="/blog" className="text-accent underline">{t.backToBlog}</Link>
         </main>
         <Footer />
       </div>
@@ -113,7 +137,7 @@ const ArticlePage = () => {
   }
 
   const backLink = article.type === "interview" ? "/sommelier-corner" : "/blog";
-  const backLabel = article.type === "interview" ? "Sommelier Corner" : "Blog";
+  const backLabel = article.type === "interview" ? t.backToCorner : "Blog";
   const articleUrl = `https://winerim.wine/article/${slug}`;
   const midIndex = Math.floor(sections.length / 2);
 
@@ -145,7 +169,7 @@ const ArticlePage = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <BookOpen size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine">
-              {article.type === "interview" ? "Entrevista" : "Artículo"}
+              {article.type === "interview" ? t.interview : t.article}
             </span>
           </motion.div>
 
@@ -165,9 +189,9 @@ const ArticlePage = () => {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
               className="flex items-center gap-4 mb-10 text-sm text-muted-foreground">
               {article.author && <span className="font-medium text-foreground">{article.author}</span>}
-              {article.author && article.publishedAt && <span className="text-muted-foreground/30">·</span>}
+              {article.author && article.publishedAt && <span className="text-muted-foreground/30">Â·</span>}
               {article.publishedAt && (
-                <time>{new Date(article.publishedAt).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
+                <time>{new Date(article.publishedAt).toLocaleDateString(lang === "en" ? "en-US" : lang === "it" ? "it-IT" : lang === "fr" ? "fr-FR" : lang === "de" ? "de-DE" : lang === "pt" ? "pt-PT" : "es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
               )}
             </motion.div>
           )}
@@ -228,7 +252,7 @@ const ArticlePage = () => {
         <Link to={backLink}
           className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-accent hover:underline">
           <ArrowLeft className="w-4 h-4" />
-          Volver a {backLabel}
+          {article.type === "interview" ? `â ${t.backToCorner}` : `â ${t.backToBlog}`}
         </Link>
       </section>
 
