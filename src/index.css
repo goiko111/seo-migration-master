@@ -176,4 +176,79 @@
   will-change: transform;
 }
 
+/* ── Article section tables ── */
+.article-section-body table,
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  display: block;
+}
+
+.article-section-body thead,
+.prose thead {
+  background: hsl(var(--wine) / 0.12);
+}
+
+.article-section-body th,
+.prose th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  border-bottom: 2px solid hsl(var(--accent) / 0.4);
+  white-space: nowrap;
+}
+
+.article-section-body td,
+.prose td {
+  padding: 0.65rem 1rem;
+  color: hsl(var(--muted-foreground));
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+
+.article-section-body tbody tr:hover,
+.prose tbody tr:hover {
+  background: hsl(var(--wine) / 0.05);
+}
+
+.article-section-body tbody tr:nth-child(even),
+.prose tbody tr:nth-child(even) {
+  background: hsl(140 2% 12%);
+}
+
+/* ── Article section lists ── */
+.article-section-body ul,
+.article-section-body ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.article-section-body ul {
+  list-style-type: disc;
+}
+
+.article-section-body ol {
+  list-style-type: decimal;
+}
+
+.article-section-body li {
+  margin-bottom: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.article-section-body li::marker {
+  color: hsl(var(--accent));
+}
+
+/* ── Article section strong / bold text ── */
+.article-section-body strong {
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+
 /* Interview question styling — handled via ReactMarkdown components instead */

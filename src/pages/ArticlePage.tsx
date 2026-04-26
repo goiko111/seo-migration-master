@@ -220,7 +220,7 @@ const ArticlePage = () => {
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <div className="prose prose-lg prose-invert max-w-none
+              <div className="article-section-body prose prose-lg prose-invert max-w-none
                 prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:text-base prose-p:md:text-lg prose-p:mb-6
                 prose-strong:text-foreground
                 prose-blockquote:border-l-accent prose-blockquote:border-l-4 prose-blockquote:pl-8 prose-blockquote:py-4 prose-blockquote:my-10 prose-blockquote:italic prose-blockquote:text-foreground/80 prose-blockquote:font-heading prose-blockquote:text-xl prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-xl
