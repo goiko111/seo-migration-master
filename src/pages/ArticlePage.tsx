@@ -37,12 +37,12 @@ interface ArticleData {
 const VALID_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
 
 const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDesc: string; backToBlog: string; interview: string; article: string; backToCorner: string }> = {
-  es: { loading: "Cargando...", notFoundTitle: "ArtÃ­culo no encontrado", notFoundDesc: "El contenido que buscas no estÃ¡ disponible.", backToBlog: "Volver al blog", interview: "Entrevista", article: "ArtÃ­culo", backToCorner: "Sommelier Corner" },
+  es: { loading: "Cargando...", notFoundTitle: "Artículo no encontrado", notFoundDesc: "El contenido que buscas no está disponible.", backToBlog: "Volver al blog", interview: "Entrevista", article: "Artículo", backToCorner: "Sommelier Corner" },
   en: { loading: "Loading...", notFoundTitle: "Article not found", notFoundDesc: "The content you're looking for is not available.", backToBlog: "Back to blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
-  it: { loading: "Caricamento...", notFoundTitle: "Articolo non trovato", notFoundDesc: "Il contenuto che cerchi non Ã¨ disponibile.", backToBlog: "Torna al blog", interview: "Intervista", article: "Articolo", backToCorner: "Sommelier Corner" },
+  it: { loading: "Caricamento...", notFoundTitle: "Articolo non trovato", notFoundDesc: "Il contenuto che cerchi non è disponibile.", backToBlog: "Torna al blog", interview: "Intervista", article: "Articolo", backToCorner: "Sommelier Corner" },
   fr: { loading: "Chargement...", notFoundTitle: "Article introuvable", notFoundDesc: "Le contenu que vous recherchez n'est pas disponible.", backToBlog: "Retour au blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
-  de: { loading: "Wird geladen...", notFoundTitle: "Artikel nicht gefunden", notFoundDesc: "Der gesuchte Inhalt ist nicht verfÃ¼gbar.", backToBlog: "ZurÃ¼ck zum Blog", interview: "Interview", article: "Artikel", backToCorner: "Sommelier Corner" },
-  pt: { loading: "A carregar...", notFoundTitle: "Artigo nÃ£o encontrado", notFoundDesc: "O conteÃºdo que procura nÃ£o estÃ¡ disponÃ­vel.", backToBlog: "Voltar ao blog", interview: "Entrevista", article: "Artigo", backToCorner: "Sommelier Corner" },
+  de: { loading: "Wird geladen...", notFoundTitle: "Artikel nicht gefunden", notFoundDesc: "Der gesuchte Inhalt ist nicht verfügbar.", backToBlog: "Zurück zum Blog", interview: "Interview", article: "Artikel", backToCorner: "Sommelier Corner" },
+  pt: { loading: "A carregar...", notFoundTitle: "Artigo não encontrado", notFoundDesc: "O conteúdo que procura não está disponível.", backToBlog: "Voltar ao blog", interview: "Entrevista", article: "Artigo", backToCorner: "Sommelier Corner" },
 };
 
 const ArticlePage = () => {
@@ -54,13 +54,27 @@ const ArticlePage = () => {
   useEffect(() => {
     if (!slug) { setArticle(null); return; }
 
+    // Build the DB slug: Spanish articles use the base slug, other languages append _lang suffix
+    const dbSlug = lang === "es" ? slug : `${slug}_${lang}`;
+
     const fetchArticle = async () => {
-      const { data } = await supabase
+      // Try the language-specific slug first
+      let { data } = await supabase
         .from("articles")
         .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
-        .eq("slug", slug)
+        .eq("slug", dbSlug)
         .eq("published", true)
         .maybeSingle();
+
+      // Fallback to Spanish base slug if no translation exists
+      if (!data && lang !== "es") {
+        ({ data } = await supabase
+          .from("articles")
+          .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
+          .eq("slug", slug)
+          .eq("published", true)
+          .maybeSingle());
+      }
 
       if (data) {
         // Set language override based on article's lang
@@ -99,7 +113,7 @@ const ArticlePage = () => {
     fetchArticle();
 
     return () => setLangOverride(null);
-  }, [slug, setLangOverride]);
+  }, [slug, lang, setLangOverride]);
 
   const sections = useMemo(() => {
     if (!article?.body) return [];
@@ -189,7 +203,7 @@ const ArticlePage = () => {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
               className="flex items-center gap-4 mb-10 text-sm text-muted-foreground">
               {article.author && <span className="font-medium text-foreground">{article.author}</span>}
-              {article.author && article.publishedAt && <span className="text-muted-foreground/30">Â·</span>}
+              {article.author && article.publishedAt && <span className="text-muted-foreground/30">·</span>}
               {article.publishedAt && (
                 <time>{new Date(article.publishedAt).toLocaleDateString(lang === "en" ? "en-US" : lang === "it" ? "it-IT" : lang === "fr" ? "fr-FR" : lang === "de" ? "de-DE" : lang === "pt" ? "pt-PT" : "es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
               )}
@@ -252,7 +266,7 @@ const ArticlePage = () => {
         <Link to={backLink}
           className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-accent hover:underline">
           <ArrowLeft className="w-4 h-4" />
-          {article.type === "interview" ? `â ${t.backToCorner}` : `â ${t.backToBlog}`}
+          {article.type === "interview" ? `← ${t.backToCorner}` : `← ${t.backToBlog}`}
         </Link>
       </section>
 
