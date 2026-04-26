@@ -20,7 +20,6 @@ import { parseMarkdownSections, type ParsedSection } from "@/components/article/
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
 
 interface ArticleData {
   title: string;
@@ -34,8 +33,6 @@ interface ArticleData {
   lang?: string;
 }
 
-const VALID_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
-
 const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDesc: string; backToBlog: string; interview: string; article: string; backToCorner: string }> = {
   es: { loading: "Cargando...", notFoundTitle: "Artículo no encontrado", notFoundDesc: "El contenido que buscas no está disponible.", backToBlog: "Volver al blog", interview: "Entrevista", article: "Artículo", backToCorner: "Sommelier Corner" },
   en: { loading: "Loading...", notFoundTitle: "Article not found", notFoundDesc: "The content you're looking for is not available.", backToBlog: "Back to blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
@@ -48,7 +45,7 @@ const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDes
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<ArticleData | null | undefined>(undefined);
-  const { lang, setLangOverride } = useLanguage();
+  const { lang } = useLanguage();
   const t = i18n[lang] || i18n.es;
 
   useEffect(() => {
@@ -77,11 +74,6 @@ const ArticlePage = () => {
       }
 
       if (data) {
-        // Set language override based on article's lang
-        if (data.lang && VALID_LANGS.includes(data.lang as SupportedLang)) {
-          setLangOverride(data.lang as SupportedLang);
-        }
-
         setArticle({
           title: data.title,
           subtitle: data.category === "interview"
@@ -111,9 +103,7 @@ const ArticlePage = () => {
       }
     };
     fetchArticle();
-
-    return () => setLangOverride(null);
-  }, [slug, lang, setLangOverride]);
+  }, [slug, lang]);
 
   const sections = useMemo(() => {
     if (!article?.body) return [];
