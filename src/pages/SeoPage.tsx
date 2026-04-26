@@ -27,12 +27,12 @@ const SeoPageLoader = () => (
 
 const SeoPageNotFound = () => (
   <div className="min-h-screen bg-background flex flex-col">
-    <SEOHead title="PÃ¡gina no encontrada | Winerim" description="Esta pÃ¡gina no existe o no estÃ¡ disponible." noindex />
+    <SEOHead title="Página no encontrada | Winerim" description="Esta página no existe o no está disponible." noindex />
     <Navbar />
     <div className="flex-1 flex items-center justify-center">
       <div className="text-center">
-        <h1 className="font-heading text-4xl font-bold mb-4">PÃ¡gina no encontrada</h1>
-        <p className="text-muted-foreground mb-8">Lo sentimos, esta pÃ¡gina no existe o no estÃ¡ disponible.</p>
+        <h1 className="font-heading text-4xl font-bold mb-4">Página no encontrada</h1>
+        <p className="text-muted-foreground mb-8">Lo sentimos, esta página no existe o no está disponible.</p>
         <Link to="/" className="bg-gradient-wine text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase">
           Volver al inicio
         </Link>
