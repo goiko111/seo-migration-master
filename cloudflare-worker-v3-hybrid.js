@@ -56,6 +56,8 @@ const SEO_ALIASES = {
   '/wine-pricing-tool': '/en/wine-pricing-tool',
   '/wine-list-benchmark': '/en/wine-list-benchmark',
   '/en/digital-wine-list': '/en/wine-list-management-software',
+  // Spanish aliases for English-slug tools
+  '/herramientas/puntuacion-carta-vinos': '/herramientas/wine-list-score',
 };
 
 // ─── NOINDEX routes (served but with noindex header) ───

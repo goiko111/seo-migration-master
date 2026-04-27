@@ -268,8 +268,14 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/benchmarks-playbooks/playbook-formar-personal', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/benchmarks-playbooks/playbook-decidir-compras-datos', priority: '0.6', changefreq: 'monthly', multilang: false },
 
-  // Library
-  { esPath: '/biblioteca-vino', priority: '0.6', changefreq: 'weekly', multilang: false },
+  // Library hubs
+  { esPath: '/biblioteca-vino', priority: '0.7', changefreq: 'weekly', multilang: false },
+  { esPath: '/biblioteca-vino/regiones', priority: '0.6', changefreq: 'weekly', multilang: false },
+  { esPath: '/biblioteca-vino/uvas', priority: '0.6', changefreq: 'weekly', multilang: false },
+  { esPath: '/biblioteca-vino/estilos', priority: '0.6', changefreq: 'weekly', multilang: false },
+  { esPath: '/biblioteca-vino/maridajes', priority: '0.6', changefreq: 'weekly', multilang: false },
+  { esPath: '/biblioteca-vino/guia-servicio', priority: '0.5', changefreq: 'monthly', multilang: false },
+  { esPath: '/biblioteca-vino/glosario', priority: '0.5', changefreq: 'monthly', multilang: false },
 
   // Problems
   { esPath: '/problemas/carta-de-vinos-no-vende', priority: '0.6', changefreq: 'monthly', multilang: false },
@@ -358,6 +364,30 @@ Deno.serve(async (req) => {
       for (const page of seoPages) {
         const lastmod = page.updated_at ? page.updated_at.split('T')[0] : now;
         xml += urlBlock(`/${page.slug}`, lastmod, 'monthly', '0.5');
+      }
+    }
+
+    // ── Biblioteca del Vino: detail pages ──
+    const GRAPE_SLUGS = ["tempranillo","garnacha","cabernet-sauvignon","pinot-noir","chardonnay","sauvignon-blanc","nebbiolo","albarino","syrah","riesling","merlot","malbec","sangiovese","monastrell","mencia","verdejo","godello","cabernet-franc","gamay","gewurztraminer","viognier","chenin-blanc","muscat","gruner-veltliner","pinot-grigio","barbera","touriga-nacional","primitivo","nero-d-avola","aglianico","carmenere","tannat","cinsault","carignan","petit-verdot","torrontes","muller-thurgau","silvaner","marsanne","roussanne","semillon","pedro-ximenez","palomino","vermentino","fiano","assyrtiko","furmint","glera","pinotage","corvina","nerello-mascalese","montepulciano","bobal","viura","garnacha-tintorera","graciano","muscadet","trebbiano","dolcetto","lagrein","xinomavro","blaufrankisch","bonarda","zweigelt","st-laurent","trollinger","kadarka","plavac-mali","saperavi","greco","mazuelo","garganega","arneis","cortese","encruzado","antao-vaz","arinto","loureiro","rkatsiteli","koshu","welschriesling","moscatel-rosado","xarello","parellada","prieto-picudo","listan-negro","touriga-franca","treixadura","pinot-meunier","baga","castelao","hondarrabi-zuri","airen","pais","malvasia","picpoul","falanghina"];
+    for (const slug of GRAPE_SLUGS) {
+      xml += urlBlock(`/biblioteca-vino/uvas/${slug}`, now, 'monthly', '0.5');
+    }
+
+    const STYLE_SLUGS = ["tinto","tinto-joven","tinto-crianza","tinto-reserva","tinto-ligero","tinto-cuerpo","tinto-maceracion-carbonica","blanco","blanco-joven","blanco-fermentado-barrica","blanco-crianza-lias","blanco-mineral","blanco-semidulce","rosado","rosado-provenzal","rosado-cuerpo","rosado-semidulce","clarete","espumoso","champagne","cava","prosecco","cremant","sekt","franciacorta","pet-nat","espumante","generoso","fino-manzanilla","amontillado","oloroso","palo-cortado","pedro-ximenez","oporto-ruby","oporto-tawny","oporto-vintage","madeira","marsala","moscatel-de-setubal","dulce-natural","sauternes-botrytizados","vendimia-tardia","eiswein","passito","vdn","moscatel-dulce","tokaji-aszu","orange-wine","orange-maceracion-corta","orange-maceracion-larga","qvevri-wine","vino-tinaja","ecologico-biodinamico-natural","ecologico-certificado","biodinamico","vino-natural","vino-anfora","crémant","botrytis","icewine"];
+    for (const slug of STYLE_SLUGS) {
+      xml += urlBlock(`/biblioteca-vino/estilos/${slug}`, now, 'monthly', '0.5');
+    }
+
+    const PAIRING_SLUGS = ["carnes-rojas","aves-y-caza","pescados-y-mariscos","quesos","pasta-arroces-y-legumbres","verduras-y-cocina-vegetariana","embutidos-y-charcuteria","postres-y-chocolate","cocina-asiatica-y-fusion","tapas-y-aperitivos","solomillo-de-ternera","cordero-asado","pato-confitado","atun-rojo","pulpo-gallego","queso-manchego","queso-azul","queso-brie-camembert","queso-parmigiano-reggiano","risotto-setas","paella","pasta-carbonara","ceviche","curry","foie-gras","jamon-iberico","setas-y-trufas","cochinillo-lechon","lubina-dorada","ostras","tartar-de-atun","ramen","thai-curry","empanadas","queso-de-cabra","gazpacho","tortilla-espanola","hamburguesa-gourmet","tarta-de-queso","frutas-tropicales","chocolate-negro"];
+    for (const slug of PAIRING_SLUGS) {
+      xml += urlBlock(`/biblioteca-vino/maridajes/${slug}`, now, 'monthly', '0.5');
+    }
+
+    const REGION_MAP: Record<string, string[]> = {"espana":["rioja","ribera-del-duero","priorat","rias-baixas","jerez","penedes","txakoli","ribeiro","valdeorras","monterrei","ribeira-sacra"],"francia":["bordeaux","champagne","bourgogne","vallee-du-rhone","alsacia","val-de-loire","languedoc-roussillon","provence","beaujolais","jura","chablis","medoc","saint-emilion","pomerol","cotes-du-rhone","chateauneuf-du-pape","graves","sauternes","margaux","pauillac","saint-julien","haut-medoc","entre-deux-mers","fronsac","cote-de-nuits","cote-de-beaune","meursault","puligny-montrachet","gevrey-chambertin","vosne-romanee","nuits-saint-georges","pommard","volnay","hermitage","cote-rotie","condrieu","sancerre","pouilly-fume","muscadet","chinon","vouvray","gigondas","cahors","cremant-bourgogne","madiran","bandol","cassis","tavel","savennieres","bellet"],"italia":["toscana","piemonte","veneto","sicilia","puglia","friuli","sardegna","trentino-alto-adige","umbria","abruzzo","marche"],"estados-unidos":["napa-valley","willamette-valley","sonoma-county","paso-robles","santa-barbara-county","russian-river-valley","alexander-valley","dry-creek-valley","walla-walla-valley","columbia-valley","finger-lakes","virginia","texas-hill-country","lodi","central-coast","santa-rita-hills","anderson-valley"],"australia":["barossa-valley"],"portugal":["douro","alentejo","vinho-verde","dao","bairrada","lisboa","tejo","setubal-palmela","algarve","madeira","acores","tras-os-montes","tavora-varosa","beira-interior","colares"],"argentina":["mendoza","valle-de-uco","salta-cafayate","san-juan","patagonia-rio-negro","lujan-de-cuyo"],"chile":["maipo","colchagua","casablanca","rapel-valley","aconcagua","leyda","bio-bio","itata","limari","elqui"],"alemania":["mosel","rheingau","pfalz","rheinhessen","baden","franken","württemberg","nahe","ahr","mittelrhein","saale-unstrut","sachsen"],"sudafrica":["stellenbosch","swartland"],"hungria":["tokaj","eger"],"grecia":["santorini"],"austria":["wachau","burgenland"],"nueva-zelanda":["central-otago","martinborough"],"uruguay":["canelones","maldonado","rivera"],"libano":["bekaa-valley"]};
+    for (const [country, regions] of Object.entries(REGION_MAP)) {
+      xml += urlBlock(`/biblioteca-vino/regiones/${country}`, now, 'monthly', '0.5');
+      for (const region of regions) {
+        xml += urlBlock(`/biblioteca-vino/regiones/${country}/${region}`, now, 'monthly', '0.4');
       }
     }
 
