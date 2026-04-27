@@ -63,14 +63,18 @@ const Blog = () => {
         .order("published_at", { ascending: false });
 
       if (data && data.length > 0) {
-        setBlogPosts(data.map(a => ({
-          title: a.title,
-          excerpt: a.excerpt || "",
-          image: a.image_url || "",
-          category: a.category,
-          slug: `/article/${a.slug}`,
-          publishedAt: a.published_at,
-        })));
+        setBlogPosts(data.map(a => {
+          // Strip _lang suffix so ArticlePage can construct the correct DB slug
+          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
+          return {
+            title: a.title,
+            excerpt: a.excerpt || "",
+            image: a.image_url || "",
+            category: a.category,
+            slug: `/article/${baseSlug}`,
+            publishedAt: a.published_at,
+          };
+        }));
       } else {
         // Fallback: if no articles in this language, show Spanish
         const { data: fallbackData } = await supabase

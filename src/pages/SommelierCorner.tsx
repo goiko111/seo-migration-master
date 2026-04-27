@@ -61,10 +61,8 @@ const langContent: Record<string, LangContent> = {
   },
 };
 
-const formatDate = (dateStr: string | null) => {
-  if (!dateStr) return "";
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+const localeMap: Record<string, string> = {
+  es: "es-ES", en: "en-US", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
 };
 
 const SommelierCorner = () => {
@@ -74,21 +72,44 @@ const SommelierCorner = () => {
   const { lang, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
 
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString(localeMap[lang] || "es-ES", { day: "numeric", month: "long", year: "numeric" });
+  };
+
   useEffect(() => {
     const fetchInterviews = async () => {
-      const { data } = await supabase
+      // Fetch interviews for the current language
+      let { data } = await supabase
         .from("articles")
         .select("slug, title, excerpt, image_url, author, author_role, published_at")
         .eq("published", true)
         .eq("category", "interview")
+        .eq("lang", lang)
         .order("published_at", { ascending: false });
 
+      // Fallback to Spanish if no interviews exist in the current language
+      if ((!data || data.length === 0) && lang !== "es") {
+        ({ data } = await supabase
+          .from("articles")
+          .select("slug, title, excerpt, image_url, author, author_role, published_at")
+          .eq("published", true)
+          .eq("category", "interview")
+          .eq("lang", "es")
+          .order("published_at", { ascending: false }));
+      }
+
       if (data && data.length > 0) {
-        setInterviews(data.map(a => ({
-          quote: a.title, name: a.author || "", role: a.author_role || "",
-          excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${a.slug}`,
-          publishedAt: a.published_at,
-        })));
+        setInterviews(data.map(a => {
+          // For translated interviews, strip the _lang suffix from slug for the URL
+          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
+          return {
+            quote: a.title, name: a.author || "", role: a.author_role || "",
+            excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${baseSlug}`,
+            publishedAt: a.published_at,
+          };
+        }));
       } else {
         const staticInterviews = Object.values(staticArticles)
           .filter(a => a.type === "interview")
@@ -102,7 +123,7 @@ const SommelierCorner = () => {
       setLoading(false);
     };
     fetchInterviews();
-  }, []);
+  }, [lang]);
 
   if (loading) {
     return (
