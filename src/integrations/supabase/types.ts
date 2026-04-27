@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       articles: {
         Row: {
+          article_group: string | null
           author: string | null
           author_image: string | null
           author_role: string | null
@@ -25,6 +26,7 @@ export type Database = {
           excerpt: string | null
           id: string
           image_url: string | null
+          lang: string
           published: boolean
           published_at: string | null
           related_links: Json | null
@@ -33,6 +35,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          article_group?: string | null
           author?: string | null
           author_image?: string | null
           author_role?: string | null
@@ -42,6 +45,7 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          lang?: string
           published?: boolean
           published_at?: string | null
           related_links?: Json | null
@@ -50,6 +54,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          article_group?: string | null
           author?: string | null
           author_image?: string | null
           author_role?: string | null
@@ -59,6 +64,7 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          lang?: string
           published?: boolean
           published_at?: string | null
           related_links?: Json | null
