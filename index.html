@@ -125,18 +125,33 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Winerim Web Chat Widget — hide until positioned to prevent FOUC -->
+    <!-- Winerim Web Chat Widget — hidden until fully loaded to prevent FOUC -->
     <style>
+      /* Hide ALL elements injected by the chat widget until we reveal them */
       #winerim-web-chat,
       .winerim-web-chat,
-      [data-winerim-chat] {
+      [data-winerim-chat],
+      [id*="winerim"],
+      [class*="winerim"],
+      [id*="web-chat"],
+      [class*="web-chat"],
+      [class*="chat-widget"],
+      [id*="chat-widget"] {
         opacity: 0 !important;
+        pointer-events: none !important;
         transition: opacity 0.3s ease;
       }
-      #winerim-web-chat.ready,
-      .winerim-web-chat.ready,
-      [data-winerim-chat].ready {
+      body.chat-ready #winerim-web-chat,
+      body.chat-ready .winerim-web-chat,
+      body.chat-ready [data-winerim-chat],
+      body.chat-ready [id*="winerim"],
+      body.chat-ready [class*="winerim"],
+      body.chat-ready [id*="web-chat"],
+      body.chat-ready [class*="web-chat"],
+      body.chat-ready [class*="chat-widget"],
+      body.chat-ready [id*="chat-widget"] {
         opacity: 1 !important;
+        pointer-events: auto !important;
       }
     </style>
     <script>
@@ -148,12 +163,9 @@
         buttonText: 'Chat',
         position: 'bottom-right'
       };
-      /* Reveal chat widget once it has loaded and positioned itself */
+      /* Reveal chat widget after it has had time to load and position itself */
       window.addEventListener('load', function() {
-        setTimeout(function() {
-          document.querySelectorAll('#winerim-web-chat, .winerim-web-chat, [data-winerim-chat]')
-            .forEach(function(el) { el.classList.add('ready'); });
-        }, 500);
+        setTimeout(function() { document.body.classList.add('chat-ready'); }, 1500);
       });
     </script>
     <script defer src="https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js"></script>
