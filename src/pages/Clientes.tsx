@@ -189,7 +189,7 @@ const Clientes = () => {
                         src={r.logo_url}
                         alt={r.name}
                         className="w-20 h-20 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ filter: 'brightness(0) invert(1)', mixBlendMode: 'screen' }}
+                        style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
                         loading="lazy"
                       />
                     ) : (
