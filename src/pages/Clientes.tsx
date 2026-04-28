@@ -188,8 +188,7 @@ const Clientes = () => {
                       <img
                         src={r.logo_url}
                         alt={r.name}
-                        className="w-20 h-20 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
+                        className="w-full h-16 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                         loading="lazy"
                       />
                     ) : (

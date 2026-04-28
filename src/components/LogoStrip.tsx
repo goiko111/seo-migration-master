@@ -120,7 +120,6 @@ const LogoStrip = () => {
                 src={item.logo}
                 alt={item.name}
                 className="h-16 sm:h-20 md:h-24 w-auto object-contain"
-                style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
                 loading="lazy"
                 decoding="async"
                 width={120}
@@ -147,7 +146,6 @@ const LogoStrip = () => {
                 src={item.logo}
                 alt={item.name}
                 className="h-16 sm:h-20 md:h-24 w-auto object-contain"
-                style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
                 loading="lazy"
                 decoding="async"
                 width={120}
@@ -172,7 +170,6 @@ const LogoStrip = () => {
                 src={item.logo}
                 alt={item.name}
                 className="h-8 sm:h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
-                style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
                 loading="lazy"
                 decoding="async"
                 width={140}
