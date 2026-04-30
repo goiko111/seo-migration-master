@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
-import { trackFormConversion } from "@/utils/trackConversion";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
 import { ads } from "@/lib/analytics";
 import ContactFormFields from "@/components/ContactFormFields";
@@ -212,7 +211,6 @@ const Demo = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
-      trackFormConversion("demo");
       navigate("/gracias?tipo=demo");
       return;
     }

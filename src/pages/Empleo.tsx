@@ -13,7 +13,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyLead } from "@/lib/notifyLead";
-import { trackFormConversion } from "@/utils/trackConversion";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const WA_NUMBER = "34658718350";
@@ -113,7 +112,6 @@ const Empleo = () => {
         message: form.message || null,
       });
 
-      trackFormConversion("empleo");
       setSubmitted(true);
       toast({ title: t.empleo_success_title ?? "¡Candidatura enviada!", description: t.empleo_success_desc ?? "Revisaremos tu perfil y te contactaremos pronto." });
     } catch {
