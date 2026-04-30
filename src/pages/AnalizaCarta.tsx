@@ -25,6 +25,7 @@ import { referencesOptions, businessTypeOptions } from "@/components/ContactForm
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
+import { trackFormConversion } from "@/utils/trackConversion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
 
@@ -607,6 +608,7 @@ const AnalizaCarta = () => {
       setSubmitting(false);
     } else {
       notifyLead(leadData);
+      trackFormConversion("analisis-carta");
       navigate("/gracias?tipo=analisis-carta");
     }
   };
