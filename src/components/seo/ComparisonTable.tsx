@@ -14,6 +14,8 @@ interface ComparisonTableProps {
   rows: ComparisonRow[];
   /** Index of the "recommended" column (highlighted) */
   highlightColumn?: number;
+  /** Label for the first column header (default: "Característica") */
+  featureLabel?: string;
 }
 
 const CellIcon = ({ val }: { val: boolean | "partial" }) => {
@@ -26,7 +28,7 @@ const CellIcon = ({ val }: { val: boolean | "partial" }) => {
  * Comparison table designed for AI citability.
  * Renders accessible <table> with clear headers and semantic markup.
  */
-const ComparisonTable = ({ title, subtitle, columns, rows, highlightColumn }: ComparisonTableProps) => (
+const ComparisonTable = ({ title, subtitle, columns, rows, highlightColumn, featureLabel = "Característica" }: ComparisonTableProps) => (
   <section className="my-12">
     {title && (
       <ScrollReveal className="text-center mb-8">
@@ -39,7 +41,7 @@ const ComparisonTable = ({ title, subtitle, columns, rows, highlightColumn }: Co
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gradient-card">
-              <th className="text-left p-4 font-semibold text-muted-foreground">Característica</th>
+              <th className="text-left p-4 font-semibold text-muted-foreground">{featureLabel}</th>
               {columns.map((col, i) => (
                 <th
                   key={i}
