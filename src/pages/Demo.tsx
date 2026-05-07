@@ -11,6 +11,7 @@ import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
 import { ads } from "@/lib/analytics";
 import ContactFormFields from "@/components/ContactFormFields";
+import { PREFIXES } from "@/components/PhoneInput";
 import SEOHead from "@/components/SEOHead";
 import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
@@ -191,7 +192,12 @@ const Demo = () => {
       restaurant: (fd.get("restaurant") as string)?.trim() || null,
       name: (fd.get("name") as string)?.trim() || null,
       position: (fd.get("position") as string)?.trim() || null,
-      phone: (fd.get("phone") as string)?.trim() || null,
+      phone: (() => {
+        const raw = (fd.get("phone") as string)?.trim();
+        const prefixCode = (fd.get("phone_prefix") as string)?.trim();
+        const pObj = PREFIXES.find(p => p.code === prefixCode);
+        return raw ? (pObj ? `${pObj.dial} ${raw}` : raw) : null;
+      })(),
       email: (fd.get("email") as string)?.trim() || null,
       city: (fd.get("city") as string)?.trim() || null,
       references_count: (fd.get("references_count") as string)?.trim() || null,

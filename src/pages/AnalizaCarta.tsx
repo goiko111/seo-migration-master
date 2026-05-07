@@ -22,6 +22,7 @@ import QuickAnswer from "@/components/seo/QuickAnswer";
 import FAQSection from "@/components/seo/FAQSection";
 import StickyCTA from "@/components/StickyCTA";
 import { referencesOptions, businessTypeOptions } from "@/components/ContactFormFields";
+import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
@@ -382,12 +383,12 @@ const afterI = i({
 });
 
 const formI = i({
-  es: { badge: "Envía tu carta", title1: "Analiza tu carta de vinos ", titleHl: "ahora", sub: "Completa el formulario y recibirás tu informe en menos de 48 horas. Gratis.", restaurantLabel: "Nombre del restaurante", restaurantPh: "Ej. Restaurante La Viña", emailLabel: "Email", cityLabel: "Ciudad", cityPh: "Ej. Madrid", refsLabel: "Nº de referencias", refsPh: "Selecciona un rango", bizLabel: "Tipo de negocio", bizPh: "Selecciona tipo de negocio", uploadBtn: "Subir archivo", linkBtn: "Pegar enlace", dropText: "Haz clic o arrastra tu carta de vinos", dropSub: "PDF, JPG, PNG · Máx 10 MB", linkLabel: "URL de tu carta", linkPh: "https://tu-restaurante.com/carta-de-vinos", submit: "Enviar carta para análisis gratuito", submitting: "Enviando…", disclaimer: "Sin compromiso. Informe en menos de 48 h.", errRequired: "Por favor completa los campos obligatorios.", errFormat: "Formato no soportado. Sube un PDF o imagen (JPG, PNG, WebP).", errSize: "El archivo es demasiado grande. Máximo 10 MB.", errUpload: "Error al subir el archivo. Inténtalo de nuevo.", errSubmit: "Error al enviar. Inténtalo de nuevo.", success: "¡Carta recibida! Te enviaremos el análisis en menos de 48 h." },
-  en: { badge: "Submit your list", title1: "Analyse your wine list ", titleHl: "now", sub: "Complete the form and you'll receive your report within 48 hours. Free.", restaurantLabel: "Restaurant name", restaurantPh: "E.g. The Wine House", emailLabel: "Email", cityLabel: "City", cityPh: "E.g. London", refsLabel: "No. of references", refsPh: "Select a range", bizLabel: "Business type", bizPh: "Select business type", uploadBtn: "Upload file", linkBtn: "Paste link", dropText: "Click or drag your wine list", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Wine list URL", linkPh: "https://your-restaurant.com/wine-list", submit: "Submit wine list for free analysis", submitting: "Submitting…", disclaimer: "No commitment. Report within 48 h.", errRequired: "Please complete the required fields.", errFormat: "Unsupported format. Upload a PDF or image (JPG, PNG, WebP).", errSize: "File is too large. Maximum 10 MB.", errUpload: "Error uploading file. Please try again.", errSubmit: "Error submitting. Please try again.", success: "Wine list received! We'll send you the analysis within 48 h." },
-  it: { badge: "Invia la tua carta", title1: "Analizza la tua carta dei vini ", titleHl: "adesso", sub: "Compila il modulo e riceverai il tuo report in meno di 48 ore. Gratis.", restaurantLabel: "Nome del ristorante", restaurantPh: "Es. Ristorante La Vigna", emailLabel: "Email", cityLabel: "Città", cityPh: "Es. Milano", refsLabel: "N° di referenze", refsPh: "Seleziona un range", bizLabel: "Tipo di attività", bizPh: "Seleziona tipo di attività", uploadBtn: "Carica file", linkBtn: "Incolla link", dropText: "Clicca o trascina la tua carta dei vini", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "URL della tua carta", linkPh: "https://il-tuo-ristorante.com/carta-vini", submit: "Invia carta per analisi gratuita", submitting: "Invio in corso…", disclaimer: "Senza impegno. Report in meno di 48 h.", errRequired: "Compila i campi obbligatori.", errFormat: "Formato non supportato. Carica un PDF o immagine (JPG, PNG, WebP).", errSize: "Il file è troppo grande. Massimo 10 MB.", errUpload: "Errore durante il caricamento. Riprova.", errSubmit: "Errore durante l'invio. Riprova.", success: "Carta ricevuta! Ti invieremo l'analisi in meno di 48 h." },
-  fr: { badge: "Envoyez votre carte", title1: "Analysez votre carte des vins ", titleHl: "maintenant", sub: "Remplissez le formulaire et vous recevrez votre rapport en moins de 48 heures. Gratuit.", restaurantLabel: "Nom du restaurant", restaurantPh: "Ex. Restaurant La Vigne", emailLabel: "Email", cityLabel: "Ville", cityPh: "Ex. Paris", refsLabel: "Nb de références", refsPh: "Sélectionnez une tranche", bizLabel: "Type d'établissement", bizPh: "Sélectionnez le type", uploadBtn: "Télécharger fichier", linkBtn: "Coller le lien", dropText: "Cliquez ou glissez votre carte des vins", dropSub: "PDF, JPG, PNG · Max 10 Mo", linkLabel: "URL de votre carte", linkPh: "https://votre-restaurant.com/carte-des-vins", submit: "Envoyer la carte pour analyse gratuite", submitting: "Envoi en cours…", disclaimer: "Sans engagement. Rapport en moins de 48 h.", errRequired: "Veuillez compléter les champs obligatoires.", errFormat: "Format non supporté. Envoyez un PDF ou une image (JPG, PNG, WebP).", errSize: "Le fichier est trop volumineux. Maximum 10 Mo.", errUpload: "Erreur lors de l'envoi du fichier. Réessayez.", errSubmit: "Erreur lors de l'envoi. Réessayez.", success: "Carte reçue ! Nous vous enverrons l'analyse en moins de 48 h." },
-  de: { badge: "Weinkarte senden", title1: "Analysieren Sie Ihre Weinkarte ", titleHl: "jetzt", sub: "Füllen Sie das Formular aus und Sie erhalten Ihren Bericht in weniger als 48 Stunden. Kostenlos.", restaurantLabel: "Restaurantname", restaurantPh: "Z.B. Restaurant Zum Wein", emailLabel: "Email", cityLabel: "Stadt", cityPh: "Z.B. Berlin", refsLabel: "Anzahl der Referenzen", refsPh: "Wählen Sie einen Bereich", bizLabel: "Geschäftstyp", bizPh: "Wählen Sie den Geschäftstyp", uploadBtn: "Datei hochladen", linkBtn: "Link einfügen", dropText: "Klicken Sie auf oder ziehen Sie Ihre Weinkarte", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Weinkarten-URL", linkPh: "https://ihr-restaurant.com/weinkarte", submit: "Weinkarte zur kostenlosen Analyse senden", submitting: "Wird gesendet…", disclaimer: "Unverbindlich. Bericht in weniger als 48 h.", errRequired: "Bitte füllen Sie die erforderlichen Felder aus.", errFormat: "Nicht unterstütztes Format. Laden Sie ein PDF oder Bild (JPG, PNG, WebP) hoch.", errSize: "Datei ist zu groß. Maximum 10 MB.", errUpload: "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut.", errSubmit: "Fehler beim Senden. Bitte versuchen Sie es erneut.", success: "Weinkarte empfangen! Wir senden Ihnen die Analyse in weniger als 48 h." },
-  pt: { badge: "Envie a sua carta", title1: "Analise a sua carta de vinhos ", titleHl: "agora", sub: "Preencha o formulário e receberá o seu relatório em menos de 48 horas. Gratuitamente.", restaurantLabel: "Nome do restaurante", restaurantPh: "Ex. Restaurante Os Vinhos", emailLabel: "Email", cityLabel: "Cidade", cityPh: "Ex. Lisboa", refsLabel: "N.º de referências", refsPh: "Seleccione um intervalo", bizLabel: "Tipo de negócio", bizPh: "Seleccione o tipo de negócio", uploadBtn: "Fazer upload do ficheiro", linkBtn: "Colar link", dropText: "Clique ou arraste a sua carta de vinhos", dropSub: "PDF, JPG, PNG · Máx 10 MB", linkLabel: "URL da carta de vinhos", linkPh: "https://seu-restaurante.com/carta-de-vinhos", submit: "Enviar carta para análise gratuita", submitting: "Enviando…", disclaimer: "Sem compromisso. Relatório em menos de 48 h.", errRequired: "Por favor, preencha os campos obrigatórios.", errFormat: "Formato não suportado. Envie um PDF ou imagem (JPG, PNG, WebP).", errSize: "O ficheiro é muito grande. Máximo 10 MB.", errUpload: "Erro ao fazer upload do ficheiro. Tente novamente.", errSubmit: "Erro ao enviar. Tente novamente.", success: "Carta de vinhos recebida! Enviaremos a análise em menos de 48 h." },
+  es: { badge: "Envía tu carta", title1: "Analiza tu carta de vinos ", titleHl: "ahora", sub: "Completa el formulario y recibirás tu informe en menos de 48 horas. Gratis.", restaurantLabel: "Nombre del restaurante", restaurantPh: "Ej. Restaurante La Viña", phoneLabel: "Teléfono", emailLabel: "Email", cityLabel: "Ciudad", cityPh: "Ej. Madrid", refsLabel: "Nº de referencias", refsPh: "Selecciona un rango", bizLabel: "Tipo de negocio", bizPh: "Selecciona tipo de negocio", uploadBtn: "Subir archivo", linkBtn: "Pegar enlace", dropText: "Haz clic o arrastra tu carta de vinos", dropSub: "PDF, JPG, PNG · Máx 10 MB", linkLabel: "URL de tu carta", linkPh: "https://tu-restaurante.com/carta-de-vinos", submit: "Enviar carta para análisis gratuito", submitting: "Enviando…", disclaimer: "Sin compromiso. Informe en menos de 48 h.", errRequired: "Por favor completa los campos obligatorios.", errFormat: "Formato no soportado. Sube un PDF o imagen (JPG, PNG, WebP).", errSize: "El archivo es demasiado grande. Máximo 10 MB.", errUpload: "Error al subir el archivo. Inténtalo de nuevo.", errSubmit: "Error al enviar. Inténtalo de nuevo.", success: "¡Carta recibida! Te enviaremos el análisis en menos de 48 h." },
+  en: { badge: "Submit your list", title1: "Analyse your wine list ", titleHl: "now", sub: "Complete the form and you'll receive your report within 48 hours. Free.", restaurantLabel: "Restaurant name", restaurantPh: "E.g. The Wine House", phoneLabel: "Phone", emailLabel: "Email", cityLabel: "City", cityPh: "E.g. London", refsLabel: "No. of references", refsPh: "Select a range", bizLabel: "Business type", bizPh: "Select business type", uploadBtn: "Upload file", linkBtn: "Paste link", dropText: "Click or drag your wine list", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Wine list URL", linkPh: "https://your-restaurant.com/wine-list", submit: "Submit wine list for free analysis", submitting: "Submitting…", disclaimer: "No commitment. Report within 48 h.", errRequired: "Please complete the required fields.", errFormat: "Unsupported format. Upload a PDF or image (JPG, PNG, WebP).", errSize: "File is too large. Maximum 10 MB.", errUpload: "Error uploading file. Please try again.", errSubmit: "Error submitting. Please try again.", success: "Wine list received! We'll send you the analysis within 48 h." },
+  it: { badge: "Invia la tua carta", title1: "Analizza la tua carta dei vini ", titleHl: "adesso", sub: "Compila il modulo e riceverai il tuo report in meno di 48 ore. Gratis.", restaurantLabel: "Nome del ristorante", restaurantPh: "Es. Ristorante La Vigna", phoneLabel: "Telefono", emailLabel: "Email", cityLabel: "Città", cityPh: "Es. Milano", refsLabel: "N° di referenze", refsPh: "Seleziona un range", bizLabel: "Tipo di attività", bizPh: "Seleziona tipo di attività", uploadBtn: "Carica file", linkBtn: "Incolla link", dropText: "Clicca o trascina la tua carta dei vini", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "URL della tua carta", linkPh: "https://il-tuo-ristorante.com/carta-vini", submit: "Invia carta per analisi gratuita", submitting: "Invio in corso…", disclaimer: "Senza impegno. Report in meno di 48 h.", errRequired: "Compila i campi obbligatori.", errFormat: "Formato non supportato. Carica un PDF o immagine (JPG, PNG, WebP).", errSize: "Il file è troppo grande. Massimo 10 MB.", errUpload: "Errore durante il caricamento. Riprova.", errSubmit: "Errore durante l'invio. Riprova.", success: "Carta ricevuta! Ti invieremo l'analisi in meno di 48 h." },
+  fr: { badge: "Envoyez votre carte", title1: "Analysez votre carte des vins ", titleHl: "maintenant", sub: "Remplissez le formulaire et vous recevrez votre rapport en moins de 48 heures. Gratuit.", restaurantLabel: "Nom du restaurant", restaurantPh: "Ex. Restaurant La Vigne", phoneLabel: "Téléphone", emailLabel: "Email", cityLabel: "Ville", cityPh: "Ex. Paris", refsLabel: "Nb de références", refsPh: "Sélectionnez une tranche", bizLabel: "Type d'établissement", bizPh: "Sélectionnez le type", uploadBtn: "Télécharger fichier", linkBtn: "Coller le lien", dropText: "Cliquez ou glissez votre carte des vins", dropSub: "PDF, JPG, PNG · Max 10 Mo", linkLabel: "URL de votre carte", linkPh: "https://votre-restaurant.com/carte-des-vins", submit: "Envoyer la carte pour analyse gratuite", submitting: "Envoi en cours…", disclaimer: "Sans engagement. Rapport en moins de 48 h.", errRequired: "Veuillez compléter les champs obligatoires.", errFormat: "Format non supporté. Envoyez un PDF ou une image (JPG, PNG, WebP).", errSize: "Le fichier est trop volumineux. Maximum 10 Mo.", errUpload: "Erreur lors de l'envoi du fichier. Réessayez.", errSubmit: "Erreur lors de l'envoi. Réessayez.", success: "Carte reçue ! Nous vous enverrons l'analyse en moins de 48 h." },
+  de: { badge: "Weinkarte senden", title1: "Analysieren Sie Ihre Weinkarte ", titleHl: "jetzt", sub: "Füllen Sie das Formular aus und Sie erhalten Ihren Bericht in weniger als 48 Stunden. Kostenlos.", restaurantLabel: "Restaurantname", restaurantPh: "Z.B. Restaurant Zum Wein", phoneLabel: "Telefon", emailLabel: "Email", cityLabel: "Stadt", cityPh: "Z.B. Berlin", refsLabel: "Anzahl der Referenzen", refsPh: "Wählen Sie einen Bereich", bizLabel: "Geschäftstyp", bizPh: "Wählen Sie den Geschäftstyp", uploadBtn: "Datei hochladen", linkBtn: "Link einfügen", dropText: "Klicken Sie auf oder ziehen Sie Ihre Weinkarte", dropSub: "PDF, JPG, PNG · Max 10 MB", linkLabel: "Weinkarten-URL", linkPh: "https://ihr-restaurant.com/weinkarte", submit: "Weinkarte zur kostenlosen Analyse senden", submitting: "Wird gesendet…", disclaimer: "Unverbindlich. Bericht in weniger als 48 h.", errRequired: "Bitte füllen Sie die erforderlichen Felder aus.", errFormat: "Nicht unterstütztes Format. Laden Sie ein PDF oder Bild (JPG, PNG, WebP) hoch.", errSize: "Datei ist zu groß. Maximum 10 MB.", errUpload: "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut.", errSubmit: "Fehler beim Senden. Bitte versuchen Sie es erneut.", success: "Weinkarte empfangen! Wir senden Ihnen die Analyse in weniger als 48 h." },
+  pt: { badge: "Envie a sua carta", title1: "Analise a sua carta de vinhos ", titleHl: "agora", sub: "Preencha o formulário e receberá o seu relatório em menos de 48 horas. Gratuitamente.", restaurantLabel: "Nome do restaurante", restaurantPh: "Ex. Restaurante Os Vinhos", phoneLabel: "Telefone", emailLabel: "Email", cityLabel: "Cidade", cityPh: "Ex. Lisboa", refsLabel: "N.º de referências", refsPh: "Seleccione um intervalo", bizLabel: "Tipo de negócio", bizPh: "Seleccione o tipo de negócio", uploadBtn: "Fazer upload do ficheiro", linkBtn: "Colar link", dropText: "Clique ou arraste a sua carta de vinhos", dropSub: "PDF, JPG, PNG · Máx 10 MB", linkLabel: "URL da carta de vinhos", linkPh: "https://seu-restaurante.com/carta-de-vinhos", submit: "Enviar carta para análise gratuita", submitting: "Enviando…", disclaimer: "Sem compromisso. Relatório em menos de 48 h.", errRequired: "Por favor, preencha os campos obrigatórios.", errFormat: "Formato não suportado. Envie um PDF ou imagem (JPG, PNG, WebP).", errSize: "O ficheiro é muito grande. Máximo 10 MB.", errUpload: "Erro ao fazer upload do ficheiro. Tente novamente.", errSubmit: "Erro ao enviar. Tente novamente.", success: "Carta de vinhos recebida! Enviaremos a análise em menos de 48 h." },
 });
 
 const faqsI = i({
@@ -563,15 +564,20 @@ const AnalizaCarta = () => {
     const fd = new FormData(e.currentTarget);
     const restaurant = (fd.get("restaurant") as string)?.trim();
     const email = (fd.get("email") as string)?.trim();
+    const phoneRaw = (fd.get("phone") as string)?.trim();
+    const phonePrefixCode = (fd.get("phone_prefix") as string)?.trim();
     const city = (fd.get("city") as string)?.trim();
     const refsCount = (fd.get("references_count") as string)?.trim();
     const menuLink = (fd.get("menu_link") as string)?.trim();
 
-    if (!restaurant || !email) {
+    if (!restaurant || !email || !phoneRaw) {
       toast.error(t.form.errRequired);
       setSubmitting(false);
       return;
     }
+
+    const prefixObj = PREFIXES.find(p => p.code === phonePrefixCode);
+    const phoneFormatted = prefixObj ? `${prefixObj.dial} ${phoneRaw}` : phoneRaw;
 
     let uploadedUrl: string | null = null;
     const file = fileRef.current?.files?.[0];
@@ -595,6 +601,7 @@ const AnalizaCarta = () => {
       form_type: "analisis-carta",
       restaurant: restaurant || null,
       email: email || null,
+      phone: phoneFormatted || null,
       city: city || null,
       references_count: refsCount || null,
       menu_link: finalLink,
@@ -1007,19 +1014,27 @@ const AnalizaCarta = () => {
                     />
                   </div>
 
-                  <div>
-                    <Label htmlFor="email" className="text-sm font-medium">
-                      {t.form.emailLabel} <span className="text-destructive">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="tu@restaurante.com"
-                      required
-                      maxLength={255}
-                      className="bg-background border-border mt-1.5"
-                    />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="phone" className="text-sm font-medium">
+                        {t.form.phoneLabel} <span className="text-destructive">*</span>
+                      </Label>
+                      <PhoneInput id="phone" name="phone" required native />
+                    </div>
+                    <div>
+                      <Label htmlFor="email" className="text-sm font-medium">
+                        {t.form.emailLabel} <span className="text-destructive">*</span>
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="tu@restaurante.com"
+                        required
+                        maxLength={255}
+                        className="bg-background border-border mt-1.5"
+                      />
+                    </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">

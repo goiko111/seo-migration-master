@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { PREFIXES } from "@/components/PhoneInput";
 
 const WA_NUMBER = "34658718350";
 const WA_MSG_ES = encodeURIComponent("Hola, me interesa trabajar en Winerim. Puedo saber mas?");
@@ -68,10 +69,12 @@ const Empleo = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const defaultPrefixCode = lang === "en" ? "GB" : lang === "it" ? "IT" : lang === "fr" ? "FR" : lang === "de" ? "DE" : lang === "pt" ? "PT" : "ES";
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
+    phone_prefix: defaultPrefixCode,
     linkedin_url: "",
     area_of_interest: "",
     message: "",
@@ -89,14 +92,17 @@ const Empleo = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim()) return;
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) return;
+
+    const prefixObj = PREFIXES.find(p => p.code === form.phone_prefix);
+    const phoneFormatted = prefixObj ? `${prefixObj.dial} ${form.phone.trim()}` : form.phone.trim();
 
     setLoading(true);
     try {
       const { error } = await supabase.from("job_applications").insert({
         name: form.name.trim(),
         email: form.email.trim(),
-        phone: form.phone.trim() || null,
+        phone: phoneFormatted || null,
         linkedin_url: form.linkedin_url.trim() || null,
         area_of_interest: form.area_of_interest || null,
         message: form.message.trim() || null,
@@ -108,7 +114,7 @@ const Empleo = () => {
         form_type: "empleo",
         name: form.name,
         email: form.email,
-        phone: form.phone || null,
+        phone: phoneFormatted || null,
         message: form.message || null,
       });
 
@@ -448,15 +454,33 @@ const Empleo = () => {
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="emp-phone">{t.form_phone_label ?? "Teléfono"}</Label>
-                    <Input
-                      id="emp-phone"
-                      type="tel"
-                      maxLength={20}
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+34 600 000 000"
-                    />
+                    <Label htmlFor="emp-phone">{t.form_phone_label ?? "Teléfono"} <span className="text-destructive">*</span></Label>
+                    <div className="flex">
+                      <select
+                        id="emp-phone-prefix"
+                        value={form.phone_prefix}
+                        onChange={(e) => setForm({ ...form, phone_prefix: e.target.value })}
+                        className="h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                        style={{ width: "110px", minWidth: "110px" }}
+                        aria-label="Country prefix"
+                      >
+                        {PREFIXES.map((p) => (
+                          <option key={p.code} value={p.code}>
+                            {p.flag} {p.dial}
+                          </option>
+                        ))}
+                      </select>
+                      <Input
+                        id="emp-phone"
+                        type="tel"
+                        required
+                        maxLength={15}
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="600 000 000"
+                        className="rounded-l-none"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="emp-linkedin" className="flex items-center gap-1.5">
