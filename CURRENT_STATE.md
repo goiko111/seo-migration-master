@@ -1,7 +1,7 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-05-07 (sesión 6)
+> Última actualización: 2026-05-07 (sesión 7)
 
 ## Estado general
 
@@ -78,22 +78,22 @@ Sin cambios desde sesión 3.
 **Tipo**: `ResourceLangContent` con 24 campos traducibles por recurso.
 **PENDIENTE**: Integrar en `ResourceTemplate.tsx` / `ResourcePage.tsx` — actualmente los componentes siguen usando solo los datos en español de `newResources.ts`. También falta traducir las strings hardcoded del template (mensajes de validación, toasts, labels).
 
-## Páginas SEO dinámicas (Supabase) — ✅ CITY PAGES DE/PT ACTIVAS
+## Páginas SEO dinámicas (Supabase) — ✅ CITY PAGES EXPANSION COMPLETA
 
-La tabla `seo_pages` tiene city pages funcionando en producción:
+La tabla `seo_pages` tiene city pages funcionando en producción para 6 idiomas:
 
 | Lang | Cluster | Ciudades | Estado |
 |------|---------|----------|--------|
-| ES | city | 3 (Madrid, Barcelona, Valencia) | ✅ Activas |
-| DE | city | 9 (Berlin, Düsseldorf, Frankfurt, Hamburg, Köln, München, Stuttgart, Wien, Zürich) | ✅ Activas |
-| PT | city | 6 (Braga, Coimbra, Faro, Funchal, Lisboa, Porto) | ✅ Activas |
-| EN | city | 0 | ❌ No existen |
-| FR | city | 0 | ❌ No existen |
-| IT | city | 0 | ❌ No existen |
+| ES | city | 61 | ✅ Activas |
+| EN | city | 121 | ✅ Activas |
+| IT | city | 50 | ✅ Activas |
+| FR | city | 50 | ✅ Activas |
+| DE | city | 39 | ✅ Activas |
+| PT | city | 26 | ✅ Activas |
 
-**Total city pages**: 18
+**Total city pages**: 347
 
-**FALTA**: Expansión masiva de ciudades. España tiene solo 3 (faltan Sevilla, Málaga, Bilbao, etc.). EN/FR/IT no tienen ninguna. DE y PT podrían ampliarse.
+**Expansión completada** (sesión 7): Se añadieron ~210 nuevas city pages en 6 países. SQLs generados, corregidos (related_pages type, Italian quotes, Ancona JSON) e insertados via Lovable API.
 
 ### Otros clusters — ⚠️ NO VERIFICADO
 
