@@ -1,7 +1,7 @@
 # NEXT_STEPS.md — winerim.wine
 
 > Tareas pendientes priorizadas. Se reescribe al final de cada sesión.
-> Última actualización: 2026-05-07 (sesión 6)
+> Última actualización: 2026-05-07 (sesión 7)
 
 ## Prioridad alta — Requiere acción manual
 
@@ -42,18 +42,9 @@
 2. Traducir strings hardcoded del template (mensajes de validación, toasts, labels)
 3. Añadir traducciones DE/PT para los 14 recursos
 
-### 5. Expansión masiva de city pages
+### 5. ~~Expansión masiva de city pages~~ ✅ COMPLETADO
 
-**Estado actual** (18 páginas + expansiones recientes UK/USA):
-- ES: 3 ciudades base + expansión en progreso
-- DE: 9 ciudades
-- PT: 6 ciudades
-- EN UK: 20 ciudades creadas
-- EN US: 70 ciudades creadas
-- FR: 0 — necesita Paris, Lyon, Bordeaux, Marseille, Nice...
-- IT: 0 — necesita Milano, Roma, Firenze, Torino, Bologna...
-
-**Pendiente**: Completar expansiones ES (30 más), UK (30 más), IT (50), FR (50), PT (20 más), DE (30 más).
+**Completado sesión 7**: 347 city pages activas en 6 idiomas (ES=61, EN=121, IT=50, FR=50, DE=39, PT=26). SQLs en `sql/` del repo.
 
 ### 6. Sincronizar worker del repo con el desplegado
 
