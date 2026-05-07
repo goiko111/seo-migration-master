@@ -144,3 +144,70 @@
 **Razón**: Los datos de city pages DE/PT en Supabase usan `internal_links` con types `"product"` y `"case_study"`, pero InternalLinks solo definía icons para `guide`, `tool`, `resource`, `solution`, `decision-center`. Cuando `typeIcons[link.type]` devolvía `undefined` y se renderizaba como `<Icon />`, causaba React error #130 ("Element type is invalid: expected string or class/function but got: undefined"). Esta era la causa del crash en city pages alemanas.
 
 **Fix**: Añadir `product` y `case_study` a `typeIcons`, `typeLabels` y `badgeClasses`, más un fallback genérico para cualquier tipo futuro desconocido.
+
+---
+
+## 2026-04-19 — Causa raíz del 404 en /de/* y /pt/*: Cloudflare Worker whitelist
+
+**Decisión**: Actualizar el Cloudflare Worker `winerim-proxy` añadiendo prefijos DE/PT a `SEO_WILDCARD_PREFIXES` y `SPA_PREFIXES`.
+
+**Razón**: Las rutas `/de/*` y `/pt/*` devolvían 404 en producción. El diagnóstico previo (NEXT_STEPS punto 3) apuntaba a la edge function `redirects`, pero era incorrecto. La causa real era el Cloudflare Worker, que usa un sistema de whitelist estricto: cualquier path que no esté en `SEO_EXACT`, `SPA_EXACT`, `SPA_PREFIXES`, `SEO_WILDCARD_PREFIXES` o `PRIVATE_ROUTES` recibe un 404 real ANTES de llegar al SPA.
+
+**Cambios realizados**:
+- `SEO_WILDCARD_PREFIXES`: añadidos `"/de/weinkarten-software-"` y `"/pt/software-carta-vinhos-"`
+- `SPA_PREFIXES`: añadidos `"/de/"` y `"/pt/"`
+
+**Hipótesis previa descartada**: "La edge function redirects no reenvía al SPA" — descartada. El 404 venía del worker, no de la edge function.
+
+**IMPORTANTE para el futuro**: Cada vez que se añada un nuevo patrón de URL (nuevo idioma, nuevo cluster de city pages en otro idioma), hay que actualizar el worker además del SPA y Supabase.
+
+---
+
+## 2026-04-19 — Deploy del worker via Cloudflare API, no UI
+
+**Decisión**: Desplegar el worker modificado usando la API REST de Cloudflare (`PUT /api/v4/accounts/{id}/workers/scripts/{name}`) desde la consola JS del dashboard, en vez de editar manualmente en el editor Monaco.
+
+**Razón**: El editor Monaco del dashboard de Cloudflare está embebido en un iframe y las herramientas de automatización del navegador no podían interactuar fiablemente con su Find/Replace (el typing iba al editor de código en vez del campo de búsqueda).
+
+**Riesgo materializado**: El primer PUT se hizo sin incluir los `bindings` (env vars) en el metadata, lo que borró todas las variables de entorno y causó un 500 "Missing ORIGIN env var". Se corrigió inmediatamente con un segundo PUT incluyendo los 5 bindings.
+
+**Lección**: Al desplegar via API con `PUT`, SIEMPRE incluir los bindings en el metadata. La API reemplaza todo, no hace merge.
+
+---
+
+## 2026-04-19 — Documentación como fuente de verdad entre sesiones
+
+**Decisión**: Adoptar formalmente los 4 documentos (PROJECT_CONTEXT.md, CURRENT_STATE.md, DECISIONS_LOG.md, NEXT_STEPS.md) como fuente de verdad obligatoria.
+
+**Reglas**:
+- Si falta contexto, revisar primero esos documentos
+- No asumir estado no documentado
+- Actualizar al final de cada sesión
+- Separar: hechos, decisiones, hipótesis y tareas pendientes
+- Si hay contradicciones, señalarlas en vez de ignorarlas
+
+**Razón**: Las sesiones de trabajo tienen contexto limitado y el proyecto se desarrolla en múltiples sesiones. Sin documentación actualizada, se repiten diagnósticos incorrectos (como la hipótesis de la edge function).
+
+---
+
+## 2026-05-07 — Apps Script deduplicación por email + ventana temporal
+
+**Decisión**: Añadir deduplicación al webhook `doPost()` del Apps Script. Antes de insertar un lead, comprobar si ya existe el mismo email en la hoja en los últimos 30 minutos.
+
+**Razón**: Google Ads reintenta el webhook POST cuando tarda en responder, causando 15+ filas duplicadas y 15+ emails por cada lead real. Esto se confirmó con el caso de Christophe Roublin (Francia) — 1 lead real, ~15 entradas en la hoja.
+
+**Alternativas descartadas**: Bloquear reintentos a nivel de red (no es posible con Google Ads); usar un lock global de Apps Script (innecesariamente complejo para este caso); dedup por Google lead ID (no disponible en el payload del webhook).
+
+**Patrón**: `isDuplicate(sheet, email, nombre)` recorre filas desde el final, rompe al salir de la ventana temporal. Match primario por email, fallback por nombre si no hay email.
+
+---
+
+## 2026-05-07 — Resource translations: archivo separado con overlay
+
+**Decisión**: Crear `src/data/newResourcesI18n.ts` como archivo separado que exporta `getLocalizedResources(lang)`. Las traducciones se aplican como overlay sobre los datos base de `newResources.ts`, sin modificar el archivo original.
+
+**Razón**: `newResources.ts` es muy grande (85KB, 14 recursos) y tiene una estructura compleja con arrays anidados, slugs, imágenes, etc. Modificarlo directamente para añadir i18n habría sido arriesgado. El patrón overlay permite traducir solo los campos textuales (24 campos por recurso via `ResourceLangContent`) manteniendo toda la estructura, slugs y assets intactos.
+
+**Idiomas traducidos**: EN, IT, FR. Los 14 recursos del catálogo.
+
+**PENDIENTE**: DE y PT para recursos. Integrar en los componentes de renderizado (`ResourceTemplate.tsx`, `ResourcePage.tsx`).

@@ -102,6 +102,8 @@ src/
 │   └── seo/                  # Breadcrumbs, FAQSection, InternalLinks, NextSteps
 ├── data/
 │   ├── ctas.ts               # Sistema CTA por funnel stage × idioma
+│   ├── newResources.ts       # 14 recursos (datos base, español)
+│   ├── newResourcesI18n.ts   # Traducciones EN/IT/FR overlay (getLocalizedResources)
 │   └── decisionCenter/       # 36 archivos (6 áreas × 6 idiomas)
 ├── hooks/
 │   └── useSeoPage.ts         # Fetch de páginas dinámicas desde Supabase
@@ -109,8 +111,44 @@ src/
     └── supabase/             # Cliente y tipos auto-generados
 ```
 
+## Cloudflare Worker (`winerim-proxy`)
+
+El dominio `winerim.wine` apunta a un Cloudflare Worker que actúa como proxy inverso. Es pieza crítica de la arquitectura — controla qué paths llegan al SPA y cuáles devuelven 404.
+
+| Campo | Valor |
+|-------|-------|
+| Cuenta Cloudflare | `Gugocreative@gmail.com` |
+| Account ID | `e75343bb63534d3d029150e90b48ec7c` |
+| Worker name | `winerim-proxy` |
+| Route | `winerim.wine/*` |
+| Workers.dev | `winerim-proxy.gugocreative.workers.dev` |
+| Código fuente (repo) | `cloudflare-worker-v3-hybrid.js` |
+
+### Env vars del worker
+
+| Variable | Valor |
+|----------|-------|
+| `ORIGIN` | `https://seo-migration-magic.lovable.app` |
+| `SITE_URL` | `https://winerim.wine` |
+| `PRERENDER_URL` | `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/prerender` |
+| `REDIRECTS_URL` | `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/redirects` |
+| `SUPABASE_ANON_KEY` | (secret — es el anon key del proyecto Supabase) |
+
+### Routing whitelist del worker
+
+El worker usa un sistema de whitelist estricto. Cualquier path que NO esté en alguna de estas listas devuelve 404 real:
+
+- **`SEO_EXACT`**: paths exactos conocidos (ej: `/software-carta-de-vinos`)
+- **`SPA_EXACT`**: paths SPA exactos (ej: `/precios`, `/contacto`)
+- **`SPA_PREFIXES`**: prefijos que sirven el SPA (ej: `/en/`, `/blog/`, `/de/`, `/pt/`)
+- **`SEO_WILDCARD_PREFIXES`**: prefijos para city pages SEO (ej: `/software-carta-de-vinos-`, `/de/weinkarten-software-`, `/pt/software-carta-vinhos-`)
+- **`PRIVATE_ROUTES`**: rutas admin
+
+**IMPORTANTE**: Al añadir nuevos patrones de URL (nuevo idioma, nuevo cluster), hay que actualizar el worker. El deploy del worker se hace via Cloudflare dashboard o API, NO via Lovable Publish.
+
 ## Build y deploy
 
 - `npm run build` — Vite build (~7-8s)
-- Deploy: push a `main` → Lovable despliega automáticamente
+- Deploy SPA: push a `main` → Lovable despliega automáticamente
+- Deploy Worker: via Cloudflare dashboard ("Edit code" → "Deploy") o via API PUT
 - Commits llevan trailer: `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`

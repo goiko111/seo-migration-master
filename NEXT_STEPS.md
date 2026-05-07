@@ -1,107 +1,112 @@
 # NEXT_STEPS.md — winerim.wine
 
 > Tareas pendientes priorizadas. Se reescribe al final de cada sesión.
-> Última actualización: 2026-04-18 (sesión 3)
+> Última actualización: 2026-05-07 (sesión 6)
 
-## Prioridad alta
+## Prioridad alta — Requiere acción manual
 
-### 1. Ejecutar SQL de city pages DE/PT en Supabase
+### 1. Fix Google Ads conversion tags (MANUAL)
 
-**Qué**: Ejecutar `sql/city-pages-de-pt.sql` en Supabase para crear 15 city pages (9 DE + 6 PT).
+**Qué**: 2 etiquetas inactivas, 1 no verificada, 2 sin conversiones recientes. Solo 3 de 8 están "Registrando conversiones".
 
-**IMPORTANTE**: Los slugs fueron corregidos en sesión 3 para NO incluir prefijos de idioma:
-- ✅ `weinkarten-software-berlin` (correcto)
-- ❌ `de/weinkarten-software-berlin` (incorrecto — nunca haría match)
+**Acción**: Ir a Google Ads → Objetivos → Conversiones → revisar cada acción de conversión individualmente. Las etiquetas inactivas probablemente necesitan reinstalación del snippet o verificación del tag.
 
-**Si el SQL ya se ejecutó con slugs incorrectos**, ejecutar este UPDATE:
-```sql
-UPDATE seo_pages 
-SET slug = REPLACE(slug, 'de/', '') 
-WHERE slug LIKE 'de/%' AND lang = 'de' AND cluster = 'city';
+**Nota**: No se pudo diagnosticar via automatización — el panel de Google Ads usa Shadow DOM que impide extracción de datos.
 
-UPDATE seo_pages 
-SET slug = REPLACE(slug, 'pt/', '') 
-WHERE slug LIKE 'pt/%' AND lang = 'pt' AND cluster = 'city';
-```
+### 2. Fix DNS www.winerim.wine → winerim.wine (MANUAL)
 
-**Verificación**: 
-```sql
-SELECT slug, lang FROM seo_pages WHERE cluster='city' AND lang IN ('de','pt') ORDER BY lang, slug;
-```
+**Qué**: `www.winerim.wine` no redirige a `winerim.wine`. Necesita configuración en Cloudflare.
 
-### 2. Verificar city pages DE/PT en staging
+**Acción en Cloudflare** (cuenta `Gugocreative@gmail.com`):
+1. DNS → Añadir CNAME: `www` → `winerim.wine` (proxied)
+2. Rules → Redirect Rules → Crear regla:
+   - Si hostname = `www.winerim.wine`
+   - Entonces redirect 301 a `https://winerim.wine${uri}`
 
-**Qué**: Después de ejecutar el SQL, verificar que las 15 páginas renderizan en staging.
+### 3. Deploy nueva versión Apps Script (MANUAL)
 
-**URLs de prueba**:
-- `https://seo-migration-magic.lovable.app/de/weinkarten-software-berlin`
-- `https://seo-migration-magic.lovable.app/pt/software-carta-vinhos-lisboa`
+**Qué**: El código con deduplicación ya está guardado pero necesita nueva implementación.
 
-**Verificar que**:
-- La página carga (no error #130)
-- CityTemplate renderiza con contenido correcto
-- InternalLinks muestra iconos y labels correctos (no crash por type desconocido)
-- RelatedPages muestra labels en el idioma correcto
-- Breadcrumbs están en el idioma correcto
+**Acción**: En el Apps Script → Implementar → Gestionar implementaciones → Editar implementación existente → Nueva versión → Implementar.
 
-### 3. Fix redirects edge function en producción
+---
 
-**Qué**: `winerim.wine` devuelve "Not Found" en texto plano para paths de city pages porque la edge function `redirects` no los reenvía al SPA.
+## Prioridad alta — Desarrollo
 
-**Dónde**: `supabase/functions/redirects/index.ts`
+### 4. Integrar newResourcesI18n.ts en componentes
 
-**Hipótesis**: La edge function tiene una lista fija de paths conocidos y cualquier path nuevo (como `/de/weinkarten-software-berlin`) es rechazado antes de llegar al SPA.
+**Qué**: El archivo de traducciones de recursos existe (`src/data/newResourcesI18n.ts`, 14 recursos × 3 idiomas EN/IT/FR) pero NO está conectado a los componentes de renderizado.
+
+**Acción**:
+1. Modificar `ResourceTemplate.tsx` para importar `getLocalizedResource()` y aplicar overlay de traducciones según el idioma activo
+2. Traducir strings hardcoded del template (mensajes de validación, toasts, labels)
+3. Añadir traducciones DE/PT para los 14 recursos
+
+### 5. Expansión masiva de city pages
+
+**Estado actual** (18 páginas + expansiones recientes UK/USA):
+- ES: 3 ciudades base + expansión en progreso
+- DE: 9 ciudades
+- PT: 6 ciudades
+- EN UK: 20 ciudades creadas
+- EN US: 70 ciudades creadas
+- FR: 0 — necesita Paris, Lyon, Bordeaux, Marseille, Nice...
+- IT: 0 — necesita Milano, Roma, Firenze, Torino, Bologna...
+
+**Pendiente**: Completar expansiones ES (30 más), UK (30 más), IT (50), FR (50), PT (20 más), DE (30 más).
+
+### 6. Sincronizar worker del repo con el desplegado
+
+**Qué**: `cloudflare-worker-v3-hybrid.js` en el repo puede estar desincronizado con el worker en producción.
 
 ---
 
 ## Prioridad media
 
-### 4. Verificar otros clusters para DE/PT
-
-**Qué**: Comprobar si los clusters `restaurant_type` y `country` tienen entradas para DE/PT.
-
-**Query**: `SELECT DISTINCT lang, cluster FROM seo_pages ORDER BY cluster, lang`
-
-### 5. Revisión visual en producción
-
-**Qué**: Navegar las páginas principales en DE y PT para detectar problemas visuales.
-
-### 6. Chat widget FOUC fix
-
-**Qué**: Verificar que el fix CSS en `index.html` funciona en producción.
+### 7. Campañas Meta Leads US/UK (#118)
+### 8. Optimizar retargeting Meta — CTA + destino (#103)
+### 9. Evaluar cambio destino Google Ads → páginas de recursos (#109)
+### 10. Verificar otros clusters (restaurant_type, country) para DE/PT
+### 11. Revisión visual traducciones en producción
+### 12. Chat widget FOUC fix en producción
 
 ---
 
 ## Prioridad baja
 
-### 7. CTA overrides para DE/PT
-### 8. Traducción de datos de catálogo
-### 9. Revisión por nativos
+### 13. CTA overrides para DE/PT
+### 14. Traducción de datos de catálogo (uvas, regiones, estilos)
+### 15. Revisión por nativos DE/PT
+### 16. Restaurant type pages para DE/PT
 
 ---
 
-## Completado en sesión 3
+## Completado en sesión 6
 
-- ✅ Root cause de React error #130 en city pages DE: `InternalLinks.tsx` renderizaba `undefined` como componente cuando `typeIcons[link.type]` no encontraba types `"product"` y `"case_study"`
-- ✅ Fix InternalLinks.tsx: añadidos types `product`/`case_study` a `typeIcons`, `typeLabels`, `badgeClasses` + fallback `|| Lightbulb` para cualquier tipo desconocido
-- ✅ Fix InternalLinks.tsx: añadidos DE/PT a `typeLabels` y `defaultTitles`
-- ✅ Fix RelatedPages.tsx: refactorizado `clusterLabels` de `Record<string, string>` a `Record<string, Record<string, string>>` con 6 idiomas + `defaultTitles` i18n
-- ✅ Fix SQL slugs: quitados prefijos `de/` y `pt/` de los 15 slugs en `city-pages-de-pt.sql`
-- ✅ Fix data bug: Faro feature tenía `"a"` en lugar de `"desc"`
-- ✅ Routing catch-all implementado (sesión anterior): `<Route path="*" element={<SeoPage />} />`
-- ✅ Documentación actualizada (4 archivos)
+- ✅ Apps Script con deduplicación creado y entregado (`APPS_SCRIPT_LEAD_NOTIFICATION_FIX.js`)
+- ✅ Traducciones de recursos EN/IT/FR creadas (`newResourcesI18n.ts`, 3,732 líneas, 14 recursos)
+- ✅ Investigación lead Francia: 1 lead real (Christophe Roublin), duplicados por reintentos webhook
+- ✅ Documentos de proyecto actualizados
+- ✅ Archivos de traducción commiteados y pusheados
 
-## Completado en sesión 2
+## Completado en sesión 5
 
-- ✅ i18n para los 4 SEO templates
-- ✅ Fix duplicate `de` keys en 4 páginas
-- ✅ SQL para 15 city pages DE/PT generado
-- ✅ Sitemap edge function con DE/PT
-- ✅ SEOHead: Organization schema, og:locale, areaServed para DE/PT
+- ✅ Google Ads conversion tracking en Gracias.tsx
+- ✅ Traducción de testimonios a EN/IT/FR
+- ✅ Traducción tabla comparativa homepage
+- ✅ Localización chat widget por idioma
+- ✅ Fix "Distribuidores" en footer EN/IT
+- ✅ Auditoría completa traducciones web
+
+## Completado en sesión 4
+
+- ✅ Diagnóstico y fix 404 en /de/* y /pt/* (Cloudflare Worker whitelist)
+- ✅ Worker `winerim-proxy` actualizado con DE/PT
+- ✅ Verificado en producción
 
 ## Para retomar la próxima sesión
 
 1. Leer los 4 documentos: `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md`, `NEXT_STEPS.md`
-2. Verificar si el SQL fue ejecutado en Supabase (query: `SELECT count(*) FROM seo_pages WHERE lang IN ('de','pt')`)
-3. Si no se ejecutó, necesitamos acceso a Supabase dashboard
-4. Si se ejecutó con slugs incorrectos, ejecutar los UPDATEs de corrección
+2. Prioridad: Integrar traducciones de recursos en componentes (punto 4)
+3. Prioridad: Completar expansión city pages pendientes (punto 5)
+4. Usuario debe confirmar: ¿se hizo el deploy de nueva versión del Apps Script? ¿Se fijaron las etiquetas de conversión? ¿Se configuró el DNS www?

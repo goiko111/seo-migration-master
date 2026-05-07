@@ -1,87 +1,103 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-04-18 (sesión 3)
+> Última actualización: 2026-05-07 (sesión 6)
 
 ## Estado general
 
-**Build**: ✅ Pasa limpio (7.6s) — sin warnings
+**Build**: ✅ Pasa limpio — sin warnings
 **Branch**: `main` — todo empujado a `origin/main`
-**Último commit**: `73816d4` — "fix: remove NotFound fallback to fix React error #130"
+**Producción**: ✅ winerim.wine funcionando (home, city pages ES/DE/PT verificadas)
+
+## Google Ads — Estado conversiones
+
+| Estado | Cantidad | Notas |
+|--------|----------|-------|
+| Registrando conversiones | 3 | ✅ Funcionando |
+| Etiqueta inactiva | 2 | ⚠️ Requiere atención — no se pudo diagnosticar via Chrome MCP (Shadow DOM) |
+| No verificado | 1 | ⚠️ Requiere atención |
+| Sin conversiones recientes | 2 | ⚠️ Requiere atención |
+
+**Gracias.tsx**: Actualizado con Google Ads conversion tracking snippet (sesión 5).
+
+## Apps Script — Webhook Lead Form
+
+**Estado**: ✅ Código con deduplicación creado y entregado al usuario.
+**Archivo**: `APPS_SCRIPT_LEAD_NOTIFICATION_FIX.js` (en outputs)
+**Pendiente**: Usuario debe crear nueva versión de implementación (Implementar → Gestionar implementaciones → Nueva versión).
+**Dedup**: Ventana de 30 minutos por email, evita duplicados por reintentos del webhook de Google Ads.
+
+## Cloudflare Worker (`winerim-proxy`) — ✅ ACTUALIZADO
+
+Worker desplegado el 2026-04-19 con los siguientes cambios:
+
+### Cambios en `SEO_WILDCARD_PREFIXES`:
+- ✅ `"/de/weinkarten-software-"` — cubre 9 ciudades DE
+- ✅ `"/pt/software-carta-vinhos-"` — cubre 6 ciudades PT
+- (Ya existían: `"/software-carta-de-vinos-"`, `"/software-vino-"`, `"/wine-list-software-"`)
+
+### Cambios en `SPA_PREFIXES`:
+- ✅ `"/de/"` — permite cualquier ruta bajo /de/
+- ✅ `"/pt/"` — permite cualquier ruta bajo /pt/
+
+### Env vars restauradas:
+- `ORIGIN`, `SITE_URL`, `PRERENDER_URL`, `REDIRECTS_URL`, `SUPABASE_ANON_KEY` — todas configuradas correctamente.
+
+### Verificación en producción:
+- `winerim.wine/de/weinkarten-software-berlin` → HTTP 200, H1: "Weinkarten-Software fuer Berlins moderne Weinrestaurants"
+- `winerim.wine/pt/software-carta-vinhos-lisboa` → HTTP 200, título: "Software Carta de Vinhos Lisboa | Winerim"
+- `winerim.wine` (home) → HTTP 200, funciona normal
 
 ## i18n: Estado de traducciones por componente
 
 ### Páginas estáticas (src/pages/) — ✅ COMPLETO
 
-Todas las páginas con contenido traducible tienen DE y PT. Detalle:
-
-| Categoría | Páginas | Estado DE/PT |
-|-----------|---------|--------------|
-| Comerciales (Index, Precios, Demo, Contacto, Funcionalidades...) | ~15 | ✅ |
-| Guías SEO (ComoHacerCartaVinos, VinoPorCopa, EstrategiaMaridaje...) | ~20 | ✅ |
-| Herramientas/Calculadoras (7 calculadoras + 3 analyzers + scores) | ~12 | ✅ |
-| Pain pages (CartaNoVende, CartaAmplia, Problemas) | 3 | ✅ |
-| Verticales (Hoteles, Grupos, WineBars, Gastronómicos, SinSumiller) | 5 | ✅ |
-| Hub pages (GrapesHub, PairingsHub, RegionsHub, StylesHub, BibliotecaVino) | 5 | ✅ |
-| Detail pages (GrapeDetail, PairingDetail, RegionDetail, StyleDetail, RegionCountry) | 5 | ✅ |
-| Otros (CursosVino, CursoDetalle, GlosarioVino, Distribuidor, Afiliate, Empleo...) | ~15 | ✅ |
-| Decision Center + DecisionCenterArea | 2 | ✅ |
-| Admin/sistema (Admin, AdminLogin, Unsubscribe, SeoPage, ArticlePage) | 5 | N/A |
-| Wrappers (BenchmarkPlaybookDetail, ComparativaDetalle, ResourcePage) | 3 | N/A |
+Todas las páginas con contenido traducible tienen DE y PT. Sin cambios desde sesión 3.
 
 ### Datos compartidos — ✅ COMPLETO
 
-| Archivo | Estado |
-|---------|--------|
-| `src/data/ctas.ts` (CTA system, 3 funnel stages) | ✅ DE/PT añadidos |
-| `src/data/decisionCenter/*.ts` (36 archivos, 6 áreas × 6 idiomas) | ✅ 12 archivos nuevos (.de.ts y .pt.ts) |
-| `src/components/VideoSection.tsx` | ✅ DE/PT añadidos |
+Sin cambios desde sesión 3.
 
-### SEO Templates (src/components/templates/) — ✅ COMPLETO
+### SEO Templates — ✅ COMPLETO
 
-| Template | Estado i18n |
-|----------|-------------|
-| CityTemplate | ✅ i18n object con 6 idiomas (antes hardcoded ES) |
-| RestaurantTypeTemplate | ✅ i18n object con 6 idiomas (antes hardcoded ES) |
-| CountryTemplate | ✅ i18n object con 6 idiomas (antes hardcoded EN) |
-| GenericSeoTemplate | ✅ i18n object + clusterConfig refactored con 6 idiomas (antes hardcoded ES) |
-| GuideTemplate | ✅ Ya tenía DE/PT |
-| PainTemplate | ✅ Ya tenía DE/PT |
-| ComparisonPageTemplate | ✅ Ya tenía DE/PT |
-| VerticalTemplate | ✅ Ya tenía DE/PT |
-| ToolStrategicBlock | ✅ Ya tenía DE/PT |
+Sin cambios desde sesión 3.
 
 ### Routing — ✅ COMPLETO
 
-`ROUTE_MAP` en `src/i18n/types.ts` tiene entradas para los 6 idiomas. `SUPPORTED_LANGS`, `LANG_FLAGS`, `LANG_LABELS` incluyen DE y PT.
+Sin cambios desde sesión 3. Catch-all `<Route path="*" element={<SeoPage />} />` sigue funcionando.
 
-**Catch-all routing**: Todas las rutas SEO usan un solo `<Route path="*" element={<SeoPage />} />`. SeoPage extrae el slug con `useLocation().pathname` → `slugFromPathname()` (quita prefijo `/xx/` de idioma) → query Supabase → template según cluster.
+### Componentes SEO compartidos — ✅ COMPLETO
 
-### Componentes SEO compartidos — ✅ COMPLETO (sesión 3)
+Sin cambios desde sesión 3.
 
-| Componente | Estado i18n |
-|------------|-------------|
-| InternalLinks.tsx | ✅ typeLabels, defaultTitles, typeIcons con 6 idiomas + types product/case_study + fallback para tipos desconocidos |
-| RelatedPages.tsx | ✅ clusterLabels y defaultTitles con 6 idiomas |
-| Breadcrumbs.tsx | ✅ Usa useLanguage() con t.breadcrumb_home |
+### Recursos (newResources) — ✅ TRADUCCIONES CREADAS, ⚠️ NO INTEGRADO
 
-## Páginas SEO dinámicas (Supabase) — ⏳ SQL LISTO, PENDIENTE EJECUCIÓN
+**Archivo nuevo**: `src/data/newResourcesI18n.ts` (3,732 líneas)
+**Idiomas traducidos**: EN, IT, FR (los 14 recursos)
+**Arquitectura**: Archivo separado con `getLocalizedResources(lang)` que aplica overlay de traducciones sobre los datos base de `newResources.ts`.
+**Tipo**: `ResourceLangContent` con 24 campos traducibles por recurso.
+**PENDIENTE**: Integrar en `ResourceTemplate.tsx` / `ResourcePage.tsx` — actualmente los componentes siguen usando solo los datos en español de `newResources.ts`. También falta traducir las strings hardcoded del template (mensajes de validación, toasts, labels).
 
-La tabla `seo_pages` en Supabase tiene páginas para ES/EN/IT/FR pero **NO tiene city pages para DE ni PT**.
+## Páginas SEO dinámicas (Supabase) — ✅ CITY PAGES DE/PT ACTIVAS
 
-**SQL preparado**: `sql/city-pages-de-pt.sql` — 15 INSERTs listos para ejecutar en Supabase SQL Editor:
-- **DE (9)**: Berlin, München, Hamburg, Frankfurt, Düsseldorf, Köln, Stuttgart, Wien, Zürich
-- **PT (6)**: Lisboa, Porto, Faro, Coimbra, Funchal, Braga
+La tabla `seo_pages` tiene city pages funcionando en producción:
 
-**Fix sesión 3**: Slugs corregidos quitando prefijos `de/` y `pt/` — ahora coinciden con lo que `slugFromPathname()` produce. También fix de data bug en Faro (`"a"` → `"desc"` en un feature).
+| Lang | Cluster | Ciudades | Estado |
+|------|---------|----------|--------|
+| ES | city | 3 (Madrid, Barcelona, Valencia) | ✅ Activas |
+| DE | city | 9 (Berlin, Düsseldorf, Frankfurt, Hamburg, Köln, München, Stuttgart, Wien, Zürich) | ✅ Activas |
+| PT | city | 6 (Braga, Coimbra, Faro, Funchal, Lisboa, Porto) | ✅ Activas |
+| EN | city | 0 | ❌ No existen |
+| FR | city | 0 | ❌ No existen |
+| IT | city | 0 | ❌ No existen |
 
-**Pendiente**: Ejecutar el SQL en Supabase (dashboard o CLI). No se puede desde el sandbox (proxy bloquea).
-**Pendiente**: Si el SQL ya se ejecutó con slugs incorrectos (`de/...`), hay que hacer UPDATE para quitarles el prefijo.
-**Pendiente**: Verificar si otros clusters (restaurant_type, country) necesitan entries DE/PT.
+**Total city pages**: 18
 
-## Chat widget FOUC fix
+**FALTA**: Expansión masiva de ciudades. España tiene solo 3 (faltan Sevilla, Málaga, Bilbao, etc.). EN/FR/IT no tienen ninguna. DE y PT podrían ampliarse.
 
-En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que cargue (opacity: 0 → 1 con transition). Los selectores usados (`#winerim-web-chat`, `.winerim-web-chat`, `[data-winerim-chat]`) son hipotéticos — **no se ha verificado en producción** que coincidan con el DOM real del widget.
+### Otros clusters — ⚠️ NO VERIFICADO
+
+No se ha comprobado si `restaurant_type`, `country`, u otros clusters tienen entries DE/PT.
 
 ## Cosas que funcionan
 
@@ -89,22 +105,20 @@ En `index.html` se añadió un bloque CSS que oculta el widget de chat hasta que
 - Fallback chain: `getI18n(map, lang)` → lang → en → es
 - Build Vite pasa sin errores
 - Todas las páginas estáticas renderizan en DE/PT sin crash
-- CTAs se muestran traducidos en DE/PT (antes caían a EN)
+- CTAs se muestran traducidos en DE/PT
+- City pages DE/PT renderizan correctamente en producción (worker + Supabase + SPA)
+- Cloudflare Worker sirve correctamente rutas `/de/*` y `/pt/*`
+- Google Ads conversion tracking en Gracias.tsx (sesión 5)
+- Apps Script webhook con deduplicación (sesión 6)
 
 ## Cosas que NO se han verificado
 
-- [ ] Aspecto visual de las traducciones en producción (no hay preview local)
+- [ ] Aspecto visual completo de las traducciones en producción
 - [ ] Calidad de las traducciones (no revisadas por nativo)
-- [x] SEO: hreflang tags para DE/PT — ya estaban en allLangPaths (client-side)
-- [x] SEO: sitemap edge function actualizado con DE/PT routes y hreflang
-- [x] SEO: Organization schema incluye DE/PT en availableLanguage y areaServed
-- [x] SEO: og:locale soporta de_DE y pt_PT
-- [x] Templates SEO tienen chrome traducido a 6 idiomas
-- [x] Duplicate de key warnings limpiados (VenderMasVino, VinoPorCopa, GuiasRecursos, ComoHacerCartaVinos)
-- [x] SQL para city pages DE/PT preparado (sql/city-pages-de-pt.sql)
-- [x] React error #130 en city pages DE/PT: causa raíz encontrada y arreglada (InternalLinks types desconocidos)
-- [x] InternalLinks.tsx: DE/PT i18n + types product/case_study + fallback
-- [x] RelatedPages.tsx: DE/PT i18n para clusterLabels y título
-- [x] SQL slugs corregidos (sin prefijos de idioma)
-- [ ] City pages DE/PT en Supabase (SQL aún pendiente de ejecución)
 - [ ] Chat widget FOUC fix funciona en producción
+- [ ] Otros clusters (restaurant_type, country) para DE/PT en Supabase
+- [ ] Worker: código fuente en repo (`cloudflare-worker-v3-hybrid.js`) puede estar desincronizado con el worker desplegado — el deploy se hizo via API, no desde el repo
+- [ ] Google Ads: 2 etiquetas inactivas, 1 no verificada, 2 sin conversiones recientes — requieren revisión manual en Google Ads UI
+- [ ] DNS: www.winerim.wine no redirige a winerim.wine — requiere config en Cloudflare
+- [ ] Apps Script: usuario debe confirmar que creó nueva versión de implementación
+- [ ] Integración de newResourcesI18n.ts en los componentes de renderizado
