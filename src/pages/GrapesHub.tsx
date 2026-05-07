@@ -19,6 +19,7 @@ import {
   type GrapeColor,
   type GrapeCatalogEntry,
 } from "@/data/grapesLibrary";
+import { getLocalizedGrape, getLocalizedCatalogEntry } from "@/data/grapesLibraryI18n";
 
 const i18n = {
   es: {
@@ -584,7 +585,10 @@ const GrapesHub = () => {
 
 /* ─── Sub-components ──────────────────────────────────────────────── */
 
-const GrapeCard = ({ grape }: { grape: { slug: string; name: string; description: string; color: GrapeColor; cartaRole: string[]; countries: string[] } }) => (
+const GrapeCard = ({ grape: rawGrape }: { grape: { slug: string; name: string; description: string; color: GrapeColor; cartaRole: string[]; countries: string[] } }) => {
+  const { lang } = useLanguage();
+  const grape = getLocalizedCatalogEntry(rawGrape as GrapeCatalogEntry, lang);
+  return (
   <Link
     to={`/biblioteca-vino/uvas/${grape.slug}`}
     className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
@@ -594,18 +598,22 @@ const GrapeCard = ({ grape }: { grape: { slug: string; name: string; description
       <ArrowRight size={14} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
     </div>
     <h3 className="font-heading text-lg font-semibold group-hover:text-wine transition-colors mb-2">{grape.name}</h3>
-    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{grape.description}</p>
+    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{rawGrape.description}</p>
     <div className="flex flex-wrap gap-1.5">
       {grape.cartaRole.slice(0, 3).map((role) => (
         <span key={role} className="text-xs bg-secondary/50 px-2 py-0.5 rounded-md capitalize">{role}</span>
       ))}
     </div>
   </Link>
-);
+  );
+};
 
-const CatalogGrid = ({ grapes }: { grapes: GrapeCatalogEntry[] }) => (
+const CatalogGrid = ({ grapes }: { grapes: GrapeCatalogEntry[] }) => {
+  const { lang } = useLanguage();
+  return (
   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    {grapes.map((grape) => {
+    {grapes.map((rawGrape) => {
+      const grape = getLocalizedCatalogEntry(rawGrape, lang);
       const isFull = hasFullEntry(grape.slug);
       return (
         <Link
@@ -636,6 +644,7 @@ const CatalogGrid = ({ grapes }: { grapes: GrapeCatalogEntry[] }) => (
       );
     })}
   </div>
-);
+  );
+};
 
 export default GrapesHub;

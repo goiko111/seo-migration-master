@@ -17,6 +17,7 @@ import {
   hasFullEntry,
   colorLabels,
 } from "@/data/grapesLibrary";
+import { getLocalizedGrape, getLocalizedCatalogEntry } from "@/data/grapesLibraryI18n";
 
 /* i18n translations */
 const i18n = {
@@ -278,9 +279,10 @@ const GrapeDetail = () => {
 /* ═══════════════════════════════════════════════════════════════════════
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════════════ */
-const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrapeBySlug>> }) => {
+const FullGrapeDetail = ({ data: rawData }: { data: NonNullable<ReturnType<typeof getGrapeBySlug>> }) => {
   const { lang, allLangPaths } = useLanguage();
   const t = i18n[lang as keyof typeof i18n] ?? i18n.es;
+  const data = getLocalizedGrape(rawData, lang);
   return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
@@ -600,9 +602,10 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
 /* ═══════════════════════════════════════════════════════════════════════
    CATALOG DETAIL — Simplified view for grapes without full Winerim layer
    ═══════════════════════════════════════════════════════════════════════ */
-const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getCatalogEntry>> }) => {
+const CatalogGrapeDetail = ({ data: rawData }: { data: NonNullable<ReturnType<typeof getCatalogEntry>> }) => {
   const { lang } = useLanguage();
   const t = i18n[lang as keyof typeof i18n] ?? i18n.es;
+  const data = getLocalizedCatalogEntry(rawData, lang);
   return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead

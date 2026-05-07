@@ -10,6 +10,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { grapeCatalog } from "@/data/grapesLibrary";
+import { getLocalizedCatalogEntry } from "@/data/grapesLibraryI18n";
 import { wineCountries } from "@/data/regionsLibrary";
 import { familyMeta, familyOrder, getAllStyles } from "@/data/stylesLibrary";
 import { categoryMeta, categoryOrder, pairingEntries } from "@/data/pairingsLibrary";
@@ -457,8 +458,9 @@ const BibliotecaVino = () => {
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {topGrapes.map((slug, i) => {
-              const grape = grapeCatalog.find((g) => g.slug === slug);
-              if (!grape) return null;
+              const rawGrape = grapeCatalog.find((g) => g.slug === slug);
+              if (!rawGrape) return null;
+              const grape = getLocalizedCatalogEntry(rawGrape, lang);
               return (
                 <ScrollReveal key={slug} delay={i * 0.05}>
                   <Link to={`/biblioteca-vino/uvas/${slug}`}
