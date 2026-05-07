@@ -211,3 +211,32 @@
 **Idiomas traducidos**: EN, IT, FR. Los 14 recursos del catálogo.
 
 **PENDIENTE**: DE y PT para recursos. Integrar en los componentes de renderizado (`ResourceTemplate.tsx`, `ResourcePage.tsx`).
+
+
+---
+
+## 2026-05-07 — City pages expansion: 347 pages across 6 languages
+
+**Decisión**: Expansión masiva de city pages insertando ~210 nuevas páginas en Supabase para 6 países: ES (+30→61), EN (+26→121), IT (+50→50), FR (+50→50), DE (+30→39), PT (+20→26).
+
+**Método**: SQL files generados y almacenados en `sql/` del repo GitHub. Ejecutados via Lovable API (`window.__execSQL`) desde el navegador, con fetch desde GitHub API (CORS-compatible) usando `window.__fixAndExec` que corrige automáticamente `related_pages` type mismatch (jsonb→text[]) y añade `ON CONFLICT (slug) DO NOTHING` para idempotencia.
+
+**Problemas resueltos**:
+- `related_pages` column es `text[]` pero SQLs usaban `::jsonb` cast → regex fix en browser
+- Italian SQL tenía comillas sin escapar (`vini 'noti'`, `vini 'seri'`) y JSON malformado en Ancona → fix en archivo y push a GitHub
+- GitHub raw URLs bloqueadas por CORS → se usó GitHub API con `Accept: application/vnd.github.v3.raw`
+- Inserciones duplicadas por ejecuciones parciales → `ON CONFLICT (slug) DO NOTHING`
+
+**Archivos SQL**: `city-pages-es-30-new.sql`, `city-pages-uk-30-new.sql`, `city-pages-it-50.sql`, `city-pages-fr-50.sql`, `city-pages-pt-20.sql`, `city-pages-de-30.sql`
+
+**Resultado final**: 347 city pages activas en producción.
+
+---
+
+## 2026-05-07 — Traducción de contenido de recursos a 5 idiomas
+
+**Decisión**: Traducir todo el contenido de la página de recursos (tarjetas, páginas individuales, formularios) a EN, IT, FR, DE, PT.
+
+**Método**: Archivos de traducción creados/actualizados en el código fuente y sincronizados via GitHub push.
+
+**Razón**: Los recursos son landing pages clave para conversión y necesitan estar en el idioma del visitante para maximizar engagement y leads.
