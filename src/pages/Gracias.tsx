@@ -1,4 +1,5 @@
 import { useSearchParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, ArrowRight, Phone, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -255,6 +256,61 @@ const Gracias = () => {
   const langContent = CONTENT[lang];
   const isResource = formType.startsWith("plantilla-") || formType.startsWith("checklist-") || formType.startsWith("scorecard-") || formType.startsWith("guia-") || formType.startsWith("revision-");
   const c = langContent[formType] || (isResource ? langContent.resource : langContent.default);
+
+  /* ── Conversion tracking for SPA ──
+   * Google Ads conversion "Demo solicitada - Winerim" is configured as
+   * "page load when URL contains winerim.wine/gracias".
+   * React Router navigates client-side without a real page load,
+   * so we must fire a virtual pageview + explicit conversion events
+   * so GTM / gtag / Meta Pixel can detect the thank-you page.
+   */
+  useEffect(() => {
+    const fullUrl = window.location.href;
+    const pagePath = window.location.pathname + window.location.search;
+
+    // 1. Virtual pageview for gtag (triggers page-load conversions)
+    const gtag = (window as any).gtag;
+    if (typeof gtag === "function") {
+      gtag("event", "page_view", {
+        page_title: chrome.seoTitle,
+        page_location: fullUrl,
+        page_path: pagePath,
+      });
+    }
+
+    // 2. dataLayer push for GTM (triggers GTM page-view-based tags)
+    const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+    dl.push({
+      event: "virtualPageview",
+      pagePath,
+      pageTitle: chrome.seoTitle,
+      formType,
+    });
+
+    // 3. Explicit generate_lead event for GA4
+    dl.push({
+      event: "generate_lead",
+      form_type: formType,
+      page_path: pagePath,
+    });
+
+    // 4. Explicit ads_conversion event (backup for GTM-based Ads tags)
+    dl.push({
+      event: "ads_conversion",
+      conversion_type: formType,
+      page_path: pagePath,
+      value: formType === "demo" ? 100 : formType === "analisis-carta" ? 50 : 30,
+      currency: "EUR",
+    });
+
+    // 5. Meta Pixel Lead event
+    if (typeof (window as any).fbq === "function") {
+      (window as any).fbq("track", "Lead", {
+        content_name: formType,
+        content_category: "form_submission",
+      });
+    }
+  }, [formType, chrome.seoTitle]);
 
   return (
     <div className="min-h-screen bg-background">
