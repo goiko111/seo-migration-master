@@ -93,7 +93,7 @@ const PhoneInput = ({
           aria-label="Country prefix"
           required={required}
         >
-          <option value="" disabled>{placeholder}</option>
+          <option value="">{placeholder}</option>
           {PREFIXES.map((p) => (
             <option key={p.code} value={p.code}>
               {p.flag} {p.dial}
@@ -123,9 +123,10 @@ const PhoneInput = ({
         className={selectCls}
         style={{ width: "130px", minWidth: "130px" }}
         aria-label="Country prefix"
+        required={required}
         {...(register ? register(`${name}_prefix`) : {})}
       >
-        <option value="" disabled>{placeholder}</option>
+        <option value="">{placeholder}</option>
         {PREFIXES.map((p) => (
           <option key={p.code} value={p.code}>
             {p.flag} {p.dial}
