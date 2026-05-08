@@ -92,6 +92,7 @@ export type Database = {
           position: string | null
           references_count: string | null
           restaurant: string | null
+          state: string | null
         }
         Insert: {
           business_type?: string | null
@@ -110,6 +111,7 @@ export type Database = {
           position?: string | null
           references_count?: string | null
           restaurant?: string | null
+          state?: string | null
         }
         Update: {
           business_type?: string | null
@@ -128,6 +130,7 @@ export type Database = {
           position?: string | null
           references_count?: string | null
           restaurant?: string | null
+          state?: string | null
         }
         Relationships: []
       }
