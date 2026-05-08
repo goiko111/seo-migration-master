@@ -1036,7 +1036,7 @@ const AnalizaCarta = () => {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="tu@restaurante.com"
+                        placeholder={fi.labels.emailPh}
                         required
                         maxLength={255}
                         className="bg-background border-border mt-1.5"
@@ -1064,12 +1064,14 @@ const AnalizaCarta = () => {
                         defaultValue=""
                       >
                         <option value="" disabled>{t.form.refsPh}</option>
-                        {referencesOptions.map(o => (
+                        {fi.references.map(o => (
                           <option key={o.value} value={o.value}>{o.label}</option>
                         ))}
                       </select>
                     </div>
                   </div>
+
+                  <StateField phoneId="phone" name="state" />
 
                   <div>
                     <Label htmlFor="business_type" className="text-sm font-medium">{t.form.bizLabel}</Label>
@@ -1080,7 +1082,7 @@ const AnalizaCarta = () => {
                       defaultValue=""
                     >
                       <option value="" disabled>{t.form.bizPh}</option>
-                      {businessTypeOptions.map(o => (
+                      {fi.businessTypes.map(o => (
                         <option key={o.value} value={o.value}>{o.label}</option>
                       ))}
                     </select>
