@@ -586,7 +586,7 @@ const AnalizaCarta = () => {
     selectFile(e.target.files?.[0] ?? null);
   };
 
-  const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleFileDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setMode("upload");
