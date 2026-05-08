@@ -873,6 +873,7 @@ const translations: { [slug: string]: { [lang: string]: ResourceLangContent } } 
     },
   },
 
+  "plantilla-analisis-margenes": {
     en: {
       metaTitle: "Wine Margin Analysis Template by Reference | Winerim",
       metaDescription: "Download the template to analyze the real margin of each wine on your list. Cost, retail price, multiplier, contribution to overall margin and profitability ranking.",
