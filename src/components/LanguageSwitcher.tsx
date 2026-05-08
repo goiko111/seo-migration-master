@@ -2,7 +2,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, SupportedLang, DEFAULT_LANG } from "@/i18n/types";
+import { SUPPORTED_LANGS, LANG_LABELS, ROUTE_MAP, SupportedLang, DEFAULT_LANG } from "@/i18n/types";
+
+const LANG_CODES: Record<SupportedLang, string> = {
+  es: "ES", en: "EN", it: "IT", fr: "FR", de: "DE", pt: "PT",
+};
 
 /** Find the ES route equivalent for the current path */
 function findEsRoute(pathname: string, currentLang: SupportedLang): string {
@@ -55,7 +59,7 @@ const LanguageSwitcher = () => {
         aria-label="Change language"
       >
         <Globe size={14} />
-        <span className="hidden sm:inline">{LANG_FLAGS[lang]}</span>
+        <span className="hidden sm:inline uppercase tracking-wide">{LANG_CODES[lang]}</span>
       </button>
 
       {open && (
@@ -68,7 +72,7 @@ const LanguageSwitcher = () => {
                 l === lang ? "text-foreground bg-wine/5" : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
               }`}
             >
-              <span>{LANG_FLAGS[l]}</span>
+              <span className="text-xs font-semibold w-6 text-foreground/70">{LANG_CODES[l]}</span>
               <span>{LANG_LABELS[l]}</span>
             </button>
           ))}
