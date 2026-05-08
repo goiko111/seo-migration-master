@@ -586,9 +586,9 @@ const GrapesHub = () => {
 
 /* ─── Sub-components ──────────────────────────────────────────────── */
 
-const GrapeCard = ({ grape: rawGrape }: { grape: { slug: string; name: string; description: string; color: GrapeColor; cartaRole: string[]; countries: string[] } }) => {
+const GrapeCard = ({ grape: rawGrape }: { grape: GrapeEntry }) => {
   const { lang } = useLanguage();
-  const grape = getLocalizedCatalogEntry(rawGrape as GrapeCatalogEntry, lang);
+  const grape = getLocalizedGrape(rawGrape, lang);
   return (
   <Link
     to={`/biblioteca-vino/uvas/${grape.slug}`}
