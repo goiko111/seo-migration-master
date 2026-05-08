@@ -598,6 +598,7 @@ const AnalizaCarta = () => {
 
     const fd = new FormData(e.currentTarget);
     const restaurant = (fd.get("restaurant") as string)?.trim();
+    const name = (fd.get("name") as string)?.trim();
     const email = (fd.get("email") as string)?.trim();
     const phoneRaw = (fd.get("phone") as string)?.trim();
     const phonePrefixCode = (fd.get("phone_prefix") as string)?.trim();
@@ -606,7 +607,7 @@ const AnalizaCarta = () => {
     const refsCount = (fd.get("references_count") as string)?.trim();
     const menuLink = (fd.get("menu_link") as string)?.trim();
 
-    if (!restaurant || !email || !phoneRaw || !phonePrefixCode) {
+    if (!restaurant || !name || !email || !phoneRaw || !phonePrefixCode) {
       toast.error(t.form.errRequired);
       setSubmitting(false);
       return;
@@ -637,6 +638,7 @@ const AnalizaCarta = () => {
     const leadData: Record<string, string | null> = {
       form_type: "analisis-carta",
       restaurant: restaurant || null,
+      name: name || null,
       email: email || null,
       phone: phoneFormatted || null,
       city: city || null,
@@ -1047,6 +1049,20 @@ const AnalizaCarta = () => {
                       id="restaurant"
                       name="restaurant"
                       placeholder={t.form.restaurantPh}
+                      required
+                      maxLength={100}
+                      className="bg-background border-border mt-1.5"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="name" className="text-sm font-medium">
+                      {fi.labels.name} <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder={fi.labels.namePh}
                       required
                       maxLength={100}
                       className="bg-background border-border mt-1.5"
