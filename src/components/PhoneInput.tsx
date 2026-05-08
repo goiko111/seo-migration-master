@@ -37,18 +37,8 @@ const PREFIXES = [
   { code: "CN", dial: "+86", flag: "\u{1F1E8}\u{1F1F3}", label: "China" },
 ];
 
-/* Default prefix per active language.
- * EN intentionally has no default — leads must pick their country
- * explicitly so we don't default US/Canada visitors to +44. */
-const DEFAULT_BY_LANG: Record<string, string | ""> = {
-  es: "ES",
-  en: "",
-  it: "IT",
-  fr: "FR",
-  de: "DE",
-  pt: "PT",
-};
-
+/* No default country prefix: leads must explicitly choose their country
+ * regardless of the UI language. */
 const PLACEHOLDER_BY_LANG: Record<string, string> = {
   es: "Selecciona país",
   en: "Select country",
@@ -81,7 +71,6 @@ const PhoneInput = ({
   native = false,
 }: PhoneInputProps) => {
   const { lang } = useLanguage();
-  const defaultCode = DEFAULT_BY_LANG[lang] ?? "ES";
   const placeholder = PLACEHOLDER_BY_LANG[lang] || PLACEHOLDER_BY_LANG.en;
 
   const selectCls =
@@ -98,7 +87,7 @@ const PhoneInput = ({
         <select
           id={`${id}_prefix`}
           name={`${id}_prefix`}
-          defaultValue={defaultCode}
+          defaultValue=""
           className={selectCls}
           style={{ width: "130px", minWidth: "130px" }}
           aria-label="Country prefix"
@@ -130,7 +119,7 @@ const PhoneInput = ({
     <div className="flex mt-1.5">
       <select
         id={`${id}_prefix`}
-        defaultValue={defaultCode}
+        defaultValue=""
         className={selectCls}
         style={{ width: "130px", minWidth: "130px" }}
         aria-label="Country prefix"

@@ -69,12 +69,11 @@ const Empleo = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const defaultPrefixCode = lang === "en" ? "GB" : lang === "it" ? "IT" : lang === "fr" ? "FR" : lang === "de" ? "DE" : lang === "pt" ? "PT" : "ES";
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    phone_prefix: defaultPrefixCode,
+    phone_prefix: "",
     linkedin_url: "",
     area_of_interest: "",
     message: "",
@@ -92,7 +91,7 @@ const Empleo = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) return;
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.phone_prefix) return;
 
     const prefixObj = PREFIXES.find(p => p.code === form.phone_prefix);
     const phoneFormatted = prefixObj ? `${prefixObj.dial} ${form.phone.trim()}` : form.phone.trim();
@@ -463,7 +462,11 @@ const Empleo = () => {
                         className="h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
                         style={{ width: "110px", minWidth: "110px" }}
                         aria-label="Country prefix"
+                        required
                       >
+                        <option value="" disabled>
+                          {lang === "en" ? "Select country" : lang === "it" ? "Seleziona paese" : lang === "fr" ? "Choisir pays" : lang === "de" ? "Land wählen" : lang === "pt" ? "Selecionar país" : "Selecciona país"}
+                        </option>
                         {PREFIXES.map((p) => (
                           <option key={p.code} value={p.code}>
                             {p.flag} {p.dial}
