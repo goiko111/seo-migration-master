@@ -599,9 +599,13 @@ const LOCALIZED_SPA_FALLBACK_PREFIXES = [
 
 // ─── SEO WILDCARD prefixes (programmatic SEO pages) ───
 const SEO_WILDCARD_PREFIXES = [
-  '/software-carta-de-vinos-',
-  '/software-vino-',
-  '/wine-list-software-',
+  '/software-carta-de-vinos-',   // ES city pages
+  '/software-vino-',              // ES cuisine city pages
+  '/wine-list-software-',         // EN city pages
+  '/software-carta-dei-vini-',    // IT city pages
+  '/logiciel-carte-des-vins-',    // FR city pages
+  '/weinkarten-software-',        // DE city pages
+  '/software-carta-de-vinhos-',   // PT city pages
 ];
 
 // ─── PRIVATE routes (proxy but noindex) ───
