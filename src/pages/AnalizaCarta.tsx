@@ -608,7 +608,20 @@ const AnalizaCarta = () => {
     const refsCount = (fd.get("references_count") as string)?.trim();
     const menuLink = (fd.get("menu_link") as string)?.trim();
 
-    if (!restaurant || !name || !email || !phoneRaw || !phonePrefixCode) {
+    const businessType = (fd.get("business_type") as string)?.trim();
+
+    if (
+      !restaurant || !name || !email || !phoneRaw || !phonePrefixCode ||
+      !city || !refsCount || !businessType
+    ) {
+      toast.error(t.form.errRequired);
+      setSubmitting(false);
+      return;
+    }
+
+    // File OR link is required
+    const hasFile = !!(selectedFile || fileRef.current?.files?.[0]);
+    if (!hasFile && !menuLink) {
       toast.error(t.form.errRequired);
       setSubmitting(false);
       return;
@@ -663,7 +676,7 @@ const AnalizaCarta = () => {
       lang,
       references_count: refsCount || null,
       menu_link: finalLink,
-      business_type: (fd.get("business_type") as string)?.trim() || null,
+      business_type: businessType || null,
     };
     const { error } = await supabase.from("contact_leads").insert(leadData);
 
@@ -1111,20 +1124,26 @@ const AnalizaCarta = () => {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="city" className="text-sm font-medium">{t.form.cityLabel}</Label>
+                      <Label htmlFor="city" className="text-sm font-medium">
+                        {t.form.cityLabel} <span className="text-destructive">*</span>
+                      </Label>
                       <Input
                         id="city"
                         name="city"
                         placeholder={t.form.cityPh}
+                        required
                         maxLength={80}
                         className="bg-background border-border mt-1.5"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="references_count" className="text-sm font-medium">{t.form.refsLabel}</Label>
+                      <Label htmlFor="references_count" className="text-sm font-medium">
+                        {t.form.refsLabel} <span className="text-destructive">*</span>
+                      </Label>
                       <select
                         id="references_count"
                         name="references_count"
+                        required
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm mt-1.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         defaultValue=""
                       >
@@ -1139,10 +1158,13 @@ const AnalizaCarta = () => {
                   <StateField phoneId="phone" name="state" />
 
                   <div>
-                    <Label htmlFor="business_type" className="text-sm font-medium">{t.form.bizLabel}</Label>
+                    <Label htmlFor="business_type" className="text-sm font-medium">
+                      {t.form.bizLabel} <span className="text-destructive">*</span>
+                    </Label>
                     <select
                       id="business_type"
                       name="business_type"
+                      required
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm mt-1.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       defaultValue=""
                     >
@@ -1156,7 +1178,11 @@ const AnalizaCarta = () => {
                   <div className="flex gap-2">
                     <button
                       type="button"
-                      onClick={() => setMode("upload")}
+                      onClick={() => {
+                        setMode("upload");
+                        // Open file picker after the dropzone (with the input) has rendered
+                        setTimeout(() => fileRef.current?.click(), 0);
+                      }}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border text-sm font-semibold transition-all ${
                         mode === "upload"
                           ? "border-wine/40 bg-wine/10 text-foreground"
@@ -1209,12 +1235,15 @@ const AnalizaCarta = () => {
                     </label>
                   ) : (
                     <div>
-                      <Label htmlFor="menu_link" className="text-sm font-medium">{t.form.linkLabel}</Label>
+                      <Label htmlFor="menu_link" className="text-sm font-medium">
+                        {t.form.linkLabel} <span className="text-destructive">*</span>
+                      </Label>
                       <Input
                         id="menu_link"
                         name="menu_link"
                         type="url"
                         placeholder={t.form.linkPh}
+                        required
                         maxLength={500}
                         className="bg-background border-border mt-1.5"
                       />
