@@ -464,7 +464,7 @@ const Empleo = () => {
                         aria-label="Country prefix"
                         required
                       >
-                        <option value="" disabled>
+                        <option value="">
                           {lang === "en" ? "Select country" : lang === "it" ? "Seleziona paese" : lang === "fr" ? "Choisir pays" : lang === "de" ? "Land wählen" : lang === "pt" ? "Selecionar país" : "Selecciona país"}
                         </option>
                         {PREFIXES.map((p) => (

@@ -28,7 +28,7 @@ const formSchema = z.object({
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
   position: z.string().trim().min(1, "Selecciona tu cargo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
-  phone_prefix: z.string().optional(),
+  phone_prefix: z.string().trim().min(1, "Selecciona el país del teléfono"),
   email: z.string().trim().email("Introduce un email válido").max(255),
   city: z.string().trim().max(100).optional().or(z.literal("")),
   references_count: z.string().trim().min(1, "Selecciona el número de referencias"),
