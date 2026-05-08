@@ -37,14 +37,25 @@ const PREFIXES = [
   { code: "CN", dial: "+86", flag: "\u{1F1E8}\u{1F1F3}", label: "China" },
 ];
 
-/* Default prefix per active language */
-const DEFAULT_BY_LANG: Record<string, string> = {
+/* Default prefix per active language.
+ * EN intentionally has no default — leads must pick their country
+ * explicitly so we don't default US/Canada visitors to +44. */
+const DEFAULT_BY_LANG: Record<string, string | ""> = {
   es: "ES",
-  en: "GB",
+  en: "",
   it: "IT",
   fr: "FR",
   de: "DE",
   pt: "PT",
+};
+
+const PLACEHOLDER_BY_LANG: Record<string, string> = {
+  es: "Selecciona país",
+  en: "Select country",
+  it: "Seleziona paese",
+  fr: "Choisir pays",
+  de: "Land wählen",
+  pt: "Selecionar país",
 };
 
 interface PhoneInputProps {
@@ -70,7 +81,8 @@ const PhoneInput = ({
   native = false,
 }: PhoneInputProps) => {
   const { lang } = useLanguage();
-  const defaultCode = DEFAULT_BY_LANG[lang] || "ES";
+  const defaultCode = DEFAULT_BY_LANG[lang] ?? "ES";
+  const placeholder = PLACEHOLDER_BY_LANG[lang] || PLACEHOLDER_BY_LANG.en;
 
   const selectCls =
     "h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer";
@@ -88,9 +100,11 @@ const PhoneInput = ({
           name={`${id}_prefix`}
           defaultValue={defaultCode}
           className={selectCls}
-          style={{ width: "110px", minWidth: "110px" }}
+          style={{ width: "130px", minWidth: "130px" }}
           aria-label="Country prefix"
+          required={required}
         >
+          <option value="" disabled>{placeholder}</option>
           {PREFIXES.map((p) => (
             <option key={p.code} value={p.code}>
               {p.flag} {p.dial}
@@ -118,10 +132,11 @@ const PhoneInput = ({
         id={`${id}_prefix`}
         defaultValue={defaultCode}
         className={selectCls}
-        style={{ width: "110px", minWidth: "110px" }}
+        style={{ width: "130px", minWidth: "130px" }}
         aria-label="Country prefix"
         {...(register ? register(`${name}_prefix`) : {})}
       >
+        <option value="" disabled>{placeholder}</option>
         {PREFIXES.map((p) => (
           <option key={p.code} value={p.code}>
             {p.flag} {p.dial}
