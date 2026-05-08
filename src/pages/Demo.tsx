@@ -30,6 +30,7 @@ const content: Record<string, {
   trust_response: string; trust_no_commitment: string; trust_demo: string;
   what_next: string; step1: string; step2: string; step3: string;
   link_software: string; link_pricing: string; link_cases: string; link_analysis: string;
+  testimonial_quote: string; testimonial_role: string;
 }> = {
   es: {
     seo_title: "Solicitar Demo Gratuita | Winerim", seo_desc: "Solicita tu demo personalizada de Winerim. 15 minutos, sin compromiso. Descubre cómo vender más vino en tu restaurante.", breadcrumb: "Demo gratuita", label: "Prueba gratuita",
@@ -54,6 +55,8 @@ const content: Record<string, {
     step2: "Preparamos la demo con tu carta real (si la envías).",
     step3: "En 15 min ves Winerim aplicado a tu caso. Sin compromiso.",
     link_software: "Software carta de vinos", link_pricing: "Planes y precios", link_cases: "Casos de éxito", link_analysis: "Análisis gratuito de carta",
+    testimonial_quote: "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos.",
+    testimonial_role: "Propietario/Sommelier · Travieso Bar",
   },
   en: {
     seo_title: "Free Demo | Winerim", seo_desc: "Request your personalized Winerim demo. 15 minutes, no commitment. Discover how to sell more wine.", breadcrumb: "Free demo", label: "Free trial",
@@ -78,6 +81,8 @@ const content: Record<string, {
     step2: "We prepare the demo with your actual wine list (if you send it).",
     step3: "In 15 min you see Winerim applied to your case. No commitment.",
     link_software: "Wine list software", link_pricing: "Plans & pricing", link_cases: "Case studies", link_analysis: "Free wine list analysis",
+    testimonial_quote: "What used to take 10–15 minutes to explain the wine list now takes 3 minutes with Winerim — guests get a full overview at a glance.",
+    testimonial_role: "Owner/Sommelier · Travieso Bar",
   },
   it: {
     seo_title: "Demo Gratuita | Winerim", seo_desc: "Richiedi la tua demo personalizzata di Winerim. 15 minuti, senza impegno.", breadcrumb: "Demo gratuita", label: "Prova gratuita",
@@ -102,6 +107,8 @@ const content: Record<string, {
     step2: "Prepariamo la demo con la tua carta reale (se la invii).",
     step3: "In 15 min vedi Winerim applicato al tuo caso. Senza impegno.",
     link_software: "Software carta dei vini", link_pricing: "Piani e prezzi", link_cases: "Casi di successo", link_analysis: "Analisi gratuita della carta",
+    testimonial_quote: "Quello che prima richiedeva 10–15 minuti per spiegare la carta, ora con Winerim in 3 minuti gli ospiti hanno già una visione globale dei vini.",
+    testimonial_role: "Proprietario/Sommelier · Travieso Bar",
   },
   fr: {
     seo_title: "Démo Gratuite | Winerim", seo_desc: "Demandez votre démo personnalisée de Winerim. 15 minutes, sans engagement.", breadcrumb: "Démo gratuite", label: "Essai gratuit",
@@ -126,6 +133,8 @@ const content: Record<string, {
     step2: "Nous préparons la démo avec votre carte réelle (si vous l'envoyez).",
     step3: "En 15 min, vous voyez Winerim appliqué à votre cas. Sans engagement.",
     link_software: "Logiciel carte des vins", link_pricing: "Plans et tarifs", link_cases: "Cas clients", link_analysis: "Analyse gratuite de carte",
+    testimonial_quote: "Ce qui prenait 10 à 15 minutes pour expliquer la carte se fait en 3 minutes avec Winerim — les clients ont une vue d'ensemble immédiate.",
+    testimonial_role: "Propriétaire/Sommelier · Travieso Bar",
   },
   de: {
     seo_title: "Kostenlose Demo anfordern | Winerim", seo_desc: "Fordern Sie Ihre personalisierte Winerim-Demo an. 15 Minuten, unverbindlich. Entdecken Sie, wie Sie mehr Wein verkaufen.", breadcrumb: "Kostenlose Demo", label: "Kostenlos testen",
@@ -150,6 +159,8 @@ const content: Record<string, {
     step2: "Wir bereiten die Demo mit Ihrer echten Karte vor (falls Sie sie senden).",
     step3: "In 15 Min. sehen Sie Winerim angewendet auf Ihren Fall. Unverbindlich.",
     link_software: "Weinkarten-Software", link_pricing: "Pläne und Preise", link_cases: "Erfolgsgeschichten", link_analysis: "Kostenlose Weinkartenanalyse",
+    testimonial_quote: "Was früher 10–15 Minuten dauerte, um die Weinkarte zu erklären, schaffen die Gäste mit Winerim in 3 Minuten – sie haben sofort einen Gesamtüberblick.",
+    testimonial_role: "Inhaber/Sommelier · Travieso Bar",
   },
   pt: {
     seo_title: "Pedir Demo Gratuita | Winerim", seo_desc: "Solicite a sua demo personalizada da Winerim. 15 minutos, sem compromisso. Descubra como vender mais vinho no seu restaurante.", breadcrumb: "Demo gratuita", label: "Teste gratuito",
@@ -174,6 +185,8 @@ const content: Record<string, {
     step2: "Preparamos a demo com a sua carta real (se a enviar).",
     step3: "Em 15 min vê a Winerim aplicada ao seu caso. Sem compromisso.",
     link_software: "Software carta de vinhos", link_pricing: "Planos e preços", link_cases: "Casos de sucesso", link_analysis: "Análise gratuita da carta",
+    testimonial_quote: "O que antes eram 10/15 minutos para explicar a carta, agora com a Winerim em 3 minutos já têm uma visão global dos vinhos.",
+    testimonial_role: "Proprietário/Sommelier · Travieso Bar",
   },
 };
 
@@ -269,13 +282,13 @@ const Demo = () => {
               {/* Social proof quote */}
               <div className="mt-8 p-4 rounded-xl border border-border bg-background">
                 <p className="text-sm text-muted-foreground italic leading-relaxed mb-3">
-                  "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos."
+                  "{c.testimonial_quote}"
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-full bg-wine flex items-center justify-center text-[9px] font-bold text-white">NO</div>
                   <div>
                     <p className="text-xs font-semibold">Nacho Otamendi</p>
-                    <p className="text-[10px] text-muted-foreground">Propietario/Sommelier · Travieso Bar</p>
+                    <p className="text-[10px] text-muted-foreground">{c.testimonial_role}</p>
                   </div>
                 </div>
               </div>
