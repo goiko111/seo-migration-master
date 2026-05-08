@@ -263,6 +263,9 @@ export const businessTypeOptions = formI18n.es.businessTypes;
 export const numLocationsOptions = formI18n.es.locations;
 export const mainChallengeOptions = formI18n.es.challenges;
 
+/** Resolve the form i18n bundle for a given language (falls back to ES). */
+export const getFormI18n = (lang: string) => formI18n[lang] || formI18n.es;
+
 export type FormVariant = "demo" | "contact" | "analysis" | "resource";
 
 interface ContactFormFieldsProps {
