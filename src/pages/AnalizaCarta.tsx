@@ -28,6 +28,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { parsePhoneNumberFromString, type CountryCode } from "libphonenumber-js";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 type L = SupportedLang; type LMap<T> = I18nMap<T>;
@@ -614,7 +615,23 @@ const AnalizaCarta = () => {
     }
 
     const prefixObj = PREFIXES.find(p => p.code === phonePrefixCode);
-    const phoneFormatted = prefixObj ? `${prefixObj.dial} ${phoneRaw}` : phoneRaw;
+    // Validate phone for selected country (digit count, format) using libphonenumber-js
+    const parsed = prefixObj
+      ? parsePhoneNumberFromString(phoneRaw, phonePrefixCode as CountryCode)
+      : undefined;
+    if (!parsed || !parsed.isValid()) {
+      toast.error(
+        lang === "es" ? "El teléfono no es válido para el país seleccionado." :
+        lang === "it" ? "Il numero di telefono non è valido per il paese selezionato." :
+        lang === "fr" ? "Le numéro de téléphone n'est pas valide pour le pays sélectionné." :
+        lang === "de" ? "Die Telefonnummer ist für das ausgewählte Land ungültig." :
+        lang === "pt" ? "O número de telefone não é válido para o país selecionado." :
+        "The phone number is not valid for the selected country."
+      );
+      setSubmitting(false);
+      return;
+    }
+    const phoneFormatted = parsed.formatInternational();
 
     let uploadedUrl: string | null = null;
     const file = selectedFile || fileRef.current?.files?.[0];
@@ -1164,14 +1181,14 @@ const AnalizaCarta = () => {
                   </div>
 
                   {mode === "upload" ? (
-                    <div
-                      onClick={() => fileRef.current?.click()}
+                    <label
+                      htmlFor="wine-list-file"
                       onDragOver={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                       }}
                       onDrop={handleFileDrop}
-                      className="relative cursor-pointer rounded-xl border-2 border-dashed border-border hover:border-wine/30 bg-background p-8 text-center transition-colors"
+                      className="relative block cursor-pointer rounded-xl border-2 border-dashed border-border hover:border-wine/30 bg-background p-8 text-center transition-colors"
                     >
                       <Upload size={28} className="mx-auto text-muted-foreground mb-3" />
                       <p className="text-sm text-muted-foreground">
@@ -1182,13 +1199,14 @@ const AnalizaCarta = () => {
                         )}
                       </p>
                       <input
+                        id="wine-list-file"
                         ref={fileRef}
                         type="file"
                         accept=".pdf,.jpg,.jpeg,.png,.webp"
-                        className="hidden"
+                        className="sr-only"
                         onChange={handleFileChange}
                       />
-                    </div>
+                    </label>
                   ) : (
                     <div>
                       <Label htmlFor="menu_link" className="text-sm font-medium">{t.form.linkLabel}</Label>
