@@ -21,8 +21,9 @@ import ComparisonTable from "@/components/seo/ComparisonTable";
 import QuickAnswer from "@/components/seo/QuickAnswer";
 import FAQSection from "@/components/seo/FAQSection";
 import StickyCTA from "@/components/StickyCTA";
-import { referencesOptions, businessTypeOptions } from "@/components/ContactFormFields";
+import { getFormI18n } from "@/components/ContactFormFields";
 import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
+import StateField from "@/components/StateField";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
@@ -525,6 +526,8 @@ const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp
 
 const AnalizaCarta = () => {
   const { lang, allLangPaths } = useLanguage();
+  const fi = getFormI18n(lang);
+  const localePathFor = (p: string) => (lang === "es" ? p : `/${lang}${p}`);
   const t = {
     seo: seo[lang], hero: hero[lang], vc: visualCard[lang], summary: summaryI[lang],
     pains: painsI[lang], painsSection: painsSectionI[lang], qa: quickAnswerI[lang],
@@ -567,10 +570,11 @@ const AnalizaCarta = () => {
     const phoneRaw = (fd.get("phone") as string)?.trim();
     const phonePrefixCode = (fd.get("phone_prefix") as string)?.trim();
     const city = (fd.get("city") as string)?.trim();
+    const state = (fd.get("state") as string)?.trim();
     const refsCount = (fd.get("references_count") as string)?.trim();
     const menuLink = (fd.get("menu_link") as string)?.trim();
 
-    if (!restaurant || !email || !phoneRaw) {
+    if (!restaurant || !email || !phoneRaw || !phonePrefixCode) {
       toast.error(t.form.errRequired);
       setSubmitting(false);
       return;
@@ -585,14 +589,15 @@ const AnalizaCarta = () => {
       const ext = file.name.split(".").pop();
       const path = `analisis/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
       const { error: uploadError } = await supabase.storage
-        .from("admin-uploads")
+        .from("lead-uploads")
         .upload(path, file);
       if (uploadError) {
+        console.error("Upload error:", uploadError);
         toast.error(t.form.errUpload);
         setSubmitting(false);
         return;
       }
-      const { data: urlData } = supabase.storage.from("admin-uploads").getPublicUrl(path);
+      const { data: urlData } = supabase.storage.from("lead-uploads").getPublicUrl(path);
       uploadedUrl = urlData.publicUrl;
     }
 
@@ -603,6 +608,8 @@ const AnalizaCarta = () => {
       email: email || null,
       phone: phoneFormatted || null,
       city: city || null,
+      state: state || null,
+      lang,
       references_count: refsCount || null,
       menu_link: finalLink,
       business_type: (fd.get("business_type") as string)?.trim() || null,
@@ -614,7 +621,7 @@ const AnalizaCarta = () => {
       setSubmitting(false);
     } else {
       notifyLead(leadData);
-      navigate("/gracias?tipo=analisis-carta");
+      navigate(localePathFor("/gracias") + "?tipo=analisis-carta");
     }
   };
 
@@ -1029,7 +1036,7 @@ const AnalizaCarta = () => {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="tu@restaurante.com"
+                        placeholder={fi.labels.emailPh}
                         required
                         maxLength={255}
                         className="bg-background border-border mt-1.5"
@@ -1057,12 +1064,14 @@ const AnalizaCarta = () => {
                         defaultValue=""
                       >
                         <option value="" disabled>{t.form.refsPh}</option>
-                        {referencesOptions.map(o => (
+                        {fi.references.map(o => (
                           <option key={o.value} value={o.value}>{o.label}</option>
                         ))}
                       </select>
                     </div>
                   </div>
+
+                  <StateField phoneId="phone" name="state" />
 
                   <div>
                     <Label htmlFor="business_type" className="text-sm font-medium">{t.form.bizLabel}</Label>
@@ -1073,7 +1082,7 @@ const AnalizaCarta = () => {
                       defaultValue=""
                     >
                       <option value="" disabled>{t.form.bizPh}</option>
-                      {businessTypeOptions.map(o => (
+                      {fi.businessTypes.map(o => (
                         <option key={o.value} value={o.value}>{o.label}</option>
                       ))}
                     </select>
