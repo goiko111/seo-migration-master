@@ -1055,6 +1055,20 @@ const AnalizaCarta = () => {
                     />
                   </div>
 
+                  <div>
+                    <Label htmlFor="name" className="text-sm font-medium">
+                      {fi.labels.name} <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder={fi.labels.namePh}
+                      required
+                      maxLength={100}
+                      className="bg-background border-border mt-1.5"
+                    />
+                  </div>
+
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="phone" className="text-sm font-medium">
