@@ -1150,6 +1150,11 @@ const AnalizaCarta = () => {
                   {mode === "upload" ? (
                     <div
                       onClick={() => fileRef.current?.click()}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      onDrop={handleFileDrop}
                       className="relative cursor-pointer rounded-xl border-2 border-dashed border-border hover:border-wine/30 bg-background p-8 text-center transition-colors"
                     >
                       <Upload size={28} className="mx-auto text-muted-foreground mb-3" />
