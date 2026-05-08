@@ -18,6 +18,7 @@ import {
   colorLabels,
   type GrapeColor,
   type GrapeCatalogEntry,
+  type GrapeEntry,
 } from "@/data/grapesLibrary";
 import { getLocalizedGrape, getLocalizedCatalogEntry } from "@/data/grapesLibraryI18n";
 
