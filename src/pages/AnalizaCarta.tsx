@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -539,25 +539,57 @@ const AnalizaCarta = () => {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [mode, setMode] = useState<"upload" | "link">("upload");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) { setFileName(null); return; }
+  useEffect(() => {
+    const preventBrowserFileDrop = (event: DragEvent) => {
+      if (event.dataTransfer?.types.includes("Files")) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("dragover", preventBrowserFileDrop);
+    window.addEventListener("drop", preventBrowserFileDrop);
+
+    return () => {
+      window.removeEventListener("dragover", preventBrowserFileDrop);
+      window.removeEventListener("drop", preventBrowserFileDrop);
+    };
+  }, []);
+
+  const clearFile = () => {
+    setFileName(null);
+    setSelectedFile(null);
+    if (fileRef.current) fileRef.current.value = "";
+  };
+
+  const selectFile = (file: File | null) => {
+    if (!file) { clearFile(); return; }
     if (!ALLOWED_TYPES.includes(file.type)) {
       toast.error(t.form.errFormat);
-      e.target.value = "";
-      setFileName(null);
+      clearFile();
       return;
     }
     if (file.size > MAX_FILE_SIZE) {
       toast.error(t.form.errSize);
-      e.target.value = "";
-      setFileName(null);
+      clearFile();
       return;
     }
+    setSelectedFile(file);
     setFileName(file.name);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    selectFile(e.target.files?.[0] ?? null);
+  };
+
+  const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMode("upload");
+    selectFile(e.dataTransfer.files?.[0] ?? null);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -584,7 +616,7 @@ const AnalizaCarta = () => {
     const phoneFormatted = prefixObj ? `${prefixObj.dial} ${phoneRaw}` : phoneRaw;
 
     let uploadedUrl: string | null = null;
-    const file = fileRef.current?.files?.[0];
+    const file = selectedFile || fileRef.current?.files?.[0];
     if (file) {
       const ext = file.name.split(".").pop();
       const path = `analisis/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
