@@ -15,6 +15,7 @@ const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPa
   contacto: { label: "Formulario de contacto" },
   "analisis-carta": { label: "Análisis gratuito de carta de vinos" },
   "wine-list-analyzer": { label: "Analizador de carta de vinos (herramienta)" },
+  "herramientas_popup": { label: "Popup /herramientas — Diagnóstico gratuito" },
   "plantilla-estrategia-vinos-copa": {
     label: "Descarga: Plantilla estrategia vinos por copa",
     resource: "Plantilla de Estrategia de Vinos por Copa",
