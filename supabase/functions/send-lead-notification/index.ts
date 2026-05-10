@@ -108,12 +108,17 @@ Deno.serve(async (req) => {
 
     // 1) Send internal notification to info@winerim.com via transactional email
     const notifId = crypto.randomUUID();
-    await supabase.functions.invoke("send-transactional-email", {
-      body: {
-        templateName: "lead-notification",
-        recipientEmail: "info@winerim.com",
-        idempotencyKey: `lead-notif-${notifId}`,
-        templateData: {
+    const notificationRecipients = ["info@winerim.com"];
+    if (lead.form_type === "herramientas_popup") {
+      notificationRecipients.push("goiko@winerim.com");
+    }
+    for (const recipient of notificationRecipients) {
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "lead-notification",
+          recipientEmail: recipient,
+          idempotencyKey: `lead-notif-${notifId}-${recipient}`,
+          templateData: {
           formLabel: formInfo.label,
           restaurant: lead.restaurant,
           name: lead.name,
@@ -128,9 +133,10 @@ Deno.serve(async (req) => {
           main_challenge: lead.main_challenge,
           message: lead.message,
           menu_link: lead.menu_link,
+          },
         },
-      },
-    });
+      });
+    }
 
     // 2) Forward lead to Winerim Connect (Lead Autopilot)
     const CONNECT_URL = Deno.env.get("WINERIM_CONNECT_WEBHOOK_URL");
