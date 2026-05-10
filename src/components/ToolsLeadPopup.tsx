@@ -76,18 +76,10 @@ const ToolsLeadPopup = () => {
       setOpen(true);
     };
 
-    const onScroll = () => {
-      const h = document.documentElement;
-      const scrolled = (h.scrollTop + window.innerHeight) / h.scrollHeight;
-      if (scrolled > 0.7) trigger();
-    };
-
-    const timeoutId = window.setTimeout(trigger, 45000); // fallback: 45s
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const timeoutId = window.setTimeout(trigger, 8000); // 8s después de cargar
 
     return () => {
       window.clearTimeout(timeoutId);
-      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
