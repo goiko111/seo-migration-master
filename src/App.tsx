@@ -17,6 +17,7 @@ const CookieConsent = lazy(() => import("./components/CookieConsent"));
 
 const BackToTop = lazy(() => import("./components/BackToTop"));
 const ToolsLeadPopup = lazy(() => import("./components/ToolsLeadPopup"));
+const FreemiumToolGuard = lazy(() => import("./components/FreemiumToolGuard"));
 
 // Lazy load other routes
 const Blog = lazy(() => import("./pages/Blog"));
@@ -682,6 +683,7 @@ const App = () => (
               <CookieConsent />
               <IntentTracker />
               <ToolsLeadPopup />
+              <FreemiumToolGuard />
             </Suspense>
           </LanguageProvider>
         </BrowserRouter>
