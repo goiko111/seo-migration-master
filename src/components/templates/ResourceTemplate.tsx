@@ -26,7 +26,6 @@ import FreemiumGate from "@/components/FreemiumGate";
 import {
   shouldGateResource,
   trackResourceDownloaded,
-  unlockFreemium,
   getResourcesDownloaded,
   useFreemiumState,
 } from "@/lib/freemium";
