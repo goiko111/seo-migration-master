@@ -25,7 +25,7 @@ const COPY: Record<string, {
   errorMsg: string;
 }> = {
   es: {
-    title: "¿Quieres que analicemos tu carta completa?",
+    title: "Sube tu carta de vinos y recibe un diagnóstico profesional gratuito con recomendaciones personalizadas",
     subtitle: "Recibe un diagnóstico profesional gratuito de tu carta de vinos: estructura, pricing, copa y oportunidades de mejora.",
     name: "Nombre",
     email: "Email profesional",
@@ -41,7 +41,7 @@ const COPY: Record<string, {
     errorMsg: "Inténtalo de nuevo en unos segundos.",
   },
   en: {
-    title: "Want us to analyze your full wine list?",
+    title: "Upload your wine list and get a free professional diagnosis with personalized recommendations",
     subtitle: "Get a free professional diagnosis of your wine list: structure, pricing, by-the-glass and improvement opportunities.",
     name: "Name",
     email: "Work email",
