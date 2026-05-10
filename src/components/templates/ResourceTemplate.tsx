@@ -22,6 +22,13 @@ import { Button } from "@/components/ui/button";
 import ContactFormFields from "@/components/ContactFormFields";
 import { PREFIXES } from "@/components/PhoneInput";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import FreemiumGate from "@/components/FreemiumGate";
+import {
+  shouldGateResource,
+  trackResourceDownloaded,
+  getResourcesDownloaded,
+  useFreemiumState,
+} from "@/lib/freemium";
 
 const formSchema = z.object({
   restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
@@ -94,6 +101,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
   const [referencesCount, setReferencesCount] = useState("");
   const navigate = useNavigate();
   const url = `${CANONICAL_DOMAIN}/recursos/${data.slug}`;
+  const { unlocked } = useFreemiumState();
+  const gated = shouldGateResource(data.slug) && !unlocked;
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -121,6 +130,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       notifyLead(leadData);
       trackFormSubmit("resource");
       trackResourceDownload(data.formType);
+      // Freemium tracking: count this resource as downloaded
+      trackResourceDownloaded(data.slug);
       ads.conversion("resource", {
         email: leadData.email || undefined,
         phone: leadData.phone || undefined,
@@ -236,7 +247,17 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="p-8 rounded-2xl border border-border bg-gradient-card">
-              {submitted ? (
+              {gated ? (
+                <FreemiumGate
+                  context="resource"
+                  count={getResourcesDownloaded().length}
+                  onUnlocked={() => {
+                    // Once unlocked, auto-track this resource and reload to reveal the form
+                    trackResourceDownloaded(data.slug);
+                    window.location.reload();
+                  }}
+                />
+              ) : submitted ? (
                 <div className="text-center py-8">
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Recurso listo!</h3>

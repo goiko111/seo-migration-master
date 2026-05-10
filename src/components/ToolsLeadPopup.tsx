@@ -6,6 +6,7 @@ import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
 import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 import { useToast } from "@/hooks/use-toast";
+import { unlockFreemium } from "@/lib/freemium";
 
 const STORAGE_KEY = "tools_lead_popup_dismissed";
 
@@ -267,6 +268,8 @@ const ToolsLeadPopup = () => {
       });
 
       toast({ title: t.successTitle, description: t.successMsg });
+      // Carta uploaded via popup also counts as unlock
+      if (file) unlockFreemium();
       sessionStorage.setItem(STORAGE_KEY, "1");
       setOpen(false);
     } catch (err) {
