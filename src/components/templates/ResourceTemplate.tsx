@@ -22,6 +22,14 @@ import { Button } from "@/components/ui/button";
 import ContactFormFields from "@/components/ContactFormFields";
 import { PREFIXES } from "@/components/PhoneInput";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import FreemiumGate from "@/components/FreemiumGate";
+import {
+  shouldGateResource,
+  trackResourceDownloaded,
+  unlockFreemium,
+  getResourcesDownloaded,
+  useFreemiumState,
+} from "@/lib/freemium";
 
 const formSchema = z.object({
   restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
@@ -94,6 +102,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
   const [referencesCount, setReferencesCount] = useState("");
   const navigate = useNavigate();
   const url = `${CANONICAL_DOMAIN}/recursos/${data.slug}`;
+  const { unlocked } = useFreemiumState();
+  const gated = shouldGateResource(data.slug) && !unlocked;
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -121,6 +131,10 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       notifyLead(leadData);
       trackFormSubmit("resource");
       trackResourceDownload(data.formType);
+      // Freemium tracking: count this resource as downloaded
+      trackResourceDownloaded(data.slug);
+      // A submitted resource form already captures lead — auto-unlock
+      unlockFreemium();
       ads.conversion("resource", {
         email: leadData.email || undefined,
         phone: leadData.phone || undefined,
