@@ -13,7 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-/* ââ i18n content ââ */
+/* ── i18n content ── */
 type LangContent = {
   metaTitle: string; metaDesc: string;
   heroLabel: string; heroTitle: string; heroHighlight: string; heroDesc: string;
@@ -29,12 +29,12 @@ const langContent: Record<string, LangContent> = {
     heroLabel: "Biblioteca de recursos",
     heroTitle: "Herramientas accionables para ",
     heroHighlight: "aplicar hoy mismo",
-    heroDesc: "Plantillas, checklists y scorecards profesionales diseÃ±ados para que mejores tu carta de vinos desde el primer dÃ­a. Sin teorÃ­a, solo acciÃ³n.",
+    heroDesc: "Plantillas, checklists y scorecards profesionales diseñados para que mejores tu carta de vinos desde el primer día. Sin teoría, solo acción.",
     filterAll: "Todos", download: "Descargar recurso", items: "recursos",
-    ctaTitle: "Â¿Quieres que todo esto se haga automÃ¡ticamente?",
-    ctaDesc: "Todo lo que ofrecen estos recursos â anÃ¡lisis de mÃ¡rgenes, control de rotaciÃ³n, scoring mensual â Winerim lo automatiza para ti.",
+    ctaTitle: "¿Quieres que todo esto se haga automáticamente?",
+    ctaDesc: "Todo lo que ofrecen estos recursos — análisis de márgenes, control de rotación, scoring mensual — Winerim lo automatiza para ti.",
     ctaPrimary: "Solicitar demo", ctaSecondary: "Analizar mi carta gratis",
-    alsoLabel: "TambiÃ©n te interesa", guidesLink: "GuÃ­as para aprender", toolsLink: "Herramientas interactivas",
+    alsoLabel: "También te interesa", guidesLink: "Guías para aprender", toolsLink: "Herramientas interactivas",
   },
   en: {
     metaTitle: "Downloadable Resources for Restaurants | Templates, Checklists & Scorecards | Winerim",
@@ -45,7 +45,7 @@ const langContent: Record<string, LangContent> = {
     heroDesc: "Professional templates, checklists and scorecards designed to improve your wine list from day one. No theory, just action.",
     filterAll: "All", download: "Download resource", items: "resources",
     ctaTitle: "Want all of this done automatically?",
-    ctaDesc: "Everything these resources offer â margin analysis, rotation control, monthly scoring â Winerim automates it for you.",
+    ctaDesc: "Everything these resources offer — margin analysis, rotation control, monthly scoring — Winerim automates it for you.",
     ctaPrimary: "Request demo", ctaSecondary: "Analyze my list free",
     alsoLabel: "You may also like", guidesLink: "Guides to learn", toolsLink: "Interactive tools",
   },
@@ -58,58 +58,58 @@ const langContent: Record<string, LangContent> = {
     heroDesc: "Template, checklist e scorecard professionali per migliorare la tua carta dei vini dal primo giorno. Niente teoria, solo azione.",
     filterAll: "Tutti", download: "Scarica risorsa", items: "risorse",
     ctaTitle: "Vuoi che tutto questo sia automatico?",
-    ctaDesc: "Tutto quello che offrono queste risorse â analisi margini, controllo rotazione, scoring mensile â Winerim lo automatizza per te.",
+    ctaDesc: "Tutto quello che offrono queste risorse — analisi margini, controllo rotazione, scoring mensile — Winerim lo automatizza per te.",
     ctaPrimary: "Richiedi demo", ctaSecondary: "Analizza la mia carta gratis",
     alsoLabel: "Potrebbe interessarti anche", guidesLink: "Guide per imparare", toolsLink: "Strumenti interattivi",
   },
   fr: {
-    metaTitle: "Ressources tÃ©lÃ©chargeables pour restaurants | ModÃ¨les, checklists et scorecards | Winerim",
-    metaDesc: "TÃ©lÃ©chargez des modÃ¨les, checklists et scorecards professionnels pour optimiser votre carte des vins. Ressources actionnables prÃªtes Ã  l'emploi.",
-    heroLabel: "BibliothÃ¨que de ressources",
-    heroTitle: "Outils actionnables Ã  ",
+    metaTitle: "Ressources téléchargeables pour restaurants | Modèles, checklists et scorecards | Winerim",
+    metaDesc: "Téléchargez des modèles, checklists et scorecards professionnels pour optimiser votre carte des vins. Ressources actionnables prêtes à l'emploi.",
+    heroLabel: "Bibliothèque de ressources",
+    heroTitle: "Outils actionnables à ",
     heroHighlight: "appliquer aujourd'hui",
-    heroDesc: "ModÃ¨les, checklists et scorecards professionnels pour amÃ©liorer votre carte des vins dÃ¨s le premier jour. Pas de thÃ©orie, que de l'action.",
-    filterAll: "Tous", download: "TÃ©lÃ©charger", items: "ressources",
+    heroDesc: "Modèles, checklists et scorecards professionnels pour améliorer votre carte des vins dès le premier jour. Pas de théorie, que de l'action.",
+    filterAll: "Tous", download: "Télécharger", items: "ressources",
     ctaTitle: "Vous voulez que tout cela soit automatique ?",
-    ctaDesc: "Tout ce qu'offrent ces ressources â analyse des marges, contrÃ´le de la rotation, scoring mensuel â Winerim l'automatise pour vous.",
-    ctaPrimary: "Demander une dÃ©mo", ctaSecondary: "Analyser ma carte gratuitement",
+    ctaDesc: "Tout ce qu'offrent ces ressources — analyse des marges, contrôle de la rotation, scoring mensuel — Winerim l'automatise pour vous.",
+    ctaPrimary: "Demander une démo", ctaSecondary: "Analyser ma carte gratuitement",
     alsoLabel: "Vous aimerez aussi", guidesLink: "Guides pour apprendre", toolsLink: "Outils interactifs",
   },
   de: {
-    metaTitle: "Herunterladbare Ressourcen fÃ¼r Restaurants | Vorlagen, Checklisten & Scorecards | Winerim",
+    metaTitle: "Herunterladbare Ressourcen für Restaurants | Vorlagen, Checklisten & Scorecards | Winerim",
     metaDesc: "Laden Sie professionelle Vorlagen, Checklisten und Scorecards zur Optimierung Ihrer Weinkarte herunter. Sofort anwendbare Ressourcen.",
     heroLabel: "Ressourcenbibliothek",
     heroTitle: "Umsetzbare Werkzeuge zum ",
     heroHighlight: "sofortigen Anwenden",
     heroDesc: "Professionelle Vorlagen, Checklisten und Scorecards, die Ihre Weinkarte vom ersten Tag an verbessern. Keine Theorie, nur Aktion.",
     filterAll: "Alle", download: "Ressource herunterladen", items: "Ressourcen",
-    ctaTitle: "MÃ¶chten Sie, dass all dies automatisch geschieht?",
-    ctaDesc: "Alles, was diese Ressourcen bieten â Margenanalyse, Rotationskontrolle, monatliches Scoring â Winerim automatisiert es fÃ¼r Sie.",
+    ctaTitle: "Möchten Sie, dass all dies automatisch geschieht?",
+    ctaDesc: "Alles, was diese Ressourcen bieten — Margenanalyse, Rotationskontrolle, monatliches Scoring — Winerim automatisiert es für Sie.",
     ctaPrimary: "Demo anfordern", ctaSecondary: "Meine Karte kostenlos analysieren",
-    alsoLabel: "Das kÃ¶nnte Sie auch interessieren", guidesLink: "Ratgeber zum Lernen", toolsLink: "Interaktive Werkzeuge",
+    alsoLabel: "Das könnte Sie auch interessieren", guidesLink: "Ratgeber zum Lernen", toolsLink: "Interaktive Werkzeuge",
   },
   pt: {
-    metaTitle: "Recursos descarregÃ¡veis para restaurantes | Modelos, checklists e scorecards | Winerim",
-    metaDesc: "Descarregue modelos, checklists e scorecards profissionais para otimizar a sua carta de vinhos. Recursos acionÃ¡veis prontos a aplicar hoje.",
+    metaTitle: "Recursos descarregáveis para restaurantes | Modelos, checklists e scorecards | Winerim",
+    metaDesc: "Descarregue modelos, checklists e scorecards profissionais para otimizar a sua carta de vinhos. Recursos acionáveis prontos a aplicar hoje.",
     heroLabel: "Biblioteca de recursos",
-    heroTitle: "Ferramentas acionÃ¡veis para ",
+    heroTitle: "Ferramentas acionáveis para ",
     heroHighlight: "aplicar hoje mesmo",
-    heroDesc: "Modelos, checklists e scorecards profissionais concebidos para melhorar a sua carta de vinhos desde o primeiro dia. Sem teoria, sÃ³ aÃ§Ã£o.",
+    heroDesc: "Modelos, checklists e scorecards profissionais concebidos para melhorar a sua carta de vinhos desde o primeiro dia. Sem teoria, só ação.",
     filterAll: "Todos", download: "Descarregar recurso", items: "recursos",
     ctaTitle: "Quer que tudo isto seja feito automaticamente?",
-    ctaDesc: "Tudo o que estes recursos oferecem â anÃ¡lise de margens, controlo de rotaÃ§Ã£o, scoring mensal â o Winerim automatiza por si.",
-    ctaPrimary: "Pedir demo", ctaSecondary: "Analisar a minha carta grÃ¡tis",
-    alsoLabel: "TambÃ©m lhe pode interessar", guidesLink: "Guias para aprender", toolsLink: "Ferramentas interativas",
+    ctaDesc: "Tudo o que estes recursos oferecem — análise de margens, controlo de rotação, scoring mensal — o Winerim automatiza por si.",
+    ctaPrimary: "Pedir demo", ctaSecondary: "Analisar a minha carta grátis",
+    alsoLabel: "Também lhe pode interessar", guidesLink: "Guias para aprender", toolsLink: "Ferramentas interativas",
   },
 };
 
-/* ââ Resource type config ââ */
+/* ── Resource type config ── */
 const typeLabels: Record<string, Record<string, string>> = {
-  plantilla: { es: "Plantilla", en: "Template", it: "Template", fr: "ModÃ¨le", de: "Vorlage", pt: "Modelo" },
+  plantilla: { es: "Plantilla", en: "Template", it: "Template", fr: "Modèle", de: "Vorlage", pt: "Modelo" },
   checklist: { es: "Checklist", en: "Checklist", it: "Checklist", fr: "Checklist", de: "Checkliste", pt: "Checklist" },
   scorecard: { es: "Scorecard", en: "Scorecard", it: "Scorecard", fr: "Scorecard", de: "Scorecard", pt: "Scorecard" },
-  revision:  { es: "RevisiÃ³n", en: "Review", it: "Revisione", fr: "RÃ©vision", de: "ÃberprÃ¼fung", pt: "RevisÃ£o" },
-  control:   { es: "Control", en: "Control", it: "Controllo", fr: "ContrÃ´le", de: "Kontrolle", pt: "Controlo" },
+  revision:  { es: "Revisión", en: "Review", it: "Revisione", fr: "Révision", de: "Überprüfung", pt: "Revisão" },
+  control:   { es: "Control", en: "Control", it: "Controllo", fr: "Contrôle", de: "Kontrolle", pt: "Controlo" },
 };
 const typeIcons: Record<string, { icon: React.ElementType; className: string }> = {
   plantilla: { icon: FileText, className: "bg-blue-500/10 text-blue-400 border-blue-500/20" },
@@ -134,32 +134,32 @@ const resourceItems: ResourceItem[] = [
   { slug: "guia-vino-por-copa-para-restaurantes", icon: Wine, type: "plantilla", tags: ["copa", "intermedio"] },
   { slug: "plantilla-wine-mapping-restaurante", icon: Layers, type: "plantilla", tags: ["pricing", "intermedio"] },
   { slug: "plantilla-estrategia-vinos-por-copa", icon: Wine, type: "plantilla", tags: ["copa", "avanzado"] },
-  { slug: "checklist-deteccion-vinos-muertos", icon: Search, type: "checklist", tags: ["rotaciÃ³n", "intermedio"] },
+  { slug: "checklist-deteccion-vinos-muertos", icon: Search, type: "checklist", tags: ["rotación", "intermedio"] },
   { slug: "plantilla-formacion-equipo-sala", icon: Brain, type: "plantilla", tags: ["equipo", "inicio"] },
   { slug: "plantilla-analisis-margenes", icon: DollarSign, type: "revision", tags: ["pricing", "avanzado"] },
-  { slug: "scorecard-rendimiento-carta", icon: BarChart3, type: "scorecard", tags: ["analÃ­tica", "avanzado"] },
+  { slug: "scorecard-rendimiento-carta", icon: BarChart3, type: "scorecard", tags: ["analítica", "avanzado"] },
   { slug: "checklist-carta-que-vende", icon: TrendingUp, type: "checklist", tags: ["rentabilidad", "inicio"] },
   { slug: "plantilla-equilibrio-carta", icon: Layers, type: "plantilla", tags: ["estructura", "intermedio"] },
-  { slug: "plantilla-revision-mensual-carta", icon: FileText, type: "revision", tags: ["analÃ­tica", "avanzado"] },
+  { slug: "plantilla-revision-mensual-carta", icon: FileText, type: "revision", tags: ["analítica", "avanzado"] },
   { slug: "revision-mensual-margenes", icon: DollarSign, type: "revision", tags: ["pricing", "rentabilidad", "avanzado"] },
   { slug: "plantilla-control-grupo-restauracion", icon: Building2, type: "control", tags: ["grupo", "avanzado"] },
 ];
 
 const resourceTexts: Record<string, ResourceText[]> = {
   es: [
-    { title: "Plantilla de carta de vinos", desc: "Plantilla profesional para diseÃ±ar y estructurar tu carta de vinos desde cero." },
-    { title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta estÃ¡ optimizada para vender." },
-    { title: "GuÃ­a vino por copa", desc: "Todo sobre cÃ³mo diseÃ±ar y rentabilizar tu oferta de vino por copa." },
-    { title: "Plantilla wine mapping", desc: "Estructura precios y distribuciÃ³n de vinos en tu carta con criterio." },
-    { title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseÃ±ar, ejecutar y controlar tu programa de copa." },
-    { title: "DetecciÃ³n de vinos muertos", desc: "Identifica referencias sin rotaciÃ³n y cuantifica el capital inmovilizado." },
-    { title: "FormaciÃ³n exprÃ©s para sala", desc: "Programa de formaciÃ³n en vino para tu equipo de sala en menos de 2 semanas." },
-    { title: "AnÃ¡lisis de mÃ¡rgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribuciÃ³n." },
-    { title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotaciÃ³n, margen y vino por copa." },
-    { title: "Â¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversiÃ³n de tu carta de vinos." },
-    { title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologÃ­as." },
-    { title: "RevisiÃ³n mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes con datos reales." },
-    { title: "RevisiÃ³n mensual de mÃ¡rgenes", desc: "Una plantilla para revisar cada mes si tu carta estÃ¡ perdiendo margen y decidir quÃ© corregir antes de que el problema crezca." },
+    { title: "Plantilla de carta de vinos", desc: "Plantilla profesional para diseñar y estructurar tu carta de vinos desde cero." },
+    { title: "Checklist carta rentable", desc: "Revisa punto por punto si tu carta está optimizada para vender." },
+    { title: "Guía vino por copa", desc: "Todo sobre cómo diseñar y rentabilizar tu oferta de vino por copa." },
+    { title: "Plantilla wine mapping", desc: "Estructura precios y distribución de vinos en tu carta con criterio." },
+    { title: "Estrategia de vinos por copa", desc: "Plan operativo completo para diseñar, ejecutar y controlar tu programa de copa." },
+    { title: "Detección de vinos muertos", desc: "Identifica referencias sin rotación y cuantifica el capital inmovilizado." },
+    { title: "Formación exprés para sala", desc: "Programa de formación en vino para tu equipo de sala en menos de 2 semanas." },
+    { title: "Análisis de márgenes", desc: "Analiza la rentabilidad de cada referencia: coste, PVP, multiplicador y contribución." },
+    { title: "Scorecard mensual", desc: "KPIs esenciales de tu carta cada mes: ventas, rotación, margen y vino por copa." },
+    { title: "¿Tu carta realmente vende?", desc: "30 puntos para evaluar la capacidad de conversión de tu carta de vinos." },
+    { title: "Equilibrio de carta", desc: "Analiza el equilibrio por estilos, regiones, precios y tipologías." },
+    { title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes con datos reales." },
+    { title: "Revisión mensual de márgenes", desc: "Una plantilla para revisar cada mes si tu carta está perdiendo margen y decidir qué corregir antes de que el problema crezca." },
     { title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking entre locales." },
   ],
   en: [
@@ -180,81 +180,81 @@ const resourceTexts: Record<string, ResourceText[]> = {
   ],
   it: [
     { title: "Template carta dei vini", desc: "Template professionale per progettare e strutturare la tua carta dei vini da zero." },
-    { title: "Checklist carta redditizia", desc: "Verifica punto per punto se la tua carta Ã¨ ottimizzata per vendere." },
+    { title: "Checklist carta redditizia", desc: "Verifica punto per punto se la tua carta è ottimizzata per vendere." },
     { title: "Guida vino al calice", desc: "Tutto su come progettare e rendere redditizia la tua offerta al calice." },
     { title: "Template wine mapping", desc: "Struttura prezzi e distribuzione dei vini nella tua carta con criterio." },
     { title: "Strategia vini al calice", desc: "Piano operativo completo per progettare, eseguire e controllare il programma al calice." },
     { title: "Rilevamento vini morti", desc: "Identifica referenze senza rotazione e quantifica il capitale immobilizzato." },
     { title: "Formazione rapida per la sala", desc: "Programma di formazione sul vino per il tuo team di sala in meno di 2 settimane." },
-    { title: "Analisi dei margini", desc: "Analizza la redditivitÃ  di ogni referenza: costo, prezzo, moltiplicatore e contribuzione." },
+    { title: "Analisi dei margini", desc: "Analizza la redditività di ogni referenza: costo, prezzo, moltiplicatore e contribuzione." },
     { title: "Scorecard mensile", desc: "KPI essenziali della tua carta ogni mese: vendite, rotazione, margine e vino al calice." },
-    { title: "La tua carta vende davvero?", desc: "30 punti per valutare la capacitÃ  di conversione della tua carta dei vini." },
+    { title: "La tua carta vende davvero?", desc: "30 punti per valutare la capacità di conversione della tua carta dei vini." },
     { title: "Equilibrio della carta", desc: "Analizza l'equilibrio per stili, regioni, prezzi e tipologie." },
     { title: "Revisione mensile della carta", desc: "Processo strutturato per rivedere la tua carta ogni mese con dati reali." },
     { title: "Revisione mensile dei margini", desc: "Un template per verificare ogni mese se la tua carta sta perdendo margine e decidere cosa correggere." },
     { title: "Controllo multi-locale", desc: "Dashboard comparativa, assortimento centralizzato e benchmarking tra locali." },
   ],
   fr: [
-    { title: "ModÃ¨le de carte des vins", desc: "ModÃ¨le professionnel pour concevoir et structurer votre carte des vins de zÃ©ro." },
-    { title: "Checklist carte rentable", desc: "VÃ©rifiez point par point si votre carte est optimisÃ©e pour vendre." },
+    { title: "Modèle de carte des vins", desc: "Modèle professionnel pour concevoir et structurer votre carte des vins de zéro." },
+    { title: "Checklist carte rentable", desc: "Vérifiez point par point si votre carte est optimisée pour vendre." },
     { title: "Guide vin au verre", desc: "Tout pour concevoir et rentabiliser votre offre de vin au verre." },
-    { title: "ModÃ¨le wine mapping", desc: "Structurez les prix et la distribution des vins dans votre carte avec mÃ©thode." },
-    { title: "StratÃ©gie vins au verre", desc: "Plan opÃ©rationnel complet pour concevoir, exÃ©cuter et contrÃ´ler votre programme au verre." },
-    { title: "DÃ©tection des vins morts", desc: "Identifiez les rÃ©fÃ©rences sans rotation et quantifiez le capital immobilisÃ©." },
-    { title: "Formation express pour la salle", desc: "Programme de formation au vin pour votre Ã©quipe de salle en moins de 2 semaines." },
-    { title: "Analyse des marges", desc: "Analysez la rentabilitÃ© de chaque rÃ©fÃ©rence : coÃ»t, prix, multiplicateur et contribution." },
+    { title: "Modèle wine mapping", desc: "Structurez les prix et la distribution des vins dans votre carte avec méthode." },
+    { title: "Stratégie vins au verre", desc: "Plan opérationnel complet pour concevoir, exécuter et contrôler votre programme au verre." },
+    { title: "Détection des vins morts", desc: "Identifiez les références sans rotation et quantifiez le capital immobilisé." },
+    { title: "Formation express pour la salle", desc: "Programme de formation au vin pour votre équipe de salle en moins de 2 semaines." },
+    { title: "Analyse des marges", desc: "Analysez la rentabilité de chaque référence : coût, prix, multiplicateur et contribution." },
     { title: "Scorecard mensuel", desc: "KPIs essentiels de votre carte chaque mois : ventes, rotation, marge et vin au verre." },
-    { title: "Votre carte vend-elle vraiment ?", desc: "30 points pour Ã©valuer la capacitÃ© de conversion de votre carte des vins." },
-    { title: "Ãquilibre de la carte", desc: "Analysez l'Ã©quilibre par styles, rÃ©gions, prix et typologies." },
-    { title: "RÃ©vision mensuelle de la carte", desc: "Processus structurÃ© pour rÃ©viser votre carte chaque mois avec des donnÃ©es rÃ©elles." },
-    { title: "RÃ©vision mensuelle des marges", desc: "Un modÃ¨le pour vÃ©rifier chaque mois si votre carte perd de la marge et dÃ©cider quoi corriger." },
-    { title: "ContrÃ´le multi-sites", desc: "Dashboard comparatif, assortiment centralisÃ© et benchmarking entre Ã©tablissements." },
+    { title: "Votre carte vend-elle vraiment ?", desc: "30 points pour évaluer la capacité de conversion de votre carte des vins." },
+    { title: "Équilibre de la carte", desc: "Analysez l'équilibre par styles, régions, prix et typologies." },
+    { title: "Révision mensuelle de la carte", desc: "Processus structuré pour réviser votre carte chaque mois avec des données réelles." },
+    { title: "Révision mensuelle des marges", desc: "Un modèle pour vérifier chaque mois si votre carte perd de la marge et décider quoi corriger." },
+    { title: "Contrôle multi-sites", desc: "Dashboard comparatif, assortiment centralisé et benchmarking entre établissements." },
   ],
   de: [
     { title: "Weinkarten-Vorlage", desc: "Professionelle Vorlage zum Entwerfen und Strukturieren Ihrer Weinkarte von Grund auf." },
-    { title: "Checkliste profitable Karte", desc: "PrÃ¼fen Sie Punkt fÃ¼r Punkt, ob Ihre Karte zum Verkaufen optimiert ist." },
-    { title: "Glaswein-Leitfaden", desc: "Alles Ã¼ber die Gestaltung und RentabilitÃ¤t Ihres Glaswein-Angebots." },
+    { title: "Checkliste profitable Karte", desc: "Prüfen Sie Punkt für Punkt, ob Ihre Karte zum Verkaufen optimiert ist." },
+    { title: "Glaswein-Leitfaden", desc: "Alles über die Gestaltung und Rentabilität Ihres Glaswein-Angebots." },
     { title: "Wine-Mapping-Vorlage", desc: "Strukturieren Sie Preise und Weinverteilung in Ihrer Karte mit klaren Kriterien." },
-    { title: "Glaswein-Strategie", desc: "Kompletter operativer Plan zur Gestaltung, DurchfÃ¼hrung und Kontrolle Ihres Glaswein-Programms." },
+    { title: "Glaswein-Strategie", desc: "Kompletter operativer Plan zur Gestaltung, Durchführung und Kontrolle Ihres Glaswein-Programms." },
     { title: "Erkennung toter Weine", desc: "Identifizieren Sie Referenzen ohne Rotation und quantifizieren Sie das gebundene Kapital." },
-    { title: "Express-Schulung fÃ¼r das Serviceteam", desc: "Weinschulungsprogramm fÃ¼r Ihr Serviceteam in weniger als 2 Wochen." },
-    { title: "Margenanalyse", desc: "Analysieren Sie die RentabilitÃ¤t jeder Referenz: Kosten, Preis, Multiplikator und Beitrag." },
+    { title: "Express-Schulung für das Serviceteam", desc: "Weinschulungsprogramm für Ihr Serviceteam in weniger als 2 Wochen." },
+    { title: "Margenanalyse", desc: "Analysieren Sie die Rentabilität jeder Referenz: Kosten, Preis, Multiplikator und Beitrag." },
     { title: "Monatliche Scorecard", desc: "Wesentliche KPIs Ihrer Karte jeden Monat: Umsatz, Rotation, Marge und Glaswein." },
     { title: "Verkauft Ihre Karte wirklich?", desc: "30 Punkte zur Bewertung der Verkaufskraft Ihrer Weinkarte." },
     { title: "Kartengleichgewicht", desc: "Analysieren Sie das Gleichgewicht nach Stilen, Regionen, Preisen und Typologien." },
-    { title: "Monatliche KartenÃ¼berprÃ¼fung", desc: "Strukturierter Prozess zur monatlichen ÃberprÃ¼fung Ihrer Karte mit realen Daten." },
-    { title: "Monatliche MargenprÃ¼fung", desc: "Eine Vorlage zur monatlichen PrÃ¼fung, ob Ihre Karte Marge verliert, und was zu korrigieren ist." },
+    { title: "Monatliche Kartenüberprüfung", desc: "Strukturierter Prozess zur monatlichen Überprüfung Ihrer Karte mit realen Daten." },
+    { title: "Monatliche Margenprüfung", desc: "Eine Vorlage zur monatlichen Prüfung, ob Ihre Karte Marge verliert, und was zu korrigieren ist." },
     { title: "Multi-Standort-Kontrolle", desc: "Vergleichs-Dashboard, zentralisiertes Sortiment und Benchmarking zwischen Standorten." },
   ],
   pt: [
     { title: "Modelo de carta de vinhos", desc: "Modelo profissional para desenhar e estruturar a sua carta de vinhos do zero." },
-    { title: "Checklist carta rentÃ¡vel", desc: "Verifique ponto a ponto se a sua carta estÃ¡ otimizada para vender." },
+    { title: "Checklist carta rentável", desc: "Verifique ponto a ponto se a sua carta está otimizada para vender." },
     { title: "Guia vinho a copo", desc: "Tudo sobre como desenhar e rentabilizar a sua oferta de vinho a copo." },
-    { title: "Modelo wine mapping", desc: "Estruture preÃ§os e distribuiÃ§Ã£o de vinhos na sua carta com critÃ©rio." },
-    { title: "EstratÃ©gia vinhos a copo", desc: "Plano operacional completo para desenhar, executar e controlar o seu programa a copo." },
-    { title: "DeteÃ§Ã£o de vinhos mortos", desc: "Identifique referÃªncias sem rotaÃ§Ã£o e quantifique o capital imobilizado." },
-    { title: "FormaÃ§Ã£o rÃ¡pida para sala", desc: "Programa de formaÃ§Ã£o em vinho para a sua equipa de sala em menos de 2 semanas." },
-    { title: "AnÃ¡lise de margens", desc: "Analise a rentabilidade de cada referÃªncia: custo, preÃ§o, multiplicador e contribuiÃ§Ã£o." },
-    { title: "Scorecard mensal", desc: "KPIs essenciais da sua carta cada mÃªs: vendas, rotaÃ§Ã£o, margem e vinho a copo." },
-    { title: "A sua carta vende mesmo?", desc: "30 pontos para avaliar a capacidade de conversÃ£o da sua carta de vinhos." },
-    { title: "EquilÃ­brio da carta", desc: "Analise o equilÃ­brio por estilos, regiÃµes, preÃ§os e tipologias." },
-    { title: "RevisÃ£o mensal da carta", desc: "Processo estruturado para rever a sua carta todos os meses com dados reais." },
-    { title: "RevisÃ£o mensal de margens", desc: "Um modelo para verificar mensalmente se a sua carta estÃ¡ a perder margem e decidir o que corrigir." },
+    { title: "Modelo wine mapping", desc: "Estruture preços e distribuição de vinhos na sua carta com critério." },
+    { title: "Estratégia vinhos a copo", desc: "Plano operacional completo para desenhar, executar e controlar o seu programa a copo." },
+    { title: "Deteção de vinhos mortos", desc: "Identifique referências sem rotação e quantifique o capital imobilizado." },
+    { title: "Formação rápida para sala", desc: "Programa de formação em vinho para a sua equipa de sala em menos de 2 semanas." },
+    { title: "Análise de margens", desc: "Analise a rentabilidade de cada referência: custo, preço, multiplicador e contribuição." },
+    { title: "Scorecard mensal", desc: "KPIs essenciais da sua carta cada mês: vendas, rotação, margem e vinho a copo." },
+    { title: "A sua carta vende mesmo?", desc: "30 pontos para avaliar a capacidade de conversão da sua carta de vinhos." },
+    { title: "Equilíbrio da carta", desc: "Analise o equilíbrio por estilos, regiões, preços e tipologias." },
+    { title: "Revisão mensal da carta", desc: "Processo estruturado para rever a sua carta todos os meses com dados reais." },
+    { title: "Revisão mensal de margens", desc: "Um modelo para verificar mensalmente se a sua carta está a perder margem e decidir o que corrigir." },
     { title: "Controlo multi-unidade", desc: "Dashboard comparativo, sortido centralizado e benchmarking entre unidades." },
   ],
 };
 
 const taxonomyFilterLabels: Record<string, Record<string, string>> = {
-  pricing:       { es: "Pricing y mÃ¡rgenes", en: "Pricing & margins", it: "Pricing e margini", fr: "Prix et marges", de: "Preise & Margen", pt: "Pricing e margens" },
-  "rotaciÃ³n":    { es: "RotaciÃ³n y stock", en: "Rotation & stock", it: "Rotazione e stock", fr: "Rotation et stock", de: "Rotation & Bestand", pt: "RotaÃ§Ã£o e stock" },
+  pricing:       { es: "Pricing y márgenes", en: "Pricing & margins", it: "Pricing e margini", fr: "Prix et marges", de: "Preise & Margen", pt: "Pricing e margens" },
+  "rotación":    { es: "Rotación y stock", en: "Rotation & stock", it: "Rotazione e stock", fr: "Rotation et stock", de: "Rotation & Bestand", pt: "Rotação e stock" },
   copa:          { es: "Vino por copa", en: "By the glass", it: "Vino al calice", fr: "Vin au verre", de: "Glaswein", pt: "Vinho a copo" },
-  equipo:        { es: "Equipo de sala", en: "Floor team", it: "Team di sala", fr: "Ãquipe de salle", de: "Serviceteam", pt: "Equipa de sala" },
+  equipo:        { es: "Equipo de sala", en: "Floor team", it: "Team di sala", fr: "Équipe de salle", de: "Serviceteam", pt: "Equipa de sala" },
   estructura:    { es: "Estructura de carta", en: "List structure", it: "Struttura carta", fr: "Structure de la carte", de: "Kartenstruktur", pt: "Estrutura da carta" },
-  rentabilidad:  { es: "Rentabilidad", en: "Profitability", it: "RedditivitÃ ", fr: "RentabilitÃ©", de: "RentabilitÃ¤t", pt: "Rentabilidade" },
-  "analÃ­tica":   { es: "AnalÃ­tica y KPIs", en: "Analytics & KPIs", it: "Analitica e KPI", fr: "Analytique et KPIs", de: "Analytik & KPIs", pt: "AnalÃ­tica e KPIs" },
+  rentabilidad:  { es: "Rentabilidad", en: "Profitability", it: "Redditività", fr: "Rentabilité", de: "Rentabilität", pt: "Rentabilidade" },
+  "analítica":   { es: "Analítica y KPIs", en: "Analytics & KPIs", it: "Analitica e KPI", fr: "Analytique et KPIs", de: "Analytik & KPIs", pt: "Analítica e KPIs" },
   grupo:         { es: "Grupos", en: "Groups", it: "Gruppi", fr: "Groupes", de: "Gruppen", pt: "Grupos" },
 };
-const taxonomyKeys = ["all", "pricing", "rotaciÃ³n", "copa", "equipo", "estructura", "rentabilidad", "analÃ­tica", "grupo"];
+const taxonomyKeys = ["all", "pricing", "rotación", "copa", "equipo", "estructura", "rentabilidad", "analítica", "grupo"];
 
 const Recursos = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
@@ -277,7 +277,7 @@ const Recursos = () => {
       <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/recursos"
         hreflang={allLangPaths("/recursos")} />
       <main>
-        {/* ââ Hero ââ */}
+        {/* ── Hero ── */}
         <section className="pt-32 pb-14 section-padding relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-emerald-500/3 rounded-full blur-[160px]" />
@@ -313,13 +313,13 @@ const Recursos = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
-                <span className="text-muted-foreground"><strong className="text-foreground">100%</strong> {{ es: "gratis", en: "free", it: "gratis", fr: "gratuit", de: "kostenlos", pt: "grÃ¡tis" }[lang] || "free"}</span>
+                <span className="text-muted-foreground"><strong className="text-foreground">100%</strong> {{ es: "gratis", en: "free", it: "gratis", fr: "gratuit", de: "kostenlos", pt: "grátis" }[lang] || "free"}</span>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* ââ Filter + Grid ââ */}
+        {/* ── Filter + Grid ── */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
           {/* Filters */}
           <ScrollReveal>
@@ -388,12 +388,12 @@ const Recursos = () => {
 
           {filtered.length === 0 && (
             <p className="text-center text-muted-foreground text-sm py-16">
-              {{ es: "No hay recursos con este filtro.", en: "No resources match this filter.", it: "Nessuna risorsa per questo filtro.", fr: "Aucune ressource pour ce filtre.", de: "Keine Ressourcen fÃ¼r diesen Filter.", pt: "Sem recursos para este filtro." }[lang] || "No resources match this filter."}
+              {{ es: "No hay recursos con este filtro.", en: "No resources match this filter.", it: "Nessuna risorsa per questo filtro.", fr: "Aucune ressource pour ce filtre.", de: "Keine Ressourcen für diesen Filter.", pt: "Sem recursos para este filtro." }[lang] || "No resources match this filter."}
             </p>
           )}
         </section>
 
-        {/* ââ Cross-links ââ */}
+        {/* ── Cross-links ── */}
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
           <ScrollReveal>
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground/60 mb-4">{t.alsoLabel}</p>
@@ -412,7 +412,7 @@ const Recursos = () => {
           </ScrollReveal>
         </section>
 
-        {/* ââ CTA ââ */}
+        {/* ── CTA ── */}
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-24 text-center">
           <ScrollReveal>
             <div className="bg-gradient-card rounded-2xl border border-border p-12">
