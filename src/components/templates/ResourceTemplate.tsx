@@ -133,8 +133,6 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       trackResourceDownload(data.formType);
       // Freemium tracking: count this resource as downloaded
       trackResourceDownloaded(data.slug);
-      // A submitted resource form already captures lead — auto-unlock
-      unlockFreemium();
       ads.conversion("resource", {
         email: leadData.email || undefined,
         phone: leadData.phone || undefined,
