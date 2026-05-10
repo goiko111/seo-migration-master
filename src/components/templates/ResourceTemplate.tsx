@@ -248,7 +248,17 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="p-8 rounded-2xl border border-border bg-gradient-card">
-              {submitted ? (
+              {gated ? (
+                <FreemiumGate
+                  context="resource"
+                  count={getResourcesDownloaded().length}
+                  onUnlocked={() => {
+                    // Once unlocked, auto-track this resource and reload to reveal the form
+                    trackResourceDownloaded(data.slug);
+                    window.location.reload();
+                  }}
+                />
+              ) : submitted ? (
                 <div className="text-center py-8">
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Recurso listo!</h3>
