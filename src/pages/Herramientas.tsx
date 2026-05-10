@@ -5,7 +5,6 @@ import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import ToolsLeadPopup from "@/components/ToolsLeadPopup";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import SummaryBox from "@/components/seo/SummaryBox";
@@ -399,7 +398,6 @@ const Herramientas = () => {
         />
       </main>
       <Footer />
-      <ToolsLeadPopup />
     </div>
   );
 };

@@ -77,6 +77,7 @@ export type Database = {
       contact_leads: {
         Row: {
           business_type: string | null
+          carta_url: string | null
           city: string | null
           created_at: string
           email: string | null
@@ -96,6 +97,7 @@ export type Database = {
         }
         Insert: {
           business_type?: string | null
+          carta_url?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
@@ -115,6 +117,7 @@ export type Database = {
         }
         Update: {
           business_type?: string | null
+          carta_url?: string | null
           city?: string | null
           created_at?: string
           email?: string | null

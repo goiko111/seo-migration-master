@@ -16,6 +16,7 @@ import Index from "./pages/Index";
 const CookieConsent = lazy(() => import("./components/CookieConsent"));
 
 const BackToTop = lazy(() => import("./components/BackToTop"));
+const ToolsLeadPopup = lazy(() => import("./components/ToolsLeadPopup"));
 
 // Lazy load other routes
 const Blog = lazy(() => import("./pages/Blog"));
@@ -680,6 +681,7 @@ const App = () => (
               <BackToTop />
               <CookieConsent />
               <IntentTracker />
+              <ToolsLeadPopup />
             </Suspense>
           </LanguageProvider>
         </BrowserRouter>

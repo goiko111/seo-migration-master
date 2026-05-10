@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef, FormEvent } from "react";
-import { X, Sparkles } from "lucide-react";
+import { useEffect, useState, useRef, FormEvent, ChangeEvent } from "react";
+import { useLocation } from "react-router-dom";
+import { X, Sparkles, Upload, FileCheck2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -16,6 +17,9 @@ const COPY: Record<string, {
   restaurant: string;
   phone: string;
   phoneOpt: string;
+  upload: string;
+  uploadHint: string;
+  uploadError: string;
   cta: string;
   sending: string;
   privacy: string;
@@ -32,6 +36,9 @@ const COPY: Record<string, {
     restaurant: "Restaurante",
     phone: "Teléfono",
     phoneOpt: "(opcional)",
+    upload: "Subir carta de vinos (PDF/imagen)",
+    uploadHint: "Opcional · PDF, JPG o PNG · máx. 10 MB",
+    uploadError: "Formato no válido. Sube un PDF, JPG o PNG (máx. 10 MB).",
     cta: "Solicitar diagnóstico gratuito",
     sending: "Enviando…",
     privacy: "Sin compromiso. Datos tratados según nuestra política de privacidad.",
@@ -48,6 +55,9 @@ const COPY: Record<string, {
     restaurant: "Restaurant",
     phone: "Phone",
     phoneOpt: "(optional)",
+    upload: "Upload wine list (PDF/image)",
+    uploadHint: "Optional · PDF, JPG or PNG · max 10 MB",
+    uploadError: "Invalid format. Upload a PDF, JPG or PNG (max 10 MB).",
     cta: "Request free diagnosis",
     sending: "Sending…",
     privacy: "No commitment. Data handled per our privacy policy.",
@@ -64,6 +74,9 @@ const COPY: Record<string, {
     restaurant: "Restaurante",
     phone: "Telefone",
     phoneOpt: "(opcional)",
+    upload: "Enviar carta de vinhos (PDF/imagem)",
+    uploadHint: "Opcional · PDF, JPG ou PNG · máx. 10 MB",
+    uploadError: "Formato inválido. Envie PDF, JPG ou PNG (máx. 10 MB).",
     cta: "Solicitar diagnóstico gratuito",
     sending: "A enviar…",
     privacy: "Sem compromisso. Dados tratados conforme a nossa política de privacidade.",
@@ -80,6 +93,9 @@ const COPY: Record<string, {
     restaurant: "Restaurant",
     phone: "Téléphone",
     phoneOpt: "(facultatif)",
+    upload: "Téléverser la carte des vins (PDF/image)",
+    uploadHint: "Facultatif · PDF, JPG ou PNG · max 10 Mo",
+    uploadError: "Format invalide. Envoyez un PDF, JPG ou PNG (max 10 Mo).",
     cta: "Demander un diagnostic gratuit",
     sending: "Envoi…",
     privacy: "Sans engagement. Données traitées selon notre politique de confidentialité.",
@@ -96,6 +112,9 @@ const COPY: Record<string, {
     restaurant: "Ristorante",
     phone: "Telefono",
     phoneOpt: "(facoltativo)",
+    upload: "Carica la carta dei vini (PDF/immagine)",
+    uploadHint: "Facoltativo · PDF, JPG o PNG · max 10 MB",
+    uploadError: "Formato non valido. Carica PDF, JPG o PNG (max 10 MB).",
     cta: "Richiedi diagnosi gratuita",
     sending: "Invio in corso…",
     privacy: "Senza impegno. Dati trattati secondo la nostra politica sulla privacy.",
@@ -112,6 +131,9 @@ const COPY: Record<string, {
     restaurant: "Restaurant",
     phone: "Telefon",
     phoneOpt: "(optional)",
+    upload: "Weinkarte hochladen (PDF/Bild)",
+    uploadHint: "Optional · PDF, JPG oder PNG · max. 10 MB",
+    uploadError: "Ungültiges Format. Laden Sie PDF, JPG oder PNG hoch (max. 10 MB).",
     cta: "Kostenlose Diagnose anfordern",
     sending: "Wird gesendet…",
     privacy: "Unverbindlich. Daten werden gemäß unserer Datenschutzrichtlinie verarbeitet.",
@@ -122,16 +144,41 @@ const COPY: Record<string, {
   },
 };
 
+const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+const MAX_BYTES = 10 * 1024 * 1024;
+
+/**
+ * Path-aware popup. Shows on:
+ *  - /herramientas and /recursos          → 8s
+ *  - /herramientas/<tool>                  → 15s (warm lead)
+ * Honors per-session dismissal.
+ */
 const ToolsLeadPopup = () => {
   const { lang } = useLanguage();
   const { toast } = useToast();
+  const { pathname } = useLocation();
   const t = COPY[lang] || COPY.es;
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
   const triggered = useRef(false);
+
+  // Determine if the popup should activate on this route + delay
+  const routeMatch = (() => {
+    // Strip language prefix (/en, /it, /fr, /de, /pt)
+    const stripped = pathname.replace(/^\/(en|it|fr|de|pt)(?=\/|$)/, "") || "/";
+    // Tool subpages: /herramientas/<something>  → 15s
+    if (/^\/herramientas\/.+/.test(stripped)) return { active: true, delay: 15000 };
+    // Hub pages
+    if (stripped === "/herramientas" || stripped === "/recursos") {
+      return { active: true, delay: 8000 };
+    }
+    return { active: false, delay: 0 };
+  })();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!routeMatch.active) return;
     if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
 
     const trigger = () => {
@@ -140,16 +187,31 @@ const ToolsLeadPopup = () => {
       setOpen(true);
     };
 
-    const timeoutId = window.setTimeout(trigger, 8000); // 8s después de cargar
+    const timeoutId = window.setTimeout(trigger, routeMatch.delay);
 
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [pathname, routeMatch.active, routeMatch.delay]);
 
   const dismiss = () => {
     sessionStorage.setItem(STORAGE_KEY, "1");
     setOpen(false);
+  };
+
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0] || null;
+    if (!f) {
+      setFile(null);
+      return;
+    }
+    if (!ALLOWED_TYPES.includes(f.type) || f.size > MAX_BYTES) {
+      toast({ title: t.errorTitle, description: t.uploadError, variant: "destructive" });
+      e.target.value = "";
+      setFile(null);
+      return;
+    }
+    setFile(f);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -167,11 +229,29 @@ const ToolsLeadPopup = () => {
     const phone = phoneNumber ? `${dial} ${phoneNumber}`.trim() : null;
 
     try {
+      // Upload optional wine list file first
+      let carta_url: string | null = null;
+      if (file) {
+        const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
+        const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+        const path = `${new Date().toISOString().slice(0, 10)}/${safeName}`;
+        const { error: upErr } = await supabase.storage
+          .from("cartas-vinos")
+          .upload(path, file, { contentType: file.type, upsert: false });
+        if (upErr) {
+          console.error("Upload error:", upErr);
+        } else {
+          const { data } = supabase.storage.from("cartas-vinos").getPublicUrl(path);
+          carta_url = data.publicUrl;
+        }
+      }
+
       const { error } = await supabase.from("contact_leads").insert({
         name,
         email,
         restaurant,
         phone,
+        carta_url,
         form_type: "herramientas_popup",
       });
       if (error) throw error;
@@ -181,6 +261,8 @@ const ToolsLeadPopup = () => {
         email,
         restaurant,
         phone,
+        carta_url,
+        menu_link: carta_url,
         form_type: "herramientas_popup",
       });
 
@@ -269,6 +351,34 @@ const ToolsLeadPopup = () => {
               {t.phone} <span className="text-muted-foreground/60">{t.phoneOpt}</span>
             </label>
             <PhoneInput native required={false} />
+          </div>
+
+          <div>
+            <label
+              htmlFor="popup_carta"
+              className="flex items-center justify-center gap-2 w-full h-10 rounded-md border border-dashed border-wine/40 bg-wine/5 hover:bg-wine/10 px-3 text-sm font-medium text-wine-light cursor-pointer transition-colors"
+            >
+              {file ? (
+                <>
+                  <FileCheck2 size={16} />
+                  <span className="truncate max-w-[80%]">{file.name}</span>
+                </>
+              ) : (
+                <>
+                  <Upload size={16} />
+                  <span>{t.upload}</span>
+                </>
+              )}
+            </label>
+            <input
+              id="popup_carta"
+              name="carta"
+              type="file"
+              accept="application/pdf,image/jpeg,image/png"
+              onChange={onFileChange}
+              className="sr-only"
+            />
+            <p className="text-[10px] text-muted-foreground/60 mt-1">{t.uploadHint}</p>
           </div>
 
           <button
