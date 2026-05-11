@@ -1335,14 +1335,156 @@ function KpiCard({
 }
 
 /* ─── Pending contact (very large lists) ─── */
-function PendingContactView({ lang }: { lang: Lang }) {
+function PendingContactView({
+  lang, message, analysisId, t,
+}: { lang: Lang; message?: string; analysisId?: string; t: any }) {
   return (
     <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
         <Clock size={32} className="text-amber-600" />
       </div>
       <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">{T_PENDING_TITLE[lang]}</h3>
-      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">{T_PENDING_TEXT[lang]}</p>
+      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+        {message || T_PENDING_TEXT[lang]}
+      </p>
+      <div className="mt-8 max-w-xl mx-auto text-left">
+        <ContactCaptureForm lang={lang} analysisId={analysisId || null} t={t} variant="pending" />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Phone input wrapper (controlled, prefix + number) ─── */
+function PhoneInputControlled({
+  id = "phone", value, onChange,
+}: { id?: string; value: string; onChange: (v: string) => void }) {
+  const { lang } = useLanguage();
+  // Parse current value for initial state
+  const initial = (() => {
+    const m = (value || "").match(/^(\+\d{1,4})(.*)$/);
+    if (m) {
+      const dial = m[1];
+      const found = PREFIXES.find((p) => p.dial === dial);
+      return { code: found?.code || "", number: m[2].trim() };
+    }
+    return { code: "", number: value || "" };
+  })();
+  const [code, setCode] = useState(initial.code);
+  const [number, setNumber] = useState(initial.number);
+
+  const placeholder: Record<string, string> = {
+    es: "Selecciona país", en: "Select country", it: "Seleziona paese",
+    fr: "Choisir pays", de: "Land wählen", pt: "Selecionar país",
+  };
+
+  const emit = (c: string, n: string) => {
+    const dial = PREFIXES.find((p) => p.code === c)?.dial || "";
+    const cleaned = n.replace(/[^\d]/g, "");
+    onChange(c && cleaned ? `${dial}${cleaned}` : cleaned);
+  };
+
+  return (
+    <div className="flex mt-1.5">
+      <select
+        id={`${id}_prefix`}
+        value={code}
+        onChange={(e) => { setCode(e.target.value); emit(e.target.value, number); }}
+        className="h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        style={{ width: 130, minWidth: 130 }}
+        aria-label="Country prefix"
+      >
+        <option value="">{placeholder[lang] || placeholder.en}</option>
+        {PREFIXES.map((p) => (
+          <option key={p.code} value={p.code}>{p.flag} {p.dial}</option>
+        ))}
+      </select>
+      <Input
+        id={id}
+        type="tel"
+        placeholder="600 000 000"
+        value={number}
+        onChange={(e) => { setNumber(e.target.value); emit(code, e.target.value); }}
+        className="flex-1 rounded-l-none"
+        maxLength={15}
+      />
+    </div>
+  );
+}
+
+/* ─── Generic contact capture form (used in long-wait + pending-contact) ─── */
+function ContactCaptureForm({
+  lang, analysisId, t, variant,
+}: { lang: Lang; analysisId: string | null; t: any; variant: "longwait" | "pending" }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
+    if (!name.trim()) return;
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/v1/unlock`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ analysisId, name, email, phone, consent: true, lang, source: variant }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.success) {
+        toast.error(data?.error || t.errGeneric);
+      } else {
+        setSent(true);
+        toast.success(t.successTitle);
+      }
+    } catch (err) {
+      console.error(err); toast.error(t.errGeneric);
+    } finally { setSubmitting(false); }
+  };
+
+  if (sent) {
+    return (
+      <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10">
+        <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+        <p className="text-sm leading-relaxed">{t.successText}</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="space-y-3">
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div>
+          <Label htmlFor={`cc-name-${variant}`} className="mb-1 block text-xs">{t.formName} *</Label>
+          <Input id={`cc-name-${variant}`} required value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor={`cc-email-${variant}`} className="mb-1 block text-xs">{t.formEmail} *</Label>
+          <Input id={`cc-email-${variant}`} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+      </div>
+      <div>
+        <Label htmlFor={`cc-phone-${variant}`} className="mb-1 block text-xs">{t.formPhone}</Label>
+        <PhoneInputControlled id={`cc-phone-${variant}`} value={phone} onChange={setPhone} />
+      </div>
+      <Button type="submit" disabled={submitting} className="w-full bg-gradient-wine text-primary-foreground font-semibold">
+        {submitting ? (<><Loader2 size={16} className="animate-spin" /> {t.unlocking}</>) : T_SEND_RECEIVE[lang]}
+      </Button>
+    </form>
+  );
+}
+
+/* ─── Long-wait soft capture (shown after ~45s, analysis still running) ─── */
+function LongWaitCaptureForm({
+  lang, analysisId, defaultCountry, t,
+}: { lang: Lang; analysisId: string | null; defaultCountry: string | null; t: any }) {
+  return (
+    <div className="mt-6 p-4 rounded-lg border border-border bg-secondary/40">
+      <p className="text-sm font-semibold mb-1">{T_LONG_CAPTURE_TITLE[lang]}</p>
+      <p className="text-xs text-muted-foreground mb-3">{T_LONG_CAPTURE_TEXT[lang]}</p>
+      <ContactCaptureForm lang={lang} analysisId={analysisId} t={t} variant="longwait" />
     </div>
   );
 }
