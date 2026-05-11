@@ -624,25 +624,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         return;
       }
 
+      currentAnalysisIdRef.current = data.analysisId;
       // Async flow: poll /v1/status/{id} until terminal state
       const finalPayload = await pollStatus(data.analysisId);
       handleFinalPayload(finalPayload);
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
-      const isAbort = err?.name === "AbortError";
-      showInlineError(
-        isAbort
-          ? (lang === "es"
-              ? "El análisis está tardando demasiado. Inténtalo de nuevo o prueba con un fragmento más pequeño."
-              : lang === "en"
-              ? "The analysis is taking too long. Please try again or try a smaller excerpt."
-              : t.errGeneric)
-          : t.errGeneric
-      );
+      showInlineError(t.errGeneric);
     } finally {
       setLoading(false);
       setPollLabel(null); setPollProgress(null);
+      currentAnalysisIdRef.current = null;
     }
   };
 
