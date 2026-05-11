@@ -563,6 +563,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
+  // Freemium / rate-limit
+  const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
+  const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -601,9 +604,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     if (tab === "text" && text.trim().length < 50) { showInlineError(t.errMin); return; }
     if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { showInlineError(t.errGeneric); return; }
     if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
+    await runAnalysis();
+  };
 
+  const runAnalysis = async () => {
     setLoading(true); setResult(null); setErrorMsg(null);
     setUrlFailedInfo(null);
+    setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
     const controller = new AbortController();
     // POST returns immediately with an analysisId; polling does the waiting.
@@ -635,6 +642,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
+
+      // Freemium gate: backend asks for registration to keep analyzing
+      if (data?.rateLimited && data?.requiresRegistration) {
+        setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
+        return;
+      }
+      // Hard daily limit (HTTP 429 or rateLimited without registration path)
+      if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
+        setRateLimitMsg(data?.message || t.errGeneric);
+        return;
+      }
 
       if (!res.ok || !data?.success) {
         const apiErr: string = (data?.error || "").toString();
