@@ -372,13 +372,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         const fd = new FormData();
         fd.append("type", "file");
         fd.append("file", file);
-        fd.append("country", country);
         fd.append("lang", lang);
+        if (placeId) fd.append("placeId", placeId);
+        if (restaurantName) fd.append("restaurantName", restaurantName);
         res = await fetch(`${API_BASE}/v1/analyze`, { method: "POST", body: fd, signal: controller.signal });
       } else {
+        const base: Record<string, any> = { lang };
+        if (placeId) base.placeId = placeId;
+        if (restaurantName) base.restaurantName = restaurantName;
         const body = tab === "url"
-          ? { type: "url", url: url.trim(), country, lang }
-          : { type: "text", text: text.trim(), country, lang };
+          ? { type: "url", url: url.trim(), ...base }
+          : { type: "text", text: text.trim(), ...base };
         res = await fetch(`${API_BASE}/v1/analyze`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -388,7 +392,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data?.success) {
+      // Handle pendingContact (very large lists processed manually)
+      if (res.ok && data?.success && data?.pendingContact) {
+        setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
+        setTimeout(() => {
+          document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      } else if (!res.ok || !data?.success) {
         const apiErr: string = (data?.error || "").toString();
         let msg = apiErr || t.errGeneric;
         if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
@@ -433,15 +443,35 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
         {/* Form */}
         <form onSubmit={onSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
-          {/* Country */}
+          {/* Restaurant search (Google Places — optional) */}
           <div className="mb-6">
-            <Label className="mb-2 block text-sm font-medium">{t.country}</Label>
-            <select value={country} onChange={(e) => setCountry(e.target.value)}
-              className="w-full md:w-auto h-11 px-4 rounded-md border border-input bg-background text-sm">
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code}>{c.flag}  {t.countries[c.code] || c.code}</option>
-              ))}
-            </select>
+            <Label className="mb-2 block text-sm font-medium">{T_RESTAURANT_LABEL[lang]}</Label>
+            {placeId && restaurantName ? (
+              <div className="flex items-start gap-3 p-3 rounded-md border border-accent/40 bg-accent/5">
+                <CheckCircle2 size={18} className="text-accent mt-0.5 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm truncate">{restaurantName}</p>
+                  {restaurantAddress && (
+                    <p className="text-xs text-muted-foreground truncate">{restaurantAddress}</p>
+                  )}
+                </div>
+                <button type="button" onClick={clearRestaurant}
+                  className="text-muted-foreground hover:text-foreground p-1" aria-label="Clear">
+                  <X size={16} />
+                </button>
+              </div>
+            ) : (
+              <PlacesSearchInput
+                ready={placesReady}
+                placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
+                onSelect={(s) => {
+                  setPlaceId(s.place_id);
+                  setRestaurantName(s.structured_formatting?.main_text || s.description);
+                  setRestaurantAddress(s.structured_formatting?.secondary_text || null);
+                }}
+              />
+            )}
+            <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
           </div>
 
           {/* Tabs */}
