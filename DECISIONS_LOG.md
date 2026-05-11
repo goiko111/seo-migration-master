@@ -1,3 +1,20 @@
+## 2026-05-11 — Sesión 9 · Analizador de Cartas + Google Places
+
+- **Decisión:** Integrar Google Places Autocomplete en el analizador como campo opcional (no bloqueante).
+  - **Razón:** Permite al Worker auto-detectar país, tipo de restaurante, rating, y calcular estimaciones de negocio (ticket medio, botellas/servicio, ingresos vino/mes). Sin restaurante seleccionado, el flujo sigue funcionando.
+- **Decisión:** Eliminar el selector de país del formulario.
+  - **Razón:** El backend infiere país desde `placeId` o, en su defecto, desde la propia carta. El selector aportaba fricción sin valor neto.
+- **Decisión:** Cargar el script de Google Maps de forma diferida (singleton) sólo cuando se monta el analizador, con `loading=async`.
+  - **Razón:** Evitar coste de carga en páginas que no usan el componente y respetar el presupuesto JS.
+- **Decisión:** API key de Places `AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A` se mantiene en código cliente, restringida por HTTP referrers en GCP.
+  - **Razón:** Es una clave pública de frontend (Maps JS); la seguridad real se hace por dominio, no por ocultarla.
+- **Decisión:** El front no envía `country` al endpoint `/v1/analyze`; sólo `lang`, `placeId` y `restaurantName` (estos dos últimos opcionales).
+  - **Razón:** Una única fuente de verdad para identificación geográfica (Worker).
+- **Decisión:** Respuesta `pendingContact: true` se renderiza como vista informativa amigable (sin error rojo).
+  - **Razón:** Cartas grandes (500+ vinos) se procesan manualmente y el usuario debe entender que el equipo le contactará en <48h.
+
+---
+
 ## 2026-05-11 — Sesión 8 · Analizador de Cartas
 
 - **Decisión:** El analizador NO mantiene su propio selector de idioma; usa siempre el idioma global de la web (`useLanguage()`).

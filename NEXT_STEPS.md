@@ -1,7 +1,29 @@
 # NEXT_STEPS.md — winerim.wine
 
 > Tareas pendientes priorizadas. Se reescribe al final de cada sesión.
-> Última actualización: 2026-05-11 (sesión 8)
+> Última actualización: 2026-05-11 (sesión 9)
+
+## Sesión 9 — abierto al cierre
+
+### A. Validación end-to-end Google Places + estimates
+- Publicar el front (Lovable Publish) y, en producción, seleccionar un restaurante real desde el autocomplete.
+- Confirmar que el body POST a `/v1/analyze` incluye `placeId` y `restaurantName`.
+- Confirmar que la respuesta trae `restaurant.google` (rating, reviews, type, address) y `estimates` (ticketMedio, ticketVino, bottlesPerService, monthlyRevenue, wps).
+- Probar caso `pendingContact: true` con una carta >500 vinos (o forzar desde el Worker en staging).
+
+### B. Restricción de API key Google Maps (MANUAL — GCP)
+- En Google Cloud Console → APIs & Services → Credentials → API key `AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A`.
+- Application restrictions → HTTP referrers, añadir:
+  - `https://winerim.wine/*`
+  - `https://*.winerim.wine/*`
+  - `https://*.lovable.app/*` (preview)
+  - `http://localhost:*` (dev)
+- API restrictions → restringir a `Maps JavaScript API` y `Places API`.
+
+### C. Limpieza i18n del analizador (cosmética)
+- Eliminar `countries: { ... }` y `country: "..."` de cada bloque `T[lang]` en `WineListAnalyzerTool.tsx` — ya no se usan tras retirar el selector de país.
+
+## Sesión 8 — abierto al cierre
 
 ## Sesión 8 — abierto al cierre
 
