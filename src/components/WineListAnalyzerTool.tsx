@@ -971,7 +971,7 @@ function PlacesSearchInput({
     clearSuggestions,
     init,
   } = usePlacesAutocomplete({
-    requestOptions: { types: ["restaurant", "bar", "cafe"] },
+    requestOptions: { types: ["establishment"] },
     debounce: 300,
     initOnMount: false,
   });
