@@ -293,10 +293,7 @@ const T: Record<Lang, any> = {
   },
 };
 
-const LANG_OPTIONS: { code: Lang; label: string }[] = [
-  { code: "es", label: "ES" }, { code: "en", label: "EN" }, { code: "fr", label: "FR" },
-  { code: "de", label: "DE" }, { code: "it", label: "IT" }, { code: "pt", label: "PT" },
-];
+// Language is taken from the global useLanguage() context; no internal switcher.
 
 /* ─── Types ─── */
 type SemaphoreStatus = "red" | "yellow" | "green";
@@ -316,13 +313,16 @@ const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-r
 const STATUS_DOT: Record<SemaphoreStatus, string> = { red: "bg-red-500", yellow: "bg-amber-500", green: "bg-emerald-500" };
 
 /* ─── Component ─── */
-interface Props { defaultLang?: Lang }
+interface Props { defaultLang?: Lang } // kept for backwards-compat; ignored
 
-export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
-  const [lang, setLang] = useState<Lang>(defaultLang);
+export default function WineListAnalyzerTool(_props: Props = {}) {
+  const { lang: globalLang } = useLanguage();
+  const lang: Lang = (["es","en","fr","de","it","pt"].includes(globalLang as string) ? globalLang : "es") as Lang;
   const t = T[lang];
 
-  const [country, setCountry] = useState("ES");
+  const [country, setCountry] = useState<string>(LANG_TO_COUNTRY[lang] || "ES");
+  // Keep country in sync if the user switches site language
+  useEffect(() => { setCountry(LANG_TO_COUNTRY[lang] || "ES"); }, [lang]);
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
@@ -423,17 +423,6 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
           </div>
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">{t.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
-
-          {/* Lang switcher */}
-          <div className="inline-flex items-center gap-1 mt-6 p-1 rounded-full border border-border bg-card">
-            <Globe2 size={14} className="ml-2 text-muted-foreground" />
-            {LANG_OPTIONS.map((l) => (
-              <button key={l.code} type="button" onClick={() => setLang(l.code)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${lang === l.code ? "bg-wine text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                {l.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Form */}
