@@ -77,6 +77,16 @@ const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
   pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
 };
 
+/* Partial analysis (>200 wines) i18n */
+const T_PARTIAL = {
+  es: { headline: (a: number, t: number) => <>Hemos analizado <strong>{a} de {t}</strong> vinos de tu carta.</>, name: "Nombre (opcional)", email: "Email", send: "Enviar informe completo", done: (n: number, e: string) => `¡Listo! Te enviaremos el informe completo de las ${n} referencias a ${e}.`, error: "No se pudo enviar. Inténtalo de nuevo." },
+  en: { headline: (a: number, t: number) => <>We analyzed <strong>{a} of {t}</strong> wines from your list.</>, name: "Name (optional)", email: "Email", send: "Send full report", done: (n: number, e: string) => `Done! We'll send the full report of all ${n} wines to ${e}.`, error: "Could not send. Please try again." },
+  fr: { headline: (a: number, t: number) => <>Nous avons analysé <strong>{a} sur {t}</strong> vins de votre carte.</>, name: "Nom (optionnel)", email: "Email", send: "Envoyer le rapport complet", done: (n: number, e: string) => `C'est fait ! Nous enverrons le rapport complet des ${n} références à ${e}.`, error: "Échec de l'envoi. Réessayez." },
+  de: { headline: (a: number, t: number) => <>Wir haben <strong>{a} von {t}</strong> Weinen Ihrer Karte analysiert.</>, name: "Name (optional)", email: "E-Mail", send: "Vollständigen Bericht senden", done: (n: number, e: string) => `Fertig! Wir senden den vollständigen Bericht aller ${n} Weine an ${e}.`, error: "Senden fehlgeschlagen. Bitte erneut versuchen." },
+  it: { headline: (a: number, t: number) => <>Abbiamo analizzato <strong>{a} su {t}</strong> vini della tua carta.</>, name: "Nome (opzionale)", email: "Email", send: "Invia il report completo", done: (n: number, e: string) => `Fatto! Ti invieremo il report completo di tutti i ${n} vini a ${e}.`, error: "Invio non riuscito. Riprova." },
+  pt: { headline: (a: number, t: number) => <>Analisámos <strong>{a} de {t}</strong> vinhos da sua carta.</>, name: "Nome (opcional)", email: "Email", send: "Enviar relatório completo", done: (n: number, e: string) => `Pronto! Enviaremos o relatório completo dos ${n} vinhos para ${e}.`, error: "Não foi possível enviar. Tente de novo." },
+} as const;
+
 /* Rotating commercial claims shown under the progress bar while processing */
 const CLAIMS: Record<Lang, string[]> = {
   es: [
@@ -523,6 +533,10 @@ interface AnalysisResult {
     wps?: { estimated: number; profile: string };
   };
   pendingContact?: boolean;
+  partialAnalysis?: boolean;
+  analyzedWines?: number;
+  totalWines?: number;
+  partialMessage?: string;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
@@ -1012,6 +1026,16 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
 
   return (
     <>
+      {result.partialAnalysis && (
+        <PartialAnalysisBanner
+          lang={lang}
+          analyzedWines={result.analyzedWines || 200}
+          totalWines={result.totalWines || summary.totalWines}
+          message={result.partialMessage}
+          analysisId={analysisId}
+          defaultRestaurant={restaurant?.name || ""}
+        />
+      )}
       {/* Restaurant + Score */}
       <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center bg-card border border-border rounded-2xl p-8">
         <div>
@@ -1640,6 +1664,88 @@ function RegistrationGateModal({
           </p>
         </form>
       </div>
+    </div>
+  );
+}
+
+/* ─── Partial analysis banner + email capture ─── */
+function PartialAnalysisBanner({
+  lang, analyzedWines, totalWines, message, analysisId, defaultRestaurant,
+}: {
+  lang: Lang;
+  analyzedWines: number;
+  totalWines: number;
+  message?: string;
+  analysisId?: string;
+  defaultRestaurant?: string;
+}) {
+  const tt = T_PARTIAL[lang];
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || submitting) return;
+    setSubmitting(true); setErr(null);
+    try {
+      const res = await fetch(`${API_BASE}/v1/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || undefined,
+          email,
+          restaurant: defaultRestaurant || undefined,
+          analysisId: analysisId || undefined,
+          lang,
+        }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok || d?.success === false) throw new Error(d?.message || "register failed");
+      setDone(true);
+    } catch {
+      setErr(tt.error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-blue-500/30 bg-blue-500/5 p-5 md:p-6">
+      <div className="flex items-start gap-3 mb-3">
+        <Info size={20} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+        <div className="flex-1">
+          <p className="text-sm md:text-base text-foreground leading-relaxed">
+            {tt.headline(analyzedWines, totalWines)}
+          </p>
+          {message && (
+            <p className="text-sm text-muted-foreground leading-relaxed mt-1">{message}</p>
+          )}
+        </div>
+      </div>
+      {done ? (
+        <div className="flex items-start gap-2 mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+          <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+          <p className="text-sm text-foreground">{tt.done(totalWines, email)}</p>
+        </div>
+      ) : (
+        <form onSubmit={submit} className="grid sm:grid-cols-[1fr_1fr_auto] gap-2 mt-3">
+          <Input
+            type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+            placeholder={tt.email} className="bg-background"
+          />
+          <Input
+            value={name} onChange={(e) => setName(e.target.value)}
+            placeholder={tt.name} className="bg-background"
+          />
+          <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground font-semibold">
+            {submitting ? <Loader2 size={16} className="animate-spin" /> : tt.send}
+          </Button>
+          {err && <p className="sm:col-span-3 text-xs text-destructive">{err}</p>}
+        </form>
+      )}
     </div>
   );
 }
