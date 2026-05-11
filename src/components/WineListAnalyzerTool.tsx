@@ -369,7 +369,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
     setLoading(true); setResult(null); setErrorMsg(null);
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
+    // Larger lists (100+ wines) can take 60-90s in Claude. Allow 120s.
+    const timeout = setTimeout(() => controller.abort(), 120000);
 
     try {
       let res: Response;
@@ -392,9 +393,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         });
       }
       clearTimeout(timeout);
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok || !data?.success) {
-        const msg = data?.error || t.errGeneric;
+        const apiErr: string = (data?.error || "").toString();
+        let msg = apiErr || t.errGeneric;
+        if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
         showInlineError(msg);
       } else {
         setResult(data as AnalysisResult);
@@ -406,7 +409,16 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
-      showInlineError(t.errGeneric);
+      const isAbort = err?.name === "AbortError";
+      showInlineError(
+        isAbort
+          ? (lang === "es"
+              ? "El análisis está tardando demasiado. Inténtalo de nuevo o prueba con un fragmento más pequeño."
+              : lang === "en"
+              ? "The analysis is taking too long. Please try again or try a smaller excerpt."
+              : t.errGeneric)
+          : t.errGeneric
+      );
     } finally {
       setLoading(false);
     }
@@ -446,9 +458,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               { k: "file", icon: Upload, label: t.tabFile },
             ] as const).map(({ k, icon: Icon, label }) => (
               <button key={k} type="button" onClick={() => setTab(k)}
-                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium transition-all ${tab === k ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                className={`flex items-center justify-center gap-2 px-2 sm:px-3 py-2.5 rounded-md text-sm font-medium transition-all ${tab === k ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
                 <Icon size={16} />
                 <span className="hidden sm:inline">{label}</span>
+                <span className="sm:hidden">{TAB_SHORT_EN[lang][k]}</span>
               </button>
             ))}
           </div>
@@ -456,17 +469,20 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           {/* Tab content */}
           <div className="mb-6">
             {tab === "url" && (
-              <Input type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder={t.urlPh} className="h-12" />
+              <div className="space-y-2">
+                <Input type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder={t.urlPh} className="h-12" />
+                <p className="text-xs text-muted-foreground leading-relaxed">{URL_NOTE[lang]}</p>
+              </div>
             )}
             {tab === "text" && (
-              <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] font-mono text-sm" />
+              <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] sm:min-h-[220px] font-mono text-sm" />
             )}
             {tab === "file" && (
               <label className="flex flex-col items-center justify-center gap-3 py-10 px-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-wine/50 hover:bg-wine/5 transition-colors">
                 <Upload size={28} className="text-wine" />
                 <span className="text-sm font-medium">{file ? file.name : t.fileLabel}</span>
                 <span className="text-xs text-muted-foreground">{t.fileHint}</span>
-                <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" className="hidden"
+                <input type="file" accept=".pdf,.jpg,.jpeg,.png,.txt,.csv,application/pdf,image/jpeg,image/png,text/plain,text/csv" className="hidden"
                   onChange={(e) => {
                     const f = e.target.files?.[0];
                     if (f && f.size > 10 * 1024 * 1024) { toast.error("Max 10MB"); return; }
