@@ -526,7 +526,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
-  const [slow, setSlow] = useState(false);
+  const [showLongCapture, setShowLongCapture] = useState(false);
+  const [claimIdx, setClaimIdx] = useState(0);
   const [pollLabel, setPollLabel] = useState<string | null>(null);
   const [pollProgress, setPollProgress] = useState<number | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
@@ -535,6 +536,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     message: string;
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
+  const currentAnalysisIdRef = useRef<string | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -546,19 +548,24 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
   const slowTimer = useRef<number | null>(null);
+  const claimTimer = useRef<number | null>(null);
   useEffect(() => {
     if (loading) {
-      setStep(0); setSlow(false);
+      setStep(0); setShowLongCapture(false); setClaimIdx(0);
       stepTimer.current = window.setInterval(() => {
         setStep((s) => (s < t.steps.length - 1 ? s + 1 : s));
       }, 3000);
-      slowTimer.current = window.setTimeout(() => setSlow(true), 25000);
+      slowTimer.current = window.setTimeout(() => setShowLongCapture(true), 45000);
+      claimTimer.current = window.setInterval(() => {
+        setClaimIdx((i) => (i + 1) % CLAIMS[lang].length);
+      }, 3500);
     }
     return () => {
       if (stepTimer.current) window.clearInterval(stepTimer.current);
       if (slowTimer.current) window.clearTimeout(slowTimer.current);
+      if (claimTimer.current) window.clearInterval(claimTimer.current);
     };
-  }, [loading, t.steps.length]);
+  }, [loading, t.steps.length, lang]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
