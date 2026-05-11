@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Search, X, Star, Clock,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -442,6 +442,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [slow, setSlow] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [urlFailedInfo, setUrlFailedInfo] = useState<{
+    message: string;
+    suggestions?: Array<{ method: string; label: string; description?: string }>;
+  } | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -477,6 +481,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
 
     setLoading(true); setResult(null); setErrorMsg(null);
+    setUrlFailedInfo(null);
     const controller = new AbortController();
     // Larger lists (100+ wines) can take 60-90s in Claude. Allow 120s.
     const timeout = setTimeout(() => controller.abort(), 120000);
@@ -507,6 +512,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
+      // Handle urlFailed: backend couldn't fetch the restaurant URL
+      if (res.ok && data?.success && data?.urlFailed) {
+        // Preserve restaurant selection if API returned it
+        if (data?.restaurant?.name && !restaurantName) {
+          setRestaurantName(data.restaurant.name);
+          if (data.restaurant.address) setRestaurantAddress(data.restaurant.address);
+        }
+        setUrlFailedInfo({
+          message: data.message || data.reason || t.errGeneric,
+          suggestions: data.suggestions,
+        });
+        setTimeout(() => {
+          document.getElementById("analyzer-url-failed")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 50);
+      } else
       // Handle pendingContact (very large lists processed manually)
       if (res.ok && data?.success && data?.pendingContact) {
         setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
@@ -630,6 +650,53 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               </label>
             )}
           </div>
+
+          {/* URL fetch failed — friendly fallback */}
+          {urlFailedInfo && !loading && (
+            <div id="analyzer-url-failed" role="status"
+              className="mb-4 p-4 rounded-lg border border-amber-500/40 bg-amber-500/10">
+              <div className="flex items-start gap-3">
+                <Info size={20} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm mb-1">
+                    {lang === "es" ? "No pudimos leer la carta desde esa URL"
+                      : lang === "en" ? "We couldn't read the list from that URL"
+                      : lang === "fr" ? "Impossible de lire la carte depuis cette URL"
+                      : lang === "de" ? "Wir konnten die Karte unter dieser URL nicht lesen"
+                      : lang === "it" ? "Non siamo riusciti a leggere la carta da quell'URL"
+                      : "Não conseguimos ler a carta a partir desse URL"}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{urlFailedInfo.message}</p>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {(urlFailedInfo.suggestions || [
+                      { method: "text", label: t.tabText },
+                      { method: "file", label: t.tabFile },
+                    ]).map((s) => {
+                      const Icon = s.method === "file" ? Upload : FileText;
+                      return (
+                        <button key={s.method} type="button"
+                          onClick={() => {
+                            if (s.method === "text" || s.method === "file") {
+                              setTab(s.method);
+                              setUrlFailedInfo(null);
+                            }
+                          }}
+                          className="flex items-start gap-3 p-3 rounded-md border border-border bg-card hover:border-accent/60 hover:bg-accent/5 transition-colors text-left">
+                          <Icon size={18} className="mt-0.5 shrink-0 text-accent" />
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium">{s.label}</p>
+                            {s.description && (
+                              <p className="text-xs text-muted-foreground mt-0.5">{s.description}</p>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Inline error (visible, no sticky overlap) */}
           {errorMsg && !loading && (
