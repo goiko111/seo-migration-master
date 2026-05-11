@@ -660,7 +660,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           {result && (
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
-              <ResultsView result={result} t={t} lang={lang} />
+              {result.pendingContact ? (
+                <PendingContactView lang={lang} />
+              ) : (
+                <ResultsView result={result} t={t} lang={lang} />
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -671,7 +675,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
 /* ─── Results subview ─── */
 function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang: Lang }) {
-  const { summary, semaphore, topProblems, restaurant, fullAnalysis, analysisId } = result;
+  const { summary, semaphore, topProblems, restaurant, fullAnalysis, analysisId, estimates } = result;
+  const k = T_KPI[lang];
+  const google = restaurant?.google;
+  const fmtMoney = (v: number, cur = "EUR") => new Intl.NumberFormat(lang, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
+  const confColor: Record<string, string> = { high: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400", medium: "bg-amber-500/15 text-amber-700 dark:text-amber-400", low: "bg-red-500/15 text-red-600 dark:text-red-400" };
 
   return (
     <>
@@ -680,6 +688,25 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
         <div>
           {restaurant?.name && (
             <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2">{restaurant.name}</h3>
+          )}
+          {google?.address && (
+            <p className="text-sm text-muted-foreground mb-2">{google.address}</p>
+          )}
+          {(google?.rating || google?.type) && (
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              {google.rating != null && (
+                <span className="inline-flex items-center gap-1 text-sm font-medium">
+                  <Star size={14} className="text-amber-500 fill-amber-500" />
+                  <span>{google.rating.toFixed(1)}</span>
+                  {google.reviews != null && (
+                    <span className="text-muted-foreground">({google.reviews.toLocaleString(lang)} {k.reviews})</span>
+                  )}
+                </span>
+              )}
+              {google.type && (
+                <span className="text-xs font-semibold px-2 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">{google.type}</span>
+              )}
+            </div>
           )}
           <p className="text-sm text-muted-foreground mb-4">{t.detected}</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
@@ -690,6 +717,46 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
         </div>
         <ScoreCircle score={summary.score} color={summary.scoreColor} label={summary.scoreLabel} title={t.score} />
       </div>
+
+      {/* Business estimates KPIs (only if API returned them) */}
+      {estimates && (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {estimates.ticketMedio && (
+            <KpiCard
+              label={k.ticket}
+              value={fmtMoney(estimates.ticketMedio.value, estimates.ticketMedio.currency)}
+              confidence={estimates.ticketMedio.confidence}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.ticketVino && (
+            <KpiCard
+              label={k.ticketWine}
+              value={fmtMoney(estimates.ticketVino.value, estimates.ticketVino.currency)}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.bottlesPerService && (
+            <KpiCard
+              label={k.bottles}
+              value={String(estimates.bottlesPerService.value)}
+              confidence={estimates.bottlesPerService.confidence}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.monthlyRevenue && (
+            <KpiCard
+              label={k.revenue}
+              value={fmtMoney(estimates.monthlyRevenue.value, estimates.monthlyRevenue.currency)}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+        </div>
+      )}
 
       {/* Semaphore */}
       <div>
