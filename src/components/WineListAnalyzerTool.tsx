@@ -938,3 +938,112 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
     </div>
   );
 }
+
+/* ─── Google Places search input ─── */
+interface PlacesSuggestion {
+  place_id: string;
+  description: string;
+  structured_formatting?: { main_text?: string; secondary_text?: string };
+}
+function PlacesSearchInput({
+  ready, placeholder, onSelect,
+}: { ready: boolean; placeholder: string; onSelect: (s: PlacesSuggestion) => void }) {
+  const {
+    ready: hookReady,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: { types: ["restaurant", "bar", "cafe"] },
+    debounce: 300,
+    initOnMount: ready,
+  });
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (!wrapRef.current?.contains(e.target as Node)) { setOpen(false); clearSuggestions(); }
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [clearSuggestions]);
+
+  const disabled = !ready || !hookReady;
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <div className="relative">
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+        <Input
+          value={value}
+          disabled={disabled}
+          onChange={(e) => { setValue(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          placeholder={placeholder}
+          className="h-12 pl-10"
+          autoComplete="off"
+        />
+      </div>
+      {open && status === "OK" && data.length > 0 && (
+        <ul className="absolute z-30 left-0 right-0 mt-1 bg-popover border border-border rounded-md shadow-lg max-h-72 overflow-auto">
+          {data.map((s) => (
+            <li key={s.place_id}>
+              <button type="button"
+                onClick={() => {
+                  setValue(s.description, false);
+                  clearSuggestions();
+                  setOpen(false);
+                  onSelect(s as PlacesSuggestion);
+                }}
+                className="w-full text-left px-4 py-2.5 hover:bg-accent/10 flex flex-col gap-0.5 border-b border-border last:border-0"
+              >
+                <span className="text-sm font-medium truncate">{s.structured_formatting?.main_text || s.description}</span>
+                {s.structured_formatting?.secondary_text && (
+                  <span className="text-xs text-muted-foreground truncate">{s.structured_formatting.secondary_text}</span>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/* ─── KPI Card ─── */
+function KpiCard({
+  label, value, confidence, confLabels, confColor,
+}: {
+  label: string;
+  value: string;
+  confidence?: "high" | "medium" | "low";
+  confLabels: { high: string; medium: string; low: string };
+  confColor: Record<string, string>;
+}) {
+  return (
+    <div className="bg-card border border-border rounded-xl p-4 flex flex-col gap-1.5">
+      <span className="text-xs text-muted-foreground uppercase tracking-wider">{label}</span>
+      <span className="font-heading text-2xl font-bold text-foreground">{value}</span>
+      {confidence && (
+        <span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full w-fit ${confColor[confidence]}`}>
+          {confLabels[confidence]}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* ─── Pending contact (very large lists) ─── */
+function PendingContactView({ lang }: { lang: Lang }) {
+  return (
+    <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
+        <Clock size={32} className="text-amber-600" />
+      </div>
+      <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">{T_PENDING_TITLE[lang]}</h3>
+      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">{T_PENDING_TEXT[lang]}</p>
+    </div>
+  );
+}
