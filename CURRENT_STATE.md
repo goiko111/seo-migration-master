@@ -1,7 +1,26 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-05-11 (sesión 8 — Analizador de Cartas v2)
+> Última actualización: 2026-05-11 (sesión 9 — Google Places + estimaciones de negocio)
+
+## Sesión 9 — Google Places Autocomplete + estimates en Analizador
+
+- ✅ `WineListAnalyzerTool.tsx`: integrado `use-places-autocomplete` (v4.0.1).
+  - Campo opcional "Tu restaurante" con buscador, lupa, dropdown y chip con X para borrar.
+  - Tipos: `restaurant`, `bar`, `cafe`. Sin restricción de país.
+  - Script Google Maps cargado de forma diferida + singleton (`loading=async`) — solo cuando se monta el analizador.
+  - API key cliente: `AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A` (pública, restringir por referrer en GCP).
+- ✅ Selector de país **eliminado**. El backend lo deduce desde `placeId` o desde la carta.
+- ✅ Body POST `/v1/analyze` actualizado: ya no envía `country`. Envía `lang` + (opcional) `placeId` y `restaurantName`. Funciona en `text`, `url` y `file` (FormData).
+- ✅ Manejo de `pendingContact: true`: vista amigable con icono reloj + mensaje localizado en 6 idiomas, en lugar de error rojo.
+- ✅ Header de resultado enriquecido: rating Google (estrella + nº reseñas), badge tipo restaurante, dirección.
+- ✅ Fila de 4 KPIs de `estimates`: Ticket medio, Ticket vino/comensal, Botellas/servicio, Ingresos vino/mes — con badge de confianza (high/medium/low) coloreado. Solo aparece si el API devuelve `estimates`.
+- ⚠️ Strings i18n del antiguo selector de país (`countries`, `country`) siguen en los `T[lang]` maps; son código muerto sin uso pero no rompen build.
+
+### Pendientes detectados (no bloqueantes)
+- Restringir la API key de Google Maps en GCP por HTTP referrer (`*.winerim.wine/*`, `*.lovable.app/*`).
+- Validar end-to-end: seleccionar un restaurante real y comprobar que el Worker devuelve `estimates` y `restaurant.google` populated.
+- Limpiar strings `countries`/`country` de los i18n maps en próxima pasada.
 
 ## Sesión 8 — Analizador de Cartas (correcciones del brief 11 May 2026)
 
