@@ -651,6 +651,53 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             )}
           </div>
 
+          {/* URL fetch failed — friendly fallback */}
+          {urlFailedInfo && !loading && (
+            <div id="analyzer-url-failed" role="status"
+              className="mb-4 p-4 rounded-lg border border-amber-500/40 bg-amber-500/10">
+              <div className="flex items-start gap-3">
+                <Info size={20} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm mb-1">
+                    {lang === "es" ? "No pudimos leer la carta desde esa URL"
+                      : lang === "en" ? "We couldn't read the list from that URL"
+                      : lang === "fr" ? "Impossible de lire la carte depuis cette URL"
+                      : lang === "de" ? "Wir konnten die Karte unter dieser URL nicht lesen"
+                      : lang === "it" ? "Non siamo riusciti a leggere la carta da quell'URL"
+                      : "Não conseguimos ler a carta a partir desse URL"}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{urlFailedInfo.message}</p>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {(urlFailedInfo.suggestions || [
+                      { method: "text", label: t.tabText },
+                      { method: "file", label: t.tabFile },
+                    ]).map((s) => {
+                      const Icon = s.method === "file" ? Upload : FileText;
+                      return (
+                        <button key={s.method} type="button"
+                          onClick={() => {
+                            if (s.method === "text" || s.method === "file") {
+                              setTab(s.method);
+                              setUrlFailedInfo(null);
+                            }
+                          }}
+                          className="flex items-start gap-3 p-3 rounded-md border border-border bg-card hover:border-accent/60 hover:bg-accent/5 transition-colors text-left">
+                          <Icon size={18} className="mt-0.5 shrink-0 text-accent" />
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium">{s.label}</p>
+                            {s.description && (
+                              <p className="text-xs text-muted-foreground mt-0.5">{s.description}</p>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Inline error (visible, no sticky overlap) */}
           {errorMsg && !loading && (
             <div id="analyzer-inline-error" role="alert" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
