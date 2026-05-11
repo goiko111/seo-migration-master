@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info, Lightbulb,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
@@ -74,6 +75,84 @@ const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
   de: "Restaurant nicht gefunden? Kein Problem, Sie können ohne Auswahl fortfahren.",
   it: "Non trovi il tuo ristorante? Nessun problema, puoi continuare senza selezionarlo.",
   pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
+};
+
+/* Rotating commercial claims shown under the progress bar while processing */
+const CLAIMS: Record<Lang, string[]> = {
+  es: [
+    "¿Sabías que el 67% de las cartas de vinos tienen márgenes mal configurados?",
+    "Un análisis profesional de tu carta puede aumentar tu beneficio hasta un 30%",
+    "Winerim analiza precios, diversidad, estructura y oportunidades de tu carta",
+    "Los restaurantes que optimizan su carta de vinos facturan un 22% más en vino",
+    "Detectamos vinos con margen bajo, huecos en la oferta y oportunidades perdidas",
+    "Tu carta de vinos es tu mejor vendedor silencioso. ¿Está bien entrenado?",
+  ],
+  en: [
+    "Did you know 67% of wine lists have misconfigured margins?",
+    "A professional wine list analysis can increase your profit by up to 30%",
+    "Winerim analyzes pricing, diversity, structure and opportunities in your list",
+    "Restaurants that optimize their wine list sell 22% more wine by revenue",
+    "We detect low-margin wines, gaps in your offering and missed opportunities",
+    "Your wine list is your best silent salesperson. Is it well trained?",
+  ],
+  fr: [
+    "Saviez-vous que 67% des cartes des vins ont des marges mal configurées ?",
+    "Une analyse professionnelle de votre carte peut augmenter vos bénéfices de 30%",
+    "Winerim analyse les prix, la diversité, la structure et les opportunités de votre carte",
+    "Les restaurants qui optimisent leur carte des vins génèrent 22% de plus en vin",
+    "Nous détectons les vins à faible marge, les lacunes et les opportunités manquées",
+    "Votre carte des vins est votre meilleur vendeur silencieux. Est-il bien formé ?",
+  ],
+  de: [
+    "Wussten Sie, dass 67% der Weinkarten falsch kalkulierte Margen haben?",
+    "Eine professionelle Weinkartenanalyse kann Ihren Gewinn um bis zu 30% steigern",
+    "Winerim analysiert Preise, Vielfalt, Struktur und Chancen Ihrer Weinkarte",
+    "Restaurants, die ihre Weinkarte optimieren, erzielen 22% mehr Weinumsatz",
+    "Wir erkennen margenschwache Weine, Angebotslücken und verpasste Chancen",
+    "Ihre Weinkarte ist Ihr bester stiller Verkäufer. Ist sie gut geschult?",
+  ],
+  it: [
+    "Sapevi che il 67% delle carte dei vini ha margini configurati male?",
+    "Un'analisi professionale della tua carta può aumentare il profitto fino al 30%",
+    "Winerim analizza prezzi, diversità, struttura e opportunità della tua carta",
+    "I ristoranti che ottimizzano la carta dei vini fatturano il 22% in più sul vino",
+    "Rileviamo vini con margine basso, lacune nell'offerta e opportunità mancate",
+    "La tua carta dei vini è il tuo miglior venditore silenzioso. È ben addestrato?",
+  ],
+  pt: [
+    "Sabia que 67% das cartas de vinhos têm margens mal configuradas?",
+    "Uma análise profissional da sua carta pode aumentar o lucro em até 30%",
+    "Winerim analisa preços, diversidade, estrutura e oportunidades da sua carta",
+    "Restaurantes que otimizam sua carta de vinhos faturam 22% mais em vinho",
+    "Detectamos vinhos com margem baixa, lacunas na oferta e oportunidades perdidas",
+    "Sua carta de vinhos é seu melhor vendedor silencioso. Está bem treinado?",
+  ],
+};
+
+/* Soft contact-capture prompt shown if processing exceeds ~45s */
+const T_LONG_CAPTURE_TITLE: Record<Lang, string> = {
+  es: "Tu carta es muy completa",
+  en: "Your wine list is very thorough",
+  fr: "Votre carte est très complète",
+  de: "Ihre Karte ist sehr umfangreich",
+  it: "La tua carta è molto completa",
+  pt: "A sua carta é muito completa",
+};
+const T_LONG_CAPTURE_TEXT: Record<Lang, string> = {
+  es: "Si prefieres, déjanos tus datos y te enviaremos el informe completo por email cuando esté listo.",
+  en: "If you prefer, leave your details and we'll email you the full report when it's ready.",
+  fr: "Si vous préférez, laissez vos coordonnées et nous vous enverrons le rapport complet par email.",
+  de: "Wenn Sie möchten, hinterlassen Sie Ihre Daten und wir senden Ihnen den vollständigen Bericht per E-Mail.",
+  it: "Se preferisci, lasciaci i tuoi dati e ti invieremo il report completo via email.",
+  pt: "Se preferir, deixe os seus dados e enviaremos o relatório completo por email.",
+};
+const T_SEND_RECEIVE: Record<Lang, string> = {
+  es: "Enviar y recibir informe",
+  en: "Send and receive report",
+  fr: "Envoyer et recevoir le rapport",
+  de: "Senden und Bericht erhalten",
+  it: "Invia e ricevi il report",
+  pt: "Enviar e receber relatório",
 };
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
