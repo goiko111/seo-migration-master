@@ -2,13 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Globe2,
+  Lock, ExternalLink, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
@@ -24,6 +25,37 @@ const COUNTRIES = [
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
 
+// Map global language to default country code
+const LANG_TO_COUNTRY: Record<Lang, string> = {
+  es: "ES", en: "US", fr: "FR", de: "DE", it: "IT", pt: "PT",
+};
+// Short labels for mobile tabs
+const TAB_SHORT = { url: "URL", text: "Texto", file: "PDF" } as const;
+const TAB_SHORT_EN: Record<Lang, { url: string; text: string; file: string }> = {
+  es: { url: "URL", text: "Texto", file: "PDF" },
+  en: { url: "URL", text: "Text", file: "PDF" },
+  fr: { url: "URL", text: "Texte", file: "PDF" },
+  de: { url: "URL", text: "Text", file: "PDF" },
+  it: { url: "URL", text: "Testo", file: "PDF" },
+  pt: { url: "URL", text: "Texto", file: "PDF" },
+};
+const URL_NOTE: Record<Lang, string> = {
+  es: "Funciona mejor con cartas publicadas en texto. Si tu carta es imagen o PDF, usa las otras opciones.",
+  en: "Works best with text-based wine list pages. If your list is an image or PDF, use the other tabs.",
+  fr: "Fonctionne mieux avec des cartes publiées en texte. Si votre carte est une image ou un PDF, utilisez les autres onglets.",
+  de: "Funktioniert am besten mit Textseiten. Bei Bild- oder PDF-Karten bitte die anderen Tabs nutzen.",
+  it: "Funziona meglio con carte pubblicate in testo. Se la tua è immagine o PDF, usa gli altri tab.",
+  pt: "Funciona melhor com cartas publicadas em texto. Se for imagem ou PDF, use as outras opções.",
+};
+const NO_WINES_MSG: Record<Lang, string> = {
+  es: "No pudimos identificar vinos en el contenido proporcionado. Intenta con otro formato o revisa que el texto incluya nombres de vinos y precios.",
+  en: "We couldn't identify any wines in the content. Try another format or make sure the text includes wine names and prices.",
+  fr: "Nous n'avons pas pu identifier de vins dans le contenu. Essayez un autre format ou vérifiez que le texte contient noms de vins et prix.",
+  de: "Wir konnten keine Weine im Inhalt erkennen. Versuchen Sie ein anderes Format oder stellen Sie sicher, dass der Text Weinnamen und Preise enthält.",
+  it: "Non siamo riusciti a identificare vini nel contenuto. Prova un altro formato o verifica che il testo includa nomi di vini e prezzi.",
+  pt: "Não conseguimos identificar vinhos no conteúdo. Tente outro formato ou verifique que o texto inclui nomes de vinhos e preços.",
+};
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
@@ -32,7 +64,7 @@ const T: Record<Lang, any> = {
     country: "País del restaurante",
     tabUrl: "Pegar URL", tabText: "Pegar texto", tabFile: "Subir PDF",
     urlPh: "https://restaurante.com/carta-de-vinos",
-    textPh: "Pega aquí el contenido de tu carta…\n\nTINTOS\nRibera del Duero Reserva 2019 — 45€\nRioja Crianza 2021 — 28€",
+    textPh: "Ejemplo:\n\nTINTOS\nRibera del Duero Reserva 2019 — 45€\nRioja Crianza 2021 — 28€\nTempranillo Joven — 18€\n\nBLANCOS\nAlbariño Rías Baixas 2023 — 22€\nVerdejo Rueda — 16€\n\nCOPAS\nRioja Crianza — 6€\nAlbariño — 7€",
     fileLabel: "Selecciona PDF, JPG o PNG",
     fileHint: "Máx. 10 MB",
     cta: "Analizar mi carta",
@@ -71,7 +103,7 @@ const T: Record<Lang, any> = {
     country: "Restaurant country",
     tabUrl: "Paste URL", tabText: "Paste text", tabFile: "Upload PDF",
     urlPh: "https://restaurant.com/wine-list",
-    textPh: "Paste your wine list here…\n\nREDS\nRibera del Duero Reserva 2019 — €45\nRioja Crianza 2021 — €28",
+    textPh: "Example:\n\nREDS\nRibera del Duero Reserva 2019 — €45\nRioja Crianza 2021 — €28\nTempranillo Joven — €18\n\nWHITES\nAlbariño Rías Baixas 2023 — €22\nVerdejo Rueda — €16\n\nBY THE GLASS\nRioja Crianza — €6\nAlbariño — €7",
     fileLabel: "Select PDF, JPG or PNG",
     fileHint: "Max 10 MB",
     cta: "Analyse my list",
@@ -261,10 +293,7 @@ const T: Record<Lang, any> = {
   },
 };
 
-const LANG_OPTIONS: { code: Lang; label: string }[] = [
-  { code: "es", label: "ES" }, { code: "en", label: "EN" }, { code: "fr", label: "FR" },
-  { code: "de", label: "DE" }, { code: "it", label: "IT" }, { code: "pt", label: "PT" },
-];
+// Language is taken from the global useLanguage() context; no internal switcher.
 
 /* ─── Types ─── */
 type SemaphoreStatus = "red" | "yellow" | "green";
@@ -284,13 +313,16 @@ const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-r
 const STATUS_DOT: Record<SemaphoreStatus, string> = { red: "bg-red-500", yellow: "bg-amber-500", green: "bg-emerald-500" };
 
 /* ─── Component ─── */
-interface Props { defaultLang?: Lang }
+interface Props { defaultLang?: Lang } // kept for backwards-compat; ignored
 
-export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
-  const [lang, setLang] = useState<Lang>(defaultLang);
+export default function WineListAnalyzerTool(_props: Props = {}) {
+  const { lang: globalLang } = useLanguage();
+  const lang: Lang = (["es","en","fr","de","it","pt"].includes(globalLang as string) ? globalLang : "es") as Lang;
   const t = T[lang];
 
-  const [country, setCountry] = useState("ES");
+  const [country, setCountry] = useState<string>(LANG_TO_COUNTRY[lang] || "ES");
+  // Keep country in sync if the user switches site language
+  useEffect(() => { setCountry(LANG_TO_COUNTRY[lang] || "ES"); }, [lang]);
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
@@ -337,7 +369,8 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
 
     setLoading(true); setResult(null); setErrorMsg(null);
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
+    // Larger lists (100+ wines) can take 60-90s in Claude. Allow 120s.
+    const timeout = setTimeout(() => controller.abort(), 120000);
 
     try {
       let res: Response;
@@ -360,9 +393,11 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
         });
       }
       clearTimeout(timeout);
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok || !data?.success) {
-        const msg = data?.error || t.errGeneric;
+        const apiErr: string = (data?.error || "").toString();
+        let msg = apiErr || t.errGeneric;
+        if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
         showInlineError(msg);
       } else {
         setResult(data as AnalysisResult);
@@ -374,7 +409,16 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
-      showInlineError(t.errGeneric);
+      const isAbort = err?.name === "AbortError";
+      showInlineError(
+        isAbort
+          ? (lang === "es"
+              ? "El análisis está tardando demasiado. Inténtalo de nuevo o prueba con un fragmento más pequeño."
+              : lang === "en"
+              ? "The analysis is taking too long. Please try again or try a smaller excerpt."
+              : t.errGeneric)
+          : t.errGeneric
+      );
     } finally {
       setLoading(false);
     }
@@ -391,17 +435,6 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
           </div>
           <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">{t.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
-
-          {/* Lang switcher */}
-          <div className="inline-flex items-center gap-1 mt-6 p-1 rounded-full border border-border bg-card">
-            <Globe2 size={14} className="ml-2 text-muted-foreground" />
-            {LANG_OPTIONS.map((l) => (
-              <button key={l.code} type="button" onClick={() => setLang(l.code)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${lang === l.code ? "bg-wine text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                {l.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Form */}
@@ -425,9 +458,10 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
               { k: "file", icon: Upload, label: t.tabFile },
             ] as const).map(({ k, icon: Icon, label }) => (
               <button key={k} type="button" onClick={() => setTab(k)}
-                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium transition-all ${tab === k ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                className={`flex items-center justify-center gap-2 px-2 sm:px-3 py-2.5 rounded-md text-sm font-medium transition-all ${tab === k ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
                 <Icon size={16} />
                 <span className="hidden sm:inline">{label}</span>
+                <span className="sm:hidden">{TAB_SHORT_EN[lang][k]}</span>
               </button>
             ))}
           </div>
@@ -435,17 +469,20 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
           {/* Tab content */}
           <div className="mb-6">
             {tab === "url" && (
-              <Input type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder={t.urlPh} className="h-12" />
+              <div className="space-y-2">
+                <Input type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder={t.urlPh} className="h-12" />
+                <p className="text-xs text-muted-foreground leading-relaxed">{URL_NOTE[lang]}</p>
+              </div>
             )}
             {tab === "text" && (
-              <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] font-mono text-sm" />
+              <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] sm:min-h-[220px] font-mono text-sm" />
             )}
             {tab === "file" && (
               <label className="flex flex-col items-center justify-center gap-3 py-10 px-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-wine/50 hover:bg-wine/5 transition-colors">
                 <Upload size={28} className="text-wine" />
                 <span className="text-sm font-medium">{file ? file.name : t.fileLabel}</span>
                 <span className="text-xs text-muted-foreground">{t.fileHint}</span>
-                <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" className="hidden"
+                <input type="file" accept=".pdf,.jpg,.jpeg,.png,.txt,.csv,application/pdf,image/jpeg,image/png,text/plain,text/csv" className="hidden"
                   onChange={(e) => {
                     const f = e.target.files?.[0];
                     if (f && f.size > 10 * 1024 * 1024) { toast.error("Max 10MB"); return; }

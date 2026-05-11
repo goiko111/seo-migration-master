@@ -1,7 +1,28 @@
 # CURRENT_STATE.md — winerim.wine
 
 > Estado actual del proyecto. Actualizado al final de cada sesión de trabajo.
-> Última actualización: 2026-05-07 (sesión 7)
+> Última actualización: 2026-05-11 (sesión 8 — Analizador de Cartas v2)
+
+## Sesión 8 — Analizador de Cartas (correcciones del brief 11 May 2026)
+
+- ✅ `WineListAnalyzerTool.tsx`: timeout fetch subido de 60s → **120s** (cartas grandes 100+ vinos).
+- ✅ Manejo de errores específico:
+  - Si API devuelve `error: "No wines found..."` → mensaje localizado claro al usuario.
+  - Mensaje específico para `AbortError` (timeout) en ES/EN.
+  - El error se muestra inline encima del CTA (`#analyzer-inline-error`), no como toast oculto.
+- ✅ Selector de idioma propio del analizador **eliminado**. Ahora usa `useLanguage()` global.
+- ✅ País preseleccionado según idioma global (es→ES, en→US, fr→FR, de→DE, it→IT, pt→PT) y se resincroniza si cambia el idioma.
+- ✅ Tabs móviles muestran texto corto ("URL"/"Texto"/"PDF") junto al icono.
+- ✅ Tab URL incluye nota localizada explicando limitaciones para cartas no-texto.
+- ✅ Placeholder del textarea ES/EN reescrito con ejemplo realista (TINTOS/BLANCOS/COPAS).
+- ✅ Input file acepta `.pdf,.jpg,.jpeg,.png,.txt,.csv`.
+- ✅ FormData del upload se envía sin Content-Type manual (el browser pone boundary). Confirmado.
+- ✅ `AnalizaCarta.tsx`: eliminadas las secciones legacy 1 (HERO antiguo) y 12 (FORMULARIO antiguo de 48h). Anclas `#formulario` reemplazadas por `#analizador`. El analyzer interactivo es ahora la única vía de captura.
+
+### Pendientes detectados (no bloqueantes)
+- AnalizaCarta.tsx aún contiene código muerto: handlers (`handleSubmit`, `handleFileDrop`, `handleFileChange`), refs, estado (`mode`, `fileName`, `submitting`) e i18n maps `formI` no usados tras eliminar la sección 12. Limpieza pendiente.
+- Import `Breadcrumbs` en AnalizaCarta.tsx ya no se usa.
+- Polling fallback a `/v1/status/:id` no implementado: el endpoint `/v1/analyze` responde síncrono y no devuelve `analysisId` antes de completar; el aumento a 120s cubre el caso real. Reevaluar si el Worker pasa a modo asíncrono.
 
 ## Estado general
 

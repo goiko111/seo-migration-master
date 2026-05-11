@@ -1,3 +1,14 @@
+## 2026-05-11 — Sesión 8 · Analizador de Cartas
+
+- **Decisión:** El analizador NO mantiene su propio selector de idioma; usa siempre el idioma global de la web (`useLanguage()`).
+  - **Razón:** Coherencia UX con el resto del sitio y un único parámetro `lang` que viaja al API.
+- **Decisión:** Eliminar el formulario antiguo de "informe en 48h" en `/analisis-carta`.
+  - **Razón:** El nuevo analizador interactivo entrega resultado al instante y captura email en el unlock gate. Coexistir confundía al usuario.
+- **Decisión:** Timeout fetch del analizador subido a 120s en lugar de implementar polling con `/v1/status/:id`.
+  - **Razón:** El endpoint `/v1/analyze` actual responde síncrono y no entrega `analysisId` previo. Reevaluar si el Worker cambia a modo async.
+- **Decisión:** País preseleccionado por idioma (es→ES, en→US, fr→FR, de→DE, it→IT, pt→PT).
+  - **Razón:** Reducir fricción del usuario en 1 click, manteniendo override manual.
+
 # DECISIONS_LOG.md — winerim.wine
 
 > Registro de decisiones técnicas y de producto. Cada entrada es inmutable una vez escrita.
