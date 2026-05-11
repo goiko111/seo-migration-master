@@ -1026,6 +1026,16 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
 
   return (
     <>
+      {result.partialAnalysis && (
+        <PartialAnalysisBanner
+          lang={lang}
+          analyzedWines={result.analyzedWines || 200}
+          totalWines={result.totalWines || summary.totalWines}
+          message={result.partialMessage}
+          analysisId={analysisId}
+          defaultRestaurant={restaurant?.name || ""}
+        />
+      )}
       {/* Restaurant + Score */}
       <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center bg-card border border-border rounded-2xl p-8">
         <div>
