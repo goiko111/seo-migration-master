@@ -308,13 +308,19 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const lang: Lang = (["es","en","fr","de","it","pt"].includes(globalLang as string) ? globalLang : "es") as Lang;
   const t = T[lang];
 
-  const [country, setCountry] = useState<string>(LANG_TO_COUNTRY[lang] || "ES");
-  // Keep country in sync if the user switches site language
-  useEffect(() => { setCountry(LANG_TO_COUNTRY[lang] || "ES"); }, [lang]);
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+
+  // Google Places — restaurant identification (optional)
+  const [placeId, setPlaceId] = useState<string | null>(null);
+  const [restaurantName, setRestaurantName] = useState<string | null>(null);
+  const [restaurantAddress, setRestaurantAddress] = useState<string | null>(null);
+  const placesReady = useGoogleMapsScript();
+  const clearRestaurant = () => {
+    setPlaceId(null); setRestaurantName(null); setRestaurantAddress(null);
+  };
 
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
