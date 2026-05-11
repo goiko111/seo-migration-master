@@ -154,6 +154,32 @@ const T_SEND_RECEIVE: Record<Lang, string> = {
   it: "Invia e ricevi il report",
   pt: "Enviar e receber relatório",
 };
+
+/* Freemium / registration gate copy */
+const T_REG_TITLE: Record<Lang, string> = {
+  es: "Regístrate para seguir analizando",
+  en: "Register to keep analyzing",
+  fr: "Inscrivez-vous pour continuer à analyser",
+  de: "Registrieren Sie sich, um weiter zu analysieren",
+  it: "Registrati per continuare ad analizzare",
+  pt: "Regista-te para continuar a analisar",
+};
+const T_REG_FOOT: Record<Lang, string> = {
+  es: "Tu primer análisis fue gratis. Regístrate para desbloquear más análisis e informes detallados.",
+  en: "Your first analysis was free. Register to unlock more analyses and detailed reports.",
+  fr: "Votre première analyse était gratuite. Inscrivez-vous pour en débloquer d'autres et accéder aux rapports détaillés.",
+  de: "Ihre erste Analyse war kostenlos. Registrieren Sie sich, um weitere Analysen und detaillierte Berichte freizuschalten.",
+  it: "La tua prima analisi è stata gratuita. Registrati per sbloccare più analisi e report dettagliati.",
+  pt: "A sua primeira análise foi gratuita. Registe-se para desbloquear mais análises e relatórios detalhados.",
+};
+const T_REG_CTA: Record<Lang, string> = {
+  es: "Registrarme gratis", en: "Register for free", fr: "Inscription gratuite",
+  de: "Kostenlos registrieren", it: "Registrati gratis", pt: "Registar-me grátis",
+};
+const T_REG_RESTAURANT: Record<Lang, string> = {
+  es: "Restaurante (opcional)", en: "Restaurant (optional)", fr: "Restaurant (optionnel)",
+  de: "Restaurant (optional)", it: "Ristorante (opzionale)", pt: "Restaurante (opcional)",
+};
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
   en: "Your wine list is very extensive",
