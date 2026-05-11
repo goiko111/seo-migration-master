@@ -300,6 +300,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
   const [step, setStep] = useState(0);
   const [slow, setSlow] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
@@ -327,7 +328,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
     if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { toast.error(t.errGeneric); return; }
     if (tab === "file" && !file) { toast.error(t.fileLabel); return; }
 
-    setLoading(true); setResult(null);
+    setLoading(true); setResult(null); setErrorMsg(null);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000);
 
@@ -354,7 +355,9 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
       clearTimeout(timeout);
       const data = await res.json();
       if (!res.ok || !data?.success) {
-        toast.error(data?.error || t.errGeneric);
+        const msg = data?.error || t.errGeneric;
+        setErrorMsg(msg);
+        toast.error(msg);
       } else {
         setResult(data as AnalysisResult);
         // Scroll into view
@@ -365,6 +368,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
+      setErrorMsg(t.errGeneric);
       toast.error(t.errGeneric);
     } finally {
       setLoading(false);
@@ -445,6 +449,14 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
               </label>
             )}
           </div>
+
+          {/* Inline error (visible, no sticky overlap) */}
+          {errorMsg && !loading && (
+            <div role="alert" className="flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
+              <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+              <p className="text-sm leading-relaxed">{errorMsg}</p>
+            </div>
+          )}
 
           {/* CTA */}
           <Button type="submit" disabled={loading} size="lg" className="w-full h-12 bg-gradient-wine text-primary-foreground text-base font-semibold">
