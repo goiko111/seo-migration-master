@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info, Lightbulb,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
@@ -74,6 +75,84 @@ const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
   de: "Restaurant nicht gefunden? Kein Problem, Sie können ohne Auswahl fortfahren.",
   it: "Non trovi il tuo ristorante? Nessun problema, puoi continuare senza selezionarlo.",
   pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
+};
+
+/* Rotating commercial claims shown under the progress bar while processing */
+const CLAIMS: Record<Lang, string[]> = {
+  es: [
+    "¿Sabías que el 67% de las cartas de vinos tienen márgenes mal configurados?",
+    "Un análisis profesional de tu carta puede aumentar tu beneficio hasta un 30%",
+    "Winerim analiza precios, diversidad, estructura y oportunidades de tu carta",
+    "Los restaurantes que optimizan su carta de vinos facturan un 22% más en vino",
+    "Detectamos vinos con margen bajo, huecos en la oferta y oportunidades perdidas",
+    "Tu carta de vinos es tu mejor vendedor silencioso. ¿Está bien entrenado?",
+  ],
+  en: [
+    "Did you know 67% of wine lists have misconfigured margins?",
+    "A professional wine list analysis can increase your profit by up to 30%",
+    "Winerim analyzes pricing, diversity, structure and opportunities in your list",
+    "Restaurants that optimize their wine list sell 22% more wine by revenue",
+    "We detect low-margin wines, gaps in your offering and missed opportunities",
+    "Your wine list is your best silent salesperson. Is it well trained?",
+  ],
+  fr: [
+    "Saviez-vous que 67% des cartes des vins ont des marges mal configurées ?",
+    "Une analyse professionnelle de votre carte peut augmenter vos bénéfices de 30%",
+    "Winerim analyse les prix, la diversité, la structure et les opportunités de votre carte",
+    "Les restaurants qui optimisent leur carte des vins génèrent 22% de plus en vin",
+    "Nous détectons les vins à faible marge, les lacunes et les opportunités manquées",
+    "Votre carte des vins est votre meilleur vendeur silencieux. Est-il bien formé ?",
+  ],
+  de: [
+    "Wussten Sie, dass 67% der Weinkarten falsch kalkulierte Margen haben?",
+    "Eine professionelle Weinkartenanalyse kann Ihren Gewinn um bis zu 30% steigern",
+    "Winerim analysiert Preise, Vielfalt, Struktur und Chancen Ihrer Weinkarte",
+    "Restaurants, die ihre Weinkarte optimieren, erzielen 22% mehr Weinumsatz",
+    "Wir erkennen margenschwache Weine, Angebotslücken und verpasste Chancen",
+    "Ihre Weinkarte ist Ihr bester stiller Verkäufer. Ist sie gut geschult?",
+  ],
+  it: [
+    "Sapevi che il 67% delle carte dei vini ha margini configurati male?",
+    "Un'analisi professionale della tua carta può aumentare il profitto fino al 30%",
+    "Winerim analizza prezzi, diversità, struttura e opportunità della tua carta",
+    "I ristoranti che ottimizzano la carta dei vini fatturano il 22% in più sul vino",
+    "Rileviamo vini con margine basso, lacune nell'offerta e opportunità mancate",
+    "La tua carta dei vini è il tuo miglior venditore silenzioso. È ben addestrato?",
+  ],
+  pt: [
+    "Sabia que 67% das cartas de vinhos têm margens mal configuradas?",
+    "Uma análise profissional da sua carta pode aumentar o lucro em até 30%",
+    "Winerim analisa preços, diversidade, estrutura e oportunidades da sua carta",
+    "Restaurantes que otimizam sua carta de vinhos faturam 22% mais em vinho",
+    "Detectamos vinhos com margem baixa, lacunas na oferta e oportunidades perdidas",
+    "Sua carta de vinhos é seu melhor vendedor silencioso. Está bem treinado?",
+  ],
+};
+
+/* Soft contact-capture prompt shown if processing exceeds ~45s */
+const T_LONG_CAPTURE_TITLE: Record<Lang, string> = {
+  es: "Tu carta es muy completa",
+  en: "Your wine list is very thorough",
+  fr: "Votre carte est très complète",
+  de: "Ihre Karte ist sehr umfangreich",
+  it: "La tua carta è molto completa",
+  pt: "A sua carta é muito completa",
+};
+const T_LONG_CAPTURE_TEXT: Record<Lang, string> = {
+  es: "Si prefieres, déjanos tus datos y te enviaremos el informe completo por email cuando esté listo.",
+  en: "If you prefer, leave your details and we'll email you the full report when it's ready.",
+  fr: "Si vous préférez, laissez vos coordonnées et nous vous enverrons le rapport complet par email.",
+  de: "Wenn Sie möchten, hinterlassen Sie Ihre Daten und wir senden Ihnen den vollständigen Bericht per E-Mail.",
+  it: "Se preferisci, lasciaci i tuoi dati e ti invieremo il report completo via email.",
+  pt: "Se preferir, deixe os seus dados e enviaremos o relatório completo por email.",
+};
+const T_SEND_RECEIVE: Record<Lang, string> = {
+  es: "Enviar y recibir informe",
+  en: "Send and receive report",
+  fr: "Envoyer et recevoir le rapport",
+  de: "Senden und Bericht erhalten",
+  it: "Invia e ricevi il report",
+  pt: "Enviar e receber relatório",
 };
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
@@ -447,7 +526,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
-  const [slow, setSlow] = useState(false);
+  const [showLongCapture, setShowLongCapture] = useState(false);
+  const [claimIdx, setClaimIdx] = useState(0);
   const [pollLabel, setPollLabel] = useState<string | null>(null);
   const [pollProgress, setPollProgress] = useState<number | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
@@ -456,6 +536,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     message: string;
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
+  const currentAnalysisIdRef = useRef<string | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -467,19 +548,24 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
   const slowTimer = useRef<number | null>(null);
+  const claimTimer = useRef<number | null>(null);
   useEffect(() => {
     if (loading) {
-      setStep(0); setSlow(false);
+      setStep(0); setShowLongCapture(false); setClaimIdx(0);
       stepTimer.current = window.setInterval(() => {
         setStep((s) => (s < t.steps.length - 1 ? s + 1 : s));
       }, 3000);
-      slowTimer.current = window.setTimeout(() => setSlow(true), 25000);
+      slowTimer.current = window.setTimeout(() => setShowLongCapture(true), 45000);
+      claimTimer.current = window.setInterval(() => {
+        setClaimIdx((i) => (i + 1) % CLAIMS[lang].length);
+      }, 3500);
     }
     return () => {
       if (stepTimer.current) window.clearInterval(stepTimer.current);
       if (slowTimer.current) window.clearTimeout(slowTimer.current);
+      if (claimTimer.current) window.clearInterval(claimTimer.current);
     };
-  }, [loading, t.steps.length]);
+  }, [loading, t.steps.length, lang]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -538,25 +624,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         return;
       }
 
+      currentAnalysisIdRef.current = data.analysisId;
       // Async flow: poll /v1/status/{id} until terminal state
       const finalPayload = await pollStatus(data.analysisId);
       handleFinalPayload(finalPayload);
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
-      const isAbort = err?.name === "AbortError";
-      showInlineError(
-        isAbort
-          ? (lang === "es"
-              ? "El análisis está tardando demasiado. Inténtalo de nuevo o prueba con un fragmento más pequeño."
-              : lang === "en"
-              ? "The analysis is taking too long. Please try again or try a smaller excerpt."
-              : t.errGeneric)
-          : t.errGeneric
-      );
+      showInlineError(t.errGeneric);
     } finally {
       setLoading(false);
       setPollLabel(null); setPollProgress(null);
+      currentAnalysisIdRef.current = null;
     }
   };
 
@@ -810,10 +889,28 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     )}
                   </div>
                 )}
-                {slow && (
-                  <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                    <AlertTriangle size={12} /> {t.errSlow}
-                  </p>
+                {/* Rotating commercial claim */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={claimIdx}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-4 flex items-start gap-2 text-[13px] text-muted-foreground"
+                  >
+                    <Lightbulb size={14} className="mt-0.5 shrink-0 text-amber-500" />
+                    <span className="leading-relaxed">{CLAIMS[lang][claimIdx]}</span>
+                  </motion.div>
+                </AnimatePresence>
+                {/* After ~45s: optional contact-capture form (analysis keeps running) */}
+                {showLongCapture && (
+                  <LongWaitCaptureForm
+                    lang={lang}
+                    analysisId={currentAnalysisIdRef.current}
+                    defaultCountry={null}
+                    t={t}
+                  />
                 )}
               </motion.div>
             )}
@@ -826,7 +923,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
               {result.pendingContact ? (
-                <PendingContactView lang={lang} />
+                <PendingContactView lang={lang} message={(result as any).message} analysisId={result.analysisId} t={t} />
               ) : (
                 <ResultsView result={result} t={t} lang={lang} />
               )}
@@ -1081,15 +1178,13 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
               <Input id="g-name" required value={name} onChange={(e) => setName(e.target.value)} />
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="g-email" className="mb-1.5 block text-sm">{t.formEmail} *</Label>
-              <Input id="g-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <div>
-              <Label htmlFor="g-phone" className="mb-1.5 block text-sm">{t.formPhone}</Label>
-              <Input id="g-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
-            </div>
+          <div>
+            <Label htmlFor="g-email" className="mb-1.5 block text-sm">{t.formEmail} *</Label>
+            <Input id="g-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="g-phone" className="mb-1.5 block text-sm">{t.formPhone}</Label>
+            <PhoneInputControlled id="g-phone" value={phone} onChange={setPhone} />
           </div>
           <label className="flex items-start gap-2 text-xs text-muted-foreground cursor-pointer">
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5" />
@@ -1240,14 +1335,156 @@ function KpiCard({
 }
 
 /* ─── Pending contact (very large lists) ─── */
-function PendingContactView({ lang }: { lang: Lang }) {
+function PendingContactView({
+  lang, message, analysisId, t,
+}: { lang: Lang; message?: string; analysisId?: string; t: any }) {
   return (
     <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
         <Clock size={32} className="text-amber-600" />
       </div>
       <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">{T_PENDING_TITLE[lang]}</h3>
-      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">{T_PENDING_TEXT[lang]}</p>
+      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+        {message || T_PENDING_TEXT[lang]}
+      </p>
+      <div className="mt-8 max-w-xl mx-auto text-left">
+        <ContactCaptureForm lang={lang} analysisId={analysisId || null} t={t} variant="pending" />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Phone input wrapper (controlled, prefix + number) ─── */
+function PhoneInputControlled({
+  id = "phone", value, onChange,
+}: { id?: string; value: string; onChange: (v: string) => void }) {
+  const { lang } = useLanguage();
+  // Parse current value for initial state
+  const initial = (() => {
+    const m = (value || "").match(/^(\+\d{1,4})(.*)$/);
+    if (m) {
+      const dial = m[1];
+      const found = PREFIXES.find((p) => p.dial === dial);
+      return { code: found?.code || "", number: m[2].trim() };
+    }
+    return { code: "", number: value || "" };
+  })();
+  const [code, setCode] = useState(initial.code);
+  const [number, setNumber] = useState(initial.number);
+
+  const placeholder: Record<string, string> = {
+    es: "Selecciona país", en: "Select country", it: "Seleziona paese",
+    fr: "Choisir pays", de: "Land wählen", pt: "Selecionar país",
+  };
+
+  const emit = (c: string, n: string) => {
+    const dial = PREFIXES.find((p) => p.code === c)?.dial || "";
+    const cleaned = n.replace(/[^\d]/g, "");
+    onChange(c && cleaned ? `${dial}${cleaned}` : cleaned);
+  };
+
+  return (
+    <div className="flex mt-1.5">
+      <select
+        id={`${id}_prefix`}
+        value={code}
+        onChange={(e) => { setCode(e.target.value); emit(e.target.value, number); }}
+        className="h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        style={{ width: 130, minWidth: 130 }}
+        aria-label="Country prefix"
+      >
+        <option value="">{placeholder[lang] || placeholder.en}</option>
+        {PREFIXES.map((p) => (
+          <option key={p.code} value={p.code}>{p.flag} {p.dial}</option>
+        ))}
+      </select>
+      <Input
+        id={id}
+        type="tel"
+        placeholder="600 000 000"
+        value={number}
+        onChange={(e) => { setNumber(e.target.value); emit(code, e.target.value); }}
+        className="flex-1 rounded-l-none"
+        maxLength={15}
+      />
+    </div>
+  );
+}
+
+/* ─── Generic contact capture form (used in long-wait + pending-contact) ─── */
+function ContactCaptureForm({
+  lang, analysisId, t, variant,
+}: { lang: Lang; analysisId: string | null; t: any; variant: "longwait" | "pending" }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
+    if (!name.trim()) return;
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/v1/unlock`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ analysisId, name, email, phone, consent: true, lang, source: variant }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.success) {
+        toast.error(data?.error || t.errGeneric);
+      } else {
+        setSent(true);
+        toast.success(t.successTitle);
+      }
+    } catch (err) {
+      console.error(err); toast.error(t.errGeneric);
+    } finally { setSubmitting(false); }
+  };
+
+  if (sent) {
+    return (
+      <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10">
+        <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+        <p className="text-sm leading-relaxed">{t.successText}</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="space-y-3">
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div>
+          <Label htmlFor={`cc-name-${variant}`} className="mb-1 block text-xs">{t.formName} *</Label>
+          <Input id={`cc-name-${variant}`} required value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <Label htmlFor={`cc-email-${variant}`} className="mb-1 block text-xs">{t.formEmail} *</Label>
+          <Input id={`cc-email-${variant}`} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+      </div>
+      <div>
+        <Label htmlFor={`cc-phone-${variant}`} className="mb-1 block text-xs">{t.formPhone}</Label>
+        <PhoneInputControlled id={`cc-phone-${variant}`} value={phone} onChange={setPhone} />
+      </div>
+      <Button type="submit" disabled={submitting} className="w-full bg-gradient-wine text-primary-foreground font-semibold">
+        {submitting ? (<><Loader2 size={16} className="animate-spin" /> {t.unlocking}</>) : T_SEND_RECEIVE[lang]}
+      </Button>
+    </form>
+  );
+}
+
+/* ─── Long-wait soft capture (shown after ~45s, analysis still running) ─── */
+function LongWaitCaptureForm({
+  lang, analysisId, defaultCountry, t,
+}: { lang: Lang; analysisId: string | null; defaultCountry: string | null; t: any }) {
+  return (
+    <div className="mt-6 p-4 rounded-lg border border-border bg-secondary/40">
+      <p className="text-sm font-semibold mb-1">{T_LONG_CAPTURE_TITLE[lang]}</p>
+      <p className="text-xs text-muted-foreground mb-3">{T_LONG_CAPTURE_TEXT[lang]}</p>
+      <ContactCaptureForm lang={lang} analysisId={analysisId} t={t} variant="longwait" />
     </div>
   );
 }
