@@ -10,7 +10,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
-import usePlacesAutocomplete from "use-places-autocomplete";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
