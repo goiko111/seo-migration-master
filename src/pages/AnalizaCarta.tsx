@@ -701,6 +701,11 @@ const AnalizaCarta = () => {
       <Navbar />
 
       <main>
+        {/* ═══════════ 0. INTERACTIVE ANALYZER TOOL ═══════════ */}
+        <div className="pt-24 md:pt-28">
+          <WineListAnalyzerTool defaultLang={lang as any} />
+        </div>
+
         {/* ═══════════ 1. HERO ═══════════ */}
         <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
