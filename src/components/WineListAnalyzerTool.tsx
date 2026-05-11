@@ -67,6 +67,14 @@ const T_RESTAURANT_HELP: Record<Lang, string> = {
   it: "Selezionando il tuo ristorante aggiungeremo stime di business (scontrino medio, ricavi vino, bottiglie/servizio).",
   pt: "Selecionar o seu restaurante adiciona estimativas (ticket médio, receita de vinho, garrafas/serviço).",
 };
+const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
+  es: "¿No encuentras tu restaurante? No pasa nada, puedes continuar sin seleccionarlo.",
+  en: "Can't find your restaurant? No problem, you can continue without selecting it.",
+  fr: "Vous ne trouvez pas votre restaurant ? Pas de souci, vous pouvez continuer sans le sélectionner.",
+  de: "Restaurant nicht gefunden? Kein Problem, Sie können ohne Auswahl fortfahren.",
+  it: "Non trovi il tuo ristorante? Nessun problema, puoi continuare senza selezionarlo.",
+  pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
+};
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
   en: "Your wine list is very extensive",
