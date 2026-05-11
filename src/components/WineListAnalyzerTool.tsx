@@ -962,33 +962,68 @@ interface PlacesSuggestion {
 function PlacesSearchInput({
   ready, placeholder, onSelect,
 }: { ready: boolean; placeholder: string; onSelect: (s: PlacesSuggestion) => void }) {
-  const {
-    ready: hookReady,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-    init,
-  } = usePlacesAutocomplete({
-    requestOptions: { types: ["establishment"] },
-    debounce: 300,
-    initOnMount: false,
-  });
+  // Uses the new google.maps.places.AutocompleteSuggestion API (the legacy
+  // AutocompleteService is unavailable for Google Cloud projects created after
+  // March 1st, 2025). We call fetchAutocompleteSuggestions() directly with
+  // debounce + a session token (one token per search session reduces billing).
+  const [value, setValue] = useState("");
+  const [data, setData] = useState<PlacesSuggestion[]>([]);
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const sessionTokenRef = useRef<any>(null);
+  const debounceRef = useRef<number | null>(null);
+  const reqIdRef = useRef(0);
 
-  // Initialise the hook as soon as Google Maps is available
-  useEffect(() => {
-    if (ready && !hookReady) init();
-  }, [ready, hookReady, init]);
-
+  // Outside-click close
   useEffect(() => {
     function onClick(e: MouseEvent) {
-      if (!wrapRef.current?.contains(e.target as Node)) { setOpen(false); clearSuggestions(); }
+      if (!wrapRef.current?.contains(e.target as Node)) { setOpen(false); }
     }
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
-  }, [clearSuggestions]);
+  }, []);
+
+  const fetchSuggestions = (input: string) => {
+    const places = (window as any).google?.maps?.places;
+    if (!places?.AutocompleteSuggestion?.fetchAutocompleteSuggestions) return;
+    if (!sessionTokenRef.current) {
+      sessionTokenRef.current = new places.AutocompleteSessionToken();
+    }
+    const reqId = ++reqIdRef.current;
+    places.AutocompleteSuggestion
+      .fetchAutocompleteSuggestions({
+        input,
+        includedPrimaryTypes: ["restaurant", "bar", "cafe"],
+        sessionToken: sessionTokenRef.current,
+      })
+      .then((res: any) => {
+        if (reqId !== reqIdRef.current) return; // stale
+        const list: PlacesSuggestion[] = (res?.suggestions || [])
+          .map((s: any) => s.placePrediction)
+          .filter(Boolean)
+          .map((p: any) => ({
+            place_id: p.placeId,
+            description: p.text?.toString?.() || "",
+            structured_formatting: {
+              main_text: p.mainText?.toString?.() || p.text?.toString?.() || "",
+              secondary_text: p.secondaryText?.toString?.() || "",
+            },
+          }));
+        setData(list);
+        setOpen(true);
+      })
+      .catch((err: any) => {
+        console.error("Places fetchAutocompleteSuggestions failed", err);
+        setData([]);
+      });
+  };
+
+  const onChange = (next: string) => {
+    setValue(next);
+    if (debounceRef.current) window.clearTimeout(debounceRef.current);
+    if (!ready || next.trim().length < 2) { setData([]); return; }
+    debounceRef.current = window.setTimeout(() => fetchSuggestions(next.trim()), 250);
+  };
 
   return (
     <div ref={wrapRef} className="relative">
@@ -996,22 +1031,23 @@ function PlacesSearchInput({
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
         <Input
           value={value}
-          onChange={(e) => { setValue(e.target.value); setOpen(true); }}
+          onChange={(e) => onChange(e.target.value)}
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
           className="h-12 pl-10"
           autoComplete="off"
         />
       </div>
-      {open && status === "OK" && data.length > 0 && (
+      {open && data.length > 0 && (
         <ul className="absolute z-30 left-0 right-0 mt-1 bg-popover border border-border rounded-md shadow-lg max-h-72 overflow-auto">
           {data.map((s) => (
             <li key={s.place_id}>
               <button type="button"
                 onClick={() => {
-                  setValue(s.description, false);
-                  clearSuggestions();
+                  setValue(s.description);
+                  setData([]);
                   setOpen(false);
+                  sessionTokenRef.current = null;
                   onSelect(s as PlacesSuggestion);
                 }}
                 className="w-full text-left px-4 py-2.5 hover:bg-accent/10 flex flex-col gap-0.5 border-b border-border last:border-0"
