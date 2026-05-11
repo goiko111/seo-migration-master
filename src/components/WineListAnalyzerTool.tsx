@@ -982,6 +982,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Freemium registration gate */}
+        {registrationGate && (
+          <RegistrationGateModal
+            lang={lang}
+            t={t}
+            message={registrationGate.message}
+            defaultRestaurant={restaurantName || ""}
+            onClose={() => setRegistrationGate(null)}
+            onRegistered={async () => {
+              setRegistrationGate(null);
+              await runAnalysis();
+            }}
+          />
+        )}
       </div>
     </section>
   );
