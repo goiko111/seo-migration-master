@@ -13,7 +13,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
-const GOOGLE_MAPS_API_KEY = "AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A";
+const GOOGLE_MAPS_API_KEY = "AIzaSyAQSpAPWbAe7HHirNOgY6YEiwsd8I5VVFI";
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
 // Short labels for mobile tabs
