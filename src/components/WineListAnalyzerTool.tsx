@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,25 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
+import usePlacesAutocomplete from "use-places-autocomplete";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
-
-const COUNTRIES = [
-  { code: "ES", flag: "🇪🇸" }, { code: "US", flag: "🇺🇸" }, { code: "UK", flag: "🇬🇧" },
-  { code: "FR", flag: "🇫🇷" }, { code: "MX", flag: "🇲🇽" }, { code: "IT", flag: "🇮🇹" },
-  { code: "DE", flag: "🇩🇪" }, { code: "CH", flag: "🇨🇭" }, { code: "AR", flag: "🇦🇷" },
-  { code: "CL", flag: "🇨🇱" }, { code: "CO", flag: "🇨🇴" }, { code: "BR", flag: "🇧🇷" },
-  { code: "PT", flag: "🇵🇹" }, { code: "NL", flag: "🇳🇱" }, { code: "BE", flag: "🇧🇪" },
-  { code: "AT", flag: "🇦🇹" },
-];
+const GOOGLE_MAPS_API_KEY = "AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A";
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
-
-// Map global language to default country code
-const LANG_TO_COUNTRY: Record<Lang, string> = {
-  es: "ES", en: "US", fr: "FR", de: "DE", it: "IT", pt: "PT",
-};
 // Short labels for mobile tabs
 const TAB_SHORT = { url: "URL", text: "Texto", file: "PDF" } as const;
 const TAB_SHORT_EN: Record<Lang, { url: string; text: string; file: string }> = {
@@ -55,6 +43,87 @@ const NO_WINES_MSG: Record<Lang, string> = {
   it: "Non siamo riusciti a identificare vini nel contenuto. Prova un altro formato o verifica che il testo includa nomi di vini e prezzi.",
   pt: "Não conseguimos identificar vinhos no conteúdo. Tente outro formato ou verifique que o texto inclui nomes de vinhos e preços.",
 };
+
+const T_RESTAURANT_LABEL: Record<Lang, string> = {
+  es: "Tu restaurante (opcional)",
+  en: "Your restaurant (optional)",
+  fr: "Votre restaurant (optionnel)",
+  de: "Ihr Restaurant (optional)",
+  it: "Il tuo ristorante (opzionale)",
+  pt: "O seu restaurante (opcional)",
+};
+const T_RESTAURANT_PLACEHOLDER: Record<Lang, string> = {
+  es: "Busca tu restaurante…",
+  en: "Search for your restaurant…",
+  fr: "Cherchez votre restaurant…",
+  de: "Restaurant suchen…",
+  it: "Cerca il tuo ristorante…",
+  pt: "Procure o seu restaurante…",
+};
+const T_RESTAURANT_HELP: Record<Lang, string> = {
+  es: "Si seleccionas tu restaurante, añadiremos estimaciones de negocio (ticket medio, ingresos vino, botellas/servicio).",
+  en: "Selecting your restaurant adds business estimates (average ticket, wine revenue, bottles/service).",
+  fr: "Sélectionner votre restaurant ajoute des estimations (ticket moyen, revenus vin, bouteilles/service).",
+  de: "Wenn Sie Ihr Restaurant auswählen, ergänzen wir Geschäftsschätzungen (Durchschnittsbon, Weinumsatz, Flaschen/Service).",
+  it: "Selezionando il tuo ristorante aggiungeremo stime di business (scontrino medio, ricavi vino, bottiglie/servizio).",
+  pt: "Selecionar o seu restaurante adiciona estimativas (ticket médio, receita de vinho, garrafas/serviço).",
+};
+const T_PENDING_TITLE: Record<Lang, string> = {
+  es: "Tu carta es muy completa",
+  en: "Your wine list is very extensive",
+  fr: "Votre carte est très complète",
+  de: "Ihre Karte ist sehr umfangreich",
+  it: "La tua carta è molto ampia",
+  pt: "A sua carta é muito extensa",
+};
+const T_PENDING_TEXT: Record<Lang, string> = {
+  es: "Nuestro equipo la está analizando manualmente. Te contactaremos en menos de 48h con tu informe personalizado.",
+  en: "Our team is analysing it manually. We'll contact you within 48h with your personalised report.",
+  fr: "Notre équipe l'analyse manuellement. Nous vous contacterons sous 48h avec votre rapport personnalisé.",
+  de: "Unser Team analysiert sie manuell. Wir melden uns innerhalb von 48 Std. mit Ihrem personalisierten Bericht.",
+  it: "Il nostro team la sta analizzando manualmente. Ti contatteremo entro 48h con il report personalizzato.",
+  pt: "A nossa equipa está a analisá-la manualmente. Contactaremos em menos de 48h com o seu relatório.",
+};
+const T_KPI: Record<Lang, { ticket: string; ticketWine: string; bottles: string; revenue: string; profile: string; rating: string; reviews: string; type: string; address: string; conf: { high: string; medium: string; low: string } }> = {
+  es: { ticket: "Ticket medio", ticketWine: "Ticket vino/comensal", bottles: "Botellas/servicio", revenue: "Ingresos vino/mes", profile: "Perfil de carta", rating: "Valoración Google", reviews: "reseñas", type: "Tipo", address: "Dirección", conf: { high: "Alta confianza", medium: "Confianza media", low: "Baja confianza" } },
+  en: { ticket: "Average ticket", ticketWine: "Wine ticket / guest", bottles: "Bottles / service", revenue: "Wine revenue / month", profile: "List profile", rating: "Google rating", reviews: "reviews", type: "Type", address: "Address", conf: { high: "High confidence", medium: "Medium confidence", low: "Low confidence" } },
+  fr: { ticket: "Ticket moyen", ticketWine: "Ticket vin / convive", bottles: "Bouteilles / service", revenue: "Revenus vin / mois", profile: "Profil de carte", rating: "Note Google", reviews: "avis", type: "Type", address: "Adresse", conf: { high: "Confiance élevée", medium: "Confiance moyenne", low: "Confiance faible" } },
+  de: { ticket: "Ø Bon", ticketWine: "Weinbon / Gast", bottles: "Flaschen / Service", revenue: "Weinumsatz / Monat", profile: "Kartenprofil", rating: "Google-Bewertung", reviews: "Rezensionen", type: "Typ", address: "Adresse", conf: { high: "Hohe Konfidenz", medium: "Mittlere Konfidenz", low: "Niedrige Konfidenz" } },
+  it: { ticket: "Scontrino medio", ticketWine: "Vino / coperto", bottles: "Bottiglie / servizio", revenue: "Ricavi vino / mese", profile: "Profilo carta", rating: "Valutazione Google", reviews: "recensioni", type: "Tipo", address: "Indirizzo", conf: { high: "Alta affidabilità", medium: "Media affidabilità", low: "Bassa affidabilità" } },
+  pt: { ticket: "Ticket médio", ticketWine: "Vinho / cliente", bottles: "Garrafas / serviço", revenue: "Receita vinho / mês", profile: "Perfil da carta", rating: "Avaliação Google", reviews: "avaliações", type: "Tipo", address: "Morada", conf: { high: "Alta confiança", medium: "Confiança média", low: "Baixa confiança" } },
+};
+
+/* ─── Google Maps script loader (singleton) ─── */
+let mapsScriptPromise: Promise<void> | null = null;
+function loadGoogleMaps(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if ((window as any).google?.maps?.places) return Promise.resolve();
+  if (mapsScriptPromise) return mapsScriptPromise;
+  mapsScriptPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>('script[data-google-maps="true"]');
+    if (existing) { existing.addEventListener("load", () => resolve()); return; }
+    const s = document.createElement("script");
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&loading=async`;
+    s.async = true; s.defer = true;
+    s.dataset.googleMaps = "true";
+    s.onload = () => resolve();
+    s.onerror = () => { mapsScriptPromise = null; reject(new Error("maps load failed")); };
+    document.head.appendChild(s);
+  });
+  return mapsScriptPromise;
+}
+function useGoogleMapsScript(): boolean {
+  const [ready, setReady] = useState<boolean>(() =>
+    typeof window !== "undefined" && !!(window as any).google?.maps?.places
+  );
+  useEffect(() => {
+    if (ready) return;
+    let mounted = true;
+    loadGoogleMaps().then(() => { if (mounted) setReady(true); }).catch(() => {});
+    return () => { mounted = false; };
+  }, [ready]);
+  return ready;
+}
 
 const T: Record<Lang, any> = {
   es: {
@@ -302,11 +371,31 @@ interface Problem { rank: number; title: string; description: string; metric: st
 interface AnalysisResult {
   success: boolean;
   analysisId: string;
-  restaurant: { name: string | null; location: string | null; cuisine_type: string | null };
+  restaurant: {
+    name: string | null;
+    location: string | null;
+    cuisine_type: string | null;
+    google?: {
+      rating?: number;
+      reviews?: number;
+      type?: string;
+      address?: string;
+      website?: string;
+    } | null;
+  };
   summary: { totalWines: number; totalByGlass: number; priceRange: { min: number; max: number; median: number; currency: string }; score: number; scoreLabel: string; scoreColor: string };
   semaphore: SemaphoreItem[];
   topProblems: Problem[];
   fullAnalysis: { locked: boolean; previewSections: string[] };
+  estimates?: {
+    restaurantType?: { type: string; confidence: "high" | "medium" | "low" };
+    ticketMedio?: { value: number; currency: string; confidence: "high" | "medium" | "low"; method?: string };
+    ticketVino?: { value: number; currency: string; glassCount?: number };
+    bottlesPerService?: { value: number; confidence: "high" | "medium" | "low"; estimatedCovers?: number };
+    monthlyRevenue?: { value: number; currency: string; servicesPerMonth?: number };
+    wps?: { estimated: number; profile: string };
+  };
+  pendingContact?: boolean;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
@@ -320,13 +409,19 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const lang: Lang = (["es","en","fr","de","it","pt"].includes(globalLang as string) ? globalLang : "es") as Lang;
   const t = T[lang];
 
-  const [country, setCountry] = useState<string>(LANG_TO_COUNTRY[lang] || "ES");
-  // Keep country in sync if the user switches site language
-  useEffect(() => { setCountry(LANG_TO_COUNTRY[lang] || "ES"); }, [lang]);
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+
+  // Google Places — restaurant identification (optional)
+  const [placeId, setPlaceId] = useState<string | null>(null);
+  const [restaurantName, setRestaurantName] = useState<string | null>(null);
+  const [restaurantAddress, setRestaurantAddress] = useState<string | null>(null);
+  const placesReady = useGoogleMapsScript();
+  const clearRestaurant = () => {
+    setPlaceId(null); setRestaurantName(null); setRestaurantAddress(null);
+  };
 
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
@@ -378,13 +473,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         const fd = new FormData();
         fd.append("type", "file");
         fd.append("file", file);
-        fd.append("country", country);
         fd.append("lang", lang);
+        if (placeId) fd.append("placeId", placeId);
+        if (restaurantName) fd.append("restaurantName", restaurantName);
         res = await fetch(`${API_BASE}/v1/analyze`, { method: "POST", body: fd, signal: controller.signal });
       } else {
+        const base: Record<string, any> = { lang };
+        if (placeId) base.placeId = placeId;
+        if (restaurantName) base.restaurantName = restaurantName;
         const body = tab === "url"
-          ? { type: "url", url: url.trim(), country, lang }
-          : { type: "text", text: text.trim(), country, lang };
+          ? { type: "url", url: url.trim(), ...base }
+          : { type: "text", text: text.trim(), ...base };
         res = await fetch(`${API_BASE}/v1/analyze`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -394,7 +493,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data?.success) {
+      // Handle pendingContact (very large lists processed manually)
+      if (res.ok && data?.success && data?.pendingContact) {
+        setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
+        setTimeout(() => {
+          document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      } else if (!res.ok || !data?.success) {
         const apiErr: string = (data?.error || "").toString();
         let msg = apiErr || t.errGeneric;
         if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
@@ -439,15 +544,35 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
         {/* Form */}
         <form onSubmit={onSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
-          {/* Country */}
+          {/* Restaurant search (Google Places — optional) */}
           <div className="mb-6">
-            <Label className="mb-2 block text-sm font-medium">{t.country}</Label>
-            <select value={country} onChange={(e) => setCountry(e.target.value)}
-              className="w-full md:w-auto h-11 px-4 rounded-md border border-input bg-background text-sm">
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code}>{c.flag}  {t.countries[c.code] || c.code}</option>
-              ))}
-            </select>
+            <Label className="mb-2 block text-sm font-medium">{T_RESTAURANT_LABEL[lang]}</Label>
+            {placeId && restaurantName ? (
+              <div className="flex items-start gap-3 p-3 rounded-md border border-accent/40 bg-accent/5">
+                <CheckCircle2 size={18} className="text-accent mt-0.5 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm truncate">{restaurantName}</p>
+                  {restaurantAddress && (
+                    <p className="text-xs text-muted-foreground truncate">{restaurantAddress}</p>
+                  )}
+                </div>
+                <button type="button" onClick={clearRestaurant}
+                  className="text-muted-foreground hover:text-foreground p-1" aria-label="Clear">
+                  <X size={16} />
+                </button>
+              </div>
+            ) : (
+              <PlacesSearchInput
+                ready={placesReady}
+                placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
+                onSelect={(s) => {
+                  setPlaceId(s.place_id);
+                  setRestaurantName(s.structured_formatting?.main_text || s.description);
+                  setRestaurantAddress(s.structured_formatting?.secondary_text || null);
+                }}
+              />
+            )}
+            <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
           </div>
 
           {/* Tabs */}
@@ -535,7 +660,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           {result && (
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
-              <ResultsView result={result} t={t} lang={lang} />
+              {result.pendingContact ? (
+                <PendingContactView lang={lang} />
+              ) : (
+                <ResultsView result={result} t={t} lang={lang} />
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -546,7 +675,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
 /* ─── Results subview ─── */
 function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang: Lang }) {
-  const { summary, semaphore, topProblems, restaurant, fullAnalysis, analysisId } = result;
+  const { summary, semaphore, topProblems, restaurant, fullAnalysis, analysisId, estimates } = result;
+  const k = T_KPI[lang];
+  const google = restaurant?.google;
+  const fmtMoney = (v: number, cur = "EUR") => new Intl.NumberFormat(lang, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
+  const confColor: Record<string, string> = { high: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400", medium: "bg-amber-500/15 text-amber-700 dark:text-amber-400", low: "bg-red-500/15 text-red-600 dark:text-red-400" };
 
   return (
     <>
@@ -555,6 +688,25 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
         <div>
           {restaurant?.name && (
             <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2">{restaurant.name}</h3>
+          )}
+          {google?.address && (
+            <p className="text-sm text-muted-foreground mb-2">{google.address}</p>
+          )}
+          {(google?.rating || google?.type) && (
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              {google.rating != null && (
+                <span className="inline-flex items-center gap-1 text-sm font-medium">
+                  <Star size={14} className="text-amber-500 fill-amber-500" />
+                  <span>{google.rating.toFixed(1)}</span>
+                  {google.reviews != null && (
+                    <span className="text-muted-foreground">({google.reviews.toLocaleString(lang)} {k.reviews})</span>
+                  )}
+                </span>
+              )}
+              {google.type && (
+                <span className="text-xs font-semibold px-2 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">{google.type}</span>
+              )}
+            </div>
           )}
           <p className="text-sm text-muted-foreground mb-4">{t.detected}</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
@@ -565,6 +717,46 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
         </div>
         <ScoreCircle score={summary.score} color={summary.scoreColor} label={summary.scoreLabel} title={t.score} />
       </div>
+
+      {/* Business estimates KPIs (only if API returned them) */}
+      {estimates && (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {estimates.ticketMedio && (
+            <KpiCard
+              label={k.ticket}
+              value={fmtMoney(estimates.ticketMedio.value, estimates.ticketMedio.currency)}
+              confidence={estimates.ticketMedio.confidence}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.ticketVino && (
+            <KpiCard
+              label={k.ticketWine}
+              value={fmtMoney(estimates.ticketVino.value, estimates.ticketVino.currency)}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.bottlesPerService && (
+            <KpiCard
+              label={k.bottles}
+              value={String(estimates.bottlesPerService.value)}
+              confidence={estimates.bottlesPerService.confidence}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+          {estimates.monthlyRevenue && (
+            <KpiCard
+              label={k.revenue}
+              value={fmtMoney(estimates.monthlyRevenue.value, estimates.monthlyRevenue.currency)}
+              confLabels={k.conf}
+              confColor={confColor}
+            />
+          )}
+        </div>
+      )}
 
       {/* Semaphore */}
       <div>
@@ -743,6 +935,115 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
           </Button>
         </form>
       </div>
+    </div>
+  );
+}
+
+/* ─── Google Places search input ─── */
+interface PlacesSuggestion {
+  place_id: string;
+  description: string;
+  structured_formatting?: { main_text?: string; secondary_text?: string };
+}
+function PlacesSearchInput({
+  ready, placeholder, onSelect,
+}: { ready: boolean; placeholder: string; onSelect: (s: PlacesSuggestion) => void }) {
+  const {
+    ready: hookReady,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: { types: ["restaurant", "bar", "cafe"] },
+    debounce: 300,
+    initOnMount: ready,
+  });
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (!wrapRef.current?.contains(e.target as Node)) { setOpen(false); clearSuggestions(); }
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [clearSuggestions]);
+
+  const disabled = !ready || !hookReady;
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <div className="relative">
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+        <Input
+          value={value}
+          disabled={disabled}
+          onChange={(e) => { setValue(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          placeholder={placeholder}
+          className="h-12 pl-10"
+          autoComplete="off"
+        />
+      </div>
+      {open && status === "OK" && data.length > 0 && (
+        <ul className="absolute z-30 left-0 right-0 mt-1 bg-popover border border-border rounded-md shadow-lg max-h-72 overflow-auto">
+          {data.map((s) => (
+            <li key={s.place_id}>
+              <button type="button"
+                onClick={() => {
+                  setValue(s.description, false);
+                  clearSuggestions();
+                  setOpen(false);
+                  onSelect(s as PlacesSuggestion);
+                }}
+                className="w-full text-left px-4 py-2.5 hover:bg-accent/10 flex flex-col gap-0.5 border-b border-border last:border-0"
+              >
+                <span className="text-sm font-medium truncate">{s.structured_formatting?.main_text || s.description}</span>
+                {s.structured_formatting?.secondary_text && (
+                  <span className="text-xs text-muted-foreground truncate">{s.structured_formatting.secondary_text}</span>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/* ─── KPI Card ─── */
+function KpiCard({
+  label, value, confidence, confLabels, confColor,
+}: {
+  label: string;
+  value: string;
+  confidence?: "high" | "medium" | "low";
+  confLabels: { high: string; medium: string; low: string };
+  confColor: Record<string, string>;
+}) {
+  return (
+    <div className="bg-card border border-border rounded-xl p-4 flex flex-col gap-1.5">
+      <span className="text-xs text-muted-foreground uppercase tracking-wider">{label}</span>
+      <span className="font-heading text-2xl font-bold text-foreground">{value}</span>
+      {confidence && (
+        <span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full w-fit ${confColor[confidence]}`}>
+          {confLabels[confidence]}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* ─── Pending contact (very large lists) ─── */
+function PendingContactView({ lang }: { lang: Lang }) {
+  return (
+    <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
+        <Clock size={32} className="text-amber-600" />
+      </div>
+      <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">{T_PENDING_TITLE[lang]}</h3>
+      <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">{T_PENDING_TEXT[lang]}</p>
     </div>
   );
 }
