@@ -900,6 +900,14 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             </div>
           )}
 
+          {/* Hard daily limit reached */}
+          {rateLimitMsg && !loading && (
+            <div role="status" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-amber-500/40 bg-amber-500/10">
+              <Info size={18} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
+              <p className="text-sm leading-relaxed">{rateLimitMsg}</p>
+            </div>
+          )}
+
           {/* CTA */}
           <Button type="submit" disabled={loading} size="lg" className="w-full h-12 bg-gradient-wine text-primary-foreground text-base font-semibold">
             {loading ? (<><Loader2 size={18} className="animate-spin" /> {t.analyzing}</>) : (<><Sparkles size={18} /> {t.cta}</>)}
