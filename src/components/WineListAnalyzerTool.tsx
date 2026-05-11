@@ -99,14 +99,29 @@ function loadGoogleMaps(): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
   if ((window as any).google?.maps?.places) return Promise.resolve();
   if (mapsScriptPromise) return mapsScriptPromise;
-  mapsScriptPromise = new Promise((resolve, reject) => {
+  mapsScriptPromise = new Promise<void>((resolve, reject) => {
+    const ensurePlaces = async () => {
+      try {
+        const g: any = (window as any).google;
+        if (g?.maps?.importLibrary) {
+          await g.maps.importLibrary("places");
+        }
+        // Fallback: poll briefly in case importLibrary is unavailable
+        const start = Date.now();
+        while (!(window as any).google?.maps?.places && Date.now() - start < 5000) {
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        if ((window as any).google?.maps?.places) resolve();
+        else reject(new Error("places library not available"));
+      } catch (e) { reject(e as Error); }
+    };
     const existing = document.querySelector<HTMLScriptElement>('script[data-google-maps="true"]');
-    if (existing) { existing.addEventListener("load", () => resolve()); return; }
+    if (existing) { existing.addEventListener("load", ensurePlaces); return; }
     const s = document.createElement("script");
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&loading=async`;
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&loading=async&v=weekly`;
     s.async = true; s.defer = true;
     s.dataset.googleMaps = "true";
-    s.onload = () => resolve();
+    s.onload = ensurePlaces;
     s.onerror = () => { mapsScriptPromise = null; reject(new Error("maps load failed")); };
     document.head.appendChild(s);
   });
