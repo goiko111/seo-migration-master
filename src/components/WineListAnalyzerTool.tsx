@@ -1667,3 +1667,85 @@ function RegistrationGateModal({
     </div>
   );
 }
+
+/* ─── Partial analysis banner + email capture ─── */
+function PartialAnalysisBanner({
+  lang, analyzedWines, totalWines, message, analysisId, defaultRestaurant,
+}: {
+  lang: Lang;
+  analyzedWines: number;
+  totalWines: number;
+  message?: string;
+  analysisId?: string;
+  defaultRestaurant?: string;
+}) {
+  const tt = T_PARTIAL[lang];
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || submitting) return;
+    setSubmitting(true); setErr(null);
+    try {
+      const res = await fetch(`${API_BASE}/v1/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || undefined,
+          email,
+          restaurant: defaultRestaurant || undefined,
+          analysisId: analysisId || undefined,
+          lang,
+        }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok || d?.success === false) throw new Error(d?.message || "register failed");
+      setDone(true);
+    } catch {
+      setErr(tt.error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-blue-500/30 bg-blue-500/5 p-5 md:p-6">
+      <div className="flex items-start gap-3 mb-3">
+        <Info size={20} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+        <div className="flex-1">
+          <p className="text-sm md:text-base text-foreground leading-relaxed">
+            {tt.headline(analyzedWines, totalWines)}
+          </p>
+          {message && (
+            <p className="text-sm text-muted-foreground leading-relaxed mt-1">{message}</p>
+          )}
+        </div>
+      </div>
+      {done ? (
+        <div className="flex items-start gap-2 mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+          <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+          <p className="text-sm text-foreground">{tt.done(totalWines, email)}</p>
+        </div>
+      ) : (
+        <form onSubmit={submit} className="grid sm:grid-cols-[1fr_1fr_auto] gap-2 mt-3">
+          <Input
+            type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+            placeholder={tt.email} className="bg-background"
+          />
+          <Input
+            value={name} onChange={(e) => setName(e.target.value)}
+            placeholder={tt.name} className="bg-background"
+          />
+          <Button type="submit" disabled={submitting} className="bg-gradient-wine text-primary-foreground font-semibold">
+            {submitting ? <Loader2 size={16} className="animate-spin" /> : tt.send}
+          </Button>
+          {err && <p className="sm:col-span-3 text-xs text-destructive">{err}</p>}
+        </form>
+      )}
+    </div>
+  );
+}
