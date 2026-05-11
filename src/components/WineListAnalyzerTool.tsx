@@ -889,10 +889,28 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     )}
                   </div>
                 )}
-                {slow && (
-                  <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                    <AlertTriangle size={12} /> {t.errSlow}
-                  </p>
+                {/* Rotating commercial claim */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={claimIdx}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-4 flex items-start gap-2 text-[13px] text-muted-foreground"
+                  >
+                    <Lightbulb size={14} className="mt-0.5 shrink-0 text-amber-500" />
+                    <span className="leading-relaxed">{CLAIMS[lang][claimIdx]}</span>
+                  </motion.div>
+                </AnimatePresence>
+                {/* After ~45s: optional contact-capture form (analysis keeps running) */}
+                {showLongCapture && (
+                  <LongWaitCaptureForm
+                    lang={lang}
+                    analysisId={currentAnalysisIdRef.current}
+                    defaultCountry={null}
+                    t={t}
+                  />
                 )}
               </motion.div>
             )}
