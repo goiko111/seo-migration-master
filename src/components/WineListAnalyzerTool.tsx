@@ -44,6 +44,87 @@ const NO_WINES_MSG: Record<Lang, string> = {
   pt: "Não conseguimos identificar vinhos no conteúdo. Tente outro formato ou verifique que o texto inclui nomes de vinhos e preços.",
 };
 
+const T_RESTAURANT_LABEL: Record<Lang, string> = {
+  es: "Tu restaurante (opcional)",
+  en: "Your restaurant (optional)",
+  fr: "Votre restaurant (optionnel)",
+  de: "Ihr Restaurant (optional)",
+  it: "Il tuo ristorante (opzionale)",
+  pt: "O seu restaurante (opcional)",
+};
+const T_RESTAURANT_PLACEHOLDER: Record<Lang, string> = {
+  es: "Busca tu restaurante…",
+  en: "Search for your restaurant…",
+  fr: "Cherchez votre restaurant…",
+  de: "Restaurant suchen…",
+  it: "Cerca il tuo ristorante…",
+  pt: "Procure o seu restaurante…",
+};
+const T_RESTAURANT_HELP: Record<Lang, string> = {
+  es: "Si seleccionas tu restaurante, añadiremos estimaciones de negocio (ticket medio, ingresos vino, botellas/servicio).",
+  en: "Selecting your restaurant adds business estimates (average ticket, wine revenue, bottles/service).",
+  fr: "Sélectionner votre restaurant ajoute des estimations (ticket moyen, revenus vin, bouteilles/service).",
+  de: "Wenn Sie Ihr Restaurant auswählen, ergänzen wir Geschäftsschätzungen (Durchschnittsbon, Weinumsatz, Flaschen/Service).",
+  it: "Selezionando il tuo ristorante aggiungeremo stime di business (scontrino medio, ricavi vino, bottiglie/servizio).",
+  pt: "Selecionar o seu restaurante adiciona estimativas (ticket médio, receita de vinho, garrafas/serviço).",
+};
+const T_PENDING_TITLE: Record<Lang, string> = {
+  es: "Tu carta es muy completa",
+  en: "Your wine list is very extensive",
+  fr: "Votre carte est très complète",
+  de: "Ihre Karte ist sehr umfangreich",
+  it: "La tua carta è molto ampia",
+  pt: "A sua carta é muito extensa",
+};
+const T_PENDING_TEXT: Record<Lang, string> = {
+  es: "Nuestro equipo la está analizando manualmente. Te contactaremos en menos de 48h con tu informe personalizado.",
+  en: "Our team is analysing it manually. We'll contact you within 48h with your personalised report.",
+  fr: "Notre équipe l'analyse manuellement. Nous vous contacterons sous 48h avec votre rapport personnalisé.",
+  de: "Unser Team analysiert sie manuell. Wir melden uns innerhalb von 48 Std. mit Ihrem personalisierten Bericht.",
+  it: "Il nostro team la sta analizzando manualmente. Ti contatteremo entro 48h con il report personalizzato.",
+  pt: "A nossa equipa está a analisá-la manualmente. Contactaremos em menos de 48h com o seu relatório.",
+};
+const T_KPI: Record<Lang, { ticket: string; ticketWine: string; bottles: string; revenue: string; profile: string; rating: string; reviews: string; type: string; address: string; conf: { high: string; medium: string; low: string } }> = {
+  es: { ticket: "Ticket medio", ticketWine: "Ticket vino/comensal", bottles: "Botellas/servicio", revenue: "Ingresos vino/mes", profile: "Perfil de carta", rating: "Valoración Google", reviews: "reseñas", type: "Tipo", address: "Dirección", conf: { high: "Alta confianza", medium: "Confianza media", low: "Baja confianza" } },
+  en: { ticket: "Average ticket", ticketWine: "Wine ticket / guest", bottles: "Bottles / service", revenue: "Wine revenue / month", profile: "List profile", rating: "Google rating", reviews: "reviews", type: "Type", address: "Address", conf: { high: "High confidence", medium: "Medium confidence", low: "Low confidence" } },
+  fr: { ticket: "Ticket moyen", ticketWine: "Ticket vin / convive", bottles: "Bouteilles / service", revenue: "Revenus vin / mois", profile: "Profil de carte", rating: "Note Google", reviews: "avis", type: "Type", address: "Adresse", conf: { high: "Confiance élevée", medium: "Confiance moyenne", low: "Confiance faible" } },
+  de: { ticket: "Ø Bon", ticketWine: "Weinbon / Gast", bottles: "Flaschen / Service", revenue: "Weinumsatz / Monat", profile: "Kartenprofil", rating: "Google-Bewertung", reviews: "Rezensionen", type: "Typ", address: "Adresse", conf: { high: "Hohe Konfidenz", medium: "Mittlere Konfidenz", low: "Niedrige Konfidenz" } },
+  it: { ticket: "Scontrino medio", ticketWine: "Vino / coperto", bottles: "Bottiglie / servizio", revenue: "Ricavi vino / mese", profile: "Profilo carta", rating: "Valutazione Google", reviews: "recensioni", type: "Tipo", address: "Indirizzo", conf: { high: "Alta affidabilità", medium: "Media affidabilità", low: "Bassa affidabilità" } },
+  pt: { ticket: "Ticket médio", ticketWine: "Vinho / cliente", bottles: "Garrafas / serviço", revenue: "Receita vinho / mês", profile: "Perfil da carta", rating: "Avaliação Google", reviews: "avaliações", type: "Tipo", address: "Morada", conf: { high: "Alta confiança", medium: "Confiança média", low: "Baixa confiança" } },
+};
+
+/* ─── Google Maps script loader (singleton) ─── */
+let mapsScriptPromise: Promise<void> | null = null;
+function loadGoogleMaps(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if ((window as any).google?.maps?.places) return Promise.resolve();
+  if (mapsScriptPromise) return mapsScriptPromise;
+  mapsScriptPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>('script[data-google-maps="true"]');
+    if (existing) { existing.addEventListener("load", () => resolve()); return; }
+    const s = document.createElement("script");
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&loading=async`;
+    s.async = true; s.defer = true;
+    s.dataset.googleMaps = "true";
+    s.onload = () => resolve();
+    s.onerror = () => { mapsScriptPromise = null; reject(new Error("maps load failed")); };
+    document.head.appendChild(s);
+  });
+  return mapsScriptPromise;
+}
+function useGoogleMapsScript(): boolean {
+  const [ready, setReady] = useState<boolean>(() =>
+    typeof window !== "undefined" && !!(window as any).google?.maps?.places
+  );
+  useEffect(() => {
+    if (ready) return;
+    let mounted = true;
+    loadGoogleMaps().then(() => { if (mounted) setReady(true); }).catch(() => {});
+    return () => { mounted = false; };
+  }, [ready]);
+  return ready;
+}
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
