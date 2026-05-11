@@ -67,6 +67,14 @@ const T_RESTAURANT_HELP: Record<Lang, string> = {
   it: "Selezionando il tuo ristorante aggiungeremo stime di business (scontrino medio, ricavi vino, bottiglie/servizio).",
   pt: "Selecionar o seu restaurante adiciona estimativas (ticket médio, receita de vinho, garrafas/serviço).",
 };
+const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
+  es: "¿No encuentras tu restaurante? No pasa nada, puedes continuar sin seleccionarlo.",
+  en: "Can't find your restaurant? No problem, you can continue without selecting it.",
+  fr: "Vous ne trouvez pas votre restaurant ? Pas de souci, vous pouvez continuer sans le sélectionner.",
+  de: "Restaurant nicht gefunden? Kein Problem, Sie können ohne Auswahl fortfahren.",
+  it: "Non trovi il tuo ristorante? Nessun problema, puoi continuare senza selezionarlo.",
+  pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
+};
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
   en: "Your wine list is very extensive",
@@ -440,6 +448,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
   const [slow, setSlow] = useState(false);
+  const [pollLabel, setPollLabel] = useState<string | null>(null);
+  const [pollProgress, setPollProgress] = useState<number | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [urlFailedInfo, setUrlFailedInfo] = useState<{
@@ -482,9 +492,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
     setLoading(true); setResult(null); setErrorMsg(null);
     setUrlFailedInfo(null);
+    setPollLabel(null); setPollProgress(null);
     const controller = new AbortController();
-    // Larger lists (100+ wines) can take 60-90s in Claude. Allow 120s.
-    const timeout = setTimeout(() => controller.abort(), 120000);
+    // POST returns immediately with an analysisId; polling does the waiting.
+    const timeout = setTimeout(() => controller.abort(), 30000);
 
     try {
       let res: Response;
@@ -512,39 +523,24 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
-      // Handle urlFailed: backend couldn't fetch the restaurant URL
-      if (res.ok && data?.success && data?.urlFailed) {
-        // Preserve restaurant selection if API returned it
-        if (data?.restaurant?.name && !restaurantName) {
-          setRestaurantName(data.restaurant.name);
-          if (data.restaurant.address) setRestaurantAddress(data.restaurant.address);
-        }
-        setUrlFailedInfo({
-          message: data.message || data.reason || t.errGeneric,
-          suggestions: data.suggestions,
-        });
-        setTimeout(() => {
-          document.getElementById("analyzer-url-failed")?.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 50);
-      } else
-      // Handle pendingContact (very large lists processed manually)
-      if (res.ok && data?.success && data?.pendingContact) {
-        setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
-        setTimeout(() => {
-          document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      } else if (!res.ok || !data?.success) {
+
+      if (!res.ok || !data?.success) {
         const apiErr: string = (data?.error || "").toString();
         let msg = apiErr || t.errGeneric;
         if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
         showInlineError(msg);
-      } else {
-        setResult(data as AnalysisResult);
-        // Scroll into view
-        setTimeout(() => {
-          document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
+        return;
       }
+
+      // Backwards-compat: if API returned the full payload synchronously, handle it.
+      if (!data.analysisId || data.status === undefined) {
+        handleFinalPayload(data);
+        return;
+      }
+
+      // Async flow: poll /v1/status/{id} until terminal state
+      const finalPayload = await pollStatus(data.analysisId);
+      handleFinalPayload(finalPayload);
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
@@ -560,7 +556,79 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       );
     } finally {
       setLoading(false);
+      setPollLabel(null); setPollProgress(null);
     }
+  };
+
+  // Poll /v1/status/{id} every 2.5s up to ~5 min
+  const pollStatus = async (id: string): Promise<any> => {
+    const startedAt = Date.now();
+    const MAX_MS = 5 * 60 * 1000;
+    while (Date.now() - startedAt < MAX_MS) {
+      await new Promise((r) => setTimeout(r, 2500));
+      try {
+        const r = await fetch(`${API_BASE}/v1/status/${encodeURIComponent(id)}`);
+        const d = await r.json().catch(() => ({}));
+        if (typeof d?.progress === "number") setPollProgress(d.progress);
+        if (typeof d?.stepLabel === "string") setPollLabel(d.stepLabel);
+        const status = d?.status;
+        if (status && status !== "processing") {
+          // Build a unified payload for handleFinalPayload
+          if (status === "complete") {
+            return { success: true, analysisId: id, ...(d.result || {}) };
+          }
+          if (status === "url_failed") {
+            return { success: true, urlFailed: true, analysisId: id, ...(d.result || {}) };
+          }
+          if (status === "pending_contact") {
+            return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
+          }
+          if (status === "error") {
+            return { success: false, error: d?.error || d?.result?.error };
+          }
+          return d;
+        }
+      } catch (e) {
+        // transient errors → keep polling
+        console.warn("status poll failed", e);
+      }
+    }
+    throw Object.assign(new Error("poll timeout"), { name: "AbortError" });
+  };
+
+  const handleFinalPayload = (data: any) => {
+    if (!data?.success) {
+      const apiErr: string = (data?.error || "").toString();
+      let msg = apiErr || t.errGeneric;
+      if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
+      showInlineError(msg);
+      return;
+    }
+    if (data.urlFailed) {
+      if (data?.restaurant?.name && !restaurantName) {
+        setRestaurantName(data.restaurant.name);
+        if (data.restaurant.address) setRestaurantAddress(data.restaurant.address);
+      }
+      setUrlFailedInfo({
+        message: data.message || data.reason || t.errGeneric,
+        suggestions: data.suggestions,
+      });
+      setTimeout(() => {
+        document.getElementById("analyzer-url-failed")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 50);
+      return;
+    }
+    if (data.pendingContact) {
+      setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
+      setTimeout(() => {
+        document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+      return;
+    }
+    setResult(data as AnalysisResult);
+    setTimeout(() => {
+      document.getElementById("analyzer-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
   };
 
   return (
@@ -607,6 +675,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               />
             )}
             <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
+            {!placeId && (
+              <p className="mt-1 text-xs text-muted-foreground/80 italic">{T_RESTAURANT_NOT_FOUND[lang]}</p>
+            )}
           </div>
 
           {/* Tabs */}
@@ -726,6 +797,19 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     </div>
                   ))}
                 </div>
+                {(pollLabel || pollProgress != null) && (
+                  <div className="mt-4">
+                    {pollLabel && (
+                      <p className="text-sm font-medium text-foreground mb-2">{pollLabel}</p>
+                    )}
+                    {pollProgress != null && (
+                      <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
+                        <div className="h-full bg-wine transition-all duration-500"
+                          style={{ width: `${Math.max(0, Math.min(100, pollProgress))}%` }} />
+                      </div>
+                    )}
+                  </div>
+                )}
                 {slow && (
                   <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
                     <AlertTriangle size={12} /> {t.errSlow}
