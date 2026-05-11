@@ -1178,15 +1178,13 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
               <Input id="g-name" required value={name} onChange={(e) => setName(e.target.value)} />
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="g-email" className="mb-1.5 block text-sm">{t.formEmail} *</Label>
-              <Input id="g-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <div>
-              <Label htmlFor="g-phone" className="mb-1.5 block text-sm">{t.formPhone}</Label>
-              <Input id="g-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
-            </div>
+          <div>
+            <Label htmlFor="g-email" className="mb-1.5 block text-sm">{t.formEmail} *</Label>
+            <Input id="g-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="g-phone" className="mb-1.5 block text-sm">{t.formPhone}</Label>
+            <PhoneInputControlled id="g-phone" value={phone} onChange={setPhone} />
           </div>
           <label className="flex items-start gap-2 text-xs text-muted-foreground cursor-pointer">
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5" />
