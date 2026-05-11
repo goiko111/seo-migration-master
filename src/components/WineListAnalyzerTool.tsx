@@ -371,11 +371,31 @@ interface Problem { rank: number; title: string; description: string; metric: st
 interface AnalysisResult {
   success: boolean;
   analysisId: string;
-  restaurant: { name: string | null; location: string | null; cuisine_type: string | null };
+  restaurant: {
+    name: string | null;
+    location: string | null;
+    cuisine_type: string | null;
+    google?: {
+      rating?: number;
+      reviews?: number;
+      type?: string;
+      address?: string;
+      website?: string;
+    } | null;
+  };
   summary: { totalWines: number; totalByGlass: number; priceRange: { min: number; max: number; median: number; currency: string }; score: number; scoreLabel: string; scoreColor: string };
   semaphore: SemaphoreItem[];
   topProblems: Problem[];
   fullAnalysis: { locked: boolean; previewSections: string[] };
+  estimates?: {
+    restaurantType?: { type: string; confidence: "high" | "medium" | "low" };
+    ticketMedio?: { value: number; currency: string; confidence: "high" | "medium" | "low"; method?: string };
+    ticketVino?: { value: number; currency: string; glassCount?: number };
+    bottlesPerService?: { value: number; confidence: "high" | "medium" | "low"; estimatedCovers?: number };
+    monthlyRevenue?: { value: number; currency: string; servicesPerMonth?: number };
+    wps?: { estimated: number; profile: string };
+  };
+  pendingContact?: boolean;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
