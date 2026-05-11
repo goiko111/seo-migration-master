@@ -675,6 +675,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               />
             )}
             <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
+            {!placeId && (
+              <p className="mt-1 text-xs text-muted-foreground/80 italic">{T_RESTAURANT_NOT_FOUND[lang]}</p>
+            )}
           </div>
 
           {/* Tabs */}
@@ -794,6 +797,19 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     </div>
                   ))}
                 </div>
+                {(pollLabel || pollProgress != null) && (
+                  <div className="mt-4">
+                    {pollLabel && (
+                      <p className="text-sm font-medium text-foreground mb-2">{pollLabel}</p>
+                    )}
+                    {pollProgress != null && (
+                      <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
+                        <div className="h-full bg-wine transition-all duration-500"
+                          style={{ width: `${Math.max(0, Math.min(100, pollProgress))}%` }} />
+                      </div>
+                    )}
+                  </div>
+                )}
                 {slow && (
                   <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
                     <AlertTriangle size={12} /> {t.errSlow}
