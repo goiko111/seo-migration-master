@@ -1,7 +1,23 @@
 # NEXT_STEPS.md — winerim.wine
 
 > Tareas pendientes priorizadas. Se reescribe al final de cada sesión.
-> Última actualización: 2026-05-07 (sesión 7)
+> Última actualización: 2026-05-11 (sesión 8)
+
+## Sesión 8 — abierto al cierre
+
+### A. Limpieza AnalizaCarta.tsx (cosmética/build)
+- Eliminar handlers y estado del formulario antiguo (`handleSubmit`, `handleFileDrop`, `handleFileChange`, `fileRef`, `mode`, `fileName`, `submitting`, `formI`, `setMode`, `setFileName`, `setSubmitting`).
+- Eliminar import `Breadcrumbs` no usado.
+- Confirmar que `t.form.*` y `t.hero.*` ya no se referencian; quitar de los i18n maps.
+
+### B. Validación end-to-end del analizador
+- Probar con PDF real >50 vinos contra `https://api.winerim.wine/v1/analyze` (Worker actualizado 11 May 2026).
+- Probar texto pegado >100 vinos (verificar que 120s es suficiente).
+- Probar URL de carta texto-only.
+- Confirmar que `/v1/unlock` envía email + devuelve `reportUrl`.
+
+### C. Decidir polling asíncrono
+- Si el Worker pasa a respuesta inmediata + `analysisId` con polling `/v1/status/:id`, refactorizar `WineListAnalyzerTool` para usar ese flujo en vez del fetch bloqueante.
 
 ## Prioridad alta — Requiere acción manual
 
