@@ -154,6 +154,32 @@ const T_SEND_RECEIVE: Record<Lang, string> = {
   it: "Invia e ricevi il report",
   pt: "Enviar e receber relatório",
 };
+
+/* Freemium / registration gate copy */
+const T_REG_TITLE: Record<Lang, string> = {
+  es: "Regístrate para seguir analizando",
+  en: "Register to keep analyzing",
+  fr: "Inscrivez-vous pour continuer à analyser",
+  de: "Registrieren Sie sich, um weiter zu analysieren",
+  it: "Registrati per continuare ad analizzare",
+  pt: "Regista-te para continuar a analisar",
+};
+const T_REG_FOOT: Record<Lang, string> = {
+  es: "Tu primer análisis fue gratis. Regístrate para desbloquear más análisis e informes detallados.",
+  en: "Your first analysis was free. Register to unlock more analyses and detailed reports.",
+  fr: "Votre première analyse était gratuite. Inscrivez-vous pour en débloquer d'autres et accéder aux rapports détaillés.",
+  de: "Ihre erste Analyse war kostenlos. Registrieren Sie sich, um weitere Analysen und detaillierte Berichte freizuschalten.",
+  it: "La tua prima analisi è stata gratuita. Registrati per sbloccare più analisi e report dettagliati.",
+  pt: "A sua primeira análise foi gratuita. Registe-se para desbloquear mais análises e relatórios detalhados.",
+};
+const T_REG_CTA: Record<Lang, string> = {
+  es: "Registrarme gratis", en: "Register for free", fr: "Inscription gratuite",
+  de: "Kostenlos registrieren", it: "Registrati gratis", pt: "Registar-me grátis",
+};
+const T_REG_RESTAURANT: Record<Lang, string> = {
+  es: "Restaurante (opcional)", en: "Restaurant (optional)", fr: "Restaurant (optionnel)",
+  de: "Restaurant (optional)", it: "Ristorante (opzionale)", pt: "Restaurante (opcional)",
+};
 const T_PENDING_TITLE: Record<Lang, string> = {
   es: "Tu carta es muy completa",
   en: "Your wine list is very extensive",
@@ -537,6 +563,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
+  // Freemium / rate-limit
+  const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
+  const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -575,9 +604,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     if (tab === "text" && text.trim().length < 50) { showInlineError(t.errMin); return; }
     if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { showInlineError(t.errGeneric); return; }
     if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
+    await runAnalysis();
+  };
 
+  const runAnalysis = async () => {
     setLoading(true); setResult(null); setErrorMsg(null);
     setUrlFailedInfo(null);
+    setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
     const controller = new AbortController();
     // POST returns immediately with an analysisId; polling does the waiting.
@@ -609,6 +642,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
+
+      // Freemium gate: backend asks for registration to keep analyzing
+      if (data?.rateLimited && data?.requiresRegistration) {
+        setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
+        return;
+      }
+      // Hard daily limit (HTTP 429 or rateLimited without registration path)
+      if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
+        setRateLimitMsg(data?.message || t.errGeneric);
+        return;
+      }
 
       if (!res.ok || !data?.success) {
         const apiErr: string = (data?.error || "").toString();
@@ -856,6 +900,14 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             </div>
           )}
 
+          {/* Hard daily limit reached */}
+          {rateLimitMsg && !loading && (
+            <div role="status" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-amber-500/40 bg-amber-500/10">
+              <Info size={18} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
+              <p className="text-sm leading-relaxed">{rateLimitMsg}</p>
+            </div>
+          )}
+
           {/* CTA */}
           <Button type="submit" disabled={loading} size="lg" className="w-full h-12 bg-gradient-wine text-primary-foreground text-base font-semibold">
             {loading ? (<><Loader2 size={18} className="animate-spin" /> {t.analyzing}</>) : (<><Sparkles size={18} /> {t.cta}</>)}
@@ -930,6 +982,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Freemium registration gate */}
+        {registrationGate && (
+          <RegistrationGateModal
+            lang={lang}
+            t={t}
+            message={registrationGate.message}
+            defaultRestaurant={restaurantName || ""}
+            onClose={() => setRegistrationGate(null)}
+            onRegistered={async () => {
+              setRegistrationGate(null);
+              await runAnalysis();
+            }}
+          />
+        )}
       </div>
     </section>
   );
@@ -1485,6 +1552,94 @@ function LongWaitCaptureForm({
       <p className="text-sm font-semibold mb-1">{T_LONG_CAPTURE_TITLE[lang]}</p>
       <p className="text-xs text-muted-foreground mb-3">{T_LONG_CAPTURE_TEXT[lang]}</p>
       <ContactCaptureForm lang={lang} analysisId={analysisId} t={t} variant="longwait" />
+    </div>
+  );
+}
+
+/* ─── Registration gate modal (shown when freemium limit hit) ─── */
+function RegistrationGateModal({
+  lang, t, message, defaultRestaurant, onClose, onRegistered,
+}: {
+  lang: Lang; t: any; message: string; defaultRestaurant: string;
+  onClose: () => void; onRegistered: () => void;
+}) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [restaurant, setRestaurant] = useState(defaultRestaurant);
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/v1/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, restaurant: restaurant || undefined, lang }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.success) {
+        toast.error(data?.message || data?.error || t.errGeneric);
+        return;
+      }
+      try {
+        localStorage.setItem("winerim_registered", "1");
+        localStorage.setItem("winerim_user", JSON.stringify({ name, email }));
+      } catch {}
+      onRegistered();
+    } catch (err) {
+      console.error(err); toast.error(t.errGeneric);
+    } finally { setSubmitting(false); }
+  };
+
+  return (
+    <div
+      role="dialog" aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl p-6 md:p-8 my-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" onClick={onClose}
+          className="absolute top-3 right-3 p-1 text-muted-foreground hover:text-foreground" aria-label="Close">
+          <X size={18} />
+        </button>
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wine/10 mx-auto mb-4">
+          <Lock size={22} className="text-wine" />
+        </div>
+        <h3 className="font-heading text-xl md:text-2xl font-bold text-center mb-2">{T_REG_TITLE[lang]}</h3>
+        <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">{message}</p>
+        <form onSubmit={submit} className="space-y-3">
+          <div>
+            <Label htmlFor="reg-name" className="mb-1 block text-xs">{t.formName} *</Label>
+            <Input id="reg-name" required value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="reg-email" className="mb-1 block text-xs">{t.formEmail} *</Label>
+            <Input id="reg-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="reg-phone" className="mb-1 block text-xs">{t.formPhone}</Label>
+            <PhoneInputControlled id="reg-phone" value={phone} onChange={setPhone} />
+          </div>
+          <div>
+            <Label htmlFor="reg-restaurant" className="mb-1 block text-xs">{T_REG_RESTAURANT[lang]}</Label>
+            <Input id="reg-restaurant" value={restaurant} onChange={(e) => setRestaurant(e.target.value)} />
+          </div>
+          <Button type="submit" disabled={submitting} size="lg"
+            className="w-full h-12 bg-gradient-wine text-primary-foreground font-semibold">
+            {submitting ? (<><Loader2 size={16} className="animate-spin" /> {t.unlocking}</>) : T_REG_CTA[lang]}
+          </Button>
+          <p className="text-[11px] text-muted-foreground text-center leading-relaxed pt-1">
+            {T_REG_FOOT[lang]}
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
