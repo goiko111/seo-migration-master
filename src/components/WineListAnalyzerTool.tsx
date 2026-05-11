@@ -1555,3 +1555,91 @@ function LongWaitCaptureForm({
     </div>
   );
 }
+
+/* ─── Registration gate modal (shown when freemium limit hit) ─── */
+function RegistrationGateModal({
+  lang, t, message, defaultRestaurant, onClose, onRegistered,
+}: {
+  lang: Lang; t: any; message: string; defaultRestaurant: string;
+  onClose: () => void; onRegistered: () => void;
+}) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [restaurant, setRestaurant] = useState(defaultRestaurant);
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/v1/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, restaurant: restaurant || undefined, lang }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.success) {
+        toast.error(data?.message || data?.error || t.errGeneric);
+        return;
+      }
+      try {
+        localStorage.setItem("winerim_registered", "1");
+        localStorage.setItem("winerim_user", JSON.stringify({ name, email }));
+      } catch {}
+      onRegistered();
+    } catch (err) {
+      console.error(err); toast.error(t.errGeneric);
+    } finally { setSubmitting(false); }
+  };
+
+  return (
+    <div
+      role="dialog" aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl p-6 md:p-8 my-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" onClick={onClose}
+          className="absolute top-3 right-3 p-1 text-muted-foreground hover:text-foreground" aria-label="Close">
+          <X size={18} />
+        </button>
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wine/10 mx-auto mb-4">
+          <Lock size={22} className="text-wine" />
+        </div>
+        <h3 className="font-heading text-xl md:text-2xl font-bold text-center mb-2">{T_REG_TITLE[lang]}</h3>
+        <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">{message}</p>
+        <form onSubmit={submit} className="space-y-3">
+          <div>
+            <Label htmlFor="reg-name" className="mb-1 block text-xs">{t.formName} *</Label>
+            <Input id="reg-name" required value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="reg-email" className="mb-1 block text-xs">{t.formEmail} *</Label>
+            <Input id="reg-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="reg-phone" className="mb-1 block text-xs">{t.formPhone}</Label>
+            <PhoneInputControlled id="reg-phone" value={phone} onChange={setPhone} />
+          </div>
+          <div>
+            <Label htmlFor="reg-restaurant" className="mb-1 block text-xs">{T_REG_RESTAURANT[lang]}</Label>
+            <Input id="reg-restaurant" value={restaurant} onChange={(e) => setRestaurant(e.target.value)} />
+          </div>
+          <Button type="submit" disabled={submitting} size="lg"
+            className="w-full h-12 bg-gradient-wine text-primary-foreground font-semibold">
+            {submitting ? (<><Loader2 size={16} className="animate-spin" /> {t.unlocking}</>) : T_REG_CTA[lang]}
+          </Button>
+          <p className="text-[11px] text-muted-foreground text-center leading-relaxed pt-1">
+            {T_REG_FOOT[lang]}
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}
