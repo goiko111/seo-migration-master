@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Search, X, Star, Clock,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -442,6 +442,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [slow, setSlow] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [urlFailedInfo, setUrlFailedInfo] = useState<{
+    message: string;
+    suggestions?: Array<{ method: string; label: string; description?: string }>;
+  } | null>(null);
 
   const showInlineError = (message: string) => {
     setErrorMsg(message);
@@ -477,6 +481,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
 
     setLoading(true); setResult(null); setErrorMsg(null);
+    setUrlFailedInfo(null);
     const controller = new AbortController();
     // Larger lists (100+ wines) can take 60-90s in Claude. Allow 120s.
     const timeout = setTimeout(() => controller.abort(), 120000);
@@ -507,6 +512,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }
       clearTimeout(timeout);
       const data = await res.json().catch(() => ({}));
+      // Handle urlFailed: backend couldn't fetch the restaurant URL
+      if (res.ok && data?.success && data?.urlFailed) {
+        // Preserve restaurant selection if API returned it
+        if (data?.restaurant?.name && !restaurantName) {
+          setRestaurantName(data.restaurant.name);
+          if (data.restaurant.address) setRestaurantAddress(data.restaurant.address);
+        }
+        setUrlFailedInfo({
+          message: data.message || data.reason || t.errGeneric,
+          suggestions: data.suggestions,
+        });
+        setTimeout(() => {
+          document.getElementById("analyzer-url-failed")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 50);
+      } else
       // Handle pendingContact (very large lists processed manually)
       if (res.ok && data?.success && data?.pendingContact) {
         setResult({ ...(data as any), pendingContact: true } as AnalysisResult);
