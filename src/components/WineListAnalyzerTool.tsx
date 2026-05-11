@@ -77,6 +77,16 @@ const T_RESTAURANT_NOT_FOUND: Record<Lang, string> = {
   pt: "Não encontra o seu restaurante? Não faz mal, pode continuar sem o selecionar.",
 };
 
+/* Partial analysis (>200 wines) i18n */
+const T_PARTIAL = {
+  es: { headline: (a: number, t: number) => <>Hemos analizado <strong>{a} de {t}</strong> vinos de tu carta.</>, name: "Nombre (opcional)", email: "Email", send: "Enviar informe completo", done: (n: number, e: string) => `¡Listo! Te enviaremos el informe completo de las ${n} referencias a ${e}.`, error: "No se pudo enviar. Inténtalo de nuevo." },
+  en: { headline: (a: number, t: number) => <>We analyzed <strong>{a} of {t}</strong> wines from your list.</>, name: "Name (optional)", email: "Email", send: "Send full report", done: (n: number, e: string) => `Done! We'll send the full report of all ${n} wines to ${e}.`, error: "Could not send. Please try again." },
+  fr: { headline: (a: number, t: number) => <>Nous avons analysé <strong>{a} sur {t}</strong> vins de votre carte.</>, name: "Nom (optionnel)", email: "Email", send: "Envoyer le rapport complet", done: (n: number, e: string) => `C'est fait ! Nous enverrons le rapport complet des ${n} références à ${e}.`, error: "Échec de l'envoi. Réessayez." },
+  de: { headline: (a: number, t: number) => <>Wir haben <strong>{a} von {t}</strong> Weinen Ihrer Karte analysiert.</>, name: "Name (optional)", email: "E-Mail", send: "Vollständigen Bericht senden", done: (n: number, e: string) => `Fertig! Wir senden den vollständigen Bericht aller ${n} Weine an ${e}.`, error: "Senden fehlgeschlagen. Bitte erneut versuchen." },
+  it: { headline: (a: number, t: number) => <>Abbiamo analizzato <strong>{a} su {t}</strong> vini della tua carta.</>, name: "Nome (opzionale)", email: "Email", send: "Invia il report completo", done: (n: number, e: string) => `Fatto! Ti invieremo il report completo di tutti i ${n} vini a ${e}.`, error: "Invio non riuscito. Riprova." },
+  pt: { headline: (a: number, t: number) => <>Analisámos <strong>{a} de {t}</strong> vinhos da sua carta.</>, name: "Nome (opcional)", email: "Email", send: "Enviar relatório completo", done: (n: number, e: string) => `Pronto! Enviaremos o relatório completo dos ${n} vinhos para ${e}.`, error: "Não foi possível enviar. Tente de novo." },
+} as const;
+
 /* Rotating commercial claims shown under the progress bar while processing */
 const CLAIMS: Record<Lang, string[]> = {
   es: [
