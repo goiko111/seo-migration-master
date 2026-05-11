@@ -523,6 +523,10 @@ interface AnalysisResult {
     wps?: { estimated: number; profile: string };
   };
   pendingContact?: boolean;
+  partialAnalysis?: boolean;
+  analyzedWines?: number;
+  totalWines?: number;
+  partialMessage?: string;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
