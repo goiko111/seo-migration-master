@@ -450,6 +450,14 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
             )}
           </div>
 
+          {/* Inline error (visible, no sticky overlap) */}
+          {errorMsg && !loading && (
+            <div role="alert" className="flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
+              <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+              <p className="text-sm leading-relaxed">{errorMsg}</p>
+            </div>
+          )}
+
           {/* CTA */}
           <Button type="submit" disabled={loading} size="lg" className="w-full h-12 bg-gradient-wine text-primary-foreground text-base font-semibold">
             {loading ? (<><Loader2 size={18} className="animate-spin" /> {t.analyzing}</>) : (<><Sparkles size={18} /> {t.cta}</>)}
