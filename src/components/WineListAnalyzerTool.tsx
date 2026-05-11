@@ -954,13 +954,19 @@ function PlacesSearchInput({
     suggestions: { status, data },
     setValue,
     clearSuggestions,
+    init,
   } = usePlacesAutocomplete({
     requestOptions: { types: ["restaurant", "bar", "cafe"] },
     debounce: 300,
-    initOnMount: ready,
+    initOnMount: false,
   });
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+
+  // Initialise the hook as soon as Google Maps is available
+  useEffect(() => {
+    if (ready && !hookReady) init();
+  }, [ready, hookReady, init]);
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -970,15 +976,12 @@ function PlacesSearchInput({
     return () => document.removeEventListener("mousedown", onClick);
   }, [clearSuggestions]);
 
-  const disabled = !ready || !hookReady;
-
   return (
     <div ref={wrapRef} className="relative">
       <div className="relative">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
         <Input
           value={value}
-          disabled={disabled}
           onChange={(e) => { setValue(e.target.value); setOpen(true); }}
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
