@@ -2,13 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles, Globe2,
+  Lock, ExternalLink, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
@@ -24,6 +25,37 @@ const COUNTRIES = [
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
 
+// Map global language to default country code
+const LANG_TO_COUNTRY: Record<Lang, string> = {
+  es: "ES", en: "US", fr: "FR", de: "DE", it: "IT", pt: "PT",
+};
+// Short labels for mobile tabs
+const TAB_SHORT = { url: "URL", text: "Texto", file: "PDF" } as const;
+const TAB_SHORT_EN: Record<Lang, { url: string; text: string; file: string }> = {
+  es: { url: "URL", text: "Texto", file: "PDF" },
+  en: { url: "URL", text: "Text", file: "PDF" },
+  fr: { url: "URL", text: "Texte", file: "PDF" },
+  de: { url: "URL", text: "Text", file: "PDF" },
+  it: { url: "URL", text: "Testo", file: "PDF" },
+  pt: { url: "URL", text: "Texto", file: "PDF" },
+};
+const URL_NOTE: Record<Lang, string> = {
+  es: "Funciona mejor con cartas publicadas en texto. Si tu carta es imagen o PDF, usa las otras opciones.",
+  en: "Works best with text-based wine list pages. If your list is an image or PDF, use the other tabs.",
+  fr: "Fonctionne mieux avec des cartes publiées en texte. Si votre carte est une image ou un PDF, utilisez les autres onglets.",
+  de: "Funktioniert am besten mit Textseiten. Bei Bild- oder PDF-Karten bitte die anderen Tabs nutzen.",
+  it: "Funziona meglio con carte pubblicate in testo. Se la tua è immagine o PDF, usa gli altri tab.",
+  pt: "Funciona melhor com cartas publicadas em texto. Se for imagem ou PDF, use as outras opções.",
+};
+const NO_WINES_MSG: Record<Lang, string> = {
+  es: "No pudimos identificar vinos en el contenido proporcionado. Intenta con otro formato o revisa que el texto incluya nombres de vinos y precios.",
+  en: "We couldn't identify any wines in the content. Try another format or make sure the text includes wine names and prices.",
+  fr: "Nous n'avons pas pu identifier de vins dans le contenu. Essayez un autre format ou vérifiez que le texte contient noms de vins et prix.",
+  de: "Wir konnten keine Weine im Inhalt erkennen. Versuchen Sie ein anderes Format oder stellen Sie sicher, dass der Text Weinnamen und Preise enthält.",
+  it: "Non siamo riusciti a identificare vini nel contenuto. Prova un altro formato o verifica che il testo includa nomi di vini e prezzi.",
+  pt: "Não conseguimos identificar vinhos no conteúdo. Tente outro formato ou verifique que o texto inclui nomes de vinhos e preços.",
+};
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
@@ -32,7 +64,7 @@ const T: Record<Lang, any> = {
     country: "País del restaurante",
     tabUrl: "Pegar URL", tabText: "Pegar texto", tabFile: "Subir PDF",
     urlPh: "https://restaurante.com/carta-de-vinos",
-    textPh: "Pega aquí el contenido de tu carta…\n\nTINTOS\nRibera del Duero Reserva 2019 — 45€\nRioja Crianza 2021 — 28€",
+    textPh: "Ejemplo:\n\nTINTOS\nRibera del Duero Reserva 2019 — 45€\nRioja Crianza 2021 — 28€\nTempranillo Joven — 18€\n\nBLANCOS\nAlbariño Rías Baixas 2023 — 22€\nVerdejo Rueda — 16€\n\nCOPAS\nRioja Crianza — 6€\nAlbariño — 7€",
     fileLabel: "Selecciona PDF, JPG o PNG",
     fileHint: "Máx. 10 MB",
     cta: "Analizar mi carta",
@@ -71,7 +103,7 @@ const T: Record<Lang, any> = {
     country: "Restaurant country",
     tabUrl: "Paste URL", tabText: "Paste text", tabFile: "Upload PDF",
     urlPh: "https://restaurant.com/wine-list",
-    textPh: "Paste your wine list here…\n\nREDS\nRibera del Duero Reserva 2019 — €45\nRioja Crianza 2021 — €28",
+    textPh: "Example:\n\nREDS\nRibera del Duero Reserva 2019 — €45\nRioja Crianza 2021 — €28\nTempranillo Joven — €18\n\nWHITES\nAlbariño Rías Baixas 2023 — €22\nVerdejo Rueda — €16\n\nBY THE GLASS\nRioja Crianza — €6\nAlbariño — €7",
     fileLabel: "Select PDF, JPG or PNG",
     fileHint: "Max 10 MB",
     cta: "Analyse my list",
