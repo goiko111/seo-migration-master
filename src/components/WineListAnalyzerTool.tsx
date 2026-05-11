@@ -302,6 +302,13 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  const showInlineError = (message: string) => {
+    setErrorMsg(message);
+    window.setTimeout(() => {
+      document.getElementById("analyzer-inline-error")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 50);
+  };
+
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
   const slowTimer = useRef<number | null>(null);
@@ -324,9 +331,9 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
     if (loading) return;
 
     // Client validation
-    if (tab === "text" && text.trim().length < 50) { toast.error(t.errMin); return; }
-    if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { toast.error(t.errGeneric); return; }
-    if (tab === "file" && !file) { toast.error(t.fileLabel); return; }
+    if (tab === "text" && text.trim().length < 50) { showInlineError(t.errMin); return; }
+    if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { showInlineError(t.errGeneric); return; }
+    if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
 
     setLoading(true); setResult(null); setErrorMsg(null);
     const controller = new AbortController();
@@ -356,8 +363,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
       const data = await res.json();
       if (!res.ok || !data?.success) {
         const msg = data?.error || t.errGeneric;
-        setErrorMsg(msg);
-        toast.error(msg);
+        showInlineError(msg);
       } else {
         setResult(data as AnalysisResult);
         // Scroll into view
@@ -368,8 +374,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
     } catch (err: any) {
       clearTimeout(timeout);
       console.error(err);
-      setErrorMsg(t.errGeneric);
-      toast.error(t.errGeneric);
+      showInlineError(t.errGeneric);
     } finally {
       setLoading(false);
     }
@@ -452,7 +457,7 @@ export default function WineListAnalyzerTool({ defaultLang = "es" }: Props) {
 
           {/* Inline error (visible, no sticky overlap) */}
           {errorMsg && !loading && (
-            <div role="alert" className="flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
+            <div id="analyzer-inline-error" role="alert" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
               <AlertTriangle size={18} className="mt-0.5 shrink-0" />
               <p className="text-sm leading-relaxed">{errorMsg}</p>
             </div>

@@ -659,7 +659,7 @@ const App = () => (
       <TooltipProvider>
         <Suspense fallback={null}>
           <Toaster />
-          <Sonner />
+          <Sonner position="top-center" richColors />
         </Suspense>
         <BrowserRouter>
           <LanguageProvider>
