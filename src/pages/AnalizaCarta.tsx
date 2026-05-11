@@ -22,6 +22,7 @@ import QuickAnswer from "@/components/seo/QuickAnswer";
 import FAQSection from "@/components/seo/FAQSection";
 import StickyCTA from "@/components/StickyCTA";
 import { getFormI18n } from "@/components/ContactFormFields";
+import WineListAnalyzerTool from "@/components/WineListAnalyzerTool";
 import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 import StateField from "@/components/StateField";
 import { supabase } from "@/integrations/supabase/client";
