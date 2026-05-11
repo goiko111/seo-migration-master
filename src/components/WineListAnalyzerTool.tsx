@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
-  Lock, ExternalLink, Sparkles,
+  Lock, ExternalLink, Sparkles, Search, X, Star, Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,25 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
+import usePlacesAutocomplete from "use-places-autocomplete";
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
-
-const COUNTRIES = [
-  { code: "ES", flag: "🇪🇸" }, { code: "US", flag: "🇺🇸" }, { code: "UK", flag: "🇬🇧" },
-  { code: "FR", flag: "🇫🇷" }, { code: "MX", flag: "🇲🇽" }, { code: "IT", flag: "🇮🇹" },
-  { code: "DE", flag: "🇩🇪" }, { code: "CH", flag: "🇨🇭" }, { code: "AR", flag: "🇦🇷" },
-  { code: "CL", flag: "🇨🇱" }, { code: "CO", flag: "🇨🇴" }, { code: "BR", flag: "🇧🇷" },
-  { code: "PT", flag: "🇵🇹" }, { code: "NL", flag: "🇳🇱" }, { code: "BE", flag: "🇧🇪" },
-  { code: "AT", flag: "🇦🇹" },
-];
+const GOOGLE_MAPS_API_KEY = "AIzaSyBcqZoVnmhGY12S39puKR248cIACToSZ4A";
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
-
-// Map global language to default country code
-const LANG_TO_COUNTRY: Record<Lang, string> = {
-  es: "ES", en: "US", fr: "FR", de: "DE", it: "IT", pt: "PT",
-};
 // Short labels for mobile tabs
 const TAB_SHORT = { url: "URL", text: "Texto", file: "PDF" } as const;
 const TAB_SHORT_EN: Record<Lang, { url: string; text: string; file: string }> = {
