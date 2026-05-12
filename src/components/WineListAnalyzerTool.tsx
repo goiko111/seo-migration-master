@@ -432,6 +432,59 @@ function useGoogleMapsScript(): boolean {
   return ready;
 }
 
+type ValueProp = { title: string; desc: string };
+const VALUE_PROPS: Record<Lang, ValueProp[]> = {
+  es: [
+    { title: "Score global", desc: "Tu carta puntuada de 0 a 100 en márgenes, diversidad, estructura y precios." },
+    { title: "Márgenes por vino", desc: "Cada referencia con su margen estimado y comparada con el benchmark del mercado." },
+    { title: "Diversidad y huecos", desc: "Mapa completo: países, regiones y uvas. Qué te falta y qué te sobra." },
+    { title: "Problemas detectados", desc: "Precios anómalos, márgenes excesivos o bajos y desequilibrios en la carta." },
+    { title: "Estimación de negocio", desc: "Ticket medio de vino, ingresos estimados y potencial de mejora real." },
+    { title: "Recomendaciones", desc: "Acciones concretas para optimizar márgenes, equilibrar la carta y vender más." },
+  ],
+  en: [
+    { title: "Overall score", desc: "Your wine list rated 0–100 on margins, diversity, structure and pricing." },
+    { title: "Margins per wine", desc: "Every reference analysed with its estimated margin against market benchmarks." },
+    { title: "Diversity & gaps", desc: "Full map: countries, regions and grapes. What's missing and what's redundant." },
+    { title: "Issues detected", desc: "Price anomalies, margins too high or low, and imbalances in your list." },
+    { title: "Business estimates", desc: "Average wine ticket, projected revenue and real upside potential." },
+    { title: "Recommendations", desc: "Concrete actions to optimise margins, rebalance the list and sell more." },
+  ],
+  fr: [
+    { title: "Score global", desc: "Votre carte notée de 0 à 100 sur marges, diversité, structure et prix." },
+    { title: "Marges par vin", desc: "Chaque référence avec sa marge estimée comparée au benchmark du marché." },
+    { title: "Diversité et lacunes", desc: "Carte complète : pays, régions, cépages. Ce qui manque et ce qui est en trop." },
+    { title: "Problèmes détectés", desc: "Prix anormaux, marges excessives ou faibles, déséquilibres dans la carte." },
+    { title: "Estimation business", desc: "Ticket moyen vin, revenus estimés et potentiel d'amélioration réel." },
+    { title: "Recommandations", desc: "Actions concrètes pour optimiser les marges, équilibrer la carte et vendre plus." },
+  ],
+  de: [
+    { title: "Gesamtscore", desc: "Ihre Karte mit 0–100 Punkten zu Margen, Vielfalt, Struktur und Preisen." },
+    { title: "Margen pro Wein", desc: "Jede Referenz mit geschätzter Marge im Vergleich zum Marktbenchmark." },
+    { title: "Vielfalt & Lücken", desc: "Vollständige Karte: Länder, Regionen, Rebsorten. Was fehlt und was zu viel ist." },
+    { title: "Erkannte Probleme", desc: "Auffällige Preise, zu hohe oder niedrige Margen und Ungleichgewichte." },
+    { title: "Geschäftsprognose", desc: "Durchschnittlicher Wein-Ticket, geschätzter Umsatz und echtes Verbesserungspotenzial." },
+    { title: "Empfehlungen", desc: "Konkrete Aktionen zur Optimierung von Margen, Balance und Umsatz." },
+  ],
+  it: [
+    { title: "Punteggio globale", desc: "La tua carta valutata 0–100 su margini, diversità, struttura e prezzi." },
+    { title: "Margini per vino", desc: "Ogni referenza con il margine stimato confrontato con il benchmark di mercato." },
+    { title: "Diversità e gap", desc: "Mappa completa: paesi, regioni, uve. Cosa manca e cosa è in eccesso." },
+    { title: "Problemi rilevati", desc: "Prezzi anomali, margini eccessivi o bassi e squilibri nella carta." },
+    { title: "Stima di business", desc: "Ticket medio vino, ricavi stimati e potenziale reale di miglioramento." },
+    { title: "Raccomandazioni", desc: "Azioni concrete per ottimizzare margini, equilibrare la carta e vendere di più." },
+  ],
+  pt: [
+    { title: "Pontuação global", desc: "A sua carta avaliada de 0 a 100 em margens, diversidade, estrutura e preços." },
+    { title: "Margens por vinho", desc: "Cada referência com a sua margem estimada comparada com o benchmark de mercado." },
+    { title: "Diversidade e lacunas", desc: "Mapa completo: países, regiões e castas. O que falta e o que sobra." },
+    { title: "Problemas detetados", desc: "Preços anómalos, margens excessivas ou baixas e desequilíbrios na carta." },
+    { title: "Estimativa de negócio", desc: "Ticket médio de vinho, receitas estimadas e potencial real de melhoria." },
+    { title: "Recomendações", desc: "Ações concretas para otimizar margens, equilibrar a carta e vender mais." },
+  ],
+};
+const VALUE_PROP_ICONS = [BarChart3, CircleDollarSign, Wine, AlertTriangle, TrendingUp, Lightbulb] as const;
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
