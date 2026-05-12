@@ -7,7 +7,7 @@ import {
   TrendingUp, Users, Languages, Repeat, ShoppingCart, BadgeCheck,
   Shield, Calendar, Database, GitCompare, Bell, Zap,
   Building2, LineChart, Rocket, Target, Upload, QrCode, Printer, LifeBuoy,
-  Download, CheckCircle2, ChevronDown,
+  Download, CheckCircle2, ChevronDown, Smartphone, Tablet, Globe,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SEOHead from "@/components/SEOHead";
@@ -827,7 +827,7 @@ export default function Presentation() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {t.s12Steps.map((step, i) => {
-            const icons = [Upload, QrCode, Printer, LifeBuoy];
+            const icons = [Smartphone, Tablet, QrCode, Globe];
             const Icon = icons[i] || Calendar;
             return (
               <Reveal key={i} delay={i * 0.08}>
