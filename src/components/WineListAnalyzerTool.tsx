@@ -851,72 +851,78 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setUrlFailedInfo(null);
     setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
-    const controller = new AbortController();
-    // En modo async el POST responde rápido con analysisId, pero el Worker actual
-    // aún puede responder síncrono tras procesar el PDF (cartas grandes >60s).
-    // Mantenemos 120s para cubrir ambos casos sin abortar prematuramente.
-    const timeout = setTimeout(() => controller.abort(), 120000);
+    setPartial({});
+    pollAbortRef.current = { aborted: false };
+    const myAbortRef = pollAbortRef.current;
+
+    // Generate analysisId on the client so we can begin polling immediately,
+    // without waiting for the (slow) POST /v1/analyze response.
+    const clientAnalysisId = Math.random().toString(16).slice(2, 10);
+    currentAnalysisIdRef.current = clientAnalysisId;
 
     try {
-      let res: Response;
-      if (tab === "file" && file) {
-        const fd = new FormData();
-        fd.append("type", "file");
-        fd.append("file", file);
-        fd.append("lang", lang);
-        if (placeId) fd.append("placeId", placeId);
-        if (restaurantName) fd.append("restaurantName", restaurantName);
-        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd, signal: controller.signal });
-      } else {
-        const base: Record<string, any> = { lang };
-        if (placeId) base.placeId = placeId;
-        if (restaurantName) base.restaurantName = restaurantName;
-        const body = tab === "url"
-          ? { type: "url", url: url.trim(), ...base }
-          : { type: "text", text: text.trim(), ...base };
-        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-          signal: controller.signal,
-        });
-      }
-      clearTimeout(timeout);
-      const data = await res.json().catch(() => ({}));
+      // Fire POST in parallel (no await on body unless it returns early with
+      // rate-limit / registration / sync payload).
+      const postPromise: Promise<any> = (async () => {
+        try {
+          let res: Response;
+          if (tab === "file" && file) {
+            const fd = new FormData();
+            fd.append("type", "file");
+            fd.append("file", file);
+            fd.append("lang", lang);
+            fd.append("analysisId", clientAnalysisId);
+            if (placeId) fd.append("placeId", placeId);
+            if (restaurantName) fd.append("restaurantName", restaurantName);
+            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd });
+          } else {
+            const base: Record<string, any> = { lang, analysisId: clientAnalysisId };
+            if (placeId) base.placeId = placeId;
+            if (restaurantName) base.restaurantName = restaurantName;
+            const body = tab === "url"
+              ? { type: "url", url: url.trim(), ...base }
+              : { type: "text", text: text.trim(), ...base };
+            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            });
+          }
+          const data = await res.json().catch(() => ({}));
+          return { res, data };
+        } catch (err) {
+          return { error: err };
+        }
+      })();
 
-      // Freemium gate: backend asks for registration to keep analyzing
-      if (data?.rateLimited && data?.requiresRegistration) {
-        setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
-        return;
-      }
-      // Hard daily limit (HTTP 429 or rateLimited without registration path)
-      if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
-        setRateLimitMsg(data?.message || t.errGeneric);
-        return;
-      }
+      // React to early POST outcomes (rate-limit, registration, sync payload).
+      postPromise.then((out: any) => {
+        if (!out || myAbortRef.aborted) return;
+        const { res, data } = out;
+        if (!res || !data) return;
+        if (data?.rateLimited && data?.requiresRegistration) {
+          myAbortRef.aborted = true;
+          setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
+          return;
+        }
+        if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
+          myAbortRef.aborted = true;
+          setRateLimitMsg(data?.message || t.errGeneric);
+          return;
+        }
+        // Backwards-compat: full sync payload (no async flow)
+        if (data?.success && data?.analysisId && data?.status === undefined) {
+          myAbortRef.aborted = true;
+          handleFinalPayload(data);
+        }
+      }).catch(() => {});
 
-      if (!res.ok || !data?.success) {
-        const apiErr: string = (data?.error || "").toString();
-        let msg = apiErr || t.errGeneric;
-        if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
-        showInlineError(msg);
-        return;
-      }
-
-      // Backwards-compat: if API returned the full payload synchronously, handle it.
-      if (!data.analysisId || data.status === undefined) {
-        handleFinalPayload(data);
-        return;
-      }
-
-      currentAnalysisIdRef.current = data.analysisId;
-      // Async flow: poll /v1/status/{id} until terminal state
-      const finalPayload = await pollStatus(data.analysisId);
-      handleFinalPayload(finalPayload);
+      // Start polling immediately with the client-generated analysisId.
+      const finalPayload = await pollStatus(clientAnalysisId, myAbortRef);
+      if (!myAbortRef.aborted && finalPayload) handleFinalPayload(finalPayload);
     } catch (err: any) {
-      clearTimeout(timeout);
       console.error(err);
-      showInlineError(t.errGeneric);
+      if (!myAbortRef.aborted) showInlineError(t.errGeneric);
     } finally {
       setLoading(false);
       setPollLabel(null); setPollProgress(null);
@@ -925,16 +931,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   };
 
   // Poll /v1/status/{id} every 2.5s up to ~5 min
-  const pollStatus = async (id: string): Promise<any> => {
+  const pollStatus = async (id: string, abortRef?: { aborted: boolean }): Promise<any> => {
     const startedAt = Date.now();
     const MAX_MS = 5 * 60 * 1000;
     while (Date.now() - startedAt < MAX_MS) {
-      await new Promise((r) => setTimeout(r, 2500));
+      if (abortRef?.aborted) return null;
+      await new Promise((r) => setTimeout(r, 2000));
+      if (abortRef?.aborted) return null;
       try {
         const r = await fetch(withAdminKey(`${API_BASE}/v1/status/${encodeURIComponent(id)}`));
         const d = await r.json().catch(() => ({}));
         if (typeof d?.progress === "number") setPollProgress(d.progress);
         if (typeof d?.stepLabel === "string") setPollLabel(d.stepLabel);
+        if (d?.partial && typeof d.partial === "object") {
+          setPartial((prev) => ({ ...prev, ...d.partial }));
+        }
         const status = d?.status;
         if (status && status !== "processing") {
           // Build a unified payload for handleFinalPayload
