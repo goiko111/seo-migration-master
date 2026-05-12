@@ -563,6 +563,7 @@ const T: Record<Lang, any> = {
     unlocking: "Generating…",
     successTitle: "Request sent!",
     successText: "We'll contact you within 48h with your personalised report.",
+    openReport: "Open full report",
     errMin: "Paste at least 50 characters of your list.",
     errEmail: "Enter a valid email.",
     errGeneric: "We couldn't analyse the list. Check the URL or try pasting the text.",
