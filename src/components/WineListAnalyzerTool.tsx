@@ -1136,19 +1136,15 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                 </button>
               </div>
             ) : (
-              <div className="relative rounded-lg ring-1 ring-accent/40 focus-within:ring-2 focus-within:ring-accent transition-shadow shadow-sm bg-background">
-                <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
-                <PlacesSearchInput
-                  ready={placesReady}
-                  placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
-                  className="h-12 pl-10 text-base border-0 bg-transparent focus-visible:ring-0"
-                  onSelect={(s) => {
-                    setPlaceId(s.place_id);
-                    setRestaurantName(s.structured_formatting?.main_text || s.description);
-                    setRestaurantAddress(s.structured_formatting?.secondary_text || null);
-                  }}
-                />
-              </div>
+              <PlacesSearchInput
+                ready={placesReady}
+                placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
+                onSelect={(s) => {
+                  setPlaceId(s.place_id);
+                  setRestaurantName(s.structured_formatting?.main_text || s.description);
+                  setRestaurantAddress(s.structured_formatting?.secondary_text || null);
+                }}
+              />
             )}
             <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
             {!placeId && (
@@ -1746,17 +1742,17 @@ function PlacesSearchInput({
 
   return (
     <div ref={wrapRef} className="relative">
-      <div className="relative">
-        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-        <Input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={() => setOpen(true)}
-          placeholder={placeholder}
-          className="h-12 pl-10"
-          autoComplete="off"
-        />
-      </div>
+       <div className="relative rounded-lg ring-1 ring-accent/40 focus-within:ring-2 focus-within:ring-accent transition-shadow shadow-sm bg-background">
+         <Search size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
+         <Input
+           value={value}
+           onChange={(e) => onChange(e.target.value)}
+           onFocus={() => setOpen(true)}
+           placeholder={placeholder}
+           className="h-14 pl-11 text-base border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-foreground/50"
+           autoComplete="off"
+         />
+       </div>
       {open && data.length > 0 && (
         <ul className="absolute z-30 left-0 right-0 mt-1 bg-popover border border-border rounded-md shadow-lg max-h-72 overflow-auto">
           {data.map((s) => (
