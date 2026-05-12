@@ -17,10 +17,10 @@ const COPY: Record<string, {
   restaurant: string;
   phone: string;
   phoneOpt: string;
-  upload: string;
-  uploadHint: string;
-  uploadRequired: string;
-  uploadError: string;
+  upload?: string;
+  uploadHint?: string;
+  uploadRequired?: string;
+  uploadError?: string;
   cta: string;
   sending: string;
   privacy: string;
@@ -166,80 +166,38 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
   const { toast } = useToast();
   const t = COPY[lang] || COPY.es;
   const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [fileError, setFileError] = useState(false);
-
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0] || null;
-    if (!f) {
-      setFile(null);
-      return;
-    }
-    if (!ALLOWED_TYPES.includes(f.type) || f.size > MAX_BYTES) {
-      toast({ title: t.errorTitle, description: t.uploadError, variant: "destructive" });
-      e.target.value = "";
-      setFile(null);
-      return;
-    }
-    setFile(f);
-    setFileError(false);
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
-
-    if (!file) {
-      setFileError(true);
-      toast({ title: t.errorTitle, description: t.uploadRequired, variant: "destructive" });
-      return;
-    }
 
     setSubmitting(true);
     const fd = new FormData(e.currentTarget);
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const restaurant = String(fd.get("restaurant") || "").trim();
-    const phoneNumber = String(fd.get("phone") || "").trim();
-    const prefixCode = String(fd.get("phone_prefix") || "").trim();
-    const dial = PREFIXES.find((p) => p.code === prefixCode)?.dial || "";
-    const phone = phoneNumber ? `${dial} ${phoneNumber}`.trim() : null;
+    const toolSlug = getToolSlugFromPath(window.location.pathname);
 
     try {
-      // Upload required carta
-      const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
-      const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-      const path = `${new Date().toISOString().slice(0, 10)}/${safeName}`;
-      const { error: upErr } = await supabase.storage
-        .from("cartas-vinos")
-        .upload(path, file, { contentType: file.type, upsert: false });
-      let carta_url: string | null = null;
-      if (!upErr) {
-        const { data } = supabase.storage.from("cartas-vinos").getPublicUrl(path);
-        carta_url = data.publicUrl;
-      } else {
-        console.error("Upload error:", upErr);
-      }
-
-      const { error } = await supabase.from("contact_leads").insert({
+      const { error } = await supabase.from("freemium_leads").insert({
         name,
         email,
         restaurant,
-        phone,
-        carta_url,
-        form_type: "freemium_gate",
+        tool_slug: toolSlug,
       });
       if (error) throw error;
 
-      notifyLead({
-        name,
-        email,
-        restaurant,
-        phone,
-        carta_url,
-        menu_link: carta_url,
-        form_type: "freemium_gate",
-      });
+      // Best-effort notification — don't fail the unlock if it errors
+      try {
+        notifyLead({
+          name,
+          email,
+          restaurant,
+          form_type: "freemium_gate",
+        });
+      } catch (notifyErr) {
+        console.warn("notifyLead failed:", notifyErr);
+      }
 
       unlockFreemium();
       toast({ title: t.successTitle, description: t.successMsg });
@@ -310,48 +268,6 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
             <label htmlFor="gate_restaurant" className="text-xs font-medium text-muted-foreground">{t.restaurant}</label>
             <input id="gate_restaurant" name="restaurant" type="text" required maxLength={150}
               className="mt-1 w-full h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-wine/40" />
-          </div>
-          <div>
-            <label htmlFor="phone" className="text-xs font-medium text-muted-foreground">
-              {t.phone} <span className="text-muted-foreground/60">{t.phoneOpt}</span>
-            </label>
-            <PhoneInput native required={false} />
-          </div>
-
-          <div>
-            <label
-              htmlFor="gate_carta"
-              className={`flex items-center justify-center gap-2 w-full h-11 rounded-md border-2 border-dashed px-3 text-sm font-medium cursor-pointer transition-colors ${
-                file
-                  ? "border-wine/50 bg-wine/10 text-wine-light"
-                  : fileError
-                    ? "border-destructive/60 bg-destructive/5 text-destructive"
-                    : "border-wine/40 bg-wine/5 hover:bg-wine/10 text-wine-light"
-              }`}
-            >
-              {file ? (
-                <>
-                  <FileCheck2 size={16} />
-                  <span className="truncate max-w-[80%]">{file.name}</span>
-                </>
-              ) : (
-                <>
-                  <Upload size={16} />
-                  <span>{t.upload} *</span>
-                </>
-              )}
-            </label>
-            <input
-              id="gate_carta"
-              name="carta"
-              type="file"
-              accept="application/pdf,image/jpeg,image/png"
-              onChange={onFileChange}
-              className="sr-only"
-            />
-            <p className={`text-[10px] mt-1 ${fileError ? "text-destructive" : "text-muted-foreground/60"}`}>
-              {fileError ? t.uploadRequired : t.uploadHint}
-            </p>
           </div>
 
           <button
