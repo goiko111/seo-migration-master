@@ -308,6 +308,22 @@ export default function Presentation() {
     return () => document.removeEventListener("fullscreenchange", onChange);
   }, []);
 
+  /* Scroll arrow visibility */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      if (el.scrollTop > 100) setShowScrollArrow(false);
+      else setShowScrollArrow(true);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToNextSlide = useCallback(() => {
+    containerRef.current?.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  }, []);
+
   const contactPath = useMemo(() => {
     const map: Record<string, string> = {
       es: "/contacto", en: "/en/contact", fr: "/fr/contact",
