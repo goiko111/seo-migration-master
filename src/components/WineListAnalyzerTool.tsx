@@ -832,7 +832,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Google Places — restaurant identification (optional)
   const [placeId, setPlaceId] = useState<string | null>(null);
@@ -907,7 +908,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     // Client validation
     if (tab === "text" && text.trim().length < 50) { showInlineError(t.errMin); return; }
     if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { showInlineError(t.errGeneric); return; }
-    if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
+    if (tab === "file" && files.length === 0) { showInlineError(t.fileLabel); return; }
     await runAnalysis();
   };
 
@@ -931,15 +932,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       const postPromise: Promise<any> = (async () => {
         try {
           let res: Response;
-          if (tab === "file" && file) {
+          if (tab === "file" && files.length > 0) {
             const fd = new FormData();
             fd.append("type", "file");
-            fd.append("file", file);
+            for (const f of files) fd.append("file", f);
             fd.append("lang", lang);
             fd.append("analysisId", clientAnalysisId);
             if (placeId) fd.append("placeId", placeId);
             if (restaurantName) fd.append("restaurantName", restaurantName);
-            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd });
+            // Fire-and-forget: do NOT await; polling drives the UI.
+            fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd })
+              .catch((err) => console.error("POST failed:", err));
+            return { res: null, data: null };
           } else {
             const base: Record<string, any> = { lang, analysisId: clientAnalysisId };
             if (placeId) base.placeId = placeId;
