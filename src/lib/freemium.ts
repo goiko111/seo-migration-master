@@ -88,6 +88,10 @@ export function trackResourceDownloaded(slug: string) {
  * Resources: gated when user already downloaded >= LIMIT distinct resources and the new one is different.
  */
 export function shouldGateTool(slug: string): boolean {
+  if (isDevMode()) {
+    warnDevBypass();
+    return false;
+  }
   if (isUnlocked()) return false;
   const used = getToolsUsed();
   if (used.includes(slug)) return false;
@@ -95,6 +99,10 @@ export function shouldGateTool(slug: string): boolean {
 }
 
 export function shouldGateResource(slug: string): boolean {
+  if (isDevMode()) {
+    warnDevBypass();
+    return false;
+  }
   if (isUnlocked()) return false;
   const used = getResourcesDownloaded();
   if (used.includes(slug)) return false;
