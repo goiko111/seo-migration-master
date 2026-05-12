@@ -1024,7 +1024,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           if (status === "url_failed") {
             return { success: true, urlFailed: true, analysisId: id, ...(d.result || {}) };
           }
-          if (status === "pending_contact") {
+          if (status === "pending_contact" || status === "url_captured") {
             return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "error") {
