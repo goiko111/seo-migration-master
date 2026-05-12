@@ -125,6 +125,7 @@ const FAQs = lazy(() => import("./pages/FAQs"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const CursosVino = lazy(() => import("./pages/CursosVino"));
 const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
+const Presentation = lazy(() => import("./pages/Presentation"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
@@ -254,6 +255,12 @@ const esRoutes = (
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     <Route path="/comparativas" element={<Comparativas />} />
     <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
+    <Route path="/presentacion" element={<Presentation />} />
+    <Route path="/en/presentation" element={<Presentation />} />
+    <Route path="/fr/presentation" element={<Presentation />} />
+    <Route path="/it/presentazione" element={<Presentation />} />
+    <Route path="/de/praesentation" element={<Presentation />} />
+    <Route path="/pt/apresentacao" element={<Presentation />} />
   </>
 );
 

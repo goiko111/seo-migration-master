@@ -113,6 +113,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/en/guides/wine-pairing-strategy-restaurants",
     "/problemas/carta-de-vinos-no-vende": "/en/problems/wine-list-not-selling",
     "/cuantos-vinos-en-una-carta-de-restaurante": "/en/how-many-wines-restaurant-list",
+    "/presentacion": "/en/presentation",
   },
   it: {
     "/": "/it",
@@ -188,6 +189,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/it/guide/strategia-abbinamento-vino-ristorante",
     "/problemas/carta-de-vinos-no-vende": "/it/problemi/carta-vini-non-vende",
     "/cuantos-vinos-en-una-carta-de-restaurante": "/it/quanti-vini-carta-ristorante",
+    "/presentacion": "/it/presentazione",
   },
   fr: {
     "/": "/fr",
@@ -263,6 +265,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/guias/como-crear-una-estrategia-de-maridaje-en-restauracion": "/fr/guides/strategie-accords-mets-vins-restaurant",
     "/problemas/carta-de-vinos-no-vende": "/fr/problemes/carte-des-vins-ne-vend-pas",
     "/cuantos-vinos-en-una-carta-de-restaurante": "/fr/combien-de-vins-carte-restaurant",
+    "/presentacion": "/fr/presentation",
   },
   de: {
     "/": "/de",
@@ -338,6 +341,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/ejemplos-carta-vinos": "/de/weinkarten-beispiele",
     "/problemas/carta-de-vinos-no-vende": "/de/probleme/weinkarte-verkauft-nicht",
     "/cuantos-vinos-en-una-carta-de-restaurante": "/de/wie-viele-weine-auf-der-restaurantkarte",
+    "/presentacion": "/de/praesentation",
   },
   pt: {
     "/": "/pt",
@@ -413,6 +417,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/ejemplos-carta-vinos": "/pt/exemplos-carta-vinhos",
     "/problemas/carta-de-vinos-no-vende": "/pt/problemas/carta-vinhos-nao-vende",
     "/cuantos-vinos-en-una-carta-de-restaurante": "/pt/quantos-vinhos-carta-restaurante",
+    "/presentacion": "/pt/apresentacao",
   },
 };
 
