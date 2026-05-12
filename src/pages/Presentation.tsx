@@ -124,13 +124,13 @@ async function generatePresentationPdf(filename: string) {
   }
 }
 
-import heroApp from "@/assets/presentation/hero-app.png";
-import wineCard from "@/assets/presentation/wine-card.png";
+import heroApp from "@/assets/presentation/hero-app.webp";
+import wineCard from "@/assets/presentation/wine-card.webp";
 import dashboardLaptop from "@/assets/presentation/dashboard-laptop.jpg";
 import tastingNotes from "@/assets/presentation/tasting-notes.png";
-import pairing from "@/assets/presentation/pairing.png";
+import pairing from "@/assets/presentation/pairing.webp";
 import bigData from "@/assets/presentation/rendimiento-carta.webp";
-import comparator from "@/assets/presentation/comparator.png";
+import comparator from "@/assets/presentation/comparator.webp";
 import stockManagement from "@/assets/presentation/stock-management.png";
 import clientsGrid from "@/assets/presentation/clients-grid.jpg";
 
