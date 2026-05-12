@@ -224,6 +224,33 @@ export type Database = {
         }
         Relationships: []
       }
+      freemium_leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          restaurant: string
+          tool_slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          restaurant: string
+          tool_slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          restaurant?: string
+          tool_slug?: string | null
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           area_of_interest: string | null
