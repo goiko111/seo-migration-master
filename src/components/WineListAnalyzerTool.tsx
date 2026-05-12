@@ -809,8 +809,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
     const controller = new AbortController();
-    // POST returns immediately with an analysisId; polling does the waiting.
-    const timeout = setTimeout(() => controller.abort(), 30000);
+    // En modo async el POST responde rápido con analysisId, pero el Worker actual
+    // aún puede responder síncrono tras procesar el PDF (cartas grandes >60s).
+    // Mantenemos 120s para cubrir ambos casos sin abortar prematuramente.
+    const timeout = setTimeout(() => controller.abort(), 120000);
 
     try {
       let res: Response;
