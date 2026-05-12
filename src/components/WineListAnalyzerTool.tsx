@@ -1194,7 +1194,14 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
               {result.pendingContact ? (
-                <PendingContactView lang={lang} message={(result as any).message} analysisId={result.analysisId} t={t} />
+                <PendingContactView
+                  lang={lang}
+                  message={(result as any).message}
+                  analysisId={result.analysisId}
+                  preview={(result as any).preview}
+                  emailConfirmation={(result as any).emailConfirmation}
+                  t={t}
+                />
               ) : (
                 <ResultsView result={result} t={t} lang={lang} />
               )}
