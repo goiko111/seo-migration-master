@@ -1652,6 +1652,10 @@ function RegistrationGateModal({
         toast.error(data?.message || data?.error || t.errGeneric);
         return;
       }
+      notifyAnalyzerLead({
+        name, email, phone, restaurant,
+        analysisId: null, variant: "registration", lang,
+      });
       try {
         localStorage.setItem("winerim_registered", "1");
         localStorage.setItem("winerim_user", JSON.stringify({ name, email }));
