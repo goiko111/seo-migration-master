@@ -951,14 +951,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             const body = tab === "url"
               ? { type: "url", url: url.trim(), ...base }
               : { type: "text", text: text.trim(), ...base };
-            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
+            // Fire-and-forget for text/url too (v5): the POST can take ~50s on
+            // the backend; we never want it to block the UI. Polling drives
+            // everything, including rate-limit / registration surfacing via
+            // the status endpoint.
+            fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
-            });
+            }).catch((err) => console.error("POST failed:", err));
+            return { res: null, data: null };
           }
-          const data = await res.json().catch(() => ({}));
-          return { res, data };
+          return { res: null, data: null };
         } catch (err) {
           return { error: err };
         }
