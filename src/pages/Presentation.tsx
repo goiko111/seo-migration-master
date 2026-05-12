@@ -127,11 +127,11 @@ async function generatePresentationPdf(filename: string) {
 import heroApp from "@/assets/presentation/hero-app.webp";
 import wineCard from "@/assets/presentation/wine-card.webp";
 import dashboardLaptop from "@/assets/presentation/dashboard-laptop.jpg";
-import tastingNotes from "@/assets/presentation/tasting-notes.png";
+import tastingNotes from "@/assets/presentation/tasting-notes.webp";
 import pairing from "@/assets/presentation/pairing.webp";
 import bigData from "@/assets/presentation/rendimiento-carta.webp";
 import comparator from "@/assets/presentation/comparator.webp";
-import stockManagement from "@/assets/presentation/stock-management.png";
+import stockManagement from "@/assets/presentation/stock-management.webp";
 import clientsGrid from "@/assets/presentation/clients-grid.jpg";
 
 /* ─── Layout primitives ─── */
