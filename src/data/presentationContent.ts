@@ -94,6 +94,19 @@ export interface PresentationContent {
   s13Subtitle: string;
   s13Quote: string;
   s13QuoteAuthor: string;
+  // Slide 13b — Pricing
+  sPricingEyebrow: string;
+  sPricingTitle: string;
+  sPricingSubtitle: string;
+  sPricingPlans: {
+    name: string;
+    tagline: string;
+    priceLabel: string;
+    features: string[];
+    cta: string;
+    highlight?: boolean;
+  }[];
+  sPricingFootnote: string;
   // Slide 14 — CTA
   s14Eyebrow: string;
   s14Title: string;
@@ -239,6 +252,51 @@ const es: PresentationContent = {
   s13Subtitle: "Estrellas Michelin, grupos hoteleros y referentes de hospitalidad usan Winerim cada día.",
   s13Quote: "Lo único que nos diferencia de la competencia es que nosotros te hacemos ganar dinero.",
   s13QuoteAuthor: "Equipo Winerim",
+  sPricingEyebrow: "Planes",
+  sPricingTitle: "Una plataforma, tres formas de empezar",
+  sPricingSubtitle: "Cada restaurante o grupo elige el plan según su tamaño y su ambición. Precios siempre adaptados a tu realidad: te lo cotizamos en 24 h.",
+  sPricingPlans: [
+    {
+      name: "Essential",
+      tagline: "Restaurantes con carta digital lista para vender más vino.",
+      priceLabel: "A consultar",
+      features: [
+        "Carta digital multilingüe con QR",
+        "Notas de cata y maridaje IA",
+        "Comparador y recomendador",
+        "Soporte y actualizaciones incluidas",
+      ],
+      cta: "Solicitar propuesta",
+    },
+    {
+      name: "Pro",
+      tagline: "Restaurantes que quieren convertir la carta en motor de rentabilidad.",
+      priceLabel: "A consultar",
+      features: [
+        "Todo Essential",
+        "Gestión de stock en tiempo real",
+        "Big Data y analítica de bodega",
+        "Pricing, márgenes y vino por copa",
+        "Decision Center y alertas",
+      ],
+      cta: "Solicitar propuesta",
+      highlight: true,
+    },
+    {
+      name: "Grupos",
+      tagline: "Grupos de restauración multi-local con control central y ROI medible.",
+      priceLabel: "A consultar",
+      features: [
+        "Todo Pro en cada local",
+        "Backoffice multi-local centralizado",
+        "Benchmarking entre restaurantes",
+        "Winerim Supply (compras inteligentes)",
+        "Onboarding y CSM dedicado",
+      ],
+      cta: "Hablar con ventas",
+    },
+  ],
+  sPricingFootnote: "Sin permanencia. Implantación incluida. Te enviamos una propuesta personalizada según número de referencias y locales.",
   s14Eyebrow: "¿Hablamos?",
   s14Title: "¿Ribera, Rioja o Winerim?",
   s14Highlight1: "Convierte la elección del vino en una experiencia emocionante, intuitiva y rentable.",
@@ -383,6 +441,51 @@ const en: PresentationContent = {
   s13Subtitle: "Michelin stars, hotel groups and hospitality leaders use Winerim every day.",
   s13Quote: "The only thing that sets us apart from the competition is that we make you money.",
   s13QuoteAuthor: "Winerim team",
+  sPricingEyebrow: "Plans",
+  sPricingTitle: "One platform, three ways to start",
+  sPricingSubtitle: "Every restaurant or group picks the plan that fits its size and ambition. Pricing is always tailored to your reality — we quote you in 24h.",
+  sPricingPlans: [
+    {
+      name: "Essential",
+      tagline: "Restaurants ready to turn a digital list into more wine sales.",
+      priceLabel: "On request",
+      features: [
+        "Multilingual digital list with QR",
+        "AI tasting notes and pairing",
+        "Wine comparator and advisor",
+        "Support and updates included",
+      ],
+      cta: "Request a quote",
+    },
+    {
+      name: "Pro",
+      tagline: "Restaurants turning the wine list into a profitability engine.",
+      priceLabel: "On request",
+      features: [
+        "Everything in Essential",
+        "Real-time stock management",
+        "Big Data and cellar analytics",
+        "Pricing, margins and by-the-glass",
+        "Decision Center and alerts",
+      ],
+      cta: "Request a quote",
+      highlight: true,
+    },
+    {
+      name: "Groups",
+      tagline: "Multi-unit hospitality groups with central control and measurable ROI.",
+      priceLabel: "On request",
+      features: [
+        "Everything in Pro at each venue",
+        "Centralized multi-unit backoffice",
+        "Cross-venue benchmarking",
+        "Winerim Supply (smart purchasing)",
+        "Dedicated onboarding and CSM",
+      ],
+      cta: "Talk to sales",
+    },
+  ],
+  sPricingFootnote: "No lock-in. Implementation included. We send a tailored proposal based on number of references and venues.",
   s14Eyebrow: "Let's talk",
   s14Title: "Ribera, Rioja or Winerim?",
   s14Highlight1: "Turn wine selection into an exciting, intuitive and profitable experience.",
@@ -418,6 +521,10 @@ const fr: PresentationContent = {
   s4ColRestaurantBody: "Contrôle total sur l'offre, le stock et les marges. Décisions appuyées par des données réelles, pas l'intuition.",
   s11Title: "Pensé pour les groupes de restauration",
   s11Subtitle: "Une seule couche d'intelligence pour tous vos établissements, sans perdre leur personnalité.",
+  sPricingEyebrow: "Formules",
+  sPricingTitle: "Une plateforme, trois façons de commencer",
+  sPricingSubtitle: "Chaque restaurant ou groupe choisit la formule adaptée à sa taille. Tarifs toujours sur mesure : devis en 24 h.",
+  sPricingFootnote: "Sans engagement. Implémentation incluse. Proposition personnalisée selon le nombre de références et d'établissements.",
   s14Title: "Bordeaux, Bourgogne ou Winerim ?",
   s14CtaPrimary: "Réserver une démo",
   s14CtaSecondary: "Partager cette présentation",
@@ -446,6 +553,10 @@ const it: PresentationContent = {
   s4ColRestaurantTitle: "Per il ristorante",
   s4ColRestaurantBody: "Controllo totale su offerta, stock e margini. Decisioni basate su dati reali, non sull'intuito.",
   s11Title: "Pensato per i gruppi di ristorazione",
+  sPricingEyebrow: "Piani",
+  sPricingTitle: "Una piattaforma, tre modi per iniziare",
+  sPricingSubtitle: "Ogni ristorante o gruppo sceglie il piano in base alla propria dimensione. Prezzi sempre su misura: preventivo in 24 h.",
+  sPricingFootnote: "Nessun vincolo. Implementazione inclusa. Proposta personalizzata in base a referenze e locali.",
   s14Title: "Toscana, Piemonte o Winerim?",
   s14CtaPrimary: "Prenota una demo",
   s14CtaSecondary: "Condividi questa presentazione",
@@ -474,6 +585,10 @@ const de: PresentationContent = {
   s4ColRestaurantTitle: "Für das Restaurant",
   s4ColRestaurantBody: "Volle Kontrolle über Angebot, Bestand und Margen. Entscheidungen auf Basis echter Daten, nicht Intuition.",
   s11Title: "Gemacht für Gastronomiegruppen",
+  sPricingEyebrow: "Pläne",
+  sPricingTitle: "Eine Plattform, drei Einstiege",
+  sPricingSubtitle: "Jedes Restaurant oder jede Gruppe wählt den passenden Plan. Preise immer maßgeschneidert – Angebot in 24 h.",
+  sPricingFootnote: "Keine Vertragsbindung. Implementierung inklusive. Individuelles Angebot je nach Referenzen und Standorten.",
   s14Title: "Rheingau, Mosel oder Winerim?",
   s14CtaPrimary: "Demo buchen",
   s14CtaSecondary: "Diese Präsentation teilen",
@@ -502,6 +617,10 @@ const pt: PresentationContent = {
   s4ColRestaurantTitle: "Para o restaurante",
   s4ColRestaurantBody: "Controlo total sobre oferta, stock e margens. Decisões baseadas em dados reais, não em intuição.",
   s11Title: "Pensado para grupos de restauração",
+  sPricingEyebrow: "Planos",
+  sPricingTitle: "Uma plataforma, três formas de começar",
+  sPricingSubtitle: "Cada restaurante ou grupo escolhe o plano à sua medida. Preços sempre adaptados: orçamento em 24 h.",
+  sPricingFootnote: "Sem permanência. Implementação incluída. Proposta personalizada conforme referências e locais.",
   s14Title: "Douro, Alentejo ou Winerim?",
   s14CtaPrimary: "Agendar demo",
   s14CtaSecondary: "Partilhar apresentação",

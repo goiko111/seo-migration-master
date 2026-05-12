@@ -7,7 +7,7 @@ import {
   TrendingUp, Users, Languages, Repeat, ShoppingCart, BadgeCheck,
   Shield, Calendar, Database, GitCompare, Bell, Zap,
   Building2, LineChart, Rocket, Target, Upload, QrCode, Printer, LifeBuoy,
-  Download,
+  Download, CheckCircle2,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SEOHead from "@/components/SEOHead";
@@ -833,6 +833,72 @@ export default function Presentation() {
             <p className="font-heading text-xl md:text-2xl italic text-cream/90">"{t.s13Quote}"</p>
             <footer className="mt-3 text-sm text-cream/60">— {t.s13QuoteAuthor}</footer>
           </blockquote>
+        </Reveal>
+      </SlideShell>
+
+      {/* ──────── SLIDE 14 — CTA ──────── */}
+      {/* ──────── SLIDE 13b — PRICING ──────── */}
+      <SlideShell bg="cream">
+        <div className="text-center mb-10 max-w-3xl mx-auto">
+          <Reveal>
+            <Eyebrow>{t.sPricingEyebrow}</Eyebrow>
+            <SlideTitle className="text-wine-dark">{t.sPricingTitle}</SlideTitle>
+            <p className="text-wine-dark/75 text-lg">{t.sPricingSubtitle}</p>
+          </Reveal>
+        </div>
+        <div className="grid md:grid-cols-3 gap-5">
+          {t.sPricingPlans.map((plan, i) => (
+            <Reveal key={i} delay={i * 0.08}>
+              <div
+                className={`relative h-full rounded-2xl p-6 flex flex-col border ${
+                  plan.highlight
+                    ? "bg-wine text-cream border-wine shadow-xl"
+                    : "bg-white text-wine-dark border-wine-dark/10 shadow-sm"
+                }`}
+              >
+                {plan.highlight && (
+                  <span className="absolute -top-3 right-4 px-3 py-1 rounded-full bg-gold text-wine-dark text-[10px] font-bold uppercase tracking-wider">
+                    Recomendado
+                  </span>
+                )}
+                <h3 className="font-heading text-2xl font-bold mb-1">{plan.name}</h3>
+                <p className={`text-sm mb-5 ${plan.highlight ? "text-cream/80" : "text-wine-dark/70"}`}>
+                  {plan.tagline}
+                </p>
+                <div className={`mb-5 pb-5 border-b ${plan.highlight ? "border-cream/20" : "border-wine-dark/10"}`}>
+                  <span className="font-heading text-3xl font-bold">{plan.priceLabel}</span>
+                </div>
+                <ul className="space-y-2.5 mb-6 flex-1">
+                  {plan.features.map((f, j) => (
+                    <li key={j} className="flex gap-2 text-sm leading-snug">
+                      <CheckCircle2
+                        className={`h-4 w-4 mt-0.5 shrink-0 ${plan.highlight ? "text-gold" : "text-wine"}`}
+                      />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  asChild
+                  size="sm"
+                  className={
+                    plan.highlight
+                      ? "bg-cream text-wine hover:bg-cream/90"
+                      : "bg-wine text-cream hover:bg-wine-light"
+                  }
+                >
+                  <Link to={contactPath}>
+                    {plan.cta} <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={0.3}>
+          <p className="mt-8 text-center text-sm text-wine-dark/60 max-w-2xl mx-auto">
+            {t.sPricingFootnote}
+          </p>
         </Reveal>
       </SlideShell>
 
