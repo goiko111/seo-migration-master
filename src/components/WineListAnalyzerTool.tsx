@@ -43,6 +43,9 @@ function notifyAnalyzerLead(payload: {
     resource: payload.analysisId ? `analysis:${payload.analysisId}` : "wine-list-analyzer",
     lang: payload.lang,
     variant: payload.variant,
+    // Tag explicit category so Autopilot/Connect can route this lead as "analisis"
+    lead_type: "analisis",
+    lead_category: "analisis",
   } as Record<string, string | null>);
 }
 
@@ -715,6 +718,44 @@ interface AnalysisResult {
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
 const STATUS_DOT: Record<SemaphoreStatus, string> = { red: "bg-red-500", yellow: "bg-amber-500", green: "bg-emerald-500" };
 
+/* ─── Partial (progressive) data emitted by /v1/status while processing ─── */
+interface PartialData {
+  restaurant?: {
+    name?: string;
+    address?: string;
+    rating?: number;
+    totalRatings?: number;
+    priceLevel?: number;
+  };
+  wines?: {
+    total?: number;
+    categories?: Record<string, number>;
+    priceRange?: { min: number; max: number; currency: string };
+  };
+  analysis?: {
+    totalWines?: number;
+    uniqueCountries?: number;
+    uniqueRegions?: number;
+    uniqueGrapes?: number;
+    byColor?: Record<string, number>;
+    avgPrice?: number;
+    medianPrice?: number;
+  };
+  scoring?: {
+    globalScore?: number;
+    scoreBreakdown?: Record<string, number>;
+    problemCount?: number;
+    recommendationCount?: number;
+  };
+  estimates?: {
+    avgTicket?: number;
+    monthlyWineRevenue?: number;
+    bottlesPerService?: number;
+    potentialUplift?: number;
+    currency?: string;
+  } | null;
+}
+
 /* ─── Component ─── */
 interface Props { defaultLang?: Lang } // kept for backwards-compat; ignored
 
@@ -743,6 +784,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [claimIdx, setClaimIdx] = useState(0);
   const [pollLabel, setPollLabel] = useState<string | null>(null);
   const [pollProgress, setPollProgress] = useState<number | null>(null);
+  const [partial, setPartial] = useState<PartialData>({});
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [errorPreview, setErrorPreview] = useState<{
@@ -755,6 +797,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
+  const pollAbortRef = useRef<{ aborted: boolean }>({ aborted: false });
   // Freemium / rate-limit
   const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
@@ -808,72 +851,78 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setUrlFailedInfo(null);
     setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
-    const controller = new AbortController();
-    // En modo async el POST responde rápido con analysisId, pero el Worker actual
-    // aún puede responder síncrono tras procesar el PDF (cartas grandes >60s).
-    // Mantenemos 120s para cubrir ambos casos sin abortar prematuramente.
-    const timeout = setTimeout(() => controller.abort(), 120000);
+    setPartial({});
+    pollAbortRef.current = { aborted: false };
+    const myAbortRef = pollAbortRef.current;
+
+    // Generate analysisId on the client so we can begin polling immediately,
+    // without waiting for the (slow) POST /v1/analyze response.
+    const clientAnalysisId = Math.random().toString(16).slice(2, 10);
+    currentAnalysisIdRef.current = clientAnalysisId;
 
     try {
-      let res: Response;
-      if (tab === "file" && file) {
-        const fd = new FormData();
-        fd.append("type", "file");
-        fd.append("file", file);
-        fd.append("lang", lang);
-        if (placeId) fd.append("placeId", placeId);
-        if (restaurantName) fd.append("restaurantName", restaurantName);
-        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd, signal: controller.signal });
-      } else {
-        const base: Record<string, any> = { lang };
-        if (placeId) base.placeId = placeId;
-        if (restaurantName) base.restaurantName = restaurantName;
-        const body = tab === "url"
-          ? { type: "url", url: url.trim(), ...base }
-          : { type: "text", text: text.trim(), ...base };
-        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-          signal: controller.signal,
-        });
-      }
-      clearTimeout(timeout);
-      const data = await res.json().catch(() => ({}));
+      // Fire POST in parallel (no await on body unless it returns early with
+      // rate-limit / registration / sync payload).
+      const postPromise: Promise<any> = (async () => {
+        try {
+          let res: Response;
+          if (tab === "file" && file) {
+            const fd = new FormData();
+            fd.append("type", "file");
+            fd.append("file", file);
+            fd.append("lang", lang);
+            fd.append("analysisId", clientAnalysisId);
+            if (placeId) fd.append("placeId", placeId);
+            if (restaurantName) fd.append("restaurantName", restaurantName);
+            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd });
+          } else {
+            const base: Record<string, any> = { lang, analysisId: clientAnalysisId };
+            if (placeId) base.placeId = placeId;
+            if (restaurantName) base.restaurantName = restaurantName;
+            const body = tab === "url"
+              ? { type: "url", url: url.trim(), ...base }
+              : { type: "text", text: text.trim(), ...base };
+            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            });
+          }
+          const data = await res.json().catch(() => ({}));
+          return { res, data };
+        } catch (err) {
+          return { error: err };
+        }
+      })();
 
-      // Freemium gate: backend asks for registration to keep analyzing
-      if (data?.rateLimited && data?.requiresRegistration) {
-        setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
-        return;
-      }
-      // Hard daily limit (HTTP 429 or rateLimited without registration path)
-      if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
-        setRateLimitMsg(data?.message || t.errGeneric);
-        return;
-      }
+      // React to early POST outcomes (rate-limit, registration, sync payload).
+      postPromise.then((out: any) => {
+        if (!out || myAbortRef.aborted) return;
+        const { res, data } = out;
+        if (!res || !data) return;
+        if (data?.rateLimited && data?.requiresRegistration) {
+          myAbortRef.aborted = true;
+          setRegistrationGate({ message: data?.message || T_REG_FOOT[lang] });
+          return;
+        }
+        if (res.status === 429 || (data?.rateLimited && !data?.requiresRegistration)) {
+          myAbortRef.aborted = true;
+          setRateLimitMsg(data?.message || t.errGeneric);
+          return;
+        }
+        // Backwards-compat: full sync payload (no async flow)
+        if (data?.success && data?.analysisId && data?.status === undefined) {
+          myAbortRef.aborted = true;
+          handleFinalPayload(data);
+        }
+      }).catch(() => {});
 
-      if (!res.ok || !data?.success) {
-        const apiErr: string = (data?.error || "").toString();
-        let msg = apiErr || t.errGeneric;
-        if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
-        showInlineError(msg);
-        return;
-      }
-
-      // Backwards-compat: if API returned the full payload synchronously, handle it.
-      if (!data.analysisId || data.status === undefined) {
-        handleFinalPayload(data);
-        return;
-      }
-
-      currentAnalysisIdRef.current = data.analysisId;
-      // Async flow: poll /v1/status/{id} until terminal state
-      const finalPayload = await pollStatus(data.analysisId);
-      handleFinalPayload(finalPayload);
+      // Start polling immediately with the client-generated analysisId.
+      const finalPayload = await pollStatus(clientAnalysisId, myAbortRef);
+      if (!myAbortRef.aborted && finalPayload) handleFinalPayload(finalPayload);
     } catch (err: any) {
-      clearTimeout(timeout);
       console.error(err);
-      showInlineError(t.errGeneric);
+      if (!myAbortRef.aborted) showInlineError(t.errGeneric);
     } finally {
       setLoading(false);
       setPollLabel(null); setPollProgress(null);
@@ -882,16 +931,21 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   };
 
   // Poll /v1/status/{id} every 2.5s up to ~5 min
-  const pollStatus = async (id: string): Promise<any> => {
+  const pollStatus = async (id: string, abortRef?: { aborted: boolean }): Promise<any> => {
     const startedAt = Date.now();
     const MAX_MS = 5 * 60 * 1000;
     while (Date.now() - startedAt < MAX_MS) {
-      await new Promise((r) => setTimeout(r, 2500));
+      if (abortRef?.aborted) return null;
+      await new Promise((r) => setTimeout(r, 2000));
+      if (abortRef?.aborted) return null;
       try {
         const r = await fetch(withAdminKey(`${API_BASE}/v1/status/${encodeURIComponent(id)}`));
         const d = await r.json().catch(() => ({}));
         if (typeof d?.progress === "number") setPollProgress(d.progress);
         if (typeof d?.stepLabel === "string") setPollLabel(d.stepLabel);
+        if (d?.partial && typeof d.partial === "object") {
+          setPartial((prev) => ({ ...prev, ...d.partial }));
+        }
         const status = d?.status;
         if (status && status !== "processing") {
           // Build a unified payload for handleFinalPayload
@@ -1162,6 +1216,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     )}
                   </div>
                 )}
+                {/* Progressive partial data while the backend works */}
+                <ProgressivePartial partial={partial} lang={lang} />
                 {/* Rotating commercial claim */}
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -2001,6 +2057,188 @@ function PartialAnalysisBanner({
           {err && <p className="sm:col-span-3 text-xs text-destructive">{err}</p>}
         </form>
       )}
+    </div>
+  );
+}
+/* ─── Progressive partial preview rendered during loading ─── */
+const PARTIAL_LABELS: Record<Lang, {
+  restaurant: string;
+  wines: string;
+  total: string;
+  countries: string;
+  regions: string;
+  grapes: string;
+  avgPrice: string;
+  priceRange: string;
+  score: string;
+  problems: string;
+  recommendations: string;
+  estimates: string;
+  ticket: string;
+  revenue: string;
+  bottles: string;
+  uplift: string;
+  colors: Record<string, string>;
+}> = {
+  es: { restaurant: "Restaurante", wines: "Tu carta en números", total: "vinos", countries: "países", regions: "regiones", grapes: "uvas", avgPrice: "Precio medio", priceRange: "Rango", score: "Score preliminar", problems: "problemas detectados", recommendations: "recomendaciones", estimates: "Estimaciones de negocio", ticket: "Ticket medio vino", revenue: "Ingresos vino/mes", bottles: "Botellas/servicio", uplift: "Potencial de mejora", colors: { tinto: "Tintos", blanco: "Blancos", rosado: "Rosados", espumoso: "Espumosos", dulce: "Dulces", generoso: "Generosos" } },
+  en: { restaurant: "Restaurant", wines: "Your list in numbers", total: "wines", countries: "countries", regions: "regions", grapes: "grapes", avgPrice: "Average price", priceRange: "Range", score: "Preliminary score", problems: "issues detected", recommendations: "recommendations", estimates: "Business estimates", ticket: "Avg wine ticket", revenue: "Monthly wine revenue", bottles: "Bottles/service", uplift: "Improvement potential", colors: { tinto: "Reds", blanco: "Whites", rosado: "Rosés", espumoso: "Sparkling", dulce: "Sweet", generoso: "Fortified" } },
+  fr: { restaurant: "Restaurant", wines: "Votre carte en chiffres", total: "vins", countries: "pays", regions: "régions", grapes: "cépages", avgPrice: "Prix moyen", priceRange: "Fourchette", score: "Score préliminaire", problems: "problèmes détectés", recommendations: "recommandations", estimates: "Estimations business", ticket: "Ticket moyen vin", revenue: "Revenu vin/mois", bottles: "Bouteilles/service", uplift: "Potentiel d'amélioration", colors: { tinto: "Rouges", blanco: "Blancs", rosado: "Rosés", espumoso: "Effervescents", dulce: "Doux", generoso: "Vins doux" } },
+  de: { restaurant: "Restaurant", wines: "Ihre Karte in Zahlen", total: "Weine", countries: "Länder", regions: "Regionen", grapes: "Rebsorten", avgPrice: "Durchschnittspreis", priceRange: "Bereich", score: "Vorläufige Bewertung", problems: "Probleme erkannt", recommendations: "Empfehlungen", estimates: "Geschäftsschätzungen", ticket: "Ø Wein-Ticket", revenue: "Wein-Umsatz/Monat", bottles: "Flaschen/Service", uplift: "Verbesserungspotenzial", colors: { tinto: "Rot", blanco: "Weiß", rosado: "Rosé", espumoso: "Schaumwein", dulce: "Süß", generoso: "Likörwein" } },
+  it: { restaurant: "Ristorante", wines: "La tua carta in numeri", total: "vini", countries: "paesi", regions: "regioni", grapes: "uve", avgPrice: "Prezzo medio", priceRange: "Fascia", score: "Punteggio preliminare", problems: "problemi rilevati", recommendations: "raccomandazioni", estimates: "Stime di business", ticket: "Ticket medio vino", revenue: "Ricavi vino/mese", bottles: "Bottiglie/servizio", uplift: "Potenziale di miglioramento", colors: { tinto: "Rossi", blanco: "Bianchi", rosado: "Rosati", espumoso: "Spumanti", dulce: "Dolci", generoso: "Liquorosi" } },
+  pt: { restaurant: "Restaurante", wines: "A sua carta em números", total: "vinhos", countries: "países", regions: "regiões", grapes: "castas", avgPrice: "Preço médio", priceRange: "Intervalo", score: "Pontuação preliminar", problems: "problemas detetados", recommendations: "recomendações", estimates: "Estimativas de negócio", ticket: "Ticket médio vinho", revenue: "Receita vinho/mês", bottles: "Garrafas/serviço", uplift: "Potencial de melhoria", colors: { tinto: "Tintos", blanco: "Brancos", rosado: "Rosés", espumoso: "Espumantes", dulce: "Doces", generoso: "Generosos" } },
+};
+
+function ProgressivePartial({ partial, lang }: { partial: PartialData; lang: Lang }) {
+  const L = PARTIAL_LABELS[lang];
+  const fadeIn = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as any } };
+  const hasAny = !!(partial.restaurant || partial.wines || partial.analysis || partial.scoring || partial.estimates);
+  if (!hasAny) return null;
+
+  const winesTotal = partial.wines?.total ?? partial.analysis?.totalWines;
+  const categories = partial.wines?.categories || partial.analysis?.byColor;
+  const totalCats = categories ? Object.values(categories).reduce((a, b) => a + (Number(b) || 0), 0) : 0;
+  const fmtMoney = (v?: number, cur = "EUR") =>
+    typeof v === "number" ? new Intl.NumberFormat(lang, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v) : "—";
+
+  return (
+    <div className="mt-6 space-y-4">
+      <AnimatePresence>
+        {partial.restaurant?.name && (
+          <motion.div key="r" {...fadeIn} className="bg-card border border-border rounded-xl p-4">
+            <div className="flex items-start justify-between gap-3 flex-wrap">
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{L.restaurant}</p>
+                <h4 className="font-semibold text-base truncate">{partial.restaurant.name}</h4>
+                {partial.restaurant.address && (
+                  <p className="text-xs text-muted-foreground truncate">{partial.restaurant.address}</p>
+                )}
+              </div>
+              {typeof partial.restaurant.rating === "number" && (
+                <span className="inline-flex items-center gap-1 text-sm font-medium shrink-0">
+                  <Star size={14} className="text-amber-500 fill-amber-500" />
+                  {partial.restaurant.rating.toFixed(1)}
+                </span>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {(winesTotal || categories) && (
+          <motion.div key="w" {...fadeIn} className="bg-card border border-border rounded-xl p-4">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{L.wines}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+              <Stat value={winesTotal} label={L.total} />
+              <Stat value={partial.analysis?.uniqueCountries} label={L.countries} />
+              <Stat value={partial.analysis?.uniqueRegions} label={L.regions} />
+              <Stat value={partial.analysis?.uniqueGrapes} label={L.grapes} />
+            </div>
+            {categories && totalCats > 0 && (
+              <div className="space-y-1.5">
+                {Object.entries(categories).map(([k, v]) => {
+                  const num = Number(v) || 0;
+                  const pct = Math.round((num / totalCats) * 100);
+                  return (
+                    <div key={k} className="flex items-center gap-2 text-xs">
+                      <span className="w-20 text-muted-foreground capitalize shrink-0">{L.colors[k] || k}</span>
+                      <div className="flex-1 h-2 rounded-full bg-secondary overflow-hidden">
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.6 }}
+                          className="h-full bg-wine" />
+                      </div>
+                      <span className="font-mono text-muted-foreground w-14 text-right shrink-0">{num} · {pct}%</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {(partial.wines?.priceRange || partial.analysis?.avgPrice != null) && (
+              <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground mt-3 pt-3 border-t border-border">
+                {partial.analysis?.avgPrice != null && (
+                  <span><strong className="text-foreground">{L.avgPrice}:</strong> {fmtMoney(partial.analysis.avgPrice, partial.wines?.priceRange?.currency)}</span>
+                )}
+                {partial.wines?.priceRange && (
+                  <span><strong className="text-foreground">{L.priceRange}:</strong> {fmtMoney(partial.wines.priceRange.min, partial.wines.priceRange.currency)} – {fmtMoney(partial.wines.priceRange.max, partial.wines.priceRange.currency)}</span>
+                )}
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {partial.scoring && typeof partial.scoring.globalScore === "number" && (
+          <motion.div key="s" {...fadeIn} className="bg-card border border-border rounded-xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="relative w-20 h-20 shrink-0">
+                <svg viewBox="0 0 80 80" className="w-full h-full">
+                  <circle cx="40" cy="40" r="32" stroke="hsl(var(--border))" strokeWidth="6" fill="none" />
+                  <motion.circle cx="40" cy="40" r="32" stroke="hsl(var(--wine, var(--primary)))" strokeWidth="6" fill="none"
+                    strokeLinecap="round" strokeDasharray={2 * Math.PI * 32}
+                    initial={{ strokeDashoffset: 2 * Math.PI * 32 }}
+                    animate={{ strokeDashoffset: 2 * Math.PI * 32 * (1 - (partial.scoring.globalScore || 0) / 100) }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    transform="rotate(-90 40 40)" />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="font-heading text-xl font-bold">{partial.scoring.globalScore}</span>
+                  <span className="text-[10px] text-muted-foreground -mt-1">/100</span>
+                </div>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">{L.score}</p>
+                {partial.scoring.scoreBreakdown && (
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+                    {Object.entries(partial.scoring.scoreBreakdown).map(([k, v]) => (
+                      <div key={k} className="flex items-center justify-between gap-2">
+                        <span className="text-muted-foreground capitalize truncate">{k}</span>
+                        <span className="font-mono font-medium">{v}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3 mt-3 pt-3 border-t border-border text-xs">
+              {typeof partial.scoring.problemCount === "number" && (
+                <span className="inline-flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
+                  <AlertTriangle size={12} /> {partial.scoring.problemCount} {L.problems}
+                </span>
+              )}
+              {typeof partial.scoring.recommendationCount === "number" && (
+                <span className="inline-flex items-center gap-1.5 text-wine">
+                  <Lightbulb size={12} /> {partial.scoring.recommendationCount} {L.recommendations}
+                </span>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {partial.estimates && (
+          <motion.div key="e" {...fadeIn} className="bg-card border border-border rounded-xl p-4">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{L.estimates}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {partial.estimates.avgTicket != null && (
+                <Stat value={fmtMoney(partial.estimates.avgTicket, partial.estimates.currency)} label={L.ticket} />
+              )}
+              {partial.estimates.monthlyWineRevenue != null && (
+                <Stat value={fmtMoney(partial.estimates.monthlyWineRevenue, partial.estimates.currency)} label={L.revenue} />
+              )}
+              {partial.estimates.bottlesPerService != null && (
+                <Stat value={String(partial.estimates.bottlesPerService)} label={L.bottles} />
+              )}
+              {partial.estimates.potentialUplift != null && (
+                <Stat value={`+${partial.estimates.potentialUplift}%`} label={L.uplift} />
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function Stat({ value, label }: { value: number | string | undefined; label: string }) {
+  return (
+    <div className="text-center">
+      <div className="font-heading text-2xl font-bold leading-tight">{value ?? "—"}</div>
+      <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
     </div>
   );
 }
