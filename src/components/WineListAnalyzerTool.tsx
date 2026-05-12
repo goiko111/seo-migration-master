@@ -680,6 +680,7 @@ const T: Record<Lang, any> = {
     unlocking: "Generazione…",
     successTitle: "Richiesta inviata!",
     successText: "Ti contatteremo entro 48h con il report personalizzato.",
+    openReport: "Apri report completo",
     errMin: "Incolla almeno 50 caratteri.",
     errEmail: "Inserisci un'email valida.",
     errGeneric: "Non siamo riusciti ad analizzare la carta. Controlla l'URL o prova a incollare il testo.",
