@@ -1,0 +1,1 @@
+ALTER TABLE public.freemium_leads ADD COLUMN IF NOT EXISTS phone text;
