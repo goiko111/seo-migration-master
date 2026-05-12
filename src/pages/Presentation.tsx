@@ -228,8 +228,12 @@ export default function Presentation() {
           .presentation-slide { scroll-snap-align: start; min-height: 100vh; }
         }
         @media print {
+          @page { size: A4 landscape; margin: 0; }
+          html, body { background: #fff !important; }
           .presentation-chrome { display: none !important; }
-          .presentation-slide { page-break-after: always; min-height: auto; padding: 1in; }
+          .presentation-root { height: auto !important; overflow: visible !important; scroll-snap-type: none !important; }
+          .presentation-slide { page-break-after: always; break-after: page; min-height: auto !important; padding: 0.5in !important; }
+          .presentation-slide:last-child { page-break-after: auto; }
         }
       `}</style>
 
