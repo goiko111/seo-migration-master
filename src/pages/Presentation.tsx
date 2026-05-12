@@ -458,6 +458,20 @@ export default function Presentation() {
             </div>
           </Reveal>
         </div>
+
+        {/* Scroll down arrow */}
+        {showScrollArrow && (
+          <motion.button
+            onClick={scrollToNextSlide}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-cream/60 hover:text-cream transition-colors cursor-pointer"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            aria-label="Scroll to next slide"
+          >
+            <span className="text-[10px] uppercase tracking-widest">{t.scrollDown || "Scroll"}</span>
+            <ChevronDown className="h-6 w-6" />
+          </motion.button>
+        )}
       </SlideShell>
 
       {/* ──────── SLIDE 2 — PROBLEM ──────── */}
