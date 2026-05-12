@@ -9,6 +9,7 @@ export interface PresentationContent {
   shareCopied: string;
   fullscreenLabel: string;
   ctaTalk: string;
+  scrollDown: string;
   preparedFor: (group: string) => string;
   // Slide 1 — Cover
   s1Eyebrow: string;
@@ -125,6 +126,7 @@ const es: PresentationContent = {
   shareCopied: "Enlace copiado",
   fullscreenLabel: "Pantalla completa",
   ctaTalk: "Hablemos",
+  scrollDown: "Desplazar",
   preparedFor: (g) => `Preparado para ${g}`,
   s1Eyebrow: "Presentación oficial",
   s1Title: "La reVINOlución de la carta de vinos",
@@ -314,6 +316,7 @@ const en: PresentationContent = {
   shareCopied: "Link copied",
   fullscreenLabel: "Fullscreen",
   ctaTalk: "Let's talk",
+  scrollDown: "Scroll",
   preparedFor: (g) => `Prepared for ${g}`,
   s1Eyebrow: "Official deck",
   s1Title: "The reVINOlution of the wine list",
@@ -504,6 +507,7 @@ const fr: PresentationContent = {
   shareCopied: "Lien copié",
   fullscreenLabel: "Plein écran",
   ctaTalk: "Parlons-en",
+  scrollDown: "Défiler",
   preparedFor: (g) => `Préparé pour ${g}`,
   s1Eyebrow: "Présentation officielle",
   s1Title: "La reVINOlution de la carte des vins",
@@ -538,6 +542,7 @@ const it: PresentationContent = {
   shareCopied: "Link copiato",
   fullscreenLabel: "Schermo intero",
   ctaTalk: "Parliamone",
+  scrollDown: "Scorri",
   preparedFor: (g) => `Preparato per ${g}`,
   s1Eyebrow: "Presentazione ufficiale",
   s1Title: "La reVINOluzione della carta dei vini",
@@ -570,6 +575,7 @@ const de: PresentationContent = {
   shareCopied: "Link kopiert",
   fullscreenLabel: "Vollbild",
   ctaTalk: "Sprechen wir",
+  scrollDown: "Scrollen",
   preparedFor: (g) => `Vorbereitet für ${g}`,
   s1Eyebrow: "Offizielle Präsentation",
   s1Title: "Die reVINOlution der Weinkarte",
@@ -602,6 +608,7 @@ const pt: PresentationContent = {
   shareCopied: "Link copiado",
   fullscreenLabel: "Ecrã inteiro",
   ctaTalk: "Falemos",
+  scrollDown: "Rolar",
   preparedFor: (g) => `Preparado para ${g}`,
   s1Eyebrow: "Apresentação oficial",
   s1Title: "A reVINOlução da carta de vinhos",

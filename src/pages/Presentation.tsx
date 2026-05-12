@@ -7,7 +7,7 @@ import {
   TrendingUp, Users, Languages, Repeat, ShoppingCart, BadgeCheck,
   Shield, Calendar, Database, GitCompare, Bell, Zap,
   Building2, LineChart, Rocket, Target, Upload, QrCode, Printer, LifeBuoy,
-  Download, CheckCircle2,
+  Download, CheckCircle2, ChevronDown,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SEOHead from "@/components/SEOHead";
@@ -219,6 +219,7 @@ export default function Presentation() {
   const grupo = params.get("grupo");
   const [shared, setShared] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showScrollArrow, setShowScrollArrow] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const url = `${CANONICAL_DOMAIN}${PRESENTATION_ROUTE[lang]}`;
@@ -305,6 +306,22 @@ export default function Presentation() {
     const onChange = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", onChange);
     return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  /* Scroll arrow visibility */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      if (el.scrollTop > 100) setShowScrollArrow(false);
+      else setShowScrollArrow(true);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToNextSlide = useCallback(() => {
+    containerRef.current?.scrollBy({ top: window.innerHeight, behavior: "smooth" });
   }, []);
 
   const contactPath = useMemo(() => {
@@ -441,6 +458,20 @@ export default function Presentation() {
             </div>
           </Reveal>
         </div>
+
+        {/* Scroll down arrow */}
+        {showScrollArrow && (
+          <motion.button
+            onClick={scrollToNextSlide}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-cream/80 hover:text-cream transition-colors cursor-pointer z-20"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            aria-label="Scroll to next slide"
+          >
+            <span className="text-[10px] uppercase tracking-widest font-medium">{t.scrollDown || "Scroll"}</span>
+            <ChevronDown className="h-7 w-7" />
+          </motion.button>
+        )}
       </SlideShell>
 
       {/* ──────── SLIDE 2 — PROBLEM ──────── */}
