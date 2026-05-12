@@ -1192,17 +1192,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] sm:min-h-[220px] font-mono text-sm" />
             )}
             {tab === "file" && (
-              <label className="flex flex-col items-center justify-center gap-3 py-10 px-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-wine/50 hover:bg-wine/5 transition-colors">
-                <Upload size={28} className="text-wine" />
-                <span className="text-sm font-medium">{file ? file.name : t.fileLabel}</span>
-                <span className="text-xs text-muted-foreground">{t.fileHint}</span>
-                <input type="file" accept=".pdf,.jpg,.jpeg,.png,.txt,.csv,application/pdf,image/jpeg,image/png,text/plain,text/csv" className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f && f.size > 10 * 1024 * 1024) { toast.error("Max 10MB"); return; }
-                    setFile(f || null);
-                  }} />
-              </label>
+              <MultiFilePicker
+                files={files}
+                setFiles={setFiles}
+                isDragging={isDragging}
+                setIsDragging={setIsDragging}
+                lang={lang}
+              />
             )}
           </div>
 
