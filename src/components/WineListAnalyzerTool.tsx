@@ -864,6 +864,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
   const pollAbortRef = useRef<{ aborted: boolean }>({ aborted: false });
+  // v5: hard 60s deadline. When reached without a "complete" status, we
+  // surface the contact-capture form. Polling continues in the background
+  // so the backend result is still saved server-side for the admin.
+  const deadlineHitRef = useRef<boolean>(false);
   // Freemium / rate-limit
   const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
