@@ -524,6 +524,7 @@ const T: Record<Lang, any> = {
     unlocking: "Generando…",
     successTitle: "¡Solicitud enviada!",
     successText: "Te contactaremos en menos de 48h con tu informe personalizado.",
+    openReport: "Abrir informe completo",
     errMin: "Pega al menos 50 caracteres de tu carta.",
     errEmail: "Introduce un email válido.",
     errGeneric: "No pudimos analizar la carta. Revisa la URL o prueba pegando el texto.",
