@@ -25,7 +25,7 @@ import wineCard from "@/assets/presentation/wine-card.jpg";
 import dashboardLaptop from "@/assets/presentation/dashboard-laptop.jpg";
 import tastingNotes from "@/assets/presentation/tasting-notes.jpg";
 import pairing from "@/assets/presentation/pairing.jpg";
-import bigData from "@/assets/presentation/big-data.jpg";
+import bigData from "@/assets/presentation/rendimiento-carta.webp";
 import comparator from "@/assets/presentation/comparator.jpg";
 import stockManagement from "@/assets/presentation/stock-management.jpg";
 import clientsGrid from "@/assets/presentation/clients-grid.jpg";
