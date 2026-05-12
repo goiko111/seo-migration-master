@@ -339,7 +339,7 @@ export default function Presentation() {
         description={t.metaDescription}
         url={url}
         hreflang={hreflang}
-        image={`${CANONICAL_DOMAIN}/og-default.jpg`}
+        image={`${CANONICAL_DOMAIN}/og-presentation.jpg`}
       />
 
       {/* Print + scroll-snap styles */}
