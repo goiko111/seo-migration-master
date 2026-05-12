@@ -324,6 +324,38 @@ export default function Presentation() {
       </SlideShell>
 
       {/* ──────── SLIDE 3 — WHAT IS WINERIM ──────── */}
+      {/* ──────── SLIDE 2b — 5 PAINS / 5 REMEDIES ──────── */}
+      <SlideShell bg="cream">
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <Reveal>
+            <Eyebrow>{t.sPainsEyebrow}</Eyebrow>
+            <SlideTitle className="text-wine-dark">{t.sPainsTitle}</SlideTitle>
+            <p className="text-wine-dark/75 text-lg">{t.sPainsSubtitle}</p>
+          </Reveal>
+        </div>
+        <div className="grid gap-3 max-w-5xl mx-auto">
+          {t.sPainsItems.map((item, i) => (
+            <Reveal key={i} delay={i * 0.05}>
+              <div className="grid md:grid-cols-[auto,1fr,auto,1fr] items-center gap-4 bg-white rounded-2xl p-5 shadow-sm border border-wine-dark/10">
+                <div className="hidden md:flex h-9 w-9 rounded-full bg-wine-dark/5 text-wine-dark font-heading font-bold text-sm items-center justify-center">
+                  {i + 1}
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.18em] font-semibold text-wine-dark/50 mb-1">{t.sPainsPainLabel}</p>
+                  <p className="font-heading text-base md:text-lg text-wine-dark leading-snug">{item.pain}</p>
+                </div>
+                <ArrowRight className="hidden md:block h-5 w-5 text-wine mx-auto" />
+                <div className="md:border-l md:border-wine-dark/10 md:pl-4">
+                  <p className="text-[10px] uppercase tracking-[0.18em] font-semibold text-wine mb-1">{t.sPainsAntidoteLabel}</p>
+                  <p className="text-sm md:text-base text-wine-dark/80 leading-snug">{item.antidote}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </SlideShell>
+
+      {/* ──────── SLIDE 3 — WHAT IS WINERIM ──────── */}
       <SlideShell>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
