@@ -22,6 +22,78 @@ import { CANONICAL_DOMAIN } from "@/seo/config";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 
+/* ─── PDF export ─── */
+async function generatePresentationPdf(filename: string) {
+  const slides = Array.from(
+    document.querySelectorAll<HTMLElement>(".presentation-slide"),
+  );
+  if (!slides.length) return;
+
+  // Visual feedback
+  const root = document.querySelector<HTMLElement>(".presentation-root");
+  const prevCursor = root?.style.cursor;
+  if (root) root.style.cursor = "progress";
+
+  // A4 landscape in mm
+  const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+
+  try {
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i];
+      // Force a stable, presentable size while rendering
+      const prev = {
+        minHeight: slide.style.minHeight,
+        height: slide.style.height,
+        width: slide.style.width,
+      };
+      slide.style.width = "1600px";
+      slide.style.height = "900px";
+      slide.style.minHeight = "900px";
+
+      // Wait one frame so layout settles
+      await new Promise((r) => requestAnimationFrame(() => r(null)));
+
+      const canvas = await html2canvas(slide, {
+        backgroundColor: null,
+        scale: 1.5,
+        useCORS: true,
+        logging: false,
+        windowWidth: 1600,
+        windowHeight: 900,
+      });
+
+      // Restore
+      slide.style.minHeight = prev.minHeight;
+      slide.style.height = prev.height;
+      slide.style.width = prev.width;
+
+      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+      // Fit into page preserving aspect ratio (canvas is 16:9, page ~1.41:1)
+      const ratio = canvas.width / canvas.height;
+      let w = pageW;
+      let h = w / ratio;
+      if (h > pageH) {
+        h = pageH;
+        w = h * ratio;
+      }
+      const x = (pageW - w) / 2;
+      const y = (pageH - h) / 2;
+
+      if (i > 0) pdf.addPage();
+      pdf.addImage(imgData, "JPEG", x, y, w, h);
+    }
+
+    pdf.save(`${filename.replace(/[^a-z0-9-_]+/gi, "-").toLowerCase()}.pdf`);
+  } catch (err) {
+    console.error("PDF generation failed", err);
+    alert("No se pudo generar el PDF. Inténtalo de nuevo.");
+  } finally {
+    if (root) root.style.cursor = prevCursor || "";
+  }
+}
+
 import heroApp from "@/assets/presentation/hero-app.jpg";
 import wineCard from "@/assets/presentation/wine-card.jpg";
 import dashboardLaptop from "@/assets/presentation/dashboard-laptop.jpg";
