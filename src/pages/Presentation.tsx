@@ -19,6 +19,8 @@ import {
   type PresentationContent,
 } from "@/data/presentationContent";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas-pro";
 
 import heroApp from "@/assets/presentation/hero-app.jpg";
 import wineCard from "@/assets/presentation/wine-card.jpg";
@@ -185,8 +187,8 @@ export default function Presentation() {
 
   const handleDownloadPdf = useCallback(() => {
     (window as any).dataLayer?.push({ event: "presentation_download_pdf", lang });
-    window.print();
-  }, [lang]);
+    void generatePresentationPdf(t.metaTitle || "winerim-presentacion");
+  }, [lang, t.metaTitle]);
 
   const handleFullscreen = useCallback(() => {
     if (typeof document === "undefined") return;
