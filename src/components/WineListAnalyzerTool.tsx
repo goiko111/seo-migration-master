@@ -1978,7 +1978,7 @@ function ContactCaptureForm({
     return (
       <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10">
         <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
-        <p className="text-sm leading-relaxed">{successOverride || t.successText}</p>
+        <p className="text-sm leading-relaxed">{successOverride || t.captureText}</p>
       </div>
     );
   }
