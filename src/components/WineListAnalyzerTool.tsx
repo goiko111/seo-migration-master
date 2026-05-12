@@ -43,6 +43,9 @@ function notifyAnalyzerLead(payload: {
     resource: payload.analysisId ? `analysis:${payload.analysisId}` : "wine-list-analyzer",
     lang: payload.lang,
     variant: payload.variant,
+    // Tag explicit category so Autopilot/Connect can route this lead as "analisis"
+    lead_type: "analisis",
+    lead_category: "analisis",
   } as Record<string, string | null>);
 }
 
