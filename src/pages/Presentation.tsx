@@ -229,11 +229,30 @@ export default function Presentation() {
         }
         @media print {
           @page { size: A4 landscape; margin: 0; }
-          html, body { background: #fff !important; }
+          html, body {
+            background: #fff !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          *, *::before, *::after {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
           .presentation-chrome { display: none !important; }
           .presentation-root { height: auto !important; overflow: visible !important; scroll-snap-type: none !important; }
-          .presentation-slide { page-break-after: always; break-after: page; min-height: auto !important; padding: 0.5in !important; }
+          .presentation-slide {
+            page-break-after: always;
+            break-after: page;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            min-height: 0 !important;
+            height: auto !important;
+            padding: 0.4in !important;
+            overflow: hidden !important;
+          }
           .presentation-slide:last-child { page-break-after: auto; }
+          .presentation-slide img { max-height: 3in !important; object-fit: contain !important; }
         }
       `}</style>
 
