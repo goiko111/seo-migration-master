@@ -362,8 +362,18 @@ export default function Presentation() {
 
       {/* Top chrome */}
       <header className="presentation-chrome fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 md:px-8 py-3 bg-background/70 backdrop-blur border-b border-border/40">
-        <Link to={lang === "es" ? "/" : `/${lang}`} className="font-heading text-lg font-bold tracking-tight text-cream">
-          winerim
+        <Link
+          to={lang === "es" ? "/" : `/${lang}`}
+          className="flex items-center gap-2 text-cream"
+          aria-label="Winerim"
+        >
+          <img
+            src={winerimLogo}
+            alt="Winerim"
+            className="h-7 md:h-8 w-auto"
+            loading="eager"
+            decoding="async"
+          />
         </Link>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
