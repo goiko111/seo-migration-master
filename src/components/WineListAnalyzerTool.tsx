@@ -864,6 +864,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
   const pollAbortRef = useRef<{ aborted: boolean }>({ aborted: false });
+  // v5: hard 60s deadline. When reached without a "complete" status, we
+  // surface the contact-capture form. Polling continues in the background
+  // so the backend result is still saved server-side for the admin.
+  const deadlineHitRef = useRef<boolean>(false);
   // Freemium / rate-limit
   const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
@@ -919,6 +923,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setPollLabel(null); setPollProgress(null);
     setPartial({});
     pollAbortRef.current = { aborted: false };
+    deadlineHitRef.current = false;
     const myAbortRef = pollAbortRef.current;
 
     // Generate analysisId on the client so we can begin polling immediately,
@@ -951,14 +956,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             const body = tab === "url"
               ? { type: "url", url: url.trim(), ...base }
               : { type: "text", text: text.trim(), ...base };
-            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
+            // Fire-and-forget for text/url too (v5): the POST can take ~50s on
+            // the backend; we never want it to block the UI. Polling drives
+            // everything, including rate-limit / registration surfacing via
+            // the status endpoint.
+            fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
-            });
+            }).catch((err) => console.error("POST failed:", err));
+            return { res: null, data: null };
           }
-          const data = await res.json().catch(() => ({}));
-          return { res, data };
+          return { res: null, data: null };
         } catch (err) {
           return { error: err };
         }
@@ -987,7 +996,25 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       }).catch(() => {});
 
       // Start polling immediately with the client-generated analysisId.
-      const finalPayload = await pollStatus(clientAnalysisId, myAbortRef);
+      // v5: race polling against a hard 60s deadline. If the deadline wins,
+      // we hand the user a friendly contact-capture form and let polling
+      // continue silently in the background (backend result still lands in
+      // KV for the admin).
+      const DEADLINE_MS = 60_000;
+      const finalPayload = await Promise.race([
+        pollStatus(clientAnalysisId, myAbortRef),
+        new Promise<any>((resolve) =>
+          setTimeout(() => {
+            deadlineHitRef.current = true;
+            resolve({
+              success: true,
+              pendingContact: true,
+              analysisId: clientAnalysisId,
+              deadline: true,
+            });
+          }, DEADLINE_MS),
+        ),
+      ]);
       if (!myAbortRef.aborted && finalPayload) handleFinalPayload(finalPayload);
     } catch (err: any) {
       console.error(err);
