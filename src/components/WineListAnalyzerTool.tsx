@@ -1216,6 +1216,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                     )}
                   </div>
                 )}
+                {/* Progressive partial data while the backend works */}
+                <ProgressivePartial partial={partial} lang={lang} />
                 {/* Rotating commercial claim */}
                 <AnimatePresence mode="wait">
                   <motion.div
