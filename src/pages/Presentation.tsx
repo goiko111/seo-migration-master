@@ -463,13 +463,13 @@ export default function Presentation() {
         {showScrollArrow && (
           <motion.button
             onClick={scrollToNextSlide}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-cream/60 hover:text-cream transition-colors cursor-pointer"
-            animate={{ y: [0, 8, 0] }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-cream/80 hover:text-cream transition-colors cursor-pointer z-20"
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             aria-label="Scroll to next slide"
           >
-            <span className="text-[10px] uppercase tracking-widest">{t.scrollDown || "Scroll"}</span>
-            <ChevronDown className="h-6 w-6" />
+            <span className="text-[10px] uppercase tracking-widest font-medium">{t.scrollDown || "Scroll"}</span>
+            <ChevronDown className="h-7 w-7" />
           </motion.button>
         )}
       </SlideShell>
