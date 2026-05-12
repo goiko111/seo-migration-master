@@ -219,6 +219,7 @@ export default function Presentation() {
   const grupo = params.get("grupo");
   const [shared, setShared] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showScrollArrow, setShowScrollArrow] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const url = `${CANONICAL_DOMAIN}${PRESENTATION_ROUTE[lang]}`;
