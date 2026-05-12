@@ -1568,6 +1568,10 @@ function ContactCaptureForm({
       } else {
         setSent(true);
         toast.success(t.successTitle);
+        notifyAnalyzerLead({
+          name, email, phone,
+          analysisId, variant, lang,
+        });
       }
     } catch (err) {
       console.error(err); toast.error(t.errGeneric);
