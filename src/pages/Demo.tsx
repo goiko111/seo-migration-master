@@ -325,13 +325,13 @@ const Demo = () => {
             <h2 className="font-heading text-2xl font-bold mb-3">{c.callTitle}</h2>
             <p className="text-muted-foreground mb-6">{c.callDesc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://wa.me/34640000000" target="_blank" rel="noopener noreferrer"
+              <a href="https://wa.me/34614499864" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
                 <MessageCircle size={16} /> WhatsApp
               </a>
-              <a href="tel:+34640000000"
+              <a href="tel:+34614499864"
                 className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
-                <Phone size={16} /> +34 640 000 000
+                <Phone size={16} /> +34 614 499 864
               </a>
             </div>
           </div>
