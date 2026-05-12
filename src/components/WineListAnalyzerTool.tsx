@@ -784,6 +784,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [claimIdx, setClaimIdx] = useState(0);
   const [pollLabel, setPollLabel] = useState<string | null>(null);
   const [pollProgress, setPollProgress] = useState<number | null>(null);
+  const [partial, setPartial] = useState<PartialData>({});
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [errorPreview, setErrorPreview] = useState<{
@@ -796,6 +797,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     suggestions?: Array<{ method: string; label: string; description?: string }>;
   } | null>(null);
   const currentAnalysisIdRef = useRef<string | null>(null);
+  const pollAbortRef = useRef<{ aborted: boolean }>({ aborted: false });
   // Freemium / rate-limit
   const [registrationGate, setRegistrationGate] = useState<{ message: string } | null>(null);
   const [rateLimitMsg, setRateLimitMsg] = useState<string | null>(null);
