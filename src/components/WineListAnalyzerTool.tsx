@@ -719,6 +719,7 @@ const T: Record<Lang, any> = {
     unlocking: "A gerar…",
     successTitle: "Pedido enviado!",
     successText: "Contactaremos em menos de 48h com o seu relatório personalizado.",
+    openReport: "Abrir relatório completo",
     errMin: "Cole pelo menos 50 caracteres.",
     errEmail: "Introduza um email válido.",
     errGeneric: "Não conseguimos analisar a carta. Verifique o URL ou tente colar o texto.",
