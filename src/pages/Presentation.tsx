@@ -509,7 +509,6 @@ export default function Presentation() {
         </div>
       </SlideShell>
 
-      {/* ──────── SLIDE 12 — IMPLEMENTATION ──────── */}
       {/* ──────── SLIDE 11b — MANAGEMENT + DYNAMIC INTELLIGENCE ──────── */}
       <SlideShell bg="dark">
         <div className="text-center mb-12 max-w-3xl mx-auto">
