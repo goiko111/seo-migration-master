@@ -1221,6 +1221,7 @@ function ScoreCircle({ score, color, label, title }: { score: number; color: str
 
 /* ─── Unlock gate ─── */
 function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; previewSections: string[]; t: any }) {
+  const { lang } = useLanguage();
   const [restaurant, setRestaurant] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -1249,7 +1250,7 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
         toast.success(t.successTitle);
         notifyAnalyzerLead({
           name, email, phone, restaurant,
-          analysisId, variant: "unlock", lang: "",
+          analysisId, variant: "unlock", lang,
         });
       }
     } catch (err) {
