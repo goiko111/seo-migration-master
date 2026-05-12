@@ -193,7 +193,7 @@ const es: PresentationContent = {
   s14CtaPrimary: "Agendar demo",
   s14CtaSecondary: "Compartir presentación",
   s14Email: "info@winerim.com",
-  s14Phone: "+34 722 180 348",
+  s14Phone: "+34 614 499 864",
 };
 
 const en: PresentationContent = {
@@ -303,7 +303,7 @@ const en: PresentationContent = {
   s14CtaPrimary: "Book a demo",
   s14CtaSecondary: "Share this deck",
   s14Email: "info@winerim.com",
-  s14Phone: "+34 722 180 348",
+  s14Phone: "+34 614 499 864",
 };
 
 const fr: PresentationContent = {
