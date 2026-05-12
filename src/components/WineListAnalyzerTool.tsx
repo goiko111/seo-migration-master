@@ -49,6 +49,27 @@ function notifyAnalyzerLead(payload: {
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
 const GOOGLE_MAPS_API_KEY = "AIzaSyAQSpAPWbAe7HHirNOgY6YEiwsd8I5VVFI";
+const ADMIN_KEY_STORAGE = "winerim_admin_key";
+
+/** Reads ?admin_key=… from URL, persists in sessionStorage and returns it. */
+function getAdminKey(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("admin_key");
+    if (fromUrl) {
+      sessionStorage.setItem(ADMIN_KEY_STORAGE, fromUrl);
+      return fromUrl;
+    }
+    return sessionStorage.getItem(ADMIN_KEY_STORAGE);
+  } catch { return null; }
+}
+
+/** Appends admin_key (if present) to a Worker URL. */
+function withAdminKey(url: string): string {
+  const key = getAdminKey();
+  if (!key) return url;
+  return url + (url.includes("?") ? "&" : "?") + "admin_key=" + encodeURIComponent(key);
+}
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
 // Short labels for mobile tabs
