@@ -641,6 +641,7 @@ const T: Record<Lang, any> = {
     unlocking: "Wird erstellt…",
     successTitle: "Anfrage gesendet!",
     successText: "Wir melden uns innerhalb von 48 Std. mit Ihrem personalisierten Bericht.",
+    openReport: "Vollständigen Bericht öffnen",
     errMin: "Fügen Sie mindestens 50 Zeichen ein.",
     errEmail: "Geben Sie eine gültige E-Mail ein.",
     errGeneric: "Karte konnte nicht analysiert werden. Bitte URL prüfen oder Text einfügen.",
