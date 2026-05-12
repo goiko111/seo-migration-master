@@ -94,6 +94,19 @@ export interface PresentationContent {
   s13Subtitle: string;
   s13Quote: string;
   s13QuoteAuthor: string;
+  // Slide 13b — Pricing
+  sPricingEyebrow: string;
+  sPricingTitle: string;
+  sPricingSubtitle: string;
+  sPricingPlans: {
+    name: string;
+    tagline: string;
+    priceLabel: string;
+    features: string[];
+    cta: string;
+    highlight?: boolean;
+  }[];
+  sPricingFootnote: string;
   // Slide 14 — CTA
   s14Eyebrow: string;
   s14Title: string;
