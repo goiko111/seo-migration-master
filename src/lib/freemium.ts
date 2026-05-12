@@ -7,6 +7,22 @@ const KEY_RESOURCES = "winerim_resources_downloaded";
 const KEY_UNLOCKED = "winerim_freemium_unlocked";
 const EVT = "winerim:freemium-change";
 
+/** Detect preview / dev environments so the gate never blocks while testing */
+function isDevMode(): boolean {
+  if (typeof window === "undefined") return false;
+  const host = window.location.hostname;
+  return host === "localhost" || host.endsWith(".lovable.app");
+}
+
+/** Log once so developers know the gate is bypassed */
+let _devWarned = false;
+function warnDevBypass() {
+  if (_devWarned) return;
+  _devWarned = true;
+  // eslint-disable-next-line no-console
+  console.info("[Winerim] Freemium gate bypassed — dev/preview mode detected.");
+}
+
 function readArr(key: string): string[] {
   try {
     const raw = localStorage.getItem(key);
