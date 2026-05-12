@@ -9,6 +9,7 @@ export interface PresentationContent {
   shareCopied: string;
   fullscreenLabel: string;
   ctaTalk: string;
+  scrollDown: string;
   preparedFor: (group: string) => string;
   // Slide 1 — Cover
   s1Eyebrow: string;
