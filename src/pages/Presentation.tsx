@@ -13,6 +13,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import {
   PRESENTATION_CONTENT,
   PRESENTATION_ROUTE,
