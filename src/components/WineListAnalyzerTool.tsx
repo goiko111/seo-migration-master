@@ -832,7 +832,8 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [tab, setTab] = useState<"url" | "text" | "file">("text");
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Google Places — restaurant identification (optional)
   const [placeId, setPlaceId] = useState<string | null>(null);
@@ -907,7 +908,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     // Client validation
     if (tab === "text" && text.trim().length < 50) { showInlineError(t.errMin); return; }
     if (tab === "url" && !/^https?:\/\/.+/i.test(url.trim())) { showInlineError(t.errGeneric); return; }
-    if (tab === "file" && !file) { showInlineError(t.fileLabel); return; }
+    if (tab === "file" && files.length === 0) { showInlineError(t.fileLabel); return; }
     await runAnalysis();
   };
 
@@ -931,15 +932,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
       const postPromise: Promise<any> = (async () => {
         try {
           let res: Response;
-          if (tab === "file" && file) {
+          if (tab === "file" && files.length > 0) {
             const fd = new FormData();
             fd.append("type", "file");
-            fd.append("file", file);
+            for (const f of files) fd.append("file", f);
             fd.append("lang", lang);
             fd.append("analysisId", clientAnalysisId);
             if (placeId) fd.append("placeId", placeId);
             if (restaurantName) fd.append("restaurantName", restaurantName);
-            res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd });
+            // Fire-and-forget: do NOT await; polling drives the UI.
+            fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd })
+              .catch((err) => console.error("POST failed:", err));
+            return { res: null, data: null };
           } else {
             const base: Record<string, any> = { lang, analysisId: clientAnalysisId };
             if (placeId) base.placeId = placeId;
@@ -1020,7 +1024,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           if (status === "url_failed") {
             return { success: true, urlFailed: true, analysisId: id, ...(d.result || {}) };
           }
-          if (status === "pending_contact") {
+          if (status === "pending_contact" || status === "url_captured") {
             return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "error") {
@@ -1188,17 +1192,13 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
               <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.textPh} className="min-h-[180px] sm:min-h-[220px] font-mono text-sm" />
             )}
             {tab === "file" && (
-              <label className="flex flex-col items-center justify-center gap-3 py-10 px-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-wine/50 hover:bg-wine/5 transition-colors">
-                <Upload size={28} className="text-wine" />
-                <span className="text-sm font-medium">{file ? file.name : t.fileLabel}</span>
-                <span className="text-xs text-muted-foreground">{t.fileHint}</span>
-                <input type="file" accept=".pdf,.jpg,.jpeg,.png,.txt,.csv,application/pdf,image/jpeg,image/png,text/plain,text/csv" className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f && f.size > 10 * 1024 * 1024) { toast.error("Max 10MB"); return; }
-                    setFile(f || null);
-                  }} />
-              </label>
+              <MultiFilePicker
+                files={files}
+                setFiles={setFiles}
+                isDragging={isDragging}
+                setIsDragging={setIsDragging}
+                lang={lang}
+              />
             )}
           </div>
 
@@ -2346,6 +2346,137 @@ function Stat({ value, label }: { value: number | string | undefined; label: str
     <div className="text-center">
       <div className="font-heading text-2xl font-bold leading-tight">{value ?? "—"}</div>
       <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{label}</div>
+    </div>
+  );
+}
+
+/* ─── Multi-file picker (drag & drop, list, remove) ─── */
+const MAX_FILES = 10;
+const MAX_TOTAL_BYTES = 20 * 1024 * 1024;
+const ACCEPT_FILE = ".pdf,.xlsx,.docx,.csv,.txt,.jpg,.jpeg,.png,.webp,.heic,image/*";
+const ACCEPT_EXT = /\.(pdf|xlsx|docx|csv|txt|jpe?g|png|webp|heic)$/i;
+
+const MFP_T: Record<Lang, {
+  drop: string; click: string; formats: string; limits: string;
+  selected: string; total: string; remove: string;
+  errMax: string; errSize: string; errFmt: (n: string) => string;
+}> = {
+  es: { drop: "Arrastra archivos aquí o", click: "haz clic para seleccionar", formats: "PDF, imágenes, Excel, Word, CSV", limits: "Máx. 10 archivos · 20 MB en total", selected: "Archivos seleccionados", total: "archivos", remove: "Quitar", errMax: "Máximo 10 archivos por análisis", errSize: "Tamaño total máximo: 20 MB", errFmt: (n) => `Formato no soportado: ${n}` },
+  en: { drop: "Drop files here or", click: "click to select", formats: "PDF, images, Excel, Word, CSV", limits: "Max 10 files · 20 MB total", selected: "Selected files", total: "files", remove: "Remove", errMax: "Maximum 10 files per analysis", errSize: "Maximum total size: 20 MB", errFmt: (n) => `Unsupported format: ${n}` },
+  fr: { drop: "Glissez des fichiers ici ou", click: "cliquez pour sélectionner", formats: "PDF, images, Excel, Word, CSV", limits: "Max 10 fichiers · 20 Mo au total", selected: "Fichiers sélectionnés", total: "fichiers", remove: "Retirer", errMax: "Maximum 10 fichiers par analyse", errSize: "Taille totale maximale : 20 Mo", errFmt: (n) => `Format non pris en charge : ${n}` },
+  de: { drop: "Dateien hierher ziehen oder", click: "klicken zum Auswählen", formats: "PDF, Bilder, Excel, Word, CSV", limits: "Max. 10 Dateien · 20 MB insgesamt", selected: "Ausgewählte Dateien", total: "Dateien", remove: "Entfernen", errMax: "Maximal 10 Dateien pro Analyse", errSize: "Maximale Gesamtgröße: 20 MB", errFmt: (n) => `Format nicht unterstützt: ${n}` },
+  it: { drop: "Trascina i file qui o", click: "clicca per selezionare", formats: "PDF, immagini, Excel, Word, CSV", limits: "Max 10 file · 20 MB totali", selected: "File selezionati", total: "file", remove: "Rimuovi", errMax: "Massimo 10 file per analisi", errSize: "Dimensione totale massima: 20 MB", errFmt: (n) => `Formato non supportato: ${n}` },
+  pt: { drop: "Arraste ficheiros aqui ou", click: "clique para selecionar", formats: "PDF, imagens, Excel, Word, CSV", limits: "Máx. 10 ficheiros · 20 MB no total", selected: "Ficheiros selecionados", total: "ficheiros", remove: "Remover", errMax: "Máximo 10 ficheiros por análise", errSize: "Tamanho total máximo: 20 MB", errFmt: (n) => `Formato não suportado: ${n}` },
+};
+
+function fmtBytes(n: number): string {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
+  return `${(n / 1024 / 1024).toFixed(1)} MB`;
+}
+
+function MultiFilePicker({
+  files, setFiles, isDragging, setIsDragging, lang,
+}: {
+  files: File[];
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  isDragging: boolean;
+  setIsDragging: (v: boolean) => void;
+  lang: Lang;
+}) {
+  const L = MFP_T[lang];
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const addFiles = (incoming: File[]) => {
+    if (!incoming.length) return;
+    // Format check
+    const bad = incoming.find((f) => !ACCEPT_EXT.test(f.name) && !f.type.startsWith("image/"));
+    if (bad) { toast.error(L.errFmt(bad.name.split(".").pop() || "?")); return; }
+    setFiles((prev) => {
+      const merged: File[] = [];
+      const seen = new Set<string>();
+      for (const f of [...prev, ...incoming]) {
+        const key = `${f.name}__${f.size}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        merged.push(f);
+      }
+      if (merged.length > MAX_FILES) {
+        toast.error(L.errMax);
+        merged.length = MAX_FILES;
+      }
+      const total = merged.reduce((s, f) => s + f.size, 0);
+      if (total > MAX_TOTAL_BYTES) {
+        toast.error(L.errSize);
+        // Trim from the end until under budget
+        while (merged.length && merged.reduce((s, f) => s + f.size, 0) > MAX_TOTAL_BYTES) merged.pop();
+      }
+      return merged;
+    });
+  };
+
+  const removeAt = (i: number) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
+
+  const totalBytes = files.reduce((s, f) => s + f.size, 0);
+
+  return (
+    <div className="space-y-3">
+      <div
+        onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+        onDragLeave={() => setIsDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setIsDragging(false);
+          addFiles(Array.from(e.dataTransfer.files || []));
+        }}
+        onClick={() => inputRef.current?.click()}
+        className={`flex flex-col items-center justify-center gap-2 py-10 px-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragging ? "border-wine bg-wine/10" : "border-border hover:border-wine/50 hover:bg-wine/5"}`}
+      >
+        <Upload size={28} className="text-wine" />
+        <p className="text-sm font-medium text-center">
+          {L.drop} <span className="text-wine underline">{L.click}</span>
+        </p>
+        <p className="text-xs text-muted-foreground">{L.formats}</p>
+        <p className="text-[11px] text-muted-foreground/70">{L.limits}</p>
+        <input
+          ref={inputRef}
+          type="file"
+          multiple
+          accept={ACCEPT_FILE}
+          className="hidden"
+          onChange={(e) => {
+            addFiles(Array.from(e.target.files || []));
+            if (inputRef.current) inputRef.current.value = "";
+          }}
+        />
+      </div>
+
+      {files.length > 0 && (
+        <div className="rounded-lg border border-border bg-card/50">
+          <ul className="divide-y divide-border">
+            {files.map((f, i) => (
+              <li key={`${f.name}-${i}`} className="flex items-center gap-3 px-3 py-2">
+                <FileText size={16} className="shrink-0 text-muted-foreground" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm truncate">{f.name}</p>
+                </div>
+                <span className="text-xs text-muted-foreground tabular-nums">{fmtBytes(f.size)}</span>
+                <button
+                  type="button"
+                  aria-label={L.remove}
+                  onClick={(e) => { e.stopPropagation(); removeAt(i); }}
+                  className="p-1 rounded hover:bg-destructive/10 hover:text-destructive transition-colors"
+                >
+                  <X size={14} />
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="px-3 py-2 text-xs text-muted-foreground border-t border-border">
+            {files.length} {L.total} · {fmtBytes(totalBytes)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
