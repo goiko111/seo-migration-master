@@ -162,6 +162,8 @@ Deno.serve(async (req) => {
             form_type: lead.form_type || null,
             form_label: formInfo.label,
             resource: formInfo.resource || null,
+            lead_type: lead.lead_type || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
+            lead_category: lead.lead_category || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
             source: "winerim_web",
           }),
         });
