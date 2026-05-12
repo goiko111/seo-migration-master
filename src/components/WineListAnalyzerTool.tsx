@@ -485,6 +485,17 @@ const VALUE_PROPS: Record<Lang, ValueProp[]> = {
 };
 const VALUE_PROP_ICONS = [BarChart3, CircleDollarSign, Wine, AlertTriangle, TrendingUp, Lightbulb] as const;
 
+const CURRENCY_SYMBOL_MAP: Record<string, string> = {
+  "€": "EUR", "$": "USD", "£": "GBP", "¥": "JPY", "₣": "CHF", "₽": "RUB",
+  "R$": "BRL", "MX$": "MXN", "AR$": "ARS", "CL$": "CLP", "CO$": "COP",
+};
+function toCurrencyCode(input?: string): string {
+  if (!input) return "EUR";
+  const trimmed = input.trim();
+  if (/^[A-Za-z]{3}$/.test(trimmed)) return trimmed.toUpperCase();
+  return CURRENCY_SYMBOL_MAP[trimmed] || "EUR";
+}
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
@@ -1368,7 +1379,11 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
   const { summary, semaphore, topProblems, restaurant, fullAnalysis, analysisId, estimates } = result;
   const k = T_KPI[lang];
   const google = restaurant?.google;
-  const fmtMoney = (v: number, cur = "EUR") => new Intl.NumberFormat(lang, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
+  const fmtMoney = (v: number, cur = "EUR") => {
+    const code = toCurrencyCode(cur);
+    try { return new Intl.NumberFormat(lang, { style: "currency", currency: code, maximumFractionDigits: 0 }).format(v); }
+    catch { return `${Math.round(v)} ${cur}`; }
+  };
   const confColor: Record<string, string> = { high: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400", medium: "bg-amber-500/15 text-amber-700 dark:text-amber-400", low: "bg-red-500/15 text-red-600 dark:text-red-400" };
 
   return (
@@ -2174,8 +2189,12 @@ function ProgressivePartial({ partial, lang }: { partial: PartialData; lang: Lan
   const winesTotal = partial.wines?.total ?? partial.analysis?.totalWines;
   const categories = partial.wines?.categories || partial.analysis?.byColor;
   const totalCats = categories ? Object.values(categories).reduce((a, b) => a + (Number(b) || 0), 0) : 0;
-  const fmtMoney = (v?: number, cur = "EUR") =>
-    typeof v === "number" ? new Intl.NumberFormat(lang, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v) : "—";
+  const fmtMoney = (v?: number, cur = "EUR") => {
+    if (typeof v !== "number") return "—";
+    const code = toCurrencyCode(cur);
+    try { return new Intl.NumberFormat(lang, { style: "currency", currency: code, maximumFractionDigits: 0 }).format(v); }
+    catch { return `${Math.round(v)} ${cur}`; }
+  };
 
   return (
     <div className="mt-6 space-y-4">
