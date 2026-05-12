@@ -1752,6 +1752,10 @@ function PartialAnalysisBanner({
       const d = await res.json().catch(() => ({}));
       if (!res.ok || d?.success === false) throw new Error(d?.message || "register failed");
       setDone(true);
+      notifyAnalyzerLead({
+        name, email, restaurant: defaultRestaurant,
+        analysisId: analysisId || null, variant: "partial", lang,
+      });
     } catch {
       setErr(tt.error);
     } finally {
