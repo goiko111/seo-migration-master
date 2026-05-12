@@ -1117,7 +1117,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         <form onSubmit={onSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
           {/* Restaurant search (Google Places — optional) */}
           <div className="mb-6">
-            <Label className="mb-2 block text-sm font-medium">{T_RESTAURANT_LABEL[lang]}</Label>
+            <Label className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
+              <Search size={16} className="text-accent" />
+              {T_RESTAURANT_LABEL[lang]}
+            </Label>
             {placeId && restaurantName ? (
               <div className="flex items-start gap-3 p-3 rounded-md border border-accent/40 bg-accent/5">
                 <CheckCircle2 size={18} className="text-accent mt-0.5 shrink-0" />
@@ -1133,15 +1136,19 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
                 </button>
               </div>
             ) : (
-              <PlacesSearchInput
-                ready={placesReady}
-                placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
-                onSelect={(s) => {
-                  setPlaceId(s.place_id);
-                  setRestaurantName(s.structured_formatting?.main_text || s.description);
-                  setRestaurantAddress(s.structured_formatting?.secondary_text || null);
-                }}
-              />
+              <div className="relative rounded-lg ring-1 ring-accent/40 focus-within:ring-2 focus-within:ring-accent transition-shadow shadow-sm bg-background">
+                <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-accent pointer-events-none" />
+                <PlacesSearchInput
+                  ready={placesReady}
+                  placeholder={T_RESTAURANT_PLACEHOLDER[lang]}
+                  className="h-12 pl-10 text-base border-0 bg-transparent focus-visible:ring-0"
+                  onSelect={(s) => {
+                    setPlaceId(s.place_id);
+                    setRestaurantName(s.structured_formatting?.main_text || s.description);
+                    setRestaurantAddress(s.structured_formatting?.secondary_text || null);
+                  }}
+                />
+              </div>
             )}
             <p className="mt-1.5 text-xs text-muted-foreground">{T_RESTAURANT_HELP[lang]}</p>
             {!placeId && (
@@ -1150,15 +1157,23 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           </div>
 
           {/* Tabs */}
-          <div className="grid grid-cols-3 gap-2 mb-4 p-1 bg-secondary rounded-lg">
+          <Label className="mb-2 block text-sm font-semibold text-foreground">
+            {lang === "es" ? "¿Cómo quieres enviar tu carta?"
+              : lang === "en" ? "How do you want to send your wine list?"
+              : lang === "fr" ? "Comment souhaitez-vous envoyer votre carte ?"
+              : lang === "de" ? "Wie möchten Sie Ihre Weinkarte senden?"
+              : lang === "it" ? "Come vuoi inviare la tua carta?"
+              : "Como quer enviar a sua carta?"}
+          </Label>
+          <div className="grid grid-cols-3 gap-2 mb-4 p-1.5 bg-secondary/70 border border-border rounded-lg">
             {([
               { k: "url", icon: Link2, label: t.tabUrl },
               { k: "text", icon: FileText, label: t.tabText },
               { k: "file", icon: Upload, label: t.tabFile },
             ] as const).map(({ k, icon: Icon, label }) => (
               <button key={k} type="button" onClick={() => setTab(k)}
-                className={`flex items-center justify-center gap-2 px-2 sm:px-3 py-2.5 rounded-md text-sm font-medium transition-all ${tab === k ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                <Icon size={16} />
+                className={`flex items-center justify-center gap-2 px-2 sm:px-3 py-3 rounded-md text-sm font-semibold transition-all ${tab === k ? "bg-card shadow-md text-accent ring-1 ring-accent/40" : "text-foreground/70 hover:text-foreground hover:bg-card/50"}`}>
+                <Icon size={18} />
                 <span className="hidden sm:inline">{label}</span>
                 <span className="sm:hidden">{TAB_SHORT_EN[lang][k]}</span>
               </button>
