@@ -1415,7 +1415,7 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
     if (!consent) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/unlock`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/unlock`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analysisId, restaurant, name, email, phone, consent }),
@@ -1759,7 +1759,7 @@ function ContactCaptureForm({
     if (!name.trim()) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/unlock`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/unlock`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analysisId, name, email, phone, consent: true, lang, source: variant }),
@@ -1844,7 +1844,7 @@ function RegistrationGateModal({
     if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/register`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/register`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, restaurant: restaurant || undefined, lang }),
@@ -1940,7 +1940,7 @@ function PartialAnalysisBanner({
     if (!email || submitting) return;
     setSubmitting(true); setErr(null);
     try {
-      const res = await fetch(`${API_BASE}/v1/register`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/register`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
