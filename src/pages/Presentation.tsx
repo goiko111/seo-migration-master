@@ -7,6 +7,7 @@ import {
   TrendingUp, Users, Languages, Repeat, ShoppingCart, BadgeCheck,
   Shield, Calendar, Database, GitCompare, Bell, Zap,
   Building2, LineChart, Rocket, Target, Upload, QrCode, Printer, LifeBuoy,
+  Download,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SEOHead from "@/components/SEOHead";
