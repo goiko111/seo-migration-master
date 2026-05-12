@@ -602,6 +602,7 @@ const T: Record<Lang, any> = {
     unlocking: "Génération…",
     successTitle: "Demande envoyée !",
     successText: "Nous vous contacterons sous 48h avec votre rapport personnalisé.",
+    openReport: "Ouvrir le rapport complet",
     errMin: "Collez au moins 50 caractères de votre carte.",
     errEmail: "Saisissez un email valide.",
     errGeneric: "Impossible d'analyser la carte. Vérifiez l'URL ou essayez de coller le texte.",
