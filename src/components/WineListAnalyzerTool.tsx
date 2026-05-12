@@ -11,6 +11,40 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLanguage } from "@/i18n/LanguageContext";
 import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
+import { notifyLead } from "@/lib/notifyLead";
+
+/**
+ * Pushes the analyzer lead into Autopilot via send-lead-notification.
+ * Fire-and-forget; never blocks the analyzer UI.
+ */
+function notifyAnalyzerLead(payload: {
+  name?: string;
+  email: string;
+  phone?: string;
+  restaurant?: string;
+  analysisId?: string | null;
+  variant: "unlock" | "pending" | "longwait" | "registration" | "partial";
+  lang: string;
+}) {
+  const variantLabel: Record<string, string> = {
+    unlock: "Analizador · desbloqueo informe",
+    pending: "Analizador · carta extensa (pending)",
+    longwait: "Analizador · espera larga",
+    registration: "Analizador · registro freemium",
+    partial: "Analizador · informe parcial >200",
+  };
+  notifyLead({
+    name: payload.name?.trim() || null,
+    email: payload.email,
+    phone: payload.phone?.trim() || null,
+    restaurant: payload.restaurant?.trim() || null,
+    form_type: "wine-list-analyzer",
+    form_label: variantLabel[payload.variant] || "Analizador de carta",
+    resource: payload.analysisId ? `analysis:${payload.analysisId}` : "wine-list-analyzer",
+    lang: payload.lang,
+    variant: payload.variant,
+  } as Record<string, string | null>);
+}
 
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
@@ -1187,6 +1221,7 @@ function ScoreCircle({ score, color, label, title }: { score: number; color: str
 
 /* ─── Unlock gate ─── */
 function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; previewSections: string[]; t: any }) {
+  const { lang } = useLanguage();
   const [restaurant, setRestaurant] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -1213,6 +1248,10 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
       } else {
         setReportUrl(data.reportUrl);
         toast.success(t.successTitle);
+        notifyAnalyzerLead({
+          name, email, phone, restaurant,
+          analysisId, variant: "unlock", lang,
+        });
       }
     } catch (err) {
       console.error(err); toast.error(t.errGeneric);
@@ -1529,6 +1568,10 @@ function ContactCaptureForm({
       } else {
         setSent(true);
         toast.success(t.successTitle);
+        notifyAnalyzerLead({
+          name, email, phone,
+          analysisId, variant, lang,
+        });
       }
     } catch (err) {
       console.error(err); toast.error(t.errGeneric);
@@ -1609,6 +1652,10 @@ function RegistrationGateModal({
         toast.error(data?.message || data?.error || t.errGeneric);
         return;
       }
+      notifyAnalyzerLead({
+        name, email, phone, restaurant,
+        analysisId: null, variant: "registration", lang,
+      });
       try {
         localStorage.setItem("winerim_registered", "1");
         localStorage.setItem("winerim_user", JSON.stringify({ name, email }));
@@ -1705,6 +1752,10 @@ function PartialAnalysisBanner({
       const d = await res.json().catch(() => ({}));
       if (!res.ok || d?.success === false) throw new Error(d?.message || "register failed");
       setDone(true);
+      notifyAnalyzerLead({
+        name, email, restaurant: defaultRestaurant,
+        analysisId: analysisId || null, variant: "partial", lang,
+      });
     } catch {
       setErr(tt.error);
     } finally {
