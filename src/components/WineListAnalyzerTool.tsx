@@ -1644,8 +1644,15 @@ function KpiCard({
 
 /* ─── Pending contact (very large lists) ─── */
 function PendingContactView({
-  lang, message, analysisId, t,
-}: { lang: Lang; message?: string; analysisId?: string; t: any }) {
+  lang, message, analysisId, preview, emailConfirmation, t,
+}: {
+  lang: Lang;
+  message?: string;
+  analysisId?: string;
+  preview?: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] };
+  emailConfirmation?: string;
+  t: any;
+}) {
   return (
     <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
@@ -1655,8 +1662,19 @@ function PendingContactView({
       <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
         {message || T_PENDING_TEXT[lang]}
       </p>
+      {preview && (
+        <div className="mt-6 max-w-xl mx-auto">
+          <PreviewBlock lang={lang} preview={preview} />
+        </div>
+      )}
       <div className="mt-8 max-w-xl mx-auto text-left">
-        <ContactCaptureForm lang={lang} analysisId={analysisId || null} t={t} variant="pending" />
+        <ContactCaptureForm
+          lang={lang}
+          analysisId={analysisId || null}
+          t={t}
+          variant="pending"
+          successOverride={emailConfirmation}
+        />
       </div>
     </div>
   );
