@@ -18,6 +18,13 @@ export interface PresentationContent {
   s2Eyebrow: string;
   s2Title: string;
   s2Subtitle: string;
+  // Slide 2b — 5 pains / 5 antidotes
+  sPainsEyebrow: string;
+  sPainsTitle: string;
+  sPainsSubtitle: string;
+  sPainsItems: { pain: string; antidote: string }[];
+  sPainsPainLabel: string;
+  sPainsAntidoteLabel: string;
   // Slide 3 — What
   s3Eyebrow: string;
   s3Title: string;
