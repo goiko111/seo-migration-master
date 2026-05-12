@@ -394,11 +394,11 @@ const Gracias = () => {
               <a href="mailto:info@winerim.com" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" /> info@winerim.com
               </a>
-              <a href="https://wa.me/34623165179" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://wa.me/34614499864" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <MessageCircle className="w-4 h-4" /> WhatsApp
               </a>
-              <a href="tel:+34722180348" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Phone className="w-4 h-4" /> +34 722 180 348
+              <a href="tel:+34614499864" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Phone className="w-4 h-4" /> +34 614 499 864
               </a>
             </div>
           </motion.div>

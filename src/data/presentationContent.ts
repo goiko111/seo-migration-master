@@ -64,6 +64,18 @@ export interface PresentationContent {
   s11Title: string;
   s11Subtitle: string;
   s11Items: { title: string; body: string }[];
+  // Slide 11b — Restaurant management & dynamic intelligence
+  sMgmtEyebrow: string;
+  sMgmtTitle: string;
+  sMgmtSubtitle: string;
+  sMgmtItems: { title: string; body: string }[];
+  sMgmtFootnote: string;
+  // Slide 11c — Winerim Supply
+  sSupplyEyebrow: string;
+  sSupplyTitle: string;
+  sSupplyBody: string;
+  sSupplyItems: { title: string; body: string }[];
+  sSupplyTag: string;
   // Slide 12 — Implementation
   s12Eyebrow: string;
   s12Title: string;
@@ -172,6 +184,28 @@ const es: PresentationContent = {
     { title: "Implementación coordinada", body: "Lanza Winerim en todos tus locales con una metodología y soporte únicos." },
     { title: "ROI medible", body: "Mide en cada local el retorno real sobre la inversión y prioriza siguientes pasos con datos." },
   ],
+  sMgmtEyebrow: "Gestión + inteligencia dinámica",
+  sMgmtTitle: "Una capa de inteligencia que opera sobre tu día a día",
+  sMgmtSubtitle: "Más allá de la carta digital: Winerim conecta carta, bodega, ventas y equipo en tiempo real para que cada decisión esté basada en datos vivos.",
+  sMgmtItems: [
+    { title: "Backoffice unificado", body: "Carta, stock, precios, márgenes y rendimiento del equipo en un solo panel." },
+    { title: "Inteligencia dinámica", body: "Recomendaciones que se recalculan cada día según ventas reales, estacionalidad y demanda." },
+    { title: "Alertas accionables", body: "Vinos sin rotación, mermas de margen o referencias agotadas: avisos antes de que afecten al servicio." },
+    { title: "Decision Center", body: "Centro de decisiones con playbooks por área (carta, compras, vino por copa, grupos) listos para ejecutar." },
+    { title: "Equipo y formación", body: "Tu sala vende mejor con notas de cata, maridajes y argumentarios siempre actualizados." },
+    { title: "Informes ejecutivos", body: "Reportes mensuales para dirección con KPIs de vino claros y comparables." },
+  ],
+  sMgmtFootnote: "La carta deja de ser un PDF estático y se convierte en el sistema operativo del vino del restaurante.",
+  sSupplyEyebrow: "Winerim Supply",
+  sSupplyTitle: "Inteligencia de compras conectada a tu carta",
+  sSupplyBody: "Winerim Supply es el módulo de compras inteligente: cruza tus ventas reales con catálogos de distribuidores para que pidas mejor, negocies con datos y protejas tu margen.",
+  sSupplyItems: [
+    { title: "Pedidos sugeridos", body: "Propuestas de compra basadas en rotación, estacionalidad y stock objetivo." },
+    { title: "Comparativa de proveedores", body: "Mismo vino, varios distribuidores: precio, condiciones y disponibilidad de un vistazo." },
+    { title: "Negociación con datos", body: "Llega a cada reunión comercial con histórico de consumo y volumen real por bodega." },
+    { title: "Margen protegido", body: "Detecta subidas de coste y simula el impacto en tu PVP antes de aceptar la tarifa." },
+  ],
+  sSupplyTag: "Disponible para grupos de restauración y restaurantes con bodega activa.",
   s12Eyebrow: "Implementación",
   s12Title: "En marcha en cuestión de días",
   s12Body: "Implementar Winerim es un proceso sencillo y sin complicaciones. Nuestro equipo se encarga de todo para que el restaurante empiece a usar la herramienta sin esfuerzo.",
@@ -193,7 +227,7 @@ const es: PresentationContent = {
   s14CtaPrimary: "Agendar demo",
   s14CtaSecondary: "Compartir presentación",
   s14Email: "info@winerim.com",
-  s14Phone: "+34 722 180 348",
+  s14Phone: "+34 614 499 864",
 };
 
 const en: PresentationContent = {
@@ -282,6 +316,28 @@ const en: PresentationContent = {
     { title: "Coordinated rollout", body: "Launch Winerim across every venue with one methodology and one support team." },
     { title: "Measurable ROI", body: "Track real return per venue and prioritize next steps with data." },
   ],
+  sMgmtEyebrow: "Management + dynamic intelligence",
+  sMgmtTitle: "An intelligence layer that runs your day-to-day",
+  sMgmtSubtitle: "Beyond a digital wine list: Winerim connects menu, cellar, sales and team in real time so every decision is based on live data.",
+  sMgmtItems: [
+    { title: "Unified backoffice", body: "Menu, stock, prices, margins and team performance in one panel." },
+    { title: "Dynamic intelligence", body: "Recommendations recalculated daily from real sales, seasonality and demand." },
+    { title: "Actionable alerts", body: "Slow-moving wines, margin drops or out-of-stock labels: warnings before they hit service." },
+    { title: "Decision Center", body: "A decision hub with playbooks by area (menu, purchasing, wine by the glass, groups) ready to execute." },
+    { title: "Team & training", body: "Your floor sells better with always up-to-date tasting notes, pairings and talking points." },
+    { title: "Executive reporting", body: "Monthly reports for leadership with clear, comparable wine KPIs." },
+  ],
+  sMgmtFootnote: "The wine list stops being a static PDF and becomes the restaurant's wine operating system.",
+  sSupplyEyebrow: "Winerim Supply",
+  sSupplyTitle: "Purchasing intelligence connected to your list",
+  sSupplyBody: "Winerim Supply is the smart purchasing module: it cross-references real sales with distributor catalogues so you order better, negotiate with data and protect your margin.",
+  sSupplyItems: [
+    { title: "Suggested orders", body: "Purchase proposals based on rotation, seasonality and target stock." },
+    { title: "Supplier benchmarking", body: "Same wine, several distributors: price, terms and availability at a glance." },
+    { title: "Data-backed negotiation", body: "Walk into every supplier meeting with consumption history and real volume per winery." },
+    { title: "Margin protected", body: "Spot cost increases and simulate the impact on your retail price before accepting." },
+  ],
+  sSupplyTag: "Available for restaurant groups and restaurants with an active cellar.",
   s12Eyebrow: "Implementation",
   s12Title: "Live in a matter of days",
   s12Body: "Implementing Winerim is smooth and hassle-free. Our team handles everything so the restaurant can start using the tool effortlessly.",
@@ -303,7 +359,7 @@ const en: PresentationContent = {
   s14CtaPrimary: "Book a demo",
   s14CtaSecondary: "Share this deck",
   s14Email: "info@winerim.com",
-  s14Phone: "+34 722 180 348",
+  s14Phone: "+34 614 499 864",
 };
 
 const fr: PresentationContent = {

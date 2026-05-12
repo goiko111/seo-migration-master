@@ -509,6 +509,70 @@ export default function Presentation() {
         </div>
       </SlideShell>
 
+      {/* ──────── SLIDE 11b — MANAGEMENT + DYNAMIC INTELLIGENCE ──────── */}
+      <SlideShell bg="dark">
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <Reveal>
+            <Eyebrow>{t.sMgmtEyebrow}</Eyebrow>
+            <SlideTitle>{t.sMgmtTitle}</SlideTitle>
+            <p className="text-cream/75 text-lg">{t.sMgmtSubtitle}</p>
+          </Reveal>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {t.sMgmtItems.map((item, i) => {
+            const icons = [Layers3, Sparkles, Bell, Target, Users, LineChart];
+            const Icon = icons[i] || Layers3;
+            return (
+              <Reveal key={i} delay={i * 0.05}>
+                <div className="bg-gradient-card border border-border/40 rounded-2xl p-6 h-full hover:border-wine/40 transition-colors">
+                  <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-wine/20 text-gold mb-4">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-cream/70 leading-relaxed">{item.body}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+        <Reveal delay={0.3}>
+          <p className="mt-10 text-center text-cream/70 italic max-w-3xl mx-auto">
+            {t.sMgmtFootnote}
+          </p>
+        </Reveal>
+      </SlideShell>
+
+      {/* ──────── SLIDE 11c — WINERIM SUPPLY ──────── */}
+      <SlideShell bg="cream">
+        <div className="grid lg:grid-cols-5 gap-12 items-center">
+          <div className="lg:col-span-2">
+            <Reveal>
+              <Eyebrow>{t.sSupplyEyebrow}</Eyebrow>
+              <SlideTitle className="text-wine-dark">{t.sSupplyTitle}</SlideTitle>
+              <p className="text-wine-dark/75 leading-relaxed mb-6">{t.sSupplyBody}</p>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-wine/10 text-wine text-xs font-semibold">
+                <ShoppingCart className="h-3.5 w-3.5" /> {t.sSupplyTag}
+              </span>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-4">
+            {t.sSupplyItems.map((item, i) => {
+              const icons = [ShoppingCart, GitCompare, Database, TrendingUp];
+              const Icon = icons[i] || ShoppingCart;
+              return (
+                <Reveal key={i} delay={i * 0.07}>
+                  <div className="bg-white rounded-xl p-5 shadow-sm border border-wine-dark/10 h-full">
+                    <Icon className="h-6 w-6 text-wine mb-3" />
+                    <h3 className="font-heading text-lg font-bold mb-1 text-wine-dark">{item.title}</h3>
+                    <p className="text-sm text-wine-dark/70 leading-relaxed">{item.body}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </SlideShell>
+
       {/* ──────── SLIDE 12 — IMPLEMENTATION ──────── */}
       <SlideShell>
         <div className="text-center mb-12 max-w-3xl mx-auto">
