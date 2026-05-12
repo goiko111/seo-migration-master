@@ -126,6 +126,7 @@ const es: PresentationContent = {
   shareCopied: "Enlace copiado",
   fullscreenLabel: "Pantalla completa",
   ctaTalk: "Hablemos",
+  scrollDown: "Desplazar",
   preparedFor: (g) => `Preparado para ${g}`,
   s1Eyebrow: "Presentación oficial",
   s1Title: "La reVINOlución de la carta de vinos",
