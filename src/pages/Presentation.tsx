@@ -124,14 +124,14 @@ async function generatePresentationPdf(filename: string) {
   }
 }
 
-import heroApp from "@/assets/presentation/hero-app.jpg";
-import wineCard from "@/assets/presentation/wine-card.jpg";
+import heroApp from "@/assets/presentation/hero-app.png";
+import wineCard from "@/assets/presentation/wine-card.png";
 import dashboardLaptop from "@/assets/presentation/dashboard-laptop.jpg";
-import tastingNotes from "@/assets/presentation/tasting-notes.jpg";
-import pairing from "@/assets/presentation/pairing.jpg";
+import tastingNotes from "@/assets/presentation/tasting-notes.png";
+import pairing from "@/assets/presentation/pairing.png";
 import bigData from "@/assets/presentation/rendimiento-carta.webp";
-import comparator from "@/assets/presentation/comparator.jpg";
-import stockManagement from "@/assets/presentation/stock-management.jpg";
+import comparator from "@/assets/presentation/comparator.png";
+import stockManagement from "@/assets/presentation/stock-management.png";
 import clientsGrid from "@/assets/presentation/clients-grid.jpg";
 
 /* ─── Layout primitives ─── */
@@ -450,7 +450,7 @@ export default function Presentation() {
               <img
                 src={heroApp}
                 alt="Winerim wine list interface"
-                className="relative rounded-2xl shadow-2xl ring-1 ring-cream/10"
+                className="relative"
                 fetchPriority="high"
                 width={1200}
                 height={760}
@@ -532,7 +532,7 @@ export default function Presentation() {
               src={wineCard}
               alt="Winerim wine card detail"
               loading="lazy"
-              className="rounded-2xl shadow-2xl ring-1 ring-border/50 mx-auto max-w-md"
+              className="mx-auto max-w-md"
             />
           </Reveal>
         </div>
@@ -651,12 +651,12 @@ export default function Presentation() {
         </div>
         <div className="grid lg:grid-cols-2 gap-10">
           <Reveal>
-            <img src={tastingNotes} alt="Tasting notes UI" loading="lazy" className="rounded-2xl shadow-xl ring-1 ring-border/50 mx-auto max-w-xs mb-6" />
+            <img src={tastingNotes} alt="Tasting notes UI" loading="lazy" className="mx-auto max-w-xs mb-6" />
             <h3 className="font-heading text-2xl font-bold mb-2">{t.s8TastingTitle}</h3>
             <p className="text-foreground/75 leading-relaxed">{t.s8TastingBody}</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <img src={pairing} alt="Automatic pairing UI" loading="lazy" className="rounded-2xl shadow-xl ring-1 ring-border/50 mx-auto max-w-md mb-6" />
+            <img src={pairing} alt="Automatic pairing UI" loading="lazy" className="mx-auto max-w-md mb-6" />
             <h3 className="font-heading text-2xl font-bold mb-2">{t.s8PairingTitle}</h3>
             <p className="text-foreground/75 leading-relaxed">{t.s8PairingBody}</p>
           </Reveal>
@@ -682,7 +682,7 @@ export default function Presentation() {
                 </li>
               ))}
             </ul>
-            <img src={bigData} alt="Big data dashboard" loading="lazy" className="rounded-xl shadow-xl ring-1 ring-cream/10" />
+            <img src={bigData} alt="Big data dashboard" loading="lazy" className="rounded-xl" />
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex items-center gap-3 mb-4">
@@ -690,7 +690,7 @@ export default function Presentation() {
               <h3 className="font-heading text-2xl md:text-3xl font-bold">{t.s9CompTitle}</h3>
             </div>
             <p className="text-cream/80 mb-6 leading-relaxed">{t.s9CompBody}</p>
-            <img src={comparator} alt="Wine comparator" loading="lazy" className="rounded-xl shadow-xl ring-1 ring-cream/10" />
+            <img src={comparator} alt="Wine comparator" loading="lazy" />
           </Reveal>
         </div>
       </SlideShell>
@@ -702,7 +702,7 @@ export default function Presentation() {
             <Eyebrow>{t.s10Eyebrow}</Eyebrow>
             <SlideTitle>{t.s10Title}</SlideTitle>
             <p className="text-foreground/75 leading-relaxed mb-6">{t.s10Body}</p>
-            <img src={stockManagement} alt="Stock management UI" loading="lazy" className="rounded-xl shadow-xl ring-1 ring-border/50" />
+            <img src={stockManagement} alt="Stock management UI" loading="lazy" />
           </Reveal>
           <div className="grid gap-3">
             {t.s10Items.map((item, i) => {
