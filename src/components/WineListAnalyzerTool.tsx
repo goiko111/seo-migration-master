@@ -1096,9 +1096,26 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
           {/* Inline error (visible, no sticky overlap) */}
           {errorMsg && !loading && (
-            <div id="analyzer-inline-error" role="alert" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
-              <AlertTriangle size={18} className="mt-0.5 shrink-0" />
-              <p className="text-sm leading-relaxed">{errorMsg}</p>
+            <div id="analyzer-inline-error" role="alert" className="mb-4 rounded-lg border border-destructive/40 bg-destructive/5 p-4 space-y-3">
+              <div className="flex items-start gap-3 text-destructive">
+                <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+                <p className="text-sm leading-relaxed">{errorMsg}</p>
+              </div>
+              {errorPreview && (
+                <PreviewBlock lang={lang} preview={errorPreview} />
+              )}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={resetForRetry}
+                  className="border-wine/40 text-wine hover:bg-wine/10"
+                >
+                  {T_PREV[lang].retry}
+                </Button>
+                <p className="text-xs text-muted-foreground">{T_PREV[lang].formatHints}</p>
+              </div>
             </div>
           )}
 
