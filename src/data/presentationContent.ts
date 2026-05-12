@@ -18,6 +18,13 @@ export interface PresentationContent {
   s2Eyebrow: string;
   s2Title: string;
   s2Subtitle: string;
+  // Slide 2b — 5 pains / 5 antidotes
+  sPainsEyebrow: string;
+  sPainsTitle: string;
+  sPainsSubtitle: string;
+  sPainsItems: { pain: string; antidote: string }[];
+  sPainsPainLabel: string;
+  sPainsAntidoteLabel: string;
   // Slide 3 — What
   s3Eyebrow: string;
   s3Title: string;
@@ -112,6 +119,18 @@ const es: PresentationContent = {
   s2Eyebrow: "El reto",
   s2Title: "Si tienes más de 100 vinos, tu cliente tiene más de 100 dudas.",
   s2Subtitle: "Cartas extensas, márgenes opacos y decisiones lentas. La mayoría de restaurantes deja de vender vino simplemente porque su carta no ayuda a elegir.",
+  sPainsEyebrow: "5 dolores · 5 antídotos",
+  sPainsTitle: "Sabemos exactamente qué te frena cada día",
+  sPainsSubtitle: "Cinco problemas reales del vino en hostelería y cómo Winerim los resuelve sin añadir trabajo a tu equipo.",
+  sPainsPainLabel: "Dolor habitual",
+  sPainsAntidoteLabel: "Antídoto Winerim",
+  sPainsItems: [
+    { pain: "El equipo no sabe vender vino.", antidote: "Sumiller digital con storytelling y notas de cata listas para usar." },
+    { pain: "El comensal se bloquea al elegir.", antidote: "Filtros sensoriales y comparador de vinos guiado por IA." },
+    { pain: "Maridajes fallidos arruinan el plato.", antidote: "Maridaje automático plato ↔ vino, en cualquier idioma." },
+    { pain: "Carta y stock no se hablan.", antidote: "Inventario en tiempo real conectado a la carta del cliente." },
+    { pain: "Botellas que nunca se mueven.", antidote: "IA que activa ventas y destaca referencias dormidas." },
+  ],
   s3Eyebrow: "Qué es Winerim",
   s3Title: "Inteligencia dinámica para la carta de vinos",
   s3Body: "Winerim es la primera plataforma que combina recomendación con IA, gestión de bodega en tiempo real y analítica de ventas en una sola herramienta. Pensada para restaurantes y grupos que quieren convertir su carta en una palanca de rentabilidad.",
@@ -244,6 +263,18 @@ const en: PresentationContent = {
   s2Eyebrow: "The challenge",
   s2Title: "If you have over 100 wines, your customer has over 100 doubts.",
   s2Subtitle: "Long lists, opaque margins and slow decisions. Most restaurants stop selling wine simply because their list doesn't help diners choose.",
+  sPainsEyebrow: "5 pains · 5 remedies",
+  sPainsTitle: "We know exactly what holds you back every day",
+  sPainsSubtitle: "Five real wine pains in hospitality and how Winerim solves them without adding work to your team.",
+  sPainsPainLabel: "Typical pain",
+  sPainsAntidoteLabel: "Winerim remedy",
+  sPainsItems: [
+    { pain: "Staff doesn't know how to sell wine.", antidote: "Digital sommelier with storytelling and ready tasting notes." },
+    { pain: "Diners get blocked when choosing.", antidote: "Sensory filters and AI-guided wine comparator." },
+    { pain: "Failed pairings ruin the dish.", antidote: "Automatic dish-to-wine pairing, in any language." },
+    { pain: "Menu and stock don't talk.", antidote: "Real-time inventory connected to the customer's menu." },
+    { pain: "Bottles that never move.", antidote: "AI that activates sales and surfaces dormant references." },
+  ],
   s3Eyebrow: "What Winerim is",
   s3Title: "Dynamic intelligence for your wine list",
   s3Body: "Winerim is the first platform that combines AI recommendation, real-time cellar management and sales analytics in a single tool. Built for restaurants and groups that want their wine list to be a profitability lever.",
