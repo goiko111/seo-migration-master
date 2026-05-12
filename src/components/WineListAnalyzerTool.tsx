@@ -718,6 +718,44 @@ interface AnalysisResult {
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
 const STATUS_DOT: Record<SemaphoreStatus, string> = { red: "bg-red-500", yellow: "bg-amber-500", green: "bg-emerald-500" };
 
+/* ─── Partial (progressive) data emitted by /v1/status while processing ─── */
+interface PartialData {
+  restaurant?: {
+    name?: string;
+    address?: string;
+    rating?: number;
+    totalRatings?: number;
+    priceLevel?: number;
+  };
+  wines?: {
+    total?: number;
+    categories?: Record<string, number>;
+    priceRange?: { min: number; max: number; currency: string };
+  };
+  analysis?: {
+    totalWines?: number;
+    uniqueCountries?: number;
+    uniqueRegions?: number;
+    uniqueGrapes?: number;
+    byColor?: Record<string, number>;
+    avgPrice?: number;
+    medianPrice?: number;
+  };
+  scoring?: {
+    globalScore?: number;
+    scoreBreakdown?: Record<string, number>;
+    problemCount?: number;
+    recommendationCount?: number;
+  };
+  estimates?: {
+    avgTicket?: number;
+    monthlyWineRevenue?: number;
+    bottlesPerService?: number;
+    potentialUplift?: number;
+    currency?: string;
+  } | null;
+}
+
 /* ─── Component ─── */
 interface Props { defaultLang?: Lang } // kept for backwards-compat; ignored
 
