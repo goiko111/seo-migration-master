@@ -634,6 +634,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [pollProgress, setPollProgress] = useState<number | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorPreview, setErrorPreview] = useState<{
+    estimatedWines?: number;
+    categoriesFound?: string[];
+    sampleWines?: string[];
+  } | null>(null);
   const [urlFailedInfo, setUrlFailedInfo] = useState<{
     message: string;
     suggestions?: Array<{ method: string; label: string; description?: string }>;
@@ -648,6 +653,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     window.setTimeout(() => {
       document.getElementById("analyzer-inline-error")?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 50);
+  };
+
+  const resetForRetry = () => {
+    setErrorMsg(null); setErrorPreview(null); setResult(null); setUrlFailedInfo(null);
   };
 
   // Loading step animator
@@ -684,7 +693,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   };
 
   const runAnalysis = async () => {
-    setLoading(true); setResult(null); setErrorMsg(null);
+    setLoading(true); setResult(null); setErrorMsg(null); setErrorPreview(null);
     setUrlFailedInfo(null);
     setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
@@ -803,8 +812,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const handleFinalPayload = (data: any) => {
     if (!data?.success) {
       const apiErr: string = (data?.error || "").toString();
-      let msg = apiErr || t.errGeneric;
+      let msg = (data?.message as string) || apiErr || t.errGeneric;
       if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
+      if (data?.preview) setErrorPreview(data.preview);
       showInlineError(msg);
       return;
     }
