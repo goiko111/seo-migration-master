@@ -11,7 +11,13 @@ const EVT = "winerim:freemium-change";
 function isDevMode(): boolean {
   if (typeof window === "undefined") return false;
   const host = window.location.hostname;
-  return host === "localhost" || host.endsWith(".lovable.app");
+  return (
+    host === "localhost" ||
+    host === "127.0.0.1" ||
+    host.endsWith(".lovable.app") ||
+    host.endsWith(".lovableproject.com") ||
+    host.endsWith(".lovable.dev")
+  );
 }
 
 /** Log once so developers know the gate is bypassed */
