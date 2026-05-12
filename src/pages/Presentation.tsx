@@ -257,6 +257,16 @@ export default function Presentation() {
           <Button
             size="sm"
             variant="ghost"
+            onClick={handleDownloadPdf}
+            className="hidden md:inline-flex gap-2 text-cream hover:text-cream"
+            aria-label="PDF"
+          >
+            <Download className="h-4 w-4" />
+            <span className="text-xs">PDF</span>
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
             onClick={handleFullscreen}
             className="hidden lg:inline-flex text-cream hover:text-cream"
             aria-label={t.fullscreenLabel}
