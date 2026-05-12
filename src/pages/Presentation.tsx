@@ -651,7 +651,7 @@ export default function Presentation() {
         </div>
         <div className="grid lg:grid-cols-2 gap-10">
           <Reveal>
-            <img src={tastingNotes} alt="Tasting notes UI" loading="lazy" className="mx-auto max-w-xs mb-6" />
+            <img src={tastingNotes} alt="Tasting notes UI" loading="lazy" className="mx-auto w-full max-w-md mb-6" />
             <h3 className="font-heading text-2xl font-bold mb-2">{t.s8TastingTitle}</h3>
             <p className="text-foreground/75 leading-relaxed">{t.s8TastingBody}</p>
           </Reveal>
@@ -702,7 +702,7 @@ export default function Presentation() {
             <Eyebrow>{t.s10Eyebrow}</Eyebrow>
             <SlideTitle>{t.s10Title}</SlideTitle>
             <p className="text-foreground/75 leading-relaxed mb-6">{t.s10Body}</p>
-            <img src={stockManagement} alt="Stock management UI" loading="lazy" />
+            <img src={stockManagement} alt="Stock management UI" loading="lazy" className="w-full max-w-2xl lg:max-w-none lg:scale-110 lg:origin-left" />
           </Reveal>
           <div className="grid gap-3">
             {t.s10Items.map((item, i) => {
