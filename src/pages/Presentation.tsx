@@ -887,18 +887,32 @@ export default function Presentation() {
                     : "bg-white text-wine-dark border-wine-dark/10 shadow-sm"
                 }`}
               >
-                {plan.highlight && (
-                  <span className="absolute -top-3 right-4 px-3 py-1 rounded-full bg-gold text-wine-dark text-[10px] font-bold uppercase tracking-wider">
-                    Recomendado
+                {plan.badge && (
+                  <span
+                    className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap ${
+                      plan.highlight
+                        ? "bg-gold text-wine-dark"
+                        : "bg-wine-dark text-cream"
+                    }`}
+                  >
+                    {plan.badge}
                   </span>
                 )}
-                <h3 className="font-heading text-2xl font-bold mb-1">{plan.name}</h3>
-                <p className={`text-sm mb-5 ${plan.highlight ? "text-cream/80" : "text-wine-dark/70"}`}>
+                <h3 className="font-heading text-2xl font-bold mb-1 mt-2">{plan.name}</h3>
+                <p className={`text-sm font-semibold mb-3 ${plan.highlight ? "text-cream" : "text-wine-dark"}`}>
                   {plan.tagline}
                 </p>
-                <div className={`mb-5 pb-5 border-b ${plan.highlight ? "border-cream/20" : "border-wine-dark/10"}`}>
-                  <span className="font-heading text-3xl font-bold">{plan.priceLabel}</span>
-                </div>
+                {plan.solves && (
+                  <p className={`text-xs italic mb-2 leading-snug ${plan.highlight ? "text-cream/70" : "text-wine-dark/60"}`}>
+                    {plan.solves}
+                  </p>
+                )}
+                {plan.fits && (
+                  <p className={`text-xs mb-4 leading-snug ${plan.highlight ? "text-cream/80" : "text-wine-dark/70"}`}>
+                    {plan.fits}
+                  </p>
+                )}
+                <div className={`mb-4 pb-4 border-b ${plan.highlight ? "border-cream/20" : "border-wine-dark/10"}`} />
                 <ul className="space-y-2.5 mb-6 flex-1">
                   {plan.features.map((f, j) => (
                     <li key={j} className="flex gap-2 text-sm leading-snug">
