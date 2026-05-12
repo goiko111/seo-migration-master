@@ -485,6 +485,17 @@ const VALUE_PROPS: Record<Lang, ValueProp[]> = {
 };
 const VALUE_PROP_ICONS = [BarChart3, CircleDollarSign, Wine, AlertTriangle, TrendingUp, Lightbulb] as const;
 
+const CURRENCY_SYMBOL_MAP: Record<string, string> = {
+  "€": "EUR", "$": "USD", "£": "GBP", "¥": "JPY", "₣": "CHF", "₽": "RUB",
+  "R$": "BRL", "MX$": "MXN", "AR$": "ARS", "CL$": "CLP", "CO$": "COP",
+};
+function toCurrencyCode(input?: string): string {
+  if (!input) return "EUR";
+  const trimmed = input.trim();
+  if (/^[A-Za-z]{3}$/.test(trimmed)) return trimmed.toUpperCase();
+  return CURRENCY_SYMBOL_MAP[trimmed] || "EUR";
+}
+
 const T: Record<Lang, any> = {
   es: {
     badge: "Análisis gratuito · 30 segundos",
