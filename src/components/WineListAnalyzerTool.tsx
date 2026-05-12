@@ -1079,6 +1079,29 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
+        {/* Value props */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {VALUE_PROPS[lang].map((vp, i) => {
+            const Icon = VALUE_PROP_ICONS[i];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm p-5 hover:border-accent/40 transition-colors"
+              >
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent mb-3">
+                  <Icon size={20} />
+                </div>
+                <h3 className="font-semibold text-base mb-1.5 text-foreground">{vp.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{vp.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
         {/* Form */}
         <form onSubmit={onSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
           {/* Restaurant search (Google Places — optional) */}
