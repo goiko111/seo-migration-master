@@ -592,6 +592,13 @@ interface AnalysisResult {
   analyzedWines?: number;
   totalWines?: number;
   partialMessage?: string;
+  preview?: {
+    estimatedWines?: number;
+    categoriesFound?: string[];
+    sampleWines?: string[];
+  };
+  message?: string;
+  emailConfirmation?: string;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
@@ -694,7 +701,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         fd.append("lang", lang);
         if (placeId) fd.append("placeId", placeId);
         if (restaurantName) fd.append("restaurantName", restaurantName);
-        res = await fetch(`${API_BASE}/v1/analyze`, { method: "POST", body: fd, signal: controller.signal });
+        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd, signal: controller.signal });
       } else {
         const base: Record<string, any> = { lang };
         if (placeId) base.placeId = placeId;
@@ -702,7 +709,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         const body = tab === "url"
           ? { type: "url", url: url.trim(), ...base }
           : { type: "text", text: text.trim(), ...base };
-        res = await fetch(`${API_BASE}/v1/analyze`, {
+        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -759,7 +766,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     while (Date.now() - startedAt < MAX_MS) {
       await new Promise((r) => setTimeout(r, 2500));
       try {
-        const r = await fetch(`${API_BASE}/v1/status/${encodeURIComponent(id)}`);
+        const r = await fetch(withAdminKey(`${API_BASE}/v1/status/${encodeURIComponent(id)}`));
         const d = await r.json().catch(() => ({}));
         if (typeof d?.progress === "number") setPollProgress(d.progress);
         if (typeof d?.stepLabel === "string") setPollLabel(d.stepLabel);
@@ -776,7 +783,12 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "error") {
-            return { success: false, error: d?.error || d?.result?.error };
+            return {
+              success: false,
+              error: d?.error || d?.result?.error,
+              message: d?.message || d?.result?.message,
+              preview: d?.preview || d?.result?.preview,
+            };
           }
           return d;
         }
