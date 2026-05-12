@@ -1,14 +1,10 @@
-import { useState, FormEvent, ChangeEvent } from "react";
-import { Lock, Upload, FileCheck2, Sparkles, X } from "lucide-react";
+import { useState, FormEvent } from "react";
+import { Lock, Sparkles, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
-import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 import { useToast } from "@/hooks/use-toast";
-import { unlockFreemium, FREEMIUM_LIMIT } from "@/lib/freemium";
-
-const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
-const MAX_BYTES = 10 * 1024 * 1024;
+import { unlockFreemium, getToolSlugFromPath } from "@/lib/freemium";
 
 const COPY: Record<string, {
   badge: string;
@@ -21,10 +17,10 @@ const COPY: Record<string, {
   restaurant: string;
   phone: string;
   phoneOpt: string;
-  upload: string;
-  uploadHint: string;
-  uploadRequired: string;
-  uploadError: string;
+  upload?: string;
+  uploadHint?: string;
+  uploadRequired?: string;
+  uploadError?: string;
   cta: string;
   sending: string;
   privacy: string;
@@ -36,20 +32,16 @@ const COPY: Record<string, {
 }> = {
   es: {
     badge: "Acceso completo",
-    title: "Has alcanzado el límite gratuito",
-    subtitle: "Sube tu carta de vinos para desbloquear acceso ilimitado a todas las herramientas y recursos profesionales.",
-    toolsCounter: (n) => `Has usado ${n} de ${FREEMIUM_LIMIT} herramientas gratuitas`,
-    resourcesCounter: (n) => `Has descargado ${n} de ${FREEMIUM_LIMIT} recursos gratuitos`,
+    title: "Desbloquea todas las herramientas gratis",
+    subtitle: "Ya has probado una herramienta. Introduce tus datos para acceder a todas sin límites.",
+    toolsCounter: () => `Acceso ilimitado a todas las herramientas y recursos`,
+    resourcesCounter: () => `Acceso ilimitado a todas las herramientas y recursos`,
     name: "Nombre",
     email: "Email profesional",
     restaurant: "Restaurante",
     phone: "Teléfono",
     phoneOpt: "(opcional)",
-    upload: "Subir carta de vinos (PDF/imagen)",
-    uploadHint: "PDF, JPG o PNG · máx. 10 MB",
-    uploadRequired: "Sube tu carta de vinos para continuar",
-    uploadError: "Formato no válido. Sube un PDF, JPG o PNG (máx. 10 MB).",
-    cta: "Desbloquear acceso completo",
+    cta: "Desbloquear herramientas",
     sending: "Enviando…",
     privacy: "Sin compromiso. Datos tratados según nuestra política de privacidad.",
     successTitle: "¡Acceso desbloqueado!",
@@ -60,20 +52,16 @@ const COPY: Record<string, {
   },
   en: {
     badge: "Full access",
-    title: "You've reached the free limit",
-    subtitle: "Upload your wine list to unlock unlimited access to all professional tools and resources.",
-    toolsCounter: (n) => `You've used ${n} of ${FREEMIUM_LIMIT} free tools`,
-    resourcesCounter: (n) => `You've downloaded ${n} of ${FREEMIUM_LIMIT} free resources`,
+    title: "Unlock all tools for free",
+    subtitle: "You've tried one tool. Enter your details to access all of them without limits.",
+    toolsCounter: () => "Unlimited access to all tools and resources",
+    resourcesCounter: () => "Unlimited access to all tools and resources",
     name: "Name",
     email: "Work email",
     restaurant: "Restaurant",
     phone: "Phone",
     phoneOpt: "(optional)",
-    upload: "Upload wine list (PDF/image)",
-    uploadHint: "PDF, JPG or PNG · max 10 MB",
-    uploadRequired: "Upload your wine list to continue",
-    uploadError: "Invalid format. Upload a PDF, JPG or PNG (max 10 MB).",
-    cta: "Unlock full access",
+    cta: "Unlock tools",
     sending: "Sending…",
     privacy: "No commitment. Data handled per our privacy policy.",
     successTitle: "Access unlocked!",
@@ -84,20 +72,16 @@ const COPY: Record<string, {
   },
   pt: {
     badge: "Acesso completo",
-    title: "Atingiu o limite gratuito",
-    subtitle: "Envie a sua carta de vinhos para desbloquear acesso ilimitado a todas as ferramentas e recursos profissionais.",
-    toolsCounter: (n) => `Já usou ${n} de ${FREEMIUM_LIMIT} ferramentas gratuitas`,
-    resourcesCounter: (n) => `Já descarregou ${n} de ${FREEMIUM_LIMIT} recursos gratuitos`,
+    title: "Desbloqueie todas as ferramentas gratuitamente",
+    subtitle: "Já experimentou uma ferramenta. Introduza os seus dados para aceder a todas sem limites.",
+    toolsCounter: () => "Acesso ilimitado a todas as ferramentas e recursos",
+    resourcesCounter: () => "Acesso ilimitado a todas as ferramentas e recursos",
     name: "Nome",
     email: "Email profissional",
     restaurant: "Restaurante",
     phone: "Telefone",
     phoneOpt: "(opcional)",
-    upload: "Enviar carta de vinhos (PDF/imagem)",
-    uploadHint: "PDF, JPG ou PNG · máx. 10 MB",
-    uploadRequired: "Envie a sua carta de vinhos para continuar",
-    uploadError: "Formato inválido. Envie PDF, JPG ou PNG (máx. 10 MB).",
-    cta: "Desbloquear acesso completo",
+    cta: "Desbloquear ferramentas",
     sending: "A enviar…",
     privacy: "Sem compromisso. Dados tratados conforme a nossa política de privacidade.",
     successTitle: "Acesso desbloqueado!",
@@ -108,20 +92,16 @@ const COPY: Record<string, {
   },
   fr: {
     badge: "Accès complet",
-    title: "Vous avez atteint la limite gratuite",
-    subtitle: "Téléversez votre carte des vins pour débloquer un accès illimité à tous les outils et ressources professionnels.",
-    toolsCounter: (n) => `Vous avez utilisé ${n} sur ${FREEMIUM_LIMIT} outils gratuits`,
-    resourcesCounter: (n) => `Vous avez téléchargé ${n} sur ${FREEMIUM_LIMIT} ressources gratuites`,
+    title: "Débloquez tous les outils gratuitement",
+    subtitle: "Vous avez essayé un outil. Renseignez vos coordonnées pour accéder à tous sans limites.",
+    toolsCounter: () => "Accès illimité à tous les outils et ressources",
+    resourcesCounter: () => "Accès illimité à tous les outils et ressources",
     name: "Nom",
     email: "Email professionnel",
     restaurant: "Restaurant",
     phone: "Téléphone",
     phoneOpt: "(facultatif)",
-    upload: "Téléverser la carte des vins (PDF/image)",
-    uploadHint: "PDF, JPG ou PNG · max 10 Mo",
-    uploadRequired: "Téléversez votre carte des vins pour continuer",
-    uploadError: "Format invalide. Envoyez un PDF, JPG ou PNG (max 10 Mo).",
-    cta: "Débloquer l'accès complet",
+    cta: "Débloquer les outils",
     sending: "Envoi…",
     privacy: "Sans engagement. Données traitées selon notre politique de confidentialité.",
     successTitle: "Accès débloqué !",
@@ -132,20 +112,16 @@ const COPY: Record<string, {
   },
   it: {
     badge: "Accesso completo",
-    title: "Hai raggiunto il limite gratuito",
-    subtitle: "Carica la tua carta dei vini per sbloccare l'accesso illimitato a tutti gli strumenti e risorse professionali.",
-    toolsCounter: (n) => `Hai utilizzato ${n} di ${FREEMIUM_LIMIT} strumenti gratuiti`,
-    resourcesCounter: (n) => `Hai scaricato ${n} di ${FREEMIUM_LIMIT} risorse gratuite`,
+    title: "Sblocca tutti gli strumenti gratis",
+    subtitle: "Hai già provato uno strumento. Inserisci i tuoi dati per accedere a tutti senza limiti.",
+    toolsCounter: () => "Accesso illimitato a tutti gli strumenti e risorse",
+    resourcesCounter: () => "Accesso illimitato a tutti gli strumenti e risorse",
     name: "Nome",
     email: "Email professionale",
     restaurant: "Ristorante",
     phone: "Telefono",
     phoneOpt: "(facoltativo)",
-    upload: "Carica la carta dei vini (PDF/immagine)",
-    uploadHint: "PDF, JPG o PNG · max 10 MB",
-    uploadRequired: "Carica la tua carta dei vini per continuare",
-    uploadError: "Formato non valido. Carica PDF, JPG o PNG (max 10 MB).",
-    cta: "Sblocca accesso completo",
+    cta: "Sblocca gli strumenti",
     sending: "Invio in corso…",
     privacy: "Senza impegno. Dati trattati secondo la nostra politica sulla privacy.",
     successTitle: "Accesso sbloccato!",
@@ -156,20 +132,16 @@ const COPY: Record<string, {
   },
   de: {
     badge: "Voller Zugang",
-    title: "Sie haben das kostenlose Limit erreicht",
-    subtitle: "Laden Sie Ihre Weinkarte hoch, um unbegrenzten Zugang zu allen professionellen Tools und Ressourcen freizuschalten.",
-    toolsCounter: (n) => `Sie haben ${n} von ${FREEMIUM_LIMIT} kostenlosen Tools genutzt`,
-    resourcesCounter: (n) => `Sie haben ${n} von ${FREEMIUM_LIMIT} kostenlosen Ressourcen heruntergeladen`,
+    title: "Schalten Sie alle Tools kostenlos frei",
+    subtitle: "Sie haben bereits ein Tool ausprobiert. Geben Sie Ihre Daten ein, um auf alle ohne Limits zuzugreifen.",
+    toolsCounter: () => "Unbegrenzter Zugriff auf alle Tools und Ressourcen",
+    resourcesCounter: () => "Unbegrenzter Zugriff auf alle Tools und Ressourcen",
     name: "Name",
     email: "Geschäftliche E-Mail",
     restaurant: "Restaurant",
     phone: "Telefon",
     phoneOpt: "(optional)",
-    upload: "Weinkarte hochladen (PDF/Bild)",
-    uploadHint: "PDF, JPG oder PNG · max. 10 MB",
-    uploadRequired: "Laden Sie Ihre Weinkarte hoch, um fortzufahren",
-    uploadError: "Ungültiges Format. Laden Sie PDF, JPG oder PNG hoch (max. 10 MB).",
-    cta: "Vollen Zugang freischalten",
+    cta: "Tools freischalten",
     sending: "Wird gesendet…",
     privacy: "Unverbindlich. Daten werden gemäß unserer Datenschutzrichtlinie verarbeitet.",
     successTitle: "Zugang freigeschaltet!",
@@ -194,80 +166,38 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
   const { toast } = useToast();
   const t = COPY[lang] || COPY.es;
   const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [fileError, setFileError] = useState(false);
-
-  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0] || null;
-    if (!f) {
-      setFile(null);
-      return;
-    }
-    if (!ALLOWED_TYPES.includes(f.type) || f.size > MAX_BYTES) {
-      toast({ title: t.errorTitle, description: t.uploadError, variant: "destructive" });
-      e.target.value = "";
-      setFile(null);
-      return;
-    }
-    setFile(f);
-    setFileError(false);
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
-
-    if (!file) {
-      setFileError(true);
-      toast({ title: t.errorTitle, description: t.uploadRequired, variant: "destructive" });
-      return;
-    }
 
     setSubmitting(true);
     const fd = new FormData(e.currentTarget);
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const restaurant = String(fd.get("restaurant") || "").trim();
-    const phoneNumber = String(fd.get("phone") || "").trim();
-    const prefixCode = String(fd.get("phone_prefix") || "").trim();
-    const dial = PREFIXES.find((p) => p.code === prefixCode)?.dial || "";
-    const phone = phoneNumber ? `${dial} ${phoneNumber}`.trim() : null;
+    const toolSlug = getToolSlugFromPath(window.location.pathname);
 
     try {
-      // Upload required carta
-      const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
-      const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-      const path = `${new Date().toISOString().slice(0, 10)}/${safeName}`;
-      const { error: upErr } = await supabase.storage
-        .from("cartas-vinos")
-        .upload(path, file, { contentType: file.type, upsert: false });
-      let carta_url: string | null = null;
-      if (!upErr) {
-        const { data } = supabase.storage.from("cartas-vinos").getPublicUrl(path);
-        carta_url = data.publicUrl;
-      } else {
-        console.error("Upload error:", upErr);
-      }
-
-      const { error } = await supabase.from("contact_leads").insert({
+      const { error } = await supabase.from("freemium_leads").insert({
         name,
         email,
         restaurant,
-        phone,
-        carta_url,
-        form_type: "freemium_gate",
+        tool_slug: toolSlug,
       });
       if (error) throw error;
 
-      notifyLead({
-        name,
-        email,
-        restaurant,
-        phone,
-        carta_url,
-        menu_link: carta_url,
-        form_type: "freemium_gate",
-      });
+      // Best-effort notification — don't fail the unlock if it errors
+      try {
+        notifyLead({
+          name,
+          email,
+          restaurant,
+          form_type: "freemium_gate",
+        });
+      } catch (notifyErr) {
+        console.warn("notifyLead failed:", notifyErr);
+      }
 
       unlockFreemium();
       toast({ title: t.successTitle, description: t.successMsg });
@@ -338,48 +268,6 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
             <label htmlFor="gate_restaurant" className="text-xs font-medium text-muted-foreground">{t.restaurant}</label>
             <input id="gate_restaurant" name="restaurant" type="text" required maxLength={150}
               className="mt-1 w-full h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-wine/40" />
-          </div>
-          <div>
-            <label htmlFor="phone" className="text-xs font-medium text-muted-foreground">
-              {t.phone} <span className="text-muted-foreground/60">{t.phoneOpt}</span>
-            </label>
-            <PhoneInput native required={false} />
-          </div>
-
-          <div>
-            <label
-              htmlFor="gate_carta"
-              className={`flex items-center justify-center gap-2 w-full h-11 rounded-md border-2 border-dashed px-3 text-sm font-medium cursor-pointer transition-colors ${
-                file
-                  ? "border-wine/50 bg-wine/10 text-wine-light"
-                  : fileError
-                    ? "border-destructive/60 bg-destructive/5 text-destructive"
-                    : "border-wine/40 bg-wine/5 hover:bg-wine/10 text-wine-light"
-              }`}
-            >
-              {file ? (
-                <>
-                  <FileCheck2 size={16} />
-                  <span className="truncate max-w-[80%]">{file.name}</span>
-                </>
-              ) : (
-                <>
-                  <Upload size={16} />
-                  <span>{t.upload} *</span>
-                </>
-              )}
-            </label>
-            <input
-              id="gate_carta"
-              name="carta"
-              type="file"
-              accept="application/pdf,image/jpeg,image/png"
-              onChange={onFileChange}
-              className="sr-only"
-            />
-            <p className={`text-[10px] mt-1 ${fileError ? "text-destructive" : "text-muted-foreground/60"}`}>
-              {fileError ? t.uploadRequired : t.uploadHint}
-            </p>
           </div>
 
           <button

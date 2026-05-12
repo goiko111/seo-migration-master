@@ -6,6 +6,7 @@ import {
   shouldGateTool,
   getToolsUsed,
   useFreemiumState,
+  getToolSlugFromPath,
 } from "@/lib/freemium";
 
 /**
@@ -16,13 +17,10 @@ import {
  */
 const FreemiumToolGuard = () => {
   const { pathname } = useLocation();
-  const { toolsUsed, unlocked } = useFreemiumState();
+  const { unlocked } = useFreemiumState();
   const [showGate, setShowGate] = useState(false);
 
-  // Strip language prefix and detect tool slug
-  const stripped = pathname.replace(/^\/(en|it|fr|de|pt)(?=\/|$)/, "") || "/";
-  const match = stripped.match(/^\/herramientas\/([^/]+)/);
-  const slug = match ? match[1] : null;
+  const slug = getToolSlugFromPath(pathname);
 
   useEffect(() => {
     if (!slug) {
