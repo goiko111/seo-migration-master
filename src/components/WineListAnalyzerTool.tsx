@@ -261,6 +261,117 @@ const T_PENDING_TEXT: Record<Lang, string> = {
   it: "Il nostro team la sta analizzando manualmente. Ti contatteremo entro 48h con il report personalizzato.",
   pt: "A nossa equipa está a analisá-la manualmente. Contactaremos em menos de 48h com o seu relatório.",
 };
+
+/* ─── Preview block (pendingContact + error) i18n ─── */
+const T_PREV: Record<Lang, {
+  detected: (n: number) => string;
+  categories: string;
+  samples: string;
+  retry: string;
+  retryHint: string;
+  formatHints: string;
+  fallbackError: string;
+}> = {
+  es: {
+    detected: (n) => `Hemos detectado aproximadamente ${n} vinos en tu carta`,
+    categories: "Categorías encontradas",
+    samples: "Algunos ejemplos detectados",
+    retry: "Intentar de nuevo",
+    retryHint: "Vuelve a probar con los datos actuales o cambia de formato.",
+    formatHints: "También puedes pegar el texto directamente o subir otro formato (PDF, foto, URL).",
+    fallbackError: "Ha ocurrido un error procesando tu carta.",
+  },
+  en: {
+    detected: (n) => `We detected approximately ${n} wines on your list`,
+    categories: "Categories found",
+    samples: "Sample wines detected",
+    retry: "Try again",
+    retryHint: "Retry with the current data or switch format.",
+    formatHints: "You can also paste the text directly or upload another format (PDF, photo, URL).",
+    fallbackError: "An error occurred while processing your list.",
+  },
+  fr: {
+    detected: (n) => `Nous avons détecté environ ${n} vins sur votre carte`,
+    categories: "Catégories trouvées",
+    samples: "Quelques vins détectés",
+    retry: "Réessayer",
+    retryHint: "Réessayez avec les données actuelles ou changez de format.",
+    formatHints: "Vous pouvez aussi coller le texte directement ou utiliser un autre format (PDF, photo, URL).",
+    fallbackError: "Une erreur est survenue lors du traitement de votre carte.",
+  },
+  de: {
+    detected: (n) => `Wir haben ungefähr ${n} Weine auf Ihrer Karte erkannt`,
+    categories: "Gefundene Kategorien",
+    samples: "Beispielhafte Weine",
+    retry: "Erneut versuchen",
+    retryHint: "Mit den aktuellen Daten erneut versuchen oder Format wechseln.",
+    formatHints: "Sie können den Text auch direkt einfügen oder ein anderes Format hochladen (PDF, Foto, URL).",
+    fallbackError: "Beim Verarbeiten Ihrer Karte ist ein Fehler aufgetreten.",
+  },
+  it: {
+    detected: (n) => `Abbiamo rilevato circa ${n} vini nella tua carta`,
+    categories: "Categorie trovate",
+    samples: "Esempi di vini rilevati",
+    retry: "Riprova",
+    retryHint: "Riprova con i dati attuali o cambia formato.",
+    formatHints: "Puoi anche incollare il testo direttamente o caricare un altro formato (PDF, foto, URL).",
+    fallbackError: "Si è verificato un errore durante l'elaborazione della tua carta.",
+  },
+  pt: {
+    detected: (n) => `Detetámos aproximadamente ${n} vinhos na sua carta`,
+    categories: "Categorias encontradas",
+    samples: "Exemplos de vinhos detetados",
+    retry: "Tentar novamente",
+    retryHint: "Tente novamente com os dados atuais ou mude de formato.",
+    formatHints: "Também pode colar o texto diretamente ou carregar outro formato (PDF, foto, URL).",
+    fallbackError: "Ocorreu um erro ao processar a sua carta.",
+  },
+};
+
+/* ─── Reusable preview block (vinos detectados + categorías + muestras) ─── */
+function PreviewBlock({
+  lang, preview,
+}: { lang: Lang; preview: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] } }) {
+  const tt = T_PREV[lang];
+  const cats = preview.categoriesFound || [];
+  const samples = preview.sampleWines || [];
+  return (
+    <div className="rounded-xl border border-border bg-background/60 p-4 md:p-5 space-y-4 text-left">
+      {typeof preview.estimatedWines === "number" && preview.estimatedWines > 0 && (
+        <p className="text-sm md:text-base text-foreground">
+          {tt.detected(preview.estimatedWines).split(String(preview.estimatedWines))[0]}
+          <strong className="text-wine">{preview.estimatedWines}</strong>
+          {tt.detected(preview.estimatedWines).split(String(preview.estimatedWines))[1] || ""}
+        </p>
+      )}
+      {cats.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{tt.categories}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {cats.slice(0, 12).map((c, i) => (
+              <span key={i} className="px-2.5 py-1 rounded-full text-xs font-medium bg-wine/10 text-wine border border-wine/20 capitalize">
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      {samples.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{tt.samples}</p>
+          <ul className="space-y-1 text-sm text-foreground/85">
+            {samples.slice(0, 5).map((s, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-wine">•</span><span className="truncate">{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const T_KPI: Record<Lang, { ticket: string; ticketWine: string; bottles: string; revenue: string; profile: string; rating: string; reviews: string; type: string; address: string; conf: { high: string; medium: string; low: string } }> = {
   es: { ticket: "Ticket medio", ticketWine: "Ticket vino/comensal", bottles: "Botellas/servicio", revenue: "Ingresos vino/mes", profile: "Perfil de carta", rating: "Valoración Google", reviews: "reseñas", type: "Tipo", address: "Dirección", conf: { high: "Alta confianza", medium: "Confianza media", low: "Baja confianza" } },
   en: { ticket: "Average ticket", ticketWine: "Wine ticket / guest", bottles: "Bottles / service", revenue: "Wine revenue / month", profile: "List profile", rating: "Google rating", reviews: "reviews", type: "Type", address: "Address", conf: { high: "High confidence", medium: "Medium confidence", low: "Low confidence" } },
