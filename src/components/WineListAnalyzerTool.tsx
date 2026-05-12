@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2, FileText, Upload, Loader2, CheckCircle2, AlertTriangle,
   Lock, ExternalLink, Sparkles, Search, X, Star, Clock, Info, Lightbulb,
+  BarChart3, CircleDollarSign, Wine, TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
