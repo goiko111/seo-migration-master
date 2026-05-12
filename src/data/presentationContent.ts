@@ -101,8 +101,10 @@ export interface PresentationContent {
   sPricingSubtitle: string;
   sPricingPlans: {
     name: string;
+    badge?: string;
     tagline: string;
-    priceLabel: string;
+    solves?: string;
+    fits?: string;
     features: string[];
     cta: string;
     highlight?: boolean;
