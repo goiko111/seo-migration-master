@@ -230,6 +230,7 @@ export type Database = {
           email: string
           id: string
           name: string
+          phone: string | null
           restaurant: string
           tool_slug: string | null
         }
@@ -238,6 +239,7 @@ export type Database = {
           email: string
           id?: string
           name: string
+          phone?: string | null
           restaurant: string
           tool_slug?: string | null
         }
@@ -246,6 +248,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string
+          phone?: string | null
           restaurant?: string
           tool_slug?: string | null
         }

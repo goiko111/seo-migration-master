@@ -5,6 +5,7 @@ import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import { unlockFreemium, getToolSlugFromPath } from "@/lib/freemium";
+import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
 
 const COPY: Record<string, {
   badge: string;
@@ -40,7 +41,7 @@ const COPY: Record<string, {
     email: "Email profesional",
     restaurant: "Restaurante",
     phone: "Teléfono",
-    phoneOpt: "(opcional)",
+    phoneOpt: "",
     cta: "Desbloquear herramientas",
     sending: "Enviando…",
     privacy: "Sin compromiso. Datos tratados según nuestra política de privacidad.",
@@ -60,7 +61,7 @@ const COPY: Record<string, {
     email: "Work email",
     restaurant: "Restaurant",
     phone: "Phone",
-    phoneOpt: "(optional)",
+    phoneOpt: "",
     cta: "Unlock tools",
     sending: "Sending…",
     privacy: "No commitment. Data handled per our privacy policy.",
@@ -80,7 +81,7 @@ const COPY: Record<string, {
     email: "Email profissional",
     restaurant: "Restaurante",
     phone: "Telefone",
-    phoneOpt: "(opcional)",
+    phoneOpt: "",
     cta: "Desbloquear ferramentas",
     sending: "A enviar…",
     privacy: "Sem compromisso. Dados tratados conforme a nossa política de privacidade.",
@@ -100,7 +101,7 @@ const COPY: Record<string, {
     email: "Email professionnel",
     restaurant: "Restaurant",
     phone: "Téléphone",
-    phoneOpt: "(facultatif)",
+    phoneOpt: "",
     cta: "Débloquer les outils",
     sending: "Envoi…",
     privacy: "Sans engagement. Données traitées selon notre politique de confidentialité.",
@@ -120,7 +121,7 @@ const COPY: Record<string, {
     email: "Email professionale",
     restaurant: "Ristorante",
     phone: "Telefono",
-    phoneOpt: "(facoltativo)",
+    phoneOpt: "",
     cta: "Sblocca gli strumenti",
     sending: "Invio in corso…",
     privacy: "Senza impegno. Dati trattati secondo la nostra politica sulla privacy.",
@@ -140,7 +141,7 @@ const COPY: Record<string, {
     email: "Geschäftliche E-Mail",
     restaurant: "Restaurant",
     phone: "Telefon",
-    phoneOpt: "(optional)",
+    phoneOpt: "",
     cta: "Tools freischalten",
     sending: "Wird gesendet…",
     privacy: "Unverbindlich. Daten werden gemäß unserer Datenschutzrichtlinie verarbeitet.",
@@ -176,6 +177,10 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const restaurant = String(fd.get("restaurant") || "").trim();
+    const phoneNumber = String(fd.get("phone") || "").trim();
+    const prefixCode = String(fd.get("phone_prefix") || "").trim();
+    const dial = PREFIXES.find((p) => p.code === prefixCode)?.dial || "";
+    const phone = phoneNumber ? `${dial} ${phoneNumber}`.trim() : null;
     const toolSlug = getToolSlugFromPath(window.location.pathname);
 
     try {
@@ -183,6 +188,7 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
         name,
         email,
         restaurant,
+        phone,
         tool_slug: toolSlug,
       });
       if (error) throw error;
@@ -193,6 +199,7 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
           name,
           email,
           restaurant,
+          phone,
           form_type: "freemium_gate",
         });
       } catch (notifyErr) {
@@ -268,6 +275,12 @@ const FreemiumGate = ({ context, count, onUnlocked, dismissible, onDismiss }: Fr
             <label htmlFor="gate_restaurant" className="text-xs font-medium text-muted-foreground">{t.restaurant}</label>
             <input id="gate_restaurant" name="restaurant" type="text" required maxLength={150}
               className="mt-1 w-full h-10 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-wine/40" />
+          </div>
+          <div>
+            <label htmlFor="phone" className="text-xs font-medium text-muted-foreground">
+              {t.phone}
+            </label>
+            <PhoneInput native required={true} />
           </div>
 
           <button
