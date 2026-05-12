@@ -34,6 +34,20 @@ async function generatePresentationPdf(filename: string) {
   const prevCursor = root?.style.cursor;
   if (root) root.style.cursor = "progress";
 
+  // Force any framer-motion Reveal blocks (initial: hidden / opacity 0) to be visible
+  // for the duration of the export, regardless of viewport intersection.
+  const styleEl = document.createElement("style");
+  styleEl.id = "winerim-pdf-export-style";
+  styleEl.textContent = `
+    .presentation-slide * {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+  `;
+  document.head.appendChild(styleEl);
+
   // A4 landscape in mm
   const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
   const pageW = pdf.internal.pageSize.getWidth();
@@ -42,6 +56,9 @@ async function generatePresentationPdf(filename: string) {
   try {
     for (let i = 0; i < slides.length; i++) {
       const slide = slides[i];
+      // Bring into view so any lazy images / IntersectionObservers fire
+      slide.scrollIntoView({ behavior: "auto", block: "start" });
+
       // Force a stable, presentable size while rendering
       const prev = {
         minHeight: slide.style.minHeight,
@@ -52,8 +69,19 @@ async function generatePresentationPdf(filename: string) {
       slide.style.height = "900px";
       slide.style.minHeight = "900px";
 
-      // Wait one frame so layout settles
-      await new Promise((r) => requestAnimationFrame(() => r(null)));
+      // Wait for layout + lazy images to settle
+      await new Promise((r) => setTimeout(r, 250));
+      const imgs = Array.from(slide.querySelectorAll<HTMLImageElement>("img"));
+      await Promise.all(
+        imgs.map((img) =>
+          img.complete && img.naturalWidth > 0
+            ? Promise.resolve()
+            : new Promise<void>((res) => {
+                img.addEventListener("load", () => res(), { once: true });
+                img.addEventListener("error", () => res(), { once: true });
+              }),
+        ),
+      );
 
       const canvas = await html2canvas(slide, {
         backgroundColor: null,
@@ -90,6 +118,7 @@ async function generatePresentationPdf(filename: string) {
     console.error("PDF generation failed", err);
     alert("No se pudo generar el PDF. Inténtalo de nuevo.");
   } finally {
+    document.getElementById("winerim-pdf-export-style")?.remove();
     if (root) root.style.cursor = prevCursor || "";
   }
 }
