@@ -49,6 +49,27 @@ function notifyAnalyzerLead(payload: {
 /* ─── Config ─── */
 const API_BASE = "https://api.winerim.wine";
 const GOOGLE_MAPS_API_KEY = "AIzaSyAQSpAPWbAe7HHirNOgY6YEiwsd8I5VVFI";
+const ADMIN_KEY_STORAGE = "winerim_admin_key";
+
+/** Reads ?admin_key=… from URL, persists in sessionStorage and returns it. */
+function getAdminKey(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("admin_key");
+    if (fromUrl) {
+      sessionStorage.setItem(ADMIN_KEY_STORAGE, fromUrl);
+      return fromUrl;
+    }
+    return sessionStorage.getItem(ADMIN_KEY_STORAGE);
+  } catch { return null; }
+}
+
+/** Appends admin_key (if present) to a Worker URL. */
+function withAdminKey(url: string): string {
+  const key = getAdminKey();
+  if (!key) return url;
+  return url + (url.includes("?") ? "&" : "?") + "admin_key=" + encodeURIComponent(key);
+}
 
 type Lang = "es" | "en" | "fr" | "de" | "it" | "pt";
 // Short labels for mobile tabs
@@ -240,6 +261,117 @@ const T_PENDING_TEXT: Record<Lang, string> = {
   it: "Il nostro team la sta analizzando manualmente. Ti contatteremo entro 48h con il report personalizzato.",
   pt: "A nossa equipa está a analisá-la manualmente. Contactaremos em menos de 48h com o seu relatório.",
 };
+
+/* ─── Preview block (pendingContact + error) i18n ─── */
+const T_PREV: Record<Lang, {
+  detected: (n: number) => string;
+  categories: string;
+  samples: string;
+  retry: string;
+  retryHint: string;
+  formatHints: string;
+  fallbackError: string;
+}> = {
+  es: {
+    detected: (n) => `Hemos detectado aproximadamente ${n} vinos en tu carta`,
+    categories: "Categorías encontradas",
+    samples: "Algunos ejemplos detectados",
+    retry: "Intentar de nuevo",
+    retryHint: "Vuelve a probar con los datos actuales o cambia de formato.",
+    formatHints: "También puedes pegar el texto directamente o subir otro formato (PDF, foto, URL).",
+    fallbackError: "Ha ocurrido un error procesando tu carta.",
+  },
+  en: {
+    detected: (n) => `We detected approximately ${n} wines on your list`,
+    categories: "Categories found",
+    samples: "Sample wines detected",
+    retry: "Try again",
+    retryHint: "Retry with the current data or switch format.",
+    formatHints: "You can also paste the text directly or upload another format (PDF, photo, URL).",
+    fallbackError: "An error occurred while processing your list.",
+  },
+  fr: {
+    detected: (n) => `Nous avons détecté environ ${n} vins sur votre carte`,
+    categories: "Catégories trouvées",
+    samples: "Quelques vins détectés",
+    retry: "Réessayer",
+    retryHint: "Réessayez avec les données actuelles ou changez de format.",
+    formatHints: "Vous pouvez aussi coller le texte directement ou utiliser un autre format (PDF, photo, URL).",
+    fallbackError: "Une erreur est survenue lors du traitement de votre carte.",
+  },
+  de: {
+    detected: (n) => `Wir haben ungefähr ${n} Weine auf Ihrer Karte erkannt`,
+    categories: "Gefundene Kategorien",
+    samples: "Beispielhafte Weine",
+    retry: "Erneut versuchen",
+    retryHint: "Mit den aktuellen Daten erneut versuchen oder Format wechseln.",
+    formatHints: "Sie können den Text auch direkt einfügen oder ein anderes Format hochladen (PDF, Foto, URL).",
+    fallbackError: "Beim Verarbeiten Ihrer Karte ist ein Fehler aufgetreten.",
+  },
+  it: {
+    detected: (n) => `Abbiamo rilevato circa ${n} vini nella tua carta`,
+    categories: "Categorie trovate",
+    samples: "Esempi di vini rilevati",
+    retry: "Riprova",
+    retryHint: "Riprova con i dati attuali o cambia formato.",
+    formatHints: "Puoi anche incollare il testo direttamente o caricare un altro formato (PDF, foto, URL).",
+    fallbackError: "Si è verificato un errore durante l'elaborazione della tua carta.",
+  },
+  pt: {
+    detected: (n) => `Detetámos aproximadamente ${n} vinhos na sua carta`,
+    categories: "Categorias encontradas",
+    samples: "Exemplos de vinhos detetados",
+    retry: "Tentar novamente",
+    retryHint: "Tente novamente com os dados atuais ou mude de formato.",
+    formatHints: "Também pode colar o texto diretamente ou carregar outro formato (PDF, foto, URL).",
+    fallbackError: "Ocorreu um erro ao processar a sua carta.",
+  },
+};
+
+/* ─── Reusable preview block (vinos detectados + categorías + muestras) ─── */
+function PreviewBlock({
+  lang, preview,
+}: { lang: Lang; preview: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] } }) {
+  const tt = T_PREV[lang];
+  const cats = preview.categoriesFound || [];
+  const samples = preview.sampleWines || [];
+  return (
+    <div className="rounded-xl border border-border bg-background/60 p-4 md:p-5 space-y-4 text-left">
+      {typeof preview.estimatedWines === "number" && preview.estimatedWines > 0 && (
+        <p className="text-sm md:text-base text-foreground">
+          {tt.detected(preview.estimatedWines).split(String(preview.estimatedWines))[0]}
+          <strong className="text-wine">{preview.estimatedWines}</strong>
+          {tt.detected(preview.estimatedWines).split(String(preview.estimatedWines))[1] || ""}
+        </p>
+      )}
+      {cats.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{tt.categories}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {cats.slice(0, 12).map((c, i) => (
+              <span key={i} className="px-2.5 py-1 rounded-full text-xs font-medium bg-wine/10 text-wine border border-wine/20 capitalize">
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      {samples.length > 0 && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{tt.samples}</p>
+          <ul className="space-y-1 text-sm text-foreground/85">
+            {samples.slice(0, 5).map((s, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-wine">•</span><span className="truncate">{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const T_KPI: Record<Lang, { ticket: string; ticketWine: string; bottles: string; revenue: string; profile: string; rating: string; reviews: string; type: string; address: string; conf: { high: string; medium: string; low: string } }> = {
   es: { ticket: "Ticket medio", ticketWine: "Ticket vino/comensal", bottles: "Botellas/servicio", revenue: "Ingresos vino/mes", profile: "Perfil de carta", rating: "Valoración Google", reviews: "reseñas", type: "Tipo", address: "Dirección", conf: { high: "Alta confianza", medium: "Confianza media", low: "Baja confianza" } },
   en: { ticket: "Average ticket", ticketWine: "Wine ticket / guest", bottles: "Bottles / service", revenue: "Wine revenue / month", profile: "List profile", rating: "Google rating", reviews: "reviews", type: "Type", address: "Address", conf: { high: "High confidence", medium: "Medium confidence", low: "Low confidence" } },
@@ -571,6 +703,13 @@ interface AnalysisResult {
   analyzedWines?: number;
   totalWines?: number;
   partialMessage?: string;
+  preview?: {
+    estimatedWines?: number;
+    categoriesFound?: string[];
+    sampleWines?: string[];
+  };
+  message?: string;
+  emailConfirmation?: string;
 }
 
 const STATUS_BG: Record<SemaphoreStatus, string> = { red: "border-l-red-500 bg-red-500/5", yellow: "border-l-amber-500 bg-amber-500/5", green: "border-l-emerald-500 bg-emerald-500/5" };
@@ -606,6 +745,11 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const [pollProgress, setPollProgress] = useState<number | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorPreview, setErrorPreview] = useState<{
+    estimatedWines?: number;
+    categoriesFound?: string[];
+    sampleWines?: string[];
+  } | null>(null);
   const [urlFailedInfo, setUrlFailedInfo] = useState<{
     message: string;
     suggestions?: Array<{ method: string; label: string; description?: string }>;
@@ -620,6 +764,10 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     window.setTimeout(() => {
       document.getElementById("analyzer-inline-error")?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 50);
+  };
+
+  const resetForRetry = () => {
+    setErrorMsg(null); setErrorPreview(null); setResult(null); setUrlFailedInfo(null);
   };
 
   // Loading step animator
@@ -656,7 +804,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   };
 
   const runAnalysis = async () => {
-    setLoading(true); setResult(null); setErrorMsg(null);
+    setLoading(true); setResult(null); setErrorMsg(null); setErrorPreview(null);
     setUrlFailedInfo(null);
     setRateLimitMsg(null);
     setPollLabel(null); setPollProgress(null);
@@ -673,7 +821,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         fd.append("lang", lang);
         if (placeId) fd.append("placeId", placeId);
         if (restaurantName) fd.append("restaurantName", restaurantName);
-        res = await fetch(`${API_BASE}/v1/analyze`, { method: "POST", body: fd, signal: controller.signal });
+        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), { method: "POST", body: fd, signal: controller.signal });
       } else {
         const base: Record<string, any> = { lang };
         if (placeId) base.placeId = placeId;
@@ -681,7 +829,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
         const body = tab === "url"
           ? { type: "url", url: url.trim(), ...base }
           : { type: "text", text: text.trim(), ...base };
-        res = await fetch(`${API_BASE}/v1/analyze`, {
+        res = await fetch(withAdminKey(`${API_BASE}/v1/analyze`), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -738,7 +886,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     while (Date.now() - startedAt < MAX_MS) {
       await new Promise((r) => setTimeout(r, 2500));
       try {
-        const r = await fetch(`${API_BASE}/v1/status/${encodeURIComponent(id)}`);
+        const r = await fetch(withAdminKey(`${API_BASE}/v1/status/${encodeURIComponent(id)}`));
         const d = await r.json().catch(() => ({}));
         if (typeof d?.progress === "number") setPollProgress(d.progress);
         if (typeof d?.stepLabel === "string") setPollLabel(d.stepLabel);
@@ -755,7 +903,12 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "error") {
-            return { success: false, error: d?.error || d?.result?.error };
+            return {
+              success: false,
+              error: d?.error || d?.result?.error,
+              message: d?.message || d?.result?.message,
+              preview: d?.preview || d?.result?.preview,
+            };
           }
           return d;
         }
@@ -770,8 +923,9 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
   const handleFinalPayload = (data: any) => {
     if (!data?.success) {
       const apiErr: string = (data?.error || "").toString();
-      let msg = apiErr || t.errGeneric;
+      let msg = (data?.message as string) || apiErr || t.errGeneric;
       if (/no wines? found/i.test(apiErr)) msg = NO_WINES_MSG[lang];
+      if (data?.preview) setErrorPreview(data.preview);
       showInlineError(msg);
       return;
     }
@@ -942,9 +1096,26 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
 
           {/* Inline error (visible, no sticky overlap) */}
           {errorMsg && !loading && (
-            <div id="analyzer-inline-error" role="alert" className="mb-4 flex items-start gap-3 p-4 rounded-lg border border-destructive/40 bg-destructive/10 text-destructive">
-              <AlertTriangle size={18} className="mt-0.5 shrink-0" />
-              <p className="text-sm leading-relaxed">{errorMsg}</p>
+            <div id="analyzer-inline-error" role="alert" className="mb-4 rounded-lg border border-destructive/40 bg-destructive/5 p-4 space-y-3">
+              <div className="flex items-start gap-3 text-destructive">
+                <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+                <p className="text-sm leading-relaxed">{errorMsg}</p>
+              </div>
+              {errorPreview && (
+                <PreviewBlock lang={lang} preview={errorPreview} />
+              )}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={resetForRetry}
+                  className="border-wine/40 text-wine hover:bg-wine/10"
+                >
+                  {T_PREV[lang].retry}
+                </Button>
+                <p className="text-xs text-muted-foreground">{T_PREV[lang].formatHints}</p>
+              </div>
             </div>
           )}
 
@@ -1023,7 +1194,14 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
               {result.pendingContact ? (
-                <PendingContactView lang={lang} message={(result as any).message} analysisId={result.analysisId} t={t} />
+                <PendingContactView
+                  lang={lang}
+                  message={(result as any).message}
+                  analysisId={result.analysisId}
+                  preview={(result as any).preview}
+                  emailConfirmation={(result as any).emailConfirmation}
+                  t={t}
+                />
               ) : (
                 <ResultsView result={result} t={t} lang={lang} />
               )}
@@ -1237,7 +1415,7 @@ function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; pr
     if (!consent) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/unlock`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/unlock`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analysisId, restaurant, name, email, phone, consent }),
@@ -1466,8 +1644,15 @@ function KpiCard({
 
 /* ─── Pending contact (very large lists) ─── */
 function PendingContactView({
-  lang, message, analysisId, t,
-}: { lang: Lang; message?: string; analysisId?: string; t: any }) {
+  lang, message, analysisId, preview, emailConfirmation, t,
+}: {
+  lang: Lang;
+  message?: string;
+  analysisId?: string;
+  preview?: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] };
+  emailConfirmation?: string;
+  t: any;
+}) {
   return (
     <div className="bg-gradient-to-br from-amber-500/10 to-wine/10 border border-amber-500/30 rounded-2xl p-8 md:p-12 text-center">
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/15 mb-5">
@@ -1477,8 +1662,19 @@ function PendingContactView({
       <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
         {message || T_PENDING_TEXT[lang]}
       </p>
+      {preview && (
+        <div className="mt-6 max-w-xl mx-auto">
+          <PreviewBlock lang={lang} preview={preview} />
+        </div>
+      )}
       <div className="mt-8 max-w-xl mx-auto text-left">
-        <ContactCaptureForm lang={lang} analysisId={analysisId || null} t={t} variant="pending" />
+        <ContactCaptureForm
+          lang={lang}
+          analysisId={analysisId || null}
+          t={t}
+          variant="pending"
+          successOverride={emailConfirmation}
+        />
       </div>
     </div>
   );
@@ -1543,8 +1739,14 @@ function PhoneInputControlled({
 
 /* ─── Generic contact capture form (used in long-wait + pending-contact) ─── */
 function ContactCaptureForm({
-  lang, analysisId, t, variant,
-}: { lang: Lang; analysisId: string | null; t: any; variant: "longwait" | "pending" }) {
+  lang, analysisId, t, variant, successOverride,
+}: {
+  lang: Lang;
+  analysisId: string | null;
+  t: any;
+  variant: "longwait" | "pending";
+  successOverride?: string;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -1557,7 +1759,7 @@ function ContactCaptureForm({
     if (!name.trim()) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/unlock`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/unlock`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analysisId, name, email, phone, consent: true, lang, source: variant }),
@@ -1582,7 +1784,7 @@ function ContactCaptureForm({
     return (
       <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10">
         <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
-        <p className="text-sm leading-relaxed">{t.successText}</p>
+        <p className="text-sm leading-relaxed">{successOverride || t.successText}</p>
       </div>
     );
   }
@@ -1642,7 +1844,7 @@ function RegistrationGateModal({
     if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error(t.errEmail); return; }
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/v1/register`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/register`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, restaurant: restaurant || undefined, lang }),
@@ -1738,7 +1940,7 @@ function PartialAnalysisBanner({
     if (!email || submitting) return;
     setSubmitting(true); setErr(null);
     try {
-      const res = await fetch(`${API_BASE}/v1/register`, {
+      const res = await fetch(withAdminKey(`${API_BASE}/v1/register`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
