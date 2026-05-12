@@ -142,19 +142,51 @@ export default function Presentation() {
     shareUrl.searchParams.set("utm_medium", "share");
     if (grupo) shareUrl.searchParams.set("grupo", grupo);
     const finalUrl = shareUrl.toString();
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: t.metaTitle, url: finalUrl });
-      } else {
-        await navigator.clipboard.writeText(finalUrl);
+    const copyFallback = (text: string): boolean => {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.top = "-1000px";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
       }
+    };
+    let success = false;
+    try {
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+      if (navigator.share && isMobile) {
+        await navigator.share({ title: t.metaTitle, url: finalUrl });
+        success = true;
+      } else if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(finalUrl);
+        success = true;
+      } else {
+        success = copyFallback(finalUrl);
+      }
+    } catch {
+      success = copyFallback(finalUrl);
+    }
+    if (success) {
       setShared(true);
       setTimeout(() => setShared(false), 2200);
       (window as any).dataLayer?.push({ event: "presentation_share_click", lang });
-    } catch {
-      /* user cancelled */
+    } else {
+      window.prompt(t.shareLabel, finalUrl);
     }
-  }, [url, grupo, t.metaTitle, lang]);
+  }, [url, grupo, t.metaTitle, t.shareLabel, lang]);
+
+  const handleDownloadPdf = useCallback(() => {
+    (window as any).dataLayer?.push({ event: "presentation_download_pdf", lang });
+    window.print();
+  }, [lang]);
 
   const handleFullscreen = useCallback(() => {
     if (typeof document === "undefined") return;
