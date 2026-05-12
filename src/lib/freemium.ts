@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-export const FREEMIUM_LIMIT = 2;
+export const FREEMIUM_LIMIT = 1;
 
 const KEY_TOOLS = "winerim_tools_used";
 const KEY_RESOURCES = "winerim_resources_downloaded";
@@ -83,6 +83,38 @@ export function shouldGateResource(slug: string): boolean {
   const used = getResourcesDownloaded();
   if (used.includes(slug)) return false;
   return used.length >= FREEMIUM_LIMIT;
+}
+
+/**
+ * Map any localized tool/resource pathname to a canonical slug.
+ * Returns null when the route isn't a gated tool/resource.
+ * The same canonical slug is used across languages so the counter is consistent.
+ */
+const PATH_TO_SLUG: Array<{ test: RegExp; slug: string }> = [
+  // Wine list analyzer
+  { test: /^\/(analisis-carta|wine-list-analysis|weinkarten-analyse|analyse-carte-vins|analisi-carta-vini|analise-carta-vinhos)\/?$/, slug: "analisis-carta" },
+  // Wine margin calculator
+  { test: /^\/(calculadora-margen-vino|wine-margin-calculator|wein-margen-rechner|calculateur-marges-vin|calcolatore-margine-vino|calculadora-margem-vinho)\/?$/, slug: "calculadora-margen-vino" },
+  // Resources hub + detail pages
+  { test: /^\/(recursos|resources|risorse|ressources|ressourcen)(\/.+)?$/, slug: "recursos" },
+  // Generic tool routes (any language) /<tools>/<slug>
+  { test: /^\/(herramientas|tools|outils|strumenti|ferramentas|werkzeuge)\/([^/]+)\/?$/, slug: "__capture__" },
+];
+
+export function getToolSlugFromPath(pathname: string): string | null {
+  // Strip language prefix
+  const stripped = pathname.replace(/^\/(en|it|fr|de|pt)(?=\/|$)/, "") || "/";
+  for (const entry of PATH_TO_SLUG) {
+    const m = stripped.match(entry.test);
+    if (m) {
+      if (entry.slug === "__capture__") {
+        // Use the actual sub-slug so each tool counts as distinct
+        return `tool:${m[2]}`;
+      }
+      return entry.slug;
+    }
+  }
+  return null;
 }
 
 /**
