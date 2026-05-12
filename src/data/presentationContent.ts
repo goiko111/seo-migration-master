@@ -64,6 +64,18 @@ export interface PresentationContent {
   s11Title: string;
   s11Subtitle: string;
   s11Items: { title: string; body: string }[];
+  // Slide 11b — Restaurant management & dynamic intelligence
+  sMgmtEyebrow: string;
+  sMgmtTitle: string;
+  sMgmtSubtitle: string;
+  sMgmtItems: { title: string; body: string }[];
+  sMgmtFootnote: string;
+  // Slide 11c — Winerim Supply
+  sSupplyEyebrow: string;
+  sSupplyTitle: string;
+  sSupplyBody: string;
+  sSupplyItems: { title: string; body: string }[];
+  sSupplyTag: string;
   // Slide 12 — Implementation
   s12Eyebrow: string;
   s12Title: string;
