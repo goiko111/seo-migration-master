@@ -1739,8 +1739,14 @@ function PhoneInputControlled({
 
 /* ─── Generic contact capture form (used in long-wait + pending-contact) ─── */
 function ContactCaptureForm({
-  lang, analysisId, t, variant,
-}: { lang: Lang; analysisId: string | null; t: any; variant: "longwait" | "pending" }) {
+  lang, analysisId, t, variant, successOverride,
+}: {
+  lang: Lang;
+  analysisId: string | null;
+  t: any;
+  variant: "longwait" | "pending";
+  successOverride?: string;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -1778,7 +1784,7 @@ function ContactCaptureForm({
     return (
       <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10">
         <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
-        <p className="text-sm leading-relaxed">{t.successText}</p>
+        <p className="text-sm leading-relaxed">{successOverride || t.successText}</p>
       </div>
     );
   }
