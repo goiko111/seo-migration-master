@@ -1590,7 +1590,12 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
       )}
 
       {/* Locked / Unlock gate */}
-      <UnlockGate analysisId={analysisId} previewSections={fullAnalysis?.previewSections || []} t={t} />
+      <UnlockGate
+        analysisId={analysisId}
+        previewSections={fullAnalysis?.previewSections || []}
+        defaultRestaurant={restaurant?.name || ""}
+        t={t}
+      />
     </>
   );
 }
