@@ -1628,13 +1628,13 @@ function ScoreCircle({ score, color, label, title }: { score: number; color: str
 }
 
 /* ─── Unlock gate ─── */
-function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; previewSections: string[]; t: any }) {
+function UnlockGate({ analysisId, previewSections, defaultRestaurant, t }: { analysisId: string; previewSections: string[]; defaultRestaurant?: string; t: any }) {
   const { lang } = useLanguage();
-  const [restaurant, setRestaurant] = useState("");
+  const [restaurant, setRestaurant] = useState(defaultRestaurant || "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [consent, setConsent] = useState(true);
+  const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [reportUrl, setReportUrl] = useState<string | null>(null);
 
