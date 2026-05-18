@@ -19,7 +19,7 @@ export default function SimulatorHero({ onStart }: { onStart: () => void }) {
           Diseña la carta de vinos perfecta para tu restaurante
         </h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Basado en datos de 149+ restaurantes. Gratis. En 3 minutos.
+          Basado en datos de +1.000 restaurantes. Gratis. En 3 minutos.
         </p>
         <Button size="lg" onClick={onStart} className="bg-wine hover:bg-wine-dark text-white">
           Empezar simulación <ArrowRight className="ml-2" />
