@@ -895,7 +895,7 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setRateLimitMsg(null); setPartial({}); setPollLabel(null); setPollProgress(null);
     setText(""); setUrl(""); setFiles([]);
     setPlaceId(null); setRestaurantName(null); setRestaurantAddress(null);
-    setTab("url");
+    setTab("text");
     setTimeout(() => {
       document.getElementById("analizador")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
