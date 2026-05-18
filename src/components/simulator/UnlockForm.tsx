@@ -16,12 +16,13 @@ const schema = z.object({
 type Props = {
   simulationId: string;
   showContactCopy?: boolean;
+  prefill?: { name?: string; email?: string; phone?: string };
 };
 
-export default function UnlockForm({ simulationId, showContactCopy }: Props) {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+export default function UnlockForm({ simulationId, showContactCopy, prefill }: Props) {
+  const [email, setEmail] = useState(prefill?.email ?? "");
+  const [name, setName] = useState(prefill?.name ?? "");
+  const [phone, setPhone] = useState(prefill?.phone ?? "");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);

@@ -46,12 +46,17 @@ const initial: FormData = {
   listStyle: "",
   includeNatural: "",
   notes: "",
+  objective: "",
+  contactName: "",
+  contactEmail: "",
+  contactPhone: "",
 };
 
 export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData) => void }) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>(initial);
   const [touched, setTouched] = useState(false);
+  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
 
   const update = <K extends keyof FormData>(key: K, value: FormData[K]) =>
     setData((d) => ({ ...d, [key]: value }));
@@ -79,8 +84,13 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
       if (!data.clientProfiles?.length) return "Selecciona al menos un perfil de cliente";
     }
     if (step === 4) {
-      if (!data.servicesPerWeek) return "Indica los servicios por semana";
-      if (!data.weeklyCovers) return "Indica los comensales estimados";
+      if (!data.objective) return "Selecciona tu objetivo principal";
+    }
+    if (step === 5) {
+      if (!data.contactName || data.contactName.trim().length < 2) return "Indica tu nombre";
+      const email = (data.contactEmail ?? "").trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Indica un email válido";
+      if (!acceptPrivacy) return "Debes aceptar la política de privacidad";
     }
     return null;
   };
@@ -214,7 +224,25 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
 
           {step === 4 && (
             <>
-              <h2 className="text-2xl font-semibold">Tu Presupuesto</h2>
+              <h2 className="text-2xl font-semibold">Tu Carta</h2>
+              <p className="text-sm text-muted-foreground -mt-3">Objetivos y preferencias para tu carta de vinos.</p>
+
+              <Field label="Objetivo principal" required>
+                <RadioGroup value={data.objective ?? ""} onValueChange={(v) => update("objective", v)} className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {[
+                    ["improve_margin", "Mejorar margen"],
+                    ["increase_rotation", "Mayor rotación"],
+                    ["reduce_waste", "Reducir merma"],
+                    ["new_list", "Carta desde cero"],
+                    ["update_list", "Actualizar carta existente"],
+                  ].map(([v, l]) => (
+                    <label key={v} className="flex items-center gap-2 cursor-pointer p-2 rounded border border-input hover:border-wine/40">
+                      <RadioGroupItem value={v} /> {l}
+                    </label>
+                  ))}
+                </RadioGroup>
+              </Field>
+
               <Field label={`Presupuesto primera compra: €${(data.budgetFirstPurchase ?? 0).toLocaleString("es-ES")}`}>
                 <Slider value={[data.budgetFirstPurchase ?? 1000]} min={1000} max={50000} step={500} onValueChange={([v]) => update("budgetFirstPurchase", v)} />
               </Field>
@@ -224,28 +252,16 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
               <Field label="Margen mínimo deseado (opcional)">
                 <ChipGroup multi={false} options={MARGINS} value={data.minMargin ?? ""} onChange={(v) => update("minMargin", v)} />
               </Field>
-              <Field label="Servicios por semana" required>
-                <NumberStepper value={data.servicesPerWeek ?? 10} min={5} max={14} onChange={(v) => update("servicesPerWeek", v)} />
-              </Field>
-              <Field label="Comensales estimados / semana" required>
-                <NumberStepper value={data.weeklyCovers ?? 0} min={0} max={5000} step={10} onChange={(v) => update("weeklyCovers", v)} />
-                <p className="text-xs text-muted-foreground mt-1">Auto-calculado a partir del aforo y los servicios. Puedes editarlo.</p>
-              </Field>
-            </>
-          )}
 
-          {step === 5 && (
-            <>
-              <h2 className="text-2xl font-semibold">Preferencias <span className="text-sm text-muted-foreground font-normal">(opcional)</span></h2>
-              <Field label="Tipos de vino deseados">
+              <Field label="Tipos de vino deseados (opcional)">
                 <ChipGroup options={WINE_TYPES} value={data.preferredWineTypes ?? []} onChange={(v) => update("preferredWineTypes", v)} />
               </Field>
               {regions.length > 0 && (
-                <Field label={`Regiones preferidas (${data.country})`}>
+                <Field label={`Regiones preferidas (opcional)`}>
                   <ChipGroup options={regions} value={data.preferredRegions ?? []} onChange={(v) => update("preferredRegions", v)} />
                 </Field>
               )}
-              <Field label="Estilo de carta">
+              <Field label="Estilo de carta (opcional)">
                 <RadioGroup value={data.listStyle} onValueChange={(v) => update("listStyle", v)} className="grid grid-cols-2 gap-2">
                   {[
                     ["clasica", "Clásica (por tipos)"],
@@ -257,14 +273,14 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
                   ))}
                 </RadioGroup>
               </Field>
-              <Field label="¿Incluir vinos naturales?">
+              <Field label="¿Incluir vinos naturales? (opcional)">
                 <RadioGroup value={data.includeNatural} onValueChange={(v) => update("includeNatural", v)} className="flex gap-6">
                   <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="si" /> Sí</label>
                   <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="no" /> No</label>
                   <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="algunos" /> Algunos</label>
                 </RadioGroup>
               </Field>
-              <Field label="Notas adicionales">
+              <Field label="Notas adicionales (opcional)">
                 <Textarea
                   maxLength={500}
                   value={data.notes ?? ""}
@@ -273,6 +289,52 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
                 />
                 <div className="text-xs text-muted-foreground text-right mt-1">{(data.notes ?? "").length}/500</div>
               </Field>
+            </>
+          )}
+
+          {step === 5 && (
+            <>
+              <h2 className="text-2xl font-semibold">Tus Datos</h2>
+              <p className="text-sm text-muted-foreground -mt-3">Para enviarte el informe completo y guardar tu simulación.</p>
+
+              <Field label="Tu nombre" required>
+                <Input
+                  value={data.contactName ?? ""}
+                  onChange={(e) => update("contactName", e.target.value)}
+                  placeholder="Ej: María García"
+                  maxLength={100}
+                />
+              </Field>
+              <Field label="Email profesional" required>
+                <Input
+                  type="email"
+                  value={data.contactEmail ?? ""}
+                  onChange={(e) => update("contactEmail", e.target.value)}
+                  placeholder="tu@restaurante.com"
+                  maxLength={255}
+                />
+              </Field>
+              <Field label="Teléfono (opcional)">
+                <Input
+                  type="tel"
+                  value={data.contactPhone ?? ""}
+                  onChange={(e) => update("contactPhone", e.target.value)}
+                  placeholder="+34 600 000 000"
+                  maxLength={40}
+                />
+              </Field>
+              <label className="flex items-start gap-2 cursor-pointer text-sm">
+                <input
+                  type="checkbox"
+                  checked={acceptPrivacy}
+                  onChange={(e) => setAcceptPrivacy(e.target.checked)}
+                  className="mt-1"
+                />
+                <span>
+                  Acepto la <Link to="/privacidad" className="text-wine underline">política de privacidad</Link>
+                  <span className="text-wine"> *</span>
+                </span>
+              </label>
             </>
           )}
         </motion.div>

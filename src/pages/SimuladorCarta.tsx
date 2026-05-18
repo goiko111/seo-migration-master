@@ -19,6 +19,7 @@ export default function SimuladorCarta() {
   const [simId, setSimId] = useState<string>("");
   const [teaser, setTeaser] = useState<Teaser | null>(null);
   const [isComplete, setIsComplete] = useState(false);
+  const [contact, setContact] = useState<{ name: string; email: string; phone?: string } | null>(null);
   const formRef = useRef<HTMLDivElement | null>(null);
   const pollRef = useRef<number | null>(null);
   const deadlineRef = useRef<number | null>(null);
@@ -33,6 +34,11 @@ export default function SimuladorCarta() {
     setSimId(id);
     setTeaser(null);
     setIsComplete(false);
+    setContact({
+      name: data.contactName ?? "",
+      email: data.contactEmail ?? "",
+      phone: data.contactPhone || undefined,
+    });
     setPhase("simulating");
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -98,7 +104,7 @@ export default function SimuladorCarta() {
 
         {phase === "teaser" && teaser && (
           <section className="py-12 px-4">
-            <TeaserReport teaser={teaser} simulationId={simId} isComplete={isComplete} />
+            <TeaserReport teaser={teaser} simulationId={simId} isComplete={isComplete} prefill={contact ?? undefined} />
           </section>
         )}
 
@@ -111,14 +117,14 @@ export default function SimuladorCarta() {
         {phase === "contact" && (
           <section className="py-16 px-4">
             {teaser ? (
-              <TeaserReport teaser={teaser} simulationId={simId} isComplete={false} />
+              <TeaserReport teaser={teaser} simulationId={simId} isComplete={false} prefill={contact ?? undefined} />
             ) : (
               <div className="max-w-md mx-auto text-center space-y-4">
                 <h2 className="text-2xl font-semibold">Casi listo</h2>
                 <p className="text-muted-foreground">
                   Tu simulación se está terminando de procesar. Déjanos tus datos y te enviaremos el informe por email en menos de 48 horas.
                 </p>
-                <UnlockForm simulationId={simId} showContactCopy />
+                <UnlockForm simulationId={simId} showContactCopy prefill={contact ?? undefined} />
               </div>
             )}
           </section>
