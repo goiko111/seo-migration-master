@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker v3 — winerim.wine hybrid router
+ * Cloudflare Worker v3.2 — winerim.wine hybrid router
  *
  * Logic:
  *   1. Technical routes (health, robots, sitemap)
@@ -211,6 +211,7 @@ const SEO_EXACT = new Set([
   '/en/wine-list-examples',
   '/en/problems/wine-list-not-selling',
   '/en/decision-center',
+  '/en/distributor',
   // EN guides
   '/en/guides/how-to-structure-wine-list-restaurant-group',
   '/en/guides/how-to-set-profitable-wine-by-glass-strategy',
@@ -246,6 +247,8 @@ const SEO_EXACT = new Set([
   '/it/software-carta-vini',
   '/it/cose-winerim',
   '/it/chi-siamo',
+  '/it/lavora-con-noi',
+  '/it/distributore',
   '/it/prodotto/intelligenza-dinamica',
   '/it/prodotto/winerim-core',
   '/it/prodotto/winerim-supply',
@@ -319,6 +322,8 @@ const SEO_EXACT = new Set([
   '/fr/logiciel-carte-des-vins',
   '/fr/quest-ce-que-winerim',
   '/fr/a-propos',
+  '/fr/emploi',
+  '/fr/distributeur',
   '/fr/produit/intelligence-dynamique',
   '/fr/produit/winerim-core',
   '/fr/produit/winerim-supply',
@@ -397,6 +402,8 @@ const SEO_EXACT = new Set([
   '/de/weinkarten-software',
   '/de/was-ist-winerim',
   '/de/ueber-uns',
+  '/de/karriere',
+  '/de/haendler',
   '/de/produkt/dynamische-intelligenz',
   '/de/produkt/winerim-core',
   '/de/produkt/winerim-supply',
@@ -470,6 +477,8 @@ const SEO_EXACT = new Set([
   '/pt/software-carta-vinhos',
   '/pt/o-que-e-winerim',
   '/pt/sobre-nos',
+  '/pt/carreiras',
+  '/pt/distribuidor',
   '/pt/produto/inteligencia-dinamica',
   '/pt/produto/winerim-core',
   '/pt/produto/winerim-supply',
