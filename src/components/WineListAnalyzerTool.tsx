@@ -1058,7 +1058,15 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             return { success: true, urlFailed: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "pending_contact" || status === "url_captured") {
-            return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
+            return {
+              success: true,
+              pendingContact: true,
+              analysisId: id,
+              ...(d.result || {}),
+              preview: d?.result?.preview || d?.preview,
+              message: d?.result?.message || d?.message,
+              emailConfirmation: d?.result?.emailConfirmation || d?.emailConfirmation,
+            };
           }
           if (status === "error") {
             return {
