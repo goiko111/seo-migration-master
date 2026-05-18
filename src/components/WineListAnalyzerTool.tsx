@@ -2239,7 +2239,11 @@ function ProgressivePartial({ partial, lang }: { partial: PartialData; lang: Lan
   if (!hasAny) return null;
 
   const winesTotal = partial.wines?.total ?? partial.analysis?.totalWines;
-  const categories = partial.wines?.categories || partial.analysis?.byColor;
+  const rawCategories = partial.wines?.categories || partial.analysis?.byColor;
+  const categories =
+    rawCategories && typeof rawCategories === "object" && !Array.isArray(rawCategories)
+      ? (rawCategories as Record<string, unknown>)
+      : null;
   const totalCats = categories ? Object.values(categories).reduce((a, b) => a + (Number(b) || 0), 0) : 0;
   const fmtMoney = (v?: number, cur = "EUR") => {
     if (typeof v !== "number") return "—";
