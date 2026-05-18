@@ -889,6 +889,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setErrorMsg(null); setErrorPreview(null); setResult(null); setUrlFailedInfo(null);
   };
 
+  // Full reset: clears inputs and results so the user can start a brand-new analysis.
+  const resetAll = () => {
+    setResult(null); setErrorMsg(null); setErrorPreview(null); setUrlFailedInfo(null);
+    setRateLimitMsg(null); setPartial({}); setPollLabel(null); setPollProgress(null);
+    setText(""); setUrl(""); setFiles([]);
+    setPlaceId(null); setRestaurantName(null); setRestaurantAddress(null);
+    setTab("text");
+    setTimeout(() => {
+      document.getElementById("analizador")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
   const slowTimer = useRef<number | null>(null);
@@ -1391,6 +1403,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           {result && (
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
+              <div className="flex justify-end">
+                <Button type="button" variant="outline" size="sm" onClick={resetAll}
+                  className="border-wine/40 text-wine hover:bg-wine/10">
+                  {lang === "es" ? "↺ Nuevo análisis"
+                    : lang === "en" ? "↺ New analysis"
+                    : lang === "fr" ? "↺ Nouvelle analyse"
+                    : lang === "de" ? "↺ Neue Analyse"
+                    : lang === "it" ? "↺ Nuova analisi"
+                    : "↺ Nova análise"}
+                </Button>
+              </div>
               {result.pendingContact ? (
                 <PendingContactView
                   lang={lang}
@@ -1567,7 +1590,12 @@ function ResultsView({ result, t, lang }: { result: AnalysisResult; t: any; lang
       )}
 
       {/* Locked / Unlock gate */}
-      <UnlockGate analysisId={analysisId} previewSections={fullAnalysis?.previewSections || []} t={t} />
+      <UnlockGate
+        analysisId={analysisId}
+        previewSections={fullAnalysis?.previewSections || []}
+        defaultRestaurant={restaurant?.name || ""}
+        t={t}
+      />
     </>
   );
 }
@@ -1600,13 +1628,13 @@ function ScoreCircle({ score, color, label, title }: { score: number; color: str
 }
 
 /* ─── Unlock gate ─── */
-function UnlockGate({ analysisId, previewSections, t }: { analysisId: string; previewSections: string[]; t: any }) {
+function UnlockGate({ analysisId, previewSections, defaultRestaurant, t }: { analysisId: string; previewSections: string[]; defaultRestaurant?: string; t: any }) {
   const { lang } = useLanguage();
-  const [restaurant, setRestaurant] = useState("");
+  const [restaurant, setRestaurant] = useState(defaultRestaurant || "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [consent, setConsent] = useState(true);
+  const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [reportUrl, setReportUrl] = useState<string | null>(null);
 
