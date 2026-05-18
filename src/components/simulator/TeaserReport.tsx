@@ -4,17 +4,20 @@ import { Lock } from "lucide-react";
 import ScoreCircle from "./ScoreCircle";
 import UnlockForm from "./UnlockForm";
 import { WINE_TYPE_META } from "@/data/simulatorRegions";
-import type { Teaser } from "@/lib/simulatorApi";
+import { formatEuro, type Teaser } from "@/lib/simulatorApi";
 
 type Props = {
   teaser: Teaser;
   simulationId: string;
   isComplete: boolean;
+  prefill?: { name?: string; email?: string; phone?: string };
 };
 
-export default function TeaserReport({ teaser, simulationId, isComplete }: Props) {
+export default function TeaserReport({ teaser, simulationId, isComplete, prefill }: Props) {
   const totalRefs = teaser.totalRefs;
-  const distribution = teaser.distribution || {};
+  const distribution = Object.entries(teaser.distribution || {}).filter(
+    ([, pct]) => Number(pct) > 0,
+  );
 
   return (
     <motion.div
@@ -45,7 +48,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete }: Props
             <dt className="text-muted-foreground">Total estimado</dt>
             <dd className="font-medium">{totalRefs}</dd>
             <dt className="text-muted-foreground">Inversión primera compra</dt>
-            <dd className="font-medium">{teaser.currency}{teaser.firstPurchase.low.toLocaleString("es-ES")} – {teaser.currency}{teaser.firstPurchase.high.toLocaleString("es-ES")}</dd>
+            <dd className="font-medium">{formatEuro(teaser.firstPurchase.low)} – {formatEuro(teaser.firstPurchase.high)}</dd>
             <dt className="text-muted-foreground">Alertas</dt>
             <dd className="font-medium">{teaser.alerts}</dd>
           </dl>
@@ -61,7 +64,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete }: Props
               <tr><th className="py-2">Tipo</th><th className="py-2">%</th><th className="py-2">Refs aprox.</th></tr>
             </thead>
             <tbody>
-              {Object.entries(distribution).map(([key, pct]) => {
+              {distribution.map(([key, pct]) => {
                 const meta = WINE_TYPE_META[key] ?? { emoji: "🍷", label: key };
                 const refs = Math.round((Number(pct) / 100) * totalRefs);
                 return (
@@ -93,7 +96,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete }: Props
           ))}
         </div>
         <div className="absolute inset-0 backdrop-blur-md bg-background/60 flex items-center justify-center p-4">
-          <UnlockForm simulationId={simulationId} showContactCopy={!isComplete} />
+          <UnlockForm simulationId={simulationId} showContactCopy={!isComplete} prefill={prefill} />
         </div>
       </div>
     </motion.div>
