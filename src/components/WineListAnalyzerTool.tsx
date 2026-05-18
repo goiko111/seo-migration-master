@@ -889,6 +889,18 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
     setErrorMsg(null); setErrorPreview(null); setResult(null); setUrlFailedInfo(null);
   };
 
+  // Full reset: clears inputs and results so the user can start a brand-new analysis.
+  const resetAll = () => {
+    setResult(null); setErrorMsg(null); setErrorPreview(null); setUrlFailedInfo(null);
+    setRateLimitMsg(null); setPartial({}); setPollLabel(null); setPollProgress(null);
+    setText(""); setUrl(""); setFiles([]);
+    setPlaceId(null); setRestaurantName(null); setRestaurantAddress(null);
+    setTab("url");
+    setTimeout(() => {
+      document.getElementById("analizador")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
   // Loading step animator
   const stepTimer = useRef<number | null>(null);
   const slowTimer = useRef<number | null>(null);
