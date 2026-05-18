@@ -1403,6 +1403,17 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
           {result && (
             <motion.div id="analyzer-results" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="mt-12 space-y-10">
+              <div className="flex justify-end">
+                <Button type="button" variant="outline" size="sm" onClick={resetAll}
+                  className="border-wine/40 text-wine hover:bg-wine/10">
+                  {lang === "es" ? "↺ Nuevo análisis"
+                    : lang === "en" ? "↺ New analysis"
+                    : lang === "fr" ? "↺ Nouvelle analyse"
+                    : lang === "de" ? "↺ Neue Analyse"
+                    : lang === "it" ? "↺ Nuova analisi"
+                    : "↺ Nova análise"}
+                </Button>
+              </div>
               {result.pendingContact ? (
                 <PendingContactView
                   lang={lang}
