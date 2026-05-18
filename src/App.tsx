@@ -126,6 +126,7 @@ const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const CursosVino = lazy(() => import("./pages/CursosVino"));
 const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
 const Presentation = lazy(() => import("./pages/Presentation"));
+const SimuladorCarta = lazy(() => import("./pages/SimuladorCarta"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
@@ -164,6 +165,7 @@ const esRoutes = (
     <Route path="/terminos" element={<Terminos />} />
     <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
     <Route path="/analisis-carta" element={<AnalizaCarta />} />
+    <Route path="/simulador-carta" element={<SimuladorCarta />} />
     <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
     <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
     <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
