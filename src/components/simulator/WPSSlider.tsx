@@ -6,9 +6,9 @@ export default function WPSSlider({ value, onChange }: { value: number; onChange
   return (
     <div className="space-y-3">
       <Slider value={[value]} min={0} max={100} step={1} onValueChange={([v]) => onChange(v)} />
-      <div className="flex justify-between text-[10px] text-muted-foreground px-1">
+      <div className="flex flex-wrap justify-between gap-x-2 gap-y-1 text-[10px] text-muted-foreground px-1">
         {WPS_ZONES.map((z) => (
-          <span key={z.name} className="text-center">{z.name}</span>
+          <span key={z.name} className="text-center whitespace-nowrap">{z.name}</span>
         ))}
       </div>
       <div className="rounded-lg border border-wine/30 bg-wine/5 p-3 text-center">
