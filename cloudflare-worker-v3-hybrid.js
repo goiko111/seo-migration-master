@@ -212,6 +212,7 @@ const SEO_EXACT = new Set([
   '/en/problems/wine-list-not-selling',
   '/en/decision-center',
   '/en/distributor',
+  '/en/wine-list-simulator',
   // EN guides
   '/en/guides/how-to-structure-wine-list-restaurant-group',
   '/en/guides/how-to-set-profitable-wine-by-glass-strategy',
@@ -287,6 +288,7 @@ const SEO_EXACT = new Set([
   '/it/esempi-carta-vini',
   '/it/problemi/carta-vini-non-vende',
   '/it/decision-center',
+  '/it/simulatore-carta',
   // IT guides
   '/it/guide/come-strutturare-carta-vini-gruppo-ristorazione',
   '/it/guide/come-fissare-strategia-redditizia-vino-al-calice',
@@ -362,6 +364,7 @@ const SEO_EXACT = new Set([
   '/fr/exemples-carte-vins',
   '/fr/problemes/carte-des-vins-ne-vend-pas',
   '/fr/decision-center',
+  '/fr/simulateur-carte',
   // FR guides
   '/fr/guides/comment-structurer-carte-vins-groupe-restauration',
   '/fr/guides/comment-fixer-strategie-rentable-vin-au-verre',
@@ -443,6 +446,7 @@ const SEO_EXACT = new Set([
   '/de/wie-viele-weine-auf-der-restaurantkarte',
   '/de/probleme/weinkarte-verkauft-nicht',
   '/de/decision-center',
+  '/de/weinkarten-simulator',
   '/de/ratgeber/weinkarte-restaurantgruppe-strukturieren',
   '/de/ratgeber/rentable-glasausschank-strategie',
   '/de/ratgeber/totbestand-weine-erkennen',
@@ -518,6 +522,7 @@ const SEO_EXACT = new Set([
   '/pt/quantos-vinhos-carta-restaurante',
   '/pt/problemas/carta-vinhos-nao-vende',
   '/pt/decision-center',
+  '/pt/simulador-carta',
   '/pt/guias/como-estruturar-carta-vinhos-grupo-restauracao',
   '/pt/guias/estrategia-rentavel-vinho-por-copo',
   '/pt/guias/como-detectar-vinhos-mortos',
