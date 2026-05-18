@@ -337,8 +337,8 @@ function PreviewBlock({
   lang, preview,
 }: { lang: Lang; preview: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] } }) {
   const tt = T_PREV[lang];
-  const cats = preview.categoriesFound || [];
-  const samples = preview.sampleWines || [];
+  const cats = Array.isArray(preview?.categoriesFound) ? preview!.categoriesFound : [];
+  const samples = Array.isArray(preview?.sampleWines) ? preview!.sampleWines : [];
   return (
     <div className="rounded-xl border border-border bg-background/60 p-4 md:p-5 space-y-4 text-left">
       {typeof preview.estimatedWines === "number" && preview.estimatedWines > 0 && (
