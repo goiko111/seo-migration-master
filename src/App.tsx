@@ -388,6 +388,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/tools/multi-unit-auditor`} element={<AuditorMultiLocal />} />
     <Route path={`${prefix}/strumenti/auditor-carta-multilocale`} element={<AuditorMultiLocal />} />
     <Route path={`${prefix}/outils/auditeur-carte-multi-sites`} element={<AuditorMultiLocal />} />
+    {/* Simulador Carta — localized slugs */}
+    <Route path={`${prefix}/wine-list-simulator`} element={<SimuladorCarta />} />
+    <Route path={`${prefix}/simulatore-carta`} element={<SimuladorCarta />} />
+    <Route path={`${prefix}/simulateur-carte`} element={<SimuladorCarta />} />
+    <Route path={`${prefix}/weinkarten-simulator`} element={<SimuladorCarta />} />
+    <Route path={`${prefix}/simulador-carta`} element={<SimuladorCarta />} />
     <Route path={`${prefix}/comparisons`} element={<Comparativas />} />
     <Route path={`${prefix}/confronti`} element={<Comparativas />} />
     <Route path={`${prefix}/comparatifs`} element={<Comparativas />} />

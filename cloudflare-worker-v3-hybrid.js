@@ -212,6 +212,7 @@ const SEO_EXACT = new Set([
   '/en/problems/wine-list-not-selling',
   '/en/decision-center',
   '/en/distributor',
+  '/en/wine-list-simulator',
   // EN guides
   '/en/guides/how-to-structure-wine-list-restaurant-group',
   '/en/guides/how-to-set-profitable-wine-by-glass-strategy',
