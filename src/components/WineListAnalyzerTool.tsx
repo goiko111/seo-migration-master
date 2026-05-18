@@ -337,8 +337,8 @@ function PreviewBlock({
   lang, preview,
 }: { lang: Lang; preview: { estimatedWines?: number; categoriesFound?: string[]; sampleWines?: string[] } }) {
   const tt = T_PREV[lang];
-  const cats = preview.categoriesFound || [];
-  const samples = preview.sampleWines || [];
+  const cats = Array.isArray(preview?.categoriesFound) ? preview!.categoriesFound : [];
+  const samples = Array.isArray(preview?.sampleWines) ? preview!.sampleWines : [];
   return (
     <div className="rounded-xl border border-border bg-background/60 p-4 md:p-5 space-y-4 text-left">
       {typeof preview.estimatedWines === "number" && preview.estimatedWines > 0 && (
@@ -1058,7 +1058,15 @@ export default function WineListAnalyzerTool(_props: Props = {}) {
             return { success: true, urlFailed: true, analysisId: id, ...(d.result || {}) };
           }
           if (status === "pending_contact" || status === "url_captured") {
-            return { success: true, pendingContact: true, analysisId: id, ...(d.result || {}) };
+            return {
+              success: true,
+              pendingContact: true,
+              analysisId: id,
+              ...(d.result || {}),
+              preview: d?.result?.preview || d?.preview,
+              message: d?.result?.message || d?.message,
+              emailConfirmation: d?.result?.emailConfirmation || d?.emailConfirmation,
+            };
           }
           if (status === "error") {
             return {
@@ -2231,8 +2239,14 @@ function ProgressivePartial({ partial, lang }: { partial: PartialData; lang: Lan
   if (!hasAny) return null;
 
   const winesTotal = partial.wines?.total ?? partial.analysis?.totalWines;
-  const categories = partial.wines?.categories || partial.analysis?.byColor;
-  const totalCats = categories ? Object.values(categories).reduce((a, b) => a + (Number(b) || 0), 0) : 0;
+  const rawCategories = partial.wines?.categories || partial.analysis?.byColor;
+  const categories =
+    rawCategories && typeof rawCategories === "object" && !Array.isArray(rawCategories)
+      ? (rawCategories as Record<string, unknown>)
+      : null;
+  const totalCats = categories
+    ? Object.values(categories).reduce<number>((a, b) => a + (Number(b) || 0), 0)
+    : 0;
   const fmtMoney = (v?: number, cur = "EUR") => {
     if (typeof v !== "number") return "—";
     const code = toCurrencyCode(cur);
