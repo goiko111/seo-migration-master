@@ -1,120 +1,75 @@
-## Objetivo
 
-Trasladar la presentación PDF actual (16 slides ES/EN, "La reVINOlución de la carta de vinos") a una página web nativa de winerim.wine, manteniendo su esencia visual y narrativa pero alineándola con la evolución de la marca ("Inteligencia dinámica", 6 pilares, foco grupos). Pensada para que un decisor la comparta por link con colegas y entiendan en 5 minutos qué es Winerim, los beneficios y cómo se implementa.
+# Plan — Simulador de Carta de Vinos (MVP)
 
-## URLs (multi-URL indexable)
+Nueva herramienta pública en `/simulador-carta` que complementa al Analizador. Mismo patrón UX: formulario → fire-and-forget POST → skeleton animado → teaser → unlock por email. Backend ya desplegado en `https://simulator.winerim.wine`.
 
-- ES: `/presentacion`
-- EN: `/en/presentation`
-- FR: `/fr/presentation`
-- IT: `/it/presentazione`
-- DE: `/de/praesentation`
-- PT: `/pt/apresentacao`
+## Alcance del MVP (Fase 1)
 
-Registradas en `src/App.tsx`, `src/i18n/LanguageContext` (ROUTE_MAP con alternates) y `public/sitemap-extra.json`. Hreflang gestionado por `SEOHead`. Indexable con SEO activo. Añadidas a `STATIC_PAGES` del worker para prerender.
+Implemento todo lo marcado como MVP: landing + formulario 5 pasos + POST + skeleton animado + teaser + unlock. Difiero a fases posteriores:
+- V2: cualificación post-unlock, export CSV
+- V3: regiones dinámicas avanzadas por país (incluyo lista estática), widget flotante alternativo
 
-## Formato: híbrido deck + scroll
+## Archivos nuevos
 
-- **Desktop (≥1024px):** deck a pantalla completa, 1 slide por vista con `scroll-snap-type: y mandatory`.
-  - Navegación: ↑/↓ teclado, rueda, swipe, dots laterales de progreso, contador inferior "03 / 14".
-  - Botón "Pantalla completa" (Fullscreen API), botón "Compartir" (copia link con `?utm_source=presentation&utm_medium=share&grupo=Nombre`).
-  - Transiciones `framer-motion` (ya instalado): fade + sutil parallax 300ms, una entrada por slide.
-- **Móvil/tablet (<1024px):** las mismas slides como secciones verticales con `ScrollReveal` (componente existente). Sin snap, lectura natural.
-- Sin Navbar/Footer estándar: header propio mínimo (logo Winerim · switcher de idioma · CTA "Hablemos").
-- Personalización opcional: `?grupo=Nombre` aparece en slide 1 ("Preparado para {Nombre}") y en URL compartida.
+1. `src/pages/SimuladorCarta.tsx` — página + orquestador del flujo (estados: `landing → form → simulating → teaser → unlocked`). `<SEOHead>` con title/description/canonical.
+2. `src/components/simulator/SimulatorHero.tsx` — hero (H1 + subtítulo + CTA scroll), 6 iconos de valor, banner diferenciador "¿Ya tienes carta? → /analisis-carta".
+3. `src/components/simulator/SimulatorForm.tsx` — wrapper con progress bar segmentada (5 dots), navegación Atrás/Siguiente, validación inline, transición slide-left con Framer Motion (ya en deps).
+4. `src/components/simulator/steps/Step1Restaurant.tsx` — nombre, ciudad (input simple, sin Google Places en MVP), país, tipo cocina (chips multi), aforo (slider 20–300 step 5), ¿ya tiene carta? con nota condicional hacia analizador.
+5. `src/components/simulator/steps/Step2Concept.tsx` — ticket medio (chips), `WPSSlider`, servicio vino (chips multi), sommelier (radio), almacenamiento (select).
+6. `src/components/simulator/steps/Step3Client.tsx` — perfil cliente (chips multi), sensibilidad precio (slider 0–100 con labels), conocimiento vino (chips), preferencia origen (chips multi).
+7. `src/components/simulator/steps/Step4Budget.tsx` — presupuesto (slider 1000–50000), bev cost (chips), margen (chips), servicios/semana (number con +/−), comensales/semana (auto-calc editable: `aforo × 0.65 × servicios / 2`).
+8. `src/components/simulator/steps/Step5Preferences.tsx` — tipos vino (chips pre-checked), regiones (chips dinámicos por país desde mapa estático), estilo carta (radio), vinos naturales (radio), notas (textarea max 500).
+9. `src/components/simulator/WPSSlider.tsx` — slider 0–100 con 5 zonas, icono 🍷×N, nombre y descripción de zona actual.
+10. `src/components/simulator/ChipGroup.tsx` — helper interno para chips (single/multi) usando Button shadcn.
+11. `src/components/simulator/SimulationProgress.tsx` — timeline 7 pasos (0–30s) con Progress, label dinámico, skeletons de las cajas del teaser que se rellenan en cuanto llega el teaser inicial.
+12. `src/components/simulator/TeaserReport.tsx` — score circle (SVG), métricas, tabla distribución con emojis por tipo, alertas, secciones blur con overlay de unlock.
+13. `src/components/simulator/UnlockForm.tsx` — email/nombre/teléfono con validación zod; al éxito redirige a `https://simulator.winerim.wine{reportUrl}`.
+14. `src/components/simulator/ScoreCircle.tsx` — círculo SVG con color por umbral (verde 70+, ámbar 45–69, rojo <45).
+15. `src/lib/simulatorApi.ts` — cliente del Worker:
+    - `generateSimulationId()` → `sim_` + 8 chars
+    - `submitSimulation(payload)` → POST `/v1/simulate` con `keepalive: true`, devuelve `{ teaser }` cuando responde
+    - `pollStatus(id)` → GET `/v1/simulate/status/{id}`
+    - `unlockReport(id, body)` → POST `/v1/simulate/unlock/{id}`
+    - Constante `SIMULATOR_BASE_URL = "https://simulator.winerim.wine"`
+16. `src/data/simulatorRegions.ts` — mapa `Record<CountryCode, string[]>` con las regiones del brief.
 
-## Estructura de slides (14 totales)
+## Archivos modificados
 
-Mantiene la columna vertebral del PDF, modernizada con el lenguaje de la web:
+- `src/App.tsx` — añadir ruta lazy `/simulador-carta` (router centralizado, mem://technical/app-router-centralization).
+- `src/pages/WineListAnalyzer.tsx` — banner cruzado "¿Aún no tienes carta? → Simúlala aquí".
+- `public/sitemap-extra.json` — añadir URL nueva (alta prioridad, herramienta pública).
 
-1. **Portada** — "winerim · La reVINOlución de la carta de vinos" + capturas reales del producto sobre fondo motion sutil. Línea opcional "Preparado para {grupo}".
-2. **El problema** — "Si tienes más de 100 vinos, tu cliente tiene más de 100 dudas." Tipografía gigante, datos sector debajo (cita de la web).
-3. **Qué es Winerim** — Definición + visión "Inteligencia dinámica para la carta de vinos" (respeta `dynamic-intelligence-naming`). Captura tablet con ficha de vino.
-4. **Cómo funciona "Haz match con tu vino"** — Recomendador + control para el restaurante. Dos columnas: comensal / restaurante.
-5. **Beneficios para restaurantes** — Grid con los 7 beneficios del PDF (ticket medio, servicio eficiente, estrategia, stock, multilingüe, rotación, conversión). Iconografía propia coherente con la web.
-6. **Beneficios para los comensales** — 4 beneficios (selección sin dudas, recomendaciones, confianza, experiencia enriquecida).
-7. **Capacidades clave (los 6 pilares)** — Bloque nuevo que conecta con `mem://marketing/core-narrative`: Notas de cata IA, Maridaje automático, Big Data, Comparador, Gestión de stock, Pricing/márgenes. Grid 3×2 con preview real.
-8. **Notas de cata + Maridaje automático** — Slide visual con dos screenshots reales de móvil/tablet (los del PDF p.8).
-9. **Big Data y comparador** — Capturas reales del dashboard analítico y comparador (PDF p.9).
-10. **Gestión de stock y rentabilidad** — 5 sub-bloques (actualización automática, alertas, rotación, pedidos, rentabilidad) sobre captura del backoffice.
-11. **Especial grupos de restauración** — Slide nueva: ROI multi-local, benchmarking entre locales, control central + autonomía local. Apoyado en `GroupStrategyBlocks` y `mem://marketing/soluciones-grupos-estrategia`. **Eje narrativo del envío a colegas.**
-12. **Implementación en días** — Línea de tiempo 4 pasos (carga inicial → QR/enlace → impresión opcional → soporte continuo). Texto del PDF p.12 condensado.
-13. **Restaurantes que ya confían** — Mosaico de logos (los 30 del PDF p.13) + 1 cifra grande de la web ("X restaurantes activos"). Cita de caso de éxito.
-14. **CTA final — "¿Ribera, Rioja o Winerim?"** — Headline del PDF p.14 + subtítulo "Lo único que nos diferencia de la competencia es que **te hacemos ganar dinero**". Botones: "Agendar demo" (→ `/contacto?origen=presentacion-grupos`), email/teléfono, botón "Compartir esta presentación".
+## Comportamiento clave (paridad con analizador, mem reciente)
 
-## Contenido i18n
+- `simulationId` se genera en el frontend antes del POST. El backend lo reutiliza para guardar el estado.
+- POST fire-and-forget con `keepalive: true`; la UI cambia inmediatamente a `simulating`.
+- El `teaser` de la respuesta del POST se usa para rellenar skeletons sin esperar al polling.
+- Polling cada 3s; al `complete` → fade-in datos reales.
+- **Deadline 40s**: si no `complete`, mostrar `UnlockForm` con copy "Te enviaremos el informe por email en menos de 48h". El polling sigue en background; si llega antes de unlock, el teaser se actualiza.
+- Nunca mostrar error al usuario (solo `console.error`).
+- Tras unlock exitoso → redirigir a `${SIMULATOR_BASE_URL}/v1/simulate/report/{id}` en la misma pestaña.
 
-- Archivo `src/data/presentationContent.ts` con `Record<SupportedLang, PresentationContent>` (mismo patrón que Decision Center y GuideTemplate, ver `mem://technical/guide-template-multilang`).
-- Tipado fuerte por slide para forzar paridad de traducciones.
-- ES y EN aprovechan textos del PDF existente; FR/IT/DE/PT se traducen del EN.
-- Capturas/logos compartidos entre idiomas en `src/assets/presentation/`.
+## Diseño
 
-## Assets visuales
-
-Copiar desde los PDFs parseados a `src/assets/presentation/`:
-- 6 screenshots de producto reales (p.1, p.2, p.5, p.8, p.9, p.10).
-- 30 logos de restaurantes (p.13) en sprite/grid.
-- Cabecera Bilbao/Mallorca como visual narrativo opcional.
-
-Política `credibility-tone-policy`: capturas reales, sin mockups inventados.
+- Reuso tokens semánticos existentes (`--wine`, `--gold`, etc. en `index.css`). Sin colores hardcoded.
+- Componentes shadcn ya disponibles: `Progress`, `Slider`, `RadioGroup`, `Select`, `Input`, `Textarea`, `Button`, `Card`, `Skeleton`, `Label`.
+- Mobile-first; cada paso ocupa la pantalla, scroll mínimo.
+- Animaciones: Framer Motion (ya en proyecto) para slide entre pasos y fade-in de resultados.
 
 ## SEO
 
-- `SEOHead` con title/description por idioma (≤60/≤155 chars, regla `meta-description-standard`).
-  - ES: "Winerim · Presentación oficial para grupos de restauración"
-  - Description con CTA implícita y palabra clave "carta de vinos".
-- JSON-LD `WebPage` + `Organization` (dual injection según `seo-schema-architecture`).
-- `<h1>` único en slide-portada; resto `<h2>`.
-- Añadir las 6 URLs a `STATIC_PAGES` (`prerender-static-pages-coverage`) y a `sitemap-extra.json`.
-- Indexable, canonical por idioma + hreflang cruzado gestionado por `SEOHead`.
+- Title: "Simulador de Carta de Vinos | Diseña tu carta ideal · Winerim" (<60)
+- Meta description (<155, con keyword, frase completa): "Diseña la carta de vinos perfecta para tu restaurante en 3 minutos. Gratis. Basado en datos de 149+ restaurantes reales."
+- H1 único; canonical absoluto; hreflang vía `SEOHead`.
 
-## Tracking (centralized-analytics-architecture)
+## Fuera de alcance (explícito)
 
-- `presentation_view` al cargar (con `lang`, `grupo` si presente).
-- `presentation_slide_view` por slide visible (con índice + nombre).
-- `presentation_share_click` cuando se copia link.
-- CTA final dispara `lead_intent` con `funnel_stage="consideration"` y `product_interest="grupos"` (alineado a `b2b-intent-tracking`).
+- i18n completo (UI sólo ES; el campo `lang` se envía como `"es"`).
+- Cualificación post-unlock, export CSV, regiones dinámicas avanzadas, Google Places autocomplete, widget flotante.
+- Cambios en el menú principal (lo dejo para una pasada UX posterior cuando se confirme la jerarquía).
 
-## Diseño visual
+## Validación
 
-- Tokens semánticos existentes (`--background`, `--primary`, `--accent`, etc.). Sin colores hardcoded.
-- Tipografía: la display de Hero para titulares 56–80px; sans actual para body.
-- 1 idea por slide, mucho aire, números/citas a gran escala.
-- Acento color burdeos/vino consistente con la marca actual (no replicar paleta dorada del PDF si no concuerda con la web — verificar tokens en `index.css` antes de implementar).
-- Modo oscuro respetado.
-- `prefers-reduced-motion`: animaciones reducidas a fade.
-- Print stylesheet básico para que `Cmd+P` exporte un PDF presentable (1 slide por página, sin chrome).
-
-## Archivos a crear/tocar
-
-```text
-Nuevos
-  src/pages/Presentation.tsx                        # contenedor + lógica deck/scroll/keyboard
-  src/components/presentation/PresentationShell.tsx # header propio + dots + share/fullscreen
-  src/components/presentation/Slide.tsx             # wrapper snap + reveal + motion
-  src/components/presentation/slides/                # 14 componentes de slide
-  src/data/presentationContent.ts                   # i18n content (6 idiomas)
-  src/assets/presentation/                          # 6 screenshots + logos clientes
-
-Modificados
-  src/App.tsx                                       # 6 rutas con React.lazy
-  src/i18n/LanguageContext.tsx                      # ROUTE_MAP + alternates
-  public/sitemap-extra.json                         # 6 URLs nuevas
-  cloudflare-worker-v3-hybrid.js                    # añadir a STATIC_PAGES (referencia, deploy manual)
-```
-
-## Detalles técnicos
-
-- Sin librerías nuevas: `framer-motion` y `lucide-react` ya disponibles. Scroll-snap nativo CSS.
-- Lazy load de la página vía `React.lazy` (`performance-js-optimization`).
-- Imágenes con `loading="lazy"` salvo la del slide 1 (`fetchpriority="high"`).
-- IntersectionObserver para disparar animaciones y eventos de tracking por slide.
-- Logos clientes como `<img>` en grid con filter de monocromo opcional para coherencia visual.
-
-## Fuera de alcance (siguientes iteraciones)
-
-- Generación server-side de PDF/PPTX descargable (por ahora `Cmd+P` cubre el caso).
-- Subida del logo del grupo personalizado.
-- Versión video/loom embebida en slide 13.
-- Variantes A/B comerciales por canal.
-- Slide bonus "Bilbao/Mallorca" del PDF — se puede añadir como #14 opcional si encaja narrativamente.
+- `tsc` limpio (lo verifica el harness).
+- Curl al Worker con payload mínimo para confirmar contrato.
+- Screenshot del flujo en preview tras implementar.
