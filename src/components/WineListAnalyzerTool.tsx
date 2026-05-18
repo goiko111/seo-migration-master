@@ -2244,7 +2244,9 @@ function ProgressivePartial({ partial, lang }: { partial: PartialData; lang: Lan
     rawCategories && typeof rawCategories === "object" && !Array.isArray(rawCategories)
       ? (rawCategories as Record<string, unknown>)
       : null;
-  const totalCats = categories ? Object.values(categories).reduce((a, b) => a + (Number(b) || 0), 0) : 0;
+  const totalCats = categories
+    ? Object.values(categories).reduce<number>((a, b) => a + (Number(b) || 0), 0)
+    : 0;
   const fmtMoney = (v?: number, cur = "EUR") => {
     if (typeof v !== "number") return "—";
     const code = toCurrencyCode(cur);
