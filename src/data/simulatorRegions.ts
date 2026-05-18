@@ -46,11 +46,11 @@ export const BEV_COSTS = ["<25%", "25-30%", "30-35%", "35-40%", ">40%", "No sé"
 export const MARGINS = ["50%", "55%", "60%", "65%", "70%", "No sé"];
 
 export const WPS_ZONES = [
-  { min: 0,  max: 20,  icon: "🍷",         name: "Complemento", desc: "El vino acompaña, la cocina manda" },
-  { min: 21, max: 40,  icon: "🍷🍷",       name: "Selección",   desc: "Carta curada, no es lo principal pero importa" },
-  { min: 41, max: 60,  icon: "🍷🍷🍷",     name: "Enfoque",     desc: "El vino es parte central de la experiencia" },
-  { min: 61, max: 80,  icon: "🍷🍷🍷🍷",   name: "Centro",      desc: "Gran carta, sommelier activo, maridajes" },
-  { min: 81, max: 100, icon: "🍷🍷🍷🍷🍷", name: "Destino",     desc: "Vinoteca / restaurante de vino, es la estrella" },
+  { min: 0,  max: 20,  icon: "🍷",         name: "Complemento", desc: "El vino acompaña, la cocina manda", legend: "La cocina manda. El vino está ahí para acompañar, pero no es un diferencial. Ej: cafetería, bar de tapas informal, restaurante con menú fijo y 4 referencias." },
+  { min: 21, max: 40,  icon: "🍷🍷",       name: "Selección",   desc: "Carta curada, no es lo principal pero importa", legend: "Hay una carta de vinos curada, se ha pensado en ella, pero no es el alma del local. Ej: bistró de barrio, gastrobar con énfasis en cócteles." },
+  { min: 41, max: 60,  icon: "🍷🍷🍷",     name: "Enfoque",     desc: "El vino es parte central de la experiencia", legend: "El vino es parte central de la experiencia. Se habla de él, se recomienda, hay cierta especialización. Ej: restaurante mediterráneo con carta mediana y copa disponible." },
+  { min: 61, max: 80,  icon: "🍷🍷🍷🍷",   name: "Centro",      desc: "Gran carta, sommelier activo, maridajes", legend: "La carta es amplia, hay sommelier o responsable de vinos activo, maridajes, formación de equipo. El cliente viene esperando encontrar algo interesante. Ej: restaurante gastronómico, hotel 4–5 estrellas." },
+  { min: 81, max: 100, icon: "🍷🍷🍷🍷🍷", name: "Destino",     desc: "Vinoteca / restaurante de vino, es la estrella", legend: "El vino es la razón de venir. Vinoteca, wine bar, restaurante con lista de 500+ referencias, catas, eventos. El local se posiciona como referente en vino." },
 ];
 
 export const WINE_TYPE_META: Record<string, { emoji: string; label: string }> = {
