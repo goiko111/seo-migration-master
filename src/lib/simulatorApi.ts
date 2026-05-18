@@ -1,5 +1,16 @@
 export const SIMULATOR_BASE_URL = "https://simulator.winerim.wine";
 
+export function formatEuro(amount: number | string | undefined | null): string {
+  const n = typeof amount === "number" ? amount : Number(amount);
+  if (!Number.isFinite(n)) return "—";
+  return new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+}
+
 export type Teaser = {
   coherenceScore: number;
   totalRefs: number;
@@ -38,6 +49,10 @@ export type SimulatePayload = {
   listStyle?: string;
   includeNatural?: string;
   notes?: string;
+  objective?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
   lang: string;
 };
 
