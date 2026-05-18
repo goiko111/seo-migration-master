@@ -143,6 +143,7 @@ const SEO_EXACT = new Set([
   '/herramientas/calculadora-ticket-medio-vino',
   '/herramientas/auditor-carta-multilocal',
   '/herramientas/calculadora-compra-inteligente',
+  '/simulador-carta',
   // Problemas
   '/problemas/carta-de-vinos-no-vende',
   // Biblioteca sub-hubs
