@@ -86,7 +86,7 @@ async function generatePresentationPdf(filename: string) {
 
       const canvas = await html2canvas(slide, {
         backgroundColor: null,
-        scale: 1.5,
+        scale: 2,
         useCORS: true,
         logging: false,
         windowWidth: 1600,
@@ -98,7 +98,7 @@ async function generatePresentationPdf(filename: string) {
       slide.style.height = prev.height;
       slide.style.width = prev.width;
 
-      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+      const imgData = canvas.toDataURL("image/jpeg", 0.85);
       // Fit into page preserving aspect ratio (canvas is 16:9, page ~1.41:1)
       const ratio = canvas.width / canvas.height;
       let w = pageW;
