@@ -220,7 +220,36 @@ export default function Presentation() {
   const [shared, setShared] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showScrollArrow, setShowScrollArrow] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  /* Short labels per slide for side dots / tooltips */
+  const slideLabels = useMemo<string[]>(
+    () => [
+      t.s1Eyebrow,
+      t.s2Eyebrow,
+      t.sPainsEyebrow,
+      t.s3Eyebrow,
+      t.s4Eyebrow,
+      t.s5Eyebrow,
+      t.s6Eyebrow,
+      t.s7Eyebrow,
+      t.s8Eyebrow,
+      t.s9Eyebrow,
+      t.s10Eyebrow,
+      t.s11Eyebrow,
+      t.sMgmtEyebrow,
+      t.sSupplyEyebrow,
+      t.s12Eyebrow,
+      t.s13Eyebrow,
+      t.sPricingEyebrow,
+      t.s14Eyebrow,
+    ],
+    [t],
+  );
 
   const url = `${CANONICAL_DOMAIN}${PRESENTATION_ROUTE[lang]}`;
   const hreflang = allLangPaths("/presentacion").map((h) => ({
@@ -308,21 +337,108 @@ export default function Presentation() {
     return () => document.removeEventListener("fullscreenchange", onChange);
   }, []);
 
-  /* Scroll arrow visibility */
+  /* Scroll tracking: arrow visibility + current slide + progress */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    const getSlides = () =>
+      Array.from(el.querySelectorAll<HTMLElement>(".presentation-slide"));
+    setTotalSlides(getSlides().length);
     const onScroll = () => {
       if (el.scrollTop > 100) setShowScrollArrow(false);
       else setShowScrollArrow(true);
+      const slides = getSlides();
+      const vh = el.clientHeight || window.innerHeight;
+      const idx = Math.min(
+        slides.length - 1,
+        Math.max(0, Math.round(el.scrollTop / vh)),
+      );
+      setCurrentSlide(idx);
+      const max = el.scrollHeight - el.clientHeight;
+      setScrollProgress(max > 0 ? (el.scrollTop / max) * 100 : 0);
     };
+    onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToNextSlide = useCallback(() => {
-    containerRef.current?.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  const goToSlide = useCallback((idx: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const slides = el.querySelectorAll<HTMLElement>(".presentation-slide");
+    const target = slides[Math.max(0, Math.min(slides.length - 1, idx))];
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
+
+  const scrollToNextSlide = useCallback(() => {
+    goToSlide(currentSlide + 1);
+  }, [goToSlide, currentSlide]);
+
+  /* Keyboard navigation */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || (e.target as HTMLElement)?.isContentEditable) return;
+      switch (e.key) {
+        case "ArrowDown":
+        case "ArrowRight":
+        case "PageDown":
+        case " ":
+          e.preventDefault();
+          goToSlide(currentSlide + 1);
+          break;
+        case "ArrowUp":
+        case "ArrowLeft":
+        case "PageUp":
+          e.preventDefault();
+          goToSlide(currentSlide - 1);
+          break;
+        case "Home":
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case "End":
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+        case "f":
+        case "F":
+          handleFullscreen();
+          break;
+        case "Escape":
+          if (document.fullscreenElement) document.exitFullscreen?.();
+          break;
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [currentSlide, totalSlides, goToSlide, handleFullscreen]);
+
+  /* Mobile swipe (vertical) */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let startY = 0;
+    let startT = 0;
+    const onStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+      startT = Date.now();
+    };
+    const onEnd = (e: TouchEvent) => {
+      const dy = e.changedTouches[0].clientY - startY;
+      const dt = Date.now() - startT;
+      if (Math.abs(dy) > 60 && dt < 600) {
+        if (dy < 0) goToSlide(currentSlide + 1);
+        else goToSlide(currentSlide - 1);
+      }
+    };
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchend", onEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchend", onEnd);
+    };
+  }, [currentSlide, goToSlide]);
 
   const contactPath = useMemo(() => {
     const map: Record<string, string> = {
@@ -429,6 +545,55 @@ export default function Presentation() {
         </div>
       </header>
 
+      {/* Progress bar */}
+      <div
+        className="presentation-chrome fixed top-0 left-0 right-0 z-[60] h-0.5 bg-transparent pointer-events-none"
+        aria-hidden
+      >
+        <div
+          className="h-full bg-gold transition-[width] duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Side dots navigation (desktop) */}
+      <nav
+        className="presentation-chrome hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col gap-2.5"
+        aria-label="Slide navigation"
+      >
+        {Array.from({ length: totalSlides }).map((_, i) => {
+          const active = i === currentSlide;
+          return (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              className="group relative flex items-center justify-end"
+              aria-label={`Slide ${i + 1}: ${slideLabels[i] || ""}`}
+              aria-current={active ? "true" : undefined}
+            >
+              <span className="absolute right-6 whitespace-nowrap text-[10px] uppercase tracking-widest font-semibold text-cream/0 group-hover:text-cream/90 bg-background/80 backdrop-blur px-2 py-1 rounded transition-opacity pointer-events-none opacity-0 group-hover:opacity-100">
+                {slideLabels[i] || `Slide ${i + 1}`}
+              </span>
+              <span
+                className={`block rounded-full transition-all ${
+                  active
+                    ? "h-2.5 w-2.5 bg-gold ring-2 ring-gold/30"
+                    : "h-1.5 w-1.5 bg-cream/40 hover:bg-cream/80"
+                }`}
+              />
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Slide counter (bottom-right) */}
+      {totalSlides > 0 && (
+        <div className="presentation-chrome fixed bottom-4 right-4 z-40 px-3 py-1.5 rounded-full bg-background/70 backdrop-blur border border-border/40 text-[11px] font-mono tabular-nums text-cream/80">
+          {String(currentSlide + 1).padStart(2, "0")}
+          <span className="text-cream/40"> / {String(totalSlides).padStart(2, "0")}</span>
+        </div>
+      )}
+
       {/* ──────── SLIDE 1 — COVER ──────── */}
       <SlideShell bg="dark" className="!pt-28">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -464,8 +629,8 @@ export default function Presentation() {
           <motion.button
             onClick={scrollToNextSlide}
             className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-cream/80 hover:text-cream transition-colors cursor-pointer z-20"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
+            transition={reduceMotion ? undefined : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             aria-label="Scroll to next slide"
           >
             <span className="text-[10px] uppercase tracking-widest font-medium">{t.scrollDown || "Scroll"}</span>
