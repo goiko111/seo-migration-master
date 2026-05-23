@@ -18,6 +18,9 @@
 - Merge commit: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 - La validación ligera de producción posterior al merge detectó que el código nuevo aún no está activo para sitemap/prerender de biblioteca: sitemap público sin rutas nuevas `de`/`pt` y bot dinámico cayendo en `bot-fallback`.
 - Se detectó y corrigió una contradicción en documentación de despliegue: `TECH_INSTRUCTIONS.md` apuntaba a `cloudflare-worker-v2.1-improved-debug.js`, pero el código integrado y el worker observado usan la línea `cloudflare-worker-v3-hybrid.js`.
+- Se intentó desplegar desde CLI, pero Supabase falló por falta de `SUPABASE_ACCESS_TOKEN` y Cloudflare no tenía sesión `wrangler`.
+- El dry-run del worker con `wrangler@3.112.0` compila correctamente.
+- Se añadieron scripts de despliegue en `package.json` para repetir el proceso cuando haya credenciales.
 
 ### Decisiones
 
@@ -35,6 +38,7 @@
 - Mantener la deuda de lint global como iniciativa separada.
 - Cerrar el bloque técnico como integrado en `main` y mover el foco a despliegue, validación productiva y mejora editorial.
 - Tratar despliegue/validación productiva como siguiente bloque operativo, porque no hay CLI/script de deploy disponible en este entorno.
+- No incluir tokens privados en el repo; usar variables de entorno o login local para desplegar.
 
 ### Hipótesis
 
@@ -46,5 +50,6 @@
 
 - Validar el despliegue en producción.
 - Usar `cloudflare-worker-v3-hybrid.js` en el despliegue manual del worker.
+- Ejecutar `npm run deploy:supabase:seo` y `npm run deploy:worker` cuando estén disponibles las credenciales.
 - Revisar Search Console tras indexación.
 - Definir el siguiente bloque editorial de la biblioteca del vino.

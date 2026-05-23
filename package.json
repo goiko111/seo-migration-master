@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy:supabase:seo": "npx --yes supabase@latest functions deploy sitemap --project-ref pwkqbcgjrhoyxrsmcypw && npx --yes supabase@latest functions deploy prerender --project-ref pwkqbcgjrhoyxrsmcypw",
+    "deploy:worker": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23",
+    "deploy:worker:dry-run": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --dry-run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

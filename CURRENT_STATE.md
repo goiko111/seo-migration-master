@@ -29,8 +29,13 @@
   - `https://winerim.wine/pt/biblioteca-vinho` responde HTTP 200.
   - `https://winerim.wine/sitemap.xml` responde HTTP 200, pero la respuesta pública comprobada todavía no muestra las nuevas rutas de biblioteca `de`/`pt`.
   - Con user-agent de Googlebot, `https://winerim.wine/de/weinbibliothek/rebsorten/tempranillo` responde `X-Worker-Branch: bot-fallback` y devuelve el `index.html` con canonical raíz, no el prerender específico.
-- En este entorno no están instalados `supabase` ni `wrangler`, y no hay script de deploy en `package.json`.
+- En este entorno no están instalados globalmente `supabase` ni `wrangler`; los scripts añadidos usan `npx`.
 - Contradicción detectada y corregida: `TECH_INSTRUCTIONS.md` indicaba desplegar `cloudflare-worker-v2.1-improved-debug.js`, mientras que el bloque integrado trabaja sobre `cloudflare-worker-v3-hybrid.js` y producción ya expone cabeceras compatibles con el worker híbrido.
+- Intento de despliegue del 2026-05-23:
+  - `npx --yes supabase@latest functions deploy sitemap --project-ref pwkqbcgjrhoyxrsmcypw` falló porque no hay `SUPABASE_ACCESS_TOKEN` ni sesión `supabase login`.
+  - `npx --yes wrangler@3.112.0 whoami` confirmó que no hay sesión Cloudflare.
+  - `npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --dry-run` sí compila el worker en seco.
+- Se añadieron scripts de despliegue reproducibles a `package.json`: `deploy:supabase:seo`, `deploy:worker` y `deploy:worker:dry-run`.
 
 ## Decisiones
 
@@ -40,6 +45,7 @@
 - Restaurar en el sitemap las rutas generales `de`/`pt` de `main` además de las rutas de biblioteca añadidas.
 - Seguir tratando el lint global como deuda separada, no como parte de este bloque.
 - No asumir que producción está actualizada hasta desplegar explícitamente Edge Functions/Worker y repetir la validación con bot.
+- El despliegue no se puede completar desde esta sesión sin credenciales privadas de Supabase y Cloudflare.
 
 ## Hipótesis
 
@@ -52,4 +58,5 @@
 - Validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
 - Confirmar que el despliegue usa `main` con merge commit `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 - Usar `cloudflare-worker-v3-hybrid.js` para el despliegue manual del worker.
+- Proveer `SUPABASE_ACCESS_TOKEN` y autenticación Cloudflare (`wrangler login` o token equivalente) para ejecutar los scripts de despliegue.
 - Separar en una tarea propia la deuda de lint global.

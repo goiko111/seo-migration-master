@@ -11,8 +11,15 @@
   - Rutas `de` y `pt` de biblioteca responden 200 como SPA.
   - El sitemap público comprobado no lista aún las nuevas rutas de biblioteca `de`/`pt`.
   - Googlebot en una ficha dinámica cae en `X-Worker-Branch: bot-fallback` y recibe canonical raíz.
-- No hay `supabase` ni `wrangler` instalados localmente, ni script de deploy en `package.json`.
+- No hay `supabase` ni `wrangler` instalados globalmente; los scripts de deploy preparados usan `npx`.
 - La contradicción de instrucciones del worker quedó corregida: `TECH_INSTRUCTIONS.md` ahora apunta a `cloudflare-worker-v3-hybrid.js`.
+- Se intentó desplegar, pero falta autenticación:
+  - Supabase requiere `SUPABASE_ACCESS_TOKEN` o `supabase login`.
+  - Cloudflare requiere `wrangler login` o token compatible.
+- Se añadieron scripts:
+  - `npm run deploy:supabase:seo`.
+  - `npm run deploy:worker`.
+  - `npm run deploy:worker:dry-run`.
 - Las comprobaciones posteriores a la resolución pasan:
   - `npm run test`.
   - `npm run build`.
@@ -38,7 +45,9 @@
 1. Desplegar las funciones Supabase actualizadas:
    - `supabase/functions/sitemap/index.ts`.
    - `supabase/functions/prerender/index.ts`.
+   - Comando preparado: `npm run deploy:supabase:seo`.
 2. Desplegar `cloudflare-worker-v3-hybrid.js` en Cloudflare con las rutas de biblioteca `de`/`pt`.
+   - Comando preparado: `npm run deploy:worker`.
 3. Tras desplegar, validar:
    - Sitemap XML y rutas `de`/`pt`.
    - Hreflang recíproco y canonical.
