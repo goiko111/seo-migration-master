@@ -22,7 +22,8 @@
 - Validar las funciones Edge tocadas con `npx --yes deno-bin check` en vez de depender de un Deno instalado globalmente.
 - Separar `LanguageProvider` en `src/i18n/LanguageProvider.tsx` y dejar `LanguageContext.tsx` para contexto/hook, eliminando warnings de Fast Refresh en el lint dirigido.
 - Cerrar el bloque técnico en un commit de feature en `codex/wine-library-de-pt`.
-- No crear PR desde este entorno porque el push por HTTPS falló por credenciales y `gh` no está disponible.
+- Instalar GitHub CLI (`gh`) con Homebrew, autenticarlo vía navegador y configurar Git con `gh auth setup-git` para poder subir la rama.
+- Crear el PR `https://github.com/goiko111/seo-migration-master/pull/1` desde `codex/wine-library-de-pt` hacia `main`.
 
 ### Hipótesis
 
@@ -31,6 +32,5 @@
 
 ### Tareas pendientes
 
-- Subir la rama desde un entorno autenticado.
-- Crear PR desde `codex/wine-library-de-pt`.
+- Revisar y aprobar el PR `https://github.com/goiko111/seo-migration-master/pull/1`.
 - Definir el siguiente bloque editorial de la biblioteca del vino.
