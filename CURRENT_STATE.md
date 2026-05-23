@@ -4,9 +4,10 @@
 
 - Fecha de actualización: 2026-05-23.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
-- Rama activa: `codex/wine-library-de-pt`.
-- PR abierto: `https://github.com/goiko111/seo-migration-master/pull/1`.
-- La ampliación de la biblioteca del vino a alemán (`de`) y portugués (`pt`) está implementada en la rama.
+- Rama activa: `main`.
+- PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
+- Merge commit en `main`: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
+- La ampliación de la biblioteca del vino a alemán (`de`) y portugués (`pt`) está integrada en `main`.
 - El bloque incluye rutas localizadas, navegación, selector de idioma, SEO head, hreflang/canonical, sitemap, prerender, enlaces internos, overlays i18n, tests y documentación de seguimiento.
 - `origin/main` avanzó mientras el PR estaba abierto y provocó conflictos al intentar fusionar la rama.
 - Los conflictos de merge se resolvieron integrando:
@@ -22,11 +23,11 @@
   - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts` pasa.
   - `git diff --check` pasa.
 - `npm run lint -- --quiet` ya fallaba previamente por errores globales fuera del alcance directo de la biblioteca del vino.
-- El merge todavía debe concluirse con commit, push y nuevo intento de merge del PR.
+- La rama remota del PR quedó fusionada en `main`; queda pendiente validar despliegue/producción.
 
 ## Decisiones
 
-- Mantener la rama `codex/wine-library-de-pt` como unidad de integración del bloque multilingüe.
+- Dar por cerrado el bloque técnico `codex/wine-library-de-pt` tras fusionarlo en `main`.
 - Resolver el merge conservando los datos i18n más recientes de `main` cuando eran más completos que los de la rama.
 - Conservar la lógica de biblioteca de esta rama para rutas dinámicas, SEO y prerender.
 - Restaurar en el sitemap las rutas generales `de`/`pt` de `main` además de las rutas de biblioteca añadidas.
@@ -40,8 +41,6 @@
 
 ## Tareas pendientes
 
-- Concluir el merge local con commit.
-- Subir la rama actualizada a `origin`.
-- Reintentar el merge del PR `https://github.com/goiko111/seo-migration-master/pull/1`.
-- Si el PR se fusiona, validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
+- Validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
+- Confirmar que el despliegue usa `main` con merge commit `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 - Separar en una tarea propia la deuda de lint global.

@@ -14,6 +14,8 @@
 - Los conflictos se resolvieron combinando el bloque de biblioteca multilingüe con los cambios más recientes de `main`.
 - Se detectó que el sitemap había perdido rutas generales `de`/`pt` de `main` durante la resolución; se corrigió manteniendo esas rutas y añadiendo las rutas de biblioteca.
 - Las verificaciones posteriores al merge resuelto pasan: tests, build, lint dirigido, `deno check` y `git diff --check`.
+- Se fusionó el PR `https://github.com/goiko111/seo-migration-master/pull/1` en `main`.
+- Merge commit: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 
 ### Decisiones
 
@@ -29,6 +31,7 @@
 - En el merge con `main`, conservar los overlays i18n más recientes de uvas en `de`/`pt` y adaptar los helpers locales que necesitaba la biblioteca.
 - Restaurar rutas generales `de`/`pt` en el sitemap tras detectar la contradicción.
 - Mantener la deuda de lint global como iniciativa separada.
+- Cerrar el bloque técnico como integrado en `main` y mover el foco a despliegue, validación productiva y mejora editorial.
 
 ### Hipótesis
 
@@ -38,7 +41,6 @@
 
 ### Tareas pendientes
 
-- Concluir el merge local con commit.
-- Subir la rama actualizada.
-- Reintentar el merge del PR.
+- Validar el despliegue en producción.
+- Revisar Search Console tras indexación.
 - Definir el siguiente bloque editorial de la biblioteca del vino.
