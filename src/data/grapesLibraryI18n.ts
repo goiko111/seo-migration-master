@@ -31,6 +31,219 @@ export type GrapeCatalogI18nOverlay = {
 type LangOverlays = Record<string, GrapeI18nOverlay>;
 type CatalogLangOverlays = Record<string, GrapeCatalogI18nOverlay>;
 
+const supportedOverlayLangs = ["en", "fr", "it", "de", "pt"] as const;
+type SupportedOverlayLang = typeof supportedOverlayLangs[number];
+
+type GrapeNarrativeFallback = {
+  tastingNotes: (name: string) => string;
+  description: (name: string) => string;
+  intro: (name: string) => string;
+  cartaPerception: (name: string) => string;
+  whenItHelps: (name: string) => string;
+  clientProfile: (name: string) => string;
+  sellByStrategy: (name: string) => string;
+  whenToWriteBig: (name: string) => string;
+  commonMistakes: (name: string) => string[];
+  faqs: (name: string) => { q: string; a: string }[];
+};
+
+const normalizeOverlayLang = (lang: string): SupportedOverlayLang =>
+  supportedOverlayLangs.includes(lang as SupportedOverlayLang) ? (lang as SupportedOverlayLang) : "en";
+
+const countryNames: Record<SupportedOverlayLang, Record<string, string>> = {
+  en: {
+    "España": "Spain",
+    "Francia": "France",
+    "Italia": "Italy",
+    "Portugal": "Portugal",
+    "Alemania": "Germany",
+    "Austria": "Austria",
+    "Estados Unidos": "United States",
+    "Argentina": "Argentina",
+    "Australia": "Australia",
+    "Chile": "Chile",
+    "Sudáfrica": "South Africa",
+    "China": "China",
+    "Nueva Zelanda": "New Zealand",
+    "Hungría": "Hungary",
+    "Grecia": "Greece",
+    "Georgia": "Georgia",
+    "Japón": "Japan",
+    "Croacia": "Croatia",
+  },
+  fr: {
+    "España": "Espagne",
+    "Francia": "France",
+    "Italia": "Italie",
+    "Portugal": "Portugal",
+    "Alemania": "Allemagne",
+    "Austria": "Autriche",
+    "Estados Unidos": "États-Unis",
+    "Argentina": "Argentine",
+    "Australia": "Australie",
+    "Chile": "Chili",
+    "Sudáfrica": "Afrique du Sud",
+    "China": "Chine",
+    "Nueva Zelanda": "Nouvelle-Zélande",
+    "Hungría": "Hongrie",
+    "Grecia": "Grèce",
+    "Georgia": "Géorgie",
+    "Japón": "Japon",
+    "Croacia": "Croatie",
+  },
+  it: {
+    "España": "Spagna",
+    "Francia": "Francia",
+    "Italia": "Italia",
+    "Portugal": "Portogallo",
+    "Alemania": "Germania",
+    "Austria": "Austria",
+    "Estados Unidos": "Stati Uniti",
+    "Argentina": "Argentina",
+    "Australia": "Australia",
+    "Chile": "Cile",
+    "Sudáfrica": "Sudafrica",
+    "China": "Cina",
+    "Nueva Zelanda": "Nuova Zelanda",
+    "Hungría": "Ungheria",
+    "Grecia": "Grecia",
+    "Georgia": "Georgia",
+    "Japón": "Giappone",
+    "Croacia": "Croazia",
+  },
+  de: {
+    "España": "Spanien",
+    "Francia": "Frankreich",
+    "Italia": "Italien",
+    "Portugal": "Portugal",
+    "Alemania": "Deutschland",
+    "Austria": "Österreich",
+    "Estados Unidos": "Vereinigte Staaten",
+    "Argentina": "Argentinien",
+    "Australia": "Australien",
+    "Chile": "Chile",
+    "Sudáfrica": "Südafrika",
+    "China": "China",
+    "Nueva Zelanda": "Neuseeland",
+    "Hungría": "Ungarn",
+    "Grecia": "Griechenland",
+    "Georgia": "Georgien",
+    "Japón": "Japan",
+    "Croacia": "Kroatien",
+  },
+  pt: {
+    "España": "Espanha",
+    "Francia": "França",
+    "Italia": "Itália",
+    "Portugal": "Portugal",
+    "Alemania": "Alemanha",
+    "Austria": "Áustria",
+    "Estados Unidos": "Estados Unidos",
+    "Argentina": "Argentina",
+    "Australia": "Austrália",
+    "Chile": "Chile",
+    "Sudáfrica": "África do Sul",
+    "China": "China",
+    "Nueva Zelanda": "Nova Zelândia",
+    "Hungría": "Hungria",
+    "Grecia": "Grécia",
+    "Georgia": "Geórgia",
+    "Japón": "Japão",
+    "Croacia": "Croácia",
+  },
+};
+
+const seoGuideLabels: Record<SupportedOverlayLang, string> = {
+  en: "Grape guide",
+  fr: "Guide du cépage",
+  it: "Guida al vitigno",
+  de: "Rebsortenführer",
+  pt: "Guia da casta",
+};
+
+const narrativeFallbacks: Record<SupportedOverlayLang, GrapeNarrativeFallback> = {
+  en: {
+    tastingNotes: (name) => `Everything you need to know to include ${name} on your wine list.`,
+    description: (name) => `Practical guide to ${name}: style, origin, service, pairings and wine-list strategy for restaurants.`,
+    intro: (name) => `${name} is part of the Winerim wine library because it helps restaurant teams connect grape variety, origin, style and commercial decision. Use this page as a practical briefing for the list, the floor team and staff training.`,
+    cartaPerception: (name) => `${name} should appear on the list with a clear style cue, a recognizable origin and one food context. That turns the grape from a technical name into a useful sales signal.`,
+    whenItHelps: (name) => `${name} helps when the team needs a confident recommendation, a clear by-the-glass story or a bridge between familiar labels and more distinctive producers.`,
+    clientProfile: (name) => `Best for guests who respond to direct guidance: style first, then region, then dish. The more specific the cue, the easier ${name} becomes to sell.`,
+    sellByStrategy: (name) => `Sell ${name} through one sentence that combines origin, weight and pairing. Avoid listing only the grape name when the region or producer does the commercial work.`,
+    whenToWriteBig: (name) => `Give ${name} more visibility when it anchors a category, explains a premium step or helps the guest compare styles without extra friction.`,
+    commonMistakes: (name) => [`Listing ${name} without a style cue.`, "Forgetting service temperature and glassware.", "Treating all regions or producers as if they tasted the same."],
+    faqs: (name) => [
+      { q: `How should a restaurant present ${name}?`, a: `Lead with style, origin and one food context. That makes ${name} easier for both the guest and the floor team.` },
+      { q: `Is ${name} useful by the glass?`, a: `It can be, if rotation is clear and the team can explain the wine in one short sentence.` },
+    ],
+  },
+  fr: {
+    tastingNotes: (name) => `Tout ce qu'il faut savoir pour inclure ${name} dans votre carte des vins.`,
+    description: (name) => `Guide pratique de ${name} : style, origine, service, accords et strategie de carte pour restaurants.`,
+    intro: (name) => `${name} fait partie de la bibliotheque du vin Winerim parce qu'il aide les equipes a relier cepage, origine, style et decision commerciale. Cette fiche sert de briefing pratique pour la carte, la salle et la formation.`,
+    cartaPerception: (name) => `${name} doit apparaitre avec un repere de style, une origine lisible et un contexte de plat. Le cepage devient alors un signal de vente, pas seulement un nom technique.`,
+    whenItHelps: (name) => `${name} aide quand l'equipe a besoin d'une recommandation sure, d'une histoire claire au verre ou d'un pont entre reperes connus et producteurs plus distinctifs.`,
+    clientProfile: (name) => `Ideal pour les clients qui reagissent a une recommandation directe : style, puis region, puis plat. Plus le repere est precis, plus ${name} se vend facilement.`,
+    sellByStrategy: (name) => `Vendez ${name} avec une phrase qui combine origine, poids et accord. Ne laissez pas le nom du cepage seul quand la region ou le producteur porte la valeur.`,
+    whenToWriteBig: (name) => `Donnez plus de visibilite a ${name} quand il structure une categorie, explique un palier premium ou aide a comparer les styles.`,
+    commonMistakes: (name) => [`Lister ${name} sans repere de style.`, "Oublier temperature de service et verrerie.", "Presenter toutes les regions ou tous les producteurs comme identiques."],
+    faqs: (name) => [
+      { q: `Comment presenter ${name} en restaurant ?`, a: `Commencez par style, origine et un contexte de plat. ${name} devient plus facile a vendre pour l'equipe comme pour le client.` },
+      { q: `${name} fonctionne-t-il au verre ?`, a: `Oui, si la rotation est claire et si l'equipe peut expliquer le vin en une phrase courte.` },
+    ],
+  },
+  it: {
+    tastingNotes: (name) => `Tutto cio che serve per includere ${name} nella carta dei vini.`,
+    description: (name) => `Guida pratica a ${name}: stile, origine, servizio, abbinamenti e strategia di carta per ristoranti.`,
+    intro: (name) => `${name} fa parte della biblioteca del vino Winerim perche aiuta la sala a collegare vitigno, origine, stile e decisione commerciale. Usa questa scheda come briefing pratico per carta, servizio e formazione.`,
+    cartaPerception: (name) => `${name} deve comparire con un'indicazione di stile, un'origine riconoscibile e un contesto di piatto. Cosi il vitigno diventa un segnale di vendita utile.`,
+    whenItHelps: (name) => `${name} aiuta quando il team ha bisogno di una raccomandazione sicura, di una storia chiara al calice o di un ponte tra referenze familiari e produttori piu distintivi.`,
+    clientProfile: (name) => `Ideale per ospiti che rispondono a una guida diretta: prima stile, poi regione, poi piatto. Piu il segnale e preciso, piu ${name} e facile da vendere.`,
+    sellByStrategy: (name) => `Vendi ${name} con una frase che unisce origine, peso e abbinamento. Non lasciare solo il nome del vitigno quando regione o produttore portano il valore.`,
+    whenToWriteBig: (name) => `Dai piu visibilita a ${name} quando struttura una categoria, spiega uno step premium o aiuta a confrontare gli stili.`,
+    commonMistakes: (name) => [`Inserire ${name} senza indicazione di stile.`, "Dimenticare temperatura di servizio e calice.", "Trattare regioni o produttori come se avessero lo stesso profilo."],
+    faqs: (name) => [
+      { q: `Come presentare ${name} in ristorante?`, a: `Parti da stile, origine e un contesto di piatto. Cosi ${name} diventa piu facile da vendere per sala e cliente.` },
+      { q: `${name} funziona al calice?`, a: `Si, se la rotazione e chiara e il team sa spiegare il vino in una frase breve.` },
+    ],
+  },
+  de: {
+    tastingNotes: (name) => `Alles, was Sie wissen mussen, um ${name} auf die Weinkarte zu setzen.`,
+    description: (name) => `Praktischer Guide zu ${name}: Stil, Herkunft, Service, Pairing und Kartenstrategie fur Restaurants.`,
+    intro: (name) => `${name} ist Teil der Winerim Weinbibliothek, weil er Serviceteams hilft, Rebsorte, Herkunft, Stil und kommerzielle Entscheidung zu verbinden. Diese Seite dient als praktisches Briefing fur Weinkarte, Service und Teamtraining.`,
+    cartaPerception: (name) => `${name} sollte mit klarem Stilhinweis, erkennbarer Herkunft und einem Essenskontext auf der Karte stehen. So wird die Rebsorte zu einem nutzlichen Verkaufssignal.`,
+    whenItHelps: (name) => `${name} hilft, wenn das Team eine sichere Empfehlung, eine klare Glaswein-Geschichte oder eine Brucke zwischen vertrauten Namen und markanteren Produzenten braucht.`,
+    clientProfile: (name) => `Geeignet fur Gaste, die auf direkte Orientierung reagieren: zuerst Stil, dann Region, dann Gericht. Je klarer der Hinweis, desto leichter verkauft sich ${name}.`,
+    sellByStrategy: (name) => `${name} uber einen Satz verkaufen, der Herkunft, Gewicht und Pairing verbindet. Nicht nur den Rebsortennamen nennen, wenn Region oder Produzent den Wert tragen.`,
+    whenToWriteBig: (name) => `${name} grosser zeigen, wenn er eine Kategorie tragt, eine Premium-Stufe erklart oder Gasten hilft, Stile leichter zu vergleichen.`,
+    commonMistakes: (name) => [`${name} ohne Stilhinweis listen.`, "Serviertemperatur und Glas vergessen.", "Regionen oder Produzenten so behandeln, als hatten sie dasselbe Profil."],
+    faqs: (name) => [
+      { q: `Wie sollte ein Restaurant ${name} prasentieren?`, a: `Mit Stil, Herkunft und einem passenden Gericht beginnen. So wird ${name} fur Gast und Serviceteam leichter verkaufbar.` },
+      { q: `Funktioniert ${name} glasweise?`, a: `Ja, wenn die Rotation klar ist und das Team den Wein in einem kurzen Satz erklaren kann.` },
+    ],
+  },
+  pt: {
+    tastingNotes: (name) => `Tudo o que precisa saber para incluir ${name} na carta de vinhos.`,
+    description: (name) => `Guia pratico de ${name}: estilo, origem, servico, harmonizacao e estrategia de carta para restaurantes.`,
+    intro: (name) => `${name} faz parte da biblioteca do vinho Winerim porque ajuda equipas de sala a ligar casta, origem, estilo e decisao comercial. Use esta ficha como briefing pratico para carta, sala e formacao.`,
+    cartaPerception: (name) => `${name} deve aparecer com uma pista clara de estilo, uma origem reconhecivel e um contexto de prato. Assim a casta passa de nome tecnico a sinal util de venda.`,
+    whenItHelps: (name) => `${name} ajuda quando a equipa precisa de uma recomendacao segura, de uma historia clara a copo ou de uma ponte entre referencias conhecidas e produtores mais distintos.`,
+    clientProfile: (name) => `Ideal para clientes que respondem a orientacao direta: primeiro estilo, depois regiao, depois prato. Quanto mais precisa a pista, mais facil e vender ${name}.`,
+    sellByStrategy: (name) => `Venda ${name} com uma frase que una origem, corpo e harmonizacao. Nao deixe apenas o nome da casta quando regiao ou produtor carregam o valor.`,
+    whenToWriteBig: (name) => `Dê mais visibilidade a ${name} quando estrutura uma categoria, explica um patamar premium ou ajuda o cliente a comparar estilos.`,
+    commonMistakes: (name) => [`Listar ${name} sem pista de estilo.`, "Esquecer temperatura de servico e copo.", "Tratar regioes ou produtores como se tivessem o mesmo perfil."],
+    faqs: (name) => [
+      { q: `Como apresentar ${name} num restaurante?`, a: `Comece por estilo, origem e um contexto de prato. Assim ${name} fica mais facil de vender para cliente e equipa.` },
+      { q: `${name} funciona a copo?`, a: `Sim, se a rotacao for clara e a equipa conseguir explicar o vinho numa frase curta.` },
+    ],
+  },
+};
+
+function localizeCountries(countries: string[], lang: string): string[] {
+  const dictionary = countryNames[normalizeOverlayLang(lang)];
+  return countries.map((country) => dictionary[country] ?? country);
+}
+
 export const grapeOverlays: Record<string, LangOverlays> = {
   "aglianico": {
     en: {
@@ -1422,30 +1635,39 @@ for (const [grapeId, langs] of Object.entries(grapeOverlays)) {
 // Helper functions
 // ============================================================
 
+export function getLocalizedGrape(grape: GrapeEntry, lang: string): GrapeEntry;
+export function getLocalizedGrape(slug: string, lang: string): GrapeEntry | undefined;
 export function getLocalizedGrape(
-  grape: GrapeEntry,
+  grapeOrSlug: GrapeEntry | string,
   lang: string
-): GrapeEntry {
+): GrapeEntry | undefined {
+  const grape = typeof grapeOrSlug === "string"
+    ? grapeEntries.find((entry) => entry.slug === grapeOrSlug)
+    : grapeOrSlug;
+  if (!grape) return undefined;
   if (lang === "es") return grape;
-  const overlay = grapeOverlays[grape.slug]?.[lang];
-  if (!overlay) return grape;
+  const overlay: GrapeI18nOverlay = grapeOverlays[grape.slug]?.[lang] ?? {};
+  const overlayLang = normalizeOverlayLang(lang);
+  const fallback = narrativeFallbacks[overlayLang];
+
   return {
     ...grape,
-    tastingNotes: overlay.tastingNotes ?? grape.tastingNotes,
-    description: overlay.description ?? grape.description,
-    intro: overlay.intro ?? grape.intro,
-    cartaPerception: overlay.cartaPerception ?? grape.cartaPerception,
-    whenItHelps: overlay.whenItHelps ?? grape.whenItHelps,
-    clientProfile: overlay.clientProfile ?? grape.clientProfile,
-    sellByStrategy: overlay.sellByStrategy ?? grape.sellByStrategy,
-    whenToWriteBig: overlay.whenToWriteBig ?? grape.whenToWriteBig,
+    countries: localizeCountries(grape.countries, lang),
+    tastingNotes: overlay.tastingNotes ?? fallback.tastingNotes(grape.name),
+    description: overlay.description ?? fallback.description(grape.name),
+    intro: overlay.intro ?? fallback.intro(grape.name),
+    cartaPerception: overlay.cartaPerception ?? fallback.cartaPerception(grape.name),
+    whenItHelps: overlay.whenItHelps ?? fallback.whenItHelps(grape.name),
+    clientProfile: overlay.clientProfile ?? fallback.clientProfile(grape.name),
+    sellByStrategy: overlay.sellByStrategy ?? fallback.sellByStrategy(grape.name),
+    whenToWriteBig: overlay.whenToWriteBig ?? fallback.whenToWriteBig(grape.name),
     aromas: overlay.aromas ?? grape.aromas,
-    commonMistakes: overlay.commonMistakes ?? grape.commonMistakes,
+    commonMistakes: overlay.commonMistakes ?? fallback.commonMistakes(grape.name),
     pairings: overlay.pairings ?? grape.pairings,
-    faqs: overlay.faqs ?? grape.faqs,
+    faqs: overlay.faqs ?? fallback.faqs(grape.name),
     seo: {
-      title: overlay.seo?.title ?? grape.seo.title,
-      description: overlay.seo?.description ?? grape.seo.description,
+      title: overlay.seo?.title ?? `${grape.name} | ${seoGuideLabels[overlayLang]} — Winerim`,
+      description: overlay.seo?.description ?? fallback.description(grape.name),
     },
   };
 }
@@ -1458,8 +1680,11 @@ export function getLocalizedCatalogEntry<T extends GrapeCatalogEntry | GrapeEntr
   const fullOverlay = grapeOverlays[entry.slug]?.[lang];
   const catalogOverlay = grapeCatalogOverlays[entry.slug]?.[lang];
   const tastingNotes = fullOverlay?.tastingNotes ?? catalogOverlay?.tastingNotes;
-  if (!tastingNotes) return entry;
-  return { ...entry, tastingNotes };
+  return {
+    ...entry,
+    countries: localizeCountries(entry.countries, lang),
+    tastingNotes: tastingNotes ?? narrativeFallbacks[normalizeOverlayLang(lang)].tastingNotes(entry.name),
+  };
 }
 
 export type LocalizedGrapeCatalogEntry = GrapeCatalogEntry & {
@@ -1478,22 +1703,32 @@ export function getLocalizedGrapeCatalogEntry(
   const entry = getCatalogEntry(slug);
   if (!entry) return undefined;
   const overlay = grapeOverlays[entry.slug]?.[lang];
+  const overlayLang = normalizeOverlayLang(lang);
+  const fallback = narrativeFallbacks[overlayLang];
+  const fallbackSeo = lang === "es"
+    ? { title: `${entry.name} | Biblioteca de uvas — Winerim`, description: entry.tastingNotes }
+    : { title: `${entry.name} | ${seoGuideLabels[overlayLang]} — Winerim`, description: fallback.description(entry.name) };
   return {
     ...getLocalizedCatalogEntry(entry, lang),
-    description: overlay?.description,
-    intro: overlay?.intro,
-    seo: overlay?.seo,
+    description: overlay?.description ?? (lang === "es" ? undefined : fallback.description(entry.name)),
+    intro: overlay?.intro ?? (lang === "es" ? undefined : fallback.intro(entry.name)),
+    seo: overlay?.seo ?? fallbackSeo,
   };
 }
 
 export function getLocalizedGrapeCatalog(lang: string): LocalizedGrapeCatalogEntry[] {
   return grapeCatalog.map((entry) => {
     const overlay = grapeOverlays[entry.slug]?.[lang];
+    const overlayLang = normalizeOverlayLang(lang);
+    const fallback = narrativeFallbacks[overlayLang];
+    const fallbackSeo = lang === "es"
+      ? { title: `${entry.name} | Biblioteca de uvas — Winerim`, description: entry.tastingNotes }
+      : { title: `${entry.name} | ${seoGuideLabels[overlayLang]} — Winerim`, description: fallback.description(entry.name) };
     return {
       ...getLocalizedCatalogEntry(entry, lang),
-      description: overlay?.description,
-      intro: overlay?.intro,
-      seo: overlay?.seo,
+      description: overlay?.description ?? (lang === "es" ? undefined : fallback.description(entry.name)),
+      intro: overlay?.intro ?? (lang === "es" ? undefined : fallback.intro(entry.name)),
+      seo: overlay?.seo ?? fallbackSeo,
     };
   });
 }

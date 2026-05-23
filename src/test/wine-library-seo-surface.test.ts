@@ -22,4 +22,17 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("/pt/biblioteca-vinho");
     expect(prerender).toContain("wineLibraryHreflang(esPath)");
   });
+
+  it("adds priority grape editorial content to prerendered bot pages", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const WINE_LIBRARY_PRIORITY_GRAPES");
+    expect(prerender).toContain("tempranillo");
+    expect(prerender).toContain("chardonnay");
+    expect(prerender).toContain("riesling");
+    expect(prerender).toContain("Rol en carta");
+    expect(prerender).toContain("Ruolo in carta");
+    expect(prerender).toContain("Role en carte");
+    expect(prerender).toContain("Papel na carta");
+  });
 });

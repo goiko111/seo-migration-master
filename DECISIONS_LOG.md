@@ -89,3 +89,41 @@
 - Revisar visualmente rutas `de`/`pt` en navegador y selector de idioma.
 - Revisar avisos de seguridad de Lovable en una tarea separada.
 - Monitorizar Search Console después de la indexación.
+
+### Bloque editorial avanzado de biblioteca del vino
+
+#### Hechos
+
+- Se inició el siguiente bloque tras cerrar infraestructura y despliegue `de`/`pt`.
+- Se implementó una nueva capa editorial para 10 uvas prioritarias.
+- Las uvas incluidas son `tempranillo`, `garnacha`, `albarino`, `verdejo`, `godello`, `chardonnay`, `cabernet-sauvignon`, `pinot-noir`, `sauvignon-blanc` y `riesling`.
+- El bloque añade inteligencia de servicio, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes y FAQs.
+- El contenido se localizó para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se integró el bloque en `GrapeDetail` para fichas completas y fichas de catálogo.
+- Se corrigió `getLocalizedGrape` para aceptar `slug` y devolver la ficha completa localizada.
+- Se detectó durante QA una fuga de narrativa española en fichas localizadas completas.
+- Se añadió fallback narrativo localizado para evitar mezclar español en páginas internacionales cuando una ficha no tenga traducción profunda.
+- Se extendió el prerender de bots para las mismas 10 uvas prioritarias y los seis idiomas.
+- Verificaciones ejecutadas: `npm run test`, `npm run build`, `deno check`, `git diff --check` y navegador local en rutas `de`, `pt`, `it`, `fr`.
+
+#### Decisiones
+
+- Tratar la paridad entre frontend y prerender como una regla de calidad SEO de la biblioteca del vino.
+- Empezar la profundidad editorial máxima por 10 uvas prioritarias antes de ampliar a más entidades.
+- Usar fallbacks narrativos localizados como solución intermedia segura, sin sustituir la escritura editorial completa futura.
+- Mantener este bloque separado de lint global y avisos de seguridad Lovable.
+- No desplegar Worker Cloudflare porque el cambio afecta a frontend y Edge Function `prerender`, no al proxy.
+
+#### Hipótesis
+
+- Las 10 uvas priorizadas concentran suficiente demanda SEO y utilidad de restaurante para justificar ser la primera tanda.
+- El enriquecimiento de prerender mejorará la lectura de bots y AI crawlers en fichas de uva.
+- La siguiente mejora de mayor impacto será ampliar entidad por entidad con contenido propio, schema más rico y enlaces internos por intención.
+
+#### Tareas pendientes
+
+- Commit y push del bloque editorial.
+- Publicar frontend desde Lovable.
+- Pedir despliegue explícito de `prerender` desde Lovable.
+- Validar producción con usuario real y Googlebot.
+- Escalar el patrón editorial a 30-50 uvas/regiones/estilos prioritarios.

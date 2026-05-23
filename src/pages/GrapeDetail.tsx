@@ -14,9 +14,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import {
   hasFullEntry,
   colorLabels,
+  type CartaRole,
   type GrapeColor,
 } from "@/data/grapesLibrary";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
+import { getGrapeEditorialProfile, type LocalizedGrapeEditorialProfile } from "@/data/wineLibraryEditorial";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -72,6 +74,108 @@ const colorLabelsByLang: Record<string, Record<GrapeColor, string>> = {
   fr: { tinta: "Rouge", blanca: "Blanc", rosada: "Rosé" },
   de: { tinta: "Rot", blanca: "Weiß", rosada: "Rosé" },
   pt: { tinta: "Tinta", blanca: "Branca", rosada: "Rosada" },
+};
+
+const cartaRoleLabelsByLang: Record<string, Record<CartaRole, string>> = {
+  es: {
+    conocida: "Conocida",
+    diferencial: "Diferencial",
+    premium: "Premium",
+    descubrimiento: "Descubrimiento",
+    valor: "Valor",
+    identitaria: "Identitaria",
+  },
+  en: {
+    conocida: "Recognizable",
+    diferencial: "Differentiating",
+    premium: "Premium",
+    descubrimiento: "Discovery",
+    valor: "Value",
+    identitaria: "Identity",
+  },
+  it: {
+    conocida: "Riconoscibile",
+    diferencial: "Differenziante",
+    premium: "Premium",
+    descubrimiento: "Scoperta",
+    valor: "Valore",
+    identitaria: "Identitaria",
+  },
+  fr: {
+    conocida: "Reconnue",
+    diferencial: "Différenciante",
+    premium: "Premium",
+    descubrimiento: "Découverte",
+    valor: "Valeur",
+    identitaria: "Identitaire",
+  },
+  de: {
+    conocida: "Bekannt",
+    diferencial: "Differenzierend",
+    premium: "Premium",
+    descubrimiento: "Entdeckung",
+    valor: "Wert",
+    identitaria: "Identität",
+  },
+  pt: {
+    conocida: "Reconhecida",
+    diferencial: "Diferencial",
+    premium: "Premium",
+    descubrimiento: "Descoberta",
+    valor: "Valor",
+    identitaria: "Identitária",
+  },
+};
+
+const cartaRoleTooltipsByLang: Record<string, Record<CartaRole, string>> = {
+  es: {
+    conocida: "Variedad que el comensal identifica sin ayuda. Aporta seguridad a la carta.",
+    diferencial: "Variedad que distingue tu carta de la competencia. Genera curiosidad.",
+    premium: "Variedad asociada a vinos de alta gama. Eleva la percepción de la carta.",
+    descubrimiento: "Variedad poco conocida que sorprende. Ideal para clientes aventureros.",
+    valor: "Variedad que ofrece buena relación calidad-precio. Ancla de la carta.",
+    identitaria: "Variedad que conecta con un territorio o tradición. Aporta autenticidad.",
+  },
+  en: {
+    conocida: "A grape guests can recognize without help. It brings confidence to the list.",
+    diferencial: "A grape that separates the list from competitors and creates curiosity.",
+    premium: "A grape associated with high-end wines. It raises perceived list quality.",
+    descubrimiento: "A discovery grape for curious guests and hand-selling moments.",
+    valor: "A grape that can deliver strong value and anchor a category.",
+    identitaria: "A grape tied to territory or tradition. It adds authenticity.",
+  },
+  it: {
+    conocida: "Vitigno che l'ospite riconosce senza aiuto. Porta sicurezza alla carta.",
+    diferencial: "Vitigno che differenzia la carta e genera curiosita.",
+    premium: "Vitigno associato a vini di fascia alta. Alza la percezione della carta.",
+    descubrimiento: "Vitigno di scoperta per ospiti curiosi e vendita guidata.",
+    valor: "Vitigno con forte rapporto qualita-prezzo. Ancora una categoria.",
+    identitaria: "Vitigno legato a territorio o tradizione. Aggiunge autenticita.",
+  },
+  fr: {
+    conocida: "Cépage que le client reconnait sans aide. Il apporte de la confiance.",
+    diferencial: "Cépage qui distingue la carte et suscite la curiosité.",
+    premium: "Cépage associé aux vins haut de gamme. Il élève la perception de la carte.",
+    descubrimiento: "Cépage de découverte pour clients curieux et vente guidée.",
+    valor: "Cépage avec bon rapport qualité-prix. Il ancre une catégorie.",
+    identitaria: "Cépage lié à un territoire ou une tradition. Il apporte de l'authenticité.",
+  },
+  de: {
+    conocida: "Rebsorte, die Gäste ohne Hilfe erkennen. Sie gibt der Karte Sicherheit.",
+    diferencial: "Rebsorte, die die Karte unterscheidet und Neugier erzeugt.",
+    premium: "Rebsorte mit Premium-Wahrnehmung. Sie hebt die Qualität der Karte.",
+    descubrimiento: "Entdecker-Rebsorte für neugierige Gäste und aktiven Service.",
+    valor: "Rebsorte mit starkem Preis-Leistungs-Signal. Sie trägt eine Kategorie.",
+    identitaria: "Rebsorte mit Herkunfts- oder Traditionsbezug. Sie bringt Authentizität.",
+  },
+  pt: {
+    conocida: "Casta que o cliente reconhece sem ajuda. Traz segurança à carta.",
+    diferencial: "Casta que diferencia a carta e gera curiosidade.",
+    premium: "Casta associada a vinhos de gama alta. Eleva a perceção da carta.",
+    descubrimiento: "Casta de descoberta para clientes curiosos e venda assistida.",
+    valor: "Casta com boa relação qualidade-preço. Ancora uma categoria.",
+    identitaria: "Casta ligada a território ou tradição. Acrescenta autenticidade.",
+  },
 };
 
 const grapeDetailCopy: Record<string, {
@@ -214,8 +318,12 @@ const GrapeDetail = () => {
    ═══════════════════════════════════════════════════════════════════════ */
 const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNullable<ReturnType<typeof getLocalizedGrape>>; linkTo: (path: string) => string; urlFor: (path: string) => string; ui: WineLibraryUi; langKey: string }) => {
   const labels = levelLabelsByLang[langKey] || levelLabelsByLang.en;
+  const roleLabels = cartaRoleLabelsByLang[langKey] || cartaRoleLabelsByLang.en;
+  const roleTooltips = cartaRoleTooltipsByLang[langKey] || cartaRoleTooltipsByLang.en;
   const colorLabel = colorLabelsByLang[langKey]?.[data.color] || colorLabels[data.color].label;
   const copy = grapeDetailCopy[langKey] || grapeDetailCopy.en;
+  const editorial = getGrapeEditorialProfile(data.slug, langKey, data.name);
+  const faqs = editorial ? [...data.faqs, ...editorial.faqs] : data.faqs;
 
   return (
   <div className="min-h-screen bg-background text-foreground">
@@ -371,21 +479,14 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
           <h3 className="font-heading text-lg font-semibold mb-3">{ui.detail.cartaRole}</h3>
           <div className="flex flex-wrap gap-3">
             {data.cartaRole.map((role) => {
-              const tooltips: Record<string, string> = {
-                conocida: "Variedad que el comensal identifica sin ayuda. Aporta seguridad a la carta.",
-                diferencial: "Variedad que distingue tu carta de la competencia. Genera curiosidad.",
-                premium: "Variedad asociada a vinos de alta gama. Eleva la percepción de la carta.",
-                descubrimiento: "Variedad poco conocida que sorprende. Ideal para clientes aventureros.",
-                valor: "Variedad que ofrece buena relación calidad-precio. Ancla de la carta.",
-                identitaria: "Variedad que conecta con un territorio o tradición. Aporta autenticidad.",
-              };
+              const label = roleLabels[role] || role;
               return (
                 <Tooltip key={role}>
                   <TooltipTrigger asChild>
-                    <span className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize cursor-help">{role}</span>
+                    <span className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium cursor-help">{label}</span>
                   </TooltipTrigger>
                   <TooltipContent side="bottom" className="max-w-xs text-xs">
-                    {tooltips[role] || role}
+                    {roleTooltips[role] || label}
                   </TooltipContent>
                 </Tooltip>
               );
@@ -405,6 +506,8 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
         )}
       </div>
     </section>
+
+    {editorial && <ServiceIntelligenceSection profile={editorial} />}
 
     {/* COMPETING VARIETIES */}
     {data.competingVarieties.length > 0 && (
@@ -493,7 +596,7 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
     </section>
 
     {/* FAQ */}
-    <FAQSection faqs={data.faqs} schemaId={`grape-${data.slug}`} />
+    <FAQSection faqs={faqs} schemaId={`grape-${data.slug}`} />
 
     {/* INTERNAL LINKS */}
     <section className="section-padding bg-gradient-dark">
@@ -553,6 +656,7 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
 const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNullable<ReturnType<typeof getLocalizedGrapeCatalogEntry>>; linkTo: (path: string) => string; urlFor: (path: string) => string; ui: WineLibraryUi; langKey: string }) => {
   const colorLabel = colorLabelsByLang[langKey]?.[data.color] || colorLabels[data.color].label;
   const copy = grapeDetailCopy[langKey] || grapeDetailCopy.en;
+  const editorial = getGrapeEditorialProfile(data.slug, langKey, data.name);
 
   return (
   <div className="min-h-screen bg-background text-foreground">
@@ -619,6 +723,8 @@ const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNu
       </div>
     </section>
 
+    {editorial && <ServiceIntelligenceSection profile={editorial} />}
+
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <RelatedWineLibraryLinks
@@ -628,6 +734,8 @@ const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNu
         />
       </div>
     </section>
+
+    {editorial && <FAQSection faqs={editorial.faqs} schemaId={`grape-${data.slug}-service`} />}
 
     {/* INTERNAL LINKS */}
     <section className="section-padding">
@@ -668,6 +776,47 @@ const WinerimBlock = ({ title, content }: { title: string; content: string }) =>
     <h3 className="font-heading text-sm font-semibold text-wine mb-2">{title}</h3>
     <p className="text-muted-foreground text-sm leading-relaxed">{content}</p>
   </div>
+);
+
+const ServiceIntelligenceSection = ({ profile }: { profile: LocalizedGrapeEditorialProfile }) => (
+  <section className="section-padding">
+    <div className="max-w-5xl mx-auto">
+      <ScrollReveal className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <Target size={18} className="text-wine" />
+          <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{profile.eyebrow}</p>
+        </div>
+        <h2 className="font-heading text-2xl md:text-3xl font-bold">{profile.title}</h2>
+        <p className="text-muted-foreground mt-3 max-w-2xl">{profile.subtitle}</p>
+      </ScrollReveal>
+
+      <div className="grid md:grid-cols-3 gap-4 mb-8">
+        {profile.facts.map((fact) => (
+          <FactCard key={fact.label} icon={<Wine size={16} />} label={fact.label} value={fact.value} />
+        ))}
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-4">
+        {profile.sections.map((section, index) => (
+          <ScrollReveal key={section.title} delay={index * 0.04}>
+            <WinerimBlock title={section.title} content={section.body} />
+          </ScrollReveal>
+        ))}
+      </div>
+
+      <ScrollReveal className="mt-8">
+        <h3 className="font-heading text-lg font-semibold mb-4">{profile.menuTitle}</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {profile.menuHooks.map((hook) => (
+            <div key={hook} className="flex items-center gap-3 bg-gradient-card rounded-xl border border-border p-4">
+              <Wine size={15} className="text-wine shrink-0" />
+              <span className="text-sm text-muted-foreground">{hook}</span>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
 );
 
 export default GrapeDetail;

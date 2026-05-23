@@ -205,6 +205,443 @@ const WINE_LIBRARY_COPY: Record<WineLibraryLang, {
   },
 };
 
+interface WineLibraryPriorityProfile {
+  serviceTemp: string;
+  glass: string;
+  role: Record<WineLibraryLang, string>;
+  cue: Record<WineLibraryLang, string>;
+  avoid: Record<WineLibraryLang, string>;
+  hooks: Record<WineLibraryLang, string[]>;
+}
+
+const WINE_LIBRARY_PRIORITY_GRAPES: Record<string, WineLibraryPriorityProfile> = {
+  tempranillo: {
+    serviceTemp: '16-18 C',
+    glass: 'Burdeos / Bordeaux',
+    role: {
+      es: 'Tinto de confianza para sostener rotación, ordenar la carta por regiones reconocibles y cubrir el espacio de Rioja, Ribera o Toro.',
+      en: 'Trust-building red that supports rotation, organizes the list around recognizable regions and covers the Rioja, Ribera or Toro slot.',
+      it: 'Rosso di fiducia per sostenere rotazione, ordinare la carta per regioni riconoscibili e coprire Rioja, Ribera o Toro.',
+      fr: 'Rouge de confiance pour soutenir la rotation, structurer la carte par regions reconnues et couvrir Rioja, Ribera ou Toro.',
+      de: 'Verlasslicher Rotwein fur Rotation, klare Regionenlogik und den Platz von Rioja, Ribera oder Toro.',
+      pt: 'Tinto de confianca para sustentar rotacao, organizar a carta por regioes reconheciveis e cobrir Rioja, Ribera ou Toro.',
+    },
+    cue: {
+      es: 'Presenta primero la región y después la uva: el cliente compra confianza antes que taxonomía.',
+      en: 'Lead with the region, then the grape: guests buy confidence before taxonomy.',
+      it: 'Presenta prima la regione e poi il vitigno: il cliente compra fiducia prima della tassonomia.',
+      fr: 'Presentez la region puis le cepage : le client achete la confiance avant la taxonomie.',
+      de: 'Zuerst die Region nennen, dann die Rebsorte: Gaste kaufen Vertrauen vor Taxonomie.',
+      pt: 'Apresente primeiro a regiao e depois a casta: o cliente compra confianca antes de taxonomia.',
+    },
+    avoid: {
+      es: 'No limitar la oferta a crianzas y reservas; deja también una lectura joven, fresca o de productor.',
+      en: 'Do not limit the offer to crianza/reserva styles; include a younger, fresher or producer-led expression.',
+      it: 'Non limitare la scelta a crianza e reserva; includi anche una lettura giovane, fresca o di produttore.',
+      fr: 'Ne limitez pas la selection aux crianza et reserva ; ajoutez aussi une expression jeune, fraiche ou de producteur.',
+      de: 'Nicht nur Crianza/Reserva zeigen; auch junge, frische oder produzentenstarke Ausdrucke anbieten.',
+      pt: 'Nao limitar a oferta a crianzas e reservas; inclua tambem uma leitura jovem, fresca ou de produtor.',
+    },
+    hooks: {
+      es: ['cordero asado', 'ibéricos', 'quesos curados'],
+      en: ['roasted lamb', 'Iberian pork', 'aged cheeses'],
+      it: ['agnello arrosto', 'maiale iberico', 'formaggi stagionati'],
+      fr: ['agneau roti', 'porc iberique', 'fromages affines'],
+      de: ['Lammbraten', 'Iberico', 'gereifter Kase'],
+      pt: ['borrego assado', 'porco iberico', 'queijos curados'],
+    },
+  },
+  albarino: {
+    serviceTemp: '8-10 C',
+    glass: 'Blanco aromático / aromatic white',
+    role: {
+      es: 'Blanco de mar y frescura, muy útil por copa y fácil de recomendar en mesas de pescado o marisco.',
+      en: 'Seafood and freshness white, useful by the glass and easy to recommend at fish or shellfish tables.',
+      it: 'Bianco di mare e freschezza, utile al calice e facile da consigliare con pesce o frutti di mare.',
+      fr: 'Blanc de mer et de fraicheur, utile au verre et facile a recommander avec poisson ou fruits de mer.',
+      de: 'Frischer Wein zu Fisch und Meer, stark im Glasverkauf und leicht im Service zu empfehlen.',
+      pt: 'Branco de mar e frescura, util a copo e facil de recomendar em mesas de peixe ou marisco.',
+    },
+    cue: {
+      es: 'Vende salinidad, precisión y frescura; debe sonar a costa, no a blanco genérico.',
+      en: 'Sell salinity, precision and freshness; the message should feel coastal, not generic.',
+      it: 'Vendi salinita, precisione e freschezza; deve evocare la costa, non un bianco generico.',
+      fr: 'Vendez salinite, precision et fraicheur ; le message doit evoquer la cote, pas un blanc generique.',
+      de: 'Salinitat, Prazision und Frische verkaufen; die Botschaft soll nach Kuste klingen.',
+      pt: 'Venda salinidade, precisao e frescura; deve soar a costa, nao a branco generico.',
+    },
+    avoid: {
+      es: 'No servir tibio; pierde tensión y se parece a cualquier blanco aromático.',
+      en: 'Do not serve lukewarm; it loses tension and becomes just another aromatic white.',
+      it: 'Non servirlo tiepido; perde tensione e diventa un bianco aromatico qualunque.',
+      fr: 'Ne pas servir tiede ; il perd sa tension et devient un blanc aromatique quelconque.',
+      de: 'Nicht lauwarm servieren; Spannung und Prazision gehen verloren.',
+      pt: 'Nao servir morno; perde tensao e parece apenas mais um branco aromatico.',
+    },
+    hooks: {
+      es: ['marisco', 'ceviche', 'sushi'],
+      en: ['shellfish', 'ceviche', 'sushi'],
+      it: ['frutti di mare', 'ceviche', 'sushi'],
+      fr: ['fruits de mer', 'ceviche', 'sushi'],
+      de: ['Meeresfruchte', 'Ceviche', 'Sushi'],
+      pt: ['marisco', 'ceviche', 'sushi'],
+    },
+  },
+  garnacha: {
+    serviceTemp: '15-17 C',
+    glass: 'Borgoña / Burgundy',
+    role: {
+      es: 'Tinto mediterráneo para diferenciar la carta con fruta, origen y viñas viejas sin alejarse del gusto reconocible.',
+      en: 'Mediterranean red that differentiates the list through fruit, origin and old vines without losing familiarity.',
+      it: 'Rosso mediterraneo che differenzia la carta con frutto, origine e vigne vecchie senza perdere familiarita.',
+      fr: 'Rouge mediterraneen qui differencie la carte par fruit, origine et vieilles vignes sans perdre les reperes connus.',
+      de: 'Mediterraner Rotwein fur Differenzierung durch Frucht, Herkunft und alte Reben.',
+      pt: 'Tinto mediterranico para diferenciar a carta com fruta, origem e vinha velha sem perder familiaridade.',
+    },
+    cue: {
+      es: 'Si hay viña vieja, altura u origen concreto, dilo pronto: ahí se justifica el precio.',
+      en: 'If old vines, altitude or precise origin matter, say it early: that is where price is justified.',
+      it: 'Se ci sono vigne vecchie, altitudine o origine precisa, dillo presto: li nasce il prezzo.',
+      fr: 'Si vieilles vignes, altitude ou origine precise comptent, dites-le tot : c est la que le prix se justifie.',
+      de: 'Wenn alte Reben, Hohe oder Herkunft wichtig sind, fruh nennen: dort entsteht der Preis.',
+      pt: 'Se houver vinha velha, altitude ou origem precisa, diga cedo: e ai que o preco se justifica.',
+    },
+    avoid: {
+      es: 'No servir demasiado caliente: el alcohol gana peso y la fruta se vuelve pesada.',
+      en: 'Do not serve too warm: alcohol becomes heavier and fruit feels jammy.',
+      it: 'Non servirlo troppo caldo: alcol e frutto diventano pesanti.',
+      fr: 'Ne pas servir trop chaud : l alcool prend le dessus et le fruit devient lourd.',
+      de: 'Nicht zu warm servieren: Alkohol wirkt schwerer und Frucht wird marmeladig.',
+      pt: 'Nao servir demasiado quente: o alcool pesa e a fruta fica pesada.',
+    },
+    hooks: {
+      es: ['carnes a la brasa', 'verduras asadas', 'arroces sabrosos'],
+      en: ['grilled meats', 'roasted vegetables', 'savoury rice dishes'],
+      it: ['carni alla griglia', 'verdure arrosto', 'risotti saporiti'],
+      fr: ['viandes grillees', 'legumes rotis', 'riz savoureux'],
+      de: ['Grillfleisch', 'gerostetes Gemuse', 'kraftige Reisgerichte'],
+      pt: ['carnes grelhadas', 'legumes assados', 'arrozes saborosos'],
+    },
+  },
+  verdejo: {
+    serviceTemp: '7-9 C',
+    glass: 'Blanco joven / young white',
+    role: {
+      es: 'Blanco de entrada y alta rotación que necesita contexto para no convertirse en commodity.',
+      en: 'High-rotation entry white that needs context so it does not become a commodity.',
+      it: 'Bianco di ingresso ad alta rotazione che richiede contesto per non diventare commodity.',
+      fr: 'Blanc d entree a forte rotation qui demande du contexte pour ne pas devenir une commodity.',
+      de: 'Weisser Einstieg mit hoher Rotation, der Kontext braucht, um nicht beliebig zu wirken.',
+      pt: 'Branco de entrada e alta rotacao que precisa de contexto para nao virar commodity.',
+    },
+    cue: {
+      es: 'Usa lenguaje directo: fresco, cítrico y ágil; después añade productor o zona.',
+      en: 'Use direct language: fresh, citrus-driven and agile; then add producer or zone.',
+      it: 'Usa un linguaggio diretto: fresco, agrumato e agile; poi aggiungi produttore o zona.',
+      fr: 'Utilisez un langage direct : frais, agrume et agile ; puis ajoutez producteur ou zone.',
+      de: 'Direkt sprechen: frisch, zitrisch und agil; danach Produzent oder Zone nennen.',
+      pt: 'Use linguagem direta: fresco, citrico e agil; depois acrescente produtor ou zona.',
+    },
+    avoid: {
+      es: 'No tratarlo como simple blanco de la casa si la referencia tiene origen o productor defendible.',
+      en: 'Do not treat it as simple house white if the reference has a defendable producer or origin.',
+      it: 'Non trattarlo come semplice vino della casa se produttore o origine sono difendibili.',
+      fr: 'Ne pas le traiter comme simple blanc maison si producteur ou origine sont defendables.',
+      de: 'Nicht als einfachen Hauswein behandeln, wenn Produzent oder Herkunft stark sind.',
+      pt: 'Nao tratar como simples vinho da casa se houver produtor ou origem defensavel.',
+    },
+    hooks: {
+      es: ['tapas', 'ensaladas', 'pescado blanco'],
+      en: ['tapas', 'salads', 'white fish'],
+      it: ['tapas', 'insalate', 'pesce bianco'],
+      fr: ['tapas', 'salades', 'poisson blanc'],
+      de: ['Tapas', 'Salate', 'weisser Fisch'],
+      pt: ['tapas', 'saladas', 'peixe branco'],
+    },
+  },
+  godello: {
+    serviceTemp: '9-11 C',
+    glass: 'Blanco con volumen / textured white',
+    role: {
+      es: 'Blanco premium para subir ticket: textura, mineralidad y gastronomía lo separan del blanco fácil.',
+      en: 'Premium white for higher spend: texture, minerality and food relevance separate it from easy whites.',
+      it: 'Bianco premium per alzare lo scontrino: texture, mineralita e gastronomia lo separano dai bianchi facili.',
+      fr: 'Blanc premium pour augmenter le ticket : texture, mineralite et gastronomie le separent des blancs faciles.',
+      de: 'Premium-Weisswein fur hoheren Bon: Textur, Mineralitat und Gastronomie heben ihn ab.',
+      pt: 'Branco premium para subir ticket: textura, mineralidade e gastronomia separam-no do branco facil.',
+    },
+    cue: {
+      es: 'Explica textura y mineralidad antes que aromas; es el puente hacia un blanco más serio.',
+      en: 'Explain texture and minerality before aromas; it is the bridge to a more serious white.',
+      it: 'Spiega texture e mineralita prima degli aromi; e il ponte verso un bianco piu serio.',
+      fr: 'Expliquez texture et mineralite avant les aromes ; c est le pont vers un blanc plus serieux.',
+      de: 'Textur und Mineralitat vor Aromen erklaren; das ist der Weg zum ernsteren Weisswein.',
+      pt: 'Explique textura e mineralidade antes dos aromas; e a ponte para um branco mais serio.',
+    },
+    avoid: {
+      es: 'No esconderlo entre blancos genéricos: necesita una frase de valor para capturar margen.',
+      en: 'Do not hide it among generic whites: it needs one value sentence to capture margin.',
+      it: 'Non nasconderlo tra bianchi generici: serve una frase di valore per catturare margine.',
+      fr: 'Ne pas le cacher parmi les blancs generiques : une phrase de valeur capte la marge.',
+      de: 'Nicht zwischen generischen Weissweinen verstecken: ein Wertsatz holt Marge heraus.',
+      pt: 'Nao esconder entre brancos genericos: precisa de uma frase de valor para capturar margem.',
+    },
+    hooks: {
+      es: ['aves', 'pescados con salsa', 'arroces'],
+      en: ['poultry', 'fish with sauce', 'rice dishes'],
+      it: ['pollame', 'pesce con salsa', 'risotti'],
+      fr: ['volaille', 'poisson en sauce', 'riz'],
+      de: ['Geflugel', 'Fisch mit Sauce', 'Reisgerichte'],
+      pt: ['aves', 'peixe com molho', 'arrozes'],
+    },
+  },
+  chardonnay: {
+    serviceTemp: '9-12 C',
+    glass: 'Borgoña blanco / white Burgundy',
+    role: {
+      es: 'Blanco global que necesita explicar estilo: con barrica, sin barrica, fresco, cremoso o mineral.',
+      en: 'Global white that needs style clarity: oaked, unoaked, fresh, creamy or mineral.',
+      it: 'Bianco globale che richiede chiarezza di stile: con legno, senza legno, fresco, cremoso o minerale.',
+      fr: 'Blanc mondial qui exige une lecture de style : boise, non boise, frais, cremeux ou mineral.',
+      de: 'Globaler Weisswein, der klare Stilbeschreibung braucht: Holz, kein Holz, frisch, cremig oder mineralisch.',
+      pt: 'Branco global que precisa de clareza de estilo: com madeira, sem madeira, fresco, cremoso ou mineral.',
+    },
+    cue: {
+      es: 'Aclara el estilo en una frase antes de hablar de aromas; evita que el cliente tema una barrica no deseada.',
+      en: 'Clarify the style in one line before aromas; avoid unwanted oak anxiety.',
+      it: 'Chiarisci lo stile in una frase prima degli aromi; evita il timore di legno indesiderato.',
+      fr: 'Clarifiez le style en une phrase avant les aromes ; evitez la crainte du bois non souhaite.',
+      de: 'Den Stil vor den Aromen klaren; so entsteht keine Sorge vor unerwunschtem Holz.',
+      pt: 'Clarifique o estilo numa frase antes dos aromas; evita receio de madeira indesejada.',
+    },
+    avoid: {
+      es: 'No dejar al cliente adivinar si tiene barrica. Es la primera pregunta comercial.',
+      en: 'Do not leave guests guessing about oak. It is the first commercial question.',
+      it: 'Non lasciare il cliente a indovinare se ha legno. E la prima domanda commerciale.',
+      fr: 'Ne laissez pas le client deviner s il y a du bois. C est la premiere question commerciale.',
+      de: 'Gaste nicht raten lassen, ob Holz im Spiel ist. Das ist die erste Verkaufsfrage.',
+      pt: 'Nao deixe o cliente adivinhar se tem madeira. E a primeira pergunta comercial.',
+    },
+    hooks: {
+      es: ['aves', 'salsas de mantequilla', 'pescados con salsa'],
+      en: ['poultry', 'butter sauces', 'fish with creamy sauces'],
+      it: ['pollame', 'salse al burro', 'pesce con salse cremose'],
+      fr: ['volaille', 'sauces au beurre', 'poisson en sauce cremeuse'],
+      de: ['Geflugel', 'Buttersaucen', 'Fisch mit cremigen Saucen'],
+      pt: ['aves', 'molhos de manteiga', 'peixe com molhos cremosos'],
+    },
+  },
+  'cabernet-sauvignon': {
+    serviceTemp: '16-18 C',
+    glass: 'Burdeos amplia / large Bordeaux',
+    role: {
+      es: 'Tinto premium internacional para carnes, estructura y comparación con tintos locales de gama alta.',
+      en: 'International premium red for meat, structure and comparison with high-end local reds.',
+      it: 'Rosso premium internazionale per carni, struttura e confronto con rossi locali di fascia alta.',
+      fr: 'Rouge premium international pour viandes, structure et comparaison avec des rouges locaux haut de gamme.',
+      de: 'Internationaler Premium-Rotwein fur Fleisch, Struktur und Vergleich mit hochwertigen lokalen Rotweinen.',
+      pt: 'Tinto premium internacional para carnes, estrutura e comparacao com tintos locais de gama alta.',
+    },
+    cue: {
+      es: 'Véndelo desde plato, tanino y estructura; funciona peor como copa casual si es joven.',
+      en: 'Sell it through dish, tannin and structure; young bottles work less well as casual glasses.',
+      it: 'Vendilo con piatto, tannino e struttura; da giovane funziona peggio come calice casuale.',
+      fr: 'Vendez-le par le plat, le tanin et la structure ; jeune, il marche moins comme verre casual.',
+      de: 'Uber Gericht, Tannin und Struktur verkaufen; jung weniger als spontanes Glas geeignet.',
+      pt: 'Venda por prato, tanino e estrutura; jovem funciona pior como copo casual.',
+    },
+    avoid: {
+      es: 'No recomendarlo sin comida si el tanino está duro; puede parecer agresivo.',
+      en: 'Do not recommend a tannic young bottle without food; it may feel aggressive.',
+      it: 'Non consigliarlo senza cibo se il tannino e duro; puo sembrare aggressivo.',
+      fr: 'Ne pas le recommander sans plat si le tanin est dur ; il peut paraitre agressif.',
+      de: 'Tanninreiche junge Flaschen nicht ohne Essen empfehlen; sie konnen aggressiv wirken.',
+      pt: 'Nao recomende garrafas jovens e tanicas sem comida; podem parecer agressivas.',
+    },
+    hooks: {
+      es: ['steak', 'carnes a la brasa', 'quesos curados'],
+      en: ['steak', 'grilled meats', 'aged cheeses'],
+      it: ['bistecca', 'carni alla griglia', 'formaggi stagionati'],
+      fr: ['steak', 'viandes grillees', 'fromages affines'],
+      de: ['Steak', 'Grillfleisch', 'gereifter Kase'],
+      pt: ['bife', 'carnes grelhadas', 'queijos curados'],
+    },
+  },
+  'pinot-noir': {
+    serviceTemp: '13-15 C',
+    glass: 'Borgoña amplia / large Burgundy',
+    role: {
+      es: 'Tinto fino y elegante para clientes que buscan menos potencia, menos madera y más precisión.',
+      en: 'Elegant red for guests seeking less power, less oak and more precision.',
+      it: 'Rosso fine ed elegante per clienti che cercano meno potenza, meno legno e piu precisione.',
+      fr: 'Rouge fin et elegant pour clients qui cherchent moins de puissance, moins de bois et plus de precision.',
+      de: 'Eleganter Rotwein fur Gaste, die weniger Kraft, weniger Holz und mehr Prazision suchen.',
+      pt: 'Tinto fino e elegante para clientes que procuram menos potencia, menos madeira e mais precisao.',
+    },
+    cue: {
+      es: 'Posiciónalo como elegante, no como ligero sin valor; sirve algo fresco y habla de finura.',
+      en: 'Position it as elegant, not weak; serve slightly cool and talk about finesse.',
+      it: 'Posizionalo come elegante, non debole; servilo leggermente fresco e parla di finezza.',
+      fr: 'Positionnez-le comme elegant, pas faible ; servez un peu frais et parlez de finesse.',
+      de: 'Als elegant positionieren, nicht als schwach; leicht kuhler servieren und uber Finesse sprechen.',
+      pt: 'Posicione como elegante, nao como fraco; sirva ligeiramente fresco e fale de finura.',
+    },
+    avoid: {
+      es: 'No servirlo a temperatura de tinto potente; pierde perfume y finura.',
+      en: 'Do not serve it at powerful-red temperature; it loses perfume and finesse.',
+      it: 'Non servirlo alla temperatura di un rosso potente; perde profumo e finezza.',
+      fr: 'Ne pas servir a temperature de rouge puissant ; il perd parfum et finesse.',
+      de: 'Nicht wie einen kraftigen Rotwein servieren; er verliert Duft und Finesse.',
+      pt: 'Nao sirva a temperatura de tinto potente; perde perfume e finura.',
+    },
+    hooks: {
+      es: ['pato', 'setas', 'atún marcado'],
+      en: ['duck', 'mushrooms', 'seared tuna'],
+      it: ['anatra', 'funghi', 'tonno scottato'],
+      fr: ['canard', 'champignons', 'thon snacke'],
+      de: ['Ente', 'Pilze', 'kurz gebratener Thunfisch'],
+      pt: ['pato', 'cogumelos', 'atum braseado'],
+    },
+  },
+  'sauvignon-blanc': {
+    serviceTemp: '7-9 C',
+    glass: 'Blanco aromático / aromatic white',
+    role: {
+      es: 'Blanco aromático y fresco para responder rápido a la petición de algo vivo, cítrico y directo.',
+      en: 'Aromatic, fresh white for the quick request for something vivid, citrus-driven and direct.',
+      it: 'Bianco aromatico e fresco per rispondere alla richiesta di qualcosa di vivo, agrumato e diretto.',
+      fr: 'Blanc aromatique et frais pour repondre vite a une demande de vin vif, agrume et direct.',
+      de: 'Aromatischer, frischer Weisswein fur den Wunsch nach etwas Lebendigem, Zitrischem und Direktem.',
+      pt: 'Branco aromatico e fresco para responder ao pedido de algo vivo, citrico e direto.',
+    },
+    cue: {
+      es: 'Hazlo reconocible por aromas verdes, cítricos y tensión; separa origen para no repetir perfiles.',
+      en: 'Make green, citrus and tension cues clear; separate origins so profiles do not overlap.',
+      it: 'Rendilo chiaro con note verdi, agrumi e tensione; separa le origini per non ripetere profili.',
+      fr: 'Rendez-le lisible par notes vertes, agrumes et tension ; separez les origines pour eviter les doublons.',
+      de: 'Grune Noten, Zitrus und Spannung klar machen; Herkunft trennen, damit Profile nicht doppeln.',
+      pt: 'Torne claros aromas verdes, citrinos e tensao; separe origens para nao repetir perfis.',
+    },
+    avoid: {
+      es: 'No poner varios blancos aromáticos que digan lo mismo; diferéncialos por origen o plato.',
+      en: 'Do not list several aromatic whites that say the same thing; separate them by origin or dish.',
+      it: 'Non inserire piu bianchi aromatici con lo stesso messaggio; separali per origine o piatto.',
+      fr: 'Ne listez pas plusieurs blancs aromatiques qui disent la meme chose ; separez par origine ou plat.',
+      de: 'Nicht mehrere aromatische Weissweine mit derselben Aussage listen; nach Herkunft oder Gericht trennen.',
+      pt: 'Nao liste varios brancos aromaticos que dizem o mesmo; diferencie por origem ou prato.',
+    },
+    hooks: {
+      es: ['queso de cabra', 'ensaladas', 'ceviche'],
+      en: ['goat cheese', 'salads', 'ceviche'],
+      it: ['formaggio di capra', 'insalate', 'ceviche'],
+      fr: ['chevre', 'salades', 'ceviche'],
+      de: ['Ziegenkase', 'Salate', 'Ceviche'],
+      pt: ['queijo de cabra', 'saladas', 'ceviche'],
+    },
+  },
+  riesling: {
+    serviceTemp: '7-10 C',
+    glass: 'Blanco aromático / aromatic white',
+    role: {
+      es: 'Blanco de descubrimiento para maridajes difíciles, clientes curiosos y cartas con ambición sommelier.',
+      en: 'Discovery white for difficult pairings, curious guests and lists with sommelier ambition.',
+      it: 'Bianco di scoperta per abbinamenti difficili, clienti curiosi e carte con ambizione sommelier.',
+      fr: 'Blanc de decouverte pour accords difficiles, clients curieux et cartes a ambition sommelier.',
+      de: 'Entdecker-Weisswein fur schwierige Pairings, neugierige Gaste und ambitionierte Karten.',
+      pt: 'Branco de descoberta para harmonizacoes dificeis, clientes curiosos e cartas com ambicao sommelier.',
+    },
+    cue: {
+      es: 'Aclara dulzor y acidez al inicio; cuando desaparece esa duda, el vino se vende.',
+      en: 'Clarify sweetness and acidity upfront; once that doubt disappears, the wine sells.',
+      it: 'Chiarisci subito dolcezza e acidita; quando il dubbio sparisce, il vino si vende.',
+      fr: 'Clarifiez sucre et acidite des le debut ; quand le doute disparait, le vin se vend.',
+      de: 'Susse und Saure sofort klaren; wenn dieser Zweifel weg ist, verkauft sich der Wein.',
+      pt: 'Clarifique dulcor e acidez no inicio; quando a duvida desaparece, o vinho vende.',
+    },
+    avoid: {
+      es: 'No presentarlo como dulce por defecto; seco, off-dry o dulce debe estar claro.',
+      en: 'Do not present it as sweet by default; dry, off-dry or sweet must be clear.',
+      it: 'Non presentarlo come dolce di default; secco, abboccato o dolce deve essere chiaro.',
+      fr: 'Ne pas le presenter comme doux par defaut ; sec, demi-sec ou doux doit etre clair.',
+      de: 'Nicht automatisch als suss prasentieren; trocken, feinherb oder suss muss klar sein.',
+      pt: 'Nao apresente como doce por defeito; seco, meio-seco ou doce deve estar claro.',
+    },
+    hooks: {
+      es: ['picante asiático', 'cerdo asado', 'quesos azules'],
+      en: ['Asian spice', 'roast pork', 'blue cheeses'],
+      it: ['spezie asiatiche', 'maiale arrosto', 'formaggi erborinati'],
+      fr: ['epices asiatiques', 'porc roti', 'fromages bleus'],
+      de: ['asiatische Scharfe', 'Schweinebraten', 'Blauschimmelkaese'],
+      pt: ['picante asiatico', 'porco assado', 'queijos azuis'],
+    },
+  },
+};
+
+const WINE_LIBRARY_EDITORIAL_COPY: Record<WineLibraryLang, {
+  role: string;
+  service: string;
+  cue: string;
+  menu: string;
+  avoid: string;
+  faqService: (subject: string, temp: string) => { q: string; a: string };
+  faqList: (subject: string) => { q: string; a: string };
+}> = {
+  es: {
+    role: 'Rol en carta',
+    service: 'Servicio recomendado',
+    cue: 'Cómo venderlo en sala',
+    menu: 'Maridajes útiles',
+    avoid: 'Error a evitar',
+    faqService: (subject, temp) => ({ q: `¿A qué temperatura servir ${subject}?`, a: `${subject} funciona como punto de partida a ${temp}. Ajusta según cuerpo, crianza y contexto de sala.` }),
+    faqList: (subject) => ({ q: `¿Cómo incluir ${subject} en una carta de restaurante?`, a: `Inclúyelo con una pista clara de estilo, plato y ocasión. Así ayuda al equipo de sala a vender, no solo a listar una referencia.` }),
+  },
+  en: {
+    role: 'Role on the wine list',
+    service: 'Recommended service',
+    cue: 'How to sell it on the floor',
+    menu: 'Useful pairings',
+    avoid: 'Mistake to avoid',
+    faqService: (subject, temp) => ({ q: `What temperature works for ${subject}?`, a: `${subject} works as a starting point at ${temp}. Adjust by body, ageing and service context.` }),
+    faqList: (subject) => ({ q: `How should a restaurant include ${subject}?`, a: `Include it with a clear cue for style, dish and occasion. That helps the floor team sell it, not just list it.` }),
+  },
+  it: {
+    role: 'Ruolo in carta',
+    service: 'Servizio consigliato',
+    cue: 'Come venderlo in sala',
+    menu: 'Abbinamenti utili',
+    avoid: 'Errore da evitare',
+    faqService: (subject, temp) => ({ q: `A che temperatura servire ${subject}?`, a: `${subject} funziona come punto di partenza a ${temp}. Regola in base a corpo, affinamento e contesto di servizio.` }),
+    faqList: (subject) => ({ q: `Come includere ${subject} in una carta ristorante?`, a: `Inseriscilo con un'indicazione chiara di stile, piatto e occasione. Cosi aiuta la sala a vendere, non solo a listare una referenza.` }),
+  },
+  fr: {
+    role: 'Role en carte',
+    service: 'Service recommande',
+    cue: 'Comment le vendre en salle',
+    menu: 'Accords utiles',
+    avoid: 'Erreur a eviter',
+    faqService: (subject, temp) => ({ q: `A quelle temperature servir ${subject} ?`, a: `${subject} fonctionne comme point de depart a ${temp}. Ajustez selon le corps, l'elevage et le contexte de service.` }),
+    faqList: (subject) => ({ q: `Comment inclure ${subject} dans une carte de restaurant ?`, a: `Ajoutez un repere clair de style, de plat et d'occasion. La carte aide ainsi l'equipe a vendre, pas seulement a lister une reference.` }),
+  },
+  de: {
+    role: 'Rolle auf der Weinkarte',
+    service: 'Empfohlener Service',
+    cue: 'Wie der Service ihn verkauft',
+    menu: 'Nutzliche Pairings',
+    avoid: 'Fehler vermeiden',
+    faqService: (subject, temp) => ({ q: `Bei welcher Temperatur ${subject} servieren?`, a: `${subject} funktioniert als Ausgangspunkt bei ${temp}. Je nach Korper, Ausbau und Servicekontext anpassen.` }),
+    faqList: (subject) => ({ q: `Wie sollte ein Restaurant ${subject} aufnehmen?`, a: `Mit einem klaren Hinweis zu Stil, Gericht und Anlass. So hilft die Karte dem Team beim Verkaufen, nicht nur beim Auflisten.` }),
+  },
+  pt: {
+    role: 'Papel na carta',
+    service: 'Servico recomendado',
+    cue: 'Como vender em sala',
+    menu: 'Harmonizacoes uteis',
+    avoid: 'Erro a evitar',
+    faqService: (subject, temp) => ({ q: `A que temperatura servir ${subject}?`, a: `${subject} funciona como ponto de partida a ${temp}. Ajuste conforme corpo, estagio e contexto de sala.` }),
+    faqList: (subject) => ({ q: `Como incluir ${subject} numa carta de restaurante?`, a: `Inclua com uma pista clara de estilo, prato e ocasiao. Assim ajuda a equipa a vender, nao apenas a listar uma referencia.` }),
+  },
+};
+
 function wineLibraryPath(lang: WineLibraryLang, esPath: string): string {
   const config = WINE_LIBRARY_PATH_CONFIG[lang];
   if (lang === 'es') return esPath;
@@ -264,14 +701,31 @@ function renderWineLibraryPage(path: string): string | null {
   const isSectionHub = parts.length === 2;
   const subject = isSectionHub ? sectionTitle : titleFromSlug(parts[parts.length - 1]);
   const type = isSectionHub ? sectionTitle.toLowerCase() : copy.detailLabels[section] || copy.detailLabels.article;
+  const priorityProfile = !isSectionHub && section === 'uvas'
+    ? WINE_LIBRARY_PRIORITY_GRAPES[parts[parts.length - 1]]
+    : undefined;
+  const editorialLang = priorityProfile ? lang : undefined;
+  const priorityCopy = editorialLang
+    ? WINE_LIBRARY_EDITORIAL_COPY[editorialLang]
+    : undefined;
   const h1 = isSectionHub ? sectionTitle : `${subject}: ${type}`;
   const title = `${h1} | Winerim`;
   const description = isSectionHub
     ? copy.sectionIntro(sectionTitle)
-    : copy.generatedIntro(subject, type);
+    : priorityProfile && priorityCopy
+      ? `${copy.generatedIntro(subject, type)} ${priorityProfile.role[editorialLang!]}`
+      : copy.generatedIntro(subject, type);
 
   const hubPath = section ? wineLibraryPath(lang, `/biblioteca-vino/${section}`) : wineLibraryPath(lang, '/biblioteca-vino');
-  const sections = isSectionHub
+  const sections = priorityProfile && priorityCopy
+    ? [
+        { heading: priorityCopy.role, content: priorityProfile.role[editorialLang!] },
+        { heading: priorityCopy.service, content: `${subject}: ${priorityProfile.serviceTemp}. ${priorityProfile.glass}.` },
+        { heading: priorityCopy.cue, content: priorityProfile.cue[editorialLang!] },
+        { heading: priorityCopy.menu, content: priorityProfile.hooks[editorialLang!].join(', ') },
+        { heading: priorityCopy.avoid, content: priorityProfile.avoid[editorialLang!] },
+      ]
+    : isSectionHub
     ? [
         { heading: sectionTitle, content: copy.sectionIntro(sectionTitle) },
         { heading: copy.home, content: copy.generatedIntro(sectionTitle, copy.detailLabels.article) },
@@ -297,12 +751,17 @@ function renderWineLibraryPage(path: string): string | null {
       subtitle: sectionTitle,
       intro: description,
       sections,
-      faqs: [
-        {
-          q: copy.faqTitle,
-          a: description,
-        },
-      ],
+      faqs: priorityProfile && priorityCopy
+        ? [
+            priorityCopy.faqService(subject, priorityProfile.serviceTemp),
+            priorityCopy.faqList(subject),
+          ]
+        : [
+            {
+              q: copy.faqTitle,
+              a: description,
+            },
+          ],
       breadcrumbs: [
         { name: copy.breadcrumbsHome, url: `${SITE}${lang === 'es' ? '/' : `/${lang}`}` },
         { name: copy.home, url: `${SITE}${wineLibraryPath(lang, '/biblioteca-vino')}` },

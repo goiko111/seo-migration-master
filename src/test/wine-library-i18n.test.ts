@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
 import { getWineLibraryEsPath, getWineLibraryHreflang, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 describe("wine library i18n routes", () => {
@@ -44,5 +45,29 @@ describe("wine library i18n routes", () => {
     expect(getWineLibraryEsPath("/en/wine-library/sommelier-basics")).toBe(
       "/biblioteca-vino/sommelier-basics"
     );
+  });
+
+  it("resolves localized full grape entries by slug", () => {
+    const grape = getLocalizedGrape("tempranillo", "de");
+
+    expect(grape?.slug).toBe("tempranillo");
+    expect(grape?.seo.title).toContain("Tempranillo");
+    expect(grape?.description).not.toEqual("tempranillo");
+  });
+
+  it("does not leak Spanish narrative fallbacks into localized full entries", () => {
+    const grape = getLocalizedGrape("tempranillo", "de");
+
+    expect(grape?.countries).toContain("Spanien");
+    expect(grape?.intro).not.toContain("Tempranillo es la variedad");
+    expect(grape?.cartaPerception).not.toContain("comensal");
+    expect(grape?.faqs[0]?.q).not.toContain("¿");
+  });
+
+  it("provides SEO fallbacks for catalog-only grape detail pages", () => {
+    const grape = getLocalizedGrapeCatalogEntry("primitivo", "es");
+
+    expect(grape?.seo?.title).toContain("Primitivo");
+    expect(grape?.seo?.description).toBeTruthy();
   });
 });
