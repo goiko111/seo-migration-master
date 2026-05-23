@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       articles: {
         Row: {
+          article_group: string | null
           author: string | null
           author_image: string | null
           author_role: string | null
@@ -25,6 +26,7 @@ export type Database = {
           excerpt: string | null
           id: string
           image_url: string | null
+          lang: string
           published: boolean
           published_at: string | null
           related_links: Json | null
@@ -33,6 +35,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          article_group?: string | null
           author?: string | null
           author_image?: string | null
           author_role?: string | null
@@ -42,6 +45,7 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          lang?: string
           published?: boolean
           published_at?: string | null
           related_links?: Json | null
@@ -50,6 +54,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          article_group?: string | null
           author?: string | null
           author_image?: string | null
           author_role?: string | null
@@ -59,6 +64,7 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          lang?: string
           published?: boolean
           published_at?: string | null
           related_links?: Json | null
@@ -71,6 +77,7 @@ export type Database = {
       contact_leads: {
         Row: {
           business_type: string | null
+          carta_url: string | null
           city: string | null
           created_at: string
           email: string | null
@@ -86,9 +93,11 @@ export type Database = {
           position: string | null
           references_count: string | null
           restaurant: string | null
+          state: string | null
         }
         Insert: {
           business_type?: string | null
+          carta_url?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
@@ -104,9 +113,11 @@ export type Database = {
           position?: string | null
           references_count?: string | null
           restaurant?: string | null
+          state?: string | null
         }
         Update: {
           business_type?: string | null
+          carta_url?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
@@ -122,6 +133,7 @@ export type Database = {
           position?: string | null
           references_count?: string | null
           restaurant?: string | null
+          state?: string | null
         }
         Relationships: []
       }
@@ -209,6 +221,36 @@ export type Database = {
           id?: string
           token?: string
           used_at?: string | null
+        }
+        Relationships: []
+      }
+      freemium_leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string | null
+          restaurant: string
+          tool_slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone?: string | null
+          restaurant: string
+          tool_slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          restaurant?: string
+          tool_slug?: string | null
         }
         Relationships: []
       }

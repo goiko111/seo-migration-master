@@ -2,7 +2,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Play, ArrowRight } from "lucide-react";
-import heroTabletImg from "@/assets/winerim-tablet-hero.png";
+import heroTabletImg from "@/assets/winerim-tablet-hero.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const heroData: Record<string, {

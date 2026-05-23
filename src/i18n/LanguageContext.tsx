@@ -9,6 +9,8 @@ export interface LanguageContextValue {
   localePath: (esPath: string) => string;
   /** Get the ES equivalent of the current path (for hreflang) */
   allLangPaths: (esPath: string) => { lang: string; url: string }[];
+  /** Override detected language for DB-backed pages whose lang differs from the URL */
+  setLangOverride: (lang: SupportedLang | null) => void;
 }
 
 export const LanguageContext = createContext<LanguageContextValue>({
@@ -16,6 +18,7 @@ export const LanguageContext = createContext<LanguageContextValue>({
   t: es,
   localePath: (p) => p,
   allLangPaths: () => [],
+  setLangOverride: () => {},
 });
 
 export const useLanguage = () => useContext(LanguageContext);

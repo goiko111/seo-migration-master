@@ -1,0 +1,178 @@
+import { Wine } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const vinoPorCopaDE: DeepAreaContent = {
+  name: "Wein nach Glas",
+  tagline: "Das Glasweins-Programm als Marge-Multiplikator",
+  intro: "Dieser Bereich hilft Ihnen, ein profitables Glaswein-Programm zu planen, umzusetzen und zu kontrollieren. Glaswein zu servieren bedeutet nicht einfach, kleinere Portionen auszuschenken: Es ist ein Marge-Hebel, ein Konversionsinstrument und ein Echtzeit-Markttest. Schlecht gemanagt wird es jedoch zur groessesten Quelle unsichtbarer Verluste in einem Restaurant.",
+  icon: Wine,
+  accent: "text-purple-500",
+  bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Glasweine anbieten, die die Marge durch Schwund zerstoeren", porQueOcurre: "Weil Weine nach Qualitaet oder persoenlichem Geschmack ausgewaehlt werden, ohne zu pruefen, ob der Umsatz die Flaschenoeffnung rechtfertigt.", consecuencia: "30-40 % der Flasche werden verworfen. Ein Wein mit theoretischer 70-%-Marge faellt auf praktisch 25 % ab. Sie verlieren bei jedem Glas Geld." },
+    { error: "Zu viele aktive Glaeser ohne ausreichenden Umsatz haben", porQueOcurre: "Weil mehr Glaeser wie ein besseres Angebot aussehen. Aber jedes offene Glas ist eine Flasche, die innerhalb von 24-48 Stunden geleert werden muss.", consecuencia: "Der Schwund vervielfacht sich mit jeder Referenz. Acht Glaeser mit niedriger Umlauffquote erzeugen mehr Verlust als vier gut gewaählte." },
+    { error: "Den Glaspreis ohne Beruecksichtigung des realen Schwunds festlegen", porQueOcurre: "Weil die schnelle Rechnung Flasche geteilt durch 5 Glaeser ist. Aber die Realitaet ist 4 Glaeser (oder weniger) nach Abzug des Schwunds.", consecuencia: "Sie verkaufen zu einem Preis, der die realen Kosten nicht deckt. Je mehr Sie verkaufen, desto mehr verlieren Sie - und es sieht aus wie gutes Geschaeft." },
+    { error: "Kanibalisierung zwischen Glas und Flasche nicht messen", porQueOcurre: "Weil angenommen wird, dass das Glas Neusaetze addiert, nie dass es Flaschenumsaetze mindert.", consecuencia: "Ihr Durchschnittsbon sinkt, ohne dass Sie es bemerken. Der Gast, der eine Flasche bestellt haette, bestellt nun zwei Glaeser, und die Gesamtmarge ist niedriger." },
+    { error: "Das Servicepersonal selbst entscheiden lassen, was es nach Glas empfiehlt", porQueOcurre: "Weil es ohne klare Richtlinie jeder Server empfiehlt, was er kennt oder bevorzugt.", consecuencia: "Der Umsatz konzentriert sich auf 1-2 Glaeser, waehrend die uebrigen oxidieren. Die Gaesteerfahrung ist inkonsistent." },
+  ],
+  links: [
+    { label: "Glaspreis-Rechner", href: "/en/tools/wine-pricing-tool", description: "Berechnen Sie den Glaspreis inklusive realem Schwund und Ziel-Marge", type: "tool" },
+    { label: "Anleitung: Glaswein ohne Margenverlust", href: "/en/guides/how-to-implement-wine-by-the-glass-without-losing-margin", description: "Schritt-fuer-Schritt-Anleitung zum Aufbau eines profitablen Glaswein-Programms", type: "guide" },
+    { label: "Vorlage: Glaswein-Strategie", href: "/en/resources/wine-by-the-glass-strategy-template", description: "Gestalten Sie Ihre Glaswein-Auswahl nach Geschaeftskriterien", type: "resource" },
+    { label: "Vorlage: Express-Servicepersonal-Training", href: "/en/resources/express-floor-training-template", description: "Trainieren Sie Ihr Team, Glaeser gezielt zu empfehlen - in 30 Minuten", type: "resource" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Ueberwachen Sie Umlauffquote, Schwund und Rentabilitaet pro Glas automatisch", type: "product" },
+    { label: "Blog: Glaspreis-Festlegung ohne Margenverzehr", href: "/en/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "Die korrekte Formel zur Festlegung von Glaspreisen mit realem Schwund", type: "article" },
+    { label: "Blog: Welche Weine nach Glas anbieten", href: "/en/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Glaswein-Auswahl nach Lokaltyp und Gaesteprofil", type: "article" },
+  ],
+  miniCases: [
+    {
+      profile: "Weinbar mit 12 aktiven Glaeser",
+      situation: "Hatte 12 Glaeser, aber nur 5 rotiertenBin gut. Die verbleibenden 7 erzeugten 35-%-Schwund, den niemand mass.",
+      action: "Reduziert auf 7 Glaeser, die mit dem besten Umlauf-/Margen-Verhaeltnis gewaehlt wurden. Die anderen 5 wurden nur als Flasche angeboten.",
+      result: "Der Schwund sank von 35 % auf 12 %. Die reale Marge pro Glas stieg um 22 %. Weniger Arbeit fuer das Servicepersonal und weniger Schwund.",
+    },
+    {
+      profile: "Restaur ant fuer Business-Lunch",
+      situation: "Bot 3 Glaeser zu Pauschalpreis (4,50 EUR) an. Berechnete Schwund nicht und differenzierte nicht nach Kosten. Das teuerste Glas kostete 3,80 EUR und wurde fuer 4,50 EUR verkauft.",
+      action: "Differenzierte Glaspreise nach echten Kosten. Erhoehte das Premium-Glas auf 6 EUR. Behielt eine Entry-Level-Option fuer 4,50 EUR mit gueensterem Wein.",
+      result: "Die durchschnittliche Marge pro Glas stieg von 18 % auf 52 %. Gaeste akzeptieren hoeheren Preis, wenn sie Qualitaetsunterschiede wahrnehmen.",
+    },
+    {
+      profile: "Fine-Dining-Restaurant mit 120 Referenzen",
+      situation: "Hatte 8 aktive Glaeser, aber 4 waren sehr aehnliche Rotweine (Rioja crianza zwischen 7 und 9 EUR pro Glas). Das Servicepersonal konnte sie nicht differenzieren und empfahl immer denselben.",
+      action: "Reduzierte Rotweine nach Glas auf 2 (einen jungen, einen crianza). Fueegte einen mineralischen Weisswein und eine Schaumwein-Option hinzu. Trainierte das Team mit der Express-Trainings-Vorlage.",
+      result: "Die Vielfalt verkaufter Glaeser stieg von 2 Referenzen auf 80 % des Programms. Das durchschnittliche Glas-Ticket stieg um 1,80 EUR, weil die Schaumwein-Option den Verkauf oeffnete.",
+    },
+    {
+      profile: "Resort-Hotel mit 3 Betriebsstaetten",
+      situation: "Jede Betriebstaette (Restaurant, Pool-Bar, Lobby-Bar) hatte verschiedene Glaeser ohne gemeinsame Kriterien. Die Pool-Bar nutzte Premium-Weine, die niemand bestellte; das Restaurant hatte Entry-Level-Glaeser, die nicht zu seiner Kueche passten.",
+      action: "Definierte ein Glaswein-Programm pro Betriebstaette: 3 Glaeser in der Pool-Bar (Entry, frisch, schnelle Rotation), 5 im Restaurant (Preisfortschritt, Paarungen), 4 in der Lobby (Erkundung, Gespraeche). Nutzte Winerim Core, um Schwund pro Betriebstaette zu ueberwachen.",
+      result: "Der Gesamtschwund sank von 28 % auf 14 %. Jede Betriebstaette hat ein Programm, das zu ihrem Publikum passt. Das Restaurant verdoppelte Premium-Glasverkauefe.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "cuando-conviene-copa",
+      title: "Wann ist Glaswein eine gute Idee",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim hat Referenzen mit Glaswein-Potenzial identifiziert: gute Bewertungen, niedriger Flaschenumsatz und oxidationsresistente Profile.", whyMatters: "Das Glas senkt die Verpflichtungsbarriere des Gastes. Ein Wein, den niemand fuer 35 EUR pro Flasche bestellt, kann leicht fuer 9 EUR pro Glas verkauft werden.", riskIfIgnored: "Sie verlieren Konversion, Durchschnittsbon und Erkundung. Der Gast, der sich die Flasche nicht traut, bestellt einfach keinen Wein." },
+      queSignifica: "Ein Wein ist ein guter Glaswein-Kandidat, wenn er drei Bedingungen gleichzeitig erfuellt: Er hat potenzielle Nachfrage (der Gast wuerde ihn kaufen, wenn er ohne volle Flaschenverpflichtung probieren koennte), er haelt mindestens 24-48 Stunden nach dem Oeffnen ohne Qualitaetsverlust, und sein erwarteter Glas-Umsatz ermoelicht es, die Flasche vor dem Abbau zu leeren. Wenn einer der drei fehlschlaegt, ist es kein guter Kandidat.",
+      porQueImporta: "Weil das Glas die Verpflichtungsbarriere des Gastes senkt. Der Gast, der eine 35-EUR-Flasche nicht riskiert, bestellt ein 9-EUR-Glas. Das erhoht Konversion, Durchschnittsbon und Erkundung. Darueber hinaus koennen Sie mit dem Glas Referenzen rotieren, die nach Flasche langsam waeren. Ein gut ausgewaehltes Glas ist Ihr bester stiller Verkaeuf.",
+      queHacer: [
+        "Ueberpruefen Sie Referenzen mit guten Bewertungen aber niedriger Flaschenumsatz - sie sind natuerliche Glaswein-Kandidaten.",
+        "Stellen Sie sicher, dass der Wein mindestens 24 Stunden nach dem Oeffnen haelt (fragen Sie den Lieferanten oder testen Sie selbst).",
+        "Schaetzen Sie, wie viele Glaeser Sie pro Woche dieser Referenz verkaufen koennen. Wenn weniger als 3, lohnt es sich wahrscheinlich nicht.",
+        "Beginnen Sie mit 4-6 gut ausgewaehlten Glaeser, bevor Sie expandieren. Besser ein paar, die rotieren, als viele, die verderben.",
+      ],
+      errores: [
+        { mistake: "Den guenstigsten Wein auf der Liste nach Glas anbieten", consequence: "Der Gast verbindet Glas mit niedriger Qualitaet. Sie verpassen die Chance, Marge zu verkaufen." },
+        { mistake: "Glaeser waehlen, ohne an Umsatz zu denken", consequence: "Sie oeffnen Flaschen, die Sie nicht leeren. Jede halbvolle Flasche ist verschwendetes Geld." },
+        { mistake: "Nicht testen, ob der Wein haelt, bevor Sie ihn nach Glas anbieten", consequence: "Sie servieren das dritte Glas aus einer Flasche, die bereits an Qualitaet verloren hat. Der Gast kommt nicht wieder." },
+      ],
+    },
+    {
+      id: "cuando-no-conviene-copa",
+      title: "Wann ist Glaswein keine gute Idee",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim hat aktive Glaeser mit unzureichendem Umsatz oder Weine identifiziert, die nach dem Oeffnen nicht gut haelten.", whyMatters: "Ein Programm von 4 gut gewaählten Glaeser ist besser als eines mit 10, wo 6 Schwund-Verluste erzeugen.", riskIfIgnored: "Sie erzeugen Schwund, schlechte Qualitaetsservice und eine negative Wahrnehmung Ihres gesamten Glaswein-Programms." },
+      queSignifica: "Nicht jeder Wein funktioniert nach Glas. Es ist nicht ratsam, wenn: Der Wein nach dem Oeffnen nicht mehr als ein paar Stunden haelt (sehr delikate Weine, Schaumweine ohne Konservierungssystem), wenn der erwartete Umsatz so niedrig ist, dass Schwund die Marge aufzehrt, wenn der resultierende Glaspreis so hoch ist, dass der Gast ihn nicht als zugaenglich sieht, oder wenn Sie bereits ein anderes Glas in derselben Preisklasse haben, das diesen Bedarf erfuellt.",
+      porQueImporta: "Weil der falsche Wein nach Glas schlimmer ist als gar kein Glaswein-Programm. Sie erzeugen Schwund, schlechte Qualitaetsservice (oxidierter Wein) und eine negative Wahrnehmung des gesamten Programms. Ein Programm von 4 gut gewaählten Glaeser ist unendlich besser als eines mit 10, wo 6 Verluste erzeugen.",
+      queHacer: [
+        "Verwerfen Sie jeden Wein, der nach dem Oeffnen nicht mindestens 24 Stunden haelt, es sei denn, Sie haben ein Konservierungssystem (Coravin, Argon).",
+        "Verwerfen Sie Referenzen mit Glaspreis > 15 EUR, es sei denn, Ihre Klientel rechtfertigt es (High-End-Fine-Dining, Premium-Hotel).",
+        "Falls Sie bereits ein Glas in derselben Preisklasse haben (gleicher Typ, ±2 EUR Unterschied), duplizieren Sie nicht. Waehlen Sie eines.",
+        "Bieten Sie einen Wein nicht nach Glas an, nur um Totbestand zu liquidieren: Das Glas ist kein Rabatt-Kanal.",
+      ],
+      errores: [
+        { mistake: "Das Glas als Kanal zum Liquidieren von Totbestand nutzen", consequence: "Sie servieren mittelmaeessige Wein nach Glas und der Gast verbindet Ihr Programm mit niedriger Qualitaet." },
+        { mistake: "Schaumwein nach Glas ohne Konservierungssystem anbieten", consequence: "Nach dem zweiten Glas hat es bereits seine Blasen verloren. Sie verkaufen ein minderwertiges Produkt." },
+        { mistake: "Zu viele aktive Glaeser 'fuer Vielfalt' haben", consequence: "Vielfalt erzeugt Schwund. Wenn Sie 10 Flaschen oeffnen und 3 Glaeser von jedem verkaufen, verlieren Sie 7 Restportionen." },
+      ],
+    },
+    {
+      id: "fijar-precio-copa",
+      title: "Wie man Glaspreise ohne Margenverlust setzt",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim hat Ihre Glaspreise inklusive realem Schwund neu berechnet und hat Abweichungen von der Ziel-Marge erkannt.", whyMatters: "Ein 1-EUR-Fehler pro Glas auf 15 Glaeser/Woche bedeutet ueber 1.100 EUR/Jahr verloren auf einer einzigen Referenz.", riskIfIgnored: "Sie verkaufen Glaeser zu einem Preis, der Schwund oder Marge nicht deckt. Jedes Ausgiesesen ist ein unsichtbarer Verlust." },
+      queSignifica: "Der Glaspreis wird NICHT berechnet, indem man den Flaschenpreis durch 5 teilt. Diese Formel ignoriert Schwund (der Wein, der am Ende der Flasche oder von unverkauften Glaeser verloren geht), die Kosten des Service und die Ziel-Marge. Die korrekte Formel beginnt mit der realen Kostenpreis pro Glas (Flaschenkosten geteilt durch tatsaechliche Glaeser, die Sie servieren, einschliesslich Schwund) und wendet den Ziel-Multiplikator auf diese Kosten an.",
+      porQueImporta: "Weil ein 1-EUR-Fehler im Glaspreis sich mit jedem Glas, das Sie servieren, vervielfacht. Wenn Sie 15 Glaeser pro Woche einer Referenz verkaufen und Ihr Preis 1,50 EUR niedriger ist als er sein sollte, verlieren Sie ueber 1.100 EUR pro Jahr nur fuer diese Referenz. Mit 6 fehlberechneten Glaeser kann die Auswirkung 5.000 EUR jaehrlich uebersteigen.",
+      queHacer: [
+        "Berechnen Sie echte Kosten pro Glas: (Flaschenpreis geteilt durch 4 tatsaechliche Glaeser) + 25 % Schwund = echte Kosten.",
+        "Wenden Sie Ihren Ziel-Multiplikator an (Minimum x3 auf echte Kosten fuer Glas).",
+        "Vergleichen Sie das Ergebnis mit dem naechsten Glaspreis auf Ihrer Liste: ist es koharent?",
+        "Nutzen Sie den Glaspreis-Rechner, um Szenarien mit verschiedenen Schwund-Niveaus zu simulieren.",
+      ],
+      errores: [
+        { mistake: "Den Flaschenpreis durch 5 Glaeser teilen", consequence: "Sie decken Schwund nicht. Sie bekommen 4-4.5 echte Glaeser aus einer Flasche, nicht 5. Sie verkaufen vom ersten Glas mit Verlust." },
+        { mistake: "Schwund in der Berechnung nicht beruecksichtigen", consequence: "Ihre theoretische Marge existiert nicht. Die Realitaet ist 20-30 % schlechter als Sie denken." },
+        { mistake: "Alle Glaspreise mit demselben Multiplikator festlegen", consequence: "Ein 8-EUR-Wein und ein 30-EUR-Wein brauchen verschiedene Glasstrategien." },
+      ],
+    },
+    {
+      id: "evitar-canibalizacion-copa",
+      title: "Wie man Kanibalisierung zwischen Glas und Flasche vermeidet",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim hat eine Verschiebung in Ihrem Glas-/Flaschen-Verhaeltnis erkannt, die auf Kanibalisierung hinweisen koennte.", whyMatters: "Wenn das Glas Umsaetze aus der Flasche nimmt, ohne mehr Marge hinzuzufuegen, arbeiten Sie haerter, um weniger zu verdienen.", riskIfIgnored: "Ihr Durchschnittsbon sinkt, ohne dass Sie es bemerken. Sie denken, Ihr Glaswein-Programm funktioniert, weil Glaeser verkaufen, aber das Gesamtergebnis ist schlechter." },
+      queSignifica: "Kanibalisierung tritt auf, wenn das Glas Umsaetze von der Flasche nimmt, ohne mehr Marge hinzuzufuegen. Wenn ein Gast, der eine 28-EUR-Flasche bestellt haette, zwei 8-EUR-Glaeser (16 EUR gesamt) bestellt, haben Sie 12 EUR Umsatz und wahrscheinlich Marge verloren. Das Ziel ist nicht, dass das Glas die Flasche ersetzt: Es ist, neue Umsaetze zu erfassen (der Gast, der keine Flasche bestellt haette).",
+      porQueImporta: "Weil, wenn Ihr Glaswein-Programm die Flasche kanibalisiert, Sie haerter arbeiten, um weniger zu verdienen. Das Ziel ist, dass das Glas den gesamten Durchschnittsbon erhoet, nicht ihn neu verteilt. Kanibalisierung ist das am wenigsten sichtbare Risiko eines Glaswein-Programms: Sie bemerken es nicht, bis Sie die Daten ansehen.",
+      queHacer: [
+        "Ueberwachen Sie das Glas-/Flaschen-Verhaeltnis Monat fuer Monat. Wenn Flaschenumsaetze sinken, wenn Sie Glas einfuehren, untersuchen Sie.",
+        "Positionieren Sie das Glas als Erkundung und die Flasche als Verpflichtung: Sie konkurrieren nicht, sie ergaenzen sich.",
+        "Vermeiden Sie es, Ihre meistverkauften Flaschen-Referenzen nach Glas anzubieten. Das Glas sollte einen anderen Bereich abdecken.",
+        "Trainieren Sie das Team, die Flasche vorzuschlagen, wenn ein Tisch 3+ Glaeser desselben Weins bestellt.",
+      ],
+      errores: [
+        { mistake: "Ihren meistverkauften Flaschen-Wein nach Glas anbieten", consequence: "Sie geben dem Gast einen Grund, weniger auszugeben. Ihr bester Wein wird jetzt in Teilen verkauft." },
+        { mistake: "Das Team nicht trainieren, den Uebergang von Glas zu Flasche zu managen", consequence: "Zwei Gaeste bestellen jeweils 2 Glaeser desselben Weins. Niemand schlaegt die Flasche vor. Sie verlieren den Verkauf." },
+        { mistake: "Nicht messen, ob das Glas zum Gesamtdurchschnittsbon addiert oder subtrahiert", consequence: "Sie denken, Ihr Glaswein-Programm funktioniert, weil Glaeser verkaufen, aber der Durchschnittsbon ist gesunken." },
+      ],
+    },
+    {
+      id: "medir-rotacion-rentabilidad",
+      title: "Wie man Umlauf und Rentabilitaet pro Glas misst",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim hat geoeffnete Flaschen mit servierten Glaeser cross-referenced und Ihren realen Schwund pro Referenz berechnet.", whyMatters: "Das Glas kann theoretisch profitabel aussehen (75-%-Marge), aber praktisch ruinoeus sein (35 % nach Schwund).", riskIfIgnored: "Sie betreiben das Glaswein-Programm blind. Ohne Messung wissen Sie nicht, ob Sie bei jeder Referenz Geld machen oder verlieren." },
+      queSignifica: "Glas-Umlauffquote misst, wie viele geoeffnete Flaschen Sie in einem Zeitraum leeren. Wenn Sie 3 Flaschen pro Woche oeffnen und alle Glaeser verkaufen, ist Ihre Umlauffquote ausgezeichnet. Wenn Sie 3 oeffnen und den Rest von 2 verwerfen, ist Ihre echte Umlauffquote eine Katastrophe, die als Verkauf verkleidet ist. Glas-Rentabilitaet ist nicht nur die theoretische Marge: Sie ist die Marge minus echtem Schwund, minus Service-Kosten, minus unverkauften Glaeser.",
+      porQueImporta: "Weil das Glas auf dem Papier profitabel aussehen und in der Praxis ruinoeus sein kann. Die theoretische Marge pro Glas kann 75 % sein, aber wenn Sie 30 % durch Schwund und 10 % durch zusaetzliche Service-Kosten verlieren, ist Ihre echte Marge 35 %. Ohne Messung betreiben Sie blind. Mit Messung optimieren Sie jede Woche.",
+      queHacer: [
+        "Notieren Sie jede fuer Glasservice geoeffnete Flasche und die Anzahl der tatsaechlich servierten Glaeser (nicht der theoretischen Zaehlung).",
+        "Berechnen Sie Ihren echten woechentlichen Schwund: (theoretische Glaeser minus servierte Glaeser) x Kosten pro Glas.",
+        "Vergleichen Sie die echte Glas-Marge (nach Schwund) mit der Flaschen-Marge fuer dieselbe Referenz.",
+        "Wenn die echte Glas-Marge niedriger ist als die Flaschen-Marge, haben Sie ein Umlauf- oder Preis-Problem.",
+      ],
+      errores: [
+        { mistake: "Nur verkaufte Glaeser messen, ohne geoeffnete Flaschen zu zaehlen", consequence: "Sie verkaufen 20 Glaeser, aber oeffnen 8 Flaschen. Ihr Schwund ist 37 % und Sie wissen das nicht." },
+        { mistake: "Annehmen, dass jede geoeffnete Flasche vollstaendig nach Glas verkauft wird", consequence: "Ihre Rentabilitaets-Berechnung ist Fiktion. Die Realitaet ist 20-30 % schlechter." },
+        { mistake: "Glas-Rentabilitaet nicht mit Flaschen-Rentabilitaet vergleichen", consequence: "Sie verkaeufen moeglicherweise nach Glas einen Wein, der nach Flasche mehr Gewinnspanne yieldet." },
+      ],
+    },
+    {
+      id: "errores-tipicos-copeo",
+      title: "Haeufige Fehler im Glaswein-Service",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim hat operationelle Muster in Ihrem Glaswein-Programm identifiziert, die haeufigen Branchhenfehlern entsprechen.", whyMatters: "Glasservice-Fehler wiederholen sich jeden Tag, jede Schicht. Ein unkontrollierter Prozess erzeugt jaehrliche kumulative Verluste von Tausenden Euro.", riskIfIgnored: "Dieselben Fehler wiederholen sich Service fuer Service. Ohne Protokoll erfaendet jede Schicht Glaswein-Management neu." },
+      queSignifica: "Glasservice ist einer der heikelstenBetriebe in einem Restaurant: Er verbindet Lagerverwaltung (geoeffnete Flaschen), Schwund-Kontrolle (verlorener Wein), Servicepersonal-Service (Empfehlung und Verkauf) und Preisgestaltung (ein Preis, der alle oben genannten deckt). Die typischen Fehler stammen nicht aus Unwissenheit - sie entstehen aus fehlender Prozess. Das Team weiss, dass Schwund existiert, aber niemand misst ihn. Sie wissen, dass der Preis unterschiedlich sein sollte, aber niemand berechnet neu.",
+      porQueImporta: "Weil Glasservice-Fehler wiederkehrend sind: Sie wiederholen sich jeden Tag, jede Schicht, jeden Service. Ein einziger Preis-Fehler kann korrigiert werden. Aber ein unkontrollierter Glaswein-Prozess erzeugt kumulative Verluste, die am Jahresende Tausende Euro betragen koennen. Die Restaurants, die Glaswein-Service am besten managen, haben nicht bessere Weine: Sie haben bessere Prozesse.",
+      queHacer: [
+        "Etablieren Sie ein Flaschen-Oeffnungs-Protokoll fuer Glaswein-Service: Wer entscheidet, wann geoeffnet wird, maximale Anzahl aktiver Flaschen.",
+        "Definieren Sie einen taeglischen Review-Moment: Bei Closing, wie viele offene Flaschen bleiben uebrig? Wie viele wurden geleert?",
+        "Trainieren Sie das Team vierteljaehrlich mit der Express-Trainings-Vorlage: 30 Minuten reichen aus.",
+        "Ueberpruefen Sie Glaspreise jedes Mal, wenn sich eine Kostengruendung aendert oder mindestens alle 3 Monate.",
+      ],
+      errores: [
+        { mistake: "Kein Protokoll zum Oeffnen von Flaschen fuer Glaswein-Service haben", consequence: "Jeder Server oeffnet, wie er moechte. Am Ende des Service sind 6 offene Flaschen mit jeweils 2 servierten Glaeser." },
+        { mistake: "Das Team nicht trainieren, nach Glas zu verkaufen", consequence: "Der Server sagt ueberlegend 'Wir haben Glaswein', ohne Ueberzeugung. Der Gast bestellt ein alkoholfrei Getraenk." },
+        { mistake: "Glaspreise nach Kostenaaenderungen nicht ueberpruefen", consequence: "Ihr Lieferant erhoehte Preise vor 4 Monaten um 8 %. Ihre Glaeser sind noch zum alten Preis. Sie verkaufen mit Verlust." },
+        { mistake: "Niemals Schwund messen", consequence: "Sie wissen nicht, wie viel Sie verlieren. Und was Sie nicht messen, koennen Sie nicht verbessern." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Berechnen Sie den korrekten Glaspreis",
+    href: "/en/tools/wine-pricing-tool",
+    description: "Bezieht realem Schwund und Ziel-Marge ein, um einen Glaspreis zu setzen, der tatsaechlich profitabel ist.",
+  },
+};
+
+export default vinoPorCopaDE;

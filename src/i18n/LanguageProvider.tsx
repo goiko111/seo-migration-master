@@ -1,7 +1,7 @@
-import { type ReactNode, useMemo } from "react";
+import { type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LanguageContext, type LanguageContextValue } from "./LanguageContext";
-import { ROUTE_MAP, type TranslationDict } from "./types";
+import { ROUTE_MAP, SUPPORTED_LANGS, type SupportedLang, type TranslationDict } from "./types";
 import { detectLangFromPath } from "./languageDetection";
 import es from "./translations/es";
 import en from "./translations/en";
@@ -14,8 +14,26 @@ const TRANSLATIONS: Record<string, TranslationDict> = { es, en, it, fr, de, pt }
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation();
-  const lang = detectLangFromPath(pathname);
+  const [langOverride, setLangOverrideState] = useState<SupportedLang | null>(null);
+  const detectedLang = detectLangFromPath(pathname);
+  const lang = langOverride || detectedLang;
   const t = TRANSLATIONS[lang] || es;
+
+  useEffect(() => {
+    setLangOverrideState(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const setLangOverride = useCallback((newLang: SupportedLang | null) => {
+    if (newLang && SUPPORTED_LANGS.includes(newLang)) {
+      setLangOverrideState(newLang);
+    } else {
+      setLangOverrideState(null);
+    }
+  }, []);
 
   const value = useMemo<LanguageContextValue>(() => ({
     lang,
@@ -36,7 +54,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         { lang: "pt", url: `${SITE}${ROUTE_MAP.pt[esPath] || `/pt${esPath}`}` },
       ];
     },
-  }), [lang, t]);
+    setLangOverride,
+  }), [lang, t, setLangOverride]);
 
   return (
     <LanguageContext.Provider value={value}>

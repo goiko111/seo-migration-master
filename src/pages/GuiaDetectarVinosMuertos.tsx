@@ -153,7 +153,83 @@ const fr: GuidePageData = {
   ],
 };
 
-const data: Record<string, GuidePageData> = { es, en, it, fr };
+const de: GuidePageData = {
+  slug: "de/ratgeber/tote-weine-erkennen",
+  metaTitle: "Wie Sie tote Weine und Referenzen erkennen, die Ihre Rentabilität bremsen | Ratgeber",
+  metaDescription: "Ratgeber zum Identifizieren von Weinen ohne Rotation auf Ihrer Karte. Lernen Sie, Totbestand zu erkennen, die Auswirkung zu quantifizieren und Entscheidungen zu treffen, um Rentabilität zurückzugewinnen.",
+  heroTitle: "Wie Sie tote Weine und Referenzen erkennen, die Ihre Rentabilität bremsen",
+  heroSubtitle: "Jede Referenz ohne Rotation ist gebundenes Kapital, verschwendeter Platz und ein Signal, dass etwas in Ihrer Auswahl, Preisgestaltung oder Positionierung nicht funktioniert.",
+  heroBadge: "Diagnostischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Meine Karte analysieren", ctaPrimaryUrl: "/wine-list-analyzer",
+  ctaSecondaryText: "Demo anfragen", ctaSecondaryUrl: "/de/demo",
+  ctaFinalTitle: "Erkennen Sie tote Weine, bevor sie sich über Monate ansammeln",
+  ctaFinalDescription: "Winerim überwacht automatisch die Rotation jeder Referenz und alarmiert Sie, wenn ein Wein sich nicht mehr verkauft.",
+  tableOfContents: ["Was ist ein toter Wein und warum ist er wichtig", "Übliche Ursachen für Bestand ohne Rotation", "Wie Sie ein Rotationsaudit durchführen", "Entscheidungskriterien: behalten, verschieben oder aus dem Sortiment nehmen", "Wie Sie künftige Ansammlung verhindern", "Das Alarmsystem, das Sie brauchen"],
+  sections: [
+    { heading: "1. Was ist ein toter Wein und warum ist er wichtig", content: "Ein toter Wein ist eine Referenz, die sich seit mehr als 90 Tagen nicht verkauft hat. Es ist nicht zwangsläufig ein schlechter Wein — er passt möglicherweise einfach nicht zu Ihrer Karte, Ihrer Klientel oder Ihrer Preisgestaltung.\n\nDie Kosten sind dreifach: gebundenes Kapital, verschwendeter Kellerplatz und Risiko der Qualitätsminderung.", tips: ["Ein Restaurant mit 250 Referenzen und 20 % toten Weinen kann 15 000 € bis 50 000 € gebundenes Kapital haben", "Junge Weine ohne Reifung verlieren mit der Zeit an Frische", "Ohne Erkennungssystem sammeln sich tote Weine durch Trägheit an"], icon: "alert" },
+    { heading: "2. Übliche Ursachen für Bestand ohne Rotation", content: "Weine sterben nicht von alleine. Es gibt klare Muster, die erklären, warum bestimmte Referenzen sich nicht mehr verkaufen.", tips: ["Preis außerhalb der Spanne: ein Wein, der für seine Kategorie zu teuer ist", "Interne Konkurrenz: zwei oder drei ähnliche Weine im selben Abschnitt", "Schlechte Positionierung auf der Karte", "Menüwechsel ohne Anpassung der Weinkarte", "Emotionale Einkäufe: der Sommelier probiert einen Wein auf einer Messe und kauft 3 Kisten", "Fehlende Empfehlung: das Team kennt den Wein nicht und empfiehlt ihn nicht"], icon: "lightbulb" },
+    { heading: "3. Wie Sie ein Rotationsaudit durchführen", content: "Das Rotationsaudit ist ein strukturierter Prozess zur Identifizierung aller problematischen Referenzen.", tips: ["Schritt 1 — Alle Referenzen mit dem Datum des letzten Verkaufs auflisten", "Schritt 2 — Klassifizieren: aktiv (<30 Tage), langsam (30–90 Tage), tot (>90 Tage)", "Schritt 3 — Gebundenes Kapital je Kategorie berechnen", "Schritt 4 — Muster identifizieren: teilen sie Merkmale?", "Schritt 5 — Mit der Karte vergleichen: sind sie gut positioniert?", "Schritt 6 — Entscheidungen mit der Entscheidungsmatrix treffen"], icon: "list" },
+    { heading: "4. Entscheidungskriterien: behalten, verschieben oder aus dem Sortiment nehmen", content: "Nicht alle Weine ohne Rotation müssen aus dem Sortiment genommen werden. Einige können mit konkreten Maßnahmen zurückgewonnen werden.", tips: ["Behalten, wenn: hohe Marge und kann durch bessere Positionierung reaktiviert werden", "Auf Glas umstellen, wenn: könnte im Offenausschank funktionieren", "Bewerben, wenn: in Degustationsmenü oder Themenevent aufnehmen", "Rücknahme verhandeln, wenn: der Lieferant Rücknahmen akzeptiert", "Aus dem Sortiment nehmen, wenn: passt nicht, keine Marge, kein gangbarer Weg zur Rotation", "Goldene Regel: wenn seit 180 Tagen nicht verkauft und kein Reaktivierungsplan besteht, sollte er raus"], icon: "check" },
+    { heading: "5. Wie Sie künftige Ansammlung verhindern", content: "Prävention ist effizienter als Erkennung.", tips: ["Einstiegsregel: jede neue Referenz braucht eine Begründung", "Bestandslimit: nicht mehr als 6–12 Einheiten einer neuen Referenz kaufen", "Probezeitraum: 60–90 Tage mit aktiver Unterstützung", "Protokoll 'einer rein, einer raus'", "Monatliche Rotationsüberprüfung: 30 Minuten pro Monat"], icon: "check" },
+    { heading: "6. Das Alarmsystem, das Sie brauchen", content: "Idealerweise haben Sie ein System, das Sie in Echtzeit alarmiert, wenn eine Referenz an Geschwindigkeit verliert.", tips: ["Frühwarnung (30 Tage ohne Verkauf): die Referenz benötigt Aufmerksamkeit", "Dringende Warnung (90 Tage ohne Verkauf): obligatorische Entscheidung", "Überbestandswarnung: wenn der Bestand 90 Tage geschätzter Verkäufe übersteigt", "Monatliches Dashboard: Zusammenfassung mit Referenzen im Alarm und gebundenem Kapital", "Ohne dieses System werden tote Weine zu spät erkannt"], icon: "alert" },
+  ],
+  faqs: [
+    { q: "Ab wie vielen Tagen gilt ein Wein als tot?", a: "Der Branchenstandard sind 90 Tage ohne Verkauf. Zwischen 30 und 90 Tagen spricht man von langsamer Rotation." },
+    { q: "Welcher Anteil der Karte ist üblicherweise Totbestand?", a: "In Restaurants ohne aktive Kontrolle zwischen 15 % und 30 %. Mit Überwachung sollte er unter 5 % liegen." },
+    { q: "Soll ich alle Weine ohne Verkauf aus dem Sortiment nehmen?", a: "Nicht automatisch. Einige können durch bessere Positionierung oder Offenausschankformat zurückgewonnen werden." },
+    { q: "Wie vermeide ich, mehr zu kaufen, als ich verkaufen kann?", a: "Setzen Sie eine anfängliche Bestandsgrenze von 6–12 Einheiten und erweitern Sie erst, wenn die Rotation in 60–90 Tagen validiert ist." },
+  ],
+  relatedTools: [
+    { label: "Rechner für Totbestand", url: "/de/tools/rechner-totbestand" },
+    { label: "Wine List Score", url: "/de/tools/wine-list-score" },
+    { label: "Weinkartenanalyse", url: "/wine-list-analyzer" },
+  ],
+  relatedGuides: [
+    { label: "Checkliste zur Erkennung toter Weine", url: "/de/ressourcen/checkliste-tote-weine" },
+    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-verbessern" },
+  ],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-detetar-vinhos-mortos",
+  metaTitle: "Como Detetar Vinhos Mortos e Referências que Travam a Rentabilidade | Guia",
+  metaDescription: "Guia para identificar vinhos sem rotação na sua carta. Aprenda a detetar stock morto, quantificar o impacto e tomar decisões para recuperar rentabilidade.",
+  heroTitle: "Como detetar vinhos mortos e referências que travam a rentabilidade",
+  heroSubtitle: "Cada referência sem rotação é capital imobilizado, espaço desperdiçado e um sinal de que algo não funciona na sua seleção, preço ou posicionamento.",
+  heroBadge: "Guia de diagnóstico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/wine-list-analyzer",
+  ctaSecondaryText: "Solicitar demo", ctaSecondaryUrl: "/pt/demo",
+  ctaFinalTitle: "Detete vinhos mortos antes que acumulem meses",
+  ctaFinalDescription: "O Winerim monitoriza automaticamente a rotação de cada referência e alerta-o quando um vinho deixa de se vender.",
+  tableOfContents: ["O que é um vinho morto e porque importa", "Causas habituais do stock sem rotação", "Como fazer uma auditoria de rotação", "Critérios de decisão: manter, mover ou retirar", "Como prevenir a acumulação futura", "O sistema de alertas de que precisa"],
+  sections: [
+    { heading: "1. O que é um vinho morto e porque importa", content: "Um vinho morto é uma referência que não se vende há mais de 90 dias. Não é necessariamente um mau vinho — pode simplesmente não encaixar na sua carta, no seu público ou no seu preço.\n\nO custo é triplo: capital imobilizado, espaço em garrafeira e risco de deterioração.", tips: ["Um restaurante com 250 referências e 20 % de vinhos mortos pode ter entre 15 000 € e 50 000 € de capital imobilizado", "Os vinhos jovens sem estágio perdem frescura com o tempo", "Sem um sistema de deteção, os vinhos mortos acumulam-se por inércia"], icon: "alert" },
+    { heading: "2. Causas habituais do stock sem rotação", content: "Os vinhos não morrem sozinhos. Existem padrões claros que explicam porque certas referências deixam de se vender.", tips: ["Preço fora da gama: um vinho demasiado caro para a sua categoria", "Concorrência interna: dois ou três vinhos semelhantes na mesma secção", "Mau posicionamento na carta", "Mudança de ementa sem ajustar a carta de vinhos", "Compras emocionais: o escanção prova um vinho numa feira e compra 3 caixas", "Falta de recomendação: a equipa não conhece o vinho e não o recomenda"], icon: "lightbulb" },
+    { heading: "3. Como fazer uma auditoria de rotação", content: "A auditoria de rotação é um processo estruturado para identificar todas as referências problemáticas.", tips: ["Passo 1 — Listar todas as referências com a data da última venda", "Passo 2 — Classificar: ativa (<30 dias), lenta (30–90 dias), morta (>90 dias)", "Passo 3 — Calcular o capital imobilizado por categoria", "Passo 4 — Identificar padrões: partilham características?", "Passo 5 — Comparar com a carta: estão bem posicionadas?", "Passo 6 — Tomar decisões usando a matriz de decisão"], icon: "list" },
+    { heading: "4. Critérios de decisão: manter, mover ou retirar", content: "Nem todos os vinhos sem rotação devem ser retirados. Alguns podem recuperar-se com ações concretas.", tips: ["Manter se: margem elevada e pode reativar-se com melhor posicionamento", "Passar a copo se: poderia funcionar no formato a copo", "Promover se: incluí-lo em menu de degustação ou evento temático", "Negociar devolução se: o fornecedor aceita devoluções", "Retirar se: não encaixa, não tem margem e não há forma viável de o rodar", "Regra de ouro: se não se vendeu em 180 dias e não há plano de reativação, deve sair"], icon: "check" },
+    { heading: "5. Como prevenir a acumulação futura", content: "A prevenção é mais eficiente que a deteção.", tips: ["Regra de entrada: cada nova referência requer justificação", "Limite de stock: não comprar mais de 6–12 unidades de uma referência nova", "Período de teste: 60–90 dias com suporte ativo", "Protocolo 'um entra, um sai'", "Revisão mensal de rotação: 30 minutos por mês"], icon: "check" },
+    { heading: "6. O sistema de alertas de que precisa", content: "O ideal é ter um sistema que o alerte em tempo real quando uma referência começa a perder velocidade.", tips: ["Alerta precoce (30 dias sem venda): a referência precisa de atenção", "Alerta urgente (90 dias sem venda): decisão obrigatória", "Alerta de stock excessivo: quando o stock supera os 90 dias de venda estimada", "Dashboard mensal: resumo com referências em alerta e capital imobilizado", "Sem este sistema, os vinhos mortos são detetados demasiado tarde"], icon: "alert" },
+  ],
+  faqs: [
+    { q: "A partir de quantos dias se considera um vinho morto?", a: "O padrão do setor é 90 dias sem qualquer venda. Entre 30 e 90 dias considera-se rotação lenta." },
+    { q: "Que percentagem da carta costuma ser stock morto?", a: "Em restaurantes sem controlo ativo, entre 15 % e 30 %. Com monitorização, deveria ser inferior a 5 %." },
+    { q: "Devo retirar todos os vinhos sem venda?", a: "Não automaticamente. Alguns podem recuperar-se com melhor posicionamento ou formato a copo." },
+    { q: "Como evito comprar mais do que consigo vender?", a: "Estabeleça um limite inicial de 6–12 unidades e não amplie até validar a rotação em 60–90 dias." },
+  ],
+  relatedTools: [
+    { label: "Calculadora de stock morto", url: "/pt/ferramentas/calculadora-stock-morto" },
+    { label: "Wine List Score", url: "/pt/ferramentas/wine-list-score" },
+    { label: "Analisador de carta", url: "/wine-list-analyzer" },
+  ],
+  relatedGuides: [
+    { label: "Checklist de deteção de vinhos mortos", url: "/pt/recursos/checklist-vinhos-mortos" },
+    { label: "Como melhorar a rotação de vinhos", url: "/pt/guias/como-melhorar-rotacao-vinhos" },
+  ],
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
 
 const GuiaDetectarVinosMuertos = () => <GuideTemplate data={data} />;
 export default GuiaDetectarVinosMuertos;

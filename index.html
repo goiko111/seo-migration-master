@@ -106,7 +106,10 @@
       "foundingDate": "2024",
       "knowsAbout": ["Wine list management", "Restaurant wine sales optimization", "AI-powered wine recommendations", "Digital wine menus", "Wine pricing strategy", "Food and wine pairing", "Hospitality technology"],
       "sameAs": ["https://www.instagram.com/winerim/", "https://www.youtube.com/@Winerim", "https://www.linkedin.com/company/winerim/"],
-      "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "url": "https://winerim.wine/contacto", "availableLanguage": ["Spanish", "English", "Italian", "French"]}
+      "contactPoint": [
+        {"@type": "ContactPoint", "contactType": "sales", "url": "https://winerim.wine/contacto", "availableLanguage": ["Spanish", "English", "Italian", "French"]},
+        {"@type": "ContactPoint", "contactType": "customer service", "email": "hello@winerim.wine", "availableLanguage": ["Spanish", "English", "Italian", "French"]}
+      ]
     }
     </script>
   </head>
@@ -120,18 +123,52 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Winerim Web Chat Widget -->
+    <!-- Winerim Web Chat Widget — hide until positioned to prevent FOUC -->
+    <style>
+      #winerim-web-chat,
+      .winerim-web-chat,
+      [data-winerim-chat] {
+        opacity: 0 !important;
+        transition: opacity 0.3s ease;
+      }
+      #winerim-web-chat.ready,
+      .winerim-web-chat.ready,
+      [data-winerim-chat].ready {
+        opacity: 1 !important;
+      }
+    </style>
     <script>
-      window.WinerimWebChatConfig = {
-        apiUrl: 'https://edwuzzmeunzgsrejlmwr.supabase.co/functions/v1/web-lead-chat',
-        primaryColor: '#9B000A',
-        welcomeMessage: '¡Hola! 👋 Soy Iñigo, del equipo de Winerim. ¿En qué puedo ayudarte?',
-        companyName: 'Winerim',
-        buttonText: 'Chat',
-        position: 'bottom-right'
-      };
+      (function() {
+        var path = window.location.pathname;
+        var langMatch = path.match(/^\/(en|it|fr|de|pt)\//);
+        var lang = langMatch ? langMatch[1] : 'es';
+        var welcomeMessages = {
+          es: '¡Hola! 👋 Soy Iñigo, del equipo de Winerim. ¿En qué puedo ayudarte?',
+          en: 'Hello! 👋 I\'m Iñigo from the Winerim team. How can I help you?',
+          it: 'Ciao! 👋 Sono Iñigo del team Winerim. Come posso aiutarti?',
+          fr: 'Bonjour ! 👋 Je suis Iñigo de l\'équipe Winerim. Comment puis-je vous aider ?',
+          de: 'Hallo! 👋 Ich bin Iñigo vom Winerim-Team. Wie kann ich Ihnen helfen?',
+          pt: 'Olá! 👋 Sou o Iñigo da equipa Winerim. Como posso ajudar?'
+        };
+        window.WinerimWebChatConfig = {
+          apiUrl: 'https://edwuzzmeunzgsrejlmwr.supabase.co/functions/v1/web-lead-chat',
+          primaryColor: '#9B000A',
+          welcomeMessage: welcomeMessages[lang] || welcomeMessages.es,
+          companyName: 'Winerim',
+          buttonText: 'Chat',
+          position: 'bottom-right',
+          lang: document.documentElement.lang || "es"
+        };
+      })();
+      /* Reveal chat widget once it has loaded and positioned itself */
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.querySelectorAll('#winerim-web-chat, .winerim-web-chat, [data-winerim-chat]')
+            .forEach(function(el) { el.classList.add('ready'); });
+        }, 500);
+      });
     </script>
-    <script src="https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js"></script>
+    <script defer src="https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js"></script>
 
     <!-- Noscript fallback: critical content visible to crawlers that don't execute JS -->
     <noscript>

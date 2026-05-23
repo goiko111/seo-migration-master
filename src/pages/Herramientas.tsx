@@ -70,6 +70,8 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Dead Stock Calculator", desc: "Estimate tied-up capital in slow-moving wines. Winerim detects this automatically.", tag: "Management" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", title: "Average Ticket Impact Calculator", desc: "Estimate how much more wine revenue you could generate by improving table ratio, ticket per table and glass strategy.", tag: "ROI" },
+      { to: "/herramientas/auditor-carta-multilocal", title: "Multi-Unit Wine List Auditor", desc: "Compare wine lists across your locations: assortment, pricing, by-the-glass and average ticket. Detect inconsistencies and opportunities.", tag: "Groups" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Smart Purchase Calculator", desc: "Analyze if a wine reference is worth buying: profitability, overpricing, tied-up stock and improvement opportunity. Winerim Supply demo.", tag: "Supply" },
     ],
     guides: [
@@ -99,6 +101,8 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostica vino al calice", desc: "Valuta se la tua offerta al calice è equilibrata in stili, prezzi e redditività.", tag: "Diagnostica" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita la tua carta con un punteggio 0-100 su struttura, equilibrio, pricing e potenziale commerciale.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calcolatrice stock morto", desc: "Stima il capitale immobilizzato in vini a bassa rotazione.", tag: "Gestione" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calcolatrice impatto scontrino medio", desc: "Stima quanto in più potresti fatturare in vino migliorando il rapporto tavoli, lo scontrino per tavolo e la strategia al calice.", tag: "ROI" },
+      { to: "/herramientas/auditor-carta-multilocal", title: "Auditor carta multi-locale", desc: "Confronta la carta dei vini dei tuoi locali: assortimento, pricing, calice e scontrino medio. Rileva incoerenze e opportunità.", tag: "Gruppi" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calcolatrice acquisto intelligente", desc: "Analizza se una referenza vale la pena: redditività, sovrapprezzo, stock immobilizzato e opportunità di miglioramento. Demo di Winerim Supply.", tag: "Supply" },
     ],
     guides: [
@@ -128,6 +132,8 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostic vin au verre", desc: "Évaluez si votre offre au verre est équilibrée en styles, prix et rentabilité.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditez votre carte avec un score de 0 à 100 sur la structure, l'équilibre, le pricing et le potentiel commercial.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculateur stock mort", desc: "Estimez le capital immobilisé dans les vins à faible rotation.", tag: "Gestion" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculateur impact ticket moyen", desc: "Estimez combien vous pourriez facturer en plus en vin en améliorant le ratio de tables, le ticket par table et la stratégie au verre.", tag: "ROI" },
+      { to: "/herramientas/auditor-carta-multilocal", title: "Auditeur carte multi-sites", desc: "Comparez la carte des vins de vos établissements : assortiment, pricing, verre et ticket moyen. Détectez incohérences et opportunités.", tag: "Groupes" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculateur achat intelligent", desc: "Analysez si une référence vaut la peine : rentabilité, surcoût, stock immobilisé et opportunité d'amélioration. Démo de Winerim Supply.", tag: "Supply" },
     ],
     guides: [
@@ -135,6 +141,68 @@ const content: Record<string, {
       { to: "/vino-por-copa-restaurante", label: "Vin au verre dans les restaurants" },
       { to: "/blog/como-disenar-carta-vinos-rentable", label: "Comment concevoir une carte des vins rentable" },
       { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Template wine mapping pour restaurants" },
+    ],
+  },
+  de: {
+    seoTitle: "Kostenlose Tools für die Weinkarte",
+    seoDesc: "Kostenlose Rechner, Analyse- und Generator-Tools für Ihre Weinkarte. Als Winerim-Kunde läuft alles automatisch.",
+    badge: "Kostenlose Tools", h1: "Optimieren Sie Ihre Weinkarte",
+    subtitle: "Testen Sie kostenlos diese Analyse-, Pricing- und Weinbegleitungs-Tools. Die gute Nachricht: Als Winerim-Kunde läuft alles automatisch — ohne manuelle Arbeit, ohne Zeitverlust, mit Ergebnissen ab dem ersten Tag.",
+    useTool: "Kostenlos testen →", guidesTitle: "Verwandte Ratgeber",
+    ctaTitle: "Was wäre, wenn all das automatisch liefe?",
+    ctaDesc: "Mit Winerim müssen Sie diese Tools nicht einzeln nutzen. Unsere Plattform analysiert Ihre Karte, optimiert Preise, schlägt Weinbegleitungen vor und überwacht die Rotation — alles automatisch. Sparen Sie Stunden an Verwaltungsaufwand pro Woche und steigern Sie Ihren Weinumsatz.",
+    ctaBtn1: "Meine Karte kostenlos analysieren", ctaBtn2: "Demo anfordern",
+    tools: [
+      { to: "/wine-list-analyzer", title: "Weinkarten-Analyzer", desc: "Laden Sie Ihre Karte hoch und erhalten Sie Verbesserungsempfehlungen. Mit Winerim aktualisiert sich diese Analyse jede Woche automatisch.", tag: "Analyse" },
+      { to: "/calculadora-margen-vino", title: "Wein-Margen-Rechner", desc: "Berechnen Sie die optimale Marge pro Referenz. Als Winerim-Kunde werden Margen automatisch optimiert.", tag: "Pricing" },
+      { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Glaspreis-Rechner", desc: "Berechnen Sie den idealen Preis pro Glas. Winerim macht das für Sie und benachrichtigt Sie, wann eine Anpassung sinnvoll ist.", tag: "Pricing" },
+      { to: "/wine-pricing-tool", title: "Wein-Pricing-Tool", desc: "Optimieren Sie die Preisstruktur Ihrer Karte. Mit Winerim wird intelligentes Pricing in Echtzeit angewendet.", tag: "Pricing" },
+      { to: "/wine-pairing-generator", title: "Weinbegleitung-Generator (KI)", desc: "Erzeugen Sie KI-gestützte Weinbegleitungen. Mit Winerim erhält Ihr Servicepersonal bei jedem Service automatische Empfehlungen.", tag: "KI" },
+      { to: "/wine-roi-calculator", title: "ROI-Rechner", desc: "Berechnen Sie das Verbesserungspotenzial durch Digitalisierung Ihrer Karte. Die Ergebnisse variieren je nach Restauranttyp.", tag: "ROI" },
+      { to: "/wine-list-benchmark", title: "Weinkarten-Benchmark", desc: "Vergleichen Sie Ihre Karte mit Branchenstandards. Winerim sendet automatische Berichte zu Ihrer Wettbewerbsposition.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Glasausschank-Diagnose", desc: "Bewerten Sie, ob Ihr Glasangebot in Stilen, Preisen und Rentabilität ausgewogen ist.", tag: "Diagnose" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditieren Sie Ihre Karte mit einem 0-100 Score in Struktur, Ausgewogenheit, Pricing, Rotation und kommerziellem Potenzial.", tag: "Audit" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Totbestand-Rechner", desc: "Schätzen Sie das in langsam drehenden Weinen gebundene Kapital. Winerim erkennt dies automatisch.", tag: "Verwaltung" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", title: "Durchschnittsbon-Impact-Rechner", desc: "Schätzen Sie, wie viel mehr Weinumsatz Sie durch bessere Tischquote, höheren Bon pro Tisch und Glasstrategie erzielen könnten.", tag: "ROI" },
+      { to: "/herramientas/auditor-carta-multilocal", title: "Multi-Standort-Karten-Auditor", desc: "Vergleichen Sie die Weinkarten Ihrer Standorte: Sortiment, Pricing, Glas und Durchschnittsbon. Erkennen Sie Inkonsistenzen und Chancen.", tag: "Gruppen" },
+      { to: "/herramientas/calculadora-compra-inteligente", title: "Intelligenter-Einkauf-Rechner", desc: "Analysieren Sie, ob eine Weinreferenz es wert ist, weiter gekauft zu werden: Rentabilität, Überpreisung, gebundener Bestand und Verbesserungschance. Winerim Supply Demo.", tag: "Supply" },
+    ],
+    guides: [
+      { to: "/precio-vino-restaurante", label: "Wie man Wein im Restaurant bepreist" },
+      { to: "/vino-por-copa-restaurante", label: "Wein im Glas in Restaurants" },
+      { to: "/blog/como-disenar-carta-vinos-rentable", label: "Wie man eine profitable Weinkarte gestaltet" },
+      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Wine-Mapping-Vorlage für Restaurants" },
+    ],
+  },
+  pt: {
+    seoTitle: "Ferramentas Gratuitas para a Carta de Vinhos",
+    seoDesc: "Calculadoras, analisadores e geradores gratuitos para a sua carta de vinhos. Como cliente Winerim, tudo é automático.",
+    badge: "Ferramentas gratuitas", h1: "Otimize a sua carta de vinhos",
+    subtitle: "Experimente grátis estas ferramentas de análise, pricing e harmonização. A boa notícia: como cliente Winerim, tudo é executado automaticamente — sem trabalho manual, sem perder tempo, com resultados desde o primeiro dia.",
+    useTool: "Experimentar grátis →", guidesTitle: "Guias relacionados",
+    ctaTitle: "E se tudo isto fosse automático?",
+    ctaDesc: "Com a Winerim não precisa de usar estas ferramentas uma a uma. A nossa plataforma analisa a sua carta, otimiza preços, sugere harmonizações e controla a rotação — tudo em automático. Poupe horas de gestão por semana e aumente as vendas de vinho.",
+    ctaBtn1: "Analisar a minha carta grátis", ctaBtn2: "Pedir demo",
+    tools: [
+      { to: "/wine-list-analyzer", title: "Analisador de carta de vinhos", desc: "Carregue a sua carta e receba recomendações de melhoria. Com a Winerim, esta análise atualiza-se todas as semanas em automático.", tag: "Análise" },
+      { to: "/calculadora-margen-vino", title: "Calculadora de margens de vinho", desc: "Calcule a margem ótima por cada referência. Como cliente Winerim, as margens otimizam-se automaticamente.", tag: "Pricing" },
+      { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de preço por copo", desc: "Calcule o preço ideal por copo. A Winerim calcula-o por si e avisa quando convém ajustar preços.", tag: "Pricing" },
+      { to: "/wine-pricing-tool", title: "Ferramenta de pricing de vinhos", desc: "Otimize a estrutura de preços da sua carta. Com a Winerim, o pricing inteligente aplica-se em tempo real.", tag: "Pricing" },
+      { to: "/wine-pairing-generator", title: "Gerador de harmonizações com IA", desc: "Gere sugestões de harmonização com IA. Com a Winerim, os seus empregados recebem recomendações automáticas em cada serviço.", tag: "IA" },
+      { to: "/wine-roi-calculator", title: "Calculadora de ROI", desc: "Calcule o potencial de melhoria ao digitalizar a sua carta. Os resultados variam conforme o tipo de restaurante.", tag: "ROI" },
+      { to: "/wine-list-benchmark", title: "Benchmark de cartas de vinhos", desc: "Compare a sua carta com os padrões do setor. A Winerim envia relatórios automáticos com a sua posição competitiva.", tag: "Benchmark" },
+      { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vinho a copo", desc: "Avalie se a sua oferta a copo está equilibrada em estilos, preços e rentabilidade.", tag: "Diagnóstico" },
+      { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audite a sua carta com um score de 0 a 100 em estrutura, equilíbrio, pricing, rotação e potencial comercial.", tag: "Auditoria" },
+      { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock morto", desc: "Estime o capital imobilizado em vinhos sem rotação. A Winerim deteta-o automaticamente.", tag: "Gestão" },
+      { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto no ticket médio", desc: "Estime quanto mais poderia faturar em vinho melhorando o rácio de mesas, o ticket por mesa e a estratégia a copo.", tag: "ROI" },
+      { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compare a carta de vinhos dos seus locais: sortido, pricing, copo e ticket médio. Detete inconsistências e oportunidades.", tag: "Grupos" },
+      { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analise se uma referência vale a pena: rentabilidade, sobrepreço, stock imobilizado e oportunidade de melhoria. Demo da Winerim Supply.", tag: "Supply" },
+    ],
+    guides: [
+      { to: "/precio-vino-restaurante", label: "Como definir o preço do vinho num restaurante" },
+      { to: "/vino-por-copa-restaurante", label: "Vinho a copo nos restaurantes" },
+      { to: "/blog/como-disenar-carta-vinos-rentable", label: "Como desenhar uma carta de vinhos rentável" },
+      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Modelo wine mapping para restaurantes" },
     ],
   },
 };
@@ -204,7 +272,7 @@ const Herramientas = () => {
               const Icon = toolIcons[t.tools.indexOf(tool)] || Search;
               return (
                 <ScrollReveal key={tool.to} delay={i * 0.04}>
-                  <Link to={tool.to} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
+                  <Link to={localePath(tool.to)} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/15 transition-colors">
                         <Icon size={20} className="text-wine" />
@@ -235,7 +303,7 @@ const Herramientas = () => {
           <div className="grid md:grid-cols-2 gap-4">
             {t.guides.map((link) => (
               <ScrollReveal key={link.to}>
-                <Link to={link.to} className="group flex items-center gap-3 p-4 rounded-xl border border-border hover:border-wine/50 transition-all">
+                <Link to={localePath(link.to)} className="group flex items-center gap-3 p-4 rounded-xl border border-border hover:border-wine/50 transition-all">
                   <span className="text-sm font-medium group-hover:text-wine transition-colors">{link.label}</span>
                   <span className="ml-auto text-muted-foreground group-hover:text-wine transition-colors text-xs">→</span>
                 </Link>

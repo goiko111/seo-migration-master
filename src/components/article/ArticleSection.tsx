@@ -30,7 +30,31 @@ const ArticleSection = ({ heading, content, index }: ArticleSectionProps) => {
             prose-a:text-accent prose-a:no-underline hover:prose-a:underline
             prose-img:rounded-xl prose-img:my-10
             prose-hr:border-border prose-hr:my-10">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                table: ({ children }) => (
+                  <div className="overflow-x-auto rounded-xl border border-border my-8">
+                    <table className="w-full border-collapse text-sm md:text-base">{children}</table>
+                  </div>
+                ),
+                thead: ({ children }) => (
+                  <thead className="bg-wine/10">{children}</thead>
+                ),
+                th: ({ children }) => (
+                  <th className="px-4 py-3 text-left font-bold text-foreground border-b-2 border-accent/30 whitespace-nowrap">{children}</th>
+                ),
+                td: ({ children }) => (
+                  <td className="px-4 py-3 text-muted-foreground border-b border-border">{children}</td>
+                ),
+                tr: ({ children, ...props }) => {
+                  // Check if this is inside thead (the node prop isn't reliable, so we just style all tr)
+                  return <tr className="hover:bg-wine/5 even:bg-[hsl(140,2%,12%)]">{children}</tr>;
+                },
+              }}
+            >
+              {content}
+            </ReactMarkdown>
           </div>
         </ScrollReveal>
       </div>

@@ -15,6 +15,7 @@ const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPa
   contacto: { label: "Formulario de contacto" },
   "analisis-carta": { label: "Análisis gratuito de carta de vinos" },
   "wine-list-analyzer": { label: "Analizador de carta de vinos (herramienta)" },
+  "herramientas_popup": { label: "Popup /herramientas — Diagnóstico gratuito" },
   "plantilla-estrategia-vinos-copa": {
     label: "Descarga: Plantilla estrategia vinos por copa",
     resource: "Plantilla de Estrategia de Vinos por Copa",
@@ -107,12 +108,17 @@ Deno.serve(async (req) => {
 
     // 1) Send internal notification to info@winerim.com via transactional email
     const notifId = crypto.randomUUID();
-    await supabase.functions.invoke("send-transactional-email", {
-      body: {
-        templateName: "lead-notification",
-        recipientEmail: "info@winerim.com",
-        idempotencyKey: `lead-notif-${notifId}`,
-        templateData: {
+    const notificationRecipients = ["info@winerim.com"];
+    if (lead.form_type === "herramientas_popup") {
+      notificationRecipients.push("goiko@winerim.com");
+    }
+    for (const recipient of notificationRecipients) {
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "lead-notification",
+          recipientEmail: recipient,
+          idempotencyKey: `lead-notif-${notifId}-${recipient}`,
+          templateData: {
           formLabel: formInfo.label,
           restaurant: lead.restaurant,
           name: lead.name,
@@ -127,9 +133,10 @@ Deno.serve(async (req) => {
           main_challenge: lead.main_challenge,
           message: lead.message,
           menu_link: lead.menu_link,
+          },
         },
-      },
-    });
+      });
+    }
 
     // 2) Forward lead to Winerim Connect (Lead Autopilot)
     const CONNECT_URL = Deno.env.get("WINERIM_CONNECT_WEBHOOK_URL");
@@ -155,6 +162,8 @@ Deno.serve(async (req) => {
             form_type: lead.form_type || null,
             form_label: formInfo.label,
             resource: formInfo.resource || null,
+            lead_type: lead.lead_type || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
+            lead_category: lead.lead_category || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
             source: "winerim_web",
           }),
         });

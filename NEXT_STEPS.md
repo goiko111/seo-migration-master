@@ -2,35 +2,42 @@
 
 ## Hechos
 
-- La base técnica para `de` y `pt` está implementada localmente.
-- El trabajo está en la rama `codex/wine-library-de-pt`.
-- El bloque técnico está comprometido en un commit de feature en esa rama.
-- La rama `codex/wine-library-de-pt` está subida a `origin`.
-- PR abierto: `https://github.com/goiko111/seo-migration-master/pull/1`.
-- Tests, build y `deno check` de las funciones Edge tocadas pasan en el estado actual.
-- El lint global tiene errores fuera del alcance directo del bloque actual.
-- El lint dirigido sobre los archivos tocados no tiene errores ni warnings.
+- La base técnica para `de` y `pt` de la biblioteca del vino está implementada.
+- El PR `https://github.com/goiko111/seo-migration-master/pull/1` está abierto desde `codex/wine-library-de-pt` hacia `main`.
+- `origin/main` avanzó y el merge local ya fue resuelto.
+- Las comprobaciones posteriores a la resolución pasan:
+  - `npm run test`.
+  - `npm run build`.
+  - ESLint dirigido de biblioteca/i18n.
+  - `npx --yes deno-bin check` de `sitemap` y `prerender`.
+  - `git diff --check`.
+- El lint global sigue teniendo deuda fuera del alcance directo de este bloque.
 
 ## Decisiones
 
-- Priorizar primero revisión, validación y cierre del bloque técnico multilingüe.
-- Mantener la deuda de lint global como tarea separada.
-- Mantener la corrección del selector de idioma para rutas dinámicas como parte del bloque `de`/`pt`.
+- Priorizar ahora commit, push y merge del PR.
+- Mantener el seguimiento de mejoras editoriales separado del cierre técnico.
+- No mezclar la deuda global de lint con el bloque de biblioteca del vino.
 
 ## Hipótesis
 
-- Tras desplegar, la mejora de mayor impacto será enriquecer el contenido editorial localizado de entidades con alto potencial SEO.
-- La generación de rutas desde una fuente común reducirá el riesgo de divergencia entre app, sitemap y prerender.
+- Tras el merge, el siguiente impacto SEO vendrá de mejorar contenido propio localizado en entidades prioritarias.
+- La cobertura técnica multilingüe ya permite escalar contenido `de` y `pt` sin reabrir la arquitectura base.
 
 ## Tareas pendientes
 
-1. Revisar y aprobar el PR `https://github.com/goiko111/seo-migration-master/pull/1`.
-2. Repetir `npm run test`, `npm run build`, lint dirigido y `deno check` si hay nuevos cambios.
-3. Separar en una tarea propia los 66 errores del lint global.
-4. Desplegar cuando el PR esté aprobado.
-5. Validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
-6. Plan editorial siguiente:
-   - Mejorar copys propios en alemán y portugués para uvas, regiones, estilos y maridajes prioritarios.
-   - Añadir contenido largo localizado en las páginas con mayor valor SEO.
-   - Revisar términos de glosario por idioma.
-   - Medir cobertura e indexación por idioma en Search Console.
+1. Hacer commit de la resolución de merge.
+2. Subir `codex/wine-library-de-pt` a `origin`.
+3. Reintentar el merge del PR.
+4. Tras desplegar, validar:
+   - Sitemap XML y rutas `de`/`pt`.
+   - Hreflang recíproco y canonical.
+   - Prerender para bots en páginas de biblioteca.
+   - Selector de idioma en rutas dinámicas.
+   - Páginas prioritarias: uvas, regiones, estilos y maridajes.
+5. Bloque editorial siguiente:
+   - Priorizar 20-30 entidades por tráfico potencial.
+   - Reescribir copys propios en `de` y `pt`, no solo overlays genéricos.
+   - Añadir FAQs localizadas por intención de búsqueda.
+   - Conectar entidades relacionadas con enlaces internos por idioma.
+   - Medir indexación y cobertura en Search Console.

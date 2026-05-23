@@ -14,6 +14,7 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
+import { getI18n } from "@/i18n/types";
 
 interface BlogPost {
   title: string;
@@ -29,6 +30,8 @@ const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string
   en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →", featured: "Featured" },
   it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →", featured: "In evidenza" },
   fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →", featured: "À la une" },
+  de: { seoTitle: "Blog", seoDesc: "Entdecken Sie die neuesten Trends der Weinwelt mit Winerim.", readMore: "Artikel lesen", heroLabel: "Wissenszentrum", heroSubtitle: "Artikel, Analysen und Trends zur Weinverwaltung in der Gastronomie.", guidesQ: "Suchen Sie praktische Leitfäden zur Optimierung Ihrer Weinkarte?", guidesBtn: "Ratgeber und Ressourcen ansehen →", featured: "Empfohlen" },
+  pt: { seoTitle: "Blog", seoDesc: "Descubra as últimas novidades do mundo do vinho com o Winerim.", readMore: "Ler artigo", heroLabel: "Centro de conhecimento", heroSubtitle: "Artigos, análises e tendências sobre a gestão de vinhos na restauração.", guidesQ: "Procura guias práticos para otimizar a sua carta de vinhos?", guidesBtn: "Ver guias e recursos →", featured: "Destaque" },
 };
 
 const formatDate = (dateStr: string | null, locale = "es-ES") => {
@@ -37,12 +40,17 @@ const formatDate = (dateStr: string | null, locale = "es-ES") => {
   return d.toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 };
 
+const langToLocale: Record<string, string> = {
+  es: "es-ES", en: "en-US", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
+};
+
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("blog");
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang) || i18n.es;
+  const locale = langToLocale[lang] || "es-ES";
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -50,35 +58,60 @@ const Blog = () => {
         .from("articles")
         .select("slug, title, excerpt, image_url, category, published_at")
         .eq("published", true)
+        .eq("lang", lang)
         .neq("category", "interview")
         .order("published_at", { ascending: false });
 
       if (data && data.length > 0) {
-        setBlogPosts(data.map(a => ({
-          title: a.title,
-          excerpt: a.excerpt || "",
-          image: a.image_url || "",
-          category: a.category,
-          slug: `/article/${a.slug}`,
-          publishedAt: a.published_at,
-        })));
-      } else {
-        const staticPosts = Object.values(staticArticles)
-          .filter(a => a.type !== "interview")
-          .map(a => ({
+        setBlogPosts(data.map(a => {
+          // Strip _lang suffix so ArticlePage can construct the correct DB slug
+          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
+          return {
             title: a.title,
-            excerpt: a.subtitle || "",
-            image: a.heroImage,
+            excerpt: a.excerpt || "",
+            image: a.image_url || "",
+            category: a.category,
+            slug: `/article/${baseSlug}`,
+            publishedAt: a.published_at,
+          };
+        }));
+      } else {
+        // Fallback: if no articles in this language, show Spanish
+        const { data: fallbackData } = await supabase
+          .from("articles")
+          .select("slug, title, excerpt, image_url, category, published_at")
+          .eq("published", true)
+          .eq("lang", "es")
+          .neq("category", "interview")
+          .order("published_at", { ascending: false });
+
+        if (fallbackData && fallbackData.length > 0) {
+          setBlogPosts(fallbackData.map(a => ({
+            title: a.title,
+            excerpt: a.excerpt || "",
+            image: a.image_url || "",
             category: a.category,
             slug: `/article/${a.slug}`,
-            publishedAt: null,
-          }));
-        setBlogPosts(staticPosts);
+            publishedAt: a.published_at,
+          })));
+        } else {
+          const staticPosts = Object.values(staticArticles)
+            .filter(a => a.type !== "interview")
+            .map(a => ({
+              title: a.title,
+              excerpt: a.subtitle || "",
+              image: a.heroImage,
+              category: a.category,
+              slug: `/article/${a.slug}`,
+              publishedAt: null,
+            }));
+          setBlogPosts(staticPosts);
+        }
       }
       setLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, [lang]);
 
   if (loading) {
     return (
@@ -117,17 +150,18 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Featured article — full width card */}
+        {/* Featured article â full width card */}
         {featured && (
           <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
             <ScrollReveal>
               <Link to={featured.slug}
-                className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/5">
+                className="group block rounded-2xl border border-white/10 overflow-hidden hover:border-wine/40 transition-all hover:shadow-xl hover:shadow-wine/10"
+                style={{ background: 'linear-gradient(145deg, hsl(140 2% 18%), hsl(140 2% 14%))' }}>
                 <div className="grid md:grid-cols-2">
                   {featured.image && (
                     <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
                       <img src={featured.image} alt={featured.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}
@@ -137,7 +171,7 @@ const Blog = () => {
                         {t.featured}
                       </span>
                       {featured.publishedAt && (
-                        <span className="text-xs text-muted-foreground">{formatDate(featured.publishedAt)}</span>
+                        <span className="text-xs text-muted-foreground">{formatDate(featured.publishedAt, locale)}</span>
                       )}
                     </div>
                     <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4 group-hover:text-wine transition-colors leading-tight">
@@ -156,17 +190,18 @@ const Blog = () => {
           </section>
         )}
 
-        {/* Grid — spacious 2-col cards */}
+        {/* Grid â spacious 2-col cards */}
         <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16">
           <div className="grid md:grid-cols-2 gap-8">
             {rest.map((post, i) => (
               <ScrollReveal key={post.slug} delay={i * 0.04}>
                 <Link to={post.slug}
-                  className="group block rounded-2xl border border-border overflow-hidden bg-gradient-card hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/5">
+                  className="group block rounded-2xl border border-white/10 overflow-hidden hover:border-wine/40 transition-all h-full hover:shadow-lg hover:shadow-wine/10"
+                  style={{ background: 'linear-gradient(145deg, hsl(140 2% 18%), hsl(140 2% 14%))' }}>
                   {post.image && (
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={post.image} alt={post.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}
@@ -176,7 +211,7 @@ const Blog = () => {
                       {post.publishedAt && (
                         <>
                           <span className="text-muted-foreground/30">·</span>
-                          <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt)}</span>
+                          <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt, locale)}</span>
                         </>
                       )}
                     </div>

@@ -32,6 +32,145 @@ const CityTemplate = ({ page, related }: Props) => {
   }));
   const canonical = page.canonical_url || `https://winerim.wine/${page.slug}`;
 
+  const cityName = b.city_name || "";
+
+  const templateI18n: Record<string, {
+    breadcrumbHome: string;
+    breadcrumbSolutions: string;
+    breadcrumbLabel: string;
+    wineInCity: (city: string) => string;
+    avgTicket: string;
+    commonProblems: string;
+    challengesIn: (city: string) => string;
+    challengesDesc: (city: string) => string;
+    winerimIn: (city: string) => string;
+    howWinerimHelps: (city: string) => string;
+    expectedResults: string;
+    benefits: string;
+    digitizeAdvantages: (city: string) => string;
+    faq: string;
+    ctaTitle: (city: string) => string;
+    ctaDesc: string;
+    ctaButton: string;
+  }> = {
+    es: {
+      breadcrumbHome: "Inicio",
+      breadcrumbSolutions: "Soluciones por ciudad",
+      breadcrumbLabel: "Soluciones",
+      wineInCity: (city: string) => `El vino en los restaurantes de ${city}`,
+      avgTicket: "Ticket medio estimado:",
+      commonProblems: "Problemas comunes",
+      challengesIn: (city: string) => `Retos en la gestión del vino en ${city}`,
+      challengesDesc: (city: string) => `Problemas habituales que encuentran los restaurantes de ${city} en la gestión de su carta de vinos.`,
+      winerimIn: (city: string) => `Winerim en ${city}`,
+      howWinerimHelps: (city: string) => `Cómo ayuda Winerim a los restaurantes de ${city}`,
+      expectedResults: "Resultados esperados",
+      benefits: "Beneficios",
+      digitizeAdvantages: (city: string) => `Ventajas de digitalizar tu carta en ${city}`,
+      faq: "Preguntas frecuentes",
+      ctaTitle: (city: string) => `¿Tienes un restaurante en ${city}?`,
+      ctaDesc: "Descubre cómo Winerim puede ayudarte a vender más vino y optimizar tu carta.",
+      ctaButton: "Solicitar demo",
+    },
+    en: {
+      breadcrumbHome: "Home",
+      breadcrumbSolutions: "Solutions by city",
+      breadcrumbLabel: "Solutions",
+      wineInCity: (city: string) => `Wine in ${city} restaurants`,
+      avgTicket: "Average check estimate:",
+      commonProblems: "Common challenges",
+      challengesIn: (city: string) => `Wine management challenges in ${city}`,
+      challengesDesc: (city: string) => `Common issues that restaurants in ${city} face when managing their wine list.`,
+      winerimIn: (city: string) => `Winerim in ${city}`,
+      howWinerimHelps: (city: string) => `How Winerim helps restaurants in ${city}`,
+      expectedResults: "Expected results",
+      benefits: "Benefits",
+      digitizeAdvantages: (city: string) => `Advantages of digitizing your wine list in ${city}`,
+      faq: "Frequently asked questions",
+      ctaTitle: (city: string) => `Have a restaurant in ${city}?`,
+      ctaDesc: "Discover how Winerim can help you sell more wine and optimize your list.",
+      ctaButton: "Request demo",
+    },
+    it: {
+      breadcrumbHome: "Home",
+      breadcrumbSolutions: "Soluzioni per città",
+      breadcrumbLabel: "Soluzioni",
+      wineInCity: (city: string) => `Il vino nei ristoranti di ${city}`,
+      avgTicket: "Scontrino medio stimato:",
+      commonProblems: "Sfide comuni",
+      challengesIn: (city: string) => `Sfide nella gestione del vino a ${city}`,
+      challengesDesc: (city: string) => `Problemi comuni che i ristoranti di ${city} affrontano nella gestione della loro carta dei vini.`,
+      winerimIn: (city: string) => `Winerim a ${city}`,
+      howWinerimHelps: (city: string) => `Come Winerim aiuta i ristoranti di ${city}`,
+      expectedResults: "Risultati attesi",
+      benefits: "Vantaggi",
+      digitizeAdvantages: (city: string) => `Vantaggi della digitalizzazione della tua carta a ${city}`,
+      faq: "Domande frequenti",
+      ctaTitle: (city: string) => `Hai un ristorante a ${city}?`,
+      ctaDesc: "Scopri come Winerim può aiutarti a vendere più vino e ottimizzare la tua carta.",
+      ctaButton: "Richiedi demo",
+    },
+    fr: {
+      breadcrumbHome: "Accueil",
+      breadcrumbSolutions: "Solutions par ville",
+      breadcrumbLabel: "Solutions",
+      wineInCity: (city: string) => `Le vin dans les restaurants de ${city}`,
+      avgTicket: "Panier moyen estimé :",
+      commonProblems: "Défis courants",
+      challengesIn: (city: string) => `Défis de gestion des vins à ${city}`,
+      challengesDesc: (city: string) => `Problèmes courants rencontrés par les restaurants de ${city} dans la gestion de leur carte des vins.`,
+      winerimIn: (city: string) => `Winerim à ${city}`,
+      howWinerimHelps: (city: string) => `Comment Winerim aide les restaurants de ${city}`,
+      expectedResults: "Résultats attendus",
+      benefits: "Avantages",
+      digitizeAdvantages: (city: string) => `Avantages de la numérisation de votre carte à ${city}`,
+      faq: "Questions fréquemment posées",
+      ctaTitle: (city: string) => `Avez-vous un restaurant à ${city} ?`,
+      ctaDesc: "Découvrez comment Winerim peut vous aider à vendre plus de vins et à optimiser votre carte.",
+      ctaButton: "Demander une démo",
+    },
+    de: {
+      breadcrumbHome: "Startseite",
+      breadcrumbSolutions: "Loesungen nach Stadt",
+      breadcrumbLabel: "Loesungen",
+      wineInCity: (city: string) => `Wein in den Restaurants von ${city}`,
+      avgTicket: "Durchschnittlicher Rechnungsbetrag:",
+      commonProblems: "Haeufige Herausforderungen",
+      challengesIn: (city: string) => `Herausforderungen bei der Weinkartenverwaltung in ${city}`,
+      challengesDesc: (city: string) => `Haeufige Probleme, denen sich Restaurants in ${city} bei der Verwaltung ihrer Weinkarte gegenuebersehen.`,
+      winerimIn: (city: string) => `Winerim in ${city}`,
+      howWinerimHelps: (city: string) => `Wie Winerim Restaurants in ${city} unterstuetzt`,
+      expectedResults: "Erwartete Ergebnisse",
+      benefits: "Vorteile",
+      digitizeAdvantages: (city: string) => `Vorteile der Digitalisierung Ihrer Weinkarte in ${city}`,
+      faq: "Haeufig gestellte Fragen",
+      ctaTitle: (city: string) => `Haben Sie ein Restaurant in ${city}?`,
+      ctaDesc: "Erfahren Sie, wie Winerim Ihnen helfen kann, mehr Wein zu verkaufen und Ihre Weinkarte zu optimieren.",
+      ctaButton: "Demo anfordern",
+    },
+    pt: {
+      breadcrumbHome: "Inicio",
+      breadcrumbSolutions: "Solucoes por cidade",
+      breadcrumbLabel: "Solucoes",
+      wineInCity: (city: string) => `O vinho nos restaurantes de ${city}`,
+      avgTicket: "Ticket medio estimado:",
+      commonProblems: "Desafios comuns",
+      challengesIn: (city: string) => `Desafios na gestao do vinho em ${city}`,
+      challengesDesc: (city: string) => `Problemas habituais que os restaurantes de ${city} enfrentam na gestao da sua carta de vinhos.`,
+      winerimIn: (city: string) => `Winerim em ${city}`,
+      howWinerimHelps: (city: string) => `Como a Winerim ajuda os restaurantes de ${city}`,
+      expectedResults: "Resultados esperados",
+      benefits: "Beneficios",
+      digitizeAdvantages: (city: string) => `Vantagens de digitalizar a sua carta em ${city}`,
+      faq: "Perguntas frequentes",
+      ctaTitle: (city: string) => `Tem um restaurante em ${city}?`,
+      ctaDesc: "Descubra como a Winerim pode o ajudar a vender mais vinho e otimizar a sua carta.",
+      ctaButton: "Solicitar demo",
+    },
+  };
+
+  const t = templateI18n[page.lang] || templateI18n.es;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead title={page.meta_title} description={page.meta_description} url={canonical} type="article" image={page.og_image || undefined} noindex={page.isThinContent} />
@@ -43,8 +182,8 @@ const CityTemplate = ({ page, related }: Props) => {
         url={`https://winerim.wine/${page.slug}`}
         faqs={page.faqs}
         breadcrumbs={[
-          { name: "Inicio", url: "https://winerim.wine/" },
-          { name: "Soluciones por ciudad", url: "https://winerim.wine/soluciones" },
+          { name: t.breadcrumbHome, url: "https://winerim.wine/" },
+          { name: t.breadcrumbSolutions, url: "https://winerim.wine/soluciones" },
           { name: b.city_name || page.hero_title, url: `https://winerim.wine/${page.slug}` },
         ]}
       />
@@ -56,7 +195,7 @@ const CityTemplate = ({ page, related }: Props) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Soluciones", href: "/guias-y-recursos" },
+            { label: t.breadcrumbLabel, href: "/guias-y-recursos" },
             { label: b.city_name || "Ciudad" },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
@@ -86,12 +225,12 @@ const CityTemplate = ({ page, related }: Props) => {
       {b.intro && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-20">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">El vino en los restaurantes de {b.city_name}</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">{t.wineInCity(cityName)}</h2>
             <p className="text-muted-foreground leading-relaxed text-lg mb-6">{b.intro}</p>
             {b.ticket_medio && (
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-gradient-card text-sm">
                 <TrendingUp size={14} className="text-wine" />
-                <span>Ticket medio estimado: <strong className="text-foreground">{b.ticket_medio}</strong></span>
+                <span>{t.avgTicket} <strong className="text-foreground">{b.ticket_medio}</strong></span>
               </div>
             )}
           </ScrollReveal>
@@ -103,9 +242,9 @@ const CityTemplate = ({ page, related }: Props) => {
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Problemas comunes</span>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">Retos en la gestión del vino en {b.city_name}</h2>
-              <p className="text-muted-foreground max-w-2xl mb-12">Problemas habituales que encuentran los restaurantes de {b.city_name} en la gestión de su carta de vinos.</p>
+              <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">{t.commonProblems}</span>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{t.challengesIn(cityName)}</h2>
+              <p className="text-muted-foreground max-w-2xl mb-12">{t.challengesDesc(cityName)}</p>
             </ScrollReveal>
             <div className="grid md:grid-cols-2 gap-4">
               {problems.map((p, i) => (
@@ -125,8 +264,8 @@ const CityTemplate = ({ page, related }: Props) => {
       {features.length > 0 && (
         <section className="max-w-5xl mx-auto px-6 md:px-12 py-20">
           <ScrollReveal>
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Winerim en {b.city_name}</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Cómo ayuda Winerim a los restaurantes de {b.city_name}</h2>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">{t.winerimIn(cityName)}</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">{t.howWinerimHelps(cityName)}</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((f, i) => (
@@ -147,7 +286,7 @@ const CityTemplate = ({ page, related }: Props) => {
         <section className="bg-gradient-card border-y border-border py-20">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12 text-center">Resultados esperados</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12 text-center">{t.expectedResults}</h2>
             </ScrollReveal>
             <div className="grid md:grid-cols-3 gap-6">
               {stats.map((s, i) => (
@@ -167,8 +306,8 @@ const CityTemplate = ({ page, related }: Props) => {
       {benefits.length > 0 && (
         <section className="max-w-5xl mx-auto px-6 md:px-12 py-20">
           <ScrollReveal>
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">Beneficios</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Ventajas de digitalizar tu carta en {b.city_name}</h2>
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent block mb-3">{t.benefits}</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">{t.digitizeAdvantages(cityName)}</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-4">
             {benefits.map((ben, i) => (
@@ -187,7 +326,7 @@ const CityTemplate = ({ page, related }: Props) => {
       {page.faqs.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 md:px-12 py-20">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">Preguntas frecuentes</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-12">{t.faq}</h2>
           </ScrollReveal>
           <div className="space-y-6">
             {page.faqs.map((faq, i) => (
@@ -217,13 +356,13 @@ const CityTemplate = ({ page, related }: Props) => {
           <div className="text-center bg-gradient-card rounded-2xl border border-border p-12 md:p-16">
             <Sparkles size={32} className="text-wine mx-auto mb-6" />
             <h2 className="font-heading text-2xl md:text-4xl font-bold mb-4">
-              ¿Tienes un restaurante en {b.city_name}?
+              {t.ctaTitle(cityName)}
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-              Descubre cómo Winerim puede ayudarte a vender más vino y optimizar tu carta.
+              {t.ctaDesc}
             </p>
             <Link to="/demo" className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-              Solicitar demo <ArrowRight size={16} />
+              {t.ctaButton} <ArrowRight size={16} />
             </Link>
           </div>
         </ScrollReveal>

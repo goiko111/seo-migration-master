@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker v3 — winerim.wine hybrid router
+ * Cloudflare Worker v3.2 — winerim.wine hybrid router
  *
  * Logic:
  *   1. Technical routes (health, robots, sitemap)
@@ -24,6 +24,8 @@ const BOT_REGEX = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|fac
 const LEGACY_PREFIXES = [
   '/wp-content/', '/wp-admin/', '/wp-includes/', '/wp-login',
   '/author/', '/category/', '/tag/', '/feed',
+  '/clientes/', '/estadisticas/', '/programa-afiliados',
+  '/contacto-analizar-carta', '/privacy-policy', '/page/',
 ];
 const LEGACY_EXACT = new Set([
   '/un-comensal-cada-vez-mas-exigente-el-vertigo-con-las-extensas-cartas-de-vinos',
@@ -54,6 +56,8 @@ const SEO_ALIASES = {
   '/wine-pricing-tool': '/en/wine-pricing-tool',
   '/wine-list-benchmark': '/en/wine-list-benchmark',
   '/en/digital-wine-list': '/en/wine-list-management-software',
+  // Spanish aliases for English-slug tools
+  '/herramientas/puntuacion-carta-vinos': '/herramientas/wine-list-score',
 };
 
 // ─── NOINDEX routes (served but with noindex header) ───
@@ -139,6 +143,7 @@ const SEO_EXACT = new Set([
   '/herramientas/calculadora-ticket-medio-vino',
   '/herramientas/auditor-carta-multilocal',
   '/herramientas/calculadora-compra-inteligente',
+  '/simulador-carta',
   // Problemas
   '/problemas/carta-de-vinos-no-vende',
   // Biblioteca sub-hubs
@@ -242,6 +247,8 @@ const SEO_EXACT = new Set([
   '/en/wine-list-examples',
   '/en/problems/wine-list-not-selling',
   '/en/decision-center',
+  '/en/distributor',
+  '/en/wine-list-simulator',
   // EN guides
   '/en/guides/how-to-structure-wine-list-restaurant-group',
   '/en/guides/how-to-set-profitable-wine-by-glass-strategy',
@@ -277,6 +284,8 @@ const SEO_EXACT = new Set([
   '/it/software-carta-vini',
   '/it/cose-winerim',
   '/it/chi-siamo',
+  '/it/lavora-con-noi',
+  '/it/distributore',
   '/it/prodotto/intelligenza-dinamica',
   '/it/prodotto/winerim-core',
   '/it/prodotto/winerim-supply',
@@ -315,6 +324,7 @@ const SEO_EXACT = new Set([
   '/it/esempi-carta-vini',
   '/it/problemi/carta-vini-non-vende',
   '/it/decision-center',
+  '/it/simulatore-carta',
   // IT guides
   '/it/guide/come-strutturare-carta-vini-gruppo-ristorazione',
   '/it/guide/come-fissare-strategia-redditizia-vino-al-calice',
@@ -350,6 +360,8 @@ const SEO_EXACT = new Set([
   '/fr/logiciel-carte-des-vins',
   '/fr/quest-ce-que-winerim',
   '/fr/a-propos',
+  '/fr/emploi',
+  '/fr/distributeur',
   '/fr/produit/intelligence-dynamique',
   '/fr/produit/winerim-core',
   '/fr/produit/winerim-supply',
@@ -388,6 +400,7 @@ const SEO_EXACT = new Set([
   '/fr/exemples-carte-vins',
   '/fr/problemes/carte-des-vins-ne-vend-pas',
   '/fr/decision-center',
+  '/fr/simulateur-carte',
   // FR guides
   '/fr/guides/comment-structurer-carte-vins-groupe-restauration',
   '/fr/guides/comment-fixer-strategie-rentable-vin-au-verre',
@@ -408,6 +421,158 @@ const SEO_EXACT = new Set([
   // IT/FR software duplicates already covered above
   '/it/software-carta-vini',
   '/fr/logiciel-carte-des-vins',
+  // ─── DE ───
+  '/de',
+  '/de/blog',
+  '/de/demo',
+  '/de/kontakt',
+  '/de/preise',
+  '/de/funktionen',
+  '/de/kunden',
+  '/de/integrationen',
+  '/de/erfolgsgeschichten',
+  '/de/tools',
+  '/de/ratgeber',
+  '/de/ressourcen',
+  '/de/loesungen',
+  '/de/herausforderungen',
+  '/de/sommelier-corner',
+  '/de/partner',
+  '/de/weinkarten-software',
+  '/de/was-ist-winerim',
+  '/de/ueber-uns',
+  '/de/karriere',
+  '/de/haendler',
+  '/de/produkt/dynamische-intelligenz',
+  '/de/produkt/winerim-core',
+  '/de/produkt/winerim-supply',
+  '/de/datenschutz',
+  '/de/agb',
+  '/de/benchmarks-playbooks',
+  '/de/vergleiche',
+  '/de/weinkarten-analyse',
+  '/de/wein-margen-rechner',
+  '/de/implementierung',
+  '/de/loesungen/restaurant-gruppen',
+  '/de/loesungen/fine-dining',
+  '/de/loesungen/weinbars',
+  '/de/loesungen/hotels',
+  '/de/loesungen/ohne-sommelier',
+  '/de/loesungen/grosse-weinkarte',
+  '/de/loesungen/wachsende-weinkarte',
+  '/de/loesungen/einkaufsintelligenz',
+  '/de/loesungen/durchschnittsbon-erhoehen',
+  '/de/tools/glaspreis-rechner',
+  '/de/tools/totbestand-rechner',
+  '/de/tools/durchschnittsbon-rechner',
+  '/de/tools/intelligenter-einkauf-rechner',
+  '/de/tools/glasausschank-diagnose',
+  '/de/tools/wine-list-score',
+  '/de/tools/multi-standort-auditor',
+  '/de/weinkarten-analyzer',
+  '/de/wein-roi-rechner',
+  '/de/weinbegleitung-generator',
+  '/de/wein-pricing-tool',
+  '/de/weinkarten-benchmark',
+  '/de/wie-man-mehr-wein-im-restaurant-verkauft',
+  '/de/weinpreise-im-restaurant',
+  '/de/wein-im-glas-restaurant',
+  '/de/kuenstliche-intelligenz-restaurants',
+  '/de/weinkarten-beispiele',
+  '/de/wie-viele-weine-auf-der-restaurantkarte',
+  '/de/probleme/weinkarte-verkauft-nicht',
+  '/de/decision-center',
+  '/de/weinkarten-simulator',
+  '/de/ratgeber/weinkarte-restaurantgruppe-strukturieren',
+  '/de/ratgeber/rentable-glasausschank-strategie',
+  '/de/ratgeber/totbestand-weine-erkennen',
+  '/de/ratgeber/service-team-wein-verkaufen-trainieren',
+  '/de/ratgeber/daten-nutzen-weinkauf-entscheiden',
+  '/de/ratgeber/weinkarte-bestand-verkauf-marge-verbinden',
+  '/de/ratgeber/weinkarten-restaurantgruppen-verwalten',
+  '/de/ratgeber/glasausschank-ohne-margenverlust',
+  '/de/ratgeber/winerim-ohne-sommelier-nutzen',
+  '/de/ratgeber/weinauswahl-nach-durchschnittsbon',
+  '/de/ratgeber/wein-kannibalisierung-erkennen',
+  '/de/ratgeber/weinkarte-monatlich-ueberpruefen',
+  '/de/ratgeber/weinrotation-im-restaurant-verbessern',
+  '/de/ratgeber/speisen-wein-kombinationsstrategie-restaurant',
+  // ─── PT ───
+  '/pt',
+  '/pt/blog',
+  '/pt/demo',
+  '/pt/contacto',
+  '/pt/precos',
+  '/pt/funcionalidades',
+  '/pt/clientes',
+  '/pt/integracoes',
+  '/pt/casos-de-sucesso',
+  '/pt/ferramentas',
+  '/pt/guias',
+  '/pt/recursos',
+  '/pt/solucoes',
+  '/pt/desafios',
+  '/pt/sommelier-corner',
+  '/pt/afiliados',
+  '/pt/software-carta-vinhos',
+  '/pt/o-que-e-winerim',
+  '/pt/sobre-nos',
+  '/pt/carreiras',
+  '/pt/distribuidor',
+  '/pt/produto/inteligencia-dinamica',
+  '/pt/produto/winerim-core',
+  '/pt/produto/winerim-supply',
+  '/pt/privacidade',
+  '/pt/termos',
+  '/pt/benchmarks-playbooks',
+  '/pt/comparativos',
+  '/pt/analise-carta',
+  '/pt/calculadora-margem-vinho',
+  '/pt/implementacao',
+  '/pt/solucoes/grupos-restauracao',
+  '/pt/solucoes/restaurantes-gastronomicos',
+  '/pt/solucoes/wine-bars',
+  '/pt/solucoes/hoteis',
+  '/pt/solucoes/sem-sommelier',
+  '/pt/solucoes/carta-vinhos-extensa',
+  '/pt/solucoes/carta-vinhos-crescimento',
+  '/pt/solucoes/inteligencia-compras',
+  '/pt/solucoes/aumentar-ticket-medio',
+  '/pt/ferramentas/calculadora-preco-vinho-por-copo',
+  '/pt/ferramentas/calculadora-stock-morto',
+  '/pt/ferramentas/calculadora-ticket-medio',
+  '/pt/ferramentas/calculadora-compra-inteligente',
+  '/pt/ferramentas/diagnostico-vinho-por-copo',
+  '/pt/ferramentas/wine-list-score',
+  '/pt/ferramentas/auditor-carta-multilocal',
+  '/pt/analisador-carta-vinhos',
+  '/pt/calculadora-roi-vinhos',
+  '/pt/gerador-harmonizacoes-ia',
+  '/pt/ferramenta-pricing-vinhos',
+  '/pt/benchmark-carta-vinhos',
+  '/pt/como-vender-mais-vinho-restaurante',
+  '/pt/preco-vinho-restaurante',
+  '/pt/vinho-por-copo-restaurante',
+  '/pt/inteligencia-artificial-restaurantes',
+  '/pt/exemplos-carta-vinhos',
+  '/pt/quantos-vinhos-carta-restaurante',
+  '/pt/problemas/carta-vinhos-nao-vende',
+  '/pt/decision-center',
+  '/pt/simulador-carta',
+  '/pt/guias/como-estruturar-carta-vinhos-grupo-restauracao',
+  '/pt/guias/estrategia-rentavel-vinho-por-copo',
+  '/pt/guias/como-detectar-vinhos-mortos',
+  '/pt/guias/como-formar-equipa-sala-vender-vinho',
+  '/pt/guias/como-usar-dados-para-decidir-que-vinhos-comprar',
+  '/pt/guias/como-conectar-carta-stock-vendas-margem',
+  '/pt/guias/como-gerir-carta-vinhos-grupos-restauracao',
+  '/pt/guias/como-implementar-vinho-por-copo-sem-perder-margem',
+  '/pt/guias/como-usar-winerim-sem-sommelier',
+  '/pt/guias/como-escolher-selecao-vinhos-por-ticket-medio',
+  '/pt/guias/como-detectar-canibalizacao-vinhos',
+  '/pt/guias/como-rever-carta-vinhos-todos-meses',
+  '/pt/guias/como-melhorar-rotacao-vinhos-restaurante',
+  '/pt/guias/estrategia-harmonizacao-vinhos-restaurante',
 ]);
 
 // ─── SPA EXACT routes (utility, work on refresh, most are noindex) ───
@@ -466,13 +631,37 @@ const SPA_PREFIXES = [
   '/it/guide/',
   '/fr/guides/',
   '/guias/',
+  // DE
+  '/de/vergleiche/',
+  '/de/ressourcen/',
+  '/de/article/',
+  '/de/decision-center/',
+  '/de/benchmarks-playbooks/',
+  '/de/ratgeber/',
+  // PT
+  '/pt/comparativos/',
+  '/pt/recursos/',
+  '/pt/article/',
+  '/pt/decision-center/',
+  '/pt/benchmarks-playbooks/',
+  '/pt/guias/',
+];
+
+// Localized SPA fallback trees that must reach the React router on origin
+const LOCALIZED_SPA_FALLBACK_PREFIXES = [
+  '/de/',
+  '/pt/',
 ];
 
 // ─── SEO WILDCARD prefixes (programmatic SEO pages) ───
 const SEO_WILDCARD_PREFIXES = [
-  '/software-carta-de-vinos-',
-  '/software-vino-',
-  '/wine-list-software-',
+  '/software-carta-de-vinos-',   // ES city pages
+  '/software-vino-',              // ES cuisine city pages
+  '/wine-list-software-',         // EN city pages
+  '/software-carta-dei-vini-',    // IT city pages
+  '/logiciel-carte-des-vins-',    // FR city pages
+  '/weinkarten-software-',        // DE city pages
+  '/software-carta-de-vinhos-',   // PT city pages
 ];
 
 // ─── PRIVATE routes (proxy but noindex) ───
@@ -501,6 +690,8 @@ function isKnownRoute(path) {
   if (NOINDEX_ROUTES.has(path)) return true;
   // SPA prefix
   if (SPA_PREFIXES.some(p => path.startsWith(p))) return true;
+  // Localized SPA fallback trees
+  if (LOCALIZED_SPA_FALLBACK_PREFIXES.some(p => path.startsWith(p))) return true;
   // SEO wildcard
   if (SEO_WILDCARD_PREFIXES.some(p => path.startsWith(p))) return true;
   return false;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");

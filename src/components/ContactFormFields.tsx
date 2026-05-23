@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PhoneInput from "@/components/PhoneInput";
 
 /* ── i18n for form options ── */
 const formI18n: Record<string, {
@@ -262,6 +263,9 @@ export const businessTypeOptions = formI18n.es.businessTypes;
 export const numLocationsOptions = formI18n.es.locations;
 export const mainChallengeOptions = formI18n.es.challenges;
 
+/** Resolve the form i18n bundle for a given language (falls back to ES). */
+export const getFormI18n = (lang: string) => formI18n[lang] || formI18n.es;
+
 export type FormVariant = "demo" | "contact" | "analysis" | "resource";
 
 interface ContactFormFieldsProps {
@@ -316,7 +320,7 @@ const ContactFormFields = ({
   const isResource = variant === "resource";
   const isContact = variant === "contact";
 
-  const phoneRequired = isDemo || isContact || isResource;
+  const phoneRequired = true; // All forms require phone
   const positionRequired = isDemo || isContact || isResource;
   const showPosition = true;
   const showPhone = true;
@@ -395,14 +399,13 @@ const ContactFormFields = ({
             <Label htmlFor="phone" className="text-sm font-medium">
               {l.phone} {phoneRequired && <span className="text-destructive">*</span>}
             </Label>
-            <div className="relative mt-1.5">
-              <Phone size={16} className={iconWrap} />
-              {native ? (
-                <Input id="phone" name="phone" type="tel" placeholder="+34 600 000 000" required={phoneRequired} maxLength={20} className={cls} />
-              ) : (
-                <Input id="phone" type="tel" placeholder="+34 600 000 000" {...register("phone")} className={cls} />
-              )}
-            </div>
+            <PhoneInput
+              id="phone"
+              name="phone"
+              required={phoneRequired}
+              native={native}
+              register={!native ? register : undefined}
+            />
             {errors?.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
           </div>
         )}

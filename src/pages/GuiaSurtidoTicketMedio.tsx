@@ -441,5 +441,267 @@ const fr: GuidePageData = {
   ctaFinalDescription: "Analyse d'assortiment, échelle de prix, détection de trous et redondances. Tout basé sur les données réelles de votre restaurant.",
 };
 
-const GuiaSurtidoTicketMedio = () => <GuideTemplate data={{ es, en, it, fr }} />;
+const de: GuidePageData = {
+  slug: "de/ratgeber/weinsortiment-nach-durchschnittsbon-waehlen",
+  metaTitle: "Weinsortiment nach Durchschnittsbon und Restauranttyp zusammenstellen | Winerim",
+  metaDescription:
+    "Leitfaden zur Auswahl des idealen Weinsortiments anhand des Durchschnittsbons, des Gästeprofils und des Küchentyps. Praktisches Framework mit Beispielen.",
+  heroTitle: "Wie Sie Ihr Weinsortiment nach Durchschnittsbon und Restauranttyp zusammenstellen",
+  heroSubtitle:
+    "Es gibt keine perfekte Weinkarte. Es gibt die perfekte Karte für Ihr Restaurant. Das Sortiment muss widerspiegeln, wer bei Ihnen isst, wie viel er ausgibt und was er erwartet. Dieser Leitfaden liefert das Framework, um es richtig zu treffen.",
+  heroBadge: "Strategischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  tableOfContents: [
+    "Warum das Sortiment vom Durchschnittsbon abhängt",
+    "4 Restaurantprofile und ihr ideales Sortiment",
+    "Framework: vom Durchschnittsbon zur Preistreppe",
+    "Wie viele Positionen pro Preisstufe",
+    "Häufige Fehler bei der Sortimentszusammenstellung",
+    "Checkliste zur Sortiments-Validierung",
+  ],
+  sections: [
+    {
+      heading: "Warum das Sortiment vom Durchschnittsbon abhängt",
+      content:
+        "Der Durchschnittsbon ist der verlässlichste Indikator für die Kaufkraft und die Erwartungen Ihrer Gäste. Ein Gast, der 25 € pro Person ausgibt, erwartet nicht dasselbe wie einer, der 80 € ausgibt.\n\nLiegt Ihr Durchschnittsbon bei 30 € und Sie führen Weine zu 60 € auf der Karte, werden sich diese Weine nicht verkaufen. Nicht, weil sie schlecht sind, sondern weil sie doppelt so viel kosten wie das gesamte Menü des Gastes.\n\nFaustregel: Ihr meistverkaufter Wein sollte zwischen 30 % und 50 % Ihres Durchschnittsbons pro Person kosten. Das ist die Preis-Komfortzone, in der sich die meisten Gäste wohlfühlen.",
+      tips: [
+        "Durchschnittsbon 25-35 €/Person → meistverkaufter Wein zwischen 8-16 € (Glas 4-6 €).",
+        "Durchschnittsbon 40-60 €/Person → meistverkaufter Wein zwischen 18-28 € (Glas 6-10 €).",
+        "Durchschnittsbon 70 €+/Person → meistverkaufter Wein zwischen 25-40 € (Glas 8-14 €).",
+        "Liegt Ihr meistverkaufter Wein nicht in diesem Bereich, passt Ihr Sortiment nicht zu Ihrem Publikum.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "4 Restaurantprofile und ihr ideales Sortiment",
+      content:
+        "Nicht jedes Restaurant mit gleichem Durchschnittsbon braucht dasselbe Sortiment. Küchentyp, Standort und Gästeprofil zählen ebenso.",
+      tips: [
+        "Casual Dining / Gastrobar (Bon 20-35 €): 15-25 Positionen, 60 % Rotwein, Fokus auf Glasweine, max. 2 Preisstufen, nichts über 35 €/Flasche. Der Gast sucht Einfachheit.",
+        "Gehobenes Autorenrestaurant (Bon 40-65 €): 30-50 Positionen, Weiß-/Rotwein-Balance, 3 Preisstufen, Premium-Glaswein als Hebel, Kleinerzeuger zur Differenzierung.",
+        "Fine Dining (Bon 70 €+): 60-120+ Positionen, Tiefe nach Region/Stil, Karte als Erlebnis, mindestens 4 Preisstufen, empfohlene Speisenbegleitungen, Ikonen als Ankerweine.",
+        "Hotel / Resort (variabler Bon): doppelte Karte — vereinfacht fürs Casual-Restaurant und vertieft fürs Gourmet-Lokal. Minibar und Room Service brauchen eigene Kuratierung.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Framework: vom Durchschnittsbon zur Preistreppe",
+      content:
+        "Die Preistreppe ist die Verteilung Ihrer Weine nach Verkaufspreis-Stufen. Ein gut gestaltetes Sortiment hat eine klare Treppe, die den Gast von der zugänglichen bis zur Premium-Option führt.\n\nSo bauen Sie sie auf:\n1. Berechnen Sie Ihren Sweet Spot (30-50 % des Durchschnittsbons).\n2. Definieren Sie 3-4 Preisstufen:\n   • Einstieg: 60-70 % des Sweet Spots → für preissensible Gäste.\n   • Sweet Spot: der Bereich, in dem Sie 50 % des Umsatzes erwarten.\n   • Premium: 150-200 % des Sweet Spots → für besondere Anlässe.\n   • Aspirational (optional): 300 %+ des Sweet Spots → 2-3 Ikonen.\n3. Verteilen Sie die Positionen: höchste Konzentration im Sweet Spot, weniger an den Rändern.\n\nBeispiel für einen Durchschnittsbon von 45 €:\n• Einstieg: 14-18 € (5 Positionen)\n• Sweet Spot: 20-28 € (12 Positionen)\n• Premium: 32-45 € (6 Positionen)\n• Aspirational: 55-90 € (3 Positionen)\n• Gesamt: 26 gut verteilte Positionen.",
+      tips: [
+        "50-60 % Ihrer Positionen sollten in der Sweet-Spot-Stufe liegen.",
+        "Die Einstiegsstufe gibt es, damit der Gast sich nicht gezwungen fühlt. Streichen Sie sie nicht.",
+        "Aspirationale Positionen müssen sich nicht oft verkaufen. Ihre Aufgabe ist es, den wahrgenommenen Wert der Karte zu verankern.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Wie viele Positionen pro Preisstufe",
+      content:
+        "Mehr Positionen bedeuten keine bessere Karte. Sie bedeuten mehr Verwaltungsaufwand, mehr gebundenes Kapital und schwerere Entscheidungen für den Gast.\n\nFaustregel nach Lokaltyp:\n• Casual / Gastrobar: 15-25 Positionen gesamt\n• Mittelklasse-Restaurant: 25-45 Positionen\n• Gourmet-Restaurant: 40-80 Positionen\n• Fine Dining mit Weinkeller: 80-150+ Positionen\n\nInnerhalb jeder Preisstufe:\n• Einstiegsstufe: 3-5 Positionen (wenige, dafür gute)\n• Sweet Spot: 8-15 Positionen (höchste Konzentration)\n• Premium: 4-8 Positionen\n• Aspirational: 2-4 Positionen\n\nSchlüsselkriterium: Jede Position braucht einen Grund, auf der Karte zu stehen. Können Sie in einem Satz nicht erklären, warum dieser Wein in Ihrer Karte steht, gehört er wahrscheinlich nicht dorthin.",
+      tips: [
+        "Haben Sie mehr als 5 Glasweine, verwalten Sie zu viel Schwund.",
+        "Jede zusätzliche Position verwässert die Aufmerksamkeit für die übrigen. Mehr ist nicht besser.",
+        "Prüfen Sie: Hat eine Stufe über 40 % der Positionen ohne Verkauf in 30 Tagen, sind es zu viele.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Häufige Fehler bei der Sortimentszusammenstellung",
+      content:
+        "Dies sind die häufigsten Fehler, die wir beim Aufbau eines Sortiments sehen — unabhängig vom Restauranttyp.",
+      tips: [
+        "Ego-Sortiment: Weine wählen, die dem Inhaber oder dem Sommelier gefallen, statt Weine, die zum Gast passen. Ihre Karte ist keine Privatsammlung.",
+        "Preislücke: nichts zwischen 18 € und 35 €, obwohl Ihr Sweet Spot genau dort liegt. Der Gast greift zum Günstigsten oder lässt Wein weg.",
+        "Redundanz: 4 Rheingauer Riesling Kabinett in derselben Preisstufe. Sie konkurrieren nicht mit dem Wettbewerb, sondern miteinander.",
+        "Fehlender Glaswein: ein Restaurant mit 30 € Durchschnittsbon, das nur Flaschen anbietet. Der Gast möchte sich nicht zu 25 € Wein verpflichten.",
+        "Statische Karte: dasselbe Sortiment über 12 Monate. Keine Saisonalität, keine Neuheiten, kein Grund für den Gast zurückzukommen und zu entdecken.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Checkliste zur Sortiments-Validierung",
+      content:
+        "Bevor Sie Ihre Karte finalisieren, prüfen Sie diese 8 Punkte, um die Balance zu validieren.",
+      tips: [
+        "✓ Liegt Ihr meistverkaufter Wein im Sweet Spot (30-50 % des Durchschnittsbons)?",
+        "✓ Gibt es mindestens 2 Glasweinoptionen in der Einstiegsstufe?",
+        "✓ Hat jede Preisstufe genügend Optionen ohne Redundanzen?",
+        "✓ Liegen weniger als 20 % der Positionen seit mehr als 60 Tagen ohne Verkauf?",
+        "✓ Gibt es mindestens 1 Weißwein und 1 Rotwein pro Preisstufe?",
+        "✓ Sind die aspirationalen Positionen für Ihr Publikum wiedererkennbar?",
+        "✓ Können Sie in einem Satz erklären, warum jeder Wein auf der Karte steht?",
+        "✓ Ist die Gesamtzahl der Positionen für Ihr Team und Ihr Lager handhabbar?",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "Was tun, wenn mein Durchschnittsbon zwischen Mittag und Abend stark schwankt?",
+      a: "Erwägen Sie eine leicht abweichende Karte oder zumindest unterschiedliche Glasweinauswahl. Ist der Abendbon 40 % höher, verkaufen sich Premium-Weine abends deutlich besser.",
+    },
+    {
+      q: "Soll ich Weine aufnehmen, die ich für gut halte, die sich aber nicht verkaufen?",
+      a: "Ein Wein, der sich nicht verkauft, ist für Ihre Karte nicht 'gut', auch wenn er objektiv hervorragend ist. Geben Sie ihm 3 Monate mit aktiver Empfehlung. Funktioniert er dann nicht, ersetzen Sie ihn.",
+    },
+    {
+      q: "Woran erkenne ich, ob ich zu viele Positionen habe?",
+      a: "Haben sich mehr als 25 % Ihrer Karte in 30 Tagen nicht verkauft, sind es zu viele. Straffen und fokussieren.",
+    },
+    {
+      q: "Hilft Winerim mir beim Festlegen des Sortiments?",
+      a: "Ja. Winerim analysiert Durchschnittsbon, Gästeprofil und historische Performance, um die ideale Kartenzusammenstellung vorzuschlagen.",
+    },
+  ],
+  relatedTools: [
+    { label: "Weinkarten-Analyse", url: "/de/weinkarten-analyse" },
+    { label: "Margen-Rechner", url: "/de/wein-margen-rechner" },
+  ],
+  relatedGuides: [
+    { label: "Wie man eine profitable Weinkarte gestaltet", url: "/de/blog/profitable-weinkarte-gestalten" },
+    { label: "Wein-Kannibalisierung erkennen", url: "/de/ratgeber/wein-kannibalisierung-auf-der-karte-erkennen" },
+  ],
+  ctaPrimaryText: "Meine Karte kostenlos analysieren",
+  ctaPrimaryUrl: "/de/weinkarten-analyse",
+  ctaSecondaryText: "Demo anfordern",
+  ctaSecondaryUrl: "/de/demo",
+  ctaFinalTitle: "Winerim sagt Ihnen genau, welche Weine Ihre Karte braucht",
+  ctaFinalDescription:
+    "Sortimentsanalyse, Preistreppe, Erkennen von Lücken und Redundanzen — alles basierend auf echten Daten Ihres Restaurants.",
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-escolher-sortido-vinhos-bilhete-medio",
+  metaTitle: "Como Escolher o Sortido de Vinhos em Função do Bilhete Médio e Tipo de Restaurante | Winerim",
+  metaDescription:
+    "Guia para selecionar o sortido ideal de vinhos conforme o bilhete médio do seu restaurante, o perfil do cliente e o tipo de cozinha. Framework prático com exemplos.",
+  heroTitle: "Como escolher o sortido de vinhos em função do bilhete médio e do tipo de restaurante",
+  heroSubtitle:
+    "Não existe a carta de vinhos perfeita. Existe a carta perfeita para o seu restaurante. O sortido tem de refletir quem come na sua sala, quanto gasta e o que espera. Este guia dá-lhe o framework para acertar.",
+  heroBadge: "Guia estratégico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  tableOfContents: [
+    "Porque o sortido depende do bilhete médio",
+    "Os 4 perfis de restaurante e o sortido ideal de cada um",
+    "Framework: do bilhete médio à escada de preços",
+    "Quantas referências por escalão de preço",
+    "Erros frequentes na composição do sortido",
+    "Checklist de validação do sortido",
+  ],
+  sections: [
+    {
+      heading: "Porque o sortido depende do bilhete médio",
+      content:
+        "O bilhete médio é o indicador mais fiável do poder de compra e das expectativas dos seus clientes. Um cliente que gasta 25 € por pessoa não espera o mesmo que um que gasta 80 €.\n\nSe o seu bilhete médio é de 30 € e tem vinhos a 60 € na carta, esses vinhos não se vão vender. Não porque sejam maus, mas porque representam o dobro do que o cliente gasta em toda a refeição.\n\nRegra geral: o vinho mais vendido da sua carta deve custar entre 30 % e 50 % do bilhete médio por pessoa. É esse o 'sweet spot' de preço onde a maioria dos clientes se sente confortável.",
+      tips: [
+        "Bilhete médio 25-35 €/pessoa → vinho mais vendido entre 8-16 € (copo 4-6 €).",
+        "Bilhete médio 40-60 €/pessoa → vinho mais vendido entre 18-28 € (copo 6-10 €).",
+        "Bilhete médio 70 €+/pessoa → vinho mais vendido entre 25-40 € (copo 8-14 €).",
+        "Se o seu vinho mais vendido não estiver nesse intervalo, o sortido está desajustado ao seu público.",
+      ],
+      icon: "lightbulb",
+    },
+    {
+      heading: "Os 4 perfis de restaurante e o sortido ideal de cada um",
+      content:
+        "Nem todos os restaurantes com o mesmo bilhete médio precisam do mesmo sortido. O tipo de cozinha, a localização e o perfil de cliente também contam.",
+      tips: [
+        "Casual dining / tasca moderna (bilhete 20-35 €): 15-25 referências, 60 % tintos, foco a copo, no máximo 2 escalões de preço, nada acima de 35 €/garrafa. O cliente procura simplicidade.",
+        "Restaurante de cozinha de autor (bilhete 40-65 €): 30-50 referências, equilíbrio branco/tinto, 3 escalões de preço, copo premium como alavanca, vinhos de pequeno produtor como diferenciação.",
+        "Fine dining (bilhete 70 €+): 60-120+ referências, profundidade por região/estilo, carta como experiência, no mínimo 4 escalões de preço, harmonizações sugeridas, vinhos icónicos como âncoras aspiracionais.",
+        "Hotel / resort (bilhete variável): carta dupla — simplificada para o restaurante casual e aprofundada para o gastronómico. Minibar e room service precisam de seleção autónoma.",
+      ],
+      icon: "list",
+    },
+    {
+      heading: "Framework: do bilhete médio à escada de preços",
+      content:
+        "A escada de preços é a distribuição dos seus vinhos por escalões de PVP. Um sortido bem desenhado tem uma escada clara que guia o cliente da opção acessível até à premium.\n\nComo construí-la:\n1. Calcule o seu 'sweet spot' (30-50 % do bilhete médio).\n2. Defina 3-4 escalões de preço:\n   • Entrada: 60-70 % do sweet spot → para o cliente sensível ao preço.\n   • Sweet spot: o intervalo onde espera concentrar 50 % das vendas.\n   • Premium: 150-200 % do sweet spot → para ocasiões especiais.\n   • Aspiracional (opcional): 300 %+ do sweet spot → 2-3 referências icónicas.\n3. Distribua referências: mais concentração no sweet spot, menos nos extremos.\n\nExemplo para bilhete médio de 45 €:\n• Entrada: 14-18 € (5 referências)\n• Sweet spot: 20-28 € (12 referências)\n• Premium: 32-45 € (6 referências)\n• Aspiracional: 55-90 € (3 referências)\n• Total: 26 referências bem distribuídas.",
+      tips: [
+        "50-60 % das suas referências devem estar no escalão sweet spot.",
+        "O escalão de entrada existe para o cliente não se sentir forçado. Não o elimine.",
+        "As referências aspiracionais não precisam de vender muito. A sua função é ancorar o valor percebido da carta.",
+      ],
+      icon: "check",
+    },
+    {
+      heading: "Quantas referências por escalão de preço",
+      content:
+        "Mais referências não é igual a melhor carta. É igual a mais complexidade de gestão, mais stock imobilizado e mais decisões difíceis para o cliente.\n\nRegra de ouro por tipo de restaurante:\n• Casual / tasca moderna: 15-25 referências totais\n• Restaurante médio: 25-45 referências\n• Restaurante gastronómico: 40-80 referências\n• Fine dining com garrafeira: 80-150+ referências\n\nDentro de cada escalão de preço:\n• Escalão de entrada: 3-5 referências (poucas mas boas)\n• Sweet spot: 8-15 referências (maior concentração)\n• Premium: 4-8 referências\n• Aspiracional: 2-4 referências\n\nCritério-chave: cada referência tem de ter uma razão para estar ali. Se não consegue explicar numa frase porque é que aquele vinho está na carta, provavelmente sobra.",
+      tips: [
+        "Se tem mais de 5 referências a copo, está a gerir quebras a mais.",
+        "Cada referência que acrescenta dilui a atenção sobre as outras. Mais não é melhor.",
+        "Verifique: se algum escalão tem mais de 40 % de referências sem venda em 30 dias, tem referências a mais.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Erros frequentes na composição do sortido",
+      content:
+        "Estes são os erros mais comuns que vemos na composição do sortido, independentemente do tipo de restaurante.",
+      tips: [
+        "Sortido de ego: escolher vinhos que agradam ao dono ou ao escanção em vez de vinhos adequados ao cliente. A carta não é uma coleção pessoal.",
+        "Buraco de preço: não haver nada entre 18 € e 35 € quando o sweet spot está aí. O cliente vai para o mais barato ou não pede.",
+        "Redundância: 4 Douro tinto reserva no mesmo intervalo de preço. Não competem com a concorrência, competem entre si.",
+        "Falta de copo: um restaurante com bilhete médio de 30 € que só oferece garrafa. O cliente não quer comprometer-se com 25 € de vinho.",
+        "Carta estática: o mesmo sortido durante 12 meses. Sem sazonalidade, sem novidade, sem motivo para o cliente regressar e descobrir.",
+      ],
+      icon: "alert",
+    },
+    {
+      heading: "Checklist de validação do sortido",
+      content:
+        "Antes de fechar a carta, passe por este checklist de 8 pontos para validar que o sortido está equilibrado.",
+      tips: [
+        "✓ O seu vinho mais vendido está no sweet spot de preço (30-50 % do bilhete médio)?",
+        "✓ Tem pelo menos 2 opções a copo no escalão de entrada?",
+        "✓ Cada escalão de preço tem opções suficientes sem redundâncias?",
+        "✓ Menos de 20 % das referências têm mais de 60 dias sem vender?",
+        "✓ Existe pelo menos 1 branco e 1 tinto por escalão?",
+        "✓ As referências aspiracionais são reconhecíveis pelo seu público?",
+        "✓ Consegue explicar numa frase porque é que cada vinho está na carta?",
+        "✓ O total de referências é gerível pela sua equipa e armazém?",
+      ],
+      icon: "list",
+    },
+  ],
+  faqs: [
+    {
+      q: "E se o meu bilhete médio variar muito entre almoço e jantar?",
+      a: "Considere uma carta ligeiramente diferente ou, pelo menos, copos diferentes. Se o jantar tiver um bilhete 40 % superior, os vinhos premium vendem-se muito mais à noite.",
+    },
+    {
+      q: "Devo incluir vinhos que sei que são bons mas que não se vendem?",
+      a: "Um vinho que não vende não é 'bom' para a sua carta, por muito que o seja objetivamente. Dê-lhe 3 meses com recomendação ativa. Se continuar sem funcionar, substitua.",
+    },
+    {
+      q: "Como sei se tenho referências a mais?",
+      a: "Se mais de 25 % da sua carta não vendeu em 30 dias, tem referências a mais. Reduza e concentre.",
+    },
+    {
+      q: "A Winerim ajuda-me a definir o sortido?",
+      a: "Sim. A Winerim analisa o seu bilhete médio, perfil de cliente e desempenho histórico para sugerir a composição ideal de carta.",
+    },
+  ],
+  relatedTools: [
+    { label: "Analisador de carta", url: "/pt/analise-carta" },
+    { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" },
+  ],
+  relatedGuides: [
+    { label: "Como desenhar uma carta de vinhos rentável", url: "/pt/blog/como-desenhar-carta-vinhos-rentavel" },
+    { label: "Como detetar canibalização de vinhos", url: "/pt/guias/como-detetar-canibalizacao-vinhos-carta" },
+  ],
+  ctaPrimaryText: "Analisar a minha carta grátis",
+  ctaPrimaryUrl: "/pt/analise-carta",
+  ctaSecondaryText: "Pedir demo",
+  ctaSecondaryUrl: "/pt/demo",
+  ctaFinalTitle: "A Winerim diz-lhe exatamente que vinhos a sua carta precisa",
+  ctaFinalDescription:
+    "Análise de sortido, escada de preços, deteção de buracos e redundâncias. Tudo assente em dados reais do seu restaurante.",
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
+
+const GuiaSurtidoTicketMedio = () => <GuideTemplate data={data} />;
 export default GuiaSurtidoTicketMedio;

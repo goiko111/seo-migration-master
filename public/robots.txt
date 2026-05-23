@@ -43,6 +43,7 @@ Disallow: /category/
 Disallow: /tag/
 
 Sitemap: https://winerim.wine/sitemap.xml
+Sitemap: https://winerim.wine/llms.txt
 
 # Block staging/preview domains from indexing
 # (handled via meta robots noindex in SEOHead, but belt-and-suspenders)

@@ -1,0 +1,177 @@
+import { Building2 } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const gruposBenchmarkingPT: DeepAreaContent = {
+  name: "Grupos & Benchmarking",
+  tagline: "Governe a categoria de vinho em escala",
+  intro: "Esta secção ajuda a tomar decisoes sobre a categoria de vinho quando gere mais de um estabelecimento. Nao eh sobre padronizar pela padronizacao: eh sobre detectar o que funciona, onde funciona e porque, para que possa decidir com dados o que vale a pena escalar, o que precisa correcao e o que deve ser removido. Benchmarking interno nao eh uma ranking: eh uma ferramenta de governanca.",
+  icon: Building2,
+  accent: "text-rose-500",
+  bg: "bg-rose-500/10",
+  audiences: ["grupo", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Comparar estabelecimentos que nao sao comparaveis", porQueOcurre: "Porque todos os estabelecimentos sao colocados na mesma ranking sem agrupar por tipo (casual, fine-dining, hotel, terraca). Um estabelecimento fine-dining e um casual nao funcionam da mesma forma.", consecuencia: "Prejudica o estabelecimento fine-dining por menor volume ou o casual por menor bilhete. As conclusoes sao inutil e os gerentes de estabelecimentos desengajam do processo." },
+    { error: "Replicar cartas de vinhos entre estabelecimentos sem considerar contexto", porQueOcurre: "Porque se algo funciona num estabelecimento parece logico copia-lo. Mas contexto (clientela, localizacao, conceito, equipa) determina o resultado.", consecuencia: "Stock morto multiplicado pelo numero de estabelecimentos alvo. Capital preso e uma carta que nao corresponde ao perfil de hospedes desse estabelecimento." },
+    { error: "Manter referencias por inercia em todas as unidades", porQueOcurre: "Porque remover um vinho da lista corporativa parece arriscado. Ninguem quer ser aquele que tira 'a usual Rioja'.", consecuencia: "Referencias que nao vendem em 3 de 5 estabelecimentos continuam a ocupar espaco, stock e atencao. O custo da inercia multiplica-se pelo numero de unidades." },
+    { error: "Padronizar demais e perder a logica comercial de cada estabelecimento", porQueOcurre: "Porque padronizacao simplifica a gestao central. Mas uma carta identica num resort costeiro e num estabelecimento de negocios urbano nao faz sentido comercial.", consecuencia: "O estabelecimento perde a sua identidade, o hospede nao encontra o que espera e as vendas caem onde a carta nao corresponde ao perfil de hospedes." },
+    { error: "Nao usar dados para decisoes de expansao ou retiragem", porQueOcurre: "Porque decisoes de sortimento sao feitas baseadas em relacoes com fornecedores, inercia ou julgamento pessoal do director de F&B, nao em desempenho medido.", consecuencia: "Compras sem criterios, cartas inchadas e oportunidades de melhoria invisiveis. O grupo funciona como soma de estabelecimentos independentes, nao como sistema." },
+  ],
+  links: [
+    { label: "Solucoes para grupos", href: "/en/solutions/restaurant-groups", description: "Como Winerim ajuda operadores multi-unidade a governar a categoria de vinho", type: "solution" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Motor de analytics com benchmarking interno, desvios e scoring por estabelecimento", type: "product" },
+    { label: "Winerim Supply", href: "/en/product/winerim-supply", description: "Inteligencia centralizada de compras com alertas de sobrepreco por unidade", type: "product" },
+    { label: "Modelo: Controlo de grupo de restaurantes", href: "/en/resources/restaurant-group-control-template", description: "Dashboard para comparar metricas-chave entre estabelecimentos", type: "resource" },
+    { label: "Modelo: Scorecard mensal", href: "/en/resources/monthly-scorecard-template", description: "Revisao de desempenho mensal estruturada por unidade", type: "resource" },
+    { label: "Blog: Padronizar vinho em grupos", href: "/en/article/estandarizar-oferta-vino-grupo-restauracion", description: "Como padronizar sem perder a identidade de cada estabelecimento", type: "article" },
+    { label: "Auditor multi-estabelecimento", href: "/en/tools/multi-venue-wine-list-auditor", description: "Compare sortimento, precos e vinho a copo entre estabelecimentos do mesmo grupo", type: "tool" },
+  ],
+  miniCases: [
+    {
+      profile: "Grupo de 6 restaurantes em 3 cidades",
+      situation: "Cada estabelecimento tinha a sua propria carta. O melhor estabelecimento tinha 64% de margem; o pior, 41%. Ninguem sabia porque nao comparavam.",
+      action: "Implementou scorecard mensal unificado. Descobriu que o estabelecimento fraco tinha 15 referencias que nao vendiam e precos 15% abaixo da media do grupo.",
+      result: "Em 4 meses o estabelecimento atrasado subiu para 56% de margem - simplesmente replicando o mix de vinho a copo e precos do lider.",
+    },
+    {
+      profile: "Cadeia hoteleira com F&B centralizado",
+      situation: "As compras eram centralizadas mas cada hotel definia precos livremente. O mesmo vinho era 28 EUR num hotel e 19 EUR noutro.",
+      action: "Definiu escaloes de preco por categoria e tipo de hotel (urbano vs resort). Cada hotel tem ±2 EUR de flexibilidade dentro do escalao.",
+      result: "Consistencia de marca, margem uniforme de 58% em todos os hoteis e maior poder de negociacao atraves de compras em volume.",
+    },
+    {
+      profile: "Grupo de 4 restaurantes casual-premium",
+      situation: "Cada estabelecimento comprava independentemente do fornecedor mais proximo. O mesmo vinho custava entre 5,20 EUR e 7,80 EUR consoante o estabelecimento. Ninguem cruzava dados de compras.",
+      action: "Centralizou compras para as 20 referencias corporativas, negociando o volume total do grupo. Usou Winerim Supply para detectar sobrepreco por estabelecimento.",
+      result: "Poupanca media de 14% nos custos de compra. Capital libertado: 6.400 EUR/trimestre. Estabelecimentos manteem liberdade para 30% da carta local.",
+    },
+    {
+      profile: "Grupo de 8 estabelecimentos misturando casual e fine-dining",
+      situation: "Os 3 estabelecimentos fine-dining tinham 62% de margem, mas os 5 casual variavam de 38% a 51%. F&B corporativo nao entendia a dispersao.",
+      action: "Separou benchmarking em dois clusters (casual e fine-dining). Descobriu que os pior-desempenhando estabelecimentos casual aplicavam o mesmo multiplicador que fine-dining em vez de um adaptado a sua gama de preco.",
+      result: "Ajustando multiplicadores por tipo de estabelecimento, estabelecimentos casual subiram para 54-58% de margem em 2 meses - sem tocar na carta, apenas precos.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "comparar-unidades",
+      title: "Como comparar estabelecimentos eficazmente",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim normalizou as suas metricas de estabelecimento por tipo para que a comparacao seja justa.", whyMatters: "Sem comparacao normalizada, dados enganam: o estabelecimento mais vendedor pode ter a pior margem.", riskIfIgnored: "Cada gerente opera pelos seus proprios criterios sem detectar melhores praticas ou problemas sistemicos." },
+      queSignifica: "Comparar estabelecimentos nao eh ordena-los de melhor a pior por receita. Eh cruzar metricas normalizadas (margem media, volume, bilhete medio de vinho, racio copo/garrafa, % vinhos mortos) entre estabelecimentos com contextos comparaveis. Um estabelecimento fine-dining e um casual nao sao comparados da mesma forma. Uma unidade hoteleira e um estabelecimento de rua sao diferentes tambem. Grupos de comparacao util por tipo e medidas de desvio da media do grupo, nao valores absolutos.",
+      porQueImporta: "Porque sem comparacao normalizada, dados enganam. O estabelecimento mais vendedor pode ter a pior margem. O menos vendedor pode ser o mais eficiente. Sem benchmarking interno, cada gerente de estabelecimento opera pelos seus proprios criterios e nao ha forma de detectar melhores praticas ou problemas sistemicos.",
+      queHacer: [
+        "Agrupe os seus estabelecimentos por tipo (casual, fine-dining, hotel, terraca) antes de comparar.",
+        "Defina 5-6 KPIs comuns: margem media, volume, % vinhos mortos, bilhete medio de vinho, racio copo/garrafa, custo medio de compra.",
+        "Calcule a media do grupo por tipo e meça o desvio de cada estabelecimento.",
+        "Use o Modelo de Controlo de Grupo para estruturar a comparacao mensalmente.",
+      ],
+      errores: [
+        { mistake: "Comparar estabelecimentos de tipos diferentes com benchmarks iguais", consequence: "Prejudica o estabelecimento fine-dining por menor volume que o casual. Nao sao comparaveis." },
+        { mistake: "Usar apenas receita como metrica de comparacao", consequence: "O estabelecimento mais vendedor pode gerar a pior margem. Receita nao eh lucro." },
+        { mistake: "Nao normalizar por numero de referencias ou tamanho de carta", consequence: "Um estabelecimento com 300 referencias e outro com 80 nao podem ser lidos da mesma forma sem ajuste." },
+      ],
+    },
+    {
+      id: "metricas-por-local",
+      title: "Que metricas rastrear por estabelecimento",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim gerou um dashboard uniforme de 6-KPI para cada um dos seus estabelecimentos.", whyMatters: "Se cada estabelecimento mede diferente, nao consegue governar. Decisoes de grupo exigem dados comparaveis.", riskIfIgnored: "Cada estabelecimento relata o que lhe convem. Nao detecta desvios ate se tornarem crises." },
+      queSignifica: "Cada estabelecimento deve ser legivel atraves de um conjunto minimo de metricas que revelem a sua saude comercial na categoria de vinho. Nao precisa de 30 indicadores: precisa dos 6 certos. Margem media ponderada (nao teorica - real, apos descontos e quebra), volume medio por referencia, percentagem de vinhos mortos (sem venda em 60+ dias), bilhete medio de vinho por mesa, racio copo/garrafa e custo medio de compra por referencia.",
+      porQueImporta: "Porque se cada estabelecimento relata metricas diferentes ou nenhumas, nao consegue governar. Decisoes de grupo exigem dados comparaveis. Se um estabelecimento mede margem bruta e outro margem liquida, a comparacao eh inutil. O primeiro passo em gerir um grupo eh padronizar o que eh medido e como.",
+      queHacer: [
+        "Defina um dashboard minimo de 6 KPIs identicos para todos os estabelecimentos.",
+        "Certifique-se de que todos calculam margem da mesma forma (mesmos criterios de custo).",
+        "Revise estes KPIs mensalmente com o Scorecard Mensal.",
+        "Identifique os 2-3 estabelecimentos que mais desviam da media em cada metrica e investigue porque.",
+      ],
+      errores: [
+        { mistake: "Deixar cada estabelecimento definir as suas proprias metricas", consequence: "Nao consegue comparar. Cada um mede o que lhe convem e os dados nao podem ser cruzados." },
+        { mistake: "Medir demasiados indicadores sem priorizar", consequence: "Paralise de analise. 30 KPIs que ninguem ve equivale a 0 KPIs." },
+        { mistake: "Nao distinguir margem teorica de margem real", consequence: "Pensa que um estabelecimento tem 68% de margem, mas com quebra e descontos reais eh 52%." },
+      ],
+    },
+    {
+      id: "referencias-que-funcionan",
+      title: "Como detectar referencias que realmente funcionam e onde",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim cruzou desempenho por referencia em todos os seus estabelecimentos para identificar o que funciona e onde.", whyMatters: "Escalar o que funciona multiplica o impacto. Mas faze-lo sem contexto multiplica o erro.", riskIfIgnored: "Replica cegamente ou retira sem criterios. Perde a chance de perceber o seu hospede por estabelecimento." },
+      queSignifica: "Uma referencia que 'funciona' nao eh apenas uma que vende: eh uma que vende com boa margem, roda a ritmo saudavel e nao canibaliza outras. Benchmarking interno deixa identificar quais referencias cumprem todas as tres condicoes em cada estabelecimento. Ás vezes um vinho funciona em 3 de 5 estabelecimentos: isso diz algo sobre o perfil de hospedes, nao sobre o vinho.",
+      porQueImporta: "Porque escalar uma referencia que funciona num estabelecimento mas noutro nao eh uma decisao que exige contexto. Se um Verdejo a 22 EUR funciona nos seus estabelecimentos costeiros mas nao nos urbanos, a conclusao nao eh 'o Verdejo nao funciona': eh que o seu hospede urbano tem preferencias diferentes. Sem esta analise, replica cegamente ou retira sem criterios.",
+      queHacer: [
+        "Cruze o top-10 de referencias em cada estabelecimento com a sua margem e volume.",
+        "Identifique os que aparecem no topo em multiplos estabelecimentos: sao candidatos a referencia corporativa.",
+        "Analise os que funcionam apenas num estabelecimento: eh o hospede, a equipa, o preco ou a carta?",
+        "Use Winerim Core para visualizar desempenho cruzado por referencia e estabelecimento.",
+      ],
+      errores: [
+        { mistake: "Assumir que o que funciona num estabelecimento funciona em todos", consequence: "Escala uma referencia que nao encaixa em 3 de 5 estabelecimentos. Stock morto multiplicado por 3." },
+        { mistake: "Medir apenas vendas sem cruzar com margem", consequence: "A sua referencia estrela pode ser a com a pior margem. Vender muito nao eh vender bem." },
+        { mistake: "Nao investigar porque uma referencia funciona num local e noutro nao", consequence: "Perde a chance de perceber o seu hospede por estabelecimento. Esse conhecimento vale mais do que a venda." },
+      ],
+    },
+    {
+      id: "cuando-replicar",
+      title: "Quando replicar uma referencia para outros estabelecimentos",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim detectou referencias com desempenho sustentado num estabelecimento que poderiam funcionar noutros com perfil semelhante.", whyMatters: "Uma replicacao bem executada multiplica retornos. Uma ma multiplica stock morto em multiplos estabelecimentos.", riskIfIgnored: "Perde oportunidades de escalar sucessos ou, pior, replica sem dados e cria problemas em multiplas unidades." },
+      queSignifica: "Replicar uma referencia significa adicionala a carta de outro estabelecimento porque demonstrou desempenho num ou varios locais. Mas a decisao nao eh automatica: exige que o perfil de hospedes seja comparavel, o preco encaixe na carta alvo, ha espaco sem criar canibalizacao e o fornecedor consegue servir esse estabelecimento nos mesmos termos.",
+      porQueImporta: "Porque uma replicacao bem executada multiplica o retorno de uma decisao boa. Mas uma mal executada multiplica o problema: stock morto em multiplos estabelecimentos, capital preso e uma referencia que 'deveria funcionar' mas nao porque o contexto eh diferente.",
+      queHacer: [
+        "Confirme que a referencia tem pelo menos 3 meses de bom desempenho (margem + volume) no estabelecimento origem.",
+        "Verifique que o perfil de hospedes no estabelecimento alvo eh comparavel ao da origem.",
+        "Verifique que o preco encaixa na arquitetura de carta do estabelecimento alvo sem duplicar um escalao.",
+        "Negocie os mesmos termos de compra para o estabelecimento alvo antes de incorporar.",
+      ],
+      errores: [
+        { mistake: "Replicar apos apenas um bom mes", consequence: "Pode ser sazonalidade ou um grupo grande que o pediu. Um mes nao eh uma tendencia." },
+        { mistake: "Nao verificar se o escalao de preco ja eh coberto no estabelecimento alvo", consequence: "Cria canibalizacao. Agora tem duas referencias competindo pelo mesmo hospede." },
+        { mistake: "Replicar sem negociar termos para o novo estabelecimento", consequence: "Compra ao mesmo fornecedor mas sem desconto de volume. A sua margem no estabelecimento alvo eh pior." },
+      ],
+    },
+    {
+      id: "cuando-retirar-compra",
+      title: "Quando retirare a compra de uma unidade",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim identificou referencias sem desempenho em estabelecimentos especificos: candidatos para retiragem activa.", whyMatters: "Num grupo, uma referencia morta em 4 estabelecimentos eh 4 vezes o problema. Retiragem baseada em dados eh uma das decisoes mais lucrativas.", riskIfIgnored: "Mantem stock morto multiplicado pelo numero de estabelecimentos. O capital preso do grupo escalona." },
+      queSignifica: "Retirar uma compra significa parar de reabastecer uma referencia num estabelecimento especifico. Nao significa que o vinho eh mau: significa que nesse estabelecimento, com esse hospede, a esse preco, nao funciona. Indicadores de retiragem sao: mais de 60 dias sem venda, margem real abaixo do limiar minimo, ou a existencia de uma melhor referencia no mesmo escalao que a canibaliza.",
+      porQueImporta: "Porque cada referencia com fraco desempenho ocupa espaco de carta, capital de stock e atencao da equipa. Num grupo, uma referencia morta em 4 estabelecimentos eh 4 vezes o problema. Retiragem activa (baseada em dados, nao inercia) eh uma das decisoes mais lucrativas que um director de F&B de grupo pode tomar.",
+      queHacer: [
+        "Revise referencias com mais de 45 dias sem venda em cada estabelecimento mensalmente.",
+        "Cruze com margem: se tambem tem margem baixa alem de nao rodar, eh candidato imediato para retiragem.",
+        "Antes de retirar, verifique se o problema eh o vinho ou a carta (esta bem posicionado? A equipa sabe dele?).",
+        "Comunique a retiragem a equipa de piso com contexto: porque sai e o que o substitui.",
+      ],
+      errores: [
+        { mistake: "Esperar que o stock acabe antes de retirar", consequence: "Enquanto espera, o capital fica preso e a carta fica desbalanceada." },
+        { mistake: "Retirar sem analisar porque nao funcionou", consequence: "Introduz outra referencia no mesmo escalao que pode falhar pela mesma razao." },
+        { mistake: "Nao comunicar mudancas de carta a equipa de piso", consequence: "O funcionario continua a recomendar um vinho que ja nao esta la. Ou pior: nao recomenda nada porque nao sabe o que eh novo." },
+      ],
+    },
+    {
+      id: "benchmarking-interno-externo",
+      title: "Como ler benchmarking interno e externo",
+      priority: "este mes",
+      porQueTeLoMostramos: { detected: "Winerim compara os seus estabelecimentos entre si (interno) e o seu grupo contra o mercado (externo) para perspectiva completa.", whyMatters: "Sem benchmarking interno nao sabe quem tem bom desempenho. Sem externo nao sabe se o seu melhor estabelecimento eh bom ou apenas o menos mau.", riskIfIgnored: "Opera cegamente dentro do seu grupo e sem referencia de mercado. Desvios sao detectados tarde." },
+      queSignifica: "Benchmarking interno compara os seus estabelecimentos entre si: quem tem melhor desempenho em cada metrica e porque. Benchmarking externo compara o seu grupo contra o mercado: a sua margem media eh acima ou abaixo da media da industria? O seu volume eh normal ou excepcional? Ambos sao necessarios. Interno diz-lhe onde melhorar dentro do seu grupo. Externo diz-lhe se o seu grupo no geral esta bem posicionado.",
+      porQueImporta: "Porque sem benchmarking interno opera cegamente dentro do seu grupo: nao sabe quem tem bom desempenho ou quem precisa ajuda. E sem benchmarking externo nao sabe se o seu 'melhor estabelecimento' eh realmente bom ou apenas o menos mau. A combinacao da-lhe uma imagem completa: melhoria interna com perspectiva de mercado.",
+      queHacer: [
+        "Execute benchmarking interno mensalmente com o Scorecard Mensal: compare 6 KPIs entre estabelecimentos.",
+        "Identifique os estabelecimentos que liderem em cada metrica e analise o que fazem diferente.",
+        "Use Winerim Core para aceder a benchmarking externo: compare as suas metricas com a media da industria.",
+        "Cruze ambos: se o seu melhor estabelecimento eh abaixo da media de mercado, tem um problema sistemico, nao local.",
+      ],
+      errores: [
+        { mistake: "Executar apenas benchmarking interno sem referencia externa", consequence: "O seu melhor estabelecimento pode estar abaixo da media de mercado. Sem contexto externo nao sabe." },
+        { mistake: "Usar benchmarking como ferramenta punitiva", consequence: "Gerentes de estabelecimento deixam de partilhar dados. Benchmarking deixa de funcionar." },
+        { mistake: "Comparar apenas uma vez por ano", consequence: "Desvios sao detectados tarde. Um problema que dura 6 meses custa 6 vezes mais que um detectado em 30 dias." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Compare os seus estabelecimentos com o auditor",
+    href: "/en/tools/multi-venue-wine-list-auditor",
+    description: "Compare sortimento, precos e vinho a copo entre unidades para detectar desvios e melhores praticas.",
+  },
+};
+
+export default gruposBenchmarkingPT;

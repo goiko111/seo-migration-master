@@ -11,6 +11,7 @@ import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
 import { ads } from "@/lib/analytics";
 import ContactFormFields from "@/components/ContactFormFields";
+import { PREFIXES } from "@/components/PhoneInput";
 import SEOHead from "@/components/SEOHead";
 import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
@@ -29,6 +30,7 @@ const content: Record<string, {
   trust_response: string; trust_no_commitment: string; trust_demo: string;
   what_next: string; step1: string; step2: string; step3: string;
   link_software: string; link_pricing: string; link_cases: string; link_analysis: string;
+  testimonial_quote: string; testimonial_role: string;
 }> = {
   es: {
     seo_title: "Solicitar Demo Gratuita | Winerim", seo_desc: "Solicita tu demo personalizada de Winerim. 15 minutos, sin compromiso. Descubre cómo vender más vino en tu restaurante.", breadcrumb: "Demo gratuita", label: "Prueba gratuita",
@@ -53,6 +55,8 @@ const content: Record<string, {
     step2: "Preparamos la demo con tu carta real (si la envías).",
     step3: "En 15 min ves Winerim aplicado a tu caso. Sin compromiso.",
     link_software: "Software carta de vinos", link_pricing: "Planes y precios", link_cases: "Casos de éxito", link_analysis: "Análisis gratuito de carta",
+    testimonial_quote: "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos.",
+    testimonial_role: "Propietario/Sommelier · Travieso Bar",
   },
   en: {
     seo_title: "Free Demo | Winerim", seo_desc: "Request your personalized Winerim demo. 15 minutes, no commitment. Discover how to sell more wine.", breadcrumb: "Free demo", label: "Free trial",
@@ -77,6 +81,8 @@ const content: Record<string, {
     step2: "We prepare the demo with your actual wine list (if you send it).",
     step3: "In 15 min you see Winerim applied to your case. No commitment.",
     link_software: "Wine list software", link_pricing: "Plans & pricing", link_cases: "Case studies", link_analysis: "Free wine list analysis",
+    testimonial_quote: "What used to take 10–15 minutes to explain the wine list now takes 3 minutes with Winerim — guests get a full overview at a glance.",
+    testimonial_role: "Owner/Sommelier · Travieso Bar",
   },
   it: {
     seo_title: "Demo Gratuita | Winerim", seo_desc: "Richiedi la tua demo personalizzata di Winerim. 15 minuti, senza impegno.", breadcrumb: "Demo gratuita", label: "Prova gratuita",
@@ -101,6 +107,8 @@ const content: Record<string, {
     step2: "Prepariamo la demo con la tua carta reale (se la invii).",
     step3: "In 15 min vedi Winerim applicato al tuo caso. Senza impegno.",
     link_software: "Software carta dei vini", link_pricing: "Piani e prezzi", link_cases: "Casi di successo", link_analysis: "Analisi gratuita della carta",
+    testimonial_quote: "Quello che prima richiedeva 10–15 minuti per spiegare la carta, ora con Winerim in 3 minuti gli ospiti hanno già una visione globale dei vini.",
+    testimonial_role: "Proprietario/Sommelier · Travieso Bar",
   },
   fr: {
     seo_title: "Démo Gratuite | Winerim", seo_desc: "Demandez votre démo personnalisée de Winerim. 15 minutes, sans engagement.", breadcrumb: "Démo gratuite", label: "Essai gratuit",
@@ -125,6 +133,60 @@ const content: Record<string, {
     step2: "Nous préparons la démo avec votre carte réelle (si vous l'envoyez).",
     step3: "En 15 min, vous voyez Winerim appliqué à votre cas. Sans engagement.",
     link_software: "Logiciel carte des vins", link_pricing: "Plans et tarifs", link_cases: "Cas clients", link_analysis: "Analyse gratuite de carte",
+    testimonial_quote: "Ce qui prenait 10 à 15 minutes pour expliquer la carte se fait en 3 minutes avec Winerim — les clients ont une vue d'ensemble immédiate.",
+    testimonial_role: "Propriétaire/Sommelier · Travieso Bar",
+  },
+  de: {
+    seo_title: "Kostenlose Demo anfordern | Winerim", seo_desc: "Fordern Sie Ihre personalisierte Winerim-Demo an. 15 Minuten, unverbindlich. Entdecken Sie, wie Sie mehr Wein verkaufen.", breadcrumb: "Kostenlose Demo", label: "Kostenlos testen",
+    title: "Fordern Sie eine kostenlose Demo von", highlight: "Winerim an",
+    subtitle: "15 Minuten · Unverbindlich · Auf Ihr Geschäft zugeschnitten",
+    benefits: ["Demo auf Ihr Geschäft zugeschnitten", "Keine Vertragsbindung", "Kostenlose Weinkartenanalyse inklusive", "Einrichtung in unter 48 Stunden"],
+    stats: [{ icon: "wine", value: "+1.000", label: "verwaltete Weinkeller" }, { icon: "zap", value: "48h", label: "Einrichtung" }, { icon: "users", value: "0", label: "Bindung" }],
+    callTitle: "Lieber einen Anruf?", callDesc: "Kontaktieren Sie uns per WhatsApp oder rufen Sie uns direkt an.",
+    faqs: [
+      { q: "Was passiert in der Demo?", a: "Wir zeigen Ihnen Winerim angewendet auf Ihre echte Weinkarte in 15 Minuten. Sie sehen die digitale Karte, Empfehlungen, Analytics und Bestandsverwaltung. Unverbindlich." },
+      { q: "Ist es wirklich kostenlos?", a: "Ja, 100% kostenlos. Die Demo und die erste Analyse Ihrer Karte kosten nichts. Wir schlagen Ihnen nur einen Plan vor, wenn er zu Ihren Bedürfnissen passt." },
+      { q: "Wie lange dauert die Einrichtung?", a: "Die meisten Restaurants sind in unter 48 Stunden live. Wir laden Ihre Karte hoch, konfigurieren Filter und personalisieren das Erlebnis." },
+    ],
+    form_title: "Fordern Sie Ihre personalisierte Demo an",
+    form_subtitle: "Je mehr Kontext Sie uns geben, desto besser passen wir die Demo auf Ihren Fall an.",
+    button: "Kostenlose Demo anfordern", sending: "Wird gesendet...",
+    disclaimer: "Unverbindlich. Mit dem Absenden akzeptieren Sie unsere Datenschutzrichtlinie.",
+    success: "Anfrage erhalten! Wir melden uns innerhalb von 24 Std. für den Demo-Termin.", error: "Fehler beim Senden. Bitte erneut versuchen.",
+    trust_response: "Antwort in 24 Std.", trust_no_commitment: "Unverbindlich", trust_demo: "15-Min-Demo",
+    what_next: "Was passiert als Nächstes?",
+    step1: "Wir kontaktieren Sie innerhalb von 24 Std. zur Terminvereinbarung.",
+    step2: "Wir bereiten die Demo mit Ihrer echten Karte vor (falls Sie sie senden).",
+    step3: "In 15 Min. sehen Sie Winerim angewendet auf Ihren Fall. Unverbindlich.",
+    link_software: "Weinkarten-Software", link_pricing: "Pläne und Preise", link_cases: "Erfolgsgeschichten", link_analysis: "Kostenlose Weinkartenanalyse",
+    testimonial_quote: "Was früher 10–15 Minuten dauerte, um die Weinkarte zu erklären, schaffen die Gäste mit Winerim in 3 Minuten – sie haben sofort einen Gesamtüberblick.",
+    testimonial_role: "Inhaber/Sommelier · Travieso Bar",
+  },
+  pt: {
+    seo_title: "Pedir Demo Gratuita | Winerim", seo_desc: "Solicite a sua demo personalizada da Winerim. 15 minutos, sem compromisso. Descubra como vender mais vinho no seu restaurante.", breadcrumb: "Demo gratuita", label: "Teste gratuito",
+    title: "Solicite uma demo gratuita da", highlight: "Winerim",
+    subtitle: "15 minutos · Sem compromisso · Adaptada ao seu tipo de negócio",
+    benefits: ["Demo adaptada ao seu tipo de negócio", "Sem compromisso de permanência", "Análise gratuita da sua carta incluída", "Configuração em menos de 48 horas"],
+    stats: [{ icon: "wine", value: "+1.000", label: "garrafeiras geridas" }, { icon: "zap", value: "48h", label: "implementação" }, { icon: "users", value: "0", label: "permanência" }],
+    callTitle: "Prefere que o chamemos?", callDesc: "Escreva-nos por WhatsApp ou ligue diretamente.",
+    faqs: [
+      { q: "O que acontece na demo?", a: "Mostramos a Winerim aplicada à sua carta real durante 15 minutos. Verá a carta digital, recomendações, painel de analítica e gestão de stock. Sem compromisso." },
+      { q: "É mesmo gratuita?", a: "Sim, 100% gratuita. A demo e a análise inicial da sua carta não têm custo. Só propomos um plano se fizer sentido para si." },
+      { q: "Quanto demora a implementação?", a: "A maioria dos restaurantes fica operacional em menos de 48 horas. Carregamos a sua carta, configuramos filtros e personalizamos a experiência." },
+    ],
+    form_title: "Solicite a sua demo personalizada",
+    form_subtitle: "Quanto mais contexto nos der, melhor adaptamos a demo ao seu caso.",
+    button: "Pedir demo gratuita", sending: "A enviar...",
+    disclaimer: "Sem compromisso. Ao enviar aceita a nossa política de privacidade.",
+    success: "Pedido recebido! Entraremos em contacto em menos de 24h para agendar a sua demo.", error: "Erro ao enviar. Tente novamente.",
+    trust_response: "Resposta em 24h", trust_no_commitment: "Sem compromisso", trust_demo: "Demo de 15 min",
+    what_next: "O que acontece depois?",
+    step1: "Contactamos em menos de 24h para agendar a demo.",
+    step2: "Preparamos a demo com a sua carta real (se a enviar).",
+    step3: "Em 15 min vê a Winerim aplicada ao seu caso. Sem compromisso.",
+    link_software: "Software carta de vinhos", link_pricing: "Planos e preços", link_cases: "Casos de sucesso", link_analysis: "Análise gratuita da carta",
+    testimonial_quote: "O que antes eram 10/15 minutos para explicar a carta, agora com a Winerim em 3 minutos já têm uma visão global dos vinhos.",
+    testimonial_role: "Proprietário/Sommelier · Travieso Bar",
   },
 };
 
@@ -143,7 +205,12 @@ const Demo = () => {
       restaurant: (fd.get("restaurant") as string)?.trim() || null,
       name: (fd.get("name") as string)?.trim() || null,
       position: (fd.get("position") as string)?.trim() || null,
-      phone: (fd.get("phone") as string)?.trim() || null,
+      phone: (() => {
+        const raw = (fd.get("phone") as string)?.trim();
+        const prefixCode = (fd.get("phone_prefix") as string)?.trim();
+        const pObj = PREFIXES.find(p => p.code === prefixCode);
+        return raw ? (pObj ? `${pObj.dial} ${raw}` : raw) : null;
+      })(),
       email: (fd.get("email") as string)?.trim() || null,
       city: (fd.get("city") as string)?.trim() || null,
       references_count: (fd.get("references_count") as string)?.trim() || null,
@@ -215,13 +282,13 @@ const Demo = () => {
               {/* Social proof quote */}
               <div className="mt-8 p-4 rounded-xl border border-border bg-background">
                 <p className="text-sm text-muted-foreground italic leading-relaxed mb-3">
-                  "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos."
+                  "{c.testimonial_quote}"
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-full bg-wine flex items-center justify-center text-[9px] font-bold text-white">NO</div>
                   <div>
                     <p className="text-xs font-semibold">Nacho Otamendi</p>
-                    <p className="text-[10px] text-muted-foreground">Propietario/Sommelier · Travieso Bar</p>
+                    <p className="text-[10px] text-muted-foreground">{c.testimonial_role}</p>
                   </div>
                 </div>
               </div>
@@ -258,13 +325,13 @@ const Demo = () => {
             <h2 className="font-heading text-2xl font-bold mb-3">{c.callTitle}</h2>
             <p className="text-muted-foreground mb-6">{c.callDesc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://wa.me/34640000000" target="_blank" rel="noopener noreferrer"
+              <a href="https://wa.me/34614499864" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
                 <MessageCircle size={16} /> WhatsApp
               </a>
-              <a href="tel:+34640000000"
+              <a href="tel:+34614499864"
                 className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg text-sm font-semibold hover:border-wine/30 hover:bg-wine/5 transition-all">
-                <Phone size={16} /> +34 640 000 000
+                <Phone size={16} /> +34 614 499 864
               </a>
             </div>
           </div>

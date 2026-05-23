@@ -125,7 +125,69 @@ const fr: GuidePageData = {
   relatedGuides: [{ label: "Modèle formation express", url: "/fr/ressources/modele-formation-salle" }, { label: "Playbook : vendre plus de vin en salle", url: "/fr/benchmarks-playbooks/vendre-plus-vin" }],
 };
 
-const data: Record<string, GuidePageData> = { es, en, it, fr };
+const de: GuidePageData = {
+  slug: "de/ratgeber/servicepersonal-fuer-weinverkauf-schulen",
+  metaTitle: "Wie Sie Servicepersonal für den Weinverkauf schulen, ohne Sommelier zu sein | Ratgeber",
+  metaDescription: "Praxisratgeber zur Schulung Ihres Serviceteams im Wein ohne Sommelier-Ausbildung. Empfehlungstechniken, vereinfachte Weinkarteikarten und ein 2-Wochen-Schulungsplan.",
+  heroTitle: "Wie Sie Servicepersonal für den Weinverkauf schulen, ohne Sommelier zu sein",
+  heroSubtitle: "Ihr Team muss nicht aus Weinexperten bestehen. Es muss genug wissen, um mit Zuversicht zu empfehlen, Gastfragen zu beantworten und jeden Tisch in eine Verkaufsgelegenheit zu verwandeln.",
+  heroBadge: "Schulungsratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  ctaPrimaryText: "Demo anfragen", ctaPrimaryUrl: "/de/demo",
+  ctaSecondaryText: "Meine Karte analysieren", ctaSecondaryUrl: "/wine-list-analyzer",
+  ctaFinalTitle: "Rüsten Sie Ihr Team mit Winerim aus",
+  ctaFinalDescription: "Winerim erstellt Weinkarteikarten, Speisenbegleitungsleitfäden und automatische Empfehlungen für Ihr Serviceteam.",
+  tableOfContents: ["Warum Weinschulung direkt die Verkäufe beeinflusst", "Was Ihr Team wissen muss (und was nicht)", "Die 5 Empfehlungstechniken", "Wie Sie einprägsame Weinkarteikarten erstellen", "2-Wochen-Schulungsplan", "Schulung bei hoher Personalfluktuation aufrechterhalten"],
+  sections: [
+    { heading: "1. Warum Weinschulung direkt die Verkäufe beeinflusst", content: "Die Gleichung ist einfach: wenn das Team Wein empfehlen kann, bestellen mehr Tische Wein.\n\nRestaurants, die in Basisschulungen investieren, berichten von 15–30 % höheren Weinumsätzen.", tips: ["60–70 % der Weinentscheidungen werden von der Empfehlung des Personals beeinflusst", "Sie brauchen keine Sommeliers — Sie brauchen Kellner, die 3–5 verlässliche Weine kennen", "Schulung ist kein einmaliges Ereignis — sie ist ein fortlaufender Prozess", "Der Return ist sofort: der erste Service nach einer Sitzung generiert bereits mehr Empfehlungen"], icon: "lightbulb" },
+    { heading: "2. Was Ihr Team wissen muss (und was nicht)", content: "Der häufigste Fehler ist, Kellner zu Sommeliers machen zu wollen.", tips: ["JA: 3–5 verlässliche Weine kennen und in 2 Sätzen beschreiben", "JA: Wissen, zu welchen Speisen jeder Wein passt", "JA: Vorbereitete Formulierungen, um Wein natürlich anzubieten", "JA: Gängige Einwände beantworten können", "NEIN: Herkunftsbezeichnungen oder weltweite Weinregionen auswendig kennen", "NEIN: Vinifikationstechniken oder komplexe Aromenprofile erklären", "Goldene Regel: wenn er einen Wein nicht in 10 Sekunden erklären kann, braucht er eine einfachere Karteikarte"], icon: "check" },
+    { heading: "3. Die 5 Empfehlungstechniken, die funktionieren", content: "Wein zu empfehlen ist kein Verkaufen — es ist Orientierung für die Gastentscheidung.", tips: ["Technik 1 — Das Glas als Türöffner: 'Während Sie die Karte ansehen, mögen Sie ein Glas unseres Rieslings?'", "Technik 2 — Die direkte Speisenbegleitung: 'Zum Entrecôte empfehle ich Ihnen unseren Spätburgunder'", "Technik 3 — Die Empfehlung des Küchenchefs: 'Der Küchenchef hat es mit diesem Wein probiert'", "Technik 4 — Die offene Frage: 'Bevorzugen Sie etwas Frischeres oder etwas Kräftigeres?'", "Technik 5 — Das subtile Upgrade: 'Wenn Ihnen das Glas gefallen hat, ist die Flasche ein sehr gutes Angebot'"], icon: "lightbulb" },
+    { heading: "4. Wie Sie einprägsame Weinkarteikarten erstellen", content: "Die Servicekarteikarte ist ein 30-Sekunden-Dokument mit dem Wesentlichen zum Empfehlen.", tips: ["Weinname wie auf der Karte", "In 3 Wörtern: 'frisch, fruchtig, unkompliziert'", "Passt perfekt zu: 2–3 konkreten Gerichten der Speisekarte", "Der Verkaufssatz: 'Er ist unser erfrischendster Weißwein, ideal zum Starten'", "Preis: Glas und Flasche, gut sichtbar", "Format: Taschenkarte, maximal 6–8 aktive Karten"], icon: "list" },
+    { heading: "5. 2-Wochen-Schulungsplan", content: "30-minütige Sitzungen vor dem Service, 2 Mal pro Woche.", tips: ["Sitzung 1 — Die 5 verlässlichen Weine: verkosten, in 3 Wörtern beschreiben, Verkaufssatz üben", "Sitzung 2 — Praktische Speisenbegleitung: 3 Wein+Speise-Kombinationen", "Sitzung 3 — Empfehlungstechniken: Rollenspiele mit realen Szenarien", "Sitzung 4 — Servicesimulation: Wein mindestens einmal pro Tisch empfehlen", "Danach: 10-minütige Auffrischungssitzungen bei jeder Kartenänderung", "Messung: Weinumsätze vor und nach vergleichen"], icon: "check" },
+    { heading: "6. Schulung bei hoher Personalfluktuation aufrechterhalten", content: "Sie brauchen ein System, das unabhängig davon funktioniert, wer im Team ist.", tips: ["Selbstlernmaterialien im Backoffice", "45-minütige Onboarding-Session", "Buddy-System für die ersten 2 Wochen", "5-minütige Pre-Service-Briefings", "Winerim erstellt automatisch aktualisierte Karteikarten", "Nicht auf Erinnerung angewiesen sein: Karten jederzeit einsehbar"], icon: "lightbulb" },
+  ],
+  faqs: [
+    { q: "Wie lange dauert es, ein Team im Wein zu schulen?", a: "Mit einem strukturierten Programm 2 Wochen (4 Sitzungen à 30 Minuten). Fortlaufende Schulung wird mit 5–10-minütigen Sitzungen aufrechterhalten." },
+    { q: "Was, wenn mein Team kein Interesse an Wein hat?", a: "Es muss kein Interesse haben — es braucht Werkzeuge. Ein gut gestaltetes Empfehlungsskript erlaubt es, Wein zu verkaufen, ohne leidenschaftlich dafür zu sein." },
+    { q: "Besser einen Sommelier einstellen oder das Team schulen?", a: "Für die meisten Restaurants ist die Schulung des Teams effektiver und nachhaltiger." },
+    { q: "Wie messe ich, ob die Schulung funktioniert?", a: "Vergleichen Sie den Weindurchschnittsbon, das Verhältnis weinbestellender Tische und das Verhältnis Glas/Flasche." },
+  ],
+  relatedTools: [{ label: "Wine List Score", url: "/de/tools/wine-list-score" }, { label: "Speisenbegleitungsgenerator", url: "/wine-pairing-generator" }],
+  relatedGuides: [{ label: "Express-Schulungsvorlage", url: "/de/ressourcen/vorlage-schulung-serviceteam" }, { label: "Playbook: mehr Wein im Service verkaufen", url: "/de/benchmarks-playbooks/playbook-mehr-wein-verkaufen" }],
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-formar-equipa-sala-vender-vinho",
+  metaTitle: "Como Formar a Equipa de Sala para Vender Vinho sem Ser Escanção | Guia",
+  metaDescription: "Guia prático para formar a sua equipa de sala em vinho sem ser escanção. Técnicas de recomendação, fichas simplificadas e um plano de formação de 2 semanas.",
+  heroTitle: "Como formar a equipa de sala para vender vinho sem ser escanção",
+  heroSubtitle: "A sua equipa não precisa de ser especialista em vinho. Precisa de saber o suficiente para recomendar com confiança, responder a dúvidas do cliente e transformar cada mesa numa oportunidade de venda.",
+  heroBadge: "Guia formativo",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  ctaPrimaryText: "Solicitar demo", ctaPrimaryUrl: "/pt/demo",
+  ctaSecondaryText: "Analisar a minha carta", ctaSecondaryUrl: "/wine-list-analyzer",
+  ctaFinalTitle: "Equipe a sua equipa com o Winerim",
+  ctaFinalDescription: "O Winerim gera fichas de vinho, guias de harmonização e recomendações automáticas para a sua equipa de sala.",
+  tableOfContents: ["Porque a formação em vinho impacta nas vendas", "O que a sua equipa precisa de saber (e o que não precisa)", "As 5 técnicas de recomendação", "Como criar fichas de vinho memorizáveis", "Plano de formação em 2 semanas", "Manter a formação com alta rotatividade de pessoal"],
+  sections: [
+    { heading: "1. Porque a formação em vinho impacta diretamente nas vendas", content: "A equação é simples: quando a equipa sabe recomendar vinho, mais mesas pedem vinho.\n\nRestaurantes que investem em formação básica reportam incrementos de 15-30 % nas vendas de vinho.", tips: ["60-70 % das decisões de vinho são influenciadas pela recomendação da equipa", "Não precisa de escanções — precisa de empregados que conheçam 3-5 vinhos de confiança", "A formação não é um evento pontual — é um processo contínuo", "O retorno é imediato: o primeiro serviço após uma sessão já gera mais recomendações"], icon: "lightbulb" },
+    { heading: "2. O que a sua equipa precisa de saber (e o que não precisa)", content: "O erro mais comum é tentar transformar empregados em escanções.", tips: ["SIM: Conhecer 3-5 vinhos de confiança e descrevê-los em 2 frases", "SIM: Saber com que pratos cada vinho combina", "SIM: Ter frases preparadas para oferecer vinho de forma natural", "SIM: Saber responder a objeções habituais", "NÃO: Conhecer denominações de origem ou regiões vinícolas do mundo", "NÃO: Explicar técnicas de vinificação ou perfis aromáticos complexos", "Regra de ouro: se não consegue explicar um vinho em 10 segundos, precisa de uma ficha mais simples"], icon: "check" },
+    { heading: "3. As 5 técnicas de recomendação que funcionam", content: "Recomendar vinho não é vender — é orientar a escolha do cliente.", tips: ["Técnica 1 — O copo como porta de entrada: 'Enquanto veem a ementa, apetece-lhes um copo do nosso Alvarinho?'", "Técnica 2 — A harmonização direta: 'Com o bife, recomendo o nosso Douro Reserva'", "Técnica 3 — A recomendação do chef: 'O chef provou-o com este vinho'", "Técnica 4 — A pergunta aberta: 'Preferem algo mais fresco ou algo com mais corpo?'", "Técnica 5 — O upgrade subtil: 'Se gostaram do copo, a garrafa tem excelente relação para a mesa'"], icon: "lightbulb" },
+    { heading: "4. Como criar fichas de vinho memorizáveis", content: "A ficha para sala é um documento de 30 segundos com o essencial para recomendar.", tips: ["Nome do vinho tal como aparece na carta", "Em 3 palavras: 'fresco, frutado, fácil'", "Perfeito com: 2-3 pratos concretos da ementa", "A frase de venda: 'É o nosso branco mais refrescante, ideal para começar'", "Preço: copo e garrafa, bem visível", "Formato: cartão de bolso, máximo 6-8 fichas ativas"], icon: "list" },
+    { heading: "5. Plano de formação em 2 semanas", content: "Sessões de 30 minutos antes do serviço, 2 vezes por semana.", tips: ["Sessão 1 — Os 5 vinhos de confiança: provar, descrever em 3 palavras, praticar a frase de venda", "Sessão 2 — Harmonização prática: 3 combinações vinho+prato", "Sessão 3 — Técnicas de recomendação: role-play com cenários reais", "Sessão 4 — Simulação de serviço: recomendar vinho pelo menos uma vez por mesa", "Depois: sessões de revisão de 10 min sempre que a carta muda", "Medição: comparar vendas de vinho antes e depois"], icon: "check" },
+    { heading: "6. Manter a formação com alta rotatividade de pessoal", content: "Precisa de um sistema que funcione independentemente de quem está na equipa.", tips: ["Material de autoformação no office", "Sessão de onboarding de 45 minutos", "Sistema de padrinho para as primeiras 2 semanas", "Reuniões pré-serviço de 5 minutos", "O Winerim gera fichas atualizadas automaticamente", "Não depender da memória: poder consultar as fichas a qualquer momento"], icon: "lightbulb" },
+  ],
+  faqs: [
+    { q: "Quanto tempo leva formar uma equipa em vinho?", a: "Com um programa estruturado, 2 semanas (4 sessões de 30 min). A formação contínua mantém-se com sessões de 5-10 min." },
+    { q: "E se a minha equipa não tiver interesse em vinho?", a: "Não precisam de ter interesse — precisam de ferramentas. Um guião de recomendação bem feito permite vender vinho sem ser apaixonado." },
+    { q: "É melhor contratar um escanção ou formar a equipa?", a: "Para a maioria dos restaurantes, formar a equipa é mais eficaz e sustentável." },
+    { q: "Como meço se a formação funciona?", a: "Compare o bilhete médio em vinho, o rácio de mesas que pedem vinho e o rácio copo/garrafa." },
+  ],
+  relatedTools: [{ label: "Wine List Score", url: "/pt/ferramentas/wine-list-score" }, { label: "Gerador de harmonizações", url: "/wine-pairing-generator" }],
+  relatedGuides: [{ label: "Template de formação expresso", url: "/pt/recursos/template-formacao-sala" }, { label: "Playbook: vender mais vinho em sala", url: "/pt/benchmarks-playbooks/vender-mais-vinho" }],
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
 
 const GuiaFormarEquipoSala = () => <GuideTemplate data={data} />;
 export default GuiaFormarEquipoSala;

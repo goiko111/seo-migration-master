@@ -83,6 +83,66 @@ const langContent: Record<string, LangContent> = {
     readMore: "Lire le guide", download: "Télécharger", useTool: "Utiliser l'outil", viewSolution: "Voir la solution",
     all: "Tous", items: "guides",
   },
+  de: {
+    metaTitle: "Praktische Ratgeber für Restaurants | Winerim",
+    metaDesc:
+      "Praktische Ratgeber und Artikel, um Ihre Weinkarte zu optimieren. Strategie, Pricing, Rotation, Team und mehr.",
+    heroLabel: "Wissenszentrum",
+    heroTitle: "Ratgeber",
+    heroDesc:
+      "Lernen Sie Best Practices, um Ihre Weinkarte profitabel zu machen. Das Beste: Winerim automatisiert alles.",
+    guidesTitle: "Ratgeber & Artikel",
+    guidesDesc:
+      "Lernen Sie Best Practices — oder lassen Sie Winerim sie automatisch für Sie anwenden.",
+    resourcesTitle: "Downloadbare Ressourcen",
+    resourcesDesc: "Nützliche Vorlagen und Checklisten.",
+    toolsTitle: "Kostenlose Werkzeuge",
+    toolsDesc: "Testen Sie sie hier kostenlos.",
+    toolsAll: "Alle ansehen →",
+    solutionsTitle: "Lösungen nach Anwendungsfall",
+    solutionsDesc: "Erkennen Sie Ihre Situation wieder? Winerim löst sie bereits.",
+    ctaTitle: "Warum manuell, wenn Winerim es automatisiert?",
+    ctaDesc:
+      "Alles, was Sie auf dieser Seite sehen — Analyse, Pricing, Speisenbegleitung, Rotation — Winerim erledigt es automatisch.",
+    ctaPrimary: "Meine Karte kostenlos analysieren",
+    ctaSecondary: "Demo anfordern",
+    readMore: "Ratgeber lesen",
+    download: "Herunterladen",
+    useTool: "Werkzeug nutzen",
+    viewSolution: "Lösung ansehen",
+    all: "Alle",
+    items: "Ratgeber",
+  },
+  pt: {
+    metaTitle: "Guias práticos para restaurantes | Winerim",
+    metaDesc:
+      "Guias práticos e artigos para otimizar a sua carta de vinhos. Estratégia, pricing, rotação, equipa e mais.",
+    heroLabel: "Centro de conhecimento",
+    heroTitle: "Guias",
+    heroDesc:
+      "Aprenda as melhores práticas para rentabilizar a sua carta de vinhos. A melhor parte: com a Winerim, tudo isto é automático.",
+    guidesTitle: "Guias e Artigos",
+    guidesDesc:
+      "Aprenda as melhores práticas — ou deixe a Winerim aplicá-las automaticamente por si.",
+    resourcesTitle: "Recursos descarregáveis",
+    resourcesDesc: "Modelos e checklists úteis.",
+    toolsTitle: "Ferramentas gratuitas",
+    toolsDesc: "Experimente-as aqui gratuitamente.",
+    toolsAll: "Ver todas →",
+    solutionsTitle: "Soluções por caso de uso",
+    solutionsDesc: "Reconhece a sua situação? A Winerim já a resolve.",
+    ctaTitle: "Porquê fazê-lo manualmente se a Winerim automatiza?",
+    ctaDesc:
+      "Tudo o que vê nesta página — análise, pricing, harmonizações, rotação — a Winerim fá-lo automaticamente.",
+    ctaPrimary: "Analisar a minha carta grátis",
+    ctaSecondary: "Pedir demo",
+    readMore: "Ler guia",
+    download: "Descarregar",
+    useTool: "Usar ferramenta",
+    viewSolution: "Ver solução",
+    all: "Todos",
+    items: "guias",
+  },
 };
 
 /* ── Guide topic tags for filtering ── */
@@ -240,7 +300,7 @@ const SectionHeader = ({ icon: HeaderIcon, title, desc, count }: { icon: React.E
 );
 
 const GuiasRecursos = () => {
-  const { lang, localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
   const [guideFilter, setGuideFilter] = useState("all");
 
@@ -262,7 +322,7 @@ const GuiasRecursos = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/guias-y-recursos" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/guias-y-recursos" hreflang={allLangPaths("/guias-y-recursos")} />
       <main>
         {/* HERO */}
         <section className="pt-32 pb-12 section-padding">

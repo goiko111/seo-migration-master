@@ -19,6 +19,7 @@ import ArticleRelatedContent, { type RelatedLink } from "@/components/article/Ar
 import { parseMarkdownSections, type ParsedSection } from "@/components/article/parseMarkdownSections";
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ArticleData {
   title: string;
@@ -29,22 +30,48 @@ interface ArticleData {
   author?: string;
   publishedAt?: string;
   relatedLinks?: RelatedLink[] | null;
+  lang?: string;
 }
+
+const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDesc: string; backToBlog: string; interview: string; article: string; backToCorner: string }> = {
+  es: { loading: "Cargando...", notFoundTitle: "Artículo no encontrado", notFoundDesc: "El contenido que buscas no está disponible.", backToBlog: "Volver al blog", interview: "Entrevista", article: "Artículo", backToCorner: "Sommelier Corner" },
+  en: { loading: "Loading...", notFoundTitle: "Article not found", notFoundDesc: "The content you're looking for is not available.", backToBlog: "Back to blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
+  it: { loading: "Caricamento...", notFoundTitle: "Articolo non trovato", notFoundDesc: "Il contenuto che cerchi non è disponibile.", backToBlog: "Torna al blog", interview: "Intervista", article: "Articolo", backToCorner: "Sommelier Corner" },
+  fr: { loading: "Chargement...", notFoundTitle: "Article introuvable", notFoundDesc: "Le contenu que vous recherchez n'est pas disponible.", backToBlog: "Retour au blog", interview: "Interview", article: "Article", backToCorner: "Sommelier Corner" },
+  de: { loading: "Wird geladen...", notFoundTitle: "Artikel nicht gefunden", notFoundDesc: "Der gesuchte Inhalt ist nicht verfügbar.", backToBlog: "Zurück zum Blog", interview: "Interview", article: "Artikel", backToCorner: "Sommelier Corner" },
+  pt: { loading: "A carregar...", notFoundTitle: "Artigo não encontrado", notFoundDesc: "O conteúdo que procura não está disponível.", backToBlog: "Voltar ao blog", interview: "Entrevista", article: "Artigo", backToCorner: "Sommelier Corner" },
+};
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<ArticleData | null | undefined>(undefined);
+  const { lang } = useLanguage();
+  const t = i18n[lang] || i18n.es;
 
   useEffect(() => {
     if (!slug) { setArticle(null); return; }
 
+    // Build the DB slug: Spanish articles use the base slug, other languages append _lang suffix
+    const dbSlug = lang === "es" ? slug : `${slug}_${lang}`;
+
     const fetchArticle = async () => {
-      const { data } = await supabase
+      // Try the language-specific slug first
+      let { data } = await supabase
         .from("articles")
-        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links")
-        .eq("slug", slug)
+        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
+        .eq("slug", dbSlug)
         .eq("published", true)
         .maybeSingle();
+
+      // Fallback to Spanish base slug if no translation exists
+      if (!data && lang !== "es") {
+        ({ data } = await supabase
+          .from("articles")
+          .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
+          .eq("slug", slug)
+          .eq("published", true)
+          .maybeSingle());
+      }
 
       if (data) {
         setArticle({
@@ -58,6 +85,7 @@ const ArticlePage = () => {
           author: data.author || undefined,
           publishedAt: data.published_at || undefined,
           relatedLinks: Array.isArray(data.related_links) ? (data.related_links as unknown as RelatedLink[]) : null,
+          lang: data.lang || "es",
         });
       } else {
         const staticArticle = getArticleBySlug(slug);
@@ -75,7 +103,7 @@ const ArticlePage = () => {
       }
     };
     fetchArticle();
-  }, [slug]);
+  }, [slug, lang]);
 
   const sections = useMemo(() => {
     if (!article?.body) return [];
@@ -91,7 +119,7 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">Cargando...</p></main>
+        <main className="pt-32 pb-24 text-center"><p className="text-muted-foreground">{t.loading}</p></main>
         <Footer />
       </div>
     );
@@ -101,11 +129,11 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <SEOHead title="Artículo no encontrado" />
+        <SEOHead title={t.notFoundTitle} />
         <main className="pt-32 pb-24 text-center section-padding">
-          <h1 className="font-heading text-4xl font-bold mb-4">Artículo no encontrado</h1>
-          <p className="text-muted-foreground mb-8">El contenido que buscas no está disponible.</p>
-          <Link to="/blog" className="text-accent underline">Volver al blog</Link>
+          <h1 className="font-heading text-4xl font-bold mb-4">{t.notFoundTitle}</h1>
+          <p className="text-muted-foreground mb-8">{t.notFoundDesc}</p>
+          <Link to="/blog" className="text-accent underline">{t.backToBlog}</Link>
         </main>
         <Footer />
       </div>
@@ -113,7 +141,7 @@ const ArticlePage = () => {
   }
 
   const backLink = article.type === "interview" ? "/sommelier-corner" : "/blog";
-  const backLabel = article.type === "interview" ? "Sommelier Corner" : "Blog";
+  const backLabel = article.type === "interview" ? t.backToCorner : "Blog";
   const articleUrl = `https://winerim.wine/article/${slug}`;
   const midIndex = Math.floor(sections.length / 2);
 
@@ -145,7 +173,7 @@ const ArticlePage = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <BookOpen size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine">
-              {article.type === "interview" ? "Entrevista" : "Artículo"}
+              {article.type === "interview" ? t.interview : t.article}
             </span>
           </motion.div>
 
@@ -167,7 +195,7 @@ const ArticlePage = () => {
               {article.author && <span className="font-medium text-foreground">{article.author}</span>}
               {article.author && article.publishedAt && <span className="text-muted-foreground/30">·</span>}
               {article.publishedAt && (
-                <time>{new Date(article.publishedAt).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
+                <time>{new Date(article.publishedAt).toLocaleDateString(lang === "en" ? "en-US" : lang === "it" ? "it-IT" : lang === "fr" ? "fr-FR" : lang === "de" ? "de-DE" : lang === "pt" ? "pt-PT" : "es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
               )}
             </motion.div>
           )}
@@ -179,7 +207,7 @@ const ArticlePage = () => {
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="rounded-2xl overflow-hidden">
-            <img src={article.heroImage} alt={article.title} className="w-full max-h-[500px] object-cover grayscale" loading="lazy" decoding="async" />
+            <img src={article.heroImage} alt={article.title} className="w-full max-h-[500px] object-cover" loading="lazy" decoding="async" />
           </motion.div>
         </section>
       )}
@@ -192,7 +220,7 @@ const ArticlePage = () => {
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <div className="prose prose-lg prose-invert max-w-none
+              <div className="article-section-body prose prose-lg prose-invert max-w-none
                 prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:text-base prose-p:md:text-lg prose-p:mb-6
                 prose-strong:text-foreground
                 prose-blockquote:border-l-accent prose-blockquote:border-l-4 prose-blockquote:pl-8 prose-blockquote:py-4 prose-blockquote:my-10 prose-blockquote:italic prose-blockquote:text-foreground/80 prose-blockquote:font-heading prose-blockquote:text-xl prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-xl
@@ -228,7 +256,7 @@ const ArticlePage = () => {
         <Link to={backLink}
           className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-accent hover:underline">
           <ArrowLeft className="w-4 h-4" />
-          Volver a {backLabel}
+          {article.type === "interview" ? `← ${t.backToCorner}` : `← ${t.backToBlog}`}
         </Link>
       </section>
 

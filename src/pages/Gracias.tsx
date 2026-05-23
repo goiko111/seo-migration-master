@@ -1,4 +1,5 @@
 import { useSearchParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, ArrowRight, Phone, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang } from "@/i18n/types";
+import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 /* ── Content per form_type ── */
 interface ThankYouContent {
@@ -24,14 +25,16 @@ interface PageChrome {
   urgent: string;
 }
 
-const CHROME: Record<SupportedLang, PageChrome> = {
+const CHROME: I18nMap<PageChrome> = {
   es: { seoTitle: "Gracias | Winerim", seoDesc: "Tu solicitud ha sido recibida correctamente.", nextSteps: "Próximos pasos", urgent: "¿Necesitas algo urgente?" },
   en: { seoTitle: "Thank You | Winerim", seoDesc: "Your request has been received successfully.", nextSteps: "Next steps", urgent: "Need something urgently?" },
   it: { seoTitle: "Grazie | Winerim", seoDesc: "La tua richiesta è stata ricevuta correttamente.", nextSteps: "Prossimi passi", urgent: "Hai bisogno di qualcosa di urgente?" },
   fr: { seoTitle: "Merci | Winerim", seoDesc: "Votre demande a bien été reçue.", nextSteps: "Prochaines étapes", urgent: "Besoin de quelque chose d'urgent ?" },
+  de: { seoTitle: "Vielen Dank | Winerim", seoDesc: "Ihre Anfrage wurde erfolgreich empfangen.", nextSteps: "Nächste Schritte", urgent: "Benötigen Sie etwas dringend?" },
+  pt: { seoTitle: "Obrigado | Winerim", seoDesc: "O seu pedido foi recebido com sucesso.", nextSteps: "Próximos passos", urgent: "Precisa de algo urgente?" },
 };
 
-const CONTENT: Record<SupportedLang, Record<string, ThankYouContent>> = {
+const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
   es: {
     demo: {
       title: "¡Solicitud de demo recibida!",
@@ -172,6 +175,76 @@ const CONTENT: Record<SupportedLang, Record<string, ThankYouContent>> = {
       cta: { label: "Retour à l'accueil", href: "/fr" },
     },
   },
+  de: {
+    demo: {
+      title: "Demo-Anfrage erhalten!",
+      subtitle: "Unser Team wird Sie innerhalb von 24 Stunden kontaktieren, um Ihre persönliche Vorführung zu vereinbaren.",
+      steps: ["Wir prüfen Ihr Profil und Ihre Weinkarte", "Wir kontaktieren Sie zur Terminvereinbarung", "Wir zeigen Ihnen Winerim in Aktion mit echten Daten"],
+      cta: { label: "Funktionen entdecken", href: "/de/funktionen" },
+      secondaryCta: { label: "Erfolgsgeschichten ansehen", href: "/de/erfolgsgeschichten" },
+    },
+    contacto: {
+      title: "Nachricht erhalten!",
+      subtitle: "Wir haben Ihre Anfrage erhalten. Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      steps: ["Ihre Nachricht wurde erfasst", "Ein Spezialist wird Ihre Anfrage prüfen", "Sie erhalten eine Antwort per E-Mail oder Telefon"],
+      cta: { label: "Entdecken Sie Winerim", href: "/de/was-ist-winerim" },
+    },
+    "analisis-carta": {
+      title: "Weinkarte zur Analyse erhalten!",
+      subtitle: "Unser Team arbeitet bereits an Ihrer persönlichen Analyse. Sie erhalten den Bericht innerhalb von 48 Stunden.",
+      steps: ["Wir analysieren Struktur, Preise und Vielfalt", "Wir identifizieren Verbesserungsmöglichkeiten", "Wir senden Ihnen einen Bericht mit konkreten Empfehlungen"],
+      cta: { label: "Unsere Werkzeuge entdecken", href: "/de/werkzeuge" },
+      secondaryCta: { label: "Preise ansehen", href: "/de/preise" },
+    },
+    resource: {
+      title: "Ressource heruntergeladen!",
+      subtitle: "Der Download hat automatisch begonnen. Sie erhalten außerdem eine Bestätigungs-E-Mail mit dem Zugriffslink.",
+      steps: ["Ihre Ressource wird heruntergeladen", "Prüfen Sie Ihre E-Mail für späteren Zugriff", "Entdecken Sie weitere kostenlose Winerim-Werkzeuge"],
+      cta: { label: "Weitere Ressourcen ansehen", href: "/de/ratgeber" },
+      secondaryCta: { label: "Werkzeuge ausprobieren", href: "/de/werkzeuge" },
+    },
+    default: {
+      title: "Erfolgreich empfangen!",
+      subtitle: "Wir haben Ihre Anfrage erfasst. Wir werden Sie schnellstmöglich kontaktieren.",
+      steps: ["Ihre Anfrage wurde erfasst", "Unser Team wird sie prüfen", "Wir melden uns in Kürze"],
+      cta: { label: "Zurück zur Startseite", href: "/de" },
+    },
+  },
+  pt: {
+    demo: {
+      title: "Pedido de demo recebido!",
+      subtitle: "A nossa equipa entrará em contacto consigo nas próximas 24 horas para agendar a sua demonstração personalizada.",
+      steps: ["Analisamos o seu perfil e carta de vinhos", "Contactamo-lo para agendar a demo", "Mostramos-lhe o Winerim em ação com dados reais"],
+      cta: { label: "Explorar funcionalidades", href: "/pt/funcionalidades" },
+      secondaryCta: { label: "Ver casos de sucesso", href: "/pt/casos-de-sucesso" },
+    },
+    contacto: {
+      title: "Mensagem recebida!",
+      subtitle: "Recebemos a sua consulta. Responderemos em menos de 24 horas.",
+      steps: ["A sua mensagem foi registada", "Um especialista analisará a sua consulta", "Receberá resposta por e-mail ou telefone"],
+      cta: { label: "Entretanto, explore o Winerim", href: "/pt/o-que-e-winerim" },
+    },
+    "analisis-carta": {
+      title: "Carta de vinhos recebida para análise!",
+      subtitle: "A nossa equipa já está a trabalhar na sua análise personalizada. Receberá o relatório em menos de 48 horas.",
+      steps: ["Analisamos estrutura, preços e variedade", "Identificamos oportunidades de melhoria", "Enviamos-lhe um relatório com recomendações concretas"],
+      cta: { label: "Descubra as nossas ferramentas", href: "/pt/ferramentas" },
+      secondaryCta: { label: "Ver preços", href: "/pt/precos" },
+    },
+    resource: {
+      title: "Recurso descarregado!",
+      subtitle: "O download começou automaticamente. Receberá também um e-mail de confirmação com o link de acesso.",
+      steps: ["O seu recurso está a ser descarregado", "Verifique o seu e-mail para aceder novamente", "Explore mais ferramentas gratuitas do Winerim"],
+      cta: { label: "Ver mais recursos", href: "/pt/guias" },
+      secondaryCta: { label: "Experimentar ferramentas", href: "/pt/ferramentas" },
+    },
+    default: {
+      title: "Recebido com sucesso!",
+      subtitle: "Registámos o seu pedido. Entraremos em contacto o mais brevemente possível.",
+      steps: ["O seu pedido foi registado", "A nossa equipa irá analisá-lo", "Contactaremos em breve"],
+      cta: { label: "Voltar ao início", href: "/pt" },
+    },
+  },
 };
 
 const Gracias = () => {
@@ -183,6 +256,61 @@ const Gracias = () => {
   const langContent = CONTENT[lang];
   const isResource = formType.startsWith("plantilla-") || formType.startsWith("checklist-") || formType.startsWith("scorecard-") || formType.startsWith("guia-") || formType.startsWith("revision-");
   const c = langContent[formType] || (isResource ? langContent.resource : langContent.default);
+
+  /* ── Conversion tracking for SPA ──
+   * Google Ads conversion "Demo solicitada - Winerim" is configured as
+   * "page load when URL contains winerim.wine/gracias".
+   * React Router navigates client-side without a real page load,
+   * so we must fire a virtual pageview + explicit conversion events
+   * so GTM / gtag / Meta Pixel can detect the thank-you page.
+   */
+  useEffect(() => {
+    const fullUrl = window.location.href;
+    const pagePath = window.location.pathname + window.location.search;
+
+    // 1. Virtual pageview for gtag (triggers page-load conversions)
+    const gtag = (window as any).gtag;
+    if (typeof gtag === "function") {
+      gtag("event", "page_view", {
+        page_title: chrome.seoTitle,
+        page_location: fullUrl,
+        page_path: pagePath,
+      });
+    }
+
+    // 2. dataLayer push for GTM (triggers GTM page-view-based tags)
+    const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+    dl.push({
+      event: "virtualPageview",
+      pagePath,
+      pageTitle: chrome.seoTitle,
+      formType,
+    });
+
+    // 3. Explicit generate_lead event for GA4
+    dl.push({
+      event: "generate_lead",
+      form_type: formType,
+      page_path: pagePath,
+    });
+
+    // 4. Explicit ads_conversion event (backup for GTM-based Ads tags)
+    dl.push({
+      event: "ads_conversion",
+      conversion_type: formType,
+      page_path: pagePath,
+      value: formType === "demo" ? 100 : formType === "analisis-carta" ? 50 : 30,
+      currency: "EUR",
+    });
+
+    // 5. Meta Pixel Lead event
+    if (typeof (window as any).fbq === "function") {
+      (window as any).fbq("track", "Lead", {
+        content_name: formType,
+        content_category: "form_submission",
+      });
+    }
+  }, [formType, chrome.seoTitle]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -266,11 +394,11 @@ const Gracias = () => {
               <a href="mailto:info@winerim.com" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" /> info@winerim.com
               </a>
-              <a href="https://wa.me/34623165179" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://wa.me/34614499864" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <MessageCircle className="w-4 h-4" /> WhatsApp
               </a>
-              <a href="tel:+34722180348" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Phone className="w-4 h-4" /> +34 722 180 348
+              <a href="tel:+34614499864" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Phone className="w-4 h-4" /> +34 614 499 864
               </a>
             </div>
           </motion.div>

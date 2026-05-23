@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Badge } from "@/components/ui/badge";
@@ -367,7 +367,7 @@ const Navbar = memo(() => {
                 className="block py-3 text-base font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground/60"
                 onClick={() => setMobileOpen(false)}
               >
-                Área cliente
+                {t.nav_client_area}
               </Link>
               <div className="mt-6">
                 <Link

@@ -14,18 +14,48 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { notifyLead } from "@/lib/notifyLead";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { PREFIXES } from "@/components/PhoneInput";
 
 const WA_NUMBER = "34658718350";
-const WA_MSG = encodeURIComponent("Hola, me interesa trabajar en Winerim. ¿Puedo saber más?");
+const WA_MSG_ES = encodeURIComponent("Hola, me interesa trabajar en Winerim. Puedo saber mas?");
+const WA_MSG_EN = encodeURIComponent("Hi, I am interested in working at Winerim. Can I learn more?");
+const WA_MSG_DE = encodeURIComponent("Hallo, ich bin daran interessiert, bei Winerim zu arbeiten. Kann ich mehr erfahren?");
+const WA_MSG_PT = encodeURIComponent("Ola, estou interessado em trabalhar na Winerim. Posso saber mais?");
 
-const AREAS = [
-  { value: "tech", label: "Tecnología / Desarrollo" },
-  { value: "product", label: "Producto / Diseño" },
-  { value: "sales", label: "Ventas / Comercial" },
-  { value: "marketing", label: "Marketing / Contenidos" },
-  { value: "ops", label: "Operaciones / Customer Success" },
-  { value: "other", label: "Otro" },
-];
+const AREAS = {
+  es: [
+    { value: "tech", label: "Tecnologia / Desarrollo" },
+    { value: "product", label: "Producto / Diseno" },
+    { value: "sales", label: "Ventas / Comercial" },
+    { value: "marketing", label: "Marketing / Contenidos" },
+    { value: "ops", label: "Operaciones / Customer Success" },
+    { value: "other", label: "Otro" },
+  ],
+  en: [
+    { value: "tech", label: "Technology / Development" },
+    { value: "product", label: "Product / Design" },
+    { value: "sales", label: "Sales / Business" },
+    { value: "marketing", label: "Marketing / Content" },
+    { value: "ops", label: "Operations / Customer Success" },
+    { value: "other", label: "Other" },
+  ],
+  de: [
+    { value: "tech", label: "Technologie / Entwicklung" },
+    { value: "product", label: "Produkt / Design" },
+    { value: "sales", label: "Vertrieb / Business" },
+    { value: "marketing", label: "Marketing / Inhalt" },
+    { value: "ops", label: "Betrieb / Customer Success" },
+    { value: "other", label: "Sonstiges" },
+  ],
+  pt: [
+    { value: "tech", label: "Tecnologia / Desenvolvimento" },
+    { value: "product", label: "Produto / Design" },
+    { value: "sales", label: "Vendas / Negocios" },
+    { value: "marketing", label: "Marketing / Conteudo" },
+    { value: "ops", label: "Operacoes / Sucesso do Cliente" },
+    { value: "other", label: "Outro" },
+  ],
+};
 
 const Check = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-start gap-3">
@@ -35,7 +65,7 @@ const Check = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Empleo = () => {
-  const { t } = useLanguage();
+  const { lang, t, allLangPaths } = useLanguage();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -43,21 +73,35 @@ const Empleo = () => {
     name: "",
     email: "",
     phone: "",
+    phone_prefix: "",
     linkedin_url: "",
     area_of_interest: "",
     message: "",
   });
+  const currentAreas = AREAS[lang as keyof typeof AREAS] || AREAS.es;
+  const getWAMessage = () => {
+    const messages: Record<string, string> = {
+      es: WA_MSG_ES,
+      en: WA_MSG_EN,
+      de: WA_MSG_DE,
+      pt: WA_MSG_PT,
+    };
+    return messages[lang] || WA_MSG_ES;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim()) return;
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.phone_prefix) return;
+
+    const prefixObj = PREFIXES.find(p => p.code === form.phone_prefix);
+    const phoneFormatted = prefixObj ? `${prefixObj.dial} ${form.phone.trim()}` : form.phone.trim();
 
     setLoading(true);
     try {
       const { error } = await supabase.from("job_applications").insert({
         name: form.name.trim(),
         email: form.email.trim(),
-        phone: form.phone.trim() || null,
+        phone: phoneFormatted || null,
         linkedin_url: form.linkedin_url.trim() || null,
         area_of_interest: form.area_of_interest || null,
         message: form.message.trim() || null,
@@ -69,7 +113,7 @@ const Empleo = () => {
         form_type: "empleo",
         name: form.name,
         email: form.email,
-        phone: form.phone || null,
+        phone: phoneFormatted || null,
         message: form.message || null,
       });
 
@@ -87,6 +131,7 @@ const Empleo = () => {
       <SEOHead
         title={t.empleo_meta_title ?? "Trabaja en Winerim — Únete al equipo"}
         description={t.empleo_meta_desc ?? "Únete al equipo que está transformando la gestión del vino en hostelería. Descubre las oportunidades de empleo en Winerim."}
+        hreflang={allLangPaths("/empleo")}
       />
       <Navbar />
       <main className="min-h-screen bg-background">
@@ -347,7 +392,7 @@ const Empleo = () => {
               {/* Multi-channel CTAs */}
               <div className="flex flex-wrap justify-center gap-3 mb-10">
                 <a
-                  href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
+                  href={`https://wa.me/${WA_NUMBER}?text=${getWAMessage()}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-wine transition-colors"
@@ -408,15 +453,37 @@ const Empleo = () => {
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="emp-phone">{t.form_phone_label ?? "Teléfono"}</Label>
-                    <Input
-                      id="emp-phone"
-                      type="tel"
-                      maxLength={20}
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+34 600 000 000"
-                    />
+                    <Label htmlFor="emp-phone">{t.form_phone_label ?? "Teléfono"} <span className="text-destructive">*</span></Label>
+                    <div className="flex">
+                      <select
+                        id="emp-phone-prefix"
+                        value={form.phone_prefix}
+                        onChange={(e) => setForm({ ...form, phone_prefix: e.target.value })}
+                        className="h-10 rounded-l-md border border-r-0 border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                        style={{ width: "110px", minWidth: "110px" }}
+                        aria-label="Country prefix"
+                        required
+                      >
+                        <option value="">
+                          {lang === "en" ? "Select country" : lang === "it" ? "Seleziona paese" : lang === "fr" ? "Choisir pays" : lang === "de" ? "Land wählen" : lang === "pt" ? "Selecionar país" : "Selecciona país"}
+                        </option>
+                        {PREFIXES.map((p) => (
+                          <option key={p.code} value={p.code}>
+                            {p.flag} {p.dial}
+                          </option>
+                        ))}
+                      </select>
+                      <Input
+                        id="emp-phone"
+                        type="tel"
+                        required
+                        maxLength={15}
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="600 000 000"
+                        className="rounded-l-none"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="emp-linkedin" className="flex items-center gap-1.5">
@@ -434,13 +501,13 @@ const Empleo = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>{t.empleo_area_label ?? "Área de interés"}</Label>
+                  <Label>{t.empleo_area_label ?? "Area de interes"}</Label>
                   <Select value={form.area_of_interest} onValueChange={(v) => setForm({ ...form, area_of_interest: v })}>
                     <SelectTrigger>
-                      <SelectValue placeholder={t.empleo_area_placeholder ?? "Selecciona un área"} />
+                      <SelectValue placeholder={t.empleo_area_placeholder ?? "Selecciona un area"} />
                     </SelectTrigger>
                     <SelectContent>
-                      {AREAS.map((a) => (
+                      {currentAreas.map((a) => (
                         <SelectItem key={a.value} value={a.value}>{a.label}</SelectItem>
                       ))}
                     </SelectContent>

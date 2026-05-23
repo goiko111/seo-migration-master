@@ -47,36 +47,69 @@ const langContent: Record<string, LangContent> = {
     subtitle: "À la Winerim Academy, tous nos experts s'expriment. Sommeliers et responsables vins des restaurants, hôtels, bars à vins, distributeurs et domaines les plus importants.",
     readCta: "Lire l'interview", featured: "À la une", interviewLabel: "Interview",
   },
+  de: {
+    metaTitle: "Sommelier Corner", metaDesc: "Interviews mit den besten Sommeliers und Weinexperten.",
+    label: "Winerim Academy", title: "Sommelier Corner",
+    subtitle: "In der Winerim Academy kommen alle unsere Experten zu Wort. Sommeliers und Weinverantwortliche der wichtigsten Restaurants, Hotels, Weinbars, Distributoren und Weingüter.",
+    readCta: "Interview lesen", featured: "Empfohlen", interviewLabel: "Interview",
+  },
+  pt: {
+    metaTitle: "Sommelier Corner", metaDesc: "Entrevistas com os melhores sommeliers e especialistas em vinho.",
+    label: "Winerim Academy", title: "Sommelier Corner",
+    subtitle: "Na Winerim Academy, falam todos os nossos especialistas. Escanções e responsáveis de vinhos dos restaurantes, hotéis, garrafeiras, distribuidores e adegas mais importantes.",
+    readCta: "Ler entrevista", featured: "Destaque", interviewLabel: "Entrevista",
+  },
 };
 
-const formatDate = (dateStr: string | null) => {
-  if (!dateStr) return "";
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+const localeMap: Record<string, string> = {
+  es: "es-ES", en: "en-US", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
 };
 
 const SommelierCorner = () => {
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [loading, setLoading] = useState(true);
   const { get } = usePageContent("sommelier");
-  const { lang } = useLanguage();
+  const { lang, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString(localeMap[lang] || "es-ES", { day: "numeric", month: "long", year: "numeric" });
+  };
 
   useEffect(() => {
     const fetchInterviews = async () => {
-      const { data } = await supabase
+      // Fetch interviews for the current language
+      let { data } = await supabase
         .from("articles")
         .select("slug, title, excerpt, image_url, author, author_role, published_at")
         .eq("published", true)
         .eq("category", "interview")
+        .eq("lang", lang)
         .order("published_at", { ascending: false });
 
+      // Fallback to Spanish if no interviews exist in the current language
+      if ((!data || data.length === 0) && lang !== "es") {
+        ({ data } = await supabase
+          .from("articles")
+          .select("slug, title, excerpt, image_url, author, author_role, published_at")
+          .eq("published", true)
+          .eq("category", "interview")
+          .eq("lang", "es")
+          .order("published_at", { ascending: false }));
+      }
+
       if (data && data.length > 0) {
-        setInterviews(data.map(a => ({
-          quote: a.title, name: a.author || "", role: a.author_role || "",
-          excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${a.slug}`,
-          publishedAt: a.published_at,
-        })));
+        setInterviews(data.map(a => {
+          // For translated interviews, strip the _lang suffix from slug for the URL
+          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
+          return {
+            quote: a.title, name: a.author || "", role: a.author_role || "",
+            excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${baseSlug}`,
+            publishedAt: a.published_at,
+          };
+        }));
       } else {
         const staticInterviews = Object.values(staticArticles)
           .filter(a => a.type === "interview")
@@ -90,7 +123,7 @@ const SommelierCorner = () => {
       setLoading(false);
     };
     fetchInterviews();
-  }, []);
+  }, [lang]);
 
   if (loading) {
     return (
@@ -104,7 +137,8 @@ const SommelierCorner = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/sommelier-corner" />
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/sommelier-corner"
+        hreflang={allLangPaths("/sommelier-corner")} />
       <main>
         {/* Hero */}
         <section className="pt-32 pb-16 section-padding">
@@ -135,7 +169,7 @@ const SommelierCorner = () => {
                   {featured.image && (
                     <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
                       <img src={featured.image} alt={featured.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}
@@ -178,7 +212,7 @@ const SommelierCorner = () => {
                   {item.image && (
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={item.image} alt={item.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         loading="lazy" decoding="async" />
                     </div>
                   )}

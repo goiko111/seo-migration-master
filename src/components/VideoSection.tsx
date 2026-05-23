@@ -20,6 +20,14 @@ const labels: Record<string, { label: string; title: string }> = {
     label: "Rejoignez la #WorldWineRevolution",
     title: "Découvrez ce que Winerim peut faire pour votre cave",
   },
+  de: {
+    label: "Werden Sie Teil der #WorldWineRevolution",
+    title: "Sehen Sie, was Winerim für Ihren Weinkeller tun kann",
+  },
+  pt: {
+    label: "Junte-se à #WorldWineRevolution",
+    title: "Veja o que o Winerim pode fazer pela sua garrafeira",
+  },
 };
 
 const VideoSection = () => {

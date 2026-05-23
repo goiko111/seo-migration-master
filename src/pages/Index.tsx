@@ -34,7 +34,7 @@ const Index = () => {
 
   // Inject BreadcrumbList + WebPage schemas for Rich Results consistency
   useEffect(() => {
-    const langNames: Record<string, string> = { es: "Inicio", en: "Home", it: "Home", fr: "Accueil" };
+    const langNames: Record<string, string> = { es: "Inicio", en: "Home", it: "Home", fr: "Accueil", de: "Startseite", pt: "Início" };
     const schemas = [
       {
         "@context": "https://schema.org",

@@ -2,11 +2,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, LanguageCode, DEFAULT_LANG } from "@/i18n/types";
+import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, type SupportedLang, DEFAULT_LANG } from "@/i18n/types";
 import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 /** Find the ES route equivalent for the current path */
-function findEsRoute(pathname: string, currentLang: LanguageCode): string {
+function findEsRoute(pathname: string, currentLang: SupportedLang): string {
   const wineLibraryPath = getWineLibraryEsPath(pathname);
   if (wineLibraryPath) return wineLibraryPath;
 
@@ -37,7 +37,7 @@ const LanguageSwitcher = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const switchTo = (targetLang: LanguageCode) => {
+  const switchTo = (targetLang: SupportedLang) => {
     setOpen(false);
     if (targetLang === lang) return;
 

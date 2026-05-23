@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import winerimLogo from "@/assets/winerim-logo.png";
+import winerimLogo from "@/assets/winerim-logo.webp";
 import ScrollReveal from "./ScrollReveal";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -131,7 +131,7 @@ const Footer = () => {
                 { label: t.nav_clients, href: localePath("/clientes") },
                 { label: t.nav_contact, href: localePath("/contacto") },
                 { label: "Partners", href: localePath("/afiliate") },
-                { label: "Distribuidores", href: localePath("/distribuidor") },
+                { label: ({ es: "Distribuidores", en: "Distributors", it: "Distributori", fr: "Distributeurs", de: "Distributoren", pt: "Distribuidores" } as Record<string, string>)[lang] ?? "Distributors", href: localePath("/distribuidor") },
                 { label: t.empleo_footer_link ?? "Trabaja con nosotros", href: localePath("/empleo") },
                 { label: t.nav_client_area, href: "/decision-center" },
                 { label: t.footer_privacy, href: localePath("/privacidad") },

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const WHATSAPP_NUMBER = "34623165179";
+const WHATSAPP_NUMBER = "34614499864";
 
 const WhatsAppButton = () => {
   const [visible, setVisible] = useState(false);

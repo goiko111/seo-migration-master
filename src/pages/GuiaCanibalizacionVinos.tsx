@@ -181,7 +181,97 @@ const fr: GuidePageData = {
   ctaFinalDescription: "Analyse automatique des clusters, alertes de redondance et recommandations de substitution basées sur la performance réelle.",
 };
 
-const data: Record<string, GuidePageData> = { es, en, it, fr };
+const de: GuidePageData = {
+  slug: "de/ratgeber/wein-kannibalisierung-auf-der-karte-erkennen",
+  metaTitle: "Wie Sie Kannibalisierung zwischen Weinen Ihrer Karte erkennen | Winerim",
+  metaDescription: "Ratgeber zum Identifizieren und Lösen von Kannibalisierung zwischen Referenzen Ihrer Weinkarte: Diagnose, Methodik, Entscheidungen und Optimierungs-Framework.",
+  heroTitle: "Wie Sie Kannibalisierung zwischen Weinen Ihrer Karte erkennen",
+  heroSubtitle: "Wenn Sie 3 Spätburgunder im selben Preissegment haben, konkurrieren sie nicht mit dem Wettbewerb. Sie konkurrieren untereinander. Kannibalisierung ist das unsichtbare Problem, das die meisten Weinkarten haben und das am wenigsten Restaurants diagnostizieren.",
+  heroBadge: "Analytischer Ratgeber",
+  breadcrumbParent: { label: "Ratgeber", href: "/de/ratgeber" },
+  tableOfContents: [
+    "Was ist Kannibalisierung und warum ist sie wichtig",
+    "Anzeichen, dass Ihre Karte Kannibalisierung aufweist",
+    "Schritt-für-Schritt-Diagnosemethodik",
+    "Wie Sie entscheiden, welche Referenz bleibt und welche geht",
+    "Typische Kannibalisierungsfälle",
+    "Checkliste gegen Kannibalisierung",
+  ],
+  sections: [
+    { heading: "Was ist Kannibalisierung und warum ist sie wichtig", content: "Kannibalisierung tritt auf, wenn zwei oder mehr Weine Ihrer Karte um denselben Gast, im selben Moment, ohne klare Differenzierung konkurrieren. Das Ergebnis: Die Verkäufe verteilen sich auf ähnliche Referenzen statt sich zu konzentrieren, keine rotiert ausreichend und der Bestand vervielfacht sich unnötig.\n\nKannibalisierung bedeutet nicht, ähnliche Weine zu haben. Sie bedeutet, ähnliche Weine ohne strategischen Grund zu haben.\n\nDirekte Auswirkungen:\n• Kapital gebunden in redundanten Referenzen.\n• Geringere durchschnittliche Rotation jeder betroffenen Referenz.\n• Höheres Risiko von Totbestand.\n• Das Serviceteam weiß nicht, welchen zu empfehlen.\n• Der Gast erstarrt vor Optionen, die er nicht unterscheiden kann.", tips: ["Zwei Riesling Kabinett zu 16 € und 18 € sind keine Vielfalt — das ist Verwirrung. Der Gast wählt fast immer den zu 16 €.", "Kannibalisierung kostet echtes Geld: gebundenes Kapital in redundantem Bestand und verlorene Verkaufsgelegenheiten.", "Ein durchschnittliches Restaurant hat zwischen 15 % und 25 % Redundanz auf der Karte, ohne es zu wissen."], icon: "alert" },
+    { heading: "Anzeichen, dass Ihre Karte Kannibalisierung aufweist", content: "Bevor Sie eine formale Analyse durchführen, achten Sie auf diese schnellen Signale.", tips: ["Zwei oder mehr Weine desselben Stils, derselben Region und Preisklasse (±20 %). Das klarste Signal.", "Eine Referenz verkauft sich gut und eine ähnliche bewegt sich kaum. Die erste 'stiehlt' Verkäufe der zweiten.", "Das Serviceteam empfiehlt immer denselben Wein, wenn 2–3 ähnliche Optionen bestehen. Die anderen sind unsichtbar.", "Sie haben angesammelten Bestand eines Weins, der sich 'eigentlich verkaufen sollte'. Ein anderer ähnlicher Wein kannibalisiert ihn wahrscheinlich.", "Wenn Sie das Team nach dem Unterschied zwischen zwei Weinen fragen, können sie ihn nicht erklären. Wenn sie ihn nicht sehen, sieht ihn auch der Gast nicht."], icon: "alert" },
+    { heading: "Schritt-für-Schritt-Diagnosemethodik", content: "Um Kannibalisierung systematisch zu erkennen, folgen Sie diesen 4 Schritten.", tips: ["Schritt 1 — Nach Profil gruppieren: klassifizieren Sie alle Weine nach Typ (Weißwein, Rotwein, Roséwein), Stil (jung, im Holzfass ausgebaut, Reserve), Region und Preisklasse.", "Schritt 2 — Cluster suchen: identifizieren Sie Gruppen mit 2+ Weinen desselben Typs + Stils + Preisklasse (±20 %). Das sind Ihre Risikocluster.", "Schritt 3 — Leistung innerhalb des Clusters vergleichen: für jedes Cluster prüfen Sie, welcher sich am meisten verkauft, welcher die bessere Marge hat und welcher am schlechtesten rotiert.", "Schritt 4 — Mit dem Team validieren: fragen Sie das Serviceteam, ob es den Unterschied zwischen den Weinen des Clusters erklären kann. Wenn nicht, ist die Kannibalisierung bestätigt."], icon: "list" },
+    { heading: "Wie Sie entscheiden, welche Referenz bleibt und welche geht", content: "Wenn Sie Kannibalisierung bestätigen, müssen Sie entscheiden, welchen Wein Sie behalten. Es geht nicht nur um Verkäufe. Verwenden Sie diese 5 gewichteten Kriterien.\n\n1. Verkaufsleistung (30 %).\n2. Bruttomarge (25 %).\n3. Differenzierung (20 %).\n4. Verfügbarkeit (15 %).\n5. Narrativ (10 %).", tips: ["Eliminieren Sie nicht immer den mit den geringsten Verkäufen. Manchmal hat er die bessere Marge oder mehr Potenzial mit aktiver Empfehlung.", "Wenn zwei Weine gleich abschneiden, behalten Sie den mit der besseren Geschichte. Narrativ verkauft.", "Wenn Sie einen Wein von der Karte nehmen, werfen Sie ihn nicht weg. Verkaufen Sie ihn bei Events, Degustationsmenüs oder als Sonderglas."], icon: "check" },
+    { heading: "Typische Kannibalisierungsfälle", content: "Dies sind die häufigsten Kannibalisierungsmuster in realen Restaurants.", tips: ["Spätburgunder vs Spätburgunder: 3 Spätburgunder zwischen 22 € und 28 €. Lösung: behalten Sie 1 in diesem Bereich und führen Sie einen Lemberger oder Dornfelder als Alternative ein.", "Riesling vs Riesling: 2 Riesling zwischen 14 € und 17 €. Lösung: behalten Sie 1 und fügen Sie einen Grauburgunder oder Silvaner zur Diversifizierung hinzu.", "Glas vs Glas: 2 junge Rotweine im Offenausschank zu 4 € und 4,50 €. Lösung: behalten Sie 1 jungen Rotwein und ersetzen Sie den anderen durch ein anderes Profil.", "Einstieg vs Einstieg: 3 Weine zwischen 12 € und 15 €, die als 'die günstige Option' konkurrieren. Lösung: behalten Sie maximal 2 und stufen Sie den dritten hoch oder ersetzen Sie ihn."], icon: "lightbulb" },
+    { heading: "Checkliste gegen Kannibalisierung", content: "Bevor Sie Ihre Karte finalisieren (oder bei jeder monatlichen Überprüfung), arbeiten Sie diese Checkliste durch.", tips: ["✓ Nicht mehr als 2 Weine desselben Typs + Stils + Region in derselben Preisklasse (±20 %).", "✓ Das Serviceteam kann den Unterschied zwischen jedem Paar ähnlicher Weine in 15 Sekunden erklären.", "✓ Jede Referenz hat einen 'Grund auf der Karte': warum sie da ist und was sie Einzigartiges beiträgt.", "✓ Kein Risikocluster hat eine Referenz mit weniger als 3 monatlichen Verkäufen.", "✓ Beim Hinzufügen einer neuen Referenz überprüfen Sie, dass sie keine bestehende kannibalisiert.", "✓ Jede Preisklasse hat Stilvielfalt, nicht Wiederholung desselben Profils."], icon: "list" },
+  ],
+  faqs: [
+    { q: "Sind 2 ähnliche Weine immer ein Problem?", a: "Nicht immer. In der gehobenen Gastronomie mit erfahrener Klientel kann es sinnvoll sein, 2 Spätburgunder verschiedener Erzeuger anzubieten. Aber in Restaurants mit 20–40 Referenzen ist Redundanz meist ein Problem." },
+    { q: "Wie erkenne ich Kannibalisierung zwischen Glas und Flasche?", a: "Wenn derselbe Wein als Glas und Flasche verfügbar ist, ist das keine Kannibalisierung (es ist komplementär). Das Problem entsteht, wenn Sie 2 junge Rotweine im Offenausschank haben, die sich die Verkäufe teilen." },
+    { q: "Wie oft sollte ich auf Kannibalisierung prüfen?", a: "Bei jeder monatlichen Kartenüberprüfung. Es ist eine schnelle Prüfung: schauen Sie sich Ihre Risikocluster an und verifizieren Sie, dass es keine redundanten Referenzen ohne Leistung gibt." },
+    { q: "Erkennt Winerim Kannibalisierung automatisch?", a: "Ja. Winerim identifiziert Cluster ähnlicher Weine auf Ihrer Karte und alarmiert Sie, wenn es Kannibalisierungsmuster auf Basis realer Leistung erkennt." },
+  ],
+  relatedTools: [
+    { label: "Weinkartenanalyse", url: "/wine-list-analyzer" },
+    { label: "Rechner für Totbestand", url: "/de/tools/rechner-totbestand" },
+  ],
+  relatedGuides: [
+    { label: "Tote Weine erkennen", url: "/de/ratgeber/tote-weine-erkennen" },
+    { label: "Sortiment nach Durchschnittsbon entscheiden", url: "/de/ratgeber/sortiment-nach-durchschnittsbon-entscheiden" },
+    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-verbessern" },
+  ],
+  ctaPrimaryText: "Meine Karte analysieren", ctaPrimaryUrl: "/wine-list-analyzer",
+  ctaSecondaryText: "Demo anfragen", ctaSecondaryUrl: "/de/demo",
+  ctaFinalTitle: "Winerim erkennt Kannibalisierung, bevor sie Sie Geld kostet",
+  ctaFinalDescription: "Automatische Clusteranalyse, Redundanzwarnungen und Ersatzempfehlungen auf Basis realer Leistung.",
+};
+
+const pt: GuidePageData = {
+  slug: "pt/guias/como-detetar-canibalizacao-vinhos-carta",
+  metaTitle: "Como Detetar Canibalização entre Vinhos da Carta | Winerim",
+  metaDescription: "Guia para identificar e resolver a canibalização entre referências da sua carta de vinhos: diagnóstico, metodologia, decisões e framework de otimização.",
+  heroTitle: "Como detetar canibalização entre vinhos da carta",
+  heroSubtitle: "Se tem 3 Douro tinto de reserva na mesma gama de preço, não estão a competir com a concorrência. Estão a competir entre si. A canibalização é o problema invisível que a maioria das cartas tem e que poucos restaurantes diagnosticam.",
+  heroBadge: "Guia analítico",
+  breadcrumbParent: { label: "Guias", href: "/pt/guias" },
+  tableOfContents: [
+    "O que é a canibalização e porque importa",
+    "Sinais de que a sua carta tem canibalização",
+    "Metodologia de diagnóstico passo a passo",
+    "Como decidir qual referência fica e qual sai",
+    "Casos típicos de canibalização",
+    "Checklist anti-canibalização",
+  ],
+  sections: [
+    { heading: "O que é a canibalização e porque importa", content: "A canibalização ocorre quando dois ou mais vinhos da sua carta competem pelo mesmo cliente, no mesmo momento, sem oferecer uma diferenciação clara. O resultado: as vendas dividem-se entre referências semelhantes em vez de se concentrarem, nenhuma roda o suficiente e o stock multiplica-se desnecessariamente.\n\nA canibalização não é ter vinhos parecidos. É ter vinhos parecidos sem uma razão estratégica.\n\nImpacto direto:\n• Capital imobilizado em referências redundantes.\n• Menor rotação média de cada referência afetada.\n• Maior risco de stock morto.\n• A equipa de sala não sabe qual recomendar.\n• O comensal paralisa perante opções que não consegue diferenciar.", tips: ["Dois Vinho Verde a 16 € e 18 € não é diversidade — é confusão. O cliente escolherá quase sempre o de 16 €.", "A canibalização custa dinheiro real: capital imobilizado em stock redundante e oportunidades de venda perdidas.", "Um restaurante médio tem entre 15 % e 25 % de redundância na carta sem o saber."], icon: "alert" },
+    { heading: "Sinais de que a sua carta tem canibalização", content: "Antes de fazer uma análise formal, procure estes sinais rápidos.", tips: ["Dois ou mais vinhos do mesmo estilo, região e gama de preço (±20 %). O sinal mais claro.", "Uma referência vende muito e outra semelhante mal se mexe. A primeira está a 'roubar' vendas à segunda.", "A equipa de sala recomenda sempre o mesmo vinho quando existem 2–3 opções semelhantes. As outras são invisíveis.", "Tem stock acumulado de um vinho que 'deveria vender-se' dado o seu perfil e preço. Outro vinho semelhante está provavelmente a canibalizá-lo.", "Ao perguntar à equipa a diferença entre dois vinhos, não a conseguem explicar. Se eles não a veem, o cliente também não."], icon: "alert" },
+    { heading: "Metodologia de diagnóstico passo a passo", content: "Para detetar canibalização de forma sistemática, siga estes 4 passos.", tips: ["Passo 1 — Agrupe por perfil: classifique todos os vinhos por tipo (branco, tinto, rosado), estilo (jovem, estagiado em madeira, reserva), região e gama de preço.", "Passo 2 — Procure clusters: identifique grupos com 2+ vinhos do mesmo tipo + estilo + gama de preço (±20 %). Esses são os seus clusters de risco.", "Passo 3 — Compare o desempenho dentro do cluster: para cada cluster, veja qual vende mais, qual tem melhor margem e qual roda pior.", "Passo 4 — Valide com a equipa: pergunte à equipa de sala se conseguem explicar a diferença entre os vinhos do cluster. Se não conseguirem, a canibalização está confirmada."], icon: "list" },
+    { heading: "Como decidir qual referência fica e qual sai", content: "Quando confirma a canibalização, precisa de decidir qual vinho manter. Não é só questão de vendas. Use estes 5 critérios ponderados.\n\n1. Desempenho comercial (30 %).\n2. Margem bruta (25 %).\n3. Diferenciação (20 %).\n4. Disponibilidade (15 %).\n5. Narrativa (10 %).", tips: ["Não elimine sempre o que vende menos. Às vezes tem melhor margem ou mais potencial com recomendação ativa.", "Se dois vinhos pontuam igual, fique com o que tem melhor história para sala. A narrativa vende.", "Ao retirar um vinho da carta, não o deite fora. Liquide-o em eventos, menus de degustação ou como copo especial."], icon: "check" },
+    { heading: "Casos típicos de canibalização", content: "Estes são os padrões de canibalização mais comuns em restaurantes reais.", tips: ["Douro vs Douro: 3 Douro tinto reserva entre 22 € e 28 €. Solução: deixe 1 nesta gama e introduza um Alentejo ou Dão como alternativa.", "Vinho Verde vs Vinho Verde: 2 Vinho Verde entre 14 € e 17 €. Solução: mantenha 1 e adicione um Alvarinho monocasta ou um Encruzado para diversificar.", "Copo vs copo: 2 tintos jovens a copo a 4 € e 4,50 €. Solução: deixe 1 tinto jovem e substitua o outro por um perfil diferente.", "Entrada vs entrada: 3 vinhos entre 12 € e 15 € a competir como 'o barato'. Solução: deixe no máximo 2 e suba o terceiro de gama ou substitua-o."], icon: "lightbulb" },
+    { heading: "Checklist anti-canibalização", content: "Antes de fechar a carta (ou em cada revisão mensal), passe esta checklist.", tips: ["✓ Não há mais de 2 vinhos do mesmo tipo + estilo + região na mesma gama de preço (±20 %).", "✓ A equipa de sala consegue explicar a diferença entre cada par de vinhos semelhantes em 15 segundos.", "✓ Cada referência tem uma 'razão de carta': porque está lá e o que acrescenta que mais nenhuma acrescenta.", "✓ Nenhum cluster de risco tem referência com menos de 3 vendas mensais.", "✓ Ao incorporar uma referência nova, verifica que não canibaliza uma existente.", "✓ Cada gama de preço tem diversidade de estilos, não repetição do mesmo perfil."], icon: "list" },
+  ],
+  faqs: [
+    { q: "Ter 2 vinhos parecidos é sempre mau?", a: "Nem sempre. No fine dining com clientela experiente, pode fazer sentido oferecer 2 Douro de produtores diferentes. Mas em restaurantes com 20-40 referências, a redundância é habitualmente um problema." },
+    { q: "Como deteto canibalização entre copo e garrafa?", a: "Se o mesmo vinho está disponível a copo e garrafa, não é canibalização (é complementar). O problema é quando tem 2 tintos jovens a copo que dividem as vendas." },
+    { q: "Com que frequência devo rever a canibalização?", a: "Em cada revisão mensal da carta. É uma verificação rápida: olhe para os seus clusters de risco e confirme que não há referências redundantes sem desempenho." },
+    { q: "O Winerim deteta a canibalização automaticamente?", a: "Sim. O Winerim identifica clusters de vinhos semelhantes na sua carta e alerta-o quando deteta padrões de canibalização com base no desempenho real." },
+  ],
+  relatedTools: [
+    { label: "Analisador de carta", url: "/wine-list-analyzer" },
+    { label: "Calculadora de stock morto", url: "/pt/ferramentas/calculadora-stock-morto" },
+  ],
+  relatedGuides: [
+    { label: "Detetar vinhos mortos", url: "/pt/guias/como-detetar-vinhos-mortos" },
+    { label: "Decidir sortido pelo bilhete médio", url: "/pt/guias/como-decidir-sortido-pelo-bilhete-medio" },
+    { label: "Melhorar a rotação de vinhos", url: "/pt/guias/como-melhorar-rotacao-vinhos" },
+  ],
+  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/wine-list-analyzer",
+  ctaSecondaryText: "Solicitar demo", ctaSecondaryUrl: "/pt/demo",
+  ctaFinalTitle: "O Winerim deteta canibalização antes que lhe custe dinheiro",
+  ctaFinalDescription: "Análise automática de clusters, alertas de redundância e recomendações de substituição com base no desempenho real.",
+};
+
+const data: Record<string, GuidePageData> = { es, en, it, fr, de, pt };
 
 const GuiaCanibalizacionVinos = () => <GuideTemplate data={data} />;
 export default GuiaCanibalizacionVinos;

@@ -1,0 +1,178 @@
+import { Wine } from "lucide-react";
+import type { DeepAreaContent } from "./margenesPricing";
+
+const vinoPorCopaPT: DeepAreaContent = {
+  name: "Vinho a Copo",
+  tagline: "O programa de vinho a copo como multiplicador de margem",
+  intro: "Esta secção ajuda a conceber, executar e controlar um programa rentavel de vinho a copo. Servir vinho a copo nao eh simplesmente despejador porcoes mais pequenas: eh uma alavanca de margem, uma ferramenta de conversao e um teste de mercado em tempo real. Mal gerido, todavia, torna-se a maior fonte de perda invisivel num restaurante.",
+  icon: Wine,
+  accent: "text-purple-500",
+  bg: "bg-purple-500/10",
+  audiences: ["sala", "direccion", "compras-fb"],
+  topErrors: [
+    { error: "Oferecer vinhos a copo que destroem a margem atraves da quebra", porQueOcurre: "Porque os vinhos sao escolhidos pela qualidade ou gosto pessoal sem verificar se o volume de vendas justifica abrir a garrafa.", consecuencia: "30-40% da garrafa sao descartados. Um vinho com margem teorica de 70% cai para 25% na pratica. Perde dinheiro em cada copo." },
+    { error: "Ter demasiados copos activos sem volume de vendas suficiente", porQueOcurre: "Porque mais copos parecem uma melhor oferta. Mas cada copo aberto eh uma garrafa que deve ser terminada dentro de 24-48 horas.", consecuencia: "A quebra multiplica-se com cada referencia. Oito copos com baixo volume geram mais perda do que quatro bem escolhidos." },
+    { error: "Definir o preco do copo sem contabilizar a quebra real", porQueOcurre: "Porque o calculo rapido eh garrafa dividido por 5 copos. Mas a realidade eh 4 copos (ou menos) depois de contabilizar a quebra.", consecuencia: "Vende a um preco que nao cobre o custo real. Quanto mais vende, mais perde - e parece bom negocio." },
+    { error: "Nao medir canibalizacao entre copo e garrafa", porQueOcurre: "Porque assume-se que o copo adiciona novas vendas, nunca que retira vendas da garrafa.", consecuencia: "O seu bilhete medio cai sem notar. O hospede que teria pedido uma garrafa agora pede dois copos, e a margem total eh menor." },
+    { error: "Deixar o pessoal de piso decidir o que recomendar a copo", porQueOcurre: "Porque sem uma directriz clara, cada funcionario recomenda o que conhece ou prefere.", consecuencia: "O volume concentra-se em 1-2 copos enquanto o resto se oxida. A experiencia do hospede eh inconsistente." },
+  ],
+  links: [
+    { label: "Calculadora de preco do copo", href: "/en/tools/wine-pricing-tool", description: "Calcule o preco do copo includindo quebra real e margem alvo", type: "tool" },
+    { label: "Guia: Vinho a copo sem perder margem", href: "/en/guides/how-to-implement-wine-by-the-glass-without-losing-margin", description: "Guia passo a passo para construir um programa de copo rentavel", type: "guide" },
+    { label: "Modelo: Estrategia de vinho a copo", href: "/en/resources/wine-by-the-glass-strategy-template", description: "Conceba a sua seleccao de copo com criterios comerciais", type: "resource" },
+    { label: "Modelo: Treino expresso do pessoal", href: "/en/resources/express-floor-training-template", description: "Treine a sua equipa para recomendar copos com proposito em 30 minutos", type: "resource" },
+    { label: "Winerim Core", href: "/en/product/winerim-core", description: "Monitorize volume, quebra e rentabilidade por copo automaticamente", type: "product" },
+    { label: "Blog: Preco do copo sem consumir margem", href: "/en/article/como-calcular-precio-por-copa-sin-comerte-margen", description: "A formula correcta para definir precos de copo com quebra real", type: "article" },
+    { label: "Blog: Que vinhos oferecer a copo", href: "/en/article/que-vinos-ofrecer-por-copa-segun-tipo-local", description: "Seleccao de copo por tipo de local e perfil de hospede", type: "article" },
+  ],
+  miniCases: [
+    {
+      profile: "Adega de vinhos com 12 copos activos",
+      situation: "Tinha 12 copos mas apenas 5 rodavam bem. Os restantes 7 geravam 35% de quebra que ninguem media.",
+      action: "Reduzido para 7 copos, escolhendo os com melhor racao de volume/margem. Os outros 5 foram oferecidos apenas pela garrafa.",
+      result: "A quebra caiu de 35% para 12%. A margem real por copo subiu 22%. Menos trabalho para o pessoal e menos quebra.",
+    },
+    {
+      profile: "Restaurante de almoco executivo",
+      situation: "Oferecia 3 copos a preco fixo (4,50 EUR). Nao calculava quebra ou diferenciava por custo. O copo mais caro custava 3,80 EUR e era vendido por 4,50 EUR.",
+      action: "Diferenciou precos de copo por custo real. Aumentou o copo premium para 6 EUR. Manteve uma opcao entry-level por 4,50 EUR com vinho mais barato.",
+      result: "A margem media por copo foi de 18% para 52%. Os hospedes aceitam pagar mais quando percebem diferenca de qualidade.",
+    },
+    {
+      profile: "Restaurante fine-dining com 120 referencias",
+      situation: "Tinha 8 copos activos mas 4 eram tintos muito semelhantes (Rioja crianza entre 7 e 9 EUR por copo). O pessoal nao conseguia diferencia-los e sempre recomendava o mesmo.",
+      action: "Reduziu tintos a copo para 2 (um jovem, um crianza). Adicionou um branco mineral e uma opcao de espumante. Treinou a equipa com o modelo de treino expresso.",
+      result: "A diversidade de copos vendidos foi de 2 referencias para 80% do programa. O bilhete medio de copo subiu 1,80 EUR porque a opcao de espumante abriu a venda.",
+    },
+    {
+      profile: "Hotel resort com 3 estabelecimentos",
+      situation: "Cada estabelecimento (restaurante, bar de piscina, lobby bar) tinha copos diferentes sem criterios comuns. O bar de piscina usava vinhos premium que ninguem pedia; o restaurante tinha copos entry-level que nao correspondiam a sua gastronomia.",
+      action: "Definiu um programa de copo por estabelecimento: 3 copos no bar de piscina (entrada, fresco, rapida rotacao), 5 no restaurante (progressao de preco, harmonias), 4 no lobby (exploracao, conversas). Usou Winerim Core para monitorizar quebra por estabelecimento.",
+      result: "A quebra geral caiu de 28% para 14%. Cada estabelecimento tem um programa coerente com o seu publico. O restaurante duplicou vendas de copos premium.",
+    },
+  ],
+  subtopics: [
+    {
+      id: "cuando-conviene-copa",
+      title: "Quando eh vinho a copo uma boa ideia",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim identificou referencias com potencial de copo: boas classificacoes, baixo volume de garrafa e perfis resistentes a oxidacao.", whyMatters: "O copo baixa a barreira de compromisso do hospede. Um vinho que ninguem pede a 35 EUR por garrafa pode vender facilmente a 9 EUR por copo.", riskIfIgnored: "Perde conversao, bilhete medio e exploracao. O hospede que nao se atreve com a garrafa simplesmente nao pede vinho." },
+      queSignifica: "Um vinho eh um bom candidato a copo quando cumpre tres condicoes simultaneamente: tem procura potencial (o hospede pediria se pudesse provar sem se comprometer com garrafa completa), aguenta pelo menos 24-48 horas uma vez aberto sem perder qualidade, e o seu volume esperado de copo permite terminar a garrafa antes de se degradar. Se falhar em qualquer das tres, nao eh bom candidato.",
+      porQueImporta: "Porque o copo baixa a barreira de compromisso do hospede. O hospede que nao arrisca uma garrafa de 35 EUR pede um copo de 9 EUR. Isso aumenta conversao, bilhete medio e exploracao. Alem disso, o copo deixa rodar referencias que seriam lentas por garrafa. Um copo bem escolhido eh o seu melhor vendedor silencioso.",
+      queHacer: [
+        "Revise referencias com boas classificacoes mas baixo volume de garrafa - sao candidatos naturais a copo.",
+        "Verifique que o vinho aguenta pelo menos 24 horas uma vez aberto (pergunte ao fornecedor ou teste).",
+        "Estime quantos copos pode vender por semana dessa referencia. Se menos de 3, provavelmente nao vale a pena.",
+        "Comece com 4-6 copos bem seleccionados antes de expandir. Melhor alguns que roddam do que muitos que estragar.",
+      ],
+      errores: [
+        { mistake: "Colocar o vinho mais barato da lista a copo", consequence: "O hospede associa copo a baixa qualidade. Perde a oportunidade de vender margem." },
+        { mistake: "Escolher copos sem pensar em volume", consequence: "Abre garrafas que nao termina. Cada meia garrafa eh dinheiro desperdicado." },
+        { mistake: "Nao testar se o vinho aguenta antes de o colocar a copo", consequence: "Serve o terceiro copo de uma garrafa que ja perdeu qualidade. O hospede nao volta." },
+      ],
+    },
+    {
+      id: "cuando-no-conviene-copa",
+      title: "Quando vinho a copo nao eh uma boa ideia",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim detectou copos activos com volume insuficiente ou vinhos que nao aguentam bem uma vez abertos.", whyMatters: "Um programa de 4 copos bem escolhidos eh melhor que um de 10 onde 6 geram perdas por quebra.", riskIfIgnored: "Gera quebra, servico de ma qualidade e percepcao negativa de todo o seu programa de copo." },
+      queSignifica: "Nao todo o vinho funciona a copo. Nao eh aconselhavel quando: o vinho nao aguenta mais de poucas horas uma vez aberto (vinhos muito delicados, espumantes sem sistema de preservacao), quando o volume esperado eh tao baixo que a quebra come a margem, quando o preco de copo resultante eh tao alto que o hospede nao o ve como acessivel, ou quando ja tem outro copo no mesmo escalao cobrindo essa necessidade.",
+      porQueImporta: "Porque colocar o vinho errado a copo eh pior do que nao ter programa de copo. Gera quebra, servico de ma qualidade (vinho oxidado) e percepcao negativa de todo o programa. Um programa de 4 copos bem escolhidos eh infinitamente melhor que um de 10 onde 6 geram perdas.",
+      queHacer: [
+        "Descarte qualquer vinho que nao aguente pelo menos 24 horas uma vez aberto, a menos que tenha sistema de preservacao (Coravin, argon).",
+        "Descarte referencias com preco de copo > 15 EUR a menos que a sua clientela o justifique (fine-dining high-end, hotel premium).",
+        "Se ja tem um copo no mesmo escalao (mesmo tipo, diferenca de ±2 EUR), nao duplique. Escolha um.",
+        "Nao coloque um vinho a copo apenas porque quer liquidar stock morto: o copo nao eh um canal de desconto.",
+      ],
+      errores: [
+        { mistake: "Usar o copo como canal para liquidar stock morto", consequence: "Serve vinho mediocre a copo e o hospede associa o seu programa a baixa qualidade." },
+        { mistake: "Oferecer espumante a copo sem sistema de preservacao", consequence: "Pelo segundo copo ja perdeu as bolhas. Esta vendendo um produto inferior." },
+        { mistake: "Ter demasiados copos activos 'para variedade'", consequence: "Variedade gera quebra. Se abre 10 garrafas e vende 3 copos de cada, perde 7 porcoes residuais." },
+      ],
+    },
+    {
+      id: "fijar-precio-copa",
+      title: "Como definir precos de copo sem perder margem",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim recalculou os seus precos de copo includindo quebra real e detectou desvios da margem alvo.", whyMatters: "Um erro de 1 EUR por copo em 15 copos/semana significa mais de 1.100 EUR/ano perdidos numa unica referencia.", riskIfIgnored: "Vende copos a um preco que nao cobre quebra ou margem. Cada servida eh uma perda invisivel." },
+      queSignifica: "O preco do copo NAO eh calculado dividindo o preco da garrafa por 5. Essa formula ignora quebra (o vinho perdido no final da garrafa ou em copos nao vendidos), o custo do servico e a margem alvo. A formula correcta comeca do custo real por copo (preco da garrafa dividido pelos copos reais que servira, includindo quebra) e aplica o multiplicador alvo a esse custo.",
+      porQueImporta: "Porque um erro de 1 EUR no preco do copo multiplica-se com cada copo que serve. Se vende 15 copos por semana de uma referencia e o seu preco eh 1,50 EUR abaixo do que deveria ser, perde mais de 1.100 EUR por ano nessa referencia sozinha. Com 6 copos mal calculados, o impacto pode exceder 5.000 EUR anualmente.",
+      queHacer: [
+        "Calcule custo real por copo: (preco da garrafa dividido por 4 copos reais) + 25% quebra = custo real.",
+        "Aplique o seu multiplicador alvo (minimo x3 no custo real para copo).",
+        "Compare o resultado com o preco de copo mais proximo da sua lista: eh coerente?",
+        "Use a Calculadora de Preco de Copo para simular cenarios com diferentes niveis de quebra.",
+      ],
+      errores: [
+        { mistake: "Dividir o preco da garrafa por 5 copos", consequence: "Nao cobre quebra. Obtem 4-4,5 copos reais de uma garrafa, nao 5. Vende com perda desde o primeiro copo." },
+        { mistake: "Nao contabilizar quebra no calculo", consequence: "A sua margem teorica nao existe. A realidade eh 20-30% pior do que pensa." },
+        { mistake: "Definir todos os precos de copo com o mesmo multiplicador", consequence: "Um vinho de 8 EUR e um de 30 EUR precisam de estrategias de copo diferentes." },
+      ],
+    },
+    {
+      id: "evitar-canibalizacion-copa",
+      title: "Como evitar canibalizacao entre copo e garrafa",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim detectou uma mudanca no seu racio copo/garrafa que poderia indicar canibalizacao.", whyMatters: "Se o copo tira vendas da garrafa sem adicionar mais margem, trabalha mais para ganhar menos.", riskIfIgnored: "O seu bilhete medio cai sem notar. Pensa que o programa de copo funciona porque copos vendem, mas o resultado total eh pior." },
+      queSignifica: "Canibalizacao ocorre quando o copo tira vendas da garrafa sem adicionar mais margem. Se um hospede que teria pedido uma garrafa de 28 EUR termina pedindo 2 copos de 8 EUR (16 EUR total), perdeu 12 EUR em receita e provavelmente margem. O objectivo nao eh o copo substituir a garrafa: eh capturar vendas novas (o hospede que nao teria pedido garrafa).",
+      porQueImporta: "Porque se o seu programa de copo canibaliza a garrafa, trabalha mais para ganhar menos. O objectivo eh o copo aumentar o bilhete medio total, nao redistribui-lo. Canibalizacao eh o risco menos visivel de um programa de copo: nao percebe ate olhar para os dados.",
+      queHacer: [
+        "Monitorize o racio copo/garrafa mes a mes. Se vendas de garrafa caem quando introduz copo, investigue.",
+        "Posicione o copo como exploracao e a garrafa como compromisso: nao competem, complementam-se.",
+        "Evite colocar as suas referencias de garrafa mais vendidas a copo. O copo deve cobrir um espaco diferente.",
+        "Treine o pessoal para sugerir a garrafa quando uma mesa pede 3+ copos do mesmo vinho.",
+      ],
+      errores: [
+        { mistake: "Colocar a sua garrafa mais vendida a copo", consequence: "Da ao hospede um motivo para gastar menos. A sua melhor garrafa agora eh vendida em pecas." },
+        { mistake: "Nao treinar o pessoal para gerir a transicao copo -> garrafa", consequence: "Dois hospedes cada um pede 2 copos do mesmo vinho. Ninguem sugere a garrafa. Perde a venda." },
+        { mistake: "Nao medir se o copo adiciona ou subtrai do bilhete medio geral", consequence: "Pensa que o programa de copo funciona porque copos vendem, mas o bilhete medio caiu." },
+      ],
+    },
+    {
+      id: "medir-rotacion-rentabilidad",
+      title: "Como medir volume e rentabilidade por copo",
+      priority: "esta semana",
+      porQueTeLoMostramos: { detected: "Winerim cross-referenced garrafas abertas com copos servidos e calculou a sua quebra real por referencia.", whyMatters: "O copo pode parecer rentavel em teoria (75% margem) mas ser desastroso na pratica (35% apos quebra).", riskIfIgnored: "Opera o programa de copo ás cegas. Sem medicao nao sabe se esta a ganhar ou perder dinheiro em cada referencia." },
+      queSignifica: "Volume de copo mede quantas garrafas abertas termina num periodo. Se abre 3 garrafas por semana e vende todos os copos, o seu volume eh excelente. Se abre 3 e descarta o resto de 2, o seu volume real eh um desastre disfarado de vendas. Rentabilidade de copo nao eh apenas a margem teorica: eh a margem menos quebra real, menos custo de servico, menos copos nao vendidos.",
+      porQueImporta: "Porque o copo pode parecer rentavel no papel e ser desastroso na pratica. A margem teorica por copo pode ser 75%, mas se perder 30% em quebra e 10% em custos adicionais de servico, a sua margem real eh 35%. Sem medicao opera ás cegas. Com medicao optimiza cada semana.",
+      queHacer: [
+        "Registe cada garrafa aberta para servico de copo e o numero de copos realmente servidos (nao a contagem teorica).",
+        "Calcule a sua quebra semanal real: (copos teoricos menos copos servidos) x custo por copo.",
+        "Compare a margem real de copo (apos quebra) com a margem de garrafa para a mesma referencia.",
+        "Se a margem real de copo eh menor que a de garrafa, tem um problema de volume ou preco.",
+      ],
+      errores: [
+        { mistake: "Medir apenas copos vendidos sem contar garrafas abertas", consequence: "Vende 20 copos mas abre 8 garrafas. A sua quebra eh 37% e nao sabe." },
+        { mistake: "Assumir que toda a garrafa aberta eh completamente vendida a copo", consequence: "O seu calculo de rentabilidade eh ficcao. A realidade eh 20-30% pior." },
+        { mistake: "Nao comparar rentabilidade de copo com rentabilidade de garrafa", consequence: "Pode estar a vender a copo um vinho que renderia mais por garrafa." },
+      ],
+    },
+    {
+      id: "errores-tipicos-copeo",
+      title: "Erros comuns no servico de copo",
+      priority: "inmediato",
+      porQueTeLoMostramos: { detected: "Winerim identificou padroes operacionais no seu programa de copo que correspondem a erros frequentes da industria.", whyMatters: "Erros de servico de copo repetem-se todos os dias, cada turno. Um processo descontrolado gera perdas acumuladas de milhares de euros por ano.", riskIfIgnored: "Os mesmos erros repetem-se servico apos servico. Sem protocolo, cada turno reinventa gestao de copos." },
+      queSignifica: "Servico de copo eh uma das operacoes mais delicadas num restaurante: combina gestao de stock (garrafas abertas), controlo de quebra (vinho perdido), servico de pessoal (recomendacao e venda) e precos (um preco que cobre tudo acima). Os erros tipicos nao vem de ignorancia - vem de falta de processo. A equipa sabe que quebra existe, mas ninguem a mede. Sabem que o preco deveria ser diferente, mas ninguem recalcula.",
+      porQueImporta: "Porque erros de servico de copo sao recorrentes: repetem-se todos os dias, cada turno, cada servico. Um erro de preco pontual pode ser corrigido. Mas um processo de copo descontrolado gera perdas acumuladas que no final do ano podem atingir milhares de euros. Os restaurantes que gerem melhor o servico de copo nao tem vinhos melhores: tem processos melhores.",
+      queHacer: [
+        "Estabeleca um protocolo de abertura de garrafas para servico de copo: quem decide quando abrir, numero maximo de garrafas activas.",
+        "Defina um momento de revisao diario: no encerramento, quantas garrafas abertas ficam? Quantas foram terminadas?",
+        "Treine a equipa trimestralmente com o Modelo de Treino Expresso: 30 minutos chegam.",
+        "Revise precos de copo cada vez que um custo muda ou pelo menos a cada 3 meses.",
+      ],
+      errores: [
+        { mistake: "Nao ter protocolo para abrir garrafas para servico de copo", consequence: "Cada funcionario abre a vontade. No final do turno ha 6 garrafas abertas com 2 copos servidos de cada." },
+        { mistake: "Nao treinar o pessoal a vender a copo", consequence: "O funcionario diz 'temos vinho a copo' sem conviccao. O hospede pede uma bebida sem alcool." },
+        { mistake: "Nao rever precos de copo apos mudancas de custo", consequence: "O seu fornecedor aumentou precos ha 4 meses em 8%. Os seus copos ainda estao ao preco antigo. Vende com perda." },
+        { mistake: "Nunca medir quebra", consequence: "Nao sabe quanto perde. E o que nao mede, nao pode melhorar." },
+      ],
+    },
+  ],
+  nextStep: {
+    label: "Calcule o preco correcto de copo",
+    href: "/en/tools/wine-pricing-tool",
+    description: "Inclui quebra real e margem alvo para definir um preco de copo que eh realmente rentavel.",
+  },
+};
+
+export default vinoPorCopaPT;

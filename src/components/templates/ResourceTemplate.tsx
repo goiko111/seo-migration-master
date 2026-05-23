@@ -20,13 +20,22 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { Button } from "@/components/ui/button";
 import ContactFormFields from "@/components/ContactFormFields";
+import { PREFIXES } from "@/components/PhoneInput";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import FreemiumGate from "@/components/FreemiumGate";
+import {
+  shouldGateResource,
+  trackResourceDownloaded,
+  getResourcesDownloaded,
+  useFreemiumState,
+} from "@/lib/freemium";
 
 const formSchema = z.object({
   restaurant: z.string().trim().min(1, "El restaurante es obligatorio").max(255),
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
   position: z.string().trim().min(1, "Selecciona tu cargo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(30),
+  phone_prefix: z.string().trim().min(1, "Selecciona el país del teléfono"),
   email: z.string().trim().email("Introduce un email válido").max(255),
   city: z.string().trim().max(100).optional().or(z.literal("")),
   references_count: z.string().trim().min(1, "Selecciona el número de referencias"),
@@ -92,6 +101,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
   const [referencesCount, setReferencesCount] = useState("");
   const navigate = useNavigate();
   const url = `${CANONICAL_DOMAIN}/recursos/${data.slug}`;
+  const { unlocked } = useFreemiumState();
+  const gated = shouldGateResource(data.slug) && !unlocked;
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -99,12 +110,14 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
 
   const onSubmit = async (formData: FormData) => {
     setLoading(true);
+    const prefixObj = PREFIXES.find(p => p.code === formData.phone_prefix);
+    const phoneFormatted = formData.phone ? (prefixObj ? `${prefixObj.dial} ${formData.phone}` : formData.phone) : null;
     try {
       const leadData = {
         restaurant: formData.restaurant,
         name: formData.name,
         position: formData.position,
-        phone: formData.phone,
+        phone: phoneFormatted,
         email: formData.email,
         city: formData.city || null,
         references_count: formData.references_count,
@@ -117,6 +130,8 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
       notifyLead(leadData);
       trackFormSubmit("resource");
       trackResourceDownload(data.formType);
+      // Freemium tracking: count this resource as downloaded
+      trackResourceDownloaded(data.slug);
       ads.conversion("resource", {
         email: leadData.email || undefined,
         phone: leadData.phone || undefined,
@@ -232,7 +247,17 @@ const ResourceTemplate = ({ data }: { data: ResourcePageData }) => {
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="p-8 rounded-2xl border border-border bg-gradient-card">
-              {submitted ? (
+              {gated ? (
+                <FreemiumGate
+                  context="resource"
+                  count={getResourcesDownloaded().length}
+                  onUnlocked={() => {
+                    // Once unlocked, auto-track this resource and reload to reveal the form
+                    trackResourceDownloaded(data.slug);
+                    window.location.reload();
+                  }}
+                />
+              ) : submitted ? (
                 <div className="text-center py-8">
                   <CheckCircle size={48} className="text-wine mx-auto mb-4" />
                   <h3 className="font-heading text-2xl font-bold mb-2">¡Recurso listo!</h3>

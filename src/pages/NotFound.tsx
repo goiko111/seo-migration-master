@@ -10,6 +10,8 @@ const content: Record<string, { label: string; title: string; desc: string; cta:
   en: { label: "Error 404", title: "Page not found", desc: "Sorry, the page you're looking for doesn't exist or has been moved.", cta: "Back to home" },
   it: { label: "Errore 404", title: "Pagina non trovata", desc: "Ci dispiace, la pagina che cerchi non esiste o è stata spostata.", cta: "Torna alla home" },
   fr: { label: "Erreur 404", title: "Page introuvable", desc: "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.", cta: "Retour à l'accueil" },
+  de: { label: "Fehler 404", title: "Seite nicht gefunden", desc: "Die gesuchte Seite existiert leider nicht oder wurde verschoben.", cta: "Zurück zur Startseite" },
+  pt: { label: "Erro 404", title: "Página não encontrada", desc: "Lamentamos, mas a página que procura não existe ou foi movida.", cta: "Voltar ao início" },
 };
 
 const NotFound = () => {

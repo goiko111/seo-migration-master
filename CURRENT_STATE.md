@@ -3,50 +3,45 @@
 ## Hechos
 
 - Fecha de actualización: 2026-05-23.
-- Al aplicar el nuevo protocolo, los archivos `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md` no existían en `/Users/GOIKO/seo-migration-master`.
-- Hubo dos correcciones de ubicación al arrancar el protocolo:
-  - El primer intento creó estos documentos en `/Users/GOIKO/Documents/Playground`.
-  - El segundo intento usó `../seo-migration-master`, que apuntaba a `/Users/GOIKO/Documents/seo-migration-master`.
-  - La ubicación correcta es `/Users/GOIKO/seo-migration-master`.
-- Se corrigió creando los documentos en `/Users/GOIKO/seo-migration-master` y eliminando los duplicados fuera de sitio.
-- La ampliación de la biblioteca del vino a alemán (`de`) y portugués (`pt`) está implementada, comprometida y subida en la rama `codex/wine-library-de-pt`.
+- Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
+- Rama activa: `codex/wine-library-de-pt`.
 - PR abierto: `https://github.com/goiko111/seo-migration-master/pull/1`.
-- Despliegue queda pendiente de aprobación/merge del PR.
-- El trabajo está ahora aislado en la rama `codex/wine-library-de-pt`.
-- El bloque incluye cambios de i18n, rutas, SEO, sitemap, prerender, enlaces internos, tests y documentación de seguimiento.
-- Se corrigió un fallo detectado durante la revisión: el selector de idioma no resolvía bien rutas dinámicas localizadas de la biblioteca, por ejemplo `/de/weinbibliothek/rebsorten/tempranillo` hacia su equivalente en otros idiomas.
-- Se separó `LanguageProvider` de `LanguageContext` para eliminar warnings de Fast Refresh sin cambiar los imports existentes de `useLanguage`.
-- Verificación acumulada del bloque:
+- La ampliación de la biblioteca del vino a alemán (`de`) y portugués (`pt`) está implementada en la rama.
+- El bloque incluye rutas localizadas, navegación, selector de idioma, SEO head, hreflang/canonical, sitemap, prerender, enlaces internos, overlays i18n, tests y documentación de seguimiento.
+- `origin/main` avanzó mientras el PR estaba abierto y provocó conflictos al intentar fusionar la rama.
+- Los conflictos de merge se resolvieron integrando:
+  - La infraestructura de rutas, SEO y biblioteca multilingüe de esta rama.
+  - Los tipos y overlays i18n más recientes de `origin/main`, incluyendo el catálogo ampliado de uvas en `de` y `pt`.
+  - Las rutas generales `de` y `pt` que `origin/main` ya exponía en el sitemap, más las rutas de biblioteca añadidas por esta rama.
+- Se detectó una contradicción durante la resolución: el sitemap conservaba las rutas `de`/`pt` de la biblioteca, pero había perdido rutas generales `de`/`pt` de `main`. Quedó corregido en `supabase/functions/sitemap/index.ts`.
+- Se ejecutó `npm install` porque `main` añadió dependencias usadas por el build, entre ellas `libphonenumber-js`.
+- Verificación actual tras resolver el merge:
   - `npm run test` pasa: 4 archivos de test, 8 tests.
   - `npm run build` pasa.
+  - ESLint dirigido sobre archivos de biblioteca/i18n tocados pasa con `--max-warnings=0`.
   - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts` pasa.
-  - ESLint dirigido sobre los archivos tocados pasa sin errores ni warnings.
-  - Render DOM verificado previamente para `/de/weinbibliothek/rebsorten/tempranillo`, incluyendo enlaces relacionados hacia rutas localizadas.
-- `npm run lint -- --quiet` falla por 66 errores en archivos fuera del alcance directo de esta tarea.
-- `deno` no está instalado globalmente, pero se pudo validar con `npx --yes deno-bin`.
-- `git diff --check` pasó antes del commit.
-- Se instaló GitHub CLI (`gh`) con Homebrew.
-- Se autenticó `gh` en GitHub como `goiko111` mediante flujo web y se configuró Git con `gh auth setup-git`.
-- La rama `codex/wine-library-de-pt` se subió correctamente a `origin`.
+  - `git diff --check` pasa.
+- `npm run lint -- --quiet` ya fallaba previamente por errores globales fuera del alcance directo de la biblioteca del vino.
+- El merge todavía debe concluirse con commit, push y nuevo intento de merge del PR.
 
 ## Decisiones
 
-- Antes de seguir con cambios funcionales, se documenta el estado inicial exigido por el nuevo protocolo.
-- Los errores globales de lint se tratan como deuda separada hasta revisar esos archivos específicamente.
-- Se usa `codex/wine-library-de-pt` para aislar el bloque antes de commit/PR.
-- El bloque se cierra en un commit de feature único para facilitar revisión.
-- Se usa GitHub CLI para operaciones autenticadas de GitHub desde este entorno.
-- La resolución de rutas de la biblioteca debe ser reversible para que el selector de idioma funcione también en fichas dinámicas.
-- `LanguageProvider` debe vivir separado de `LanguageContext` para mantener Fast Refresh limpio.
+- Mantener la rama `codex/wine-library-de-pt` como unidad de integración del bloque multilingüe.
+- Resolver el merge conservando los datos i18n más recientes de `main` cuando eran más completos que los de la rama.
+- Conservar la lógica de biblioteca de esta rama para rutas dinámicas, SEO y prerender.
+- Restaurar en el sitemap las rutas generales `de`/`pt` de `main` además de las rutas de biblioteca añadidas.
+- Seguir tratando el lint global como deuda separada, no como parte de este bloque.
 
 ## Hipótesis
 
-- Los 66 errores de lint global son deuda preexistente o ajena al bloque de trabajo de la biblioteca del vino, porque el lint dirigido sobre los archivos tocados pasa.
-- La deuda de lint global sigue fuera del alcance del bloque actual.
+- La estrategia correcta sigue siendo cerrar primero la base técnica multilingüe de la biblioteca y después enriquecer contenido editorial por idioma.
+- El build y las pruebas actuales cubren la superficie crítica del merge, pero la validación final debe repetirse en producción tras desplegar.
+- Los errores globales de lint siguen siendo deuda preexistente o de superficies ajenas al bloque de biblioteca.
 
 ## Tareas pendientes
 
-- Revisar y aprobar el PR `https://github.com/goiko111/seo-migration-master/pull/1`.
-- Ejecutar de nuevo `npm run test`, `npm run build`, lint dirigido y `deno check` si se hacen nuevos cambios.
+- Concluir el merge local con commit.
+- Subir la rama actualizada a `origin`.
+- Reintentar el merge del PR `https://github.com/goiko111/seo-migration-master/pull/1`.
+- Si el PR se fusiona, validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
 - Separar en una tarea propia la deuda de lint global.
-- Desplegar y validar sitemap, canonical, hreflang y prerender en producción.

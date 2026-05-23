@@ -7,6 +7,7 @@ import { Mail, Phone, MessageCircle } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ContactFormFields from "@/components/ContactFormFields";
+import { PREFIXES } from "@/components/PhoneInput";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -76,6 +77,30 @@ const content: Record<string, {
     problems: ["Vous vendez toujours les mêmes vins", "Votre équipe en salle ne suit pas", "Des vins stagnants", "Manque de variété", "Gestion en temps réel"],
     success: "Demande envoyée ! Nous vous contacterons bientôt.", error: "Erreur d'envoi. Veuillez réessayer.",
   },
+  de: {
+    seo_title: "Kontakt", seo_desc: "Kontaktieren Sie Winerim. Wir analysieren Ihre Weinkarte kostenlos und helfen Ihnen, sie zu optimieren.", breadcrumb: "Kontakt",
+    title: "Möchten Sie Ihren Weinumsatz", highlight: "optimieren?",
+    subtitle: "Wir analysieren Ihre Weinkarte völlig kostenlos. Wir zeigen Ihnen echte Chancen zur Verbesserung von Marge, Rotation und Sortiment.",
+    form_title: "Kostenlose Weinkartenanalyse",
+    name: "Name", position: "Position im Restaurant", email: "E-Mail", phone: "Telefon",
+    restaurant: "Restaurant", city: "Stadt", references: "Anzahl der Referenzen", menu_link: "Link zu Ihrer Weinkarte", message: "Nachricht (Was möchten Sie verbessern?)",
+    button: "Anfrage senden", sending: "Wird gesendet...",
+    problems_title: "Haben Sie eine dieser Herausforderungen?",
+    problems: ["Sie verkaufen immer die gleichen Weine", "Ihr Serviceteam kommt nicht hinterher", "Weine bleiben liegen", "Zu wenig Vielfalt", "Verwaltung in Echtzeit"],
+    success: "Anfrage gesendet! Wir melden uns in Kürze.", error: "Fehler beim Senden. Bitte erneut versuchen.",
+  },
+  pt: {
+    seo_title: "Contacto", seo_desc: "Contacte a Winerim. Analisamos a sua carta de vinhos gratuitamente e ajudamos a otimizá-la.", breadcrumb: "Contacto",
+    title: "Quer otimizar as suas vendas", highlight: "de vinho?",
+    subtitle: "Analisamos a sua carta de forma completamente gratuita. Mostramos oportunidades reais de melhoria em margem, rotação e sortido.",
+    form_title: "Análise gratuita da sua carta",
+    name: "Nome", position: "Cargo no restaurante", email: "Email", phone: "Telefone",
+    restaurant: "Restaurante", city: "Cidade", references: "Número de referências", menu_link: "Link para a sua carta", message: "Mensagem (O que gostaria de melhorar?)",
+    button: "Enviar pedido", sending: "A enviar...",
+    problems_title: "Tem algum destes problemas?",
+    problems: ["Vende sempre os mesmos vinhos", "A sua equipa de sala não chega", "Tem vinhos parados", "Falta-lhe variedade", "Gestão em tempo real"],
+    success: "Pedido enviado! Entraremos em contacto em breve.", error: "Erro ao enviar. Tente novamente.",
+  },
 };
 
 const Contacto = () => {
@@ -93,7 +118,12 @@ const Contacto = () => {
       restaurant: (fd.get("restaurant") as string)?.trim() || null,
       name: (fd.get("name") as string)?.trim() || null,
       position: (fd.get("position") as string)?.trim() || null,
-      phone: (fd.get("phone") as string)?.trim() || null,
+      phone: (() => {
+        const raw = (fd.get("phone") as string)?.trim();
+        const prefixCode = (fd.get("phone_prefix") as string)?.trim();
+        const pObj = PREFIXES.find(p => p.code === prefixCode);
+        return raw ? (pObj ? `${pObj.dial} ${raw}` : raw) : null;
+      })(),
       email: (fd.get("email") as string)?.trim() || null,
       city: (fd.get("city") as string)?.trim() || null,
       references_count: (fd.get("references_count") as string)?.trim() || null,
@@ -141,9 +171,9 @@ const Contacto = () => {
                   {submitting ? c.sending : c.button}
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">
-                  {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre " }[lang]}
+                  {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre ", de: "Unverbindlich. Mit dem Absenden akzeptieren Sie unsere ", pt: "Sem compromisso. Ao enviar aceita a nossa " }[lang]}
                   <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
-                    {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité" }[lang]}
+                    {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité", de: "Datenschutzrichtlinie", pt: "política de privacidade" }[lang]}
                   </Link>.
                 </p>
               </form>
@@ -173,20 +203,27 @@ const Contacto = () => {
                   <MessageCircle className="w-5 h-5 text-accent shrink-0" />
                   <div>
                     <p className="text-sm font-medium">WhatsApp</p>
-                    <a href="https://wa.me/34623165179" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 623 165 179</a>
+                    <a href="https://wa.me/34614499864" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 614 499 864</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">{lang === "es" ? "Llamadas" : lang === "it" ? "Chiamate" : lang === "fr" ? "Appels" : "Calls"}</p>
-                    <a href="tel:+34722180348" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 722 180 348</a>
+                    <p className="text-sm font-medium">{{ es: "Ventas", en: "Sales", it: "Vendite", fr: "Ventes", de: "Vertrieb", pt: "Vendas" }[lang]}</p>
+                    <a href="tel:+34614499864" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 614 499 864</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-accent shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium">{{ es: "Soporte (solo clientes)", en: "Support (clients only)", it: "Supporto (solo clienti)", fr: "Support (clients uniquement)", de: "Support (nur Kunden)", pt: "Suporte (apenas clientes)" }[lang]}</p>
+                    <a href="tel:+34624402303" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 624 40 23 03</a>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-border">
-                <h3 className="font-heading text-lg font-semibold mb-4">Winerim {lang === "es" ? "en un minuto" : lang === "en" ? "in one minute" : lang === "it" ? "in un minuto" : "en une minute"}</h3>
+                <h3 className="font-heading text-lg font-semibold mb-4">Winerim {lang === "es" ? "en un minuto" : lang === "en" ? "in one minute" : lang === "it" ? "in un minuto" : lang === "de" ? "in einer Minute" : lang === "pt" ? "num minuto" : "en une minute"}</h3>
                 <div className="rounded-xl overflow-hidden border border-border">
                   <Suspense fallback={<div className="aspect-video bg-muted rounded-xl" />}>
                     <YouTubeFacade videoId="-PleM286zeY" title="Winerim en un minuto" />
