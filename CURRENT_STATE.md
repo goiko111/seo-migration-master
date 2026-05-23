@@ -24,6 +24,13 @@
   - `git diff --check` pasa.
 - `npm run lint -- --quiet` ya fallaba previamente por errores globales fuera del alcance directo de la biblioteca del vino.
 - La rama remota del PR quedó fusionada en `main`; queda pendiente validar despliegue/producción.
+- Validación ligera de producción tras el merge:
+  - `https://winerim.wine/de/weinbibliothek` responde HTTP 200.
+  - `https://winerim.wine/pt/biblioteca-vinho` responde HTTP 200.
+  - `https://winerim.wine/sitemap.xml` responde HTTP 200, pero la respuesta pública comprobada todavía no muestra las nuevas rutas de biblioteca `de`/`pt`.
+  - Con user-agent de Googlebot, `https://winerim.wine/de/weinbibliothek/rebsorten/tempranillo` responde `X-Worker-Branch: bot-fallback` y devuelve el `index.html` con canonical raíz, no el prerender específico.
+- En este entorno no están instalados `supabase` ni `wrangler`, y no hay script de deploy en `package.json`.
+- Contradicción detectada y corregida: `TECH_INSTRUCTIONS.md` indicaba desplegar `cloudflare-worker-v2.1-improved-debug.js`, mientras que el bloque integrado trabaja sobre `cloudflare-worker-v3-hybrid.js` y producción ya expone cabeceras compatibles con el worker híbrido.
 
 ## Decisiones
 
@@ -32,6 +39,7 @@
 - Conservar la lógica de biblioteca de esta rama para rutas dinámicas, SEO y prerender.
 - Restaurar en el sitemap las rutas generales `de`/`pt` de `main` además de las rutas de biblioteca añadidas.
 - Seguir tratando el lint global como deuda separada, no como parte de este bloque.
+- No asumir que producción está actualizada hasta desplegar explícitamente Edge Functions/Worker y repetir la validación con bot.
 
 ## Hipótesis
 
@@ -43,4 +51,5 @@
 
 - Validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
 - Confirmar que el despliegue usa `main` con merge commit `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
+- Usar `cloudflare-worker-v3-hybrid.js` para el despliegue manual del worker.
 - Separar en una tarea propia la deuda de lint global.

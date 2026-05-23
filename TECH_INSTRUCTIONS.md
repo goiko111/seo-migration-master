@@ -1,8 +1,10 @@
 # Bot Detection Fix — Instrucciones para el Técnico
 
-**Versión**: v2.1 (improved-debug)
+**Versión vigente**: v3 hybrid (`cloudflare-worker-v3-hybrid.js`)
 **Estado**: Listo para ejecución
 **Tiempo estimado**: ~1 hora
+
+> Actualizado el 2026-05-23: las instrucciones antiguas apuntaban a `cloudflare-worker-v2.1-improved-debug.js`. Para el estado actual de `main`, el worker que contiene las rutas localizadas de la biblioteca del vino en `de` y `pt` es `cloudflare-worker-v3-hybrid.js`.
 
 ---
 
@@ -11,7 +13,7 @@
 Debes hacer esto **en este orden exacto**:
 
 1. **Actualizar `redirects` en Supabase** (15-30 min)
-2. **Deploy Worker v2.1 en Cloudflare** (5 min)
+2. **Deploy Worker v3 hybrid en Cloudflare** (5 min)
 3. **Validar en staging** con curl (15-30 min)
 4. **Deploy a producción** (solo si staging OK)
 
@@ -60,12 +62,12 @@ Después, en Supabase Dashboard:
 
 ---
 
-## PASO 2: Deploy Worker v2.1 en Cloudflare (5 min)
+## PASO 2: Deploy Worker v3 hybrid en Cloudflare (5 min)
 
 ### El archivo correcto
-**USAR**: `cloudflare-worker-v2.1-improved-debug.js`
+**USAR**: `cloudflare-worker-v3-hybrid.js`
 
-**NO USES**: `cloudflare-worker-v2-corrected.js` (ese es viejo)
+**NO USES**: `cloudflare-worker-v2-corrected.js` ni `cloudflare-worker-v2.1-improved-debug.js` para el despliegue actual de la biblioteca multilingüe.
 
 ### Cómo deployar
 
@@ -74,7 +76,7 @@ Después, en Supabase Dashboard:
 3. Hacer click en "Edit" o crear uno nuevo
 4. Seleccionar **TODO el código actual** (Ctrl+A)
 5. Borrarlo
-6. Copiar **TODO el contenido** de `cloudflare-worker-v2.1-improved-debug.js`
+6. Copiar **TODO el contenido** de `cloudflare-worker-v3-hybrid.js`
 7. Pegarlo en el editor
 8. **Save & Deploy**
 

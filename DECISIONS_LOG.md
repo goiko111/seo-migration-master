@@ -16,6 +16,8 @@
 - Las verificaciones posteriores al merge resuelto pasan: tests, build, lint dirigido, `deno check` y `git diff --check`.
 - Se fusionó el PR `https://github.com/goiko111/seo-migration-master/pull/1` en `main`.
 - Merge commit: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
+- La validación ligera de producción posterior al merge detectó que el código nuevo aún no está activo para sitemap/prerender de biblioteca: sitemap público sin rutas nuevas `de`/`pt` y bot dinámico cayendo en `bot-fallback`.
+- Se detectó y corrigió una contradicción en documentación de despliegue: `TECH_INSTRUCTIONS.md` apuntaba a `cloudflare-worker-v2.1-improved-debug.js`, pero el código integrado y el worker observado usan la línea `cloudflare-worker-v3-hybrid.js`.
 
 ### Decisiones
 
@@ -32,6 +34,7 @@
 - Restaurar rutas generales `de`/`pt` en el sitemap tras detectar la contradicción.
 - Mantener la deuda de lint global como iniciativa separada.
 - Cerrar el bloque técnico como integrado en `main` y mover el foco a despliegue, validación productiva y mejora editorial.
+- Tratar despliegue/validación productiva como siguiente bloque operativo, porque no hay CLI/script de deploy disponible en este entorno.
 
 ### Hipótesis
 
@@ -42,5 +45,6 @@
 ### Tareas pendientes
 
 - Validar el despliegue en producción.
+- Usar `cloudflare-worker-v3-hybrid.js` en el despliegue manual del worker.
 - Revisar Search Console tras indexación.
 - Definir el siguiente bloque editorial de la biblioteca del vino.

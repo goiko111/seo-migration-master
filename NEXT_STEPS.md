@@ -7,6 +7,12 @@
 - Merge commit: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 - La rama local está en `main`, alineada con `origin/main`.
 - `origin/main` avanzó durante el trabajo, el merge local fue resuelto y posteriormente fusionado.
+- Producción todavía no refleja por completo el bloque nuevo en sitemap/prerender:
+  - Rutas `de` y `pt` de biblioteca responden 200 como SPA.
+  - El sitemap público comprobado no lista aún las nuevas rutas de biblioteca `de`/`pt`.
+  - Googlebot en una ficha dinámica cae en `X-Worker-Branch: bot-fallback` y recibe canonical raíz.
+- No hay `supabase` ni `wrangler` instalados localmente, ni script de deploy en `package.json`.
+- La contradicción de instrucciones del worker quedó corregida: `TECH_INSTRUCTIONS.md` ahora apunta a `cloudflare-worker-v3-hybrid.js`.
 - Las comprobaciones posteriores a la resolución pasan:
   - `npm run test`.
   - `npm run build`.
@@ -20,6 +26,7 @@
 - Priorizar ahora despliegue y validación productiva.
 - Mantener el seguimiento de mejoras editoriales separado del cierre técnico.
 - No mezclar la deuda global de lint con el bloque de biblioteca del vino.
+- No dar por válida la indexabilidad productiva hasta ver sitemap y prerender nuevos en producción.
 
 ## Hipótesis
 
@@ -28,15 +35,18 @@
 
 ## Tareas pendientes
 
-1. Confirmar despliegue desde `main`.
-2. Tras desplegar, validar:
+1. Desplegar las funciones Supabase actualizadas:
+   - `supabase/functions/sitemap/index.ts`.
+   - `supabase/functions/prerender/index.ts`.
+2. Desplegar `cloudflare-worker-v3-hybrid.js` en Cloudflare con las rutas de biblioteca `de`/`pt`.
+3. Tras desplegar, validar:
    - Sitemap XML y rutas `de`/`pt`.
    - Hreflang recíproco y canonical.
    - Prerender para bots en páginas de biblioteca.
    - Selector de idioma en rutas dinámicas.
    - Páginas prioritarias: uvas, regiones, estilos y maridajes.
-3. Separar una tarea para el lint global pendiente.
-4. Bloque editorial siguiente:
+4. Separar una tarea para el lint global pendiente.
+5. Bloque editorial siguiente:
    - Priorizar 20-30 entidades por tráfico potencial.
    - Reescribir copys propios en `de` y `pt`, no solo overlays genéricos.
    - Añadir FAQs localizadas por intención de búsqueda.
