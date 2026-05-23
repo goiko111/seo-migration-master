@@ -3,216 +3,16 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, Grape } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
+import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import { useLanguage } from "@/i18n/LanguageContext";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
-import { getRegionBySlug, getCountryBySlug } from "@/data/regionsLibrary";
-
-/* i18n translations */
-const i18n = {
-  es: {
-    biblioteca: "Biblioteca del Vino",
-    regions: "Regiones",
-    alsoKnownAs: "También conocida como:",
-    keyFacts: "Datos clave",
-    registeredWineries: "Bodegas registradas",
-    country: "País",
-    type: "Tipo",
-    prestige: "Prestigio",
-    recognition: "Reconocimiento",
-    wineTypes: "Tipos de vino",
-    subzones: "Subzonas",
-    mainGrapes: "Uvas principales",
-    usualStyles: "Estilos habituales",
-    winerimVision: "Visión Winerim",
-    whatCommunicatesInCarta: "Qué comunica en una carta",
-    cartaReading: "Lectura en carta",
-    whenHighlight: "Cuándo conviene destacarla",
-    clientProfile: "Qué tipo de cliente la reconoce",
-    howSellBetter: "Cómo vende mejor",
-    usualCartaRole: "Rol habitual en carta",
-    competingRegions: "Regiones comparables",
-    competingRegionsDesc: "Denominaciones que compiten en percepción o segmento similar.",
-    commonMistakesInterpretation: "Errores comunes de interpretación",
-    suggestedPairings: "Maridajes sugeridos",
-    continueExploring: "Sigue explorando",
-    allRegions: "Todas las regiones de {country}",
-    allRegionsWorld: "Regiones del mundo",
-    winerimCore: "Winerim Core",
-    requestDemo: "Solicitar demo",
-    bringToCartaWithCriteria: "Lleva {name} a tu carta con criterio",
-    winerimIntegrates: "Winerim integra datos de denominaciones, percepción y rol comercial para ayudarte a decidir qué vinos incluir, destacar o rotar.",
-  },
-  en: {
-    biblioteca: "Wine Library",
-    regions: "Regions",
-    alsoKnownAs: "Also known as:",
-    keyFacts: "Key Facts",
-    registeredWineries: "Registered Wineries",
-    country: "Country",
-    type: "Type",
-    prestige: "Prestige",
-    recognition: "Recognition",
-    wineTypes: "Wine Types",
-    subzones: "Subzones",
-    mainGrapes: "Main Grapes",
-    usualStyles: "Usual Styles",
-    winerimVision: "Winerim Vision",
-    whatCommunicatesInCarta: "What It Communicates on Wine Lists",
-    cartaReading: "Reading on Wine Lists",
-    whenHighlight: "When to Highlight It",
-    clientProfile: "Type of Client Who Recognizes It",
-    howSellBetter: "How to Sell It Better",
-    usualCartaRole: "Usual Role on Wine Lists",
-    competingRegions: "Comparable Regions",
-    competingRegionsDesc: "Denominations that compete in perception or similar segment.",
-    commonMistakesInterpretation: "Common Mistakes in Interpretation",
-    suggestedPairings: "Suggested Pairings",
-    continueExploring: "Continue Exploring",
-    allRegions: "All Regions of {country}",
-    allRegionsWorld: "Regions of the World",
-    winerimCore: "Winerim Core",
-    requestDemo: "Request Demo",
-    bringToCartaWithCriteria: "Bring {name} to Your Wine List with Criteria",
-    winerimIntegrates: "Winerim integrates data on denominations, perception, and commercial role to help you decide which wines to include, highlight, or rotate.",
-  },
-  it: {
-    biblioteca: "Biblioteca del Vino",
-    regions: "Regioni",
-    alsoKnownAs: "Anche conosciuta come:",
-    keyFacts: "Fatti Chiave",
-    registeredWineries: "Cantine Registrate",
-    country: "Paese",
-    type: "Tipo",
-    prestige: "Prestigio",
-    recognition: "Riconoscimento",
-    wineTypes: "Tipi di Vino",
-    subzones: "Subzone",
-    mainGrapes: "Uve Principali",
-    usualStyles: "Stili Abituali",
-    winerimVision: "Visione Winerim",
-    whatCommunicatesInCarta: "Cosa Comunica sulla Carta",
-    cartaReading: "Lettura sulla Carta",
-    whenHighlight: "Quando Metterla in Evidenza",
-    clientProfile: "Tipo di Cliente che la Riconosce",
-    howSellBetter: "Come Venderla Meglio",
-    usualCartaRole: "Ruolo Abituale sulla Carta",
-    competingRegions: "Regioni Comparabili",
-    competingRegionsDesc: "Denominazioni che competono nella percezione o in segmenti simili.",
-    commonMistakesInterpretation: "Errori Comuni nell'Interpretazione",
-    suggestedPairings: "Abbinamenti Consigliati",
-    continueExploring: "Continua Esplorando",
-    allRegions: "Tutte le Regioni di {country}",
-    allRegionsWorld: "Regioni del Mondo",
-    winerimCore: "Winerim Core",
-    requestDemo: "Richiedi Demo",
-    bringToCartaWithCriteria: "Porta {name} nella Tua Carta con Criterio",
-    winerimIntegrates: "Winerim integra dati su denominazioni, percezione e ruolo commerciale per aiutarti a decidere quali vini includere, evidenziare o ruotare.",
-  },
-  fr: {
-    biblioteca: "Bibliotheque du Vin",
-    regions: "Regions",
-    alsoKnownAs: "Egalement connu sous le nom de:",
-    keyFacts: "Faits Cles",
-    registeredWineries: "Caves Enregistrees",
-    country: "Pays",
-    type: "Type",
-    prestige: "Prestige",
-    recognition: "Reconnaissance",
-    wineTypes: "Types de Vin",
-    subzones: "Sous-zones",
-    mainGrapes: "Cepages Principaux",
-    usualStyles: "Styles Habituels",
-    winerimVision: "Vision Winerim",
-    whatCommunicatesInCarta: "Ce qu'il Communique sur la Carte",
-    cartaReading: "Lecture sur la Carte",
-    whenHighlight: "Quand la Mettre en Avant",
-    clientProfile: "Type de Client qui la Reconnait",
-    howSellBetter: "Comment la Vendre Mieux",
-    usualCartaRole: "Role Habituel sur la Carte",
-    competingRegions: "Regions Comparables",
-    competingRegionsDesc: "Denominations qui concurrencent dans la perception ou un segment similaire.",
-    commonMistakesInterpretation: "Erreurs Courantes dans l'Interpretation",
-    suggestedPairings: "Accords Suggerez",
-    continueExploring: "Continuer l'Exploration",
-    allRegions: "Toutes les Regions de {country}",
-    allRegionsWorld: "Regions du Monde",
-    winerimCore: "Winerim Core",
-    requestDemo: "Demander une Demonstration",
-    bringToCartaWithCriteria: "Apportez {name} a Votre Carte avec Critere",
-    winerimIntegrates: "Winerim integre les donnees sur les denominations, la perception et le role commercial pour vous aider a decider quels vins inclure, mettre en evidence ou faire tourner.",
-  },
-  de: {
-    biblioteca: "Weinbibliothek",
-    regions: "Weinregionen",
-    alsoKnownAs: "Auch bekannt als:",
-    keyFacts: "Wichtige Fakten",
-    registeredWineries: "Registrierte Weinguter",
-    country: "Land",
-    type: "Typ",
-    prestige: "Prestige",
-    recognition: "Anerkennung",
-    wineTypes: "Weintypen",
-    subzones: "Unterzonen",
-    mainGrapes: "Wichtigste Rebsorten",
-    usualStyles: "Ubliche Stile",
-    winerimVision: "Winerim-Sicht",
-    whatCommunicatesInCarta: "Warum es auf der Weinkarte mitteilt",
-    cartaReading: "Lesung auf der Weinkarte",
-    whenHighlight: "Wann man es hervorheben sollte",
-    clientProfile: "Kundentyp, der es erkennt",
-    howSellBetter: "Wie man es besser verkauft",
-    usualCartaRole: "Ubliche Rolle auf der Weinkarte",
-    competingRegions: "Vergleichbare Weinregionen",
-    competingRegionsDesc: "Denominationen, die in der Wahrnehmung oder einem ahnlichen Segment konkurrieren.",
-    commonMistakesInterpretation: "Haufige Interpretationsfehler",
-    suggestedPairings: "Empfohlene Speisebegleitungen",
-    continueExploring: "Weitererkundung",
-    allRegions: "Alle Regionen von {country}",
-    allRegionsWorld: "Weinregionen der Welt",
-    winerimCore: "Winerim Core",
-    requestDemo: "Demo anfordern",
-    bringToCartaWithCriteria: "Bringen Sie {name} mit Kriterien auf Ihre Weinkarte",
-    winerimIntegrates: "Winerim integriert Daten zu Denominationen, Wahrnehmung und geschäftlicher Rolle, um Ihnen zu helfen, zu entscheiden, welche Weine einbezogen, hervorgehoben oder gewechselt werden sollen.",
-  },
-  pt: {
-    biblioteca: "Biblioteca do Vinho",
-    regions: "Regioes",
-    alsoKnownAs: "Tambem conhecida como:",
-    keyFacts: "Fatos Principais",
-    registeredWineries: "Adegas Registradas",
-    country: "Pais",
-    type: "Tipo",
-    prestige: "Prestigio",
-    recognition: "Reconhecimento",
-    wineTypes: "Tipos de Vinho",
-    subzones: "Subzonas",
-    mainGrapes: "Castas Principais",
-    usualStyles: "Estilos Habituais",
-    winerimVision: "Visao Winerim",
-    whatCommunicatesInCarta: "O Que Comunica na Carta",
-    cartaReading: "Leitura na Carta",
-    whenHighlight: "Quando Destaca-la",
-    clientProfile: "Tipo de Cliente que a Reconhece",
-    howSellBetter: "Como Vender Melhor",
-    usualCartaRole: "Papel Habitual na Carta",
-    competingRegions: "Regioes Compariveis",
-    competingRegionsDesc: "Denominacoes que competem em percepcao ou segmento similar.",
-    commonMistakesInterpretation: "Erros Comuns de Interpretacao",
-    suggestedPairings: "Harmonizacoes Sugeridas",
-    continueExploring: "Continuar Explorando",
-    allRegions: "Todas as Regioes de {country}",
-    allRegionsWorld: "Regioes do Mundo",
-    winerimCore: "Winerim Core",
-    requestDemo: "Solicitar Demo",
-    bringToCartaWithCriteria: "Leve {name} para sua Carta com Criterio",
-    winerimIntegrates: "Winerim integra dados de regioes vinicolas, percepcao e papel comercial para ajuda-lo a decidir quais vinhos incluir, destacar ou rodar.",
-  },
-};
+import { getLocalizedCountryBySlug, getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const prestigeLabels: Record<string, string> = {
   "icónico": "Icónico",
@@ -231,10 +31,11 @@ const recognitionLabels: Record<string, string> = {
 };
 
 const RegionDetail = () => {
-  const { allLangPaths } = useLanguage();
   const { country, region } = useParams<{ country: string; region: string }>();
-  const data = region ? getRegionBySlug(region) : undefined;
-  const countryData = country ? getCountryBySlug(country) : undefined;
+  const { lang } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const data = region ? getLocalizedRegionBySlug(region, lang) : undefined;
+  const countryData = country ? getLocalizedCountryBySlug(country, lang) : undefined;
 
   // JSON-LD Schema
   useEffect(() => {
@@ -249,27 +50,24 @@ const RegionDetail = () => {
       description: data.description,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
       publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: `https://winerim.wine/biblioteca-vino/regiones/${country}/${region}`,
+      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`),
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("region-detail-jsonld")?.remove(); };
-  }, [data, countryData, country, region]);
+  }, [data, countryData, country, region, lang]);
 
   if (!data || !countryData) {
-    return <Navigate to={country ? `/biblioteca-vino/regiones/${country}` : "/biblioteca-vino/regiones"} replace />;
+    return <Navigate to={country ? linkTo(`/biblioteca-vino/regiones/${country}`) : linkTo("/biblioteca-vino/regiones")} replace />;
   }
-
-  const { lang } = useLanguage();
-  const t = i18n[lang as keyof typeof i18n] ?? i18n.es;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={data.seo.title}
         description={data.seo.description}
-        url={`https://winerim.wine/biblioteca-vino/regiones/${country}/${region}`}
+        url={getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`)}
+        hreflang={getWineLibraryHreflang(`/biblioteca-vino/regiones/${country}/${region}`)}
         type="article"
-        hreflang={allLangPaths("/biblioteca-vino/regiones")}
       />
       <Navbar />
 
@@ -279,9 +77,9 @@ const RegionDetail = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: t.biblioteca, href: "/biblioteca-vino" },
-            { label: t.regions, href: "/biblioteca-vino/regiones" },
-            { label: countryData.name, href: `/biblioteca-vino/regiones/${country}` },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Regiones", href: linkTo("/biblioteca-vino/regiones") },
+            { label: countryData.name, href: linkTo(`/biblioteca-vino/regiones/${country}`) },
             { label: data.name },
           ]} />
 
@@ -338,17 +136,17 @@ const RegionDetail = () => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.keyFacts}</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">Datos clave</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.bodegasCount && (
-              <FactCard icon={<Wine size={16} />} label={t.registeredWineries} value={data.bodegasCount.toLocaleString()} />
+              <FactCard icon={<Wine size={16} />} label="Bodegas registradas" value={data.bodegasCount.toLocaleString()} />
             )}
-            <FactCard icon={<MapPin size={16} />} label={t.country} value={countryData.name} />
-            <FactCard icon={<Target size={16} />} label={t.type} value={data.denominationType} />
-            <FactCard icon={<TrendingUp size={16} />} label={t.prestige} value={prestigeLabels[data.prestige]} />
-            <FactCard icon={<Users size={16} />} label={t.recognition} value={recognitionLabels[data.clientRecognition]} />
-            <FactCard icon={<Grape size={16} />} label={t.wineTypes} value={data.wineTypes.join(", ")} />
+            <FactCard icon={<MapPin size={16} />} label="País" value={countryData.name} />
+            <FactCard icon={<Target size={16} />} label="Tipo" value={data.denominationType} />
+            <FactCard icon={<TrendingUp size={16} />} label="Prestigio" value={prestigeLabels[data.prestige]} />
+            <FactCard icon={<Users size={16} />} label="Reconocimiento" value={recognitionLabels[data.clientRecognition]} />
+            <FactCard icon={<Grape size={16} />} label="Tipos de vino" value={data.wineTypes.join(", ")} />
           </div>
         </div>
       </section>
@@ -358,7 +156,7 @@ const RegionDetail = () => {
         <section className="section-padding">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal className="mb-8">
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.subzones}</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">Subzonas</h2>
             </ScrollReveal>
             <ScrollReveal>
               <div className="flex flex-wrap gap-3">
@@ -379,7 +177,7 @@ const RegionDetail = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10">
             <ScrollReveal>
-              <h2 className="font-heading text-xl font-semibold mb-4">{t.mainGrapes}</h2>
+              <h2 className="font-heading text-xl font-semibold mb-4">Uvas principales</h2>
               <div className="flex flex-wrap gap-2">
                 {data.mainGrapes.map((g) => (
                   <LinkedTag key={g} name={g} hint="grape" />
@@ -387,7 +185,7 @@ const RegionDetail = () => {
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
-              <h2 className="font-heading text-xl font-semibold mb-4">{t.usualStyles}</h2>
+              <h2 className="font-heading text-xl font-semibold mb-4">Estilos habituales</h2>
               <div className="space-y-2">
                 {data.styles.map((s) => (
                   <div key={s} className="flex items-start gap-2">
@@ -407,29 +205,29 @@ const RegionDetail = () => {
           <ScrollReveal className="mb-10">
             <div className="flex items-center gap-3 mb-2">
               <Lightbulb size={18} className="text-wine" />
-              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{t.winerimVision}</p>
+              <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">Visión Winerim</p>
             </div>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.whatCommunicatesInCarta}</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">Qué comunica en una carta</h2>
           </ScrollReveal>
 
           <div className="space-y-6">
             <ScrollReveal>
-              <WinerimBlock title={t.cartaReading} content={data.cartaReading} />
+              <WinerimBlock title="Lectura en carta" content={data.cartaReading} />
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
-              <WinerimBlock title={t.whenHighlight} content={data.whenToHighlight} />
+              <WinerimBlock title="Cuándo conviene destacarla" content={data.whenToHighlight} />
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
-              <WinerimBlock title={t.clientProfile} content={data.clientProfile} />
+              <WinerimBlock title="Qué tipo de cliente la reconoce" content={data.clientProfile} />
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
-              <WinerimBlock title={t.howSellBetter} content={data.sellByStrategy} />
+              <WinerimBlock title="Cómo vende mejor" content={data.sellByStrategy} />
             </ScrollReveal>
           </div>
 
           {/* Carta roles */}
           <ScrollReveal delay={0.2} className="mt-8">
-            <h3 className="font-heading text-lg font-semibold mb-3">{t.usualCartaRole}</h3>
+            <h3 className="font-heading text-lg font-semibold mb-3">Rol habitual en carta</h3>
             <div className="flex flex-wrap gap-3">
               {data.cartaRole.map((role) => (
                 <span key={role} className="bg-wine/10 text-wine border border-wine/20 px-4 py-2 rounded-full text-sm font-medium capitalize">
@@ -446,8 +244,8 @@ const RegionDetail = () => {
         <section className="section-padding bg-gradient-dark">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal className="mb-6">
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.competingRegions}</h2>
-              <p className="text-muted-foreground text-sm mt-2">{t.competingRegionsDesc}</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">Regiones comparables</h2>
+              <p className="text-muted-foreground text-sm mt-2">Denominaciones que compiten en percepción o segmento similar.</p>
             </ScrollReveal>
             <ScrollReveal>
               <div className="flex flex-wrap gap-3">
@@ -467,7 +265,7 @@ const RegionDetail = () => {
             <ScrollReveal className="mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <AlertTriangle size={18} className="text-wine" />
-                <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.commonMistakesInterpretation}</h2>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">Errores comunes de interpretación</h2>
               </div>
             </ScrollReveal>
             <div className="space-y-3">
@@ -489,7 +287,7 @@ const RegionDetail = () => {
         <section className="section-padding bg-gradient-dark">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal className="mb-8">
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">{t.suggestedPairings}</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">Maridajes sugeridos</h2>
             </ScrollReveal>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.pairings.map((p, i) => (
@@ -508,19 +306,32 @@ const RegionDetail = () => {
       {/* FAQ */}
       <FAQSection faqs={data.faqs} schemaId={`region-${data.slug}`} />
 
-      {/* INTERNAL LINKS */}
       <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <RelatedWineLibraryLinks
+            items={[
+              ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+              ...data.styles.map((name) => ({ name, hint: "style" as const })),
+              ...data.competingRegions.map((name) => ({ name, hint: "region" as const })),
+              ...(data.pairings || []).map((name) => ({ name, hint: "pairing" as const })),
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* INTERNAL LINKS */}
+      <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-8">
-            <h2 className="font-heading text-xl font-semibold">{t.continueExploring}</h2>
+            <h2 className="font-heading text-xl font-semibold">Sigue explorando</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { to: `/biblioteca-vino/regiones/${country}`, label: t.allRegions.replace('{country}', countryData.name) },
-              { to: "/biblioteca-vino/regiones", label: t.allRegionsWorld },
-              { to: "/biblioteca-vino", label: t.biblioteca },
-              { to: "/producto/winerim-core", label: t.winerimCore },
-              { to: "/demo", label: t.requestDemo },
+              { to: linkTo(`/biblioteca-vino/regiones/${country}`), label: `Todas las regiones de ${countryData.name}` },
+              { to: linkTo("/biblioteca-vino/regiones"), label: "Regiones del mundo" },
+              { to: linkTo("/biblioteca-vino"), label: "Biblioteca del Vino" },
+              { to: "/producto/winerim-core", label: "Winerim Core" },
+              { to: linkTo("/demo"), label: "Solicitar demo" },
             ].map((link) => (
               <Link
                 key={link.to}
@@ -548,16 +359,16 @@ const RegionDetail = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-                {t.bringToCartaWithCriteria.replace('{name}', data.name)} <span className="text-gradient-wine italic"></span>
+                Lleva <span className="text-gradient-wine italic">{data.name}</span> a tu carta con criterio
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
-                {t.winerimIntegrates}
+                Winerim integra datos de denominaciones, percepción y rol comercial para ayudarte a decidir qué vinos incluir, destacar o rotar.
               </p>
               <Link
-                to="/demo"
+                to={linkTo("/demo")}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all"
               >
-                {t.requestDemo} <ArrowRight size={16} />
+                Solicitar demo <ArrowRight size={16} />
               </Link>
             </div>
           </motion.div>

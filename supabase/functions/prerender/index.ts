@@ -53,6 +53,274 @@ interface PageContent {
 
 interface HreflangEntry { lang: string; url: string }
 
+const WINE_LIBRARY_HOME_HREFLANG: HreflangEntry[] = [
+  { lang: 'es', url: `${SITE}/biblioteca-vino` },
+  { lang: 'en', url: `${SITE}/en/wine-library` },
+  { lang: 'it', url: `${SITE}/it/biblioteca-vino` },
+  { lang: 'fr', url: `${SITE}/fr/bibliotheque-vin` },
+  { lang: 'de', url: `${SITE}/de/weinbibliothek` },
+  { lang: 'pt', url: `${SITE}/pt/biblioteca-vinho` },
+  { lang: 'x-default', url: `${SITE}/biblioteca-vino` },
+];
+
+const WINE_LIBRARY_LANGS = ['es', 'en', 'it', 'fr', 'de', 'pt'] as const;
+type WineLibraryLang = typeof WINE_LIBRARY_LANGS[number];
+
+interface WineLibraryPathConfig {
+  base: string;
+  sections: Record<string, string>;
+}
+
+const WINE_LIBRARY_PATH_CONFIG: Record<WineLibraryLang, WineLibraryPathConfig> = {
+  es: {
+    base: '/biblioteca-vino',
+    sections: {
+      regiones: 'regiones',
+      uvas: 'uvas',
+      estilos: 'estilos',
+      maridajes: 'maridajes',
+      'guia-servicio': 'guia-servicio',
+      glosario: 'glosario',
+    },
+  },
+  en: {
+    base: '/en/wine-library',
+    sections: {
+      regiones: 'regions',
+      uvas: 'grapes',
+      estilos: 'styles',
+      maridajes: 'pairings',
+      'guia-servicio': 'service-guide',
+      glosario: 'glossary',
+    },
+  },
+  it: {
+    base: '/it/biblioteca-vino',
+    sections: {
+      regiones: 'regioni',
+      uvas: 'vitigni',
+      estilos: 'stili',
+      maridajes: 'abbinamenti',
+      'guia-servicio': 'guida-servizio',
+      glosario: 'glossario',
+    },
+  },
+  fr: {
+    base: '/fr/bibliotheque-vin',
+    sections: {
+      regiones: 'regions',
+      uvas: 'cepages',
+      estilos: 'styles-de-vin',
+      maridajes: 'accords',
+      'guia-servicio': 'guide-service',
+      glosario: 'glossaire',
+    },
+  },
+  de: {
+    base: '/de/weinbibliothek',
+    sections: {
+      regiones: 'regionen',
+      uvas: 'rebsorten',
+      estilos: 'weinstile',
+      maridajes: 'weinbegleitung',
+      'guia-servicio': 'service-guide',
+      glosario: 'glossar',
+    },
+  },
+  pt: {
+    base: '/pt/biblioteca-vinho',
+    sections: {
+      regiones: 'regioes',
+      uvas: 'castas',
+      estilos: 'estilos',
+      maridajes: 'harmonizacoes',
+      'guia-servicio': 'guia-servico',
+      glosario: 'glossario',
+    },
+  },
+};
+
+const WINE_LIBRARY_COPY: Record<WineLibraryLang, {
+  home: string;
+  sectionTitles: Record<string, string>;
+  detailLabels: Record<string, string>;
+  generatedIntro: (subject: string, type: string) => string;
+  sectionIntro: (section: string) => string;
+  breadcrumbsHome: string;
+  faqTitle: string;
+}> = {
+  es: {
+    home: 'Biblioteca de vino',
+    sectionTitles: { regiones: 'Regiones vinícolas', uvas: 'Variedades de uva', estilos: 'Estilos de vino', maridajes: 'Maridajes', 'guia-servicio': 'Guía de servicio', glosario: 'Glosario del vino' },
+    detailLabels: { regiones: 'región vinícola', uvas: 'variedad de uva', estilos: 'estilo de vino', maridajes: 'maridaje', article: 'guía de vino' },
+    generatedIntro: (subject, type) => `${subject} forma parte de la biblioteca de vino de Winerim como ${type}. Esta página ayuda a equipos de sala y responsables de carta a conectar origen, estilo, servicio y decisión comercial.`,
+    sectionIntro: (section) => `Explora ${section.toLowerCase()} con enfoque práctico para carta de vinos, venta en sala y formación interna.`,
+    breadcrumbsHome: 'Inicio',
+    faqTitle: 'Preguntas frecuentes',
+  },
+  en: {
+    home: 'Wine library',
+    sectionTitles: { regiones: 'Wine regions', uvas: 'Grape varieties', estilos: 'Wine styles', maridajes: 'Wine pairings', 'guia-servicio': 'Service guide', glosario: 'Wine glossary' },
+    detailLabels: { regiones: 'wine region', uvas: 'grape variety', estilos: 'wine style', maridajes: 'wine pairing', article: 'wine guide' },
+    generatedIntro: (subject, type) => `${subject} is part of the Winerim wine library as a ${type}. This page helps restaurant teams connect origin, style, service and commercial decisions.`,
+    sectionIntro: (section) => `Explore ${section.toLowerCase()} with a practical angle for wine-list strategy, floor sales and staff training.`,
+    breadcrumbsHome: 'Home',
+    faqTitle: 'Frequently asked questions',
+  },
+  it: {
+    home: 'Biblioteca del vino',
+    sectionTitles: { regiones: 'Regioni vinicole', uvas: 'Vitigni', estilos: 'Stili di vino', maridajes: 'Abbinamenti', 'guia-servicio': 'Guida di servizio', glosario: 'Glossario del vino' },
+    detailLabels: { regiones: 'regione vinicola', uvas: 'vitigno', estilos: 'stile di vino', maridajes: 'abbinamento', article: 'guida vino' },
+    generatedIntro: (subject, type) => `${subject} fa parte della biblioteca del vino Winerim come ${type}. Questa pagina aiuta la sala a collegare origine, stile, servizio e decisione commerciale.`,
+    sectionIntro: (section) => `Esplora ${section.toLowerCase()} con un taglio pratico per carta vini, vendita in sala e formazione interna.`,
+    breadcrumbsHome: 'Home',
+    faqTitle: 'Domande frequenti',
+  },
+  fr: {
+    home: 'Bibliothèque du vin',
+    sectionTitles: { regiones: 'Régions viticoles', uvas: 'Cépages', estilos: 'Styles de vin', maridajes: 'Accords mets-vins', 'guia-servicio': 'Guide de service', glosario: 'Glossaire du vin' },
+    detailLabels: { regiones: 'région viticole', uvas: 'cépage', estilos: 'style de vin', maridajes: 'accord mets-vin', article: 'guide vin' },
+    generatedIntro: (subject, type) => `${subject} fait partie de la bibliothèque du vin Winerim comme ${type}. Cette page aide les équipes à relier origine, style, service et décision commerciale.`,
+    sectionIntro: (section) => `Explorez ${section.toLowerCase()} avec une approche pratique pour la carte, la vente en salle et la formation.`,
+    breadcrumbsHome: 'Accueil',
+    faqTitle: 'Questions fréquentes',
+  },
+  de: {
+    home: 'Weinbibliothek',
+    sectionTitles: { regiones: 'Weinregionen', uvas: 'Rebsorten', estilos: 'Weinstile', maridajes: 'Weinbegleitung', 'guia-servicio': 'Service-Guide', glosario: 'Weinglossar' },
+    detailLabels: { regiones: 'Weinregion', uvas: 'Rebsorte', estilos: 'Weinstil', maridajes: 'Weinbegleitung', article: 'Wein-Guide' },
+    generatedIntro: (subject, type) => `${subject} ist Teil der Winerim Weinbibliothek als ${type}. Diese Seite hilft Serviceteams, Herkunft, Stil, Service und kommerzielle Entscheidung zu verbinden.`,
+    sectionIntro: (section) => `Entdecken Sie ${section.toLowerCase()} mit praktischem Fokus auf Weinkarte, Verkauf im Service und Teamtraining.`,
+    breadcrumbsHome: 'Startseite',
+    faqTitle: 'Häufige Fragen',
+  },
+  pt: {
+    home: 'Biblioteca do vinho',
+    sectionTitles: { regiones: 'Regiões vinícolas', uvas: 'Castas', estilos: 'Estilos de vinho', maridajes: 'Harmonizações', 'guia-servicio': 'Guia de serviço', glosario: 'Glossário do vinho' },
+    detailLabels: { regiones: 'região vinícola', uvas: 'casta', estilos: 'estilo de vinho', maridajes: 'harmonização', article: 'guia de vinho' },
+    generatedIntro: (subject, type) => `${subject} faz parte da biblioteca do vinho Winerim como ${type}. Esta página ajuda equipas de sala a ligar origem, estilo, serviço e decisão comercial.`,
+    sectionIntro: (section) => `Explore ${section.toLowerCase()} com foco prático para carta de vinhos, venda em sala e formação interna.`,
+    breadcrumbsHome: 'Início',
+    faqTitle: 'Perguntas frequentes',
+  },
+};
+
+function wineLibraryPath(lang: WineLibraryLang, esPath: string): string {
+  const config = WINE_LIBRARY_PATH_CONFIG[lang];
+  if (lang === 'es') return esPath;
+  if (esPath === '/biblioteca-vino') return config.base;
+
+  const match = esPath.match(/^\/biblioteca-vino\/([^/]+)(.*)$/);
+  if (!match) return esPath;
+  const [, section, rest] = match;
+  return `${config.base}/${config.sections[section] || section}${rest}`;
+}
+
+function wineLibraryHreflang(esPath: string): HreflangEntry[] {
+  return [
+    ...WINE_LIBRARY_LANGS.map((lang) => ({ lang, url: `${SITE}${wineLibraryPath(lang, esPath)}` })),
+    { lang: 'x-default', url: `${SITE}${wineLibraryPath('es', esPath)}` },
+  ];
+}
+
+function titleFromSlug(slug: string): string {
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.length <= 3 ? part.toUpperCase() : `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+    .join(' ');
+}
+
+function resolveWineLibraryPath(path: string): { lang: WineLibraryLang; esPath: string } | null {
+  for (const lang of WINE_LIBRARY_LANGS) {
+    const config = WINE_LIBRARY_PATH_CONFIG[lang];
+    if (path === config.base) return { lang, esPath: '/biblioteca-vino' };
+    if (!path.startsWith(`${config.base}/`)) continue;
+
+    const relative = path.slice(config.base.length + 1);
+    const [localizedSection, ...restParts] = relative.split('/');
+    const esSection = Object.entries(config.sections).find(([, value]) => value === localizedSection)?.[0] || localizedSection;
+    const rest = restParts.length > 0 ? `/${restParts.join('/')}` : '';
+    return { lang, esPath: `/biblioteca-vino/${esSection}${rest}` };
+  }
+  return null;
+}
+
+function renderWineLibraryPage(path: string): string | null {
+  const resolved = resolveWineLibraryPath(path);
+  if (!resolved) return null;
+
+  const { lang, esPath } = resolved;
+  const copy = WINE_LIBRARY_COPY[lang];
+  const parts = esPath.split('/').filter(Boolean);
+  const section = parts[1];
+  const canonical = `${SITE}${wineLibraryPath(lang, esPath)}`;
+
+  if (esPath === '/biblioteca-vino') {
+    return generateHTML(STATIC_PAGES['/biblioteca-vino'].meta, STATIC_PAGES['/biblioteca-vino'].content, wineLibraryHreflang(esPath));
+  }
+
+  const sectionTitle = copy.sectionTitles[section] || copy.home;
+  const isSectionHub = parts.length === 2;
+  const subject = isSectionHub ? sectionTitle : titleFromSlug(parts[parts.length - 1]);
+  const type = isSectionHub ? sectionTitle.toLowerCase() : copy.detailLabels[section] || copy.detailLabels.article;
+  const h1 = isSectionHub ? sectionTitle : `${subject}: ${type}`;
+  const title = `${h1} | Winerim`;
+  const description = isSectionHub
+    ? copy.sectionIntro(sectionTitle)
+    : copy.generatedIntro(subject, type);
+
+  const hubPath = section ? wineLibraryPath(lang, `/biblioteca-vino/${section}`) : wineLibraryPath(lang, '/biblioteca-vino');
+  const sections = isSectionHub
+    ? [
+        { heading: sectionTitle, content: copy.sectionIntro(sectionTitle) },
+        { heading: copy.home, content: copy.generatedIntro(sectionTitle, copy.detailLabels.article) },
+      ]
+    : [
+        { heading: subject, content: copy.generatedIntro(subject, type) },
+        { heading: sectionTitle, content: copy.sectionIntro(sectionTitle) },
+        { heading: copy.home, content: copy.generatedIntro(subject, copy.detailLabels.article) },
+      ];
+
+  return generateHTML(
+    {
+      title,
+      description,
+      canonical,
+      ogImage: OG_IMAGE,
+      lang,
+      type: 'website',
+      schemaType: isSectionHub ? 'CollectionPage' : 'Article',
+    },
+    {
+      h1,
+      subtitle: sectionTitle,
+      intro: description,
+      sections,
+      faqs: [
+        {
+          q: copy.faqTitle,
+          a: description,
+        },
+      ],
+      breadcrumbs: [
+        { name: copy.breadcrumbsHome, url: `${SITE}${lang === 'es' ? '/' : `/${lang}`}` },
+        { name: copy.home, url: `${SITE}${wineLibraryPath(lang, '/biblioteca-vino')}` },
+        ...(section ? [{ name: sectionTitle, url: `${SITE}${hubPath}` }] : []),
+        ...(!isSectionHub ? [{ name: subject, url: canonical }] : []),
+      ],
+      internalLinks: [
+        { label: copy.sectionTitles.uvas, url: wineLibraryPath(lang, '/biblioteca-vino/uvas') },
+        { label: copy.sectionTitles.regiones, url: wineLibraryPath(lang, '/biblioteca-vino/regiones') },
+        { label: copy.sectionTitles.estilos, url: wineLibraryPath(lang, '/biblioteca-vino/estilos') },
+        { label: copy.sectionTitles.maridajes, url: wineLibraryPath(lang, '/biblioteca-vino/maridajes') },
+        { label: copy.sectionTitles.glosario, url: wineLibraryPath(lang, '/biblioteca-vino/glosario') },
+      ],
+    },
+    wineLibraryHreflang(esPath)
+  );
+}
+
 // ── Hreflang map: ES path → other language paths ──
 const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
   '/': [
@@ -211,11 +479,101 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'fr', url: `${SITE}/fr/logiciel-carte-des-vins` },
     { lang: 'x-default', url: `${SITE}/software-carta-de-vinos` },
   ],
+  '/biblioteca-vino': WINE_LIBRARY_HOME_HREFLANG,
+  '/en/wine-library': WINE_LIBRARY_HOME_HREFLANG,
+  '/it/biblioteca-vino': WINE_LIBRARY_HOME_HREFLANG,
+  '/fr/bibliotheque-vin': WINE_LIBRARY_HOME_HREFLANG,
+  '/de/weinbibliothek': WINE_LIBRARY_HOME_HREFLANG,
+  '/pt/biblioteca-vinho': WINE_LIBRARY_HOME_HREFLANG,
+};
+
+const WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
+  '/en/wine-library': {
+    meta: { title: 'Wine Library — Grapes, Regions, Styles and Pairings | Winerim', description: 'Explore Winerim’s wine library: grape varieties, wine regions, wine styles, pairings and glossary for hospitality professionals.', canonical: `${SITE}/en/wine-library`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Wine library for hospitality professionals',
+      subtitle: 'Structured wine knowledge for floor teams, sommeliers and purchasing managers.',
+      sections: [
+        { heading: 'Grape varieties', content: 'Guides to key varieties with sensory profile, regions, pairing logic and wine-list role.' },
+        { heading: 'Wine regions', content: 'Country and denomination guides with restaurant-focused commercial reading.' },
+        { heading: 'Wine styles', content: 'Service, glassware, temperature and pairing expectations by style.' },
+        { heading: 'Pairings', content: 'Food and wine pairing principles for confident restaurant recommendations.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Wine Library', url: `${SITE}/en/wine-library` }],
+      internalLinks: [{ label: 'Grapes', url: '/en/wine-library/grapes' }, { label: 'Regions', url: '/en/wine-library/regions' }, { label: 'Styles', url: '/en/wine-library/styles' }, { label: 'Pairings', url: '/en/wine-library/pairings' }],
+    },
+  },
+  '/it/biblioteca-vino': {
+    meta: { title: 'Biblioteca del Vino — Vitigni, Regioni, Stili e Abbinamenti | Winerim', description: 'Esplora la biblioteca del vino Winerim: vitigni, regioni, stili, abbinamenti e glossario per professionisti della ristorazione.', canonical: `${SITE}/it/biblioteca-vino`, ogImage: OG_IMAGE, lang: 'it', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Biblioteca del vino per professionisti della ristorazione',
+      subtitle: 'Conoscenza vinicola strutturata per sala, sommelier e responsabili acquisti.',
+      sections: [
+        { heading: 'Vitigni', content: 'Schede sui principali vitigni con profilo sensoriale, regioni e ruolo in carta.' },
+        { heading: 'Regioni vinicole', content: 'Guide per paese e denominazione con lettura commerciale per la ristorazione.' },
+        { heading: 'Stili di vino', content: 'Servizio, calice, temperatura e occasioni di vendita per stile.' },
+        { heading: 'Abbinamenti', content: 'Principi di abbinamento per raccomandazioni più sicure in sala.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Biblioteca del Vino', url: `${SITE}/it/biblioteca-vino` }],
+      internalLinks: [{ label: 'Vitigni', url: '/it/biblioteca-vino/vitigni' }, { label: 'Regioni', url: '/it/biblioteca-vino/regioni' }, { label: 'Stili', url: '/it/biblioteca-vino/stili' }, { label: 'Abbinamenti', url: '/it/biblioteca-vino/abbinamenti' }],
+    },
+  },
+  '/fr/bibliotheque-vin': {
+    meta: { title: 'Bibliothèque du Vin — Cépages, Régions, Styles et Accords | Winerim', description: 'Explorez la bibliothèque du vin Winerim: cépages, régions, styles, accords et glossaire pour professionnels de la restauration.', canonical: `${SITE}/fr/bibliotheque-vin`, ogImage: OG_IMAGE, lang: 'fr', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Bibliothèque du vin pour professionnels de la restauration',
+      subtitle: 'Connaissance du vin structurée pour la salle, les sommeliers et les achats.',
+      sections: [
+        { heading: 'Cépages', content: 'Guides des principaux cépages avec profil sensoriel, régions et rôle en carte.' },
+        { heading: 'Régions viticoles', content: 'Guides par pays et appellation avec lecture commerciale pour la restauration.' },
+        { heading: 'Styles de vin', content: 'Service, verrerie, température et attentes d’accord par style.' },
+        { heading: 'Accords', content: 'Principes d’accords mets-vins pour mieux recommander en salle.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Bibliothèque du Vin', url: `${SITE}/fr/bibliotheque-vin` }],
+      internalLinks: [{ label: 'Cépages', url: '/fr/bibliotheque-vin/cepages' }, { label: 'Régions', url: '/fr/bibliotheque-vin/regions' }, { label: 'Styles', url: '/fr/bibliotheque-vin/styles-de-vin' }, { label: 'Accords', url: '/fr/bibliotheque-vin/accords' }],
+    },
+  },
+  '/de/weinbibliothek': {
+    meta: { title: 'Weinbibliothek — Rebsorten, Regionen, Stile und Pairings | Winerim', description: 'Entdecken Sie die Winerim Weinbibliothek: Rebsorten, Weinregionen, Weinstile, Pairings und Glossar für Gastronomieprofis.', canonical: `${SITE}/de/weinbibliothek`, ogImage: OG_IMAGE, lang: 'de', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Weinbibliothek für Gastronomieprofis',
+      subtitle: 'Strukturiertes Weinwissen für Service, Sommeliers und Einkauf.',
+      sections: [
+        { heading: 'Rebsorten', content: 'Profile wichtiger Rebsorten mit Sensorik, Regionen, Pairing-Logik und Rolle auf der Weinkarte.' },
+        { heading: 'Weinregionen', content: 'Guides nach Ländern und Herkunftsbezeichnungen mit kommerzieller Lesart für Restaurants.' },
+        { heading: 'Weinstile', content: 'Service, Glas, Temperatur und Pairing-Erwartung nach Stil.' },
+        { heading: 'Pairings', content: 'Prinzipien für sichere Speise- und Weinempfehlungen im Service.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Weinbibliothek', url: `${SITE}/de/weinbibliothek` }],
+      internalLinks: [{ label: 'Rebsorten', url: '/de/weinbibliothek/rebsorten' }, { label: 'Regionen', url: '/de/weinbibliothek/regionen' }, { label: 'Weinstile', url: '/de/weinbibliothek/weinstile' }, { label: 'Pairings', url: '/de/weinbibliothek/weinbegleitung' }],
+    },
+  },
+  '/pt/biblioteca-vinho': {
+    meta: { title: 'Biblioteca do Vinho — Castas, Regiões, Estilos e Harmonizações | Winerim', description: 'Explore a biblioteca do vinho Winerim: castas, regiões, estilos, harmonizações e glossário para profissionais de restauração.', canonical: `${SITE}/pt/biblioteca-vinho`, ogImage: OG_IMAGE, lang: 'pt', type: 'website', schemaType: 'CollectionPage' },
+    content: {
+      h1: 'Biblioteca do vinho para profissionais de restauração',
+      subtitle: 'Conhecimento de vinho estruturado para sala, sommeliers e responsáveis de compras.',
+      sections: [
+        { heading: 'Castas', content: 'Guias das principais castas com perfil sensorial, regiões, harmonizações e papel na carta.' },
+        { heading: 'Regiões vitivinícolas', content: 'Guias por país e denominação com leitura comercial para restauração.' },
+        { heading: 'Estilos de vinho', content: 'Serviço, copo, temperatura e expectativa de harmonização por estilo.' },
+        { heading: 'Harmonizações', content: 'Princípios de harmonização para recomendações mais seguras em sala.' },
+      ],
+      faqs: [],
+      breadcrumbs: [{ name: 'Início', url: `${SITE}/pt` }, { name: 'Biblioteca do Vinho', url: `${SITE}/pt/biblioteca-vinho` }],
+      internalLinks: [{ label: 'Castas', url: '/pt/biblioteca-vinho/castas' }, { label: 'Regiões', url: '/pt/biblioteca-vinho/regioes' }, { label: 'Estilos', url: '/pt/biblioteca-vinho/estilos' }, { label: 'Harmonizações', url: '/pt/biblioteca-vinho/harmonizacoes' }],
+    },
+  },
 };
 
 // ── Static page definitions ──
 // Each page has full semantic content for bots — independent of React hydration.
 const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
+  ...WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES,
   '/': {
     meta: {
       title: 'Software de IA para Restaurantes — Vende Más Vino | Winerim',
@@ -1894,7 +2252,7 @@ ${hreflangHTML}
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Winerim">
-  <meta property="og:locale" content="${meta.lang === 'en' ? 'en_GB' : meta.lang === 'it' ? 'it_IT' : meta.lang === 'fr' ? 'fr_FR' : 'es_ES'}">
+  <meta property="og:locale" content="${({ es: 'es_ES', en: 'en_GB', it: 'it_IT', fr: 'fr_FR', de: 'de_DE', pt: 'pt_PT' } as Record<string, string>)[meta.lang] || 'es_ES'}">
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeAttr(meta.title)}">
@@ -1961,24 +2319,37 @@ async function renderSeoPage(slug: string): Promise<string | null> {
   if (!Array.isArray(data) || data.length === 0) return null;
 
   const page = data[0];
-  const body = (typeof page.body === 'object' && page.body !== null ? page.body : {}) as Record<string, any>;
+  const body = (typeof page.body === 'object' && page.body !== null ? page.body : {}) as Record<string, unknown>;
   const faqs = Array.isArray(page.faqs) ? page.faqs as { q: string; a: string }[] : [];
 
   const sections: { heading: string; content: string }[] = [];
-  if (body.intro) sections.push({ heading: 'Introducción', content: body.intro });
+  if (typeof body.intro === 'string') sections.push({ heading: 'Introducción', content: body.intro });
   if (Array.isArray(body.sections)) {
     for (const s of body.sections) {
-      if (s.heading && s.content) sections.push({ heading: s.heading, content: s.content });
+      if (typeof s !== 'object' || s === null) continue;
+      const section = s as Record<string, unknown>;
+      if (typeof section.heading === 'string' && typeof section.content === 'string') {
+        sections.push({ heading: section.heading, content: section.content });
+      }
     }
   }
   if (Array.isArray(body.problems)) {
-    sections.push({ heading: 'Retos habituales', content: body.problems.join('. ') });
+    sections.push({ heading: 'Retos habituales', content: body.problems.filter((item): item is string => typeof item === 'string').join('. ') });
   }
   if (Array.isArray(body.benefits)) {
-    sections.push({ heading: 'Beneficios', content: body.benefits.join('. ') });
+    sections.push({ heading: 'Beneficios', content: body.benefits.filter((item): item is string => typeof item === 'string').join('. ') });
   }
   if (Array.isArray(body.features)) {
-    const featText = body.features.map((f: any) => `${f.title}: ${f.desc}`).join('. ');
+    const featText = body.features
+      .map((f) => {
+        if (typeof f !== 'object' || f === null) return '';
+        const feature = f as Record<string, unknown>;
+        const title = typeof feature.title === 'string' ? feature.title : '';
+        const desc = typeof feature.desc === 'string' ? feature.desc : '';
+        return title && desc ? `${title}: ${desc}` : title || desc;
+      })
+      .filter(Boolean)
+      .join('. ');
     sections.push({ heading: 'Cómo te ayuda Winerim', content: featText });
   }
 
@@ -1995,7 +2366,12 @@ async function renderSeoPage(slug: string): Promise<string | null> {
   };
 
   const internalLinks = Array.isArray(body.internal_links)
-    ? body.internal_links.map((l: any) => ({ label: l.label || l.title || '', url: l.url || l.to || '/' }))
+    ? body.internal_links.map((link) => {
+        const l = typeof link === 'object' && link !== null ? link as Record<string, unknown> : {};
+        const label = typeof l.label === 'string' ? l.label : typeof l.title === 'string' ? l.title : '';
+        const url = typeof l.url === 'string' ? l.url : typeof l.to === 'string' ? l.to : '/';
+        return { label, url };
+      })
     : [
         { label: 'Solicitar demo', url: '/demo' },
         { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
@@ -2005,7 +2381,7 @@ async function renderSeoPage(slug: string): Promise<string | null> {
   const content: PageContent = {
     h1: page.hero_title,
     subtitle: page.hero_subtitle || undefined,
-    intro: body.intro || undefined,
+    intro: typeof body.intro === 'string' ? body.intro : undefined,
     sections,
     faqs,
     breadcrumbs: [
@@ -2171,6 +2547,10 @@ Deno.serve(async (req) => {
     if (staticPage) {
       const hreflang = HREFLANG_MAP[path];
       html = generateHTML(staticPage.meta, staticPage.content, hreflang);
+    }
+
+    if (!html) {
+      html = renderWineLibraryPage(path);
     }
 
     if (!html && (path.startsWith('/software-carta-de-vinos-') || path.startsWith('/software-vino-') || path.startsWith('/wine-list-software-'))) {

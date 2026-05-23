@@ -37,6 +37,13 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-supply': '/en/product/winerim-supply',
     '/analisis-carta': '/en/wine-list-analysis',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
+    '/biblioteca-vino': '/en/wine-library',
+    '/biblioteca-vino/regiones': '/en/wine-library/regions',
+    '/biblioteca-vino/uvas': '/en/wine-library/grapes',
+    '/biblioteca-vino/estilos': '/en/wine-library/styles',
+    '/biblioteca-vino/maridajes': '/en/wine-library/pairings',
+    '/biblioteca-vino/guia-servicio': '/en/wine-library/service-guide',
+    '/biblioteca-vino/glosario': '/en/wine-library/glossary',
   },
   it: {
     '/': '/it',
@@ -65,6 +72,13 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-supply': '/it/prodotto/winerim-supply',
     '/analisis-carta': '/it/analisi-carta',
     '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
+    '/biblioteca-vino': '/it/biblioteca-vino',
+    '/biblioteca-vino/regiones': '/it/biblioteca-vino/regioni',
+    '/biblioteca-vino/uvas': '/it/biblioteca-vino/vitigni',
+    '/biblioteca-vino/estilos': '/it/biblioteca-vino/stili',
+    '/biblioteca-vino/maridajes': '/it/biblioteca-vino/abbinamenti',
+    '/biblioteca-vino/guia-servicio': '/it/biblioteca-vino/guida-servizio',
+    '/biblioteca-vino/glosario': '/it/biblioteca-vino/glossario',
   },
   fr: {
     '/': '/fr',
@@ -93,6 +107,13 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-supply': '/fr/produit/winerim-supply',
     '/analisis-carta': '/fr/analyse-carte',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
+    '/biblioteca-vino': '/fr/bibliotheque-vin',
+    '/biblioteca-vino/regiones': '/fr/bibliotheque-vin/regions',
+    '/biblioteca-vino/uvas': '/fr/bibliotheque-vin/cepages',
+    '/biblioteca-vino/estilos': '/fr/bibliotheque-vin/styles-de-vin',
+    '/biblioteca-vino/maridajes': '/fr/bibliotheque-vin/accords',
+    '/biblioteca-vino/guia-servicio': '/fr/bibliotheque-vin/guide-service',
+    '/biblioteca-vino/glosario': '/fr/bibliotheque-vin/glossaire',
   },
   de: {
     '/': '/de',
@@ -121,6 +142,13 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-supply': '/de/produkt/winerim-supply',
     '/analisis-carta': '/de/weinkarten-analyse',
     '/calculadora-margen-vino': '/de/wein-margen-rechner',
+    '/biblioteca-vino': '/de/weinbibliothek',
+    '/biblioteca-vino/regiones': '/de/weinbibliothek/regionen',
+    '/biblioteca-vino/uvas': '/de/weinbibliothek/rebsorten',
+    '/biblioteca-vino/estilos': '/de/weinbibliothek/weinstile',
+    '/biblioteca-vino/maridajes': '/de/weinbibliothek/weinbegleitung',
+    '/biblioteca-vino/guia-servicio': '/de/weinbibliothek/service-guide',
+    '/biblioteca-vino/glosario': '/de/weinbibliothek/glossar',
   },
   pt: {
     '/': '/pt',
@@ -149,21 +177,91 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-supply': '/pt/produto/winerim-supply',
     '/analisis-carta': '/pt/analise-carta',
     '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
+    '/biblioteca-vino': '/pt/biblioteca-vinho',
+    '/biblioteca-vino/regiones': '/pt/biblioteca-vinho/regioes',
+    '/biblioteca-vino/uvas': '/pt/biblioteca-vinho/castas',
+    '/biblioteca-vino/estilos': '/pt/biblioteca-vinho/estilos',
+    '/biblioteca-vino/maridajes': '/pt/biblioteca-vinho/harmonizacoes',
+    '/biblioteca-vino/guia-servicio': '/pt/biblioteca-vinho/guia-servico',
+    '/biblioteca-vino/glosario': '/pt/biblioteca-vinho/glossario',
   },
 };
 
+const WINE_LIBRARY_BASE: Record<string, string> = {
+  en: '/en/wine-library',
+  it: '/it/biblioteca-vino',
+  fr: '/fr/bibliotheque-vin',
+  de: '/de/weinbibliothek',
+  pt: '/pt/biblioteca-vinho',
+};
+
+const WINE_LIBRARY_SECTIONS: Record<string, Record<string, string>> = {
+  en: {
+    regiones: 'regions',
+    uvas: 'grapes',
+    estilos: 'styles',
+    maridajes: 'pairings',
+    'guia-servicio': 'service-guide',
+    glosario: 'glossary',
+  },
+  it: {
+    regiones: 'regioni',
+    uvas: 'vitigni',
+    estilos: 'stili',
+    maridajes: 'abbinamenti',
+    'guia-servicio': 'guida-servizio',
+    glosario: 'glossario',
+  },
+  fr: {
+    regiones: 'regions',
+    uvas: 'cepages',
+    estilos: 'styles-de-vin',
+    maridajes: 'accords',
+    'guia-servicio': 'guide-service',
+    glosario: 'glossaire',
+  },
+  de: {
+    regiones: 'regionen',
+    uvas: 'rebsorten',
+    estilos: 'weinstile',
+    maridajes: 'weinbegleitung',
+    'guia-servicio': 'service-guide',
+    glosario: 'glossar',
+  },
+  pt: {
+    regiones: 'regioes',
+    uvas: 'castas',
+    estilos: 'estilos',
+    maridajes: 'harmonizacoes',
+    'guia-servicio': 'guia-servico',
+    glosario: 'glossario',
+  },
+};
+
+function localizedPath(lang: string, esPath: string): string | undefined {
+  if (lang === 'es') return esPath;
+  if (esPath === '/biblioteca-vino') return WINE_LIBRARY_BASE[lang];
+
+  const wineMatch = esPath.match(/^\/biblioteca-vino\/([^/]+)(.*)$/);
+  if (wineMatch && WINE_LIBRARY_BASE[lang]) {
+    const [, section, rest] = wineMatch;
+    return `${WINE_LIBRARY_BASE[lang]}/${WINE_LIBRARY_SECTIONS[lang]?.[section] || section}${rest}`;
+  }
+
+  return ROUTE_MAP[lang]?.[esPath];
+}
+
 /** Generate hreflang alternate XML links for a given ES path */
 function hreflangBlock(esPath: string): string {
-  const langs = ['en', 'it', 'fr', 'de', 'pt'];
+  const langs = ['es', 'en', 'it', 'fr', 'de', 'pt'];
   const esUrl = `${SITE}${esPath}`;
   let xml = '';
   // x-default → ES
   xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${esUrl}"/>\n`;
-  xml += `    <xhtml:link rel="alternate" hreflang="es" href="${esUrl}"/>\n`;
   for (const lang of langs) {
-    const localizedPath = ROUTE_MAP[lang]?.[esPath];
-    if (localizedPath) {
-      xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${SITE}${localizedPath}"/>\n`;
+    const path = localizedPath(lang, esPath);
+    if (path) {
+      xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${SITE}${path}"/>\n`;
     }
   }
   return xml;
@@ -268,14 +366,14 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/benchmarks-playbooks/playbook-formar-personal', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/benchmarks-playbooks/playbook-decidir-compras-datos', priority: '0.6', changefreq: 'monthly', multilang: false },
 
-  // Library hubs
-  { esPath: '/biblioteca-vino', priority: '0.7', changefreq: 'weekly', multilang: false },
-  { esPath: '/biblioteca-vino/regiones', priority: '0.6', changefreq: 'weekly', multilang: false },
-  { esPath: '/biblioteca-vino/uvas', priority: '0.6', changefreq: 'weekly', multilang: false },
-  { esPath: '/biblioteca-vino/estilos', priority: '0.6', changefreq: 'weekly', multilang: false },
-  { esPath: '/biblioteca-vino/maridajes', priority: '0.6', changefreq: 'weekly', multilang: false },
-  { esPath: '/biblioteca-vino/guia-servicio', priority: '0.5', changefreq: 'monthly', multilang: false },
-  { esPath: '/biblioteca-vino/glosario', priority: '0.5', changefreq: 'monthly', multilang: false },
+  // Library
+  { esPath: '/biblioteca-vino', priority: '0.6', changefreq: 'weekly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones', priority: '0.5', changefreq: 'weekly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas', priority: '0.5', changefreq: 'weekly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos', priority: '0.5', changefreq: 'weekly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes', priority: '0.5', changefreq: 'weekly', multilang: true },
+  { esPath: '/biblioteca-vino/guia-servicio', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/glosario', priority: '0.4', changefreq: 'monthly', multilang: true },
 
   // Problems
   { esPath: '/problemas/carta-de-vinos-no-vende', priority: '0.6', changefreq: 'monthly', multilang: false },
@@ -297,6 +395,249 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/herramientas/calculadora-ticket-medio-vino', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/auditor-carta-multilocal', priority: '0.6', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-compra-inteligente', priority: '0.6', changefreq: 'monthly', multilang: false },
+];
+
+
+// Generated from src/data/*Library.ts to expose entity detail pages in the sitemap.
+const WINE_LIBRARY_DYNAMIC_ROUTES: StaticRoute[] = [
+  { esPath: '/biblioteca-vino/borgona', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/cabernet-sauvignon', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/chardonnay', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/amontillado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/biodinamico', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco-crianza-lias', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco-fermentado-barrica', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco-joven', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco-mineral', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/blanco-semidulce', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/cava', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/champagne', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/clarete', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/cremant', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/dulce-natural', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/ecologico-biodinamico-natural', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/ecologico-certificado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/eiswein', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/espumante', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/espumoso', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/fino-manzanilla', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/franciacorta', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/generoso', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/madeira', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/marsala', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/moscatel-de-setubal', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/moscatel-dulce', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/oloroso', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/oporto-ruby', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/oporto-tawny', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/oporto-vintage', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/orange-maceracion-corta', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/orange-maceracion-larga', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/orange-wine', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/palo-cortado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/passito', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/pedro-ximenez', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/pet-nat', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/prosecco', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/qvevri-wine', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/rosado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/rosado-cuerpo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/rosado-provenzal', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/rosado-semidulce', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/sauternes-botrytizados', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/sekt', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-crianza', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-cuerpo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-joven', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-ligero', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-maceracion-carbonica', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tinto-reserva', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/tokaji-aszu', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/vdn', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/vendimia-tardia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/vino-anfora', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/vino-natural', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/estilos/vino-tinaja', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/garnacha', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridaje-carne', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridaje-pescado', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridaje-queso', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/aves-y-caza', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/carnes-rojas', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/embutidos-y-charcuteria', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/postres-y-chocolate', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/quesos', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/tapas-y-aperitivos', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/maridajes/verduras-y-cocina-vegetariana', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/napa-valley', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/priorat', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/alemania', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/argentina', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/australia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/australia/barossa-valley', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/austria', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/chile', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/bierzo', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/calatayud', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/jerez', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/jumilla', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/montsant', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/navarra', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/penedes', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/priorat', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/rias-baixas', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/ribera-del-duero', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/rioja', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/rueda', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/somontano', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/toro', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/espana/txakoli', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/estados-unidos', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/estados-unidos/napa-valley', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/alsacia', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/beaujolais', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/bordeaux', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/bourgogne', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/chablis', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/champagne', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/jura', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/languedoc-roussillon', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/medoc', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/pomerol', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/provence', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/saint-emilion', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/val-de-loire', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/francia/vallee-du-rhone', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/georgia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/grecia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/hungria', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/abruzzo', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/campania', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/friuli', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/marche', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/piemonte', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/puglia', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/sardegna', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/sicilia', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/toscana', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/trentino-alto-adige', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/umbria', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/italia/veneto', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/nueva-zelanda', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/nueva-zelanda/marlborough', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/portugal', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/portugal/douro', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/sudafrica', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/regiones/uruguay', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/rioja', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/sauvignon-blanc', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/tempranillo', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/aglianico', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/airen', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/albarino', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/antao-vaz', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/arinto', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/arneis', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/assyrtiko', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/baga', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/barbera', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/blaufrankisch', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/bobal', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/bonarda', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/cabernet-franc', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/cabernet-sauvignon', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/carignan', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/carmenere', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/castelao', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/chardonnay', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/chenin-blanc', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/cinsault', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/cortese', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/corvina', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/dolcetto', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/encruzado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/fiano', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/furmint', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/gamay', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/garganega', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/garnacha', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/garnacha-tintorera', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/gewurztraminer', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/glera', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/godello', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/graciano', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/greco', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/gruner-veltliner', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/hondarrabi-zuri', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/kadarka', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/koshu', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/lagrein', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/listan-negro', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/loureiro', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/malbec', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/marsanne', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/mazuelo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/mencia', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/merlot', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/monastrell', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/montepulciano', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/moscatel-rosado', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/muller-thurgau', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/muscadet', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/muscat', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/nebbiolo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/nerello-mascalese', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/nero-d-avola', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pais', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/palomino', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/parellada', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pedro-ximenez', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/petit-verdot', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pinot-grigio', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pinot-meunier', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pinot-noir', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/pinotage', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/plavac-mali', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/prieto-picudo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/primitivo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/riesling', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/rkatsiteli', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/roussanne', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/sangiovese', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/saperavi', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/sauvignon-blanc', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/semillon', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/silvaner', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/st-laurent', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/syrah', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/tannat', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/tempranillo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/torrontes', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/touriga-franca', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/touriga-nacional', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/trebbiano', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/treixadura', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/trollinger', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/verdejo', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/vermentino', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/viognier', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/viura', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/welschriesling', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/xarello', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/xinomavro', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/uvas/zweigelt', priority: '0.5', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/vino-blanco', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/vino-espumoso', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/vino-rosado', priority: '0.4', changefreq: 'monthly', multilang: true },
+  { esPath: '/biblioteca-vino/vino-tinto', priority: '0.4', changefreq: 'monthly', multilang: true },
 ];
 
 /** Build a <url> block with optional hreflang alternates */
@@ -341,12 +682,26 @@ Deno.serve(async (req) => {
       // Localized versions (only if multilang)
       if (route.multilang) {
         for (const lang of ['en', 'it', 'fr', 'de', 'pt']) {
-          const localizedPath = ROUTE_MAP[lang]?.[route.esPath];
-          if (localizedPath) {
+          const path = localizedPath(lang, route.esPath);
+          if (path) {
             // Localized pages get same hreflang set, slightly lower priority
             const localPriority = Math.max(0.3, parseFloat(route.priority) - 0.1).toFixed(1);
-            xml += urlBlock(localizedPath, now, route.changefreq, localPriority, alternates);
+            xml += urlBlock(path, now, route.changefreq, localPriority, alternates);
           }
+        }
+      }
+    }
+
+    // ── Wine library entities (ES + localized equivalents) ──
+    for (const route of WINE_LIBRARY_DYNAMIC_ROUTES) {
+      const alternates = hreflangBlock(route.esPath);
+      xml += urlBlock(route.esPath, now, route.changefreq, route.priority, alternates);
+
+      for (const lang of ['en', 'it', 'fr', 'de', 'pt']) {
+        const path = localizedPath(lang, route.esPath);
+        if (path) {
+          const localPriority = Math.max(0.3, parseFloat(route.priority) - 0.1).toFixed(1);
+          xml += urlBlock(path, now, route.changefreq, localPriority, alternates);
         }
       }
     }
@@ -364,30 +719,6 @@ Deno.serve(async (req) => {
       for (const page of seoPages) {
         const lastmod = page.updated_at ? page.updated_at.split('T')[0] : now;
         xml += urlBlock(`/${page.slug}`, lastmod, 'monthly', '0.5');
-      }
-    }
-
-    // ── Biblioteca del Vino: detail pages ──
-    const GRAPE_SLUGS = ["tempranillo","garnacha","cabernet-sauvignon","pinot-noir","chardonnay","sauvignon-blanc","nebbiolo","albarino","syrah","riesling","merlot","malbec","sangiovese","monastrell","mencia","verdejo","godello","cabernet-franc","gamay","gewurztraminer","viognier","chenin-blanc","muscat","gruner-veltliner","pinot-grigio","barbera","touriga-nacional","primitivo","nero-d-avola","aglianico","carmenere","tannat","cinsault","carignan","petit-verdot","torrontes","muller-thurgau","silvaner","marsanne","roussanne","semillon","pedro-ximenez","palomino","vermentino","fiano","assyrtiko","furmint","glera","pinotage","corvina","nerello-mascalese","montepulciano","bobal","viura","garnacha-tintorera","graciano","muscadet","trebbiano","dolcetto","lagrein","xinomavro","blaufrankisch","bonarda","zweigelt","st-laurent","trollinger","kadarka","plavac-mali","saperavi","greco","mazuelo","garganega","arneis","cortese","encruzado","antao-vaz","arinto","loureiro","rkatsiteli","koshu","welschriesling","moscatel-rosado","xarello","parellada","prieto-picudo","listan-negro","touriga-franca","treixadura","pinot-meunier","baga","castelao","hondarrabi-zuri","airen","pais","malvasia","picpoul","falanghina"];
-    for (const slug of GRAPE_SLUGS) {
-      xml += urlBlock(`/biblioteca-vino/uvas/${slug}`, now, 'monthly', '0.5');
-    }
-
-    const STYLE_SLUGS = ["tinto","tinto-joven","tinto-crianza","tinto-reserva","tinto-ligero","tinto-cuerpo","tinto-maceracion-carbonica","blanco","blanco-joven","blanco-fermentado-barrica","blanco-crianza-lias","blanco-mineral","blanco-semidulce","rosado","rosado-provenzal","rosado-cuerpo","rosado-semidulce","clarete","espumoso","champagne","cava","prosecco","cremant","sekt","franciacorta","pet-nat","espumante","generoso","fino-manzanilla","amontillado","oloroso","palo-cortado","pedro-ximenez","oporto-ruby","oporto-tawny","oporto-vintage","madeira","marsala","moscatel-de-setubal","dulce-natural","sauternes-botrytizados","vendimia-tardia","eiswein","passito","vdn","moscatel-dulce","tokaji-aszu","orange-wine","orange-maceracion-corta","orange-maceracion-larga","qvevri-wine","vino-tinaja","ecologico-biodinamico-natural","ecologico-certificado","biodinamico","vino-natural","vino-anfora","crémant","botrytis","icewine"];
-    for (const slug of STYLE_SLUGS) {
-      xml += urlBlock(`/biblioteca-vino/estilos/${slug}`, now, 'monthly', '0.5');
-    }
-
-    const PAIRING_SLUGS = ["carnes-rojas","aves-y-caza","pescados-y-mariscos","quesos","pasta-arroces-y-legumbres","verduras-y-cocina-vegetariana","embutidos-y-charcuteria","postres-y-chocolate","cocina-asiatica-y-fusion","tapas-y-aperitivos","solomillo-de-ternera","cordero-asado","pato-confitado","atun-rojo","pulpo-gallego","queso-manchego","queso-azul","queso-brie-camembert","queso-parmigiano-reggiano","risotto-setas","paella","pasta-carbonara","ceviche","curry","foie-gras","jamon-iberico","setas-y-trufas","cochinillo-lechon","lubina-dorada","ostras","tartar-de-atun","ramen","thai-curry","empanadas","queso-de-cabra","gazpacho","tortilla-espanola","hamburguesa-gourmet","tarta-de-queso","frutas-tropicales","chocolate-negro"];
-    for (const slug of PAIRING_SLUGS) {
-      xml += urlBlock(`/biblioteca-vino/maridajes/${slug}`, now, 'monthly', '0.5');
-    }
-
-    const REGION_MAP: Record<string, string[]> = {"espana":["rioja","ribera-del-duero","priorat","rias-baixas","jerez","penedes","txakoli","ribeiro","valdeorras","monterrei","ribeira-sacra"],"francia":["bordeaux","champagne","bourgogne","vallee-du-rhone","alsacia","val-de-loire","languedoc-roussillon","provence","beaujolais","jura","chablis","medoc","saint-emilion","pomerol","cotes-du-rhone","chateauneuf-du-pape","graves","sauternes","margaux","pauillac","saint-julien","haut-medoc","entre-deux-mers","fronsac","cote-de-nuits","cote-de-beaune","meursault","puligny-montrachet","gevrey-chambertin","vosne-romanee","nuits-saint-georges","pommard","volnay","hermitage","cote-rotie","condrieu","sancerre","pouilly-fume","muscadet","chinon","vouvray","gigondas","cahors","cremant-bourgogne","madiran","bandol","cassis","tavel","savennieres","bellet"],"italia":["toscana","piemonte","veneto","sicilia","puglia","friuli","sardegna","trentino-alto-adige","umbria","abruzzo","marche"],"estados-unidos":["napa-valley","willamette-valley","sonoma-county","paso-robles","santa-barbara-county","russian-river-valley","alexander-valley","dry-creek-valley","walla-walla-valley","columbia-valley","finger-lakes","virginia","texas-hill-country","lodi","central-coast","santa-rita-hills","anderson-valley"],"australia":["barossa-valley"],"portugal":["douro","alentejo","vinho-verde","dao","bairrada","lisboa","tejo","setubal-palmela","algarve","madeira","acores","tras-os-montes","tavora-varosa","beira-interior","colares"],"argentina":["mendoza","valle-de-uco","salta-cafayate","san-juan","patagonia-rio-negro","lujan-de-cuyo"],"chile":["maipo","colchagua","casablanca","rapel-valley","aconcagua","leyda","bio-bio","itata","limari","elqui"],"alemania":["mosel","rheingau","pfalz","rheinhessen","baden","franken","württemberg","nahe","ahr","mittelrhein","saale-unstrut","sachsen"],"sudafrica":["stellenbosch","swartland"],"hungria":["tokaj","eger"],"grecia":["santorini"],"austria":["wachau","burgenland"],"nueva-zelanda":["central-otago","martinborough"],"uruguay":["canelones","maldonado","rivera"],"libano":["bekaa-valley"]};
-    for (const [country, regions] of Object.entries(REGION_MAP)) {
-      xml += urlBlock(`/biblioteca-vino/regiones/${country}`, now, 'monthly', '0.5');
-      for (const region of regions) {
-        xml += urlBlock(`/biblioteca-vino/regiones/${country}/${region}`, now, 'monthly', '0.4');
       }
     }
 

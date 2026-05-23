@@ -1,3 +1,4 @@
+import { grapeCatalog, grapeEntries, getCatalogEntry } from "./grapesLibrary";
 import type { GrapeEntry, GrapeCatalogEntry } from "./grapesLibrary";
 
 // ============================================================
@@ -1459,4 +1460,44 @@ export function getLocalizedCatalogEntry<T extends GrapeCatalogEntry | GrapeEntr
   const tastingNotes = fullOverlay?.tastingNotes ?? catalogOverlay?.tastingNotes;
   if (!tastingNotes) return entry;
   return { ...entry, tastingNotes };
+}
+
+export type LocalizedGrapeCatalogEntry = GrapeCatalogEntry & {
+  description?: string;
+  intro?: string;
+  seo?: {
+    title?: string;
+    description?: string;
+  };
+};
+
+export function getLocalizedGrapeCatalogEntry(
+  slug: string,
+  lang: string,
+): LocalizedGrapeCatalogEntry | undefined {
+  const entry = getCatalogEntry(slug);
+  if (!entry) return undefined;
+  const overlay = grapeOverlays[entry.slug]?.[lang];
+  return {
+    ...getLocalizedCatalogEntry(entry, lang),
+    description: overlay?.description,
+    intro: overlay?.intro,
+    seo: overlay?.seo,
+  };
+}
+
+export function getLocalizedGrapeCatalog(lang: string): LocalizedGrapeCatalogEntry[] {
+  return grapeCatalog.map((entry) => {
+    const overlay = grapeOverlays[entry.slug]?.[lang];
+    return {
+      ...getLocalizedCatalogEntry(entry, lang),
+      description: overlay?.description,
+      intro: overlay?.intro,
+      seo: overlay?.seo,
+    };
+  });
+}
+
+export function getLocalizedGrapeEntries(lang: string): GrapeEntry[] {
+  return grapeEntries.map((entry) => getLocalizedGrape(entry, lang));
 }

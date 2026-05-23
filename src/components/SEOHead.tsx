@@ -20,41 +20,21 @@ interface SEOHeadProps {
   hreflang?: HreflangLink[];
 }
 
-// Multilingual fallbacks for JSON-LD and document.title cleanup
-const ORG_DESCRIPTIONS: Record<string, string> = {
-  es: "Plataforma de gestión inteligente de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos, pricing dinámico y analítica de ventas.",
-  en: "Intelligent wine list management platform for restaurants, hotels, and hospitality groups. Interactive digital wine menu with AI recommendations, automatic pairings, dynamic pricing, and sales analytics.",
-  it: "Piattaforma di gestione intelligente delle carte dei vini per ristoranti, hotel e gruppi di ristorazione. Carta digitale interattiva con raccomandazioni IA, abbinamenti automatici, pricing dinamico e analisi delle vendite.",
-  fr: "Plateforme de gestion intelligente des cartes des vins pour restaurants, hôtels et groupes de restauration. Carte digitale interactive avec recommandations IA, accords mets-vins automatiques, tarification dynamique et analyse des ventes.",
-  de: "Intelligente Weinkarten-Management-Plattform für Restaurants, Hotels und Gastronomiegruppen. Interaktive digitale Weinkarte mit KI-Empfehlungen, automatischen Speisenpaarungen, dynamischer Preisgestaltung und Verkaufsanalysen.",
-  pt: "Plataforma de gestão inteligente de cartas de vinhos para restaurantes, hotéis e grupos de restauração. Carta digital interativa com recomendações de IA, harmonizações automáticas, pricing dinâmico e análise de vendas.",
-};
+const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
+  const path = (() => {
+    if (!url) return "";
+    try {
+      return url.startsWith("http") ? new URL(url).pathname : url;
+    } catch {
+      return url;
+    }
+  })();
 
-const ORG_SLOGANS: Record<string, string> = {
-  es: "La inteligencia artificial que vende más vino en tu restaurante",
-  en: "The AI that sells more wine in your restaurant",
-  it: "L'intelligenza artificiale che vende più vino nel tuo ristorante",
-  fr: "L'intelligence artificielle qui vend plus de vin dans votre restaurant",
-  de: "Die künstliche Intelligenz, die mehr Wein in Ihrem Restaurant verkauft",
-  pt: "A inteligência artificial que vende mais vinho no seu restaurante",
-};
+  const urlLang = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/)?.[1];
+  if (urlLang) return urlLang;
+  if (path) return "es";
 
-const FALLBACK_TITLES: Record<string, string> = {
-  es: "Winerim – Carta de Vinos Digital | Recomendador Inteligente",
-  en: "Winerim – Digital Wine List | AI Sommelier",
-  it: "Winerim – Carta dei Vini Digitale | Sommelier IA",
-  fr: "Winerim – Carte des Vins Digitale | Sommelier IA",
-  de: "Winerim – Digitale Weinkarte | KI-Sommelier",
-  pt: "Winerim – Carta de Vinhos Digital | Sommelier IA",
-};
-
-const SOFTWARE_DESCRIPTIONS: Record<string, string> = {
-  es: "Carta de vinos digital con recomendador inteligente para restaurantes y bodegas.",
-  en: "Digital wine list with intelligent recommender for restaurants and wineries.",
-  it: "Carta dei vini digitale con raccomandatore intelligente per ristoranti e cantine.",
-  fr: "Carte des vins digitale avec recommandation intelligente pour restaurants et caves.",
-  de: "Digitale Weinkarte mit intelligentem Empfehlungssystem für Restaurants und Weingüter.",
-  pt: "Carta de vinhos digital com recomendador inteligente para restaurantes e adegas.",
+  return hreflang?.find((h) => h.lang !== "x-default")?.lang || "es";
 };
 
 const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang }: SEOHeadProps) => {
@@ -62,13 +42,6 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     const suffix = " | Winerim";
     const fullTitle = title.endsWith(suffix) || title.length > 55 ? title : `${title}${suffix}`;
     document.title = fullTitle;
-
-    // Detect current language from hreflang or URL
-    const lang = hreflang?.find(h => h.lang !== "x-default")?.lang || (() => {
-      const path = typeof window !== "undefined" ? window.location.pathname : "";
-      const match = path.match(/^\/(en|it|fr|de|pt)\//);
-      return match ? match[1] : "es";
-    })();
 
     const setMeta = (property: string, content: string, isName = false) => {
       const attr = isName ? "name" : "property";
@@ -132,8 +105,16 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("twitter:title", fullTitle);
     setMeta("og:type", type);
     setMeta("og:site_name", "Winerim");
-    const localeMap: Record<string, string> = { en: "en_GB", it: "it_IT", fr: "fr_FR", de: "de_DE", pt: "pt_PT", es: "es_ES" };
-    setMeta("og:locale", localeMap[lang] || "es_ES");
+    const pageLang = detectPageLang(url, hreflang);
+    const ogLocales: Record<string, string> = {
+      en: "en_GB",
+      it: "it_IT",
+      fr: "fr_FR",
+      de: "de_DE",
+      pt: "pt_PT",
+      es: "es_ES",
+    };
+    setMeta("og:locale", ogLocales[pageLang] || "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
     // OG image — always absolute with production domain
@@ -181,7 +162,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalArticleUrl },
         wordCount: wordCount || undefined,
-        inLanguage: lang,
+        inLanguage: pageLang,
       });
     } else {
       scriptEl.textContent = JSON.stringify({
@@ -190,7 +171,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         name: "Winerim",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
-        description: description || SOFTWARE_DESCRIPTIONS[lang] || SOFTWARE_DESCRIPTIONS.es,
+        description: description || "Carta de vinos digital con recomendador inteligente para restaurantes y bodegas.",
         url: url || CANONICAL_DOMAIN,
         offers: {
           "@type": "Offer",
@@ -220,8 +201,8 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       url: CANONICAL_DOMAIN,
       logo: `${CANONICAL_DOMAIN}/favicon.png`,
       image: DEFAULT_OG_IMAGE,
-      description: ORG_DESCRIPTIONS[lang] || ORG_DESCRIPTIONS.es,
-      slogan: ORG_SLOGANS[lang] || ORG_SLOGANS.es,
+      description: "Plataforma de gestión inteligente de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos, pricing dinámico y analítica de ventas.",
+      slogan: "La inteligencia artificial que vende más vino en tu restaurante",
       foundingDate: "2024",
       areaServed: [
         { "@type": "Place", name: "Europe" },
@@ -229,10 +210,6 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         { "@type": "Place", name: "Italy" },
         { "@type": "Place", name: "France" },
         { "@type": "Place", name: "United Kingdom" },
-        { "@type": "Place", name: "Germany" },
-        { "@type": "Place", name: "Austria" },
-        { "@type": "Place", name: "Switzerland" },
-        { "@type": "Place", name: "Portugal" },
       ],
       knowsAbout: [
         "Wine list management",
@@ -272,7 +249,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     });
 
     return () => {
-      document.title = FALLBACK_TITLES[lang] || FALLBACK_TITLES.es;
+      document.title = "Winerim – Carta de Vinos Digital | Recomendador Inteligente";
       if (scriptEl) scriptEl.remove();
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();

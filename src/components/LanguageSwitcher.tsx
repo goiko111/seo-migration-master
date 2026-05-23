@@ -2,14 +2,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { SUPPORTED_LANGS, LANG_LABELS, ROUTE_MAP, SupportedLang, DEFAULT_LANG } from "@/i18n/types";
-
-const LANG_CODES: Record<SupportedLang, string> = {
-  es: "ES", en: "EN", it: "IT", fr: "FR", de: "DE", pt: "PT",
-};
+import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, type SupportedLang, DEFAULT_LANG } from "@/i18n/types";
+import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 /** Find the ES route equivalent for the current path */
 function findEsRoute(pathname: string, currentLang: SupportedLang): string {
+  const wineLibraryPath = getWineLibraryEsPath(pathname);
+  if (wineLibraryPath) return wineLibraryPath;
+
   if (currentLang === "es") return pathname;
 
   const langMap = ROUTE_MAP[currentLang];
@@ -46,7 +46,9 @@ const LanguageSwitcher = () => {
     if (targetLang === DEFAULT_LANG) {
       navigate(esRoute);
     } else {
-      const targetPath = ROUTE_MAP[targetLang][esRoute] || `/${targetLang}${esRoute}`;
+      const targetPath = esRoute.startsWith("/biblioteca-vino")
+        ? getWineLibraryPath(targetLang, esRoute)
+        : ROUTE_MAP[targetLang][esRoute] || `/${targetLang}${esRoute}`;
       navigate(targetPath);
     }
   };
@@ -59,7 +61,7 @@ const LanguageSwitcher = () => {
         aria-label="Change language"
       >
         <Globe size={14} />
-        <span className="hidden sm:inline uppercase tracking-wide">{LANG_CODES[lang]}</span>
+        <span className="hidden sm:inline">{LANG_FLAGS[lang]}</span>
       </button>
 
       {open && (
@@ -72,7 +74,7 @@ const LanguageSwitcher = () => {
                 l === lang ? "text-foreground bg-wine/5" : "text-muted-foreground hover:text-foreground hover:bg-wine/5"
               }`}
             >
-              <span className="text-xs font-semibold w-6 text-foreground/70">{LANG_CODES[l]}</span>
+              <span>{LANG_FLAGS[l]}</span>
               <span>{LANG_LABELS[l]}</span>
             </button>
           ))}
