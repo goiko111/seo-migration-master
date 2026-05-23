@@ -3,13 +3,16 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, Grape } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
+import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
-import { getRegionBySlug, getCountryBySlug } from "@/data/regionsLibrary";
+import { getLocalizedCountryBySlug, getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const prestigeLabels: Record<string, string> = {
   "icónico": "Icónico",
@@ -29,8 +32,10 @@ const recognitionLabels: Record<string, string> = {
 
 const RegionDetail = () => {
   const { country, region } = useParams<{ country: string; region: string }>();
-  const data = region ? getRegionBySlug(region) : undefined;
-  const countryData = country ? getCountryBySlug(country) : undefined;
+  const { lang } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const data = region ? getLocalizedRegionBySlug(region, lang) : undefined;
+  const countryData = country ? getLocalizedCountryBySlug(country, lang) : undefined;
 
   // JSON-LD Schema
   useEffect(() => {
@@ -45,14 +50,14 @@ const RegionDetail = () => {
       description: data.description,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
       publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: `https://winerim.wine/biblioteca-vino/regiones/${country}/${region}`,
+      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`),
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("region-detail-jsonld")?.remove(); };
-  }, [data, countryData, country, region]);
+  }, [data, countryData, country, region, lang]);
 
   if (!data || !countryData) {
-    return <Navigate to={country ? `/biblioteca-vino/regiones/${country}` : "/biblioteca-vino/regiones"} replace />;
+    return <Navigate to={country ? linkTo(`/biblioteca-vino/regiones/${country}`) : linkTo("/biblioteca-vino/regiones")} replace />;
   }
 
   return (
@@ -60,7 +65,8 @@ const RegionDetail = () => {
       <SEOHead
         title={data.seo.title}
         description={data.seo.description}
-        url={`https://winerim.wine/biblioteca-vino/regiones/${country}/${region}`}
+        url={getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`)}
+        hreflang={getWineLibraryHreflang(`/biblioteca-vino/regiones/${country}/${region}`)}
         type="article"
       />
       <Navbar />
@@ -71,9 +77,9 @@ const RegionDetail = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Regiones", href: "/biblioteca-vino/regiones" },
-            { label: countryData.name, href: `/biblioteca-vino/regiones/${country}` },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Regiones", href: linkTo("/biblioteca-vino/regiones") },
+            { label: countryData.name, href: linkTo(`/biblioteca-vino/regiones/${country}`) },
             { label: data.name },
           ]} />
 
@@ -300,19 +306,32 @@ const RegionDetail = () => {
       {/* FAQ */}
       <FAQSection faqs={data.faqs} schemaId={`region-${data.slug}`} />
 
-      {/* INTERNAL LINKS */}
       <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <RelatedWineLibraryLinks
+            items={[
+              ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+              ...data.styles.map((name) => ({ name, hint: "style" as const })),
+              ...data.competingRegions.map((name) => ({ name, hint: "region" as const })),
+              ...(data.pairings || []).map((name) => ({ name, hint: "pairing" as const })),
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* INTERNAL LINKS */}
+      <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-8">
             <h2 className="font-heading text-xl font-semibold">Sigue explorando</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { to: `/biblioteca-vino/regiones/${country}`, label: `Todas las regiones de ${countryData.name}` },
-              { to: "/biblioteca-vino/regiones", label: "Regiones del mundo" },
-              { to: "/biblioteca-vino", label: "Biblioteca del Vino" },
+              { to: linkTo(`/biblioteca-vino/regiones/${country}`), label: `Todas las regiones de ${countryData.name}` },
+              { to: linkTo("/biblioteca-vino/regiones"), label: "Regiones del mundo" },
+              { to: linkTo("/biblioteca-vino"), label: "Biblioteca del Vino" },
               { to: "/producto/winerim-core", label: "Winerim Core" },
-              { to: "/demo", label: "Solicitar demo" },
+              { to: linkTo("/demo"), label: "Solicitar demo" },
             ].map((link) => (
               <Link
                 key={link.to}
@@ -346,7 +365,7 @@ const RegionDetail = () => {
                 Winerim integra datos de denominaciones, percepción y rol comercial para ayudarte a decidir qué vinos incluir, destacar o rotar.
               </p>
               <Link
-                to="/demo"
+                to={linkTo("/demo")}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all"
               >
                 Solicitar demo <ArrowRight size={16} />

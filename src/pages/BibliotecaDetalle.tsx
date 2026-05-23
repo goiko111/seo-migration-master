@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getBySlug, categoryMeta, type WineEntry } from "@/data/wineLibrary";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
   uva: Grape,
@@ -17,7 +19,9 @@ const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
 
 const BibliotecaDetalle = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { lang } = useLanguage();
   const entry = getBySlug(slug || "");
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
 
   useEffect(() => {
     if (!entry) return;
@@ -43,8 +47,8 @@ const BibliotecaDetalle = () => {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Inicio", item: "https://winerim.wine/" },
-        { "@type": "ListItem", position: 2, name: "Biblioteca del vino", item: "https://winerim.wine/biblioteca-vino" },
-        { "@type": "ListItem", position: 3, name: entry.name, item: `https://winerim.wine/biblioteca-vino/${entry.slug}` },
+        { "@type": "ListItem", position: 2, name: "Biblioteca del vino", item: getWineLibraryUrl(lang, "/biblioteca-vino") },
+        { "@type": "ListItem", position: 3, name: entry.name, item: getWineLibraryUrl(lang, `/biblioteca-vino/${entry.slug}`) },
       ],
     });
     document.head.appendChild(breadcrumb);
@@ -53,7 +57,7 @@ const BibliotecaDetalle = () => {
       document.getElementById("biblio-detail-jsonld")?.remove();
       document.getElementById("biblio-detail-breadcrumb")?.remove();
     };
-  }, [entry]);
+  }, [entry, lang]);
 
   if (!entry) {
     return (
@@ -61,7 +65,7 @@ const BibliotecaDetalle = () => {
         <Navbar />
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-6">
           <h1 className="font-heading text-3xl font-bold mb-4">Entrada no encontrada</h1>
-          <Link to="/biblioteca-vino" className="text-wine hover:underline">← Volver a la Biblioteca del vino</Link>
+          <Link to={linkTo("/biblioteca-vino")} className="text-wine hover:underline">← Volver a la Biblioteca del vino</Link>
         </div>
         <Footer />
       </div>
@@ -76,8 +80,9 @@ const BibliotecaDetalle = () => {
       <SEOHead
         title={`${entry.name} | Biblioteca del Vino – Winerim`}
         description={entry.description}
-        url={`https://winerim.wine/biblioteca-vino/${entry.slug}`}
+        url={getWineLibraryUrl(lang, `/biblioteca-vino/${entry.slug}`)}
         type="article"
+        hreflang={getWineLibraryHreflang(`/biblioteca-vino/${entry.slug}`)}
       />
       <Navbar />
 
@@ -87,7 +92,7 @@ const BibliotecaDetalle = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           <Link
-            to="/biblioteca-vino"
+            to={linkTo("/biblioteca-vino")}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-wine transition-colors mb-6"
           >
             <ArrowLeft size={14} />
@@ -249,13 +254,13 @@ const BibliotecaDetalle = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/demo"
+                  to={linkTo("/demo")}
                   className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all"
                 >
                   Solicitar demo <ArrowRight size={16} />
                 </Link>
                 <Link
-                  to="/biblioteca-vino"
+                  to={linkTo("/biblioteca-vino")}
                   className="px-8 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all"
                 >
                   Explorar más

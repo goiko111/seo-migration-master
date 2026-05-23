@@ -7,6 +7,7 @@ import {
   MapPin, Grape, ShieldCheck
 } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
+import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -14,13 +15,17 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
-  getStyleBySlug,
-  getStyleCatalogEntry,
-  familyMeta,
-  styleEntries,
   type StyleEntry,
   type StyleCatalogEntry,
 } from "@/data/stylesLibrary";
+import {
+  getLocalizedFamilyMeta,
+  getLocalizedStyleBySlug,
+  getLocalizedStyleCatalogEntry,
+  getLocalizedStyleEntries,
+} from "@/data/stylesLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const levelLabels: Record<string, string> = {
   baja: "Baja", media: "Media", alta: "Alta", "muy-alta": "Muy alta",
@@ -33,8 +38,11 @@ const levelLabels: Record<string, string> = {
 
 const StyleDetail = () => {
   const { style: styleSlug } = useParams<{ style: string }>();
-  const fullEntry = styleSlug ? getStyleBySlug(styleSlug) : undefined;
-  const catalogEntry = styleSlug ? getStyleCatalogEntry(styleSlug) : undefined;
+  const { lang } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const fullEntry = styleSlug ? getLocalizedStyleBySlug(styleSlug, lang) : undefined;
+  const catalogEntry = styleSlug ? getLocalizedStyleCatalogEntry(styleSlug, lang) : undefined;
+  const localizedStyleEntries = getLocalizedStyleEntries(lang);
 
   // JSON-LD
   useEffect(() => {
@@ -50,27 +58,29 @@ const StyleDetail = () => {
       description: fullEntry?.seo.description || entry.description,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
       publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: `https://winerim.wine/biblioteca-vino/estilos/${entry.slug}`,
+      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/estilos/${entry.slug}`),
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("style-detail-jsonld")?.remove(); };
-  }, [fullEntry, catalogEntry, styleSlug]);
+  }, [fullEntry, catalogEntry, styleSlug, lang]);
 
-  if (!fullEntry && !catalogEntry) return <Navigate to="/biblioteca-vino/estilos" replace />;
+  if (!fullEntry && !catalogEntry) return <Navigate to={linkTo("/biblioteca-vino/estilos")} replace />;
 
-  if (fullEntry) return <FullStyleDetail data={fullEntry} />;
-  return <CatalogStyleDetail data={catalogEntry!} />;
+  const urlFor = (path: string) => getWineLibraryUrl(lang, path);
+
+  if (fullEntry) return <FullStyleDetail data={fullEntry} linkTo={linkTo} localizedStyleEntries={localizedStyleEntries} lang={lang} urlFor={urlFor} />;
+  return <CatalogStyleDetail data={catalogEntry!} linkTo={linkTo} localizedStyleEntries={localizedStyleEntries} lang={lang} urlFor={urlFor} />;
 };
 
 /* ═══════════════════════════════════════════════════════════════
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════ */
-const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
-  const familyInfo = familyMeta[data.family];
+const FullStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor }: { data: StyleEntry; linkTo: (path: string) => string; localizedStyleEntries: StyleEntry[]; lang: string; urlFor: (path: string) => string }) => {
+  const familyInfo = getLocalizedFamilyMeta(data.family, lang);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={data.seo.title} description={data.seo.description} url={`https://winerim.wine/biblioteca-vino/estilos/${data.slug}`} type="article" />
+      <SEOHead title={data.seo.title} description={data.seo.description} url={urlFor(`/biblioteca-vino/estilos/${data.slug}`)} type="article" hreflang={getWineLibraryHreflang(`/biblioteca-vino/estilos/${data.slug}`)} />
       <Navbar />
 
       {/* HERO */}
@@ -79,8 +89,8 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Estilos", href: "/biblioteca-vino/estilos" },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Estilos", href: linkTo("/biblioteca-vino/estilos") },
             { label: data.name },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -314,15 +324,15 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
               <h3 className="font-heading text-lg font-semibold mb-4">Estilos relacionados</h3>
               <div className="flex flex-wrap gap-3">
                 {data.relatedStyles.map(slug => {
-                  const related = styleEntries.find(e => e.slug === slug || e.id === slug);
+                  const related = localizedStyleEntries.find(e => e.slug === slug || e.id === slug);
                   if (!related) return null;
                   return (
                     <Link
                       key={slug}
-                      to={`/biblioteca-vino/estilos/${related.slug}`}
+                      to={linkTo(`/biblioteca-vino/estilos/${related.slug}`)}
                       className="flex items-center gap-2 bg-gradient-card border border-border rounded-lg px-4 py-2 hover:border-wine/30 transition-all text-sm"
                     >
-                      <span>{familyMeta[related.family].emoji}</span>
+                      <span>{getLocalizedFamilyMeta(related.family, lang).emoji}</span>
                       <span>{related.name}</span>
                       <ArrowRight size={12} className="text-muted-foreground" />
                     </Link>
@@ -346,8 +356,22 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
         </section>
       )}
 
-      {/* CTA */}
       <section className="section-padding">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <RelatedWineLibraryLinks
+            items={[
+              ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+              ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
+              ...data.pairings.map((name) => ({ name, hint: "pairing" as const })),
+              ...data.relatedStyles.map((name) => ({ name, hint: "style" as const })),
+              ...data.competingStyles.map((name) => ({ name, hint: "style" as const })),
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-gradient-dark">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <ScrollReveal>
             <div className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 overflow-hidden">
@@ -359,7 +383,7 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
                   Winerim organiza, activa y optimiza tu carta de vinos con criterio profesional.
                 </p>
-                <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+                <Link to={linkTo("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
                   Solicitar demo <ArrowRight size={16} />
                 </Link>
               </div>
@@ -376,18 +400,19 @@ const FullStyleDetail = ({ data }: { data: StyleEntry }) => {
 /* ═══════════════════════════════════════════════════════════════
    CATALOG DETAIL — Simplified view for subtypes
    ═══════════════════════════════════════════════════════════════ */
-const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
-  const familyInfo = familyMeta[data.family];
+const CatalogStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor }: { data: StyleCatalogEntry; linkTo: (path: string) => string; localizedStyleEntries: StyleEntry[]; lang: string; urlFor: (path: string) => string }) => {
+  const familyInfo = getLocalizedFamilyMeta(data.family, lang);
   // Find parent style
-  const parent = styleEntries.find(e => e.family === data.family);
+  const parent = localizedStyleEntries.find(e => e.family === data.family);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={`${data.name}: Guía del Estilo de Vino | Winerim`}
         description={data.description}
-        url={`https://winerim.wine/biblioteca-vino/estilos/${data.slug}`}
+        url={urlFor(`/biblioteca-vino/estilos/${data.slug}`)}
         type="article"
+        hreflang={getWineLibraryHreflang(`/biblioteca-vino/estilos/${data.slug}`)}
       />
       <Navbar />
 
@@ -395,9 +420,9 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Estilos", href: "/biblioteca-vino/estilos" },
-            ...(parent ? [{ label: parent.name, href: `/biblioteca-vino/estilos/${parent.slug}` }] : []),
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Estilos", href: linkTo("/biblioteca-vino/estilos") },
+            ...(parent ? [{ label: parent.name, href: linkTo(`/biblioteca-vino/estilos/${parent.slug}`) }] : []),
             { label: data.name },
           ]} />
 
@@ -429,12 +454,24 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
           </div>
 
           {parent && (
-            <Link to={`/biblioteca-vino/estilos/${parent.slug}`}
+            <Link to={linkTo(`/biblioteca-vino/estilos/${parent.slug}`)}
               className="inline-flex items-center gap-2 text-wine hover:underline text-sm font-medium"
             >
               ← Ver {parent.name} completo
             </Link>
           )}
+        </div>
+      </section>
+
+      <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <RelatedWineLibraryLinks
+            items={[
+              ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+              ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
+              ...(parent ? [{ name: parent.slug, hint: "style" as const }] : []),
+            ]}
+          />
         </div>
       </section>
 
@@ -445,7 +482,7 @@ const CatalogStyleDetail = ({ data }: { data: StyleCatalogEntry }) => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">Descubre cómo Winerim organiza tu carta</h2>
-              <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+              <Link to={linkTo("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
                 Solicitar demo <ArrowRight size={16} />
               </Link>
             </div>

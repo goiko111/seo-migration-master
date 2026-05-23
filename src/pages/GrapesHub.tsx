@@ -11,13 +11,17 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
-  grapeCatalog,
-  grapeEntries,
   hasFullEntry,
   colorLabels,
   type GrapeColor,
-  type GrapeCatalogEntry,
 } from "@/data/grapesLibrary";
+import {
+  getLocalizedGrapeCatalog,
+  getLocalizedGrapeEntries,
+  type LocalizedGrapeCatalogEntry,
+} from "@/data/grapesLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const faqs = [
   { q: "¿Cuántas variedades de uva cubre Winerim?", a: "El catálogo de Winerim incluye más de 85 variedades de uva de más de 30 países, con información sobre sinonimias, regiones clave y notas de cata." },
@@ -26,18 +30,34 @@ const faqs = [
   { q: "¿Qué son los sinónimos de una uva?", a: "Muchas variedades reciben diferentes nombres según el país o región. Tempranillo es Tinto Fino en Ribera del Duero, Cencibel en La Mancha y Tinta Roriz en Portugal. Son la misma uva." },
 ];
 
-const colorFilters: { key: GrapeColor | "all"; label: string }[] = [
-  { key: "all", label: "Todas" },
-  { key: "tinta", label: "🍷 Tintas" },
-  { key: "blanca", label: "🥂 Blancas" },
-];
-
-const countryOptions = [...new Set(grapeCatalog.flatMap((g) => g.countries))].sort();
+const grapeHubLabels: Record<string, { all: string; redFilter: string; whiteFilter: string; red: string; white: string }> = {
+  es: { all: "Todas", redFilter: "🍷 Tintas", whiteFilter: "🥂 Blancas", red: "Tintas", white: "Blancas" },
+  en: { all: "All", redFilter: "🍷 Red", whiteFilter: "🥂 White", red: "Red", white: "White" },
+  it: { all: "Tutti", redFilter: "🍷 Rossi", whiteFilter: "🥂 Bianchi", red: "Rossi", white: "Bianchi" },
+  fr: { all: "Tous", redFilter: "🍷 Rouges", whiteFilter: "🥂 Blancs", red: "Rouges", white: "Blancs" },
+  de: { all: "Alle", redFilter: "🍷 Rot", whiteFilter: "🥂 Weiß", red: "Rot", white: "Weiß" },
+  pt: { all: "Todas", redFilter: "🍷 Tintas", whiteFilter: "🥂 Brancas", red: "Tintas", white: "Brancas" },
+};
 
 const GrapesHub = () => {
+  const { lang, localePath } = useLanguage();
+  const grapeLabels = grapeHubLabels[String(lang)] || grapeHubLabels.en;
   const [search, setSearch] = useState("");
   const [colorFilter, setColorFilter] = useState<GrapeColor | "all">("all");
   const [countryFilter, setCountryFilter] = useState<string>("");
+  const ui = useMemo(() => getWineLibraryUi(lang), [lang]);
+  const grapeCatalog = useMemo(() => getLocalizedGrapeCatalog(lang), [lang]);
+  const grapeEntries = useMemo(() => getLocalizedGrapeEntries(lang), [lang]);
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const countryOptions = useMemo(() => [...new Set(grapeCatalog.flatMap((g) => g.countries))].sort(), [grapeCatalog]);
+  const colorFilters = useMemo<{ key: GrapeColor | "all"; label: string }[]>(
+    () => [
+      { key: "all", label: grapeLabels.all },
+      { key: "tinta", label: grapeLabels.redFilter },
+      { key: "blanca", label: grapeLabels.whiteFilter },
+    ],
+    [grapeLabels]
+  );
 
   const filtered = useMemo(() => {
     let results = grapeCatalog;
@@ -48,16 +68,17 @@ const GrapesHub = () => {
       results = results.filter((g) => g.countries.includes(countryFilter));
     }
     if (search.trim()) {
-      const q = search.toLowerCase();
+      const q = normalizeWineSearch(search);
       results = results.filter(
         (g) =>
-          g.name.toLowerCase().includes(q) ||
-          g.synonyms.some((s) => s.toLowerCase().includes(q)) ||
-          g.keyRegions.some((r) => r.toLowerCase().includes(q))
+          normalizeWineSearch(g.name).includes(q) ||
+          g.synonyms.some((s) => normalizeWineSearch(s).includes(q)) ||
+          g.keyRegions.some((r) => normalizeWineSearch(r).includes(q)) ||
+          g.countries.some((c) => normalizeWineSearch(c).includes(q))
       );
     }
     return results;
-  }, [search, colorFilter, countryFilter]);
+  }, [search, colorFilter, countryFilter, grapeCatalog]);
 
   const tintas = grapeCatalog.filter((g) => g.color === "tinta").length;
   const blancas = grapeCatalog.filter((g) => g.color === "blanca").length;
@@ -79,9 +100,10 @@ const GrapesHub = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Variedades de Uva | Guía Completa para Hostelería"
-        description="Guía completa de 87 variedades de uva para hostelería. Perfil sensorial, rol en carta, criterio comercial y maridajes. Con enfoque Winerim."
-        url="https://winerim.wine/biblioteca-vino/uvas"
+        title={`${ui.sections.grapes} | ${ui.libraryName}`}
+        description={ui.hubs.grapesIntro(tintas, blancas)}
+        url={getWineLibraryUrl(lang, "/biblioteca-vino/uvas")}
+        hreflang={getWineLibraryHreflang("/biblioteca-vino/uvas")}
       />
       <Navbar />
 
@@ -91,8 +113,8 @@ const GrapesHub = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Variedades de uva" },
+            { label: ui.libraryName, href: linkTo("/biblioteca-vino") },
+            { label: ui.sections.grapes },
           ]} />
 
           <motion.div
@@ -103,7 +125,7 @@ const GrapesHub = () => {
           >
             <Grape size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">
-              {grapeCatalog.length} variedades · {uniqueCountries} países
+              {grapeCatalog.length} {ui.stats.grapeVarieties} · {uniqueCountries} {ui.stats.countries}
             </span>
           </motion.div>
 
@@ -113,7 +135,7 @@ const GrapesHub = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6 max-w-4xl"
           >
-            Variedades de <span className="text-gradient-wine italic">uva</span>
+            {ui.hubs.grapesTitle} <span className="text-gradient-wine italic">{ui.hubs.grapesItalic}</span>
           </motion.h1>
 
           <motion.p
@@ -122,7 +144,7 @@ const GrapesHub = () => {
             transition={{ delay: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10"
           >
-            {tintas} tintas, {blancas} blancas: cada variedad con su perfil sensorial, su rol comercial en carta y su lectura Winerim para hostelería.
+            {ui.hubs.grapesIntro(tintas, blancas)}
           </motion.p>
 
           {/* Stats */}
@@ -133,10 +155,10 @@ const GrapesHub = () => {
             className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10"
           >
             {[
-              { label: "Variedades", value: String(grapeCatalog.length) },
-              { label: "Tintas", value: String(tintas) },
-              { label: "Blancas", value: String(blancas) },
-              { label: "Países", value: String(uniqueCountries) },
+              { label: ui.stats.grapeVarieties, value: String(grapeCatalog.length) },
+              { label: grapeLabels.red, value: String(tintas) },
+              { label: grapeLabels.white, value: String(blancas) },
+              { label: ui.stats.countries, value: String(uniqueCountries) },
             ].map((stat) => (
               <div key={stat.label} className="bg-gradient-card rounded-xl border border-border p-4 text-center">
                 <p className="font-heading text-2xl font-bold text-wine">{stat.value}</p>
@@ -155,7 +177,7 @@ const GrapesHub = () => {
             <div className="relative max-w-md">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Buscar variedad, sinónimo o región…"
+                placeholder={ui.hubs.grapesSearch}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 bg-gradient-card border-border"
@@ -185,7 +207,7 @@ const GrapesHub = () => {
                 onChange={(e) => setCountryFilter(e.target.value)}
                 className="text-xs px-3 py-1.5 rounded-full border border-border bg-background text-foreground"
               >
-                <option value="">Todos los países</option>
+                <option value="">{ui.hubs.allCountries}</option>
                 {countryOptions.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
@@ -196,7 +218,7 @@ const GrapesHub = () => {
                   onClick={() => { setSearch(""); setColorFilter("all"); setCountryFilter(""); }}
                   className="text-xs text-muted-foreground hover:text-wine flex items-center gap-1 transition-colors"
                 >
-                  <X size={12} /> Limpiar
+                  <X size={12} /> {ui.actions.clear}
                 </button>
               )}
             </div>
@@ -210,16 +232,16 @@ const GrapesHub = () => {
           <div className="max-w-7xl mx-auto">
             <ScrollReveal className="mb-10">
               <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-                Variedades más reconocidas
+                {ui.hubs.featuredGrapes}
               </h2>
               <p className="text-muted-foreground max-w-2xl">
-                Las variedades que todo profesional de hostelería debería dominar.
+                {ui.hubs.featuredGrapesIntro}
               </p>
             </ScrollReveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map((grape, i) => (
                 <ScrollReveal key={grape.slug} delay={i * 0.05}>
-                  <GrapeCard grape={grape} />
+                  <GrapeCard grape={grape} linkTo={linkTo} />
                 </ScrollReveal>
               ))}
             </div>
@@ -233,16 +255,16 @@ const GrapesHub = () => {
           <div className="max-w-7xl mx-auto">
             <ScrollReveal className="mb-10">
               <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-                Variedades diferenciales
+                {ui.hubs.differentialGrapes}
               </h2>
               <p className="text-muted-foreground max-w-2xl">
-                Variedades que aportan criterio, descubrimiento y sofisticación a una carta.
+                {ui.hubs.differentialGrapesIntro}
               </p>
             </ScrollReveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {differential.map((grape, i) => (
                 <ScrollReveal key={grape.slug} delay={i * 0.05}>
-                  <GrapeCard grape={grape} />
+                  <GrapeCard grape={grape} linkTo={linkTo} />
                 </ScrollReveal>
               ))}
             </div>
@@ -255,7 +277,7 @@ const GrapesHub = () => {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="mb-10">
             <h2 className="font-heading text-2xl md:text-3xl font-bold mb-2">
-              {hasActiveFilters ? `${filtered.length} variedades encontradas` : "Todas las variedades"}
+              {hasActiveFilters ? ui.hubs.grapesFound(filtered.length) : ui.hubs.allGrapes}
             </h2>
           </ScrollReveal>
 
@@ -270,17 +292,17 @@ const GrapesHub = () => {
                     <span>{colorLabels[color].emoji}</span> {colorLabels[color].label}
                     <span className="text-sm text-muted-foreground font-normal">({grapes.length})</span>
                   </h3>
-                  <CatalogGrid grapes={grapes} />
+                  <CatalogGrid grapes={grapes} linkTo={linkTo} />
                 </div>
               );
             })
           ) : (
-            <CatalogGrid grapes={filtered} />
+            <CatalogGrid grapes={filtered} linkTo={linkTo} />
           )}
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-muted-foreground">No se encontraron variedades que coincidan con los filtros.</p>
+              <p className="text-muted-foreground">{ui.hubs.noGrapes}</p>
             </div>
           )}
         </div>
@@ -302,17 +324,16 @@ const GrapesHub = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                Lleva este conocimiento a tu{" "}
-                <span className="text-gradient-wine italic">carta de vinos</span>
+                {ui.cta.grapesTitle}
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm sm:text-base">
-                Winerim integra información de variedades, percepción comercial y maridajes directamente en tu herramienta de gestión de carta.
+                {ui.cta.grapesBody}
               </p>
               <Link
-                to="/demo"
+                to={localePath("/demo")}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
               >
-                Solicitar demo <ArrowRight size={16} />
+                {ui.actions.requestDemo} <ArrowRight size={16} />
               </Link>
             </div>
           </motion.div>
@@ -326,9 +347,9 @@ const GrapesHub = () => {
 
 /* ─── Sub-components ──────────────────────────────────────────────── */
 
-const GrapeCard = ({ grape }: { grape: { slug: string; name: string; description: string; color: GrapeColor; cartaRole: string[]; countries: string[] } }) => (
+const GrapeCard = ({ grape, linkTo }: { grape: { slug: string; name: string; description: string; color: GrapeColor; cartaRole: string[]; countries: string[] }; linkTo: (path: string) => string }) => (
   <Link
-    to={`/biblioteca-vino/uvas/${grape.slug}`}
+    to={linkTo(`/biblioteca-vino/uvas/${grape.slug}`)}
     className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
   >
     <div className="flex items-center justify-between mb-3">
@@ -345,14 +366,14 @@ const GrapeCard = ({ grape }: { grape: { slug: string; name: string; description
   </Link>
 );
 
-const CatalogGrid = ({ grapes }: { grapes: GrapeCatalogEntry[] }) => (
+const CatalogGrid = ({ grapes, linkTo }: { grapes: LocalizedGrapeCatalogEntry[]; linkTo: (path: string) => string }) => (
   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {grapes.map((grape) => {
       const isFull = hasFullEntry(grape.slug);
       return (
         <Link
           key={grape.slug}
-          to={`/biblioteca-vino/uvas/${grape.slug}`}
+          to={linkTo(`/biblioteca-vino/uvas/${grape.slug}`)}
           className="group flex flex-col bg-gradient-card rounded-xl border border-border p-5 hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5"
         >
           <div className="flex items-center justify-between mb-2">

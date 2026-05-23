@@ -8,6 +8,8 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface GlossaryTerm {
   term: string;
@@ -58,7 +60,9 @@ const glossary: GlossaryTerm[] = [
 ];
 
 const GlosarioVino = () => {
+  const { lang } = useLanguage();
   const [search, setSearch] = useState("");
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
 
   const letters = useMemo(() => {
     const set = new Set(glossary.map((t) => t.term[0].toUpperCase()));
@@ -67,8 +71,8 @@ const GlosarioVino = () => {
 
   const filtered = useMemo(() => {
     if (!search.trim()) return glossary;
-    const q = search.toLowerCase();
-    return glossary.filter((t) => t.term.toLowerCase().includes(q) || t.definition.toLowerCase().includes(q));
+    const q = normalizeWineSearch(search);
+    return glossary.filter((t) => normalizeWineSearch(t.term).includes(q) || normalizeWineSearch(t.definition).includes(q));
   }, [search]);
 
   const grouped = useMemo(() => {
@@ -86,7 +90,8 @@ const GlosarioVino = () => {
       <SEOHead
         title="Glosario del Vino | Términos Esenciales para Hostelería"
         description="Glosario con más de 35 términos clave del mundo del vino explicados con claridad para profesionales de hostelería. De acidez a vendimia tardía."
-        url="https://winerim.wine/biblioteca-vino/glosario"
+        url={getWineLibraryUrl(lang, "/biblioteca-vino/glosario")}
+        hreflang={getWineLibraryHreflang("/biblioteca-vino/glosario")}
       />
       <Navbar />
 
@@ -96,7 +101,7 @@ const GlosarioVino = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
             { label: "Glosario" },
           ]} />
 
@@ -166,7 +171,7 @@ const GlosarioVino = () => {
                         <p className="text-sm text-foreground/70 italic">💡 {t.example}</p>
                       )}
                       {t.link && (
-                        <Link to={t.link.href} className="inline-flex items-center gap-1 text-wine text-sm mt-2 hover:underline">
+                        <Link to={linkTo(t.link.href)} className="inline-flex items-center gap-1 text-wine text-sm mt-2 hover:underline">
                           {t.link.label} <ArrowRight size={12} />
                         </Link>
                       )}
@@ -198,7 +203,7 @@ const GlosarioVino = () => {
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
                   Winerim integra el conocimiento del vino directamente en la carta digital, haciendo que cada referencia sea autoexplicativa.
                 </p>
-                <Link to="/demo"
+                <Link to={getWineLibraryPath(lang, "/demo")}
                   className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
                   Solicitar demo <ArrowRight size={16} />
                 </Link>

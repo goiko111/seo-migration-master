@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Grape, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, MapPin } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
+import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -11,24 +12,171 @@ import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
-  getGrapeBySlug,
-  getCatalogEntry,
   hasFullEntry,
   colorLabels,
+  type GrapeColor,
 } from "@/data/grapesLibrary";
+import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const levelLabels: Record<string, string> = {
-  baja: "Baja", media: "Media", alta: "Alta", "muy-alta": "Muy alta",
-  ligero: "Ligero", medio: "Medio", alto: "Alto", "muy-alto": "Muy alto",
-  sutil: "Sutil",
-  fácil: "Fácil", difícil: "Difícil", "muy-difícil": "Muy difícil",
-  internacional: "Internacional", nacional: "Nacional", local: "Local", diferencial: "Diferencial",
+const levelLabelsByLang: Record<string, Record<string, string>> = {
+  es: {
+    baja: "Baja", media: "Media", alta: "Alta", "muy-alta": "Muy alta",
+    ligero: "Ligero", medio: "Medio", alto: "Alto", "muy-alto": "Muy alto",
+    sutil: "Sutil",
+    fácil: "Fácil", difícil: "Difícil", "muy-difícil": "Muy difícil",
+    internacional: "Internacional", nacional: "Nacional", local: "Local", diferencial: "Diferencial",
+  },
+  en: {
+    baja: "Low", media: "Medium", alta: "High", "muy-alta": "Very high",
+    ligero: "Light", medio: "Medium", alto: "Full", "muy-alto": "Very full",
+    sutil: "Subtle",
+    fácil: "Easy", difícil: "Difficult", "muy-difícil": "Very difficult",
+    internacional: "International", nacional: "National", local: "Local", diferencial: "Differential",
+  },
+  it: {
+    baja: "Bassa", media: "Media", alta: "Alta", "muy-alta": "Molto alta",
+    ligero: "Leggero", medio: "Medio", alto: "Pieno", "muy-alto": "Molto pieno",
+    sutil: "Sottile",
+    fácil: "Facile", difícil: "Difficile", "muy-difícil": "Molto difficile",
+    internacional: "Internazionale", nacional: "Nazionale", local: "Locale", diferencial: "Differenziale",
+  },
+  fr: {
+    baja: "Faible", media: "Moyenne", alta: "Élevée", "muy-alta": "Très élevée",
+    ligero: "Léger", medio: "Moyen", alto: "Corsé", "muy-alto": "Très corsé",
+    sutil: "Subtil",
+    fácil: "Facile", difícil: "Difficile", "muy-difícil": "Très difficile",
+    internacional: "International", nacional: "National", local: "Local", diferencial: "Différenciant",
+  },
+  de: {
+    baja: "Niedrig", media: "Mittel", alta: "Hoch", "muy-alta": "Sehr hoch",
+    ligero: "Leicht", medio: "Mittel", alto: "Kräftig", "muy-alto": "Sehr kräftig",
+    sutil: "Subtil",
+    fácil: "Einfach", difícil: "Schwierig", "muy-difícil": "Sehr schwierig",
+    internacional: "International", nacional: "National", local: "Lokal", diferencial: "Differenzierend",
+  },
+  pt: {
+    baja: "Baixa", media: "Média", alta: "Alta", "muy-alta": "Muito alta",
+    ligero: "Leve", medio: "Médio", alto: "Encorpado", "muy-alto": "Muito encorpado",
+    sutil: "Sutil",
+    fácil: "Fácil", difícil: "Difícil", "muy-difícil": "Muito difícil",
+    internacional: "Internacional", nacional: "Nacional", local: "Local", diferencial: "Diferencial",
+  },
 };
+
+const colorLabelsByLang: Record<string, Record<GrapeColor, string>> = {
+  es: { tinta: "Tinta", blanca: "Blanca", rosada: "Rosada" },
+  en: { tinta: "Red", blanca: "White", rosada: "Rosé" },
+  it: { tinta: "Rossa", blanca: "Bianca", rosada: "Rosata" },
+  fr: { tinta: "Rouge", blanca: "Blanc", rosada: "Rosé" },
+  de: { tinta: "Rot", blanca: "Weiß", rosada: "Rosé" },
+  pt: { tinta: "Tinta", blanca: "Branca", rosada: "Rosada" },
+};
+
+const grapeDetailCopy: Record<string, {
+  alsoKnownAs: string;
+  acidity: string;
+  body: string;
+  aromaticIntensity: string;
+  commercialDifficulty: string;
+  scope: string;
+  perceivedOnList: string;
+  bestRegionsForSales: string;
+  competingDescription: string;
+  allVarieties: string;
+  bringToListTitle: (name: string) => string;
+}> = {
+  es: {
+    alsoKnownAs: "También conocida como",
+    acidity: "Acidez",
+    body: "Cuerpo",
+    aromaticIntensity: "Intensidad aromática",
+    commercialDifficulty: "Dificultad comercial",
+    scope: "Alcance",
+    perceivedOnList: "Cómo se percibe en carta",
+    bestRegionsForSales: "Regiones donde más vende",
+    competingDescription: "Variedades que ocupan un espacio similar en carta o percepción.",
+    allVarieties: "Todas las variedades",
+    bringToListTitle: (name) => `Lleva ${name} a tu carta con criterio`,
+  },
+  en: {
+    alsoKnownAs: "Also known as",
+    acidity: "Acidity",
+    body: "Body",
+    aromaticIntensity: "Aromatic intensity",
+    commercialDifficulty: "Commercial difficulty",
+    scope: "Scope",
+    perceivedOnList: "How it is perceived on the list",
+    bestRegionsForSales: "Regions where it sells best",
+    competingDescription: "Varieties that occupy a similar space on the list or in guest perception.",
+    allVarieties: "All varieties",
+    bringToListTitle: (name) => `Bring ${name} into your wine list with criteria`,
+  },
+  it: {
+    alsoKnownAs: "Conosciuta anche come",
+    acidity: "Acidità",
+    body: "Corpo",
+    aromaticIntensity: "Intensità aromatica",
+    commercialDifficulty: "Difficoltà commerciale",
+    scope: "Portata",
+    perceivedOnList: "Come viene percepita in carta",
+    bestRegionsForSales: "Regioni dove vende di più",
+    competingDescription: "Vitigni che occupano uno spazio simile in carta o nella percezione.",
+    allVarieties: "Tutti i vitigni",
+    bringToListTitle: (name) => `Porta ${name} nella tua carta con criterio`,
+  },
+  fr: {
+    alsoKnownAs: "Aussi connu comme",
+    acidity: "Acidité",
+    body: "Corps",
+    aromaticIntensity: "Intensité aromatique",
+    commercialDifficulty: "Difficulté commerciale",
+    scope: "Portée",
+    perceivedOnList: "Comment il est perçu en carte",
+    bestRegionsForSales: "Régions où il se vend le mieux",
+    competingDescription: "Cépages occupant un espace similaire en carte ou en perception client.",
+    allVarieties: "Tous les cépages",
+    bringToListTitle: (name) => `Intégrez ${name} à votre carte avec méthode`,
+  },
+  de: {
+    alsoKnownAs: "Auch bekannt als",
+    acidity: "Säure",
+    body: "Körper",
+    aromaticIntensity: "Aromatische Intensität",
+    commercialDifficulty: "Kommerzielle Schwierigkeit",
+    scope: "Reichweite",
+    perceivedOnList: "Wahrnehmung auf der Weinkarte",
+    bestRegionsForSales: "Regionen mit der stärksten Verkaufswirkung",
+    competingDescription: "Rebsorten, die auf der Karte oder in der Wahrnehmung eine ähnliche Rolle einnehmen.",
+    allVarieties: "Alle Rebsorten",
+    bringToListTitle: (name) => `${name} gezielt auf die Weinkarte bringen`,
+  },
+  pt: {
+    alsoKnownAs: "Também conhecida como",
+    acidity: "Acidez",
+    body: "Corpo",
+    aromaticIntensity: "Intensidade aromática",
+    commercialDifficulty: "Dificuldade comercial",
+    scope: "Alcance",
+    perceivedOnList: "Como é percebida na carta",
+    bestRegionsForSales: "Regiões onde vende melhor",
+    competingDescription: "Castas que ocupam um espaço semelhante na carta ou na perceção do cliente.",
+    allVarieties: "Todas as castas",
+    bringToListTitle: (name) => `Leve ${name} para a sua carta com critério`,
+  },
+};
+
+type WineLibraryUi = ReturnType<typeof getWineLibraryUi>;
 
 const GrapeDetail = () => {
   const { grape: grapeSlug } = useParams<{ grape: string }>();
-  const fullEntry = grapeSlug ? getGrapeBySlug(grapeSlug) : undefined;
-  const catalogEntry = grapeSlug ? getCatalogEntry(grapeSlug) : undefined;
+  const { lang } = useLanguage();
+  const langKey = String(lang);
+  const ui = getWineLibraryUi(lang);
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const fullEntry = grapeSlug ? getLocalizedGrape(grapeSlug, lang) : undefined;
+  const catalogEntry = grapeSlug ? getLocalizedGrapeCatalogEntry(grapeSlug, lang) : undefined;
 
   // JSON-LD
   useEffect(() => {
@@ -44,31 +192,39 @@ const GrapeDetail = () => {
       description: fullEntry?.description || entry.tastingNotes,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
       publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: `https://winerim.wine/biblioteca-vino/uvas/${entry.slug}`,
+      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/uvas/${entry.slug}`),
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("grape-detail-jsonld")?.remove(); };
-  }, [fullEntry, catalogEntry, grapeSlug]);
+  }, [fullEntry, catalogEntry, grapeSlug, lang]);
 
   if (!fullEntry && !catalogEntry) {
-    return <Navigate to="/biblioteca-vino/uvas" replace />;
+    return <Navigate to={linkTo("/biblioteca-vino/uvas")} replace />;
   }
 
   // Render full entry if available, otherwise a simplified catalog view
-  if (fullEntry) return <FullGrapeDetail data={fullEntry} />;
-  return <CatalogGrapeDetail data={catalogEntry!} />;
+  const urlFor = (path: string) => getWineLibraryUrl(lang, path);
+
+  if (fullEntry) return <FullGrapeDetail data={fullEntry} linkTo={linkTo} urlFor={urlFor} ui={ui} langKey={langKey} />;
+  return <CatalogGrapeDetail data={catalogEntry!} linkTo={linkTo} urlFor={urlFor} ui={ui} langKey={langKey} />;
 };
 
 /* ═══════════════════════════════════════════════════════════════════════
    FULL DETAIL — Complete Winerim layer
    ═══════════════════════════════════════════════════════════════════════ */
-const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrapeBySlug>> }) => (
+const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNullable<ReturnType<typeof getLocalizedGrape>>; linkTo: (path: string) => string; urlFor: (path: string) => string; ui: WineLibraryUi; langKey: string }) => {
+  const labels = levelLabelsByLang[langKey] || levelLabelsByLang.en;
+  const colorLabel = colorLabelsByLang[langKey]?.[data.color] || colorLabels[data.color].label;
+  const copy = grapeDetailCopy[langKey] || grapeDetailCopy.en;
+
+  return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
       title={data.seo.title}
       description={data.seo.description}
-      url={`https://winerim.wine/biblioteca-vino/uvas/${data.slug}`}
+      url={urlFor(`/biblioteca-vino/uvas/${data.slug}`)}
       type="article"
+      hreflang={getWineLibraryHreflang(`/biblioteca-vino/uvas/${data.slug}`)}
     />
     <Navbar />
 
@@ -78,8 +234,8 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
       <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
         <Breadcrumbs items={[
-          { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-          { label: "Variedades", href: "/biblioteca-vino/uvas" },
+          { label: ui.libraryName, href: linkTo("/biblioteca-vino") },
+          { label: ui.sections.grapes, href: linkTo("/biblioteca-vino/uvas") },
           { label: data.name },
         ]} />
 
@@ -87,11 +243,11 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
           className="flex flex-wrap items-center gap-3 mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-wine/30 bg-wine/5">
             <span>{colorLabels[data.color].emoji}</span>
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabels[data.color].label}</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabel}</span>
           </span>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize cursor-help">{levelLabels[data.scope] || data.scope}</span>
+              <span className="text-xs bg-wine/10 text-wine px-3 py-1.5 rounded-full capitalize cursor-help">{labels[data.scope] || data.scope}</span>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-xs text-xs">
               {data.scope === "internacional" && "Variedad reconocida y cultivada en todo el mundo. Fácil de identificar para cualquier comensal."}
@@ -102,7 +258,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full cursor-help">Reconocimiento: {levelLabels[data.clientRecognition] || data.clientRecognition}</span>
+              <span className="text-xs bg-secondary/50 px-3 py-1.5 rounded-full cursor-help">{ui.detail.recognition}: {labels[data.clientRecognition] || data.clientRecognition}</span>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-xs text-xs">
               {data.clientRecognition === "muy-alto" && "La mayoría de comensales la reconocen por nombre. Se vende sola."}
@@ -122,7 +278,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
         {data.synonyms.length > 0 && (
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
             className="text-sm text-muted-foreground mb-4">
-            También conocida como: <span className="italic">{data.synonyms.join(", ")}</span>
+            {copy.alsoKnownAs}: <span className="italic">{data.synonyms.join(", ")}</span>
           </motion.p>
         )}
 
@@ -146,19 +302,19 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-4xl mx-auto">
         <ScrollReveal className="mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold">Perfil sensorial</h2>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold">{ui.detail.sensoryProfile}</h2>
         </ScrollReveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          <FactCard icon={<Wine size={16} />} label="Acidez" value={levelLabels[data.acidity]} />
-          <FactCard icon={<Target size={16} />} label="Cuerpo" value={levelLabels[data.body]} />
-          <FactCard icon={<Grape size={16} />} label="Intensidad aromática" value={levelLabels[data.aromaticIntensity]} />
-          <FactCard icon={<TrendingUp size={16} />} label="Reconocimiento" value={levelLabels[data.clientRecognition]} />
-          <FactCard icon={<Users size={16} />} label="Dificultad comercial" value={levelLabels[data.commercialDifficulty]} />
-          <FactCard icon={<MapPin size={16} />} label="Alcance" value={levelLabels[data.scope]} />
+          <FactCard icon={<Wine size={16} />} label={copy.acidity} value={labels[data.acidity]} />
+          <FactCard icon={<Target size={16} />} label={copy.body} value={labels[data.body]} />
+          <FactCard icon={<Grape size={16} />} label={copy.aromaticIntensity} value={labels[data.aromaticIntensity]} />
+          <FactCard icon={<TrendingUp size={16} />} label={ui.detail.recognition} value={labels[data.clientRecognition]} />
+          <FactCard icon={<Users size={16} />} label={copy.commercialDifficulty} value={labels[data.commercialDifficulty]} />
+          <FactCard icon={<MapPin size={16} />} label={copy.scope} value={labels[data.scope]} />
         </div>
 
         <ScrollReveal>
-          <h3 className="font-heading text-lg font-semibold mb-4">Aromas característicos</h3>
+          <h3 className="font-heading text-lg font-semibold mb-4">{ui.detail.aromas}</h3>
           <div className="flex flex-wrap gap-2">
             {data.aromas.map((a) => (
               <span key={a} className="bg-wine/10 text-wine border border-wine/20 px-3 py-1.5 rounded-full text-sm">{a}</span>
@@ -173,7 +329,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10">
           <ScrollReveal>
-            <h2 className="font-heading text-xl font-semibold mb-4">Países</h2>
+            <h2 className="font-heading text-xl font-semibold mb-4">{ui.detail.countries}</h2>
             <div className="flex flex-wrap gap-2">
               {data.countries.map((c) => (
                 <span key={c} className="bg-secondary/50 border border-border px-3 py-1.5 rounded-full text-sm">{c}</span>
@@ -181,7 +337,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <h2 className="font-heading text-xl font-semibold mb-4">Regiones clave</h2>
+            <h2 className="font-heading text-xl font-semibold mb-4">{ui.detail.keyRegions}</h2>
             <div className="flex flex-wrap gap-2">
               {data.keyRegions.map((r) => (
                 <LinkedTag key={r} name={r} hint="region" />
@@ -198,21 +354,21 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
         <ScrollReveal className="mb-10">
           <div className="flex items-center gap-3 mb-2">
             <Lightbulb size={18} className="text-wine" />
-            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">Visión Winerim</p>
+            <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{ui.detail.cartaVision}</p>
           </div>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold">Cómo se percibe en carta</h2>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold">{copy.perceivedOnList}</h2>
         </ScrollReveal>
 
         <div className="space-y-6">
-          <ScrollReveal><WinerimBlock title="Percepción en carta" content={data.cartaPerception} /></ScrollReveal>
-          <ScrollReveal delay={0.05}><WinerimBlock title="Cuándo ayuda a vender" content={data.whenItHelps} /></ScrollReveal>
-          <ScrollReveal delay={0.1}><WinerimBlock title="Qué tipo de cliente la reconoce" content={data.clientProfile} /></ScrollReveal>
-          <ScrollReveal delay={0.15}><WinerimBlock title="Cómo vende mejor" content={data.sellByStrategy} /></ScrollReveal>
-          <ScrollReveal delay={0.2}><WinerimBlock title="Cuándo escribir la uva en grande" content={data.whenToWriteBig} /></ScrollReveal>
+          <ScrollReveal><WinerimBlock title={ui.detail.cartaPerception} content={data.cartaPerception} /></ScrollReveal>
+          <ScrollReveal delay={0.05}><WinerimBlock title={ui.detail.whenItHelps} content={data.whenItHelps} /></ScrollReveal>
+          <ScrollReveal delay={0.1}><WinerimBlock title={ui.detail.clientProfile} content={data.clientProfile} /></ScrollReveal>
+          <ScrollReveal delay={0.15}><WinerimBlock title={ui.detail.sellByStrategy} content={data.sellByStrategy} /></ScrollReveal>
+          <ScrollReveal delay={0.2}><WinerimBlock title={ui.detail.whenToWriteBig} content={data.whenToWriteBig} /></ScrollReveal>
         </div>
 
         <ScrollReveal delay={0.25} className="mt-8">
-          <h3 className="font-heading text-lg font-semibold mb-3">Rol habitual en carta</h3>
+          <h3 className="font-heading text-lg font-semibold mb-3">{ui.detail.cartaRole}</h3>
           <div className="flex flex-wrap gap-3">
             {data.cartaRole.map((role) => {
               const tooltips: Record<string, string> = {
@@ -239,7 +395,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
 
         {data.bestRegionsForSales.length > 0 && (
           <ScrollReveal delay={0.3} className="mt-8">
-            <h3 className="font-heading text-lg font-semibold mb-3">Regiones donde más vende</h3>
+            <h3 className="font-heading text-lg font-semibold mb-3">{copy.bestRegionsForSales}</h3>
             <div className="flex flex-wrap gap-2">
               {data.bestRegionsForSales.map((r) => (
                 <span key={r} className="bg-secondary/50 border border-border px-3 py-1.5 rounded-full text-sm">{r}</span>
@@ -255,15 +411,15 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-6">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Variedades que compiten</h2>
-            <p className="text-muted-foreground text-sm mt-2">Variedades que ocupan un espacio similar en carta o percepción.</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{ui.detail.competingVarieties}</h2>
+            <p className="text-muted-foreground text-sm mt-2">{copy.competingDescription}</p>
           </ScrollReveal>
           <ScrollReveal>
             <div className="flex flex-wrap gap-3">
               {data.competingVarieties.map((v) => {
                 const hasFull = hasFullEntry(v);
                 return hasFull ? (
-                  <Link key={v} to={`/biblioteca-vino/uvas/${v}`}
+                  <Link key={v} to={linkTo(`/biblioteca-vino/uvas/${v}`)}
                     className="bg-secondary/50 border border-border px-4 py-2 rounded-full text-sm hover:border-wine/30 hover:text-wine transition-all capitalize">
                     {v.replace(/-/g, " ")}
                   </Link>
@@ -284,7 +440,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
           <ScrollReveal className="mb-8">
             <div className="flex items-center gap-3 mb-2">
               <AlertTriangle size={18} className="text-wine" />
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">Errores comunes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">{ui.detail.commonMistakes}</h2>
             </div>
           </ScrollReveal>
           <div className="space-y-3">
@@ -306,7 +462,7 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal className="mb-8">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold">Maridajes sugeridos</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold">{ui.detail.suggestedPairings}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {data.pairings.map((p, i) => (
@@ -322,6 +478,20 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
       </section>
     )}
 
+    <section className="section-padding bg-gradient-dark">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <RelatedWineLibraryLinks
+          items={[
+            ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
+            ...data.bestRegionsForSales.map((name) => ({ name, hint: "region" as const })),
+            ...data.competingVarieties.map((name) => ({ name, hint: "grape" as const })),
+            ...data.relatedGrapes.map((name) => ({ name, hint: "grape" as const })),
+            ...data.pairings.map((name) => ({ name, hint: "pairing" as const })),
+          ]}
+        />
+      </div>
+    </section>
+
     {/* FAQ */}
     <FAQSection faqs={data.faqs} schemaId={`grape-${data.slug}`} />
 
@@ -329,15 +499,15 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-4xl mx-auto">
         <ScrollReveal className="mb-8">
-          <h2 className="font-heading text-xl font-semibold">Sigue explorando</h2>
+          <h2 className="font-heading text-xl font-semibold">{ui.detail.keepExploring}</h2>
         </ScrollReveal>
         <div className="grid sm:grid-cols-2 gap-4">
           {[
-            { to: "/biblioteca-vino/uvas", label: "Todas las variedades" },
-            { to: "/biblioteca-vino/regiones", label: "Regiones vinícolas" },
-            { to: "/biblioteca-vino", label: "Biblioteca del Vino" },
+            { to: linkTo("/biblioteca-vino/uvas"), label: copy.allVarieties },
+            { to: linkTo("/biblioteca-vino/regiones"), label: ui.sections.regions },
+            { to: linkTo("/biblioteca-vino"), label: ui.libraryName },
             { to: "/producto/winerim-core", label: "Winerim Core" },
-            { to: "/demo", label: "Solicitar demo" },
+            { to: linkTo("/demo"), label: ui.actions.requestDemo },
           ].map((link) => (
             <Link key={link.to} to={link.to}
               className="flex items-center justify-between bg-gradient-card rounded-xl border border-border p-4 hover:border-wine/30 transition-all group">
@@ -358,14 +528,14 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
           <div className="relative z-10">
             <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-              Lleva <span className="text-gradient-wine italic">{data.name}</span> a tu carta con criterio
+              {copy.bringToListTitle(data.name)}
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
-              Winerim integra datos de variedades, percepción y rol comercial para ayudarte a decidir qué vinos incluir, destacar o rotar.
+              {ui.cta.grapesBody}
             </p>
-            <Link to="/demo"
+            <Link to={linkTo("/demo")}
               className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
-              Solicitar demo <ArrowRight size={16} />
+              {ui.actions.requestDemo} <ArrowRight size={16} />
             </Link>
           </div>
         </motion.div>
@@ -374,17 +544,23 @@ const FullGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getGrap
 
     <Footer />
   </div>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════════
    CATALOG DETAIL — Simplified view for grapes without full Winerim layer
    ═══════════════════════════════════════════════════════════════════════ */
-const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getCatalogEntry>> }) => (
+const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNullable<ReturnType<typeof getLocalizedGrapeCatalogEntry>>; linkTo: (path: string) => string; urlFor: (path: string) => string; ui: WineLibraryUi; langKey: string }) => {
+  const colorLabel = colorLabelsByLang[langKey]?.[data.color] || colorLabels[data.color].label;
+  const copy = grapeDetailCopy[langKey] || grapeDetailCopy.en;
+
+  return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
-      title={`${data.name}: Variedad de uva | Biblioteca Winerim`}
-      description={`${data.name}: ${data.tastingNotes} Regiones: ${data.keyRegions.join(", ")}. Guía Winerim.`}
-      url={`https://winerim.wine/biblioteca-vino/uvas/${data.slug}`}
+      title={data.seo.title}
+      description={data.seo.description}
+      url={urlFor(`/biblioteca-vino/uvas/${data.slug}`)}
+      hreflang={getWineLibraryHreflang(`/biblioteca-vino/uvas/${data.slug}`)}
     />
     <Navbar />
 
@@ -392,8 +568,8 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
       <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
         <Breadcrumbs items={[
-          { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-          { label: "Variedades", href: "/biblioteca-vino/uvas" },
+          { label: ui.libraryName, href: linkTo("/biblioteca-vino") },
+          { label: ui.sections.grapes, href: linkTo("/biblioteca-vino/uvas") },
           { label: data.name },
         ]} />
 
@@ -401,7 +577,7 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
           className="flex items-center gap-3 mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-wine/30 bg-wine/5">
             <span>{colorLabels[data.color].emoji}</span>
-            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabels[data.color].label}</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{colorLabel}</span>
           </span>
         </motion.div>
 
@@ -412,7 +588,7 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
 
         {data.synonyms.length > 0 && (
           <p className="text-sm text-muted-foreground mb-4">
-            También conocida como: <span className="italic">{data.synonyms.join(", ")}</span>
+            {copy.alsoKnownAs}: <span className="italic">{data.synonyms.join(", ")}</span>
           </p>
         )}
 
@@ -424,7 +600,7 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10">
           <div>
-            <h2 className="font-heading text-xl font-semibold mb-4">Países</h2>
+            <h2 className="font-heading text-xl font-semibold mb-4">{ui.detail.countries}</h2>
             <div className="flex flex-wrap gap-2">
               {data.countries.map((c) => (
                 <span key={c} className="bg-secondary/50 border border-border px-3 py-1.5 rounded-full text-sm">{c}</span>
@@ -432,7 +608,7 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
             </div>
           </div>
           <div>
-            <h2 className="font-heading text-xl font-semibold mb-4">Regiones clave</h2>
+            <h2 className="font-heading text-xl font-semibold mb-4">{ui.detail.keyRegions}</h2>
             <div className="flex flex-wrap gap-2">
               {data.keyRegions.map((r) => (
                 <LinkedTag key={r} name={r} hint="region" />
@@ -443,16 +619,26 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
       </div>
     </section>
 
-    {/* INTERNAL LINKS */}
     <section className="section-padding bg-gradient-dark">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <RelatedWineLibraryLinks
+          items={[
+            ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
+          ]}
+        />
+      </div>
+    </section>
+
+    {/* INTERNAL LINKS */}
+    <section className="section-padding">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-heading text-xl font-semibold mb-6">Sigue explorando</h2>
+        <h2 className="font-heading text-xl font-semibold mb-6">{ui.detail.keepExploring}</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {[
-            { to: "/biblioteca-vino/uvas", label: "Todas las variedades" },
-            { to: "/biblioteca-vino/regiones", label: "Regiones vinícolas" },
-            { to: "/biblioteca-vino", label: "Biblioteca del Vino" },
-            { to: "/demo", label: "Solicitar demo" },
+            { to: linkTo("/biblioteca-vino/uvas"), label: copy.allVarieties },
+            { to: linkTo("/biblioteca-vino/regiones"), label: ui.sections.regions },
+            { to: linkTo("/biblioteca-vino"), label: ui.libraryName },
+            { to: linkTo("/demo"), label: ui.actions.requestDemo },
           ].map((link) => (
             <Link key={link.to} to={link.to}
               className="flex items-center justify-between bg-gradient-card rounded-xl border border-border p-4 hover:border-wine/30 transition-all group">
@@ -466,7 +652,8 @@ const CatalogGrapeDetail = ({ data }: { data: NonNullable<ReturnType<typeof getC
 
     <Footer />
   </div>
-);
+  );
+};
 
 /* ─── Sub-components ──────────────────────────────────────────────── */
 const FactCard = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => (

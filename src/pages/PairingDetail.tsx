@@ -7,6 +7,7 @@ import {
   MessageSquare, Palette
 } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
+import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -14,15 +15,22 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
-  getPairingBySlug,
-  categoryMeta,
-  pairingEntries,
   type PairingEntry,
 } from "@/data/pairingsLibrary";
+import {
+  getLocalizedCategoryMeta,
+  getLocalizedPairingBySlug,
+  getLocalizedPairingEntries,
+} from "@/data/pairingsLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const PairingDetail = () => {
   const { pairing: pairingSlug } = useParams<{ pairing: string }>();
-  const entry = pairingSlug ? getPairingBySlug(pairingSlug) : undefined;
+  const { lang } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const entry = pairingSlug ? getLocalizedPairingBySlug(pairingSlug, lang) : undefined;
+  const pairingEntries = getLocalizedPairingEntries(lang);
 
   useEffect(() => {
     if (!entry) return;
@@ -36,19 +44,19 @@ const PairingDetail = () => {
       description: entry.seo.description,
       author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
       publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: `https://winerim.wine/biblioteca-vino/maridajes/${entry.slug}`,
+      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/maridajes/${entry.slug}`),
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("pairing-detail-jsonld")?.remove(); };
-  }, [entry, pairingSlug]);
+  }, [entry, pairingSlug, lang]);
 
-  if (!entry) return <Navigate to="/biblioteca-vino/maridajes" replace />;
+  if (!entry) return <Navigate to={linkTo("/biblioteca-vino/maridajes")} replace />;
 
-  const meta = categoryMeta[entry.category];
+  const meta = getLocalizedCategoryMeta(entry.category, lang);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={entry.seo.title} description={entry.seo.description} url={`https://winerim.wine/biblioteca-vino/maridajes/${entry.slug}`} type="article" />
+      <SEOHead title={entry.seo.title} description={entry.seo.description} url={getWineLibraryUrl(lang, `/biblioteca-vino/maridajes/${entry.slug}`)} type="article" hreflang={getWineLibraryHreflang(`/biblioteca-vino/maridajes/${entry.slug}`)} />
       <Navbar />
 
       {/* HERO */}
@@ -57,8 +65,8 @@ const PairingDetail = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Maridajes", href: "/biblioteca-vino/maridajes" },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Maridajes", href: linkTo("/biblioteca-vino/maridajes") },
             { label: entry.name },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -257,9 +265,9 @@ const PairingDetail = () => {
                 {entry.relatedPairings.map(slug => {
                   const related = pairingEntries.find(e => e.slug === slug || e.id === slug);
                   if (!related) return null;
-                  const rMeta = categoryMeta[related.category];
+                  const rMeta = getLocalizedCategoryMeta(related.category, lang);
                   return (
-                    <Link key={slug} to={`/biblioteca-vino/maridajes/${related.slug}`}
+                    <Link key={slug} to={linkTo(`/biblioteca-vino/maridajes/${related.slug}`)}
                       className="flex items-center gap-2 bg-gradient-card border border-border rounded-lg px-4 py-2 hover:border-wine/30 transition-all text-sm"
                     >
                       <span>{rMeta.emoji}</span>
@@ -284,8 +292,22 @@ const PairingDetail = () => {
         </section>
       )}
 
-      {/* CTA */}
       <section className="section-padding bg-gradient-dark">
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <RelatedWineLibraryLinks
+            items={[
+              ...entry.recommendedStyles.map((name) => ({ name, hint: "style" as const })),
+              ...entry.recommendedRegions.map((name) => ({ name, hint: "region" as const })),
+              ...entry.recommendedGrapes.map((name) => ({ name, hint: "grape" as const })),
+              ...entry.alternatives.map((name) => ({ name, hint: "style" as const })),
+              ...entry.relatedPairings.map((name) => ({ name, hint: "pairing" as const })),
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <ScrollReveal>
             <div className="relative bg-gradient-card rounded-3xl border border-border p-8 sm:p-12 overflow-hidden">
@@ -297,7 +319,7 @@ const PairingDetail = () => {
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
                   Winerim conecta carta, platos y maridajes para que tu equipo recomiende mejor y tu cliente elija con criterio.
                 </p>
-                <Link to="/demo" className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
+                <Link to={linkTo("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
                   Solicitar demo <ArrowRight size={16} />
                 </Link>
               </div>

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, Globe, Search, ArrowRight, Filter, Wine } from "lucide-react";
@@ -9,7 +9,9 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Input } from "@/components/ui/input";
-import { wineCountries, regionEntries } from "@/data/regionsLibrary";
+import { getLocalizedCountries, getLocalizedRegions } from "@/data/regionsLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const faqs = [
   { q: "¿Cuántas regiones vinícolas cubre Winerim?", a: "El catálogo de Winerim incluye más de 3.700 denominaciones, regiones e indicaciones geográficas de más de 40 países, con información de más de 95.000 bodegas." },
@@ -26,29 +28,79 @@ type SearchResult = {
   to: string;
 };
 
+const regionHubLabels: Record<string, {
+  wineriesInDb: string;
+  types: string;
+  wineries: string;
+  noResults: (search: string) => string;
+}> = {
+  es: {
+    wineriesInDb: "Bodegas en BD",
+    types: "Tipos",
+    wineries: "bodegas",
+    noResults: (search) => `No se encontraron países ni denominaciones que coincidan con "${search}"`,
+  },
+  en: {
+    wineriesInDb: "Wineries in DB",
+    types: "Types",
+    wineries: "wineries",
+    noResults: (search) => `No countries or denominations match "${search}"`,
+  },
+  it: {
+    wineriesInDb: "Cantine in DB",
+    types: "Tipi",
+    wineries: "cantine",
+    noResults: (search) => `Nessun paese o denominazione corrisponde a "${search}"`,
+  },
+  fr: {
+    wineriesInDb: "Domaines en base",
+    types: "Types",
+    wineries: "domaines",
+    noResults: (search) => `Aucun pays ni appellation ne correspond à "${search}"`,
+  },
+  de: {
+    wineriesInDb: "Weingüter in DB",
+    types: "Typen",
+    wineries: "Weingüter",
+    noResults: (search) => `Keine Länder oder Herkunftsbezeichnungen passen zu "${search}"`,
+  },
+  pt: {
+    wineriesInDb: "Adegas na BD",
+    types: "Tipos",
+    wineries: "adegas",
+    noResults: (search) => `Nenhum país ou denominação corresponde a "${search}"`,
+  },
+};
+
 const RegionsHub = () => {
+  const { lang, localePath } = useLanguage();
+  const regionLabels = regionHubLabels[String(lang)] || regionHubLabels.en;
   const [search, setSearch] = useState("");
+  const ui = useMemo(() => getWineLibraryUi(lang), [lang]);
+  const wineCountries = useMemo(() => getLocalizedCountries(lang), [lang]);
+  const regionEntries = useMemo(() => getLocalizedRegions(lang), [lang]);
+  const linkTo = useCallback((path: string) => getWineLibraryPath(lang, path), [lang]);
 
   const totalDenominations = wineCountries.reduce((acc, c) => acc + c.denominationsCount, 0);
 
   // Combined search across countries AND denominations
   const { filteredCountries, searchResults } = useMemo(() => {
     if (!search.trim()) return { filteredCountries: wineCountries, searchResults: [] as SearchResult[] };
-    const q = search.toLowerCase();
+    const q = normalizeWineSearch(search);
 
     const countries = wineCountries.filter(
       (c) =>
-        c.name.toLowerCase().includes(q) ||
-        c.nameEn.toLowerCase().includes(q) ||
-        c.denominationTypes.toLowerCase().includes(q)
+        normalizeWineSearch(c.name).includes(q) ||
+        normalizeWineSearch(c.nameEn).includes(q) ||
+        normalizeWineSearch(c.denominationTypes).includes(q)
     );
 
     // Search within denominations/regions
     const denomResults: SearchResult[] = regionEntries
       .filter((r) =>
-        r.name.toLowerCase().includes(q) ||
-        (r.altNames && r.altNames.some((a) => a.toLowerCase().includes(q))) ||
-        r.denominationType.toLowerCase().includes(q)
+        normalizeWineSearch(r.name).includes(q) ||
+        (r.altNames && r.altNames.some((a) => normalizeWineSearch(a).includes(q))) ||
+        normalizeWineSearch(r.denominationType).includes(q)
       )
       .slice(0, 12)
       .map((r) => {
@@ -58,19 +110,20 @@ const RegionsHub = () => {
           name: r.name,
           flag: country?.flag,
           extra: `${country?.name || r.country} · ${r.denominationType}`,
-          to: `/biblioteca-vino/regiones/${r.country}/${r.slug}`,
+          to: linkTo(`/biblioteca-vino/regiones/${r.country}/${r.slug}`),
         };
       });
 
     return { filteredCountries: countries, searchResults: denomResults };
-  }, [search]);
+  }, [search, wineCountries, regionEntries, linkTo]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Regiones Vinícolas del Mundo | Biblioteca del Vino"
-        description="Guía de regiones vinícolas y denominaciones de origen para hostelería. Más de 3.700 denominaciones de 40+ países con criterio Winerim."
-        url="https://winerim.wine/biblioteca-vino/regiones"
+        title={`${ui.sections.regions} | ${ui.libraryName}`}
+        description={ui.hubs.regionsIntro(wineCountries.length)}
+        url={getWineLibraryUrl(lang, "/biblioteca-vino/regiones")}
+        hreflang={getWineLibraryHreflang("/biblioteca-vino/regiones")}
       />
       <Navbar />
 
@@ -80,8 +133,8 @@ const RegionsHub = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Regiones vinícolas" },
+            { label: ui.libraryName, href: linkTo("/biblioteca-vino") },
+            { label: ui.sections.regions },
           ]} />
 
           <motion.div
@@ -92,7 +145,7 @@ const RegionsHub = () => {
           >
             <Globe size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">
-              {wineCountries.length} países con guía · {totalDenominations.toLocaleString()}+ denominaciones
+              {wineCountries.length} {ui.stats.countries} · {totalDenominations.toLocaleString()}+ {ui.stats.denominations}
             </span>
           </motion.div>
 
@@ -102,7 +155,7 @@ const RegionsHub = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6 max-w-4xl"
           >
-            Regiones vinícolas del <span className="text-gradient-wine italic">mundo</span>
+            {ui.hubs.regionsTitle} <span className="text-gradient-wine italic">{ui.hubs.regionsItalic}</span>
           </motion.h1>
 
           <motion.p
@@ -111,8 +164,7 @@ const RegionsHub = () => {
             transition={{ delay: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10"
           >
-            Denominaciones, indicaciones geográficas y regiones vinícolas de {wineCountries.length} países.
-            Con enfoque Winerim: consulta, interpretación y aplicación comercial para hostelería.
+            {ui.hubs.regionsIntro(wineCountries.length)}
           </motion.p>
 
           {/* Stats */}
@@ -123,10 +175,10 @@ const RegionsHub = () => {
             className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10"
           >
             {[
-              { label: "Países con guía", value: String(wineCountries.length) },
-              { label: "Denominaciones", value: totalDenominations.toLocaleString() },
-              { label: "Bodegas en BD", value: wineCountries.reduce((a, c) => a + c.bodegasCount, 0).toLocaleString() },
-              { label: "Tipos", value: "DO, AOP, AVA…" },
+              { label: ui.stats.countries, value: String(wineCountries.length) },
+              { label: ui.stats.denominations, value: totalDenominations.toLocaleString() },
+              { label: regionLabels.wineriesInDb, value: wineCountries.reduce((a, c) => a + c.bodegasCount, 0).toLocaleString() },
+              { label: regionLabels.types, value: "DO, AOP, AVA..." },
             ].map((stat) => (
               <div key={stat.label} className="bg-gradient-card rounded-xl border border-border p-4 text-center">
                 <p className="font-heading text-2xl font-bold text-wine">{stat.value}</p>
@@ -144,7 +196,7 @@ const RegionsHub = () => {
           >
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Buscar país, denominación o tipo (DO, AVA…)"
+              placeholder={ui.hubs.regionsSearch}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 bg-gradient-card border-border"
@@ -153,7 +205,7 @@ const RegionsHub = () => {
             {/* Denomination search results dropdown */}
             {search.trim() && searchResults.length > 0 && (
               <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto">
-                <p className="text-xs text-muted-foreground px-4 pt-3 pb-1">Denominaciones y regiones</p>
+                <p className="text-xs text-muted-foreground px-4 pt-3 pb-1">{ui.stats.denominations}</p>
                 {searchResults.map((r) => (
                   <Link
                     key={r.to}
@@ -179,10 +231,10 @@ const RegionsHub = () => {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="mb-10">
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-              Explora por país
+              {ui.hubs.exploreByCountry}
             </h2>
             <p className="text-muted-foreground max-w-2xl">
-              Cada país tiene su propia arquitectura de denominaciones, estilos y regiones. Selecciona uno para explorar su mapa vinícola completo.
+              {ui.hubs.exploreByCountryIntro}
             </p>
           </ScrollReveal>
 
@@ -192,7 +244,7 @@ const RegionsHub = () => {
               return (
                 <ScrollReveal key={country.slug} delay={i * 0.04}>
                   <Link
-                    to={`/biblioteca-vino/regiones/${country.slug}`}
+                    to={linkTo(`/biblioteca-vino/regiones/${country.slug}`)}
                     className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
                   >
                     <div className="flex items-center justify-between mb-4">
@@ -210,10 +262,10 @@ const RegionsHub = () => {
 
                     <div className="flex flex-wrap gap-2 mb-4">
                       <span className="text-xs bg-wine/10 text-wine px-2 py-1 rounded-md">
-                        {country.denominationsCount} denominaciones
+                        {country.denominationsCount} {ui.stats.denominations}
                       </span>
                       <span className="text-xs bg-secondary/50 text-muted-foreground px-2 py-1 rounded-md">
-                        {country.bodegasCount.toLocaleString()} bodegas
+                        {country.bodegasCount.toLocaleString()} {regionLabels.wineries}
                       </span>
                     </div>
 
@@ -241,7 +293,7 @@ const RegionsHub = () => {
 
           {filteredCountries.length === 0 && searchResults.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-muted-foreground">No se encontraron países ni denominaciones que coincidan con "{search}"</p>
+              <p className="text-muted-foreground">{regionLabels.noResults(search)}</p>
             </div>
           )}
         </div>
@@ -253,10 +305,10 @@ const RegionsHub = () => {
           <div className="max-w-7xl mx-auto">
             <ScrollReveal className="mb-10">
               <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-                Regiones destacadas
+                {ui.hubs.featuredRegions}
               </h2>
               <p className="text-muted-foreground max-w-2xl">
-                Denominaciones icónicas que todo profesional de hostelería debería conocer.
+                {ui.hubs.featuredRegionsIntro}
               </p>
             </ScrollReveal>
 
@@ -266,7 +318,7 @@ const RegionsHub = () => {
                 return (
                   <ScrollReveal key={region.slug} delay={i * 0.06}>
                     <Link
-                      to={`/biblioteca-vino/regiones/${region.country}/${region.slug}`}
+                      to={linkTo(`/biblioteca-vino/regiones/${region.country}/${region.slug}`)}
                       className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
                     >
                       <div className="flex items-center gap-2 mb-3">
@@ -293,7 +345,7 @@ const RegionsHub = () => {
                         ))}
                         {region.bodegasCount && (
                           <span className="text-xs text-muted-foreground ml-auto">
-                            {region.bodegasCount.toLocaleString()} bodegas
+                            {region.bodegasCount.toLocaleString()} {regionLabels.wineries}
                           </span>
                         )}
                       </div>
@@ -322,17 +374,16 @@ const RegionsHub = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
             <div className="relative z-10">
               <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                Lleva este conocimiento a tu{" "}
-                <span className="text-gradient-wine italic">carta de vinos</span>
+                {ui.cta.regionsTitle}
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm sm:text-base">
-                Winerim integra información de regiones, denominaciones y percepción comercial directamente en tu herramienta de gestión de carta.
+                {ui.cta.regionsBody()}
               </p>
               <Link
-                to="/demo"
+                to={localePath("/demo")}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20"
               >
-                Solicitar demo
+                {ui.actions.requestDemo}
                 <ArrowRight size={16} />
               </Link>
             </div>

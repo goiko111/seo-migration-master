@@ -2,10 +2,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, SupportedLang, DEFAULT_LANG } from "@/i18n/types";
+import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, LanguageCode, DEFAULT_LANG } from "@/i18n/types";
+import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 /** Find the ES route equivalent for the current path */
-function findEsRoute(pathname: string, currentLang: SupportedLang): string {
+function findEsRoute(pathname: string, currentLang: LanguageCode): string {
+  const wineLibraryPath = getWineLibraryEsPath(pathname);
+  if (wineLibraryPath) return wineLibraryPath;
+
   if (currentLang === "es") return pathname;
 
   const langMap = ROUTE_MAP[currentLang];
@@ -33,7 +37,7 @@ const LanguageSwitcher = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const switchTo = (targetLang: SupportedLang) => {
+  const switchTo = (targetLang: LanguageCode) => {
     setOpen(false);
     if (targetLang === lang) return;
 
@@ -42,7 +46,9 @@ const LanguageSwitcher = () => {
     if (targetLang === DEFAULT_LANG) {
       navigate(esRoute);
     } else {
-      const targetPath = ROUTE_MAP[targetLang][esRoute] || `/${targetLang}${esRoute}`;
+      const targetPath = esRoute.startsWith("/biblioteca-vino")
+        ? getWineLibraryPath(targetLang, esRoute)
+        : ROUTE_MAP[targetLang][esRoute] || `/${targetLang}${esRoute}`;
       navigate(targetPath);
     }
   };

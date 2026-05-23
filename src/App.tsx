@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LanguageProvider } from "@/i18n/LanguageContext";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy load UI chrome — not needed for FCP
@@ -388,6 +388,83 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/decision-center/:areaSlug`} element={<DecisionCenterArea />} />
     <Route path={`${prefix}/implementation`} element={<Implantacion />} />
     <Route path={`${prefix}/implementazione`} element={<Implantacion />} />
+    <Route path={`${prefix}/biblioteca-vino`} element={<BibliotecaVino />} />
+    <Route path={`${prefix}/biblioteca-vino/regiones`} element={<RegionsHub />} />
+    <Route path={`${prefix}/biblioteca-vino/regiones/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/biblioteca-vino/regiones/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/uvas`} element={<GrapesHub />} />
+    <Route path={`${prefix}/biblioteca-vino/uvas/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/estilos`} element={<StylesHub />} />
+    <Route path={`${prefix}/biblioteca-vino/estilos/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/maridajes`} element={<PairingsHub />} />
+    <Route path={`${prefix}/biblioteca-vino/maridajes/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/guia-servicio`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/biblioteca-vino/glosario`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/biblioteca-vino/:slug`} element={<BibliotecaDetalle />} />
+    {/* Localized wine library routes */}
+    <Route path={`${prefix}/wine-library`} element={<BibliotecaVino />} />
+    <Route path={`${prefix}/wine-library/regions`} element={<RegionsHub />} />
+    <Route path={`${prefix}/wine-library/regions/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/wine-library/regions/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/wine-library/grapes`} element={<GrapesHub />} />
+    <Route path={`${prefix}/wine-library/grapes/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/wine-library/styles`} element={<StylesHub />} />
+    <Route path={`${prefix}/wine-library/styles/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/wine-library/pairings`} element={<PairingsHub />} />
+    <Route path={`${prefix}/wine-library/pairings/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/wine-library/service-guide`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/wine-library/glossary`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/wine-library/:slug`} element={<BibliotecaDetalle />} />
+    <Route path={`${prefix}/bibliotheque-vin`} element={<BibliotecaVino />} />
+    <Route path={`${prefix}/bibliotheque-vin/regions`} element={<RegionsHub />} />
+    <Route path={`${prefix}/bibliotheque-vin/regions/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/bibliotheque-vin/regions/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/bibliotheque-vin/cepages`} element={<GrapesHub />} />
+    <Route path={`${prefix}/bibliotheque-vin/cepages/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/bibliotheque-vin/styles-de-vin`} element={<StylesHub />} />
+    <Route path={`${prefix}/bibliotheque-vin/styles-de-vin/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/bibliotheque-vin/accords`} element={<PairingsHub />} />
+    <Route path={`${prefix}/bibliotheque-vin/accords/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/bibliotheque-vin/guide-service`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/bibliotheque-vin/glossaire`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/bibliotheque-vin/:slug`} element={<BibliotecaDetalle />} />
+    <Route path={`${prefix}/biblioteca-vino/regioni`} element={<RegionsHub />} />
+    <Route path={`${prefix}/biblioteca-vino/regioni/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/biblioteca-vino/regioni/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/vitigni`} element={<GrapesHub />} />
+    <Route path={`${prefix}/biblioteca-vino/vitigni/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/stili`} element={<StylesHub />} />
+    <Route path={`${prefix}/biblioteca-vino/stili/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/abbinamenti`} element={<PairingsHub />} />
+    <Route path={`${prefix}/biblioteca-vino/abbinamenti/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/biblioteca-vino/guida-servizio`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/biblioteca-vino/glossario`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/weinbibliothek`} element={<BibliotecaVino />} />
+    <Route path={`${prefix}/weinbibliothek/regionen`} element={<RegionsHub />} />
+    <Route path={`${prefix}/weinbibliothek/regionen/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/weinbibliothek/regionen/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/weinbibliothek/rebsorten`} element={<GrapesHub />} />
+    <Route path={`${prefix}/weinbibliothek/rebsorten/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/weinbibliothek/weinstile`} element={<StylesHub />} />
+    <Route path={`${prefix}/weinbibliothek/weinstile/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/weinbibliothek/weinbegleitung`} element={<PairingsHub />} />
+    <Route path={`${prefix}/weinbibliothek/weinbegleitung/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/weinbibliothek/service-guide`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/weinbibliothek/glossar`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/weinbibliothek/:slug`} element={<BibliotecaDetalle />} />
+    <Route path={`${prefix}/biblioteca-vinho`} element={<BibliotecaVino />} />
+    <Route path={`${prefix}/biblioteca-vinho/regioes`} element={<RegionsHub />} />
+    <Route path={`${prefix}/biblioteca-vinho/regioes/:country`} element={<RegionCountry />} />
+    <Route path={`${prefix}/biblioteca-vinho/regioes/:country/:region`} element={<RegionDetail />} />
+    <Route path={`${prefix}/biblioteca-vinho/castas`} element={<GrapesHub />} />
+    <Route path={`${prefix}/biblioteca-vinho/castas/:grape`} element={<GrapeDetail />} />
+    <Route path={`${prefix}/biblioteca-vinho/estilos`} element={<StylesHub />} />
+    <Route path={`${prefix}/biblioteca-vinho/estilos/:style`} element={<StyleDetail />} />
+    <Route path={`${prefix}/biblioteca-vinho/harmonizacoes`} element={<PairingsHub />} />
+    <Route path={`${prefix}/biblioteca-vinho/harmonizacoes/:pairing`} element={<PairingDetail />} />
+    <Route path={`${prefix}/biblioteca-vinho/guia-servico`} element={<GuiaServicio />} />
+    <Route path={`${prefix}/biblioteca-vinho/glossario`} element={<GlosarioVino />} />
+    <Route path={`${prefix}/biblioteca-vinho/:slug`} element={<BibliotecaDetalle />} />
     <Route path={`${prefix}/article/:slug`} element={<ArticlePage />} />
     {/* Guides — EN */}
     <Route path={`${prefix}/guides/how-to-structure-wine-list-restaurant-group`} element={<GuiaCartaGrupoRestauracion />} />
@@ -509,6 +586,8 @@ const App = () => (
                 {langRoutes("/en")}
                 {langRoutes("/it")}
                 {langRoutes("/fr")}
+                {langRoutes("/de")}
+                {langRoutes("/pt")}
                 <Route path="/unsubscribe" element={<Unsubscribe />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

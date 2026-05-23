@@ -20,6 +20,23 @@ interface SEOHeadProps {
   hreflang?: HreflangLink[];
 }
 
+const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
+  const path = (() => {
+    if (!url) return "";
+    try {
+      return url.startsWith("http") ? new URL(url).pathname : url;
+    } catch {
+      return url;
+    }
+  })();
+
+  const urlLang = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/)?.[1];
+  if (urlLang) return urlLang;
+  if (path) return "es";
+
+  return hreflang?.find((h) => h.lang !== "x-default")?.lang || "es";
+};
+
 const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang }: SEOHeadProps) => {
   useEffect(() => {
     const suffix = " | Winerim";
@@ -88,7 +105,16 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     setMeta("twitter:title", fullTitle);
     setMeta("og:type", type);
     setMeta("og:site_name", "Winerim");
-    setMeta("og:locale", hreflang?.find(h => h.lang !== "x-default")?.lang === "en" ? "en_GB" : hreflang?.find(h => h.lang !== "x-default")?.lang === "it" ? "it_IT" : hreflang?.find(h => h.lang !== "x-default")?.lang === "fr" ? "fr_FR" : "es_ES");
+    const pageLang = detectPageLang(url, hreflang);
+    const ogLocales: Record<string, string> = {
+      en: "en_GB",
+      it: "it_IT",
+      fr: "fr_FR",
+      de: "de_DE",
+      pt: "pt_PT",
+      es: "es_ES",
+    };
+    setMeta("og:locale", ogLocales[pageLang] || "es_ES");
     setMeta("twitter:card", "summary_large_image");
 
     // OG image — always absolute with production domain
@@ -136,7 +162,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalArticleUrl },
         wordCount: wordCount || undefined,
-        inLanguage: hreflang?.find(h => h.lang !== "x-default")?.lang || "es",
+        inLanguage: pageLang,
       });
     } else {
       scriptEl.textContent = JSON.stringify({
@@ -211,7 +237,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         "@type": "ContactPoint",
         contactType: "sales",
         url: `${CANONICAL_DOMAIN}/contacto`,
-        availableLanguage: ["Spanish", "English", "Italian", "French"],
+        availableLanguage: ["Spanish", "English", "Italian", "French", "German", "Portuguese"],
       },
       hasOfferCatalog: {
         "@type": "OfferCatalog",

@@ -7,6 +7,8 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const serviceData = [
   { style: "Tinto", ml: 150, cups: 5, temp: "14–18 °C", glass: "Burdeos (amplia) o Borgoña (abombada)", emoji: "🍷", link: "/biblioteca-vino/estilos/vino-tinto" },
@@ -17,12 +19,17 @@ const serviceData = [
   { style: "Fortificado", ml: 75, cups: 10, temp: "6–18 °C (según tipo)", glass: "Catavino de Jerez o copa pequeña tulipa", emoji: "🏺", link: "/biblioteca-vino/estilos/vino-generoso-fortificado" },
 ];
 
-const GuiaServicio = () => (
+const GuiaServicio = () => {
+  const { lang, localePath } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+
+  return (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
       title="Guía de Servicio del Vino | Estándar Winerim (WSET)"
       description="Medidas de servicio por estilo de vino: ml por copa, copas por botella, temperatura y copa recomendada. Referencia WSET para hostelería."
-      url="https://winerim.wine/biblioteca-vino/guia-servicio"
+      url={getWineLibraryUrl(lang, "/biblioteca-vino/guia-servicio")}
+      hreflang={getWineLibraryHreflang("/biblioteca-vino/guia-servicio")}
     />
     <Navbar />
 
@@ -32,7 +39,7 @@ const GuiaServicio = () => (
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full">
         <Breadcrumbs items={[
-          { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
+          { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
           { label: "Guía de Servicio" },
         ]} />
 
@@ -73,7 +80,7 @@ const GuiaServicio = () => (
                 {serviceData.map((row) => (
                   <TableRow key={row.style} className="border-b border-border/50 hover:bg-wine/5 transition-colors">
                     <TableCell>
-                      <Link to={row.link} className="flex items-center gap-2 font-medium hover:text-wine transition-colors">
+                      <Link to={linkTo(row.link)} className="flex items-center gap-2 font-medium hover:text-wine transition-colors">
                         <span>{row.emoji}</span>
                         <span>{row.style}</span>
                       </Link>
@@ -100,7 +107,7 @@ const GuiaServicio = () => (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {serviceData.map((row, i) => (
             <ScrollReveal key={row.style} delay={i * 0.06}>
-              <Link to={row.link} className="block bg-gradient-card border border-border rounded-xl p-6 hover:border-wine/30 transition-all group h-full">
+              <Link to={linkTo(row.link)} className="block bg-gradient-card border border-border rounded-xl p-6 hover:border-wine/30 transition-all group h-full">
                 <div className="text-3xl mb-3">{row.emoji}</div>
                 <h3 className="font-heading text-lg font-semibold mb-4 group-hover:text-wine transition-colors">{row.style}</h3>
                 <div className="space-y-3">
@@ -159,11 +166,11 @@ const GuiaServicio = () => (
                 La calculadora Winerim aplica estas medidas a tus precios reales y te dice exactamente cuánto ganas por copa.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/herramientas/calculadora-precio-vino-por-copa"
+                <Link to={localePath("/herramientas/calculadora-precio-vino-por-copa")}
                   className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
                   Calculadora por copa <ArrowRight size={16} />
                 </Link>
-                <Link to="/biblioteca-vino"
+                <Link to={linkTo("/biblioteca-vino")}
                   className="px-8 py-4 rounded-lg border border-border text-sm font-semibold tracking-wider uppercase hover:bg-secondary transition-all">
                   Volver a la Biblioteca
                 </Link>
@@ -176,6 +183,7 @@ const GuiaServicio = () => (
 
     <Footer />
   </div>
-);
+  );
+};
 
 export default GuiaServicio;

@@ -7,14 +7,19 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
-import { getCountryBySlug, getRegionsByCountry, type RegionEntry } from "@/data/regionsLibrary";
+import { type RegionEntry } from "@/data/regionsLibrary";
+import { getLocalizedCountryBySlug, getLocalizedRegionsByCountry } from "@/data/regionsLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const RegionCountry = () => {
   const { country } = useParams<{ country: string }>();
-  const data = country ? getCountryBySlug(country) : undefined;
-  const regions = country ? getRegionsByCountry(country) : [];
+  const { lang } = useLanguage();
+  const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const data = country ? getLocalizedCountryBySlug(country, lang) : undefined;
+  const regions = country ? getLocalizedRegionsByCountry(country, lang) : [];
 
-  if (!data) return <Navigate to="/biblioteca-vino/regiones" replace />;
+  if (!data) return <Navigate to={linkTo("/biblioteca-vino/regiones")} replace />;
 
   const topRegions = regions.filter((r) => data.topRegions.includes(r.slug));
   const differentialRegions = regions.filter((r) => data.differentialRegions.includes(r.slug));
@@ -27,7 +32,8 @@ const RegionCountry = () => {
       <SEOHead
         title={data.seo.title}
         description={data.seo.description}
-        url={`https://winerim.wine/biblioteca-vino/regiones/${data.slug}`}
+        url={getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${data.slug}`)}
+        hreflang={getWineLibraryHreflang(`/biblioteca-vino/regiones/${data.slug}`)}
       />
       <Navbar />
 
@@ -37,8 +43,8 @@ const RegionCountry = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: "/biblioteca-vino" },
-            { label: "Regiones", href: "/biblioteca-vino/regiones" },
+            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
+            { label: "Regiones", href: linkTo("/biblioteca-vino/regiones") },
             { label: data.name },
           ]} />
 
@@ -111,7 +117,7 @@ const RegionCountry = () => {
                 Las denominaciones que todo profesional de hostelería debería conocer.
               </p>
             </ScrollReveal>
-            <RegionGrid regions={topRegions} country={data.slug} />
+            <RegionGrid regions={topRegions} country={data.slug} linkTo={linkTo} />
           </div>
         </section>
       )}
@@ -132,7 +138,7 @@ const RegionCountry = () => {
                 Denominaciones que aportan criterio, tendencia y descubrimiento a una carta.
               </p>
             </ScrollReveal>
-            <RegionGrid regions={differentialRegions} country={data.slug} />
+            <RegionGrid regions={differentialRegions} country={data.slug} linkTo={linkTo} />
           </div>
         </section>
       )}
@@ -144,7 +150,7 @@ const RegionCountry = () => {
             <ScrollReveal className="mb-10">
               <h2 className="font-heading text-2xl md:text-3xl font-bold">Todas las regiones</h2>
             </ScrollReveal>
-            <RegionGrid regions={otherRegions} country={data.slug} />
+            <RegionGrid regions={otherRegions} country={data.slug} linkTo={linkTo} />
           </div>
         </section>
       )}
@@ -196,10 +202,10 @@ const RegionCountry = () => {
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { to: "/biblioteca-vino/regiones", label: "Todas las regiones del mundo" },
-              { to: "/biblioteca-vino", label: "Biblioteca del Vino completa" },
+              { to: linkTo("/biblioteca-vino/regiones"), label: "Todas las regiones del mundo" },
+              { to: linkTo("/biblioteca-vino"), label: "Biblioteca del Vino completa" },
               { to: "/producto/winerim-core", label: "Winerim Core" },
-              { to: "/demo", label: "Solicitar demo" },
+              { to: linkTo("/demo"), label: "Solicitar demo" },
             ].map((link) => (
               <Link
                 key={link.to}
@@ -234,7 +240,7 @@ const RegionCountry = () => {
                 Winerim integra datos de {data.denominationsCount} denominaciones de {data.name} para ayudarte a tomar mejores decisiones de carta.
               </p>
               <Link
-                to="/demo"
+                to={linkTo("/demo")}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all"
               >
                 Solicitar demo <ArrowRight size={16} />
@@ -250,12 +256,12 @@ const RegionCountry = () => {
 };
 
 /* ─── Sub-component: Region Card Grid ─────────────────────────────── */
-const RegionGrid = ({ regions, country }: { regions: RegionEntry[]; country: string }) => (
+const RegionGrid = ({ regions, country, linkTo }: { regions: RegionEntry[]; country: string; linkTo: (path: string) => string }) => (
   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {regions.map((region, i) => (
       <ScrollReveal key={region.slug} delay={i * 0.05}>
         <Link
-          to={`/biblioteca-vino/regiones/${country}/${region.slug}`}
+          to={linkTo(`/biblioteca-vino/regiones/${country}/${region.slug}`)}
           className="group block bg-gradient-card rounded-xl border border-border p-6 hover:border-wine/30 transition-all duration-300 hover:-translate-y-1 h-full"
         >
           <div className="flex items-center justify-between mb-3">
