@@ -53,3 +53,39 @@
 - Ejecutar `npm run deploy:supabase:seo` y `npm run deploy:worker` cuando estén disponibles las credenciales.
 - Revisar Search Console tras indexación.
 - Definir el siguiente bloque editorial de la biblioteca del vino.
+
+### Cierre de despliegue productivo
+
+#### Hechos
+
+- El usuario aclaró que Supabase vive dentro de Lovable para este proyecto y proporcionó el proyecto `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- Se publicó el frontend desde Lovable; la UI mostró `Published` y `Up to date`.
+- Se autenticó Cloudflare Wrangler como `gugocreative@gmail.com`.
+- El primer despliegue CLI del Worker `winerim-proxy` (`170c5339-8938-45c9-8aaa-e8be84dac540`) dejó producción en HTTP 500 porque el script no preservaba las variables públicas del Worker.
+- Se redeployó el Worker con `--keep-vars` y variables explícitas (`60c3b0e2-28ac-4785-8eb8-fd7750294823`), recuperando HTTP 200.
+- Lovable desplegó las Edge Functions `sitemap` y `prerender` tras pedirlo explícitamente en el chat del proyecto.
+- Se detectó que `prerender` devolvía HTML correcto con `Content-Type: text/plain`; el Worker lo rechazaba y caía en `bot-fallback`.
+- Se parcheó `cloudflare-worker-v3-hybrid.js` para aceptar HTML prerenderizado por contenido real, aunque venga etiquetado como `text/plain`.
+- Se desplegó el Worker final `ec6d2f24-f3f3-4739-8a56-ef6992fdf2a9`.
+- Producción quedó validada:
+  - Sitemap público con rutas `de` y `pt` de biblioteca.
+  - Googlebot en Tempranillo alemán y portugués con `X-Prerendered: true`, `X-Worker-Branch: bot-prerender`, canonical y hreflang correctos.
+
+#### Decisiones
+
+- No usar Supabase externo como vía principal en este proyecto mientras Lovable gestione las Edge Functions.
+- Desplegar el Worker desde el repo con `npm run deploy:worker`, no con comandos sueltos que puedan omitir variables.
+- Mantener `--keep-vars` en los scripts del Worker para preservar secretos de Cloudflare.
+- Tratar como válido el HTML prerenderizado si el cuerpo empieza por `<!doctype html` o `<html`, aunque el `Content-Type` no sea `text/html`.
+
+#### Hipótesis
+
+- El comportamiento `Content-Type: text/plain` de Supabase Edge Functions puede repetirse en otros prerenders; el sniffing de HTML evita una caída falsa a SPA para bots.
+- El flujo Lovable puede requerir prompts explícitos para Edge Functions aunque la UI indique que publicar frontend es suficiente.
+
+#### Tareas pendientes
+
+- Commit y push de los ajustes finales.
+- Revisar visualmente rutas `de`/`pt` en navegador y selector de idioma.
+- Revisar avisos de seguridad de Lovable en una tarea separada.
+- Monitorizar Search Console después de la indexación.

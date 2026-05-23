@@ -12,8 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "deploy:supabase:seo": "npx --yes supabase@latest functions deploy sitemap --project-ref pwkqbcgjrhoyxrsmcypw && npx --yes supabase@latest functions deploy prerender --project-ref pwkqbcgjrhoyxrsmcypw",
-    "deploy:worker": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23",
-    "deploy:worker:dry-run": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --dry-run"
+    "deploy:worker": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --keep-vars --var ORIGIN:https://seo-migration-magic.lovable.app --var PRERENDER_URL:https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/prerender --var REDIRECTS_URL:https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/redirects --var SITE_URL:https://winerim.wine",
+    "deploy:worker:dry-run": "npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --keep-vars --var ORIGIN:https://seo-migration-magic.lovable.app --var PRERENDER_URL:https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/prerender --var REDIRECTS_URL:https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/redirects --var SITE_URL:https://winerim.wine --dry-run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

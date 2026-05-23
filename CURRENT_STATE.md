@@ -9,54 +9,55 @@
 - Merge commit en `main`: `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
 - La ampliación de la biblioteca del vino a alemán (`de`) y portugués (`pt`) está integrada en `main`.
 - El bloque incluye rutas localizadas, navegación, selector de idioma, SEO head, hreflang/canonical, sitemap, prerender, enlaces internos, overlays i18n, tests y documentación de seguimiento.
-- `origin/main` avanzó mientras el PR estaba abierto y provocó conflictos al intentar fusionar la rama.
-- Los conflictos de merge se resolvieron integrando:
-  - La infraestructura de rutas, SEO y biblioteca multilingüe de esta rama.
-  - Los tipos y overlays i18n más recientes de `origin/main`, incluyendo el catálogo ampliado de uvas en `de` y `pt`.
-  - Las rutas generales `de` y `pt` que `origin/main` ya exponía en el sitemap, más las rutas de biblioteca añadidas por esta rama.
-- Se detectó una contradicción durante la resolución: el sitemap conservaba las rutas `de`/`pt` de la biblioteca, pero había perdido rutas generales `de`/`pt` de `main`. Quedó corregido en `supabase/functions/sitemap/index.ts`.
-- Se ejecutó `npm install` porque `main` añadió dependencias usadas por el build, entre ellas `libphonenumber-js`.
-- Verificación actual tras resolver el merge:
-  - `npm run test` pasa: 4 archivos de test, 8 tests.
-  - `npm run build` pasa.
-  - ESLint dirigido sobre archivos de biblioteca/i18n tocados pasa con `--max-warnings=0`.
-  - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts` pasa.
-  - `git diff --check` pasa.
-- `npm run lint -- --quiet` ya fallaba previamente por errores globales fuera del alcance directo de la biblioteca del vino.
-- La rama remota del PR quedó fusionada en `main`; queda pendiente validar despliegue/producción.
-- Validación ligera de producción tras el merge:
-  - `https://winerim.wine/de/weinbibliothek` responde HTTP 200.
-  - `https://winerim.wine/pt/biblioteca-vinho` responde HTTP 200.
-  - `https://winerim.wine/sitemap.xml` responde HTTP 200, pero la respuesta pública comprobada todavía no muestra las nuevas rutas de biblioteca `de`/`pt`.
-  - Con user-agent de Googlebot, `https://winerim.wine/de/weinbibliothek/rebsorten/tempranillo` responde `X-Worker-Branch: bot-fallback` y devuelve el `index.html` con canonical raíz, no el prerender específico.
-- En este entorno no están instalados globalmente `supabase` ni `wrangler`; los scripts añadidos usan `npx`.
-- Contradicción detectada y corregida: `TECH_INSTRUCTIONS.md` indicaba desplegar `cloudflare-worker-v2.1-improved-debug.js`, mientras que el bloque integrado trabaja sobre `cloudflare-worker-v3-hybrid.js` y producción ya expone cabeceras compatibles con el worker híbrido.
-- Intento de despliegue del 2026-05-23:
-  - `npx --yes supabase@latest functions deploy sitemap --project-ref pwkqbcgjrhoyxrsmcypw` falló porque no hay `SUPABASE_ACCESS_TOKEN` ni sesión `supabase login`.
-  - `npx --yes wrangler@3.112.0 whoami` confirmó que no hay sesión Cloudflare.
-  - `npx --yes wrangler@3.112.0 deploy cloudflare-worker-v3-hybrid.js --name winerim-proxy --compatibility-date 2026-05-23 --dry-run` sí compila el worker en seco.
-- Se añadieron scripts de despliegue reproducibles a `package.json`: `deploy:supabase:seo`, `deploy:worker` y `deploy:worker:dry-run`.
+- Las verificaciones locales previas al despliegue pasan:
+  - `npm run test`: 4 archivos de test, 8 tests.
+  - `npm run build`.
+  - ESLint dirigido sobre archivos de biblioteca/i18n tocados con `--max-warnings=0`.
+  - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts`.
+  - `git diff --check`.
+- `npm run lint -- --quiet` sigue teniendo deuda global fuera del alcance directo de la biblioteca del vino.
+- Proyecto Lovable usado para despliegue: `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- El usuario corrigió que Supabase vive dentro de Lovable para este proyecto; no se debe tratar como un despliegue externo por CLI salvo nueva instrucción explícita.
+- Frontend publicado desde Lovable; la UI mostró `Published`, `Up to date` y el dominio Lovable `seo-migration-magic.lovable.app`.
+- Producción en `winerim.wine` devuelve cabecera `x-deployment-id: df8cac10-6c11-46f2-90b0-a76e0ebe655a` para el origen Lovable.
+- Cloudflare Wrangler quedó autenticado como `gugocreative@gmail.com`.
+- Cloudflare Worker `winerim-proxy` fue desplegado varias veces durante el cierre:
+  - `170c5339-8938-45c9-8aaa-e8be84dac540`: primer despliegue con script incompleto; provocó HTTP 500 porque se perdieron variables públicas del Worker.
+  - `60c3b0e2-28ac-4785-8eb8-fd7750294823`: redespliegue con variables explícitas y `--keep-vars`; recuperó HTTP 200.
+  - `ec6d2f24-f3f3-4739-8a56-ef6992fdf2a9`: despliegue final tras parchear aceptación de HTML prerenderizado con `Content-Type: text/plain`.
+- Se detectó y corrigió una contradicción operativa: el script `deploy:worker` no preservaba variables de Cloudflare, aunque producción dependía de `ORIGIN`, `PRERENDER_URL`, `REDIRECTS_URL`, `SITE_URL` y el secreto `SUPABASE_ANON_KEY`.
+- `SUPABASE_ANON_KEY` existe como secreto en Cloudflare para `winerim-proxy`.
+- Las Edge Functions `sitemap` y `prerender` se actualizaron desde Lovable tras pedir explícitamente el despliegue en el chat del proyecto.
+- Se detectó y corrigió otra contradicción operativa: Lovable había indicado que las Edge Functions se desplegaban automáticamente al publicar, pero producción demostró que no estaban actualizadas hasta pedir el despliegue explícito.
+- Validación productiva final del 2026-05-23:
+  - `https://winerim.wine/de/weinbibliothek` responde HTTP 200 con `X-Worker-Branch: spa`.
+  - `https://winerim.wine/pt/biblioteca-vinho` responde HTTP 200 con `X-Worker-Branch: spa`.
+  - `https://winerim.wine/sitemap.xml` lista rutas `de` y `pt` de la biblioteca, incluyendo hubs y rutas dinámicas.
+  - Googlebot en `https://winerim.wine/de/weinbibliothek/rebsorten/tempranillo` responde HTTP 200, `X-Prerendered: true`, `X-Worker-Branch: bot-prerender`, title alemán, canonical alemán y hreflang recíproco `es/en/it/fr/de/pt/x-default`.
+  - Googlebot en `https://winerim.wine/pt/biblioteca-vinho/castas/tempranillo` responde HTTP 200, `X-Prerendered: true`, `X-Worker-Branch: bot-prerender`, title portugués, canonical portugués y hreflang recíproco `es/en/it/fr/de/pt/x-default`.
+- `TECH_INSTRUCTIONS.md` y `package.json` se actualizaron para usar `cloudflare-worker-v3-hybrid.js` con variables explícitas y `--keep-vars`.
+- La UI de Lovable muestra avisos de seguridad/uso (`Security`, `Review security`, límites de Cloud/AI); queda pendiente revisarlos como bloque separado.
 
 ## Decisiones
 
-- Dar por cerrado el bloque técnico `codex/wine-library-de-pt` tras fusionarlo en `main`.
-- Resolver el merge conservando los datos i18n más recientes de `main` cuando eran más completos que los de la rama.
-- Conservar la lógica de biblioteca de esta rama para rutas dinámicas, SEO y prerender.
-- Restaurar en el sitemap las rutas generales `de`/`pt` de `main` además de las rutas de biblioteca añadidas.
-- Seguir tratando el lint global como deuda separada, no como parte de este bloque.
-- No asumir que producción está actualizada hasta desplegar explícitamente Edge Functions/Worker y repetir la validación con bot.
-- El despliegue no se puede completar desde esta sesión sin credenciales privadas de Supabase y Cloudflare.
+- Considerar cerrado el despliegue técnico principal de la biblioteca del vino `de`/`pt` cuando estén confirmados sitemap y prerender productivos.
+- Para este proyecto, usar Lovable como vía de despliegue de Edge Functions Supabase salvo instrucción contraria.
+- Mantener el despliegue del Worker reproducible desde el repo con `npm run deploy:worker`.
+- Incluir `--keep-vars` y variables públicas explícitas en cualquier despliegue del Worker para no romper producción.
+- Aceptar HTML prerenderizado por contenido real aunque Supabase lo entregue con `Content-Type: text/plain`.
+- Seguir tratando el lint global y los avisos de seguridad de Lovable como iniciativas separadas.
 
 ## Hipótesis
 
-- La estrategia correcta sigue siendo cerrar primero la base técnica multilingüe de la biblioteca y después enriquecer contenido editorial por idioma.
-- El build y las pruebas actuales cubren la superficie crítica del merge, pero la validación final debe repetirse en producción tras desplegar.
-- Los errores globales de lint siguen siendo deuda preexistente o de superficies ajenas al bloque de biblioteca.
+- La base técnica multilingüe de la biblioteca ya permite escalar contenido editorial en `de` y `pt` sin reabrir la arquitectura.
+- El mayor impacto SEO siguiente vendrá de profundidad editorial propia, datos estructurados más ricos y enlaces internos por intención.
+- Los avisos de seguridad de Lovable pueden no bloquear SEO, pero deben revisarse antes de nuevas campañas o tráfico pagado.
 
 ## Tareas pendientes
 
-- Validar en producción sitemap, canonical, hreflang, prerender, selector de idioma y rutas localizadas.
-- Confirmar que el despliegue usa `main` con merge commit `30e9a95f592ba1c3607c0b385a2711e783bcc525`.
-- Usar `cloudflare-worker-v3-hybrid.js` para el despliegue manual del worker.
-- Proveer `SUPABASE_ACCESS_TOKEN` y autenticación Cloudflare (`wrangler login` o token equivalente) para ejecutar los scripts de despliegue.
-- Separar en una tarea propia la deuda de lint global.
+- Commit y push de los ajustes finales de Worker, scripts, instrucciones y documentos de estado.
+- Revisar visualmente en navegador real las páginas principales `de`/`pt` y el selector de idioma en rutas dinámicas.
+- Revisar Search Console después de indexación para sitemap, cobertura, canonical seleccionada por Google y errores hreflang.
+- Separar una tarea para la deuda global de lint.
+- Separar una tarea para los avisos de seguridad mostrados por Lovable.
+- Definir el siguiente bloque editorial de la biblioteca del vino.

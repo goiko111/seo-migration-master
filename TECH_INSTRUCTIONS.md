@@ -71,6 +71,16 @@ Después, en Supabase Dashboard:
 
 ### Cómo deployar
 
+Opción recomendada desde el repo:
+
+```bash
+npm run deploy:worker
+```
+
+Ese script despliega `cloudflare-worker-v3-hybrid.js` con `--keep-vars` y las variables públicas necesarias. Es importante usar `--keep-vars` para no perder secretos ya configurados en Cloudflare.
+
+Opción manual:
+
 1. Ir a **Cloudflare Dashboard** → **Workers**
 2. Buscar `winerim-proxy`
 3. Hacer click en "Edit" o crear uno nuevo
@@ -86,6 +96,7 @@ En **Settings** del Worker, verificar que existen:
 - `ORIGIN` = tu URL Lovable (ej: https://seo-migration-magic.lovable.app)
 - `PRERENDER_URL` = https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/prerender
 - `REDIRECTS_URL` = https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/redirects
+- `SITE_URL` = https://winerim.wine
 - `SUPABASE_ANON_KEY` = (debe estar en **Secrets**, no como variable normal)
 
 Si falta algo, agrégalo.

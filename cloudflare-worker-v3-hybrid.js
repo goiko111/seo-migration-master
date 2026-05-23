@@ -862,8 +862,9 @@ export default {
           },
         });
         const ct = res.headers.get('Content-Type') || '';
-        if (ct.includes('text/html')) {
-          const html = await res.text();
+        const html = await res.text();
+        const looksLikeHtml = /^\s*(?:<!doctype html|<html\b)/i.test(html);
+        if (ct.includes('text/html') || looksLikeHtml) {
           const robotsTag = getXRobotsTag(path);
           const headers = {
             'Content-Type': 'text/html; charset=utf-8',
@@ -874,7 +875,6 @@ export default {
           if (robotsTag) headers['X-Robots-Tag'] = robotsTag;
           return new Response(html, { status: 200, headers });
         }
-        await res.text(); // consume
       } catch (e) {
         console.error('Prerender error:', e);
       }
