@@ -398,6 +398,10 @@ const STATIC_ROUTES: StaticRoute[] = [
 ];
 
 const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set([
+  // Legal pages are available to users and bots, but should not be submitted as organic landing pages.
+  '/privacidad',
+  '/terminos',
+
   // Resource and benchmark detail pages currently resolve to generic prerendered HTML for bots.
   // Keep them out of the submitted sitemap until they have dedicated prerender content.
   '/recursos/plantilla-carta-de-vinos',
@@ -426,7 +430,7 @@ const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set([
   '/benchmarks-playbooks/playbook-decidir-compras-datos',
 ]);
 
-const UNSUPPORTED_SEO_PAGE_SLUG_RE = /^(?:grape|uva|vitigno|rebsorte|cepage|casta|curso-vino|curso-vinho|wine-course|corso-vino|cours-vin|weinkurs|region-vinicola|wine-region|regione-vinicola|regiao-vinicola|weinregion|software-carta-vinhos)-/;
+const UNSUPPORTED_SEO_PAGE_SLUG_RE = /^(?:grape|uva|vitigno|rebsorte|cepage|casta|curso-vino|curso-vinho|wine-course|corso-vino|cours-vin|weinkurs|region-vinicola|wine-region|regione-vinicola|regiao-vinicola|weinregion|software-carta-de-vinos|software-vino|wine-list-software|software-carta-dei-vini|logiciel-carte-des-vins|weinkarten-software|software-carta-vinhos|software-carta-de-vinhos)-/;
 
 function shouldIncludeSeoPageSlug(slug: unknown): slug is string {
   return typeof slug === 'string' && slug.length > 0 && !UNSUPPORTED_SEO_PAGE_SLUG_RE.test(slug);

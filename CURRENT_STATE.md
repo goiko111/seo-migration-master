@@ -258,6 +258,70 @@
 - Producción todavía no refleja el commit:
   - `https://winerim.wine/robots.txt?codex=a98e8c6` sigue anunciando `Sitemap: https://winerim.wine/llms.txt`.
   - `https://winerim.wine/llms-full.txt?codex=a98e8c6` responde 404.
+
+## Actualización 2026-05-24: auditoría profunda de web
+
+## Hechos
+
+- Antes de continuar con biblioteca del vino se ejecutó una revisión profunda de la web a nivel SEO técnico, contenido, LLMs, UX y rendimiento.
+- Informe creado: `src/seo/WEB_DEEP_AUDIT_2026-05-24.md`.
+- Producción auditada con Googlebot mantiene bien las rutas core ya saneadas: home, `/clientes`, `/biblioteca-vino`, `/en/pricing`, `/de/preise`, `/pt/precos`, `/software-carta-de-vinos`, `/recursos` y `/benchmarks-playbooks`.
+- Sitemap público actual: 2.431 URLs.
+- Quedan 122 URLs programáticas de ciudad en `bot-fallback`, sobre todo `wine-list-software-*` y `software-carta-de-vinos-*`.
+- Las páginas legales localizadas aparecían con contenido/canonical de home para Googlebot, por ejemplo `/en/privacy`.
+- Lighthouse mobile medido el 2026-05-24:
+  - Home: Performance 58, Accessibility 96, Best Practices 71, SEO 92; LCP 12,9 s, FCP 6,6 s, CLS 0.
+  - `/clientes`: Performance 57, Accessibility 93, Best Practices 71, SEO 92; LCP 12,1 s, FCP 7,4 s, CLS 0.
+- Lighthouse detectó 404 de red en `https://winerim.wine/~api/analytics`.
+- Lighthouse detectó un 404 de logo en producción causado por assets con espacios en el nombre generado, por ejemplo `Mabe%20Jamoneria-*.png`.
+- Se implementaron correcciones locales:
+  - Las páginas legales tienen `noindex` en frontend.
+  - `SEOHead` emite `noindex, follow` cuando el `noindex` es explícito.
+  - `prerender` renderiza páginas legales exactas en `es`, `en`, `it`, `fr`, `de` y `pt` con canonical propio y `noindex, follow`.
+  - `sitemap` excluye legales y familias programáticas de ciudad sin prerender real.
+  - Se sanearon nombres de archivo de logos con espacios/caracteres especiales.
+  - `LogoStrip` usa `em-hotels.png`.
+- Se desplegó Cloudflare Worker `winerim-proxy` para activar `X-Robots-Tag: noindex, follow` en legales.
+- Version ID Worker desplegada: `4cc5425b-cc8d-4de4-a72f-d9370b355426`.
+- Producción validada tras Worker:
+  - `/en/privacy?codex=legal-noindex` como Googlebot responde 200 con `X-Robots-Tag: noindex, follow`.
+  - `/privacidad?codex=legal-noindex` como Googlebot responde 200 con `X-Robots-Tag: noindex, follow`.
+- Las correcciones de frontend, sitemap y prerender siguen pendientes de publicación desde Lovable.
+- Verificaciones locales completadas:
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `npm run build`.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check`.
+  - QA local en `/clientes`: 591 imágenes renderizadas.
+  - QA local en `/en/privacy`: `Privacy Policy`, canonical `https://winerim.wine/en/privacy`, robots `noindex, follow`.
+- Se detectó una contradicción/deuda documental: `src/seo/route-map.ts` sigue sin reflejar plenamente `de`/`pt` y no debe tratarse como fuente única frente a los mapas reales de i18n, sitemap y prerender.
+
+## Decisiones
+
+- Las páginas legales deben estar disponibles para usuarios, pero fuera del sitemap y fuera del índice orgánico.
+- Las páginas legales deben ser `noindex, follow`, no `noindex, nofollow`, para no cortar el rastreo de enlaces internos.
+- Las city pages programáticas sin prerender específico no deben enviarse a Google hasta tener contenido/canonical/H1 propios.
+- Los assets públicos de logos no deben tener espacios ni caracteres especiales en el basename.
+- Mantener Lighthouse y Search Console como fuente de priorización para el siguiente bloque de performance.
+
+## Hipótesis
+
+- El problema principal de rendimiento móvil viene de JavaScript inicial, imágenes sobredimensionadas y DOM grande, no del tiempo de respuesta del documento.
+- Al publicar desde Lovable el sitemap saneado, Search Console debería recibir menos URLs con canonical inesperada o contenido genérico.
+- Resolver `~api/analytics` debería limpiar errores de consola y mejorar Best Practices.
+- Las city pages pueden ser útiles como landings reales por mercado, pero hoy son riesgo de contenido fino/duplicado.
+
+## Tareas pendientes
+
+- Publicar desde Lovable frontend y Edge Functions `sitemap`/`prerender`.
+- Revalidar producción tras Lovable:
+  - `/sitemap.xml` no debe listar legales ni city pages fallback.
+  - Googlebot en `/en/privacy` debe recibir `Privacy Policy`, canonical propio y `noindex, follow`.
+  - `/clientes` no debe generar 404 por assets con espacios.
+- Resolver o desactivar la llamada a `~api/analytics`.
+- Abrir bloque P1 de Core Web Vitals: LCP home y `/clientes`, JS inicial, imágenes responsivas y DOM de logos.
+- Decidir destino final de city pages: contenido real, redirect o noindex.
+- Unificar o degradar explícitamente `src/seo/route-map.ts` para evitar contradicciones futuras.
   - Googlebot en `https://winerim.wine/en/pricing?codex=a98e8c6` sigue recibiendo `html lang="es"` y canonical `https://winerim.wine`.
 - Lovable sigue redirigiendo a login en el navegador de Codex: `https://lovable.dev/login?redirect=%2Fprojects%2F2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
 

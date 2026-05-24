@@ -34,7 +34,7 @@ import logoWyndhamHotel from "@/assets/logos/hotels-white/wyndham.png";
 import logoMyrHotel from "@/assets/logos/hotels-white/myr.png";
 import logoFourSeasonsHotel from "@/assets/logos/hotels-white/fourseasons.png";
 import logoPalladiumHotel from "@/assets/logos/hotels-white/palladium.png";
-import logoEmHotel from "@/assets/logos/hotels-white/em_hotels.png";
+import logoEmHotel from "@/assets/logos/hotels-white/em-hotels.png";
 
 interface LogoItem {
   name: string;

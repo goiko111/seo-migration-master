@@ -57,7 +57,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     // ── Environment-aware robots ──
     // Staging/preview domains are ALWAYS noindex, regardless of the prop
     const shouldNoindex = noindex || !isProduction();
-    if (shouldNoindex) {
+    if (noindex) {
+      setMeta("robots", "noindex, follow", true);
+    } else if (shouldNoindex) {
       setMeta("robots", "noindex, nofollow", true);
     } else {
       setMeta("robots", "index, follow", true);

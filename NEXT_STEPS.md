@@ -213,3 +213,56 @@
 15. Deuda separada:
    - Resolver lint global.
    - Revisar avisos de seguridad de Lovable.
+
+## Actualización 2026-05-24: auditoría profunda web
+
+## Hechos
+
+- Informe nuevo: `src/seo/WEB_DEEP_AUDIT_2026-05-24.md`.
+- Worker desplegado: `winerim-proxy` Version ID `4cc5425b-cc8d-4de4-a72f-d9370b355426`.
+- Producción ya emite `X-Robots-Tag: noindex, follow` en `/privacidad` y `/en/privacy` para Googlebot.
+- Cambios locales pendientes de Lovable:
+  - Sitemap sin legales ni city pages fallback.
+  - Prerender legal exacto con canonical propio en 6 idiomas.
+  - Frontend legal con `noindex`.
+  - Assets de logos renombrados para evitar espacios/caracteres especiales.
+- Lighthouse mobile actual:
+  - Home Performance 58, LCP 12,9 s.
+  - `/clientes` Performance 57, LCP 12,1 s.
+- 404 detectado pendiente: `https://winerim.wine/~api/analytics`.
+
+## Decisiones
+
+- Prioridad inmediata: publicar y revalidar los cambios SEO/UX ya implementados antes de seguir ampliando biblioteca del vino.
+- Las city pages deben salir del sitemap mientras no tengan prerender real.
+- Las legales quedan accesibles pero no indexables.
+- La siguiente mejora transversal debe centrarse en Core Web Vitals y errores de consola.
+
+## Hipótesis
+
+- Publicar el sitemap limpio reducirá URLs descubiertas sin contenido útil y canonicals inesperadas.
+- Reducir JS inicial y optimizar imágenes tendrá más impacto en LCP que tocar servidor.
+- `/clientes` necesita estrategia de carga progresiva o paginación/virtualización si se mantienen cientos de logos visibles.
+
+## Tareas pendientes inmediatas
+
+1. Publicar desde Lovable:
+   - Frontend.
+   - Edge Function `sitemap`.
+   - Edge Function `prerender`.
+2. Revalidar tras Lovable:
+   - `/sitemap.xml` sin legales ni city pages fallback.
+   - `/en/privacy` como Googlebot con título `Privacy Policy`, canonical `/en/privacy` y `noindex, follow`.
+   - `/clientes` sin 404 de logos.
+3. Reenviar `/sitemap.xml` en Search Console tras validar producción.
+4. Resolver `~api/analytics`.
+5. Abrir bloque Core Web Vitals:
+   - Home LCP.
+   - `/clientes` LCP y DOM.
+   - Imágenes responsive.
+   - JS inicial no usado.
+6. Decidir destino definitivo de city pages:
+   - Landing real por ciudad/idioma.
+   - Redirect a página canónica superior.
+   - `noindex`.
+7. Resolver contradicción de `src/seo/route-map.ts` frente al mapa real `de`/`pt`.

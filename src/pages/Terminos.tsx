@@ -85,7 +85,7 @@ const Terminos = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/terminos")}`} hreflang={allLangPaths("/terminos")} />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/terminos")}`} hreflang={allLangPaths("/terminos")} noindex />
       <main className="pt-32 pb-24 max-w-3xl mx-auto px-6 md:px-12">
         <h1 className="font-heading text-3xl md:text-4xl font-bold mb-8">{t.title}</h1>
         <div className="prose prose-sm prose-invert max-w-none prose-headings:font-heading prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground">

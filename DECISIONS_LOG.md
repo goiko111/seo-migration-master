@@ -318,6 +318,50 @@
 - Retirar o dejar inactivo `/sitemap_index.xml` en Search Console si la UI lo permite.
 - Desplegar `sitemap` y `prerender` saneados desde Lovable.
 - Reenviar `/sitemap.xml` cuando producción ya refleje esos cambios.
+
+## 2026-05-24
+
+### Auditoría profunda web, rendimiento y señales orgánicas
+
+#### Hechos
+
+- El usuario pidió revisar la web en profundidad antes de continuar con biblioteca del vino.
+- Se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md` antes de continuar.
+- Se creó `src/seo/WEB_DEEP_AUDIT_2026-05-24.md`.
+- Lighthouse mobile midió performance baja en home y `/clientes`:
+  - Home: Performance 58, LCP 12,9 s.
+  - `/clientes`: Performance 57, LCP 12,1 s.
+- Se detectaron 122 URLs programáticas de ciudad en `bot-fallback`.
+- Se detectó que páginas legales localizadas aparecían en sitemap y devolvían a Googlebot contenido/canonical de home.
+- Se detectó 404 de `~api/analytics`.
+- Se detectó 404 de asset en `/clientes` por nombres de archivo de logos con espacios.
+- Se implementó saneamiento local de sitemap, legales, prerender y nombres de assets.
+- Se desplegó Cloudflare Worker `winerim-proxy` con Version ID `4cc5425b-cc8d-4de4-a72f-d9370b355426`.
+- Producción ya emite `X-Robots-Tag: noindex, follow` en legales tras el despliegue Worker.
+
+#### Decisiones
+
+- Las páginas legales no deben competir en SEO: se mantienen accesibles, pero con `noindex, follow` y fuera de sitemap.
+- El `noindex` explícito de frontend debe ser `noindex, follow`; staging mantiene `noindex, nofollow`.
+- Las familias city/programmatic sin HTML SEO válido salen del sitemap hasta que tengan contenido real o destino definitivo.
+- No añadir más superficie indexable masiva sin asegurar primero prerender, canonical, H1 y contenido específico.
+- Sanear basenames de assets públicos para evitar rutas generadas con espacios o caracteres problemáticos.
+
+#### Hipótesis
+
+- El LCP móvil está condicionado por JS e imágenes, no por TTFB.
+- El sitemap saneado reducirá ruido de Search Console cuando se publique desde Lovable y se reenvíe.
+- La galería de clientes necesita optimización específica por volumen de logos y DOM.
+- `~api/analytics` puede depender del entorno Lovable/origen y requiere revisión separada.
+
+#### Tareas pendientes
+
+- Publicar frontend y Edge Functions desde Lovable.
+- Revalidar sitemap, legales y assets en producción tras Lovable.
+- Resolver `~api/analytics`.
+- Planificar bloque Core Web Vitals.
+- Decidir destino de city pages.
+- Actualizar o retirar como fuente operativa `src/seo/route-map.ts` si sigue contradiciendo `de`/`pt`.
 - Corregir FAQPage duplicado.
 - Optimizar LCP móvil de la home.
 

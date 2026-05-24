@@ -76,6 +76,18 @@ const LEGACY_DIRECT_REDIRECTS = {
 const NOINDEX_ROUTES = new Set([
   '/gracias',
   '/unsubscribe',
+  '/privacidad',
+  '/terminos',
+  '/en/privacy',
+  '/en/terms',
+  '/it/privacy',
+  '/it/termini',
+  '/fr/confidentialite',
+  '/fr/conditions',
+  '/de/datenschutz',
+  '/de/agb',
+  '/pt/privacidade',
+  '/pt/termos',
 ]);
 
 // ─── SEO EXACT routes (indexable, sitemap) ───

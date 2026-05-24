@@ -39,6 +39,7 @@ interface PageMeta {
   lang: string;
   type: string;
   schemaType: string;
+  robots?: string;
 }
 
 interface PageContent {
@@ -1358,10 +1359,230 @@ const WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES: Record<string, { meta: PageMeta;
   },
 };
 
+interface LegalStaticPageSeed {
+  path: string;
+  lang: WineLibraryLang;
+  title: string;
+  description: string;
+  sections: { heading: string; content: string }[];
+}
+
+function makeLegalStaticPage(seed: LegalStaticPageSeed): { meta: PageMeta; content: PageContent } {
+  const homePath = seed.lang === 'es' ? '/' : `/${seed.lang}`;
+  const demoPath = staticLocalizedPath(seed.lang, '/demo') || '/demo';
+  const contactPath = staticLocalizedPath(seed.lang, '/contacto') || '/contacto';
+
+  return {
+    meta: {
+      title: `${seed.title} | Winerim`,
+      description: seed.description,
+      canonical: `${SITE}${seed.path}`,
+      ogImage: OG_IMAGE,
+      lang: seed.lang,
+      type: 'website',
+      schemaType: 'WebPage',
+      robots: 'noindex, follow',
+    },
+    content: {
+      h1: seed.title,
+      intro: seed.description,
+      sections: seed.sections,
+      faqs: [],
+      breadcrumbs: [
+        { name: seed.lang === 'es' ? 'Inicio' : 'Home', url: `${SITE}${homePath}` },
+        { name: seed.title, url: `${SITE}${seed.path}` },
+      ],
+      internalLinks: [
+        { label: 'Winerim', url: homePath },
+        { label: 'Demo', url: demoPath },
+        { label: 'Contacto', url: contactPath },
+      ],
+    },
+  };
+}
+
+const LEGAL_STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = Object.fromEntries([
+  makeLegalStaticPage({
+    path: '/privacidad',
+    lang: 'es',
+    title: 'Política de Privacidad',
+    description: 'Política de privacidad de Winerim.',
+    sections: [
+      { heading: '1. Responsable del tratamiento', content: 'Winerim S.L. es responsable del tratamiento de los datos personales recogidos a través de este sitio web.' },
+      { heading: '2. Datos recogidos', content: 'Recogemos los datos que nos proporcionas voluntariamente a través de nuestros formularios de contacto y demo.' },
+      { heading: '3. Finalidad', content: 'Los datos se utilizan exclusivamente para gestionar las solicitudes de información, demos y contacto comercial.' },
+      { heading: '4. Base legal', content: 'El tratamiento se basa en el consentimiento del interesado al enviar el formulario.' },
+      { heading: '5. Derechos', content: 'Puedes ejercer tus derechos de acceso, rectificación y supresión enviando un email a info@winerim.com.' },
+      { heading: '6. Cookies', content: 'Este sitio utiliza cookies propias y de terceros para mejorar la experiencia de navegación.' },
+      { heading: '7. Conservación', content: 'Los datos se conservarán mientras exista interés mutuo y durante los plazos legalmente establecidos.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/terminos',
+    lang: 'es',
+    title: 'Términos de Uso',
+    description: 'Términos y condiciones de uso de Winerim.',
+    sections: [
+      { heading: '1. Titularidad', content: 'Este sitio web es propiedad de Winerim S.L. El acceso y uso del sitio implica la aceptación de estos términos.' },
+      { heading: '2. Uso del servicio', content: 'El usuario se compromete a utilizar el sitio web y sus servicios de forma lícita.' },
+      { heading: '3. Propiedad intelectual', content: 'Todos los contenidos del sitio son propiedad de Winerim o de sus licenciantes.' },
+      { heading: '4. Limitación de responsabilidad', content: 'Winerim no se responsabiliza de los daños que puedan derivarse del uso de este sitio web.' },
+      { heading: '5. Modificaciones', content: 'Winerim se reserva el derecho de modificar estos términos en cualquier momento.' },
+      { heading: '6. Legislación aplicable', content: 'Estos términos se rigen por la legislación española.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/en/privacy',
+    lang: 'en',
+    title: 'Privacy Policy',
+    description: 'Winerim privacy policy.',
+    sections: [
+      { heading: '1. Data Controller', content: 'Winerim S.L. is the data controller for personal data collected through this website.' },
+      { heading: '2. Data Collected', content: 'We collect data you voluntarily provide through our contact and demo forms.' },
+      { heading: '3. Purpose', content: 'Data is used exclusively to manage information requests, demos and commercial contact.' },
+      { heading: '4. Legal Basis', content: "Processing is based on the data subject's consent when submitting the form." },
+      { heading: '5. Rights', content: 'You can exercise your rights of access, rectification and deletion by emailing info@winerim.com.' },
+      { heading: '6. Cookies', content: 'This site uses first and third-party cookies to improve the browsing experience.' },
+      { heading: '7. Retention', content: 'Data will be retained as long as there is mutual interest and for legally established periods.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/en/terms',
+    lang: 'en',
+    title: 'Terms of Use',
+    description: 'Terms and conditions of use for Winerim.',
+    sections: [
+      { heading: '1. Ownership', content: 'This website is owned by Winerim S.L. Access and use of the site implies acceptance of these terms.' },
+      { heading: '2. Use of Service', content: 'The user agrees to use the website and its services lawfully.' },
+      { heading: '3. Intellectual Property', content: 'All content on the site is the property of Winerim or its licensors.' },
+      { heading: '4. Limitation of Liability', content: 'Winerim is not responsible for damages that may arise from the use of this website.' },
+      { heading: '5. Modifications', content: 'Winerim reserves the right to modify these terms at any time.' },
+      { heading: '6. Applicable Law', content: 'These terms are governed by Spanish law.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/it/privacy',
+    lang: 'it',
+    title: 'Informativa sulla Privacy',
+    description: 'Informativa sulla privacy di Winerim.',
+    sections: [
+      { heading: '1. Titolare del trattamento', content: 'Winerim S.L. è il titolare del trattamento dei dati personali raccolti attraverso questo sito web.' },
+      { heading: '2. Dati raccolti', content: 'Raccogliamo i dati che ci fornisci volontariamente attraverso i nostri moduli di contatto e demo.' },
+      { heading: '3. Finalità', content: 'I dati vengono utilizzati esclusivamente per gestire le richieste di informazioni, demo e contatti commerciali.' },
+      { heading: '4. Base giuridica', content: "Il trattamento si basa sul consenso dell'interessato al momento dell'invio del modulo." },
+      { heading: '5. Diritti', content: "Puoi esercitare i tuoi diritti di accesso, rettifica e cancellazione inviando un'email a info@winerim.com." },
+      { heading: '6. Cookie', content: "Questo sito utilizza cookie propri e di terze parti per migliorare l'esperienza di navigazione." },
+      { heading: '7. Conservazione', content: 'I dati saranno conservati finché esiste un interesse reciproco e per i periodi legalmente stabiliti.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/it/termini',
+    lang: 'it',
+    title: 'Termini di Utilizzo',
+    description: "Termini e condizioni d'uso di Winerim.",
+    sections: [
+      { heading: '1. Titolarità', content: "Questo sito web è di proprietà di Winerim S.L. L'accesso e l'utilizzo del sito implica l'accettazione di questi termini." },
+      { heading: '2. Utilizzo del servizio', content: "L'utente si impegna a utilizzare il sito web e i suoi servizi in modo lecito." },
+      { heading: '3. Proprietà intellettuale', content: 'Tutti i contenuti del sito sono di proprietà di Winerim o dei suoi licenzianti.' },
+      { heading: '4. Limitazione di responsabilità', content: "Winerim non è responsabile dei danni che possano derivare dall'uso di questo sito web." },
+      { heading: '5. Modifiche', content: 'Winerim si riserva il diritto di modificare questi termini in qualsiasi momento.' },
+      { heading: '6. Legge applicabile', content: 'Questi termini sono regolati dalla legge spagnola.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/fr/confidentialite',
+    lang: 'fr',
+    title: 'Politique de Confidentialité',
+    description: 'Politique de confidentialité de Winerim.',
+    sections: [
+      { heading: '1. Responsable du traitement', content: 'Winerim S.L. est responsable du traitement des données personnelles collectées via ce site web.' },
+      { heading: '2. Données collectées', content: 'Nous collectons les données que vous nous fournissez volontairement via nos formulaires de contact et de démo.' },
+      { heading: '3. Finalité', content: "Les données sont utilisées exclusivement pour gérer les demandes d'information, démos et contacts commerciaux." },
+      { heading: '4. Base légale', content: 'Le traitement est basé sur le consentement de la personne concernée lors de la soumission du formulaire.' },
+      { heading: '5. Droits', content: "Vous pouvez exercer vos droits d'accès, rectification et suppression en envoyant un email à info@winerim.com." },
+      { heading: '6. Cookies', content: "Ce site utilise des cookies propres et tiers pour améliorer l'expérience de navigation." },
+      { heading: '7. Conservation', content: "Les données seront conservées tant qu'il existe un intérêt mutuel et pendant les délais légalement établis." },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/fr/conditions',
+    lang: 'fr',
+    title: "Conditions d'Utilisation",
+    description: "Conditions générales d'utilisation de Winerim.",
+    sections: [
+      { heading: '1. Propriété', content: "Ce site web est la propriété de Winerim S.L. L'accès et l'utilisation du site impliquent l'acceptation de ces conditions." },
+      { heading: '2. Utilisation du service', content: "L'utilisateur s'engage à utiliser le site web et ses services de manière licite." },
+      { heading: '3. Propriété intellectuelle', content: 'Tout le contenu du site est la propriété de Winerim ou de ses concédants.' },
+      { heading: '4. Limitation de responsabilité', content: "Winerim n'est pas responsable des dommages pouvant résulter de l'utilisation de ce site web." },
+      { heading: '5. Modifications', content: 'Winerim se réserve le droit de modifier ces conditions à tout moment.' },
+      { heading: '6. Droit applicable', content: 'Ces conditions sont régies par le droit espagnol.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/de/datenschutz',
+    lang: 'de',
+    title: 'Datenschutzrichtlinie',
+    description: 'Datenschutzrichtlinie von Winerim.',
+    sections: [
+      { heading: '1. Verantwortlicher', content: 'Winerim S.L. ist verantwortlich für die Verarbeitung der über diese Website erhobenen personenbezogenen Daten.' },
+      { heading: '2. Erhobene Daten', content: 'Wir erheben Daten, die Sie uns freiwillig über unsere Kontakt- und Demo-Formulare zur Verfügung stellen.' },
+      { heading: '3. Zweck', content: 'Die Daten werden ausschließlich zur Bearbeitung von Informationsanfragen, Demos und geschäftlichen Kontakten verwendet.' },
+      { heading: '4. Rechtsgrundlage', content: 'Die Verarbeitung basiert auf der Einwilligung der betroffenen Person bei Absendung des Formulars.' },
+      { heading: '5. Rechte', content: 'Sie können Ihre Rechte auf Auskunft, Berichtigung und Löschung per E-Mail an info@winerim.com ausüben.' },
+      { heading: '6. Cookies', content: 'Diese Website verwendet eigene und Drittanbieter-Cookies zur Verbesserung des Nutzererlebnisses.' },
+      { heading: '7. Speicherdauer', content: 'Die Daten werden aufbewahrt, solange ein beiderseitiges Interesse besteht, sowie für die gesetzlich vorgeschriebenen Fristen.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/de/agb',
+    lang: 'de',
+    title: 'Nutzungsbedingungen',
+    description: 'Nutzungsbedingungen von Winerim.',
+    sections: [
+      { heading: '1. Eigentum', content: 'Diese Website ist Eigentum von Winerim S.L. Der Zugang und die Nutzung der Website setzen die Annahme dieser Bedingungen voraus.' },
+      { heading: '2. Nutzung des Dienstes', content: 'Der Nutzer verpflichtet sich, die Website und ihre Dienste rechtmäßig zu nutzen.' },
+      { heading: '3. Geistiges Eigentum', content: 'Alle Inhalte der Website sind Eigentum von Winerim oder ihrer Lizenzgeber.' },
+      { heading: '4. Haftungsbeschränkung', content: 'Winerim haftet nicht für Schäden, die aus der Nutzung dieser Website entstehen können.' },
+      { heading: '5. Änderungen', content: 'Winerim behält sich das Recht vor, diese Bedingungen jederzeit zu ändern.' },
+      { heading: '6. Anwendbares Recht', content: 'Diese Bedingungen unterliegen dem spanischen Recht.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/pt/privacidade',
+    lang: 'pt',
+    title: 'Política de Privacidade',
+    description: 'Política de privacidade da Winerim.',
+    sections: [
+      { heading: '1. Responsável pelo tratamento', content: 'A Winerim S.L. é responsável pelo tratamento dos dados pessoais recolhidos através deste website.' },
+      { heading: '2. Dados recolhidos', content: 'Recolhemos os dados que nos fornece voluntariamente através dos nossos formulários de contacto e demo.' },
+      { heading: '3. Finalidade', content: 'Os dados são utilizados exclusivamente para gerir pedidos de informação, demos e contacto comercial.' },
+      { heading: '4. Base legal', content: 'O tratamento baseia-se no consentimento do titular dos dados ao enviar o formulário.' },
+      { heading: '5. Direitos', content: 'Pode exercer os seus direitos de acesso, retificação e eliminação enviando um e-mail para info@winerim.com.' },
+      { heading: '6. Cookies', content: 'Este website utiliza cookies próprios e de terceiros para melhorar a experiência de navegação.' },
+      { heading: '7. Conservação', content: 'Os dados serão conservados enquanto existir interesse mútuo e durante os prazos legalmente estabelecidos.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/pt/termos',
+    lang: 'pt',
+    title: 'Termos de Utilização',
+    description: 'Termos e condições de utilização da Winerim.',
+    sections: [
+      { heading: '1. Titularidade', content: 'Este website é propriedade da Winerim S.L. O acesso e utilização do website implica a aceitação destes termos.' },
+      { heading: '2. Utilização do serviço', content: 'O utilizador compromete-se a utilizar o website e os seus serviços de forma lícita.' },
+      { heading: '3. Propriedade intelectual', content: 'Todos os conteúdos do website são propriedade da Winerim ou dos seus licenciadores.' },
+      { heading: '4. Limitação de responsabilidade', content: 'A Winerim não se responsabiliza pelos danos que possam resultar da utilização deste website.' },
+      { heading: '5. Alterações', content: 'A Winerim reserva-se o direito de alterar estes termos a qualquer momento.' },
+      { heading: '6. Legislação aplicável', content: 'Estes termos regem-se pela legislação espanhola.' },
+    ],
+  }),
+].map((page) => [page.meta.canonical.replace(SITE, '') || '/', page]));
+
 // ── Static page definitions ──
 // Each page has full semantic content for bots — independent of React hydration.
 const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   ...WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES,
+  ...LEGAL_STATIC_PAGES,
   '/': {
     meta: {
       title: 'Software de IA para Restaurantes — Vende Más Vino | Winerim',
@@ -3028,7 +3249,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(meta.title)}</title>
   <meta name="description" content="${escapeAttr(meta.description)}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="${escapeAttr(meta.robots || 'index, follow')}">
   <link rel="canonical" href="${meta.canonical}">
 ${hreflangHTML}
   
