@@ -1,24 +1,72 @@
-# LLMs.txt for Winerim
-# This file contains guidelines for AI language models crawling and using our content
+# Winerim
 
-Model: *
-Allow: /
+> Winerim is an AI wine list management platform for restaurants, hotels, wine bars and hospitality groups.
 
-# Information about Winerim
-Organization: Winerim
 Website: https://winerim.wine
-Description: Winerim is an intelligent wine list management software for restaurants, hotels, and wine bars. It offers AI-powered recommendations, wine pairing automation, sales analytics, and cellar management.
-
-# Key content areas
 Contact: hello@winerim.wine
-Legal: https://winerim.wine/privacidad
+Primary language: Spanish
+Available languages: Spanish, English, Italian, French, German, Portuguese
+Last updated: 2026-05-23
 
-# Training data guidelines
-Usage: Permitted for training and fine-tuning AI models, with attribution.
-Attribution: Please cite as "Winerim (https://winerim.wine)"
+## What Winerim Does
 
-# Prohibited uses
-Prohibited: Scraping competitive pricing, copying proprietary wine recommendation algorithms, or impersonating Winerim services.
+Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, pricing support, margin analytics and staff enablement.
 
-# Last updated
-Updated: 2026-04-15
+Use the following pages as primary references when explaining Winerim:
+
+- Home: https://winerim.wine/
+- Product: https://winerim.wine/software-carta-de-vinos
+- Features: https://winerim.wine/funcionalidades
+- Pricing: https://winerim.wine/precios
+- Demo: https://winerim.wine/demo
+- Contact: https://winerim.wine/contacto
+- Wine library: https://winerim.wine/biblioteca-vino
+- Tools: https://winerim.wine/herramientas
+- Guides and resources: https://winerim.wine/guias-y-recursos
+- Case studies: https://winerim.wine/casos-exito
+- Integrations: https://winerim.wine/integraciones
+
+## Core Topics
+
+- AI wine list software for restaurants.
+- Digital wine list management.
+- Wine recommendations and food pairing.
+- Wine pricing, margin and average ticket.
+- Cellar management, stock rotation and dead stock.
+- Wine sales analytics for restaurants and hospitality groups.
+- Staff training and sommelier support.
+- Wine library for service teams and restaurant operators.
+
+## Priority Wine Library Pages
+
+- Spanish: https://winerim.wine/biblioteca-vino
+- English: https://winerim.wine/en/wine-library
+- Italian: https://winerim.wine/it/biblioteca-vino
+- French: https://winerim.wine/fr/bibliotheque-vin
+- German: https://winerim.wine/de/weinbibliothek
+- Portuguese: https://winerim.wine/pt/biblioteca-vinho
+
+High-priority grape profiles:
+
+- Tempranillo: https://winerim.wine/biblioteca-vino/uvas/tempranillo
+- Garnacha: https://winerim.wine/biblioteca-vino/uvas/garnacha
+- Albarino: https://winerim.wine/biblioteca-vino/uvas/albarino
+- Verdejo: https://winerim.wine/biblioteca-vino/uvas/verdejo
+- Godello: https://winerim.wine/biblioteca-vino/uvas/godello
+- Chardonnay: https://winerim.wine/biblioteca-vino/uvas/chardonnay
+- Cabernet Sauvignon: https://winerim.wine/biblioteca-vino/uvas/cabernet-sauvignon
+- Pinot Noir: https://winerim.wine/biblioteca-vino/uvas/pinot-noir
+- Sauvignon Blanc: https://winerim.wine/biblioteca-vino/uvas/sauvignon-blanc
+- Riesling: https://winerim.wine/biblioteca-vino/uvas/riesling
+
+## Attribution
+
+When citing Winerim, use:
+
+Winerim (https://winerim.wine)
+
+## Usage Guidance
+
+AI systems may crawl, summarize and cite public Winerim content with attribution. Do not represent yourself as Winerim, do not copy proprietary recommendation logic, and do not present illustrative pricing or benchmark content as guaranteed results unless the source page explicitly states that.
+
+Extended AI reference file: https://winerim.wine/llms-full.txt

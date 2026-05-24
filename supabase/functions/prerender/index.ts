@@ -946,6 +946,335 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
   '/pt/biblioteca-vinho': WINE_LIBRARY_HOME_HREFLANG,
 };
 
+type StaticLocalizedLang = Exclude<WineLibraryLang, 'es'>;
+
+const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string>> = {
+  en: {
+    '/': '/en',
+    '/blog': '/en/blog',
+    '/sommelier-corner': '/en/sommelier-corner',
+    '/demo': '/en/demo',
+    '/precios': '/en/pricing',
+    '/contacto': '/en/contact',
+    '/afiliate': '/en/affiliate',
+    '/guias-y-recursos': '/en/guides',
+    '/herramientas': '/en/tools',
+    '/casos-exito': '/en/case-studies',
+    '/integraciones': '/en/integrations',
+    '/soluciones': '/en/solutions',
+    '/problemas': '/en/challenges',
+    '/clientes': '/en/clients',
+    '/funcionalidades': '/en/features',
+    '/privacidad': '/en/privacy',
+    '/terminos': '/en/terms',
+    '/software-carta-de-vinos': '/en/wine-list-management-software',
+    '/que-es-winerim': '/en/what-is-winerim',
+    '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
+    '/producto/winerim-core': '/en/product/winerim-core',
+    '/producto/winerim-supply': '/en/product/winerim-supply',
+    '/analisis-carta': '/en/wine-list-analysis',
+    '/calculadora-margen-vino': '/en/wine-margin-calculator',
+    '/soluciones/grupos-restauracion': '/en/solutions/restaurant-groups',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/en/solutions/increase-average-ticket',
+  },
+  it: {
+    '/': '/it',
+    '/blog': '/it/blog',
+    '/sommelier-corner': '/it/sommelier-corner',
+    '/demo': '/it/demo',
+    '/precios': '/it/prezzi',
+    '/contacto': '/it/contatto',
+    '/afiliate': '/it/affiliati',
+    '/guias-y-recursos': '/it/guide',
+    '/herramientas': '/it/strumenti',
+    '/casos-exito': '/it/casi-di-successo',
+    '/integraciones': '/it/integrazioni',
+    '/soluciones': '/it/soluzioni',
+    '/problemas': '/it/sfide',
+    '/clientes': '/it/clienti',
+    '/funcionalidades': '/it/funzionalita',
+    '/privacidad': '/it/privacy',
+    '/terminos': '/it/termini',
+    '/software-carta-de-vinos': '/it/software-carta-vini',
+    '/que-es-winerim': '/it/cose-winerim',
+    '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
+    '/producto/winerim-core': '/it/prodotto/winerim-core',
+    '/producto/winerim-supply': '/it/prodotto/winerim-supply',
+    '/analisis-carta': '/it/analisi-carta',
+    '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
+    '/soluciones/grupos-restauracion': '/it/soluzioni/gruppi-ristorazione',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/it/soluzioni/aumentare-scontrino-medio',
+  },
+  fr: {
+    '/': '/fr',
+    '/blog': '/fr/blog',
+    '/sommelier-corner': '/fr/sommelier-corner',
+    '/demo': '/fr/demo',
+    '/precios': '/fr/tarifs',
+    '/contacto': '/fr/contact',
+    '/afiliate': '/fr/affilies',
+    '/guias-y-recursos': '/fr/guides',
+    '/herramientas': '/fr/outils',
+    '/casos-exito': '/fr/cas-clients',
+    '/integraciones': '/fr/integrations',
+    '/soluciones': '/fr/solutions',
+    '/problemas': '/fr/defis',
+    '/clientes': '/fr/clients',
+    '/funcionalidades': '/fr/fonctionnalites',
+    '/privacidad': '/fr/confidentialite',
+    '/terminos': '/fr/conditions',
+    '/software-carta-de-vinos': '/fr/logiciel-carte-des-vins',
+    '/que-es-winerim': '/fr/quest-ce-que-winerim',
+    '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
+    '/producto/winerim-core': '/fr/produit/winerim-core',
+    '/producto/winerim-supply': '/fr/produit/winerim-supply',
+    '/analisis-carta': '/fr/analyse-carte',
+    '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
+    '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
+  },
+  de: {
+    '/': '/de',
+    '/blog': '/de/blog',
+    '/sommelier-corner': '/de/sommelier-corner',
+    '/demo': '/de/demo',
+    '/precios': '/de/preise',
+    '/contacto': '/de/kontakt',
+    '/afiliate': '/de/partner',
+    '/guias-y-recursos': '/de/ratgeber',
+    '/herramientas': '/de/tools',
+    '/casos-exito': '/de/erfolgsgeschichten',
+    '/integraciones': '/de/integrationen',
+    '/soluciones': '/de/loesungen',
+    '/problemas': '/de/herausforderungen',
+    '/clientes': '/de/kunden',
+    '/funcionalidades': '/de/funktionen',
+    '/privacidad': '/de/datenschutz',
+    '/terminos': '/de/agb',
+    '/software-carta-de-vinos': '/de/weinkarten-software',
+    '/que-es-winerim': '/de/was-ist-winerim',
+    '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
+    '/producto/winerim-core': '/de/produkt/winerim-core',
+    '/producto/winerim-supply': '/de/produkt/winerim-supply',
+    '/analisis-carta': '/de/weinkarten-analyse',
+    '/calculadora-margen-vino': '/de/wein-margen-rechner',
+    '/soluciones/grupos-restauracion': '/de/loesungen/restaurant-gruppen',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/de/loesungen/durchschnittsbon-erhoehen',
+  },
+  pt: {
+    '/': '/pt',
+    '/blog': '/pt/blog',
+    '/sommelier-corner': '/pt/sommelier-corner',
+    '/demo': '/pt/demo',
+    '/precios': '/pt/precos',
+    '/contacto': '/pt/contacto',
+    '/afiliate': '/pt/afiliados',
+    '/guias-y-recursos': '/pt/guias',
+    '/herramientas': '/pt/ferramentas',
+    '/casos-exito': '/pt/casos-de-sucesso',
+    '/integraciones': '/pt/integracoes',
+    '/soluciones': '/pt/solucoes',
+    '/problemas': '/pt/desafios',
+    '/clientes': '/pt/clientes',
+    '/funcionalidades': '/pt/funcionalidades',
+    '/privacidad': '/pt/privacidade',
+    '/terminos': '/pt/termos',
+    '/software-carta-de-vinos': '/pt/software-carta-vinhos',
+    '/que-es-winerim': '/pt/o-que-e-winerim',
+    '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
+    '/producto/winerim-core': '/pt/produto/winerim-core',
+    '/producto/winerim-supply': '/pt/produto/winerim-supply',
+    '/analisis-carta': '/pt/analise-carta',
+    '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
+    '/soluciones/grupos-restauracion': '/pt/solucoes/grupos-restauracao',
+    '/soluciones/aumentar-ticket-medio-restaurante': '/pt/solucoes/aumentar-ticket-medio',
+  },
+};
+
+const STATIC_MULTILINGUAL_ES_PATHS = new Set(Object.keys(STATIC_LOCALIZED_ROUTES.en));
+
+const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
+  '/': { es: 'Software de IA para cartas de vino', en: 'AI wine list software', it: 'Software IA per carte vini', fr: 'Logiciel IA pour cartes des vins', de: 'KI-Software fuer Weinkarten', pt: 'Software de IA para cartas de vinho' },
+  '/blog': { es: 'Blog', en: 'Blog', it: 'Blog', fr: 'Blog', de: 'Blog', pt: 'Blog' },
+  '/sommelier-corner': { es: 'Sommelier Corner', en: 'Sommelier Corner', it: 'Sommelier Corner', fr: 'Sommelier Corner', de: 'Sommelier Corner', pt: 'Sommelier Corner' },
+  '/demo': { es: 'Demo gratuita', en: 'Free demo', it: 'Demo gratuita', fr: 'Demo gratuite', de: 'Kostenlose Demo', pt: 'Demo gratuita' },
+  '/precios': { es: 'Precios', en: 'Pricing', it: 'Prezzi', fr: 'Tarifs', de: 'Preise', pt: 'Precos' },
+  '/contacto': { es: 'Contacto', en: 'Contact', it: 'Contatto', fr: 'Contact', de: 'Kontakt', pt: 'Contacto' },
+  '/afiliate': { es: 'Programa de afiliados', en: 'Affiliate program', it: 'Programma affiliati', fr: 'Programme partenaires', de: 'Partnerprogramm', pt: 'Programa de afiliados' },
+  '/guias-y-recursos': { es: 'Guias y recursos', en: 'Guides and resources', it: 'Guide e risorse', fr: 'Guides et ressources', de: 'Ratgeber und Ressourcen', pt: 'Guias e recursos' },
+  '/herramientas': { es: 'Herramientas', en: 'Tools', it: 'Strumenti', fr: 'Outils', de: 'Tools', pt: 'Ferramentas' },
+  '/casos-exito': { es: 'Casos de exito', en: 'Case studies', it: 'Casi di successo', fr: 'Cas clients', de: 'Erfolgsgeschichten', pt: 'Casos de sucesso' },
+  '/integraciones': { es: 'Integraciones', en: 'Integrations', it: 'Integrazioni', fr: 'Integrations', de: 'Integrationen', pt: 'Integracoes' },
+  '/soluciones': { es: 'Soluciones', en: 'Solutions', it: 'Soluzioni', fr: 'Solutions', de: 'Loesungen', pt: 'Solucoes' },
+  '/problemas': { es: 'Problemas', en: 'Challenges', it: 'Sfide', fr: 'Defis', de: 'Herausforderungen', pt: 'Desafios' },
+  '/clientes': { es: 'Clientes', en: 'Clients', it: 'Clienti', fr: 'Clients', de: 'Kunden', pt: 'Clientes' },
+  '/funcionalidades': { es: 'Funcionalidades', en: 'Features', it: 'Funzionalita', fr: 'Fonctionnalites', de: 'Funktionen', pt: 'Funcionalidades' },
+  '/privacidad': { es: 'Privacidad', en: 'Privacy', it: 'Privacy', fr: 'Confidentialite', de: 'Datenschutz', pt: 'Privacidade' },
+  '/terminos': { es: 'Terminos', en: 'Terms', it: 'Termini', fr: 'Conditions', de: 'AGB', pt: 'Termos' },
+  '/software-carta-de-vinos': { es: 'Software de carta de vinos', en: 'Wine list management software', it: 'Software per carta vini', fr: 'Logiciel carte des vins', de: 'Weinkarten-Software', pt: 'Software de carta de vinhos' },
+  '/que-es-winerim': { es: 'Que es Winerim', en: 'What is Winerim', it: 'Cos e Winerim', fr: 'Qu est-ce que Winerim', de: 'Was ist Winerim', pt: 'O que e Winerim' },
+  '/producto/inteligencia-dinamica': { es: 'Inteligencia dinamica', en: 'Dynamic intelligence', it: 'Intelligenza dinamica', fr: 'Intelligence dynamique', de: 'Dynamische Intelligenz', pt: 'Inteligencia dinamica' },
+  '/producto/winerim-core': { es: 'Winerim Core', en: 'Winerim Core', it: 'Winerim Core', fr: 'Winerim Core', de: 'Winerim Core', pt: 'Winerim Core' },
+  '/producto/winerim-supply': { es: 'Winerim Supply', en: 'Winerim Supply', it: 'Winerim Supply', fr: 'Winerim Supply', de: 'Winerim Supply', pt: 'Winerim Supply' },
+  '/analisis-carta': { es: 'Analisis de carta de vinos', en: 'Wine list analysis', it: 'Analisi carta vini', fr: 'Analyse de carte des vins', de: 'Weinkartenanalyse', pt: 'Analise de carta de vinhos' },
+  '/calculadora-margen-vino': { es: 'Calculadora de margen de vino', en: 'Wine margin calculator', it: 'Calcolatrice margini vino', fr: 'Calculateur de marge vin', de: 'Wein-Margenrechner', pt: 'Calculadora de margem de vinho' },
+  '/soluciones/grupos-restauracion': { es: 'Grupos de restauracion', en: 'Restaurant groups', it: 'Gruppi di ristorazione', fr: 'Groupes de restauration', de: 'Restaurantgruppen', pt: 'Grupos de restauracao' },
+  '/soluciones/aumentar-ticket-medio-restaurante': { es: 'Aumentar ticket medio', en: 'Increase average ticket', it: 'Aumentare lo scontrino medio', fr: 'Augmenter le ticket moyen', de: 'Durchschnittsbon erhoehen', pt: 'Aumentar ticket medio' },
+};
+
+const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
+  home: string;
+  description: (label: string) => string;
+  subtitle: (label: string) => string;
+  sections: (label: string) => { heading: string; content: string }[];
+  faqs: (label: string) => { q: string; a: string }[];
+  links: { label: string; esPath: string }[];
+}> = {
+  en: {
+    home: 'Home',
+    description: (label) => `${label} from Winerim: AI wine list software for restaurants, hotels and hospitality groups that need recommendations, pairing, stock control, pricing support and analytics.`,
+    subtitle: (label) => `${label} for hospitality teams that want to sell more wine with better data and clearer service workflows.`,
+    sections: (label) => [
+      { heading: 'What this page covers', content: `${label} explains how Winerim helps restaurants connect their wine list, guest recommendations, service training, stock and margin decisions.` },
+      { heading: 'Why it matters', content: 'Wine sales depend on clear recommendations, current stock, confident staff and pricing decisions based on data rather than intuition.' },
+      { heading: 'How Winerim helps', content: 'Winerim combines a digital wine list, AI recommendations, food pairing, cellar intelligence and analytics in one operational platform.' },
+    ],
+    faqs: (label) => [{ q: `Is ${label} available in Winerim?`, a: `Yes. ${label} is part of the Winerim platform and connects with the wider wine list, recommendations, stock and analytics workflow.` }],
+    links: [{ label: 'Product', esPath: '/software-carta-de-vinos' }, { label: 'Features', esPath: '/funcionalidades' }, { label: 'Pricing', esPath: '/precios' }, { label: 'Demo', esPath: '/demo' }],
+  },
+  it: {
+    home: 'Home',
+    description: (label) => `${label} di Winerim: software IA per carte vini per ristoranti, hotel e gruppi che hanno bisogno di raccomandazioni, abbinamenti, stock, pricing e analytics.`,
+    subtitle: (label) => `${label} per team di ristorazione che vogliono vendere piu vino con dati migliori e un servizio piu chiaro.`,
+    sections: (label) => [
+      { heading: 'Cosa copre questa pagina', content: `${label} spiega come Winerim collega carta vini, raccomandazioni, formazione del personale, stock e margini.` },
+      { heading: 'Perche conta', content: 'La vendita del vino dipende da raccomandazioni chiare, disponibilita aggiornata, personale sicuro e decisioni di prezzo basate sui dati.' },
+      { heading: 'Come aiuta Winerim', content: 'Winerim combina carta vini digitale, raccomandazioni IA, abbinamenti, intelligence di cantina e analytics in una piattaforma operativa.' },
+    ],
+    faqs: (label) => [{ q: `${label} e disponibile in Winerim?`, a: `Si. ${label} fa parte della piattaforma Winerim e si collega a carta vini, raccomandazioni, stock e analytics.` }],
+    links: [{ label: 'Prodotto', esPath: '/software-carta-de-vinos' }, { label: 'Funzionalita', esPath: '/funcionalidades' }, { label: 'Prezzi', esPath: '/precios' }, { label: 'Demo', esPath: '/demo' }],
+  },
+  fr: {
+    home: 'Accueil',
+    description: (label) => `${label} de Winerim : logiciel IA pour cartes des vins destine aux restaurants, hotels et groupes qui veulent recommandations, accords, stock, pricing et analytics.`,
+    subtitle: (label) => `${label} pour les equipes de restauration qui veulent vendre plus de vin avec de meilleures donnees et un service plus clair.`,
+    sections: (label) => [
+      { heading: 'Ce que couvre cette page', content: `${label} explique comment Winerim relie carte des vins, recommandations, formation, stock et marge.` },
+      { heading: 'Pourquoi c est important', content: 'La vente du vin depend de recommandations claires, d un stock a jour, d equipes confiantes et de decisions de prix fondees sur les donnees.' },
+      { heading: 'Comment Winerim aide', content: 'Winerim combine carte des vins digitale, recommandations IA, accords mets-vins, intelligence de cave et analytics dans une plateforme operationnelle.' },
+    ],
+    faqs: (label) => [{ q: `${label} est-il disponible dans Winerim ?`, a: `Oui. ${label} fait partie de la plateforme Winerim et se connecte a la carte des vins, aux recommandations, au stock et aux analytics.` }],
+    links: [{ label: 'Produit', esPath: '/software-carta-de-vinos' }, { label: 'Fonctionnalites', esPath: '/funcionalidades' }, { label: 'Tarifs', esPath: '/precios' }, { label: 'Demo', esPath: '/demo' }],
+  },
+  de: {
+    home: 'Startseite',
+    description: (label) => `${label} von Winerim: KI-Software fuer Weinkarten in Restaurants, Hotels und Gruppen mit Empfehlungen, Pairing, Bestand, Pricing und Analytics.`,
+    subtitle: (label) => `${label} fuer Gastronomieteams, die mit besseren Daten und klareren Serviceablaeufen mehr Wein verkaufen wollen.`,
+    sections: (label) => [
+      { heading: 'Worum es auf dieser Seite geht', content: `${label} zeigt, wie Winerim Weinkarte, Empfehlungen, Teamschulung, Bestand und Marge verbindet.` },
+      { heading: 'Warum das wichtig ist', content: 'Weinverkauf braucht klare Empfehlungen, aktuellen Bestand, sichere Serviceteams und datenbasierte Preisentscheidungen.' },
+      { heading: 'Wie Winerim hilft', content: 'Winerim kombiniert digitale Weinkarte, KI-Empfehlungen, Food Pairing, Kellerintelligenz und Analytics in einer operativen Plattform.' },
+    ],
+    faqs: (label) => [{ q: `Ist ${label} in Winerim verfuegbar?`, a: `Ja. ${label} ist Teil der Winerim-Plattform und verbindet Weinkarte, Empfehlungen, Bestand und Analytics.` }],
+    links: [{ label: 'Produkt', esPath: '/software-carta-de-vinos' }, { label: 'Funktionen', esPath: '/funcionalidades' }, { label: 'Preise', esPath: '/precios' }, { label: 'Demo', esPath: '/demo' }],
+  },
+  pt: {
+    home: 'Inicio',
+    description: (label) => `${label} da Winerim: software de IA para cartas de vinho em restaurantes, hoteis e grupos com recomendacoes, harmonizacoes, stock, pricing e analytics.`,
+    subtitle: (label) => `${label} para equipas de restauracao que querem vender mais vinho com melhores dados e processos de servico mais claros.`,
+    sections: (label) => [
+      { heading: 'O que esta pagina cobre', content: `${label} explica como a Winerim liga carta de vinhos, recomendacoes, formacao da equipa, stock e margem.` },
+      { heading: 'Porque importa', content: 'A venda de vinho depende de recomendacoes claras, stock actualizado, equipa confiante e decisoes de preco baseadas em dados.' },
+      { heading: 'Como a Winerim ajuda', content: 'A Winerim combina carta de vinhos digital, recomendacoes IA, harmonizacoes, inteligencia de cave e analytics numa plataforma operacional.' },
+    ],
+    faqs: (label) => [{ q: `${label} esta disponivel na Winerim?`, a: `Sim. ${label} faz parte da plataforma Winerim e liga-se a carta de vinhos, recomendacoes, stock e analytics.` }],
+    links: [{ label: 'Produto', esPath: '/software-carta-de-vinos' }, { label: 'Funcionalidades', esPath: '/funcionalidades' }, { label: 'Precos', esPath: '/precios' }, { label: 'Demo', esPath: '/demo' }],
+  },
+};
+
+function staticLocalizedPath(lang: WineLibraryLang, esPath: string): string | undefined {
+  if (lang === 'es') return esPath;
+  return STATIC_LOCALIZED_ROUTES[lang]?.[esPath];
+}
+
+function resolveStaticRouteGroup(path: string): { lang: WineLibraryLang; esPath: string } | null {
+  if (STATIC_MULTILINGUAL_ES_PATHS.has(path)) return { lang: 'es', esPath: path };
+
+  for (const lang of ['en', 'it', 'fr', 'de', 'pt'] as StaticLocalizedLang[]) {
+    for (const [esPath, localized] of Object.entries(STATIC_LOCALIZED_ROUTES[lang])) {
+      if (localized === path) return { lang, esPath };
+    }
+  }
+
+  return null;
+}
+
+function staticHreflang(esPath: string): HreflangEntry[] {
+  const entries: HreflangEntry[] = [{ lang: 'es', url: `${SITE}${esPath === '/' ? '/' : esPath}` }];
+
+  for (const lang of ['en', 'it', 'fr', 'de', 'pt'] as StaticLocalizedLang[]) {
+    const path = staticLocalizedPath(lang, esPath);
+    if (path) entries.push({ lang, url: `${SITE}${path}` });
+  }
+
+  entries.push({ lang: 'x-default', url: `${SITE}${esPath === '/' ? '/' : esPath}` });
+  return entries;
+}
+
+function hreflangForPath(path: string): HreflangEntry[] | undefined {
+  const group = resolveStaticRouteGroup(path);
+  if (group) return staticHreflang(group.esPath);
+  return HREFLANG_MAP[path];
+}
+
+function renderLocalizedStaticPage(path: string): string | null {
+  const group = resolveStaticRouteGroup(path);
+  if (!group || group.lang === 'es') return null;
+
+  const source = STATIC_PAGES[group.esPath];
+  if (!source) return null;
+
+  const template = LOCALIZED_STATIC_TEMPLATES[group.lang];
+  const label = STATIC_PAGE_LABELS[group.esPath]?.[group.lang] || source.content.h1;
+  const canonicalPath = staticLocalizedPath(group.lang, group.esPath);
+  if (!canonicalPath) return null;
+
+  const canonical = `${SITE}${canonicalPath}`;
+  const homePath = `/${group.lang}`;
+  const content: PageContent = {
+    h1: label,
+    subtitle: template.subtitle(label),
+    intro: template.description(label),
+    sections: template.sections(label),
+    faqs: template.faqs(label),
+    breadcrumbs: [
+      { name: template.home, url: `${SITE}${homePath}` },
+      { name: label, url: canonical },
+    ],
+    internalLinks: [
+      ...template.links
+        .map((link) => {
+          const localized = staticLocalizedPath(group.lang, link.esPath);
+          return localized ? { label: link.label, url: localized } : null;
+        })
+        .filter((link): link is { label: string; url: string } => Boolean(link)),
+      { label: 'Wine library', url: wineLibraryPath(group.lang, '/biblioteca-vino') },
+    ],
+  };
+
+  return generateHTML(
+    {
+      ...source.meta,
+      title: `${label} | Winerim`,
+      description: template.description(label),
+      canonical,
+      lang: group.lang,
+    },
+    content,
+    staticHreflang(group.esPath)
+  );
+}
+
 const WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   '/en/wine-library': {
     meta: { title: 'Wine Library — Grapes, Regions, Styles and Pairings | Winerim', description: 'Explore Winerim’s wine library: grape varieties, wine regions, wine styles, pairings and glossary for hospitality professionals.', canonical: `${SITE}/en/wine-library`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'CollectionPage' },
@@ -2854,6 +3183,11 @@ async function renderSeoPage(slug: string): Promise<string | null> {
 }
 
 // ── Dynamic article renderer ──
+function inferArticleLang(slug: string): WineLibraryLang {
+  const match = slug.match(/_(en|it|fr|de|pt)$/);
+  return match ? match[1] as WineLibraryLang : 'es';
+}
+
 async function renderArticle(slug: string): Promise<string | null> {
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -2868,6 +3202,7 @@ async function renderArticle(slug: string): Promise<string | null> {
 
   const article = data[0];
   const body = article.body || '';
+  const lang = inferArticleLang(article.slug || slug);
 
   const sections: { heading: string; content: string }[] = [];
   const lines = body.split('\n');
@@ -2898,7 +3233,7 @@ async function renderArticle(slug: string): Promise<string | null> {
       description: article.excerpt || article.title,
       canonical,
       ogImage: article.image_url || OG_IMAGE,
-      lang: 'es',
+      lang,
       type: 'article',
       schemaType: 'Article',
     },
@@ -2908,7 +3243,7 @@ async function renderArticle(slug: string): Promise<string | null> {
       sections: sections.slice(0, 10),
       faqs: [],
       breadcrumbs: [
-        { name: 'Inicio', url: `${SITE}/` },
+        { name: lang === 'es' ? 'Inicio' : 'Home', url: `${SITE}${lang === 'es' ? '/' : `/${lang}`}` },
         { name: 'Blog', url: `${SITE}/blog` },
         { name: article.title, url: canonical },
       ],
@@ -3004,8 +3339,12 @@ Deno.serve(async (req) => {
 
     const staticPage = STATIC_PAGES[path];
     if (staticPage) {
-      const hreflang = HREFLANG_MAP[path];
+      const hreflang = hreflangForPath(path);
       html = generateHTML(staticPage.meta, staticPage.content, hreflang);
+    }
+
+    if (!html) {
+      html = renderLocalizedStaticPage(path);
     }
 
     if (!html) {

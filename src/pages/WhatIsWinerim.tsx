@@ -382,25 +382,18 @@ const WhatIsWinerim = () => {
     const ld = document.createElement("script");
     ld.id = "what-is-winerim-jsonld";
     ld.type = "application/ld+json";
-    ld.textContent = JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        name: "Winerim",
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Web",
-        description: t.seo.desc,
-        url: "https://winerim.wine",
-        offers: { "@type": "Offer", url: "https://winerim.wine/precios", priceCurrency: "EUR", availability: "https://schema.org/InStock" },
-        featureList: ["Digital wine list management", "AI wine recommendations", "Automatic food and wine pairing", "Wine sales analytics", "Price optimization", "Smart wine filters", "Wine comparison tool"],
-        audience: { "@type": "Audience", audienceType: "Restaurants, Wine Bars, Hotels, Restaurant Groups" },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: t.faqs.items.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-      },
-    ]);
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Winerim",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description: t.seo.desc,
+      url: "https://winerim.wine",
+      offers: { "@type": "Offer", url: "https://winerim.wine/precios", priceCurrency: "EUR", availability: "https://schema.org/InStock" },
+      featureList: ["Digital wine list management", "AI wine recommendations", "Automatic food and wine pairing", "Wine sales analytics", "Price optimization", "Smart wine filters", "Wine comparison tool"],
+      audience: { "@type": "Audience", audienceType: "Restaurants, Wine Bars, Hotels, Restaurant Groups" },
+    });
     document.head.appendChild(ld);
     return () => { document.getElementById("what-is-winerim-jsonld")?.remove(); };
   }, [lang]);

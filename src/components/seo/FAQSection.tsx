@@ -18,6 +18,8 @@ const defaultTitles: Record<string, string> = {
   en: "Frequently asked questions",
   it: "Domande frequenti",
   fr: "Questions fréquentes",
+  de: "Häufige Fragen",
+  pt: "Perguntas frequentes",
 };
 
 interface FAQSectionProps {

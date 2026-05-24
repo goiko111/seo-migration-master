@@ -5,7 +5,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import {
   ArrowRight, AlertTriangle, XCircle, Lightbulb, Cpu, TrendingUp, Wine,
   BookOpen, Users, DollarSign, BarChart3, Layers, MessageSquare,
@@ -416,18 +415,6 @@ const i18n: I18nMap<PageContent> = {
 const VenderMasVino = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.id = "faq-jsonld";
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org", "@type": "FAQPage",
-      mainEntity: t.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-    });
-    document.head.appendChild(script);
-    return () => { script.remove(); };
-  }, [t.faqs]);
 
   return (
     <div className="min-h-screen bg-background">

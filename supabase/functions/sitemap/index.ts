@@ -397,6 +397,41 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/herramientas/calculadora-compra-inteligente', priority: '0.6', changefreq: 'monthly', multilang: false },
 ];
 
+const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set([
+  // Resource and benchmark detail pages currently resolve to generic prerendered HTML for bots.
+  // Keep them out of the submitted sitemap until they have dedicated prerender content.
+  '/recursos/plantilla-carta-de-vinos',
+  '/recursos/checklist-carta-de-vinos-rentable',
+  '/recursos/guia-vino-por-copa-para-restaurantes',
+  '/recursos/plantilla-wine-mapping-restaurante',
+  '/recursos/plantilla-estrategia-vinos-por-copa',
+  '/recursos/checklist-deteccion-vinos-muertos',
+  '/recursos/plantilla-formacion-equipo-sala',
+  '/recursos/plantilla-analisis-margenes',
+  '/recursos/scorecard-rendimiento-carta',
+  '/recursos/checklist-carta-que-vende',
+  '/recursos/plantilla-equilibrio-carta',
+  '/recursos/revision-mensual-margenes',
+  '/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante',
+  '/benchmarks-playbooks/benchmark-distribucion-rangos-precio',
+  '/benchmarks-playbooks/benchmark-estrategia-por-copa',
+  '/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos',
+  '/benchmarks-playbooks/benchmark-peso-vino-ticket-medio',
+  '/benchmarks-playbooks/benchmark-margen-por-tipo-referencia',
+  '/benchmarks-playbooks/playbook-vender-mas-vino',
+  '/benchmarks-playbooks/playbook-mejorar-rotacion',
+  '/benchmarks-playbooks/playbook-carta-rentable',
+  '/benchmarks-playbooks/playbook-optimizar-vino-copa',
+  '/benchmarks-playbooks/playbook-formar-personal',
+  '/benchmarks-playbooks/playbook-decidir-compras-datos',
+]);
+
+const UNSUPPORTED_SEO_PAGE_SLUG_RE = /^(?:grape|uva|vitigno|rebsorte|cepage|casta|curso-vino|curso-vinho|wine-course|corso-vino|cours-vin|weinkurs|region-vinicola|wine-region|regione-vinicola|regiao-vinicola|weinregion|software-carta-vinhos)-/;
+
+function shouldIncludeSeoPageSlug(slug: unknown): slug is string {
+  return typeof slug === 'string' && slug.length > 0 && !UNSUPPORTED_SEO_PAGE_SLUG_RE.test(slug);
+}
+
 
 // Generated from src/data/*Library.ts to expose entity detail pages in the sitemap.
 const WINE_LIBRARY_DYNAMIC_ROUTES: StaticRoute[] = [
@@ -674,6 +709,8 @@ Deno.serve(async (req) => {
 
     // ── Static routes (ES + hreflang alternates) ──
     for (const route of STATIC_ROUTES) {
+      if (TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS.has(route.esPath)) continue;
+
       const alternates = route.multilang ? hreflangBlock(route.esPath) : '';
 
       // ES version
@@ -717,6 +754,7 @@ Deno.serve(async (req) => {
     // ── Dynamic: programmatic SEO pages ──
     if (Array.isArray(seoPages)) {
       for (const page of seoPages) {
+        if (!shouldIncludeSeoPageSlug(page.slug)) continue;
         const lastmod = page.updated_at ? page.updated_at.split('T')[0] : now;
         xml += urlBlock(`/${page.slug}`, lastmod, 'monthly', '0.5');
       }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -685,23 +684,6 @@ const CellIcon = ({ value }: { value: boolean | string }) => {
 const SoftwareCartaVinos = () => {
   const { lang } = useLanguage();
   const t = getI18n(i18n, lang);
-
-  useEffect(() => {
-    const faqScript = document.createElement("script");
-    faqScript.id = "faq-jsonld-software";
-    faqScript.type = "application/ld+json";
-    faqScript.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: t.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-    document.head.appendChild(faqScript);
-    return () => { faqScript.remove(); };
-  }, [t]);
 
   return (
     <div className="min-h-screen bg-background">

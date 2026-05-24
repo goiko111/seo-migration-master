@@ -60,6 +60,18 @@ const SEO_ALIASES = {
   '/herramientas/puntuacion-carta-vinos': '/herramientas/wine-list-score',
 };
 
+// ─── High-confidence legacy URLs surfaced by Search Console ───
+const LEGACY_DIRECT_REDIRECTS = {
+  '/privacy-policy': '/privacidad',
+  '/home': '/',
+  '/homepage': '/',
+  '/alex-pardo': '/article/alex-pardo',
+  '/aumenta-la-venta-de-vinos-en-tu-restaurante-mejores-estrategias': '/como-vender-mas-vino-en-un-restaurante',
+  '/winerim-vs-wineadvisor-2': '/comparativas',
+  '/en/the-importance-of-choosing-the-wine-that-goes-best-with-food': '/en/blog',
+  '/estadisticas': '/benchmarks-playbooks',
+};
+
 // ─── NOINDEX routes (served but with noindex header) ───
 const NOINDEX_ROUTES = new Set([
   '/gracias',
@@ -739,6 +751,17 @@ export default {
         headers: { 'Content-Type': 'text/plain', 'X-Worker-Branch': 'health' },
       });
     }
+    if (path === '/google0be715f4ef205b3d.html') {
+      return new Response('google-site-verification: google0be715f4ef205b3d.html', {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=3600',
+          'X-Robots-Tag': 'noindex',
+          'X-Worker-Branch': 'gsc-verification',
+        },
+      });
+    }
     if (path === '/robots.txt') {
       return proxyToOrigin(request, env, path, '', {
         'X-Worker-Branch': 'robots',
@@ -792,7 +815,33 @@ export default {
       });
     }
 
-    // ── 4. Legacy WordPress URLs → redirects function ──
+    // ── 4. Direct legacy redirects from Search Console samples ──
+    const directLegacyTarget = LEGACY_DIRECT_REDIRECTS[path]
+      || (path.startsWith('/clientes/') ? '/clientes' : null)
+      || (path.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null);
+    if (directLegacyTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${directLegacyTarget}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'direct-legacy-redirect',
+        },
+      });
+    }
+
+    if (path === '/' && url.searchParams.has('p')) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}/blog`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'wordpress-query-redirect',
+        },
+      });
+    }
+
+    // ── 5. Legacy WordPress URLs → redirects function ──
     if (isLegacyUrl(path)) {
       try {
         const res = await fetch(`${env.REDIRECTS_URL}?path=${encodeURIComponent(path)}`, {
