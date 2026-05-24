@@ -616,7 +616,7 @@ export default function Presentation() {
                 src={heroApp}
                 alt="Winerim wine list interface"
                 className="relative"
-                fetchPriority="high"
+                {...({ fetchpriority: "high" } as Record<string, string>)}
                 width={1200}
                 height={760}
               />

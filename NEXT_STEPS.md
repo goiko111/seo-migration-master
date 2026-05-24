@@ -258,14 +258,6 @@
 4. Resolver `~api/analytics`.
 5. Abrir bloque Core Web Vitals:
    - Home LCP.
-   - `/clientes` LCP y DOM.
-   - Imágenes responsive.
-   - JS inicial no usado.
-6. Decidir destino definitivo de city pages:
-   - Landing real por ciudad/idioma.
-   - Redirect a página canónica superior.
-   - `noindex`.
-7. Resolver contradicción de `src/seo/route-map.ts` frente al mapa real `de`/`pt`.
 
 ## Actualización 2026-05-24: cierre parcial analytics y `/clientes`
 
@@ -335,3 +327,50 @@
    - JS inicial no usado.
    - Chunks grandes.
    - Cache TTL de assets.
+
+## Actualización 2026-05-24: cierre Search Console + Core Web Vitals home
+
+## Hechos
+
+- Search Console:
+  - `/sitemap.xml` reenviado correctamente.
+  - `https://winerim.wine/software-carta-de-vinos` añadida a cola prioritaria de rastreo.
+  - `https://winerim.wine/de/weinbibliothek` sigue sin confirmación de indexación manual porque la UI quedó bloqueada probando la URL.
+  - La tanda automatizada de URLs estratégicas quedó con resultado no verificable por timeout.
+- Core Web Vitals home implementado localmente:
+  - Home bajo el fold diferida tras `load`.
+  - Footer y chat diferidos.
+  - Navbar inicial sin `framer-motion`.
+  - Preloads iniciales del build reducidos a `vendor-react`, `vendor-query` y `vendor-router`.
+  - `fetchPriority` camelCase eliminado de `src`; se usa `fetchpriority` donde aplica.
+- QA local:
+  - `npm run test`: 5 archivos, 15 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Preview local home con H1 visible, chunks bajo el fold cargando después del delay, dropdown desktop y menú móvil correctos.
+
+## Decisiones
+
+- Siguiente acción operativa: commit/push y publish Lovable de este bloque.
+- No repetir solicitudes masivas de indexación; usar tandas cortas y registrar solo confirmaciones explícitas.
+- Medir Core Web Vitals en producción después del publish, no antes.
+
+## Hipótesis
+
+- Este bloque debería bajar presión de JS alrededor del primer viewport y mejorar LCP móvil cuando llegue a producción.
+- Search Console tardará días en reflejar cambios de sitemap/indexación y semanas en estabilizar métricas Core Web Vitals de campo.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push del bloque Core Web Vitals.
+2. Publicar desde Lovable.
+3. Revalidar producción:
+   - Home renderiza hero correctamente.
+   - Preloads iniciales siguen sin vendors pesados.
+   - Menú desktop/móvil funciona.
+   - Chat carga diferido.
+4. Reejecutar Lighthouse móvil en home tras publish.
+5. Reintentar en Search Console `Solicitar indexación` para `https://winerim.wine/de/weinbibliothek`.
+6. Continuar bloque máximo nivel de biblioteca del vino tras cerrar publicación y medición de este saneamiento.
+7. Decidir destino definitivo de city pages.
+8. Resolver contradicción de `src/seo/route-map.ts` frente al mapa real `de`/`pt`.

@@ -152,7 +152,7 @@ const HeroSection = memo(() => {
                 alt="Winerim — carta de vinos inteligente en tablet para restaurantes"
                 className="relative w-full max-w-2xl mx-auto drop-shadow-2xl rounded-2xl animate-fade-in-up animation-delay-400"
                 loading="eager"
-                fetchPriority="high"
+                {...({ fetchpriority: "high" } as Record<string, string>)}
                 width={800}
                 height={600}
                 decoding="async"

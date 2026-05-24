@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import winerimLogo from "@/assets/winerim-logo.webp";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -201,47 +200,39 @@ const Navbar = memo(() => {
               )}
 
               {/* Mega dropdown */}
-              <AnimatePresence>
-                {item.columns && openDropdown === item.label && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 pt-3"
-                  >
-                    <div className="bg-background/95 backdrop-blur-lg border border-border rounded-xl shadow-xl shadow-black/10 p-1">
-                      <div className={`flex ${item.columns.length > 1 ? "divide-x divide-border" : ""}`}>
-                        {item.columns.map((col) => (
-                          <div key={col.title} className="min-w-[220px] px-2 py-2">
-                            <span className="block px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/70">
-                              {col.title}
-                            </span>
-                            {col.items.map((sub) => (
-                              <Link
-                                key={sub.href + sub.label}
-                                to={sub.href}
-                                className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors ${
-                                  isActive(sub.href)
-                                    ? "text-foreground bg-wine/5 font-medium"
-                                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                                }`}
-                              >
-                                <span className="flex-1">{sub.label}</span>
-                                {sub.badge && (
-                                  <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
-                                    {sub.badge}
-                                  </Badge>
-                                )}
-                              </Link>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
+              {item.columns && openDropdown === item.label && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 animate-fade-in-up">
+                  <div className="bg-background/95 backdrop-blur-lg border border-border rounded-xl shadow-xl shadow-black/10 p-1">
+                    <div className={`flex ${item.columns.length > 1 ? "divide-x divide-border" : ""}`}>
+                      {item.columns.map((col) => (
+                        <div key={col.title} className="min-w-[220px] px-2 py-2">
+                          <span className="block px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/70">
+                            {col.title}
+                          </span>
+                          {col.items.map((sub) => (
+                            <Link
+                              key={sub.href + sub.label}
+                              to={sub.href}
+                              className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors ${
+                                isActive(sub.href)
+                                  ? "text-foreground bg-wine/5 font-medium"
+                                  : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                              }`}
+                            >
+                              <span className="flex-1">{sub.label}</span>
+                              {sub.badge && (
+                                <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                                  {sub.badge}
+                                </Badge>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </nav>
@@ -278,117 +269,101 @@ const Navbar = memo(() => {
       </div>
 
       {/* ── Mobile menu ────────────────────────── */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden fixed inset-0 top-16 sm:top-20 bg-background/98 backdrop-blur-lg z-40 overflow-y-auto"
-          >
-            <nav className="flex flex-col gap-1 px-6 py-8">
-              {navItems.map((item) => (
-                <div key={item.label}>
-                  {item.columns ? (
-                    <div>
-                      <button
-                        onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
-                        className={`flex items-center justify-between w-full py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border ${
-                          isActive(item.href) ? "text-foreground" : "text-muted-foreground"
-                        }`}
-                      >
-                        {item.label}
-                        <ChevronDown
-                          size={18}
-                          className={`transition-transform ${mobileExpanded === item.label ? "rotate-180" : ""}`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {mobileExpanded === item.label && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="pl-2 py-3 space-y-4">
-                              {item.columns.map((col) => (
-                                <div key={col.title}>
-                                  <span className="block text-[11px] font-semibold tracking-widest uppercase text-muted-foreground/60 mb-1 px-2">
-                                    {col.title}
-                                  </span>
-                                  <div className="space-y-0.5">
-                                    {col.items.map((sub) => (
-                                      <Link
-                                        key={sub.href + sub.label}
-                                        to={sub.href}
-                                        className={`flex items-center gap-2 py-2 px-2 text-base rounded-lg transition-colors ${
-                                          isActive(sub.href)
-                                            ? "text-foreground bg-wine/5"
-                                            : "text-muted-foreground hover:text-foreground"
-                                        }`}
-                                        onClick={() => setMobileOpen(false)}
-                                      >
-                                        {sub.label}
-                                        {sub.badge && (
-                                          <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
-                                            {sub.badge}
-                                          </Badge>
-                                        )}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className={`block py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border ${
+      {mobileOpen && (
+        <div className="lg:hidden fixed inset-0 top-16 sm:top-20 bg-background/98 backdrop-blur-lg z-40 overflow-y-auto animate-fade-in">
+          <nav className="flex flex-col gap-1 px-6 py-8">
+            {navItems.map((item) => (
+              <div key={item.label}>
+                {item.columns ? (
+                  <div>
+                    <button
+                      onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
+                      className={`flex items-center justify-between w-full py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border ${
                         isActive(item.href) ? "text-foreground" : "text-muted-foreground"
                       }`}
-                      onClick={() => setMobileOpen(false)}
                     >
                       {item.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform ${mobileExpanded === item.label ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {mobileExpanded === item.label && (
+                      <div className="overflow-hidden animate-fade-in">
+                        <div className="pl-2 py-3 space-y-4">
+                          {item.columns.map((col) => (
+                            <div key={col.title}>
+                              <span className="block text-[11px] font-semibold tracking-widest uppercase text-muted-foreground/60 mb-1 px-2">
+                                {col.title}
+                              </span>
+                              <div className="space-y-0.5">
+                                {col.items.map((sub) => (
+                                  <Link
+                                    key={sub.href + sub.label}
+                                    to={sub.href}
+                                    className={`flex items-center gap-2 py-2 px-2 text-base rounded-lg transition-colors ${
+                                      isActive(sub.href)
+                                        ? "text-foreground bg-wine/5"
+                                        : "text-muted-foreground hover:text-foreground"
+                                    }`}
+                                    onClick={() => setMobileOpen(false)}
+                                  >
+                                    {sub.label}
+                                    {sub.badge && (
+                                      <Badge className="bg-wine/15 text-wine border-wine/25 text-[10px] px-1.5 py-0 font-semibold leading-4">
+                                        {sub.badge}
+                                      </Badge>
+                                    )}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`block py-3 text-lg font-medium tracking-widest uppercase transition-colors border-b border-border ${
+                      isActive(item.href) ? "text-foreground" : "text-muted-foreground"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            ))}
 
               {/* Mobile contact + area cliente + CTA */}
+            <Link
+              to="/decision-center"
+              className="block py-3 text-base font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground/60"
+              onClick={() => setMobileOpen(false)}
+            >
+              {t.nav_client_area}
+            </Link>
+            <div className="mt-6">
               <Link
-                to="/decision-center"
-                className="block py-3 text-base font-medium tracking-widest uppercase transition-colors border-b border-border text-muted-foreground/60"
+                to={localePath("/demo")}
+                className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
+                onClick={() => { setMobileOpen(false); ga.ctaClick("mobile_nav_demo", "/demo", "navbar_mobile"); }}
+              >
+                {t.nav_cta}
+              </Link>
+              <Link
+                to={localePath("/contacto")}
+                className="block text-center text-sm text-muted-foreground mt-3 py-2 hover:text-foreground transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                {t.nav_client_area}
+                {t.nav_contact}
               </Link>
-              <div className="mt-6">
-                <Link
-                  to={localePath("/demo")}
-                  className="block bg-gradient-wine text-primary-foreground px-6 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase text-center"
-                  onClick={() => { setMobileOpen(false); ga.ctaClick("mobile_nav_demo", "/demo", "navbar_mobile"); }}
-                >
-                  {t.nav_cta}
-                </Link>
-                <Link
-                  to={localePath("/contacto")}
-                  className="block text-center text-sm text-muted-foreground mt-3 py-2 hover:text-foreground transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {t.nav_contact}
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 });

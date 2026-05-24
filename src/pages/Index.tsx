@@ -1,36 +1,16 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import { PageContentProvider } from "@/contexts/PageContentContext";
-import StickyCTA from "@/components/StickyCTA";
 import SEOHead from "@/components/SEOHead";
 import HeroSection from "@/components/landing/HeroSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-// Lazy load everything below the fold
-const LogoStrip = lazy(() => import("@/components/LogoStrip"));
-const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
-const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
-const WhoItHelpsSection = lazy(() => import("@/components/landing/WhoItHelpsSection"));
-const BusinessProfilesSection = lazy(() => import("@/components/landing/BusinessProfilesSection"));
-const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
-const DynamicIntelligenceTeaser = lazy(() => import("@/components/landing/DynamicIntelligenceTeaser"));
-const CategoryLeapSection = lazy(() => import("@/components/landing/CategoryLeapSection"));
-const ResultsSection = lazy(() => import("@/components/landing/ResultsSection"));
-const HowItWorksSection = lazy(() => import("@/components/landing/HowItWorksSection"));
-const TestimonialsSection = lazy(() => import("@/components/landing/TestimonialsSection"));
-const VideoSection = lazy(() => import("@/components/VideoSection"));
-const DefinitionSection = lazy(() => import("@/components/landing/DefinitionSection"));
-const DecisionCenterTeaser = lazy(() => import("@/components/DecisionCenterTeaser"));
-const CredibilitySection = lazy(() => import("@/components/seo/CredibilitySection"));
+const HomeBelowFold = lazy(() => import("@/components/landing/HomeBelowFold"));
 const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
-const SectionFallback = () => (
-  <div className="min-h-[200px]" />
-);
-
 const Index = () => {
   const { t, lang, allLangPaths } = useLanguage();
+  const [loadBelowFold, setLoadBelowFold] = useState(false);
 
   // Inject BreadcrumbList + WebPage schemas for Rich Results consistency
   useEffect(() => {
@@ -59,6 +39,27 @@ const Index = () => {
     return () => { document.getElementById("schema-home-webpage")?.remove(); };
   }, [lang, t.seo_home_title, t.seo_home_description]);
 
+  useEffect(() => {
+    let delayId: number | undefined;
+
+    const revealBelowFold = () => {
+      delayId = window.setTimeout(() => setLoadBelowFold(true), 600);
+    };
+
+    if (document.readyState === "complete") {
+      revealBelowFold();
+    } else {
+      window.addEventListener("load", revealBelowFold, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener("load", revealBelowFold);
+      if (delayId) {
+        window.clearTimeout(delayId);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
@@ -68,78 +69,24 @@ const Index = () => {
         hreflang={allLangPaths("/")}
       />
       <Navbar />
-      <PageContentProvider page="home">
-        <main>
-          {/* 1. Hero — value prop, stats, CTA */}
-          <HeroSection />
+      <main>
+        {/* 1. Hero - value prop, stats, CTA */}
+        <HeroSection />
 
-          {/* 2. Social proof — logos */}
-          <Suspense fallback={<SectionFallback />}>
-            <LogoStrip />
-          </Suspense>
-
-          {/* 3–4. Problem → Solution (conversion funnel) */}
-          <Suspense fallback={<SectionFallback />}>
-            <ProblemSection />
-            <SolutionSection />
-          </Suspense>
-
-          {/* 5. How it works — reduce friction early */}
-          <Suspense fallback={<SectionFallback />}>
-            <HowItWorksSection />
-          </Suspense>
-
-          {/* 6. Results — outcomes before features */}
-          <Suspense fallback={<SectionFallback />}>
-            <ResultsSection />
-          </Suspense>
-
-          {/* 7. Business profiles — self-identification by visitor type */}
-          <Suspense fallback={<SectionFallback />}>
-            <BusinessProfilesSection />
-          </Suspense>
-
-          {/* 8. Who it helps — role-based value (complementary to profiles) */}
-          <Suspense fallback={<SectionFallback />}>
-            <WhoItHelpsSection />
-          </Suspense>
-
-          {/* 8–9. Category leap + Features + Dynamic Intelligence */}
-          <Suspense fallback={<SectionFallback />}>
-            <CategoryLeapSection />
-            <FeaturesPreview />
-            <DynamicIntelligenceTeaser />
-          </Suspense>
-
-          {/* 10–11. Testimonials + Video — trust builders */}
-          <Suspense fallback={<SectionFallback />}>
-            <TestimonialsSection />
-            <VideoSection />
-          </Suspense>
-
-          {/* 12. Decision Center teaser — premium value layer */}
-          <Suspense fallback={<SectionFallback />}>
-            <DecisionCenterTeaser lang={lang} />
-          </Suspense>
-
-          {/* 13–14. Credibility + Definition — SEO/citability */}
-          <Suspense fallback={<SectionFallback />}>
-            <section className="max-w-3xl mx-auto px-6 md:px-12 py-12">
-              <CredibilitySection lang={lang} />
-            </section>
-            <DefinitionSection />
-          </Suspense>
-
-          {/* 14. Final CTA */}
-          <Suspense fallback={<SectionFallback />}>
+        {loadBelowFold ? (
+          <Suspense fallback={<div className="min-h-[200px]" />}>
+            <HomeBelowFold lang={lang} />
             <FinalCTASection />
-            <StickyCTA pageType="home" />
           </Suspense>
-        </main>
-      </PageContentProvider>
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+        ) : (
+          <div className="min-h-[200px]" aria-hidden="true" />
+        )}
+      </main>
+      {loadBelowFold && (
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      )}
     </div>
   );
 };

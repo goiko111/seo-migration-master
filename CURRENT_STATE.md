@@ -654,3 +654,65 @@
   - Revisar imágenes responsive y formatos next-gen.
   - Revisar cache TTL de assets.
   - Corregir contraste/enlace sin texto si se aborda accesibilidad.
+
+## Actualización 2026-05-24: Search Console y Core Web Vitals home
+
+## Hechos
+
+- Se continuó la sesión leyendo primero `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Search Console estaba autenticado con `gugocreative@gmail.com` para la propiedad URL-prefix `https://winerim.wine/`.
+- En Search Console se reenvió `https://winerim.wine/sitemap.xml`.
+- Search Console mostró el modal `Se ha enviado el sitemap correctamente`.
+- Tras cerrar el modal, la tabla seguía mostrando 2.431 páginas descubiertas para `/sitemap.xml`; se espera que cambie solo cuando Google recrawlee.
+- Se inspeccionó `https://winerim.wine/software-carta-de-vinos`.
+- La solicitud manual de indexación para `https://winerim.wine/software-carta-de-vinos` quedó confirmada por Search Console con el mensaje de cola prioritaria.
+- Se intentó una tanda automatizada de inspecciones/indexación para URLs estratégicas, pero el proceso expiró sin salida verificable; no se considera confirmado qué URLs de esa tanda quedaron en cola.
+- La inspección de `https://winerim.wine/de/weinbibliothek` mostró `La URL no está en Google`.
+- Al solicitar indexación de `https://winerim.wine/de/weinbibliothek`, Search Console quedó bloqueado en `Estamos probando si se puede indexar la URL publicada`; no se considera confirmada la solicitud.
+- Se implementó un bloque local de Core Web Vitals para la home:
+  - `src/pages/Index.tsx` monta la home bajo el fold después del primer `load`.
+  - `src/components/landing/HomeBelowFold.tsx` separa las secciones secundarias de home y su `PageContentProvider`.
+  - `src/components/Navbar.tsx` deja de importar `framer-motion` en la navegación inicial.
+  - `vite.config.ts` filtra modulepreloads pesados de vendors diferidos.
+  - `index.html` carga el widget de chat después del `load` y en idle/fallback diferido.
+  - `fetchPriority` camelCase se sustituyó por `fetchpriority` en imágenes hero para evitar avisos React.
+- Build local posterior:
+  - `dist/index.html` solo pre-carga inicialmente `vendor-react`, `vendor-query` y `vendor-router`.
+  - Ya no aparecen como modulepreload inicial `vendor-motion`, `vendor-supabase`, `vendor-charts`, `vendor-radix` ni `vendor-markdown`.
+  - El entry local de home queda en torno a 268 kB, frente a unos 300 kB observados antes de este saneamiento.
+- Verificaciones ejecutadas:
+  - `npm run test`: 5 archivos, 15 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Preview local `http://127.0.0.1:4177/`.
+  - QA local: H1 de home visible, chunks bajo el fold cargan después del delay, dropdown desktop funciona, menú móvil funciona y submenu móvil de Producto funciona.
+- Avisos no bloqueantes durante build:
+  - Browserslist/caniuse-lite desactualizado.
+  - Chunks grandes por encima de 200 kB.
+
+## Decisiones
+
+- Priorizar Core Web Vitals de home sin cambiar la propuesta visual ni el copy principal.
+- Diferir secciones bajo el fold, Footer y chat para reducir competencia con FCP/LCP.
+- Mantener `framer-motion` fuera del navbar inicial; las animaciones simples de menú usan clases CSS existentes.
+- Normalizar `fetchpriority` en imágenes hero para conservar prioridad de imagen sin avisos React.
+- No afirmar que toda la tanda de URLs estratégicas quedó enviada a indexación si Search Console no devolvió confirmación verificable.
+- Tratar la indexación manual como refuerzo puntual: el sitemap limpio y el enlazado interno siguen siendo la vía principal.
+
+## Hipótesis
+
+- El grupo móvil de LCP malo de Search Console debería mejorar tras publicar este bloque y esperar datos de CrUX/Search Console.
+- La mayor mejora inicial viene de reducir competencia de JS y terceros alrededor del hero, no de cambiar contenido.
+- Las URLs de biblioteca alemana/portuguesa pueden tardar más en entrar en índice aunque respondan 200 y estén en sitemap.
+
+## Tareas pendientes
+
+- Commit y push del bloque Core Web Vitals.
+- Publicar desde Lovable para que los cambios lleguen a producción.
+- Revalidar producción tras publish:
+  - `dist` publicado debe conservar preloads iniciales ligeros.
+  - Home debe renderizar hero y navegación sin errores.
+  - Menú móvil y dropdown desktop deben seguir funcionando.
+  - Widget de chat debe aparecer tras carga diferida.
+- Reintentar más tarde en Search Console la solicitud de indexación de `https://winerim.wine/de/weinbibliothek`.
+- No validar mejora LCP en Search Console hasta que el bloque esté publicado y haya nuevos datos de campo.

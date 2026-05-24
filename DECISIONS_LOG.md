@@ -649,3 +649,41 @@
 - Reintentar indexación manual de URLs estratégicas cuando Search Console lo permita.
 - Preparar bloque Core Web Vitals con foco en LCP/FCP, imágenes, JS no usado y cache TTL.
 - Vigilar si se repite el aviso de Lighthouse sobre `robots.txt`.
+
+### Search Console y primer bloque Core Web Vitals home
+
+#### Hechos
+
+- Se reenvió `/sitemap.xml` en Search Console y la UI confirmó el envío correcto.
+- Search Console seguía mostrando 2.431 páginas descubiertas tras el envío, pendiente de recrawl.
+- La URL `https://winerim.wine/software-carta-de-vinos` quedó añadida a la cola prioritaria de rastreo.
+- La solicitud de indexación para `https://winerim.wine/de/weinbibliothek` no quedó confirmada porque la UI se quedó bloqueada probando indexabilidad.
+- Una tanda automatizada de URLs estratégicas expiró sin salida verificable, por lo que no se considera confirmada.
+- Se implementó un saneamiento local de rendimiento para home:
+  - Home bajo el fold diferida después del primer `load`.
+  - Chat diferido tras `load`/idle.
+  - Navbar sin `framer-motion` en el bundle inicial.
+  - Modulepreloads iniciales reducidos a vendors esenciales.
+  - `fetchpriority` normalizado en imágenes hero.
+- Verificaciones completadas: `npm run test`, `npm run build`, `git diff --check` y QA local en preview para home, dropdown desktop y menú móvil.
+
+#### Decisiones
+
+- Usar indexación manual solo como refuerzo de URLs prioritarias, no como sustituto de sitemap, enlazado interno y consistencia técnica.
+- No documentar como exitosas solicitudes de indexación sin confirmación explícita de Search Console.
+- Atacar LCP de home reduciendo competencia de JS y terceros antes de rediseñar hero o contenido.
+- Mantener comportamiento visual del navbar con CSS simple en vez de cargar `framer-motion` en la navegación inicial.
+- Retrasar contenido bajo el fold y Footer hasta después de la carga inicial para proteger FCP/LCP.
+
+#### Hipótesis
+
+- El nuevo perfil de carga debería mejorar LCP móvil de home tras publicar y esperar datos de campo.
+- El efecto no será inmediato en Search Console porque Core Web Vitals depende de datos agregados y recrawl.
+- Las rutas nuevas internacionales de biblioteca pueden necesitar varias señales adicionales: sitemap leído, enlaces internos y solicitudes puntuales de indexación.
+
+#### Tareas pendientes
+
+- Commit y push del bloque Core Web Vitals.
+- Publicar desde Lovable.
+- Revalidar producción y medir Lighthouse/CrUX cuando el despliegue esté activo.
+- Reintentar indexación de `https://winerim.wine/de/weinbibliothek` más tarde.

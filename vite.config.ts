@@ -20,6 +20,12 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Target modern browsers for smaller output
     target: "es2020",
+    // Keep first-page preload focused on the shell. Route-only/vendor chunks still load
+    // when their lazy imports execute, but they no longer compete with FCP/LCP.
+    modulePreload: {
+      resolveDependencies: (_filename, deps) =>
+        deps.filter((dep) => !/vendor-(charts|markdown|motion|radix|supabase)/.test(dep)),
+    },
     // Enable CSS code splitting
     cssCodeSplit: true,
     // Optimize chunk size

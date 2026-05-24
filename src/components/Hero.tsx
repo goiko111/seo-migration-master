@@ -23,7 +23,7 @@ const Hero = () => {
           alt="Bodega de vinos con botellas seleccionadas para restaurantes"
           className="w-full h-full object-cover scale-110"
           loading="eager"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           width={1920}
           height={1080}
         />

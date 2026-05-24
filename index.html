@@ -168,7 +168,21 @@
         }, 500);
       });
     </script>
-    <script defer src="https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+        var loadChat = function() {
+          var script = document.createElement('script');
+          script.src = 'https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js';
+          script.async = true;
+          document.body.appendChild(script);
+        };
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadChat, { timeout: 3000 });
+        } else {
+          setTimeout(loadChat, 1500);
+        }
+      });
+    </script>
 
     <!-- Noscript fallback: critical content visible to crawlers that don't execute JS -->
     <noscript>
