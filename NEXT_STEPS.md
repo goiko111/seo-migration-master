@@ -84,6 +84,12 @@
   - `/sitemap.xml?codex=1` responde 200.
 - `npm run deploy:supabase:seo` no pudo desplegar Edge Functions por falta de `SUPABASE_ACCESS_TOKEN` o login Supabase CLI.
 - Lovable en el navegador de Codex redirige a login; no se pudo publicar frontend ni Edge Functions desde esa vía.
+- El bloque se commiteó y empujó a `origin/main` como `a98e8c6 fix: clean search console seo signals`.
+- Producción todavía no refleja `a98e8c6`:
+  - `robots.txt` mantiene `llms.txt` como sitemap.
+  - `llms-full.txt` responde 404.
+  - `/en/pricing` como Googlebot sigue con `html lang="es"` y canonical a `/`.
+- Lovable sigue abierto en login dentro del navegador de Codex.
 
 ## Decisiones
 
@@ -104,6 +110,8 @@
 - Usar `FAQSection` como fuente única de `FAQPage` para páginas con FAQs visibles.
 - Mantener los JSON-LD estáticos de `index.html` como fallback con IDs que `SEOHead` pueda actualizar.
 - No pedir validación FAQ en Search Console hasta publicar el frontend corregido desde Lovable.
+- Usar `a98e8c6` como referencia de publicación.
+- No considerar resuelto el despliegue aunque GitHub esté actualizado: producción debe validarse por HTTP.
 
 ## Hipótesis
 
@@ -120,10 +128,13 @@
 - Los errores FAQ deberían resolverse tras publicar frontend y esperar recrawl de Google.
 - El redirect `/estadisticas/*` debería reducir una familia concreta de 404 legacy.
 - Puede quedar una duplicación específica de `SoftwareApplication` en páginas con schema propio adicional, pero ya no viene de los JSON-LD genéricos sin ID de `index.html`.
+- Lovable probablemente requiere sync/publish manual para llevar `origin/main` a producción.
 
 ## Tareas pendientes
 
 1. Despliegue Lovable del bloque SEO/LLM:
+   - Iniciar sesión en Lovable dentro del navegador de Codex o publicar manualmente desde la cuenta del proyecto.
+   - Sincronizar/publicar el commit `a98e8c6`.
    - Publicar frontend para activar `robots.txt`, `llms.txt` y `llms-full.txt`.
    - Publicar frontend para llevar a producción el arreglo de `FAQPage` duplicado.
    - Pedir explícitamente a Lovable el despliegue de Edge Function `sitemap`.

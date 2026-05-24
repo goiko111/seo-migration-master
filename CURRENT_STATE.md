@@ -242,3 +242,42 @@
 - Pedir validación en Search Console de FAQ solo tras confirmar producción.
 - Continuar mapa de redirects legacy para el resto de 404.
 - Revisar si `WhatIsWinerim` debe mantener un `SoftwareApplication` adicional o convertirlo a otro tipo semántico como `AboutPage`.
+
+## Actualización 2026-05-24: commit/push y comprobación de producción
+
+## Hechos
+
+- Se comprobó que `SUPABASE_ACCESS_TOKEN` sigue ausente en el entorno.
+- `npm run deploy:supabase:seo` sigue fallando por falta de token o login Supabase CLI.
+- Se verificó de nuevo:
+  - `npm run test`: 5 archivos, 15 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+- Se creó el commit `a98e8c6 fix: clean search console seo signals`.
+- Se hizo push de `a98e8c6` a `origin/main`.
+- Producción todavía no refleja el commit:
+  - `https://winerim.wine/robots.txt?codex=a98e8c6` sigue anunciando `Sitemap: https://winerim.wine/llms.txt`.
+  - `https://winerim.wine/llms-full.txt?codex=a98e8c6` responde 404.
+  - Googlebot en `https://winerim.wine/en/pricing?codex=a98e8c6` sigue recibiendo `html lang="es"` y canonical `https://winerim.wine`.
+- Lovable sigue redirigiendo a login en el navegador de Codex: `https://lovable.dev/login?redirect=%2Fprojects%2F2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+
+## Decisiones
+
+- Mantener `a98e8c6` como commit de referencia del bloque Search Console/SEO.
+- No considerar desplegadas las correcciones frontend/Edge Functions hasta que producción cambie en las verificaciones públicas.
+- Para continuar sin token Supabase, hace falta iniciar sesión en Lovable dentro del navegador de Codex o publicar manualmente desde Lovable.
+
+## Hipótesis
+
+- Lovable no está auto-publicando desde `origin/main`, o todavía requiere una acción manual de sync/publish.
+- Una vez Lovable publique el commit, `robots.txt`, `llms-full.txt` y el arreglo FAQ deberían aparecer en producción; `sitemap`/`prerender` requerirán además despliegue de Edge Functions.
+
+## Tareas pendientes
+
+- Iniciar sesión en Lovable en la ventana de Codex y publicar el proyecto.
+- Confirmar si Lovable permite desplegar explícitamente las Edge Functions `sitemap` y `prerender`.
+- Revalidar producción tras publish:
+  - `robots.txt` sin `llms.txt` como sitemap.
+  - `llms-full.txt` con HTTP 200.
+  - `/en/pricing`, `/de/preise` y `/pt/precos` como Googlebot con idioma/canonical propios.
+  - `FAQPage` único en las páginas afectadas.

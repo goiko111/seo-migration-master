@@ -359,3 +359,34 @@
 - Confirmar en producción que las páginas afectadas tienen un solo `FAQPage`.
 - Pedir validación FAQ en Search Console tras el despliegue frontend.
 - Revisar si `WhatIsWinerim` debe conservar schema `SoftwareApplication` propio adicional o transformarlo en un tipo semántico más específico.
+
+### Commit/push del bloque SEO y bloqueo Lovable
+
+#### Hechos
+
+- Se creó y empujó a `origin/main` el commit `a98e8c6 fix: clean search console seo signals`.
+- El commit contiene auditorías, `llms.txt`, `llms-full.txt`, correcciones `robots.txt`, sitemap/prerender, FAQ/schema, verificación GSC, redirects Worker y documentos de estado.
+- Producción no refleja todavía el commit:
+  - `robots.txt` mantiene `llms.txt` como sitemap.
+  - `llms-full.txt` responde 404.
+  - `/en/pricing` como Googlebot sigue entregando home/canonical española.
+- `SUPABASE_ACCESS_TOKEN` sigue ausente y Supabase CLI no puede desplegar Edge Functions.
+- Lovable en el navegador de Codex sigue en login.
+
+#### Decisiones
+
+- Tomar `a98e8c6` como referencia para publicar desde Lovable.
+- No reenviar sitemap ni pedir validaciones en Search Console hasta que producción refleje el commit.
+- Continuar por Lovable autenticado o por Supabase CLI con token explícito.
+
+#### Hipótesis
+
+- Lovable requiere sync/publish manual aunque `origin/main` esté actualizado.
+- El despliegue frontend y el despliegue de Edge Functions pueden ser acciones separadas dentro de Lovable.
+
+#### Tareas pendientes
+
+- Iniciar sesión en Lovable en la ventana de Codex.
+- Publicar/sincronizar el commit `a98e8c6`.
+- Desplegar `sitemap` y `prerender`.
+- Repetir QA público antes de tocar Search Console.
