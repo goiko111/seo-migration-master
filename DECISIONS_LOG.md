@@ -390,3 +390,34 @@
 - Publicar/sincronizar el commit `a98e8c6`.
 - Desplegar `sitemap` y `prerender`.
 - Repetir QA público antes de tocar Search Console.
+
+### Producción validada tras publicación Lovable
+
+#### Hechos
+
+- Lovable publicó el bloque SEO/LLM.
+- `robots.txt` ya no declara `llms.txt` como sitemap.
+- `llms-full.txt` responde HTTP 200 en producción.
+- `sitemap.xml` en producción contiene 2.431 URLs y ya no incluye familias excluidas como `grape/`, `uva/`, `llms.txt` ni el ejemplo `/benchmarks-playbooks/playbook-mejorar-rotacion`.
+- Googlebot recibe idioma/canonical propios en `/en/pricing`, `/de/preise` y `/pt/precos`.
+- Googlebot recibe `html lang="en"` e `inLanguage: "en"` en `/article/alex-pardo_en`.
+- Las páginas con error FAQ previo renderizan 1 solo `FAQPage` en navegador.
+- Worker no se redesplegó porque producción ya servía correctamente redirects y verificación GSC.
+
+#### Decisiones
+
+- Dar por publicado el bloque técnico SEO/LLM en producción.
+- No redeployar Worker sin cambio efectivo o fallo de QA.
+- Pasar el foco a Search Console: reenviar sitemap y pedir validaciones.
+
+#### Hipótesis
+
+- Search Console mantendrá el estado antiguo hasta recrawl, pero las condiciones técnicas para validar ya están.
+- La limpieza del sitemap debería reducir errores detectados en próximos rastreos.
+
+#### Tareas pendientes
+
+- Reenviar sitemap en Search Console.
+- Pedir validación FAQ.
+- Seguir exportando y corrigiendo familias 404 restantes.
+- Abrir bloque separado para LCP móvil y enlaces internos.

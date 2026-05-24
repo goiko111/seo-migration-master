@@ -85,11 +85,19 @@
 - `npm run deploy:supabase:seo` no pudo desplegar Edge Functions por falta de `SUPABASE_ACCESS_TOKEN` o login Supabase CLI.
 - Lovable en el navegador de Codex redirige a login; no se pudo publicar frontend ni Edge Functions desde esa vía.
 - El bloque se commiteó y empujó a `origin/main` como `a98e8c6 fix: clean search console seo signals`.
-- Producción todavía no refleja `a98e8c6`:
+- Antes del publish de Lovable, producción todavía no reflejaba `a98e8c6`:
   - `robots.txt` mantiene `llms.txt` como sitemap.
   - `llms-full.txt` responde 404.
   - `/en/pricing` como Googlebot sigue con `html lang="es"` y canonical a `/`.
-- Lovable sigue abierto en login dentro del navegador de Codex.
+- Antes del publish, Lovable seguía abierto en login dentro del navegador de Codex.
+- Después de publicar Lovable, producción ya refleja el bloque:
+  - `robots.txt` solo declara `https://winerim.wine/sitemap.xml`.
+  - `llms-full.txt` responde HTTP 200.
+  - `sitemap.xml` contiene 2.431 URLs y excluye familias 404 conocidas.
+  - Googlebot en `/en/pricing`, `/de/preise` y `/pt/precos` recibe idioma/canonical propios.
+  - Googlebot en `/article/alex-pardo_en` recibe `html lang="en"` e `inLanguage: "en"`.
+  - `/software-carta-de-vinos`, `/como-vender-mas-vino-en-un-restaurante` y `/en/what-is-winerim` renderizan 1 solo `FAQPage`.
+- No hizo falta redeployar Cloudflare Worker: redirects legacy, verificación GSC y sitemap proxy respondieron correctamente.
 
 ## Decisiones
 
@@ -128,29 +136,22 @@
 - Los errores FAQ deberían resolverse tras publicar frontend y esperar recrawl de Google.
 - El redirect `/estadisticas/*` debería reducir una familia concreta de 404 legacy.
 - Puede quedar una duplicación específica de `SoftwareApplication` en páginas con schema propio adicional, pero ya no viene de los JSON-LD genéricos sin ID de `index.html`.
-- Lovable probablemente requiere sync/publish manual para llevar `origin/main` a producción.
+- Lovable requería publish manual para llevar `origin/main` a producción.
+- Search Console puede recibir ya el sitemap y validaciones porque producción está corregida.
 
 ## Tareas pendientes
 
 1. Despliegue Lovable del bloque SEO/LLM:
-   - Iniciar sesión en Lovable dentro del navegador de Codex o publicar manualmente desde la cuenta del proyecto.
-   - Sincronizar/publicar el commit `a98e8c6`.
-   - Publicar frontend para activar `robots.txt`, `llms.txt` y `llms-full.txt`.
-   - Publicar frontend para llevar a producción el arreglo de `FAQPage` duplicado.
-   - Pedir explícitamente a Lovable el despliegue de Edge Function `sitemap`.
-   - Pedir explícitamente a Lovable el despliegue de Edge Function `prerender`.
-   - Si se usa CLI en vez de Lovable, aportar `SUPABASE_ACCESS_TOKEN` o ejecutar `supabase login`.
+   - Hecho: frontend, `sitemap` y `prerender` reflejan el bloque en producción.
+   - Hecho: no hizo falta redeployar Worker.
 2. QA de producción post-despliegue:
-   - Validar `https://winerim.wine/robots.txt`: solo debe declarar `https://winerim.wine/sitemap.xml` como sitemap.
-   - Validar `https://winerim.wine/llms.txt` y `https://winerim.wine/llms-full.txt`.
-   - Re-crawlear `https://winerim.wine/sitemap.xml` como Googlebot.
-   - Validar `/en/pricing`, `/de/preise`, `/pt/precos` y `/precios` como Googlebot.
-   - Validar un artículo internacional con sufijo `_en`, `_it`, `_fr`, `_de` o `_pt`.
+   - Hecho: `robots.txt`, `llms-full.txt`, sitemap, rutas localizadas, artículo internacional y FAQ schema validados.
 3. Search Console:
    - Exportar ejemplos completos de `Páginas`: 404, descubiertas sin indexar, rastreadas sin indexar, duplicadas y canónicas alternativas.
    - Cruzar los errores públicos con impresiones, clics, canónica elegida por Google y motivo de exclusión.
-   - Reenviar `https://winerim.wine/sitemap.xml` tras validar producción.
-   - Pedir validación de correcciones en Search Console.
+   - Reenviar `https://winerim.wine/sitemap.xml`.
+   - Pedir validación de FAQ duplicado.
+   - Pedir validación de 404 cuando se completen familias de redirects/correcciones.
    - Revisar si se puede retirar `/sitemap_index.xml` desde la vista de detalle o configuración.
 4. P0 destino definitivo de URLs excluidas:
    - Decidir si las familias `grape/uva/vitigno/rebsorte/cepage/casta`, cursos, regiones y `software-carta-vinhos-*` quedan fuera, redirigen o se convierten en páginas reales.

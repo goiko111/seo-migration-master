@@ -281,3 +281,51 @@
   - `llms-full.txt` con HTTP 200.
   - `/en/pricing`, `/de/preise` y `/pt/precos` como Googlebot con idioma/canonical propios.
   - `FAQPage` único en las páginas afectadas.
+
+## Actualización 2026-05-24: producción validada tras Lovable
+
+## Hechos
+
+- El usuario publicó desde Lovable.
+- No se redesplegó Cloudflare Worker porque las rutas dependientes del Worker ya respondían correctamente.
+- Producción refleja el frontend publicado:
+  - `https://winerim.wine/robots.txt?codex=postlovable` ya solo declara `Sitemap: https://winerim.wine/sitemap.xml`.
+  - `https://winerim.wine/llms-full.txt?codex=postlovable` responde HTTP 200.
+- Producción refleja `prerender` localizado:
+  - Googlebot en `/en/pricing` recibe `html lang="en"`, canonical `https://winerim.wine/en/pricing` y hreflang `es/en/de/pt/x-default`.
+  - Googlebot en `/de/preise` recibe `html lang="de"` y canonical `https://winerim.wine/de/preise`.
+  - Googlebot en `/pt/precos` recibe `html lang="pt"` y canonical `https://winerim.wine/pt/precos`.
+  - Googlebot en `/article/alex-pardo_en` recibe `html lang="en"` e `inLanguage: "en"`.
+- Producción refleja el sitemap saneado:
+  - `https://winerim.wine/sitemap.xml?codex=postlovable2` contiene 2.431 URLs.
+  - El sitemap ya no incluye `llms.txt`.
+  - El sitemap ya no incluye las familias `grape/` ni `uva/`.
+  - El sitemap ya no incluye el ejemplo temporalmente excluido `/benchmarks-playbooks/playbook-mejorar-rotacion`.
+  - El sitemap sí incluye `/en/pricing` y `/de/preise`.
+- Producción mantiene Worker correcto:
+  - `/estadisticas/estadisticas-2024-01-28?codex=postlovable` responde 301 a `/benchmarks-playbooks`.
+  - `/google0be715f4ef205b3d.html?codex=postlovable2` responde 200 con `X-Worker-Branch: gsc-verification`.
+- Producción renderizada en navegador confirma `FAQPage` único:
+  - `/software-carta-de-vinos`: 1 `FAQPage`, 0 JSON-LD sin ID.
+  - `/como-vender-mas-vino-en-un-restaurante`: 1 `FAQPage`, 0 JSON-LD sin ID.
+  - `/en/what-is-winerim`: 1 `FAQPage`, 0 JSON-LD sin ID.
+
+## Decisiones
+
+- No desplegar Worker cuando la lógica desplegada ya coincide con las verificaciones públicas.
+- Considerar cerrado el despliegue técnico del bloque `robots`/`llms`/`sitemap`/`prerender`/FAQ.
+- El siguiente paso en Search Console ya puede ser reenviar `/sitemap.xml` y pedir validaciones de corrección.
+
+## Hipótesis
+
+- Google tardará días en reflejar la reducción de URLs no indexadas y la corrección de FAQ.
+- La bajada del sitemap de 2.989 a 2.431 URLs debería reducir ruido de 404 y páginas débiles enviadas.
+- Las páginas localizadas estáticas deberían empezar a recuperar señales internacionales al dejar de canonicalizar a la home española.
+
+## Tareas pendientes
+
+- Reenviar `https://winerim.wine/sitemap.xml` en Search Console.
+- Pedir validación de corrección para FAQ duplicado en Search Console.
+- Pedir validación o seguimiento de 404 tras corregir familias completas.
+- Exportar ejemplos completos restantes de 404, descubiertas sin indexar y rastreadas sin indexar.
+- Continuar con Core Web Vitals móvil, LCP home y fortalecimiento de enlaces internos.
