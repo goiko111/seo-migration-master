@@ -2,7 +2,7 @@
 
 ## Hechos
 
-- Fecha de actualización: 2026-05-23.
+- Fecha de actualización: 2026-05-24.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
 - Rama activa: `main`.
 - PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
@@ -329,3 +329,50 @@
 - Pedir validación o seguimiento de 404 tras corregir familias completas.
 - Exportar ejemplos completos restantes de 404, descubiertas sin indexar y rastreadas sin indexar.
 - Continuar con Core Web Vitals móvil, LCP home y fortalecimiento de enlaces internos.
+
+## Actualización 2026-05-24: acciones Search Console post-despliegue
+
+## Hechos
+
+- Al iniciar esta continuación se releyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- En Search Console, `/sitemap.xml` aparece enviado el 24 may 2026, leído el 24 may 2026, con estado `Correcto`, 2.431 páginas descubiertas y 0 vídeos.
+- En Search Console, `/sitemap_index.xml` sigue listado desde el 22 dic 2022, leído por última vez el 18 may 2026, con estado `Correcto` y 1.358 páginas descubiertas.
+- Se pidió la validación de corrección del problema `El campo "FAQPage" está duplicado`.
+- Search Console dejó la validación FAQ en estado `Iniciada`, con fecha de inicio 24/5/26.
+- Se inspeccionó `https://winerim.wine/software-carta-de-vinos` en Search Console:
+  - Estado: `La URL está en Google`.
+  - Indexación de páginas: `La página está indexada`.
+  - HTTPS: válido.
+  - Rutas de exploración: 1 elemento válido.
+  - Preguntas frecuentes: 1 elemento válido.
+- Se intentó solicitar indexación/reindexación de `https://winerim.wine/software-carta-de-vinos`.
+- Search Console devolvió error al enviar la solicitud de indexación: `Se ha producido un problema al enviar la solicitud de indexación. Vuelve a intentarlo más tarde.`
+
+## Decisiones
+
+- No hacer indexación manual masiva: usar la herramienta de inspección solo para una tanda corta de URLs estratégicas.
+- No insistir repetidamente con `Solicitar indexación` mientras Search Console devuelva error temporal.
+- Mantener `/sitemap_index.xml` como pendiente de revisión, sin retirarlo a ciegas mientras la UI no ofrezca una acción clara.
+- Considerar que el paso manual prioritario de Search Console para FAQ ya está hecho: la validación quedó iniciada.
+
+## Hipótesis
+
+- La validación FAQ puede tardar días en completarse aunque la inspección de URL ya detecte 1 FAQ válido.
+- El error de solicitud de indexación parece temporal o propio de Search Console, no un bloqueo técnico de Winerim, porque la URL inspeccionada está indexada y con mejoras válidas.
+- El nuevo sitemap de 2.431 URLs debería empezar a sustituir la lectura antigua del sitemap cuando Google recalcule cobertura.
+
+## Tareas pendientes
+
+- Monitorizar la validación FAQ iniciada el 24/5/26.
+- Reintentar solicitud de indexación más tarde solo para URLs estratégicas:
+  - `https://winerim.wine/software-carta-de-vinos`
+  - `https://winerim.wine/como-vender-mas-vino-en-un-restaurante`
+  - `https://winerim.wine/en/pricing`
+  - `https://winerim.wine/de/preise`
+  - `https://winerim.wine/pt/precos`
+  - `https://winerim.wine/biblioteca-vino`
+  - `https://winerim.wine/en/wine-library`
+  - `https://winerim.wine/de/weinbibliothek`
+  - `https://winerim.wine/pt/biblioteca-vinho`
+- Revisar más adelante si Search Console permite retirar `/sitemap_index.xml` sin afectar al sitemap activo.
+- No validar 404 todavía hasta completar familias de redirects o destinos canónicos.

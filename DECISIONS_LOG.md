@@ -421,3 +421,41 @@
 - Pedir validación FAQ.
 - Seguir exportando y corrigiendo familias 404 restantes.
 - Abrir bloque separado para LCP móvil y enlaces internos.
+
+### Acciones Search Console post-despliegue
+
+#### Hechos
+
+- Se releyeron los documentos fuente de verdad antes de continuar.
+- Search Console muestra `/sitemap.xml` enviado y leído el 24 may 2026, estado `Correcto`, 2.431 páginas descubiertas y 0 vídeos.
+- Search Console mantiene `/sitemap_index.xml` listado desde 2022, leído por última vez el 18 may 2026, estado `Correcto`, 1.358 páginas descubiertas.
+- Se inició la validación del error `El campo "FAQPage" está duplicado`.
+- La validación FAQ quedó con resultado `Iniciada` y fecha de inicio 24/5/26.
+- La inspección de URL de `https://winerim.wine/software-carta-de-vinos` confirma:
+  - URL en Google.
+  - Página indexada.
+  - HTTPS válido.
+  - 1 breadcrumb válido.
+  - 1 FAQ válido.
+- Se intentó solicitar reindexación de `https://winerim.wine/software-carta-de-vinos`.
+- Search Console rechazó temporalmente la solicitud con el mensaje `Se ha producido un problema al enviar la solicitud de indexación. Vuelve a intentarlo más tarde.`
+
+#### Decisiones
+
+- Reenviar sitemap y validar FAQ son acciones suficientes para esta primera pasada post-despliegue.
+- La indexación manual debe limitarse a URLs estratégicas, no a todo el sitemap.
+- No repetir solicitudes de indexación mientras Search Console devuelva error temporal.
+- No retirar `/sitemap_index.xml` sin confirmar una acción de retirada clara en Search Console.
+
+#### Hipótesis
+
+- Google puede tardar varios días en procesar la validación FAQ y actualizar los informes de cobertura.
+- El error de solicitud de indexación no indica problema técnico de la página inspeccionada, porque Search Console la muestra indexada y con datos estructurados válidos.
+- El sitemap nuevo ya está técnicamente aceptado por Search Console; el efecto en páginas no indexadas será gradual.
+
+#### Tareas pendientes
+
+- Monitorizar la validación FAQ iniciada.
+- Reintentar indexación manual más tarde solo para una lista corta de URLs core e internacionales.
+- Seguir corrigiendo 404 por familias antes de pedir validación global.
+- Abrir bloque separado para Core Web Vitals móvil y enlaces internos.

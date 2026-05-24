@@ -147,10 +147,14 @@
 2. QA de producción post-despliegue:
    - Hecho: `robots.txt`, `llms-full.txt`, sitemap, rutas localizadas, artículo internacional y FAQ schema validados.
 3. Search Console:
+   - Hecho: `/sitemap.xml` reenviado y leído el 24 may 2026, estado `Correcto`, 2.431 páginas descubiertas.
+   - Hecho: validación de `FAQPage` duplicado iniciada el 24/5/26.
+   - Hecho: inspección de `https://winerim.wine/software-carta-de-vinos` confirma URL indexada y 1 FAQ válido.
+   - Bloqueado temporalmente: `Solicitar indexación` devolvió `Se ha producido un problema al enviar la solicitud de indexación. Vuelve a intentarlo más tarde.`
    - Exportar ejemplos completos de `Páginas`: 404, descubiertas sin indexar, rastreadas sin indexar, duplicadas y canónicas alternativas.
    - Cruzar los errores públicos con impresiones, clics, canónica elegida por Google y motivo de exclusión.
-   - Reenviar `https://winerim.wine/sitemap.xml`.
-   - Pedir validación de FAQ duplicado.
+   - Monitorizar resultado de la validación FAQ.
+   - Reintentar indexación manual más tarde para una tanda corta de URLs estratégicas, no para todo el sitemap.
    - Pedir validación de 404 cuando se completen familias de redirects/correcciones.
    - Revisar si se puede retirar `/sitemap_index.xml` desde la vista de detalle o configuración.
 4. P0 destino definitivo de URLs excluidas:
@@ -176,8 +180,8 @@
    - Optimizar LCP móvil de la home.
    - Revisar imagen/hero inicial, JS crítico, preload y tamaño de bundles.
 10. P1 schema:
-   - Publicar y revalidar el arreglo local de `FAQPage` duplicado en `/software-carta-de-vinos`.
-   - Publicar y revalidar el arreglo local de `FAQPage` duplicado en `/como-vender-mas-vino-en-un-restaurante`.
+   - Hecho: arreglo `FAQPage` publicado en producción y validación Search Console iniciada.
+   - Monitorizar resultado de validación para `/software-carta-de-vinos` y `/como-vender-mas-vino-en-un-restaurante`.
    - Revisar si `WhatIsWinerim` debe conservar schema `SoftwareApplication` adicional o transformarlo en `AboutPage`/`WebPage` con `mainEntity`.
 11. P1 LLMs:
    - Añadir páginas de evidencia, casos y comparativas con datos citables.
