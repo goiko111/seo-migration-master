@@ -401,6 +401,7 @@
   - `git diff --check` sin errores.
   - Navegador local en home: los 8 logos de hoteles cargan con dimensiones válidas.
   - Navegador local en `/clientes`: 589 logos detectados y sin imágenes rotas en la muestra cargada.
+- El bloque base de logos quedó commiteado y pusheado en `main` con `c7adcfe feat: update hotel and client logos`.
 - Avisos no bloqueantes:
   - Browserslist/caniuse-lite sigue desactualizado.
   - Persisten avisos de chunks grandes durante build.
@@ -409,7 +410,7 @@
 
 - Usar assets estáticos versionados para la galería pública de `/clientes`, evitando que la página dependa de datos incompletos o antiguos de Supabase.
 - Mantener los logos de clientes como PNG optimizados porque el entorno local no soporta conversión WebP vía `sips`.
-- Mostrar la galería de clientes como logos limpios, sin nombres visibles generados desde filenames, para evitar texto de baja calidad visual.
+- Tras feedback del usuario, mostrar nombres visibles de clientes bajo cada logo en `/clientes`; mantener ubicación como apoyo visual y metadata accesible.
 - No tocar SEO técnico, Worker, sitemap, prerender ni Search Console en este bloque.
 
 ## Hipótesis
@@ -420,9 +421,52 @@
 
 ## Tareas pendientes
 
-- Hacer commit y push de la actualización de logos.
+- Hecho: commit y push de la actualización base de logos con `c7adcfe`.
 - Publicar desde Lovable para que home y `/clientes` reflejen los nuevos assets.
 - Revalidar producción:
   - Home: sección `Grupos hoteleros` con los 8 logos nuevos.
   - `/clientes`: galería de 589 logos cargando sin rotos.
 - Valorar más adelante si conviene convertir los logos a WebP/AVIF con una herramienta de imagen dedicada.
+
+## Actualización 2026-05-24: ajuste visual de logos
+
+## Hechos
+
+- Al iniciar este ajuste se releyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se detectó una contradicción documental: `CURRENT_STATE.md` aún marcaba como pendiente el commit/push del bloque base de logos, aunque `c7adcfe` ya estaba pusheado.
+- El usuario pidió mantener el nombre escrito de los clientes y hacer más grandes los logos de hoteles en la home.
+- `src/pages/Clientes.tsx` vuelve a mostrar texto visible por cliente bajo cada logo.
+- `src/pages/Clientes.tsx` muestra también la ubicación como apoyo secundario, limitada en una línea.
+- `src/components/LogoStrip.tsx` aumenta el tamaño visual de los logos de hoteles:
+  - Antes: imagen `h-8 sm:h-14 md:h-16`.
+  - Ahora: imagen `h-16 sm:h-20 md:h-24`.
+- No se añadieron nuevos assets.
+- Verificación local:
+  - `npm run build` completado correctamente.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check` sin errores.
+  - Navegador local en `/clientes`: aparecen nombres visibles junto a los logos.
+  - Navegador local en home: los 8 logos de hoteles cargan y miden 96 px de alto en viewport desktop local.
+- Avisos no bloqueantes:
+  - Browserslist/caniuse-lite sigue desactualizado.
+  - Persisten avisos de chunks grandes durante build.
+
+## Decisiones
+
+- Mantener nombres visibles de clientes en `/clientes` porque el usuario lo prefiere y mejora reconocimiento comercial.
+- Reducir densidad de la galería de clientes de 8 columnas máximas a 6 columnas máximas para dar aire al logo y al nombre.
+- Mantener los logos de hoteles sin nombre escrito visible en home, pero con mayor presencia visual.
+- No tocar SEO técnico, Worker, sitemap, prerender ni Search Console en este ajuste.
+
+## Hipótesis
+
+- Los nombres visibles debajo de cada logo harán más reconocible la prueba social, aunque algunos nombres generados desde filename puedan requerir normalización editorial futura.
+- Aumentar los logos de hoteles mejora la percepción de credibilidad en la home sin cambiar arquitectura ni contenido SEO.
+
+## Tareas pendientes
+
+- Publicar desde Lovable el ajuste visual de logos.
+- Revalidar producción:
+  - Home: logos de hoteles más grandes.
+  - `/clientes`: logos con nombre visible.
+- Valorar un manifest editorial de clientes para normalizar nombres comerciales, grupos y ubicaciones.

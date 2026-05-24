@@ -163,17 +163,17 @@ const LogoStrip = () => {
         className="mt-8 sm:mt-10 px-6"
       >
         <span className="block text-xs tracking-[0.25em] uppercase text-accent/80 font-semibold text-center mb-8">{t.logostrip_hotels}</span>
-        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14 lg:gap-16">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-8 sm:gap-x-12 md:gap-x-16 lg:gap-x-20">
           {hotelLogos.map((item) => (
-            <div key={item.name} className="flex items-center justify-center h-12 sm:h-16 md:h-20 px-1">
+            <div key={item.name} className="flex items-center justify-center h-20 sm:h-24 md:h-28 px-2 sm:px-3">
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 sm:h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                 loading="lazy"
                 decoding="async"
-                width={140}
-                height={64}
+                width={192}
+                height={96}
               />
             </div>
           ))}

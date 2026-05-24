@@ -151,9 +151,13 @@
    - Hecho local: 589 logos de clientes añadidos a `src/assets/logos/clients-white/`.
    - Hecho local: home usa los nuevos logos de hoteles en `LogoStrip`.
    - Hecho local: `/clientes` usa la galería estática de logos optimizados.
-   - Hecho local: build, tests, `git diff --check` y navegador local validados.
+   - Hecho: actualización base commiteada y pusheada con `c7adcfe`.
+   - Hecho local: `/clientes` vuelve a mostrar nombre visible de cada cliente bajo el logo.
+   - Hecho local: home muestra los logos hoteleros con mayor tamaño visual.
+   - Hecho local: build, tests, `git diff --check` y navegador local validados tras el ajuste visual.
    - Pendiente: publicar desde Lovable.
-   - Pendiente: validar en producción home y `/clientes`.
+   - Pendiente: validar en producción home y `/clientes` tras publish.
+   - Pendiente: decidir si se crea un manifest editorial para normalizar nombres comerciales de clientes.
 3. Search Console:
    - Hecho: `/sitemap.xml` reenviado y leído el 24 may 2026, estado `Correcto`, 2.431 páginas descubiertas.
    - Hecho: validación de `FAQPage` duplicado iniciada el 24/5/26.

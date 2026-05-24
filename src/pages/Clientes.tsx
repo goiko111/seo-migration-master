@@ -203,23 +203,35 @@ const Clientes = () => {
           </ScrollReveal>
 
           {hasLogos ? (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {staticClientLogos.map((client, i) => (
                 <ScrollReveal key={client.id} delay={Math.min(i * 0.01, 0.5)}>
                   <div
-                    className="group bg-gradient-card rounded-xl border border-border p-4 flex items-center justify-center hover:border-wine/30 transition-all duration-300 aspect-[3/2]"
+                    className="group bg-gradient-card rounded-xl border border-border p-4 min-h-36 sm:min-h-40 flex flex-col items-center justify-between gap-3 hover:border-wine/30 transition-all duration-300"
                     aria-label={client.location ? `${client.name}, ${client.location}` : client.name}
                     title={client.location ? `${client.name} · ${client.location}` : client.name}
                   >
-                    <img
-                      src={client.logoUrl}
-                      alt={`${client.name} logo`}
-                      className="w-full h-full max-h-20 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                      loading="lazy"
-                      decoding="async"
-                      width={160}
-                      height={80}
-                    />
+                    <div className="flex min-h-20 w-full flex-1 items-center justify-center">
+                      <img
+                        src={client.logoUrl}
+                        alt={`${client.name} logo`}
+                        className="max-h-20 w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                        loading="lazy"
+                        decoding="async"
+                        width={160}
+                        height={80}
+                      />
+                    </div>
+                    <div className="w-full text-center">
+                      <p className="text-xs sm:text-sm font-medium leading-snug text-foreground [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
+                        {client.name}
+                      </p>
+                      {client.location ? (
+                        <p className="mt-1 text-[10px] leading-tight text-muted-foreground truncate">
+                          {client.location}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
                 </ScrollReveal>
               ))}

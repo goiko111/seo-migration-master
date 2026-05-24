@@ -482,7 +482,7 @@
 #### Decisiones
 
 - Priorizar assets estáticos versionados para la prueba social pública.
-- Mantener nombres/ubicaciones de cliente como metadatos accesibles (`aria-label` y `title`) y no como texto visible generado desde filenames.
+- Tras feedback posterior del usuario, mantener nombres visibles de clientes bajo cada logo y conservar ubicación como apoyo/metadato accesible.
 - Ordenar la galería con logos de España primero.
 - No mezclar este bloque con SEO técnico, Search Console, Worker ni biblioteca del vino.
 
@@ -494,7 +494,41 @@
 
 #### Tareas pendientes
 
-- Commit y push.
+- Hecho: commit y push base de logos con `c7adcfe feat: update hotel and client logos`.
 - Publicar desde Lovable.
 - Validar home y `/clientes` en producción.
 - Evaluar conversión WebP/AVIF dedicada si se quiere reducir aún más peso.
+
+### Ajuste visual posterior de logos
+
+#### Hechos
+
+- El usuario pidió mantener el nombre escrito de los clientes y hacer más grandes los logos de hoteles.
+- Se detectó y corrigió una contradicción documental: el commit/push base de logos ya estaba hecho en `c7adcfe`, aunque `CURRENT_STATE.md` aún lo marcaba pendiente.
+- `Clientes` muestra ahora nombre visible y ubicación secundaria en cada tarjeta de cliente.
+- La galería de `/clientes` baja su densidad máxima de 8 a 6 columnas para que logo y nombre respiren mejor.
+- `LogoStrip` aumenta el tamaño de los logos hoteleros en home de `h-8 sm:h-14 md:h-16` a `h-16 sm:h-20 md:h-24`.
+- Verificaciones ejecutadas:
+  - `npm run build`.
+  - `npm run test`.
+  - `git diff --check`.
+  - Navegador local en home y `/clientes`.
+
+#### Decisiones
+
+- Mostrar nombre visible de clientes bajo el logo como criterio de diseño para `/clientes`.
+- Mantener ubicación visible de forma secundaria, limitada a una línea.
+- Dar más presencia a los logos de hoteles sin añadir copy visible nuevo en la home.
+- No mezclar el ajuste visual con cambios SEO, Worker, Search Console ni biblioteca del vino.
+
+#### Hipótesis
+
+- La página `/clientes` gana claridad comercial al combinar logo y nombre.
+- Los hoteles en home necesitan mayor peso visual para que la sección de grupos hoteleros no quede débil frente a Michelin/Repsol.
+- En un bloque posterior convendrá normalizar nombres desde un manifest editorial, porque algunos filenames no reflejan perfectamente el nombre comercial.
+
+#### Tareas pendientes
+
+- Publicar el ajuste desde Lovable.
+- Validar en producción home y `/clientes`.
+- Decidir si se crea un manifest editorial de clientes con nombres comerciales revisados.
