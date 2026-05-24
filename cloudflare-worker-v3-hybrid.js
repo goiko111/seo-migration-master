@@ -763,6 +763,18 @@ export default {
         headers: { 'Content-Type': 'text/plain', 'X-Worker-Branch': 'health' },
       });
     }
+    if (path === '/~api/analytics') {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Cache-Control': 'no-store',
+          'X-Robots-Tag': 'noindex',
+          'X-Worker-Branch': 'analytics-noop',
+        },
+      });
+    }
     if (path === '/google0be715f4ef205b3d.html') {
       return new Response('google-site-verification: google0be715f4ef205b3d.html', {
         status: 200,

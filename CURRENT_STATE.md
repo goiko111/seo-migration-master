@@ -534,3 +534,58 @@
   - Home: logos de hoteles más grandes.
   - `/clientes`: logos con nombre visible.
 - Valorar un manifest editorial de clientes para normalizar nombres comerciales, grupos y ubicaciones.
+
+## Actualización 2026-05-24: rendimiento `/clientes` y analytics noop
+
+## Hechos
+
+- Al retomar se confirmó que producción aún no refleja todo el bloque pendiente de Lovable:
+  - `https://winerim.wine/sitemap.xml?codex=01fc2b1` sigue con 2.431 URLs e incluye legales y city pages fallback.
+  - `https://winerim.wine/en/privacy?codex=01fc2b1` como Googlebot ya recibe `X-Robots-Tag: noindex, follow` desde Worker, pero el HTML del origen sigue siendo la home/canonical `/`.
+- Lovable en el navegador de Codex sigue redirigiendo a login, por lo que no se pudo publicar frontend ni Edge Functions desde esa vía.
+- `SUPABASE_ACCESS_TOKEN` sigue ausente en el entorno.
+- Se corrigió en Cloudflare Worker el 404 de producción `https://winerim.wine/~api/analytics`.
+- Worker desplegado: `winerim-proxy` Version ID `5e984988-b0c1-4fa2-b5f8-dc0e62fabe0f`.
+- Verificación de producción:
+  - `GET https://winerim.wine/~api/analytics` responde HTTP 204.
+  - `OPTIONS https://winerim.wine/~api/analytics` responde HTTP 204.
+  - La respuesta incluye `X-Worker-Branch: analytics-noop`, `Cache-Control: no-store` y `X-Robots-Tag: noindex`.
+- `src/pages/Clientes.tsx` ahora carga la galería de clientes por tandas:
+  - 120 logos iniciales.
+  - Botón para cargar 120 logos adicionales por click.
+  - Contador localizado en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- QA local en `/clientes` móvil:
+  - Estado inicial: 120 imágenes de logo.
+  - Tras click en `Ver más clientes`: 240 imágenes.
+  - Texto inicial: `Mostrando 120 de 589`.
+  - Sin errores de consola en la prueba.
+- Verificaciones ejecutadas:
+  - `npm run build` correcto.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check` correcto.
+  - `npm run deploy:worker:dry-run` correcto.
+- `npm run lint` falla por deuda global preexistente fuera de los archivos modificados; `src/pages/Clientes.tsx` no aparece entre los errores.
+
+## Decisiones
+
+- Resolver `~api/analytics` en Worker como endpoint noop 204 para eliminar ruido de consola/Lighthouse sin depender del origen Lovable.
+- Cambiar `/clientes` de carga total de 589 logos visibles a carga progresiva por tandas para reducir DOM inicial, imágenes iniciales y presión sobre LCP.
+- Mantener nombre escrito y ubicación secundaria en cada cliente, respetando la preferencia visual ya fijada por el usuario.
+- No mezclar este bloque con corrección global de lint, porque los errores vienen de deuda previa y no del cambio actual.
+
+## Hipótesis
+
+- Reducir la carga inicial de `/clientes` de 589 a 120 logos debería mejorar DOM inicial, coste de layout y LCP móvil.
+- El endpoint noop de analytics debería eliminar el 404 detectado por Lighthouse sin afectar SEO ni indexación.
+- El mayor salto pendiente sigue dependiendo de publicar desde Lovable los cambios de frontend, `sitemap` y `prerender` ya implementados.
+
+## Tareas pendientes
+
+- Publicar desde Lovable los cambios pendientes de frontend y Edge Functions.
+- Tras publish Lovable, revalidar:
+  - `/sitemap.xml` sin legales ni city pages fallback.
+  - `/en/privacy` como Googlebot con título/canonical propios y `noindex, follow`.
+  - `/clientes` en producción con galería progresiva y sin 404 de logos.
+- Reenviar `/sitemap.xml` en Search Console solo después de validar producción.
+- Reejecutar Lighthouse móvil en home y `/clientes` tras publish para medir el impacto real.
+- Abrir bloque específico para Core Web Vitals de home: hero/LCP, JS inicial, bundles e imágenes responsive.

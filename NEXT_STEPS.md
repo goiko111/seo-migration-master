@@ -266,3 +266,60 @@
    - Redirect a página canónica superior.
    - `noindex`.
 7. Resolver contradicción de `src/seo/route-map.ts` frente al mapa real `de`/`pt`.
+
+## Actualización 2026-05-24: cierre parcial analytics y `/clientes`
+
+## Hechos
+
+- Hecho: `~api/analytics` ya no responde 404 en producción.
+- Worker desplegado: `5e984988-b0c1-4fa2-b5f8-dc0e62fabe0f`.
+- Producción verificada:
+  - `GET /~api/analytics` -> HTTP 204.
+  - `OPTIONS /~api/analytics` -> HTTP 204.
+  - Header `X-Worker-Branch: analytics-noop`.
+- Hecho local: `/clientes` ya no renderiza 589 logos de golpe.
+- Hecho local: `/clientes` renderiza 120 logos iniciales y carga 120 más por click.
+- Hecho local: el contador/botón de carga progresiva está traducido a `es`, `en`, `it`, `fr`, `de` y `pt`.
+- QA local:
+  - 120 logos iniciales.
+  - 240 logos tras click en `Ver más clientes`.
+  - Sin errores de consola.
+- Validaciones:
+  - `npm run build`: correcto.
+  - `npm run test`: 15 tests correctos.
+  - `git diff --check`: correcto.
+  - `npm run deploy:worker:dry-run`: correcto.
+- `npm run lint` falla por deuda global preexistente y no por el cambio de `/clientes`.
+- Bloqueo actual: Lovable sigue sin sesión disponible en Codex, por lo que frontend, `sitemap` y `prerender` siguen requiriendo publish manual/autenticado.
+
+## Decisiones
+
+- Mantener `~api/analytics` como 204 noop en Worker.
+- Mantener galería completa de clientes, pero con carga progresiva para reducir coste inicial.
+- No reenviar sitemap ni pedir nuevas validaciones de Search Console hasta publicar y validar Lovable.
+
+## Hipótesis
+
+- `/clientes` debería mejorar en DOM inicial/LCP una vez publicado el frontend.
+- Lighthouse debería dejar de reportar el 404 de analytics.
+- Home sigue siendo el siguiente foco principal de Core Web Vitals.
+
+## Tareas pendientes inmediatas
+
+1. Publicar desde Lovable:
+   - Frontend.
+   - Edge Function `sitemap`.
+   - Edge Function `prerender`.
+2. Revalidar producción tras Lovable:
+   - `/sitemap.xml` sin legales ni city pages fallback.
+   - `/en/privacy` como Googlebot con canonical propio y `noindex, follow`.
+   - `/clientes` con 120 logos iniciales, botón de carga progresiva y sin 404 de logos.
+3. Reejecutar Lighthouse móvil:
+   - Home.
+   - `/clientes`.
+4. Reenviar `/sitemap.xml` en Search Console solo después de que producción esté validada.
+5. Siguiente bloque Core Web Vitals:
+   - Home LCP.
+   - Imágenes responsive.
+   - JS inicial no usado.
+   - Chunks grandes.

@@ -576,3 +576,37 @@
 - Publicar el ajuste desde Lovable.
 - Validar en producción home y `/clientes`.
 - Decidir si se crea un manifest editorial de clientes con nombres comerciales revisados.
+
+### Rendimiento `/clientes` y endpoint analytics noop
+
+#### Hechos
+
+- Producción sigue sin reflejar todo el bloque pendiente de Lovable: el sitemap público aún incluye legales/city pages fallback y `/en/privacy` como Googlebot conserva HTML/canonical de la home.
+- El navegador de Codex sigue viendo Lovable en login, por lo que no se pudo publicar desde esa vía.
+- Se añadió en `cloudflare-worker-v3-hybrid.js` una respuesta HTTP 204 para `/~api/analytics`.
+- Se desplegó Worker `winerim-proxy` Version ID `5e984988-b0c1-4fa2-b5f8-dc0e62fabe0f`.
+- Producción verifica `GET` y `OPTIONS` de `/~api/analytics` con HTTP 204 y `X-Worker-Branch: analytics-noop`.
+- `/clientes` pasa a cargar los 589 logos por tandas de 120.
+- QA local confirma 120 logos iniciales y 240 tras pulsar `Ver más clientes`, sin errores de consola.
+- Verificaciones: `npm run build`, `npm run test`, `git diff --check` y `npm run deploy:worker:dry-run`.
+- `npm run lint` sigue fallando por deuda global preexistente no relacionada con los archivos modificados.
+
+#### Decisiones
+
+- Usar el Worker para neutralizar `/~api/analytics` con 204, porque el 404 venía del origen y afectaba a auditorías.
+- Mantener `/clientes` como galería completa, pero con carga progresiva en vez de renderizar todos los logos de golpe.
+- Conservar nombre escrito y ubicación en las tarjetas de cliente.
+- No bloquear este cierre por lint global mientras build, tests y diff check estén correctos.
+
+#### Hipótesis
+
+- La carga progresiva de logos reducirá DOM inicial y presión de imágenes en `/clientes`.
+- El 204 de analytics eliminará el error de consola en Lighthouse.
+- Hasta publicar Lovable, producción no reflejará la parte frontend de `/clientes` ni el sitemap/prerender limpio.
+
+#### Tareas pendientes
+
+- Publicar Lovable para activar frontend, `sitemap` y `prerender` pendientes.
+- Revalidar `/clientes`, sitemap y legales tras publish.
+- Reejecutar Lighthouse móvil en home y `/clientes`.
+- Planificar la limpieza de lint global como bloque separado.

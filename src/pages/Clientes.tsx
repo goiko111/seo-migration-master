@@ -1,12 +1,14 @@
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, Quote } from "lucide-react";
+import { ArrowRight, ChevronDown, Star, Quote } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n } from "@/i18n/types";
 
@@ -16,6 +18,9 @@ interface StaticClientLogo {
   logoUrl: string;
   location: string;
 }
+
+const CLIENT_LOGO_INITIAL_COUNT = 120;
+const CLIENT_LOGO_LOAD_STEP = 120;
 
 const clientLogoModules = import.meta.glob("../assets/logos/clients-white/**/*.png", {
   eager: true,
@@ -77,49 +82,49 @@ const i18n: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string; badge: string; title: string; subtitle: string;
   stats: { value: string; label: string }[];
   featured_badge: string; featured_title: string;
-  all_title: string; all_sub: string;
+  all_title: string; all_sub: string; show_more: string; showing_count: (visible: number, total: number) => string;
   cta_badge: string; cta_title: string; cta_sub: string; cta_btn: string;
 }> = {
   es: {
     seo_title: "Clientes de Winerim | Restaurantes que confían en nosotros", seo_desc: "Más de 1.000 restaurantes confían en Winerim para gestionar su carta de vinos.", breadcrumb: "Clientes", badge: "Nuestros clientes", title: "Los mejores restaurantes ya usan <em>Winerim</em>", subtitle: "Más de 1.000 establecimientos confían en nuestra tecnología para transformar su carta de vinos.",
     stats: [{ value: "1.000+", label: "Bodegas gestionadas" }, { value: "500.000+", label: "Referencias en nuestra base de datos" }, { value: "18", label: "Testimonios verificados de profesionales" }, { value: "España y Europa", label: "Presencia geográfica" }],
     featured_badge: "Destacados", featured_title: "Lo que dicen nuestros <em>clientes</em>",
-    all_title: "Todos nuestros <em>clientes</em>", all_sub: "Restaurantes de toda España, Portugal, Italia y más confían en Winerim.",
+    all_title: "Todos nuestros <em>clientes</em>", all_sub: "Restaurantes de toda España, Portugal, Italia y más confían en Winerim.", show_more: "Ver más clientes", showing_count: (visible, total) => `Mostrando ${visible} de ${total}`,
     cta_badge: "Únete", cta_title: "¿Listo para ser el <em>siguiente?</em>", cta_sub: "Prueba Winerim gratis y descubre por qué más de 1.000 restaurantes ya confían en nosotros.", cta_btn: "Solicitar demo",
   },
   en: {
     seo_title: "Winerim Clients | Restaurants that trust us", seo_desc: "Over 1,000 restaurants trust Winerim to manage their wine list.", breadcrumb: "Clients", badge: "Our clients", title: "The best restaurants already use <em>Winerim</em>", subtitle: "Over 1,000 establishments trust our technology to transform their wine list.",
     stats: [{ value: "1,000+", label: "Cellars managed" }, { value: "500,000+", label: "References in our database" }, { value: "18", label: "Verified professional testimonials" }, { value: "Spain & Europe", label: "Geographic presence" }],
     featured_badge: "Featured", featured_title: "What our <em>clients</em> say",
-    all_title: "All our <em>clients</em>", all_sub: "Restaurants across Spain, Portugal, Italy and more trust Winerim.",
+    all_title: "All our <em>clients</em>", all_sub: "Restaurants across Spain, Portugal, Italy and more trust Winerim.", show_more: "Show more clients", showing_count: (visible, total) => `Showing ${visible} of ${total}`,
     cta_badge: "Join us", cta_title: "Ready to be <em>next?</em>", cta_sub: "Try Winerim free and discover why over 1,000 restaurants already trust us.", cta_btn: "Request demo",
   },
   it: {
     seo_title: "Clienti Winerim | Ristoranti che si fidano di noi", seo_desc: "Oltre 1.000 ristoranti si fidano di Winerim.", breadcrumb: "Clienti", badge: "I nostri clienti", title: "I migliori ristoranti usano già <em>Winerim</em>", subtitle: "Oltre 1.000 ristoranti si fidano della nostra tecnologia.",
     stats: [{ value: "1.000+", label: "Cantine gestite" }, { value: "500.000+", label: "Referenze nel nostro database" }, { value: "18", label: "Testimonianze verificate" }, { value: "Spagna e Europa", label: "Presenza geografica" }],
     featured_badge: "In evidenza", featured_title: "Cosa dicono i nostri <em>clienti</em>",
-    all_title: "Tutti i nostri <em>clienti</em>", all_sub: "Ristoranti in Spagna, Portogallo, Italia e oltre si fidano di Winerim.",
+    all_title: "Tutti i nostri <em>clienti</em>", all_sub: "Ristoranti in Spagna, Portogallo, Italia e oltre si fidano di Winerim.", show_more: "Mostra altri clienti", showing_count: (visible, total) => `Mostrando ${visible} di ${total}`,
     cta_badge: "Unisciti", cta_title: "Pronto ad essere il <em>prossimo?</em>", cta_sub: "Prova Winerim gratis e scopri perché oltre 1.000 ristoranti si fidano di noi.", cta_btn: "Richiedi demo",
   },
   fr: {
     seo_title: "Clients Winerim | Restaurants qui nous font confiance", seo_desc: "Plus de 1 000 restaurants font confiance à Winerim.", breadcrumb: "Clients", badge: "Nos clients", title: "Les meilleurs restaurants utilisent déjà <em>Winerim</em>", subtitle: "Plus de 1 000 établissements font confiance à notre technologie.",
     stats: [{ value: "1 000+", label: "Caves gérées" }, { value: "500 000+", label: "Références dans notre base" }, { value: "18", label: "Témoignages professionnels vérifiés" }, { value: "Espagne et Europe", label: "Présence géographique" }],
     featured_badge: "En vedette", featured_title: "Ce que disent nos <em>clients</em>",
-    all_title: "Tous nos <em>clients</em>", all_sub: "Restaurants en Espagne, Portugal, Italie et ailleurs font confiance à Winerim.",
+    all_title: "Tous nos <em>clients</em>", all_sub: "Restaurants en Espagne, Portugal, Italie et ailleurs font confiance à Winerim.", show_more: "Voir plus de clients", showing_count: (visible, total) => `${visible} sur ${total} affichés`,
     cta_badge: "Rejoignez-nous", cta_title: "Prêt à être le <em>prochain ?</em>", cta_sub: "Essayez Winerim gratuitement et découvrez pourquoi plus de 1 000 restaurants nous font confiance.", cta_btn: "Demander démo",
   },
   de: {
     seo_title: "Winerim-Kunden | Restaurants, die uns vertrauen", seo_desc: "Über 1.000 Restaurants vertrauen Winerim für die Verwaltung ihrer Weinkarte.", breadcrumb: "Kunden", badge: "Unsere Kunden", title: "Die besten Restaurants nutzen bereits <em>Winerim</em>", subtitle: "Über 1.000 Betriebe vertrauen unserer Technologie, um ihre Weinkarte zu transformieren.",
     stats: [{ value: "1.000+", label: "Verwaltete Weinkeller" }, { value: "500.000+", label: "Referenzen in unserer Datenbank" }, { value: "18", label: "Verifizierte Erfahrungsberichte" }, { value: "Spanien & Europa", label: "Geografische Präsenz" }],
     featured_badge: "Empfohlen", featured_title: "Was unsere <em>Kunden</em> sagen",
-    all_title: "Alle unsere <em>Kunden</em>", all_sub: "Restaurants in ganz Spanien, Portugal, Italien und darüber hinaus vertrauen Winerim.",
+    all_title: "Alle unsere <em>Kunden</em>", all_sub: "Restaurants in ganz Spanien, Portugal, Italien und darüber hinaus vertrauen Winerim.", show_more: "Mehr Kunden anzeigen", showing_count: (visible, total) => `${visible} von ${total} angezeigt`,
     cta_badge: "Mitmachen", cta_title: "Bereit, der <em>Nächste</em> zu sein?", cta_sub: "Testen Sie Winerim kostenlos und erfahren Sie, warum über 1.000 Restaurants uns bereits vertrauen.", cta_btn: "Demo anfordern",
   },
   pt: {
     seo_title: "Clientes do Winerim | Restaurantes que confiam em nós", seo_desc: "Mais de 1.000 restaurantes confiam no Winerim para gerir a sua carta de vinhos.", breadcrumb: "Clientes", badge: "Os nossos clientes", title: "Os melhores restaurantes já usam o <em>Winerim</em>", subtitle: "Mais de 1.000 estabelecimentos confiam na nossa tecnologia para transformar a sua carta de vinhos.",
     stats: [{ value: "1.000+", label: "Garrafeiras geridas" }, { value: "500.000+", label: "Referências na nossa base de dados" }, { value: "18", label: "Testemunhos verificados de profissionais" }, { value: "Espanha e Europa", label: "Presença geográfica" }],
     featured_badge: "Destaques", featured_title: "O que dizem os nossos <em>clientes</em>",
-    all_title: "Todos os nossos <em>clientes</em>", all_sub: "Restaurantes em toda a Espanha, Portugal, Itália e mais confiam no Winerim.",
+    all_title: "Todos os nossos <em>clientes</em>", all_sub: "Restaurantes em toda a Espanha, Portugal, Itália e mais confiam no Winerim.", show_more: "Ver mais clientes", showing_count: (visible, total) => `A mostrar ${visible} de ${total}`,
     cta_badge: "Junte-se", cta_title: "Pronto para ser o <em>próximo?</em>", cta_sub: "Experimente o Winerim gratuitamente e descubra por que mais de 1.000 restaurantes já confiam em nós.", cta_btn: "Pedir demo",
   },
 };
@@ -130,6 +135,13 @@ const Clientes = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = getI18n(i18n, lang) || i18n.es;
   const hasLogos = staticClientLogos.length > 0;
+  const [visibleLogoCount, setVisibleLogoCount] = useState(CLIENT_LOGO_INITIAL_COUNT);
+  const visibleClientLogos = useMemo(
+    () => staticClientLogos.slice(0, visibleLogoCount),
+    [visibleLogoCount],
+  );
+  const visibleCount = Math.min(visibleLogoCount, staticClientLogos.length);
+  const hasMoreLogos = visibleCount < staticClientLogos.length;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -203,39 +215,55 @@ const Clientes = () => {
           </ScrollReveal>
 
           {hasLogos ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {staticClientLogos.map((client, i) => (
-                <ScrollReveal key={client.id} delay={Math.min(i * 0.01, 0.5)}>
-                  <div
-                    className="group bg-gradient-card rounded-xl border border-border p-4 min-h-36 sm:min-h-40 flex flex-col items-center justify-between gap-3 hover:border-wine/30 transition-all duration-300"
-                    aria-label={client.location ? `${client.name}, ${client.location}` : client.name}
-                    title={client.location ? `${client.name} · ${client.location}` : client.name}
-                  >
-                    <div className="flex min-h-20 w-full flex-1 items-center justify-center">
-                      <img
-                        src={client.logoUrl}
-                        alt={`${client.name} logo`}
-                        className="max-h-20 w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        loading="lazy"
-                        decoding="async"
-                        width={160}
-                        height={80}
-                      />
-                    </div>
-                    <div className="w-full text-center">
-                      <p className="text-xs sm:text-sm font-medium leading-snug text-foreground [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
-                        {client.name}
-                      </p>
-                      {client.location ? (
-                        <p className="mt-1 text-[10px] leading-tight text-muted-foreground truncate">
-                          {client.location}
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                {visibleClientLogos.map((client, i) => (
+                  <ScrollReveal key={client.id} delay={Math.min(i * 0.01, 0.5)}>
+                    <div
+                      className="group bg-gradient-card rounded-xl border border-border p-4 min-h-36 sm:min-h-40 flex flex-col items-center justify-between gap-3 hover:border-wine/30 transition-all duration-300"
+                      aria-label={client.location ? `${client.name}, ${client.location}` : client.name}
+                      title={client.location ? `${client.name} · ${client.location}` : client.name}
+                    >
+                      <div className="flex min-h-20 w-full flex-1 items-center justify-center">
+                        <img
+                          src={client.logoUrl}
+                          alt={`${client.name} logo`}
+                          className="max-h-20 w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                          loading="lazy"
+                          decoding="async"
+                          width={160}
+                          height={80}
+                        />
+                      </div>
+                      <div className="w-full text-center">
+                        <p className="text-xs sm:text-sm font-medium leading-snug text-foreground [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden">
+                          {client.name}
                         </p>
-                      ) : null}
+                        {client.location ? (
+                          <p className="mt-1 text-[10px] leading-tight text-muted-foreground truncate">
+                            {client.location}
+                          </p>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+              <div className="mt-10 flex flex-col items-center gap-4">
+                <p className="text-xs text-muted-foreground">{c.showing_count(visibleCount, staticClientLogos.length)}</p>
+                {hasMoreLogos ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="gap-2 border-border bg-transparent"
+                    onClick={() => setVisibleLogoCount((count) => Math.min(count + CLIENT_LOGO_LOAD_STEP, staticClientLogos.length))}
+                  >
+                    {c.show_more}
+                    <ChevronDown size={16} />
+                  </Button>
+                ) : null}
+              </div>
+            </>
           ) : (
             <div className="flex flex-wrap justify-center gap-3">
               {fallbackClients.map((name, i) => (
