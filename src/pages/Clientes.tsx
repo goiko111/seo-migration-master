@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Quote } from "lucide-react";
@@ -9,17 +8,54 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
 import { getI18n } from "@/i18n/types";
 
-interface Restaurant {
+interface StaticClientLogo {
   id: string;
   name: string;
-  logo_url: string | null;
-  city: string | null;
-  category: string | null;
-  featured: boolean;
+  logoUrl: string;
+  location: string;
 }
+
+const clientLogoModules = import.meta.glob("../assets/logos/clients-white/**/*.png", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const humanizeSegment = (value: string) => {
+  if (value === value.toUpperCase() && value.length <= 4) return value;
+
+  return value
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/([a-z])([0-9])/g, "$1 $2")
+    .replace(/([0-9])([a-z])/g, "$1 $2")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .map((word) => (word ? `${word[0].toUpperCase()}${word.slice(1)}` : word))
+    .join(" ");
+};
+
+const staticClientLogos: StaticClientLogo[] = Object.entries(clientLogoModules)
+  .sort(([a], [b]) => {
+    const aPriority = a.includes("/Spain/") ? 0 : 1;
+    const bPriority = b.includes("/Spain/") ? 0 : 1;
+    return aPriority - bPriority || a.localeCompare(b);
+  })
+  .map(([path, logoUrl]) => {
+    const segments = path.split("/");
+    const fileName = segments[segments.length - 1];
+    const folderStart = segments.findIndex((segment) => segment === "clients-white");
+    const locationSegments = folderStart >= 0 ? segments.slice(folderStart + 1, -1) : [];
+
+    return {
+      id: path,
+      name: humanizeSegment(fileName),
+      logoUrl,
+      location: locationSegments.map(humanizeSegment).join(" · "),
+    };
+  });
 
 const featuredTestimonials = [
   { name: "Álex Pardo", location: "Restaurante Coque", type: "Mejor Sommelier de España 2023", quote: { es: "Con Winerim no hay que imprimir, permite tener la carta actualizada siempre, me ayuda a gestionar los stocks, compras y ventas, y es muy visual y atractiva.", en: "With Winerim there's no printing, the list is always up to date, it helps me manage stocks, purchases and sales, and it's very visual and attractive.", it: "Con Winerim non c'è bisogno di stampare, la carta è sempre aggiornata, mi aiuta a gestire stock, acquisti e vendite, ed è molto visiva e attraente.", fr: "Avec Winerim, pas besoin d'imprimer, la carte est toujours à jour, ça m'aide à gérer les stocks, achats et ventes, et c'est très visuel et attractif.", de: "Mit Winerim muss nichts gedruckt werden, die Karte ist immer aktuell, es hilft mir bei der Verwaltung von Bestand, Einkauf und Verkauf — und es ist sehr visuell und ansprechend.", pt: "Com o Winerim não é preciso imprimir, a carta está sempre atualizada, ajuda-me a gerir stocks, compras e vendas, e é muito visual e atrativa." } },
@@ -93,20 +129,7 @@ const emToGradient = (html: string) => html.replace(/<em>/g, '<span class="text-
 const Clientes = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = getI18n(i18n, lang) || i18n.es;
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-
-  useEffect(() => {
-    supabase
-      .from("restaurants")
-      .select("id, name, logo_url, city, category, featured")
-      .eq("visible", true)
-      .order("display_order", { ascending: true })
-      .then(({ data }) => {
-        if (data && data.length > 0) setRestaurants(data as Restaurant[]);
-      });
-  }, []);
-
-  const hasLogos = restaurants.length > 0;
+  const hasLogos = staticClientLogos.length > 0;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -180,24 +203,23 @@ const Clientes = () => {
           </ScrollReveal>
 
           {hasLogos ? (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
-              {restaurants.map((r, i) => (
-                <ScrollReveal key={r.id} delay={Math.min(i * 0.02, 0.6)}>
-                  <div className="group bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-wine/30 transition-all duration-300 aspect-square">
-                    {r.logo_url ? (
-                      <img
-                        src={r.logo_url}
-                        alt={r.name}
-                        className="w-full h-16 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center">
-                        <span className="font-heading text-lg font-bold text-wine">{r.name.charAt(0)}</span>
-                      </div>
-                    )}
-                    <p className="text-[11px] text-muted-foreground text-center font-medium leading-tight mt-1">{r.name}</p>
-                    {r.city && <p className="text-[10px] text-muted-foreground/60 text-center">{r.city}</p>}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8 gap-4">
+              {staticClientLogos.map((client, i) => (
+                <ScrollReveal key={client.id} delay={Math.min(i * 0.01, 0.5)}>
+                  <div
+                    className="group bg-gradient-card rounded-xl border border-border p-4 flex items-center justify-center hover:border-wine/30 transition-all duration-300 aspect-[3/2]"
+                    aria-label={client.location ? `${client.name}, ${client.location}` : client.name}
+                    title={client.location ? `${client.name} · ${client.location}` : client.name}
+                  >
+                    <img
+                      src={client.logoUrl}
+                      alt={`${client.name} logo`}
+                      className="w-full h-full max-h-20 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                      loading="lazy"
+                      decoding="async"
+                      width={160}
+                      height={80}
+                    />
                   </div>
                 </ScrollReveal>
               ))}

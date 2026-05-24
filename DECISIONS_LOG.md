@@ -459,3 +459,42 @@
 - Reintentar indexación manual más tarde solo para una lista corta de URLs core e internacionales.
 - Seguir corrigiendo 404 por familias antes de pedir validación global.
 - Abrir bloque separado para Core Web Vitals móvil y enlaces internos.
+
+### Actualización de logos home/clientes
+
+#### Hechos
+
+- El usuario pidió actualizar logos antes de continuar con Search Console o biblioteca del vino.
+- Se usó `Hoteles_Blancos_1024.zip` para la sección de hoteles de la home.
+- Se usó `Logos_Blancos_white_1024.zip` para la página `/clientes`.
+- Se añadieron 8 logos de hoteles en `src/assets/logos/hotels-white/`.
+- Se añadieron 589 logos de clientes en `src/assets/logos/clients-white/`.
+- Los PNG se redujeron a 360 px para controlar peso.
+- `LogoStrip` importa ahora los logos de hoteles blancos desde `hotels-white`.
+- `Clientes` usa `import.meta.glob` para construir la galería estática desde `clients-white`.
+- `/clientes` ya no depende de la tabla `restaurants` de Supabase para mostrar la galería pública de logos.
+- Verificaciones ejecutadas:
+  - `npm run build`.
+  - `npm run test`.
+  - `git diff --check`.
+  - Navegador local en home y `/clientes`.
+
+#### Decisiones
+
+- Priorizar assets estáticos versionados para la prueba social pública.
+- Mantener nombres/ubicaciones de cliente como metadatos accesibles (`aria-label` y `title`) y no como texto visible generado desde filenames.
+- Ordenar la galería con logos de España primero.
+- No mezclar este bloque con SEO técnico, Search Console, Worker ni biblioteca del vino.
+
+#### Hipótesis
+
+- La nueva galería aumenta credibilidad comercial sin afectar al flujo SEO técnico.
+- El lazy-loading reduce el impacto de incluir 589 logos en `/clientes`.
+- En el futuro puede merecer la pena generar un manifest curado de nombres comerciales y ubicaciones.
+
+#### Tareas pendientes
+
+- Commit y push.
+- Publicar desde Lovable.
+- Validar home y `/clientes` en producción.
+- Evaluar conversión WebP/AVIF dedicada si se quiere reducir aún más peso.

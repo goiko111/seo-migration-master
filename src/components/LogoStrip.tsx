@@ -27,14 +27,14 @@ import logoElMotel from "@/assets/logos/elmotel.webp";
 import logoDamaso from "@/assets/logos/damaso.webp";
 import logoCasamar from "@/assets/logos/casamar.webp";
 import logoBocaatti from "@/assets/logos/bocaatti.webp";
-import logoMelia from "@/assets/logos/melia.webp";
-import logoHyatt from "@/assets/logos/hyatt.webp";
-import logoMarriott from "@/assets/logos/marriott.webp";
-import logoWyndham from "@/assets/logos/wyndham.webp";
-import logoMyr from "@/assets/logos/myr.webp";
-import logoFourSeasons from "@/assets/logos/fourseasons.webp";
-import logoPalladium from "@/assets/logos/palladium.webp";
-import logoEm from "@/assets/logos/em.webp";
+import logoMeliaHotel from "@/assets/logos/hotels-white/melia.png";
+import logoHyattHotel from "@/assets/logos/hotels-white/hyatt.png";
+import logoMarriottHotel from "@/assets/logos/hotels-white/marriott.png";
+import logoWyndhamHotel from "@/assets/logos/hotels-white/wyndham.png";
+import logoMyrHotel from "@/assets/logos/hotels-white/myr.png";
+import logoFourSeasonsHotel from "@/assets/logos/hotels-white/fourseasons.png";
+import logoPalladiumHotel from "@/assets/logos/hotels-white/palladium.png";
+import logoEmHotel from "@/assets/logos/hotels-white/em_hotels.png";
 
 interface LogoItem {
   name: string;
@@ -73,14 +73,14 @@ const repsolLogos: LogoItem[] = [
 ];
 
 const hotelLogos: LogoItem[] = [
-  { name: "Hyatt", logo: logoHyatt },
-  { name: "Marriott", logo: logoMarriott },
-  { name: "Wyndham Hotel Group", logo: logoWyndham },
-  { name: "Meliá Hotels International", logo: logoMelia },
-  { name: "MYR Hotels", logo: logoMyr },
-  { name: "Four Seasons", logo: logoFourSeasons },
-  { name: "Palladium Hotel Group", logo: logoPalladium },
-  { name: "EM Hotels", logo: logoEm, isWhite: true },
+  { name: "Meliá Hotels International", logo: logoMeliaHotel },
+  { name: "Marriott", logo: logoMarriottHotel },
+  { name: "MYR Hotels", logo: logoMyrHotel },
+  { name: "Wyndham Hotel Group", logo: logoWyndhamHotel },
+  { name: "Palladium Hotel Group", logo: logoPalladiumHotel },
+  { name: "EM Hotels", logo: logoEmHotel, isWhite: true },
+  { name: "Hyatt", logo: logoHyattHotel },
+  { name: "Four Seasons", logo: logoFourSeasonsHotel },
 ];
 
 

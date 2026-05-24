@@ -146,6 +146,14 @@
    - Hecho: no hizo falta redeployar Worker.
 2. QA de producción post-despliegue:
    - Hecho: `robots.txt`, `llms-full.txt`, sitemap, rutas localizadas, artículo internacional y FAQ schema validados.
+2.1. Logos home/clientes:
+   - Hecho local: 8 logos de hoteles añadidos a `src/assets/logos/hotels-white/`.
+   - Hecho local: 589 logos de clientes añadidos a `src/assets/logos/clients-white/`.
+   - Hecho local: home usa los nuevos logos de hoteles en `LogoStrip`.
+   - Hecho local: `/clientes` usa la galería estática de logos optimizados.
+   - Hecho local: build, tests, `git diff --check` y navegador local validados.
+   - Pendiente: publicar desde Lovable.
+   - Pendiente: validar en producción home y `/clientes`.
 3. Search Console:
    - Hecho: `/sitemap.xml` reenviado y leído el 24 may 2026, estado `Correcto`, 2.431 páginas descubiertas.
    - Hecho: validación de `FAQPage` duplicado iniciada el 24/5/26.

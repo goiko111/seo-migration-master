@@ -376,3 +376,53 @@
   - `https://winerim.wine/pt/biblioteca-vinho`
 - Revisar más adelante si Search Console permite retirar `/sitemap_index.xml` sin afectar al sitemap activo.
 - No validar 404 todavía hasta completar familias de redirects o destinos canónicos.
+
+## Actualización 2026-05-24: actualización de logos home/clientes
+
+## Hechos
+
+- Al iniciar este bloque se releyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El usuario pidió actualizar logos antes de continuar con Search Console/biblioteca del vino.
+- Se recibieron dos paquetes de assets:
+  - `Hoteles_Blancos_1024.zip` con 8 logos de grupos hoteleros.
+  - `Logos_Blancos_white_1024.zip` con 589 logos de clientes.
+- Los assets se incorporaron al repo en:
+  - `src/assets/logos/hotels-white/`
+  - `src/assets/logos/clients-white/`
+- Los PNG originales de 1024 px se redujeron a 360 px de lado para limitar peso:
+  - Hoteles: 228 KB.
+  - Clientes: 18 MB.
+- `src/components/LogoStrip.tsx` usa ahora los 8 logos blancos de hoteles para la sección de home.
+- `src/pages/Clientes.tsx` deja de depender de la tabla `restaurants` de Supabase para pintar la galería principal y usa los 589 logos estáticos optimizados.
+- En `/clientes`, la galería prioriza logos de España primero y mantiene nombre/ubicación como `aria-label`/`title`.
+- Verificación local:
+  - `npm run build` completado correctamente.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check` sin errores.
+  - Navegador local en home: los 8 logos de hoteles cargan con dimensiones válidas.
+  - Navegador local en `/clientes`: 589 logos detectados y sin imágenes rotas en la muestra cargada.
+- Avisos no bloqueantes:
+  - Browserslist/caniuse-lite sigue desactualizado.
+  - Persisten avisos de chunks grandes durante build.
+
+## Decisiones
+
+- Usar assets estáticos versionados para la galería pública de `/clientes`, evitando que la página dependa de datos incompletos o antiguos de Supabase.
+- Mantener los logos de clientes como PNG optimizados porque el entorno local no soporta conversión WebP vía `sips`.
+- Mostrar la galería de clientes como logos limpios, sin nombres visibles generados desde filenames, para evitar texto de baja calidad visual.
+- No tocar SEO técnico, Worker, sitemap, prerender ni Search Console en este bloque.
+
+## Hipótesis
+
+- El peso añadido de 18 MB queda contenido porque las imágenes son lazy-loaded y la ruta `/clientes` no está en la home.
+- La galería estática dará una señal de prueba social más completa y fiable que la dependencia actual de Supabase.
+- Puede convenir en un bloque posterior crear un manifest editorial con nombres comerciales normalizados si se quieren mostrar textos visibles por cliente.
+
+## Tareas pendientes
+
+- Hacer commit y push de la actualización de logos.
+- Publicar desde Lovable para que home y `/clientes` reflejen los nuevos assets.
+- Revalidar producción:
+  - Home: sección `Grupos hoteleros` con los 8 logos nuevos.
+  - `/clientes`: galería de 589 logos cargando sin rotos.
+- Valorar más adelante si conviene convertir los logos a WebP/AVIF con una herramienta de imagen dedicada.
