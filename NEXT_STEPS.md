@@ -307,19 +307,31 @@
 ## Tareas pendientes inmediatas
 
 1. Publicar desde Lovable:
-   - Frontend.
-   - Edge Function `sitemap`.
-   - Edge Function `prerender`.
+   - Hecho: frontend.
+   - Hecho: Edge Function `sitemap`.
+   - Hecho: Edge Function `prerender`.
 2. Revalidar producción tras Lovable:
-   - `/sitemap.xml` sin legales ni city pages fallback.
-   - `/en/privacy` como Googlebot con canonical propio y `noindex, follow`.
-   - `/clientes` con 120 logos iniciales, botón de carga progresiva y sin 404 de logos.
+   - Hecho: `/sitemap.xml` tiene 2.072 URLs y no incluye legales ni city pages fallback comprobadas.
+   - Hecho: legales en 6 idiomas como Googlebot con canonical propio y `noindex, follow`.
+   - Hecho: `/clientes` con 120 logos iniciales, botón de carga progresiva y sin 404 same-origin de assets.
 3. Reejecutar Lighthouse móvil:
-   - Home.
-   - `/clientes`.
-4. Reenviar `/sitemap.xml` en Search Console solo después de que producción esté validada.
-5. Siguiente bloque Core Web Vitals:
+   - Hecho: home Performance 59, LCP 11,2 s.
+   - Hecho: `/clientes` Performance 57, LCP 12,3 s, DOM 1.255.
+4. Reenviar `/sitemap.xml` en Search Console.
+5. Reintentar indexación manual de una lista corta:
+   - `https://winerim.wine/software-carta-de-vinos`
+   - `https://winerim.wine/como-vender-mas-vino-en-un-restaurante`
+   - `https://winerim.wine/en/pricing`
+   - `https://winerim.wine/de/preise`
+   - `https://winerim.wine/pt/precos`
+   - `https://winerim.wine/biblioteca-vino`
+   - `https://winerim.wine/en/wine-library`
+   - `https://winerim.wine/de/weinbibliothek`
+   - `https://winerim.wine/pt/biblioteca-vinho`
+6. Siguiente bloque Core Web Vitals:
    - Home LCP.
+   - `/clientes` LCP.
    - Imágenes responsive.
    - JS inicial no usado.
    - Chunks grandes.
+   - Cache TTL de assets.

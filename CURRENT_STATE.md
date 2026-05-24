@@ -589,3 +589,68 @@
 - Reenviar `/sitemap.xml` en Search Console solo después de validar producción.
 - Reejecutar Lighthouse móvil en home y `/clientes` tras publish para medir el impacto real.
 - Abrir bloque específico para Core Web Vitals de home: hero/LCP, JS inicial, bundles e imágenes responsive.
+
+## Actualización 2026-05-24: validación post-deploy Lovable
+
+## Hechos
+
+- El usuario confirmó que hizo el deploy desde Lovable.
+- Producción ya refleja el bloque pendiente de frontend, `sitemap` y `prerender`.
+- `https://winerim.wine/sitemap.xml?codex=f778db3` contiene 2.072 URLs.
+- El sitemap ya no incluye las legales:
+  - `/privacidad`
+  - `/en/privacy`
+  - `/it/privacy`
+  - `/fr/confidentialite`
+  - `/de/datenschutz`
+  - `/pt/privacidade`
+- El sitemap ya no incluye las familias fallback de city pages comprobadas:
+  - `wine-list-software-*`
+  - `software-carta-de-vinos-*`
+  - `software-carta-vinhos-*`
+- Googlebot recibe prerender legal exacto en los seis idiomas, con `X-Worker-Branch: bot-prerender`, `X-Robots-Tag: noindex, follow`, `meta robots: noindex, follow`, canonical propio e idioma correcto:
+  - `/privacidad`: `lang="es"`, canonical `/privacidad`.
+  - `/en/privacy`: `lang="en"`, canonical `/en/privacy`.
+  - `/it/privacy`: `lang="it"`, canonical `/it/privacy`.
+  - `/fr/confidentialite`: `lang="fr"`, canonical `/fr/confidentialite`.
+  - `/de/datenschutz`: `lang="de"`, canonical `/de/datenschutz`.
+  - `/pt/privacidade`: `lang="pt"`, canonical `/pt/privacidade`.
+- `/clientes` en producción ya usa carga progresiva:
+  - 120 logos iniciales.
+  - Botón `Ver más clientes`.
+  - 240 logos tras un click.
+  - Texto `Mostrando 120 de 589` y `Mostrando 240 de 589`.
+  - Sin errores de consola en QA Playwright.
+  - Sin 404 same-origin de assets en la muestra comprobada.
+- Home en producción muestra los 8 logos hoteleros nuevos con altura visual de 96 px en viewport desktop y sin fallos same-origin.
+- `https://winerim.wine/~api/analytics?codex=f778db3` sigue respondiendo HTTP 204 con `X-Worker-Branch: analytics-noop`.
+- Lighthouse mobile post-deploy:
+  - Home: Performance 59, Accessibility 96, Best Practices 75, SEO 92, FCP 5,4 s, LCP 11,2 s, Speed Index 6,5 s, TBT 70 ms, DOM 1.370 elementos.
+  - `/clientes`: Performance 57, Accessibility 93, Best Practices 75, SEO 85, FCP 5,6 s, LCP 12,3 s, Speed Index 8,6 s, TBT 110 ms, DOM 1.255 elementos.
+- Comparado con la auditoría previa, `/clientes` baja de 2.177 a 1.255 elementos DOM y el ahorro potencial por imágenes responsive baja de 927 KB a 240 KB.
+- Un run de Lighthouse en `/clientes` marcó `robots.txt is not valid` sin detalles, pero `robots.txt` responde 200, home Lighthouse lo marca válido y el contenido directo es válido con un único sitemap XML.
+
+## Decisiones
+
+- Considerar completado el bloqueo de deploy Lovable para este bloque: sitemap, legales, logos y `/clientes` ya están activos en producción.
+- Mantener `~api/analytics` resuelto en Worker como 204.
+- No considerar resuelto Core Web Vitals: aunque `/clientes` redujo DOM/peso de imágenes, LCP sigue por encima del objetivo.
+- Tratar el aviso puntual de Lighthouse sobre `robots.txt` en `/clientes` como anomalía a vigilar, no como fallo confirmado.
+
+## Hipótesis
+
+- El nuevo sitemap de 2.072 URLs debería reducir ruido de cobertura y URLs descubiertas sin contenido útil en Search Console.
+- El noindex legal exacto en seis idiomas debería evitar indexación accidental de páginas legales sin mezclar canonicals con home.
+- El cuello de rendimiento ya no está principalmente en los 589 logos de `/clientes`, sino en FCP/LCP inicial, JS no usado, entrega de imágenes, cache TTL y render del primer viewport.
+
+## Tareas pendientes
+
+- Reenviar `/sitemap.xml` en Search Console.
+- Reintentar inspección/indexación manual solo para una tanda corta de URLs estratégicas.
+- Monitorizar la validación FAQ ya iniciada.
+- Abrir bloque Core Web Vitals:
+  - Identificar LCP element real en home y `/clientes`.
+  - Optimizar JS inicial/no usado.
+  - Revisar imágenes responsive y formatos next-gen.
+  - Revisar cache TTL de assets.
+  - Corregir contraste/enlace sin texto si se aborda accesibilidad.

@@ -610,3 +610,42 @@
 - Revalidar `/clientes`, sitemap y legales tras publish.
 - Reejecutar Lighthouse móvil en home y `/clientes`.
 - Planificar la limpieza de lint global como bloque separado.
+
+### Validación post-deploy Lovable
+
+#### Hechos
+
+- El usuario confirmó que hizo el deploy desde Lovable.
+- Producción refleja el bloque desplegado:
+  - Sitemap público con 2.072 URLs.
+  - Legales fuera del sitemap.
+  - Familias `wine-list-software-*`, `software-carta-de-vinos-*` y `software-carta-vinhos-*` fuera del sitemap.
+  - Legales prerenderizadas para Googlebot en `es`, `en`, `it`, `fr`, `de` y `pt` con canonical propio y `noindex, follow`.
+  - `/clientes` con 120 logos iniciales y carga progresiva hasta 240 tras el primer click.
+  - Home con 8 logos hoteleros nuevos activos y tamaño visual de 96 px en desktop.
+  - `/~api/analytics` responde 204 en producción.
+- Lighthouse mobile post-deploy:
+  - Home: Performance 59, LCP 11,2 s.
+  - `/clientes`: Performance 57, LCP 12,3 s, DOM 1.255 elementos.
+- `/clientes` mejoró DOM frente a la auditoría anterior, pero LCP sigue siendo alto.
+- Lighthouse marcó una anomalía puntual de `robots.txt` en `/clientes`; verificación directa y home Lighthouse confirman `robots.txt` válido.
+
+#### Decisiones
+
+- Dar por desbloqueado el deploy Lovable del bloque SEO/UX actual.
+- Pasar la siguiente prioridad a Search Console post-deploy y Core Web Vitals.
+- No volver a tocar el sitemap hasta reenviarlo y observar cómo lo procesa Search Console.
+- Mantener como tarea separada la mejora real de LCP, porque requiere trabajo sobre render inicial, imágenes y JS.
+
+#### Hipótesis
+
+- Search Console debería procesar un sitemap más limpio después del reenvío.
+- Las legales deberían dejar de generar señales confusas de indexación/canonical tras recrawl.
+- La carga progresiva de logos mejora estructura y peso, pero el LCP depende de una capa más alta del arranque de la app.
+
+#### Tareas pendientes
+
+- Reenviar `/sitemap.xml` en Search Console.
+- Reintentar indexación manual de URLs estratégicas cuando Search Console lo permita.
+- Preparar bloque Core Web Vitals con foco en LCP/FCP, imágenes, JS no usado y cache TTL.
+- Vigilar si se repite el aviso de Lighthouse sobre `robots.txt`.
