@@ -804,6 +804,13 @@
 - Hecho local: el chat ya estaba diferido y no se cambió.
 - Hecho local: el iframe `noscript` de GTM se conserva.
 - Commit técnico creado: `e164294 fix: defer gtm until after load`.
+- Push completado a `origin/main` hasta `7de6ed6 docs: record deferred gtm block`.
+- Producción revisada después del push todavía no refleja el cambio:
+  - Deployment activo: `94aea691-4fe9-4a08-84c0-135f46fa300f`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - No contiene `__winerimLoadGtm`.
+  - Todavía contiene el snippet inmediato antiguo de GTM.
+- Falta publish desde Lovable.
 - Verificación local:
   - `npm run build`: correcto.
   - `npm run test`: 16 tests correctos.
@@ -828,8 +835,8 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Pushear `main` con `e164294` y documentación.
-2. Publicar `main` desde Lovable.
+1. Hecho: pushear `main` con `e164294` y documentación.
+2. Pendiente: publicar `main` desde Lovable.
 3. Revalidar producción:
    - HTML contiene `__winerimLoadGtm`.
    - Consent Mode sigue antes de GTM.

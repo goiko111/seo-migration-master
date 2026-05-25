@@ -1284,6 +1284,15 @@
 - Se cambió el snippet de GTM para definir `window.__winerimLoadGtm` y cargar `https://www.googletagmanager.com/gtm.js?id=GTM-NDNQP955` solo después de `load` y en idle, con fallback `setTimeout`.
 - Se mantiene el iframe `noscript` de GTM.
 - Commit técnico creado: `e164294 fix: defer gtm until after load`.
+- Push completado a `origin/main` con:
+  - `e164294 fix: defer gtm until after load`;
+  - `7de6ed6 docs: record deferred gtm block`.
+- Comprobación de producción tras el push:
+  - Deployment observado: `94aea691-4fe9-4a08-84c0-135f46fa300f`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - Producción todavía no contiene `__winerimLoadGtm`.
+  - Producción todavía contiene el snippet inmediato antiguo de GTM.
+  - Conclusión factual: falta publish desde Lovable para llevar `origin/main` a producción.
 - Verificaciones locales:
   - `npm run build`: correcto.
   - `npm run test`: 6 archivos, 16 tests correctos.
@@ -1314,8 +1323,8 @@
 
 ## Tareas pendientes
 
-- Pushear `e164294` y documentación de cierre.
-- Publicar `main` desde Lovable.
+- Hecho: pushear `e164294` y documentación de cierre a `origin/main`.
+- Pendiente: publicar `main` desde Lovable.
 - Revalidar producción tras publish:
   - HTML contiene `__winerimLoadGtm`.
   - GTM no aparece como snippet inmediato antiguo.
