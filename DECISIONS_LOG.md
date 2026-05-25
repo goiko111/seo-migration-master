@@ -1044,3 +1044,28 @@
 - Hecho: pushear código y documentación.
 - Pendiente: publicar desde Lovable.
 - Revalidar producción con HTML, QA y 2-3 muestras Lighthouse.
+
+### 2026-05-25: publish Lovable pendiente de confirmación
+
+#### Hechos
+
+- Producción sigue sirviendo deployment `94aea691-4fe9-4a08-84c0-135f46fa300f`, entry `/assets/index-BRCyx101.js` y el snippet antiguo de GTM.
+- El navegador integrado de Codex no está disponible.
+- Chrome tiene sesión Lovable activa en el proyecto `2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- El botón `Publish` está visible.
+- La UI Lovable, tras recarga, no muestra explícitamente el commit `e164294`.
+
+#### Decisiones
+
+- Pedir confirmación antes de pulsar `Publish` porque es un cambio público de producción.
+- No asumir que Lovable está sincronizado solo porque GitHub `main` está actualizado.
+
+#### Hipótesis
+
+- La UI de Lovable puede no mostrar todo el historial reciente.
+- Si el publish no incorpora `e164294`, el siguiente paso será resolver sincronización GitHub/Lovable antes de seguir midiendo.
+
+#### Tareas pendientes
+
+- Confirmar publish.
+- Revalidar producción después.

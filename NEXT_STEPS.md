@@ -846,3 +846,34 @@
    - Lighthouse mobile home con 2-3 muestras.
 4. Si LCP mejora y queda estable, retomar biblioteca del vino al máximo nivel.
 5. Si LCP sigue alto, auditar hidratación/render del H1 y coste del entry inicial.
+
+## Actualización 2026-05-25: siguiente paso inmediato
+
+## Hechos
+
+- GitHub `main` está limpio y sincronizado con `origin/main`.
+- Producción sigue sin el cambio de GTM diferido.
+- Lovable está abierto y autenticado en Chrome.
+- `Publish` está visible.
+- La UI Lovable no muestra explícitamente `e164294` tras recarga.
+
+## Decisiones
+
+- Antes de pulsar `Publish`, pedir confirmación explícita al usuario.
+
+## Hipótesis
+
+- Publicar puede bastar si Lovable usa el último estado sincronizado aunque la UI no muestre el commit.
+- Si no basta, habrá que forzar la sincronización GitHub -> Lovable.
+
+## Tareas pendientes listas para retomar
+
+1. Confirmación del usuario para pulsar `Publish` en Lovable.
+2. Pulsar `Publish`.
+3. Esperar despliegue.
+4. Revalidar producción:
+   - `__winerimLoadGtm`.
+   - ausencia del snippet inmediato antiguo de GTM.
+   - QA home y Tempranillo alemán.
+   - Lighthouse mobile 2-3 muestras.
+5. Actualizar documentos con el resultado real.

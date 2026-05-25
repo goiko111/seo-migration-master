@@ -1332,3 +1332,38 @@
   - Lighthouse mobile home con 2-3 muestras.
 - Si LCP mejora y queda estable, retomar biblioteca del vino al máximo nivel.
 - Si LCP sigue alto, auditar hidratación/render del H1 y coste del entry inicial.
+
+## Actualización 2026-05-25: Lovable disponible, publish pendiente de confirmación
+
+## Hechos
+
+- Relectura de documentos operativos completada al iniciar la retoma.
+- `git status`: `main...origin/main`, árbol limpio.
+- Producción revisada de nuevo:
+  - Deployment activo: `94aea691-4fe9-4a08-84c0-135f46fa300f`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - Todavía no contiene `__winerimLoadGtm`.
+  - Todavía contiene el snippet inmediato antiguo de GTM.
+- El navegador integrado de Codex no está disponible (`iab`).
+- Chrome sí tiene sesión Lovable activa para `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- En Lovable el botón `Publish` está visible.
+- Tras recargar Lovable, el DOM no muestra `e164294` ni texto relacionado con GTM diferido.
+- Brecha detectada: GitHub `main` contiene el cambio, pero la UI de Lovable no evidencia explícitamente que el commit esté incorporado antes de pulsar `Publish`.
+
+## Decisiones
+
+- No pulsar `Publish` sin confirmación explícita porque cambia la web pública.
+- Tratar la ausencia de `e164294` en la UI Lovable como una incertidumbre, no como prueba definitiva de que Lovable no haya sincronizado.
+
+## Hipótesis
+
+- Lovable puede tener la UI de historial incompleta o no mostrar commits recientes aunque el publish use el estado sincronizado.
+- Si se pulsa `Publish` y producción sigue sin `__winerimLoadGtm`, habrá que forzar sincronización desde Lovable o publicar por otra vía.
+
+## Tareas pendientes
+
+- Confirmar si se debe pulsar `Publish` en Lovable ahora.
+- Tras publicar:
+  - Revalidar HTML de producción.
+  - Si aparece `__winerimLoadGtm`, ejecutar QA y Lighthouse.
+  - Si no aparece, investigar sincronización GitHub -> Lovable.
