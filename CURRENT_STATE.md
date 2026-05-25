@@ -787,3 +787,84 @@
   - Dropdown desktop y menú móvil deben seguir funcionando.
   - Lighthouse mobile home debe repetirse en producción.
 - Si Lighthouse producción mejora pero sigue insuficiente, abrir bloque específico para terceros: GTM, Google Ads, Meta Pixel y chat.
+
+## Actualización 2026-05-25: revalidación producción tras publish de main
+
+## Hechos
+
+- El usuario confirmó que el deploy de `main` ya estaba hecho desde Lovable.
+- Producción ya refleja el bloque de código `7cccf3d`:
+  - Deployment activo: `19fcf663-9531-4993-a3a9-4ae480002433`.
+  - Entry activo: `/assets/index-Fu3lyPiF.js`.
+  - El entry anterior `/assets/index-D4-5gxc6.js` ya no está activo en home.
+  - Modulepreloads iniciales: `vendor-react-Dq-5nJUb.js`, `vendor-query-Bp82qg4E.js`, `vendor-router-B4emm9GY.js` y `vendor-ui-utils--BulIq_u.js`.
+  - No hay modulepreloads pesados de `vendor-motion`, `vendor-charts`, `vendor-radix`, `vendor-supabase` ni `vendor-markdown`.
+  - El entry publicado no contiene imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+  - El entry publicado mantiene referencias a `vendor-ui-utils`, como se esperaba.
+- Sitemap de producción sigue correcto:
+  - `https://winerim.wine/sitemap.xml` responde 200.
+  - `X-Worker-Branch: sitemap`.
+  - 2.072 URLs.
+- QA de navegación en producción:
+  - Home renderiza el H1 `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - Dropdown desktop `Producto` funciona.
+  - No se detectaron errores de consola en la prueba de navegador.
+- Lighthouse mobile de producción tras publish:
+  - Performance 60.
+  - Accessibility 96.
+  - Best Practices 75.
+  - SEO 92.
+  - FCP 5,14 s.
+  - LCP 11,38 s.
+  - Speed Index 5,91 s.
+  - TBT 110,5 ms.
+  - CLS 0,002.
+  - DOM 1.371 elementos.
+- El LCP de producción sigue siendo el H1 de la home.
+- Desglose LCP:
+  - TTFB 808 ms.
+  - Load Delay 0 ms.
+  - Load Time 0 ms.
+  - Render Delay 10,57 s, 93% del LCP.
+- La cadena crítica propia ya es corta:
+  - HTML -> `/assets/index-B8X_G7Tz.css`.
+  - HTML -> `/assets/index-Fu3lyPiF.js`.
+  - Longest chain aprox. 791 ms.
+- El CSS `/assets/index-B8X_G7Tz.css` sigue marcado como render-blocking con ahorro estimado de 170 ms.
+- Un Lighthouse alternativo bloqueando terceros no mejoró el LCP:
+  - Performance 58.
+  - FCP 6,72 s.
+  - LCP 12,33 s.
+  - TBT 26,5 ms.
+  - Render Delay 11,50 s.
+- Por tanto, los terceros contribuyen a JS no usado/TBT, pero no explican por sí solos el LCP de 11 s tras este deploy.
+- Terceros detectados en navegación/Lighthouse: GTM, Google Ads, Meta Pixel, Clarity, Leadfeeder y chat.
+
+## Decisiones
+
+- Dar por correctamente publicado el bloque de bundle `7cccf3d`: el problema de imports estáticos pesados está resuelto en producción.
+- No dar por resuelto Core Web Vitals: Lighthouse mobile de producción sigue con LCP alto.
+- No volver a atacar `vendor-motion`/`vendor-charts` como causa principal del LCP de home, porque ya no están en el arranque estático.
+- El siguiente bloque debe aislar el render delay del H1, especialmente CSS crítico, carga de fuentes, animación/gradient del hero y comportamiento bajo throttling móvil.
+- Mantener el bloque de terceros como P1, pero no asumir que por sí solo arreglará el LCP porque la prueba bloqueándolos no mejoró.
+
+## Hipótesis
+
+- El resultado local de Lighthouse 96 vs producción 60 indica que queda una diferencia de entorno/red/throttling y render del primer viewport, no un problema de chunk pesado propio.
+- El H1 puede estar recalculando LCP tarde por combinación de fuente externa, `font-heading`, texto con gradient/clip y animación `animate-fade-in-up`.
+- Reducir o eliminar animación del H1, precargar/self-hostear fuentes críticas o usar una fuente del sistema para el hero podría mejorar el render delay.
+- CSS crítico inline o reducción del CSS render-blocking puede aportar, aunque el ahorro estimado actual es menor que el render delay total.
+
+## Tareas pendientes
+
+- Abrir bloque específico `Core Web Vitals home: render delay H1`.
+- Probar en local y preview variantes controladas:
+  - H1 sin `animate-fade-in-up`.
+  - H1 sin `text-gradient-wine` o con color sólido en primer paint.
+  - Hero con fuente del sistema o fuente crítica self-host/preload real de WOFF2.
+  - CSS crítico mínimo para above-the-fold.
+- Repetir Lighthouse production-like tras cada variante.
+- Mantener como bloque posterior:
+  - Defer de GTM/Ads/Meta/Clarity/Leadfeeder.
+  - Revisión del chat.
+  - Cache/headers de assets.

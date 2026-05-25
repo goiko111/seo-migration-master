@@ -722,3 +722,38 @@
 - Revalidar entry/preloads/chunks en producción tras publish.
 - Repetir Lighthouse mobile en producción.
 - Mantener Search Console/Core Web Vitals en observación porque los datos de campo no cambiarán inmediatamente.
+
+### 2026-05-25: revalidación producción tras publish de main
+
+#### Hechos
+
+- Producción ya sirve el deployment `19fcf663-9531-4993-a3a9-4ae480002433`.
+- Home ya usa entry `/assets/index-Fu3lyPiF.js`, distinto del entry viejo `/assets/index-D4-5gxc6.js`.
+- Modulepreloads iniciales publicados: `vendor-react`, `vendor-query`, `vendor-router` y `vendor-ui-utils`.
+- El entry publicado no importa estáticamente `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+- QA de home en producción: H1 presente, dropdown desktop `Producto` correcto y sin errores de consola.
+- Lighthouse mobile tras publish sigue en Performance 60 y LCP 11,38 s.
+- El LCP sigue siendo el H1 de la home.
+- El desglose LCP muestra 93% de render delay: 10,57 s.
+- La cadena crítica propia ya es corta y no incluye chunks pesados: HTML -> CSS/entry.
+- Una prueba de Lighthouse bloqueando terceros no mejoró el LCP; bajó a Performance 58 y LCP 12,33 s.
+
+#### Decisiones
+
+- Considerar resuelto en producción el problema de imports estáticos pesados del entry.
+- No considerar resuelto Core Web Vitals.
+- No seguir invirtiendo en `vendor-motion`/`vendor-charts` para la home hasta que aparezca una nueva evidencia.
+- El siguiente diagnóstico de rendimiento debe centrarse en el render delay del H1: CSS crítico, fuentes, animación y estilos del hero.
+- Mantener terceros como deuda relevante, pero no tratarlos como causa única del LCP porque el test bloqueándolos no mejoró.
+
+#### Hipótesis
+
+- La combinación de fuente externa Playfair, `font-heading`, gradiente de texto y animación del H1 puede estar retrasando la contabilización final de LCP bajo el perfil móvil de Lighthouse.
+- El resultado de producción se puede acercar al preview local si se estabiliza el primer paint del H1 y se reduce dependencia de CSS/fuentes externas para el texto principal.
+
+#### Tareas pendientes
+
+- Probar variante del hero sin animación en H1.
+- Probar variante del H1 con color sólido inicial.
+- Evaluar self-host/preload real de fuentes críticas o fuente del sistema en hero.
+- Medir cada variante antes de publicar.

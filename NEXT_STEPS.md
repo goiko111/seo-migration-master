@@ -427,3 +427,51 @@
    - Chat.
    - CSS render-blocking.
 6. Después de cerrar rendimiento, retomar biblioteca del vino al máximo nivel.
+
+## Actualización 2026-05-25: retoma tras revalidar producción publicada
+
+## Hechos
+
+- El deploy de `main` ya está activo en producción.
+- Producción sirve entry nuevo `/assets/index-Fu3lyPiF.js`.
+- El entry publicado ya no importa estáticamente `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+- Modulepreloads iniciales ligeros confirmados: `vendor-react`, `vendor-query`, `vendor-router`, `vendor-ui-utils`.
+- Home y dropdown desktop funcionan; no se detectaron errores de consola.
+- Lighthouse mobile de home sigue mal:
+  - Performance 60.
+  - LCP 11,38 s.
+  - FCP 5,14 s.
+  - TBT 110,5 ms.
+  - CLS 0,002.
+- El LCP es el H1 y el 93% del tiempo es render delay.
+- Bloquear terceros en Lighthouse no mejoró el LCP, así que terceros no son la única causa.
+
+## Decisiones
+
+- Siguiente prioridad: `Core Web Vitals home: render delay H1`.
+- No seguir con biblioteca del vino hasta cerrar o aparcar explícitamente este punto de rendimiento.
+- Terceros siguen siendo importantes, pero pasan detrás del diagnóstico del H1.
+
+## Hipótesis
+
+- El H1 se contabiliza tarde por CSS/fuentes/animación/gradient en throttling móvil.
+- El siguiente cambio con mayor probabilidad de impacto es estabilizar el primer paint del H1:
+  - sin animación;
+  - color sólido inicial;
+  - fuente crítica local/preload o fuente del sistema para hero;
+  - CSS crítico above-the-fold.
+
+## Tareas pendientes listas para retomar
+
+1. Crear una variante local del hero sin `animate-fade-in-up` en el H1.
+2. Medir Lighthouse preview y, si mejora, aplicar el cambio.
+3. Si no mejora, probar H1 con color sólido inicial en vez de gradient text.
+4. Si no mejora, probar fuentes críticas self-host/preload o fuente del sistema para el H1.
+5. Después, volver a production Lighthouse.
+6. Solo cuando LCP esté controlado, abordar terceros:
+   - GTM/Ads.
+   - Meta Pixel.
+   - Clarity.
+   - Leadfeeder.
+   - Chat.
+7. Retomar biblioteca del vino al máximo nivel cuando el bloque de rendimiento quede cerrado o aparcado.
