@@ -672,3 +672,44 @@
    - Enlazado interno por intención.
    - Schema por entidad.
    - Contenido editorial profundo por idioma.
+
+## Actualización 2026-05-25: producción validada tras `f26443a`
+
+## Hechos
+
+- Hecho: el publish de Lovable ya está activo en producción.
+- Hecho: producción sirve deployment `baa85387-7e8f-4f71-a058-0633f8767465`.
+- Hecho: home sirve entry `/assets/index-BRCyx101.js`, distinto de `/assets/index-howILT12.js`.
+- Hecho: modulepreloads iniciales ya no incluyen `vendor-query`; quedan `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+- Hecho: el entry publicado no contiene imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+- Hecho: home mantiene H1 correcto, sin animación, con color sólido y fuente del sistema en móvil.
+- Hecho: `/de/weinbibliothek/rebsorten/tempranillo` renderiza H1 `Tempranillo` y bloque `Service-Intelligenz` como usuario humano.
+- Hecho: Lighthouse mobile producción sigue variable:
+  - Mejor muestra: Performance 85, LCP 3,4 s.
+  - Segunda muestra: Performance 68, LCP 7,9 s.
+
+## Decisiones
+
+- El bloque de publish `f26443a` queda cerrado.
+- El bug humano de la ficha alemana de Tempranillo queda corregido en producción.
+- Core Web Vitals sigue abierto por inestabilidad de LCP.
+
+## Hipótesis
+
+- El siguiente cuello de rendimiento está probablemente en CSS crítico/render-blocking, fuentes o condiciones externas de medición, no en React Query ni en vendors pesados iniciales.
+- La biblioteca del vino ya puede retomarse sobre una base más limpia, siempre que no se reintroduzca carga editorial en el arranque global.
+
+## Tareas pendientes listas para retomar
+
+1. Elegir siguiente bloque:
+   - Opción A: CSS crítico/above-the-fold para estabilizar LCP móvil.
+   - Opción B: retomar ampliación máxima de biblioteca del vino.
+2. Si seguimos performance:
+   - Auditar CSS render-blocking.
+   - Probar inline crítico del hero/navbar.
+   - Medir Lighthouse con varias muestras.
+3. Si retomamos biblioteca:
+   - Priorizar 30-50 uvas/regiones/estilos.
+   - Ampliar contenido por idioma.
+   - Añadir schema por entidad.
+   - Reforzar enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.

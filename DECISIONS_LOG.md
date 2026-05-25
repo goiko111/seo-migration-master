@@ -907,3 +907,36 @@
 
 - Publicar desde Lovable el commit `f26443a` o cualquier `main` posterior que lo contenga.
 - Revalidar producción con entry/preloads, home, ruta humana de Tempranillo y Lighthouse mobile.
+
+### 2026-05-25: producción validada tras arranque ligero
+
+#### Hechos
+
+- El usuario confirmó el publish desde Lovable.
+- Producción sirve deployment `baa85387-7e8f-4f71-a058-0633f8767465`.
+- Home sirve entry `/assets/index-BRCyx101.js`.
+- Modulepreloads iniciales publicados: `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+- `vendor-query` ya no aparece en preload inicial ni en el entry publicado.
+- El entry publicado sigue sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` y `vendor-supabase`.
+- Home en producción mantiene H1 correcto, sin animación, sin gradiente y con fuente del sistema en móvil.
+- `/de/weinbibliothek/rebsorten/tempranillo` como usuario humano renderiza H1 `Tempranillo` y bloque `Service-Intelligenz`.
+- Lighthouse mobile producción tras publish:
+  - Run 1: Performance 85, FCP 2,4 s, LCP 3,4 s, TBT 60 ms, CLS 0,006.
+  - Run 2: Performance 68, FCP 3,1 s, LCP 7,9 s, TBT 60 ms, CLS 0,006.
+
+#### Decisiones
+
+- Dar por publicado y validado el bloque de arranque ligero y reparación de ficha humana.
+- No reintroducir React Query en el arranque inicial.
+- No dar por cerrado Core Web Vitals hasta estabilizar LCP en varias muestras.
+- Si el usuario quiere seguir performance, el siguiente bloque será CSS crítico/render-blocking.
+
+#### Hipótesis
+
+- La variabilidad restante de Lighthouse viene de CSS crítico, render-blocking, fuentes o condiciones externas, no de los vendors pesados que ya fueron eliminados del arranque.
+- La mejora de campo en Search Console no será inmediata.
+
+#### Tareas pendientes
+
+- Decidir si seguimos inmediatamente con CSS crítico o retomamos la ampliación máxima de biblioteca del vino.
+- Si se retoma biblioteca, usar esta base ya saneada para ampliar entidades sin cargar datos editoriales en el chrome global.

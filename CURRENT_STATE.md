@@ -1111,3 +1111,57 @@
   - `/de/weinbibliothek/rebsorten/tempranillo` como usuario humano con H1 `Tempranillo` y bloque `Service-Intelligenz`.
   - Lighthouse mobile home con al menos dos runs para medir estabilidad.
 - Si producción mejora pero sigue fuera de objetivo, abrir bloque CSS crítico/above-the-fold.
+
+## Actualización 2026-05-25: producción validada tras publish de arranque ligero
+
+## Hechos
+
+- El usuario confirmó la publicación desde Lovable.
+- Producción ya refleja el bloque `f26443a`:
+  - Deployment activo observado: `baa85387-7e8f-4f71-a058-0633f8767465`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - Entry anterior `/assets/index-howILT12.js` ya no está activo en home.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+  - `vendor-query` ya no aparece en modulepreload inicial ni en el entry publicado.
+  - El entry publicado no contiene referencias estáticas a `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+  - El entry conserva `font-serif lg:font-heading` y `text-wine-light`.
+- QA de home en producción:
+  - H1 visible: `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - H1 sin animación: `animationName: none`, `opacity: 1`.
+  - Primer tramo sin gradiente: `backgroundImage: none`.
+  - En viewport móvil 390 px, el H1 usa fuente del sistema: `ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`.
+  - En desktop conserva Playfair por `lg:font-heading`.
+- QA de biblioteca humana en producción:
+  - `/de/weinbibliothek/rebsorten/tempranillo` renderiza H1 `Tempranillo`.
+  - La página muestra bloque `Service-Intelligenz`.
+  - Título observado: `Tempranillo | Rebsortenführer — Winerim | Winerim`.
+  - No se detectaron errores de consola en la prueba.
+- Matiz de QA: la ficha de uva requiere esperar a que cargue el chunk lazy; tras `load` inmediato puede no estar lista, pero tras unos segundos renderiza correctamente.
+- Lighthouse mobile de producción tras el publish:
+  - Run 1: Performance 85, FCP 2,4 s, LCP 3,4 s, Speed Index 5,1 s, TBT 60 ms, CLS 0,006.
+  - Run 2: Performance 68, FCP 3,1 s, LCP 7,9 s, Speed Index 4,3 s, TBT 60 ms, CLS 0,006.
+- Conclusión factual: el arranque ligero está publicado y mejora claramente el mejor caso de Lighthouse, pero el LCP móvil sigue inestable y no se puede cerrar Core Web Vitals todavía.
+
+## Decisiones
+
+- Considerar cerrado el bloqueo de publish del bloque `f26443a`.
+- Considerar arreglado el bug humano de ficha alemana de Tempranillo en producción.
+- Mantener `vendor-query` fuera del arranque inicial.
+- No declarar Core Web Vitals resuelto por la variabilidad de Lighthouse; el siguiente bloque será CSS crítico/above-the-fold si seguimos rendimiento.
+
+## Hipótesis
+
+- La variabilidad restante parece menos ligada a JS propio inicial y más a CSS/render-blocking, orden de primer paint o condiciones externas de Lighthouse.
+- Search Console tardará días o semanas en reflejar la mejora de campo aunque el bundle ya esté saneado.
+- La ficha humana de uva puede beneficiarse de prefetch o skeleton específico si se quiere reducir la espera del chunk lazy, pero ya no está rota.
+
+## Tareas pendientes
+
+- Si seguimos Core Web Vitals:
+  - Abrir bloque CSS crítico/above-the-fold.
+  - Revisar render-blocking CSS y fuentes críticas.
+  - Medir Lighthouse con varias muestras tras cada cambio.
+- Si aparcamos rendimiento:
+  - Retomar ampliación máxima de biblioteca del vino.
+  - Priorizar 30-50 entidades por demanda SEO y valor comercial.
+  - Añadir schema por entidad y enlazado interno por intención.
