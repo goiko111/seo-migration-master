@@ -517,3 +517,52 @@
 4. Si sigue alto, probar H1 con color sólido inicial en vez de `text-gradient-wine`.
 5. Si sigue alto, probar fuente crítica self-host/preload o fuente del sistema solo para el hero.
 6. Después de cerrar o aparcar este bloque, retomar biblioteca del vino al máximo nivel.
+
+## Actualización 2026-05-25: siguiente retoma tras revalidar H1 sin animación
+
+## Hechos
+
+- El deploy de Lovable sí publicó la variante sin animación.
+- Producción sirve deployment `05d29c6a-1f11-4a80-8af5-c913bfa8d990`.
+- Entry publicado: `/assets/index-B3ya-SL1.js`.
+- H1 publicado:
+  - Sin `animate-fade-in-up`.
+  - `animationName: none`.
+  - `opacity: 1`.
+- Lighthouse mobile producción de esta variante:
+  - Performance 58.
+  - FCP 6,2 s.
+  - LCP 11,1 s.
+  - Render Delay 10,3 s.
+  - LCP sigue siendo el H1.
+- Se aplicó localmente la siguiente variante:
+  - Primer tramo del H1 con `text-wine-light`.
+  - Se eliminó `text-gradient-wine` solo en el H1 de home.
+- Validación local:
+  - `npm run build`: correcto.
+  - `npm run test`: 15 tests correctos.
+  - `git diff --check`: correcto.
+  - QA navegador: primer tramo sin background/gradient, H1 visible y sin animación.
+  - Lighthouse local: Performance 96, FCP 2,0 s, LCP 2,3 s.
+
+## Decisiones
+
+- La animación no explica el LCP alto de producción.
+- Publicar y medir la variante de color sólido antes de pasar a fuentes/CSS crítico.
+
+## Hipótesis
+
+- Si `text-gradient-wine`/background-clip era parte del problema, producción debe bajar el render delay.
+- Si no baja, el siguiente foco será fuente crítica o CSS render-blocking.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push de la variante color sólido.
+2. Publicar `main` desde Lovable.
+3. Revalidar producción:
+   - Entry nuevo distinto de `/assets/index-B3ya-SL1.js`.
+   - H1 con `text-wine-light` y sin `text-gradient-wine`.
+   - Lighthouse mobile home.
+   - Comparar contra LCP 11,1 s y render delay 10,3 s.
+4. Si sigue alto, probar fuente del sistema solo para el H1/hero o self-host/preload de Playfair crítica.
+5. Después, abordar CSS crítico/terceros si sigue pendiente.

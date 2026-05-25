@@ -911,3 +911,69 @@
   - Repetir Lighthouse mobile home.
   - Revisar desglose LCP y confirmar si baja el `render delay`.
 - Si no mejora lo suficiente, probar la siguiente variante: H1 con color sólido inicial en vez de `text-gradient-wine`.
+
+## Actualización 2026-05-25: producción H1 sin animación y variante color sólido
+
+## Hechos
+
+- El usuario confirmó que el cambio H1 sin animación ya estaba publicado desde Lovable.
+- Producción refleja el deploy nuevo:
+  - Deployment activo: `05d29c6a-1f11-4a80-8af5-c913bfa8d990`.
+  - Entry activo: `/assets/index-B3ya-SL1.js`.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-query`, `vendor-router` y `vendor-ui-utils`.
+  - El entry publicado no contiene imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix`, `vendor-supabase` ni `vendor-markdown`.
+  - El entry publicado contiene el H1 sin `animate-fade-in-up`.
+- QA navegador en producción:
+  - H1: `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - Clase H1: `font-heading text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.1] mb-5`.
+  - `animationName: none`.
+  - `opacity: 1`.
+  - `fontFamily: "Playfair Display", serif`.
+- Lighthouse mobile producción tras quitar animación:
+  - Performance 58.
+  - Accessibility 96.
+  - Best Practices 75.
+  - SEO 92.
+  - FCP 6,2 s.
+  - LCP 11,1 s.
+  - Speed Index 7,1 s.
+  - TBT 100 ms.
+  - CLS 0,007.
+  - LCP element sigue siendo el H1.
+  - Desglose LCP: TTFB 785 ms, Load Delay 0 ms, Load Time 0 ms, Render Delay 10.300 ms, 93%.
+- Conclusión factual: quitar `animate-fade-in-up` del H1 no resuelve el LCP alto de producción.
+- Se aplicó localmente la siguiente variante controlada:
+  - En `src/components/landing/HeroSection.tsx`, el primer fragmento del H1 pasa de `text-gradient-wine` a `text-wine-light`.
+  - No se tocaron fuente, tamaños, estructura, copy ni CSS crítico.
+- Verificación local de la variante color sólido:
+  - `npm run build`: correcto.
+  - `npm run test`: 5 archivos, 15 tests correctos.
+  - `git diff --check`: correcto.
+  - QA navegador local: primer tramo del H1 con `text-wine-light`, `backgroundImage: none`, color `rgb(207, 23, 35)`, H1 sin animación y opacidad 1.
+  - Lighthouse mobile local: Performance 96, FCP 2,0 s, LCP 2,3 s, TBT 100 ms, CLS 0,007.
+- Avisos no bloqueantes durante build:
+  - Browserslist/caniuse-lite desactualizado.
+  - Chunks grandes por encima de 200 kB.
+
+## Decisiones
+
+- Descartar la animación del H1 como causa suficiente del LCP alto.
+- Mantener el H1 sin animación porque evita una espera innecesaria y no rompe la experiencia.
+- Probar ahora color sólido en el primer tramo del H1 para aislar si `background-clip/text-gradient` retrasa el LCP.
+- No tocar todavía fuente crítica ni CSS inline hasta publicar y medir esta variante.
+
+## Hipótesis
+
+- Si el gradiente de texto estaba retrasando el paint final del H1, la variante `text-wine-light` debería reducir el render delay en producción.
+- Si producción sigue con LCP alto, el foco pasa a fuente crítica externa (`Playfair Display`), CSS render-blocking y posible orden de hidratación/primer paint.
+
+## Tareas pendientes
+
+- Commit y push de la variante color sólido.
+- Publicar `main` desde Lovable.
+- Revalidar producción tras publish:
+  - Confirmar entry nuevo distinto de `/assets/index-B3ya-SL1.js`.
+  - Confirmar H1 con `text-wine-light`, sin `text-gradient-wine`.
+  - Repetir Lighthouse mobile home.
+  - Comparar contra LCP 11,1 s y render delay 10,3 s de la variante sin animación.
+- Si no mejora, probar fuente crítica self-host/preload o fuente del sistema solo para el hero.

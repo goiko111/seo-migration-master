@@ -86,7 +86,7 @@ const HeroSection = memo(() => {
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.1] mb-5">
               {h.title.split('. ').map((part, i, arr) => (
                 <span key={i}>
-                  {i === 0 ? <span className="text-gradient-wine">{part}.</span> : <>{" "}{part}{i < arr.length - 1 ? '.' : ''}</>}
+                  {i === 0 ? <span className="text-wine-light">{part}.</span> : <>{" "}{part}{i < arr.length - 1 ? '.' : ''}</>}
                   {i < arr.length - 1 && <br className="hidden sm:block" />}
                 </span>
               ))}

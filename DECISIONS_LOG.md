@@ -788,3 +788,43 @@
 
 - Publicar desde Lovable el commit `b86d06d`.
 - Revalidar Lighthouse mobile en producción y revisar el desglose LCP.
+
+### 2026-05-25: revalidación de H1 sin animación y siguiente variante
+
+#### Hechos
+
+- El usuario confirmó la publicación en Lovable.
+- Producción sirve deployment `05d29c6a-1f11-4a80-8af5-c913bfa8d990` con entry `/assets/index-B3ya-SL1.js`.
+- El entry publicado mantiene preloads ligeros y no importa estáticamente vendors pesados.
+- El H1 publicado ya no tiene `animate-fade-in-up`; navegador confirma `animationName: none` y `opacity: 1`.
+- Lighthouse mobile producción tras la variante sin animación:
+  - Performance 58.
+  - FCP 6,2 s.
+  - LCP 11,1 s.
+  - TBT 100 ms.
+  - CLS 0,007.
+  - El LCP sigue siendo el H1 y el render delay sigue en 10,3 s, 93%.
+- Se aplicó localmente la siguiente variante: cambiar el primer tramo del H1 de `text-gradient-wine` a `text-wine-light`.
+- Verificaciones locales de la variante color sólido:
+  - `npm run build`.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check`.
+  - QA navegador: primer tramo sin `backgroundImage`, H1 sin animación, opacidad 1.
+  - Lighthouse mobile local: Performance 96, FCP 2,0 s y LCP 2,3 s.
+
+#### Decisiones
+
+- Descartar que la animación del H1 sea la causa suficiente del LCP alto.
+- Mantener la retirada de animación por ser una mejora segura del primer paint.
+- Probar color sólido antes de tocar fuentes o CSS crítico.
+
+#### Hipótesis
+
+- Si el problema viene del gradiente/clip de texto, producción debería mejorar al publicar el H1 con `text-wine-light`.
+- Si no mejora, la hipótesis principal pasa a fuente externa crítica o CSS/orden de render.
+
+#### Tareas pendientes
+
+- Commit y push de la variante color sólido.
+- Publicar desde Lovable.
+- Revalidar Lighthouse mobile producción y revisar si baja el render delay.
