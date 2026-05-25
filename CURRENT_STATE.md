@@ -1596,11 +1596,59 @@
 
 ## Tareas pendientes
 
-- En Lovable, publicar el commit `80895ac feat: connect wine library entities`.
-- En Lovable, pedir explícitamente: desplegar la Supabase Edge Function `prerender`.
-- Revalidar producción como Googlebot:
-  - `/biblioteca-vino/uvas/xarello` debe enlazar a Penedes, Cava, espumoso, marisco y arroces.
-  - `/biblioteca-vino/regiones/francia/champagne` debe enlazar a Chardonnay, Pinot Noir, espumoso, marisco y quesos.
-  - `/biblioteca-vino/estilos/espumoso` debe enlazar `Champagne` como región y `Cava` como estilo.
-  - `/biblioteca-vino/maridajes/carnes-rojas` debe enlazar Tempranillo, Syrah, Cabernet Sauvignon, Rioja y tinto reserva.
+- Hecho: en Lovable, publicar el commit `80895ac feat: connect wine library entities`.
+- Hecho: en Lovable, desplegar explícitamente la Supabase Edge Function `prerender`.
+- Hecho: revalidar producción como Googlebot:
+  - `/biblioteca-vino/uvas/xarello` enlaza a Penedes, Cava, espumoso, marisco y arroces.
+  - `/biblioteca-vino/regiones/francia/champagne` enlaza a Chardonnay, Pinot Noir, espumoso, marisco y quesos.
+  - `/biblioteca-vino/estilos/espumoso` enlaza `Champagne` como región y `Cava` como estilo.
+  - `/biblioteca-vino/maridajes/carnes-rojas` enlaza Tempranillo, Syrah, Cabernet Sauvignon, Rioja y tinto reserva.
 - Tras validar producción, retomar ampliación editorial profunda de regiones, estilos, maridajes y schema por entidad.
+
+## Actualización 2026-05-25: grafo estratégico publicado y validado
+
+## Hechos
+
+- Se intentó desplegar `prerender` por CLI, pero falló por ausencia de `SUPABASE_ACCESS_TOKEN`.
+- Se envió a Lovable el pedido operativo para desplegar el commit `feat: connect wine library entities` y la Edge Function `prerender`.
+- Lovable confirmó `Edge Function prerender desplegada`.
+- Se pulsó `Update` en el panel de publicación de Lovable.
+- Lovable quedó en estado `Up to date`.
+- Producción sirve nuevo asset frontend para usuarios reales: `/assets/index-DAMK02nf.js`.
+- Producción como Googlebot quedó validada con enlaces estratégicos en:
+  - `/biblioteca-vino/uvas/xarello`;
+  - `/biblioteca-vino/regiones/francia/champagne`;
+  - `/biblioteca-vino/estilos/espumoso`;
+  - `/biblioteca-vino/maridajes/carnes-rojas`.
+- Producción como usuario real quedó validada con Chrome headless en `/biblioteca-vino/uvas/xarello`; el DOM renderizado contiene:
+  - `/biblioteca-vino/regiones/espana/penedes`;
+  - `/biblioteca-vino/estilos/cava`;
+  - `/biblioteca-vino/estilos/espumoso`;
+  - `/biblioteca-vino/maridajes/pescados-y-mariscos`;
+  - `/biblioteca-vino/maridajes/pasta-arroces-y-legumbres`.
+- La ruta humana responde con `x-worker-branch: spa`; la ruta bot responde con `x-worker-branch: bot-prerender`.
+- No se desplegó Cloudflare Worker.
+
+## Decisiones
+
+- Cerrar el bloque de grafo estratégico como publicado y validado.
+- Mantener el procedimiento operativo confirmado:
+  - GitHub commit/push;
+  - Lovable `Update` para frontend;
+  - petición explícita de despliegue de Edge Function `prerender`;
+  - validación separada de usuario real y Googlebot.
+- No tocar Cloudflare Worker cuando `bot-prerender` funciona y el cambio está en frontend/Edge Function.
+
+## Hipótesis
+
+- El nuevo grafo interno debería mejorar rastreo, comprensión semántica y lectura por LLM crawlers tras recrawl.
+- El impacto en Search Console tardará en aparecer y debe medirse por cobertura, impresiones y consultas de biblioteca.
+
+## Tareas pendientes
+
+- Retomar ampliación editorial profunda:
+  - regiones prioritarias;
+  - estilos prioritarios;
+  - maridajes prioritarios;
+  - schema `DefinedTerm`/`ItemList` donde aporte valor.
+- Monitorizar Search Console tras recrawl.

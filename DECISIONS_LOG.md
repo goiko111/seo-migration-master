@@ -1248,6 +1248,39 @@
 
 #### Tareas pendientes
 
-- Publicar `80895ac` desde Lovable.
-- Desplegar Edge Function `prerender` desde Lovable.
-- Revalidar Googlebot y usuario real en uva, región, estilo y maridaje antes de cerrar el bloque.
+- Hecho: publicar `80895ac` desde Lovable.
+- Hecho: desplegar Edge Function `prerender` desde Lovable.
+- Hecho: revalidar Googlebot y usuario real en uva, región, estilo y maridaje antes de cerrar el bloque.
+
+### 2026-05-25: grafo estratégico publicado y validado
+
+#### Hechos
+
+- Supabase CLI no pudo desplegar `prerender` por falta de `SUPABASE_ACCESS_TOKEN`.
+- Se usó Lovable como vía operativa de despliegue, según el patrón documentado del proyecto.
+- Lovable desplegó explícitamente la Edge Function `prerender`.
+- Se ejecutó `Update` en Lovable y el panel quedó `Up to date`.
+- Producción para Googlebot quedó validada:
+  - Xarel-lo enlaza a Penedes, Cava, espumoso, marisco y arroces.
+  - Champagne enlaza a Chardonnay, Pinot Noir, espumoso, marisco y quesos.
+  - Espumoso enlaza a Champagne como región, Cava como estilo, Chardonnay, Xarel-lo y marisco.
+  - Carnes rojas enlaza a Tempranillo, Syrah, Cabernet Sauvignon, Rioja y tinto reserva.
+- Producción para usuario real quedó validada en Chrome headless en Xarel-lo con el asset `/assets/index-DAMK02nf.js` y los enlaces estratégicos esperados.
+
+#### Decisiones
+
+- Cerrar el bloque de grafo estratégico como publicado.
+- Mantener Lovable como vía de despliegue para Edge Functions mientras no exista `SUPABASE_ACCESS_TOKEN`.
+- No desplegar Cloudflare Worker porque la rama `bot-prerender` funciona y sirve el HTML actualizado.
+- Seguir validando por separado HTML de bots y DOM de usuario real cuando se modifique biblioteca del vino.
+
+#### Hipótesis
+
+- El bloque ya está disponible para Googlebot y crawlers de IA.
+- Search Console no mostrará efecto inmediato; el resultado dependerá del recrawl.
+
+#### Tareas pendientes
+
+- Abrir bloque de contenido profundo para regiones, estilos y maridajes.
+- Evaluar schema semántico adicional por entidad.
+- Monitorizar Search Console para cambios de cobertura e impresiones de biblioteca.

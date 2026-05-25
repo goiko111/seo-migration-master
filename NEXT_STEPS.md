@@ -1103,13 +1103,73 @@
 
 ## Tareas pendientes listas para retomar
 
-1. En Lovable, pulsar `Update` para el commit `feat: connect wine library entities`.
-2. En el chat de Lovable, pedir literalmente: `Despliega la Supabase Edge Function prerender con el código actual`.
-3. Validar como Googlebot:
-   - `curl -L -s -A 'Googlebot/2.1 (+http://www.google.com/bot.html)' https://winerim.wine/biblioteca-vino/uvas/xarello`
-   - Confirmar enlaces a Penedes, Cava, espumoso, marisco y arroces.
-4. Validar también:
-   - `/biblioteca-vino/regiones/francia/champagne`
-   - `/biblioteca-vino/estilos/espumoso`
-   - `/biblioteca-vino/maridajes/carnes-rojas`
-5. Si todo pasa, actualizar documentos y continuar con la ampliación editorial profunda de regiones, estilos, maridajes y schema.
+1. Hecho: en Lovable, pulsar `Update` para el commit `feat: connect wine library entities`.
+2. Hecho: en el chat de Lovable, pedir despliegue de la Supabase Edge Function `prerender`.
+3. Hecho: validar como Googlebot:
+   - `/biblioteca-vino/uvas/xarello`;
+   - `/biblioteca-vino/regiones/francia/champagne`;
+   - `/biblioteca-vino/estilos/espumoso`;
+   - `/biblioteca-vino/maridajes/carnes-rojas`.
+4. Hecho: validar usuario real en Chrome headless para `/biblioteca-vino/uvas/xarello`.
+5. Continuar con la ampliación editorial profunda de regiones, estilos, maridajes y schema.
+
+## Actualización 2026-05-25: siguiente sesión tras publicar grafo estratégico
+
+## Hechos
+
+- El grafo estratégico de biblioteca del vino está publicado y validado.
+- Googlebot recibe los enlaces internos estratégicos desde `prerender`.
+- Usuarios reales reciben el frontend actualizado desde `/assets/index-DAMK02nf.js`.
+- No fue necesario tocar Cloudflare Worker.
+- La Supabase CLI sigue sin token local; Lovable es la vía operativa para Edge Functions.
+
+## Decisiones
+
+- El siguiente trabajo ya no es despliegue, sino ampliación editorial profunda.
+- Prioridad recomendada: regiones primero, porque conectan intención SEO geográfica con uvas, estilos y maridajes.
+- Mantener cada bloque con paridad React/prerender y validación producción.
+
+## Hipótesis
+
+- Regiones prioritarias darán más crecimiento SEO que otra tanda de uvas aisladas porque atacan intención geográfica y gastronómica.
+- Schema `DefinedTerm`/`ItemList` puede aportar claridad semántica si se aplica por entidad sin duplicar schema innecesario.
+
+## Tareas pendientes listas para retomar
+
+1. Profundizar regiones prioritarias:
+   - Rioja;
+   - Ribera del Duero;
+   - Rias Baixas;
+   - Rueda;
+   - Priorat;
+   - Borgoña;
+   - Burdeos;
+   - Champagne;
+   - Douro;
+   - Vinho Verde.
+2. Profundizar estilos prioritarios:
+   - tinto crianza;
+   - tinto reserva;
+   - blanco con lias;
+   - espumoso metodo tradicional;
+   - rosado gastronomico.
+3. Profundizar maridajes prioritarios:
+   - carnes rojas;
+   - pescado blanco;
+   - marisco;
+   - arroces;
+   - cocina asiatica;
+   - quesos.
+4. Revisar schema por entidad:
+   - `DefinedTerm`;
+   - `ItemList`;
+   - `FAQPage`;
+   - `BreadcrumbList`;
+   - evitar duplicidades o schema decorativo.
+5. Tras el siguiente bloque:
+   - tests;
+   - build;
+   - `deno check`;
+   - publish Lovable;
+   - deploy explícito `prerender`;
+   - validación usuario real y Googlebot.
