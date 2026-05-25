@@ -1015,7 +1015,7 @@
 - GTM cargaba de forma inmediata en el `head`.
 - El chat ya estaba diferido tras `load` + `requestIdleCallback`.
 - Se creó `e164294 fix: defer gtm until after load`.
-- Se pusheó `main` hasta `7de6ed6 docs: record deferred gtm block`.
+- Se pusheó `main`; el commit técnico del cambio es `e164294 fix: defer gtm until after load`.
 - Producción revisada después del push todavía sirve deployment `94aea691-4fe9-4a08-84c0-135f46fa300f`, entry `/assets/index-BRCyx101.js` y el snippet inmediato antiguo de GTM.
 - Conclusión factual: falta publish desde Lovable.
 - El snippet nuevo define `window.__winerimLoadGtm` y carga GTM tras `load` + `requestIdleCallback`, con fallback `setTimeout`.

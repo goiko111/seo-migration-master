@@ -804,7 +804,7 @@
 - Hecho local: el chat ya estaba diferido y no se cambió.
 - Hecho local: el iframe `noscript` de GTM se conserva.
 - Commit técnico creado: `e164294 fix: defer gtm until after load`.
-- Push completado a `origin/main` hasta `7de6ed6 docs: record deferred gtm block`.
+- Push completado a `origin/main`; el commit técnico del cambio es `e164294 fix: defer gtm until after load`.
 - Producción revisada después del push todavía no refleja el cambio:
   - Deployment activo: `94aea691-4fe9-4a08-84c0-135f46fa300f`.
   - Entry activo: `/assets/index-BRCyx101.js`.

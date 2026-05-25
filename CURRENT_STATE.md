@@ -1284,9 +1284,7 @@
 - Se cambió el snippet de GTM para definir `window.__winerimLoadGtm` y cargar `https://www.googletagmanager.com/gtm.js?id=GTM-NDNQP955` solo después de `load` y en idle, con fallback `setTimeout`.
 - Se mantiene el iframe `noscript` de GTM.
 - Commit técnico creado: `e164294 fix: defer gtm until after load`.
-- Push completado a `origin/main` con:
-  - `e164294 fix: defer gtm until after load`;
-  - `7de6ed6 docs: record deferred gtm block`.
+- Push completado a `origin/main`; el commit técnico del cambio es `e164294 fix: defer gtm until after load`.
 - Comprobación de producción tras el push:
   - Deployment observado: `94aea691-4fe9-4a08-84c0-135f46fa300f`.
   - Entry activo: `/assets/index-BRCyx101.js`.
