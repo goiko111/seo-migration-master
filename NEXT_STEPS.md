@@ -753,3 +753,42 @@
    - `/de/weinbibliothek/rebsorten/tempranillo` correcta.
 4. Si mejora y queda estable, retomar biblioteca del vino al máximo nivel.
 5. Si sigue variable, auditar terceros/orden de hidratación.
+
+## Actualización 2026-05-25: CSS crítico validado en producción
+
+## Hechos
+
+- Hecho: el publish de Lovable está activo.
+- Hecho: producción sirve deployment `0e7c5ea6-8b8a-4638-a5f7-01e2335d8106`.
+- Hecho: el HTML de home contiene `critical-above-fold-css`.
+- Hecho: el CSS principal carga no bloqueante y conserva fallback `noscript`.
+- Hecho: Lighthouse mobile producción ya no lista recursos render-blocking.
+- Hecho: métricas Lighthouse mobile:
+  - Run 1: Performance 73, LCP 6,6 s.
+  - Run 2: Performance 71, LCP 6,7 s.
+- Hecho: home móvil/desktop y Tempranillo alemán pasan QA de Chrome sin errores.
+
+## Decisiones
+
+- El bloque CSS crítico queda cerrado.
+- Core Web Vitals sigue abierto porque el LCP todavía no está en objetivo.
+- El siguiente bloque de performance debe mirar terceros/hidratación, no CSS render-blocking.
+
+## Hipótesis
+
+- El LCP restante puede depender de scripts de terceros, orden de ejecución inicial o cuándo se estabiliza el H1 tras hidratación.
+- Si se decide priorizar crecimiento de contenido, ya podemos retomar biblioteca del vino con una base técnica bastante más limpia.
+
+## Tareas pendientes listas para retomar
+
+1. Elegir siguiente dirección:
+   - Performance: terceros/hidratación.
+   - Contenido: biblioteca del vino al máximo nivel.
+2. Si seguimos performance:
+   - Auditar GTM, Ads, Meta, Clarity, Leadfeeder y chat.
+   - Probar carga por consentimiento/idle.
+   - Medir LCP en 2-3 runs por variante.
+3. Si retomamos biblioteca:
+   - Priorizar 30-50 entidades.
+   - Crear contenido profundo por idioma.
+   - Añadir schema y enlaces internos por intención.

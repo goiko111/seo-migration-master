@@ -974,3 +974,34 @@
 
 - Publicar `main` desde Lovable.
 - Revalidar producción con Lighthouse mobile y QA de home/ficha de uva.
+
+### 2026-05-25: producción validada tras CSS crítico
+
+#### Hechos
+
+- El usuario indicó que el bloque CSS crítico ya estaba publicado.
+- Producción sirve deployment `0e7c5ea6-8b8a-4638-a5f7-01e2335d8106`.
+- Home contiene `critical-above-fold-css`.
+- El CSS principal carga como preload + stylesheet no bloqueante con fallback `noscript`.
+- No hay stylesheet principal bloqueante fuera de `noscript`.
+- Lighthouse mobile producción:
+  - Run 1: Performance 73, FCP 2,4 s, LCP 6,6 s, TBT 90 ms, CLS 0,006.
+  - Run 2: Performance 71, FCP 2,4 s, LCP 6,7 s, TBT 190 ms, CLS 0,006.
+  - 0 recursos render-blocking en ambos runs.
+- QA Chrome producción confirmó home móvil, home desktop y Tempranillo alemán sin errores de consola.
+
+#### Decisiones
+
+- Dar por validado el bloque CSS crítico en producción.
+- Considerar resuelto el problema concreto de CSS render-blocking.
+- Mantener Core Web Vitals abierto porque LCP sigue por encima del objetivo.
+- Si se sigue performance, pasar a hidratación/terceros.
+
+#### Hipótesis
+
+- El CSS crítico estabiliza mejor FCP/Speed Index, pero el H1 sigue entrando tarde en LCP por causas ajenas al stylesheet principal.
+- Terceros y orden de ejecución inicial son los siguientes sospechosos razonables.
+
+#### Tareas pendientes
+
+- Decidir si el siguiente bloque es terceros/hidratación o retomar biblioteca del vino.

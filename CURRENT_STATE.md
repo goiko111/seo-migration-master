@@ -1224,3 +1224,51 @@
   - Lighthouse mobile con `render-blocking resources` en 0.
   - Home móvil/desktop sin FOUC visible ni errores.
   - Ficha alemana de Tempranillo sigue renderizando.
+
+## Actualización 2026-05-25: producción validada tras CSS crítico
+
+## Hechos
+
+- El usuario confirmó que el publish de Lovable parecía estar hecho.
+- Producción ya refleja el bloque CSS crítico:
+  - Deployment activo observado: `0e7c5ea6-8b8a-4638-a5f7-01e2335d8106`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - El HTML contiene `critical-above-fold-css`.
+  - El CSS principal `/assets/index-Dh6dOxG-.css` carga como `preload` + stylesheet `media="print"` con `onload`.
+  - El HTML mantiene fallback `noscript` para el CSS completo.
+  - No hay stylesheet principal bloqueante fuera del fallback `noscript`.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+  - `vendor-query` sigue fuera del preload inicial y del entry publicado.
+- Lighthouse mobile producción tras el publish:
+  - Run 1: Performance 73, FCP 2,4 s, LCP 6,6 s, Speed Index 3,0 s, TBT 90 ms, CLS 0,006.
+  - Run 2: Performance 71, FCP 2,4 s, LCP 6,7 s, Speed Index 2,8 s, TBT 190 ms, CLS 0,006.
+  - `render-blocking resources`: 0 en ambos runs.
+- QA Chrome producción:
+  - Home móvil: H1 correcto, fuente serif del sistema, header fixed, CTA con gradiente y fondo correcto.
+  - Home desktop: H1 correcto, Playfair Display en desktop, nav visible y tablet hero visible.
+  - `/de/weinbibliothek/rebsorten/tempranillo`: H1 `Tempranillo`, título localizado y bloque `Service-Intelligenz`.
+  - No se detectaron errores de consola en la prueba.
+- Conclusión factual: el bloqueo por CSS render-blocking queda eliminado en producción, pero el LCP móvil sigue por encima de objetivo.
+
+## Decisiones
+
+- Considerar publicado y validado el bloque CSS crítico.
+- Considerar resuelto el punto específico `render-blocking resources`.
+- No declarar cerrado Core Web Vitals porque LCP sigue alrededor de 6,6-6,7 s en las dos muestras de producción.
+- El siguiente bloque de rendimiento, si se continúa, debe centrarse en orden de hidratación/primer render y terceros, no en CSS render-blocking principal.
+
+## Hipótesis
+
+- La mejora de FCP/Speed Index indica que el CSS crítico ayudó al primer render, aunque el LCP del H1 sigue contabilizándose tarde.
+- La causa restante puede estar en hidratación, tareas de terceros, scripts iniciales de tracking, fuentes/estilos aplicados después o variabilidad de entorno Lighthouse.
+- El CSS crítico inline debe mantenerse sincronizado con cambios futuros de hero/navbar.
+
+## Tareas pendientes
+
+- Si seguimos rendimiento:
+  - Auditar orden de hidratación y scripts de terceros.
+  - Probar diferir GTM/Ads/Meta/Clarity/Leadfeeder con consentimiento/idle.
+  - Medir si el LCP del H1 mejora al reducir scripts antes de interacción.
+- Si aparcamos rendimiento:
+  - Retomar biblioteca del vino al máximo nivel sobre la base saneada.
+  - Priorizar 30-50 entidades y enlazado interno.
