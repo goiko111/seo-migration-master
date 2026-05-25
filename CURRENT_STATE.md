@@ -1044,3 +1044,69 @@
   - Repetir Lighthouse mobile home.
   - Comparar contra LCP 7,0 s y render delay 6,19 s de la variante color sólido.
 - Si no mejora lo suficiente, pasar a CSS crítico/inline above-the-fold y revisión de carga del CSS.
+
+## Actualización 2026-05-25: fuente móvil publicada y saneamiento de arranque/biblioteca humana
+
+## Hechos
+
+- La variante `font-serif lg:font-heading` del H1 quedó commiteada previamente en `main` con `1a3a1c3 fix: use system serif for mobile hero h1`.
+- Producción refleja esa variante:
+  - Deployment activo observado: `25c70cc4-cb78-4036-b43a-73bd41ee085a`.
+  - Entry activo: `/assets/index-howILT12.js`.
+  - En navegador desktop, el H1 mantiene `font-serif lg:font-heading`, sin animación y con opacidad 1.
+  - El entry publicado contiene `font-serif lg:font-heading` y `text-wine-light`.
+- Producción todavía conserva `vendor-query` en modulepreload inicial y en el entry publicado.
+- Lighthouse mobile de producción para esta variante sigue siendo variable:
+  - Run favorable: Performance 85, FCP 2,6 s, LCP 3,5 s, TBT 100 ms, CLS 0,006.
+  - Run posterior: Performance 63, FCP 4,8 s, LCP 7,9 s, TBT 30 ms, CLS 0.
+- Conclusión factual: la variante de fuente móvil puede mejorar el mejor caso, pero no permite declarar resuelto el LCP móvil de forma estable.
+- Se detectó que `LanguageSwitcher` arrastraba helpers desde `wineLibraryI18n`, dejando código de biblioteca del vino en el arranque global.
+- Se creó `src/data/wineLibraryRoutes.ts` con helpers ligeros de rutas, idiomas, canonical y hreflang de biblioteca.
+- `src/components/LanguageSwitcher.tsx` usa ahora `wineLibraryRoutes` en vez de importar la capa editorial completa.
+- `src/data/wineLibraryI18n.ts` reexporta los helpers de rutas desde el nuevo módulo para mantener compatibilidad.
+- Se eliminó React Query del arranque de `App`:
+  - `src/App.tsx` ya no envuelve toda la app en `QueryClientProvider`.
+  - `src/hooks/usePageContent.ts` usa caché manual con TTL de 5 minutos y deduplicación de peticiones.
+- Build local tras el saneamiento:
+  - Entry local: `/assets/index-BpRdM0S8.js`.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+  - Ya no aparece `vendor-query` como preload inicial.
+  - El entry local no contiene `QueryClient` ni imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` o `vendor-supabase`.
+- Se detectó un bug importante en experiencia humana de biblioteca:
+  - En producción, `/de/weinbibliothek/rebsorten/tempranillo` carga sin H1 ni bloque `Service-Intelligenz` para usuario humano.
+  - El origen probable era la retirada previa del `TooltipProvider` global sin proveedor local en `GrapeDetail`.
+- Se corrigió `src/pages/GrapeDetail.tsx` añadiendo `TooltipProvider` local solo alrededor de fichas completas.
+- Se añadió test de regresión `src/test/grape-detail-render.test.tsx` para asegurar que `/de/weinbibliothek/rebsorten/tempranillo` renderiza H1 `Tempranillo` y el bloque `Service-Intelligenz`.
+- `src/test/setup.ts` añade mock de `IntersectionObserver` para jsdom.
+- Verificaciones locales completadas:
+  - `npm run test`: 6 archivos, 16 tests correctos.
+  - `npm run build`: correcto.
+  - `git diff --check`: correcto.
+  - QA navegador local home: H1 visible, sin animación, con `font-serif lg:font-heading`.
+  - QA navegador local `/de/weinbibliothek/rebsorten/tempranillo`: H1 `Tempranillo`, bloque `Service-Intelligenz`, root no vacío y sin errores de consola.
+  - Lighthouse mobile local home: Performance 98, FCP 1,7 s, LCP 2,1 s, TBT 60 ms, CLS 0,006.
+
+## Decisiones
+
+- Mantener por ahora H1 sin animación, con color sólido y `font-serif lg:font-heading`, pero no marcar Core Web Vitals como cerrado.
+- No restaurar un `TooltipProvider` global: los componentes que lo necesiten deben proveerlo localmente para no cargar Radix en el arranque de home.
+- Mantener los datos editoriales de biblioteca del vino fuera del chrome global y del selector de idioma.
+- Sustituir React Query en `usePageContent` por caché manual, porque ese contenido se usa en superficies diferidas y no justifica un provider global en el primer render.
+
+## Hipótesis
+
+- Al publicar este bloque, el entry de home debería perder `vendor-query` y reducir presión de arranque.
+- La corrección local de `TooltipProvider` debería arreglar las fichas humanas de uva que hoy quedan sin contenido principal en producción.
+- Search Console/Core Web Vitals tardará en reflejar cambios aunque Lighthouse mejore inmediatamente.
+- Si Lighthouse de producción sigue inestable tras publicar este bloque, el siguiente cuello estará probablemente en CSS crítico/render-blocking y orden de primer render.
+
+## Tareas pendientes
+
+- Publicar `main` desde Lovable cuando este bloque esté en `origin/main`.
+- Revalidar producción tras publish:
+  - Entry nuevo distinto de `/assets/index-howILT12.js`.
+  - Modulepreloads iniciales sin `vendor-query`.
+  - Home sin imports estáticos de vendors pesados.
+  - `/de/weinbibliothek/rebsorten/tempranillo` como usuario humano con H1 `Tempranillo` y bloque `Service-Intelligenz`.
+  - Lighthouse mobile home con al menos dos runs para medir estabilidad.
+- Si producción mejora pero sigue fuera de objetivo, abrir bloque CSS crítico/above-the-fold.

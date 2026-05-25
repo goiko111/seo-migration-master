@@ -621,3 +621,53 @@
    - Comparar contra LCP 7,0 s y render delay 6,19 s.
 4. Si mejora pero sigue por encima de objetivo, abrir bloque CSS crítico.
 5. Si no mejora, valorar revertir fuente móvil y centrar el bloque en CSS/terceros.
+
+## Actualización 2026-05-25: cierre local de arranque ligero y ficha humana de biblioteca
+
+## Hechos
+
+- Hecho: la variante `font-serif lg:font-heading` ya está publicada en producción con deployment `25c70cc4-cb78-4036-b43a-73bd41ee085a` y entry `/assets/index-howILT12.js`.
+- Hecho: producción conserva `vendor-query` en el preload inicial.
+- Hecho: Lighthouse mobile producción de la variante fuente móvil es inestable:
+  - Run favorable: Performance 85, LCP 3,5 s.
+  - Run posterior: Performance 63, LCP 7,9 s.
+- Hecho local: se extrajo `src/data/wineLibraryRoutes.ts` para que el selector de idioma no cargue la capa editorial completa de biblioteca.
+- Hecho local: `App` ya no usa `QueryClientProvider` y `usePageContent` usa caché manual.
+- Hecho local: el build deja preloads iniciales en `vendor-react`, `vendor-router` y `vendor-ui-utils`; ya no aparece `vendor-query`.
+- Hecho producción actual: `/de/weinbibliothek/rebsorten/tempranillo` como usuario humano no muestra H1 ni bloque `Service-Intelligenz`.
+- Hecho local: `GrapeDetail` añade `TooltipProvider` local y la ruta alemana de Tempranillo renderiza H1 y bloque editorial.
+- Verificación local completada:
+  - `npm run test`: 16 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - QA navegador local de home y ficha alemana.
+  - Lighthouse mobile local home: Performance 98, FCP 1,7 s, LCP 2,1 s.
+
+## Decisiones
+
+- Mantener la variante H1 actual, pero no declarar resuelto Core Web Vitals hasta validar el nuevo arranque sin `vendor-query`.
+- Mantener providers de UI pesados localizados por ruta.
+- Mantener biblioteca del vino como superficie prioritaria, pero corregir primero el bug humano de fichas de uva antes de escalar más contenido.
+
+## Hipótesis
+
+- Publicar este bloque debería:
+  - Reducir el entry/preloads iniciales de home.
+  - Arreglar fichas humanas de uva localizadas.
+  - Dar una base más limpia para decidir si el siguiente foco es CSS crítico.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar `main` desde Lovable cuando este bloque esté en `origin/main`.
+2. Revalidar producción:
+   - Entry nuevo distinto de `/assets/index-howILT12.js`.
+   - Modulepreloads sin `vendor-query`.
+   - Home sin errores y H1 correcto.
+   - `/de/weinbibliothek/rebsorten/tempranillo` con H1 `Tempranillo` y bloque `Service-Intelligenz`.
+   - Lighthouse mobile home con dos muestras.
+3. Si LCP sigue inestable, abrir bloque CSS crítico/above-the-fold.
+4. Después de cerrar o aparcar Core Web Vitals, retomar ampliación máxima de biblioteca del vino:
+   - 30-50 uvas/regiones/estilos por demanda SEO.
+   - Enlazado interno por intención.
+   - Schema por entidad.
+   - Contenido editorial profundo por idioma.

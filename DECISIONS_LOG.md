@@ -869,3 +869,40 @@
 - Commit y push de la variante fuente móvil.
 - Publicar desde Lovable.
 - Revalidar Lighthouse mobile producción y comparar contra LCP 7,0 s.
+
+### 2026-05-25: fuente móvil publicada y corrección de arranque/biblioteca humana
+
+#### Hechos
+
+- La variante de H1 con `font-serif lg:font-heading` quedó en `main` con `1a3a1c3`.
+- Producción refleja esa variante en deployment `25c70cc4-cb78-4036-b43a-73bd41ee085a` y entry `/assets/index-howILT12.js`.
+- Lighthouse mobile de producción para esa variante fue variable:
+  - Performance 85, FCP 2,6 s y LCP 3,5 s en un run.
+  - Performance 63, FCP 4,8 s y LCP 7,9 s en otro run.
+- Producción mantiene `vendor-query` en el arranque inicial.
+- Se separaron los helpers ligeros de rutas de biblioteca en `src/data/wineLibraryRoutes.ts`.
+- `LanguageSwitcher` dejó de importar `wineLibraryI18n` y usa el módulo ligero de rutas.
+- `App` dejó de usar `QueryClientProvider`.
+- `usePageContent` mantiene el contrato del hook con caché manual, TTL y deduplicación de peticiones.
+- Se detectó que la ficha humana `/de/weinbibliothek/rebsorten/tempranillo` en producción no muestra H1 ni bloque editorial.
+- Se corrigió `GrapeDetail` con `TooltipProvider` local para fichas completas.
+- Se añadió test de regresión para la ficha alemana de Tempranillo.
+- Verificaciones locales completadas: `npm run test` con 16 tests, `npm run build`, `git diff --check`, QA navegador local y Lighthouse mobile local con Performance 98 y LCP 2,1 s.
+
+#### Decisiones
+
+- No considerar cerrado Core Web Vitals por la mejora puntual de Lighthouse; usar varias muestras y publicar el saneamiento de arranque antes de decidir.
+- No volver a introducir providers globales para solucionar dependencias de rutas específicas.
+- Mantener los helpers de rutas de biblioteca separados de la capa editorial para proteger el entry de home.
+- Sacar React Query del primer render porque ya no hay consumo global que lo justifique.
+
+#### Hipótesis
+
+- La eliminación de `vendor-query` del preload inicial reducirá coste de arranque en producción.
+- El proveedor local de tooltip arreglará el bug humano de fichas de uva sin penalizar la home.
+- El siguiente bloque de rendimiento, si sigue haciendo falta, será CSS crítico y render-blocking.
+
+#### Tareas pendientes
+
+- Publicar desde Lovable cuando este bloque esté en `origin/main`.
+- Revalidar producción con entry/preloads, home, ruta humana de Tempranillo y Lighthouse mobile.

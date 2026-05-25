@@ -10,7 +10,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   hasFullEntry,
   colorLabels,
@@ -309,7 +309,13 @@ const GrapeDetail = () => {
   // Render full entry if available, otherwise a simplified catalog view
   const urlFor = (path: string) => getWineLibraryUrl(lang, path);
 
-  if (fullEntry) return <FullGrapeDetail data={fullEntry} linkTo={linkTo} urlFor={urlFor} ui={ui} langKey={langKey} />;
+  if (fullEntry) {
+    return (
+      <TooltipProvider delayDuration={150}>
+        <FullGrapeDetail data={fullEntry} linkTo={linkTo} urlFor={urlFor} ui={ui} langKey={langKey} />
+      </TooltipProvider>
+    );
+  }
   return <CatalogGrapeDetail data={catalogEntry!} linkTo={linkTo} urlFor={urlFor} ui={ui} langKey={langKey} />;
 };
 

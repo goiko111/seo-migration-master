@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
@@ -130,15 +129,6 @@ const SimuladorCarta = lazy(() => import("./pages/SimuladorCarta"));
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminShell = lazy(() => import("./components/admin/AdminShell"));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -808,26 +798,24 @@ const DeferredAppChrome = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <LanguageProvider>
-        <ScrollToTop />
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {esRoutes}
-            {langRoutes("/en")}
-            {langRoutes("/it")}
-            {langRoutes("/fr")}
-            {langRoutes("/de")}
-            {langRoutes("/pt")}
-            <Route path="/unsubscribe" element={<Unsubscribe />} />
-            <Route path="*" element={<SeoPage />} />
-          </Routes>
-        </Suspense>
-        <DeferredAppChrome />
-      </LanguageProvider>
-    </BrowserRouter>
-  </QueryClientProvider>
+  <BrowserRouter>
+    <LanguageProvider>
+      <ScrollToTop />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          {esRoutes}
+          {langRoutes("/en")}
+          {langRoutes("/it")}
+          {langRoutes("/fr")}
+          {langRoutes("/de")}
+          {langRoutes("/pt")}
+          <Route path="/unsubscribe" element={<Unsubscribe />} />
+          <Route path="*" element={<SeoPage />} />
+        </Routes>
+      </Suspense>
+      <DeferredAppChrome />
+    </LanguageProvider>
+  </BrowserRouter>
 );
 
 export default App;

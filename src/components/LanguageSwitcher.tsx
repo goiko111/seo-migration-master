@@ -3,7 +3,7 @@ import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, type SupportedLang, DEFAULT_LANG } from "@/i18n/types";
-import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryI18n";
+import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryRoutes";
 
 /** Find the ES route equivalent for the current path */
 function findEsRoute(pathname: string, currentLang: SupportedLang): string {
