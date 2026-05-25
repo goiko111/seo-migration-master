@@ -1005,3 +1005,39 @@
 #### Tareas pendientes
 
 - Decidir si el siguiente bloque es terceros/hidratación o retomar biblioteca del vino.
+
+### 2026-05-25: GTM diferido tras load/idle
+
+#### Hechos
+
+- Se auditó `index.html` y el código de tracking.
+- Consent Mode v2 se mantiene inicializado antes de GTM.
+- GTM cargaba de forma inmediata en el `head`.
+- El chat ya estaba diferido tras `load` + `requestIdleCallback`.
+- Se creó `e164294 fix: defer gtm until after load`.
+- El snippet nuevo define `window.__winerimLoadGtm` y carga GTM tras `load` + `requestIdleCallback`, con fallback `setTimeout`.
+- Verificación local:
+  - `npm run build`: correcto.
+  - `npm run test`: 16 tests.
+  - `git diff --check`: correcto.
+  - Lighthouse mobile local: Performance 98/97 y LCP 2,1 s en ambas pasadas.
+  - QA navegador local de home y Tempranillo alemán sin errores de consola.
+
+#### Decisiones
+
+- Mantener Consent Mode temprano.
+- Diferir GTM para proteger LCP y primer render.
+- Mantener fallback `noscript`.
+- No modificar todavía las etiquetas internas del contenedor GTM.
+- Aceptar el tradeoff de medición: algunas etiquetas de marketing pueden activarse segundos más tarde.
+
+#### Hipótesis
+
+- Si terceros dentro de GTM influían en producción, el LCP debería mejorar o volverse menos variable tras el publish.
+- Si no mejora, el siguiente bloque debe centrarse en hidratación/render del H1 y coste del entry inicial.
+
+#### Tareas pendientes
+
+- Pushear código y documentación.
+- Publicar desde Lovable.
+- Revalidar producción con HTML, QA y 2-3 muestras Lighthouse.

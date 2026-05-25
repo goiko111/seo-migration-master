@@ -7,6 +7,7 @@
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas prioritarias, además de la infraestructura multilingüe.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
+- Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero y CSS crítico; queda por validar el bloque de GTM diferido.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
 - Search Console está verificado para la propiedad URL-prefix `https://winerim.wine/`; la propiedad de dominio `sc-domain:winerim.wine` sigue pendiente de acceso/verificación.
 - Desde el 2026-05-23, estos documentos son la fuente de verdad operativa del proyecto:
@@ -38,3 +39,4 @@
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada sin romper la paridad multilingüe ni el prerender para bots.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
+- Publicar y revalidar el bloque de GTM diferido antes de decidir si se retoma biblioteca del vino o se sigue con hidratación/render del H1.

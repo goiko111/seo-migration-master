@@ -792,3 +792,50 @@
    - Priorizar 30-50 entidades.
    - Crear contenido profundo por idioma.
    - Añadir schema y enlaces internos por intención.
+
+## Actualización 2026-05-25: GTM diferido listo para publish
+
+## Hechos
+
+- Hecho local: se auditó la carga de terceros del primer viewport.
+- Hecho local: Consent Mode v2 sigue inicializado antes de GTM.
+- Hecho local: GTM dejó de cargarse inmediatamente en el `head`.
+- Hecho local: el nuevo snippet carga GTM después de `load` + `requestIdleCallback`, con fallback `setTimeout`.
+- Hecho local: el chat ya estaba diferido y no se cambió.
+- Hecho local: el iframe `noscript` de GTM se conserva.
+- Commit técnico creado: `e164294 fix: defer gtm until after load`.
+- Verificación local:
+  - `npm run build`: correcto.
+  - `npm run test`: 16 tests correctos.
+  - `git diff --check`: correcto.
+  - Lighthouse mobile preview:
+    - Run 1: Performance 98, FCP 1,8 s, LCP 2,1 s, TBT 90 ms, CLS 0,006.
+    - Run 2: Performance 97, FCP 1,7 s, LCP 2,1 s, TBT 110 ms, CLS 0,006.
+  - Home y Tempranillo alemán pasan QA local sin errores de consola.
+
+## Decisiones
+
+- Mantener Consent Mode temprano.
+- Diferir GTM antes de tocar configuración interna del contenedor.
+- No tocar Worker ni Supabase en este bloque.
+- Medir producción antes de seguir con biblioteca del vino.
+
+## Hipótesis
+
+- Este cambio puede reducir competencia de terceros antes del LCP en producción.
+- Si no hay mejora clara, el cuello estará probablemente en hidratación/render del H1 o en coste del entry inicial.
+- Las métricas de Search Console/Core Web Vitals tardarán en reflejar cambios aunque Lighthouse responda antes.
+
+## Tareas pendientes listas para retomar
+
+1. Pushear `main` con `e164294` y documentación.
+2. Publicar `main` desde Lovable.
+3. Revalidar producción:
+   - HTML contiene `__winerimLoadGtm`.
+   - Consent Mode sigue antes de GTM.
+   - GTM no usa el snippet inmediato antiguo.
+   - Home móvil/desktop correcta.
+   - `/de/weinbibliothek/rebsorten/tempranillo` correcta.
+   - Lighthouse mobile home con 2-3 muestras.
+4. Si LCP mejora y queda estable, retomar biblioteca del vino al máximo nivel.
+5. Si LCP sigue alto, auditar hidratación/render del H1 y coste del entry inicial.

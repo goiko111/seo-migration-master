@@ -1272,3 +1272,56 @@
 - Si aparcamos rendimiento:
   - Retomar biblioteca del vino al máximo nivel sobre la base saneada.
   - Priorizar 30-50 entidades y enlazado interno.
+
+## Actualización 2026-05-25: GTM diferido localmente
+
+## Hechos
+
+- Se auditó la carga de terceros en el arranque.
+- En `index.html`, Consent Mode v2 ya se inicializaba antes de GTM y se mantiene en el `head`.
+- GTM era el único tercero de tracking que se insertaba inmediatamente durante el parseo del `head`.
+- El chat de Winerim ya estaba diferido tras `load` + `requestIdleCallback`.
+- Se cambió el snippet de GTM para definir `window.__winerimLoadGtm` y cargar `https://www.googletagmanager.com/gtm.js?id=GTM-NDNQP955` solo después de `load` y en idle, con fallback `setTimeout`.
+- Se mantiene el iframe `noscript` de GTM.
+- Commit técnico creado: `e164294 fix: defer gtm until after load`.
+- Verificaciones locales:
+  - `npm run build`: correcto.
+  - `npm run test`: 6 archivos, 16 tests correctos.
+  - `git diff --check`: correcto.
+  - `dist/index.html` contiene `__winerimLoadGtm`, `requestIdleCallback`, `GTM-NDNQP955`, Consent Mode y fallback `noscript`.
+  - El CSS principal sigue cargando como preload + stylesheet no bloqueante + fallback `noscript`.
+  - Lighthouse mobile local:
+    - Run 1: Performance 98, FCP 1,8 s, LCP 2,1 s, TBT 90 ms, CLS 0,006.
+    - Run 2: Performance 97, FCP 1,7 s, LCP 2,1 s, TBT 110 ms, CLS 0,006.
+  - QA navegador local:
+    - Home renderiza H1 `Vende más vino. Mejora márgenes. Controla tu bodega.`
+    - `/de/weinbibliothek/rebsorten/tempranillo` renderiza H1 `Tempranillo`, canonical y JSON-LD.
+    - No se detectaron errores de consola.
+
+## Decisiones
+
+- Mantener Consent Mode temprano para conservar el contrato de consentimiento antes de cualquier tag.
+- Diferir el contenedor GTM para reducir competencia de red/main thread antes del primer render relevante.
+- Aceptar que las etiquetas gestionadas dentro de GTM pueden dispararse unos segundos más tarde.
+- No tocar todavía configuración interna de GTM, Google Ads, Meta, Clarity o Leadfeeder porque viven dentro del contenedor.
+- No tocar Cloudflare Worker en este bloque.
+
+## Hipótesis
+
+- Si GTM o tags internos estaban compitiendo con el primer render, producción debería mostrar menos variabilidad de LCP tras publicar `e164294`.
+- Si producción sigue con LCP alto, el siguiente sospechoso será hidratación/orden de render del H1 o coste del bundle inicial, no CSS render-blocking ni GTM inmediato.
+- Search Console y Core Web Vitals de campo no reflejarán este cambio en tiempo real aunque Lighthouse sintético mejore.
+
+## Tareas pendientes
+
+- Pushear `e164294` y documentación de cierre.
+- Publicar `main` desde Lovable.
+- Revalidar producción tras publish:
+  - HTML contiene `__winerimLoadGtm`.
+  - GTM no aparece como snippet inmediato antiguo.
+  - Consent Mode sigue antes de GTM.
+  - Home móvil/desktop correcta.
+  - `/de/weinbibliothek/rebsorten/tempranillo` correcta.
+  - Lighthouse mobile home con 2-3 muestras.
+- Si LCP mejora y queda estable, retomar biblioteca del vino al máximo nivel.
+- Si LCP sigue alto, auditar hidratación/render del H1 y coste del entry inicial.
