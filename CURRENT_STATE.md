@@ -2,7 +2,7 @@
 
 ## Hechos
 
-- Fecha de actualización: 2026-05-24.
+- Fecha de actualización: 2026-05-25.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
 - Rama activa: `main`.
 - PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
@@ -1421,3 +1421,61 @@
   - ampliar contenido profundo por idioma;
   - reforzar schema y enlaces internos por intención.
 - Como mejora secundaria de rendimiento, auditar JS no usado si vuelve a ser prioritario.
+
+## Actualización 2026-05-25: segunda tanda editorial de biblioteca del vino
+
+## Hechos
+
+- Se retomó la biblioteca del vino tras cerrar GTM diferido y Core Web Vitals sintético de home.
+- Se amplió la capa editorial avanzada de uvas prioritarias de 10 a 20 perfiles.
+- Nuevas uvas añadidas a `src/data/wineLibraryEditorial.ts`:
+  - `syrah`
+  - `merlot`
+  - `malbec`
+  - `nebbiolo`
+  - `sangiovese`
+  - `monastrell`
+  - `viura`
+  - `chenin-blanc`
+  - `xarello`
+  - `touriga-nacional`
+- Las nuevas fichas incluyen temperatura, copa, aireación, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes y FAQs localizadas mediante la capa existente.
+- Se añadió la misma segunda tanda a `supabase/functions/prerender/index.ts` para mantener paridad entre experiencia humana y HTML prerenderizado para bots.
+- Se actualizó el contrato de pruebas:
+  - `src/test/wine-library-editorial.test.ts` exige 20 perfiles prioritarios y cubre segunda tanda en `de` y `pt`.
+  - `src/test/wine-library-seo-surface.test.ts` exige que el prerender contenga las nuevas uvas prioritarias.
+- Verificaciones completadas:
+  - `npm run test -- --run`: 6 archivos, 17 tests.
+  - `npm run build`: correcto.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: correcto.
+  - `git diff --check`: correcto.
+  - QA local en navegador: `/biblioteca-vino/uvas/syrah`, `/de/weinbibliothek/rebsorten/syrah`, `/pt/biblioteca-vinho/castas/xarello` y `/en/wine-library/grapes/chenin-blanc` muestran inteligencia de servicio, rol en carta y maridajes sin errores de consola.
+- No se detectó fuga de texto español en las rutas `de` y `pt` probadas.
+- Producción aún no refleja esta tanda hasta publicar desde Lovable.
+
+## Decisiones
+
+- Usar `xarello` como slug canónico porque es el slug real del catálogo; no crear `xarel-lo`.
+- Añadir `monastrell` y `touriga-nacional` para reforzar intención ibérica/portuguesa, ya que `verdejo` y `godello` ya estaban en la primera tanda.
+- Mantener la segunda tanda dentro del mismo patrón editorial de servicio para evitar crear una abstracción nueva innecesaria.
+- Mantener paridad frontend/prerender como requisito de calidad SEO y LLM.
+
+## Hipótesis
+
+- Pasar de 10 a 20 uvas prioritarias aumenta la profundidad semántica de la biblioteca sin añadir URLs nuevas ni riesgo de indexación.
+- Las nuevas uvas cubren demanda internacional e ibérica relevante para restaurantes: tintos globales, tintos italianos, blancos de valor y Portugal.
+- El impacto SEO real dependerá de publicar desde Lovable y de que Google recrawlee las rutas.
+
+## Tareas pendientes
+
+- Commit y push de la segunda tanda editorial.
+- Publicar desde Lovable:
+  - frontend;
+  - Edge Function `prerender`.
+- Revalidar producción tras publish:
+  - `/biblioteca-vino/uvas/syrah`;
+  - `/de/weinbibliothek/rebsorten/syrah`;
+  - `/pt/biblioteca-vinho/castas/xarello`;
+  - `/en/wine-library/grapes/chenin-blanc`;
+  - Googlebot/prerender en al menos una uva nueva `de` o `pt`.
+- Siguiente ampliación: regiones, estilos, maridajes y schema/enlazado interno por intención.

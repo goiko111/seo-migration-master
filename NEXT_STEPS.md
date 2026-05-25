@@ -920,3 +920,58 @@
 3. Rendimiento residual opcional:
    - auditar JS no usado;
    - revisar carga de tags dentro del contenedor GTM si vuelve la variabilidad.
+
+## Actualización 2026-05-25: segunda tanda editorial lista para publish
+
+## Hechos
+
+- Hecho local: biblioteca del vino ampliada de 10 a 20 uvas prioritarias con inteligencia de servicio.
+- Hecho local: nuevas uvas cubiertas:
+  - `syrah`
+  - `merlot`
+  - `malbec`
+  - `nebbiolo`
+  - `sangiovese`
+  - `monastrell`
+  - `viura`
+  - `chenin-blanc`
+  - `xarello`
+  - `touriga-nacional`
+- Hecho local: React y `prerender` tienen paridad editorial para estas uvas.
+- Hecho local: pruebas actualizadas para exigir 20 perfiles prioritarios y presencia de la segunda tanda en prerender.
+- Verificación local completada:
+  - `npm run test -- --run`: 17 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - QA navegador en `/biblioteca-vino/uvas/syrah`, `/de/weinbibliothek/rebsorten/syrah`, `/pt/biblioteca-vinho/castas/xarello` y `/en/wine-library/grapes/chenin-blanc`.
+- Producción queda pendiente de publish desde Lovable.
+
+## Decisiones
+
+- Slug canónico de Xarel-lo: `xarello`.
+- Esta tanda añade `monastrell` y `touriga-nacional` porque refuerzan la biblioteca en España/Portugal y `verdejo`/`godello` ya estaban cubiertas.
+- No se crean nuevas rutas; se enriquecen rutas existentes.
+
+## Hipótesis
+
+- La segunda tanda mejora profundidad y autoridad temática de la biblioteca sin aumentar deuda de indexación.
+- El siguiente salto debe venir de regiones, estilos y maridajes con enlazado cruzado y schema por entidad.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push de la segunda tanda editorial.
+2. Publicar desde Lovable:
+   - frontend;
+   - Edge Function `prerender`.
+3. Revalidar producción:
+   - `/biblioteca-vino/uvas/syrah`;
+   - `/de/weinbibliothek/rebsorten/syrah`;
+   - `/pt/biblioteca-vinho/castas/xarello`;
+   - `/en/wine-library/grapes/chenin-blanc`;
+   - Googlebot en al menos una ficha nueva.
+4. Continuar biblioteca del vino al máximo nivel:
+   - regiones: Rioja, Ribera del Duero, Rias Baixas, Rueda, Priorat, Borgoña, Burdeos, Champagne, Douro, Vinho Verde;
+   - estilos: crianza, reserva, blanco con lias, espumoso metodo tradicional, rosado gastronomico;
+   - maridajes: carnes rojas, pescado blanco, marisco, arroces, cocina asiatica, quesos;
+   - schema y enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.

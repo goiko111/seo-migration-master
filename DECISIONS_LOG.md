@@ -1102,3 +1102,50 @@
 
 - Monitorizar Core Web Vitals en Search Console.
 - Retomar biblioteca del vino al máximo nivel o, si se prioriza rendimiento residual, auditar JS no usado.
+
+### 2026-05-25: segunda tanda editorial de biblioteca del vino
+
+#### Hechos
+
+- Se amplió localmente la capa editorial avanzada de uvas prioritarias de 10 a 20 perfiles.
+- Nuevas uvas prioritarias añadidas:
+  - `syrah`
+  - `merlot`
+  - `malbec`
+  - `nebbiolo`
+  - `sangiovese`
+  - `monastrell`
+  - `viura`
+  - `chenin-blanc`
+  - `xarello`
+  - `touriga-nacional`
+- `src/data/wineLibraryEditorial.ts` contiene los perfiles nuevos para la experiencia React.
+- `supabase/functions/prerender/index.ts` contiene perfiles equivalentes para bots y crawlers.
+- Las pruebas se actualizaron para cubrir la segunda tanda y la superficie SEO.
+- Verificaciones completadas:
+  - `npm run test -- --run`: 17 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - QA local en navegador de rutas ES, DE, PT y EN.
+
+#### Decisiones
+
+- Usar `xarello` como slug canónico en lugar de `xarel-lo`, porque el catálogo real usa `xarello`.
+- Añadir `monastrell` y `touriga-nacional` en esta tanda para reforzar el eje ibérico y portugués.
+- No añadir URLs nuevas; la ampliación aumenta profundidad editorial sobre rutas ya existentes.
+- Mantener el patrón actual de perfiles editoriales antes de pasar a una estructura de contenido más granular por entidad.
+- Mantener paridad frontend/prerender como criterio obligatorio de biblioteca del vino.
+
+#### Hipótesis
+
+- Esta tanda mejora la utilidad para restaurantes y la lectura semántica internacional sin aumentar riesgo de sitemap.
+- La próxima ganancia fuerte vendrá de regiones/estilos/maridajes con enlaces internos cruzados y schema más rico.
+- `xarello` puede necesitar alias visible/editorial para capturar búsquedas con grafías `Xarel-lo` y `Xarel·lo`, aunque el slug técnico siga siendo `xarello`.
+
+#### Tareas pendientes
+
+- Commit y push.
+- Publicar desde Lovable.
+- Revalidar producción con usuario real y Googlebot.
+- Diseñar la siguiente tanda de regiones, estilos y maridajes prioritarios.

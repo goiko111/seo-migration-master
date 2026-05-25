@@ -30,6 +30,11 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("tempranillo");
     expect(prerender).toContain("chardonnay");
     expect(prerender).toContain("riesling");
+    expect(prerender).toContain("syrah");
+    expect(prerender).toContain("nebbiolo");
+    expect(prerender).toContain("chenin-blanc");
+    expect(prerender).toContain("xarello");
+    expect(prerender).toContain("touriga-nacional");
     expect(prerender).toContain("Rol en carta");
     expect(prerender).toContain("Ruolo in carta");
     expect(prerender).toContain("Role en carte");
