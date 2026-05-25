@@ -636,6 +636,7 @@
 - Hecho local: el build deja preloads iniciales en `vendor-react`, `vendor-router` y `vendor-ui-utils`; ya no aparece `vendor-query`.
 - Hecho producción actual: `/de/weinbibliothek/rebsorten/tempranillo` como usuario humano no muestra H1 ni bloque `Service-Intelligenz`.
 - Hecho local: `GrapeDetail` añade `TooltipProvider` local y la ruta alemana de Tempranillo renderiza H1 y bloque editorial.
+- Hecho: el bloque quedó commiteado y pusheado a `origin/main` con `f26443a fix: slim startup and restore grape detail render`.
 - Verificación local completada:
   - `npm run test`: 16 tests.
   - `npm run build`.
@@ -658,7 +659,7 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Publicar `main` desde Lovable cuando este bloque esté en `origin/main`.
+1. Publicar `main` desde Lovable; debe incluir `f26443a`.
 2. Revalidar producción:
    - Entry nuevo distinto de `/assets/index-howILT12.js`.
    - Modulepreloads sin `vendor-query`.

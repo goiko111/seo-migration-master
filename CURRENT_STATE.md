@@ -1078,6 +1078,7 @@
 - Se corrigió `src/pages/GrapeDetail.tsx` añadiendo `TooltipProvider` local solo alrededor de fichas completas.
 - Se añadió test de regresión `src/test/grape-detail-render.test.tsx` para asegurar que `/de/weinbibliothek/rebsorten/tempranillo` renderiza H1 `Tempranillo` y el bloque `Service-Intelligenz`.
 - `src/test/setup.ts` añade mock de `IntersectionObserver` para jsdom.
+- El bloque quedó commiteado y pusheado a `origin/main` con `f26443a fix: slim startup and restore grape detail render`.
 - Verificaciones locales completadas:
   - `npm run test`: 6 archivos, 16 tests correctos.
   - `npm run build`: correcto.
@@ -1102,7 +1103,7 @@
 
 ## Tareas pendientes
 
-- Publicar `main` desde Lovable cuando este bloque esté en `origin/main`.
+- Publicar `main` desde Lovable; el commit de código relevante es `f26443a`.
 - Revalidar producción tras publish:
   - Entry nuevo distinto de `/assets/index-howILT12.js`.
   - Modulepreloads iniciales sin `vendor-query`.

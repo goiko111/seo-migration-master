@@ -888,6 +888,7 @@
 - Se corrigió `GrapeDetail` con `TooltipProvider` local para fichas completas.
 - Se añadió test de regresión para la ficha alemana de Tempranillo.
 - Verificaciones locales completadas: `npm run test` con 16 tests, `npm run build`, `git diff --check`, QA navegador local y Lighthouse mobile local con Performance 98 y LCP 2,1 s.
+- Se creó y pusheó `f26443a fix: slim startup and restore grape detail render`.
 
 #### Decisiones
 
@@ -904,5 +905,5 @@
 
 #### Tareas pendientes
 
-- Publicar desde Lovable cuando este bloque esté en `origin/main`.
+- Publicar desde Lovable el commit `f26443a` o cualquier `main` posterior que lo contenga.
 - Revalidar producción con entry/preloads, home, ruta humana de Tempranillo y Lighthouse mobile.
