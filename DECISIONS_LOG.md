@@ -771,6 +771,8 @@
   - `git diff --check`.
   - QA navegador en preview local: H1 visible, sin animación y con opacidad 1.
   - Lighthouse mobile local: Performance 96, FCP 2,0 s y LCP 2,3 s.
+- Commit y push realizados en `main`: `b86d06d fix: remove hero h1 entrance animation`.
+- Lovable no pudo publicarse desde Codex porque el proyecto redirige a login en el navegador integrado.
 
 #### Decisiones
 
@@ -784,6 +786,5 @@
 
 #### Tareas pendientes
 
-- Commit y push de la variante.
-- Publicar desde Lovable.
+- Publicar desde Lovable el commit `b86d06d`.
 - Revalidar Lighthouse mobile en producción y revisar el desglose LCP.

@@ -493,6 +493,8 @@
   - `git diff --check`: correcto.
   - Preview local: H1 visible, `animationName: none`, `opacity: 1`.
   - Lighthouse mobile local: Performance 96, FCP 2,0 s, LCP 2,3 s, TBT 110 ms, CLS 0,007.
+- Commit y push realizados: `b86d06d fix: remove hero h1 entrance animation`.
+- Lovable sigue redirigiendo a login en el navegador de Codex; el publish requiere sesión Lovable activa o publicación manual/autenticada.
 
 ## Decisiones
 
@@ -506,8 +508,8 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Commit y push de la variante H1.
-2. Publicar `main` desde Lovable.
+1. Publicar `main` desde Lovable; contiene `b86d06d`.
+2. Avisar cuando esté publicado para revalidar producción.
 3. Revalidar producción:
    - Confirmar H1 sin `animate-fade-in-up`.
    - Ejecutar Lighthouse mobile home.

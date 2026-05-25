@@ -886,6 +886,8 @@
   - Preview local `http://127.0.0.1:4177/`: H1 visible con el texto `Vende más vino. Mejora márgenes. Controla tu bodega.`
   - QA navegador: el H1 tiene `animationName: none` y `opacity: 1`.
   - Lighthouse mobile local en preview: Performance 96, FCP 2,0 s, LCP 2,3 s, TBT 110 ms, CLS 0,007.
+- Se creó y pusheó a `origin/main` el commit `b86d06d fix: remove hero h1 entrance animation`.
+- Tras el push se intentó abrir Lovable desde el navegador de Codex, pero redirige a `https://lovable.dev/login?redirect=%2Fprojects%2F2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`; no se pudo publicar desde esta sesión.
 - Avisos no bloqueantes durante build:
   - Browserslist/caniuse-lite desactualizado.
   - Chunks grandes por encima de 200 kB.
@@ -903,8 +905,7 @@
 
 ## Tareas pendientes
 
-- Commit y push de la variante H1 sin animación.
-- Publicar `main` desde Lovable.
+- Publicar `main` desde Lovable; el cambio pendiente es `b86d06d`.
 - Revalidar producción tras publish:
   - Confirmar que el H1 publicado ya no tiene `animate-fade-in-up`.
   - Repetir Lighthouse mobile home.
