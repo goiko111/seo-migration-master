@@ -1367,3 +1367,57 @@
   - Revalidar HTML de producción.
   - Si aparece `__winerimLoadGtm`, ejecutar QA y Lighthouse.
   - Si no aparece, investigar sincronización GitHub -> Lovable.
+
+## Actualización 2026-05-25: GTM diferido publicado y validado en producción
+
+## Hechos
+
+- El usuario confirmó publicar desde Lovable.
+- Se pulsó `Publish` y después `Update` en el panel `Published` de Lovable.
+- Lovable terminó en estado `Up to date`.
+- Lovable sigue mostrando aviso de balance Cloud & AI pausado, pero no bloqueó la actualización del frontend.
+- Producción refleja el cambio:
+  - Deployment activo: `11e48c49-19d5-4d37-884c-d58b7de5387a`.
+  - Entry activo: `/assets/index-BRCyx101.js`.
+  - HTML contiene `__winerimLoadGtm`.
+  - HTML contiene `requestIdleCallback`.
+  - HTML mantiene Consent Mode antes de GTM.
+  - HTML mantiene fallback `noscript` de GTM.
+  - HTML ya no contiene el snippet inmediato antiguo `w[l].push({'gtm.start'...`.
+  - HTML mantiene `critical-above-fold-css`.
+  - CSS principal sigue como preload + stylesheet no bloqueante + fallback `noscript`.
+- QA producción:
+  - Home móvil: H1 `Vende más vino. Mejora márgenes. Controla tu bodega.`, canonical `/`, JSON-LD y sin errores de consola.
+  - Home desktop: H1 correcto, canonical `/`, JSON-LD y sin errores de consola.
+  - `/de/weinbibliothek/rebsorten/tempranillo`: `lang=de`, H1 `Tempranillo`, canonical alemán, JSON-LD y sin errores de consola.
+  - GTM cargó en QA como recurso diferido y `window.__winerimGtmLoaded` quedó en `true`.
+- Lighthouse mobile producción tras GTM diferido:
+  - Run 1: Performance 89, FCP 2,6 s, LCP 2,7 s, Speed Index 4,6 s, TBT 110 ms, CLS 0,006.
+  - Run 2: Performance 89, FCP 2,6 s, LCP 2,6 s, Speed Index 4,9 s, TBT 110 ms, CLS 0,006.
+  - Run 3: Performance 93, FCP 2,4 s, LCP 2,5 s, Speed Index 2,5 s, TBT 160 ms, CLS 0,006.
+  - `render-blocking resources`: 0 en las tres muestras.
+- Resultado frente a medición anterior tras CSS crítico:
+  - Antes: Performance 73/71, LCP 6,6/6,7 s.
+  - Ahora: Performance 89/89/93, LCP 2,7/2,6/2,5 s.
+
+## Decisiones
+
+- Cerrar el bloque GTM diferido como publicado y validado.
+- Considerar Core Web Vitals sintético de home en estado aceptable para retomar biblioteca del vino, sin declarar aún mejora de campo en Search Console.
+- Mantener Consent Mode temprano y GTM diferido.
+- No tocar Cloudflare Worker ni Supabase para este bloque.
+
+## Hipótesis
+
+- La variabilidad previa de LCP estaba muy probablemente influida por GTM/tags asociados o por competencia inicial que GTM provocaba.
+- Search Console/Core Web Vitals de campo tardará días o semanas en reflejar el cambio.
+- Queda deuda residual de JS no usado, pero ya no parece ser el bloqueo principal de LCP home.
+
+## Tareas pendientes
+
+- Monitorizar Search Console/Core Web Vitals de campo.
+- Retomar biblioteca del vino al máximo nivel:
+  - priorizar 30-50 entidades;
+  - ampliar contenido profundo por idioma;
+  - reforzar schema y enlaces internos por intención.
+- Como mejora secundaria de rendimiento, auditar JS no usado si vuelve a ser prioritario.

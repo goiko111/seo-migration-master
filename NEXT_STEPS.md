@@ -877,3 +877,46 @@
    - QA home y Tempranillo alemán.
    - Lighthouse mobile 2-3 muestras.
 5. Actualizar documentos con el resultado real.
+
+## Actualización 2026-05-25: GTM diferido cerrado, siguiente bloque
+
+## Hechos
+
+- Hecho: el usuario confirmó publicar.
+- Hecho: Lovable publicó el frontend y quedó `Up to date`.
+- Hecho: producción sirve deployment `11e48c49-19d5-4d37-884c-d58b7de5387a`.
+- Hecho: producción contiene `__winerimLoadGtm` y ya no contiene el snippet inmediato antiguo de GTM.
+- Hecho: Consent Mode sigue antes de GTM.
+- Hecho: QA producción de home móvil, home desktop y Tempranillo alemán sin errores.
+- Hecho: Lighthouse mobile producción:
+  - Run 1: Performance 89, LCP 2,7 s.
+  - Run 2: Performance 89, LCP 2,6 s.
+  - Run 3: Performance 93, LCP 2,5 s.
+  - 0 recursos render-blocking.
+
+## Decisiones
+
+- Bloque GTM diferido cerrado.
+- Core Web Vitals sintético de home queda en rango operativo para retomar contenido.
+- No declarar aún mejora de campo hasta que Search Console lo refleje.
+
+## Hipótesis
+
+- El principal bloqueo de LCP era GTM/tags asociados compitiendo al inicio.
+- La deuda residual de JS no usado puede abordarse después, pero no bloquea ahora la biblioteca.
+
+## Tareas pendientes listas para retomar
+
+1. Retomar biblioteca del vino al máximo nivel:
+   - priorizar 30-50 entidades por demanda SEO y valor comercial;
+   - ampliar uvas, regiones, estilos y maridajes;
+   - crear contenido profundo por idioma;
+   - añadir/validar schema por entidad;
+   - reforzar enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.
+2. Monitorizar Search Console:
+   - Core Web Vitals móvil home;
+   - indexación de rutas de biblioteca;
+   - validaciones FAQ/sitemap ya iniciadas.
+3. Rendimiento residual opcional:
+   - auditar JS no usado;
+   - revisar carga de tags dentro del contenedor GTM si vuelve la variabilidad.

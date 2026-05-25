@@ -1069,3 +1069,36 @@
 
 - Confirmar publish.
 - Revalidar producción después.
+
+### 2026-05-25: GTM diferido validado en producción
+
+#### Hechos
+
+- El usuario confirmó publicar.
+- Se ejecutó `Publish` + `Update` en Lovable.
+- Lovable quedó `Up to date`.
+- Producción sirve deployment `11e48c49-19d5-4d37-884c-d58b7de5387a`.
+- Producción contiene `__winerimLoadGtm`, `requestIdleCallback`, Consent Mode previo y fallback `noscript`.
+- Producción ya no contiene el snippet inmediato antiguo de GTM.
+- QA producción de home móvil, home desktop y Tempranillo alemán sin errores de consola.
+- Lighthouse mobile producción:
+  - Run 1: Performance 89, LCP 2,7 s.
+  - Run 2: Performance 89, LCP 2,6 s.
+  - Run 3: Performance 93, LCP 2,5 s.
+  - 0 recursos render-blocking.
+
+#### Decisiones
+
+- Cerrar el bloque GTM diferido.
+- Mantener GTM diferido y Consent Mode temprano.
+- Considerar suficientemente saneada la home para retomar biblioteca del vino, manteniendo monitorización de campo.
+
+#### Hipótesis
+
+- La mejora sintética indica que GTM/tags asociados estaban contribuyendo de forma material al LCP alto.
+- Search Console no reflejará el cambio inmediatamente.
+
+#### Tareas pendientes
+
+- Monitorizar Core Web Vitals en Search Console.
+- Retomar biblioteca del vino al máximo nivel o, si se prioriza rendimiento residual, auditar JS no usado.
