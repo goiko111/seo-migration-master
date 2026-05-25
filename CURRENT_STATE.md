@@ -977,3 +977,70 @@
   - Repetir Lighthouse mobile home.
   - Comparar contra LCP 11,1 s y render delay 10,3 s de la variante sin animación.
 - Si no mejora, probar fuente crítica self-host/preload o fuente del sistema solo para el hero.
+
+## Actualización 2026-05-25: producción color sólido y variante fuente móvil
+
+## Hechos
+
+- El usuario confirmó que el cambio de H1 con color sólido ya estaba publicado desde Lovable.
+- Producción refleja el deploy nuevo:
+  - Deployment activo: `9d5642ab-6d1f-4806-b6c3-26c1b330db23`.
+  - Entry activo: `/assets/index-QyK9ToNR.js`.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-query`, `vendor-router` y `vendor-ui-utils`.
+  - El entry publicado no contiene imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix`, `vendor-supabase` ni `vendor-markdown`.
+  - El entry contiene `text-wine-light` para el H1 y no conserva el snippet del H1 con `text-gradient-wine`.
+- QA navegador en producción:
+  - H1: `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - H1 sin animación: `animationName: none`, `opacity: 1`.
+  - Primer tramo del H1: `text-wine-light`, `backgroundImage: none`, color `rgb(207, 23, 35)`.
+  - Fuente del H1 todavía era `"Playfair Display", serif`.
+- Lighthouse mobile producción tras color sólido:
+  - Performance 63.
+  - Accessibility 96.
+  - Best Practices 75.
+  - SEO 92.
+  - FCP 5,1 s.
+  - LCP 7,0 s.
+  - Speed Index 5,1 s.
+  - TBT 70 ms.
+  - CLS 0,007.
+  - LCP element sigue siendo el H1.
+  - Desglose LCP: TTFB 801 ms, Load Delay 0 ms, Load Time 0 ms, Render Delay 6.187 ms, 89%.
+- Conclusión factual: quitar `text-gradient-wine` mejora producción de forma material, pero LCP sigue por encima del objetivo.
+- Se aplicó localmente la siguiente variante controlada:
+  - El H1 pasa de `font-heading` a `font-serif lg:font-heading`.
+  - En móvil/tablet usa fuente serif del sistema.
+  - En escritorio `lg` conserva `Playfair Display` para no degradar la primera impresión desktop.
+  - Se mantienen H1 sin animación y primer tramo con `text-wine-light`.
+- Verificación local de la variante fuente móvil:
+  - `npm run build`: correcto.
+  - `npm run test`: 5 archivos, 15 tests correctos.
+  - `git diff --check`: correcto.
+  - QA navegador local desktop 1280 px: H1 conserva `"Playfair Display", serif`.
+  - Lighthouse mobile local: Performance 96, FCP 1,9 s, LCP 2,2 s, TBT 120 ms, CLS 0,006.
+- Avisos no bloqueantes durante build:
+  - Browserslist/caniuse-lite desactualizado.
+  - Chunks grandes por encima de 200 kB.
+
+## Decisiones
+
+- Mantener la eliminación del gradiente del H1 porque redujo LCP de producción de 11,1 s a 7,0 s.
+- Probar fuente del sistema solo bajo `lg` para atacar Core Web Vitals móvil sin sacrificar la identidad visual desktop.
+- No tocar todavía CSS crítico ni terceros hasta medir esta variante publicada.
+
+## Hipótesis
+
+- Si Playfair Display es parte del render delay móvil, `font-serif lg:font-heading` debería reducir el LCP de producción por debajo de la variante de color sólido.
+- Si LCP sigue alto, el siguiente foco será CSS crítico above-the-fold y orden de carga del CSS/JS inicial, más que estética del H1.
+
+## Tareas pendientes
+
+- Commit y push de la variante fuente móvil.
+- Publicar `main` desde Lovable.
+- Revalidar producción tras publish:
+  - Confirmar entry nuevo distinto de `/assets/index-QyK9ToNR.js`.
+  - Confirmar H1 con `font-serif lg:font-heading`.
+  - En viewport móvil, confirmar fuente del sistema para el H1.
+  - Repetir Lighthouse mobile home.
+  - Comparar contra LCP 7,0 s y render delay 6,19 s de la variante color sólido.
+- Si no mejora lo suficiente, pasar a CSS crítico/inline above-the-fold y revisión de carga del CSS.

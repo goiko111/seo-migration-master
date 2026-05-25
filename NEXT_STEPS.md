@@ -566,3 +566,58 @@
    - Comparar contra LCP 11,1 s y render delay 10,3 s.
 4. Si sigue alto, probar fuente del sistema solo para el H1/hero o self-host/preload de Playfair crítica.
 5. Después, abordar CSS crítico/terceros si sigue pendiente.
+
+## Actualización 2026-05-25: siguiente retoma tras color sólido
+
+## Hechos
+
+- El deploy de Lovable publicó la variante de H1 con color sólido.
+- Producción sirve deployment `9d5642ab-6d1f-4806-b6c3-26c1b330db23`.
+- Entry publicado: `/assets/index-QyK9ToNR.js`.
+- H1 publicado:
+  - Sin `animate-fade-in-up`.
+  - Primer tramo con `text-wine-light`.
+  - Sin `text-gradient-wine` en el H1.
+  - `backgroundImage: none`.
+- Lighthouse mobile producción de esta variante:
+  - Performance 63.
+  - FCP 5,1 s.
+  - LCP 7,0 s.
+  - Render Delay 6,19 s.
+  - LCP sigue siendo el H1.
+- La variante color sólido mejoró de forma material frente a:
+  - H1 sin animación: LCP 11,1 s, render delay 10,3 s.
+  - Bundle optimizado previo: LCP 11,38 s, render delay 10,57 s.
+- Se aplicó localmente la siguiente variante:
+  - H1 con `font-serif lg:font-heading`.
+  - Móvil/tablet usan fuente serif del sistema.
+  - Desktop `lg` mantiene Playfair Display.
+- Validación local:
+  - `npm run build`: correcto.
+  - `npm run test`: 15 tests correctos.
+  - `git diff --check`: correcto.
+  - QA navegador desktop: Playfair se conserva en 1280 px.
+  - Lighthouse local: Performance 96, FCP 1,9 s, LCP 2,2 s.
+
+## Decisiones
+
+- Mantener color sólido del H1.
+- Probar fuente del sistema solo para móvil/tablet antes de tocar CSS crítico.
+- Conservar Playfair en desktop para mantener identidad visual.
+
+## Hipótesis
+
+- La fuente externa Playfair aún puede estar retrasando el LCP móvil.
+- Si la variante no mejora producción, el siguiente bloque debe ir a CSS crítico/inline above-the-fold.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push de la variante `font-serif lg:font-heading`.
+2. Publicar `main` desde Lovable.
+3. Revalidar producción:
+   - Entry nuevo distinto de `/assets/index-QyK9ToNR.js`.
+   - H1 con `font-serif lg:font-heading`.
+   - Lighthouse mobile home.
+   - Comparar contra LCP 7,0 s y render delay 6,19 s.
+4. Si mejora pero sigue por encima de objetivo, abrir bloque CSS crítico.
+5. Si no mejora, valorar revertir fuente móvil y centrar el bloque en CSS/terceros.

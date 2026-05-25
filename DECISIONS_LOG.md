@@ -828,3 +828,44 @@
 - Commit y push de la variante color sólido.
 - Publicar desde Lovable.
 - Revalidar Lighthouse mobile producción y revisar si baja el render delay.
+
+### 2026-05-25: revalidación de color sólido y variante fuente móvil
+
+#### Hechos
+
+- El usuario confirmó la publicación en Lovable de la variante de H1 con color sólido.
+- Producción sirve deployment `9d5642ab-6d1f-4806-b6c3-26c1b330db23` con entry `/assets/index-QyK9ToNR.js`.
+- El entry publicado mantiene preloads ligeros y no importa estáticamente vendors pesados.
+- El H1 publicado tiene `text-wine-light`, sin gradiente, sin animación y con opacidad 1.
+- Lighthouse mobile producción tras color sólido:
+  - Performance 63.
+  - FCP 5,1 s.
+  - LCP 7,0 s.
+  - TBT 70 ms.
+  - CLS 0,007.
+  - El LCP sigue siendo el H1.
+  - Render delay baja a 6,19 s, 89%.
+- Se aplicó localmente la siguiente variante: `font-serif lg:font-heading` en el H1.
+- Verificaciones locales de la variante fuente móvil:
+  - `npm run build`.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check`.
+  - QA navegador desktop: a 1280 px el H1 conserva `Playfair Display`.
+  - Lighthouse mobile local: Performance 96, FCP 1,9 s y LCP 2,2 s.
+
+#### Decisiones
+
+- Mantener el color sólido del H1 porque mejoró producción de forma clara.
+- Limitar la fuente del sistema a móvil/tablet mediante `font-serif lg:font-heading`.
+- Medir esta variante antes de abordar CSS crítico o terceros.
+
+#### Hipótesis
+
+- La dependencia de Playfair en móvil puede explicar una parte del render delay que queda.
+- Si esta variante no baja suficiente, el problema restante probablemente esté en CSS crítico/render blocking o en el orden de primer render.
+
+#### Tareas pendientes
+
+- Commit y push de la variante fuente móvil.
+- Publicar desde Lovable.
+- Revalidar Lighthouse mobile producción y comparar contra LCP 7,0 s.
