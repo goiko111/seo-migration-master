@@ -33,7 +33,9 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           // Core React — always needed
-          "vendor-react": ["react", "react-dom"],
+          "vendor-react": ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
+          // Tiny shared UI helpers used by the shell; keep them out of heavy feature chunks.
+          "vendor-ui-utils": ["clsx", "tailwind-merge", "class-variance-authority"],
           // Router — always needed but separate from React core
           "vendor-router": ["react-router-dom"],
           // Framer Motion — heavy, used everywhere but can load async

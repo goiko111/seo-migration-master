@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
@@ -7,7 +7,6 @@ import ScrollToTop from "./components/ScrollToTop";
 // Lazy load UI chrome — not needed for FCP
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
-const TooltipProvider = lazy(() => import("@/components/ui/tooltip").then(m => ({ default: m.TooltipProvider })));
 
 // Eager load home for fast first paint
 import Index from "./pages/Index";
@@ -146,6 +145,51 @@ const PageLoader = () => (
     <div className="w-8 h-8 border-2 border-wine border-t-transparent rounded-full animate-spin" />
   </div>
 );
+
+const useDeferredAppChrome = () => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    let cancelled = false;
+    let timeoutHandle: number | undefined;
+    let idleHandle: number | undefined;
+
+    const reveal = () => {
+      if (!cancelled) setReady(true);
+    };
+
+    const scheduleReveal = () => {
+      if (idleWindow.requestIdleCallback) {
+        idleHandle = idleWindow.requestIdleCallback(reveal, { timeout: 2000 });
+        return;
+      }
+
+      timeoutHandle = window.setTimeout(reveal, 1200);
+    };
+
+    if (document.readyState === "complete") {
+      scheduleReveal();
+    } else {
+      window.addEventListener("load", scheduleReveal, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleReveal);
+      if (timeoutHandle !== undefined) window.clearTimeout(timeoutHandle);
+      if (idleHandle !== undefined) idleWindow.cancelIdleCallback?.(idleHandle);
+    };
+  }, []);
+
+  return ready;
+};
 
 // Spanish routes (also used for shared routes)
 const esRoutes = (
@@ -745,42 +789,44 @@ const IntentTracker = lazy(() =>
   }))
 );
 
+const DeferredAppChrome = () => {
+  const ready = useDeferredAppChrome();
+
+  if (!ready) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <Toaster />
+      <Sonner position="top-center" richColors />
+      <BackToTop />
+      <CookieConsent />
+      <IntentTracker />
+      <ToolsLeadPopup />
+      <FreemiumToolGuard />
+    </Suspense>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <Suspense fallback={null}>
-      <TooltipProvider>
-        <Suspense fallback={null}>
-          <Toaster />
-          <Sonner position="top-center" richColors />
+    <BrowserRouter>
+      <LanguageProvider>
+        <ScrollToTop />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {esRoutes}
+            {langRoutes("/en")}
+            {langRoutes("/it")}
+            {langRoutes("/fr")}
+            {langRoutes("/de")}
+            {langRoutes("/pt")}
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="*" element={<SeoPage />} />
+          </Routes>
         </Suspense>
-        <BrowserRouter>
-          <LanguageProvider>
-            <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                {esRoutes}
-                {langRoutes("/en")}
-                {langRoutes("/it")}
-                {langRoutes("/fr")}
-                {langRoutes("/de")}
-                {langRoutes("/pt")}
-                <Route path="/unsubscribe" element={<Unsubscribe />} />
-                <Route path="*" element={<SeoPage />} />
-              </Routes>
-            </Suspense>
-            {/* Overlay components — lazy loaded, non-critical */}
-            <Suspense fallback={null}>
-              
-              <BackToTop />
-              <CookieConsent />
-              <IntentTracker />
-              <ToolsLeadPopup />
-              <FreemiumToolGuard />
-            </Suspense>
-          </LanguageProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </Suspense>
+        <DeferredAppChrome />
+      </LanguageProvider>
+    </BrowserRouter>
   </QueryClientProvider>
 );
 
