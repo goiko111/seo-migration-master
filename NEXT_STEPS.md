@@ -960,18 +960,71 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Commit y push de la segunda tanda editorial.
-2. Publicar desde Lovable:
-   - frontend;
-   - Edge Function `prerender`.
-3. Revalidar producción:
+1. Hecho: commit y push de la segunda tanda editorial con `d03625a`.
+2. Hecho: publish frontend desde Lovable.
+3. Hecho: despliegue explícito de Edge Function `prerender` desde Lovable.
+4. Hecho: revalidación producción como usuario real y Googlebot en:
    - `/biblioteca-vino/uvas/syrah`;
    - `/de/weinbibliothek/rebsorten/syrah`;
    - `/pt/biblioteca-vinho/castas/xarello`;
-   - `/en/wine-library/grapes/chenin-blanc`;
-   - Googlebot en al menos una ficha nueva.
-4. Continuar biblioteca del vino al máximo nivel:
+   - `/en/wine-library/grapes/chenin-blanc`.
+5. Continuar biblioteca del vino al máximo nivel:
    - regiones: Rioja, Ribera del Duero, Rias Baixas, Rueda, Priorat, Borgoña, Burdeos, Champagne, Douro, Vinho Verde;
    - estilos: crianza, reserva, blanco con lias, espumoso metodo tradicional, rosado gastronomico;
    - maridajes: carnes rojas, pescado blanco, marisco, arroces, cocina asiatica, quesos;
    - schema y enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.
+
+## Actualización 2026-05-25: siguiente bloque recomendado
+
+## Hechos
+
+- La segunda tanda editorial de uvas prioritarias está publicada y validada en producción.
+- La biblioteca tiene ahora 20 uvas prioritarias con inteligencia de servicio visible para usuarios y bots.
+- El flujo operativo confirmado para cambios de biblioteca con prerender es:
+  - commit/push;
+  - publish frontend en Lovable;
+  - pedir despliegue explícito de Edge Function `prerender`;
+  - validar producción como usuario y Googlebot.
+
+## Decisiones
+
+- No hace falta Cloudflare Worker para la segunda tanda.
+- La siguiente ampliación debe salir del plano "uvas aisladas" y construir red temática: regiones, estilos, maridajes y enlaces internos.
+
+## Hipótesis
+
+- La autoridad temática crecerá más si cada uva prioritaria enlaza con regiones, estilos y maridajes relevantes.
+- Crear alias visibles para grafías alternativas evitará perder intención de búsqueda sin duplicar slugs.
+
+## Tareas pendientes listas para retomar
+
+1. Regiones prioritarias:
+   - Rioja;
+   - Ribera del Duero;
+   - Rias Baixas;
+   - Rueda;
+   - Priorat;
+   - Borgoña;
+   - Burdeos;
+   - Champagne;
+   - Douro;
+   - Vinho Verde.
+2. Estilos prioritarios:
+   - tinto crianza;
+   - tinto reserva;
+   - blanco con lias;
+   - espumoso metodo tradicional;
+   - rosado gastronomico.
+3. Maridajes prioritarios:
+   - carnes rojas;
+   - pescado blanco;
+   - marisco;
+   - arroces;
+   - cocina asiatica;
+   - quesos.
+4. Schema/enlazado:
+   - revisar `Article`, `FAQPage`, `BreadcrumbList` y posibles `DefinedTerm`/`ItemList`;
+   - crear enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.
+5. Alias y variantes:
+   - `Xarel-lo`/`Xarel·lo` -> `xarello`;
+   - revisar grafías con acentos y sin acentos para búsquedas internacionales.

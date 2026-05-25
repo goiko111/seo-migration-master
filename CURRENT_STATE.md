@@ -1468,14 +1468,54 @@
 
 ## Tareas pendientes
 
-- Commit y push de la segunda tanda editorial.
-- Publicar desde Lovable:
-  - frontend;
-  - Edge Function `prerender`.
-- Revalidar producción tras publish:
-  - `/biblioteca-vino/uvas/syrah`;
-  - `/de/weinbibliothek/rebsorten/syrah`;
-  - `/pt/biblioteca-vinho/castas/xarello`;
-  - `/en/wine-library/grapes/chenin-blanc`;
-  - Googlebot/prerender en al menos una uva nueva `de` o `pt`.
+- Hecho: commit y push de la segunda tanda editorial con `d03625a feat: expand priority wine grape profiles`.
+- Hecho: frontend publicado desde Lovable.
+- Hecho: Edge Function `prerender` desplegada explícitamente desde Lovable tras detectar que el publish del frontend no actualizaba bots.
+- Hecho: producción revalidada en `/biblioteca-vino/uvas/syrah`, `/de/weinbibliothek/rebsorten/syrah`, `/pt/biblioteca-vinho/castas/xarello` y `/en/wine-library/grapes/chenin-blanc`.
 - Siguiente ampliación: regiones, estilos, maridajes y schema/enlazado interno por intención.
+
+## Actualización 2026-05-25: segunda tanda editorial publicada y validada
+
+## Hechos
+
+- Commit publicado en GitHub: `d03625a feat: expand priority wine grape profiles`.
+- Lovable detectó el commit `feat: expand priority wine grape profiles`.
+- Se pulsó `Publish` en Lovable.
+- Producción pasó a deployment frontend `d80a4e7c-1f42-4cfe-8414-b247ae5ccd75`.
+- Tras el publish frontend, Googlebot todavía recibía la versión genérica de Syrah/Xarello porque `prerender` no se había actualizado.
+- Se pidió en Lovable el despliegue explícito de Supabase Edge Function `prerender`.
+- Lovable confirmó el despliegue de `prerender`.
+- Producción validada como Googlebot:
+  - `/biblioteca-vino/uvas/syrah` contiene `Rol en carta`, contenido editorial de Syrah y `x-worker-branch: bot-prerender`.
+  - `/de/weinbibliothek/rebsorten/syrah` contiene el perfil enriquecido de Syrah y `x-worker-branch: bot-prerender`.
+  - `/pt/biblioteca-vinho/castas/xarello` contiene `Papel na carta`, `marisco` y `x-worker-branch: bot-prerender`.
+  - `/en/wine-library/grapes/chenin-blanc` contiene perfil enriquecido de Chenin Blanc.
+- Producción validada como usuario real en navegador:
+  - `/biblioteca-vino/uvas/syrah` muestra H1 `Syrah`, inteligencia de servicio, rol en carta y maridajes.
+  - `/de/weinbibliothek/rebsorten/syrah` muestra H1 `Syrah`, inteligencia de servicio, rol en carta y maridajes.
+  - `/pt/biblioteca-vinho/castas/xarello` muestra H1 `Xarel·lo`, inteligencia de servicio, rol en carta y maridajes.
+  - `/en/wine-library/grapes/chenin-blanc` muestra H1 `Chenin Blanc`, inteligencia de servicio, rol en carta y maridajes.
+  - No se detectaron errores de consola en las rutas revalidadas.
+- No hizo falta modificar ni redeployar Cloudflare Worker.
+
+## Decisiones
+
+- Considerar cerrada la segunda tanda editorial de uvas prioritarias solo tras validar frontend y prerender en producción.
+- Mantener como procedimiento: cuando se toque `supabase/functions/prerender`, pedir despliegue explícito de esa Edge Function en Lovable aunque el frontend marque `Published/Up to date`.
+- No publicar Worker Cloudflare para este bloque porque la ruta `bot-prerender` funcionó correctamente tras actualizar Edge Function.
+
+## Hipótesis
+
+- Las nuevas 10 uvas prioritarias ya son visibles para Googlebot y crawlers de IA, por lo que pueden empezar a consolidar señales tras recrawl.
+- Search Console tardará en reflejar cualquier mejora de cobertura o contenido.
+- El siguiente mayor incremento de autoridad temática vendrá de regiones, estilos y maridajes con enlaces internos cruzados.
+
+## Tareas pendientes
+
+- Continuar biblioteca del vino al máximo nivel:
+  - ampliar regiones prioritarias;
+  - ampliar estilos prioritarios;
+  - ampliar maridajes prioritarios;
+  - añadir alias visibles para grafías como `Xarel-lo`/`Xarel·lo`;
+  - reforzar schema y enlaces internos por intención.
+- Monitorizar Search Console para indexación de rutas nuevas/enriquecidas.

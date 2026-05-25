@@ -6,7 +6,7 @@
 - El proyecto es una aplicación Vite + React + TypeScript.
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas prioritarias, además de la infraestructura multilingüe.
-- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la segunda tanda local cubre 20 uvas prioritarias.
+- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la segunda tanda publicada cubre 20 uvas prioritarias.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.

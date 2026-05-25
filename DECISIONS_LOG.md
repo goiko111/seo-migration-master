@@ -1149,3 +1149,38 @@
 - Publicar desde Lovable.
 - Revalidar producción con usuario real y Googlebot.
 - Diseñar la siguiente tanda de regiones, estilos y maridajes prioritarios.
+
+### 2026-05-25: segunda tanda editorial publicada en producción
+
+#### Hechos
+
+- Commit `d03625a feat: expand priority wine grape profiles` ya estaba pusheado a `origin/main`.
+- El usuario confirmó continuar y se publicó desde Lovable.
+- Producción pasó a frontend deployment `d80a4e7c-1f42-4cfe-8414-b247ae5ccd75`.
+- Tras publicar frontend, producción como Googlebot seguía sirviendo fichas genéricas para Syrah y Xarello.
+- Se detectó que el cambio pendiente era la Edge Function `prerender`, no Cloudflare Worker.
+- Se pidió a Lovable desplegar explícitamente `prerender`.
+- Lovable confirmó que `prerender` quedó desplegada.
+- Producción como Googlebot quedó validada con contenido editorial enriquecido en:
+  - `/biblioteca-vino/uvas/syrah`
+  - `/de/weinbibliothek/rebsorten/syrah`
+  - `/pt/biblioteca-vinho/castas/xarello`
+  - `/en/wine-library/grapes/chenin-blanc`
+- Producción como usuario real quedó validada en esas cuatro rutas sin errores de consola.
+
+#### Decisiones
+
+- Tratar `Publish` frontend y despliegue de `prerender` como dos pasos separados cuando haya cambios en `supabase/functions/prerender/index.ts`.
+- No redeployar Cloudflare Worker si `x-worker-branch: bot-prerender` funciona y el problema está en contenido de Edge Function.
+- Mantener la segunda tanda editorial como publicada y cerrada.
+
+#### Hipótesis
+
+- El contenido enriquecido ya queda disponible para indexación y lectura por LLM crawlers.
+- El siguiente bloque debe aumentar la red semántica entre entidades, no solo añadir más perfiles aislados.
+
+#### Tareas pendientes
+
+- Abrir bloque de regiones, estilos y maridajes prioritarios.
+- Añadir alias/variantes de grafía para entidades con búsqueda ambigua.
+- Monitorizar Search Console tras recrawl.
