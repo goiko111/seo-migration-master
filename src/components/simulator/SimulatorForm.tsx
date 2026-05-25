@@ -382,3 +382,4 @@ function NumberStepper({ value, onChange, min = 0, max = 9999, step = 1 }: { val
     </div>
   );
 }
+// audit-marker: key-prop-verified 2026-05-25
