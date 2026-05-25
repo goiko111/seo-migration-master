@@ -713,3 +713,43 @@
    - Ampliar contenido por idioma.
    - Añadir schema por entidad.
    - Reforzar enlaces internos uva -> región -> estilo -> maridaje -> guía de servicio.
+
+## Actualización 2026-05-25: CSS crítico listo para publish
+
+## Hechos
+
+- Hecho local: se implementó CSS crítico above-the-fold en `index.html`.
+- Hecho local: `vite.config.ts` convierte el CSS de build en no bloqueante:
+  - preload;
+  - stylesheet `media="print"` con `onload`;
+  - fallback `noscript`.
+- Hecho local: Lighthouse mobile preview muestra 0 recursos render-blocking.
+- Hecho local: Lighthouse mobile preview:
+  - Run 1: Performance 98, LCP 2,0 s.
+  - Run 2: Performance 97, LCP 2,1 s.
+- Hecho local: home móvil/desktop y ficha alemana de Tempranillo pasan QA de Chrome sin errores.
+- Hecho local: `npm run build`, `npm run test` y `git diff --check` correctos.
+- Commit técnico: `6627bda fix: load build css non-blocking`.
+
+## Decisiones
+
+- Continuar por publish Lovable y medición productiva antes de tocar terceros o ampliar biblioteca.
+- Mantener el CSS crítico limitado a navbar/hero para no convertir `index.html` en una segunda hoja de estilos completa.
+
+## Hipótesis
+
+- Al publicar, Lighthouse debería dejar de marcar el CSS principal como render-blocking.
+- Si LCP sigue variable en producción, habrá que mirar terceros/orden de hidratación/caché, porque CSS bloqueante quedaría descartado.
+
+## Tareas pendientes listas para retomar
+
+1. Pushear `main` si aún no está subido.
+2. Publicar `main` desde Lovable.
+3. Revalidar producción:
+   - HTML contiene `critical-above-fold-css`.
+   - CSS principal carga no bloqueante.
+   - Lighthouse mobile no lista recursos render-blocking.
+   - Home móvil/desktop correcta.
+   - `/de/weinbibliothek/rebsorten/tempranillo` correcta.
+4. Si mejora y queda estable, retomar biblioteca del vino al máximo nivel.
+5. Si sigue variable, auditar terceros/orden de hidratación.

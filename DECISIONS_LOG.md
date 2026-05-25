@@ -940,3 +940,37 @@
 
 - Decidir si seguimos inmediatamente con CSS crítico o retomamos la ampliación máxima de biblioteca del vino.
 - Si se retoma biblioteca, usar esta base ya saneada para ampliar entidades sin cargar datos editoriales en el chrome global.
+
+### 2026-05-25: CSS crítico y stylesheet no bloqueante
+
+#### Hechos
+
+- Se implementó el primer bloque CSS crítico/above-the-fold.
+- `index.html` incluye ahora `critical-above-fold-css` para navbar y hero de home.
+- `vite.config.ts` añade un plugin de build que convierte el CSS generado en preload + stylesheet no bloqueante + fallback `noscript`.
+- Verificaciones locales:
+  - `npm run build`: correcto.
+  - `npm run test`: 16 tests.
+  - `git diff --check`: correcto.
+  - QA Chrome móvil y desktop de home sin errores.
+  - QA Chrome de `/de/weinbibliothek/rebsorten/tempranillo` correcta.
+  - Lighthouse mobile local: Performance 98/97, LCP 2,0/2,1 s y 0 recursos render-blocking.
+- Commit técnico creado: `6627bda fix: load build css non-blocking`.
+
+#### Decisiones
+
+- Eliminar el CSS render-blocking por build transform, no manualmente en `dist`.
+- Mantener el CSS crítico inline limitado al primer viewport.
+- Mantener `noscript` para conservar degradación segura.
+- No mezclar este bloque con terceros ni cambios de contenido.
+
+#### Hipótesis
+
+- Producción debería eliminar el aviso de render-blocking CSS tras publicar.
+- El aumento de HTML está justificado si estabiliza FCP/LCP.
+- El CSS crítico deberá revisarse cuando cambien hero o navbar.
+
+#### Tareas pendientes
+
+- Publicar `main` desde Lovable.
+- Revalidar producción con Lighthouse mobile y QA de home/ficha de uva.

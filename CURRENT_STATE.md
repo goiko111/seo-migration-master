@@ -1165,3 +1165,62 @@
   - Retomar ampliación máxima de biblioteca del vino.
   - Priorizar 30-50 entidades por demanda SEO y valor comercial.
   - Añadir schema por entidad y enlazado interno por intención.
+
+## Actualización 2026-05-25: CSS crítico above-the-fold local
+
+## Hechos
+
+- Se abrió el bloque `CSS crítico/above-the-fold` tras validar que producción seguía con LCP móvil variable.
+- Se añadió `critical-above-fold-css` en `index.html` con estilos mínimos para:
+  - variables de color base;
+  - body;
+  - navbar;
+  - hero;
+  - tipografías críticas;
+  - botones y utilidades above-the-fold usadas por home.
+- Se añadió en `vite.config.ts` el plugin `winerim-non-blocking-build-css`.
+- En build de producción, el CSS generado por Vite pasa de stylesheet bloqueante a:
+  - `rel="preload" as="style"`;
+  - stylesheet `media="print"` con `onload`;
+  - fallback `noscript`.
+- Build local posterior:
+  - `dist/index.html`: 21,07 KB, gzip 6,35 KB.
+  - El HTML contiene `critical-above-fold-css`.
+  - El CSS de build aparece como preload + stylesheet no bloqueante + fallback `noscript`.
+  - Modulepreloads iniciales se mantienen en `vendor-react`, `vendor-router` y `vendor-ui-utils`.
+- Lighthouse mobile local en preview:
+  - Run 1: Performance 98, FCP 1,7 s, LCP 2,0 s, TBT 90 ms, CLS 0,006.
+  - Run 2: Performance 97, FCP 1,7 s, LCP 2,1 s, TBT 110 ms, CLS 0,006.
+  - `render-blocking resources`: 0.
+- QA local con Chrome:
+  - Home móvil: H1 visible, fuente serif del sistema, header fixed, fondo correcto y sin errores de consola.
+  - Home desktop: H1 visible, Playfair en desktop, nav visible y tablet hero visible.
+  - `/de/weinbibliothek/rebsorten/tempranillo`: H1 `Tempranillo`, bloque `Service-Intelligenz` y sin errores de consola.
+- Verificaciones completadas:
+  - `npm run build`: correcto.
+  - `npm run test`: 6 archivos, 16 tests correctos.
+  - `git diff --check`: correcto.
+- Commit técnico creado: `6627bda fix: load build css non-blocking`.
+
+## Decisiones
+
+- Aceptar un aumento pequeño de HTML inicial para eliminar el stylesheet bloqueante del primer viewport.
+- Mantener fallback `noscript` para que usuarios sin JS reciban el CSS completo.
+- No tocar todavía GTM/terceros ni rediseñar hero; este bloque aísla la variable CSS render-blocking.
+
+## Hipótesis
+
+- Al publicar `6627bda`, Lighthouse de producción debería dejar de listar el CSS principal como recurso render-blocking.
+- Si producción sigue con LCP variable, el siguiente foco será orden de ejecución/hidratación, terceros o caché/red, no el stylesheet principal.
+- El CSS crítico inline debe vigilarse si cambia el hero o navbar, porque puede quedarse desalineado con clases futuras.
+
+## Tareas pendientes
+
+- Push de `6627bda` y documentación de cierre.
+- Publicar `main` desde Lovable.
+- Revalidar producción tras publish:
+  - Entry/HTML nuevo con `critical-above-fold-css`.
+  - CSS completo cargando como preload + stylesheet `media="print"`.
+  - Lighthouse mobile con `render-blocking resources` en 0.
+  - Home móvil/desktop sin FOUC visible ni errores.
+  - Ficha alemana de Tempranillo sigue renderizando.
