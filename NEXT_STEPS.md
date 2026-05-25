@@ -475,3 +475,43 @@
    - Leadfeeder.
    - Chat.
 7. Retomar biblioteca del vino al máximo nivel cuando el bloque de rendimiento quede cerrado o aparcado.
+
+## Actualización 2026-05-25: cierre variante H1 sin animación
+
+## Hechos
+
+- Se aplicó la primera variante del bloque `Core Web Vitals home: render delay H1`.
+- Cambio realizado: el H1 de `src/components/landing/HeroSection.tsx` ya no tiene `animate-fade-in-up`.
+- Se mantuvieron intactos:
+  - `text-gradient-wine`.
+  - `font-heading` / Playfair Display.
+  - Google Fonts.
+  - CSS crítico.
+- Verificación local completada:
+  - `npm run build`: correcto.
+  - `npm run test`: 15 tests correctos.
+  - `git diff --check`: correcto.
+  - Preview local: H1 visible, `animationName: none`, `opacity: 1`.
+  - Lighthouse mobile local: Performance 96, FCP 2,0 s, LCP 2,3 s, TBT 110 ms, CLS 0,007.
+
+## Decisiones
+
+- Publicar y medir esta variante antes de añadir más cambios.
+- No mezclar todavía gradiente, fuentes ni CSS crítico para conservar una lectura limpia de Lighthouse.
+
+## Hipótesis
+
+- Si la animación era la causa del LCP tardío, producción debería mostrar menor `render delay`.
+- Si no mejora, la causa más probable se desplaza a gradiente/fuente/CSS crítico.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push de la variante H1.
+2. Publicar `main` desde Lovable.
+3. Revalidar producción:
+   - Confirmar H1 sin `animate-fade-in-up`.
+   - Ejecutar Lighthouse mobile home.
+   - Comparar LCP y `render delay` contra la medición anterior: LCP 11,38 s y render delay 10,57 s.
+4. Si sigue alto, probar H1 con color sólido inicial en vez de `text-gradient-wine`.
+5. Si sigue alto, probar fuente crítica self-host/preload o fuente del sistema solo para el hero.
+6. Después de cerrar o aparcar este bloque, retomar biblioteca del vino al máximo nivel.

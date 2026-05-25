@@ -868,3 +868,45 @@
   - Defer de GTM/Ads/Meta/Clarity/Leadfeeder.
   - Revisión del chat.
   - Cache/headers de assets.
+
+## Actualización 2026-05-25: variante H1 sin animación
+
+## Hechos
+
+- Se continuó la sesión leyendo primero `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- No se detectaron contradicciones nuevas entre los documentos y el estado del repo.
+- Se abrió el bloque específico `Core Web Vitals home: render delay H1`.
+- Se aplicó la primera variante controlada en `src/components/landing/HeroSection.tsx`:
+  - El H1 de la home ya no usa `animate-fade-in-up`.
+  - No se tocaron todavía `text-gradient-wine`, `font-heading`, carga de fuentes ni CSS crítico.
+- Verificación local:
+  - `npm run build`: correcto.
+  - `npm run test`: 5 archivos, 15 tests correctos.
+  - `git diff --check`: correcto.
+  - Preview local `http://127.0.0.1:4177/`: H1 visible con el texto `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - QA navegador: el H1 tiene `animationName: none` y `opacity: 1`.
+  - Lighthouse mobile local en preview: Performance 96, FCP 2,0 s, LCP 2,3 s, TBT 110 ms, CLS 0,007.
+- Avisos no bloqueantes durante build:
+  - Browserslist/caniuse-lite desactualizado.
+  - Chunks grandes por encima de 200 kB.
+
+## Decisiones
+
+- Probar el render delay del H1 con cambios de una sola variable para que la medición sea atribuible.
+- Mantener por ahora el gradiente del primer fragmento del H1 y la fuente `Playfair Display`, porque la primera prueba documentada era retirar la animación.
+- No considerar resuelto Core Web Vitals hasta publicar esta variante y revalidar Lighthouse mobile en producción.
+
+## Hipótesis
+
+- Si el H1 se contabilizaba tarde por la animación CSS, esta variante debería reducir el render delay de producción.
+- Si producción sigue con LCP alto tras publicar, la siguiente causa probable será el gradiente de texto, la fuente externa crítica o CSS render-blocking.
+
+## Tareas pendientes
+
+- Commit y push de la variante H1 sin animación.
+- Publicar `main` desde Lovable.
+- Revalidar producción tras publish:
+  - Confirmar que el H1 publicado ya no tiene `animate-fade-in-up`.
+  - Repetir Lighthouse mobile home.
+  - Revisar desglose LCP y confirmar si baja el `render delay`.
+- Si no mejora lo suficiente, probar la siguiente variante: H1 con color sólido inicial en vez de `text-gradient-wine`.

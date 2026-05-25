@@ -757,3 +757,33 @@
 - Probar variante del H1 con color sólido inicial.
 - Evaluar self-host/preload real de fuentes críticas o fuente del sistema en hero.
 - Medir cada variante antes de publicar.
+
+### 2026-05-25: variante controlada del H1 de home
+
+#### Hechos
+
+- Se releyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md` antes de continuar.
+- Se aplicó la variante documentada de Core Web Vitals: retirar `animate-fade-in-up` solo del H1 de `src/components/landing/HeroSection.tsx`.
+- No se modificaron gradiente, fuente ni CSS crítico en esta variante.
+- Verificaciones locales completadas:
+  - `npm run build`.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check`.
+  - QA navegador en preview local: H1 visible, sin animación y con opacidad 1.
+  - Lighthouse mobile local: Performance 96, FCP 2,0 s y LCP 2,3 s.
+
+#### Decisiones
+
+- Mantener la prueba como cambio mínimo para aislar si la animación del H1 estaba retrasando el LCP en producción.
+- Publicar y medir producción antes de tocar `text-gradient-wine`, fuentes o CSS crítico.
+
+#### Hipótesis
+
+- La mejora local confirma que no hay regresión visual ni funcional, pero la validación real es producción porque el problema se manifiesta con red/throttling y entorno publicado.
+- Si producción no mejora, el siguiente experimento debe ser color sólido inicial para el H1 y después fuente crítica/preload.
+
+#### Tareas pendientes
+
+- Commit y push de la variante.
+- Publicar desde Lovable.
+- Revalidar Lighthouse mobile en producción y revisar el desglose LCP.
