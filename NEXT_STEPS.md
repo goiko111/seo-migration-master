@@ -1062,7 +1062,7 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Commit y push del bloque.
+1. Hecho: commit y push del bloque con `80895ac feat: connect wine library entities`.
 2. Publicar frontend desde Lovable.
 3. Pedir despliegue explícito de Edge Function `prerender` en Lovable.
 4. Revalidar producción:
@@ -1076,3 +1076,40 @@
    - profundizar estilos prioritarios;
    - profundizar maridajes prioritarios;
    - evaluar schema `DefinedTerm`/`ItemList` por tipo de entidad.
+
+## Actualización 2026-05-25: listo para retomar desde deploy Lovable
+
+## Hechos
+
+- Hecho: commit y push del bloque de grafo estratégico.
+- Commit en `origin/main`: `80895ac feat: connect wine library entities`.
+- Lovable ve el commit nuevo, pero producción no muestra todavía el grafo estratégico en `prerender`.
+- Verificación de producción como Googlebot:
+  - `x-worker-branch: bot-prerender` está activo.
+  - El HTML de `/biblioteca-vino/uvas/xarello` aún no muestra los enlaces estratégicos; solo hubs generales.
+  - Espumoso y carnes rojas tampoco contienen los enlaces estratégicos esperados.
+- La automatización no consiguió activar `Update` en Lovable.
+
+## Decisiones
+
+- Retomar por Lovable antes de hacer más código.
+- No tocar Cloudflare Worker salvo fallo posterior del proxy.
+- Cerrar el bloque solo cuando producción y Googlebot confirmen el grafo.
+
+## Hipótesis
+
+- Falta aplicar el `Update` de Lovable y desplegar la Edge Function `prerender`.
+- El código ya subido debería ser suficiente para que producción quede correcta tras ese deploy.
+
+## Tareas pendientes listas para retomar
+
+1. En Lovable, pulsar `Update` para el commit `feat: connect wine library entities`.
+2. En el chat de Lovable, pedir literalmente: `Despliega la Supabase Edge Function prerender con el código actual`.
+3. Validar como Googlebot:
+   - `curl -L -s -A 'Googlebot/2.1 (+http://www.google.com/bot.html)' https://winerim.wine/biblioteca-vino/uvas/xarello`
+   - Confirmar enlaces a Penedes, Cava, espumoso, marisco y arroces.
+4. Validar también:
+   - `/biblioteca-vino/regiones/francia/champagne`
+   - `/biblioteca-vino/estilos/espumoso`
+   - `/biblioteca-vino/maridajes/carnes-rojas`
+5. Si todo pasa, actualizar documentos y continuar con la ampliación editorial profunda de regiones, estilos, maridajes y schema.

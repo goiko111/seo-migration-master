@@ -1217,7 +1217,37 @@
 
 #### Tareas pendientes
 
-- Commit y push.
+- Hecho: commit y push con `80895ac feat: connect wine library entities`.
 - Publish frontend en Lovable.
 - Deploy explícito de `prerender` en Lovable.
 - Revalidación de producción como usuario real y Googlebot.
+
+### 2026-05-25: grafo estratégico subido y validación de producción pendiente
+
+#### Hechos
+
+- El bloque de grafo estratégico se commiteó como `80895ac feat: connect wine library entities`.
+- El commit `80895ac` se subió correctamente a `origin/main`.
+- Lovable muestra el commit nuevo en la conversación del proyecto `Web Winerim`.
+- La validación de producción como Googlebot muestra que `prerender` sigue sirviendo la versión anterior para el grafo estratégico:
+  - Xarel-lo/Xarello conserva contenido editorial avanzado, pero sus enlaces relacionados en HTML siguen siendo hubs generales.
+  - Espumoso y carnes rojas no devuelven todavía los enlaces estratégicos esperados.
+- El intento de pulsar `Update` desde automatización no cambió el estado de Lovable.
+- macOS solicitó permiso amplio para que Codex controle Finder durante esa automatización; no se concedió desde esta sesión.
+
+#### Decisiones
+
+- No marcar el grafo estratégico como publicado en producción hasta que `prerender` devuelva los enlaces internos nuevos.
+- Mantener como siguiente acción operativa publicar desde Lovable y pedir despliegue explícito de la Edge Function `prerender`.
+- No tocar Cloudflare Worker para este bloque mientras `x-worker-branch: bot-prerender` siga activo y el problema sea contenido no actualizado.
+
+#### Hipótesis
+
+- Lovable aún no ha aplicado el commit `80895ac` al frontend/Edge Function de producción.
+- El deploy explícito de `prerender` debería resolver la diferencia entre GitHub/local y producción sin cambios adicionales de código.
+
+#### Tareas pendientes
+
+- Publicar `80895ac` desde Lovable.
+- Desplegar Edge Function `prerender` desde Lovable.
+- Revalidar Googlebot y usuario real en uva, región, estilo y maridaje antes de cerrar el bloque.

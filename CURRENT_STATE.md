@@ -1561,8 +1561,46 @@
 
 ## Tareas pendientes
 
-- Commit y push del bloque de grafo estratégico.
+- Hecho: commit y push del bloque de grafo estratégico con `80895ac feat: connect wine library entities`.
 - Publicar frontend desde Lovable.
 - Desplegar explícitamente la Edge Function `prerender` desde Lovable.
 - Revalidar producción como usuario real y Googlebot en rutas de uva, región, estilo y maridaje.
 - Siguiente ampliación: contenido más profundo para regiones, estilos y maridajes prioritarios, y revisar schema `DefinedTerm`/`ItemList` donde aporte valor.
+
+## Actualización 2026-05-25: grafo estratégico pusheado, deploy Lovable pendiente
+
+## Hechos
+
+- El bloque de grafo estratégico ya está commiteado y subido a `origin/main`.
+- Commit publicado en GitHub: `80895ac feat: connect wine library entities`.
+- Lovable muestra el commit `feat: connect wine library entities` en el proyecto `Web Winerim`.
+- Producción aún no refleja el grafo estratégico en el HTML prerenderizado de bots:
+  - `/biblioteca-vino/uvas/xarello` responde con `x-worker-branch: bot-prerender`, pero el bloque `Enlaces relacionados` sigue limitado a hubs generales.
+  - `/biblioteca-vino/estilos/espumoso` responde con `x-worker-branch: bot-prerender`, pero todavía no incluye enlaces estratégicos como `Champagne`, `Cava`, `Chardonnay`, `marisco` o `quesos`.
+  - `/biblioteca-vino/maridajes/carnes-rojas` responde `200`, pero no contiene los enlaces estratégicos esperados en el prerender.
+- Se intentó activar `Update` desde la pestaña autenticada de Lovable, pero la interacción automatizada no cambió el estado del panel.
+- macOS mostró un permiso amplio para que Codex controle Finder durante la automatización; no se concedió ese permiso desde la sesión.
+- No se ha desplegado Cloudflare Worker para este bloque.
+
+## Decisiones
+
+- Tratar este bloque como completado en código y GitHub, pero no como publicado en producción.
+- No afirmar publicación hasta validar que Googlebot recibe los enlaces estratégicos desde `prerender`.
+- Mantener el siguiente paso en Lovable: pulsar `Update` y pedir despliegue explícito de la Edge Function `prerender`.
+- No desplegar Cloudflare Worker salvo que la validación posterior demuestre que el proxy impide servir el HTML actualizado.
+
+## Hipótesis
+
+- El frontend de Lovable y/o la Edge Function `prerender` siguen sirviendo la versión anterior pese a que GitHub ya tiene el commit nuevo.
+- Una vez Lovable aplique el `Update` y despliegue `prerender`, las rutas de biblioteca deberían mostrar el grafo estratégico sin tocar Cloudflare.
+
+## Tareas pendientes
+
+- En Lovable, publicar el commit `80895ac feat: connect wine library entities`.
+- En Lovable, pedir explícitamente: desplegar la Supabase Edge Function `prerender`.
+- Revalidar producción como Googlebot:
+  - `/biblioteca-vino/uvas/xarello` debe enlazar a Penedes, Cava, espumoso, marisco y arroces.
+  - `/biblioteca-vino/regiones/francia/champagne` debe enlazar a Chardonnay, Pinot Noir, espumoso, marisco y quesos.
+  - `/biblioteca-vino/estilos/espumoso` debe enlazar `Champagne` como región y `Cava` como estilo.
+  - `/biblioteca-vino/maridajes/carnes-rojas` debe enlazar Tempranillo, Syrah, Cabernet Sauvignon, Rioja y tinto reserva.
+- Tras validar producción, retomar ampliación editorial profunda de regiones, estilos, maridajes y schema por entidad.
