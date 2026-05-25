@@ -699,7 +699,8 @@
 - Se creó y pusheó `7cccf3d fix: remove heavy vendors from home startup`.
 - El build local posterior tiene entry `/assets/index-DZSHSGuS.js`, sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
 - Lighthouse mobile local en preview tras `7cccf3d`: Performance 96, FCP 1,96 s y LCP 2,26 s.
-- Producción aún no refleja `7cccf3d`; sigue sirviendo deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
+- Producción aún no refleja el cambio de código `7cccf3d`; sigue sirviendo deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
+- El último commit pusheado tras actualizar documentación es `228eef6`; desplegar `main` incluye `7cccf3d`.
 
 #### Decisiones
 
@@ -708,7 +709,7 @@
 - Crear `vendor-ui-utils` para `clsx`, `tailwind-merge` y `class-variance-authority`.
 - Eliminar el `TooltipProvider` lazy global de `App.tsx` para que no pueda suspender el primer render.
 - Retrasar overlays, toasts, cookie consent, intent tracker y popups hasta después de `load`/idle.
-- Publicar `7cccf3d` desde Lovable antes de tomar más decisiones de rendimiento.
+- Publicar `main` desde Lovable antes de tomar más decisiones de rendimiento.
 
 #### Hipótesis
 
@@ -717,7 +718,7 @@
 
 #### Tareas pendientes
 
-- Publicar `7cccf3d` desde Lovable.
+- Publicar `main` desde Lovable; contiene el cambio de código `7cccf3d`.
 - Revalidar entry/preloads/chunks en producción tras publish.
 - Repetir Lighthouse mobile en producción.
 - Mantener Search Console/Core Web Vitals en observación porque los datos de campo no cambiarán inmediatamente.

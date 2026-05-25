@@ -393,11 +393,12 @@
   - `git diff --check`: correcto.
   - QA navegador preview: H1, dropdown desktop y consola correctos.
   - Lighthouse mobile preview: Performance 96 y LCP 2,26 s.
-- Producción aún no refleja `7cccf3d`; sigue sirviendo `/assets/index-D4-5gxc6.js`.
+- Producción aún no refleja el cambio de código `7cccf3d`; sigue sirviendo `/assets/index-D4-5gxc6.js`.
+- El último commit pusheado tras documentación es `228eef6`; publicar `main` incluye el cambio de código `7cccf3d`.
 
 ## Decisiones
 
-- La prioridad inmediata es publicar `7cccf3d` desde Lovable y medir producción.
+- La prioridad inmediata es publicar `main` desde Lovable y medir producción.
 - No seguir ampliando biblioteca del vino hasta validar este segundo bloque de rendimiento o dejarlo explícitamente aparcado.
 - Si producción no mejora tras `7cccf3d`, el siguiente bloque debe centrarse en third-party JS y CSS render-blocking.
 
@@ -408,7 +409,7 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Publicar `7cccf3d` desde Lovable.
+1. Publicar `main` desde Lovable; contiene el cambio de código `7cccf3d`.
 2. Verificar producción tras publish:
    - Entry nuevo distinto de `/assets/index-D4-5gxc6.js`.
    - Sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
