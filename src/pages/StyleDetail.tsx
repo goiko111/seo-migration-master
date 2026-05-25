@@ -18,6 +18,7 @@ import {
   type StyleEntry,
   type StyleCatalogEntry,
 } from "@/data/stylesLibrary";
+import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
 import {
   getLocalizedFamilyMeta,
   getLocalizedStyleBySlug,
@@ -360,6 +361,7 @@ const FullStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor }: 
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <RelatedWineLibraryLinks
             items={[
+              ...getStrategicWineLibraryLinks("style", data.slug),
               ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
               ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
               ...data.pairings.map((name) => ({ name, hint: "pairing" as const })),
@@ -467,6 +469,7 @@ const CatalogStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor 
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <RelatedWineLibraryLinks
             items={[
+              ...getStrategicWineLibraryLinks("style", data.slug),
               ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
               ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
               ...(parent ? [{ name: parent.slug, hint: "style" as const }] : []),

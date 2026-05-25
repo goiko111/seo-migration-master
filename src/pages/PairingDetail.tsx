@@ -17,6 +17,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import {
   type PairingEntry,
 } from "@/data/pairingsLibrary";
+import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
 import {
   getLocalizedCategoryMeta,
   getLocalizedPairingBySlug,
@@ -296,6 +297,7 @@ const PairingDetail = () => {
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <RelatedWineLibraryLinks
             items={[
+              ...getStrategicWineLibraryLinks("pairing", entry.slug),
               ...entry.recommendedStyles.map((name) => ({ name, hint: "style" as const })),
               ...entry.recommendedRegions.map((name) => ({ name, hint: "region" as const })),
               ...entry.recommendedGrapes.map((name) => ({ name, hint: "grape" as const })),

@@ -19,6 +19,7 @@ import {
 } from "@/data/grapesLibrary";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
 import { getGrapeEditorialProfile, type LocalizedGrapeEditorialProfile } from "@/data/wineLibraryEditorial";
+import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -591,6 +592,7 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <RelatedWineLibraryLinks
           items={[
+            ...getStrategicWineLibraryLinks("grape", data.slug),
             ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
             ...data.bestRegionsForSales.map((name) => ({ name, hint: "region" as const })),
             ...data.competingVarieties.map((name) => ({ name, hint: "grape" as const })),
@@ -735,6 +737,7 @@ const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNu
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <RelatedWineLibraryLinks
           items={[
+            ...getStrategicWineLibraryLinks("grape", data.slug),
             ...data.keyRegions.map((name) => ({ name, hint: "region" as const })),
           ]}
         />

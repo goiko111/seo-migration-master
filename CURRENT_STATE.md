@@ -1519,3 +1519,50 @@
   - añadir alias visibles para grafías como `Xarel-lo`/`Xarel·lo`;
   - reforzar schema y enlaces internos por intención.
 - Monitorizar Search Console para indexación de rutas nuevas/enriquecidas.
+
+## Actualización 2026-05-25: grafo estratégico de biblioteca del vino
+
+## Hechos
+
+- Se inició el siguiente bloque de biblioteca del vino tras la segunda tanda editorial publicada.
+- Se añadieron alias de resolución en `src/data/wineLibraryLinks.ts` para capturar variantes sin duplicar URLs:
+  - `Xarel-lo`, `Xarel·lo` y `Xarello` -> `xarello`.
+  - `Borgoña`/`Borgona` -> `bourgogne`.
+  - `Burdeos` -> `bordeaux`.
+  - `blanco con lías`, `espumoso método tradicional`, `rosado gastronómico`.
+  - `pescado blanco`, `marisco`, `arroces`, `cocina asiática`.
+- El resolver de enlaces de biblioteca ahora separa lookup por categoría (`grape`, `region`, `style`, `pairing`) para respetar hints y evitar colisiones como `Champagne` región vs `Champagne` estilo.
+- Se creó un grafo estratégico de enlaces internos para conectar uvas, regiones, estilos y maridajes prioritarios.
+- Las páginas React de detalle de uva, región, estilo y maridaje ahora anteponen enlaces estratégicos al bloque `RelatedWineLibraryLinks`.
+- `supabase/functions/prerender/index.ts` incluye `WINE_LIBRARY_STRATEGIC_LINKS` para que Googlebot y crawlers de IA reciban enlaces internos estratégicos en HTML prerenderizado.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 7 archivos, 21 tests.
+  - `npm run build`: correcto.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: correcto.
+  - `git diff --check`: correcto.
+  - QA navegador local en `/biblioteca-vino/uvas/xarello`, `/biblioteca-vino/regiones/francia/champagne`, `/biblioteca-vino/estilos/espumoso` y `/biblioteca-vino/maridajes/carnes-rojas`.
+- QA local confirmó enlaces estratégicos visibles y resolubles, incluyendo `Champagne` como región en la ficha de espumoso.
+- No se detectaron errores de consola en las rutas probadas.
+- Este bloque aún no está publicado en producción.
+
+## Decisiones
+
+- No crear slugs duplicados para grafías alternativas: se resuelven mediante alias hacia el slug canónico.
+- Mantener `xarello` como slug canónico y cubrir variantes editoriales con alias.
+- Resolver colisiones de entidades por categoría, no por prioridad global de strings.
+- Priorizar red semántica interna antes de añadir más URLs nuevas.
+- Mantener paridad frontend/prerender como requisito: los enlaces estratégicos deben existir también para bots.
+
+## Hipótesis
+
+- El enlazado estratégico aumentará la comprensión temática de la biblioteca al conectar entidades por intención real de restaurante.
+- Resolver alias evitará perder búsquedas con grafías frecuentes sin generar canibalización ni duplicados.
+- La mejora será visible para Googlebot y LLM crawlers tras desplegar `prerender` desde Lovable.
+
+## Tareas pendientes
+
+- Commit y push del bloque de grafo estratégico.
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente la Edge Function `prerender` desde Lovable.
+- Revalidar producción como usuario real y Googlebot en rutas de uva, región, estilo y maridaje.
+- Siguiente ampliación: contenido más profundo para regiones, estilos y maridajes prioritarios, y revisar schema `DefinedTerm`/`ItemList` donde aporte valor.

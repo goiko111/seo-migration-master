@@ -11,6 +11,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getLocalizedCountryBySlug, getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
+import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -310,6 +311,7 @@ const RegionDetail = () => {
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <RelatedWineLibraryLinks
             items={[
+              ...getStrategicWineLibraryLinks("region", data.slug),
               ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
               ...data.styles.map((name) => ({ name, hint: "style" as const })),
               ...data.competingRegions.map((name) => ({ name, hint: "region" as const })),

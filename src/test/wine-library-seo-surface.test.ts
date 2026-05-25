@@ -40,4 +40,15 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("Role en carte");
     expect(prerender).toContain("Papel na carta");
   });
+
+  it("adds strategic internal links to prerendered wine-library entities", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const WINE_LIBRARY_STRATEGIC_LINKS");
+    expect(prerender).toContain("/biblioteca-vino/uvas/xarello");
+    expect(prerender).toContain("/biblioteca-vino/regiones/espana/rias-baixas");
+    expect(prerender).toContain("/biblioteca-vino/estilos/tinto-crianza");
+    expect(prerender).toContain("/biblioteca-vino/maridajes/carnes-rojas");
+    expect(prerender).toContain("wineLibraryStrategicLinks(lang, esPath)");
+  });
 });

@@ -1184,3 +1184,40 @@
 - Abrir bloque de regiones, estilos y maridajes prioritarios.
 - Añadir alias/variantes de grafía para entidades con búsqueda ambigua.
 - Monitorizar Search Console tras recrawl.
+
+### 2026-05-25: grafo estratégico de biblioteca del vino
+
+#### Hechos
+
+- Se implementó localmente el primer bloque de red temática entre entidades de biblioteca del vino.
+- `src/data/wineLibraryLinks.ts` incorpora alias de alto valor para variantes de grafía y búsquedas semánticas:
+  - `Xarel-lo`/`Xarel·lo` hacia `xarello`.
+  - `Borgoña` hacia `bourgogne`.
+  - `Burdeos` hacia `bordeaux`.
+  - estilos y maridajes como `blanco con lías`, `espumoso método tradicional`, `rosado gastronómico`, `marisco`, `arroces` y `cocina asiática`.
+- El resolver de enlaces ahora usa lookup separado por categoría para respetar hints y resolver correctamente entidades homónimas como `Champagne`.
+- Se añadió un grafo estratégico para enlaces internos en fichas de uva, región, estilo y maridaje.
+- El grafo se integró en React y en `supabase/functions/prerender/index.ts`.
+- Se añadieron tests de alias, resolución por categoría y presencia del grafo estratégico en prerender.
+- Verificaciones locales completadas: tests completos, build, `deno check`, `git diff --check` y QA navegador local.
+
+#### Decisiones
+
+- Resolver variantes mediante alias, no mediante rutas duplicadas.
+- Mantener `xarello` como slug canónico.
+- Separar el resolver por categoría para no perder precisión SEO cuando una palabra representa entidades distintas.
+- Dar prioridad a enlaces internos por intención gastronómica/comercial antes de ampliar masivamente más URLs.
+- Mantener paridad entre React y prerender para que usuarios, Googlebot y crawlers de IA vean la misma red esencial.
+
+#### Hipótesis
+
+- Los enlaces cruzados uva -> región -> estilo -> maridaje aumentarán la autoridad temática de la biblioteca.
+- Los alias reducirán fricción SEO para búsquedas con grafías ambiguas sin generar canibalización.
+- Este bloque debería mejorar rastreo y comprensión semántica cuando esté publicado y recrawleado.
+
+#### Tareas pendientes
+
+- Commit y push.
+- Publish frontend en Lovable.
+- Deploy explícito de `prerender` en Lovable.
+- Revalidación de producción como usuario real y Googlebot.

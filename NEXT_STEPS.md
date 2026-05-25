@@ -1028,3 +1028,51 @@
 5. Alias y variantes:
    - `Xarel-lo`/`Xarel·lo` -> `xarello`;
    - revisar grafías con acentos y sin acentos para búsquedas internacionales.
+
+## Actualización 2026-05-25: grafo estratégico listo localmente
+
+## Hechos
+
+- Bloque local implementado:
+  - alias de grafías y consultas frecuentes;
+  - resolver de enlaces separado por categoría;
+  - grafo estratégico de enlaces internos para uvas, regiones, estilos y maridajes;
+  - integración en React;
+  - integración equivalente en `prerender`;
+  - tests nuevos y contrato SEO actualizado.
+- Verificación local completada:
+  - `npm run test -- --run`: 21 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - QA navegador local en Xarel-lo, Champagne región, espumoso y carnes rojas.
+- Producción aún no refleja este bloque hasta commit/push, publish Lovable y deploy explícito de `prerender`.
+
+## Decisiones
+
+- No duplicar URLs por alias.
+- Mantener `xarello` como slug canónico.
+- Usar hints por categoría para resolver colisiones de entidad.
+- Hacer visible para bots el mismo grafo interno que ve React.
+
+## Hipótesis
+
+- Este bloque mejora más la arquitectura semántica que añadir otra tanda aislada de uvas.
+- El siguiente salto vendrá de ampliar contenido específico en regiones, estilos y maridajes prioritarios ya conectados.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push del bloque.
+2. Publicar frontend desde Lovable.
+3. Pedir despliegue explícito de Edge Function `prerender` en Lovable.
+4. Revalidar producción:
+   - `/biblioteca-vino/uvas/xarello` muestra enlaces a Penedès, Cava, espumoso, marisco y arroces.
+   - `/biblioteca-vino/regiones/francia/champagne` enlaza a Chardonnay, Pinot Noir, espumoso, marisco y quesos.
+   - `/biblioteca-vino/estilos/espumoso` enlaza `Champagne` como región y `Cava` como estilo.
+   - `/biblioteca-vino/maridajes/carnes-rojas` enlaza Tempranillo, Syrah, Cabernet Sauvignon, Rioja y tinto reserva.
+   - Googlebot recibe los enlaces estratégicos desde `prerender`.
+5. Siguiente bloque editorial:
+   - profundizar fichas de regiones prioritarias;
+   - profundizar estilos prioritarios;
+   - profundizar maridajes prioritarios;
+   - evaluar schema `DefinedTerm`/`ItemList` por tipo de entidad.

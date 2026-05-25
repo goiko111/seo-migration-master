@@ -1021,6 +1021,289 @@ function wineLibraryHreflang(esPath: string): HreflangEntry[] {
   ];
 }
 
+const WINE_LIBRARY_STRATEGIC_LINKS: Record<string, { label: string; esPath: string }[]> = {
+  '/biblioteca-vino/uvas/tempranillo': [
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Ribera del Duero', esPath: '/biblioteca-vino/regiones/espana/ribera-del-duero' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/uvas/garnacha': [
+    { label: 'Priorat', esPath: '/biblioteca-vino/regiones/espana/priorat' },
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Rosado gastronomico', esPath: '/biblioteca-vino/estilos/rosado-cuerpo' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+  ],
+  '/biblioteca-vino/uvas/albarino': [
+    { label: 'Rias Baixas', esPath: '/biblioteca-vino/regiones/espana/rias-baixas' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Cocina asiatica', esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+  ],
+  '/biblioteca-vino/uvas/verdejo': [
+    { label: 'Rueda', esPath: '/biblioteca-vino/regiones/espana/rueda' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+  ],
+  '/biblioteca-vino/uvas/godello': [
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/chardonnay': [
+    { label: 'Borgona', esPath: '/biblioteca-vino/regiones/francia/bourgogne' },
+    { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/cabernet-sauvignon': [
+    { label: 'Burdeos', esPath: '/biblioteca-vino/regiones/francia/bordeaux' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/pinot-noir': [
+    { label: 'Borgona', esPath: '/biblioteca-vino/regiones/francia/bourgogne' },
+    { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+    { label: 'Rosado gastronomico', esPath: '/biblioteca-vino/estilos/rosado-cuerpo' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/sauvignon-blanc': [
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Cocina asiatica', esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/riesling': [
+    { label: 'Cocina asiatica', esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/syrah': [
+    { label: 'Priorat', esPath: '/biblioteca-vino/regiones/espana/priorat' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/uvas/merlot': [
+    { label: 'Burdeos', esPath: '/biblioteca-vino/regiones/francia/bordeaux' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/uvas/malbec': [
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/nebbiolo': [
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/sangiovese': [
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/monastrell': [
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+  ],
+  '/biblioteca-vino/uvas/viura': [
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/chenin-blanc': [
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Cocina asiatica', esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/uvas/xarello': [
+    { label: 'Penedes', esPath: '/biblioteca-vino/regiones/espana/penedes' },
+    { label: 'Cava', esPath: '/biblioteca-vino/estilos/cava' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+  ],
+  '/biblioteca-vino/uvas/touriga-nacional': [
+    { label: 'Douro', esPath: '/biblioteca-vino/regiones/portugal/douro' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/regiones/espana/rioja': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Viura', esPath: '/biblioteca-vino/uvas/viura' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/regiones/espana/ribera-del-duero': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/regiones/espana/rias-baixas': [
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+  ],
+  '/biblioteca-vino/regiones/espana/rueda': [
+    { label: 'Verdejo', esPath: '/biblioteca-vino/uvas/verdejo' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+  ],
+  '/biblioteca-vino/regiones/espana/priorat': [
+    { label: 'Garnacha', esPath: '/biblioteca-vino/uvas/garnacha' },
+    { label: 'Syrah', esPath: '/biblioteca-vino/uvas/syrah' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/regiones/francia/bourgogne': [
+    { label: 'Pinot Noir', esPath: '/biblioteca-vino/uvas/pinot-noir' },
+    { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/regiones/francia/bordeaux': [
+    { label: 'Cabernet Sauvignon', esPath: '/biblioteca-vino/uvas/cabernet-sauvignon' },
+    { label: 'Merlot', esPath: '/biblioteca-vino/uvas/merlot' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/regiones/francia/champagne': [
+    { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+    { label: 'Pinot Noir', esPath: '/biblioteca-vino/uvas/pinot-noir' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/regiones/portugal/douro': [
+    { label: 'Touriga Nacional', esPath: '/biblioteca-vino/uvas/touriga-nacional' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/regiones/portugal/vinho-verde': [
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+  ],
+  '/biblioteca-vino/estilos/tinto-crianza': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Ribera del Duero', esPath: '/biblioteca-vino/regiones/espana/ribera-del-duero' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/estilos/tinto-reserva': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Cabernet Sauvignon', esPath: '/biblioteca-vino/uvas/cabernet-sauvignon' },
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Burdeos', esPath: '/biblioteca-vino/regiones/francia/bordeaux' },
+    { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+  ],
+  '/biblioteca-vino/estilos/blanco-crianza-lias': [
+    { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+    { label: 'Godello', esPath: '/biblioteca-vino/uvas/godello' },
+    { label: 'Viura', esPath: '/biblioteca-vino/uvas/viura' },
+    { label: 'Borgona', esPath: '/biblioteca-vino/regiones/francia/bourgogne' },
+    { label: 'Pescado blanco', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+  ],
+  '/biblioteca-vino/estilos/espumoso': [
+    { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+    { label: 'Cava', esPath: '/biblioteca-vino/estilos/cava' },
+    { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+    { label: 'Xarel-lo', esPath: '/biblioteca-vino/uvas/xarello' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+  ],
+  '/biblioteca-vino/estilos/cava': [
+    { label: 'Penedes', esPath: '/biblioteca-vino/regiones/espana/penedes' },
+    { label: 'Xarel-lo', esPath: '/biblioteca-vino/uvas/xarello' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Marisco', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+    { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+  ],
+  '/biblioteca-vino/estilos/rosado-cuerpo': [
+    { label: 'Garnacha', esPath: '/biblioteca-vino/uvas/garnacha' },
+    { label: 'Syrah', esPath: '/biblioteca-vino/uvas/syrah' },
+    { label: 'Priorat', esPath: '/biblioteca-vino/regiones/espana/priorat' },
+    { label: 'Arroces', esPath: '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres' },
+    { label: 'Cocina asiatica', esPath: '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion' },
+  ],
+  '/biblioteca-vino/maridajes/carnes-rojas': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Syrah', esPath: '/biblioteca-vino/uvas/syrah' },
+    { label: 'Cabernet Sauvignon', esPath: '/biblioteca-vino/uvas/cabernet-sauvignon' },
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+  ],
+  '/biblioteca-vino/maridajes/pescados-y-mariscos': [
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Verdejo', esPath: '/biblioteca-vino/uvas/verdejo' },
+    { label: 'Rias Baixas', esPath: '/biblioteca-vino/regiones/espana/rias-baixas' },
+    { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+  ],
+  '/biblioteca-vino/maridajes/lubina-dorada': [
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Verdejo', esPath: '/biblioteca-vino/uvas/verdejo' },
+    { label: 'Godello', esPath: '/biblioteca-vino/uvas/godello' },
+    { label: 'Rias Baixas', esPath: '/biblioteca-vino/regiones/espana/rias-baixas' },
+    { label: 'Rueda', esPath: '/biblioteca-vino/regiones/espana/rueda' },
+  ],
+  '/biblioteca-vino/maridajes/pasta-arroces-y-legumbres': [
+    { label: 'Sangiovese', esPath: '/biblioteca-vino/uvas/sangiovese' },
+    { label: 'Nebbiolo', esPath: '/biblioteca-vino/uvas/nebbiolo' },
+    { label: 'Garnacha', esPath: '/biblioteca-vino/uvas/garnacha' },
+    { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+    { label: 'Rosado gastronomico', esPath: '/biblioteca-vino/estilos/rosado-cuerpo' },
+  ],
+  '/biblioteca-vino/maridajes/paella': [
+    { label: 'Garnacha', esPath: '/biblioteca-vino/uvas/garnacha' },
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Verdejo', esPath: '/biblioteca-vino/uvas/verdejo' },
+    { label: 'Rosado gastronomico', esPath: '/biblioteca-vino/estilos/rosado-cuerpo' },
+    { label: 'Rueda', esPath: '/biblioteca-vino/regiones/espana/rueda' },
+  ],
+  '/biblioteca-vino/maridajes/cocina-asiatica-y-fusion': [
+    { label: 'Riesling', esPath: '/biblioteca-vino/uvas/riesling' },
+    { label: 'Sauvignon Blanc', esPath: '/biblioteca-vino/uvas/sauvignon-blanc' },
+    { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+    { label: 'Espumoso metodo tradicional', esPath: '/biblioteca-vino/estilos/espumoso' },
+    { label: 'Rosado gastronomico', esPath: '/biblioteca-vino/estilos/rosado-cuerpo' },
+  ],
+  '/biblioteca-vino/maridajes/quesos': [
+    { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+    { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+    { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+    { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+    { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+  ],
+};
+
+function wineLibraryStrategicLinks(lang: WineLibraryLang, esPath: string): { label: string; url: string }[] {
+  return (WINE_LIBRARY_STRATEGIC_LINKS[esPath] || []).map((link) => ({
+    label: link.label,
+    url: wineLibraryPath(lang, link.esPath),
+  }));
+}
+
 function titleFromSlug(slug: string): string {
   return slug
     .split('-')
@@ -1078,6 +1361,7 @@ function renderWineLibraryPage(path: string): string | null {
       : copy.generatedIntro(subject, type);
 
   const hubPath = section ? wineLibraryPath(lang, `/biblioteca-vino/${section}`) : wineLibraryPath(lang, '/biblioteca-vino');
+  const strategicInternalLinks = isSectionHub ? [] : wineLibraryStrategicLinks(lang, esPath);
   const sections = priorityProfile && priorityCopy
     ? [
         { heading: priorityCopy.role, content: priorityProfile.role[editorialLang!] },
@@ -1130,6 +1414,7 @@ function renderWineLibraryPage(path: string): string | null {
         ...(!isSectionHub ? [{ name: subject, url: canonical }] : []),
       ],
       internalLinks: [
+        ...strategicInternalLinks,
         { label: copy.sectionTitles.uvas, url: wineLibraryPath(lang, '/biblioteca-vino/uvas') },
         { label: copy.sectionTitles.regiones, url: wineLibraryPath(lang, '/biblioteca-vino/regiones') },
         { label: copy.sectionTitles.estilos, url: wineLibraryPath(lang, '/biblioteca-vino/estilos') },
