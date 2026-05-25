@@ -374,3 +374,55 @@
 6. Continuar bloque máximo nivel de biblioteca del vino tras cerrar publicación y medición de este saneamiento.
 7. Decidir destino definitivo de city pages.
 8. Resolver contradicción de `src/seo/route-map.ts` frente al mapa real `de`/`pt`.
+
+## Actualización 2026-05-25: siguiente retoma tras segundo bloque Core Web Vitals
+
+## Hechos
+
+- El bloque `553d17c` sí está publicado en producción, pero Lighthouse mobile de home sigue alrededor de Performance 60 y LCP 10,97 s.
+- Se encontró que el entry publicado aún cargaba `vendor-motion` y `vendor-charts` de forma estática.
+- Se implementó, commiteó y pusheó `7cccf3d fix: remove heavy vendors from home startup`.
+- `7cccf3d` corrige:
+  - `react/jsx-runtime` dentro de `vendor-react`.
+  - utilidades UI en `vendor-ui-utils`.
+  - eliminación del `TooltipProvider` lazy global.
+  - diferido de chrome no crítico de aplicación tras `load`/idle.
+- Validación local de `7cccf3d`:
+  - `npm run build`: correcto.
+  - `npm run test`: 15 tests.
+  - `git diff --check`: correcto.
+  - QA navegador preview: H1, dropdown desktop y consola correctos.
+  - Lighthouse mobile preview: Performance 96 y LCP 2,26 s.
+- Producción aún no refleja `7cccf3d`; sigue sirviendo `/assets/index-D4-5gxc6.js`.
+
+## Decisiones
+
+- La prioridad inmediata es publicar `7cccf3d` desde Lovable y medir producción.
+- No seguir ampliando biblioteca del vino hasta validar este segundo bloque de rendimiento o dejarlo explícitamente aparcado.
+- Si producción no mejora tras `7cccf3d`, el siguiente bloque debe centrarse en third-party JS y CSS render-blocking.
+
+## Hipótesis
+
+- `7cccf3d` debería ser el salto real para LCP sintético de home.
+- Los datos de Search Console/Core Web Vitals no cambiarán en tiempo real aunque Lighthouse mejore tras publish.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar `7cccf3d` desde Lovable.
+2. Verificar producción tras publish:
+   - Entry nuevo distinto de `/assets/index-D4-5gxc6.js`.
+   - Sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+   - Preloads iniciales ligeros con `vendor-ui-utils`.
+   - Home, dropdown desktop y menú móvil funcionando.
+3. Ejecutar Lighthouse mobile en producción para home.
+4. Si el resultado es bueno, volver a Search Console:
+   - Reintentar indexación de `https://winerim.wine/de/weinbibliothek`.
+   - Monitorizar validación FAQ.
+   - Vigilar lectura del sitemap limpio.
+5. Si el resultado sigue flojo, abrir bloque third-party:
+   - GTM.
+   - Google Ads.
+   - Meta Pixel.
+   - Chat.
+   - CSS render-blocking.
+6. Después de cerrar rendimiento, retomar biblioteca del vino al máximo nivel.

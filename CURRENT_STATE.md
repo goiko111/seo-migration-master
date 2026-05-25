@@ -716,3 +716,73 @@
   - Widget de chat debe aparecer tras carga diferida.
 - Reintentar más tarde en Search Console la solicitud de indexación de `https://winerim.wine/de/weinbibliothek`.
 - No validar mejora LCP en Search Console hasta que el bloque esté publicado y haya nuevos datos de campo.
+
+## Actualización 2026-05-25: publish previo validado y segundo bloque Core Web Vitals
+
+## Hechos
+
+- Se releyeron los documentos fuente de verdad antes de continuar.
+- El usuario confirmó que el bloque anterior ya estaba publicado.
+- Producción refleja el commit `553d17c fix: improve home core web vitals`:
+  - `https://winerim.wine/` responde 200.
+  - Deployment activo: `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
+  - Entry activo: `/assets/index-D4-5gxc6.js`.
+  - Modulepreloads iniciales: `vendor-react`, `vendor-query` y `vendor-router`.
+  - No hay preloads iniciales de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+  - `https://winerim.wine/sitemap.xml` responde 200 con 2.072 URLs y `X-Worker-Branch: sitemap`.
+- QA de producción del bloque `553d17c`:
+  - Home renderiza 1 H1: `Vende más vino. Mejora márgenes. Controla tu bodega.`
+  - Dropdown desktop `Producto` funciona.
+  - No se detectaron errores de consola en la prueba de navegador.
+- Lighthouse mobile sobre producción publicada seguía sin mejorar de forma material:
+  - Performance 60.
+  - FCP 5,65 s.
+  - LCP 10,97 s.
+  - TBT 82 ms.
+  - CLS 0,002.
+  - DOM 1.371 elementos.
+- Se detectó la causa principal de que el primer bloque no bastara:
+  - El entry publicado seguía importando estáticamente `vendor-motion` y `vendor-charts`.
+  - La causa local era el particionado manual: `react/jsx-runtime` quedaba dentro de `vendor-motion` y utilidades UI (`clsx`, `tailwind-merge`, `class-variance-authority`) podían quedar dentro de chunks pesados como `vendor-charts`.
+  - `App.tsx` también envolvía toda la app en un `TooltipProvider` lazy, capaz de suspender el render inicial de la home.
+- Se implementó y pusheó el segundo bloque Core Web Vitals:
+  - Commit `7cccf3d fix: remove heavy vendors from home startup`.
+  - `vite.config.ts` mueve `react/jsx-runtime` y `react/jsx-dev-runtime` a `vendor-react`.
+  - `vite.config.ts` crea `vendor-ui-utils` para utilidades UI pequeñas.
+  - `src/App.tsx` elimina el `TooltipProvider` lazy global.
+  - `src/App.tsx` retrasa toasts, cookie consent, back-to-top, intent tracker y popups hasta después de `load`/idle.
+- Verificación local del segundo bloque:
+  - `npm run build`: correcto.
+  - `npm run test`: 5 archivos, 15 tests.
+  - `git diff --check`: correcto.
+  - QA navegador en preview local: H1 correcto, dropdown `Producto` correcto y sin errores de consola.
+  - Bundle local: entry `/assets/index-DZSHSGuS.js`, sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+  - Preloads locales: `vendor-react`, `vendor-query`, `vendor-router`, `vendor-ui-utils`.
+  - Lighthouse mobile local en preview: Performance 96, FCP 1,96 s, LCP 2,26 s, TBT 119,5 ms, CLS 0,005.
+- Producción todavía no refleja `7cccf3d`:
+  - Sigue sirviendo `/assets/index-D4-5gxc6.js`.
+  - Sigue en deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
+
+## Decisiones
+
+- Dar por publicado y validado el primer bloque `553d17c`, pero no dar por resuelto Core Web Vitals porque Lighthouse de producción sigue con LCP cercano a 11 s.
+- Tratar `7cccf3d` como el bloque real de corrección del arranque pesado de home.
+- Mantener `framer-motion`, Recharts, Radix y Supabase fuera del arranque inicial de la home.
+- Retrasar chrome no crítico de aplicación hasta después de `load`/idle para proteger FCP/LCP.
+
+## Hipótesis
+
+- Al publicar `7cccf3d` desde Lovable, Lighthouse mobile de home debería acercarse mucho más al resultado local, aunque producción seguirá condicionada por red, Cloudflare, terceros y caché.
+- Search Console/Core Web Vitals tardará días o semanas en reflejar datos de campo aunque Lighthouse mejore inmediatamente.
+- El siguiente cuello de botella, tras publicar `7cccf3d`, probablemente serán scripts de terceros y CSS render-blocking, no los chunks `motion/charts`.
+
+## Tareas pendientes
+
+- Publicar `7cccf3d` desde Lovable.
+- Revalidar producción tras publish:
+  - Entry debe cambiar desde `/assets/index-D4-5gxc6.js`.
+  - No debe haber imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase` en el entry.
+  - Modulepreloads iniciales deben incluir solo vendors esenciales y `vendor-ui-utils`.
+  - Dropdown desktop y menú móvil deben seguir funcionando.
+  - Lighthouse mobile home debe repetirse en producción.
+- Si Lighthouse producción mejora pero sigue insuficiente, abrir bloque específico para terceros: GTM, Google Ads, Meta Pixel y chat.

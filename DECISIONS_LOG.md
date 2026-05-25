@@ -687,3 +687,37 @@
 - Publicar desde Lovable.
 - Revalidar producción y medir Lighthouse/CrUX cuando el despliegue esté activo.
 - Reintentar indexación de `https://winerim.wine/de/weinbibliothek` más tarde.
+
+### 2026-05-25: segundo bloque Core Web Vitals home
+
+#### Hechos
+
+- Producción publicada con `553d17c` se validó correctamente a nivel funcional, pero Lighthouse mobile siguió en Performance 60 y LCP 10,97 s.
+- El entry publicado `/assets/index-D4-5gxc6.js` seguía importando `vendor-motion` y `vendor-charts` de forma estática aunque ya no aparecieran como modulepreload inicial.
+- Se identificó que el `manualChunks` de Vite dejaba `react/jsx-runtime` dentro de `vendor-motion` y utilidades UI dentro de chunks pesados.
+- Se identificó que `App.tsx` mantenía un `TooltipProvider` lazy envolviendo toda la aplicación.
+- Se creó y pusheó `7cccf3d fix: remove heavy vendors from home startup`.
+- El build local posterior tiene entry `/assets/index-DZSHSGuS.js`, sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
+- Lighthouse mobile local en preview tras `7cccf3d`: Performance 96, FCP 1,96 s y LCP 2,26 s.
+- Producción aún no refleja `7cccf3d`; sigue sirviendo deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
+
+#### Decisiones
+
+- No dar por resuelto Core Web Vitals con el bloque `553d17c`; fue una reducción parcial de preloads, no una eliminación completa del coste crítico.
+- Mover `react/jsx-runtime` y `react/jsx-dev-runtime` a `vendor-react`.
+- Crear `vendor-ui-utils` para `clsx`, `tailwind-merge` y `class-variance-authority`.
+- Eliminar el `TooltipProvider` lazy global de `App.tsx` para que no pueda suspender el primer render.
+- Retrasar overlays, toasts, cookie consent, intent tracker y popups hasta después de `load`/idle.
+- Publicar `7cccf3d` desde Lovable antes de tomar más decisiones de rendimiento.
+
+#### Hipótesis
+
+- El mayor salto inmediato de LCP vendrá de publicar `7cccf3d`, porque elimina cargas estáticas pesadas del arranque.
+- Si tras publicar `7cccf3d` producción sigue lejos del preview local, la siguiente prioridad será third-party JS y CSS render-blocking.
+
+#### Tareas pendientes
+
+- Publicar `7cccf3d` desde Lovable.
+- Revalidar entry/preloads/chunks en producción tras publish.
+- Repetir Lighthouse mobile en producción.
+- Mantener Search Console/Core Web Vitals en observación porque los datos de campo no cambiarán inmediatamente.
