@@ -762,7 +762,7 @@
 - Producción todavía no refleja el cambio de código `7cccf3d`:
   - Sigue sirviendo `/assets/index-D4-5gxc6.js`.
   - Sigue en deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
-- El último commit pusheado a `main` tras actualizar documentación es `228eef6 docs: record core web vitals followup`; desplegar `main` incluye el cambio de código `7cccf3d`.
+- Desplegar la rama `main` desde Lovable incluye el cambio de código `7cccf3d`, aunque puede haber commits posteriores solo de documentación.
 
 ## Decisiones
 
@@ -779,7 +779,7 @@
 
 ## Tareas pendientes
 
-- Publicar `main` desde Lovable; el cambio de código relevante es `7cccf3d` y el último commit remoto es `228eef6`.
+- Publicar `main` desde Lovable; el cambio de código relevante es `7cccf3d`.
 - Revalidar producción tras publish:
   - Entry debe cambiar desde `/assets/index-D4-5gxc6.js`.
   - No debe haber imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase` en el entry.

@@ -700,7 +700,7 @@
 - El build local posterior tiene entry `/assets/index-DZSHSGuS.js`, sin imports estáticos de `vendor-motion`, `vendor-charts`, `vendor-radix` ni `vendor-supabase`.
 - Lighthouse mobile local en preview tras `7cccf3d`: Performance 96, FCP 1,96 s y LCP 2,26 s.
 - Producción aún no refleja el cambio de código `7cccf3d`; sigue sirviendo deployment `20fa0919-eb4c-4738-a25d-5bf87c5c1cff`.
-- El último commit pusheado tras actualizar documentación es `228eef6`; desplegar `main` incluye `7cccf3d`.
+- Desplegar la rama `main` desde Lovable incluye `7cccf3d`, aunque puede haber commits posteriores solo de documentación.
 
 #### Decisiones
 

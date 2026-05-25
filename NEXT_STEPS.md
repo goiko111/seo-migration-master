@@ -394,7 +394,7 @@
   - QA navegador preview: H1, dropdown desktop y consola correctos.
   - Lighthouse mobile preview: Performance 96 y LCP 2,26 s.
 - Producción aún no refleja el cambio de código `7cccf3d`; sigue sirviendo `/assets/index-D4-5gxc6.js`.
-- El último commit pusheado tras documentación es `228eef6`; publicar `main` incluye el cambio de código `7cccf3d`.
+- Publicar `main` incluye el cambio de código `7cccf3d`, aunque puede haber commits posteriores solo de documentación.
 
 ## Decisiones
 
