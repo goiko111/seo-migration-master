@@ -3,6 +3,25 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+const nonBlockingBuildCss = () => ({
+  name: "winerim-non-blocking-build-css",
+  enforce: "post" as const,
+  transformIndexHtml(html: string) {
+    return html.replace(
+      /<link rel="stylesheet"([^>]*?)href="(\/assets\/[^"]+\.css)"([^>]*)>/g,
+      (_match, before: string, href: string, after: string) => {
+        const attrs = `${before}${after}`;
+        const crossorigin = /\bcrossorigin\b/.test(attrs) ? " crossorigin" : "";
+        return [
+          `<link rel="preload" as="style"${crossorigin} href="${href}" />`,
+          `<link rel="stylesheet"${crossorigin} href="${href}" media="print" onload="this.media='all'" />`,
+          `<noscript><link rel="stylesheet"${crossorigin} href="${href}" /></noscript>`,
+        ].join("");
+      },
+    );
+  },
+});
+
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -11,7 +30,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react(), nonBlockingBuildCss(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

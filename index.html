@@ -26,6 +26,177 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+    <style id="critical-above-fold-css">
+      :root {
+        --background: 140 2% 10%;
+        --foreground: 36 47% 93%;
+        --muted-foreground: 36 15% 60%;
+        --border: 140 2% 20%;
+        --wine: 356 100% 30%;
+        --wine-light: 356 80% 45%;
+        --wine-dark: 356 100% 18%;
+        --primary-foreground: 36 47% 93%;
+        --font-heading: "Playfair Display", serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      img { max-width: 100%; height: auto; }
+      a { color: inherit; text-decoration: inherit; }
+      button { font: inherit; }
+      .fixed { position: fixed; }
+      .absolute { position: absolute; }
+      .relative { position: relative; }
+      .inset-0 { inset: 0; }
+      .top-0 { top: 0; }
+      .left-0 { left: 0; }
+      .right-0 { right: 0; }
+      .bottom-0 { bottom: 0; }
+      .z-10 { z-index: 10; }
+      .z-50 { z-index: 50; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-5 { margin-bottom: 1.25rem; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .mb-8 { margin-bottom: 2rem; }
+      .mb-10 { margin-bottom: 2.5rem; }
+      .hidden { display: none; }
+      .block { display: block; }
+      .flex { display: flex; }
+      .inline-flex { display: inline-flex; }
+      .grid { display: grid; }
+      .shrink-0 { flex-shrink: 0; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .justify-between { justify-content: space-between; }
+      .gap-1 { gap: .25rem; }
+      .gap-1\.5 { gap: .375rem; }
+      .gap-2 { gap: .5rem; }
+      .gap-3 { gap: .75rem; }
+      .gap-12 { gap: 3rem; }
+      .-space-x-1\.5 > :not([hidden]) ~ :not([hidden]) { margin-left: -.375rem; }
+      .min-h-\[90vh\] { min-height: 90vh; }
+      .h-2 { height: .5rem; }
+      .w-2 { width: .5rem; }
+      .h-6 { height: 1.5rem; }
+      .h-7 { height: 1.75rem; }
+      .w-7 { width: 1.75rem; }
+      .h-16 { height: 4rem; }
+      .h-24 { height: 6rem; }
+      .w-full { width: 100%; }
+      .max-w-xl { max-width: 36rem; }
+      .max-w-2xl { max-width: 42rem; }
+      .max-w-7xl { max-width: 80rem; }
+      .overflow-hidden { overflow: hidden; }
+      .rounded { border-radius: .25rem; }
+      .rounded-full { border-radius: 9999px; }
+      .rounded-lg { border-radius: .5rem; }
+      .rounded-2xl { border-radius: 1rem; }
+      .border { border-width: 1px; border-style: solid; }
+      .border-2 { border-width: 2px; border-style: solid; }
+      .border-background { border-color: hsl(var(--background)); }
+      .border-border { border-color: hsl(var(--border)); }
+      .border-wine\/30 { border-color: hsl(var(--wine) / .3); }
+      .bg-transparent { background-color: transparent; }
+      .bg-background { background-color: hsl(var(--background)); }
+      .bg-background\/90 { background-color: hsl(var(--background) / .9); }
+      .bg-wine { background-color: hsl(var(--wine)); }
+      .bg-wine\/5 { background-color: hsl(var(--wine) / .05); }
+      .bg-wine\/80 { background-color: hsl(var(--wine) / .8); }
+      .bg-gradient-wine { background: linear-gradient(135deg, hsl(var(--wine-dark)), hsl(var(--wine))); }
+      .bg-gradient-to-br.from-background.via-background.to-wine-dark\/10 {
+        background-image: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--background)), hsl(var(--wine-dark) / .1));
+      }
+      .bg-gradient-to-t.from-background.to-transparent {
+        background-image: linear-gradient(to top, hsl(var(--background)), transparent);
+      }
+      .px-2 { padding-left: .5rem; padding-right: .5rem; }
+      .px-3 { padding-left: .75rem; padding-right: .75rem; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .px-8 { padding-left: 2rem; padding-right: 2rem; }
+      .py-1\.5 { padding-top: .375rem; padding-bottom: .375rem; }
+      .py-2 { padding-top: .5rem; padding-bottom: .5rem; }
+      .py-2\.5 { padding-top: .625rem; padding-bottom: .625rem; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .pt-28 { padding-top: 7rem; }
+      .pb-16 { padding-bottom: 4rem; }
+      .text-\[9px\] { font-size: 9px; }
+      .text-\[11px\] { font-size: 11px; }
+      .text-xs { font-size: .75rem; line-height: 1rem; }
+      .text-sm { font-size: .875rem; line-height: 1.25rem; }
+      .text-base { font-size: 1rem; line-height: 1.5rem; }
+      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .font-medium { font-weight: 500; }
+      .font-semibold { font-weight: 600; }
+      .font-bold { font-weight: 700; }
+      .font-serif { font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
+      .leading-\[1\.1\] { line-height: 1.1; }
+      .leading-relaxed { line-height: 1.625; }
+      .tracking-wide { letter-spacing: .025em; }
+      .tracking-wider { letter-spacing: .05em; }
+      .tracking-widest { letter-spacing: .1em; }
+      .uppercase { text-transform: uppercase; }
+      .text-center { text-align: center; }
+      .text-white { color: #fff; }
+      .text-foreground { color: hsl(var(--foreground)); }
+      .text-foreground\/50 { color: hsl(var(--foreground) / .5); }
+      .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+      .text-muted-foreground\/50 { color: hsl(var(--muted-foreground) / .5); }
+      .text-muted-foreground\/60 { color: hsl(var(--muted-foreground) / .6); }
+      .text-primary-foreground { color: hsl(var(--primary-foreground)); }
+      .text-wine { color: hsl(var(--wine)); }
+      .text-wine-light { color: hsl(var(--wine-light)); }
+      .drop-shadow-2xl { filter: drop-shadow(0 25px 25px rgb(0 0 0 / .15)); }
+      .transition-all { transition-property: all; transition-timing-function: cubic-bezier(.4,0,.2,1); transition-duration: 150ms; }
+      .transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(.4,0,.2,1); transition-duration: 150ms; }
+      .duration-300 { transition-duration: 300ms; }
+      .animate-fade-in { animation: criticalFadeIn .6s ease-out both; }
+      .animate-fade-in-up { animation: criticalFadeInUp .6s ease-out both; }
+      .animate-pulse { animation: criticalPulse 2s cubic-bezier(.4,0,.6,1) infinite; }
+      .animation-delay-200 { animation-delay: 200ms; }
+      .animation-delay-400 { animation-delay: 400ms; }
+      @keyframes criticalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes criticalFadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes criticalPulse { 50% { opacity: .5; } }
+      @media (min-width: 640px) {
+        .sm\:block { display: block; }
+        .sm\:flex-row { flex-direction: row; }
+        .sm\:h-7 { height: 1.75rem; }
+        .sm\:h-20 { height: 5rem; }
+        .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      }
+      @media (min-width: 768px) {
+        .md\:px-12 { padding-left: 3rem; padding-right: 3rem; }
+        .md\:text-5xl { font-size: 3rem; line-height: 1; }
+        .md\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+      }
+      @media (min-width: 1024px) {
+        .lg\:block { display: block; }
+        .lg\:flex { display: flex; }
+        .lg\:hidden { display: none; }
+        .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .lg\:gap-16 { gap: 4rem; }
+        .lg\:text-\[3\.4rem\] { font-size: 3.4rem; }
+        .lg\:font-heading { font-family: var(--font-heading); }
+      }
+      @media (min-width: 1280px) {
+        .xl\:text-6xl { font-size: 3.75rem; line-height: 1; }
+        .xl\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .xl\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .xl\:gap-2 { gap: .5rem; }
+        .xl\:text-sm { font-size: .875rem; line-height: 1.25rem; }
+      }
+    </style>
+
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Winerim – Carta Inteligente de Vinos para Restaurantes">
     <meta property="og:description" content="Winerim es la carta inteligente de vinos para restaurantes. Recomendaciones con IA, maridajes automáticos, analítica de ventas y gestión de bodega.">
