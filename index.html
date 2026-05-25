@@ -240,13 +240,33 @@
       gtag('set', 'url_passthrough', true);
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NDNQP955');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager — delayed until after load/idle to protect LCP -->
+    <script>
+      (function(w,d,s,l,i){
+        w[l] = w[l] || [];
+        w.__winerimGtmLoaded = false;
+        w.__winerimLoadGtm = function() {
+          if (w.__winerimGtmLoaded) return;
+          w.__winerimGtmLoaded = true;
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        };
+        var scheduleGtm = function() {
+          if ('requestIdleCallback' in w) {
+            w.requestIdleCallback(w.__winerimLoadGtm, { timeout: 3000 });
+          } else {
+            w.setTimeout(w.__winerimLoadGtm, 1800);
+          }
+        };
+        if (d.readyState === 'complete') scheduleGtm();
+        else w.addEventListener('load', scheduleGtm, { once: true });
+      })(window,document,'script','dataLayer','GTM-NDNQP955');
+    </script>
     <!-- End Google Tag Manager -->
 
     <script id="seo-jsonld" type="application/ld+json">
