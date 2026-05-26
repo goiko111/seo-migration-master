@@ -6,8 +6,9 @@
 - El proyecto es una aplicación Vite + React + TypeScript.
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
-- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión local cubre 30 uvas prioritarias. La publicación de esa tanda requiere Lovable y despliegue explícito de `prerender`.
-- La expansión editorial local de biblioteca del vino cubre ya 30 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión cubre 30 uvas prioritarias en el repo y en rutas representativas ya publicadas.
+- La expansión editorial de biblioteca del vino cubre 30 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- La cobertura completa de la expansión en sitemap requiere publicar desde Lovable el commit `9f99fa7` y desplegar explícitamente la Edge Function `sitemap`.
 - La biblioteca del vino incluye un grafo estratégico publicado que conecta uvas, regiones, estilos y maridajes prioritarios.
 - La profundidad de regiones, estilos y maridajes prioritarios ya fue publicada y validada en producción.
 - Los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública ya redirigen en producción a las rutas canónicas de entidad.

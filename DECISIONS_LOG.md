@@ -1574,3 +1574,35 @@
 - Desplegar `sitemap` y `prerender` desde Lovable.
 - Revalidar producción como usuario real y Googlebot.
 - Monitorizar Search Console tras recrawl.
+
+### Producción validada y sitemap de expansión completado
+
+#### Hechos
+
+- Producción ya sirve la capa de expansión en rutas representativas como Googlebot:
+  - Fino/Manzanilla en alemán;
+  - Ostras en portugués;
+  - Sancerre en francés.
+- Producción también se validó como usuario real para esas tres rutas: sin 404, canonical correcto y sin errores de consola.
+- El sitemap público ya no contiene shortcuts legacy españoles como `<loc>`.
+- Se detectó que algunas entidades expandidas no estaban aún en `WINE_LIBRARY_DYNAMIC_ROUTES`.
+- Se añadió la cobertura faltante de sitemap para regiones y maridajes/platos concretos de la expansión.
+- Commit y push completados: `9f99fa7 fix: include expanded wine entities in sitemap`.
+- Validaciones locales del ajuste final: tests dirigidos, full test, build, Deno check y `git diff --check`.
+
+#### Decisiones
+
+- Cerrar como validada la parte de contenido/prerender ya publicada.
+- Dejar el sitemap como pendiente de publicación final hasta que Lovable despliegue `9f99fa7`.
+- No tocar Worker porque la ruta `bot-prerender` y los redirects legacy siguen funcionando.
+
+#### Hipótesis
+
+- La última mejora de sitemap aumentará descubrimiento de platos concretos y regiones nuevas una vez desplegada.
+- Search Console reflejará primero la limpieza de shortcuts y después la ampliación de rutas cuando recrawlee el sitemap.
+
+#### Tareas pendientes
+
+- Publicar `9f99fa7` desde Lovable.
+- Desplegar Edge Function `sitemap`.
+- Revalidar sitemap público y reenviarlo en Search Console.

@@ -1467,19 +1467,19 @@
 
 1. Commit y push:
    - Hecho: expansión editorial.
-   - Pendiente: actualización de documentación de cierre.
+   - Hecho: actualización de documentación de cierre previa.
+   - Hecho: ajuste final de sitemap subido con `9f99fa7`.
 2. Publicar desde Lovable:
-   - frontend;
-   - Edge Function `sitemap`;
-   - Edge Function `prerender`.
+   - Pendiente: commit `9f99fa7`;
+   - Pendiente: Edge Function `sitemap`.
 3. Validar producción como usuario real:
-   - `/de/weinbibliothek/weinstile/fino-manzanilla`;
-   - `/pt/biblioteca-vinho/harmonizacoes/ostras`;
-   - `/fr/bibliotheque-vin/regions/francia/sancerre`.
+   - Hecho: `/de/weinbibliothek/weinstile/fino-manzanilla`;
+   - Hecho: `/pt/biblioteca-vinho/harmonizacoes/ostras`;
+   - Hecho: `/fr/bibliotheque-vin/regions/francia/sancerre`.
 4. Validar producción como Googlebot:
-   - las tres rutas anteriores;
-   - `/de/weinbibliothek/rebsorten/mencia`;
-   - `/sitemap.xml` sin shortcuts legacy españoles.
+   - Hecho: las tres rutas anteriores.
+   - Hecho: `/sitemap.xml` sin shortcuts legacy españoles.
+   - Pendiente tras publicar `9f99fa7`: `/sitemap.xml` con `/biblioteca-vino/maridajes/ostras` y `/biblioteca-vino/regiones/francia/sancerre`.
 5. Search Console:
    - monitorizar shortcuts legacy como redirigidas/canónicas alternativas;
    - revisar recrawl de rutas enriquecidas;

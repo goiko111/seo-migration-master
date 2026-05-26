@@ -2141,3 +2141,58 @@
   - `/sitemap.xml` sin shortcuts legacy españoles;
   - una uva nueva, por ejemplo `/de/weinbibliothek/rebsorten/mencia`.
 - Monitorizar Search Console para legacy shortcuts y nuevas entidades enriquecidas.
+
+## Actualización 2026-05-26: producción validada y ajuste final de sitemap
+
+## Hechos
+
+- El usuario indicó que la publicación ya estaba disponible y se revalidó producción.
+- Producción como Googlebot responde HTTP 200, `x-prerendered: true` y `x-worker-branch: bot-prerender` en:
+  - `/de/weinbibliothek/weinstile/fino-manzanilla`;
+  - `/pt/biblioteca-vinho/harmonizacoes/ostras`;
+  - `/fr/bibliotheque-vin/regions/francia/sancerre`.
+- El HTML prerenderizado productivo contiene la nueva capa compacta de expansión:
+  - Fino/Manzanilla en alemán con rol en carta y temperatura `7-9 C`.
+  - Ostras en portugués con Champagne/Cava/Muscadet y papel en carta.
+  - Sancerre en francés con temperatura `8-10 C` y maridajes de mar.
+- Producción como usuario real validada en navegador:
+  - las tres rutas cargan sin 404;
+  - canonical correcto;
+  - sin errores de consola;
+  - sin `¿` detectado.
+- `sitemap.xml` público ya no contiene los 16 shortcuts legacy españoles como `<loc>`.
+- Se detectó una nueva laguna local antes del cierre:
+  - algunas entidades de expansión prerenderizaban pero no estaban en `WINE_LIBRARY_DYNAMIC_ROUTES`.
+  - Faltaban en sitemap rutas como `ostras`, `solomillo-de-ternera`, `mendoza`, `mosel`, `willamette-valley`, `sancerre` y `barolo`.
+- Se corrigió localmente `supabase/functions/sitemap/index.ts` para incluir todas las entidades expandidas faltantes.
+- Se actualizó `src/test/wine-library-seo-surface.test.ts` para cubrir esa presencia en sitemap.
+- Verificaciones del ajuste final:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 8 tests correctos.
+  - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts`: correcto.
+  - `npm run test -- --run`: 7 archivos, 35 tests correctos.
+  - `npm run build`: correcto, con avisos no bloqueantes de Browserslist y chunks grandes.
+  - `git diff --check`: correcto.
+- Commit y push completados:
+  - `9f99fa7 fix: include expanded wine entities in sitemap`.
+- La producción aún necesita publicar el commit `9f99fa7` desde Lovable y desplegar explícitamente la Edge Function `sitemap` para que esas rutas adicionales entren en el sitemap público.
+
+## Decisiones
+
+- Considerar la capa de contenido/prerender de la expansión como publicada y validada en rutas representativas.
+- No considerar cerrado el sitemap de la expansión hasta desplegar `9f99fa7` desde Lovable.
+- No tocar Cloudflare Worker porque los redirects y `bot-prerender` funcionan.
+
+## Hipótesis
+
+- Tras desplegar `sitemap`, Google debería descubrir mejor los maridajes/platos concretos y regiones nuevas de la expansión.
+- El mayor riesgo residual no es contenido, sino que Lovable no haya desplegado aún la última Edge Function `sitemap`.
+
+## Tareas pendientes
+
+- Publicar desde Lovable el commit `9f99fa7`.
+- Desplegar explícitamente Edge Function `sitemap`.
+- Revalidar producción:
+  - `https://winerim.wine/sitemap.xml` contiene `/biblioteca-vino/maridajes/ostras`;
+  - contiene `/biblioteca-vino/regiones/francia/sancerre`;
+  - mantiene `0` shortcuts legacy españoles como `<loc>`.
+- Después, reenviar o revalidar sitemap en Search Console.
