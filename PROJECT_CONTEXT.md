@@ -5,10 +5,10 @@
 - Repositorio de trabajo actual: `/Users/GOIKO/seo-migration-master`.
 - El proyecto es una aplicación Vite + React + TypeScript.
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
-- La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones y estilos prioritarios, además de la infraestructura multilingüe.
+- La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la segunda tanda publicada cubre 20 uvas prioritarias.
 - La biblioteca del vino incluye un grafo estratégico publicado que conecta uvas, regiones, estilos y maridajes prioritarios.
-- La profundidad de regiones prioritarias ya fue publicada y validada; la primera tanda profunda de estilos prioritarios está implementada en local y pendiente de publicación/validación productiva.
+- La profundidad de regiones prioritarias ya fue publicada y validada; las primeras tandas profundas de estilos y maridajes prioritarios están implementadas en local y pendientes de publicación/validación productiva.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
@@ -42,7 +42,7 @@
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
-- Publicar y validar en producción la primera tanda profunda de estilos prioritarios antes de abrir el bloque de maridajes prioritarios.
+- Publicar y validar en producción las tandas profundas pendientes de estilos y maridajes prioritarios antes de tratar la biblioteca como cerrada en producción.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
 - Continuar escalando biblioteca del vino al máximo nivel y mantener rendimiento residual como línea secundaria.

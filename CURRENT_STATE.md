@@ -1830,3 +1830,80 @@
   - `/de/weinbibliothek/weinstile/espumoso`;
   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
 - Tras validar estilos, continuar con maridajes prioritarios y schema semántico por entidad.
+
+## Actualización 2026-05-26: maridajes prioritarios y schema semántico local
+
+## Hechos
+
+- Se implementó localmente la primera tanda profunda de maridajes prioritarios de biblioteca del vino.
+- Commit creado y pusheado a `origin/main`:
+  - `fe4d10b feat: deepen priority wine pairings`.
+- Maridajes incluidos:
+  - `carnes-rojas`;
+  - `lubina-dorada` como nodo de pescado blanco;
+  - `pescados-y-mariscos` como nodo de marisco;
+  - `pasta-arroces-y-legumbres` como nodo de arroces;
+  - `cocina-asiatica-y-fusion`;
+  - `quesos`.
+- Nueva capa creada: `src/data/wineLibraryPairingEditorial.ts`.
+- La capa de maridajes incluye momento de servicio, vino por copa, vinos base, rol del maridaje, guion de sala, palanca comercial, error a evitar, ruta de upsell, platos clave y FAQs.
+- El contenido está localizado para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `src/data/pairingsLibraryI18n.ts` añade fallbacks profundos para campos visibles de maridajes en idiomas internacionales:
+  - principios;
+  - notas de platos;
+  - errores comunes;
+  - alternativas;
+  - uso en carta;
+  - lenguaje de sala;
+  - opciones seguras y diferenciales;
+  - conceptos;
+  - FAQs.
+- `src/data/pairingsLibraryI18n.ts` traduce nombres prioritarios como `lubina-dorada` a intención real de pescado blanco en `en/fr/it/de/pt`.
+- `src/data/pairingsLibraryI18n.ts` localiza términos narrativos de estilos para evitar fugas como `Blanco aromático` en rutas alemanas o portuguesas.
+- `src/pages/PairingDetail.tsx` integra la sección editorial de maridajes, etiquetas localizadas, FAQs combinadas, CTA localizado y schema `DefinedTerm`.
+- `src/pages/GrapeDetail.tsx`, `src/pages/RegionDetail.tsx` y `src/pages/StyleDetail.tsx` ahora emiten JSON-LD `@graph` con `Article` + `DefinedTerm`, alineando la semántica de todas las entidades principales de la biblioteca.
+- `supabase/functions/prerender/index.ts` incluye perfiles equivalentes para los 6 maridajes prioritarios, manteniendo paridad esencial para Googlebot y crawlers de IA.
+- Verificaciones locales completadas:
+  - `npx tsc --noEmit --pretty false`: correcto.
+  - `npm run test -- --run`: 7 archivos, 33 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: correcto.
+  - `git diff --check`: correcto.
+  - `npm run build`: correcto.
+  - Browser QA local en `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`.
+  - Browser QA local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- QA local verificó que las rutas alemana y portuguesa de maridajes muestran `DefinedTerm`, un solo `FAQPage`, no muestran `¿` y no usan términos narrativos españoles como `Blanco aromático`.
+- Producción aún no refleja estilos ni maridajes hasta publicación en Lovable y despliegue explícito de la Edge Function `prerender`.
+
+## Decisiones
+
+- Avanzar localmente con maridajes aunque la publicación de estilos siga bloqueada por Lovable/login, porque el usuario pidió continuar hasta cerrar la biblioteca.
+- No marcar como cerrado en producción ningún bloque que dependa de Lovable hasta validar frontend y `prerender`.
+- Tratar `lubina-dorada` como nodo de intención `pescado blanco`, porque así conecta mejor con la intención SEO documentada.
+- Tratar `pescados-y-mariscos` como nodo de intención `marisco`, manteniendo el slug existente para no crear nuevas URLs.
+- Añadir `DefinedTerm` en las cuatro familias de detalle: uvas, regiones, estilos y maridajes.
+- Mantener `FAQPage` único por página de detalle mediante `FAQSection`.
+- No tocar Cloudflare Worker para este bloque salvo que producción demuestre `bot-fallback` o HTML antiguo tras actualizar Lovable.
+
+## Hipótesis
+
+- La biblioteca queda localmente mucho más cerca de "máximo nivel" porque ya cubre uvas, regiones, estilos, maridajes, enlaces internos, FAQs y schema semántico por entidad.
+- El salto SEO/LLM real dependerá de publicar frontend y `prerender`, y después de recrawl.
+- Los siguientes incrementos deberían centrarse en producción, QA, legacy shortcuts y ampliación masiva de más entidades, no en reabrir la arquitectura base.
+
+## Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente la Edge Function `prerender` desde Lovable.
+- Revalidar producción como Googlebot:
+  - `/biblioteca-vino/estilos/tinto-crianza`;
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+  - `/biblioteca-vino/maridajes/carnes-rojas`;
+  - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- Revalidar producción como usuario real:
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+  - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- Tras validar producción, auditar legacy shortcuts de biblioteca y decidir redirects/metadatos únicos.

@@ -1422,3 +1422,53 @@
 - Desplegar explícitamente `prerender` desde Lovable.
 - Validar producción como usuario real y Googlebot.
 - Continuar con maridajes prioritarios y schema semántico.
+
+### Primera tanda profunda de maridajes prioritarios y schema semántico
+
+#### Hechos
+
+- Se implementó localmente la primera tanda profunda de maridajes prioritarios.
+- Commit creado y pusheado a `origin/main`: `fe4d10b feat: deepen priority wine pairings`.
+- Se creó `src/data/wineLibraryPairingEditorial.ts` con 6 nodos:
+  - carnes rojas;
+  - pescado blanco mediante `lubina-dorada`;
+  - marisco mediante `pescados-y-mariscos`;
+  - arroces mediante `pasta-arroces-y-legumbres`;
+  - cocina asiática y fusión;
+  - quesos.
+- Cada perfil de maridaje incluye momento, copa, vinos base, rol, guion de sala, palanca comercial, error a evitar, upsell, platos clave y FAQs.
+- Los perfiles están localizados para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `PairingDetail` integra el bloque editorial, etiquetas localizadas, CTA localizado, FAQs combinadas y schema `DefinedTerm`.
+- `pairingsLibraryI18n` añade fallbacks profundos para narrativa internacional de maridajes y localiza términos de estilos dentro de textos.
+- `prerender` incorpora perfiles equivalentes para los 6 maridajes prioritarios.
+- `GrapeDetail`, `RegionDetail`, `StyleDetail` y `PairingDetail` quedan alineados con JSON-LD `@graph` de `Article` + `DefinedTerm`.
+- Verificaciones locales completadas:
+  - `npx tsc --noEmit --pretty false`.
+  - `npm run test -- --run`: 33 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - Browser QA local en maridaje alemán de cocina asiática.
+  - Browser QA local en maridaje portugués de pescado blanco.
+
+#### Decisiones
+
+- Avanzar localmente con maridajes pese al bloqueo de Lovable, dejando claro que producción no está cerrada.
+- Usar los slugs existentes para intención SEO: `lubina-dorada` como pescado blanco y `pescados-y-mariscos` como marisco.
+- No crear nuevas URLs en esta tanda para evitar deuda de sitemap/canonical.
+- Añadir `DefinedTerm` a todas las familias de detalle de biblioteca como schema semántico base.
+- Mantener el despliegue de Edge Function `prerender` como requisito para considerar cerrado el bloque frente a bots.
+- No desplegar Cloudflare Worker salvo que producción muestre fallo de proxy.
+
+#### Hipótesis
+
+- Maridajes completan el triángulo editorial principal de la biblioteca: entidad vinícola, estilo y uso gastronómico.
+- `DefinedTerm` ayudará a crawlers y LLMs a entender las fichas como conceptos definidos dentro de la biblioteca Winerim.
+- La siguiente mejora de impacto real será publicar, validar producción y resolver legacy shortcuts, más que seguir moviendo arquitectura local.
+
+#### Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente `prerender` desde Lovable.
+- Validar producción como usuario real y Googlebot.
+- Resolver legacy shortcuts de biblioteca y decidir siguiente expansión masiva de entidades.

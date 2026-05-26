@@ -1335,3 +1335,71 @@
    - evaluar `DefinedTerm`/`ItemList`;
    - mantener `FAQPage` único;
    - validar usuario real y Googlebot en producción.
+
+## Actualización 2026-05-26: maridajes/schema implementados y pusheados
+
+## Hechos
+
+- Hecho local: primera tanda profunda de maridajes prioritarios implementada.
+- Hecho: commit y push completados con `fe4d10b feat: deepen priority wine pairings`.
+- Hecho local: nueva capa `src/data/wineLibraryPairingEditorial.ts` en seis idiomas.
+- Maridajes cubiertos:
+  - `carnes-rojas`;
+  - `lubina-dorada` como pescado blanco;
+  - `pescados-y-mariscos` como marisco;
+  - `pasta-arroces-y-legumbres` como arroces;
+  - `cocina-asiatica-y-fusion`;
+  - `quesos`.
+- Hecho local: `PairingDetail` renderiza inteligencia de maridaje, etiquetas localizadas, FAQs combinadas y CTA localizado.
+- Hecho local: `pairingsLibraryI18n` genera narrativa localizada profunda para maridajes internacionales y evita términos de estilo españoles en texto narrativo.
+- Hecho local: `prerender` tiene perfiles prioritarios equivalentes para los 6 maridajes.
+- Hecho local: `GrapeDetail`, `RegionDetail`, `StyleDetail` y `PairingDetail` emiten `Article` + `DefinedTerm`.
+- Verificaciones locales completadas:
+  - `npx tsc --noEmit --pretty false`.
+  - `npm run test -- --run`: 33 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - Browser QA local en `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`.
+  - Browser QA local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- Hecho: producción sigue pendiente porque Lovable estaba en login y no hay `SUPABASE_ACCESS_TOKEN`.
+
+## Decisiones
+
+- Retomar por commit/push y después Lovable antes de abrir nuevas ampliaciones editoriales.
+- Publicar estilos y maridajes juntos en el próximo `Update` de Lovable.
+- Pedir despliegue explícito de `prerender` porque ambos bloques modifican HTML para bots.
+- No tocar Cloudflare Worker salvo que producción sirva `bot-fallback` o HTML antiguo tras actualizar Lovable.
+
+## Hipótesis
+
+- Tras publicar frontend y `prerender`, la biblioteca quedará cerrada en su bloque principal: uvas, regiones, estilos, maridajes, grafo interno, FAQs y schema semántico.
+- El siguiente trabajo de máximo nivel debería ser:
+  - validar producción;
+  - resolver legacy shortcuts;
+  - ampliar más entidades por demanda SEO;
+  - monitorizar Search Console.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar frontend desde Lovable.
+2. Pedir a Lovable: desplegar Edge Function `prerender`.
+3. Validar producción como Googlebot:
+   - `/biblioteca-vino/estilos/tinto-crianza`;
+   - `/de/weinbibliothek/weinstile/espumoso`;
+   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+   - `/biblioteca-vino/maridajes/carnes-rojas`;
+   - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+4. Validar producción como usuario real:
+   - `/de/weinbibliothek/weinstile/espumoso`;
+   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+   - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+5. Resolver los 96 legacy shortcuts de biblioteca:
+   - decidir redirects canónicos o metadatos únicos;
+   - evitar canibalización con rutas nuevas.
+6. Siguiente expansión máxima:
+   - ampliar más regiones, estilos secundarios y platos concretos;
+   - reforzar enlaces internos desde hubs;
+   - monitorizar Search Console tras recrawl.
