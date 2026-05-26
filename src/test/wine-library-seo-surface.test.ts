@@ -8,8 +8,12 @@ describe("wine library SEO surface", () => {
     expect(sitemap).toContain("const WINE_LIBRARY_DYNAMIC_ROUTES");
     expect(sitemap).toContain("/biblioteca-vino/uvas/tempranillo");
     expect(sitemap).toContain("/biblioteca-vino/regiones/espana/rioja");
+    expect(sitemap).toContain("/biblioteca-vino/regiones/francia/sancerre");
+    expect(sitemap).toContain("/biblioteca-vino/regiones/argentina/mendoza");
     expect(sitemap).toContain("/biblioteca-vino/estilos/tinto-crianza");
     expect(sitemap).toContain("/biblioteca-vino/maridajes/carnes-rojas");
+    expect(sitemap).toContain("/biblioteca-vino/maridajes/ostras");
+    expect(sitemap).toContain("/biblioteca-vino/maridajes/solomillo-de-ternera");
     expect(sitemap).toContain("function localizedPath");
     expect(sitemap).toContain("WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS");
     expect(sitemap).toContain("if (WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS.has(route.esPath)) continue");
