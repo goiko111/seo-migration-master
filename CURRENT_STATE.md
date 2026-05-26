@@ -1772,6 +1772,8 @@
 ## Hechos
 
 - Se implementó la primera tanda profunda de estilos prioritarios de biblioteca del vino.
+- Commit creado y pusheado a `origin/main`:
+  - `7198d3a feat: deepen priority wine styles`.
 - Estilos incluidos:
   - `tinto-crianza`;
   - `tinto-reserva`;

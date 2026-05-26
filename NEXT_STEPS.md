@@ -1276,6 +1276,7 @@
 ## Hechos
 
 - Hecho local: primera tanda profunda de estilos prioritarios implementada.
+- Hecho: commit y push del bloque de estilos completados con `7198d3a feat: deepen priority wine styles`.
 - Estilos cubiertos:
   - `tinto-crianza`;
   - `tinto-reserva`;

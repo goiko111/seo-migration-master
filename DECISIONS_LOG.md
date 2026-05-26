@@ -1376,6 +1376,7 @@
 #### Hechos
 
 - Se inició la ampliación profunda de estilos tras publicar y validar la tanda regional.
+- Commit `7198d3a feat: deepen priority wine styles` creado y pusheado a `origin/main`.
 - Se creó `src/data/wineLibraryStyleEditorial.ts` con 5 estilos prioritarios:
   - tinto crianza;
   - tinto reserva;
