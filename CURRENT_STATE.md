@@ -684,6 +684,8 @@
   - `npm run test`: 5 archivos, 15 tests.
   - `npm run build`.
   - `git diff --check`.
+- Commit y push completados:
+  - `78135cd feat: expand wine library editorial coverage`.
   - Preview local `http://127.0.0.1:4177/`.
   - QA local: H1 de home visible, chunks bajo el fold cargan después del delay, dropdown desktop funciona, menú móvil funciona y submenu móvil de Producto funciona.
 - Avisos no bloqueantes durante build:
@@ -2014,3 +2016,120 @@
   - estilos secundarios;
   - platos/maridajes concretos;
   - más uvas internacionales.
+
+## Actualización 2026-05-26: expansión editorial masiva local de biblioteca
+
+## Hechos
+
+- Se implementó localmente una expansión editorial masiva de biblioteca del vino sobre rutas canónicas ya existentes.
+- Nueva capa creada: `src/data/wineLibraryEditorialExpansion.ts`.
+- Cobertura editorial local tras la expansión:
+  - 30 uvas prioritarias.
+  - 22 regiones prioritarias.
+  - 15 estilos prioritarios.
+  - 18 maridajes/platos prioritarios.
+- Nuevas uvas añadidas a la capa prioritaria:
+  - `mencia`;
+  - `cabernet-franc`;
+  - `gamay`;
+  - `gewurztraminer`;
+  - `viognier`;
+  - `gruner-veltliner`;
+  - `pinot-grigio`;
+  - `barbera`;
+  - `primitivo`;
+  - `aglianico`.
+- Nuevas regiones ampliadas mediante perfil editorial localizado:
+  - `toscana`;
+  - `napa-valley`;
+  - `jerez`;
+  - `vallee-du-rhone`;
+  - `piemonte`;
+  - `barossa-valley`;
+  - `marlborough`;
+  - `mendoza`;
+  - `mosel`;
+  - `willamette-valley`;
+  - `sancerre`;
+  - `barolo`.
+- Nuevos estilos ampliados mediante perfil editorial localizado:
+  - `tinto-joven`;
+  - `tinto-ligero`;
+  - `tinto-cuerpo`;
+  - `blanco-joven`;
+  - `blanco-mineral`;
+  - `champagne`;
+  - `cava`;
+  - `fino-manzanilla`;
+  - `pedro-ximenez`;
+  - `orange-maceracion-corta`.
+- Nuevos maridajes/platos ampliados mediante perfil editorial localizado:
+  - `aves-y-caza`;
+  - `verduras-y-cocina-vegetariana`;
+  - `postres-y-chocolate`;
+  - `tapas-y-aperitivos`;
+  - `solomillo-de-ternera`;
+  - `cordero-asado`;
+  - `pato-confitado`;
+  - `atun-rojo`;
+  - `pulpo-gallego`;
+  - `risotto-setas`;
+  - `ostras`;
+  - `chocolate-negro`.
+- La expansión se integró en:
+  - `src/data/wineLibraryEditorial.ts`;
+  - `src/data/wineLibraryRegionEditorial.ts`;
+  - `src/data/wineLibraryStyleEditorial.ts`;
+  - `src/data/wineLibraryPairingEditorial.ts`;
+  - `supabase/functions/prerender/index.ts`.
+- El `prerender` incluye perfiles compactos equivalentes para la nueva tanda, manteniendo paridad esencial para Googlebot y crawlers de IA.
+- Se corrigió una contradicción técnica detectada durante esta sesión:
+  - El Worker ya redirige 96 shortcuts legacy de biblioteca.
+  - El sitemap seguía listando los 16 shortcuts legacy españoles como rutas enviadas.
+  - `supabase/functions/sitemap/index.ts` ahora excluye esos shortcuts legacy del sitemap para no enviar URLs 301.
+- QA local en navegador:
+  - `/de/weinbibliothek/weinstile/fino-manzanilla` carga sin 404 y con canonical alemán.
+  - `/pt/biblioteca-vinho/harmonizacoes/ostras` carga sin 404 y con canonical portugués.
+  - `/fr/bibliotheque-vin/regions/francia/sancerre` carga sin 404 y con canonical francés.
+  - No se detectaron errores de consola en las rutas probadas.
+- Verificaciones locales completadas:
+  - `npx tsc --noEmit --pretty false`.
+  - `npm run test -- --run src/test/wine-library-editorial.test.ts src/test/wine-library-seo-surface.test.ts`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `npm run test -- --run`: 7 archivos, 35 tests correctos.
+  - `npm run build`.
+  - `git diff --check`.
+- Avisos no bloqueantes durante build:
+  - Browserslist/caniuse-lite desactualizado.
+  - Chunks grandes por encima de 200 kB.
+
+## Decisiones
+
+- Ampliar la biblioteca sin crear nuevas rutas: usar rutas canónicas existentes y añadir profundidad editorial.
+- Usar una capa de expansión localizada reutilizable para cubrir más entidades con consistencia en los seis idiomas.
+- Mantener los perfiles manuales profundos como capa superior y usar la expansión arquetípica como segunda ola editorial.
+- El sitemap no debe enviar shortcuts legacy que ya son 301; deben quedar fuera y consolidar señal hacia las rutas canónicas.
+- No tocar Cloudflare Worker en esta tanda porque no cambia la lógica de redirects ni del proxy.
+
+## Hipótesis
+
+- Esta tanda debería aumentar la cobertura informacional y la utilidad comercial de la biblioteca en consultas long-tail de regiones, estilos, platos y uvas internacionales.
+- La mejora SEO/LLM real dependerá de publicar el frontend en Lovable y desplegar explícitamente las Edge Functions `sitemap` y `prerender`.
+- Quitar URLs 301 del sitemap debería reducir señales contradictorias para Google tras el siguiente recrawl.
+
+## Tareas pendientes
+
+- Hecho: commit y push de la expansión editorial masiva.
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente desde Lovable:
+  - Edge Function `sitemap`;
+  - Edge Function `prerender`.
+- Revalidar producción como usuario real:
+  - `/de/weinbibliothek/weinstile/fino-manzanilla`;
+  - `/pt/biblioteca-vinho/harmonizacoes/ostras`;
+  - `/fr/bibliotheque-vin/regions/francia/sancerre`.
+- Revalidar producción como Googlebot:
+  - las mismas tres rutas anteriores;
+  - `/sitemap.xml` sin shortcuts legacy españoles;
+  - una uva nueva, por ejemplo `/de/weinbibliothek/rebsorten/mencia`.
+- Monitorizar Search Console para legacy shortcuts y nuevas entidades enriquecidas.

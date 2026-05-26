@@ -1533,3 +1533,42 @@
 - Monitorizar Search Console para confirmar consolidación de legacy shortcuts.
 - Publicar bundle React desde Lovable en el siguiente ciclo general.
 - Pasar a expansión editorial masiva y enlazado interno de biblioteca.
+
+### Expansión editorial masiva local de biblioteca
+
+#### Hechos
+
+- Se implementó una segunda ola editorial local para ampliar biblioteca del vino sin crear nuevas rutas.
+- Se añadió `src/data/wineLibraryEditorialExpansion.ts` como capa reutilizable de perfiles localizados.
+- La cobertura local queda en:
+  - 30 uvas prioritarias;
+  - 22 regiones prioritarias;
+  - 15 estilos prioritarios;
+  - 18 maridajes/platos prioritarios.
+- La nueva ola añade 10 uvas internacionales, 12 regiones, 10 estilos y 12 maridajes/platos concretos.
+- `prerender` se amplió con perfiles compactos equivalentes para bots.
+- Se corrigió el sitemap para excluir los 16 shortcuts legacy españoles que ya redirigen por Worker.
+- Verificaciones locales completadas: TypeScript, tests dirigidos, full test, build, Deno check, `git diff --check` y QA local de rutas `de`, `pt` y `fr`.
+- Commit y push completados: `78135cd feat: expand wine library editorial coverage`.
+
+#### Decisiones
+
+- Usar perfiles arquetípicos localizados como segunda ola editorial cuando no exista perfil manual profundo.
+- Mantener prioridad editorial manual para entidades principales y usar la nueva capa como expansión consistente.
+- No crear URLs nuevas en esta tanda; la mejora debe enriquecer rutas canónicas existentes.
+- Excluir del sitemap cualquier shortcut legacy que ya sea 301, empezando por los 16 shortcuts españoles fuente.
+- Mantener Cloudflare Worker sin cambios en esta tanda.
+
+#### Hipótesis
+
+- Esta expansión aumenta cobertura semántica y utilidad práctica sin aumentar deuda de routing.
+- Los crawlers de IA y Googlebot se beneficiarán solo después de publicar Lovable y desplegar `sitemap`/`prerender`.
+- La limpieza del sitemap ayuda a consolidar señales de redirects legacy.
+
+#### Tareas pendientes
+
+- Hecho: commit y push de la expansión.
+- Publicar frontend desde Lovable.
+- Desplegar `sitemap` y `prerender` desde Lovable.
+- Revalidar producción como usuario real y Googlebot.
+- Monitorizar Search Console tras recrawl.

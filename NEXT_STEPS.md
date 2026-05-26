@@ -1430,3 +1430,54 @@
    - estilos: joven, roble, blanco aromatico, dulce, generoso, naranja.
 3. Reforzar enlaces internos desde hubs hacia entidades enriquecidas.
 4. Publicar bundle React desde Lovable en el siguiente ciclo general.
+
+## Actualización 2026-05-26: expansión masiva local lista para publicar
+
+## Hechos
+
+- Hecho local: expansión editorial masiva implementada.
+- Hecho local: cobertura de biblioteca ampliada a 30 uvas, 22 regiones, 15 estilos y 18 maridajes/platos prioritarios.
+- Hecho local: nueva capa `src/data/wineLibraryEditorialExpansion.ts`.
+- Hecho local: `prerender` tiene perfiles compactos equivalentes para la nueva tanda.
+- Hecho local: `sitemap` deja de enviar los shortcuts legacy españoles que ya redirigen a rutas canónicas.
+- Hecho local: QA navegador correcto en:
+  - `/de/weinbibliothek/weinstile/fino-manzanilla`;
+  - `/pt/biblioteca-vinho/harmonizacoes/ostras`;
+  - `/fr/bibliotheque-vin/regions/francia/sancerre`.
+- Hecho local: TypeScript, tests, build, Deno check y `git diff --check` correctos.
+- Hecho: commit y push de código completados con `78135cd feat: expand wine library editorial coverage`.
+
+## Decisiones
+
+- Siguiente paso operativo: commit/push y publicación Lovable.
+- No tocar Cloudflare Worker para esta tanda.
+- Desplegar explícitamente `sitemap` y `prerender` porque ambos han cambiado.
+- No marcar esta expansión como cerrada en producción hasta validar usuario real y Googlebot.
+
+## Hipótesis
+
+- Lovable necesitará frontend publish y deploy explícito de Edge Functions.
+- Si Lovable publica correctamente, la producción debería reflejar la expansión sin cambios de Worker.
+- Search Console tardará en reflejar la consolidación de shortcuts y la nueva profundidad editorial.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push:
+   - Hecho: expansión editorial.
+   - Pendiente: actualización de documentación de cierre.
+2. Publicar desde Lovable:
+   - frontend;
+   - Edge Function `sitemap`;
+   - Edge Function `prerender`.
+3. Validar producción como usuario real:
+   - `/de/weinbibliothek/weinstile/fino-manzanilla`;
+   - `/pt/biblioteca-vinho/harmonizacoes/ostras`;
+   - `/fr/bibliotheque-vin/regions/francia/sancerre`.
+4. Validar producción como Googlebot:
+   - las tres rutas anteriores;
+   - `/de/weinbibliothek/rebsorten/mencia`;
+   - `/sitemap.xml` sin shortcuts legacy españoles.
+5. Search Console:
+   - monitorizar shortcuts legacy como redirigidas/canónicas alternativas;
+   - revisar recrawl de rutas enriquecidas;
+   - preparar siguiente ola con datos reales de impresiones y cobertura.
