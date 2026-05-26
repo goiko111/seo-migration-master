@@ -1873,6 +1873,7 @@
   - Browser QA local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
 - QA local verificó que las rutas alemana y portuguesa de maridajes muestran `DefinedTerm`, un solo `FAQPage`, no muestran `¿` y no usan términos narrativos españoles como `Blanco aromático`.
 - Producción aún no refleja estilos ni maridajes hasta publicación en Lovable y despliegue explícito de la Edge Function `prerender`.
+- Se reintentó abrir Lovable tras el push de `fe4d10b`, pero `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` redirige a login en el navegador disponible.
 
 ## Decisiones
 
