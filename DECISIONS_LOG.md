@@ -1336,3 +1336,37 @@
 - Desplegar explícitamente `prerender` desde Lovable.
 - Validar producción como usuario real y Googlebot.
 - Continuar con estilos y maridajes prioritarios.
+
+### Primera tanda profunda de regiones publicada
+
+#### Hechos
+
+- Commit `6f6dcd8 feat: deepen priority wine regions` creado y pusheado a `origin/main`.
+- Lovable publicó el frontend y quedó `Up to date`.
+- Lovable desplegó explícitamente la Edge Function `prerender`.
+- Producción validada como Googlebot en:
+  - `/biblioteca-vino/regiones/espana/rioja`;
+  - `/de/weinbibliothek/regionen/francia/champagne`;
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/en/wine-library/regions/espana/rioja`.
+- Las cuatro rutas respondieron con `x-prerendered: true` y `x-worker-branch: bot-prerender`.
+- Producción validada como usuario real con Chrome headless controlado por timeout en:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/de/weinbibliothek/regionen/francia/champagne`.
+- Se detectó y corrigió una contradicción documental: las rutas localizadas de regiones conservan el slug de país fuente (`espana`, `francia`, `portugal`) y no usan `/spain/` como slug canónico.
+
+#### Decisiones
+
+- Cerrar el bloque regional como publicado y validado.
+- No desplegar Cloudflare Worker para este bloque.
+- Mantener slugs fuente de país en rutas localizadas por ahora; cualquier traducción de slugs debe tratarse como migración SEO separada.
+
+#### Hipótesis
+
+- La capa regional publicada reforzará la comprensión temática de biblioteca del vino tras recrawl.
+- El siguiente bloque natural es estilos prioritarios, porque el grafo ya conecta regiones con estilos y maridajes.
+
+#### Tareas pendientes
+
+- Abrir bloque de estilos prioritarios.
+- Monitorizar Search Console para recrawl de rutas de biblioteca enriquecidas.

@@ -1204,7 +1204,7 @@
    - `/biblioteca-vino/regiones/espana/rioja`;
    - `/de/weinbibliothek/regionen/francia/champagne`;
    - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
-   - `/en/wine-library/regions/spain/rioja`.
+   - `/en/wine-library/regions/espana/rioja`.
 5. Validar producción como usuario real:
    - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
    - `/de/weinbibliothek/regionen/francia/champagne`.
@@ -1214,3 +1214,59 @@
    - blanco con lias;
    - espumoso metodo tradicional;
    - rosado gastronomico.
+
+## Actualización 2026-05-26: regiones publicadas, siguiente bloque listo
+
+## Hechos
+
+- Hecho: commit y push del bloque regional con `6f6dcd8 feat: deepen priority wine regions`.
+- Hecho: frontend publicado desde Lovable.
+- Hecho: Edge Function `prerender` desplegada explícitamente desde Lovable.
+- Hecho: producción validada como Googlebot:
+  - `/biblioteca-vino/regiones/espana/rioja`;
+  - `/de/weinbibliothek/regionen/francia/champagne`;
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/en/wine-library/regions/espana/rioja`.
+- Hecho: producción validada como usuario real:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/de/weinbibliothek/regionen/francia/champagne`.
+- Hecho: no hizo falta desplegar Cloudflare Worker.
+- Hecho: se corrigió la ruta documentada inglesa de Rioja a `/en/wine-library/regions/espana/rioja`, porque el sistema conserva slugs fuente de país.
+
+## Decisiones
+
+- La primera tanda profunda de regiones queda cerrada.
+- Mantener el procedimiento:
+  - commit/push;
+  - Lovable `Update`;
+  - despliegue explícito de `prerender`;
+  - validación separada usuario real/Googlebot.
+- Continuar con estilos antes que maridajes, porque los estilos son el siguiente nodo central entre región, uva y recomendación gastronómica.
+
+## Hipótesis
+
+- Estilos prioritarios reforzarán búsquedas de intención práctica y ayudarán a unir regiones/uvas con maridajes.
+- Schema semántico conviene revisarlo después de tener regiones + estilos + maridajes profundos para no crear schema decorativo demasiado pronto.
+
+## Tareas pendientes listas para retomar
+
+1. Estilos prioritarios:
+   - tinto crianza;
+   - tinto reserva;
+   - blanco con lias;
+   - espumoso metodo tradicional;
+   - rosado gastronomico.
+2. Maridajes prioritarios:
+   - carnes rojas;
+   - pescado blanco;
+   - marisco;
+   - arroces;
+   - cocina asiatica;
+   - quesos.
+3. Schema/enlazado:
+   - evaluar `DefinedTerm`/`ItemList` tras ampliar estilos y maridajes;
+   - mantener paridad React/prerender;
+   - validar usuario real y Googlebot en producción.
+4. Search Console:
+   - monitorizar recrawl de biblioteca del vino;
+   - observar cobertura e impresiones de rutas enriquecidas.

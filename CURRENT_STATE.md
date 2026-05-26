@@ -1717,5 +1717,52 @@
   - `/biblioteca-vino/regiones/espana/rioja`;
   - `/de/weinbibliothek/regionen/francia/champagne`;
   - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
-  - `/en/wine-library/regions/spain/rioja`.
+  - `/en/wine-library/regions/espana/rioja`.
 - Tras validar, continuar con estilos prioritarios, maridajes prioritarios y schema semántico.
+
+## Actualización 2026-05-26: primera tanda de regiones publicada y validada
+
+## Hechos
+
+- Commit creado y pusheado a `origin/main`:
+  - `6f6dcd8 feat: deepen priority wine regions`.
+- Lovable mostró el commit `feat: deepen priority wine regions`.
+- Se publicó frontend desde Lovable con `Update`; Lovable quedó en estado `Up to date`.
+- Se pidió a Lovable desplegar explícitamente la Edge Function `prerender`.
+- Lovable confirmó:
+  - `Edge Function prerender desplegada`.
+  - Verificación propia de `/biblioteca-vino/regiones/espana/rioja` sirviendo nuevos perfiles regionales a Googlebot.
+- Producción validada como Googlebot:
+  - `/biblioteca-vino/regiones/espana/rioja`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, contenido `Rol en carta`, `Rioja es el tinto de confianza`, `cordero asado`.
+  - `/de/weinbibliothek/regionen/francia/champagne`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, contenido `Rolle auf der Weinkarte`, `Champagne ist Feier`, `Austern`.
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, contenido `Papel na carta`, `Vinho Verde traz frescura`, `marisco`.
+  - `/en/wine-library/regions/espana/rioja`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, contenido `Role on the wine list`, `Rioja is the trust red`, `roasted lamb`.
+- Producción validada como usuario real con Chrome headless controlado por timeout:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`: DOM contiene `Como usar Vinho Verde numa carta`, `Papel na carta` y `marisco`.
+  - `/de/weinbibliothek/regionen/francia/champagne`: DOM contiene `Wie Champagne auf der Weinkarte funktioniert`, `Rolle auf der Weinkarte` y `Austern`.
+- No se desplegó Cloudflare Worker; `bot-prerender` funcionó correctamente tras actualizar Lovable/prerender.
+- Contradicción detectada y corregida en documentación: las rutas localizadas de región traducen la sección (`regions`, `regionen`, `regioes`) pero conservan slugs fuente de país (`espana`, `francia`, `portugal`), por lo que `/en/wine-library/regions/spain/rioja` no es la ruta canónica documentada.
+
+## Decisiones
+
+- Cerrar la primera tanda profunda de regiones como publicada y validada.
+- Mantener Lovable como vía operativa para frontend y Edge Function `prerender`.
+- No tocar Cloudflare Worker cuando producción responde por `bot-prerender` y el contenido actualizado llega correctamente.
+- Mantener slugs fuente de país en rutas localizadas hasta que se decida una migración explícita con redirects/hreflang/canonical.
+
+## Hipótesis
+
+- La tanda regional ya es legible por usuarios, Googlebot y crawlers de IA.
+- El siguiente salto editorial con menor riesgo debería profundizar estilos prioritarios conectados por el grafo.
+- Traducir slugs de país podría mejorar UX internacional, pero implicaría una migración SEO que debe diseñarse aparte.
+
+## Tareas pendientes
+
+- Continuar con estilos prioritarios:
+  - tinto crianza;
+  - tinto reserva;
+  - blanco con lias;
+  - espumoso metodo tradicional;
+  - rosado gastronomico.
+- Después, continuar con maridajes prioritarios y schema semántico por entidad.
+- Monitorizar Search Console tras recrawl para cobertura e impresiones de biblioteca del vino.
