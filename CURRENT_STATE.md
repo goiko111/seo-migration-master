@@ -2231,7 +2231,7 @@
 
 ## Tareas pendientes
 
-- Reenviar o revalidar `/sitemap.xml` en Search Console.
+- Hecho: reenviar `/sitemap.xml` en Search Console.
 - Solicitar indexación solo para una tanda corta de URLs estratégicas si Search Console lo permite:
   - `/biblioteca-vino/maridajes/ostras`;
   - `/biblioteca-vino/regiones/francia/sancerre`;
@@ -2241,3 +2241,37 @@
   - rutas nuevas como descubiertas/indexadas;
   - cambios de impresiones en biblioteca del vino.
 - Siguiente ola recomendada: usar datos de Search Console antes de añadir más entidades.
+
+## Actualización 2026-05-26: sitemap reenviado en Search Console
+
+## Hechos
+
+- Search Console estaba accesible con la cuenta `gugocreative@gmail.com`.
+- En la propiedad `https://winerim.wine/`, se reenvió `/sitemap.xml`.
+- Search Console mostró confirmación:
+  - `Se ha enviado el sitemap correctamente`.
+- La fila de `/sitemap.xml` quedó con:
+  - Enviado: `26 may 2026`.
+  - Última lectura: `24 may 2026`.
+  - Estado: `Correcto`.
+  - Páginas descubiertas: `2.072`.
+- La última lectura no cambió inmediatamente; Google indica que lo procesará periódicamente.
+
+## Decisiones
+
+- No solicitar indexación masiva en esta sesión.
+- Esperar a que Search Console relea el sitemap antes de priorizar otra expansión editorial.
+
+## Hipótesis
+
+- Google puede tardar en actualizar `Última lectura`, cobertura y páginas descubiertas tras el reenvío.
+- Una tanda corta de inspección/indexación manual puede ser útil cuando el sitemap aparezca leído de nuevo.
+
+## Tareas pendientes
+
+- Revisar Search Console más adelante para confirmar nueva fecha de `Última lectura`.
+- Si Search Console lo permite, inspeccionar una tanda corta:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/de/weinbibliothek/rebsorten/mencia`.
+- Monitorizar cobertura e impresiones de biblioteca del vino.

@@ -1516,8 +1516,8 @@
 ## Tareas pendientes listas para retomar
 
 1. Search Console:
-   - reenviar o revalidar `/sitemap.xml`;
-   - revisar si el sitemap muestra fecha de última lectura posterior al despliegue;
+   - Hecho: reenviar `/sitemap.xml`.
+   - Pendiente: revisar si el sitemap muestra fecha de última lectura posterior al despliegue;
    - pedir indexación manual solo para una tanda corta si la UI lo permite.
 2. Tanda corta sugerida para inspección/indexación:
    - `/biblioteca-vino/maridajes/ostras`;
@@ -1531,3 +1531,41 @@
    - esperar datos de Search Console;
    - priorizar entidades con impresiones y baja posición;
    - reforzar enlazado interno desde hubs si Google no descubre rápido las nuevas rutas.
+
+## Actualización 2026-05-26: Search Console listo para monitorizar
+
+## Hechos
+
+- `/sitemap.xml` reenviado en Search Console.
+- Confirmación recibida: `Se ha enviado el sitemap correctamente`.
+- Estado actual de la fila:
+  - Enviado: `26 may 2026`;
+  - Última lectura: `24 may 2026`;
+  - Estado: `Correcto`;
+  - Páginas descubiertas: `2.072`.
+
+## Decisiones
+
+- No pedir indexación masiva.
+- Próximo paso: esperar lectura nueva o inspeccionar una tanda corta estratégica.
+
+## Hipótesis
+
+- Search Console actualizará `Última lectura` cuando Google procese el sitemap reenviado.
+- Las nuevas entidades pueden aparecer primero como descubiertas antes de indexarse.
+
+## Tareas pendientes listas para retomar
+
+1. Volver a Search Console y comprobar:
+   - fecha de `Última lectura`;
+   - páginas descubiertas;
+   - cobertura de URLs nuevas.
+2. Inspeccionar manualmente, si procede:
+   - `/biblioteca-vino/maridajes/ostras`;
+   - `/biblioteca-vino/regiones/francia/sancerre`;
+   - `/de/weinbibliothek/rebsorten/mencia`.
+3. Preparar siguiente ola solo con datos de:
+   - impresiones;
+   - posición media;
+   - estado de indexación;
+   - consultas long-tail.

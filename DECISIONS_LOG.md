@@ -1635,3 +1635,25 @@
 - Reenviar o validar `/sitemap.xml` en Search Console.
 - Monitorizar cobertura e impresiones de biblioteca.
 - Usar datos reales de Search Console para priorizar la siguiente expansión.
+
+### Sitemap reenviado en Search Console
+
+#### Hechos
+
+- Se reenvió `/sitemap.xml` en Search Console para la propiedad `https://winerim.wine/`.
+- La UI confirmó: `Se ha enviado el sitemap correctamente`.
+- La fila quedó con `Enviado: 26 may 2026`, `Última lectura: 24 may 2026`, `Estado: Correcto` y `2.072` páginas descubiertas.
+
+#### Decisiones
+
+- No solicitar indexación masiva inmediatamente.
+- Esperar nueva lectura del sitemap antes de abrir otra expansión grande.
+
+#### Hipótesis
+
+- Google procesará el sitemap nuevo más adelante y actualizará cobertura/descubrimiento después.
+
+#### Tareas pendientes
+
+- Comprobar nueva fecha de última lectura en Search Console.
+- Inspeccionar una tanda corta de URLs estratégicas si la UI lo permite.
