@@ -2,7 +2,7 @@
 
 ## Hechos
 
-- Fecha de actualización: 2026-05-25.
+- Fecha de actualización: 2026-05-26.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
 - Rama activa: `main`.
 - PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
@@ -1652,3 +1652,70 @@
   - maridajes prioritarios;
   - schema `DefinedTerm`/`ItemList` donde aporte valor.
 - Monitorizar Search Console tras recrawl.
+
+## Actualización 2026-05-26: primera tanda profunda de regiones prioritarias
+
+## Hechos
+
+- Se implementó localmente la primera tanda editorial profunda de regiones prioritarias de biblioteca del vino.
+- Regiones incluidas:
+  - `rioja`
+  - `ribera-del-duero`
+  - `rias-baixas`
+  - `rueda`
+  - `priorat`
+  - `bourgogne`
+  - `bordeaux`
+  - `champagne`
+  - `douro`
+  - `vinho-verde`
+- Nueva capa creada: `src/data/wineLibraryRegionEditorial.ts`.
+- La capa regional incluye servicio, copa, uso por copa, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes y FAQs.
+- El contenido está localizado para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `src/pages/RegionDetail.tsx` integra la sección editorial regional cuando existe perfil prioritario.
+- `src/pages/RegionDetail.tsx` usa ahora etiquetas principales multilingües de la biblioteca para breadcrumbs, datos clave, secciones, CTA y roles.
+- `src/data/regionsLibraryI18n.ts` añade fallbacks localizados para campos profundos de región en idiomas no españoles:
+  - estilos;
+  - lectura en carta;
+  - cuándo destacar;
+  - perfil de cliente;
+  - estrategia de venta;
+  - errores comunes;
+  - maridajes;
+  - FAQs.
+- `supabase/functions/prerender/index.ts` incluye perfiles equivalentes para las 10 regiones prioritarias, manteniendo paridad para Googlebot y crawlers de IA.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 7 archivos, 25 tests.
+  - `npm run build`: correcto.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: correcto.
+  - `git diff --check`: correcto.
+  - Render test humano en región prioritaria portuguesa: `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`.
+- Chrome headless externo con `--dump-dom` se quedó colgado en el entorno local; se cortaron los procesos temporales y se sustituyó esa comprobación por test de render controlado con React Testing Library.
+- Producción aún no refleja esta tanda hasta commit/push, publish Lovable y despliegue explícito de `prerender`.
+
+## Decisiones
+
+- Priorizar regiones antes que estilos y maridajes porque conectan intención geográfica, uvas, estilos, maridajes y criterio comercial.
+- Mantener las 10 regiones documentadas como primera tanda regional.
+- No crear URLs nuevas; el bloque aumenta profundidad editorial sobre rutas existentes.
+- Añadir fallbacks localizados profundos para regiones en idiomas internacionales, porque dejar textos españoles en páginas localizadas reduce calidad SEO/LLM.
+- Mantener paridad React/prerender como requisito para considerar cerrado el bloque.
+- No tocar Cloudflare Worker para este bloque salvo que la validación productiva demuestre un problema de proxy.
+
+## Hipótesis
+
+- La profundidad regional aumentará autoridad temática porque cubre intención geográfica y refuerza enlaces internos ya publicados.
+- Evitar mezcla de español en rutas internacionales mejorará la comprensión por Googlebot y crawlers de IA.
+- El impacto real dependerá de publicar frontend y `prerender` desde Lovable y de que Google recrawlee las fichas.
+
+## Tareas pendientes
+
+- Commit y push de la primera tanda profunda de regiones prioritarias.
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente la Edge Function `prerender` desde Lovable.
+- Revalidar producción como Googlebot y usuario real en rutas representativas:
+  - `/biblioteca-vino/regiones/espana/rioja`;
+  - `/de/weinbibliothek/regionen/francia/champagne`;
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/en/wine-library/regions/spain/rioja`.
+- Tras validar, continuar con estilos prioritarios, maridajes prioritarios y schema semántico.

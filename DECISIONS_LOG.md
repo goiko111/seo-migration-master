@@ -1284,3 +1284,55 @@
 - Abrir bloque de contenido profundo para regiones, estilos y maridajes.
 - Evaluar schema semántico adicional por entidad.
 - Monitorizar Search Console para cambios de cobertura e impresiones de biblioteca.
+
+## 2026-05-26
+
+### Primera tanda profunda de regiones prioritarias
+
+#### Hechos
+
+- Se inició el bloque editorial profundo de regiones tras quedar publicado y validado el grafo estratégico de biblioteca del vino.
+- Se creó `src/data/wineLibraryRegionEditorial.ts` con 10 regiones prioritarias:
+  - Rioja;
+  - Ribera del Duero;
+  - Rías Baixas;
+  - Rueda;
+  - Priorat;
+  - Borgoña/Bourgogne;
+  - Burdeos/Bordeaux;
+  - Champagne;
+  - Douro;
+  - Vinho Verde.
+- Cada perfil regional incluye servicio, copa, uso por copa, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes y FAQs.
+- Los perfiles están localizados para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `RegionDetail` integra el bloque regional y localiza etiquetas principales de la página.
+- `regionsLibraryI18n` genera fallbacks profundos localizados para secciones de región que antes quedaban en español en rutas internacionales.
+- `prerender` incorpora perfiles regionales equivalentes para que bots reciban la misma capa esencial.
+- Se añadieron tests de perfiles regionales, render humano, i18n regional y superficie SEO de prerender.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 25 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+
+#### Decisiones
+
+- La primera ampliación profunda post-grafo se centra en regiones, no en otra tanda de uvas.
+- Las regiones prioritarias se enriquecen sin crear nuevas URLs para evitar más deuda de indexación.
+- Las páginas regionales internacionales deben evitar narrativa española heredada; se aplican fallbacks localizados cuando no hay traducción humana específica.
+- `prerender` debe mantener perfiles regionales propios, aunque duplique una versión reducida del contenido React, porque es la fuente que leen Googlebot y LLM crawlers.
+- No modificar Cloudflare Worker mientras el cambio sea de frontend y Edge Function `prerender`.
+
+#### Hipótesis
+
+- Las regiones aportan una señal SEO más amplia que entidades aisladas porque conectan intención geográfica con uvas, estilos y maridajes.
+- Los fallbacks localizados reducen fricción internacional mientras se escriben versiones editoriales humanas más profundas por región.
+- La mejora será medible solo tras publicación en Lovable, despliegue de `prerender` y recrawl.
+
+#### Tareas pendientes
+
+- Commit y push del bloque.
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente `prerender` desde Lovable.
+- Validar producción como usuario real y Googlebot.
+- Continuar con estilos y maridajes prioritarios.

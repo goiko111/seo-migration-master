@@ -1137,16 +1137,11 @@
 ## Tareas pendientes listas para retomar
 
 1. Profundizar regiones prioritarias:
-   - Rioja;
-   - Ribera del Duero;
-   - Rias Baixas;
-   - Rueda;
-   - Priorat;
-   - Borgoña;
-   - Burdeos;
-   - Champagne;
-   - Douro;
-   - Vinho Verde.
+   - Hecho local: primera tanda profunda implementada para Rioja, Ribera del Duero, Rias Baixas, Rueda, Priorat, Borgoña, Burdeos, Champagne, Douro y Vinho Verde.
+   - Hecho local: perfiles regionales en seis idiomas.
+   - Hecho local: React y `prerender` tienen paridad esencial.
+   - Hecho local: fallbacks profundos localizados evitan narrativa española en regiones internacionales.
+   - Pendiente: commit/push, publish Lovable, deploy explícito de `prerender` y validación productiva.
 2. Profundizar estilos prioritarios:
    - tinto crianza;
    - tinto reserva;
@@ -1167,9 +1162,55 @@
    - `BreadcrumbList`;
    - evitar duplicidades o schema decorativo.
 5. Tras el siguiente bloque:
-   - tests;
-   - build;
-   - `deno check`;
-   - publish Lovable;
-   - deploy explícito `prerender`;
-   - validación usuario real y Googlebot.
+   - Hecho local: tests, build, `deno check` y `git diff --check`.
+   - Pendiente: publish Lovable.
+   - Pendiente: deploy explícito `prerender`.
+   - Pendiente: validación usuario real y Googlebot.
+
+## Actualización 2026-05-26: retomar desde publicación de regiones
+
+## Hechos
+
+- El bloque local de regiones prioritarias está implementado y verificado.
+- Archivos principales:
+  - `src/data/wineLibraryRegionEditorial.ts`;
+  - `src/pages/RegionDetail.tsx`;
+  - `src/data/regionsLibraryI18n.ts`;
+  - `supabase/functions/prerender/index.ts`.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 25 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+- El dev server local está disponible en `http://127.0.0.1:5173/` mientras la sesión siga activa.
+
+## Decisiones
+
+- Retomar por commit/push y Lovable antes de hacer más contenido.
+- Pedir siempre despliegue explícito de `prerender` porque este bloque modifica HTML para bots.
+- No tocar Cloudflare Worker salvo que producción sirva `bot-fallback` o HTML antiguo tras actualizar Lovable.
+
+## Hipótesis
+
+- Producción necesitará dos pasos: frontend Lovable y Edge Function `prerender`.
+- Si Lovable despliega correctamente, Googlebot debería ver los perfiles de Rioja, Champagne y Vinho Verde sin cambios de Worker.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push del bloque regional.
+2. Publicar frontend desde Lovable.
+3. Pedir a Lovable: desplegar Edge Function `prerender`.
+4. Validar producción como Googlebot:
+   - `/biblioteca-vino/regiones/espana/rioja`;
+   - `/de/weinbibliothek/regionen/francia/champagne`;
+   - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+   - `/en/wine-library/regions/spain/rioja`.
+5. Validar producción como usuario real:
+   - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+   - `/de/weinbibliothek/regionen/francia/champagne`.
+6. Después de validar, abrir bloque de estilos prioritarios:
+   - tinto crianza;
+   - tinto reserva;
+   - blanco con lias;
+   - espumoso metodo tradicional;
+   - rosado gastronomico.

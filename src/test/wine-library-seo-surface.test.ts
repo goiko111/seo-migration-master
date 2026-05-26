@@ -41,6 +41,19 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("Papel na carta");
   });
 
+  it("adds priority region editorial content to prerendered bot pages", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const WINE_LIBRARY_PRIORITY_REGIONS");
+    expect(prerender).toContain("ribera-del-duero");
+    expect(prerender).toContain("rias-baixas");
+    expect(prerender).toContain("bourgogne");
+    expect(prerender).toContain("bordeaux");
+    expect(prerender).toContain("vinho-verde");
+    expect(prerender).toContain("Rolle auf der Weinkarte");
+    expect(prerender).toContain("Papel na carta");
+  });
+
   it("adds strategic internal links to prerendered wine-library entities", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
 

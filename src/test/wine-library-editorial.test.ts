@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getGrapeEditorialProfile, priorityGrapeSlugs } from "@/data/wineLibraryEditorial";
+import { getRegionEditorialProfile, priorityRegionSlugs } from "@/data/wineLibraryRegionEditorial";
 
 describe("wine library editorial profiles", () => {
   it("defines priority service profiles for the first two editorial tranches", () => {
@@ -43,6 +44,31 @@ describe("wine library editorial profiles", () => {
     expect(de?.sections.some((section) => section.title === "Rolle auf der Karte")).toBe(true);
     expect(de?.menuHooks).toContain("Grillfleisch");
     expect(pt?.eyebrow).toBe("Inteligencia de servico");
+    expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
+    expect(pt?.menuHooks).toContain("marisco");
+  });
+
+  it("defines priority regional service profiles in all wine-library languages", () => {
+    expect(priorityRegionSlugs).toEqual([
+      "rioja",
+      "ribera-del-duero",
+      "rias-baixas",
+      "rueda",
+      "priorat",
+      "bourgogne",
+      "bordeaux",
+      "champagne",
+      "douro",
+      "vinho-verde",
+    ]);
+
+    const de = getRegionEditorialProfile("champagne", "de", "Champagne");
+    const pt = getRegionEditorialProfile("vinho-verde", "pt", "Vinho Verde");
+
+    expect(de?.eyebrow).toBe("Regionale Service-Intelligenz");
+    expect(de?.sections.some((section) => section.title === "Rolle auf der Weinkarte")).toBe(true);
+    expect(de?.menuHooks).toContain("Austern");
+    expect(pt?.eyebrow).toBe("Inteligencia regional de servico");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
   });

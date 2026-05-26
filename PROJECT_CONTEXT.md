@@ -7,6 +7,8 @@
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas prioritarias, además de la infraestructura multilingüe.
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la segunda tanda publicada cubre 20 uvas prioritarias.
+- La biblioteca del vino incluye un grafo estratégico publicado que conecta uvas, regiones, estilos y maridajes prioritarios.
+- La siguiente línea editorial activa es la profundidad de regiones prioritarias, con paridad React/prerender y seis idiomas.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
@@ -39,7 +41,7 @@
 
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
-- Escalar la capa editorial avanzada sin romper la paridad multilingüe ni el prerender para bots.
+- Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
 - Continuar escalando biblioteca del vino al máximo nivel y mantener rendimiento residual como línea secundaria.

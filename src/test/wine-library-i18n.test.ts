@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
+import { getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
 import { getWineLibraryEsPath, getWineLibraryHreflang, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 describe("wine library i18n routes", () => {
@@ -62,6 +63,19 @@ describe("wine library i18n routes", () => {
     expect(grape?.intro).not.toContain("Tempranillo es la variedad");
     expect(grape?.cartaPerception).not.toContain("comensal");
     expect(grape?.faqs[0]?.q).not.toContain("¿");
+  });
+
+  it("does not leak Spanish region narratives into localized region detail pages", () => {
+    const de = getLocalizedRegionBySlug("rioja", "de");
+    const pt = getLocalizedRegionBySlug("vinho-verde", "pt");
+
+    expect(de?.cartaReading).toContain("Weinkarte");
+    expect(de?.styles.some((style) => style.includes("Rotwein"))).toBe(true);
+    expect(de?.faqs[0]?.q).not.toContain("¿");
+    expect(de?.commonMistakes[0]).not.toContain("No ");
+    expect(pt?.cartaReading).toContain("carta");
+    expect(pt?.pairings).toContain("marisco");
+    expect(pt?.faqs[0]?.q).not.toContain("¿");
   });
 
   it("provides SEO fallbacks for catalog-only grape detail pages", () => {

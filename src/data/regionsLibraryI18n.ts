@@ -2,6 +2,7 @@ import {
   regionEntries,
   wineCountries,
   type RegionEntry,
+  type WineType,
   type WineCountry,
 } from "./regionsLibrary";
 import {
@@ -113,6 +114,213 @@ const buildRegionOverlay = (entry: RegionEntry, lang: WineI18nLang): RegionI18nO
   return copy[lang];
 };
 
+const regionRuntimeCopy: Record<WineI18nLang, {
+  style: Record<WineType, (name: string) => string>;
+  pairings: Record<WineType, string[]>;
+  cartaReading: (entry: RegionEntry, prestige: string, recognition: string) => string;
+  whenToHighlight: (entry: RegionEntry) => string;
+  clientProfile: (entry: RegionEntry, recognition: string) => string;
+  sellByStrategy: (entry: RegionEntry, grapes: string) => string;
+  mistakes: (entry: RegionEntry) => string[];
+  faqs: (entry: RegionEntry, grapes: string, styles: string) => { q: string; a: string }[];
+}> = {
+  en: {
+    style: {
+      tinto: (name) => `${name} structured red`,
+      blanco: (name) => `${name} fresh white`,
+      rosado: (name) => `${name} gastronomic rosé`,
+      espumoso: (name) => `${name} sparkling wine`,
+      dulce: (name) => `${name} sweet wine`,
+      generoso: (name) => `${name} fortified wine`,
+      naranja: (name) => `${name} orange wine`,
+      seco: (name) => `${name} dry wine`,
+    },
+    pairings: {
+      tinto: ["grilled meats", "roast dishes", "aged cheeses"],
+      blanco: ["white fish", "shellfish", "fresh starters"],
+      rosado: ["rice dishes", "vegetables", "Mediterranean plates"],
+      espumoso: ["aperitif", "oysters", "salty snacks"],
+      dulce: ["fruit desserts", "blue cheese", "foie gras"],
+      generoso: ["Iberian ham", "tapas", "aged cheeses"],
+      naranja: ["spiced dishes", "fermented vegetables", "hard cheeses"],
+      seco: ["aperitif", "fish", "light starters"],
+    },
+    cartaReading: (entry, prestige, recognition) => `${entry.name} gives the list a ${prestige} regional signal with ${recognition} guest recognition. It helps organize origin, price ladder and food recommendation in one visible reference.`,
+    whenToHighlight: (entry) => `Highlight ${entry.name} when the list needs a clear regional anchor, a food-led recommendation or a bridge between familiar wines and more distinctive producers.`,
+    clientProfile: (entry, recognition) => `${entry.name} fits guests with ${recognition} recognition of the region, plus curious tables that respond to origin, grape and food context.`,
+    sellByStrategy: (entry, grapes) => `Sell it through region first, then grapes (${grapes}) and style. The floor team should connect ${entry.name} to one dish and one clear occasion.`,
+    mistakes: (entry) => [
+      `Do not reduce ${entry.name} to a single style; show the grape or producer cue that makes the bottle specific.`,
+      "Do not list the region without a food or service cue; guests need a short reason to choose it.",
+      "Do not let price be the only ladder; origin, producer and style should explain the step up.",
+    ],
+    faqs: (entry, grapes, styles) => [
+      { q: `What grapes define ${entry.name}?`, a: `${entry.name} is mainly explained through ${grapes}. Use the grape cue to make the region easier to sell on the floor.` },
+      { q: `What style of wine should a restaurant expect from ${entry.name}?`, a: `${entry.name} usually appears on the list through ${styles}. The best choice depends on dish, price point and service format.` },
+    ],
+  },
+  it: {
+    style: {
+      tinto: (name) => `rosso strutturato di ${name}`,
+      blanco: (name) => `bianco fresco di ${name}`,
+      rosado: (name) => `rosato gastronomico di ${name}`,
+      espumoso: (name) => `spumante di ${name}`,
+      dulce: (name) => `vino dolce di ${name}`,
+      generoso: (name) => `vino fortificato di ${name}`,
+      naranja: (name) => `orange wine di ${name}`,
+      seco: (name) => `vino secco di ${name}`,
+    },
+    pairings: {
+      tinto: ["carni alla griglia", "arrosti", "formaggi stagionati"],
+      blanco: ["pesce bianco", "frutti di mare", "antipasti freschi"],
+      rosado: ["risotti", "verdure", "cucina mediterranea"],
+      espumoso: ["aperitivo", "ostriche", "stuzzichini salati"],
+      dulce: ["dessert alla frutta", "formaggi erborinati", "foie gras"],
+      generoso: ["prosciutto iberico", "tapas", "formaggi stagionati"],
+      naranja: ["piatti speziati", "verdure fermentate", "formaggi duri"],
+      seco: ["aperitivo", "pesce", "antipasti leggeri"],
+    },
+    cartaReading: (entry, prestige, recognition) => `${entry.name} porta in carta un segnale regionale ${prestige} con riconoscibilita ${recognition}. Aiuta a organizzare origine, scala prezzo e raccomandazione gastronomica.`,
+    whenToHighlight: (entry) => `Evidenzia ${entry.name} quando la carta ha bisogno di un'ancora regionale chiara, una raccomandazione legata al cibo o un ponte verso produttori piu distintivi.`,
+    clientProfile: (entry, recognition) => `${entry.name} funziona per ospiti con riconoscibilita ${recognition} della regione e per tavoli curiosi sensibili a origine, vitigno e piatto.`,
+    sellByStrategy: (entry, grapes) => `Vendilo prima per regione, poi per vitigni (${grapes}) e stile. La sala deve collegare ${entry.name} a un piatto e a un'occasione chiara.`,
+    mistakes: (entry) => [
+      `Non ridurre ${entry.name} a un solo stile; mostra il vitigno o il produttore che rende specifica la bottiglia.`,
+      "Non listare la regione senza un indizio di cibo o servizio; l'ospite ha bisogno di una ragione breve.",
+      "Non far dipendere la scala solo dal prezzo; origine, produttore e stile devono spiegare il salto.",
+    ],
+    faqs: (entry, grapes, styles) => [
+      { q: `Quali vitigni definiscono ${entry.name}?`, a: `${entry.name} si spiega soprattutto attraverso ${grapes}. Usa il vitigno per renderla piu facile da vendere in sala.` },
+      { q: `Che stile aspettarsi da ${entry.name}?`, a: `${entry.name} appare di solito in carta come ${styles}. La scelta dipende da piatto, fascia prezzo e formato di servizio.` },
+    ],
+  },
+  fr: {
+    style: {
+      tinto: (name) => `rouge structure de ${name}`,
+      blanco: (name) => `blanc frais de ${name}`,
+      rosado: (name) => `rose gastronomique de ${name}`,
+      espumoso: (name) => `effervescent de ${name}`,
+      dulce: (name) => `vin doux de ${name}`,
+      generoso: (name) => `vin fortifie de ${name}`,
+      naranja: (name) => `vin orange de ${name}`,
+      seco: (name) => `vin sec de ${name}`,
+    },
+    pairings: {
+      tinto: ["viandes grillees", "plats rotis", "fromages affines"],
+      blanco: ["poisson blanc", "fruits de mer", "entrees fraiches"],
+      rosado: ["riz", "legumes", "cuisine mediterraneenne"],
+      espumoso: ["aperitif", "huitres", "snacks sales"],
+      dulce: ["desserts aux fruits", "fromages bleus", "foie gras"],
+      generoso: ["jambon iberique", "tapas", "fromages affines"],
+      naranja: ["plats epices", "legumes fermentes", "fromages durs"],
+      seco: ["aperitif", "poisson", "entrees legeres"],
+    },
+    cartaReading: (entry, prestige, recognition) => `${entry.name} apporte a la carte un signal regional ${prestige} avec une reconnaissance client ${recognition}. Elle aide a organiser origine, prix et recommandation gastronomique.`,
+    whenToHighlight: (entry) => `Mettez ${entry.name} en avant quand la carte a besoin d'un repere regional clair, d'une recommandation par plat ou d'un pont vers des producteurs plus distinctifs.`,
+    clientProfile: (entry, recognition) => `${entry.name} convient aux clients avec une reconnaissance ${recognition} de la region et aux tables curieuses sensibles a l'origine, au cepage et au plat.`,
+    sellByStrategy: (entry, grapes) => `Vendez d'abord par region, puis par cepages (${grapes}) et par style. L'equipe doit relier ${entry.name} a un plat et a une occasion claire.`,
+    mistakes: (entry) => [
+      `Ne pas reduire ${entry.name} a un seul style ; montrez le cepage ou le producteur qui rend la bouteille specifique.`,
+      "Ne pas lister la region sans repere de plat ou de service ; le client a besoin d'une raison courte.",
+      "Ne pas faire du prix la seule echelle ; origine, producteur et style doivent expliquer la montee.",
+    ],
+    faqs: (entry, grapes, styles) => [
+      { q: `Quels cepages definissent ${entry.name} ?`, a: `${entry.name} s'explique surtout par ${grapes}. Le cepage aide l'equipe a la vendre plus facilement.` },
+      { q: `Quel style attendre de ${entry.name} ?`, a: `${entry.name} apparait generalement en carte comme ${styles}. Le choix depend du plat, du prix et du format de service.` },
+    ],
+  },
+  de: {
+    style: {
+      tinto: (name) => `strukturierter Rotwein aus ${name}`,
+      blanco: (name) => `frischer Weisswein aus ${name}`,
+      rosado: (name) => `gastronomischer Rose aus ${name}`,
+      espumoso: (name) => `Schaumwein aus ${name}`,
+      dulce: (name) => `Susswein aus ${name}`,
+      generoso: (name) => `aufgespriteter Wein aus ${name}`,
+      naranja: (name) => `Orange Wine aus ${name}`,
+      seco: (name) => `trockener Wein aus ${name}`,
+    },
+    pairings: {
+      tinto: ["Grillfleisch", "Bratgerichte", "gereifter Kase"],
+      blanco: ["weisser Fisch", "Meeresfruchte", "frische Vorspeisen"],
+      rosado: ["Reisgerichte", "Gemuse", "mediterrane Kuche"],
+      espumoso: ["Aperitif", "Austern", "salzige Snacks"],
+      dulce: ["Fruchtdesserts", "Blauschimmelkase", "Foie gras"],
+      generoso: ["Iberico-Schinken", "Tapas", "gereifter Kase"],
+      naranja: ["gewurzte Gerichte", "fermentiertes Gemuse", "Hartkase"],
+      seco: ["Aperitif", "Fisch", "leichte Vorspeisen"],
+    },
+    cartaReading: (entry, prestige, recognition) => `${entry.name} gibt der Weinkarte ein ${prestige} Herkunftssignal mit ${recognition} Gasteerkennung. Das hilft bei Herkunft, Preisleiter und Speiseempfehlung.`,
+    whenToHighlight: (entry) => `${entry.name} hervorheben, wenn die Karte einen klaren regionalen Anker, eine speisebezogene Empfehlung oder den Schritt zu markanteren Produzenten braucht.`,
+    clientProfile: (entry, recognition) => `${entry.name} passt zu Gasten mit ${recognition} Regionserkennung und zu neugierigen Tischen, die auf Herkunft, Rebsorte und Speise reagieren.`,
+    sellByStrategy: (entry, grapes) => `Zuerst uber Region verkaufen, dann uber Rebsorten (${grapes}) und Stil. Das Team sollte ${entry.name} mit einem Gericht und einem Anlass verbinden.`,
+    mistakes: (entry) => [
+      `${entry.name} nicht auf einen einzigen Stil reduzieren; Rebsorte oder Produzent machen die Flasche konkret.`,
+      "Die Region nicht ohne Speise- oder Servicehinweis listen; Gaste brauchen einen kurzen Grund.",
+      "Preis nicht als einzige Leiter nutzen; Herkunft, Produzent und Stil mussen den Schritt erklaren.",
+    ],
+    faqs: (entry, grapes, styles) => [
+      { q: `Welche Rebsorten pragen ${entry.name}?`, a: `${entry.name} lasst sich vor allem uber ${grapes} erklaren. Die Rebsorte macht die Region im Service leichter verkaufbar.` },
+      { q: `Welchen Weinstil erwartet man aus ${entry.name}?`, a: `${entry.name} erscheint auf der Karte meist als ${styles}. Die beste Wahl hangt von Gericht, Preis und Serviceformat ab.` },
+    ],
+  },
+  pt: {
+    style: {
+      tinto: (name) => `tinto estruturado de ${name}`,
+      blanco: (name) => `branco fresco de ${name}`,
+      rosado: (name) => `rosado gastronomico de ${name}`,
+      espumoso: (name) => `espumante de ${name}`,
+      dulce: (name) => `vinho doce de ${name}`,
+      generoso: (name) => `vinho generoso de ${name}`,
+      naranja: (name) => `vinho laranja de ${name}`,
+      seco: (name) => `vinho seco de ${name}`,
+    },
+    pairings: {
+      tinto: ["carnes grelhadas", "assados", "queijos curados"],
+      blanco: ["peixe branco", "marisco", "entradas frescas"],
+      rosado: ["arrozes", "legumes", "cozinha mediterranica"],
+      espumoso: ["aperitivo", "ostras", "petiscos salgados"],
+      dulce: ["sobremesas de fruta", "queijos azuis", "foie gras"],
+      generoso: ["presunto iberico", "tapas", "queijos curados"],
+      naranja: ["pratos especiados", "legumes fermentados", "queijos duros"],
+      seco: ["aperitivo", "peixe", "entradas leves"],
+    },
+    cartaReading: (entry, prestige, recognition) => `${entry.name} da a carta um sinal regional ${prestige} com reconhecimento ${recognition} do cliente. Ajuda a organizar origem, escala de preco e recomendacao gastronomica.`,
+    whenToHighlight: (entry) => `Destaque ${entry.name} quando a carta precisa de ancora regional clara, recomendacao ligada a prato ou ponte para produtores mais distintivos.`,
+    clientProfile: (entry, recognition) => `${entry.name} funciona para clientes com reconhecimento ${recognition} da regiao e mesas curiosas que respondem a origem, casta e comida.`,
+    sellByStrategy: (entry, grapes) => `Venda primeiro por regiao, depois por castas (${grapes}) e estilo. A equipa deve ligar ${entry.name} a um prato e uma ocasiao clara.`,
+    mistakes: (entry) => [
+      `Nao reduzir ${entry.name} a um unico estilo; mostre a casta ou produtor que torna a garrafa especifica.`,
+      "Nao listar a regiao sem pista de comida ou servico; o cliente precisa de uma razao curta.",
+      "Nao deixar o preco ser a unica escala; origem, produtor e estilo devem explicar o salto.",
+    ],
+    faqs: (entry, grapes, styles) => [
+      { q: `Que castas definem ${entry.name}?`, a: `${entry.name} explica-se sobretudo por ${grapes}. A casta torna a regiao mais facil de vender em sala.` },
+      { q: `Que estilo esperar de ${entry.name}?`, a: `${entry.name} aparece normalmente na carta como ${styles}. A melhor escolha depende de prato, preco e formato de servico.` },
+    ],
+  },
+};
+
+const buildLocalizedRuntimeRegion = (entry: RegionEntry, lang: WineI18nLang): Partial<RegionEntry> => {
+  const copy = regionRuntimeCopy[lang];
+  const grapes = formatList(entry.mainGrapes.slice(0, 4), lang);
+  const styles = formatList(entry.wineTypes.map((type) => copy.style[type]?.(entry.name) || type), lang);
+  const prestige = prestigeLabels[lang][entry.prestige] || entry.prestige;
+  const recognition = recognitionLabels[lang][entry.clientRecognition] || entry.clientRecognition;
+  const pairings = Array.from(new Set(entry.wineTypes.flatMap((type) => copy.pairings[type] || []))).slice(0, 6);
+
+  return {
+    styles: entry.wineTypes.map((type) => copy.style[type]?.(entry.name) || type),
+    cartaReading: copy.cartaReading(entry, prestige, recognition),
+    whenToHighlight: copy.whenToHighlight(entry),
+    clientProfile: copy.clientProfile(entry, recognition),
+    sellByStrategy: copy.sellByStrategy(entry, grapes),
+    commonMistakes: copy.mistakes(entry),
+    pairings,
+    faqs: copy.faqs(entry, grapes, styles),
+  };
+};
+
 const buildCountryOverlay = (country: WineCountry, lang: WineI18nLang): CountryI18nOverlay => {
   const name = localizeCountryName(country.name, lang);
   const topRegions = formatList(country.topRegions.map((slug) => slug.replace(/-/g, " ")), lang);
@@ -196,8 +404,10 @@ const applyRegionOverlay = <T extends RegionEntry>(entry: T, lang?: string): T =
   const overlayLang = normalizeWineOverlayLang(lang);
   const overlay = overlayLang ? regionOverlays[entry.slug]?.[overlayLang] : undefined;
   if (!overlay) return entry;
+  const localizedRuntime = buildLocalizedRuntimeRegion(entry, overlayLang);
   return {
     ...entry,
+    ...localizedRuntime,
     description: overlay.description,
     intro: overlay.intro,
     seo: { ...entry.seo, ...overlay.seo },
