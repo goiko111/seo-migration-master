@@ -1909,3 +1909,56 @@
   - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
 - Tras validar producción, auditar legacy shortcuts de biblioteca y decidir redirects/metadatos únicos.
+
+## Actualización 2026-05-26: estilos y maridajes validados en producción
+
+## Hechos
+
+- El usuario confirmó que Lovable/frontend y producción ya estaban publicados.
+- Se revalidó producción como Googlebot con cache-bust en las rutas pendientes.
+- Googlebot recibe HTTP 200, `x-prerendered: true` y `x-worker-branch: bot-prerender` en:
+  - `/biblioteca-vino/estilos/tinto-crianza`;
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+  - `/biblioteca-vino/maridajes/carnes-rojas`;
+  - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- El prerender productivo ya incluye la capa editorial esencial de estilos y maridajes:
+  - rol en carta o papel en carta;
+  - lectura de servicio;
+  - argumento de sala;
+  - maridajes/platos clave;
+  - error a evitar;
+  - un `Article`;
+  - un solo `FAQPage`.
+- Producción como usuario real validada en navegador para:
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+  - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- En frontend humano, las cuatro rutas muestran los bloques avanzados, un solo `FAQPage` y `DefinedTerm`.
+- Queda resuelta la contradicción anterior: antes del último publish el prerender mostraba HTML antiguo; tras el publish confirmado por el usuario, producción ya contiene la capa profunda.
+
+## Decisiones
+
+- Cerrar en producción la primera tanda profunda de estilos y maridajes prioritarios.
+- Considerar cerrado el bloque principal actual de biblioteca del vino: uvas, regiones, estilos, maridajes, grafo interno, FAQs, paridad multilingüe y prerender esencial.
+- Mantener como línea separada la mejora futura de la plantilla de prerender para que sus H1/títulos usen alias localizados más editoriales, aunque el contenido esencial ya está presente.
+- Pasar el siguiente frente de biblioteca a legacy shortcuts, ampliación masiva de entidades y monitorización en Search Console.
+
+## Hipótesis
+
+- El recrawl de Google debería empezar a ver la capa profunda de estilos y maridajes desde este despliegue.
+- La diferencia entre H1/título del prerender compacto y H1/título del frontend humano puede mejorarse en una tanda futura, pero no bloquea el cierre del bloque principal.
+- Los próximos saltos de SEO vendrán más de legacy shortcuts, enlaces internos, más entidades y Search Console que de seguir reabriendo la arquitectura base.
+
+## Tareas pendientes
+
+- Resolver los 96 legacy shortcuts de biblioteca con redirects canónicos o metadatos únicos.
+- Monitorizar Search Console para cobertura, recrawl e impresiones de las rutas enriquecidas.
+- Definir la siguiente expansión masiva de entidades por demanda SEO:
+  - más regiones;
+  - estilos secundarios;
+  - platos concretos;
+  - más uvas internacionales.
+- Mejorar en una tanda futura los títulos/H1 del prerender compacto para usar alias localizados de entidad cuando exista perfil editorial.

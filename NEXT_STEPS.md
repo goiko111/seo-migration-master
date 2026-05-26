@@ -1336,7 +1336,7 @@
    - mantener `FAQPage` único;
    - validar usuario real y Googlebot en producción.
 
-## Actualización 2026-05-26: maridajes/schema implementados y pusheados
+## Actualización 2026-05-26: maridajes/schema implementados, pusheados y validados en producción
 
 ## Hechos
 
@@ -1365,43 +1365,34 @@
 - Hecho: producción sigue pendiente porque Lovable estaba en login y no hay `SUPABASE_ACCESS_TOKEN`.
 - Hecho: tras el push de `fe4d10b`, Lovable sigue redirigiendo a login en `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
 - Hecho: revalidación productiva posterior al push confirma que Googlebot recibe `bot-prerender`, pero todavía sin los nuevos bloques profundos de estilos/maridajes.
+- Hecho posterior: el usuario confirmó publish completo en producción.
+- Hecho posterior: Googlebot ya recibe la capa esencial profunda de estilos y maridajes con `bot-prerender`.
+- Hecho posterior: usuario real en navegador ya ve bloques avanzados, `DefinedTerm` y un solo `FAQPage` en rutas representativas `de` y `pt`.
 
 ## Decisiones
 
-- Retomar por commit/push y después Lovable antes de abrir nuevas ampliaciones editoriales.
-- Publicar estilos y maridajes juntos en el próximo `Update` de Lovable.
-- Pedir despliegue explícito de `prerender` porque ambos bloques modifican HTML para bots.
+- Cerrar estilos y maridajes como publicados y validados en producción.
+- Mantener publish + despliegue explícito de `prerender` como protocolo para futuras tandas.
 - No tocar Cloudflare Worker salvo que producción sirva `bot-fallback` o HTML antiguo tras actualizar Lovable.
 
 ## Hipótesis
 
-- Tras publicar frontend y `prerender`, la biblioteca quedará cerrada en su bloque principal: uvas, regiones, estilos, maridajes, grafo interno, FAQs y schema semántico.
+- La biblioteca queda cerrada en su bloque principal actual: uvas, regiones, estilos, maridajes, grafo interno, FAQs y schema semántico en frontend.
 - El siguiente trabajo de máximo nivel debería ser:
-  - validar producción;
   - resolver legacy shortcuts;
   - ampliar más entidades por demanda SEO;
   - monitorizar Search Console.
 
 ## Tareas pendientes listas para retomar
 
-1. Publicar frontend desde Lovable.
-2. Pedir a Lovable: desplegar Edge Function `prerender`.
-3. Validar producción como Googlebot:
-   - `/biblioteca-vino/estilos/tinto-crianza`;
-   - `/de/weinbibliothek/weinstile/espumoso`;
-   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
-   - `/biblioteca-vino/maridajes/carnes-rojas`;
-   - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
-   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
-4. Validar producción como usuario real:
-   - `/de/weinbibliothek/weinstile/espumoso`;
-   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
-   - `/de/weinbibliothek/weinbegleitung/cocina-asiatica-y-fusion`;
-   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
-5. Resolver los 96 legacy shortcuts de biblioteca:
+1. Resolver los 96 legacy shortcuts de biblioteca:
    - decidir redirects canónicos o metadatos únicos;
    - evitar canibalización con rutas nuevas.
-6. Siguiente expansión máxima:
+2. Siguiente expansión máxima:
    - ampliar más regiones, estilos secundarios y platos concretos;
    - reforzar enlaces internos desde hubs;
    - monitorizar Search Console tras recrawl.
+3. Refinamiento futuro:
+   - mejorar títulos/H1 del prerender compacto con alias localizados de entidad;
+   - mantener paridad de contenido esencial entre frontend y prerender;
+   - comprobar evolución en Search Console.

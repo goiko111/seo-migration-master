@@ -1472,3 +1472,33 @@
 - Desplegar explícitamente `prerender` desde Lovable.
 - Validar producción como usuario real y Googlebot.
 - Resolver legacy shortcuts de biblioteca y decidir siguiente expansión masiva de entidades.
+
+### Estilos y maridajes validados en producción
+
+#### Hechos
+
+- El usuario confirmó que todo estaba desplegado y publicado en producción.
+- Se revalidó producción como Googlebot con cache-bust.
+- Las rutas de estilos y maridajes pendientes responden HTTP 200 con `x-prerendered: true` y `x-worker-branch: bot-prerender`.
+- El prerender productivo contiene la capa esencial de estilos y maridajes: rol, servicio, argumento de sala, platos/maridajes, error a evitar, `Article` y un solo `FAQPage`.
+- Se validó producción como usuario real en navegador para alemán y portugués en estilos y maridajes.
+- El frontend humano muestra los bloques avanzados, `DefinedTerm` y un solo `FAQPage`.
+
+#### Decisiones
+
+- Cerrar la primera tanda profunda de estilos y maridajes como publicada y validada en producción.
+- Dar por cerrado el bloque principal actual de biblioteca del vino.
+- Mantener la mejora de H1/títulos del prerender como refinamiento futuro, no como bloqueo.
+- Continuar con legacy shortcuts, expansión de entidades y monitorización Search Console.
+
+#### Hipótesis
+
+- Googlebot y crawlers de IA ya pueden leer la capa profunda esencial de estilos y maridajes.
+- Search Console tardará varios días en reflejar recrawl y cambios de cobertura.
+- La siguiente mejora con impacto será reducir canibalización/duplicación legacy y ampliar entidades con criterio SEO.
+
+#### Tareas pendientes
+
+- Resolver legacy shortcuts de biblioteca.
+- Monitorizar Search Console.
+- Planificar siguiente expansión editorial masiva.
