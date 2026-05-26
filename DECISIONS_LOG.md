@@ -1606,3 +1606,32 @@
 - Publicar `9f99fa7` desde Lovable.
 - Desplegar Edge Function `sitemap`.
 - Revalidar sitemap público y reenviarlo en Search Console.
+
+### Sitemap de expansión validado en producción
+
+#### Hechos
+
+- El usuario confirmó la publicación del último despliegue.
+- El sitemap público ya contiene las rutas de expansión añadidas en `9f99fa7`, incluyendo `ostras`, `solomillo-de-ternera`, `sancerre`, `mendoza`, `mosel`, `willamette-valley` y `barolo`.
+- El sitemap público mantiene fuera los shortcuts legacy españoles.
+- Googlebot validado en nuevas entidades de expansión:
+  - `ostras` en portugués;
+  - `mencia` en alemán.
+- Ambas rutas responden con `x-prerendered: true` y `x-worker-branch: bot-prerender`.
+
+#### Decisiones
+
+- Cerrar la expansión editorial masiva como publicada y validada en producción.
+- No hacer más cambios de Worker para este bloque.
+- Pasar a Search Console y monitorización antes de abrir otra ola editorial.
+
+#### Hipótesis
+
+- El sitemap completo debería mejorar descubrimiento de entidades long-tail de biblioteca.
+- El impacto SEO se verá tras recrawl, no inmediatamente.
+
+#### Tareas pendientes
+
+- Reenviar o validar `/sitemap.xml` en Search Console.
+- Monitorizar cobertura e impresiones de biblioteca.
+- Usar datos reales de Search Console para priorizar la siguiente expansión.

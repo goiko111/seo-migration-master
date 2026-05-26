@@ -1470,8 +1470,8 @@
    - Hecho: actualización de documentación de cierre previa.
    - Hecho: ajuste final de sitemap subido con `9f99fa7`.
 2. Publicar desde Lovable:
-   - Pendiente: commit `9f99fa7`;
-   - Pendiente: Edge Function `sitemap`.
+   - Hecho: commit `9f99fa7`;
+   - Hecho: Edge Function `sitemap`.
 3. Validar producción como usuario real:
    - Hecho: `/de/weinbibliothek/weinstile/fino-manzanilla`;
    - Hecho: `/pt/biblioteca-vinho/harmonizacoes/ostras`;
@@ -1479,8 +1479,55 @@
 4. Validar producción como Googlebot:
    - Hecho: las tres rutas anteriores.
    - Hecho: `/sitemap.xml` sin shortcuts legacy españoles.
-   - Pendiente tras publicar `9f99fa7`: `/sitemap.xml` con `/biblioteca-vino/maridajes/ostras` y `/biblioteca-vino/regiones/francia/sancerre`.
+   - Hecho: `/sitemap.xml` con `/biblioteca-vino/maridajes/ostras` y `/biblioteca-vino/regiones/francia/sancerre`.
 5. Search Console:
    - monitorizar shortcuts legacy como redirigidas/canónicas alternativas;
    - revisar recrawl de rutas enriquecidas;
    - preparar siguiente ola con datos reales de impresiones y cobertura.
+
+## Actualización 2026-05-26: expansión cerrada, siguiente paso Search Console
+
+## Hechos
+
+- Hecho: commit `9f99fa7` publicado.
+- Hecho: Edge Function `sitemap` desplegada.
+- Hecho: sitemap público contiene rutas nuevas de expansión:
+  - `ostras`;
+  - `solomillo-de-ternera`;
+  - `sancerre`;
+  - `mendoza`;
+  - `mosel`;
+  - `willamette-valley`;
+  - `barolo`.
+- Hecho: sitemap público mantiene fuera los shortcuts legacy españoles.
+- Hecho: Googlebot recibe prerender correcto en `ostras` portugués y `mencia` alemán.
+
+## Decisiones
+
+- La expansión editorial masiva de biblioteca queda cerrada en producción.
+- El siguiente bloque no debe añadir más entidades a ciegas; debe partir de Search Console.
+- Mantener monitorización SEO como siguiente frente.
+
+## Hipótesis
+
+- Google tardará en descubrir/indexar la nueva profundidad aunque el sitemap ya esté correcto.
+- Las primeras señales útiles serán cobertura, canónica elegida, impresiones y consultas long-tail.
+
+## Tareas pendientes listas para retomar
+
+1. Search Console:
+   - reenviar o revalidar `/sitemap.xml`;
+   - revisar si el sitemap muestra fecha de última lectura posterior al despliegue;
+   - pedir indexación manual solo para una tanda corta si la UI lo permite.
+2. Tanda corta sugerida para inspección/indexación:
+   - `/biblioteca-vino/maridajes/ostras`;
+   - `/biblioteca-vino/regiones/francia/sancerre`;
+   - `/de/weinbibliothek/rebsorten/mencia`.
+3. Monitorizar:
+   - shortcuts legacy como redirigidas;
+   - rutas nuevas como descubiertas/indexadas;
+   - impresiones no branded de biblioteca del vino.
+4. Próxima ola editorial:
+   - esperar datos de Search Console;
+   - priorizar entidades con impresiones y baja posición;
+   - reforzar enlazado interno desde hubs si Google no descubre rápido las nuevas rutas.

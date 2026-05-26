@@ -2196,3 +2196,48 @@
   - contiene `/biblioteca-vino/regiones/francia/sancerre`;
   - mantiene `0` shortcuts legacy españoles como `<loc>`.
 - Después, reenviar o revalidar sitemap en Search Console.
+
+## Actualización 2026-05-26: sitemap de expansión validado en producción
+
+## Hechos
+
+- El usuario confirmó que el último despliegue ya estaba publicado.
+- Producción validada tras el despliegue del commit `9f99fa7`.
+- `https://winerim.wine/sitemap.xml` contiene las rutas de expansión que faltaban:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/maridajes/solomillo-de-ternera`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/biblioteca-vino/regiones/argentina/mendoza`;
+  - `/biblioteca-vino/regiones/alemania/mosel`;
+  - `/biblioteca-vino/regiones/estados-unidos/willamette-valley`;
+  - `/biblioteca-vino/regiones/italia/barolo`.
+- El sitemap público mantiene `0` shortcuts legacy españoles como `<loc>`.
+- Conteo observado del sitemap público: 2.054 bloques `<loc>`.
+- Googlebot validado en:
+  - `/pt/biblioteca-vinho/harmonizacoes/ostras`: HTTP 200, `x-prerendered: true`, `x-worker-branch: bot-prerender`, `inLanguage: pt`, `FAQPage`.
+  - `/de/weinbibliothek/rebsorten/mencia`: HTTP 200, `x-prerendered: true`, `x-worker-branch: bot-prerender`, `inLanguage: de`, `FAQPage`.
+- Repo limpio en `main` tras la validación.
+
+## Decisiones
+
+- Cerrar como publicada y validada la expansión editorial masiva de biblioteca del vino, incluyendo contenido, prerender y sitemap.
+- Mantener Cloudflare Worker sin cambios porque redirects legacy y `bot-prerender` funcionan.
+- La siguiente acción ya no es código de biblioteca, sino monitorización y acciones de Search Console.
+
+## Hipótesis
+
+- El sitemap validado debería facilitar el descubrimiento de las nuevas entidades concretas tras recrawl.
+- Search Console tardará días o semanas en mostrar consolidación de shortcuts legacy y nuevas rutas enriquecidas.
+
+## Tareas pendientes
+
+- Reenviar o revalidar `/sitemap.xml` en Search Console.
+- Solicitar indexación solo para una tanda corta de URLs estratégicas si Search Console lo permite:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/de/weinbibliothek/rebsorten/mencia`.
+- Monitorizar cobertura:
+  - shortcuts legacy como redirigidas;
+  - rutas nuevas como descubiertas/indexadas;
+  - cambios de impresiones en biblioteca del vino.
+- Siguiente ola recomendada: usar datos de Search Console antes de añadir más entidades.
