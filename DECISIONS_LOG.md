@@ -1550,6 +1550,8 @@
 - Se corrigió el sitemap para excluir los 16 shortcuts legacy españoles que ya redirigen por Worker.
 - Verificaciones locales completadas: TypeScript, tests dirigidos, full test, build, Deno check, `git diff --check` y QA local de rutas `de`, `pt` y `fr`.
 - Commit y push completados: `78135cd feat: expand wine library editorial coverage`.
+- Producción todavía no refleja el `sitemap` actualizado: el sitemap público sigue listando shortcuts legacy como `/biblioteca-vino/tempranillo` y `/biblioteca-vino/napa-valley`.
+- Lovable redirige a login y no existe `SUPABASE_ACCESS_TOKEN` local, por lo que el despliegue productivo queda pendiente.
 
 #### Decisiones
 

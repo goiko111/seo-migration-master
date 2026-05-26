@@ -1446,6 +1446,9 @@
   - `/fr/bibliotheque-vin/regions/francia/sancerre`.
 - Hecho local: TypeScript, tests, build, Deno check y `git diff --check` correctos.
 - Hecho: commit y push de código completados con `78135cd feat: expand wine library editorial coverage`.
+- Hecho: Lovable no está accesible desde esta sesión porque redirige a login.
+- Hecho: no hay `SUPABASE_ACCESS_TOKEN` local.
+- Hecho: producción todavía tiene `sitemap.xml` antiguo para esta tanda y sigue listando shortcuts legacy.
 
 ## Decisiones
 

@@ -686,6 +686,14 @@
   - `git diff --check`.
 - Commit y push completados:
   - `78135cd feat: expand wine library editorial coverage`.
+- Publicación productiva no completada desde esta sesión:
+  - Lovable redirige a `https://lovable.dev/login?redirect=%2Fprojects%2F2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+  - `SUPABASE_ACCESS_TOKEN` no existe en el entorno local.
+  - No se pudo desplegar por CLI ni desde Lovable.
+- Revalidación productiva posterior al push:
+  - `https://winerim.wine/sitemap.xml` sigue listando shortcuts legacy como `/biblioteca-vino/tempranillo` y `/biblioteca-vino/napa-valley`.
+  - Por tanto, la Edge Function `sitemap` nueva aún no está desplegada en producción.
+  - La expansión editorial local no debe marcarse como cerrada en producción hasta publicar Lovable y desplegar `sitemap`/`prerender`.
   - Preview local `http://127.0.0.1:4177/`.
   - QA local: H1 de home visible, chunks bajo el fold cargan después del delay, dropdown desktop funciona, menú móvil funciona y submenu móvil de Producto funciona.
 - Avisos no bloqueantes durante build:
