@@ -9,6 +9,7 @@
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la segunda tanda publicada cubre 20 uvas prioritarias.
 - La biblioteca del vino incluye un grafo estratégico publicado que conecta uvas, regiones, estilos y maridajes prioritarios.
 - La profundidad de regiones, estilos y maridajes prioritarios ya fue publicada y validada en producción.
+- Los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública ya redirigen en producción a las rutas canónicas de entidad.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
@@ -45,4 +46,4 @@
 - Mantener la validación productiva de cada tanda editorial antes de tratarla como cerrada.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
-- Resolver legacy shortcuts y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.
+- Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.

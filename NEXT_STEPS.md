@@ -202,7 +202,7 @@
    - Revisar `analisis.winerim.wine`: añadir canonical/noindex o convertirlo en landing SEO válida.
    - Redirigir o resolver URLs antiguas que aparecen en búsqueda pública y hoy terminan en 404.
 13. P2 biblioteca del vino:
-   - Resolver los 96 legacy shortcuts con redirects canónicos o metadatos únicos.
+   - Hecho: resolver los 96 legacy shortcuts con redirects canónicos en Worker de producción.
    - Mantener las rutas nuevas de biblioteca como superficie principal.
 14. Siguiente bloque editorial máximo nivel:
    - Priorizar 30-50 entidades por potencial SEO.
@@ -1379,15 +1379,19 @@
 
 - La biblioteca queda cerrada en su bloque principal actual: uvas, regiones, estilos, maridajes, grafo interno, FAQs y schema semántico en frontend.
 - El siguiente trabajo de máximo nivel debería ser:
-  - resolver legacy shortcuts;
+  - mantener monitorización de legacy shortcuts ya resueltos;
   - ampliar más entidades por demanda SEO;
   - monitorizar Search Console.
 
 ## Tareas pendientes listas para retomar
 
-1. Resolver los 96 legacy shortcuts de biblioteca:
-   - decidir redirects canónicos o metadatos únicos;
-   - evitar canibalización con rutas nuevas.
+1. Legacy shortcuts de biblioteca:
+   - Hecho: 96 redirects canónicos en producción vía Worker.
+   - Hecho: matriz productiva 96/96 validada sin fallos.
+   - Hecho: commit y push `d37044e fix: redirect legacy wine library shortcuts`.
+   - Hecho: Worker desplegado con Version ID `c4d375bb-5280-41fe-b793-549be14f17c4`.
+   - Pendiente: monitorizar Search Console tras recrawl.
+   - Pendiente: publicar bundle React desde Lovable en el siguiente ciclo general para incluir la defensa secundaria de SPA.
 2. Siguiente expansión máxima:
    - ampliar más regiones, estilos secundarios y platos concretos;
    - reforzar enlaces internos desde hubs;
@@ -1396,3 +1400,33 @@
    - mejorar títulos/H1 del prerender compacto con alias localizados de entidad;
    - mantener paridad de contenido esencial entre frontend y prerender;
    - comprobar evolución en Search Console.
+
+## Actualización 2026-05-26: lista para retomar tras legacy shortcuts
+
+## Hechos
+
+- El bloque de legacy shortcuts queda resuelto en producción a nivel Worker.
+- Las URLs antiguas de una sola parte de biblioteca ya no deben competir con las rutas nuevas de uvas, regiones, estilos y maridajes.
+- La siguiente línea documentada es expansión editorial masiva y monitorización de Search Console.
+
+## Decisiones
+
+- Continuar con contenido nuevo solo sobre rutas canónicas nuevas.
+- Mantener los shortcuts antiguos como redirects permanentes.
+- No reabrir arquitectura base de biblioteca salvo que producción o Search Console muestren una contradicción concreta.
+
+## Hipótesis
+
+- El siguiente mayor retorno vendrá de ampliar entidades y enlazado interno, no de crear más rutas técnicas.
+- Search Console tardará días o semanas en consolidar la señal de redirects.
+
+## Tareas pendientes listas para retomar
+
+1. Exportar o revisar en Search Console ejemplos de URLs legacy de biblioteca después del recrawl.
+2. Preparar la siguiente tanda editorial:
+   - regiones: Ribera del Duero, Rias Baixas, Rueda, Priorat, Burdeos, Douro, Vinho Verde;
+   - uvas: Syrah, Merlot, Malbec, Nebbiolo, Sangiovese, Viura, Xarel-lo, Chenin Blanc;
+   - maridajes/platos: carnes blancas, verduras, pasta, setas, chocolate, postres, aperitivos;
+   - estilos: joven, roble, blanco aromatico, dulce, generoso, naranja.
+3. Reforzar enlaces internos desde hubs hacia entidades enriquecidas.
+4. Publicar bundle React desde Lovable en el siguiente ciclo general.

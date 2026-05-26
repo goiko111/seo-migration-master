@@ -1499,6 +1499,37 @@
 
 #### Tareas pendientes
 
-- Resolver legacy shortcuts de biblioteca.
+- Hecho después: resolver legacy shortcuts de biblioteca.
 - Monitorizar Search Console.
 - Planificar siguiente expansión editorial masiva.
+
+### Legacy shortcuts de biblioteca resueltos en producción
+
+#### Hechos
+
+- Se implementó el mapa de 16 shortcuts legacy de biblioteca del vino por idioma, cubriendo 96 URLs.
+- Se añadieron redirects canónicos en `cloudflare-worker-v3-hybrid.js`.
+- Se añadió defensa secundaria en React mediante `src/data/wineLibraryLegacyRedirects.ts` y `BibliotecaDetalle`.
+- Se añadieron tests para matriz de redirects y presencia de lógica Worker.
+- Verificaciones completadas: tests dirigidos, TypeScript, full test, build, dry-run Worker y `git diff --check`.
+- Commit y push completados: `d37044e fix: redirect legacy wine library shortcuts`.
+- Worker desplegado en producción con Version ID `c4d375bb-5280-41fe-b793-549be14f17c4`.
+- Matriz productiva validada: 96 redirects comprobados, 0 fallos.
+
+#### Decisiones
+
+- Usar 301 permanentes hacia rutas canónicas de entidad en vez de crear contenido/metadatos únicos para shortcuts antiguos.
+- Hacer la redirección en Worker para que Googlebot, crawlers de IA y usuarios reciban la canonicalización antes de cargar React.
+- Mantener la redirección React como capa secundaria, aunque el cierre SEO dependa del Worker.
+- No crear nuevas URLs ni nuevos slugs para resolver este bloque.
+
+#### Hipótesis
+
+- Esta corrección debería consolidar autoridad de shortcuts antiguos hacia las rutas nuevas y reducir duplicación de títulos/H1 genéricos.
+- Search Console tardará en reflejar la mejora y puede mantener temporalmente ejemplos antiguos en cobertura.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console para confirmar consolidación de legacy shortcuts.
+- Publicar bundle React desde Lovable en el siguiente ciclo general.
+- Pasar a expansión editorial masiva y enlazado interno de biblioteca.

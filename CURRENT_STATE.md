@@ -183,7 +183,7 @@
 - Refinar contenido humano de rutas estáticas localizadas: el prerender genérico actual es una capa técnica, no la versión editorial final.
 - Definir patrón canónico definitivo para artículos traducidos (`/article/slug_lang` vs rutas localizadas `/en/article/slug`).
 - Revisar o noindex/canonicalizar `analisis.winerim.wine` para que no compita con la home ni transmita una señal pobre.
-- Resolver legacy shortcuts de biblioteca del vino con redirects canónicos o metadatos únicos.
+- Hecho: resolver legacy shortcuts de biblioteca del vino con redirects canónicos en Worker de producción.
 - Separar una tarea para deuda global de lint.
 - Separar una tarea para avisos de seguridad de Lovable.
 
@@ -1954,7 +1954,7 @@
 
 ## Tareas pendientes
 
-- Resolver los 96 legacy shortcuts de biblioteca con redirects canónicos o metadatos únicos.
+- Hecho: resolver los 96 legacy shortcuts de biblioteca con redirects canónicos en Worker de producción.
 - Monitorizar Search Console para cobertura, recrawl e impresiones de las rutas enriquecidas.
 - Definir la siguiente expansión masiva de entidades por demanda SEO:
   - más regiones;
@@ -1962,3 +1962,55 @@
   - platos concretos;
   - más uvas internacionales.
 - Mejorar en una tanda futura los títulos/H1 del prerender compacto para usar alias localizados de entidad cuando exista perfil editorial.
+
+## Actualización 2026-05-26: legacy shortcuts de biblioteca resueltos
+
+## Hechos
+
+- Se implementó y publicó el mapa de redirects canónicos para los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública.
+- Los 96 shortcuts corresponden a 16 slugs antiguos en 6 idiomas.
+- Nuevo archivo: `src/data/wineLibraryLegacyRedirects.ts`.
+- `src/pages/BibliotecaDetalle.tsx` redirige los shortcuts legacy hacia la ruta canónica localizada antes de renderizar un 404.
+- `cloudflare-worker-v3-hybrid.js` redirige en el borde las URLs legacy de una sola parte hacia la entidad canónica localizada con 301 permanente.
+- Tests actualizados:
+  - `src/test/wine-library-links.test.ts`;
+  - `src/test/wine-library-seo-surface.test.ts`.
+- Verificaciones completadas:
+  - `npm run test -- --run src/test/wine-library-links.test.ts src/test/wine-library-seo-surface.test.ts`: 12 tests correctos.
+  - `npx tsc --noEmit --pretty false`: correcto.
+  - `npm run test -- --run`: 7 archivos, 35 tests correctos.
+  - `npm run build`: correcto, con avisos no bloqueantes ya conocidos de Browserslist y chunks grandes.
+  - `npm run deploy:worker:dry-run`: correcto.
+  - `git diff --check`: correcto.
+- Commit y push completados: `d37044e fix: redirect legacy wine library shortcuts`.
+- Cloudflare Worker `winerim-proxy` desplegado con Version ID `c4d375bb-5280-41fe-b793-549be14f17c4`.
+- Producción validada:
+  - 96/96 legacy shortcuts devuelven HTTP 301.
+  - 96/96 apuntan al destino canónico esperado.
+  - 96/96 emiten `X-Worker-Branch: wine-library-legacy-redirect`.
+  - Destinos representativos en `es`, `en`, `it`, `fr`, `de` y `pt` responden HTTP 200 con `X-Prerendered: true` y `X-Worker-Branch: bot-prerender`.
+- No se realizó publicación manual desde Lovable en esta sesión; la corrección crítica para SEO ya está activa en el Worker de producción.
+
+## Decisiones
+
+- Resolver los shortcuts legacy con 301 canónicos, no con metadatos únicos, para evitar canibalización contra las rutas nuevas de entidad.
+- Mantener las rutas nuevas de biblioteca como superficie principal indexable.
+- Duplicar el mapa mínimo en Worker porque el Worker no importa módulos TypeScript del frontend y debe poder redirigir antes de servir la SPA.
+- Mantener una redirección equivalente en React como defensa secundaria para navegación de cliente o bundles futuros.
+
+## Hipótesis
+
+- Google debería consolidar señales de las URLs antiguas hacia las rutas canónicas nuevas tras recrawl.
+- La reducción de páginas legacy con H1/título genérico debería mejorar calidad de cobertura y disminuir canibalización interna.
+- La publicación Lovable del bundle React puede ser útil para alinear la SPA, pero no bloquea el resultado SEO directo porque el Worker ya intercepta las URLs.
+
+## Tareas pendientes
+
+- Monitorizar en Search Console si las URLs legacy pasan a aparecer como redirigidas o canónicas alternativas correctas.
+- Si Search Console mantiene ejemplos legacy sin actualizar, reintentar inspección o solicitar indexación de una tanda corta de destinos canónicos.
+- Publicar desde Lovable cuando se haga el siguiente publish general para que la defensa secundaria de React quede también en el bundle servido.
+- Continuar con la siguiente expansión editorial masiva de biblioteca:
+  - más regiones;
+  - estilos secundarios;
+  - platos/maridajes concretos;
+  - más uvas internacionales.
