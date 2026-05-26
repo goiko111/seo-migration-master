@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { getStrategicWineLibraryLinks, resolveLibraryLink } from "@/data/wineLibraryLinks";
+import {
+  getLocalizedWineLibraryLegacyRedirect,
+  getWineLibraryLegacyRedirectMatrix,
+  wineLibraryLegacyShortcutSlugs,
+} from "@/data/wineLibraryLegacyRedirects";
 
 describe("wine library link resolver", () => {
   it("resolves high-intent aliases without creating duplicate slugs", () => {
@@ -33,5 +38,17 @@ describe("wine library link resolver", () => {
     [...xarelloLinks, ...riojaLinks, ...pairingLinks].forEach((link) => {
       expect(resolveLibraryLink(link.name, link.hint), `${link.name} should resolve`).not.toBeNull();
     });
+  });
+
+  it("redirects one-segment legacy shortcuts to canonical section URLs", () => {
+    expect(wineLibraryLegacyShortcutSlugs).toHaveLength(16);
+    expect(getWineLibraryLegacyRedirectMatrix()).toHaveLength(96);
+
+    expect(getLocalizedWineLibraryLegacyRedirect("es", "borgona")).toBe("/biblioteca-vino/regiones/francia/bourgogne");
+    expect(getLocalizedWineLibraryLegacyRedirect("en", "cabernet-sauvignon")).toBe("/en/wine-library/grapes/cabernet-sauvignon");
+    expect(getLocalizedWineLibraryLegacyRedirect("it", "vino-espumoso")).toBe("/it/biblioteca-vino/stili/espumoso");
+    expect(getLocalizedWineLibraryLegacyRedirect("fr", "maridaje-pescado")).toBe("/fr/bibliotheque-vin/accords/pescados-y-mariscos");
+    expect(getLocalizedWineLibraryLegacyRedirect("de", "rioja")).toBe("/de/weinbibliothek/regionen/espana/rioja");
+    expect(getLocalizedWineLibraryLegacyRedirect("pt", "maridaje-queso")).toBe("/pt/biblioteca-vinho/harmonizacoes/quesos");
   });
 });

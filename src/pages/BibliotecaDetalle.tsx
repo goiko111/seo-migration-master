@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Wine, MapPin, Utensils, Palette, Grape } from "lucide-react";
@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getBySlug, categoryMeta, type WineEntry } from "@/data/wineLibrary";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { getLocalizedWineLibraryLegacyRedirect } from "@/data/wineLibraryLegacyRedirects";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const categoryIcons: Record<WineEntry["category"], typeof Wine> = {
@@ -22,9 +23,10 @@ const BibliotecaDetalle = () => {
   const { lang } = useLanguage();
   const entry = getBySlug(slug || "");
   const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const canonicalLegacyRedirect = getLocalizedWineLibraryLegacyRedirect(lang, slug);
 
   useEffect(() => {
-    if (!entry) return;
+    if (!entry || canonicalLegacyRedirect) return;
 
     const schema = document.createElement("script");
     schema.id = "biblio-detail-jsonld";
@@ -57,7 +59,11 @@ const BibliotecaDetalle = () => {
       document.getElementById("biblio-detail-jsonld")?.remove();
       document.getElementById("biblio-detail-breadcrumb")?.remove();
     };
-  }, [entry, lang]);
+  }, [entry, lang, canonicalLegacyRedirect]);
+
+  if (canonicalLegacyRedirect) {
+    return <Navigate to={canonicalLegacyRedirect} replace />;
+  }
 
   if (!entry) {
     return (

@@ -88,4 +88,14 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("/biblioteca-vino/maridajes/carnes-rojas");
     expect(prerender).toContain("wineLibraryStrategicLinks(lang, esPath)");
   });
+
+  it("redirects legacy one-segment wine-library shortcuts at the Worker edge", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("const WINE_LIBRARY_LEGACY_SHORTCUTS");
+    expect(worker).toContain("'borgona': '/biblioteca-vino/regiones/francia/bourgogne'");
+    expect(worker).toContain("'maridaje-pescado': '/biblioteca-vino/maridajes/pescados-y-mariscos'");
+    expect(worker).toContain("getWineLibraryLegacyShortcutTarget(path)");
+    expect(worker).toContain("'X-Worker-Branch': 'wine-library-legacy-redirect'");
+  });
 });

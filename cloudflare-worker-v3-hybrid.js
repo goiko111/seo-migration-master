@@ -72,6 +72,67 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/estadisticas': '/benchmarks-playbooks',
 };
 
+// ─── Wine library legacy one-segment shortcuts → canonical entity URLs ───
+const WINE_LIBRARY_BASES = {
+  es: '/biblioteca-vino',
+  en: '/en/wine-library',
+  it: '/it/biblioteca-vino',
+  fr: '/fr/bibliotheque-vin',
+  de: '/de/weinbibliothek',
+  pt: '/pt/biblioteca-vinho',
+};
+const WINE_LIBRARY_SECTION_MAP = {
+  es: { regiones: 'regiones', uvas: 'uvas', estilos: 'estilos', maridajes: 'maridajes' },
+  en: { regiones: 'regions', uvas: 'grapes', estilos: 'styles', maridajes: 'pairings' },
+  it: { regiones: 'regioni', uvas: 'vitigni', estilos: 'stili', maridajes: 'abbinamenti' },
+  fr: { regiones: 'regions', uvas: 'cepages', estilos: 'styles-de-vin', maridajes: 'accords' },
+  de: { regiones: 'regionen', uvas: 'rebsorten', estilos: 'weinstile', maridajes: 'weinbegleitung' },
+  pt: { regiones: 'regioes', uvas: 'castas', estilos: 'estilos', maridajes: 'harmonizacoes' },
+};
+const WINE_LIBRARY_LEGACY_SHORTCUTS = {
+  'tempranillo': '/biblioteca-vino/uvas/tempranillo',
+  'chardonnay': '/biblioteca-vino/uvas/chardonnay',
+  'garnacha': '/biblioteca-vino/uvas/garnacha',
+  'sauvignon-blanc': '/biblioteca-vino/uvas/sauvignon-blanc',
+  'cabernet-sauvignon': '/biblioteca-vino/uvas/cabernet-sauvignon',
+  'rioja': '/biblioteca-vino/regiones/espana/rioja',
+  'borgona': '/biblioteca-vino/regiones/francia/bourgogne',
+  'priorat': '/biblioteca-vino/regiones/espana/priorat',
+  'napa-valley': '/biblioteca-vino/regiones/estados-unidos/napa-valley',
+  'vino-tinto': '/biblioteca-vino/estilos/tinto',
+  'vino-blanco': '/biblioteca-vino/estilos/blanco',
+  'vino-rosado': '/biblioteca-vino/estilos/rosado',
+  'vino-espumoso': '/biblioteca-vino/estilos/espumoso',
+  'maridaje-carne': '/biblioteca-vino/maridajes/carnes-rojas',
+  'maridaje-pescado': '/biblioteca-vino/maridajes/pescados-y-mariscos',
+  'maridaje-queso': '/biblioteca-vino/maridajes/quesos',
+};
+
+function localizeWineLibraryPath(lang, esPath) {
+  const base = WINE_LIBRARY_BASES[lang] || WINE_LIBRARY_BASES.es;
+  if (esPath === '/biblioteca-vino') return base;
+
+  const match = esPath.match(/^\/biblioteca-vino\/([^/]+)(.*)$/);
+  if (!match) return esPath;
+
+  const section = match[1];
+  const rest = match[2] || '';
+  const localizedSection = WINE_LIBRARY_SECTION_MAP[lang]?.[section] || section;
+  return `${base}/${localizedSection}${rest}`;
+}
+
+function getWineLibraryLegacyShortcutTarget(path) {
+  for (const [lang, base] of Object.entries(WINE_LIBRARY_BASES)) {
+    if (!path.startsWith(`${base}/`)) continue;
+    const slug = path.slice(base.length + 1);
+    if (!slug || slug.includes('/')) return null;
+    const canonicalEsPath = WINE_LIBRARY_LEGACY_SHORTCUTS[slug];
+    if (!canonicalEsPath) return null;
+    return localizeWineLibraryPath(lang, canonicalEsPath);
+  }
+  return null;
+}
+
 // ─── NOINDEX routes (served but with noindex header) ───
 const NOINDEX_ROUTES = new Set([
   '/gracias',
@@ -850,6 +911,18 @@ export default {
           'Location': `${env.SITE_URL || 'https://winerim.wine'}${directLegacyTarget}`,
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'direct-legacy-redirect',
+        },
+      });
+    }
+
+    const wineLibraryLegacyTarget = getWineLibraryLegacyShortcutTarget(path);
+    if (wineLibraryLegacyTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${wineLibraryLegacyTarget}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'wine-library-legacy-redirect',
         },
       });
     }
