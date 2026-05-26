@@ -1364,6 +1364,7 @@
   - Browser QA local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
 - Hecho: producción sigue pendiente porque Lovable estaba en login y no hay `SUPABASE_ACCESS_TOKEN`.
 - Hecho: tras el push de `fe4d10b`, Lovable sigue redirigiendo a login en `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- Hecho: revalidación productiva posterior al push confirma que Googlebot recibe `bot-prerender`, pero todavía sin los nuevos bloques profundos de estilos/maridajes.
 
 ## Decisiones
 
