@@ -1,5 +1,10 @@
 export type WineLibraryRegionEditorialLang = "es" | "en" | "it" | "fr" | "de" | "pt";
 
+import {
+  expandedRegionSlugs,
+  getExpandedRegionEditorialProfile,
+} from "./wineLibraryEditorialExpansion";
+
 type LocalizedRegionEditorialText = {
   byTheGlass: string;
   role: string;
@@ -41,6 +46,7 @@ export const priorityRegionSlugs = [
   "champagne",
   "douro",
   "vinho-verde",
+  ...expandedRegionSlugs,
 ] as const;
 
 const profileText = (text: Record<WineLibraryRegionEditorialLang, LocalizedRegionEditorialText>) => text;
@@ -684,7 +690,7 @@ export function getRegionEditorialProfile(
   regionName: string,
 ): LocalizedRegionEditorialProfile | undefined {
   const profile = regionEditorialProfiles[slug];
-  if (!profile) return undefined;
+  if (!profile) return getExpandedRegionEditorialProfile(slug, lang, regionName);
   const resolvedLang = langFallback(lang);
   const copy = regionEditorialCopy[resolvedLang];
   const text = profile.texts[resolvedLang];

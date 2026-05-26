@@ -679,6 +679,25 @@ const WINE_LIBRARY_DYNAMIC_ROUTES: StaticRoute[] = [
   { esPath: '/biblioteca-vino/vino-tinto', priority: '0.4', changefreq: 'monthly', multilang: true },
 ];
 
+const WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS = new Set([
+  '/biblioteca-vino/tempranillo',
+  '/biblioteca-vino/chardonnay',
+  '/biblioteca-vino/garnacha',
+  '/biblioteca-vino/sauvignon-blanc',
+  '/biblioteca-vino/cabernet-sauvignon',
+  '/biblioteca-vino/rioja',
+  '/biblioteca-vino/borgona',
+  '/biblioteca-vino/priorat',
+  '/biblioteca-vino/napa-valley',
+  '/biblioteca-vino/vino-tinto',
+  '/biblioteca-vino/vino-blanco',
+  '/biblioteca-vino/vino-rosado',
+  '/biblioteca-vino/vino-espumoso',
+  '/biblioteca-vino/maridaje-carne',
+  '/biblioteca-vino/maridaje-pescado',
+  '/biblioteca-vino/maridaje-queso',
+]);
+
 /** Build a <url> block with optional hreflang alternates */
 function urlBlock(loc: string, lastmod: string, changefreq: string, priority: string, hreflang?: string): string {
   let xml = `  <url>\n    <loc>${SITE}${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n`;
@@ -735,6 +754,8 @@ Deno.serve(async (req) => {
 
     // ── Wine library entities (ES + localized equivalents) ──
     for (const route of WINE_LIBRARY_DYNAMIC_ROUTES) {
+      if (WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS.has(route.esPath)) continue;
+
       const alternates = hreflangBlock(route.esPath);
       xml += urlBlock(route.esPath, now, route.changefreq, route.priority, alternates);
 

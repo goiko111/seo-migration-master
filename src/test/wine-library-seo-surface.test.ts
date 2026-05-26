@@ -11,6 +11,8 @@ describe("wine library SEO surface", () => {
     expect(sitemap).toContain("/biblioteca-vino/estilos/tinto-crianza");
     expect(sitemap).toContain("/biblioteca-vino/maridajes/carnes-rojas");
     expect(sitemap).toContain("function localizedPath");
+    expect(sitemap).toContain("WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS");
+    expect(sitemap).toContain("if (WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS.has(route.esPath)) continue");
   });
 
   it("has a generic bot prerenderer for localized wine-library routes", () => {
@@ -35,6 +37,10 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("chenin-blanc");
     expect(prerender).toContain("xarello");
     expect(prerender).toContain("touriga-nacional");
+    expect(prerender).toContain("WINE_LIBRARY_EXPANDED_GRAPES");
+    expect(prerender).toContain("mencia");
+    expect(prerender).toContain("gruner-veltliner");
+    expect(prerender).toContain("aglianico");
     expect(prerender).toContain("Rol en carta");
     expect(prerender).toContain("Ruolo in carta");
     expect(prerender).toContain("Role en carte");
@@ -50,6 +56,10 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("bourgogne");
     expect(prerender).toContain("bordeaux");
     expect(prerender).toContain("vinho-verde");
+    expect(prerender).toContain("WINE_LIBRARY_EXPANDED_REGIONS");
+    expect(prerender).toContain("toscana");
+    expect(prerender).toContain("sancerre");
+    expect(prerender).toContain("barolo");
     expect(prerender).toContain("Rolle auf der Weinkarte");
     expect(prerender).toContain("Papel na carta");
   });
@@ -62,6 +72,10 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("tinto-reserva");
     expect(prerender).toContain("blanco-crianza-lias");
     expect(prerender).toContain("rosado-cuerpo");
+    expect(prerender).toContain("WINE_LIBRARY_EXPANDED_STYLES");
+    expect(prerender).toContain("tinto-joven");
+    expect(prerender).toContain("fino-manzanilla");
+    expect(prerender).toContain("orange-maceracion-corta");
     expect(prerender).toContain("Schaumwein ist nicht nur Feier");
     expect(prerender).toContain("Papel na carta");
   });
@@ -74,6 +88,10 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("pescados-y-mariscos");
     expect(prerender).toContain("pasta-arroces-y-legumbres");
     expect(prerender).toContain("cocina-asiatica-y-fusion");
+    expect(prerender).toContain("WINE_LIBRARY_EXPANDED_PAIRINGS");
+    expect(prerender).toContain("aves-y-caza");
+    expect(prerender).toContain("ostras");
+    expect(prerender).toContain("chocolate-negro");
     expect(prerender).toContain("Rotes Fleisch ist das Vertrauenspairing");
     expect(prerender).toContain("Marisco e alavanca de frescura");
   });

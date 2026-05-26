@@ -1,5 +1,10 @@
 export type WineLibraryStyleEditorialLang = "es" | "en" | "it" | "fr" | "de" | "pt";
 
+import {
+  expandedStyleSlugs,
+  getExpandedStyleEditorialProfile,
+} from "./wineLibraryEditorialExpansion";
+
 type LocalizedStyleEditorialText = {
   byTheGlass: string;
   role: string;
@@ -36,6 +41,7 @@ export const priorityStyleSlugs = [
   "blanco-crianza-lias",
   "espumoso",
   "rosado-cuerpo",
+  ...expandedStyleSlugs,
 ] as const;
 
 const profileText = (text: Record<WineLibraryStyleEditorialLang, LocalizedStyleEditorialText>) => text;
@@ -399,7 +405,7 @@ export function getStyleEditorialProfile(
   styleName: string,
 ): LocalizedStyleEditorialProfile | undefined {
   const profile = styleEditorialProfiles[slug];
-  if (!profile) return undefined;
+  if (!profile) return getExpandedStyleEditorialProfile(slug, lang, styleName);
   const resolvedLang = langFallback(lang);
   const copy = styleEditorialCopy[resolvedLang];
   const text = profile.texts[resolvedLang];

@@ -5,7 +5,7 @@ import { getStyleEditorialProfile, priorityStyleSlugs } from "@/data/wineLibrary
 import { getPairingEditorialProfile, priorityPairingSlugs } from "@/data/wineLibraryPairingEditorial";
 
 describe("wine library editorial profiles", () => {
-  it("defines priority service profiles for the first two editorial tranches", () => {
+  it("defines priority service profiles for the first three editorial tranches", () => {
     expect(priorityGrapeSlugs).toContain("tempranillo");
     expect(priorityGrapeSlugs).toContain("albarino");
     expect(priorityGrapeSlugs).toContain("godello");
@@ -13,7 +13,11 @@ describe("wine library editorial profiles", () => {
     expect(priorityGrapeSlugs).toContain("chenin-blanc");
     expect(priorityGrapeSlugs).toContain("xarello");
     expect(priorityGrapeSlugs).toContain("touriga-nacional");
-    expect(priorityGrapeSlugs).toHaveLength(20);
+    expect(priorityGrapeSlugs).toContain("mencia");
+    expect(priorityGrapeSlugs).toContain("cabernet-franc");
+    expect(priorityGrapeSlugs).toContain("gruner-veltliner");
+    expect(priorityGrapeSlugs).toContain("aglianico");
+    expect(priorityGrapeSlugs).toHaveLength(30);
   });
 
   it("localizes service intelligence for de and pt priority grapes", () => {
@@ -62,6 +66,18 @@ describe("wine library editorial profiles", () => {
       "champagne",
       "douro",
       "vinho-verde",
+      "toscana",
+      "napa-valley",
+      "jerez",
+      "vallee-du-rhone",
+      "piemonte",
+      "barossa-valley",
+      "marlborough",
+      "mendoza",
+      "mosel",
+      "willamette-valley",
+      "sancerre",
+      "barolo",
     ]);
 
     const de = getRegionEditorialProfile("champagne", "de", "Champagne");
@@ -73,6 +89,11 @@ describe("wine library editorial profiles", () => {
     expect(pt?.eyebrow).toBe("Inteligencia regional de servico");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
+
+    const expanded = getRegionEditorialProfile("sancerre", "de", "Sancerre");
+    expect(expanded?.eyebrow).toBe("Weinkarten-Intelligenz");
+    expect(expanded?.sections.some((section) => section.title === "Rolle auf der Weinkarte")).toBe(true);
+    expect(expanded?.menuHooks).toContain("Austern");
   });
 
   it("defines priority style service profiles in all wine-library languages", () => {
@@ -82,6 +103,16 @@ describe("wine library editorial profiles", () => {
       "blanco-crianza-lias",
       "espumoso",
       "rosado-cuerpo",
+      "tinto-joven",
+      "tinto-ligero",
+      "tinto-cuerpo",
+      "blanco-joven",
+      "blanco-mineral",
+      "champagne",
+      "cava",
+      "fino-manzanilla",
+      "pedro-ximenez",
+      "orange-maceracion-corta",
     ]);
 
     const de = getStyleEditorialProfile("espumoso", "de", "Schaumwein");
@@ -93,6 +124,11 @@ describe("wine library editorial profiles", () => {
     expect(pt?.eyebrow).toBe("Inteligencia de estilo");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
+
+    const expanded = getStyleEditorialProfile("fino-manzanilla", "fr", "Fino / Manzanilla");
+    expect(expanded?.eyebrow).toBe("Intelligence de carte");
+    expect(expanded?.sections.some((section) => section.title === "Role en carte")).toBe(true);
+    expect(expanded?.menuHooks).toContain("aperitif");
   });
 
   it("defines priority pairing service profiles in all wine-library languages", () => {
@@ -103,6 +139,18 @@ describe("wine library editorial profiles", () => {
       "pasta-arroces-y-legumbres",
       "cocina-asiatica-y-fusion",
       "quesos",
+      "aves-y-caza",
+      "verduras-y-cocina-vegetariana",
+      "postres-y-chocolate",
+      "tapas-y-aperitivos",
+      "solomillo-de-ternera",
+      "cordero-asado",
+      "pato-confitado",
+      "atun-rojo",
+      "pulpo-gallego",
+      "risotto-setas",
+      "ostras",
+      "chocolate-negro",
     ]);
 
     const de = getPairingEditorialProfile("cocina-asiatica-y-fusion", "de", "Asiatische Kuche");
@@ -114,5 +162,10 @@ describe("wine library editorial profiles", () => {
     expect(pt?.eyebrow).toBe("Inteligencia de harmonizacao");
     expect(pt?.sections.some((section) => section.title === "Papel da harmonizacao")).toBe(true);
     expect(pt?.menuHooks).toContain("ostras");
+
+    const expanded = getPairingEditorialProfile("ostras", "de", "Austern");
+    expect(expanded?.eyebrow).toBe("Weinkarten-Intelligenz");
+    expect(expanded?.sections.some((section) => section.title === "Rolle auf der Weinkarte")).toBe(true);
+    expect(expanded?.menuHooks).toContain("Austern");
   });
 });

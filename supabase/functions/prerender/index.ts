@@ -1703,6 +1703,243 @@ const WINE_LIBRARY_PRIORITY_PAIRINGS: Record<string, WineLibraryPriorityProfile>
   },
 };
 
+type WineLibraryExpansionTemplate =
+  | 'freshWhite'
+  | 'mineralWhite'
+  | 'aromaticWhite'
+  | 'elegantRed'
+  | 'structuredRed'
+  | 'mediterraneanRed'
+  | 'sparkling'
+  | 'fortified'
+  | 'foodPairing'
+  | 'dessertPairing'
+  | 'aperitifPairing';
+
+interface WineLibraryExpansionSeed {
+  slug: string;
+  serviceTemp: string;
+  glass: string;
+  template: WineLibraryExpansionTemplate;
+  hooks: Record<WineLibraryLang, string[]>;
+}
+
+const WINE_LIBRARY_EXPANSION_TEXT: Record<WineLibraryExpansionTemplate, Record<WineLibraryLang, {
+  role: string;
+  cue: string;
+  avoid: string;
+}>> = {
+  freshWhite: {
+    es: { role: 'Referencia blanca de alta rotacion para vender frescura, origen y decision facil por copa.', cue: 'Explica acidez, aroma y plato en una frase clara.', avoid: 'No tratarlo como blanco generico de la casa.' },
+    en: { role: 'High-rotation white reference for freshness, origin and easy by-the-glass decisions.', cue: 'Explain acidity, aroma and dish fit in one clear sentence.', avoid: 'Do not reduce it to generic house-white language.' },
+    it: { role: 'Bianco ad alta rotazione per freschezza, origine e scelta facile al calice.', cue: 'Spiega acidita, aroma e piatto in una frase chiara.', avoid: 'Non ridurlo a bianco generico della casa.' },
+    fr: { role: 'Blanc de forte rotation pour fraicheur, origine et decision facile au verre.', cue: 'Expliquez acidite, aromes et plat en une phrase claire.', avoid: 'Ne pas le reduire a un blanc maison generique.' },
+    de: { role: 'Weisse Referenz mit hoher Rotation fur Frische, Herkunft und einfache Glasentscheidung.', cue: 'Saure, Aroma und Gericht in einem klaren Satz erklaren.', avoid: 'Nicht als generischen Hauswein behandeln.' },
+    pt: { role: 'Branco de alta rotacao para frescura, origem e decisao facil a copo.', cue: 'Explique acidez, aroma e prato numa frase clara.', avoid: 'Nao reduzir a branco generico da casa.' },
+  },
+  mineralWhite: {
+    es: { role: 'Blanco gastronomico para vender tension, salinidad y una botella mas seria.', cue: 'Traduce mineralidad en sal, acidez, textura y final limpio.', avoid: 'No describirlo solo como seco: explica su utilidad con comida.' },
+    en: { role: 'Gastronomic white for tension, salinity and a more serious bottle step.', cue: 'Translate minerality into salt, acidity, texture and clean finish.', avoid: 'Do not describe it only as dry: explain why it works with food.' },
+    it: { role: 'Bianco gastronomico per tensione, salinita e bottiglia piu seria.', cue: 'Traduci mineralita in sale, acidita, texture e finale pulito.', avoid: 'Non descriverlo solo come secco: spiega l uso col cibo.' },
+    fr: { role: 'Blanc gastronomique pour tension, salinite et bouteille plus serieuse.', cue: 'Traduisez mineralite en sel, acidite, texture et finale nette.', avoid: 'Ne pas le decrire seulement comme sec : expliquez son role a table.' },
+    de: { role: 'Gastronomischer Weisswein fur Spannung, Salinitat und eine ernstere Flasche.', cue: 'Mineralitat in Salz, Saure, Textur und klaren Nachhall ubersetzen.', avoid: 'Nicht nur als trocken beschreiben: den Nutzen zum Essen erklaren.' },
+    pt: { role: 'Branco gastronomico para tensao, salinidade e garrafa mais seria.', cue: 'Traduza mineralidade em sal, acidez, textura e final limpo.', avoid: 'Nao descrever apenas como seco: explique o uso com comida.' },
+  },
+  aromaticWhite: {
+    es: { role: 'Blanco aromatico para crear recuerdo, frescura y maridajes que no funcionan con tintos.', cue: 'Aclara dulzor, acidez y perfil aromatico antes de recomendar.', avoid: 'No servir demasiado frio ni dejar dudas sobre si es seco o dulce.' },
+    en: { role: 'Aromatic white for memory, freshness and pairings that do not work with reds.', cue: 'Clarify sweetness, acidity and aromatic profile before recommending.', avoid: 'Do not serve too cold or leave doubt about dry versus sweet.' },
+    it: { role: 'Bianco aromatico per memoria, freschezza e abbinamenti dove il rosso non funziona.', cue: 'Chiarisci dolcezza, acidita e profilo aromatico.', avoid: 'Non servire troppo freddo ne lasciare dubbi su secco o dolce.' },
+    fr: { role: 'Blanc aromatique pour memoire, fraicheur et accords ou le rouge ne marche pas.', cue: 'Clarifiez sucre, acidite et profil aromatique.', avoid: 'Ne pas servir trop froid ni laisser le doute sec/doux.' },
+    de: { role: 'Aromatischer Weisswein fur Erinnerung, Frische und Pairings, bei denen Rotwein nicht passt.', cue: 'Susse, Saure und Aromatik vor der Empfehlung klaren.', avoid: 'Nicht zu kalt servieren oder trocken/suss unklar lassen.' },
+    pt: { role: 'Branco aromatico para memoria, frescura e harmonizacoes onde tinto nao funciona.', cue: 'Clarifique docura, acidez e perfil aromatico.', avoid: 'Nao servir demasiado frio nem deixar duvida seco/doce.' },
+  },
+  elegantRed: {
+    es: { role: 'Tinto elegante para clientes que buscan finura, acidez y menos peso alcoholico.', cue: 'Sirve ligeramente fresco y vende textura antes que potencia.', avoid: 'No presentarlo como tinto ligero sin valor: la clave es precision.' },
+    en: { role: 'Elegant red for guests seeking finesse, acidity and less alcoholic weight.', cue: 'Serve slightly cool and sell texture before power.', avoid: 'Do not present it as low-value light red: precision is the key.' },
+    it: { role: 'Rosso elegante per chi cerca finezza, acidita e meno peso alcolico.', cue: 'Servi leggermente fresco e vendi texture prima della potenza.', avoid: 'Non presentarlo come rosso leggero senza valore: la chiave e precisione.' },
+    fr: { role: 'Rouge elegant pour clients qui cherchent finesse, acidite et moins de poids alcoolique.', cue: 'Servez legerement frais et vendez texture avant puissance.', avoid: 'Ne pas le presenter comme rouge leger sans valeur : la cle est precision.' },
+    de: { role: 'Eleganter Rotwein fur Gaste, die Finesse, Saure und weniger Alkoholgewicht suchen.', cue: 'Leicht kuhl servieren und Textur vor Kraft verkaufen.', avoid: 'Nicht als leichten Wein ohne Wert darstellen: Prazision ist der Kern.' },
+    pt: { role: 'Tinto elegante para clientes que procuram finura, acidez e menos peso alcoolico.', cue: 'Sirva ligeiramente fresco e venda textura antes de potencia.', avoid: 'Nao apresentar como tinto leve sem valor: a chave e precisao.' },
+  },
+  structuredRed: {
+    es: { role: 'Tinto estructurado para carnes, ticket alto y botellas con mayor presencia en mesa.', cue: 'Conecta tanino, grasa, brasa y tiempo de aireacion.', avoid: 'No recomendarlo joven y cerrado sin plato ni aire.' },
+    en: { role: 'Structured red for meat, higher spend and bottles with more table presence.', cue: 'Connect tannin, fat, grill and aeration time.', avoid: 'Do not recommend it young and closed without food or air.' },
+    it: { role: 'Rosso strutturato per carne, ticket alto e bottiglie di presenza.', cue: 'Collega tannino, grasso, brace e aria.', avoid: 'Non consigliarlo giovane e chiuso senza cibo o aria.' },
+    fr: { role: 'Rouge structure pour viande, ticket eleve et bouteille de presence.', cue: 'Reliez tanin, gras, grill et aeration.', avoid: 'Ne pas le recommander jeune et ferme sans plat ni air.' },
+    de: { role: 'Strukturierter Rotwein fur Fleisch, hoheren Bon und Flaschen mit Prasenz.', cue: 'Tannin, Fett, Grill und Luftzeit verbinden.', avoid: 'Jung und verschlossen nicht ohne Essen oder Luft empfehlen.' },
+    pt: { role: 'Tinto estruturado para carne, ticket alto e garrafas com presenca.', cue: 'Ligue tanino, gordura, grelha e tempo de ar.', avoid: 'Nao recomendar jovem e fechado sem prato nem ar.' },
+  },
+  mediterraneanRed: {
+    es: { role: 'Tinto mediterraneo para fruta, especia, brasa y diferenciacion sin perder facilidad.', cue: 'Vende origen, madurez y plato, manteniendo frescura.', avoid: 'No servir caliente: el alcohol pesa y reduce precision.' },
+    en: { role: 'Mediterranean red for fruit, spice, grill and differentiation without losing ease.', cue: 'Sell origin, ripeness and dish fit while keeping freshness.', avoid: 'Do not serve warm: alcohol becomes heavy and precision drops.' },
+    it: { role: 'Rosso mediterraneo per frutto, spezia, brace e differenza senza perdere facilita.', cue: 'Vendi origine, maturita e piatto mantenendo freschezza.', avoid: 'Non servire caldo: l alcol pesa e perde precisione.' },
+    fr: { role: 'Rouge mediterraneen pour fruit, epice, grill et difference sans perdre lisibilite.', cue: 'Vendez origine, maturite et plat en gardant la fraicheur.', avoid: 'Ne pas servir chaud : l alcool pese et la precision baisse.' },
+    de: { role: 'Mediterraner Rotwein fur Frucht, Wurze, Grill und Differenzierung ohne Schwierigkeit.', cue: 'Herkunft, Reife und Gericht verkaufen, Frische bewahren.', avoid: 'Nicht warm servieren: Alkohol wirkt schwer und Prazision sinkt.' },
+    pt: { role: 'Tinto mediterranico para fruta, especiaria, grelha e diferenciacao sem perder facilidade.', cue: 'Venda origem, maturidade e prato mantendo frescura.', avoid: 'Nao servir quente: o alcool pesa e reduz precisao.' },
+  },
+  sparkling: {
+    es: { role: 'Espumoso para aperitivo, celebracion y maridajes que suben ticket desde el primer servicio.', cue: 'Habla de metodo, crianza y dosage para justificar precio.', avoid: 'No relegarlo al postre ni servirlo en copa inadecuada.' },
+    en: { role: 'Sparkling wine for aperitif, celebration and pairings that lift spend from the first service.', cue: 'Talk method, ageing and dosage to explain price.', avoid: 'Do not relegate it to dessert or unsuitable glassware.' },
+    it: { role: 'Spumante per aperitivo, celebrazione e abbinamenti che alzano lo scontrino.', cue: 'Parla di metodo, affinamento e dosage per spiegare il prezzo.', avoid: 'Non relegarlo al dessert ne a calici inadatti.' },
+    fr: { role: 'Effervescent pour aperitif, celebration et accords qui augmentent le ticket.', cue: 'Parlez methode, elevage et dosage pour expliquer le prix.', avoid: 'Ne pas le releguer au dessert ni au mauvais verre.' },
+    de: { role: 'Schaumwein fur Aperitif, Anlass und Pairings, die den Bon ab dem ersten Service heben.', cue: 'Methode, Reife und Dosage erklaren, um Preis sichtbar zu machen.', avoid: 'Nicht auf Dessert reduzieren oder falsch servieren.' },
+    pt: { role: 'Espumante para aperitivo, celebracao e harmonizacoes que sobem ticket desde o inicio.', cue: 'Fale de metodo, estagio e dosage para explicar preco.', avoid: 'Nao relegar a sobremesa nem servir em copo errado.' },
+  },
+  fortified: {
+    es: { role: 'Vino de servicio experto para aperitivo, quesos, postres y cierre de mesa.', cue: 'Explica seco/dulce, temperatura y tamano de servicio.', avoid: 'No esconderlo como rareza; necesita un uso concreto.' },
+    en: { role: 'Expert-service wine for aperitif, cheese, dessert and table closure.', cue: 'Explain dry/sweet, temperature and pour size.', avoid: 'Do not hide it as a curiosity; it needs a concrete use.' },
+    it: { role: 'Vino di servizio esperto per aperitivo, formaggi, dessert e fine tavola.', cue: 'Spiega secco/dolce, temperatura e dose.', avoid: 'Non nasconderlo come curiosita; serve un uso concreto.' },
+    fr: { role: 'Vin de service expert pour aperitif, fromage, dessert et fin de table.', cue: 'Expliquez sec/doux, temperature et dose.', avoid: 'Ne pas le cacher comme curiosite ; il demande un usage concret.' },
+    de: { role: 'Expertenwein fur Aperitif, Kase, Dessert und Abschluss.', cue: 'Trocken/suss, Temperatur und Ausschankgrosse erklaren.', avoid: 'Nicht als Kuriositat verstecken; er braucht konkreten Einsatz.' },
+    pt: { role: 'Vinho de servico especialista para aperitivo, queijo, sobremesa e fim de mesa.', cue: 'Explique seco/doce, temperatura e tamanho da dose.', avoid: 'Nao esconder como curiosidade; precisa de uso concreto.' },
+  },
+  foodPairing: {
+    es: { role: 'Maridaje de alta utilidad para traducir plato, salsa y textura en recomendacion vendible.', cue: 'Empieza por grasa, salsa e intensidad antes de elegir color.', avoid: 'No aplicar una regla fija: el punto del plato decide el vino.' },
+    en: { role: 'High-utility pairing that turns dish, sauce and texture into a sellable recommendation.', cue: 'Start with fat, sauce and intensity before choosing colour.', avoid: 'Do not apply a fixed rule: the dish details decide the wine.' },
+    it: { role: 'Abbinamento utile per tradurre piatto, salsa e texture in raccomandazione vendibile.', cue: 'Parti da grasso, salsa e intensita prima del colore.', avoid: 'Non applicare una regola fissa: decide il piatto.' },
+    fr: { role: 'Accord tres utile pour transformer plat, sauce et texture en recommandation vendable.', cue: 'Commencez par gras, sauce et intensite avant la couleur.', avoid: 'Ne pas appliquer une regle fixe : le detail du plat decide.' },
+    de: { role: 'Nutzliches Pairing, das Gericht, Sauce und Textur in eine verkaufbare Empfehlung ubersetzt.', cue: 'Mit Fett, Sauce und Intensitat beginnen, erst dann Farbe wahlen.', avoid: 'Keine feste Regel anwenden: das Gericht entscheidet.' },
+    pt: { role: 'Harmonizacao util para traduzir prato, molho e textura numa recomendacao vendavel.', cue: 'Comece por gordura, molho e intensidade antes da cor.', avoid: 'Nao aplicar regra fixa: o detalhe do prato decide.' },
+  },
+  dessertPairing: {
+    es: { role: 'Maridaje de cierre para vender media copa, dulzor equilibrado y recuerdo final.', cue: 'Iguala o supera el dulzor del postre y conserva acidez.', avoid: 'No poner vinos secos contra chocolate o azucar alta.' },
+    en: { role: 'Closing pairing for half-pours, balanced sweetness and a memorable finish.', cue: 'Match or exceed dessert sweetness while keeping acidity.', avoid: 'Do not put dry wines against chocolate or high sugar.' },
+    it: { role: 'Abbinamento finale per mezzi calici, dolcezza equilibrata e ricordo.', cue: 'Eguaglia o supera la dolcezza del dessert mantenendo acidita.', avoid: 'Non usare vini secchi con cioccolato o zucchero alto.' },
+    fr: { role: 'Accord de fin pour demi-verres, douceur equilibree et souvenir final.', cue: 'Egaler ou depasser le sucre du dessert en gardant acidite.', avoid: 'Ne pas mettre des vins secs face au chocolat ou sucre eleve.' },
+    de: { role: 'Abschluss-Pairing fur kleine Glaser, balancierte Susse und Erinnerung.', cue: 'Dessertsusse erreichen oder ubertreffen und Saure behalten.', avoid: 'Trockene Weine nicht gegen Schokolade oder hohen Zucker stellen.' },
+    pt: { role: 'Harmonizacao final para meios copos, docura equilibrada e memoria.', cue: 'Iguale ou supere a docura da sobremesa mantendo acidez.', avoid: 'Nao usar vinhos secos contra chocolate ou acucar alto.' },
+  },
+  aperitifPairing: {
+    es: { role: 'Maridaje de apertura para acelerar decision, copa y primer upsell.', cue: 'Busca sal, acidez, burbuja o amargor fino segun aperitivo.', avoid: 'No empezar la mesa con un vino pesado si el plato es ligero.' },
+    en: { role: 'Opening pairing for faster decision, first glass and first upsell.', cue: 'Look for salt, acidity, bubbles or fine bitterness depending on the snack.', avoid: 'Do not open the table with a heavy wine if the dish is light.' },
+    it: { role: 'Abbinamento di apertura per decisione rapida, primo calice e upsell.', cue: 'Cerca sale, acidita, bollicina o amaro fine secondo aperitivo.', avoid: 'Non aprire con vino pesante se il piatto e leggero.' },
+    fr: { role: 'Accord d ouverture pour decision rapide, premier verre et montee en gamme.', cue: 'Cherchez sel, acidite, bulle ou amertume fine selon aperitif.', avoid: 'Ne pas ouvrir avec un vin lourd si le plat est leger.' },
+    de: { role: 'Start-Pairing fur schnelle Entscheidung, erstes Glas und ersten Upsell.', cue: 'Salz, Saure, Perlage oder feine Bitterkeit je nach Snack suchen.', avoid: 'Nicht mit schwerem Wein starten, wenn das Gericht leicht ist.' },
+    pt: { role: 'Harmonizacao de abertura para decisao rapida, primeiro copo e upsell.', cue: 'Procure sal, acidez, bolha ou amargor fino conforme aperitivo.', avoid: 'Nao abrir com vinho pesado se o prato e leve.' },
+  },
+};
+
+function buildExpandedProfile(seed: WineLibraryExpansionSeed): WineLibraryPriorityProfile {
+  const copy = WINE_LIBRARY_EXPANSION_TEXT[seed.template];
+  return {
+    serviceTemp: seed.serviceTemp,
+    glass: seed.glass,
+    role: Object.fromEntries(WINE_LIBRARY_LANGS.map((lang) => [lang, copy[lang].role])) as Record<WineLibraryLang, string>,
+    cue: Object.fromEntries(WINE_LIBRARY_LANGS.map((lang) => [lang, copy[lang].cue])) as Record<WineLibraryLang, string>,
+    avoid: Object.fromEntries(WINE_LIBRARY_LANGS.map((lang) => [lang, copy[lang].avoid])) as Record<WineLibraryLang, string>,
+    hooks: seed.hooks,
+  };
+}
+
+function expandedProfileEntry(
+  slug: string,
+  serviceTemp: string,
+  glass: string,
+  template: WineLibraryExpansionTemplate,
+  hookSet: Record<WineLibraryLang, string[]>,
+): [string, WineLibraryPriorityProfile] {
+  return [slug, buildExpandedProfile({ slug, serviceTemp, glass, template, hooks: hookSet })];
+}
+
+const hooks = {
+  redMeat: {
+    es: ['carnes rojas', 'cordero', 'quesos curados'],
+    en: ['red meat', 'lamb', 'aged cheese'],
+    it: ['carni rosse', 'agnello', 'formaggi stagionati'],
+    fr: ['viandes rouges', 'agneau', 'fromages affines'],
+    de: ['rotes Fleisch', 'Lamm', 'gereifter Kase'],
+    pt: ['carnes vermelhas', 'borrego', 'queijos curados'],
+  },
+  seafood: {
+    es: ['ostras', 'pescado blanco', 'marisco'],
+    en: ['oysters', 'white fish', 'shellfish'],
+    it: ['ostriche', 'pesce bianco', 'frutti di mare'],
+    fr: ['huitres', 'poisson blanc', 'fruits de mer'],
+    de: ['Austern', 'weisser Fisch', 'Meeresfruchte'],
+    pt: ['ostras', 'peixe branco', 'marisco'],
+  },
+  vegetable: {
+    es: ['verduras', 'setas', 'arroces'],
+    en: ['vegetables', 'mushrooms', 'rice dishes'],
+    it: ['verdure', 'funghi', 'risotti'],
+    fr: ['legumes', 'champignons', 'riz'],
+    de: ['Gemuse', 'Pilze', 'Reisgerichte'],
+    pt: ['legumes', 'cogumelos', 'arrozes'],
+  },
+  aperitif: {
+    es: ['aperitivo', 'tapas', 'frituras'],
+    en: ['aperitif', 'tapas', 'fried dishes'],
+    it: ['aperitivo', 'tapas', 'fritti'],
+    fr: ['aperitif', 'tapas', 'fritures'],
+    de: ['Aperitif', 'Tapas', 'Frittiertes'],
+    pt: ['aperitivo', 'tapas', 'fritos'],
+  },
+  dessert: {
+    es: ['chocolate', 'quesos azules', 'postres'],
+    en: ['chocolate', 'blue cheese', 'desserts'],
+    it: ['cioccolato', 'formaggi erborinati', 'dessert'],
+    fr: ['chocolat', 'fromages bleus', 'desserts'],
+    de: ['Schokolade', 'Blauschimmelkase', 'Desserts'],
+    pt: ['chocolate', 'queijos azuis', 'sobremesas'],
+  },
+} satisfies Record<string, Record<WineLibraryLang, string[]>>;
+
+const WINE_LIBRARY_EXPANDED_GRAPES: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
+  expandedProfileEntry('mencia', '14-16 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('cabernet-franc', '15-17 C', 'Burdeos / universal amplia', 'elegantRed', hooks.redMeat),
+  expandedProfileEntry('gamay', '12-14 C', 'Borgona / universal', 'elegantRed', hooks.aperitif),
+  expandedProfileEntry('gewurztraminer', '7-9 C', 'Blanco aromatico', 'aromaticWhite', hooks.dessert),
+  expandedProfileEntry('viognier', '9-11 C', 'Blanco con volumen', 'aromaticWhite', hooks.seafood),
+  expandedProfileEntry('gruner-veltliner', '7-9 C', 'Blanco aromatico / universal', 'freshWhite', hooks.vegetable),
+  expandedProfileEntry('pinot-grigio', '7-9 C', 'Blanco joven / universal', 'freshWhite', hooks.seafood),
+  expandedProfileEntry('barbera', '14-16 C', 'Universal / Borgona', 'mediterraneanRed', hooks.vegetable),
+  expandedProfileEntry('primitivo', '15-17 C', 'Burdeos / universal amplia', 'mediterraneanRed', hooks.redMeat),
+  expandedProfileEntry('aglianico', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+]);
+
+const WINE_LIBRARY_EXPANDED_REGIONS: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
+  expandedProfileEntry('toscana', '16-18 C', 'Burdeos / universal amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('napa-valley', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('jerez', '7-13 C', 'Copa pequena / blanco', 'fortified', hooks.aperitif),
+  expandedProfileEntry('vallee-du-rhone', '15-18 C', 'Burdeos / Syrah', 'mediterraneanRed', hooks.redMeat),
+  expandedProfileEntry('piemonte', '15-18 C', 'Borgona amplia', 'elegantRed', hooks.redMeat),
+  expandedProfileEntry('barossa-valley', '16-18 C', 'Syrah / Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('marlborough', '7-9 C', 'Blanco aromatico', 'aromaticWhite', hooks.seafood),
+  expandedProfileEntry('mendoza', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('mosel', '7-10 C', 'Blanco aromatico', 'aromaticWhite', hooks.seafood),
+  expandedProfileEntry('willamette-valley', '13-15 C', 'Borgona amplia', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('sancerre', '8-10 C', 'Blanco aromatico / universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('barolo', '16-18 C', 'Borgona / Nebbiolo', 'structuredRed', hooks.redMeat),
+]);
+
+const WINE_LIBRARY_EXPANDED_STYLES: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
+  expandedProfileEntry('tinto-joven', '13-15 C', 'Universal', 'elegantRed', hooks.aperitif),
+  expandedProfileEntry('tinto-ligero', '13-15 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('tinto-cuerpo', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('blanco-joven', '7-9 C', 'Blanco joven', 'freshWhite', hooks.seafood),
+  expandedProfileEntry('blanco-mineral', '8-11 C', 'Blanco universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('champagne', '6-8 C', 'Tulipa / blanco', 'sparkling', hooks.seafood),
+  expandedProfileEntry('cava', '6-8 C', 'Tulipa / blanco', 'sparkling', hooks.aperitif),
+  expandedProfileEntry('fino-manzanilla', '7-9 C', 'Copa pequena / blanco', 'fortified', hooks.aperitif),
+  expandedProfileEntry('pedro-ximenez', '10-12 C', 'Copa pequena', 'fortified', hooks.dessert),
+  expandedProfileEntry('orange-maceracion-corta', '10-12 C', 'Universal', 'mediterraneanRed', hooks.vegetable),
+]);
+
+const WINE_LIBRARY_EXPANDED_PAIRINGS: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
+  expandedProfileEntry('aves-y-caza', 'Copa: Pinot Noir, Chardonnay o Garnacha fina', 'Ruta: blanco con cuerpo -> tinto elegante', 'foodPairing', hooks.redMeat),
+  expandedProfileEntry('verduras-y-cocina-vegetariana', 'Copa: Verdejo serio, Gruner Veltliner o rosado', 'Ruta: fresco -> mineral -> textura', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('postres-y-chocolate', 'Copa: PX, Oporto Tawny o Moscatel', 'Ruta: dulzor -> acidez -> final', 'dessertPairing', hooks.dessert),
+  expandedProfileEntry('tapas-y-aperitivos', 'Copa: Cava, Fino, Verdejo o rosado', 'Ruta: aperitivo -> sal -> frescura', 'aperitifPairing', hooks.aperitif),
+  expandedProfileEntry('solomillo-de-ternera', 'Copa: Rioja reserva, Cabernet o Pinot potente', 'Ruta: tinto elegante -> reserva', 'foodPairing', hooks.redMeat),
+  expandedProfileEntry('cordero-asado', 'Copa: Rioja, Ribera o Garnacha vieja', 'Ruta: crianza -> reserva -> origen', 'foodPairing', hooks.redMeat),
+  expandedProfileEntry('pato-confitado', 'Copa: Pinot Noir, Nebbiolo o Garnacha', 'Ruta: acidez -> fruta -> especia', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('atun-rojo', 'Copa: Pinot Noir, rosado o blanco con lias', 'Ruta: mar -> umami -> textura', 'foodPairing', hooks.seafood),
+  expandedProfileEntry('pulpo-gallego', 'Copa: Godello, Albarino, Mencia o espumoso', 'Ruta: sal -> pimenton -> frescura', 'foodPairing', hooks.seafood),
+  expandedProfileEntry('risotto-setas', 'Copa: Pinot Noir, Nebbiolo o blanco con lias', 'Ruta: tierra -> textura -> acidez', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('ostras', 'Copa: Champagne, Cava o Muscadet', 'Ruta: salinidad -> burbuja -> premium', 'aperitifPairing', hooks.seafood),
+  expandedProfileEntry('chocolate-negro', 'Copa: PX, Oporto o Banyuls', 'Ruta: cacao -> dulzor -> amargor', 'dessertPairing', hooks.dessert),
+]);
+
 const WINE_LIBRARY_EDITORIAL_COPY: Record<WineLibraryLang, {
   role: string;
   service: string;
@@ -2111,16 +2348,16 @@ function renderWineLibraryPage(path: string): string | null {
   const subject = isSectionHub ? sectionTitle : titleFromSlug(parts[parts.length - 1]);
   const type = isSectionHub ? sectionTitle.toLowerCase() : copy.detailLabels[section] || copy.detailLabels.article;
   const priorityGrapeProfile = !isSectionHub && section === 'uvas'
-    ? WINE_LIBRARY_PRIORITY_GRAPES[parts[parts.length - 1]]
+    ? WINE_LIBRARY_PRIORITY_GRAPES[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_GRAPES[parts[parts.length - 1]]
     : undefined;
   const priorityRegionProfile = !isSectionHub && section === 'regiones'
-    ? WINE_LIBRARY_PRIORITY_REGIONS[parts[parts.length - 1]]
+    ? WINE_LIBRARY_PRIORITY_REGIONS[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_REGIONS[parts[parts.length - 1]]
     : undefined;
   const priorityStyleProfile = !isSectionHub && section === 'estilos'
-    ? WINE_LIBRARY_PRIORITY_STYLES[parts[parts.length - 1]]
+    ? WINE_LIBRARY_PRIORITY_STYLES[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_STYLES[parts[parts.length - 1]]
     : undefined;
   const priorityPairingProfile = !isSectionHub && section === 'maridajes'
-    ? WINE_LIBRARY_PRIORITY_PAIRINGS[parts[parts.length - 1]]
+    ? WINE_LIBRARY_PRIORITY_PAIRINGS[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_PAIRINGS[parts[parts.length - 1]]
     : undefined;
   const priorityProfile = priorityGrapeProfile || priorityRegionProfile || priorityStyleProfile || priorityPairingProfile;
   const editorialLang = priorityProfile ? lang : undefined;

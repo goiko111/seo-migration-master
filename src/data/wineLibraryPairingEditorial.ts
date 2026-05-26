@@ -1,5 +1,10 @@
 export type WineLibraryPairingEditorialLang = "es" | "en" | "it" | "fr" | "de" | "pt";
 
+import {
+  expandedPairingSlugs,
+  getExpandedPairingEditorialProfile,
+} from "./wineLibraryEditorialExpansion";
+
 type LocalizedPairingEditorialText = {
   byTheGlass: string;
   defaultWines: string;
@@ -38,6 +43,7 @@ export const priorityPairingSlugs = [
   "pasta-arroces-y-legumbres",
   "cocina-asiatica-y-fusion",
   "quesos",
+  ...expandedPairingSlugs,
 ] as const;
 
 const profileText = (text: Record<WineLibraryPairingEditorialLang, LocalizedPairingEditorialText>) => text;
@@ -524,7 +530,7 @@ export function getPairingEditorialProfile(
   pairingName: string,
 ): LocalizedPairingEditorialProfile | undefined {
   const profile = pairingEditorialProfiles[slug];
-  if (!profile) return undefined;
+  if (!profile) return getExpandedPairingEditorialProfile(slug, lang, pairingName);
   const resolvedLang = langFallback(lang);
   const copy = pairingEditorialCopy[resolvedLang];
   const text = profile.texts[resolvedLang];
