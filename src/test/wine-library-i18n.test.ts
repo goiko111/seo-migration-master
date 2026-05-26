@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
 import { getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
 import { getLocalizedStyleBySlug } from "@/data/stylesLibraryI18n";
+import { getLocalizedPairingBySlug } from "@/data/pairingsLibraryI18n";
 import { getWineLibraryEsPath, getWineLibraryHreflang, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 describe("wine library i18n routes", () => {
@@ -91,6 +92,23 @@ describe("wine library i18n routes", () => {
     expect(pt?.name).toBe("Branco sobre Lias");
     expect(pt?.cartaCommunication).toContain("carta");
     expect(pt?.pairings).toContain("marisco");
+    expect(pt?.faqs[0]?.q).not.toContain("¿");
+  });
+
+  it("does not leak Spanish pairing narratives into localized pairing detail pages", () => {
+    const de = getLocalizedPairingBySlug("cocina-asiatica-y-fusion", "de");
+    const pt = getLocalizedPairingBySlug("lubina-dorada", "pt");
+
+    expect(de?.name).toBe("Weinbegleitung zu Asiatischer und Fusion-Küche");
+    expect(de?.principles[0]).toContain("Weinkorper");
+    expect(de?.description).not.toContain("Blanco");
+    expect(de?.cartaUsage).toContain("Glasempfehlung");
+    expect(de?.faqs[0]?.q).not.toContain("¿");
+    expect(de?.commonMistakes[0]).not.toContain("No ");
+    expect(pt?.name).toBe("Harmonização com Peixe Branco");
+    expect(pt?.description).not.toContain("Blanco");
+    expect(pt?.dishes[0]?.dish).toBe("Robalo ao sal");
+    expect(pt?.cartaUsage).toContain("copo");
     expect(pt?.faqs[0]?.q).not.toContain("¿");
   });
 

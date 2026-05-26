@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/i18n/LanguageProvider";
 import GrapeDetail from "@/pages/GrapeDetail";
 import RegionDetail from "@/pages/RegionDetail";
 import StyleDetail from "@/pages/StyleDetail";
+import PairingDetail from "@/pages/PairingDetail";
 
 describe("grape detail rendering", () => {
   it("renders localized grape detail pages for human users", async () => {
@@ -54,5 +55,22 @@ describe("grape detail rendering", () => {
     expect(screen.getByRole("heading", { name: /Wie Schaumwein auf der Weinkarte verkauft wird/i, level: 2 })).toBeInTheDocument();
     expect(screen.getByText("Rolle auf der Weinkarte")).toBeInTheDocument();
     expect(screen.getAllByText("Austern").length).toBeGreaterThan(0);
+  });
+
+  it("renders localized priority pairing editorial sections for human users", async () => {
+    render(
+      <MemoryRouter initialEntries={["/pt/biblioteca-vinho/harmonizacoes/lubina-dorada"]}>
+        <LanguageProvider>
+          <Routes>
+            <Route path="/pt/biblioteca-vinho/harmonizacoes/:pairing" element={<PairingDetail />} />
+          </Routes>
+        </LanguageProvider>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: /Harmonização com Peixe Branco/i, level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Como vender Harmonização com Peixe Branco em sala/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByText("Papel da harmonizacao")).toBeInTheDocument();
+    expect(screen.getAllByText("robalo").length).toBeGreaterThan(0);
   });
 });

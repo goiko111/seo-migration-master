@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getGrapeEditorialProfile, priorityGrapeSlugs } from "@/data/wineLibraryEditorial";
 import { getRegionEditorialProfile, priorityRegionSlugs } from "@/data/wineLibraryRegionEditorial";
 import { getStyleEditorialProfile, priorityStyleSlugs } from "@/data/wineLibraryStyleEditorial";
+import { getPairingEditorialProfile, priorityPairingSlugs } from "@/data/wineLibraryPairingEditorial";
 
 describe("wine library editorial profiles", () => {
   it("defines priority service profiles for the first two editorial tranches", () => {
@@ -92,5 +93,26 @@ describe("wine library editorial profiles", () => {
     expect(pt?.eyebrow).toBe("Inteligencia de estilo");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
+  });
+
+  it("defines priority pairing service profiles in all wine-library languages", () => {
+    expect(priorityPairingSlugs).toEqual([
+      "carnes-rojas",
+      "lubina-dorada",
+      "pescados-y-mariscos",
+      "pasta-arroces-y-legumbres",
+      "cocina-asiatica-y-fusion",
+      "quesos",
+    ]);
+
+    const de = getPairingEditorialProfile("cocina-asiatica-y-fusion", "de", "Asiatische Kuche");
+    const pt = getPairingEditorialProfile("pescados-y-mariscos", "pt", "Peixes e mariscos");
+
+    expect(de?.eyebrow).toBe("Pairing-Service-Intelligenz");
+    expect(de?.sections.some((section) => section.title === "Pairing-Rolle")).toBe(true);
+    expect(de?.menuHooks).toContain("Ramen");
+    expect(pt?.eyebrow).toBe("Inteligencia de harmonizacao");
+    expect(pt?.sections.some((section) => section.title === "Papel da harmonizacao")).toBe(true);
+    expect(pt?.menuHooks).toContain("ostras");
   });
 });

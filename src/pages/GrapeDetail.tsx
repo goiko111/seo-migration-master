@@ -287,17 +287,35 @@ const GrapeDetail = () => {
   useEffect(() => {
     const entry = fullEntry || catalogEntry;
     if (!entry) return;
+    const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/uvas/${entry.slug}`);
+    const description = fullEntry?.description || entry.tastingNotes;
     const schema = document.createElement("script");
     schema.id = "grape-detail-jsonld";
     schema.type = "application/ld+json";
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Article",
-      headline: entry.name,
-      description: fullEntry?.description || entry.tastingNotes,
-      author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/uvas/${entry.slug}`),
+      "@graph": [
+        {
+          "@type": "Article",
+          headline: entry.name,
+          description,
+          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          mainEntityOfPage: pageUrl,
+          about: { "@id": `${pageUrl}#grape-term` },
+        },
+        {
+          "@id": `${pageUrl}#grape-term`,
+          "@type": "DefinedTerm",
+          name: entry.name,
+          description,
+          inDefinedTermSet: {
+            "@type": "DefinedTermSet",
+            name: "Winerim Wine Library",
+            url: getWineLibraryUrl(lang, "/biblioteca-vino/uvas"),
+          },
+        },
+      ],
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("grape-detail-jsonld")?.remove(); };

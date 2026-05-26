@@ -1484,6 +1484,225 @@ const WINE_LIBRARY_PRIORITY_STYLES: Record<string, WineLibraryPriorityProfile> =
   },
 };
 
+const WINE_LIBRARY_PRIORITY_PAIRINGS: Record<string, WineLibraryPriorityProfile> = {
+  'carnes-rojas': {
+    serviceTemp: 'Copa: Rioja Crianza, Ribera roble o Malbec',
+    glass: 'Ruta: crianza -> productor -> reserva premium',
+    role: {
+      es: 'Carnes rojas es el maridaje de confianza para vender tinto con seguridad, leyendo corte, grasa, salsa y punto de coccion.',
+      en: 'Red meat is the trust pairing for selling red wine with confidence by reading cut, fat, sauce and cooking point.',
+      it: 'Le carni rosse sono l abbinamento di fiducia per vendere rosso leggendo taglio, grasso, salsa e cottura.',
+      fr: 'Les viandes rouges sont l accord de confiance pour vendre du rouge en lisant morceau, gras, sauce et cuisson.',
+      de: 'Rotes Fleisch ist das Vertrauenspairing fur Rotweinverkauf nach Schnitt, Fett, Sauce und Gargrad.',
+      pt: 'Carnes vermelhas sao a harmonizacao de confianca para vender tinto lendo corte, gordura, molho e ponto.',
+    },
+    cue: {
+      es: 'Empieza por la carne y termina por estructura: grasa, brasa, tanino y frescura.',
+      en: 'Start with the meat and finish with structure: fat, grill, tannin and freshness.',
+      it: 'Partire dalla carne e chiudere con struttura: grasso, brace, tannino e freschezza.',
+      fr: 'Commencer par la viande et finir par la structure : gras, grill, tanin et fraicheur.',
+      de: 'Beim Fleisch beginnen und mit Struktur enden: Fett, Grill, Tannin und Frische.',
+      pt: 'Comecar pela carne e terminar na estrutura: gordura, grelha, tanino e frescura.',
+    },
+    avoid: {
+      es: 'No recomendar siempre el tinto mas potente; solomillo o carpaccio necesitan menos tanino que chuleton.',
+      en: 'Do not always recommend the most powerful red; fillet or carpaccio needs less tannin than ribeye.',
+      it: 'Non consigliare sempre il rosso piu potente; filetto o carpaccio richiedono meno tannino.',
+      fr: 'Ne pas recommander toujours le rouge le plus puissant ; filet ou carpaccio demandent moins de tanin.',
+      de: 'Nicht immer den kraftigsten Rotwein empfehlen; Filet oder Carpaccio brauchen weniger Tannin.',
+      pt: 'Nao recomendar sempre o tinto mais potente; filet ou carpaccio precisam de menos tanino.',
+    },
+    hooks: {
+      es: ['chuleton', 'cordero', 'solomillo', 'estofados', 'quesos curados'],
+      en: ['ribeye', 'lamb', 'fillet', 'stews', 'aged cheese'],
+      it: ['costata', 'agnello', 'filetto', 'brasati', 'formaggi stagionati'],
+      fr: ['entrecote', 'agneau', 'filet', 'plats mijotes', 'fromages affines'],
+      de: ['Ribeye', 'Lamm', 'Filet', 'Schmorgerichte', 'gereifter Kase'],
+      pt: ['entrecote', 'borrego', 'filet', 'estufados', 'queijos curados'],
+    },
+  },
+  'lubina-dorada': {
+    serviceTemp: 'Copa: Albarino, Verdejo, Chablis o Godello',
+    glass: 'Ruta: blanco fresco -> mineral -> lias premium',
+    role: {
+      es: 'Pescado blanco debe vender frescura, precision y respeto por el producto.',
+      en: 'White fish should sell freshness, precision and respect for the product.',
+      it: 'Il pesce bianco deve vendere freschezza, precisione e rispetto del prodotto.',
+      fr: 'Le poisson blanc doit vendre fraicheur, precision et respect du produit.',
+      de: 'Weisser Fisch verkauft Frische, Prazision und Respekt vor dem Produkt.',
+      pt: 'Peixe branco deve vender frescura, precisao e respeito pelo produto.',
+    },
+    cue: {
+      es: 'Habla de delicadeza, acidez y salinidad; si hay salsa, deja que decida el cuerpo.',
+      en: 'Talk delicacy, acidity and salinity; if there is sauce, let it decide the body.',
+      it: 'Parlare di delicatezza, acidita e salinita; se c e salsa, decide il corpo.',
+      fr: 'Parler delicatesse, acidite et salinite ; s il y a sauce, elle decide le corps.',
+      de: 'Delikatesse, Saure und Salinitat nennen; Sauce entscheidet den Korper.',
+      pt: 'Falar de delicadeza, acidez e salinidade; se houver molho, ele decide o corpo.',
+    },
+    avoid: {
+      es: 'No tapar el pescado con madera excesiva ni servir el vino helado hasta borrar aromas.',
+      en: 'Do not cover the fish with excessive oak or serve the wine so cold that aromatics disappear.',
+      it: 'Non coprire il pesce con troppo legno ne servire il vino troppo freddo.',
+      fr: 'Ne pas couvrir le poisson avec trop de bois ni servir le vin trop froid.',
+      de: 'Den Fisch nicht mit Holz verdecken und den Wein nicht zu kalt servieren.',
+      pt: 'Nao tapar o peixe com madeira excessiva nem servir o vinho demasiado frio.',
+    },
+    hooks: {
+      es: ['lubina', 'dorada', 'merluza', 'rodaballo', 'salsas ligeras'],
+      en: ['sea bass', 'sea bream', 'hake', 'turbot', 'light sauces'],
+      it: ['branzino', 'orata', 'nasello', 'rombo', 'salse leggere'],
+      fr: ['bar', 'daurade', 'merlu', 'turbot', 'sauces legeres'],
+      de: ['Wolfsbarsch', 'Dorade', 'Seehecht', 'Steinbutt', 'leichte Saucen'],
+      pt: ['robalo', 'dourada', 'pescada', 'pregado', 'molhos leves'],
+    },
+  },
+  'pescados-y-mariscos': {
+    serviceTemp: 'Copa: Albarino, Cava Brut Nature, Champagne o Muscadet',
+    glass: 'Ruta: blanco fresco -> espumoso -> botella premium',
+    role: {
+      es: 'Marisco es una palanca de frescura, salinidad y ticket medio: puede vender blanco, espumoso o botella premium.',
+      en: 'Seafood is a lever for freshness, salinity and spend: it can sell white, sparkling or premium bottles.',
+      it: 'I frutti di mare sono leva di freschezza, salinita e scontrino: vendono bianco, spumante o premium.',
+      fr: 'Les fruits de mer activent fraicheur, salinite et ticket : blanc, effervescent ou bouteille premium.',
+      de: 'Meeresfruchte sind Hebel fur Frische, Salinitat und Bon: Weisswein, Schaumwein oder Premiumflasche.',
+      pt: 'Marisco e alavanca de frescura, salinidade e ticket: vende branco, espumante ou garrafa premium.',
+    },
+    cue: {
+      es: 'Conecta mar, sal y burbuja. En crudo manda la acidez; a la plancha entra mas volumen.',
+      en: 'Connect sea, salt and bubbles. Raw seafood needs acidity; grilled seafood can take more volume.',
+      it: 'Collegare mare, sale e bollicina. A crudo acidita; alla griglia piu volume.',
+      fr: 'Relier mer, sel et bulle. Le cru demande acidite ; la plancha accepte plus de volume.',
+      de: 'Meer, Salz und Perlage verbinden. Roh braucht Saure; gegrillt vertragt mehr Volumen.',
+      pt: 'Ligar mar, sal e bolha. Em cru manda a acidez; na grelha entra mais volume.',
+    },
+    avoid: {
+      es: 'No limitar marisco a un solo blanco fresco; hay margen en espumosos, lias y blancos minerales.',
+      en: 'Do not reduce seafood to one fresh white; there is margin in sparkling, lees-aged and mineral whites.',
+      it: 'Non ridurre il mare a un solo bianco fresco; c e margine in spumanti, lieviti e mineralita.',
+      fr: 'Ne pas reduire les fruits de mer a un seul blanc frais ; la marge existe sur bulles, lies et mineralite.',
+      de: 'Meeresfruchte nicht auf einen Weisswein reduzieren; Marge liegt in Schaumwein, Hefelager und Mineralitat.',
+      pt: 'Nao limitar marisco a um branco fresco; ha margem em espumantes, lias e mineralidade.',
+    },
+    hooks: {
+      es: ['ostras', 'gambas', 'pulpo', 'ceviche', 'sushi'],
+      en: ['oysters', 'prawns', 'octopus', 'ceviche', 'sushi'],
+      it: ['ostriche', 'gamberi', 'polpo', 'ceviche', 'sushi'],
+      fr: ['huitres', 'crevettes', 'poulpe', 'ceviche', 'sushi'],
+      de: ['Austern', 'Garnelen', 'Oktopus', 'Ceviche', 'Sushi'],
+      pt: ['ostras', 'camarao', 'polvo', 'ceviche', 'sushi'],
+    },
+  },
+  'pasta-arroces-y-legumbres': {
+    serviceTemp: 'Copa: Garnacha, rose gastronomico, Verdejo o Chianti',
+    glass: 'Ruta: por salsa -> por fondo -> por textura',
+    role: {
+      es: 'Arroces y pasta son maridajes de rotacion: salsa, fondo y grasa mandan mas que el ingrediente base.',
+      en: 'Rice and pasta are rotation pairings: sauce, stock and fat matter more than the base ingredient.',
+      it: 'Riso e pasta sono abbinamenti di rotazione: salsa, fondo e grasso contano piu della base.',
+      fr: 'Riz et pates sont des accords de rotation : sauce, fond et gras comptent plus que la base.',
+      de: 'Reis und Pasta sind Rotationspairings: Sauce, Fond und Fett zahlen mehr als die Basis.',
+      pt: 'Arrozes e massas sao harmonizacoes de rotacao: molho, fundo e gordura mandam mais que a base.',
+    },
+    cue: {
+      es: 'Pregunta por salsa y fondo: tomate pide acidez, setas piden tierra, marisco pide salinidad.',
+      en: 'Ask about sauce and stock: tomato needs acidity, mushrooms need earth, seafood needs salinity.',
+      it: 'Chiedere salsa e fondo: pomodoro vuole acidita, funghi terra, mare salinita.',
+      fr: 'Demander sauce et fond : tomate veut acidite, champignons terre, mer salinite.',
+      de: 'Nach Sauce und Fond fragen: Tomate braucht Saure, Pilze Erde, Meeresfruchte Salinitat.',
+      pt: 'Perguntar pelo molho e fundo: tomate pede acidez, cogumelos terra, marisco salinidade.',
+    },
+    avoid: {
+      es: 'No tratar todos los arroces como paella ni toda pasta como tomate; el condimento decide.',
+      en: 'Do not treat every rice dish as paella or every pasta as tomato; seasoning decides.',
+      it: 'Non trattare ogni riso come paella ne ogni pasta come pomodoro; decide il condimento.',
+      fr: 'Ne pas traiter tous les riz comme paella ni toutes les pates comme tomate ; l assaisonnement decide.',
+      de: 'Nicht jedes Reisgericht als Paella und jede Pasta als Tomate behandeln; Wurze entscheidet.',
+      pt: 'Nao tratar todos os arrozes como paella nem todas as massas como tomate; o tempero decide.',
+    },
+    hooks: {
+      es: ['paella', 'risotto', 'pasta con tomate', 'setas', 'legumbres'],
+      en: ['paella', 'risotto', 'tomato pasta', 'mushrooms', 'legumes'],
+      it: ['paella', 'risotto', 'pasta al pomodoro', 'funghi', 'legumi'],
+      fr: ['paella', 'risotto', 'pates tomate', 'champignons', 'legumineuses'],
+      de: ['Paella', 'Risotto', 'Tomatenpasta', 'Pilze', 'Hulsenfruchte'],
+      pt: ['paella', 'risotto', 'massa com tomate', 'cogumelos', 'leguminosas'],
+    },
+  },
+  'cocina-asiatica-y-fusion': {
+    serviceTemp: 'Copa: Riesling, Gewurztraminer o espumoso brut',
+    glass: 'Ruta: picante -> umami -> dulzor/acidez',
+    role: {
+      es: 'Cocina asiatica exige gestionar picante, umami, dulzor y acidez; es donde un buen maridaje mas sorprende.',
+      en: 'Asian cuisine requires managing spice, umami, sweetness and acidity; it is where pairing surprises most.',
+      it: 'La cucina asiatica richiede piccante, umami, dolcezza e acidita; qui l abbinamento sorprende.',
+      fr: 'La cuisine asiatique demande piment, umami, douceur et acidite ; c est l accord qui surprend.',
+      de: 'Asiatische Kuche verlangt Kontrolle von Scharfe, Umami, Suesse und Saure; hier uberrascht Pairing.',
+      pt: 'Cozinha asiatica exige gerir picante, umami, docura e acidez; e onde a harmonizacao surpreende.',
+    },
+    cue: {
+      es: 'No empieces por color; empieza por picante, soja, jengibre, coco o agridulce.',
+      en: 'Do not start with colour; start with spice, soy, ginger, coconut or sweet-sour balance.',
+      it: 'Non partire dal colore; partire da piccante, soia, zenzero, cocco o agrodolce.',
+      fr: 'Ne pas commencer par la couleur ; commencer par piment, soja, gingembre, coco ou aigre-doux.',
+      de: 'Nicht mit Farbe beginnen; mit Scharfe, Soja, Ingwer, Kokos oder Suss-Sauer starten.',
+      pt: 'Nao comecar pela cor; comecar por picante, soja, gengibre, coco ou agridoce.',
+    },
+    avoid: {
+      es: 'No usar tintos tanicos con picante o soja dominante; se endurecen y aumentan el calor.',
+      en: 'Avoid tannic reds with heat or dominant soy; they harden and increase spice perception.',
+      it: 'Evitare rossi tannici con piccante o soia dominante; si induriscono e aumentano il calore.',
+      fr: 'Eviter les rouges tanniques avec piment ou soja dominant ; ils durcissent et augmentent la chaleur.',
+      de: 'Tannische Rotweine bei Scharfe oder dominanter Soja vermeiden; sie wirken hart.',
+      pt: 'Evitar tintos tanicos com picante ou soja dominante; endurecem e aumentam o calor.',
+    },
+    hooks: {
+      es: ['sushi', 'ramen', 'thai curry', 'bao', 'ceviche fusion'],
+      en: ['sushi', 'ramen', 'Thai curry', 'bao', 'fusion ceviche'],
+      it: ['sushi', 'ramen', 'thai curry', 'bao', 'ceviche fusion'],
+      fr: ['sushi', 'ramen', 'thai curry', 'bao', 'ceviche fusion'],
+      de: ['Sushi', 'Ramen', 'Thai Curry', 'Bao', 'Fusion-Ceviche'],
+      pt: ['sushi', 'ramen', 'thai curry', 'bao', 'ceviche fusion'],
+    },
+  },
+  quesos: {
+    serviceTemp: 'Copa: Amontillado, Riesling, Sauternes o PX',
+    glass: 'Ruta: fresco -> cremoso -> curado -> azul',
+    role: {
+      es: 'Quesos es una categoria de margen alto si se vende por familias: fresco, cremoso, curado y azul.',
+      en: 'Cheese is a high-margin category when sold by families: fresh, creamy, aged and blue.',
+      it: 'I formaggi sono categoria ad alto margine se venduti per famiglie: freschi, cremosi, stagionati, erborinati.',
+      fr: 'Le fromage est une categorie a forte marge vendu par familles : frais, cremeux, affine et bleu.',
+      de: 'Kase ist margentragend, wenn nach Familien verkauft wird: frisch, cremig, gereift und blau.',
+      pt: 'Queijos sao categoria de margem alta quando vendidos por familias: fresco, cremoso, curado e azul.',
+    },
+    cue: {
+      es: 'No digas solo tinto con queso; lee sal, grasa, curacion e intensidad.',
+      en: 'Do not just say red with cheese; read salt, fat, ageing and intensity.',
+      it: 'Non dire solo rosso con formaggio; leggere sale, grasso, stagionatura e intensita.',
+      fr: 'Ne dites pas seulement rouge avec fromage ; lisez sel, gras, affinage et intensite.',
+      de: 'Nicht einfach Rotwein zu Kase sagen; Salz, Fett, Reife und Intensitat lesen.',
+      pt: 'Nao dizer apenas tinto com queijo; ler sal, gordura, cura e intensidade.',
+    },
+    avoid: {
+      es: 'No recomendar tintos tanicos con todos los quesos; muchos van mejor con blancos, generosos o dulces.',
+      en: 'Do not recommend tannic reds with every cheese; many work better with whites, fortified or sweet wines.',
+      it: 'Non consigliare rossi tannici con tutti i formaggi; molti funzionano meglio con bianchi o dolci.',
+      fr: 'Ne pas recommander des rouges tanniques avec tous les fromages ; beaucoup vont mieux avec blancs ou doux.',
+      de: 'Nicht tannische Rotweine zu jedem Kase empfehlen; viele passen besser zu Weisswein oder Susswein.',
+      pt: 'Nao recomendar tintos tanicos com todos os queijos; muitos funcionam melhor com brancos ou doces.',
+    },
+    hooks: {
+      es: ['manchego', 'queso azul', 'brie', 'parmigiano', 'tabla de quesos'],
+      en: ['Manchego', 'blue cheese', 'Brie', 'Parmigiano', 'cheese board'],
+      it: ['Manchego', 'erborinato', 'Brie', 'Parmigiano', 'tagliere'],
+      fr: ['Manchego', 'fromage bleu', 'Brie', 'Parmigiano', 'plateau de fromages'],
+      de: ['Manchego', 'Blauschimmel', 'Brie', 'Parmigiano', 'Kaseplatte'],
+      pt: ['Manchego', 'queijo azul', 'Brie', 'Parmigiano', 'tabua de queijos'],
+    },
+  },
+};
+
 const WINE_LIBRARY_EDITORIAL_COPY: Record<WineLibraryLang, {
   role: string;
   service: string;
@@ -1900,7 +2119,10 @@ function renderWineLibraryPage(path: string): string | null {
   const priorityStyleProfile = !isSectionHub && section === 'estilos'
     ? WINE_LIBRARY_PRIORITY_STYLES[parts[parts.length - 1]]
     : undefined;
-  const priorityProfile = priorityGrapeProfile || priorityRegionProfile || priorityStyleProfile;
+  const priorityPairingProfile = !isSectionHub && section === 'maridajes'
+    ? WINE_LIBRARY_PRIORITY_PAIRINGS[parts[parts.length - 1]]
+    : undefined;
+  const priorityProfile = priorityGrapeProfile || priorityRegionProfile || priorityStyleProfile || priorityPairingProfile;
   const editorialLang = priorityProfile ? lang : undefined;
   const priorityCopy = editorialLang
     ? WINE_LIBRARY_EDITORIAL_COPY[editorialLang]

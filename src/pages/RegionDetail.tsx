@@ -132,17 +132,34 @@ const RegionDetail = () => {
   // JSON-LD Schema
   useEffect(() => {
     if (!data || !countryData) return;
+    const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`);
     const schema = document.createElement("script");
     schema.id = "region-detail-jsonld";
     schema.type = "application/ld+json";
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Article",
-      headline: data.name,
-      description: data.description,
-      author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`),
+      "@graph": [
+        {
+          "@type": "Article",
+          headline: data.name,
+          description: data.description,
+          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          mainEntityOfPage: pageUrl,
+          about: { "@id": `${pageUrl}#region-term` },
+        },
+        {
+          "@id": `${pageUrl}#region-term`,
+          "@type": "DefinedTerm",
+          name: data.name,
+          description: data.description,
+          inDefinedTermSet: {
+            "@type": "DefinedTermSet",
+            name: "Winerim Wine Library",
+            url: getWineLibraryUrl(lang, "/biblioteca-vino/regiones"),
+          },
+        },
+      ],
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("region-detail-jsonld")?.remove(); };

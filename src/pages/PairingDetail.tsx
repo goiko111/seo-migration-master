@@ -17,35 +17,206 @@ import ScrollReveal from "@/components/ScrollReveal";
 import {
   type PairingEntry,
 } from "@/data/pairingsLibrary";
+import { getPairingEditorialProfile, type LocalizedPairingEditorialProfile } from "@/data/wineLibraryPairingEditorial";
 import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
 import {
   getLocalizedCategoryMeta,
   getLocalizedPairingBySlug,
   getLocalizedPairingEntries,
 } from "@/data/pairingsLibraryI18n";
-import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUrl } from "@/data/wineLibraryI18n";
+import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
+
+const pairingDetailCopy: Record<string, {
+  principles: string;
+  combinations: string;
+  recommendedStyles: string;
+  recommendedRegions: string;
+  frequentGrapes: string;
+  commonMistakes: string;
+  winerimReading: string;
+  hospitalityUse: string;
+  cartaUsage: string;
+  salaLanguage: string;
+  safeOptions: string;
+  differentialOptions: string;
+  restaurantMistakes: string;
+  whenClassicLoses: string;
+  bestConcepts: string;
+  relatedPairings: string;
+  faqTitle: string;
+  ctaTitle: string;
+  ctaText: string;
+}> = {
+  es: {
+    principles: "Principios clave",
+    combinations: "Combinaciones recomendadas",
+    recommendedStyles: "Estilos recomendados",
+    recommendedRegions: "Regiones recomendadas",
+    frequentGrapes: "Uvas frecuentes",
+    commonMistakes: "Errores frecuentes",
+    winerimReading: "Lectura Winerim",
+    hospitalityUse: "Cómo usar este maridaje en hostelería",
+    cartaUsage: "Cómo usarlo en carta",
+    salaLanguage: "Lenguaje de sala",
+    safeOptions: "Opciones seguras",
+    differentialOptions: "Opciones diferenciales",
+    restaurantMistakes: "Errores del restaurante",
+    whenClassicLoses: "Cuándo lo clásico pierde fuerza",
+    bestConcepts: "Mejor para estos conceptos",
+    relatedPairings: "Maridajes relacionados",
+    faqTitle: "Preguntas frecuentes",
+    ctaTitle: "¿Quieres que tu carta sugiera maridajes con inteligencia?",
+    ctaText: "Winerim conecta carta, platos y maridajes para que tu equipo recomiende mejor y tu cliente elija con criterio.",
+  },
+  en: {
+    principles: "Key principles",
+    combinations: "Recommended combinations",
+    recommendedStyles: "Recommended styles",
+    recommendedRegions: "Recommended regions",
+    frequentGrapes: "Frequent grapes",
+    commonMistakes: "Common mistakes",
+    winerimReading: "Winerim reading",
+    hospitalityUse: "How to use this pairing in hospitality",
+    cartaUsage: "How to use it on the list",
+    salaLanguage: "Floor language",
+    safeOptions: "Safe options",
+    differentialOptions: "Differentiating options",
+    restaurantMistakes: "Restaurant mistakes",
+    whenClassicLoses: "When the classic loses force",
+    bestConcepts: "Best for these concepts",
+    relatedPairings: "Related pairings",
+    faqTitle: "Frequently asked questions",
+    ctaTitle: "Want your list to suggest pairings with intelligence?",
+    ctaText: "Winerim connects wine lists, dishes and pairings so your team recommends better and guests choose with confidence.",
+  },
+  it: {
+    principles: "Principi chiave",
+    combinations: "Combinazioni consigliate",
+    recommendedStyles: "Stili consigliati",
+    recommendedRegions: "Regioni consigliate",
+    frequentGrapes: "Vitigni frequenti",
+    commonMistakes: "Errori frequenti",
+    winerimReading: "Lettura Winerim",
+    hospitalityUse: "Come usare questo abbinamento nella ristorazione",
+    cartaUsage: "Come usarlo in carta",
+    salaLanguage: "Linguaggio di sala",
+    safeOptions: "Opzioni sicure",
+    differentialOptions: "Opzioni differenzianti",
+    restaurantMistakes: "Errori del ristorante",
+    whenClassicLoses: "Quando il classico perde forza",
+    bestConcepts: "Ideale per questi concept",
+    relatedPairings: "Abbinamenti correlati",
+    faqTitle: "Domande frequenti",
+    ctaTitle: "Vuoi che la tua carta suggerisca abbinamenti con intelligenza?",
+    ctaText: "Winerim connette carta, piatti e abbinamenti per aiutare la sala a raccomandare meglio.",
+  },
+  fr: {
+    principles: "Principes cles",
+    combinations: "Combinaisons recommandees",
+    recommendedStyles: "Styles recommandes",
+    recommendedRegions: "Regions recommandees",
+    frequentGrapes: "Cepages frequents",
+    commonMistakes: "Erreurs frequentes",
+    winerimReading: "Lecture Winerim",
+    hospitalityUse: "Comment utiliser cet accord en restauration",
+    cartaUsage: "Comment l'utiliser en carte",
+    salaLanguage: "Langage de salle",
+    safeOptions: "Options sures",
+    differentialOptions: "Options differentiantes",
+    restaurantMistakes: "Erreurs du restaurant",
+    whenClassicLoses: "Quand le classique perd de la force",
+    bestConcepts: "Ideal pour ces concepts",
+    relatedPairings: "Accords associes",
+    faqTitle: "Questions frequentes",
+    ctaTitle: "Votre carte doit-elle suggerer des accords avec intelligence ?",
+    ctaText: "Winerim relie carte, plats et accords pour aider l'equipe a mieux recommander.",
+  },
+  de: {
+    principles: "Schlusselprinzipien",
+    combinations: "Empfohlene Kombinationen",
+    recommendedStyles: "Empfohlene Stile",
+    recommendedRegions: "Empfohlene Regionen",
+    frequentGrapes: "Haufige Rebsorten",
+    commonMistakes: "Haufige Fehler",
+    winerimReading: "Winerim-Lesart",
+    hospitalityUse: "Wie dieses Pairing in der Gastronomie genutzt wird",
+    cartaUsage: "Nutzung auf der Weinkarte",
+    salaLanguage: "Servicesprache",
+    safeOptions: "Sichere Optionen",
+    differentialOptions: "Differenzierende Optionen",
+    restaurantMistakes: "Restaurantfehler",
+    whenClassicLoses: "Wann der Klassiker an Kraft verliert",
+    bestConcepts: "Am besten fur diese Konzepte",
+    relatedPairings: "Verwandte Pairings",
+    faqTitle: "Haufige Fragen",
+    ctaTitle: "Soll Ihre Karte Pairings intelligent vorschlagen?",
+    ctaText: "Winerim verbindet Weinkarte, Gerichte und Pairings, damit Ihr Team besser empfiehlt.",
+  },
+  pt: {
+    principles: "Principios chave",
+    combinations: "Combinacoes recomendadas",
+    recommendedStyles: "Estilos recomendados",
+    recommendedRegions: "Regioes recomendadas",
+    frequentGrapes: "Castas frequentes",
+    commonMistakes: "Erros frequentes",
+    winerimReading: "Leitura Winerim",
+    hospitalityUse: "Como usar esta harmonizacao em restauracao",
+    cartaUsage: "Como usar na carta",
+    salaLanguage: "Linguagem de sala",
+    safeOptions: "Opcoes seguras",
+    differentialOptions: "Opcoes diferenciais",
+    restaurantMistakes: "Erros do restaurante",
+    whenClassicLoses: "Quando o classico perde forca",
+    bestConcepts: "Melhor para estes conceitos",
+    relatedPairings: "Harmonizacoes relacionadas",
+    faqTitle: "Perguntas frequentes",
+    ctaTitle: "Quer que a sua carta sugira harmonizacoes com inteligencia?",
+    ctaText: "Winerim liga carta, pratos e harmonizacoes para que a equipa recomende melhor.",
+  },
+};
 
 const PairingDetail = () => {
   const { pairing: pairingSlug } = useParams<{ pairing: string }>();
   const { lang } = useLanguage();
+  const langKey = String(lang);
+  const ui = getWineLibraryUi(lang);
+  const copy = pairingDetailCopy[langKey] || pairingDetailCopy.en;
   const linkTo = (path: string) => getWineLibraryPath(lang, path);
   const entry = pairingSlug ? getLocalizedPairingBySlug(pairingSlug, lang) : undefined;
   const pairingEntries = getLocalizedPairingEntries(lang);
+  const editorial = entry ? getPairingEditorialProfile(entry.slug, langKey, entry.name) : undefined;
 
   useEffect(() => {
     if (!entry) return;
+    const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/maridajes/${entry.slug}`);
     const schema = document.createElement("script");
     schema.id = "pairing-detail-jsonld";
     schema.type = "application/ld+json";
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Article",
-      headline: entry.name,
-      description: entry.seo.description,
-      author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-      mainEntityOfPage: getWineLibraryUrl(lang, `/biblioteca-vino/maridajes/${entry.slug}`),
+      "@graph": [
+        {
+          "@type": "Article",
+          headline: entry.name,
+          description: entry.seo.description,
+          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+          mainEntityOfPage: pageUrl,
+          about: { "@id": `${pageUrl}#pairing-term` },
+        },
+        {
+          "@id": `${pageUrl}#pairing-term`,
+          "@type": "DefinedTerm",
+          name: entry.name,
+          description: entry.description,
+          inDefinedTermSet: {
+            "@type": "DefinedTermSet",
+            name: "Winerim Wine Library",
+            url: getWineLibraryUrl(lang, "/biblioteca-vino/maridajes"),
+          },
+        },
+      ],
     });
     document.head.appendChild(schema);
     return () => { document.getElementById("pairing-detail-jsonld")?.remove(); };
@@ -66,8 +237,8 @@ const PairingDetail = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: "Biblioteca del Vino", href: linkTo("/biblioteca-vino") },
-            { label: "Maridajes", href: linkTo("/biblioteca-vino/maridajes") },
+            { label: ui.libraryName, href: linkTo("/biblioteca-vino") },
+            { label: ui.sections.pairings, href: linkTo("/biblioteca-vino/maridajes") },
             { label: entry.name },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -104,7 +275,7 @@ const PairingDetail = () => {
       <section className="section-padding bg-gradient-dark">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Principios clave</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{copy.principles}</h2>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 gap-4">
             {entry.principles.map((p, i) => (
@@ -123,7 +294,7 @@ const PairingDetail = () => {
       <section className="section-padding">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Combinaciones recomendadas</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{copy.combinations}</h2>
           </ScrollReveal>
           <div className="space-y-4">
             {entry.dishes.map((dish, i) => (
@@ -156,7 +327,7 @@ const PairingDetail = () => {
             <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
               <div className="flex items-center gap-2 mb-4">
                 <Palette size={18} className="text-wine" />
-                <h3 className="font-heading text-base font-semibold">Estilos recomendados</h3>
+                <h3 className="font-heading text-base font-semibold">{copy.recommendedStyles}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {entry.recommendedStyles.map(s => (
@@ -169,7 +340,7 @@ const PairingDetail = () => {
             <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
               <div className="flex items-center gap-2 mb-4">
                 <MapPin size={18} className="text-wine" />
-                <h3 className="font-heading text-base font-semibold">Regiones recomendadas</h3>
+                <h3 className="font-heading text-base font-semibold">{copy.recommendedRegions}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {entry.recommendedRegions.map(r => (
@@ -182,7 +353,7 @@ const PairingDetail = () => {
             <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
               <div className="flex items-center gap-2 mb-4">
                 <Grape size={18} className="text-wine" />
-                <h3 className="font-heading text-base font-semibold">Uvas frecuentes</h3>
+                <h3 className="font-heading text-base font-semibold">{copy.frequentGrapes}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {entry.recommendedGrapes.map(g => (
@@ -194,13 +365,15 @@ const PairingDetail = () => {
         </div>
       </section>
 
+      {editorial && <PairingServiceIntelligenceSection profile={editorial} />}
+
       {/* COMMON MISTAKES */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <ScrollReveal>
             <div className="flex items-center gap-2 mb-6">
               <AlertTriangle size={18} className="text-wine" />
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">Errores frecuentes</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold">{copy.commonMistakes}</h2>
             </div>
             <div className="space-y-3">
               {entry.commonMistakes.map((m, i) => (
@@ -220,19 +393,19 @@ const PairingDetail = () => {
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
               <Wine size={14} className="text-wine" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">Lectura Winerim</span>
+              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{copy.winerimReading}</span>
             </div>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Cómo usar este maridaje en hostelería</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">{copy.hospitalityUse}</h2>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { icon: Target, title: "Cómo usarlo en carta", text: entry.cartaUsage },
-              { icon: MessageSquare, title: "Lenguaje de sala", text: entry.salaLanguage },
-              { icon: ShieldCheck, title: "Opciones seguras", text: entry.safeOptions },
-              { icon: TrendingUp, title: "Opciones diferenciales", text: entry.differentialOptions },
-              { icon: AlertTriangle, title: "Errores del restaurante", text: entry.restaurantMistakes },
-              { icon: Lightbulb, title: "Cuándo lo clásico pierde fuerza", text: entry.whenClassicLoses },
+              { icon: Target, title: copy.cartaUsage, text: entry.cartaUsage },
+              { icon: MessageSquare, title: copy.salaLanguage, text: entry.salaLanguage },
+              { icon: ShieldCheck, title: copy.safeOptions, text: entry.safeOptions },
+              { icon: TrendingUp, title: copy.differentialOptions, text: entry.differentialOptions },
+              { icon: AlertTriangle, title: copy.restaurantMistakes, text: entry.restaurantMistakes },
+              { icon: Lightbulb, title: copy.whenClassicLoses, text: entry.whenClassicLoses },
             ].map((block, i) => (
               <ScrollReveal key={block.title} delay={i * 0.06}>
                 <div className="bg-gradient-card border border-border rounded-xl p-6 h-full">
@@ -249,7 +422,7 @@ const PairingDetail = () => {
           {/* Best concepts */}
           <ScrollReveal className="mt-6">
             <div className="bg-gradient-card border border-border rounded-xl p-6">
-              <h3 className="font-heading text-base font-semibold mb-3">Mejor para estos conceptos</h3>
+              <h3 className="font-heading text-base font-semibold mb-3">{copy.bestConcepts}</h3>
               <div className="flex flex-wrap gap-2">
                 {entry.bestConcepts.map(c => (
                   <span key={c} className="text-sm bg-accent/50 px-3 py-1 rounded-full">{c}</span>
@@ -261,7 +434,7 @@ const PairingDetail = () => {
           {/* Related pairings */}
           {entry.relatedPairings.length > 0 && (
             <ScrollReveal className="mt-6">
-              <h3 className="font-heading text-lg font-semibold mb-4">Maridajes relacionados</h3>
+              <h3 className="font-heading text-lg font-semibold mb-4">{copy.relatedPairings}</h3>
               <div className="flex flex-wrap gap-3">
                 {entry.relatedPairings.map(slug => {
                   const related = pairingEntries.find(e => e.slug === slug || e.id === slug);
@@ -285,12 +458,11 @@ const PairingDetail = () => {
 
       {/* FAQs */}
       {entry.faqs.length > 0 && (
-        <section className="section-padding">
-          <div className="max-w-4xl mx-auto px-6 md:px-12">
-            <ScrollReveal><h2 className="font-heading text-2xl md:text-3xl font-bold mb-8">Preguntas frecuentes</h2></ScrollReveal>
-            <FAQSection faqs={entry.faqs} />
-          </div>
-        </section>
+        <FAQSection
+          faqs={editorial ? [...entry.faqs, ...editorial.faqs] : entry.faqs}
+          title={copy.faqTitle}
+          schemaId={`pairing-${entry.slug}`}
+        />
       )}
 
       <section className="section-padding bg-gradient-dark">
@@ -316,13 +488,13 @@ const PairingDetail = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--wine)/0.08),transparent_70%)]" />
               <div className="relative z-10">
                 <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-                  ¿Quieres que tu carta sugiera <span className="text-gradient-wine italic">maridajes</span> con inteligencia?
+                  {copy.ctaTitle}
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm">
-                  Winerim conecta carta, platos y maridajes para que tu equipo recomiende mejor y tu cliente elija con criterio.
+                  {copy.ctaText}
                 </p>
                 <Link to={linkTo("/demo")} className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
-                  Solicitar demo <ArrowRight size={16} />
+                  {ui.actions.requestDemo} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
@@ -334,5 +506,59 @@ const PairingDetail = () => {
     </div>
   );
 };
+
+const PairingFactCard = ({ label, value }: { label: string; value: string }) => (
+  <div className="bg-gradient-card rounded-xl border border-border p-5">
+    <div className="flex items-center gap-2 mb-2 text-wine">
+      <Wine size={16} />
+      <span className="text-xs text-muted-foreground">{label}</span>
+    </div>
+    <p className="font-heading text-sm font-semibold">{value}</p>
+  </div>
+);
+
+const PairingServiceIntelligenceSection = ({ profile }: { profile: LocalizedPairingEditorialProfile }) => (
+  <section className="section-padding bg-gradient-dark">
+    <div className="max-w-5xl mx-auto px-6 md:px-12">
+      <ScrollReveal className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <Target size={18} className="text-wine" />
+          <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{profile.eyebrow}</p>
+        </div>
+        <h2 className="font-heading text-2xl md:text-3xl font-bold">{profile.title}</h2>
+        <p className="text-muted-foreground mt-3 max-w-2xl">{profile.subtitle}</p>
+      </ScrollReveal>
+
+      <div className="grid md:grid-cols-3 gap-4 mb-8">
+        {profile.facts.map((fact) => (
+          <PairingFactCard key={fact.label} label={fact.label} value={fact.value} />
+        ))}
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-4">
+        {profile.sections.map((section, index) => (
+          <ScrollReveal key={section.title} delay={index * 0.04}>
+            <div className="bg-gradient-card rounded-xl border border-border p-6">
+              <h3 className="font-heading text-sm font-semibold text-wine mb-2">{section.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{section.body}</p>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      <ScrollReveal className="mt-8">
+        <h3 className="font-heading text-lg font-semibold mb-4">{profile.menuTitle}</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          {profile.menuHooks.map((hook) => (
+            <div key={hook} className="flex items-center gap-3 bg-gradient-card rounded-xl border border-border p-4">
+              <Utensils size={15} className="text-wine shrink-0" />
+              <span className="text-sm text-muted-foreground">{hook}</span>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+);
 
 export default PairingDetail;

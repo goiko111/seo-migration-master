@@ -66,6 +66,18 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("Papel na carta");
   });
 
+  it("adds priority pairing editorial content to prerendered bot pages", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const WINE_LIBRARY_PRIORITY_PAIRINGS");
+    expect(prerender).toContain("lubina-dorada");
+    expect(prerender).toContain("pescados-y-mariscos");
+    expect(prerender).toContain("pasta-arroces-y-legumbres");
+    expect(prerender).toContain("cocina-asiatica-y-fusion");
+    expect(prerender).toContain("Rotes Fleisch ist das Vertrauenspairing");
+    expect(prerender).toContain("Marisco e alavanca de frescura");
+  });
+
   it("adds strategic internal links to prerendered wine-library entities", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
 
