@@ -1270,3 +1270,65 @@
 4. Search Console:
    - monitorizar recrawl de biblioteca del vino;
    - observar cobertura e impresiones de rutas enriquecidas.
+
+## Actualización 2026-05-26: estilos prioritarios implementados
+
+## Hechos
+
+- Hecho local: primera tanda profunda de estilos prioritarios implementada.
+- Estilos cubiertos:
+  - `tinto-crianza`;
+  - `tinto-reserva`;
+  - `blanco-crianza-lias`;
+  - `espumoso`;
+  - `rosado-cuerpo`.
+- Hecho local: nueva capa `src/data/wineLibraryStyleEditorial.ts` en seis idiomas.
+- Hecho local: `StyleDetail` renderiza inteligencia de servicio, rol en carta, guion de sala, palancas comerciales, errores a evitar, maridajes y FAQs.
+- Hecho local: `blanco-crianza-lias` ya tiene ficha completa en `stylesLibrary`.
+- Hecho local: `stylesLibraryI18n` evita fugas de narrativa española en campos profundos de estilos internacionales.
+- Hecho local: `prerender` tiene perfiles prioritarios equivalentes para bots.
+- Hecho local: el widget de chat usa el idioma detectado por ruta en `de` y `pt`.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 29 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - Browser QA local en `/de/weinbibliothek/weinstile/espumoso`.
+  - Browser QA local en `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
+
+## Decisiones
+
+- Retomar por Lovable antes de añadir más contenido.
+- Pedir despliegue explícito de `prerender` porque el bloque modifica HTML para bots.
+- No tocar Cloudflare Worker salvo que producción sirva `bot-fallback` o HTML antiguo tras actualizar Lovable.
+- Después de validar estilos, continuar con maridajes prioritarios antes de schema final.
+
+## Hipótesis
+
+- Producción necesitará dos pasos: frontend Lovable y Edge Function `prerender`.
+- Si Lovable despliega correctamente, Googlebot debería ver los perfiles de tinto crianza, espumoso, blanco sobre lías y rosado gastronómico sin cambios de Worker.
+- El siguiente bloque natural son maridajes porque completan el triángulo región/uva/estilo/intención gastronómica.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar frontend desde Lovable.
+2. Pedir a Lovable: desplegar Edge Function `prerender`.
+3. Validar producción como Googlebot:
+   - `/biblioteca-vino/estilos/tinto-crianza`;
+   - `/de/weinbibliothek/weinstile/espumoso`;
+   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+   - `/en/wine-library/styles/rosado-cuerpo`.
+4. Validar producción como usuario real:
+   - `/de/weinbibliothek/weinstile/espumoso`;
+   - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
+5. Maridajes prioritarios:
+   - carnes rojas;
+   - pescado blanco;
+   - marisco;
+   - arroces;
+   - cocina asiatica;
+   - quesos.
+6. Schema/enlazado tras maridajes:
+   - evaluar `DefinedTerm`/`ItemList`;
+   - mantener `FAQPage` único;
+   - validar usuario real y Googlebot en producción.

@@ -4,6 +4,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import GrapeDetail from "@/pages/GrapeDetail";
 import RegionDetail from "@/pages/RegionDetail";
+import StyleDetail from "@/pages/StyleDetail";
 
 describe("grape detail rendering", () => {
   it("renders localized grape detail pages for human users", async () => {
@@ -36,5 +37,22 @@ describe("grape detail rendering", () => {
     expect(screen.getByRole("heading", { name: /Como usar Vinho Verde numa carta/i, level: 2 })).toBeInTheDocument();
     expect(screen.getByText("Papel na carta")).toBeInTheDocument();
     expect(screen.getAllByText("marisco").length).toBeGreaterThan(0);
+  });
+
+  it("renders localized priority style editorial sections for human users", async () => {
+    render(
+      <MemoryRouter initialEntries={["/de/weinbibliothek/weinstile/espumoso"]}>
+        <LanguageProvider>
+          <Routes>
+            <Route path="/de/weinbibliothek/weinstile/:style" element={<StyleDetail />} />
+          </Routes>
+        </LanguageProvider>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: /Schaumwein/i, level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Wie Schaumwein auf der Weinkarte verkauft wird/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByText("Rolle auf der Weinkarte")).toBeInTheDocument();
+    expect(screen.getAllByText("Austern").length).toBeGreaterThan(0);
   });
 });

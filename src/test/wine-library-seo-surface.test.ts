@@ -54,6 +54,18 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("Papel na carta");
   });
 
+  it("adds priority style editorial content to prerendered bot pages", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const WINE_LIBRARY_PRIORITY_STYLES");
+    expect(prerender).toContain("tinto-crianza");
+    expect(prerender).toContain("tinto-reserva");
+    expect(prerender).toContain("blanco-crianza-lias");
+    expect(prerender).toContain("rosado-cuerpo");
+    expect(prerender).toContain("Schaumwein ist nicht nur Feier");
+    expect(prerender).toContain("Papel na carta");
+  });
+
   it("adds strategic internal links to prerendered wine-library entities", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
 

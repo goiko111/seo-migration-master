@@ -1370,3 +1370,51 @@
 
 - Abrir bloque de estilos prioritarios.
 - Monitorizar Search Console para recrawl de rutas de biblioteca enriquecidas.
+
+### Primera tanda profunda de estilos prioritarios
+
+#### Hechos
+
+- Se inició la ampliación profunda de estilos tras publicar y validar la tanda regional.
+- Se creó `src/data/wineLibraryStyleEditorial.ts` con 5 estilos prioritarios:
+  - tinto crianza;
+  - tinto reserva;
+  - blanco crianza sobre lías;
+  - espumoso;
+  - rosado gastronómico.
+- Cada perfil de estilo incluye temperatura de servicio, copa, uso por copa, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes de carta y FAQs.
+- Los perfiles están localizados para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `StyleDetail` integra el bloque editorial, etiquetas localizadas y FAQs de la capa de estilo.
+- `stylesLibraryI18n` añade nombres localizados y fallbacks profundos para que las fichas internacionales de estilos no dependan de narrativa española.
+- `stylesLibrary` añade una ficha completa para `blanco-crianza-lias`, que antes existía solo como subtipo.
+- `prerender` incorpora perfiles equivalentes para que bots reciban la misma capa esencial de estilos.
+- Se corrigió el idioma del widget de chat en `index.html` para respetar el idioma detectado por ruta.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 29 tests.
+  - `npm run build`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `git diff --check`.
+  - Browser QA local en alemán para `espumoso`.
+  - Browser QA local en portugués para `blanco-crianza-lias`.
+
+#### Decisiones
+
+- Cerrar la tanda local de estilos como implementada y verificada antes de abrir maridajes.
+- Empezar estilos por 5 nodos con alta utilidad comercial y buena conexión con el grafo ya publicado.
+- Convertir `blanco-crianza-lias` en ficha completa porque faltaba profundidad para un estilo prioritario.
+- Mantener duplicación reducida en `prerender` para preservar calidad de lectura por Googlebot y crawlers de IA.
+- Considerar el idioma del widget de chat parte de la experiencia localizada y corregirlo dentro de este bloque.
+- No desplegar Cloudflare Worker salvo que producción muestre fallo de proxy o caída a `bot-fallback`.
+
+#### Hipótesis
+
+- La capa de estilos reforzará búsquedas de servicio, venta por copa, maridaje y carta de vinos.
+- La calidad internacional mejora al eliminar fugas de español en rutas `de` y `pt`.
+- El efecto SEO/LLM depende de publicar Lovable, desplegar `prerender` y validar producción.
+
+#### Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente `prerender` desde Lovable.
+- Validar producción como usuario real y Googlebot.
+- Continuar con maridajes prioritarios y schema semántico.

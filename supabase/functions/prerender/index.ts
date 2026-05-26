@@ -1301,6 +1301,189 @@ const WINE_LIBRARY_PRIORITY_REGIONS: Record<string, WineLibraryPriorityProfile> 
   },
 };
 
+const WINE_LIBRARY_PRIORITY_STYLES: Record<string, WineLibraryPriorityProfile> = {
+  'tinto-crianza': {
+    serviceTemp: '16-18 C',
+    glass: 'Burdeos / universal amplia',
+    role: {
+      es: 'El tinto crianza es el puente de confianza entre vino sencillo y botella premium: seguro, reconocible y con precio defendible.',
+      en: 'Crianza red is the trust bridge between an easy red and a premium bottle: safe, recognizable and price-defendable.',
+      it: 'Il rosso crianza e il ponte di fiducia tra rosso semplice e bottiglia premium: sicuro, riconoscibile e difendibile nel prezzo.',
+      fr: 'Le rouge crianza est le pont de confiance entre rouge simple et bouteille premium : rassurant, lisible et defendable en prix.',
+      de: 'Crianza-Rotwein ist die Vertrauensbrucke zwischen einfachem Rotwein und Premiumflasche: sicher, erkennbar und preislich erklarbar.',
+      pt: 'O tinto crianza e a ponte de confianca entre tinto simples e garrafa premium: seguro, reconhecivel e com preco defensavel.',
+    },
+    cue: {
+      es: 'Vender por region, productor y equilibrio: fruta madura, madera integrada y tanino amable.',
+      en: 'Sell by region, producer and balance: ripe fruit, integrated oak and gentle tannin.',
+      it: 'Vendere per regione, produttore ed equilibrio: frutto maturo, legno integrato e tannino gentile.',
+      fr: 'Vendre par region, producteur et equilibre : fruit mur, bois integre et tanin souple.',
+      de: 'Uber Region, Produzent und Balance verkaufen: reife Frucht, integriertes Holz und sanftes Tannin.',
+      pt: 'Vender por regiao, produtor e equilibrio: fruta madura, madeira integrada e tanino amavel.',
+    },
+    avoid: {
+      es: 'No servirlo demasiado caliente ni reducirlo a vino con madera; la clave es equilibrio.',
+      en: 'Do not serve it too warm or reduce it to oaky wine; the key is balance.',
+      it: 'Non servirlo troppo caldo ne ridurlo a vino boise; la chiave e equilibrio.',
+      fr: 'Ne pas le servir trop chaud ni le reduire a un vin boise ; la cle est l equilibre.',
+      de: 'Nicht zu warm servieren und nicht auf Holz reduzieren; entscheidend ist Balance.',
+      pt: 'Nao servir demasiado quente nem reduzir a vinho com madeira; a chave e equilibrio.',
+    },
+    hooks: {
+      es: ['cordero', 'carnes rojas', 'setas', 'quesos curados', 'guisos'],
+      en: ['lamb', 'red meat', 'mushrooms', 'aged cheese', 'stews'],
+      it: ['agnello', 'carni rosse', 'funghi', 'formaggi stagionati', 'stufati'],
+      fr: ['agneau', 'viandes rouges', 'champignons', 'fromages affines', 'plats mijotes'],
+      de: ['Lamm', 'rotes Fleisch', 'Pilze', 'gereifter Kase', 'Schmorgerichte'],
+      pt: ['borrego', 'carnes vermelhas', 'cogumelos', 'queijos curados', 'estufados'],
+    },
+  },
+  'tinto-reserva': {
+    serviceTemp: '16-18 C',
+    glass: 'Burdeos amplia',
+    role: {
+      es: 'El tinto reserva construye percepcion premium mediante envejecimiento, productor, anada y momento especial.',
+      en: 'Reserva red builds premium perception through ageing, producer, vintage and special occasion.',
+      it: 'Il rosso reserva costruisce percezione premium con affinamento, produttore, annata e occasione.',
+      fr: 'Le rouge reserva cree une perception premium par elevage, producteur, millesime et occasion.',
+      de: 'Reserva-Rotwein schafft Premiumwahrnehmung uber Ausbau, Produzent, Jahrgang und Anlass.',
+      pt: 'O tinto reserva cria percecao premium atraves de estagio, produtor, colheita e ocasiao.',
+    },
+    cue: {
+      es: 'Cuenta el tiempo: crianza, botella y evolucion. Asi el precio se entiende mejor.',
+      en: 'Tell the time story: oak ageing, bottle ageing and evolution. Price becomes easier to understand.',
+      it: 'Racconta il tempo: botte, bottiglia ed evoluzione. Il prezzo diventa piu chiaro.',
+      fr: 'Racontez le temps : elevage, bouteille et evolution. Le prix devient plus lisible.',
+      de: 'Die Zeit erzahlen: Fass, Flasche und Entwicklung. So wird der Preis verstandlicher.',
+      pt: 'Conte o tempo: barrica, garrafa e evolucao. O preco torna-se mais claro.',
+    },
+    avoid: {
+      es: 'No asumir que mas viejo siempre es mejor; revisar anada, conservacion y aireacion.',
+      en: 'Do not assume older is always better; check vintage, storage and aeration.',
+      it: 'Non dare per scontato che piu vecchio sia sempre meglio; controllare annata, conservazione e aria.',
+      fr: 'Ne pas supposer que plus vieux est toujours meilleur ; verifier millesime, conservation et aeration.',
+      de: 'Nicht annehmen, dass alter immer besser ist; Jahrgang, Lagerung und Luftbedarf prufen.',
+      pt: 'Nao assumir que mais velho e sempre melhor; verificar colheita, conservacao e ar.',
+    },
+    hooks: {
+      es: ['chuleton', 'caza', 'guisos lentos', 'trufa', 'quesos muy curados'],
+      en: ['ribeye', 'game', 'slow stews', 'truffle', 'very aged cheese'],
+      it: ['costata', 'selvaggina', 'brasati', 'tartufo', 'formaggi stagionati'],
+      fr: ['entrecote', 'gibier', 'plats mijotes', 'truffe', 'fromages affines'],
+      de: ['Ribeye', 'Wild', 'Schmorgerichte', 'Truffel', 'gereifter Kase'],
+      pt: ['entrecote', 'caca', 'estufados lentos', 'trufa', 'queijos curados'],
+    },
+  },
+  'blanco-crianza-lias': {
+    serviceTemp: '10-12 C',
+    glass: 'Blanco grande / universal',
+    role: {
+      es: 'El blanco con lias vende textura y precio superior sin depender de la barrica.',
+      en: 'Lees-aged white sells texture and a higher white-wine price without relying on oak.',
+      it: 'Il bianco sui lieviti vende texture e prezzo superiore senza dipendere dal legno.',
+      fr: 'Le blanc sur lies vend texture et prix superieur sans dependre du bois.',
+      de: 'Weisswein auf der Hefe verkauft Textur und hoheren Weissweinpreis ohne Holz als Hauptargument.',
+      pt: 'O branco sobre lias vende textura e preco superior sem depender da madeira.',
+    },
+    cue: {
+      es: 'Traducir lias a cremosidad, salinidad y volumen; la tecnica debe ser util para el cliente.',
+      en: 'Translate lees into creaminess, salinity and volume; the technique must be useful to the guest.',
+      it: 'Tradurre i lieviti in cremosita, salinita e volume; la tecnica deve essere utile.',
+      fr: 'Traduire les lies en cremeux, salinite et volume ; la technique doit servir le client.',
+      de: 'Hefelager in Cremigkeit, Salinitat und Volumen ubersetzen; Technik muss nutzlich werden.',
+      pt: 'Traduzir lias em cremosidade, salinidade e volume; a tecnica deve ajudar o cliente.',
+    },
+    avoid: {
+      es: 'No servirlo helado ni presentarlo como blanco pesado; la gracia es tension con volumen.',
+      en: 'Do not serve it ice cold or present it as heavy white; the point is tension with volume.',
+      it: 'Non servirlo gelato ne presentarlo come bianco pesante; il punto e tensione con volume.',
+      fr: 'Ne pas servir glace ni comme blanc lourd ; l interet est la tension avec du volume.',
+      de: 'Nicht eiskalt servieren und nicht als schweren Weisswein verkaufen; es geht um Spannung mit Volumen.',
+      pt: 'Nao servir gelado nem apresentar como branco pesado; a chave e tensao com volume.',
+    },
+    hooks: {
+      es: ['pescado blanco', 'marisco', 'arroces', 'aves', 'quesos cremosos'],
+      en: ['white fish', 'shellfish', 'rice dishes', 'poultry', 'creamy cheeses'],
+      it: ['pesce bianco', 'frutti di mare', 'risotti', 'pollame', 'formaggi cremosi'],
+      fr: ['poisson blanc', 'fruits de mer', 'riz', 'volaille', 'fromages cremoses'],
+      de: ['weisser Fisch', 'Meeresfruchte', 'Reisgerichte', 'Geflugel', 'cremiger Kase'],
+      pt: ['peixe branco', 'marisco', 'arrozes', 'aves', 'queijos cremosos'],
+    },
+  },
+  espumoso: {
+    serviceTemp: '6-8 C',
+    glass: 'Tulipa / copa de vino blanco',
+    role: {
+      es: 'El espumoso no es solo celebracion: es aperitivo, maridaje y herramienta de ticket medio.',
+      en: 'Sparkling wine is not only celebration: it is aperitif, pairing tool and spend builder.',
+      it: 'Lo spumante non e solo celebrazione: e aperitivo, abbinamento e leva di scontrino.',
+      fr: 'L effervescent n est pas seulement celebration : c est aperitif, accord et levier de ticket.',
+      de: 'Schaumwein ist nicht nur Feier: Er ist Aperitif, Pairing-Werkzeug und Bon-Hebel.',
+      pt: 'O espumante nao e so celebracao: e aperitivo, harmonizacao e alavanca de ticket medio.',
+    },
+    cue: {
+      es: 'Habla de metodo, crianza sobre lias y dosage para explicar Cava, Champagne y Prosecco.',
+      en: 'Talk method, lees ageing and dosage to explain Cava, Champagne and Prosecco.',
+      it: 'Parla di metodo, affinamento sui lieviti e dosage per spiegare Cava, Champagne e Prosecco.',
+      fr: 'Parlez methode, elevage sur lies et dosage pour expliquer Cava, Champagne et Prosecco.',
+      de: 'Methode, Hefelager und Dosage nennen, um Cava, Champagne und Prosecco zu erklaren.',
+      pt: 'Fale de metodo, estagio sobre lias e dosage para explicar Cava, Champagne e Prosecco.',
+    },
+    avoid: {
+      es: 'No relegarlo al postre ni servirlo en coupe; pierde precision y oportunidad comercial.',
+      en: 'Do not relegate it to dessert or serve it in coupe glasses; precision and opportunity disappear.',
+      it: 'Non relegarlo al dessert ne servirlo in coppa; perde precisione e opportunita.',
+      fr: 'Ne pas le releguer au dessert ni le servir en coupe ; precision et opportunite baissent.',
+      de: 'Nicht auf Dessert reduzieren und nicht in der Coupe servieren; Prazision und Chance gehen verloren.',
+      pt: 'Nao relegar para sobremesa nem servir em coupe; perde precisao e oportunidade.',
+    },
+    hooks: {
+      es: ['ostras', 'frituras', 'sushi', 'jamon iberico', 'quesos'],
+      en: ['oysters', 'fried dishes', 'sushi', 'Iberian ham', 'cheese'],
+      it: ['ostriche', 'fritti', 'sushi', 'jamon iberico', 'formaggi'],
+      fr: ['huitres', 'fritures', 'sushi', 'jambon iberique', 'fromages'],
+      de: ['Austern', 'Frittiertes', 'Sushi', 'Iberico-Schinken', 'Kase'],
+      pt: ['ostras', 'fritos', 'sushi', 'presunto iberico', 'queijos'],
+    },
+  },
+  'rosado-cuerpo': {
+    serviceTemp: '9-11 C',
+    glass: 'Blanco amplio / universal',
+    role: {
+      es: 'El rosado gastronomico une frescura de blanco y estructura de tinto; resuelve mesas que no se ponen de acuerdo.',
+      en: 'Gastronomic rose bridges white freshness and red structure; it solves tables that cannot agree.',
+      it: 'Il rosato gastronomico unisce freschezza del bianco e struttura del rosso; risolve tavoli indecisi.',
+      fr: 'Le rose gastronomique relie fraicheur du blanc et structure du rouge ; il resout les tables hesitantes.',
+      de: 'Gastronomischer Rose verbindet Weissweinfrische mit Rotweinstruktur und lost unentschlossene Tische.',
+      pt: 'O rose gastronomico une frescura de branco e estrutura de tinto; resolve mesas sem consenso.',
+    },
+    cue: {
+      es: 'Venderlo como rosado seco, serio y de comida; color no significa dulzor.',
+      en: 'Sell it as dry, serious and food-friendly rose; colour does not mean sweetness.',
+      it: 'Vendilo come rosato secco, serio e da tavola; colore non significa dolcezza.',
+      fr: 'Vendez-le comme rose sec, serieux et de table ; la couleur ne signifie pas sucre.',
+      de: 'Als trockenen, ernsthaften Speisenrose verkaufen; Farbe bedeutet nicht Suesse.',
+      pt: 'Venda como rose seco, serio e de comida; cor nao significa docura.',
+    },
+    avoid: {
+      es: 'No presentarlo como vino simple de verano; si tiene cuerpo, necesita rol gastronomico.',
+      en: 'Do not present it as simple summer wine; if it has body, give it a gastronomic role.',
+      it: 'Non presentarlo come semplice vino estivo; se ha corpo, merita ruolo gastronomico.',
+      fr: 'Ne pas le presenter comme simple vin d ete ; s il a du corps, il merite un role gastronomique.',
+      de: 'Nicht als einfachen Sommerwein vorstellen; mit Korper braucht er eine gastronomische Rolle.',
+      pt: 'Nao apresentar como vinho simples de verao; se tem corpo, merece papel gastronomico.',
+    },
+    hooks: {
+      es: ['arroces', 'atun', 'cocina picante', 'charcuteria', 'aves'],
+      en: ['rice dishes', 'tuna', 'spicy food', 'charcuterie', 'poultry'],
+      it: ['risotti', 'tonno', 'cucina piccante', 'salumi', 'pollame'],
+      fr: ['riz', 'thon', 'cuisine epicee', 'charcuterie', 'volaille'],
+      de: ['Reisgerichte', 'Thunfisch', 'scharfe Kuche', 'Charcuterie', 'Geflugel'],
+      pt: ['arrozes', 'atum', 'comida picante', 'enchidos', 'aves'],
+    },
+  },
+};
+
 const WINE_LIBRARY_EDITORIAL_COPY: Record<WineLibraryLang, {
   role: string;
   service: string;
@@ -1714,7 +1897,10 @@ function renderWineLibraryPage(path: string): string | null {
   const priorityRegionProfile = !isSectionHub && section === 'regiones'
     ? WINE_LIBRARY_PRIORITY_REGIONS[parts[parts.length - 1]]
     : undefined;
-  const priorityProfile = priorityGrapeProfile || priorityRegionProfile;
+  const priorityStyleProfile = !isSectionHub && section === 'estilos'
+    ? WINE_LIBRARY_PRIORITY_STYLES[parts[parts.length - 1]]
+    : undefined;
+  const priorityProfile = priorityGrapeProfile || priorityRegionProfile || priorityStyleProfile;
   const editorialLang = priorityProfile ? lang : undefined;
   const priorityCopy = editorialLang
     ? WINE_LIBRARY_EDITORIAL_COPY[editorialLang]

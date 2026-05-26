@@ -1766,3 +1766,61 @@
   - rosado gastronomico.
 - Después, continuar con maridajes prioritarios y schema semántico por entidad.
 - Monitorizar Search Console tras recrawl para cobertura e impresiones de biblioteca del vino.
+
+## Actualización 2026-05-26: primera tanda profunda de estilos prioritarios
+
+## Hechos
+
+- Se implementó la primera tanda profunda de estilos prioritarios de biblioteca del vino.
+- Estilos incluidos:
+  - `tinto-crianza`;
+  - `tinto-reserva`;
+  - `blanco-crianza-lias`;
+  - `espumoso`;
+  - `rosado-cuerpo`.
+- Nueva capa creada: `src/data/wineLibraryStyleEditorial.ts`.
+- La capa de estilos incluye temperatura de servicio, copa, uso por copa, rol en carta, guion de sala, palanca comercial, error a evitar, maridajes de carta y FAQs.
+- El contenido está localizado para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- `src/data/stylesLibrary.ts` añade `blanco-crianza-lias` como ficha completa de estilo, no solo como subtipo ligero.
+- `src/data/stylesLibraryI18n.ts` añade nombres localizados y fallbacks profundos para evitar narrativa española en páginas internacionales de estilos.
+- `src/pages/StyleDetail.tsx` integra la sección editorial de estilos, etiquetas localizadas, FAQs combinadas y CTA localizado.
+- `supabase/functions/prerender/index.ts` incluye perfiles equivalentes para los 5 estilos prioritarios, manteniendo paridad esencial para Googlebot y crawlers de IA.
+- `index.html` corrige el idioma enviado al widget de chat para usar el idioma detectado por ruta en vez de caer a `document.documentElement.lang || "es"`.
+- Verificaciones locales completadas:
+  - `npm run test -- --run`: 7 archivos, 29 tests.
+  - `npm run build`: correcto.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: correcto.
+  - `git diff --check`: correcto.
+  - Navegador local en `/de/weinbibliothek/weinstile/espumoso`.
+  - Navegador local en `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
+- QA local verificó que las rutas alemana y portuguesa no muestran fuga española relevante en la página ni en el título del widget de chat.
+- Producción aún no refleja esta tanda hasta publicación en Lovable y despliegue explícito de la Edge Function `prerender`.
+
+## Decisiones
+
+- Cerrar el bloque local de estilos como implementado y verificado.
+- Mantener la tanda inicial en 5 estilos por impacto práctico en carta y por conexión directa con regiones, uvas y maridajes del grafo.
+- Convertir `blanco-crianza-lias` en ficha completa porque era un nodo prioritario sin superficie editorial suficiente.
+- Mantener paridad React/prerender también para estilos; no basta con que el usuario humano vea la capa editorial.
+- Corregir el idioma del widget de chat como parte de la calidad internacional de las rutas localizadas.
+- No tocar Cloudflare Worker para este bloque salvo que la validación productiva demuestre `bot-fallback` o HTML antiguo.
+
+## Hipótesis
+
+- Los estilos prioritarios reforzarán búsquedas de intención práctica como servicio, venta por copa, maridaje y diseño de carta.
+- Evitar mezcla de español en páginas `de` y `pt` mejorará la comprensión por Googlebot, crawlers de IA y usuarios internacionales.
+- El impacto real dependerá de publicar frontend y `prerender` desde Lovable y esperar recrawl.
+
+## Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente la Edge Function `prerender` desde Lovable.
+- Revalidar producción como Googlebot:
+  - `/biblioteca-vino/estilos/tinto-crianza`;
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`;
+  - `/en/wine-library/styles/rosado-cuerpo`.
+- Revalidar producción como usuario real:
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
+- Tras validar estilos, continuar con maridajes prioritarios y schema semántico por entidad.

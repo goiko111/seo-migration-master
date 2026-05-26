@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
 import { getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
+import { getLocalizedStyleBySlug } from "@/data/stylesLibraryI18n";
 import { getWineLibraryEsPath, getWineLibraryHreflang, getWineLibraryPath } from "@/data/wineLibraryI18n";
 
 describe("wine library i18n routes", () => {
@@ -74,6 +75,21 @@ describe("wine library i18n routes", () => {
     expect(de?.faqs[0]?.q).not.toContain("¿");
     expect(de?.commonMistakes[0]).not.toContain("No ");
     expect(pt?.cartaReading).toContain("carta");
+    expect(pt?.pairings).toContain("marisco");
+    expect(pt?.faqs[0]?.q).not.toContain("¿");
+  });
+
+  it("does not leak Spanish style narratives into localized style detail pages", () => {
+    const de = getLocalizedStyleBySlug("tinto-crianza", "de");
+    const pt = getLocalizedStyleBySlug("blanco-crianza-lias", "pt");
+
+    expect(de?.name).toBe("Crianza-Rotwein");
+    expect(de?.cartaCommunication).toContain("Weinkarte");
+    expect(de?.pairings).toContain("rotes Fleisch");
+    expect(de?.faqs[0]?.q).not.toContain("¿");
+    expect(de?.sellByStrategy).not.toContain("denominación");
+    expect(pt?.name).toBe("Branco sobre Lias");
+    expect(pt?.cartaCommunication).toContain("carta");
     expect(pt?.pairings).toContain("marisco");
     expect(pt?.faqs[0]?.q).not.toContain("¿");
   });

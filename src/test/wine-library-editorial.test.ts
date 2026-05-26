@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getGrapeEditorialProfile, priorityGrapeSlugs } from "@/data/wineLibraryEditorial";
 import { getRegionEditorialProfile, priorityRegionSlugs } from "@/data/wineLibraryRegionEditorial";
+import { getStyleEditorialProfile, priorityStyleSlugs } from "@/data/wineLibraryStyleEditorial";
 
 describe("wine library editorial profiles", () => {
   it("defines priority service profiles for the first two editorial tranches", () => {
@@ -69,6 +70,26 @@ describe("wine library editorial profiles", () => {
     expect(de?.sections.some((section) => section.title === "Rolle auf der Weinkarte")).toBe(true);
     expect(de?.menuHooks).toContain("Austern");
     expect(pt?.eyebrow).toBe("Inteligencia regional de servico");
+    expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
+    expect(pt?.menuHooks).toContain("marisco");
+  });
+
+  it("defines priority style service profiles in all wine-library languages", () => {
+    expect(priorityStyleSlugs).toEqual([
+      "tinto-crianza",
+      "tinto-reserva",
+      "blanco-crianza-lias",
+      "espumoso",
+      "rosado-cuerpo",
+    ]);
+
+    const de = getStyleEditorialProfile("espumoso", "de", "Schaumwein");
+    const pt = getStyleEditorialProfile("blanco-crianza-lias", "pt", "Branco sobre Lias");
+
+    expect(de?.eyebrow).toBe("Stil-Service-Intelligenz");
+    expect(de?.sections.some((section) => section.title === "Rolle auf der Weinkarte")).toBe(true);
+    expect(de?.menuHooks).toContain("Austern");
+    expect(pt?.eyebrow).toBe("Inteligencia de estilo");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
   });
