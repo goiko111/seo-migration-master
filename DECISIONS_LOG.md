@@ -1390,6 +1390,8 @@
 - `stylesLibrary` añade una ficha completa para `blanco-crianza-lias`, que antes existía solo como subtipo.
 - `prerender` incorpora perfiles equivalentes para que bots reciban la misma capa esencial de estilos.
 - Se corrigió el idioma del widget de chat en `index.html` para respetar el idioma detectado por ruta.
+- Tras el push se intentó continuar con Lovable, pero la pestaña accesible estaba en login.
+- Se comprobó que `SUPABASE_ACCESS_TOKEN` sigue ausente, así que el despliegue CLI de `prerender` continúa bloqueado.
 - Verificaciones locales completadas:
   - `npm run test -- --run`: 29 tests.
   - `npm run build`.
@@ -1406,6 +1408,7 @@
 - Mantener duplicación reducida en `prerender` para preservar calidad de lectura por Googlebot y crawlers de IA.
 - Considerar el idioma del widget de chat parte de la experiencia localizada y corregirlo dentro de este bloque.
 - No desplegar Cloudflare Worker salvo que producción muestre fallo de proxy o caída a `bot-fallback`.
+- No considerar publicado este bloque hasta que Lovable aplique el frontend y despliegue explícitamente `prerender`.
 
 #### Hipótesis
 

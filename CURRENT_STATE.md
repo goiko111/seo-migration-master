@@ -1796,6 +1796,10 @@
   - Navegador local en `/de/weinbibliothek/weinstile/espumoso`.
   - Navegador local en `/pt/biblioteca-vinho/estilos/blanco-crianza-lias`.
 - QA local verificó que las rutas alemana y portuguesa no muestran fuga española relevante en la página ni en el título del widget de chat.
+- Intento de publicación posterior al push:
+  - La única pestaña Lovable accesible redirige a login.
+  - `SUPABASE_ACCESS_TOKEN` no existe en el entorno local.
+  - No se pudo publicar frontend ni desplegar `prerender` desde esta sesión.
 - Producción aún no refleja esta tanda hasta publicación en Lovable y despliegue explícito de la Edge Function `prerender`.
 
 ## Decisiones

@@ -1289,6 +1289,8 @@
 - Hecho local: `stylesLibraryI18n` evita fugas de narrativa española en campos profundos de estilos internacionales.
 - Hecho local: `prerender` tiene perfiles prioritarios equivalentes para bots.
 - Hecho local: el widget de chat usa el idioma detectado por ruta en `de` y `pt`.
+- Hecho: Lovable no pudo publicarse desde esta sesión porque la pestaña accesible está en login.
+- Hecho: no hay `SUPABASE_ACCESS_TOKEN`, por lo que el despliegue directo de `prerender` por CLI sigue bloqueado.
 - Verificaciones locales completadas:
   - `npm run test -- --run`: 29 tests.
   - `npm run build`.
