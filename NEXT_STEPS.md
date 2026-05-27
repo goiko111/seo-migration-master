@@ -1644,3 +1644,43 @@
    - reforzar enlazado desde hubs;
    - comprobar si aparece como canónica alternativa;
    - revisar profundidad diferencial de contenido frente a competidores.
+
+## Actualización 2026-05-27: 404 y sitemap antiguo
+
+## Hechos
+
+- Se revisó Search Console después de la solicitud manual de indexación.
+- Cobertura observada:
+  - 67 páginas indexadas.
+  - 197 URLs en `No se ha encontrado (404)`.
+  - 1.758 URLs en `Descubierta: actualmente sin indexar`.
+  - 133 URLs en `Rastreada: actualmente sin indexar`.
+- `/sitemap_index.xml` sigue enviado en Search Console, pero en producción redirige a `/sitemap.xml`.
+- Search Console permite `Quitar sitemap` para `/sitemap_index.xml`; no se ejecutó.
+- Se corrigieron dos 404 reales visibles en ejemplos de Search Console:
+  - `/corso-vino-cata-mw-examen-practico` -> `/decision-center/cursos`;
+  - `/winerim-sommelier-magazine` -> `/sommelier-corner`.
+- Worker desplegado: `b32cd9a2-63fe-40d5-97a4-5087a179f0b6`.
+- Los 10 ejemplos visibles revisados del grupo 404 terminan ahora en HTTP 200 tras redirects.
+
+## Decisiones
+
+- No quitar `/sitemap_index.xml` sin confirmación explícita.
+- No validar aún el grupo 404 completo hasta revisar si hay más ejemplos activos.
+- Mantener prioridad en Search Console: cobertura, redirects legacy y descubrimiento de biblioteca del vino.
+
+## Hipótesis
+
+- El bloque 404 debería mejorar gradualmente tras recrawl, pero puede contener más URLs antiguas no visibles en la primera página.
+- El mayor cuello de botella actual sigue siendo `Descubierta: actualmente sin indexar`, no solo 404.
+
+## Tareas pendientes listas para retomar
+
+1. Revisar más ejemplos del grupo `No se ha encontrado (404)`.
+2. Si la mayoría ya redirigen o tienen destino claro, pedir confirmación para iniciar `Validar corrección`.
+3. Pedir confirmación explícita si se quiere quitar `/sitemap_index.xml` de Search Console.
+4. Monitorizar las tres URLs de biblioteca con indexación solicitada:
+   - `/biblioteca-vino/maridajes/ostras`;
+   - `/biblioteca-vino/regiones/francia/sancerre`;
+   - `/de/weinbibliothek/rebsorten/mencia`.
+5. Abrir bloque de enlazado interno si las nuevas URLs siguen como descubiertas/rastreadas sin indexar.

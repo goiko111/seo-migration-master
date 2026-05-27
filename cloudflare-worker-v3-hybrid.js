@@ -68,6 +68,8 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/alex-pardo': '/article/alex-pardo',
   '/aumenta-la-venta-de-vinos-en-tu-restaurante-mejores-estrategias': '/como-vender-mas-vino-en-un-restaurante',
   '/winerim-vs-wineadvisor-2': '/comparativas',
+  '/winerim-sommelier-magazine': '/sommelier-corner',
+  '/corso-vino-cata-mw-examen-practico': '/decision-center/cursos',
   '/en/the-importance-of-choosing-the-wine-that-goes-best-with-food': '/en/blog',
   '/estadisticas': '/benchmarks-playbooks',
 };

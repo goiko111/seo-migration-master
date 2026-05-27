@@ -1726,3 +1726,39 @@
 
 - Revisar el estado de las tres URLs en Search Console tras el siguiente intervalo de recrawl.
 - Si quedan sin indexar, analizar motivo específico antes de pedir más indexaciones manuales.
+
+### Saneamiento adicional de ejemplos 404
+
+#### Hechos
+
+- Se revisó el informe `Páginas` de Search Console.
+- Search Console muestra 67 páginas indexadas y el bloque principal no indexado como `Descubierta: actualmente sin indexar` con 1.758 URLs.
+- El grupo `No se ha encontrado (404)` muestra 197 URLs.
+- Se inspeccionaron ejemplos visibles del grupo 404.
+- Dos ejemplos visibles seguían activos como 404 en producción antes de la corrección:
+  - `/corso-vino-cata-mw-examen-practico`;
+  - `/winerim-sommelier-magazine/`.
+- Se añadió redirect directo en Worker:
+  - `/corso-vino-cata-mw-examen-practico` -> `/decision-center/cursos`;
+  - `/winerim-sommelier-magazine` -> `/sommelier-corner`.
+- Se ejecutó `npm run deploy:worker:dry-run` correctamente.
+- Se desplegó Cloudflare Worker `winerim-proxy` con Version ID `b32cd9a2-63fe-40d5-97a4-5087a179f0b6`.
+- Los 10 ejemplos visibles del grupo 404 revisados acaban en HTTP 200 tras redirects.
+- `/sitemap_index.xml` redirige en producción a `/sitemap.xml`, pero sigue enviado en Search Console y puede quitarse desde el menú.
+
+#### Decisiones
+
+- Corregir por ahora solo redirects de equivalencia clara, no convertir todas las URLs 404 en redirecciones genéricas.
+- No quitar `/sitemap_index.xml` desde Search Console sin confirmación explícita.
+- No pedir validación del grupo 404 hasta revisar más ejemplos o confirmar que el conjunto restante está suficientemente cubierto.
+
+#### Hipótesis
+
+- Los ejemplos 404 visibles deberían salir del grupo cuando Google los recrawlee.
+- Puede haber más URLs 404 ocultas en el grupo que requieran redirects adicionales o 410 si no tienen equivalente útil.
+
+#### Tareas pendientes
+
+- Seguir revisando ejemplos del grupo 404.
+- Decidir si quitar `/sitemap_index.xml` de Search Console.
+- Decidir cuándo iniciar validación del grupo 404.

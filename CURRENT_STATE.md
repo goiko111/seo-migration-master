@@ -2365,3 +2365,61 @@
   - rastreadas sin indexar;
   - canónicas alternativas.
 - No abrir otra tanda masiva de solicitudes manuales sin revisar primero el resultado de esta tanda.
+
+## Actualización 2026-05-27: saneamiento adicional de 404 en Search Console
+
+## Hechos
+
+- Se revisó el informe `Páginas` de Search Console tras la solicitud manual de indexación.
+- Estado observado en Search Console:
+  - `Indexadas`: 67.
+  - `No se ha encontrado (404)`: 197 URLs.
+  - `Página alternativa con etiqueta canónica adecuada`: 66 URLs.
+  - `Página con redirección`: 18 URLs.
+  - `Duplicada: el usuario no ha indicado ninguna versión canónica`: 3 URLs.
+  - `Excluida por una etiqueta "noindex"`: 1 URL.
+  - `Descubierta: actualmente sin indexar`: 1.758 URLs.
+  - `Rastreada: actualmente sin indexar`: 133 URLs.
+  - `Duplicada: Google ha elegido una versión canónica diferente a la del usuario`: 2 URLs.
+- Se abrió el detalle de `/sitemap_index.xml` en Search Console.
+- `/sitemap_index.xml` sigue enviado en Search Console, con:
+  - Última lectura: `18/5/26`.
+  - Páginas descubiertas: `1.358`.
+  - Estado: sitemap procesado correctamente.
+- Producción ya redirige `https://winerim.wine/sitemap_index.xml` con 301 a `https://winerim.wine/sitemap.xml`.
+- Search Console ofrece la opción `Quitar sitemap` para `/sitemap_index.xml`, pero no se ejecutó.
+- Se abrió el grupo `No se ha encontrado (404)` y se revisaron ejemplos visibles.
+- Antes de la corrección, dos ejemplos visibles seguían siendo 404 reales en producción:
+  - `https://winerim.wine/corso-vino-cata-mw-examen-practico`;
+  - `https://winerim.wine/winerim-sommelier-magazine/`.
+- Se añadieron dos redirects directos de alta confianza en `cloudflare-worker-v3-hybrid.js`:
+  - `/corso-vino-cata-mw-examen-practico` -> `/decision-center/cursos`;
+  - `/winerim-sommelier-magazine` -> `/sommelier-corner`.
+- Verificaciones:
+  - `npm run deploy:worker:dry-run`: correcto.
+  - `git diff --check`: correcto.
+  - Worker `winerim-proxy` desplegado con Version ID `b32cd9a2-63fe-40d5-97a4-5087a179f0b6`.
+- Producción validada:
+  - `/corso-vino-cata-mw-examen-practico` devuelve 301 a `/decision-center/cursos`.
+  - `/winerim-sommelier-magazine` devuelve 301 a `/sommelier-corner`.
+  - `/winerim-sommelier-magazine/` normaliza primero trailing slash y acaba en `/sommelier-corner`.
+  - Los 10 ejemplos 404 visibles revisados en Search Console acaban ahora en HTTP 200 tras redirects.
+
+## Decisiones
+
+- Resolver solo redirects legacy de alta confianza con equivalencia semántica clara.
+- No quitar `/sitemap_index.xml` de Search Console sin confirmación explícita del usuario.
+- No iniciar validación del grupo 404 de Search Console todavía sin revisar si el conjunto completo está suficientemente cubierto.
+
+## Hipótesis
+
+- Estos redirects deberían reducir ejemplos visibles del grupo 404 tras el siguiente recrawl.
+- El grupo 404 aún puede contener URLs no cubiertas; validar el grupo completo puede fallar si hay más ejemplos activos sin destino.
+- Quitar `/sitemap_index.xml` de Search Console limpiaría el panel, pero no es urgente porque en producción redirige correctamente a `/sitemap.xml`.
+
+## Tareas pendientes
+
+- Commit y push del redirect Worker y documentación.
+- Revisar más ejemplos del grupo 404 antes de pedir validación completa.
+- Pedir confirmación explícita si se decide quitar `/sitemap_index.xml` en Search Console.
+- Pedir confirmación explícita si se decide iniciar `Validar corrección` para el grupo 404.
