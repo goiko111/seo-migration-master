@@ -2275,3 +2275,59 @@
   - `/biblioteca-vino/regiones/francia/sancerre`;
   - `/de/weinbibliothek/rebsorten/mencia`.
 - Monitorizar cobertura e impresiones de biblioteca del vino.
+
+## Actualización 2026-05-27: Search Console tras recrawl de sitemap
+
+## Hechos
+
+- Al iniciar la continuación se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio en `main` y sincronizado con `origin/main`.
+- Search Console mostró que `/sitemap.xml` ya fue releído:
+  - Enviado: `26 may 2026`.
+  - Última lectura: `26 may 2026`.
+  - Estado: `Correcto`.
+  - Páginas descubiertas: `2.054`.
+  - Vídeos descubiertos: `0`.
+- Search Console sigue mostrando `/sitemap_index.xml` como sitemap enviado antiguo:
+  - Enviado: `22 dic 2022`.
+  - Última lectura: `18 may 2026`.
+  - Estado: `Correcto`.
+  - Páginas descubiertas: `1.358`.
+- Se inspeccionó la tanda corta estratégica:
+  - `https://winerim.wine/biblioteca-vino/maridajes/ostras`;
+  - `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`;
+  - `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`.
+- Estado de inspección:
+  - `ostras`: `La URL no está en Google`; motivo indicado: `Google no reconoce esta URL`.
+  - `sancerre`: `La URL no está en Google`; motivo indicado: `Descubierta: actualmente sin indexar`.
+  - `mencia`: `La URL no está en Google`; motivo indicado: `Descubierta: actualmente sin indexar`.
+- Prueba en vivo de las tres URLs:
+  - Search Console indica `La URL está disponible para Google`.
+  - Search Console indica que la página se puede indexar.
+- No se pulsó `Solicitar indexación`.
+
+## Decisiones
+
+- Mantener la regla de no solicitar indexación manual sin confirmación explícita justo antes de pulsar el botón.
+- No abrir una nueva ola editorial todavía: la siguiente mejora debe partir del comportamiento real de indexación y consultas.
+- Tratar la tanda corta como candidata razonable para solicitud manual de indexación si el usuario lo confirma.
+
+## Hipótesis
+
+- El bloqueo actual de las tres URLs no es técnico: Google puede acceder a ellas y las ve indexables.
+- `sancerre` y `mencia` ya están en cola de descubrimiento; falta que Google las rastree/indexe.
+- `ostras` puede tardar algo más en aparecer como descubierta porque Google acaba de releer el sitemap.
+- Search Console puede tardar días o semanas en reflejar cobertura e impresiones de la expansión.
+
+## Tareas pendientes
+
+- Si el usuario confirma explícitamente, solicitar indexación manual de:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/de/weinbibliothek/rebsorten/mencia`.
+- Revisar en unos días si esas URLs pasan a:
+  - indexada;
+  - descubierta sin indexar;
+  - rastreada sin indexar;
+  - canónica alternativa.
+- Revisar si Search Console permite retirar o dejar de priorizar `/sitemap_index.xml`, que sigue enviado desde 2022.

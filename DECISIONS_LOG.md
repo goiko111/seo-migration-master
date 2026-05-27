@@ -1657,3 +1657,43 @@
 
 - Comprobar nueva fecha de última lectura en Search Console.
 - Inspeccionar una tanda corta de URLs estratégicas si la UI lo permite.
+
+### Search Console tras nueva lectura de sitemap
+
+#### Hechos
+
+- Al retomar se leyeron los cuatro documentos fuente de verdad del proyecto.
+- `/sitemap.xml` aparece en Search Console con nueva `Última lectura: 26 may 2026`.
+- `/sitemap.xml` aparece como `Correcto` y con `2.054` páginas descubiertas.
+- `/sitemap_index.xml` sigue enviado desde `22 dic 2022`, con última lectura `18 may 2026`, estado `Correcto` y `1.358` páginas descubiertas.
+- Se inspeccionaron tres URLs estratégicas de la expansión:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/de/weinbibliothek/rebsorten/mencia`.
+- Search Console indica que las tres URLs no están en Google.
+- `sancerre` y `mencia` aparecen como `Descubierta: actualmente sin indexar`.
+- `ostras` aparece como URL no reconocida por Google.
+- La prueba en vivo de las tres URLs indica que están disponibles para Google y se pueden indexar.
+- No se solicitó indexación manual.
+
+#### Decisiones
+
+- No solicitar indexación manual sin confirmación explícita justo antes de ejecutar la acción.
+- No solicitar indexación masiva.
+- Considerar aceptable solicitar indexación manual solo para la tanda corta estratégica si el usuario lo confirma.
+- Mantener la siguiente ola editorial bloqueada hasta tener señales de Search Console sobre descubrimiento, indexación, impresiones y consultas.
+
+#### Hipótesis
+
+- El problema actual es cola de descubrimiento/indexación, no disponibilidad técnica ni bloqueo de robots.
+- Las URLs nuevas deberían ir apareciendo en cobertura conforme Google procese el sitemap ya leído.
+- `ostras` puede necesitar solicitud manual de indexación antes que `sancerre` y `mencia`, porque aún figura como no reconocida.
+
+#### Tareas pendientes
+
+- Pedir confirmación explícita al usuario si se va a pulsar `Solicitar indexación`.
+- Si se confirma, solicitar indexación de la tanda corta:
+  - `/biblioteca-vino/maridajes/ostras`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/de/weinbibliothek/rebsorten/mencia`.
+- Monitorizar si la cobertura cambia tras la solicitud o tras recrawl natural.

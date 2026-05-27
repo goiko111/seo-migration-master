@@ -1557,15 +1557,47 @@
 ## Tareas pendientes listas para retomar
 
 1. Volver a Search Console y comprobar:
-   - fecha de `Última lectura`;
-   - páginas descubiertas;
-   - cobertura de URLs nuevas.
+   - Hecho: `/sitemap.xml` ya muestra `Última lectura: 26 may 2026`;
+   - Hecho: `/sitemap.xml` mantiene estado `Correcto`;
+   - Hecho: `/sitemap.xml` muestra `2.054` páginas descubiertas.
 2. Inspeccionar manualmente, si procede:
-   - `/biblioteca-vino/maridajes/ostras`;
-   - `/biblioteca-vino/regiones/francia/sancerre`;
-   - `/de/weinbibliothek/rebsorten/mencia`.
+   - Hecho: `/biblioteca-vino/maridajes/ostras` no está en Google, pero la prueba en vivo indica que está disponible y se puede indexar;
+   - Hecho: `/biblioteca-vino/regiones/francia/sancerre` está descubierta pero sin indexar; la prueba en vivo indica que está disponible y se puede indexar;
+   - Hecho: `/de/weinbibliothek/rebsorten/mencia` está descubierta pero sin indexar; la prueba en vivo indica que está disponible y se puede indexar.
 3. Preparar siguiente ola solo con datos de:
    - impresiones;
    - posición media;
    - estado de indexación;
    - consultas long-tail.
+
+## Actualización 2026-05-27: siguiente paso inmediato
+
+## Hechos
+
+- Google ya releyó `/sitemap.xml`.
+- Las tres URLs estratégicas probadas son técnicamente indexables según la prueba en vivo de Search Console.
+- Ninguna de las tres URLs está indexada todavía.
+- `sancerre` y `mencia` ya están descubiertas sin indexar.
+- `ostras` aún aparece como URL no reconocida por Google.
+- No se ha pulsado `Solicitar indexación`.
+
+## Decisiones
+
+- No pedir indexación manual masiva.
+- Pedir confirmación explícita antes de solicitar indexación de la tanda corta.
+- No abrir otra expansión de biblioteca hasta tener señales de indexación y rendimiento.
+
+## Hipótesis
+
+- Solicitar indexación de tres URLs estratégicas puede acelerar el primer rastreo sin saturar el proceso.
+- Si Google no indexa estas URLs tras la solicitud, el siguiente foco será enlazado interno desde hubs y señales de calidad por entidad.
+
+## Tareas pendientes listas para retomar
+
+1. Si el usuario confirma, pulsar `Solicitar indexación` en Search Console para:
+   - `https://winerim.wine/biblioteca-vino/maridajes/ostras`;
+   - `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`;
+   - `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`.
+2. Tras pedir indexación, documentar el resultado exacto de Search Console.
+3. En la próxima revisión, comprobar si pasan a indexadas o si quedan como descubiertas/rastreadas sin indexar.
+4. Revisar el sitemap antiguo `/sitemap_index.xml` solo como tarea secundaria; no bloquea la biblioteca porque `/sitemap.xml` ya está correcto.
