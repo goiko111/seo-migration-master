@@ -1595,9 +1595,52 @@
 ## Tareas pendientes listas para retomar
 
 1. Si el usuario confirma, pulsar `Solicitar indexación` en Search Console para:
-   - `https://winerim.wine/biblioteca-vino/maridajes/ostras`;
-   - `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`;
-   - `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`.
-2. Tras pedir indexación, documentar el resultado exacto de Search Console.
+   - Hecho: `https://winerim.wine/biblioteca-vino/maridajes/ostras`;
+   - Hecho: `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`;
+   - Hecho: `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`.
+2. Tras pedir indexación, documentar el resultado exacto de Search Console:
+   - Hecho: las tres URLs muestran `Se ha solicitado la indexación`.
+   - Hecho: Search Console indica que quedaron añadidas a cola de rastreo prioritaria.
 3. En la próxima revisión, comprobar si pasan a indexadas o si quedan como descubiertas/rastreadas sin indexar.
 4. Revisar el sitemap antiguo `/sitemap_index.xml` solo como tarea secundaria; no bloquea la biblioteca porque `/sitemap.xml` ya está correcto.
+
+## Actualización 2026-05-27: listo para próxima revisión
+
+## Hechos
+
+- Solicitud manual de indexación completada para las tres URLs estratégicas.
+- No se solicitaron más URLs.
+- El siguiente dato útil no será inmediato: dependerá de Search Console tras recrawl.
+
+## Decisiones
+
+- Esperar datos antes de abrir otra tanda editorial o pedir más indexaciones manuales.
+- Priorizar monitorización de cobertura y consultas long-tail de biblioteca.
+
+## Hipótesis
+
+- Si Google indexa estas tres URLs, la expansión empieza a entrar correctamente por sitemap e inspección manual.
+- Si Google no las indexa, el foco no debe ser más contenido a ciegas, sino enlaces internos, autoridad y calidad percibida por URL.
+
+## Tareas pendientes listas para retomar
+
+1. Revisar en Search Console las tres URLs:
+   - `/biblioteca-vino/maridajes/ostras`;
+   - `/biblioteca-vino/regiones/francia/sancerre`;
+   - `/de/weinbibliothek/rebsorten/mencia`.
+2. Comprobar para cada una:
+   - estado de indexación;
+   - último rastreo;
+   - sitemaps detectados;
+   - canónica declarada y canónica elegida por Google;
+   - mejoras detectadas como `FAQPage` y breadcrumbs.
+3. Revisar rendimiento de biblioteca del vino cuando haya datos:
+   - impresiones;
+   - clics;
+   - CTR;
+   - posición media;
+   - consultas long-tail.
+4. Si alguna queda sin indexar:
+   - reforzar enlazado desde hubs;
+   - comprobar si aparece como canónica alternativa;
+   - revisar profundidad diferencial de contenido frente a competidores.

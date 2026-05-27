@@ -1697,3 +1697,32 @@
   - `/biblioteca-vino/regiones/francia/sancerre`;
   - `/de/weinbibliothek/rebsorten/mencia`.
 - Monitorizar si la cobertura cambia tras la solicitud o tras recrawl natural.
+
+### Solicitud manual de indexación de tanda corta
+
+#### Hechos
+
+- El usuario respondió afirmativamente a la solicitud de confirmación para pedir indexación manual.
+- Se pidió indexación manual en Search Console para:
+  - `/de/weinbibliothek/rebsorten/mencia`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/biblioteca-vino/maridajes/ostras`.
+- Las tres URLs recibieron confirmación de Search Console:
+  - `Se ha solicitado la indexación`.
+- Search Console indicó que las URLs se añadieron a una cola de rastreo prioritaria.
+
+#### Decisiones
+
+- Limitar la acción manual a tres URLs estratégicas.
+- No convertir la solicitud manual de indexación en una práctica masiva para toda la biblioteca.
+- Usar el resultado de esta tanda como señal antes de priorizar otra ola editorial o más solicitudes.
+
+#### Hipótesis
+
+- La solicitud puede adelantar el rastreo de URLs nuevas de biblioteca, especialmente `ostras`.
+- La indexación final dependerá de señales de calidad, enlaces internos, canónica elegida por Google y demanda.
+
+#### Tareas pendientes
+
+- Revisar el estado de las tres URLs en Search Console tras el siguiente intervalo de recrawl.
+- Si quedan sin indexar, analizar motivo específico antes de pedir más indexaciones manuales.

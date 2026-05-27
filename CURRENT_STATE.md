@@ -2331,3 +2331,37 @@
   - rastreada sin indexar;
   - canónica alternativa.
 - Revisar si Search Console permite retirar o dejar de priorizar `/sitemap_index.xml`, que sigue enviado desde 2022.
+
+## Actualización 2026-05-27: solicitud manual de indexación
+
+## Hechos
+
+- El usuario confirmó solicitar indexación manual de la tanda corta estratégica.
+- Se solicitó indexación manual en Search Console para:
+  - `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`;
+  - `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`;
+  - `https://winerim.wine/biblioteca-vino/maridajes/ostras`.
+- Search Console mostró confirmación en las tres URLs:
+  - `Se ha solicitado la indexación`.
+- Search Console indicó que las URLs quedaron añadidas a una cola de rastreo prioritaria.
+- No se solicitó indexación masiva ni se tocaron otras URLs.
+
+## Decisiones
+
+- Ejecutar solo la tanda corta confirmada por el usuario.
+- Mantener la monitorización como siguiente paso, sin seguir solicitando indexación URL a URL de forma masiva.
+
+## Hipótesis
+
+- Las solicitudes pueden acelerar el primer rastreo o recrawl, pero no garantizan indexación.
+- Si alguna URL queda como `Rastreada: actualmente sin indexar`, el siguiente trabajo deberá centrarse en enlazado interno, señales de calidad y demanda real.
+
+## Tareas pendientes
+
+- Revisar en Search Console el estado de las tres URLs tras unos días.
+- Monitorizar si pasan a:
+  - indexadas;
+  - descubiertas sin indexar;
+  - rastreadas sin indexar;
+  - canónicas alternativas.
+- No abrir otra tanda masiva de solicitudes manuales sin revisar primero el resultado de esta tanda.
