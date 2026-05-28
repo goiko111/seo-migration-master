@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { PageContentProvider } from "@/contexts/PageContentContext";
 import StickyCTA from "@/components/StickyCTA";
+import type { SupportedLang } from "@/i18n/types";
 
 const LogoStrip = lazy(() => import("@/components/LogoStrip"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
@@ -22,7 +23,7 @@ const SectionFallback = () => (
   <div className="min-h-[200px]" />
 );
 
-const HomeBelowFold = ({ lang }: { lang: string }) => (
+const HomeBelowFold = ({ lang }: { lang: SupportedLang }) => (
   <PageContentProvider page="home">
     {/* 2. Social proof - logos */}
     <Suspense fallback={<SectionFallback />}>
