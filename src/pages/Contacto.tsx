@@ -202,22 +202,15 @@ const Contacto = () => {
                 <div className="flex items-center gap-3">
                   <MessageCircle className="w-5 h-5 text-accent shrink-0" />
                   <div>
-                    <p className="text-sm font-medium">WhatsApp</p>
-                    <a href="https://wa.me/34614499864" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 614 499 864</a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-accent shrink-0" />
-                  <div>
                     <p className="text-sm font-medium">{{ es: "Ventas", en: "Sales", it: "Vendite", fr: "Ventes", de: "Vertrieb", pt: "Vendas" }[lang]}</p>
-                    <a href="tel:+34614499864" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 614 499 864</a>
+                    <a href="https://wa.me/34614499864" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 614 499 864</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-accent shrink-0" />
+                  <MessageCircle className="w-5 h-5 text-accent shrink-0" />
                   <div>
                     <p className="text-sm font-medium">{{ es: "Soporte (solo clientes)", en: "Support (clients only)", it: "Supporto (solo clienti)", fr: "Support (clients uniquement)", de: "Support (nur Kunden)", pt: "Suporte (apenas clientes)" }[lang]}</p>
-                    <a href="tel:+34624402303" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 624 40 23 03</a>
+                    <a href="https://wa.me/34624402303" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+34 624 40 23 03</a>
                   </div>
                 </div>
               </div>
