@@ -5210,6 +5210,38 @@ function inferArticleLang(slug: string): WineLibraryLang {
   return match ? match[1] as WineLibraryLang : 'es';
 }
 
+function normalizeArticleLang(value: unknown): WineLibraryLang | null {
+  return typeof value === 'string' && ['es', 'en', 'it', 'fr', 'de', 'pt'].includes(value)
+    ? value as WineLibraryLang
+    : null;
+}
+
+function stripArticleLangSuffix(slug: string): string {
+  return slug.replace(/_(en|it|fr|de|pt)$/, '');
+}
+
+function localizedArticlePath(lang: WineLibraryLang, slug: string): string {
+  const baseSlug = stripArticleLangSuffix(slug);
+  return lang === 'es' ? `/article/${baseSlug}` : `/${lang}/article/${baseSlug}`;
+}
+
+function articleRequestFromPath(path: string): { dbSlug: string; routeLang: WineLibraryLang; baseSlug: string } | null {
+  const localized = path.match(/^\/(en|it|fr|de|pt)\/article\/(.+)$/);
+  if (localized) {
+    const routeLang = localized[1] as WineLibraryLang;
+    const baseSlug = stripArticleLangSuffix(localized[2]);
+    return { dbSlug: `${baseSlug}_${routeLang}`, routeLang, baseSlug };
+  }
+
+  const spanish = path.match(/^\/article\/(.+)$/);
+  if (!spanish) return null;
+
+  const rawSlug = spanish[1];
+  const legacyLang = normalizeArticleLang(rawSlug.match(/_(en|it|fr|de|pt)$/)?.[1]);
+  const baseSlug = stripArticleLangSuffix(rawSlug);
+  return { dbSlug: rawSlug, routeLang: legacyLang || 'es', baseSlug };
+}
+
 function normalizeArticleInternalUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const raw = value.trim();
@@ -5310,6 +5342,10 @@ function uniqueArticleInternalLinks(links: { label: string; url: string }[]): { 
   });
 }
 
+function articleStaticLink(lang: WineLibraryLang, esPath: string): string {
+  return staticLocalizedPath(lang, esPath) || esPath;
+}
+
 async function renderArticle(slug: string): Promise<string | null> {
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -5324,16 +5360,18 @@ async function renderArticle(slug: string): Promise<string | null> {
 
   const article = data[0];
   const body = article.body || '';
-  const lang = inferArticleLang(article.slug || slug);
+  const lang = normalizeArticleLang(article.lang) || inferArticleLang(article.slug || slug);
+  const baseSlug = stripArticleLangSuffix(article.slug || slug);
+  const canonicalPath = localizedArticlePath(lang, baseSlug);
   const articleInternalLinks = uniqueArticleInternalLinks([
     ...articleRelatedLinksFromDb(article.related_links),
     ...articleMarkdownInternalLinks(body),
     ...articleKeywordInternalLinks(lang, article.slug || slug, body),
-    { label: 'Blog', url: '/blog' },
+    { label: 'Blog', url: articleStaticLink(lang, '/blog') },
     { label: WINE_LIBRARY_COPY[lang].home, url: wineLibraryPath(lang, '/biblioteca-vino') },
-    { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
-    { label: 'Herramientas', url: '/herramientas' },
-    { label: 'Demo', url: '/demo' },
+    { label: STATIC_PAGE_LABELS['/software-carta-de-vinos']?.[lang] || 'Software carta de vinos', url: articleStaticLink(lang, '/software-carta-de-vinos') },
+    { label: STATIC_PAGE_LABELS['/herramientas']?.[lang] || 'Herramientas', url: articleStaticLink(lang, '/herramientas') },
+    { label: STATIC_PAGE_LABELS['/demo']?.[lang] || 'Demo', url: articleStaticLink(lang, '/demo') },
   ]).slice(0, 14);
 
   const sections: { heading: string; content: string }[] = [];
@@ -5357,7 +5395,7 @@ async function renderArticle(slug: string): Promise<string | null> {
     sections.push({ heading: currentHeading, content: currentContent.join(' ').trim() });
   }
 
-  const canonical = `${SITE}/article/${article.slug}`;
+  const canonical = `${SITE}${canonicalPath}`;
 
   return generateHTML(
     {
@@ -5376,7 +5414,7 @@ async function renderArticle(slug: string): Promise<string | null> {
       faqs: [],
       breadcrumbs: [
         { name: lang === 'es' ? 'Inicio' : 'Home', url: `${SITE}${lang === 'es' ? '/' : `/${lang}`}` },
-        { name: 'Blog', url: `${SITE}/blog` },
+        { name: 'Blog', url: `${SITE}${articleStaticLink(lang, '/blog')}` },
         { name: article.title, url: canonical },
       ],
       internalLinks: articleInternalLinks,
@@ -5463,6 +5501,7 @@ Deno.serve(async (req) => {
     }
 
     let html: string | null = null;
+    const articleRequest = articleRequestFromPath(path);
 
     const staticPage = STATIC_PAGES[path];
     if (staticPage) {
@@ -5482,19 +5521,21 @@ Deno.serve(async (req) => {
       html = renderWineLibraryPage(path);
     }
 
+    if (!html && articleRequest) {
+      html = await renderArticle(articleRequest.dbSlug);
+      if (!html && articleRequest.routeLang !== 'es') {
+        html = await renderArticle(articleRequest.baseSlug);
+      }
+    }
+
     if (!html && (path.startsWith('/software-carta-de-vinos-') || path.startsWith('/software-vino-') || path.startsWith('/wine-list-software-'))) {
       const slug = path.replace(/^\//, '');
       html = await renderSeoPage(slug);
     }
 
-    if (!html && !path.startsWith('/article/')) {
+    if (!html && !articleRequest) {
       const slug = path.replace(/^\//, '');
       if (slug) html = await renderSeoPage(slug);
-    }
-
-    if (!html && path.startsWith('/article/')) {
-      const slug = path.replace('/article/', '');
-      html = await renderArticle(slug);
     }
 
     if (html) {

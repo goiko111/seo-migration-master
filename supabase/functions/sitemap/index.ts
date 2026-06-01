@@ -251,6 +251,25 @@ function localizedPath(lang: string, esPath: string): string | undefined {
   return ROUTE_MAP[lang]?.[esPath];
 }
 
+function stripArticleLangSuffix(slug: string): string {
+  return slug.replace(/_(en|it|fr|de|pt)$/, '');
+}
+
+function articleLangFromRow(article: { slug?: string; lang?: string | null }): string {
+  if (article.lang && ['es', 'en', 'it', 'fr', 'de', 'pt'].includes(article.lang)) {
+    return article.lang;
+  }
+  const match = article.slug?.match(/_(en|it|fr|de|pt)$/);
+  return match ? match[1] : 'es';
+}
+
+function articlePath(article: { slug?: string; lang?: string | null }): string | null {
+  if (!article.slug) return null;
+  const lang = articleLangFromRow(article);
+  const baseSlug = stripArticleLangSuffix(article.slug);
+  return lang === 'es' ? `/article/${baseSlug}` : `/${lang}/article/${baseSlug}`;
+}
+
 /** Generate hreflang alternate XML links for a given ES path */
 function hreflangBlock(esPath: string): string {
   const langs = ['es', 'en', 'it', 'fr', 'de', 'pt'];
@@ -730,7 +749,7 @@ Deno.serve(async (req) => {
     const now = new Date().toISOString().split('T')[0];
 
     const [articlesRes, seoPagesRes] = await Promise.all([
-      fetch(`${supabaseUrl}/rest/v1/articles?published=eq.true&select=slug,updated_at&order=updated_at.desc`, {
+      fetch(`${supabaseUrl}/rest/v1/articles?published=eq.true&select=slug,updated_at,lang&order=updated_at.desc`, {
         headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` },
       }),
       fetch(`${supabaseUrl}/rest/v1/seo_pages?published=eq.true&select=slug,updated_at,lang&order=updated_at.desc`, {
@@ -785,7 +804,8 @@ Deno.serve(async (req) => {
     if (Array.isArray(articles)) {
       for (const article of articles) {
         const lastmod = article.updated_at ? article.updated_at.split('T')[0] : now;
-        xml += urlBlock(`/article/${article.slug}`, lastmod, 'monthly', '0.6');
+        const path = articlePath(article);
+        if (path) xml += urlBlock(path, lastmod, 'monthly', '0.6');
       }
     }
 

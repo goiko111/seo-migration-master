@@ -15,6 +15,7 @@ import { BlogSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
 import { getI18n } from "@/i18n/types";
+import { localizedArticlePath } from "@/lib/articleRoutes";
 
 interface BlogPost {
   title: string;
@@ -25,13 +26,17 @@ interface BlogPost {
   publishedAt: string | null;
 }
 
-const i18n: Record<string, { seoTitle: string; seoDesc: string; readMore: string; heroLabel: string; heroSubtitle: string; guidesQ: string; guidesBtn: string; featured: string }> = {
-  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer artículo", heroLabel: "Centro de conocimiento", heroSubtitle: "Artículos, análisis y tendencias sobre la gestión de vinos en restauración.", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →", featured: "Destacado" },
-  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →", featured: "Featured" },
-  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →", featured: "In evidenza" },
-  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →", featured: "À la une" },
-  de: { seoTitle: "Blog", seoDesc: "Entdecken Sie die neuesten Trends der Weinwelt mit Winerim.", readMore: "Artikel lesen", heroLabel: "Wissenszentrum", heroSubtitle: "Artikel, Analysen und Trends zur Weinverwaltung in der Gastronomie.", guidesQ: "Suchen Sie praktische Leitfäden zur Optimierung Ihrer Weinkarte?", guidesBtn: "Ratgeber und Ressourcen ansehen →", featured: "Empfohlen" },
-  pt: { seoTitle: "Blog", seoDesc: "Descubra as últimas novidades do mundo do vinho com o Winerim.", readMore: "Ler artigo", heroLabel: "Centro de conhecimento", heroSubtitle: "Artigos, análises e tendências sobre a gestão de vinhos na restauração.", guidesQ: "Procura guias práticos para otimizar a sua carta de vinhos?", guidesBtn: "Ver guias e recursos →", featured: "Destaque" },
+const i18n: Record<string, {
+  seoTitle: string; seoDesc: string; readMore: string; heroLabel: string; heroSubtitle: string; guidesQ: string; guidesBtn: string; featured: string;
+  nextTitle: string; nextSubtitle: string; analysisLabel: string; analysisDesc: string; guidesLabel: string; guidesDesc: string; comparisonsLabel: string; comparisonsDesc: string; demoLabel: string; demoDesc: string;
+  relatedTitle: string; toolsLabel: string; benchmarksLabel: string; casesLabel: string; softwareLabel: string;
+}> = {
+  es: { seoTitle: "Blog", seoDesc: "Descubre toda la actualidad del mundo del vino de la mano de Winerim.", readMore: "Leer artículo", heroLabel: "Centro de conocimiento", heroSubtitle: "Artículos, análisis y tendencias sobre la gestión de vinos en restauración.", guidesQ: "¿Buscas guías prácticas para optimizar tu carta de vinos?", guidesBtn: "Ver guías y recursos →", featured: "Destacado", nextTitle: "Profundiza y pasa a la acción", nextSubtitle: "De lo informativo a lo práctico: herramientas, guías y soluciones.", analysisLabel: "Analiza tu carta gratis", analysisDesc: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", guidesLabel: "Guías y recursos prácticos", guidesDesc: "Plantillas, checklists y guías paso a paso para mejorar tu carta.", comparisonsLabel: "Compara Winerim con alternativas", comparisonsDesc: "Comparativas claras para decidir qué solución encaja.", demoLabel: "Solicitar demo personalizada", demoDesc: "Demo con tu carta real. Sin compromiso.", relatedTitle: "Recursos complementarios", toolsLabel: "Herramientas gratuitas de análisis y pricing", benchmarksLabel: "Benchmarks y playbooks del sector", casesLabel: "Casos de éxito de restaurantes reales", softwareLabel: "Software de carta de vinos inteligente" },
+  en: { seoTitle: "Blog", seoDesc: "Discover the latest from the wine world with Winerim.", readMore: "Read article", heroLabel: "Knowledge center", heroSubtitle: "Articles, analysis, and trends on wine management in restaurants.", guidesQ: "Looking for practical guides to optimize your wine list?", guidesBtn: "View guides & resources →", featured: "Featured", nextTitle: "Go from reading to action", nextSubtitle: "Move from insight to practical tools, guides and solutions.", analysisLabel: "Analyse your wine list for free", analysisDesc: "Upload your list and get a diagnosis with concrete recommendations.", guidesLabel: "Practical guides and resources", guidesDesc: "Templates, checklists and step-by-step guides to improve your list.", comparisonsLabel: "Compare Winerim with alternatives", comparisonsDesc: "Clear comparisons to decide which solution fits.", demoLabel: "Request a personalised demo", demoDesc: "A demo with your real wine list. No commitment.", relatedTitle: "Related resources", toolsLabel: "Free analysis and pricing tools", benchmarksLabel: "Industry benchmarks and playbooks", casesLabel: "Real restaurant case studies", softwareLabel: "Intelligent wine list software" },
+  it: { seoTitle: "Blog", seoDesc: "Scopri le ultime novità dal mondo del vino con Winerim.", readMore: "Leggi articolo", heroLabel: "Centro conoscenze", heroSubtitle: "Articoli, analisi e tendenze sulla gestione dei vini nella ristorazione.", guidesQ: "Cerchi guide pratiche per ottimizzare la tua carta dei vini?", guidesBtn: "Vedi guide e risorse →", featured: "In evidenza", nextTitle: "Dalla lettura all'azione", nextSubtitle: "Passa dagli spunti pratici a strumenti, guide e soluzioni.", analysisLabel: "Analizza gratis la tua carta", analysisDesc: "Carica la carta e ricevi una diagnosi con raccomandazioni concrete.", guidesLabel: "Guide e risorse pratiche", guidesDesc: "Template, checklist e guide passo passo per migliorare la carta.", comparisonsLabel: "Confronta Winerim con alternative", comparisonsDesc: "Confronti chiari per scegliere la soluzione più adatta.", demoLabel: "Richiedi una demo personalizzata", demoDesc: "Demo con la tua carta reale. Senza impegno.", relatedTitle: "Risorse correlate", toolsLabel: "Strumenti gratuiti di analisi e pricing", benchmarksLabel: "Benchmark e playbook del settore", casesLabel: "Casi di successo reali", softwareLabel: "Software intelligente per carta dei vini" },
+  fr: { seoTitle: "Blog", seoDesc: "Découvrez l'actualité du monde du vin avec Winerim.", readMore: "Lire l'article", heroLabel: "Centre de connaissances", heroSubtitle: "Articles, analyses et tendances sur la gestion des vins en restauration.", guidesQ: "Vous cherchez des guides pratiques pour optimiser votre carte des vins ?", guidesBtn: "Voir guides et ressources →", featured: "À la une", nextTitle: "Passer de la lecture à l'action", nextSubtitle: "Des idées aux outils, guides et solutions opérationnelles.", analysisLabel: "Analyser votre carte gratuitement", analysisDesc: "Importez votre carte et recevez un diagnostic avec des recommandations concrètes.", guidesLabel: "Guides et ressources pratiques", guidesDesc: "Modèles, checklists et guides pas à pas pour améliorer votre carte.", comparisonsLabel: "Comparer Winerim aux alternatives", comparisonsDesc: "Des comparatifs clairs pour choisir la bonne solution.", demoLabel: "Demander une demo personnalisée", demoDesc: "Demo avec votre vraie carte. Sans engagement.", relatedTitle: "Ressources complémentaires", toolsLabel: "Outils gratuits d'analyse et de pricing", benchmarksLabel: "Benchmarks et playbooks du secteur", casesLabel: "Cas clients de restaurants réels", softwareLabel: "Logiciel intelligent de carte des vins" },
+  de: { seoTitle: "Blog", seoDesc: "Entdecken Sie die neuesten Trends der Weinwelt mit Winerim.", readMore: "Artikel lesen", heroLabel: "Wissenszentrum", heroSubtitle: "Artikel, Analysen und Trends zur Weinverwaltung in der Gastronomie.", guidesQ: "Suchen Sie praktische Leitfäden zur Optimierung Ihrer Weinkarte?", guidesBtn: "Ratgeber und Ressourcen ansehen →", featured: "Empfohlen", nextTitle: "Vom Lesen zur Umsetzung", nextSubtitle: "Von Wissen zu praktischen Tools, Ratgebern und Lösungen.", analysisLabel: "Weinkarte kostenlos analysieren", analysisDesc: "Laden Sie Ihre Karte hoch und erhalten Sie konkrete Empfehlungen.", guidesLabel: "Praktische Ratgeber und Ressourcen", guidesDesc: "Vorlagen, Checklisten und Schritt-für-Schritt-Ratgeber.", comparisonsLabel: "Winerim mit Alternativen vergleichen", comparisonsDesc: "Klare Vergleiche für die richtige Entscheidung.", demoLabel: "Persönliche Demo anfragen", demoDesc: "Demo mit Ihrer echten Weinkarte. Unverbindlich.", relatedTitle: "Ergänzende Ressourcen", toolsLabel: "Kostenlose Analyse- und Pricing-Tools", benchmarksLabel: "Branchen-Benchmarks und Playbooks", casesLabel: "Erfolgsgeschichten echter Restaurants", softwareLabel: "Intelligente Weinkarten-Software" },
+  pt: { seoTitle: "Blog", seoDesc: "Descubra as últimas novidades do mundo do vinho com o Winerim.", readMore: "Ler artigo", heroLabel: "Centro de conhecimento", heroSubtitle: "Artigos, análises e tendências sobre a gestão de vinhos na restauração.", guidesQ: "Procura guias práticos para otimizar a sua carta de vinhos?", guidesBtn: "Ver guias e recursos →", featured: "Destaque", nextTitle: "Da leitura à ação", nextSubtitle: "Passe dos conteúdos para ferramentas, guias e soluções práticas.", analysisLabel: "Analisar carta gratuitamente", analysisDesc: "Carregue a sua carta e receba um diagnóstico com recomendações concretas.", guidesLabel: "Guias e recursos práticos", guidesDesc: "Modelos, checklists e guias passo a passo para melhorar a carta.", comparisonsLabel: "Comparar Winerim com alternativas", comparisonsDesc: "Comparativos claros para escolher a solução certa.", demoLabel: "Pedir demo personalizada", demoDesc: "Demo com a sua carta real. Sem compromisso.", relatedTitle: "Recursos complementares", toolsLabel: "Ferramentas gratuitas de análise e pricing", benchmarksLabel: "Benchmarks e playbooks do setor", casesLabel: "Casos de sucesso de restaurantes reais", softwareLabel: "Software inteligente para carta de vinhos" },
 };
 
 const formatDate = (dateStr: string | null, locale = "es-ES") => {
@@ -64,14 +69,12 @@ const Blog = () => {
 
       if (data && data.length > 0) {
         setBlogPosts(data.map(a => {
-          // Strip _lang suffix so ArticlePage can construct the correct DB slug
-          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
           return {
             title: a.title,
             excerpt: a.excerpt || "",
             image: a.image_url || "",
             category: a.category,
-            slug: `/article/${baseSlug}`,
+            slug: localizedArticlePath(a.slug, lang),
             publishedAt: a.published_at,
           };
         }));
@@ -91,7 +94,7 @@ const Blog = () => {
             excerpt: a.excerpt || "",
             image: a.image_url || "",
             category: a.category,
-            slug: `/article/${a.slug}`,
+            slug: localizedArticlePath(a.slug, lang),
             publishedAt: a.published_at,
           })));
         } else {
@@ -102,7 +105,7 @@ const Blog = () => {
               excerpt: a.subtitle || "",
               image: a.heroImage,
               category: a.category,
-              slug: `/article/${a.slug}`,
+              slug: localizedArticlePath(a.slug, lang),
               publishedAt: null,
             }));
           setBlogPosts(staticPosts);
@@ -141,7 +144,7 @@ const Blog = () => {
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              {get("hero", "title", "Blog")}
+              {lang === "es" ? get("hero", "title", "Blog") : "Blog"}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -233,23 +236,23 @@ const Blog = () => {
 
         {/* Next steps flow: MOFU → BOFU → conversion */}
         <NextSteps
-          title="Profundiza y pasa a la acción"
-          subtitle="De lo informativo a lo práctico: herramientas, guías y soluciones."
+          title={t.nextTitle}
+          subtitle={t.nextSubtitle}
           steps={[
-            { to: "/analisis-carta", label: "Analiza tu carta gratis", description: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", type: "tool" },
-            { to: "/guias-y-recursos", label: "Guías y recursos prácticos", description: "Plantillas, checklists y guías paso a paso para mejorar tu carta.", type: "guide" },
-            { to: "/comparativas", label: "Compara Winerim con alternativas", description: "Comparativas claras para decidir qué solución encaja.", type: "solution" },
-            { to: "/demo", label: "Solicitar demo personalizada", description: "Demo con tu carta real. Sin compromiso.", type: "solution" },
+            { to: localePath("/analisis-carta"), label: t.analysisLabel, description: t.analysisDesc, type: "tool" },
+            { to: localePath("/guias-y-recursos"), label: t.guidesLabel, description: t.guidesDesc, type: "guide" },
+            { to: localePath("/comparativas"), label: t.comparisonsLabel, description: t.comparisonsDesc, type: "solution" },
+            { to: localePath("/demo"), label: t.demoLabel, description: t.demoDesc, type: "solution" },
           ]}
         />
 
         <InternalLinks
-          title="Recursos complementarios"
+          title={t.relatedTitle}
           links={[
-            { to: "/herramientas", label: "Herramientas gratuitas de análisis y pricing", type: "tool" },
-            { to: "/benchmarks-playbooks", label: "Benchmarks y playbooks del sector", type: "resource" },
-            { to: "/casos-exito", label: "Casos de éxito de restaurantes reales", type: "guide" },
-            { to: "/software-carta-de-vinos", label: "Software de carta de vinos inteligente", type: "solution" },
+            { to: localePath("/herramientas"), label: t.toolsLabel, type: "tool" },
+            { to: localePath("/benchmarks-playbooks"), label: t.benchmarksLabel, type: "resource" },
+            { to: localePath("/casos-exito"), label: t.casesLabel, type: "guide" },
+            { to: localePath("/software-carta-de-vinos"), label: t.softwareLabel, type: "solution" },
           ]}
         />
 

@@ -4,11 +4,15 @@ import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { SUPPORTED_LANGS, LANG_FLAGS, LANG_LABELS, ROUTE_MAP, type SupportedLang, DEFAULT_LANG } from "@/i18n/types";
 import { getWineLibraryEsPath, getWineLibraryPath } from "@/data/wineLibraryRoutes";
+import { stripArticleLangSuffix } from "@/lib/articleRoutes";
 
 /** Find the ES route equivalent for the current path */
 function findEsRoute(pathname: string, currentLang: SupportedLang): string {
   const wineLibraryPath = getWineLibraryEsPath(pathname);
   if (wineLibraryPath) return wineLibraryPath;
+
+  const articleMatch = pathname.match(/^\/(?:(?:en|it|fr|de|pt)\/)?article\/(.+)$/);
+  if (articleMatch) return `/article/${stripArticleLangSuffix(articleMatch[1])}`;
 
   if (currentLang === "es") return pathname;
 

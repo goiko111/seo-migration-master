@@ -20,6 +20,8 @@ import { parseMarkdownSections, type ParsedSection } from "@/components/article/
 import { supabase } from "@/integrations/supabase/client";
 import { getArticleBySlug } from "@/data/articles";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { type SupportedLang } from "@/i18n/types";
+import { articleDbSlugForLang, inferArticleLangFromSlug, localizedArticlePath, stripArticleLangSuffix } from "@/lib/articleRoutes";
 
 interface ArticleData {
   title: string;
@@ -51,8 +53,9 @@ const ArticlePage = () => {
   useEffect(() => {
     if (!slug) { setArticle(null); return; }
 
-    // Build the DB slug: Spanish articles use the base slug, other languages append _lang suffix
-    const dbSlug = lang === "es" ? slug : `${slug}_${lang}`;
+    const baseSlug = stripArticleLangSuffix(slug);
+    const legacySlugLang = inferArticleLangFromSlug(slug);
+    const dbSlug = legacySlugLang ? slug : articleDbSlugForLang(baseSlug, lang);
 
     const fetchArticle = async () => {
       // Try the language-specific slug first
@@ -68,7 +71,7 @@ const ArticlePage = () => {
         ({ data } = await supabase
           .from("articles")
           .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
-          .eq("slug", slug)
+          .eq("slug", baseSlug)
           .eq("published", true)
           .maybeSingle());
       }
@@ -88,7 +91,7 @@ const ArticlePage = () => {
           lang: data.lang || "es",
         });
       } else {
-        const staticArticle = getArticleBySlug(slug);
+        const staticArticle = getArticleBySlug(baseSlug);
         if (staticArticle) {
           setArticle({
             title: staticArticle.title,
@@ -115,6 +118,15 @@ const ArticlePage = () => {
     [sections]
   );
 
+  const requestedArticleLang = (inferArticleLangFromSlug(slug || "") || lang) as SupportedLang;
+  const contentLang = (article?.lang && ["es", "en", "it", "fr", "de", "pt"].includes(article.lang)
+    ? article.lang
+    : requestedArticleLang) as SupportedLang;
+
+  useEffect(() => {
+    if (article) document.documentElement.lang = contentLang;
+  }, [article, contentLang]);
+
   if (article === undefined) {
     return (
       <div className="min-h-screen bg-background">
@@ -133,16 +145,21 @@ const ArticlePage = () => {
         <main className="pt-32 pb-24 text-center section-padding">
           <h1 className="font-heading text-4xl font-bold mb-4">{t.notFoundTitle}</h1>
           <p className="text-muted-foreground mb-8">{t.notFoundDesc}</p>
-          <Link to="/blog" className="text-accent underline">{t.backToBlog}</Link>
+          <Link to={lang === "es" ? "/blog" : `/${lang}/blog`} className="text-accent underline">{t.backToBlog}</Link>
         </main>
         <Footer />
       </div>
     );
   }
 
-  const backLink = article.type === "interview" ? "/sommelier-corner" : "/blog";
-  const backLabel = article.type === "interview" ? t.backToCorner : "Blog";
-  const articleUrl = `https://winerim.wine/article/${slug}`;
+  const canonicalLang = contentLang === requestedArticleLang ? requestedArticleLang : contentLang;
+  const articleLabels = i18n[requestedArticleLang] || t;
+  const baseSlug = stripArticleLangSuffix(slug || "");
+  const backLink = article.type === "interview"
+    ? (requestedArticleLang === "es" ? "/sommelier-corner" : `/${requestedArticleLang}/sommelier-corner`)
+    : (requestedArticleLang === "es" ? "/blog" : `/${requestedArticleLang}/blog`);
+  const backLabel = article.type === "interview" ? articleLabels.backToCorner : "Blog";
+  const articleUrl = `https://winerim.wine${localizedArticlePath(baseSlug, canonicalLang)}`;
   const midIndex = Math.floor(sections.length / 2);
 
   return (
@@ -173,7 +190,7 @@ const ArticlePage = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6">
             <BookOpen size={14} className="text-wine" />
             <span className="text-xs font-semibold tracking-widest uppercase text-wine">
-              {article.type === "interview" ? t.interview : t.article}
+              {article.type === "interview" ? articleLabels.interview : articleLabels.article}
             </span>
           </motion.div>
 
@@ -195,7 +212,7 @@ const ArticlePage = () => {
               {article.author && <span className="font-medium text-foreground">{article.author}</span>}
               {article.author && article.publishedAt && <span className="text-muted-foreground/30">·</span>}
               {article.publishedAt && (
-                <time>{new Date(article.publishedAt).toLocaleDateString(lang === "en" ? "en-US" : lang === "it" ? "it-IT" : lang === "fr" ? "fr-FR" : lang === "de" ? "de-DE" : lang === "pt" ? "pt-PT" : "es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
+                <time>{new Date(article.publishedAt).toLocaleDateString(requestedArticleLang === "en" ? "en-US" : requestedArticleLang === "it" ? "it-IT" : requestedArticleLang === "fr" ? "fr-FR" : requestedArticleLang === "de" ? "de-DE" : requestedArticleLang === "pt" ? "pt-PT" : "es-ES", { day: "numeric", month: "long", year: "numeric" })}</time>
               )}
             </motion.div>
           )}
@@ -246,7 +263,7 @@ const ArticlePage = () => {
       <ArticleToolsSection body={article.body} />
 
       {/* RELATED CONTENT */}
-      <ArticleRelatedContent slug={slug || ""} body={article.body} manualLinks={article.relatedLinks} />
+      <ArticleRelatedContent slug={baseSlug} body={article.body} manualLinks={article.relatedLinks} />
 
       {/* CTA FINAL */}
       <CTASection pageType="article" />
@@ -256,7 +273,7 @@ const ArticlePage = () => {
         <Link to={backLink}
           className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-accent hover:underline">
           <ArrowLeft className="w-4 h-4" />
-          {article.type === "interview" ? `← ${t.backToCorner}` : `← ${t.backToBlog}`}
+          {article.type === "interview" ? `← ${articleLabels.backToCorner}` : `← ${articleLabels.backToBlog}`}
         </Link>
       </section>
 

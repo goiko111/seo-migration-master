@@ -12,6 +12,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { InterviewSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
+import { localizedArticlePath } from "@/lib/articleRoutes";
 
 interface Interview {
   quote: string; name: string; role: string; excerpt: string; image: string; slug: string; publishedAt: string | null;
@@ -102,11 +103,9 @@ const SommelierCorner = () => {
 
       if (data && data.length > 0) {
         setInterviews(data.map(a => {
-          // For translated interviews, strip the _lang suffix from slug for the URL
-          const baseSlug = a.slug.replace(/_(?:en|it|fr|de|pt)$/, "");
           return {
             quote: a.title, name: a.author || "", role: a.author_role || "",
-            excerpt: a.excerpt || "", image: a.image_url || "", slug: `/article/${baseSlug}`,
+            excerpt: a.excerpt || "", image: a.image_url || "", slug: localizedArticlePath(a.slug, lang),
             publishedAt: a.published_at,
           };
         }));
@@ -115,7 +114,7 @@ const SommelierCorner = () => {
           .filter(a => a.type === "interview")
           .map(a => ({
             quote: a.title, name: a.name || "", role: a.role || "",
-            excerpt: a.subtitle || "", image: a.heroImage, slug: `/article/${a.slug}`,
+            excerpt: a.subtitle || "", image: a.heroImage, slug: localizedArticlePath(a.slug, lang),
             publishedAt: null,
           }));
         setInterviews(staticInterviews);
