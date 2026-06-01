@@ -1733,16 +1733,16 @@
 ## Tareas pendientes listas para retomar
 
 1. Resolver autenticación Cloudflare:
-   - renovar login de Wrangler; o
-   - exportar/proporcionar `CLOUDFLARE_API_TOKEN` válido con permisos de Workers.
+   - Hecho: login OAuth renovado con `gugocreative@gmail.com`.
 2. Desplegar Worker pendiente:
-   - ejecutar `npm run deploy:worker`.
+   - Hecho: Worker `winerim-proxy` desplegado con Version ID `fda7c63b-ae88-4e3f-98c4-9d48ee39edc2`.
 3. Validar producción tras deploy:
-   - `/https:/winerim.wine/fr/integrations` -> `/fr/integrations`;
-   - `/analiza-tu-carta` -> `/analisis-carta`;
-   - `/simone-monese` -> `/article/simone-monese`;
-   - `/carta-vinos-digital` -> `/software-carta-de-vinos`.
+   - Hecho: `/https:/winerim.wine/fr/integrations` -> `/fr/integrations` -> 200;
+   - Hecho: `/analiza-tu-carta` -> `/analisis-carta` -> 200;
+   - Hecho: `/simone-monese` -> `/article/simone-monese` -> 200;
+   - Hecho: `/carta-vinos-digital` -> `/software-carta-de-vinos` -> 200.
 4. Recalcular los 100 ejemplos visibles de 404.
+   - Hecho: 95 terminan en 200, 3 en 404 y 2 en 410.
 5. Si producción queda saneada, pedir confirmación explícita para:
    - retirar `/sitemap_index.xml`; o
    - iniciar `Validar corrección` del grupo 404.
@@ -1750,3 +1750,41 @@
    - reforzar enlaces internos desde hubs hacia entidades nuevas ya indexadas;
    - revisar rendimiento/consultas cuando haya datos;
    - priorizar la próxima expansión por impresiones, intención y baja posición.
+
+## Próximo arranque recomendado
+
+## Hechos
+
+- El Worker ya está desplegado y validado.
+- La muestra visible de 404 está mayoritariamente saneada: 95/100 terminan en 200.
+- Quedan 3 404 visibles sin equivalencia clara:
+  - `/los-mejores-restaurantes-de-cataluna-para-disfrutar-del-vino/`;
+  - `/kit-digital/`;
+  - `/facturacion-y-contratos/`.
+- Quedan 2 URLs antiguas que terminan en 410, lo cual es aceptable si no hay equivalente útil.
+- Las tres URLs estratégicas de biblioteca del vino ya están indexadas.
+
+## Decisiones
+
+- No hacer más redirects de baja confianza.
+- No validar corrección 404 ni retirar `/sitemap_index.xml` sin confirmación explícita.
+- La siguiente mejora de biblioteca debe ser enlazado interno y monitorización de consultas, no indexación manual masiva.
+
+## Hipótesis
+
+- El próximo recrawl de Google debería bajar el grupo 404.
+- Si `Descubierta: actualmente sin indexar` sigue alto, el siguiente cuello será autoridad/enlazado interno y profundidad diferencial por entidad.
+
+## Tareas pendientes listas para retomar
+
+1. Reabrir Search Console en unos días y comprobar:
+   - evolución de `No se ha encontrado (404)`;
+   - evolución de `Descubierta: actualmente sin indexar`;
+   - rendimiento de biblioteca del vino.
+2. Si el usuario confirma explícitamente:
+   - iniciar `Validar corrección` del grupo 404;
+   - o retirar `/sitemap_index.xml`.
+3. Abrir bloque de enlazado interno de biblioteca:
+   - hubs principales -> entidades indexadas nuevas;
+   - uva -> región -> estilo -> maridaje;
+   - CTAs suaves hacia análisis/carta en páginas de intención comercial.

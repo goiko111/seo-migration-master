@@ -1809,3 +1809,38 @@
 - Recalcular la muestra de 100 URLs tras deploy.
 - Pedir confirmación antes de retirar `/sitemap_index.xml`.
 - Pedir confirmación antes de iniciar `Validar corrección` para 404.
+
+### Despliegue Worker completado
+
+#### Hechos
+
+- Se renovó la autenticación de Wrangler con OAuth Cloudflare usando `gugocreative@gmail.com`.
+- Durante el login se rechazó instalar Cloudflare skills.
+- Se usó Node `v24.14.0` del runtime de workspace para ejecutar `wrangler@4.95.0`, porque Wrangler 4 no soporta Node 20.
+- Se desplegó Cloudflare Worker `winerim-proxy`.
+- Version ID desplegada: `fda7c63b-ae88-4e3f-98c4-9d48ee39edc2`.
+- Producción validada en ejemplos de URLs mal formadas, CTAs antiguos, artículos legacy y carta digital.
+- Tras el deploy, la muestra de 100 ejemplos visibles de 404 queda:
+  - 95 terminan en 200.
+  - 3 terminan en 404.
+  - 2 terminan en 410.
+- `npm run deploy:worker:dry-run` funciona con la sesión renovada.
+
+#### Decisiones
+
+- No añadir redirects dudosos para `/los-mejores-restaurantes-de-cataluna-para-disfrutar-del-vino/`, `/kit-digital/` ni `/facturacion-y-contratos/` sin una equivalencia clara.
+- No iniciar validación 404 en Search Console dentro de esta sesión.
+- No retirar `/sitemap_index.xml` dentro de esta sesión.
+- Tratar el bloque de redirects como desplegado y validado en producción.
+
+#### Hipótesis
+
+- Search Console debería reducir el grupo 404 cuando recrawlee los ejemplos ya saneados.
+- Puede quedar una cola residual de 404 si Google prueba URLs antiguas fuera de la muestra visible.
+
+#### Tareas pendientes
+
+- Monitorizar el grupo 404 tras recrawl.
+- Revisar más ejemplos si el grupo no baja.
+- Decidir explícitamente qué hacer con los 3 404 restantes de la muestra.
+- Pedir confirmación antes de `Validar corrección` 404 o retirar `/sitemap_index.xml`.

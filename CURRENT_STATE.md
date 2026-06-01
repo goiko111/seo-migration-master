@@ -2509,3 +2509,57 @@
 - Decidir con confirmación explícita si se retira `/sitemap_index.xml` de Search Console.
 - Decidir con confirmación explícita si se inicia `Validar corrección` para 404 cuando producción esté saneada.
 - Monitorizar en Search Console si `Descubierta: actualmente sin indexar` baja y si las rutas nuevas de biblioteca empiezan a recibir impresiones.
+
+## Actualización 2026-06-01: despliegue Worker completado
+
+## Hechos
+
+- Se renovó la autenticación de Wrangler mediante OAuth Cloudflare con la cuenta `gugocreative@gmail.com`.
+- Se rechazó instalar Cloudflare skills cuando Wrangler lo preguntó durante el login.
+- Wrangler 4 requería Node >= 22; se usó el Node del runtime de workspace (`v24.14.0`) para ejecutar `wrangler@4.95.0`.
+- Se desplegó Cloudflare Worker `winerim-proxy` con Version ID `fda7c63b-ae88-4e3f-98c4-9d48ee39edc2`.
+- Producción validada tras el deploy:
+  - `/https:/winerim.wine/fr/integrations` devuelve 301 a `/fr/integrations` y termina en 200.
+  - `/https:/winerim.wine/fr/conditions` devuelve 301 a `/fr/conditions` y termina en 200.
+  - `/https:/winerim.wine/en/guides/how-to-train-staff-to-sell-wine` devuelve 301 a `/en/guides/how-to-train-staff-to-sell-wine` y termina en 200.
+  - `/analiza-tu-carta` devuelve 301 a `/analisis-carta` y termina en 200.
+  - `/simone-monese` devuelve 301 a `/article/simone-monese` y termina en 200.
+  - `/carta-vinos-digital` devuelve 301 a `/software-carta-de-vinos` y termina en 200.
+  - `/contacto-analizar-carta` devuelve 301 a `/analisis-carta` y termina en 200.
+  - `/como-ser-sommelier-formacion-funciones-y-salidas-profesionales` devuelve 301 a `/decision-center/cursos` y termina en 200.
+- Recalculada la muestra de 100 ejemplos visibles de 404 de Search Console tras el deploy:
+  - 95 acaban en HTTP 200.
+  - 3 acaban en HTTP 404.
+  - 2 acaban en HTTP 410.
+- Los 3 ejemplos que siguen en 404 son:
+  - `/los-mejores-restaurantes-de-cataluna-para-disfrutar-del-vino/`;
+  - `/kit-digital/`;
+  - `/facturacion-y-contratos/`.
+- Los 2 ejemplos que terminan en 410 son:
+  - `/meet-our-winemaker-john-duo/`;
+  - `/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world/`.
+- `npm run deploy:worker:dry-run` vuelve a funcionar con la sesión renovada de Wrangler.
+
+## Decisiones
+
+- No forzar redirects para los 3 404 restantes de la muestra porque no tienen equivalente semántico claro documentado.
+- Mantener 410 para contenidos antiguos sin equivalente útil cuando ya está configurado así.
+- Considerar producción saneada para la muestra visible principal de 404, pero no iniciar validación en Search Console sin confirmación explícita.
+- Mantener el script actual de dry-run como válido; para deploy real con Wrangler 4 se usó Node 24 del runtime por requisito de versión.
+
+## Hipótesis
+
+- El grupo 404 de Search Console debería mejorar tras el siguiente recrawl porque 95 de los 100 ejemplos visibles ya no terminan en 404.
+- La validación 404 podría seguir fallando si Google prueba URLs no visibles en la primera muestra que aún acaban en 404.
+- Los 3 404 restantes pueden dejarse como 404 hasta decidir si merecen 410 o un destino editorial específico.
+
+## Tareas pendientes
+
+- Esperar recrawl de Google para que Search Console actualice el grupo 404.
+- Revisar más ejemplos si Search Console mantiene muchos 404 después del recrawl.
+- Decidir si los 3 404 restantes de la muestra deben:
+  - permanecer como 404;
+  - responder 410;
+  - redirigir a un destino nuevo si se define equivalencia real.
+- Pedir confirmación explícita antes de iniciar `Validar corrección` del grupo 404.
+- Pedir confirmación explícita antes de retirar `/sitemap_index.xml`.
