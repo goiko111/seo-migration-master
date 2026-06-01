@@ -2681,3 +2681,75 @@
 - Monitorizar en Search Console el recrawl de `/biblioteca-vino` y hubs principales.
 - Considerar extraer la matriz estratégica de biblioteca a una fuente compartida o generada para evitar divergencias entre React y `prerender`.
 - Continuar el bloque de máximo nivel de biblioteca: más profundidad editorial, schema por entidad, enlaces por intención y priorización de URLs para indexación manual.
+
+## Actualización 2026-06-01: cluster de blog para biblioteca del vino
+
+## Hechos
+
+- Al retomar esta continuación se revisaron los documentos fuente de verdad del proyecto antes de cerrar estado.
+- Se confirmó que el blog usa Supabase `articles` como fuente principal y `src/data/articles.ts` solo como fallback si la tabla no devuelve contenido.
+- Se confirmó que `ArticlePage` lee artículos desde Supabase por `slug`, con fallback a español para idiomas no disponibles.
+- Se confirmó que `supabase/functions/prerender/index.ts` renderiza artículos desde la tabla `articles`, por lo que las mejoras de prerender afectan a artículos ya existentes y futuros.
+- Antes del cambio, el prerender de artículos no exponía `related_links` ni enlaces markdown del cuerpo como enlaces internos detectables; solo añadía navegación genérica.
+- Se mejoró `src/components/article/ArticleRelatedContent.tsx` para sugerir enlaces a biblioteca del vino, uvas, regiones y maridajes cuando el artículo trata vino, uvas, regiones o maridaje.
+- Se mejoró `supabase/functions/prerender/index.ts` para construir enlaces internos de artículo desde:
+  - `related_links` de la base de datos;
+  - enlaces markdown presentes en el cuerpo;
+  - reglas semánticas hacia biblioteca del vino, uvas, regiones, estilos, maridajes, análisis de carta y demo;
+  - fallback genérico solo cuando no haya señales mejores.
+- Se creó la migración `supabase/migrations/20260601093000_add_wine_library_blog_cluster.sql`.
+- La migración añade, si falta, la columna `article_group` y publica 3 artículos españoles:
+  - `biblioteca-vino-restaurante-vender-mas`;
+  - `uvas-regiones-equipo-sala-vender-vino`;
+  - `maridajes-carta-vinos-rentable`.
+- Verificaciones locales completadas:
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`;
+  - `npm run test`: 7 archivos, 35 tests;
+  - `npm run build`;
+  - `npx eslint src/components/article/ArticleRelatedContent.tsx`;
+  - `git diff --check`.
+- Commit creado y pusheado a `main`: `cbe8a80 feat: add wine library blog cluster`.
+- Lovable añadió además el commit remoto `cdd6e8f Apliqué la migración del blog`, con una migración SQL generada por Lovable para el mismo cluster.
+- Quedan dos archivos de migración idempotentes para el cluster (`20260601075446_d8d6d927-c2fc-4a8b-bc75-2f7b34f3e59c.sql` y `20260601093000_add_wine_library_blog_cluster.sql`); ambos usan `ADD COLUMN IF NOT EXISTS` y `ON CONFLICT (slug) DO UPDATE`, por lo que no duplican artículos.
+- Lovable desplegó la Edge Function `prerender` y aplicó la migración SQL en Supabase.
+- Supabase público devuelve los 3 nuevos artículos como `published=true`, `lang=es` y `published_at` el 2026-06-01.
+- Producción validada como Googlebot:
+  - los 3 artículos responden HTTP 200;
+  - `X-Worker-Branch: bot-prerender`;
+  - `X-Prerendered: true`;
+  - `Content-Type: text/html; charset=utf-8`;
+  - títulos reales del artículo presentes;
+  - enlaces HTML detectables hacia `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/maridajes`, `/analisis-carta` y `/demo`.
+- `https://winerim.wine/sitemap.xml` responde 200 desde la rama `sitemap`, contiene 2.057 URLs y ya incluye los 3 nuevos artículos.
+- No se detectaron contradicciones nuevas durante este cierre; sí se mantiene como riesgo operativo la duplicación de reglas entre frontend y prerender.
+
+## Decisiones
+
+- Sí conviene publicar artículos nuevos en el blog, pero como clusters tácticos de alta intención, no como volumen genérico.
+- El primer cluster debe reforzar la biblioteca del vino y conectar contenido informacional con acciones comerciales: análisis de carta y demo.
+- Los artículos nuevos deben incluir enlaces internos contextuales desde el cuerpo y `related_links`; el prerender debe exponerlos en HTML para bots.
+- Empezar en español permite validar indexación, CTR y enlaces internos antes de traducir a `en`, `it`, `fr`, `de` y `pt`.
+- No solicitar indexación masiva: priorizar una tanda corta de URLs estratégicas y monitorizar señales reales.
+
+## Hipótesis
+
+- Este cluster puede aumentar autoridad temática de la biblioteca del vino al conectar blog, hubs, entidades y herramientas comerciales.
+- Los nuevos enlaces HTML en prerender deberían ayudar a Google y crawlers de IA a descubrir mejor la relación entre artículos y biblioteca.
+- El impacto dependerá de que Google rastree el sitemap actualizado y de que Search Console permita solicitar indexación para una tanda reducida.
+- Traducir los artículos sin validar primero el rendimiento español podría crear más URLs con señales débiles; conviene priorizar por datos.
+
+## Tareas pendientes
+
+- Solicitar indexación en Search Console, si la herramienta lo permite, para:
+  - `/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/article/uvas-regiones-equipo-sala-vender-vino`;
+  - `/article/maridajes-carta-vinos-rentable`;
+  - `/biblioteca-vino`;
+  - `/biblioteca-vino/uvas`;
+  - `/biblioteca-vino/regiones`;
+  - `/biblioteca-vino/maridajes`.
+- Monitorizar en Search Console impresiones, CTR, cobertura e indexación de los 3 artículos.
+- Decidir el siguiente cluster editorial por datos: gestión de carta, maridajes rentables, formación de sala, regiones estratégicas o comparativas de software.
+- Traducir a otros idiomas solo los artículos que muestren potencial o que refuercen rutas internacionales prioritarias.
+- Considerar una fuente compartida para reglas de enlaces internos entre React y `prerender`.
+- No crear una tercera migración para estos mismos 3 artículos; si se limpia la redundancia, hacerlo como tarea explícita y revisando historial de migraciones aplicadas.

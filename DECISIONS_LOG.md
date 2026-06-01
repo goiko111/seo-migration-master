@@ -1912,3 +1912,42 @@
 - Monitorizar Search Console para hubs de biblioteca y entidades prioritarias.
 - Definir una fuente única para rutas estratégicas si vuelve a crecer la matriz.
 - Continuar con schema y profundidad editorial de entidades para llevar la biblioteca al máximo nivel.
+
+### Cluster de blog para biblioteca del vino
+
+#### Hechos
+
+- Se auditó cómo funciona el blog: Supabase `articles` es la fuente principal y `src/data/articles.ts` actúa como fallback.
+- Se confirmó que el prerender de artículos lee desde Supabase, pero antes no convertía `related_links` ni enlaces markdown del cuerpo en enlaces internos HTML completos.
+- Se mejoró el enlazado interno de artículos en frontend y prerender.
+- Se creó la migración `supabase/migrations/20260601093000_add_wine_library_blog_cluster.sql`.
+- Se publicaron 3 artículos españoles:
+  - `biblioteca-vino-restaurante-vender-mas`;
+  - `uvas-regiones-equipo-sala-vender-vino`;
+  - `maridajes-carta-vinos-rentable`.
+- Se creó y pusheó el commit `cbe8a80 feat: add wine library blog cluster`.
+- Lovable añadió el commit remoto `cdd6e8f Apliqué la migración del blog` con una migración SQL idempotente equivalente para aplicar el cluster.
+- Lovable desplegó `prerender` y aplicó la migración SQL.
+- Producción quedó validada: los 3 artículos responden HTTP 200 como Googlebot, usan `bot-prerender`, exponen enlaces internos hacia biblioteca/hubs/análisis/demo y aparecen en `sitemap.xml`.
+
+#### Decisiones
+
+- Sí se deben publicar nuevos artículos, pero solo cuando formen clusters claros conectados a objetivos SEO y comerciales.
+- Para biblioteca del vino, el blog debe funcionar como capa de autoridad temática y no como repositorio de posts aislados.
+- Cada artículo estratégico debe enlazar al menos a un hub de biblioteca, una intención específica y una acción de conversión cuando encaje.
+- El prerender debe exponer esos enlaces en HTML para bots; no basta con que existan en React o en markdown cliente.
+- La primera publicación se hace en español; las traducciones se priorizarán por señales de Search Console y valor internacional.
+
+#### Hipótesis
+
+- El cluster ayudará a reforzar la autoridad de `/biblioteca-vino` y sus hubs si Google rastrea las nuevas URLs desde sitemap y enlaces internos.
+- Los artículos pueden capturar búsquedas de intención práctica para restaurantes que no encajan bien en fichas de entidad.
+- La combinación artículo -> biblioteca -> análisis/demo puede mejorar tanto SEO informacional como conversión asistida.
+
+#### Tareas pendientes
+
+- Solicitar indexación manual de una tanda corta si Search Console lo permite.
+- Medir indexación, impresiones y CTR de los 3 artículos.
+- Elegir el siguiente cluster editorial con datos: formación de sala, regiones, rentabilidad de carta, maridajes o comparativas.
+- Definir cuándo traducir artículos a `en`, `it`, `fr`, `de` y `pt`.
+- Evitar nuevas migraciones duplicadas para estos mismos slugs salvo que se decida limpiar explícitamente la redundancia.

@@ -14,6 +14,9 @@
 - El prerender para bots de la biblioteca del vino debe exponer el mismo grafo estratégico que el frontend humano; esta paridad quedó revalidada en producción el 2026-06-01 para home y hubs principales.
 - La profundidad de regiones, estilos y maridajes prioritarios ya fue publicada y validada en producción.
 - Los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública ya redirigen en producción a las rutas canónicas de entidad.
+- El blog forma parte de la estrategia de autoridad de la biblioteca del vino: debe publicar clusters editoriales que enlacen de forma contextual a hubs, entidades, herramientas de análisis y demo.
+- El 2026-06-01 quedó publicado el primer cluster de 3 artículos españoles de blog enfocados en biblioteca del vino, uvas/regiones y maridajes para restaurantes.
+- El prerender de artículos debe exponer enlaces internos reales procedentes de `related_links`, markdown del cuerpo y reglas semánticas, no solo navegación genérica.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
@@ -32,6 +35,7 @@
 - Si falta contexto, revisar primero estos documentos antes de continuar.
 - Si se detectan contradicciones entre documentos, código o instrucciones, señalarlas en vez de ignorarlas.
 - Actualizar estos documentos también durante la sesión cuando ocurra algo significativo.
+- Publicar artículos de blog de forma táctica, por clusters conectados a la biblioteca del vino y a conversión, antes que aumentar volumen sin enlazado ni intención clara.
 
 ## Hipótesis
 
@@ -42,6 +46,7 @@
 - Las rutas estratégicas de hubs deben mantenerse sincronizadas entre React y `supabase/functions/prerender/index.ts` hasta que exista una fuente compartida.
 - La ampliación editorial debe publicarse desde Lovable y validarse en producción antes de tratarse como cerrada.
 - Los archivos `llms.txt` y `llms-full.txt` ayudan a orientar agentes y crawlers de IA, pero no sustituyen contenido indexable, prerender correcto ni schema consistente.
+- Los clusters editoriales del blog deberían aumentar autoridad temática y enlazado interno hacia la biblioteca del vino si se indexan, se enlazan desde hubs relevantes y mantienen profundidad real.
 
 ## Tareas pendientes
 
@@ -54,3 +59,4 @@
 - Evitar que frontend y prerender diverjan cuando se añadan nuevos enlaces estratégicos de biblioteca.
 - Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.
+- Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.

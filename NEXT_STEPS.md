@@ -1886,3 +1886,53 @@
    - Profundizar fichas prioritarias con intención de compra, servicio, maridaje, regiones y FAQs.
    - Crear una fuente compartida para rutas estratégicas frontend/prerender.
    - Medir qué entidades están descubiertas sin indexar antes de añadir nuevas tandas masivas.
+
+## Actualización 2026-06-01: listo para retomar tras cluster de blog
+
+## Hechos
+
+- Se publicó el primer cluster de blog para reforzar la biblioteca del vino.
+- Commit en `main`: `cbe8a80 feat: add wine library blog cluster`.
+- Lovable añadió el commit remoto `cdd6e8f Apliqué la migración del blog`, con una migración idempotente equivalente para el mismo cluster.
+- Lovable aplicó la migración SQL y desplegó `prerender`.
+- Artículos publicados y validados:
+  - `/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/article/uvas-regiones-equipo-sala-vender-vino`;
+  - `/article/maridajes-carta-vinos-rentable`.
+- Los 3 artículos responden 200 como Googlebot, usan `bot-prerender`, aparecen en `sitemap.xml` y enlazan a biblioteca, uvas, regiones, maridajes, análisis de carta y demo.
+- Supabase lista esos 3 artículos como los más recientes de la tabla `articles`.
+
+## Decisiones
+
+- Sí debemos publicar nuevos artículos en el blog, pero solo en clusters estratégicos con intención clara y enlaces internos reales.
+- El siguiente paso no es publicar muchos posts, sino medir estos 3, solicitar indexación selectiva y decidir el próximo cluster por potencial SEO/comercial.
+- Las traducciones se harán después de validar qué temas merecen escalar internacionalmente.
+
+## Hipótesis
+
+- Este cluster debería reforzar autoridad temática de biblioteca del vino y ayudar a Google a entender mejor el grafo blog -> biblioteca -> conversión.
+- Los artículos pueden capturar intención práctica de restaurantes y alimentar visitas hacia análisis/demo.
+- Si Search Console sigue mostrando muchas URLs descubiertas sin indexar, hará falta más autoridad/enlazado externo además de más contenido.
+
+## Tareas pendientes listas para retomar
+
+1. En Search Console, inspeccionar y solicitar indexación si está disponible:
+   - `https://winerim.wine/article/biblioteca-vino-restaurante-vender-mas`
+   - `https://winerim.wine/article/uvas-regiones-equipo-sala-vender-vino`
+   - `https://winerim.wine/article/maridajes-carta-vinos-rentable`
+2. Reenviar o comprobar lectura de `https://winerim.wine/sitemap.xml` tras el cambio.
+3. Monitorizar durante la siguiente semana:
+   - estado de indexación de los 3 artículos;
+   - impresiones/clics por consultas relacionadas con biblioteca del vino, uvas, regiones y maridajes;
+   - enlaces internos detectados hacia hubs de biblioteca.
+4. Preparar el siguiente cluster solo después de mirar señales iniciales:
+   - formación de sala para vender vino;
+   - regiones prioritarias para cartas de restaurante;
+   - maridajes por tipo de cocina;
+   - rentabilidad, stock y rotación de carta;
+   - comparativas de software de carta de vinos.
+5. Mantener como bloque técnico:
+   - fuente compartida de enlaces estratégicos entre React y `prerender`;
+   - schema de artículos y hubs;
+   - extracción de métricas Search Console para priorizar nuevas publicaciones.
+6. No crear más migraciones para estos 3 slugs; si se decide limpiar la duplicación de migraciones, revisar primero cuáles constan aplicadas por Supabase/Lovable.
