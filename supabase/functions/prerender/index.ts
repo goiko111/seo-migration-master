@@ -2023,6 +2023,143 @@ function wineLibraryHreflang(esPath: string): HreflangEntry[] {
   ];
 }
 
+type WineLibraryLocalizedText = Partial<Record<WineLibraryLang, string>> & { es: string; en: string };
+
+interface WineLibraryHubRouteGroup {
+  title: WineLibraryLocalizedText;
+  description: WineLibraryLocalizedText;
+  links: { label: string; esPath: string }[];
+}
+
+const hubText = (copy: WineLibraryLocalizedText, lang: WineLibraryLang): string =>
+  copy[lang] || copy.en || copy.es;
+
+const WINE_LIBRARY_HUB_ROUTE_GROUPS: Record<string, WineLibraryHubRouteGroup[]> = {
+  '/biblioteca-vino': [
+    {
+      title: { es: 'Rutas estrategicas para explorar la biblioteca', en: 'Strategic routes through the library', it: 'Percorsi strategici nella biblioteca', fr: 'Parcours strategiques dans la bibliotheque', de: 'Strategische Wege durch die Bibliothek', pt: 'Percursos estrategicos na biblioteca' },
+      description: { es: 'Accesos directos que conectan uvas, regiones, estilos y maridajes con alta intencion de busqueda y uso real en carta.', en: 'Short paths that connect grapes, regions, styles and pairings with strong search intent and real wine-list use.', it: 'Accessi rapidi che collegano vitigni, regioni, stili e abbinamenti con forte intento di ricerca e uso reale in carta.', fr: 'Acces courts reliant cepages, regions, styles et accords a forte intention de recherche et usage reel en carte.', de: 'Kurze Wege, die Rebsorten, Regionen, Stile und Pairings mit hoher Suchintention und echtem Einsatz auf der Karte verbinden.', pt: 'Acessos diretos que ligam castas, regioes, estilos e harmonizacoes com forte intencao de pesquisa e uso real na carta.' },
+      links: [
+        { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+        { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+        { label: 'Ribera del Duero', esPath: '/biblioteca-vino/regiones/espana/ribera-del-duero' },
+        { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+        { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+        { label: 'Rias Baixas', esPath: '/biblioteca-vino/regiones/espana/rias-baixas' },
+        { label: 'Godello', esPath: '/biblioteca-vino/uvas/godello' },
+        { label: 'Ostras', esPath: '/biblioteca-vino/maridajes/ostras' },
+        { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+        { label: 'Espumoso', esPath: '/biblioteca-vino/estilos/espumoso' },
+      ],
+    },
+  ],
+  '/biblioteca-vino/uvas': [
+    {
+      title: { es: 'Rutas de uvas con mayor valor para carta', en: 'Grape routes with the highest wine-list value', it: 'Percorsi di vitigni con maggiore valore in carta', fr: 'Parcours de cepages a forte valeur en carte', de: 'Rebsortenwege mit hohem Wert fuer die Weinkarte', pt: 'Rotas de castas com maior valor para a carta' },
+      description: { es: 'Conecta variedades reconocibles y diferenciales con regiones, estilos y maridajes que activan la decision del comensal.', en: 'Connect recognizable and distinctive varieties with regions, styles and pairings that drive guest decisions.', it: 'Collega varieta riconoscibili e distintive a regioni, stili e abbinamenti che guidano la scelta del cliente.', fr: 'Reliez les cepages connus et differentiants aux regions, styles et accords qui declenchent la decision du client.', de: 'Verbindet bekannte und differenzierende Rebsorten mit Regionen, Stilen und Pairings, die Gaesteentscheidungen ausloesen.', pt: 'Liga castas reconheciveis e diferenciais a regioes, estilos e harmonizacoes que ajudam a decisao do cliente.' },
+      links: [
+        { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+        { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+        { label: 'Cabernet Sauvignon', esPath: '/biblioteca-vino/uvas/cabernet-sauvignon' },
+        { label: 'Pinot Noir', esPath: '/biblioteca-vino/uvas/pinot-noir' },
+        { label: 'Mencia', esPath: '/biblioteca-vino/uvas/mencia' },
+        { label: 'Godello', esPath: '/biblioteca-vino/uvas/godello' },
+        { label: 'Xarel-lo', esPath: '/biblioteca-vino/uvas/xarello' },
+        { label: 'Touriga Nacional', esPath: '/biblioteca-vino/uvas/touriga-nacional' },
+        { label: 'Sancerre', esPath: '/biblioteca-vino/regiones/francia/sancerre' },
+        { label: 'Ostras', esPath: '/biblioteca-vino/maridajes/ostras' },
+      ],
+    },
+  ],
+  '/biblioteca-vino/regiones': [
+    {
+      title: { es: 'Regiones que ordenan la lectura de la carta', en: 'Regions that structure wine-list reading', it: 'Regioni che strutturano la lettura della carta', fr: 'Regions qui structurent la lecture de la carte', de: 'Regionen, die die Weinkarte strukturieren', pt: 'Regioes que estruturam a leitura da carta' },
+      description: { es: 'Rutas desde denominaciones de referencia hacia uvas, estilos y maridajes utiles para servicio, compra y venta.', en: 'Routes from benchmark denominations into grapes, styles and pairings useful for service, purchasing and sales.', it: 'Percorsi da denominazioni di riferimento verso vitigni, stili e abbinamenti utili per servizio, acquisti e vendita.', fr: 'Parcours depuis les appellations de reference vers cepages, styles et accords utiles au service, aux achats et a la vente.', de: 'Wege von Referenzherkuenften zu Rebsorten, Stilen und Pairings fuer Service, Einkauf und Verkauf.', pt: 'Rotas desde denominacoes de referencia ate castas, estilos e harmonizacoes uteis para servico, compra e venda.' },
+      links: [
+        { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+        { label: 'Ribera del Duero', esPath: '/biblioteca-vino/regiones/espana/ribera-del-duero' },
+        { label: 'Rias Baixas', esPath: '/biblioteca-vino/regiones/espana/rias-baixas' },
+        { label: 'Priorat', esPath: '/biblioteca-vino/regiones/espana/priorat' },
+        { label: 'Bourgogne', esPath: '/biblioteca-vino/regiones/francia/bourgogne' },
+        { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+        { label: 'Sancerre', esPath: '/biblioteca-vino/regiones/francia/sancerre' },
+        { label: 'Bordeaux', esPath: '/biblioteca-vino/regiones/francia/bordeaux' },
+        { label: 'Douro', esPath: '/biblioteca-vino/regiones/portugal/douro' },
+        { label: 'Touriga Nacional', esPath: '/biblioteca-vino/uvas/touriga-nacional' },
+      ],
+    },
+  ],
+  '/biblioteca-vino/estilos': [
+    {
+      title: { es: 'Estilos conectados con decision comercial', en: 'Styles connected to commercial decisions', it: 'Stili collegati alla decisione commerciale', fr: 'Styles lies a la decision commerciale', de: 'Stile mit kommerzieller Entscheidungskraft', pt: 'Estilos ligados a decisao comercial' },
+      description: { es: 'Caminos desde el estilo hacia uvas, regiones y platos que facilitan explicar, vender y equilibrar una carta.', en: 'Paths from style into grapes, regions and dishes that make a list easier to explain, sell and balance.', it: 'Percorsi dallo stile verso vitigni, regioni e piatti che aiutano a spiegare, vendere ed equilibrare la carta.', fr: 'Chemins depuis le style vers cepages, regions et plats pour mieux expliquer, vendre et equilibrer une carte.', de: 'Wege vom Stil zu Rebsorten, Regionen und Gerichten, um eine Karte leichter zu erklaeren, zu verkaufen und auszubalancieren.', pt: 'Caminhos do estilo para castas, regioes e pratos que ajudam a explicar, vender e equilibrar uma carta.' },
+      links: [
+        { label: 'Tinto crianza', esPath: '/biblioteca-vino/estilos/tinto-crianza' },
+        { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+        { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+        { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
+        { label: 'Blanco con lias', esPath: '/biblioteca-vino/estilos/blanco-crianza-lias' },
+        { label: 'Chardonnay', esPath: '/biblioteca-vino/uvas/chardonnay' },
+        { label: 'Espumoso', esPath: '/biblioteca-vino/estilos/espumoso' },
+        { label: 'Cava', esPath: '/biblioteca-vino/estilos/cava' },
+        { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+      ],
+    },
+  ],
+  '/biblioteca-vino/maridajes': [
+    {
+      title: { es: 'Maridajes que abren rutas de venta', en: 'Pairings that open sales routes', it: 'Abbinamenti che aprono percorsi di vendita', fr: 'Accords qui ouvrent des chemins de vente', de: 'Pairings, die Verkaufswege oeffnen', pt: 'Harmonizacoes que abrem rotas de venda' },
+      description: { es: 'Conecta platos de alta demanda con uvas, regiones y estilos que reducen friccion y elevan el ticket medio.', en: 'Connect high-demand dishes with grapes, regions and styles that reduce friction and lift average ticket.', it: 'Collega piatti ad alta domanda a vitigni, regioni e stili che riducono attrito e aumentano lo scontrino medio.', fr: 'Reliez les plats a forte demande aux cepages, regions et styles qui reduisent la friction et augmentent le ticket moyen.', de: 'Verbindet stark nachgefragte Gerichte mit Rebsorten, Regionen und Stilen, die Reibung senken und den Durchschnittsbon erhoehen.', pt: 'Liga pratos de alta procura a castas, regioes e estilos que reduzem friccao e aumentam o ticket medio.' },
+      links: [
+        { label: 'Ostras', esPath: '/biblioteca-vino/maridajes/ostras' },
+        { label: 'Pescados y mariscos', esPath: '/biblioteca-vino/maridajes/pescados-y-mariscos' },
+        { label: 'Lubina y dorada', esPath: '/biblioteca-vino/maridajes/lubina-dorada' },
+        { label: 'Albarino', esPath: '/biblioteca-vino/uvas/albarino' },
+        { label: 'Carnes rojas', esPath: '/biblioteca-vino/maridajes/carnes-rojas' },
+        { label: 'Tempranillo', esPath: '/biblioteca-vino/uvas/tempranillo' },
+        { label: 'Tinto reserva', esPath: '/biblioteca-vino/estilos/tinto-reserva' },
+        { label: 'Quesos', esPath: '/biblioteca-vino/maridajes/quesos' },
+        { label: 'Champagne', esPath: '/biblioteca-vino/regiones/francia/champagne' },
+      ],
+    },
+  ],
+};
+
+function wineLibraryHubRouteSections(lang: WineLibraryLang, esPath: string): { heading: string; content: string }[] {
+  return (WINE_LIBRARY_HUB_ROUTE_GROUPS[esPath] || []).map((group) => ({
+    heading: hubText(group.title, lang),
+    content: `${hubText(group.description, lang)} ${group.links.map((link) => link.label).join(', ')}.`,
+  }));
+}
+
+function wineLibraryHubRouteLinks(lang: WineLibraryLang, esPath: string): { label: string; url: string }[] {
+  return (WINE_LIBRARY_HUB_ROUTE_GROUPS[esPath] || [])
+    .flatMap((group) => group.links)
+    .map((link) => ({
+      label: link.label,
+      url: wineLibraryPath(lang, link.esPath),
+    }));
+}
+
+function withWineLibraryHubRoutes(content: PageContent, lang: WineLibraryLang, esPath: string): PageContent {
+  const routeSections = wineLibraryHubRouteSections(lang, esPath);
+  const routeLinks = wineLibraryHubRouteLinks(lang, esPath);
+  if (routeSections.length === 0 && routeLinks.length === 0) return content;
+
+  const seen = new Set<string>();
+  const internalLinks = [...routeLinks, ...content.internalLinks].filter((link) => {
+    if (seen.has(link.url)) return false;
+    seen.add(link.url);
+    return true;
+  });
+
+  return {
+    ...content,
+    sections: [...content.sections, ...routeSections],
+    internalLinks,
+  };
+}
+
 const WINE_LIBRARY_STRATEGIC_LINKS: Record<string, { label: string; esPath: string }[]> = {
   '/biblioteca-vino/uvas/tempranillo': [
     { label: 'Rioja', esPath: '/biblioteca-vino/regiones/espana/rioja' },
@@ -2340,7 +2477,13 @@ function renderWineLibraryPage(path: string): string | null {
   const canonical = `${SITE}${wineLibraryPath(lang, esPath)}`;
 
   if (esPath === '/biblioteca-vino') {
-    return generateHTML(STATIC_PAGES['/biblioteca-vino'].meta, STATIC_PAGES['/biblioteca-vino'].content, wineLibraryHreflang(esPath));
+    const localizedHomePath = wineLibraryPath(lang, esPath);
+    const staticHomePage = STATIC_PAGES[localizedHomePath] || STATIC_PAGES['/biblioteca-vino'];
+    return generateHTML(
+      staticHomePage.meta,
+      withWineLibraryHubRoutes(staticHomePage.content, lang, esPath),
+      wineLibraryHreflang(esPath)
+    );
   }
 
   const sectionTitle = copy.sectionTitles[section] || copy.home;
@@ -2373,8 +2516,8 @@ function renderWineLibraryPage(path: string): string | null {
       : copy.generatedIntro(subject, type);
 
   const hubPath = section ? wineLibraryPath(lang, `/biblioteca-vino/${section}`) : wineLibraryPath(lang, '/biblioteca-vino');
-  const strategicInternalLinks = isSectionHub ? [] : wineLibraryStrategicLinks(lang, esPath);
-  const sections = priorityProfile && priorityCopy
+  const strategicInternalLinks = isSectionHub ? wineLibraryHubRouteLinks(lang, esPath) : wineLibraryStrategicLinks(lang, esPath);
+  const baseSections = priorityProfile && priorityCopy
     ? [
         { heading: priorityCopy.role, content: priorityProfile.role[editorialLang!] },
         { heading: priorityCopy.service, content: `${subject}: ${priorityProfile.serviceTemp}. ${priorityProfile.glass}.` },
@@ -2392,6 +2535,7 @@ function renderWineLibraryPage(path: string): string | null {
         { heading: sectionTitle, content: copy.sectionIntro(sectionTitle) },
         { heading: copy.home, content: copy.generatedIntro(subject, copy.detailLabels.article) },
       ];
+  const sections = isSectionHub ? [...baseSections, ...wineLibraryHubRouteSections(lang, esPath)] : baseSections;
 
   return generateHTML(
     {
@@ -5218,7 +5362,11 @@ Deno.serve(async (req) => {
     const staticPage = STATIC_PAGES[path];
     if (staticPage) {
       const hreflang = hreflangForPath(path);
-      html = generateHTML(staticPage.meta, staticPage.content, hreflang);
+      const wineLibraryHome = resolveWineLibraryPath(path);
+      const content = wineLibraryHome?.esPath === '/biblioteca-vino'
+        ? withWineLibraryHubRoutes(staticPage.content, wineLibraryHome.lang, wineLibraryHome.esPath)
+        : staticPage.content;
+      html = generateHTML(staticPage.meta, content, hreflang);
     }
 
     if (!html) {
