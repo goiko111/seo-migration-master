@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -241,6 +242,8 @@ const PairingsHub = () => {
           <p className="text-sm text-muted-foreground mb-6">{ui.hubs.pairingsCount(filtered.length)}</p>
         </div>
       </section>
+
+      {!search.trim() && categoryFilter === "all" && <StrategicWineLibraryRoutes hub="pairings" />}
 
       {/* CARDS */}
       <section className="section-padding pt-0">

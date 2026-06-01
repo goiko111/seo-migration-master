@@ -1844,3 +1844,38 @@
 - Revisar más ejemplos si el grupo no baja.
 - Decidir explícitamente qué hacer con los 3 404 restantes de la muestra.
 - Pedir confirmación antes de `Validar corrección` 404 o retirar `/sitemap_index.xml`.
+
+### Enlazado interno estratégico de hubs de biblioteca
+
+#### Hechos
+
+- Se revisó el código de detalle de uvas, regiones, estilos y maridajes.
+- Las fichas detalle ya incorporan relaciones internas mediante `RelatedWineLibraryLinks`.
+- Se añadió un componente específico para hubs: `StrategicWineLibraryRoutes`.
+- El componente se integró en la home de biblioteca y en los hubs de uvas, regiones, estilos y maridajes.
+- Las rutas se resuelven con `getWineLibraryPath` y fuentes localizadas, incluyendo `de` y `pt`.
+- Verificaciones locales correctas:
+  - `npm run test`;
+  - `npm run build`;
+  - `git diff --check`;
+  - ESLint limitado a archivos tocados.
+- El lint completo del repo sigue fallando por deuda previa no relacionada.
+
+#### Decisiones
+
+- Priorizar enlaces desde hubs hacia entidades estratégicas antes de abrir otra expansión editorial masiva.
+- Usar grupos editoriales curados de 4 rutas por bloque para mantener relevancia y control semántico.
+- Mostrar el bloque solo en la vista inicial de hubs cuando no hay búsqueda o filtros activos.
+- No usar indexación manual para este bloque; primero desplegar, validar producción y monitorizar.
+
+#### Hipótesis
+
+- Los hubs deberían transmitir más contexto y autoridad a entidades prioritarias de biblioteca.
+- La mejora puede ayudar a que Google pase de descubrimiento a rastreo/indexación en más URLs nuevas.
+- Los datos de Search Console tras recrawl serán la mejor señal para decidir la siguiente ampliación.
+
+#### Tareas pendientes
+
+- Desplegar el frontend desde Lovable.
+- Validar producción y prerender/HTML de las rutas principales.
+- Revisar Search Console tras recrawl antes de decidir nuevas solicitudes manuales o más expansión editorial.

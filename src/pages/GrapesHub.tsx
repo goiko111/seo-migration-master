@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -225,6 +226,8 @@ const GrapesHub = () => {
           </motion.div>
         </div>
       </section>
+
+      {!hasActiveFilters && <StrategicWineLibraryRoutes hub="grapes" />}
 
       {/* FEATURED GRAPES */}
       {!hasActiveFilters && (

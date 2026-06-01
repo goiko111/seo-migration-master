@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -223,6 +224,8 @@ const StylesHub = () => {
           <p className="text-sm text-muted-foreground mb-6">{ui.hubs.stylesCount(filtered.length)}</p>
         </div>
       </section>
+
+      {!search.trim() && familyFilter === "all" && <StrategicWineLibraryRoutes hub="styles" className="bg-gradient-dark" />}
 
       {/* FAMILIES */}
       {familyFilter === "all" ? (

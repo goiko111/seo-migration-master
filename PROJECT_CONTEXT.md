@@ -10,6 +10,7 @@
 - La expansión editorial de biblioteca del vino cubre 30 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
 - La cobertura completa de la expansión en sitemap quedó publicada y validada tras desplegar desde Lovable el commit `9f99fa7`.
 - La biblioteca del vino incluye un grafo estratégico publicado que conecta uvas, regiones, estilos y maridajes prioritarios.
+- Los hubs principales de la biblioteca del vino exponen rutas estratégicas internas hacia uvas, regiones, estilos y maridajes prioritarios en seis idiomas.
 - La profundidad de regiones, estilos y maridajes prioritarios ya fue publicada y validada en producción.
 - Los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública ya redirigen en producción a las rutas canónicas de entidad.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.

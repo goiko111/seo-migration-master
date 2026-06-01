@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import ScrollReveal from "@/components/ScrollReveal";
+import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
 import { getLocalizedCountries, getLocalizedRegions } from "@/data/regionsLibraryI18n";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
@@ -225,6 +226,8 @@ const RegionsHub = () => {
           </motion.div>
         </div>
       </section>
+
+      {!search.trim() && <StrategicWineLibraryRoutes hub="regions" />}
 
       {/* COUNTRIES GRID */}
       <section className="section-padding pt-8">

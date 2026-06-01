@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
+import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { familyOrder } from "@/data/stylesLibrary";
@@ -180,6 +181,8 @@ const BibliotecaVino = () => {
           </div>
         </div>
       </section>
+
+      <StrategicWineLibraryRoutes hub="library" />
 
       {/* ESTILOS PREVIEW */}
       <section className="section-padding">

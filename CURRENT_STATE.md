@@ -2563,3 +2563,73 @@
   - redirigir a un destino nuevo si se define equivalencia real.
 - Pedir confirmación explícita antes de iniciar `Validar corrección` del grupo 404.
 - Pedir confirmación explícita antes de retirar `/sitemap_index.xml`.
+
+## Actualización 2026-06-01: enlazado interno de hubs de biblioteca
+
+## Hechos
+
+- Al retomar la sesión se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio en `main` antes de empezar el bloque de enlazado interno.
+- Se confirmó en código que las fichas detalle de uvas, regiones, estilos y maridajes ya renderizan `RelatedWineLibraryLinks` con relaciones entre entidades.
+- Se creó `src/components/biblioteca/StrategicWineLibraryRoutes.tsx`.
+- El nuevo componente expone rutas estratégicas por hub:
+  - biblioteca principal;
+  - uvas;
+  - regiones;
+  - estilos;
+  - maridajes.
+- Cada bloque conecta uvas, regiones, estilos y maridajes prioritarios mediante rutas curadas de alta intención, por ejemplo:
+  - Tempranillo -> Rioja -> Ribera del Duero -> Tinto crianza;
+  - Albariño -> Rías Baixas -> Godello -> Blanco con crianza sobre lías;
+  - Ostras -> Pescados y mariscos -> Quesos -> Carnes rojas;
+  - Champagne -> Espumoso -> Cava -> Xarel·lo.
+- El componente resuelve nombres desde las fuentes localizadas de biblioteca y rutas con `getWineLibraryPath`, por lo que funciona también en `de` y `pt`.
+- Se insertó el bloque en:
+  - `src/pages/BibliotecaVino.tsx`;
+  - `src/pages/GrapesHub.tsx`;
+  - `src/pages/RegionsHub.tsx`;
+  - `src/pages/StylesHub.tsx`;
+  - `src/pages/PairingsHub.tsx`.
+- En los hubs con filtros o búsqueda, el bloque se muestra solo en la vista inicial sin filtros para no interferir con la intención de búsqueda del usuario.
+- Verificaciones ejecutadas:
+  - `npm run test`: correcto, 35 tests pasan.
+  - `npm run build`: correcto.
+  - `git diff --check`: correcto.
+  - `npx eslint src/components/biblioteca/StrategicWineLibraryRoutes.tsx src/pages/BibliotecaVino.tsx src/pages/GrapesHub.tsx src/pages/RegionsHub.tsx src/pages/StylesHub.tsx src/pages/PairingsHub.tsx`: correcto.
+- `npm run lint` completo sigue fallando por deuda previa no relacionada con estos cambios, principalmente `no-explicit-any`, `no-empty-object-type`, `no-require-imports` y warnings de fast-refresh en archivos no tocados.
+- Validación local en navegador sobre `http://127.0.0.1:8080`:
+  - el bloque aparece en `/biblioteca-vino`;
+  - las rutas estratégicas aparecen en `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos` y `/biblioteca-vino/maridajes`;
+  - `/de/weinbibliothek` genera enlaces localizados como `/de/weinbibliothek/rebsorten/tempranillo`;
+  - `/pt/biblioteca-vinho` genera enlaces localizados como `/pt/biblioteca-vinho/castas/tempranillo`;
+  - no se detectó overflow horizontal en desktop.
+
+## Decisiones
+
+- Reforzar primero los hubs de biblioteca porque reparten autoridad interna y ayudan al descubrimiento de URLs nuevas.
+- No duplicar lógica en las fichas detalle, ya que esas páginas ya tenían relaciones internas.
+- Usar rutas editoriales curadas en lugar de un listado automático masivo, para mantener relevancia semántica y evitar ruido.
+- Mantener los bloques dentro de la experiencia editorial de biblioteca, no como CTAs comerciales agresivos.
+- No solicitar indexación manual nueva por este cambio; el siguiente paso SEO debe ser desplegar, validar y monitorizar recrawl.
+
+## Hipótesis
+
+- El nuevo enlazado desde hubs debería mejorar descubrimiento, contexto semántico y reparto de autoridad hacia entidades prioritarias.
+- El impacto en Search Console dependerá del despliegue en producción y del siguiente recrawl de Google.
+- Las rutas nuevas deberían ayudar especialmente a URLs en estado `Descubierta: actualmente sin indexar`.
+- Puede haber margen adicional en de/pt si se detectan nombres de platos o entidades que aún dependan de overlays incompletos.
+
+## Tareas pendientes
+
+- Publicar el frontend actualizado desde Lovable.
+- Validar producción tras deploy en:
+  - `/biblioteca-vino`;
+  - `/biblioteca-vino/uvas`;
+  - `/biblioteca-vino/regiones`;
+  - `/biblioteca-vino/estilos`;
+  - `/biblioteca-vino/maridajes`;
+  - `/de/weinbibliothek`;
+  - `/pt/biblioteca-vinho`.
+- Tras producción, comprobar que las rutas estratégicas aparecen en HTML/prerender para bots.
+- Monitorizar en Search Console si baja `Descubierta: actualmente sin indexar` y si suben impresiones long-tail de biblioteca.
+- Mantener pendiente, con confirmación explícita, cualquier acción de `Validar corrección` 404 o retirada de `/sitemap_index.xml`.

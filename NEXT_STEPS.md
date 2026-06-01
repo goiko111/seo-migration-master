@@ -1785,6 +1785,56 @@
    - iniciar `Validar corrección` del grupo 404;
    - o retirar `/sitemap_index.xml`.
 3. Abrir bloque de enlazado interno de biblioteca:
-   - hubs principales -> entidades indexadas nuevas;
-   - uva -> región -> estilo -> maridaje;
-   - CTAs suaves hacia análisis/carta en páginas de intención comercial.
+   - Hecho: hubs principales -> entidades estratégicas nuevas y ya indexadas;
+   - Hecho: rutas uva -> región -> estilo -> maridaje desde biblioteca principal, uvas, regiones, estilos y maridajes;
+   - Pendiente: CTAs suaves hacia análisis/carta en páginas de intención comercial, si se decide abrir ese bloque.
+
+## Actualización 2026-06-01: listo para retomar tras enlazado interno
+
+## Hechos
+
+- Se añadió enlazado interno estratégico en la home de biblioteca y en los hubs de:
+  - uvas;
+  - regiones;
+  - estilos;
+  - maridajes.
+- El componente nuevo es `src/components/biblioteca/StrategicWineLibraryRoutes.tsx`.
+- Los enlaces usan nombres localizados y rutas localizadas en seis idiomas.
+- La validación local confirmó rutas en español, alemán y portugués.
+- `npm run test`, `npm run build`, `git diff --check` y ESLint limitado a archivos tocados pasan.
+- `npm run lint` completo sigue fallando por errores preexistentes no relacionados.
+- No se ha desplegado todavía este cambio de frontend en producción desde Lovable dentro de esta sesión.
+
+## Decisiones
+
+- Tratar el bloque de enlazado interno como la mejora principal inmediata para reducir el cuello de `Descubierta: actualmente sin indexar`.
+- No abrir otra tanda de indexación manual hasta ver señales posteriores al deploy y recrawl.
+- Mantener cualquier acción sobre Search Console 404 o `/sitemap_index.xml` bajo confirmación explícita.
+
+## Hipótesis
+
+- Los hubs reforzados deberían acelerar descubrimiento y mejorar contexto semántico de entidades prioritarias.
+- La mejora no tendrá efecto en Search Console hasta que Lovable publique el frontend y Google recrawlee.
+- La siguiente mejora de máximo nivel será una mezcla de datos GSC, expansión editorial selectiva y enlaces desde páginas comerciales relacionadas.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar el frontend actualizado desde Lovable.
+2. Validar en producción:
+   - `/biblioteca-vino`;
+   - `/biblioteca-vino/uvas`;
+   - `/biblioteca-vino/regiones`;
+   - `/biblioteca-vino/estilos`;
+   - `/biblioteca-vino/maridajes`;
+   - `/de/weinbibliothek`;
+   - `/pt/biblioteca-vinho`.
+3. Validar que el bloque aparece en HTML/prerender para bots, no solo tras hidratación cliente.
+4. Revisar Search Console tras recrawl:
+   - evolución de `Descubierta: actualmente sin indexar`;
+   - nuevas URLs indexadas de biblioteca;
+   - impresiones y consultas long-tail por entidad.
+5. Siguiente ampliación de biblioteca al máximo nivel:
+   - completar overlays de nombres/platos en de y pt si aparecen cadenas residuales poco naturales;
+   - añadir clusters por intención comercial desde páginas de análisis/carta hacia entidades de biblioteca;
+   - ampliar contenido diferencial en entidades que GSC muestre con impresiones y baja posición;
+   - reforzar schema y `llms.txt` solo después de validar que el HTML/prerender y el enlazado están limpios.
