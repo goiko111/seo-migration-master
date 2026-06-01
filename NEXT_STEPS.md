@@ -1803,7 +1803,7 @@
 - La validación local confirmó rutas en español, alemán y portugués.
 - `npm run test`, `npm run build`, `git diff --check` y ESLint limitado a archivos tocados pasan.
 - `npm run lint` completo sigue fallando por errores preexistentes no relacionados.
-- No se ha desplegado todavía este cambio de frontend en producción desde Lovable dentro de esta sesión.
+- En esa sesión aún no se había desplegado el cambio de frontend desde Lovable; quedó resuelto en el cierre posterior de prerender del 2026-06-01.
 
 ## Decisiones
 
@@ -1820,6 +1820,7 @@
 ## Tareas pendientes listas para retomar
 
 1. Publicar el frontend actualizado desde Lovable.
+   - Hecho en el cierre posterior del 2026-06-01.
 2. Validar en producción:
    - `/biblioteca-vino`;
    - `/biblioteca-vino/uvas`;
@@ -1828,7 +1829,9 @@
    - `/biblioteca-vino/maridajes`;
    - `/de/weinbibliothek`;
    - `/pt/biblioteca-vinho`.
+   - Hecho en el cierre posterior del 2026-06-01 con Googlebot.
 3. Validar que el bloque aparece en HTML/prerender para bots, no solo tras hidratación cliente.
+   - Hecho en el cierre posterior del 2026-06-01.
 4. Revisar Search Console tras recrawl:
    - evolución de `Descubierta: actualmente sin indexar`;
    - nuevas URLs indexadas de biblioteca;
@@ -1838,3 +1841,48 @@
    - añadir clusters por intención comercial desde páginas de análisis/carta hacia entidades de biblioteca;
    - ampliar contenido diferencial en entidades que GSC muestre con impresiones y baja posición;
    - reforzar schema y `llms.txt` solo después de validar que el HTML/prerender y el enlazado están limpios.
+
+## Actualización 2026-06-01: cierre prerender rutas estratégicas biblioteca
+
+## Hechos
+
+- El frontend productivo ya mostraba el nuevo bloque de rutas estratégicas de biblioteca, pero Googlebot no lo recibía en HTML prerenderizado.
+- Se corrigió `supabase/functions/prerender/index.ts`.
+- Commit publicado en `main`: `0c44042 fix: mirror wine library hub links in prerender`.
+- Lovable desplegó la Edge Function `prerender`.
+- Producción validada como Googlebot:
+  - `es`: `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos`, `/biblioteca-vino/maridajes`.
+  - `en`: `/en/wine-library`, `/en/wine-library/grapes`.
+  - `it`: `/it/biblioteca-vino`, `/it/biblioteca-vino/vitigni`.
+  - `fr`: `/fr/bibliotheque-vin`, `/fr/bibliotheque-vin/cepages`.
+  - `de`: `/de/weinbibliothek`, `/de/weinbibliothek/rebsorten`.
+  - `pt`: `/pt/biblioteca-vinho`, `/pt/biblioteca-vinho/castas`.
+- Todas las rutas probadas responden 200, `X-Worker-Branch: bot-prerender`, `X-Prerendered: true`, canonical propio, texto estratégico y enlace estratégico esperado.
+
+## Decisiones
+
+- Cerrar como resuelta la brecha frontend/prerender de rutas estratégicas de hubs.
+- No tocar Worker ni publicar frontend adicional para este cierre porque producción ya sirve el cambio desde `prerender`.
+- Mantener como tarea futura la extracción de la matriz estratégica a una fuente compartida.
+
+## Hipótesis
+
+- El impacto debería verse en mejor rastreo de entidades prioritarias y señales internas más claras para Googlebot y crawlers de IA.
+- La medición real dependerá del recrawl de Google y de los informes de Search Console.
+
+## Tareas pendientes inmediatas
+
+1. Monitorizar Search Console para `/biblioteca-vino` y hubs tras recrawl.
+2. Reintentar indexación manual de una tanda corta de URLs estratégicas si Search Console lo permite:
+   - `/biblioteca-vino`
+   - `/biblioteca-vino/uvas`
+   - `/biblioteca-vino/regiones`
+   - `/biblioteca-vino/estilos`
+   - `/biblioteca-vino/maridajes`
+   - `/de/weinbibliothek`
+   - `/pt/biblioteca-vinho`
+3. Siguiente bloque biblioteca máximo nivel:
+   - Añadir schema por entidad y por hub.
+   - Profundizar fichas prioritarias con intención de compra, servicio, maridaje, regiones y FAQs.
+   - Crear una fuente compartida para rutas estratégicas frontend/prerender.
+   - Medir qué entidades están descubiertas sin indexar antes de añadir nuevas tandas masivas.

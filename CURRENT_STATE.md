@@ -2,7 +2,7 @@
 
 ## Hechos
 
-- Fecha de actualización: 2026-05-26.
+- Fecha de actualización: 2026-06-01.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
 - Rama activa: `main`.
 - PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
@@ -2621,7 +2621,7 @@
 
 ## Tareas pendientes
 
-- Publicar el frontend actualizado desde Lovable.
+- Hecho en actualización posterior del 2026-06-01: frontend y prerender de hubs estratégicos quedaron reflejados en producción.
 - Validar producción tras deploy en:
   - `/biblioteca-vino`;
   - `/biblioteca-vino/uvas`;
@@ -2630,6 +2630,54 @@
   - `/biblioteca-vino/maridajes`;
   - `/de/weinbibliothek`;
   - `/pt/biblioteca-vinho`.
-- Tras producción, comprobar que las rutas estratégicas aparecen en HTML/prerender para bots.
+- Hecho en actualización posterior del 2026-06-01: las rutas estratégicas aparecen en HTML/prerender para bots.
 - Monitorizar en Search Console si baja `Descubierta: actualmente sin indexar` y si suben impresiones long-tail de biblioteca.
 - Mantener pendiente, con confirmación explícita, cualquier acción de `Validar corrección` 404 o retirada de `/sitemap_index.xml`.
+
+## Actualización 2026-06-01: prerender de rutas estratégicas de biblioteca
+
+## Hechos
+
+- Al iniciar esta continuación se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repositorio estaba en `main` y limpio respecto a `origin/main` antes de aplicar el nuevo ajuste.
+- Producción ya tenía publicado el bundle frontend con `StrategicWineLibraryRoutes`, incluyendo textos y rutas para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se detectó una contradicción operativa: el frontend humano publicado sí incluía las rutas estratégicas, pero el HTML prerenderizado para Googlebot no las incluía en home ni hubs de biblioteca.
+- Se corrigió `supabase/functions/prerender/index.ts` para que el prerender añada rutas estratégicas internas en:
+  - Home de biblioteca del vino.
+  - Hubs de uvas, regiones, estilos y maridajes.
+  - Rutas localizadas `es`, `en`, `it`, `fr`, `de` y `pt`.
+- La corrección añade grupos de rutas estratégicas en prerender y los conecta tanto en la rama estática de `/biblioteca-vino` como en el renderer dinámico de hubs.
+- Commit creado y pusheado a `main`: `0c44042 fix: mirror wine library hub links in prerender`.
+- Verificaciones locales completadas:
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `git diff --check`.
+  - `npm run test`: 7 archivos, 35 tests.
+  - `npm run build`.
+  - Smoke test local con Googlebot contra la Edge Function en `/biblioteca-vino`, hubs ES y homes `de`/`pt`.
+- Lovable desplegó explícitamente la Edge Function `prerender` tras pedirlo desde el chat del proyecto.
+- Revalidación de producción como Googlebot completada:
+  - `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos` y `/biblioteca-vino/maridajes` responden 200 con `X-Worker-Branch: bot-prerender`, `X-Prerendered: true`, canonical propio, texto estratégico y enlaces internos.
+  - `/en/wine-library` y `/en/wine-library/grapes` responden con texto y enlaces estratégicos localizados.
+  - `/it/biblioteca-vino` y `/it/biblioteca-vino/vitigni` responden con texto y enlaces estratégicos localizados.
+  - `/fr/bibliotheque-vin` y `/fr/bibliotheque-vin/cepages` responden con texto y enlaces estratégicos localizados.
+  - `/de/weinbibliothek` y `/de/weinbibliothek/rebsorten` responden con texto y enlaces estratégicos localizados.
+  - `/pt/biblioteca-vinho` y `/pt/biblioteca-vinho/castas` responden con texto y enlaces estratégicos localizados.
+- No hizo falta redesplegar Cloudflare Worker ni publicar frontend adicional: la brecha estaba en `prerender` y producción quedó verde tras desplegar esa Edge Function.
+
+## Decisiones
+
+- Tratar el prerender como parte obligatoria del cierre SEO: un bloque visible en React no se considera publicado para SEO hasta que Googlebot lo recibe en HTML.
+- Mantener por ahora la lista estratégica duplicada en React y `prerender` para resolver la urgencia de indexabilidad.
+- No tocar Worker ni frontend cuando la revalidación productiva confirma que el cambio crítico ya está servido por `bot-prerender`.
+
+## Hipótesis
+
+- Al exponer rutas estratégicas internas en el HTML para bots, Google y crawlers de IA deberían descubrir mejor las entidades prioritarias de la biblioteca.
+- Search Console puede tardar varios días en reflejar la mejora de rastreo e indexación.
+- La siguiente mejora de mayor impacto será reducir duplicación entre frontend/prerender y seguir aumentando profundidad editorial/schema de entidades prioritarias.
+
+## Tareas pendientes
+
+- Monitorizar en Search Console el recrawl de `/biblioteca-vino` y hubs principales.
+- Considerar extraer la matriz estratégica de biblioteca a una fuente compartida o generada para evitar divergencias entre React y `prerender`.
+- Continuar el bloque de máximo nivel de biblioteca: más profundidad editorial, schema por entidad, enlaces por intención y priorización de URLs para indexación manual.

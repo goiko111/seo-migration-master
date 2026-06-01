@@ -1876,6 +1876,39 @@
 
 #### Tareas pendientes
 
-- Desplegar el frontend desde Lovable.
-- Validar producción y prerender/HTML de las rutas principales.
+- Hecho en cierre posterior del 2026-06-01: frontend publicado desde Lovable.
+- Hecho en cierre posterior del 2026-06-01: producción y prerender/HTML de rutas principales validados.
 - Revisar Search Console tras recrawl antes de decidir nuevas solicitudes manuales o más expansión editorial.
+
+## 2026-06-01
+
+### Prerender de rutas estratégicas de biblioteca
+
+#### Hechos
+
+- Se comprobó que el commit frontend `6bb3180` ya estaba publicado en producción para usuarios humanos.
+- El bundle productivo contenía `StrategicWineLibraryRoutes` con rutas estratégicas para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Googlebot seguía recibiendo HTML prerenderizado sin esas rutas en `/biblioteca-vino` y hubs principales.
+- Se implementó la paridad en `supabase/functions/prerender/index.ts`.
+- Se creó y pusheó el commit `0c44042 fix: mirror wine library hub links in prerender`.
+- Lovable desplegó la Edge Function `prerender`.
+- Producción quedó validada como Googlebot con `bot-prerender`, canonical propio y enlaces estratégicos en home/hubs de biblioteca y rutas localizadas probadas.
+
+#### Decisiones
+
+- La biblioteca del vino no se da por cerrada para SEO si la experiencia humana y el prerender para bots no tienen el mismo grafo interno prioritario.
+- El prerender debe incluir rutas estratégicas de hubs, no solo enlaces estratégicos de páginas de detalle.
+- Para esta corrección se mantiene la duplicación explícita de datos entre frontend y Edge Function porque era el camino más rápido y seguro para producción.
+- La extracción a una fuente compartida queda como mejora posterior, no como bloqueo del despliegue.
+
+#### Hipótesis
+
+- Este ajuste aumentará la capacidad de rastreo de URLs prioritarias de uvas, regiones, estilos y maridajes.
+- La mejora puede ayudar también a crawlers de IA porque reduce la dependencia del JavaScript cliente para entender el grafo de la biblioteca.
+- Search Console puede tardar días o semanas en reflejar cambios en cobertura y enlaces internos.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console para hubs de biblioteca y entidades prioritarias.
+- Definir una fuente única para rutas estratégicas si vuelve a crecer la matriz.
+- Continuar con schema y profundidad editorial de entidades para llevar la biblioteca al máximo nivel.
