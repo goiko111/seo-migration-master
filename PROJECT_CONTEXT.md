@@ -16,6 +16,9 @@
 - Los 96 legacy shortcuts de biblioteca del vino detectados en auditoría pública ya redirigen en producción a las rutas canónicas de entidad.
 - El blog forma parte de la estrategia de autoridad de la biblioteca del vino: debe publicar clusters editoriales que enlacen de forma contextual a hubs, entidades, herramientas de análisis y demo.
 - El 2026-06-01 quedó publicado el primer cluster de 3 artículos españoles de blog enfocados en biblioteca del vino, uvas/regiones y maridajes para restaurantes.
+- El 2026-06-01 quedó publicado y validado el cluster internacional de 15 artículos adaptados para `en`, `it`, `fr`, `de` y `pt` sobre biblioteca del vino.
+- La navegación del blog ya mantiene el idioma en rutas de artículo localizadas `/{lang}/article/{slug}`; se corrigió el salto a español detectado en blogs internacionales.
+- Los bloques de apoyo de artículos (índice, herramientas, relacionados y CTAs) están localizados en la experiencia humana para evitar residuos de UI española en artículos internacionales.
 - El prerender de artículos debe exponer enlaces internos reales procedentes de `related_links`, markdown del cuerpo y reglas semánticas, no solo navegación genérica.
 - Los artículos estratégicos del blog deben tener rutas localizadas limpias (`/{lang}/article/{slug}`) y contenido adaptado a mercado cuando se publiquen en otros idiomas.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
@@ -37,7 +40,7 @@
 - Si se detectan contradicciones entre documentos, código o instrucciones, señalarlas en vez de ignorarlas.
 - Actualizar estos documentos también durante la sesión cuando ocurra algo significativo.
 - Publicar artículos de blog de forma táctica, por clusters conectados a la biblioteca del vino y a conversión, antes que aumentar volumen sin enlazado ni intención clara.
-- Priorizar traducción/adaptación por país de artículos estratégicos, pero solo cuando el routing, sitemap y prerender mantengan el idioma sin saltar a español.
+- Priorizar traducción/adaptación por país de artículos estratégicos cuando el routing, sitemap, prerender y la UI humana mantengan el idioma sin saltar a español.
 
 ## Hipótesis
 
@@ -63,4 +66,4 @@
 - Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.
 - Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.
-- Tras desplegar desde Lovable el soporte de artículos localizados, validar rutas `/en/article/...`, `/it/article/...`, `/fr/article/...`, `/de/article/...` y `/pt/article/...` en frontend, sitemap y prerender.
+- Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.

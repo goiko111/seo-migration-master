@@ -2805,7 +2805,7 @@
 - No se pudo hacer QA headless con Playwright porque `playwright`, `@playwright/test`, `puppeteer` y `puppeteer-core` no están instalados en el repo.
 - Commit creado y pusheado a `main`: `9eb4b76 fix: localize blog article routes`.
 - Supabase público todavía no devuelve las versiones `_en`, `_it`, `_fr`, `_de` y `_pt` del nuevo cluster; por tanto, la migración está lista en GitHub pero pendiente de aplicar desde Lovable.
-- Producción todavía requiere despliegue Lovable de:
+- Estado antes del cierre productivo posterior: producción todavía requería despliegue Lovable de:
   - frontend;
   - Edge Function `prerender`;
   - Edge Function `sitemap`;
@@ -2837,3 +2837,62 @@
   - Googlebot en `/{lang}/article/biblioteca-vino-restaurante-vender-mas` debe recibir `bot-prerender`, `html lang` correcto y canonical localizado;
   - `sitemap.xml` debe incluir las 15 rutas localizadas nuevas.
 - Después de validar producción, solicitar indexación selectiva de los artículos internacionales prioritarios, no indexación masiva.
+
+## Actualización 2026-06-01: cierre productivo de blog internacional
+
+## Hechos
+
+- Se continuó tras revisar `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Lovable aplicó la migración `supabase/migrations/20260601102000_add_localized_wine_library_blog_cluster.sql`.
+- Supabase público devuelve 15 artículos localizados publicados:
+  - 3 temas de biblioteca del vino;
+  - 5 idiomas internacionales: `en`, `it`, `fr`, `de`, `pt`.
+- Lovable desplegó las Edge Functions `prerender` y `sitemap`.
+- Producción validada como Googlebot:
+  - `/en/article/biblioteca-vino-restaurante-vender-mas` responde `html lang="en"`, canonical inglés y contenido inglés.
+  - `/it/article/uvas-regiones-equipo-sala-vender-vino` responde `html lang="it"` y contenido italiano.
+  - `/fr/article/maridajes-carta-vinos-rentable` responde `html lang="fr"` y contenido francés.
+  - `/de/article/biblioteca-vino-restaurante-vender-mas` responde `html lang="de"` y contenido alemán.
+  - `/pt/article/maridajes-carta-vinos-rentable` responde `html lang="pt"` y contenido portugués.
+- `https://winerim.wine/sitemap.xml` contiene 2.072 URLs e incluye las nuevas rutas internacionales `/{lang}/article/...`.
+- Se publicó frontend desde Lovable y quedó `Up to date`.
+- En navegador real de producción, `/en/blog` enlaza artículos a `/en/article/...` y no a `/article/...`, por lo que ya no fuerza detección española.
+- En navegador real de producción, `/en/article/biblioteca-vino-restaurante-vender-mas` mantiene `lang="en"`, canonical inglés, H1 inglés y enlaces internos ingleses.
+- Se detectó un residuo de UI española en artículos internacionales: índice, herramientas, relacionados y CTAs.
+- Se corrigió y publicó el commit `ee9da93 fix: localize article support blocks`.
+- Producción validada en navegador real tras `ee9da93`:
+  - no aparece `Contenido del artículo`;
+  - no aparece `Herramientas útiles`;
+  - no aparece `Contenido relacionado`;
+  - aparecen `ARTICLE CONTENTS`, `Useful tools`, `Related content` y `Free wine list analysis`.
+- Verificaciones locales del bloque final:
+  - ESLint dirigido en archivos tocados;
+  - `git diff --check`;
+  - `npm run test -- --run`: 8 archivos, 38 tests;
+  - `npm run build`.
+- El build mantiene avisos no bloqueantes de Browserslist desactualizado y chunks grandes.
+
+## Decisiones
+
+- Dar por resuelto el salto a español del blog para rutas de artículo localizadas tras validar frontend, prerender y sitemap.
+- Mantener `/{lang}/article/{slug}` como URL pública canónica para artículos internacionales.
+- Mantener slugs internos de Supabase con sufijo `_{lang}` por compatibilidad.
+- Publicar los artículos estratégicos internacionales como adaptaciones por mercado, no traducciones literales.
+- No tocar de nuevo base de datos ni Edge Functions para el pulido de UI; el último cambio fue solo frontend.
+- No solicitar indexación hasta tener producción completa validada, lo que ya queda cumplido para este cluster.
+
+## Hipótesis
+
+- El cluster internacional debería reforzar la autoridad temática de la biblioteca del vino en mercados internacionales si Google rastrea las nuevas URLs del sitemap.
+- Corregir rutas, canonical, idioma y UI reducirá señales contradictorias para SEO internacional y LLMs.
+- Search Console puede tardar días o semanas en reflejar indexación, impresiones y CTR de las nuevas URLs.
+
+## Tareas pendientes
+
+- Solicitar indexación selectiva en Search Console para una tanda corta de artículos internacionales prioritarios, empezando por:
+  - `/en/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/de/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/pt/article/maridajes-carta-vinos-rentable`.
+- Monitorizar en Search Console cobertura, impresiones y CTR de los 18 artículos del cluster completo.
+- Revisar si quedan residuos de UI española en otros tipos de páginas internacionales, especialmente herramientas y recursos legacy.
+- Extraer en el futuro reglas compartidas de rutas/enlaces de artículos para reducir duplicación entre React y `prerender`.

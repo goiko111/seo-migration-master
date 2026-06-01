@@ -1956,7 +1956,7 @@
   - ESLint dirigido;
   - `git diff --check`.
 - Limitación de QA: navegador integrado no disponible y Playwright/Puppeteer no instalados.
-- Estado de producción/base de datos: Supabase aún no devuelve las versiones traducidas, por lo que falta aplicar migración y desplegar desde Lovable.
+- Estado antes del cierre productivo posterior: Supabase aún no devolvía las versiones traducidas, por lo que faltaba aplicar migración y desplegar desde Lovable.
 
 ## Decisiones
 
@@ -1973,19 +1973,69 @@
 
 ## Tareas pendientes listas para retomar
 
-1. En Lovable, publicar el commit `9eb4b76`.
-2. Aplicar la migración:
+1. Hecho en cierre posterior: Lovable publicó el commit de rutas localizadas y el frontend final `ee9da93`.
+2. Hecho en cierre posterior: aplicar la migración:
    - `supabase/migrations/20260601102000_add_localized_wine_library_blog_cluster.sql`.
-3. Desplegar explícitamente Edge Functions:
+3. Hecho en cierre posterior: desplegar explícitamente Edge Functions:
    - `prerender`;
    - `sitemap`.
-4. Revalidar producción:
+4. Hecho en cierre posterior: revalidar producción:
    - `/en/blog` -> primer artículo debe abrir `/en/article/...`;
    - `/it/blog`, `/fr/blog`, `/de/blog`, `/pt/blog` deben conservar idioma al entrar en artículos;
    - Supabase público debe devolver los 15 slugs `_en/_it/_fr/_de/_pt`;
    - Googlebot en `/en/article/biblioteca-vino-restaurante-vender-mas` debe recibir `bot-prerender`, canonical `https://winerim.wine/en/article/biblioteca-vino-restaurante-vender-mas` y texto inglés;
    - repetir una muestra en `it`, `fr`, `de`, `pt`;
    - `sitemap.xml` debe incluir las rutas `/{lang}/article/...`.
-5. Si todo valida, solicitar indexación selectiva de una tanda corta:
+5. Siguiente tarea real: solicitar indexación selectiva de una tanda corta:
    - los 5 artículos `/lang/article/biblioteca-vino-restaurante-vender-mas`;
    - después los de uvas/regiones y maridajes si Search Console no falla.
+
+## Actualización 2026-06-01: listo para retomar tras blog internacional publicado
+
+## Hechos
+
+- El cluster internacional de biblioteca del vino está publicado:
+  - 15 artículos adaptados para `en`, `it`, `fr`, `de` y `pt`;
+  - 3 temas por idioma: biblioteca del vino, uvas/regiones y maridajes.
+- Lovable aplicó la migración SQL internacional.
+- Lovable desplegó `prerender` y `sitemap`.
+- Lovable publicó frontend y quedó `Up to date`.
+- Commit final en `main`: `ee9da93 fix: localize article support blocks`.
+- Producción validada:
+  - Supabase devuelve los 15 slugs internacionales como `published=true`.
+  - `sitemap.xml` tiene 2.072 URLs e incluye las rutas `/{lang}/article/...`.
+  - Googlebot recibe `html lang`, canonical y contenido correctos en muestras `en`, `it`, `fr`, `de` y `pt`.
+  - Navegador real en `/en/blog` enlaza a `/en/article/...`.
+  - Navegador real en `/en/article/biblioteca-vino-restaurante-vender-mas` ya no muestra UI española en índice, herramientas, relacionados ni CTAs.
+
+## Decisiones
+
+- Dar por cerrado el bug de salto a español del blog.
+- Mantener como canónico internacional `/{lang}/article/{slug}`.
+- Tratar la UI de soporte de artículos como parte obligatoria de la localización.
+- No crear más artículos hasta medir indexación y señales iniciales de este cluster.
+
+## Hipótesis
+
+- La biblioteca del vino gana autoridad internacional al tener blog, sitemap, canonical, contenido, enlaces internos y UI alineados por idioma.
+- Search Console tardará en reflejar el impacto; conviene medir antes de abrir otro cluster editorial grande.
+
+## Tareas pendientes listas para retomar
+
+1. Search Console:
+   - inspeccionar e intentar solicitar indexación de `/en/article/biblioteca-vino-restaurante-vender-mas`;
+   - repetir con `/de/article/biblioteca-vino-restaurante-vender-mas`;
+   - repetir con `/pt/article/maridajes-carta-vinos-rentable`;
+   - si no falla, ampliar a los otros artículos internacionales del cluster.
+2. Monitorizar durante la próxima semana:
+   - cobertura de las 18 URLs del cluster completo;
+   - impresiones y CTR por país/idioma;
+   - consultas relacionadas con wine library, Weinbibliothek, biblioteca do vinho, abbinamenti y accords mets-vins.
+3. Revisar residuos de UI española en rutas internacionales fuera del blog:
+   - herramientas;
+   - recursos;
+   - páginas programáticas antiguas.
+4. Siguiente mejora de biblioteca del vino:
+   - schema por hub y entidad;
+   - más profundidad editorial en entidades con impresiones;
+   - fuente compartida para reglas de enlaces/rutas entre frontend y `prerender`.

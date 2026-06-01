@@ -1988,3 +1988,43 @@
 - Aplicar migración SQL del cluster internacional.
 - Revalidar producción en blog, artículos localizados, prerender y sitemap.
 - Solicitar indexación solo tras confirmar que las URLs localizadas responden correctamente.
+
+### Cierre productivo de blog internacional y UI de artículos
+
+#### Hechos
+
+- Lovable aplicó la migración `20260601102000_add_localized_wine_library_blog_cluster.sql`.
+- Supabase quedó con 15 artículos internacionales publicados para el cluster de biblioteca del vino.
+- Lovable desplegó `prerender` y `sitemap`.
+- `sitemap.xml` pasó a 2.072 URLs e incluye las rutas `/{lang}/article/...` del cluster internacional.
+- Googlebot recibe `bot-prerender`, `html lang` correcto y canonical localizado en muestras `en`, `it`, `fr`, `de` y `pt`.
+- El frontend fue publicado desde Lovable y quedó `Up to date`.
+- La navegación humana de `/en/blog` ya enlaza a `/en/article/...`, sin saltar a `/article/...`.
+- Se corrigió un residuo de UI española en artículos internacionales:
+  - índice del artículo;
+  - bloque de herramientas;
+  - contenido relacionado;
+  - CTAs intermedios, finales y sticky.
+- Commit final publicado: `ee9da93 fix: localize article support blocks`.
+- Verificaciones locales: ESLint dirigido, `git diff --check`, tests y build.
+- Verificaciones productivas: navegador real en artículo inglés, Googlebot en artículos internacionales y sitemap.
+
+#### Decisiones
+
+- Cerrar como resuelto el bug de salto a español en blog/artículos.
+- Mantener `/{lang}/article/{slug}` como patrón canónico internacional.
+- Considerar los 15 artículos internacionales publicados, porque base de datos, prerender, sitemap y frontend humano ya están validados.
+- Tratar la UI de soporte del artículo como parte de la localización, no como detalle secundario.
+- No tocar base de datos ni Edge Functions para el pulido final de UI: fue un cambio exclusivamente frontend.
+
+#### Hipótesis
+
+- El cluster internacional debería mejorar señales SEO/LLM porque URL, idioma, canonical, sitemap, contenido y UI ahora apuntan al mismo mercado.
+- El siguiente impacto dependerá más de indexación, enlazado interno, autoridad y señales de Search Console que de publicar más volumen inmediato.
+
+#### Tareas pendientes
+
+- Solicitar indexación selectiva de los artículos internacionales ya validados.
+- Monitorizar cobertura y consultas en Search Console.
+- Auditar residuos de UI española en otras rutas internacionales.
+- Separar futura refactorización para compartir reglas entre frontend y `prerender`.
