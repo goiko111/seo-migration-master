@@ -2753,3 +2753,87 @@
 - Traducir a otros idiomas solo los artículos que muestren potencial o que refuercen rutas internacionales prioritarias.
 - Considerar una fuente compartida para reglas de enlaces internos entre React y `prerender`.
 - No crear una tercera migración para estos mismos 3 artículos; si se limpia la redundancia, hacerlo como tarea explícita y revisando historial de migraciones aplicadas.
+
+## Actualización 2026-06-01: artículos localizados y salto de idioma en blog
+
+## Hechos
+
+- El usuario señaló dos problemas nuevos:
+  - los artículos estratégicos deberían publicarse en todos los idiomas, adaptados a mercado/país;
+  - al navegar por la web, sobre todo en blog, la experiencia saltaba al español.
+- Se revisaron de nuevo los documentos fuente de verdad antes de actuar.
+- Se detectó la causa principal del salto de idioma:
+  - `Blog.tsx` y `SommelierCorner.tsx` enlazaban artículos traducidos a `/article/{slug}` sin prefijo de idioma;
+  - al entrar en `/article/{slug}`, `LanguageProvider` detectaba `es` porque la ruta no llevaba `/en`, `/it`, `/fr`, `/de` o `/pt`.
+- Se añadió `src/lib/articleRoutes.ts` para centralizar:
+  - eliminación de sufijos `_en`, `_it`, `_fr`, `_de`, `_pt`;
+  - inferencia de idioma desde slugs legacy;
+  - construcción de slugs de base de datos;
+  - construcción de rutas localizadas limpias `/{lang}/article/{slug}`.
+- `Blog.tsx` ahora enlaza artículos en el idioma activo:
+  - español: `/article/{slug}`;
+  - otros idiomas: `/{lang}/article/{slug}`.
+- `SommelierCorner.tsx` aplica el mismo patrón para entrevistas traducidas.
+- `ArticlePage.tsx` ahora:
+  - busca en Supabase el slug correcto por idioma;
+  - soporta rutas legacy `/article/{slug}_en` y rutas limpias `/en/article/{slug}`;
+  - canonicaliza artículos traducidos hacia la ruta limpia localizada;
+  - mantiene enlaces de vuelta al blog/Sommelier del idioma solicitado;
+  - ajusta `document.documentElement.lang` al idioma real del artículo cargado.
+- `LanguageSwitcher.tsx` reconoce rutas de artículo y conserva el slug base al cambiar de idioma.
+- `supabase/functions/prerender/index.ts` ahora entiende rutas de artículos localizadas `/{lang}/article/{slug}`, renderiza el slug correcto de Supabase y canonicaliza a la URL localizada limpia.
+- `supabase/functions/sitemap/index.ts` ahora consulta `lang` en artículos y emite:
+  - `/article/{slug}` para español;
+  - `/{lang}/article/{slug}` para artículos internacionales.
+- Se creó la migración `supabase/migrations/20260601102000_add_localized_wine_library_blog_cluster.sql`.
+- La migración añade 15 artículos localizados/adaptados para el cluster de biblioteca del vino:
+  - `en`, `it`, `fr`, `de` y `pt`;
+  - 3 temas por idioma: biblioteca del vino, uvas/regiones/castas/rebsorten/cépages y maridajes/abbinamenti/accords/harmonizações/Weinbegleitung.
+- Los contenidos se adaptaron con ejemplos de mercado:
+  - inglés: UK/internacional;
+  - italiano: Italia, Piemonte, Toscana, Veneto;
+  - francés: Francia, Bourgogne, Loire, Champagne;
+  - alemán: DACH, Riesling, Spätburgunder, Mosel/Rheingau/Wachau;
+  - portugués: Portugal, Douro, Dão, Alentejo, Vinho Verde.
+- Verificaciones locales completadas:
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npm run test`: 8 archivos, 38 tests;
+  - `npx eslint src/lib/articleRoutes.ts src/pages/Blog.tsx src/pages/ArticlePage.tsx src/pages/SommelierCorner.tsx src/components/LanguageSwitcher.tsx`;
+  - `npm run build`;
+  - `git diff --check`.
+- No se pudo hacer QA de navegación visual con el navegador integrado porque el backend `iab` no estaba disponible.
+- No se pudo hacer QA headless con Playwright porque `playwright`, `@playwright/test`, `puppeteer` y `puppeteer-core` no están instalados en el repo.
+- Commit creado y pusheado a `main`: `9eb4b76 fix: localize blog article routes`.
+- Supabase público todavía no devuelve las versiones `_en`, `_it`, `_fr`, `_de` y `_pt` del nuevo cluster; por tanto, la migración está lista en GitHub pero pendiente de aplicar desde Lovable.
+- Producción todavía requiere despliegue Lovable de:
+  - frontend;
+  - Edge Function `prerender`;
+  - Edge Function `sitemap`;
+  - migración SQL `20260601102000_add_localized_wine_library_blog_cluster.sql`.
+
+## Decisiones
+
+- Sí, los artículos estratégicos deben publicarse en todos los idiomas relevantes, pero con adaptación real de mercado y no como traducción literal.
+- Antes de escalar artículos internacionales, había que corregir la raíz técnica del salto a español.
+- La URL pública canónica de artículos internacionales pasa a ser `/{lang}/article/{slug}`, aunque la base de datos conserve slugs con sufijo `{slug}_{lang}`.
+- Mantener compatibilidad con slugs legacy como `/article/{slug}_en`, pero canonicalizarlos a la ruta limpia.
+- No considerar publicadas las adaptaciones internacionales hasta que Lovable aplique la migración y despliegue `sitemap`/`prerender`.
+
+## Hipótesis
+
+- El salto al español en blog debería desaparecer tras desplegar el frontend porque los enlaces ya mantienen el prefijo de idioma.
+- El prerender localizado de artículos debería evitar que bots reciban home genérica o canonical español en rutas internacionales.
+- Las adaptaciones por mercado deberían reforzar SEO internacional y posicionamiento en LLMs más que traducciones literales.
+- El sitemap localizado de artículos debería mejorar descubrimiento de las nuevas URLs internacionales tras despliegue.
+
+## Tareas pendientes
+
+- Publicar desde Lovable el commit `9eb4b76`.
+- Aplicar desde Lovable la migración `20260601102000_add_localized_wine_library_blog_cluster.sql`.
+- Desplegar explícitamente Edge Functions `prerender` y `sitemap`.
+- Revalidar producción tras deploy:
+  - `/en/blog` debe enlazar a `/en/article/...`;
+  - `/it/blog`, `/fr/blog`, `/de/blog` y `/pt/blog` deben mantener su idioma al abrir artículos;
+  - Googlebot en `/{lang}/article/biblioteca-vino-restaurante-vender-mas` debe recibir `bot-prerender`, `html lang` correcto y canonical localizado;
+  - `sitemap.xml` debe incluir las 15 rutas localizadas nuevas.
+- Después de validar producción, solicitar indexación selectiva de los artículos internacionales prioritarios, no indexación masiva.

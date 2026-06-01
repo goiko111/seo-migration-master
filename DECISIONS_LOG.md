@@ -1951,3 +1951,40 @@
 - Elegir el siguiente cluster editorial con datos: formación de sala, regiones, rentabilidad de carta, maridajes o comparativas.
 - Definir cuándo traducir artículos a `en`, `it`, `fr`, `de` y `pt`.
 - Evitar nuevas migraciones duplicadas para estos mismos slugs salvo que se decida limpiar explícitamente la redundancia.
+
+### Artículos localizados y salto de idioma en blog
+
+#### Hechos
+
+- El usuario preguntó si los artículos debían publicarse en todos los idiomas adaptados a país y reportó que el blog saltaba a español durante la navegación.
+- Se confirmó en código que los listados de blog y Sommelier enlazaban a `/article/{slug}` incluso cuando el usuario estaba en `/en/blog`, `/de/blog`, `/pt/blog`, etc.
+- Se centralizó la lógica de rutas de artículos en `src/lib/articleRoutes.ts`.
+- Se corrigieron enlaces de blog y entrevistas para usar rutas localizadas `/{lang}/article/{slug}`.
+- `ArticlePage.tsx` soporta rutas localizadas limpias y slugs legacy con sufijo, además de canonical localizado.
+- `LanguageSwitcher.tsx` reconoce rutas de artículo al cambiar de idioma.
+- `prerender` soporta `/{lang}/article/{slug}` y `sitemap` emite rutas de artículo localizadas usando el campo `lang`.
+- Se creó la migración `20260601102000_add_localized_wine_library_blog_cluster.sql` con 15 adaptaciones del cluster de biblioteca del vino para `en`, `it`, `fr`, `de` y `pt`.
+- Verificaciones locales: Deno check, tests, build, ESLint dirigido y `git diff --check`.
+- Commit creado y pusheado: `9eb4b76 fix: localize blog article routes`.
+- La migración aún no está aplicada en Supabase de producción; Supabase público no devuelve todavía las versiones `_en/_it/_fr/_de/_pt`.
+
+#### Decisiones
+
+- Publicar el cluster de biblioteca del vino en todos los idiomas relevantes, pero con adaptación por mercado y ejemplos locales.
+- Usar `/{lang}/article/{slug}` como patrón canónico público para artículos internacionales.
+- Mantener slugs de base de datos con sufijo `_{lang}` por compatibilidad con el sistema existente.
+- No dar por publicada la ampliación internacional hasta que Lovable despliegue frontend, `prerender`, `sitemap` y aplique la migración.
+- Validar navegación humana y Googlebot después del despliegue antes de solicitar indexación.
+
+#### Hipótesis
+
+- El salto a español venía principalmente de enlaces sin prefijo de idioma, no de falta de traducciones en sí.
+- La corrección de rutas reducirá fricción de usuario internacional y señales SEO contradictorias.
+- El contenido adaptado por mercado debería funcionar mejor para SEO y LLMs que traducciones literales.
+
+#### Tareas pendientes
+
+- Publicar desde Lovable el commit `9eb4b76`.
+- Aplicar migración SQL del cluster internacional.
+- Revalidar producción en blog, artículos localizados, prerender y sitemap.
+- Solicitar indexación solo tras confirmar que las URLs localizadas responden correctamente.

@@ -1936,3 +1936,56 @@
    - schema de artículos y hubs;
    - extracción de métricas Search Console para priorizar nuevas publicaciones.
 6. No crear más migraciones para estos 3 slugs; si se decide limpiar la duplicación de migraciones, revisar primero cuáles constan aplicadas por Supabase/Lovable.
+
+## Actualización 2026-06-01: listo para retomar tras corrección blog i18n
+
+## Hechos
+
+- Se corrigió localmente el salto a español en navegación de blog:
+  - blog y Sommelier ya generan URLs `/{lang}/article/{slug}`;
+  - `ArticlePage` ya resuelve slugs de base de datos por idioma;
+  - `LanguageSwitcher` reconoce rutas de artículo;
+  - `prerender` y `sitemap` soportan artículos localizados.
+- Se creó y pusheó el commit `9eb4b76 fix: localize blog article routes`.
+- Se añadió la migración `20260601102000_add_localized_wine_library_blog_cluster.sql`.
+- La migración contiene 15 artículos adaptados para `en`, `it`, `fr`, `de` y `pt`.
+- Verificaciones locales completadas:
+  - `npm run test`: 8 archivos, 38 tests;
+  - `npm run build`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - ESLint dirigido;
+  - `git diff --check`.
+- Limitación de QA: navegador integrado no disponible y Playwright/Puppeteer no instalados.
+- Estado de producción/base de datos: Supabase aún no devuelve las versiones traducidas, por lo que falta aplicar migración y desplegar desde Lovable.
+
+## Decisiones
+
+- Patrón canónico nuevo para artículos internacionales: `/{lang}/article/{slug}`.
+- Slugs de base de datos siguen usando `slug_lang` por compatibilidad.
+- Las traducciones del cluster se tratan como adaptaciones por mercado, no traducción literal.
+- No pedir indexación hasta validar producción.
+
+## Hipótesis
+
+- Tras desplegar, el usuario debería dejar de ver saltos a español al navegar desde blogs internacionales.
+- El sitemap con rutas localizadas permitirá descubrir mejor las versiones internacionales.
+- El prerender corregido evitará que Googlebot reciba la home o canonical incorrecto en rutas `/{lang}/article/...`.
+
+## Tareas pendientes listas para retomar
+
+1. En Lovable, publicar el commit `9eb4b76`.
+2. Aplicar la migración:
+   - `supabase/migrations/20260601102000_add_localized_wine_library_blog_cluster.sql`.
+3. Desplegar explícitamente Edge Functions:
+   - `prerender`;
+   - `sitemap`.
+4. Revalidar producción:
+   - `/en/blog` -> primer artículo debe abrir `/en/article/...`;
+   - `/it/blog`, `/fr/blog`, `/de/blog`, `/pt/blog` deben conservar idioma al entrar en artículos;
+   - Supabase público debe devolver los 15 slugs `_en/_it/_fr/_de/_pt`;
+   - Googlebot en `/en/article/biblioteca-vino-restaurante-vender-mas` debe recibir `bot-prerender`, canonical `https://winerim.wine/en/article/biblioteca-vino-restaurante-vender-mas` y texto inglés;
+   - repetir una muestra en `it`, `fr`, `de`, `pt`;
+   - `sitemap.xml` debe incluir las rutas `/{lang}/article/...`.
+5. Si todo valida, solicitar indexación selectiva de una tanda corta:
+   - los 5 artículos `/lang/article/biblioteca-vino-restaurante-vender-mas`;
+   - después los de uvas/regiones y maridajes si Search Console no falla.
