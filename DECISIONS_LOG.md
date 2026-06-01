@@ -1762,3 +1762,50 @@
 - Seguir revisando ejemplos del grupo 404.
 - Decidir si quitar `/sitemap_index.xml` de Search Console.
 - Decidir cuándo iniciar validación del grupo 404.
+
+## 2026-06-01
+
+### Hechos
+
+- Se retomó el trabajo leyendo los cuatro documentos fuente de verdad del proyecto.
+- Se revisó Search Console para `https://winerim.wine/`.
+- `/sitemap.xml` aparece correcto, con última lectura `30 may 2026` y `2.054` páginas descubiertas.
+- `/sitemap_index.xml` sigue enviado, aparece correcto, con última lectura `28 may 2026` y también `2.054` páginas descubiertas.
+- El informe `Páginas` muestra 102 indexadas y 2.331 sin indexar, con actualización `29/5/26`.
+- Las tres URLs estratégicas de biblioteca del vino inspeccionadas el 2026-05-27 ya aparecen indexadas:
+  - `/de/weinbibliothek/rebsorten/mencia`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/biblioteca-vino/maridajes/ostras`.
+- Search Console confirma para las tres URLs canónica inspeccionada, rastreo correcto, indexación permitida, HTTPS válido, breadcrumbs válidos y FAQ válido.
+- Se amplió la tabla de ejemplos del grupo `No se ha encontrado (404)` a 100 filas.
+- En esos 100 ejemplos, siguiendo redirecciones completas, 47 acaban en 200, 51 en 404 y 2 en 410.
+- Se añadieron cambios locales al Worker para:
+  - normalizar rutas mal formadas `/https:/winerim.wine/...`;
+  - redirigir legacy de alta confianza hacia URLs canónicas existentes.
+- `npm run deploy:worker:dry-run` y `git diff --check` pasan.
+- El despliegue real de Worker falló por Cloudflare `Authentication error [code: 10000]`.
+
+### Decisiones
+
+- Considerar la tanda corta de indexación manual como validación positiva de la salud técnica de la biblioteca del vino.
+- No continuar con solicitudes manuales masivas de indexación.
+- No retirar `/sitemap_index.xml` sin confirmación explícita, aunque ya no sea necesario técnicamente.
+- No iniciar validación de corrección 404 hasta que los redirects pendientes estén desplegados y verificados en producción.
+- Añadir redirects solo si hay equivalente semántico claro o normalización técnica inequívoca.
+- Tratar el fallo de Cloudflare como bloqueo operativo externo, no como fallo del código.
+
+### Hipótesis
+
+- Google empezó a aceptar las páginas nuevas de biblioteca porque reciben HTML rastreable, canonical correcto, FAQ y breadcrumbs coherentes.
+- Las URLs nuevas que aún estén descubiertas sin indexar necesitarán más enlazado interno y señales de calidad, no más solicitudes manuales indiscriminadas.
+- Los 404 legacy visibles son una mezcla de URLs ya corregidas pero no recrawleadas, URLs mal formadas y contenido antiguo sin equivalente exacto.
+- El siguiente despliegue de Worker debería reducir una parte relevante del grupo 404 tras recrawl.
+
+### Tareas pendientes
+
+- Renovar autenticación Cloudflare o usar un `CLOUDFLARE_API_TOKEN` válido.
+- Desplegar el Worker con los redirects añadidos.
+- Validar producción con ejemplos concretos de Search Console.
+- Recalcular la muestra de 100 URLs tras deploy.
+- Pedir confirmación antes de retirar `/sitemap_index.xml`.
+- Pedir confirmación antes de iniciar `Validar corrección` para 404.

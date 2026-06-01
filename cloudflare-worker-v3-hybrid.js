@@ -68,11 +68,54 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/alex-pardo': '/article/alex-pardo',
   '/aumenta-la-venta-de-vinos-en-tu-restaurante-mejores-estrategias': '/como-vender-mas-vino-en-un-restaurante',
   '/winerim-vs-wineadvisor-2': '/comparativas',
+  '/winerim-vs-wineadvisor': '/comparativas',
   '/winerim-sommelier-magazine': '/sommelier-corner',
   '/corso-vino-cata-mw-examen-practico': '/decision-center/cursos',
+  '/winerim-academy-2': '/decision-center/cursos',
   '/en/the-importance-of-choosing-the-wine-that-goes-best-with-food': '/en/blog',
   '/estadisticas': '/benchmarks-playbooks',
+  '/programa-afiliados': '/afiliate',
+  '/blog-2': '/blog',
+  '/revista': '/blog',
+  '/contacto-analizar-carta': '/analisis-carta',
+  '/analiza-tu-carta': '/analisis-carta',
+  '/formulario-contacto': '/contacto',
+  '/formulario-de-contacto-web-link-carta': '/contacto',
+  '/condiciones-de-servicio-2': '/terminos',
+  '/carta-vinos-digital': '/software-carta-de-vinos',
+  '/carta_vinos_digital': '/software-carta-de-vinos',
+  '/choosing-wine-a-not-so-easy-task-for-many-diners': '/software-carta-de-vinos',
+  '/como-mejorar-la-experiencia-del-cliente-en-un-restaurante': '/software-carta-de-vinos',
+  '/como-hacer-una-carta-de-vinos-perfecta-para-tu-restaurante': '/como-hacer-una-carta-de-vinos',
+  '/ia-para-restaurantes-las-mejores-aplicaciones': '/inteligencia-artificial-restaurantes',
+  '/venta-de-vinos-en-restaurantes-7-errores-comunes-y-como-solucionarlos': '/como-vender-mas-vino-en-un-restaurante',
+  '/los-mejores-software-tpv-para-restaurante': '/integraciones',
+  '/maridaje-de-vinos-guia-completa-para-restaurantes': '/guias/como-crear-una-estrategia-de-maridaje-en-restauracion',
+  '/envejecimiento-del-vino': '/biblioteca-vino/glosario',
+  '/uvas-poco-comunes-vinos-poco-conocidos': '/biblioteca-vino/uvas',
+  '/vinos-y-comida-vegana': '/biblioteca-vino/maridajes',
+  '/como-ser-sommelier-formacion-funciones-y-salidas-profesionales': '/decision-center/cursos',
+  '/simone-monese': '/article/simone-monese',
+  '/joan-guso': '/article/joan-guso',
+  '/berta-romero': '/article/berta-romero',
+  '/david-paredes': '/article/david-paredes',
+  '/nacho-otamendi': '/article/nacho-otamendi',
+  '/xavi-nolla-cuenta-por-que-winerim-es-el-mejor-aliado-del-sommelier': '/article/xavi-nolla',
+  '/jordi-subiros-motel-emporda': '/casos-exito',
+  '/informe-can-bosch': '/casos-exito',
+  '/andre-jullien-el-arte-del-sommelier': '/sommelier-corner',
+  '/un-consejo-salirnos-de-nuestra-zona-de-confort': '/sommelier-corner',
+  '/un-consejo-prueba-todo-lo-que-puedas': '/sommelier-corner',
+  '/un-consejo-apreciar-lo-bien-hecho': '/sommelier-corner',
+  '/un-consejo-cata-con-el-corazon': '/sommelier-corner',
 };
+
+function getMalformedAbsolutePathTarget(path) {
+  const match = path.match(/^\/https?:\/(?:\/)?(?:www\.)?winerim\.wine(\/.*)$/i);
+  if (!match) return null;
+  const target = match[1].replace(/\/{2,}/g, '/');
+  return target && target !== path ? target : null;
+}
 
 // ─── Wine library legacy one-segment shortcuts → canonical entity URLs ───
 const WINE_LIBRARY_BASES = {
@@ -898,6 +941,18 @@ export default {
           'Location': `${env.SITE_URL || 'https://winerim.wine'}${path.toLowerCase()}${url.search}`,
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'lowercase',
+        },
+      });
+    }
+
+    const malformedAbsoluteTarget = getMalformedAbsolutePathTarget(path);
+    if (malformedAbsoluteTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${malformedAbsoluteTarget}${url.search}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'malformed-absolute-url-redirect',
         },
       });
     }

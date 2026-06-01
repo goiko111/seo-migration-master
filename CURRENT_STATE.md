@@ -2423,3 +2423,89 @@
 - Revisar más ejemplos del grupo 404 antes de pedir validación completa.
 - Pedir confirmación explícita si se decide quitar `/sitemap_index.xml` en Search Console.
 - Pedir confirmación explícita si se decide iniciar `Validar corrección` para el grupo 404.
+
+## Actualización 2026-06-01: seguimiento Search Console e indexación biblioteca
+
+## Hechos
+
+- Al iniciar la sesión se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio en `main` antes de tocar código.
+- Search Console para `https://winerim.wine/` muestra `/sitemap.xml` con:
+  - Enviado: `26 may 2026`.
+  - Última lectura: `30 may 2026`.
+  - Estado: `Correcto`.
+  - Páginas descubiertas: `2.054`.
+- Search Console sigue mostrando `/sitemap_index.xml` enviado desde `22 dic 2022`, con:
+  - Última lectura: `28 may 2026`.
+  - Estado: `Correcto`.
+  - Páginas descubiertas: `2.054`.
+- Informe `Páginas`, última actualización `29/5/26`:
+  - `Indexadas`: 102.
+  - `Sin indexar`: 2.331.
+  - `No se ha encontrado (404)`: 189.
+  - `Página alternativa con etiqueta canónica adecuada`: 29.
+  - `Página con redirección`: 23.
+  - `Excluida por una etiqueta "noindex"`: 3.
+  - `Duplicada: el usuario no ha indicado ninguna versión canónica`: 3.
+  - `Descubierta: actualmente sin indexar`: 1.930.
+  - `Rastreada: actualmente sin indexar`: 153.
+  - `Duplicada: Google ha elegido una versión canónica diferente a la del usuario`: 1.
+- Las tres URLs estratégicas de biblioteca del vino con indexación manual solicitada el 2026-05-27 aparecen ahora como indexadas:
+  - `https://winerim.wine/de/weinbibliothek/rebsorten/mencia`.
+  - `https://winerim.wine/biblioteca-vino/regiones/francia/sancerre`.
+  - `https://winerim.wine/biblioteca-vino/maridajes/ostras`.
+- En las tres URLs, Search Console indica:
+  - `La página está indexada`.
+  - Último rastreo por `Robot de Google para smartphones` el `27 may 2026`.
+  - Rastreo permitido: `Sí`.
+  - Obtención de página: `Correcto`.
+  - Indexación permitida: `Sí`.
+  - Canónica declarada igual a la URL inspeccionada.
+  - Canónica elegida por Google: `URL inspeccionada`.
+  - HTTPS válido, breadcrumbs válidos y `Preguntas frecuentes` válidas.
+- Se revisó el grupo 404 en Search Console con 100 ejemplos visibles.
+- En producción, antes de los cambios locales nuevos:
+  - 87 de esos 100 ejemplos respondían con primer salto 301.
+  - 13 respondían con primer salto 404.
+  - Siguiendo redirecciones completas, 47 acababan en 200, 51 en 404 y 2 en 410.
+- Se detectó una familia clara de 404 mal formados: rutas con patrón `/https:/winerim.wine/...`.
+- Se añadieron cambios locales en `cloudflare-worker-v3-hybrid.js`:
+  - Normalización genérica de rutas mal formadas `/https:/winerim.wine/...` hacia su path real.
+  - Redirects directos de alta confianza para legacy de Search Console con equivalente claro, incluyendo `analiza-tu-carta`, CTAs antiguos, artículos de sommelier existentes, páginas de carta digital, maridajes, IA restaurantes y rutas de artículo con slug existente.
+- Verificación local del Worker:
+  - `npm run deploy:worker:dry-run`: correcto.
+  - `git diff --check`: correcto.
+  - Import local del Worker confirma 301 para ejemplos como `/https:/winerim.wine/fr/integrations`, `/analiza-tu-carta`, `/simone-monese` y `/carta-vinos-digital`.
+- El despliegue real del Worker quedó bloqueado:
+  - `npm run deploy:worker` falló con Cloudflare `Authentication error [code: 10000]`.
+  - `wrangler whoami` detecta un OAuth token con permisos, pero el API rechaza la operación de deploy.
+
+## Decisiones
+
+- Tratar la indexación de `mencia`, `sancerre` y `ostras` como señal positiva: la infraestructura de biblioteca del vino es rastreable, canónica e indexable para Google.
+- No solicitar más indexación manual de forma masiva.
+- No quitar `/sitemap_index.xml` desde Search Console sin confirmación explícita.
+- No iniciar `Validar corrección` del grupo 404 hasta desplegar los nuevos redirects y revisar más ejemplos o el conjunto completo.
+- Mantener criterio de redirects de alta confianza: equivalencia semántica clara o normalización técnica inequívoca.
+- Separar bloqueo de Cloudflare: los cambios están listos localmente, pero producción no los refleja hasta renovar sesión/token y desplegar.
+
+## Hipótesis
+
+- La solicitud manual corta aceleró el rastreo de las tres URLs de biblioteca, pero la indexación final también dependió de que canonical, FAQ, breadcrumbs y prerender estuvieran limpios.
+- El aumento de indexadas de 67 a 102 sugiere que Google está empezando a procesar el bloque nuevo, aunque el cuello principal sigue siendo `Descubierta: actualmente sin indexar`.
+- El grupo 404 debería bajar cuando Google recrawlee redirects ya existentes y cuando se despliegue la normalización pendiente del Worker.
+- Las URLs `/https:/winerim.wine/...` probablemente vienen de enlaces absolutos mal serializados en algún momento histórico; normalizarlas a su path real es más correcto que dejarlas como 404.
+
+## Tareas pendientes
+
+- Restaurar autenticación Cloudflare Wrangler o proporcionar `CLOUDFLARE_API_TOKEN` válido.
+- Desplegar `cloudflare-worker-v3-hybrid.js` con los redirects nuevos.
+- Validar producción tras despliegue:
+  - `/https:/winerim.wine/fr/integrations` -> `/fr/integrations`.
+  - `/analiza-tu-carta` -> `/analisis-carta`.
+  - `/simone-monese` -> `/article/simone-monese`.
+  - `/carta-vinos-digital` -> `/software-carta-de-vinos`.
+- Recalcular los 100 ejemplos visibles de 404 después del deploy.
+- Decidir con confirmación explícita si se retira `/sitemap_index.xml` de Search Console.
+- Decidir con confirmación explícita si se inicia `Validar corrección` para 404 cuando producción esté saneada.
+- Monitorizar en Search Console si `Descubierta: actualmente sin indexar` baja y si las rutas nuevas de biblioteca empiezan a recibir impresiones.

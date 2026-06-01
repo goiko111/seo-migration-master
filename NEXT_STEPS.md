@@ -1684,3 +1684,69 @@
    - `/biblioteca-vino/regiones/francia/sancerre`;
    - `/de/weinbibliothek/rebsorten/mencia`.
 5. Abrir bloque de enlazado interno si las nuevas URLs siguen como descubiertas/rastreadas sin indexar.
+
+## Actualización 2026-06-01: listo para retomar
+
+## Hechos
+
+- Search Console muestra `/sitemap.xml` correcto, última lectura `30 may 2026`, `2.054` páginas descubiertas.
+- `/sitemap_index.xml` sigue enviado y correcto, última lectura `28 may 2026`, `2.054` páginas descubiertas.
+- Cobertura actual según Search Console, actualizado `29/5/26`:
+  - 102 indexadas.
+  - 2.331 sin indexar.
+  - 189 en 404.
+  - 1.930 descubiertas sin indexar.
+  - 153 rastreadas sin indexar.
+- Las tres URLs estratégicas de biblioteca ya están indexadas:
+  - `/de/weinbibliothek/rebsorten/mencia`;
+  - `/biblioteca-vino/regiones/francia/sancerre`;
+  - `/biblioteca-vino/maridajes/ostras`.
+- Las tres tienen rastreo correcto por Googlebot smartphone el `27 may 2026`, canónica inspeccionada, HTTPS válido, breadcrumbs válidos y FAQ válido.
+- Se revisaron 100 ejemplos visibles del grupo 404:
+  - 47 acaban en HTTP 200 siguiendo redirects.
+  - 51 acaban en HTTP 404 siguiendo redirects.
+  - 2 acaban en HTTP 410.
+- Cambios locales listos en `cloudflare-worker-v3-hybrid.js`:
+  - normalización de `/https:/winerim.wine/...`;
+  - redirects directos para legacy de alta confianza.
+- Verificaciones locales:
+  - `npm run deploy:worker:dry-run`: correcto.
+  - `git diff --check`: correcto.
+  - prueba local del Worker con ejemplos críticos: correcta.
+- Bloqueo actual:
+  - `npm run deploy:worker` falla por Cloudflare `Authentication error [code: 10000]`.
+
+## Decisiones
+
+- La tanda corta de indexación manual de biblioteca se considera exitosa.
+- La biblioteca del vino puede seguir creciendo, pero con prioridad en enlazado interno y señales de calidad para reducir `Descubierta: actualmente sin indexar`.
+- No pedir más indexación manual masiva.
+- No quitar `/sitemap_index.xml` ni iniciar `Validar corrección` 404 sin confirmación explícita.
+- Antes de cualquier validación GSC de 404, desplegar y verificar el Worker pendiente.
+
+## Hipótesis
+
+- Google está aceptando las páginas nuevas de biblioteca porque la base técnica quedó limpia.
+- El gran cuello de botella actual es descubrimiento/indexación por escala y autoridad, no bloqueo técnico de las tres URLs probadas.
+- Los redirects pendientes del Worker reducirán 404 visibles cuando Google recrawlee.
+
+## Tareas pendientes listas para retomar
+
+1. Resolver autenticación Cloudflare:
+   - renovar login de Wrangler; o
+   - exportar/proporcionar `CLOUDFLARE_API_TOKEN` válido con permisos de Workers.
+2. Desplegar Worker pendiente:
+   - ejecutar `npm run deploy:worker`.
+3. Validar producción tras deploy:
+   - `/https:/winerim.wine/fr/integrations` -> `/fr/integrations`;
+   - `/analiza-tu-carta` -> `/analisis-carta`;
+   - `/simone-monese` -> `/article/simone-monese`;
+   - `/carta-vinos-digital` -> `/software-carta-de-vinos`.
+4. Recalcular los 100 ejemplos visibles de 404.
+5. Si producción queda saneada, pedir confirmación explícita para:
+   - retirar `/sitemap_index.xml`; o
+   - iniciar `Validar corrección` del grupo 404.
+6. Siguiente mejora de biblioteca del vino:
+   - reforzar enlaces internos desde hubs hacia entidades nuevas ya indexadas;
+   - revisar rendimiento/consultas cuando haya datos;
+   - priorizar la próxima expansión por impresiones, intención y baja posición.
