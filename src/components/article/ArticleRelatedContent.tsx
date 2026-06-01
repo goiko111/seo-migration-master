@@ -19,6 +19,15 @@ const typeConfig = {
 /** Keyword → related links mapping for automatic suggestion */
 const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
   {
+    keywords: ["biblioteca", "uva", "uvas", "variedad", "variedades", "tempranillo", "albariño", "albarino", "godello", "mencía", "mencia", "rioja", "ribera", "rias baixas", "región", "region", "estilo", "maridaje", "pairing"],
+    links: [
+      { to: "/biblioteca-vino", label: "Biblioteca del vino", type: "guide" },
+      { to: "/biblioteca-vino/uvas", label: "Uvas clave para carta de vinos", type: "guide" },
+      { to: "/biblioteca-vino/regiones", label: "Regiones de vino para restauración", type: "guide" },
+      { to: "/biblioteca-vino/maridajes", label: "Maridajes por plato y ocasión", type: "guide" },
+    ],
+  },
+  {
     keywords: ["precio", "pricing", "margen", "coste", "rentab"],
     links: [
       { to: "/calculadora-margen-vino", label: "Calculadora de márgenes de vino", type: "tool" },
@@ -48,6 +57,7 @@ const autoLinkRules: { keywords: string[]; links: RelatedLink[] }[] = [
   {
     keywords: ["maridaje", "pairing", "abbinament", "accord"],
     links: [
+      { to: "/biblioteca-vino/maridajes", label: "Biblioteca de maridajes", type: "guide" },
       { to: "/wine-pairing-generator", label: "Generador de maridajes con IA", type: "tool" },
       { to: "/producto/inteligencia-dinamica", label: "Inteligencia Dinámica: recomendaciones IA", type: "solution" },
     ],

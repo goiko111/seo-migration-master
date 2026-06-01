@@ -5210,6 +5210,106 @@ function inferArticleLang(slug: string): WineLibraryLang {
   return match ? match[1] as WineLibraryLang : 'es';
 }
 
+function normalizeArticleInternalUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const raw = value.trim();
+  if (!raw || raw.startsWith('#') || raw.startsWith('mailto:') || raw.startsWith('tel:')) return null;
+
+  if (raw.startsWith('/')) return raw;
+
+  try {
+    const parsed = new URL(raw);
+    if (parsed.origin !== SITE) return null;
+    return `${parsed.pathname}${parsed.search}`;
+  } catch (_) {
+    return null;
+  }
+}
+
+function normalizeArticleLabel(value: unknown): string {
+  return typeof value === 'string'
+    ? value.replace(/[#*_`]/g, '').replace(/\s+/g, ' ').trim()
+    : '';
+}
+
+function parseRelatedLinksValue(value: unknown): unknown[] {
+  if (Array.isArray(value)) return value;
+  if (typeof value !== 'string') return [];
+
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function articleRelatedLinksFromDb(value: unknown): { label: string; url: string }[] {
+  return parseRelatedLinksValue(value)
+    .map((item) => {
+      const link = typeof item === 'object' && item !== null ? item as Record<string, unknown> : {};
+      const url = normalizeArticleInternalUrl(link.to || link.url || link.href);
+      const label = normalizeArticleLabel(link.label || link.title || link.text);
+      return url && label ? { label, url } : null;
+    })
+    .filter((link): link is { label: string; url: string } => Boolean(link));
+}
+
+function articleMarkdownInternalLinks(body: string): { label: string; url: string }[] {
+  const links: { label: string; url: string }[] = [];
+  const markdownLink = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = markdownLink.exec(body))) {
+    if (match.index > 0 && body[match.index - 1] === '!') continue;
+    const label = normalizeArticleLabel(match[1]);
+    const url = normalizeArticleInternalUrl(match[2]);
+    if (label && url) links.push({ label, url });
+  }
+
+  return links;
+}
+
+function textIncludesAny(text: string, keywords: string[]): boolean {
+  return keywords.some((keyword) => text.includes(keyword));
+}
+
+function articleKeywordInternalLinks(lang: WineLibraryLang, slug: string, body: string): { label: string; url: string }[] {
+  const normalizedText = `${slug} ${body}`
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+  const copy = WINE_LIBRARY_COPY[lang];
+  const links: { label: string; url: string }[] = [];
+
+  if (textIncludesAny(normalizedText, ['biblioteca', 'wine library', 'weinbibliothek', 'bibliotheque', 'biblioteca vinho'])) {
+    links.push({ label: copy.home, url: wineLibraryPath(lang, '/biblioteca-vino') });
+  }
+  if (textIncludesAny(normalizedText, ['uva', 'uvas', 'variedad', 'variedades', 'grape', 'cepage', 'rebsorte', 'casta', 'tempranillo', 'albarino', 'mencia', 'godello'])) {
+    links.push({ label: copy.sectionTitles.uvas, url: wineLibraryPath(lang, '/biblioteca-vino/uvas') });
+  }
+  if (textIncludesAny(normalizedText, ['region', 'rioja', 'ribera', 'rias baixas', 'sancerre', 'champagne', 'douro'])) {
+    links.push({ label: copy.sectionTitles.regiones, url: wineLibraryPath(lang, '/biblioteca-vino/regiones') });
+  }
+  if (textIncludesAny(normalizedText, ['estilo', 'style', 'stil', 'crianza', 'reserva', 'espumoso', 'sparkling', 'copa', 'glass', 'calice', 'verre'])) {
+    links.push({ label: copy.sectionTitles.estilos, url: wineLibraryPath(lang, '/biblioteca-vino/estilos') });
+  }
+  if (textIncludesAny(normalizedText, ['maridaje', 'pairing', 'abbinament', 'accord', 'harmonizacao', 'plato', 'dish'])) {
+    links.push({ label: copy.sectionTitles.maridajes, url: wineLibraryPath(lang, '/biblioteca-vino/maridajes') });
+  }
+
+  return links;
+}
+
+function uniqueArticleInternalLinks(links: { label: string; url: string }[]): { label: string; url: string }[] {
+  const seen = new Set<string>();
+  return links.filter((link) => {
+    if (!link.url || seen.has(link.url)) return false;
+    seen.add(link.url);
+    return true;
+  });
+}
+
 async function renderArticle(slug: string): Promise<string | null> {
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -5225,6 +5325,16 @@ async function renderArticle(slug: string): Promise<string | null> {
   const article = data[0];
   const body = article.body || '';
   const lang = inferArticleLang(article.slug || slug);
+  const articleInternalLinks = uniqueArticleInternalLinks([
+    ...articleRelatedLinksFromDb(article.related_links),
+    ...articleMarkdownInternalLinks(body),
+    ...articleKeywordInternalLinks(lang, article.slug || slug, body),
+    { label: 'Blog', url: '/blog' },
+    { label: WINE_LIBRARY_COPY[lang].home, url: wineLibraryPath(lang, '/biblioteca-vino') },
+    { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
+    { label: 'Herramientas', url: '/herramientas' },
+    { label: 'Demo', url: '/demo' },
+  ]).slice(0, 14);
 
   const sections: { heading: string; content: string }[] = [];
   const lines = body.split('\n');
@@ -5269,12 +5379,7 @@ async function renderArticle(slug: string): Promise<string | null> {
         { name: 'Blog', url: `${SITE}/blog` },
         { name: article.title, url: canonical },
       ],
-      internalLinks: [
-        { label: 'Blog', url: '/blog' },
-        { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
-        { label: 'Herramientas', url: '/herramientas' },
-        { label: 'Demo', url: '/demo' },
-      ],
+      internalLinks: articleInternalLinks,
     }
   );
 }
