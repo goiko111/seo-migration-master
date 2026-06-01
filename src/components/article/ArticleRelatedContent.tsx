@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calculator, BookOpen, Download, Lightbulb, Wine, Brain } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { type SupportedLang } from "@/i18n/types";
 
 export interface RelatedLink {
   to: string;
@@ -9,11 +11,20 @@ export interface RelatedLink {
 }
 
 const typeConfig = {
-  tool: { icon: Calculator, badge: "Herramienta", badgeClass: "text-wine" },
-  guide: { icon: BookOpen, badge: "Guía", badgeClass: "text-accent" },
-  resource: { icon: Download, badge: "Recurso", badgeClass: "text-emerald-500" },
-  solution: { icon: Lightbulb, badge: "Solución", badgeClass: "text-amber-500" },
-  "decision-center": { icon: Brain, badge: "Decision Center", badgeClass: "text-purple-500" },
+  tool: { icon: Calculator, badgeClass: "text-wine" },
+  guide: { icon: BookOpen, badgeClass: "text-accent" },
+  resource: { icon: Download, badgeClass: "text-emerald-500" },
+  solution: { icon: Lightbulb, badgeClass: "text-amber-500" },
+  "decision-center": { icon: Brain, badgeClass: "text-purple-500" },
+};
+
+const copy: Record<SupportedLang, { title: string; badges: Record<RelatedLink["type"], string> }> = {
+  es: { title: "Contenido relacionado", badges: { tool: "Herramienta", guide: "Guía", resource: "Recurso", solution: "Solución", "decision-center": "Decision Center" } },
+  en: { title: "Related content", badges: { tool: "Tool", guide: "Guide", resource: "Resource", solution: "Solution", "decision-center": "Decision Center" } },
+  it: { title: "Contenuti correlati", badges: { tool: "Strumento", guide: "Guida", resource: "Risorsa", solution: "Soluzione", "decision-center": "Decision Center" } },
+  fr: { title: "Contenus associés", badges: { tool: "Outil", guide: "Guide", resource: "Ressource", solution: "Solution", "decision-center": "Decision Center" } },
+  de: { title: "Verwandte Inhalte", badges: { tool: "Tool", guide: "Ratgeber", resource: "Ressource", solution: "Lösung", "decision-center": "Decision Center" } },
+  pt: { title: "Conteúdo relacionado", badges: { tool: "Ferramenta", guide: "Guia", resource: "Recurso", solution: "Solução", "decision-center": "Decision Center" } },
 };
 
 /** Keyword → related links mapping for automatic suggestion */
@@ -121,6 +132,31 @@ const mandatoryLinks: RelatedLink[] = [
   { to: "/demo", label: "Solicitar demo gratuita", type: "solution" },
 ];
 
+const labelOverrides: Record<string, Partial<Record<SupportedLang, string>>> = {
+  "/biblioteca-vino": { en: "Wine library", it: "Biblioteca del vino", fr: "Bibliothèque du vin", de: "Weinbibliothek", pt: "Biblioteca do vinho" },
+  "/biblioteca-vino/uvas": { en: "Key grapes for wine lists", it: "Vitigni chiave per la carta", fr: "Cépages clés pour la carte", de: "Wichtige Rebsorten für die Weinkarte", pt: "Castas-chave para a carta" },
+  "/biblioteca-vino/regiones": { en: "Wine regions for restaurants", it: "Regioni del vino per la ristorazione", fr: "Régions viticoles pour la restauration", de: "Weinregionen für die Gastronomie", pt: "Regiões de vinho para restauração" },
+  "/biblioteca-vino/maridajes": { en: "Pairings by dish and occasion", it: "Abbinamenti per piatto e occasione", fr: "Accords par plat et moment", de: "Weinbegleitung nach Gericht und Anlass", pt: "Harmonizações por prato e ocasião" },
+  "/analisis-carta": { en: "Analyse your wine list for free", it: "Analizza gratis la tua carta dei vini", fr: "Analyser votre carte des vins gratuitement", de: "Weinkarte kostenlos analysieren", pt: "Analisar carta de vinhos gratuitamente" },
+  "/producto/winerim-core": { en: "Winerim Core: wine list analytics", it: "Winerim Core: analisi della carta", fr: "Winerim Core : analyse de carte", de: "Winerim Core: Weinkarten-Analyse", pt: "Winerim Core: análise da carta" },
+  "/herramientas": { en: "Free wine list tools", it: "Strumenti gratuiti per la carta", fr: "Outils gratuits pour carte des vins", de: "Kostenlose Weinkarten-Tools", pt: "Ferramentas gratuitas para carta de vinhos" },
+  "/demo": { en: "Request a free demo", it: "Richiedi una demo gratuita", fr: "Demander une démo gratuite", de: "Kostenlose Demo anfragen", pt: "Solicitar demo gratuita" },
+  "/precios": { en: "Winerim plans and pricing", it: "Piani e prezzi Winerim", fr: "Plans et tarifs Winerim", de: "Winerim Pläne und Preise", pt: "Planos e preços Winerim" },
+  "/soluciones/restaurantes-gastronomicos": { en: "Solutions for gastronomic restaurants", it: "Soluzioni per ristoranti gastronomici", fr: "Solutions pour restaurants gastronomiques", de: "Lösungen für Gourmetrestaurants", pt: "Soluções para restaurantes gastronómicos" },
+};
+
+const localizedPrefixes = /^\/(en|it|fr|de|pt)\//;
+
+function localizeLink(link: RelatedLink, lang: SupportedLang, localePath: (path: string) => string): RelatedLink {
+  const isAlreadyLocalized = localizedPrefixes.test(link.to);
+  const shouldLocalize = link.to.startsWith("/") && !isAlreadyLocalized;
+  return {
+    ...link,
+    to: shouldLocalize ? localePath(link.to) : link.to,
+    label: labelOverrides[link.to]?.[lang] || link.label,
+  };
+}
+
 function getAutoLinks(slug: string, body: string): RelatedLink[] {
   const text = `${slug} ${body}`.toLowerCase();
   const matched = new Map<string, RelatedLink>();
@@ -144,6 +180,8 @@ interface ArticleRelatedContentProps {
 }
 
 const ArticleRelatedContent = ({ slug, body, manualLinks }: ArticleRelatedContentProps) => {
+  const { lang, localePath } = useLanguage();
+  const t = copy[lang] || copy.es;
   const baseLinks = manualLinks && manualLinks.length > 0 ? manualLinks : getAutoLinks(slug, body);
   // Ensure mandatory links (pricing, demo) are always present
   const existingPaths = new Set(baseLinks.map(l => l.to));
@@ -153,7 +191,7 @@ const ArticleRelatedContent = ({ slug, body, manualLinks }: ArticleRelatedConten
   if (!hasSolution && !extras.some(l => l.to.startsWith("/soluciones"))) {
     extras.unshift({ to: "/soluciones/restaurantes-gastronomicos", label: "Soluciones para restaurantes gastronómicos", type: "solution" });
   }
-  const links = [...baseLinks, ...extras].slice(0, 8);
+  const links = [...baseLinks, ...extras].slice(0, 8).map((link) => localizeLink(link, lang, localePath));
 
   if (!links.length) return null;
 
@@ -163,7 +201,7 @@ const ArticleRelatedContent = ({ slug, body, manualLinks }: ArticleRelatedConten
         <div className="border-t border-border pt-12">
           <div className="flex items-center gap-3 mb-8">
             <Wine size={20} className="text-wine" />
-            <h2 className="font-heading text-xl md:text-2xl font-bold">Contenido relacionado</h2>
+            <h2 className="font-heading text-xl md:text-2xl font-bold">{t.title}</h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {links.map((link, i) => {
@@ -180,7 +218,7 @@ const ArticleRelatedContent = ({ slug, body, manualLinks }: ArticleRelatedConten
                     </div>
                     <div className="flex-1 min-w-0">
                       <span className={`text-[10px] font-semibold tracking-widest uppercase ${config.badgeClass} block mb-0.5`}>
-                        {config.badge}
+                        {t.badges[link.type]}
                       </span>
                       <p className="text-sm font-medium group-hover:text-wine transition-colors truncate">
                         {link.label}

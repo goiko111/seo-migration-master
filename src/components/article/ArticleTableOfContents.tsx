@@ -1,10 +1,21 @@
 import ScrollReveal from "@/components/ScrollReveal";
+import { type SupportedLang } from "@/i18n/types";
 
 interface ArticleTableOfContentsProps {
   headings: string[];
+  lang?: SupportedLang;
 }
 
-const ArticleTableOfContents = ({ headings }: ArticleTableOfContentsProps) => {
+const labels: Record<SupportedLang, string> = {
+  es: "Contenido del artículo",
+  en: "Article contents",
+  it: "Indice dell'articolo",
+  fr: "Sommaire de l'article",
+  de: "Inhalt des Artikels",
+  pt: "Conteúdo do artigo",
+};
+
+const ArticleTableOfContents = ({ headings, lang = "es" }: ArticleTableOfContentsProps) => {
   if (headings.length < 2) return null;
 
   return (
@@ -12,7 +23,7 @@ const ArticleTableOfContents = ({ headings }: ArticleTableOfContentsProps) => {
       <ScrollReveal>
         <div className="p-6 md:p-8 rounded-xl border border-border bg-gradient-card">
           <h2 className="font-heading font-bold text-sm uppercase tracking-widest text-accent mb-5">
-            Contenido del artículo
+            {labels[lang] || labels.es}
           </h2>
           <ol className="space-y-3">
             {headings.map((heading, i) => (

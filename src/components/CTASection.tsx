@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { getResolvedCTASet, type PageType } from "@/data/ctas";
+import { getResolvedCTASetForLang, type PageType } from "@/data/ctas";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface CTASectionProps {
   /** Page type for contextual copy */
@@ -38,15 +39,16 @@ const CTASection = ({
   secondaryUrl,
   micro,
 }: CTASectionProps) => {
-  const ctaSet = getResolvedCTASet(pageType);
+  const { lang, localePath } = useLanguage();
+  const ctaSet = getResolvedCTASetForLang(pageType, lang);
 
   const resolvedBadge = badge || ctaSet.badge;
   const resolvedTitle = title || ctaSet.finalTitle;
   const resolvedDesc = description || ctaSet.finalDesc;
   const resolvedPrimaryText = primaryText || ctaSet.primary.text;
-  const resolvedPrimaryUrl = primaryUrl || ctaSet.primary.url;
+  const resolvedPrimaryUrl = primaryUrl || localePath(ctaSet.primary.url);
   const resolvedSecondaryText = secondaryText || ctaSet.secondary.text;
-  const resolvedSecondaryUrl = secondaryUrl || ctaSet.secondary.url;
+  const resolvedSecondaryUrl = secondaryUrl || localePath(ctaSet.secondary.url);
   const resolvedMicro = micro || ctaSet.primary.micro;
 
   return (

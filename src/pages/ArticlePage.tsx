@@ -230,7 +230,7 @@ const ArticlePage = () => {
       )}
 
       {/* TABLE OF CONTENTS */}
-      <ArticleTableOfContents headings={sectionHeadings} />
+      <ArticleTableOfContents headings={sectionHeadings} lang={contentLang} />
 
       {/* INTRO (content before first ##) */}
       {sections.length > 0 && sections[0].heading === "" && sections[0].content && (

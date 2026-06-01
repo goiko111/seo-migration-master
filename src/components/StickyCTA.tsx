@@ -26,7 +26,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const location = useLocation();
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
 
   // Don't show on demo/contact/admin pages
   const excludedPaths = ["/demo", "/contacto", "/admin", "/analisis-carta", "/en/demo", "/en/contact", "/it/demo", "/it/contatto", "/fr/demo", "/fr/contact"];
@@ -49,7 +49,7 @@ const StickyCTA = ({ pageType, text, url, threshold = 600 }: StickyCTAProps) => 
 
   const ctaSet = getResolvedCTASetForLang(pageType, lang);
   const ctaText = text || ctaSet.stickyText;
-  const ctaUrl = url || ctaSet.primary.url;
+  const ctaUrl = url || localePath(ctaSet.primary.url);
 
   return (
     <AnimatePresence>

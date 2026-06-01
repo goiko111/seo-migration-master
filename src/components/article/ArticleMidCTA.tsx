@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, BarChart3, Wine } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { getResolvedCTASet, type PageType, type FunnelStage } from "@/data/ctas";
+import { getResolvedCTASetForLang, type PageType } from "@/data/ctas";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ArticleMidCTAProps {
   /** Page type for contextual copy */
@@ -36,13 +37,14 @@ const ArticleMidCTA = ({
   buttonUrl,
   variant = "default",
 }: ArticleMidCTAProps) => {
-  const ctaSet = getResolvedCTASet(pageType);
+  const { lang, localePath } = useLanguage();
+  const ctaSet = getResolvedCTASetForLang(pageType, lang);
   const Icon = variantIcons[variant] || Sparkles;
 
   const resolvedTitle = title || ctaSet.midTitle;
   const resolvedDesc = description || ctaSet.midDesc;
   const resolvedBtn = buttonText || ctaSet.primary.text;
-  const resolvedUrl = buttonUrl || ctaSet.primary.url;
+  const resolvedUrl = buttonUrl || localePath(ctaSet.primary.url);
 
   const borderCls = variant === "highlight"
     ? "border-wine/30 bg-wine/5"
