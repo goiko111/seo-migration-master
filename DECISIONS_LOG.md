@@ -2108,3 +2108,31 @@
 - Resolver acceso Search Console.
 - Solicitar indexación selectiva.
 - Continuar con schema de detalle de entidades.
+
+### Indexación selectiva de hubs y artículos internacionales
+
+#### Hechos
+
+- Search Console quedó accesible mediante la propiedad URL-prefix `https://winerim.wine/`.
+- La propiedad de dominio `sc-domain:winerim.wine` no quedó accesible para `gugocreative@gmail.com`.
+- Se solicitaron tres hubs internacionales de biblioteca:
+  - EN grapes;
+  - PT harmonizacoes;
+  - DE rebsorten.
+- Se procesó también la tanda prioritaria de tres artículos internacionales.
+- Search Console confirmó `Se ha solicitado la indexación` para los hubs y terminó la secuencia de artículos en la tercera URL con confirmación.
+
+#### Decisiones
+
+- Operar Search Console desde la propiedad URL-prefix mientras no exista acceso al dominio.
+- No repetir solicitudes de las mismas URLs.
+- Priorizar pocas URLs estratégicas y esperar datos antes de abrir una tanda grande.
+
+#### Hipótesis
+
+- La solicitud manual acelerará rastreo de hubs y artículos, pero no garantiza indexación inmediata.
+
+#### Tareas pendientes
+
+- Revisar cambios de estado en 48-72 horas.
+- Medir impresiones/cobertura antes de solicitar más URLs.

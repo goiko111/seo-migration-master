@@ -3021,3 +3021,41 @@
   - `/pt/biblioteca-vinho/harmonizacoes`;
   - `/de/weinbibliothek/rebsorten`.
 - Después, seguir con la tanda de artículos internacionales ya validada.
+
+## Actualización 2026-06-04: indexación selectiva solicitada en Search Console
+
+## Hechos
+
+- Se confirmó que `gugocreative@gmail.com` tiene acceso a la propiedad URL-prefix `https://winerim.wine/`.
+- La propiedad de dominio `sc-domain:winerim.wine` sigue sin acceso para esa cuenta, pero no bloquea la inspección de URLs canónicas `https://winerim.wine/...`.
+- Se solicitaron en Search Console las siguientes URLs de hubs:
+  - `https://winerim.wine/en/wine-library/grapes`;
+  - `https://winerim.wine/pt/biblioteca-vinho/harmonizacoes`;
+  - `https://winerim.wine/de/weinbibliothek/rebsorten`.
+- Estado observado antes de solicitar:
+  - EN grapes: `La URL no está en Google`, `Google no reconoce esta URL`, sin sitemap de referencia detectado.
+  - PT harmonizacoes: `La URL no está en Google`, `Descubierta: actualmente sin indexar`, con `sitemap.xml` y `sitemap_index.xml`.
+  - DE rebsorten: `La URL no está en Google`, `Descubierta: actualmente sin indexar`, con `sitemap.xml` y `sitemap_index.xml`.
+- Search Console confirmó `Se ha solicitado la indexación` para las tres URLs de hubs.
+- Se ejecutó también la tanda prioritaria de artículos internacionales:
+  - `https://winerim.wine/en/article/biblioteca-vino-restaurante-vender-mas`;
+  - `https://winerim.wine/de/article/biblioteca-vino-restaurante-vender-mas`;
+  - `https://winerim.wine/pt/article/maridajes-carta-vinos-rentable`.
+- La automatización de artículos agotó el tiempo de retorno del navegador, pero al revisar el estado posterior quedó en la tercera URL (`pt/article/maridajes-carta-vinos-rentable`) con el diálogo `Se ha solicitado la indexación`, lo que confirma que la secuencia llegó hasta el final.
+
+## Decisiones
+
+- Usar la propiedad `https://winerim.wine/` para inspección e indexación manual mientras la propiedad de dominio no esté disponible.
+- No repetir solicitudes sobre las mismas URLs porque Google avisa que múltiples envíos no cambian prioridad.
+- Mantener la indexación manual selectiva, no masiva.
+
+## Hipótesis
+
+- Las URLs PT/DE ya estaban descubiertas por sitemap y deberían avanzar antes que la EN que Google aún no reconocía.
+- La solicitud manual debería acelerar rastreo, pero la indexación final dependerá de evaluación de Google y puede tardar días o semanas.
+
+## Tareas pendientes
+
+- Revisar Search Console en 48-72 horas para ver si las seis URLs pasan de `no indexada` a rastreada/indexada.
+- Monitorizar el informe de Páginas para `Descubierta: actualmente sin indexar`.
+- Continuar con schema de detalle de entidades de biblioteca del vino.

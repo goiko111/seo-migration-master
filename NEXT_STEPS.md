@@ -2167,3 +2167,44 @@
 3. Siguiente bloque de desarrollo:
    - schema de detalle para uvas, regiones, estilos y maridajes;
    - resolver si conviene limpiar el `SoftwareApplication` del catálogo Organization o mantenerlo como oferta de producto.
+
+## Actualización 2026-06-04: Search Console operativo y solicitudes enviadas
+
+## Hechos
+
+- Search Console funciona con la propiedad `https://winerim.wine/`.
+- La propiedad `sc-domain:winerim.wine` sigue sin acceso para `gugocreative@gmail.com`.
+- Solicitudes de indexación enviadas:
+  - `/en/wine-library/grapes`;
+  - `/pt/biblioteca-vinho/harmonizacoes`;
+  - `/de/weinbibliothek/rebsorten`;
+  - `/en/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/de/article/biblioteca-vino-restaurante-vender-mas`;
+  - `/pt/article/maridajes-carta-vinos-rentable`.
+- Estado inicial observado:
+  - EN grapes: Google no reconocía aún la URL.
+  - PT/DE hubs: descubiertas por sitemap, actualmente sin indexar.
+  - PT article finalizó con confirmación visible de solicitud.
+
+## Decisiones
+
+- No enviar de nuevo las mismas URLs.
+- Esperar 48-72 horas antes de evaluar si conviene otra tanda.
+- Mantener indexación manual selectiva.
+
+## Hipótesis
+
+- Las rutas descubiertas por sitemap deberían actualizar estado antes que las no reconocidas.
+- Search Console puede tardar en reflejar rastreo aunque la cola prioritaria ya esté solicitada.
+
+## Tareas pendientes listas para retomar
+
+1. En 48-72 horas:
+   - inspeccionar las seis URLs solicitadas;
+   - anotar si cambian a rastreadas, indexadas o con canonical distinto.
+2. Si avanzan bien:
+   - solicitar una segunda tanda corta de URLs de biblioteca;
+   - incluir entidades de detalle con más valor SEO.
+3. Desarrollo:
+   - implementar schema de detalle para uvas, regiones, estilos y maridajes;
+   - decidir si se mantiene o separa el `SoftwareApplication` dentro del catálogo de Organization.
