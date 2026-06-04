@@ -2090,3 +2090,41 @@
 4. Search Console:
    - continuar indexación selectiva después de validar producción;
    - medir cobertura e impresiones del cluster internacional antes de abrir otro cluster editorial grande.
+
+## Actualización 2026-06-04: pendiente de publish Lovable
+
+## Hechos
+
+- El bloque de schema/i18n de hubs está en `main` con commit `9a14725 fix: enrich wine library hub schema`.
+- No se pudo publicar desde el navegador interno porque Lovable redirige a login.
+- No se pudo desplegar `prerender` por CLI porque falta `SUPABASE_ACCESS_TOKEN`.
+- No se requiere deploy de Cloudflare Worker para este bloque.
+
+## Decisiones
+
+- No dar por cerrado en producción hasta publicar Lovable y desplegar `prerender`.
+- La siguiente acción humana/operativa es autenticada en Lovable, no de código.
+
+## Hipótesis
+
+- Tras publicar desde Lovable, el frontend humano mostrará schema y FAQs localizadas.
+- Tras desplegar `prerender`, Googlebot recibirá `ItemList`, FAQs y navegación/footer localizados.
+
+## Tareas pendientes listas para retomar
+
+1. En Lovable:
+   - abrir `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`;
+   - publicar el proyecto desde `main`;
+   - desplegar explícitamente la Edge Function `prerender`.
+2. Revalidar producción como Googlebot:
+   - `/en/wine-library/grapes`;
+   - `/pt/biblioteca-vinho/harmonizacoes`;
+   - `/de/weinbibliothek/rebsorten`.
+3. Criterios de cierre:
+   - aparece `ItemList` en JSON-LD;
+   - FAQ del hub está en el idioma correcto;
+   - header/footer prerenderizados no tienen residuos españoles;
+   - `x-worker-branch: bot-prerender` y `x-prerendered: true`.
+4. Después:
+   - retomar Search Console con indexación selectiva;
+   - seguir con schema de detalle para entidades.

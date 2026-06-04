@@ -2956,3 +2956,30 @@
   - `BibliotecaDetalle`.
 - Revisar si detalle de entidades duplica Article JSON-LD y decidir consolidación.
 - Continuar la indexación selectiva pendiente en Search Console tras validar producción.
+
+## Actualización 2026-06-04: push completado y despliegue pendiente
+
+## Hechos
+
+- Commit creado y pusheado a `main`: `9a14725 fix: enrich wine library hub schema`.
+- El árbol local quedó limpio tras el push.
+- Se intentó abrir Lovable en el navegador interno, pero redirige a `https://lovable.dev/login?redirect=%2Fprojects%2F2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- No hay sesión local Supabase CLI ni variable `SUPABASE_ACCESS_TOKEN`.
+- El intento directo de desplegar `prerender` por CLI falló con: `Access token not provided`.
+- No se desplegó Cloudflare Worker; este bloque no requiere cambios de Worker.
+
+## Decisiones
+
+- Dejar el cambio listo en `main` y no marcarlo como publicado en producción hasta que Lovable publique frontend y despliegue `prerender`.
+- No intentar métodos alternativos de deploy sin credenciales explícitas.
+
+## Hipótesis
+
+- Lovable podrá publicar el frontend desde el commit `9a14725` y desplegar `prerender` con la sesión autenticada del proyecto.
+- Producción seguirá sirviendo el HTML prerenderizado anterior hasta ese despliegue.
+
+## Tareas pendientes
+
+- En Lovable, publicar el proyecto desde `main`.
+- En Lovable, desplegar explícitamente la Edge Function `prerender`.
+- Revalidar producción después del deploy antes de pedir más indexación en Search Console.

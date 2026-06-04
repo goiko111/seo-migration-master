@@ -2059,3 +2059,26 @@
 - Revalidar producción en hubs internacionales.
 - Extender schema a páginas de detalle.
 - Retomar indexación selectiva en Search Console tras producción validada.
+
+### Estado de despliegue del bloque schema/i18n de hubs
+
+#### Hechos
+
+- Commit publicado en `main`: `9a14725 fix: enrich wine library hub schema`.
+- Lovable no está autenticado en el navegador interno y redirige a login.
+- El deploy directo de `prerender` por CLI falló por falta de `SUPABASE_ACCESS_TOKEN`.
+
+#### Decisiones
+
+- Considerar el bloque como implementado y pusheado, pero no desplegado en producción.
+- Mantener Lovable como vía operativa para publicar frontend y Edge Function cuando la sesión esté disponible.
+
+#### Hipótesis
+
+- Una vez Lovable publique el commit y despliegue `prerender`, las validaciones locales deberían replicarse en producción.
+
+#### Tareas pendientes
+
+- Publish Lovable.
+- Deploy explícito de `prerender`.
+- Validación productiva Googlebot.
