@@ -2028,3 +2028,34 @@
 - Monitorizar cobertura y consultas en Search Console.
 - Auditar residuos de UI española en otras rutas internacionales.
 - Separar futura refactorización para compartir reglas entre frontend y `prerender`.
+
+### Schema e i18n de hubs de biblioteca del vino
+
+#### Hechos
+
+- Se implementó soporte de `structuredData` explícito en `SEOHead`.
+- Se añadió `src/components/seo/wineLibrarySchema.ts` para construir schema de hubs como `CollectionPage`, `DefinedTermSet`, `ItemList` y `BreadcrumbList`.
+- Los hubs principales de biblioteca del vino usan schema específico en frontend.
+- Las FAQs visibles de los hubs quedaron localizadas en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se corrigieron residuos de idioma en `GrapesHub` y `RegionsHub`.
+- `prerender` ahora emite `ItemList`, FAQs de sección, navegación/footer localizados y etiquetas estratégicas localizadas en hubs internacionales.
+- Verificaciones locales completadas: ESLint dirigido, Deno check, tests, build, `git diff --check` y muestras Googlebot locales.
+
+#### Decisiones
+
+- Los hubs de biblioteca se modelan como colecciones semánticas, no como aplicación/software.
+- Las etiquetas visibles se localizan sin cambiar los slugs canónicos.
+- La matriz de rutas estratégicas queda como fuente compartida provisional entre UI y schema.
+- No ampliar más contenido hasta publicar y validar este bloque estructural.
+
+#### Hipótesis
+
+- `CollectionPage` + `ItemList` debería ayudar a Search Console, Google y LLMs a entender mejor la profundidad de biblioteca.
+- La localización del prerender debería mejorar consistencia internacional frente a bots.
+
+#### Tareas pendientes
+
+- Publicar desde Lovable y desplegar `prerender`.
+- Revalidar producción en hubs internacionales.
+- Extender schema a páginas de detalle.
+- Retomar indexación selectiva en Search Console tras producción validada.

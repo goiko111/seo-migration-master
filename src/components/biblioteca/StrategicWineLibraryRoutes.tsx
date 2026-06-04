@@ -51,6 +51,11 @@ interface ResolvedRoute {
   type: RouteType;
 }
 
+export interface StrategicWineLibraryRouteItem extends ResolvedRoute {
+  groupTitle: string;
+  groupDescription: string;
+}
+
 interface StrategicWineLibraryRoutesProps {
   hub: StrategicWineLibraryHub;
   className?: string;
@@ -361,6 +366,22 @@ const resolveRoute = (definition: RouteDefinition, lang: SupportedLang): Resolve
 
   const entry = getLocalizedPairingBySlug(definition.slug, lang);
   return entry ? { label: entry.name, path: getWineLibraryPath(lang, `/biblioteca-vino/maridajes/${entry.slug}`), type: definition.type } : null;
+};
+
+// eslint-disable-next-line react-refresh/only-export-components -- Keeps visible strategic routes and JSON-LD schema on the same source.
+export const getStrategicWineLibraryRouteItems = (hub: StrategicWineLibraryHub, lang: string): StrategicWineLibraryRouteItem[] => {
+  const language = langKey(lang);
+  return routeGroups[hub].flatMap((group) => {
+    const groupText = groupCopy[group.copyKey];
+    return group.routes
+      .map((definition) => resolveRoute(definition, language))
+      .filter((entry): entry is ResolvedRoute => Boolean(entry))
+      .map((entry) => ({
+        ...entry,
+        groupTitle: text(groupText.title, language),
+        groupDescription: text(groupText.description, language),
+      }));
+  });
 };
 
 const StrategicWineLibraryRoutes = ({ hub, className = "" }: StrategicWineLibraryRoutesProps) => {

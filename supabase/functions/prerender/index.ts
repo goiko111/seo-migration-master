@@ -206,6 +206,46 @@ const WINE_LIBRARY_COPY: Record<WineLibraryLang, {
   },
 };
 
+function wineLibrarySectionFaqs(lang: WineLibraryLang, sectionTitle: string, description: string): { q: string; a: string }[] {
+  const copy = ({
+    es: {
+      covers: `¿Qué incluye ${sectionTitle} en Winerim?`,
+      use: '¿Cómo ayuda esta sección a gestionar una carta?',
+      useAnswer: 'Ayuda a conectar origen, estilo, precio, servicio y maridaje para que el equipo de sala recomiende con más criterio.',
+    },
+    en: {
+      covers: `What does ${sectionTitle} include in Winerim?`,
+      use: 'How does this section help manage a wine list?',
+      useAnswer: 'It helps connect origin, style, price, service and pairing so the floor team can recommend with more confidence.',
+    },
+    it: {
+      covers: `Cosa include ${sectionTitle} in Winerim?`,
+      use: 'Come aiuta questa sezione nella gestione della carta?',
+      useAnswer: 'Aiuta a collegare origine, stile, prezzo, servizio e abbinamento per raccomandare con più criterio.',
+    },
+    fr: {
+      covers: `Que comprend ${sectionTitle} dans Winerim ?`,
+      use: 'Comment cette section aide-t-elle à gérer une carte ?',
+      useAnswer: 'Elle aide à relier origine, style, prix, service et accord pour recommander avec plus de méthode.',
+    },
+    de: {
+      covers: `Was umfasst ${sectionTitle} in Winerim?`,
+      use: 'Wie hilft dieser Bereich bei der Weinkartensteuerung?',
+      useAnswer: 'Er verbindet Herkunft, Stil, Preis, Service und Pairing, damit das Team sicherer empfehlen kann.',
+    },
+    pt: {
+      covers: `O que inclui ${sectionTitle} na Winerim?`,
+      use: 'Como é que esta secção ajuda a gerir a carta?',
+      useAnswer: 'Ajuda a ligar origem, estilo, preço, serviço e harmonização para a equipa recomendar com mais critério.',
+    },
+  } as Record<WineLibraryLang, { covers: string; use: string; useAnswer: string }>)[lang];
+
+  return [
+    { q: copy.covers, a: description },
+    { q: copy.use, a: copy.useAnswer },
+  ];
+}
+
 interface WineLibraryPriorityProfile {
   serviceTemp: string;
   glass: string;
@@ -2034,6 +2074,25 @@ interface WineLibraryHubRouteGroup {
 const hubText = (copy: WineLibraryLocalizedText, lang: WineLibraryLang): string =>
   copy[lang] || copy.en || copy.es;
 
+const WINE_LIBRARY_STRATEGIC_LABELS: Record<string, Partial<Record<WineLibraryLang, string>>> = {
+  Albarino: { es: 'Albariño', en: 'Albariño', it: 'Albariño', fr: 'Albariño', de: 'Albariño', pt: 'Alvarinho' },
+  'Blanco con lias': { es: 'Blanco con lías', en: 'Lees-aged white', it: 'Bianco sui lieviti', fr: 'Blanc sur lies', de: 'Weißwein auf der Hefe', pt: 'Branco com borras' },
+  'Carnes rojas': { en: 'Red meat', it: 'Carni rosse', fr: 'Viandes rouges', de: 'Rotes Fleisch', pt: 'Carnes vermelhas' },
+  Espumoso: { en: 'Sparkling wine', it: 'Spumante', fr: 'Effervescent', de: 'Schaumwein', pt: 'Espumante' },
+  'Lubina y dorada': { en: 'Sea bass and sea bream', it: 'Branzino e orata', fr: 'Bar et dorade', de: 'Wolfsbarsch und Dorade', pt: 'Robalo e dourada' },
+  Mencia: { es: 'Mencía', en: 'Mencía', it: 'Mencía', fr: 'Mencía', de: 'Mencía', pt: 'Mencía' },
+  Ostras: { en: 'Oysters', it: 'Ostriche', fr: 'Huîtres', de: 'Austern', pt: 'Ostras' },
+  'Pescados y mariscos': { en: 'Fish and seafood', it: 'Pesce e frutti di mare', fr: 'Poissons et fruits de mer', de: 'Fisch und Meeresfrüchte', pt: 'Peixes e mariscos' },
+  Quesos: { en: 'Cheese', it: 'Formaggi', fr: 'Fromages', de: 'Käse', pt: 'Queijos' },
+  'Rias Baixas': { es: 'Rías Baixas', en: 'Rías Baixas', it: 'Rías Baixas', fr: 'Rías Baixas', de: 'Rías Baixas', pt: 'Rías Baixas' },
+  'Tinto crianza': { en: 'Crianza red', it: 'Rosso crianza', fr: 'Rouge crianza', de: 'Crianza-Rotwein', pt: 'Tinto crianza' },
+  'Tinto reserva': { en: 'Reserva red', it: 'Rosso reserva', fr: 'Rouge reserva', de: 'Reserva-Rotwein', pt: 'Tinto reserva' },
+  'Xarel-lo': { es: 'Xarel·lo', en: 'Xarel·lo', it: 'Xarel·lo', fr: 'Xarel·lo', de: 'Xarel·lo', pt: 'Xarel·lo' },
+};
+
+const wineLibraryStrategicLabel = (label: string, lang: WineLibraryLang): string =>
+  WINE_LIBRARY_STRATEGIC_LABELS[label]?.[lang] || label;
+
 const WINE_LIBRARY_HUB_ROUTE_GROUPS: Record<string, WineLibraryHubRouteGroup[]> = {
   '/biblioteca-vino': [
     {
@@ -2128,7 +2187,7 @@ const WINE_LIBRARY_HUB_ROUTE_GROUPS: Record<string, WineLibraryHubRouteGroup[]> 
 function wineLibraryHubRouteSections(lang: WineLibraryLang, esPath: string): { heading: string; content: string }[] {
   return (WINE_LIBRARY_HUB_ROUTE_GROUPS[esPath] || []).map((group) => ({
     heading: hubText(group.title, lang),
-    content: `${hubText(group.description, lang)} ${group.links.map((link) => link.label).join(', ')}.`,
+    content: `${hubText(group.description, lang)} ${group.links.map((link) => wineLibraryStrategicLabel(link.label, lang)).join(', ')}.`,
   }));
 }
 
@@ -2136,7 +2195,7 @@ function wineLibraryHubRouteLinks(lang: WineLibraryLang, esPath: string): { labe
   return (WINE_LIBRARY_HUB_ROUTE_GROUPS[esPath] || [])
     .flatMap((group) => group.links)
     .map((link) => ({
-      label: link.label,
+      label: wineLibraryStrategicLabel(link.label, lang),
       url: wineLibraryPath(lang, link.esPath),
     }));
 }
@@ -2557,6 +2616,8 @@ function renderWineLibraryPage(path: string): string | null {
             priorityCopy.faqService(subject, priorityProfile.serviceTemp),
             priorityCopy.faqList(subject),
           ]
+        : isSectionHub
+        ? wineLibrarySectionFaqs(lang, sectionTitle, description)
         : [
             {
               q: copy.faqTitle,
@@ -4958,6 +5019,35 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
 
 // ── HTML Generator ──
 function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangEntry[]): string {
+  const navLang = WINE_LIBRARY_LANGS.includes(meta.lang as WineLibraryLang) ? meta.lang as WineLibraryLang : 'es';
+  const absoluteUrl = (url: string) => url.startsWith('http') ? url : `${SITE}${url.startsWith('/') ? url : `/${url}`}`;
+  const localizedStaticUrl = (esPath: string) => absoluteUrl(staticLocalizedPath(navLang, esPath) || esPath);
+  const navCopy = ({
+    es: {
+      product: 'Producto', features: 'Funcionalidades', pricing: 'Precios', tools: 'Herramientas', guides: 'Guías', blog: 'Blog', demo: 'Demo', contact: 'Contacto',
+      related: 'Enlaces relacionados', tagline: 'Carta inteligente de vinos para restaurantes.', privacy: 'Privacidad', terms: 'Términos',
+    },
+    en: {
+      product: 'Product', features: 'Features', pricing: 'Pricing', tools: 'Tools', guides: 'Guides', blog: 'Blog', demo: 'Demo', contact: 'Contact',
+      related: 'Related links', tagline: 'Intelligent wine list software for restaurants.', privacy: 'Privacy', terms: 'Terms',
+    },
+    it: {
+      product: 'Prodotto', features: 'Funzionalità', pricing: 'Prezzi', tools: 'Strumenti', guides: 'Guide', blog: 'Blog', demo: 'Demo', contact: 'Contatto',
+      related: 'Link correlati', tagline: 'Carta vini intelligente per ristoranti.', privacy: 'Privacy', terms: 'Termini',
+    },
+    fr: {
+      product: 'Produit', features: 'Fonctionnalités', pricing: 'Tarifs', tools: 'Outils', guides: 'Guides', blog: 'Blog', demo: 'Démo', contact: 'Contact',
+      related: 'Liens associés', tagline: 'Carte des vins intelligente pour restaurants.', privacy: 'Confidentialité', terms: 'Conditions',
+    },
+    de: {
+      product: 'Produkt', features: 'Funktionen', pricing: 'Preise', tools: 'Tools', guides: 'Ratgeber', blog: 'Blog', demo: 'Demo', contact: 'Kontakt',
+      related: 'Verwandte Links', tagline: 'Intelligente Weinkarten-Software für Restaurants.', privacy: 'Datenschutz', terms: 'AGB',
+    },
+    pt: {
+      product: 'Produto', features: 'Funcionalidades', pricing: 'Preços', tools: 'Ferramentas', guides: 'Guias', blog: 'Blog', demo: 'Demo', contact: 'Contacto',
+      related: 'Links relacionados', tagline: 'Carta de vinhos inteligente para restaurantes.', privacy: 'Privacidade', terms: 'Termos',
+    },
+  } as Record<WineLibraryLang, Record<string, string>>)[navLang];
   const faqSchema = content.faqs.length > 0 ? JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -4976,6 +5066,26 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
       position: i + 1,
       name: bc.name,
       item: bc.url,
+    })),
+  }) : '';
+
+  const collectionLinks = content.internalLinks
+    .filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index)
+    .slice(0, 40);
+
+  const itemListSchema = meta.schemaType === 'CollectionPage' && collectionLinks.length > 0 ? JSON.stringify({
+    '@context': 'https://schema.org',
+    '@id': `${meta.canonical}#itemlist`,
+    '@type': 'ItemList',
+    name: content.h1,
+    description: meta.description,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: collectionLinks.length,
+    itemListElement: collectionLinks.map((link, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: link.label,
+      url: absoluteUrl(link.url),
     })),
   }) : '';
 
@@ -4999,6 +5109,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
         author: { '@type': 'Organization', name: 'Winerim', url: SITE },
         publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
         inLanguage: meta.lang,
+        ...(meta.schemaType === 'CollectionPage' ? { mainEntity: { '@id': `${meta.canonical}#itemlist` } } : {}),
       });
 
   const orgSchema = JSON.stringify({
@@ -5007,7 +5118,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     name: 'Winerim',
     url: SITE,
     logo: OG_IMAGE,
-    description: 'Carta inteligente de vinos con IA para restaurantes, hoteles y vinotecas.',
+    description: navCopy.tagline,
     foundingDate: '2024',
     knowsAbout: ['Wine list management', 'Restaurant wine sales optimization', 'AI-powered wine recommendations', 'Digital wine menus', 'Wine pricing strategy', 'Food and wine pairing', 'Hospitality technology'],
     sameAs: [
@@ -5027,16 +5138,25 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
       <p>${escapeHtml(s.content)}</p>
     </section>`).join('\n');
 
+  const faqHeading = ({
+    es: 'Preguntas frecuentes',
+    en: 'Frequently asked questions',
+    it: 'Domande frequenti',
+    fr: 'Questions frequentes',
+    de: 'Haeufige Fragen',
+    pt: 'Perguntas frequentes',
+  } as Record<string, string>)[meta.lang] || 'Frequently asked questions';
+
   const faqsHTML = content.faqs.length > 0 ? `
     <section>
-      <h2>Preguntas frecuentes</h2>
+      <h2>${escapeHtml(faqHeading)}</h2>
       <dl>
         ${content.faqs.map(f => `<dt>${escapeHtml(f.q)}</dt><dd>${escapeHtml(f.a)}</dd>`).join('\n        ')}
       </dl>
     </section>` : '';
 
   const navHTML = content.internalLinks.map(l =>
-    `<a href="${SITE}${l.url}">${escapeHtml(l.label)}</a>`
+    `<a href="${absoluteUrl(l.url)}">${escapeHtml(l.label)}</a>`
   ).join(' | ');
 
   const breadcrumbHTML = content.breadcrumbs.length > 1
@@ -5070,6 +5190,7 @@ ${hreflangHTML}
   <meta name="twitter:image" content="${meta.ogImage}">
   
   <script type="application/ld+json">${mainSchema}</script>
+  ${itemListSchema ? `<script type="application/ld+json">${itemListSchema}</script>` : ''}
   ${faqSchema ? `<script type="application/ld+json">${faqSchema}</script>` : ''}
   ${breadcrumbSchema ? `<script type="application/ld+json">${breadcrumbSchema}</script>` : ''}
   <script type="application/ld+json">${orgSchema}</script>
@@ -5077,15 +5198,15 @@ ${hreflangHTML}
 <body>
   <header>
     <nav aria-label="Main navigation">
-      <a href="${SITE}/">Winerim</a> |
-      <a href="${SITE}/software-carta-de-vinos">Producto</a> |
-      <a href="${SITE}/funcionalidades">Funcionalidades</a> |
-      <a href="${SITE}/precios">Precios</a> |
-      <a href="${SITE}/herramientas">Herramientas</a> |
-      <a href="${SITE}/guias-y-recursos">Guías</a> |
-      <a href="${SITE}/blog">Blog</a> |
-      <a href="${SITE}/demo">Demo</a> |
-      <a href="${SITE}/contacto">Contacto</a>
+      <a href="${localizedStaticUrl('/')}">Winerim</a> |
+      <a href="${localizedStaticUrl('/software-carta-de-vinos')}">${escapeHtml(navCopy.product)}</a> |
+      <a href="${localizedStaticUrl('/funcionalidades')}">${escapeHtml(navCopy.features)}</a> |
+      <a href="${localizedStaticUrl('/precios')}">${escapeHtml(navCopy.pricing)}</a> |
+      <a href="${localizedStaticUrl('/herramientas')}">${escapeHtml(navCopy.tools)}</a> |
+      <a href="${localizedStaticUrl('/guias-y-recursos')}">${escapeHtml(navCopy.guides)}</a> |
+      <a href="${localizedStaticUrl('/blog')}">${escapeHtml(navCopy.blog)}</a> |
+      <a href="${localizedStaticUrl('/demo')}">${escapeHtml(navCopy.demo)}</a> |
+      <a href="${localizedStaticUrl('/contacto')}">${escapeHtml(navCopy.contact)}</a>
     </nav>
   </header>
   
@@ -5099,16 +5220,16 @@ ${hreflangHTML}
       ${faqsHTML}
     </article>
     
-    <nav aria-label="Enlaces relacionados">
+    <nav aria-label="${escapeAttr(navCopy.related)}">
       ${navHTML}
     </nav>
   </main>
   
   <footer>
-    <p>&copy; ${new Date().getFullYear()} Winerim. Carta inteligente de vinos para restaurantes.</p>
+    <p>&copy; ${new Date().getFullYear()} Winerim. ${escapeHtml(navCopy.tagline)}</p>
     <nav aria-label="Legal">
-      <a href="${SITE}/privacidad">Privacidad</a> |
-      <a href="${SITE}/terminos">Términos</a>
+      <a href="${localizedStaticUrl('/privacidad')}">${escapeHtml(navCopy.privacy)}</a> |
+      <a href="${localizedStaticUrl('/terminos')}">${escapeHtml(navCopy.terms)}</a>
     </nav>
   </footer>
 </body>

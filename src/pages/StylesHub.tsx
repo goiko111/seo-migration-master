@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import { buildWineLibraryCollectionSchema } from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
@@ -23,12 +24,44 @@ import {
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const faqs = [
-  { q: "¿Cuántos estilos de vino existen?", a: "Winerim clasifica el mundo del vino en 8 grandes familias (tinto, blanco, rosado, espumoso, generoso, dulce natural, naranja y ecológico/biodinámico/natural) con más de 50 subtipos y variantes." },
-  { q: "¿Por qué importa conocer los estilos para gestionar una carta?", a: "El estilo determina la experiencia del comensal: temperatura, copa, maridaje y expectativas. Una carta bien organizada por estilos ayuda al cliente a elegir y al restaurante a vender mejor." },
-  { q: "¿Qué diferencia hay entre vino generoso y dulce natural?", a: "El vino generoso tiene alcohol añadido (fortificado). El dulce natural concentra azúcar por métodos naturales (botrytis, pasificación, congelación) sin añadir alcohol." },
-  { q: "¿Qué es un orange wine?", a: "Un vino elaborado con uvas blancas pero fermentado con sus hollejos como un tinto. El resultado es un vino de color ámbar/naranja con taninos y complejidad textural." },
-];
+const faqsByLang: Record<string, { q: string; a: string }[]> = {
+  es: [
+    { q: "¿Cuántos estilos de vino existen?", a: "Winerim clasifica el mundo del vino en 8 grandes familias y más de 50 subtipos, desde tintos y blancos hasta espumosos, generosos, dulces, naranjas y vinos naturales." },
+    { q: "¿Por qué importa conocer los estilos para gestionar una carta?", a: "El estilo determina temperatura, copa, maridaje y expectativas. Una carta organizada por estilos ayuda al cliente a elegir y al equipo a vender mejor." },
+    { q: "¿Qué diferencia hay entre vino generoso y dulce natural?", a: "El vino generoso suele estar fortificado con alcohol añadido. El dulce natural concentra azúcar por métodos como botrytis, pasificación o congelación." },
+    { q: "¿Qué es un orange wine?", a: "Es un vino elaborado con uvas blancas fermentadas con sus pieles. El resultado suele ser ámbar, con tanino, textura y mayor complejidad." },
+  ],
+  en: [
+    { q: "How many wine styles are there?", a: "Winerim groups wine into 8 major families and 50+ subtypes, from red and white to sparkling, fortified, sweet, orange and natural wines." },
+    { q: "Why do styles matter for wine-list management?", a: "Style shapes temperature, glassware, pairing and guest expectations. A style-led list is easier to read, recommend and sell." },
+    { q: "What is the difference between fortified and natural sweet wine?", a: "Fortified wine usually has added alcohol. Natural sweet wine concentrates sugar through methods such as botrytis, drying grapes or freezing." },
+    { q: "What is orange wine?", a: "Orange wine is made from white grapes fermented with their skins. It is usually amber-coloured, textured and more tannic than a typical white wine." },
+  ],
+  it: [
+    { q: "Quanti stili di vino esistono?", a: "Winerim organizza il vino in 8 grandi famiglie e oltre 50 sottotipi, dai rossi e bianchi agli spumanti, fortificati, dolci, orange e naturali." },
+    { q: "Perché gli stili contano nella gestione della carta?", a: "Lo stile definisce temperatura, calice, abbinamento e aspettative. Una carta per stili è più leggibile e più facile da vendere." },
+    { q: "Che differenza c'è tra vino fortificato e dolce naturale?", a: "Il vino fortificato prevede di norma alcol aggiunto. Il dolce naturale concentra zucchero con botrite, appassimento o congelamento." },
+    { q: "Che cos'è un orange wine?", a: "È un vino da uve bianche fermentate con le bucce. Il risultato è spesso ambrato, più tannico, materico e complesso." },
+  ],
+  fr: [
+    { q: "Combien de styles de vin existe-t-il ?", a: "Winerim organise le vin en 8 grandes familles et plus de 50 sous-types, des rouges et blancs aux effervescents, fortifiés, doux, orange et naturels." },
+    { q: "Pourquoi les styles comptent-ils dans la gestion d'une carte ?", a: "Le style définit température, verre, accord et attentes. Une carte structurée par styles se lit mieux et se vend plus facilement." },
+    { q: "Quelle différence entre vin fortifié et vin doux naturel ?", a: "Le vin fortifié reçoit généralement de l'alcool ajouté. Le vin doux naturel concentre le sucre par botrytis, passerillage ou gel." },
+    { q: "Qu'est-ce qu'un vin orange ?", a: "C'est un vin issu de raisins blancs fermentés avec leurs peaux. Il est souvent ambré, texturé, plus tannique et complexe." },
+  ],
+  de: [
+    { q: "Wie viele Weinstile gibt es?", a: "Winerim ordnet Wein in 8 große Familien und mehr als 50 Untertypen ein, von Rot- und Weißwein bis Schaumwein, verstärkten, süßen, orangen und naturbelassenen Weinen." },
+    { q: "Warum sind Weinstile für die Karte wichtig?", a: "Der Stil bestimmt Temperatur, Glas, Pairing und Erwartung. Eine nach Stil strukturierte Karte ist leichter zu verstehen, zu empfehlen und zu verkaufen." },
+    { q: "Was unterscheidet verstärkten Wein und natursüßen Wein?", a: "Verstärkter Wein enthält meist zugesetzten Alkohol. Natursüßer Wein konzentriert Zucker durch Botrytis, Trocknung oder Gefrieren." },
+    { q: "Was ist Orange Wine?", a: "Orange Wine wird aus weißen Trauben mit Schalenkontakt vergoren. Er ist oft bernsteinfarben, texturiert, tanninhaltiger und komplexer." },
+  ],
+  pt: [
+    { q: "Quantos estilos de vinho existem?", a: "A Winerim organiza o vinho em 8 grandes famílias e mais de 50 subtipos, de tintos e brancos a espumantes, fortificados, doces, laranja e naturais." },
+    { q: "Porque é que os estilos importam na gestão da carta?", a: "O estilo define temperatura, copo, harmonização e expectativas. Uma carta organizada por estilos é mais fácil de ler, recomendar e vender." },
+    { q: "Qual é a diferença entre vinho fortificado e doce natural?", a: "O vinho fortificado recebe normalmente álcool adicionado. O doce natural concentra açúcar por botrytis, passificação ou congelação." },
+    { q: "O que é um vinho laranja?", a: "É um vinho de uvas brancas fermentadas com as películas. Costuma ter cor âmbar, tanino, textura e maior complexidade." },
+  ],
+};
 
 const styleHubLabels: Record<string, {
   all: string;
@@ -84,6 +117,7 @@ const styleHubLabels: Record<string, {
 const StylesHub = () => {
   const { lang, localePath } = useLanguage();
   const styleLabels = styleHubLabels[String(lang)] || styleHubLabels.en;
+  const hubFaqs = faqsByLang[String(lang)] || faqsByLang.en;
   const [search, setSearch] = useState("");
   const [familyFilter, setFamilyFilter] = useState<StyleFamily | "all">("all");
   const [showFilters, setShowFilters] = useState(false);
@@ -100,6 +134,17 @@ const StylesHub = () => {
     [lang, styleLabels]
   );
   const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const collectionSchema = useMemo(
+    () => buildWineLibraryCollectionSchema({
+      lang,
+      hub: "styles",
+      title: ui.sections.styles,
+      description: ui.hubs.stylesIntro,
+      path: "/biblioteca-vino/estilos",
+      libraryName: ui.libraryName,
+    }),
+    [lang, ui]
+  );
 
   const filtered = useMemo(() => {
     let results = styleEntries;
@@ -124,6 +169,7 @@ const StylesHub = () => {
         description={ui.hubs.stylesIntro}
         url={getWineLibraryUrl(lang, "/biblioteca-vino/estilos")}
         hreflang={getWineLibraryHreflang("/biblioteca-vino/estilos")}
+        structuredData={collectionSchema}
       />
       <Navbar />
 
@@ -310,14 +356,7 @@ const StylesHub = () => {
       </section>
 
       {/* FAQs */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-4xl mx-auto">
-          <ScrollReveal>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 text-center">{ui.sections.faq}</h2>
-          </ScrollReveal>
-          <FAQSection faqs={faqs} />
-        </div>
-      </section>
+      <FAQSection faqs={hubFaqs} schemaId="styles-hub" className="bg-gradient-dark" />
 
       <Footer />
     </div>

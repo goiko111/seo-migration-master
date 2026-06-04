@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import { buildWineLibraryCollectionSchema } from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
@@ -24,12 +25,44 @@ import {
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const faqs = [
-  { q: "¿Cuántas variedades de uva cubre Winerim?", a: "El catálogo de Winerim incluye más de 85 variedades de uva de más de 30 países, con información sobre sinonimias, regiones clave y notas de cata." },
-  { q: "¿Por qué importa conocer las uvas para gestionar una carta?", a: "La variedad de uva es uno de los principales ejes de decisión del comensal. Entender qué comunica cada uva, cómo se percibe y con qué se marida permite diseñar cartas más efectivas y vender mejor." },
-  { q: "¿Qué es una variedad internacional vs. una local?", a: "Las variedades internacionales (Cabernet Sauvignon, Chardonnay, Sauvignon Blanc) se cultivan globalmente y tienen alto reconocimiento. Las locales (Mencía, Godello, Nerello Mascalese) son exclusivas de zonas concretas y aportan diferenciación." },
-  { q: "¿Qué son los sinónimos de una uva?", a: "Muchas variedades reciben diferentes nombres según el país o región. Tempranillo es Tinto Fino en Ribera del Duero, Cencibel en La Mancha y Tinta Roriz en Portugal. Son la misma uva." },
-];
+const faqsByLang: Record<string, { q: string; a: string }[]> = {
+  es: [
+    { q: "¿Cuántas variedades de uva cubre Winerim?", a: "El catálogo de Winerim incluye más de 85 variedades de uva de más de 30 países, con sinonimias, regiones clave y notas de cata." },
+    { q: "¿Por qué importa conocer las uvas para gestionar una carta?", a: "La variedad de uva es uno de los principales ejes de decisión del comensal. Entender qué comunica cada uva, cómo se percibe y con qué se marida permite diseñar cartas más efectivas." },
+    { q: "¿Qué es una variedad internacional frente a una local?", a: "Las variedades internacionales se cultivan globalmente y tienen alto reconocimiento. Las locales o diferenciales aportan identidad territorial y ayudan a distinguir una carta." },
+    { q: "¿Qué son los sinónimos de una uva?", a: "Muchas variedades reciben nombres distintos según país o región. Tempranillo puede aparecer como Tinto Fino, Cencibel o Tinta Roriz, según el contexto." },
+  ],
+  en: [
+    { q: "How many grape varieties does Winerim cover?", a: "The Winerim catalogue covers 85+ grape varieties from more than 30 countries, with synonyms, key regions and tasting notes." },
+    { q: "Why do grapes matter for wine-list management?", a: "Grape variety is one of the clearest decision cues for guests. Knowing what each grape signals helps teams design sharper lists and recommend with confidence." },
+    { q: "What is the difference between international and local grapes?", a: "International grapes have global recognition. Local or distinctive grapes add identity, discovery and a stronger sense of place to the list." },
+    { q: "What are grape synonyms?", a: "Many grapes have different names by country or region. Tempranillo can appear as Tinto Fino, Cencibel or Tinta Roriz depending on the market." },
+  ],
+  it: [
+    { q: "Quanti vitigni copre Winerim?", a: "Il catalogo Winerim include oltre 85 vitigni di più di 30 paesi, con sinonimi, regioni chiave e note di degustazione." },
+    { q: "Perché i vitigni sono importanti nella gestione della carta?", a: "Il vitigno è uno dei segnali più chiari per l'ospite. Capire cosa comunica aiuta a costruire carte più leggibili e a raccomandare meglio." },
+    { q: "Che differenza c'è tra vitigni internazionali e locali?", a: "I vitigni internazionali hanno riconoscibilità globale. Quelli locali o distintivi portano identità territoriale, scoperta e differenziazione." },
+    { q: "Cosa sono i sinonimi di un vitigno?", a: "Molti vitigni cambiano nome secondo paese o regione. Tempranillo può apparire come Tinto Fino, Cencibel o Tinta Roriz." },
+  ],
+  fr: [
+    { q: "Combien de cépages Winerim couvre-t-il ?", a: "Le catalogue Winerim couvre plus de 85 cépages issus de plus de 30 pays, avec synonymes, régions clés et notes de dégustation." },
+    { q: "Pourquoi les cépages comptent-ils dans la gestion d'une carte ?", a: "Le cépage est un repère de décision très lisible pour le client. Savoir ce qu'il communique aide à structurer la carte et à mieux recommander." },
+    { q: "Quelle différence entre cépages internationaux et locaux ?", a: "Les cépages internationaux sont largement reconnus. Les cépages locaux ou différenciants apportent identité, découverte et profondeur à la carte." },
+    { q: "Que sont les synonymes d'un cépage ?", a: "De nombreux cépages portent des noms différents selon le pays ou la région. Tempranillo peut devenir Tinto Fino, Cencibel ou Tinta Roriz." },
+  ],
+  de: [
+    { q: "Wie viele Rebsorten deckt Winerim ab?", a: "Der Winerim-Katalog umfasst mehr als 85 Rebsorten aus über 30 Ländern, inklusive Synonymen, Schlüsselregionen und Verkostungsnotizen." },
+    { q: "Warum sind Rebsorten für die Weinkarte wichtig?", a: "Die Rebsorte ist für Gäste ein klarer Entscheidungspunkt. Wer ihre Wirkung versteht, kann Karten besser strukturieren und sicherer empfehlen." },
+    { q: "Was unterscheidet internationale und lokale Rebsorten?", a: "Internationale Rebsorten haben hohe Wiedererkennung. Lokale oder differenzierende Sorten bringen Herkunft, Entdeckung und Profil in die Karte." },
+    { q: "Was sind Synonyme einer Rebsorte?", a: "Viele Rebsorten tragen je nach Land oder Region unterschiedliche Namen. Tempranillo kann als Tinto Fino, Cencibel oder Tinta Roriz erscheinen." },
+  ],
+  pt: [
+    { q: "Quantas castas cobre a Winerim?", a: "O catálogo da Winerim inclui mais de 85 castas de mais de 30 países, com sinónimos, regiões-chave e notas de prova." },
+    { q: "Porque é que as castas importam na gestão da carta?", a: "A casta é uma das pistas de decisão mais claras para o cliente. Entender o que comunica ajuda a desenhar cartas melhores e a recomendar com segurança." },
+    { q: "Qual é a diferença entre castas internacionais e locais?", a: "As castas internacionais têm reconhecimento global. As locais ou diferenciais acrescentam identidade, descoberta e profundidade à carta." },
+    { q: "O que são sinónimos de uma casta?", a: "Muitas castas têm nomes diferentes conforme o país ou a região. Tempranillo pode surgir como Tinto Fino, Cencibel ou Tinta Roriz." },
+  ],
+};
 
 const grapeHubLabels: Record<string, { all: string; redFilter: string; whiteFilter: string; red: string; white: string }> = {
   es: { all: "Todas", redFilter: "🍷 Tintas", whiteFilter: "🥂 Blancas", red: "Tintas", white: "Blancas" },
@@ -43,6 +76,7 @@ const grapeHubLabels: Record<string, { all: string; redFilter: string; whiteFilt
 const GrapesHub = () => {
   const { lang, localePath } = useLanguage();
   const grapeLabels = grapeHubLabels[String(lang)] || grapeHubLabels.en;
+  const hubFaqs = faqsByLang[String(lang)] || faqsByLang.en;
   const [search, setSearch] = useState("");
   const [colorFilter, setColorFilter] = useState<GrapeColor | "all">("all");
   const [countryFilter, setCountryFilter] = useState<string>("");
@@ -97,6 +131,17 @@ const GrapesHub = () => {
   }, [featured, differential]);
 
   const hasActiveFilters = colorFilter !== "all" || !!countryFilter || !!search.trim();
+  const collectionSchema = useMemo(
+    () => buildWineLibraryCollectionSchema({
+      lang,
+      hub: "grapes",
+      title: ui.sections.grapes,
+      description: ui.hubs.grapesIntro(tintas, blancas),
+      path: "/biblioteca-vino/uvas",
+      libraryName: ui.libraryName,
+    }),
+    [lang, ui, tintas, blancas]
+  );
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -105,6 +150,7 @@ const GrapesHub = () => {
         description={ui.hubs.grapesIntro(tintas, blancas)}
         url={getWineLibraryUrl(lang, "/biblioteca-vino/uvas")}
         hreflang={getWineLibraryHreflang("/biblioteca-vino/uvas")}
+        structuredData={collectionSchema}
       />
       <Navbar />
 
@@ -292,15 +338,15 @@ const GrapesHub = () => {
               return (
                 <div key={color} className="mb-12 last:mb-0">
                   <h3 className="font-heading text-xl font-semibold mb-6 flex items-center gap-2">
-                    <span>{colorLabels[color].emoji}</span> {colorLabels[color].label}
+                    <span>{colorLabels[color].emoji}</span> {color === "tinta" ? grapeLabels.red : grapeLabels.white}
                     <span className="text-sm text-muted-foreground font-normal">({grapes.length})</span>
                   </h3>
-                  <CatalogGrid grapes={grapes} linkTo={linkTo} />
+                  <CatalogGrid grapes={grapes} linkTo={linkTo} guideLabel={ui.badges.guide} />
                 </div>
               );
             })
           ) : (
-            <CatalogGrid grapes={filtered} linkTo={linkTo} />
+            <CatalogGrid grapes={filtered} linkTo={linkTo} guideLabel={ui.badges.guide} />
           )}
 
           {filtered.length === 0 && (
@@ -312,7 +358,7 @@ const GrapesHub = () => {
       </section>
 
       {/* FAQ */}
-      <FAQSection faqs={faqs} schemaId="grapes-hub" />
+      <FAQSection faqs={hubFaqs} schemaId="grapes-hub" />
 
       {/* CTA */}
       <section className="section-padding">
@@ -369,7 +415,7 @@ const GrapeCard = ({ grape, linkTo }: { grape: { slug: string; name: string; des
   </Link>
 );
 
-const CatalogGrid = ({ grapes, linkTo }: { grapes: LocalizedGrapeCatalogEntry[]; linkTo: (path: string) => string }) => (
+const CatalogGrid = ({ grapes, linkTo, guideLabel }: { grapes: LocalizedGrapeCatalogEntry[]; linkTo: (path: string) => string; guideLabel: string }) => (
   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {grapes.map((grape) => {
       const isFull = hasFullEntry(grape.slug);
@@ -395,7 +441,7 @@ const CatalogGrid = ({ grapes, linkTo }: { grapes: LocalizedGrapeCatalogEntry[];
               <span key={r} className="text-[10px] bg-wine/8 text-wine px-1.5 py-0.5 rounded">{r}</span>
             ))}
             {isFull && (
-              <Badge variant="outline" className="text-[10px] px-1.5 py-0 h-4 border-wine/20 text-wine ml-auto">Guía</Badge>
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0 h-4 border-wine/20 text-wine ml-auto">{guideLabel}</Badge>
             )}
           </div>
         </Link>

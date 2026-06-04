@@ -2896,3 +2896,63 @@
 - Monitorizar en Search Console cobertura, impresiones y CTR de los 18 artículos del cluster completo.
 - Revisar si quedan residuos de UI española en otros tipos de páginas internacionales, especialmente herramientas y recursos legacy.
 - Extraer en el futuro reglas compartidas de rutas/enlaces de artículos para reducir duplicación entre React y `prerender`.
+
+## Actualización 2026-06-04: schema e i18n de hubs de biblioteca del vino
+
+## Hechos
+
+- Se continuó tras revisar `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repositorio estaba limpio, en `main`, alineado con `origin/main`, antes de empezar este bloque.
+- Se añadió soporte en `SEOHead` para recibir `structuredData` explícito y evitar que los hubs de biblioteca hereden schema genérico de `SoftwareApplication`.
+- Se creó `src/components/seo/wineLibrarySchema.ts` para generar JSON-LD de hubs con `CollectionPage`, `DefinedTermSet`, `ItemList` y `BreadcrumbList`.
+- `BibliotecaVino`, `GrapesHub`, `RegionsHub`, `StylesHub` y `PairingsHub` ya emiten schema específico de biblioteca del vino en frontend.
+- Se localizaron las FAQs visibles de los hubs en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se corrigieron residuos de UI española en hubs:
+  - `GrapesHub`: etiquetas de color y badge `Guía`;
+  - `RegionsHub`: subtítulo fijo en inglés y roles de carta en español.
+- Se actualizó `supabase/functions/prerender/index.ts` para:
+  - emitir `ItemList` en páginas `CollectionPage`;
+  - localizar encabezado de FAQ;
+  - localizar navegación, footer y descripción de Organization;
+  - añadir FAQs útiles en hubs de sección;
+  - localizar etiquetas de rutas estratégicas de biblioteca del vino para bots.
+- Verificación local del prerender como Googlebot:
+  - `/en/wine-library/grapes`;
+  - `/pt/biblioteca-vinho/harmonizacoes`;
+  - `/de/weinbibliothek/rebsorten`.
+- Verificaciones ejecutadas:
+  - ESLint dirigido en archivos tocados;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npm run test -- --run`: 8 archivos, 38 tests;
+  - `npm run build`;
+  - `git diff --check`.
+- El build mantiene avisos no bloqueantes de Browserslist desactualizado y chunks grandes.
+- Este bloque todavía requiere publicación de frontend en Lovable y despliegue de la Edge Function `prerender` para verse en producción.
+
+## Decisiones
+
+- Tratar los hubs de biblioteca como `CollectionPage` con `ItemList`, no como `SoftwareApplication`.
+- Mantener los slugs de URL estables aunque las etiquetas visibles se localicen por idioma.
+- Mantener por ahora la matriz de rutas estratégicas en el componente visible y reutilizarla para schema, para evitar divergencias entre UI y JSON-LD.
+- Priorizar paridad entre React humano y prerender para bots antes de ampliar más volumen editorial.
+
+## Hipótesis
+
+- El schema específico de hubs debería mejorar la comprensión de Google y LLMs sobre la arquitectura de la biblioteca del vino.
+- La localización del HTML prerenderizado debería reducir señales contradictorias en rutas internacionales.
+- El impacto en Search Console dependerá de publicar el frontend, desplegar `prerender` y esperar recrawl.
+
+## Tareas pendientes
+
+- Crear commit y push de este bloque.
+- Publicar frontend desde Lovable.
+- Desplegar explícitamente la Edge Function `prerender`.
+- Revalidar producción como Googlebot en muestras `en`, `pt` y `de`.
+- Continuar con schema de entidades de detalle:
+  - `GrapeDetail`;
+  - `RegionDetail`;
+  - `StyleDetail`;
+  - `PairingDetail`;
+  - `BibliotecaDetalle`.
+- Revisar si detalle de entidades duplica Article JSON-LD y decidir consolidación.
+- Continuar la indexación selectiva pendiente en Search Console tras validar producción.

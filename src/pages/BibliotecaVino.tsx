@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
+import { buildWineLibraryCollectionSchema } from "@/components/seo/wineLibrarySchema";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { familyOrder } from "@/data/stylesLibrary";
@@ -102,6 +103,17 @@ const BibliotecaVino = () => {
   const pairings = useMemo(() => getLocalizedPairingEntries(lang), [lang]);
   const linkTo = (path: string) => getWineLibraryPath(lang, path);
   const searchIndex = useMemo(() => buildSearchIndex(grapes, countries, styles, pairings, lang, ui), [grapes, countries, styles, pairings, lang, ui]);
+  const collectionSchema = useMemo(
+    () => buildWineLibraryCollectionSchema({
+      lang,
+      hub: "library",
+      title: ui.libraryName,
+      description: ui.homeIntro,
+      path: "/biblioteca-vino",
+      libraryName: ui.libraryName,
+    }),
+    [lang, ui]
+  );
 
   useEffect(() => {
     if (!search.trim()) { setSearchResults([]); return; }
@@ -116,6 +128,7 @@ const BibliotecaVino = () => {
         description={ui.homeIntro}
         url={getWineLibraryUrl(lang, "/biblioteca-vino")}
         hreflang={getWineLibraryHreflang("/biblioteca-vino")}
+        structuredData={collectionSchema}
       />
       <Navbar />
 

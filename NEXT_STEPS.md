@@ -2039,3 +2039,54 @@
    - schema por hub y entidad;
    - más profundidad editorial en entidades con impresiones;
    - fuente compartida para reglas de enlaces/rutas entre frontend y `prerender`.
+
+## Actualización 2026-06-04: listo para publicar schema/i18n de hubs
+
+## Hechos
+
+- Se implementó el primer bloque de schema por hub de biblioteca del vino.
+- Los hubs principales ahora tienen JSON-LD específico en frontend:
+  - `CollectionPage`;
+  - `DefinedTermSet`;
+  - `ItemList`;
+  - `BreadcrumbList`.
+- `prerender` quedó preparado para servir hubs internacionales con `ItemList`, FAQs y navegación/footer localizados.
+- Las FAQs de hubs visibles quedaron localizadas en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se corrigieron residuos de UI en `GrapesHub` y `RegionsHub`.
+- Validaciones locales completadas:
+  - ESLint dirigido;
+  - Deno check;
+  - tests;
+  - build;
+  - `git diff --check`;
+  - muestras prerender locales como Googlebot.
+
+## Decisiones
+
+- Publicar primero la capa estructural de hubs antes de seguir con más volumen editorial.
+- Mantener slugs estables y localizar solo labels/contenido visible.
+- Tratar la matriz estratégica de enlaces como fuente compartida provisional entre UI y schema.
+
+## Hipótesis
+
+- La biblioteca del vino debería ganar claridad semántica para buscadores y LLMs tras publicar este bloque.
+- La mejora será visible en producción solo después de deploy Lovable, deploy de `prerender` y recrawl.
+
+## Tareas pendientes listas para retomar
+
+1. Publicación:
+   - hacer push del commit de este bloque;
+   - publicar frontend desde Lovable;
+   - desplegar explícitamente Edge Function `prerender`.
+2. Revalidación producción:
+   - Googlebot en `/en/wine-library/grapes`;
+   - Googlebot en `/pt/biblioteca-vinho/harmonizacoes`;
+   - Googlebot en `/de/weinbibliothek/rebsorten`;
+   - comprobar `ItemList`, FAQ localizada, navegación localizada y ausencia de residuos españoles en header/footer.
+3. Siguiente bloque de biblioteca:
+   - schema de detalle para uvas, regiones, estilos y maridajes;
+   - revisar duplicación de Article JSON-LD en detalle;
+   - enriquecer entidades con datos de mayor intención SEO.
+4. Search Console:
+   - continuar indexación selectiva después de validar producción;
+   - medir cobertura e impresiones del cluster internacional antes de abrir otro cluster editorial grande.

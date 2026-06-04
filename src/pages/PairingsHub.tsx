@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import { buildWineLibraryCollectionSchema } from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
@@ -23,12 +24,44 @@ import {
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const faqs = [
-  { q: "¿Cuántas categorías de maridaje cubre Winerim?", a: "Winerim organiza los maridajes en 10 grandes categorías gastronómicas: carnes rojas, aves y caza, pescados y mariscos, quesos, pasta/arroces/legumbres, verduras, embutidos, postres, cocina asiática y tapas. Cada una con principios, combinaciones y lectura comercial." },
-  { q: "¿El maridaje tiene reglas fijas?", a: "No hay reglas absolutas, pero sí principios que funcionan. La intensidad del plato debe equilibrarse con la del vino. La grasa pide acidez o taninos. El picante pide dulzura residual. Las salsas suelen importar más que el ingrediente principal." },
-  { q: "¿Por qué importa el maridaje para un restaurante?", a: "Un buen maridaje mejora la experiencia del comensal, facilita la venta de vino, sube el ticket medio y genera percepción de profesionalidad. Es una de las palancas comerciales más directas." },
-  { q: "¿Un rosado sirve para todo?", a: "El rosado es uno de los vinos más versátiles para maridaje. Funciona con ensaladas, tapas, cocina mediterránea, asiática y muchos platos ligeros. Es un gran comodín, pero no cubre todo el espectro." },
-];
+const faqsByLang: Record<string, { q: string; a: string }[]> = {
+  es: [
+    { q: "¿Cuántas categorías de maridaje cubre Winerim?", a: "Winerim organiza los maridajes en 10 grandes categorías gastronómicas, con principios, combinaciones y lectura comercial para servicio en restaurante." },
+    { q: "¿El maridaje tiene reglas fijas?", a: "No hay reglas absolutas, pero sí principios útiles: intensidad con intensidad, grasa con acidez, dulzor con dulzor y atención especial a la salsa." },
+    { q: "¿Por qué importa el maridaje para un restaurante?", a: "Un buen maridaje mejora la experiencia, facilita la venta de vino, eleva el ticket medio y da más seguridad al equipo de sala." },
+    { q: "¿Un rosado sirve para todo?", a: "El rosado es muy versátil para tapas, cocina mediterránea, platos ligeros y algunas recetas asiáticas, pero no sustituye todas las familias de vino." },
+  ],
+  en: [
+    { q: "How many pairing categories does Winerim cover?", a: "Winerim organizes pairings into 10 major food categories, with principles, recommended combinations and commercial language for restaurant service." },
+    { q: "Are wine pairings fixed rules?", a: "No. They are practical principles: match intensity, use acidity with fat, keep wine at least as sweet as dessert and pay close attention to sauces." },
+    { q: "Why do pairings matter for restaurants?", a: "Good pairing improves the guest experience, makes wine easier to sell, lifts average ticket and gives the floor team more confidence." },
+    { q: "Can rosé pair with everything?", a: "Rosé is very versatile with tapas, Mediterranean food, lighter dishes and some Asian recipes, but it does not replace every wine family." },
+  ],
+  it: [
+    { q: "Quante categorie di abbinamento copre Winerim?", a: "Winerim organizza gli abbinamenti in 10 grandi categorie gastronomiche, con principi, combinazioni e lettura commerciale per il servizio." },
+    { q: "Gli abbinamenti hanno regole fisse?", a: "No. Esistono principi pratici: intensità con intensità, acidità con grasso, dolcezza con dolcezza e grande attenzione alla salsa." },
+    { q: "Perché gli abbinamenti contano per un ristorante?", a: "Un buon abbinamento migliora l'esperienza, facilita la vendita del vino, aumenta lo scontrino medio e dà sicurezza alla sala." },
+    { q: "Il rosato va bene con tutto?", a: "Il rosato è molto versatile con tapas, cucina mediterranea, piatti leggeri e alcune ricette asiatiche, ma non sostituisce tutte le famiglie di vino." },
+  ],
+  fr: [
+    { q: "Combien de catégories d'accords Winerim couvre-t-il ?", a: "Winerim organise les accords en 10 grandes catégories gastronomiques, avec principes, combinaisons et lecture commerciale pour le service." },
+    { q: "Les accords ont-ils des règles fixes ?", a: "Non. Il s'agit de principes pratiques : intensité avec intensité, gras avec acidité, douceur avec douceur et attention particulière aux sauces." },
+    { q: "Pourquoi les accords comptent-ils pour un restaurant ?", a: "Un bon accord améliore l'expérience, facilite la vente du vin, augmente le ticket moyen et donne plus d'assurance à l'équipe." },
+    { q: "Le rosé va-t-il avec tout ?", a: "Le rosé est très polyvalent avec tapas, cuisine méditerranéenne, plats légers et certaines recettes asiatiques, mais il ne remplace pas toutes les familles de vin." },
+  ],
+  de: [
+    { q: "Wie viele Pairing-Kategorien deckt Winerim ab?", a: "Winerim ordnet Pairings in 10 große gastronomische Kategorien ein, mit Prinzipien, Kombinationen und Verkaufssprache für den Service." },
+    { q: "Gibt es feste Regeln für Pairings?", a: "Nein. Es gibt praktische Prinzipien: Intensität zu Intensität, Fett mit Säure, Süße mit Süße und besondere Aufmerksamkeit für Saucen." },
+    { q: "Warum sind Pairings für Restaurants wichtig?", a: "Ein gutes Pairing verbessert das Gästeerlebnis, erleichtert den Weinverkauf, erhöht den Durchschnittsbon und gibt dem Team Sicherheit." },
+    { q: "Passt Rosé zu allem?", a: "Rosé ist sehr vielseitig zu Tapas, mediterraner Küche, leichten Gerichten und manchen asiatischen Rezepten, ersetzt aber nicht jede Weinfamilie." },
+  ],
+  pt: [
+    { q: "Quantas categorias de harmonização cobre a Winerim?", a: "A Winerim organiza harmonizações em 10 grandes categorias gastronómicas, com princípios, combinações e leitura comercial para serviço." },
+    { q: "A harmonização tem regras fixas?", a: "Não. Existem princípios práticos: intensidade com intensidade, gordura com acidez, doçura com doçura e atenção especial aos molhos." },
+    { q: "Porque é que a harmonização importa num restaurante?", a: "Uma boa harmonização melhora a experiência, facilita a venda de vinho, aumenta o ticket médio e dá mais confiança à equipa." },
+    { q: "Um rosé serve para tudo?", a: "O rosé é muito versátil com tapas, cozinha mediterrânica, pratos leves e algumas receitas asiáticas, mas não substitui todas as famílias de vinho." },
+  ],
+};
 
 const pairingHubLabels: Record<string, {
   all: string;
@@ -119,12 +152,24 @@ const pairingHubLabels: Record<string, {
 const PairingsHub = () => {
   const { lang, localePath } = useLanguage();
   const pairingLabels = pairingHubLabels[String(lang)] || pairingHubLabels.en;
+  const hubFaqs = faqsByLang[String(lang)] || faqsByLang.en;
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<PairingCategory | "all">("all");
   const [showFilters, setShowFilters] = useState(false);
   const ui = useMemo(() => getWineLibraryUi(lang), [lang]);
   const pairingEntries = useMemo(() => getLocalizedPairingEntries(lang), [lang]);
   const linkTo = (path: string) => getWineLibraryPath(lang, path);
+  const collectionSchema = useMemo(
+    () => buildWineLibraryCollectionSchema({
+      lang,
+      hub: "pairings",
+      title: ui.sections.pairings,
+      description: ui.hubs.pairingsIntro,
+      path: "/biblioteca-vino/maridajes",
+      libraryName: ui.libraryName,
+    }),
+    [lang, ui]
+  );
 
   const filtered = useMemo(() => {
     let results = pairingEntries;
@@ -151,6 +196,7 @@ const PairingsHub = () => {
         description={ui.hubs.pairingsIntro}
         url={getWineLibraryUrl(lang, "/biblioteca-vino/maridajes")}
         hreflang={getWineLibraryHreflang("/biblioteca-vino/maridajes")}
+        structuredData={collectionSchema}
       />
       <Navbar />
 
@@ -301,12 +347,7 @@ const PairingsHub = () => {
       </section>
 
       {/* FAQs */}
-      <section className="section-padding bg-gradient-dark">
-        <div className="max-w-4xl mx-auto">
-          <ScrollReveal><h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 text-center">{ui.sections.faq}</h2></ScrollReveal>
-          <FAQSection faqs={faqs} />
-        </div>
-      </section>
+      <FAQSection faqs={hubFaqs} schemaId="pairings-hub" className="bg-gradient-dark" />
 
       <Footer />
     </div>

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import { buildWineLibraryCollectionSchema } from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import StrategicWineLibraryRoutes from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { Input } from "@/components/ui/input";
@@ -14,12 +15,44 @@ import { getLocalizedCountries, getLocalizedRegions } from "@/data/regionsLibrar
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, normalizeWineSearch } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const faqs = [
-  { q: "¿Cuántas regiones vinícolas cubre Winerim?", a: "El catálogo de Winerim incluye más de 3.700 denominaciones, regiones e indicaciones geográficas de más de 40 países, con información de más de 95.000 bodegas." },
-  { q: "¿Qué diferencia hay entre DO, AOP, AVA y DOC?", a: "Son sistemas de clasificación de distintos países: DO (España), AOP (Francia), AVA (EE.UU.) y DOC (Italia/Portugal). Todos definen zonas geográficas con reglas de producción, pero con diferencias en restricciones y requisitos." },
-  { q: "¿Por qué importa conocer las regiones para gestionar una carta?", a: "La región es uno de los principales factores de decisión del comensal. Entender qué comunica cada región permite diseñar cartas más efectivas, con un equilibrio inteligente entre regiones seguras y diferenciales." },
-  { q: "¿Cómo usa Winerim esta información?", a: "Winerim integra el conocimiento de regiones directamente en la experiencia de gestión de carta: recomendaciones, benchmarks, pricing inteligente y herramientas de decisión que tienen en cuenta la percepción y el rol comercial de cada denominación." },
-];
+const faqsByLang: Record<string, { q: string; a: string }[]> = {
+  es: [
+    { q: "¿Cuántas regiones vinícolas cubre Winerim?", a: "El catálogo de Winerim incluye más de 3.700 denominaciones, regiones e indicaciones geográficas de más de 40 países, con información de más de 95.000 bodegas." },
+    { q: "¿Qué diferencia hay entre DO, AOP, AVA y DOC?", a: "Son sistemas de clasificación de distintos países. Todos delimitan zonas geográficas con reglas de producción, aunque cambian los requisitos, el prestigio y la lectura comercial." },
+    { q: "¿Por qué importa conocer las regiones para gestionar una carta?", a: "La región es un factor clave de decisión. Entender qué comunica cada denominación permite equilibrar referencias seguras, diferenciales y premium." },
+    { q: "¿Cómo usa Winerim esta información?", a: "Winerim conecta regiones con recomendaciones, benchmarks, pricing y herramientas de decisión que tienen en cuenta percepción, origen y rol comercial." },
+  ],
+  en: [
+    { q: "How many wine regions does Winerim cover?", a: "Winerim covers 3,700+ denominations, regions and geographical indications across 40+ countries, with data from more than 95,000 wineries." },
+    { q: "What is the difference between DO, AOP, AVA and DOC?", a: "They are national classification systems. Each defines a geographic wine area with production rules, but requirements, prestige and commercial meaning vary by country." },
+    { q: "Why do regions matter for wine-list management?", a: "Region is a major decision cue for guests. It helps teams balance safe, distinctive and premium references with clearer positioning." },
+    { q: "How does Winerim use this information?", a: "Winerim connects regions with recommendations, benchmarks, pricing and decision tools that account for perception, origin and commercial role." },
+  ],
+  it: [
+    { q: "Quante regioni vinicole copre Winerim?", a: "Winerim copre oltre 3.700 denominazioni, regioni e indicazioni geografiche in più di 40 paesi, con dati di oltre 95.000 cantine." },
+    { q: "Che differenza c'è tra DO, AOP, AVA e DOC?", a: "Sono sistemi nazionali di classificazione. Definiscono aree geografiche e regole produttive, ma cambiano requisiti, prestigio e lettura commerciale." },
+    { q: "Perché le regioni contano nella gestione della carta?", a: "La regione è un riferimento decisivo per l'ospite. Aiuta a bilanciare referenze sicure, distintive e premium con un posizionamento più chiaro." },
+    { q: "Come usa Winerim queste informazioni?", a: "Winerim collega regioni a raccomandazioni, benchmark, pricing e strumenti decisionali che considerano percezione, origine e ruolo commerciale." },
+  ],
+  fr: [
+    { q: "Combien de régions viticoles Winerim couvre-t-il ?", a: "Winerim couvre plus de 3 700 appellations, régions et indications géographiques dans plus de 40 pays, avec des données sur plus de 95 000 domaines." },
+    { q: "Quelle différence entre DO, AOP, AVA et DOC ?", a: "Ce sont des systèmes nationaux de classification. Ils définissent une zone et des règles de production, mais les exigences, le prestige et la lecture commerciale varient." },
+    { q: "Pourquoi les régions comptent-elles dans une carte des vins ?", a: "La région est un repère de décision majeur. Elle aide à équilibrer références sûres, différenciantes et premium." },
+    { q: "Comment Winerim utilise-t-il ces informations ?", a: "Winerim relie régions, recommandations, benchmarks, pricing et outils de décision en tenant compte de la perception, de l'origine et du rôle commercial." },
+  ],
+  de: [
+    { q: "Wie viele Weinregionen deckt Winerim ab?", a: "Winerim umfasst mehr als 3.700 Herkunftsbezeichnungen, Regionen und geografische Angaben in über 40 Ländern, mit Daten zu mehr als 95.000 Weingütern." },
+    { q: "Was ist der Unterschied zwischen DO, AOP, AVA und DOC?", a: "Das sind nationale Klassifikationssysteme. Sie definieren Herkunftsgebiete und Produktionsregeln, unterscheiden sich aber in Anforderungen, Prestige und kommerzieller Wirkung." },
+    { q: "Warum sind Regionen für die Weinkarte wichtig?", a: "Regionen sind ein zentraler Entscheidungspunkt für Gäste. Sie helfen, sichere, differenzierende und Premium-Referenzen klar zu positionieren." },
+    { q: "Wie nutzt Winerim diese Informationen?", a: "Winerim verbindet Regionen mit Empfehlungen, Benchmarks, Pricing und Entscheidungstools, die Wahrnehmung, Herkunft und kommerzielle Rolle berücksichtigen." },
+  ],
+  pt: [
+    { q: "Quantas regiões vinícolas cobre a Winerim?", a: "A Winerim cobre mais de 3.700 denominações, regiões e indicações geográficas em mais de 40 países, com dados de mais de 95.000 adegas." },
+    { q: "Qual é a diferença entre DO, AOP, AVA e DOC?", a: "São sistemas nacionais de classificação. Definem zonas geográficas e regras de produção, mas variam em requisitos, prestígio e leitura comercial." },
+    { q: "Porque é que as regiões importam na gestão da carta?", a: "A região é uma pista de decisão forte para o cliente. Ajuda a equilibrar referências seguras, diferenciais e premium." },
+    { q: "Como é que a Winerim usa esta informação?", a: "A Winerim liga regiões a recomendações, benchmarks, pricing e ferramentas de decisão que consideram perceção, origem e papel comercial." },
+  ],
+};
 
 type SearchResult = {
   type: "country" | "denomination";
@@ -33,42 +66,49 @@ const regionHubLabels: Record<string, {
   wineriesInDb: string;
   types: string;
   wineries: string;
+  roles: Record<string, string>;
   noResults: (search: string) => string;
 }> = {
   es: {
     wineriesInDb: "Bodegas en BD",
     types: "Tipos",
     wineries: "bodegas",
+    roles: { segura: "Segura", diferencial: "Diferencial", premium: "Premium", identitaria: "Identitaria", prestigio: "Prestigio", descubrimiento: "Descubrimiento", valor: "Valor" },
     noResults: (search) => `No se encontraron países ni denominaciones que coincidan con "${search}"`,
   },
   en: {
     wineriesInDb: "Wineries in DB",
     types: "Types",
     wineries: "wineries",
+    roles: { segura: "Reliable", diferencial: "Differentiating", premium: "Premium", identitaria: "Identity", prestigio: "Prestige", descubrimiento: "Discovery", valor: "Value" },
     noResults: (search) => `No countries or denominations match "${search}"`,
   },
   it: {
     wineriesInDb: "Cantine in DB",
     types: "Tipi",
     wineries: "cantine",
+    roles: { segura: "Sicura", diferencial: "Differenziante", premium: "Premium", identitaria: "Identitaria", prestigio: "Prestigio", descubrimiento: "Scoperta", valor: "Valore" },
     noResults: (search) => `Nessun paese o denominazione corrisponde a "${search}"`,
   },
   fr: {
     wineriesInDb: "Domaines en base",
     types: "Types",
     wineries: "domaines",
+    roles: { segura: "Sûre", diferencial: "Différenciante", premium: "Premium", identitaria: "Identitaire", prestigio: "Prestige", descubrimiento: "Découverte", valor: "Valeur" },
     noResults: (search) => `Aucun pays ni appellation ne correspond à "${search}"`,
   },
   de: {
     wineriesInDb: "Weingüter in DB",
     types: "Typen",
     wineries: "Weingüter",
+    roles: { segura: "Verlässlich", diferencial: "Differenzierend", premium: "Premium", identitaria: "Identität", prestigio: "Prestige", descubrimiento: "Entdeckung", valor: "Wert" },
     noResults: (search) => `Keine Länder oder Herkunftsbezeichnungen passen zu "${search}"`,
   },
   pt: {
     wineriesInDb: "Adegas na BD",
     types: "Tipos",
     wineries: "adegas",
+    roles: { segura: "Segura", diferencial: "Diferencial", premium: "Premium", identitaria: "Identitária", prestigio: "Prestígio", descubrimiento: "Descoberta", valor: "Valor" },
     noResults: (search) => `Nenhum país ou denominação corresponde a "${search}"`,
   },
 };
@@ -76,6 +116,7 @@ const regionHubLabels: Record<string, {
 const RegionsHub = () => {
   const { lang, localePath } = useLanguage();
   const regionLabels = regionHubLabels[String(lang)] || regionHubLabels.en;
+  const hubFaqs = faqsByLang[String(lang)] || faqsByLang.en;
   const [search, setSearch] = useState("");
   const ui = useMemo(() => getWineLibraryUi(lang), [lang]);
   const wineCountries = useMemo(() => getLocalizedCountries(lang), [lang]);
@@ -83,6 +124,17 @@ const RegionsHub = () => {
   const linkTo = useCallback((path: string) => getWineLibraryPath(lang, path), [lang]);
 
   const totalDenominations = wineCountries.reduce((acc, c) => acc + c.denominationsCount, 0);
+  const collectionSchema = useMemo(
+    () => buildWineLibraryCollectionSchema({
+      lang,
+      hub: "regions",
+      title: ui.sections.regions,
+      description: ui.hubs.regionsIntro(wineCountries.length),
+      path: "/biblioteca-vino/regiones",
+      libraryName: ui.libraryName,
+    }),
+    [lang, ui, wineCountries.length]
+  );
 
   // Combined search across countries AND denominations
   const { filteredCountries, searchResults } = useMemo(() => {
@@ -125,6 +177,7 @@ const RegionsHub = () => {
         description={ui.hubs.regionsIntro(wineCountries.length)}
         url={getWineLibraryUrl(lang, "/biblioteca-vino/regiones")}
         hreflang={getWineLibraryHreflang("/biblioteca-vino/regiones")}
+        structuredData={collectionSchema}
       />
       <Navbar />
 
@@ -257,7 +310,6 @@ const RegionsHub = () => {
                           <h3 className="font-heading text-lg font-semibold group-hover:text-wine transition-colors">
                             {country.name}
                           </h3>
-                          <p className="text-xs text-muted-foreground">{country.nameEn}</p>
                         </div>
                       </div>
                       <ArrowRight size={16} className="text-muted-foreground group-hover:text-wine group-hover:translate-x-1 transition-all" />
@@ -342,8 +394,8 @@ const RegionsHub = () => {
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {region.cartaRole.slice(0, 3).map((role) => (
-                          <span key={role} className="text-xs bg-secondary/50 px-2 py-0.5 rounded-md capitalize">
-                            {role}
+                          <span key={role} className="text-xs bg-secondary/50 px-2 py-0.5 rounded-md">
+                            {regionLabels.roles[role] || role}
                           </span>
                         ))}
                         {region.bodegasCount && (
@@ -362,7 +414,7 @@ const RegionsHub = () => {
       )}
 
       {/* FAQ */}
-      <FAQSection faqs={faqs} schemaId="regions-hub" />
+      <FAQSection faqs={hubFaqs} schemaId="regions-hub" />
 
       {/* CTA */}
       <section className="section-padding">

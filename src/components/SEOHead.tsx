@@ -6,6 +6,8 @@ interface HreflangLink {
   url: string;
 }
 
+type StructuredData = Record<string, unknown>;
+
 interface SEOHeadProps {
   title: string;
   description?: string;
@@ -18,6 +20,7 @@ interface SEOHeadProps {
   wordCount?: number;
   noindex?: boolean;
   hreflang?: HreflangLink[];
+  structuredData?: StructuredData | StructuredData[];
 }
 
 const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
@@ -37,7 +40,7 @@ const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
   return hreflang?.find((h) => h.lang !== "x-default")?.lang || "es";
 };
 
-const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang }: SEOHeadProps) => {
+const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang, structuredData }: SEOHeadProps) => {
   useEffect(() => {
     const suffix = " | Winerim";
     const fullTitle = title.endsWith(suffix) || title.length > 55 ? title : `${title}${suffix}`;
@@ -143,7 +146,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       document.head.appendChild(scriptEl);
     }
 
-    if (type === "article") {
+    if (structuredData) {
+      scriptEl.textContent = JSON.stringify(structuredData);
+    } else if (type === "article") {
       const canonicalArticleUrl = url && url.startsWith("http") && !url.includes("lovable.app")
         ? url
         : `${CANONICAL_DOMAIN}${url?.startsWith("/") ? url : `/${url || ""}`}`;
@@ -259,7 +264,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       const robotsMeta = document.querySelector('meta[name="robots"]');
       if (robotsMeta) robotsMeta.remove();
     };
-  }, [title, description, image, url, type, publishedAt, modifiedAt, author, wordCount, noindex, hreflang]);
+  }, [title, description, image, url, type, publishedAt, modifiedAt, author, wordCount, noindex, hreflang, structuredData]);
 
   return null;
 };
