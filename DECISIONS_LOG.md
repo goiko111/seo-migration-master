@@ -2082,3 +2082,29 @@
 - Publish Lovable.
 - Deploy explícito de `prerender`.
 - Validación productiva Googlebot.
+
+### Publicación productiva del schema/i18n de hubs
+
+#### Hechos
+
+- Lovable publicó el frontend y quedó `Published` / `Up to date`.
+- Edge Functions `prerender`, `sitemap` y `redirects` constaban como desplegadas en Lovable.
+- Validación productiva como Googlebot correcta en `en`, `pt` y `de` para hubs de biblioteca.
+- Validación humana hidratada correcta en `/en/wine-library/grapes`.
+- Search Console no permitió acceder a `sc-domain:winerim.wine` con `gugocreative@gmail.com`.
+
+#### Decisiones
+
+- Dar por publicado el bloque técnico de hubs.
+- Bloquear la tarea de indexación manual hasta resolver permisos de Search Console.
+- Mantener Worker sin cambios.
+
+#### Hipótesis
+
+- La mejora ya está disponible para bots y usuarios, pero Search Console tardará en mostrar impacto.
+
+#### Tareas pendientes
+
+- Resolver acceso Search Console.
+- Solicitar indexación selectiva.
+- Continuar con schema de detalle de entidades.

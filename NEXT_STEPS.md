@@ -2128,3 +2128,42 @@
 4. Después:
    - retomar Search Console con indexación selectiva;
    - seguir con schema de detalle para entidades.
+
+## Actualización 2026-06-04: bloque publicado, falta acceso Search Console
+
+## Hechos
+
+- Frontend publicado desde Lovable y marcado como `Up to date`.
+- Edge Functions `prerender`, `sitemap` y `redirects` estaban desplegadas en Lovable.
+- Producción validada como Googlebot en:
+  - `/en/wine-library/grapes`;
+  - `/pt/biblioteca-vinho/harmonizacoes`;
+  - `/de/weinbibliothek/rebsorten`.
+- Las tres rutas devuelven `x-prerendered: true`, `x-worker-branch: bot-prerender`, `CollectionPage` e `ItemList`.
+- La ruta inglesa hidratada en navegador humano tiene `ItemList` y no muestra FAQ española.
+- Search Console queda bloqueado por permisos: `gugocreative@gmail.com` no puede acceder a `sc-domain:winerim.wine`.
+
+## Decisiones
+
+- Considerar cerrado el deploy del bloque schema/i18n de hubs.
+- Retomar indexación manual solo cuando Search Console tenga cuenta con permisos.
+
+## Hipótesis
+
+- El recrawl orgánico puede empezar a recoger el cambio aunque no se solicite indexación manual inmediatamente.
+- La solicitud manual acelerará la visibilidad de las tres rutas tras resolver permisos.
+
+## Tareas pendientes listas para retomar
+
+1. Search Console:
+   - cambiar a una cuenta con permisos sobre `winerim.wine` o conceder acceso a `gugocreative@gmail.com`;
+   - inspeccionar `/en/wine-library/grapes`;
+   - inspeccionar `/pt/biblioteca-vinho/harmonizacoes`;
+   - inspeccionar `/de/weinbibliothek/rebsorten`;
+   - solicitar indexación si la inspección lo permite.
+2. Después de GSC:
+   - repetir indexación selectiva para artículos internacionales prioritarios;
+   - monitorizar cobertura e impresiones.
+3. Siguiente bloque de desarrollo:
+   - schema de detalle para uvas, regiones, estilos y maridajes;
+   - resolver si conviene limpiar el `SoftwareApplication` del catálogo Organization o mantenerlo como oferta de producto.

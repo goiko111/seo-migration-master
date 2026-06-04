@@ -2983,3 +2983,41 @@
 - En Lovable, publicar el proyecto desde `main`.
 - En Lovable, desplegar explícitamente la Edge Function `prerender`.
 - Revalidar producción después del deploy antes de pedir más indexación en Search Console.
+
+## Actualización 2026-06-04: frontend publicado, prerender validado y GSC bloqueado por permisos
+
+## Hechos
+
+- Lovable quedó autenticado y accesible en el navegador de Codex para el proyecto `Web Winerim`.
+- En Lovable constaba el despliegue de Edge Functions `prerender`, `sitemap` y `redirects`.
+- Se pulsó `Publish` y Lovable mostró estado `Published` / `Up to date`.
+- Producción validada como Googlebot tras publish:
+  - `/en/wine-library/grapes`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, `CollectionPage`, `ItemList`, FAQ inglesa y navegación inglesa.
+  - `/pt/biblioteca-vinho/harmonizacoes`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, `CollectionPage`, `ItemList`, FAQ portuguesa y etiquetas localizadas como `Peixes e mariscos`, `Robalo e dourada`, `Carnes vermelhas`, `Queijos`.
+  - `/de/weinbibliothek/rebsorten`: `x-prerendered: true`, `x-worker-branch: bot-prerender`, `CollectionPage`, `ItemList`, FAQ alemana y navegación/footer alemanes.
+- Producción validada en navegador humano hidratado para `/en/wine-library/grapes`:
+  - `html lang="en"`;
+  - JSON-LD de hub con `CollectionPage|DefinedTermSet|ItemList|BreadcrumbList`;
+  - FAQ no muestra `Preguntas frecuentes`.
+- Se detectó `SoftwareApplication` dentro del JSON-LD de Organization como `itemOffered` del catálogo de planes; no sustituye al schema de hub.
+- Search Console abrió con la cuenta `gugocreative@gmail.com`, pero mostró `Vaya, no puedes acceder a esta propiedad` para `sc-domain:winerim.wine`.
+
+## Decisiones
+
+- Considerar publicado y validado en producción el bloque de schema/i18n de hubs.
+- No tocar Cloudflare Worker porque el flujo `bot-prerender` responde correctamente.
+- No solicitar indexación desde Search Console hasta tener una cuenta con acceso a la propiedad.
+
+## Hipótesis
+
+- Googlebot ya puede rastrear los hubs internacionales con schema y navegación localizada.
+- La indexación manual podrá retomarse en cuanto Search Console tenga permisos correctos.
+
+## Tareas pendientes
+
+- Cambiar en Search Console a una cuenta con acceso a `winerim.wine` o conceder acceso a `gugocreative@gmail.com`.
+- Solicitar indexación selectiva de:
+  - `/en/wine-library/grapes`;
+  - `/pt/biblioteca-vinho/harmonizacoes`;
+  - `/de/weinbibliothek/rebsorten`.
+- Después, seguir con la tanda de artículos internacionales ya validada.
