@@ -3406,3 +3406,33 @@
   - `/integraciones`;
   - recursos y benchmarks/playbooks desde hubs, blog, producto y biblioteca.
 - Retomar después `Descubierta: actualmente sin indexar`, especialmente biblioteca del vino y artículos internacionales.
+
+## Actualización 2026-06-05: intento de comunicación con Lovable
+
+## Hechos
+
+- Se retomó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio y sincronizado con `origin/main`.
+- Se intentó usar el navegador integrado para enviar a Lovable la instrucción de publicar las Edge Functions, pero la sesión no exponía ningún navegador conectado.
+- Se detectaron pestañas de Chrome abiertas en el proyecto Lovable `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- Chrome permitió listar pestañas, pero no permitió una interacción fiable con el contenido de Lovable:
+  - la ejecución de JavaScript en pestañas de Lovable quedó bloqueada;
+  - la captura de pantalla local salió negra;
+  - la capa de accesibilidad no expuso ventanas útiles de Chrome;
+  - no había `chrome-cli` ni puerto de depuración remoto disponible.
+- No hay confirmación de que Lovable haya recibido el mensaje.
+
+## Decisiones
+
+- No enviar comandos ni pegar texto a ciegas en Lovable sin localizar de forma fiable el campo de chat/instrucciones.
+- Mantener como pendiente que Lovable publique las Edge Functions de Supabase ya implementadas en el repo.
+
+## Hipótesis
+
+- La pestaña de Lovable existe en Chrome, pero esta sesión no tiene permisos/canal suficiente para automatizarla de forma segura.
+- El camino más seguro sigue siendo pegar en Lovable el mensaje operativo preparado o proporcionar `SUPABASE_ACCESS_TOKEN` para desplegar por CLI.
+
+## Tareas pendientes
+
+- Enviar a Lovable la instrucción de publicar `supabase/functions/prerender/index.ts` y `supabase/functions/sitemap/index.ts`.
+- Tras publicar desde Lovable, revalidar producción como Googlebot y decidir si se retira el puente de Worker.

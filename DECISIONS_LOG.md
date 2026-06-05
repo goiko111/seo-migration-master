@@ -2321,3 +2321,26 @@
 - Monitorizar si GSC reconoce el cambio en las seis URLs.
 - Reforzar enlaces internos hacia estas URLs desde hubs, producto, blog y biblioteca.
 - Retomar `Descubierta: actualmente sin indexar` con foco en biblioteca del vino e internacional.
+
+### Comunicación con Lovable para publicar Edge Functions
+
+#### Hechos
+
+- Se intentó enviar directamente a Lovable la instrucción operativa para publicar las Edge Functions de Supabase actualizadas.
+- La sesión no tenía navegador integrado conectado.
+- Chrome sí tenía pestañas del proyecto Winerim en Lovable, pero no se pudo interactuar de forma fiable con el contenido de la página.
+- No hay confirmación de envío a Lovable.
+
+#### Decisiones
+
+- No pegar ni enviar instrucciones a ciegas en Lovable.
+- Dejar preparado el mensaje exacto para Lovable y mantener el despliegue de Supabase como tarea pendiente.
+
+#### Hipótesis
+
+- Con navegador integrado conectado o con permisos de automatización/captura activos, se podrá enviar el mensaje directamente desde la pestaña de Lovable.
+- Alternativamente, `SUPABASE_ACCESS_TOKEN` permitiría cerrar el despliegue sin depender de Lovable.
+
+#### Tareas pendientes
+
+- Enviar el mensaje operativo a Lovable o desplegar Supabase por CLI si se proporciona token.

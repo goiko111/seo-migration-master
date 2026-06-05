@@ -2460,3 +2460,63 @@
    - biblioteca del vino;
    - páginas de recursos y guías.
 6. Retomar `Descubierta: actualmente sin indexar`, priorizando biblioteca del vino y artículos internacionales.
+
+## Actualización 2026-06-05: mensaje listo para Lovable
+
+## Hechos
+
+- Se intentó comunicar la instrucción directamente a Lovable.
+- La automatización no pudo confirmar interacción segura con la pestaña de Lovable.
+- Lovable todavía debe publicar las Edge Functions de Supabase para convertir el puente de Worker en solución de respaldo o retirarlo.
+
+## Decisiones
+
+- No considerar avisado a Lovable hasta ver confirmación explícita de envío o publicación.
+
+## Hipótesis
+
+- El Worker mantiene producción correcta mientras Lovable publica las Edge Functions.
+
+## Tareas pendientes listas para retomar
+
+1. Pegar/enviar este mensaje en el chat del proyecto Lovable `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`:
+
+```text
+Publica desde Lovable las Edge Functions de Supabase actualizadas del commit fe70c0b.
+
+Objetivo: dejar como fuente definitiva los cambios que ahora están cubiertos temporalmente por Cloudflare Worker.
+
+Cambios que deben publicarse:
+1. supabase/functions/prerender/index.ts
+   - Prerender dedicado para /recursos/*.
+   - Prerender dedicado para /benchmarks-playbooks/*.
+   - /integraciones con contenido de bot enriquecido.
+   - Override localizado para /it/prezzi.
+2. supabase/functions/sitemap/index.ts
+   - Dejar de excluir recursos y benchmarks/playbooks del sitemap.
+
+No cambies el frontend ni el Worker. El Worker ya está desplegado como puente en producción:
+670b5372-cbca-48a5-92af-8ebcfb9fb5f5.
+
+Tras publicar, validar como Googlebot:
+- /it/prezzi
+- /integraciones
+- /recursos/plantilla-formacion-equipo-sala
+- /benchmarks-playbooks/benchmark-peso-vino-ticket-medio
+- /recursos/revision-mensual-margenes
+- /sitemap.xml
+
+Esperado:
+- 200
+- index, follow
+- canonical propio
+- no canonical a /
+- schema WebPage/CreativeWork/Article según página
+- sitemap incluye las fichas de recursos/benchmarks.
+
+Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPABASE_ACCESS_TOKEN.
+```
+
+2. Tras confirmar publicación desde Lovable, revalidar producción con user-agent Googlebot.
+3. Decidir si se retira el puente de Cloudflare Worker o queda como fallback.
+4. Continuar con Search Console: monitorizar `Rastreada: actualmente sin indexar` y después atacar `Descubierta: actualmente sin indexar`.
