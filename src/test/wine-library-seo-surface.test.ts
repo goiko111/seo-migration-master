@@ -177,4 +177,42 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("LEGACY_GONE_PATHS.has(path)");
     expect(worker).toContain("'X-Worker-Branch': 'legacy-gone'");
   });
+
+  it("prerenders resource and benchmark detail pages instead of falling back to the homepage", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(prerender).toContain("const RESOURCE_DETAIL_PRERENDER_PAGES");
+    expect(prerender).toContain("function renderResourceDetailPage");
+    expect(prerender).toContain("'plantilla-formacion-equipo-sala'");
+    expect(prerender).toContain("'revision-mensual-margenes'");
+    expect(prerender).toContain("schemaType: 'CreativeWork'");
+    expect(prerender).toContain("const BENCHMARK_DETAIL_PRERENDER_PAGES");
+    expect(prerender).toContain("function renderBenchmarkPlaybookDetailPage");
+    expect(prerender).toContain("'benchmark-peso-vino-ticket-medio'");
+    expect(prerender).toContain("renderResourceDetailPage(path)");
+    expect(prerender).toContain("renderBenchmarkPlaybookDetailPage(path)");
+    expect(worker).toContain("function renderWorkerDetailPrerender");
+    expect(worker).toContain("'X-Worker-Branch': 'worker-detail-prerender'");
+    expect(worker).toContain("injectWorkerDetailUrlsIntoSitemap");
+    expect(worker).toContain("'X-Worker-Branch': 'sitemap-worker-detail-bridge'");
+    expect(worker).toContain("const STATIC_WORKER_PRERENDER_PAGES");
+    expect(worker).toContain("'/it/prezzi'");
+    expect(worker).toContain("'/integraciones'");
+    expect(worker).toContain("'X-Worker-Branch': 'worker-static-prerender'");
+  });
+
+  it("submits resource and benchmark details in the sitemap once dedicated prerender exists", () => {
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
+
+    expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");
+    expect(sitemap).toContain("{ esPath: '/recursos/revision-mensual-margenes'");
+    expect(sitemap).toContain("{ esPath: '/benchmarks-playbooks/benchmark-peso-vino-ticket-medio'");
+    expect(exclusionBlock).not.toContain("'/recursos/plantilla-formacion-equipo-sala'");
+    expect(exclusionBlock).not.toContain("'/recursos/revision-mensual-margenes'");
+    expect(exclusionBlock).not.toContain("'/benchmarks-playbooks/benchmark-peso-vino-ticket-medio'");
+    expect(exclusionBlock).toContain("'/privacidad'");
+    expect(exclusionBlock).toContain("'/terminos'");
+  });
 });

@@ -3055,6 +3055,40 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
   },
 };
 
+function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (lang === 'it' && esPath === '/precios') {
+    return {
+      title: 'Prezzi Winerim | Software carta vini per ristoranti',
+      description: 'Scopri quale piano Winerim si adatta al tuo ristorante, hotel o gruppo. Carta vini digitale, analytics, pricing, stock, integrazioni e supporto.',
+      h1: 'Prezzi Winerim',
+      subtitle: 'Piani per ristoranti, hotel e gruppi che vogliono vendere più vino, migliorare margini e gestire la carta con dati reali.',
+      intro: 'Il prezzo dipende dal numero di referenze, locali e livello di integrazione richiesto. L’obiettivo non è solo pubblicare una carta digitale, ma trasformarla in uno strumento di vendita e decisione.',
+      sections: [
+        { heading: 'Piani per ogni operazione', content: 'Starter digitalizza la carta e migliora la presentazione. Pro aggiunge analytics, pricing, raccomandazioni e controllo della rotazione. Enterprise centralizza multi-locale, integrazioni POS/PMS, API e reporting direzionale.' },
+        { heading: 'Cosa cambia con Winerim', content: 'Winerim aiuta a migliorare ticket medio del vino, identificare stock fermo, ottimizzare prezzi, formare il team e misurare l’impatto delle decisioni sulla carta.' },
+        { heading: 'Come scegliere il piano', content: 'Un ristorante indipendente può iniziare con Starter o Pro. Un gastronomico, wine bar o hotel richiede Pro o Enterprise. Un gruppo multi-locale dovrebbe partire da Enterprise per governance e benchmarking.' },
+      ],
+      faqs: [
+        { q: 'Come si calcola il prezzo di Winerim?', a: 'Dipende da referenze, locali, moduli e integrazioni. La proposta viene adattata al tipo di ristorante, hotel o gruppo.' },
+        { q: 'Quale piano serve a un gruppo multi-locale?', a: 'Di solito Enterprise, perché include governance centralizzata, benchmark tra locali, integrazioni e reporting.' },
+      ],
+      breadcrumbs: [
+        { name: 'Home', url: `${SITE}/it` },
+        { name: label, url: canonical },
+      ],
+      internalLinks: [
+        { label: 'Prodotto', url: '/it/software-carta-vini' },
+        { label: 'Funzionalità', url: '/it/funzionalita' },
+        { label: 'Integrazioni', url: '/it/integrazioni' },
+        { label: 'Demo', url: '/it/demo' },
+        { label: 'Biblioteca del vino', url: wineLibraryPath(lang, '/biblioteca-vino') },
+      ],
+    };
+  }
+
+  return null;
+}
+
 function staticLocalizedPath(lang: WineLibraryLang, esPath: string): string | undefined {
   if (lang === 'es') return esPath;
   return STATIC_LOCALIZED_ROUTES[lang]?.[esPath];
@@ -3104,17 +3138,18 @@ function renderLocalizedStaticPage(path: string): string | null {
 
   const canonical = `${SITE}${canonicalPath}`;
   const homePath = `/${group.lang}`;
+  const override = localizedStaticPageOverride(group.lang, group.esPath, label, canonical);
   const content: PageContent = {
-    h1: label,
-    subtitle: template.subtitle(label),
-    intro: template.description(label),
-    sections: template.sections(label),
-    faqs: template.faqs(label),
-    breadcrumbs: [
+    h1: override?.h1 || label,
+    subtitle: override?.subtitle || template.subtitle(label),
+    intro: override?.intro || template.description(label),
+    sections: override?.sections || template.sections(label),
+    faqs: override?.faqs || template.faqs(label),
+    breadcrumbs: override?.breadcrumbs || [
       { name: template.home, url: `${SITE}${homePath}` },
       { name: label, url: canonical },
     ],
-    internalLinks: [
+    internalLinks: override?.internalLinks || [
       ...template.links
         .map((link) => {
           const localized = staticLocalizedPath(group.lang, link.esPath);
@@ -3128,8 +3163,8 @@ function renderLocalizedStaticPage(path: string): string | null {
   return generateHTML(
     {
       ...source.meta,
-      title: `${label} | Winerim`,
-      description: template.description(label),
+      title: override?.title || `${label} | Winerim`,
+      description: override?.description || template.description(label),
       canonical,
       lang: group.lang,
     },
@@ -3893,8 +3928,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/integraciones': {
     meta: {
-      title: 'Integraciones | Winerim se conecta con tu stack',
-      description: 'Winerim se integra con TPVs, sistemas de gestión de restaurantes, ERPs y plataformas hoteleras para una gestión de vinos sin fricciones.',
+      title: 'Integraciones de Winerim | TPV, PMS, ERP, Inventario y API',
+      description: 'Winerim se integra con los sistemas que ya usas: TPV, PMS hotelero, ERP y gestión de inventario. Ecosistema conectado para restaurantes, hoteles y grupos.',
       canonical: `${SITE}/integraciones`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -3903,12 +3938,18 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
     content: {
       h1: 'Integraciones de Winerim',
-      subtitle: 'Conecta Winerim con las herramientas que ya usas en tu restaurante.',
+      subtitle: 'Conecta la carta de vinos con ventas, stock, costes, PMS hotelero, ERP y sistemas de punto de venta para tomar decisiones con datos reales.',
       sections: [
-        { heading: 'TPV y punto de venta', content: 'Integración directa con los principales sistemas de punto de venta para sincronizar ventas, stock y precios automáticamente.' },
-        { heading: 'Sistemas de gestión', content: 'Conexión con ERPs y plataformas de gestión de restauración para unificar datos de compras, inventario y facturación.' },
+        { heading: 'Por qué importan las integraciones', content: 'Sin conexión con el TPV, el vino queda aislado: no sabes qué referencias se venden realmente, qué margen generan ni qué vinos se quedan sin rotación. Winerim conecta carta, ventas, stock y coste para convertir la carta en un sistema de decisión.' },
+        { heading: 'TPV, POS y ventas reales', content: 'Winerim se integra con sistemas de punto de venta para sincronizar ventas por referencia, periodo y punto de servicio. Esto permite medir ticket medio de vino, rotación, margen y rendimiento por copa o botella.' },
+        { heading: 'Inventario, ERP y compras', content: 'La integración con inventario y ERP ayuda a mantener stock actualizado, detectar sobrestock, revisar costes y decidir compras con información real en lugar de intuición o presión comercial.' },
+        { heading: 'Hoteles, grupos y API', content: 'En hoteles y grupos, Winerim centraliza datos entre locales, outlets y sistemas PMS. Para equipos técnicos, la API permite proyectos personalizados y conexión con sistemas propios.' },
       ],
-      faqs: [],
+      faqs: [
+        { q: '¿Winerim se integra con mi TPV?', a: 'Winerim se integra con múltiples sistemas de punto de venta y puede evaluar integraciones personalizadas según el stack del restaurante, hotel o grupo.' },
+        { q: '¿Necesito cambiar de sistema?', a: 'No. Winerim está diseñado para conectarse con las herramientas existentes y evitar doble entrada de datos.' },
+        { q: '¿Las integraciones están incluidas en todos los planes?', a: 'Las integraciones avanzadas suelen formar parte de planes Pro o Enterprise, dependiendo del sistema, volumen de datos y complejidad técnica.' },
+      ],
       breadcrumbs: [
         { name: 'Inicio', url: `${SITE}/` },
         { name: 'Integraciones', url: `${SITE}/integraciones` },
@@ -3916,6 +3957,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [
         { label: 'Funcionalidades', url: '/funcionalidades' },
         { label: 'Precios', url: '/precios' },
+        { label: 'Winerim Supply', url: '/producto/winerim-supply' },
+        { label: 'Analizar carta', url: '/analisis-carta' },
         { label: 'Demo', url: '/demo' },
       ],
     },
@@ -5543,6 +5586,314 @@ async function renderArticle(slug: string): Promise<string | null> {
   );
 }
 
+interface CompactDetailPrerenderPage {
+  title: string;
+  description: string;
+  subtitle: string;
+  problem: string;
+  content: string;
+}
+
+const RESOURCE_DETAIL_PRERENDER_PAGES: Record<string, CompactDetailPrerenderPage> = {
+  'plantilla-estrategia-vinos-por-copa': {
+    title: 'Plantilla de estrategia de vinos por copa',
+    description: 'Descarga gratis la plantilla para diseñar tu estrategia de vino por copa: selección, pricing, rotación, control de merma y objetivos de venta.',
+    subtitle: 'Diseña, ejecuta y controla tu programa de vino por copa con un documento operativo que cubre selección, pricing, rotación y objetivos.',
+    problem: 'El vino por copa es una de las palancas de margen más potentes en restauración, pero sin un plan estructurado se gestiona de forma reactiva: merma descontrolada, selección estancada y oportunidades de venta perdidas.',
+    content: 'Un documento de trabajo completo para gestionar tu programa de vino por copa de forma profesional.',
+  },
+  'checklist-deteccion-vinos-muertos': {
+    title: 'Checklist de detección de vinos muertos y baja rotación',
+    description: 'Descarga la checklist para identificar vinos sin rotación en tu carta. Detecta stock muerto.',
+    subtitle: 'Identifica las referencias que no rotan, cuantifica el capital inmovilizado y toma decisiones informadas sobre qué mantener, promocionar o retirar.',
+    problem: 'Los vinos que no se venden no solo ocupan espacio en bodega: inmovilizan capital, generan costes de almacenaje y pueden deteriorarse.',
+    content: 'Un proceso estructurado para auditar tu bodega e identificar las referencias que necesitan acción inmediata.',
+  },
+  'plantilla-formacion-equipo-sala': {
+    title: 'Plantilla de formación exprés en vino para equipos de sala',
+    description: 'Descarga la plantilla para formar a tu equipo de sala en vino en menos de 2 semanas.',
+    subtitle: 'Un programa de formación práctico para que tu equipo recomiende vino con confianza en menos de 2 semanas, sin necesidad de conocimientos previos.',
+    problem: 'La falta de formación en vino no es un problema de voluntad, sino de herramientas. Sin una guía clara y práctica, el personal evita recomendar vino por miedo a equivocarse.',
+    content: 'Un programa completo de formación diseñado para sesiones cortas antes del servicio.',
+  },
+  'plantilla-analisis-margenes': {
+    title: 'Plantilla de análisis de márgenes por referencia',
+    description: 'Descarga la plantilla para analizar el margen de cada vino de tu carta. Coste, PVP, multiplicador, contribución al margen global y ranking de rentabilidad.',
+    subtitle: 'Analiza la rentabilidad real de cada vino de tu carta: coste, PVP, multiplicador, margen bruto y contribución al resultado global.',
+    problem: 'Muchos restaurantes conocen su margen bruto general de vino, pero no saben qué referencias contribuyen más o menos al resultado.',
+    content: 'Una hoja de cálculo estructurada para analizar la rentabilidad de cada referencia de tu carta.',
+  },
+  'scorecard-rendimiento-carta': {
+    title: 'Scorecard mensual de rendimiento de carta de vinos',
+    description: 'Descarga el scorecard para medir el rendimiento de tu carta de vinos cada mes. KPIs de venta, rotación, margen, copa y ticket medio en un solo documento.',
+    subtitle: 'Un cuadro de mando mensual con los KPIs esenciales para evaluar si tu carta de vinos está funcionando.',
+    problem: 'Sin métricas claras, la gestión de la carta se basa en sensaciones. El scorecard convierte la intuición en datos accionables.',
+    content: 'Un documento mensual que agrupa los indicadores más importantes de tu carta de vinos en un solo vistazo.',
+  },
+  'checklist-carta-que-vende': {
+    title: 'Checklist: ¿Tu carta de vinos realmente vende?',
+    description: 'Descarga la checklist para evaluar si tu carta de vinos está diseñada para vender.',
+    subtitle: '30 puntos de control para evaluar si tu carta está diseñada para convertir, no solo para informar.',
+    problem: 'Muchas cartas de vinos están técnicamente bien construidas pero no venden porque informan sin guiar la decisión del cliente.',
+    content: '6 dimensiones de conversión con 30 puntos de control para diagnosticar la capacidad de venta de tu carta.',
+  },
+  'plantilla-equilibrio-carta': {
+    title: 'Plantilla para evaluar el equilibrio de tu carta de vinos',
+    description: 'Descarga la plantilla para analizar el equilibrio de tu carta por estilos, regiones, precios y tipologías. Detecta desequilibrios y mejora la composición.',
+    subtitle: 'Analiza si tu carta está equilibrada por estilos, regiones, rangos de precio y tipologías.',
+    problem: 'Muchas cartas acumulan referencias por inercia y los desequilibrios se acumulan sin que nadie los detecte.',
+    content: 'Un análisis multidimensional de la composición de tu carta para detectar desequilibrios y oportunidades.',
+  },
+  'plantilla-revision-mensual-carta': {
+    title: 'Plantilla de revisión mensual de carta de vinos',
+    description: 'Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.',
+    subtitle: 'Un proceso estructurado para revisar tu carta cada mes: qué funciona, qué no, qué cambiar y qué investigar.',
+    problem: 'Sin un proceso periódico, los problemas se acumulan: vinos muertos, precios desactualizados, oportunidades perdidas y una carta que envejece.',
+    content: 'Un documento de trabajo mensual con 5 bloques que cubren todo el ciclo de revisión de tu carta.',
+  },
+  'plantilla-control-grupo-restauracion': {
+    title: 'Plantilla de control y análisis de carta de vinos para grupos de restauración',
+    description: 'Descarga la plantilla para gestionar y comparar la carta de vinos en múltiples locales.',
+    subtitle: 'Gestiona, compara y optimiza la carta de vinos en todos tus locales con un framework de control centralizado.',
+    problem: 'En grupos de restauración, cada local gestiona el vino de forma diferente y sin visibilidad cruzada.',
+    content: 'Un framework completo para gestionar la carta de vinos de forma centralizada en grupos con múltiples locales.',
+  },
+  'plantilla-carta-de-vinos': {
+    title: 'Plantilla de carta de vinos para restaurante',
+    description: 'Descarga gratis una plantilla profesional para diseñar tu carta de vinos. Estructura de categorías, precios equilibrados y sección por copa incluida.',
+    subtitle: 'Descarga una plantilla profesional para diseñar una carta de vinos clara, equilibrada y pensada para vender más.',
+    problem: 'Diseñar una carta desde cero puede llevar a errores que afectan tanto a la experiencia del cliente como a la rentabilidad.',
+    content: 'Todo lo que necesitas para diseñar una carta de vinos profesional desde el primer día.',
+  },
+  'checklist-carta-de-vinos-rentable': {
+    title: 'Checklist: ¿Tu carta de vinos es rentable?',
+    description: 'Descarga gratis la checklist para evaluar si tu carta de vinos está optimizada: estructura, precios, estilos, vino por copa y rotación.',
+    subtitle: '25 puntos de control para evaluar si tu carta de vinos está optimizada para vender más.',
+    problem: 'La mayoría de cartas de vinos tienen puntos ciegos que impactan directamente en ventas y márgenes.',
+    content: '5 áreas de evaluación con 25 puntos de control para diagnosticar tu carta de vinos.',
+  },
+  'guia-vino-por-copa-para-restaurantes': {
+    title: 'Guía de vino por copa para restaurantes',
+    description: 'Descarga gratis la guía completa de vino por copa: cuántos ofrecer, cómo fijar precios, qué vinos elegir y cómo aumentar ventas en tu restaurante.',
+    subtitle: 'Todo lo que necesitas para diseñar un programa de vino por copa rentable.',
+    problem: 'La mayoría de restaurantes ofrece vino por copa sin una estrategia clara: pocas referencias, precios arbitrarios, sin rotación y sin medición.',
+    content: '5 capítulos con todo lo necesario para lanzar o mejorar tu programa de vino por copa.',
+  },
+  'plantilla-wine-mapping-restaurante': {
+    title: 'Plantilla de Wine Mapping para restaurantes',
+    description: 'Descarga gratis la plantilla de wine mapping para estructurar los precios y la distribución de vinos en tu carta.',
+    subtitle: 'Mapea tu carta de vinos en una matriz de precio por estilo para detectar huecos, solapamientos y oportunidades.',
+    problem: 'Sin un mapa visual de tu carta es difícil detectar si hay demasiados vinos compitiendo en la misma franja o estilos sin cobertura.',
+    content: 'Todo lo necesario para mapear tu carta de vinos y detectar oportunidades de mejora.',
+  },
+  'revision-mensual-margenes': {
+    title: 'Revisión mensual de márgenes',
+    description: 'Descarga la plantilla para revisar cada mes el margen de tu carta de vinos. Detecta erosión de rentabilidad.',
+    subtitle: 'Una plantilla práctica para revisar cada mes cómo evoluciona el margen real de tu carta.',
+    problem: 'Muchos restaurantes detectan tarde que están perdiendo margen por subida de costes, mala calibración de precios o referencias poco rentables.',
+    content: 'Convierte la revisión mensual en una rutina útil para pricing, compras, copeo y rentabilidad real.',
+  },
+};
+
+const BENCHMARK_DETAIL_PRERENDER_PAGES: Record<string, CompactDetailPrerenderPage & { kind: 'Benchmark' | 'Playbook' }> = {
+  'benchmark-referencias-por-tipo-restaurante': {
+    kind: 'Benchmark',
+    title: 'Número ideal de referencias según tipo de restaurante',
+    description: '¿Cuántas referencias debe tener tu carta de vinos? Benchmark por tipo de restaurante: gastronómico, casual, hotel, vinoteca.',
+    subtitle: 'Descubre cuántas referencias de vino debería tener tu carta según el tipo de establecimiento, el ticket medio y el perfil de cliente.',
+    problem: 'Una carta sobredimensionada genera stock muerto, confusión en el cliente y costes de almacenaje innecesarios. Una carta demasiado corta limita la experiencia.',
+    content: 'El número ideal de referencias depende del tipo de restaurante, posicionamiento, rotación esperada y capacidad del equipo para recomendar.',
+  },
+  'benchmark-distribucion-rangos-precio': {
+    kind: 'Benchmark',
+    title: 'Distribución ideal por rangos de precio',
+    description: 'Cómo distribuir los rangos de precio en tu carta de vinos para maximizar ventas y margen. Benchmark con criterios prácticos para hostelería.',
+    subtitle: 'Aprende a estructurar los rangos de precio de tu carta para que el cliente navegue con facilidad y el restaurante maximice su margen.',
+    problem: 'Una carta con precios mal distribuidos concentra pedidos en el vino más barato o hace que los caros parezcan inaccesibles.',
+    content: 'La distribución de precios debe guiar al cliente hacia una zona de confort donde el restaurante obtiene su mejor margen.',
+  },
+  'benchmark-estrategia-por-copa': {
+    kind: 'Benchmark',
+    title: 'Estrategia de vino por copa: cuántos y cuáles',
+    description: '¿Cuántos vinos por copa ofrecer? ¿Cuáles elegir? Benchmark con criterios prácticos para diseñar una oferta de vino por copa rentable.',
+    subtitle: 'El vino por copa es una de las palancas más potentes para aumentar ventas. Descubre cuántos ofrecer, qué perfiles elegir y cómo rotarlos.',
+    problem: 'Ofrecer pocos vinos por copa limita la experiencia. Ofrecer demasiados genera merma y complejidad operativa.',
+    content: 'Una oferta de vino por copa bien diseñada aumenta ticket medio, reduce barreras de compra y permite explorar sin compromiso.',
+  },
+  'benchmark-equilibrio-regiones-estilos': {
+    kind: 'Benchmark',
+    title: 'Equilibrio entre regiones, estilos y tipologías',
+    description: '¿Tu carta está equilibrada en regiones, estilos y tipologías? Benchmark para construir una carta diversa, coherente y alineada con tu cocina.',
+    subtitle: 'Una carta equilibrada no es una carta que lo tiene todo: es una carta donde cada vino cumple una función.',
+    problem: 'Cartas donde una región o estilo domina excesivamente limitan la experiencia del cliente y las posibilidades de maridaje.',
+    content: 'El equilibrio significa que cada región, estilo y tipología responde a la cocina, el perfil del cliente y la identidad del establecimiento.',
+  },
+  'benchmark-peso-vino-ticket-medio': {
+    kind: 'Benchmark',
+    title: 'Peso del vino en el ticket medio',
+    description: '¿Cuánto debería representar el vino en tu ticket medio? Benchmark por tipo de restaurante para evaluar y mejorar la contribución del vino a la facturación.',
+    subtitle: 'El vino puede representar entre un 15% y un 40% del ticket medio. Conoce los rangos habituales y evalúa si estás por debajo de tu potencial.',
+    problem: 'Muchos restaurantes desconocen qué porcentaje del ticket medio corresponde al vino y no pueden evaluar si aprovechan su potencial.',
+    content: 'El peso del vino en el ticket medio varía según el tipo de restaurante, pero los rangos del sector permiten identificar oportunidades.',
+  },
+  'benchmark-margen-por-tipo-referencia': {
+    kind: 'Benchmark',
+    title: 'Margen por tipo de referencia',
+    description: '¿Qué margen aplicar a cada tipo de vino? Benchmark con criterios por categoría: entrada, medio, premium, copa, espumoso. Estrategia de pricing real.',
+    subtitle: 'No todos los vinos necesitan el mismo margen. Descubre cómo aplicar una estrategia de pricing diferenciada.',
+    problem: 'Aplicar un multiplicador uniforme genera precios desproporcionados en referencias caras y márgenes insuficientes en referencias baratas.',
+    content: 'Una estrategia inteligente aplica diferentes multiplicadores según coste, contexto competitivo y percepción de valor del cliente.',
+  },
+  'playbook-vender-mas-vino': {
+    kind: 'Playbook',
+    title: 'Cómo vender más vino en sala',
+    description: 'Playbook práctico para aumentar las ventas de vino en tu restaurante. Técnicas de recomendación, formación de personal y diseño de carta.',
+    subtitle: 'Un plan de acción con las técnicas más efectivas para que tu equipo venda más vino sin necesidad de ser sumiller.',
+    problem: 'El personal no recomienda vino porque no se siente seguro, no tiene formación o la carta es demasiado compleja para explicarla.',
+    content: 'Vender más vino requiere una carta bien diseñada, un equipo con herramientas claras y un sistema que facilite la recomendación.',
+  },
+  'playbook-mejorar-rotacion': {
+    kind: 'Playbook',
+    title: 'Cómo mejorar la rotación de vinos',
+    description: 'Playbook para eliminar stock muerto y mejorar la rotación de tu bodega. Criterios de análisis, acciones correctivas y prevención.',
+    subtitle: 'Un plan paso a paso para identificar los vinos que no rotan, decidir qué hacer con ellos y prevenir que se acumulen en el futuro.',
+    problem: 'Stock muerto que ocupa espacio, inmoviliza capital y genera costes ocultos durante meses o años.',
+    content: 'La rotación requiere análisis periódico, decisiones claras sobre qué mantener o retirar y un sistema de prevención.',
+  },
+  'playbook-carta-rentable': {
+    kind: 'Playbook',
+    title: 'Cómo construir una carta más rentable',
+    description: 'Playbook completo para diseñar una carta de vinos que maximice márgenes, rotación y experiencia del cliente. Estructura, pricing y selección.',
+    subtitle: 'Un marco de trabajo para rediseñar tu carta de vinos con foco en rentabilidad sin sacrificar experiencia.',
+    problem: 'Cartas construidas por inercia acumulan referencias, precios sin estrategia y poca conexión con la cocina.',
+    content: 'Una carta rentable es aquella donde cada referencia tiene propósito, precio bien calculado y conexión clara con la oferta gastronómica.',
+  },
+  'playbook-optimizar-vino-copa': {
+    kind: 'Playbook',
+    title: 'Cómo optimizar tu oferta de vino por copa',
+    description: 'Playbook para diseñar, gestionar y rentabilizar tu oferta de vino por copa. Selección, pricing, control de merma y estrategia de rotación.',
+    subtitle: 'La copa es tu mejor herramienta de venta de vino. Este playbook muestra cómo maximizar facturación y minimizar merma.',
+    problem: 'Merma excesiva, selección poco atractiva, precios mal calculados o falta de rotación frenan la rentabilidad de la copa.',
+    content: 'Una oferta de vino por copa rentable requiere selección inteligente, pricing ajustado y control operativo.',
+  },
+  'playbook-formar-personal': {
+    kind: 'Playbook',
+    title: 'Cómo formar al personal para recomendar vino',
+    description: 'Playbook para formar al personal de sala en vino. Técnicas simples, sin jerga, para que tu equipo recomiende con confianza y aumente las ventas.',
+    subtitle: 'Tu equipo no necesita ser sumiller. Necesita confianza, herramientas adecuadas y una carta que pueda explicar en 30 segundos.',
+    problem: 'El personal no recomienda vino porque tiene miedo a equivocarse, no conoce la carta o siente que el vino es un tema de expertos.',
+    content: 'La formación en vino debe ser práctica, centrada en la carta real del restaurante y orientada a venta.',
+  },
+  'playbook-decidir-compras-datos': {
+    kind: 'Playbook',
+    title: 'Cómo decidir qué vinos comprar con datos',
+    description: 'Playbook para tomar decisiones de compra de vino basadas en datos reales: rotación, margen, demanda y tendencias. Reduce riesgos y mejora tu selección.',
+    subtitle: 'Deja de comprar por intuición o por la relación con el proveedor. Aprende a usar datos de venta para comprar mejor.',
+    problem: 'Decisiones de compra basadas en inercia, presión del distribuidor o gusto personal generan surtido débil y stock inmovilizado.',
+    content: 'Comprar bien significa comprar lo que tu restaurante necesita según datos de venta, rotación, margen y demanda real.',
+  },
+};
+
+function renderResourceDetailPage(path: string): string | null {
+  const match = path.match(/^\/recursos\/([^/]+)$/);
+  if (!match) return null;
+
+  const slug = match[1];
+  const page = RESOURCE_DETAIL_PRERENDER_PAGES[slug];
+  if (!page) return null;
+
+  const canonical = `${SITE}/recursos/${slug}`;
+  return generateHTML(
+    {
+      title: `${page.title} | Winerim`,
+      description: page.description,
+      canonical,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'article',
+      schemaType: 'CreativeWork',
+    },
+    {
+      h1: page.title,
+      subtitle: page.subtitle,
+      intro: page.description,
+      sections: [
+        { heading: 'Problema que resuelve', content: page.problem },
+        { heading: 'Qué incluye', content: page.content },
+        { heading: 'Cómo usarlo en una carta de vinos', content: `Este recurso ayuda a ordenar decisiones de carta, precio, rotación, formación o compras con un criterio operativo. Está pensado para equipos de sala, responsables de F&B, propietarios y grupos que necesitan pasar de la intuición a procesos repetibles.` },
+        { heading: 'Siguiente paso con Winerim', content: 'La plantilla te da el marco de trabajo. Winerim automatiza el análisis de carta, el seguimiento de ventas, la detección de oportunidades y la recomendación de acciones para vender más vino con mejores márgenes.' },
+      ],
+      faqs: [
+        { q: `¿Para qué sirve ${page.title}?`, a: page.description },
+        { q: '¿Cómo ayuda Winerim después de usar el recurso?', a: 'Winerim convierte el diagnóstico en seguimiento continuo: analiza ventas, margen, rotación, stock y oportunidades de mejora sobre la carta real del restaurante.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Recursos', url: `${SITE}/recursos` },
+        { name: page.title, url: canonical },
+      ],
+      internalLinks: [
+        { label: 'Recursos descargables', url: '/recursos' },
+        { label: 'Guías y recursos', url: '/guias-y-recursos' },
+        { label: 'Benchmarks y playbooks', url: '/benchmarks-playbooks' },
+        { label: 'Software de carta de vinos', url: '/software-carta-de-vinos' },
+        { label: 'Analizar mi carta gratis', url: '/analisis-carta' },
+        { label: 'Solicitar demo', url: '/demo' },
+      ],
+    }
+  );
+}
+
+function renderBenchmarkPlaybookDetailPage(path: string): string | null {
+  const match = path.match(/^\/benchmarks-playbooks\/([^/]+)$/);
+  if (!match) return null;
+
+  const slug = match[1];
+  const page = BENCHMARK_DETAIL_PRERENDER_PAGES[slug];
+  if (!page) return null;
+
+  const canonical = `${SITE}/benchmarks-playbooks/${slug}`;
+  return generateHTML(
+    {
+      title: `${page.title} | Winerim`,
+      description: page.description,
+      canonical,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'article',
+      schemaType: 'Article',
+    },
+    {
+      h1: page.title,
+      subtitle: page.subtitle,
+      intro: page.description,
+      sections: [
+        { heading: `Resumen del ${page.kind.toLowerCase()}`, content: page.content },
+        { heading: 'Problema que resuelve', content: page.problem },
+        { heading: 'Cómo aplicarlo en un restaurante', content: 'Úsalo para revisar la estructura de carta, el comportamiento de ventas, la rotación de referencias, el peso del vino en el ticket y la capacidad del equipo para recomendar con seguridad.' },
+        { heading: 'Cómo lo convierte Winerim en acción', content: 'Winerim conecta carta, ventas, stock, margen y recomendaciones para que estos criterios no queden en una revisión puntual, sino en un sistema continuo de decisión.' },
+      ],
+      faqs: [
+        { q: `¿Qué aporta este ${page.kind.toLowerCase()}?`, a: page.description },
+        { q: '¿Necesito datos de ventas para aplicarlo?', a: 'Los datos reales mejoran la precisión, pero el contenido también sirve como marco cualitativo para detectar oportunidades antes de automatizar el seguimiento con Winerim.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Benchmarks y playbooks', url: `${SITE}/benchmarks-playbooks` },
+        { name: page.title, url: canonical },
+      ],
+      internalLinks: [
+        { label: 'Benchmarks y playbooks', url: '/benchmarks-playbooks' },
+        { label: 'Guías y recursos', url: '/guias-y-recursos' },
+        { label: 'Herramientas gratuitas', url: '/herramientas' },
+        { label: 'Software de carta de vinos', url: '/software-carta-de-vinos' },
+        { label: 'Analizar mi carta gratis', url: '/analisis-carta' },
+        { label: 'Solicitar demo', url: '/demo' },
+      ],
+    }
+  );
+}
+
 // ── Helpers ──
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -5640,6 +5991,14 @@ Deno.serve(async (req) => {
 
     if (!html) {
       html = renderWineLibraryPage(path);
+    }
+
+    if (!html) {
+      html = renderResourceDetailPage(path);
+    }
+
+    if (!html) {
+      html = renderBenchmarkPlaybookDetailPage(path);
     }
 
     if (!html && articleRequest) {

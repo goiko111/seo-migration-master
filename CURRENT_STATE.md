@@ -3331,3 +3331,78 @@
   - `/en/terms`.
 - Para las seis indexables de esa lista, reforzar enlazado interno, contenido visible, prerender/schema y presencia en sitemap si procede.
 - Mantener legales como `noindex`.
+
+## Actualización 2026-06-05: refuerzo de las 6 URLs indexables `200 -> 200`
+
+## Hechos
+
+- Se retomó la sesión leyendo primero `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se auditó producción como Googlebot para las `8` URLs que seguían en `200 -> 200`.
+- Las dos legales siguen correctas:
+  - `/terminos`: `noindex, follow`;
+  - `/en/terms`: `noindex, follow`.
+- En las seis indexables se detectó:
+  - `/recursos/plantilla-formacion-equipo-sala`, `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio` y `/recursos/revision-mensual-margenes` devolvían HTML prerenderizado con title/canonical/schema de la home, por lo que Google podía interpretarlas como duplicadas/canonicalizadas a `/`;
+  - `/it/prezzi` y `/integraciones` devolvían canonical propio, pero contenido de bot muy fino;
+  - `/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad` devolvía HTML largo, canonical propio y schema `Article`.
+- Se añadió prerender dedicado en `supabase/functions/prerender/index.ts` para:
+  - fichas de `/recursos/*`;
+  - fichas de `/benchmarks-playbooks/*`;
+  - `/integraciones` con contenido más completo;
+  - override específico para `/it/prezzi`.
+- Se actualizó `supabase/functions/sitemap/index.ts` para que recursos y benchmarks/playbooks vuelvan a poder entrar en el sitemap una vez tienen prerender dedicado.
+- El deploy directo de Supabase Edge Functions falló por falta de credenciales locales:
+  - `SUPABASE_ACCESS_TOKEN` no está configurado;
+  - el CLI pidió `supabase login`.
+- Para cubrir producción sin esperar a Lovable, se añadió un puente temporal en `cloudflare-worker-v3-hybrid.js`:
+  - `worker-detail-prerender` para `/recursos/*` y `/benchmarks-playbooks/*`;
+  - `worker-static-prerender` para `/it/prezzi` y `/integraciones`;
+  - `sitemap-worker-detail-bridge` para inyectar recursos y benchmarks/playbooks en `/sitemap.xml` mientras Supabase sirve la versión antigua.
+- Worker final desplegado:
+  - version ID `670b5372-cbca-48a5-92af-8ebcfb9fb5f5`.
+- Validación productiva final como Googlebot:
+  - `/it/prezzi`: `200`, `worker-static-prerender`, canonical `https://winerim.wine/it/prezzi`, `index, follow`;
+  - `/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad`: `200`, `bot-prerender`, canonical propio, schema `Article`, `1113` palabras;
+  - `/recursos/plantilla-formacion-equipo-sala`: `200`, `worker-detail-prerender`, canonical propio, schema `CreativeWork`;
+  - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`: `200`, `worker-detail-prerender`, canonical propio, schema `Article`;
+  - `/recursos/revision-mensual-margenes`: `200`, `worker-detail-prerender`, canonical propio, schema `CreativeWork`;
+  - `/integraciones`: `200`, `worker-static-prerender`, canonical propio, schema `WebPage`.
+- `/sitemap.xml` en producción devuelve `X-Worker-Branch: sitemap-worker-detail-bridge` e incluye:
+  - `/recursos/plantilla-formacion-equipo-sala`;
+  - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`;
+  - `/recursos/revision-mensual-margenes`.
+- Validaciones locales:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts src/test/wine-library-seo-surface.test.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 15 tests;
+  - `npm run test -- --run`: 8 archivos, 45 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+
+## Decisiones
+
+- No redirigir las seis URLs indexables: son páginas útiles y deben competir como URLs propias.
+- Mantener `/terminos` y `/en/terms` como `noindex`.
+- Usar Cloudflare Worker como puente productivo porque no hay token local para desplegar Supabase Edge Functions.
+- Mantener también los cambios en Supabase `prerender` y `sitemap` para que Lovable pueda publicar la solución de fuente cuando esté disponible.
+- Reforzar primero indexabilidad/canonical/schema antes de solicitar nuevas indexaciones manuales.
+
+## Hipótesis
+
+- Las tres fichas de recursos/benchmarks deberían dejar de parecer duplicados de la home cuando Google las recrawlee.
+- `/it/prezzi` e `/integraciones` tienen mejores señales para salir de `Rastreada: actualmente sin indexar`, aunque pueden seguir necesitando enlaces internos y autoridad.
+- El puente de Worker es suficiente para producción, pero conviene publicar Edge Functions desde Lovable para evitar depender de lógica duplicada a medio plazo.
+
+## Tareas pendientes
+
+- Publicar desde Lovable las Edge Functions `prerender` y `sitemap` actualizadas, o proporcionar `SUPABASE_ACCESS_TOKEN` para desplegarlas por CLI.
+- Cuando Supabase esté publicado, decidir si se retira el puente del Worker o se deja como fallback.
+- Monitorizar en Search Console:
+  - validación iniciada de `Rastreada: actualmente sin indexar`;
+  - si las seis URLs indexables pasan a indexadas o cambian de motivo.
+- Reforzar enlazado interno hacia:
+  - `/it/prezzi`;
+  - `/integraciones`;
+  - recursos y benchmarks/playbooks desde hubs, blog, producto y biblioteca.
+- Retomar después `Descubierta: actualmente sin indexar`, especialmente biblioteca del vino y artículos internacionales.

@@ -2398,3 +2398,65 @@
    - mejorar contenido/prerender/schema;
    - mantener o retirar del sitemap según valor SEO.
 5. Retomar después `Descubierta: actualmente sin indexar`, con foco en biblioteca del vino y artículos internacionales.
+
+## Actualización 2026-06-05: 6 URLs indexables reforzadas en producción
+
+## Hechos
+
+- Se completó el microbloque de las 6 URLs indexables que seguían `200 -> 200`.
+- Producción, como Googlebot, queda así:
+  - `/it/prezzi`: `200`, `worker-static-prerender`, canonical propio, `index, follow`;
+  - `/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad`: `200`, `bot-prerender`, canonical propio, schema `Article`;
+  - `/recursos/plantilla-formacion-equipo-sala`: `200`, `worker-detail-prerender`, canonical propio, schema `CreativeWork`;
+  - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`: `200`, `worker-detail-prerender`, canonical propio, schema `Article`;
+  - `/recursos/revision-mensual-margenes`: `200`, `worker-detail-prerender`, canonical propio, schema `CreativeWork`;
+  - `/integraciones`: `200`, `worker-static-prerender`, canonical propio, schema `WebPage`.
+- `/sitemap.xml` en producción usa `sitemap-worker-detail-bridge` e incluye las fichas de recursos/benchmarks auditadas.
+- Worker desplegado:
+  - version ID `670b5372-cbca-48a5-92af-8ebcfb9fb5f5`.
+- Cambios de Supabase Edge Functions implementados en repo:
+  - `prerender`: recursos, benchmarks/playbooks, `/integraciones`, override `/it/prezzi`;
+  - `sitemap`: recursos y benchmarks/playbooks dejan de estar excluidos.
+- El deploy directo de Supabase no se pudo hacer porque falta `SUPABASE_ACCESS_TOKEN`.
+- Validaciones pasadas:
+  - Deno check;
+  - ESLint;
+  - test específico SEO;
+  - suite completa: 8 archivos, 45 tests;
+  - dry-run y deploy de Worker.
+
+## Decisiones
+
+- Mantener el puente de Worker hasta que Lovable publique las Edge Functions de Supabase.
+- No tocar las dos legales (`/terminos`, `/en/terms`): deben seguir `noindex`.
+- No pedir indexación masiva de todo; priorizar recrawl y solicitudes selectivas si GSC no actualiza.
+
+## Hipótesis
+
+- Las tres fichas de recursos/benchmarks no se indexaban porque Google recibía canonical/title/schema de la home.
+- `/it/prezzi` e `/integraciones` tenían señal técnica correcta pero poco contenido para bots.
+- El siguiente cuello será enlazado interno/autoridad y el bloque `Descubierta: actualmente sin indexar`.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar desde Lovable las Edge Functions actualizadas:
+   - `supabase/functions/prerender/index.ts`;
+   - `supabase/functions/sitemap/index.ts`.
+2. Tras publicar Supabase, revalidar:
+   - `/it/prezzi`;
+   - `/integraciones`;
+   - `/recursos/plantilla-formacion-equipo-sala`;
+   - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`;
+   - `/recursos/revision-mensual-margenes`;
+   - `/sitemap.xml`.
+3. Decidir si se retira el puente de Worker o se mantiene como fallback.
+4. En Search Console:
+   - monitorizar la validación iniciada de `Rastreada: actualmente sin indexar`;
+   - revisar estas seis URLs si siguen sin indexar tras recrawl;
+   - solicitar indexación manual solo para las URLs estratégicas que ya estén limpias y si GSC lo permite.
+5. Reforzar enlazado interno hacia `/it/prezzi`, `/integraciones`, recursos y benchmarks/playbooks desde:
+   - hubs de producto;
+   - blog;
+   - biblioteca del vino;
+   - páginas de recursos y guías.
+6. Retomar `Descubierta: actualmente sin indexar`, priorizando biblioteca del vino y artículos internacionales.

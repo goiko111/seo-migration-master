@@ -214,6 +214,233 @@ function getWineLibraryLegacyShortcutTarget(path) {
   return null;
 }
 
+// ─── Worker bridge prerender for resource/benchmark detail pages ───
+// Keeps production bot HTML canonical while Supabase Edge Functions are published from Lovable.
+const RESOURCE_DETAIL_PRERENDER_PAGES = {
+  'plantilla-estrategia-vinos-por-copa': ['Plantilla de estrategia de vinos por copa', 'Descarga gratis la plantilla para diseñar tu estrategia de vino por copa: selección, pricing, rotación, control de merma y objetivos de venta.', 'Diseña, ejecuta y controla tu programa de vino por copa con un documento operativo que cubre selección, pricing, rotación y objetivos.', 'El vino por copa es una de las palancas de margen más potentes en restauración, pero sin un plan estructurado se gestiona de forma reactiva.', 'Un documento de trabajo completo para gestionar tu programa de vino por copa de forma profesional.'],
+  'checklist-deteccion-vinos-muertos': ['Checklist de detección de vinos muertos y baja rotación', 'Descarga la checklist para identificar vinos sin rotación en tu carta. Detecta stock muerto.', 'Identifica las referencias que no rotan, cuantifica el capital inmovilizado y toma decisiones informadas.', 'Los vinos que no se venden ocupan espacio, inmovilizan capital y pueden deteriorarse.', 'Un proceso estructurado para auditar tu bodega e identificar referencias que necesitan acción inmediata.'],
+  'plantilla-formacion-equipo-sala': ['Plantilla de formación exprés en vino para equipos de sala', 'Descarga la plantilla para formar a tu equipo de sala en vino en menos de 2 semanas.', 'Un programa de formación práctico para que tu equipo recomiende vino con confianza.', 'Sin una guía clara, el personal evita recomendar vino por miedo a equivocarse o no saber qué decir.', 'Un programa completo de formación diseñado para sesiones cortas antes del servicio.'],
+  'plantilla-analisis-margenes': ['Plantilla de análisis de márgenes por referencia', 'Descarga la plantilla para analizar el margen de cada vino de tu carta. Coste, PVP, multiplicador, contribución al margen global y ranking de rentabilidad.', 'Analiza la rentabilidad real de cada vino de tu carta.', 'Muchos restaurantes conocen su margen bruto general, pero no qué referencias contribuyen más o menos al resultado.', 'Una hoja de cálculo estructurada para analizar la rentabilidad de cada referencia.'],
+  'scorecard-rendimiento-carta': ['Scorecard mensual de rendimiento de carta de vinos', 'Descarga el scorecard para medir el rendimiento de tu carta de vinos cada mes. KPIs de venta, rotación, margen, copa y ticket medio en un solo documento.', 'Un cuadro de mando mensual con los KPIs esenciales para evaluar tu carta.', 'Sin métricas claras, la gestión de la carta se basa en sensaciones.', 'Un documento mensual que agrupa los indicadores más importantes de tu carta de vinos.'],
+  'checklist-carta-que-vende': ['Checklist: ¿Tu carta de vinos realmente vende?', 'Descarga la checklist para evaluar si tu carta de vinos está diseñada para vender.', '30 puntos de control para evaluar si tu carta está diseñada para convertir.', 'Muchas cartas informan, pero no guían la decisión del cliente.', '6 dimensiones de conversión con 30 puntos de control para diagnosticar la capacidad de venta.'],
+  'plantilla-equilibrio-carta': ['Plantilla para evaluar el equilibrio de tu carta de vinos', 'Descarga la plantilla para analizar el equilibrio de tu carta por estilos, regiones, precios y tipologías. Detecta desequilibrios y mejora la composición.', 'Analiza si tu carta está equilibrada por estilos, regiones, rangos de precio y tipologías.', 'Muchas cartas acumulan referencias por inercia y los desequilibrios quedan ocultos.', 'Un análisis multidimensional de la composición de tu carta.'],
+  'plantilla-revision-mensual-carta': ['Plantilla de revisión mensual de carta de vinos', 'Descarga la plantilla para revisar tu carta de vinos cada mes: rendimiento por referencia, oportunidades de mejora, rotación, pricing y plan de acción.', 'Un proceso estructurado para revisar tu carta cada mes.', 'Sin revisión periódica, se acumulan vinos muertos, precios desactualizados y oportunidades perdidas.', 'Un documento mensual con 5 bloques para cubrir el ciclo de revisión.'],
+  'plantilla-control-grupo-restauracion': ['Plantilla de control y análisis de carta de vinos para grupos de restauración', 'Descarga la plantilla para gestionar y comparar la carta de vinos en múltiples locales.', 'Gestiona, compara y optimiza la carta en todos tus locales con control centralizado.', 'Cada local puede gestionar el vino de forma distinta y sin visibilidad cruzada.', 'Un framework para gestionar la carta de vinos de forma centralizada en grupos.'],
+  'plantilla-carta-de-vinos': ['Plantilla de carta de vinos para restaurante', 'Descarga gratis una plantilla profesional para diseñar tu carta de vinos. Estructura de categorías, precios equilibrados y sección por copa incluida.', 'Diseña una carta clara, equilibrada y pensada para vender más.', 'Diseñar una carta desde cero puede generar errores de experiencia y rentabilidad.', 'Todo lo necesario para diseñar una carta de vinos profesional desde el primer día.'],
+  'checklist-carta-de-vinos-rentable': ['Checklist: ¿Tu carta de vinos es rentable?', 'Descarga gratis la checklist para evaluar si tu carta de vinos está optimizada: estructura, precios, estilos, vino por copa y rotación.', '25 puntos de control para evaluar si tu carta está optimizada.', 'La mayoría de cartas tiene puntos ciegos que impactan ventas y márgenes.', '5 áreas de evaluación para diagnosticar tu carta de vinos.'],
+  'guia-vino-por-copa-para-restaurantes': ['Guía de vino por copa para restaurantes', 'Descarga gratis la guía completa de vino por copa: cuántos ofrecer, cómo fijar precios, qué vinos elegir y cómo aumentar ventas en tu restaurante.', 'Diseña un programa de vino por copa rentable.', 'Muchos restaurantes ofrecen vino por copa sin estrategia clara.', '5 capítulos para lanzar o mejorar tu programa de vino por copa.'],
+  'plantilla-wine-mapping-restaurante': ['Plantilla de Wine Mapping para restaurantes', 'Descarga gratis la plantilla de wine mapping para estructurar los precios y la distribución de vinos en tu carta.', 'Mapea tu carta en una matriz de precio por estilo.', 'Sin un mapa visual es difícil detectar solapamientos, huecos y franjas mal cubiertas.', 'Todo lo necesario para mapear tu carta y detectar oportunidades de mejora.'],
+  'revision-mensual-margenes': ['Revisión mensual de márgenes', 'Descarga la plantilla para revisar cada mes el margen de tu carta de vinos. Detecta erosión de rentabilidad.', 'Revisa cada mes cómo evoluciona el margen real de tu carta.', 'Muchos restaurantes detectan tarde pérdidas de margen por costes, precios o referencias poco rentables.', 'Una rutina útil para pricing, compras, copeo y rentabilidad real.'],
+};
+
+const BENCHMARK_DETAIL_PRERENDER_PAGES = {
+  'benchmark-referencias-por-tipo-restaurante': ['Benchmark', 'Número ideal de referencias según tipo de restaurante', '¿Cuántas referencias debe tener tu carta de vinos? Benchmark por tipo de restaurante: gastronómico, casual, hotel, vinoteca.', 'Descubre cuántas referencias debería tener tu carta según tipo de establecimiento, ticket medio y perfil de cliente.', 'Una carta sobredimensionada genera stock muerto y confusión; una carta demasiado corta limita la experiencia.', 'El número ideal depende del tipo de restaurante, posicionamiento, rotación esperada y capacidad del equipo.'],
+  'benchmark-distribucion-rangos-precio': ['Benchmark', 'Distribución ideal por rangos de precio', 'Cómo distribuir los rangos de precio en tu carta de vinos para maximizar ventas y margen. Benchmark con criterios prácticos para hostelería.', 'Estructura precios para que el cliente navegue con facilidad y el restaurante proteja margen.', 'Una carta con precios mal distribuidos concentra ventas en el vino más barato o bloquea la gama alta.', 'La distribución debe guiar hacia una zona de confort rentable.'],
+  'benchmark-estrategia-por-copa': ['Benchmark', 'Estrategia de vino por copa: cuántos y cuáles', '¿Cuántos vinos por copa ofrecer? ¿Cuáles elegir? Benchmark con criterios prácticos para diseñar una oferta de vino por copa rentable.', 'El vino por copa es una palanca potente para aumentar ventas.', 'Pocas copas limitan experiencia; demasiadas generan merma y complejidad.', 'Una oferta bien diseñada aumenta ticket medio y reduce barreras de compra.'],
+  'benchmark-equilibrio-regiones-estilos': ['Benchmark', 'Equilibrio entre regiones, estilos y tipologías', '¿Tu carta está equilibrada en regiones, estilos y tipologías? Benchmark para construir una carta diversa, coherente y alineada con tu cocina.', 'Una carta equilibrada hace que cada vino cumpla una función.', 'Una región o estilo dominante limita experiencia y maridaje.', 'Cada región, estilo y tipología debe responder a cocina, cliente e identidad.'],
+  'benchmark-peso-vino-ticket-medio': ['Benchmark', 'Peso del vino en el ticket medio', '¿Cuánto debería representar el vino en tu ticket medio? Benchmark por tipo de restaurante para evaluar y mejorar la contribución del vino a la facturación.', 'El vino puede representar entre un 15% y un 40% del ticket medio.', 'Muchos restaurantes desconocen qué porcentaje del ticket corresponde al vino.', 'Los rangos del sector permiten identificar oportunidades de venta y margen.'],
+  'benchmark-margen-por-tipo-referencia': ['Benchmark', 'Margen por tipo de referencia', '¿Qué margen aplicar a cada tipo de vino? Benchmark con criterios por categoría: entrada, medio, premium, copa, espumoso. Estrategia de pricing real.', 'No todos los vinos necesitan el mismo margen.', 'Un multiplicador uniforme distorsiona referencias caras y baratas.', 'La estrategia debe variar por coste, contexto competitivo y percepción de valor.'],
+  'playbook-vender-mas-vino': ['Playbook', 'Cómo vender más vino en sala', 'Playbook práctico para aumentar las ventas de vino en tu restaurante. Técnicas de recomendación, formación de personal y diseño de carta.', 'Un plan para que el equipo venda más vino sin ser sumiller.', 'El personal no recomienda vino si no se siente seguro o si la carta es compleja.', 'Vender más requiere carta clara, equipo preparado y sistema de recomendación.'],
+  'playbook-mejorar-rotacion': ['Playbook', 'Cómo mejorar la rotación de vinos', 'Playbook para eliminar stock muerto y mejorar la rotación de tu bodega. Criterios de análisis, acciones correctivas y prevención.', 'Identifica vinos que no rotan y decide qué hacer con ellos.', 'El stock muerto inmoviliza capital y genera costes ocultos.', 'La rotación mejora con análisis periódico, decisiones claras y prevención.'],
+  'playbook-carta-rentable': ['Playbook', 'Cómo construir una carta más rentable', 'Playbook completo para diseñar una carta de vinos que maximice márgenes, rotación y experiencia del cliente. Estructura, pricing y selección.', 'Rediseña la carta con foco en rentabilidad sin sacrificar experiencia.', 'Las cartas construidas por inercia acumulan referencias y precios sin estrategia.', 'Cada referencia debe tener propósito, precio calculado y conexión con la cocina.'],
+  'playbook-optimizar-vino-copa': ['Playbook', 'Cómo optimizar tu oferta de vino por copa', 'Playbook para diseñar, gestionar y rentabilizar tu oferta de vino por copa. Selección, pricing, control de merma y estrategia de rotación.', 'La copa puede maximizar facturación y minimizar merma.', 'Merma, selección débil y precios mal calculados frenan rentabilidad.', 'La copa rentable requiere selección inteligente, pricing ajustado y control operativo.'],
+  'playbook-formar-personal': ['Playbook', 'Cómo formar al personal para recomendar vino', 'Playbook para formar al personal de sala en vino. Técnicas simples, sin jerga, para que tu equipo recomiende con confianza y aumente las ventas.', 'Tu equipo necesita confianza y una carta que pueda explicar rápido.', 'El miedo a equivocarse frena la recomendación de vino.', 'La formación debe ser práctica, centrada en la carta real y orientada a venta.'],
+  'playbook-decidir-compras-datos': ['Playbook', 'Cómo decidir qué vinos comprar con datos', 'Playbook para tomar decisiones de compra de vino basadas en datos reales: rotación, margen, demanda y tendencias. Reduce riesgos y mejora tu selección.', 'Usa ventas reales para comprar mejor.', 'Comprar por inercia o presión comercial genera surtido débil y stock inmovilizado.', 'Comprar bien es comprar lo que el restaurante necesita según datos reales.'],
+};
+
+const STATIC_WORKER_PRERENDER_PAGES = {
+  '/integraciones': {
+    lang: 'es',
+    title: 'Integraciones de Winerim | TPV, PMS, ERP, Inventario y API',
+    description: 'Winerim se integra con los sistemas que ya usas: TPV, PMS hotelero, ERP y gestión de inventario. Ecosistema conectado para restaurantes, hoteles y grupos.',
+    h1: 'Integraciones de Winerim',
+    subtitle: 'Conecta la carta de vinos con ventas, stock, costes, PMS hotelero, ERP y sistemas de punto de venta para tomar decisiones con datos reales.',
+    canonical: '/integraciones',
+    schemaType: 'WebPage',
+    sections: [
+      ['Por qué importan las integraciones', 'Sin conexión con el TPV, el vino queda aislado: no sabes qué referencias se venden realmente, qué margen generan ni qué vinos se quedan sin rotación. Winerim conecta carta, ventas, stock y coste para convertir la carta en un sistema de decisión.'],
+      ['TPV, POS y ventas reales', 'Winerim se integra con sistemas de punto de venta para sincronizar ventas por referencia, periodo y punto de servicio. Esto permite medir ticket medio de vino, rotación, margen y rendimiento por copa o botella.'],
+      ['Inventario, ERP y compras', 'La integración con inventario y ERP ayuda a mantener stock actualizado, detectar sobrestock, revisar costes y decidir compras con información real en lugar de intuición o presión comercial.'],
+      ['Hoteles, grupos y API', 'En hoteles y grupos, Winerim centraliza datos entre locales, outlets y sistemas PMS. Para equipos técnicos, la API permite proyectos personalizados y conexión con sistemas propios.'],
+    ],
+    links: [['Funcionalidades', '/funcionalidades'], ['Precios', '/precios'], ['Winerim Supply', '/producto/winerim-supply'], ['Solicitar demo', '/demo']],
+  },
+  '/it/prezzi': {
+    lang: 'it',
+    title: 'Prezzi Winerim | Software carta vini per ristoranti',
+    description: 'Scopri quale piano Winerim si adatta al tuo ristorante, hotel o gruppo. Carta vini digitale, analytics, pricing, stock, integrazioni e supporto.',
+    h1: 'Prezzi Winerim',
+    subtitle: 'Piani per ristoranti, hotel e gruppi che vogliono vendere più vino, migliorare margini e gestire la carta con dati reali.',
+    canonical: '/it/prezzi',
+    schemaType: 'WebPage',
+    sections: [
+      ['Piani per ogni operazione', 'Starter digitalizza la carta e migliora la presentazione. Pro aggiunge analytics, pricing, raccomandazioni e controllo della rotazione. Enterprise centralizza multi-locale, integrazioni POS/PMS, API e reporting direzionale.'],
+      ['Cosa cambia con Winerim', 'Il prezzo dipende dal numero di referenze, locali e livello di integrazione richiesto. L’obiettivo non è solo pubblicare una carta digitale, ma trasformarla in uno strumento di vendita e decisione.'],
+      ['ROI e margine', 'Winerim aiuta a migliorare ticket medio del vino, identificare stock fermo, ottimizzare prezzi, formare il team e misurare l’impatto delle decisioni sulla carta.'],
+      ['Come scegliere il piano', 'Un ristorante indipendente può iniziare con Starter o Pro. Un gastronomico, wine bar o hotel richiede Pro o Enterprise. Un gruppo multi-locale dovrebbe partire da Enterprise per governance e benchmarking.'],
+    ],
+    links: [['Prodotto', '/it/software-carta-vini'], ['Funzionalità', '/it/funzionalita'], ['Integrazioni', '/it/integrazioni'], ['Demo', '/it/demo']],
+  },
+};
+
+function escapeHtml(value) {
+  return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderWorkerStaticPrerender(path, site) {
+  const page = STATIC_WORKER_PRERENDER_PAGES[path];
+  if (!page) return null;
+
+  const canonical = `${site}${page.canonical}`;
+  const schema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': page.schemaType,
+    name: page.h1,
+    headline: page.title,
+    description: page.description,
+    url: canonical,
+    inLanguage: page.lang,
+    publisher: { '@type': 'Organization', name: 'Winerim', url: site },
+  });
+  const navLinks = page.links.map(([label, url]) => `<a href="${site}${url}">${escapeHtml(label)}</a>`).join(' | ');
+  const sections = page.sections.map(([heading, body]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`).join('\n      ');
+
+  return `<!doctype html>
+<html lang="${page.lang}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHtml(page.title)}</title>
+  <meta name="description" content="${escapeHtml(page.description)}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${escapeHtml(page.title)}">
+  <meta property="og:description" content="${escapeHtml(page.description)}">
+  <meta property="og:url" content="${canonical}">
+  <script type="application/ld+json">${schema}</script>
+</head>
+<body>
+  <header><nav><a href="${site}${page.lang === 'it' ? '/it' : '/'}">Winerim</a> | ${navLinks}</nav></header>
+  <main>
+    <article>
+      <h1>${escapeHtml(page.h1)}</h1>
+      <p><strong>${escapeHtml(page.subtitle)}</strong></p>
+      <p>${escapeHtml(page.description)}</p>
+      ${sections}
+    </article>
+    <nav aria-label="Enlaces relacionados">${navLinks}</nav>
+  </main>
+  <footer><p>Winerim. Carta inteligente de vinos para restaurantes.</p></footer>
+  <!-- worker-static:${escapeHtml(path)} -->
+</body>
+</html>`;
+}
+
+function renderWorkerDetailPrerender(path, site) {
+  const resourceMatch = path.match(/^\/recursos\/([^/]+)$/);
+  const benchmarkMatch = path.match(/^\/benchmarks-playbooks\/([^/]+)$/);
+  const resource = resourceMatch ? RESOURCE_DETAIL_PRERENDER_PAGES[resourceMatch[1]] : null;
+  const benchmark = benchmarkMatch ? BENCHMARK_DETAIL_PRERENDER_PAGES[benchmarkMatch[1]] : null;
+  if (!resource && !benchmark) return null;
+
+  const slug = resourceMatch?.[1] || benchmarkMatch?.[1];
+  const canonical = `${site}${path}`;
+  const [kind, title, description, subtitle, problem, content] = resource
+    ? ['CreativeWork', resource[0], resource[1], resource[2], resource[3], resource[4]]
+    : [benchmark[0], benchmark[1], benchmark[2], benchmark[3], benchmark[4], benchmark[5]];
+  const schemaType = kind === 'CreativeWork' ? 'CreativeWork' : 'Article';
+  const hubPath = resource ? '/recursos' : '/benchmarks-playbooks';
+  const hubLabel = resource ? 'Recursos descargables' : 'Benchmarks y playbooks';
+  const schema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    headline: title,
+    name: title,
+    description,
+    url: canonical,
+    inLanguage: 'es',
+    author: { '@type': 'Organization', name: 'Winerim', url: site },
+    publisher: { '@type': 'Organization', name: 'Winerim', url: site },
+  });
+  const breadcrumb = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site}/` },
+      { '@type': 'ListItem', position: 2, name: hubLabel, item: `${site}${hubPath}` },
+      { '@type': 'ListItem', position: 3, name: title, item: canonical },
+    ],
+  });
+
+  return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHtml(title)} | Winerim</title>
+  <meta name="description" content="${escapeHtml(description)}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="${escapeHtml(title)} | Winerim">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:url" content="${canonical}">
+  <script type="application/ld+json">${schema}</script>
+  <script type="application/ld+json">${breadcrumb}</script>
+</head>
+<body>
+  <header><nav><a href="${site}/">Winerim</a> | <a href="${site}/software-carta-de-vinos">Software carta de vinos</a> | <a href="${site}${hubPath}">${hubLabel}</a> | <a href="${site}/demo">Demo</a></nav></header>
+  <main>
+    <nav aria-label="Breadcrumb"><a href="${site}/">Inicio</a> / <a href="${site}${hubPath}">${hubLabel}</a> / ${escapeHtml(title)}</nav>
+    <article>
+      <h1>${escapeHtml(title)}</h1>
+      <p><strong>${escapeHtml(subtitle)}</strong></p>
+      <p>${escapeHtml(description)}</p>
+      <section><h2>Problema que resuelve</h2><p>${escapeHtml(problem)}</p></section>
+      <section><h2>Qué incluye</h2><p>${escapeHtml(content)}</p></section>
+      <section><h2>Cómo aplicarlo en tu carta</h2><p>Este contenido ayuda a equipos de sala, F&amp;B managers, propietarios y grupos de restauración a ordenar decisiones de carta, precio, rotación, formación y compras con criterios repetibles.</p></section>
+      <section><h2>Siguiente paso con Winerim</h2><p>Winerim convierte este criterio en seguimiento continuo: carta, ventas, stock, margen, recomendaciones y oportunidades conectadas en una plataforma de decisión.</p></section>
+    </article>
+    <nav aria-label="Enlaces relacionados">
+      <a href="${site}${hubPath}">${hubLabel}</a> |
+      <a href="${site}/guias-y-recursos">Guías y recursos</a> |
+      <a href="${site}/herramientas">Herramientas</a> |
+      <a href="${site}/analisis-carta">Analizar mi carta gratis</a> |
+      <a href="${site}/demo">Solicitar demo</a>
+    </nav>
+  </main>
+  <footer><p>Winerim. Carta inteligente de vinos para restaurantes.</p></footer>
+  <!-- worker-detail:${escapeHtml(slug)} -->
+</body>
+</html>`;
+}
+
+function detailUrlBlock(site, path, lastmod) {
+  return `  <url>
+    <loc>${site}${path}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+`;
+}
+
+function injectWorkerDetailUrlsIntoSitemap(xml, site) {
+  if (xml.includes(`${site}/recursos/plantilla-formacion-equipo-sala`)
+    && xml.includes(`${site}/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`)) {
+    return xml;
+  }
+
+  const lastmod = new Date().toISOString().slice(0, 10);
+  const blocks = [
+    ...Object.keys(RESOURCE_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/recursos/${slug}`, lastmod)),
+    ...Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, lastmod)),
+  ].join('');
+
+  return xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
+}
+
 // ─── NOINDEX routes (served but with noindex header) ───
 const NOINDEX_ROUTES = new Set([
   '/gracias',
@@ -943,12 +1170,16 @@ export default {
             'apikey': env.SUPABASE_ANON_KEY,
           },
         });
-        return new Response(await res.text(), {
+        const sitemapXml = injectWorkerDetailUrlsIntoSitemap(
+          await res.text(),
+          env.SITE_URL || 'https://winerim.wine',
+        );
+        return new Response(sitemapXml, {
           headers: {
             'Content-Type': 'application/xml; charset=utf-8',
             'Cache-Control': 'public, max-age=3600',
             'X-Robots-Tag': 'index, follow',
-            'X-Worker-Branch': 'sitemap',
+            'X-Worker-Branch': 'sitemap-worker-detail-bridge',
           },
         });
       } catch (e) {
@@ -1128,6 +1359,32 @@ export default {
 
     // ── 7. Bot traffic → prerender ──
     if (isBot(ua)) {
+      const workerStaticHtml = renderWorkerStaticPrerender(path, env.SITE_URL || 'https://winerim.wine');
+      if (workerStaticHtml) {
+        return new Response(workerStaticHtml, {
+          status: 200,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+            'X-Prerendered': 'true',
+            'X-Worker-Branch': 'worker-static-prerender',
+          },
+        });
+      }
+
+      const workerDetailHtml = renderWorkerDetailPrerender(path, env.SITE_URL || 'https://winerim.wine');
+      if (workerDetailHtml) {
+        return new Response(workerDetailHtml, {
+          status: 200,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+            'X-Prerendered': 'true',
+            'X-Worker-Branch': 'worker-detail-prerender',
+          },
+        });
+      }
+
       try {
         const prerenderUrl = `${env.PRERENDER_URL}?path=${encodeURIComponent(path)}`;
         const res = await fetch(prerenderUrl, {

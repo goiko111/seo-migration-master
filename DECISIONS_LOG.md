@@ -2279,3 +2279,45 @@
 - Monitorizar la validación GSC.
 - Revisar las `8` URLs `200 -> 200` y decidir refuerzo o noindex/sitemap según intención.
 - Seguir después con `Descubierta: actualmente sin indexar`, especialmente biblioteca del vino y artículos internacionales.
+
+### Refuerzo de las 6 URLs indexables `200 -> 200`
+
+#### Hechos
+
+- Se auditaron como Googlebot las `8` URLs reales restantes del informe `Rastreada: actualmente sin indexar`.
+- `/terminos` y `/en/terms` siguen como legales `noindex`, correcto.
+- Las tres fichas:
+  - `/recursos/plantilla-formacion-equipo-sala`;
+  - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`;
+  - `/recursos/revision-mensual-margenes`;
+  estaban respondiendo con canonical/title/schema de la home en el prerender de bots.
+- Se añadió prerender dedicado en Supabase para recursos y benchmarks/playbooks.
+- Se dejó de excluir recursos y benchmarks/playbooks del sitemap en la Edge Function.
+- El despliegue Supabase por CLI falló por falta de `SUPABASE_ACCESS_TOKEN`.
+- Se desplegó un puente productivo en Cloudflare Worker:
+  - version ID `670b5372-cbca-48a5-92af-8ebcfb9fb5f5`;
+  - `worker-detail-prerender` para recursos y benchmarks/playbooks;
+  - `worker-static-prerender` para `/it/prezzi` e `/integraciones`;
+  - `sitemap-worker-detail-bridge` para inyectar las fichas en `/sitemap.xml`.
+- Producción queda validada como Googlebot con `200`, `index, follow`, canonical propio y schema adecuado en las seis URLs indexables.
+- Tests completos pasados: 8 archivos, 45 tests.
+
+#### Decisiones
+
+- Mantener las seis URLs indexables como páginas propias y no redirigirlas.
+- Usar Worker como puente temporal porque no hay credenciales locales para desplegar Supabase.
+- Mantener los cambios en Supabase listos para publicar desde Lovable.
+- No pedir indexación manual masiva hasta que Google recrawlee el bloque corregido.
+
+#### Hipótesis
+
+- El principal bloqueo de las tres fichas era canonicalización efectiva a la home en el HTML de bot.
+- `/it/prezzi` e `/integraciones` necesitaban más contenido semántico de bot, no un cambio de URL.
+- Tras recrawl, estas seis URLs deberían tener más opciones de salir de `Rastreada: actualmente sin indexar`.
+
+#### Tareas pendientes
+
+- Publicar Supabase `prerender` y `sitemap` desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Monitorizar si GSC reconoce el cambio en las seis URLs.
+- Reforzar enlaces internos hacia estas URLs desde hubs, producto, blog y biblioteca.
+- Retomar `Descubierta: actualmente sin indexar` con foco en biblioteca del vino e internacional.

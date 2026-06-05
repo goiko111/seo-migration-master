@@ -420,33 +420,6 @@ const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set([
   // Legal pages are available to users and bots, but should not be submitted as organic landing pages.
   '/privacidad',
   '/terminos',
-
-  // Resource and benchmark detail pages currently resolve to generic prerendered HTML for bots.
-  // Keep them out of the submitted sitemap until they have dedicated prerender content.
-  '/recursos/plantilla-carta-de-vinos',
-  '/recursos/checklist-carta-de-vinos-rentable',
-  '/recursos/guia-vino-por-copa-para-restaurantes',
-  '/recursos/plantilla-wine-mapping-restaurante',
-  '/recursos/plantilla-estrategia-vinos-por-copa',
-  '/recursos/checklist-deteccion-vinos-muertos',
-  '/recursos/plantilla-formacion-equipo-sala',
-  '/recursos/plantilla-analisis-margenes',
-  '/recursos/scorecard-rendimiento-carta',
-  '/recursos/checklist-carta-que-vende',
-  '/recursos/plantilla-equilibrio-carta',
-  '/recursos/revision-mensual-margenes',
-  '/benchmarks-playbooks/benchmark-referencias-por-tipo-restaurante',
-  '/benchmarks-playbooks/benchmark-distribucion-rangos-precio',
-  '/benchmarks-playbooks/benchmark-estrategia-por-copa',
-  '/benchmarks-playbooks/benchmark-equilibrio-regiones-estilos',
-  '/benchmarks-playbooks/benchmark-peso-vino-ticket-medio',
-  '/benchmarks-playbooks/benchmark-margen-por-tipo-referencia',
-  '/benchmarks-playbooks/playbook-vender-mas-vino',
-  '/benchmarks-playbooks/playbook-mejorar-rotacion',
-  '/benchmarks-playbooks/playbook-carta-rentable',
-  '/benchmarks-playbooks/playbook-optimizar-vino-copa',
-  '/benchmarks-playbooks/playbook-formar-personal',
-  '/benchmarks-playbooks/playbook-decidir-compras-datos',
 ]);
 
 const UNSUPPORTED_SEO_PAGE_SLUG_RE = /^(?:grape|uva|vitigno|rebsorte|cepage|casta|curso-vino|curso-vinho|wine-course|corso-vino|cours-vin|weinkurs|region-vinicola|wine-region|regione-vinicola|regiao-vinicola|weinregion|software-carta-de-vinos|software-vino|wine-list-software|software-carta-dei-vini|logiciel-carte-des-vins|weinkarten-software|software-carta-vinhos|software-carta-de-vinhos)-/;
