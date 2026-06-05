@@ -2246,3 +2246,102 @@
 3. Estrategia:
    - priorizar indexación de hubs, entidades y artículos con mejor enlazado interno;
    - esperar datos nuevos de GSC antes de otra tanda manual.
+
+## Actualización 2026-06-05: legacy article redirects desplegados
+
+## Hechos
+
+- Ya está desplegado el Worker con redirects `301` para artículos legacy localizados:
+  - `/article/{slug}_en` -> `/en/article/{slug}`;
+  - `/article/{slug}_it` -> `/it/article/{slug}`;
+  - `/article/{slug}_fr` -> `/fr/article/{slug}`;
+  - `/article/{slug}_de` -> `/de/article/{slug}`;
+  - `/article/{slug}_pt` -> `/pt/article/{slug}`.
+- Version ID de Worker: `251558ac-99da-4fec-8fa6-8a63286174c0`.
+- Validación productiva correcta en ejemplos EN, DE y PT.
+- Tests locales completos: 39 tests pasan.
+
+## Decisiones
+
+- Cerrar la primera corrección del ruido legacy de artículos.
+- Siguiente foco: 404 y `Rastreada: actualmente sin indexar`.
+
+## Hipótesis
+
+- Search Console tardará días en reflejar menos ruido en legacy, pero Googlebot ya recibe la señal correcta.
+
+## Tareas pendientes listas para retomar
+
+1. Search Console:
+   - inspeccionar una muestra legacy `_en/_de/_pt` en unos días;
+   - comprobar si cambia a `Página con redirección` o desaparece del motivo `Descubierta`.
+2. 404:
+   - abrir informe `No se ha encontrado (404)`;
+   - extraer ejemplos;
+   - decidir 301, 410 o dejar 404.
+3. Rastreada sin indexar:
+   - revisar si son páginas de valor real;
+   - mejorar enlazado/contenido o sacarlas del sitemap si no merecen indexarse.
+
+## Actualización 2026-06-05: 404 visibles no son 404 productivos
+
+## Hechos
+
+- Las 10 primeras muestras del informe `No se ha encontrado (404)` ya redirigen en producción.
+- No se añadió código extra para esas muestras.
+- GSC no ofreció `Validar corrección` en la vista actual.
+
+## Decisiones
+
+- No tocar más redirects 404 hasta tener más ejemplos o recrawl.
+- Pasar al siguiente foco: `Rastreada: actualmente sin indexar`.
+
+## Hipótesis
+
+- El informe de 404 bajará cuando Google recrawlee los legacy ya redirigidos.
+
+## Tareas pendientes listas para retomar
+
+1. Abrir `Rastreada: actualmente sin indexar`.
+2. Revisar ejemplos:
+   - páginas de valor que necesitan más contenido/enlazado;
+   - páginas no estratégicas que conviene sacar del sitemap;
+   - rutas legacy que conviene redirigir.
+3. Revisión posterior:
+   - comprobar si `No se ha encontrado (404)` baja tras recrawl.
+
+## Actualización 2026-06-05: 404 legacy adicionales redirigidos
+
+## Hechos
+
+- Worker desplegado con redirects adicionales de alta confianza:
+  - `/terms-of-service` -> `/terminos`;
+  - `/landing` -> `/`;
+  - `/reviews-restaurante` -> `/casos-exito`;
+  - `/por-que-los-jovenes-no-beben-vino-en-los-restaurantes` -> `/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes`.
+- Version ID de Worker: `6c6f3366-e13f-4eee-b9c1-7603572f8822`.
+- Producción validada con `301` directo en las cuatro URLs y destino final `200` en variantes con trailing slash.
+- Tests completos pasados: 8 archivos, 40 tests.
+- El redirect legacy de artículos localizados (`/article/{slug}_{lang}`) sigue activo y validado.
+
+## Decisiones
+
+- Cerrar esta tanda de redirects legacy de alta confianza.
+- No añadir más redirects sin ejemplos nuevos de GSC o equivalencia semántica clara.
+- Siguiente foco operativo: `Rastreada: actualmente sin indexar`.
+
+## Hipótesis
+
+- El informe 404 de GSC debería bajar después del recrawl, pero no de forma inmediata porque los datos visibles eran del `29/5/26`.
+- El cuello de indexación seguirá siendo `Descubierta`/`Rastreada sin indexar` aunque el bloque 404 mejore.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push del bloque Worker/docs.
+2. Abrir `Rastreada: actualmente sin indexar` en Search Console.
+3. Clasificar ejemplos en:
+   - páginas valiosas que necesitan más enlazado interno/contenido;
+   - páginas no estratégicas que deben salir del sitemap;
+   - rutas legacy que necesitan `301`;
+   - URLs sin equivalente útil que pueden quedarse como 404/410.
+4. Tras recrawl, revisar si `No se ha encontrado (404)` baja y si las legacy `_lang` pasan a `Página con redirección`.

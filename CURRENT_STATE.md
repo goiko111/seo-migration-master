@@ -3108,3 +3108,136 @@
 - Revisar si conviene implementar redirects `301` para artículos legacy `slug_lang`.
 - Confirmar si todas las URLs del sitemap actual tienen valor suficiente para indexación o si conviene priorizar/podar.
 - Reinspeccionar en 48-72 horas las seis URLs solicitadas el 2026-06-04.
+
+## Actualización 2026-06-05: redirects 301 para artículos legacy localizados
+
+## Hechos
+
+- Se implementó en `cloudflare-worker-v3-hybrid.js` una regla genérica para rutas legacy de artículos:
+  - patrón: `/article/{slug}_{en|it|fr|de|pt}`;
+  - destino: `/{lang}/article/{slug}`;
+  - estado: `301`;
+  - branch: `legacy-localized-article-redirect`.
+- La regla preserva query string cuando existe.
+- Se añadió cobertura en `src/test/wine-library-seo-surface.test.ts`.
+- Validaciones locales:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - ESLint dirigido;
+  - `npm run test -- --run`: 8 archivos, 39 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+- Se desplegó Cloudflare Worker `winerim-proxy`.
+- Worker version ID desplegada: `251558ac-99da-4fec-8fa6-8a63286174c0`.
+- Producción validada:
+  - `/article/alex-pardo_en` -> `301` a `/en/article/alex-pardo`;
+  - `/article/5-errores-reales-que-vemos-en-cartas-de-vinos-de-restaurantes_de` -> `301` a `/de/article/5-errores-reales-que-vemos-en-cartas-de-vinos-de-restaurantes`;
+  - `/article/alternativa-carta-pdf-vinos_pt?utm=test` -> `301` a `/pt/article/alternativa-carta-pdf-vinos?utm=test`;
+  - `/en/article/alex-pardo` sigue respondiendo `200`.
+
+## Decisiones
+
+- Convertir los artículos legacy localizados con sufijo en redirects permanentes en el Worker, antes de bot prerender y antes del proxy SPA.
+- Mantener compatibilidad de destino limpio, pero no seguir sirviendo legacy con `200` + canonical.
+- No tocar Supabase ni Lovable para este cambio, porque la corrección vive en Cloudflare Worker.
+
+## Hipótesis
+
+- Google consolidará más rápido las señales de las rutas legacy hacia las rutas limpias localizadas.
+- El informe de `Descubierta: actualmente sin indexar` debería ir reduciendo ruido legacy cuando GSC recrawlee esas URLs.
+
+## Tareas pendientes
+
+- Reinspeccionar en Search Console una muestra de legacy `_en/_de/_pt` tras recrawl.
+- Revisar la causa `No se ha encontrado (404)` con sus 189 URLs.
+- Revisar `Rastreada: actualmente sin indexar` para separar páginas valiosas de baja prioridad.
+
+## Actualización 2026-06-05: auditoría inicial de 404 GSC
+
+## Hechos
+
+- Se abrió el informe GSC `No se ha encontrado (404)`.
+- El informe muestra `189` URLs, con última actualización `29/5/26`.
+- Las 10 muestras visibles son legacy antiguas:
+  - `/corso-vino-cata-mw-examen-practico`;
+  - `/winerim-sommelier-magazine/`;
+  - `/winerim-vs-wineadvisor-2/`;
+  - `/alex-pardo/`;
+  - `/estadisticas/estadisticas-2024-01-28/`;
+  - `/home/`;
+  - `/estadisticas/estadisticas-2024-02-24/`;
+  - `/clientes/canabota/`;
+  - `/clientes/yandiola/`;
+  - `/clientes/casa-curro/`.
+- Producción actual ya no devuelve 404 en esas muestras:
+  - las rutas sin trailing slash mapeadas devuelven `301` directo;
+  - las rutas con trailing slash hacen primero normalización de slash y acaban en destino `200`.
+- Ejemplos de destino final validados:
+  - `/winerim-sommelier-magazine/` -> `/sommelier-corner` -> `200`;
+  - `/winerim-vs-wineadvisor-2/` -> `/comparativas` -> `200`;
+  - `/alex-pardo/` -> `/article/alex-pardo` -> `200`;
+  - `/estadisticas/estadisticas-2024-01-28/` -> `/benchmarks-playbooks` -> `200`;
+  - `/home/` -> `/` -> `200`;
+  - `/clientes/canabota/` -> `/clientes` -> `200`.
+- En esta vista GSC no expuso botón `Validar corrección`; solo `ver detalles`.
+
+## Decisiones
+
+- No añadir nuevas reglas para las 10 muestras visibles de 404 porque ya están resueltas en producción.
+- Esperar recrawl/GSC antes de considerar más cambios sobre esas URLs.
+- Mantener pendiente auditar más allá de las 10 muestras visibles si el recuento no baja.
+
+## Hipótesis
+
+- El bloque de 404 refleja principalmente estado histórico anterior a los redirects ya desplegados.
+- GSC debería mover esas URLs a `Página con redirección` o sacarlas del error cuando las recrawlee.
+
+## Tareas pendientes
+
+- Si el 404 sigue alto tras recrawl, exportar más ejemplos desde GSC.
+- Revisar si conviene reducir cadenas de dos saltos para legacy con trailing slash.
+
+## Actualización 2026-06-05: redirects adicionales para 404 legacy de alta confianza
+
+## Hechos
+
+- Se añadieron cuatro redirects directos en `cloudflare-worker-v3-hybrid.js` para URLs legacy que auditorías previas habían confirmado como 404 reales:
+  - `/terms-of-service` -> `/terminos`;
+  - `/landing` -> `/`;
+  - `/reviews-restaurante` -> `/casos-exito`;
+  - `/por-que-los-jovenes-no-beben-vino-en-los-restaurantes` -> `/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes`.
+- Se añadió cobertura de test en `src/test/wine-library-seo-surface.test.ts`.
+- Validaciones locales:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js src/test/wine-library-seo-surface.test.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 10 tests;
+  - `npm run test -- --run`: 8 archivos, 40 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+- Se desplegó Cloudflare Worker `winerim-proxy`.
+- Worker version ID desplegada: `6c6f3366-e13f-4eee-b9c1-7603572f8822`.
+- Producción validada:
+  - `/terms-of-service` devuelve `301` a `/terminos`;
+  - `/landing` devuelve `301` a `/`;
+  - `/reviews-restaurante` devuelve `301` a `/casos-exito`;
+  - `/por-que-los-jovenes-no-beben-vino-en-los-restaurantes` devuelve `301` a `/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes`;
+  - las cuatro variantes con trailing slash terminan en destino `200`;
+  - `/article/alex-pardo_en` conserva el redirect `legacy-localized-article-redirect` a `/en/article/alex-pardo`.
+
+## Decisiones
+
+- Redirigir solo URLs legacy con equivalente semántico claro y validado.
+- Enviar `/reviews-restaurante` a `/casos-exito` por intención de reviews/casos.
+- Enviar `/terms-of-service` a `/terminos` por equivalencia legal.
+- Enviar `/landing` a home porque no hay una landing canónica más específica documentada.
+- Enviar el artículo antiguo de jóvenes y vino a su ruta actual de artículo, porque el slug existe en `src/data/articles.ts`.
+
+## Hipótesis
+
+- Estos redirects reducirán parte del ruido del informe 404 cuando Google recrawlee.
+- Las variantes con trailing slash seguirán teniendo dos saltos por la normalización global, pero llegan a `200` y no bloquean indexación ni consolidación.
+
+## Tareas pendientes
+
+- Esperar recrawl de Google antes de validar si el informe 404 baja.
+- Si el recuento 404 se mantiene alto, exportar más ejemplos desde GSC y clasificar en `301`, `410` o contenido nuevo.
+- Continuar revisión de `Rastreada: actualmente sin indexar` para separar páginas valiosas de URLs que conviene podar o redirigir.

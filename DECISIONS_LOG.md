@@ -2164,3 +2164,81 @@
 - Auditar ejemplos de las principales causas de no indexación.
 - Definir plan de redirects legacy.
 - Volver a medir después de que GSC actualice datos posteriores al deploy.
+
+### Redirects 301 para artículos legacy localizados
+
+#### Hechos
+
+- Se implementó regla genérica de Worker para `/article/{slug}_{lang}` con `lang` en `en`, `it`, `fr`, `de`, `pt`.
+- El destino queda como `/{lang}/article/{slug}`.
+- Worker desplegado con version ID `251558ac-99da-4fec-8fa6-8a63286174c0`.
+- Producción devuelve `301` con `X-Worker-Branch: legacy-localized-article-redirect` en muestras reales de GSC.
+
+#### Decisiones
+
+- Usar `301` en edge para legacy localizados en lugar de servir `200` con canonical.
+- Mantener query string en el redirect.
+- No modificar contenido ni base de datos para esta corrección.
+
+#### Hipótesis
+
+- Esto debería limpiar parte del inventario legacy de Search Console y reforzar las rutas canónicas localizadas.
+
+#### Tareas pendientes
+
+- Medir de nuevo `Descubierta: actualmente sin indexar` cuando GSC actualice.
+- Continuar con auditoría de 404 y rastreadas/no indexadas.
+
+### Auditoría inicial de 404
+
+#### Hechos
+
+- Se revisó el informe GSC `No se ha encontrado (404)` con `189` URLs.
+- Las 10 muestras visibles son legacy antiguas.
+- Producción actual redirige esas muestras y acaba en destinos `200`.
+- GSC no mostró botón disponible de `Validar corrección` en esa vista.
+
+#### Decisiones
+
+- No crear reglas nuevas para esas 10 muestras porque ya no son 404 reales en producción.
+- Monitorizar recrawl antes de intervenir más.
+
+#### Hipótesis
+
+- El informe de 404 está atrasado y debería mejorar con recrawl.
+
+#### Tareas pendientes
+
+- Exportar más ejemplos si el recuento no baja.
+- Evaluar si conviene evitar cadenas de redirect en trailing slash legacy.
+
+### Redirects adicionales para 404 legacy de alta confianza
+
+#### Hechos
+
+- Se añadieron redirects directos en Cloudflare Worker para:
+  - `/terms-of-service` -> `/terminos`;
+  - `/landing` -> `/`;
+  - `/reviews-restaurante` -> `/casos-exito`;
+  - `/por-que-los-jovenes-no-beben-vino-en-los-restaurantes` -> `/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes`.
+- Worker desplegado con version ID `6c6f3366-e13f-4eee-b9c1-7603572f8822`.
+- Producción devuelve `301` con `X-Worker-Branch: direct-legacy-redirect` en las cuatro URLs.
+- Las versiones con trailing slash terminan en destino `200`.
+- La suite local queda en 8 archivos y 40 tests pasados.
+
+#### Decisiones
+
+- Mantener la política de redirects de alta confianza: solo se añade `301` cuando existe una equivalencia clara.
+- Resolver el artículo legacy de jóvenes y vino hacia su ruta de artículo actual, no hacia `/blog`.
+- Dejar los casos dudosos pendientes de exportación GSC en vez de inventar destinos.
+
+#### Hipótesis
+
+- Estos redirects deberían reducir el bloque de 404 histórico cuando Search Console actualice después de recrawl.
+- El efecto no será inmediato porque el informe visto estaba actualizado a `29/5/26`.
+
+#### Tareas pendientes
+
+- Revisar el informe 404 tras recrawl.
+- Exportar más ejemplos si el recuento no baja.
+- Continuar con `Rastreada: actualmente sin indexar`.

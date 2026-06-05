@@ -63,12 +63,16 @@ const SEO_ALIASES = {
 // ─── High-confidence legacy URLs surfaced by Search Console ───
 const LEGACY_DIRECT_REDIRECTS = {
   '/privacy-policy': '/privacidad',
+  '/terms-of-service': '/terminos',
   '/home': '/',
   '/homepage': '/',
+  '/landing': '/',
   '/alex-pardo': '/article/alex-pardo',
   '/aumenta-la-venta-de-vinos-en-tu-restaurante-mejores-estrategias': '/como-vender-mas-vino-en-un-restaurante',
+  '/por-que-los-jovenes-no-beben-vino-en-los-restaurantes': '/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes',
   '/winerim-vs-wineadvisor-2': '/comparativas',
   '/winerim-vs-wineadvisor': '/comparativas',
+  '/reviews-restaurante': '/casos-exito',
   '/winerim-sommelier-magazine': '/sommelier-corner',
   '/corso-vino-cata-mw-examen-practico': '/decision-center/cursos',
   '/winerim-academy-2': '/decision-center/cursos',
@@ -115,6 +119,13 @@ function getMalformedAbsolutePathTarget(path) {
   if (!match) return null;
   const target = match[1].replace(/\/{2,}/g, '/');
   return target && target !== path ? target : null;
+}
+
+function getLegacyLocalizedArticleTarget(path) {
+  const match = path.match(/^\/article\/([^/]+)_(en|it|fr|de|pt)$/);
+  if (!match) return null;
+  const [, baseSlug, lang] = match;
+  return `/${lang}/article/${baseSlug}`;
 }
 
 // ─── Wine library legacy one-segment shortcuts → canonical entity URLs ───
@@ -953,6 +964,18 @@ export default {
           'Location': `${env.SITE_URL || 'https://winerim.wine'}${malformedAbsoluteTarget}${url.search}`,
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'malformed-absolute-url-redirect',
+        },
+      });
+    }
+
+    const legacyLocalizedArticleTarget = getLegacyLocalizedArticleTarget(path);
+    if (legacyLocalizedArticleTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${legacyLocalizedArticleTarget}${url.search}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'legacy-localized-article-redirect',
         },
       });
     }

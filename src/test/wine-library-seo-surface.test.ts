@@ -120,4 +120,25 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("getWineLibraryLegacyShortcutTarget(path)");
     expect(worker).toContain("'X-Worker-Branch': 'wine-library-legacy-redirect'");
   });
+
+  it("redirects legacy localized article suffixes at the Worker edge", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("function getLegacyLocalizedArticleTarget(path)");
+    expect(worker).toContain("/^\\/article\\/([^/]+)_(en|it|fr|de|pt)$/");
+    expect(worker).toContain("return `/${lang}/article/${baseSlug}`");
+    expect(worker).toContain("getLegacyLocalizedArticleTarget(path)");
+    expect(worker).toContain("'X-Worker-Branch': 'legacy-localized-article-redirect'");
+  });
+
+  it("maps high-confidence GSC 404 legacy URLs at the Worker edge", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("'/terms-of-service': '/terminos'");
+    expect(worker).toContain("'/landing': '/'");
+    expect(worker).toContain("'/reviews-restaurante': '/casos-exito'");
+    expect(worker).toContain(
+      "'/por-que-los-jovenes-no-beben-vino-en-los-restaurantes': '/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes'",
+    );
+  });
 });
