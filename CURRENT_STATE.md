@@ -3059,3 +3059,52 @@
 - Revisar Search Console en 48-72 horas para ver si las seis URLs pasan de `no indexada` a rastreada/indexada.
 - Monitorizar el informe de Páginas para `Descubierta: actualmente sin indexar`.
 - Continuar con schema de detalle de entidades de biblioteca del vino.
+
+## Actualización 2026-06-05: lectura inicial de cobertura GSC
+
+## Hechos
+
+- Search Console, propiedad `https://winerim.wine/`, muestra en el informe de Páginas:
+  - `102` URLs indexadas;
+  - `2.331` URLs sin indexar;
+  - última actualización del informe: `29/5/26`.
+- Motivos principales de no indexación:
+  - `Descubierta: actualmente sin indexar`: `1.930` URLs;
+  - `Rastreada: actualmente sin indexar`: `153` URLs;
+  - `No se ha encontrado (404)`: `189` URLs;
+  - `Página alternativa con etiqueta canónica adecuada`: `29` URLs;
+  - `Página con redirección`: `23` URLs;
+  - `noindex`: `3` URLs;
+  - duplicadas sin canonical: `3` URLs;
+  - canonical distinta elegida por Google: `1` URL.
+- El sitemap actual contiene `2.072` URLs y `robots.txt` permite Googlebot.
+- El informe de `Descubierta: actualmente sin indexar` muestra como ejemplos muchas URLs legacy de artículos con sufijos de idioma:
+  - `/article/..._de`;
+  - `/article/..._fr`;
+  - `/article/..._it`;
+  - `/article/..._pt`;
+  - `/article/..._en`.
+- El sitemap actual ya lista versiones limpias localizadas, por ejemplo `/de/article/...`, `/en/article/...`, `/pt/article/...`, no esas legacy con sufijo.
+- Las legacy de artículos responden `200` y canonicalizan a la ruta limpia localizada en prerender para Googlebot; no redirigen `301`.
+
+## Decisiones
+
+- Tratar `102` indexadas como una señal baja para el volumen estratégico del sitio, pero leerla con cautela porque el informe va retrasado al `29/5/26`.
+- Priorizar saneamiento de inventario y señales de canonical/redirect antes de solicitar más indexación masiva.
+- Considerar convertir rutas legacy `slug_lang` de artículos en redirecciones `301` a `/{lang}/article/{slug}` para acelerar consolidación.
+
+## Hipótesis
+
+- Gran parte del diferencial entre sitemap y URLs sin indexar viene de histórico legacy y descubrimiento de URLs antiguas, no solo de las nuevas páginas de biblioteca.
+- Las URLs nuevas de biblioteca pueden tardar en reflejarse porque Search Console todavía no incluye la publicación/indexación del 2026-06-04.
+- Responder `200` en legacy con canonical puede ser correcto, pero un `301` probablemente reduciría ruido de cobertura y consolidaría señales más rápido.
+
+## Tareas pendientes
+
+- Auditar muestras de:
+  - `Descubierta: actualmente sin indexar`;
+  - `Rastreada: actualmente sin indexar`;
+  - `No se ha encontrado (404)`.
+- Revisar si conviene implementar redirects `301` para artículos legacy `slug_lang`.
+- Confirmar si todas las URLs del sitemap actual tienen valor suficiente para indexación o si conviene priorizar/podar.
+- Reinspeccionar en 48-72 horas las seis URLs solicitadas el 2026-06-04.

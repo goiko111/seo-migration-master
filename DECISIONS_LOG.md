@@ -2136,3 +2136,31 @@
 
 - Revisar cambios de estado en 48-72 horas.
 - Medir impresiones/cobertura antes de solicitar más URLs.
+
+### Lectura de cobertura e indexación baja
+
+#### Hechos
+
+- Search Console muestra `102` URLs indexadas y `2.331` sin indexar en la propiedad `https://winerim.wine/`.
+- La última actualización del informe es `29/5/26`, anterior a los últimos despliegues e indexación manual.
+- La causa dominante es `Descubierta: actualmente sin indexar` con `1.930` URLs.
+- Las muestras visibles de esa causa son mayoritariamente URLs legacy de artículos con sufijo de idioma (`/article/..._de`, `/article/..._fr`, etc.).
+- El sitemap actual contiene `2.072` URLs limpias y no incluye esas legacy con sufijo.
+- Las legacy responden `200` con canonical limpio localizado, no `301`.
+
+#### Decisiones
+
+- Considerar bajo el ratio de indexación, pero no interpretarlo como fallo total porque el informe está atrasado y mezcla URLs legacy.
+- Priorizar depurar señales legacy/canonical/redirect antes de ampliar indexación manual.
+- Evaluar redirecciones `301` para artículos legacy con sufijo.
+
+#### Hipótesis
+
+- El ruido legacy está consumiendo parte del análisis/crawl de Google y dificultando leer el avance real de la biblioteca del vino.
+- Un sistema de redirects más explícito puede reducir el inventario no indexado visible en GSC.
+
+#### Tareas pendientes
+
+- Auditar ejemplos de las principales causas de no indexación.
+- Definir plan de redirects legacy.
+- Volver a medir después de que GSC actualice datos posteriores al deploy.

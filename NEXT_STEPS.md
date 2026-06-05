@@ -2208,3 +2208,41 @@
 3. Desarrollo:
    - implementar schema de detalle para uvas, regiones, estilos y maridajes;
    - decidir si se mantiene o separa el `SoftwareApplication` dentro del catálogo de Organization.
+
+## Actualización 2026-06-05: siguiente foco, cobertura baja en GSC
+
+## Hechos
+
+- GSC reporta `102` indexadas frente a `2.331` sin indexar.
+- El informe está actualizado a `29/5/26`, antes de los cambios y solicitudes del 2026-06-04.
+- Causa principal: `Descubierta: actualmente sin indexar` con `1.930` URLs.
+- Las muestras visibles son muchas URLs legacy de artículos con sufijo de idioma.
+- El sitemap actual tiene `2.072` URLs limpias y `robots.txt` permite Googlebot.
+- Las legacy de artículos responden `200` con canonical limpio, no `301`.
+
+## Decisiones
+
+- No hacer indexación masiva.
+- La siguiente mejora debe ser depuración de inventario SEO:
+  - legacy redirects;
+  - 404s;
+  - páginas rastreadas/no indexadas;
+  - priorización del sitemap.
+
+## Hipótesis
+
+- El ratio de indexación mejorará más limpiando señales legacy y reforzando enlazado interno que solicitando manualmente cientos de URLs.
+
+## Tareas pendientes listas para retomar
+
+1. Auditar GSC:
+   - exportar o revisar ejemplos de `Descubierta: actualmente sin indexar`;
+   - exportar o revisar ejemplos de `Rastreada: actualmente sin indexar`;
+   - exportar o revisar ejemplos de `404`.
+2. Código/SEO técnico:
+   - implementar `301` de `/article/{slug}_{lang}` a `/{lang}/article/{slug}` si no rompe compatibilidad;
+   - revisar legacy article routes que hoy responden `200`;
+   - confirmar que sitemap solo contiene URLs canónicas de valor.
+3. Estrategia:
+   - priorizar indexación de hubs, entidades y artículos con mejor enlazado interno;
+   - esperar datos nuevos de GSC antes de otra tanda manual.
