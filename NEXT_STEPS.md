@@ -2337,7 +2337,7 @@
 
 ## Tareas pendientes listas para retomar
 
-1. Commit y push del bloque Worker/docs.
+1. Hecho al cierre: commit y push del bloque Worker/docs.
 2. Abrir `Rastreada: actualmente sin indexar` en Search Console.
 3. Clasificar ejemplos en:
    - páginas valiosas que necesitan más enlazado interno/contenido;
@@ -2345,3 +2345,56 @@
    - rutas legacy que necesitan `301`;
    - URLs sin equivalente útil que pueden quedarse como 404/410.
 4. Tras recrawl, revisar si `No se ha encontrado (404)` baja y si las legacy `_lang` pasan a `Página con redirección`.
+
+## Actualización 2026-06-05: `Rastreada sin indexar` saneado y validación iniciada
+
+## Hechos
+
+- Se completó la revisión del informe `Rastreada: actualmente sin indexar`.
+- Se extrajeron las `153` URLs visibles desde Search Console.
+- El CSV no pudo descargarse desde el navegador integrado; la extracción se hizo aumentando a `100` filas y capturando las dos páginas de tabla.
+- Antes del Worker nuevo:
+  - `122` URLs acababan en `301 -> 200`;
+  - `9` URLs respondían `200 -> 200`;
+  - `20` URLs acababan en `404`;
+  - `1` URL acababa en `410`.
+- Worker desplegado para corregir los 404 de alta confianza y queries legacy.
+- Version ID de Worker: `06906271-4e57-4755-be7e-03376cfd8f7d`.
+- Después del deploy:
+  - `143` URLs quedan en `301 -> 200`;
+  - `8` URLs quedan en `200 -> 200`;
+  - `2` URLs quedan en `301 -> 410`;
+  - `0` URLs quedan en `404`.
+- Search Console tiene validación iniciada para el motivo:
+  - `Resultado de la validación: Iniciada`;
+  - `Fecha de inicio: 5/6/26`.
+- Tests completos pasados: 8 archivos, 43 tests.
+
+## Decisiones
+
+- Cerrar el bloque de redirects de `Rastreada sin indexar`.
+- No solicitar indexación masiva todavía.
+- Tratar las `8` URLs `200 -> 200` como siguiente microbloque de calidad/indexabilidad.
+- Mantener legales `terminos` y `en/terms` como `noindex`.
+
+## Hipótesis
+
+- El informe debería mejorar cuando Google procese la validación.
+- Si algunas URLs reales siguen sin indexar, el problema ya será contenido/enlazado/señal de calidad, no respuesta HTTP.
+
+## Tareas pendientes listas para retomar
+
+1. Hecho al cierre: commit y push del bloque Worker/docs.
+2. Monitorizar la validación GSC de `Rastreada: actualmente sin indexar`.
+3. Revisar las 6 URLs indexables que siguen `200 -> 200`:
+   - `/it/prezzi`;
+   - `/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad`;
+   - `/recursos/plantilla-formacion-equipo-sala`;
+   - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`;
+   - `/recursos/revision-mensual-margenes`;
+   - `/integraciones`.
+4. Para esas 6, decidir:
+   - reforzar enlaces internos desde hubs/producto/blog;
+   - mejorar contenido/prerender/schema;
+   - mantener o retirar del sitemap según valor SEO.
+5. Retomar después `Descubierta: actualmente sin indexar`, con foco en biblioteca del vino y artículos internacionales.

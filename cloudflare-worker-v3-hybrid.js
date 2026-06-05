@@ -66,19 +66,24 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/terms-of-service': '/terminos',
   '/home': '/',
   '/homepage': '/',
+  '/en/homepage': '/en',
   '/landing': '/',
   '/alex-pardo': '/article/alex-pardo',
   '/aumenta-la-venta-de-vinos-en-tu-restaurante-mejores-estrategias': '/como-vender-mas-vino-en-un-restaurante',
   '/por-que-los-jovenes-no-beben-vino-en-los-restaurantes': '/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes',
   '/winerim-vs-wineadvisor-2': '/comparativas',
   '/winerim-vs-wineadvisor': '/comparativas',
+  '/winerim-vs-vinipad': '/comparativas',
   '/reviews-restaurante': '/casos-exito',
   '/winerim-sommelier-magazine': '/sommelier-corner',
   '/corso-vino-cata-mw-examen-practico': '/decision-center/cursos',
+  '/winerim-academy': '/decision-center/cursos',
   '/winerim-academy-2': '/decision-center/cursos',
   '/en/the-importance-of-choosing-the-wine-that-goes-best-with-food': '/en/blog',
+  '/en/when-the-food-goes-with-the-wine-the-best-restaurants': '/en/guides/wine-pairing-strategy-restaurants',
   '/estadisticas': '/benchmarks-playbooks',
   '/programa-afiliados': '/afiliate',
+  '/programa-afiliados/afiliacion': '/afiliate',
   '/blog-2': '/blog',
   '/revista': '/blog',
   '/contacto-analizar-carta': '/analisis-carta',
@@ -89,6 +94,7 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/carta-vinos-digital': '/software-carta-de-vinos',
   '/carta_vinos_digital': '/software-carta-de-vinos',
   '/choosing-wine-a-not-so-easy-task-for-many-diners': '/software-carta-de-vinos',
+  '/en/choosing-wine-a-not-so-easy-task-for-many-diners': '/en/wine-list-management-software',
   '/como-mejorar-la-experiencia-del-cliente-en-un-restaurante': '/software-carta-de-vinos',
   '/como-hacer-una-carta-de-vinos-perfecta-para-tu-restaurante': '/como-hacer-una-carta-de-vinos',
   '/ia-para-restaurantes-las-mejores-aplicaciones': '/inteligencia-artificial-restaurantes',
@@ -98,7 +104,10 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/envejecimiento-del-vino': '/biblioteca-vino/glosario',
   '/uvas-poco-comunes-vinos-poco-conocidos': '/biblioteca-vino/uvas',
   '/vinos-y-comida-vegana': '/biblioteca-vino/maridajes',
+  '/vinos-ecologicos': '/biblioteca-vino/estilos/ecologico-biodinamico-natural',
+  '/los-mejores-restaurantes-de-cataluna-para-disfrutar-del-vino': '/blog',
   '/como-ser-sommelier-formacion-funciones-y-salidas-profesionales': '/decision-center/cursos',
+  '/periko-ortega': '/article/periko-ortega',
   '/simone-monese': '/article/simone-monese',
   '/joan-guso': '/article/joan-guso',
   '/berta-romero': '/article/berta-romero',
@@ -106,19 +115,35 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/nacho-otamendi': '/article/nacho-otamendi',
   '/xavi-nolla-cuenta-por-que-winerim-es-el-mejor-aliado-del-sommelier': '/article/xavi-nolla',
   '/jordi-subiros-motel-emporda': '/casos-exito',
+  '/jordi-subiros-lo-que-winerim-aporta-a-un-responsable-de-fb': '/casos-exito',
   '/informe-can-bosch': '/casos-exito',
+  '/informe-il-mulino-di-monza': '/casos-exito',
   '/andre-jullien-el-arte-del-sommelier': '/sommelier-corner',
   '/un-consejo-salirnos-de-nuestra-zona-de-confort': '/sommelier-corner',
   '/un-consejo-prueba-todo-lo-que-puedas': '/sommelier-corner',
   '/un-consejo-apreciar-lo-bien-hecho': '/sommelier-corner',
+  '/un-consejo-prueba-vinos-': '/article/un-consejo-prueba-vinos-nuevos',
+  '/un-consejo-cata-con-el-': '/article/un-consejo-cata-con-el-corazon',
   '/un-consejo-cata-con-el-corazon': '/sommelier-corner',
+  '/en/cookies': '/en/privacy',
 };
+
+const LEGACY_GONE_PATHS = new Set([
+  '/en/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world',
+]);
 
 function getMalformedAbsolutePathTarget(path) {
   const match = path.match(/^\/https?:\/(?:\/)?(?:www\.)?winerim\.wine(\/.*)$/i);
   if (!match) return null;
   const target = match[1].replace(/\/{2,}/g, '/');
   return target && target !== path ? target : null;
+}
+
+function getLegacyLanguageQueryTarget(url) {
+  if (url.pathname !== '/' || !url.searchParams.has('lang')) return null;
+  const lang = (url.searchParams.get('lang') || '').toLowerCase();
+  const targets = { en: '/en', it: '/it', fr: '/fr', de: '/de', pt: '/pt', es: '/' };
+  return targets[lang] || null;
 }
 
 function getLegacyLocalizedArticleTarget(path) {
@@ -968,6 +993,18 @@ export default {
       });
     }
 
+    const legacyLanguageQueryTarget = getLegacyLanguageQueryTarget(url);
+    if (legacyLanguageQueryTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${legacyLanguageQueryTarget}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'legacy-language-query-redirect',
+        },
+      });
+    }
+
     const legacyLocalizedArticleTarget = getLegacyLocalizedArticleTarget(path);
     if (legacyLocalizedArticleTarget) {
       return new Response(null, {
@@ -980,10 +1017,23 @@ export default {
       });
     }
 
+    if (LEGACY_GONE_PATHS.has(path)) {
+      return new Response('Gone', {
+        status: 410,
+        headers: {
+          'Content-Type': 'text/plain',
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'legacy-gone',
+        },
+      });
+    }
+
     // ── 4. Direct legacy redirects from Search Console samples ──
     const directLegacyTarget = LEGACY_DIRECT_REDIRECTS[path]
       || (path.startsWith('/clientes/') ? '/clientes' : null)
-      || (path.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null);
+      || (path.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null)
+      || (path.startsWith('/blog-2/') ? '/blog' : null)
+      || (path.startsWith('/programa-afiliados/') ? '/afiliate' : null);
     if (directLegacyTarget) {
       return new Response(null, {
         status: 301,

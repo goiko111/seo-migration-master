@@ -3241,3 +3241,93 @@
 - Esperar recrawl de Google antes de validar si el informe 404 baja.
 - Si el recuento 404 se mantiene alto, exportar más ejemplos desde GSC y clasificar en `301`, `410` o contenido nuevo.
 - Continuar revisión de `Rastreada: actualmente sin indexar` para separar páginas valiosas de URLs que conviene podar o redirigir.
+
+## Actualización 2026-06-05: saneamiento de `Rastreada: actualmente sin indexar`
+
+## Hechos
+
+- Se abrió en Search Console el informe `Rastreada: actualmente sin indexar`.
+- El informe muestra:
+  - `153` URLs afectadas;
+  - última actualización: `29/5/26`;
+  - fecha de primera detección: `2/3/24`.
+- La exportación CSV no funcionó dentro del navegador integrado, así que se aumentó la tabla a `100` filas y se capturaron las `153` URLs mediante las dos páginas visibles (`1-100` y `101-153`).
+- Clasificación productiva antes del nuevo Worker:
+  - `122` URLs ya acababan en `301 -> 200`;
+  - `9` URLs respondían `200 -> 200`;
+  - `20` URLs acababan todavía en `404`;
+  - `1` URL acababa en `410`;
+  - `1` comprobación tuvo error puntual de fetch, sin repetirse como patrón.
+- Se añadieron redirects directos de alta confianza para URLs legacy rastreadas sin indexar:
+  - `/en/homepage` -> `/en`;
+  - `/periko-ortega` -> `/article/periko-ortega`;
+  - `/informe-il-mulino-di-monza` -> `/casos-exito`;
+  - `/jordi-subiros-lo-que-winerim-aporta-a-un-responsable-de-fb` -> `/casos-exito`;
+  - `/vinos-ecologicos` -> `/biblioteca-vino/estilos/ecologico-biodinamico-natural`;
+  - `/winerim-vs-vinipad` -> `/comparativas`;
+  - `/programa-afiliados/afiliacion` -> `/afiliate`;
+  - `/en/when-the-food-goes-with-the-wine-the-best-restaurants` -> `/en/guides/wine-pairing-strategy-restaurants`;
+  - `/en/cookies` -> `/en/privacy`;
+  - `/los-mejores-restaurantes-de-cataluna-para-disfrutar-del-vino` -> `/blog`;
+  - `/winerim-academy` -> `/decision-center/cursos`;
+  - `/en/choosing-wine-a-not-so-easy-task-for-many-diners` -> `/en/wine-list-management-software`;
+  - `/un-consejo-prueba-vinos-` -> `/article/un-consejo-prueba-vinos-nuevos`;
+  - `/un-consejo-cata-con-el-` -> `/article/un-consejo-cata-con-el-corazon`.
+- Se añadieron redirects por familia:
+  - `/blog-2/*` -> `/blog`;
+  - `/programa-afiliados/*` -> `/afiliate`.
+- Se añadió normalización de query legacy:
+  - `/?lang=en` -> `/en`;
+  - el helper soporta también `it`, `fr`, `de`, `pt` y `es`.
+- Se añadió `410` directo para `/en/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world`, porque la documentación previa lo trataba como noticia sin equivalente útil.
+- Validaciones locales:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js src/test/wine-library-seo-surface.test.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 13 tests;
+  - `npm run test -- --run`: 8 archivos, 43 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+- Se desplegó Cloudflare Worker `winerim-proxy`.
+- Worker version ID desplegada: `06906271-4e57-4755-be7e-03376cfd8f7d`.
+- Producción validada en muestras:
+  - los nuevos destinos devuelven `301` con `X-Worker-Branch: direct-legacy-redirect`;
+  - `/?lang=en` devuelve `301` con `X-Worker-Branch: legacy-language-query-redirect`;
+  - `/en/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world/` termina en `410`.
+- Revalidación productiva de las `153` URLs completas tras deploy:
+  - `143` URLs quedan en `301 -> 200`;
+  - `8` URLs quedan en `200 -> 200`;
+  - `2` URLs quedan en `301 -> 410`;
+  - `0` URLs quedan en `404`.
+- Search Console permitió iniciar validación del informe.
+- Estado visible en GSC:
+  - `Resultado de la validación: Iniciada`;
+  - `Fecha de inicio: 5/6/26`.
+
+## Decisiones
+
+- No solicitar indexación masiva para este bloque: primero se saneó el inventario legacy que Google ya había rastreado.
+- Convertir a `301` solo URLs con destino semántico claro.
+- Usar `410` para noticias legacy sin equivalente útil, en vez de redirigirlas a hubs genéricos.
+- Tratar las `8` URLs que siguen en `200` como trabajo de calidad/enlazado/indexabilidad, no como problema de redirect.
+- Iniciar validación de `Rastreada: actualmente sin indexar` en Search Console tras comprobar que ya no quedan `404` en la muestra completa.
+
+## Hipótesis
+
+- GSC debería mover la mayoría de las 153 URLs fuera de `Rastreada: actualmente sin indexar` cuando recrawlee y procese la validación.
+- Las URLs reales que siguen en `200` pueden necesitar más enlaces internos, contenido más específico o revisión de sitemap para lograr indexación.
+- Las páginas legales `terminos` y `en/terms` seguirán sin indexarse por `noindex`, y eso es correcto.
+
+## Tareas pendientes
+
+- Monitorizar el resultado de la validación iniciada en GSC.
+- Revisar por separado las `8` URLs que siguen en `200 -> 200`:
+  - `/it/prezzi`;
+  - `/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad`;
+  - `/recursos/plantilla-formacion-equipo-sala`;
+  - `/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`;
+  - `/recursos/revision-mensual-margenes`;
+  - `/integraciones`;
+  - `/terminos`;
+  - `/en/terms`.
+- Para las seis indexables de esa lista, reforzar enlazado interno, contenido visible, prerender/schema y presencia en sitemap si procede.
+- Mantener legales como `noindex`.

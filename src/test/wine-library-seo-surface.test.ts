@@ -141,4 +141,40 @@ describe("wine library SEO surface", () => {
       "'/por-que-los-jovenes-no-beben-vino-en-los-restaurantes': '/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes'",
     );
   });
+
+  it("maps crawled-not-indexed legacy URLs surfaced by GSC", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("'/en/homepage': '/en'");
+    expect(worker).toContain("'/periko-ortega': '/article/periko-ortega'");
+    expect(worker).toContain("'/vinos-ecologicos': '/biblioteca-vino/estilos/ecologico-biodinamico-natural'");
+    expect(worker).toContain("'/winerim-vs-vinipad': '/comparativas'");
+    expect(worker).toContain("'/programa-afiliados/afiliacion': '/afiliate'");
+    expect(worker).toContain(
+      "'/en/when-the-food-goes-with-the-wine-the-best-restaurants': '/en/guides/wine-pairing-strategy-restaurants'",
+    );
+    expect(worker).toContain("'/en/cookies': '/en/privacy'");
+    expect(worker).toContain("'/un-consejo-prueba-vinos-': '/article/un-consejo-prueba-vinos-nuevos'");
+    expect(worker).toContain("'/un-consejo-cata-con-el-': '/article/un-consejo-cata-con-el-corazon'");
+    expect(worker).toContain("(path.startsWith('/blog-2/') ? '/blog' : null)");
+    expect(worker).toContain("(path.startsWith('/programa-afiliados/') ? '/afiliate' : null)");
+  });
+
+  it("normalizes legacy language query URLs at the Worker edge", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("function getLegacyLanguageQueryTarget(url)");
+    expect(worker).toContain("url.searchParams.has('lang')");
+    expect(worker).toContain("const targets = { en: '/en', it: '/it', fr: '/fr', de: '/de', pt: '/pt', es: '/' }");
+    expect(worker).toContain("legacy-language-query-redirect");
+  });
+
+  it("marks no-equivalent legacy news as gone at the Worker edge", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("const LEGACY_GONE_PATHS");
+    expect(worker).toContain("'/en/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world'");
+    expect(worker).toContain("LEGACY_GONE_PATHS.has(path)");
+    expect(worker).toContain("'X-Worker-Branch': 'legacy-gone'");
+  });
 });

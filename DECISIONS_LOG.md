@@ -2242,3 +2242,40 @@
 - Revisar el informe 404 tras recrawl.
 - Exportar más ejemplos si el recuento no baja.
 - Continuar con `Rastreada: actualmente sin indexar`.
+
+### Saneamiento de `Rastreada: actualmente sin indexar`
+
+#### Hechos
+
+- Se extrajeron las `153` URLs visibles del informe GSC `Rastreada: actualmente sin indexar`.
+- Antes del nuevo Worker quedaban `20` URLs con destino final `404`.
+- Se añadieron redirects directos para legacy de artículos, casos, comparativas, academia, cookies, afiliados y rutas localizadas antiguas.
+- Se añadieron redirects por familia para `/blog-2/*` y `/programa-afiliados/*`.
+- Se añadió normalización de `/?lang={lang}` hacia homes localizadas.
+- Se añadió `410` para `/en/castillo-ygay-gran-reserva-especial-recognized-as-the-best-wine-in-the-world`, sin equivalente útil.
+- Worker desplegado con version ID `06906271-4e57-4755-be7e-03376cfd8f7d`.
+- Tras deploy, la revalidación de las `153` URLs queda:
+  - `143` en `301 -> 200`;
+  - `8` en `200 -> 200`;
+  - `2` en `301 -> 410`;
+  - `0` en `404`.
+- Search Console muestra `Resultado de la validación: Iniciada`, con fecha de inicio `5/6/26`.
+- La suite local queda en 8 archivos y 43 tests pasados.
+
+#### Decisiones
+
+- Iniciar validación GSC solo después de comprobar que el conjunto visible no deja destinos `404`.
+- No convertir las `8` URLs reales que siguen en `200` en redirects; deben trabajarse como indexabilidad/calidad.
+- Mantener `410` para contenido sin equivalente claro.
+- Consolidar queries legacy de idioma con redirects permanentes a la home localizada.
+
+#### Hipótesis
+
+- La validación debería reducir el ruido de URLs legacy rastreadas cuando Google procese la tanda.
+- El siguiente cuello de botella será la calidad, enlazado interno y priorización de URLs reales, no los redirects legacy de esta muestra.
+
+#### Tareas pendientes
+
+- Monitorizar la validación GSC.
+- Revisar las `8` URLs `200 -> 200` y decidir refuerzo o noindex/sitemap según intención.
+- Seguir después con `Descubierta: actualmente sin indexar`, especialmente biblioteca del vino y artículos internacionales.
