@@ -2344,3 +2344,30 @@
 #### Tareas pendientes
 
 - Enviar el mensaje operativo a Lovable o desplegar Supabase por CLI si se proporciona token.
+
+### Reducción de cadenas de redirect legacy visibles en GSC
+
+#### Hechos
+
+- Search Console sigue mostrando `Rastreada: actualmente sin indexar` con `153` URLs y última actualización `29/5/26`.
+- La validación del motivo sigue iniciada desde el `5/6/26`.
+- Los ejemplos visibles están dominados por URLs legacy de `/clientes/*` y `/estadisticas/*`.
+- Producción ya redirigía esas familias, pero las variantes con slash final generaban cadena de dos redirects.
+- Se desplegó Worker `396ec636-a1af-4bd4-8fb6-5f9dc2b0bc3a` para resolver legacy directos antes del trailing slash genérico.
+- Las muestras de GSC ahora devuelven un único `301` con `X-Worker-Branch: direct-legacy-redirect`.
+
+#### Decisiones
+
+- Priorizar redirects legacy directos antes que normalización genérica de trailing slash cuando exista destino semántico claro.
+- No redirigir `/clientes` porque es una página útil e indexable.
+- Mantener `/estadisticas` y sus profundas legacy apuntando a `/benchmarks-playbooks`.
+
+#### Hipótesis
+
+- Reducir cadenas ayudará a Google a consolidar las señales de estas familias en menos rastreos.
+- GSC no mostrará el impacto hasta que procese datos posteriores al deploy del `2026-06-06`.
+
+#### Tareas pendientes
+
+- Vigilar si el recuento de `Rastreada: actualmente sin indexar` baja o si las legacy pasan a `Página con redirección`.
+- Exportar más ejemplos si aparecen nuevas familias no cubiertas.

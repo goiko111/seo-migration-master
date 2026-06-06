@@ -2520,3 +2520,40 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 2. Tras confirmar publicación desde Lovable, revalidar producción con user-agent Googlebot.
 3. Decidir si se retira el puente de Cloudflare Worker o queda como fallback.
 4. Continuar con Search Console: monitorizar `Rastreada: actualmente sin indexar` y después atacar `Descubierta: actualmente sin indexar`.
+
+## Actualización 2026-06-06: legacy de clientes/estadísticas sin cadenas
+
+## Hechos
+
+- Se revisó la vista actual de GSC `Rastreada: actualmente sin indexar`.
+- Sigue en `153` URLs, con datos del `29/5/26` y validación iniciada el `5/6/26`.
+- Se detectó que muchos ejemplos visibles eran legacy de `/clientes/*` y `/estadisticas/*`.
+- Se desplegó Worker `396ec636-a1af-4bd4-8fb6-5f9dc2b0bc3a`.
+- Producción ahora responde en un solo salto:
+  - `/clientes/el-capricho/` -> `/clientes`;
+  - `/clientes/page/8/` -> `/clientes`;
+  - `/estadisticas/estadisticas-2024-02-28-3/` -> `/benchmarks-playbooks`;
+  - `/estadisticas/page/27/` -> `/benchmarks-playbooks`.
+- Tests completos pasados: 8 archivos, 45 tests.
+
+## Decisiones
+
+- Mantener este bloque cerrado hasta que GSC recrawlee.
+- No solicitar indexación manual para legacy redirigidas.
+
+## Hipótesis
+
+- Esas URLs deberían pasar a consolidarse como redirecciones cuando Google actualice el informe.
+
+## Tareas pendientes listas para retomar
+
+1. Si Lovable ya publicó Edge Functions, revalidar Supabase y decidir si retirar el puente del Worker.
+2. Revisar GSC cuando actualice:
+   - `Rastreada: actualmente sin indexar`;
+   - `Página con redirección`;
+   - `No se ha encontrado (404)`.
+3. Continuar con `Descubierta: actualmente sin indexar`, priorizando:
+   - biblioteca del vino;
+   - artículos internacionales;
+   - URLs estratégicas limpias en sitemap.
+4. Reforzar enlaces internos hacia `/it/prezzi`, `/integraciones`, recursos y benchmarks/playbooks.

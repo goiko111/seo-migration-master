@@ -3436,3 +3436,64 @@
 
 - Enviar a Lovable la instrucción de publicar `supabase/functions/prerender/index.ts` y `supabase/functions/sitemap/index.ts`.
 - Tras publicar desde Lovable, revalidar producción como Googlebot y decidir si se retira el puente de Worker.
+
+## Actualización 2026-06-06: reducción de cadenas legacy visibles en GSC
+
+## Hechos
+
+- Se retomó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio y sincronizado con `origin/main`.
+- Se revisó la pestaña abierta de Search Console para `Rastreada: actualmente sin indexar`.
+- Search Console sigue mostrando:
+  - `153` URLs afectadas;
+  - última actualización `29/5/26`;
+  - validación iniciada el `5/6/26`.
+- Los ejemplos visibles actuales están dominados por legacy de:
+  - `/clientes/*`;
+  - `/clientes/page/*`;
+  - `/estadisticas/*`;
+  - `/estadisticas/page/*`.
+- Producción ya redirigía esas familias, pero las variantes con trailing slash hacían dos saltos:
+  - `trailing-slash`;
+  - después `direct-legacy-redirect`.
+- Se actualizó `cloudflare-worker-v3-hybrid.js` para resolver los redirects legacy directos antes de la normalización genérica de trailing slash.
+- Se añadió `getDirectLegacyTarget(path)` con lookup normalizado para detectar legacy con slash final.
+- Se actualizó `src/test/wine-library-seo-surface.test.ts` para proteger esta prioridad de ejecución.
+- Validaciones locales pasadas:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js src/test/wine-library-seo-surface.test.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 15 tests;
+  - `npm run test -- --run`: 8 archivos, 45 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+- Worker desplegado:
+  - version ID `396ec636-a1af-4bd4-8fb6-5f9dc2b0bc3a`.
+- Producción validada como Googlebot:
+  - `/clientes/el-capricho/`: `301` directo a `/clientes`, `X-Worker-Branch: direct-legacy-redirect`;
+  - `/clientes/page/8/`: `301` directo a `/clientes`, `X-Worker-Branch: direct-legacy-redirect`;
+  - `/estadisticas/estadisticas-2024-02-28-3/`: `301` directo a `/benchmarks-playbooks`, `X-Worker-Branch: direct-legacy-redirect`;
+  - `/estadisticas/page/27/`: `301` directo a `/benchmarks-playbooks`, `X-Worker-Branch: direct-legacy-redirect`.
+- Las rutas estratégicas revalidadas siguen correctas:
+  - `/it/prezzi`: `200`, `worker-static-prerender`;
+  - `/recursos/plantilla-formacion-equipo-sala`: `200`, `worker-detail-prerender`;
+  - `/sitemap.xml`: `200`, `sitemap-worker-detail-bridge`, `index, follow`.
+
+## Decisiones
+
+- Reducir cadenas de redirects legacy visibles en GSC en vez de esperar solo al recrawl.
+- Mantener `/clientes` como página indexable propia.
+- Mantener `/clientes/` como normalización simple a `/clientes`.
+- Redirigir páginas profundas legacy de clientes hacia `/clientes` y estadísticas legacy hacia `/benchmarks-playbooks`.
+
+## Hipótesis
+
+- Al recrawlear, Google debería procesar más limpiamente estas familias porque ya no pasan por una cadena `301 -> 301 -> 200`.
+- El informe seguirá mostrando `153` hasta que GSC actualice datos posteriores al `29/5/26`.
+- La validación iniciada el `5/6/26` puede tardar varios días en reflejar el cambio.
+
+## Tareas pendientes
+
+- Monitorizar en GSC si `Rastreada: actualmente sin indexar` baja o cambia de causa tras recrawl.
+- Si GSC sigue mostrando familias legacy, exportar más ejemplos y aplicar solo redirects de alta confianza.
+- Mantener pendiente la publicación de Edge Functions desde Lovable.
+- Retomar después `Descubierta: actualmente sin indexar`, priorizando biblioteca del vino y artículos internacionales.

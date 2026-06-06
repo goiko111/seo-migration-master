@@ -153,6 +153,20 @@ function getLegacyLocalizedArticleTarget(path) {
   return `/${lang}/article/${baseSlug}`;
 }
 
+function normalizeLegacyLookupPath(path) {
+  if (path.length <= 1 || !path.endsWith('/')) return path;
+  return path.slice(0, -1);
+}
+
+function getDirectLegacyTarget(path) {
+  const legacyLookupPath = normalizeLegacyLookupPath(path);
+  return LEGACY_DIRECT_REDIRECTS[legacyLookupPath]
+    || (legacyLookupPath.startsWith('/clientes/') ? '/clientes' : null)
+    || (legacyLookupPath.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null)
+    || (legacyLookupPath.startsWith('/blog-2/') ? '/blog' : null)
+    || (legacyLookupPath.startsWith('/programa-afiliados/') ? '/afiliate' : null);
+}
+
 // ─── Wine library legacy one-segment shortcuts → canonical entity URLs ───
 const WINE_LIBRARY_BASES = {
   es: '/biblioteca-vino',
@@ -1187,6 +1201,19 @@ export default {
       }
     }
 
+    // ── 2. Direct legacy redirects from Search Console samples ──
+    const directLegacyTarget = getDirectLegacyTarget(path);
+    if (directLegacyTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${directLegacyTarget}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'direct-legacy-redirect',
+        },
+      });
+    }
+
     // ── 2. Trailing slash normalization (not root) ──
     if (path.length > 1 && path.endsWith('/')) {
       const clean = path.slice(0, -1);
@@ -1255,23 +1282,6 @@ export default {
           'Content-Type': 'text/plain',
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'legacy-gone',
-        },
-      });
-    }
-
-    // ── 4. Direct legacy redirects from Search Console samples ──
-    const directLegacyTarget = LEGACY_DIRECT_REDIRECTS[path]
-      || (path.startsWith('/clientes/') ? '/clientes' : null)
-      || (path.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null)
-      || (path.startsWith('/blog-2/') ? '/blog' : null)
-      || (path.startsWith('/programa-afiliados/') ? '/afiliate' : null);
-    if (directLegacyTarget) {
-      return new Response(null, {
-        status: 301,
-        headers: {
-          'Location': `${env.SITE_URL || 'https://winerim.wine'}${directLegacyTarget}`,
-          'Cache-Control': 'public, max-age=31536000',
-          'X-Worker-Branch': 'direct-legacy-redirect',
         },
       });
     }

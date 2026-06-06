@@ -156,8 +156,15 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("'/en/cookies': '/en/privacy'");
     expect(worker).toContain("'/un-consejo-prueba-vinos-': '/article/un-consejo-prueba-vinos-nuevos'");
     expect(worker).toContain("'/un-consejo-cata-con-el-': '/article/un-consejo-cata-con-el-corazon'");
-    expect(worker).toContain("(path.startsWith('/blog-2/') ? '/blog' : null)");
-    expect(worker).toContain("(path.startsWith('/programa-afiliados/') ? '/afiliate' : null)");
+    expect(worker).toContain("function getDirectLegacyTarget(path)");
+    expect(worker).toContain("const legacyLookupPath = normalizeLegacyLookupPath(path)");
+    expect(worker).toContain("(legacyLookupPath.startsWith('/clientes/') ? '/clientes' : null)");
+    expect(worker).toContain("(legacyLookupPath.startsWith('/estadisticas/') ? '/benchmarks-playbooks' : null)");
+    expect(worker).toContain("(legacyLookupPath.startsWith('/blog-2/') ? '/blog' : null)");
+    expect(worker).toContain("(legacyLookupPath.startsWith('/programa-afiliados/') ? '/afiliate' : null)");
+    expect(worker.indexOf("const directLegacyTarget = getDirectLegacyTarget(path)")).toBeLessThan(
+      worker.indexOf("if (path.length > 1 && path.endsWith('/'))"),
+    );
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {
