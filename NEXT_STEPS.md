@@ -2557,3 +2557,51 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - artículos internacionales;
    - URLs estratégicas limpias en sitemap.
 4. Reforzar enlaces internos hacia `/it/prezzi`, `/integraciones`, recursos y benchmarks/playbooks.
+
+## Actualización 2026-06-06: `Descubierta` en validación y sitemap estabilizado
+
+## Hechos
+
+- Se inició validación en GSC para `Descubierta: actualmente sin indexar`.
+- También se inició validación con filtro `/sitemap.xml`.
+- La causa tiene `1.930` URLs y datos aún actualizados a `29/5/26`.
+- La muestra visible de `1.000` URLs se reparte así:
+  - `761` biblioteca del vino;
+  - `154` legacy de artículos localizados;
+  - `36` artículos ES canónicos;
+  - `35` páginas localizadas de producto/site;
+  - `11` páginas ES de producto/recurso;
+  - `3` otras.
+- Producción ya sirve sitemap con:
+  - `2.098` URLs;
+  - `1.458` de biblioteca;
+  - `0` legacy `/article/{slug}_{lang}`;
+  - `lastmod=2026-06-01` estable para toda la biblioteca.
+- Worker desplegado: `56798607-2334-4472-8c23-d44c94af8432`.
+- Tests completos pasados: 8 archivos, 45 tests.
+
+## Decisiones
+
+- No hacer indexación manual masiva.
+- Esperar respuesta de validación de GSC mientras se refuerza señal interna.
+- Mantener sitemap completo de biblioteca, pero sin falsa actualización diaria.
+
+## Hipótesis
+
+- Las legacy de artículos deberían salir de `Descubierta` o pasar a `Página con redirección`.
+- La biblioteca del vino debería mejorar con recrawl, pero necesita enlaces internos y quizá más priorización editorial.
+
+## Tareas pendientes listas para retomar
+
+1. Monitorizar en GSC:
+   - `Descubierta: actualmente sin indexar`, validación iniciada `6/6/26`;
+   - `Rastreada: actualmente sin indexar`, validación iniciada `5/6/26`;
+   - `Página con redirección`;
+   - `No se ha encontrado (404)`.
+2. Si Lovable publicó Edge Functions, revalidar Supabase y decidir si retirar el puente del Worker.
+3. Reforzar enlaces internos hacia biblioteca del vino:
+   - hubs `uvas`, `regiones`, `estilos`, `maridajes`;
+   - entidades prioritarias;
+   - artículos internacionales relacionados;
+   - recursos y guías.
+4. Auditar artículos canónicos finos detectados en `Descubierta`, empezando por `/article/alex-peiro`.

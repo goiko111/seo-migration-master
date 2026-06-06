@@ -4,6 +4,8 @@ const corsHeaders = {
 };
 
 const SITE = 'https://winerim.wine';
+const STATIC_ROUTE_LASTMOD = '2026-06-06';
+const WINE_LIBRARY_LASTMOD = '2026-06-01';
 
 // ─────────────────────────────────────────────
 // ROUTE MAP: ES path → localized paths per language
@@ -742,7 +744,7 @@ Deno.serve(async (req) => {
       const alternates = route.multilang ? hreflangBlock(route.esPath) : '';
 
       // ES version
-      xml += urlBlock(route.esPath, now, route.changefreq, route.priority, alternates);
+      xml += urlBlock(route.esPath, STATIC_ROUTE_LASTMOD, route.changefreq, route.priority, alternates);
 
       // Localized versions (only if multilang)
       if (route.multilang) {
@@ -751,7 +753,7 @@ Deno.serve(async (req) => {
           if (path) {
             // Localized pages get same hreflang set, slightly lower priority
             const localPriority = Math.max(0.3, parseFloat(route.priority) - 0.1).toFixed(1);
-            xml += urlBlock(path, now, route.changefreq, localPriority, alternates);
+            xml += urlBlock(path, STATIC_ROUTE_LASTMOD, route.changefreq, localPriority, alternates);
           }
         }
       }
@@ -762,13 +764,13 @@ Deno.serve(async (req) => {
       if (WINE_LIBRARY_LEGACY_SHORTCUT_ES_PATHS.has(route.esPath)) continue;
 
       const alternates = hreflangBlock(route.esPath);
-      xml += urlBlock(route.esPath, now, route.changefreq, route.priority, alternates);
+      xml += urlBlock(route.esPath, WINE_LIBRARY_LASTMOD, route.changefreq, route.priority, alternates);
 
       for (const lang of ['en', 'it', 'fr', 'de', 'pt']) {
         const path = localizedPath(lang, route.esPath);
         if (path) {
           const localPriority = Math.max(0.3, parseFloat(route.priority) - 0.1).toFixed(1);
-          xml += urlBlock(path, now, route.changefreq, localPriority, alternates);
+          xml += urlBlock(path, WINE_LIBRARY_LASTMOD, route.changefreq, localPriority, alternates);
         }
       }
     }

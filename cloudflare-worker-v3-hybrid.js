@@ -440,19 +440,48 @@ function detailUrlBlock(site, path, lastmod) {
 `;
 }
 
+const WORKER_DETAIL_SITEMAP_LASTMOD = '2026-06-05';
+const WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01';
+
+function isWineLibrarySitemapPath(path) {
+  return path.startsWith('/biblioteca-vino')
+    || path.startsWith('/en/wine-library')
+    || path.startsWith('/it/biblioteca-vino')
+    || path.startsWith('/fr/bibliotheque-vin')
+    || path.startsWith('/de/weinbibliothek')
+    || path.startsWith('/pt/biblioteca-vinho');
+}
+
+function stabilizeSitemapLastmod(xml) {
+  return xml.replace(
+    /(<url>[\s\S]*?<loc>([^<]+)<\/loc>[\s\S]*?<lastmod>)([^<]+)(<\/lastmod>)/g,
+    (match, prefix, loc, currentLastmod, suffix) => {
+      try {
+        const path = new URL(loc).pathname;
+        if (isWineLibrarySitemapPath(path)) {
+          return `${prefix}${WINE_LIBRARY_SITEMAP_LASTMOD}${suffix}`;
+        }
+      } catch {
+        return match;
+      }
+      return `${prefix}${currentLastmod}${suffix}`;
+    },
+  );
+}
+
 function injectWorkerDetailUrlsIntoSitemap(xml, site) {
   if (xml.includes(`${site}/recursos/plantilla-formacion-equipo-sala`)
     && xml.includes(`${site}/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`)) {
-    return xml;
+    return stabilizeSitemapLastmod(xml);
   }
 
-  const lastmod = new Date().toISOString().slice(0, 10);
   const blocks = [
-    ...Object.keys(RESOURCE_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/recursos/${slug}`, lastmod)),
-    ...Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, lastmod)),
+    ...Object.keys(RESOURCE_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/recursos/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD)),
+    ...Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD)),
   ].join('');
 
-  return xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
+  const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
+  return stabilizeSitemapLastmod(bridgedXml);
 }
 
 // ─── NOINDEX routes (served but with noindex header) ───

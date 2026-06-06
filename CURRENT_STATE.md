@@ -3497,3 +3497,82 @@
 - Si GSC sigue mostrando familias legacy, exportar más ejemplos y aplicar solo redirects de alta confianza.
 - Mantener pendiente la publicación de Edge Functions desde Lovable.
 - Retomar después `Descubierta: actualmente sin indexar`, priorizando biblioteca del vino y artículos internacionales.
+
+## Actualización 2026-06-06: validación de `Descubierta` y sitemap estable
+
+## Hechos
+
+- Se retomó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio y sincronizado con `origin/main`.
+- En la vista general de GSC, `Descubierta: actualmente sin indexar` muestra:
+  - `1.930` URLs afectadas;
+  - última actualización `29/5/26`;
+  - validación inicialmente no iniciada.
+- Se abrió `Descubierta: actualmente sin indexar` y se inició validación:
+  - `Resultado de la validación: Iniciada`;
+  - `Fecha de inicio: 6/6/26`.
+- Al filtrar por `/sitemap.xml`, también se inició validación para la misma causa:
+  - `Resultado de la validación: Iniciada`;
+  - `Fecha de inicio: 6/6/26`.
+- Se extrajeron `1.000` URLs visibles de la tabla de ejemplos de `Descubierta`.
+- Clasificación de esas `1.000` URLs visibles:
+  - `761` biblioteca del vino;
+  - `154` legacy de artículos con sufijo de idioma `/article/{slug}_{lang}`;
+  - `36` artículos canónicos ES;
+  - `35` páginas localizadas de producto/site;
+  - `11` páginas ES de producto/recurso;
+  - `3` otras.
+- Las muestras legacy de artículos localizados responden en producción con `301` y `X-Worker-Branch: legacy-localized-article-redirect`.
+- `/article/alex-pardo` es una URL real, indexable, canónica, presente en sitemap y con `977` palabras en prerender.
+- `/article/alex-peiro` aparece como posible caso fino: `200`, canónico, pero solo `123` palabras en prerender.
+- El sitemap actual de producción contiene:
+  - `2.098` URLs;
+  - `1.458` URLs de biblioteca del vino;
+  - `243` URLs de biblioteca por idioma;
+  - `0` URLs legacy `/article/{slug}_{lang}`.
+- Se detectó que el sitemap marcaba `lastmod` dinámico para rutas estáticas y biblioteca al usar la fecha de generación.
+- Se corrigió `supabase/functions/sitemap/index.ts` para usar fechas estables:
+  - `STATIC_ROUTE_LASTMOD = '2026-06-06'`;
+  - `WINE_LIBRARY_LASTMOD = '2026-06-01'`.
+- Se corrigió el Worker puente para estabilizar ya en producción el `lastmod` de biblioteca:
+  - `WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01'`;
+  - `WORKER_DETAIL_SITEMAP_LASTMOD = '2026-06-05'`.
+- Worker desplegado:
+  - version ID `56798607-2334-4472-8c23-d44c94af8432`.
+- Producción validada tras deploy:
+  - `/sitemap.xml`: `200`, `sitemap-worker-detail-bridge`, `index, follow`;
+  - `2.098` URLs totales;
+  - `1.458` URLs de biblioteca;
+  - todas las URLs de biblioteca tienen `lastmod=2026-06-01`;
+  - `0` legacy de artículo con sufijo en sitemap;
+  - recursos/benchmarks inyectados por Worker mantienen `lastmod=2026-06-05`.
+- Validaciones locales pasadas:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/sitemap/index.ts`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js supabase/functions/sitemap/index.ts src/test/wine-library-seo-surface.test.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 15 tests;
+  - `npm run test -- --run`: 8 archivos, 45 tests;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`.
+
+## Decisiones
+
+- Iniciar validación de `Descubierta: actualmente sin indexar` porque las principales legacy visibles ya responden con redirects correctos y el sitemap actual no las envía.
+- No solicitar indexación manual masiva para las `1.930` URLs.
+- Mantener cobertura completa de biblioteca en sitemap, pero corregir `lastmod` para no enviar falsa frescura diaria.
+- Mantener el Worker como puente productivo hasta que Lovable publique las Edge Functions actualizadas.
+
+## Hipótesis
+
+- GSC sigue mostrando legacy en `/sitemap.xml` por histórico anterior, no porque el sitemap actual las contenga.
+- El `lastmod` estable debería reducir ruido de crawl y ayudar a Google a priorizar biblioteca del vino sin interpretar cambios diarios artificiales.
+- La biblioteca del vino necesita ahora más crawl/indexación y señal interna; no parece un problema de canonical o sitemap roto.
+- Algunos artículos canónicos finos, como `alex-peiro`, pueden necesitar ampliación editorial o poda futura.
+
+## Tareas pendientes
+
+- Monitorizar la validación iniciada de `Descubierta: actualmente sin indexar`.
+- Revisar si GSC mueve legacy `/article/{slug}_{lang}` a `Página con redirección`.
+- Reforzar enlazado interno hacia hubs y entidades prioritarias de biblioteca del vino.
+- Auditar artículos canónicos finos antes de seguir enviándolos con prioridad en sitemap.
+- Mantener pendiente la publicación de Edge Functions desde Lovable.

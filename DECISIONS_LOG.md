@@ -2371,3 +2371,35 @@
 
 - Vigilar si el recuento de `Rastreada: actualmente sin indexar` baja o si las legacy pasan a `Página con redirección`.
 - Exportar más ejemplos si aparecen nuevas familias no cubiertas.
+
+### Validación de `Descubierta` y estabilización de `lastmod`
+
+#### Hechos
+
+- GSC muestra `Descubierta: actualmente sin indexar` con `1.930` URLs.
+- Se inició validación general de la causa el `6/6/26`.
+- Se inició también validación con filtro `/sitemap.xml` el `6/6/26`.
+- La muestra visible de `1.000` URLs contiene `761` URLs de biblioteca del vino y `154` legacy de artículos con sufijo de idioma.
+- El sitemap actual no contiene legacy `/article/{slug}_{lang}`.
+- El sitemap actual contiene `1.458` URLs de biblioteca del vino.
+- El sitemap estaba asignando `lastmod` dinámico por fecha de generación a rutas de biblioteca.
+- Se desplegó Worker `56798607-2334-4472-8c23-d44c94af8432` para estabilizar `lastmod` de biblioteca en producción.
+
+#### Decisiones
+
+- Iniciar validación de `Descubierta` porque las legacy principales ya redirigen y el sitemap actual está limpio.
+- Mantener todas las URLs de biblioteca en sitemap, pero con `lastmod` estable.
+- Usar `2026-06-01` como fecha estable de última actualización editorial de biblioteca del vino.
+- Usar `2026-06-05` para las fichas de recursos/benchmarks inyectadas por Worker.
+
+#### Hipótesis
+
+- Google conserva asociación histórica entre legacy y `/sitemap.xml` aunque el sitemap actual ya no las incluya.
+- El `lastmod` dinámico podía estar generando ruido de recrawl y mala priorización.
+- La biblioteca del vino necesita más señal y tiempo de crawl, no una corrección de canonical masiva.
+
+#### Tareas pendientes
+
+- Revisar evolución de `Descubierta` tras recrawl.
+- Auditar artículos canónicos con poco contenido antes de priorizarlos.
+- Reforzar enlazado interno hacia biblioteca del vino desde blog, producto y recursos.

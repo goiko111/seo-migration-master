@@ -202,6 +202,8 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("function renderWorkerDetailPrerender");
     expect(worker).toContain("'X-Worker-Branch': 'worker-detail-prerender'");
     expect(worker).toContain("injectWorkerDetailUrlsIntoSitemap");
+    expect(worker).toContain("const WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01'");
+    expect(worker).toContain("function stabilizeSitemapLastmod");
     expect(worker).toContain("'X-Worker-Branch': 'sitemap-worker-detail-bridge'");
     expect(worker).toContain("const STATIC_WORKER_PRERENDER_PAGES");
     expect(worker).toContain("'/it/prezzi'");
@@ -213,6 +215,9 @@ describe("wine library SEO surface", () => {
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
 
+    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-06'");
+    expect(sitemap).toContain("const WINE_LIBRARY_LASTMOD = '2026-06-01'");
+    expect(sitemap).toContain("urlBlock(route.esPath, WINE_LIBRARY_LASTMOD");
     expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");
     expect(sitemap).toContain("{ esPath: '/recursos/revision-mensual-margenes'");
     expect(sitemap).toContain("{ esPath: '/benchmarks-playbooks/benchmark-peso-vino-ticket-medio'");
