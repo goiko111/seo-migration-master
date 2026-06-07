@@ -3576,3 +3576,68 @@
 - Reforzar enlazado interno hacia hubs y entidades prioritarias de biblioteca del vino.
 - Auditar artículos canónicos finos antes de seguir enviándolos con prioridad en sitemap.
 - Mantener pendiente la publicación de Edge Functions desde Lovable.
+
+## Actualización 2026-06-07: recuperación editorial de `/article/alex-peiro`
+
+## Hechos
+
+- Se retomó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio y sincronizado con `origin/main`.
+- Producción como Googlebot confirmaba que `/article/alex-peiro` estaba técnicamente bien servida:
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - canonical `https://winerim.wine/article/alex-peiro`.
+- El problema detectado era editorial:
+  - solo `123` palabras visibles en prerender;
+  - placeholder visible: `La URL original de la entrevista con Álex Peiró no está disponible actualmente en la web de origen. Contenido pendiente de recuperar.`;
+  - solo enlaces internos genéricos, sin enlaces profundos a hubs de biblioteca.
+- Se confirmó que Supabase `articles` es la fuente principal del blog y del prerender; `src/data/articles.ts` actúa como fallback.
+- Se implementó el commit `a095b85 fix: enrich alex peiro article` y se hizo push a `origin/main`.
+- Cambios del commit:
+  - `src/data/articles.ts`: fallback de `alex-peiro` ampliado a `780` palabras, sin placeholder, con enlaces contextuales a biblioteca del vino, uvas, regiones, estilos, maridajes, software de carta y análisis de carta.
+  - `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql`: migración idempotente para actualizar/upsert de `articles.slug='alex-peiro'`, `related_links`, `lang`, `category`, `author` y contenido largo.
+  - `src/test/article-content-quality.test.ts`: test para evitar que el fallback de `alex-peiro` vuelva a quedar como contenido fino o placeholder.
+- Verificaciones locales completadas:
+  - `npm run test -- --run src/test/article-content-quality.test.ts src/test/article-routes.test.ts src/test/wine-library-seo-surface.test.ts`: 19 tests.
+  - `npm run test -- --run`: 9 archivos, 46 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - `npx eslint src/data/articles.ts src/test/article-content-quality.test.ts`.
+- Lovable detectó el commit `fix: enrich alex peiro article`.
+- Se pulsó `Publish project` y luego `Update`; Lovable quedó en estado `Up to date`.
+- La revalidación productiva posterior mostró que el frontend quedó publicado, pero la fila de Supabase no se actualizó:
+  - `/article/alex-peiro?codex=a095b85` sigue con `123` palabras;
+  - el placeholder sigue presente;
+  - no aparecen los enlaces profundos a `/biblioteca-vino/uvas`, `/regiones`, `/estilos`, `/maridajes` ni `/analisis-carta`.
+- Se intentó enviar la instrucción operativa a Lovable por chat, pero el `Chat input` no recibía foco ni texto desde el navegador integrado.
+- Se comprobó la vía directa con la clave pública de Supabase:
+  - lectura pública de `articles.slug='alex-peiro'` funciona;
+  - `PATCH` con clave pública no actualiza la fila por permisos/RLS.
+- Se probó `/admin`; redirige a `/admin/login` y no hay sesión de editor activa en el navegador integrado.
+
+## Decisiones
+
+- No considerar resuelto `/article/alex-peiro` en producción hasta aplicar la migración de Supabase.
+- Mantener el fallback estático enriquecido como protección, pero tratar Supabase `articles` como fuente operativa para artículos publicados y prerender.
+- No inventar una entrevista completa ni atribuir respuestas no disponibles; se optó por una recuperación editorial basada en los hechos/citas disponibles y en análisis útil para sala, carta y biblioteca.
+- No forzar más el chat de Lovable cuando el input no recibe foco, para evitar envíos accidentales o acciones opacas.
+
+## Hipótesis
+
+- Lovable `Update` publica frontend, pero no aplica automáticamente migraciones de Supabase añadidas desde GitHub.
+- Aplicar `20260607123000_enrich_alex_peiro_article.sql` debería hacer que Googlebot vea más de `500` palabras, elimine el placeholder y detecte enlaces internos profundos hacia biblioteca.
+- Corregir artículos canónicos finos reducirá fricción en `Descubierta: actualmente sin indexar`, especialmente para URLs reales que sí están en sitemap.
+
+## Tareas pendientes
+
+- Aplicar en Supabase la migración `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql` desde Lovable, Supabase SQL editor, Admin UI autenticado o CLI con token.
+- Revalidar después como Googlebot:
+  - `https://winerim.wine/article/alex-peiro`;
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - canonical propio;
+  - sin placeholder;
+  - más de `500` palabras visibles;
+  - enlaces a `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos`, `/biblioteca-vino/maridajes`, `/software-carta-de-vinos` y `/analisis-carta`.
+- Si la revalidación pasa, solicitar indexación selectiva de `/article/alex-peiro` en Search Console si la herramienta lo permite.
+- Continuar la auditoría de artículos canónicos finos detectados en `Descubierta`.

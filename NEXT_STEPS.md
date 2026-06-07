@@ -2605,3 +2605,56 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - artículos internacionales relacionados;
    - recursos y guías.
 4. Auditar artículos canónicos finos detectados en `Descubierta`, empezando por `/article/alex-peiro`.
+
+## Actualización 2026-06-07: siguiente arranque
+
+## Hechos
+
+- Commit publicado en GitHub: `a095b85 fix: enrich alex peiro article`.
+- Lovable detectó el commit y se ejecutó `Publish project` + `Update`.
+- Lovable quedó en `Up to date`.
+- Producción de `/article/alex-peiro` como Googlebot sigue pendiente a nivel Supabase:
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - canonical propio;
+  - sigue el placeholder;
+  - sigue con `123` palabras visibles.
+- La migración que debe aplicarse es:
+  - `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql`.
+- El fallback estático ya está enriquecido y protegido por test:
+  - `src/data/articles.ts`;
+  - `src/test/article-content-quality.test.ts`.
+- Validaciones locales pasadas:
+  - `npm run test -- --run`: 46 tests;
+  - `npm run build`;
+  - `git diff --check`;
+  - `npx eslint src/data/articles.ts src/test/article-content-quality.test.ts`.
+- Bloqueos actuales:
+  - el chat de Lovable no recibía foco/texto desde el navegador integrado;
+  - no hay sesión activa en `/admin`;
+  - la clave pública de Supabase no permite actualizar la fila;
+  - no hay `SUPABASE_ACCESS_TOKEN` documentado como disponible.
+
+## Decisiones
+
+- La próxima tarea debe ser aplicar la migración de Supabase, no tocar más frontend para este caso.
+- No solicitar indexación de `/article/alex-peiro` hasta que producción deje de mostrar el placeholder.
+
+## Hipótesis
+
+- La migración puede aplicarse desde Lovable si el usuario consigue escribir en el chat o desde una vista de Supabase/SQL dentro de Lovable.
+- También puede aplicarse por CLI si se proporciona `SUPABASE_ACCESS_TOKEN` o una sesión Supabase válida.
+
+## Tareas pendientes listas para retomar
+
+1. Aplicar `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql` en Supabase.
+2. Validar con:
+   `curl -A 'Googlebot/2.1 (+http://www.google.com/bot.html)' -D - https://winerim.wine/article/alex-peiro?codex=a095b85`
+3. Confirmar:
+   - sin `Contenido pendiente`;
+   - más de `500` palabras;
+   - enlaces profundos a biblioteca del vino;
+   - `bot-prerender`;
+   - canonical propio.
+4. Pedir indexación selectiva en Search Console si la validación pasa.
+5. Seguir con la auditoría de artículos canónicos finos y enlazado interno hacia biblioteca.

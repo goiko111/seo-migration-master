@@ -2403,3 +2403,40 @@
 - Revisar evolución de `Descubierta` tras recrawl.
 - Auditar artículos canónicos con poco contenido antes de priorizarlos.
 - Reforzar enlazado interno hacia biblioteca del vino desde blog, producto y recursos.
+
+### Recuperación editorial de `/article/alex-peiro`
+
+#### Hechos
+
+- Se auditó `/article/alex-peiro` porque GSC lo mostraba como artículo canónico real dentro de `Descubierta: actualmente sin indexar`.
+- Producción como Googlebot respondía `200` y `bot-prerender`, pero solo mostraba `123` palabras y un placeholder de contenido pendiente.
+- Se confirmó que el prerender de artículos lee desde Supabase `articles`, no desde el fallback estático.
+- Se enriqueció el fallback estático de `alex-peiro` hasta `780` palabras, con enlaces contextuales a la biblioteca del vino.
+- Se creó la migración `20260607123000_enrich_alex_peiro_article.sql` para actualizar la fila real en Supabase.
+- Se añadió el test `article-content-quality.test.ts`.
+- Verificaciones locales completadas: tests enfocados, test completo, build, ESLint dirigido y `git diff --check`.
+- Commit y push realizados: `a095b85 fix: enrich alex peiro article`.
+- Lovable publicó/actualizó el frontend hasta quedar `Up to date`, pero producción sigue mostrando el placeholder porque la migración de Supabase no se aplicó.
+- El chat de Lovable no aceptó foco/texto desde el navegador integrado.
+- La clave pública de Supabase permite leer el artículo, pero no actualizarlo.
+- `/admin` no tiene sesión activa de editor.
+
+#### Decisiones
+
+- Tratar la corrección de contenido como incompleta hasta aplicar la migración en Supabase.
+- Mantener el contenido enriquecido en fallback y en migración para que frontend y base de datos puedan converger.
+- No atribuir respuestas inventadas a Álex Peiró; usar una recuperación editorial basada en hechos disponibles y análisis propio.
+- No seguir forzando acciones en Lovable si la interfaz no permite una interacción fiable.
+
+#### Hipótesis
+
+- Lovable no aplica automáticamente migraciones SQL al hacer `Update` desde el panel Publish.
+- Con la migración aplicada, `/article/alex-peiro` pasará de pieza fina a URL canónica defendible para indexación.
+- Este patrón debe repetirse con otros artículos canónicos finos antes de solicitar indexación selectiva.
+
+#### Tareas pendientes
+
+- Aplicar la migración de Supabase.
+- Revalidar `/article/alex-peiro` en producción como Googlebot.
+- Si queda correcto, pedir indexación selectiva en GSC.
+- Continuar con la siguiente URL fina de artículos canónicos.
