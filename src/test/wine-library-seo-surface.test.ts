@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { priorityGrapeSlugs } from "@/data/wineLibraryEditorial";
 import { describe, expect, it } from "vitest";
 
 describe("wine library SEO surface", () => {
@@ -107,12 +108,24 @@ describe("wine library SEO surface", () => {
 
   it("adds strategic internal links to prerendered wine-library entities", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const strategicLinksBlock =
+      prerender.match(/const WINE_LIBRARY_STRATEGIC_LINKS[\s\S]*?\n};/)?.[0] || "";
+    const missingPriorityGrapes = priorityGrapeSlugs.filter(
+      (slug) => !strategicLinksBlock.includes(`'/biblioteca-vino/uvas/${slug}'`),
+    );
 
     expect(prerender).toContain("const WINE_LIBRARY_STRATEGIC_LINKS");
-    expect(prerender).toContain("/biblioteca-vino/uvas/xarello");
-    expect(prerender).toContain("/biblioteca-vino/regiones/espana/rias-baixas");
-    expect(prerender).toContain("/biblioteca-vino/estilos/tinto-crianza");
-    expect(prerender).toContain("/biblioteca-vino/maridajes/carnes-rojas");
+    expect(missingPriorityGrapes).toEqual([]);
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/xarello");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/gruner-veltliner");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/corvina");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/regiones/espana/rias-baixas");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/regiones/francia/muscadet");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/estilos/tinto-crianza");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/estilos/blanco-mineral");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/maridajes/carnes-rojas");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/maridajes/ostras");
+    expect(strategicLinksBlock).toContain("/biblioteca-vino/maridajes/risotto-setas");
     expect(prerender).toContain("wineLibraryStrategicLinks(lang, esPath)");
   });
 
