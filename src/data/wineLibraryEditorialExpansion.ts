@@ -308,6 +308,18 @@ export const expandedRegionSlugs = [
   "willamette-valley",
   "sancerre",
   "barolo",
+  "ribeira-sacra",
+  "bierzo",
+  "toro",
+  "chablis",
+  "alsacia",
+  "provence",
+  "santorini",
+  "valpolicella",
+  "chianti-classico",
+  "brunello-di-montalcino",
+  "soave",
+  "etna",
 ] as const;
 
 const expandedRegionSeeds: Record<(typeof expandedRegionSlugs)[number], {
@@ -330,6 +342,18 @@ const expandedRegionSeeds: Record<(typeof expandedRegionSlugs)[number], {
   "willamette-valley": { priority: 20, serviceTemp: "13-15 C", glass: "Borgona amplia", archetype: "elegantRed", byTheGlass: "Pinot Noir elegante", hookSet: "vegetable" },
   "sancerre": { priority: 21, serviceTemp: "8-10 C", glass: "Blanco aromatico / universal", archetype: "mineralWhite", byTheGlass: "Sauvignon Blanc mineral", hookSet: "seafood" },
   "barolo": { priority: 22, serviceTemp: "16-18 C", glass: "Borgona / Nebbiolo", archetype: "premiumRed", byTheGlass: "Nebbiolo de productor", hookSet: "redMeat" },
+  "ribeira-sacra": { priority: 23, serviceTemp: "13-15 C", glass: "Borgona / universal", archetype: "elegantRed", byTheGlass: "Mencia atlantica", hookSet: "vegetable" },
+  "bierzo": { priority: 24, serviceTemp: "14-16 C", glass: "Borgona / universal", archetype: "elegantRed", byTheGlass: "Mencia de productor", hookSet: "vegetable" },
+  "toro": { priority: 25, serviceTemp: "16-18 C", glass: "Burdeos amplia", archetype: "premiumRed", byTheGlass: "Tinta de Toro", hookSet: "redMeat" },
+  "chablis": { priority: 26, serviceTemp: "8-10 C", glass: "Blanco mineral / universal", archetype: "mineralWhite", byTheGlass: "Chardonnay mineral", hookSet: "seafood" },
+  "alsacia": { priority: 27, serviceTemp: "7-10 C", glass: "Blanco aromatico", archetype: "aromaticWhite", byTheGlass: "Riesling o Pinot Gris", hookSet: "seafood" },
+  "provence": { priority: 28, serviceTemp: "8-10 C", glass: "Universal / blanco", archetype: "aromaticWhite", byTheGlass: "Rosado provenzal", hookSet: "aperitif" },
+  "santorini": { priority: 29, serviceTemp: "8-10 C", glass: "Blanco mineral / universal", archetype: "mineralWhite", byTheGlass: "Assyrtiko", hookSet: "seafood" },
+  "valpolicella": { priority: 30, serviceTemp: "14-16 C", glass: "Borgona / universal", archetype: "elegantRed", byTheGlass: "Corvina / Valpolicella", hookSet: "vegetable" },
+  "chianti-classico": { priority: 31, serviceTemp: "15-17 C", glass: "Burdeos / universal", archetype: "classicRed", byTheGlass: "Chianti Classico", hookSet: "redMeat" },
+  "brunello-di-montalcino": { priority: 32, serviceTemp: "16-18 C", glass: "Burdeos amplia / Borgona amplia", archetype: "premiumRed", byTheGlass: "Brunello por Coravin", hookSet: "redMeat" },
+  "soave": { priority: 33, serviceTemp: "8-10 C", glass: "Blanco mineral / universal", archetype: "mineralWhite", byTheGlass: "Garganega / Soave", hookSet: "seafood" },
+  "etna": { priority: 34, serviceTemp: "13-15 C", glass: "Borgona / universal", archetype: "elegantRed", byTheGlass: "Nerello Mascalese", hookSet: "vegetable" },
 };
 
 export const expandedStyleSlugs = [
@@ -343,6 +367,16 @@ export const expandedStyleSlugs = [
   "fino-manzanilla",
   "pedro-ximenez",
   "orange-maceracion-corta",
+  "prosecco",
+  "cremant",
+  "franciacorta",
+  "pet-nat",
+  "amontillado",
+  "oloroso",
+  "palo-cortado",
+  "oporto-tawny",
+  "madeira",
+  "blanco-fermentado-barrica",
 ] as const;
 
 const expandedStyleSeeds: Record<(typeof expandedStyleSlugs)[number], {
@@ -363,6 +397,16 @@ const expandedStyleSeeds: Record<(typeof expandedStyleSlugs)[number], {
   "fino-manzanilla": { priority: 13, serviceTemp: "7-9 C", glass: "Copa pequena / blanco", archetype: "florFortified", byTheGlass: "Fino o Manzanilla", hookSet: "aperitif" },
   "pedro-ximenez": { priority: 14, serviceTemp: "10-12 C", glass: "Copa pequena", archetype: "sweetFortified", byTheGlass: "PX por media copa", hookSet: "dessert" },
   "orange-maceracion-corta": { priority: 15, serviceTemp: "10-12 C", glass: "Universal", archetype: "orange", byTheGlass: "Orange joven con baja extraccion", hookSet: "vegetable" },
+  "prosecco": { priority: 16, serviceTemp: "6-8 C", glass: "Tulipa / blanco", archetype: "tableSparkling", byTheGlass: "Prosecco brut", hookSet: "aperitif" },
+  "cremant": { priority: 17, serviceTemp: "6-8 C", glass: "Tulipa / blanco", archetype: "tableSparkling", byTheGlass: "Cremant brut", hookSet: "aperitif" },
+  "franciacorta": { priority: 18, serviceTemp: "6-8 C", glass: "Tulipa / blanco", archetype: "premiumSparkling", byTheGlass: "Franciacorta brut", hookSet: "seafood" },
+  "pet-nat": { priority: 19, serviceTemp: "6-8 C", glass: "Tulipa / universal", archetype: "tableSparkling", byTheGlass: "Pet-nat fresco", hookSet: "aperitif" },
+  "amontillado": { priority: 20, serviceTemp: "10-12 C", glass: "Copa pequena / blanco", archetype: "florFortified", byTheGlass: "Amontillado seco", hookSet: "aperitif" },
+  "oloroso": { priority: 21, serviceTemp: "12-14 C", glass: "Copa pequena", archetype: "florFortified", byTheGlass: "Oloroso seco", hookSet: "aperitif" },
+  "palo-cortado": { priority: 22, serviceTemp: "11-13 C", glass: "Copa pequena", archetype: "florFortified", byTheGlass: "Palo Cortado", hookSet: "aperitif" },
+  "oporto-tawny": { priority: 23, serviceTemp: "12-14 C", glass: "Copa pequena", archetype: "sweetFortified", byTheGlass: "Tawny por media copa", hookSet: "dessert" },
+  "madeira": { priority: 24, serviceTemp: "12-14 C", glass: "Copa pequena", archetype: "sweetFortified", byTheGlass: "Madeira seco o dulce", hookSet: "dessert" },
+  "blanco-fermentado-barrica": { priority: 25, serviceTemp: "10-12 C", glass: "Blanco grande / universal", archetype: "mineralWhite", byTheGlass: "Chardonnay o Godello con barrica", hookSet: "seafood" },
 };
 
 export const expandedPairingSlugs = [
@@ -378,6 +422,18 @@ export const expandedPairingSlugs = [
   "risotto-setas",
   "ostras",
   "chocolate-negro",
+  "ceviche",
+  "queso-azul",
+  "queso-de-cabra",
+  "jamon-iberico",
+  "paella",
+  "curry",
+  "ramen",
+  "thai-curry",
+  "setas-y-trufas",
+  "cochinillo-lechon",
+  "queso-manchego",
+  "tarta-de-queso",
 ] as const;
 
 const expandedPairingSeeds: Record<(typeof expandedPairingSlugs)[number], {
@@ -400,6 +456,18 @@ const expandedPairingSeeds: Record<(typeof expandedPairingSlugs)[number], {
   "risotto-setas": { priority: 16, serviceMoment: "rice / texture pairing", archetype: "mushroom", byTheGlass: "Pinot Noir, Nebbiolo o blanco con lias", defaultWines: "Pinot Noir, Nebbiolo, Chardonnay, Godello", hookSet: "vegetable" },
   "ostras": { priority: 17, serviceMoment: "premium aperitif / upsell", archetype: "oysters", byTheGlass: "Champagne, Cava o Muscadet", defaultWines: "Champagne, Cava, Muscadet, Albarino", hookSet: "seafood" },
   "chocolate-negro": { priority: 18, serviceMoment: "dessert / closing glass", archetype: "chocolate", byTheGlass: "PX, Oporto o Banyuls", defaultWines: "PX, Oporto, Banyuls, Madeira", hookSet: "dessert" },
+  "ceviche": { priority: 19, serviceMoment: "fresh seafood / by-the-glass", archetype: "vegetable", byTheGlass: "Albarino, Sauvignon Blanc o Riesling seco", defaultWines: "Albarino, Sauvignon Blanc, Riesling, Cava", hookSet: "seafood" },
+  "queso-azul": { priority: 20, serviceMoment: "cheese / closing glass", archetype: "dessert", byTheGlass: "PX, Oporto Tawny o Sauternes", defaultWines: "PX, Oporto, Sauternes, Tokaji", hookSet: "dessert" },
+  "queso-de-cabra": { priority: 21, serviceMoment: "cheese / fresh white", archetype: "vegetable", byTheGlass: "Sancerre, Sauvignon Blanc o Verdejo", defaultWines: "Sauvignon Blanc, Sancerre, Verdejo, Cava", hookSet: "aperitif" },
+  "jamon-iberico": { priority: 22, serviceMoment: "aperitif / premium snack", archetype: "aperitif", byTheGlass: "Fino, Cava brut nature o Champagne", defaultWines: "Fino, Manzanilla, Cava, Champagne", hookSet: "aperitif" },
+  "paella": { priority: 23, serviceMoment: "rice main / bottle or glass", archetype: "vegetable", byTheGlass: "Rosado, Albarino, Godello o Cava", defaultWines: "Rosado, Albarino, Godello, Cava", hookSet: "seafood" },
+  "curry": { priority: 24, serviceMoment: "spicy main / aromatic white", archetype: "vegetable", byTheGlass: "Riesling, Gewurztraminer o Gruner Veltliner", defaultWines: "Riesling, Gewurztraminer, Gruner Veltliner, rosado", hookSet: "vegetable" },
+  "ramen": { priority: 25, serviceMoment: "broth / umami pairing", archetype: "vegetable", byTheGlass: "Riesling, Albarino o Pinot Noir ligero", defaultWines: "Riesling, Albarino, Pinot Noir, Gamay", hookSet: "vegetable" },
+  "thai-curry": { priority: 26, serviceMoment: "spicy coconut / aromatic white", archetype: "vegetable", byTheGlass: "Gewurztraminer, Riesling o Sauvignon Blanc", defaultWines: "Gewurztraminer, Riesling, Sauvignon Blanc, Vermentino", hookSet: "vegetable" },
+  "setas-y-trufas": { priority: 27, serviceMoment: "earth / premium bottle", archetype: "mushroom", byTheGlass: "Pinot Noir, Nebbiolo o Chardonnay con lias", defaultWines: "Pinot Noir, Nebbiolo, Chardonnay, Godello", hookSet: "vegetable" },
+  "cochinillo-lechon": { priority: 28, serviceMoment: "roast / classic bottle", archetype: "lamb", byTheGlass: "Rioja, Ribera o Garnacha", defaultWines: "Tempranillo, Garnacha, Mencia, Pinot Noir", hookSet: "redMeat" },
+  "queso-manchego": { priority: 29, serviceMoment: "cheese / aperitif or bottle", archetype: "aperitif", byTheGlass: "Fino, Cava, Rioja crianza o Garnacha", defaultWines: "Fino, Cava, Tempranillo, Garnacha", hookSet: "aperitif" },
+  "tarta-de-queso": { priority: 30, serviceMoment: "dessert / closing glass", archetype: "dessert", byTheGlass: "Moscatel, Sauternes o espumoso demi-sec", defaultWines: "Moscatel, Sauternes, Riesling dulce, demi-sec", hookSet: "dessert" },
 };
 
 export function getExpandedRegionEditorialProfile(slug: string, lang: string, name: string): BaseProfile | undefined {

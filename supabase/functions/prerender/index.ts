@@ -1960,6 +1960,18 @@ const WINE_LIBRARY_EXPANDED_REGIONS: Record<string, WineLibraryPriorityProfile> 
   expandedProfileEntry('willamette-valley', '13-15 C', 'Borgona amplia', 'elegantRed', hooks.vegetable),
   expandedProfileEntry('sancerre', '8-10 C', 'Blanco aromatico / universal', 'mineralWhite', hooks.seafood),
   expandedProfileEntry('barolo', '16-18 C', 'Borgona / Nebbiolo', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('ribeira-sacra', '13-15 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('bierzo', '14-16 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('toro', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('chablis', '8-10 C', 'Blanco mineral / universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('alsacia', '7-10 C', 'Blanco aromatico', 'aromaticWhite', hooks.seafood),
+  expandedProfileEntry('provence', '8-10 C', 'Universal / blanco', 'aromaticWhite', hooks.aperitif),
+  expandedProfileEntry('santorini', '8-10 C', 'Blanco mineral / universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('valpolicella', '14-16 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
+  expandedProfileEntry('chianti-classico', '15-17 C', 'Burdeos / universal', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('brunello-di-montalcino', '16-18 C', 'Burdeos amplia / Borgona amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('soave', '8-10 C', 'Blanco mineral / universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('etna', '13-15 C', 'Borgona / universal', 'elegantRed', hooks.vegetable),
 ]);
 
 const WINE_LIBRARY_EXPANDED_STYLES: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
@@ -1973,6 +1985,16 @@ const WINE_LIBRARY_EXPANDED_STYLES: Record<string, WineLibraryPriorityProfile> =
   expandedProfileEntry('fino-manzanilla', '7-9 C', 'Copa pequena / blanco', 'fortified', hooks.aperitif),
   expandedProfileEntry('pedro-ximenez', '10-12 C', 'Copa pequena', 'fortified', hooks.dessert),
   expandedProfileEntry('orange-maceracion-corta', '10-12 C', 'Universal', 'mediterraneanRed', hooks.vegetable),
+  expandedProfileEntry('prosecco', '6-8 C', 'Tulipa / blanco', 'sparkling', hooks.aperitif),
+  expandedProfileEntry('cremant', '6-8 C', 'Tulipa / blanco', 'sparkling', hooks.aperitif),
+  expandedProfileEntry('franciacorta', '6-8 C', 'Tulipa / blanco', 'sparkling', hooks.seafood),
+  expandedProfileEntry('pet-nat', '6-8 C', 'Tulipa / universal', 'sparkling', hooks.aperitif),
+  expandedProfileEntry('amontillado', '10-12 C', 'Copa pequena / blanco', 'fortified', hooks.aperitif),
+  expandedProfileEntry('oloroso', '12-14 C', 'Copa pequena', 'fortified', hooks.aperitif),
+  expandedProfileEntry('palo-cortado', '11-13 C', 'Copa pequena', 'fortified', hooks.aperitif),
+  expandedProfileEntry('oporto-tawny', '12-14 C', 'Copa pequena', 'fortified', hooks.dessert),
+  expandedProfileEntry('madeira', '12-14 C', 'Copa pequena', 'fortified', hooks.dessert),
+  expandedProfileEntry('blanco-fermentado-barrica', '10-12 C', 'Blanco grande / universal', 'mineralWhite', hooks.seafood),
 ]);
 
 const WINE_LIBRARY_EXPANDED_PAIRINGS: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
@@ -1988,6 +2010,18 @@ const WINE_LIBRARY_EXPANDED_PAIRINGS: Record<string, WineLibraryPriorityProfile>
   expandedProfileEntry('risotto-setas', 'Copa: Pinot Noir, Nebbiolo o blanco con lias', 'Ruta: tierra -> textura -> acidez', 'foodPairing', hooks.vegetable),
   expandedProfileEntry('ostras', 'Copa: Champagne, Cava o Muscadet', 'Ruta: salinidad -> burbuja -> premium', 'aperitifPairing', hooks.seafood),
   expandedProfileEntry('chocolate-negro', 'Copa: PX, Oporto o Banyuls', 'Ruta: cacao -> dulzor -> amargor', 'dessertPairing', hooks.dessert),
+  expandedProfileEntry('ceviche', 'Copa: Albarino, Sauvignon Blanc o Riesling seco', 'Ruta: acidez -> sal -> frescura', 'foodPairing', hooks.seafood),
+  expandedProfileEntry('queso-azul', 'Copa: PX, Oporto Tawny o Sauternes', 'Ruta: sal -> dulzor -> cierre', 'dessertPairing', hooks.dessert),
+  expandedProfileEntry('queso-de-cabra', 'Copa: Sancerre, Sauvignon Blanc o Verdejo', 'Ruta: acidez -> hierbas -> frescura', 'aperitifPairing', hooks.aperitif),
+  expandedProfileEntry('jamon-iberico', 'Copa: Fino, Cava brut nature o Champagne', 'Ruta: sal -> grasa -> burbuja', 'aperitifPairing', hooks.aperitif),
+  expandedProfileEntry('paella', 'Copa: Rosado, Albarino, Godello o Cava', 'Ruta: arroz -> socarrat -> frescura', 'foodPairing', hooks.seafood),
+  expandedProfileEntry('curry', 'Copa: Riesling, Gewurztraminer o Gruner Veltliner', 'Ruta: especia -> dulzor -> acidez', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('ramen', 'Copa: Riesling, Albarino o Pinot Noir ligero', 'Ruta: caldo -> umami -> acidez', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('thai-curry', 'Copa: Gewurztraminer, Riesling o Sauvignon Blanc', 'Ruta: coco -> picante -> aroma', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('setas-y-trufas', 'Copa: Pinot Noir, Nebbiolo o Chardonnay con lias', 'Ruta: tierra -> textura -> premium', 'foodPairing', hooks.vegetable),
+  expandedProfileEntry('cochinillo-lechon', 'Copa: Rioja, Ribera o Garnacha', 'Ruta: piel -> grasa -> acidez', 'foodPairing', hooks.redMeat),
+  expandedProfileEntry('queso-manchego', 'Copa: Fino, Cava, Rioja crianza o Garnacha', 'Ruta: sal -> curacion -> tinto suave', 'aperitifPairing', hooks.aperitif),
+  expandedProfileEntry('tarta-de-queso', 'Copa: Moscatel, Sauternes o espumoso demi-sec', 'Ruta: crema -> dulzor -> acidez', 'dessertPairing', hooks.dessert),
 ]);
 
 const WINE_LIBRARY_EDITORIAL_COPY: Record<WineLibraryLang, {
