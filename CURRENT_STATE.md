@@ -1,5 +1,62 @@
 # Current State
 
+## Actualizacion 2026-06-08: profundidad visible fallback en biblioteca del vino
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se implemento `src/components/biblioteca/WineLibraryOperationalDepth.tsx`.
+- La nueva capa visible aparece solo cuando una entidad no tiene perfil editorial especifico y cubre:
+  - lectura de cliente;
+  - argumento de sala;
+  - papel en carta;
+  - siguiente paso y CTA a demo.
+- La capa esta localizada para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se integro como fallback en:
+  - `src/pages/GrapeDetail.tsx`;
+  - `src/pages/RegionDetail.tsx`;
+  - `src/pages/StyleDetail.tsx`;
+  - `src/pages/PairingDetail.tsx`.
+- Las fichas prioritarias con perfil editorial siguen mostrando su bloque especifico y no duplican el fallback.
+- Se corrigio una prueba que usaba una ruta portuguesa artificial `/pt/biblioteca-vinho/uvas/...`; la ruta real de produccion es `/pt/biblioteca-vinho/castas/...`.
+- Se anadio cobertura en `src/test/grape-detail-render.test.tsx` para una ficha sin perfil editorial especifico: Airen en portugues.
+- Validaciones locales completadas:
+  - `npm test -- --run`: 9 archivos, 48 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Navegador local en `/pt/biblioteca-vinho/castas/airen`: bloque `Como usar Airén numa carta real`, tres tarjetas, texto fallback y CTA `/pt/demo`.
+- Commit funcional creado y pusheado: `31354ef feat: add visible wine library depth fallback`.
+- Lovable `Web Winerim` publico el commit y quedo en estado `Up to date`.
+- Produccion validada tras publish:
+  - `https://winerim.wine/pt/biblioteca-vinho/castas/airen?codex_visible_depth=31354ef` muestra `Airén`, `Como usar Airén numa carta real`, las tres tarjetas localizadas y CTA `/pt/demo`.
+  - `https://winerim.wine/de/weinbibliothek/rebsorten/tempranillo?codex_visible_depth=31354ef` mantiene `Service-Intelligenz` y no muestra el fallback operacional.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+- No se desplegaron Edge Functions Supabase para este cambio, porque el cambio es frontend humano.
+
+## Decisiones
+
+- Añadir profundidad visible humana para entidades no prioritarias sin sustituir los perfiles editoriales especificos ya existentes.
+- Usar un componente comun para uvas, regiones, estilos y maridajes, en vez de duplicar copy y UI en cada pagina.
+- Mantener el CTA a demo dentro del bloque porque conecta la consulta informacional con la accion comercial de Winerim.
+- Corregir pruebas para usar rutas localizadas reales, especialmente portugues `castas`, y evitar validaciones que solo pasen por rutas artificiales de test.
+- Publicar desde Lovable tras push a `origin/main`, porque sigue siendo la via operativa del frontend de Winerim.
+
+## Hipotesis
+
+- Las fichas no prioritarias ganaran mejor utilidad humana, mas profundidad semantica y mejores rutas de conversion sin inflar las fichas prioritarias.
+- Este fallback reduce el hueco entre entidades con perfil editorial avanzado y entidades de catalogo, pero no sustituye la escritura editorial propia de entidades de alto valor.
+- La siguiente mejora de maximo nivel debe ampliar perfiles especificos por demanda SEO/comercial y seguir reforzando enlaces contextuales entre biblioteca, blog, herramientas y demo.
+
+## Tareas pendientes
+
+- Revalidar una muestra mas amplia de produccion cuando el cache y Search Console hayan recirculado.
+- Escalar perfiles editoriales propios para las entidades con mas demanda o valor comercial que todavia dependen del fallback.
+- Revisar schema especifico por tipo de entidad para no quedarse solo en profundidad visual.
+- Mantener vigilancia de rutas localizadas reales en tests, especialmente `pt/castas`, `de/rebsorten`, `fr/cepages`, `it/vitigni`.
+- Contradiccion documental detectada: secciones historicas de `CURRENT_STATE.md` siguen describiendo una fase antigua de 10 uvas, mientras `PROJECT_CONTEXT.md` documenta la expansion actual de 30 uvas, 22 regiones, 15 estilos y 18 maridajes. Se conserva el historico, pero el estado vigente es esta actualizacion y `PROJECT_CONTEXT.md`.
+
 ## Actualizacion 2026-06-08: Search Console, prerender y biblioteca del vino
 
 ## Hechos

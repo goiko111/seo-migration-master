@@ -2,6 +2,45 @@
 
 ## 2026-06-08
 
+### Profundidad visible fallback en biblioteca del vino
+
+#### Hechos
+
+- Se implemento `WineLibraryOperationalDepth` como capa visible para entidades de biblioteca sin perfil editorial especifico.
+- La capa cubre uvas, regiones, estilos y maridajes.
+- El contenido esta localizado para `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se integro en `GrapeDetail`, `RegionDetail`, `StyleDetail` y `PairingDetail`.
+- Las fichas con perfil editorial prioritario mantienen su bloque especifico y no muestran el fallback.
+- Se corrigio el test de Airen portugues para usar la ruta real `/pt/biblioteca-vinho/castas/airen`.
+- Validaciones locales completadas: `npm test -- --run`, `npm run build`, `git diff --check` y navegador local.
+- Commit y push completados: `31354ef feat: add visible wine library depth fallback`.
+- Lovable publico el cambio y quedo en `Up to date`.
+- Produccion validada:
+  - Airen portugues muestra el fallback operativo localizado.
+  - Tempranillo aleman conserva `Service-Intelligenz` y no duplica fallback.
+- No se modifico Worker, base de datos ni Edge Functions.
+
+#### Decisiones
+
+- La profundidad humana de entidades sin perfil editorial se resuelve con un fallback visible comun y localizado.
+- No duplicar contenido en entidades prioritarias que ya tienen inteligencia editorial especifica.
+- Mantener CTA a demo como enlace comercial contextual dentro del fallback.
+- Usar rutas localizadas reales en tests para evitar falsa confianza.
+- Publicar este cambio por Lovable como frontend, sin despliegue de Worker ni Supabase.
+
+#### Hipotesis
+
+- El fallback mejora utilidad y conversion en fichas largas de cola sin exigir escritura editorial manual inmediata para todas.
+- Las entidades con mas demanda deben seguir pasando de fallback a perfil editorial propio.
+- El patron puede servir como base de QA para detectar entidades con contenido demasiado ligero en experiencia humana.
+
+#### Tareas pendientes
+
+- Ampliar perfiles especificos a las entidades que sigan dependiendo del fallback y tengan alto valor SEO/comercial.
+- Revisar schema por tipo de entidad.
+- Revalidar una muestra de produccion y Search Console cuando haya recrawl.
+- Mantener documentada la contradiccion historica entre fases antiguas de 10 uvas y el estado actual de expansion masiva.
+
 ### Hechos
 
 - Se continuo la auditoria de Search Console y de la biblioteca del vino sobre el proyecto correcto de Lovable: `Web Winerim`.

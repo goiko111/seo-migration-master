@@ -1,5 +1,52 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras fallback visible de biblioteca
+
+## Hechos
+
+- El commit `31354ef feat: add visible wine library depth fallback` esta pusheado en `main`.
+- Lovable `Web Winerim` publico el commit y quedo en `Up to date`.
+- Produccion validada en experiencia humana:
+  - `/pt/biblioteca-vinho/castas/airen` muestra el bloque visible `Como usar Airén numa carta real`.
+  - `/de/weinbibliothek/rebsorten/tempranillo` conserva su bloque especifico `Service-Intelligenz` y no muestra fallback.
+- La nueva capa esta localizada para seis idiomas y conectada a uvas, regiones, estilos y maridajes.
+- Validaciones del bloque:
+  - `npm test -- --run`: 48 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - navegador local y produccion.
+- No se toco Worker, DB ni Edge Functions.
+
+## Decisiones
+
+- El bloque de fallback visible queda cerrado como mejora de UX/contenido humano para entidades sin perfil editorial especifico.
+- Las entidades prioritarias deben seguir usando perfiles propios, no el fallback.
+- La ruta portuguesa real para uvas/castas es `/pt/biblioteca-vinho/castas/...`; evitar `/pt/biblioteca-vinho/uvas/...` salvo como ruta interna artificial de test, que ya se corrigio.
+
+## Hipotesis
+
+- La biblioteca queda mejor equilibrada para usuarios humanos, pero el maximo nivel vendra de convertir progresivamente entidades de alto valor de fallback a perfil editorial propio.
+- La mejora puede ayudar a conversion y calidad percibida, aunque el impacto de indexacion dependera de recrawl y enlazado interno.
+
+## Tareas pendientes inmediatas
+
+1. Expandir perfiles especificos de biblioteca:
+   - priorizar entidades que hoy dependen del fallback y tienen demanda comercial;
+   - empezar por uvas/regiones/estilos/maridajes con mas busquedas o mejor encaje de producto.
+2. Revisar schema por tipo de entidad:
+   - diferenciar mejor `DefinedTerm`, `Article`, `FAQPage` y posibles entidades de producto/servicio cuando corresponda.
+3. Reforzar enlaces internos humanos:
+   - blog -> entidad;
+   - guia/herramienta -> entidad;
+   - entidad -> demo/producto;
+   - uva -> region -> estilo -> maridaje.
+4. Revalidar produccion mas adelante:
+   - muestra de fichas fallback en los seis idiomas;
+   - muestra de fichas prioritarias para confirmar que no duplican fallback.
+5. Mantener Search Console:
+   - monitorizar `Descubierta: actualmente sin indexar`;
+   - pedir indexacion selectiva solo para hubs/entidades maduras cuando la herramienta no falle.
+
 ## Actualizacion 2026-06-08: estado retomable
 
 ## Hechos

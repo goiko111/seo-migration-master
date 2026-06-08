@@ -8,6 +8,7 @@
 - La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 30 uvas prioritarias.
 - La expansión editorial de biblioteca del vino cubre 30 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- El 2026-06-08 se publico en produccion un fallback visible localizado para entidades de biblioteca sin perfil editorial especifico, integrado en uvas, regiones, estilos y maridajes.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para biblioteca del vino: 761/761 URLs visibles de Search Console pasan con minimo 317 palabras, canonical propio, idioma correcto, schema y hreflang.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para 49 rutas estaticas/no-biblioteca visibles en Search Console: 49/49 pasan con minimo 302 palabras, canonical propio e idioma correcto.
 - La cobertura completa de la expansión en sitemap quedó publicada y validada tras desplegar desde Lovable el commit `9f99fa7`.
@@ -53,6 +54,7 @@
 - La ampliación internacional de la biblioteca debe priorizar paridad de rutas, indexabilidad, hreflang, canonical, sitemap y prerender para bots.
 - La mejora editorial debería avanzar después de asegurar la base técnica multilingüe.
 - La mejora editorial debe mantener paridad entre experiencia humana, sitemap/prerender y datos estructurados.
+- Las entidades prioritarias deben usar perfiles editoriales propios; el fallback visible es una capa para entidades que aun no tienen perfil especifico.
 - Las rutas estratégicas de hubs deben mantenerse sincronizadas entre React y `supabase/functions/prerender/index.ts` hasta que exista una fuente compartida.
 - La ampliación editorial debe publicarse desde Lovable y validarse en producción antes de tratarse como cerrada.
 - Los archivos `llms.txt` y `llms-full.txt` ayudan a orientar agentes y crawlers de IA, pero no sustituyen contenido indexable, prerender correcto ni schema consistente.
@@ -64,6 +66,7 @@
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
+- Convertir progresivamente entidades que dependen del fallback visible en perfiles editoriales especificos cuando tengan demanda SEO o valor comercial.
 - Mantener la validación productiva de cada tanda editorial antes de tratarla como cerrada.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
