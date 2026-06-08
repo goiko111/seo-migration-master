@@ -108,14 +108,22 @@ describe("wine library SEO surface", () => {
 
   it("adds strategic internal links to prerendered wine-library entities", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const strategicLinksBlock =
       prerender.match(/const WINE_LIBRARY_STRATEGIC_LINKS[\s\S]*?\n};/)?.[0] || "";
     const missingPriorityGrapes = priorityGrapeSlugs.filter(
       (slug) => !strategicLinksBlock.includes(`'/biblioteca-vino/uvas/${slug}'`),
     );
+    const strategicTargets = [
+      ...new Set([...strategicLinksBlock.matchAll(/esPath: '([^']+)'/g)].map((match) => match[1])),
+    ];
+    const targetsMissingFromSitemap = strategicTargets.filter(
+      (target) => !sitemap.includes(`esPath: '${target}'`),
+    );
 
     expect(prerender).toContain("const WINE_LIBRARY_STRATEGIC_LINKS");
     expect(missingPriorityGrapes).toEqual([]);
+    expect(targetsMissingFromSitemap).toEqual([]);
     expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/xarello");
     expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/gruner-veltliner");
     expect(strategicLinksBlock).toContain("/biblioteca-vino/uvas/corvina");
