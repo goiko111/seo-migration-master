@@ -17,7 +17,9 @@
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 40 uvas prioritarias.
-- La expansión editorial de biblioteca del vino cubre 40 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- La expansión editorial de biblioteca del vino cubre 40 uvas, 34 regiones prioritarias, 25 estilos prioritarios y 30 maridajes/platos prioritarios en seis idiomas.
+- El 2026-06-08 se publico y valido en produccion `3954369 feat: expand wine library entity editorial coverage`, que amplio perfiles editoriales visibles de regiones, estilos y maridajes/platos, sincronizo `prerender` y anadio rutas nuevas al sitemap.
+- Produccion tras `3954369`: Googlebot valida Santorini PT, Franciacorta DE y Ceviche PT con `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto, schema enriquecido y contenido editorial sin fallback; `/sitemap.xml` contiene 2.228 URLs y las nuevas rutas revisadas en `es/de/pt`.
 - El 2026-06-08 se publico en produccion la cuarta tanda editorial de uvas prioritarias: `graciano`, `muscadet`, `semillon`, `assyrtiko`, `vermentino`, `carmenere`, `tannat`, `petit-verdot`, `torrontes` y `corvina`.
 - El 2026-06-08 se pusheo `d02ff15 feat: enrich wine library grape schema links`, que completa enlaces estrategicos para las 40 uvas prioritarias, enriquece JSON-LD humano de fichas de uva y desambigua `muscadet` como uva `Melon de Bourgogne` frente a region; la paridad de `prerender` quedo cerrada posteriormente con `7a1745a`.
 - El 2026-06-08 se publico en produccion un fallback visible localizado para entidades de biblioteca sin perfil editorial especifico, integrado en uvas, regiones, estilos y maridajes.

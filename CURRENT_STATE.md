@@ -1,5 +1,66 @@
 # Current State
 
+## Actualizacion 2026-06-08: quinta tanda editorial de regiones, estilos y maridajes
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se implemento y pusheo `3954369 feat: expand wine library entity editorial coverage`.
+- La cobertura editorial visible de biblioteca del vino pasa a:
+  - 40 uvas prioritarias;
+  - 34 regiones prioritarias;
+  - 25 estilos prioritarios;
+  - 30 maridajes/platos prioritarios.
+- `src/data/wineLibraryEditorialExpansion.ts` anadio 12 regiones: `ribeira-sacra`, `bierzo`, `toro`, `chablis`, `alsacia`, `provence`, `santorini`, `valpolicella`, `chianti-classico`, `brunello-di-montalcino`, `soave` y `etna`.
+- `src/data/wineLibraryEditorialExpansion.ts` anadio 10 estilos: `prosecco`, `cremant`, `franciacorta`, `pet-nat`, `amontillado`, `oloroso`, `palo-cortado`, `oporto-tawny`, `madeira` y `blanco-fermentado-barrica`.
+- `src/data/wineLibraryEditorialExpansion.ts` anadio 12 maridajes/platos: `ceviche`, `queso-azul`, `queso-de-cabra`, `jamon-iberico`, `paella`, `curry`, `ramen`, `thai-curry`, `setas-y-trufas`, `cochinillo-lechon`, `queso-manchego` y `tarta-de-queso`.
+- Se corrigio la plantilla de `ceviche`, `paella` y `ramen` para evitar heredar una lectura de `tinto elegante`; `ceviche` PT queda validado como `branco gastronomico`.
+- `supabase/functions/prerender/index.ts` se sincronizo con las nuevas entidades para que Googlebot reciba perfil editorial de bot.
+- `supabase/functions/sitemap/index.ts` anadio las rutas que faltaban para regiones italianas y maridajes/platos nuevos; la revision local confirma 366 rutas fuente, 0 duplicados y 0 faltantes en la tanda nueva.
+- Tests y validaciones locales completadas:
+  - `npm run test -- --run src/test/wine-library-editorial.test.ts src/test/wine-library-seo-surface.test.ts`: 25 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`.
+  - `npm run test -- --run`: 55 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Navegador local en Santorini PT, Franciacorta DE y Ceviche PT.
+- Lovable `Web Winerim` desplego `prerender` y `sitemap` del commit `3954369` y publico frontend con estado `Up to date`.
+- Produccion validada independientemente como Googlebot:
+  - `/pt/biblioteca-vinho/regioes/grecia/santorini`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, contenido editorial y sin fallback.
+  - `/de/weinbibliothek/weinstile/franciacorta`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, contenido editorial y sin fallback.
+  - `/pt/biblioteca-vinho/harmonizacoes/ceviche`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, contenido editorial y sin fallback.
+- Produccion `/sitemap.xml` responde `200`, `x-worker-branch: sitemap-worker-detail-bridge`, contiene 2.228 URLs y no faltan las variantes revisadas `es/de/pt` de `chianti-classico`, `brunello-di-montalcino`, `soave`, `etna`, `jamon-iberico`, `thai-curry` y `tarta-de-queso`.
+- Produccion humana validada en `/pt/biblioteca-vinho/harmonizacoes/ceviche`: canonical propio, `lang="pt"`, `Papel na carta`, `branco gastronomico`, sin fallback y sin texto de `tinto elegante`.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Escalar regiones, estilos y maridajes/platos con la capa generativa localizada existente para mantener seis idiomas sin duplicar seis bloques manuales por entidad.
+- Cuando una entidad pasa a prioridad editorial, mantener paridad minima entre experiencia humana, `prerender` y sitemap.
+- Anadir al sitemap las entidades nuevas que ya existian en catalogos humanos pero no estaban sometidas como URLs dinamicas.
+- Ajustar plantillas de maridaje cuando una herencia generica produzca una recomendacion poco natural para el plato.
+- Mantener sin cambios Cloudflare Worker y DB porque la tanda pertenece a React, `prerender` y `sitemap`.
+
+## Hipotesis
+
+- Ampliar perfiles propios en regiones, estilos y maridajes de alta intencion deberia reducir dependencia del fallback visible y mejorar utilidad humana, rastreo e interpretacion por LLMs.
+- La presencia de nuevas rutas en sitemap junto con HTML prerenderizado robusto deberia acelerar descubrimiento tras recrawl, aunque Search Console tardara en reflejarlo.
+- Los maridajes de alta intencion como `ceviche`, `jamon-iberico`, `thai-curry` y `tarta-de-queso` pueden convertirse en puertas de entrada SEO hacia la biblioteca si se refuerzan con enlaces internos y blog.
+
+## Tareas pendientes
+
+- Monitorizar en Search Console el recrawl posterior a `3954369`, especialmente `/sitemap.xml` y la categoria `Descubierta: actualmente sin indexar`.
+- Solicitar indexacion selectiva de una tanda corta si Search Console lo permite:
+  - hubs de biblioteca;
+  - Santorini PT;
+  - Franciacorta DE;
+  - Ceviche PT;
+  - rutas nuevas de sitemap con alta intencion.
+- Reforzar enlaces internos estrategicos hacia las nuevas entidades desde hubs, fichas relacionadas y futuros articulos.
+- Planificar la migracion de slugs localizados solo como proyecto SEO separado con redirects 301, canonicals, hreflang y validacion.
+
 ## Actualizacion 2026-06-08: schema enriquecido para regiones, estilos y maridajes
 
 ## Hechos

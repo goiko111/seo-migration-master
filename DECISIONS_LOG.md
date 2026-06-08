@@ -2,6 +2,45 @@
 
 ## 2026-06-08
 
+### Quinta tanda editorial de regiones, estilos y maridajes
+
+#### Hechos
+
+- Se implemento y pusheo `3954369 feat: expand wine library entity editorial coverage`.
+- La cobertura editorial visible de biblioteca del vino queda en 40 uvas, 34 regiones, 25 estilos y 30 maridajes/platos prioritarios.
+- Se anadieron 12 regiones prioritarias: `ribeira-sacra`, `bierzo`, `toro`, `chablis`, `alsacia`, `provence`, `santorini`, `valpolicella`, `chianti-classico`, `brunello-di-montalcino`, `soave` y `etna`.
+- Se anadieron 10 estilos prioritarios: `prosecco`, `cremant`, `franciacorta`, `pet-nat`, `amontillado`, `oloroso`, `palo-cortado`, `oporto-tawny`, `madeira` y `blanco-fermentado-barrica`.
+- Se anadieron 12 maridajes/platos prioritarios: `ceviche`, `queso-azul`, `queso-de-cabra`, `jamon-iberico`, `paella`, `curry`, `ramen`, `thai-curry`, `setas-y-trufas`, `cochinillo-lechon`, `queso-manchego` y `tarta-de-queso`.
+- Se sincronizo `supabase/functions/prerender/index.ts` para que bots reciban perfiles editoriales de la misma tanda.
+- Se ampliaron rutas en `supabase/functions/sitemap/index.ts` para regiones italianas y maridajes/platos que aun no estaban sometidos.
+- Validaciones locales completadas: tests enfocados, `deno check`, suite completa, build, `git diff --check`, revision de sitemap sin duplicados y navegador local.
+- Lovable `Web Winerim` desplego `prerender` y `sitemap` desde `3954369`, publico frontend y quedo `Up to date`.
+- Produccion validada como Googlebot en Santorini PT, Franciacorta DE y Ceviche PT con `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto, schema enriquecido, contenido editorial y sin fallback.
+- Produccion `/sitemap.xml` contiene 2.228 URLs y cubre las variantes `es/de/pt` revisadas de los nuevos slugs estrategicos.
+- Produccion humana validada en Ceviche PT con `branco gastronomico`, sin fallback y sin lectura erronea de `tinto elegante`.
+- No se modifico Cloudflare Worker ni base de datos.
+
+#### Decisiones
+
+- Usar la capa editorial generativa localizada para escalar perfiles propios con consistencia en seis idiomas.
+- Mantener paridad de cada tanda entre React, `prerender` y sitemap antes de tratarla como cerrada.
+- Incluir en sitemap las entidades nuevas que ya existian en catalogos de biblioteca pero no estaban sometidas.
+- Revisar manualmente las herencias de plantilla cuando el texto generico produzca una recomendacion poco natural para un plato.
+- Seguir usando Lovable como via operativa para Supabase Edge Functions mientras no haya `SUPABASE_ACCESS_TOKEN` local.
+
+#### Hipotesis
+
+- La nueva cobertura reduce la cantidad de entidades de alto valor que dependen de fallback y deberia mejorar utilidad humana y rastreo.
+- Los nuevos maridajes/platos pueden actuar como long-tail de alta intencion si se refuerzan con enlaces internos y clusters de blog.
+- El incremento de sitemap a 2.228 URLs deberia ayudar al descubrimiento, pero Search Console necesitara recrawl antes de reflejar el cambio.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console tras el recrawl de `/sitemap.xml` y de las nuevas fichas.
+- Solicitar indexacion selectiva de una tanda corta cuando la herramienta lo permita.
+- Reforzar enlaces internos hacia las nuevas entidades desde hubs, fichas relacionadas y blog.
+- Mantener la migracion de slugs localizados como proyecto separado.
+
 ### Schema enriquecido para regiones, estilos y maridajes
 
 #### Hechos

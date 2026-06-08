@@ -1,5 +1,50 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras quinta tanda editorial publicada
+
+## Hechos
+
+- `main` contiene y tiene pusheado `3954369 feat: expand wine library entity editorial coverage`.
+- Lovable `Web Winerim` desplego `prerender` y `sitemap` desde `3954369` y publico frontend; el panel quedo `Up to date`.
+- La biblioteca del vino tiene perfiles editoriales visibles para 40 uvas, 34 regiones, 25 estilos y 30 maridajes/platos prioritarios.
+- Produccion Googlebot validada:
+  - `/pt/biblioteca-vinho/regioes/grecia/santorini`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema enriquecido, contenido editorial y sin fallback.
+  - `/de/weinbibliothek/weinstile/franciacorta`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, schema enriquecido, contenido editorial y sin fallback.
+  - `/pt/biblioteca-vinho/harmonizacoes/ceviche`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema enriquecido, contenido editorial y sin fallback.
+- Produccion humana validada en `/pt/biblioteca-vinho/harmonizacoes/ceviche`: perfil propio, `Papel na carta`, `branco gastronomico`, canonical propio, sin fallback y sin lectura de `tinto elegante`.
+- `/sitemap.xml` responde `200`, contiene 2.228 URLs y no faltan las variantes `es/de/pt` revisadas de `chianti-classico`, `brunello-di-montalcino`, `soave`, `etna`, `jamon-iberico`, `thai-curry` y `tarta-de-queso`.
+- Validaciones locales completadas: tests enfocados, `deno check`, suite completa, build, `git diff --check`, revision local de sitemap sin duplicados y navegador local.
+- No se toco Cloudflare Worker.
+- No se toco base de datos.
+
+## Decisiones
+
+- La quinta tanda editorial queda cerrada solo porque ya esta validada en local, Lovable y produccion.
+- Mantener como siguiente prioridad Search Console e indexacion selectiva, no otra tanda grande inmediata sin observar recrawl.
+- Seguir tratando la localizacion de slugs de entidad como proyecto SEO separado.
+
+## Hipotesis
+
+- Search Console deberia empezar a descubrir las nuevas rutas cuando recrawlee `/sitemap.xml`, aunque puede tardar dias o semanas.
+- El siguiente salto vendra de reforzar enlaces internos y contenido de apoyo hacia las nuevas fichas, no solo de seguir sumando entidades.
+- Las nuevas fichas de maridaje pueden apoyar clusters de blog por idioma si se publican articulos conectados.
+
+## Tareas pendientes inmediatas
+
+1. Search Console:
+   - revisar fecha de ultimo rastreo de `/sitemap.xml`;
+   - comprobar si aparecen las nuevas URLs en cobertura;
+   - solicitar indexacion selectiva de hubs y 5-10 fichas nuevas si la herramienta lo permite.
+2. Enlazado interno:
+   - reforzar hubs de regiones, estilos y maridajes hacia las nuevas prioridades;
+   - anadir enlaces contextuales desde fichas relacionadas ya maduras;
+   - revisar que nuevos perfiles no queden aislados del grafo estrategico.
+3. Contenido:
+   - preparar clusters de blog por idioma alrededor de maridajes de alta intencion (`ceviche`, `jamon-iberico`, `thai-curry`, `tarta-de-queso`);
+   - enlazar esos articulos a biblioteca, herramientas y demo.
+4. Proyecto separado:
+   - planificar slugs localizados con mapa completo, redirects 301, canonicals, hreflang, sitemap y validacion antes/despues.
+
 ## Actualizacion 2026-06-08: retomar tras deploy de schema enriquecido de entidades
 
 ## Hechos
