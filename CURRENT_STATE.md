@@ -1,5 +1,75 @@
 # Current State
 
+## Actualizacion 2026-06-08: prerender estrategico y sitemap estrategico cerrados
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Contradiccion detectada: los documentos aun marcaban `d02ff15` como `prerender` pendiente, pero el repo y Lovable ya habian avanzado a `7a1745a` para sincronizar `prerender` y a `6d0c2cf` para completar el sitemap.
+- Lovable `Web Winerim` ya habia desplegado la Edge Function `prerender` del commit `7a1745a`.
+- Produccion Googlebot validada tras `7a1745a`:
+  - `/de/weinbibliothek/rebsorten/muscadet`;
+  - `/pt/biblioteca-vinho/castas/muscadet`;
+  - `/de/weinbibliothek/rebsorten/gruner-veltliner`;
+  - `/pt/biblioteca-vinho/castas/corvina`.
+- Las cuatro rutas responden `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto y JSON-LD con `mentions` estrategicas reales.
+- Los slugs de entidad siguen en forma canonica base espanola dentro de rutas localizadas; los segmentos de seccion si estan localizados, por ejemplo `regionen`, `regioes`, `weinbegleitung` y `harmonizacoes`.
+- Se audito la sincronizacion entre `WINE_LIBRARY_STRATEGIC_LINKS` de `supabase/functions/prerender/index.ts` y `WINE_LIBRARY_DYNAMIC_ROUTES` de `supabase/functions/sitemap/index.ts`.
+- Antes del cambio faltaban 9 rutas estrategicas en el sitemap:
+  - `/biblioteca-vino/maridajes/ceviche`;
+  - `/biblioteca-vino/maridajes/lubina-dorada`;
+  - `/biblioteca-vino/maridajes/queso-azul`;
+  - `/biblioteca-vino/maridajes/queso-de-cabra`;
+  - `/biblioteca-vino/regiones/espana/ribeira-sacra`;
+  - `/biblioteca-vino/regiones/francia/muscadet`;
+  - `/biblioteca-vino/regiones/grecia/santorini`;
+  - `/biblioteca-vino/regiones/italia/valpolicella`;
+  - `/biblioteca-vino/regiones/italia/vermentino-di-gallura`.
+- Se implemento y pusheo `6d0c2cf fix: include strategic wine library targets in sitemap`.
+- `supabase/functions/sitemap/index.ts` ahora incluye esas 9 rutas estrategicas.
+- `src/test/wine-library-seo-surface.test.ts` ahora valida que todos los targets de `WINE_LIBRARY_STRATEGIC_LINKS` esten presentes en el sitemap.
+- Validaciones locales tras `6d0c2cf`:
+  - `npx --yes deno-bin check supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 17 tests;
+  - `npm run test -- --run`: 52 tests;
+  - `npm run build`;
+  - `git diff --check`.
+- El intento de deploy CLI de `sitemap` fallo por falta de `SUPABASE_ACCESS_TOKEN`; no habia token local ni sesion Supabase guardada.
+- Se envio instruccion explicita a Lovable para desplegar `sitemap` del commit `6d0c2cf`.
+- Lovable respondio que la Edge Function `sitemap` quedo desplegada y que `/sitemap.xml` produce 2.150 URLs.
+- Produccion validada independientemente:
+  - `/sitemap.xml` responde `200`, `content-type: application/xml; charset=utf-8`, `x-worker-branch: sitemap-worker-detail-bridge` y `x-robots-tag: index, follow`;
+  - conteo real: 2.150 URLs;
+  - las 54 variantes de las 9 rutas nuevas en seis idiomas estan presentes;
+  - las 27 variantes `es/de/pt` revisadas como Googlebot responden `200`;
+  - una muestra de rutas nuevas confirma `x-prerendered: true` y `x-worker-branch: bot-prerender`.
+- Se pulso `Publish your app` en Lovable despues del deploy de `sitemap`; el panel quedo `Published` y `Up to date`.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Dar por cerrado el despliegue de `prerender` estrategico para uvas prioritarias en `7a1745a`.
+- Dar por cerrado el despliegue de `sitemap` estrategico para los targets de enlaces internos en `6d0c2cf`.
+- Mantener como guardrail que cualquier target nuevo de `WINE_LIBRARY_STRATEGIC_LINKS` debe estar tambien en `WINE_LIBRARY_DYNAMIC_ROUTES`.
+- No traducir slugs de entidad como cambio rapido porque alteraria canonicals ya publicados; tratarlo como migracion SEO separada.
+- Mantener Lovable como via operativa para Edge Functions mientras no haya `SUPABASE_ACCESS_TOKEN` local.
+
+## Hipotesis
+
+- Tener los enlaces estrategicos de JSON-LD tambien en sitemap deberia mejorar rastreo y coherencia semantica entre uvas, regiones, estilos y maridajes.
+- El aumento de sitemap de 2.098 a 2.150 URLs refleja la incorporacion efectiva de las rutas estrategicas, teniendo en cuenta que algunas variantes ya podian existir o deduplicarse.
+- La migracion futura de slugs localizados puede mejorar percepcion internacional, pero solo si se ejecuta con redirects y sin romper señales acumuladas.
+
+## Tareas pendientes
+
+- Monitorizar Search Console cuando actualice datos posteriores al deploy de `6d0c2cf`.
+- Solicitar indexacion selectiva de hubs y entidades maduras si Search Console lo permite sin error.
+- Planificar la migracion de slugs de entidad localizados con mapa completo por idioma, redirects 301, canonical, hreflang y sitemap.
+- Extender el criterio de schema, `mentions` y enlazado estrategico a regiones, estilos y maridajes, no solo uvas.
+- Continuar convirtiendo entidades de alto valor desde fallback a perfiles editoriales propios.
+
 ## Actualizacion 2026-06-08: schema y enlaces internos de uvas prioritarias
 
 ## Hechos

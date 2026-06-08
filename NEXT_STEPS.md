@@ -1,5 +1,64 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras deploy de sitemap estrategico
+
+## Hechos
+
+- `main` incluye y tiene pusheado `6d0c2cf fix: include strategic wine library targets in sitemap`.
+- `7a1745a fix: sync prerender grape strategic links` quedo desplegado en `prerender` y validado en produccion como Googlebot.
+- `6d0c2cf` quedo desplegado en la Edge Function `sitemap` desde Lovable `Web Winerim`.
+- Produccion `/sitemap.xml` responde `200` y contiene 2.150 URLs.
+- Las 54 variantes de las 9 rutas estrategicas nuevas estan presentes en sitemap en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Las 27 variantes `es/de/pt` revisadas como Googlebot responden `200`.
+- Muestra de headers de rutas nuevas:
+  - `/biblioteca-vino/regiones/francia/muscadet`;
+  - `/de/weinbibliothek/weinbegleitung/queso-azul`;
+  - `/pt/biblioteca-vinho/regioes/italia/vermentino-di-gallura`;
+  - todas con `content-type: text/html; charset=utf-8`, `x-prerendered: true` y `x-worker-branch: bot-prerender`.
+- El CLI de Supabase sigue bloqueado sin `SUPABASE_ACCESS_TOKEN`; Lovable es la via operativa actual para Edge Functions.
+- No se toco Cloudflare Worker ni base de datos.
+
+## Decisiones
+
+- No queda pendiente desplegar `prerender` para `d02ff15`; esa deuda quedo superada por `7a1745a`.
+- No queda pendiente desplegar `sitemap` para `6d0c2cf`; ya esta validado en produccion.
+- El siguiente bloque no debe ser otro parche tecnico de sitemap, sino expansion editorial/schema y plan de slugs localizados.
+- Los slugs de entidad localizados no se cambian sin plan de migracion SEO.
+
+## Hipotesis
+
+- Search Console deberia empezar a descubrir mejor las entidades estrategicas cuando recrawlee el sitemap nuevo.
+- La siguiente mejora de maximo nivel vendra de contenido visible, schema especifico y enlaces contextuales para regiones, estilos y maridajes.
+- Una migracion de slugs localizados puede mejorar adecuacion internacional, pero tambien puede generar volatilidad si se ejecuta sin redirects y canonical plan.
+
+## Tareas pendientes inmediatas
+
+1. Monitorizar Search Console:
+   - revisar fecha de ultimo rastreo de `/sitemap.xml`;
+   - comprobar si baja `Descubierta: actualmente sin indexar`;
+   - revisar ejemplos de las 9 rutas estrategicas nuevas.
+2. Solicitar indexacion selectiva si la herramienta lo permite:
+   - `/biblioteca-vino`;
+   - `/biblioteca-vino/uvas`;
+   - `/biblioteca-vino/regiones`;
+   - `/biblioteca-vino/estilos`;
+   - `/biblioteca-vino/maridajes`;
+   - una seleccion corta de rutas nuevas ya servibles.
+3. Planificar migracion de slugs localizados:
+   - mapa completo por idioma;
+   - canonicals nuevos;
+   - redirects 301 desde slugs actuales;
+   - hreflang y sitemap nuevos;
+   - validacion de Search Console antes/despues.
+4. Extender schema/enlazado estrategico a:
+   - regiones prioritarias;
+   - estilos prioritarios;
+   - maridajes prioritarios.
+5. Seguir ampliando contenido visible:
+   - perfiles editoriales propios para regiones y maridajes de alto valor;
+   - clusters de blog por idioma solo si enlazan a entidades maduras;
+   - CTAs contextuales hacia demo/herramientas sin forzar paginas informacionales.
+
 ## Actualizacion 2026-06-08: retomar tras schema y enlaces de uvas
 
 ## Hechos

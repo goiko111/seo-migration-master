@@ -3,14 +3,18 @@
 ## Hechos
 
 - Repositorio de trabajo actual: `/Users/GOIKO/seo-migration-master`.
+- El 2026-06-08 se detecto y corrigio una contradiccion documental: los documentos seguian marcando `d02ff15` como `prerender` pendiente, pero el estado real ya habia avanzado a `7a1745a` para `prerender` y `6d0c2cf` para `sitemap`.
+- El 2026-06-08 quedo desplegada y validada en produccion la Edge Function `prerender` del commit `7a1745a`: Googlebot recibe `mentions` estrategicas reales en JSON-LD para uvas prioritarias, no solo hubs genericos.
+- El 2026-06-08 se pusheo, desplego y valido `6d0c2cf fix: include strategic wine library targets in sitemap`: `/sitemap.xml` responde `200`, contiene 2.150 URLs y cubre las 9 rutas estrategicas nuevas en las seis lenguas.
+- Las 54 variantes nuevas del sitemap para esas 9 rutas existen en produccion; las 27 variantes `es/de/pt` revisadas como Googlebot responden `200` y una muestra confirma `x-prerendered: true` con `x-worker-branch: bot-prerender`.
+- Los slugs de entidad de la biblioteca siguen usando la forma canonica base espanola dentro de rutas localizadas, por ejemplo `francia`, `blanco-mineral` o `queso-azul`; cambiar esto requiere migracion de canonicals, redirects, hreflang y sitemap.
 - El proyecto es una aplicación Vite + React + TypeScript.
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 40 uvas prioritarias.
 - La expansión editorial de biblioteca del vino cubre 40 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
 - El 2026-06-08 se publico en produccion la cuarta tanda editorial de uvas prioritarias: `graciano`, `muscadet`, `semillon`, `assyrtiko`, `vermentino`, `carmenere`, `tannat`, `petit-verdot`, `torrontes` y `corvina`.
-- El 2026-06-08 se pusheo `d02ff15 feat: enrich wine library grape schema links`, que completa enlaces estrategicos para las 40 uvas prioritarias, enriquece JSON-LD humano de fichas de uva y desambigua `muscadet` como uva `Melon de Bourgogne` frente a region.
-- El frontend humano del commit `d02ff15` quedo publicado desde Lovable, pero la Edge Function `prerender` todavia debe desplegarse para que Googlebot reciba el schema enriquecido nuevo.
+- El 2026-06-08 se pusheo `d02ff15 feat: enrich wine library grape schema links`, que completa enlaces estrategicos para las 40 uvas prioritarias, enriquece JSON-LD humano de fichas de uva y desambigua `muscadet` como uva `Melon de Bourgogne` frente a region; la paridad de `prerender` quedo cerrada posteriormente con `7a1745a`.
 - El 2026-06-08 se publico en produccion un fallback visible localizado para entidades de biblioteca sin perfil editorial especifico, integrado en uvas, regiones, estilos y maridajes.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para biblioteca del vino: 761/761 URLs visibles de Search Console pasan con minimo 317 palabras, canonical propio, idioma correcto, schema y hreflang.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para 49 rutas estaticas/no-biblioteca visibles en Search Console: 49/49 pasan con minimo 302 palabras, canonical propio e idioma correcto.
@@ -50,6 +54,7 @@
 - Actualizar estos documentos también durante la sesión cuando ocurra algo significativo.
 - Publicar artículos de blog de forma táctica, por clusters conectados a la biblioteca del vino y a conversión, antes que aumentar volumen sin enlazado ni intención clara.
 - Priorizar traducción/adaptación por país de artículos estratégicos cuando el routing, sitemap, prerender y la UI humana mantengan el idioma sin saltar a español.
+- No traducir slugs de entidad como parche rapido mientras ya esten publicados como canonicals en sitemap; tratarlos como una migracion SEO con redirects 301, hreflang, canonicals y validacion de Search Console.
 
 ## Hipótesis
 
@@ -72,8 +77,8 @@
 - Convertir progresivamente entidades que dependen del fallback visible en perfiles editoriales especificos cuando tengan demanda SEO o valor comercial; la cobertura de uvas prioritarias ya paso de 30 a 40.
 - Mantener la validación productiva de cada tanda editorial antes de tratarla como cerrada.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
-- Desplegar `prerender` del commit `d02ff15` desde Lovable o mediante CLI con `SUPABASE_ACCESS_TOKEN`, y revalidar Googlebot en Muscadet DE/PT.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
+- Planificar la migracion futura de slugs de entidad localizados solo con mapa completo, redirects 301 y control de impacto SEO.
 - Evitar que frontend y prerender diverjan cuando se añadan nuevos enlaces estratégicos de biblioteca.
 - Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.

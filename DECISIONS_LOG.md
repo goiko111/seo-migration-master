@@ -2,6 +2,43 @@
 
 ## 2026-06-08
 
+### Cierre de prerender y sitemap estrategico de biblioteca
+
+#### Hechos
+
+- Se detecto una contradiccion documental: `d02ff15` seguia descrito como pendiente de `prerender`, aunque el repo y Lovable ya habian avanzado.
+- La Edge Function `prerender` del commit `7a1745a` quedo desplegada en Lovable `Web Winerim`.
+- Produccion Googlebot valida `mentions` estrategicas reales en JSON-LD para Muscadet DE/PT, Gruner Veltliner DE y Corvina PT.
+- Se audito la paridad entre los targets de `WINE_LIBRARY_STRATEGIC_LINKS` y el sitemap.
+- Faltaban 9 rutas estrategicas en `WINE_LIBRARY_DYNAMIC_ROUTES`.
+- Se implemento, valido, pusheo y desplego `6d0c2cf fix: include strategic wine library targets in sitemap`.
+- `src/test/wine-library-seo-surface.test.ts` ahora impide que un target estrategico de `prerender` quede fuera del sitemap.
+- La Edge Function `sitemap` se desplego desde Lovable tras fallar el CLI por falta de `SUPABASE_ACCESS_TOKEN`.
+- Produccion `/sitemap.xml` responde `200`, contiene 2.150 URLs y contiene las 54 variantes de las 9 rutas nuevas en seis idiomas.
+- Las 27 variantes `es/de/pt` revisadas como Googlebot responden `200`; una muestra confirma `x-prerendered: true` y `bot-prerender`.
+- No se modifico Cloudflare Worker ni base de datos.
+
+#### Decisiones
+
+- Cerrar `7a1745a` como deploy efectivo de `prerender` estrategico.
+- Cerrar `6d0c2cf` como deploy efectivo de `sitemap` estrategico.
+- Mantener una prueba automatica que sincronice `WINE_LIBRARY_STRATEGIC_LINKS` y `WINE_LIBRARY_DYNAMIC_ROUTES`.
+- No convertir slugs de entidad a formas traducidas como parche rapido; hacerlo solo como migracion SEO planificada con redirects 301.
+- Seguir usando Lovable para desplegar Supabase Edge Functions mientras no haya token CLI local.
+
+#### Hipotesis
+
+- La paridad `prerender` + sitemap refuerza el rastreo de entidades estrategicas y reduce señales incompletas para Googlebot y LLMs.
+- Search Console tardara en reflejar el cambio, pero las URLs ya son servibles, rastreables y visibles en sitemap.
+- Traducir slugs de entidad puede ser valioso, aunque su impacto positivo depende de preservar canonicals historicos mediante redirects.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console despues del recrawl de `/sitemap.xml`.
+- Planificar la migracion de slugs localizados como proyecto separado.
+- Continuar schema/enlazado para regiones, estilos y maridajes.
+- Seguir ampliando perfiles editoriales propios en entidades de alto valor comercial y SEO.
+
 ### Schema y grafo interno de uvas prioritarias
 
 #### Hechos
