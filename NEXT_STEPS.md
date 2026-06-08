@@ -1,5 +1,72 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras cuarta tanda de uvas
+
+## Hechos
+
+- `main` incluye y tiene pusheado `ad89889 feat: expand priority grape editorial profiles`.
+- Lovable `Web Winerim` sincronizo el commit desde GitHub, desplego Supabase Edge Function `prerender` y publico frontend con estado final `Up to date`.
+- La biblioteca del vino tiene ahora 40 uvas prioritarias con perfil editorial humano.
+- La cuarta tanda incluye:
+  - `graciano`;
+  - `muscadet`;
+  - `semillon`;
+  - `assyrtiko`;
+  - `vermentino`;
+  - `carmenere`;
+  - `tannat`;
+  - `petit-verdot`;
+  - `torrontes`;
+  - `corvina`.
+- Validaciones locales completadas:
+  - tests enfocados de biblioteca: 24 tests;
+  - `deno check` de `supabase/functions/prerender/index.ts`;
+  - suite completa: 49 tests;
+  - `npm run build`;
+  - `git diff --check`;
+  - navegador local en rutas PT/DE.
+- Produccion validada:
+  - Googlebot en `/pt/biblioteca-vinho/castas/graciano`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, contenido editorial y sin fallback.
+  - Googlebot en `/de/weinbibliothek/rebsorten/muscadet`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, contenido editorial y sin fallback.
+  - Usuario humano en ambas rutas: inteligencia de servicio, rol en carta, maridajes y sin fallback.
+- No se toco Cloudflare Worker ni base de datos.
+
+## Decisiones
+
+- Dar por cerrada y publicada la cuarta tanda editorial de uvas.
+- Mantener como regla que toda ampliacion visible de biblioteca debe revisar tambien `prerender`.
+- Continuar la expansion maxima por entidades con demanda SEO/comercial, no por volumen indiscriminado.
+
+## Hipotesis
+
+- El siguiente impacto vendra de pasar regiones, maridajes y estilos de fallback a perfiles propios, y de reforzar schema/enlazado.
+- Search Console tardara en reflejar el recrawl de estas fichas.
+- `Muscadet` necesita una revision editorial fina por la ambiguedad entre region y uva/sinonimo `Melon de Bourgogne`.
+
+## Tareas pendientes inmediatas
+
+1. Revisar schema de fichas de uva:
+   - sinonimos;
+   - paises;
+   - regiones;
+   - FAQs;
+   - enlaces a region/estilo/maridaje.
+2. Elegir la siguiente tanda de entidades propias:
+   - regiones con valor comercial;
+   - maridajes de alta intencion;
+   - estilos con potencial de busqueda y decision de carta.
+3. Reforzar enlaces internos desde las 40 uvas:
+   - hacia regiones clave;
+   - hacia estilos;
+   - hacia maridajes;
+   - hacia demo/herramientas cuando tenga sentido.
+4. Revisar `muscadet`:
+   - diferenciar casta/sinonimo `Melon de Bourgogne` de region `Muscadet`;
+   - decidir si necesita copy, canonical o enlaces aclaratorios.
+5. Monitorizar Search Console:
+   - revisar recrawl de uvas prioritarias;
+   - solicitar indexacion selectiva de hubs y fichas maduras si la herramienta lo permite.
+
 ## Actualizacion 2026-06-08: retomar tras fallback visible de biblioteca
 
 ## Hechos

@@ -1,5 +1,72 @@
 # Current State
 
+## Actualizacion 2026-06-08: cuarta tanda editorial de uvas prioritarias
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se implemento la cuarta tanda de perfiles editoriales humanos para uvas de biblioteca del vino.
+- La cobertura de uvas prioritarias paso de 30 a 40.
+- Las 10 uvas anadidas son:
+  - `graciano`;
+  - `muscadet`;
+  - `semillon`;
+  - `assyrtiko`;
+  - `vermentino`;
+  - `carmenere`;
+  - `tannat`;
+  - `petit-verdot`;
+  - `torrontes`;
+  - `corvina`.
+- Cada nueva uva tiene servicio, copa, aireacion, rol en carta, guion de sala, palanca comercial, error a evitar y maridajes de menu localizados en `es`, `en`, `it`, `fr`, `de` y `pt`.
+- Se sincronizo `supabase/functions/prerender/index.ts` con entradas expandidas para las mismas 10 uvas, manteniendo disponibilidad editorial para Googlebot y crawlers.
+- Se actualizo la cobertura de tests:
+  - `priorityGrapeSlugs` ahora exige 40 uvas;
+  - se valida la cuarta tanda en aleman y portugues;
+  - se valida que `prerender` contiene la nueva tanda.
+- Validaciones locales completadas:
+  - `npm test -- --run src/test/wine-library-editorial.test.ts src/test/wine-library-seo-surface.test.ts`: 24 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `npm test -- --run`: 49 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Navegador local en `/pt/biblioteca-vinho/castas/graciano` y `/de/weinbibliothek/rebsorten/muscadet`.
+- Commit funcional creado y pusheado: `ad89889 feat: expand priority grape editorial profiles`.
+- Lovable `Web Winerim` sincronizo `ad89889` desde GitHub `main`.
+- Lovable desplego Supabase Edge Function `prerender` para el commit `ad89889`.
+- Lovable quedo en estado `Up to date` tras pulsar `Update` en el panel de publish.
+- Produccion validada como Googlebot:
+  - `https://winerim.wine/pt/biblioteca-vinho/castas/graciano?codex=ad89889`: `200`, `X-Worker-Branch: bot-prerender`, `x-prerendered: true`, canonical propio, `html lang="pt"`, 421 palabras, contenido editorial y sin fallback visible.
+  - `https://winerim.wine/de/weinbibliothek/rebsorten/muscadet?codex=ad89889`: `200`, `X-Worker-Branch: bot-prerender`, `x-prerendered: true`, canonical propio, `html lang="de"`, 366 palabras, contenido editorial y sin fallback visible.
+- Produccion validada en navegador humano:
+  - `/pt/biblioteca-vinho/castas/graciano` muestra `Inteligencia de servico`, `Papel na carta`, maridaje `borrego assado`, canonical propio y no muestra `Como usar Graciano numa carta real`.
+  - `/de/weinbibliothek/rebsorten/muscadet` muestra `Service-Intelligenz`, `Rolle auf der Karte`, maridaje de mar, canonical propio y no muestra fallback.
+- En la experiencia humana alemana, la ruta `/de/weinbibliothek/rebsorten/muscadet` muestra H1 `Melon de Bourgogne` porque el catalogo trata `Muscadet` como sinonimo/nombre comercial de la uva.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Convertir primero 10 uvas de alto valor SEO/comercial que todavia dependian del fallback visible.
+- Mantener la cuarta tanda como perfiles humanos especificos en React y como perfiles expandidos en `prerender`, evitando que bots reciban una pagina menos rica que usuarios.
+- Publicar frontend y `prerender` desde Lovable, porque sigue siendo la via operativa real del proyecto.
+- No tocar Cloudflare Worker ni base de datos porque el cambio pertenece a frontend y Edge Function `prerender`.
+
+## Hipotesis
+
+- Esta tanda mejora cobertura internacional para busquedas de descubrimiento, blancos de mar y tintos premium menos obvios.
+- La combinacion de perfil humano propio y prerender editorial deberia reducir dependencia del fallback y aumentar calidad percibida por usuarios, Googlebot y LLMs.
+- `Muscadet` puede requerir una decision editorial posterior para separar mejor la lectura de uva `Melon de Bourgogne` frente a region `Muscadet`.
+
+## Tareas pendientes
+
+- Continuar convirtiendo entidades de alto valor que aun usan fallback visible, especialmente regiones y maridajes con demanda comercial.
+- Revisar schema especifico de fichas de uva para reflejar mejor entidad, sinonimos, paises, estilos y FAQs.
+- Revisar naming y enlaces internos de `muscadet` para evitar confusion entre casta/sinonimo y region.
+- Revalidar una muestra mayor de las 40 uvas prioritarias en produccion cuando cache y Search Console hayan recirculado.
+- Monitorizar Search Console para ver si baja `Descubierta: actualmente sin indexar` y si estas fichas empiezan a recibir rastreo.
+
 ## Actualizacion 2026-06-08: profundidad visible fallback en biblioteca del vino
 
 ## Hechos

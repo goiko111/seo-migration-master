@@ -2,6 +2,41 @@
 
 ## 2026-06-08
 
+### Cuarta tanda editorial de uvas prioritarias
+
+#### Hechos
+
+- Se amplio la capa editorial humana de uvas prioritarias de 30 a 40.
+- Las 10 uvas anadidas son `graciano`, `muscadet`, `semillon`, `assyrtiko`, `vermentino`, `carmenere`, `tannat`, `petit-verdot`, `torrontes` y `corvina`.
+- Se sincronizo `supabase/functions/prerender/index.ts` con las mismas 10 uvas mediante perfiles expandidos para bots.
+- Se actualizaron tests editoriales y de superficie SEO para exigir la cuarta tanda.
+- Validaciones locales completadas: tests enfocados, `deno check`, suite completa, build, `git diff --check` y navegador local.
+- Commit funcional creado y pusheado: `ad89889 feat: expand priority grape editorial profiles`.
+- Lovable `Web Winerim` sincronizo `ad89889`, desplego `prerender` y publico frontend tras `Update`.
+- Produccion validada:
+  - Googlebot en `/pt/biblioteca-vinho/castas/graciano` y `/de/weinbibliothek/rebsorten/muscadet`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto, contenido editorial y sin fallback.
+  - Navegador humano en ambas rutas: perfil editorial propio, seccion de rol, maridajes y sin fallback visible.
+- No se modifico Cloudflare Worker ni base de datos.
+
+#### Decisiones
+
+- Priorizar uvas con valor comercial y SEO antes de abrir otra superficie nueva.
+- Mantener paridad frontend/prerender para cada tanda editorial.
+- Resolver esta tanda sin cambios de Worker ni DB.
+- Tratar `Muscadet` como ficha de uva existente aunque el H1 humano aleman muestre `Melon de Bourgogne` por sinonimia del catalogo.
+
+#### Hipotesis
+
+- La cuarta tanda refuerza autoridad en vinos de descubrimiento, blancos gastronomicos y tintos premium internacionales.
+- Reducir el numero de entidades de alto valor servidas con fallback deberia mejorar utilidad humana y senales para Googlebot/LLMs.
+- La ambiguedad `Muscadet` uva/region merece revision editorial posterior para enlazado y schema.
+
+#### Tareas pendientes
+
+- Seguir con regiones, estilos o maridajes que todavia dependan del fallback visible.
+- Revisar schema y enlaces internos de las 40 uvas prioritarias.
+- Monitorizar Search Console despues de recrawl.
+
 ### Profundidad visible fallback en biblioteca del vino
 
 #### Hechos

@@ -6,8 +6,9 @@
 - El proyecto es una aplicación Vite + React + TypeScript.
 - La biblioteca del vino vive en la superficie `/biblioteca-vino` y sus rutas localizadas.
 - La biblioteca del vino incluye una capa editorial avanzada para uvas, regiones, estilos y maridajes prioritarios, además de la infraestructura multilingüe.
-- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 30 uvas prioritarias.
-- La expansión editorial de biblioteca del vino cubre 30 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 40 uvas prioritarias.
+- La expansión editorial de biblioteca del vino cubre 40 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
+- El 2026-06-08 se publico en produccion la cuarta tanda editorial de uvas prioritarias: `graciano`, `muscadet`, `semillon`, `assyrtiko`, `vermentino`, `carmenere`, `tannat`, `petit-verdot`, `torrontes` y `corvina`.
 - El 2026-06-08 se publico en produccion un fallback visible localizado para entidades de biblioteca sin perfil editorial especifico, integrado en uvas, regiones, estilos y maridajes.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para biblioteca del vino: 761/761 URLs visibles de Search Console pasan con minimo 317 palabras, canonical propio, idioma correcto, schema y hreflang.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para 49 rutas estaticas/no-biblioteca visibles en Search Console: 49/49 pasan con minimo 302 palabras, canonical propio e idioma correcto.
@@ -66,7 +67,7 @@
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
-- Convertir progresivamente entidades que dependen del fallback visible en perfiles editoriales especificos cuando tengan demanda SEO o valor comercial.
+- Convertir progresivamente entidades que dependen del fallback visible en perfiles editoriales especificos cuando tengan demanda SEO o valor comercial; la cobertura de uvas prioritarias ya paso de 30 a 40.
 - Mantener la validación productiva de cada tanda editorial antes de tratarla como cerrada.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
