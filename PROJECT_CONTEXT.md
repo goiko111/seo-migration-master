@@ -24,6 +24,8 @@
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.
+- El proyecto Lovable correcto para la web pública Winerim es `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` (`Web Winerim`).
+- El 2026-06-08 se detectó una contradicción operativa: `https://lovable.dev/projects/ebb36746-82ff-43c3-86c1-558573beddcd` pertenece al proyecto `Crim`, no a la web pública `Web Winerim`.
 - Search Console está verificado para la propiedad URL-prefix `https://winerim.wine/`; la propiedad de dominio `sc-domain:winerim.wine` sigue pendiente de acceso/verificación.
 - Desde el 2026-05-23, estos documentos son la fuente de verdad operativa del proyecto:
   - `PROJECT_CONTEXT.md`

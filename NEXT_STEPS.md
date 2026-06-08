@@ -2658,3 +2658,46 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - canonical propio.
 4. Pedir indexación selectiva en Search Console si la validación pasa.
 5. Seguir con la auditoría de artículos canónicos finos y enlazado interno hacia biblioteca.
+
+## Actualización 2026-06-08: listo para retomar tras aplicar migración de `alex-peiro`
+
+## Hechos
+
+- Contradicción detectada y resuelta: el proyecto Lovable `ebb36746-82ff-43c3-86c1-558573beddcd` es `Crim`, no la web pública Winerim.
+- Proyecto Lovable correcto usado: `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` (`Web Winerim`).
+- La migración `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql` fue aplicada desde Lovable.
+- Producción revalidada como Googlebot:
+  - `/article/alex-peiro?codex=lovable-20260608-verify`;
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - `X-Prerendered: true`;
+  - canonical `https://winerim.wine/article/alex-peiro`;
+  - `926` palabras visibles;
+  - sin placeholder;
+  - enlaces a biblioteca, uvas, regiones, estilos, maridajes, software de carta y análisis de carta.
+- No hay cambios de código nuevos en esta sesión; el cambio real fue aplicar la migración ya versionada en Supabase.
+
+## Decisiones
+
+- `/article/alex-peiro` queda desbloqueado para indexación selectiva.
+- No tocar `Crim` para tareas de Winerim web pública.
+- Continuar con Search Console y auditoría de artículos finos antes de abrir otra ampliación masiva de biblioteca.
+
+## Hipótesis
+
+- Google puede tardar días en mover la URL aunque la versión productiva ya esté corregida.
+- La siguiente mejora incremental vendrá de detectar y corregir más artículos canónicos finos, no de enviar URLs masivamente a indexación.
+
+## Tareas pendientes listas para retomar
+
+1. Abrir Search Console en la propiedad `https://winerim.wine/`.
+2. Inspeccionar `https://winerim.wine/article/alex-peiro`.
+3. Solicitar indexación si Search Console permite el envío.
+4. Revisar la muestra de `Descubierta: actualmente sin indexar` y escoger la siguiente URL canónica fina.
+5. Auditar esa URL como Googlebot con el mismo criterio:
+   - `200`;
+   - `bot-prerender`;
+   - canonical propio;
+   - sin placeholder;
+   - contenido suficiente;
+   - enlaces internos contextuales.

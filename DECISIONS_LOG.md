@@ -2440,3 +2440,40 @@
 - Revalidar `/article/alex-peiro` en producción como Googlebot.
 - Si queda correcto, pedir indexación selectiva en GSC.
 - Continuar con la siguiente URL fina de artículos canónicos.
+
+## 2026-06-08
+
+### Aplicación de migración Supabase para `/article/alex-peiro`
+
+#### Hechos
+
+- Se retomó la sesión leyendo los cuatro documentos de fuente de verdad del proyecto.
+- El enlace Lovable aportado en la sesión, `https://lovable.dev/projects/ebb36746-82ff-43c3-86c1-558573beddcd`, corresponde al proyecto `Crim`, no a la web pública `Web Winerim`.
+- Se evitó aplicar cambios en `Crim`.
+- Se usó el proyecto correcto `Web Winerim`: `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- Se envió a Lovable la instrucción para aplicar `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql`.
+- Lovable informó que la migración quedó aplicada en Supabase.
+- La validación independiente como Googlebot de `https://winerim.wine/article/alex-peiro?codex=lovable-20260608-verify` confirmó:
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - `X-Prerendered: true`;
+  - canonical propio;
+  - `926` palabras visibles;
+  - placeholder ausente;
+  - enlaces estratégicos a biblioteca del vino, hubs, software y análisis.
+
+#### Decisiones
+
+- No operar sobre proyectos Lovable no documentados aunque el usuario los abra, si la revisión muestra que pertenecen a otra app.
+- Usar siempre `Web Winerim` como destino de cambios de la web pública salvo decisión explícita documentada.
+- Dar por resuelta la recuperación editorial de `/article/alex-peiro` en producción y pasar la acción siguiente a Search Console.
+
+#### Hipótesis
+
+- La URL `/article/alex-peiro` ya es suficientemente defendible para solicitar indexación selectiva.
+- El patrón de artículos canónicos finos puede repetirse en otros ejemplos de `Descubierta: actualmente sin indexar`.
+
+#### Tareas pendientes
+
+- Solicitar indexación selectiva de `/article/alex-peiro` en Search Console.
+- Continuar con la siguiente URL fina del informe `Descubierta`.

@@ -2,7 +2,7 @@
 
 ## Hechos
 
-- Fecha de actualización: 2026-06-01.
+- Fecha de actualización: 2026-06-08.
 - Repositorio de trabajo: `/Users/GOIKO/seo-migration-master`.
 - Rama activa: `main`.
 - PR `https://github.com/goiko111/seo-migration-master/pull/1` fusionado el 2026-05-23.
@@ -3641,3 +3641,48 @@
   - enlaces a `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos`, `/biblioteca-vino/maridajes`, `/software-carta-de-vinos` y `/analisis-carta`.
 - Si la revalidación pasa, solicitar indexación selectiva de `/article/alex-peiro` en Search Console si la herramienta lo permite.
 - Continuar la auditoría de artículos canónicos finos detectados en `Descubierta`.
+
+## Actualización 2026-06-08: migración de `/article/alex-peiro` aplicada desde Lovable
+
+## Hechos
+
+- Se retomó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El usuario aportó `https://lovable.dev/projects/ebb36746-82ff-43c3-86c1-558573beddcd` como acceso a Lovable.
+- Se comprobó que ese proyecto es `Crim` y muestra la preview `Winerim Protocol Center`, por lo que no corresponde a la web pública documentada.
+- La web pública Winerim sigue siendo el proyecto Lovable `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`, identificado como `Web Winerim`.
+- Se accedió al proyecto correcto `Web Winerim` y se revisó el conector Supabase; la pantalla de connector no expone un editor SQL directo.
+- Se envió al chat de Lovable la instrucción para aplicar `supabase/migrations/20260607123000_enrich_alex_peiro_article.sql` sobre `articles.slug='alex-peiro'`.
+- Lovable informó que la migración quedó aplicada y validó:
+  - HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - `X-Prerendered: true`;
+  - canonical propio `https://winerim.wine/article/alex-peiro`;
+  - más de `1200` palabras según su validación;
+  - enlaces a biblioteca, uvas, regiones, estilos, maridajes, software de carta y análisis de carta.
+- Se revalidó producción de forma independiente como Googlebot:
+  - `https://winerim.wine/article/alex-peiro?codex=lovable-20260608-verify` responde HTTP `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - `X-Prerendered: true`;
+  - canonical `https://winerim.wine/article/alex-peiro`;
+  - `926` palabras visibles en el HTML analizado;
+  - placeholder ausente;
+  - enlaces presentes a `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos`, `/biblioteca-vino/maridajes`, `/software-carta-de-vinos` y `/analisis-carta`.
+
+## Decisiones
+
+- No usar el proyecto Lovable `Crim` para cambios de la web pública Winerim.
+- Mantener `Web Winerim` (`2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`) como proyecto Lovable operativo para frontend y Supabase de la web pública.
+- Considerar cerrado el bloqueo editorial específico de `/article/alex-peiro` porque producción ya no muestra placeholder y supera el umbral de contenido útil.
+- Mantener la indexación de `/article/alex-peiro` como siguiente acción en Search Console, no como cambio de código.
+
+## Hipótesis
+
+- Corregir `/article/alex-peiro` debería ayudar a que esta URL canónica tenga más opciones de salir de `Descubierta: actualmente sin indexar`.
+- Puede haber otros artículos canónicos con patrón similar: técnicamente indexables, pero demasiado finos para priorizar indexación.
+- Search Console puede tardar varios días en reflejar el cambio aunque la URL ya esté corregida en producción.
+
+## Tareas pendientes
+
+- Solicitar indexación selectiva de `https://winerim.wine/article/alex-peiro` en Search Console si la herramienta lo permite.
+- Continuar la auditoría de artículos canónicos finos detectados en `Descubierta`.
+- Seguir reforzando enlazado interno hacia biblioteca del vino desde artículos, producto y recursos.
