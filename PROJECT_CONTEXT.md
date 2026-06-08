@@ -6,6 +6,7 @@
 - El 2026-06-08 se creo el commit funcional `70bb44e feat: enrich wine library entity schema`, que extiende el schema enriquecido y `mentions` estrategicas a regiones, estilos y maridajes, ademas de mantener paridad en `prerender` para bots.
 - La mejora `70bb44e` anade grafo JSON-LD de `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm` para fichas humanas de regiones, estilos y maridajes, con propiedades especificas por tipo de entidad.
 - La mejora `70bb44e` actualiza `supabase/functions/prerender/index.ts` para que Googlebot y crawlers reciban el mismo patron semantico en fichas de biblioteca reconocidas.
+- El 2026-06-08 Lovable `Web Winerim` desplego `prerender` y publico frontend desde `69d2fbf`; produccion quedo validada como Googlebot en Vinho Verde PT, Espumoso DE y Lubina/Dorada PT con `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto, schema completo y `mentions`.
 - Validaciones locales de `70bb44e`: tests enfocados de biblioteca y superficie SEO, `deno check` de `prerender`, suite completa, build, `git diff --check` y navegador local.
 - El 2026-06-08 se detecto y corrigio una contradiccion documental: los documentos seguian marcando `d02ff15` como `prerender` pendiente, pero el estado real ya habia avanzado a `7a1745a` para `prerender` y `6d0c2cf` para `sitemap`.
 - El 2026-06-08 quedo desplegada y validada en produccion la Edge Function `prerender` del commit `7a1745a`: Googlebot recibe `mentions` estrategicas reales en JSON-LD para uvas prioritarias, no solo hubs genericos.
@@ -90,4 +91,4 @@
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.
 - Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.
 - Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.
-- Desplegar y validar en produccion `70bb44e` desde Lovable antes de tratar como cerrada la ampliacion semantica de regiones, estilos y maridajes.
+- Monitorizar en Search Console la ampliacion semantica de regiones, estilos y maridajes tras el deploy validado de `69d2fbf`.

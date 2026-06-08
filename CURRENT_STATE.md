@@ -20,6 +20,12 @@
 - `supabase/functions/prerender/index.ts` ahora identifica fichas de uvas, regiones, estilos y maridajes para emitir un grafo semantico equivalente en HTML de bot.
 - Se añadieron tests renderizados para validar schema de region PT, estilo DE y maridaje PT con `WebPage`, `DefinedTermSet`, `DefinedTerm`, propiedades y `mentions`.
 - `src/test/wine-library-seo-surface.test.ts` valida que `prerender` conserva `WebPage`, `DefinedTermSet` y anchors semanticos para regiones, estilos y maridajes.
+- `70bb44e` y el cierre documental `69d2fbf` quedaron pusheados a `origin/main`.
+- Lovable `Web Winerim` sincronizo `69d2fbf`, desplego Supabase Edge Function `prerender` y dejo el frontend en estado `Published` / `Up to date`.
+- Produccion validada independientemente como Googlebot:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, 9 `mentions` y 455 palabras.
+  - `/de/weinbibliothek/weinstile/espumoso`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, 10 `mentions` y 381 palabras.
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`: `200`, `x-worker-branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, 10 `mentions` y 442 palabras.
 - Validaciones locales completadas durante la sesion:
   - `npm run test -- --run src/test/grape-detail-render.test.tsx src/test/wine-library-seo-surface.test.ts`: 26 tests.
   - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
@@ -27,7 +33,7 @@
   - Antes del cierre tambien se habia validado `npm run test -- --run`, `npm run build` y navegador local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
 - No se modifico Cloudflare Worker.
 - No se modifico base de datos.
-- Queda pendiente desplegar desde Lovable y validar produccion para tratar esta capa como cerrada.
+- La capa semantica de regiones, estilos y maridajes queda publicada y validada en produccion.
 
 ## Decisiones
 
@@ -36,6 +42,7 @@
 - Mantener paridad entre experiencia humana y `prerender` para bots en cualquier mejora semantica de biblioteca.
 - No tocar Worker ni DB porque la mejora pertenece a React y a Supabase Edge Function `prerender`.
 - Usar Lovable como via operativa de deploy para `prerender`, ya que el CLI local sigue sin `SUPABASE_ACCESS_TOKEN`.
+- Dar por cerrada esta tanda solo despues de validacion independiente de produccion, no solo por respuesta de Lovable.
 
 ## Hipotesis
 
@@ -45,13 +52,9 @@
 
 ## Tareas pendientes
 
-- Desplegar `70bb44e` desde Lovable `Web Winerim`.
-- Validar produccion como Googlebot en:
-  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
-  - `/de/weinbibliothek/weinstile/espumoso`;
-  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
-- Confirmar `200`, `bot-prerender`, `x-prerendered: true`, canonical propio y JSON-LD con `WebPage`, `DefinedTermSet`, `DefinedTerm` y `mentions`.
-- Despues del deploy, monitorizar Search Console y mantener como siguiente bloque la expansion editorial visible de regiones, estilos y maridajes.
+- Monitorizar Search Console tras recrawl de las fichas de regiones, estilos y maridajes.
+- Mantener como siguiente bloque la expansion editorial visible de regiones, estilos y maridajes.
+- Planificar la migracion de slugs localizados solo como proyecto SEO separado con redirects y canonicals.
 
 ## Actualizacion 2026-06-08: prerender estrategico y sitemap estrategico cerrados
 

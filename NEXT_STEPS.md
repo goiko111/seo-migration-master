@@ -1,10 +1,11 @@
 # Next Steps
 
-## Actualizacion 2026-06-08: retomar tras schema enriquecido de entidades
+## Actualizacion 2026-06-08: retomar tras deploy de schema enriquecido de entidades
 
 ## Hechos
 
-- `main` contiene el commit funcional local `70bb44e feat: enrich wine library entity schema`.
+- `main` contiene y tiene pusheado `70bb44e feat: enrich wine library entity schema`.
+- `main` tambien contiene y tiene pusheado `69d2fbf docs: record wine library entity schema rollout`.
 - La mejora extiende el schema enriquecido de biblioteca a regiones, estilos y maridajes.
 - React humano y `supabase/functions/prerender/index.ts` quedan sincronizados con el patron:
   - `WebPage`;
@@ -17,14 +18,19 @@
   - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
   - `git diff --check`.
   - En la misma sesion tambien se validaron suite completa, build y navegador local.
+- Lovable `Web Winerim` desplego Supabase Edge Function `prerender` desde `69d2fbf` y publico el frontend; el panel quedo `Published` / `Up to date`.
+- Produccion validada independientemente como Googlebot:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema completo y 9 `mentions`.
+  - `/de/weinbibliothek/weinstile/espumoso`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, schema completo y 10 `mentions`.
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema completo y 10 `mentions`.
 - No se toco Cloudflare Worker.
 - No se toco base de datos.
 
 ## Decisiones
 
-- El siguiente paso operativo es despliegue desde Lovable `Web Winerim`, no cambios de Worker.
-- La capa se considerara cerrada solo tras validar produccion como Googlebot.
+- La capa de schema enriquecido para regiones, estilos y maridajes queda cerrada como deploy productivo.
 - Mantener los slugs de entidad actuales; cualquier localizacion de slugs sigue siendo una migracion SEO separada.
+- No iniciar cambios de Worker para esta linea salvo que una validacion productiva lo exija.
 
 ## Hipotesis
 
@@ -33,23 +39,21 @@
 
 ## Tareas pendientes inmediatas
 
-1. Pushear el commit funcional si aun no esta en `origin/main`.
-2. Desplegar desde Lovable `Web Winerim`.
-3. Validar produccion como Googlebot:
-   - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
-   - `/de/weinbibliothek/weinstile/espumoso`;
-   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
-4. Comprobar en cada muestra:
-   - `200`;
-   - `x-worker-branch: bot-prerender`;
-   - `x-prerendered: true`;
-   - canonical propio;
-   - JSON-LD con `WebPage`, `DefinedTermSet`, `DefinedTerm` y `mentions`.
-5. Despues del deploy, actualizar estos documentos con resultado final.
-6. Siguiente bloque editorial:
+1. Monitorizar Search Console:
+   - recrawl de hubs de biblioteca;
+   - ejemplos de regiones, estilos y maridajes;
+   - evolucion de `Descubierta: actualmente sin indexar`.
+2. Solicitar indexacion selectiva solo de una tanda corta si Search Console lo permite sin error.
+3. Siguiente bloque editorial:
    - perfiles propios para regiones prioritarias que aun dependan de fallback;
    - perfiles propios para maridajes de alta intencion;
    - perfiles propios para estilos con demanda de busqueda y valor de carta.
+4. Preparar, como proyecto separado, la migracion de slugs localizados:
+   - mapa completo por idioma;
+   - redirects 301;
+   - canonicals nuevos;
+   - hreflang y sitemap;
+   - validacion antes/despues en Search Console.
 
 ## Actualizacion 2026-06-08: retomar tras deploy de sitemap estrategico
 

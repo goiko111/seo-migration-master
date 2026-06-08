@@ -14,6 +14,12 @@
 - `supabase/functions/prerender/index.ts` se sincronizo para emitir el mismo patron semantico en fichas de biblioteca reconocidas para bots.
 - Se añadieron tests renderizados para una region portuguesa, un estilo aleman y un maridaje portugues.
 - Validaciones locales completadas: tests enfocados, `deno check`, `git diff --check`, suite completa, build y navegador local.
+- Commits pusheados a `origin/main`: `70bb44e` y `69d2fbf`.
+- Lovable `Web Winerim` desplego Supabase Edge Function `prerender` desde `69d2fbf` y publico frontend; el panel quedo `Published` / `Up to date`.
+- Produccion validada independientemente como Googlebot:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema completo, 9 `mentions`.
+  - `/de/weinbibliothek/weinstile/espumoso`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="de"`, schema completo, 10 `mentions`.
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang="pt"`, schema completo, 10 `mentions`.
 - No se modifico Cloudflare Worker ni base de datos.
 
 #### Decisiones
@@ -22,6 +28,7 @@
 - Mantener `DefinedTermSet` separado por seccion para que uvas, regiones, estilos y maridajes tengan contexto semantico propio.
 - Alimentar `mentions` desde enlaces estrategicos y listas editoriales ya existentes, evitando duplicar una segunda fuente manual de grafo.
 - Publicar este cambio desde Lovable para incluir frontend y Edge Function `prerender`.
+- Considerar cerrada la tanda solo tras validacion independiente de produccion.
 
 #### Hipotesis
 
@@ -31,9 +38,9 @@
 
 #### Tareas pendientes
 
-- Desplegar `70bb44e` desde Lovable.
-- Revalidar produccion como Googlebot en rutas PT/DE de region, estilo y maridaje.
+- Monitorizar Search Console tras recrawl de las rutas validadas.
 - Mantener como siguiente bloque la expansion editorial visible de regiones, estilos y maridajes de mayor valor.
+- Tratar la migracion de slugs localizados como proyecto SEO separado.
 
 ### Cierre de prerender y sitemap estrategico de biblioteca
 
