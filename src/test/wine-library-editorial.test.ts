@@ -5,7 +5,7 @@ import { getStyleEditorialProfile, priorityStyleSlugs } from "@/data/wineLibrary
 import { getPairingEditorialProfile, priorityPairingSlugs } from "@/data/wineLibraryPairingEditorial";
 
 describe("wine library editorial profiles", () => {
-  it("defines priority service profiles for the first three editorial tranches", () => {
+  it("defines priority service profiles for the first four editorial tranches", () => {
     expect(priorityGrapeSlugs).toContain("tempranillo");
     expect(priorityGrapeSlugs).toContain("albarino");
     expect(priorityGrapeSlugs).toContain("godello");
@@ -17,7 +17,17 @@ describe("wine library editorial profiles", () => {
     expect(priorityGrapeSlugs).toContain("cabernet-franc");
     expect(priorityGrapeSlugs).toContain("gruner-veltliner");
     expect(priorityGrapeSlugs).toContain("aglianico");
-    expect(priorityGrapeSlugs).toHaveLength(30);
+    expect(priorityGrapeSlugs).toContain("graciano");
+    expect(priorityGrapeSlugs).toContain("muscadet");
+    expect(priorityGrapeSlugs).toContain("semillon");
+    expect(priorityGrapeSlugs).toContain("assyrtiko");
+    expect(priorityGrapeSlugs).toContain("vermentino");
+    expect(priorityGrapeSlugs).toContain("carmenere");
+    expect(priorityGrapeSlugs).toContain("tannat");
+    expect(priorityGrapeSlugs).toContain("petit-verdot");
+    expect(priorityGrapeSlugs).toContain("torrontes");
+    expect(priorityGrapeSlugs).toContain("corvina");
+    expect(priorityGrapeSlugs).toHaveLength(40);
   });
 
   it("localizes service intelligence for de and pt priority grapes", () => {
@@ -52,6 +62,18 @@ describe("wine library editorial profiles", () => {
     expect(pt?.eyebrow).toBe("Inteligencia de servico");
     expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
     expect(pt?.menuHooks).toContain("marisco");
+  });
+
+  it("localizes the fourth editorial tranche for de and pt", () => {
+    const de = getGrapeEditorialProfile("muscadet", "de", "Muscadet");
+    const pt = getGrapeEditorialProfile("graciano", "pt", "Graciano");
+
+    expect(de?.eyebrow).toBe("Service-Intelligenz");
+    expect(de?.sections.some((section) => section.title === "Rolle auf der Karte")).toBe(true);
+    expect(de?.menuHooks).toContain("Meeresfruchte");
+    expect(pt?.eyebrow).toBe("Inteligencia de servico");
+    expect(pt?.sections.some((section) => section.title === "Papel na carta")).toBe(true);
+    expect(pt?.menuHooks).toContain("borrego assado");
   });
 
   it("defines priority regional service profiles in all wine-library languages", () => {

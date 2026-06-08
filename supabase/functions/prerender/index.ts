@@ -1935,6 +1935,16 @@ const WINE_LIBRARY_EXPANDED_GRAPES: Record<string, WineLibraryPriorityProfile> =
   expandedProfileEntry('barbera', '14-16 C', 'Universal / Borgona', 'mediterraneanRed', hooks.vegetable),
   expandedProfileEntry('primitivo', '15-17 C', 'Burdeos / universal amplia', 'mediterraneanRed', hooks.redMeat),
   expandedProfileEntry('aglianico', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('graciano', '15-17 C', 'Rioja / Burdeos amplia', 'elegantRed', hooks.redMeat),
+  expandedProfileEntry('muscadet', '7-9 C', 'Blanco joven / universal', 'freshWhite', hooks.seafood),
+  expandedProfileEntry('semillon', '8-11 C', 'Blanco con volumen / universal amplia', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('assyrtiko', '8-10 C', 'Blanco mineral / universal', 'mineralWhite', hooks.seafood),
+  expandedProfileEntry('vermentino', '8-10 C', 'Blanco mediterraneo / universal', 'freshWhite', hooks.seafood),
+  expandedProfileEntry('carmenere', '15-17 C', 'Burdeos / universal amplia', 'mediterraneanRed', hooks.redMeat),
+  expandedProfileEntry('tannat', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('petit-verdot', '16-18 C', 'Burdeos amplia', 'structuredRed', hooks.redMeat),
+  expandedProfileEntry('torrontes', '7-9 C', 'Blanco aromatico', 'aromaticWhite', hooks.aperitif),
+  expandedProfileEntry('corvina', '15-17 C', 'Borgona / universal amplia', 'structuredRed', hooks.redMeat),
 ]);
 
 const WINE_LIBRARY_EXPANDED_REGIONS: Record<string, WineLibraryPriorityProfile> = Object.fromEntries([
