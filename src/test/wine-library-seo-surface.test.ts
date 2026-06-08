@@ -141,7 +141,13 @@ describe("wine library SEO surface", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
 
     expect(prerender).toContain("const isWineLibraryDetail");
+    expect(prerender).toContain("function getWineLibraryDetailSchemaContext");
     expect(prerender).toContain("const wineLibraryDetailEntity");
+    expect(prerender).toContain("'@type': 'WebPage'");
+    expect(prerender).toContain("'@type': 'DefinedTermSet'");
+    expect(prerender).toContain("termAnchor: 'region-term'");
+    expect(prerender).toContain("termAnchor: 'style-term'");
+    expect(prerender).toContain("termAnchor: 'pairing-term'");
     expect(prerender).toContain("const mentionLinks");
     expect(prerender).toContain("about: wineLibraryDetailEntity");
     expect(prerender).toContain("mentions: mentionLinks");

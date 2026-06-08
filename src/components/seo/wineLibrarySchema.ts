@@ -3,6 +3,7 @@ import {
   type StrategicWineLibraryHub,
 } from "@/components/biblioteca/StrategicWineLibraryRoutes";
 import { getWineLibraryUrl, resolveWineLang, type WineRuntimeLang } from "@/data/wineLibraryI18n";
+import { resolveLibraryLink, type StrategicWineLibraryLinkItem } from "@/data/wineLibraryLinks";
 
 const SITE = "https://winerim.wine";
 
@@ -41,6 +42,123 @@ interface WineLibraryCollectionSchemaInput {
   path: string;
   libraryName: string;
 }
+
+export type WineLibrarySchemaNode = Record<string, unknown>;
+
+export const uniqueWineLibrarySchemaStrings = (values: Array<string | undefined>) => (
+  Array.from(new Set(values.map((value) => value?.trim()).filter((value): value is string => Boolean(value))))
+);
+
+export const wineLibrarySchemaPropertyValue = (name: string, value?: string | string[]) => {
+  const normalizedValue = Array.isArray(value) ? uniqueWineLibrarySchemaStrings(value).join(", ") : value?.trim();
+  if (!normalizedValue) return null;
+  return { "@type": "PropertyValue", name, value: normalizedValue };
+};
+
+export const buildWineLibrarySchemaMentions = (
+  items: StrategicWineLibraryLinkItem[],
+  lang: string,
+  limit = 18,
+): WineLibrarySchemaNode[] => {
+  const seenUrls = new Set<string>();
+  return items.reduce<WineLibrarySchemaNode[]>((mentions, item) => {
+    const resolved = resolveLibraryLink(item.name, item.hint);
+    if (!resolved) return mentions;
+    const url = getWineLibraryUrl(lang, resolved.path);
+    if (seenUrls.has(url)) return mentions;
+    seenUrls.add(url);
+    mentions.push({ "@type": "Thing", name: item.name, url });
+    return mentions;
+  }, []).slice(0, limit);
+};
+
+interface WineLibraryDetailSchemaInput {
+  pageUrl: string;
+  lang: string;
+  name: string;
+  description: string;
+  termAnchor: string;
+  termSetPath: string;
+  termSetName: string;
+  termCode: string;
+  additionalType: string;
+  keywords?: string[];
+  alternateName?: string[];
+  additionalProperties?: Array<Record<string, unknown>>;
+  mentions?: WineLibrarySchemaNode[];
+  disambiguatingDescription?: string;
+}
+
+export const buildWineLibraryDetailSchema = ({
+  pageUrl,
+  lang,
+  name,
+  description,
+  termAnchor,
+  termSetPath,
+  termSetName,
+  termCode,
+  additionalType,
+  keywords = [],
+  alternateName = [],
+  additionalProperties = [],
+  mentions = [],
+  disambiguatingDescription,
+}: WineLibraryDetailSchemaInput): WineLibrarySchemaNode => {
+  const termId = `${pageUrl}#${termAnchor}`;
+  const pageId = `${pageUrl}#webpage`;
+  const articleId = `${pageUrl}#article`;
+  const termSetUrl = getWineLibraryUrl(lang, termSetPath);
+  const normalizedKeywords = uniqueWineLibrarySchemaStrings([name, ...keywords]);
+  const normalizedAlternateNames = uniqueWineLibrarySchemaStrings(alternateName)
+    .filter((item) => item.toLowerCase() !== name.toLowerCase());
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@id": pageId,
+        "@type": "WebPage",
+        name,
+        description,
+        url: pageUrl,
+        inLanguage: lang,
+        mainEntity: { "@id": termId },
+      },
+      {
+        "@id": articleId,
+        "@type": "Article",
+        headline: name,
+        description,
+        ...(normalizedKeywords.length ? { keywords: normalizedKeywords.join(", ") } : {}),
+        author: { "@type": "Organization", name: "Winerim", url: SITE },
+        publisher: { "@type": "Organization", name: "Winerim", url: SITE },
+        mainEntityOfPage: { "@id": pageId },
+        about: { "@id": termId },
+        ...(mentions.length ? { mentions } : {}),
+      },
+      {
+        "@id": `${termSetUrl}#term-set`,
+        "@type": "DefinedTermSet",
+        name: termSetName,
+        url: termSetUrl,
+        inLanguage: lang,
+      },
+      {
+        "@id": termId,
+        "@type": "DefinedTerm",
+        name,
+        ...(normalizedAlternateNames.length ? { alternateName: normalizedAlternateNames } : {}),
+        termCode,
+        additionalType,
+        description,
+        inDefinedTermSet: { "@id": `${termSetUrl}#term-set` },
+        ...(additionalProperties.length ? { additionalProperty: additionalProperties } : {}),
+        ...(disambiguatingDescription ? { disambiguatingDescription } : {}),
+      },
+    ],
+  };
+};
 
 export const buildWineLibraryCollectionSchema = ({
   lang,

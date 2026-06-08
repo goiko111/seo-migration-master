@@ -10,10 +10,16 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import {
+  buildWineLibraryDetailSchema,
+  buildWineLibrarySchemaMentions,
+  uniqueWineLibrarySchemaStrings,
+  wineLibrarySchemaPropertyValue,
+} from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import { getLocalizedCountryBySlug, getLocalizedRegionBySlug } from "@/data/regionsLibraryI18n";
 import { getRegionEditorialProfile, type LocalizedRegionEditorialProfile } from "@/data/wineLibraryRegionEditorial";
-import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
+import { getStrategicWineLibraryLinks, type StrategicWineLibraryLinkItem } from "@/data/wineLibraryLinks";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl, wineTypeLabels } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -134,37 +140,58 @@ const RegionDetail = () => {
   useEffect(() => {
     if (!data || !countryData) return;
     const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/regiones/${country}/${region}`);
+    const wineTypeLabelsForSchema = wineTypeLabels[langKey as keyof typeof wineTypeLabels] || wineTypeLabels.en;
+    const wineTypeValues = data.wineTypes.map((type) => wineTypeLabelsForSchema[type] || type);
+    const cartaRoleValues = data.cartaRole.map((role) => roleLabels[role] || role);
+    const mentionItems: StrategicWineLibraryLinkItem[] = [
+      ...getStrategicWineLibraryLinks("region", data.slug),
+      ...data.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+      ...data.styles.map((name) => ({ name, hint: "style" as const })),
+      ...data.competingRegions.map((name) => ({ name, hint: "region" as const })),
+      ...(data.pairings || []).map((name) => ({ name, hint: "pairing" as const })),
+    ];
+    const mentions = buildWineLibrarySchemaMentions(mentionItems, lang);
+    const additionalProperties = [
+      wineLibrarySchemaPropertyValue("Country", countryData.name),
+      wineLibrarySchemaPropertyValue("Denomination type", data.denominationType),
+      wineLibrarySchemaPropertyValue("Wine styles", wineTypeValues),
+      wineLibrarySchemaPropertyValue("Main grapes", data.mainGrapes),
+      wineLibrarySchemaPropertyValue("Restaurant list roles", cartaRoleValues),
+      wineLibrarySchemaPropertyValue("Prestige", prestigeLabels[data.prestige] || data.prestige),
+      wineLibrarySchemaPropertyValue("Client recognition", recognitionLabels[data.clientRecognition] || data.clientRecognition),
+      data.subzones?.length ? wineLibrarySchemaPropertyValue("Subzones", data.subzones) : null,
+      editorial ? wineLibrarySchemaPropertyValue("Service profile", editorial.title) : null,
+    ].filter((item): item is NonNullable<typeof item> => Boolean(item));
+    const keywords = uniqueWineLibrarySchemaStrings([
+      data.name,
+      countryData.name,
+      ...data.mainGrapes,
+      ...data.styles,
+      ...wineTypeValues,
+      ...data.competingRegions,
+      ...(data.pairings || []),
+    ]);
     const schema = document.createElement("script");
     schema.id = "region-detail-jsonld";
     schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: data.name,
-          description: data.description,
-          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          mainEntityOfPage: pageUrl,
-          about: { "@id": `${pageUrl}#region-term` },
-        },
-        {
-          "@id": `${pageUrl}#region-term`,
-          "@type": "DefinedTerm",
-          name: data.name,
-          description: data.description,
-          inDefinedTermSet: {
-            "@type": "DefinedTermSet",
-            name: "Winerim Wine Library",
-            url: getWineLibraryUrl(lang, "/biblioteca-vino/regiones"),
-          },
-        },
-      ],
-    });
+    schema.textContent = JSON.stringify(buildWineLibraryDetailSchema({
+      pageUrl,
+      lang,
+      name: data.name,
+      description: data.description,
+      termAnchor: "region-term",
+      termSetPath: "/biblioteca-vino/regiones",
+      termSetName: "Winerim Wine Library Regions",
+      termCode: `${country}/${data.slug}`,
+      additionalType: "Wine region or denomination",
+      keywords,
+      alternateName: data.altNames || [],
+      additionalProperties,
+      mentions,
+    }));
     document.head.appendChild(schema);
     return () => { document.getElementById("region-detail-jsonld")?.remove(); };
-  }, [data, countryData, country, region, lang]);
+  }, [data, countryData, country, region, lang, langKey, editorial, prestigeLabels, recognitionLabels, roleLabels]);
 
   if (!data || !countryData) {
     return <Navigate to={country ? linkTo(`/biblioteca-vino/regiones/${country}`) : linkTo("/biblioteca-vino/regiones")} replace />;

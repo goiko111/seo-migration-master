@@ -5227,6 +5227,78 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
 };
 
+interface WineLibraryDetailSchemaContext {
+  termAnchor: string;
+  termSetUrl: string;
+  termSetName: string;
+  termCode: string;
+  additionalType: string;
+}
+
+function getWineLibraryDetailSchemaContext(canonical: string, lang: WineLibraryLang): WineLibraryDetailSchemaContext | null {
+  let pathname = canonical;
+  try {
+    pathname = new URL(canonical).pathname;
+  } catch (_) {
+    pathname = canonical.replace(SITE, '');
+  }
+
+  const segments = pathname.split('/').filter(Boolean);
+  const sectionConfig = WINE_LIBRARY_PATH_CONFIG[lang].sections;
+  const copy = WINE_LIBRARY_COPY[lang];
+  const detailSections: Array<{
+    section: keyof WineLibraryPathConfig['sections'];
+    termAnchor: string;
+    termSetPath: string;
+    termSetLabel: string;
+    additionalType: string;
+  }> = [
+    {
+      section: 'uvas',
+      termAnchor: 'grape-term',
+      termSetPath: '/biblioteca-vino/uvas',
+      termSetLabel: copy.sectionTitles.uvas,
+      additionalType: 'Wine grape variety',
+    },
+    {
+      section: 'regiones',
+      termAnchor: 'region-term',
+      termSetPath: '/biblioteca-vino/regiones',
+      termSetLabel: copy.sectionTitles.regiones,
+      additionalType: 'Wine region or denomination',
+    },
+    {
+      section: 'estilos',
+      termAnchor: 'style-term',
+      termSetPath: '/biblioteca-vino/estilos',
+      termSetLabel: copy.sectionTitles.estilos,
+      additionalType: 'Wine style',
+    },
+    {
+      section: 'maridajes',
+      termAnchor: 'pairing-term',
+      termSetPath: '/biblioteca-vino/maridajes',
+      termSetLabel: copy.sectionTitles.maridajes,
+      additionalType: 'Wine pairing',
+    },
+  ];
+
+  for (const detail of detailSections) {
+    const localizedSection = sectionConfig[detail.section];
+    const sectionIndex = segments.indexOf(localizedSection);
+    if (sectionIndex < 0 || sectionIndex >= segments.length - 1) continue;
+    return {
+      termAnchor: detail.termAnchor,
+      termSetUrl: `${SITE}${wineLibraryPath(lang, detail.termSetPath)}`,
+      termSetName: `${detail.termSetLabel} | ${copy.home}`,
+      termCode: segments.slice(sectionIndex + 1).join('/'),
+      additionalType: detail.additionalType,
+    };
+  }
+
+  return null;
+}
+
 // ── HTML Generator ──
 function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangEntry[]): string {
   const navLang = WINE_LIBRARY_LANGS.includes(meta.lang as WineLibraryLang) ? meta.lang as WineLibraryLang : 'es';
@@ -5289,11 +5361,23 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     '/weinbibliothek/',
     '/biblioteca-vinho/',
   ].some((segment) => meta.canonical.includes(segment));
+  const wineLibraryDetailContext = isWineLibraryDetail
+    ? getWineLibraryDetailSchemaContext(meta.canonical, navLang)
+    : null;
+  const wineLibraryDetailTermId = wineLibraryDetailContext
+    ? `${meta.canonical}#${wineLibraryDetailContext.termAnchor}`
+    : `${meta.canonical}#wine-library-term`;
   const wineLibraryDetailEntity = isWineLibraryDetail ? {
+    '@id': wineLibraryDetailTermId,
     '@type': 'DefinedTerm',
     name: content.h1,
     url: meta.canonical,
     description: meta.description,
+    ...(wineLibraryDetailContext ? {
+      termCode: wineLibraryDetailContext.termCode,
+      additionalType: wineLibraryDetailContext.additionalType,
+      inDefinedTermSet: { '@id': `${wineLibraryDetailContext.termSetUrl}#term-set` },
+    } : {}),
   } : null;
   const mentionLinks = isWineLibraryDetail
     ? collectionLinks.slice(0, 12).map((link) => ({
@@ -5330,6 +5414,43 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
         url: SITE,
         offers: { '@type': 'Offer', priceCurrency: 'EUR', url: `${SITE}/precios` },
       })
+    : wineLibraryDetailContext && wineLibraryDetailEntity
+      ? JSON.stringify({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@id': `${meta.canonical}#webpage`,
+              '@type': 'WebPage',
+              name: content.h1,
+              headline: meta.title,
+              description: meta.description,
+              url: meta.canonical,
+              inLanguage: meta.lang,
+              mainEntity: { '@id': wineLibraryDetailTermId },
+              publisher: { '@id': `${SITE}#organization` },
+            },
+            {
+              '@id': `${meta.canonical}#article`,
+              '@type': 'Article',
+              headline: meta.title,
+              description: meta.description,
+              keywords: [content.h1, ...collectionLinks.slice(0, 12).map((link) => link.label)].join(', '),
+              author: { '@type': 'Organization', name: 'Winerim', url: SITE },
+              publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+              mainEntityOfPage: { '@id': `${meta.canonical}#webpage` },
+              about: { '@id': wineLibraryDetailTermId },
+              ...(mentionLinks.length > 0 ? { mentions: mentionLinks } : {}),
+            },
+            {
+              '@id': `${wineLibraryDetailContext.termSetUrl}#term-set`,
+              '@type': 'DefinedTermSet',
+              name: wineLibraryDetailContext.termSetName,
+              url: wineLibraryDetailContext.termSetUrl,
+              inLanguage: meta.lang,
+            },
+            wineLibraryDetailEntity,
+          ],
+        })
     : JSON.stringify({
         '@context': 'https://schema.org',
         '@type': meta.schemaType || 'WebPage',

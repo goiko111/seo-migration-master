@@ -14,13 +14,19 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import {
+  buildWineLibraryDetailSchema,
+  buildWineLibrarySchemaMentions,
+  uniqueWineLibrarySchemaStrings,
+  wineLibrarySchemaPropertyValue,
+} from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
   type StyleEntry,
   type StyleCatalogEntry,
 } from "@/data/stylesLibrary";
 import { getStyleEditorialProfile, type LocalizedStyleEditorialProfile } from "@/data/wineLibraryStyleEditorial";
-import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
+import { getStrategicWineLibraryLinks, type StrategicWineLibraryLinkItem } from "@/data/wineLibraryLinks";
 import {
   getLocalizedFamilyMeta,
   getLocalizedStyleBySlug,
@@ -140,6 +146,10 @@ const styleDetailCopy: Record<string, {
   },
 };
 
+type StyleSchemaEntry = StyleEntry | StyleCatalogEntry;
+
+const isFullStyleSchemaEntry = (entry: StyleSchemaEntry): entry is StyleEntry => "pairings" in entry;
+
 const StyleDetail = () => {
   const { style: styleSlug } = useParams<{ style: string }>();
   const { lang } = useLanguage();
@@ -152,36 +162,59 @@ const StyleDetail = () => {
   useEffect(() => {
     const entry = fullEntry || catalogEntry;
     if (!entry) return;
+    const langKey = String(lang);
+    const labels = levelLabelsByLang[langKey] || levelLabelsByLang.en;
+    const familyInfo = getLocalizedFamilyMeta(entry.family, lang);
     const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/estilos/${entry.slug}`);
     const description = fullEntry?.seo.description || entry.description;
+    const editorial = getStyleEditorialProfile(entry.slug, langKey, entry.name);
+    const mentionItems: StrategicWineLibraryLinkItem[] = [
+      ...getStrategicWineLibraryLinks("style", entry.slug),
+      ...entry.mainGrapes.map((name) => ({ name, hint: "grape" as const })),
+      ...entry.keyRegions.map((name) => ({ name, hint: "region" as const })),
+      ...(isFullStyleSchemaEntry(entry) ? entry.pairings.map((name) => ({ name, hint: "pairing" as const })) : []),
+      ...(isFullStyleSchemaEntry(entry) ? entry.relatedStyles.map((name) => ({ name, hint: "style" as const })) : []),
+      ...(isFullStyleSchemaEntry(entry) ? entry.competingStyles.map((name) => ({ name, hint: "style" as const })) : []),
+    ];
+    const mentions = buildWineLibrarySchemaMentions(mentionItems, lang);
+    const additionalProperties = [
+      wineLibrarySchemaPropertyValue("Style family", familyInfo.label),
+      wineLibrarySchemaPropertyValue("Serving temperature", entry.servingTemp),
+      wineLibrarySchemaPropertyValue("Main grapes", entry.mainGrapes),
+      wineLibrarySchemaPropertyValue("Key regions", entry.keyRegions),
+      isFullStyleSchemaEntry(entry) ? wineLibrarySchemaPropertyValue("Body", labels[entry.body] || entry.body) : null,
+      isFullStyleSchemaEntry(entry) ? wineLibrarySchemaPropertyValue("Acidity", labels[entry.acidity] || entry.acidity) : null,
+      isFullStyleSchemaEntry(entry) ? wineLibrarySchemaPropertyValue("Complexity", labels[entry.complexity] || entry.complexity) : null,
+      isFullStyleSchemaEntry(entry) ? wineLibrarySchemaPropertyValue("Pairings", entry.pairings) : null,
+      isFullStyleSchemaEntry(entry) ? wineLibrarySchemaPropertyValue("Restaurant list roles", entry.cartaRole.map((role) => labels[role] || role)) : null,
+      editorial ? wineLibrarySchemaPropertyValue("Service profile", editorial.title) : null,
+    ].filter((item): item is NonNullable<typeof item> => Boolean(item));
+    const keywords = uniqueWineLibrarySchemaStrings([
+      entry.name,
+      familyInfo.label,
+      ...entry.mainGrapes,
+      ...entry.keyRegions,
+      ...(isFullStyleSchemaEntry(entry) ? entry.pairings : []),
+      ...(isFullStyleSchemaEntry(entry) ? entry.relatedStyles : []),
+      ...(isFullStyleSchemaEntry(entry) ? entry.competingStyles : []),
+    ]);
     const schema = document.createElement("script");
     schema.id = "style-detail-jsonld";
     schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: entry.name,
-          description,
-          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          mainEntityOfPage: pageUrl,
-          about: { "@id": `${pageUrl}#style-term` },
-        },
-        {
-          "@id": `${pageUrl}#style-term`,
-          "@type": "DefinedTerm",
-          name: entry.name,
-          description,
-          inDefinedTermSet: {
-            "@type": "DefinedTermSet",
-            name: "Winerim Wine Library",
-            url: getWineLibraryUrl(lang, "/biblioteca-vino/estilos"),
-          },
-        },
-      ],
-    });
+    schema.textContent = JSON.stringify(buildWineLibraryDetailSchema({
+      pageUrl,
+      lang,
+      name: entry.name,
+      description,
+      termAnchor: "style-term",
+      termSetPath: "/biblioteca-vino/estilos",
+      termSetName: "Winerim Wine Library Wine Styles",
+      termCode: entry.slug,
+      additionalType: "Wine style",
+      keywords,
+      additionalProperties,
+      mentions,
+    }));
     document.head.appendChild(schema);
     return () => { document.getElementById("style-detail-jsonld")?.remove(); };
   }, [fullEntry, catalogEntry, styleSlug, lang]);

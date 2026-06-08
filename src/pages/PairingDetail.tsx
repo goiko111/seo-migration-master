@@ -14,12 +14,18 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
+import {
+  buildWineLibraryDetailSchema,
+  buildWineLibrarySchemaMentions,
+  uniqueWineLibrarySchemaStrings,
+  wineLibrarySchemaPropertyValue,
+} from "@/components/seo/wineLibrarySchema";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
   type PairingEntry,
 } from "@/data/pairingsLibrary";
 import { getPairingEditorialProfile, type LocalizedPairingEditorialProfile } from "@/data/wineLibraryPairingEditorial";
-import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
+import { getStrategicWineLibraryLinks, type StrategicWineLibraryLinkItem } from "@/data/wineLibraryLinks";
 import {
   getLocalizedCategoryMeta,
   getLocalizedPairingBySlug,
@@ -191,37 +197,59 @@ const PairingDetail = () => {
   useEffect(() => {
     if (!entry) return;
     const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/maridajes/${entry.slug}`);
+    const meta = getLocalizedCategoryMeta(entry.category, lang);
+    const mentionItems: StrategicWineLibraryLinkItem[] = [
+      ...getStrategicWineLibraryLinks("pairing", entry.slug),
+      ...entry.recommendedStyles.map((name) => ({ name, hint: "style" as const })),
+      ...entry.recommendedRegions.map((name) => ({ name, hint: "region" as const })),
+      ...entry.recommendedGrapes.map((name) => ({ name, hint: "grape" as const })),
+      ...entry.alternatives.map((name) => ({ name, hint: "style" as const })),
+      ...entry.relatedPairings.map((name) => ({ name, hint: "pairing" as const })),
+    ];
+    const mentions = buildWineLibrarySchemaMentions(mentionItems, lang);
+    const additionalProperties = [
+      wineLibrarySchemaPropertyValue("Pairing category", meta.label),
+      wineLibrarySchemaPropertyValue("Pairing level", entry.level),
+      wineLibrarySchemaPropertyValue("Intensity", entry.intensity),
+      wineLibrarySchemaPropertyValue("Fat level", entry.fatLevel),
+      wineLibrarySchemaPropertyValue("Spice level", entry.spiceLevel),
+      wineLibrarySchemaPropertyValue("Food acidity", entry.acidityInFood),
+      wineLibrarySchemaPropertyValue("Recommended styles", entry.recommendedStyles),
+      wineLibrarySchemaPropertyValue("Recommended regions", entry.recommendedRegions),
+      wineLibrarySchemaPropertyValue("Recommended grapes", entry.recommendedGrapes),
+      wineLibrarySchemaPropertyValue("Restaurant pairing roles", entry.pairingRole),
+      editorial ? wineLibrarySchemaPropertyValue("Service profile", editorial.title) : null,
+    ].filter((item): item is NonNullable<typeof item> => Boolean(item));
+    const keywords = uniqueWineLibrarySchemaStrings([
+      entry.name,
+      meta.label,
+      ...entry.principles,
+      ...entry.recommendedStyles,
+      ...entry.recommendedRegions,
+      ...entry.recommendedGrapes,
+      ...entry.alternatives,
+      ...entry.relatedPairings,
+    ]);
     const schema = document.createElement("script");
     schema.id = "pairing-detail-jsonld";
     schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: entry.name,
-          description: entry.seo.description,
-          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          mainEntityOfPage: pageUrl,
-          about: { "@id": `${pageUrl}#pairing-term` },
-        },
-        {
-          "@id": `${pageUrl}#pairing-term`,
-          "@type": "DefinedTerm",
-          name: entry.name,
-          description: entry.description,
-          inDefinedTermSet: {
-            "@type": "DefinedTermSet",
-            name: "Winerim Wine Library",
-            url: getWineLibraryUrl(lang, "/biblioteca-vino/maridajes"),
-          },
-        },
-      ],
-    });
+    schema.textContent = JSON.stringify(buildWineLibraryDetailSchema({
+      pageUrl,
+      lang,
+      name: entry.name,
+      description: entry.seo.description,
+      termAnchor: "pairing-term",
+      termSetPath: "/biblioteca-vino/maridajes",
+      termSetName: "Winerim Wine Library Pairings",
+      termCode: entry.slug,
+      additionalType: "Wine pairing",
+      keywords,
+      additionalProperties,
+      mentions,
+    }));
     document.head.appendChild(schema);
     return () => { document.getElementById("pairing-detail-jsonld")?.remove(); };
-  }, [entry, pairingSlug, lang]);
+  }, [entry, pairingSlug, lang, editorial]);
 
   if (!entry) return <Navigate to={linkTo("/biblioteca-vino/maridajes")} replace />;
 
