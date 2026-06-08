@@ -9,6 +9,8 @@
 - La capa editorial avanzada de uvas prioritarias está escalando por tandas; tras la última expansión publicada cubre 40 uvas prioritarias.
 - La expansión editorial de biblioteca del vino cubre 40 uvas, 22 regiones prioritarias, 15 estilos prioritarios y 18 maridajes/platos prioritarios en seis idiomas.
 - El 2026-06-08 se publico en produccion la cuarta tanda editorial de uvas prioritarias: `graciano`, `muscadet`, `semillon`, `assyrtiko`, `vermentino`, `carmenere`, `tannat`, `petit-verdot`, `torrontes` y `corvina`.
+- El 2026-06-08 se pusheo `d02ff15 feat: enrich wine library grape schema links`, que completa enlaces estrategicos para las 40 uvas prioritarias, enriquece JSON-LD humano de fichas de uva y desambigua `muscadet` como uva `Melon de Bourgogne` frente a region.
+- El frontend humano del commit `d02ff15` quedo publicado desde Lovable, pero la Edge Function `prerender` todavia debe desplegarse para que Googlebot reciba el schema enriquecido nuevo.
 - El 2026-06-08 se publico en produccion un fallback visible localizado para entidades de biblioteca sin perfil editorial especifico, integrado en uvas, regiones, estilos y maridajes.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para biblioteca del vino: 761/761 URLs visibles de Search Console pasan con minimo 317 palabras, canonical propio, idioma correcto, schema y hreflang.
 - El 2026-06-08 se desplego y valido en produccion una capa de profundidad de prerender para 49 rutas estaticas/no-biblioteca visibles en Search Console: 49/49 pasan con minimo 302 palabras, canonical propio e idioma correcto.
@@ -70,6 +72,7 @@
 - Convertir progresivamente entidades que dependen del fallback visible en perfiles editoriales especificos cuando tengan demanda SEO o valor comercial; la cobertura de uvas prioritarias ya paso de 30 a 40.
 - Mantener la validación productiva de cada tanda editorial antes de tratarla como cerrada.
 - Publicar y validar en producción cada tanda editorial de biblioteca del vino.
+- Desplegar `prerender` del commit `d02ff15` desde Lovable o mediante CLI con `SUPABASE_ACCESS_TOKEN`, y revalidar Googlebot en Muscadet DE/PT.
 - Revalidar en producción cualquier cambio de sitemap/prerender tras desplegarlo desde Lovable.
 - Evitar que frontend y prerender diverjan cuando se añadan nuevos enlaces estratégicos de biblioteca.
 - Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.

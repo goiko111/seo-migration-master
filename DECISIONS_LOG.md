@@ -2,6 +2,45 @@
 
 ## 2026-06-08
 
+### Schema y grafo interno de uvas prioritarias
+
+#### Hechos
+
+- Se completo el grafo estrategico de enlaces internos para las 40 uvas prioritarias.
+- Se anadieron alias y resolucion contextual para `muscadet`:
+  - `Melon de Bourgogne` resuelve como uva;
+  - `Muscadet` resuelve como region cuando el enlace pide `region`.
+- Se enriquecio el JSON-LD humano de fichas de uva con `WebPage`, `Article`, `DefinedTermSet`, `DefinedTerm`, `alternateName`, propiedades de entidad y `mentions` internas.
+- El grafo de uva no emite `FAQPage`; las FAQs siguen delegadas en `FAQSection`.
+- Se anadio aviso localizado en seis idiomas para desambiguar `Muscadet` como uva `Melon de Bourgogne` frente a la region Muscadet.
+- Se preparo `supabase/functions/prerender/index.ts` para que el HTML de bots de fichas de biblioteca incluya `mainEntity`, `about` y `mentions`.
+- Validaciones locales completadas: tests enfocados, `deno check`, suite completa, build, `git diff --check` y navegador local.
+- Commit funcional creado y pusheado: `d02ff15 feat: enrich wine library grape schema links`.
+- Lovable detecto el commit `d02ff15`; se publico frontend desde `Publish project` -> `Update`.
+- Produccion humana valida en `/de/weinbibliothek/rebsorten/muscadet`.
+- Produccion Googlebot y Supabase directo todavia sirven `prerender` anterior; falta desplegar la Edge Function `prerender` del commit `d02ff15`.
+- El intento de deploy CLI de `prerender` fallo por falta de `SUPABASE_ACCESS_TOKEN`.
+- No se modifico Cloudflare Worker ni base de datos.
+
+#### Decisiones
+
+- Priorizar schema y enlazado interno antes de iniciar otra tanda de entidades.
+- Tratar `muscadet` como caso editorial ambiguo y hacerlo explicito en UI y schema.
+- Mantener `FAQPage` fuera del grafo propio de uva para evitar duplicidades.
+- Publicar frontend por Lovable y dejar pendiente el despliegue explicito de `prerender` si Lovable no permite enviar instrucciones desde el navegador automatizado.
+
+#### Hipotesis
+
+- Un grafo completo y resoluble para 40 uvas mejora autoridad interna, rastreo y comprension semantica.
+- La mejora de schema ayudara especialmente a LLMs y crawlers cuando tambien este activa en `prerender`.
+- La ambiguedad Muscadet/Melon de Bourgogne puede afectar a intencion de busqueda si no se desambigua de forma visible.
+
+#### Tareas pendientes
+
+- Desplegar `prerender` del commit `d02ff15` desde Lovable o con token CLI autorizado.
+- Revalidar Googlebot en DE/PT tras ese deploy.
+- Extender el mismo criterio de schema/enlazado a regiones, estilos y maridajes.
+
 ### Cuarta tanda editorial de uvas prioritarias
 
 #### Hechos

@@ -1,5 +1,86 @@
 # Current State
 
+## Actualizacion 2026-06-08: schema y enlaces internos de uvas prioritarias
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se implemento una mejora de biblioteca del vino centrada en schema, enlaces internos y desambiguacion de `muscadet`.
+- Commit funcional creado y pusheado: `d02ff15 feat: enrich wine library grape schema links`.
+- `src/data/wineLibraryLinks.ts` ahora anade enlaces estrategicos para las 40 uvas prioritarias, no solo para las 20 primeras.
+- Se anadieron alias de resolucion para `Melon de Bourgogne`, `Melon`, `Muscadet Sèvre-et-Maine`, `Muscadet Sevre-et-Maine` y `Muscadet sur Lie`.
+- `Muscadet` puede resolverse como uva o como region segun el `hint`:
+  - `Melon de Bourgogne` con `grape` apunta a `/biblioteca-vino/uvas/muscadet`;
+  - `Muscadet` con `region` apunta a `/biblioteca-vino/regiones/francia/muscadet`.
+- `src/pages/GrapeDetail.tsx` ahora genera JSON-LD enriquecido para fichas de uva:
+  - `WebPage`;
+  - `Article`;
+  - `DefinedTermSet`;
+  - `DefinedTerm`;
+  - `alternateName`;
+  - paises, regiones clave, color, acidez, cuerpo, intensidad aromatica y rol en carta como `PropertyValue`;
+  - `mentions` hacia entidades internas resolubles de region, estilo, uva y maridaje.
+- El JSON-LD nuevo no incluye `FAQPage`, para evitar duplicar el schema de FAQs que ya emite `FAQSection`.
+- La ficha humana de `muscadet` muestra una aclaracion localizada en seis idiomas explicando que la pagina modela la uva `Melon de Bourgogne` y enlaza la region `Muscadet` cuando el contexto es denominacion/origen.
+- `supabase/functions/prerender/index.ts` queda preparado para que las fichas de biblioteca prerenderizadas como bots incluyan `mainEntity`, `about` y `mentions` semanticas hacia enlaces internos.
+- Tests ampliados:
+  - todas las 40 `priorityGrapeSlugs` deben tener enlaces estrategicos resolubles;
+  - `muscadet` se valida como caso ambiguo uva/region;
+  - la ficha alemana valida aviso humano, schema enriquecido, mencion a region Muscadet y ausencia de `FAQPage` dentro del grafo de uva;
+  - la superficie SEO de `prerender` valida la nueva capa de menciones semanticas.
+- Validaciones locales completadas:
+  - `npm test -- --run src/test/wine-library-links.test.ts src/test/grape-detail-render.test.tsx src/test/wine-library-seo-surface.test.ts`: 28 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `npm test -- --run`: 52 tests.
+  - `npm run build`.
+  - `git diff --check`.
+  - Navegador local en `/de/weinbibliothek/rebsorten/muscadet`.
+- Lovable `Web Winerim` detecto el commit `d02ff15` como `Pushed from GitHub`.
+- Se pulso `Publish project` y despues `Update` en Lovable.
+- Produccion humana validada en `https://winerim.wine/de/weinbibliothek/rebsorten/muscadet?codex=d02ff15`:
+  - H1 `Melon de Bourgogne`;
+  - aviso visible de desambiguacion;
+  - `grape-detail-jsonld` con `alternateName` que incluye `Muscadet`;
+  - `mentions` hacia `/de/weinbibliothek/regionen/francia/muscadet`;
+  - 0 `FAQPage` dentro del grafo de uva.
+- Produccion Googlebot sigue sirviendo `prerender` antiguo para `/de/weinbibliothek/rebsorten/muscadet`:
+  - `200`;
+  - `X-Worker-Branch: bot-prerender`;
+  - `x-prerendered: true`;
+  - canonical propio e `html lang="de"`;
+  - 722 palabras;
+  - pero el schema principal aun no contiene `mentions` ni `DefinedTerm` enriquecido.
+- La Edge Function directa de Supabase tambien confirma que `prerender` sigue en version anterior.
+- Se intento desplegar solo `prerender` por CLI como fallback, pero fallo por falta de `SUPABASE_ACCESS_TOKEN`.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Completar primero el grafo de enlaces de las 40 uvas prioritarias antes de abrir otra tanda editorial.
+- Mantener la aclaracion de `muscadet` en la UI humana para evitar confusion entre uva/sinonimo y region.
+- Enriquecer el schema de uva sin anadir `FAQPage` al grafo propio de la ficha, porque el proyecto ya tuvo deuda de FAQ duplicado.
+- Publicar el frontend desde Lovable, siguiendo la via operativa documentada.
+- No desplegar Cloudflare Worker ni tocar DB porque el cambio pertenece a frontend y `prerender`.
+
+## Hipotesis
+
+- El grafo completo de las 40 uvas deberia mejorar rastreo interno, contexto semantico y lectura por LLMs.
+- La desambiguacion de `muscadet` reducira señales contradictorias para usuarios, Googlebot y crawlers de IA.
+- La mejora de schema sera plenamente efectiva para bots cuando Lovable despliegue la Edge Function `prerender` del commit `d02ff15`.
+
+## Tareas pendientes
+
+- Desplegar explicitamente Supabase Edge Function `prerender` del commit `d02ff15` desde Lovable, o proporcionar `SUPABASE_ACCESS_TOKEN` si se decide usar CLI.
+- Revalidar despues del deploy de `prerender`:
+  - Googlebot en `/de/weinbibliothek/rebsorten/muscadet`;
+  - Googlebot en `/pt/biblioteca-vinho/castas/muscadet`;
+  - presencia de `mentions` y entidad `DefinedTerm` enriquecida en HTML de bot.
+- Continuar con schema especifico para regiones, estilos y maridajes.
+- Convertir mas regiones/maridajes/estilos de alto valor desde fallback a perfil editorial propio.
+- Monitorizar Search Console cuando haya recrawl de las uvas prioritarias.
+
 ## Actualizacion 2026-06-08: cuarta tanda editorial de uvas prioritarias
 
 ## Hechos

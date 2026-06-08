@@ -1,5 +1,72 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras schema y enlaces de uvas
+
+## Hechos
+
+- `main` incluye y tiene pusheado `d02ff15 feat: enrich wine library grape schema links`.
+- La mejora cubre:
+  - enlaces estrategicos resolubles para las 40 uvas prioritarias;
+  - alias y resolucion contextual de `muscadet` como uva/region;
+  - JSON-LD humano enriquecido para fichas de uva;
+  - aviso localizado de desambiguacion de `muscadet`;
+  - preparacion de `prerender` para `mainEntity`, `about` y `mentions` en fichas de biblioteca.
+- Validaciones locales completadas:
+  - tests enfocados: 28 tests;
+  - `deno check` de `supabase/functions/prerender/index.ts`;
+  - suite completa: 52 tests;
+  - `npm run build`;
+  - `git diff --check`;
+  - navegador local en Muscadet aleman.
+- Lovable `Web Winerim` detecto el commit y se pulso `Publish project` -> `Update`.
+- Produccion humana esta publicada para `/de/weinbibliothek/rebsorten/muscadet`:
+  - aviso visible;
+  - JSON-LD enriquecido;
+  - menciones internas;
+  - sin `FAQPage` duplicado en el grafo de uva.
+- Produccion Googlebot aun usa `prerender` anterior para Muscadet.
+- Supabase Edge Function directa tambien devuelve el `prerender` anterior.
+- El intento de deploy CLI de `prerender` fallo porque falta `SUPABASE_ACCESS_TOKEN`.
+- No se toco Cloudflare Worker.
+- No se toco base de datos.
+
+## Decisiones
+
+- Retomar por el despliegue de `prerender` antes de considerar cerrada esta mejora para bots.
+- Mantener Lovable como via preferida para Edge Functions; usar CLI solo si se proporciona token o si se autoriza explicitamente ese camino.
+- No iniciar otra tanda editorial grande hasta que el cambio de schema/enlazado este activo tambien para Googlebot.
+
+## Hipotesis
+
+- El frontend humano ya aporta valor inmediato, pero Googlebot/LLMs no recibiran todo el nuevo schema hasta que `prerender` se despliegue.
+- La validacion de produccion puede tardar por cache, pero la funcion directa de Supabase confirma que falta deploy real de Edge Function.
+- Despues de `prerender`, el siguiente bloque de alto impacto sera aplicar schema/enlazado equivalente a regiones, estilos y maridajes.
+
+## Tareas pendientes inmediatas
+
+1. Desplegar `prerender` del commit `d02ff15`:
+   - Opcion preferida: pedirlo en Lovable `Web Winerim`.
+   - Opcion alternativa: usar CLI con `SUPABASE_ACCESS_TOKEN`.
+2. Revalidar produccion como Googlebot:
+   - `/de/weinbibliothek/rebsorten/muscadet`;
+   - `/pt/biblioteca-vinho/castas/muscadet`;
+   - esperado: `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma correcto, `mentions` y entidad enriquecida.
+3. Revalidar humano una muestra adicional:
+   - `/de/weinbibliothek/rebsorten/muscadet`;
+   - `/pt/biblioteca-vinho/castas/muscadet`;
+   - una uva no ambigua con enlaces nuevos, por ejemplo `gruner-veltliner` o `corvina`.
+4. Extender la capa de schema/enlazado a:
+   - regiones prioritarias;
+   - estilos prioritarios;
+   - maridajes prioritarios.
+5. Continuar expansion editorial visible:
+   - regiones y maridajes con demanda comercial;
+   - perfiles propios donde hoy solo hay fallback.
+6. Monitorizar Search Console tras recrawl:
+   - fichas de uva prioritarias;
+   - `Descubierta: actualmente sin indexar`;
+   - ejemplos concretos de Muscadet uva/region.
+
 ## Actualizacion 2026-06-08: retomar tras cuarta tanda de uvas
 
 ## Hechos
