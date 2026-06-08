@@ -16,11 +16,13 @@ import {
   hasFullEntry,
   colorLabels,
   type CartaRole,
+  type GrapeCatalogEntry,
   type GrapeColor,
+  type GrapeEntry,
 } from "@/data/grapesLibrary";
 import { getLocalizedGrape, getLocalizedGrapeCatalogEntry } from "@/data/grapesLibraryI18n";
 import { getGrapeEditorialProfile, type LocalizedGrapeEditorialProfile } from "@/data/wineLibraryEditorial";
-import { getStrategicWineLibraryLinks } from "@/data/wineLibraryLinks";
+import { getStrategicWineLibraryLinks, resolveLibraryLink, type StrategicWineLibraryLinkItem } from "@/data/wineLibraryLinks";
 import { getWineLibraryHreflang, getWineLibraryPath, getWineLibraryUi, getWineLibraryUrl } from "@/data/wineLibraryI18n";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -191,6 +193,7 @@ const grapeDetailCopy: Record<string, {
   bestRegionsForSales: string;
   competingDescription: string;
   allVarieties: string;
+  muscadetClarifier: string;
   bringToListTitle: (name: string) => string;
 }> = {
   es: {
@@ -204,6 +207,7 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Regiones donde más vende",
     competingDescription: "Variedades que ocupan un espacio similar en carta o percepción.",
     allVarieties: "Todas las variedades",
+    muscadetClarifier: "En esta ficha, Muscadet se trata como la uva Melon de Bourgogne. La región Muscadet se enlaza cuando el contexto es denominación u origen.",
     bringToListTitle: (name) => `Lleva ${name} a tu carta con criterio`,
   },
   en: {
@@ -217,6 +221,7 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Regions where it sells best",
     competingDescription: "Varieties that occupy a similar space on the list or in guest perception.",
     allVarieties: "All varieties",
+    muscadetClarifier: "Here, Muscadet is treated as the Melon de Bourgogne grape. The Muscadet region is linked when the context is appellation or origin.",
     bringToListTitle: (name) => `Bring ${name} into your wine list with criteria`,
   },
   it: {
@@ -230,6 +235,7 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Regioni dove vende di più",
     competingDescription: "Vitigni che occupano uno spazio simile in carta o nella percezione.",
     allVarieties: "Tutti i vitigni",
+    muscadetClarifier: "In questa scheda, Muscadet è trattato come il vitigno Melon de Bourgogne. La regione Muscadet viene collegata quando il contesto è denominazione o origine.",
     bringToListTitle: (name) => `Porta ${name} nella tua carta con criterio`,
   },
   fr: {
@@ -243,6 +249,7 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Régions où il se vend le mieux",
     competingDescription: "Cépages occupant un espace similaire en carte ou en perception client.",
     allVarieties: "Tous les cépages",
+    muscadetClarifier: "Dans cette fiche, Muscadet est traité comme le cépage Melon de Bourgogne. La région Muscadet est liée lorsque le contexte est l'appellation ou l'origine.",
     bringToListTitle: (name) => `Intégrez ${name} à votre carte avec méthode`,
   },
   de: {
@@ -256,6 +263,7 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Regionen mit der stärksten Verkaufswirkung",
     competingDescription: "Rebsorten, die auf der Karte oder in der Wahrnehmung eine ähnliche Rolle einnehmen.",
     allVarieties: "Alle Rebsorten",
+    muscadetClarifier: "Auf dieser Seite wird Muscadet als die Rebsorte Melon de Bourgogne behandelt. Die Region Muscadet wird verlinkt, wenn es um Appellation oder Herkunft geht.",
     bringToListTitle: (name) => `${name} gezielt auf die Weinkarte bringen`,
   },
   pt: {
@@ -269,11 +277,146 @@ const grapeDetailCopy: Record<string, {
     bestRegionsForSales: "Regiões onde vende melhor",
     competingDescription: "Castas que ocupam um espaço semelhante na carta ou na perceção do cliente.",
     allVarieties: "Todas as castas",
+    muscadetClarifier: "Nesta ficha, Muscadet é tratado como a casta Melon de Bourgogne. A região Muscadet é ligada quando o contexto é denominação ou origem.",
     bringToListTitle: (name) => `Leve ${name} para a sua carta com critério`,
   },
 };
 
 type WineLibraryUi = ReturnType<typeof getWineLibraryUi>;
+type GrapeSchemaEntry = GrapeEntry | GrapeCatalogEntry;
+type SchemaNode = Record<string, unknown>;
+
+const isFullGrapeEntry = (entry: GrapeSchemaEntry): entry is GrapeEntry => "pairings" in entry;
+
+const uniqueStrings = (values: Array<string | undefined>) => (
+  Array.from(new Set(values.map((value) => value?.trim()).filter((value): value is string => Boolean(value))))
+);
+
+const propertyValue = (name: string, value?: string | string[]) => {
+  const normalizedValue = Array.isArray(value) ? uniqueStrings(value).join(", ") : value?.trim();
+  if (!normalizedValue) return null;
+  return { "@type": "PropertyValue", name, value: normalizedValue };
+};
+
+const buildGrapeSchemaMentions = (entry: GrapeSchemaEntry, lang: string): SchemaNode[] => {
+  const candidates: StrategicWineLibraryLinkItem[] = [
+    ...getStrategicWineLibraryLinks("grape", entry.slug),
+    ...entry.keyRegions.map((name) => ({ name, hint: "region" as const })),
+  ];
+
+  if (isFullGrapeEntry(entry)) {
+    candidates.push(
+      ...entry.bestRegionsForSales.map((name) => ({ name, hint: "region" as const })),
+      ...entry.competingVarieties.map((name) => ({ name, hint: "grape" as const })),
+      ...entry.relatedGrapes.map((name) => ({ name, hint: "grape" as const })),
+      ...entry.pairings.map((name) => ({ name, hint: "pairing" as const })),
+    );
+  }
+
+  const seenUrls = new Set<string>();
+  return candidates.reduce<SchemaNode[]>((mentions, item) => {
+    const resolved = resolveLibraryLink(item.name, item.hint);
+    if (!resolved) return mentions;
+    const url = getWineLibraryUrl(lang, resolved.path);
+    if (seenUrls.has(url)) return mentions;
+    seenUrls.add(url);
+    mentions.push({ "@type": "Thing", name: item.name, url });
+    return mentions;
+  }, []).slice(0, 18);
+};
+
+const buildGrapeDetailSchema = ({
+  entry,
+  lang,
+  pageUrl,
+  description,
+  editorial,
+}: {
+  entry: GrapeSchemaEntry;
+  lang: string;
+  pageUrl: string;
+  description: string;
+  editorial?: LocalizedGrapeEditorialProfile;
+}) => {
+  const termId = `${pageUrl}#grape-term`;
+  const articleId = `${pageUrl}#article`;
+  const pageId = `${pageUrl}#webpage`;
+  const termSetUrl = getWineLibraryUrl(lang, "/biblioteca-vino/uvas");
+  const synonyms = uniqueStrings([
+    ...entry.synonyms,
+    entry.slug === "muscadet" ? "Muscadet" : undefined,
+    entry.slug === "muscadet" ? "Melon de Bourgogne" : undefined,
+  ]).filter((synonym) => synonym.toLowerCase() !== entry.name.toLowerCase());
+  const regionValues = isFullGrapeEntry(entry)
+    ? uniqueStrings([...entry.keyRegions, ...entry.bestRegionsForSales])
+    : entry.keyRegions;
+  const keywordValues = uniqueStrings([
+    entry.name,
+    ...entry.synonyms,
+    ...entry.countries,
+    ...entry.keyRegions,
+    ...(isFullGrapeEntry(entry) ? [...entry.pairings, ...entry.relatedGrapes] : []),
+  ]);
+  const additionalProperties = [
+    propertyValue("Color", entry.color),
+    propertyValue("Countries", entry.countries),
+    propertyValue("Key regions", regionValues),
+    isFullGrapeEntry(entry) ? propertyValue("Acidity", entry.acidity) : null,
+    isFullGrapeEntry(entry) ? propertyValue("Body", entry.body) : null,
+    isFullGrapeEntry(entry) ? propertyValue("Aromatic intensity", entry.aromaticIntensity) : null,
+    isFullGrapeEntry(entry) ? propertyValue("Restaurant list roles", entry.cartaRole) : null,
+    editorial ? propertyValue("Service profile", editorial.title) : null,
+  ].filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const mentions = buildGrapeSchemaMentions(entry, lang);
+  const aboutTerm = {
+    "@id": termId,
+    "@type": "DefinedTerm",
+    name: entry.name,
+    ...(synonyms.length ? { alternateName: synonyms } : {}),
+    termCode: entry.slug,
+    additionalType: "Wine grape variety",
+    description,
+    inDefinedTermSet: { "@id": `${termSetUrl}#term-set` },
+    ...(additionalProperties.length ? { additionalProperty: additionalProperties } : {}),
+    ...(entry.slug === "muscadet"
+      ? { disambiguatingDescription: "Muscadet can describe the Loire appellation; this page models the grape entity Melon de Bourgogne." }
+      : {}),
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@id": pageId,
+        "@type": "WebPage",
+        name: entry.name,
+        description,
+        url: pageUrl,
+        inLanguage: lang,
+        mainEntity: { "@id": termId },
+      },
+      {
+        "@id": articleId,
+        "@type": "Article",
+        headline: entry.name,
+        description,
+        keywords: keywordValues.join(", "),
+        author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+        publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
+        mainEntityOfPage: { "@id": pageId },
+        about: { "@id": termId },
+        ...(mentions.length ? { mentions } : {}),
+      },
+      {
+        "@id": `${termSetUrl}#term-set`,
+        "@type": "DefinedTermSet",
+        name: "Winerim Wine Library Grape Varieties",
+        url: termSetUrl,
+      },
+      aboutTerm,
+    ],
+  };
+};
 
 const GrapeDetail = () => {
   const { grape: grapeSlug } = useParams<{ grape: string }>();
@@ -290,37 +433,14 @@ const GrapeDetail = () => {
     if (!entry) return;
     const pageUrl = getWineLibraryUrl(lang, `/biblioteca-vino/uvas/${entry.slug}`);
     const description = fullEntry?.description || entry.tastingNotes;
+    const editorial = getGrapeEditorialProfile(entry.slug, langKey, entry.name);
     const schema = document.createElement("script");
     schema.id = "grape-detail-jsonld";
     schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          headline: entry.name,
-          description,
-          author: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          publisher: { "@type": "Organization", name: "Winerim", url: "https://winerim.wine" },
-          mainEntityOfPage: pageUrl,
-          about: { "@id": `${pageUrl}#grape-term` },
-        },
-        {
-          "@id": `${pageUrl}#grape-term`,
-          "@type": "DefinedTerm",
-          name: entry.name,
-          description,
-          inDefinedTermSet: {
-            "@type": "DefinedTermSet",
-            name: "Winerim Wine Library",
-            url: getWineLibraryUrl(lang, "/biblioteca-vino/uvas"),
-          },
-        },
-      ],
-    });
+    schema.textContent = JSON.stringify(buildGrapeDetailSchema({ entry, lang, pageUrl, description, editorial }));
     document.head.appendChild(schema);
     return () => { document.getElementById("grape-detail-jsonld")?.remove(); };
-  }, [fullEntry, catalogEntry, grapeSlug, lang]);
+  }, [fullEntry, catalogEntry, grapeSlug, lang, langKey]);
 
   if (!fullEntry && !catalogEntry) {
     return <Navigate to={linkTo("/biblioteca-vino/uvas")} replace />;
@@ -413,6 +533,13 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
             className="text-sm text-muted-foreground mb-4">
             {copy.alsoKnownAs}: <span className="italic">{data.synonyms.join(", ")}</span>
+          </motion.p>
+        )}
+
+        {data.slug === "muscadet" && (
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}
+            className="text-sm text-muted-foreground mb-4 max-w-2xl">
+            {copy.muscadetClarifier}
           </motion.p>
         )}
 
@@ -731,6 +858,10 @@ const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNu
           <p className="text-sm text-muted-foreground mb-4">
             {copy.alsoKnownAs}: <span className="italic">{data.synonyms.join(", ")}</span>
           </p>
+        )}
+
+        {data.slug === "muscadet" && (
+          <p className="text-sm text-muted-foreground mb-4 max-w-2xl">{copy.muscadetClarifier}</p>
         )}
 
         <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">{data.tastingNotes}</p>

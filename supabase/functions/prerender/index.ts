@@ -5125,6 +5125,26 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
   const collectionLinks = content.internalLinks
     .filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index)
     .slice(0, 40);
+  const isWineLibraryDetail = meta.schemaType === 'Article' && [
+    '/biblioteca-vino/',
+    '/wine-library/',
+    '/bibliotheque-vin/',
+    '/weinbibliothek/',
+    '/biblioteca-vinho/',
+  ].some((segment) => meta.canonical.includes(segment));
+  const wineLibraryDetailEntity = isWineLibraryDetail ? {
+    '@type': 'DefinedTerm',
+    name: content.h1,
+    url: meta.canonical,
+    description: meta.description,
+  } : null;
+  const mentionLinks = isWineLibraryDetail
+    ? collectionLinks.slice(0, 12).map((link) => ({
+        '@type': 'Thing',
+        name: link.label,
+        url: absoluteUrl(link.url),
+      }))
+    : [];
 
   const itemListSchema = meta.schemaType === 'CollectionPage' && collectionLinks.length > 0 ? JSON.stringify({
     '@context': 'https://schema.org',
@@ -5163,6 +5183,8 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
         publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
         inLanguage: meta.lang,
         ...(meta.schemaType === 'CollectionPage' ? { mainEntity: { '@id': `${meta.canonical}#itemlist` } } : {}),
+        ...(wineLibraryDetailEntity ? { mainEntity: wineLibraryDetailEntity, about: wineLibraryDetailEntity } : {}),
+        ...(mentionLinks.length > 0 ? { mentions: mentionLinks } : {}),
       });
 
   const orgSchema = JSON.stringify({

@@ -116,6 +116,18 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("wineLibraryStrategicLinks(lang, esPath)");
   });
 
+  it("describes prerendered wine-library detail entities with semantic mentions", () => {
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(prerender).toContain("const isWineLibraryDetail");
+    expect(prerender).toContain("const wineLibraryDetailEntity");
+    expect(prerender).toContain("const mentionLinks");
+    expect(prerender).toContain("about: wineLibraryDetailEntity");
+    expect(prerender).toContain("mentions: mentionLinks");
+    expect(prerender).toContain("/weinbibliothek/");
+    expect(prerender).toContain("/biblioteca-vinho/");
+  });
+
   it("redirects legacy one-segment wine-library shortcuts at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 

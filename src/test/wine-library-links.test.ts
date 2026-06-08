@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { priorityGrapeSlugs } from "@/data/wineLibraryEditorial";
 import { getStrategicWineLibraryLinks, resolveLibraryLink } from "@/data/wineLibraryLinks";
 import {
   getLocalizedWineLibraryLegacyRedirect,
@@ -12,6 +13,9 @@ describe("wine library link resolver", () => {
     expect(resolveLibraryLink("Xarel·lo", "grape")?.path).toBe("/biblioteca-vino/uvas/xarello");
     expect(resolveLibraryLink("Borgoña", "region")?.path).toBe("/biblioteca-vino/regiones/francia/bourgogne");
     expect(resolveLibraryLink("Burdeos", "region")?.path).toBe("/biblioteca-vino/regiones/francia/bordeaux");
+    expect(resolveLibraryLink("Melon de Bourgogne", "grape")?.path).toBe("/biblioteca-vino/uvas/muscadet");
+    expect(resolveLibraryLink("Muscadet", "region")?.path).toBe("/biblioteca-vino/regiones/francia/muscadet");
+    expect(resolveLibraryLink("Muscadet Sèvre-et-Maine", "region")?.path).toBe("/biblioteca-vino/regiones/francia/muscadet");
     expect(resolveLibraryLink("blanco con lías", "style")?.path).toBe("/biblioteca-vino/estilos/blanco-crianza-lias");
     expect(resolveLibraryLink("espumoso método tradicional", "style")?.path).toBe("/biblioteca-vino/estilos/espumoso");
     expect(resolveLibraryLink("rosado gastronómico", "style")?.path).toBe("/biblioteca-vino/estilos/rosado-cuerpo");
@@ -28,15 +32,28 @@ describe("wine library link resolver", () => {
 
   it("keeps the strategic relation graph resolvable", () => {
     const xarelloLinks = getStrategicWineLibraryLinks("grape", "xarello");
+    const muscadetLinks = getStrategicWineLibraryLinks("grape", "muscadet");
     const riojaLinks = getStrategicWineLibraryLinks("region", "rioja");
     const pairingLinks = getStrategicWineLibraryLinks("pairing", "carnes-rojas");
 
     expect(xarelloLinks.map((link) => link.name)).toContain("Cava");
+    expect(muscadetLinks.map((link) => link.name)).toContain("Ostras");
     expect(riojaLinks.map((link) => link.name)).toContain("Tempranillo");
     expect(pairingLinks.map((link) => link.name)).toContain("Tinto reserva");
 
-    [...xarelloLinks, ...riojaLinks, ...pairingLinks].forEach((link) => {
+    [...xarelloLinks, ...muscadetLinks, ...riojaLinks, ...pairingLinks].forEach((link) => {
       expect(resolveLibraryLink(link.name, link.hint), `${link.name} should resolve`).not.toBeNull();
+    });
+  });
+
+  it("keeps every priority grape connected to resolvable strategic entities", () => {
+    priorityGrapeSlugs.forEach((slug) => {
+      const links = getStrategicWineLibraryLinks("grape", slug);
+
+      expect(links.length, `${slug} should have strategic links`).toBeGreaterThan(0);
+      links.forEach((link) => {
+        expect(resolveLibraryLink(link.name, link.hint), `${slug} -> ${link.name} should resolve`).not.toBeNull();
+      });
     });
   });
 

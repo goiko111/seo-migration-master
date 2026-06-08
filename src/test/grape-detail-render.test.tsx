@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
@@ -38,6 +38,34 @@ describe("grape detail rendering", () => {
     expect(screen.getByRole("heading", { name: /Como usar Airén numa carta real/i, level: 2 })).toBeInTheDocument();
     expect(screen.getByText("Papel na carta")).toBeInTheDocument();
     expect(screen.getByText(/Ligue Airén a regiões, estilos e harmonizações/i)).toBeInTheDocument();
+  });
+
+  it("emits enriched grape schema and clarifies Muscadet as grape versus region", async () => {
+    render(
+      <MemoryRouter initialEntries={["/de/weinbibliothek/rebsorten/muscadet"]}>
+        <LanguageProvider>
+          <Routes>
+            <Route path="/de/weinbibliothek/rebsorten/:grape" element={<GrapeDetail />} />
+          </Routes>
+        </LanguageProvider>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: /Melon de Bourgogne|Muscadet/i, level: 1 })).toBeInTheDocument();
+    expect(screen.getByText(/Muscadet als die Rebsorte Melon de Bourgogne/i)).toBeInTheDocument();
+
+    await waitFor(() => expect(document.getElementById("grape-detail-jsonld")).toBeTruthy());
+    const schema = JSON.parse(document.getElementById("grape-detail-jsonld")?.textContent || "{}");
+    const graph = schema["@graph"] as Array<Record<string, unknown>>;
+    const term = graph.find((node) => node["@type"] === "DefinedTerm" && String(node["@id"]).includes("#grape-term"));
+    const article = graph.find((node) => node["@type"] === "Article");
+    const properties = term?.additionalProperty as Array<Record<string, string>>;
+    const mentions = article?.mentions as Array<Record<string, string>>;
+
+    expect(term?.alternateName).toContain("Muscadet");
+    expect(properties.some((property) => property.name === "Countries" && property.value.includes("Frankreich"))).toBe(true);
+    expect(mentions.some((mention) => mention.url.includes("/de/weinbibliothek/regionen/francia/muscadet"))).toBe(true);
+    expect(graph.some((node) => node["@type"] === "FAQPage")).toBe(false);
   });
 
   it("renders localized priority region editorial sections for human users", async () => {
