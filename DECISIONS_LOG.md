@@ -2,6 +2,45 @@
 
 ## 2026-06-08
 
+### Search Console tras quinta tanda editorial
+
+#### Hechos
+
+- Se uso la propiedad Search Console URL-prefix `https://winerim.wine/`.
+- La vista general mostraba 102 paginas indexadas y 2.331 no indexadas como foto del 2026-06-08.
+- Antes del reenvio, `/sitemap.xml` y `/sitemap_index.xml` figuraban con ultimo rastreo 2026-06-06 y 2.098 paginas descubiertas.
+- Se reenvio `/sitemap.xml`.
+- Search Console marco `/sitemap.xml` como `Correcto`, ultimo rastreo 2026-06-08 y 2.228 URLs descubiertas.
+- `/sitemap_index.xml` quedo sin reenviar y seguia mostrando ultimo rastreo 2026-06-06 y 2.098 paginas descubiertas.
+- Se inspeccionaron y solicitaron manualmente para indexacion:
+  - `https://winerim.wine/pt/biblioteca-vinho/harmonizacoes/ceviche`;
+  - `https://winerim.wine/pt/biblioteca-vinho/regioes/grecia/santorini`;
+  - `https://winerim.wine/de/weinbibliothek/weinstile/franciacorta`.
+- Las tres fichas aparecian en Search Console como `La URL no esta en Google` y `Descubierta: actualmente sin indexar`, con presencia en sitemap.
+- Search Console acepto las tres solicitudes y confirmo que cada URL quedo anadida a una cola de rastreo prioritaria.
+- `https://winerim.wine/biblioteca-vino` y `https://winerim.wine/biblioteca-vino/maridajes` aparecen como `La URL esta en Google`.
+- No se modifico codigo, Worker ni base de datos.
+
+#### Decisiones
+
+- Usar `/sitemap.xml` como sitemap operativo principal en Search Console porque ya refleja las 2.228 URLs publicadas.
+- Mantener las solicitudes manuales de indexacion en tandas cortas y representativas.
+- Priorizar fichas nuevas validadas en produccion y no repetir solicitud para hubs ya indexados.
+- Tratar las cifras de Search Console como datos con retraso, no como contradiccion con produccion cuando las URLs ya responden correctamente y estan en sitemap.
+
+#### Hipotesis
+
+- Google ya actualizo descubrimiento de sitemap tras el reenvio, pero la indexacion de fichas nuevas depende de cola y prioridad.
+- Las solicitudes manuales pueden ayudar con ejemplos estrategicos, pero el volumen total debera moverse por enlazado interno, calidad de contenido y recrawl natural.
+- Los hubs indexados deberian servir como base para reforzar rastreo hacia fichas nuevas si se mejora el enlazado contextual.
+
+#### Tareas pendientes
+
+- Revalidar en Search Console las tres URLs solicitadas dentro de unos dias.
+- Revisar si `/sitemap_index.xml` debe reenviarse o retirarse de la operativa si sigue mostrando menos URLs que `/sitemap.xml`.
+- Preparar una segunda tanda corta solo si Search Console no muestra limites y si las nuevas fichas siguen sin indexar.
+- Continuar con refuerzo de enlaces internos y clusters de blog por idioma.
+
 ### Quinta tanda editorial de regiones, estilos y maridajes
 
 #### Hechos

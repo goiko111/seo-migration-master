@@ -1,5 +1,49 @@
 # Current State
 
+## Actualizacion 2026-06-08: Search Console tras quinta tanda editorial
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- La propiedad operativa usada fue Search Console URL-prefix `https://winerim.wine/`.
+- La vista general de Search Console mostraba 102 paginas indexadas y 2.331 paginas no indexadas; este dato es una foto del 2026-06-08 y puede cambiar con retraso respecto a produccion.
+- Antes del reenvio, Search Console tenia `/sitemap.xml` y `/sitemap_index.xml` con ultimo rastreo 2026-06-06 y 2.098 paginas descubiertas.
+- Se reenvio `/sitemap.xml` desde Search Console.
+- Search Console acepto el sitemap y paso a mostrar `/sitemap.xml` como `Correcto`, ultimo rastreo 2026-06-08 y 2.228 URLs descubiertas.
+- `/sitemap_index.xml` seguia figurando con ultimo rastreo 2026-06-06 y 2.098 paginas descubiertas.
+- Se inspecciono `https://winerim.wine/pt/biblioteca-vinho/harmonizacoes/ceviche`: Search Console lo mostraba como `La URL no esta en Google` y `Descubierta: actualmente sin indexar`, con presencia en `https://winerim.wine/sitemap.xml`.
+- Search Console acepto la solicitud manual de indexacion para Ceviche PT y confirmo que la URL fue anadida a una cola de rastreo prioritaria.
+- Se inspecciono `https://winerim.wine/pt/biblioteca-vinho/regioes/grecia/santorini`: Search Console lo mostraba como `La URL no esta en Google` y `Descubierta: actualmente sin indexar`, con presencia en sitemap.
+- Search Console acepto la solicitud manual de indexacion para Santorini PT y confirmo que la URL fue anadida a una cola de rastreo prioritaria.
+- Se inspecciono `https://winerim.wine/de/weinbibliothek/weinstile/franciacorta`: Search Console lo mostraba como `La URL no esta en Google` y `Descubierta: actualmente sin indexar`, con presencia en sitemap.
+- Search Console acepto la solicitud manual de indexacion para Franciacorta DE y confirmo que la URL fue anadida a una cola de rastreo prioritaria.
+- Se inspecciono `https://winerim.wine/biblioteca-vino`: Search Console lo mostraba como `La URL esta en Google`.
+- Se inspecciono `https://winerim.wine/biblioteca-vino/maridajes`: Search Console lo mostraba como `La URL esta en Google`.
+- No se modifico codigo de aplicacion.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Reenviar solo `/sitemap.xml` como sitemap canonico operativo porque ya refleja las 2.228 URLs de produccion.
+- Solicitar indexacion manual solo de una tanda corta y representativa para evitar saturar la herramienta o topar con cuotas de Search Console.
+- Priorizar para solicitud manual fichas nuevas ya validadas en produccion y con alta intencion: un maridaje PT, una region PT y un estilo DE.
+- No solicitar de nuevo indexacion de hubs que Search Console ya marca como indexados.
+
+## Hipotesis
+
+- El salto de 2.098 a 2.228 URLs descubiertas en Search Console refleja que Google ya leyo el sitemap actualizado tras la quinta tanda editorial.
+- Las solicitudes manuales pueden acelerar el recrawl de las fichas seleccionadas, pero no garantizan indexacion inmediata ni mejora de posicion.
+- Que los hubs principales esten indexados y las fichas nuevas aparezcan como descubiertas sugiere que el problema actual es cola/priorizacion de rastreo, no bloqueo tecnico de sitemap o canonical.
+
+## Tareas pendientes
+
+- Revisar en Search Console dentro de unos dias si Ceviche PT, Santorini PT y Franciacorta DE pasan de `Descubierta: actualmente sin indexar` a indexadas o a otro estado.
+- Monitorizar si baja el volumen de `Descubierta: actualmente sin indexar` tras el rastreo de `/sitemap.xml` del 2026-06-08.
+- Hacer una segunda tanda corta de solicitudes manuales solo si no aparece limite de cuota y si las URLs nuevas siguen descubiertas sin indexar.
+- Reforzar enlaces internos hacia las fichas nuevas desde hubs, entidades relacionadas y proximos articulos de blog.
+
 ## Actualizacion 2026-06-08: quinta tanda editorial de regiones, estilos y maridajes
 
 ## Hechos

@@ -1,5 +1,51 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras reenvio de sitemap e indexacion selectiva
+
+## Hechos
+
+- `main` sigue limpio funcionalmente; en esta sesion no se cambio codigo de aplicacion.
+- Se trabajo con Search Console en la propiedad URL-prefix `https://winerim.wine/`.
+- `/sitemap.xml` fue reenviado y Search Console lo muestra como `Correcto`, ultimo rastreo 2026-06-08 y 2.228 URLs descubiertas.
+- `/sitemap_index.xml` seguia mostrando ultimo rastreo 2026-06-06 y 2.098 paginas descubiertas.
+- Search Console acepto solicitudes manuales de indexacion para:
+  - `https://winerim.wine/pt/biblioteca-vinho/harmonizacoes/ceviche`;
+  - `https://winerim.wine/pt/biblioteca-vinho/regioes/grecia/santorini`;
+  - `https://winerim.wine/de/weinbibliothek/weinstile/franciacorta`.
+- Las tres URLs solicitadas estaban en estado `Descubierta: actualmente sin indexar` y presentes en sitemap.
+- `https://winerim.wine/biblioteca-vino` y `https://winerim.wine/biblioteca-vino/maridajes` ya aparecen indexadas en Search Console.
+- Produccion tecnica de la quinta tanda sigue validada: sitemap con 2.228 URLs, prerender correcto y fichas nuevas servibles.
+
+## Decisiones
+
+- No repetir solicitud manual sobre hubs que ya estan indexados.
+- Mantener indexacion manual como apoyo selectivo, no como estrategia principal de escalado.
+- La siguiente mejora debe reforzar rastreo y autoridad desde enlaces internos y contenido editorial, no solo seguir solicitando URLs una a una.
+- Tratar `/sitemap_index.xml` como punto a revisar si sigue quedando desfasado frente a `/sitemap.xml`.
+
+## Hipotesis
+
+- La discrepancia entre 102 paginas indexadas y 2.228 URLs descubiertas refleja retraso de Google y baja prioridad de cola para fichas nuevas, no un bloqueo tecnico general.
+- Las fichas nuevas deberian mejorar su probabilidad de indexacion si reciben mas enlaces internos desde hubs, fichas relacionadas y articulos por idioma.
+- El cluster de maridajes puede ser la via mas rapida para captar long-tail porque conecta intencion de busqueda humana con entidades nuevas ya maduras.
+
+## Tareas pendientes inmediatas
+
+1. Search Console:
+   - revisar en unos dias Ceviche PT, Santorini PT y Franciacorta DE;
+   - comprobar si baja `Descubierta: actualmente sin indexar`;
+   - revisar si `/sitemap_index.xml` conviene reenviarlo o retirarlo como referencia secundaria.
+2. Enlazado interno:
+   - reforzar hubs de regiones, estilos y maridajes hacia las nuevas entidades;
+   - anadir enlaces contextuales desde fichas relacionadas maduras;
+   - evitar que entidades nuevas dependan solo del sitemap para ser descubiertas.
+3. Contenido:
+   - preparar clusters de blog por idioma para `ceviche`, `jamon-iberico`, `thai-curry` y `tarta-de-queso`;
+   - enlazar cada articulo a ficha de biblioteca, herramienta relevante y demo;
+   - adaptar por mercado, no traducir literalmente.
+4. Proyecto separado:
+   - planificar slugs localizados con mapa completo, redirects 301, canonicals, hreflang, sitemap y validacion antes/despues.
+
 ## Actualizacion 2026-06-08: retomar tras quinta tanda editorial publicada
 
 ## Hechos

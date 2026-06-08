@@ -45,6 +45,9 @@
 - El proyecto Lovable correcto para la web pública Winerim es `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` (`Web Winerim`).
 - El 2026-06-08 se detectó una contradicción operativa: `https://lovable.dev/projects/ebb36746-82ff-43c3-86c1-558573beddcd` pertenece al proyecto `Crim`, no a la web pública `Web Winerim`.
 - Search Console está verificado para la propiedad URL-prefix `https://winerim.wine/`; la propiedad de dominio `sc-domain:winerim.wine` sigue pendiente de acceso/verificación.
+- El 2026-06-08 se reenvio `/sitemap.xml` en Search Console para la propiedad URL-prefix `https://winerim.wine/`; Google lo marco como `Correcto`, ultimo rastreo 2026-06-08 y 2.228 URLs descubiertas.
+- El 2026-06-08 Search Console acepto solicitudes manuales de indexacion para tres fichas nuevas de alta intencion ya presentes en sitemap: Ceviche PT, Santorini PT y Franciacorta DE.
+- El 2026-06-08 Search Console mostro `/biblioteca-vino` y `/biblioteca-vino/maridajes` como URLs ya indexadas; el bloqueo principal observado sigue concentrado en fichas nuevas descubiertas pero aun no indexadas.
 - Desde el 2026-05-23, estos documentos son la fuente de verdad operativa del proyecto:
   - `PROJECT_CONTEXT.md`
   - `CURRENT_STATE.md`
@@ -91,6 +94,7 @@
 - Evitar que frontend y prerender diverjan cuando se añadan nuevos enlaces estratégicos de biblioteca.
 - Mantener los redirects legacy de biblioteca validados y continuar escalando biblioteca del vino al máximo nivel, manteniendo rendimiento residual como línea secundaria.
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.
+- Monitorizar en Search Console el efecto del reenvio de `/sitemap.xml` del 2026-06-08 y de las tres solicitudes manuales de indexacion aceptadas.
 - Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.
 - Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.
 - Monitorizar en Search Console la ampliacion semantica de regiones, estilos y maridajes tras el deploy validado de `69d2fbf`.
