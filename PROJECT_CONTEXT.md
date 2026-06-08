@@ -3,6 +3,10 @@
 ## Hechos
 
 - Repositorio de trabajo actual: `/Users/GOIKO/seo-migration-master`.
+- El 2026-06-08 se creo el commit funcional `70bb44e feat: enrich wine library entity schema`, que extiende el schema enriquecido y `mentions` estrategicas a regiones, estilos y maridajes, ademas de mantener paridad en `prerender` para bots.
+- La mejora `70bb44e` anade grafo JSON-LD de `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm` para fichas humanas de regiones, estilos y maridajes, con propiedades especificas por tipo de entidad.
+- La mejora `70bb44e` actualiza `supabase/functions/prerender/index.ts` para que Googlebot y crawlers reciban el mismo patron semantico en fichas de biblioteca reconocidas.
+- Validaciones locales de `70bb44e`: tests enfocados de biblioteca y superficie SEO, `deno check` de `prerender`, suite completa, build, `git diff --check` y navegador local.
 - El 2026-06-08 se detecto y corrigio una contradiccion documental: los documentos seguian marcando `d02ff15` como `prerender` pendiente, pero el estado real ya habia avanzado a `7a1745a` para `prerender` y `6d0c2cf` para `sitemap`.
 - El 2026-06-08 quedo desplegada y validada en produccion la Edge Function `prerender` del commit `7a1745a`: Googlebot recibe `mentions` estrategicas reales en JSON-LD para uvas prioritarias, no solo hubs genericos.
 - El 2026-06-08 se pusheo, desplego y valido `6d0c2cf fix: include strategic wine library targets in sitemap`: `/sitemap.xml` responde `200`, contiene 2.150 URLs y cubre las 9 rutas estrategicas nuevas en las seis lenguas.
@@ -55,6 +59,7 @@
 - Publicar artículos de blog de forma táctica, por clusters conectados a la biblioteca del vino y a conversión, antes que aumentar volumen sin enlazado ni intención clara.
 - Priorizar traducción/adaptación por país de artículos estratégicos cuando el routing, sitemap, prerender y la UI humana mantengan el idioma sin saltar a español.
 - No traducir slugs de entidad como parche rapido mientras ya esten publicados como canonicals en sitemap; tratarlos como una migracion SEO con redirects 301, hreflang, canonicals y validacion de Search Console.
+- Tratar el schema enriquecido de regiones, estilos y maridajes como parte de la capa semantica base de biblioteca, no como mejora opcional solo para uvas.
 
 ## Hipótesis
 
@@ -68,6 +73,7 @@
 - Los archivos `llms.txt` y `llms-full.txt` ayudan a orientar agentes y crawlers de IA, pero no sustituyen contenido indexable, prerender correcto ni schema consistente.
 - Los clusters editoriales del blog deberían aumentar autoridad temática y enlazado interno hacia la biblioteca del vino si se indexan, se enlazan desde hubs relevantes y mantienen profundidad real.
 - Corregir el salto de idioma en blog debería mejorar experiencia internacional y evitar señales SEO/LLM contradictorias entre URL, contenido, canonical e idioma.
+- Aplicar el mismo patron de `WebPage` + `Article` + `DefinedTermSet` + `DefinedTerm` en todas las fichas prioritarias deberia mejorar comprension de entidades por Googlebot y LLMs.
 
 ## Tareas pendientes
 
@@ -84,3 +90,4 @@
 - Monitorizar en Search Console la expansión editorial masiva ya publicada y validada.
 - Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.
 - Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.
+- Desplegar y validar en produccion `70bb44e` desde Lovable antes de tratar como cerrada la ampliacion semantica de regiones, estilos y maridajes.

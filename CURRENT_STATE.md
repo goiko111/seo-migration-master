@@ -1,5 +1,58 @@
 # Current State
 
+## Actualizacion 2026-06-08: schema enriquecido para regiones, estilos y maridajes
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se implemento `70bb44e feat: enrich wine library entity schema`.
+- `src/components/seo/wineLibrarySchema.ts` ahora contiene helpers compartidos para construir schema de fichas de biblioteca:
+  - `WebPage`;
+  - `Article`;
+  - `DefinedTermSet`;
+  - `DefinedTerm`;
+  - `PropertyValue`;
+  - `mentions` internas resolubles con rutas localizadas.
+- `src/pages/RegionDetail.tsx` emite schema enriquecido con propiedades de pais, tipo de denominacion, estilos, uvas principales, roles de carta, prestigio, reconocimiento, subzonas y perfil de servicio.
+- `src/pages/StyleDetail.tsx` emite schema enriquecido con familia de estilo, temperatura de servicio, uvas, regiones clave, cuerpo, acidez, complejidad, maridajes, roles de carta y perfil de servicio.
+- `src/pages/PairingDetail.tsx` emite schema enriquecido con categoria, nivel, intensidad, grasa, picante, acidez del plato, estilos, regiones, uvas recomendadas, roles de maridaje y perfil de servicio.
+- `supabase/functions/prerender/index.ts` ahora identifica fichas de uvas, regiones, estilos y maridajes para emitir un grafo semantico equivalente en HTML de bot.
+- Se añadieron tests renderizados para validar schema de region PT, estilo DE y maridaje PT con `WebPage`, `DefinedTermSet`, `DefinedTerm`, propiedades y `mentions`.
+- `src/test/wine-library-seo-surface.test.ts` valida que `prerender` conserva `WebPage`, `DefinedTermSet` y anchors semanticos para regiones, estilos y maridajes.
+- Validaciones locales completadas durante la sesion:
+  - `npm run test -- --run src/test/grape-detail-render.test.tsx src/test/wine-library-seo-surface.test.ts`: 26 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `git diff --check`.
+  - Antes del cierre tambien se habia validado `npm run test -- --run`, `npm run build` y navegador local en `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+- Queda pendiente desplegar desde Lovable y validar produccion para tratar esta capa como cerrada.
+
+## Decisiones
+
+- Extender a regiones, estilos y maridajes el mismo patron semantico ya aplicado a uvas prioritarias.
+- Mantener el schema de fichas como grafo `WebPage` + `Article` + `DefinedTermSet` + `DefinedTerm`, evitando volver a schemas planos con menos contexto.
+- Mantener paridad entre experiencia humana y `prerender` para bots en cualquier mejora semantica de biblioteca.
+- No tocar Worker ni DB porque la mejora pertenece a React y a Supabase Edge Function `prerender`.
+- Usar Lovable como via operativa de deploy para `prerender`, ya que el CLI local sigue sin `SUPABASE_ACCESS_TOKEN`.
+
+## Hipotesis
+
+- Las fichas de regiones, estilos y maridajes pasan a ser mas legibles como entidades conectadas, no solo como articulos aislados.
+- Googlebot y LLMs deberian interpretar mejor la relacion uva-region-estilo-maridaje si el grafo semantico y los enlaces internos coinciden.
+- El impacto en Search Console dependera del despliegue efectivo de `prerender` y del recrawl posterior.
+
+## Tareas pendientes
+
+- Desplegar `70bb44e` desde Lovable `Web Winerim`.
+- Validar produccion como Googlebot en:
+  - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+  - `/de/weinbibliothek/weinstile/espumoso`;
+  - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+- Confirmar `200`, `bot-prerender`, `x-prerendered: true`, canonical propio y JSON-LD con `WebPage`, `DefinedTermSet`, `DefinedTerm` y `mentions`.
+- Despues del deploy, monitorizar Search Console y mantener como siguiente bloque la expansion editorial visible de regiones, estilos y maridajes.
+
 ## Actualizacion 2026-06-08: prerender estrategico y sitemap estrategico cerrados
 
 ## Hechos

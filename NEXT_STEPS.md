@@ -1,5 +1,56 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: retomar tras schema enriquecido de entidades
+
+## Hechos
+
+- `main` contiene el commit funcional local `70bb44e feat: enrich wine library entity schema`.
+- La mejora extiende el schema enriquecido de biblioteca a regiones, estilos y maridajes.
+- React humano y `supabase/functions/prerender/index.ts` quedan sincronizados con el patron:
+  - `WebPage`;
+  - `Article`;
+  - `DefinedTermSet`;
+  - `DefinedTerm`;
+  - `mentions` internas localizadas.
+- Validaciones locales completadas:
+  - `npm run test -- --run src/test/grape-detail-render.test.tsx src/test/wine-library-seo-surface.test.ts`: 26 tests.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `git diff --check`.
+  - En la misma sesion tambien se validaron suite completa, build y navegador local.
+- No se toco Cloudflare Worker.
+- No se toco base de datos.
+
+## Decisiones
+
+- El siguiente paso operativo es despliegue desde Lovable `Web Winerim`, no cambios de Worker.
+- La capa se considerara cerrada solo tras validar produccion como Googlebot.
+- Mantener los slugs de entidad actuales; cualquier localizacion de slugs sigue siendo una migracion SEO separada.
+
+## Hipotesis
+
+- La mejora puede reforzar lectura por Googlebot y LLMs al conectar fichas no-uva con entidades relacionadas.
+- El mayor salto editorial pendiente sigue siendo convertir mas regiones, estilos y maridajes de fallback a perfiles visibles propios.
+
+## Tareas pendientes inmediatas
+
+1. Pushear el commit funcional si aun no esta en `origin/main`.
+2. Desplegar desde Lovable `Web Winerim`.
+3. Validar produccion como Googlebot:
+   - `/pt/biblioteca-vinho/regioes/portugal/vinho-verde`;
+   - `/de/weinbibliothek/weinstile/espumoso`;
+   - `/pt/biblioteca-vinho/harmonizacoes/lubina-dorada`.
+4. Comprobar en cada muestra:
+   - `200`;
+   - `x-worker-branch: bot-prerender`;
+   - `x-prerendered: true`;
+   - canonical propio;
+   - JSON-LD con `WebPage`, `DefinedTermSet`, `DefinedTerm` y `mentions`.
+5. Despues del deploy, actualizar estos documentos con resultado final.
+6. Siguiente bloque editorial:
+   - perfiles propios para regiones prioritarias que aun dependan de fallback;
+   - perfiles propios para maridajes de alta intencion;
+   - perfiles propios para estilos con demanda de busqueda y valor de carta.
+
 ## Actualizacion 2026-06-08: retomar tras deploy de sitemap estrategico
 
 ## Hechos

@@ -2,6 +2,39 @@
 
 ## 2026-06-08
 
+### Schema enriquecido para regiones, estilos y maridajes
+
+#### Hechos
+
+- Se implemento `70bb44e feat: enrich wine library entity schema`.
+- El frontend humano de regiones, estilos y maridajes emite ahora grafo JSON-LD enriquecido con `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm`.
+- Las fichas de regiones incorporan propiedades de pais, tipo de denominacion, estilos, uvas, rol de carta, prestigio, reconocimiento, subzonas y perfil de servicio.
+- Las fichas de estilos incorporan propiedades de familia, temperatura de servicio, uvas, regiones, cuerpo, acidez, complejidad, maridajes, rol de carta y perfil de servicio.
+- Las fichas de maridajes incorporan propiedades de categoria, nivel, intensidad, grasa, picante, acidez del plato, estilos, regiones, uvas recomendadas, roles de maridaje y perfil de servicio.
+- `supabase/functions/prerender/index.ts` se sincronizo para emitir el mismo patron semantico en fichas de biblioteca reconocidas para bots.
+- Se añadieron tests renderizados para una region portuguesa, un estilo aleman y un maridaje portugues.
+- Validaciones locales completadas: tests enfocados, `deno check`, `git diff --check`, suite completa, build y navegador local.
+- No se modifico Cloudflare Worker ni base de datos.
+
+#### Decisiones
+
+- Convertir el schema enriquecido en patron comun de todas las fichas estrategicas de biblioteca del vino.
+- Mantener `DefinedTermSet` separado por seccion para que uvas, regiones, estilos y maridajes tengan contexto semantico propio.
+- Alimentar `mentions` desde enlaces estrategicos y listas editoriales ya existentes, evitando duplicar una segunda fuente manual de grafo.
+- Publicar este cambio desde Lovable para incluir frontend y Edge Function `prerender`.
+
+#### Hipotesis
+
+- La coherencia entre schema humano, `prerender` y enlaces internos deberia mejorar el posicionamiento semantico de la biblioteca del vino.
+- Las entidades no-uva ganaran contexto de autoridad al quedar conectadas con uvas, regiones, estilos y maridajes relacionados.
+- Search Console tardara en reflejar la mejora aunque produccion quede servible inmediatamente tras deploy.
+
+#### Tareas pendientes
+
+- Desplegar `70bb44e` desde Lovable.
+- Revalidar produccion como Googlebot en rutas PT/DE de region, estilo y maridaje.
+- Mantener como siguiente bloque la expansion editorial visible de regiones, estilos y maridajes de mayor valor.
+
 ### Cierre de prerender y sitemap estrategico de biblioteca
 
 #### Hechos
