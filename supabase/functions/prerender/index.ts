@@ -5175,7 +5175,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     `  <link rel="alternate" hreflang="${h.lang}" href="${h.url}" />`
   ).join('\n');
 
-  const sections = withStaticDepthSections(meta, content);
+  const sections = withWineLibraryDepthSections(meta, content, withStaticDepthSections(meta, content));
   const sectionsHTML = sections.map(s => `
     <section>
       <h2>${escapeHtml(s.heading)}</h2>
@@ -5315,6 +5315,141 @@ function withStaticDepthSections(meta: PageMeta, content: PageContent): PageCont
     { heading: copy.nextHeading, content: copy.next(label) },
   ];
 }
+
+function withWineLibraryDepthSections(meta: PageMeta, content: PageContent, sections: PageContent['sections']): PageContent['sections'] {
+  if (/noindex/i.test(meta.robots || '')) return sections;
+
+  const path = (() => {
+    try { return new URL(meta.canonical).pathname; } catch (_) { return meta.canonical; }
+  })();
+  const resolved = resolveWineLibraryPath(path);
+  if (!resolved) return sections;
+
+  const bodyText = [
+    content.subtitle || '',
+    content.intro || '',
+    ...sections.flatMap(section => [section.heading, section.content]),
+    ...content.faqs.flatMap(faq => [faq.q, faq.a]),
+  ].join(' ');
+
+  if (bodyText.trim().split(/\s+/).filter(Boolean).length >= 340) {
+    return sections;
+  }
+
+  const { lang, esPath } = resolved;
+  const parts = esPath.split('/').filter(Boolean);
+  const section = parts[1] || 'home';
+  const isHub = esPath === '/biblioteca-vino' || parts.length === 2;
+  const kind = isHub ? 'hub' : section;
+  const label = content.h1;
+  const sectionLabel = content.subtitle || WINE_LIBRARY_COPY[lang].home;
+  const copy = WINE_LIBRARY_DEPTH_COPY[lang];
+  const kindLabel = WINE_LIBRARY_DEPTH_KIND_LABELS[lang][kind] || WINE_LIBRARY_DEPTH_KIND_LABELS[lang].article;
+
+  return [
+    ...sections,
+    { heading: copy.useHeading, content: copy.use(label, kindLabel, sectionLabel) },
+    { heading: copy.serviceHeading, content: copy.service(label, kindLabel, sectionLabel) },
+    { heading: copy.dataHeading, content: copy.data(label, kindLabel, sectionLabel) },
+    { heading: copy.compareHeading, content: copy.compare(label, kindLabel, sectionLabel) },
+    { heading: copy.nextHeading, content: copy.next(label, kindLabel, sectionLabel) },
+  ];
+}
+
+const WINE_LIBRARY_DEPTH_KIND_LABELS: Record<WineLibraryLang, Record<string, string>> = {
+  es: { hub: 'ruta de biblioteca', uvas: 'uva', regiones: 'region', estilos: 'estilo', maridajes: 'maridaje', glosario: 'glosario', 'guia-servicio': 'guia de servicio', article: 'guia de vino' },
+  en: { hub: 'library route', uvas: 'grape', regiones: 'region', estilos: 'style', maridajes: 'pairing', glosario: 'glossary', 'guia-servicio': 'service guide', article: 'wine guide' },
+  it: { hub: 'percorso di biblioteca', uvas: 'vitigno', regiones: 'regione', estilos: 'stile', maridajes: 'abbinamento', glosario: 'glossario', 'guia-servicio': 'guida di servizio', article: 'guida vino' },
+  fr: { hub: 'parcours de bibliotheque', uvas: 'cepage', regiones: 'region', estilos: 'style', maridajes: 'accord', glosario: 'glossaire', 'guia-servicio': 'guide de service', article: 'guide vin' },
+  de: { hub: 'Bibliotheksroute', uvas: 'Rebsorte', regiones: 'Region', estilos: 'Stil', maridajes: 'Pairing', glosario: 'Glossar', 'guia-servicio': 'Service-Guide', article: 'Wein-Guide' },
+  pt: { hub: 'rota de biblioteca', uvas: 'casta', regiones: 'regiao', estilos: 'estilo', maridajes: 'harmonizacao', glosario: 'glossario', 'guia-servicio': 'guia de servico', article: 'guia de vinho' },
+};
+
+const WINE_LIBRARY_DEPTH_COPY: Record<WineLibraryLang, {
+  useHeading: string;
+  use: (label: string, kind: string, section: string) => string;
+  serviceHeading: string;
+  service: (label: string, kind: string, section: string) => string;
+  dataHeading: string;
+  data: (label: string, kind: string, section: string) => string;
+  compareHeading: string;
+  compare: (label: string, kind: string, section: string) => string;
+  nextHeading: string;
+  next: (label: string, kind: string, section: string) => string;
+}> = {
+  es: {
+    useHeading: 'Uso en carta real',
+    use: (label, kind, section) => `${label} debe leerse como ${kind} dentro de ${section}, no como una ficha aislada. Sirve para decidir ubicacion en carta, precio relativo, plato de entrada y frase de venta. Cuando el equipo puede resumirlo en una linea, la biblioteca se convierte en material operativo para sala.`,
+    serviceHeading: 'Claves de servicio y venta',
+    service: (label) => `En sala, ${label} funciona mejor cuando se traduce a una recomendacion sencilla: perfil del vino, ocasion de consumo, temperatura aproximada y razon del maridaje. Esa lectura reduce dudas del cliente y ayuda a vender con confianza incluso cuando no hay sommelier en cada turno.`,
+    dataHeading: 'Datos para priorizar',
+    data: (label) => `Para decidir si ${label} merece mas presencia, conviene cruzar rotacion, margen, ventas por copa, platos mas pedidos y referencias sustitutivas. La biblioteca no sustituye al dato comercial: lo ordena para tomar decisiones de compra, precio, formacion y arquitectura de carta.`,
+    compareHeading: 'Comparaciones utiles',
+    compare: (label) => `Compara ${label} con uvas, regiones, estilos y maridajes cercanos antes de cambiar la carta. Esa comparacion evita duplicidades, descubre huecos de gama y permite construir rutas internas entre biblioteca, recomendaciones digitales, carta por copa y argumentos de venta del equipo.`,
+    nextHeading: 'Siguiente accion',
+    next: (label) => `El siguiente paso es convertir ${label} en una accion concreta: revisar una referencia actual, crear una recomendacion por plato, ajustar una copa o preparar una frase de formacion para el equipo antes del servicio.`,
+  },
+  en: {
+    useHeading: 'Use in a real wine list',
+    use: (label, kind, section) => `${label} should be read as a ${kind} inside ${section}, not as an isolated note. It helps decide list placement, relative price, first dish to mention and the short sales line. When the team can summarize it in one sentence, the library becomes operational floor material.`,
+    serviceHeading: 'Service and sales cues',
+    service: (label) => `On the floor, ${label} works best when it becomes a simple recommendation: wine profile, drinking occasion, approximate temperature and reason for the pairing. That reading reduces guest doubt and helps the team sell with confidence even when no sommelier is present every shift.`,
+    dataHeading: 'Data to prioritize',
+    data: (label) => `To decide whether ${label} deserves more space, compare rotation, margin, by-the-glass sales, most ordered dishes and substitute references. The library does not replace commercial data: it organizes it for purchasing, pricing, training and wine-list architecture decisions.`,
+    compareHeading: 'Useful comparisons',
+    compare: (label) => `Compare ${label} with nearby grapes, regions, styles and pairings before changing the list. That comparison avoids duplication, reveals missing price tiers and builds internal routes between the library, digital recommendations, by-the-glass strategy and the sales arguments used by the team.`,
+    nextHeading: 'Next action',
+    next: (label) => `The next step is to turn ${label} into one concrete action: review a current reference, create a dish recommendation, adjust a glass pour or prepare one training sentence for the team before service.`,
+  },
+  it: {
+    useHeading: 'Uso in una carta reale',
+    use: (label, kind, section) => `${label} va letto come ${kind} dentro ${section}, non come una scheda isolata. Aiuta a decidere posizione in carta, prezzo relativo, primo piatto da citare e frase di vendita. Quando la sala lo riassume in una riga, la biblioteca diventa materiale operativo.`,
+    serviceHeading: 'Chiavi di servizio e vendita',
+    service: (label) => `In sala, ${label} funziona meglio quando diventa una raccomandazione semplice: profilo del vino, occasione di consumo, temperatura indicativa e motivo dell abbinamento. Questa lettura riduce i dubbi del cliente e aiuta a vendere anche senza sommelier in ogni turno.`,
+    dataHeading: 'Dati per dare priorita',
+    data: (label) => `Per decidere se ${label} merita piu spazio, conviene confrontare rotazione, margine, vendite al calice, piatti piu richiesti e referenze sostitutive. La biblioteca non sostituisce il dato commerciale: lo ordina per acquisti, prezzi, formazione e architettura della carta.`,
+    compareHeading: 'Confronti utili',
+    compare: (label) => `Confronta ${label} con vitigni, regioni, stili e abbinamenti vicini prima di cambiare la carta. Il confronto evita doppioni, rivela fasce mancanti e costruisce percorsi interni tra biblioteca, raccomandazioni digitali, vino al calice e argomenti di vendita della sala.`,
+    nextHeading: 'Prossima azione',
+    next: (label) => `Il passo successivo e trasformare ${label} in una azione concreta: rivedere una referenza attuale, creare una raccomandazione per piatto, regolare un calice o preparare una frase di formazione prima del servizio.`,
+  },
+  fr: {
+    useHeading: 'Usage dans une vraie carte',
+    use: (label, kind, section) => `${label} doit etre lu comme ${kind} dans ${section}, pas comme une fiche isolee. Cela aide a choisir la place en carte, le prix relatif, le premier plat a citer et la phrase de vente. Quand l equipe le resume en une ligne, la bibliotheque devient un outil de salle.`,
+    serviceHeading: 'Cles de service et de vente',
+    service: (label) => `En salle, ${label} fonctionne mieux quand il devient une recommandation simple : profil du vin, occasion de consommation, temperature approximative et raison de l accord. Cette lecture reduit le doute client et aide a vendre avec methode meme sans sommelier a chaque service.`,
+    dataHeading: 'Donnees a prioriser',
+    data: (label) => `Pour savoir si ${label} merite plus de place, il faut croiser rotation, marge, ventes au verre, plats les plus commandes et references substituables. La bibliotheque ne remplace pas la donnee commerciale : elle l organise pour achats, prix, formation et architecture de carte.`,
+    compareHeading: 'Comparaisons utiles',
+    compare: (label) => `Comparez ${label} avec les cepages, regions, styles et accords proches avant de modifier la carte. Cette comparaison evite les doublons, revele les niveaux de prix manquants et cree des routes internes entre bibliotheque, recommandations digitales, vin au verre et arguments de vente.`,
+    nextHeading: 'Action suivante',
+    next: (label) => `L etape suivante consiste a transformer ${label} en action concrete : revoir une reference actuelle, creer une recommandation par plat, ajuster un verre ou preparer une phrase de formation avant le service.`,
+  },
+  de: {
+    useHeading: 'Einsatz auf der echten Weinkarte',
+    use: (label, kind, section) => `${label} sollte als ${kind} innerhalb von ${section} gelesen werden, nicht als isolierte Notiz. Es hilft bei Platzierung, relativem Preis, erstem Gericht und kurzer Verkaufszeile. Wenn das Team es in einem Satz zusammenfasst, wird die Bibliothek zu nutzbarem Servicematerial.`,
+    serviceHeading: 'Service- und Verkaufshinweise',
+    service: (label) => `Im Service funktioniert ${label} am besten als einfache Empfehlung: Weinprofil, Trinkmoment, ungefaehre Temperatur und Grund fur das Pairing. Diese Lesart reduziert Zweifel beim Gast und hilft dem Team, auch ohne Sommelier in jeder Schicht sicher zu verkaufen.`,
+    dataHeading: 'Daten fur Priorisierung',
+    data: (label) => `Um zu entscheiden, ob ${label} mehr Raum verdient, sollten Rotation, Marge, Offenweinverkauf, meistbestellte Gerichte und ersetzbare Referenzen verglichen werden. Die Bibliothek ersetzt keine Verkaufsdaten: Sie ordnet sie fur Einkauf, Preis, Training und Kartenarchitektur.`,
+    compareHeading: 'Sinnvolle Vergleiche',
+    compare: (label) => `Vergleiche ${label} vor einer Kartenanderung mit nahen Rebsorten, Regionen, Stilen und Pairings. So vermeidet das Team Dopplungen, erkennt fehlende Preisstufen und baut interne Wege zwischen Bibliothek, digitalen Empfehlungen, Offenweinstrategie und Verkaufsargumenten.`,
+    nextHeading: 'Nachste Aktion',
+    next: (label) => `Der nachste Schritt ist, ${label} in eine konkrete Aktion zu ubersetzen: eine aktuelle Referenz prufen, eine Empfehlung pro Gericht anlegen, ein Glasangebot anpassen oder einen Trainingssatz vor dem Service vorbereiten.`,
+  },
+  pt: {
+    useHeading: 'Uso numa carta real',
+    use: (label, kind, section) => `${label} deve ser lido como ${kind} dentro de ${section}, nao como uma ficha isolada. Ajuda a decidir posicao na carta, preco relativo, primeiro prato a mencionar e frase de venda. Quando a equipa resume em uma linha, a biblioteca vira material operacional de sala.`,
+    serviceHeading: 'Chaves de servico e venda',
+    service: (label) => `Em sala, ${label} funciona melhor quando se traduz numa recomendacao simples: perfil do vinho, ocasiao de consumo, temperatura aproximada e razao da harmonizacao. Essa leitura reduz duvidas do cliente e ajuda a vender com confianca mesmo sem sommelier em todos os turnos.`,
+    dataHeading: 'Dados para priorizar',
+    data: (label) => `Para decidir se ${label} merece mais espaco, convem cruzar rotacao, margem, vendas a copo, pratos mais pedidos e referencias substitutas. A biblioteca nao substitui o dado comercial: organiza-o para decisoes de compra, preco, formacao e arquitectura da carta.`,
+    compareHeading: 'Comparacoes uteis',
+    compare: (label) => `Compare ${label} com castas, regioes, estilos e harmonizacoes proximas antes de alterar a carta. Essa comparacao evita duplicidades, revela patamares de preco em falta e cria rotas internas entre biblioteca, recomendacoes digitais, vinho a copo e argumentos de venda da equipa.`,
+    nextHeading: 'Proxima accao',
+    next: (label) => `O passo seguinte e transformar ${label} numa accao concreta: rever uma referencia actual, criar uma recomendacao por prato, ajustar uma opcao a copo ou preparar uma frase de formacao antes do servico.`,
+  },
+};
 
 const STATIC_DEPTH_COPY: Record<WineLibraryLang, {
   workflowHeading: string;
