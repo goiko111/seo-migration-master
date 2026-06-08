@@ -5175,7 +5175,8 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     `  <link rel="alternate" hreflang="${h.lang}" href="${h.url}" />`
   ).join('\n');
 
-  const sectionsHTML = content.sections.map(s => `
+  const sections = withStaticDepthSections(meta, content);
+  const sectionsHTML = sections.map(s => `
     <section>
       <h2>${escapeHtml(s.heading)}</h2>
       <p>${escapeHtml(s.content)}</p>
@@ -5278,6 +5279,128 @@ ${hreflangHTML}
 </body>
 </html>`;
 }
+
+function withStaticDepthSections(meta: PageMeta, content: PageContent): PageContent['sections'] {
+  if (/noindex/i.test(meta.robots || '')) return content.sections;
+
+  const path = (() => {
+    try { return new URL(meta.canonical).pathname; } catch (_) { return meta.canonical; }
+  })();
+
+  if (/biblioteca-vino|wine-library|biblioteca-vinho|bibliotheque-vin|weinbibliothek/.test(path)) {
+    return content.sections;
+  }
+
+  const bodyText = [
+    content.subtitle || '',
+    content.intro || '',
+    ...content.sections.flatMap(section => [section.heading, section.content]),
+    ...content.faqs.flatMap(faq => [faq.q, faq.a]),
+  ].join(' ');
+
+  if (bodyText.trim().split(/\s+/).filter(Boolean).length >= 300) {
+    return content.sections;
+  }
+
+  const lang = WINE_LIBRARY_LANGS.includes(meta.lang as WineLibraryLang) ? meta.lang as WineLibraryLang : 'es';
+  const label = content.h1;
+  const copy = STATIC_DEPTH_COPY[lang];
+
+  return [
+    ...content.sections,
+    { heading: copy.workflowHeading, content: copy.workflow(label) },
+    { heading: copy.dataHeading, content: copy.data(label) },
+    { heading: copy.teamHeading, content: copy.team(label) },
+    { heading: copy.libraryHeading, content: copy.library(label) },
+    { heading: copy.nextHeading, content: copy.next(label) },
+  ];
+}
+
+const STATIC_DEPTH_COPY: Record<WineLibraryLang, {
+  workflowHeading: string;
+  workflow: (label: string) => string;
+  dataHeading: string;
+  data: (label: string) => string;
+  teamHeading: string;
+  team: (label: string) => string;
+  libraryHeading: string;
+  library: (label: string) => string;
+  nextHeading: string;
+  next: (label: string) => string;
+}> = {
+  es: {
+    workflowHeading: 'Como encaja en la operativa de vino',
+    workflow: (label) => `${label} no es una pagina aislada: forma parte del flujo de decision de Winerim para ordenar la carta, entender ventas, detectar referencias con baja rotacion y convertir la recomendacion de vino en una rutina sencilla para sala y direccion.`,
+    dataHeading: 'Datos que conviene revisar',
+    data: () => 'Antes de decidir, conviene cruzar ticket medio, margen por referencia, peso del vino sobre la facturacion, rotacion por estilo y vinos sin movimiento. Esas senales permiten priorizar acciones con impacto real en compras, precios y formacion del equipo.',
+    teamHeading: 'Uso por el equipo de sala',
+    team: (label) => `${label} tambien debe ser comprensible para camareros, responsables de sala y direccion. La pagina conecta la decision digital con argumentos de servicio: que recomendar, por que tiene sentido y como explicarlo sin depender siempre de un sommelier.`,
+    libraryHeading: 'Conexion con biblioteca del vino',
+    library: () => 'Cuando la decision afecta a estilos, regiones, uvas o maridajes, conviene apoyarla en la biblioteca del vino. Asi cada cambio de carta queda conectado con lenguaje de sala, argumentos de venta y formacion interna.',
+    nextHeading: 'Siguiente paso recomendado',
+    next: () => 'El siguiente paso natural es analizar la carta actual, identificar oportunidades de margen y seleccionar pocas acciones medibles: mejorar una categoria, activar vino por copa, reforzar maridajes o pedir una demo con datos reales del restaurante.',
+  },
+  en: {
+    workflowHeading: 'How it fits the wine workflow',
+    workflow: (label) => `${label} is not an isolated page: it belongs to the Winerim decision workflow for structuring the wine list, understanding sales, spotting slow-moving references and turning wine recommendations into a simple routine for the floor team and management.`,
+    dataHeading: 'Data worth checking',
+    data: () => 'Before changing the list, teams should review average ticket, margin by reference, wine weight in total revenue, rotation by style and bottles with no movement. Those signals help prioritize decisions that affect buying, pricing and staff training.',
+    teamHeading: 'How the floor team uses it',
+    team: (label) => `${label} should also be clear for waiters, floor managers and operators. The page connects the digital decision with service language: what to recommend, why it makes sense and how to explain it without relying on a sommelier every time.`,
+    libraryHeading: 'Connection with the wine library',
+    library: () => 'When the decision touches styles, regions, grapes or pairings, it should connect back to the wine library. That keeps each list change tied to service language, sales arguments and internal staff training.',
+    nextHeading: 'Recommended next step',
+    next: () => 'The natural next step is to analyse the current list, identify margin opportunities and choose a small number of measurable actions: improve one category, activate wine by the glass, strengthen pairings or request a demo with real restaurant data.',
+  },
+  it: {
+    workflowHeading: 'Come entra nel flusso vino',
+    workflow: (label) => `${label} non e una pagina isolata: fa parte del flusso decisionale Winerim per ordinare la carta, leggere le vendite, individuare referenze lente e trasformare la raccomandazione del vino in una routine semplice per sala e direzione.`,
+    dataHeading: 'Dati da controllare',
+    data: () => 'Prima di cambiare la carta conviene leggere scontrino medio, margine per referenza, peso del vino sul fatturato, rotazione per stile e bottiglie ferme. Questi segnali aiutano a decidere acquisti, prezzi e formazione con priorita reali.',
+    teamHeading: 'Uso da parte della sala',
+    team: (label) => `${label} deve essere chiaro anche per camerieri, responsabili di sala e direzione. La pagina collega la decisione digitale al linguaggio di servizio: cosa consigliare, perche ha senso e come spiegarlo senza dipendere sempre da un sommelier.`,
+    libraryHeading: 'Connessione con la biblioteca del vino',
+    library: () => 'Quando la decisione riguarda stili, regioni, vitigni o abbinamenti, conviene collegarla alla biblioteca del vino. Cosi ogni cambio di carta resta legato a linguaggio di sala, argomenti di vendita e formazione interna.',
+    nextHeading: 'Prossimo passo consigliato',
+    next: () => 'Il passo successivo e analizzare la carta attuale, identificare opportunita di margine e scegliere poche azioni misurabili: migliorare una categoria, attivare il vino al calice, rafforzare gli abbinamenti o richiedere una demo con dati reali.',
+  },
+  fr: {
+    workflowHeading: 'Place dans le flux vin',
+    workflow: (label) => `${label} n est pas une page isolee : elle appartient au flux de decision Winerim pour structurer la carte, comprendre les ventes, detecter les references lentes et transformer la recommandation vin en routine simple pour la salle et la direction.`,
+    dataHeading: 'Donnees a verifier',
+    data: () => 'Avant de modifier la carte, il faut regarder ticket moyen, marge par reference, poids du vin dans le chiffre d affaires, rotation par style et bouteilles sans mouvement. Ces signaux aident a prioriser achats, prix et formation.',
+    teamHeading: 'Usage par l equipe de salle',
+    team: (label) => `${label} doit aussi etre clair pour serveurs, responsables de salle et direction. La page relie la decision digitale au langage de service : quoi recommander, pourquoi cela a du sens et comment l expliquer sans dependra toujours d un sommelier.`,
+    libraryHeading: 'Lien avec la bibliotheque du vin',
+    library: () => 'Quand la decision touche styles, regions, cepages ou accords, elle doit revenir vers la bibliotheque du vin. Chaque changement de carte reste ainsi relie au langage de salle, aux arguments de vente et a la formation.',
+    nextHeading: 'Etape suivante recommandee',
+    next: () => 'L etape suivante consiste a analyser la carte actuelle, identifier les opportunites de marge et choisir quelques actions mesurables : ameliorer une categorie, activer le vin au verre, renforcer les accords ou demander une demo avec donnees reelles.',
+  },
+  de: {
+    workflowHeading: 'Rolle im Wein-Workflow',
+    workflow: (label) => `${label} ist keine isolierte Seite: Sie gehoert zum Winerim-Entscheidungsfluss, um die Weinkarte zu strukturieren, Verkaufe zu verstehen, langsam drehende Referenzen zu erkennen und Empfehlungen im Service einfacher zu machen.`,
+    dataHeading: 'Relevante Datenpunkte',
+    data: () => 'Vor einer Anderung sollten Teams Durchschnittsbon, Marge je Referenz, Weinanteil am Umsatz, Rotation nach Stil und Flaschen ohne Bewegung prufen. Diese Signale helfen bei Einkauf, Pricing und Teamtraining.',
+    teamHeading: 'Nutzung im Serviceteam',
+    team: (label) => `${label} muss auch fur Service, Leitung und Betreiber verstandlich sein. Die Seite verbindet digitale Entscheidung mit Servicesprache: was empfohlen wird, warum es passt und wie man es ohne standige Abhangigkeit vom Sommelier erklaert.`,
+    libraryHeading: 'Verbindung zur Weinbibliothek',
+    library: () => 'Wenn die Entscheidung Stile, Regionen, Rebsorten oder Pairings betrifft, sollte sie mit der Weinbibliothek verbunden sein. So bleiben Kartenanderungen an Servicesprache, Verkaufsargumente und internes Training gekoppelt.',
+    nextHeading: 'Empfohlener nachster Schritt',
+    next: () => 'Der nachste Schritt ist die Analyse der aktuellen Karte, das Erkennen von Margenchancen und die Auswahl weniger messbarer Massnahmen: Kategorie verbessern, Offenweine aktivieren, Pairings starken oder eine Demo mit echten Daten anfragen.',
+  },
+  pt: {
+    workflowHeading: 'Como entra no fluxo de vinho',
+    workflow: (label) => `${label} nao e uma pagina isolada: faz parte do fluxo de decisao da Winerim para estruturar a carta, compreender vendas, detectar referencias com baixa rotacao e transformar recomendacoes de vinho numa rotina simples para sala e direccao.`,
+    dataHeading: 'Dados que vale a pena rever',
+    data: () => 'Antes de alterar a carta, convem rever ticket medio, margem por referencia, peso do vinho na facturacao, rotacao por estilo e garrafas sem movimento. Esses sinais ajudam a priorizar compras, precos e formacao da equipa.',
+    teamHeading: 'Uso pela equipa de sala',
+    team: (label) => `${label} tambem deve ser claro para empregados, responsaveis de sala e direccao. A pagina liga a decisao digital a linguagem de servico: o que recomendar, porque faz sentido e como explicar sem depender sempre de um sommelier.`,
+    libraryHeading: 'Ligacao com a biblioteca do vinho',
+    library: () => 'Quando a decisao envolve estilos, regioes, castas ou harmonizacoes, deve voltar a biblioteca do vinho. Assim cada alteracao de carta fica ligada a linguagem de sala, argumentos de venda e formacao interna.',
+    nextHeading: 'Proximo passo recomendado',
+    next: () => 'O passo seguinte e analisar a carta actual, identificar oportunidades de margem e escolher poucas accoes mensuraveis: melhorar uma categoria, activar vinho a copo, reforcar harmonizacoes ou pedir uma demo com dados reais.',
+  },
+};
 
 // ── Dynamic SEO page renderer ──
 async function renderSeoPage(slug: string): Promise<string | null> {
