@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, Grape } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
 import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
+import WineLibraryOperationalDepth from "@/components/biblioteca/WineLibraryOperationalDepth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -351,7 +352,17 @@ const RegionDetail = () => {
         </div>
       </section>
 
-      {editorial && <RegionServiceIntelligenceSection profile={editorial} />}
+      {editorial ? (
+        <RegionServiceIntelligenceSection profile={editorial} />
+      ) : (
+        <WineLibraryOperationalDepth
+          entityName={data.name}
+          kind="region"
+          lang={langKey}
+          ctaHref={linkTo("/demo")}
+          ctaLabel={ui.actions.requestDemo}
+        />
+      )}
 
       {/* COMPETING REGIONS */}
       {data.competingRegions.length > 0 && (

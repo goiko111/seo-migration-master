@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
 import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
+import WineLibraryOperationalDepth from "@/components/biblioteca/WineLibraryOperationalDepth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -365,7 +366,17 @@ const PairingDetail = () => {
         </div>
       </section>
 
-      {editorial && <PairingServiceIntelligenceSection profile={editorial} />}
+      {editorial ? (
+        <PairingServiceIntelligenceSection profile={editorial} />
+      ) : (
+        <WineLibraryOperationalDepth
+          entityName={entry.name}
+          kind="pairing"
+          lang={lang}
+          ctaHref={linkTo("/demo")}
+          ctaLabel={ui.actions.requestDemo}
+        />
+      )}
 
       {/* COMMON MISTAKES */}
       <section className="section-padding">

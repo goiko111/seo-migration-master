@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
 import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
+import WineLibraryOperationalDepth from "@/components/biblioteca/WineLibraryOperationalDepth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -302,7 +303,17 @@ const FullStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor }: 
         </div>
       </section>
 
-      {editorial && <StyleServiceIntelligenceSection profile={editorial} />}
+      {editorial ? (
+        <StyleServiceIntelligenceSection profile={editorial} />
+      ) : (
+        <WineLibraryOperationalDepth
+          entityName={data.name}
+          kind="style"
+          lang={lang}
+          ctaHref={linkTo("/demo")}
+          ctaLabel={ui.actions.requestDemo}
+        />
+      )}
 
       {/* ELABORATION */}
       <section className="section-padding">
@@ -595,7 +606,17 @@ const CatalogStyleDetail = ({ data, linkTo, localizedStyleEntries, lang, urlFor 
         </div>
       </section>
 
-      {editorial && <StyleServiceIntelligenceSection profile={editorial} />}
+      {editorial ? (
+        <StyleServiceIntelligenceSection profile={editorial} />
+      ) : (
+        <WineLibraryOperationalDepth
+          entityName={data.name}
+          kind="style"
+          lang={lang}
+          ctaHref={linkTo("/demo")}
+          ctaLabel={ui.actions.requestDemo}
+        />
+      )}
 
       {editorial && (
         <FAQSection faqs={editorial.faqs} schemaId={`style-${data.slug}`} />

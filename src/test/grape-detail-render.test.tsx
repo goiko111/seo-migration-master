@@ -23,6 +23,23 @@ describe("grape detail rendering", () => {
     expect(screen.getByRole("heading", { name: /Service-Intelligenz/i, level: 2 })).toBeInTheDocument();
   });
 
+  it("renders localized operational depth for grape pages without a specific editorial profile", async () => {
+    render(
+      <MemoryRouter initialEntries={["/pt/biblioteca-vinho/castas/airen"]}>
+        <LanguageProvider>
+          <Routes>
+            <Route path="/pt/biblioteca-vinho/castas/:grape" element={<GrapeDetail />} />
+          </Routes>
+        </LanguageProvider>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: /Airén/i, level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Como usar Airén numa carta real/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByText("Papel na carta")).toBeInTheDocument();
+    expect(screen.getByText(/Ligue Airén a regiões, estilos e harmonizações/i)).toBeInTheDocument();
+  });
+
   it("renders localized priority region editorial sections for human users", async () => {
     render(
       <MemoryRouter initialEntries={["/pt/biblioteca-vinho/regioes/portugal/vinho-verde"]}>

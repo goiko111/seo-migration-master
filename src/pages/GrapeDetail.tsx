@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Grape, ArrowRight, Wine, AlertTriangle, Users, TrendingUp, Target, Lightbulb, MapPin } from "lucide-react";
 import LinkedTag from "@/components/biblioteca/LinkedTag";
 import RelatedWineLibraryLinks from "@/components/biblioteca/RelatedWineLibraryLinks";
+import WineLibraryOperationalDepth from "@/components/biblioteca/WineLibraryOperationalDepth";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -532,7 +533,17 @@ const FullGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNulla
       </div>
     </section>
 
-    {editorial && <ServiceIntelligenceSection profile={editorial} />}
+    {editorial ? (
+      <ServiceIntelligenceSection profile={editorial} />
+    ) : (
+      <WineLibraryOperationalDepth
+        entityName={data.name}
+        kind="grape"
+        lang={langKey}
+        ctaHref={linkTo("/demo")}
+        ctaLabel={ui.actions.requestDemo}
+      />
+    )}
 
     {/* COMPETING VARIETIES */}
     {data.competingVarieties.length > 0 && (
@@ -749,7 +760,17 @@ const CatalogGrapeDetail = ({ data, linkTo, urlFor, ui, langKey }: { data: NonNu
       </div>
     </section>
 
-    {editorial && <ServiceIntelligenceSection profile={editorial} />}
+    {editorial ? (
+      <ServiceIntelligenceSection profile={editorial} />
+    ) : (
+      <WineLibraryOperationalDepth
+        entityName={data.name}
+        kind="grape"
+        lang={langKey}
+        ctaHref={linkTo("/demo")}
+        ctaLabel={ui.actions.requestDemo}
+      />
+    )}
 
     <section className="section-padding bg-gradient-dark">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
