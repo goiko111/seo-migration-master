@@ -131,6 +131,16 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("'X-Worker-Branch': 'legacy-localized-article-redirect'");
   });
 
+  it("redirects unprefixed international article canonicals to localized routes", () => {
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(worker).toContain("const LOCALIZED_ARTICLE_CANONICAL_REDIRECTS");
+    expect(worker).toContain("'/article/alternative-zur-pdf-weinkarte': '/de/article/alternative-zur-pdf-weinkarte'");
+    expect(worker).toContain("'/article/wine-by-the-glass-software-restaurants': '/en/article/wine-by-the-glass-software-restaurants'");
+    expect(worker).toContain("getLocalizedArticleCanonicalTarget(path)");
+    expect(worker).toContain("'X-Worker-Branch': 'localized-article-canonical-redirect'");
+  });
+
   it("maps high-confidence GSC 404 legacy URLs at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 

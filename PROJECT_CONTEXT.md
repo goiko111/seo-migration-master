@@ -21,6 +21,7 @@
 - Los bloques de apoyo de artículos (índice, herramientas, relacionados y CTAs) están localizados en la experiencia humana para evitar residuos de UI española en artículos internacionales.
 - El prerender de artículos debe exponer enlaces internos reales procedentes de `related_links`, markdown del cuerpo y reglas semánticas, no solo navegación genérica.
 - Los artículos estratégicos del blog deben tener rutas localizadas limpias (`/{lang}/article/{slug}`) y contenido adaptado a mercado cuando se publiquen en otros idiomas.
+- Las variantes internacionales de artículos no deben quedar servidas como `200` en `/article/{slug}` si su canonical real es `/{lang}/article/{slug}`; el Worker debe consolidarlas con `301` cuando aparezcan en Search Console.
 - El SEO técnico y la lectura por LLMs forman parte del alcance operativo de la biblioteca del vino: sitemap, prerender, idioma, canonical, hreflang, robots y archivos `llms.txt`.
 - Core Web Vitals de la home es una línea activa antes de retomar ampliación editorial máxima: ya se cerraron arranque ligero, CSS crítico y GTM diferido en producción.
 - El proyecto usa Lovable como vía operativa para publicar frontend y Edge Functions Supabase.

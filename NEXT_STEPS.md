@@ -2702,3 +2702,57 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - sin placeholder;
    - contenido suficiente;
    - enlaces internos contextuales.
+
+## Actualización 2026-06-08: listo para retomar tras redirects de artículos internacionales
+
+## Hechos
+
+- Se auditó la muestra visible de `1.000` URLs de `Descubierta: actualmente sin indexar`.
+- Clasificación:
+  - `761` biblioteca del vino;
+  - `154` legacy `/article/{slug}_{lang}`;
+  - `36` artículos canónicos `/article/{slug}`;
+  - `49` otras rutas.
+- Los `36` artículos canónicos visibles no son finos:
+  - mínimo `590` palabras;
+  - mediana `883` palabras;
+  - `0` placeholders.
+- Se detectaron `14` duplicados blandos: URLs internacionales en `/article/{slug}` que respondían `200`, pero canonicalizaban a `/{lang}/article/{slug}`.
+- Se corrigieron en Worker con `301` a la ruta localizada.
+- Worker desplegado: `881ec799-cc05-4110-8e4e-6ed75f3bcd6d`.
+- Producción validada:
+  - `14/14` redirigen con `X-Worker-Branch: localized-article-canonical-redirect`;
+  - los destinos localizados responden `200`, `bot-prerender` y canonical propio.
+- Tests y verificaciones pasadas:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npx eslint cloudflare-worker-v3-hybrid.js src/test/wine-library-seo-surface.test.ts`;
+  - `npm run deploy:worker:dry-run`;
+  - `npm run test -- --run`;
+  - `git diff --check`.
+
+## Decisiones
+
+- No enriquecer artículos de este lote porque no hay contenido fino visible.
+- Usar redirects Worker para consolidar variantes internacionales sin prefijo de idioma.
+- El foco siguiente pasa a la muestra `other` y a reforzar crawl/indexación de biblioteca del vino.
+
+## Hipótesis
+
+- Las `14` URLs corregidas deberían moverse a `Página con redirección` cuando GSC actualice.
+- La biblioteca del vino sigue necesitando más señal interna y tiempo de crawl más que correcciones técnicas masivas.
+
+## Tareas pendientes listas para retomar
+
+1. Commit y push del cambio.
+2. Revisar la muestra `other` de `49` URLs visibles en `Descubierta`.
+3. Auditar una tanda representativa de biblioteca del vino:
+   - hubs;
+   - estilos;
+   - uvas;
+   - regiones;
+   - maridajes.
+4. Decidir si el siguiente bloque debe ser:
+   - más enlazado interno hacia biblioteca;
+   - solicitudes selectivas de indexación a hubs;
+   - o refuerzo editorial de entidades con más potencial.

@@ -3690,3 +3690,84 @@
 - Monitorizar en Search Console el recrawl de `https://winerim.wine/article/alex-peiro`.
 - Continuar la auditoría de artículos canónicos finos detectados en `Descubierta`.
 - Seguir reforzando enlazado interno hacia biblioteca del vino desde artículos, producto y recursos.
+
+## Actualización 2026-06-08: saneamiento de duplicados blandos de artículos internacionales
+
+## Hechos
+
+- Se continuó la sesión leyendo `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El repo estaba limpio y sincronizado con `origin/main` al empezar.
+- Search Console mantiene `Descubierta: actualmente sin indexar` con:
+  - `1.930` páginas afectadas;
+  - validación `Iniciada`;
+  - `Fecha de inicio: 6/6/26`;
+  - última actualización `29/5/26`.
+- En la muestra visible de `1.000` URLs de `Descubierta`, tras subir la tabla a `500` filas por página y extraer las URLs del DOM:
+  - `761` URLs son biblioteca del vino;
+  - `154` son legacy de artículos con sufijo `/article/{slug}_{lang}`;
+  - `36` son artículos canónicos bajo `/article/{slug}`;
+  - `49` son otras rutas.
+- La exportación CSV desde el navegador integrado no está soportada; se usó extracción de DOM visible para clasificar la muestra.
+- Se inspeccionó `https://winerim.wine/article/alex-pardo` en Search Console:
+  - `La URL está en Google`;
+  - `La página está indexada`;
+  - HTTPS correcto;
+  - `1` elemento válido de rutas de exploración.
+- Se auditó en producción como Googlebot la muestra de `36` artículos canónicos:
+  - `0` URLs con status distinto de `200`;
+  - `0` artículos por debajo de `500` palabras;
+  - `0` placeholders;
+  - mínimo `590` palabras;
+  - mediana `883` palabras;
+  - `14` URLs internacionales servían `200` en `/article/{slug}`, pero canonicalizaban a `/{lang}/article/{slug}`.
+- Se añadió en `cloudflare-worker-v3-hybrid.js` el mapa `LOCALIZED_ARTICLE_CANONICAL_REDIRECTS` para consolidar esas `14` variantes:
+  - `en`: `what-wines-offer-by-glass-venue-type`, `wine-by-the-glass-software-restaurants`;
+  - `it`: `come-sapere-se-la-carta-vini-squilibrata`, `pricing-vino-errori-comuni`, `quali-vini-offrire-al-bicchiere-secondo-tipo-locale`;
+  - `fr`: `quand-carte-vins-trop-longue`, `quels-vins-proposer-au-verre-selon-type-etablissement`;
+  - `de`: `alternative-zur-pdf-weinkarte`, `fehler-weinepreis-restaurant`, `software-offener-weinausschank-restaurants`, `zu-lange-weinkarte`;
+  - `pt`: `como-saber-carta-vinhos-desequilibrada`, `quando-carta-vinhos-demasiado-longa`, `software-vinho-copo-restaurantes`.
+- Se añadió cobertura en `src/test/wine-library-seo-surface.test.ts`.
+- Verificaciones locales completadas:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: `16` tests;
+  - `npx eslint cloudflare-worker-v3-hybrid.js src/test/wine-library-seo-surface.test.ts`;
+  - `git diff --check`;
+  - `npm run deploy:worker:dry-run`;
+  - `npm run test -- --run`: `9` archivos, `47` tests.
+- Worker desplegado:
+  - `winerim-proxy`;
+  - Version ID `881ec799-cc05-4110-8e4e-6ed75f3bcd6d`.
+- Producción validada como Googlebot:
+  - las `14` variantes `/article/{slug}` devuelven `301`;
+  - `X-Worker-Branch: localized-article-canonical-redirect`;
+  - destino `/{lang}/article/{slug}`;
+  - query string preservado;
+  - los destinos localizados responden `200`, `bot-prerender` y canonical propio.
+- Mini-regresión productiva:
+  - `/article/alex-pardo` sigue `200`, `bot-prerender`, canonical propio;
+  - `/article/alex-peiro` sigue `200`, `bot-prerender`, canonical propio;
+  - `/article/alex-pardo_en` sigue `301`, `legacy-localized-article-redirect`;
+  - `/article/wine-by-the-glass-software-restaurants` ahora `301`, `localized-article-canonical-redirect`.
+
+## Decisiones
+
+- No pedir recrawl de `alex-pardo` porque ya está en Google, indexado y no hubo cambio reciente de contenido.
+- Tratar los artículos internacionales bajo `/article/{slug}` con canonical a `/{lang}/article/{slug}` como duplicados blandos a consolidar con `301`.
+- Resolver este patrón en Cloudflare Worker porque afecta a URLs públicas ya vistas por GSC y no requiere Lovable.
+- Mantener la auditoría de artículos canónicos finos como línea activa, pero este lote no requiere enriquecimiento editorial.
+
+## Hipótesis
+
+- Estas `14` URLs deberían pasar con el tiempo a `Página con redirección` o desaparecer de `Descubierta`.
+- La muestra de GSC sigue desactualizada al `29/5/26`, así que el impacto no será visible hasta que Google procese la validación iniciada el `6/6/26` y recrawlee.
+- El cuello principal restante en `Descubierta` ya no parece ser contenido fino de artículos visibles, sino priorización/crawl de biblioteca del vino y ruido histórico legacy.
+
+## Tareas pendientes
+
+- Commit y push del cambio de Worker y test.
+- Monitorizar en Search Console:
+  - si las `14` variantes pasan a `Página con redirección`;
+  - si baja `Descubierta`;
+  - si la biblioteca del vino empieza a recibir más indexación e impresiones.
+- Continuar con la muestra `other` de `49` rutas de `Descubierta`.
+- Seguir reforzando enlazado interno hacia biblioteca del vino y páginas localizadas limpias.

@@ -153,6 +153,27 @@ function getLegacyLocalizedArticleTarget(path) {
   return `/${lang}/article/${baseSlug}`;
 }
 
+const LOCALIZED_ARTICLE_CANONICAL_REDIRECTS = {
+  '/article/alternative-zur-pdf-weinkarte': '/de/article/alternative-zur-pdf-weinkarte',
+  '/article/come-sapere-se-la-carta-vini-squilibrata': '/it/article/come-sapere-se-la-carta-vini-squilibrata',
+  '/article/como-saber-carta-vinhos-desequilibrada': '/pt/article/como-saber-carta-vinhos-desequilibrada',
+  '/article/fehler-weinepreis-restaurant': '/de/article/fehler-weinepreis-restaurant',
+  '/article/pricing-vino-errori-comuni': '/it/article/pricing-vino-errori-comuni',
+  '/article/quali-vini-offrire-al-bicchiere-secondo-tipo-locale': '/it/article/quali-vini-offrire-al-bicchiere-secondo-tipo-locale',
+  '/article/quand-carte-vins-trop-longue': '/fr/article/quand-carte-vins-trop-longue',
+  '/article/quando-carta-vinhos-demasiado-longa': '/pt/article/quando-carta-vinhos-demasiado-longa',
+  '/article/quels-vins-proposer-au-verre-selon-type-etablissement': '/fr/article/quels-vins-proposer-au-verre-selon-type-etablissement',
+  '/article/software-offener-weinausschank-restaurants': '/de/article/software-offener-weinausschank-restaurants',
+  '/article/software-vinho-copo-restaurantes': '/pt/article/software-vinho-copo-restaurantes',
+  '/article/what-wines-offer-by-glass-venue-type': '/en/article/what-wines-offer-by-glass-venue-type',
+  '/article/wine-by-the-glass-software-restaurants': '/en/article/wine-by-the-glass-software-restaurants',
+  '/article/zu-lange-weinkarte': '/de/article/zu-lange-weinkarte',
+};
+
+function getLocalizedArticleCanonicalTarget(path) {
+  return LOCALIZED_ARTICLE_CANONICAL_REDIRECTS[path] || null;
+}
+
 function normalizeLegacyLookupPath(path) {
   if (path.length <= 1 || !path.endsWith('/')) return path;
   return path.slice(0, -1);
@@ -1300,6 +1321,18 @@ export default {
           'Location': `${env.SITE_URL || 'https://winerim.wine'}${legacyLocalizedArticleTarget}${url.search}`,
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'legacy-localized-article-redirect',
+        },
+      });
+    }
+
+    const localizedArticleCanonicalTarget = getLocalizedArticleCanonicalTarget(path);
+    if (localizedArticleCanonicalTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${localizedArticleCanonicalTarget}${url.search}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'localized-article-canonical-redirect',
         },
       });
     }

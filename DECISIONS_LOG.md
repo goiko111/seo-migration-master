@@ -2480,3 +2480,53 @@
 
 - Monitorizar el recrawl de `/article/alex-peiro` en Search Console.
 - Continuar con la siguiente URL fina del informe `Descubierta`.
+
+### Saneamiento de duplicados blandos de artículos internacionales
+
+#### Hechos
+
+- Se abrió de nuevo `Descubierta: actualmente sin indexar` en Search Console.
+- La causa sigue con `1.930` URLs, validación `Iniciada`, fecha de inicio `6/6/26` y datos actualizados a `29/5/26`.
+- Se subió la tabla a `500` filas y se clasificaron `1.000` URLs visibles:
+  - `761` biblioteca del vino;
+  - `154` legacy `/article/{slug}_{lang}`;
+  - `36` artículos canónicos `/article/{slug}`;
+  - `49` otras rutas.
+- Los `36` artículos canónicos visibles no presentan problema editorial:
+  - `0` bajo `500` palabras;
+  - `0` placeholders;
+  - mínimo `590` palabras;
+  - mediana `883` palabras.
+- Se detectaron `14` artículos internacionales servidos como `200` en `/article/{slug}` con canonical a `/{lang}/article/{slug}`.
+- Se implementó en `cloudflare-worker-v3-hybrid.js` `LOCALIZED_ARTICLE_CANONICAL_REDIRECTS`.
+- Se desplegó Cloudflare Worker `winerim-proxy` Version ID `881ec799-cc05-4110-8e4e-6ed75f3bcd6d`.
+- Producción confirmó las `14` redirecciones:
+  - `301`;
+  - `X-Worker-Branch: localized-article-canonical-redirect`;
+  - destino localizado correcto;
+  - destino `200`, `bot-prerender` y canonical propio.
+- Verificaciones completadas:
+  - sintaxis Worker;
+  - ESLint dirigido;
+  - test enfocado `wine-library-seo-surface`;
+  - test completo `47` tests;
+  - `git diff --check`;
+  - dry-run Worker;
+  - mini-regresión productiva.
+
+#### Decisiones
+
+- Consolidar con `301` las URLs internacionales sin prefijo de idioma que canonicalizan a rutas localizadas.
+- No hacer cambios editoriales sobre este lote porque el contenido visible es suficiente.
+- No reenviar indexación manual para URLs que deben convertirse en redirecciones; dejar que GSC las reclasifique.
+
+#### Hipótesis
+
+- El ruido de artículos internacionales en `Descubierta` bajará cuando Google recrawlee y vea los `301`.
+- La mayor bolsa restante de `Descubierta` es biblioteca del vino, donde el siguiente impacto vendrá de enlazado interno, señales de demanda y tiempo de crawl.
+
+#### Tareas pendientes
+
+- Commit y push.
+- Revisar las `49` rutas `other` de la muestra visible.
+- Monitorizar evolución de `Descubierta` y `Página con redirección`.
