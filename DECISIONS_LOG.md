@@ -2461,12 +2461,15 @@
   - `926` palabras visibles;
   - placeholder ausente;
   - enlaces estratégicos a biblioteca del vino, hubs, software y análisis.
+- Search Console confirmó que `https://winerim.wine/article/alex-peiro` ya está en Google y la página está indexada.
+- Se solicitó indexación de la URL para forzar recrawl de la versión corregida.
+- Search Console aceptó la solicitud y mostró `Se ha solicitado la indexación`.
 
 #### Decisiones
 
 - No operar sobre proyectos Lovable no documentados aunque el usuario los abra, si la revisión muestra que pertenecen a otra app.
 - Usar siempre `Web Winerim` como destino de cambios de la web pública salvo decisión explícita documentada.
-- Dar por resuelta la recuperación editorial de `/article/alex-peiro` en producción y pasar la acción siguiente a Search Console.
+- Dar por resuelta la recuperación editorial de `/article/alex-peiro` en producción y la solicitud selectiva de recrawl en Search Console.
 
 #### Hipótesis
 
@@ -2475,5 +2478,5 @@
 
 #### Tareas pendientes
 
-- Solicitar indexación selectiva de `/article/alex-peiro` en Search Console.
+- Monitorizar el recrawl de `/article/alex-peiro` en Search Console.
 - Continuar con la siguiente URL fina del informe `Descubierta`.

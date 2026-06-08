@@ -2675,11 +2675,14 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
   - `926` palabras visibles;
   - sin placeholder;
   - enlaces a biblioteca, uvas, regiones, estilos, maridajes, software de carta y análisis de carta.
+- Search Console inspeccionó `https://winerim.wine/article/alex-peiro` y mostró que la URL ya está en Google y la página está indexada.
+- Se solicitó indexación para recrawl de la versión corregida.
+- Search Console aceptó la solicitud y mostró `Se ha solicitado la indexación`.
 - No hay cambios de código nuevos en esta sesión; el cambio real fue aplicar la migración ya versionada en Supabase.
 
 ## Decisiones
 
-- `/article/alex-peiro` queda desbloqueado para indexación selectiva.
+- `/article/alex-peiro` queda corregido en producción y con indexación solicitada.
 - No tocar `Crim` para tareas de Winerim web pública.
 - Continuar con Search Console y auditoría de artículos finos antes de abrir otra ampliación masiva de biblioteca.
 
@@ -2690,11 +2693,9 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 
 ## Tareas pendientes listas para retomar
 
-1. Abrir Search Console en la propiedad `https://winerim.wine/`.
-2. Inspeccionar `https://winerim.wine/article/alex-peiro`.
-3. Solicitar indexación si Search Console permite el envío.
-4. Revisar la muestra de `Descubierta: actualmente sin indexar` y escoger la siguiente URL canónica fina.
-5. Auditar esa URL como Googlebot con el mismo criterio:
+1. Monitorizar en Search Console el recrawl de `https://winerim.wine/article/alex-peiro`.
+2. Revisar la muestra de `Descubierta: actualmente sin indexar` y escoger la siguiente URL canónica fina.
+3. Auditar esa URL como Googlebot con el mismo criterio:
    - `200`;
    - `bot-prerender`;
    - canonical propio;

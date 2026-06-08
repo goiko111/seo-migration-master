@@ -3667,13 +3667,17 @@
   - `926` palabras visibles en el HTML analizado;
   - placeholder ausente;
   - enlaces presentes a `/biblioteca-vino`, `/biblioteca-vino/uvas`, `/biblioteca-vino/regiones`, `/biblioteca-vino/estilos`, `/biblioteca-vino/maridajes`, `/software-carta-de-vinos` y `/analisis-carta`.
+- Se inspeccionó `https://winerim.wine/article/alex-peiro` en Search Console.
+- Search Console informó: `La URL está en Google`, `La página está indexada`, HTTPS correcto y `1` elemento válido de rutas de exploración.
+- Se solicitó indexación para que Google recrawlee la versión corregida.
+- Search Console confirmó: `Se ha solicitado la indexación` y añadió la URL a una cola de rastreo prioritaria.
 
 ## Decisiones
 
 - No usar el proyecto Lovable `Crim` para cambios de la web pública Winerim.
 - Mantener `Web Winerim` (`2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`) como proyecto Lovable operativo para frontend y Supabase de la web pública.
 - Considerar cerrado el bloqueo editorial específico de `/article/alex-peiro` porque producción ya no muestra placeholder y supera el umbral de contenido útil.
-- Mantener la indexación de `/article/alex-peiro` como siguiente acción en Search Console, no como cambio de código.
+- Tratar `/article/alex-peiro` como URL corregida e indexación solicitada; el siguiente trabajo pasa a monitorización y auditoría de otras URLs finas.
 
 ## Hipótesis
 
@@ -3683,6 +3687,6 @@
 
 ## Tareas pendientes
 
-- Solicitar indexación selectiva de `https://winerim.wine/article/alex-peiro` en Search Console si la herramienta lo permite.
+- Monitorizar en Search Console el recrawl de `https://winerim.wine/article/alex-peiro`.
 - Continuar la auditoría de artículos canónicos finos detectados en `Descubierta`.
 - Seguir reforzando enlazado interno hacia biblioteca del vino desde artículos, producto y recursos.
