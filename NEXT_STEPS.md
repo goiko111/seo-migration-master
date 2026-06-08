@@ -1,5 +1,69 @@
 # Next Steps
 
+## Actualizacion 2026-06-08: estado retomable
+
+## Hechos
+
+- `main` incluye y tiene pusheados:
+  - `3932aa0 fix: deepen static prerender pages`.
+  - `5aa5b1c fix: deepen wine library prerender pages`.
+- Ambos commits fueron desplegados desde Lovable en el proyecto `Web Winerim`.
+- Las 49 rutas no-biblioteca visibles en Search Console que estaban en `Descubierta` quedan validadas en produccion:
+  - 49/49 correctas.
+  - minimo 302 palabras.
+  - mediana 374 palabras.
+  - 0 fallos tecnicos.
+- Las 761 URLs visibles de biblioteca del vino en Search Console quedan validadas en produccion:
+  - 761/761 correctas.
+  - minimo 317 palabras.
+  - p10 362, mediana 422, p90 474, maximo 543.
+  - 0 fallos tecnicos.
+- Se validaron `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, idioma esperado, schema y hreflang.
+- No se toco Cloudflare Worker ni base de datos.
+
+## Decisiones
+
+- Dar por cerrado el bloque de contenido fino en prerender para las rutas visibles auditadas de Search Console.
+- No pedir validaciones masivas manuales en Search Console; priorizar indexacion selectiva y monitorizacion.
+- La siguiente ampliacion de biblioteca debe enfocarse en contenido visible y editorial por entidad, no solo en prerender.
+- Mantener Lovable como via de despliegue de `prerender`.
+
+## Hipotesis
+
+- Search Console deberia empezar a reducir o reclasificar parte de `Descubierta: actualmente sin indexar` cuando Google vuelva a rastrear estas URLs.
+- El efecto no sera inmediato porque el ultimo dato visible de Search Console seguia fechado el 2026-05-29.
+- La biblioteca del vino ya tiene una base tecnica y de prerender mucho mas solida; ahora el diferencial esta en autoridad, contenido humano, enlaces y clusters por mercado.
+
+## Tareas pendientes inmediatas
+
+1. Monitorizar Search Console:
+   - revisar cuando cambie la fecha de datos de `Descubierta: actualmente sin indexar`;
+   - comprobar si baja el volumen de URLs descubiertas;
+   - revisar ejemplos concretos de biblioteca y rutas estaticas ya enriquecidas.
+2. Pedir indexacion selectiva, no masiva, cuando Search Console lo permita:
+   - `/biblioteca-vino`;
+   - `/biblioteca-vino/uvas`;
+   - `/biblioteca-vino/regiones`;
+   - `/biblioteca-vino/estilos`;
+   - `/biblioteca-vino/maridajes`;
+   - `/de/weinbibliothek/service-guide`;
+   - `/pt/biblioteca-vinho`.
+3. Continuar biblioteca del vino al maximo nivel:
+   - convertir las entidades con mas demanda en paginas humanas mas profundas;
+   - priorizar uvas, regiones, estilos y maridajes con valor comercial;
+   - reforzar enlaces internos entre entidad, guia, herramienta y demo;
+   - revisar schema por tipo de entidad.
+4. Revisar articulos:
+   - confirmar recrawl de las 154 URLs legacy con sufijo de idioma;
+   - publicar nuevos clusters por idioma/pais solo si enlazan a entidades maduras;
+   - mantener rutas localizadas limpias para articulos internacionales.
+5. Mantener tareas tecnicas separadas:
+   - Core Web Vitals;
+   - Search Console 404 legacy restantes;
+   - `/sitemap_index.xml`;
+   - avisos de Lovable;
+   - deuda global de lint.
+
 ## Hechos
 
 - La base técnica para `de` y `pt` de la biblioteca del vino está implementada, fusionada, desplegada y validada en producción.

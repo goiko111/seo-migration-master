@@ -1,5 +1,82 @@
 # Current State
 
+## Actualizacion 2026-06-08: Search Console, prerender y biblioteca del vino
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Search Console mostraba la familia `Descubierta: actualmente sin indexar` con 1.930 URLs, validacion iniciada el 2026-06-06 y datos todavia fechados el 2026-05-29.
+- De 1.000 URLs visibles extraidas de Search Console:
+  - 761 correspondian a biblioteca del vino.
+  - 154 eran articulos legacy con sufijos `/article/{slug}_{lang}`.
+  - 36 eran articulos canonicos `/article/{slug}`.
+  - 49 eran otras rutas estaticas/localizadas/herramientas.
+- Las 49 rutas no-biblioteca estaban tecnicamente correctas en produccion antes del cambio (`200`, `bot-prerender`, canonical propio, sin `noindex`), pero todas eran finas: menos de 300 palabras visibles.
+- Se implemento `withStaticDepthSections` en `supabase/functions/prerender/index.ts`.
+- El commit `3932aa0 fix: deepen static prerender pages` se pusheo a `main` y se desplego desde Lovable en el proyecto correcto `Web Winerim`.
+- Produccion validada tras `3932aa0`:
+  - 49/49 rutas no-biblioteca pasan.
+  - 0 fallos.
+  - minimo 302 palabras.
+  - mediana 374 palabras.
+  - `200`, `X-Worker-Branch: bot-prerender`, `x-prerendered: true`, canonical propio e idioma correcto.
+- Se audito una muestra profunda de 68 URLs de biblioteca del vino en produccion antes del segundo cambio.
+- La biblioteca estaba tecnicamente correcta (`200`, prerender, canonical, `lang`, schema y hreflang), pero corta editorialmente:
+  - muestra de 68 URLs: minimo 147 palabras, mediana 203, maximo 287.
+  - todas las 68 URLs de la muestra estaban por debajo de 300 palabras.
+- Se implemento `withWineLibraryDepthSections` en `supabase/functions/prerender/index.ts`.
+- El bloque de biblioteca solo se activa en rutas de biblioteca y solo si el cuerpo actual queda por debajo de 340 palabras.
+- El bloque nuevo anade secciones localizadas para `es`, `en`, `it`, `fr`, `de` y `pt`: uso en carta real, claves de servicio/venta, datos para priorizar, comparaciones utiles y siguiente accion.
+- El commit `5aa5b1c fix: deepen wine library prerender pages` se pusheo a `main` y se desplego desde Lovable.
+- Validacion local tras `5aa5b1c`:
+  - 761/761 URLs visibles de biblioteca del vino pasan.
+  - 0 fallos.
+  - minimo 317 palabras.
+  - p10 362, mediana 422, p90 474, maximo 543.
+  - canonical propio, `lang` esperado, schema presente, hreflang completo y sin `noindex`.
+- Produccion validada tras despliegue de `5aa5b1c`:
+  - 761/761 URLs visibles de biblioteca del vino pasan.
+  - 0 fallos.
+  - minimo 317 palabras.
+  - p10 362, mediana 422, p90 474, maximo 543.
+  - `200`, `X-Worker-Branch: bot-prerender`, `x-prerendered: true`, canonical propio, `lang` esperado, schema presente, hreflang completo y sin `noindex`.
+- Verificaciones ejecutadas:
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts`.
+  - `npm run test -- --run`: 9 archivos, 47 tests.
+  - `git diff --check`.
+  - Validaciones locales y de produccion como Googlebot.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+- Se uso Lovable como via de despliegue de la Edge Function `prerender`.
+
+## Decisiones
+
+- Tratar las paginas tecnicamente correctas pero finas como problema de calidad para indexacion, aunque no sean errores HTTP/canonical.
+- Mejorar primero el HTML de prerender para bots en rutas ya indexables, sin cambiar UI humana ni crear nuevas rutas.
+- Mantener Cloudflare Worker fuera de estos dos bloques porque no habia cambio de proxy, redirects ni verificacion.
+- Para biblioteca del vino, no sustituir los perfiles editoriales prioritarios ya existentes: el nuevo bloque es una capa complementaria para entidades y hubs que quedaban demasiado compactos.
+- Usar un umbral interno de 340 palabras para activar la profundidad de biblioteca, dejando intactas las paginas que ya superen ese cuerpo.
+- Validar siempre en produccion como Googlebot antes de tratar un cambio de prerender como cerrado.
+
+## Hipotesis
+
+- El aumento de cuerpo textual en prerender deberia ayudar a que Google reevalúe parte de las URLs en `Descubierta: actualmente sin indexar`, pero Search Console puede tardar dias o semanas en reflejarlo.
+- El impacto sera mayor en rutas que ya tenian buenas senales tecnicas y estaban bloqueadas por baja profundidad o baja prioridad de rastreo.
+- Para competir al maximo nivel, la siguiente capa debe llevar mas contenido editorial visible tambien a usuarios humanos, no solo al HTML de bots.
+- La biblioteca ganara autoridad adicional si se refuerza con enlaces contextuales desde blog, guias, herramientas y casos por pais.
+
+## Tareas pendientes
+
+- Monitorizar en Search Console la validacion iniciada el 2026-06-06 para `Descubierta: actualmente sin indexar`.
+- Reintentar solicitud de indexacion selectiva para un grupo corto de hubs y entidades maduras cuando Search Console lo permita.
+- Auditar de nuevo cuando Search Console actualice datos posteriores al 2026-06-08.
+- Revisar el bloque de 154 articulos legacy con sufijos y confirmar que Google reciba las redirecciones/canonicals esperadas tras recrawl.
+- Seguir ampliando biblioteca del vino al maximo nivel con contenido visible por entidad, no solo prerender:
+  - mas perfiles propios de uvas, regiones, estilos y maridajes.
+  - mejores enlaces cruzados uva -> region -> estilo -> maridaje -> guia.
+  - schema mas especifico por tipo de entidad cuando encaje.
+  - clusters de blog por pais e idioma conectados a entidades maduras.
+
 ## Hechos
 
 - Fecha de actualización: 2026-06-08.

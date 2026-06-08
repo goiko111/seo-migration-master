@@ -1,5 +1,49 @@
 # Decisions Log
 
+## 2026-06-08
+
+### Hechos
+
+- Se continuo la auditoria de Search Console y de la biblioteca del vino sobre el proyecto correcto de Lovable: `Web Winerim`.
+- Se confirmo que el proyecto Lovable `Crim` no es la web publica Winerim y no debe usarse para este despliegue.
+- Se revisaron 1.000 URLs visibles de Search Console en `Descubierta: actualmente sin indexar`.
+- Clasificacion de esas URLs visibles:
+  - 761 biblioteca del vino.
+  - 154 articulos legacy con sufijo de idioma.
+  - 36 articulos canonicos.
+  - 49 rutas no-biblioteca.
+- Las 49 rutas no-biblioteca estaban finas en produccion aunque tecnicamente correctas.
+- Se implemento y desplego `3932aa0 fix: deepen static prerender pages`.
+- Produccion tras `3932aa0`: 49/49 rutas no-biblioteca validadas con minimo 302 palabras, mediana 374 y 0 fallos.
+- La muestra profunda de 68 URLs de biblioteca del vino en produccion estaba tecnicamente limpia pero por debajo de 300 palabras en todos los casos.
+- Se implemento y desplego `5aa5b1c fix: deepen wine library prerender pages`.
+- Produccion tras `5aa5b1c`: 761/761 URLs visibles de biblioteca validadas con minimo 317 palabras, mediana 422 y 0 fallos.
+- Las validaciones confirmaron `200`, `bot-prerender`, `x-prerendered: true`, canonical propio, `lang` esperado, schema y hreflang.
+- Verificaciones de codigo completadas: Deno check, Vitest completo y `git diff --check`.
+- No se desplego Cloudflare Worker ni se modifico base de datos.
+
+### Decisiones
+
+- Resolver el problema de paginas finas en prerender antes de pedir mas indexacion manual.
+- Usar una capa de profundidad operacional localizada para paginas estaticas finas, manteniendo la UI humana sin cambios.
+- Para biblioteca del vino, anadir una capa comun de uso en carta, servicio/venta, datos, comparaciones y siguiente accion solo cuando el contenido de bot queda por debajo del umbral.
+- No tocar Worker si el cambio pertenece exclusivamente a Edge Function `prerender`.
+- Desplegar Edge Function `prerender` desde Lovable, porque en este proyecto Supabase vive dentro de Lovable.
+- Considerar una ruta como cerrada solo si la validacion independiente de produccion como Googlebot confirma el resultado, no solo si Lovable responde que desplego.
+
+### Hipotesis
+
+- Las URLs en `Descubierta: actualmente sin indexar` tenian una mezcla de baja prioridad de rastreo y contenido demasiado fino, no un fallo tecnico unico.
+- La mejora de cuerpo en HTML prerenderizado deberia aumentar la probabilidad de rastreo e indexacion, pero Search Console tardara en mostrarlo.
+- La siguiente ventaja competitiva de biblioteca vendra de contenido visible y editorial por entidad, no solo de texto adicional en prerender.
+
+### Tareas pendientes
+
+- Monitorizar Search Console cuando actualice datos posteriores al despliegue.
+- Solicitar indexacion selectiva de hubs y entidades maduras cuando la herramienta no devuelva error.
+- Revisar las 154 URLs legacy de articulos con sufijos tras recrawl.
+- Planificar la siguiente tanda editorial visible de biblioteca del vino por entidad e idioma.
+
 ## 2026-05-23
 
 ### Hechos
