@@ -1,5 +1,56 @@
 # Current State
 
+## Actualizacion 2026-06-09: handoff para Spiritsrim
+
+## Hechos
+
+- Se trabajo sobre `main` en `/Users/GOIKO/seo-migration-master`.
+- Se leyeron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El usuario explico que existe o se quiere crear una hermana gemela de Winerim para destilados llamada `Spiritsrim`.
+- Se reviso la arquitectura local de Winerim: Vite + React + TypeScript, rutas multilingues, biblioteca del vino, `SEOHead`, schema, blog, recursos, Supabase Edge Functions, Cloudflare Worker y scripts de despliegue.
+- Se creo `SPIRITSRIM_CODEX_HANDOFF.md` como briefing autocontenido para abrir una tarea nueva de Codex y construir Spiritsrim a partir del patron Winerim.
+- El handoff incluye:
+  - objetivo de Spiritsrim;
+  - documentos fuente de verdad a leer;
+  - contexto tecnico de Winerim;
+  - archivos clave;
+  - que clonar y que no clonar;
+  - posicionamiento recomendado;
+  - mapa conceptual Winerim -> Spiritsrim;
+  - propuesta de biblioteca de destilados;
+  - schema recomendado;
+  - herramientas sugeridas;
+  - plan de implementacion;
+  - guardrails;
+  - validaciones minimas;
+  - accesos y datos necesarios;
+  - prompt listo para pegar en otra tarea de Codex.
+- No se modifico codigo de aplicacion.
+- No se modifico Cloudflare Worker.
+- No se modifico base de datos.
+
+## Decisiones
+
+- Preparar Spiritsrim como proyecto separado, no como sustitucion de Winerim.
+- Reutilizar de Winerim la arquitectura, patrones SEO, validaciones y estructura de biblioteca, pero no el contenido literal ni los identificadores operativos.
+- Orientar Spiritsrim a destilados, cocteleria, backbar y servicio beverage para restaurantes, hoteles, cocktail bars, grupos y distribuidores.
+- Recomendar una biblioteca propia de destilados con categorias, origenes, materias primas, cocteles/serves, guia de servicio y glosario.
+
+## Hipotesis
+
+- La arquitectura Winerim reduce mucho el tiempo de salida de Spiritsrim si se separan bien marca, dominio, datos, sitemap, prerender y contenido.
+- Spiritsrim puede heredar la ventaja SEO/LLM de Winerim si se replica la paridad entre experiencia humana, schema, sitemap, prerender, canonical y hreflang.
+- El mayor riesgo de la clonacion es dejar residuos de Winerim: dominio, copy, claims, logos, project-ref, worker name o rutas de vino.
+
+## Tareas pendientes
+
+- Abrir una tarea nueva de Codex usando `SPIRITSRIM_CODEX_HANDOFF.md` como briefing inicial.
+- Decidir dominio final de Spiritsrim.
+- Crear o confirmar proyecto Lovable de Spiritsrim.
+- Crear o confirmar proyecto Supabase y Worker separados.
+- Aportar logo, favicon, OG image, paleta y assets de Spiritsrim.
+- Confirmar idiomas iniciales, mercados prioritarios, CTAs, destino de leads y logos/clientes autorizados.
+
 ## Actualizacion 2026-06-08: Search Console tras quinta tanda editorial
 
 ## Hechos

@@ -1,5 +1,36 @@
 # Decisions Log
 
+## 2026-06-09
+
+### Handoff para Spiritsrim
+
+#### Hechos
+
+- El usuario planteo crear `Spiritsrim`, hermana gemela de Winerim para destilados.
+- Se reviso el contexto documental del proyecto y la estructura local de Winerim.
+- Se creo `SPIRITSRIM_CODEX_HANDOFF.md` como briefing operativo para otra tarea de Codex.
+- El handoff documenta arquitectura, archivos clave, mapa Winerim -> Spiritsrim, biblioteca de destilados propuesta, schema, herramientas, plan de implementacion, guardrails, validaciones, accesos necesarios y prompt inicial.
+- No se modifico codigo, Worker ni base de datos.
+
+#### Decisiones
+
+- Tratar Spiritsrim como proyecto separado de Winerim.
+- Reutilizar patrones tecnicos y SEO de Winerim, pero sustituir completamente dominio semantico, copy, assets, datos, IDs operativos y despliegue.
+- Recomendar que Spiritsrim arranque con una biblioteca de destilados multilingue, no solo con una landing comercial.
+- Mantener como guardrail central que sitemap, prerender, canonical, hreflang y schema deben cambiar a Spiritsrim antes de cualquier lanzamiento.
+
+#### Hipotesis
+
+- La base Winerim puede acelerar mucho Spiritsrim si se clona con disciplina y se eliminan residuos de marca/dominio/contenido.
+- El enfoque de biblioteca semantica puede ser aun mas valioso en spirits por la amplitud de categorias, origenes, materias primas, cocteles y servicio.
+- La mayor fuente de errores sera operacional: project-ref de Supabase, Worker, dominio, Search Console y formularios apuntando todavia a Winerim.
+
+#### Tareas pendientes
+
+- Usar `SPIRITSRIM_CODEX_HANDOFF.md` como briefing en la nueva tarea.
+- Confirmar dominio, Lovable, Supabase, Cloudflare, marca, assets, idiomas y destino de leads.
+- Crear repo/proyecto separado antes de ejecutar cambios reales de Spiritsrim.
+
 ## 2026-06-08
 
 ### Search Console tras quinta tanda editorial

@@ -48,6 +48,7 @@
 - El 2026-06-08 se reenvio `/sitemap.xml` en Search Console para la propiedad URL-prefix `https://winerim.wine/`; Google lo marco como `Correcto`, ultimo rastreo 2026-06-08 y 2.228 URLs descubiertas.
 - El 2026-06-08 Search Console acepto solicitudes manuales de indexacion para tres fichas nuevas de alta intencion ya presentes en sitemap: Ceviche PT, Santorini PT y Franciacorta DE.
 - El 2026-06-08 Search Console mostro `/biblioteca-vino` y `/biblioteca-vino/maridajes` como URLs ya indexadas; el bloqueo principal observado sigue concentrado en fichas nuevas descubiertas pero aun no indexadas.
+- El 2026-06-09 se creo `SPIRITSRIM_CODEX_HANDOFF.md` como briefing para construir Spiritsrim, hermana gemela de Winerim orientada a destilados, cocteleria y backbar.
 - Desde el 2026-05-23, estos documentos son la fuente de verdad operativa del proyecto:
   - `PROJECT_CONTEXT.md`
   - `CURRENT_STATE.md`
@@ -66,6 +67,7 @@
 - Priorizar traducción/adaptación por país de artículos estratégicos cuando el routing, sitemap, prerender y la UI humana mantengan el idioma sin saltar a español.
 - No traducir slugs de entidad como parche rapido mientras ya esten publicados como canonicals en sitemap; tratarlos como una migracion SEO con redirects 301, hreflang, canonicals y validacion de Search Console.
 - Tratar el schema enriquecido de regiones, estilos y maridajes como parte de la capa semantica base de biblioteca, no como mejora opcional solo para uvas.
+- Tratar Spiritsrim como proyecto separado que puede reutilizar arquitectura Winerim, pero no dominio, IDs, contenido literal, claims ni sitemap/prerender de Winerim.
 
 ## Hipótesis
 
@@ -98,3 +100,4 @@
 - Monitorizar en Search Console el cluster de artículos de biblioteca del vino publicado el 2026-06-01 y solicitar indexación de una tanda corta si la herramienta lo permite.
 - Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.
 - Monitorizar en Search Console la ampliacion semantica de regiones, estilos y maridajes tras el deploy validado de `69d2fbf`.
+- Si se abre la tarea Spiritsrim, usar `SPIRITSRIM_CODEX_HANDOFF.md` como punto de partida junto con los cuatro documentos fuente de verdad.

@@ -1,5 +1,54 @@
 # Next Steps
 
+## Actualizacion 2026-06-09: retomar Spiritsrim en tarea separada
+
+## Hechos
+
+- Existe `SPIRITSRIM_CODEX_HANDOFF.md` en la raiz del repo.
+- El handoff esta pensado para crear una tarea nueva de Codex y construir Spiritsrim usando Winerim como base tecnica y SEO.
+- Winerim no se ha modificado funcionalmente en esta sesion.
+
+## Decisiones
+
+- Spiritsrim debe tratarse como proyecto separado.
+- La tarea nueva debe leer primero:
+  - `PROJECT_CONTEXT.md`;
+  - `CURRENT_STATE.md`;
+  - `DECISIONS_LOG.md`;
+  - `NEXT_STEPS.md`;
+  - `SPIRITSRIM_CODEX_HANDOFF.md`.
+- No se debe tocar produccion Winerim para crear Spiritsrim.
+
+## Hipotesis
+
+- El primer bloque de Spiritsrim deberia ser un clon controlado de arquitectura, no una reescritura desde cero.
+- La salida mas robusta sera crear primero marca, rutas, biblioteca de destilados, sitemap/prerender y validaciones antes de ampliar blog o herramientas.
+
+## Tareas pendientes inmediatas
+
+1. Abrir nueva tarea Codex para Spiritsrim.
+2. Confirmar datos operativos:
+   - dominio final;
+   - proyecto Lovable;
+   - repo o fork;
+   - proyecto Supabase;
+   - Worker/Cloudflare;
+   - Search Console;
+   - destino de formularios/leads.
+3. Confirmar marca:
+   - logo;
+   - favicon;
+   - OG image;
+   - paleta;
+   - tono visual;
+   - claims permitidos.
+4. Confirmar alcance inicial:
+   - idiomas;
+   - mercados prioritarios;
+   - verticales;
+   - herramientas que deben salir en v1;
+   - si hay logos/clientes autorizados.
+
 ## Actualizacion 2026-06-08: retomar tras reenvio de sitemap e indexacion selectiva
 
 ## Hechos
