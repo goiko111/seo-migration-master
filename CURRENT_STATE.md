@@ -1,5 +1,50 @@
 # Current State
 
+## Actualizacion 2026-06-11: Lovable despliega Edge Functions y Worker queda limpio
+
+## Hechos
+
+- Se pidio a Lovable (`Web Winerim`) desplegar las Supabase Edge Functions `sitemap` y `prerender` desde el ultimo `main`.
+- Lovable confirmo que ambas Edge Functions quedaron desplegadas.
+- Validacion directa contra Supabase `sitemap`:
+  - `status 200`;
+  - contiene las seis rutas localizadas del Barometro;
+  - mantiene alternates `xhtml:link`.
+- Validacion directa contra Supabase `prerender` para `/barometro-cartas-vino-2026`:
+  - `status 200`;
+  - `resolvedPath` correcto;
+  - contiene canonical propio;
+  - contiene `hreflang`;
+  - contiene schema `Report`;
+  - contiene schema `Dataset`.
+- Se retiro del Cloudflare Worker el prerender estatico temporal del Barometro para evitar duplicar la fuente SEO.
+- Se mantuvieron en el Worker el reconocimiento de rutas del Barometro y el fallback de sitemap, que ahora no inyecta nada si Supabase ya trae las seis URLs.
+- `node --check cloudflare-worker-v3-hybrid.js`, `npm run deploy:worker:dry-run` y `git diff --check` pasaron correctamente.
+- Se desplego Cloudflare Worker `winerim-proxy` version `356db317-9985-41de-a1a1-ac6ed6baba6f`.
+- Produccion valida:
+  - usuario humano en `https://winerim.wine/barometro-cartas-vino-2026`: `200`;
+  - Googlebot en la misma URL: `200`, `x-prerendered: true`, `x-worker-branch: bot-prerender`;
+  - el HTML prerenderizado conserva canonical, `hreflang="x-default"`, schema `Report` y schema `Dataset`;
+  - `/sitemap.xml` contiene las seis URLs localizadas del Barometro.
+
+## Decisiones
+
+- Dar por cerrada la dependencia temporal del prerender estatico del Worker para el Barometro.
+- Tratar Supabase `sitemap` y `prerender` como fuente productiva de verdad para el Barometro.
+- Mantener en Worker solo la proteccion de rutas y fallback de sitemap por seguridad operativa.
+
+## Hipotesis
+
+- Servir el Barometro a bots desde Supabase `prerender` reduce divergencias futuras frente al frontend y al sitemap.
+- El estado actual deberia ser mas mantenible para nuevas paginas SEO/LLM que el puente estatico temporal en Worker.
+
+## Tareas pendientes
+
+- Monitorizar Search Console en 24-72 horas para ver si la URL principal del Barometro pasa a rastreada o indexada.
+- Revisar si las cinco variantes internacionales aparecen descubiertas desde sitemap.
+- Considerar retirar tambien el fallback de sitemap del Worker si durante varios dias Supabase se mantiene estable.
+- Obtener `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI para futuros deploys directos sin depender de Lovable.
+
 ## Actualizacion 2026-06-11: Search Console acelera Barometro Winerim
 
 ## Hechos

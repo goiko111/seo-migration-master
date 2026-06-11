@@ -330,104 +330,17 @@ const BAROMETER_ALTERNATES = {
 
 const WORKER_BAROMETER_SITEMAP_LASTMOD = '2026-06-10';
 
-const WORKER_BAROMETER_PAGES = {
-  '/barometro-cartas-vino-2026': {
-    lang: 'es',
-    title: 'Barómetro Winerim 2026 de cartas de vino',
-    description: 'Estudio Winerim sobre cartas de vino: referencias, precios, vino por copa, rotación, margen y oportunidades para restaurantes y hoteles.',
-    h1: 'Barómetro Winerim de cartas de vino',
-    subtitle: 'Un marco público para entender cuánto potencial económico queda oculto dentro de una carta de vinos.',
-    sections: [
-      ['Metodología', 'El Barómetro Winerim separa datos observables, inferencias e hipótesis. Solo debe publicar cifras reales cuando existan datos agregados, anonimizados y una muestra suficiente.'],
-      ['Qué mide', 'Referencias por carta, rangos de precio, vino por copa, regiones, uvas, estilos, maridajes, rotación, margen y señales de stock inmovilizado.'],
-      ['Patrones detectables', 'Margen invisible, cartas demasiado grandes, vino por copa infrautilizado, solapamiento de referencias y desconexión entre carta, ventas y stock.'],
-      ['Uso para restaurantes y hoteles', 'El barómetro ayuda a comparar una carta con criterios de mercado y a priorizar decisiones de compra, precio, formación y rotación.'],
-    ],
-    links: [['Analizar mi carta', '/analisis-carta'], ['Benchmark de cartas', '/benchmark-carta-vinos'], ['Benchmarks y playbooks', '/benchmarks-playbooks'], ['Demo', '/demo']],
-  },
-  '/en/wine-list-barometer-2026': {
-    lang: 'en',
-    title: 'Winerim 2026 Wine List Barometer',
-    description: 'Winerim report on wine lists: references, pricing, by-the-glass strategy, rotation, margin and opportunities for restaurants and hotels.',
-    h1: 'Winerim Wine List Barometer',
-    subtitle: 'A public framework for understanding the hidden economic potential inside a restaurant wine list.',
-    sections: [
-      ['Methodology', 'The Winerim Barometer separates observed data, inferences and hypotheses. Real figures should only be published when aggregated, anonymized data and sufficient sample size exist.'],
-      ['What it measures', 'References per list, price ranges, by-the-glass offer, regions, grapes, styles, pairings, rotation, margin and dead-stock signals.'],
-      ['Patterns to detect', 'Invisible margin, oversized lists, underused by-the-glass programs, reference overlap and disconnection between list, sales and stock.'],
-      ['Use for restaurants and hotels', 'The barometer helps benchmark a wine list and prioritize buying, pricing, training and rotation decisions.'],
-    ],
-    links: [['Analyze my wine list', '/en/wine-list-analysis'], ['Wine list benchmark', '/en/wine-list-benchmark'], ['Benchmarks and playbooks', '/en/benchmarks-playbooks'], ['Demo', '/en/demo']],
-  },
-  '/it/barometro-carte-vini-2026': {
-    lang: 'it',
-    title: 'Barometro Winerim 2026 delle carte vini',
-    description: 'Studio Winerim sulle carte vini: referenze, prezzi, vino al calice, rotazione, margine e opportunità per ristoranti e hotel.',
-    h1: 'Barometro Winerim delle carte vini',
-    subtitle: 'Un quadro pubblico per capire il potenziale economico nascosto nella carta vini.',
-    sections: [
-      ['Metodologia', 'Il Barometro Winerim separa dati osservati, inferenze e ipotesi. Le cifre reali vanno pubblicate solo con dati aggregati, anonimizzati e campione sufficiente.'],
-      ['Cosa misura', 'Referenze per carta, fasce prezzo, vino al calice, regioni, vitigni, stili, abbinamenti, rotazione, margine e segnali di stock fermo.'],
-      ['Pattern rilevabili', 'Margine invisibile, carte troppo ampie, vino al calice sottoutilizzato, sovrapposizione di referenze e disconnessione tra carta, vendite e stock.'],
-      ['Uso per ristoranti e hotel', 'Il barometro aiuta a confrontare una carta e a priorizzare acquisti, pricing, formazione e rotazione.'],
-    ],
-    links: [['Analizzare la carta', '/it/analisi-carta'], ['Benchmark carta vini', '/it/benchmark-carta-vini'], ['Benchmark e playbook', '/it/benchmarks-playbooks'], ['Demo', '/it/demo']],
-  },
-  '/fr/barometre-cartes-vins-2026': {
-    lang: 'fr',
-    title: 'Baromètre Winerim 2026 des cartes des vins',
-    description: 'Étude Winerim sur les cartes des vins : références, prix, vin au verre, rotation, marge et opportunités pour restaurants et hôtels.',
-    h1: 'Baromètre Winerim des cartes des vins',
-    subtitle: 'Un cadre public pour comprendre le potentiel économique caché dans une carte des vins.',
-    sections: [
-      ['Méthodologie', 'Le Baromètre Winerim distingue données observées, inférences et hypothèses. Les chiffres réels ne doivent être publiés qu avec des données agrégées, anonymisées et un échantillon suffisant.'],
-      ['Ce qui est mesuré', 'Références par carte, fourchettes de prix, vin au verre, régions, cépages, styles, accords, rotation, marge et signaux de stock dormant.'],
-      ['Signaux détectables', 'Marge invisible, cartes trop larges, vin au verre sous-exploité, chevauchement de références et déconnexion entre carte, ventes et stock.'],
-      ['Usage pour restaurants et hôtels', 'Le baromètre aide à comparer une carte et à prioriser achats, prix, formation et rotation.'],
-    ],
-    links: [['Analyser ma carte', '/fr/analyse-carte'], ['Benchmark carte des vins', '/fr/benchmark-carte-vins'], ['Benchmarks et playbooks', '/fr/benchmarks-playbooks'], ['Démo', '/fr/demo']],
-  },
-  '/de/weinkarten-barometer-2026': {
-    lang: 'de',
-    title: 'Winerim Weinkarten-Barometer 2026',
-    description: 'Winerim Studie zu Weinkarten: Referenzen, Preise, Ausschank im Glas, Rotation, Marge und Chancen für Restaurants und Hotels.',
-    h1: 'Winerim Weinkarten-Barometer',
-    subtitle: 'Ein öffentliches Rahmenwerk für das wirtschaftliche Potenzial einer Weinkarte.',
-    sections: [
-      ['Methodik', 'Das Winerim Barometer trennt beobachtete Daten, Ableitungen und Hypothesen. Reale Zahlen sollten nur mit aggregierten, anonymisierten Daten und ausreichender Stichprobe veröffentlicht werden.'],
-      ['Was gemessen wird', 'Referenzen pro Karte, Preisbereiche, Wein im Glas, Regionen, Rebsorten, Stile, Pairings, Rotation, Marge und Signale für gebundenes Lager.'],
-      ['Erkennbare Muster', 'Unsichtbare Marge, zu große Karten, ungenutzter Ausschank im Glas, Überschneidungen und fehlende Verbindung zwischen Karte, Verkauf und Bestand.'],
-      ['Nutzen für Restaurants und Hotels', 'Das Barometer hilft, Weinkarten zu vergleichen und Entscheidungen zu Einkauf, Preis, Training und Rotation zu priorisieren.'],
-    ],
-    links: [['Weinkarte analysieren', '/de/weinkarten-analyse'], ['Weinkarten-Benchmark', '/de/weinkarten-benchmark'], ['Benchmarks und Playbooks', '/de/benchmarks-playbooks'], ['Demo', '/de/demo']],
-  },
-  '/pt/barometro-cartas-vinhos-2026': {
-    lang: 'pt',
-    title: 'Barómetro Winerim 2026 de cartas de vinho',
-    description: 'Estudo Winerim sobre cartas de vinho: referências, preços, vinho a copo, rotação, margem e oportunidades para restaurantes e hotéis.',
-    h1: 'Barómetro Winerim de cartas de vinho',
-    subtitle: 'Um enquadramento público para entender o potencial económico escondido numa carta de vinhos.',
-    sections: [
-      ['Metodologia', 'O Barómetro Winerim separa dados observados, inferências e hipóteses. Números reais só devem ser publicados com dados agregados, anonimizados e amostra suficiente.'],
-      ['O que mede', 'Referências por carta, faixas de preço, vinho a copo, regiões, castas, estilos, harmonizações, rotação, margem e sinais de stock parado.'],
-      ['Padrões detetáveis', 'Margem invisível, cartas demasiado grandes, vinho a copo subutilizado, sobreposição de referências e desconexão entre carta, vendas e stock.'],
-      ['Uso para restaurantes e hotéis', 'O barómetro ajuda a comparar uma carta e a priorizar compras, preços, formação e rotação.'],
-    ],
-    links: [['Analisar carta', '/pt/analise-carta'], ['Benchmark carta de vinhos', '/pt/benchmark-carta-vinhos'], ['Benchmarks e playbooks', '/pt/benchmarks-playbooks'], ['Demo', '/pt/demo']],
-  },
-};
-
 function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function renderWorkerStaticPrerender(path, site) {
-  const page = STATIC_WORKER_PRERENDER_PAGES[path] || WORKER_BAROMETER_PAGES[path];
+  const page = STATIC_WORKER_PRERENDER_PAGES[path];
   if (!page) return null;
 
   const canonicalPath = page.canonical || path;
   const canonical = `${site}${canonicalPath}`;
-  const schemaType = page.schemaType || (WORKER_BAROMETER_PAGES[path] ? 'Report' : 'WebPage');
+  const schemaType = page.schemaType || 'WebPage';
   const schema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': schemaType,
@@ -451,7 +364,7 @@ function renderWorkerStaticPrerender(path, site) {
     variableMeasured: ['references per wine list', 'price ranges', 'by-the-glass offer', 'regions', 'grapes', 'styles', 'pairings', 'rotation', 'margin', 'dead stock signals'],
   }) : '';
   const schemaScripts = [`<script type="application/ld+json">${schema}</script>`, datasetSchema ? `<script type="application/ld+json">${datasetSchema}</script>` : ''].join('\n  ');
-  const alternates = page.alternates || (WORKER_BAROMETER_PAGES[path] ? BAROMETER_ALTERNATES : null);
+  const alternates = page.alternates || null;
   const alternateLinks = alternates ? Object.entries(alternates)
     .map(([lang, altPath]) => `<link rel="alternate" hreflang="${lang}" href="${site}${altPath}">`)
     .join('\n  ') : '';

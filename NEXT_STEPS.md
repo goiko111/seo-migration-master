@@ -1,6 +1,6 @@
 # Next Steps
 
-## Actualizacion 2026-06-11: retomar tras Search Console del Barometro
+## Actualizacion 2026-06-11: retomar tras limpiar Worker del Barometro
 
 ## Hechos
 
@@ -8,6 +8,9 @@
 - `sitemap.xml` ya fue reenviado y leido el `11 jun 2026`.
 - El sitemap figura como `Correcto` con `2.234` paginas descubiertas.
 - El aumento desde `2.228` a `2.234` confirma que Search Console ya reconoce las seis URLs nuevas del Barometro en el sitemap.
+- Lovable ya desplego las Edge Functions `sitemap` y `prerender`.
+- Produccion ya sirve el Barometro a Googlebot desde Supabase `prerender` con `x-worker-branch: bot-prerender`.
+- Cloudflare Worker `winerim-proxy` quedo desplegado en version `356db317-9985-41de-a1a1-ac6ed6baba6f` sin el prerender estatico temporal del Barometro.
 
 ## Tareas pendientes inmediatas
 
@@ -20,36 +23,8 @@
    - `/de/weinkarten-barometer-2026`;
    - `/pt/barometro-cartas-vinhos-2026`.
 4. Si las variantes no aparecen en Search Console tras varios dias, inspeccionar y solicitar indexacion manual selectiva.
-5. Pedir a Lovable que despliegue las Edge Functions de Supabase `sitemap` y `prerender` desde `main` para retirar la dependencia temporal del puente Worker.
-
-## Prompt recomendado para Lovable
-
-```text
-En el proyecto Web Winerim, despliega las Supabase Edge Functions `sitemap` y `prerender` desde el último `main`.
-
-Contexto:
-- El Barómetro Winerim ya está publicado en producción.
-- Commits relevantes:
-  - 4020e5a feat: add Winerim wine list barometer
-  - aed4328 fix: serve barometer through worker
-  - d71051b docs: record barometer production rollout
-- Cloudflare Worker ya sirve temporalmente las rutas, sitemap y prerender del Barómetro.
-- No tocar base de datos.
-- No modificar contenido ni diseño.
-- No cambiar Cloudflare Worker desde Lovable.
-
-Objetivo:
-1. Desplegar `supabase/functions/sitemap`.
-2. Desplegar `supabase/functions/prerender`.
-3. Validar que `/sitemap.xml` incluye estas seis URLs:
-   - /barometro-cartas-vino-2026
-   - /en/wine-list-barometer-2026
-   - /it/barometro-carte-vini-2026
-   - /fr/barometre-cartes-vins-2026
-   - /de/weinkarten-barometer-2026
-   - /pt/barometro-cartas-vinhos-2026
-4. Validar como Googlebot que `/barometro-cartas-vino-2026` devuelve 200, canonical propio, hreflang, schema Report y Dataset.
-```
+5. Si Supabase se mantiene estable varios dias, valorar retirar el fallback de sitemap del Worker.
+6. Conseguir `SUPABASE_ACCESS_TOKEN` o sesion CLI para no depender de Lovable en futuros deploys SEO.
 
 ## Actualizacion 2026-06-11: retomar tras publicar Barometro Winerim
 

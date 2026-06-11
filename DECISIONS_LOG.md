@@ -2,6 +2,36 @@
 
 ## 2026-06-11
 
+### Lovable despliega `sitemap`/`prerender` y se retira el puente estatico del Worker
+
+#### Hechos
+
+- Se pidio a Lovable desplegar las Edge Functions `sitemap` y `prerender` del proyecto `Web Winerim`.
+- Lovable confirmo el deploy de ambas funciones.
+- Se valido directamente Supabase:
+  - `sitemap` responde `200`, contiene las seis rutas localizadas del Barometro y mantiene alternates `xhtml:link`;
+  - `prerender` responde `200` para `/barometro-cartas-vino-2026` y contiene canonical, `hreflang`, schema `Report` y schema `Dataset`.
+- Se elimino del Cloudflare Worker el objeto temporal de prerender estatico del Barometro.
+- Se desplego Cloudflare Worker `winerim-proxy` version `356db317-9985-41de-a1a1-ac6ed6baba6f`.
+- Produccion como Googlebot devuelve `x-worker-branch: bot-prerender`, lo que confirma que el Barometro ya sale por Supabase `prerender`, no por el puente estatico del Worker.
+
+#### Decisiones
+
+- Supabase `sitemap` y `prerender` pasan a ser la fuente productiva de verdad del Barometro.
+- El Worker conserva solo reconocimiento de rutas y fallback de sitemap, no el HTML estatico del Barometro.
+- Lovable queda como via operativa valida para desplegar Edge Functions cuando no exista token local de Supabase.
+
+#### Hipotesis
+
+- Reducir HTML SEO duplicado en Worker disminuye riesgo de divergencia entre pagina humana, sitemap y prerender bot.
+- El estado actual facilita que futuras mejoras del Barometro salgan por una sola fuente.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console durante los proximos dias.
+- Retirar el fallback de sitemap del Worker solo si Supabase demuestra estabilidad suficiente.
+- Obtener credenciales CLI de Supabase para automatizar futuros deploys SEO.
+
 ### Search Console para Barometro Winerim
 
 #### Hechos

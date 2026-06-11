@@ -8,7 +8,9 @@
 - El Barometro Winerim incluye schema `Report`, `Dataset` e `ItemList`, metodologia editorial, FAQ y separacion conceptual entre datos observables, inferencias e hipotesis.
 - La implementacion local del Barometro Winerim paso `npm run build`, test SEO enfocado, `deno check` de Edge Functions, validacion JSON de `sitemap-extra.json`, `git diff --check` y QA local desktop/mobile.
 - El 2026-06-11 se publico el Barometro Winerim en produccion: frontend Lovable `Up to date`, Cloudflare Worker `winerim-proxy` version `ec48088d-62b0-4d3e-85c0-8d9cc74760e1`, seis URLs localizadas con `200`, sitemap con las seis URLs y Googlebot con `worker-static-prerender`, canonical, `hreflang`, `Report` y `Dataset`.
-- El 2026-06-11 el deploy directo de Supabase Edge Functions `sitemap` y `prerender` siguio bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; el Worker cubre temporalmente la ruta, sitemap y prerender del Barometro.
+- El 2026-06-11 el deploy directo por CLI de Supabase Edge Functions `sitemap` y `prerender` siguio bloqueado por falta de `SUPABASE_ACCESS_TOKEN`, pero Lovable desplego ambas Edge Functions desde el proyecto `Web Winerim`.
+- El 2026-06-11, tras el deploy de Lovable, se retiro el prerender estatico temporal del Barometro en Cloudflare Worker y se desplego `winerim-proxy` version `356db317-9985-41de-a1a1-ac6ed6baba6f`; Googlebot recibe el Barometro desde Supabase `prerender` con `x-worker-branch: bot-prerender`.
+- El 2026-06-11 la Edge Function `sitemap` de Supabase ya incluye las seis URLs del Barometro con alternates `xhtml:link`; la inyeccion del Worker queda solo como fallback inofensivo si alguna URL faltara en origen.
 - El 2026-06-11 Search Console recibio solicitud de indexacion manual para `https://winerim.wine/barometro-cartas-vino-2026` y releyo `/sitemap.xml` como `Correcto`, con `2.234` paginas descubiertas.
 - El 2026-06-08 se creo el commit funcional `70bb44e feat: enrich wine library entity schema`, que extiende el schema enriquecido y `mentions` estrategicas a regiones, estilos y maridajes, ademas de mantener paridad en `prerender` para bots.
 - La mejora `70bb44e` anade grafo JSON-LD de `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm` para fichas humanas de regiones, estilos y maridajes, con propiedades especificas por tipo de entidad.
@@ -69,7 +71,7 @@
 - Separar siempre la información en hechos, decisiones, hipótesis y tareas pendientes.
 - Tratar el Barometro Winerim como activo de autoridad SEO/LLM y fuente citable, no como sustituto del `Wine List Score` existente.
 - No publicar cifras de benchmark como datos reales del mercado sin respaldo de datos agregados, anonimizados y metodologia documentada.
-- Para el Barometro, aceptar el puente de Cloudflare Worker como estado productivo valido mientras no exista token Supabase para desplegar Edge Functions.
+- Para el Barometro, usar Supabase `sitemap` y `prerender` como fuente productiva de verdad tras el deploy de Lovable; Cloudflare Worker solo debe conservar reconocimiento de rutas y fallback de sitemap.
 - Si falta contexto, revisar primero estos documentos antes de continuar.
 - Si se detectan contradicciones entre documentos, código o instrucciones, señalarlas en vez de ignorarlas.
 - Actualizar estos documentos también durante la sesión cuando ocurra algo significativo.
@@ -98,7 +100,7 @@
 
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Monitorizar en Search Console la indexacion de la URL principal del Barometro Winerim y la cobertura de las seis variantes localizadas tras el reenvio de `/sitemap.xml` del 2026-06-11.
-- Desplegar `npm run deploy:supabase:seo` cuando haya `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI, para alinear Edge Functions con el Worker.
+- Conseguir `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI sigue siendo deseable para despliegues futuros sin depender de Lovable, pero el Barometro ya esta alineado en `sitemap` y `prerender` por Lovable.
 - Definir el dataset real del Barometro Winerim 2026: campos, periodo, muestra minima, segmentos y umbrales de anonimato.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
