@@ -1,5 +1,45 @@
 # Decisions Log
 
+## 2026-06-11
+
+### Publicacion productiva del Barometro Winerim
+
+#### Hechos
+
+- Se pusheo `4020e5a feat: add Winerim wine list barometer` a `origin/main`.
+- Se publico el frontend desde Lovable y el panel quedo `Up to date`.
+- Produccion seguia devolviendo `404` para `/barometro-cartas-vino-2026` porque el Cloudflare Worker cortaba rutas nuevas no registradas con `x-worker-branch: not-found`.
+- Se anadio soporte del Barometro al Worker:
+  - rutas conocidas en seis idiomas;
+  - prerender estatico para bots;
+  - schema `Report` y `Dataset`;
+  - canonical y `hreflang`;
+  - inyeccion de las seis URLs en `/sitemap.xml`.
+- Se desplego `winerim-proxy` version `ec48088d-62b0-4d3e-85c0-8d9cc74760e1`.
+- Se pusheo `aed4328 fix: serve barometer through worker` a `origin/main`.
+- Validacion productiva:
+  - seis URLs del Barometro responden `200`;
+  - Googlebot recibe `x-prerendered: true`, `worker-static-prerender`, canonical, `hreflang`, `Report` y `Dataset`;
+  - `/sitemap.xml` contiene las seis URLs del Barometro.
+- `npm run deploy:supabase:seo` fallo por falta de `SUPABASE_ACCESS_TOKEN`.
+
+#### Decisiones
+
+- Dar por publicado el Barometro en produccion porque Cloudflare Worker ya cubre HTML humano, sitemap y prerender bot.
+- Mantener el Worker como puente SEO hasta poder desplegar directamente `sitemap` y `prerender` en Supabase.
+- No retrasar la solicitud de indexacion en Search Console por la falta de token Supabase.
+
+#### Hipotesis
+
+- El Barometro deberia ser rastreable por Google desde sitemap y por inspeccion manual inmediata.
+- La indexacion dependera mas de rastreo/cobertura de Google que de cambios tecnicos adicionales en la web.
+
+#### Tareas pendientes
+
+- Inspeccionar la URL principal en Search Console y solicitar indexacion.
+- Desplegar Supabase Edge Functions cuando haya token/sesion CLI.
+- Monitorizar cobertura de las seis variantes localizadas.
+
 ## 2026-06-10
 
 ### Barometro Winerim de cartas de vino

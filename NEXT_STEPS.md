@@ -1,5 +1,38 @@
 # Next Steps
 
+## Actualizacion 2026-06-11: retomar tras publicar Barometro Winerim
+
+## Hechos
+
+- El Barometro Winerim ya esta publicado en produccion.
+- Commits en `origin/main`:
+  - `4020e5a feat: add Winerim wine list barometer`;
+  - `aed4328 fix: serve barometer through worker`.
+- Lovable quedo publicado y `Up to date`.
+- Cloudflare Worker `winerim-proxy` quedo desplegado en version `ec48088d-62b0-4d3e-85c0-8d9cc74760e1`.
+- Las seis rutas localizadas del Barometro responden `200` en produccion.
+- Googlebot recibe prerender correcto en la URL principal con `Report`, `Dataset`, canonical y `hreflang`.
+- `/sitemap.xml` ya contiene las seis URLs del Barometro.
+- Supabase Edge Functions no quedaron desplegadas por CLI porque falta `SUPABASE_ACCESS_TOKEN`; el Worker cubre la publicacion actual.
+
+## Tareas pendientes inmediatas
+
+1. En Search Console, inspeccionar `https://winerim.wine/barometro-cartas-vino-2026` y solicitar indexacion si la herramienta lo permite.
+2. Revisar en 24-72 horas:
+   - si Search Console descubre las seis URLs desde sitemap;
+   - si alguna aparece como `Descubierta: actualmente sin indexar`;
+   - si hay errores de canonical, idioma o duplicadas.
+3. Cuando haya `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI, ejecutar:
+   - `npm run deploy:supabase:seo`.
+4. Tras desplegar Supabase, confirmar que el Worker ya no necesita inyectar el Barometro como puente temporal.
+5. Preparar la segunda version del Barometro:
+   - dataset real;
+   - periodo de analisis;
+   - muestra minima;
+   - umbrales de anonimato;
+   - segmentos por tipo de negocio/pais si hay masa suficiente.
+6. Revisar `/analisis-carta` en produccion para confirmar H1, copy, CTA y formulario tras el publish de Lovable.
+
 ## Actualizacion 2026-06-10: retomar tras implementar Barometro Winerim
 
 ## Hechos

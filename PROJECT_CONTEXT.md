@@ -7,6 +7,8 @@
 - El Barometro Winerim queda conectado a rutas React, `ROUTE_MAP`, sitemap, prerender, `sitemap-extra.json`, `llms.txt`, `llms-full.txt` y enlaces internos desde guias, benchmark y benchmarks/playbooks.
 - El Barometro Winerim incluye schema `Report`, `Dataset` e `ItemList`, metodologia editorial, FAQ y separacion conceptual entre datos observables, inferencias e hipotesis.
 - La implementacion local del Barometro Winerim paso `npm run build`, test SEO enfocado, `deno check` de Edge Functions, validacion JSON de `sitemap-extra.json`, `git diff --check` y QA local desktop/mobile.
+- El 2026-06-11 se publico el Barometro Winerim en produccion: frontend Lovable `Up to date`, Cloudflare Worker `winerim-proxy` version `ec48088d-62b0-4d3e-85c0-8d9cc74760e1`, seis URLs localizadas con `200`, sitemap con las seis URLs y Googlebot con `worker-static-prerender`, canonical, `hreflang`, `Report` y `Dataset`.
+- El 2026-06-11 el deploy directo de Supabase Edge Functions `sitemap` y `prerender` siguio bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; el Worker cubre temporalmente la ruta, sitemap y prerender del Barometro.
 - El 2026-06-08 se creo el commit funcional `70bb44e feat: enrich wine library entity schema`, que extiende el schema enriquecido y `mentions` estrategicas a regiones, estilos y maridajes, ademas de mantener paridad en `prerender` para bots.
 - La mejora `70bb44e` anade grafo JSON-LD de `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm` para fichas humanas de regiones, estilos y maridajes, con propiedades especificas por tipo de entidad.
 - La mejora `70bb44e` actualiza `supabase/functions/prerender/index.ts` para que Googlebot y crawlers reciban el mismo patron semantico en fichas de biblioteca reconocidas.
@@ -66,6 +68,7 @@
 - Separar siempre la información en hechos, decisiones, hipótesis y tareas pendientes.
 - Tratar el Barometro Winerim como activo de autoridad SEO/LLM y fuente citable, no como sustituto del `Wine List Score` existente.
 - No publicar cifras de benchmark como datos reales del mercado sin respaldo de datos agregados, anonimizados y metodologia documentada.
+- Para el Barometro, aceptar el puente de Cloudflare Worker como estado productivo valido mientras no exista token Supabase para desplegar Edge Functions.
 - Si falta contexto, revisar primero estos documentos antes de continuar.
 - Si se detectan contradicciones entre documentos, código o instrucciones, señalarlas en vez de ignorarlas.
 - Actualizar estos documentos también durante la sesión cuando ocurra algo significativo.
@@ -93,7 +96,8 @@
 ## Tareas pendientes
 
 - Mantener estos documentos actualizados al cierre de cada sesión.
-- Desplegar y validar en produccion el Barometro Winerim y sus variantes localizadas antes de tratarlo como publicado.
+- Inspeccionar en Search Console la URL principal del Barometro Winerim y monitorizar cobertura de las seis variantes localizadas.
+- Desplegar `npm run deploy:supabase:seo` cuando haya `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI, para alinear Edge Functions con el Worker.
 - Definir el dataset real del Barometro Winerim 2026: campos, periodo, muestra minima, segmentos y umbrales de anonimato.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.
 - Escalar la capa editorial avanzada de uvas, regiones, estilos y maridajes sin romper la paridad multilingüe ni el prerender para bots.
