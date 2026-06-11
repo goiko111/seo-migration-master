@@ -9,6 +9,7 @@
 - La implementacion local del Barometro Winerim paso `npm run build`, test SEO enfocado, `deno check` de Edge Functions, validacion JSON de `sitemap-extra.json`, `git diff --check` y QA local desktop/mobile.
 - El 2026-06-11 se publico el Barometro Winerim en produccion: frontend Lovable `Up to date`, Cloudflare Worker `winerim-proxy` version `ec48088d-62b0-4d3e-85c0-8d9cc74760e1`, seis URLs localizadas con `200`, sitemap con las seis URLs y Googlebot con `worker-static-prerender`, canonical, `hreflang`, `Report` y `Dataset`.
 - El 2026-06-11 el deploy directo de Supabase Edge Functions `sitemap` y `prerender` siguio bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; el Worker cubre temporalmente la ruta, sitemap y prerender del Barometro.
+- El 2026-06-11 Search Console recibio solicitud de indexacion manual para `https://winerim.wine/barometro-cartas-vino-2026` y releyo `/sitemap.xml` como `Correcto`, con `2.234` paginas descubiertas.
 - El 2026-06-08 se creo el commit funcional `70bb44e feat: enrich wine library entity schema`, que extiende el schema enriquecido y `mentions` estrategicas a regiones, estilos y maridajes, ademas de mantener paridad en `prerender` para bots.
 - La mejora `70bb44e` anade grafo JSON-LD de `WebPage`, `Article`, `DefinedTermSet` y `DefinedTerm` para fichas humanas de regiones, estilos y maridajes, con propiedades especificas por tipo de entidad.
 - La mejora `70bb44e` actualiza `supabase/functions/prerender/index.ts` para que Googlebot y crawlers reciban el mismo patron semantico en fichas de biblioteca reconocidas.
@@ -96,7 +97,7 @@
 ## Tareas pendientes
 
 - Mantener estos documentos actualizados al cierre de cada sesión.
-- Inspeccionar en Search Console la URL principal del Barometro Winerim y monitorizar cobertura de las seis variantes localizadas.
+- Monitorizar en Search Console la indexacion de la URL principal del Barometro Winerim y la cobertura de las seis variantes localizadas tras el reenvio de `/sitemap.xml` del 2026-06-11.
 - Desplegar `npm run deploy:supabase:seo` cuando haya `SUPABASE_ACCESS_TOKEN` o sesion Supabase CLI, para alinear Edge Functions con el Worker.
 - Definir el dataset real del Barometro Winerim 2026: campos, periodo, muestra minima, segmentos y umbrales de anonimato.
 - Confirmar en cada nueva sesión si el estado real del repo coincide con lo documentado.

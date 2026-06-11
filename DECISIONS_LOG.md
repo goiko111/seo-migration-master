@@ -2,6 +2,36 @@
 
 ## 2026-06-11
 
+### Search Console para Barometro Winerim
+
+#### Hechos
+
+- Se inspecciono `https://winerim.wine/barometro-cartas-vino-2026` en Search Console.
+- El estado inicial era `La URL no esta en Google` y `Google no reconoce esta URL`.
+- Se solicito indexacion manual y Search Console confirmo que la URL fue anadida a una cola de rastreo prioritaria.
+- Se reenvio `sitemap.xml`.
+- Search Console confirmo el envio del sitemap y actualizo `/sitemap.xml` a:
+  - enviado: `11 jun 2026`;
+  - ultima lectura: `11 jun 2026`;
+  - estado: `Correcto`;
+  - paginas descubiertas: `2.234`.
+- El sitemap anterior mostraba `2.228` paginas; el aumento a `2.234` encaja con las seis URLs nuevas del Barometro.
+
+#### Decisiones
+
+- No forzar de momento solicitudes manuales para todas las variantes internacionales; dejar que Google procese el sitemap actualizado.
+- Priorizar seguimiento en 24-72 horas antes de abrir otra tanda manual de inspecciones.
+
+#### Hipotesis
+
+- La inspeccion manual acelera el rastreo de la URL principal, pero no garantiza indexacion inmediata.
+- El sitemap actualizado deberia bastar para descubrimiento inicial de las seis variantes.
+
+#### Tareas pendientes
+
+- Revisar cobertura e indexacion del Barometro en 24-72 horas.
+- Solicitar indexacion selectiva de variantes internacionales solo si no aparecen descubiertas o rastreadas.
+
 ### Publicacion productiva del Barometro Winerim
 
 #### Hechos
