@@ -1,5 +1,180 @@
 # Next Steps
 
+## Actualizacion 2026-06-10: retomar tras implementar Barometro Winerim
+
+## Hechos
+
+- El Barometro Winerim de cartas de vino 2026 ya esta implementado en codigo.
+- La pagina principal es `/barometro-cartas-vino-2026`.
+- Existen variantes localizadas para `en`, `it`, `fr`, `de` y `pt`.
+- Sitemap, prerender, `llms.txt`, `llms-full.txt`, rutas React, `ROUTE_MAP`, `sitemap-extra.json` y enlaces internos ya fueron actualizados.
+- Validaciones locales completadas:
+  - build;
+  - test SEO enfocado;
+  - `deno check`;
+  - JSON de `sitemap-extra.json`;
+  - `git diff --check`;
+  - QA local desktop/mobile.
+
+## Tareas pendientes inmediatas
+
+1. Desplegar desde Lovable el frontend y las Edge Functions afectadas (`sitemap` y `prerender`).
+2. Validar produccion:
+   - `/barometro-cartas-vino-2026`;
+   - `/en/wine-list-barometer-2026`;
+   - `/it/barometro-carte-vini-2026`;
+   - `/fr/barometre-cartes-vins-2026`;
+   - `/de/weinkarten-barometer-2026`;
+   - `/pt/barometro-cartas-vinhos-2026`.
+3. Validar como Googlebot que la pagina devuelve `x-prerendered: true`, canonical propio, idioma correcto, schema `Report`/`Dataset` y enlaces internos reales.
+4. Reenviar o inspeccionar en Search Console la URL principal tras deploy.
+5. Definir el dataset real del Barometro Winerim 2026:
+   - cartas analizadas;
+   - referencias por carta;
+   - precios botella/copa;
+   - regiones, uvas, estilos y denominaciones;
+   - venta por copa;
+   - rotacion/stock si existe;
+   - tipo de negocio, pais/ciudad y ticket medio si se puede anonimizar.
+6. Convertir la siguiente version del barometro en estudio con cifras reales solo cuando haya metodologia, muestra y anonimato suficientes.
+
+## Actualizacion 2026-06-10: retomar tras refuerzo de `/analisis-carta`
+
+## Hechos
+
+- `/analisis-carta` ahora usa un `<h1>` real en el encabezado principal del analizador.
+- El copy principal se oriento a margen perdido, envio en 30 segundos e informe personalizado en menos de 48 h.
+- Build y `git diff --check` pasaron correctamente.
+
+## Tareas pendientes inmediatas
+
+1. Desplegar los cambios desde Lovable o el flujo operativo vigente.
+2. Validar produccion humana en `/analisis-carta`:
+   - H1 visible correcto;
+   - CTA visible y entendible;
+   - no solape en mobile;
+   - formulario funcionando en modos URL, texto y archivo.
+3. Si se puede acceder a analitica/eventos:
+   - medir clicks en URL, texto y archivo;
+   - medir envio de formulario;
+   - medir desbloqueo de informe completo.
+4. Preparar el siguiente bloque de conversion:
+   - ejemplo visual de informe;
+   - seccion "que recibiras" mas tangible;
+   - enlace contextual a futuros benchmarks/barometro.
+
+## Actualizacion 2026-06-10: retomar autoridad propia de Winerim
+
+## Hechos
+
+- El `Wine List Score` ya existe y debe funcionar como ancla de captacion, no como tarea nueva.
+- Existen superficies publicas para `WineListBenchmark`, `BenchmarksPlaybooks` y `Comparativas`.
+- La propuesta pendiente se centra en desarrollar:
+  - Barometro Winerim 2026;
+  - benchmarks agregados publicables;
+  - guias por vertical/problema;
+  - comparativas BOFU adicionales;
+  - schema reforzado;
+  - propuesta de home antes/despues.
+
+## Tareas pendientes inmediatas
+
+1. Datos para Barometro:
+   - inventario de cartas analizadas;
+   - numero de referencias por carta;
+   - precios botella y copa;
+   - estilos, regiones, uvas y denominaciones;
+   - vinos por copa;
+   - ventas/rotacion si existen;
+   - stock muerto/capital inmovilizado si existe;
+   - tipo de negocio, pais/ciudad y ticket medio si se puede anonimizar.
+2. Metodologia:
+   - definir periodo de datos;
+   - definir muestra minima por segmento;
+   - fijar umbrales de anonimato;
+   - separar datos observados, inferencias e hipotesis.
+3. Publicacion:
+   - convertir `WineListBenchmark` de cifras estaticas a pieza con metodologia y datos defendibles;
+   - crear pagina/reporte `Barometro Winerim 2026`;
+   - anadir schema `Dataset`, `Report`, `FAQPage` e `ItemList` donde corresponda.
+4. Guias y comparativas:
+   - crear primeras guias por vertical: restaurantes sin sommelier, hoteles, grupos, wine bars y restaurantes gastronomicos;
+   - ampliar comparativas hacia Excel, consultor externo, menu digital generico, software de inventario y carta PDF/QR.
+5. Home:
+   - revisar propuesta antes/despues y, si se aprueba, implementar el nuevo framing centrado en diagnostico y datos propios.
+
+## Actualizacion 2026-06-10: SEO/LLM inicial de Spiritsrim publicado
+
+## Hechos
+
+- Spiritsrim ya tiene home castellana enriquecida, pagina `/software-carta-destilados`, fichas prioritarias con narrativa SEO y prerender estatico para todas las URLs del sitemap.
+- `sitemap.xml` queda en `325` URLs.
+- Despliegue activo en Cloudflare Pages: `https://b77c1545.spiritsrim.pages.dev`.
+- Produccion validada con HTML estatico y canonicals correctos en home, producto, biblioteca, Tequila, Negroni y sitemap.
+- Search Console ya muestra el sitemap como `Correcto`, ultima lectura 2026-06-10 y `325` paginas descubiertas.
+
+## Tareas pendientes inmediatas
+
+1. Monitorizar Search Console durante los proximos dias: cobertura, paginas descubiertas e indexacion inicial.
+2. Enriquecer segunda tanda de entidades: `bourbon`, `scotch`, `vermouth`, `agave`, `blue-agave`, `espresso-martini`, `manhattan`, `gin-tonic`.
+3. Crear primeros clusters editoriales en castellano.
+4. Decidir si `www` debe servir contenido o redirigir a apex.
+
+## Actualizacion 2026-06-09: activar dominio Spiritsrim en Cloudflare
+
+## Hechos
+
+- Spiritsrim ya esta publicado en Cloudflare Pages: `https://spiritsrim.pages.dev/`.
+- `spiritsrim.com` y `www.spiritsrim.com` estan añadidos a Pages y estan `active`.
+- La zona `spiritsrim.com` ya esta creada en Cloudflare y DNS esta preparado hacia `spiritsrim.pages.dev`.
+- OVH acepto la solicitud de cambio de nameservers desde `dns-parking.com` a `april.ns.cloudflare.com` y `nash.ns.cloudflare.com`.
+- DNS publico ya delega en Cloudflare.
+- Validacion final completada con `HTTP/2 200` en apex, `www`, sitemap y ruta profunda de biblioteca.
+- Search Console tiene verificada la propiedad de dominio `sc-domain:spiritsrim.com` mediante TXT DNS en Cloudflare.
+- `https://spiritsrim.com/sitemap.xml` fue enviado, leido el 2026-06-09 y figura como `Correcto` con `324` paginas descubiertas.
+- El token local no tiene permiso para crear la zona Cloudflare.
+
+## Tareas pendientes inmediatas
+
+1. Monitorizar Search Console tras el primer recrawl: cobertura, paginas descubiertas e indexacion inicial.
+2. Decidir si `www` debe servir contenido o redirigir a apex.
+3. Revisar en 24-48 horas si quedan caches DNS antiguas en resolvers residuales.
+
+## Actualizacion 2026-06-09: continuar Spiritsrim tras crear base separada
+
+## Hechos
+
+- Existe un repo separado de Spiritsrim en `/Users/GOIKO/spiritsrim`.
+- El repo nuevo no tiene remoto configurado.
+- La base publica inicial ya incluye home, biblioteca de destilados multilingue, sitemap, prerender, redirects, Worker, robots, llms, manifest, OG image, favicons, tests y validaciones locales.
+- El dominio tecnico usado en codigo es provisionalmente `https://spiritsrim.com`.
+- El servidor local quedo activo en `http://127.0.0.1:8080/`.
+
+## Decisiones
+
+- Continuar el trabajo de implementacion en `/Users/GOIKO/spiritsrim`, no en el repo Winerim.
+- No desplegar hasta confirmar dominio final, Lovable, Supabase, Cloudflare y destino de leads.
+- Mantener el foco siguiente en operativa real y QA productivo, no en volumen editorial.
+
+## Hipotesis
+
+- La siguiente sesion deberia poder empezar desde validacion visual, configuracion de proyecto Lovable/Supabase y conexion de formularios.
+
+## Tareas pendientes inmediatas
+
+1. Confirmar dominio final y si `spiritsrim.com` es correcto.
+2. Crear/confirmar proyecto Lovable de Spiritsrim y actualizar `SPIRITSRIM_ORIGIN`.
+3. Crear/confirmar Supabase separado y sustituir placeholders.
+4. Configurar Cloudflare Worker `spiritsrim-proxy` con `PRERENDER_URL`, `SITEMAP_URL`, `ORIGIN` y `SITE_URL`.
+5. Confirmar lead routing/email/CRM para demo/contacto.
+6. Revisar visualmente home y biblioteca en desktop/mobile con navegador.
+7. Desplegar y validar:
+   - home humana;
+   - biblioteca ES/EN/PT/DE;
+   - ficha de categoria, origen, materia prima y coctel;
+   - Googlebot con `x-prerendered: true`;
+   - `/sitemap.xml`, `/robots.txt`, `/llms.txt`.
+
 ## Actualizacion 2026-06-09: retomar Spiritsrim en tarea separada
 
 ## Hechos

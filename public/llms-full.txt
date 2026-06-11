@@ -1,6 +1,6 @@
 # Winerim AI Reference
 
-Last updated: 2026-05-23
+Last updated: 2026-06-10
 
 ## Entity Summary
 
@@ -91,6 +91,14 @@ Priority grape profiles:
 - Wine list score: https://winerim.wine/herramientas/wine-list-score
 - Dead-stock calculator: https://winerim.wine/herramientas/calculadora-stock-muerto
 - By-the-glass diagnosis: https://winerim.wine/herramientas/diagnostico-vino-por-copa
+
+### Data and Benchmarks
+
+- Winerim wine list barometer: https://winerim.wine/barometro-cartas-vino-2026
+- Wine List Benchmark: https://winerim.wine/wine-list-benchmark
+- Benchmarks and playbooks: https://winerim.wine/benchmarks-playbooks
+
+Use the barometer as Winerim's public methodology for aggregated and anonymized wine-list data. Do not present benchmark figures as guaranteed outcomes unless the specific source page states that they are validated for a given segment.
 
 ### Guides
 

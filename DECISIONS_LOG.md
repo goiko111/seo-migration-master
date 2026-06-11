@@ -1,5 +1,175 @@
 # Decisions Log
 
+## 2026-06-10
+
+### Barometro Winerim de cartas de vino
+
+#### Hechos
+
+- Se implemento una nueva pagina publica para el Barometro Winerim de cartas de vino 2026.
+- La ruta principal es `/barometro-cartas-vino-2026` y tiene variantes localizadas en ingles, italiano, frances, aleman y portugues.
+- La pagina incluye metodologia, patrones detectables, segmentos publicables, datos necesarios, FAQ, enlaces internos y CTAs hacia analisis/benchmarks.
+- Se conecto la pagina a rutas React, `ROUTE_MAP`, sitemap, prerender, `sitemap-extra.json`, `llms.txt`, `llms-full.txt` y enlaces internos.
+- Se anadio schema `Report` y `Dataset` tambien en la version prerenderizada para bots.
+- Validaciones completadas: build, test SEO enfocado, `deno check`, JSON del sitemap extra, `git diff --check` y QA local desktop/mobile.
+
+#### Decisiones
+
+- Priorizar el Barometro Winerim como pieza de autoridad propia y citable, no como sustituto del `Wine List Score` existente.
+- Mantener una separacion explicita entre hechos/datos observados, inferencias e hipotesis dentro del enfoque editorial.
+- No presentar cifras de benchmark como resultados reales hasta respaldarlas con datos agregados, anonimizados y metodologia documentada.
+- Actualizar `STATIC_ROUTE_LASTMOD` a `2026-06-10` por la incorporacion de una nueva pagina estatica estrategica y alinear los tests.
+
+#### Hipotesis
+
+- El barometro puede elevar autoridad SEO/LLM al convertir conocimiento operativo de cartas de vino en una fuente estructurada y enlazable.
+- Los futuros benchmarks por vertical seran mas defendibles si se apoyan en el barometro, metodologia y umbrales de anonimato.
+
+#### Tareas pendientes
+
+- Desplegar desde Lovable y validar produccion como usuario y Googlebot.
+- Inspeccionar o solicitar indexacion de la URL principal en Search Console.
+- Recopilar datos reales para una siguiente version con cifras publicables.
+
+### Refuerzo de captacion en `/analisis-carta`
+
+#### Hechos
+
+- Se reviso la propuesta de otra tarea de Codex sobre adaptar el patron Surfeo a Winerim.
+- Se confirmo que el titulo visual del analizador en `/analisis-carta` estaba implementado como `<h2>` dentro de `WineListAnalyzerTool`.
+- Se corrigio a `<h1>` y se reforzo el copy del encabezado en seis idiomas.
+- El nuevo angulo del encabezado comunica perdida de margen/potencial economico, envio en 30 segundos e informe personalizado en menos de 48 h.
+- `npm run build` y `git diff --check` pasaron correctamente.
+
+#### Decisiones
+
+- Usar `/analisis-carta` como landing principal de captacion basada en "cuanto dinero/margen pierde tu carta de vinos sin que lo veas".
+- No modificar por ahora la logica del analizador ni los flujos backend.
+- Mantener el claim de mas de 500 cartas analizadas como prueba social ya presente en otras zonas de la pagina.
+
+#### Tareas pendientes
+
+- Validar la pagina publicada tras deploy.
+- Medir conversion del nuevo encabezado frente al anterior si existe analitica de eventos.
+- Preparar ejemplo visual de informe para reforzar confianza.
+
+### Estrategia de autoridad propia para Winerim
+
+#### Hechos
+
+- El usuario indico que el test/score de carta ya existe en Winerim.
+- El repo confirma la existencia de `WineListScore`, `WineListAnalyzer`, `WineListBenchmark`, `BenchmarksPlaybooks` y `Comparativas`.
+- `WineListBenchmark` existe como pagina, pero sus cifras publicas actuales son estaticas/orientativas y no deben presentarse como estudio propio real sin respaldo de datos.
+- La oportunidad inspirada en Surfeo se reformula como capa de autoridad propia: barometro, benchmarks agregados, guias por vertical/problema, comparativas y schema.
+
+#### Decisiones
+
+- No crear un nuevo punto 1; aprovechar el `Wine List Score` existente como ancla de conversion.
+- Priorizar el Barometro Winerim 2026 como pieza editorial de datos propios.
+- Publicar benchmarks solo con datos agregados y anonimizados.
+- Evitar rankings nominales de clientes, ciudades o restaurantes si no hay permiso o masa critica suficiente.
+- Usar las comparativas BOFU como paginas de decision, no como ataques a alternativas.
+
+#### Hipotesis
+
+- Los datos propios de cartas, precios, copa, estilos, regiones, rotacion y stock pueden convertirse en una ventaja SEO/LLM dificil de copiar.
+- Los benchmarks publicos pueden mejorar confianza si explican metodologia, muestra, periodo, limitaciones y datos anonimizados.
+- Las guias por vertical rendiran mejor cuando esten enlazadas a biblioteca, score, benchmark y demo.
+
+#### Tareas pendientes
+
+- Confirmar disponibilidad y calidad de los datos necesarios para el Barometro.
+- Definir metodologia y umbrales de anonimato.
+- Redactar el esquema editorial del Barometro y de los benchmarks.
+- Preparar propuesta de home antes/despues y decidir implementacion.
+
+### SEO/LLM inicial de Spiritsrim
+
+#### Hechos
+
+- Se enriquecio Spiritsrim desde el repo separado `/Users/GOIKO/spiritsrim`.
+- Se creo `/software-carta-destilados`.
+- Se añadieron narrativas SEO/LLM para entidades prioritarias.
+- Se genero HTML estatico para todas las URLs del sitemap.
+- `sitemap.xml` queda en `325` URLs.
+- Se desplego en Cloudflare Pages: `https://b77c1545.spiritsrim.pages.dev`.
+- Search Console muestra el sitemap actualizado como `Correcto`, ultima lectura 2026-06-10 y `325` paginas descubiertas.
+
+#### Decisiones
+
+- Usar HTML estatico por URL para mejorar SEO y recuperabilidad por LLMs.
+- Mantener castellano como primera capa editorial fuerte.
+- Seguir documentando en este repo solo como espejo/handoff; el trabajo operativo vive en `/Users/GOIKO/spiritsrim`.
+
+#### Tareas pendientes
+
+- Monitorizar cobertura e indexacion inicial en Search Console tras la lectura del sitemap actualizado.
+- Enriquecer segunda tanda de entidades y clusters editoriales.
+- Decidir canonical de `www`.
+
+## 2026-06-09
+
+### Publicacion inicial de Spiritsrim en Cloudflare Pages
+
+#### Hechos
+
+- Se publico Spiritsrim desde `/Users/GOIKO/spiritsrim` en Cloudflare Pages como proyecto `spiritsrim`.
+- URL disponible: `https://spiritsrim.pages.dev/`.
+- Se añadieron `spiritsrim.com` y `www.spiritsrim.com` como custom domains de Pages.
+- Se creo la zona `spiritsrim.com` en Cloudflare.
+- Se preparo DNS Cloudflare hacia `spiritsrim.pages.dev`.
+- OVH acepto la solicitud de cambio de nameservers desde `dns-parking.com` hacia `april.ns.cloudflare.com` y `nash.ns.cloudflare.com`.
+- DNS publico ya delega en Cloudflare.
+- Se dejaron los CNAME web en DNS-only, se recrearon los custom domains de Pages y `spiritsrim.com` / `www.spiritsrim.com` quedaron `active`.
+- Validacion final: apex, `www`, `/sitemap.xml` y ruta profunda de biblioteca responden `HTTP/2 200`.
+- Search Console tiene verificada la propiedad de dominio `sc-domain:spiritsrim.com` mediante TXT DNS manual en Cloudflare.
+- Se envio `https://spiritsrim.com/sitemap.xml`; Search Console lo leyo el 2026-06-09 como `Correcto` y detecto `324` paginas.
+- Se decidio no usar Lovable como requisito para publicar esta web.
+
+#### Decisiones
+
+- Usar Cloudflare Pages como hosting primario de Spiritsrim.
+- Usar Cloudflare DNS como zona autoritativa de `spiritsrim.com`; OVH queda como registrador.
+- Usar propiedad de dominio en Search Console y verificacion TXT manual; no usar OAuth Google-Cloudflare para la verificacion.
+- Priorizar monitorizacion de Search Console y decision canonica de `www` antes de Worker/Supabase avanzado.
+
+#### Tareas pendientes
+
+- Monitorizar Search Console tras primer recrawl.
+- Decidir si `www` debe servir contenido o redirigir a apex.
+
+## 2026-06-09
+
+### Base separada de Spiritsrim creada
+
+#### Hechos
+
+- Se creo `/Users/GOIKO/spiritsrim` como repo separado mediante clon local del repo base.
+- Se elimino el remoto del nuevo repo para evitar pushes accidentales al origen de Winerim.
+- Se construyo una primera base publica de Spiritsrim con home, chrome propio, rutas principales, biblioteca de destilados multilingue, schema, sitemap, prerender, redirects, Worker, robots, llms, manifest, OG image y favicons.
+- Se retiraron del arbol lanzable de Spiritsrim contenidos, assets, migraciones, funciones y rutas heredadas que pertenecian a Winerim.
+- `.env`, `supabase/config.toml` y scripts de deploy quedaron con placeholders/variables de Spiritsrim.
+- Validaciones locales completadas: tests, build, `deno check`, `git diff --check`, escaneo de residuos criticos y servidor Vite local.
+
+#### Decisiones
+
+- Tratar `/Users/GOIKO/spiritsrim` como el repo operativo de Spiritsrim.
+- Usar `https://spiritsrim.com` como canonical tecnico provisional.
+- No publicar nada con IDs, dominio, Worker, assets, clientes o claims heredados.
+- Priorizar base indexable y paridad SEO antes de herramientas avanzadas, blog y formularios definitivos.
+
+#### Hipotesis
+
+- El corte actual reduce el riesgo principal de clonacion: residuos operativos o SEO de Winerim.
+- La taxonomia inicial de categorias, origenes, materias primas y cocteles da una base suficiente para validar arquitectura y rastreo.
+
+#### Tareas pendientes
+
+- Confirmar dominio, Lovable, Supabase, Worker, Search Console y destino de leads.
+- Reemplazar placeholders operativos por credenciales/URLs de Spiritsrim.
+- Validar en produccion como humano y Googlebot tras deploy.
+- Escalar contenidos, herramientas y blog sin traducir literalmente Winerim.
+
 ## 2026-06-09
 
 ### Handoff para Spiritsrim

@@ -4,7 +4,7 @@ const corsHeaders = {
 };
 
 const SITE = 'https://winerim.wine';
-const STATIC_ROUTE_LASTMOD = '2026-06-06';
+const STATIC_ROUTE_LASTMOD = '2026-06-10';
 const WINE_LIBRARY_LASTMOD = '2026-06-01';
 
 // ─────────────────────────────────────────────
@@ -38,6 +38,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-core': '/en/product/winerim-core',
     '/producto/winerim-supply': '/en/product/winerim-supply',
     '/analisis-carta': '/en/wine-list-analysis',
+    '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/biblioteca-vino': '/en/wine-library',
     '/biblioteca-vino/regiones': '/en/wine-library/regions',
@@ -73,6 +74,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-core': '/it/prodotto/winerim-core',
     '/producto/winerim-supply': '/it/prodotto/winerim-supply',
     '/analisis-carta': '/it/analisi-carta',
+    '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
     '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
     '/biblioteca-vino': '/it/biblioteca-vino',
     '/biblioteca-vino/regiones': '/it/biblioteca-vino/regioni',
@@ -108,6 +110,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-core': '/fr/produit/winerim-core',
     '/producto/winerim-supply': '/fr/produit/winerim-supply',
     '/analisis-carta': '/fr/analyse-carte',
+    '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
     '/biblioteca-vino': '/fr/bibliotheque-vin',
     '/biblioteca-vino/regiones': '/fr/bibliotheque-vin/regions',
@@ -143,6 +146,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-core': '/de/produkt/winerim-core',
     '/producto/winerim-supply': '/de/produkt/winerim-supply',
     '/analisis-carta': '/de/weinkarten-analyse',
+    '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
     '/calculadora-margen-vino': '/de/wein-margen-rechner',
     '/biblioteca-vino': '/de/weinbibliothek',
     '/biblioteca-vino/regiones': '/de/weinbibliothek/regionen',
@@ -178,6 +182,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/winerim-core': '/pt/produto/winerim-core',
     '/producto/winerim-supply': '/pt/produto/winerim-supply',
     '/analisis-carta': '/pt/analise-carta',
+    '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
     '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
     '/biblioteca-vino': '/pt/biblioteca-vinho',
     '/biblioteca-vino/regiones': '/pt/biblioteca-vinho/regioes',
@@ -326,6 +331,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/producto/winerim-core', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/producto/winerim-supply', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/barometro-cartas-vino-2026', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/calculadora-margen-vino', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/inteligencia-artificial-restaurantes', priority: '0.8', changefreq: 'monthly', multilang: false },
 

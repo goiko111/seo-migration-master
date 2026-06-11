@@ -292,7 +292,7 @@ describe("wine library SEO surface", () => {
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
 
-    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-06'");
+    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-10'");
     expect(sitemap).toContain("const WINE_LIBRARY_LASTMOD = '2026-06-01'");
     expect(sitemap).toContain("urlBlock(route.esPath, WINE_LIBRARY_LASTMOD");
     expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");

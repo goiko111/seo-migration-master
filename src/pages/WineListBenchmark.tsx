@@ -339,6 +339,15 @@ const pt: T = {
 
 const i18n: Record<string, T> = { es, en, it, fr, de, pt };
 
+const barometerLinkLabel: Record<string, string> = {
+  es: "Barómetro Winerim de cartas de vino",
+  en: "Winerim wine list barometer",
+  it: "Barometro Winerim delle carte dei vini",
+  fr: "Baromètre Winerim des cartes des vins",
+  de: "Winerim Weinkarten-Barometer",
+  pt: "Barómetro Winerim de cartas de vinhos",
+};
+
 /* ─── Chart data (prices are language-independent) ─── */
 const priceValues = [28, 42, 35, 24, 26, 22];
 const fills = [
@@ -579,7 +588,12 @@ const WineListBenchmark = () => {
         </div>
       </section>
 
-      <InternalLinks links={t.links} />
+      <InternalLinks
+        links={[
+          { to: localePath("/barometro-cartas-vino-2026"), label: barometerLinkLabel[lang] || barometerLinkLabel.es, type: "resource" as const },
+          ...t.links,
+        ]}
+      />
       <Footer />
     </div>
   );

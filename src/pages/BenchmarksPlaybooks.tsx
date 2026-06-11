@@ -17,6 +17,15 @@ import { getI18n } from "@/i18n/types";
 
 const CANONICAL = "https://winerim.wine";
 
+const barometerLinkLabel: Record<string, string> = {
+  es: "Barómetro Winerim de cartas de vino",
+  en: "Winerim wine list barometer",
+  it: "Barometro Winerim delle carte dei vini",
+  fr: "Baromètre Winerim des cartes des vins",
+  de: "Winerim Weinkarten-Barometer",
+  pt: "Barómetro Winerim de cartas de vinhos",
+};
+
 interface PageChrome {
   seoTitle: string;
   seoDesc: string;
@@ -442,7 +451,13 @@ const BenchmarksPlaybooks = () => {
       <FAQSection faqs={t.faqs} schemaId="bp-index" />
 
       {/* INTERNAL LINKS */}
-      <InternalLinks title={t.linksTitle} links={t.links} />
+      <InternalLinks
+        title={t.linksTitle}
+        links={[
+          { to: localePath("/barometro-cartas-vino-2026"), label: barometerLinkLabel[lang] || barometerLinkLabel.es, type: "resource" as const },
+          ...t.links,
+        ]}
+      />
 
       {/* FINAL CTA */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-24">

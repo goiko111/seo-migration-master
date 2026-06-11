@@ -3037,6 +3037,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/winerim-core': '/en/product/winerim-core',
     '/producto/winerim-supply': '/en/product/winerim-supply',
     '/analisis-carta': '/en/wine-list-analysis',
+    '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/soluciones/grupos-restauracion': '/en/solutions/restaurant-groups',
     '/soluciones/aumentar-ticket-medio-restaurante': '/en/solutions/increase-average-ticket',
@@ -3065,6 +3066,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/winerim-core': '/it/prodotto/winerim-core',
     '/producto/winerim-supply': '/it/prodotto/winerim-supply',
     '/analisis-carta': '/it/analisi-carta',
+    '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
     '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
     '/soluciones/grupos-restauracion': '/it/soluzioni/gruppi-ristorazione',
     '/soluciones/aumentar-ticket-medio-restaurante': '/it/soluzioni/aumentare-scontrino-medio',
@@ -3093,6 +3095,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/winerim-core': '/fr/produit/winerim-core',
     '/producto/winerim-supply': '/fr/produit/winerim-supply',
     '/analisis-carta': '/fr/analyse-carte',
+    '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
     '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
     '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
@@ -3121,6 +3124,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/winerim-core': '/de/produkt/winerim-core',
     '/producto/winerim-supply': '/de/produkt/winerim-supply',
     '/analisis-carta': '/de/weinkarten-analyse',
+    '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
     '/calculadora-margen-vino': '/de/wein-margen-rechner',
     '/soluciones/grupos-restauracion': '/de/loesungen/restaurant-gruppen',
     '/soluciones/aumentar-ticket-medio-restaurante': '/de/loesungen/durchschnittsbon-erhoehen',
@@ -3149,6 +3153,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/winerim-core': '/pt/produto/winerim-core',
     '/producto/winerim-supply': '/pt/produto/winerim-supply',
     '/analisis-carta': '/pt/analise-carta',
+    '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
     '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
     '/soluciones/grupos-restauracion': '/pt/solucoes/grupos-restauracao',
     '/soluciones/aumentar-ticket-medio-restaurante': '/pt/solucoes/aumentar-ticket-medio',
@@ -3181,6 +3186,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/producto/winerim-core': { es: 'Winerim Core', en: 'Winerim Core', it: 'Winerim Core', fr: 'Winerim Core', de: 'Winerim Core', pt: 'Winerim Core' },
   '/producto/winerim-supply': { es: 'Winerim Supply', en: 'Winerim Supply', it: 'Winerim Supply', fr: 'Winerim Supply', de: 'Winerim Supply', pt: 'Winerim Supply' },
   '/analisis-carta': { es: 'Analisis de carta de vinos', en: 'Wine list analysis', it: 'Analisi carta vini', fr: 'Analyse de carte des vins', de: 'Weinkartenanalyse', pt: 'Analise de carta de vinhos' },
+  '/barometro-cartas-vino-2026': { es: 'Barometro Winerim de cartas de vino', en: 'Winerim wine list barometer', it: 'Barometro Winerim delle carte vini', fr: 'Barometre Winerim des cartes des vins', de: 'Winerim Weinkarten-Barometer', pt: 'Barometro Winerim de cartas de vinhos' },
   '/calculadora-margen-vino': { es: 'Calculadora de margen de vino', en: 'Wine margin calculator', it: 'Calcolatrice margini vino', fr: 'Calculateur de marge vin', de: 'Wein-Margenrechner', pt: 'Calculadora de margem de vinho' },
   '/soluciones/grupos-restauracion': { es: 'Grupos de restauracion', en: 'Restaurant groups', it: 'Gruppi di ristorazione', fr: 'Groupes de restauration', de: 'Restaurantgruppen', pt: 'Grupos de restauracao' },
   '/soluciones/aumentar-ticket-medio-restaurante': { es: 'Aumentar ticket medio', en: 'Increase average ticket', it: 'Aumentare lo scontrino medio', fr: 'Augmenter le ticket moyen', de: 'Durchschnittsbon erhoehen', pt: 'Aumentar ticket medio' },
@@ -3257,6 +3263,133 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
 };
 
 function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (esPath === '/barometro-cartas-vino-2026' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Winerim Wine List Barometer 2026 | Winerim',
+        description: 'Winerim report on restaurant wine-list performance: methodology, measured variables, margin patterns and benchmarks by segment.',
+        h1: 'Winerim wine list barometer',
+        subtitle: 'Aggregated and anonymised data to understand where wine lists lose margin, which opportunities repeat and how to compare a restaurant with defensible references.',
+        intro: 'The Winerim Barometer is a living report. It starts with methodology, variables and observable patterns, then adds numerical cuts by country, vertical and list type when sample size and anonymisation rules are strong enough.',
+        sections: [
+          { heading: 'Methodology and anonymisation', content: 'The analysis works with lists, references, prices, by-the-glass formats, styles, regions and structural signals. Names of restaurants, hotels, groups and clients are not published.' },
+          { heading: 'Measured variables', content: 'Winerim measures reference count, price distribution, by-the-glass weight, regions, grapes, styles, pairings and, when available, sales, stock, margin and rotation by reference.' },
+          { heading: 'Margin patterns', content: 'The Barometer looks for invisible margin, underused by-the-glass offers, cannibalisation between similar references, large lists without clear function and missing monthly review cycles.' },
+          { heading: 'Priority segments', content: 'The first publishable cuts should cover fine dining restaurants, hotels, restaurant groups and restaurants without sommeliers because each needs a different benchmark.' },
+        ],
+        faqs: [
+          { q: 'Does the Barometer publish client data?', a: 'No. It is designed for aggregated and anonymised data, without names, full lists or sensitive metrics from specific clients.' },
+          { q: 'Can I compare my list with the Barometer?', a: 'Yes. Submit your list for the free analysis and use the benchmark as a framework for size, price, glass offer, styles and opportunities.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Guides and resources', url: `${SITE}/en/guides` }, { name: label, url: canonical }],
+        internalLinks: [
+          { label: 'Free wine-list analysis', url: '/en/wine-list-analysis' },
+          { label: 'Wine List Benchmark', url: '/en/wine-list-benchmark' },
+          { label: 'Benchmarks and playbooks', url: '/en/benchmarks-playbooks' },
+          { label: 'Winerim comparisons', url: '/en/comparisons' },
+        ],
+      },
+      it: {
+        title: 'Barometro Winerim 2026 delle Carte dei Vini | Winerim',
+        description: 'Report Winerim su performance delle carte dei vini: metodologia, variabili misurate, pattern di margine e benchmark per segmento.',
+        h1: 'Barometro Winerim delle carte dei vini',
+        subtitle: 'Dati aggregati e anonimizzati per capire dove le carte perdono margine, quali opportunità si ripetono e come confrontare un ristorante con riferimenti difendibili.',
+        intro: 'Il Barometro Winerim è un report vivo: prima metodologia, variabili e pattern osservabili; poi tagli numerici per paese, verticale e tipo di carta quando campione e anonimato saranno solidi.',
+        sections: [
+          { heading: 'Metodologia e anonimizzazione', content: 'L analisi lavora con carte, referenze, prezzi, formati al calice, stili, regioni e segnali di struttura. Non vengono pubblicati nomi di clienti o metriche sensibili.' },
+          { heading: 'Variabili misurate', content: 'Winerim misura numero di referenze, distribuzione prezzi, peso del calice, regioni, vitigni, stili, abbinamenti e, quando disponibili, vendite, stock, margine e rotazione.' },
+          { heading: 'Pattern di margine', content: 'Il Barometro cerca margine invisibile, calice sottoutilizzato, cannibalizzazione tra referenze simili, carte grandi senza funzione e assenza di revisione mensile.' },
+          { heading: 'Segmenti prioritari', content: 'I primi tagli dovrebbero coprire ristoranti gastronomici, hotel, gruppi e locali senza sommelier, perché ogni verticale richiede benchmark diversi.' },
+        ],
+        faqs: [
+          { q: 'Il Barometro pubblica dati dei clienti?', a: 'No. Usa dati aggregati e anonimizzati, senza nomi, carte complete o metriche sensibili di clienti specifici.' },
+          { q: 'Posso confrontare la mia carta?', a: 'Si. Invia la carta all analisi gratuita e usa il benchmark come quadro per dimensione, prezzo, calice, stili e opportunità.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Guide e risorse', url: `${SITE}/it/guide` }, { name: label, url: canonical }],
+        internalLinks: [
+          { label: 'Analisi gratuita carta vini', url: '/it/analisi-carta' },
+          { label: 'Wine List Benchmark', url: '/it/benchmark-carta-vini' },
+          { label: 'Benchmark e playbook', url: '/it/benchmarks-playbooks' },
+          { label: 'Confronti Winerim', url: '/it/confronti' },
+        ],
+      },
+      fr: {
+        title: 'Baromètre Winerim 2026 des Cartes des Vins | Winerim',
+        description: 'Rapport Winerim sur la performance des cartes des vins : méthodologie, variables mesurées, marge et benchmarks par segment.',
+        h1: 'Baromètre Winerim des cartes des vins',
+        subtitle: 'Données agrégées et anonymisées pour comprendre où les cartes perdent de la marge, quelles opportunités se répètent et comment comparer un restaurant.',
+        intro: 'Le Baromètre Winerim est un rapport vivant : méthodologie, variables et motifs observables d abord, puis chiffres par pays, vertical et type de carte quand l échantillon est suffisant.',
+        sections: [
+          { heading: 'Méthodologie et anonymisation', content: 'L analyse travaille avec cartes, références, prix, formats au verre, styles, régions et signaux de structure. Les noms et données sensibles ne sont pas publiés.' },
+          { heading: 'Variables mesurées', content: 'Winerim mesure nombre de références, distribution de prix, poids du vin au verre, régions, cépages, styles, accords et, si disponible, ventes, stock, marge et rotation.' },
+          { heading: 'Motifs de marge', content: 'Le Baromètre recherche marge invisible, vin au verre sous exploité, cannibalisation entre références proches, grandes cartes sans fonction claire et absence de cycle mensuel.' },
+          { heading: 'Segments prioritaires', content: 'Les premières coupes devraient couvrir restaurants gastronomiques, hôtels, groupes et restaurants sans sommelier, car chaque vertical demande un benchmark distinct.' },
+        ],
+        faqs: [
+          { q: 'Le Baromètre publie-t-il des données clients ?', a: 'Non. Il utilise des données agrégées et anonymisées, sans noms, cartes complètes ni métriques sensibles de clients précis.' },
+          { q: 'Puis-je comparer ma carte ?', a: 'Oui. Envoyez la carte pour l analyse gratuite puis utilisez le benchmark comme cadre pour taille, prix, verre, styles et opportunités.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Guides et ressources', url: `${SITE}/fr/guides` }, { name: label, url: canonical }],
+        internalLinks: [
+          { label: 'Analyse gratuite de carte', url: '/fr/analyse-carte' },
+          { label: 'Wine List Benchmark', url: '/fr/benchmark-carte-vins' },
+          { label: 'Benchmarks et playbooks', url: '/fr/benchmarks-playbooks' },
+          { label: 'Comparatifs Winerim', url: '/fr/comparatifs' },
+        ],
+      },
+      de: {
+        title: 'Winerim Weinkarten-Barometer 2026 | Winerim',
+        description: 'Winerim-Bericht zur Performance von Weinkarten: Methodik, Variablen, Margenmuster und Benchmarks nach Segment.',
+        h1: 'Winerim Weinkarten-Barometer',
+        subtitle: 'Aggregierte und anonymisierte Daten, um zu verstehen, wo Weinkarten Marge verlieren, welche Chancen sich wiederholen und wie ein Restaurant vergleichbar wird.',
+        intro: 'Das Winerim Barometer ist ein Live-Bericht: zuerst Methodik, Variablen und beobachtbare Muster, danach Zahlen nach Land, Vertikal und Kartentyp, wenn Stichprobe und Anonymisierung ausreichen.',
+        sections: [
+          { heading: 'Methodik und Anonymisierung', content: 'Die Analyse arbeitet mit Karten, Referenzen, Preisen, Glasformaten, Stilen, Regionen und Struktursignalen. Namen und sensible Kundendaten werden nicht veröffentlicht.' },
+          { heading: 'Gemessene Variablen', content: 'Winerim misst Referenzanzahl, Preisverteilung, Glasweinanteil, Regionen, Rebsorten, Stile, Pairings und, sofern vorhanden, Verkauf, Bestand, Marge und Rotation.' },
+          { heading: 'Margenmuster', content: 'Das Barometer sucht nach unsichtbarer Marge, untergenutztem Glaswein, Kannibalisierung ähnlicher Referenzen, großen Karten ohne klare Funktion und fehlendem Monatszyklus.' },
+          { heading: 'Priorisierte Segmente', content: 'Erste Schnitte sollten Fine Dining, Hotels, Restaurantgruppen und Restaurants ohne Sommelier abdecken, weil jedes Segment andere Benchmarks braucht.' },
+        ],
+        faqs: [
+          { q: 'Veröffentlicht das Barometer Kundendaten?', a: 'Nein. Es nutzt aggregierte und anonymisierte Daten, ohne Namen, vollständige Karten oder sensible Kennzahlen einzelner Kunden.' },
+          { q: 'Kann ich meine Karte vergleichen?', a: 'Ja. Senden Sie Ihre Karte zur kostenlosen Analyse und nutzen Sie den Benchmark als Rahmen für Größe, Preis, Glasangebot, Stile und Chancen.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Ratgeber und Ressourcen', url: `${SITE}/de/ratgeber` }, { name: label, url: canonical }],
+        internalLinks: [
+          { label: 'Kostenlose Weinkartenanalyse', url: '/de/weinkarten-analyse' },
+          { label: 'Wine List Benchmark', url: '/de/weinkarten-benchmark' },
+          { label: 'Benchmarks und Playbooks', url: '/de/benchmarks-playbooks' },
+          { label: 'Winerim Vergleiche', url: '/de/vergleiche' },
+        ],
+      },
+      pt: {
+        title: 'Barómetro Winerim 2026 de Cartas de Vinhos | Winerim',
+        description: 'Relatório Winerim sobre desempenho de cartas de vinhos: metodologia, variáveis medidas, padrões de margem e benchmarks por segmento.',
+        h1: 'Barómetro Winerim de cartas de vinhos',
+        subtitle: 'Dados agregados e anonimizados para perceber onde as cartas perdem margem, que oportunidades se repetem e como comparar um restaurante com referências defensáveis.',
+        intro: 'O Barómetro Winerim é um relatório vivo: primeiro metodologia, variáveis e padrões observáveis; depois cortes numéricos por país, vertical e tipo de carta quando a amostra for suficiente.',
+        sections: [
+          { heading: 'Metodologia e anonimização', content: 'A análise trabalha com cartas, referências, preços, formatos a copo, estilos, regiões e sinais de estrutura. Nomes e dados sensíveis não são publicados.' },
+          { heading: 'Variáveis medidas', content: 'A Winerim mede número de referências, distribuição de preços, peso do vinho a copo, regiões, castas, estilos, harmonizações e, quando disponível, vendas, stock, margem e rotação.' },
+          { heading: 'Padrões de margem', content: 'O Barómetro procura margem invisível, vinho a copo subutilizado, canibalização entre referências semelhantes, cartas grandes sem função clara e falta de ciclo mensal.' },
+          { heading: 'Segmentos prioritários', content: 'Os primeiros cortes devem cobrir restaurantes gastronómicos, hotéis, grupos e restaurantes sem sommelier, porque cada vertical precisa de benchmark próprio.' },
+        ],
+        faqs: [
+          { q: 'O Barómetro publica dados de clientes?', a: 'Não. Usa dados agregados e anonimizados, sem nomes, cartas completas ou métricas sensíveis de clientes específicos.' },
+          { q: 'Posso comparar a minha carta?', a: 'Sim. Envie a carta para análise gratuita e use o benchmark como enquadramento para tamanho, preço, copo, estilos e oportunidades.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Guias e recursos', url: `${SITE}/pt/guias` }, { name: label, url: canonical }],
+        internalLinks: [
+          { label: 'Análise gratuita de carta', url: '/pt/analise-carta' },
+          { label: 'Wine List Benchmark', url: '/pt/benchmark-carta-vinhos' },
+          { label: 'Benchmarks e playbooks', url: '/pt/benchmarks-playbooks' },
+          { label: 'Comparativos Winerim', url: '/pt/comparativos' },
+        ],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
   if (lang === 'it' && esPath === '/precios') {
     return {
       title: 'Prezzi Winerim | Software carta vini per ristoranti',
@@ -4063,6 +4196,48 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Herramientas', url: '/herramientas' },
         { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
         { label: 'Demo', url: '/demo' },
+      ],
+    },
+  },
+  '/barometro-cartas-vino-2026': {
+    meta: {
+      title: 'Barómetro Winerim 2026 de Cartas de Vino | Winerim',
+      description: 'Informe Winerim sobre cómo rinden las cartas de vino en restauración: metodología, variables medidas, patrones de margen y benchmarks por segmento.',
+      canonical: `${SITE}/barometro-cartas-vino-2026`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'article',
+      schemaType: 'Report',
+    },
+    content: {
+      h1: 'Barómetro Winerim de cartas de vino',
+      subtitle: 'Datos agregados y anonimizados para entender dónde pierden margen las cartas, qué oportunidades se repiten y cómo comparar un restaurante con referencias defendibles.',
+      intro: 'El Barómetro Winerim 2026 funciona como informe vivo. Primero publica metodología, variables y patrones observados; después incorporará cortes numéricos por país, vertical y tipo de carta cuando exista muestra suficiente y reglas de anonimato claras.',
+      sections: [
+        { heading: 'Metodología y anonimización', content: 'El análisis trabaja con cartas, referencias, precios, formatos por copa, estilos, regiones y señales de estructura. No se publican nombres de restaurantes, hoteles, grupos ni clientes, y los cortes por país, ciudad o vertical requieren umbrales mínimos antes de convertirse en benchmark público.' },
+        { heading: 'Variables medidas', content: 'Winerim mide número de referencias, distribución de precios, peso del vino por copa, regiones, uvas, estilos, maridajes y, cuando el restaurante comparte datos operativos, ventas, stock, margen y rotación por referencia.' },
+        { heading: 'Patrones de margen', content: 'El Barómetro busca señales como margen invisible, vino por copa infrautilizado, canibalización entre referencias parecidas, cartas grandes sin función clara, biblioteca de vino poco conectada y ausencia de revisión mensual.' },
+        { heading: 'Segmentos prioritarios', content: 'Los primeros cortes publicables deberían cubrir restaurantes gastronómicos, hoteles, grupos de restauración y restaurantes sin sumiller, porque cada vertical necesita comparar estructura, margen, copa, stock y recomendaciones de forma distinta.' },
+        { heading: 'Datos necesarios para escalar', content: 'Para llevar el Barómetro al máximo nivel hacen falta cartas completas con nombre, origen, estilo, formato, precio botella, precio copa, tipo de negocio, país, ciudad, ticket medio, número de locales, ventas, rotación, stock, margen, platos principales y periodo de análisis.' },
+      ],
+      faqs: [
+        { q: '¿El Barómetro publica datos de clientes?', a: 'No. La página está diseñada para datos agregados y anonimizados. No publica nombres, cartas completas ni métricas sensibles de clientes concretos.' },
+        { q: '¿Las cifras actuales son definitivas?', a: 'No. La primera versión prioriza metodología, variables y patrones observables. Las cifras segmentadas se deberían publicar solo con muestra suficiente y reglas claras de anonimato.' },
+        { q: '¿Cómo se conecta con la biblioteca del vino?', a: 'La biblioteca aporta el lenguaje semántico de uvas, regiones, estilos y maridajes. El Barómetro usa esa estructura para explicar qué falta, qué sobra y qué bloque de la carta puede vender mejor.' },
+        { q: '¿Puedo comparar mi carta con el Barómetro?', a: 'Sí. El flujo recomendado es enviar la carta en el análisis gratuito y usar el benchmark como marco para entender tamaño, precios, copa, estilos y oportunidades.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Guías y recursos', url: `${SITE}/guias-y-recursos` },
+        { name: 'Barómetro Winerim', url: `${SITE}/barometro-cartas-vino-2026` },
+      ],
+      internalLinks: [
+        { label: 'Analizar carta de vinos gratis', url: '/analisis-carta' },
+        { label: 'Wine List Benchmark', url: '/wine-list-benchmark' },
+        { label: 'Benchmarks y playbooks', url: '/benchmarks-playbooks' },
+        { label: 'Comparativas Winerim', url: '/comparativas' },
+        { label: 'Biblioteca de vino', url: '/biblioteca-vino' },
+        { label: 'Demo gratuita', url: '/demo' },
       ],
     },
   },
@@ -5437,6 +5612,28 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     })),
   }) : '';
 
+  const reportDatasetSchema = meta.schemaType === 'Report' ? JSON.stringify({
+    '@context': 'https://schema.org',
+    '@id': `${meta.canonical}#dataset-framework`,
+    '@type': 'Dataset',
+    name: `${content.h1} dataset framework`,
+    description: meta.description,
+    url: meta.canonical,
+    creator: { '@type': 'Organization', name: 'Winerim', url: SITE },
+    publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+    isAccessibleForFree: true,
+    inLanguage: meta.lang,
+    measurementTechnique: 'Aggregated and anonymized wine-list analysis across references, prices, by-the-glass offer, wine styles, regions, pairings, margin and rotation signals.',
+    variableMeasured: [
+      'Number of wine references',
+      'Bottle and glass price ranges',
+      'By-the-glass offer',
+      'Wine regions and grapes',
+      'Wine styles and pairings',
+      'Sales, stock, margin and rotation signals',
+    ].map((name) => ({ '@type': 'PropertyValue', name })),
+  }) : '';
+
   const mainSchema = meta.schemaType === 'SoftwareApplication'
     ? JSON.stringify({
         '@context': 'https://schema.org',
@@ -5579,6 +5776,7 @@ ${hreflangHTML}
   
   <script type="application/ld+json">${mainSchema}</script>
   ${itemListSchema ? `<script type="application/ld+json">${itemListSchema}</script>` : ''}
+  ${reportDatasetSchema ? `<script type="application/ld+json">${reportDatasetSchema}</script>` : ''}
   ${faqSchema ? `<script type="application/ld+json">${faqSchema}</script>` : ''}
   ${breadcrumbSchema ? `<script type="application/ld+json">${breadcrumbSchema}</script>` : ''}
   <script type="application/ld+json">${orgSchema}</script>

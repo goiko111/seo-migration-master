@@ -46,6 +46,7 @@ const WineROICalculator = lazy(() => import("./pages/WineROICalculator"));
 const WinePairingGenerator = lazy(() => import("./pages/WinePairingGenerator"));
 const WinePricingTool = lazy(() => import("./pages/WinePricingTool"));
 const WineListBenchmark = lazy(() => import("./pages/WineListBenchmark"));
+const BarometroCartasVino = lazy(() => import("./pages/BarometroCartasVino"));
 const Precios = lazy(() => import("./pages/Precios"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
@@ -230,6 +231,7 @@ const esRoutes = (
     <Route path="/wine-pairing-generator" element={<WinePairingGenerator />} />
     <Route path="/wine-pricing-tool" element={<WinePricingTool />} />
     <Route path="/wine-list-benchmark" element={<WineListBenchmark />} />
+    <Route path="/barometro-cartas-vino-2026" element={<BarometroCartasVino />} />
     <Route path="/precios" element={<Precios />} />
     <Route path="/integraciones" element={<Integraciones />} />
     <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
@@ -431,6 +433,11 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/comparisons`} element={<Comparativas />} />
     <Route path={`${prefix}/confronti`} element={<Comparativas />} />
     <Route path={`${prefix}/comparatifs`} element={<Comparativas />} />
+    <Route path={`${prefix}/wine-list-barometer-2026`} element={<BarometroCartasVino />} />
+    <Route path={`${prefix}/barometro-carte-vini-2026`} element={<BarometroCartasVino />} />
+    <Route path={`${prefix}/barometre-cartes-vins-2026`} element={<BarometroCartasVino />} />
+    <Route path={`${prefix}/weinkarten-barometer-2026`} element={<BarometroCartasVino />} />
+    <Route path={`${prefix}/barometro-cartas-vinhos-2026`} element={<BarometroCartasVino />} />
     <Route path={`${prefix}/comparisons/:slug`} element={<ComparativaDetalle />} />
     <Route path={`${prefix}/confronti/:slug`} element={<ComparativaDetalle />} />
     <Route path={`${prefix}/comparatifs/:slug`} element={<ComparativaDetalle />} />
