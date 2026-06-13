@@ -5621,6 +5621,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     url: meta.canonical,
     creator: { '@type': 'Organization', name: 'Winerim', url: SITE },
     publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+    license: localizedStaticUrl('/terminos'),
     isAccessibleForFree: true,
     inLanguage: meta.lang,
     measurementTechnique: 'Aggregated and anonymized wine-list analysis across references, prices, by-the-glass offer, wine styles, regions, pairings, margin and rotation signals.',

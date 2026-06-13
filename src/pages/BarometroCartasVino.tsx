@@ -522,6 +522,7 @@ const BarometroCartasVino = () => {
   const t = getI18n(i18n, lang);
   const canonicalPath = localePath(ES_PATH);
   const canonical = `${CANONICAL_DOMAIN}${canonicalPath}`;
+  const datasetLicense = `${CANONICAL_DOMAIN}${localePath("/terminos")}`;
 
   const structuredData = [
     {
@@ -551,6 +552,7 @@ const BarometroCartasVino = () => {
       name: `${t.h1} dataset framework`,
       description: t.schemaMeasurement,
       creator: { "@type": "Organization", name: "Winerim", url: CANONICAL_DOMAIN },
+      license: datasetLicense,
       isAccessibleForFree: true,
       inLanguage: lang,
       measurementTechnique: t.schemaMeasurement,

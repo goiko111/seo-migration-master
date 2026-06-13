@@ -330,6 +330,15 @@ const BAROMETER_ALTERNATES = {
 
 const WORKER_BAROMETER_SITEMAP_LASTMOD = '2026-06-10';
 
+const WORKER_TERMS_PATHS = {
+  es: '/terminos',
+  en: '/en/terms',
+  it: '/it/termini',
+  fr: '/fr/conditions',
+  de: '/de/agb',
+  pt: '/pt/termos',
+};
+
 function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -360,6 +369,7 @@ function renderWorkerStaticPrerender(path, site) {
     inLanguage: page.lang,
     creator: { '@type': 'Organization', name: 'Winerim', url: site },
     publisher: { '@type': 'Organization', name: 'Winerim', url: site },
+    license: `${site}${WORKER_TERMS_PATHS[page.lang] || '/terminos'}`,
     measurementTechnique: 'Aggregated and anonymized wine list analysis',
     variableMeasured: ['references per wine list', 'price ranges', 'by-the-glass offer', 'regions', 'grapes', 'styles', 'pairings', 'rotation', 'margin', 'dead stock signals'],
   }) : '';
