@@ -1,5 +1,41 @@
 # Decisions Log
 
+## 2026-06-13
+
+### Seguimiento Search Console y limpieza de `Dataset` del Barometro
+
+#### Hechos
+
+- Se reviso Search Console para `https://winerim.wine/`.
+- La vista general mostraba `719` paginas indexadas, `2.600` no indexadas y `899` clics totales en busqueda web.
+- `https://winerim.wine/barometro-cartas-vino-2026` ya fue rastreada por Google y paso a `Rastreada: actualmente sin indexar`.
+- La URL principal ES tiene rastreo permitido, obtencion correcta, indexacion permitida, sitemap detectado y canonica propia.
+- EN y PT del Barometro ya aparecen indexadas.
+- IT, FR y DE aparecen `Rastreada: actualmente sin indexar`, con rastreo permitido, obtencion correcta, indexacion permitida y sitemap detectado.
+- Se solicito indexacion manual para ES, IT, FR y DE.
+- Search Console detecto en `Dataset` un aviso no critico: falta `license` opcional.
+- Se anadio `license` localizado al schema `Dataset` del Barometro en React, Supabase `prerender` y fallback Worker.
+- Se desplego Worker `winerim-proxy` version `5d2c0d9c-b596-4796-99fb-2ac5af00636e`.
+- Se pusheo `3ddbbe2 fix: add dataset license to barometer schema`.
+- Lovable desplego `prerender` desde `3ddbbe2` y publico frontend; produccion valida `license` en las seis variantes.
+
+#### Decisiones
+
+- No pedir reindexacion para EN/PT porque ya estan indexadas.
+- Usar las paginas localizadas de terminos como `license` mientras no exista licencia especifica de dataset.
+- Tratar el aviso `license` como mejora de calidad SEO/LLM, no como bloqueo de indexacion.
+
+#### Hipotesis
+
+- El aviso de `license` desaparecera en Search Console tras el siguiente rastreo de las URLs del Barometro.
+- La indexacion parcial EN/PT sugiere que el cluster esta siendo entendido; ES/IT/FR/DE dependen ahora de la seleccion de Google tras nuevo rastreo.
+
+#### Tareas pendientes
+
+- Revisar ES/IT/FR/DE en 48-72 horas.
+- Confirmar si el informe `Conjuntos de datos` deja de marcar el campo `license`.
+- Priorizar Core Web Vitals como linea tecnica posterior porque Search Console muestra `153` URLs en `Necesita mejorar` en movil y ordenador.
+
 ## 2026-06-11
 
 ### Lovable despliega `sitemap`/`prerender` y se retira el puente estatico del Worker

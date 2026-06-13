@@ -1,5 +1,29 @@
 # Next Steps
 
+## Actualizacion 2026-06-13: retomar tras seguimiento Search Console del Barometro
+
+## Hechos
+
+- Search Console ya rastreo el Barometro.
+- EN y PT del Barometro aparecen indexadas.
+- ES, IT, FR y DE estan `Rastreada: actualmente sin indexar`.
+- Se solicitaron indexaciones manuales para ES, IT, FR y DE el 2026-06-13.
+- Produccion ya expone `Dataset.license` localizado en las seis variantes tras commit `3ddbbe2`, Worker `5d2c0d9c-b596-4796-99fb-2ac5af00636e` y deploy Lovable de `prerender`/frontend.
+- Search Console mostro `719` paginas indexadas, `2.600` no indexadas y Core Web Vitals con `153` URLs en `Necesita mejorar` en movil y ordenador.
+
+## Tareas pendientes inmediatas
+
+1. Revisar en 48-72 horas estas URLs:
+   - `https://winerim.wine/barometro-cartas-vino-2026`;
+   - `https://winerim.wine/it/barometro-carte-vini-2026`;
+   - `https://winerim.wine/fr/barometre-cartes-vins-2026`;
+   - `https://winerim.wine/de/weinkarten-barometer-2026`.
+2. Confirmar que EN y PT siguen indexadas.
+3. Revisar el informe de `Conjuntos de datos` para confirmar si desaparece `Falta el campo "license"`.
+4. No repetir solicitudes manuales de indexacion salvo que Search Console muestre error nuevo; varias solicitudes no aumentan prioridad.
+5. Auditar Core Web Vitals como siguiente linea tecnica: Search Console muestra `153` URLs en `Necesita mejorar` en movil y ordenador.
+6. Preparar la siguiente version del Barometro con dataset real, muestra minima y reglas de anonimato.
+
 ## Actualizacion 2026-06-11: retomar tras limpiar Worker del Barometro
 
 ## Hechos

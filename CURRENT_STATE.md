@@ -1,5 +1,78 @@
 # Current State
 
+## Actualizacion 2026-06-13: Search Console y Dataset license del Barometro
+
+## Hechos
+
+- Se reviso Search Console para la propiedad URL-prefix `https://winerim.wine/`.
+- Vista general de Search Console en el momento de revision:
+  - `719` paginas indexadas;
+  - `2.600` paginas no indexadas;
+  - `899` clics totales en busqueda web;
+  - Core Web Vitals muestra `153` URLs en `Necesita mejorar` en movil y `153` en ordenador.
+- La URL `https://winerim.wine/barometro-cartas-vino-2026` ya no aparece como desconocida por Google.
+- Estado de la URL principal ES:
+  - `La URL no esta en Google`;
+  - motivo: `Rastreada: actualmente sin indexar`;
+  - ultimo rastreo: `11 jun 2026, 4:37:41`;
+  - rastreador: Robot de Google para smartphones;
+  - rastreo permitido: `Si`;
+  - obtencion de pagina: `Correcto`;
+  - indexacion permitida: `Si`;
+  - sitemap detectado: `https://winerim.wine/sitemap.xml`;
+  - canonica declarada: propia;
+  - canonica seleccionada por Google: URL inspeccionada.
+- Se volvio a solicitar indexacion manual para la URL principal ES y Search Console confirmo que fue anadida a una cola de rastreo prioritaria.
+- Estado de variantes:
+  - EN `https://winerim.wine/en/wine-list-barometer-2026`: indexada en Google.
+  - PT `https://winerim.wine/pt/barometro-cartas-vinhos-2026`: indexada en Google.
+  - IT `https://winerim.wine/it/barometro-carte-vini-2026`: `Rastreada: actualmente sin indexar`, ultimo rastreo `11 jun 2026, 8:14:48`.
+  - FR `https://winerim.wine/fr/barometre-cartes-vins-2026`: `Rastreada: actualmente sin indexar`, ultimo rastreo `11 jun 2026, 12:24:16`.
+  - DE `https://winerim.wine/de/weinkarten-barometer-2026`: `Rastreada: actualmente sin indexar`, ultimo rastreo `11 jun 2026, 9:22:45`.
+- Se solicitaron manualmente indexaciones para IT, FR y DE; PT no se solicito porque ya aparecia indexada.
+- Search Console mostro un aviso no critico en `Conjuntos de datos`: `Falta el campo "license" (opcional)`.
+- Se implemento `license` localizado en el schema `Dataset` del Barometro:
+  - React humano: `src/pages/BarometroCartasVino.tsx`;
+  - Supabase `prerender`: `supabase/functions/prerender/index.ts`;
+  - fallback generico de Worker: `cloudflare-worker-v3-hybrid.js`.
+- Validaciones locales completadas:
+  - `npm run build`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` (`17` tests pasados);
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run deploy:worker:dry-run`;
+  - `git diff --check`.
+- Se desplego Cloudflare Worker `winerim-proxy` version `5d2c0d9c-b596-4796-99fb-2ac5af00636e`.
+- Se pusheo a `origin/main` el commit `3ddbbe2 fix: add dataset license to barometer schema`.
+- Lovable desplego Supabase `prerender` desde `3ddbbe2` y valido ES/EN/PT con `200`, `bot-prerender`, `x-prerendered true`, canonical, `hreflang`, schema `Report`, schema `Dataset` y `license` localizado.
+- Se publico frontend desde Lovable y el dialogo quedo `Up to date`.
+- Produccion validada como Googlebot:
+  - ES contiene `license: https://winerim.wine/terminos`;
+  - EN contiene `license: https://winerim.wine/en/terms`;
+  - IT contiene `license: https://winerim.wine/it/termini`;
+  - FR contiene `license: https://winerim.wine/fr/conditions`;
+  - DE contiene `license: https://winerim.wine/de/agb`;
+  - PT contiene `license: https://winerim.wine/pt/termos`.
+
+## Decisiones
+
+- No volver a solicitar indexacion para EN/PT porque ya estan indexadas.
+- Solicitar indexacion manual solo para ES/IT/FR/DE, que estan tecnicamente correctas pero aun no indexadas.
+- Usar las paginas localizadas de terminos de Winerim como `license` del `Dataset` hasta que exista una licencia especifica de dataset o metodologia.
+
+## Hipotesis
+
+- ES/IT/FR/DE deberian avanzar de `Rastreada: actualmente sin indexar` a indexadas tras la nueva cola de rastreo, aunque Google no garantiza plazo ni inclusion.
+- El aviso no critico de `Dataset` deberia desaparecer en Search Console tras el siguiente recrawl porque produccion ya expone `license`.
+- La presencia de EN/PT ya indexadas indica que el Barometro esta entrando en el indice por hreflang/sitemap, no solo por solicitud manual.
+
+## Tareas pendientes
+
+- Revisar Search Console en 48-72 horas para ES/IT/FR/DE.
+- Confirmar que el informe de `Conjuntos de datos` deja de mostrar `Falta el campo "license"` tras recrawl.
+- Vigilar Core Web Vitals: hay `153` URLs en `Necesita mejorar` tanto en movil como en ordenador.
+- Mantener como siguiente mejora editorial del Barometro la definicion de dataset real, muestra minima y reglas de anonimato.
+
 ## Actualizacion 2026-06-11: Lovable despliega Edge Functions y Worker queda limpio
 
 ## Hechos
