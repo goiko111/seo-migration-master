@@ -1,5 +1,27 @@
 # Next Steps
 
+## Actualizacion 2026-06-19: retomar tras correccion de `/presentacion`
+
+## Hechos
+
+- `/presentacion` ya no devuelve `404` en produccion.
+- La causa fue Cloudflare Worker: la ruta existia en React y sitemap, pero no estaba permitida por `SEO_EXACT`.
+- Las seis rutas de presentacion ya responden `200` para usuarios.
+- Las seis rutas responden `200` para Googlebot con `x-worker-branch: worker-static-prerender`.
+- Worker desplegado: `807319ba-4743-47ad-87e9-401e8d952efe`.
+
+## Tareas pendientes inmediatas
+
+1. No hace falta actuar en Lovable para este bug: el bloqueo estaba en Cloudflare Worker y ya esta desplegado.
+2. Mantener como deuda tecnica menor: mover o duplicar el prerender de presentacion en Supabase `prerender` para que el Worker no tenga contenido SEO estatico de esta pagina.
+3. En futuras rutas publicas, validar siempre:
+   - ruta React;
+   - inclusion en sitemap si es indexable;
+   - inclusion en Worker;
+   - respuesta humana `200`;
+   - respuesta Googlebot `200` con canonical/titulo correctos.
+4. Continuar despues con el hub `Como empezar con el vino`.
+
 ## Actualizacion 2026-06-19: retomar `Como empezar con el vino`
 
 ## Hechos

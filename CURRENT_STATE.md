@@ -1,5 +1,56 @@
 # Current State
 
+## Actualizacion 2026-06-19: `/presentacion` deja de devolver 404
+
+## Hechos
+
+- El usuario reporto que `/presentacion` devolvia `Not Found`.
+- Validacion inicial en produccion:
+  - `https://winerim.wine/presentacion` respondia `HTTP 404`;
+  - el cuerpo era `Not Found`;
+  - cabecera `x-worker-branch: not-found`;
+  - cabecera `x-robots-tag: noindex`.
+- El codigo React ya tenia rutas para la presentacion:
+  - `/presentacion`;
+  - `/en/presentation`;
+  - `/fr/presentation`;
+  - `/it/presentazione`;
+  - `/de/praesentation`;
+  - `/pt/apresentacao`.
+- `public/sitemap-extra.json` ya incluia las seis URLs de presentacion.
+- La causa era Cloudflare Worker: las rutas de presentacion no estaban incluidas en `SEO_EXACT`, por lo que el Worker las cortaba antes de llegar al origen Lovable.
+- Se actualizaron `cloudflare-worker-v3-hybrid.js` y el Worker productivo:
+  - se anadieron las seis rutas a `SEO_EXACT`;
+  - se anadio prerender estatico especifico para las seis variantes de presentacion;
+  - se mantuvieron canonical, alternates `hreflang`, schema `WebPage` y enlaces internos basicos.
+- Validaciones ejecutadas:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run deploy:worker:dry-run`;
+  - `git diff --check`;
+  - `npm run deploy:worker`.
+- Cloudflare Worker `winerim-proxy` quedo desplegado con version `807319ba-4743-47ad-87e9-401e8d952efe`.
+- Produccion validada:
+  - humano: las seis rutas de presentacion responden `200`;
+  - Googlebot: las seis rutas responden `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`;
+  - Googlebot recibe titulos propios de presentacion por idioma.
+- Estado de worktree tras la correccion: `index.html` y `src/components/WineListAnalyzerTool.tsx` siguen modificados de antes y no se tocaron en esta correccion.
+
+## Decisiones
+
+- Tratar `/presentacion` como ruta SEO publica porque ya esta en sitemap y tiene versiones localizadas.
+- Resolver el bloqueo en Worker, no en Lovable, porque la cabecera `x-worker-branch: not-found` demostraba que la peticion no llegaba al origen.
+- Anadir prerender estatico en Worker para evitar que Googlebot recibiera fallback de otra pagina mientras Supabase `prerender` no tenga una version especifica.
+
+## Hipotesis
+
+- La pagina fallaba por desalineacion operativa entre React/sitemap y Cloudflare Worker, no por un problema de Lovable ni del componente `Presentation`.
+- Centralizar el prerender de presentacion en Supabase reduciria duplicacion futura, pero no era necesario para resolver el 404 productivo.
+
+## Tareas pendientes
+
+- Si se modifica la presentacion de forma significativa, sincronizar tambien el prerender estatico del Worker o migrarlo a Supabase `prerender`.
+- Incluir las rutas de presentacion en cualquier checklist futura de validacion de rutas publicas nuevas.
+
 ## Actualizacion 2026-06-19: referencia La RVF para iniciacion al vino
 
 ## Hechos

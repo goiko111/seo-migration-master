@@ -2,6 +2,9 @@
 
 ## Hechos
 
+- El 2026-06-19 se corrigio el `404 Not Found` de `https://winerim.wine/presentacion`: React y `sitemap-extra.json` ya tenian la ruta, pero Cloudflare Worker la bloqueaba como ruta no conocida con `x-worker-branch: not-found`.
+- La correccion anadio al Worker las seis rutas de presentacion (`/presentacion`, `/en/presentation`, `/fr/presentation`, `/it/presentazione`, `/de/praesentation`, `/pt/apresentacao`) como rutas SEO exactas y anadio prerender estatico especifico para bots.
+- Produccion quedo validada tras desplegar Cloudflare Worker `winerim-proxy` version `807319ba-4743-47ad-87e9-401e8d952efe`: las seis rutas responden `200` para usuarios y Googlebot recibe `worker-static-prerender` con titulo/canonical propios.
 - El 2026-06-19 se reviso la seccion de La Revue du Vin de France `S'initier au vin` y su `Dictionnaire du vin` como referencia editorial externa para ampliar la biblioteca del vino de Winerim.
 - La RVF estructura la iniciacion al vino con hubs y subhubs: aprender vino, diccionario/glosario, acuerdos comida-vino, regiones, terroirs, conservacion/cava, economia, subastas y cultura del vino.
 - La revision externa se considera inspiracion de arquitectura, intenciones de busqueda y taxonomia editorial; no es fuente para copiar texto, ejemplos literales ni estructura protegida.
@@ -74,6 +77,8 @@
 
 ## Decisiones
 
+- Toda ruta incluida en sitemap o en React como pagina publica debe estar tambien permitida por Cloudflare Worker; si no, produccion puede devolver `404` antes de llegar a Lovable.
+- Para `/presentacion`, mantener un prerender estatico en Worker hasta que Supabase `prerender` tenga una version propia equivalente o se centralice la fuente SEO.
 - Para Winerim, convertir la inspiracion de La RVF en un hub propio `Como empezar con el vino`, localizado, conectado a biblioteca, glosario, maridajes, regiones, uvas, estilos, analisis de carta y formacion de equipos de sala.
 - Priorizar en ese hub el angulo diferencial B2B de Winerim: explicar vino para restaurantes, hoteles y equipos de sala, no solo educacion generica para aficionados.
 - No priorizar subastas como parte del primer bloque de iniciacion de Winerim; puede quedar como contenido futuro de autoridad, pero no como base de la biblioteca para captacion.
@@ -93,6 +98,7 @@
 
 ## Hipótesis
 
+- La discrepancia entre React/sitemap y Worker puede repetirse en paginas nuevas si no se valida siempre produccion humana y Googlebot tras publicar rutas.
 - Un recorrido guiado para principiantes puede aumentar la utilidad humana, el enlazado interno y la comprension por Google/LLMs de la biblioteca del vino.
 - Adaptar contenidos de iniciacion a contextos de restaurante y hotel deberia diferenciar Winerim frente a medios editoriales generalistas de vino.
 - La biblioteca del vino es una superficie SEO estratégica para Winerim.
@@ -110,6 +116,7 @@
 
 ## Tareas pendientes
 
+- Considerar mover el prerender especifico de `/presentacion` desde Worker a Supabase `prerender` para reducir duplicacion futura.
 - Implementar el hub localizado `Como empezar con el vino` y una primera tanda de articulos propios: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiquetas, temperatura de servicio, copas, conservacion, defectos, maridajes basicos y recomendacion en sala.
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Monitorizar en Search Console la indexacion de la URL principal del Barometro Winerim y la cobertura de las seis variantes localizadas tras el reenvio de `/sitemap.xml` del 2026-06-11.
