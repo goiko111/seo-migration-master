@@ -1,5 +1,35 @@
 # Decisions Log
 
+## 2026-06-19
+
+### Revision de La RVF para `Como empezar con el vino`
+
+#### Hechos
+
+- Se revisaron las paginas de La Revue du Vin de France sobre `S'initier au vin` y `Dictionnaire du vin`.
+- La estructura revisada combina hub principal, subhubs tematicos y articulos atomicos de iniciacion.
+- Los subhubs mas relevantes para Winerim son aprender vino, diccionario/glosario, acuerdos comida-vino, regiones, terroirs y conservacion/cava.
+- Los temas con mejor encaje inmediato son vocabulario de cata, como catar, tipos de vino, cepas, regiones, lectura de etiqueta, temperatura de servicio, copas, conservacion, defectos y maridajes.
+- Winerim ya tiene biblioteca, glosario, cursos, maridajes y guias; lo que falta es ordenar una capa de inicio guiado.
+
+#### Decisiones
+
+- No copiar contenido de La RVF; usarlo solo para inspirar arquitectura editorial, intenciones SEO y cobertura tematica.
+- Crear un hub propio `Como empezar con el vino` con enfoque Winerim: aprendizaje util para restaurantes, hoteles y equipos de sala.
+- Priorizar contenido evergreen y accionable frente a noticias, subastas o actualidad economica.
+- Conectar cada pieza nueva con entidades existentes de biblioteca y con activos de conversion.
+
+#### Hipotesis
+
+- La ruta guiada de iniciacion puede mejorar engagement, enlazado interno e indexabilidad semantica.
+- El angulo de sala/restaurante puede diferenciar a Winerim de medios editoriales generalistas.
+
+#### Tareas pendientes
+
+- Implementar el hub localizado y la primera tanda de articulos propios.
+- Asegurar que sitemap, prerender, canonicals, hreflang, schema y `llms.txt` quedan actualizados.
+- Validar en produccion como usuario humano y como Googlebot tras deploy.
+
 ## 2026-06-13
 
 ### Seguimiento Search Console y limpieza de `Dataset` del Barometro

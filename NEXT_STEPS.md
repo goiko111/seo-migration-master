@@ -1,5 +1,47 @@
 # Next Steps
 
+## Actualizacion 2026-06-19: retomar `Como empezar con el vino`
+
+## Hechos
+
+- La revision de La RVF confirma que una biblioteca fuerte necesita un hub de iniciacion, subhubs tematicos y articulos atomicos evergreen.
+- Winerim ya dispone de biblioteca, glosario, cursos, maridajes, regiones, estilos, guias, Barometro y activos de conversion.
+- La oportunidad no es copiar La RVF, sino ordenar Winerim como recorrido guiado propio para usuarios principiantes y equipos de sala.
+
+## Tareas pendientes inmediatas
+
+1. Crear el hub localizado `Como empezar con el vino`:
+   - ES `/biblioteca-vino/como-empezar`;
+   - EN `/en/wine-library/how-to-start`;
+   - FR `/fr/bibliotheque-vin/debuter`;
+   - IT `/it/biblioteca-vino/iniziare`;
+   - DE `/de/weinbibliothek/einsteigen`;
+   - PT `/pt/biblioteca-vinho/como-comecar`.
+2. Estructurar el hub por niveles:
+   - entender la botella;
+   - catar y describir;
+   - uvas, regiones y estilos;
+   - maridajes basicos;
+   - servicio, conservacion y recomendacion en sala.
+3. Crear primera tanda de articulos propios:
+   - como empezar a aprender vino desde cero;
+   - como catar vino en cinco pasos;
+   - palabras para describir un vino;
+   - tipos de vino;
+   - que es una uva o cepa;
+   - diferencia entre uva, region, DO/AOC, bodega y anada;
+   - como leer una etiqueta;
+   - temperatura de servicio;
+   - que copa usar;
+   - como conservar una botella abierta;
+   - defectos del vino;
+   - maridajes basicos;
+   - como recomendar vino en sala sin ser sumiller;
+   - como formar a un equipo de sala en vino.
+4. Conectar cada articulo a entidades existentes de biblioteca: uvas, regiones, estilos y maridajes.
+5. Actualizar rutas React, sitemap, prerender, `llms.txt`, `llms-full.txt`, canonicals, hreflang y schema.
+6. Validar localmente con build/test SEO y luego validar produccion tras deploy desde Lovable.
+
 ## Actualizacion 2026-06-13: retomar tras seguimiento Search Console del Barometro
 
 ## Hechos

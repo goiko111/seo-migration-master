@@ -1,5 +1,46 @@
 # Current State
 
+## Actualizacion 2026-06-19: referencia La RVF para iniciacion al vino
+
+## Hechos
+
+- Se revisaron estas URLs de La Revue du Vin de France:
+  - `https://www.larvf.com/,le-dico-du-vin,13178.htm`;
+  - `https://www.larvf.com/s-initier-au-vin,13174.asp2`.
+- La seccion `S'initier au vin` agrupa subtemas de iniciacion: aprender vino, diccionario, acuerdos mets-vins, regiones viticolas, terroirs, organizar una cava, economia, subastas y cultura alrededor del vino.
+- El `Dictionnaire du vin` funciona como glosario evergreen con explicaciones atomicas de terminos, tecnicas, cepas, defectos, estilos y vinificacion.
+- La seccion `Apprendre le vin` concentra temas muy validos para Winerim: vocabulario de cata, como catar, que es una cepa, fermentacion, temperatura de servicio, conservacion de botella abierta, defectos del vino, aromas, copas, lectura de etiqueta y nociones basicas de vinificacion.
+- Las secciones de acuerdos, regiones y conservacion/cava tambien encajan con la biblioteca existente de Winerim.
+- Las secciones de economia, subastas y actualidad son utiles como autoridad secundaria, pero no son el primer bloque para una experiencia de iniciacion.
+- El repo ya tiene superficies relacionadas: biblioteca multilingue, glosario, cursos, maridajes, regiones, estilos, guias y rutas SEO/LLM.
+- Estado de worktree al revisar: ya existian cambios modificados en `index.html` y `src/components/WineListAnalyzerTool.tsx` que no se tocaron en esta revision.
+
+## Decisiones
+
+- Usar La RVF solo como referencia de arquitectura editorial e intencion de busqueda, no como contenido a copiar.
+- Crear una capa propia de Winerim: `Como empezar con el vino`, con variantes localizadas y enfoque practico para restaurantes, hoteles y equipos de sala.
+- Conectar ese hub con biblioteca, glosario, maridajes, uvas, regiones, estilos, analisis de carta y conversion a demo.
+- Priorizar articulos evergreen y guias accionables antes que noticias o piezas de subastas.
+
+## Hipotesis
+
+- Un hub guiado de iniciacion reducira la sensacion de biblioteca enciclopedica dispersa y ayudara a usuarios principiantes a avanzar por niveles.
+- El enfoque B2B de sala puede hacer que Winerim compita mejor que un medio generalista: no solo explicar vino, sino ayudar a recomendarlo, venderlo y formar equipos.
+- El hub puede reforzar SEO/LLM si cada articulo enlaza a entidades existentes y a herramientas como analisis de carta y maridajes.
+
+## Tareas pendientes
+
+- Implementar un hub localizado tipo:
+  - ES `/biblioteca-vino/como-empezar`;
+  - EN `/en/wine-library/how-to-start`;
+  - FR `/fr/bibliotheque-vin/debuter`;
+  - IT `/it/biblioteca-vino/iniziare`;
+  - DE `/de/weinbibliothek/einsteigen`;
+  - PT `/pt/biblioteca-vinho/como-comecar`.
+- Preparar primera tanda editorial propia en seis idiomas: catar vino, vocabulario de cata, tipos de vino, uvas iniciales, regiones iniciales, leer etiqueta, temperatura, copas, conservacion, defectos, maridajes basicos, recomendacion en sala y formacion de equipos.
+- Revisar sitemap, prerender, `llms.txt`, `llms-full.txt`, enlaces internos y schema al implementar.
+- Mantener separadas las piezas para aficionados de las piezas para restaurantes/hoteles.
+
 ## Actualizacion 2026-06-13: Search Console y Dataset license del Barometro
 
 ## Hechos

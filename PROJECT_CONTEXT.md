@@ -2,6 +2,9 @@
 
 ## Hechos
 
+- El 2026-06-19 se reviso la seccion de La Revue du Vin de France `S'initier au vin` y su `Dictionnaire du vin` como referencia editorial externa para ampliar la biblioteca del vino de Winerim.
+- La RVF estructura la iniciacion al vino con hubs y subhubs: aprender vino, diccionario/glosario, acuerdos comida-vino, regiones, terroirs, conservacion/cava, economia, subastas y cultura del vino.
+- La revision externa se considera inspiracion de arquitectura, intenciones de busqueda y taxonomia editorial; no es fuente para copiar texto, ejemplos literales ni estructura protegida.
 - Repositorio de trabajo actual: `/Users/GOIKO/seo-migration-master`.
 - El 2026-06-10 se implemento en codigo el Barometro Winerim de cartas de vino 2026 como nueva pieza publica de autoridad propia en `/barometro-cartas-vino-2026`, con variantes localizadas para `en`, `it`, `fr`, `de` y `pt`.
 - El Barometro Winerim queda conectado a rutas React, `ROUTE_MAP`, sitemap, prerender, `sitemap-extra.json`, `llms.txt`, `llms-full.txt` y enlaces internos desde guias, benchmark y benchmarks/playbooks.
@@ -71,6 +74,9 @@
 
 ## Decisiones
 
+- Para Winerim, convertir la inspiracion de La RVF en un hub propio `Como empezar con el vino`, localizado, conectado a biblioteca, glosario, maridajes, regiones, uvas, estilos, analisis de carta y formacion de equipos de sala.
+- Priorizar en ese hub el angulo diferencial B2B de Winerim: explicar vino para restaurantes, hoteles y equipos de sala, no solo educacion generica para aficionados.
+- No priorizar subastas como parte del primer bloque de iniciacion de Winerim; puede quedar como contenido futuro de autoridad, pero no como base de la biblioteca para captacion.
 - Separar siempre la información en hechos, decisiones, hipótesis y tareas pendientes.
 - Tratar el Barometro Winerim como activo de autoridad SEO/LLM y fuente citable, no como sustituto del `Wine List Score` existente.
 - No publicar cifras de benchmark como datos reales del mercado sin respaldo de datos agregados, anonimizados y metodologia documentada.
@@ -87,6 +93,8 @@
 
 ## Hipótesis
 
+- Un recorrido guiado para principiantes puede aumentar la utilidad humana, el enlazado interno y la comprension por Google/LLMs de la biblioteca del vino.
+- Adaptar contenidos de iniciacion a contextos de restaurante y hotel deberia diferenciar Winerim frente a medios editoriales generalistas de vino.
 - La biblioteca del vino es una superficie SEO estratégica para Winerim.
 - La ampliación internacional de la biblioteca debe priorizar paridad de rutas, indexabilidad, hreflang, canonical, sitemap y prerender para bots.
 - La mejora editorial debería avanzar después de asegurar la base técnica multilingüe.
@@ -102,6 +110,7 @@
 
 ## Tareas pendientes
 
+- Implementar el hub localizado `Como empezar con el vino` y una primera tanda de articulos propios: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiquetas, temperatura de servicio, copas, conservacion, defectos, maridajes basicos y recomendacion en sala.
 - Mantener estos documentos actualizados al cierre de cada sesión.
 - Monitorizar en Search Console la indexacion de la URL principal del Barometro Winerim y la cobertura de las seis variantes localizadas tras el reenvio de `/sitemap.xml` del 2026-06-11.
 - Monitorizar en Search Console la cola de indexacion renovada el 2026-06-13 para ES, IT, FR y DE del Barometro, y confirmar que el aviso `Falta el campo "license"` desaparece tras recrawl.
