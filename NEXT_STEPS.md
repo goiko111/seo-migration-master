@@ -1,5 +1,46 @@
 # Next Steps
 
+## Actualizacion 2026-06-29: retomar tras auditoria de publicaciones y pendientes
+
+## Hechos
+
+- Los articulos del cluster de biblioteca del vino del 2026-06-01 estan publicados, marcados como `published=true`, presentes en sitemap y validan como Googlebot con prerender correcto.
+- Produccion tiene `440` URLs de articulos en sitemap.
+- El hub `Como empezar con el vino`, inspirado por La RVF, no esta implementado como pagina real.
+- Las rutas previstas del hub pueden devolver `200` por fallback/catch-all, pero no tienen contenido especifico ni aparecen en sitemap.
+
+## Tareas pendientes inmediatas
+
+1. Implementar el hub `Como empezar con el vino` como pagina real, no como fallback:
+   - ES `/biblioteca-vino/como-empezar`;
+   - EN `/en/wine-library/how-to-start`;
+   - FR `/fr/bibliotheque-vin/debuter`;
+   - IT `/it/biblioteca-vino/iniziare`;
+   - DE `/de/weinbibliothek/einsteigen`;
+   - PT `/pt/biblioteca-vinho/como-comecar`.
+2. Crear contenido propio por niveles:
+   - entender la botella;
+   - catar y describir;
+   - uvas, regiones y estilos;
+   - maridajes basicos;
+   - servicio, conservacion y recomendacion en sala.
+3. Actualizar infraestructura SEO/LLM:
+   - rutas React;
+   - sitemap/Supabase sitemap;
+   - Supabase `prerender`;
+   - Worker si alguna ruta queda bloqueada;
+   - `public/llms.txt`;
+   - `public/llms-full.txt`;
+   - tests SEO.
+4. Validar produccion tras deploy:
+   - status `200` humano;
+   - Googlebot `200`;
+   - titulo/H1/canonical especificos;
+   - `hreflang`;
+   - presencia en `/sitemap.xml`;
+   - enlaces internos hacia glosario, uvas, regiones, estilos, maridajes, analisis de carta y demo.
+5. Despues del hub, crear primera tanda de articulos de iniciacion y enlazarlos desde el hub.
+
 ## Actualizacion 2026-06-19: retomar tras correccion de `/presentacion`
 
 ## Hechos

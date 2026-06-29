@@ -1,5 +1,51 @@
 # Current State
 
+## Actualizacion 2026-06-29: auditoria de publicaciones blog y pendientes SEO/LLM
+
+## Hechos
+
+- Se reviso si las publicaciones del blog y las mejoras pendientes de biblioteca del vino estan realmente publicadas.
+- La tabla publica `articles` de Supabase devuelve `440` articulos publicados:
+  - `de`: 75;
+  - `en`: 74;
+  - `es`: 69;
+  - `fr`: 74;
+  - `it`: 75;
+  - `pt`: 73.
+- `/sitemap.xml` de produccion contiene `2.234` URLs totales y `440` URLs de articulos.
+- El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas:
+  - `biblioteca-vino-restaurante-vender-mas`;
+  - `uvas-regiones-equipo-sala-vender-vino`;
+  - `maridajes-carta-vinos-rentable`.
+- Las 18 variantes del cluster anterior aparecen como `published=true` en Supabase, estan en sitemap y una muestra valida como Googlebot con `200`, `x-worker-branch: bot-prerender`, canonical propio, titulo y H1 correctos.
+- El hub inspirado por La RVF `Como empezar con el vino` no esta implementado todavia como pagina real:
+  - no hay rutas dedicadas en `src/App.tsx`;
+  - no aparece en `public/sitemap-extra.json`;
+  - no aparece en `/sitemap.xml`;
+  - no aparece en `public/llms.txt` ni `public/llms-full.txt`;
+  - no hay contenido especifico en `supabase/functions/prerender/index.ts`.
+- Las URLs previstas (`/biblioteca-vino/como-empezar`, `/en/wine-library/how-to-start`, `/fr/bibliotheque-vin/debuter`) devuelven `200` por los catch-all/prefijos de biblioteca, pero no sirven una pagina especifica del hub; Googlebot recibe un fallback de biblioteca, no contenido de iniciacion.
+- Siguen existiendo cambios locales previos no relacionados en `index.html` y `src/components/WineListAnalyzerTool.tsx`.
+
+## Decisiones
+
+- Considerar publicados los articulos existentes del cluster de biblioteca del vino; el problema no es publicacion del cluster anterior, sino falta de la nueva capa editorial de iniciacion.
+- Tratar el hub `Como empezar con el vino` como la siguiente implementacion prioritaria para SEO convencional y LLMs.
+- No dejar las URLs previstas del hub dependiendo de fallbacks/catch-all: deben convertirse en paginas reales con rutas, sitemap, prerender, canonical, hreflang y menciones en `llms`.
+
+## Hipotesis
+
+- El cluster publicado ayuda a autoridad tematica, pero no cubre la intencion de busqueda educativa de iniciacion detectada en la revision de La RVF.
+- Un hub guiado de iniciacion puede cerrar una brecha de arquitectura: ahora hay mucha biblioteca enciclopedica, pero falta una entrada didactica por niveles.
+- Las URLs fallback pueden confundir validaciones superficiales porque responden `200`, aunque no representen contenido real ni intencion especifica.
+
+## Tareas pendientes
+
+- Implementar el hub localizado `Como empezar con el vino` y conectarlo a biblioteca, glosario, uvas, regiones, estilos, maridajes, analisis de carta y demo.
+- Crear la primera tanda de contenidos propios de iniciacion: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiqueta, temperatura, copas, conservacion, defectos, maridajes basicos, recomendacion en sala y formacion de equipos.
+- Actualizar rutas React, sitemap, Supabase `prerender`, Worker si aplica, `public/llms.txt`, `public/llms-full.txt`, tests SEO y validacion de produccion humana/Googlebot.
+- Revisar si conviene redirigir o bloquear temporalmente cualquier ruta prevista del hub hasta que exista contenido real, para evitar soft-200 de paginas genericas.
+
 ## Actualizacion 2026-06-19: `/presentacion` deja de devolver 404
 
 ## Hechos

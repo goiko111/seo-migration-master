@@ -2,6 +2,9 @@
 
 ## Hechos
 
+- El 2026-06-29 se audito el estado de publicaciones y pendientes SEO/LLM: Supabase expone `440` articulos publicados y `/sitemap.xml` contiene `440` URLs de articulos dentro de `2.234` URLs totales.
+- El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas, incluido en sitemap y validado en muestras como Googlebot con prerender, canonical, titulo y H1 especificos.
+- El hub inspirado por La RVF `Como empezar con el vino` aun no esta implementado como pagina real; las URLs previstas responden por fallback/catch-all, pero no tienen contenido especifico, sitemap, `llms` ni prerender propio.
 - El 2026-06-19 se corrigio el `404 Not Found` de `https://winerim.wine/presentacion`: React y `sitemap-extra.json` ya tenian la ruta, pero Cloudflare Worker la bloqueaba como ruta no conocida con `x-worker-branch: not-found`.
 - La correccion anadio al Worker las seis rutas de presentacion (`/presentacion`, `/en/presentation`, `/fr/presentation`, `/it/presentazione`, `/de/praesentation`, `/pt/apresentacao`) como rutas SEO exactas y anadio prerender estatico especifico para bots.
 - Produccion quedo validada tras desplegar Cloudflare Worker `winerim-proxy` version `807319ba-4743-47ad-87e9-401e8d952efe`: las seis rutas responden `200` para usuarios y Googlebot recibe `worker-static-prerender` con titulo/canonical propios.
@@ -77,6 +80,8 @@
 
 ## Decisiones
 
+- Priorizar la implementacion del hub `Como empezar con el vino` como siguiente mejora estructural SEO/LLM, porque los articulos anteriores de biblioteca ya estan publicados.
+- Validar nuevas URLs estrategicas por contenido real, no solo por status `200`, para evitar falsos positivos causados por fallbacks o catch-all.
 - Toda ruta incluida en sitemap o en React como pagina publica debe estar tambien permitida por Cloudflare Worker; si no, produccion puede devolver `404` antes de llegar a Lovable.
 - Para `/presentacion`, mantener un prerender estatico en Worker hasta que Supabase `prerender` tenga una version propia equivalente o se centralice la fuente SEO.
 - Para Winerim, convertir la inspiracion de La RVF en un hub propio `Como empezar con el vino`, localizado, conectado a biblioteca, glosario, maridajes, regiones, uvas, estilos, analisis de carta y formacion de equipos de sala.
@@ -98,6 +103,7 @@
 
 ## Hipótesis
 
+- La brecha principal actual de biblioteca del vino para SEO/LLM es de arquitectura guiada de iniciacion, no de publicacion del cluster editorial previo.
 - La discrepancia entre React/sitemap y Worker puede repetirse en paginas nuevas si no se valida siempre produccion humana y Googlebot tras publicar rutas.
 - Un recorrido guiado para principiantes puede aumentar la utilidad humana, el enlazado interno y la comprension por Google/LLMs de la biblioteca del vino.
 - Adaptar contenidos de iniciacion a contextos de restaurante y hotel deberia diferenciar Winerim frente a medios editoriales generalistas de vino.
@@ -116,6 +122,7 @@
 
 ## Tareas pendientes
 
+- Implementar y desplegar el hub localizado `Como empezar con el vino` con rutas reales, sitemap, prerender, canonical, hreflang y presencia en `llms.txt`/`llms-full.txt`.
 - Considerar mover el prerender especifico de `/presentacion` desde Worker a Supabase `prerender` para reducir duplicacion futura.
 - Implementar el hub localizado `Como empezar con el vino` y una primera tanda de articulos propios: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiquetas, temperatura de servicio, copas, conservacion, defectos, maridajes basicos y recomendacion en sala.
 - Mantener estos documentos actualizados al cierre de cada sesión.

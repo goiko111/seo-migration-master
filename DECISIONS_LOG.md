@@ -1,5 +1,39 @@
 # Decisions Log
 
+## 2026-06-29
+
+### Auditoria de articulos publicados y pendientes SEO/LLM
+
+#### Hechos
+
+- Se comprobo Supabase, sitemap y produccion para distinguir articulos publicados de mejoras pendientes.
+- Supabase expone `440` articulos publicados en total: `de` 75, `en` 74, `es` 69, `fr` 74, `it` 75 y `pt` 73.
+- `/sitemap.xml` contiene `2.234` URLs y `440` URLs de articulos.
+- El cluster de biblioteca del vino publicado el 2026-06-01 existe en seis idiomas para tres temas:
+  - biblioteca del vino como herramienta de venta;
+  - uvas/regiones que debe conocer el equipo de sala;
+  - maridajes que aumentan venta/rentabilidad.
+- Las muestras de articulos revisadas responden `200` para usuario y `200` para Googlebot con `bot-prerender`, canonical, titulo y H1 especificos.
+- La capa inspirada en La RVF (`Como empezar con el vino`) sigue sin implementarse como pagina real: no esta en rutas dedicadas, sitemap, `llms`, ni prerender especifico.
+- Las URLs previstas del hub responden `200` por fallback/catch-all, pero muestran contenido generico de biblioteca o SPA, no una pagina dedicada de iniciacion.
+
+#### Decisiones
+
+- Dar por publicado el cluster de articulos de biblioteca existente.
+- Mantener como prioridad siguiente la implementacion del hub `Como empezar con el vino`, no la republicacion del cluster antiguo.
+- Exigir que cualquier nueva URL estrategica tenga ruta real, contenido especifico, sitemap, prerender bot, canonical, hreflang y entrada en `llms`.
+
+#### Hipotesis
+
+- La brecha actual de SEO/LLM no es falta de articulos publicados, sino falta de arquitectura didactica de iniciacion conectada a la biblioteca.
+- Las respuestas `200` por fallback pueden ocultar problemas si solo se valida status code; hay que validar tambien titulo, H1, canonical y contenido.
+
+#### Tareas pendientes
+
+- Implementar hub localizado de iniciacion y primera tanda editorial propia.
+- Validar que las URLs previstas dejen de ser fallback y pasen a contenido especifico.
+- Mantener seguimiento de Search Console para articulos y Barometro.
+
 ## 2026-06-19
 
 ### Correccion de `/presentacion` en produccion
