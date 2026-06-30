@@ -1,5 +1,48 @@
 # Decisions Log
 
+## 2026-06-30
+
+### Landing Meta Demo para campañas
+
+#### Hechos
+
+- Se transcribio el audio recibido el 2026-06-30; confirma los entregables de Meta: ID de cuenta publicitaria, identificador del conjunto de datos/pixel, codigo Pixel, UTMs, captura de campos ocultos y HTML de la landing.
+- Se implemento una landing de captacion separada para campanas de Meta en `src/pages/MetaDemoLanding.tsx`.
+- Se anadio la ruta `/meta-demo` en React y se preparo la raiz de `go.winerim.wine` para mostrar esa landing mediante deteccion de host.
+- La landing captura campos UTM ocultos (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) y tambien `fbclid`, URL y referrer.
+- La atribucion se guarda en `contact_leads.message` como JSON junto con los datos del formulario; no se anadieron columnas nuevas a la base de datos.
+- La landing usa `form_type="demo"` para integrarse con el flujo actual de notificaciones y conversiones.
+- El Pixel Meta `450273446324682` se incorpora dentro de la landing y solo dispara si hay consentimiento aceptado.
+- Se desactivo el chat externo para `/meta-demo` y para el host `go.winerim.wine`.
+- Se registro `/meta-demo` como ruta `noindex` en Cloudflare Worker.
+- Validaciones locales completadas: `npm run build`, `npm run deploy:worker:dry-run`, QA desktop y QA mobile sin overflow.
+- No se ha desplegado produccion en esta sesion.
+
+#### Decisiones
+
+- No hay decision nueva derivada del audio; se mantiene el plan ya implementado para Pixel/UTMs/landing.
+- Usar `go.winerim.wine` como subdominio recomendado para funnels de campanas.
+- No usar `demo.winerim.wine` sin revisar antes porque la comprobacion DNS muestra que ya resuelve.
+- Mantener la landing fuera de SEO/indexacion; es una pagina de conversion pagada, no un activo editorial.
+- No publicar testimonios falsos ni placeholders literales; los espacios de casos pendientes se mantienen como pendientes de prueba real.
+- Evitar migracion de base de datos en esta fase y guardar UTMs en `message`; reevaluar si se necesita reporting avanzado por campana/anuncio.
+- Respetar consentimiento antes de cargar/disparar Meta Pixel.
+
+#### Hipotesis
+
+- Una landing sin navegacion, footer, chat, FAQ ni CTAs secundarios reducira distracciones frente a `/demo` para trafico frio de Meta.
+- `go.winerim.wine` es suficientemente corto y reutilizable para nuevos funnels sin bloquear el significado de `demo`.
+- Si las campanas escalan, necesitaremos columnas UTM dedicadas o una tabla de attribution para reporting comercial mas limpio.
+
+#### Tareas pendientes
+
+- Publicar el frontend desde Lovable.
+- Desplegar Worker tras tener el frontend publicado.
+- Configurar DNS/Worker route de `go.winerim.wine/*`.
+- Validar produccion con UTMs reales y comprobar lead/notificacion.
+- Resolver la contradiccion de prueba social: `+1.000 bodegas gestionadas` frente a `+2.000 restaurantes`.
+- Conseguir tres testimonios reales antes de escalar presupuesto.
+
 ## 2026-06-29
 
 ### Auditoria de articulos publicados y pendientes SEO/LLM

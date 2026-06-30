@@ -1,5 +1,43 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar landing Meta Demo
+
+## Hechos
+
+- El audio recibido confirma que los materiales de campana son: cuenta publicitaria, identificador de conjunto de datos/pixel, codigo Pixel, UTMs, captura de configuracion de campos ocultos y HTML de landing.
+- La landing de campanas esta implementada localmente en `/meta-demo`.
+- `go.winerim.wine` es el subdominio recomendado; `demo.winerim.wine` ya resolvia en DNS en la comprobacion local.
+- La landing captura UTMs ocultos y se integra con `contact_leads`, notificaciones, eventos existentes y Pixel Meta consent-aware.
+- `/meta-demo` esta marcada como `noindex` en React/SEOHead y en Cloudflare Worker.
+- El chat externo y el popup global quedan desactivados para la landing.
+- Validaciones locales completadas:
+  - build OK;
+  - Worker dry-run OK;
+  - desktop/mobile sin overflow;
+  - hidden UTMs rellenados correctamente con parametros de prueba.
+- Falta publicar en produccion y configurar DNS/ruta Worker para el subdominio.
+
+## Tareas pendientes inmediatas
+
+1. Publicar frontend desde Lovable para que `https://winerim.wine/meta-demo` exista en produccion.
+2. Desplegar Cloudflare Worker con la inclusion de `/meta-demo` como `noindex`.
+3. Configurar `go.winerim.wine` en Cloudflare:
+   - DNS proxied hacia el mismo flujo/origen que Winerim;
+   - route `go.winerim.wine/*` asociada a `winerim-proxy`.
+4. Validar produccion:
+   - `https://winerim.wine/meta-demo?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;
+   - `https://go.winerim.wine/?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;
+   - H1, formulario, noindex, ausencia de chat externo, ausencia de popup global y hidden UTMs.
+5. Probar un envio real controlado del formulario y confirmar:
+   - fila en `contact_leads`;
+   - `message` contiene attribution JSON;
+   - email/webhook/notificacion llegan;
+   - evento Lead de Meta/ads solo se dispara si hay consentimiento.
+6. Confirmar el claim de prueba social:
+   - si `+1.000 bodegas gestionadas` y `+2.000 restaurantes` son metricas distintas, documentar ambas;
+   - si una esta desactualizada, unificar copy antes de escalar campana.
+7. Reemplazar los tres casos pendientes por testimonios reales o retirar esa seccion si no hay prueba suficiente.
+
 ## Actualizacion 2026-06-29: retomar tras auditoria de publicaciones y pendientes
 
 Nota 2026-06-30: esta lista queda actualizada por la implementacion en codigo de `Aprender vino`. La tarea viva ya no es crear el hub dentro de Biblioteca, sino desplegarlo, validarlo y preparar sus spokes.

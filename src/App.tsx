@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -23,6 +23,7 @@ const SommelierCorner = lazy(() => import("./pages/SommelierCorner"));
 const Afiliate = lazy(() => import("./pages/Afiliate"));
 const Contacto = lazy(() => import("./pages/Contacto"));
 const Demo = lazy(() => import("./pages/Demo"));
+const MetaDemoLanding = lazy(() => import("./pages/MetaDemoLanding"));
 const ArticlePage = lazy(() => import("./pages/ArticlePage"));
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Terminos = lazy(() => import("./pages/Terminos"));
@@ -138,6 +139,14 @@ const PageLoader = () => (
   </div>
 );
 
+const CampaignHome = () => {
+  if (typeof window !== "undefined" && window.location.hostname === "go.winerim.wine") {
+    return <MetaDemoLanding />;
+  }
+
+  return <Index />;
+};
+
 const useDeferredAppChrome = () => {
   const [ready, setReady] = useState(false);
 
@@ -186,12 +195,13 @@ const useDeferredAppChrome = () => {
 // Spanish routes (also used for shared routes)
 const esRoutes = (
   <>
-    <Route path="/" element={<Index />} />
+    <Route path="/" element={<CampaignHome />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/sommelier-corner" element={<SommelierCorner />} />
     <Route path="/afiliate" element={<Afiliate />} />
     <Route path="/contacto" element={<Contacto />} />
     <Route path="/demo" element={<Demo />} />
+    <Route path="/meta-demo" element={<MetaDemoLanding />} />
     <Route path="/gracias" element={<Gracias />} />
     <Route path="/faqs" element={<FAQs />} />
     <Route path="/article/:slug" element={<ArticlePage />} />
@@ -795,18 +805,23 @@ const IntentTracker = lazy(() =>
 
 const DeferredAppChrome = () => {
   const ready = useDeferredAppChrome();
+  const location = useLocation();
 
   if (!ready) return null;
+
+  const isCampaignLanding =
+    location.pathname === "/meta-demo" ||
+    (typeof window !== "undefined" && window.location.hostname === "go.winerim.wine" && location.pathname === "/");
 
   return (
     <Suspense fallback={null}>
       <Toaster />
       <Sonner position="top-center" richColors />
-      <BackToTop />
       <CookieConsent />
       <IntentTracker />
-      <ToolsLeadPopup />
-      <FreemiumToolGuard />
+      {!isCampaignLanding && <BackToTop />}
+      {!isCampaignLanding && <ToolsLeadPopup />}
+      {!isCampaignLanding && <FreemiumToolGuard />}
     </Suspense>
   );
 };

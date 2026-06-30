@@ -794,6 +794,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
 
 // ─── NOINDEX routes (served but with noindex header) ───
 const NOINDEX_ROUTES = new Set([
+  '/meta-demo',
   '/gracias',
   '/unsubscribe',
   '/privacidad',

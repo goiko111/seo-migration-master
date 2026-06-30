@@ -1,5 +1,67 @@
 # Current State
 
+## Actualizacion 2026-06-30: landing Meta Demo para campañas
+
+## Hechos
+
+- Se transcribio el audio `WhatsApp Audio 2026-06-30 at 10.51.47.opus`; confirma que el material a entregar para la landing/campanas incluye cuenta publicitaria, identificador de conjunto de datos/pixel, codigo Pixel, UTMs, captura de campos ocultos y HTML de la landing.
+- Se preparo una landing aislada para campañas de Meta en `src/pages/MetaDemoLanding.tsx`.
+- La ruta de preview/publicacion en el dominio principal queda como `/meta-demo`.
+- El subdominio recomendado para el funnel es `go.winerim.wine`.
+- Comprobacion DNS puntual: `demo.winerim.wine` ya resuelve a Cloudflare; `go.winerim.wine` no devolvio A/CNAME en la comprobacion local, por lo que parece libre.
+- `src/App.tsx` ahora registra `/meta-demo` y muestra la landing en la raiz cuando el host sea `go.winerim.wine`.
+- La landing incluye el copy recibido: demo gratuita, 15 minutos, sin compromiso, formulario de contexto, stat cards y testimonio real de Travieso Bar.
+- No se publicaron testimonios ficticios: los tres casos sin datos reales quedan marcados como pendientes/verificados antes de escalar campanas.
+- El formulario guarda leads en `contact_leads` con `form_type="demo"` y captura `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, URL y referrer dentro de `message` como JSON.
+- Se mantienen los eventos existentes de lead/demo (`trackFormStart`, `trackFormSubmit`, `ads.conversion`) y se anaden eventos `dataLayer` especificos de la landing.
+- Se incorporo el Pixel ID de Meta `450273446324682` de forma consent-aware: solo se inicializa/dispara si el usuario ha aceptado consentimiento.
+- `index.html` se actualizo para no cargar el chat externo en `/meta-demo` ni en el host `go.winerim.wine`; la propia landing tambien elimina el widget si llegara a inyectarse.
+- `cloudflare-worker-v3-hybrid.js` trata `/meta-demo` como ruta servida pero `noindex`.
+- Validaciones completadas:
+  - `npm run build`;
+  - `npm run deploy:worker:dry-run`;
+  - QA local desktop en `http://127.0.0.1:5173/meta-demo` sin overflow y sin chat externo;
+  - QA local mobile `390x844` sin overflow y con formulario apilado correctamente.
+- El servidor local de Vite quedo levantado en `http://127.0.0.1:5173/` para revision.
+- No se desplego produccion todavia desde esta sesion.
+- Siguen existiendo cambios locales previos en `src/components/WineListAnalyzerTool.tsx`; no se tocaron en esta tarea.
+
+## Decisiones
+
+- El audio no introduce una decision nueva; refuerza la decision ya tomada de capturar UTMs ocultos y usar el Pixel Meta `450273446324682`.
+- Usar `go.winerim.wine` como subdominio de campanas frente a `demo.winerim.wine`, porque `demo` ya resuelve y ademas es menos flexible para futuros funnels.
+- Mantener la landing como superficie de conversion `noindex`, no como pagina SEO ni como parte de Biblioteca del vino.
+- Reutilizar `contact_leads` y guardar la atribucion UTM en `message` para evitar una migracion de base de datos en esta fase.
+- No mostrar testimonios inventados ni placeholders literales del tipo `[Añade aqui]`; mejor dejar espacios pendientes de prueba social real.
+- Mantener el banner de cookies por cumplimiento; el Pixel Meta queda condicionado al consentimiento.
+
+## Hipotesis
+
+- `go.winerim.wine` funcionara bien como URL corta y reusable para Meta Ads, Google Ads y futuros funnels si Cloudflare enruta el host al mismo Worker/frontend.
+- Guardar la atribucion en `message` es suficiente para la primera fase de campanas; si se necesita reporting avanzado, convendra crear columnas UTM dedicadas o una tabla de attribution.
+- La landing deberia convertir mejor que `/demo` para trafico frio de Meta al eliminar navegacion, footer, FAQ, chat y CTAs secundarios.
+
+## Contradicciones / dudas abiertas
+
+- El contenido recibido usa `+1.000 bodegas gestionadas`, pero las creatividades mencionan `+2.000 restaurantes`; hay que confirmar si son metricas distintas o si una esta desactualizada.
+- `demo.winerim.wine` no parece libre porque ya resuelve a Cloudflare; no conviene usarlo sin revisar que servicio tiene detras.
+
+## Tareas pendientes
+
+- Publicar el frontend desde Lovable para que `/meta-demo` exista en produccion.
+- Desplegar el Cloudflare Worker tras el publish del frontend o junto con el cambio de DNS.
+- En Cloudflare, crear/enrutar `go.winerim.wine`:
+  - DNS proxied hacia el mismo origen/flujo que la web publica;
+  - Worker route `go.winerim.wine/*` hacia `winerim-proxy`.
+- Validar produccion:
+  - `https://winerim.wine/meta-demo` responde `200` y `noindex`;
+  - `https://go.winerim.wine/` responde `200` y muestra la landing;
+  - no aparece chat externo ni popup global;
+  - hidden UTMs se rellenan correctamente;
+  - envio de formulario crea lead y notificacion.
+- Confirmar el claim correcto entre `+1.000 bodegas` y `+2.000 restaurantes`.
+- Sustituir los tres casos pendientes por testimonios reales antes de escalar presupuesto.
+
 ## Actualizacion 2026-06-29: auditoria de publicaciones blog y pendientes SEO/LLM
 
 Nota 2026-06-30: esta fotografia queda superada para el hub de iniciacion. La pagina real se implemento en codigo como `Aprender vino`, separada de `Biblioteca del vino`; lo pendiente ahora es commit/push, despliegue completo y validacion productiva.

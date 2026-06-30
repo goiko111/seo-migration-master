@@ -335,6 +335,19 @@
     <script>
       (function() {
         var path = window.location.pathname;
+        var chatDisabledPaths = [
+          '/meta-demo',
+          '/analisis-carta',
+          '/simulador-carta',
+          '/en/wine-list-analysis',
+          '/it/analisi-carta-vini',
+          '/fr/analyse-carte-des-vins',
+          '/de/weinkarten-analyse',
+          '/pt/analise-carta-de-vinhos'
+        ];
+        var isCampaignHost = window.location.hostname === 'go.winerim.wine';
+        var isFunnelPage = isCampaignHost || chatDisabledPaths.indexOf(path.replace(/\/$/, '')) !== -1;
+        window.__WINERIM_CHAT_DISABLED__ = isFunnelPage;
         var langMatch = path.match(/^\/(en|it|fr|de|pt)\//);
         var lang = langMatch ? langMatch[1] : 'es';
         var welcomeMessages = {
@@ -345,6 +358,7 @@
           de: 'Hallo! 👋 Ich bin Iñigo vom Winerim-Team. Wie kann ich Ihnen helfen?',
           pt: 'Olá! 👋 Sou o Iñigo da equipa Winerim. Como posso ajudar?'
         };
+        if (isFunnelPage) return;
         window.WinerimWebChatConfig = {
           apiUrl: 'https://edwuzzmeunzgsrejlmwr.supabase.co/functions/v1/web-lead-chat',
           primaryColor: '#9B000A',
@@ -358,6 +372,7 @@
       })();
       /* Reveal chat widget once it has loaded and positioned itself */
       window.addEventListener('load', function() {
+        if (window.__WINERIM_CHAT_DISABLED__) return;
         setTimeout(function() {
           document.querySelectorAll('#winerim-web-chat, .winerim-web-chat, [data-winerim-chat]')
             .forEach(function(el) { el.classList.add('ready'); });
@@ -366,6 +381,7 @@
     </script>
     <script>
       window.addEventListener('load', function() {
+        if (window.__WINERIM_CHAT_DISABLED__) return;
         var loadChat = function() {
           var script = document.createElement('script');
           script.src = 'https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js';

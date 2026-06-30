@@ -2,6 +2,14 @@
 
 ## Hechos
 
+- El 2026-06-30 se implemento localmente una landing de captacion para campanas de Meta en `/meta-demo`, con subdominio recomendado `go.winerim.wine`.
+- La landing Meta Demo vive en `src/pages/MetaDemoLanding.tsx`, se registra en `src/App.tsx`, captura UTMs ocultos y guarda la atribucion en `contact_leads.message` como JSON.
+- La landing usa `form_type="demo"` para mantener el flujo actual de leads/notificaciones/conversiones y carga/dispara el Pixel Meta `450273446324682` solo con consentimiento aceptado.
+- `/meta-demo` queda como ruta `noindex` en Cloudflare Worker y la raiz de `go.winerim.wine` se prepara en React para mostrar la landing si el host esta configurado.
+- El chat externo se desactiva para `/meta-demo` y para `go.winerim.wine`; la propia landing elimina cualquier widget si llegara a inyectarse.
+- Validaciones locales de la landing Meta Demo: `npm run build`, `npm run deploy:worker:dry-run`, QA desktop/mobile sin overflow, hidden UTMs correctos y sin chat externo.
+- No se desplego produccion de la landing Meta Demo en la sesion del 2026-06-30; faltan publish Lovable, deploy Worker y configuracion DNS/route de `go.winerim.wine`.
+- Contradiccion abierta: el contenido de landing usa `+1.000 bodegas gestionadas`, mientras creatividades mencionan `+2.000 restaurantes`; hay que confirmar si son metricas distintas o una esta desactualizada.
 - El 2026-06-29 se audito el estado de publicaciones y pendientes SEO/LLM: Supabase expone `440` articulos publicados y `/sitemap.xml` contiene `440` URLs de articulos dentro de `2.234` URLs totales.
 - El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas, incluido en sitemap y validado en muestras como Googlebot con prerender, canonical, titulo y H1 especificos.
 - El hub inspirado por La RVF quedo implementado y publicado el 2026-06-30 como capa separada `Aprender vino`; las rutas antiguas previstas tipo `/biblioteca-vino/como-empezar` pasan a ser aliases/redirects legacy.
@@ -96,6 +104,10 @@
 
 ## Decisiones
 
+- Usar `go.winerim.wine` como subdominio recomendado para funnels de campanas; no usar `demo.winerim.wine` sin revisar porque ya resuelve en DNS.
+- Mantener la landing Meta Demo como superficie de conversion pagada `noindex`, separada de SEO editorial y de Biblioteca del vino.
+- En la primera fase de campanas, guardar UTMs en `contact_leads.message` en vez de crear migraciones de columnas; si escala reporting, evaluar columnas dedicadas o tabla de attribution.
+- No publicar testimonios inventados ni placeholders literales en la landing; sustituir espacios pendientes por casos reales antes de escalar presupuesto.
 - La inspiracion de La RVF se materializo como una capa separada `Aprender vino`, no como una subcarpeta de `Biblioteca del vino`.
 - Validar nuevas URLs estrategicas por contenido real, no solo por status `200`, para evitar falsos positivos causados por fallbacks o catch-all.
 - Toda ruta incluida en sitemap o en React como pagina publica debe estar tambien permitida por Cloudflare Worker; si no, produccion puede devolver `404` antes de llegar a Lovable.
@@ -122,6 +134,8 @@
 
 ## Hipótesis
 
+- La landing Meta Demo deberia convertir mejor que `/demo` para trafico frio de Meta porque elimina navegacion, footer, chat externo, FAQ y CTAs secundarios.
+- `go.winerim.wine` deberia servir como URL corta y reutilizable para Meta Ads, Google Ads y funnels futuros si Cloudflare enruta el host al mismo Worker/frontend.
 - La brecha principal actual tras publicar `Aprender vino` es reenviar/monitorizar Search Console y ampliar spokes especificos de iniciacion sin mezclar la biblioteca de entidades.
 - La correccion de buckets deberia reducir exposicion de documentos sensibles sin romper captacion si Lovable aplica migracion, frontend y Edge Function juntos.
 - La correccion de buckets ya reduce exposicion en el popup de herramientas; la privacidad real de PDFs de `/analisis-carta` depende de como `api.winerim.wine` almacene o descarte los archivos recibidos.
@@ -143,6 +157,10 @@
 
 ## Tareas pendientes
 
+- Publicar la landing Meta Demo desde Lovable, desplegar el Worker y configurar Cloudflare DNS/route para `go.winerim.wine/*`.
+- Validar en produccion `/meta-demo` y `go.winerim.wine/` con UTMs reales, noindex, ausencia de chat externo, lead creado, notificacion y eventos de conversion.
+- Confirmar y unificar el claim de prueba social `+1.000 bodegas` frente a `+2.000 restaurantes`.
+- Reemplazar los tres casos pendientes de la landing Meta Demo por testimonios reales o retirar esa seccion.
 - Monitorizar Search Console para confirmar descubrimiento, rastreo e indexacion de las seis rutas de `Aprender vino`.
 - Desplegar desde Lovable la correccion de seguridad de Supabase Storage para `cartas-vinos` y `lead-uploads`, porque el CLI local sigue sin `SUPABASE_ACCESS_TOKEN` y la base local no esta arrancada.
 - Revalidar que los formularios con upload siguen funcionando y que los enlaces internos recibidos por email/webhook son firmados, no publicos.

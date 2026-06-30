@@ -1,0 +1,597 @@
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Building2,
+  Check,
+  Clock,
+  Loader2,
+  Quote,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Wine,
+  Zap,
+} from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import SEOHead from "@/components/SEOHead";
+import PhoneInput, { PREFIXES } from "@/components/PhoneInput";
+import { ads, hasConsent } from "@/lib/analytics";
+import { notifyLead } from "@/lib/notifyLead";
+import { trackFormStart, trackFormSubmit } from "@/hooks/useIntentTracker";
+import { supabase } from "@/integrations/supabase/client";
+
+const META_PIXEL_ID = "450273446324682";
+const CAMPAIGN_HOST = "go.winerim.wine";
+
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
+type UTMKey = (typeof UTM_KEYS)[number];
+type Attribution = Partial<Record<UTMKey | "fbclid" | "landing_url" | "referrer", string>>;
+
+const positionOptions = [
+  "Propietario / Dueño",
+  "Sommelier",
+  "Chef / Jefe de cocina",
+  "F&B Manager / Director de operaciones",
+  "Maître / Jefe de sala",
+  "Gerente",
+  "Otro",
+];
+
+const referenceOptions = [
+  "Menos de 30",
+  "30 - 50",
+  "50 - 100",
+  "100 - 200",
+  "200 - 500",
+  "Más de 500",
+];
+
+const businessTypeOptions = [
+  "Restaurante gastronómico",
+  "Restaurante con estrella Michelin",
+  "Restaurante con Sol Repsol",
+  "Bistró / Wine bar",
+  "Hotel / Resort",
+  "Grupo de restauración",
+  "Cadena de restaurantes",
+  "Otro",
+];
+
+const locationOptions = ["1 local", "2 - 5 locales", "6 - 15 locales", "Más de 15 locales"];
+
+const challengeOptions = [
+  "Reducir stock muerto en bodega",
+  "Aumentar el ticket medio de vino",
+  "Liberar tiempo del sommelier",
+  "Mejorar la experiencia del comensal",
+  "Vender mejor mi carta actual",
+  "Aumentar el margen",
+  "Otro",
+];
+
+const stats = [
+  { value: "+1.000", label: "Bodegas gestionadas", icon: Wine },
+  { value: "48h", label: "Implementación", icon: Zap },
+  { value: "0", label: "Permanencia", icon: Users },
+];
+
+const benefits = [
+  "Demo adaptada a tu tipo de negocio",
+  "Sin compromiso de permanencia",
+  "Análisis gratuito de tu carta incluido",
+  "Configuración en menos de 48 horas",
+];
+
+const cases = [
+  {
+    number: "01",
+    label: "REAL",
+    title: "Travieso Bar",
+    quote:
+      "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos.",
+    person: "Nacho Otamendi",
+    role: "Propietario / Sommelier · Travieso Bar",
+  },
+  {
+    number: "02",
+    label: "PENDIENTE",
+    title: "Rotación de bodega",
+    quote:
+      "Espacio reservado para un caso real centrado en reducción de stock muerto y mejor rotación de referencias.",
+    person: "Testimonio por confirmar",
+    role: "Cliente · Ciudad",
+  },
+  {
+    number: "03",
+    label: "PENDIENTE",
+    title: "Ticket medio y margen",
+    quote:
+      "Espacio reservado para un caso real sobre aumento del ticket medio de vino o mejora del margen en sala.",
+    person: "Testimonio por confirmar",
+    role: "Cliente · Ciudad",
+  },
+  {
+    number: "04",
+    label: "PENDIENTE",
+    title: "Tiempo recuperado",
+    quote:
+      "Espacio reservado para un caso real sobre el tiempo que el equipo recupera al dejar procesos manuales.",
+    person: "Testimonio por confirmar",
+    role: "Cliente · Ciudad",
+  },
+];
+
+const fieldBase =
+  "h-10 rounded-md border border-white/15 bg-white/95 px-3 py-2 text-sm text-slate-950 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+
+function getAttribution(): Attribution {
+  if (typeof window === "undefined") return {};
+
+  const params = new URLSearchParams(window.location.search);
+  const values: Attribution = {
+    landing_url: window.location.href,
+  };
+
+  UTM_KEYS.forEach((key) => {
+    const value = params.get(key);
+    if (value) values[key] = value;
+  });
+
+  const fbclid = params.get("fbclid");
+  if (fbclid) values.fbclid = fbclid;
+  if (document.referrer) values.referrer = document.referrer;
+
+  return values;
+}
+
+function pushDataLayerEvent(event: string, params: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+  const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+  dataLayer.push({ event, ...params });
+}
+
+function ensureMetaPixel() {
+  if (typeof window === "undefined" || !hasConsent()) return;
+
+  const win = window as any;
+  if (typeof win.fbq === "function") {
+    win.fbq("track", "PageView", { content_name: "meta_demo_landing" });
+    return;
+  }
+
+  const fbq = function (...args: unknown[]) {
+    if (fbq.callMethod) fbq.callMethod(...args);
+    else fbq.queue.push(args);
+  } as any;
+
+  fbq.queue = [];
+  fbq.loaded = true;
+  fbq.version = "2.0";
+  win.fbq = fbq;
+  win._fbq = fbq;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://connect.facebook.net/en_US/fbevents.js";
+  const firstScript = document.getElementsByTagName("script")[0];
+  firstScript?.parentNode?.insertBefore(script, firstScript);
+
+  win.fbq("init", META_PIXEL_ID);
+  win.fbq("track", "PageView", { content_name: "meta_demo_landing" });
+}
+
+function fireMetaLead(attribution: Attribution) {
+  if (typeof window === "undefined" || !hasConsent()) return;
+  const fbq = (window as any).fbq;
+  if (typeof fbq !== "function") return;
+
+  fbq("track", "Lead", {
+    content_name: "meta_demo_landing",
+    content_category: "demo_request",
+    ...attribution,
+  });
+}
+
+const FieldLabel = ({ htmlFor, children, required }: { htmlFor: string; children: React.ReactNode; required?: boolean }) => (
+  <label htmlFor={htmlFor} className="text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
+    {children}
+    {required ? <span className="ml-1 text-accent">*</span> : null}
+  </label>
+);
+
+const SelectField = ({
+  id,
+  name,
+  label,
+  options,
+  placeholder,
+  required,
+}: {
+  id: string;
+  name: string;
+  label: string;
+  options: string[];
+  placeholder?: string;
+  required?: boolean;
+}) => (
+  <div className="space-y-2">
+    <FieldLabel htmlFor={id} required={required}>
+      {label}
+    </FieldLabel>
+    <select id={id} name={name} required={required} defaultValue="" className={`${fieldBase} w-full`}>
+      <option value="" disabled>
+        {placeholder || "Selecciona una opción"}
+      </option>
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  </div>
+);
+
+const MetaDemoLanding = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const [attribution, setAttribution] = useState<Attribution>({});
+  const startedForm = useRef(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentAttribution = getAttribution();
+    setAttribution(currentAttribution);
+    (window as any).__WINERIM_CHAT_DISABLED__ = true;
+    document
+      .querySelectorAll("#wc-toggle, #winerim-web-chat, .winerim-web-chat, [data-winerim-chat]")
+      .forEach((el) => el.remove());
+    ensureMetaPixel();
+    pushDataLayerEvent("meta_landing_view", {
+      landing_host: typeof window !== "undefined" ? window.location.hostname : CAMPAIGN_HOST,
+      ...currentAttribution,
+    });
+  }, []);
+
+  const handleFormFocus = () => {
+    if (startedForm.current) return;
+    startedForm.current = true;
+    trackFormStart("demo");
+    pushDataLayerEvent("meta_demo_form_start", attribution);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    const fd = new FormData(e.currentTarget);
+    const currentAttribution = getAttribution();
+    const rawPhone = (fd.get("phone") as string)?.trim();
+    const prefixCode = (fd.get("phone_prefix") as string)?.trim();
+    const prefix = PREFIXES.find((p) => p.code === prefixCode);
+    const name = (fd.get("name") as string)?.trim() || null;
+    const email = (fd.get("email") as string)?.trim() || null;
+    const phone = rawPhone ? (prefix ? `${prefix.dial} ${rawPhone}` : rawPhone) : null;
+
+    const leadData = {
+      form_type: "demo",
+      restaurant: (fd.get("restaurant") as string)?.trim() || null,
+      name,
+      position: (fd.get("position") as string)?.trim() || null,
+      phone,
+      email,
+      city: (fd.get("city") as string)?.trim() || null,
+      references_count: (fd.get("references_count") as string)?.trim() || null,
+      business_type: (fd.get("business_type") as string)?.trim() || null,
+      num_locations: (fd.get("num_locations") as string)?.trim() || null,
+      main_challenge: (fd.get("main_challenge") as string)?.trim() || null,
+      message: JSON.stringify({
+        landing: "meta_demo_landing",
+        requested_demo: true,
+        attribution: currentAttribution,
+      }),
+    };
+
+    const { error } = await supabase.from("contact_leads").insert(leadData);
+    if (error) {
+      toast.error("No hemos podido enviar la solicitud. Inténtalo de nuevo.");
+      setSubmitting(false);
+      return;
+    }
+
+    notifyLead(leadData);
+    trackFormSubmit("demo");
+    pushDataLayerEvent("meta_demo_lead", currentAttribution);
+    fireMetaLead(currentAttribution);
+    ads.conversion("demo", {
+      email: email || undefined,
+      phone: phone || undefined,
+      first_name: name?.split(" ")[0] || undefined,
+      last_name: name?.split(" ").slice(1).join(" ") || undefined,
+      city: leadData.city || undefined,
+    });
+
+    navigate("/gracias?tipo=demo&origen=meta");
+  };
+
+  return (
+    <div className="min-h-screen bg-[#111312] text-white">
+      <SEOHead
+        title="Solicita una demo gratuita de Winerim"
+        description="Demo gratuita de Winerim para restaurantes, hoteles y grupos de restauración. 15 minutos, sin compromiso y con análisis gratuito de tu carta incluido."
+        url={`https://${CAMPAIGN_HOST}/`}
+        noindex
+      />
+
+      <main>
+        <section className="relative overflow-hidden px-5 py-8 sm:px-8 lg:min-h-screen lg:px-10 lg:py-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(131,40,59,0.42),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_34%)]" />
+          <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:min-h-[calc(100vh-5rem)]">
+            <header className="flex items-center justify-between">
+              <Link to="/" className="font-heading text-2xl font-bold tracking-wide">
+                Winerim
+              </Link>
+              <div className="hidden items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60 sm:flex">
+                <ShieldCheck className="h-4 w-4 text-accent" />
+                Sin compromiso
+              </div>
+            </header>
+
+            <div className="grid flex-1 items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] xl:gap-16">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="max-w-2xl"
+              >
+                <span className="mb-4 block text-xs font-bold uppercase tracking-[0.32em] text-accent">
+                  Prueba gratuita
+                </span>
+                <h1 className="font-heading text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
+                  Solicita una demo gratuita de <span className="text-accent">Winerim</span>
+                </h1>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-white/74">
+                  15 minutos · Sin compromiso · Adaptada a tu tipo de negocio
+                </p>
+
+                <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {benefits.map((benefit) => (
+                    <li key={benefit} className="flex items-start gap-3 text-sm leading-6 text-white/78">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-9 grid grid-cols-3 gap-3">
+                  {stats.map(({ value, label, icon: Icon }) => (
+                    <div key={label} className="rounded-lg border border-white/12 bg-white/[0.06] p-4">
+                      <Icon className="mb-3 h-5 w-5 text-accent" />
+                      <p className="font-heading text-2xl font-bold">{value}</p>
+                      <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/52">
+                        {label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/12 pt-6 text-xs uppercase tracking-[0.14em] text-white/58">
+                  <span className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-accent" />
+                    Respuesta en 24 h
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-accent" />
+                    Sin compromiso
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-accent" />
+                    Demo de 15 min
+                  </span>
+                </div>
+
+                <figure className="mt-7 rounded-lg border border-white/12 bg-white/[0.06] p-5">
+                  <Quote className="mb-3 h-5 w-5 text-accent" />
+                  <blockquote className="text-sm italic leading-7 text-white/76">
+                    "Lo que antes eran 10/15 minutos para explicar la carta, ahora con Winerim en 3 minutos ya tienen una visión global de los vinos."
+                  </blockquote>
+                  <figcaption className="mt-4 flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                      NO
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Nacho Otamendi</p>
+                      <p className="text-xs text-white/54">Propietario/Sommelier · Travieso Bar</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="rounded-lg border border-white/12 bg-[#191b1a]/95 p-5 shadow-2xl shadow-black/20 sm:p-7 lg:p-8"
+              >
+                <div className="mb-6">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent/18">
+                    <Building2 className="h-5 w-5 text-accent" />
+                  </div>
+                  <h2 className="font-heading text-2xl font-bold">Solicita tu demo personalizada</h2>
+                  <p className="mt-2 text-sm leading-6 text-white/60">
+                    Cuanto más contexto nos des, mejor adaptaremos la demo a tu caso.
+                  </p>
+                </div>
+
+                <form className="space-y-4" onFocusCapture={handleFormFocus} onSubmit={handleSubmit}>
+                  {UTM_KEYS.map((key) => (
+                    <input key={key} type="hidden" name={key} value={attribution[key] || ""} readOnly />
+                  ))}
+
+                  <div className="space-y-2">
+                    <FieldLabel htmlFor="restaurant" required>
+                      Nombre del restaurante
+                    </FieldLabel>
+                    <Input
+                      id="restaurant"
+                      name="restaurant"
+                      required
+                      placeholder="Ej. Restaurante La Viña"
+                      className={fieldBase}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <FieldLabel htmlFor="name" required>
+                      Tu nombre completo
+                    </FieldLabel>
+                    <Input id="name" name="name" required placeholder="Nombre y apellidos" className={fieldBase} />
+                  </div>
+
+                  <SelectField
+                    id="position"
+                    name="position"
+                    label="Tu cargo en el negocio"
+                    placeholder="¿Cuál es tu rol?"
+                    options={positionOptions}
+                    required
+                  />
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <FieldLabel htmlFor="phone" required>
+                        Teléfono
+                      </FieldLabel>
+                      <PhoneInput id="phone" name="phone" native required className="bg-white/95 text-slate-950" />
+                    </div>
+                    <div className="space-y-2">
+                      <FieldLabel htmlFor="email" required>
+                        Email profesional
+                      </FieldLabel>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="tu@restaurante.com"
+                        className={fieldBase}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <FieldLabel htmlFor="city" required>
+                        Ciudad
+                      </FieldLabel>
+                      <Input id="city" name="city" required placeholder="Ej. Madrid" className={fieldBase} />
+                    </div>
+                    <SelectField
+                      id="references_count"
+                      name="references_count"
+                      label="Referencias en carta"
+                      options={referenceOptions}
+                      required
+                    />
+                  </div>
+
+                  <SelectField
+                    id="business_type"
+                    name="business_type"
+                    label="Tipo de establecimiento"
+                    options={businessTypeOptions}
+                  />
+
+                  <SelectField
+                    id="num_locations"
+                    name="num_locations"
+                    label="Locales que gestionas"
+                    options={locationOptions}
+                  />
+
+                  <SelectField
+                    id="main_challenge"
+                    name="main_challenge"
+                    label="¿Qué quieres mejorar de tu carta?"
+                    placeholder="Tu principal reto ahora mismo"
+                    options={challengeOptions}
+                  />
+
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="h-12 w-full rounded-md bg-accent text-sm font-bold uppercase tracking-[0.16em] text-white hover:bg-accent/90"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Enviando
+                      </>
+                    ) : (
+                      <>
+                        Solicitar demo gratuita
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+
+                  <p className="text-center text-xs leading-5 text-white/50">
+                    Sin compromiso. Al enviar aceptas nuestra{" "}
+                    <Link to="/privacidad" className="text-white underline underline-offset-4">
+                      política de privacidad
+                    </Link>
+                    .
+                  </p>
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-white/10 bg-[#f4f1ed] px-5 py-16 text-slate-950 sm:px-8 lg:px-10 lg:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-[0.26em] text-accent">Casos de éxito</span>
+              <h2 className="mt-4 font-heading text-3xl font-bold leading-tight sm:text-4xl">
+                Lo que cuentan los restaurantes que ya usan Winerim
+              </h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">
+                Casos reales y espacios reservados para completar con testimonios verificados antes de escalar campañas.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 lg:grid-cols-4">
+              {cases.map((caseItem) => (
+                <article
+                  key={caseItem.number}
+                  className={`rounded-lg border p-5 ${
+                    caseItem.label === "REAL"
+                      ? "border-accent/30 bg-white"
+                      : "border-dashed border-slate-300 bg-white/70"
+                  }`}
+                >
+                  <div className="mb-6 flex items-center justify-between">
+                    <span className="font-heading text-2xl font-bold text-slate-300">{caseItem.number}</span>
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                      {caseItem.label}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-lg font-bold">{caseItem.title}</h3>
+                  <p className="mt-4 text-sm italic leading-7 text-slate-600">"{caseItem.quote}"</p>
+                  <div className="mt-6 border-t border-slate-200 pt-4">
+                    <p className="text-sm font-semibold">{caseItem.person}</p>
+                    <p className="mt-1 text-xs text-slate-500">{caseItem.role}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default MetaDemoLanding;
