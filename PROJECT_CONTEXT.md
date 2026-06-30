@@ -2,13 +2,16 @@
 
 ## Hechos
 
-- El 2026-06-30 se implemento localmente una landing de captacion para campanas de Meta en `/meta-demo`, con subdominio recomendado `go.winerim.wine`.
+- El 2026-06-30 se implemento una landing de captacion para campanas de Meta en `/meta-demo`, con subdominio recomendado `go.winerim.wine`.
 - La landing Meta Demo vive en `src/pages/MetaDemoLanding.tsx`, se registra en `src/App.tsx`, captura UTMs ocultos y guarda la atribucion en `contact_leads.message` como JSON.
 - La landing usa `form_type="demo"` para mantener el flujo actual de leads/notificaciones/conversiones y carga/dispara el Pixel Meta `450273446324682` solo con consentimiento aceptado.
 - `/meta-demo` queda como ruta `noindex` en Cloudflare Worker y la raiz de `go.winerim.wine` se prepara en React para mostrar la landing si el host esta configurado.
 - El chat externo se desactiva para `/meta-demo` y para `go.winerim.wine`; la propia landing elimina cualquier widget si llegara a inyectarse.
-- Validaciones locales de la landing Meta Demo: `npm run build`, `npm run deploy:worker:dry-run`, QA desktop/mobile sin overflow, hidden UTMs correctos y sin chat externo.
-- No se desplego produccion de la landing Meta Demo en la sesion del 2026-06-30; faltan publish Lovable, deploy Worker y configuracion DNS/route de `go.winerim.wine`.
+- Validaciones de la landing Meta Demo: `npm run build`, `npm run deploy:worker:dry-run`, QA desktop/mobile sin overflow, hidden UTMs correctos, sin chat externo y comprobacion productiva de `HTTP 200`/`noindex` en `/meta-demo`.
+- El 2026-06-30 se pusheo `43e1cae feat: add meta demo campaign landing` a `origin/main`.
+- El 2026-06-30 se desplego Cloudflare Worker `winerim-proxy` version `635e8855-8d39-4473-b37c-f3566653dd70`.
+- Falta publish Lovable del frontend para que `https://winerim.wine/meta-demo` renderice la landing real; ahora la ruta ya abre y es `noindex`, pero todavia muestra la home antigua.
+- Falta configuracion DNS/route de `go.winerim.wine`.
 - Contradiccion abierta: el contenido de landing usa `+1.000 bodegas gestionadas`, mientras creatividades mencionan `+2.000 restaurantes`; hay que confirmar si son metricas distintas o una esta desactualizada.
 - El 2026-06-29 se audito el estado de publicaciones y pendientes SEO/LLM: Supabase expone `440` articulos publicados y `/sitemap.xml` contiene `440` URLs de articulos dentro de `2.234` URLs totales.
 - El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas, incluido en sitemap y validado en muestras como Googlebot con prerender, canonical, titulo y H1 especificos.
@@ -157,7 +160,7 @@
 
 ## Tareas pendientes
 
-- Publicar la landing Meta Demo desde Lovable, desplegar el Worker y configurar Cloudflare DNS/route para `go.winerim.wine/*`.
+- Publicar la landing Meta Demo desde Lovable en el commit `43e1cae` y configurar Cloudflare DNS/route para `go.winerim.wine/*`; el Worker de `/meta-demo` ya esta desplegado.
 - Validar en produccion `/meta-demo` y `go.winerim.wine/` con UTMs reales, noindex, ausencia de chat externo, lead creado, notificacion y eventos de conversion.
 - Confirmar y unificar el claim de prueba social `+1.000 bodegas` frente a `+2.000 restaurantes`.
 - Reemplazar los tres casos pendientes de la landing Meta Demo por testimonios reales o retirar esa seccion.

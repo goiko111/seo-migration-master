@@ -5,7 +5,7 @@
 ## Hechos
 
 - El audio recibido confirma que los materiales de campana son: cuenta publicitaria, identificador de conjunto de datos/pixel, codigo Pixel, UTMs, captura de configuracion de campos ocultos y HTML de landing.
-- La landing de campanas esta implementada localmente en `/meta-demo`.
+- La landing de campanas esta implementada y pusheada en `/meta-demo`.
 - `go.winerim.wine` es el subdominio recomendado; `demo.winerim.wine` ya resolvia en DNS en la comprobacion local.
 - La landing captura UTMs ocultos y se integra con `contact_leads`, notificaciones, eventos existentes y Pixel Meta consent-aware.
 - `/meta-demo` esta marcada como `noindex` en React/SEOHead y en Cloudflare Worker.
@@ -15,16 +15,19 @@
   - Worker dry-run OK;
   - desktop/mobile sin overflow;
   - hidden UTMs rellenados correctamente con parametros de prueba.
-- Falta publicar en produccion y configurar DNS/ruta Worker para el subdominio.
+- Commit publicado en GitHub: `43e1cae feat: add meta demo campaign landing`.
+- Cloudflare Worker desplegado: `winerim-proxy` version `635e8855-8d39-4473-b37c-f3566653dd70`.
+- `https://winerim.wine/meta-demo` ya responde `HTTP 200` y `noindex`, pero todavia renderiza la home antigua porque falta publicar el frontend desde Lovable.
+- Falta configurar DNS/ruta Worker para `go.winerim.wine`.
 
 ## Tareas pendientes inmediatas
 
-1. Publicar frontend desde Lovable para que `https://winerim.wine/meta-demo` exista en produccion.
-2. Desplegar Cloudflare Worker con la inclusion de `/meta-demo` como `noindex`.
+1. Publicar frontend desde Lovable para que `https://winerim.wine/meta-demo` muestre la landing real del commit `43e1cae`.
+2. No repetir deploy de Worker salvo cambio de ruta/DNS; `/meta-demo` ya esta incluido como `noindex` en produccion.
 3. Configurar `go.winerim.wine` en Cloudflare:
    - DNS proxied hacia el mismo flujo/origen que Winerim;
    - route `go.winerim.wine/*` asociada a `winerim-proxy`.
-4. Validar produccion:
+4. Validar produccion tras el publish de Lovable:
    - `https://winerim.wine/meta-demo?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;
    - `https://go.winerim.wine/?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;
    - H1, formulario, noindex, ausencia de chat externo, ausencia de popup global y hidden UTMs.

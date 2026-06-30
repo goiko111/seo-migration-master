@@ -23,7 +23,10 @@
   - QA local desktop en `http://127.0.0.1:5173/meta-demo` sin overflow y sin chat externo;
   - QA local mobile `390x844` sin overflow y con formulario apilado correctamente.
 - El servidor local de Vite quedo levantado en `http://127.0.0.1:5173/` para revision.
-- No se desplego produccion todavia desde esta sesion.
+- Se creo y pusheo a `origin/main` el commit `43e1cae feat: add meta demo campaign landing`.
+- Se desplego Cloudflare Worker `winerim-proxy` con version `635e8855-8d39-4473-b37c-f3566653dd70`.
+- Produccion ya reconoce `https://winerim.wine/meta-demo` con `HTTP 200` y `x-robots-tag: noindex, follow`, pero sigue renderizando la home antigua hasta que Lovable publique el frontend del commit `43e1cae`.
+- `go.winerim.wine` sigue sin DNS activo en la comprobacion local; la configuracion de subdominio queda pendiente en Cloudflare.
 - Siguen existiendo cambios locales previos en `src/components/WineListAnalyzerTool.tsx`; no se tocaron en esta tarea.
 
 ## Decisiones
@@ -48,8 +51,8 @@
 
 ## Tareas pendientes
 
-- Publicar el frontend desde Lovable para que `/meta-demo` exista en produccion.
-- Desplegar el Cloudflare Worker tras el publish del frontend o junto con el cambio de DNS.
+- Publicar el frontend desde Lovable para que `/meta-demo` muestre la landing real del commit `43e1cae`, no la home actual.
+- No hace falta volver a desplegar el Worker para `/meta-demo`: ya esta desplegado con version `635e8855-8d39-4473-b37c-f3566653dd70`, salvo que se cambie la configuracion de rutas de Cloudflare.
 - En Cloudflare, crear/enrutar `go.winerim.wine`:
   - DNS proxied hacia el mismo origen/flujo que la web publica;
   - Worker route `go.winerim.wine/*` hacia `winerim-proxy`.

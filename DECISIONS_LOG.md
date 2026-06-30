@@ -16,7 +16,10 @@
 - Se desactivo el chat externo para `/meta-demo` y para el host `go.winerim.wine`.
 - Se registro `/meta-demo` como ruta `noindex` en Cloudflare Worker.
 - Validaciones locales completadas: `npm run build`, `npm run deploy:worker:dry-run`, QA desktop y QA mobile sin overflow.
-- No se ha desplegado produccion en esta sesion.
+- Se creo y pusheo a `origin/main` el commit `43e1cae feat: add meta demo campaign landing`.
+- Se desplego Cloudflare Worker `winerim-proxy` con version `635e8855-8d39-4473-b37c-f3566653dd70`.
+- Produccion ya devuelve `HTTP 200` y `x-robots-tag: noindex, follow` en `https://winerim.wine/meta-demo`, pero aun renderiza la home antigua porque falta publicar el frontend en Lovable.
+- `go.winerim.wine` sigue pendiente de DNS/route en Cloudflare.
 
 #### Decisiones
 
@@ -36,8 +39,8 @@
 
 #### Tareas pendientes
 
-- Publicar el frontend desde Lovable.
-- Desplegar Worker tras tener el frontend publicado.
+- Publicar el frontend desde Lovable desde `origin/main` commit `43e1cae`.
+- No redeplegar Worker salvo cambio de ruta/DNS: `/meta-demo` ya esta cubierto por la version `635e8855-8d39-4473-b37c-f3566653dd70`.
 - Configurar DNS/Worker route de `go.winerim.wine/*`.
 - Validar produccion con UTMs reales y comprobar lead/notificacion.
 - Resolver la contradiccion de prueba social: `+1.000 bodegas gestionadas` frente a `+2.000 restaurantes`.
