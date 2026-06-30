@@ -23,6 +23,7 @@ import { ads, hasConsent } from "@/lib/analytics";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackFormStart, trackFormSubmit } from "@/hooks/useIntentTracker";
 import { supabase } from "@/integrations/supabase/client";
+import winerimLogo from "@/assets/winerim-logo.webp";
 
 const META_PIXEL_ID = "450273446324682";
 const CAMPAIGN_HOST = "go.winerim.wine";
@@ -74,7 +75,7 @@ const challengeOptions = [
 ];
 
 const stats = [
-  { value: "+1.000", label: "Bodegas gestionadas", icon: Wine },
+  { value: "+2.000", label: "Restaurantes", icon: Wine },
   { value: "48h", label: "Implementación", icon: Zap },
   { value: "0", label: "Permanencia", icon: Users },
 ];
@@ -98,30 +99,30 @@ const cases = [
   },
   {
     number: "02",
-    label: "PENDIENTE",
+    label: "REAL",
     title: "Rotación de bodega",
     quote:
-      "Espacio reservado para un caso real centrado en reducción de stock muerto y mejor rotación de referencias.",
-    person: "Testimonio por confirmar",
-    role: "Cliente · Ciudad",
+      "Nos ha permitido rotar mejor los vinos, incluir etiquetas nuevas sin miedo, y dedicar más tiempo al cliente.",
+    person: "Simone Monese",
+    role: "Sommelier · La Vecchia Griglia",
   },
   {
     number: "03",
-    label: "PENDIENTE",
+    label: "REAL",
     title: "Ticket medio y margen",
     quote:
-      "Espacio reservado para un caso real sobre aumento del ticket medio de vino o mejora del margen en sala.",
-    person: "Testimonio por confirmar",
-    role: "Cliente · Ciudad",
+      "Me ayuda al escandallo en el día a día de los vinos, a tener un mayor control de la carta con el precio de compra y el precio de venta.",
+    person: "Lorena Cuevas",
+    role: "Sommelier · El Paladar By Zuriñe García",
   },
   {
     number: "04",
-    label: "PENDIENTE",
+    label: "REAL",
     title: "Tiempo recuperado",
     quote:
-      "Espacio reservado para un caso real sobre el tiempo que el equipo recupera al dejar procesos manuales.",
-    person: "Testimonio por confirmar",
-    role: "Cliente · Ciudad",
+      "Me ayuda a ahorrar tiempo en la creación de cartas de vinos, ofrecer un aliado al camarero en la venta de los vinos.",
+    person: "Xavi Nolla",
+    role: "Sommelier y Fundador · enoAula",
   },
 ];
 
@@ -301,7 +302,24 @@ const MetaDemoLanding = () => {
       return;
     }
 
-    notifyLead(leadData);
+    const notificationLead = {
+      ...leadData,
+      source: "meta_demo_landing",
+      lead_type: "demo",
+      lead_category: "meta_campaign",
+      landing_url: currentAttribution.landing_url || null,
+      referrer: currentAttribution.referrer || null,
+      fbclid: currentAttribution.fbclid || null,
+      utm_source: currentAttribution.utm_source || null,
+      utm_medium: currentAttribution.utm_medium || null,
+      utm_campaign: currentAttribution.utm_campaign || null,
+      utm_content: currentAttribution.utm_content || null,
+      utm_term: currentAttribution.utm_term || null,
+    };
+    const notified = await notifyLead(notificationLead);
+    if (!notified) {
+      toast.warning("Solicitud guardada. Revisaremos la notificación interna manualmente.");
+    }
     trackFormSubmit("demo");
     pushDataLayerEvent("meta_demo_lead", currentAttribution);
     fireMetaLead(currentAttribution);
@@ -322,6 +340,7 @@ const MetaDemoLanding = () => {
         title="Solicita una demo gratuita de Winerim"
         description="Demo gratuita de Winerim para restaurantes, hoteles y grupos de restauración. 15 minutos, sin compromiso y con análisis gratuito de tu carta incluido."
         url={`https://${CAMPAIGN_HOST}/`}
+        image="https://winerim.wine/og-image.png"
         noindex
       />
 
@@ -330,8 +349,8 @@ const MetaDemoLanding = () => {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(131,40,59,0.42),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_34%)]" />
           <div className="relative mx-auto flex max-w-7xl flex-col gap-10 lg:min-h-[calc(100vh-5rem)]">
             <header className="flex items-center justify-between">
-              <Link to="/" className="font-heading text-2xl font-bold tracking-wide">
-                Winerim
+              <Link to="/" className="flex items-center" aria-label="Winerim">
+                <img src={winerimLogo} alt="Winerim" className="h-9 w-auto sm:h-10" />
               </Link>
               <div className="hidden items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60 sm:flex">
                 <ShieldCheck className="h-4 w-4 text-accent" />
@@ -558,7 +577,7 @@ const MetaDemoLanding = () => {
                 Lo que cuentan los restaurantes que ya usan Winerim
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-600">
-                Casos reales y espacios reservados para completar con testimonios verificados antes de escalar campañas.
+                Cuatro testimonios reales de profesionales que usan Winerim para vender, rotar y explicar mejor su carta.
               </p>
             </div>
 
@@ -569,7 +588,7 @@ const MetaDemoLanding = () => {
                   className={`rounded-lg border p-5 ${
                     caseItem.label === "REAL"
                       ? "border-accent/30 bg-white"
-                      : "border-dashed border-slate-300 bg-white/70"
+                      : "border-slate-300 bg-white/70"
                   }`}
                 >
                   <div className="mb-6 flex items-center justify-between">

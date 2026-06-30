@@ -23,16 +23,23 @@ export function fireAdsConversion(formType?: string): void {
 
 /**
  * Sends lead data to the notification edge function.
- * Fire-and-forget: errors are logged but don't block the UI.
+ * Returns false when the Edge Function invocation itself fails.
  */
-export async function notifyLead(lead: Record<string, string | null>) {
+export async function notifyLead(lead: Record<string, string | null>): Promise<boolean> {
+  let ok = true;
   try {
-    await supabase.functions.invoke("send-lead-notification", {
+    const { error } = await supabase.functions.invoke("send-lead-notification", {
       body: lead,
     });
+    if (error) {
+      ok = false;
+      console.error("notifyLead edge function error:", error);
+    }
   } catch (err) {
+    ok = false;
     console.error("notifyLead failed (non-blocking):", err);
   }
   // Fire Google Ads conversion after successful submission
   fireAdsConversion(lead.form_type || undefined);
+  return ok;
 }

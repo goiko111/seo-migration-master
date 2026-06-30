@@ -1,5 +1,64 @@
 # Current State
 
+## Actualizacion 2026-06-30: landing Meta Demo reforzada con CRM, logo y testimonios reales
+
+## Hechos
+
+- El usuario confirmo que el claim correcto para campanas es `+2.000 restaurantes`; se sustituyo el stat anterior `+1.000 bodegas gestionadas` en `src/pages/MetaDemoLanding.tsx`.
+- La landing Meta Demo ahora muestra el logo real de Winerim desde `src/assets/winerim-logo.webp` en la cabecera.
+- El OpenGraph de la landing se fijo explicitamente a `https://winerim.wine/og-image.png`; el asset existe en `public/og-image.png` e incluye marca Winerim.
+- Los tres casos plantilla se reemplazaron por testimonios reales de la web, alineados con cada titulo:
+  - Rotacion de bodega: Simone Monese, Sommelier de La Vecchia Griglia.
+  - Ticket medio y margen: Lorena Cuevas, Sommelier de El Paladar By Zurine Garcia.
+  - Tiempo recuperado: Xavi Nolla, Sommelier y Fundador de enoAula.
+- El formulario de la landing sigue conectado al backend mediante `onSubmit`, no mediante un `action` HTML estatico: inserta en `contact_leads` y despues invoca `send-lead-notification`.
+- Se reforzo `src/lib/notifyLead.ts` para devolver `true/false` segun la respuesta de la Edge Function.
+- En `MetaDemoLanding`, la invocacion de `notifyLead` ahora se espera con `await` antes de disparar conversiones y navegar a gracias.
+- Se actualizo `supabase/functions/send-lead-notification/index.ts` para reenviar a Winerim Connect/CRM los campos de atribucion Meta (`landing_url`, `referrer`, `fbclid` y UTMs).
+- Para leads de `meta_demo_landing` o `meta_campaign`, la Edge Function considera obligatorio el reenvio a Winerim Connect: si falta `WINERIM_CONNECT_WEBHOOK_URL` o el webhook falla, devuelve error.
+- Validaciones completadas:
+  - `npm run build` OK;
+  - `npx --yes deno-bin check supabase/functions/send-lead-notification/index.ts` OK;
+  - `git diff --check` OK;
+  - prueba Playwright/Chrome local en `http://127.0.0.1:5174/meta-demo?...` OK.
+- Resultado de la prueba local de formulario:
+  - lead test: `codex-test+winerim-meta-crm@winerim.com`;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200`;
+  - la pagina navego a `/gracias?tipo=demo&origen=meta`;
+  - los hidden UTMs quedaron rellenos;
+  - no quedaban placeholders ni `+1.000` en la landing local.
+- El despliegue CLI directo de `send-lead-notification` fallo por falta de `SUPABASE_ACCESS_TOKEN`, igual que en despliegues Supabase anteriores.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco ni debe mezclarse con esta landing.
+
+## Decisiones
+
+- Usar `+2.000 restaurantes` como cifra publica en esta landing de campanas.
+- No anadir un `action` HTML estatico al `<form>` porque la app no es un formulario HTML plano: el flujo correcto es React `onSubmit` -> Supabase `contact_leads` -> Edge Function -> email/CRM.
+- Usar solamente testimonios reales ya existentes en la web para los casos de exito; no dejar placeholders en una landing de pago.
+- Hacer obligatorio el reenvio al CRM para la landing Meta desde la Edge Function, manteniendo la fila en Supabase como respaldo operativo.
+
+## Hipotesis
+
+- Esperar a `send-lead-notification` antes de navegar a gracias reducira perdidas silenciosas de notificacion/CRM en trafico de Meta.
+- Pasar UTMs y `fbclid` al CRM permitira medir mejor campana, anuncio y termino sin migracion de columnas inmediata.
+
+## Contradicciones / dudas abiertas
+
+- No queda abierta la contradiccion `+1.000 bodegas` vs `+2.000 restaurantes`: queda resuelta a favor de `+2.000 restaurantes`.
+- No se pudo confirmar el CRM final en produccion porque la Edge Function reforzada aun no esta desplegada; la prueba local uso la Edge Function productiva actualmente activa y devolvio `200`.
+
+## Tareas pendientes
+
+- Publicar frontend desde Lovable con esta version para que `https://go.winerim.wine/` y `/meta-demo` muestren logo, `+2.000 restaurantes`, OpenGraph y testimonios reales.
+- Desplegar desde Lovable Cloud/Supabase la Edge Function `send-lead-notification` actualizada.
+- Tras publish/deploy, repetir el test en produccion con UTMs y confirmar:
+  - `contact_leads` creado;
+  - Edge Function `200`;
+  - lead visible en CRM/Winerim Connect;
+  - redireccion a gracias;
+  - ausencia de placeholders y de `+1.000`.
+
 ## Actualizacion 2026-06-30: landing Meta Demo para campañas
 
 ## Hechos

@@ -37,6 +37,24 @@ async function resolvePrivateStorageLink(
   return data?.signedUrl || null;
 }
 
+function parseLeadMessage(message?: string | null): Record<string, any> {
+  if (!message) return {};
+  try {
+    const parsed = JSON.parse(message);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getAttributionValue(
+  lead: Record<string, any>,
+  attribution: Record<string, any>,
+  key: string,
+): string | null {
+  return lead[key] || attribution[key] || null;
+}
+
 /* ──────── Human-readable labels + download paths for every form_type ──────── */
 const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPath?: string }> = {
   demo: { label: "Solicitud de demo gratuita" },
@@ -134,6 +152,10 @@ Deno.serve(async (req) => {
 
     const lead = await req.json();
     const formInfo = FORM_LABELS[lead.form_type || ""] || { label: lead.form_type || "Desconocido" };
+    const messagePayload = parseLeadMessage(lead.message || null);
+    const attribution = messagePayload.attribution && typeof messagePayload.attribution === "object"
+      ? messagePayload.attribution
+      : {};
     const resolvedMenuLink = await resolvePrivateStorageLink(
       supabase,
       lead.menu_link || lead.carta_url || null,
@@ -173,6 +195,9 @@ Deno.serve(async (req) => {
 
     // 2) Forward lead to Winerim Connect (Lead Autopilot)
     const CONNECT_URL = Deno.env.get("WINERIM_CONNECT_WEBHOOK_URL");
+    const connectRequired = lead.source === "meta_demo_landing" || lead.lead_category === "meta_campaign";
+    let connectForwarded = false;
+    let connectError: string | null = null;
     if (CONNECT_URL) {
       try {
         const connectRes = await fetch(CONNECT_URL, {
@@ -197,18 +222,32 @@ Deno.serve(async (req) => {
             resource: formInfo.resource || null,
             lead_type: lead.lead_type || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
             lead_category: lead.lead_category || (lead.form_type === "wine-list-analyzer" || lead.form_type === "analisis-carta" ? "analisis" : null),
-            source: "winerim_web",
+            source: lead.source || "winerim_web",
+            landing_url: getAttributionValue(lead, attribution, "landing_url"),
+            referrer: getAttributionValue(lead, attribution, "referrer"),
+            fbclid: getAttributionValue(lead, attribution, "fbclid"),
+            utm_source: getAttributionValue(lead, attribution, "utm_source"),
+            utm_medium: getAttributionValue(lead, attribution, "utm_medium"),
+            utm_campaign: getAttributionValue(lead, attribution, "utm_campaign"),
+            utm_content: getAttributionValue(lead, attribution, "utm_content"),
+            utm_term: getAttributionValue(lead, attribution, "utm_term"),
           }),
         });
         if (!connectRes.ok) {
-          const err = await connectRes.text();
-          console.error("Winerim Connect webhook error:", err);
+          connectError = await connectRes.text();
+          console.error("Winerim Connect webhook error:", connectError);
+          if (connectRequired) throw new Error(`Winerim Connect webhook error: ${connectError}`);
         } else {
+          connectForwarded = true;
           console.log("Lead forwarded to Winerim Connect");
         }
       } catch (e) {
-        console.error("Winerim Connect webhook failed (non-blocking):", e);
+        connectError = e instanceof Error ? e.message : String(e);
+        console.error("Winerim Connect webhook failed:", e);
+        if (connectRequired) throw e;
       }
+    } else if (connectRequired) {
+      throw new Error("WINERIM_CONNECT_WEBHOOK_URL is not configured for required CRM forwarding");
     }
 
     // 3) Send confirmation to the lead (if they provided email)
@@ -243,7 +282,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    return new Response(JSON.stringify({ ok: true }), {
+    return new Response(JSON.stringify({ ok: true, connect_forwarded: connectForwarded, connect_error: connectError }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {

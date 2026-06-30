@@ -2,6 +2,12 @@
 
 ## Hechos
 
+- El 2026-06-30 se reforzo la landing Meta Demo tras el publish inicial: `src/pages/MetaDemoLanding.tsx` ahora muestra el logo real de Winerim, usa `https://winerim.wine/og-image.png` como OpenGraph, cambia la prueba social a `+2.000 restaurantes` y sustituye los tres casos plantilla por testimonios reales de Simone Monese, Lorena Cuevas y Xavi Nolla.
+- La landing Meta Demo no usa un `action` HTML estatico; el formulario esta conectado por `onSubmit` a Supabase `contact_leads`, y despues invoca `send-lead-notification`. Este flujo se mantiene porque evita duplicar leads y conserva validacion, tracking y atribucion.
+- El 2026-06-30 se reforzo `notifyLead` para esperar la respuesta de la Edge Function y devolver `false` si falla la invocacion, evitando que la navegacion a gracias oculte errores de notificacion/CRM en la landing Meta.
+- El 2026-06-30 se actualizo `supabase/functions/send-lead-notification/index.ts` para reenviar a Winerim Connect los campos de atribucion Meta (`landing_url`, `referrer`, `fbclid`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) y exigir CRM cuando `source="meta_demo_landing"` o `lead_category="meta_campaign"`.
+- Validacion local de la landing reforzada: `npm run build`, `npx --yes deno-bin check supabase/functions/send-lead-notification/index.ts`, `git diff --check` y prueba Playwright/Chrome en `http://127.0.0.1:5174/meta-demo?...` con lead test `codex-test+winerim-meta-crm@winerim.com`; Supabase `contact_leads` respondio `201`, `send-lead-notification` respondio `200` y la navegacion termino en `/gracias?tipo=demo&origen=meta`.
+- El deploy CLI directo de `send-lead-notification` sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; la Edge Function reforzada debe desplegarse desde Lovable Cloud/Supabase igual que en sesiones anteriores.
 - El 2026-06-30 se implemento una landing de captacion para campanas de Meta en `/meta-demo`, con subdominio recomendado `go.winerim.wine`.
 - La landing Meta Demo vive en `src/pages/MetaDemoLanding.tsx`, se registra en `src/App.tsx`, captura UTMs ocultos y guarda la atribucion en `contact_leads.message` como JSON.
 - La landing usa `form_type="demo"` para mantener el flujo actual de leads/notificaciones/conversiones y carga/dispara el Pixel Meta `450273446324682` solo con consentimiento aceptado.
@@ -15,7 +21,7 @@
 - El 2026-06-30 se anadio la ruta Worker `go.winerim.wine/*` a `winerim-proxy`, manteniendo `winerim.wine/*`.
 - El 2026-06-30 se desplego Cloudflare Worker `winerim-proxy` version `e850fe30-c8de-4fef-b7da-5bce3ea11667` para aplicar `X-Robots-Tag: noindex, follow` a todo el host `go.winerim.wine`.
 - Validacion productiva de `go.winerim.wine`: DNS resuelve a Cloudflare, `HTTP 200`, `x-worker-branch: spa` y `x-robots-tag: noindex, follow`; todavia muestra la home antigua hasta que Lovable publique el frontend del commit `43e1cae` o posterior.
-- Contradiccion abierta: el contenido de landing usa `+1.000 bodegas gestionadas`, mientras creatividades mencionan `+2.000 restaurantes`; hay que confirmar si son metricas distintas o una esta desactualizada.
+- La contradiccion de prueba social de la landing Meta queda cerrada por decision del usuario: se usa `+2.000 restaurantes` en lugar de `+1.000 bodegas gestionadas`.
 - El 2026-06-29 se audito el estado de publicaciones y pendientes SEO/LLM: Supabase expone `440` articulos publicados y `/sitemap.xml` contiene `440` URLs de articulos dentro de `2.234` URLs totales.
 - El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas, incluido en sitemap y validado en muestras como Googlebot con prerender, canonical, titulo y H1 especificos.
 - El hub inspirado por La RVF quedo implementado y publicado el 2026-06-30 como capa separada `Aprender vino`; las rutas antiguas previstas tipo `/biblioteca-vino/como-empezar` pasan a ser aliases/redirects legacy.
@@ -110,6 +116,10 @@
 
 ## Decisiones
 
+- Usar `+2.000 restaurantes` como claim de prueba social en la landing Meta Demo.
+- Reemplazar los casos plantilla de la landing Meta Demo solo con testimonios reales ya presentes en la web; no inventar testimonios ni dejar placeholders visibles en campanas.
+- Mantener el formulario de la landing Meta conectado por React/Supabase (`onSubmit` -> `contact_leads` -> `send-lead-notification`) en vez de anadir un `action` HTML estatico que podria saltarse tracking, validacion o CRM.
+- Considerar obligatorio el reenvio a Winerim Connect/CRM para leads de `meta_demo_landing`; si falta `WINERIM_CONNECT_WEBHOOK_URL` o el webhook falla, la Edge Function debe devolver error para poder detectarlo.
 - Usar `go.winerim.wine` como subdominio recomendado para funnels de campanas; no usar `demo.winerim.wine` sin revisar porque ya resuelve en DNS.
 - Mantener la landing Meta Demo como superficie de conversion pagada `noindex`, separada de SEO editorial y de Biblioteca del vino.
 - En la primera fase de campanas, guardar UTMs en `contact_leads.message` en vez de crear migraciones de columnas; si escala reporting, evaluar columnas dedicadas o tabla de attribution.
@@ -140,6 +150,8 @@
 
 ## Hipótesis
 
+- Esperar la invocacion de `send-lead-notification` antes de navegar a gracias reduce el riesgo de perder envios a CRM en trafico de campanas.
+- Incluir UTMs y `fbclid` tambien en el payload de Winerim Connect deberia permitir atribucion comercial mas clara sin cambiar todavia el esquema de `contact_leads`.
 - La landing Meta Demo deberia convertir mejor que `/demo` para trafico frio de Meta porque elimina navegacion, footer, chat externo, FAQ y CTAs secundarios.
 - `go.winerim.wine` deberia servir como URL corta y reutilizable para Meta Ads, Google Ads y funnels futuros si Cloudflare enruta el host al mismo Worker/frontend.
 - La brecha principal actual tras publicar `Aprender vino` es reenviar/monitorizar Search Console y ampliar spokes especificos de iniciacion sin mezclar la biblioteca de entidades.
@@ -163,10 +175,9 @@
 
 ## Tareas pendientes
 
-- Publicar la landing Meta Demo desde Lovable en el commit `43e1cae` o posterior; DNS, route Worker y cabecera `noindex` de `go.winerim.wine` ya estan activos.
-- Validar en produccion `/meta-demo` y `go.winerim.wine/` con UTMs reales, noindex, ausencia de chat externo, lead creado, notificacion y eventos de conversion.
-- Confirmar y unificar el claim de prueba social `+1.000 bodegas` frente a `+2.000 restaurantes`.
-- Reemplazar los tres casos pendientes de la landing Meta Demo por testimonios reales o retirar esa seccion.
+- Publicar el frontend desde Lovable con la version reforzada de la landing Meta Demo para que produccion muestre logo, OpenGraph, `+2.000 restaurantes` y testimonios reales.
+- Desplegar desde Lovable Cloud/Supabase la Edge Function `send-lead-notification` reforzada para que el CRM reciba atribucion Meta y el reenvio sea obligatorio en esta landing.
+- Revalidar en produccion `https://go.winerim.wine/` con UTMs reales: noindex, logo, OG, testimonios, lead creado, Edge Function `200`, CRM recibido y redireccion a gracias.
 - Monitorizar Search Console para confirmar descubrimiento, rastreo e indexacion de las seis rutas de `Aprender vino`.
 - Desplegar desde Lovable la correccion de seguridad de Supabase Storage para `cartas-vinos` y `lead-uploads`, porque el CLI local sigue sin `SUPABASE_ACCESS_TOKEN` y la base local no esta arrancada.
 - Revalidar que los formularios con upload siguen funcionando y que los enlaces internos recibidos por email/webhook son firmados, no publicos.

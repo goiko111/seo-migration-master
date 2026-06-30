@@ -2,6 +2,39 @@
 
 ## 2026-06-30
 
+### Refuerzo landing Meta Demo: logo, testimonios y CRM
+
+#### Hechos
+
+- Se reviso la landing Meta Demo tras el publish inicial y se aplicaron mejoras en `src/pages/MetaDemoLanding.tsx`.
+- La cabecera ahora usa el logo real de Winerim (`winerim-logo.webp`) en vez de texto plano.
+- El OpenGraph de la landing apunta explicitamente a `https://winerim.wine/og-image.png`.
+- Se cambio la prueba social de `+1.000 bodegas gestionadas` a `+2.000 restaurantes`.
+- Se sustituyeron los tres casos plantilla por testimonios reales de Simone Monese, Lorena Cuevas y Xavi Nolla.
+- Se reviso la nota tecnica sobre `action` del formulario: en esta app el formulario no debe depender de un `action` HTML plano, porque ya esta conectado por React `onSubmit` a Supabase y a la Edge Function de notificaciones.
+- `notifyLead` ahora devuelve estado de exito/error y la landing espera la respuesta antes de navegar a gracias.
+- `send-lead-notification` ahora reenvia a Winerim Connect los campos de atribucion de Meta y considera obligatorio el CRM en leads de `meta_demo_landing`/`meta_campaign`.
+- Validaciones locales pasadas: build, `deno check`, `git diff --check` y prueba Playwright/Chrome con formulario enviado; Supabase `contact_leads` respondio `201` y la Edge Function respondio `200`.
+- El deploy directo de la Edge Function por CLI no pudo hacerse por falta de `SUPABASE_ACCESS_TOKEN`.
+
+#### Decisiones
+
+- La cifra oficial para esta landing queda en `+2.000 restaurantes`.
+- No se publican placeholders ni testimonios inventados en campanas; se usan testimonios reales ya presentes en la web.
+- No se anade `action` HTML estatico al formulario de la landing, porque podria saltarse la insercion controlada, tracking, atribucion o CRM.
+- El reenvio a Winerim Connect/CRM es obligatorio para la landing Meta y debe desplegarse en `send-lead-notification`.
+
+#### Hipotesis
+
+- La espera explicita de `notifyLead` hara mas fiable el envio a CRM antes de redirigir a la pagina de gracias.
+- Reenviar UTMs y `fbclid` al CRM dara suficiente trazabilidad para las primeras campanas sin crear todavia nuevas columnas de atribucion.
+
+#### Tareas pendientes
+
+- Publicar frontend desde Lovable con la landing reforzada.
+- Desplegar `send-lead-notification` desde Lovable Cloud/Supabase.
+- Repetir prueba de formulario en produccion y confirmar que el lead aparece en Winerim Connect.
+
 ### Landing Meta Demo para campañas
 
 #### Hechos

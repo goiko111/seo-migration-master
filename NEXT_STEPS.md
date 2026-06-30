@@ -1,5 +1,42 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar landing Meta Demo reforzada
+
+## Hechos
+
+- La landing Meta Demo ya esta reforzada en codigo local:
+  - logo real de Winerim en cabecera;
+  - OpenGraph con `https://winerim.wine/og-image.png`;
+  - stat unificado a `+2.000 restaurantes`;
+  - tres testimonios reales sustituyendo plantillas;
+  - formulario conectado a Supabase por `onSubmit`;
+  - notificacion esperada con `await notifyLead`;
+  - Edge Function preparada para reenviar UTMs/`fbclid` al CRM.
+- Validaciones locales pasadas: `npm run build`, `deno check` de `send-lead-notification`, `git diff --check` y prueba Playwright/Chrome de envio.
+- La prueba local creo un lead test con respuesta `201` de `contact_leads` y `200` de `send-lead-notification`, y redirigio a `/gracias?tipo=demo&origen=meta`.
+- El CLI local no puede desplegar `send-lead-notification` por falta de `SUPABASE_ACCESS_TOKEN`.
+- Hay un cambio local previo en `src/components/WineListAnalyzerTool.tsx`; no forma parte de esta tarea.
+
+## Tareas pendientes inmediatas
+
+1. Publicar frontend desde Lovable para que `https://go.winerim.wine/` y `https://winerim.wine/meta-demo` sirvan la version reforzada.
+2. Desplegar desde Lovable Cloud/Supabase la Edge Function `send-lead-notification`.
+3. Tras ambos despliegues, validar produccion con:
+   - `https://go.winerim.wine/?utm_source=meta&utm_medium=paid_social&utm_campaign=codex_prod_test&utm_content=form_submit&utm_term=demo&fbclid=codex_prod_test`;
+   - logo visible;
+   - `+2.000 restaurantes`;
+   - OpenGraph `https://winerim.wine/og-image.png`;
+   - sin placeholders ni `+1.000`;
+   - `X-Robots-Tag: noindex, follow`;
+   - hidden UTMs correctos.
+4. Enviar un formulario de prueba en produccion y confirmar:
+   - fila en `contact_leads`;
+   - Edge Function `send-lead-notification` responde `200`;
+   - el lead llega a Winerim Connect/CRM con UTMs y `fbclid`;
+   - la pagina redirige a `/gracias?tipo=demo&origen=meta`.
+5. Si el test de CRM falla, revisar primero que `WINERIM_CONNECT_WEBHOOK_URL` este configurado en los secrets de la Edge Function.
+6. No mezclar con `src/components/WineListAnalyzerTool.tsx` salvo que el usuario pida retomar esa linea.
+
 ## Actualizacion 2026-06-30: retomar landing Meta Demo
 
 ## Hechos
