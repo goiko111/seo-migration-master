@@ -3290,8 +3290,12 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Se creó y subió `9c005dd feat: add learn wine hub` a `origin/main`.
 - Se desplegó Cloudflare Worker `winerim-proxy` Version ID `749b0929-9ac5-408b-8c51-7ee195051232`.
 - Googlebot y `/sitemap.xml` ya quedan cubiertos por Worker para `Aprender vino`.
-- Producción humana sigue mostrando `Página no encontrada` en `/aprender-vino` hasta que Lovable publique el frontend del commit `9c005dd`.
 - Supabase CLI no pudo desplegar `sitemap`/`prerender` por falta de `SUPABASE_ACCESS_TOKEN`.
+- El usuario confirmó después que Lovable publicó frontend y Edge Functions `sitemap`/`prerender` desde `main`.
+- Producción humana quedó validada para las seis rutas con H1/canonical/hreflang propios, sin `Página no encontrada`.
+- Googlebot quedó validado en las seis rutas con `HTTP 200`, `x-prerendered: true` y título localizado correcto.
+- `/sitemap.xml` contiene las seis URLs nuevas y se observaron `2.240` nodos `<url>`.
+- El usuario informó dos hallazgos de seguridad preexistentes en buckets `cartas-vinos` y `lead-uploads`, fuera del alcance de este deploy.
 
 #### Decisiones
 
@@ -3305,7 +3309,8 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
   - PT `/pt/aprender-vinho`.
 - Usar schema `LearningResource` para la nueva capa.
 - Añadir fallback/prerender en Worker para bots mientras Supabase `prerender` no esté desplegado.
-- No crear subpáginas de iniciación hasta validar el hub en producción humana, no solo como Googlebot.
+- Pasar a fase de Search Console y spokes de iniciación una vez validada producción humana y Googlebot.
+- Tratar los hallazgos de buckets Supabase Storage como tarea de seguridad independiente.
 
 #### Hipótesis
 
@@ -3314,7 +3319,6 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 #### Tareas pendientes
 
-- Publicar frontend en Lovable desde `origin/main` commit `9c005dd`.
-- Publicar Supabase functions desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
-- Validar producción humana en las seis rutas.
-- Reenviar sitemap en Search Console cuando producción humana y Supabase estén alineados.
+- Reenviar sitemap en Search Console y solicitar indexacion selectiva de `/aprender-vino` si la herramienta lo permite.
+- Monitorizar indexacion de las seis rutas de `Aprender vino`.
+- Auditar/corregir buckets Supabase Storage `cartas-vinos` y `lead-uploads` en una tarea separada.

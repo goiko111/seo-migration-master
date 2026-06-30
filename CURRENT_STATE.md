@@ -4934,15 +4934,31 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
   - error: `LegacyPlatformAuthRequiredError`.
 - Se creó el commit `9c005dd feat: add learn wine hub` y se subió a `origin/main`.
 - Se desplegó Cloudflare Worker `winerim-proxy` Version ID `749b0929-9ac5-408b-8c51-7ee195051232`.
+- El usuario confirmó después que Lovable desplegó las Edge Functions `sitemap` y `prerender` desde `main`.
+- El usuario confirmó que el frontend quedó publicado desde Lovable.
 - Producción tras Worker:
   - `/sitemap.xml` contiene las seis URLs de `Aprender vino`;
   - Googlebot recibe `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`, título, H1 y schema `LearningResource` en muestras ES/EN/PT.
-- Producción humana aún no está alineada:
-  - `/aprender-vino` carga `Página no encontrada | Winerim`;
-  - canonical humano observado: `https://winerim.wine/`;
-  - H1 humano observado: `Página no encontrada`;
-  - causa probable: Lovable frontend aún no publicó el commit `9c005dd`.
-- La pestaña integrada de Lovable redirige a login, así que Codex no pudo publicar frontend/Edge Functions desde Lovable.
+- Revalidación Googlebot tras deploy completo:
+  - las seis URLs devuelven `HTTP 200`;
+  - `x-prerendered: true`;
+  - título localizado correcto;
+  - ninguna sirve `Página no encontrada`.
+- Revalidación sitemap tras deploy completo:
+  - `/sitemap.xml` contiene las seis URLs nuevas;
+  - total observado: `2.240` nodos `<url>`.
+- Revalidación producción humana tras deploy completo:
+  - las seis URLs cargan contenido real;
+  - canonical propio;
+  - H1 localizado propio;
+  - 7 `hreflang` por página;
+  - sin `Página no encontrada`;
+  - sin errores de consola;
+  - sin overflow horizontal.
+- El usuario informó dos hallazgos de seguridad preexistentes en buckets Supabase Storage:
+  - `cartas-vinos`;
+  - `lead-uploads`.
+- Esos hallazgos quedaron fuera del alcance de este deploy y deben tratarse en una tarea separada.
 - El servidor local está activo en `http://127.0.0.1:5173/`.
 - Cambios no relacionados ya existentes y no tocados por esta sesión:
   - `index.html`;
@@ -4952,26 +4968,20 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - `Biblioteca del vino` queda como grafo/colección de entidades: uvas, regiones, estilos, maridajes, servicio y glosario.
 - `Aprender vino` queda como capa guiada de aprendizaje para equipos de sala, enlazada a Biblioteca pero separada en arquitectura, intención y URLs.
-- No crear todavía subpáginas finas de iniciación hasta que el hub esté publicado y validado para usuarios humanos en producción.
+- No crear subpáginas finas de iniciación dentro de Biblioteca; si se crean, deben colgar de `Aprender vino` o de blog/guias con intención propia.
 - Mantener fallback/prerender en Worker para cubrir bots si Supabase `prerender` aún no está desplegado.
+- Tratar la auditoría de buckets Supabase Storage como deuda de seguridad separada del despliegue SEO/LLM.
 
 ## Hipótesis
 
 - Separar `Aprender vino` debería mejorar la comprensión SEO/LLM: una página responde a “por dónde empezar” y la Biblioteca responde a entidades concretas.
 - El hub puede captar búsquedas informacionales y conducirlas hacia análisis de carta, demo y contenido de biblioteca con más intención comercial.
-- Mientras Lovable/Supabase no publiquen los cambios, la producción humana no muestra aún la nueva página React aunque el Worker ya cubre bots y sitemap.
+- Tras el deploy de Lovable, `Aprender vino` ya queda alineado para humano, sitemap y bots.
 
 ## Tareas pendientes
 
-- Publicar frontend desde Lovable para commit `9c005dd` o confirmar que GitHub/Lovable auto-despliega `main`.
-- Desplegar Supabase functions `sitemap` y `prerender` desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
-- Revalidar en producción como navegador humano:
-  - `/aprender-vino`;
-  - `/en/learn-wine`;
-  - `/it/imparare-il-vino`;
-  - `/fr/apprendre-le-vin`;
-  - `/de/wein-lernen`;
-  - `/pt/aprender-vinho`.
-- Revalidar Googlebot en las seis rutas cuando Supabase `prerender` quede publicado; hoy el Worker ya cubre muestras ES/EN/PT.
-- Reenviar `/sitemap.xml` en Search Console cuando producción tenga las URLs nuevas.
+- Reenviar `/sitemap.xml` en Search Console.
+- Solicitar indexacion selectiva de `/aprender-vino` si Search Console lo permite.
+- Monitorizar rastreo/indexacion de las seis rutas de `Aprender vino`.
+- Auditar los buckets Supabase Storage `cartas-vinos` y `lead-uploads` en una tarea separada de seguridad.
 - Después de validar el hub, planificar spokes propios de iniciación: cata, vocabulario, tipos de vino, uvas para empezar, regiones para empezar, etiquetas, temperatura, copas, conservación, defectos, maridajes básicos y recomendación en sala.

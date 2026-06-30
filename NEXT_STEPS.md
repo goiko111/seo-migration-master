@@ -3645,7 +3645,7 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
   - Deno check;
   - Worker dry-run;
   - QA con Chrome headless.
-- Despliegue Supabase bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- El deploy CLI local de Supabase estuvo bloqueado por falta de `SUPABASE_ACCESS_TOKEN`, pero el usuario confirmó que Lovable desplegó `sitemap` y `prerender` desde `main`.
 - Commit/push completado:
   - `9c005dd feat: add learn wine hub`;
   - `origin/main` actualizado.
@@ -3656,9 +3656,23 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
   - Googlebot recibe prerender estático Worker con `LearningResource`;
   - `/sitemap.xml` ya contiene las seis URLs nuevas.
 - Producción humana:
-  - `/aprender-vino` aún muestra `Página no encontrada | Winerim`;
-  - falta publicar el frontend Lovable del commit `9c005dd`.
-- Codex no pudo publicar desde Lovable porque la pestaña integrada redirige a login.
+  - las seis rutas cargan contenido real;
+  - canonical propio;
+  - H1 localizado;
+  - 7 `hreflang`;
+  - sin `Página no encontrada`;
+  - sin errores de consola;
+  - sin overflow horizontal.
+- Sitemap:
+  - contiene las seis URLs nuevas;
+  - total observado: `2.240` URLs.
+- Googlebot:
+  - las seis rutas devuelven `HTTP 200`;
+  - `x-prerendered: true`;
+  - título localizado correcto.
+- El usuario informó dos hallazgos de seguridad preexistentes en buckets Supabase Storage:
+  - `cartas-vinos`;
+  - `lead-uploads`.
 - Hay cambios no relacionados ya existentes en:
   - `index.html`;
   - `src/components/WineListAnalyzerTool.tsx`.
@@ -3667,31 +3681,26 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 
 - No mezclar `Aprender vino` dentro de la Biblioteca como si fuera otra entidad.
 - Usar `Aprender vino` como hub de iniciación y captación para equipos de sala.
-- Ampliar después con spokes educativos solo cuando el hub esté publicado y validado también para usuarios humanos.
+- Ampliar con spokes educativos desde `Aprender vino`/blog/guias, no como entidades internas de Biblioteca.
+- Tratar los hallazgos de buckets Supabase Storage como tarea de seguridad independiente.
 
 ## Hipótesis
 
 - El hub debería mejorar posicionamiento convencional y LLM al explicar de forma explícita cómo empezar y cómo usar la Biblioteca.
-- Ahora mismo hay divergencia temporal: Worker/sitemap/bots ya están alineados, pero frontend Lovable humano aún no.
+- La siguiente mejora de SEO/LLM vendra de Search Console, enlazado interno hacia el hub y spokes educativos propios.
 
 ## Tareas pendientes listas para retomar
 
-1. Publicar frontend desde Lovable o confirmar auto-deploy desde `main` para commit `9c005dd`.
-2. Desplegar Supabase functions:
-   `npm run deploy:supabase:seo`
-   con `SUPABASE_ACCESS_TOKEN`, o pedir a Lovable que publique `sitemap` y `prerender`.
-3. Validar producción humana:
-   - navegador humano para las seis rutas;
-   - que `/aprender-vino` deje de mostrar `Página no encontrada`;
-   - canonical propio;
-   - H1 propio;
-   - hreflang.
-4. Revalidar producción bot tras publicar Lovable/Supabase:
-   - Googlebot para las seis rutas;
-   - `X-Worker-Branch`;
-   - presencia en `/sitemap.xml`.
-5. Reenviar `/sitemap.xml` en Search Console.
-6. Preparar la primera tanda de spokes de `Aprender vino`:
+1. Reenviar `/sitemap.xml` en Search Console.
+2. Solicitar indexacion selectiva de `/aprender-vino` si Search Console lo permite.
+3. Monitorizar que las seis rutas de `Aprender vino` pasen a descubiertas/rastreadas/indexadas.
+4. Auditar buckets Supabase Storage `cartas-vinos` y `lead-uploads`:
+   - politicas RLS;
+   - exposicion publica;
+   - permisos de subida/lectura;
+   - caducidad o firmado de URLs;
+   - retencion de archivos.
+5. Preparar la primera tanda de spokes de `Aprender vino`:
    - cómo catar vino;
    - vocabulario de cata;
    - tipos de vino;
