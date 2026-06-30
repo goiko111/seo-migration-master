@@ -448,6 +448,12 @@ const MetaDemoLanding = () => {
                   {UTM_KEYS.map((key) => (
                     <input key={key} type="hidden" name={key} value={attribution[key] || ""} readOnly />
                   ))}
+                  <input type="hidden" name="fbclid" value={attribution.fbclid || ""} readOnly />
+                  {/* Honeypot anti-spam: must stay empty for humans */}
+                  <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                    <label htmlFor="company_website">Website</label>
+                    <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+                  </div>
 
                   <div className="space-y-2">
                     <FieldLabel htmlFor="restaurant" required>
