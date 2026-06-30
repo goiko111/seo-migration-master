@@ -275,7 +275,11 @@ const MetaDemoLanding = () => {
     const prefix = PREFIXES.find((p) => p.code === prefixCode);
     const name = (fd.get("name") as string)?.trim() || null;
     const email = (fd.get("email") as string)?.trim() || null;
-    const phone = rawPhone ? (prefix ? `${prefix.dial} ${rawPhone}` : rawPhone) : null;
+    // Normalize to strict E.164: +<countrycode><number>, no spaces/dashes/parens
+    const digitsOnly = rawPhone ? rawPhone.replace(/[^\d]/g, "") : "";
+    const phone = digitsOnly
+      ? (prefix ? `${prefix.dial}${digitsOnly}` : `+${digitsOnly}`)
+      : null;
 
     // Honeypot anti-spam: silently drop submission
     if (honeypot) {
