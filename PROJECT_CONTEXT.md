@@ -16,6 +16,10 @@
 - El 2026-06-30 se preparo una correccion de seguridad para buckets `lead-uploads` y `cartas-vinos`: buckets privados, subida anonima restringida por carpeta/tipo/tamano y enlaces firmados desde `send-lead-notification`.
 - El 2026-06-30 se preparo el plan operativo de primera tanda de spokes de `Aprender vino` en `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md`, con 12 temas, slugs ES/EN/IT/FR/DE/PT, prioridad y criterios SEO/LLM.
 - El 2026-06-30 se pusheo `9e274d0 feat: harden lead uploads and plan wine learning spokes`; el despliegue Supabase directo sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN` y Lovable no esta autenticado en el navegador integrado de Codex.
+- El 2026-06-30 el usuario confirmo que `lead-uploads` y `cartas-vinos` quedaron privados mediante Lovable Storage tool, con `SELECT` publico eliminado, politicas de `INSERT` anon/auth restringidas y `send-lead-notification` desplegada para convertir `storage://...` en URLs firmadas de 14 dias.
+- Contradiccion detectada el 2026-06-30: el resumen operativo indicaba que `/analisis-carta` envia `storage://lead-uploads/analisis/...`, pero el bundle productivo y el build local muestran que la experiencia activa de `/analisis-carta` es `WineListAnalyzerTool`, que envia archivos a `https://api.winerim.wine/v1/analyze`; el flujo `lead-uploads` en `src/pages/AnalizaCarta.tsx` existe en codigo pero no esta conectado a un formulario renderizado.
+- Produccion si sirve el cambio del popup de herramientas: `ToolsLeadPopup` sube a `cartas-vinos` y guarda `storage://cartas-vinos/...` sin `getPublicUrl`.
+- El backend `https://api.winerim.wine` responde como servicio Cloudflare externo al repo; no se localizo su codigo fuente en `/Users/GOIKO/seo-migration-master`.
 - El 2026-06-19 se corrigio el `404 Not Found` de `https://winerim.wine/presentacion`: React y `sitemap-extra.json` ya tenian la ruta, pero Cloudflare Worker la bloqueaba como ruta no conocida con `x-worker-branch: not-found`.
 - La correccion anadio al Worker las seis rutas de presentacion (`/presentacion`, `/en/presentation`, `/fr/presentation`, `/it/presentazione`, `/de/praesentation`, `/pt/apresentacao`) como rutas SEO exactas y anadio prerender estatico especifico para bots.
 - Produccion quedo validada tras desplegar Cloudflare Worker `winerim-proxy` version `807319ba-4743-47ad-87e9-401e8d952efe`: las seis rutas responden `200` para usuarios y Googlebot recibe `worker-static-prerender` con titulo/canonical propios.
@@ -98,6 +102,8 @@
 - Para Winerim, mantener `Aprender vino` como hub propio localizado, conectado a biblioteca, glosario, maridajes, regiones, uvas, estilos, analisis de carta y formacion de equipos de sala.
 - Priorizar en ese hub el angulo diferencial B2B de Winerim: explicar vino para restaurantes, hoteles y equipos de sala, no solo educacion generica para aficionados.
 - Las cartas de vino subidas por leads deben tratarse como datos privados: no usar buckets publicos ni URLs publicas persistentes para `lead-uploads` ni `cartas-vinos`.
+- No dar por cerrado el flujo de privacidad de `/analisis-carta` hasta auditar `api.winerim.wine`; no forzar su migracion a Supabase Storage sin entender el backend porque podria romper el analizador interactivo.
+- Tratar los limites de tamano y MIME a nivel bucket como tarea de Lovable Cloud Storage panel/soporte mientras la plataforma bloquee SQL directo contra `storage.buckets`.
 - No priorizar subastas como parte del primer bloque de iniciacion de Winerim; puede quedar como contenido futuro de autoridad, pero no como base de la biblioteca para captacion.
 - Separar siempre la información en hechos, decisiones, hipótesis y tareas pendientes.
 - Tratar el Barometro Winerim como activo de autoridad SEO/LLM y fuente citable, no como sustituto del `Wine List Score` existente.
@@ -117,6 +123,7 @@
 
 - La brecha principal actual tras publicar `Aprender vino` es reenviar/monitorizar Search Console y ampliar spokes especificos de iniciacion sin mezclar la biblioteca de entidades.
 - La correccion de buckets deberia reducir exposicion de documentos sensibles sin romper captacion si Lovable aplica migracion, frontend y Edge Function juntos.
+- La correccion de buckets ya reduce exposicion en el popup de herramientas; la privacidad real de PDFs de `/analisis-carta` depende de como `api.winerim.wine` almacene o descarte los archivos recibidos.
 - La discrepancia entre React/sitemap y Worker puede repetirse en paginas nuevas si no se valida siempre produccion humana y Googlebot tras publicar rutas.
 - Un recorrido guiado para principiantes puede aumentar la utilidad humana, el enlazado interno y la comprension por Google/LLMs de la biblioteca del vino.
 - Adaptar contenidos de iniciacion a contextos de restaurante y hotel deberia diferenciar Winerim frente a medios editoriales generalistas de vino.
@@ -138,6 +145,7 @@
 - Monitorizar Search Console para confirmar descubrimiento, rastreo e indexacion de las seis rutas de `Aprender vino`.
 - Desplegar desde Lovable la correccion de seguridad de Supabase Storage para `cartas-vinos` y `lead-uploads`, porque el CLI local sigue sin `SUPABASE_ACCESS_TOKEN` y la base local no esta arrancada.
 - Revalidar que los formularios con upload siguen funcionando y que los enlaces internos recibidos por email/webhook son firmados, no publicos.
+- Auditar o localizar el backend `api.winerim.wine` para documentar almacenamiento, retencion, acceso y borrado de PDFs enviados por `WineListAnalyzerTool`.
 - Considerar mover el prerender especifico de `/presentacion` desde Worker a Supabase `prerender` para reducir duplicacion futura.
 - Ampliar `Aprender vino` con una primera tanda de articulos propios: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiquetas, temperatura de servicio, copas, conservacion, defectos, maridajes basicos y recomendacion en sala.
 - Mantener estos documentos actualizados al cierre de cada sesión.

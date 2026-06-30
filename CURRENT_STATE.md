@@ -5094,3 +5094,73 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
   - `maridajes-basicos-para-restaurantes`;
   - con variantes EN/IT/FR/DE/PT adaptadas.
 - Actualizar `Aprender vino` para enlazar esos spokes cuando estén publicados.
+
+## Actualizacion 2026-06-30: despliegue parcial de seguridad Storage y auditoria de flujo real
+
+## Hechos
+
+- El usuario confirmo que Lovable marco los buckets `lead-uploads` y `cartas-vinos` como privados mediante storage tool.
+- El usuario confirmo que la plataforma bloqueo SQL directo contra `storage.buckets`, por lo que no quedaron aplicados desde SQL:
+  - `file_size_limit = 10 MB`;
+  - `allowed_mime_types`.
+- El usuario confirmo que las politicas RLS quedaron aplicadas:
+  - `lead-uploads`: `INSERT` anon/auth solo en `analisis/<pdf|jpg|jpeg|png|webp>`;
+  - `cartas-vinos`: `INSERT` anon/auth solo en `<pdf|jpg|jpeg|png>`;
+  - `SELECT` publico eliminado.
+- Validacion reportada por el usuario con anon key:
+  - upload `lead-uploads/analisis/*.pdf`: `200`;
+  - upload `lead-uploads/<root>.pdf`: `403`;
+  - upload `cartas-vinos/*.pdf`: `200`;
+  - read anonimo normal y `/public/...`: `400`.
+- El usuario confirmo que `send-lead-notification` quedo desplegada y convierte `storage://bucket/path` en URL firmada de 14 dias con service role antes de enviar email y webhook.
+- Verificacion read-only de produccion:
+  - el chunk productivo `ToolsLeadPopup-5QA0vEF_.js` contiene `storage://cartas-vinos/...`;
+  - ese chunk no contiene `getPublicUrl`;
+  - por tanto el popup de herramientas publicado ya usa referencias privadas.
+- Contradiccion detectada:
+  - el resumen operativo decia que `/analisis-carta` envia `storage://lead-uploads/analisis/...`;
+  - el chunk productivo de `/analisis-carta` no contiene `storage://`, `lead-uploads` ni `getPublicUrl`;
+  - el build local actual tampoco los contiene en el chunk activo.
+- Causa de la contradiccion:
+  - `src/pages/AnalizaCarta.tsx` contiene un `handleSubmit` antiguo con subida privada a `lead-uploads/analisis/...`;
+  - ese `handleSubmit` no esta conectado a ningun `<form>` renderizado;
+  - la pantalla real de `/analisis-carta` renderiza `WineListAnalyzerTool`.
+- Flujo real activo de `/analisis-carta`:
+  - para archivos, `WineListAnalyzerTool` envia `FormData` a `https://api.winerim.wine/v1/analyze`;
+  - despues usa `analysisId` y notifica leads via `send-lead-notification`;
+  - para modo URL, `menu_link` conserva la URL enviada por el usuario;
+  - para modo archivo, no se ha confirmado una URL de archivo en el lead: depende del backend externo.
+- `https://api.winerim.wine` responde como servicio Cloudflare externo; no se localizo su codigo fuente en este repo.
+- Verificaciones locales ejecutadas:
+  - `npm run build` paso;
+  - avisos no bloqueantes: Browserslist antiguo y chunks grandes.
+- Cambios no relacionados siguen presentes y no se tocaron:
+  - `index.html`;
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+## Decisiones
+
+- Dar por desplegada y validada la privacidad de `cartas-vinos` para el popup de herramientas.
+- No dar por cerrado el flujo de privacidad de `/analisis-carta` hasta auditar `api.winerim.wine`.
+- No migrar a ciegas `/analisis-carta` a Supabase Storage porque podria romper el analizador interactivo que depende de `/v1/analyze`.
+- Mantener como tarea separada la configuracion de `file_size_limit` y `allowed_mime_types` a nivel bucket desde Lovable Cloud Storage o soporte.
+- Mantener documentada la existencia de codigo muerto en `AnalizaCarta.tsx` para limpiarlo o reconectarlo con intencion explicita.
+
+## Hipotesis
+
+- `api.winerim.wine` probablemente guarda o procesa temporalmente los archivos fuera de Supabase Storage; la retencion y permisos no pueden inferirse desde este repo.
+- Los leads del analizador en modo archivo pueden estar llegando con `analysisId` pero sin enlace directo al PDF original, salvo que el backend externo lo anada por otra via.
+- El endurecimiento de `lead-uploads` sigue siendo util para el codigo preparado/futuro, pero no protege por si solo el flujo activo de PDFs de `/analisis-carta`.
+
+## Tareas pendientes
+
+- Auditar o localizar el codigo/deploy de `https://api.winerim.wine`:
+  - donde almacena PDFs;
+  - tiempo de retencion;
+  - permisos/acceso;
+  - borrado o anonimizado;
+  - si puede devolver una referencia privada o firmada al lead.
+- Decidir si `WineListAnalyzerTool` debe seguir enviando archivos al backend API o si conviene redisenar el flujo con Storage privado + worker/API.
+- Ajustar `file_size_limit` y `allowed_mime_types` desde Lovable Cloud Storage si el panel lo permite.
+- Limpiar o reconectar el `handleSubmit` muerto de `src/pages/AnalizaCarta.tsx` para evitar futuras conclusiones erroneas.
+- Retomar la primera ola de spokes de `Aprender vino` y su publicacion multilingue.

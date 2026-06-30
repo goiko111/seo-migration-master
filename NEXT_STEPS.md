@@ -3714,3 +3714,40 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - añadirlos a `llms.txt`/`llms-full.txt` si procede;
    - reenviar sitemap;
    - solicitar indexación selectiva solo para la URL principal de cada nueva ola.
+
+## Actualizacion 2026-06-30: siguientes 5 pasos tras validar Storage
+
+## Hechos
+
+- El usuario confirmo que `lead-uploads` y `cartas-vinos` ya son privados en Lovable Storage.
+- El usuario confirmo que las politicas RLS ya bloquean lectura anonima y limitan subidas anon/auth a rutas/tipos previstos.
+- `send-lead-notification` ya esta desplegada y convierte referencias `storage://...` en URLs firmadas de 14 dias.
+- Produccion del popup de herramientas ya usa `storage://cartas-vinos/...`.
+- Contradiccion importante: `/analisis-carta` activo no usa `lead-uploads`; renderiza `WineListAnalyzerTool` y envia archivos a `https://api.winerim.wine/v1/analyze`.
+- El codigo de `api.winerim.wine` no esta localizado en este repo.
+- `npm run build` paso con avisos no bloqueantes.
+
+## Tareas pendientes inmediatas
+
+1. Auditar el backend real de `/analisis-carta`:
+   - localizar el codigo o panel de `https://api.winerim.wine`;
+   - documentar donde guarda PDFs, durante cuanto tiempo, quien accede y como se borran;
+   - confirmar si el lead puede incluir una referencia interna o firmada al archivo.
+2. Cerrar la deuda Storage en Lovable Cloud:
+   - aplicar `file_size_limit = 10 MB` si el panel lo permite;
+   - aplicar `allowed_mime_types` si el panel lo permite;
+   - si no se puede, abrir soporte o dejarlo como limitacion aceptada y cubierta parcialmente por RLS/frontend.
+3. Hacer QA end-to-end controlado del popup de herramientas:
+   - subir un PDF/imagen de prueba;
+   - confirmar que email y Winerim Connect reciben URL firmada, no `storage://` crudo ni URL publica;
+   - confirmar que la URL publica antigua del bucket sigue bloqueada.
+4. Limpiar la contradiccion de codigo en `/analisis-carta`:
+   - eliminar o reconectar el `handleSubmit` muerto de `src/pages/AnalizaCarta.tsx`;
+   - documentar en comentarios o README cual es el flujo oficial del analizador;
+   - evitar que futuras auditorias crean que `lead-uploads` cubre el analizador activo.
+5. Retomar crecimiento SEO/LLM de `Aprender vino`:
+   - publicar primera ola de 3 spokes x 6 idiomas;
+   - enlazarlos desde `Aprender vino`;
+   - actualizar `llms.txt`/`llms-full.txt` si procede;
+   - revisar Search Console en 48-72 h para las seis rutas del hub;
+   - solicitar indexacion selectiva solo para URLs principales de cada nueva ola.

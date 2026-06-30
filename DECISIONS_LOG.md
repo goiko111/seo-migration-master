@@ -3363,3 +3363,45 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Revalidar uploads y URLs firmadas tras despliegue.
 - Revisar Search Console en 48-72 horas.
 - Crear y publicar la primera ola de 3 spokes x 6 idiomas.
+
+### Seguridad Storage desplegada y contradiccion en `/analisis-carta`
+
+#### Hechos
+
+- El usuario confirmo que Lovable marco `lead-uploads` y `cartas-vinos` como buckets privados mediante storage tool.
+- El usuario confirmo que las politicas RLS quedaron aplicadas y validadas con anon key:
+  - subida permitida solo en rutas/tipos previstos;
+  - subida a raiz de `lead-uploads` bloqueada con `403`;
+  - lectura anonima bloqueada con `400`;
+  - lectura por `/public/...` bloqueada con `400`.
+- El usuario confirmo que `send-lead-notification` esta desplegada y genera URLs firmadas de 14 dias para referencias `storage://bucket/path`.
+- La plataforma bloqueo SQL directo contra `storage.buckets`; por tanto quedan pendientes el limite de tamano y la lista MIME a nivel bucket.
+- Verificacion read-only de produccion confirmo que el popup de herramientas publicado usa `storage://cartas-vinos/...` y ya no usa `getPublicUrl`.
+- Se detecto una contradiccion:
+  - el resumen recibido decia que `/analisis-carta` envia `storage://lead-uploads/analisis/...`;
+  - produccion y build local muestran que el flujo activo no contiene `storage://` ni `lead-uploads`;
+  - `/analisis-carta` renderiza `WineListAnalyzerTool`, que envia archivos a `https://api.winerim.wine/v1/analyze`.
+- `src/pages/AnalizaCarta.tsx` contiene un `handleSubmit` con subida a `lead-uploads`, pero no esta conectado a ningun formulario renderizado.
+- No se localizo en este repo el codigo fuente de `api.winerim.wine`; el servicio responde desde Cloudflare.
+
+#### Decisiones
+
+- Dar por correcto el endurecimiento de Storage para `cartas-vinos` y para cualquier flujo que realmente use referencias `storage://...`.
+- No dar por cerrada la privacidad de archivos de `/analisis-carta` hasta auditar `api.winerim.wine`.
+- No cambiar `WineListAnalyzerTool` a Supabase Storage sin conocer el contrato de `/v1/analyze`, para no romper el analizador.
+- Tratar los limites de tamano/MIME a nivel bucket como tarea de Lovable Cloud Storage panel o soporte.
+- Mantener la contradiccion documentada explicitamente y limpiar/reconectar el codigo muerto en una tarea posterior.
+
+#### Hipotesis
+
+- El backend `api.winerim.wine` puede estar usando almacenamiento propio de Cloudflare o procesamiento temporal; su retencion real no es inferible desde el frontend.
+- El lead del analizador en modo archivo puede estar llegando con `analysisId`, no con link al PDF original.
+- La auditoria del backend externo es la siguiente pieza necesaria antes de declarar cerrado el flujo completo de privacidad de cartas.
+
+#### Tareas pendientes
+
+- Localizar o auditar el backend `api.winerim.wine`.
+- Confirmar politica de retencion/borrado de PDFs y si existen URLs internas o firmadas para ventas.
+- Ajustar `file_size_limit` y `allowed_mime_types` desde Lovable Cloud Storage si es posible.
+- Limpiar o reconectar el `handleSubmit` muerto de `AnalizaCarta.tsx`.
+- Continuar con la primera ola de spokes de `Aprender vino`.
