@@ -1,5 +1,61 @@
 # Current State
 
+## Actualizacion 2026-06-30: QA productiva de formularios sin chat
+
+## Hechos
+
+- El usuario decidio dejar el chat fuera de esta tanda de pruebas.
+- Se probaron en produccion varios formularios de Winerim con run id `20260630125959`.
+- `/demo` con `codex-qa-demo-20260630125959@winerim.com`:
+  - redirigio a `/gracias?tipo=demo`;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200`;
+  - la Edge Function devolvio `connect_forwarded:true`.
+- `/contacto` con `codex-qa-contacto-20260630125959@winerim.com`:
+  - redirigio a `/gracias?tipo=contacto`;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200`;
+  - la Edge Function devolvio `connect_forwarded:true`.
+- Popup de herramientas en `/recursos` con `codex-qa-popup-20260630125959@winerim.com`:
+  - el popup se envio y cerro correctamente;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200`;
+  - la Edge Function devolvio `connect_forwarded:true`.
+- Landing `https://go.winerim.wine/` con `codex-qa-go-20260630125959@winerim.com`:
+  - redirigio a `/gracias?tipo=demo&origen=meta`;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200`;
+  - la Edge Function devolvio `connect_forwarded:true`;
+  - `submit-gastrofunnel` respondio `200` con upstream `success:true` y `lead_id` `fe69414e-f343-4e99-ae9f-f92b7c90db22`.
+- En `go.winerim.wine`, el chat estaba desactivado como estaba previsto: `window.__WINERIM_CHAT_DISABLED__ === true` y no habia nodos de chat en el DOM.
+- En las pruebas aparecieron abortos de analitica y `404` genericos de consola; no bloquearon Supabase, notificaciones ni CRM.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- No probar ni modificar chat en esta sesion salvo nueva instruccion explicita.
+- Dar por validado tecnicamente el envio a CRM para los formularios probados cuando `send-lead-notification` devuelve `connect_forwarded:true`.
+- Mantener `submit-gastrofunnel` como canal adicional validado en `go.winerim.wine`, ya que devolvio upstream `success:true`.
+
+## Hipotesis
+
+- Los `404` genericos de consola probablemente pertenecen a recursos secundarios o analitica y no afectan a captacion.
+- La confirmacion visual en Winerim Connect/CRM deberia mostrar los leads con los emails de prueba anteriores si los webhooks se procesaron correctamente.
+
+## Contradicciones / dudas abiertas
+
+- No hay contradiccion viva sobre chat: queda fuera por decision del usuario.
+- La confirmacion visual dentro de Winerim Connect/CRM sigue pendiente porque la QA local solo verifica respuestas tecnicas de Supabase/Edge Functions/upstream.
+
+## Tareas pendientes
+
+- Verificar en Winerim Connect/CRM los cuatro leads QA:
+  - `codex-qa-demo-20260630125959@winerim.com`;
+  - `codex-qa-contacto-20260630125959@winerim.com`;
+  - `codex-qa-popup-20260630125959@winerim.com`;
+  - `codex-qa-go-20260630125959@winerim.com`.
+- Revisar los `404` genericos de consola solo si se quiere limpiar deuda menor de frontend/analitica.
+
 ## Actualizacion 2026-06-30: landing Meta Demo reforzada con CRM, logo y testimonios reales
 
 ## Hechos

@@ -1,5 +1,36 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar tras QA de formularios sin chat
+
+## Hechos
+
+- Chat queda fuera de alcance por decision del usuario.
+- Formularios productivos validados tecnicamente:
+  - `/demo`: `contact_leads 201`, `send-lead-notification 200`, `connect_forwarded:true`;
+  - `/contacto`: `contact_leads 201`, `send-lead-notification 200`, `connect_forwarded:true`;
+  - popup `/recursos`: `contact_leads 201`, `send-lead-notification 200`, `connect_forwarded:true`;
+  - `go.winerim.wine`: `contact_leads 201`, `send-lead-notification 200`, `connect_forwarded:true`, `submit-gastrofunnel 200`, upstream `success:true`.
+- Leads QA a buscar en CRM:
+  - `codex-qa-demo-20260630125959@winerim.com`;
+  - `codex-qa-contacto-20260630125959@winerim.com`;
+  - `codex-qa-popup-20260630125959@winerim.com`;
+  - `codex-qa-go-20260630125959@winerim.com`.
+- La landing `go.winerim.wine` mantiene chat desactivado de forma esperada.
+
+## Tareas pendientes inmediatas
+
+1. Entrar en Winerim Connect/CRM y confirmar que los cuatro leads QA aparecen correctamente identificados.
+2. Revisar que el lead de `go.winerim.wine` conserva UTMs de prueba:
+   - `utm_source=codex_qa`;
+   - `utm_medium=paid_social_test`;
+   - `utm_campaign=qa_20260630125959`;
+   - `utm_content=form_test`;
+   - `utm_term=demo`;
+   - `fbclid=codex_qa_20260630125959`.
+3. No tocar chat hasta nueva orden del usuario.
+4. Si se quiere dejar la consola de produccion mas limpia, investigar los `404` genericos observados en QA; no bloquearon los formularios.
+5. Mantener fuera de esta linea el cambio local previo en `src/components/WineListAnalyzerTool.tsx`.
+
 ## Actualizacion 2026-06-30: retomar landing Meta Demo reforzada
 
 ## Hechos

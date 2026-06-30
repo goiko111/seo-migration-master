@@ -2,6 +2,12 @@
 
 ## Hechos
 
+- El 2026-06-30 se revalidaron formularios productivos sin incluir chat por decision posterior del usuario: `/demo`, `/contacto`, popup de herramientas en `/recursos` y `https://go.winerim.wine/`.
+- La tanda QA de formularios uso el identificador `20260630125959` y creo leads de prueba `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com`.
+- En `/demo`, `/contacto` y popup de `/recursos`, Supabase `contact_leads` respondio `201` y `send-lead-notification` respondio `200` con `connect_forwarded:true`.
+- En `https://go.winerim.wine/`, el formulario respondio `contact_leads` `201`, `send-lead-notification` `200` con `connect_forwarded:true`, `submit-gastrofunnel` `200` y upstream `success:true` con `lead_id` `fe69414e-f343-4e99-ae9f-f92b7c90db22`.
+- La prueba de `go.winerim.wine` confirmo que el chat esta desactivado de forma esperada: `window.__WINERIM_CHAT_DISABLED__ === true` y no habia nodos de chat en DOM.
+- Durante la QA aparecieron abortos de analitica y errores `404` genericos en consola; no afectaron a insercion Supabase, notificacion ni reenvio CRM, pero quedan como posible linea menor de investigacion si se quiere limpiar consola.
 - El 2026-06-30 se revalido produccion de la landing Meta Demo tras el publish: `https://go.winerim.wine/` ya muestra logo real, `+2.000 restaurantes`, testimonios reales de Simone Monese/Lorena Cuevas/Xavi Nolla, OpenGraph `https://winerim.wine/og-image.png`, `noindex, follow` y UTMs ocultos correctos.
 - El 2026-06-30 se envio un formulario test en produccion desde `go.winerim.wine` con el lead `codex-prod-test+winerim-meta@winerim.com`; `contact_leads` respondio `201`, `send-lead-notification` respondio `200` y la landing redirigio a `/gracias?tipo=demo&origen=meta`.
 - Durante el primer test productivo del formulario Meta Demo aparecio una llamada adicional a `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/submit-gastrofunnel` con respuesta `500`; despues se integro el commit remoto de Lovable `644db09`, que anadio `supabase/functions/submit-gastrofunnel/index.ts` y la llamada desde `MetaDemoLanding`.
@@ -120,6 +126,8 @@
 
 ## Decisiones
 
+- Dejar el chat fuera de la QA actual hasta nueva orden; no probar ni modificar el widget de chat en esta tanda.
+- Considerar valida la conexion tecnica a CRM para los formularios probados cuando `send-lead-notification` devuelve `connect_forwarded:true`; la confirmacion final visual debe hacerse dentro de Winerim Connect/CRM.
 - Usar `+2.000 restaurantes` como claim de prueba social en la landing Meta Demo.
 - Reemplazar los casos plantilla de la landing Meta Demo solo con testimonios reales ya presentes en la web; no inventar testimonios ni dejar placeholders visibles en campanas.
 - Mantener el formulario de la landing Meta conectado por React/Supabase (`onSubmit` -> `contact_leads` -> `send-lead-notification`) en vez de anadir un `action` HTML estatico que podria saltarse tracking, validacion o CRM.
@@ -154,6 +162,7 @@
 
 ## Hipótesis
 
+- Los `404` genericos observados en consola durante QA productiva probablemente pertenecen a recursos/analitica no criticos, no al flujo de formularios ni al CRM.
 - Esperar la invocacion de `send-lead-notification` antes de navegar a gracias reduce el riesgo de perder envios a CRM en trafico de campanas.
 - Incluir UTMs y `fbclid` tambien en el payload de Winerim Connect deberia permitir atribucion comercial mas clara sin cambiar todavia el esquema de `contact_leads`.
 - La landing Meta Demo deberia convertir mejor que `/demo` para trafico frio de Meta porque elimina navegacion, footer, chat externo, FAQ y CTAs secundarios.
@@ -179,6 +188,8 @@
 
 ## Tareas pendientes
 
+- Confirmar visualmente en Winerim Connect/CRM que los leads `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com` aparecen correctamente identificados.
+- Si se quiere dejar la consola mas limpia, investigar los `404` genericos detectados durante QA productiva; no bloquearon formularios ni CRM.
 - Confirmar visualmente en Winerim Connect/CRM que los leads test `codex-prod-test+winerim-meta@winerim.com`, `codex-diagnostic+winerim-gastrofunnel@winerim.com` y `codex-prod-retest+winerim-meta@winerim.com` entraron con UTMs y `fbclid`.
 - Mantener monitorizado `submit-gastrofunnel` en proximas pruebas de campana aunque la revalidacion productiva ya devuelve `200`.
 - Monitorizar Search Console para confirmar descubrimiento, rastreo e indexacion de las seis rutas de `Aprender vino`.

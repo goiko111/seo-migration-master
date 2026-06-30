@@ -2,6 +2,31 @@
 
 ## 2026-06-30
 
+### QA productiva de formularios sin chat
+
+#### Hechos
+
+- El usuario decidio dejar el chat fuera de la tanda actual.
+- Se probaron formularios productivos en `/demo`, `/contacto`, popup de herramientas en `/recursos` y `https://go.winerim.wine/`.
+- Los emails de prueba fueron `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com`.
+- En `/demo`, `/contacto` y popup de `/recursos`, `contact_leads` respondio `201` y `send-lead-notification` respondio `200` con `connect_forwarded:true`.
+- En `go.winerim.wine`, `contact_leads` respondio `201`, `send-lead-notification` respondio `200` con `connect_forwarded:true` y `submit-gastrofunnel` respondio `200` con upstream `success:true`.
+- El chat de `go.winerim.wine` estaba desactivado como se esperaba.
+
+#### Decisiones
+
+- No seguir probando chat en esta fase; queda fuera hasta nueva instruccion.
+- Considerar las respuestas `connect_forwarded:true` como validacion tecnica de envio a Winerim Connect/CRM, pendiente de comprobacion visual en el CRM.
+
+#### Hipotesis
+
+- Los abortos de analitica y `404` genericos de consola no forman parte del flujo critico de lead.
+
+#### Tareas pendientes
+
+- Confirmar visualmente en Winerim Connect/CRM los cuatro leads QA con sus emails de prueba.
+- Investigar los `404` genericos solo como limpieza secundaria, no como bloqueo de captacion.
+
 ### Validacion productiva de landing Meta Demo reforzada
 
 #### Hechos
