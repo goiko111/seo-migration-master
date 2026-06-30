@@ -2,6 +2,9 @@
 
 ## Hechos
 
+- El 2026-06-30 se revalido produccion de la landing Meta Demo tras el publish: `https://go.winerim.wine/` ya muestra logo real, `+2.000 restaurantes`, testimonios reales de Simone Monese/Lorena Cuevas/Xavi Nolla, OpenGraph `https://winerim.wine/og-image.png`, `noindex, follow` y UTMs ocultos correctos.
+- El 2026-06-30 se envio un formulario test en produccion desde `go.winerim.wine` con el lead `codex-prod-test+winerim-meta@winerim.com`; `contact_leads` respondio `201`, `send-lead-notification` respondio `200` y la landing redirigio a `/gracias?tipo=demo&origen=meta`.
+- Durante el test productivo del formulario Meta Demo aparecio una llamada adicional a `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/submit-gastrofunnel` con respuesta `500`; ese nombre no aparece en el repo local, por lo que queda como integracion externa/GTM/Lovable/Supabase pendiente de investigar.
 - El 2026-06-30 se reforzo la landing Meta Demo tras el publish inicial: `src/pages/MetaDemoLanding.tsx` ahora muestra el logo real de Winerim, usa `https://winerim.wine/og-image.png` como OpenGraph, cambia la prueba social a `+2.000 restaurantes` y sustituye los tres casos plantilla por testimonios reales de Simone Monese, Lorena Cuevas y Xavi Nolla.
 - La landing Meta Demo no usa un `action` HTML estatico; el formulario esta conectado por `onSubmit` a Supabase `contact_leads`, y despues invoca `send-lead-notification`. Este flujo se mantiene porque evita duplicar leads y conserva validacion, tracking y atribucion.
 - El 2026-06-30 se reforzo `notifyLead` para esperar la respuesta de la Edge Function y devolver `false` si falla la invocacion, evitando que la navegacion a gracias oculte errores de notificacion/CRM en la landing Meta.
@@ -175,9 +178,9 @@
 
 ## Tareas pendientes
 
-- Publicar el frontend desde Lovable con la version reforzada de la landing Meta Demo para que produccion muestre logo, OpenGraph, `+2.000 restaurantes` y testimonios reales.
-- Desplegar desde Lovable Cloud/Supabase la Edge Function `send-lead-notification` reforzada para que el CRM reciba atribucion Meta y el reenvio sea obligatorio en esta landing.
-- Revalidar en produccion `https://go.winerim.wine/` con UTMs reales: noindex, logo, OG, testimonios, lead creado, Edge Function `200`, CRM recibido y redireccion a gracias.
+- Confirmar en Lovable/Supabase que `send-lead-notification` esta desplegada con el commit `34b6900`, porque el CLI local no pudo desplegarla y la respuesta `200` productiva no prueba por si sola que este activa la version que exige CRM para Meta.
+- Investigar y corregir la llamada productiva a `submit-gastrofunnel` que devuelve `500`; no esta en el repo local y podria venir de GTM, Lovable o una Edge Function no versionada aqui.
+- Confirmar en Winerim Connect/CRM que el lead test `codex-prod-test+winerim-meta@winerim.com` entro con UTMs y `fbclid`.
 - Monitorizar Search Console para confirmar descubrimiento, rastreo e indexacion de las seis rutas de `Aprender vino`.
 - Desplegar desde Lovable la correccion de seguridad de Supabase Storage para `cartas-vinos` y `lead-uploads`, porque el CLI local sigue sin `SUPABASE_ACCESS_TOKEN` y la base local no esta arrancada.
 - Revalidar que los formularios con upload siguen funcionando y que los enlaces internos recibidos por email/webhook son firmados, no publicos.
