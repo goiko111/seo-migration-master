@@ -3287,6 +3287,10 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - La inspiración de La RVF y la sección “cómo empezar con el vino” se revisó como una necesidad de arquitectura guiada, no como una nueva entidad de biblioteca.
 - Se implementó el hub localizado `Aprender vino` en código con rutas ES/EN/IT/FR/DE/PT.
 - El hub enlaza hacia `Biblioteca del vino`, pero tiene intención propia de aprendizaje y captación.
+- Se creó y subió `9c005dd feat: add learn wine hub` a `origin/main`.
+- Se desplegó Cloudflare Worker `winerim-proxy` Version ID `749b0929-9ac5-408b-8c51-7ee195051232`.
+- Googlebot y `/sitemap.xml` ya quedan cubiertos por Worker para `Aprender vino`.
+- Producción humana sigue mostrando `Página no encontrada` en `/aprender-vino` hasta que Lovable publique el frontend del commit `9c005dd`.
 - Supabase CLI no pudo desplegar `sitemap`/`prerender` por falta de `SUPABASE_ACCESS_TOKEN`.
 
 #### Decisiones
@@ -3301,7 +3305,7 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
   - PT `/pt/aprender-vinho`.
 - Usar schema `LearningResource` para la nueva capa.
 - Añadir fallback/prerender en Worker para bots mientras Supabase `prerender` no esté desplegado.
-- No crear subpáginas de iniciación hasta validar el hub en producción.
+- No crear subpáginas de iniciación hasta validar el hub en producción humana, no solo como Googlebot.
 
 #### Hipótesis
 
@@ -3310,6 +3314,7 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 #### Tareas pendientes
 
-- Desplegar/publicar frontend, Supabase functions y Worker.
-- Validar producción humana y Googlebot.
-- Reenviar sitemap en Search Console cuando producción esté alineada.
+- Publicar frontend en Lovable desde `origin/main` commit `9c005dd`.
+- Publicar Supabase functions desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Validar producción humana en las seis rutas.
+- Reenviar sitemap en Search Console cuando producción humana y Supabase estén alineados.
