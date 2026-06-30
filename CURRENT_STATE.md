@@ -5103,6 +5103,8 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - El usuario confirmo que la plataforma bloqueo SQL directo contra `storage.buckets`, por lo que no quedaron aplicados desde SQL:
   - `file_size_limit = 10 MB`;
   - `allowed_mime_types`.
+- Tras hacer `fetch`, se incorporo desde remoto la migracion `supabase/migrations/20260630082747_c608b25f-fbaa-4950-b158-6611319b8ade.sql`, que contiene solo las politicas RLS aplicables.
+- La migracion preparada previamente `supabase/migrations/20260630074507_harden_lead_storage_buckets.sql` se dejo como no-op documentado para que futuros despliegues no fallen al intentar actualizar `storage.buckets` por SQL.
 - El usuario confirmo que las politicas RLS quedaron aplicadas:
   - `lead-uploads`: `INSERT` anon/auth solo en `analisis/<pdf|jpg|jpeg|png|webp>`;
   - `cartas-vinos`: `INSERT` anon/auth solo en `<pdf|jpg|jpeg|png>`;

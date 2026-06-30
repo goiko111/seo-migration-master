@@ -3722,6 +3722,8 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 - El usuario confirmo que `lead-uploads` y `cartas-vinos` ya son privados en Lovable Storage.
 - El usuario confirmo que las politicas RLS ya bloquean lectura anonima y limitan subidas anon/auth a rutas/tipos previstos.
 - `send-lead-notification` ya esta desplegada y convierte referencias `storage://...` en URLs firmadas de 14 dias.
+- La migracion efectiva de politicas es `supabase/migrations/20260630082747_c608b25f-fbaa-4950-b158-6611319b8ade.sql`.
+- La migracion anterior `supabase/migrations/20260630074507_harden_lead_storage_buckets.sql` queda como no-op documentado porque Lovable bloquea `UPDATE storage.buckets`.
 - Produccion del popup de herramientas ya usa `storage://cartas-vinos/...`.
 - Contradiccion importante: `/analisis-carta` activo no usa `lead-uploads`; renderiza `WineListAnalyzerTool` y envia archivos a `https://api.winerim.wine/v1/analyze`.
 - El codigo de `api.winerim.wine` no esta localizado en este repo.

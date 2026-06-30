@@ -3376,6 +3376,8 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
   - lectura por `/public/...` bloqueada con `400`.
 - El usuario confirmo que `send-lead-notification` esta desplegada y genera URLs firmadas de 14 dias para referencias `storage://bucket/path`.
 - La plataforma bloqueo SQL directo contra `storage.buckets`; por tanto quedan pendientes el limite de tamano y la lista MIME a nivel bucket.
+- El remoto incorporo `supabase/migrations/20260630082747_c608b25f-fbaa-4950-b158-6611319b8ade.sql` como migracion efectiva de politicas RLS.
+- `supabase/migrations/20260630074507_harden_lead_storage_buckets.sql` se convirtio en no-op documentado para no volver a ejecutar SQL bloqueado contra `storage.buckets`.
 - Verificacion read-only de produccion confirmo que el popup de herramientas publicado usa `storage://cartas-vinos/...` y ya no usa `getPublicUrl`.
 - Se detecto una contradiccion:
   - el resumen recibido decia que `/analisis-carta` envia `storage://lead-uploads/analisis/...`;
@@ -3391,6 +3393,7 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - No cambiar `WineListAnalyzerTool` a Supabase Storage sin conocer el contrato de `/v1/analyze`, para no romper el analizador.
 - Tratar los limites de tamano/MIME a nivel bucket como tarea de Lovable Cloud Storage panel o soporte.
 - Mantener la contradiccion documentada explicitamente y limpiar/reconectar el codigo muerto en una tarea posterior.
+- Mantener la migracion `20260630082747...` como fuente de politicas y no recuperar los `UPDATE storage.buckets` en migraciones futuras.
 
 #### Hipotesis
 
