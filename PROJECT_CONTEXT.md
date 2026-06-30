@@ -2,6 +2,8 @@
 
 ## Hechos
 
+- El 2026-06-30 el usuario aporto nuevos copys comerciales sobre stock/TPV, margenes, albaranes/facturas/compras, carta digital, direccion y sumiller para evaluar una nueva seccion de venta en la web.
+- La nueva linea comercial propuesta se centra en explicar `como lo hace Winerim`: subir albaranes/facturas, conectar TPV, mantener stock/carta actualizados y cruzar compras, ventas, rotacion y margen.
 - El 2026-06-30 se repitio la prueba productiva del formulario de `https://go.winerim.wine/` con run id `20260630154016` y lead `codex-qa-go-retest-20260630154016@winerim.com`.
 - La prueba exitosa de `go.winerim.wine` mantuvo `robots` `noindex, follow`, H1 `Solicita una demo gratuita de Winerim`, UTMs ocultos correctos, chat desactivado, formulario valido y redireccion a `https://go.winerim.wine/gracias?tipo=demo&origen=meta`.
 - En esa repeticion, `contact_leads` respondio `201`, `send-lead-notification` respondio `200` con `connect_forwarded:true`, y `submit-gastrofunnel` respondio `200` con upstream `success:true` y `lead_id` `f388a0b4-bf19-4724-a1ed-f93211d05f13`.
@@ -130,6 +132,7 @@
 
 ## Decisiones
 
+- Tratar los copys nuevos como material para una seccion web de conversion, no solo como anuncios de Meta: debe reforzar homepage/producto y explicar el sistema operativo de bodega de Winerim.
 - Dejar el chat fuera de la QA actual hasta nueva orden; no probar ni modificar el widget de chat en esta tanda.
 - Considerar valida la conexion tecnica a CRM para los formularios probados cuando `send-lead-notification` devuelve `connect_forwarded:true`; la confirmacion final visual debe hacerse dentro de Winerim Connect/CRM.
 - Usar `+2.000 restaurantes` como claim de prueba social en la landing Meta Demo.
@@ -166,6 +169,8 @@
 
 ## Hipótesis
 
+- Una seccion tipo `Como lo hace Winerim` o `Sabias que...` podria mejorar conversion porque aterriza el beneficio operativo: menos Excel, menos stock desactualizado, mas control de margen y carta viva conectada al TPV.
+- Conviene evitar promesas absolutas tipo `todo al momento` o `olvidate` si alguna integracion depende del TPV, proveedor o configuracion; mejor formularlo como `cuando conectas tu TPV` o `con la integracion activa`.
 - Los `404` genericos observados en consola durante QA productiva probablemente pertenecen a recursos/analitica no criticos, no al flujo de formularios ni al CRM.
 - Esperar la invocacion de `send-lead-notification` antes de navegar a gracias reduce el riesgo de perder envios a CRM en trafico de campanas.
 - Incluir UTMs y `fbclid` tambien en el payload de Winerim Connect deberia permitir atribucion comercial mas clara sin cambiar todavia el esquema de `contact_leads`.
@@ -192,6 +197,8 @@
 
 ## Tareas pendientes
 
+- Disenar e implementar una seccion comercial en la web basada en los copys nuevos, priorizando el mensaje: `Subes albaranes, conectas TPV y Winerim mantiene stock, carta y margen bajo control`.
+- Decidir ubicacion de la seccion: home, pagina de producto y/o landing de conversion; version recomendada inicial: home + producto, con version reducida en funnels.
 - Confirmar visualmente en Winerim Connect/CRM que el lead `codex-qa-go-retest-20260630154016@winerim.com` aparece correctamente identificado con UTMs `qa_20260630154016` y `fbclid=codex_qa_retest_20260630154016`.
 - Confirmar visualmente en Winerim Connect/CRM que los leads `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com` aparecen correctamente identificados.
 - Si se quiere dejar la consola mas limpia, investigar los `404` genericos detectados durante QA productiva; no bloquearon formularios ni CRM.

@@ -1,5 +1,38 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar seccion `Como lo hace Winerim`
+
+## Hechos
+
+- Hay nuevos copys comerciales para testear sobre:
+  - stock conectado a TPV;
+  - margenes y rotacion;
+  - albaranes/facturas/compras;
+  - carta digital viva;
+  - direccion/propietario;
+  - sumiller/responsable de vino.
+- La oportunidad es crear una seccion web que explique como Winerim convierte la bodega en un sistema conectado.
+
+## Tareas pendientes inmediatas
+
+1. Confirmar alcance real de integraciones:
+   - TPV;
+   - albaranes;
+   - facturas;
+   - actualizacion de stock;
+   - actualizacion de carta.
+2. Redactar seccion final con estructura recomendada:
+   - H2: `Subes albaranes. Vendes botellas. Winerim mantiene tu bodega en orden.`;
+   - subtitulo sobre TPV, compras, stock, carta y margen conectados;
+   - bloque `Antes / Con Winerim`;
+   - tarjetas de flujo: compras, ventas, carta, margen, decisiones;
+   - CTA hacia demo o analisis de carta.
+3. Decidir ubicacion inicial:
+   - home, como bloque de conversion principal;
+   - pagina de producto, como explicacion funcional;
+   - version reducida en `go.winerim.wine` o futuras landings.
+4. Evitar claims absolutos hasta confirmar integraciones; usar `cuando conectas tu TPV` y `con la integracion activa`.
+
 ## Actualizacion 2026-06-30: retomar tras re-test de `go.winerim.wine`
 
 ## Hechos

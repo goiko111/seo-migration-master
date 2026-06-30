@@ -2,6 +2,28 @@
 
 ## 2026-06-30
 
+### Nueva seccion comercial sobre operativa conectada de Winerim
+
+#### Hechos
+
+- El usuario aporto una bateria de copys sobre stock/TPV, margenes, albaranes/facturas/compras, carta digital, direccion y sumiller.
+- El objetivo es valorar una nueva seccion web tipo `sabias que...` o `como lo hace Winerim`.
+- Los angulos con mayor encaje para web son los que explican el sistema completo: compras, ventas, TPV, stock, carta y margen conectados.
+
+#### Decisiones
+
+- Convertir estos copys en una seccion de conversion para web, no tratarlos solo como headlines de Meta.
+- Mantener prudencia con claims como `al momento` si dependen de integracion activa con TPV/proveedor.
+
+#### Hipotesis
+
+- Una seccion de flujo operativo puede ayudar a vender Winerim mejor que una lista de features porque convierte conceptos tecnicos en una transformacion visible para propietario, direccion y sumiller.
+
+#### Tareas pendientes
+
+- Redactar version final de la seccion y decidir ubicacion inicial.
+- Confirmar alcance tecnico real de TPV/albaranes/facturas antes de publicar claims absolutos.
+
 ### Re-test productivo de formulario `go.winerim.wine`
 
 #### Hechos

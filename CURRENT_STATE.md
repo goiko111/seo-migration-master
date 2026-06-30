@@ -1,5 +1,43 @@
 # Current State
 
+## Actualizacion 2026-06-30: propuesta comercial `Como lo hace Winerim`
+
+## Hechos
+
+- El usuario aporto copys agrupados por angulos:
+  - stock y TPV;
+  - margenes;
+  - albaranes, facturas y compras;
+  - carta digital y gestion;
+  - propietario/direccion;
+  - sumiller/responsable de vino;
+  - headlines y descripciones cortas para Meta.
+- El objetivo planteado es evaluar si se puede crear una seccion web que ayude a vender Winerim, en la linea de `sabias que...` y `como lo hace Winerim`.
+- Los copys mas diferenciales son los que conectan operativa real: albaranes/facturas, TPV, stock, carta, ventas, rotacion y margen.
+
+## Decisiones
+
+- Tratar esta linea como una seccion de conversion para web, no solo como copy de anuncios.
+- No usar claims absolutos sin matiz si dependen de integraciones concretas; preferir formulaciones como `cuando conectas tu TPV` o `con la integracion activa`.
+
+## Hipotesis
+
+- La seccion puede vender mejor si no se limita a listar funciones y muestra el flujo completo: compras entran, ventas salen, stock cambia, carta se actualiza y margen se entiende.
+- El angulo `subes albaranes y olvidate de perseguir Excel` puede ser muy potente si se expresa con precision operativa.
+
+## Contradicciones / dudas abiertas
+
+- Hay que confirmar el alcance real de integraciones TPV, albaranes y facturas antes de prometer actualizacion `al momento` en todos los casos.
+
+## Tareas pendientes
+
+- Crear propuesta de seccion web con:
+  - headline principal;
+  - bloque `Antes / Con Winerim`;
+  - 4-5 tarjetas de flujo operativo;
+  - CTA hacia demo o analisis de carta.
+- Decidir si se implementa primero en home, pagina de producto o landing/funnel.
+
 ## Actualizacion 2026-06-30: re-test productivo de `go.winerim.wine`
 
 ## Hechos
