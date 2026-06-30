@@ -269,12 +269,19 @@ const MetaDemoLanding = () => {
 
     const fd = new FormData(e.currentTarget);
     const currentAttribution = getAttribution();
+    const honeypot = ((fd.get("company_website") as string) || "").trim();
     const rawPhone = (fd.get("phone") as string)?.trim();
     const prefixCode = (fd.get("phone_prefix") as string)?.trim();
     const prefix = PREFIXES.find((p) => p.code === prefixCode);
     const name = (fd.get("name") as string)?.trim() || null;
     const email = (fd.get("email") as string)?.trim() || null;
     const phone = rawPhone ? (prefix ? `${prefix.dial} ${rawPhone}` : rawPhone) : null;
+
+    // Honeypot anti-spam: silently drop submission
+    if (honeypot) {
+      navigate("/gracias?tipo=demo&origen=meta");
+      return;
+    }
 
     const leadData = {
       form_type: "demo",
@@ -323,6 +330,33 @@ const MetaDemoLanding = () => {
     trackFormSubmit("demo");
     pushDataLayerEvent("meta_demo_lead", currentAttribution);
     fireMetaLead(currentAttribution);
+
+    // Forward to GastroFunnel upstream (Winerim leads-upsert) via edge function
+    try {
+      const { data: gfData, error: gfError } = await supabase.functions.invoke("submit-gastrofunnel", {
+        body: {
+          name: name || "",
+          email: email || "",
+          phone: phone || "",
+          restaurant: leadData.restaurant || "",
+          city: leadData.city || "",
+          utm_source: currentAttribution.utm_source || "",
+          utm_medium: currentAttribution.utm_medium || "",
+          utm_campaign: currentAttribution.utm_campaign || "",
+          utm_content: currentAttribution.utm_content || "",
+          utm_term: currentAttribution.utm_term || "",
+          fbclid: currentAttribution.fbclid || "",
+        },
+      });
+      if (gfError) {
+        console.warn("[gastrofunnel] forward error", gfError);
+      } else if ((gfData as any)?.success && typeof (window as any).fbq === "function" && hasConsent()) {
+        (window as any).fbq("track", "Lead", { content_name: "gastrofunnel" });
+      }
+    } catch (err) {
+      console.warn("[gastrofunnel] forward exception", err);
+    }
+
     ads.conversion("demo", {
       email: email || undefined,
       phone: phone || undefined,
