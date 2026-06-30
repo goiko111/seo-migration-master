@@ -56,6 +56,12 @@ const SEO_ALIASES = {
   '/wine-pricing-tool': '/en/wine-pricing-tool',
   '/wine-list-benchmark': '/en/wine-list-benchmark',
   '/en/digital-wine-list': '/en/wine-list-management-software',
+  '/biblioteca-vino/como-empezar': '/aprender-vino',
+  '/en/wine-library/how-to-start': '/en/learn-wine',
+  '/it/biblioteca-vino/iniziare': '/it/imparare-il-vino',
+  '/fr/bibliotheque-vin/debuter': '/fr/apprendre-le-vin',
+  '/de/weinbibliothek/einsteigen': '/de/wein-lernen',
+  '/pt/biblioteca-vinho/como-comecar': '/pt/aprender-vinho',
   // Spanish aliases for English-slug tools
   '/herramientas/puntuacion-carta-vinos': '/herramientas/wine-list-score',
 };
@@ -293,6 +299,16 @@ const PRESENTATION_ALTERNATES = {
   'x-default': '/presentacion',
 };
 
+const LEARN_WINE_ALTERNATES = {
+  es: '/aprender-vino',
+  en: '/en/learn-wine',
+  it: '/it/imparare-il-vino',
+  fr: '/fr/apprendre-le-vin',
+  de: '/de/wein-lernen',
+  pt: '/pt/aprender-vinho',
+  'x-default': '/aprender-vino',
+};
+
 const STATIC_WORKER_PRERENDER_PAGES = {
   '/presentacion': {
     lang: 'es',
@@ -396,6 +412,114 @@ const STATIC_WORKER_PRERENDER_PAGES = {
     ],
     links: [['Demo', '/pt/demo'], ['Produto', '/pt/software-carta-vinhos'], ['Funcionalidades', '/pt/funcionalidades'], ['Analise carta', '/pt/analise-carta']],
   },
+  '/aprender-vino': {
+    lang: 'es',
+    title: 'Aprender Vino desde Cero para Restaurantes | Winerim',
+    description: 'Ruta para aprender vino desde cero: botella, cata, uvas, regiones, estilos, maridajes, servicio y decisiones de carta para equipos de sala.',
+    h1: 'Aprender vino desde cero, aplicado a vender mejor en sala',
+    subtitle: 'Una guia ordenada para que un equipo entienda una botella, describa un vino sin jerga, recomiende con seguridad y conecte conocimiento con margen, rotacion y experiencia del cliente.',
+    canonical: '/aprender-vino',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Entender la botella', 'Etiqueta, origen, variedad, anada, crianza, estilo y precio ayudan al equipo a explicar por que un vino esta en carta.'],
+      ['Catar y describir sin jerga', 'Aroma, acidez, cuerpo, tanino, dulzor, alcohol y final se traducen a lenguaje claro de sala.'],
+      ['Conectar uvas, regiones y estilos', 'La Biblioteca del vino es la base de datos; Aprender vino es la ruta guiada para usarla en conversaciones reales.'],
+      ['Recomendar por comida', 'El aprendizaje aterriza en maridajes practicos para pescado, carne, arroces, cocina asiatica, quesos, postres y platos de la casa.'],
+      ['Servir y decidir mejor', 'Temperatura, copa, medidas, vino por copa, margen, rotacion y revision mensual convierten conocimiento en gestion.'],
+    ],
+    links: [['Biblioteca', '/biblioteca-vino'], ['Glosario', '/biblioteca-vino/glosario'], ['Maridajes', '/biblioteca-vino/maridajes'], ['Analizar carta', '/analisis-carta']],
+  },
+  '/en/learn-wine': {
+    lang: 'en',
+    title: 'Learn Wine from Scratch for Restaurants | Winerim',
+    description: 'Practical wine learning path for restaurant teams: bottle basics, tasting, grapes, regions, styles, pairings, service and wine-list decisions.',
+    h1: 'Learn wine from scratch and use it to sell better on the floor',
+    subtitle: 'A clear path for teams to understand a bottle, describe wine without jargon, recommend with confidence and connect knowledge with margin, rotation and guest experience.',
+    canonical: '/en/learn-wine',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Understand the bottle', 'Label, origin, grape, vintage, ageing, style and price help the team explain why a wine belongs on the list.'],
+      ['Taste and describe without jargon', 'Aroma, acidity, body, tannin, sweetness, alcohol and finish become simple service language.'],
+      ['Connect grapes, regions and styles', 'The Wine Library is the database; Learn Wine is the guided path for using it in real guest conversations.'],
+      ['Recommend by food', 'Learning turns into practical pairings for fish, meat, rice, Asian cuisine, cheese, desserts and signature dishes.'],
+      ['Serve and decide better', 'Temperature, glassware, pour size, by-the-glass strategy, margin, rotation and monthly review make learning operational.'],
+    ],
+    links: [['Wine Library', '/en/wine-library'], ['Glossary', '/en/wine-library/glossary'], ['Pairings', '/en/wine-library/pairings'], ['Analyze list', '/en/wine-list-analysis']],
+  },
+  '/it/imparare-il-vino': {
+    lang: 'it',
+    title: 'Imparare il Vino da Zero per Ristoranti | Winerim',
+    description: 'Percorso pratico per imparare il vino: bottiglia, degustazione, vitigni, regioni, stili, abbinamenti, servizio e decisioni di carta.',
+    h1: 'Imparare il vino da zero e usarlo per vendere meglio in sala',
+    subtitle: 'Un percorso ordinato per capire una bottiglia, descrivere un vino senza gergo, consigliare con sicurezza e collegare conoscenza, margine, rotazione ed esperienza cliente.',
+    canonical: '/it/imparare-il-vino',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Capire la bottiglia', 'Etichetta, origine, vitigno, annata, affinamento, stile e prezzo aiutano il team a spiegare perche una referenza e in carta.'],
+      ['Degustare e descrivere senza gergo', 'Aroma, acidita, corpo, tannino, dolcezza, alcol e finale diventano linguaggio semplice da sala.'],
+      ['Collegare vitigni, regioni e stili', 'La Biblioteca del vino e la base dati; Imparare il vino e il percorso guidato per usarla in sala.'],
+      ['Consigliare con il cibo', 'Il sapere diventa abbinamenti pratici per pesce, carne, riso, cucina asiatica, formaggi, dessert e piatti della casa.'],
+      ['Servire e decidere meglio', 'Temperatura, calice, dosi, vino al calice, margine, rotazione e revisione mensile rendono operativo l apprendimento.'],
+    ],
+    links: [['Biblioteca', '/it/biblioteca-vino'], ['Glossario', '/it/biblioteca-vino/glossario'], ['Abbinamenti', '/it/biblioteca-vino/abbinamenti'], ['Analisi carta', '/it/analisi-carta']],
+  },
+  '/fr/apprendre-le-vin': {
+    lang: 'fr',
+    title: 'Apprendre le Vin depuis Zero pour Restaurants | Winerim',
+    description: 'Parcours pratique pour apprendre le vin : bouteille, degustation, cepages, regions, styles, accords, service et decisions de carte.',
+    h1: 'Apprendre le vin depuis zero et mieux vendre en salle',
+    subtitle: 'Un parcours clair pour comprendre une bouteille, decrire un vin sans jargon, recommander avec confiance et relier connaissance, marge, rotation et experience client.',
+    canonical: '/fr/apprendre-le-vin',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Comprendre la bouteille', 'Etiquette, origine, cepage, millesime, elevage, style et prix aident l equipe a expliquer pourquoi un vin est a la carte.'],
+      ['Deguster et decrire sans jargon', 'Aromes, acidite, corps, tanin, sucrosite, alcool et finale deviennent un langage simple pour le service.'],
+      ['Relier cepages, regions et styles', 'La Bibliotheque du vin est la base de donnees; Apprendre le vin est le parcours guide pour l utiliser en salle.'],
+      ['Recommander avec les plats', 'Le savoir devient accords pratiques pour poisson, viande, riz, cuisine asiatique, fromages, desserts et plats signature.'],
+      ['Servir et mieux decider', 'Temperature, verre, dose, vin au verre, marge, rotation et revue mensuelle rendent l apprentissage operationnel.'],
+    ],
+    links: [['Bibliotheque', '/fr/bibliotheque-vin'], ['Glossaire', '/fr/bibliotheque-vin/glossaire'], ['Accords', '/fr/bibliotheque-vin/accords'], ['Analyse carte', '/fr/analyse-carte']],
+  },
+  '/de/wein-lernen': {
+    lang: 'de',
+    title: 'Wein Lernen von Grund auf fuer Restaurants | Winerim',
+    description: 'Praktischer Lernpfad fuer Restaurantteams: Flasche, Verkostung, Rebsorten, Regionen, Stile, Pairings, Service und Weinkartenentscheidungen.',
+    h1: 'Wein von Grund auf lernen und im Service besser verkaufen',
+    subtitle: 'Ein klarer Pfad, damit Teams eine Flasche verstehen, Wein ohne Fachjargon beschreiben, sicher empfehlen und Wissen mit Marge, Rotation und Gaesteerlebnis verbinden.',
+    canonical: '/de/wein-lernen',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Die Flasche verstehen', 'Etikett, Herkunft, Rebsorte, Jahrgang, Ausbau, Stil und Preis helfen dem Team zu erklaeren, warum ein Wein auf der Karte steht.'],
+      ['Verkosten und ohne Fachjargon beschreiben', 'Aroma, Saeure, Koerper, Tannin, Suesse, Alkohol und Abgang werden in einfache Servicesprache uebersetzt.'],
+      ['Rebsorten, Regionen und Stile verbinden', 'Die Weinbibliothek ist die Datenbasis; Wein lernen ist der gefuehrte Pfad fuer den Service.'],
+      ['Zum Essen empfehlen', 'Wissen wird zu praktischen Pairings fuer Fisch, Fleisch, Reisgerichte, asiatische Kueche, Kaese, Desserts und Signature-Gerichte.'],
+      ['Besser servieren und entscheiden', 'Temperatur, Glas, Ausschankmenge, Glaswein, Marge, Rotation und Monatsreview machen Lernen operativ.'],
+    ],
+    links: [['Weinbibliothek', '/de/weinbibliothek'], ['Glossar', '/de/weinbibliothek/glossar'], ['Pairings', '/de/weinbibliothek/weinbegleitung'], ['Analyse', '/de/weinkarten-analyse']],
+  },
+  '/pt/aprender-vinho': {
+    lang: 'pt',
+    title: 'Aprender Vinho do Zero para Restaurantes | Winerim',
+    description: 'Percurso pratico para aprender vinho: garrafa, prova, castas, regioes, estilos, harmonizacoes, servico e decisoes de carta.',
+    h1: 'Aprender vinho do zero e vender melhor na sala',
+    subtitle: 'Um percurso claro para a equipa entender uma garrafa, descrever vinho sem jargao, recomendar com seguranca e ligar conhecimento a margem, rotacao e experiencia do cliente.',
+    canonical: '/pt/aprender-vinho',
+    schemaType: 'LearningResource',
+    alternates: LEARN_WINE_ALTERNATES,
+    sections: [
+      ['Entender a garrafa', 'Rotulo, origem, casta, ano, estagio, estilo e preco ajudam a equipa a explicar porque um vinho esta na carta.'],
+      ['Provar e descrever sem jargao', 'Aroma, acidez, corpo, tanino, docura, alcool e final tornam-se linguagem simples de sala.'],
+      ['Ligar castas, regioes e estilos', 'A Biblioteca do vinho e a base de dados; Aprender vinho e o percurso guiado para usar essa base na sala.'],
+      ['Recomendar com comida', 'O conhecimento torna-se harmonizacoes praticas para peixe, carne, arroz, cozinha asiatica, queijos, sobremesas e pratos da casa.'],
+      ['Servir e decidir melhor', 'Temperatura, copo, dose, vinho a copo, margem, rotacao e revisao mensal tornam a aprendizagem operacional.'],
+    ],
+    links: [['Biblioteca', '/pt/biblioteca-vinho'], ['Glossario', '/pt/biblioteca-vinho/glossario'], ['Harmonizacoes', '/pt/biblioteca-vinho/harmonizacoes'], ['Analise carta', '/pt/analise-carta']],
+  },
   '/integraciones': {
     lang: 'es',
     title: 'Integraciones de Winerim | TPV, PMS, ERP, Inventario y API',
@@ -441,6 +565,7 @@ const BAROMETER_ALTERNATES = {
 };
 
 const WORKER_BAROMETER_SITEMAP_LASTMOD = '2026-06-10';
+const WORKER_LEARN_WINE_SITEMAP_LASTMOD = '2026-06-30';
 
 const WORKER_TERMS_PATHS = {
   es: '/terminos',
@@ -649,8 +774,10 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     && xml.includes(`${site}/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`);
   const barometerPaths = [...new Set(Object.values(BAROMETER_ALTERNATES))];
   const missingBarometerPaths = barometerPaths.filter(path => !xml.includes(`${site}${path}`));
+  const learnWinePaths = [...new Set(Object.values(LEARN_WINE_ALTERNATES))];
+  const missingLearnWinePaths = learnWinePaths.filter(path => !xml.includes(`${site}${path}`));
 
-  if (hasDetailUrls && missingBarometerPaths.length === 0) {
+  if (hasDetailUrls && missingBarometerPaths.length === 0 && missingLearnWinePaths.length === 0) {
     return stabilizeSitemapLastmod(xml);
   }
 
@@ -658,6 +785,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...(hasDetailUrls ? [] : Object.keys(RESOURCE_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/recursos/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD))),
     ...(hasDetailUrls ? [] : Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD))),
     ...missingBarometerPaths.map(path => detailUrlBlock(site, path, WORKER_BAROMETER_SITEMAP_LASTMOD)),
+    ...missingLearnWinePaths.map(path => detailUrlBlock(site, path, WORKER_LEARN_WINE_SITEMAP_LASTMOD)),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
@@ -706,6 +834,7 @@ const SEO_EXACT = new Set([
   '/implantacion',
   '/como-vender-mas-vino-en-un-restaurante',
   '/analisis-carta',
+  '/aprender-vino',
   '/como-hacer-una-carta-de-vinos',
   '/guias-y-recursos',
   '/recursos',
@@ -837,6 +966,7 @@ const SEO_EXACT = new Set([
   '/en/wine-list-barometer-2026',
   '/en/comparisons',
   '/en/wine-list-analysis',
+  '/en/learn-wine',
   '/en/wine-margin-calculator',
   '/en/implementation',
   '/en/solutions/restaurant-groups',
@@ -916,6 +1046,7 @@ const SEO_EXACT = new Set([
   '/it/presentazione',
   '/it/confronti',
   '/it/analisi-carta',
+  '/it/imparare-il-vino',
   '/it/calcolatrice-margini-vino',
   '/it/implementazione',
   '/it/soluzioni/gruppi-ristorazione',
@@ -994,6 +1125,7 @@ const SEO_EXACT = new Set([
   '/fr/presentation',
   '/fr/comparatifs',
   '/fr/analyse-carte',
+  '/fr/apprendre-le-vin',
   '/fr/calculateur-marge-vin',
   '/fr/implementation',
   '/fr/solutions/groupes-restauration',
@@ -1077,6 +1209,7 @@ const SEO_EXACT = new Set([
   '/de/praesentation',
   '/de/vergleiche',
   '/de/weinkarten-analyse',
+  '/de/wein-lernen',
   '/de/wein-margen-rechner',
   '/de/implementierung',
   '/de/loesungen/restaurant-gruppen',
@@ -1155,6 +1288,7 @@ const SEO_EXACT = new Set([
   '/pt/apresentacao',
   '/pt/comparativos',
   '/pt/analise-carta',
+  '/pt/aprender-vinho',
   '/pt/calculadora-margem-vinho',
   '/pt/implementacao',
   '/pt/solucoes/grupos-restauracao',

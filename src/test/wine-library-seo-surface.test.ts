@@ -244,6 +244,31 @@ describe("wine library SEO surface", () => {
     );
   });
 
+  it("publishes the learn-wine hub as a separate multilingual SEO surface", () => {
+    const app = readFileSync("src/App.tsx", "utf8");
+    const routes = readFileSync("src/i18n/types.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+    const llms = readFileSync("public/llms.txt", "utf8");
+
+    expect(app).toContain("const AprenderVino");
+    expect(app).toContain('path="/aprender-vino"');
+    expect(app).toContain("`${prefix}/learn-wine`");
+    expect(app).toContain("`${prefix}/aprender-vinho`");
+    expect(routes).toContain('"/aprender-vino": "/en/learn-wine"');
+    expect(routes).toContain('"/aprender-vino": "/de/wein-lernen"');
+    expect(routes).toContain('"/aprender-vino": "/pt/aprender-vinho"');
+    expect(sitemap).toContain("{ esPath: '/aprender-vino', priority: '0.7', changefreq: 'monthly', multilang: true }");
+    expect(prerender).toContain("'/aprender-vino': [");
+    expect(prerender).toContain("schemaType: 'LearningResource'");
+    expect(worker).toContain("const LEARN_WINE_ALTERNATES");
+    expect(worker).toContain("'/biblioteca-vino/como-empezar': '/aprender-vino'");
+    expect(worker).toContain("'/pt/aprender-vinho'");
+    expect(llms).toContain("Learn wine: https://winerim.wine/aprender-vino");
+    expect(llms).toContain("https://winerim.wine/de/wein-lernen");
+  });
+
   it("normalizes legacy language query URLs at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 
@@ -292,7 +317,7 @@ describe("wine library SEO surface", () => {
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
 
-    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-10'");
+    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-30'");
     expect(sitemap).toContain("const WINE_LIBRARY_LASTMOD = '2026-06-01'");
     expect(sitemap).toContain("urlBlock(route.esPath, WINE_LIBRARY_LASTMOD");
     expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");

@@ -2,6 +2,8 @@
 
 ## Actualizacion 2026-06-29: auditoria de publicaciones blog y pendientes SEO/LLM
 
+Nota 2026-06-30: esta fotografia queda superada para el hub de iniciacion. La pagina real se implemento en codigo como `Aprender vino`, separada de `Biblioteca del vino`; lo pendiente ahora es commit/push, despliegue completo y validacion productiva.
+
 ## Hechos
 
 - Se reviso si las publicaciones del blog y las mejoras pendientes de biblioteca del vino estan realmente publicadas.
@@ -18,33 +20,29 @@
   - `uvas-regiones-equipo-sala-vender-vino`;
   - `maridajes-carta-vinos-rentable`.
 - Las 18 variantes del cluster anterior aparecen como `published=true` en Supabase, estan en sitemap y una muestra valida como Googlebot con `200`, `x-worker-branch: bot-prerender`, canonical propio, titulo y H1 correctos.
-- El hub inspirado por La RVF `Como empezar con el vino` no esta implementado todavia como pagina real:
-  - no hay rutas dedicadas en `src/App.tsx`;
-  - no aparece en `public/sitemap-extra.json`;
-  - no aparece en `/sitemap.xml`;
-  - no aparece en `public/llms.txt` ni `public/llms-full.txt`;
-  - no hay contenido especifico en `supabase/functions/prerender/index.ts`.
-- Las URLs previstas (`/biblioteca-vino/como-empezar`, `/en/wine-library/how-to-start`, `/fr/bibliotheque-vin/debuter`) devuelven `200` por los catch-all/prefijos de biblioteca, pero no sirven una pagina especifica del hub; Googlebot recibe un fallback de biblioteca, no contenido de iniciacion.
+- El hub inspirado por La RVF ya no debe describirse como `Como empezar con el vino` dentro de Biblioteca; desde el 2026-06-30 existe en codigo como `Aprender vino`, con rutas, sitemap extra, `llms` y prerender preparados.
+- Las URLs previstas antiguas (`/biblioteca-vino/como-empezar`, `/en/wine-library/how-to-start`, `/fr/bibliotheque-vin/debuter`) quedan tratadas como aliases/redirects legacy hacia la nueva capa, no como canonicals.
 - Siguen existiendo cambios locales previos no relacionados en `index.html` y `src/components/WineListAnalyzerTool.tsx`.
 
 ## Decisiones
 
 - Considerar publicados los articulos existentes del cluster de biblioteca del vino; el problema no es publicacion del cluster anterior, sino falta de la nueva capa editorial de iniciacion.
-- Tratar el hub `Como empezar con el vino` como la siguiente implementacion prioritaria para SEO convencional y LLMs.
-- No dejar las URLs previstas del hub dependiendo de fallbacks/catch-all: deben convertirse en paginas reales con rutas, sitemap, prerender, canonical, hreflang y menciones en `llms`.
+- Tratar `Aprender vino` como la capa de iniciacion prioritaria para SEO convencional y LLMs.
+- No dejar las URLs legacy del hub dependiendo de fallbacks/catch-all: deben redirigir a paginas reales con rutas, sitemap, prerender, canonical, hreflang y menciones en `llms`.
 
 ## Hipotesis
 
-- El cluster publicado ayuda a autoridad tematica, pero no cubre la intencion de busqueda educativa de iniciacion detectada en la revision de La RVF.
-- Un hub guiado de iniciacion puede cerrar una brecha de arquitectura: ahora hay mucha biblioteca enciclopedica, pero falta una entrada didactica por niveles.
-- Las URLs fallback pueden confundir validaciones superficiales porque responden `200`, aunque no representen contenido real ni intencion especifica.
+- El cluster publicado ayuda a autoridad tematica, pero no cubre por si solo la intencion de busqueda educativa de iniciacion detectada en la revision de La RVF.
+- `Aprender vino` puede cerrar la brecha de arquitectura: Biblioteca mantiene el grafo enciclopedico y el hub nuevo ofrece una entrada didactica por niveles.
+- Las URLs fallback pueden confundir validaciones superficiales porque responden `200`, aunque no representen contenido real ni intencion especifica; por eso se han preparado aliases/redirects.
 
 ## Tareas pendientes
 
-- Implementar el hub localizado `Como empezar con el vino` y conectarlo a biblioteca, glosario, uvas, regiones, estilos, maridajes, analisis de carta y demo.
+- Hacer commit/push de `Aprender vino` y desplegar Cloudflare Worker.
+- Publicar frontend desde Lovable o confirmar autodeploy desde `main`.
+- Desplegar Supabase `sitemap` y `prerender` desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Validar produccion humana/Googlebot para las seis rutas canonicas de `Aprender vino`.
 - Crear la primera tanda de contenidos propios de iniciacion: catar vino, vocabulario de cata, tipos de vino, uvas para empezar, regiones para empezar, leer etiqueta, temperatura, copas, conservacion, defectos, maridajes basicos, recomendacion en sala y formacion de equipos.
-- Actualizar rutas React, sitemap, Supabase `prerender`, Worker si aplica, `public/llms.txt`, `public/llms-full.txt`, tests SEO y validacion de produccion humana/Googlebot.
-- Revisar si conviene redirigir o bloquear temporalmente cualquier ruta prevista del hub hasta que exista contenido real, para evitar soft-200 de paginas genericas.
 
 ## Actualizacion 2026-06-19: `/presentacion` deja de devolver 404
 
@@ -98,6 +96,8 @@
 - Incluir las rutas de presentacion en cualquier checklist futura de validacion de rutas publicas nuevas.
 
 ## Actualizacion 2026-06-19: referencia La RVF para iniciacion al vino
+
+Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como subruta canonica dentro de `Biblioteca del vino`.
 
 ## Hechos
 
@@ -4883,3 +4883,85 @@
   - si la biblioteca del vino empieza a recibir más indexación e impresiones.
 - Continuar con la muestra `other` de `49` rutas de `Descubierta`.
 - Seguir reforzando enlazado interno hacia biblioteca del vino y páginas localizadas limpias.
+
+## Actualización 2026-06-30: hub separado `Aprender vino` para SEO/LLM
+
+## Hechos
+
+- Se retomó la sesión siguiendo el protocolo y se leyeron `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se confirmó la decisión editorial: el contenido de iniciación inspirado por La RVF no debe mezclarse como entidad interna de `Biblioteca del vino`.
+- Se creó la página React `src/pages/AprenderVino.tsx` con contenido localizado en:
+  - ES: `/aprender-vino`;
+  - EN: `/en/learn-wine`;
+  - IT: `/it/imparare-il-vino`;
+  - FR: `/fr/apprendre-le-vin`;
+  - DE: `/de/wein-lernen`;
+  - PT: `/pt/aprender-vinho`.
+- La página incluye:
+  - canonical propio;
+  - `hreflang` completo con `x-default`;
+  - schema `LearningResource`, `BreadcrumbList` e `ItemList`;
+  - enlaces a Biblioteca del vino, glosario, uvas, regiones, maridajes, guía de servicio, análisis de carta y demo.
+- Se conectaron las rutas en `src/App.tsx` y `src/i18n/types.ts`.
+- Se actualizó `supabase/functions/sitemap/index.ts`:
+  - `STATIC_ROUTE_LASTMOD = '2026-06-30'`;
+  - rutas localizadas;
+  - entrada multilingüe para `/aprender-vino`.
+- Se actualizó `supabase/functions/prerender/index.ts`:
+  - `HREFLANG_MAP`;
+  - `STATIC_LOCALIZED_ROUTES`;
+  - `STATIC_PAGE_LABELS`;
+  - página estática ES;
+  - overrides localizados EN/IT/FR/DE/PT.
+- Se actualizó `cloudflare-worker-v3-hybrid.js`:
+  - aliases legacy desde rutas tipo `/biblioteca-vino/como-empezar`;
+  - `LEARN_WINE_ALTERNATES`;
+  - prerender estático Worker para las seis URLs;
+  - inyección puente al sitemap si Supabase aún no incluye las URLs;
+  - rutas exactas SEO en `SEO_EXACT`.
+- Se actualizaron `public/llms.txt`, `public/llms-full.txt` y `public/sitemap-extra.json`.
+- Se amplió `src/test/wine-library-seo-surface.test.ts` para proteger la nueva superficie.
+- Verificaciones completadas:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: 18 tests;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - parse JSON de `public/sitemap-extra.json`;
+  - `git diff --check`;
+  - `npm run build`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npm run deploy:worker:dry-run`;
+  - QA con Chrome headless en `/aprender-vino`, `/en/learn-wine` y `/pt/aprender-vinho`: canonical correcto, 7 hreflangs, sin errores de consola y sin overflow horizontal.
+- El intento de desplegar Supabase SEO falló porque no hay `SUPABASE_ACCESS_TOKEN` ni sesión CLI:
+  - error: `LegacyPlatformAuthRequiredError`.
+- El servidor local está activo en `http://127.0.0.1:5173/`.
+- Cambios no relacionados ya existentes y no tocados por esta sesión:
+  - `index.html`;
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+## Decisiones
+
+- `Biblioteca del vino` queda como grafo/colección de entidades: uvas, regiones, estilos, maridajes, servicio y glosario.
+- `Aprender vino` queda como capa guiada de aprendizaje para equipos de sala, enlazada a Biblioteca pero separada en arquitectura, intención y URLs.
+- No crear todavía subpáginas finas de iniciación hasta que el hub esté publicado y validado en producción.
+- Mantener fallback/prerender en Worker para cubrir bots si Supabase `prerender` aún no está desplegado.
+
+## Hipótesis
+
+- Separar `Aprender vino` debería mejorar la comprensión SEO/LLM: una página responde a “por dónde empezar” y la Biblioteca responde a entidades concretas.
+- El hub puede captar búsquedas informacionales y conducirlas hacia análisis de carta, demo y contenido de biblioteca con más intención comercial.
+- Mientras Lovable/Supabase no publiquen los cambios, la producción humana puede no mostrar aún la nueva página React aunque el Worker pueda cubrir bots tras su despliegue.
+
+## Tareas pendientes
+
+- Commit y push de los cambios de esta sesión.
+- Desplegar Cloudflare Worker si el commit queda listo.
+- Publicar frontend desde Lovable o confirmar que GitHub/Lovable auto-despliega `main`.
+- Desplegar Supabase functions `sitemap` y `prerender` desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Validar en producción como navegador humano y como Googlebot:
+  - `/aprender-vino`;
+  - `/en/learn-wine`;
+  - `/it/imparare-il-vino`;
+  - `/fr/apprendre-le-vin`;
+  - `/de/wein-lernen`;
+  - `/pt/aprender-vinho`.
+- Reenviar `/sitemap.xml` en Search Console cuando producción tenga las URLs nuevas.
+- Después de validar el hub, planificar spokes propios de iniciación: cata, vocabulario, tipos de vino, uvas para empezar, regiones para empezar, etiquetas, temperatura, copas, conservación, defectos, maridajes básicos y recomendación en sala.

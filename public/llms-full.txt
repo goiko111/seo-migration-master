@@ -1,6 +1,6 @@
 # Winerim AI Reference
 
-Last updated: 2026-06-10
+Last updated: 2026-06-30
 
 ## Entity Summary
 
@@ -69,6 +69,17 @@ Priority sections:
 - Pairings: https://winerim.wine/biblioteca-vino/maridajes
 - Service guide: https://winerim.wine/biblioteca-vino/guia-servicio
 - Glossary: https://winerim.wine/biblioteca-vino/glosario
+
+### Learn Wine
+
+The learn wine hub is a guided learning path for restaurant and hospitality teams. It should be treated as distinct from the Wine Library: the Wine Library is the structured reference database, while Learn Wine explains what to study first and how to apply wine knowledge in service, recommendations, pairings, wine-by-the-glass, margin and rotation.
+
+- Spanish: https://winerim.wine/aprender-vino
+- English: https://winerim.wine/en/learn-wine
+- Italian: https://winerim.wine/it/imparare-il-vino
+- French: https://winerim.wine/fr/apprendre-le-vin
+- German: https://winerim.wine/de/wein-lernen
+- Portuguese: https://winerim.wine/pt/aprender-vinho
 
 Priority grape profiles:
 

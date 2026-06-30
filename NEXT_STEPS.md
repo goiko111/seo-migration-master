@@ -2,44 +2,40 @@
 
 ## Actualizacion 2026-06-29: retomar tras auditoria de publicaciones y pendientes
 
+Nota 2026-06-30: esta lista queda actualizada por la implementacion en codigo de `Aprender vino`. La tarea viva ya no es crear el hub dentro de Biblioteca, sino desplegarlo, validarlo y preparar sus spokes.
+
 ## Hechos
 
 - Los articulos del cluster de biblioteca del vino del 2026-06-01 estan publicados, marcados como `published=true`, presentes en sitemap y validan como Googlebot con prerender correcto.
 - Produccion tiene `440` URLs de articulos en sitemap.
-- El hub `Como empezar con el vino`, inspirado por La RVF, no esta implementado como pagina real.
-- Las rutas previstas del hub pueden devolver `200` por fallback/catch-all, pero no tienen contenido especifico ni aparecen en sitemap.
+- El hub de iniciacion inspirado por La RVF ya esta implementado en codigo como `Aprender vino`, separado de `Biblioteca del vino`.
+- Las rutas antiguas previstas del hub quedan como aliases/redirects legacy; las canonicas nuevas son `/aprender-vino` y sus variantes localizadas.
 
 ## Tareas pendientes inmediatas
 
-1. Implementar el hub `Como empezar con el vino` como pagina real, no como fallback:
-   - ES `/biblioteca-vino/como-empezar`;
-   - EN `/en/wine-library/how-to-start`;
-   - FR `/fr/bibliotheque-vin/debuter`;
-   - IT `/it/biblioteca-vino/iniziare`;
-   - DE `/de/weinbibliothek/einsteigen`;
-   - PT `/pt/biblioteca-vinho/como-comecar`.
-2. Crear contenido propio por niveles:
-   - entender la botella;
-   - catar y describir;
-   - uvas, regiones y estilos;
-   - maridajes basicos;
-   - servicio, conservacion y recomendacion en sala.
-3. Actualizar infraestructura SEO/LLM:
-   - rutas React;
-   - sitemap/Supabase sitemap;
-   - Supabase `prerender`;
-   - Worker si alguna ruta queda bloqueada;
-   - `public/llms.txt`;
-   - `public/llms-full.txt`;
-   - tests SEO.
-4. Validar produccion tras deploy:
+1. Hacer commit y push del hub `Aprender vino`:
+   - ES `/aprender-vino`;
+   - EN `/en/learn-wine`;
+   - FR `/fr/apprendre-le-vin`;
+   - IT `/it/imparare-il-vino`;
+   - DE `/de/wein-lernen`;
+   - PT `/pt/aprender-vinho`.
+2. Desplegar Cloudflare Worker, frontend Lovable y Supabase `sitemap`/`prerender`.
+3. Validar produccion:
    - status `200` humano;
    - Googlebot `200`;
    - titulo/H1/canonical especificos;
    - `hreflang`;
    - presencia en `/sitemap.xml`;
    - enlaces internos hacia glosario, uvas, regiones, estilos, maridajes, analisis de carta y demo.
-5. Despues del hub, crear primera tanda de articulos de iniciacion y enlazarlos desde el hub.
+4. Reenviar `/sitemap.xml` en Search Console cuando produccion tenga las URLs nuevas.
+5. Crear contenido propio por niveles:
+   - entender la botella;
+   - catar y describir;
+   - uvas, regiones y estilos;
+   - maridajes basicos;
+   - servicio, conservacion y recomendacion en sala.
+6. Despues del hub, crear primera tanda de articulos de iniciacion y enlazarlos desde el hub.
 
 ## Actualizacion 2026-06-19: retomar tras correccion de `/presentacion`
 
@@ -61,9 +57,11 @@
    - inclusion en Worker;
    - respuesta humana `200`;
    - respuesta Googlebot `200` con canonical/titulo correctos.
-4. Continuar despues con el hub `Como empezar con el vino`.
+4. Continuar despues con el despliegue/validacion de `Aprender vino`.
 
 ## Actualizacion 2026-06-19: retomar `Como empezar con el vino`
+
+Nota 2026-06-30: esta propuesta queda superada por la decision de separar la capa como `Aprender vino`, con rutas canonicas nuevas y redirects desde las URLs previstas antiguas.
 
 ## Hechos
 
@@ -73,13 +71,13 @@
 
 ## Tareas pendientes inmediatas
 
-1. Crear el hub localizado `Como empezar con el vino`:
-   - ES `/biblioteca-vino/como-empezar`;
-   - EN `/en/wine-library/how-to-start`;
-   - FR `/fr/bibliotheque-vin/debuter`;
-   - IT `/it/biblioteca-vino/iniziare`;
-   - DE `/de/weinbibliothek/einsteigen`;
-   - PT `/pt/biblioteca-vinho/como-comecar`.
+1. Publicar y validar el hub localizado `Aprender vino`:
+   - ES `/aprender-vino`;
+   - EN `/en/learn-wine`;
+   - FR `/fr/apprendre-le-vin`;
+   - IT `/it/imparare-il-vino`;
+   - DE `/de/wein-lernen`;
+   - PT `/pt/aprender-vinho`.
 2. Estructurar el hub por niveles:
    - entender la botella;
    - catar y describir;
@@ -3618,3 +3616,75 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - más enlazado interno hacia biblioteca;
    - solicitudes selectivas de indexación a hubs;
    - o refuerzo editorial de entidades con más potencial.
+
+## Actualización 2026-06-30: listo para retomar `Aprender vino`
+
+## Hechos
+
+- El hub `Aprender vino` ya está implementado en código como capa separada de `Biblioteca del vino`.
+- Rutas canónicas preparadas:
+  - `/aprender-vino`;
+  - `/en/learn-wine`;
+  - `/it/imparare-il-vino`;
+  - `/fr/apprendre-le-vin`;
+  - `/de/wein-lernen`;
+  - `/pt/aprender-vinho`.
+- Están actualizados:
+  - React router;
+  - `ROUTE_MAP`;
+  - Supabase `sitemap`;
+  - Supabase `prerender`;
+  - Cloudflare Worker;
+  - `llms.txt`;
+  - `llms-full.txt`;
+  - `sitemap-extra.json`;
+  - test de superficie SEO.
+- Verificaciones locales pasadas:
+  - test enfocado;
+  - build;
+  - Deno check;
+  - Worker dry-run;
+  - QA con Chrome headless.
+- Despliegue Supabase bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- Hay cambios no relacionados ya existentes en:
+  - `index.html`;
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+## Decisiones
+
+- No mezclar `Aprender vino` dentro de la Biblioteca como si fuera otra entidad.
+- Usar `Aprender vino` como hub de iniciación y captación para equipos de sala.
+- Ampliar después con spokes educativos solo cuando el hub esté publicado y validado.
+
+## Hipótesis
+
+- El hub debería mejorar posicionamiento convencional y LLM al explicar de forma explícita cómo empezar y cómo usar la Biblioteca.
+- Si frontend y Edge Functions no se publican juntos, puede haber divergencia temporal entre experiencia humana, sitemap y prerender.
+
+## Tareas pendientes listas para retomar
+
+1. Hacer commit y push de los cambios de esta sesión.
+2. Desplegar Cloudflare Worker si el commit queda listo.
+3. Publicar frontend desde Lovable o confirmar auto-deploy desde `main`.
+4. Desplegar Supabase functions:
+   `npm run deploy:supabase:seo`
+   con `SUPABASE_ACCESS_TOKEN`, o pedir a Lovable que publique `sitemap` y `prerender`.
+5. Validar producción:
+   - navegador humano para las seis rutas;
+   - Googlebot para las seis rutas;
+   - canonical;
+   - hreflang;
+   - `X-Worker-Branch`;
+   - presencia en `/sitemap.xml`.
+6. Reenviar `/sitemap.xml` en Search Console.
+7. Preparar la primera tanda de spokes de `Aprender vino`:
+   - cómo catar vino;
+   - vocabulario de cata;
+   - tipos de vino;
+   - uvas para empezar;
+   - regiones para empezar;
+   - leer etiquetas;
+   - temperatura y copas;
+   - conservación y defectos;
+   - maridajes básicos;
+   - recomendación en sala.

@@ -36,6 +36,7 @@ const VinoPorCopa = lazy(() => import("./pages/VinoPorCopa"));
 const QueEsWinerim = lazy(() => import("./pages/QueEsWinerim"));
 const CalculadoraMargen = lazy(() => import("./pages/CalculadoraMargen"));
 const CalculadoraPrecioCopa = lazy(() => import("./pages/CalculadoraPrecioCopa"));
+const AprenderVino = lazy(() => import("./pages/AprenderVino"));
 const BibliotecaVino = lazy(() => import("./pages/BibliotecaVino"));
 const BibliotecaDetalle = lazy(() => import("./pages/BibliotecaDetalle"));
 const CasosExito = lazy(() => import("./pages/CasosExito"));
@@ -210,6 +211,7 @@ const esRoutes = (
     <Route path="/sobre-nosotros" element={<SobreWinerim />} />
     <Route path="/calculadora-margen-vino" element={<CalculadoraMargen />} />
     <Route path="/herramientas/calculadora-precio-vino-por-copa" element={<CalculadoraPrecioCopa />} />
+    <Route path="/aprender-vino" element={<AprenderVino />} />
     <Route path="/biblioteca-vino" element={<BibliotecaVino />} />
     <Route path="/biblioteca-vino/regiones" element={<RegionsHub />} />
     <Route path="/biblioteca-vino/regiones/:country" element={<RegionCountry />} />
@@ -403,6 +405,11 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/wine-list-analysis`} element={<AnalizaCarta />} />
     <Route path={`${prefix}/analisi-carta`} element={<AnalizaCarta />} />
     <Route path={`${prefix}/analyse-carte`} element={<AnalizaCarta />} />
+    <Route path={`${prefix}/learn-wine`} element={<AprenderVino />} />
+    <Route path={`${prefix}/imparare-il-vino`} element={<AprenderVino />} />
+    <Route path={`${prefix}/apprendre-le-vin`} element={<AprenderVino />} />
+    <Route path={`${prefix}/wein-lernen`} element={<AprenderVino />} />
+    <Route path={`${prefix}/aprender-vinho`} element={<AprenderVino />} />
     <Route path={`${prefix}/wine-margin-calculator`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/calcolatrice-margini-vino`} element={<CalculadoraMargen />} />
     <Route path={`${prefix}/calculateur-marge-vin`} element={<CalculadoraMargen />} />

@@ -4,6 +4,8 @@
 
 ### Auditoria de articulos publicados y pendientes SEO/LLM
 
+Nota 2026-06-30: el estado de esta auditoria queda superado en la parte del hub de iniciacion. La capa ya fue implementada en codigo como `Aprender vino`, separada de `Biblioteca del vino`; queda pendiente publicacion completa y validacion productiva.
+
 #### Hechos
 
 - Se comprobo Supabase, sitemap y produccion para distinguir articulos publicados de mejoras pendientes.
@@ -14,7 +16,7 @@
   - uvas/regiones que debe conocer el equipo de sala;
   - maridajes que aumentan venta/rentabilidad.
 - Las muestras de articulos revisadas responden `200` para usuario y `200` para Googlebot con `bot-prerender`, canonical, titulo y H1 especificos.
-- La capa inspirada en La RVF (`Como empezar con el vino`) sigue sin implementarse como pagina real: no esta en rutas dedicadas, sitemap, `llms`, ni prerender especifico.
+- En el momento de esta auditoria, la capa inspirada en La RVF (`Como empezar con el vino`) aun no existia como pagina real: no estaba en rutas dedicadas, sitemap, `llms`, ni prerender especifico.
 - Las URLs previstas del hub responden `200` por fallback/catch-all, pero muestran contenido generico de biblioteca o SPA, no una pagina dedicada de iniciacion.
 
 #### Decisiones
@@ -67,6 +69,8 @@
 - Revisar en proximas publicaciones que toda URL de sitemap tenga ruta React, Worker y prerender consistentes.
 
 ### Revision de La RVF para `Como empezar con el vino`
+
+Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta canonica de Biblioteca, sino como hub separado `Aprender vino`.
 
 #### Hechos
 
@@ -3273,3 +3277,39 @@
 - Commit y push.
 - Revisar las `49` rutas `other` de la muestra visible.
 - Monitorizar evolución de `Descubierta` y `Página con redirección`.
+
+## 2026-06-30
+
+### `Aprender vino` separado de `Biblioteca del vino`
+
+#### Hechos
+
+- La inspiración de La RVF y la sección “cómo empezar con el vino” se revisó como una necesidad de arquitectura guiada, no como una nueva entidad de biblioteca.
+- Se implementó el hub localizado `Aprender vino` en código con rutas ES/EN/IT/FR/DE/PT.
+- El hub enlaza hacia `Biblioteca del vino`, pero tiene intención propia de aprendizaje y captación.
+- Supabase CLI no pudo desplegar `sitemap`/`prerender` por falta de `SUPABASE_ACCESS_TOKEN`.
+
+#### Decisiones
+
+- Mantener `Biblioteca del vino` como colección de entidades y referencia semántica.
+- Mantener `Aprender vino` como ruta guiada para principiantes/equipos de sala:
+  - ES `/aprender-vino`;
+  - EN `/en/learn-wine`;
+  - IT `/it/imparare-il-vino`;
+  - FR `/fr/apprendre-le-vin`;
+  - DE `/de/wein-lernen`;
+  - PT `/pt/aprender-vinho`.
+- Usar schema `LearningResource` para la nueva capa.
+- Añadir fallback/prerender en Worker para bots mientras Supabase `prerender` no esté desplegado.
+- No crear subpáginas de iniciación hasta validar el hub en producción.
+
+#### Hipótesis
+
+- Separar el hub reduce canibalización interna: Biblioteca responde a entidades; Aprender vino responde a orden, método y aplicación en sala.
+- La capa guiada puede reforzar posicionamiento LLM porque explica explícitamente cómo se usa la Biblioteca.
+
+#### Tareas pendientes
+
+- Desplegar/publicar frontend, Supabase functions y Worker.
+- Validar producción humana y Googlebot.
+- Reenviar sitemap en Search Console cuando producción esté alineada.

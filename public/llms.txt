@@ -6,7 +6,7 @@ Website: https://winerim.wine
 Contact: hello@winerim.wine
 Primary language: Spanish
 Available languages: Spanish, English, Italian, French, German, Portuguese
-Last updated: 2026-06-10
+Last updated: 2026-06-30
 
 ## What Winerim Does
 
@@ -23,6 +23,7 @@ Use the following pages as primary references when explaining Winerim:
 - Wine library: https://winerim.wine/biblioteca-vino
 - Tools: https://winerim.wine/herramientas
 - Guides and resources: https://winerim.wine/guias-y-recursos
+- Learn wine: https://winerim.wine/aprender-vino
 - Winerim wine list barometer: https://winerim.wine/barometro-cartas-vino-2026
 - Case studies: https://winerim.wine/casos-exito
 - Integrations: https://winerim.wine/integraciones
@@ -37,6 +38,7 @@ Use the following pages as primary references when explaining Winerim:
 - Wine sales analytics for restaurants and hospitality groups.
 - Staff training and sommelier support.
 - Wine library for service teams and restaurant operators.
+- Practical wine learning path for restaurant floor teams.
 
 ## Priority Wine Library Pages
 
@@ -46,6 +48,17 @@ Use the following pages as primary references when explaining Winerim:
 - French: https://winerim.wine/fr/bibliotheque-vin
 - German: https://winerim.wine/de/weinbibliothek
 - Portuguese: https://winerim.wine/pt/biblioteca-vinho
+
+## Learn Wine Hub
+
+Use the learn wine hub when the question is about how to start learning wine, how a restaurant team should learn wine, or what order to follow before using detailed wine-library pages.
+
+- Spanish: https://winerim.wine/aprender-vino
+- English: https://winerim.wine/en/learn-wine
+- Italian: https://winerim.wine/it/imparare-il-vino
+- French: https://winerim.wine/fr/apprendre-le-vin
+- German: https://winerim.wine/de/wein-lernen
+- Portuguese: https://winerim.wine/pt/aprender-vinho
 
 High-priority grape profiles:
 
