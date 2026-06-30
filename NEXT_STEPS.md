@@ -1,5 +1,33 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar tras re-test de `go.winerim.wine`
+
+## Hechos
+
+- Re-test exitoso de `https://go.winerim.wine/`:
+  - lead: `codex-qa-go-retest-20260630154016@winerim.com`;
+  - restaurante: `CODEx QA Go Retest 20260630154016`;
+  - redireccion: `/gracias?tipo=demo&origen=meta`;
+  - `contact_leads`: `201`;
+  - `send-lead-notification`: `200`, `connect_forwarded:true`;
+  - `submit-gastrofunnel`: `200`, upstream `success:true`, `lead_id=f388a0b4-bf19-4724-a1ed-f93211d05f13`.
+- UTMs de la prueba:
+  - `utm_source=codex_qa`;
+  - `utm_medium=paid_social_retest`;
+  - `utm_campaign=qa_20260630154016`;
+  - `utm_content=form_retest`;
+  - `utm_term=demo`;
+  - `fbclid=codex_qa_retest_20260630154016`.
+- Intento previo `codex-qa-go-retest-20260630153825@winerim.com` no envio formulario por faltar `phone_prefix`; no debe buscarse en CRM.
+- Chat sigue fuera de alcance y la landing lo mantiene desactivado.
+
+## Tareas pendientes inmediatas
+
+1. Confirmar en Winerim Connect/CRM el lead `codex-qa-go-retest-20260630154016@winerim.com`.
+2. Verificar que ese lead conserva UTMs y `fbclid`.
+3. No buscar el email `codex-qa-go-retest-20260630153825@winerim.com` como lead creado.
+4. Mantener `phone_prefix=ES` o equivalente en proximas automatizaciones de esta landing.
+
 ## Actualizacion 2026-06-30: retomar tras QA de formularios sin chat
 
 ## Hechos

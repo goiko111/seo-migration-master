@@ -2,6 +2,10 @@
 
 ## Hechos
 
+- El 2026-06-30 se repitio la prueba productiva del formulario de `https://go.winerim.wine/` con run id `20260630154016` y lead `codex-qa-go-retest-20260630154016@winerim.com`.
+- La prueba exitosa de `go.winerim.wine` mantuvo `robots` `noindex, follow`, H1 `Solicita una demo gratuita de Winerim`, UTMs ocultos correctos, chat desactivado, formulario valido y redireccion a `https://go.winerim.wine/gracias?tipo=demo&origen=meta`.
+- En esa repeticion, `contact_leads` respondio `201`, `send-lead-notification` respondio `200` con `connect_forwarded:true`, y `submit-gastrofunnel` respondio `200` con upstream `success:true` y `lead_id` `f388a0b4-bf19-4724-a1ed-f93211d05f13`.
+- Un intento previo de la misma repeticion con run id `20260630153825` no llego a enviar red ni crear lead porque el selector obligatorio `phone_prefix` quedo sin completar; no debe buscarse ese email en CRM.
 - El 2026-06-30 se revalidaron formularios productivos sin incluir chat por decision posterior del usuario: `/demo`, `/contacto`, popup de herramientas en `/recursos` y `https://go.winerim.wine/`.
 - La tanda QA de formularios uso el identificador `20260630125959` y creo leads de prueba `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com`.
 - En `/demo`, `/contacto` y popup de `/recursos`, Supabase `contact_leads` respondio `201` y `send-lead-notification` respondio `200` con `connect_forwarded:true`.
@@ -188,6 +192,7 @@
 
 ## Tareas pendientes
 
+- Confirmar visualmente en Winerim Connect/CRM que el lead `codex-qa-go-retest-20260630154016@winerim.com` aparece correctamente identificado con UTMs `qa_20260630154016` y `fbclid=codex_qa_retest_20260630154016`.
 - Confirmar visualmente en Winerim Connect/CRM que los leads `codex-qa-demo-20260630125959@winerim.com`, `codex-qa-contacto-20260630125959@winerim.com`, `codex-qa-popup-20260630125959@winerim.com` y `codex-qa-go-20260630125959@winerim.com` aparecen correctamente identificados.
 - Si se quiere dejar la consola mas limpia, investigar los `404` genericos detectados durante QA productiva; no bloquearon formularios ni CRM.
 - Confirmar visualmente en Winerim Connect/CRM que los leads test `codex-prod-test+winerim-meta@winerim.com`, `codex-diagnostic+winerim-gastrofunnel@winerim.com` y `codex-prod-retest+winerim-meta@winerim.com` entraron con UTMs y `fbclid`.

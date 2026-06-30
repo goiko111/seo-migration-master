@@ -1,5 +1,58 @@
 # Current State
 
+## Actualizacion 2026-06-30: re-test productivo de `go.winerim.wine`
+
+## Hechos
+
+- Se repitio la prueba del formulario de `https://go.winerim.wine/` sin probar chat.
+- Primer intento de la repeticion:
+  - run id `20260630153825`;
+  - email `codex-qa-go-retest-20260630153825@winerim.com`;
+  - no hubo llamadas de red ni redireccion porque el campo obligatorio `phone_prefix` quedo vacio;
+  - no debe buscarse ese email como lead creado.
+- Segundo intento, corregido con `phone_prefix=ES`:
+  - run id `20260630154016`;
+  - restaurante `CODEx QA Go Retest 20260630154016`;
+  - email `codex-qa-go-retest-20260630154016@winerim.com`;
+  - URL con `utm_source=codex_qa`, `utm_medium=paid_social_retest`, `utm_campaign=qa_20260630154016`, `utm_content=form_retest`, `utm_term=demo`, `fbclid=codex_qa_retest_20260630154016`.
+- Estado de la landing en la prueba exitosa:
+  - titulo `Solicita una demo gratuita de Winerim | Winerim`;
+  - H1 `Solicita una demo gratuita de Winerim`;
+  - `robots` `noindex, follow`;
+  - UTMs ocultos correctamente poblados;
+  - `window.__WINERIM_CHAT_DISABLED__ === true`;
+  - `chatNodes: 0`;
+  - formulario valido antes de enviar.
+- Resultado tecnico de la prueba exitosa:
+  - redireccion a `https://go.winerim.wine/gracias?tipo=demo&origen=meta`;
+  - `contact_leads` respondio `201`;
+  - `send-lead-notification` respondio `200` con `{"ok":true,"connect_forwarded":true,"connect_error":null}`;
+  - `submit-gastrofunnel` respondio `200` con upstream `success:true` y `lead_id` `f388a0b4-bf19-4724-a1ed-f93211d05f13`.
+- Siguen apareciendo `404` genericos de consola, pero no bloquearon formulario, notificacion ni CRM.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Mantener el chat fuera de alcance en esta validacion.
+- En futuras pruebas automatizadas de esta landing, rellenar siempre `phone_prefix` porque es obligatorio aunque el label visual principal sea telefono.
+
+## Hipotesis
+
+- El lead de la prueba exitosa deberia aparecer en Winerim Connect/CRM con la atribucion `qa_20260630154016`.
+- Los `404` genericos siguen pareciendo recursos secundarios o analitica, no errores del flujo de lead.
+
+## Contradicciones / dudas abiertas
+
+- La confirmacion visual dentro de CRM sigue pendiente; la prueba actual valida respuestas tecnicas de Supabase, Edge Functions y upstream.
+
+## Tareas pendientes
+
+- Buscar en Winerim Connect/CRM el lead `codex-qa-go-retest-20260630154016@winerim.com`.
+- Confirmar que el CRM conserva UTMs y `fbclid` de la prueba:
+  - `utm_campaign=qa_20260630154016`;
+  - `fbclid=codex_qa_retest_20260630154016`.
+- No buscar `codex-qa-go-retest-20260630153825@winerim.com` como lead valido porque ese intento no se envio.
+
 ## Actualizacion 2026-06-30: QA productiva de formularios sin chat
 
 ## Hechos

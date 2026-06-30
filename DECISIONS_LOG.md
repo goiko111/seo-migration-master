@@ -2,6 +2,33 @@
 
 ## 2026-06-30
 
+### Re-test productivo de formulario `go.winerim.wine`
+
+#### Hechos
+
+- Se repitio la prueba del formulario de `https://go.winerim.wine/`.
+- Un primer intento con email `codex-qa-go-retest-20260630153825@winerim.com` no se envio porque faltaba el campo obligatorio `phone_prefix`; no genero llamadas de red ni lead.
+- El intento valido uso email `codex-qa-go-retest-20260630154016@winerim.com`, restaurante `CODEx QA Go Retest 20260630154016` y UTMs `qa_20260630154016`.
+- La landing mantuvo `noindex, follow`, UTMs ocultos correctos y chat desactivado.
+- El formulario valido redirigio a `/gracias?tipo=demo&origen=meta`.
+- `contact_leads` respondio `201`.
+- `send-lead-notification` respondio `200` con `connect_forwarded:true`.
+- `submit-gastrofunnel` respondio `200` con upstream `success:true` y `lead_id` `f388a0b4-bf19-4724-a1ed-f93211d05f13`.
+
+#### Decisiones
+
+- Mantener chat fuera de esta QA.
+- Incluir siempre `phone_prefix` en scripts de prueba de la landing Meta porque es un select obligatorio.
+
+#### Hipotesis
+
+- El CRM deberia mostrar el lead `codex-qa-go-retest-20260630154016@winerim.com` con la atribucion de campana `qa_20260630154016`.
+
+#### Tareas pendientes
+
+- Confirmar visualmente el lead en Winerim Connect/CRM.
+- No usar el intento `20260630153825` como evidencia de lead creado.
+
 ### QA productiva de formularios sin chat
 
 #### Hechos
