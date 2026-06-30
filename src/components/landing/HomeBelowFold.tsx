@@ -6,6 +6,7 @@ import type { SupportedLang } from "@/i18n/types";
 const LogoStrip = lazy(() => import("@/components/LogoStrip"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
+const ConnectedCellarSection = lazy(() => import("@/components/landing/ConnectedCellarSection"));
 const WhoItHelpsSection = lazy(() => import("@/components/landing/WhoItHelpsSection"));
 const BusinessProfilesSection = lazy(() => import("@/components/landing/BusinessProfilesSection"));
 const FeaturesPreview = lazy(() => import("@/components/landing/FeaturesPreview"));
@@ -39,6 +40,7 @@ const HomeBelowFold = ({ lang }: { lang: SupportedLang }) => (
     {/* 5. How it works - reduce friction early */}
     <Suspense fallback={<SectionFallback />}>
       <HowItWorksSection />
+      <ConnectedCellarSection />
     </Suspense>
 
     {/* 6. Results - outcomes before features */}

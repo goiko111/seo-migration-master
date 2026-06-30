@@ -1,5 +1,51 @@
 # Current State
 
+## Actualizacion 2026-06-30: implementacion inicial `Como lo hace Winerim` y briefs La RVF
+
+## Hechos
+
+- Se implemento `src/components/landing/ConnectedCellarSection.tsx`.
+- La seccion se inserta en `src/components/landing/HomeBelowFold.tsx` justo despues de `HowItWorksSection`.
+- La seccion esta localizada en seis idiomas (`es`, `en`, `it`, `fr`, `de`, `pt`).
+- Mensaje central: compras/albaranes, TPV, stock, carta, margen y decisiones conectadas en un sistema operativo de bodega.
+- El copy evita claims absolutos sobre automatizacion:
+  - `cuando conectas tu TPV`;
+  - `con la integracion TPV activa`;
+  - nota de dependencia de integraciones activas y flujo operativo.
+- Se amplio `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md` con briefs ejecutables para:
+  - catar vino en 5 pasos;
+  - vocabulario de cata;
+  - maridajes basicos para restaurantes.
+- Validaciones:
+  - `npm run build` OK;
+  - QA local desktop/mobile en `http://127.0.0.1:5173/` OK;
+  - la seccion aparece visible, sin overflow y sin errores de consola en la prueba local.
+- El banner de cookies y el sticky CTA pueden cubrir parte baja de la captura local, pero no impiden que la seccion cargue ni producen overflow.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Primera ubicacion de `Como lo hace Winerim`: home.
+- Segunda fase: adaptar el bloque a producto (`Winerim Core`/`Winerim Supply`) y preparar version reducida para funnels.
+- Para la linea La RVF/Aprender vino, avanzar primero con 3 temas x 6 idiomas antes de publicar toda la lista.
+
+## Hipotesis
+
+- El bloque comercial deberia ayudar a vender mejor porque explica el flujo completo del producto, no solo una lista de funcionalidades.
+- Los tres briefs iniciales de `Aprender vino` son la forma mas segura de convertir la referencia editorial francesa en contenido propio, util y no copiado.
+
+## Contradicciones / dudas abiertas
+
+- Aun hay que confirmar el alcance tecnico exacto de integraciones TPV, albaranes y facturas antes de usar claims mas fuertes en producto o campanas.
+- La seccion esta validada localmente, pero no publicada en produccion hasta que Lovable haga publish desde `main`.
+
+## Tareas pendientes
+
+- Publicar frontend en Lovable y revalidar home en produccion.
+- Adaptar el bloque `Como lo hace Winerim` a pagina de producto y funnels.
+- Crear los articulos de la primera oleada de `Aprender vino` y publicarlos con `related_links`.
+- Actualizar el hub `Aprender vino` con enlaces a los spokes cuando existan.
+
 ## Actualizacion 2026-06-30: propuesta comercial `Como lo hace Winerim`
 
 ## Hechos

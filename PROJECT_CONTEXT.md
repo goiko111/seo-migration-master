@@ -2,6 +2,11 @@
 
 ## Hechos
 
+- El 2026-06-30 se implemento en la home la primera version de la seccion comercial `Como lo hace Winerim` mediante el componente `src/components/landing/ConnectedCellarSection.tsx`.
+- La seccion `Como lo hace Winerim` se inserta en `src/components/landing/HomeBelowFold.tsx` despues de `HowItWorksSection`, esta localizada en `es/en/it/fr/de/pt` y cubre compras/albaranes, TPV, stock, carta, margen y decisiones.
+- La seccion evita claims absolutos: usa formulas como `cuando conectas tu TPV`, `con la integracion TPV activa` y una nota sobre dependencia de integraciones/flujos operativos.
+- Validacion local de la seccion comercial: `npm run build` OK; QA Playwright en `http://127.0.0.1:5173/` desktop y mobile encontro la seccion visible, sin overflow y sin errores de consola.
+- El plan `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md` se amplio con briefs ejecutables para la primera oleada de `Aprender vino`: catar vino en 5 pasos, vocabulario de cata y maridajes basicos para restaurantes.
 - El 2026-06-30 el usuario aporto nuevos copys comerciales sobre stock/TPV, margenes, albaranes/facturas/compras, carta digital, direccion y sumiller para evaluar una nueva seccion de venta en la web.
 - La nueva linea comercial propuesta se centra en explicar `como lo hace Winerim`: subir albaranes/facturas, conectar TPV, mantener stock/carta actualizados y cruzar compras, ventas, rotacion y margen.
 - El 2026-06-30 se repitio la prueba productiva del formulario de `https://go.winerim.wine/` con run id `20260630154016` y lead `codex-qa-go-retest-20260630154016@winerim.com`.
@@ -132,6 +137,8 @@
 
 ## Decisiones
 
+- Ubicacion inicial de la seccion `Como lo hace Winerim`: home, justo despues del bloque `HowItWorksSection`; la pagina de producto y funnels quedan como segunda fase para adaptar la misma logica.
+- Para la inspiracion de La RVF, avanzar primero con 3 spokes x 6 idiomas, no con todos los temas a la vez, para mantener calidad, enlazado y revision editorial.
 - Tratar los copys nuevos como material para una seccion web de conversion, no solo como anuncios de Meta: debe reforzar homepage/producto y explicar el sistema operativo de bodega de Winerim.
 - Dejar el chat fuera de la QA actual hasta nueva orden; no probar ni modificar el widget de chat en esta tanda.
 - Considerar valida la conexion tecnica a CRM para los formularios probados cuando `send-lead-notification` devuelve `connect_forwarded:true`; la confirmacion final visual debe hacerse dentro de Winerim Connect/CRM.
@@ -169,6 +176,8 @@
 
 ## Hipótesis
 
+- La seccion `Como lo hace Winerim` deberia mejorar comprension y conversion porque transforma funciones dispersas en un flujo operativo: compra entra, venta sale, stock se alinea, carta se actualiza y margen se entiende.
+- Los briefs de la primera oleada de `Aprender vino` reducen el riesgo de publicar contenido generico y ayudan a mantener el enfoque B2B para equipos de sala.
 - Una seccion tipo `Como lo hace Winerim` o `Sabias que...` podria mejorar conversion porque aterriza el beneficio operativo: menos Excel, menos stock desactualizado, mas control de margen y carta viva conectada al TPV.
 - Conviene evitar promesas absolutas tipo `todo al momento` o `olvidate` si alguna integracion depende del TPV, proveedor o configuracion; mejor formularlo como `cuando conectas tu TPV` o `con la integracion activa`.
 - Los `404` genericos observados en consola durante QA productiva probablemente pertenecen a recursos/analitica no criticos, no al flujo de formularios ni al CRM.
@@ -197,6 +206,10 @@
 
 ## Tareas pendientes
 
+- Publicar desde Lovable el frontend que incluye `ConnectedCellarSection` y revalidar produccion humana en home desktop/mobile.
+- Adaptar la seccion `Como lo hace Winerim` a una pagina de producto, probablemente `Winerim Core` o `Winerim Supply`, y preparar version corta para funnels.
+- Crear la migracion SQL de la primera oleada `Aprender vino` con 3 temas x 6 idiomas y sus `related_links`, o preparar los articulos en el CMS si Lovable lo gestiona mejor.
+- Actualizar el hub `Aprender vino` para enlazar a los tres spokes cuando esten publicados.
 - Disenar e implementar una seccion comercial en la web basada en los copys nuevos, priorizando el mensaje: `Subes albaranes, conectas TPV y Winerim mantiene stock, carta y margen bajo control`.
 - Decidir ubicacion de la seccion: home, pagina de producto y/o landing de conversion; version recomendada inicial: home + producto, con version reducida en funnels.
 - Confirmar visualmente en Winerim Connect/CRM que el lead `codex-qa-go-retest-20260630154016@winerim.com` aparece correctamente identificado con UTMs `qa_20260630154016` y `fbclid=codex_qa_retest_20260630154016`.

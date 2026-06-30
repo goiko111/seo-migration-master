@@ -1,5 +1,41 @@
 # Next Steps
 
+## Actualizacion 2026-06-30: retomar tras implementacion inicial `Como lo hace Winerim`
+
+## Hechos
+
+- Implementado componente `ConnectedCellarSection` en home.
+- Ubicacion: despues de `HowItWorksSection`.
+- Localizacion: `es/en/it/fr/de/pt`.
+- Build local OK y QA local desktop/mobile OK.
+- Ampliado el plan de `Aprender vino` con briefs para los tres primeros spokes.
+- Cambio local ajeno en `src/components/WineListAnalyzerTool.tsx` sigue fuera de esta linea.
+
+## Tareas pendientes inmediatas
+
+1. Publicar frontend desde Lovable.
+2. Revalidar produccion:
+   - home desktop;
+   - home mobile;
+   - ausencia de overflow;
+   - seccion visible despues de `Como funciona`;
+   - CTAs a demo y analisis de carta.
+3. Adaptar `Como lo hace Winerim` a producto:
+   - candidato 1: `Winerim Supply`;
+   - candidato 2: `Winerim Core`;
+   - version corta para `go.winerim.wine` o futuras landings.
+4. Confirmar alcance tecnico real antes de claims mas fuertes:
+   - TPV;
+   - albaranes;
+   - facturas;
+   - actualizacion de carta;
+   - actualizacion de stock.
+5. Siguiente paso editorial La RVF/Aprender vino:
+   - crear migracion SQL o carga CMS para 3 temas x 6 idiomas;
+   - incluir `related_links`;
+   - actualizar hub `Aprender vino`;
+   - validar sitemap/prerender/Search Console.
+
 ## Actualizacion 2026-06-30: retomar seccion `Como lo hace Winerim`
 
 ## Hechos

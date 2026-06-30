@@ -76,6 +76,117 @@ Reason:
 - They link naturally to glosario, estilos and maridajes.
 - They are useful for both SEO and floor-team training.
 
+## Execution Briefs For Wave 1
+
+### 1. How to taste wine in 5 steps
+
+Primary goal:
+
+- Give restaurant teams a repeatable tasting method that is useful in service, not a technical sommelier exam.
+
+Core angle:
+
+- Taste with a commercial purpose: describe the wine clearly, recommend faster, and avoid empty phrases.
+
+Required structure:
+
+1. Quick answer: the five steps in plain language.
+2. Look: color, brightness and what not to overinterpret.
+3. Smell: fruit, flowers, spice, oak, age and faults.
+4. Taste: acidity, body, tannin, sweetness, alcohol and finish.
+5. Translate tasting into service language.
+6. Mistakes teams make when tasting wine.
+7. How Winerim helps turn tasting notes into usable recommendations.
+
+Required internal links:
+
+- `Aprender vino`
+- `Biblioteca del vino / glosario`
+- `Biblioteca del vino / estilos`
+- `Biblioteca del vino / guia-servicio`
+- `/decision-center/cursos`
+- `/demo`
+
+CTA:
+
+- `Forma a tu equipo para recomendar vino con confianza. Solicita una demo de Winerim.`
+
+### 2. Wine tasting vocabulary
+
+Primary goal:
+
+- Create a practical vocabulary page that helps floor teams explain wine without sounding vague or overtechnical.
+
+Core angle:
+
+- Fewer empty adjectives, more useful words that help a guest choose.
+
+Required structure:
+
+1. Quick answer: the wine words a restaurant team should know first.
+2. Aroma words: fruit, floral, herbal, spice, oak, ageing.
+3. Structure words: acidity, tannin, body, alcohol, sweetness.
+4. Texture and finish words.
+5. Words to avoid in service because they confuse guests.
+6. How to adapt vocabulary to menu and guest profile.
+7. How Winerim standardizes descriptions across the team.
+
+Required internal links:
+
+- `Aprender vino`
+- `Biblioteca del vino / glosario`
+- `Biblioteca del vino / estilos`
+- `Biblioteca del vino / uvas`
+- `/guias/como-formar-equipo-sala-para-vender-vino`
+- `/demo`
+
+CTA:
+
+- `Convierte el vocabulario de vino en ventas reales en sala. Pide una demo.`
+
+### 3. Basic food and wine pairing for restaurants
+
+Primary goal:
+
+- Give restaurants a practical pairing framework connected to sales and guest experience.
+
+Core angle:
+
+- Pairing is not decoration; it is a way to recommend faster, increase confidence and move the right references.
+
+Required structure:
+
+1. Quick answer: the basic pairing rules that work in service.
+2. Match weight: light dishes with lighter wines, richer dishes with fuller wines.
+3. Acidity, fat and salt.
+4. Tannin, protein and texture.
+5. Sweetness, spice and desserts.
+6. Pairing by dish categories: fish, meat, rice, cheese, Asian cuisine and desserts.
+7. How Winerim turns pairings into recommendations inside the digital wine list.
+
+Required internal links:
+
+- `Aprender vino`
+- `Biblioteca del vino / maridajes`
+- `Biblioteca del vino / estilos`
+- `/guias/como-crear-una-estrategia-de-maridaje-en-restauracion`
+- `/wine-pairing-generator`
+- `/demo`
+
+CTA:
+
+- `Haz que tu carta recomiende mejor en cada mesa. Solicita una demo de Winerim.`
+
+## Publishing Checklist For Each Wave
+
+1. Create SQL migration with localized article rows.
+2. Keep `article_group` shared per topic across languages.
+3. Add `related_links` in every row, not only markdown links in the body.
+4. Update `Aprender vino` hub once the articles exist.
+5. Validate human article routes and Googlebot/prerender samples.
+6. Re-submit `/sitemap.xml` after production publish.
+7. Request indexing only for the hub and the ES article URLs first, then monitor before requesting all localized variants.
+
 ## Article Requirements
 
 - Minimum `900` words per article.

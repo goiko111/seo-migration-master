@@ -2,6 +2,34 @@
 
 ## 2026-06-30
 
+### Implementacion inicial de `Como lo hace Winerim` y briefs de `Aprender vino`
+
+#### Hechos
+
+- Se creo `src/components/landing/ConnectedCellarSection.tsx` como seccion comercial nueva para la home.
+- `HomeBelowFold` carga la seccion despues de `HowItWorksSection`.
+- La seccion esta localizada en seis idiomas y cubre flujo de compras, TPV, stock, carta, margen y decisiones.
+- Se amplio `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md` con briefs ejecutables para los tres primeros spokes.
+- `npm run build` paso correctamente.
+- QA local desktop/mobile valido visibilidad de la seccion, ausencia de overflow y ausencia de errores de consola.
+
+#### Decisiones
+
+- Publicar primero el bloque comercial en home antes de llevarlo a producto o funnels.
+- Mantener lenguaje prudente sobre integraciones y automatizacion.
+- Ejecutar `Aprender vino` en oleadas pequenas: primero 3 temas x 6 idiomas.
+
+#### Hipotesis
+
+- El bloque `Como lo hace Winerim` aumenta claridad comercial porque muestra el proceso completo de bodega conectada.
+- Los briefs reducen el riesgo de contenido educativo generico y ayudan a mantener una voz propia frente a referencias tipo La RVF.
+
+#### Tareas pendientes
+
+- Publicar frontend desde Lovable y validar produccion.
+- Adaptar el bloque a producto/funnels.
+- Crear y publicar los articulos de la primera oleada de `Aprender vino`.
+
 ### Nueva seccion comercial sobre operativa conectada de Winerim
 
 #### Hechos
