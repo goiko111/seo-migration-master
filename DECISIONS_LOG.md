@@ -10,24 +10,25 @@
 - Produccion muestra logo real, `+2.000 restaurantes`, testimonios reales, OpenGraph correcto, `noindex, follow` y UTMs ocultos correctos.
 - Se envio un formulario test productivo con `codex-prod-test+winerim-meta@winerim.com`.
 - `contact_leads` respondio `201`, `send-lead-notification` respondio `200` y la landing redirigio a `/gracias?tipo=demo&origen=meta`.
-- Aparecio una llamada adicional a `submit-gastrofunnel` con respuesta `500`.
-- `submit-gastrofunnel` no aparece en el repo local, por lo que queda pendiente revisar integraciones externas, GTM, Lovable o Edge Functions no versionadas.
+- Aparecio una llamada adicional a `submit-gastrofunnel` con respuesta inicial `500`.
+- Tras integrar el commit remoto de Lovable `644db09`, `submit-gastrofunnel` aparece versionada en `supabase/functions/submit-gastrofunnel/index.ts`.
+- Una llamada diagnostica directa a `submit-gastrofunnel` respondio `200` con upstream `success:true`.
+- Una segunda prueba completa de formulario productivo respondio `contact_leads` `201`, `send-lead-notification` `200`, `submit-gastrofunnel` `200` y redirigio a gracias.
 
 #### Decisiones
 
 - No repetir DNS, Worker ni publish frontend para esta landing salvo cambios nuevos; la version reforzada ya esta publicada.
-- Concentrar el siguiente trabajo en confirmar CRM/Winerim Connect, revisar despliegue real de `send-lead-notification` y corregir `submit-gastrofunnel`.
+- Concentrar el siguiente trabajo en confirmar visualmente CRM/Winerim Connect y monitorizar las primeras campanas, no en reabrir frontend/DNS.
 
 #### Hipotesis
 
-- `submit-gastrofunnel` podria ser una integracion externa paralela o antigua que intenta enviar el lead al CRM aunque el flujo principal de Supabase/Edge Function funcione.
-- Si `send-lead-notification` no esta desplegada desde `34b6900`, puede estar devolviendo `200` sin exigir todavia el reenvio CRM obligatorio para Meta.
+- El `500` inicial de `submit-gastrofunnel` pudo deberse a una ventana de despliegue/secrets antes de que Lovable dejara la funcion estable; la revalidacion posterior ya devuelve `200`.
+- Si `send-lead-notification` no esta desplegada desde `34b6900`, `submit-gastrofunnel` funciona como envio paralelo al CRM mientras se confirma la version exacta de la notificacion.
 
 #### Tareas pendientes
 
-- Confirmar que el lead test aparece en Winerim Connect/CRM con UTMs y `fbclid`.
-- Revisar logs y existencia de `submit-gastrofunnel` en Lovable/Supabase.
-- Confirmar o desplegar `send-lead-notification` desde el commit `34b6900`.
+- Confirmar que los leads test aparecen en Winerim Connect/CRM con UTMs y `fbclid`.
+- Monitorizar `submit-gastrofunnel` durante las primeras campanas reales.
 
 ### Refuerzo landing Meta Demo: logo, testimonios y CRM
 

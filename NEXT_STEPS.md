@@ -6,7 +6,10 @@
 
 - La landing reforzada ya esta publicada en `https://go.winerim.wine/` y muestra logo, `+2.000 restaurantes`, OpenGraph correcto y los tres testimonios reales.
 - Se envio un formulario test en produccion; `contact_leads` respondio `201`, `send-lead-notification` respondio `200` y hubo redireccion a `/gracias?tipo=demo&origen=meta`.
-- En el mismo test aparecio una llamada adicional a `submit-gastrofunnel` con `HTTP 500`; no esta localizada en el repo, por lo que probablemente viene de una integracion externa o una Edge Function no versionada aqui.
+- En el primer test aparecio una llamada adicional a `submit-gastrofunnel` con `HTTP 500`; despues se integro el commit remoto de Lovable `644db09`, que versiona esa funcion.
+- Revalidacion posterior:
+  - llamada directa a `submit-gastrofunnel`: `200`, upstream `success:true`;
+  - segundo formulario productivo completo: `contact_leads` `201`, `send-lead-notification` `200`, `submit-gastrofunnel` `200`, redireccion a gracias.
 - La landing Meta Demo ya esta reforzada en codigo local:
   - logo real de Winerim en cabecera;
   - OpenGraph con `https://winerim.wine/og-image.png`;
@@ -22,13 +25,16 @@
 
 ## Tareas pendientes inmediatas
 
-1. Confirmar en Winerim Connect/CRM que el lead `codex-prod-test+winerim-meta@winerim.com` ha entrado con UTMs y `fbclid`.
-2. Revisar en Lovable/Supabase si la Edge Function `send-lead-notification` esta desplegada desde el commit `34b6900`; si no, desplegarla.
-3. Investigar `submit-gastrofunnel`:
-   - localizar si existe como Edge Function en Lovable/Supabase aunque no este en el repo;
-   - revisar logs del `500`;
-   - decidir si se corrige, se conecta correctamente al CRM o se elimina si es una integracion antigua duplicada.
-4. Si el test de CRM falla, revisar primero que `WINERIM_CONNECT_WEBHOOK_URL` este configurado en los secrets de `send-lead-notification`.
+1. Confirmar en Winerim Connect/CRM que entraron estos leads test con UTMs y `fbclid`:
+   - `codex-prod-test+winerim-meta@winerim.com`;
+   - `codex-diagnostic+winerim-gastrofunnel@winerim.com`;
+   - `codex-prod-retest+winerim-meta@winerim.com`.
+2. Revisar en Lovable/Supabase si la Edge Function `send-lead-notification` esta desplegada desde el commit `34b6900`; si no, desplegarla para mantener el envio CRM obligatorio dentro de esa funcion.
+3. Monitorizar durante las primeras campanas que `submit-gastrofunnel` siga devolviendo `200`.
+4. Si el CRM no muestra algun lead, revisar primero:
+   - `WINERIM_CONNECT_WEBHOOK_URL` en `send-lead-notification`;
+   - `WINERIM_API_KEY` y `WINERIM_ANON_KEY` en `submit-gastrofunnel`;
+   - logs del upstream `https://edwuzzmeunzgsrejlmwr.supabase.co/functions/v1/leads-upsert`.
 5. No repetir DNS, Worker ni frontend de la landing salvo cambios nuevos; `go.winerim.wine` ya sirve la version reforzada y mantiene `noindex, follow`.
 6. No mezclar con `src/components/WineListAnalyzerTool.tsx` salvo que el usuario pida retomar esa linea.
 

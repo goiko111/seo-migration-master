@@ -21,7 +21,17 @@
   - `send-lead-notification` respondio `200`;
   - la landing redirigio a `https://go.winerim.wine/gracias?tipo=demo&origen=meta`.
 - Durante el mismo test aparecio una llamada adicional a `submit-gastrofunnel` con `HTTP 500`.
-- `submit-gastrofunnel` no aparece en el repo local bajo `src`, `supabase`, `public` ni `index.html`; queda como posible integracion externa de GTM/Lovable/Supabase o funcion no versionada en este repo.
+- Tras integrar el commit remoto de Lovable `644db09`, `submit-gastrofunnel` si aparece versionado en `supabase/functions/submit-gastrofunnel/index.ts` y la landing incluye su llamada en `MetaDemoLanding`.
+- Una llamada diagnostica directa a `submit-gastrofunnel` con `codex-diagnostic+winerim-gastrofunnel@winerim.com` respondio `200` y upstream `success:true`.
+- Una segunda prueba completa de formulario productivo con `codex-prod-retest+winerim-meta@winerim.com` respondio:
+  - `contact_leads` `201`;
+  - `send-lead-notification` `200`;
+  - `submit-gastrofunnel` `200`;
+  - redireccion a `/gracias?tipo=demo&origen=meta`.
+- Validaciones tras integrar el commit remoto de Lovable:
+  - `npm run build` OK;
+  - `npx --yes deno-bin check supabase/functions/send-lead-notification/index.ts supabase/functions/submit-gastrofunnel/index.ts` OK;
+  - `git diff --check` OK.
 - El usuario confirmo que el claim correcto para campanas es `+2.000 restaurantes`; se sustituyo el stat anterior `+1.000 bodegas gestionadas` en `src/pages/MetaDemoLanding.tsx`.
 - La landing Meta Demo ahora muestra el logo real de Winerim desde `src/assets/winerim-logo.webp` en la cabecera.
 - El OpenGraph de la landing se fijo explicitamente a `https://winerim.wine/og-image.png`; el asset existe en `public/og-image.png` e incluye marca Winerim.
@@ -64,14 +74,13 @@
 ## Contradicciones / dudas abiertas
 
 - No queda abierta la contradiccion `+1.000 bodegas` vs `+2.000 restaurantes`: queda resuelta a favor de `+2.000 restaurantes`.
-- No se ha confirmado visualmente en Winerim Connect/CRM que el lead test haya entrado con UTMs y `fbclid`.
-- La llamada `submit-gastrofunnel` devuelve `500` aunque el flujo principal `contact_leads` + `send-lead-notification` devuelve exito; hay que investigar si ese endpoint forma parte del CRM real, una automatizacion paralela o una integracion antigua.
+- No se ha confirmado visualmente en Winerim Connect/CRM que los leads test hayan entrado con UTMs y `fbclid`, aunque `submit-gastrofunnel` ya devuelve upstream `success:true`.
+- La incidencia inicial de `submit-gastrofunnel` `500` queda superada por revalidacion posterior `200`; conviene monitorizarla en las primeras campanas reales.
 
 ## Tareas pendientes
 
-- Confirmar en Lovable/Supabase si `send-lead-notification` esta desplegada desde el commit `34b6900` o si sigue activa una version anterior.
-- Revisar la configuracion/funcion `submit-gastrofunnel`, porque devuelve `500` en produccion y no esta versionada en este repo.
-- Confirmar en Winerim Connect/CRM la entrada del lead test `codex-prod-test+winerim-meta@winerim.com` con UTMs y `fbclid`.
+- Confirmar en Winerim Connect/CRM la entrada de los leads test con UTMs y `fbclid`.
+- Monitorizar durante las primeras campanas que `submit-gastrofunnel` siga devolviendo `200`.
 
 ## Actualizacion 2026-06-30: landing Meta Demo para campañas
 
