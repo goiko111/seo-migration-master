@@ -5050,6 +5050,9 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Cambios no relacionados ya existentes y no tocados por esta sesión:
   - `index.html`;
   - `src/components/WineListAnalyzerTool.tsx`.
+- Se creó y pusheó `9e274d0 feat: harden lead uploads and plan wine learning spokes`.
+- El intento de deploy Supabase desde CLI falló por `LegacyPlatformAuthRequiredError`: falta `SUPABASE_ACCESS_TOKEN`.
+- Lovable sigue redirigiendo a login en el navegador integrado de Codex, por lo que no se pudo publicar el commit desde ahí.
 
 ## Decisiones
 
@@ -5068,6 +5071,7 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ## Tareas pendientes
 
 - Desplegar desde Lovable:
+  - commit `9e274d0`;
   - migración `20260630074507_harden_lead_storage_buckets.sql`;
   - frontend actualizado;
   - Edge Function `send-lead-notification`.

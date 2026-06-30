@@ -3691,7 +3691,7 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 
 ## Tareas pendientes listas para retomar
 
-1. Desplegar desde Lovable el commit con seguridad Storage:
+1. Desplegar desde Lovable el commit `9e274d0` con seguridad Storage:
    - migración `20260630074507_harden_lead_storage_buckets.sql`;
    - frontend actualizado;
    - Edge Function `send-lead-notification`.

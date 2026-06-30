@@ -3341,6 +3341,8 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Se actualizaron formularios para guardar referencias privadas `storage://bucket/path`.
 - Se actualizó `send-lead-notification` para generar URLs firmadas temporales desde service role.
 - Se creó `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md` con la primera arquitectura de spokes.
+- Se pusheó `9e274d0 feat: harden lead uploads and plan wine learning spokes`.
+- El deploy remoto queda pendiente porque CLI no tiene `SUPABASE_ACCESS_TOKEN` y Lovable no está autenticado en el navegador integrado.
 
 #### Decisiones
 
@@ -3357,7 +3359,7 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 #### Tareas pendientes
 
-- Desplegar la migración y Edge Function desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Desplegar commit `9e274d0` desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
 - Revalidar uploads y URLs firmadas tras despliegue.
 - Revisar Search Console en 48-72 horas.
 - Crear y publicar la primera ola de 3 spokes x 6 idiomas.
