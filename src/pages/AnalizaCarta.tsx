@@ -34,6 +34,8 @@ import type { SupportedLang, I18nMap } from "@/i18n/types";
 
 type L = SupportedLang; type LMap<T> = I18nMap<T>;
 
+const privateStorageRef = (bucket: string, path: string) => `storage://${bucket}/${path}`;
+
 /* ── i18n helpers ── */
 const i = <T,>(r: LMap<T>): LMap<T> => r;
 
@@ -647,7 +649,7 @@ const AnalizaCarta = () => {
     }
     const phoneFormatted = parsed.formatInternational();
 
-    let uploadedUrl: string | null = null;
+    let uploadedRef: string | null = null;
     const file = selectedFile || fileRef.current?.files?.[0];
     if (file) {
       const ext = file.name.split(".").pop();
@@ -661,11 +663,10 @@ const AnalizaCarta = () => {
         setSubmitting(false);
         return;
       }
-      const { data: urlData } = supabase.storage.from("lead-uploads").getPublicUrl(path);
-      uploadedUrl = urlData.publicUrl;
+      uploadedRef = privateStorageRef("lead-uploads", path);
     }
 
-    const finalLink = uploadedUrl || menuLink || null;
+    const finalLink = uploadedRef || menuLink || null;
     const leadData: Record<string, string | null> = {
       form_type: "analisis-carta",
       restaurant: restaurant || null,

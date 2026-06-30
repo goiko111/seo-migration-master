@@ -3322,3 +3322,42 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Reenviar sitemap en Search Console y solicitar indexacion selectiva de `/aprender-vino` si la herramienta lo permite.
 - Monitorizar indexacion de las seis rutas de `Aprender vino`.
 - Auditar/corregir buckets Supabase Storage `cartas-vinos` y `lead-uploads` en una tarea separada.
+
+### Ejecución de cinco pasos posteriores a `Aprender vino`
+
+#### Hechos
+
+- Search Console aceptó el reenvío de `/sitemap.xml`.
+- Search Console aceptó la solicitud de indexación manual de `https://winerim.wine/aprender-vino`.
+- La inspección de las seis rutas confirmó que todas están detectadas en `https://winerim.wine/sitemap.xml`.
+- Estado GSC tras solicitud:
+  - ES `/aprender-vino`: `Rastreada: actualmente sin indexar`, último rastreo `30 jun 2026, 9:41:46`, smartphone Googlebot, obtención correcta;
+  - EN/IT/FR/DE/PT: `Descubierta: actualmente sin indexar`.
+- Se confirmó el riesgo de Storage:
+  - `lead-uploads` y `cartas-vinos` estaban públicos;
+  - ambos tenían políticas de lectura pública;
+  - ambos recibían archivos de leads.
+- Se preparó la migración `20260630074507_harden_lead_storage_buckets.sql`.
+- Se actualizaron formularios para guardar referencias privadas `storage://bucket/path`.
+- Se actualizó `send-lead-notification` para generar URLs firmadas temporales desde service role.
+- Se creó `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md` con la primera arquitectura de spokes.
+
+#### Decisiones
+
+- Pedir indexación manual solo de la URL ES principal y monitorizar las otras cinco variantes.
+- Hacer privados los buckets con cartas de leads y reemplazar URLs públicas persistentes por URLs firmadas.
+- Mantener subida anónima únicamente para los buckets y tipos de archivo necesarios.
+- Priorizar tres spokes iniciales: cata en cinco pasos, vocabulario de cata y maridajes básicos.
+
+#### Hipótesis
+
+- El reenvío de sitemap y la solicitud ES deberían acelerar el primer rastreo del cluster.
+- Las variantes internacionales deberían avanzar cuando Google procese alternates y sitemap.
+- La solución con URL firmada mantiene utilidad operativa para ventas sin exposición pública permanente.
+
+#### Tareas pendientes
+
+- Desplegar la migración y Edge Function desde Lovable o con `SUPABASE_ACCESS_TOKEN`.
+- Revalidar uploads y URLs firmadas tras despliegue.
+- Revisar Search Console en 48-72 horas.
+- Crear y publicar la primera ola de 3 spokes x 6 idiomas.

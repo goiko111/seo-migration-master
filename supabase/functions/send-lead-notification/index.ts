@@ -7,6 +7,35 @@ const corsHeaders = {
 };
 
 const SITE = "https://winerim.wine";
+const SIGNED_URL_TTL_SECONDS = 60 * 60 * 24 * 14;
+const PRIVATE_STORAGE_PREFIX = "storage://";
+const PRIVATE_LEAD_BUCKETS = new Set(["lead-uploads", "cartas-vinos"]);
+
+async function resolvePrivateStorageLink(
+  supabase: any,
+  value?: string | null,
+): Promise<string | null> {
+  if (!value?.startsWith(PRIVATE_STORAGE_PREFIX)) return value || null;
+
+  const storagePath = value.slice(PRIVATE_STORAGE_PREFIX.length);
+  const slashIndex = storagePath.indexOf("/");
+  if (slashIndex <= 0) return null;
+
+  const bucket = storagePath.slice(0, slashIndex);
+  const path = storagePath.slice(slashIndex + 1);
+  if (!PRIVATE_LEAD_BUCKETS.has(bucket) || !path) return null;
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .createSignedUrl(path, SIGNED_URL_TTL_SECONDS);
+
+  if (error) {
+    console.error("Failed to create signed Storage URL:", error);
+    return null;
+  }
+
+  return data?.signedUrl || null;
+}
 
 /* ──────── Human-readable labels + download paths for every form_type ──────── */
 const FORM_LABELS: Record<string, { label: string; resource?: string; downloadPath?: string }> = {
@@ -105,6 +134,10 @@ Deno.serve(async (req) => {
 
     const lead = await req.json();
     const formInfo = FORM_LABELS[lead.form_type || ""] || { label: lead.form_type || "Desconocido" };
+    const resolvedMenuLink = await resolvePrivateStorageLink(
+      supabase,
+      lead.menu_link || lead.carta_url || null,
+    );
 
     // 1) Send internal notification to info@winerim.com via transactional email
     const notifId = crypto.randomUUID();
@@ -132,7 +165,7 @@ Deno.serve(async (req) => {
           has_sommelier: lead.has_sommelier,
           main_challenge: lead.main_challenge,
           message: lead.message,
-          menu_link: lead.menu_link,
+          menu_link: resolvedMenuLink,
           },
         },
       });
@@ -158,7 +191,7 @@ Deno.serve(async (req) => {
             has_sommelier: lead.has_sommelier || null,
             main_challenge: lead.main_challenge || null,
             message: lead.message || null,
-            menu_link: lead.menu_link || null,
+            menu_link: resolvedMenuLink || null,
             form_type: lead.form_type || null,
             form_label: formInfo.label,
             resource: formInfo.resource || null,
@@ -214,8 +247,9 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     console.error("send-lead-notification error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

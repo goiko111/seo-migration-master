@@ -4985,3 +4985,108 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Monitorizar rastreo/indexacion de las seis rutas de `Aprender vino`.
 - Auditar los buckets Supabase Storage `cartas-vinos` y `lead-uploads` en una tarea separada de seguridad.
 - Después de validar el hub, planificar spokes propios de iniciación: cata, vocabulario, tipos de vino, uvas para empezar, regiones para empezar, etiquetas, temperatura, copas, conservación, defectos, maridajes básicos y recomendación en sala.
+
+## Actualización 2026-06-30: ejecución de los cinco pasos posteriores a `Aprender vino`
+
+## Hechos
+
+- Se reenvió `/sitemap.xml` en Search Console.
+- Search Console confirmó: `Se ha enviado el sitemap correctamente`.
+- `/sitemap.xml` aparece con fecha de envío `30 jun 2026`; la última lectura visible seguía en `29 jun 2026` justo después del envío.
+- Se inspeccionó `https://winerim.wine/aprender-vino` en Search Console.
+- Estado inicial de `/aprender-vino`:
+  - `La URL no está en Google`;
+  - `La página no está indexada: Descubierta: actualmente sin indexar`;
+  - sitemap detectado: `https://winerim.wine/sitemap.xml`.
+- Se solicitó indexación manual de `/aprender-vino`.
+- Search Console aceptó la solicitud y mostró: `Se ha solicitado la indexación`.
+- Tras la solicitud, `/aprender-vino` cambió a:
+  - `La página no está indexada: Rastreada: actualmente sin indexar`;
+  - último rastreo: `30 jun 2026, 9:41:46`;
+  - rastreador: `Robot de Google para smartphones`;
+  - obtención de página: `Correcto`;
+  - sitemap detectado.
+- Se inspeccionaron las seis rutas de `Aprender vino` en Search Console:
+  - ES `/aprender-vino`: `Rastreada: actualmente sin indexar`;
+  - EN `/en/learn-wine`: `Descubierta: actualmente sin indexar`;
+  - IT `/it/imparare-il-vino`: `Descubierta: actualmente sin indexar`;
+  - FR `/fr/apprendre-le-vin`: `Descubierta: actualmente sin indexar`;
+  - DE `/de/wein-lernen`: `Descubierta: actualmente sin indexar`;
+  - PT `/pt/aprender-vinho`: `Descubierta: actualmente sin indexar`;
+  - las seis aparecen asociadas a `https://winerim.wine/sitemap.xml`.
+- Se auditó el código de Supabase Storage para los buckets `lead-uploads` y `cartas-vinos`.
+- Hallazgos de seguridad confirmados en migraciones previas:
+  - ambos buckets se crearon como `public = true`;
+  - existían políticas de lectura pública;
+  - existían políticas de subida anónima con restricciones mínimas.
+- Se preparó una migración nueva:
+  - `supabase/migrations/20260630074507_harden_lead_storage_buckets.sql`.
+- La migración preparada:
+  - marca `lead-uploads` y `cartas-vinos` como privados;
+  - fija límite de tamaño de `10 MB`;
+  - restringe MIME types;
+  - elimina políticas de lectura pública;
+  - conserva subida anónima/authenticated solo para tipos permitidos.
+- Se actualizó frontend:
+  - `src/pages/AnalizaCarta.tsx`;
+  - `src/components/ToolsLeadPopup.tsx`;
+  - los uploads guardan referencias `storage://bucket/path` en vez de URLs públicas persistentes.
+- Se actualizó `supabase/functions/send-lead-notification/index.ts`:
+  - convierte referencias `storage://...` en URLs firmadas temporales de 14 días usando service role;
+  - envía la URL firmada a notificación interna y Winerim Connect.
+- El deploy directo de Supabase sigue bloqueado localmente por falta de `SUPABASE_ACCESS_TOKEN`.
+- La validación local de lista de migraciones falló porque Supabase local no está arrancado en `127.0.0.1:54322`.
+- Verificaciones pasadas:
+  - `npm run build`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npx --yes deno-bin check supabase/functions/send-lead-notification/index.ts supabase/functions/sitemap/index.ts supabase/functions/prerender/index.ts`;
+  - `git diff --check`.
+- Se creó `src/seo/APRENDER_VINO_SPOKES_PLAN_2026-06-30.md`.
+- El plan de spokes incluye:
+  - 12 temas;
+  - slugs localizados ES/EN/IT/FR/DE/PT;
+  - primera ola recomendada de 3 temas x 6 idiomas;
+  - requisitos de enlazado interno, estructura SEO y posicionamiento LLM.
+- Cambios no relacionados ya existentes y no tocados por esta sesión:
+  - `index.html`;
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+## Decisiones
+
+- No solicitar indexación manual de las seis variantes de golpe; se pidió la URL ES principal y se monitorizó el resto para evitar gasto innecesario de cuota.
+- Mantener los uploads de leads funcionando, pero sin buckets públicos ni URLs públicas persistentes.
+- Resolver el acceso operativo a archivos de leads con URLs firmadas desde Edge Function, no desde el cliente público.
+- Publicar primero los spokes de `Aprender vino` como blog/guias con intención propia, no como entidades de `Biblioteca del vino`.
+
+## Hipótesis
+
+- Google debería rastrear las variantes internacionales al procesar sitemap, hreflang y enlazado desde el hub.
+- La URL ES puede pasar de `Rastreada: actualmente sin indexar` a indexada tras el recrawl, pero no conviene repetir solicitudes manuales.
+- La migración de buckets reducirá exposición de cartas privadas sin romper captación si Lovable despliega migración, frontend y Edge Function de forma conjunta.
+- La primera ola de spokes (`cata`, `vocabulario`, `maridajes básicos`) debería reforzar el hub y generar señales internas rápidas.
+
+## Tareas pendientes
+
+- Desplegar desde Lovable:
+  - migración `20260630074507_harden_lead_storage_buckets.sql`;
+  - frontend actualizado;
+  - Edge Function `send-lead-notification`.
+- Revalidar tras deploy:
+  - upload de archivo en `/analisis-carta`;
+  - upload de archivo en popup de herramientas;
+  - email interno con URL firmada;
+  - webhook Winerim Connect con URL firmada;
+  - URLs públicas antiguas de los buckets dejan de ser accesibles.
+- Revisar Search Console en 48-72 horas:
+  - `/aprender-vino`;
+  - `/en/learn-wine`;
+  - `/it/imparare-il-vino`;
+  - `/fr/apprendre-le-vin`;
+  - `/de/wein-lernen`;
+  - `/pt/aprender-vinho`.
+- Crear la migración de artículos para la primera ola:
+  - `como-catar-vino-en-cinco-pasos`;
+  - `vocabulario-de-cata-de-vino`;
+  - `maridajes-basicos-para-restaurantes`;
+  - con variantes EN/IT/FR/DE/PT adaptadas.
+- Actualizar `Aprender vino` para enlazar esos spokes cuando estén publicados.

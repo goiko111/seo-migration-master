@@ -3691,23 +3691,26 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 
 ## Tareas pendientes listas para retomar
 
-1. Reenviar `/sitemap.xml` en Search Console.
-2. Solicitar indexacion selectiva de `/aprender-vino` si Search Console lo permite.
-3. Monitorizar que las seis rutas de `Aprender vino` pasen a descubiertas/rastreadas/indexadas.
-4. Auditar buckets Supabase Storage `cartas-vinos` y `lead-uploads`:
-   - politicas RLS;
-   - exposicion publica;
-   - permisos de subida/lectura;
-   - caducidad o firmado de URLs;
-   - retencion de archivos.
-5. Preparar la primera tanda de spokes de `Aprender vino`:
-   - cómo catar vino;
-   - vocabulario de cata;
-   - tipos de vino;
-   - uvas para empezar;
-   - regiones para empezar;
-   - leer etiquetas;
-   - temperatura y copas;
-   - conservación y defectos;
-   - maridajes básicos;
-   - recomendación en sala.
+1. Desplegar desde Lovable el commit con seguridad Storage:
+   - migración `20260630074507_harden_lead_storage_buckets.sql`;
+   - frontend actualizado;
+   - Edge Function `send-lead-notification`.
+2. Revalidar seguridad Storage:
+   - `/analisis-carta` sube archivo correctamente;
+   - popup de herramientas sube archivo correctamente;
+   - email interno recibe URL firmada temporal;
+   - Winerim Connect recibe URL firmada temporal;
+   - URLs públicas persistentes de `lead-uploads` y `cartas-vinos` dejan de funcionar.
+3. Revisar Search Console en 48-72 horas:
+   - `/aprender-vino` pasa de `Rastreada: actualmente sin indexar` a indexada o mantiene motivo claro;
+   - EN/IT/FR/DE/PT pasan de `Descubierta` a rastreadas/indexadas.
+4. Crear la migración SQL de la primera ola de spokes:
+   - `como-catar-vino-en-cinco-pasos`;
+   - `vocabulario-de-cata-de-vino`;
+   - `maridajes-basicos-para-restaurantes`;
+   - variantes EN/IT/FR/DE/PT adaptadas.
+5. Cuando esos spokes estén publicados:
+   - enlazarlos desde `Aprender vino`;
+   - añadirlos a `llms.txt`/`llms-full.txt` si procede;
+   - reenviar sitemap;
+   - solicitar indexación selectiva solo para la URL principal de cada nueva ola.

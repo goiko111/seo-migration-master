@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { unlockFreemium } from "@/lib/freemium";
 
 const STORAGE_KEY = "tools_lead_popup_dismissed";
+const privateStorageRef = (bucket: string, path: string) => `storage://${bucket}/${path}`;
 
 const COPY: Record<string, {
   title: string;
@@ -242,8 +243,7 @@ const ToolsLeadPopup = () => {
         if (upErr) {
           console.error("Upload error:", upErr);
         } else {
-          const { data } = supabase.storage.from("cartas-vinos").getPublicUrl(path);
-          carta_url = data.publicUrl;
+          carta_url = privateStorageRef("cartas-vinos", path);
         }
       }
 
