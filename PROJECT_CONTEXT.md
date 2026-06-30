@@ -11,7 +11,10 @@
 - El 2026-06-30 se pusheo `43e1cae feat: add meta demo campaign landing` a `origin/main`.
 - El 2026-06-30 se desplego Cloudflare Worker `winerim-proxy` version `635e8855-8d39-4473-b37c-f3566653dd70`.
 - Falta publish Lovable del frontend para que `https://winerim.wine/meta-demo` renderice la landing real; ahora la ruta ya abre y es `noindex`, pero todavia muestra la home antigua.
-- Falta configuracion DNS/route de `go.winerim.wine`.
+- El 2026-06-30 se creo en Cloudflare el DNS `go.winerim.wine` como `A 185.158.133.1`, proxied, TTL Auto.
+- El 2026-06-30 se anadio la ruta Worker `go.winerim.wine/*` a `winerim-proxy`, manteniendo `winerim.wine/*`.
+- El 2026-06-30 se desplego Cloudflare Worker `winerim-proxy` version `e850fe30-c8de-4fef-b7da-5bce3ea11667` para aplicar `X-Robots-Tag: noindex, follow` a todo el host `go.winerim.wine`.
+- Validacion productiva de `go.winerim.wine`: DNS resuelve a Cloudflare, `HTTP 200`, `x-worker-branch: spa` y `x-robots-tag: noindex, follow`; todavia muestra la home antigua hasta que Lovable publique el frontend del commit `43e1cae` o posterior.
 - Contradiccion abierta: el contenido de landing usa `+1.000 bodegas gestionadas`, mientras creatividades mencionan `+2.000 restaurantes`; hay que confirmar si son metricas distintas o una esta desactualizada.
 - El 2026-06-29 se audito el estado de publicaciones y pendientes SEO/LLM: Supabase expone `440` articulos publicados y `/sitemap.xml` contiene `440` URLs de articulos dentro de `2.234` URLs totales.
 - El cluster de biblioteca del vino del 2026-06-01 esta publicado en seis idiomas, incluido en sitemap y validado en muestras como Googlebot con prerender, canonical, titulo y H1 especificos.
@@ -160,7 +163,7 @@
 
 ## Tareas pendientes
 
-- Publicar la landing Meta Demo desde Lovable en el commit `43e1cae` y configurar Cloudflare DNS/route para `go.winerim.wine/*`; el Worker de `/meta-demo` ya esta desplegado.
+- Publicar la landing Meta Demo desde Lovable en el commit `43e1cae` o posterior; DNS, route Worker y cabecera `noindex` de `go.winerim.wine` ya estan activos.
 - Validar en produccion `/meta-demo` y `go.winerim.wine/` con UTMs reales, noindex, ausencia de chat externo, lead creado, notificacion y eventos de conversion.
 - Confirmar y unificar el claim de prueba social `+1.000 bodegas` frente a `+2.000 restaurantes`.
 - Reemplazar los tres casos pendientes de la landing Meta Demo por testimonios reales o retirar esa seccion.

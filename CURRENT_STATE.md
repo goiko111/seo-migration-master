@@ -26,7 +26,11 @@
 - Se creo y pusheo a `origin/main` el commit `43e1cae feat: add meta demo campaign landing`.
 - Se desplego Cloudflare Worker `winerim-proxy` con version `635e8855-8d39-4473-b37c-f3566653dd70`.
 - Produccion ya reconoce `https://winerim.wine/meta-demo` con `HTTP 200` y `x-robots-tag: noindex, follow`, pero sigue renderizando la home antigua hasta que Lovable publique el frontend del commit `43e1cae`.
-- `go.winerim.wine` sigue sin DNS activo en la comprobacion local; la configuracion de subdominio queda pendiente en Cloudflare.
+- El 2026-06-30 se creo en Cloudflare el DNS `go.winerim.wine` como `A 185.158.133.1`, proxied, TTL Auto.
+- Se anadio la ruta Worker `go.winerim.wine/*` a `winerim-proxy`, manteniendo `winerim.wine/*`.
+- Se actualizo y desplego Cloudflare Worker `winerim-proxy` version `e850fe30-c8de-4fef-b7da-5bce3ea11667` para aplicar `X-Robots-Tag: noindex, follow` a todo el host `go.winerim.wine`.
+- Validacion productiva de `go.winerim.wine`: DNS resuelve a Cloudflare, `HTTP 200`, `x-worker-branch: spa` y `x-robots-tag: noindex, follow`.
+- `https://go.winerim.wine/` sigue renderizando la home antigua hasta que Lovable publique el frontend del commit `43e1cae` o posterior.
 - Siguen existiendo cambios locales previos en `src/components/WineListAnalyzerTool.tsx`; no se tocaron en esta tarea.
 
 ## Decisiones
@@ -51,11 +55,9 @@
 
 ## Tareas pendientes
 
-- Publicar el frontend desde Lovable para que `/meta-demo` muestre la landing real del commit `43e1cae`, no la home actual.
-- No hace falta volver a desplegar el Worker para `/meta-demo`: ya esta desplegado con version `635e8855-8d39-4473-b37c-f3566653dd70`, salvo que se cambie la configuracion de rutas de Cloudflare.
-- En Cloudflare, crear/enrutar `go.winerim.wine`:
-  - DNS proxied hacia el mismo origen/flujo que la web publica;
-  - Worker route `go.winerim.wine/*` hacia `winerim-proxy`.
+- Publicar el frontend desde Lovable para que `/meta-demo` y `go.winerim.wine/` muestren la landing real del commit `43e1cae`, no la home actual.
+- No hace falta volver a configurar DNS ni ruta Worker para `go.winerim.wine`: ya estan creados.
+- No hace falta volver a desplegar el Worker salvo nuevo cambio de codigo; la version activa para esta correccion es `e850fe30-c8de-4fef-b7da-5bce3ea11667`.
 - Validar produccion:
   - `https://winerim.wine/meta-demo` responde `200` y `noindex`;
   - `https://go.winerim.wine/` responde `200` y muestra la landing;

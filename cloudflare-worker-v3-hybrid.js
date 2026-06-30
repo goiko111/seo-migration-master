@@ -1438,6 +1438,9 @@ const STATIC_EXT = /\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp|a
 
 // ─── Helpers ───
 function isBot(ua) { return BOT_REGEX.test(ua || ''); }
+function isCampaignHost(hostname) {
+  return (hostname || '').toLowerCase() === 'go.winerim.wine';
+}
 function isLegacyUrl(path) {
   if (LEGACY_EXACT.has(path)) return true;
   return LEGACY_PREFIXES.some(p => path.startsWith(p));
@@ -1460,7 +1463,8 @@ function isKnownRoute(path) {
   return false;
 }
 
-function getXRobotsTag(path) {
+function getXRobotsTag(path, hostname = '') {
+  if (isCampaignHost(hostname)) return 'noindex, follow';
   if (NOINDEX_ROUTES.has(path)) return 'noindex, follow';
   if (PRIVATE_ROUTES.has(path)) return 'noindex, nofollow';
   return null; // let the page handle it
@@ -1487,6 +1491,7 @@ export default {
     const url = new URL(request.url);
     let path = url.pathname;
     const ua = request.headers.get('User-Agent') || '';
+    const hostname = url.hostname.toLowerCase();
 
     // ── 0. Static assets → pass through to origin directly ──
     if (STATIC_EXT.test(path)) {
@@ -1739,27 +1744,33 @@ export default {
     if (isBot(ua)) {
       const workerStaticHtml = renderWorkerStaticPrerender(path, env.SITE_URL || 'https://winerim.wine');
       if (workerStaticHtml) {
+        const robotsTag = getXRobotsTag(path, hostname);
+        const headers = {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          'X-Prerendered': 'true',
+          'X-Worker-Branch': 'worker-static-prerender',
+        };
+        if (robotsTag) headers['X-Robots-Tag'] = robotsTag;
         return new Response(workerStaticHtml, {
           status: 200,
-          headers: {
-            'Content-Type': 'text/html; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-            'X-Prerendered': 'true',
-            'X-Worker-Branch': 'worker-static-prerender',
-          },
+          headers,
         });
       }
 
       const workerDetailHtml = renderWorkerDetailPrerender(path, env.SITE_URL || 'https://winerim.wine');
       if (workerDetailHtml) {
+        const robotsTag = getXRobotsTag(path, hostname);
+        const headers = {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          'X-Prerendered': 'true',
+          'X-Worker-Branch': 'worker-detail-prerender',
+        };
+        if (robotsTag) headers['X-Robots-Tag'] = robotsTag;
         return new Response(workerDetailHtml, {
           status: 200,
-          headers: {
-            'Content-Type': 'text/html; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-            'X-Prerendered': 'true',
-            'X-Worker-Branch': 'worker-detail-prerender',
-          },
+          headers,
         });
       }
 
@@ -1776,7 +1787,7 @@ export default {
         const html = await res.text();
         const looksLikeHtml = /^\s*(?:<!doctype html|<html\b)/i.test(html);
         if (ct.includes('text/html') || looksLikeHtml) {
-          const robotsTag = getXRobotsTag(path);
+          const robotsTag = getXRobotsTag(path, hostname);
           const headers = {
             'Content-Type': 'text/html; charset=utf-8',
             'Cache-Control': 'public, max-age=3600, s-maxage=86400',
@@ -1793,7 +1804,7 @@ export default {
     }
 
     // ── 8. Proxy to SPA origin ──
-    const robotsTag = getXRobotsTag(path);
+    const robotsTag = getXRobotsTag(path, hostname);
     const extra = { 'X-Worker-Branch': isBot(ua) ? 'bot-fallback' : 'spa' };
     if (robotsTag) extra['X-Robots-Tag'] = robotsTag;
     return proxyToOrigin(request, env, path, url.search, extra);

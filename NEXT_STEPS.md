@@ -18,15 +18,16 @@
 - Commit publicado en GitHub: `43e1cae feat: add meta demo campaign landing`.
 - Cloudflare Worker desplegado: `winerim-proxy` version `635e8855-8d39-4473-b37c-f3566653dd70`.
 - `https://winerim.wine/meta-demo` ya responde `HTTP 200` y `noindex`, pero todavia renderiza la home antigua porque falta publicar el frontend desde Lovable.
-- Falta configurar DNS/ruta Worker para `go.winerim.wine`.
+- DNS creado: `go.winerim.wine` como `A 185.158.133.1`, proxied, TTL Auto.
+- Ruta Worker creada: `go.winerim.wine/*` asociada a `winerim-proxy`; `winerim.wine/*` se mantiene.
+- Cloudflare Worker redeployado con version `e850fe30-c8de-4fef-b7da-5bce3ea11667` para que todo `go.winerim.wine` sea `noindex, follow`.
+- `https://go.winerim.wine/` ya responde `HTTP 200` y `noindex`, pero todavia renderiza la home antigua porque falta publicar el frontend desde Lovable.
 
 ## Tareas pendientes inmediatas
 
 1. Publicar frontend desde Lovable para que `https://winerim.wine/meta-demo` muestre la landing real del commit `43e1cae`.
 2. No repetir deploy de Worker salvo cambio de ruta/DNS; `/meta-demo` ya esta incluido como `noindex` en produccion.
-3. Configurar `go.winerim.wine` en Cloudflare:
-   - DNS proxied hacia el mismo flujo/origen que Winerim;
-   - route `go.winerim.wine/*` asociada a `winerim-proxy`.
+3. No repetir configuracion de `go.winerim.wine`; DNS y route ya estan activos.
 4. Validar produccion tras el publish de Lovable:
    - `https://winerim.wine/meta-demo?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;
    - `https://go.winerim.wine/?utm_source=meta&utm_medium=paid_social&utm_campaign=test&utm_content=ad&utm_term=demo`;

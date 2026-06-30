@@ -19,7 +19,11 @@
 - Se creo y pusheo a `origin/main` el commit `43e1cae feat: add meta demo campaign landing`.
 - Se desplego Cloudflare Worker `winerim-proxy` con version `635e8855-8d39-4473-b37c-f3566653dd70`.
 - Produccion ya devuelve `HTTP 200` y `x-robots-tag: noindex, follow` en `https://winerim.wine/meta-demo`, pero aun renderiza la home antigua porque falta publicar el frontend en Lovable.
-- `go.winerim.wine` sigue pendiente de DNS/route en Cloudflare.
+- Se creo el DNS `go.winerim.wine` en Cloudflare como `A 185.158.133.1`, proxied, TTL Auto.
+- Se anadio la ruta Worker `go.winerim.wine/*` a `winerim-proxy`, manteniendo `winerim.wine/*`.
+- Se actualizo y desplego Cloudflare Worker `winerim-proxy` version `e850fe30-c8de-4fef-b7da-5bce3ea11667` para que todo el host `go.winerim.wine` reciba `X-Robots-Tag: noindex, follow`.
+- Validacion productiva: `go.winerim.wine` resuelve a Cloudflare, responde `HTTP 200`, pasa por `x-worker-branch: spa` y devuelve `x-robots-tag: noindex, follow`.
+- `go.winerim.wine` aun renderiza la home antigua porque falta publicar el frontend en Lovable.
 
 #### Decisiones
 
@@ -30,6 +34,8 @@
 - No publicar testimonios falsos ni placeholders literales; los espacios de casos pendientes se mantienen como pendientes de prueba real.
 - Evitar migracion de base de datos en esta fase y guardar UTMs en `message`; reevaluar si se necesita reporting avanzado por campana/anuncio.
 - Respetar consentimiento antes de cargar/disparar Meta Pixel.
+- Crear `go.winerim.wine` como registro `A` proxied a `185.158.133.1`, siguiendo el patron ya usado por `demo.winerim.wine`.
+- Aplicar `noindex, follow` por cabecera a todo el host `go.winerim.wine`, no solo a la ruta `/meta-demo`.
 
 #### Hipotesis
 
@@ -39,9 +45,9 @@
 
 #### Tareas pendientes
 
-- Publicar el frontend desde Lovable desde `origin/main` commit `43e1cae`.
-- No redeplegar Worker salvo cambio de ruta/DNS: `/meta-demo` ya esta cubierto por la version `635e8855-8d39-4473-b37c-f3566653dd70`.
-- Configurar DNS/Worker route de `go.winerim.wine/*`.
+- Publicar el frontend desde Lovable desde `origin/main` commit `43e1cae` o posterior.
+- No repetir DNS ni ruta Worker para `go.winerim.wine`; ya estan activos.
+- No redeplegar Worker salvo cambios nuevos; la version activa para `go` noindex es `e850fe30-c8de-4fef-b7da-5bce3ea11667`.
 - Validar produccion con UTMs reales y comprobar lead/notificacion.
 - Resolver la contradiccion de prueba social: `+1.000 bodegas gestionadas` frente a `+2.000 restaurantes`.
 - Conseguir tres testimonios reales antes de escalar presupuesto.
