@@ -1,5 +1,39 @@
 # Decisions Log
 
+## 2026-07-01
+
+### Primera oleada de articulos `Aprender vino`
+
+#### Hechos
+
+- Se preparo una migracion Supabase para publicar 18 articulos de `Aprender vino`.
+- La oleada cubre tres temas en seis idiomas:
+  - catar vino en cinco pasos;
+  - vocabulario de cata;
+  - maridajes basicos para restaurantes.
+- Se actualizo el hub `Aprender vino` para enlazar los tres spokes por idioma.
+- Se actualizaron prerender, Worker fallback, `llms.txt`, `llms-full.txt` y test SEO para exponer los nuevos enlaces.
+- Las validaciones locales de build, test SEO, Worker, Edge Functions y QA Playwright pasaron.
+
+#### Decisiones
+
+- Mantener los nuevos contenidos como articulos localizados, no como entidades de `Biblioteca del vino`.
+- Publicar por oleadas pequenas para mantener calidad editorial y control de indexacion.
+- Usar slugs localizados en ruta y sufijo de idioma en Supabase para las variantes internacionales.
+- El CTA de las tarjetas del hub debe ser de lectura de guia, no de exploracion de biblioteca.
+
+#### Hipotesis
+
+- Estos spokes reforzaran el hub `Aprender vino` para SEO convencional y LLMs porque crean enlaces, contenido extraible y rutas de aprendizaje claras.
+- La combinacion de cata, vocabulario y maridaje cubre intenciones iniciales utiles para restaurantes y equipos de sala.
+
+#### Tareas pendientes
+
+- Aplicar la migracion en Supabase/Lovable.
+- Publicar frontend y Edge Functions actualizadas.
+- Validar produccion y reenviar sitemap en Search Console.
+- Continuar con la segunda oleada editorial.
+
 ## 2026-06-30
 
 ### Implementacion inicial de `Como lo hace Winerim` y briefs de `Aprender vino`

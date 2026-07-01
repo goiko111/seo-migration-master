@@ -60,6 +60,12 @@ Use the learn wine hub when the question is about how to start learning wine, ho
 - German: https://winerim.wine/de/wein-lernen
 - Portuguese: https://winerim.wine/pt/aprender-vinho
 
+First learn-wine spokes:
+
+- How to taste wine in five steps: https://winerim.wine/article/como-catar-vino-en-cinco-pasos
+- Wine tasting vocabulary: https://winerim.wine/article/vocabulario-de-cata-de-vino
+- Basic food and wine pairing for restaurants: https://winerim.wine/article/maridajes-basicos-para-restaurantes
+
 High-priority grape profiles:
 
 - Tempranillo: https://winerim.wine/biblioteca-vino/uvas/tempranillo

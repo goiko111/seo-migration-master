@@ -61,6 +61,10 @@ interface LearnWineCopy {
   sectionTitle: string;
   sectionIntro: string;
   steps: LearningStep[];
+  articlesTitle: string;
+  articlesIntro: string;
+  articleCta: string;
+  articleLinks: { title: string; description: string; path: string }[];
   methodTitle: string;
   methodIntro: string;
   method: { title: string; text: string }[];
@@ -129,6 +133,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         icon: ClipboardCheck,
       },
     ],
+    articlesTitle: "Primeras guías para empezar",
+    articlesIntro:
+      "Tres piezas prácticas para pasar de la teoría a conversación real en sala: catar, describir y recomendar por plato.",
+    articleCta: "Leer guía",
+    articleLinks: [
+      {
+        title: "Cómo catar vino en cinco pasos",
+        description: "Un método repetible para mirar, oler, probar y traducir el vino a una frase útil para el cliente.",
+        path: "/article/como-catar-vino-en-cinco-pasos",
+      },
+      {
+        title: "Vocabulario de cata de vino",
+        description: "Las palabras esenciales para describir aroma, estructura, textura y final sin sonar vacío.",
+        path: "/article/vocabulario-de-cata-de-vino",
+      },
+      {
+        title: "Maridajes básicos para restaurantes",
+        description: "Reglas simples para recomendar por pescado, carne, arroces, quesos, cocina asiática y postres.",
+        path: "/article/maridajes-basicos-para-restaurantes",
+      },
+    ],
     methodTitle: "Método Winerim para aprender vino en restauración",
     methodIntro:
       "No se trata de memorizar enciclopedias. Se trata de que cada persona de sala pueda responder tres preguntas: qué es, con qué va y por qué merece la pena.",
@@ -174,6 +199,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
       { title: "Learn grapes and regions", description: "The varieties and regions that appear most often on restaurant wine lists, with their commercial role.", outcome: "Outcome: every reference is understood by function, not just by name.", esPath: "/biblioteca-vino/uvas", icon: Grape },
       { title: "Recommend by food", description: "Core pairings for fish, meat, rice, Asian cuisine, cheese and desserts.", outcome: "Outcome: faster recommendations that lift ticket and experience.", esPath: "/biblioteca-vino/maridajes", icon: Utensils },
       { title: "Serve and decide better", description: "Temperature, glassware, pours, by-the-glass strategy, rotation, margin and monthly review.", outcome: "Outcome: knowledge that affects sales, stock and profitability.", esPath: "/biblioteca-vino/guia-servicio", icon: ClipboardCheck },
+    ],
+    articlesTitle: "First guides to start with",
+    articlesIntro:
+      "Three practical pieces that turn wine learning into floor conversations: tasting, describing and recommending by dish.",
+    articleCta: "Read guide",
+    articleLinks: [
+      {
+        title: "How to taste wine in five steps",
+        description: "A repeatable method for looking, smelling, tasting and turning the wine into guest language.",
+        path: "/en/article/how-to-taste-wine-in-five-steps",
+      },
+      {
+        title: "Wine tasting vocabulary",
+        description: "The essential words for aroma, structure, texture and finish without empty adjectives.",
+        path: "/en/article/wine-tasting-vocabulary",
+      },
+      {
+        title: "Basic food and wine pairing for restaurants",
+        description: "Simple rules for recommending by fish, meat, rice, cheese, Asian cuisine and desserts.",
+        path: "/en/article/basic-food-and-wine-pairing-for-restaurants",
+      },
     ],
     methodTitle: "The Winerim method for wine learning in hospitality",
     methodIntro:
@@ -221,6 +267,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
       { title: "Consigliare col cibo", description: "Abbinamenti base per pesce, carne, riso, cucina asiatica, formaggi e dessert.", outcome: "Risultato: raccomandazioni rapide che migliorano ticket ed esperienza.", esPath: "/biblioteca-vino/maridajes", icon: Utensils },
       { title: "Servire e decidere meglio", description: "Temperatura, calice, dosi, vino al calice, rotazione, margine e revisione mensile.", outcome: "Risultato: conoscenza che impatta vendite, stock e redditività.", esPath: "/biblioteca-vino/guia-servicio", icon: ClipboardCheck },
     ],
+    articlesTitle: "Prime guide per iniziare",
+    articlesIntro:
+      "Tre contenuti pratici per portare l'apprendimento nella conversazione in sala: degustare, descrivere e consigliare con il piatto.",
+    articleCta: "Leggi la guida",
+    articleLinks: [
+      {
+        title: "Come degustare il vino in cinque passaggi",
+        description: "Un metodo ripetibile per osservare, annusare, assaggiare e tradurre il vino per il cliente.",
+        path: "/it/article/come-degustare-il-vino-in-cinque-passaggi",
+      },
+      {
+        title: "Vocabolario di degustazione del vino",
+        description: "Le parole essenziali per aroma, struttura, texture e finale senza frasi vuote.",
+        path: "/it/article/vocabolario-degustazione-vino",
+      },
+      {
+        title: "Abbinamenti base cibo-vino per ristoranti",
+        description: "Regole semplici per consigliare con pesce, carne, riso, formaggi, cucina asiatica e dessert.",
+        path: "/it/article/abbinamenti-base-cibo-vino-per-ristoranti",
+      },
+    ],
     methodTitle: "Il metodo Winerim per imparare il vino nella ristorazione",
     methodIntro:
       "Non si tratta di memorizzare enciclopedie. Ogni persona di sala deve rispondere a tre domande: cos'è, con cosa si abbina e perché vale la pena sceglierlo.",
@@ -266,6 +333,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
       { title: "Cépages et régions", description: "Les variétés et régions les plus présentes en restauration, avec leur rôle commercial.", outcome: "Résultat : chaque référence se comprend par sa fonction.", esPath: "/biblioteca-vino/uvas", icon: Grape },
       { title: "Recommander avec les plats", description: "Accords de base pour poisson, viande, riz, cuisine asiatique, fromages et desserts.", outcome: "Résultat : recommandations rapides qui améliorent ticket et expérience.", esPath: "/biblioteca-vino/maridajes", icon: Utensils },
       { title: "Servir et mieux décider", description: "Température, verre, doses, vin au verre, rotation, marge et revue mensuelle.", outcome: "Résultat : une connaissance qui touche ventes, stock et rentabilité.", esPath: "/biblioteca-vino/guia-servicio", icon: ClipboardCheck },
+    ],
+    articlesTitle: "Premiers guides pour commencer",
+    articlesIntro:
+      "Trois contenus pratiques pour passer de l'apprentissage à la conversation en salle : déguster, décrire et recommander avec les plats.",
+    articleCta: "Lire le guide",
+    articleLinks: [
+      {
+        title: "Comment déguster le vin en cinq étapes",
+        description: "Une méthode répétable pour observer, sentir, goûter et traduire le vin pour le client.",
+        path: "/fr/article/comment-deguster-le-vin-en-cinq-etapes",
+      },
+      {
+        title: "Vocabulaire de dégustation du vin",
+        description: "Les mots essentiels pour parler d'arômes, structure, texture et finale clairement.",
+        path: "/fr/article/vocabulaire-de-degustation-du-vin",
+      },
+      {
+        title: "Accords mets-vins de base pour restaurants",
+        description: "Des règles simples pour recommander avec poisson, viande, riz, fromages, cuisine asiatique et desserts.",
+        path: "/fr/article/accords-mets-vins-de-base-pour-restaurants",
+      },
     ],
     methodTitle: "La méthode Winerim pour apprendre le vin en restauration",
     methodIntro:
@@ -313,6 +401,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
       { title: "Zum Essen empfehlen", description: "Basis-Pairings für Fisch, Fleisch, Reisgerichte, asiatische Küche, Käse und Desserts.", outcome: "Ergebnis: schnellere Empfehlungen für mehr Ticket und Erlebnis.", esPath: "/biblioteca-vino/maridajes", icon: Utensils },
       { title: "Besser servieren und entscheiden", description: "Temperatur, Glas, Ausschankmenge, Glaswein, Rotation, Marge und Monatsreview.", outcome: "Ergebnis: Wissen, das Verkauf, Bestand und Profitabilität beeinflusst.", esPath: "/biblioteca-vino/guia-servicio", icon: ClipboardCheck },
     ],
+    articlesTitle: "Erste Leitfäden für den Einstieg",
+    articlesIntro:
+      "Drei praktische Inhalte, die Weinwissen in Servicegespräche übersetzen: verkosten, beschreiben und zum Gericht empfehlen.",
+    articleCta: "Leitfaden lesen",
+    articleLinks: [
+      {
+        title: "Wein in fünf Schritten verkosten",
+        description: "Eine wiederholbare Methode, um Wein zu sehen, zu riechen, zu schmecken und verständlich zu erklären.",
+        path: "/de/article/wein-verkosten-in-fuenf-schritten",
+      },
+      {
+        title: "Weinverkostungs-Vokabular",
+        description: "Die wichtigsten Wörter für Aroma, Struktur, Textur und Abgang ohne leere Floskeln.",
+        path: "/de/article/weinverkostung-vokabular",
+      },
+      {
+        title: "Einfache Food-Wine-Pairings für Restaurants",
+        description: "Einfache Regeln für Empfehlungen zu Fisch, Fleisch, Reisgerichten, Käse, asiatischer Küche und Desserts.",
+        path: "/de/article/einfache-food-wine-pairings-fuer-restaurants",
+      },
+    ],
     methodTitle: "Die Winerim-Methode für Weinlernen in der Gastronomie",
     methodIntro:
       "Es geht nicht darum, Lexika auswendig zu lernen. Jede Person im Service soll drei Fragen beantworten: was ist es, wozu passt es und warum lohnt es sich.",
@@ -358,6 +467,27 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
       { title: "Castas e regiões", description: "As variedades e regiões mais presentes nas cartas de restaurante, com o seu papel comercial.", outcome: "Resultado: cada referência é entendida pela sua função.", esPath: "/biblioteca-vino/uvas", icon: Grape },
       { title: "Recomendar por comida", description: "Harmonizações base para peixe, carne, arroz, cozinha asiática, queijos e sobremesas.", outcome: "Resultado: recomendações rápidas que elevam ticket e experiência.", esPath: "/biblioteca-vino/maridajes", icon: Utensils },
       { title: "Servir e decidir melhor", description: "Temperatura, copo, doses, vinho a copo, rotação, margem e revisão mensal.", outcome: "Resultado: conhecimento que afeta vendas, stock e rentabilidade.", esPath: "/biblioteca-vino/guia-servicio", icon: ClipboardCheck },
+    ],
+    articlesTitle: "Primeiros guias para começar",
+    articlesIntro:
+      "Três conteúdos práticos para transformar aprendizagem em conversa de sala: provar, descrever e recomendar com o prato.",
+    articleCta: "Ler guia",
+    articleLinks: [
+      {
+        title: "Como provar vinho em cinco passos",
+        description: "Um método repetível para observar, cheirar, provar e traduzir o vinho para o cliente.",
+        path: "/pt/article/como-provar-vinho-em-cinco-passos",
+      },
+      {
+        title: "Vocabulário de prova de vinho",
+        description: "As palavras essenciais para aroma, estrutura, textura e final sem frases vazias.",
+        path: "/pt/article/vocabulario-de-prova-de-vinho",
+      },
+      {
+        title: "Harmonizações básicas para restaurantes",
+        description: "Regras simples para recomendar com peixe, carne, arroz, queijo, cozinha asiática e sobremesas.",
+        path: "/pt/article/harmonizacoes-basicas-para-restaurantes",
+      },
     ],
     methodTitle: "O método Winerim para aprender vinho na restauração",
     methodIntro:
@@ -415,6 +545,16 @@ const AprenderVino = () => {
           position: index + 1,
           name: step.title,
           url: `${CANONICAL_DOMAIN}${getWineLibraryPath(lang, step.esPath)}`,
+        })),
+      },
+      {
+        "@type": "ItemList",
+        name: copy.articlesTitle,
+        itemListElement: copy.articleLinks.map((article, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: article.title,
+          url: `${CANONICAL_DOMAIN}${article.path}`,
         })),
       },
     ],
@@ -543,6 +683,36 @@ const AprenderVino = () => {
 
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <ScrollReveal>
+            <div className="max-w-3xl mb-10">
+              <div className="flex items-center gap-3 mb-4">
+                <BookOpen size={20} className="text-wine" />
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">{copy.articlesTitle}</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">{copy.articlesIntro}</p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-16">
+            {copy.articleLinks.map((article, index) => (
+              <ScrollReveal key={article.path} delay={index * 0.06}>
+                <Link
+                  to={article.path}
+                  className="group block h-full border border-border bg-gradient-card rounded-xl p-6 hover:border-wine/40 hover:bg-wine/5 transition-all"
+                >
+                  <p className="text-xs font-semibold text-wine mb-3">{String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-wine transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{article.description}</p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-wine">
+                    {copy.articleCta} <ArrowRight size={15} />
+                  </span>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
             <ScrollReveal>
               <div className="sticky top-28">

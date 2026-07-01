@@ -1,5 +1,65 @@
 # Current State
 
+## Actualizacion 2026-07-01: primera oleada de articulos `Aprender vino`
+
+## Hechos
+
+- El usuario confirmo que el deploy anterior ya estaba publicado y pidio continuar con `Aprender vino`.
+- Se creo la migracion `supabase/migrations/20260701064536_add_learn_wine_first_spokes.sql`.
+- La migracion prepara 18 articulos publicados en `public.articles`: 3 temas x 6 idiomas.
+- Temas incluidos:
+  - catar vino en cinco pasos;
+  - vocabulario de cata de vino;
+  - maridajes basicos para restaurantes.
+- Cada articulo incluye `article_group`, `lang`, `related_links`, categoria `Aprender vino`, imagen, cuerpo markdown, FAQ y enlaces a hub, biblioteca y conversion.
+- Los slugs internacionales siguen el patron de la app: ruta limpia `/{lang}/article/{slug}` y fila DB con sufijo `_{lang}`.
+- `src/pages/AprenderVino.tsx` ahora muestra una seccion de primeros spokes con 3 tarjetas localizadas y CTA de lectura.
+- El schema del hub incorpora un `ItemList` con los articulos de la oleada.
+- Se sincronizaron enlaces en:
+  - `supabase/functions/prerender/index.ts`;
+  - `cloudflare-worker-v3-hybrid.js`;
+  - `public/llms.txt`;
+  - `public/llms-full.txt`;
+  - `src/test/wine-library-seo-surface.test.ts`.
+- Validaciones completadas:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` OK;
+  - `npm run build` OK;
+  - `node --check cloudflare-worker-v3-hybrid.js` OK;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts` OK;
+  - `git diff --check` OK.
+- QA Playwright local:
+  - `/aprender-vino`, `/en/learn-wine` y `/pt/aprender-vinho` muestran 3 enlaces de articulo;
+  - no hay overflow en desktop/mobile;
+  - CTA de cards corregido a `Leer guia`/equivalentes.
+- El servidor local de Vite quedo levantado temporalmente en `http://127.0.0.1:5173/` durante QA.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Publicar la primera oleada de `Aprender vino` como articulos localizados, no como nuevas fichas de Biblioteca del vino.
+- Mantener `Aprender vino` como capa guiada y Biblioteca del vino como capa de referencia/entidades.
+- Priorizar primero 3 temas x 6 idiomas antes de avanzar con el resto del plan editorial.
+- Exponer enlaces a los spokes tambien en prerender, Worker y `llms` para SEO/LLM, no solo en React.
+
+## Hipotesis
+
+- La oleada deberia mejorar el rastreo e indexabilidad del hub porque convierte `Aprender vino` en una arquitectura hub-and-spoke real.
+- Los tres temas iniciales son buenos puntos de entrada para equipos de sala porque conectan aprendizaje con recomendacion, maridaje y venta.
+
+## Contradicciones / dudas abiertas
+
+- `supabase migration list --local` no pudo validar contra base local porque Postgres local no esta arrancado en `127.0.0.1:54322`.
+- Los articulos no estaran visibles en produccion hasta que Lovable/Supabase aplique la migracion en la base real.
+- Durante QA local aparecio un error conocido de Instagram feed/404 en consola desktop; no bloquea el hub ni los enlaces nuevos.
+
+## Tareas pendientes
+
+- Aplicar la migracion en Supabase desde Lovable o flujo operativo disponible.
+- Publicar frontend desde Lovable y desplegar `sitemap`/`prerender` actualizados.
+- Revalidar produccion humana y Googlebot para hub y articulos.
+- Reenviar sitemap y solicitar indexacion selectiva de las URLs ES.
+- Preparar segunda oleada: tipos de vino, uvas para empezar y regiones para empezar.
+
 ## Actualizacion 2026-06-30: implementacion inicial `Como lo hace Winerim` y briefs La RVF
 
 ## Hechos

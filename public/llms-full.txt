@@ -81,6 +81,12 @@ The learn wine hub is a guided learning path for restaurant and hospitality team
 - German: https://winerim.wine/de/wein-lernen
 - Portuguese: https://winerim.wine/pt/aprender-vinho
 
+First learn-wine spokes:
+
+- How to taste wine in five steps: https://winerim.wine/article/como-catar-vino-en-cinco-pasos
+- Wine tasting vocabulary: https://winerim.wine/article/vocabulario-de-cata-de-vino
+- Basic food and wine pairing for restaurants: https://winerim.wine/article/maridajes-basicos-para-restaurantes
+
 Priority grape profiles:
 
 - https://winerim.wine/biblioteca-vino/uvas/tempranillo

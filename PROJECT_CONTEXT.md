@@ -2,6 +2,15 @@
 
 ## Hechos
 
+- El 2026-07-01 se preparo la primera oleada publicable de spokes de `Aprender vino` mediante la migracion `supabase/migrations/20260701064536_add_learn_wine_first_spokes.sql`.
+- La migracion de `Aprender vino` crea/actualiza 18 articulos: 3 temas x 6 idiomas (`es/en/it/fr/de/pt`) para cata en cinco pasos, vocabulario de cata y maridajes basicos para restaurantes.
+- Los articulos usan slugs localizados con sufijo de idioma en Supabase para variantes internacionales, siguiendo el patron de rutas `/{lang}/article/{slug}` sin salto a espanol.
+- El hub `src/pages/AprenderVino.tsx` enlaza ahora esos tres spokes por idioma en una seccion `Primeras guias para empezar` y expone un `ItemList` adicional en schema.
+- Se sincronizaron enlaces de los nuevos spokes en `supabase/functions/prerender/index.ts`, `cloudflare-worker-v3-hybrid.js`, `public/llms.txt` y `public/llms-full.txt`.
+- Validaciones locales del 2026-07-01 para `Aprender vino`: `npm run test -- --run src/test/wine-library-seo-surface.test.ts` OK, `npm run build` OK, `node --check cloudflare-worker-v3-hybrid.js` OK, `deno check` de `prerender`/`sitemap` OK y `git diff --check` OK.
+- QA Playwright local en `http://127.0.0.1:5173/` valido que `/aprender-vino`, `/en/learn-wine` y `/pt/aprender-vinho` muestran 3 enlaces de articulo, sin overflow; el CTA de tarjetas quedo corregido a `Leer guia`/equivalentes.
+- Durante la QA local del hub aparecio el error ya conocido del feed de Instagram/404 en desktop; no afecta al bloque de `Aprender vino`, pero queda como deuda menor de consola.
+- `supabase migration list --local` no pudo ejecutarse porque la base local no esta arrancada en `127.0.0.1:54322`; la migracion queda validada por inspeccion, conteo de filas y coherencia de slugs, pendiente de aplicacion real en Supabase/Lovable.
 - El 2026-06-30 se implemento en la home la primera version de la seccion comercial `Como lo hace Winerim` mediante el componente `src/components/landing/ConnectedCellarSection.tsx`.
 - La seccion `Como lo hace Winerim` se inserta en `src/components/landing/HomeBelowFold.tsx` despues de `HowItWorksSection`, esta localizada en `es/en/it/fr/de/pt` y cubre compras/albaranes, TPV, stock, carta, margen y decisiones.
 - La seccion evita claims absolutos: usa formulas como `cuando conectas tu TPV`, `con la integracion TPV activa` y una nota sobre dependencia de integraciones/flujos operativos.
@@ -137,6 +146,10 @@
 
 ## Decisiones
 
+- La primera oleada real de `Aprender vino` se publica como articulos de blog localizados, no como entidades nuevas de `Biblioteca del vino`.
+- Los tres primeros spokes priorizados son: catar vino en cinco pasos, vocabulario de cata y maridajes basicos para restaurantes.
+- En el hub `Aprender vino`, las tarjetas de spokes deben usar CTA de lectura (`Leer guia` y equivalentes), no el CTA general de biblioteca.
+- Para bots y LLMs, el hub debe exponer enlaces a los spokes tanto en React/schema como en prerender, Worker fallback y archivos `llms`.
 - Ubicacion inicial de la seccion `Como lo hace Winerim`: home, justo despues del bloque `HowItWorksSection`; la pagina de producto y funnels quedan como segunda fase para adaptar la misma logica.
 - Para la inspiracion de La RVF, avanzar primero con 3 spokes x 6 idiomas, no con todos los temas a la vez, para mantener calidad, enlazado y revision editorial.
 - Tratar los copys nuevos como material para una seccion web de conversion, no solo como anuncios de Meta: debe reforzar homepage/producto y explicar el sistema operativo de bodega de Winerim.
@@ -176,6 +189,9 @@
 
 ## Hipótesis
 
+- Publicar los primeros spokes de `Aprender vino` deberia mejorar enlazado interno, cobertura SEO informacional y recuperabilidad por LLMs porque convierte el hub en una ruta guiada con contenido profundo.
+- La primera oleada puede ayudar a restaurantes y hoteles a formar equipo de sala con lenguaje practico, diferenciando Winerim de medios editoriales generalistas de vino.
+- Los articulos entraran en sitemap automaticamente cuando la migracion este aplicada y la Edge Function `sitemap` lea las filas publicadas de `articles`.
 - La seccion `Como lo hace Winerim` deberia mejorar comprension y conversion porque transforma funciones dispersas en un flujo operativo: compra entra, venta sale, stock se alinea, carta se actualiza y margen se entiende.
 - Los briefs de la primera oleada de `Aprender vino` reducen el riesgo de publicar contenido generico y ayudan a mantener el enfoque B2B para equipos de sala.
 - Una seccion tipo `Como lo hace Winerim` o `Sabias que...` podria mejorar conversion porque aterriza el beneficio operativo: menos Excel, menos stock desactualizado, mas control de margen y carta viva conectada al TPV.
@@ -206,6 +222,11 @@
 
 ## Tareas pendientes
 
+- Aplicar/desplegar desde Lovable/Supabase la migracion `20260701064536_add_learn_wine_first_spokes.sql` para que las 18 filas de articulos existan en produccion.
+- Publicar desde Lovable el frontend que enlaza los nuevos spokes en `Aprender vino` y desplegar las Edge Functions `sitemap`/`prerender` actualizadas.
+- Validar produccion tras deploy: hub humano, 18 rutas de articulos, sitemap con articulos, Googlebot/prerender para una muestra ES/EN/PT y ausencia de salto de idioma.
+- Reenviar `/sitemap.xml` en Search Console y solicitar indexacion primero para `/aprender-vino` y las tres URLs ES de la oleada.
+- Preparar la segunda oleada de `Aprender vino`: tipos de vino, uvas para empezar y regiones para empezar.
 - Publicar desde Lovable el frontend que incluye `ConnectedCellarSection` y revalidar produccion humana en home desktop/mobile.
 - Adaptar la seccion `Como lo hace Winerim` a una pagina de producto, probablemente `Winerim Core` o `Winerim Supply`, y preparar version corta para funnels.
 - Crear la migracion SQL de la primera oleada `Aprender vino` con 3 temas x 6 idiomas y sus `related_links`, o preparar los articulos en el CMS si Lovable lo gestiona mejor.

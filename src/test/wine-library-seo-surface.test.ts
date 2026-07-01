@@ -267,6 +267,9 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("'/pt/aprender-vinho'");
     expect(llms).toContain("Learn wine: https://winerim.wine/aprender-vino");
     expect(llms).toContain("https://winerim.wine/de/wein-lernen");
+    expect(prerender).toContain("/article/como-catar-vino-en-cinco-pasos");
+    expect(worker).toContain("/en/article/wine-tasting-vocabulary");
+    expect(llms).toContain("https://winerim.wine/article/maridajes-basicos-para-restaurantes");
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {
