@@ -20,30 +20,37 @@
 
 ## Tareas pendientes inmediatas
 
-1. Aplicar en Lovable/Supabase la migracion:
+1. Revisar secciones de distribuidores y margenes:
+   - copy y claims;
+   - enlaces internos;
+   - CTAs;
+   - SEO convencional;
+   - posicionamiento LLM;
+   - coherencia con producto, `Como lo hace Winerim`, analisis de carta y conversion.
+2. Aplicar en Lovable/Supabase la migracion:
    - `supabase/migrations/20260701064536_add_learn_wine_first_spokes.sql`.
-2. Publicar desde Lovable:
+3. Publicar desde Lovable:
    - frontend con el hub actualizado;
    - Edge Functions `sitemap` y `prerender` actualizadas.
-3. Validar produccion humana:
+4. Validar produccion humana:
    - `/aprender-vino`;
    - `/en/learn-wine`;
    - `/pt/aprender-vinho`;
    - 3 tarjetas visibles con CTA de lectura;
    - 18 rutas de articulo devuelven contenido real, no fallback ni `Not found`.
-4. Validar Googlebot/prerender:
+5. Validar Googlebot/prerender:
    - `/aprender-vino`;
    - `/article/como-catar-vino-en-cinco-pasos`;
    - `/en/article/how-to-taste-wine-in-five-steps`;
    - `/pt/article/harmonizacoes-basicas-para-restaurantes`.
-5. Validar `/sitemap.xml`:
+6. Validar `/sitemap.xml`:
    - contiene las 18 URLs de articulos;
    - respeta rutas localizadas.
-6. Search Console:
+7. Search Console:
    - reenviar `/sitemap.xml`;
    - solicitar indexacion selectiva de las 3 URLs ES;
    - monitorizar antes de solicitar todas las variantes.
-7. Preparar segunda oleada:
+8. Preparar segunda oleada:
    - tipos de vino explicados para restaurantes;
    - uvas que conocer para empezar;
    - regiones vinicolas para empezar.

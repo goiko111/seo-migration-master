@@ -54,6 +54,7 @@
 
 ## Tareas pendientes
 
+- Recordatorio solicitado por el usuario: revisar y actualizar secciones de distribuidores y margenes en la web.
 - Aplicar la migracion en Supabase desde Lovable o flujo operativo disponible.
 - Publicar frontend desde Lovable y desplegar `sitemap`/`prerender` actualizados.
 - Revalidar produccion humana y Googlebot para hub y articulos.

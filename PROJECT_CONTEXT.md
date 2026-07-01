@@ -222,6 +222,7 @@
 
 ## Tareas pendientes
 
+- Revisar y actualizar las secciones de distribuidores y margenes para alinear copy, claims, enlaces internos, CTAs, SEO y posicionamiento LLM.
 - Aplicar/desplegar desde Lovable/Supabase la migracion `20260701064536_add_learn_wine_first_spokes.sql` para que las 18 filas de articulos existan en produccion.
 - Publicar desde Lovable el frontend que enlaza los nuevos spokes en `Aprender vino` y desplegar las Edge Functions `sitemap`/`prerender` actualizadas.
 - Validar produccion tras deploy: hub humano, 18 rutas de articulos, sitemap con articulos, Googlebot/prerender para una muestra ES/EN/PT y ausencia de salto de idioma.
