@@ -2,6 +2,47 @@
 
 ## 2026-07-01
 
+### Segunda oleada publicada y extension comercial `Como lo hace Winerim`
+
+#### Hechos
+
+- Lovable/Supabase ya exponia las 18 URLs nuevas de la segunda oleada de `Aprender vino`.
+- Se desplego Cloudflare Worker `winerim-proxy` version `6d8af13d-2ac0-4626-8535-2f5457954d56`.
+- Produccion valida como Googlebot:
+  - 18/18 articulos nuevos con `HTTP 200`, `x-prerendered: true`, canonical propio y contenido real;
+  - 6/6 hubs `Aprender vino` con `HTTP 200`, `worker-static-prerender`, `x-prerendered: true`, canonical propio y 6 guias enlazadas por idioma.
+- Navegador real valida los hubs con 6 enlaces de articulo, canonical correcto y sin overflow en desktop/mobile.
+- `/sitemap.xml` productivo contiene `2282` URLs e incluye las 18 URLs nuevas.
+- Search Console recibio de nuevo `/sitemap.xml` correctamente, pero aun mostraba `2.264` paginas descubiertas antes de procesar la lectura nueva.
+- Search Console devolvio `Cuota superada` al intentar solicitar indexacion manual de la primera URL ES nueva.
+- Se ampliaron las secciones comerciales:
+  - `ConnectedCellarSection` ahora admite variantes `core` y `supply`;
+  - `WinerimCore` explica como datos operativos se convierten en diagnosticos;
+  - `WinerimSupply` explica como albaranes/compras se convierten en criterios de reposicion;
+  - `MetaDemoLanding` incorpora una version corta `Que veras en la demo`.
+- Se corrigio el conector DE/PT de `WinerimSupply`, que heredaba texto frances.
+- Validaciones locales: build OK, `git diff --check` OK y QA navegador desktop/mobile OK.
+
+#### Decisiones
+
+- Mantener el orden de publicacion para contenido dependiente de Supabase: articulos primero, Worker despues.
+- No forzar mas solicitudes manuales cuando Search Console devuelve cuota superada; dejarlas para el siguiente reinicio de cuota.
+- Reutilizar el componente `ConnectedCellarSection` con variantes contextuales para reducir duplicacion y mantener paridad visual.
+- Mantener la landing Meta como pagina de conversion pagada: explicacion corta del flujo operativo, no pagina larga de producto.
+
+#### Hipotesis
+
+- La segunda oleada deberia empezar a descubrirse mejor tras el reenvio del sitemap y el enlazado desde los hubs.
+- La extension comercial de Core/Supply deberia mejorar comprension y conversion porque convierte el claim `subes albaranes y olvidate` en un flujo concreto.
+- La discrepancia `2.264` vs `2282` deberia resolverse cuando Search Console procese la nueva lectura del sitemap.
+
+#### Tareas pendientes
+
+- Publicar frontend en Lovable.
+- Revalidar produccion de Core, Supply y `go.winerim.wine`.
+- Solicitar manana indexacion de las 3 URLs ES nuevas de la segunda oleada y de `/it/calcolatrice-margini-vino`.
+- Corregir la deuda de localizacion de `DecisionCenterTeaser` en PT/DE.
+
 ### Segunda oleada `Aprender vino`
 
 #### Hechos

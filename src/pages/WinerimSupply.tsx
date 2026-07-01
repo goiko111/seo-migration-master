@@ -13,6 +13,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import { Badge } from "@/components/ui/badge";
+import ConnectedCellarSection from "@/components/landing/ConnectedCellarSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import { type SupportedLang, type I18nMap, getI18n} from "@/i18n/types";
@@ -673,7 +674,17 @@ const WinerimSupply = () => {
                 <p className="text-xs tracking-[0.25em] uppercase text-gradient-gold font-semibold mb-4">{tx.s2_eyebrow}</p>
                 <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">
                   {tx.s2_title_1}<span className="text-gradient-gold">{tx.s2_title_sells}</span>{" "}
-                  {lang === "es" ? "con lo que " : lang === "en" ? "with what you " : lang === "it" ? "con ciò che " : "avec ce que vous "}
+                  {lang === "es"
+                    ? "con lo que "
+                    : lang === "en"
+                      ? "with what you "
+                      : lang === "it"
+                        ? "con ciò che "
+                        : lang === "fr"
+                          ? "avec ce que vous "
+                          : lang === "de"
+                            ? "mit dem, was Sie "
+                            : "com o que "}
                   <span className="text-gradient-gold">{tx.s2_title_buys}</span>
                 </h2>
                 <div className="space-y-4">
@@ -698,6 +709,8 @@ const WinerimSupply = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      <ConnectedCellarSection variant="supply" />
 
       {/* ═══ 3. CAPABILITIES ═══ */}
       <section className="section-padding" id="capacidades">

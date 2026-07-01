@@ -1,5 +1,55 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras Worker, Search Console y secciones comerciales
+
+## Hechos
+
+- Segunda oleada de `Aprender vino` ya validada en produccion:
+  - 18 articulos nuevos responden `200` como Googlebot;
+  - 6 hubs enlazan 6 guias por idioma;
+  - Worker desplegado: `winerim-proxy` version `6d8af13d-2ac0-4626-8535-2f5457954d56`;
+  - sitemap productivo con `2282` URLs.
+- Search Console recibio `/sitemap.xml` correctamente, pero aun mostraba `2.264` paginas descubiertas antes de procesar la nueva lectura.
+- Search Console devolvio `Cuota superada` para solicitudes manuales de indexacion.
+- Se preparo una ampliacion comercial para publicar:
+  - variantes `core` y `supply` de `ConnectedCellarSection`;
+  - insercion en `WinerimCore` y `WinerimSupply`;
+  - bloque corto `Que veras en la demo` en `MetaDemoLanding`;
+  - correccion del conector DE/PT en `WinerimSupply`.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `git diff --check`;
+  - QA navegador local desktop/mobile.
+- Sigue fuera de alcance el cambio ajeno en `src/components/WineListAnalyzerTool.tsx`.
+
+## Tareas pendientes inmediatas
+
+1. Publicar frontend desde Lovable cuando este commit este en `origin/main`.
+2. Revalidar produccion despues del publish:
+   - `https://winerim.wine/producto/winerim-core`;
+   - `https://winerim.wine/en/product/winerim-core`;
+   - `https://winerim.wine/producto/winerim-supply`;
+   - `https://winerim.wine/pt/produto/winerim-supply`;
+   - `https://go.winerim.wine/`.
+3. Validar en produccion:
+   - nueva seccion Core visible;
+   - nueva seccion Supply visible;
+   - bloque `Que veras en la demo` visible en la landing Meta;
+   - sin overflow mobile;
+   - CTAs correctos hacia demo, margen y compra inteligente.
+4. Search Console cuando se reinicie cuota:
+   - solicitar indexacion de `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta`;
+   - solicitar indexacion de `https://winerim.wine/article/uvas-que-conocer-para-empezar`;
+   - solicitar indexacion de `https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante`;
+   - solicitar indexacion de `https://winerim.wine/it/calcolatrice-margini-vino`.
+5. Revisar si Search Console actualiza `/sitemap.xml` desde `2.264` paginas descubiertas hacia las `2282` URLs productivas.
+6. Corregir deuda de localizacion detectada:
+   - `DecisionCenterTeaser` muestra texto espanol en PT/DE dentro de paginas de producto.
+7. Mantener pendiente separado:
+   - confirmar visualmente en CRM los leads QA anteriores;
+   - no tocar chat hasta nueva orden;
+   - no tocar `WineListAnalyzerTool.tsx` salvo instruccion expresa.
+
 ## Actualizacion 2026-07-01: retomar tras preparar segunda oleada `Aprender vino`
 
 ## Hechos

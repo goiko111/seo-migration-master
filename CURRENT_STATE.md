@@ -1,5 +1,67 @@
 # Current State
 
+## Actualizacion 2026-07-01: segunda oleada publicada y bloque comercial ampliado
+
+## Hechos
+
+- El usuario confirmo que Lovable habia aplicado/publicado la segunda oleada de `Aprender vino`.
+- Se validaron antes del Worker las 18 URLs nuevas de articulos como Googlebot: `HTTP 200`, `x-prerendered: true`, canonical propio y contenido real sin `Not found`.
+- Se desplego Cloudflare Worker `winerim-proxy` version `6d8af13d-2ac0-4626-8535-2f5457954d56`.
+- Tras el Worker, los 6 hubs de `Aprender vino` responden como Googlebot con `HTTP 200`, `x-worker-branch: worker-static-prerender`, `x-prerendered: true`, canonical propio y enlaces a las 6 guias por idioma.
+- Validacion en navegador real de los hubs: 6 enlaces de articulo por idioma, canonical correcto y sin overflow en desktop y mobile.
+- `/sitemap.xml` productivo contiene `2282` URLs y las 18 URLs nuevas de la segunda oleada.
+- Search Console mostraba aun `2.264` paginas descubiertas para `/sitemap.xml` antes del nuevo procesamiento.
+- Se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`.
+- La solicitud manual de indexacion para `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta` devolvio `Cuota superada`.
+- Por cuota diaria superada, quedan sin solicitar manualmente:
+  - `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta`;
+  - `https://winerim.wine/article/uvas-que-conocer-para-empezar`;
+  - `https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante`;
+  - `https://winerim.wine/it/calcolatrice-margini-vino`.
+- Se amplio `src/components/landing/ConnectedCellarSection.tsx` con variantes `home`, `core` y `supply`.
+- `src/pages/WinerimCore.tsx` usa la variante `core` para explicar el paso de datos operativos a diagnosticos.
+- `src/pages/WinerimSupply.tsx` usa la variante `supply` para explicar albaranes, compras, stock, reposicion y negociacion.
+- `src/pages/MetaDemoLanding.tsx` incorpora la seccion compacta `Que veras en la demo` sobre albaranes, TPV/stock y margen real.
+- Se corrigio el conector multidioma de `WinerimSupply` para DE/PT: ya no hereda el texto frances.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `git diff --check`;
+  - QA navegador local desktop/mobile para Core, Supply y Meta Demo sin overflow ni `Not found`.
+- Deuda detectada durante QA: `DecisionCenterTeaser` muestra texto espanol en variantes PT/DE de paginas de producto.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco ni debe incluirse en este commit.
+
+## Decisiones
+
+- Desplegar el Worker solo despues de comprobar que las 18 URLs nuevas ya existian en Supabase/Lovable.
+- Mantener solicitudes manuales de Search Console para URLs estrategicas, pero no insistir cuando Google devuelve cuota superada.
+- Reutilizar `ConnectedCellarSection` con variantes contextuales en vez de duplicar secciones separadas por producto.
+- Mantener la landing Meta enfocada al formulario y anadir solo una version corta del flujo operativo.
+
+## Hipotesis
+
+- El sitemap reenviado deberia permitir que Search Console pase de `2.264` paginas descubiertas hacia las `2282` URLs actuales cuando procese la nueva lectura.
+- Las nuevas variantes `core` y `supply` deberian mejorar conversion porque explican como Winerim convierte datos operativos en decisiones concretas.
+- La seccion corta de Meta Demo deberia ayudar a que trafico frio entienda mejor la propuesta antes de leer testimonios o enviar el formulario.
+
+## Contradicciones / dudas abiertas
+
+- Search Console aun mostraba `2.264` paginas descubiertas aunque el sitemap productivo contiene `2282` URLs.
+- Search Console sigue con cuota diaria superada para solicitudes manuales de indexacion.
+- `DecisionCenterTeaser` conserva texto espanol en variantes PT/DE; queda como deuda de localizacion separada.
+
+## Tareas pendientes
+
+- Publicar en Lovable el frontend con las nuevas secciones comerciales.
+- Revalidar produccion de:
+  - `/producto/winerim-core`;
+  - `/en/product/winerim-core`;
+  - `/producto/winerim-supply`;
+  - `/pt/produto/winerim-supply`;
+  - `https://go.winerim.wine/`.
+- Cuando se reinicie la cuota de Search Console, solicitar indexacion manual de las 3 URLs ES nuevas y de `/it/calcolatrice-margini-vino`.
+- Revisar si Search Console actualiza el conteo de sitemap hacia `2282`.
+- Corregir la localizacion de `DecisionCenterTeaser` en PT/DE.
+
 ## Actualizacion 2026-07-01: segunda oleada `Aprender vino` preparada
 
 ## Hechos

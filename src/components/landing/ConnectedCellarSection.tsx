@@ -30,6 +30,14 @@ interface ConnectedCellarCopy {
   note: string;
 }
 
+type ConnectedCellarVariant = "home" | "core" | "supply";
+
+interface ConnectedCellarSectionProps {
+  variant?: ConnectedCellarVariant;
+}
+
+type ContextualCopyOverride = Partial<ConnectedCellarCopy>;
+
 const copy: I18nMap<ConnectedCellarCopy> = {
   es: {
     eyebrow: "COMO LO HACE WINERIM",
@@ -243,11 +251,362 @@ const copy: I18nMap<ConnectedCellarCopy> = {
   },
 };
 
+const contextualCopy: Record<Exclude<ConnectedCellarVariant, "home">, I18nMap<ContextualCopyOverride>> = {
+  core: {
+    es: {
+      eyebrow: "CORE EN ACCION",
+      title: "El Core no espera a que mires un Excel. Convierte cada dato en",
+      highlight: "una senal de decision",
+      subtitle:
+        "Albaranes, ventas, stock y carta alimentan Winerim Core para detectar margen, rotacion, stock dormido y cambios de precio que conviene revisar.",
+      beforeItems: [
+        "Cada dato vive en un sitio distinto: TPV, proveedor, carta, Excel y memoria del equipo.",
+        "El margen real se revisa tarde, cuando el coste ya ha cambiado o la botella ya no rota.",
+        "La direccion ve sintomas, pero no siempre la causa: precio, stock, rotacion o arquitectura de carta.",
+      ],
+      afterItems: [
+        "Core cruza coste, venta, stock, carta y rotacion en una lectura unica.",
+        "Las alertas ayudan a priorizar referencias que revisar, mover, reponer o retirar.",
+        "Direccion, sumiller y sala trabajan sobre las mismas senales, no sobre intuiciones aisladas.",
+      ],
+      flowTitle: "Del movimiento diario al diagnostico",
+      flowItems: [
+        { title: "Coste actualizado", desc: "Albaranes y facturas ayudan a mantener precios de compra y referencias bajo control." },
+        { title: "Venta conectada", desc: "Con TPV activo, cada venta alimenta lectura de stock, rotacion y rendimiento." },
+        { title: "Carta interpretada", desc: "Core lee como encaja cada vino dentro de precio, estilo, formato y disponibilidad." },
+        { title: "Margen calculado", desc: "Cruza coste, precio de venta, rotacion y stock para detectar fugas y oportunidades." },
+        { title: "Accion priorizada", desc: "Ordena que revisar primero: reposicion, precio, visibilidad, baja rotacion o exceso de stock." },
+      ],
+      ctaPrimary: "Ver una demo de Core",
+      ctaSecondary: "Calcular margen",
+      note: "Las senales dependen de los datos conectados, las integraciones activas y el flujo operativo de cada restaurante.",
+    },
+    en: {
+      eyebrow: "CORE IN ACTION",
+      title: "Core does not wait for another spreadsheet. It turns each data point into",
+      highlight: "a decision signal",
+      subtitle:
+        "Invoices, sales, stock and the wine list feed Winerim Core so it can detect margin, rotation, sleeping stock and price changes worth reviewing.",
+      beforeItems: [
+        "Data sits in separate places: POS, suppliers, list, spreadsheets and team memory.",
+        "Real margin is reviewed too late, after costs have changed or bottles have stopped moving.",
+        "Management sees symptoms, but not always the cause: price, stock, rotation or list architecture.",
+      ],
+      afterItems: [
+        "Core cross-references cost, sale, stock, list and rotation in one reading.",
+        "Alerts help prioritise which references to review, move, restock or remove.",
+        "Owners, sommeliers and floor teams work from the same signals, not isolated intuition.",
+      ],
+      flowTitle: "From daily movement to diagnosis",
+      flowItems: [
+        { title: "Cost updated", desc: "Delivery notes and invoices help keep purchase prices and references under control." },
+        { title: "Sales connected", desc: "With POS active, each sale feeds stock, rotation and performance analysis." },
+        { title: "List interpreted", desc: "Core reads how each wine fits by price, style, format and availability." },
+        { title: "Margin calculated", desc: "It combines cost, sale price, rotation and stock to detect leaks and opportunities." },
+        { title: "Action prioritised", desc: "It orders what to review first: restock, price, visibility, slow rotation or excess stock." },
+      ],
+      ctaPrimary: "See a Core demo",
+      ctaSecondary: "Calculate margin",
+      note: "Signals depend on connected data, active integrations and each restaurant's operating workflow.",
+    },
+    it: {
+      eyebrow: "CORE IN AZIONE",
+      title: "Core non aspetta un altro Excel. Trasforma ogni dato in",
+      highlight: "un segnale di decisione",
+      subtitle:
+        "Documenti, vendite, stock e carta alimentano Winerim Core per rilevare margine, rotazione, stock fermo e cambi di prezzo da rivedere.",
+      beforeItems: [
+        "Ogni dato vive in un posto diverso: POS, fornitore, carta, Excel e memoria del team.",
+        "Il margine reale si controlla tardi, quando il costo e gia cambiato o la bottiglia non ruota piu.",
+        "La direzione vede sintomi, ma non sempre la causa: prezzo, stock, rotazione o architettura della carta.",
+      ],
+      afterItems: [
+        "Core incrocia costo, vendita, stock, carta e rotazione in una lettura unica.",
+        "Gli alert aiutano a prioritizzare referenze da rivedere, muovere, riordinare o togliere.",
+        "Direzione, sommelier e sala lavorano sugli stessi segnali, non su intuizioni isolate.",
+      ],
+      flowTitle: "Dal movimento quotidiano alla diagnosi",
+      flowItems: [
+        { title: "Costo aggiornato", desc: "Documenti e fatture aiutano a tenere sotto controllo prezzi di acquisto e referenze." },
+        { title: "Vendita collegata", desc: "Con POS attivo, ogni vendita alimenta analisi di stock, rotazione e performance." },
+        { title: "Carta interpretata", desc: "Core legge il ruolo di ogni vino per prezzo, stile, formato e disponibilita." },
+        { title: "Margine calcolato", desc: "Incrocia costo, prezzo di vendita, rotazione e stock per rilevare perdite e opportunita." },
+        { title: "Azione prioritaria", desc: "Ordina cosa rivedere prima: riordino, prezzo, visibilita, bassa rotazione o stock eccessivo." },
+      ],
+      ctaPrimary: "Vedere una demo Core",
+      ctaSecondary: "Calcolare il margine",
+      note: "I segnali dipendono dai dati collegati, dalle integrazioni attive e dal flusso operativo del ristorante.",
+    },
+    fr: {
+      eyebrow: "CORE EN ACTION",
+      title: "Core n'attend pas un autre Excel. Il transforme chaque donnee en",
+      highlight: "signal de decision",
+      subtitle:
+        "Factures, ventes, stock et carte alimentent Winerim Core pour detecter marge, rotation, stock dormant et changements de prix a revoir.",
+      beforeItems: [
+        "Chaque donnee vit ailleurs : caisse, fournisseur, carte, Excel et memoire de l'equipe.",
+        "La marge reelle est revue trop tard, quand le cout a deja change ou que la bouteille ne tourne plus.",
+        "La direction voit les symptomes, mais pas toujours la cause : prix, stock, rotation ou architecture de carte.",
+      ],
+      afterItems: [
+        "Core croise cout, vente, stock, carte et rotation dans une lecture unique.",
+        "Les alertes aident a prioriser les references a revoir, bouger, recommander ou retirer.",
+        "Direction, sommelier et salle travaillent sur les memes signaux, pas sur des intuitions isolees.",
+      ],
+      flowTitle: "Du mouvement quotidien au diagnostic",
+      flowItems: [
+        { title: "Cout actualise", desc: "Bons et factures aident a garder prix d'achat et references sous controle." },
+        { title: "Vente connectee", desc: "Avec la caisse active, chaque vente nourrit l'analyse stock, rotation et performance." },
+        { title: "Carte interpretee", desc: "Core lit le role de chaque vin par prix, style, format et disponibilite." },
+        { title: "Marge calculee", desc: "Il croise cout, prix de vente, rotation et stock pour detecter fuites et opportunites." },
+        { title: "Action priorisee", desc: "Il ordonne quoi revoir d'abord : reassort, prix, visibilite, faible rotation ou surstock." },
+      ],
+      ctaPrimary: "Voir une demo Core",
+      ctaSecondary: "Calculer la marge",
+      note: "Les signaux dependent des donnees connectees, des integrations actives et du fonctionnement de chaque restaurant.",
+    },
+    de: {
+      eyebrow: "CORE IN AKTION",
+      title: "Core wartet nicht auf die naechste Tabelle. Es macht aus jedem Datensatz",
+      highlight: "ein Entscheidungssignal",
+      subtitle:
+        "Belege, Verkaeufe, Bestand und Weinkarte speisen Winerim Core, damit Marge, Rotation, ruhender Bestand und Preiswechsel sichtbar werden.",
+      beforeItems: [
+        "Daten liegen getrennt: Kassensystem, Lieferant, Karte, Tabelle und Teamerinnerung.",
+        "Die echte Marge wird zu spaet geprueft, wenn Kosten schon anders sind oder Flaschen nicht mehr laufen.",
+        "Die Leitung sieht Symptome, aber nicht immer die Ursache: Preis, Bestand, Rotation oder Kartenarchitektur.",
+      ],
+      afterItems: [
+        "Core verbindet Kosten, Verkauf, Bestand, Karte und Rotation in einer Lesart.",
+        "Warnungen helfen, Referenzen zu priorisieren: pruefen, bewegen, nachbestellen oder entfernen.",
+        "Leitung, Sommelier und Service arbeiten mit denselben Signalen, nicht mit Einzelintuition.",
+      ],
+      flowTitle: "Vom Tagesgeschaeft zur Diagnose",
+      flowItems: [
+        { title: "Kosten aktualisiert", desc: "Lieferscheine und Rechnungen helfen, Einkaufspreise und Referenzen zu kontrollieren." },
+        { title: "Verkauf verbunden", desc: "Mit aktivem Kassensystem speist jeder Verkauf Bestand, Rotation und Leistungsanalyse." },
+        { title: "Karte interpretiert", desc: "Core liest die Rolle jedes Weins nach Preis, Stil, Format und Verfuegbarkeit." },
+        { title: "Marge berechnet", desc: "Es kombiniert Kosten, Verkaufspreis, Rotation und Bestand, um Lecks und Chancen zu erkennen." },
+        { title: "Aktion priorisiert", desc: "Es ordnet, was zuerst geprueft wird: Nachkauf, Preis, Sichtbarkeit, langsame Rotation oder Ueberbestand." },
+      ],
+      ctaPrimary: "Core Demo ansehen",
+      ctaSecondary: "Marge berechnen",
+      note: "Die Signale haengen von verbundenen Daten, aktiven Integrationen und dem Ablauf jedes Restaurants ab.",
+    },
+    pt: {
+      eyebrow: "CORE EM ACAO",
+      title: "O Core nao espera por outro Excel. Transforma cada dado em",
+      highlight: "um sinal de decisao",
+      subtitle:
+        "Faturas, vendas, stock e carta alimentam o Winerim Core para detetar margem, rotacao, stock parado e mudancas de preco a rever.",
+      beforeItems: [
+        "Cada dado vive num sitio diferente: POS, fornecedor, carta, Excel e memoria da equipa.",
+        "A margem real e revista tarde, quando o custo ja mudou ou a garrafa ja nao roda.",
+        "A direcao ve sintomas, mas nem sempre a causa: preco, stock, rotacao ou arquitetura da carta.",
+      ],
+      afterItems: [
+        "O Core cruza custo, venda, stock, carta e rotacao numa leitura unica.",
+        "Os alertas ajudam a priorizar referencias a rever, mover, repor ou retirar.",
+        "Direcao, escancao e sala trabalham sobre os mesmos sinais, nao sobre intuicoes isoladas.",
+      ],
+      flowTitle: "Do movimento diario ao diagnostico",
+      flowItems: [
+        { title: "Custo atualizado", desc: "Guias e faturas ajudam a manter precos de compra e referencias sob controlo." },
+        { title: "Venda ligada", desc: "Com POS ativo, cada venda alimenta analise de stock, rotacao e desempenho." },
+        { title: "Carta interpretada", desc: "O Core le o papel de cada vinho por preco, estilo, formato e disponibilidade." },
+        { title: "Margem calculada", desc: "Cruza custo, preco de venda, rotacao e stock para detetar fugas e oportunidades." },
+        { title: "Acao priorizada", desc: "Ordena o que rever primeiro: reposicao, preco, visibilidade, baixa rotacao ou excesso de stock." },
+      ],
+      ctaPrimary: "Ver demo do Core",
+      ctaSecondary: "Calcular margem",
+      note: "Os sinais dependem dos dados ligados, das integracoes ativas e do fluxo operacional de cada restaurante.",
+    },
+  },
+  supply: {
+    es: {
+      eyebrow: "SUPPLY EN ACCION",
+      title: "Cada albaran deja de ser papeleo y se convierte en",
+      highlight: "criterio de compra",
+      subtitle:
+        "Supply conecta compras, coste, stock y rotacion para saber que reponer, que renegociar y que referencias no merece la pena volver a comprar.",
+      beforeItems: [
+        "Pedidos repetidos por costumbre aunque la referencia ya no rote.",
+        "Precios de compra aceptados sin comparar ni medir impacto en margen.",
+        "Stock inmovilizado que se detecta cuando ya ocupa bodega y caja.",
+      ],
+      afterItems: [
+        "Las compras entran con coste, proveedor y referencia trazados.",
+        "La reposicion se apoya en demanda real, margen y stock disponible.",
+        "Las conversaciones con distribuidores parten de datos, no de sensaciones.",
+      ],
+      flowTitle: "De compra aislada a aprovisionamiento inteligente",
+      flowItems: [
+        { title: "Subes albaranes", desc: "Captura coste, proveedor y referencia para dejar de reconstruir compras a mano." },
+        { title: "Conectas ventas", desc: "El consumo real muestra que referencias se mueven y cuales se quedan paradas." },
+        { title: "Lees stock", desc: "La bodega deja de ser una foto fija y se convierte en una senal de reposicion." },
+        { title: "Comparas precio", desc: "Detecta sobreprecios, oportunidades de negociacion y cambios de coste relevantes." },
+        { title: "Compras mejor", desc: "Decide que reponer, que no volver a comprar y que sustituir con mas criterio." },
+      ],
+      ctaPrimary: "Ver una demo de Supply",
+      ctaSecondary: "Probar compra inteligente",
+      note: "Las recomendaciones dependen de los datos de compra, stock y venta disponibles en cada negocio.",
+    },
+    en: {
+      eyebrow: "SUPPLY IN ACTION",
+      title: "Each delivery note stops being admin and becomes",
+      highlight: "purchasing criteria",
+      subtitle:
+        "Supply connects purchases, cost, stock and rotation to know what to restock, what to renegotiate and which references are not worth buying again.",
+      beforeItems: [
+        "Orders are repeated out of habit even when references no longer move.",
+        "Purchase prices are accepted without comparison or margin impact.",
+        "Tied-up stock is detected only after it has taken space and cash.",
+      ],
+      afterItems: [
+        "Purchases enter with cost, supplier and reference traced.",
+        "Restocking is based on real demand, margin and available stock.",
+        "Distributor conversations start from data, not impressions.",
+      ],
+      flowTitle: "From isolated purchase to smart supply",
+      flowItems: [
+        { title: "Upload delivery notes", desc: "Capture cost, supplier and reference without rebuilding purchases manually." },
+        { title: "Connect sales", desc: "Real consumption shows which references move and which ones stay still." },
+        { title: "Read stock", desc: "The cellar stops being a static picture and becomes a replenishment signal." },
+        { title: "Compare price", desc: "Detect overpricing, negotiation opportunities and relevant cost changes." },
+        { title: "Buy better", desc: "Decide what to restock, what not to buy again and what to replace with better criteria." },
+      ],
+      ctaPrimary: "See a Supply demo",
+      ctaSecondary: "Try smart purchasing",
+      note: "Recommendations depend on the purchase, stock and sales data available in each business.",
+    },
+    it: {
+      eyebrow: "SUPPLY IN AZIONE",
+      title: "Ogni documento smette di essere burocrazia e diventa",
+      highlight: "criterio d'acquisto",
+      subtitle:
+        "Supply collega acquisti, costo, stock e rotazione per sapere cosa riordinare, cosa rinegoziare e quali referenze non conviene ricomprare.",
+      beforeItems: [
+        "Ordini ripetuti per abitudine anche quando la referenza non ruota piu.",
+        "Prezzi d'acquisto accettati senza confronto o impatto sul margine.",
+        "Stock immobilizzato rilevato solo quando occupa gia spazio e cassa.",
+      ],
+      afterItems: [
+        "Gli acquisti entrano con costo, fornitore e referenza tracciati.",
+        "Il riordino si basa su domanda reale, margine e stock disponibile.",
+        "Le conversazioni con i distributori partono dai dati, non da sensazioni.",
+      ],
+      flowTitle: "Da acquisto isolato ad approvvigionamento intelligente",
+      flowItems: [
+        { title: "Carichi documenti", desc: "Cattura costo, fornitore e referenza senza ricostruire gli acquisti a mano." },
+        { title: "Colleghi vendite", desc: "Il consumo reale mostra quali referenze si muovono e quali restano ferme." },
+        { title: "Leggi lo stock", desc: "La cantina smette di essere una foto statica e diventa un segnale di riordino." },
+        { title: "Confronti il prezzo", desc: "Rileva sovrapprezzi, opportunita di negoziazione e cambi di costo rilevanti." },
+        { title: "Compri meglio", desc: "Decidi cosa riordinare, cosa non ricomprare e cosa sostituire con piu criterio." },
+      ],
+      ctaPrimary: "Vedere una demo Supply",
+      ctaSecondary: "Provare acquisto intelligente",
+      note: "Le raccomandazioni dipendono dai dati di acquisto, stock e vendita disponibili in ogni business.",
+    },
+    fr: {
+      eyebrow: "SUPPLY EN ACTION",
+      title: "Chaque bon cesse d'etre administratif et devient",
+      highlight: "critere d'achat",
+      subtitle:
+        "Supply relie achats, cout, stock et rotation pour savoir quoi recommander, quoi renegocier et quelles references ne plus racheter.",
+      beforeItems: [
+        "Commandes repetees par habitude alors que la reference ne tourne plus.",
+        "Prix d'achat acceptes sans comparaison ni impact marge.",
+        "Stock immobilise detecte seulement quand il occupe deja cave et tresorerie.",
+      ],
+      afterItems: [
+        "Les achats entrent avec cout, fournisseur et reference traces.",
+        "Le reassort s'appuie sur demande reelle, marge et stock disponible.",
+        "Les discussions fournisseurs partent des donnees, pas des impressions.",
+      ],
+      flowTitle: "De l'achat isole a l'approvisionnement intelligent",
+      flowItems: [
+        { title: "Importez les bons", desc: "Capturez cout, fournisseur et reference sans reconstruire les achats a la main." },
+        { title: "Connectez les ventes", desc: "La consommation reelle montre quelles references bougent et lesquelles dorment." },
+        { title: "Lisez le stock", desc: "La cave cesse d'etre une photo fixe et devient un signal de reassort." },
+        { title: "Comparez le prix", desc: "Detectez surcouts, opportunites de negociation et changements de cout importants." },
+        { title: "Achetez mieux", desc: "Decidez quoi recommander, quoi ne plus acheter et quoi remplacer avec plus de criteres." },
+      ],
+      ctaPrimary: "Voir une demo Supply",
+      ctaSecondary: "Tester l'achat intelligent",
+      note: "Les recommandations dependent des donnees d'achat, de stock et de vente disponibles dans chaque etablissement.",
+    },
+    de: {
+      eyebrow: "SUPPLY IN AKTION",
+      title: "Jeder Lieferschein wird weniger Verwaltung und mehr",
+      highlight: "Einkaufskriterium",
+      subtitle:
+        "Supply verbindet Einkauf, Kosten, Bestand und Rotation, um zu wissen, was nachbestellt, neu verhandelt oder nicht wieder gekauft werden sollte.",
+      beforeItems: [
+        "Bestellungen werden aus Gewohnheit wiederholt, auch wenn die Referenz nicht mehr laeuft.",
+        "Einkaufspreise werden akzeptiert, ohne Vergleich oder Margenwirkung.",
+        "Gebundener Bestand wird erst erkannt, wenn er schon Platz und Kapital blockiert.",
+      ],
+      afterItems: [
+        "Einkaeufe kommen mit Kosten, Lieferant und Referenz nachvollziehbar rein.",
+        "Nachbestellung basiert auf realer Nachfrage, Marge und verfuegbarem Bestand.",
+        "Gespraeche mit Distributoren starten mit Daten, nicht mit Eindruecken.",
+      ],
+      flowTitle: "Vom Einzeleinkauf zur intelligenten Versorgung",
+      flowItems: [
+        { title: "Lieferscheine hochladen", desc: "Kosten, Lieferant und Referenz erfassen, ohne Einkaeufe manuell nachzubauen." },
+        { title: "Verkaeufe verbinden", desc: "Der echte Verbrauch zeigt, welche Referenzen laufen und welche stehen bleiben." },
+        { title: "Bestand lesen", desc: "Der Keller wird von einer Momentaufnahme zu einem Nachbestellungssignal." },
+        { title: "Preis vergleichen", desc: "Ueberpreise, Verhandlungschancen und relevante Kostenwechsel erkennen." },
+        { title: "Besser einkaufen", desc: "Entscheiden, was nachbestellt, nicht wieder gekauft oder ersetzt werden sollte." },
+      ],
+      ctaPrimary: "Supply Demo ansehen",
+      ctaSecondary: "Smart Einkauf testen",
+      note: "Empfehlungen haengen von Einkaufs-, Bestands- und Verkaufsdaten im jeweiligen Betrieb ab.",
+    },
+    pt: {
+      eyebrow: "SUPPLY EM ACAO",
+      title: "Cada guia deixa de ser papelada e passa a ser",
+      highlight: "criterio de compra",
+      subtitle:
+        "A Supply liga compras, custo, stock e rotacao para saber o que repor, o que renegociar e que referencias nao vale a pena voltar a comprar.",
+      beforeItems: [
+        "Encomendas repetidas por habito mesmo quando a referencia ja nao roda.",
+        "Precos de compra aceites sem comparacao nem leitura de margem.",
+        "Stock imobilizado detetado so quando ja ocupa garrafeira e caixa.",
+      ],
+      afterItems: [
+        "As compras entram com custo, fornecedor e referencia rastreados.",
+        "A reposicao apoia-se em procura real, margem e stock disponivel.",
+        "As conversas com distribuidores partem de dados, nao de sensacoes.",
+      ],
+      flowTitle: "Da compra isolada ao aprovisionamento inteligente",
+      flowItems: [
+        { title: "Carrega guias", desc: "Captura custo, fornecedor e referencia sem reconstruir compras manualmente." },
+        { title: "Liga vendas", desc: "O consumo real mostra que referencias se movem e quais ficam paradas." },
+        { title: "Le o stock", desc: "A garrafeira deixa de ser uma fotografia e passa a ser um sinal de reposicao." },
+        { title: "Compara preco", desc: "Deteta sobreprecos, oportunidades de negociacao e mudancas de custo relevantes." },
+        { title: "Compra melhor", desc: "Decide o que repor, o que nao voltar a comprar e o que substituir com mais criterio." },
+      ],
+      ctaPrimary: "Ver demo da Supply",
+      ctaSecondary: "Testar compra inteligente",
+      note: "As recomendacoes dependem dos dados de compra, stock e venda disponiveis em cada negocio.",
+    },
+  },
+};
+
 const flowIcons = [FileUp, ShoppingCart, ListChecks, BarChart3, PackageCheck];
 
-const ConnectedCellarSection = () => {
+const ConnectedCellarSection = ({ variant = "home" }: ConnectedCellarSectionProps) => {
   const { lang, localePath } = useLanguage();
-  const t = getI18n(copy, lang);
+  const baseCopy = getI18n(copy, lang);
+  const variantCopy = variant === "home" ? {} : getI18n(contextualCopy[variant], lang);
+  const t = { ...baseCopy, ...variantCopy };
+  const secondaryPath =
+    variant === "core"
+      ? "/herramientas/calculadora-margen"
+      : variant === "supply"
+        ? "/herramientas/calculadora-compra-inteligente"
+        : "/analisis-carta";
 
   return (
     <section className="section-padding bg-background">
@@ -331,7 +690,7 @@ const ConnectedCellarSection = () => {
                 <ArrowRight size={16} />
               </Link>
               <Link
-                to={localePath("/analisis-carta")}
+                to={localePath(secondaryPath)}
                 className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold uppercase tracking-wider hover:border-wine/30 hover:bg-secondary transition-all"
               >
                 {t.ctaSecondary}

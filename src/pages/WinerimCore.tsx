@@ -13,6 +13,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
+import ConnectedCellarSection from "@/components/landing/ConnectedCellarSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
@@ -796,6 +797,8 @@ const WinerimCore = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      <ConnectedCellarSection variant="core" />
 
       {/* ─── 3. TOOLS → CORE BRIDGE ─── */}
       <section className="py-20 md:py-28">

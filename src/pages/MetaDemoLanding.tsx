@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Building2,
+  BarChart3,
   Check,
   Clock,
+  FileUp,
   Loader2,
   Quote,
   ShieldCheck,
   Sparkles,
+  ShoppingCart,
   Users,
   Wine,
   Zap,
@@ -85,6 +88,24 @@ const benefits = [
   "Sin compromiso de permanencia",
   "Análisis gratuito de tu carta incluido",
   "Configuración en menos de 48 horas",
+];
+
+const workflowSteps = [
+  {
+    icon: FileUp,
+    title: "Subes albaranes y facturas",
+    desc: "Winerim convierte compras, costes y proveedores en datos ordenados para tu bodega.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Conectas ventas y stock",
+    desc: "Con TPV activo, cada botella vendida ayuda a leer rotación, disponibilidad y reposición.",
+  },
+  {
+    icon: BarChart3,
+    title: "Decides con margen real",
+    desc: "Detectas vinos dormidos, fugas de margen y referencias que conviene mover o revisar.",
+  },
 ];
 
 const cases = [
@@ -609,6 +630,32 @@ const MetaDemoLanding = () => {
                   </p>
                 </form>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-white/10 bg-[#111312] px-5 py-14 text-white sm:px-8 lg:px-10 lg:py-16">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.26em] text-accent">Qué verás en la demo</span>
+              <h2 className="mt-4 max-w-xl font-heading text-3xl font-bold leading-tight sm:text-4xl">
+                Cómo Winerim convierte tu bodega en un sistema de decisión
+              </h2>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-white/62">
+                No es solo una carta digital. En la demo vemos cómo compras, TPV, stock, carta y margen pueden trabajar juntos para vender mejor el vino.
+              </p>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-3">
+              {workflowSteps.map(({ icon: Icon, title, desc }) => (
+                <article key={title} className="rounded-lg border border-white/12 bg-white/[0.055] p-5">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-accent/16">
+                    <Icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/60">{desc}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>

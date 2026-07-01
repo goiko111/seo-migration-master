@@ -2,6 +2,20 @@
 
 ## Hechos
 
+- El 2026-07-01, tras confirmacion del usuario de que Lovable habia publicado la segunda oleada de `Aprender vino`, se desplego Cloudflare Worker `winerim-proxy` version `6d8af13d-2ac0-4626-8535-2f5457954d56`.
+- Antes de desplegar el Worker, se validaron las 18 URLs nuevas de articulos como Googlebot: todas devolvian `HTTP 200`, `x-prerendered: true`, canonical propio y contenido real sin `Not found`.
+- Tras el Worker, los 6 hubs de `Aprender vino` validan como Googlebot con `HTTP 200`, `x-worker-branch: worker-static-prerender`, `x-prerendered: true`, canonical propio y enlaces a las 6 guias por idioma.
+- La validacion en navegador real de los hubs de `Aprender vino` confirmo 6 enlaces de articulo por idioma, canonical correcto y ausencia de overflow en desktop y mobile.
+- El sitemap productivo contiene ahora `2282` URLs y las 18 URLs nuevas de la segunda oleada; Search Console seguia mostrando `2.264` paginas descubiertas antes de procesar el nuevo envio.
+- El 2026-07-01 se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`.
+- El 2026-07-01 Search Console no permitio solicitar indexacion manual de los nuevos articulos ES ni de la URL italiana pendiente de margen porque la cuota diaria seguia superada.
+- El 2026-07-01 se amplio `Como lo hace Winerim` a producto/funnel: `ConnectedCellarSection` acepta variantes `core` y `supply`, `WinerimCore` y `WinerimSupply` las usan, y `MetaDemoLanding` incorpora el bloque compacto `Que veras en la demo`.
+- La variante `core` explica como albaranes, ventas, stock, carta y margen se convierten en diagnosticos y senales de decision.
+- La variante `supply` explica como albaranes, compras, coste, stock y rotacion se convierten en criterio de reposicion y negociacion.
+- La landing `go.winerim.wine` / `/meta-demo` gana una seccion corta sobre subir albaranes, conectar ventas/stock y decidir con margen real, manteniendo el foco en el formulario.
+- Se corrigio una contradiccion de idioma en `WinerimSupply`: el conector del H2 de Supply para DE/PT heredaba el texto frances `avec ce que vous`; ahora DE usa `mit dem, was Sie` y PT `com o que`.
+- Validaciones locales de la ampliacion comercial: `npm run build`, `git diff --check` y QA navegador desktop/mobile para Core, Supply y Meta Demo sin overflow ni `Not found`.
+- Durante la QA se detecto una deuda preexistente: `DecisionCenterTeaser` muestra texto espanol en variantes PT/DE de paginas de producto.
 - El 2026-07-01 se preparo la segunda oleada de `Aprender vino` como 18 articulos localizados: tipos de vino, uvas/castas/cepages/rebsorten para empezar y regiones vinicolas para empezar en restaurante.
 - La segunda oleada vive en la migracion `supabase/migrations/20260701102537_add_learn_wine_second_spokes.sql` y usa `article_group`, `lang` y `related_links` siguiendo el patron de la primera oleada.
 - El hub `Aprender vino`, `prerender`, Cloudflare Worker, `llms.txt`, `llms-full.txt` y el test SEO quedaron sincronizados para exponer 6 guias por idioma cuando la migracion se aplique.
