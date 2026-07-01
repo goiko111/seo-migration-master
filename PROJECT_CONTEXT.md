@@ -2,6 +2,15 @@
 
 ## Hechos
 
+- El 2026-07-01 se preparo una revision publicable de las paginas `Distribuidor` y `Calculadora de margen` en seis idiomas.
+- `Distribuidor` quedo reposicionada como programa B2B para partners HORECA, con claims prudentes, breadcrumbs, requisitos, modelo de partner, escenarios economicos, proceso, mercados, FAQ e internal links.
+- `Calculadora de margen` quedo reforzada con FAQ localizada, canonical/hreflang localizado, enlaces internos localizados y explicacion de margen, multiplicador y Beverage Cost.
+- Se sincronizaron distribuidores y margen en React, `ROUTE_MAP`, sitemap, prerender, Cloudflare Worker, `sitemap-extra.json`, `llms.txt` y `llms-full.txt`.
+- Se corrigio un bug local de `CalculadoraMargen`: el componente usaba `useEffect` pero el import de React no lo incluia tras la edicion.
+- Se corrigio un overflow movil en el componente comun `InternalLinks`, que afectaba a tarjetas de enlaces internos en mobile.
+- Validaciones locales del 2026-07-01 para distribuidores/margenes: build OK, Worker check OK, Deno check OK, `sitemap-extra` JSON OK, `git diff --check` OK y QA navegador desktop/mobile OK.
+- Contradiccion corregida el 2026-07-01: `/distribuidor` existia en React, pero faltaba en `ROUTE_MAP` y en parte de la superficie SEO localizada.
+- Contradiccion corregida el 2026-07-01: la calculadora de margen tenia rutas DE/PT, pero la lista manual de alternates de `prerender` no incluia DE/PT.
 - El 2026-07-01 se preparo la primera oleada publicable de spokes de `Aprender vino` mediante la migracion `supabase/migrations/20260701064536_add_learn_wine_first_spokes.sql`.
 - La migracion de `Aprender vino` crea/actualiza 18 articulos: 3 temas x 6 idiomas (`es/en/it/fr/de/pt`) para cata en cinco pasos, vocabulario de cata y maridajes basicos para restaurantes.
 - Los articulos usan slugs localizados con sufijo de idioma en Supabase para variantes internacionales, siguiendo el patron de rutas `/{lang}/article/{slug}` sin salto a espanol.
@@ -152,6 +161,10 @@
 
 ## Decisiones
 
+- En `Distribuidor`, evitar claims no documentados o demasiado absolutos (`15M+ restaurantes`, `90%`, `producto que se vende solo`) y usar una propuesta de partner HORECA verificable.
+- Mantener `/de/haendler` como ruta canonica alemana para distribuidores.
+- Usar `FAQSection` como patron para FAQ visibles + schema localizado en paginas comerciales/herramientas, en vez de scripts JSON-LD manuales por pagina.
+- Tratar `InternalLinks` como componente comun sensible a SEO y responsive; los arreglos de mobile deben hacerse en el componente si el problema es compartido.
 - La primera oleada real de `Aprender vino` se publica como articulos de blog localizados, no como entidades nuevas de `Biblioteca del vino`.
 - Los tres primeros spokes priorizados son: catar vino en cinco pasos, vocabulario de cata y maridajes basicos para restaurantes.
 - En el hub `Aprender vino`, las tarjetas de spokes deben usar CTA de lectura (`Leer guia` y equivalentes), no el CTA general de biblioteca.
@@ -195,6 +208,9 @@
 
 ## Hipótesis
 
+- Reforzar distribuidores con estructura de partner, FAQ e internal links deberia mejorar conversion comercial y comprension por LLMs.
+- Reforzar la calculadora de margen con FAQ localizada e internal links deberia mejorar su utilidad SEO/LLM y conectarla mejor con Winerim Core/Supply.
+- Mantener paridad entre React, sitemap, prerender, Worker y `llms` deberia reducir incidencias de Search Console en rutas comerciales nuevas.
 - Publicar los primeros spokes de `Aprender vino` deberia mejorar enlazado interno, cobertura SEO informacional y recuperabilidad por LLMs porque convierte el hub en una ruta guiada con contenido profundo.
 - La primera oleada puede ayudar a restaurantes y hoteles a formar equipo de sala con lenguaje practico, diferenciando Winerim de medios editoriales generalistas de vino.
 - Los articulos entraran en sitemap automaticamente cuando la migracion este aplicada y la Edge Function `sitemap` lea las filas publicadas de `articles`.
@@ -228,7 +244,7 @@
 
 ## Tareas pendientes
 
-- Revisar y actualizar las secciones de distribuidores y margenes para alinear copy, claims, enlaces internos, CTAs, SEO y posicionamiento LLM.
+- Revision local de distribuidores y margenes completada el 2026-07-01; pendiente publicar, desplegar y revalidar produccion.
 - Aplicar/desplegar desde Lovable/Supabase la migracion `20260701064536_add_learn_wine_first_spokes.sql` para que las 18 filas de articulos existan en produccion.
 - Publicar desde Lovable el frontend que enlaza los nuevos spokes en `Aprender vino` y desplegar las Edge Functions `sitemap`/`prerender` actualizadas.
 - Validar produccion tras deploy: hub humano, 18 rutas de articulos, sitemap con articulos, Googlebot/prerender para una muestra ES/EN/PT y ausencia de salto de idioma.

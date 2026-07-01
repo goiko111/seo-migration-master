@@ -14,6 +14,7 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
+import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n } from "@/i18n/types";
 
@@ -271,11 +272,11 @@ const i18n: Record<string, LangContent> = {
     ctaDesc: "Winerim Core analyses pricing, margins, rotation and the full architecture of your wine list — with a deep analytical layer that works with your real data, not generic formulas.",
     ctaPrimary: "See how Winerim Core solves it", ctaSecondary: "Analyse my list for free",
     internalLinks: [
-      { to: "/precio-vino-restaurante", label: "How to price wine", type: "guide" },
-      { to: "/blog/como-disenar-carta-vinos-rentable", label: "How to design a profitable list", type: "guide" },
-      { to: "/wine-pricing-tool", label: "Pricing tool", type: "tool" },
-      { to: "/recursos/plantilla-wine-mapping-restaurante", label: "Wine mapping template", type: "resource" },
-      { to: "/producto/winerim-core", label: "Winerim Core: full analytics", type: "solution" },
+      { to: "/en/wine-pricing-restaurant", label: "How to price wine", type: "guide" },
+      { to: "/en/wine-pricing-tool", label: "Wine pricing tool", type: "tool" },
+      { to: "/en/product/winerim-core", label: "Winerim Core: full analytics", type: "solution" },
+      { to: "/en/product/winerim-supply", label: "Winerim Supply: purchasing intelligence", type: "solution" },
+      { to: "/en/demo", label: "Request a demo", type: "solution" },
     ],
   },
   it: {
@@ -345,8 +346,10 @@ const i18n: Record<string, LangContent> = {
     ctaDesc: "Winerim Core analizza pricing, margini, rotazione e l'architettura completa della tua carta — con uno strato analitico profondo che lavora con i tuoi dati reali.",
     ctaPrimary: "Scopri come lo risolve Winerim Core", ctaSecondary: "Analizza la mia carta gratis",
     internalLinks: [
-      { to: "/precio-vino-restaurante", label: "Come fissare il prezzo del vino", type: "guide" },
-      { to: "/producto/winerim-core", label: "Winerim Core: analisi completa", type: "solution" },
+      { to: "/it/prezzo-vino-ristorante", label: "Come fissare il prezzo del vino", type: "guide" },
+      { to: "/it/prodotto/winerim-core", label: "Winerim Core: analisi completa", type: "solution" },
+      { to: "/it/prodotto/winerim-supply", label: "Winerim Supply: acquisti e costi", type: "solution" },
+      { to: "/it/demo", label: "Richiedi una demo", type: "solution" },
     ],
   },
   fr: {
@@ -416,8 +419,10 @@ const i18n: Record<string, LangContent> = {
     ctaDesc: "Winerim Core analyse le pricing, les marges, la rotation et l'architecture complète de votre carte — avec une couche analytique profonde qui travaille avec vos données réelles.",
     ctaPrimary: "Voir comment Winerim Core le résout", ctaSecondary: "Analyser ma carte gratuitement",
     internalLinks: [
-      { to: "/precio-vino-restaurante", label: "Comment fixer le prix du vin", type: "guide" },
-      { to: "/producto/winerim-core", label: "Winerim Core : analyse complète", type: "solution" },
+      { to: "/fr/prix-vin-restaurant", label: "Comment fixer le prix du vin", type: "guide" },
+      { to: "/fr/produit/winerim-core", label: "Winerim Core : analyse complète", type: "solution" },
+      { to: "/fr/produit/winerim-supply", label: "Winerim Supply : achats et coûts", type: "solution" },
+      { to: "/fr/demo", label: "Demander une demo", type: "solution" },
     ],
   },
   de: {
@@ -487,10 +492,10 @@ const i18n: Record<string, LangContent> = {
     ctaDesc: "Winerim Core analysiert Pricing, Margen, Rotation und die gesamte Architektur Ihrer Karte — mit einer tiefen analytischen Ebene, die mit Ihren echten Daten arbeitet, nicht mit generischen Formeln.",
     ctaPrimary: "Sehen, wie Winerim Core es löst", ctaSecondary: "Meine Karte kostenlos analysieren",
     internalLinks: [
-      { to: "/precio-vino-restaurante", label: "Wie man den Weinpreis festlegt", type: "guide" },
-      { to: "/producto/winerim-core", label: "Winerim Core: vollständige Analytik", type: "solution" },
-      { to: "/decision-center/margenes-pricing", label: "Decision Center: Margen und Pricing", type: "decision-center" },
-      { to: "/precios", label: "Pläne und Preise", type: "solution" },
+      { to: "/de/weinpreise-im-restaurant", label: "Wie man den Weinpreis festlegt", type: "guide" },
+      { to: "/de/produkt/winerim-core", label: "Winerim Core: vollständige Analytik", type: "solution" },
+      { to: "/de/produkt/winerim-supply", label: "Winerim Supply: Einkauf und Kosten", type: "solution" },
+      { to: "/de/demo", label: "Demo anfragen", type: "solution" },
     ],
   },
   pt: {
@@ -560,10 +565,10 @@ const i18n: Record<string, LangContent> = {
     ctaDesc: "O Winerim Core analisa o pricing, as margens, a rotação e a arquitetura completa da sua carta — com uma camada analítica profunda que trabalha com os seus dados reais, não com fórmulas genéricas.",
     ctaPrimary: "Ver como o Winerim Core resolve", ctaSecondary: "Analisar a minha carta grátis",
     internalLinks: [
-      { to: "/precio-vino-restaurante", label: "Como definir o preço do vinho", type: "guide" },
-      { to: "/producto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
-      { to: "/decision-center/margenes-pricing", label: "Decision Center: margens e pricing", type: "decision-center" },
-      { to: "/precios", label: "Planos e preços", type: "solution" },
+      { to: "/pt/preco-vinho-restaurante", label: "Como definir o preço do vinho", type: "guide" },
+      { to: "/pt/produto/winerim-core", label: "Winerim Core: analítica completa", type: "solution" },
+      { to: "/pt/produto/winerim-supply", label: "Winerim Supply: compras e custos", type: "solution" },
+      { to: "/pt/demo", label: "Pedir demo", type: "solution" },
     ],
   },
 };
@@ -640,11 +645,69 @@ const execI18n: Record<string, {
   },
 };
 
+const marginFaqs: Record<string, { title: string; items: { q: string; a: string }[] }> = {
+  es: {
+    title: "Preguntas frecuentes sobre margen y precio del vino",
+    items: [
+      { q: "Como se calcula el precio de venta del vino en un restaurante?", a: "Se parte del precio de compra y se aplica un multiplicador que cambia segun tipo de vino, gama, contexto del restaurante y ticket medio. Winerim usa esta herramienta como demo simplificada; Core lo cruza con datos reales de carta, ventas y stock." },
+      { q: "Que es el Beverage Cost?", a: "Es el porcentaje que representa el coste de compra sobre el precio de venta. Si sube demasiado, el margen real se estrecha aunque el vino siga vendiendose." },
+      { q: "Por que no usar el mismo multiplicador en toda la carta?", a: "Porque un vino de entrada, un champagne y una referencia premium no soportan la misma elasticidad de precio. Un multiplicador unico puede frenar rotacion o destruir margen." },
+      { q: "Como ayuda Winerim despues de calcular el margen?", a: "Winerim Core conecta margen con rotacion, stock, compras, copa y arquitectura de carta para decidir que mantener, ajustar, renegociar o retirar." },
+    ],
+  },
+  en: {
+    title: "Wine margin and pricing FAQ",
+    items: [
+      { q: "How is wine selling price calculated in a restaurant?", a: "Start from purchase cost and apply a multiplier that changes by wine type, range, restaurant context and average ticket. This calculator is a simplified demo; Winerim Core cross-references real list, sales and stock data." },
+      { q: "What is Beverage Cost?", a: "It is the percentage of purchase cost over selling price. When it rises too much, real margin narrows even if the wine keeps selling." },
+      { q: "Why not use the same multiplier across the whole list?", a: "Entry wines, champagne and premium references do not have the same price elasticity. One fixed multiplier can slow rotation or damage margin." },
+      { q: "What does Winerim do after calculating margin?", a: "Winerim Core connects margin with rotation, stock, purchasing, by-the-glass strategy and list architecture so you can decide what to keep, adjust, renegotiate or remove." },
+    ],
+  },
+  it: {
+    title: "Domande frequenti su margine e pricing del vino",
+    items: [
+      { q: "Come si calcola il prezzo di vendita del vino in un ristorante?", a: "Si parte dal prezzo d'acquisto e si applica un moltiplicatore che cambia per tipo di vino, fascia, contesto del ristorante e ticket medio. Questa calcolatrice e una demo semplificata; Winerim Core incrocia dati reali di carta, vendite e stock." },
+      { q: "Che cos'e il Beverage Cost?", a: "E la percentuale del costo d'acquisto sul prezzo di vendita. Se sale troppo, il margine reale si restringe anche se il vino continua a vendere." },
+      { q: "Perche non usare lo stesso moltiplicatore su tutta la carta?", a: "Vini d'ingresso, champagne e referenze premium non hanno la stessa elasticita di prezzo. Un moltiplicatore unico puo rallentare la rotazione o danneggiare il margine." },
+      { q: "Cosa fa Winerim dopo il calcolo del margine?", a: "Winerim Core collega margine, rotazione, stock, acquisti, vino al calice e architettura della carta per decidere cosa mantenere, modificare, rinegoziare o ritirare." },
+    ],
+  },
+  fr: {
+    title: "Questions frequentes sur marge et prix du vin",
+    items: [
+      { q: "Comment calculer le prix de vente du vin au restaurant ?", a: "On part du prix d'achat et on applique un multiplicateur qui varie selon le type de vin, la gamme, le contexte du restaurant et le ticket moyen. Ce calculateur est une demo simplifiee ; Winerim Core croise les donnees reelles de carte, ventes et stock." },
+      { q: "Qu'est-ce que le Beverage Cost ?", a: "C'est le pourcentage du cout d'achat sur le prix de vente. S'il monte trop, la marge reelle se reduit meme si le vin continue a se vendre." },
+      { q: "Pourquoi ne pas utiliser le meme multiplicateur pour toute la carte ?", a: "Un vin d'entree, un champagne et une reference premium n'ont pas la meme elasticite prix. Un multiplicateur unique peut ralentir la rotation ou abimer la marge." },
+      { q: "Que fait Winerim apres le calcul de marge ?", a: "Winerim Core relie marge, rotation, stock, achats, vin au verre et architecture de carte pour decider quoi garder, ajuster, renegocier ou retirer." },
+    ],
+  },
+  de: {
+    title: "FAQ zu Weinmarge und Pricing",
+    items: [
+      { q: "Wie berechnet man den Verkaufspreis von Wein im Restaurant?", a: "Ausgangspunkt ist der Einkaufspreis. Darauf wird ein Multiplikator angewendet, der nach Weintyp, Preisklasse, Restaurantkontext und Durchschnittsbon variiert. Dieser Rechner ist eine vereinfachte Demo; Winerim Core verbindet echte Karten-, Verkaufs- und Bestandsdaten." },
+      { q: "Was ist Beverage Cost?", a: "Das ist der Anteil des Einkaufspreises am Verkaufspreis. Wenn er zu hoch wird, schrumpft die echte Marge, auch wenn sich der Wein weiter verkauft." },
+      { q: "Warum nicht ein Multiplikator fuer die ganze Karte?", a: "Einstiegsweine, Champagner und Premium-Referenzen haben nicht dieselbe Preiselastizitaet. Ein fixer Multiplikator kann Rotation bremsen oder Marge zerstoeren." },
+      { q: "Was macht Winerim nach der Margenberechnung?", a: "Winerim Core verbindet Marge mit Rotation, Bestand, Einkauf, Ausschank und Kartenarchitektur, um zu entscheiden, was bleiben, angepasst, neu verhandelt oder entfernt werden sollte." },
+    ],
+  },
+  pt: {
+    title: "Perguntas frequentes sobre margem e preco do vinho",
+    items: [
+      { q: "Como se calcula o preco de venda do vinho num restaurante?", a: "Parte-se do preco de compra e aplica-se um multiplicador que muda consoante tipo de vinho, gama, contexto do restaurante e bilhete medio. Esta calculadora e uma demo simplificada; o Winerim Core cruza dados reais de carta, vendas e stock." },
+      { q: "O que e Beverage Cost?", a: "E a percentagem que o custo de compra representa sobre o preco de venda. Se sobe demasiado, a margem real estreita mesmo que o vinho continue a vender." },
+      { q: "Porque nao usar o mesmo multiplicador em toda a carta?", a: "Vinhos de entrada, champanhe e referencias premium nao tem a mesma elasticidade de preco. Um multiplicador unico pode travar rotacao ou destruir margem." },
+      { q: "O que faz a Winerim depois de calcular a margem?", a: "O Winerim Core liga margem, rotacao, stock, compras, vinho a copo e arquitetura da carta para decidir o que manter, ajustar, renegociar ou retirar." },
+    ],
+  },
+};
+
 /* ─── Component ─── */
 const CalculadoraMargen = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
   const dl = execI18n[lang] || execI18n.es;
+  const faq = marginFaqs[lang] || marginFaqs.es;
 
   const [wineCat, setWineCat] = useState<WineCat>("still");
   const [restCtx, setRestCtx] = useState<RestCtx>("casual");
@@ -722,25 +785,9 @@ const CalculadoraMargen = () => {
     return reading;
   }, [marginHealth, currentPrice, results, catLabel, ctxLabel, dl, bcStatus]);
 
-  useEffect(() => {
-    const schema = document.createElement("script");
-    schema.id = "calc-jsonld";
-    schema.type = "application/ld+json";
-    schema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        { "@type": "Question", name: "¿Cómo se calcula el precio de venta del vino en un restaurante?", acceptedAnswer: { "@type": "Answer", text: "Se multiplica el precio de compra por un factor diferenciado según tipo de vino, gama y contexto del restaurante, usando interpolación continua para evitar saltos artificiales." } },
-        { "@type": "Question", name: "¿Qué es el Beverage Cost y cuál es el objetivo?", acceptedAnswer: { "@type": "Answer", text: "El Beverage Cost es el porcentaje que el coste del vino supone sobre su precio de venta. El objetivo estándar es mantenerlo por debajo del 28-30%." } },
-      ],
-    });
-    document.head.appendChild(schema);
-    return () => { document.getElementById("calc-jsonld")?.remove(); };
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url="https://winerim.wine/calculadora-margen-vino"
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/calculadora-margen-vino")}`}
         hreflang={allLangPaths("/calculadora-margen-vino")} />
       <Navbar />
 
@@ -1127,6 +1174,7 @@ const CalculadoraMargen = () => {
         </div>
       </section>
 
+      <FAQSection faqs={faq.items} title={faq.title} schemaId={`margin-calculator-${lang}`} />
       <InternalLinks links={t.internalLinks} />
       <Footer />
     </div>

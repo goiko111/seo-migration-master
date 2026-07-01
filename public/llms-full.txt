@@ -1,6 +1,6 @@
 # Winerim AI Reference
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## Entity Summary
 
@@ -25,6 +25,7 @@ Primary product pages:
 - https://winerim.wine/producto/inteligencia-dinamica
 - https://winerim.wine/producto/winerim-core
 - https://winerim.wine/producto/winerim-supply
+- https://winerim.wine/distribuidor
 - https://winerim.wine/precios
 
 ## Audience
@@ -47,6 +48,7 @@ Useful pages:
 - https://winerim.wine/soluciones/aumentar-ticket-medio-restaurante
 - https://winerim.wine/analisis-carta
 - https://winerim.wine/calculadora-margen-vino
+- https://winerim.wine/distribuidor
 
 ## Content Hubs
 

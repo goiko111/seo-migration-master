@@ -2974,6 +2974,8 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'en', url: `${SITE}/en/wine-margin-calculator` },
     { lang: 'it', url: `${SITE}/it/calcolatrice-margini-vino` },
     { lang: 'fr', url: `${SITE}/fr/calculateur-marge-vin` },
+    { lang: 'de', url: `${SITE}/de/wein-margen-rechner` },
+    { lang: 'pt', url: `${SITE}/pt/calculadora-margem-vinho` },
     { lang: 'x-default', url: `${SITE}/calculadora-margen-vino` },
   ],
   '/afiliate': [
@@ -3030,6 +3032,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/precios': '/en/pricing',
     '/contacto': '/en/contact',
     '/afiliate': '/en/affiliate',
+    '/distribuidor': '/en/distributor',
     '/guias-y-recursos': '/en/guides',
     '/herramientas': '/en/tools',
     '/casos-exito': '/en/case-studies',
@@ -3060,6 +3063,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/precios': '/it/prezzi',
     '/contacto': '/it/contatto',
     '/afiliate': '/it/affiliati',
+    '/distribuidor': '/it/distributore',
     '/guias-y-recursos': '/it/guide',
     '/herramientas': '/it/strumenti',
     '/casos-exito': '/it/casi-di-successo',
@@ -3090,6 +3094,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/precios': '/fr/tarifs',
     '/contacto': '/fr/contact',
     '/afiliate': '/fr/affilies',
+    '/distribuidor': '/fr/distributeur',
     '/guias-y-recursos': '/fr/guides',
     '/herramientas': '/fr/outils',
     '/casos-exito': '/fr/cas-clients',
@@ -3120,6 +3125,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/precios': '/de/preise',
     '/contacto': '/de/kontakt',
     '/afiliate': '/de/partner',
+    '/distribuidor': '/de/haendler',
     '/guias-y-recursos': '/de/ratgeber',
     '/herramientas': '/de/tools',
     '/casos-exito': '/de/erfolgsgeschichten',
@@ -3150,6 +3156,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/precios': '/pt/precos',
     '/contacto': '/pt/contacto',
     '/afiliate': '/pt/afiliados',
+    '/distribuidor': '/pt/distribuidor',
     '/guias-y-recursos': '/pt/guias',
     '/herramientas': '/pt/ferramentas',
     '/casos-exito': '/pt/casos-de-sucesso',
@@ -3184,6 +3191,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/precios': { es: 'Precios', en: 'Pricing', it: 'Prezzi', fr: 'Tarifs', de: 'Preise', pt: 'Precos' },
   '/contacto': { es: 'Contacto', en: 'Contact', it: 'Contatto', fr: 'Contact', de: 'Kontakt', pt: 'Contacto' },
   '/afiliate': { es: 'Programa de afiliados', en: 'Affiliate program', it: 'Programma affiliati', fr: 'Programme partenaires', de: 'Partnerprogramm', pt: 'Programa de afiliados' },
+  '/distribuidor': { es: 'Distribuidores Winerim', en: 'Winerim distributors', it: 'Distributori Winerim', fr: 'Distributeurs Winerim', de: 'Winerim Haendler', pt: 'Distribuidores Winerim' },
   '/guias-y-recursos': { es: 'Guias y recursos', en: 'Guides and resources', it: 'Guide e risorse', fr: 'Guides et ressources', de: 'Ratgeber und Ressourcen', pt: 'Guias e recursos' },
   '/herramientas': { es: 'Herramientas', en: 'Tools', it: 'Strumenti', fr: 'Outils', de: 'Tools', pt: 'Ferramentas' },
   '/casos-exito': { es: 'Casos de exito', en: 'Case studies', it: 'Casi di successo', fr: 'Cas clients', de: 'Erfolgsgeschichten', pt: 'Casos de sucesso' },
@@ -3278,6 +3286,190 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
 };
 
 function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (esPath === '/calculadora-margen-vino' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Wine Margin Calculator for Restaurants | Winerim',
+        description: 'Calculate wine margin, multiplier and Beverage Cost to check whether your list protects profit, rotation and pricing.',
+        h1: 'Wine margin calculator for restaurants',
+        subtitle: 'Estimate real margin, multiplier and Beverage Cost before changing price, by-the-glass strategy or reorder decisions.',
+        sections: [
+          { heading: 'How it works', content: 'Enter purchase cost, current selling price, wine type and restaurant context. The calculator returns gross margin, multiplier, Beverage Cost and an operational reading.' },
+          { heading: 'Why margin matters', content: 'A wine list can sell well and still lose profitability if costs rise, prices are not updated or every reference uses the same multiplier.' },
+          { heading: 'After the calculation', content: 'Winerim Core connects margin with rotation, stock, purchasing, by-the-glass strategy and list architecture so the team can decide what to keep, adjust, renegotiate or remove.' },
+        ],
+        faqs: [
+          { q: 'How is wine selling price calculated?', a: 'Start from purchase cost and apply a multiplier that changes by wine type, range, restaurant context and average ticket.' },
+          { q: 'What is Beverage Cost?', a: 'It is the percentage of purchase cost over selling price. When it rises too much, real margin narrows even if the wine keeps selling.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'How to price wine', url: '/en/wine-pricing-restaurant' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Winerim Supply', url: '/en/product/winerim-supply' }, { label: 'Request a demo', url: '/en/demo' }],
+      },
+      it: {
+        title: 'Calcolatrice Margini Vino per Ristoranti | Winerim',
+        description: 'Calcola margine, moltiplicatore e Beverage Cost per capire se la carta protegge redditivita, rotazione e prezzi.',
+        h1: 'Calcolatrice margini vino per ristoranti',
+        subtitle: 'Stima margine reale, moltiplicatore e Beverage Cost prima di cambiare prezzo, vino al calice o riordino.',
+        sections: [
+          { heading: 'Come funziona', content: 'Inserisci costo di acquisto, prezzo attuale, tipo di vino e contesto del ristorante. La calcolatrice restituisce margine lordo, moltiplicatore, Beverage Cost e una lettura operativa.' },
+          { heading: 'Perche il margine conta', content: 'Una carta puo vendere bene e perdere redditivita se i costi aumentano, i prezzi non si aggiornano o tutte le referenze usano lo stesso moltiplicatore.' },
+          { heading: 'Dopo il calcolo', content: 'Winerim Core collega margine, rotazione, stock, acquisti, vino al calice e architettura della carta per decidere cosa mantenere, modificare o ritirare.' },
+        ],
+        faqs: [
+          { q: 'Come si calcola il prezzo di vendita del vino?', a: 'Si parte dal prezzo di acquisto e si applica un moltiplicatore che cambia per tipo di vino, fascia, contesto del ristorante e ticket medio.' },
+          { q: 'Che cos e il Beverage Cost?', a: 'E la percentuale del costo di acquisto sul prezzo di vendita. Se sale troppo, il margine reale si restringe anche se il vino continua a vendere.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Strumenti', url: `${SITE}/it/strumenti` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Come fissare il prezzo del vino', url: '/it/prezzo-vino-ristorante' }, { label: 'Winerim Core', url: '/it/prodotto/winerim-core' }, { label: 'Winerim Supply', url: '/it/prodotto/winerim-supply' }, { label: 'Richiedi demo', url: '/it/demo' }],
+      },
+      fr: {
+        title: 'Calculateur de Marge Vin pour Restaurants | Winerim',
+        description: 'Calculez marge, multiplicateur et Beverage Cost pour verifier si votre carte protege rentabilite, rotation et prix.',
+        h1: 'Calculateur de marge vin pour restaurants',
+        subtitle: 'Estimez marge reelle, multiplicateur et Beverage Cost avant de modifier prix, vin au verre ou reapprovisionnement.',
+        sections: [
+          { heading: 'Comment ca fonctionne', content: 'Indiquez cout d achat, prix actuel, type de vin et contexte du restaurant. Le calculateur renvoie marge brute, multiplicateur, Beverage Cost et lecture operationnelle.' },
+          { heading: 'Pourquoi la marge compte', content: 'Une carte peut bien vendre et perdre en rentabilite si les couts montent, les prix ne suivent pas ou toutes les references utilisent le meme multiplicateur.' },
+          { heading: 'Apres le calcul', content: 'Winerim Core relie marge, rotation, stock, achats, vin au verre et architecture de carte pour decider quoi garder, ajuster, renegocier ou retirer.' },
+        ],
+        faqs: [
+          { q: 'Comment calculer le prix de vente du vin?', a: 'On part du prix d achat et on applique un multiplicateur qui varie selon type de vin, gamme, contexte du restaurant et ticket moyen.' },
+          { q: 'Qu est ce que le Beverage Cost?', a: 'C est le pourcentage du cout d achat sur le prix de vente. S il monte trop, la marge reelle se reduit meme si le vin continue a se vendre.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Outils', url: `${SITE}/fr/outils` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Comment fixer le prix du vin', url: '/fr/prix-vin-restaurant' }, { label: 'Winerim Core', url: '/fr/produit/winerim-core' }, { label: 'Winerim Supply', url: '/fr/produit/winerim-supply' }, { label: 'Demander une demo', url: '/fr/demo' }],
+      },
+      de: {
+        title: 'Wein-Margenrechner fuer Restaurants | Winerim',
+        description: 'Berechnen Sie Weinmarge, Multiplikator und Beverage Cost, um Preis, Rotation und Profitabilitaet zu pruefen.',
+        h1: 'Wein-Margenrechner fuer Restaurants',
+        subtitle: 'Schaetzen Sie echte Marge, Multiplikator und Beverage Cost, bevor Preis, Glasweinstrategie oder Nachkauf entschieden werden.',
+        sections: [
+          { heading: 'So funktioniert es', content: 'Einkaufskosten, aktuellen Verkaufspreis, Weintyp und Restaurantkontext eingeben. Der Rechner liefert Bruttomarge, Multiplikator, Beverage Cost und eine operative Einordnung.' },
+          { heading: 'Warum Marge wichtig ist', content: 'Eine Weinkarte kann gut verkaufen und trotzdem Profit verlieren, wenn Kosten steigen, Preise nicht aktualisiert werden oder alle Referenzen denselben Multiplikator nutzen.' },
+          { heading: 'Nach der Berechnung', content: 'Winerim Core verbindet Marge mit Rotation, Bestand, Einkauf, Glaswein und Kartenarchitektur, um zu entscheiden, was bleibt, angepasst, neu verhandelt oder entfernt wird.' },
+        ],
+        faqs: [
+          { q: 'Wie berechnet man den Verkaufspreis von Wein?', a: 'Ausgangspunkt ist der Einkaufspreis. Darauf wird ein Multiplikator angewendet, der nach Weintyp, Preisklasse, Restaurantkontext und Durchschnittsbon variiert.' },
+          { q: 'Was ist Beverage Cost?', a: 'Das ist der Anteil des Einkaufspreises am Verkaufspreis. Wenn er zu hoch wird, schrumpft die echte Marge, auch wenn sich der Wein weiter verkauft.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Tools', url: `${SITE}/de/tools` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Weinpreise im Restaurant', url: '/de/weinpreise-im-restaurant' }, { label: 'Winerim Core', url: '/de/produkt/winerim-core' }, { label: 'Winerim Supply', url: '/de/produkt/winerim-supply' }, { label: 'Demo anfragen', url: '/de/demo' }],
+      },
+      pt: {
+        title: 'Calculadora de Margem de Vinho para Restaurantes | Winerim',
+        description: 'Calcule margem, multiplicador e Beverage Cost para perceber se a carta protege rentabilidade, rotacao e preco.',
+        h1: 'Calculadora de margem de vinho para restaurantes',
+        subtitle: 'Estime margem real, multiplicador e Beverage Cost antes de mudar preco, vinho a copo ou reposicao.',
+        sections: [
+          { heading: 'Como funciona', content: 'Introduza custo de compra, preco atual, tipo de vinho e contexto do restaurante. A calculadora devolve margem bruta, multiplicador, Beverage Cost e leitura operacional.' },
+          { heading: 'Porque a margem importa', content: 'Uma carta pode vender bem e perder rentabilidade se os custos sobem, os precos nao sao atualizados ou todas as referencias usam o mesmo multiplicador.' },
+          { heading: 'Depois do calculo', content: 'O Winerim Core liga margem, rotacao, stock, compras, vinho a copo e arquitetura de carta para decidir o que manter, ajustar, renegociar ou retirar.' },
+        ],
+        faqs: [
+          { q: 'Como se calcula o preco de venda do vinho?', a: 'Parte-se do preco de compra e aplica-se um multiplicador que muda consoante tipo de vinho, gama, contexto do restaurante e bilhete medio.' },
+          { q: 'O que e Beverage Cost?', a: 'E a percentagem que o custo de compra representa sobre o preco de venda. Se sobe demasiado, a margem real estreita mesmo que o vinho continue a vender.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Ferramentas', url: `${SITE}/pt/ferramentas` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Como definir o preco do vinho', url: '/pt/preco-vinho-restaurante' }, { label: 'Winerim Core', url: '/pt/produto/winerim-core' }, { label: 'Winerim Supply', url: '/pt/produto/winerim-supply' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
+  if (esPath === '/distribuidor' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Winerim Distributors | Commercial Partner for Hospitality',
+        description: 'Winerim distribution program for HORECA partners: wine-list software, margin analysis, stock, purchasing and central support.',
+        h1: 'Bring Winerim to restaurants, hotels and groups in your market',
+        subtitle: 'A program for HORECA partners that already sell to hospitality and want to add a wine-list, stock, purchasing, margin and analytics platform.',
+        sections: [
+          { heading: 'Hospitality opportunity', content: 'Many restaurants still manage wine lists, stock, purchasing and margins with spreadsheets, PDFs or disconnected decisions.' },
+          { heading: 'Partner model', content: 'The distributor works as an independent B2B partner with commercial assets, central support, first-demo guidance and territory conditions defined by agreement.' },
+          { heading: 'Ideal profile', content: 'Wine distributors, HORECA consultants, hospitality software companies and professionals with real access to restaurants, hotels, wine bars or groups fit best.' },
+        ],
+        faqs: [
+          { q: 'What type of partner fits Winerim?', a: 'Partners with an active hospitality network, B2B experience and the ability to open qualified demos or pilots.' },
+          { q: 'Is territory exclusivity possible?', a: 'It can be considered when market, commercial capacity and goals justify it. It is defined in the distribution agreement.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Features', url: `${SITE}/en/features` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim Supply', url: '/en/product/winerim-supply' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Wine margin calculator', url: '/en/wine-margin-calculator' }, { label: 'Request a demo', url: '/en/demo' }],
+      },
+      it: {
+        title: 'Distributori Winerim | Partner commerciale per la ristorazione',
+        description: 'Programma distributori Winerim per partner HORECA: software carta vini, margini, stock, acquisti e supporto centrale.',
+        h1: 'Porta Winerim a ristoranti, hotel e gruppi nel tuo mercato',
+        subtitle: 'Un programma per partner HORECA che vendono gia alla ristorazione e vogliono aggiungere una piattaforma per carta vini, stock, acquisti, margini e analytics.',
+        sections: [
+          { heading: 'Opportunita HORECA', content: 'Molti ristoranti gestiscono ancora carta, stock, acquisti e margini con fogli di calcolo, PDF o decisioni scollegate.' },
+          { heading: 'Modello partner', content: 'Il distributore lavora come partner B2B indipendente con materiali commerciali, supporto centrale e condizioni di territorio definite per accordo.' },
+          { heading: 'Profilo ideale', content: 'Distributori vino, consulenti HORECA, software hospitality e professionisti con accesso reale a ristoranti, hotel, wine bar o gruppi.' },
+        ],
+        faqs: [
+          { q: 'Che tipo di partner cerca Winerim?', a: 'Partner con rete attiva nella ristorazione, esperienza B2B e capacita di aprire demo o piloti qualificati.' },
+          { q: 'E possibile l esclusiva territoriale?', a: 'Puo esserlo se mercato, capacita commerciale e obiettivi lo giustificano. Si definisce nell accordo.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Funzionalita', url: `${SITE}/it/funzionalita` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim Supply', url: '/it/prodotto/winerim-supply' }, { label: 'Winerim Core', url: '/it/prodotto/winerim-core' }, { label: 'Calcolatrice margini vino', url: '/it/calcolatrice-margini-vino' }, { label: 'Richiedi demo', url: '/it/demo' }],
+      },
+      fr: {
+        title: 'Distributeurs Winerim | Partenaire commercial HORECA',
+        description: 'Programme distributeurs Winerim pour partenaires HORECA : logiciel carte des vins, marge, stock, achats et support central.',
+        h1: 'Amenez Winerim aux restaurants, hotels et groupes de votre marche',
+        subtitle: 'Un programme pour partenaires HORECA qui vendent deja a la restauration et veulent ajouter une plateforme carte des vins, stock, achats, marge et analytics.',
+        sections: [
+          { heading: 'Opportunite HORECA', content: 'Beaucoup de restaurants gerent encore carte, stock, achats et marges avec tableurs, PDF ou decisions dispersees.' },
+          { heading: 'Modele partenaire', content: 'Le distributeur travaille comme partenaire B2B independant avec supports commerciaux, accompagnement central et conditions de territoire definies par accord.' },
+          { heading: 'Profil ideal', content: 'Distributeurs de vin, consultants HORECA, logiciels hospitality et professionnels avec acces reel aux restaurants, hotels, bars a vin ou groupes.' },
+        ],
+        faqs: [
+          { q: 'Quel type de partenaire convient a Winerim?', a: 'Des partenaires avec reseau HORECA actif, experience B2B et capacite a ouvrir des demos ou pilotes qualifies.' },
+          { q: 'L exclusivite territoriale est elle possible?', a: 'Oui si le marche, la capacite commerciale et les objectifs le justifient. Elle se definit dans l accord.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Fonctionnalites', url: `${SITE}/fr/fonctionnalites` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim Supply', url: '/fr/produit/winerim-supply' }, { label: 'Winerim Core', url: '/fr/produit/winerim-core' }, { label: 'Calculateur marge vin', url: '/fr/calculateur-marge-vin' }, { label: 'Demander une demo', url: '/fr/demo' }],
+      },
+      de: {
+        title: 'Winerim Haendler | Vertriebspartner fuer Gastronomie',
+        description: 'Winerim Distributionsprogramm fuer HORECA-Partner: Weinkarten-Software, Marge, Bestand, Einkauf und zentraler Support.',
+        h1: 'Bringen Sie Winerim zu Restaurants, Hotels und Gruppen in Ihrem Markt',
+        subtitle: 'Ein Programm fuer HORECA-Partner, die bereits an Gastronomie verkaufen und eine Plattform fuer Weinkarte, Bestand, Einkauf, Marge und Analytics ergaenzen wollen.',
+        sections: [
+          { heading: 'HORECA-Chance', content: 'Viele Restaurants verwalten Weinkarte, Bestand, Einkauf und Margen noch mit Tabellen, PDFs oder getrennten Entscheidungen.' },
+          { heading: 'Partnermodell', content: 'Der Haendler arbeitet als unabhaengiger B2B-Partner mit Vertriebsunterlagen, zentraler Unterstuetzung und gebietsbezogenen Bedingungen.' },
+          { heading: 'Ideales Profil', content: 'Weindistributoren, HORECA-Berater, Hospitality-Softwareanbieter und Profis mit echtem Zugang zu Restaurants, Hotels, Weinbars oder Gruppen.' },
+        ],
+        faqs: [
+          { q: 'Welcher Partner passt zu Winerim?', a: 'Partner mit aktivem Gastronomienetzwerk, B2B-Erfahrung und der Faehigkeit, qualifizierte Demos oder Piloten zu eroeffnen.' },
+          { q: 'Ist Gebietsexklusivitaet moeglich?', a: 'Sie kann moeglich sein, wenn Markt, Vertriebsleistung und Ziele es rechtfertigen. Das wird im Vertrag definiert.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Funktionen', url: `${SITE}/de/funktionen` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim Supply', url: '/de/produkt/winerim-supply' }, { label: 'Winerim Core', url: '/de/produkt/winerim-core' }, { label: 'Wein-Margenrechner', url: '/de/wein-margen-rechner' }, { label: 'Demo anfragen', url: '/de/demo' }],
+      },
+      pt: {
+        title: 'Distribuidores Winerim | Parceiro comercial para hotelaria',
+        description: 'Programa de distribuicao Winerim para parceiros HORECA: software carta de vinhos, margem, stock, compras e suporte central.',
+        h1: 'Leve a Winerim a restaurantes, hoteis e grupos no seu mercado',
+        subtitle: 'Um programa para parceiros HORECA que ja vendem a restauracao e querem acrescentar uma plataforma de carta, stock, compras, margem e analitica.',
+        sections: [
+          { heading: 'Oportunidade HORECA', content: 'Muitos restaurantes ainda gerem carta, stock, compras e margens com folhas de calculo, PDFs ou decisoes desligadas.' },
+          { heading: 'Modelo de parceiro', content: 'O distribuidor trabalha como parceiro B2B independente, com materiais comerciais, suporte central e condicoes de territorio definidas em acordo.' },
+          { heading: 'Perfil ideal', content: 'Distribuidores de vinho, consultores HORECA, software de hotelaria e profissionais com acesso real a restaurantes, hoteis, wine bars ou grupos.' },
+        ],
+        faqs: [
+          { q: 'Que tipo de parceiro encaixa na Winerim?', a: 'Parceiros com rede ativa na restauracao, experiencia B2B e capacidade para abrir demos ou pilotos qualificados.' },
+          { q: 'Existe exclusividade territorial?', a: 'Pode existir se mercado, capacidade comercial e objetivos o justificarem. Define-se no acordo de distribuicao.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Funcionalidades', url: `${SITE}/pt/funcionalidades` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim Supply', url: '/pt/produto/winerim-supply' }, { label: 'Winerim Core', url: '/pt/produto/winerim-core' }, { label: 'Calculadora de margem', url: '/pt/calculadora-margem-vinho' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
   if (esPath === '/aprender-vino' && lang !== 'es') {
     const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
       en: {
@@ -4894,18 +5086,43 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Uvas', url: '/biblioteca-vino/uvas' }, { label: 'Regiones', url: '/biblioteca-vino/regiones' }, { label: 'Estilos', url: '/biblioteca-vino/estilos' }, { label: 'Maridajes', url: '/biblioteca-vino/maridajes' }, { label: 'Glosario', url: '/biblioteca-vino/glosario' }],
     },
   },
+  '/distribuidor': {
+    meta: { title: 'Distribuidores Winerim | Partner comercial para hosteleria', description: 'Programa de distribucion Winerim para partners HORECA: software de carta de vinos, analisis de margen, stock, compras y soporte centralizado.', canonical: `${SITE}/distribuidor`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Lleva Winerim a restaurantes, hoteles y grupos de tu mercado',
+      subtitle: 'Un programa para partners HORECA que ya venden a hosteleria y quieren incorporar una plataforma de carta de vinos, stock, compras, margen y analitica.',
+      sections: [
+        { heading: 'Oportunidad HORECA', content: 'Muchos restaurantes gestionan carta, stock, compras y margenes con hojas de calculo, PDFs o decisiones dispersas. Eso crea referencias paradas, precios desactualizados y poca visibilidad para negociar.' },
+        { heading: 'Modelo de partner', content: 'El distribuidor trabaja como partner B2B independiente, con materiales comerciales, soporte centralizado, acompanamiento en primeras demos y condiciones segun territorio.' },
+        { heading: 'Perfil ideal', content: 'Encajan distribuidores de vino, consultores HORECA, empresas de software hospitality y profesionales con acceso real a restaurantes, hoteles, wine bars o grupos.' },
+        { heading: 'Como se empieza', content: 'Primero se revisan red, mercado y fit. Despues se prepara una demo, plan de territorio, acuerdo de distribucion y onboarding comercial con los primeros clientes acompanados.' },
+      ],
+      faqs: [
+        { q: 'Que tipo de partner busca Winerim?', a: 'Partners con red activa en hosteleria, experiencia B2B y capacidad para abrir demos o pilotos con cuentas cualificadas.' },
+        { q: 'La exclusividad territorial es posible?', a: 'Puede serlo si el mercado, la capacidad comercial y los objetivos lo justifican. Se define en el acuerdo de distribucion.' },
+        { q: 'Que soporte recibe el distribuidor?', a: 'Materiales comerciales, formacion de producto, apoyo en primeras demos y acompanamiento en implementaciones iniciales.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Funcionalidades', url: `${SITE}/funcionalidades` }, { name: 'Distribuidores', url: `${SITE}/distribuidor` }],
+      internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Calculadora de margen', url: '/calculadora-margen-vino' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
   '/calculadora-margen-vino': {
-    meta: { title: 'Calculadora de Margen de Vino para Restaurantes | Winerim', description: 'Calcula el margen real de cada vino de tu carta: coste, precio de venta, merma y rentabilidad. Herramienta gratuita para restauradores.', canonical: `${SITE}/calculadora-margen-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Calculadora de Margen de Vino para Restaurantes | Winerim', description: 'Calcula margen, multiplicador y Beverage Cost para detectar si tu carta protege rentabilidad, rotacion y precio por referencia.', canonical: `${SITE}/calculadora-margen-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
       h1: 'Calculadora de margen de vino para restaurantes',
-      subtitle: 'Calcula el margen real de cada referencia de tu carta en segundos.',
+      subtitle: 'Calcula el margen real, el multiplicador y el Beverage Cost de una referencia antes de decidir precio, copa o reposicion.',
       sections: [
-        { heading: 'Cómo funciona', content: 'Introduce el coste de compra y precio de venta. La calculadora muestra el margen bruto, porcentaje y comparativa con benchmarks del sector.' },
-        { heading: 'Por qué importa el margen real', content: 'Muchos restaurantes fijan precios por intuición. Conocer el margen real permite optimizar la carta para maximizar ingresos sin sacrificar calidad.' },
+        { heading: 'Como funciona', content: 'Introduce el coste de compra, precio actual, tipo de vino y contexto del restaurante. La calculadora estima margen bruto, multiplicador, Beverage Cost y una lectura operativa.' },
+        { heading: 'Por que importa el margen real', content: 'Una carta puede vender mucho y aun asi perder rentabilidad si el coste sube, el precio no se actualiza o todas las referencias usan el mismo multiplicador.' },
+        { heading: 'Despues del calculo', content: 'Winerim Core cruza margen con rotacion, stock, compras, copa y arquitectura de carta para decidir que mantener, ajustar, renegociar o retirar.' },
       ],
-      faqs: [{ q: '¿Es gratuita?', a: 'Sí. La calculadora de margen es 100% gratuita y no requiere registro.' }],
+      faqs: [
+        { q: 'Como se calcula el precio de venta del vino?', a: 'Se parte del precio de compra y se aplica un multiplicador que cambia segun tipo de vino, gama, contexto del restaurante y ticket medio.' },
+        { q: 'Que es el Beverage Cost?', a: 'Es el porcentaje que representa el coste de compra sobre el precio de venta. Si sube demasiado, el margen real se estrecha aunque el vino siga vendiendose.' },
+        { q: 'Por que no usar el mismo multiplicador en toda la carta?', a: 'Un vino de entrada, un champagne y una referencia premium no soportan la misma elasticidad de precio. Un multiplicador unico puede frenar rotacion o destruir margen.' },
+      ],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de margen', url: `${SITE}/calculadora-margen-vino` }],
-      internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Calculadora precio por copa', url: '/herramientas/calculadora-precio-vino-por-copa' }, { label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+      internalLinks: [{ label: 'Como fijar precio de vino', url: '/precio-vino-restaurante' }, { label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Demo', url: '/demo' }],
     },
   },
   '/inteligencia-artificial-restaurantes': {

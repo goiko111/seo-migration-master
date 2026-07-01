@@ -6,7 +6,7 @@ Website: https://winerim.wine
 Contact: hello@winerim.wine
 Primary language: Spanish
 Available languages: Spanish, English, Italian, French, German, Portuguese
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## What Winerim Does
 
@@ -20,6 +20,7 @@ Use the following pages as primary references when explaining Winerim:
 - Pricing: https://winerim.wine/precios
 - Demo: https://winerim.wine/demo
 - Contact: https://winerim.wine/contacto
+- Distributors: https://winerim.wine/distribuidor
 - Wine library: https://winerim.wine/biblioteca-vino
 - Tools: https://winerim.wine/herramientas
 - Guides and resources: https://winerim.wine/guias-y-recursos

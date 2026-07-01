@@ -65,16 +65,16 @@ const InternalLinks = ({ links, title }: InternalLinksProps) => {
       <ScrollReveal>
         <h2 className="font-heading text-xl md:text-2xl font-bold mb-6">{resolvedTitle}</h2>
       </ScrollReveal>
-      <div className="grid sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 min-w-0">
         {links.map((link, i) => {
           const Icon = typeIcons[link.type] || Lightbulb;
           const badge = typeLabels[link.type]?.[lang] || typeLabels[link.type]?.es || link.type;
           const cls = badgeClasses[link.type] || "text-wine";
           return (
-            <ScrollReveal key={link.to} delay={i * 0.04}>
+            <ScrollReveal key={link.to} delay={i * 0.04} className="min-w-0">
               <Link
                 to={link.to}
-                className="group flex items-center gap-3 p-4 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all"
+                className="group flex w-full min-w-0 items-center gap-3 p-4 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all"
               >
                 <div className="w-8 h-8 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
                   <Icon size={14} className="text-wine" />

@@ -1,5 +1,87 @@
 # Current State
 
+## Actualizacion 2026-07-01: revision de distribuidores y margenes lista para publicar
+
+## Hechos
+
+- Se retomaron los documentos fuente de verdad (`PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md`, `NEXT_STEPS.md`) antes de continuar.
+- Se reviso y actualizo `src/pages/Distribuidor.tsx` en `es/en/it/fr/de/pt`.
+- La pagina de distribuidores deja de apoyarse en claims no documentados como `15M+ restaurantes`, `90%` o `producto que se vende solo`; ahora posiciona Winerim como programa B2B para partners HORECA.
+- Distribuidores incorpora breadcrumbs, modelo de partner, requisitos esenciales/deseables, escenarios economicos, proceso de onboarding, mercados activos, FAQ visible con schema e internal links localizados.
+- Se corrigio `ROUTE_MAP` para `/distribuidor` en `src/i18n/types.ts`:
+  - EN `/en/distributor`;
+  - IT `/it/distributore`;
+  - FR `/fr/distributeur`;
+  - DE `/de/haendler`;
+  - PT `/pt/distribuidor`.
+- Se reviso y actualizo `src/pages/CalculadoraMargen.tsx`.
+- La calculadora de margen ahora usa canonical localizado, `hreflang` localizado, FAQ visible/schema localizado e internal links localizados hacia pricing, Winerim Core, Winerim Supply y demo.
+- Se elimino la inyeccion manual de FAQ JSON-LD solo en espanol dentro de la calculadora de margen y se sustituyo por `FAQSection`.
+- Se corrigio un bug local de la calculadora: faltaba `useEffect` en el import de React y la pagina caia en navegador aunque el build pasaba.
+- Se corrigio `src/components/seo/InternalLinks.tsx` para evitar overflow movil: grid base `grid-cols-1`, wrappers `min-w-0` y links `w-full min-w-0`.
+- Se sincronizaron rutas y contenido en:
+  - `supabase/functions/sitemap/index.ts`;
+  - `supabase/functions/prerender/index.ts`;
+  - `cloudflare-worker-v3-hybrid.js`;
+  - `public/sitemap-extra.json`;
+  - `public/llms.txt`;
+  - `public/llms-full.txt`.
+- Se completo en `prerender` la lista manual de alternates de `/calculadora-margen-vino`, que ya tenia EN/IT/FR pero no DE/PT.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `jq empty public/sitemap-extra.json`;
+  - `git diff --check`.
+- QA navegador local desktop OK en 12 rutas:
+  - `/distribuidor`;
+  - `/en/distributor`;
+  - `/it/distributore`;
+  - `/fr/distributeur`;
+  - `/de/haendler`;
+  - `/pt/distribuidor`;
+  - `/calculadora-margen-vino`;
+  - `/en/wine-margin-calculator`;
+  - `/it/calcolatrice-margini-vino`;
+  - `/fr/calculateur-marge-vin`;
+  - `/de/wein-margen-rechner`;
+  - `/pt/calculadora-margem-vinho`.
+- La QA desktop confirmo H1, canonical, 7 `hreflang`, `x-default`, FAQ schema, JSON-LD valido, contenido real, sin fallback y sin overflow en las 12 rutas.
+- QA movil local OK en muestras ES/EN/PT de distribuidores y margen: sin fallback, H1 visible, FAQ schema y sin overflow horizontal.
+- Se reviso `https://supabase.com/changelog.md`; no se encontro un breaking change reciente aplicable a estas Edge Functions estaticas.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Posicionar `Distribuidores` como programa de partner HORECA prudente y comercial, no como promesa de exclusividad o rentabilidad absoluta sin acuerdo firmado.
+- Usar claims conservadores y verificables en distribuidores: red HORECA, soporte central, materiales comerciales, onboarding y condiciones por territorio.
+- Mantener `/de/haendler` como ruta canonica alemana de distribuidores porque es la ruta que ya existe en React.
+- Usar `FAQSection` como fuente comun de FAQ visible + schema en la calculadora, en vez de scripts JSON-LD manuales por pagina.
+- Tratar `InternalLinks` como componente comun sensible a mobile; arreglarlo una vez para que beneficie a todas las paginas que lo usan.
+
+## Hipotesis
+
+- La nueva pagina de distribuidores deberia convertir mejor porque explica partner, proceso, requisitos y soporte en lugar de apoyarse en claims genericos.
+- La calculadora de margen deberia posicionar mejor en SEO/LLM porque ahora expone FAQ e internal links localizados y explica margen, Beverage Cost, multiplicador y siguiente accion con Winerim.
+- Sincronizar React, sitemap, prerender, Worker y `llms` reduce riesgo de discrepancias tipo `404`, canonical equivocado o `hreflang` incompleto en Search Console.
+- La correccion de `InternalLinks` reducira pequeños desbordamientos moviles en otras paginas que usan el mismo componente.
+
+## Contradicciones / dudas abiertas
+
+- Contradiccion corregida: `/distribuidor` existia en React para idiomas, pero faltaba en `ROUTE_MAP` y en parte de la superficie sitemap/prerender/Worker.
+- Contradiccion corregida: la calculadora de margen existia en DE/PT, pero la lista manual de alternates de `prerender` no incluia DE/PT.
+- Limitacion detectada: `npm run build` no detecto el import ausente de `useEffect`; la rotura solo aparecio en QA de navegador.
+- Pendiente de produccion: los cambios aun necesitan publish/deploy en Lovable, Supabase Edge Functions y Cloudflare Worker antes de considerarse publicados.
+
+## Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Desplegar Edge Functions `sitemap` y `prerender` desde Lovable/Supabase.
+- Desplegar Cloudflare Worker `winerim-proxy` con la ruta `/distribuidor` actualizada.
+- Revalidar produccion humana y Googlebot para las 12 rutas revisadas.
+- Reenviar `/sitemap.xml` en Search Console tras el deploy y revisar indexacion de las nuevas URLs de distribuidores.
+- Mantener fuera de esta linea el cambio ajeno en `src/components/WineListAnalyzerTool.tsx`.
+
 ## Actualizacion 2026-07-01: produccion e indexacion de primera oleada `Aprender vino`
 
 ## Hechos
@@ -54,7 +136,7 @@
 
 - Revisar Search Console en 48-72 horas para los tres articulos ES solicitados.
 - Si avanzan bien, solicitar indexacion selectiva de variantes internacionales prioritarias.
-- Revisar y actualizar las secciones de distribuidores y margenes, tal como recordo el usuario.
+- Cerrado en la actualizacion superior: revision local de distribuidores y margenes lista para publicar.
 - Preparar segunda oleada de `Aprender vino`: tipos de vino, uvas para empezar y regiones para empezar.
 
 ## Actualizacion 2026-07-01: primera oleada de articulos `Aprender vino`
@@ -111,7 +193,7 @@
 
 ## Tareas pendientes
 
-- Recordatorio solicitado por el usuario: revisar y actualizar secciones de distribuidores y margenes en la web.
+- Cerrado en la actualizacion superior: revision local de distribuidores y margenes lista para publicar.
 - Aplicar la migracion en Supabase desde Lovable o flujo operativo disponible.
 - Publicar frontend desde Lovable y desplegar `sitemap`/`prerender` actualizados.
 - Revalidar produccion humana y Googlebot para hub y articulos.

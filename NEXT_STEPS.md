@@ -1,5 +1,60 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras revision de distribuidores y margenes
+
+## Hechos
+
+- Revision local de distribuidores y margenes completada.
+- Cambios preparados en React, rutas i18n, sitemap, prerender, Worker, `sitemap-extra` y `llms`.
+- QA local desktop completada en 12 rutas con H1, canonical, 7 `hreflang`, FAQ schema, JSON-LD valido, sin fallback y sin overflow.
+- QA movil completada en muestras ES/EN/PT de distribuidores y margen sin overflow y sin errores nuevos.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `jq empty public/sitemap-extra.json`;
+  - `git diff --check`.
+- Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Publicar y desplegar esta tanda:
+   - frontend desde Lovable;
+   - Edge Functions `sitemap` y `prerender`;
+   - Cloudflare Worker `winerim-proxy`.
+2. Revalidar produccion humana y Googlebot:
+   - `/distribuidor`;
+   - `/en/distributor`;
+   - `/it/distributore`;
+   - `/fr/distributeur`;
+   - `/de/haendler`;
+   - `/pt/distribuidor`;
+   - `/calculadora-margen-vino`;
+   - `/en/wine-margin-calculator`;
+   - `/it/calcolatrice-margini-vino`;
+   - `/fr/calculateur-marge-vin`;
+   - `/de/wein-margen-rechner`;
+   - `/pt/calculadora-margem-vinho`.
+3. Tras deploy, reenviar `/sitemap.xml` en Search Console.
+4. Inspeccionar en Search Console:
+   - `/distribuidor`;
+   - `/calculadora-margen-vino`;
+   - una variante internacional de distribuidores;
+   - una variante internacional de margen.
+5. Monitorizar en 48-72 horas la primera oleada de `Aprender vino` ya solicitada:
+   - `/article/como-catar-vino-en-cinco-pasos`;
+   - `/article/vocabulario-de-cata-de-vino`;
+   - `/article/maridajes-basicos-para-restaurantes`.
+6. Preparar segunda oleada de `Aprender vino`:
+   - tipos de vino explicados para restaurantes;
+   - uvas que conocer para empezar;
+   - regiones vinicolas para empezar.
+7. Adaptar `Como lo hace Winerim` a producto y funnels:
+   - Winerim Core;
+   - Winerim Supply;
+   - version corta para landings de captacion.
+8. Mantener pendiente separado: confirmar en CRM los leads QA de formularios anteriores.
+
 ## Actualizacion 2026-07-01: retomar tras primera oleada publicada de `Aprender vino`
 
 ## Hechos
@@ -30,13 +85,7 @@
 
 ## Tareas pendientes inmediatas
 
-1. Revisar secciones de distribuidores y margenes:
-   - copy y claims;
-   - enlaces internos;
-   - CTAs;
-   - SEO convencional;
-   - posicionamiento LLM;
-   - coherencia con producto, `Como lo hace Winerim`, analisis de carta y conversion.
+1. Cerrado en la actualizacion superior: revision local de distribuidores y margenes lista para publicar.
 2. Monitorizar Search Console en 48-72 horas:
    - `/article/como-catar-vino-en-cinco-pasos`;
    - `/article/vocabulario-de-cata-de-vino`;
@@ -49,7 +98,7 @@
    - tipos de vino explicados para restaurantes;
    - uvas que conocer para empezar;
    - regiones vinicolas para empezar.
-5. Adaptar `Como lo hace Winerim` a producto y funnels cuando se cierre la revision de distribuidores/margenes.
+5. Adaptar `Como lo hace Winerim` a producto y funnels tras publicar y revalidar distribuidores/margenes.
 
 ## Actualizacion 2026-06-30: retomar tras implementacion inicial `Como lo hace Winerim`
 

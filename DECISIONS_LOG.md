@@ -2,6 +2,43 @@
 
 ## 2026-07-01
 
+### Revision de distribuidores y margenes
+
+#### Hechos
+
+- Se actualizaron las secciones/paginas de distribuidores y calculadora de margen en seis idiomas.
+- `Distribuidor` ahora se posiciona como programa B2B para partners HORECA y elimina claims no documentados como `15M+ restaurantes`, `90%` y `producto que se vende solo`.
+- `Distribuidor` incorpora breadcrumbs, contenido localizado de modelo de partner, requisitos, escenarios economicos, proceso, mercados, FAQ schema e internal links.
+- Se anadio `/distribuidor` al `ROUTE_MAP`, `sitemap`, `prerender`, Worker, `sitemap-extra` y archivos `llms`.
+- `CalculadoraMargen` incorpora canonical localizado, FAQ visible/schema localizado e internal links localizados.
+- Se corrigio un bug de runtime en `CalculadoraMargen` por import ausente de `useEffect`.
+- Se corrigio overflow movil en `InternalLinks` con `grid-cols-1`, `min-w-0` y `w-full`.
+- Se completo en `prerender` la matriz de alternates de la calculadora con DE/PT.
+- Validaciones locales pasadas: build, Worker check, Deno check de Edge Functions, JSON de `sitemap-extra`, `git diff --check` y QA navegador desktop/mobile.
+- Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse.
+
+#### Decisiones
+
+- Tratar la pagina de distribuidores como programa de partner comercial HORECA, no como promesa de exclusividad o rentabilidad automatica.
+- Mantener claims prudentes sobre margen, territorio y soporte hasta que cada acuerdo comercial los concrete.
+- Mantener `/de/haendler` como canonical aleman de distribuidores.
+- Usar `FAQSection` para FAQ visibles y schema multilingue en la calculadora, evitando JSON-LD manual solo en espanol.
+- Corregir el overflow en el componente comun `InternalLinks` porque afecta a varias paginas, no solo a distribuidores/margenes.
+
+#### Hipotesis
+
+- El nuevo enfoque de distribuidores deberia atraer partners mas cualificados porque explica fit, proceso y requisitos.
+- La calculadora de margen deberia mejorar su recuperabilidad SEO/LLM por tener FAQ localizada, enlaces internos correctos y coherencia entre React y prerender.
+- La paridad entre rutas React, sitemap, prerender, Worker y `llms` deberia reducir incidencias futuras en Search Console.
+
+#### Tareas pendientes
+
+- Publicar frontend en Lovable.
+- Desplegar `sitemap` y `prerender`.
+- Desplegar Worker.
+- Revalidar produccion humana y Googlebot para distribuidores y calculadora de margen en seis idiomas.
+- Reenviar sitemap e inspeccionar URLs prioritarias en Search Console.
+
 ### Produccion e indexacion de primera oleada `Aprender vino`
 
 #### Hechos
@@ -23,7 +60,7 @@
 
 - Considerar cerrada la publicacion tecnica de la primera oleada de `Aprender vino`.
 - No pedir indexacion manual masiva de las 18 variantes de golpe; monitorizar primero hub y articulos ES.
-- Mantener como siguiente foco la revision de distribuidores/margenes y la segunda oleada editorial.
+- Mantener como siguiente foco la publicacion/revalidacion de distribuidores/margenes y la segunda oleada editorial.
 
 #### Hipotesis
 
@@ -34,7 +71,7 @@
 
 - Revisar Search Console en 48-72 horas.
 - Pedir indexacion de variantes internacionales solo si el primer lote progresa o si alguna URL prioritaria queda estancada.
-- Continuar con revision de distribuidores/margenes y segunda oleada de `Aprender vino`.
+- Continuar con publicacion/revalidacion de distribuidores/margenes y segunda oleada de `Aprender vino`.
 
 ### Primera oleada de articulos `Aprender vino`
 

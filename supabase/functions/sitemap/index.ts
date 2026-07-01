@@ -4,7 +4,7 @@ const corsHeaders = {
 };
 
 const SITE = 'https://winerim.wine';
-const STATIC_ROUTE_LASTMOD = '2026-06-30';
+const STATIC_ROUTE_LASTMOD = '2026-07-01';
 const WINE_LIBRARY_LASTMOD = '2026-06-01';
 
 // ─────────────────────────────────────────────
@@ -28,6 +28,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/problemas': '/en/challenges',
     '/sommelier-corner': '/en/sommelier-corner',
     '/afiliate': '/en/affiliate',
+    '/distribuidor': '/en/distributor',
     '/software-carta-de-vinos': '/en/wine-list-management-software',
     '/que-es-winerim': '/en/what-is-winerim',
     '/privacidad': '/en/privacy',
@@ -65,6 +66,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/problemas': '/it/sfide',
     '/sommelier-corner': '/it/sommelier-corner',
     '/afiliate': '/it/affiliati',
+    '/distribuidor': '/it/distributore',
     '/software-carta-de-vinos': '/it/software-carta-vini',
     '/que-es-winerim': '/it/cose-winerim',
     '/privacidad': '/it/privacy',
@@ -102,6 +104,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/problemas': '/fr/defis',
     '/sommelier-corner': '/fr/sommelier-corner',
     '/afiliate': '/fr/affilies',
+    '/distribuidor': '/fr/distributeur',
     '/software-carta-de-vinos': '/fr/logiciel-carte-des-vins',
     '/que-es-winerim': '/fr/quest-ce-que-winerim',
     '/privacidad': '/fr/confidentialite',
@@ -139,6 +142,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/problemas': '/de/herausforderungen',
     '/sommelier-corner': '/de/sommelier-corner',
     '/afiliate': '/de/partner',
+    '/distribuidor': '/de/haendler',
     '/software-carta-de-vinos': '/de/weinkarten-software',
     '/que-es-winerim': '/de/was-ist-winerim',
     '/privacidad': '/de/datenschutz',
@@ -176,6 +180,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/problemas': '/pt/desafios',
     '/sommelier-corner': '/pt/sommelier-corner',
     '/afiliate': '/pt/afiliados',
+    '/distribuidor': '/pt/distribuidor',
     '/software-carta-de-vinos': '/pt/software-carta-vinhos',
     '/que-es-winerim': '/pt/o-que-e-winerim',
     '/privacidad': '/pt/privacidade',
@@ -318,6 +323,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/precios', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/contacto', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/afiliate', priority: '0.6', changefreq: 'monthly', multilang: true },
+  { esPath: '/distribuidor', priority: '0.6', changefreq: 'monthly', multilang: true },
   { esPath: '/guias-y-recursos', priority: '0.7', changefreq: 'weekly', multilang: true },
   { esPath: '/herramientas', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/casos-exito', priority: '0.7', changefreq: 'monthly', multilang: true },
