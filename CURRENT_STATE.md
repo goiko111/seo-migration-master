@@ -1,5 +1,54 @@
 # Current State
 
+## Actualizacion 2026-07-01: revalidacion post-publish y fix de canonicals/localizacion
+
+## Hechos
+
+- El usuario confirmo que el frontend con la ampliacion comercial de Core/Supply/Meta Demo ya estaba publicado.
+- Se revalido produccion en navegador real, desktop y mobile, para:
+  - `https://winerim.wine/producto/winerim-core`;
+  - `https://winerim.wine/en/product/winerim-core`;
+  - `https://winerim.wine/producto/winerim-supply`;
+  - `https://winerim.wine/pt/produto/winerim-supply`;
+  - `https://go.winerim.wine/`.
+- La revalidacion confirmo que las nuevas secciones estan visibles, los CTAs estan presentes, no hay overflow horizontal y no aparece `Not found`.
+- `https://go.winerim.wine/` mantiene canonical propio, H1 correcto, bloque `Que veras en la demo`, formulario presente y cabecera `x-robots-tag: noindex, follow`.
+- Se detecto una contradiccion SEO en produccion: `/en/product/winerim-core` mostraba contenido ingles, pero el canonical seguia apuntando a `/producto/winerim-core`.
+- Se corrigio localmente `src/pages/WinerimCore.tsx` para calcular la URL canonica con `CANONICAL_DOMAIN + localePath("/producto/winerim-core")`.
+- Se corrigio localmente `src/components/DecisionCenterTeaser.tsx` con traducciones DE/PT y fallback mediante `getI18n`, cerrando la deuda detectada de texto espanol en variantes PT/DE.
+- Validaciones locales del fix OK:
+  - `npm run build`;
+  - `git diff --check`;
+  - navegador local para `/en/product/winerim-core`, `/de/produkt/winerim-core` y `/pt/produto/winerim-supply` con canonical/copy correctos y sin overflow.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco ni debe incluirse.
+
+## Decisiones
+
+- Considerar la ampliacion comercial de Core/Supply/Meta Demo publicada y validada en produccion.
+- Corregir de inmediato canonicals localizados incorrectos aunque la pagina sea visible y funcional.
+- Resolver la localizacion de componentes compartidos en el componente comun (`DecisionCenterTeaser`) para evitar residuos de idioma en varias paginas.
+
+## Hipotesis
+
+- El canonical localizado de Core deberia reducir senales de duplicidad o consolidacion erronea en paginas internacionales de producto.
+- Las traducciones DE/PT del teaser deberian mejorar consistencia de idioma y calidad percibida en producto, especialmente para crawlers y usuarios internacionales.
+
+## Contradicciones / dudas abiertas
+
+- Contradiccion detectada y corregida localmente: contenido ingles en `/en/product/winerim-core` con canonical espanol en produccion.
+- El fix todavia no esta publicado en produccion hasta que Lovable publique el commit nuevo.
+- Search Console sigue con cuota diaria superada para las solicitudes manuales pendientes.
+
+## Tareas pendientes
+
+- Pushear el fix de canonical/localizacion y publicar frontend desde Lovable.
+- Revalidar en produccion despues del publish:
+  - `/en/product/winerim-core` canonical `https://winerim.wine/en/product/winerim-core`;
+  - `/de/produkt/winerim-core` canonical `https://winerim.wine/de/produkt/winerim-core`;
+  - `/pt/produto/winerim-supply` teaser Decision Center en portugues.
+- Cuando se reinicie la cuota de Search Console, solicitar indexacion manual de las 3 URLs ES nuevas de `Aprender vino` y de `/it/calcolatrice-margini-vino`.
+- Revisar si Search Console actualiza el conteo de sitemap hacia `2282`.
+
 ## Actualizacion 2026-07-01: segunda oleada publicada y bloque comercial ampliado
 
 ## Hechos

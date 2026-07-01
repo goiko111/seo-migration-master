@@ -2,6 +2,40 @@
 
 ## 2026-07-01
 
+### Revalidacion post-publish y fix de canonicals/localizacion
+
+#### Hechos
+
+- Tras el publish de Lovable, produccion valida en navegador real la ampliacion comercial de Core, Supply y Meta Demo.
+- Las rutas revisadas no presentan overflow ni `Not found` en desktop/mobile:
+  - `/producto/winerim-core`;
+  - `/en/product/winerim-core`;
+  - `/producto/winerim-supply`;
+  - `/pt/produto/winerim-supply`;
+  - `https://go.winerim.wine/`.
+- `go.winerim.wine` mantiene `noindex, follow`, formulario visible y bloque `Que veras en la demo`.
+- Se detecto que `/en/product/winerim-core` tenia canonical espanol aunque el contenido fuese ingles.
+- Se corrigio localmente `WinerimCore` para generar canonical localizado con `localePath`.
+- Se corrigio localmente `DecisionCenterTeaser` con copys DE/PT y fallback `getI18n`.
+- Validaciones locales del fix: build OK, `git diff --check` OK y navegador local OK para canonical EN/DE Core y copy PT.
+
+#### Decisiones
+
+- Tratar canonicals cruzados entre idiomas como error SEO prioritario.
+- Mantener cada pagina internacional de producto con canonical propio, no consolidado a ES.
+- Resolver los textos compartidos en el componente comun para evitar residuos de idioma en cualquier pagina que lo use.
+
+#### Hipotesis
+
+- Corregir el canonical de Core EN/DE/PT reducira riesgo de consolidacion incorrecta y mejorara lectura por Google/LLMs.
+- La localizacion DE/PT del Decision Center refuerza coherencia internacional en paginas de producto.
+
+#### Tareas pendientes
+
+- Pushear y publicar el fix en Lovable.
+- Revalidar produccion tras publish del fix.
+- Continuar con Search Console cuando se reinicie cuota.
+
 ### Segunda oleada publicada y extension comercial `Como lo hace Winerim`
 
 #### Hechos

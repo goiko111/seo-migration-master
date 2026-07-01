@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Brain, BarChart3, Lightbulb, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getI18n } from "@/i18n/types";
 
 /* ── i18n ── */
 const i18n: I18nMap<{
@@ -65,6 +66,32 @@ const i18n: I18nMap<{
     badge: "Clients uniquement",
     badge_desc: "Disponible dans la plateforme pour les utilisateurs actifs de Winerim.",
   },
+  de: {
+    eyebrow: "Für Kunden enthalten",
+    title_1: "Sie sehen nicht nur Daten. ",
+    title_highlight: "Sie wissen, was zu tun ist.",
+    subtitle: "Decision Center ist eine exklusive Produktschicht, die Winerim-Kunden hilft, Insights zu interpretieren, Aktionen zu priorisieren und klarere Entscheidungen zu Weinkarte, Pricing, Bestand und Einkauf zu treffen.",
+    pillars: [
+      { icon: "brain", label: "Kontextuelle Interpretation", desc: "Jede Kennzahl kommt mit Kontext: was sie bedeutet, warum sie wichtig ist und was zu tun ist." },
+      { icon: "chart", label: "Intelligente Priorisierung", desc: "Warnungen werden nach Dringlichkeit sortiert, damit Sie dort zuerst handeln, wo der groesste Hebel liegt." },
+      { icon: "lightbulb", label: "Umsetzbare Entscheidungen", desc: "Konkrete Schritte fuer jede Situation: nicht nur Diagnose, sondern Aktion." },
+    ],
+    badge: "Nur fuer Kunden",
+    badge_desc: "Verfuegbar in der Plattform fuer aktive Winerim-Nutzer.",
+  },
+  pt: {
+    eyebrow: "Incluido para clientes",
+    title_1: "Não vê apenas dados. ",
+    title_highlight: "Sabe o que fazer com eles.",
+    subtitle: "O Decision Center é uma camada exclusiva do produto que ajuda clientes Winerim a interpretar insights, priorizar ações e tomar decisões mais claras sobre carta, pricing, stock e compras.",
+    pillars: [
+      { icon: "brain", label: "Interpretação contextual", desc: "Cada métrica vem acompanhada de contexto: o que significa, porque importa e o que fazer." },
+      { icon: "chart", label: "Priorização inteligente", desc: "Classifica alertas por urgência para agir primeiro onde existe mais impacto." },
+      { icon: "lightbulb", label: "Decisões acionáveis", desc: "Passos concretos para cada situação: não apenas diagnóstico, também ação." },
+    ],
+    badge: "Só para clientes",
+    badge_desc: "Disponível dentro da plataforma para utilizadores ativos da Winerim.",
+  },
 };
 
 const iconMap = {
@@ -80,7 +107,7 @@ interface Props {
 }
 
 const DecisionCenterTeaser = memo(({ lang, compact = false }: Props) => {
-  const t = i18n[lang] || i18n.es;
+  const t = getI18n(i18n, lang);
 
   if (compact) {
     return (

@@ -1,5 +1,48 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras revalidacion post-publish y fix local
+
+## Hechos
+
+- La ampliacion comercial de Core/Supply/Meta Demo ya fue publicada por Lovable y revalidada en produccion.
+- Produccion valida en navegador real desktop/mobile:
+  - `/producto/winerim-core`;
+  - `/en/product/winerim-core`;
+  - `/producto/winerim-supply`;
+  - `/pt/produto/winerim-supply`;
+  - `https://go.winerim.wine/`.
+- Las secciones nuevas y CTAs estan visibles, no hay overflow y no aparece `Not found`.
+- `go.winerim.wine` mantiene `noindex, follow`, formulario visible y bloque `Que veras en la demo`.
+- Se detecto y corrigio localmente una contradiccion SEO: `/en/product/winerim-core` tenia canonical espanol en produccion.
+- Fix local preparado:
+  - `src/pages/WinerimCore.tsx` genera canonical con `localePath`;
+  - `src/components/DecisionCenterTeaser.tsx` incorpora DE/PT y fallback `getI18n`.
+- Validaciones locales del fix OK:
+  - `npm run build`;
+  - `git diff --check`;
+  - navegador local para Core EN/DE y Supply PT.
+- Cambio ajeno en `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Publicar en Lovable el commit nuevo con:
+   - canonical localizado de `WinerimCore`;
+   - localizacion DE/PT de `DecisionCenterTeaser`.
+2. Revalidar produccion tras ese publish:
+   - `https://winerim.wine/en/product/winerim-core` canonical propio;
+   - `https://winerim.wine/de/produkt/winerim-core` canonical propio;
+   - `https://winerim.wine/pt/produto/winerim-supply` sin texto espanol en Decision Center.
+3. Search Console cuando se reinicie cuota:
+   - solicitar indexacion de `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta`;
+   - solicitar indexacion de `https://winerim.wine/article/uvas-que-conocer-para-empezar`;
+   - solicitar indexacion de `https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante`;
+   - solicitar indexacion de `https://winerim.wine/it/calcolatrice-margini-vino`.
+4. Revisar si Search Console actualiza `/sitemap.xml` desde `2.264` paginas descubiertas hacia las `2282` URLs productivas.
+5. Mantener pendiente separado:
+   - confirmar visualmente en CRM los leads QA anteriores;
+   - no tocar chat hasta nueva orden;
+   - no tocar `WineListAnalyzerTool.tsx` salvo instruccion expresa.
+
 ## Actualizacion 2026-07-01: retomar tras Worker, Search Console y secciones comerciales
 
 ## Hechos

@@ -2,6 +2,12 @@
 
 ## Hechos
 
+- El 2026-07-01, tras el publish de Lovable del bloque comercial Core/Supply/Meta Demo, se revalido produccion en navegador real para `WinerimCore`, `WinerimSupply` y `go.winerim.wine`: contenido nuevo visible, CTAs presentes, sin overflow en desktop/mobile y `go.winerim.wine` con `noindex, follow`.
+- En esa revalidacion se detecto una contradiccion SEO: `https://winerim.wine/en/product/winerim-core` renderizaba contenido ingles, pero su canonical apuntaba a `https://winerim.wine/producto/winerim-core`.
+- Se corrigio localmente `WinerimCore` para que el canonical use `localePath("/producto/winerim-core")` sobre `CANONICAL_DOMAIN`.
+- Se corrigio localmente la deuda de localizacion de `DecisionCenterTeaser`: ahora tiene copys DE/PT y usa `getI18n` para fallback seguro.
+- Validaciones locales del fix Core/Decision Center: `npm run build`, `git diff --check` y QA navegador local de canonical EN/DE Core y copy PT Supply sin overflow ni `Not found`.
+- El fix de canonical/localizacion queda pendiente de publicar en Lovable y revalidar en produccion.
 - El 2026-07-01, tras confirmacion del usuario de que Lovable habia publicado la segunda oleada de `Aprender vino`, se desplego Cloudflare Worker `winerim-proxy` version `6d8af13d-2ac0-4626-8535-2f5457954d56`.
 - Antes de desplegar el Worker, se validaron las 18 URLs nuevas de articulos como Googlebot: todas devolvian `HTTP 200`, `x-prerendered: true`, canonical propio y contenido real sin `Not found`.
 - Tras el Worker, los 6 hubs de `Aprender vino` validan como Googlebot con `HTTP 200`, `x-worker-branch: worker-static-prerender`, `x-prerendered: true`, canonical propio y enlaces a las 6 guias por idioma.
@@ -189,6 +195,8 @@
 
 ## Decisiones
 
+- Tratar cualquier canonical localizado que apunte a la version espanola como error SEO, aunque el contenido visible este correctamente traducido.
+- Resolver deudas de localizacion comunes en componentes compartidos cuando aparezcan durante QA de producto, no dejarlas como problema aislado de una sola pagina.
 - Mantener la segunda oleada de `Aprender vino` como articulos guiados B2B y no mezclarla con fichas de entidad de `Biblioteca del vino`.
 - Coordinar despliegue de oleadas editoriales que dependen de Supabase en este orden: migracion de articulos, publish frontend, Edge Functions `sitemap`/`prerender`, Worker.
 - Dar por publicada y revalidada tecnicamente la tanda de distribuidores y calculadora de margen tras validar Googlebot, navegador real, sitemap y Search Console.

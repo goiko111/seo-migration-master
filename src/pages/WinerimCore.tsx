@@ -19,6 +19,7 @@ import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
 import { getI18n } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
+import { CANONICAL_DOMAIN } from "@/seo/config";
 
 /* ── Animation ── */
 const fadeUp = {
@@ -638,13 +639,14 @@ const i18n: I18nMap<CoreI18n> = {
 const WinerimCore = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/producto/winerim-core")}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={t.seo_title}
         description={t.seo_desc}
-        url="https://winerim.wine/producto/winerim-core"
+        url={canonicalUrl}
         hreflang={allLangPaths("/producto/winerim-core")}
       />
       <Navbar />
