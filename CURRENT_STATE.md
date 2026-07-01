@@ -1,5 +1,64 @@
 # Current State
 
+## Actualizacion 2026-07-01: revalidacion productiva de landing Meta Demo
+
+## Hechos
+
+- Se hizo una segunda pasada de QA sobre la landing de `go.winerim.wine` despues del commit `67e245a`.
+- Estado repo al iniciar la pasada: `main` en `67e245a`; unico cambio local ajeno pendiente `src/components/WineListAnalyzerTool.tsx`.
+- Validaciones locales:
+  - `npm run build` OK;
+  - `git diff --check` OK;
+  - capturas desktop/mobile de `http://127.0.0.1:4190/meta-demo` OK;
+  - el codigo contiene `Sistema Winerim IA`, los 4 bullets nuevos, `Solicita tu demo`, `+2.000` y no contiene `Prueba gratuita`, `PLANTILLA`, `+1.000` ni `BODEGAS GESTIONADAS`.
+- Produccion ya esta publicada: `https://go.winerim.wine/` renderiza `Sistema Winerim IA`.
+- Produccion en `https://winerim.wine/meta-demo` tambien renderiza la landing actualizada.
+- Headers productivos revisados:
+  - `HTTP 200`;
+  - `x-robots-tag: noindex, follow`;
+  - `x-worker-branch: spa`;
+  - `x-deployment-id: e39de2d7-cea8-40e7-b65a-2b8a4ca7690d`.
+- DOM productivo revisado:
+  - title `Solicita una demo gratuita de Winerim | Winerim`;
+  - robots `noindex, follow`;
+  - canonical `https://go.winerim.wine/`;
+  - OpenGraph `https://winerim.wine/og-image.png`;
+  - chat desactivado (`window.__WINERIM_CHAT_DISABLED__ === true`) y sin nodos de chat.
+- Layout productivo:
+  - desktop sin overflow horizontal (`1280/1280`);
+  - mobile sin overflow horizontal (`390/390`);
+  - CTA fijo visible en desktop/mobile.
+- Clic real sobre el CTA fijo en mobile:
+  - actualiza hash a `#demo-form`;
+  - desplaza a `scrollY=1188`;
+  - deja `#demo-form` visible con top aproximado `96px`.
+- UTMs/fbclid en produccion verificados con query real: los hidden inputs conservan `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` y `fbclid`.
+- Formulario inspeccionado: conserva 19 controles, campos obligatorios y selects esperados.
+- No se envio lead nuevo al CRM en esta pasada para evitar ruido, porque el cambio revalidado no toco backend ni `onSubmit`.
+- Unicos 404 observados: `https://go.winerim.wine/__l5e/trackevents`, tracking interno de Lovable no bloqueante.
+
+## Decisiones
+
+- Dar por publicada y revalidada la actualizacion de copy/CTA de la landing Meta Demo.
+- No hacer prueba de envio CRM adicional salvo peticion expresa o cambio futuro en el flujo de formulario.
+- Mantener el banner global de cookies como posible mejora CRO separada, no como incidencia de esta pasada.
+
+## Hipotesis
+
+- La landing deberia estar lista para trafico de campana desde el punto de vista de copy, CTA, atribucion UTM y SEO `noindex`.
+- Los 404 de `__l5e/trackevents` no deberian afectar conversion ni tracking propio de Winerim; parecen ruido de Lovable.
+
+## Contradicciones / dudas abiertas
+
+- La navegacion directa a `https://go.winerim.wine/#demo-form` no desplaza en captura inicial por el comportamiento de carga de la SPA, pero el clic real del CTA ya renderizado si funciona correctamente.
+- Sigue pendiente decidir si se adapta el banner de cookies para mejorar conversion en landings de pago.
+
+## Tareas pendientes
+
+- Retomar CloudRIM/SAVia cuando el usuario lo confirme.
+- Si se quiere una QA completa de CRM tras el publish, enviar un lead test nuevo y verificar `contact_leads`, `send-lead-notification` y `submit-gastrofunnel`.
+- Mantener fuera de alcance `src/components/WineListAnalyzerTool.tsx` salvo instruccion expresa.
+
 ## Actualizacion 2026-07-01: landing Meta Demo actualizada antes de CloudRIM/SAVia
 
 ## Hechos

@@ -1,5 +1,47 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras revalidar landing Meta Demo en produccion
+
+## Hechos
+
+- Landing Meta Demo publicada y revalidada en produccion.
+- `https://go.winerim.wine/` y `https://winerim.wine/meta-demo` muestran la version actualizada.
+- Revalidado:
+  - badge `Sistema Winerim IA`;
+  - CTA fijo `Solicita tu demo`;
+  - bullets nuevos con primera frase destacada;
+  - `+2.000 restaurantes`;
+  - testimonios reales;
+  - `noindex, follow`;
+  - OpenGraph de Winerim;
+  - chat desactivado;
+  - sin overflow horizontal desktop/mobile;
+  - ancla del CTA al formulario funcionando con clic real;
+  - UTMs/fbclid capturados en inputs ocultos.
+- No se envio lead test nuevo en esta pasada para evitar ruido en CRM.
+- Observacion no bloqueante: 404 de `__l5e/trackevents` de Lovable.
+- Cambio ajeno en `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Retomar CloudRIM/SAVia desde el handoff:
+   - `/producto/cloudrim`;
+   - `/producto/savia`;
+   - bloque en home;
+   - cards en `/funcionalidades`;
+   - CloudRIM en `/integraciones`;
+   - SAVia en `/producto/inteligencia-dinamica`.
+2. Si se quiere cerrar tambien CRM despues de esta publicacion, enviar un lead test nuevo desde `https://go.winerim.wine/` y verificar:
+   - `contact_leads`;
+   - `send-lead-notification`;
+   - `submit-gastrofunnel`;
+   - entrada visible en Winerim Connect/CRM.
+3. Decidir si se optimiza el banner de cookies para landings de pago.
+4. Mantener pendientes SEO previos:
+   - Search Console cuando reinicie cuota;
+   - revisar conteo de sitemap hacia `2282`;
+   - revalidar cualquier fix de canonicals/localizacion que no haya quedado publicado.
+
 ## Actualizacion 2026-07-01: retomar tras ajuste de landing Meta Demo
 
 ## Hechos

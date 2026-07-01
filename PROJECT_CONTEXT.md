@@ -2,6 +2,12 @@
 
 ## Hechos
 
+- El 2026-07-01 se revalido en produccion el commit `67e245a` de la landing Meta Demo: `https://go.winerim.wine/` y `https://winerim.wine/meta-demo` ya renderizan `Sistema Winerim IA`, CTA fijo `Solicita tu demo`, bullets nuevos con inicio en negrita, `+2.000 restaurantes` y testimonios reales.
+- La revalidacion productiva confirmo `x-robots-tag: noindex, follow`, canonical `https://go.winerim.wine/`, OpenGraph `https://winerim.wine/og-image.png`, chat desactivado y ausencia de overflow horizontal en desktop/mobile.
+- El CTA fijo de la landing Meta fue probado con clic real en produccion: actualiza hash a `#demo-form`, desplaza al formulario y lo deja visible en mobile.
+- La captura de UTMs/fbclid de `go.winerim.wine` fue revalidada en produccion con query real; los hidden inputs conservan `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` y `fbclid`.
+- En esta pasada no se envio un lead nuevo al CRM porque el cambio revisado era de copy/CTA y el flujo backend no se habia tocado; el formulario ya conserva campos y conexion React/Supabase/CRM existentes.
+- La QA productiva detecto solo 404 de `https://go.winerim.wine/__l5e/trackevents`, atribuibles a tracking interno de Lovable; no afectan al render, formulario ni CTA.
 - El 2026-07-01 se actualizo localmente la landing de campanas `go.winerim.wine` / `/meta-demo` con el copy aportado desde LeadConnector: badge `Sistema Winerim IA`, bullets nuevos con primera frase en negrita y CTA fijo superior `Solicita tu demo`.
 - En esa actualizacion se mantuvieron los testimonios reales ya publicados y el claim `+2.000 restaurantes`; el enlace de referencia seguia mostrando placeholders y `+1.000 bodegas gestionadas`, pero eso contradice decisiones previas del proyecto.
 - La validacion local de la actualizacion de Meta Demo paso `npm run build`, `git diff --check`, captura Playwright desktop/mobile y comprobacion por selector `Sistema Winerim IA`.
@@ -200,6 +206,8 @@
 
 ## Decisiones
 
+- Considerar publicada y revalidada la actualizacion de copy/CTA de `go.winerim.wine` tras comprobar produccion, responsive, ancla al formulario, UTMs y SEO `noindex`.
+- No generar leads QA adicionales cuando el cambio revisado no toca backend/formulario y ya existen pruebas previas de CRM, salvo que el usuario pida una prueba completa de envio.
 - Para `go.winerim.wine`, usar el copy comercial nuevo de LeadConnector solo donde no contradiga decisiones previas: se conserva `+2.000 restaurantes` y testimonios reales.
 - Mantener el CTA fijo superior de la landing Meta como boton de anclaje al formulario, sin cambiar el flujo React/Supabase/CRM existente.
 - Tratar el banner de cookies en landing de pago como posible optimizacion CRO separada, no como bloqueante tecnico.

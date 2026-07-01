@@ -2,6 +2,42 @@
 
 ## 2026-07-01
 
+### Revalidacion productiva de landing Meta Demo
+
+#### Hechos
+
+- Se hizo una segunda pasada sobre la landing Meta Demo despues del commit `67e245a`.
+- `npm run build` y `git diff --check` pasan.
+- `https://go.winerim.wine/` ya renderiza la version actualizada con:
+  - `Sistema Winerim IA`;
+  - CTA fijo `Solicita tu demo`;
+  - bullets nuevos;
+  - `+2.000 restaurantes`;
+  - testimonios reales.
+- `https://winerim.wine/meta-demo` tambien renderiza la version actualizada.
+- Produccion mantiene `x-robots-tag: noindex, follow`, canonical `https://go.winerim.wine/`, OpenGraph de Winerim y chat desactivado.
+- Mobile y desktop no presentan overflow horizontal.
+- El CTA fijo, al hacer clic, desplaza al formulario `#demo-form` y lo deja visible.
+- La captura de UTMs/fbclid funciona con query real.
+- No se envio lead nuevo porque el cambio revisado no modificaba backend/formulario.
+- Solo se observaron 404 de `__l5e/trackevents`, atribuibles a tracking interno de Lovable.
+
+#### Decisiones
+
+- Dar por publicada y revalidada la actualizacion de copy/CTA de `go.winerim.wine`.
+- Reservar una nueva prueba de envio CRM para cuando el usuario la pida o cuando se toque el flujo del formulario.
+- Mantener como mejora opcional revisar el banner de cookies en landings de pago.
+
+#### Hipotesis
+
+- El nuevo copy y el CTA fijo estan listos para trafico de campana.
+- Los 404 de Lovable no afectan al flujo de captacion de Winerim.
+
+#### Tareas pendientes
+
+- Retomar CloudRIM/SAVia.
+- Si se quiere cerrar al 100% comercial/CRM, enviar un lead test nuevo y verificarlo en CRM.
+
 ### Landing Meta Demo: copy LeadConnector y CTA fijo
 
 #### Hechos
