@@ -1,5 +1,85 @@
 # Current State
 
+## Actualizacion 2026-07-01: produccion distribuidores/margenes y Search Console
+
+## Hechos
+
+- El usuario confirmo que el deploy/publish/purge ya estaba hecho y se revalido produccion.
+- Produccion como Googlebot valida 12/12 rutas de distribuidores y calculadora de margen:
+  - `/distribuidor`;
+  - `/en/distributor`;
+  - `/it/distributore`;
+  - `/fr/distributeur`;
+  - `/de/haendler`;
+  - `/pt/distribuidor`;
+  - `/calculadora-margen-vino`;
+  - `/en/wine-margin-calculator`;
+  - `/it/calcolatrice-margini-vino`;
+  - `/fr/calculateur-marge-vin`;
+  - `/de/wein-margen-rechner`;
+  - `/pt/calculadora-margem-vinho`.
+- Las 12 rutas responden `HTTP 200`, `x-prerendered: true`, canonical propio, 7 `hreflang`, H1 localizado y sin fallback/home/`Not found`.
+- Las seis rutas de distribuidores responden como Googlebot por `x-worker-branch: worker-static-prerender`.
+- Las seis rutas de calculadora de margen responden como Googlebot por `x-worker-branch: bot-prerender`.
+- Produccion en navegador real valida 12/12 rutas para usuarios: contenido localizado, H1 correcto, canonical propio, sin fallback ni `Pagina no encontrada`.
+- Observacion tecnica: el HTML crudo no-bot via `curl` devuelve el shell SPA con title/canonical de home, pero el navegador real y Googlebot reciben la ruta correcta.
+- `/sitemap.xml` responde `HTTP 200`, `x-worker-branch: sitemap-worker-detail-bridge`, contiene las 12 URLs revisadas y expone `2264` entradas.
+- Search Console mostraba `/sitemap.xml` ya enviado y leido el 1 jul 2026 como `Correcto`, con `2.258` paginas descubiertas antes de releer la version de `2264` URLs.
+- Se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`.
+- Search Console acepto solicitud manual de indexacion/reindexacion para 11 URLs:
+  - `https://winerim.wine/distribuidor`;
+  - `https://winerim.wine/calculadora-margen-vino`;
+  - `https://winerim.wine/en/distributor`;
+  - `https://winerim.wine/en/wine-margin-calculator`;
+  - `https://winerim.wine/pt/distribuidor`;
+  - `https://winerim.wine/pt/calculadora-margem-vinho`;
+  - `https://winerim.wine/fr/distributeur`;
+  - `https://winerim.wine/fr/calculateur-marge-vin`;
+  - `https://winerim.wine/de/haendler`;
+  - `https://winerim.wine/de/wein-margen-rechner`;
+  - `https://winerim.wine/it/distributore`.
+- Search Console no acepto la solicitud manual de `https://winerim.wine/it/calcolatrice-margini-vino` porque se alcanzo la cuota diaria.
+- Estado visto en Search Console durante la inspeccion:
+  - `/distribuidor`: `La URL no esta en Google`; razon `Google no reconoce esta URL`; solicitud aceptada.
+  - `/calculadora-margen-vino`: `La URL esta en Google`; recrawl solicitado.
+  - `/en/distributor`: `Descubierta: actualmente sin indexar`; solicitud aceptada.
+  - `/en/wine-margin-calculator`: `La URL esta en Google`; recrawl solicitado.
+  - `/pt/distribuidor`: `Pagina alternativa con etiqueta canonica adecuada`; solicitud aceptada.
+  - `/pt/calculadora-margem-vinho`: `La URL esta en Google`; recrawl solicitado.
+  - `/fr/distributeur`: `Descubierta: actualmente sin indexar`; solicitud aceptada.
+  - `/fr/calculateur-marge-vin`: `Rastreada: actualmente sin indexar`; solicitud aceptada.
+  - `/de/haendler`: `Descubierta: actualmente sin indexar`; solicitud aceptada.
+  - `/de/wein-margen-rechner`: `La URL esta en Google`; recrawl solicitado.
+  - `/it/distributore`: `Google no reconoce esta URL`; solicitud aceptada.
+  - `/it/calcolatrice-margini-vino`: `Rastreada: actualmente sin indexar`; rastreo permitido, obtencion correcta, indexacion permitida, canonical declarado y seleccionado como la URL inspeccionada, presente en sitemap, pero sin solicitud por cuota diaria.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Dar por publicada y revalidada tecnicamente la tanda de distribuidores y calculadora de margen en produccion.
+- Usar Search Console para solicitudes manuales solo en URLs estrategicas y respetar cuota diaria; el resto debe apoyarse en sitemap, enlazado interno y monitorizacion.
+- Considerar valido el comportamiento SEO si Googlebot y navegador real reciben contenido correcto, aunque el HTML crudo no-bot siga siendo shell SPA.
+- Vigilar el caso `/pt/distribuidor` por la senal de `Pagina alternativa con etiqueta canonica adecuada`; no tratarlo como error bloqueante mientras canonical/hreflang/productivo sean correctos.
+
+## Hipotesis
+
+- Las 11 solicitudes manuales deberian acelerar el rastreo, pero no garantizan indexacion inmediata ni posicionamiento.
+- Search Console podria actualizar el conteo de sitemap de `2.258` a `2.264` en la proxima lectura.
+- La senal de `/pt/distribuidor` podria deberse a similitud internacional, a una decision temporal de Google o a consolidacion canonica previa; si persiste, convendra reforzar diferenciacion local y enlazado especifico PT.
+
+## Contradicciones / dudas abiertas
+
+- Diferencia observada: `/sitemap.xml` productivo contiene `2264` URLs, mientras Search Console mostraba `2.258` paginas descubiertas antes de procesar el reenvio.
+- `https://winerim.wine/it/calcolatrice-margini-vino` esta tecnicamente apta para indexacion, pero queda sin solicitud manual por cuota diaria de Search Console.
+
+## Tareas pendientes
+
+- Manana solicitar manualmente la indexacion de `https://winerim.wine/it/calcolatrice-margini-vino` si sigue sin indexar.
+- Revisar en 48-72 horas el estado de las 12 URLs revisadas en Search Console.
+- Confirmar si Search Console actualiza el conteo de `/sitemap.xml` a `2264` URLs descubiertas o equivalente.
+- Vigilar especialmente `/pt/distribuidor` por la senal de canonical alternativa.
+- Mantener fuera de esta linea el cambio ajeno en `src/components/WineListAnalyzerTool.tsx`.
+
 ## Actualizacion 2026-07-01: revision de distribuidores y margenes lista para publicar
 
 ## Hechos

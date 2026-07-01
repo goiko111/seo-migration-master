@@ -2,6 +2,51 @@
 
 ## 2026-07-01
 
+### Produccion e indexacion de distribuidores/margenes
+
+#### Hechos
+
+- El usuario confirmo que el deploy/publish/purge estaba hecho.
+- Produccion valida 12/12 rutas de distribuidores y calculadora de margen como Googlebot con `HTTP 200`, `x-prerendered: true`, canonical propio, 7 `hreflang`, H1 localizado y sin fallback/home.
+- Produccion valida 12/12 rutas en navegador real para usuarios con contenido localizado, H1 correcto y canonical propio.
+- `/sitemap.xml` responde `200`, contiene las 12 URLs revisadas y expone `2264` entradas.
+- Search Console tenia `/sitemap.xml` como `Correcto` y se reenvio correctamente el 1 jul 2026.
+- Search Console acepto 11 solicitudes manuales de indexacion/reindexacion:
+  - `/distribuidor`;
+  - `/calculadora-margen-vino`;
+  - `/en/distributor`;
+  - `/en/wine-margin-calculator`;
+  - `/pt/distribuidor`;
+  - `/pt/calculadora-margem-vinho`;
+  - `/fr/distributeur`;
+  - `/fr/calculateur-marge-vin`;
+  - `/de/haendler`;
+  - `/de/wein-margen-rechner`;
+  - `/it/distributore`.
+- Search Console bloqueo la solicitud de `/it/calcolatrice-margini-vino` por cuota diaria superada.
+- `/it/calcolatrice-margini-vino` aparece como `Rastreada: actualmente sin indexar`, pero con rastreo permitido, obtencion correcta, indexacion permitida, canonical propio seleccionado y sitemap detectado.
+- `/pt/distribuidor` aparece como `Pagina alternativa con etiqueta canonica adecuada`, aunque produccion muestra canonical propio y hreflang correcto.
+
+#### Decisiones
+
+- Considerar cerrada la validacion tecnica de produccion para distribuidores y calculadora de margen.
+- Respetar la cuota diaria de Search Console y dejar `/it/calcolatrice-margini-vino` como primera solicitud manual de manana.
+- Monitorizar `/pt/distribuidor` antes de hacer cambios: la senal de canonical alternativa no contradice por ahora la validacion tecnica de canonical/hreflang.
+- Mantener la fuente de descubrimiento principal en sitemap + enlazado interno; usar solicitudes manuales solo para URLs estrategicas.
+
+#### Hipotesis
+
+- Las solicitudes manuales aceleraran el recrawl de las rutas comerciales nuevas, pero Google puede tardar dias en cambiar de `Descubierta`/`Rastreada` a indexada.
+- El desfase de Search Console entre `2.258` paginas descubiertas y `2264` URLs reales del sitemap deberia corregirse tras la nueva lectura.
+- Si `/pt/distribuidor` sigue como alternativa en 48-72 horas, puede requerir mas diferenciacion local, enlaces internos PT o revision de canonicals historicos.
+
+#### Tareas pendientes
+
+- Solicitar manana la indexacion de `https://winerim.wine/it/calcolatrice-margini-vino`.
+- Revisar en 48-72 horas el estado de las 12 rutas.
+- Comprobar si Search Console actualiza el conteo de URLs descubiertas del sitemap.
+- Vigilar especialmente `/pt/distribuidor`.
+
 ### Revision de distribuidores y margenes
 
 #### Hechos

@@ -2,6 +2,11 @@
 
 ## Hechos
 
+- El 2026-07-01 se revalido produccion tras publish/deploy/purge para distribuidores y calculadora de margen: 12/12 rutas responden correctamente como Googlebot con `HTTP 200`, `x-prerendered: true`, canonical propio, 7 `hreflang`, H1 localizado y sin fallback.
+- El 2026-07-01 se revalido navegador real para esas 12 rutas y todas muestran contenido localizado, H1/canonical propios y sin `Pagina no encontrada`.
+- El 2026-07-01 `/sitemap.xml` productivo contiene las 12 URLs revisadas y `2264` entradas; Search Console recibio de nuevo el sitemap correctamente.
+- El 2026-07-01 Search Console acepto 11 solicitudes manuales de indexacion/reindexacion para distribuidores y calculadora de margen; solo quedo pendiente `https://winerim.wine/it/calcolatrice-margini-vino` por cuota diaria.
+- El 2026-07-01 Search Console mostro `/pt/distribuidor` como `Pagina alternativa con etiqueta canonica adecuada`, aunque produccion valida canonical propio y hreflang correcto; queda como senal a vigilar.
 - El 2026-07-01 se preparo una revision publicable de las paginas `Distribuidor` y `Calculadora de margen` en seis idiomas.
 - `Distribuidor` quedo reposicionada como programa B2B para partners HORECA, con claims prudentes, breadcrumbs, requisitos, modelo de partner, escenarios economicos, proceso, mercados, FAQ e internal links.
 - `Calculadora de margen` quedo reforzada con FAQ localizada, canonical/hreflang localizado, enlaces internos localizados y explicacion de margen, multiplicador y Beverage Cost.
@@ -165,6 +170,9 @@
 
 ## Decisiones
 
+- Dar por publicada y revalidada tecnicamente la tanda de distribuidores y calculadora de margen tras validar Googlebot, navegador real, sitemap y Search Console.
+- Usar solicitudes manuales de Search Console solo para URLs estrategicas y respetar la cuota diaria; el resto debe apoyarse en sitemap, enlazado interno y seguimiento.
+- Vigilar `/pt/distribuidor` antes de cambiar codigo: la senal de canonical alternativa no contradice todavia las validaciones productivas de canonical/hreflang.
 - En `Distribuidor`, evitar claims no documentados o demasiado absolutos (`15M+ restaurantes`, `90%`, `producto que se vende solo`) y usar una propuesta de partner HORECA verificable.
 - Mantener `/de/haendler` como ruta canonica alemana para distribuidores.
 - Usar `FAQSection` como patron para FAQ visibles + schema localizado en paginas comerciales/herramientas, en vez de scripts JSON-LD manuales por pagina.
@@ -213,6 +221,9 @@
 
 ## Hipótesis
 
+- Las solicitudes manuales de Search Console deberian acelerar el recrawl de distribuidores/margenes, pero no garantizan indexacion inmediata.
+- El desfase entre las `2264` URLs reales del sitemap y las `2.258` paginas descubiertas que mostraba Search Console deberia corregirse tras una nueva lectura.
+- Si `/pt/distribuidor` sigue como alternativa canonica tras el recrawl, podria requerir mas diferenciacion local, enlaces internos PT o revision de cache/canonicals historicos.
 - Reforzar distribuidores con estructura de partner, FAQ e internal links deberia mejorar conversion comercial y comprension por LLMs.
 - Reforzar la calculadora de margen con FAQ localizada e internal links deberia mejorar su utilidad SEO/LLM y conectarla mejor con Winerim Core/Supply.
 - Mantener paridad entre React, sitemap, prerender, Worker y `llms` deberia reducir incidencias de Search Console en rutas comerciales nuevas.

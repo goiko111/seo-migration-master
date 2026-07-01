@@ -1,5 +1,56 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras Search Console de distribuidores/margenes
+
+## Hechos
+
+- Produccion ya quedo revalidada para las 12 rutas de distribuidores y calculadora de margen.
+- Googlebot recibe `200`, prerender, canonical propio, 7 `hreflang` y contenido localizado en las 12 rutas.
+- Navegador real recibe contenido correcto en las 12 rutas.
+- `/sitemap.xml` productivo contiene las 12 URLs y `2264` entradas.
+- Search Console recibio de nuevo `/sitemap.xml` y confirmo envio correcto.
+- Search Console acepto 11 solicitudes manuales de indexacion/reindexacion.
+- Quedo pendiente por cuota diaria:
+  - `https://winerim.wine/it/calcolatrice-margini-vino`.
+- Senal a vigilar:
+  - `https://winerim.wine/pt/distribuidor` aparece como `Pagina alternativa con etiqueta canonica adecuada`.
+- Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Manana, cuando se reinicie cuota de Search Console, solicitar indexacion de:
+   - `https://winerim.wine/it/calcolatrice-margini-vino`.
+2. En 48-72 horas, revisar estado en Search Console de las 12 URLs:
+   - `/distribuidor`;
+   - `/en/distributor`;
+   - `/it/distributore`;
+   - `/fr/distributeur`;
+   - `/de/haendler`;
+   - `/pt/distribuidor`;
+   - `/calculadora-margen-vino`;
+   - `/en/wine-margin-calculator`;
+   - `/it/calcolatrice-margini-vino`;
+   - `/fr/calculateur-marge-vin`;
+   - `/de/wein-margen-rechner`;
+   - `/pt/calculadora-margem-vinho`.
+3. Confirmar si Search Console actualiza `/sitemap.xml` desde `2.258` paginas descubiertas hacia las `2264` URLs productivas actuales.
+4. Si `/pt/distribuidor` sigue como alternativa canonica, revisar:
+   - canonical/hreflang productivo otra vez;
+   - enlazado interno PT;
+   - diferenciacion del copy PT frente a ES;
+   - posibles canonicals historicos cacheados.
+5. Continuar con segunda oleada de `Aprender vino`:
+   - tipos de vino explicados para restaurantes;
+   - uvas que conocer para empezar;
+   - regiones vinicolas para empezar.
+6. Adaptar `Como lo hace Winerim` a paginas de producto/funnels:
+   - Winerim Core;
+   - Winerim Supply;
+   - version corta para landings de captacion.
+7. Mantener pendiente separado:
+   - confirmar visualmente en CRM los leads QA anteriores;
+   - no tocar chat hasta nueva orden del usuario.
+
 ## Actualizacion 2026-07-01: retomar tras revision de distribuidores y margenes
 
 ## Hechos
