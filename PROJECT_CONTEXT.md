@@ -2,6 +2,11 @@
 
 ## Hechos
 
+- El 2026-07-01 se preparo la segunda oleada de `Aprender vino` como 18 articulos localizados: tipos de vino, uvas/castas/cepages/rebsorten para empezar y regiones vinicolas para empezar en restaurante.
+- La segunda oleada vive en la migracion `supabase/migrations/20260701102537_add_learn_wine_second_spokes.sql` y usa `article_group`, `lang` y `related_links` siguiendo el patron de la primera oleada.
+- El hub `Aprender vino`, `prerender`, Cloudflare Worker, `llms.txt`, `llms-full.txt` y el test SEO quedaron sincronizados para exponer 6 guias por idioma cuando la migracion se aplique.
+- Validaciones locales de la segunda oleada: test SEO, build, Worker check, Deno check, `git diff --check` y QA navegador desktop/mobile en ES/EN/PT sin overflow.
+- La segunda oleada no esta desplegada todavia en produccion porque primero hay que aplicar la migracion en Lovable/Supabase; el Worker no debe publicarse antes para no enlazar articulos inexistentes.
 - El 2026-07-01 se revalido produccion tras publish/deploy/purge para distribuidores y calculadora de margen: 12/12 rutas responden correctamente como Googlebot con `HTTP 200`, `x-prerendered: true`, canonical propio, 7 `hreflang`, H1 localizado y sin fallback.
 - El 2026-07-01 se revalido navegador real para esas 12 rutas y todas muestran contenido localizado, H1/canonical propios y sin `Pagina no encontrada`.
 - El 2026-07-01 `/sitemap.xml` productivo contiene las 12 URLs revisadas y `2264` entradas; Search Console recibio de nuevo el sitemap correctamente.
@@ -170,6 +175,8 @@
 
 ## Decisiones
 
+- Mantener la segunda oleada de `Aprender vino` como articulos guiados B2B y no mezclarla con fichas de entidad de `Biblioteca del vino`.
+- Coordinar despliegue de oleadas editoriales que dependen de Supabase en este orden: migracion de articulos, publish frontend, Edge Functions `sitemap`/`prerender`, Worker.
 - Dar por publicada y revalidada tecnicamente la tanda de distribuidores y calculadora de margen tras validar Googlebot, navegador real, sitemap y Search Console.
 - Usar solicitudes manuales de Search Console solo para URLs estrategicas y respetar la cuota diaria; el resto debe apoyarse en sitemap, enlazado interno y seguimiento.
 - Vigilar `/pt/distribuidor` antes de cambiar codigo: la senal de canonical alternativa no contradice todavia las validaciones productivas de canonical/hreflang.
@@ -221,6 +228,8 @@
 
 ## Hipótesis
 
+- Tipos de vino, uvas iniciales y regiones iniciales deberian completar el recorrido de `Aprender vino` y hacerlo mas util para equipos de sala, SEO convencional y LLMs.
+- Si la migracion, sitemap/prerender y Worker se publican juntos, Google deberia descubrir las 18 URLs nuevas con menor riesgo de `Not found` o enlaces rotos temporales.
 - Las solicitudes manuales de Search Console deberian acelerar el recrawl de distribuidores/margenes, pero no garantizan indexacion inmediata.
 - El desfase entre las `2264` URLs reales del sitemap y las `2.258` paginas descubiertas que mostraba Search Console deberia corregirse tras una nueva lectura.
 - Si `/pt/distribuidor` sigue como alternativa canonica tras el recrawl, podria requerir mas diferenciacion local, enlaces internos PT o revision de cache/canonicals historicos.

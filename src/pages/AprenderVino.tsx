@@ -135,7 +135,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Primeras guías para empezar",
     articlesIntro:
-      "Tres piezas prácticas para pasar de la teoría a conversación real en sala: catar, describir y recomendar por plato.",
+      "Seis piezas prácticas para pasar de la teoría a conversación real en sala: catar, describir, recomendar, entender tipos, uvas y regiones.",
     articleCta: "Leer guía",
     articleLinks: [
       {
@@ -152,6 +152,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Maridajes básicos para restaurantes",
         description: "Reglas simples para recomendar por pescado, carne, arroces, quesos, cocina asiática y postres.",
         path: "/article/maridajes-basicos-para-restaurantes",
+      },
+      {
+        title: "Tipos de vino para entender una carta",
+        description: "Blancos, tintos, rosados, espumosos, dulces y generosos explicados por función de servicio.",
+        path: "/article/tipos-de-vino-para-entender-una-carta",
+      },
+      {
+        title: "Uvas que conocer para empezar",
+        description: "Variedades ancla para explicar estilo, precio, maridaje y alternativas dentro de la carta.",
+        path: "/article/uvas-que-conocer-para-empezar",
+      },
+      {
+        title: "Regiones vinícolas para empezar",
+        description: "Una ruta por regiones que ayudan a explicar expectativa, precio y alternativas en sala.",
+        path: "/article/regiones-vinicolas-para-empezar-en-restaurante",
       },
     ],
     methodTitle: "Método Winerim para aprender vino en restauración",
@@ -202,7 +217,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "First guides to start with",
     articlesIntro:
-      "Three practical pieces that turn wine learning into floor conversations: tasting, describing and recommending by dish.",
+      "Six practical pieces that turn wine learning into floor conversations: tasting, describing, pairing, wine types, grapes and regions.",
     articleCta: "Read guide",
     articleLinks: [
       {
@@ -219,6 +234,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Basic food and wine pairing for restaurants",
         description: "Simple rules for recommending by fish, meat, rice, cheese, Asian cuisine and desserts.",
         path: "/en/article/basic-food-and-wine-pairing-for-restaurants",
+      },
+      {
+        title: "Types of wine to understand a list",
+        description: "White, red, rose, sparkling, sweet and fortified wines explained by service role.",
+        path: "/en/article/types-of-wine-restaurant-wine-list",
+      },
+      {
+        title: "Grapes to know first",
+        description: "Anchor grapes for explaining style, price, pairing and alternatives on the list.",
+        path: "/en/article/grapes-to-know-when-starting-with-wine",
+      },
+      {
+        title: "Wine regions to know first",
+        description: "A route through regions that explain guest expectation, price and service alternatives.",
+        path: "/en/article/wine-regions-to-know-for-restaurant-service",
       },
     ],
     methodTitle: "The Winerim method for wine learning in hospitality",
@@ -269,7 +299,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Prime guide per iniziare",
     articlesIntro:
-      "Tre contenuti pratici per portare l'apprendimento nella conversazione in sala: degustare, descrivere e consigliare con il piatto.",
+      "Sei contenuti pratici per portare l'apprendimento nella conversazione in sala: degustare, descrivere, abbinare, leggere tipi, vitigni e regioni.",
     articleCta: "Leggi la guida",
     articleLinks: [
       {
@@ -286,6 +316,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Abbinamenti base cibo-vino per ristoranti",
         description: "Regole semplici per consigliare con pesce, carne, riso, formaggi, cucina asiatica e dessert.",
         path: "/it/article/abbinamenti-base-cibo-vino-per-ristoranti",
+      },
+      {
+        title: "Tipi di vino per capire una carta",
+        description: "Bianchi, rossi, rosati, spumanti, dolci e fortificati letti per funzione di servizio.",
+        path: "/it/article/tipi-di-vino-per-capire-una-carta",
+      },
+      {
+        title: "Vitigni da conoscere per iniziare",
+        description: "Vitigni ancora per spiegare stile, prezzo, abbinamento e alternative in carta.",
+        path: "/it/article/vitigni-da-conoscere-per-iniziare",
+      },
+      {
+        title: "Regioni vinicole da conoscere",
+        description: "Un percorso tra regioni che spiegano aspettativa, prezzo e alternative in sala.",
+        path: "/it/article/regioni-vinicole-da-conoscere-in-ristorante",
       },
     ],
     methodTitle: "Il metodo Winerim per imparare il vino nella ristorazione",
@@ -336,7 +381,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Premiers guides pour commencer",
     articlesIntro:
-      "Trois contenus pratiques pour passer de l'apprentissage à la conversation en salle : déguster, décrire et recommander avec les plats.",
+      "Six contenus pratiques pour passer de l'apprentissage à la conversation en salle : déguster, décrire, accorder, lire types, cépages et régions.",
     articleCta: "Lire le guide",
     articleLinks: [
       {
@@ -353,6 +398,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Accords mets-vins de base pour restaurants",
         description: "Des règles simples pour recommander avec poisson, viande, riz, fromages, cuisine asiatique et desserts.",
         path: "/fr/article/accords-mets-vins-de-base-pour-restaurants",
+      },
+      {
+        title: "Types de vin pour comprendre une carte",
+        description: "Blancs, rouges, rosés, effervescents, doux et fortifiés par rôle de service.",
+        path: "/fr/article/types-de-vin-pour-comprendre-une-carte",
+      },
+      {
+        title: "Cépages à connaître pour commencer",
+        description: "Cépages repères pour expliquer style, prix, accord et alternatives en carte.",
+        path: "/fr/article/cepages-a-connaitre-pour-commencer",
+      },
+      {
+        title: "Régions viticoles à connaître",
+        description: "Un parcours parmi les régions qui expliquent attente, prix et alternatives en salle.",
+        path: "/fr/article/regions-viticoles-a-connaitre-en-restauration",
       },
     ],
     methodTitle: "La méthode Winerim pour apprendre le vin en restauration",
@@ -403,7 +463,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Erste Leitfäden für den Einstieg",
     articlesIntro:
-      "Drei praktische Inhalte, die Weinwissen in Servicegespräche übersetzen: verkosten, beschreiben und zum Gericht empfehlen.",
+      "Sechs praktische Inhalte, die Weinwissen in Servicegespräche übersetzen: verkosten, beschreiben, pairen, Weinarten, Rebsorten und Regionen lesen.",
     articleCta: "Leitfaden lesen",
     articleLinks: [
       {
@@ -420,6 +480,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Einfache Food-Wine-Pairings für Restaurants",
         description: "Einfache Regeln für Empfehlungen zu Fisch, Fleisch, Reisgerichten, Käse, asiatischer Küche und Desserts.",
         path: "/de/article/einfache-food-wine-pairings-fuer-restaurants",
+      },
+      {
+        title: "Weinarten verstehen",
+        description: "Weisswein, Rotwein, Rose, Schaumwein, Suesswein und fortifizierte Weine nach Servicefunktion.",
+        path: "/de/article/weinarten-weinkarte-verstehen",
+      },
+      {
+        title: "Rebsorten fuer den Einstieg",
+        description: "Anker-Rebsorten, um Stil, Preis, Pairing und Alternativen auf der Karte zu erklaeren.",
+        path: "/de/article/rebsorten-die-man-zum-einstieg-kennen-sollte",
+      },
+      {
+        title: "Weinregionen fuer den Service",
+        description: "Regionen, die Gaesteerwartung, Preis und Alternativen im Service erklaeren.",
+        path: "/de/article/weinregionen-fuer-den-service-kennen",
       },
     ],
     methodTitle: "Die Winerim-Methode für Weinlernen in der Gastronomie",
@@ -470,7 +545,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Primeiros guias para começar",
     articlesIntro:
-      "Três conteúdos práticos para transformar aprendizagem em conversa de sala: provar, descrever e recomendar com o prato.",
+      "Seis conteúdos práticos para transformar aprendizagem em conversa de sala: provar, descrever, harmonizar, ler tipos, castas e regiões.",
     articleCta: "Ler guia",
     articleLinks: [
       {
@@ -487,6 +562,21 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Harmonizações básicas para restaurantes",
         description: "Regras simples para recomendar com peixe, carne, arroz, queijo, cozinha asiática e sobremesas.",
         path: "/pt/article/harmonizacoes-basicas-para-restaurantes",
+      },
+      {
+        title: "Tipos de vinho para entender uma carta",
+        description: "Brancos, tintos, rosados, espumantes, doces e fortificados pela função em sala.",
+        path: "/pt/article/tipos-de-vinho-para-entender-uma-carta",
+      },
+      {
+        title: "Castas para conhecer ao começar",
+        description: "Castas de referência para explicar estilo, preço, harmonização e alternativas na carta.",
+        path: "/pt/article/castas-para-conhecer-ao-comecar",
+      },
+      {
+        title: "Regiões vinícolas para conhecer",
+        description: "Uma rota por regiões que explicam expectativa, preço e alternativas em sala.",
+        path: "/pt/article/regioes-vinicolas-para-conhecer-em-restaurante",
       },
     ],
     methodTitle: "O método Winerim para aprender vinho na restauração",

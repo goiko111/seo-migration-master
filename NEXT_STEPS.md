@@ -1,5 +1,57 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras preparar segunda oleada `Aprender vino`
+
+## Hechos
+
+- Segunda oleada de `Aprender vino` preparada localmente.
+- Migracion creada:
+  - `supabase/migrations/20260701102537_add_learn_wine_second_spokes.sql`.
+- Contenido preparado:
+  - 18 articulos;
+  - 3 temas;
+  - 6 idiomas;
+  - slugs localizados;
+  - `related_links`;
+  - `article_group` compartido por tema.
+- Hub `Aprender vino` actualizado para mostrar 6 guias por idioma.
+- `prerender`, Worker fallback, `llms` y test SEO actualizados.
+- Validaciones locales OK:
+  - test SEO;
+  - build;
+  - Worker check;
+  - Deno check;
+  - `git diff --check`;
+  - QA local desktop/mobile ES/EN/PT sin overflow.
+- No desplegar Worker todavia hasta aplicar la migracion de articulos.
+
+## Tareas pendientes inmediatas
+
+1. En Lovable/Supabase, aplicar la migracion:
+   - `20260701102537_add_learn_wine_second_spokes.sql`.
+2. Publicar frontend desde Lovable.
+3. Desplegar Edge Functions:
+   - `sitemap`;
+   - `prerender`.
+4. Desplegar Cloudflare Worker despues de que los articulos existan en Supabase.
+5. Revalidar produccion:
+   - 6 hubs `Aprender vino`;
+   - 18 articulos nuevos como Googlebot;
+   - canonical propio;
+   - idioma correcto;
+   - contenido real sin `Not found`;
+   - `/sitemap.xml` contiene las 18 URLs nuevas.
+6. Search Console:
+   - reenviar `/sitemap.xml`;
+   - solicitar indexacion de las 3 URLs ES nuevas:
+     - `/article/tipos-de-vino-para-entender-una-carta`;
+     - `/article/uvas-que-conocer-para-empezar`;
+     - `/article/regiones-vinicolas-para-empezar-en-restaurante`.
+7. Despues de publicar, continuar con:
+   - monitorizar distribuidores/margenes en 48-72 horas;
+   - pedir indexacion pendiente de `/it/calcolatrice-margini-vino`;
+   - adaptar `Como lo hace Winerim` a producto/funnels.
+
 ## Actualizacion 2026-07-01: retomar tras Search Console de distribuidores/margenes
 
 ## Hechos

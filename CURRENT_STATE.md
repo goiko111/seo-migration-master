@@ -1,5 +1,59 @@
 # Current State
 
+## Actualizacion 2026-07-01: segunda oleada `Aprender vino` preparada
+
+## Hechos
+
+- Se preparo la segunda oleada de `Aprender vino` como articulos localizados, separada de `Biblioteca del vino`.
+- Se creo la migracion `supabase/migrations/20260701102537_add_learn_wine_second_spokes.sql` mediante `supabase migration new add_learn_wine_second_spokes`.
+- La migracion inserta/actualiza 18 articulos publicados en `public.articles`: 3 temas x 6 idiomas.
+- Temas incluidos:
+  - tipos de vino para entender una carta;
+  - uvas/castas/cepages/rebsorten para empezar;
+  - regiones vinicolas para empezar en restaurante.
+- Cada tema comparte `article_group` en los seis idiomas:
+  - `learn-wine-wine-types`;
+  - `learn-wine-grapes-to-start`;
+  - `learn-wine-regions-to-start`.
+- Los slugs siguen el patron actual: ES sin sufijo y variantes internacionales con sufijo DB `_en/_it/_fr/_de/_pt`, publicadas como `/{lang}/article/{slug}`.
+- `src/pages/AprenderVino.tsx` enlaza ahora 6 guias por idioma en el hub.
+- Se actualizaron `supabase/functions/prerender/index.ts`, `cloudflare-worker-v3-hybrid.js`, `public/llms.txt`, `public/llms-full.txt` y `src/test/wine-library-seo-surface.test.ts`.
+- Validaciones OK:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npm run build`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `git diff --check`.
+- Validacion de migracion por inspeccion: 18 slugs unicos, 3 grupos, pares `$md$` y `$json$` equilibrados y `ON CONFLICT (slug) DO UPDATE`.
+- QA navegador local en `http://127.0.0.1:5173/`: `/aprender-vino`, `/en/learn-wine` y `/pt/aprender-vinho` muestran 6 enlaces de articulo en desktop y mobile, sin overflow horizontal.
+- No se desplego Worker todavia porque los enlaces nuevos no deben exponerse en produccion antes de aplicar la migracion de articulos en Supabase.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Mantener la segunda oleada como articulos de `Aprender vino`, no como nuevas entidades de `Biblioteca del vino`.
+- Publicar tipos, uvas y regiones como contenido guiado B2B para equipos de sala, conectando aprendizaje con carta, recomendacion, analisis y demo.
+- No desplegar el Worker hasta que Lovable/Supabase aplique la migracion y publique el frontend, para evitar que bots vean enlaces a articulos aun inexistentes.
+
+## Hipotesis
+
+- La segunda oleada deberia reforzar el hub como ruta educativa completa porque cubre los tres bloques que faltaban tras cata/vocabulario/maridaje: tipos, uvas y regiones.
+- Al estar enlazados desde hub, prerender, Worker y `llms`, los nuevos articulos deberian mejorar descubrimiento SEO/LLM cuando se aplique la migracion.
+
+## Contradicciones / dudas abiertas
+
+- La migracion esta preparada y validada localmente, pero no esta aplicada en la base productiva hasta que Lovable/Supabase ejecute el deploy.
+- El frontend local ya enlaza 6 guias, pero produccion no debe considerarse actualizada hasta publish de Lovable.
+
+## Tareas pendientes
+
+- Aplicar en Lovable/Supabase la migracion `20260701102537_add_learn_wine_second_spokes.sql`.
+- Publicar frontend desde Lovable.
+- Desplegar Edge Functions `sitemap` y `prerender`.
+- Desplegar Cloudflare Worker despues de aplicar migracion/frontend/Edge Functions.
+- Revalidar produccion humana y Googlebot para hubs y los 18 nuevos articulos.
+- Reenviar `/sitemap.xml` y solicitar indexacion selectiva de las URLs ES de la segunda oleada.
+
 ## Actualizacion 2026-07-01: produccion distribuidores/margenes y Search Console
 
 ## Hechos

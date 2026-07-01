@@ -270,6 +270,10 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("/article/como-catar-vino-en-cinco-pasos");
     expect(worker).toContain("/en/article/wine-tasting-vocabulary");
     expect(llms).toContain("https://winerim.wine/article/maridajes-basicos-para-restaurantes");
+    expect(prerender).toContain("/article/tipos-de-vino-para-entender-una-carta");
+    expect(worker).toContain("/en/article/types-of-wine-restaurant-wine-list");
+    expect(worker).toContain("/pt/article/regioes-vinicolas-para-conhecer-em-restaurante");
+    expect(llms).toContain("https://winerim.wine/article/uvas-que-conocer-para-empezar");
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {
@@ -320,7 +324,7 @@ describe("wine library SEO surface", () => {
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
 
-    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-06-30'");
+    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-07-01'");
     expect(sitemap).toContain("const WINE_LIBRARY_LASTMOD = '2026-06-01'");
     expect(sitemap).toContain("urlBlock(route.esPath, WINE_LIBRARY_LASTMOD");
     expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");

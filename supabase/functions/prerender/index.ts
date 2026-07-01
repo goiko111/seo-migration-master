@@ -4892,7 +4892,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { heading: 'Conectar uvas, regiones y estilos', content: 'La Biblioteca del vino funciona como base de datos de uvas, regiones, estilos, maridajes y glosario. Aprender vino es la ruta guiada para usar esa base en conversaciones reales con clientes.' },
         { heading: 'Recomendar por comida', content: 'El aprendizaje debe aterrizar en maridajes prácticos: pescado, carne, arroces, cocina asiática, quesos, postres y platos de la casa. Así el conocimiento impacta ticket medio y experiencia.' },
         { heading: 'Servir y decidir mejor', content: 'Temperatura, copa, medidas, vino por copa, margen, rotación y revisión mensual convierten el conocimiento en gestión. Una carta que se entiende se vende y se mejora con más facilidad.' },
-        { heading: 'Primeras guías publicadas', content: 'La primera oleada de Aprender vino cubre cómo catar vino en cinco pasos, vocabulario de cata y maridajes básicos para restaurantes. Son piezas pensadas para formar equipos de sala y conectar aprendizaje con recomendación, carta digital y demo.' },
+        { heading: 'Guías publicadas', content: 'Aprender vino enlaza guías para catar, describir, maridar, entender tipos de vino, reconocer uvas ancla y usar regiones como lenguaje de sala. Son piezas pensadas para formar equipos y conectar aprendizaje con recomendación, carta digital y demo.' },
       ],
       faqs: [
         { q: '¿Aprender vino sustituye a la Biblioteca del vino?', a: 'No. La Biblioteca es la referencia estructurada de uvas, regiones, estilos, maridajes y glosario. Aprender vino es la capa guiada para saber por dónde empezar y cómo aplicar ese contenido en sala.' },
@@ -4913,6 +4913,9 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Cómo catar vino en cinco pasos', url: '/article/como-catar-vino-en-cinco-pasos' },
         { label: 'Vocabulario de cata de vino', url: '/article/vocabulario-de-cata-de-vino' },
         { label: 'Maridajes básicos para restaurantes', url: '/article/maridajes-basicos-para-restaurantes' },
+        { label: 'Tipos de vino para entender una carta', url: '/article/tipos-de-vino-para-entender-una-carta' },
+        { label: 'Uvas que conocer para empezar', url: '/article/uvas-que-conocer-para-empezar' },
+        { label: 'Regiones vinicolas para empezar', url: '/article/regiones-vinicolas-para-empezar-en-restaurante' },
         { label: 'Analizar carta de vinos gratis', url: '/analisis-carta' },
         { label: 'Demo gratuita', url: '/demo' },
       ],

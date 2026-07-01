@@ -2,6 +2,45 @@
 
 ## 2026-07-01
 
+### Segunda oleada `Aprender vino`
+
+#### Hechos
+
+- Se preparo una segunda oleada de `Aprender vino` con 18 articulos: 3 temas x 6 idiomas.
+- La migracion creada es `supabase/migrations/20260701102537_add_learn_wine_second_spokes.sql`.
+- Temas:
+  - tipos de vino para entender una carta;
+  - uvas/castas/cepages/rebsorten para empezar;
+  - regiones vinicolas para empezar en restaurante.
+- Se actualizaron el hub `Aprender vino`, prerender, Worker fallback, `llms.txt`, `llms-full.txt` y el test SEO enfocado.
+- Validaciones pasadas:
+  - test SEO enfocado;
+  - build;
+  - Worker syntax check;
+  - Deno check de `prerender`/`sitemap`;
+  - `git diff --check`;
+  - QA navegador local desktop/mobile en ES/EN/PT con 6 enlaces y sin overflow.
+- La migracion contiene 18 slugs unicos, 3 `article_group` y `ON CONFLICT (slug) DO UPDATE`.
+- No se desplego Worker todavia porque depende de que los articulos existan antes en Supabase.
+
+#### Decisiones
+
+- Mantener `Aprender vino` como ruta guiada de articulos, separada de la capa de entidades de `Biblioteca del vino`.
+- Publicar la oleada 2 como contenido B2B para equipos de sala, no como contenido editorial generico.
+- Coordinar deploy: migracion Supabase, frontend, Edge Functions y Worker deben publicarse juntos o en ese orden.
+
+#### Hipotesis
+
+- Tipos de vino, uvas iniciales y regiones iniciales completan mejor el recorrido de aprendizaje y mejoran la comprension del hub para Google/LLMs.
+- Exponer los nuevos enlaces en React, prerender, Worker y `llms` deberia facilitar descubrimiento cuando la base productiva tenga los articulos.
+
+#### Tareas pendientes
+
+- Aplicar la migracion en Lovable/Supabase.
+- Publicar frontend y Edge Functions.
+- Desplegar Worker despues de aplicar migracion/frontend.
+- Revalidar produccion y Search Console.
+
 ### Produccion e indexacion de distribuidores/margenes
 
 #### Hechos
