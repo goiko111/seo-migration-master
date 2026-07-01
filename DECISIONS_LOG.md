@@ -2,6 +2,40 @@
 
 ## 2026-07-01
 
+### Produccion e indexacion de primera oleada `Aprender vino`
+
+#### Hechos
+
+- El usuario confirmo que el publish estaba hecho.
+- Se desplego Cloudflare Worker `winerim-proxy` version `77662a6b-a0b0-4e2f-bfbf-b4c7cb3ad06b`.
+- Produccion como Googlebot valida los 6 hubs de `Aprender vino` con `200`, `worker-static-prerender`, `x-prerendered: true` y 3/3 enlaces a articulos por idioma.
+- Produccion como Googlebot valida los 18 articulos de la primera oleada con `200`, prerender, canonical correcto y contenido real.
+- `/sitemap.xml` contiene las 18 URLs de articulos de la oleada.
+- Search Console acepto el reenvio de `/sitemap.xml`.
+- Search Console mostro `/aprender-vino` ya indexada y acepto la solicitud de reindexacion.
+- Search Console mostro los 3 articulos ES como `Descubierta: actualmente sin indexar`, presentes en sitemap y aptos para indexacion tras prueba de URL publicada.
+- Search Console acepto la solicitud de indexacion de:
+  - `https://winerim.wine/article/como-catar-vino-en-cinco-pasos`;
+  - `https://winerim.wine/article/vocabulario-de-cata-de-vino`;
+  - `https://winerim.wine/article/maridajes-basicos-para-restaurantes`.
+
+#### Decisiones
+
+- Considerar cerrada la publicacion tecnica de la primera oleada de `Aprender vino`.
+- No pedir indexacion manual masiva de las 18 variantes de golpe; monitorizar primero hub y articulos ES.
+- Mantener como siguiente foco la revision de distribuidores/margenes y la segunda oleada editorial.
+
+#### Hipotesis
+
+- Al refrescar el hub indexado y pedir los tres articulos ES, Google deberia descubrir mejor la estructura hub-and-spoke.
+- Las variantes internacionales deberian beneficiarse del sitemap y del enlazado, aunque pueden requerir solicitudes selectivas posteriores.
+
+#### Tareas pendientes
+
+- Revisar Search Console en 48-72 horas.
+- Pedir indexacion de variantes internacionales solo si el primer lote progresa o si alguna URL prioritaria queda estancada.
+- Continuar con revision de distribuidores/margenes y segunda oleada de `Aprender vino`.
+
 ### Primera oleada de articulos `Aprender vino`
 
 #### Hechos

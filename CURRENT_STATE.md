@@ -1,5 +1,62 @@
 # Current State
 
+## Actualizacion 2026-07-01: produccion e indexacion de primera oleada `Aprender vino`
+
+## Hechos
+
+- El usuario confirmo que el publish estaba hecho y pidio continuar.
+- Se desplego Cloudflare Worker `winerim-proxy` version `77662a6b-a0b0-4e2f-bfbf-b4c7cb3ad06b`.
+- Revalidacion productiva como Googlebot:
+  - los 6 hubs de `Aprender vino` responden `200`;
+  - los 6 hubs devuelven `x-worker-branch: worker-static-prerender`;
+  - los 6 hubs devuelven `x-prerendered: true`;
+  - los 6 hubs exponen 3/3 enlaces a los articulos de su idioma.
+- Revalidacion productiva de articulos:
+  - 18/18 URLs responden `200`;
+  - 18/18 devuelven `x-prerendered: true`;
+  - 18/18 tienen canonical propio correcto;
+  - 0/18 muestran fallback o `Not found`.
+- `/sitemap.xml` responde `200` y contiene las 18 URLs de articulos de la primera oleada.
+- En Search Console:
+  - `/sitemap.xml` se reenvio correctamente;
+  - `https://winerim.wine/aprender-vino` ya aparece indexada;
+  - se solicito reindexacion de `https://winerim.wine/aprender-vino` y Google la anadio a cola prioritaria;
+  - los 3 articulos ES aparecen como `Descubierta: actualmente sin indexar` y presentes en sitemap;
+  - la prueba de URL publicada confirmo que los 3 articulos ES se pueden indexar;
+  - Google acepto la solicitud de indexacion de los 3 articulos ES:
+    - `https://winerim.wine/article/como-catar-vino-en-cinco-pasos`;
+    - `https://winerim.wine/article/vocabulario-de-cata-de-vino`;
+    - `https://winerim.wine/article/maridajes-basicos-para-restaurantes`.
+- Search Console muestra a 2026-07-01 un contexto global de `1.568` paginas indexadas y `2.734` paginas no indexadas para la propiedad URL-prefix `https://winerim.wine/`.
+- Sigue existiendo un cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx`; no se toco.
+
+## Decisiones
+
+- Dar la primera oleada de `Aprender vino` como publicada y validada tecnicamente en produccion.
+- Priorizar solicitud manual de indexacion para el hub ES y los tres articulos ES; las variantes internacionales quedan monitorizadas via sitemap antes de pedirlas todas manualmente.
+- Mantener `Aprender vino` separado de `Biblioteca del vino`: ruta guiada y articulos por un lado, capa de entidades por otro.
+
+## Hipotesis
+
+- La reindexacion del hub deberia ayudar a que Google refresque el enlazado hacia los nuevos spokes.
+- Las solicitudes manuales de los tres articulos ES deberian acelerar el primer rastreo, pero no garantizan indexacion inmediata ni ranking.
+- Si las URLs ES pasan de `Descubierta` a `Rastreada` o indexada, convendra solicitar despues una seleccion de variantes EN/PT/FR/IT/DE.
+
+## Contradicciones / dudas abiertas
+
+- La primera comprobacion productiva uso tres slugs esperados incorrectos; al contrastar con la migracion se confirmo que React, Worker y la base usan los slugs reales:
+  - `vocabulario-de-cata-de-vino`;
+  - `basic-food-and-wine-pairing-for-restaurants`;
+  - `vocabulario-de-prova-de-vinho`.
+- La senal de Search Console `Descubierta: actualmente sin indexar` no es un error tecnico de la web: las URLs estan en sitemap, son accesibles y la prueba viva permite indexarlas.
+
+## Tareas pendientes
+
+- Revisar Search Console en 48-72 horas para los tres articulos ES solicitados.
+- Si avanzan bien, solicitar indexacion selectiva de variantes internacionales prioritarias.
+- Revisar y actualizar las secciones de distribuidores y margenes, tal como recordo el usuario.
+- Preparar segunda oleada de `Aprender vino`: tipos de vino, uvas para empezar y regiones para empezar.
+
 ## Actualizacion 2026-07-01: primera oleada de articulos `Aprender vino`
 
 ## Hechos

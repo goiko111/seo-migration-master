@@ -9,6 +9,12 @@
 - Se sincronizaron enlaces de los nuevos spokes en `supabase/functions/prerender/index.ts`, `cloudflare-worker-v3-hybrid.js`, `public/llms.txt` y `public/llms-full.txt`.
 - Validaciones locales del 2026-07-01 para `Aprender vino`: `npm run test -- --run src/test/wine-library-seo-surface.test.ts` OK, `npm run build` OK, `node --check cloudflare-worker-v3-hybrid.js` OK, `deno check` de `prerender`/`sitemap` OK y `git diff --check` OK.
 - QA Playwright local en `http://127.0.0.1:5173/` valido que `/aprender-vino`, `/en/learn-wine` y `/pt/aprender-vinho` muestran 3 enlaces de articulo, sin overflow; el CTA de tarjetas quedo corregido a `Leer guia`/equivalentes.
+- El 2026-07-01 se desplego Cloudflare Worker `winerim-proxy` version `77662a6b-a0b0-4e2f-bfbf-b4c7cb3ad06b` para refrescar el prerender estatico de los hubs `Aprender vino`.
+- Tras el publish y el deploy del Worker, produccion valido como Googlebot los 6 hubs de `Aprender vino`: todos responden `200`, `x-worker-branch: worker-static-prerender`, `x-prerendered: true` y exponen 3/3 enlaces a los nuevos articulos.
+- Tras el publish y el deploy del Worker, produccion valido los 18 articulos de la primera oleada como Googlebot: todos responden `200`, `x-prerendered: true`, canonical propio y contenido real sin `Not found`.
+- El 2026-07-01 `/sitemap.xml` respondio `200` y contiene las 18 URLs de articulos de la primera oleada; Search Console recibio de nuevo `/sitemap.xml` y confirmo `Se ha enviado el sitemap correctamente`.
+- El 2026-07-01 Search Console mostro `https://winerim.wine/aprender-vino` ya indexada; se solicito reindexacion y Google la anadio a cola de rastreo prioritaria.
+- El 2026-07-01 Search Console mostro los tres articulos ES de la oleada como `Descubierta: actualmente sin indexar`, presentes en `https://winerim.wine/sitemap.xml`; la prueba de URL publicada confirmo que se pueden indexar y Google acepto la solicitud de indexacion para las tres.
 - Durante la QA local del hub aparecio el error ya conocido del feed de Instagram/404 en desktop; no afecta al bloque de `Aprender vino`, pero queda como deuda menor de consola.
 - `supabase migration list --local` no pudo ejecutarse porque la base local no esta arrancada en `127.0.0.1:54322`; la migracion queda validada por inspeccion, conteo de filas y coherencia de slugs, pendiente de aplicacion real en Supabase/Lovable.
 - El 2026-06-30 se implemento en la home la primera version de la seccion comercial `Como lo hace Winerim` mediante el componente `src/components/landing/ConnectedCellarSection.tsx`.

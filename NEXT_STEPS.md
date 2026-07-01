@@ -1,10 +1,10 @@
 # Next Steps
 
-## Actualizacion 2026-07-01: retomar tras primera oleada `Aprender vino`
+## Actualizacion 2026-07-01: retomar tras primera oleada publicada de `Aprender vino`
 
 ## Hechos
 
-- Primera oleada preparada en codigo:
+- Primera oleada publicada y validada en produccion:
   - migracion `20260701064536_add_learn_wine_first_spokes.sql`;
   - 18 articulos, 3 temas x 6 idiomas;
   - hub `Aprender vino` enlazando los spokes;
@@ -15,6 +15,16 @@
   - `deno check`;
   - `node --check` Worker;
   - QA Playwright en ES/EN/PT.
+- Cloudflare Worker desplegado: `winerim-proxy` version `77662a6b-a0b0-4e2f-bfbf-b4c7cb3ad06b`.
+- Validaciones productivas OK:
+  - 6/6 hubs responden `200` como Googlebot y exponen 3/3 enlaces a articulos;
+  - 18/18 articulos responden `200` como Googlebot, con prerender, canonical correcto y contenido real;
+  - `/sitemap.xml` contiene las 18 URLs.
+- Search Console:
+  - `/sitemap.xml` reenviado correctamente;
+  - `/aprender-vino` ya estaba indexada y se solicito reindexacion;
+  - los 3 articulos ES estaban `Descubierta: actualmente sin indexar`, presentes en sitemap y aptos tras prueba viva;
+  - indexacion solicitada y aceptada para los 3 articulos ES.
 - Limitacion: base local Supabase no esta arrancada, por lo que la migracion no se aplico localmente.
 - Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
 
@@ -27,33 +37,19 @@
    - SEO convencional;
    - posicionamiento LLM;
    - coherencia con producto, `Como lo hace Winerim`, analisis de carta y conversion.
-2. Aplicar en Lovable/Supabase la migracion:
-   - `supabase/migrations/20260701064536_add_learn_wine_first_spokes.sql`.
-3. Publicar desde Lovable:
-   - frontend con el hub actualizado;
-   - Edge Functions `sitemap` y `prerender` actualizadas.
-4. Validar produccion humana:
-   - `/aprender-vino`;
-   - `/en/learn-wine`;
-   - `/pt/aprender-vinho`;
-   - 3 tarjetas visibles con CTA de lectura;
-   - 18 rutas de articulo devuelven contenido real, no fallback ni `Not found`.
-5. Validar Googlebot/prerender:
-   - `/aprender-vino`;
+2. Monitorizar Search Console en 48-72 horas:
    - `/article/como-catar-vino-en-cinco-pasos`;
-   - `/en/article/how-to-taste-wine-in-five-steps`;
-   - `/pt/article/harmonizacoes-basicas-para-restaurantes`.
-6. Validar `/sitemap.xml`:
-   - contiene las 18 URLs de articulos;
-   - respeta rutas localizadas.
-7. Search Console:
-   - reenviar `/sitemap.xml`;
-   - solicitar indexacion selectiva de las 3 URLs ES;
-   - monitorizar antes de solicitar todas las variantes.
-8. Preparar segunda oleada:
+   - `/article/vocabulario-de-cata-de-vino`;
+   - `/article/maridajes-basicos-para-restaurantes`;
+   - comprobar si pasan de `Descubierta` a `Rastreada` o indexada.
+3. Si el lote ES progresa, solicitar indexacion selectiva de variantes internacionales prioritarias:
+   - EN y PT primero por oportunidad comercial;
+   - FR/IT/DE despues si no avanzan via sitemap.
+4. Preparar segunda oleada:
    - tipos de vino explicados para restaurantes;
    - uvas que conocer para empezar;
    - regiones vinicolas para empezar.
+5. Adaptar `Como lo hace Winerim` a producto y funnels cuando se cierre la revision de distribuidores/margenes.
 
 ## Actualizacion 2026-06-30: retomar tras implementacion inicial `Como lo hace Winerim`
 
