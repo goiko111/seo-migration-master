@@ -1,5 +1,61 @@
 # Current State
 
+## Actualizacion 2026-07-01: landing Meta Demo actualizada antes de CloudRIM/SAVia
+
+## Hechos
+
+- El usuario pidio pausar la entrada en CloudRIM/SAVia para actualizar primero la landing de `go.winerim.wine`.
+- Se tomo como referencia el contenido de `https://sites.leadconnectorhq.com/preview/2xc4bo8rOcqAkRWPLO5H?notrack=true`.
+- Se actualizo `src/pages/MetaDemoLanding.tsx`:
+  - el badge pasa de `Prueba gratuita` a `Sistema Winerim IA`;
+  - el bloque superior `Sin compromiso` sale de la cabecera;
+  - se anade CTA fijo superior derecho `Solicita tu demo` con ancla al formulario;
+  - los bullets principales usan el nuevo copy comercial;
+  - la primera frase de cada bullet queda en negrita.
+- Se mantuvieron los testimonios reales existentes en vez de volver a los placeholders de la referencia.
+- Se mantuvo `+2.000 restaurantes` en vez de `+1.000 bodegas gestionadas`.
+- No se cambio el flujo del formulario: sigue conectado por React a Supabase, notificaciones y CRM.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `git diff --check -- src/pages/MetaDemoLanding.tsx`;
+  - captura Playwright desktop/mobile;
+  - comprobacion por selector `Sistema Winerim IA`.
+- La captura local muestra que el banner global de cookies tapa parte del formulario en primera visita; es comportamiento preexistente/global, no causado por este cambio.
+- El cambio local previo y ajeno en `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse ni incluirse.
+- CloudRIM/SAVia sigue pendiente de implementacion; solo se habia preparado el plan solicitado.
+
+## Decisiones
+
+- Usar el copy nuevo de LeadConnector para los bullets, puliendo la frase final que venia duplicada/mal puntuada.
+- Conservar la prueba social decidida previamente: `+2.000 restaurantes`.
+- Conservar testimonios reales y no publicar placeholders en una landing de campana.
+- Mantener el CTA fijo como ancla al formulario, sin modificar backend ni tracking.
+
+## Hipotesis
+
+- El nuevo copy deberia alinear mejor la landing con campanas Meta centradas en IA, stock muerto, ventas y restaurantes premium.
+- El CTA fijo deberia aumentar llegada al formulario en scroll, especialmente en mobile.
+- Quitar `Sin compromiso` de la cabecera reduce ruido visual, aunque el mensaje sigue presente en copy/trust.
+
+## Contradicciones / dudas abiertas
+
+- La referencia externa incluye `+1.000 bodegas gestionadas`, pero la decision vigente del proyecto es usar `+2.000 restaurantes`.
+- La referencia externa incluye testimonios plantilla, pero la decision vigente es no publicar placeholders ni testimonios inventados.
+- El banner de cookies puede reducir conversion en primera visita de pago; conviene decidir si se ajusta solo para `go.winerim.wine`.
+
+## Tareas pendientes
+
+- Pushear el cambio de landing y publicar frontend desde Lovable.
+- Revalidar `https://go.winerim.wine/` tras publish:
+  - badge `Sistema Winerim IA`;
+  - CTA fijo superior derecho;
+  - bullets nuevos con primera frase en negrita;
+  - `+2.000 restaurantes`;
+  - testimonios reales;
+  - formulario y CRM sin regresiones.
+- Valorar ajuste CRO del banner de cookies para landings de pago.
+- Retomar despues la implementacion de CloudRIM/SAVia desde el handoff y el plan ya dado.
+
 ## Actualizacion 2026-07-01: revalidacion post-publish y fix de canonicals/localizacion
 
 ## Hechos

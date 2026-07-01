@@ -1,5 +1,50 @@
 # Next Steps
 
+## Actualizacion 2026-07-01: retomar tras ajuste de landing Meta Demo
+
+## Hechos
+
+- `src/pages/MetaDemoLanding.tsx` queda actualizado localmente con el copy de referencia de LeadConnector.
+- Cambios incluidos:
+  - badge `Sistema Winerim IA`;
+  - CTA fijo superior derecho `Solicita tu demo`;
+  - retirada del `Sin compromiso` de cabecera;
+  - bullets nuevos con primera frase en negrita;
+  - testimonios reales mantenidos;
+  - `+2.000 restaurantes` mantenido.
+- No se toco el backend del formulario ni el flujo CRM.
+- Validaciones locales OK:
+  - `npm run build`;
+  - `git diff --check`;
+  - captura Playwright desktop/mobile;
+  - comprobacion por selector renderizado.
+- Observacion CRO: el banner global de cookies puede tapar parte del formulario en primera visita.
+- CloudRIM/SAVia sigue pendiente; solo se dio el plan antes de pausar por esta landing.
+- Cambio ajeno en `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Publicar en Lovable el commit nuevo de landing.
+2. Revalidar `https://go.winerim.wine/` tras publish:
+   - badge correcto;
+   - CTA fijo visible en desktop/mobile;
+   - bullets con negrita inicial;
+   - `+2.000 restaurantes`;
+   - testimonios reales;
+   - formulario operativo.
+3. Si se quiere maximizar conversion de pago, decidir si se adapta el banner de cookies para `go.winerim.wine`.
+4. Retomar CloudRIM/SAVia:
+   - crear `/producto/cloudrim`;
+   - crear `/producto/savia`;
+   - anadir bloque en home;
+   - anadir cards en `/funcionalidades`;
+   - anadir seccion CloudRIM en `/integraciones`;
+   - anadir seccion SAVia en `/producto/inteligencia-dinamica`.
+5. Mantener pendientes SEO previos:
+   - publish/revalidacion del fix de canonicals/localizacion si no queda incluido en el proximo publish;
+   - Search Console cuando reinicie cuota;
+   - revisar conteo de sitemap hacia `2282`.
+
 ## Actualizacion 2026-07-01: retomar tras revalidacion post-publish y fix local
 
 ## Hechos

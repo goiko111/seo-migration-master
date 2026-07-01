@@ -84,10 +84,22 @@ const stats = [
 ];
 
 const benefits = [
-  "Demo adaptada a tu tipo de negocio",
-  "Sin compromiso de permanencia",
-  "Análisis gratuito de tu carta incluido",
-  "Configuración en menos de 48 horas",
+  {
+    lead: "Exclusivo para restaurantes premium:",
+    rest: " diseñado para salas de alta hostelería con más de 40 referencias que priorizan la excelencia en la experiencia del comensal.",
+  },
+  {
+    lead: "Mismo stock, +23% de ventas:",
+    rest: " aumentamos la facturación en sala optimizando las recomendaciones, sin necesidad de añadir etiquetas nuevas a tu bodega.",
+  },
+  {
+    lead: "Reduce un 40% el stock muerto:",
+    rest: " la IA da salida automática a esas botellas de alta gama e ingresos parados que hoy no estás aprovechando en el servicio.",
+  },
+  {
+    lead: "Sin riesgo ni permanencia:",
+    rest: " prueba tu demo 100% personalizada, con total libertad contractual, y recibe un análisis inicial gratuito del margen oculto de tu carta.",
+  },
 ];
 
 const workflowSteps = [
@@ -403,6 +415,14 @@ const MetaDemoLanding = () => {
         noindex
       />
 
+      <a
+        href="#demo-form"
+        className="fixed right-4 top-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/25 transition hover:bg-accent/90 sm:right-8 sm:px-5"
+      >
+        Solicita tu demo
+        <ArrowRight className="h-3.5 w-3.5" />
+      </a>
+
       <main>
         <section className="relative overflow-hidden px-5 py-8 sm:px-8 lg:min-h-screen lg:px-10 lg:py-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(131,40,59,0.42),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_34%)]" />
@@ -411,10 +431,6 @@ const MetaDemoLanding = () => {
               <Link to="/" className="flex items-center" aria-label="Winerim">
                 <img src={winerimLogo} alt="Winerim" className="h-9 w-auto sm:h-10" />
               </Link>
-              <div className="hidden items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60 sm:flex">
-                <ShieldCheck className="h-4 w-4 text-accent" />
-                Sin compromiso
-              </div>
             </header>
 
             <div className="grid flex-1 items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] xl:gap-16">
@@ -425,7 +441,7 @@ const MetaDemoLanding = () => {
                 className="max-w-2xl"
               >
                 <span className="mb-4 block text-xs font-bold uppercase tracking-[0.32em] text-accent">
-                  Prueba gratuita
+                  Sistema Winerim IA
                 </span>
                 <h1 className="font-heading text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
                   Solicita una demo gratuita de <span className="text-accent">Winerim</span>
@@ -436,9 +452,12 @@ const MetaDemoLanding = () => {
 
                 <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                   {benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-3 text-sm leading-6 text-white/78">
+                    <li key={benefit.lead} className="flex items-start gap-3 text-sm leading-6 text-white/78">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                      <span>{benefit}</span>
+                      <span>
+                        <strong className="font-semibold text-white">{benefit.lead}</strong>
+                        {benefit.rest}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -488,10 +507,11 @@ const MetaDemoLanding = () => {
               </motion.div>
 
               <motion.div
+                id="demo-form"
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="rounded-lg border border-white/12 bg-[#191b1a]/95 p-5 shadow-2xl shadow-black/20 sm:p-7 lg:p-8"
+                className="scroll-mt-24 rounded-lg border border-white/12 bg-[#191b1a]/95 p-5 shadow-2xl shadow-black/20 sm:p-7 lg:p-8"
               >
                 <div className="mb-6">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent/18">

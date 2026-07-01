@@ -2,6 +2,39 @@
 
 ## 2026-07-01
 
+### Landing Meta Demo: copy LeadConnector y CTA fijo
+
+#### Hechos
+
+- Antes de implementar CloudRIM/SAVia, el usuario pidio actualizar `go.winerim.wine`.
+- La referencia de copy fue `https://sites.leadconnectorhq.com/preview/2xc4bo8rOcqAkRWPLO5H?notrack=true`.
+- Se actualizo `src/pages/MetaDemoLanding.tsx` con:
+  - badge `Sistema Winerim IA`;
+  - CTA fijo superior derecho `Solicita tu demo`;
+  - retirada del bloque de cabecera `Sin compromiso`;
+  - bullets comerciales nuevos;
+  - primera frase de cada bullet en negrita.
+- Se mantuvo el formulario React/Supabase/CRM sin introducir `action` HTML estatico.
+- Validaciones locales: build OK, `git diff --check` OK, captura Playwright desktop/mobile OK y selector `Sistema Winerim IA` renderizado.
+
+#### Decisiones
+
+- Mantener `+2.000 restaurantes` en la landing aunque la referencia externa traiga `+1.000 bodegas gestionadas`.
+- Mantener testimonios reales en vez de placeholders de la referencia.
+- Pulir el cuarto bullet de la referencia para eliminar duplicacion y mejorar puntuacion sin cambiar el angulo comercial.
+- Considerar el banner global de cookies como posible mejora CRO separada, no como regresion de la landing.
+
+#### Hipotesis
+
+- El nuevo copy mejora coherencia con campanas Meta de IA, ventas, stock muerto y restaurantes premium.
+- El CTA fijo deberia mejorar conversion al mantener siempre visible el acceso al formulario.
+
+#### Tareas pendientes
+
+- Publicar frontend desde Lovable.
+- Revalidar `https://go.winerim.wine/` tras publish y probar formulario/CRM si el usuario lo pide.
+- Retomar CloudRIM/SAVia despues de cerrar esta landing.
+
 ### Revalidacion post-publish y fix de canonicals/localizacion
 
 #### Hechos

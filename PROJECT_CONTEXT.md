@@ -2,6 +2,11 @@
 
 ## Hechos
 
+- El 2026-07-01 se actualizo localmente la landing de campanas `go.winerim.wine` / `/meta-demo` con el copy aportado desde LeadConnector: badge `Sistema Winerim IA`, bullets nuevos con primera frase en negrita y CTA fijo superior `Solicita tu demo`.
+- En esa actualizacion se mantuvieron los testimonios reales ya publicados y el claim `+2.000 restaurantes`; el enlace de referencia seguia mostrando placeholders y `+1.000 bodegas gestionadas`, pero eso contradice decisiones previas del proyecto.
+- La validacion local de la actualizacion de Meta Demo paso `npm run build`, `git diff --check`, captura Playwright desktop/mobile y comprobacion por selector `Sistema Winerim IA`.
+- Se detecto en QA que el banner global de cookies puede tapar parte inferior del formulario de `go.winerim.wine` en primera visita; no es regresion de este cambio, queda como mejora separada si se quiere optimizar conversion de campanas.
+- La implementacion de CloudRIM/SAVia no se ha iniciado todavia; se preparo un plan de trabajo, pero el usuario pidio pausar antes para actualizar la landing Meta.
 - El 2026-07-01, tras el publish de Lovable del bloque comercial Core/Supply/Meta Demo, se revalido produccion en navegador real para `WinerimCore`, `WinerimSupply` y `go.winerim.wine`: contenido nuevo visible, CTAs presentes, sin overflow en desktop/mobile y `go.winerim.wine` con `noindex, follow`.
 - En esa revalidacion se detecto una contradiccion SEO: `https://winerim.wine/en/product/winerim-core` renderizaba contenido ingles, pero su canonical apuntaba a `https://winerim.wine/producto/winerim-core`.
 - Se corrigio localmente `WinerimCore` para que el canonical use `localePath("/producto/winerim-core")` sobre `CANONICAL_DOMAIN`.
@@ -195,6 +200,9 @@
 
 ## Decisiones
 
+- Para `go.winerim.wine`, usar el copy comercial nuevo de LeadConnector solo donde no contradiga decisiones previas: se conserva `+2.000 restaurantes` y testimonios reales.
+- Mantener el CTA fijo superior de la landing Meta como boton de anclaje al formulario, sin cambiar el flujo React/Supabase/CRM existente.
+- Tratar el banner de cookies en landing de pago como posible optimizacion CRO separada, no como bloqueante tecnico.
 - Tratar cualquier canonical localizado que apunte a la version espanola como error SEO, aunque el contenido visible este correctamente traducido.
 - Resolver deudas de localizacion comunes en componentes compartidos cuando aparezcan durante QA de producto, no dejarlas como problema aislado de una sola pagina.
 - Mantener la segunda oleada de `Aprender vino` como articulos guiados B2B y no mezclarla con fichas de entidad de `Biblioteca del vino`.
