@@ -309,6 +309,16 @@ const LEARN_WINE_ALTERNATES = {
   'x-default': '/aprender-vino',
 };
 
+const DISTRIBUTOR_ALTERNATES = {
+  es: '/distribuidor',
+  en: '/en/distributor',
+  it: '/it/distributore',
+  fr: '/fr/distributeur',
+  de: '/de/haendler',
+  pt: '/pt/distribuidor',
+  'x-default': '/distribuidor',
+};
+
 const STATIC_WORKER_PRERENDER_PAGES = {
   '/presentacion': {
     lang: 'es',
@@ -411,6 +421,108 @@ const STATIC_WORKER_PRERENDER_PAGES = {
       ['Proximo passo', 'A apresentacao pode ser partilhada, descarregada como deck e usada para pedir uma demo adaptada ao caso concreto.'],
     ],
     links: [['Demo', '/pt/demo'], ['Produto', '/pt/software-carta-vinhos'], ['Funcionalidades', '/pt/funcionalidades'], ['Analise carta', '/pt/analise-carta']],
+  },
+  '/distribuidor': {
+    lang: 'es',
+    title: 'Distribuidores Winerim | Partner comercial para hosteleria',
+    description: 'Programa de distribucion Winerim para partners HORECA: software de carta de vinos, analisis de margen, stock, compras y soporte centralizado.',
+    h1: 'Lleva Winerim a restaurantes, hoteles y grupos de tu mercado',
+    subtitle: 'Un programa para partners HORECA que ya venden a hosteleria y quieren incorporar una plataforma de carta de vinos, stock, compras, margen y analitica.',
+    canonical: '/distribuidor',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['Oportunidad HORECA', 'Muchos restaurantes gestionan carta, stock, compras y margenes con hojas de calculo, PDFs o decisiones dispersas. Eso crea referencias paradas, precios desactualizados y poca visibilidad para negociar.'],
+      ['Modelo de partner', 'El distribuidor trabaja como partner B2B independiente, con materiales comerciales, soporte centralizado, acompanamiento en primeras demos y condiciones segun territorio.'],
+      ['Perfil ideal', 'Encajan distribuidores de vino, consultores HORECA, empresas de software hospitality y profesionales con acceso real a restaurantes, hoteles, wine bars o grupos.'],
+      ['Como empezar', 'Primero se revisan red, mercado y fit. Despues se prepara una demo, plan de territorio, acuerdo de distribucion y onboarding comercial con primeros clientes acompanados.'],
+    ],
+    links: [['Winerim Supply', '/producto/winerim-supply'], ['Winerim Core', '/producto/winerim-core'], ['Calculadora de margen', '/calculadora-margen-vino'], ['Demo', '/demo']],
+  },
+  '/en/distributor': {
+    lang: 'en',
+    title: 'Winerim Distributors | Commercial Partner for Hospitality',
+    description: 'Winerim distribution program for HORECA partners: wine-list software, margin analysis, stock, purchasing and central support.',
+    h1: 'Bring Winerim to restaurants, hotels and groups in your market',
+    subtitle: 'A program for HORECA partners already selling into hospitality who want to add a platform for wine lists, stock, purchasing, margin and analytics.',
+    canonical: '/en/distributor',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['Hospitality opportunity', 'Many restaurants still manage lists, stock, purchasing and margin with spreadsheets, PDFs or scattered decisions. That leaves slow references, outdated prices and weak negotiating visibility.'],
+      ['Partner model', 'The distributor works as an independent B2B partner with commercial assets, central support, first-demo guidance and territory conditions defined by agreement.'],
+      ['Ideal profile', 'Wine distributors, HORECA consultants, hospitality software companies and professionals with real access to restaurants, hotels, wine bars or groups fit best.'],
+      ['How to start', 'We review network, market and fit first. Then we prepare a demo, territory plan, distribution agreement and commercial onboarding with first accounts supported.'],
+    ],
+    links: [['Winerim Supply', '/en/product/winerim-supply'], ['Winerim Core', '/en/product/winerim-core'], ['Wine margin calculator', '/en/wine-margin-calculator'], ['Request a demo', '/en/demo']],
+  },
+  '/it/distributore': {
+    lang: 'it',
+    title: 'Distributori Winerim | Partner commerciale per ospitalita',
+    description: 'Programma di distribuzione Winerim per partner HORECA: software carta vini, analisi margini, stock, acquisti e supporto centrale.',
+    h1: 'Porta Winerim a ristoranti, hotel e gruppi nel tuo mercato',
+    subtitle: 'Un programma per partner HORECA che gia vendono alla ristorazione e vogliono aggiungere una piattaforma per carta vini, stock, acquisti, margini e analytics.',
+    canonical: '/it/distributore',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['Opportunita HORECA', 'Molti ristoranti gestiscono carta, stock, acquisti e margini con fogli di calcolo, PDF o decisioni disperse. Questo lascia referenze ferme, prezzi non aggiornati e poca visibilita in negoziazione.'],
+      ['Modello partner', 'Il distributore lavora come partner B2B indipendente con materiali commerciali, supporto centrale e condizioni di territorio definite per accordo.'],
+      ['Profilo ideale', 'Distributori vino, consulenti HORECA, software hospitality e professionisti con accesso reale a ristoranti, hotel, wine bar o gruppi.'],
+      ['Come iniziare', 'Si valutano rete, mercato e fit. Poi si prepara demo, piano territorio, accordo distributivo e onboarding commerciale con i primi clienti accompagnati.'],
+    ],
+    links: [['Winerim Supply', '/it/prodotto/winerim-supply'], ['Winerim Core', '/it/prodotto/winerim-core'], ['Calcolatrice margini vino', '/it/calcolatrice-margini-vino'], ['Richiedi demo', '/it/demo']],
+  },
+  '/fr/distributeur': {
+    lang: 'fr',
+    title: 'Distributeurs Winerim | Partenaire commercial HORECA',
+    description: 'Programme distributeurs Winerim pour partenaires HORECA : logiciel carte des vins, marge, stock, achats et support central.',
+    h1: 'Amenez Winerim aux restaurants, hotels et groupes de votre marche',
+    subtitle: 'Un programme pour partenaires HORECA qui vendent deja a la restauration et veulent ajouter une plateforme carte des vins, stock, achats, marge et analytics.',
+    canonical: '/fr/distributeur',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['Opportunite HORECA', 'Beaucoup de restaurants gerent encore carte, stock, achats et marges avec tableurs, PDF ou decisions dispersees. Cela laisse des references dormantes, des prix obsoletes et peu de visibilite pour negocier.'],
+      ['Modele partenaire', 'Le distributeur travaille comme partenaire B2B independant avec supports commerciaux, accompagnement central et conditions de territoire definies par accord.'],
+      ['Profil ideal', 'Distributeurs de vin, consultants HORECA, logiciels hospitality et professionnels avec acces reel aux restaurants, hotels, bars a vin ou groupes.'],
+      ['Comment commencer', 'Nous validons reseau, marche et fit. Puis nous preparons demo, plan de territoire, accord de distribution et onboarding commercial avec premiers comptes accompagnes.'],
+    ],
+    links: [['Winerim Supply', '/fr/produit/winerim-supply'], ['Winerim Core', '/fr/produit/winerim-core'], ['Calculateur marge vin', '/fr/calculateur-marge-vin'], ['Demander une demo', '/fr/demo']],
+  },
+  '/de/haendler': {
+    lang: 'de',
+    title: 'Winerim Haendler | Vertriebspartner fuer Gastronomie',
+    description: 'Winerim Distributionsprogramm fuer HORECA-Partner: Weinkarten-Software, Marge, Bestand, Einkauf und zentraler Support.',
+    h1: 'Bringen Sie Winerim zu Restaurants, Hotels und Gruppen in Ihrem Markt',
+    subtitle: 'Ein Programm fuer HORECA-Partner, die bereits an Gastronomie verkaufen und eine Plattform fuer Weinkarte, Bestand, Einkauf, Marge und Analytics ergaenzen wollen.',
+    canonical: '/de/haendler',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['HORECA-Chance', 'Viele Restaurants verwalten Weinkarte, Bestand, Einkauf und Margen noch mit Tabellen, PDFs oder getrennten Entscheidungen. Das fuehrt zu langsamen Referenzen, veralteten Preisen und schwacher Verhandlungsbasis.'],
+      ['Partnermodell', 'Der Haendler arbeitet als unabhaengiger B2B-Partner mit Vertriebsunterlagen, zentraler Unterstuetzung und gebietsbezogenen Bedingungen.'],
+      ['Ideales Profil', 'Weindistributoren, HORECA-Berater, Hospitality-Softwareanbieter und Profis mit echtem Zugang zu Restaurants, Hotels, Weinbars oder Gruppen.'],
+      ['So starten wir', 'Wir pruefen Netzwerk, Markt und Fit. Danach folgen Demo, Gebietsplan, Distributionsvertrag und kommerzielles Onboarding mit begleiteten ersten Accounts.'],
+    ],
+    links: [['Winerim Supply', '/de/produkt/winerim-supply'], ['Winerim Core', '/de/produkt/winerim-core'], ['Wein-Margenrechner', '/de/wein-margen-rechner'], ['Demo anfragen', '/de/demo']],
+  },
+  '/pt/distribuidor': {
+    lang: 'pt',
+    title: 'Distribuidores Winerim | Parceiro comercial para hotelaria',
+    description: 'Programa de distribuicao Winerim para parceiros HORECA: software carta de vinhos, margem, stock, compras e suporte central.',
+    h1: 'Leve a Winerim a restaurantes, hoteis e grupos no seu mercado',
+    subtitle: 'Um programa para parceiros HORECA que ja vendem a restauracao e querem acrescentar uma plataforma de carta, stock, compras, margem e analitica.',
+    canonical: '/pt/distribuidor',
+    schemaType: 'WebPage',
+    alternates: DISTRIBUTOR_ALTERNATES,
+    sections: [
+      ['Oportunidade HORECA', 'Muitos restaurantes ainda gerem carta, stock, compras e margens com folhas de calculo, PDFs ou decisoes desligadas. Isso deixa referencias paradas, precos desatualizados e pouca visibilidade para negociar.'],
+      ['Modelo de parceiro', 'O distribuidor trabalha como parceiro B2B independente, com materiais comerciais, suporte central e condicoes de territorio definidas em acordo.'],
+      ['Perfil ideal', 'Distribuidores de vinho, consultores HORECA, software de hotelaria e profissionais com acesso real a restaurantes, hoteis, wine bars ou grupos.'],
+      ['Como comecar', 'Validamos rede, mercado e encaixe. Depois preparamos demo, plano de territorio, acordo de distribuicao e onboarding comercial com primeiras contas acompanhadas.'],
+    ],
+    links: [['Winerim Supply', '/pt/produto/winerim-supply'], ['Winerim Core', '/pt/produto/winerim-core'], ['Calculadora de margem', '/pt/calculadora-margem-vinho'], ['Pedir demo', '/pt/demo']],
   },
   '/aprender-vino': {
     lang: 'es',
@@ -572,6 +684,7 @@ const BAROMETER_ALTERNATES = {
 
 const WORKER_BAROMETER_SITEMAP_LASTMOD = '2026-06-10';
 const WORKER_LEARN_WINE_SITEMAP_LASTMOD = '2026-06-30';
+const WORKER_DISTRIBUTOR_SITEMAP_LASTMOD = '2026-07-01';
 
 const WORKER_TERMS_PATHS = {
   es: '/terminos',
@@ -782,8 +895,10 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
   const missingBarometerPaths = barometerPaths.filter(path => !xml.includes(`${site}${path}`));
   const learnWinePaths = [...new Set(Object.values(LEARN_WINE_ALTERNATES))];
   const missingLearnWinePaths = learnWinePaths.filter(path => !xml.includes(`${site}${path}`));
+  const distributorPaths = [...new Set(Object.values(DISTRIBUTOR_ALTERNATES))];
+  const missingDistributorPaths = distributorPaths.filter(path => !xml.includes(`${site}${path}`));
 
-  if (hasDetailUrls && missingBarometerPaths.length === 0 && missingLearnWinePaths.length === 0) {
+  if (hasDetailUrls && missingBarometerPaths.length === 0 && missingLearnWinePaths.length === 0 && missingDistributorPaths.length === 0) {
     return stabilizeSitemapLastmod(xml);
   }
 
@@ -792,6 +907,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...(hasDetailUrls ? [] : Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD))),
     ...missingBarometerPaths.map(path => detailUrlBlock(site, path, WORKER_BAROMETER_SITEMAP_LASTMOD)),
     ...missingLearnWinePaths.map(path => detailUrlBlock(site, path, WORKER_LEARN_WINE_SITEMAP_LASTMOD)),
+    ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD)),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;

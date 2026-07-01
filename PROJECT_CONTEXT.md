@@ -8,6 +8,10 @@
 - Se sincronizaron distribuidores y margen en React, `ROUTE_MAP`, sitemap, prerender, Cloudflare Worker, `sitemap-extra.json`, `llms.txt` y `llms-full.txt`.
 - Se corrigio un bug local de `CalculadoraMargen`: el componente usaba `useEffect` pero el import de React no lo incluia tras la edicion.
 - Se corrigio un overflow movil en el componente comun `InternalLinks`, que afectaba a tarjetas de enlaces internos en mobile.
+- El 2026-07-01 se pusheo `b981921 feat: refine distributor and margin SEO pages` y se desplego Cloudflare Worker `winerim-proxy` version `31bbbf98-93f6-4659-81fb-5ece89be0214`.
+- El 2026-07-01 el deploy CLI de Supabase SEO siguio bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; `sitemap` y `prerender` deben desplegarse desde Lovable/Supabase.
+- El 2026-07-01 se anadio prerender estatico puente en Worker para las seis rutas de distribuidores porque la Edge Function productiva antigua devolvia contenido/canonical de home para `/distribuidor`.
+- Con cache-buster, produccion valida `worker-static-prerender` correcto para distribuidores; sin query queda pendiente purgar cache Cloudflare de esas rutas.
 - Validaciones locales del 2026-07-01 para distribuidores/margenes: build OK, Worker check OK, Deno check OK, `sitemap-extra` JSON OK, `git diff --check` OK y QA navegador desktop/mobile OK.
 - Contradiccion corregida el 2026-07-01: `/distribuidor` existia en React, pero faltaba en `ROUTE_MAP` y en parte de la superficie SEO localizada.
 - Contradiccion corregida el 2026-07-01: la calculadora de margen tenia rutas DE/PT, pero la lista manual de alternates de `prerender` no incluia DE/PT.
@@ -165,6 +169,7 @@
 - Mantener `/de/haendler` como ruta canonica alemana para distribuidores.
 - Usar `FAQSection` como patron para FAQ visibles + schema localizado en paginas comerciales/herramientas, en vez de scripts JSON-LD manuales por pagina.
 - Tratar `InternalLinks` como componente comun sensible a SEO y responsive; los arreglos de mobile deben hacerse en el componente si el problema es compartido.
+- Usar prerender estatico en Worker solo como puente cuando la Edge Function productiva aun no tenga el contenido correcto; despues de desplegar `prerender`, valorar retirar el puente si se quiere centralizar SEO en Supabase.
 - La primera oleada real de `Aprender vino` se publica como articulos de blog localizados, no como entidades nuevas de `Biblioteca del vino`.
 - Los tres primeros spokes priorizados son: catar vino en cinco pasos, vocabulario de cata y maridajes basicos para restaurantes.
 - En el hub `Aprender vino`, las tarjetas de spokes deben usar CTA de lectura (`Leer guia` y equivalentes), no el CTA general de biblioteca.

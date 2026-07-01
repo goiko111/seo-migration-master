@@ -14,6 +14,11 @@
 - Se corrigio un bug de runtime en `CalculadoraMargen` por import ausente de `useEffect`.
 - Se corrigio overflow movil en `InternalLinks` con `grid-cols-1`, `min-w-0` y `w-full`.
 - Se completo en `prerender` la matriz de alternates de la calculadora con DE/PT.
+- Se pusheo el commit `b981921 feat: refine distributor and margin SEO pages` a `origin/main`.
+- El deploy CLI de Supabase SEO fallo por falta de `SUPABASE_ACCESS_TOKEN`.
+- Se desplego Cloudflare Worker `winerim-proxy` version `31bbbf98-93f6-4659-81fb-5ece89be0214`.
+- Tras detectar que la Edge Function antigua devolvia contenido/canonical de home para `/distribuidor`, se anadio prerender estatico de emergencia en Worker para las seis rutas de distribuidores.
+- Con cache-buster, Googlebot recibe ya `worker-static-prerender` correcto para ES y EN de distribuidores; sin query queda pendiente purga de cache Cloudflare.
 - Validaciones locales pasadas: build, Worker check, Deno check de Edge Functions, JSON de `sitemap-extra`, `git diff --check` y QA navegador desktop/mobile.
 - Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse.
 
@@ -24,6 +29,7 @@
 - Mantener `/de/haendler` como canonical aleman de distribuidores.
 - Usar `FAQSection` para FAQ visibles y schema multilingue en la calculadora, evitando JSON-LD manual solo en espanol.
 - Corregir el overflow en el componente comun `InternalLinks` porque afecta a varias paginas, no solo a distribuidores/margenes.
+- Usar Worker static prerender como puente temporal cuando la Edge Function productiva aun no esta desplegada y devuelve contenido generico.
 
 #### Hipotesis
 
@@ -34,8 +40,8 @@
 #### Tareas pendientes
 
 - Publicar frontend en Lovable.
-- Desplegar `sitemap` y `prerender`.
-- Desplegar Worker.
+- Desplegar `sitemap` y `prerender` desde Lovable/Supabase.
+- Purgar cache Cloudflare de las seis URLs de distribuidores o esperar expiracion de cache antes de pedir indexacion.
 - Revalidar produccion humana y Googlebot para distribuidores y calculadora de margen en seis idiomas.
 - Reenviar sitemap e inspeccionar URLs prioritarias en Search Console.
 

@@ -27,6 +27,14 @@
   - `public/llms.txt`;
   - `public/llms-full.txt`.
 - Se completo en `prerender` la lista manual de alternates de `/calculadora-margen-vino`, que ya tenia EN/IT/FR pero no DE/PT.
+- Se creo el commit `b981921 feat: refine distributor and margin SEO pages` y se pusheo a `origin/main`.
+- El deploy CLI de Supabase SEO fallo por falta de `SUPABASE_ACCESS_TOKEN`, igual que en sesiones anteriores.
+- Se desplego Cloudflare Worker `winerim-proxy` version `31f4e71d-d184-40e0-89a6-0dae9722195f` y despues una correccion de emergencia version `31bbbf98-93f6-4659-81fb-5ece89be0214`.
+- La correccion de emergencia del Worker anade prerender estatico para las seis rutas de distribuidores y las inyecta en sitemap si origen aun no las trae.
+- Produccion con cache-buster valida como Googlebot `worker-static-prerender` correcto para:
+  - `https://winerim.wine/distribuidor?codex_worker_check=202607010908`;
+  - `https://winerim.wine/en/distributor?codex_worker_check=202607010908`.
+- Sin cache-buster, Cloudflare aun devolvia HTML antiguo cacheado de bot-prerender para `/distribuidor`, con canonical de home; queda pendiente purgar cache de las seis rutas de distribuidores.
 - Validaciones locales OK:
   - `npm run build`;
   - `node --check cloudflare-worker-v3-hybrid.js`;
@@ -71,13 +79,19 @@
 - Contradiccion corregida: `/distribuidor` existia en React para idiomas, pero faltaba en `ROUTE_MAP` y en parte de la superficie sitemap/prerender/Worker.
 - Contradiccion corregida: la calculadora de margen existia en DE/PT, pero la lista manual de alternates de `prerender` no incluia DE/PT.
 - Limitacion detectada: `npm run build` no detecto el import ausente de `useEffect`; la rotura solo aparecio en QA de navegador.
-- Pendiente de produccion: los cambios aun necesitan publish/deploy en Lovable, Supabase Edge Functions y Cloudflare Worker antes de considerarse publicados.
+- Pendiente de produccion: el Worker ya esta desplegado, pero faltan publish frontend en Lovable, deploy de Edge Functions `sitemap`/`prerender` y purge de cache Cloudflare para las rutas de distribuidores sin query.
 
 ## Tareas pendientes
 
 - Publicar frontend desde Lovable.
 - Desplegar Edge Functions `sitemap` y `prerender` desde Lovable/Supabase.
-- Desplegar Cloudflare Worker `winerim-proxy` con la ruta `/distribuidor` actualizada.
+- Purgar cache Cloudflare para:
+  - `https://winerim.wine/distribuidor`;
+  - `https://winerim.wine/en/distributor`;
+  - `https://winerim.wine/it/distributore`;
+  - `https://winerim.wine/fr/distributeur`;
+  - `https://winerim.wine/de/haendler`;
+  - `https://winerim.wine/pt/distribuidor`.
 - Revalidar produccion humana y Googlebot para las 12 rutas revisadas.
 - Reenviar `/sitemap.xml` en Search Console tras el deploy y revisar indexacion de las nuevas URLs de distribuidores.
 - Mantener fuera de esta linea el cambio ajeno en `src/components/WineListAnalyzerTool.tsx`.

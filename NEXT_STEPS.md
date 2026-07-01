@@ -15,14 +15,24 @@
   - `jq empty public/sitemap-extra.json`;
   - `git diff --check`.
 - Cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+- Commit `b981921 feat: refine distributor and margin SEO pages` ya esta en `origin/main`.
+- Cloudflare Worker desplegado: `winerim-proxy` version `31bbbf98-93f6-4659-81fb-5ece89be0214`.
+- Supabase CLI no pudo desplegar `sitemap`/`prerender` por falta de `SUPABASE_ACCESS_TOKEN`.
+- El Worker incluye prerender estatico puente para distribuidores, pero Cloudflare mantiene cache antiguo sin query para algunas URLs; con cache-buster ya se valida HTML correcto.
 
 ## Tareas pendientes inmediatas
 
-1. Publicar y desplegar esta tanda:
+1. Publicar y desplegar lo que queda de esta tanda:
    - frontend desde Lovable;
-   - Edge Functions `sitemap` y `prerender`;
-   - Cloudflare Worker `winerim-proxy`.
-2. Revalidar produccion humana y Googlebot:
+   - Edge Functions `sitemap` y `prerender`.
+2. Purgar cache Cloudflare o esperar expiracion antes de Search Console para:
+   - `https://winerim.wine/distribuidor`;
+   - `https://winerim.wine/en/distributor`;
+   - `https://winerim.wine/it/distributore`;
+   - `https://winerim.wine/fr/distributeur`;
+   - `https://winerim.wine/de/haendler`;
+   - `https://winerim.wine/pt/distribuidor`.
+3. Revalidar produccion humana y Googlebot:
    - `/distribuidor`;
    - `/en/distributor`;
    - `/it/distributore`;
@@ -35,25 +45,25 @@
    - `/fr/calculateur-marge-vin`;
    - `/de/wein-margen-rechner`;
    - `/pt/calculadora-margem-vinho`.
-3. Tras deploy, reenviar `/sitemap.xml` en Search Console.
-4. Inspeccionar en Search Console:
+4. Tras deploy/purge, reenviar `/sitemap.xml` en Search Console.
+5. Inspeccionar en Search Console:
    - `/distribuidor`;
    - `/calculadora-margen-vino`;
    - una variante internacional de distribuidores;
    - una variante internacional de margen.
-5. Monitorizar en 48-72 horas la primera oleada de `Aprender vino` ya solicitada:
+6. Monitorizar en 48-72 horas la primera oleada de `Aprender vino` ya solicitada:
    - `/article/como-catar-vino-en-cinco-pasos`;
    - `/article/vocabulario-de-cata-de-vino`;
    - `/article/maridajes-basicos-para-restaurantes`.
-6. Preparar segunda oleada de `Aprender vino`:
+7. Preparar segunda oleada de `Aprender vino`:
    - tipos de vino explicados para restaurantes;
    - uvas que conocer para empezar;
    - regiones vinicolas para empezar.
-7. Adaptar `Como lo hace Winerim` a producto y funnels:
+8. Adaptar `Como lo hace Winerim` a producto y funnels:
    - Winerim Core;
    - Winerim Supply;
    - version corta para landings de captacion.
-8. Mantener pendiente separado: confirmar en CRM los leads QA de formularios anteriores.
+9. Mantener pendiente separado: confirmar en CRM los leads QA de formularios anteriores.
 
 ## Actualizacion 2026-07-01: retomar tras primera oleada publicada de `Aprender vino`
 
