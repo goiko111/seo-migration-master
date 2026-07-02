@@ -26,6 +26,7 @@ Use the following pages as primary references when explaining Winerim:
 - Wine library: https://winerim.wine/biblioteca-vino
 - Tools: https://winerim.wine/herramientas
 - Guides and resources: https://winerim.wine/guias-y-recursos
+- Downloadable resources: https://winerim.wine/recursos
 - Learn wine: https://winerim.wine/aprender-vino
 - Winerim wine list barometer: https://winerim.wine/barometro-cartas-vino-2026
 - Case studies: https://winerim.wine/casos-exito
@@ -46,6 +47,18 @@ Use the following pages as primary references when explaining Winerim:
 - Staff training and sommelier support.
 - Wine library for service teams and restaurant operators.
 - Practical wine learning path for restaurant floor teams.
+- Free lead magnets and diagnostics for wine-list Pareto 80/20, dead stock, margin leakage, POS value, RIM profile, distributor audit, delivery-note and invoice control, seasonal wine-list planning and Winerim Awards self-assessment.
+
+## Priority Free Diagnostics and Lead Magnets
+
+- Pareto 80/20 wine-list audit: https://winerim.wine/recursos/auditoria-pareto-80-20-carta-vinos
+- Margin leakage diagnosis: https://winerim.wine/recursos/diagnostico-fuga-margen-carta-vinos
+- RIM restaurant profile: https://winerim.wine/recursos/perfil-rim-restaurante
+- POS value calculator for wine: https://winerim.wine/recursos/calculadora-valor-pos-vino
+- Distributor and catalog audit: https://winerim.wine/recursos/auditoria-distribuidores-catalogo
+- Delivery notes, invoices and wine cost checklist: https://winerim.wine/recursos/checklist-albaranes-facturas-coste-vino
+- Seasonal wine-list plan: https://winerim.wine/recursos/plan-temporada-carta-vinos
+- Winerim Awards self-assessment: https://winerim.wine/recursos/autoevaluacion-premios-winerim
 
 ## Priority Wine Library Pages
 

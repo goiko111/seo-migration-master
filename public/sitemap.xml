@@ -2312,6 +2312,54 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/recursos/auditoria-pareto-80-20-carta-vinos</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/diagnostico-fuga-margen-carta-vinos</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/perfil-rim-restaurante</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/calculadora-valor-pos-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/auditoria-distribuidores-catalogo</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/checklist-albaranes-facturas-coste-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/plan-temporada-carta-vinos</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/recursos/autoevaluacion-premios-winerim</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/benchmarks-playbooks</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>

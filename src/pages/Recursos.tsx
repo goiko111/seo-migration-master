@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Download, Wine, Search, DollarSign, BarChart3, Brain,
   FileText, CheckCircle, Layers, Building2, TrendingUp,
-  ArrowRight, Package, Sparkles
+  ArrowRight, Package, Sparkles, PieChart, Target, Calendar
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -143,6 +143,14 @@ const resourceItems: ResourceItem[] = [
   { slug: "plantilla-revision-mensual-carta", icon: FileText, type: "revision", tags: ["analítica", "avanzado"] },
   { slug: "revision-mensual-margenes", icon: DollarSign, type: "revision", tags: ["pricing", "rentabilidad", "avanzado"] },
   { slug: "plantilla-control-grupo-restauracion", icon: Building2, type: "control", tags: ["grupo", "avanzado"] },
+  { slug: "auditoria-pareto-80-20-carta-vinos", icon: PieChart, type: "revision", tags: ["analítica", "rentabilidad", "avanzado"] },
+  { slug: "diagnostico-fuga-margen-carta-vinos", icon: DollarSign, type: "checklist", tags: ["pricing", "rentabilidad", "avanzado"] },
+  { slug: "perfil-rim-restaurante", icon: Target, type: "scorecard", tags: ["analítica", "estructura", "inicio"] },
+  { slug: "calculadora-valor-pos-vino", icon: BarChart3, type: "scorecard", tags: ["analítica", "rentabilidad", "avanzado"] },
+  { slug: "auditoria-distribuidores-catalogo", icon: Building2, type: "revision", tags: ["pricing", "rotación", "avanzado"] },
+  { slug: "checklist-albaranes-facturas-coste-vino", icon: FileText, type: "checklist", tags: ["pricing", "analítica", "avanzado"] },
+  { slug: "plan-temporada-carta-vinos", icon: Calendar, type: "plantilla", tags: ["estructura", "copa", "intermedio"] },
+  { slug: "autoevaluacion-premios-winerim", icon: CheckCircle, type: "scorecard", tags: ["analítica", "estructura", "intermedio"] },
 ];
 
 const resourceTexts: Record<string, ResourceText[]> = {
@@ -161,6 +169,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes con datos reales." },
     { title: "Revisión mensual de márgenes", desc: "Una plantilla para revisar cada mes si tu carta está perdiendo margen y decidir qué corregir antes de que el problema crezca." },
     { title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking entre locales." },
+    { title: "Auditoría Pareto 80/20", desc: "Detecta qué vinos sostienen la facturación, cuáles ocupan espacio y dónde ajustar la carta." },
+    { title: "Diagnóstico de fuga de margen", desc: "Encuentra pérdidas por coste, PVP, copa, reposición y compras antes de que se acumulen." },
+    { title: "Perfil RIM del restaurante", desc: "Descubre si tu carta es gourmet, estratégica, turística, pasiva o necesita simplificación." },
+    { title: "Valor POS para vino", desc: "Calcula qué valor pierdes cuando las ventas del TPV no alimentan carta, stock y margen." },
+    { title: "Auditoría de distribuidores", desc: "Evalúa catálogo, precios, albaranes, servicio y encaje real de cada proveedor." },
+    { title: "Checklist albaranes y coste", desc: "Controla si facturas, albaranes y tarifas actualizan de verdad el coste de la carta." },
+    { title: "Plan de temporada", desc: "Prepara compras, copa, stock, formación y margen antes de temporada alta." },
+    { title: "Autoevaluación Premios Winerim", desc: "Puntúa tu carta con criterios de rentabilidad, equilibrio, experiencia, stock y datos." },
   ],
   en: [
     { title: "Wine list template", desc: "Professional template to design and structure your wine list from scratch." },

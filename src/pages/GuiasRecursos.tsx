@@ -199,6 +199,14 @@ const resources = [
   { to: "/recursos/plantilla-revision-mensual-carta", icon: FileText, title: "Revisión mensual de carta", desc: "Proceso estructurado para revisar tu carta cada mes: rendimiento, pricing, rotación y plan de acción.", tags: ["analítica", "restaurante", "avanzado"] },
   { to: "/recursos/revision-mensual-margenes", icon: DollarSign, title: "Revisión mensual de márgenes", desc: "Revisa cada mes si tu carta está perdiendo margen y decide qué corregir antes de que el problema crezca.", tags: ["pricing", "restaurante", "avanzado"] },
   { to: "/recursos/plantilla-control-grupo-restauracion", icon: Building2, title: "Control para grupos", desc: "Dashboard comparativo, surtido centralizado y benchmarking interno entre locales.", tags: ["analítica", "grupo", "avanzado"] },
+  { to: "/recursos/auditoria-pareto-80-20-carta-vinos", icon: BarChart3, title: "Auditoría Pareto 80/20", desc: "Detecta qué vinos sostienen la facturación, cuáles ocupan espacio y qué referencias conviene mover.", tags: ["analítica", "rentabilidad", "avanzado"] },
+  { to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: DollarSign, title: "Diagnóstico de fuga de margen", desc: "Encuentra pérdidas por coste, PVP, copa, reposición y compras antes de que se acumulen.", tags: ["pricing", "rentabilidad", "avanzado"] },
+  { to: "/recursos/perfil-rim-restaurante", icon: Brain, title: "Perfil RIM del restaurante", desc: "Descubre qué tipo de carta tienes y qué decisiones debería priorizar.", tags: ["analítica", "estructura", "inicio"] },
+  { to: "/recursos/calculadora-valor-pos-vino", icon: BarChart3, title: "Valor POS para vino", desc: "Calcula el valor de conectar ventas TPV con carta, stock, margen y compras.", tags: ["analítica", "restaurante", "avanzado"] },
+  { to: "/recursos/auditoria-distribuidores-catalogo", icon: Building2, title: "Auditoría de distribuidores", desc: "Evalúa catálogo, tarifas, albaranes, servicio y encaje real de cada proveedor.", tags: ["pricing", "rotación", "avanzado"] },
+  { to: "/recursos/checklist-albaranes-facturas-coste-vino", icon: FileText, title: "Checklist albaranes y coste", desc: "Controla si documentos y tarifas actualizan de verdad el coste de la carta.", tags: ["pricing", "analítica", "avanzado"] },
+  { to: "/recursos/plan-temporada-carta-vinos", icon: BookOpen, title: "Plan de temporada", desc: "Prepara compras, copa, stock, formación y margen antes de temporada alta.", tags: ["estructura", "copa", "intermedio"] },
+  { to: "/recursos/autoevaluacion-premios-winerim", icon: CheckCircle, title: "Autoevaluación Premios Winerim", desc: "Puntúa tu carta con criterios de gestión, experiencia, rentabilidad y calidad digital.", tags: ["analítica", "estructura", "intermedio"] },
 ];
 
 const tools = [
