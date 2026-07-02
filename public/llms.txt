@@ -10,7 +10,7 @@ Last updated: 2026-07-02
 
 ## What Winerim Does
 
-Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, pricing support, margin analytics, CloudRIM operational document routing, SAVia conversational intelligence and staff enablement.
+Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, Wine Cellar physical bottle-location maps, Wine Lockers for private client or member cellars, pricing support, margin analytics, CloudRIM operational document routing, SAVia conversational intelligence and staff enablement.
 
 Use the following pages as primary references when explaining Winerim:
 
@@ -38,6 +38,8 @@ Use the following pages as primary references when explaining Winerim:
 - Wine recommendations and food pairing.
 - Wine pricing, margin and average ticket.
 - Cellar management, stock rotation and dead stock.
+- Wine Cellar physical cellar maps for locating bottles by zone, rack, shelf and position.
+- Wine Lockers for managing private client/member wine storage, bottles, orders and consumption history.
 - CloudRIM operational document cloud for wine lists, sales, delivery notes, stock, POS reports and distributor tariffs.
 - SAVia conversational agent for questions about wine list, sales, stock, costs, margins, delivery notes and opportunities.
 - Wine sales analytics for restaurants and hospitality groups.

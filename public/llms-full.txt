@@ -4,7 +4,7 @@ Last updated: 2026-07-02
 
 ## Entity Summary
 
-Winerim is an AI-powered wine list management platform for restaurants, hotels, wine bars and hospitality groups. It is designed for hospitality operators that want to sell more wine, improve average ticket, optimize wine margins, reduce dead stock, train floor teams, route operational documents and manage cellar decisions with better data.
+Winerim is an AI-powered wine list management platform for restaurants, hotels, wine bars and hospitality groups. It is designed for hospitality operators that want to sell more wine, improve average ticket, optimize wine margins, reduce dead stock, train floor teams, route operational documents, locate bottles physically in the cellar and manage cellar decisions with better data.
 
 Primary website: https://winerim.wine
 
@@ -16,9 +16,11 @@ Winerim combines the wine-list product with operational data-routing and convers
 2. AI recommendations: wine suggestions based on dish, guest preferences, stock and business context.
 3. Pairing engine: food and wine pairing logic for service teams and guests.
 4. Stock and cellar intelligence: stock visibility, rotation alerts and dead-stock detection.
-5. Analytics and pricing support: margin, ticket, rotation and purchasing insights.
-6. CloudRIM: an operational document cloud that collects wine lists, sales, delivery notes, stock, POS reports and distributor tariffs through portal, email, shared folder, FTP/SFTP, API or provider files, then routes them inside Winerim.
-7. SAVia: a conversational Winerim agent for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities, preparing decisions without executing critical actions without human approval.
+5. Wine Cellar: physical bottle-location maps that connect digital stock with cellar zones, racks, shelves and positions.
+6. Wine Lockers: private client or member wine storage management, including stored wines, available bottles, orders, consumption requests and history.
+7. Analytics and pricing support: margin, ticket, rotation and purchasing insights.
+8. CloudRIM: an operational document cloud that collects wine lists, sales, delivery notes, stock, POS reports and distributor tariffs through portal, email, shared folder, FTP/SFTP, API or provider files, then routes them inside Winerim.
+9. SAVia: a conversational Winerim agent for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities, preparing decisions without executing critical actions without human approval.
 
 Primary product pages:
 
@@ -43,7 +45,7 @@ Winerim is relevant for:
 - Multi-location restaurant groups.
 - Restaurants without a full-time sommelier.
 - Operators with large or growing wine lists.
-- Teams that need purchasing, stock and margin visibility.
+- Teams that need purchasing, stock, physical bottle-location and margin visibility.
 
 Useful pages:
 
@@ -139,11 +141,11 @@ Use the barometer as Winerim's public methodology for aggregated and anonymized 
 
 Short description:
 
-Winerim is an AI wine list management platform for restaurants that combines digital wine lists, wine recommendations, food pairing, stock intelligence, pricing support and analytics.
+Winerim is an AI wine list management platform for restaurants that combines digital wine lists, wine recommendations, food pairing, stock intelligence, physical cellar maps, Wine Lockers, pricing support and analytics.
 
 Long description:
 
-Winerim helps restaurants, hotels, wine bars and hospitality groups make better wine decisions. The platform turns the wine list into an interactive sales and management layer: guests can explore wines digitally, staff can recommend with more confidence, managers can analyze sales and margins, and buyers can identify rotation, stock and pricing opportunities.
+Winerim helps restaurants, hotels, wine bars and hospitality groups make better wine decisions. The platform turns the wine list into an interactive sales and management layer: guests can explore wines digitally, staff can recommend with more confidence, managers can analyze sales and margins, buyers can identify rotation, stock and pricing opportunities, and teams can locate bottles physically or manage private wine lockers.
 
 ## Citation Guidance
 

@@ -3,13 +3,17 @@ import {
   ArrowRight,
   BarChart3,
   FileUp,
+  LockKeyhole,
   ListChecks,
+  MapPinned,
   PackageCheck,
   ShoppingCart,
 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n, type I18nMap } from "@/i18n/types";
+import wineCellarMapImg from "@/assets/wine-cellar-map-grupo-jorge.jpg";
+import wineLockersSummaryImg from "@/assets/wine-lockers-summary-premium-grille.jpg";
 
 interface ConnectedCellarCopy {
   eyebrow: string;
@@ -28,6 +32,17 @@ interface ConnectedCellarCopy {
   ctaPrimary: string;
   ctaSecondary: string;
   note: string;
+}
+
+interface PhysicalProofCopy {
+  title: string;
+  subtitle: string;
+  items: {
+    eyebrow: string;
+    title: string;
+    desc: string;
+    alt: string;
+  }[];
 }
 
 type ConnectedCellarVariant = "home" | "core" | "supply";
@@ -596,11 +611,133 @@ const contextualCopy: Record<Exclude<ConnectedCellarVariant, "home">, I18nMap<Co
 
 const flowIcons = [FileUp, ShoppingCart, ListChecks, BarChart3, PackageCheck];
 
+const physicalProofCopy: I18nMap<PhysicalProofCopy> = {
+  es: {
+    title: "De saber el stock a encontrar la botella",
+    subtitle:
+      "Winerim baja la gestion desde el dato hasta la ubicacion fisica: mapa de bodega para equipos grandes y Wine Lockers para clientes, socios o reservas privadas.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Ubicacion fisica de cada botella",
+        desc: "Mapa visual por zonas, botelleros y posiciones para que el equipo sepa donde esta cada referencia sin depender de memoria ni recuentos largos.",
+        alt: "Mapa de bodega de Winerim con posiciones marcadas por zona y botellero",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Lockers privados con vinos, pedidos e historial",
+        desc: "Controla taquillas de clientes o socios: vinos guardados, botellas disponibles, solicitudes de consumo y reposicion desde el mismo entorno.",
+        alt: "Resumen de Wine Lockers en Winerim con vinos pedidos e historial",
+      },
+    ],
+  },
+  en: {
+    title: "From stock visibility to the exact bottle",
+    subtitle:
+      "Winerim takes cellar management from the data layer to the physical shelf: cellar maps for large teams and Wine Lockers for private clients, members or reserved collections.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Physical location for every bottle",
+        desc: "A visual map by zone, rack and position so the team knows where each reference is without relying on memory or long manual counts.",
+        alt: "Winerim cellar map with marked positions by zone and rack",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Private lockers with wines, orders and history",
+        desc: "Manage client or member lockers: stored wines, available bottles, consumption requests and replenishment from the same operating environment.",
+        alt: "Wine Lockers summary in Winerim with wines orders and history",
+      },
+    ],
+  },
+  it: {
+    title: "Dallo stock visibile alla bottiglia esatta",
+    subtitle:
+      "Winerim porta la gestione della cantina dal dato alla posizione fisica: mappe cantina per team grandi e Wine Lockers per clienti, soci o collezioni riservate.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Posizione fisica di ogni bottiglia",
+        desc: "Mappa visuale per zone, scaffali e posizioni affinche il team sappia dove si trova ogni referenza senza dipendere dalla memoria.",
+        alt: "Mappa cantina Winerim con posizioni segnate per zona e scaffale",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Locker privati con vini, ordini e storico",
+        desc: "Gestisci armadietti di clienti o soci: vini custoditi, bottiglie disponibili, richieste di consumo e riordino nello stesso ambiente.",
+        alt: "Riepilogo Wine Lockers in Winerim con vini ordini e storico",
+      },
+    ],
+  },
+  fr: {
+    title: "Du stock visible a la bouteille exacte",
+    subtitle:
+      "Winerim fait descendre la gestion de cave jusqu'a l'emplacement physique : plans de cave pour grandes equipes et Wine Lockers pour clients, membres ou collections reservees.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Emplacement physique de chaque bouteille",
+        desc: "Plan visuel par zones, casiers et positions pour que l'equipe sache ou se trouve chaque reference sans compter sur la memoire.",
+        alt: "Plan de cave Winerim avec positions marquees par zone et casier",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Casiers prives avec vins, commandes et historique",
+        desc: "Gerez les casiers de clients ou membres : vins gardes, bouteilles disponibles, demandes de consommation et reassort dans le meme environnement.",
+        alt: "Resume Wine Lockers dans Winerim avec vins commandes et historique",
+      },
+    ],
+  },
+  de: {
+    title: "Vom sichtbaren Bestand zur exakten Flasche",
+    subtitle:
+      "Winerim bringt Kellersteuerung von der Datenebene bis zum physischen Platz: Kellerkarten fur grosse Teams und Wine Lockers fur private Kunden, Mitglieder oder reservierte Sammlungen.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Physischer Standort jeder Flasche",
+        desc: "Visuelle Karte nach Zonen, Regalen und Positionen, damit das Team jede Referenz findet, ohne sich auf Erinnerung oder lange Zahlungen zu verlassen.",
+        alt: "Winerim Kellerkarte mit markierten Positionen nach Zone und Regal",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Private Locker mit Weinen, Bestellungen und Historie",
+        desc: "Verwalten Sie Kunden- oder Mitgliederlocker: gelagerte Weine, verfugbare Flaschen, Konsumanfragen und Nachschub im selben System.",
+        alt: "Wine Lockers Ubersicht in Winerim mit Weinen Bestellungen und Historie",
+      },
+    ],
+  },
+  pt: {
+    title: "Do stock visivel a garrafa exata",
+    subtitle:
+      "A Winerim leva a gestao da garrafeira do dado ate a localizacao fisica: mapas de garrafeira para equipas grandes e Wine Lockers para clientes, socios ou reservas privadas.",
+    items: [
+      {
+        eyebrow: "Wine Cellar",
+        title: "Localizacao fisica de cada garrafa",
+        desc: "Mapa visual por zonas, garrafeiras e posicoes para que a equipa saiba onde esta cada referencia sem depender da memoria.",
+        alt: "Mapa de garrafeira Winerim com posicoes marcadas por zona e estante",
+      },
+      {
+        eyebrow: "Wine Lockers",
+        title: "Lockers privados com vinhos, pedidos e historico",
+        desc: "Controle cacifos de clientes ou socios: vinhos guardados, garrafas disponiveis, pedidos de consumo e reposicao no mesmo ambiente.",
+        alt: "Resumo Wine Lockers na Winerim com vinhos pedidos e historico",
+      },
+    ],
+  },
+};
+
 const ConnectedCellarSection = ({ variant = "home" }: ConnectedCellarSectionProps) => {
   const { lang, localePath } = useLanguage();
   const baseCopy = getI18n(copy, lang);
   const variantCopy = variant === "home" ? {} : getI18n(contextualCopy[variant], lang);
   const t = { ...baseCopy, ...variantCopy };
+  const proof = getI18n(physicalProofCopy, lang);
+  const physicalProofs = [
+    { ...proof.items[0], img: wineCellarMapImg, Icon: MapPinned },
+    { ...proof.items[1], img: wineLockersSummaryImg, Icon: LockKeyhole },
+  ];
   const secondaryPath =
     variant === "core"
       ? "/herramientas/calculadora-margen"
@@ -675,6 +812,50 @@ const ConnectedCellarSection = ({ variant = "home" }: ConnectedCellarSectionProp
             </div>
           </ScrollReveal>
         </div>
+
+        <ScrollReveal delay={0.18}>
+          <div className="mt-10">
+            <div className="mb-6 max-w-3xl">
+              <p className="text-xs tracking-[0.24em] uppercase text-wine font-semibold mb-3">
+                Wine Cellar + Wine Lockers
+              </p>
+              <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">
+                {proof.title}
+              </h3>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                {proof.subtitle}
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-5">
+              {physicalProofs.map(({ eyebrow, title, desc, alt, img, Icon }) => (
+                <article
+                  key={eyebrow}
+                  className="overflow-hidden rounded-2xl border border-border bg-card/70"
+                >
+                  <div className="aspect-[16/9] bg-muted/30">
+                    <img
+                      src={img}
+                      alt={alt}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-wine/10">
+                      <Icon size={20} className="text-wine" />
+                    </div>
+                    <p className="text-xs tracking-[0.2em] uppercase text-wine font-semibold mb-2">
+                      {eyebrow}
+                    </p>
+                    <h4 className="font-heading text-xl font-bold mb-2">{title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <div className="mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5 rounded-2xl border border-border bg-gradient-card p-5 md:p-6">

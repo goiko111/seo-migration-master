@@ -16,22 +16,37 @@ const InstagramFeed = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const fetchPosts = async () => {
       try {
         const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
         const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/instagram-feed`
+          `https://${projectId}.supabase.co/functions/v1/instagram-feed`,
+          { signal: controller.signal }
         );
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
-        setPosts(data.posts ?? []);
+        if (isMounted) {
+          setPosts(data.posts ?? []);
+        }
       } catch (err) {
-        console.error("Instagram feed error:", err);
+        if (isMounted && (err as Error).name !== "AbortError") {
+          console.error("Instagram feed error:", err);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
     fetchPosts();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, []);
 
   const scroll = (dir: "left" | "right") => {
