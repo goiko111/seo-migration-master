@@ -1,5 +1,58 @@
 # Current State
 
+## Actualizacion 2026-07-02: produccion revalidada y sitemap completo preparado
+
+## Hechos
+
+- Tras el publish de Lovable, `https://winerim.wine/sitemap.xml` ya responde `200` en produccion, pero la version publicada inicialmente era el fallback parcial de `403` URLs.
+- Search Console acepto el reenvio de `/sitemap.xml` el 2026-07-02 y paso a mostrar `403` paginas descubiertas para ese sitemap, frente a las `2.282` URLs que mostraba la lectura anterior.
+- `https://winerim.wine/llms.txt` responde `200`, contiene CloudRIM/SAVia y muestra el despliegue productivo `x-deployment-id: 46a9e914-a3a2-4326-9f72-1b6b8ec36d5b`.
+- En navegador real, las rutas publicadas de CloudRIM/SAVia funcionan para usuarios:
+  - `/producto/cloudrim`;
+  - `/producto/savia`;
+  - `/en/product/cloudrim`;
+  - `/pt/produto/savia`.
+- En esas rutas, el navegador real muestra H1/titulo/canonical propios, contenido CloudRIM/SAVia, ausencia de `Not found` y sin overflow horizontal en el viewport probado.
+- Como Googlebot en el apex, CloudRIM/SAVia siguen recibiendo el HTML shell de home: sin `x-prerendered`, sin `x-worker-branch`, canonical `https://winerim.wine/` y H1 `Carta inteligente de vinos con recomendador IA`.
+- La Edge Function directa `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/sitemap` sigue respondiendo `200` con `2.282` URLs, pero no incluye todavia CloudRIM/SAVia.
+- Se creo `scripts/refresh-static-sitemap.mjs` y el script npm `generate:sitemap-static` para reconstruir `public/sitemap.xml` desde la Edge Function viva y anadir solo las 12 URLs CloudRIM/SAVia que faltan.
+- `public/sitemap.xml` local queda ahora en `2.294` URLs unicas: `2.282` de la fuente completa + `12` CloudRIM/SAVia, sin duplicados y con cierre XML valido.
+- Validaciones locales OK:
+  - `npm run generate:sitemap-static`;
+  - validacion de `2.294` `<loc>` unicos y checks de CloudRIM/SAVia, biblioteca y articulo;
+  - `npm run build`;
+  - `git diff --check`.
+- El cambio ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse ni incluirse.
+
+## Decisiones
+
+- No dejar como version final el fallback de `403` URLs porque reduce la cobertura comunicada en Search Console.
+- Usar temporalmente un sitemap estatico completo de `2.294` URLs mientras el deploy CLI de Supabase siga bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- Anadir solo CloudRIM/SAVia al sitemap completo de la Edge Function, y no las otras `204` URLs extra del fallback parcial, porque algunas son legales, privadas o paginas historicamente excluidas hasta tener prerender/canonical propio.
+- Reenviar `/sitemap.xml` en Search Console de nuevo solo despues de publicar y revalidar que produccion sirve `2.294` URLs.
+
+## Hipotesis
+
+- Publicar el sitemap estatico completo deberia restaurar la cobertura de Search Console desde `403` hacia `2.294` URLs en la siguiente lectura.
+- El problema de Googlebot para CloudRIM/SAVia no esta en React, porque el navegador real ve canonicals correctos; esta en la capa de prerender/Worker/Edge del apex.
+- La Edge Function de sitemap sigue operativa, pero va por detras del codigo actual; por eso sirve `2.282` URLs y no las 12 nuevas.
+
+## Contradicciones / dudas abiertas
+
+- Contradiccion detectada: el sitemap del apex ya responde `200`, pero lo hace con el fallback parcial publicado por frontend, no con el sitemap completo historico.
+- Contradiccion detectada: Search Console acepto el sitemap parcial y actualizo paginas descubiertas a `403`; hay que corregirlo con una nueva publicacion y reenvio.
+- Contradiccion persistente: usuario/navegador ve CloudRIM/SAVia correctamente, pero Googlebot en el apex sigue viendo home/canonical raiz.
+
+## Tareas pendientes
+
+- Publicar desde Lovable o flujo equivalente el commit que deja `public/sitemap.xml` en `2.294` URLs.
+- Revalidar en produccion:
+  - `https://winerim.wine/sitemap.xml` debe devolver `200`;
+  - debe contener `2.294` URLs;
+  - debe incluir CloudRIM/SAVia, biblioteca y articulos.
+- Reenviar `/sitemap.xml` en Search Console tras esa revalidacion para reemplazar la lectura parcial de `403`.
+- Resolver el prerender del apex para que Googlebot reciba CloudRIM/SAVia con canonical propio.
+
 ## Actualizacion 2026-07-02: puente Worker desplegado y bloqueo de apex detectado
 
 ## Hechos

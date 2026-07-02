@@ -2,6 +2,37 @@
 
 ## 2026-07-02
 
+### Sitemap completo estatico tras publish parcial
+
+#### Hechos
+
+- Tras el publish de Lovable, `https://winerim.wine/sitemap.xml` paso de `404` a `200`, pero servia el fallback parcial de `403` URLs.
+- Search Console acepto el reenvio de `/sitemap.xml` el 2026-07-02 y actualizo la fila a `403` paginas descubiertas.
+- La Edge Function directa de Supabase `sitemap` sigue viva y devuelve `2.282` URLs, aunque no incluye CloudRIM/SAVia.
+- En navegador real, CloudRIM/SAVia ya funcionan en produccion con H1/titulo/canonical propios.
+- Como Googlebot en el apex, CloudRIM/SAVia siguen devolviendo shell de home y canonical raiz.
+- Se anadio `scripts/refresh-static-sitemap.mjs` y el script `npm run generate:sitemap-static`.
+- Se regenero `public/sitemap.xml` con `2.294` URLs unicas: `2.282` del sitemap completo de Supabase + `12` URLs CloudRIM/SAVia.
+- Validaciones locales pasadas: generacion, unicidad/cierre XML, checks de rutas clave, build y `git diff --check`.
+
+#### Decisiones
+
+- Corregir de inmediato el fallback parcial de `403` porque reduce la cobertura comunicada a Search Console.
+- Usar un sitemap estatico completo generado desde la Edge Function viva mientras no se pueda desplegar `sitemap` con Supabase CLI.
+- Inyectar solo las 12 URLs CloudRIM/SAVia al sitemap completo, no las otras `204` URLs que el fallback parcial tenia de mas.
+- Reenviar Search Console solo cuando produccion sirva el sitemap de `2.294` URLs.
+
+#### Hipotesis
+
+- El sitemap estatico completo reducira el dano de la lectura parcial de Search Console en la siguiente lectura/procesado.
+- El prerender de CloudRIM/SAVia sigue siendo un bloqueo separado del sitemap.
+
+#### Tareas pendientes
+
+- Publicar el commit con el sitemap de `2.294` URLs.
+- Revalidar `https://winerim.wine/sitemap.xml` en produccion y reenviarlo en Search Console.
+- Resolver la capa apex/Worker/Edge para que Googlebot reciba CloudRIM/SAVia reales.
+
 ### Puente Worker CloudRIM/SAVia y bloqueo del apex
 
 #### Hechos

@@ -1,5 +1,38 @@
 # Next Steps
 
+## Actualizacion 2026-07-02: retomar con sitemap completo y Search Console
+
+## Hechos
+
+- Produccion ya sirve `https://winerim.wine/sitemap.xml` con `HTTP 200`.
+- El primer publish sirvio un fallback parcial de `403` URLs y Search Console lo acepto el 2026-07-02, mostrando `403` paginas descubiertas.
+- Se preparo localmente un sitemap estatico completo de `2.294` URLs:
+  - `2.282` URLs del sitemap completo vivo en Supabase;
+  - `12` URLs CloudRIM/SAVia nuevas.
+- `npm run generate:sitemap-static` reconstruye ese archivo desde `scripts/refresh-static-sitemap.mjs`.
+- `npm run build` pasa con el sitemap completo.
+- En navegador real, CloudRIM/SAVia estan publicadas y funcionan para usuarios con canonical propio.
+- Como Googlebot en `winerim.wine`, CloudRIM/SAVia siguen devolviendo home/canonical raiz porque el apex no ejecuta Worker/prerender correcto.
+- `src/components/WineListAnalyzerTool.tsx` sigue siendo cambio ajeno y fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Publicar el commit con:
+   - `public/sitemap.xml` de `2.294` URLs;
+   - `scripts/refresh-static-sitemap.mjs`;
+   - script npm `generate:sitemap-static`;
+   - documentacion actualizada.
+2. Revalidar produccion tras publish:
+   - `curl https://winerim.wine/sitemap.xml` debe contar `2.294` `<url>`;
+   - debe incluir `/producto/cloudrim`, `/producto/savia`, variantes EN/IT/FR/DE/PT, biblioteca y articulos.
+3. Reenviar `/sitemap.xml` en Search Console para sustituir la lectura parcial de `403`.
+4. Mantener vivo el bloqueo SEO principal:
+   - Googlebot en CloudRIM/SAVia del apex debe dejar de recibir canonical raiz;
+   - resolver por Edge Functions `prerender`/`sitemap` desde Lovable/Supabase o por ownership/routing de Cloudflare Worker.
+5. Cuando el prerender del apex este resuelto:
+   - revalidar las 12 rutas CloudRIM/SAVia como Googlebot;
+   - solicitar indexacion manual de las rutas principales si hay cuota.
+
 ## Actualizacion 2026-07-02: retomar tras puente Worker y bloqueo apex
 
 ## Hechos
