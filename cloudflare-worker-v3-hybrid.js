@@ -1070,6 +1070,7 @@ function detailUrlBlock(site, path, lastmod) {
 
 const WORKER_DETAIL_SITEMAP_LASTMOD = '2026-06-05';
 const WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01';
+const WORKER_TOOLS_SITEMAP_LASTMOD = '2026-07-02';
 
 function isWineLibrarySitemapPath(path) {
   return path.startsWith('/biblioteca-vino')
@@ -1111,6 +1112,14 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...Object.values(SAVIA_ALTERNATES),
   ])];
   const missingCloudRimSaviaPaths = cloudRimSaviaPaths.filter(path => !xml.includes(`${site}${path}`));
+  const onlineToolPaths = [
+    '/herramientas/simulador-senal-margenes',
+    '/herramientas/test-perfil-rim',
+    '/herramientas/simulador-pareto-carta-vinos',
+    '/herramientas/calculadora-fuga-margen',
+    '/herramientas/comparador-distribuidores',
+  ];
+  const missingOnlineToolPaths = onlineToolPaths.filter(path => !xml.includes(`${site}${path}`));
 
   if (
     hasDetailUrls
@@ -1118,6 +1127,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     && missingLearnWinePaths.length === 0
     && missingDistributorPaths.length === 0
     && missingCloudRimSaviaPaths.length === 0
+    && missingOnlineToolPaths.length === 0
   ) {
     return stabilizeSitemapLastmod(xml);
   }
@@ -1129,6 +1139,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...missingLearnWinePaths.map(path => detailUrlBlock(site, path, WORKER_LEARN_WINE_SITEMAP_LASTMOD)),
     ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD)),
     ...missingCloudRimSaviaPaths.map(path => detailUrlBlock(site, path, WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD)),
+    ...missingOnlineToolPaths.map(path => detailUrlBlock(site, path, WORKER_TOOLS_SITEMAP_LASTMOD)),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
