@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart } from "lucide-react";
+import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -39,6 +39,7 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vino por copa", desc: "Evalúa si tu oferta por copa está equilibrada en estilos, precios y rentabilidad. Con Winerim, esto se monitoriza en tiempo real.", tag: "Diagnóstico" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Simulador de señal de Márgenes", desc: "Introduce PVP, coste, stock, ventas y días sin venta para ver si una referencia apunta a OK, no reponer, liquidar o crítico.", tag: "Márgenes" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto en ticket medio", desc: "Estima cuánto más facturarías en vino mejorando el ratio de mesas, el ticket por mesa y la estrategia de copa.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compara la carta de vinos de tus locales: surtido, pricing, copa y ticket medio. Detecta inconsistencias y oportunidades.", tag: "Grupos" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analiza si una referencia merece seguir comprándose: rentabilidad, sobreprecio, stock inmovilizado y oportunidad de mejora. Demo de Winerim Supply.", tag: "Supply" },
@@ -208,6 +209,9 @@ const content: Record<string, {
 };
 
 const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw, RotateCcw, RotateCcw, ShoppingCart];
+const toolIconByPath: Record<string, typeof Search> = {
+  "/herramientas/simulador-senal-margenes": AlertTriangle,
+};
 
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
@@ -269,7 +273,7 @@ const Herramientas = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTools.map((tool, i) => {
-              const Icon = toolIcons[t.tools.indexOf(tool)] || Search;
+              const Icon = toolIconByPath[tool.to] || toolIcons[t.tools.indexOf(tool)] || Search;
               return (
                 <ScrollReveal key={tool.to} delay={i * 0.04}>
                   <Link to={localePath(tool.to)} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">

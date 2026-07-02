@@ -2240,6 +2240,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/herramientas/simulador-senal-margenes</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/recursos/plantilla-carta-de-vinos</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>

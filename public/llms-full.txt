@@ -118,6 +118,7 @@ Priority grape profiles:
 - Wine margin calculator: https://winerim.wine/calculadora-margen-vino
 - Wine list score: https://winerim.wine/herramientas/wine-list-score
 - Dead-stock calculator: https://winerim.wine/herramientas/calculadora-stock-muerto
+- Margin signal simulator: https://winerim.wine/herramientas/simulador-senal-margenes
 - By-the-glass diagnosis: https://winerim.wine/herramientas/diagnostico-vino-por-copa
 
 ### Free Diagnostics and Downloadable Resources

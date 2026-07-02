@@ -1465,7 +1465,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "auditoria-pareto-80-20-carta-vinos",
     formType: "auditoria-pareto-80-20-carta-vinos",
-    downloadFile: "/recursos/winerim_auditoria_pareto_8020_carta_vinos_2026.md",
+    downloadFile: "/recursos/winerim_auditoria_pareto_8020_carta_vinos_2026.xlsx",
     metaTitle: "Auditoría Pareto 80/20 de Carta de Vinos | Recurso Gratis | Winerim",
     metaDescription: "Descarga la auditoría Pareto 80/20 para detectar qué vinos sostienen la facturación, qué referencias ocupan espacio y dónde ajustar la carta.",
     badgeIcon: PieChart,
@@ -1557,7 +1557,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "diagnostico-fuga-margen-carta-vinos",
     formType: "diagnostico-fuga-margen-carta-vinos",
-    downloadFile: "/recursos/winerim_diagnostico_fuga_margen_carta_vinos_2026.md",
+    downloadFile: "/recursos/winerim_diagnostico_fuga_margen_carta_vinos_2026.xlsx",
     metaTitle: "Diagnóstico de Fuga de Margen en Carta de Vinos | Winerim",
     metaDescription: "Checklist gratis para detectar dónde pierde margen tu carta de vinos: costes, PVP, copa, descuentos, reposición y proveedores.",
     badgeIcon: DollarSign,
@@ -1741,7 +1741,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "calculadora-valor-pos-vino",
     formType: "calculadora-valor-pos-vino",
-    downloadFile: "/recursos/winerim_valor_pos_vino_2026.md",
+    downloadFile: "/recursos/winerim_valor_pos_vino_2026.xlsx",
     metaTitle: "Calculadora de Valor POS para Vino | Winerim",
     metaDescription: "Calcula qué valor puede aportar conectar ventas POS con carta, stock, margen y compras de vino en tu restaurante.",
     badgeIcon: BarChart3,
@@ -1833,7 +1833,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "auditoria-distribuidores-catalogo",
     formType: "auditoria-distribuidores-catalogo",
-    downloadFile: "/recursos/winerim_auditoria_distribuidores_catalogo_2026.md",
+    downloadFile: "/recursos/winerim_auditoria_distribuidores_catalogo_2026.xlsx",
     metaTitle: "Auditoría de Distribuidores y Catálogo de Vino | Winerim Supply",
     metaDescription: "Checklist para revisar distribuidores, tarifas, albaranes, precios de compra, catálogo y oportunidad real de cada proveedor.",
     badgeIcon: Building2,
@@ -2109,7 +2109,7 @@ export const newResources: ResourcePageData[] = [
   {
     slug: "autoevaluacion-premios-winerim",
     formType: "autoevaluacion-premios-winerim",
-    downloadFile: "/recursos/winerim_autoevaluacion_premios_winerim_2026.md",
+    downloadFile: "/recursos/winerim_autoevaluacion_premios_winerim_2026.xlsx",
     metaTitle: "Autoevaluación Premios Winerim a Mejores Cartas de Vino",
     metaDescription: "Autoevalúa tu carta con criterios Winerim: rentabilidad, rotación, equilibrio, identidad, experiencia, gestión de stock y calidad digital.",
     badgeIcon: CheckCircle,
