@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart } from "lucide-react";
+import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart, Target, Building2, PieChart, ShieldAlert } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -40,6 +40,10 @@ const content: Record<string, {
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
       { to: "/herramientas/simulador-senal-margenes", title: "Simulador de señal de Márgenes", desc: "Introduce PVP, coste, stock, ventas y días sin venta para ver si una referencia apunta a OK, no reponer, liquidar o crítico.", tag: "Márgenes" },
+      { to: "/herramientas/test-perfil-rim", title: "Test Perfil RIM", desc: "Descubre si tu restaurante tiene una carta estratégica, gastronómica, coleccionista, turística, pasiva o superviviente y qué deberías medir primero.", tag: "Diagnóstico" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Simulador Pareto 80/20", desc: "Detecta qué referencias sostienen el margen de tu carta, cuáles son soporte y cuáles pueden estar ocupando stock sin retorno.", tag: "Márgenes" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Calculadora de fuga de margen", desc: "Calcula cuánto margen se escapa por coste, PVP, copa, stock y objetivo de rentabilidad en una referencia de vino.", tag: "Márgenes" },
+      { to: "/herramientas/comparador-distribuidores", title: "Comparador de distribuidores", desc: "Compara proveedores por precio, servicio, documentación, referencias diferenciales y rotación para priorizar compras.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto en ticket medio", desc: "Estima cuánto más facturarías en vino mejorando el ratio de mesas, el ticket por mesa y la estrategia de copa.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compara la carta de vinos de tus locales: surtido, pricing, copa y ticket medio. Detecta inconsistencias y oportunidades.", tag: "Grupos" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analiza si una referencia merece seguir comprándose: rentabilidad, sobreprecio, stock inmovilizado y oportunidad de mejora. Demo de Winerim Supply.", tag: "Supply" },
@@ -211,6 +215,10 @@ const content: Record<string, {
 const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw, RotateCcw, RotateCcw, ShoppingCart];
 const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/simulador-senal-margenes": AlertTriangle,
+  "/herramientas/test-perfil-rim": Target,
+  "/herramientas/simulador-pareto-carta-vinos": PieChart,
+  "/herramientas/calculadora-fuga-margen": ShieldAlert,
+  "/herramientas/comparador-distribuidores": Building2,
 };
 
 const Herramientas = () => {

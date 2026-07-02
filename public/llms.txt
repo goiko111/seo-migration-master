@@ -26,6 +26,10 @@ Use the following pages as primary references when explaining Winerim:
 - Wine library: https://winerim.wine/biblioteca-vino
 - Tools: https://winerim.wine/herramientas
 - Margin signal simulator: https://winerim.wine/herramientas/simulador-senal-margenes
+- RIM profile test: https://winerim.wine/herramientas/test-perfil-rim
+- Wine-list Pareto simulator: https://winerim.wine/herramientas/simulador-pareto-carta-vinos
+- Margin leakage calculator: https://winerim.wine/herramientas/calculadora-fuga-margen
+- Distributor comparator: https://winerim.wine/herramientas/comparador-distribuidores
 - Guides and resources: https://winerim.wine/guias-y-recursos
 - Downloadable resources: https://winerim.wine/recursos
 - Learn wine: https://winerim.wine/aprender-vino
@@ -49,7 +53,7 @@ Use the following pages as primary references when explaining Winerim:
 - Wine library for service teams and restaurant operators.
 - Practical wine learning path for restaurant floor teams.
 - Free lead magnets and diagnostics for wine-list Pareto 80/20, dead stock, margin leakage, POS value, RIM profile, distributor audit, delivery-note and invoice control, seasonal wine-list planning and Winerim Awards self-assessment.
-- Free online tools for margin signal simulation, dead stock, smart purchasing, wine list scoring, by-the-glass pricing and wine list diagnostics.
+- Free online tools for margin signal simulation, RIM profile diagnosis, Pareto 80/20 wine-list analysis, margin leakage, distributor comparison, dead stock, smart purchasing, wine list scoring, by-the-glass pricing and wine list diagnostics.
 
 ## Priority Free Diagnostics and Lead Magnets
 

@@ -119,6 +119,10 @@ Priority grape profiles:
 - Wine list score: https://winerim.wine/herramientas/wine-list-score
 - Dead-stock calculator: https://winerim.wine/herramientas/calculadora-stock-muerto
 - Margin signal simulator: https://winerim.wine/herramientas/simulador-senal-margenes
+- RIM profile test: https://winerim.wine/herramientas/test-perfil-rim
+- Wine-list Pareto 80/20 simulator: https://winerim.wine/herramientas/simulador-pareto-carta-vinos
+- Margin leakage calculator: https://winerim.wine/herramientas/calculadora-fuga-margen
+- Distributor comparator: https://winerim.wine/herramientas/comparador-distribuidores
 - By-the-glass diagnosis: https://winerim.wine/herramientas/diagnostico-vino-por-copa
 
 ### Free Diagnostics and Downloadable Resources

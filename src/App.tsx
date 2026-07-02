@@ -91,6 +91,10 @@ const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
 const SimuladorSenalMargenes = lazy(() => import("./pages/SimuladorSenalMargenes"));
+const TestPerfilRim = lazy(() => import("./pages/TestPerfilRim"));
+const ComparadorDistribuidores = lazy(() => import("./pages/ComparadorDistribuidores"));
+const SimuladorParetoCarta = lazy(() => import("./pages/SimuladorParetoCarta"));
+const CalculadoraFugaMargen = lazy(() => import("./pages/CalculadoraFugaMargen"));
 const CalculadoraTicketMedio = lazy(() => import("./pages/CalculadoraTicketMedio"));
 const AuditorMultiLocal = lazy(() => import("./pages/AuditorMultiLocal"));
 const CalculadoraCompraInteligente = lazy(() => import("./pages/CalculadoraCompraInteligente"));
@@ -294,6 +298,10 @@ const esRoutes = (
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
     <Route path="/herramientas/simulador-senal-margenes" element={<SimuladorSenalMargenes />} />
+    <Route path="/herramientas/test-perfil-rim" element={<TestPerfilRim />} />
+    <Route path="/herramientas/comparador-distribuidores" element={<ComparadorDistribuidores />} />
+    <Route path="/herramientas/simulador-pareto-carta-vinos" element={<SimuladorParetoCarta />} />
+    <Route path="/herramientas/calculadora-fuga-margen" element={<CalculadoraFugaMargen />} />
     <Route path="/herramientas/calculadora-ticket-medio-vino" element={<CalculadoraTicketMedio />} />
     <Route path="/herramientas/auditor-carta-multilocal" element={<AuditorMultiLocal />} />
     <Route path="/herramientas/calculadora-compra-inteligente" element={<CalculadoraCompraInteligente />} />

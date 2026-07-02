@@ -2246,6 +2246,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/herramientas/test-perfil-rim</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/simulador-pareto-carta-vinos</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/calculadora-fuga-margen</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/comparador-distribuidores</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/recursos/plantilla-carta-de-vinos</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
