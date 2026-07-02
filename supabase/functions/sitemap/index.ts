@@ -4,7 +4,7 @@ const corsHeaders = {
 };
 
 const SITE = 'https://winerim.wine';
-const STATIC_ROUTE_LASTMOD = '2026-07-01';
+const STATIC_ROUTE_LASTMOD = '2026-07-02';
 const WINE_LIBRARY_LASTMOD = '2026-06-01';
 
 // ─────────────────────────────────────────────
@@ -38,6 +38,8 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
     '/producto/winerim-core': '/en/product/winerim-core',
     '/producto/winerim-supply': '/en/product/winerim-supply',
+    '/producto/cloudrim': '/en/product/cloudrim',
+    '/producto/savia': '/en/product/savia',
     '/analisis-carta': '/en/wine-list-analysis',
     '/aprender-vino': '/en/learn-wine',
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
@@ -76,6 +78,8 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
     '/producto/winerim-core': '/it/prodotto/winerim-core',
     '/producto/winerim-supply': '/it/prodotto/winerim-supply',
+    '/producto/cloudrim': '/it/prodotto/cloudrim',
+    '/producto/savia': '/it/prodotto/savia',
     '/analisis-carta': '/it/analisi-carta',
     '/aprender-vino': '/it/imparare-il-vino',
     '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
@@ -114,6 +118,8 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
     '/producto/winerim-core': '/fr/produit/winerim-core',
     '/producto/winerim-supply': '/fr/produit/winerim-supply',
+    '/producto/cloudrim': '/fr/produit/cloudrim',
+    '/producto/savia': '/fr/produit/savia',
     '/analisis-carta': '/fr/analyse-carte',
     '/aprender-vino': '/fr/apprendre-le-vin',
     '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
@@ -152,6 +158,8 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
     '/producto/winerim-core': '/de/produkt/winerim-core',
     '/producto/winerim-supply': '/de/produkt/winerim-supply',
+    '/producto/cloudrim': '/de/produkt/cloudrim',
+    '/producto/savia': '/de/produkt/savia',
     '/analisis-carta': '/de/weinkarten-analyse',
     '/aprender-vino': '/de/wein-lernen',
     '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
@@ -190,6 +198,8 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
     '/producto/winerim-core': '/pt/produto/winerim-core',
     '/producto/winerim-supply': '/pt/produto/winerim-supply',
+    '/producto/cloudrim': '/pt/produto/cloudrim',
+    '/producto/savia': '/pt/produto/savia',
     '/analisis-carta': '/pt/analise-carta',
     '/aprender-vino': '/pt/aprender-vinho',
     '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
@@ -341,6 +351,8 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/producto/inteligencia-dinamica', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/producto/winerim-core', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/producto/winerim-supply', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/producto/cloudrim', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/producto/savia', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/analisis-carta', priority: '0.8', changefreq: 'monthly', multilang: true },
   { esPath: '/aprender-vino', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/barometro-cartas-vino-2026', priority: '0.7', changefreq: 'monthly', multilang: true },

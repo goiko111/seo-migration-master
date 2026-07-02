@@ -2,6 +2,13 @@
 
 ## Hechos
 
+- El 2026-07-02 se implemento localmente CloudRIM y SAVia como capacidades principales de la web Winerim.
+- CloudRIM tiene pagina propia en `/producto/cloudrim` y variantes EN/IT/FR/DE/PT; se define como nube operativa/documental para recoger cartas, ventas, albaranes, stock, reportes TPV y tarifas por portal, email, carpeta compartida, FTP/SFTP, API o proveedor.
+- SAVia tiene pagina propia en `/producto/savia` y variantes EN/IT/FR/DE/PT; se define como agente conversacional para preguntar sobre carta, ventas, stock, costes, margenes, albaranes y oportunidades, sin ejecutar acciones criticas sin aprobacion humana.
+- CloudRIM/SAVia quedaron incorporados en home, navbar/footer, `/funcionalidades`, `/integraciones` y `/producto/inteligencia-dinamica`.
+- La superficie SEO/LLM de CloudRIM/SAVia quedo sincronizada en React, `ROUTE_MAP`, sitemap, prerender, Worker, `sitemap-extra`, `llms.txt`, `llms-full.txt` y test SEO.
+- Validaciones locales de CloudRIM/SAVia: test SEO enfocado, build, Deno check, Worker syntax check, Worker dry-run, JSON de sitemap extra, `git diff --check` y QA navegador desktop/mobile en 8 rutas clave.
+- El despliegue CLI de Supabase SEO sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; estas rutas quedan pendientes de publicar desde Lovable/Supabase y revalidar en produccion.
 - El 2026-07-01 se revalido en produccion el commit `67e245a` de la landing Meta Demo: `https://go.winerim.wine/` y `https://winerim.wine/meta-demo` ya renderizan `Sistema Winerim IA`, CTA fijo `Solicita tu demo`, bullets nuevos con inicio en negrita, `+2.000 restaurantes` y testimonios reales.
 - La revalidacion productiva confirmo `x-robots-tag: noindex, follow`, canonical `https://go.winerim.wine/`, OpenGraph `https://winerim.wine/og-image.png`, chat desactivado y ausencia de overflow horizontal en desktop/mobile.
 - El CTA fijo de la landing Meta fue probado con clic real en produccion: actualiza hash a `#demo-form`, desplaza al formulario y lo deja visible en mobile.
@@ -206,6 +213,9 @@
 
 ## Decisiones
 
+- CloudRIM y SAVia pasan a ser capacidades principales de Winerim con paginas propias, presencia en home/producto y superficie SEO/LLM completa.
+- SAVia debe comunicarse siempre como agente que prepara decisiones y respuestas, no como sistema que ejecuta acciones criticas sin aprobacion humana.
+- La publicacion de CloudRIM/SAVia debe coordinarse en orden: Lovable frontend, Edge Functions `sitemap`/`prerender`, Cloudflare Worker y revalidacion de produccion/Search Console.
 - Considerar publicada y revalidada la actualizacion de copy/CTA de `go.winerim.wine` tras comprobar produccion, responsive, ancla al formulario, UTMs y SEO `noindex`.
 - No generar leads QA adicionales cuando el cambio revisado no toca backend/formulario y ya existen pruebas previas de CRM, salvo que el usuario pida una prueba completa de envio.
 - Para `go.winerim.wine`, usar el copy comercial nuevo de LeadConnector solo donde no contradiga decisiones previas: se conserva `+2.000 restaurantes` y testimonios reales.

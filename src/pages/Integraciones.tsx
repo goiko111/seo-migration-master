@@ -5,7 +5,7 @@ import {
   ArrowRight, Plug, Monitor, Database, Warehouse, Code2,
   RefreshCw, BarChart3, Wine, CheckCircle, Layers, Zap, Globe,
   AlertTriangle, Check, X, Clock, Wrench, ShieldCheck, Settings,
-  TrendingUp, Users
+  TrendingUp, Users, Cloud
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -40,6 +40,9 @@ type Content = {
   posBadge: string; posTitle: string; posTitleHighlight: string; posDesc: string;
   posNoteTitle: string; posNote: string;
   pos: Integration[];
+  /* CloudRIM */
+  cloudBadge: string; cloudTitle: string; cloudTitleHighlight: string; cloudDesc: string; cloudDesc2: string;
+  cloudBullets: string[];
   /* ERP */
   erpBadge: string; erpTitle: string; erpTitleHighlight: string; erpDesc: string;
   erp: Integration[];
@@ -130,6 +133,18 @@ const ES: Content = {
     { name: "SoftRestaurant", desc: "API REST/JSON con endpoints de catálogo", status: "active" },
     { name: "Poster POS", desc: "Portal de desarrolladores con API abierta", status: "active" },
     { name: "Fudo", desc: "APIs de inyección de pedidos y catálogo", status: "active" },
+  ],
+
+  cloudBadge: "CloudRIM",
+  cloudTitle: "Cuando no hay integración perfecta, ",
+  cloudTitleHighlight: "también hay camino",
+  cloudDesc: "No todos los TPV, ERPs o distribuidores ofrecen una API limpia desde el primer día. CloudRIM permite recoger información por archivos, email, carpetas compartidas o FTP/SFTP, procesarla con IA y conectarla con Winerim.",
+  cloudDesc2: "Esto permite empezar antes: ventas exportadas del TPV, tarifas enviadas por email, albaranes en PDF o reportes de stock se convierten en datos accionables sin obligar al restaurante a introducirlos a mano.",
+  cloudBullets: [
+    "Portal, email, carpetas compartidas, FTP/SFTP, API o proveedor.",
+    "Albaranes, facturas, tarifas, cartas, stock y reportes de ventas.",
+    "Clasificación y enrutado hacia carta, compras, stock, ventas y margen.",
+    "Revisión humana solo en lo que necesita confirmación.",
   ],
 
   erpBadge: "Gestión empresarial (ERP)", erpTitle: "Integración con sistemas de ", erpTitleHighlight: "gestión",
@@ -281,6 +296,18 @@ const EN: Content = {
     { name: "Fudo", desc: "Order injection and catalog APIs", status: "active" },
   ],
 
+  cloudBadge: "CloudRIM",
+  cloudTitle: "When there is no perfect integration, ",
+  cloudTitleHighlight: "there is still a path",
+  cloudDesc: "Not every POS, ERP or distributor offers a clean API from day one. CloudRIM can collect information via files, email, shared folders or FTP/SFTP, process it with AI and connect it with Winerim.",
+  cloudDesc2: "That lets you start earlier: POS exports, distributor tariffs by email, delivery notes in PDF or stock reports become actionable data without forcing the restaurant to enter everything by hand.",
+  cloudBullets: [
+    "Portal, email, shared folders, FTP/SFTP, API or provider.",
+    "Delivery notes, invoices, tariffs, wine lists, stock and sales reports.",
+    "Classification and routing to list, purchasing, stock, sales and margin.",
+    "Human review only where confirmation is needed.",
+  ],
+
   erpBadge: "Business management (ERP)", erpTitle: "Integration with management ", erpTitleHighlight: "systems",
   erpDesc: "Connect Winerim with your ERP to improve cellar control, automate supplier orders and get a complete view of costs and margins.",
   erp: [
@@ -374,6 +401,10 @@ const IT: Content = { ...EN,
   subtitle: "Non siamo uno strumento isolato. Winerim si integra con i sistemi POS, PMS, ERP e inventario che già utilizzi.",
   ctaDemo: "Richiedi demo", ctaContact: "Chiedi info integrazione",
   statusActive: "Integrazione attiva", statusDev: "In sviluppo", statusCustom: "Su progetto",
+  cloudTitle: "Quando non esiste un'integrazione perfetta, ", cloudTitleHighlight: "c'e comunque una strada",
+  cloudDesc: "Non tutti i POS, ERP o distributori offrono una API pulita dal primo giorno. CloudRIM raccoglie informazioni tramite file, email, cartelle condivise o FTP/SFTP, le elabora con IA e le collega a Winerim.",
+  cloudDesc2: "Questo permette di iniziare prima: export POS, tariffe via email, documenti in PDF o report stock diventano dati operativi senza obbligare il ristorante a inserirli a mano.",
+  cloudBullets: ["Portale, email, cartelle condivise, FTP/SFTP, API o fornitore.", "Documenti, fatture, tariffe, carte, stock e report vendite.", "Classificazione e instradamento verso carta, acquisti, stock, vendite e margine.", "Revisione umana solo dove serve conferma."],
   ctaBtn: "Richiedi demo", ctaSecondary: "Chiedi info integrazione",
 };
 
@@ -385,6 +416,10 @@ const FR: Content = { ...EN,
   subtitle: "Nous ne sommes pas un outil isolé. Winerim s'intègre aux systèmes POS, PMS, ERP et inventaire que vous utilisez déjà.",
   ctaDemo: "Demander une démo", ctaContact: "Renseignements intégration",
   statusActive: "Intégration active", statusDev: "En développement", statusCustom: "Sur projet",
+  cloudTitle: "Quand il n'y a pas d'intégration parfaite, ", cloudTitleHighlight: "il existe quand même un chemin",
+  cloudDesc: "Tous les POS, ERP ou distributeurs n'offrent pas une API propre dès le premier jour. CloudRIM collecte l'information par fichiers, email, dossiers partagés ou FTP/SFTP, la traite avec IA et la connecte à Winerim.",
+  cloudDesc2: "Cela permet de commencer plus tôt : exports caisse, tarifs envoyés par email, bons en PDF ou rapports de stock deviennent des données actionnables sans saisie manuelle.",
+  cloudBullets: ["Portail, email, dossiers partagés, FTP/SFTP, API ou fournisseur.", "Bons, factures, tarifs, cartes, stock et rapports de ventes.", "Classification et routage vers carte, achats, stock, ventes et marge.", "Révision humaine uniquement là où une confirmation est nécessaire."],
   ctaBtn: "Demander une démo", ctaSecondary: "Renseignements intégration",
 };
 
@@ -396,6 +431,10 @@ const DE: Content = { ...EN,
   subtitle: "Wir sind kein isoliertes Tool. Winerim integriert sich mit Ihren bereits vorhandenen POS-, PMS-, ERP- und Inventarsystemen.",
   ctaDemo: "Demo anfordern", ctaContact: "Integrationen anfragen",
   statusActive: "Integration aktiv", statusDev: "In Entwicklung", statusCustom: "Projektbasiert",
+  cloudTitle: "Wenn es keine perfekte Integration gibt, ", cloudTitleHighlight: "gibt es trotzdem einen Weg",
+  cloudDesc: "Nicht jedes POS, ERP oder jeder Distributor bietet ab Tag eins eine saubere API. CloudRIM sammelt Informationen per Datei, E-Mail, Ordner oder FTP/SFTP, verarbeitet sie mit KI und verbindet sie mit Winerim.",
+  cloudDesc2: "So kann man frueher starten: POS-Exporte, Tarife per E-Mail, Lieferscheine als PDF oder Bestandsreports werden nutzbare Daten ohne manuelle Eingabe.",
+  cloudBullets: ["Portal, E-Mail, geteilte Ordner, FTP/SFTP, API oder Lieferant.", "Lieferscheine, Rechnungen, Tarife, Karten, Bestand und Verkaufsreports.", "Klassifizierung und Routing zu Karte, Einkauf, Bestand, Verkauf und Marge.", "Menschliche Pruefung nur dort, wo Bestaetigung noetig ist."],
   ctaBtn: "Demo anfordern", ctaSecondary: "Integrationen anfragen",
 };
 
@@ -407,6 +446,10 @@ const PT: Content = { ...EN,
   subtitle: "Não somos uma ferramenta isolada. Winerim integra-se com seus sistemas de POS, PMS, ERP e inventário que já utiliza.",
   ctaDemo: "Solicitar demonstração", ctaContact: "Informações de integração",
   statusActive: "Integração ativa", statusDev: "Em desenvolvimento", statusCustom: "Projeto personalizado",
+  cloudTitle: "Quando não há integração perfeita, ", cloudTitleHighlight: "também há caminho",
+  cloudDesc: "Nem todos os POS, ERPs ou distribuidores oferecem uma API limpa desde o primeiro dia. CloudRIM recolhe informação por ficheiros, email, pastas partilhadas ou FTP/SFTP, processa com IA e liga-a à Winerim.",
+  cloudDesc2: "Isto permite começar antes: exportações POS, tabelas por email, guias em PDF ou relatórios de stock tornam-se dados acionáveis sem obrigar o restaurante a introduzir tudo à mão.",
+  cloudBullets: ["Portal, email, pastas partilhadas, FTP/SFTP, API ou fornecedor.", "Guias, faturas, tabelas, cartas, stock e relatórios de vendas.", "Classificação e encaminhamento para carta, compras, stock, vendas e margem.", "Revisão humana apenas quando é preciso confirmação."],
   ctaBtn: "Solicitar demonstração", ctaSecondary: "Informações de integração",
 };
 
@@ -598,6 +641,38 @@ const Integraciones = () => {
               </p>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── CloudRIM bridge ── */}
+      <section className="section-padding">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+            <ScrollReveal>
+              <div className="flex items-center gap-3 mb-3">
+                <Cloud size={20} className="text-wine" />
+                <p className="text-sm tracking-[0.3em] uppercase text-gradient-gold font-semibold">{t.cloudBadge}</p>
+              </div>
+              <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                {t.cloudTitle}<span className="text-gradient-wine italic">{t.cloudTitleHighlight}</span>
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>{t.cloudDesc}</p>
+                <p>{t.cloudDesc2}</p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {t.cloudBullets.map((item, i) => (
+                <ScrollReveal key={item} delay={i * 0.05}>
+                  <div className="h-full rounded-xl border border-border bg-gradient-card p-5">
+                    <CheckCircle size={18} className="text-wine mb-3" />
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item}</p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

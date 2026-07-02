@@ -285,6 +285,51 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("legacy-language-query-redirect");
   });
 
+  it("publishes CloudRIM and SAVia as multilingual product SEO surfaces", () => {
+    const app = readFileSync("src/App.tsx", "utf8");
+    const routes = readFileSync("src/i18n/types.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+    const llms = readFileSync("public/llms.txt", "utf8");
+    const llmsFull = readFileSync("public/llms-full.txt", "utf8");
+    const home = readFileSync("src/components/landing/HomeBelowFold.tsx", "utf8");
+    const features = readFileSync("src/pages/Funcionalidades.tsx", "utf8");
+    const integrations = readFileSync("src/pages/Integraciones.tsx", "utf8");
+    const dynamicIntelligence = readFileSync("src/pages/InteligenciaDinamica.tsx", "utf8");
+
+    expect(app).toContain("const CloudRim");
+    expect(app).toContain("const SAVia");
+    expect(app).toContain('path="/producto/cloudrim"');
+    expect(app).toContain('path="/producto/savia"');
+    expect(app).toContain("`${prefix}/product/cloudrim`");
+    expect(app).toContain("`${prefix}/produto/savia`");
+    expect(routes).toContain('"/producto/cloudrim": "/en/product/cloudrim"');
+    expect(routes).toContain('"/producto/savia": "/de/produkt/savia"');
+    expect(routes).toContain('"/producto/cloudrim": "/pt/produto/cloudrim"');
+    expect(sitemap).toContain("{ esPath: '/producto/cloudrim', priority: '0.7', changefreq: 'monthly', multilang: true }");
+    expect(sitemap).toContain("{ esPath: '/producto/savia', priority: '0.7', changefreq: 'monthly', multilang: true }");
+    expect(prerender).toContain("'/producto/cloudrim': [");
+    expect(prerender).toContain("'/producto/savia': [");
+    expect(prerender).toContain("La nube donde tu restaurante deja los documentos");
+    expect(prerender).toContain("Pregunta a tu bodega. SAVia responde");
+    expect(prerender).toContain("CloudRIM centralises wine lists");
+    expect(prerender).toContain("SAVia helps teams understand");
+    expect(worker).toContain("'/producto/cloudrim'");
+    expect(worker).toContain("'/en/product/savia'");
+    expect(worker).toContain("'/de/produkt/cloudrim'");
+    expect(worker).toContain("'/pt/produto/savia'");
+    expect(llms).toContain("CloudRIM: https://winerim.wine/producto/cloudrim");
+    expect(llms).toContain("SAVia: https://winerim.wine/producto/savia");
+    expect(llmsFull).toContain("CloudRIM: an operational document cloud");
+    expect(llmsFull).toContain("SAVia: a conversational Winerim agent");
+    expect(home).toContain("CloudRimSaviaSection");
+    expect(features).toContain("CloudRIM");
+    expect(features).toContain("SAVia");
+    expect(integrations).toContain("cloudTitle");
+    expect(dynamicIntelligence).toContain("savia_title");
+  });
+
   it("marks no-equivalent legacy news as gone at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 
@@ -324,7 +369,7 @@ describe("wine library SEO surface", () => {
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const exclusionBlock = sitemap.match(/const TEMPORARILY_EXCLUDED_STATIC_SITEMAP_PATHS = new Set\(\[[\s\S]*?\]\);/)?.[0] || "";
 
-    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-07-01'");
+    expect(sitemap).toContain("const STATIC_ROUTE_LASTMOD = '2026-07-02'");
     expect(sitemap).toContain("const WINE_LIBRARY_LASTMOD = '2026-06-01'");
     expect(sitemap).toContain("urlBlock(route.esPath, WINE_LIBRARY_LASTMOD");
     expect(sitemap).toContain("{ esPath: '/recursos/plantilla-formacion-equipo-sala'");

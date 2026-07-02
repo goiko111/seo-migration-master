@@ -2946,6 +2946,24 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'fr', url: `${SITE}/fr/produit/winerim-supply` },
     { lang: 'x-default', url: `${SITE}/producto/winerim-supply` },
   ],
+  '/producto/cloudrim': [
+    { lang: 'es', url: `${SITE}/producto/cloudrim` },
+    { lang: 'en', url: `${SITE}/en/product/cloudrim` },
+    { lang: 'it', url: `${SITE}/it/prodotto/cloudrim` },
+    { lang: 'fr', url: `${SITE}/fr/produit/cloudrim` },
+    { lang: 'de', url: `${SITE}/de/produkt/cloudrim` },
+    { lang: 'pt', url: `${SITE}/pt/produto/cloudrim` },
+    { lang: 'x-default', url: `${SITE}/producto/cloudrim` },
+  ],
+  '/producto/savia': [
+    { lang: 'es', url: `${SITE}/producto/savia` },
+    { lang: 'en', url: `${SITE}/en/product/savia` },
+    { lang: 'it', url: `${SITE}/it/prodotto/savia` },
+    { lang: 'fr', url: `${SITE}/fr/produit/savia` },
+    { lang: 'de', url: `${SITE}/de/produkt/savia` },
+    { lang: 'pt', url: `${SITE}/pt/produto/savia` },
+    { lang: 'x-default', url: `${SITE}/producto/savia` },
+  ],
   '/producto/inteligencia-dinamica': [
     { lang: 'es', url: `${SITE}/producto/inteligencia-dinamica` },
     { lang: 'en', url: `${SITE}/en/product/dynamic-intelligence` },
@@ -3048,6 +3066,8 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
     '/producto/winerim-core': '/en/product/winerim-core',
     '/producto/winerim-supply': '/en/product/winerim-supply',
+    '/producto/cloudrim': '/en/product/cloudrim',
+    '/producto/savia': '/en/product/savia',
     '/analisis-carta': '/en/wine-list-analysis',
     '/aprender-vino': '/en/learn-wine',
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
@@ -3079,6 +3099,8 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
     '/producto/winerim-core': '/it/prodotto/winerim-core',
     '/producto/winerim-supply': '/it/prodotto/winerim-supply',
+    '/producto/cloudrim': '/it/prodotto/cloudrim',
+    '/producto/savia': '/it/prodotto/savia',
     '/analisis-carta': '/it/analisi-carta',
     '/aprender-vino': '/it/imparare-il-vino',
     '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
@@ -3110,6 +3132,8 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
     '/producto/winerim-core': '/fr/produit/winerim-core',
     '/producto/winerim-supply': '/fr/produit/winerim-supply',
+    '/producto/cloudrim': '/fr/produit/cloudrim',
+    '/producto/savia': '/fr/produit/savia',
     '/analisis-carta': '/fr/analyse-carte',
     '/aprender-vino': '/fr/apprendre-le-vin',
     '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
@@ -3141,6 +3165,8 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
     '/producto/winerim-core': '/de/produkt/winerim-core',
     '/producto/winerim-supply': '/de/produkt/winerim-supply',
+    '/producto/cloudrim': '/de/produkt/cloudrim',
+    '/producto/savia': '/de/produkt/savia',
     '/analisis-carta': '/de/weinkarten-analyse',
     '/aprender-vino': '/de/wein-lernen',
     '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
@@ -3172,6 +3198,8 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
     '/producto/winerim-core': '/pt/produto/winerim-core',
     '/producto/winerim-supply': '/pt/produto/winerim-supply',
+    '/producto/cloudrim': '/pt/produto/cloudrim',
+    '/producto/savia': '/pt/produto/savia',
     '/analisis-carta': '/pt/analise-carta',
     '/aprender-vino': '/pt/aprender-vinho',
     '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
@@ -3207,6 +3235,8 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/producto/inteligencia-dinamica': { es: 'Inteligencia dinamica', en: 'Dynamic intelligence', it: 'Intelligenza dinamica', fr: 'Intelligence dynamique', de: 'Dynamische Intelligenz', pt: 'Inteligencia dinamica' },
   '/producto/winerim-core': { es: 'Winerim Core', en: 'Winerim Core', it: 'Winerim Core', fr: 'Winerim Core', de: 'Winerim Core', pt: 'Winerim Core' },
   '/producto/winerim-supply': { es: 'Winerim Supply', en: 'Winerim Supply', it: 'Winerim Supply', fr: 'Winerim Supply', de: 'Winerim Supply', pt: 'Winerim Supply' },
+  '/producto/cloudrim': { es: 'CloudRIM', en: 'CloudRIM', it: 'CloudRIM', fr: 'CloudRIM', de: 'CloudRIM', pt: 'CloudRIM' },
+  '/producto/savia': { es: 'SAVia', en: 'SAVia', it: 'SAVia', fr: 'SAVia', de: 'SAVia', pt: 'SAVia' },
   '/analisis-carta': { es: 'Analisis de carta de vinos', en: 'Wine list analysis', it: 'Analisi carta vini', fr: 'Analyse de carte des vins', de: 'Weinkartenanalyse', pt: 'Analise de carta de vinhos' },
   '/aprender-vino': { es: 'Aprender vino', en: 'Learn wine', it: 'Imparare il vino', fr: 'Apprendre le vin', de: 'Wein lernen', pt: 'Aprender vinho' },
   '/barometro-cartas-vino-2026': { es: 'Barometro Winerim de cartas de vino', en: 'Winerim wine list barometer', it: 'Barometro Winerim delle carte vini', fr: 'Barometre Winerim des cartes des vins', de: 'Winerim Weinkarten-Barometer', pt: 'Barometro Winerim de cartas de vinhos' },
@@ -3286,6 +3316,200 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
 };
 
 function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (esPath === '/producto/cloudrim' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'CloudRIM | Operational Document Cloud for Restaurants',
+        description: 'CloudRIM collects wine lists, invoices, delivery notes, POS reports, stock files and distributor tariffs, then routes them inside Winerim.',
+        h1: 'The operational cloud where your restaurant drops documents and Winerim does the heavy work',
+        subtitle: 'CloudRIM centralises wine lists, sales, delivery notes, stock, POS reports and distributor tariffs so Winerim can turn them into usable operational data.',
+        sections: [
+          { heading: 'The problem', content: 'The problem is not only having data. It is getting every menu, delivery note, invoice, tariff and sales report into the right place without asking the team to repeat manual work.' },
+          { heading: 'How CloudRIM works', content: 'The restaurant uploads or connects documents through a portal, email, shared folder, FTP/SFTP, API, POS or supplier. CloudRIM identifies the source, type and business context, then routes each file to the right Winerim workflow.' },
+          { heading: 'What it can collect', content: 'CloudRIM can handle wine lists, purchase invoices, delivery notes, stock exports, POS sales reports and distributor price lists by channel, format and provider.' },
+          { heading: 'What the restaurant gains', content: 'Less manual administration, fewer copy-paste errors, updated cost and stock data, clearer margins and more reliable inputs for Winerim Core, Winerim Supply and SAVia.' },
+        ],
+        faqs: [
+          { q: 'Does CloudRIM require an API from every provider?', a: 'No. It can start from practical channels such as email, uploads, shared folders, exports or supplier files while deeper integrations are prepared.' },
+          { q: 'Does CloudRIM replace the restaurant team?', a: 'No. It removes repetitive collection and routing work so the team can review, approve and make better decisions with cleaner data.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Product', url: `${SITE}/en/wine-list-management-software` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'SAVia', url: '/en/product/savia' }, { label: 'Integrations', url: '/en/integrations' }, { label: 'Winerim Supply', url: '/en/product/winerim-supply' }, { label: 'Request a demo', url: '/en/demo' }],
+      },
+      it: {
+        title: 'CloudRIM | Nube documentale operativa per ristoranti',
+        description: 'CloudRIM raccoglie carte vini, fatture, bolle, report POS, stock e tariffe dei distributori e li instrada dentro Winerim.',
+        h1: 'La nube operativa dove il ristorante lascia i documenti e Winerim fa il lavoro pesante',
+        subtitle: 'CloudRIM centralizza carta vini, vendite, bolle, stock, report POS e tariffe dei distributori per trasformarli in dati operativi utilizzabili.',
+        sections: [
+          { heading: 'Il problema', content: 'Il problema non e solo avere dati. E fare arrivare carta, bolle, fatture, listini e report vendite nel posto giusto senza chiedere al team altro lavoro manuale.' },
+          { heading: 'Come funziona CloudRIM', content: 'Il ristorante carica o collega documenti tramite portale, email, cartella condivisa, FTP/SFTP, API, POS o fornitore. CloudRIM identifica fonte, tipo e contesto e invia ogni file al flusso Winerim corretto.' },
+          { heading: 'Cosa puo raccogliere', content: 'CloudRIM puo gestire carte vini, fatture di acquisto, bolle, export stock, report vendite POS e listini distributori per canale, formato e provider.' },
+          { heading: 'Cosa guadagna il ristorante', content: 'Meno amministrazione manuale, meno errori di copia, costi e stock piu aggiornati, margini piu chiari e dati migliori per Winerim Core, Winerim Supply e SAVia.' },
+        ],
+        faqs: [
+          { q: 'CloudRIM richiede una API da ogni fornitore?', a: 'No. Puo partire da canali pratici come email, upload, cartelle condivise, export o file dei fornitori mentre si preparano integrazioni piu profonde.' },
+          { q: 'CloudRIM sostituisce il team?', a: 'No. Elimina raccolta e instradamento ripetitivi, lasciando al team revisione, approvazione e decisioni con dati piu puliti.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Prodotto', url: `${SITE}/it/software-carta-vini` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'SAVia', url: '/it/prodotto/savia' }, { label: 'Integrazioni', url: '/it/integrazioni' }, { label: 'Winerim Supply', url: '/it/prodotto/winerim-supply' }, { label: 'Richiedi demo', url: '/it/demo' }],
+      },
+      fr: {
+        title: 'CloudRIM | Nuage documentaire operationnel pour restaurants',
+        description: 'CloudRIM collecte cartes, factures, bons de livraison, rapports POS, stocks et tarifs distributeurs, puis les route dans Winerim.',
+        h1: 'Le nuage operationnel ou le restaurant depose ses documents et Winerim fait le travail lourd',
+        subtitle: 'CloudRIM centralise cartes des vins, ventes, bons de livraison, stock, rapports POS et tarifs distributeurs pour les transformer en donnees exploitables.',
+        sections: [
+          { heading: 'Le probleme', content: 'Le probleme n est pas seulement d avoir des donnees. C est de faire arriver carte, factures, bons, tarifs et rapports de vente au bon endroit sans rajouter du travail manuel.' },
+          { heading: 'Comment fonctionne CloudRIM', content: 'Le restaurant envoie ou connecte les documents via portail, email, dossier partage, FTP/SFTP, API, POS ou fournisseur. CloudRIM identifie source, type et contexte puis route chaque fichier vers le bon flux Winerim.' },
+          { heading: 'Ce qu il peut collecter', content: 'CloudRIM peut traiter cartes des vins, factures d achat, bons de livraison, exports de stock, rapports de ventes POS et tarifs distributeurs par canal, format et fournisseur.' },
+          { heading: 'Ce que gagne le restaurant', content: 'Moins d administration manuelle, moins d erreurs, couts et stocks plus a jour, marges plus lisibles et meilleurs signaux pour Winerim Core, Winerim Supply et SAVia.' },
+        ],
+        faqs: [
+          { q: 'CloudRIM exige-t-il une API de chaque fournisseur?', a: 'Non. Il peut commencer avec email, uploads, dossiers partages, exports ou fichiers fournisseurs pendant que des integrations plus profondes se preparent.' },
+          { q: 'CloudRIM remplace-t-il l equipe?', a: 'Non. Il retire la collecte et le routage repetitifs pour que l equipe garde revue, validation et decisions avec de meilleures donnees.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Produit', url: `${SITE}/fr/logiciel-carte-des-vins` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'SAVia', url: '/fr/produit/savia' }, { label: 'Integrations', url: '/fr/integrations' }, { label: 'Winerim Supply', url: '/fr/produit/winerim-supply' }, { label: 'Demander une demo', url: '/fr/demo' }],
+      },
+      de: {
+        title: 'CloudRIM | Operative Dokumenten-Cloud fuer Restaurants',
+        description: 'CloudRIM sammelt Weinkarten, Rechnungen, Lieferscheine, POS-Reports, Bestand und Lieferantentarife und routet sie in Winerim.',
+        h1: 'Die operative Cloud, in der das Restaurant Dokumente ablegt und Winerim die schwere Arbeit uebernimmt',
+        subtitle: 'CloudRIM zentralisiert Weinkarten, Verkäufe, Lieferscheine, Bestand, POS-Reports und Lieferantentarife, damit Winerim daraus nutzbare operative Daten macht.',
+        sections: [
+          { heading: 'Das Problem', content: 'Das Problem ist nicht nur, Daten zu haben. Es geht darum, Karte, Lieferscheine, Rechnungen, Tarife und Verkaufsberichte an den richtigen Ort zu bringen, ohne dem Team mehr Handarbeit zu geben.' },
+          { heading: 'So funktioniert CloudRIM', content: 'Das Restaurant lädt Dokumente hoch oder verbindet Portale, E-Mail, geteilte Ordner, FTP/SFTP, API, POS oder Lieferanten. CloudRIM erkennt Quelle, Typ und Kontext und routet jede Datei in den passenden Winerim-Workflow.' },
+          { heading: 'Was gesammelt werden kann', content: 'CloudRIM verarbeitet Weinkarten, Einkaufsrechnungen, Lieferscheine, Bestandsdateien, POS-Verkaufsberichte und Lieferantentarife nach Kanal, Format und Anbieter.' },
+          { heading: 'Was das Restaurant gewinnt', content: 'Weniger manuelle Verwaltung, weniger Fehler, aktuellere Kosten- und Bestandsdaten, klarere Margen und bessere Eingaben fuer Winerim Core, Winerim Supply und SAVia.' },
+        ],
+        faqs: [
+          { q: 'Braucht CloudRIM fuer jeden Anbieter eine API?', a: 'Nein. Es kann mit E-Mail, Uploads, geteilten Ordnern, Exporten oder Lieferantendateien starten, waehrend tiefere Integrationen vorbereitet werden.' },
+          { q: 'Ersetzt CloudRIM das Team?', a: 'Nein. Es nimmt repetitive Sammlung und Weiterleitung ab, damit das Team pruefen, freigeben und mit saubereren Daten entscheiden kann.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Produkt', url: `${SITE}/de/weinkarten-software` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'SAVia', url: '/de/produkt/savia' }, { label: 'Integrationen', url: '/de/integrationen' }, { label: 'Winerim Supply', url: '/de/produkt/winerim-supply' }, { label: 'Demo anfragen', url: '/de/demo' }],
+      },
+      pt: {
+        title: 'CloudRIM | Nuvem documental operacional para restaurantes',
+        description: 'CloudRIM recolhe cartas, faturas, guias, relatórios POS, stock e tabelas de distribuidores, e encaminha tudo dentro da Winerim.',
+        h1: 'A nuvem operacional onde o restaurante deixa documentos e a Winerim faz o trabalho pesado',
+        subtitle: 'CloudRIM centraliza cartas de vinho, vendas, guias, stock, relatórios POS e tabelas de distribuidores para os transformar em dados operacionais.',
+        sections: [
+          { heading: 'O problema', content: 'O problema nao e apenas ter dados. E fazer chegar carta, faturas, guias, tabelas e relatorios de venda ao sitio certo sem pedir mais trabalho manual a equipa.' },
+          { heading: 'Como funciona o CloudRIM', content: 'O restaurante carrega ou liga documentos por portal, email, pasta partilhada, FTP/SFTP, API, POS ou fornecedor. O CloudRIM identifica origem, tipo e contexto e encaminha cada ficheiro para o fluxo Winerim correto.' },
+          { heading: 'O que pode recolher', content: 'O CloudRIM pode tratar cartas de vinho, faturas de compra, guias, exportacoes de stock, relatorios de vendas POS e tabelas de distribuidores por canal, formato e fornecedor.' },
+          { heading: 'O que ganha o restaurante', content: 'Menos administracao manual, menos erros, custos e stock mais atualizados, margens mais claras e melhores dados para Winerim Core, Winerim Supply e SAVia.' },
+        ],
+        faqs: [
+          { q: 'O CloudRIM exige API de todos os fornecedores?', a: 'Nao. Pode comecar por canais praticos como email, uploads, pastas partilhadas, exportacoes ou ficheiros de fornecedores enquanto se preparam integracoes mais profundas.' },
+          { q: 'O CloudRIM substitui a equipa?', a: 'Nao. Remove recolha e encaminhamento repetitivos para que a equipa possa rever, aprovar e decidir com dados mais limpos.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Produto', url: `${SITE}/pt/software-carta-vinhos` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'SAVia', url: '/pt/produto/savia' }, { label: 'Integracoes', url: '/pt/integracoes' }, { label: 'Winerim Supply', url: '/pt/produto/winerim-supply' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
+  if (esPath === '/producto/savia' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'SAVia | Conversational Agent for Wine List, Stock and Margins',
+        description: 'SAVia is Winerim conversational intelligence for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities.',
+        h1: 'Ask your cellar. SAVia answers with Winerim data.',
+        subtitle: 'SAVia helps teams understand what is happening in their wine list, sales, stock, costs and margins without digging through dashboards.',
+        sections: [
+          { heading: 'Why SAVia exists', content: 'Dashboards show data. SAVia helps interpret it, connect signals and prepare decisions in everyday language for owners, sommeliers, F&B managers and operations teams.' },
+          { heading: 'What you can ask', content: 'Ask which wines tie up the most capital, which references lost margin, what to push this week, what changed after a delivery note or which wines need review before the next order.' },
+          { heading: 'Human approval', content: 'SAVia can consult, summarize, compare and prepare actions, but critical operations such as changing prices, removing references or approving purchases remain under human approval.' },
+          { heading: 'How it gets context', content: 'SAVia works with the operational data routed by Winerim and CloudRIM: lists, sales, stock, purchase prices, delivery notes, invoices and distributor information.' },
+        ],
+        faqs: [
+          { q: 'Can SAVia change my wine list by itself?', a: 'No. SAVia prepares recommendations and actions, but critical changes require human approval.' },
+          { q: 'Who is SAVia for?', a: 'Owners, sommeliers, F&B managers, operations teams and anyone who needs quick answers from Winerim data.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Product', url: `${SITE}/en/wine-list-management-software` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'CloudRIM', url: '/en/product/cloudrim' }, { label: 'Dynamic intelligence', url: '/en/product/dynamic-intelligence' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Request a demo', url: '/en/demo' }],
+      },
+      it: {
+        title: 'SAVia | Agente conversazionale per carta vini, stock e margini',
+        description: 'SAVia e l agente conversazionale di Winerim per interrogare carta, vendite, stock, costi, margini, bolle e opportunita.',
+        h1: 'Chiedi alla tua cantina. SAVia risponde con i dati Winerim.',
+        subtitle: 'SAVia aiuta il team a capire cosa succede in carta, vendite, stock, costi e margini senza perdersi nei dashboard.',
+        sections: [
+          { heading: 'Perche esiste SAVia', content: 'I dashboard mostrano dati. SAVia aiuta a interpretarli, collegare segnali e preparare decisioni in linguaggio naturale per proprietari, sommelier, F&B manager e operation.' },
+          { heading: 'Cosa puoi chiedere', content: 'Puoi chiedere quali vini immobilizzano piu capitale, quali referenze hanno perso margine, cosa spingere questa settimana, cosa e cambiato dopo una bolla o quali vini rivedere prima del prossimo ordine.' },
+          { heading: 'Approvazione umana', content: 'SAVia puo consultare, riassumere, confrontare e preparare azioni, ma cambi di prezzo, rimozioni e acquisti critici restano sotto approvazione umana.' },
+          { heading: 'Come riceve contesto', content: 'SAVia lavora con i dati operativi instradati da Winerim e CloudRIM: carte, vendite, stock, prezzi di acquisto, bolle, fatture e informazioni dei distributori.' },
+        ],
+        faqs: [
+          { q: 'SAVia puo modificare la carta da sola?', a: 'No. Prepara raccomandazioni e azioni, ma le modifiche critiche richiedono approvazione umana.' },
+          { q: 'Per chi e SAVia?', a: 'Proprietari, sommelier, F&B manager, operation e chiunque abbia bisogno di risposte rapide dai dati Winerim.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Prodotto', url: `${SITE}/it/software-carta-vini` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'CloudRIM', url: '/it/prodotto/cloudrim' }, { label: 'Intelligenza dinamica', url: '/it/prodotto/intelligenza-dinamica' }, { label: 'Winerim Core', url: '/it/prodotto/winerim-core' }, { label: 'Richiedi demo', url: '/it/demo' }],
+      },
+      fr: {
+        title: 'SAVia | Agent conversationnel pour carte, stock et marges',
+        description: 'SAVia est l agent conversationnel de Winerim pour interroger carte, ventes, stock, couts, marges, bons de livraison et opportunites.',
+        h1: 'Interrogez votre cave. SAVia repond avec les donnees Winerim.',
+        subtitle: 'SAVia aide les equipes a comprendre carte, ventes, stock, couts et marges sans fouiller dans les tableaux de bord.',
+        sections: [
+          { heading: 'Pourquoi SAVia existe', content: 'Les dashboards montrent les donnees. SAVia aide a les interpreter, relier les signaux et preparer des decisions en langage courant pour direction, sommellerie, F&B et operations.' },
+          { heading: 'Ce que vous pouvez demander', content: 'Demandez quels vins immobilisent le plus de capital, quelles references ont perdu de la marge, quoi pousser cette semaine, ce qui a change apres un bon de livraison ou quels vins revoir avant la prochaine commande.' },
+          { heading: 'Validation humaine', content: 'SAVia peut consulter, resumer, comparer et preparer des actions, mais les changements critiques comme prix, retrait de references ou achats restent sous validation humaine.' },
+          { heading: 'Comment il obtient le contexte', content: 'SAVia travaille avec les donnees operationnelles routees par Winerim et CloudRIM: cartes, ventes, stock, prix d achat, bons, factures et donnees distributeurs.' },
+        ],
+        faqs: [
+          { q: 'SAVia peut-il changer la carte seul?', a: 'Non. Il prepare recommandations et actions, mais les changements critiques demandent une validation humaine.' },
+          { q: 'Pour qui est SAVia?', a: 'Direction, sommeliers, F&B managers, operations et toute personne qui a besoin de reponses rapides issues des donnees Winerim.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Produit', url: `${SITE}/fr/logiciel-carte-des-vins` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'CloudRIM', url: '/fr/produit/cloudrim' }, { label: 'Intelligence dynamique', url: '/fr/produit/intelligence-dynamique' }, { label: 'Winerim Core', url: '/fr/produit/winerim-core' }, { label: 'Demander une demo', url: '/fr/demo' }],
+      },
+      de: {
+        title: 'SAVia | Konversationsagent fuer Weinkarte, Bestand und Marge',
+        description: 'SAVia ist der Winerim-Konversationsagent fuer Fragen zu Karte, Verkauf, Bestand, Kosten, Margen, Lieferscheinen und Chancen.',
+        h1: 'Fragen Sie Ihren Keller. SAVia antwortet mit Winerim-Daten.',
+        subtitle: 'SAVia hilft Teams, Weinkarte, Verkauf, Bestand, Kosten und Margen zu verstehen, ohne sich durch Dashboards zu klicken.',
+        sections: [
+          { heading: 'Warum es SAVia gibt', content: 'Dashboards zeigen Daten. SAVia hilft, sie zu interpretieren, Signale zu verbinden und Entscheidungen in Alltagssprache vorzubereiten.' },
+          { heading: 'Was Sie fragen koennen', content: 'Fragen Sie, welche Weine Kapital binden, welche Referenzen Marge verloren haben, was diese Woche gepusht werden sollte, was sich nach einem Lieferschein geaendert hat oder welche Weine vor der naechsten Bestellung geprueft werden sollten.' },
+          { heading: 'Menschliche Freigabe', content: 'SAVia kann abfragen, zusammenfassen, vergleichen und Aktionen vorbereiten. Kritische Schritte wie Preisänderungen, Entfernen von Referenzen oder Kaufentscheidungen bleiben unter menschlicher Freigabe.' },
+          { heading: 'Wie Kontext entsteht', content: 'SAVia nutzt operative Daten aus Winerim und CloudRIM: Karten, Verkauf, Bestand, Einkaufspreise, Lieferscheine, Rechnungen und Lieferantendaten.' },
+        ],
+        faqs: [
+          { q: 'Kann SAVia meine Weinkarte selbst aendern?', a: 'Nein. SAVia bereitet Empfehlungen und Aktionen vor, aber kritische Aenderungen brauchen menschliche Freigabe.' },
+          { q: 'Fuer wen ist SAVia gedacht?', a: 'Eigentuemer, Sommeliers, F&B-Manager, Operationsteams und alle, die schnelle Antworten aus Winerim-Daten brauchen.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Produkt', url: `${SITE}/de/weinkarten-software` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'CloudRIM', url: '/de/produkt/cloudrim' }, { label: 'Dynamische Intelligenz', url: '/de/produkt/dynamische-intelligenz' }, { label: 'Winerim Core', url: '/de/produkt/winerim-core' }, { label: 'Demo anfragen', url: '/de/demo' }],
+      },
+      pt: {
+        title: 'SAVia | Agente conversacional para carta, stock e margens',
+        description: 'SAVia e o agente conversacional da Winerim para perguntar sobre carta, vendas, stock, custos, margens, guias e oportunidades.',
+        h1: 'Pergunta a tua garrafeira. A SAVia responde com dados Winerim.',
+        subtitle: 'A SAVia ajuda a equipa a entender carta, vendas, stock, custos e margens sem procurar em dashboards.',
+        sections: [
+          { heading: 'Porque existe a SAVia', content: 'Os dashboards mostram dados. A SAVia ajuda a interpreta-los, ligar sinais e preparar decisoes em linguagem natural para proprietarios, sommeliers, F&B e operacoes.' },
+          { heading: 'O que podes perguntar', content: 'Pergunta que vinhos imobilizam mais capital, que referencias perderam margem, o que promover esta semana, o que mudou depois de uma guia ou que vinhos rever antes da proxima compra.' },
+          { heading: 'Aprovacao humana', content: 'A SAVia pode consultar, resumir, comparar e preparar acoes, mas mudancas criticas como precos, remocao de referencias ou compras ficam sob aprovacao humana.' },
+          { heading: 'Como ganha contexto', content: 'A SAVia trabalha com dados operacionais encaminhados pela Winerim e pelo CloudRIM: cartas, vendas, stock, precos de compra, guias, faturas e informacao de distribuidores.' },
+        ],
+        faqs: [
+          { q: 'A SAVia pode alterar a carta sozinha?', a: 'Nao. Prepara recomendacoes e acoes, mas as mudancas criticas exigem aprovacao humana.' },
+          { q: 'Para quem e a SAVia?', a: 'Proprietarios, sommeliers, F&B managers, equipas de operacoes e qualquer pessoa que precise de respostas rapidas a partir dos dados Winerim.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Produto', url: `${SITE}/pt/software-carta-vinhos` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'CloudRIM', url: '/pt/produto/cloudrim' }, { label: 'Inteligencia dinamica', url: '/pt/produto/inteligencia-dinamica' }, { label: 'Winerim Core', url: '/pt/produto/winerim-core' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
   if (esPath === '/calculadora-margen-vino' && lang !== 'es') {
     const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
       en: {
@@ -5071,6 +5295,44 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       faqs: [{ q: '¿Winerim Supply sustituye mi ERP?', a: 'No. Se integra con tu sistema actual para enriquecer los datos de gestión de vinos con inteligencia de negocio.' }],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Producto', url: `${SITE}/software-carta-de-vinos` }, { name: 'Winerim Supply', url: `${SITE}/producto/winerim-supply` }],
       internalLinks: [{ label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' }, { label: 'Funcionalidades', url: '/funcionalidades' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/producto/cloudrim': {
+    meta: { title: 'CloudRIM | Nube documental operativa para restaurantes', description: 'CloudRIM recoge cartas, ventas, albaranes, stock, reportes TPV y tarifas de distribuidores, y los enruta dentro de Winerim.', canonical: `${SITE}/producto/cloudrim`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'La nube donde tu restaurante deja los documentos y Winerim hace el trabajo pesado',
+      subtitle: 'CloudRIM centraliza cartas, ventas, albaranes, stock, reportes TPV y tarifas de distribuidores para convertirlos en datos operativos dentro de Winerim.',
+      sections: [
+        { heading: 'El problema no es tener datos', content: 'El problema es conseguir que cartas, albaranes, facturas, tarifas, stock y reportes de ventas lleguen al sitio correcto sin obligar al equipo a repetir tareas manuales cada semana.' },
+        { heading: 'Como funciona CloudRIM', content: 'El restaurante sube o conecta documentos por portal, email, carpeta compartida, FTP/SFTP, API, TPV o proveedor. CloudRIM identifica fuente, tipo de documento y contexto, y enruta cada archivo hacia el flujo adecuado de Winerim.' },
+        { heading: 'Que puede recoger', content: 'CloudRIM trabaja con cartas de vino, reportes de ventas, albaranes, facturas, stock, reportes TPV y tarifas de distribuidores, incluso cuando llegan en formatos y canales distintos.' },
+        { heading: 'Que gana el restaurante', content: 'Menos administracion manual, menos errores de copia, coste y stock mas actualizados, margenes mas claros y mejores datos para Winerim Core, Winerim Supply y SAVia.' },
+      ],
+      faqs: [
+        { q: 'CloudRIM necesita una API de cada proveedor?', a: 'No. Puede empezar con canales practicos como portal, email, carpetas compartidas, exportaciones, FTP/SFTP o archivos de proveedor mientras se preparan integraciones mas profundas.' },
+        { q: 'CloudRIM sustituye al equipo?', a: 'No. Quita trabajo repetitivo de recogida y enrutado para que el equipo pueda revisar, aprobar y decidir con datos mas limpios.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Producto', url: `${SITE}/software-carta-de-vinos` }, { name: 'CloudRIM', url: `${SITE}/producto/cloudrim` }],
+      internalLinks: [{ label: 'SAVia', url: '/producto/savia' }, { label: 'Integraciones', url: '/integraciones' }, { label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/producto/savia': {
+    meta: { title: 'SAVia | Agente conversacional para carta, stock y margenes', description: 'SAVia es el agente conversacional de Winerim para preguntar sobre carta, ventas, stock, costes, margenes, albaranes y oportunidades.', canonical: `${SITE}/producto/savia`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Pregunta a tu bodega. SAVia responde con datos de Winerim.',
+      subtitle: 'SAVia ayuda a interpretar carta, ventas, stock, costes, margenes, albaranes y oportunidades sin tener que bucear en dashboards.',
+      sections: [
+        { heading: 'La forma conversacional de usar Winerim', content: 'Los dashboards muestran datos. SAVia ayuda a interpretarlos, conectar senales y preparar decisiones en lenguaje natural para direccion, sumilleria, F&B y operaciones.' },
+        { heading: 'Que puedes preguntar', content: 'Puedes preguntar que vinos inmovilizan mas capital, que referencias han perdido margen, que conviene impulsar esta semana, que cambio tras un albaran o que vinos revisar antes de comprar.' },
+        { heading: 'Decision humana siempre', content: 'SAVia puede consultar, resumir, comparar y preparar acciones, pero los cambios criticos como precios, retirada de referencias o aprobacion de compras quedan bajo aprobacion humana.' },
+        { heading: 'Contexto conectado', content: 'SAVia trabaja con los datos operativos que Winerim y CloudRIM ordenan: carta, ventas, stock, precios de compra, albaranes, facturas, tarifas y distribuidores.' },
+      ],
+      faqs: [
+        { q: 'SAVia puede cambiar mi carta automaticamente?', a: 'No. SAVia prepara recomendaciones y acciones, pero los cambios criticos requieren aprobacion humana.' },
+        { q: 'Para quien es SAVia?', a: 'Para propietarios, sommeliers, F&B managers, equipos de operaciones y cualquier responsable que necesite respuestas rapidas a partir de los datos de Winerim.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Producto', url: `${SITE}/software-carta-de-vinos` }, { name: 'SAVia', url: `${SITE}/producto/savia` }],
+      internalLinks: [{ label: 'CloudRIM', url: '/producto/cloudrim' }, { label: 'Inteligencia dinamica', url: '/producto/inteligencia-dinamica' }, { label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Demo', url: '/demo' }],
     },
   },
   '/biblioteca-vino': {

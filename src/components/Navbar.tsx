@@ -52,6 +52,8 @@ const Navbar = memo(() => {
             { label: "Winerim Core", href: localePath("/producto/winerim-core"), badge: newBadge },
             { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: newBadge },
             { label: "Winerim Supply", href: localePath("/producto/winerim-supply"), badge: newBadge },
+            { label: "CloudRIM", href: localePath("/producto/cloudrim"), badge: newBadge },
+            { label: "SAVia", href: localePath("/producto/savia"), badge: newBadge },
             { label: t.nav_integrations, href: localePath("/integraciones") },
           ],
         },

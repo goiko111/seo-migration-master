@@ -82,6 +82,8 @@ const Footer = () => {
                 { label: "Winerim Core", href: localePath("/producto/winerim-core") },
                 { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica") },
                 { label: "Winerim Supply", href: localePath("/producto/winerim-supply") },
+                { label: "CloudRIM", href: localePath("/producto/cloudrim") },
+                { label: "SAVia", href: localePath("/producto/savia") },
                 { label: t.nav_integrations, href: localePath("/integraciones") },
                 { label: t.nav_pricing, href: localePath("/precios") },
                 { label: t.nav_case_studies, href: localePath("/casos-exito") },

@@ -1,5 +1,89 @@
 # Current State
 
+## Actualizacion 2026-07-02: CloudRIM y SAVia incorporados en la web
+
+## Hechos
+
+- Se implementaron las paginas de producto:
+  - `/producto/cloudrim`;
+  - `/producto/savia`.
+- Ambas paginas tienen contenido localizado para `es/en/it/fr/de/pt`, SEOHead con canonical localizado, breadcrumbs, FAQ, schema `SoftwareApplication` y enlaces internos.
+- Se anadio el bloque `CloudRIM + SAVia` en home justo despues de la solucion de 5 herramientas.
+- Se anadieron enlaces a CloudRIM y SAVia en navbar y footer.
+- Se anadieron dos cards de CloudRIM/SAVia en `/funcionalidades`.
+- Se anadio una seccion CloudRIM en `/integraciones` para explicar el puente documental cuando no hay API perfecta.
+- Se anadio una seccion SAVia en `/producto/inteligencia-dinamica` como forma conversacional de usar la inteligencia de Winerim.
+- Se sincronizaron rutas en `src/App.tsx` y `src/i18n/types.ts` para ES, EN, IT, FR, DE y PT.
+- Se sincronizo la superficie SEO/LLM:
+  - `supabase/functions/sitemap/index.ts`;
+  - `supabase/functions/prerender/index.ts`;
+  - `cloudflare-worker-v3-hybrid.js`;
+  - `public/sitemap-extra.json`;
+  - `public/llms.txt`;
+  - `public/llms-full.txt`;
+  - `src/test/wine-library-seo-surface.test.ts`.
+- Se corrigio durante QA que el titulo `Como funciona CloudRIM` existia en copy pero no se renderizaba en la tarjeta de pasos.
+- Validaciones locales OK:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npm run build`;
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - validacion JSON de `public/sitemap-extra.json`;
+  - `npm run deploy:worker:dry-run`.
+- QA local con Chrome en `http://127.0.0.1:4179` OK en desktop y mobile para:
+  - `/producto/cloudrim`;
+  - `/en/product/cloudrim`;
+  - `/producto/savia`;
+  - `/pt/produto/savia`;
+  - `/`;
+  - `/funcionalidades`;
+  - `/integraciones`;
+  - `/producto/inteligencia-dinamica`.
+- La QA confirmo canonicals correctos, contenido visible, ausencia de `Not found` y sin overflow horizontal.
+- El deploy CLI de Supabase SEO sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- No se desplego el Worker real porque debe ir despues de publicar frontend y Edge Functions desde Lovable/Supabase.
+- El cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse ni incluirse.
+
+## Decisiones
+
+- Tratar CloudRIM y SAVia como capacidades principales de producto, con paginas propias y presencia transversal en home, funcionalidades, integraciones e inteligencia dinamica.
+- Posicionar CloudRIM como nube operativa/documental que recoge cartas, ventas, albaranes, stock, reportes TPV y tarifas por los canales reales del restaurante.
+- Posicionar SAVia como agente conversacional que consulta y prepara decisiones, sin ejecutar acciones criticas sin aprobacion humana.
+- No desplegar el Worker productivo antes de que Lovable publique frontend y Edge Functions `sitemap`/`prerender`.
+
+## Hipotesis
+
+- CloudRIM deberia hacer mas tangible el mensaje de `subes tus albaranes y olvidate` porque explica como entran documentos y datos dispersos en Winerim.
+- SAVia deberia reforzar conversion y posicionamiento LLM al traducir dashboards y datos operativos en preguntas naturales.
+- La inclusion en `llms.txt` y `llms-full.txt` deberia ayudar a que modelos externos entiendan CloudRIM/SAVia como parte central de Winerim.
+
+## Contradicciones / dudas abiertas
+
+- No hay contradicciones nuevas de producto detectadas.
+- La unica limitacion operativa es conocida: el CLI de Supabase no puede desplegar sin `SUPABASE_ACCESS_TOKEN`.
+- Produccion todavia no esta revalidada para estas rutas hasta que Lovable/Supabase publiquen los cambios.
+
+## Tareas pendientes
+
+- Pushear el commit de CloudRIM/SAVia a `origin/main`.
+- En Lovable, publicar frontend y desplegar Edge Functions:
+  - `sitemap`;
+  - `prerender`.
+- Desplegar Cloudflare Worker despues de la publicacion de frontend/Edge Functions.
+- Revalidar produccion como usuario y Googlebot:
+  - `/producto/cloudrim`;
+  - `/producto/savia`;
+  - variantes EN/IT/FR/DE/PT;
+  - home;
+  - `/funcionalidades`;
+  - `/integraciones`;
+  - `/producto/inteligencia-dinamica`;
+  - `/sitemap.xml`;
+  - `llms.txt` y `llms-full.txt`.
+- Reenviar `/sitemap.xml` en Search Console tras confirmar produccion.
+- Mantener fuera de alcance `src/components/WineListAnalyzerTool.tsx` salvo instruccion expresa.
+
 ## Actualizacion 2026-07-01: revalidacion productiva de landing Meta Demo
 
 ## Hechos

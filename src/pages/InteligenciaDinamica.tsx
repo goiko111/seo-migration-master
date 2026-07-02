@@ -53,6 +53,10 @@ const i18n: I18nMap<{
   s3_badge: string; s3_title_1: string; s3_title_highlight: string; s3_subtitle: string;
   s3_layers: { num: string; title: string; desc: string }[];
   s3_closing: string;
+  // SAVia section
+  savia_badge: string; savia_title_1: string; savia_title_highlight: string; savia_subtitle: string;
+  savia_questions: string[];
+  savia_control_title: string; savia_control_text: string; savia_cta: string;
   // Section 4 — Objectives
   s4_badge: string; s4_title_1: string; s4_title_highlight: string; s4_subtitle: string;
   s4_objectives: { title: string; desc: string }[];
@@ -126,6 +130,19 @@ const i18n: I18nMap<{
       { num: "04", title: "Módulos RIM™", desc: "Deciden cuándo y por qué actuar según clima, afluencia, ventas, stock, calendario o comportamiento real." },
     ],
     s3_closing: "El resultado es una carta que se adapta sola para vender mejor sin perder coherencia.",
+    savia_badge: "SAVia",
+    savia_title_1: "La forma conversacional de usar la ",
+    savia_title_highlight: "inteligencia de Winerim",
+    savia_subtitle: "Los dashboards muestran datos. SAVia ayuda a interpretarlos. Pregunta qué vinos están parados, qué costes han cambiado, qué referencias conviene revisar o qué oportunidades hay en la carta.",
+    savia_questions: [
+      "Qué vinos tengo parados y cuánto capital inmovilizan?",
+      "Qué referencias han bajado margen por cambio de coste?",
+      "Qué vinos debería impulsar esta semana?",
+      "Qué cambios de carta pueden mejorar rotación y rentabilidad?",
+    ],
+    savia_control_title: "SAVia combina carta, ventas, stock, margen, compras y documentos procesados",
+    savia_control_text: "Convierte la operativa de vino en decisiones explicables. Puede consultar, resumir y preparar acciones; las decisiones críticas quedan bajo aprobación humana.",
+    savia_cta: "Ver SAVia",
     s4_badge: "Objetivos",
     s4_title_1: "Elige el objetivo. ",
     s4_title_highlight: "Winerim activa la estrategia.",
@@ -246,6 +263,19 @@ const i18n: I18nMap<{
       { num: "04", title: "RIM™ modules", desc: "Decide when and why to act based on weather, footfall, sales, stock, calendar or real behaviour." },
     ],
     s3_closing: "The result is a list that adapts on its own to sell better without losing coherence.",
+    savia_badge: "SAVia",
+    savia_title_1: "The conversational way to use ",
+    savia_title_highlight: "Winerim intelligence",
+    savia_subtitle: "Dashboards show data. SAVia helps interpret it. Ask which wines are stuck, which costs changed, what to review or where opportunities sit in the list.",
+    savia_questions: [
+      "Which wines are stuck and how much capital do they tie up?",
+      "Which references lost margin after a cost change?",
+      "Which wines should I push this week?",
+      "Which list changes could improve rotation and profitability?",
+    ],
+    savia_control_title: "SAVia combines list, sales, stock, margin, purchasing and processed documents",
+    savia_control_text: "It turns wine operations into explainable decisions. It can consult, summarize and prepare actions; critical decisions remain under human approval.",
+    savia_cta: "See SAVia",
     s4_badge: "Objectives",
     s4_title_1: "Choose the objective. ",
     s4_title_highlight: "Winerim activates the strategy.",
@@ -366,6 +396,19 @@ const i18n: I18nMap<{
       { num: "04", title: "Moduli RIM™", desc: "Decidono quando e perché agire in base a clima, affluenza, vendite, stock, calendario o comportamento reale." },
     ],
     s3_closing: "Il risultato è una carta che si adatta da sola per vendere meglio senza perdere coerenza.",
+    savia_badge: "SAVia",
+    savia_title_1: "Il modo conversazionale di usare ",
+    savia_title_highlight: "l'intelligenza di Winerim",
+    savia_subtitle: "I dashboard mostrano dati. SAVia aiuta a interpretarli. Chiedi quali vini sono fermi, quali costi sono cambiati, cosa rivedere o dove sono le opportunita in carta.",
+    savia_questions: [
+      "Quali vini sono fermi e quanto capitale immobilizzano?",
+      "Quali referenze hanno perso margine dopo un cambio di costo?",
+      "Quali vini dovrei spingere questa settimana?",
+      "Quali cambi di carta migliorano rotazione e redditivita?",
+    ],
+    savia_control_title: "SAVia combina carta, vendite, stock, margine, acquisti e documenti processati",
+    savia_control_text: "Trasforma l'operativita del vino in decisioni spiegabili. Puo consultare, riassumere e preparare azioni; le decisioni critiche restano sotto approvazione umana.",
+    savia_cta: "Vedere SAVia",
     s4_badge: "Obiettivi",
     s4_title_1: "Scegli l'obiettivo. ",
     s4_title_highlight: "Winerim attiva la strategia.",
@@ -486,6 +529,19 @@ const i18n: I18nMap<{
       { num: "04", title: "Modules RIM™", desc: "Décident quand et pourquoi agir selon la météo, l'affluence, les ventes, le stock, le calendrier ou le comportement réel." },
     ],
     s3_closing: "Le résultat est une carte qui s'adapte seule pour mieux vendre sans perdre de cohérence.",
+    savia_badge: "SAVia",
+    savia_title_1: "La manière conversationnelle d'utiliser ",
+    savia_title_highlight: "l'intelligence de Winerim",
+    savia_subtitle: "Les dashboards montrent des données. SAVia aide à les interpréter. Demandez quels vins dorment, quels coûts ont changé, quoi revoir ou quelles opportunités existent dans la carte.",
+    savia_questions: [
+      "Quels vins dorment et combien de capital immobilisent-ils ?",
+      "Quelles références ont perdu de la marge après un changement de coût ?",
+      "Quels vins pousser cette semaine ?",
+      "Quels changements de carte améliorent rotation et rentabilité ?",
+    ],
+    savia_control_title: "SAVia combine carte, ventes, stock, marge, achats et documents traités",
+    savia_control_text: "Elle transforme l'opération vin en décisions explicables. Elle peut consulter, résumer et préparer des actions ; les décisions critiques restent sous approbation humaine.",
+    savia_cta: "Voir SAVia",
     s4_badge: "Objectifs",
     s4_title_1: "Choisissez l'objectif. ",
     s4_title_highlight: "Winerim active la stratégie.",
@@ -606,6 +662,19 @@ const i18n: I18nMap<{
       { num: "04", title: "RIM™-Module", desc: "Entscheiden wann und warum zu handeln ist – nach Wetter, Aufkommen, Verkäufen, Bestand, Kalender oder realem Verhalten." },
     ],
     s3_closing: "Das Ergebnis ist eine Karte, die sich selbst anpasst, um besser zu verkaufen, ohne ihre Kohärenz zu verlieren.",
+    savia_badge: "SAVia",
+    savia_title_1: "Die dialogische Art, ",
+    savia_title_highlight: "Winerim-Intelligenz zu nutzen",
+    savia_subtitle: "Dashboards zeigen Daten. SAVia hilft, sie zu interpretieren. Fragen Sie, welche Weine stillstehen, welche Kosten sich geaendert haben, was geprueft werden sollte oder wo Chancen liegen.",
+    savia_questions: [
+      "Welche Weine stehen still und wie viel Kapital binden sie?",
+      "Welche Referenzen haben nach Kostenwechsel Marge verloren?",
+      "Welche Weine sollten diese Woche gepusht werden?",
+      "Welche Kartenaenderungen verbessern Rotation und Rentabilitaet?",
+    ],
+    savia_control_title: "SAVia kombiniert Karte, Verkauf, Bestand, Marge, Einkauf und verarbeitete Dokumente",
+    savia_control_text: "Es verwandelt Weinoperationen in erklaerbare Entscheidungen. SAVia kann abfragen, zusammenfassen und Aktionen vorbereiten; kritische Entscheidungen bleiben menschlich freigegeben.",
+    savia_cta: "SAVia ansehen",
     s4_badge: "Ziele",
     s4_title_1: "Wählen Sie das Ziel. ",
     s4_title_highlight: "Winerim aktiviert die Strategie.",
@@ -726,6 +795,19 @@ const i18n: I18nMap<{
       { num: "04", title: "Módulos RIM™", desc: "Decidem quando e porquê atuar conforme o tempo, afluência, vendas, stock, calendário ou comportamento real." },
     ],
     s3_closing: "O resultado é uma carta que se adapta sozinha para vender melhor sem perder coerência.",
+    savia_badge: "SAVia",
+    savia_title_1: "A forma conversacional de usar a ",
+    savia_title_highlight: "inteligência da Winerim",
+    savia_subtitle: "Os dashboards mostram dados. SAVia ajuda a interpretá-los. Pergunte que vinhos estão parados, que custos mudaram, o que rever ou que oportunidades existem na carta.",
+    savia_questions: [
+      "Que vinhos estão parados e quanto capital imobilizam?",
+      "Que referências perderam margem após mudança de custo?",
+      "Que vinhos devo impulsionar esta semana?",
+      "Que mudanças na carta melhoram rotação e rentabilidade?",
+    ],
+    savia_control_title: "SAVia combina carta, vendas, stock, margem, compras e documentos processados",
+    savia_control_text: "Transforma a operação de vinho em decisões explicáveis. Pode consultar, resumir e preparar ações; as decisões críticas ficam sob aprovação humana.",
+    savia_cta: "Ver SAVia",
     s4_badge: "Objetivos",
     s4_title_1: "Escolha o objetivo. ",
     s4_title_highlight: "A Winerim ativa a estratégia.",
@@ -1131,6 +1213,57 @@ const InteligenciaDinamica = () => {
         </section>
 
         {/* ════════════════════════════════════════════════
+            SAVIA — INTERFAZ CONVERSACIONAL
+        ════════════════════════════════════════════════ */}
+        <section className="section-padding bg-gradient-dark">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
+              <ScrollReveal>
+                <Badge className="bg-wine/10 text-wine border-wine/20 mb-6 text-xs tracking-widest uppercase px-4 py-1.5">
+                  {tx.savia_badge}
+                </Badge>
+                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 leading-tight">
+                  {tx.savia_title_1}<span className="text-gradient-wine">{tx.savia_title_highlight}</span>
+                </h2>
+                <p className="text-muted-foreground text-lg leading-relaxed mb-8">{tx.savia_subtitle}</p>
+                <Link
+                  to={localePath("/producto/savia")}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-wine hover:text-wine-light transition-colors"
+                >
+                  {tx.savia_cta} <ArrowRight size={14} />
+                </Link>
+              </ScrollReveal>
+
+              <div className="grid gap-4">
+                {tx.savia_questions.map((question, i) => (
+                  <ScrollReveal key={question} delay={i * 0.05}>
+                    <div className="rounded-xl border border-border bg-card/70 p-5">
+                      <div className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
+                          <MessageSquare size={17} className="text-wine" />
+                        </div>
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">"{question}"</p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+                <ScrollReveal delay={0.25}>
+                  <div className="rounded-xl border border-wine/20 bg-wine/5 p-6">
+                    <div className="flex items-start gap-3">
+                      <ShieldCheck size={20} className="text-wine shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="font-heading text-lg font-bold mb-2">{tx.savia_control_title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{tx.savia_control_text}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════
             4. OBJETIVOS
         ════════════════════════════════════════════════ */}
         <section className="section-padding relative">
@@ -1513,6 +1646,7 @@ const InteligenciaDinamica = () => {
       <InternalLinks links={[
         { to: localePath("/producto/winerim-core"), label: tx.il_core, type: "solution" },
         { to: localePath("/producto/winerim-supply"), label: lang === "es" ? "Winerim Supply: inteligencia de compras" : lang === "en" ? "Winerim Supply: purchasing intelligence" : lang === "it" ? "Winerim Supply: intelligenza acquisti" : "Winerim Supply : intelligence achats", type: "solution" },
+        { to: localePath("/producto/savia"), label: lang === "es" ? "SAVia: agente IA de Winerim" : lang === "en" ? "SAVia: Winerim AI agent" : lang === "it" ? "SAVia: agente IA Winerim" : lang === "de" ? "SAVia: Winerim KI-Agent" : lang === "pt" ? "SAVia: agente IA Winerim" : "SAVia : agent IA Winerim", type: "solution" },
         { to: localePath("/funcionalidades"), label: tx.il_features, type: "solution" },
         { to: localePath("/herramientas/wine-list-score"), label: lang === "es" ? "Wine List Score: evalúa tu carta" : lang === "en" ? "Wine List Score: evaluate your list" : lang === "it" ? "Wine List Score: valuta la tua carta" : "Wine List Score : évaluez votre carte", type: "tool" },
         { to: localePath("/recursos/checklist-carta-de-vinos-rentable"), label: lang === "es" ? "Checklist carta rentable" : lang === "en" ? "Profitable wine list checklist" : lang === "it" ? "Checklist carta redditizia" : "Checklist carte rentable", type: "resource" },

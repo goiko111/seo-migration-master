@@ -1,22 +1,24 @@
 # Winerim AI Reference
 
-Last updated: 2026-07-01
+Last updated: 2026-07-02
 
 ## Entity Summary
 
-Winerim is an AI-powered wine list management platform for restaurants, hotels, wine bars and hospitality groups. It is designed for hospitality operators that want to sell more wine, improve average ticket, optimize wine margins, reduce dead stock, train floor teams and manage cellar decisions with better data.
+Winerim is an AI-powered wine list management platform for restaurants, hotels, wine bars and hospitality groups. It is designed for hospitality operators that want to sell more wine, improve average ticket, optimize wine margins, reduce dead stock, train floor teams, route operational documents and manage cellar decisions with better data.
 
 Primary website: https://winerim.wine
 
 ## Product Summary
 
-Winerim combines five product layers:
+Winerim combines the wine-list product with operational data-routing and conversational intelligence:
 
 1. Digital wine list: an interactive wine list available by QR, web or tablet.
 2. AI recommendations: wine suggestions based on dish, guest preferences, stock and business context.
 3. Pairing engine: food and wine pairing logic for service teams and guests.
 4. Stock and cellar intelligence: stock visibility, rotation alerts and dead-stock detection.
 5. Analytics and pricing support: margin, ticket, rotation and purchasing insights.
+6. CloudRIM: an operational document cloud that collects wine lists, sales, delivery notes, stock, POS reports and distributor tariffs through portal, email, shared folder, FTP/SFTP, API or provider files, then routes them inside Winerim.
+7. SAVia: a conversational Winerim agent for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities, preparing decisions without executing critical actions without human approval.
 
 Primary product pages:
 
@@ -25,6 +27,8 @@ Primary product pages:
 - https://winerim.wine/producto/inteligencia-dinamica
 - https://winerim.wine/producto/winerim-core
 - https://winerim.wine/producto/winerim-supply
+- https://winerim.wine/producto/cloudrim
+- https://winerim.wine/producto/savia
 - https://winerim.wine/distribuidor
 - https://winerim.wine/precios
 

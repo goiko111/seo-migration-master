@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, BarChart3, Zap, ShoppingCart,
   CheckCircle2, GraduationCap, QrCode, Brain, Wine,
-  Layers, TrendingUp, Package, Sparkles,
+  Layers, TrendingUp, Package, Sparkles, Cloud, MessageSquare,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -205,6 +205,20 @@ const content: I18nMap<PageContent> = {
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Recomendaciones dinámicas" : "Automatizaciones" })),
       },
       {
+        icon: Cloud, title: "CloudRIM",
+        desc: "La nube operativa donde el restaurante deja cartas, albaranes, ventas, stock y tarifas. Winerim clasifica cada documento, extrae la información relevante y la envía al flujo correcto.",
+        benefits: ["Recibe documentos por portal, email, carpeta compartida, FTP/SFTP, API o proveedor", "Clasifica cartas, ventas, stock, albaranes, facturas y tarifas", "Reduce introducción manual y duplicidad operativa", "Deja trazabilidad sobre lo recibido, procesado y pendiente de revisión"],
+        linkLabel: "Conocer CloudRIM", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documentos y stock conectados" : "Control operativo de bodega" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "El agente IA de Winerim. Pregunta por ventas, margen, stock, costes o cambios de carta y recibe respuestas accionables para decidir qué revisar, comprar, impulsar o descatalogar.",
+        benefits: ["Consulta carta, ventas, stock, costes, márgenes y albaranes", "Explica oportunidades y riesgos en lenguaje operativo", "Prepara decisiones sin ejecutar acciones críticas sin aprobación", "Ayuda a dirección, sumiller y sala a decidir con contexto"],
+        linkLabel: "Ver SAVia", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversación con datos de bodega" : "Respuestas accionables sobre la carta" })),
+      },
+      {
         icon: GraduationCap, title: "Formación del equipo de sala",
         desc: "Guías de vino, fichas simplificadas y recomendaciones contextuales para que el equipo de sala pueda hablar de vino con confianza, tenga o no formación previa. El objetivo no es convertirlos en sumilleres, sino en vendedores informados.",
         benefits: ["Fichas simplificadas de cada vino accesibles desde cualquier dispositivo", "Recomendaciones contextuales que el equipo puede usar en sala", "Guías de servicio: temperatura, copa, decantación, maridaje sugerido", "Formación continua sin necesidad de sesiones presenciales"],
@@ -320,6 +334,20 @@ const content: I18nMap<PageContent> = {
         benefits: ["Automatic wine list reordering based on commercial goals", "Highlighting wines with the best margin or rotation need", "Automatic hiding of out-of-stock or at-risk SKUs", "Contextual adaptation by weather, time of day or footfall"],
         linkLabel: "Discover Dynamic Intelligence", linkHref: "/en/product/dynamic-intelligence",
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Dynamic recommendations" : "Automations" })),
+      },
+      {
+        icon: Cloud, title: "CloudRIM",
+        desc: "The operating cloud where the restaurant drops wine lists, delivery notes, sales, stock and distributor tariffs. Winerim classifies each document, extracts the relevant information and routes it to the right workflow.",
+        benefits: ["Collects files via portal, email, shared folder, FTP/SFTP, API or provider", "Classifies lists, sales, stock, delivery notes, invoices and tariffs", "Reduces manual entry and duplicated work", "Tracks what arrived, what was processed and what needs review"],
+        linkLabel: "Meet CloudRIM", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documents and stock connected" : "Cellar operating control" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "Winerim's AI agent. Ask about sales, margin, stock, costs or wine list changes and get actionable answers to decide what to review, buy, push or delist.",
+        benefits: ["Queries wine list, sales, stock, costs, margins and delivery notes", "Explains opportunities and risks in operating language", "Prepares decisions without executing critical actions without approval", "Helps owners, sommeliers and floor teams decide with context"],
+        linkLabel: "See SAVia", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Cellar data conversation" : "Actionable wine list answers" })),
       },
       {
         icon: GraduationCap, title: "Floor staff training",
@@ -439,6 +467,20 @@ const content: I18nMap<PageContent> = {
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Raccomandazioni dinamiche" : "Automatizzazioni" })),
       },
       {
+        icon: Cloud, title: "CloudRIM",
+        desc: "La nube operativa dove il ristorante lascia carta, documenti, vendite, stock e tariffe. Winerim classifica ogni documento, estrae l'informazione rilevante e la invia al flusso corretto.",
+        benefits: ["Raccoglie file via portale, email, cartella, FTP/SFTP, API o fornitore", "Classifica carta, vendite, stock, documenti, fatture e tariffe", "Riduce inserimenti manuali e duplicazioni operative", "Traccia cio che arriva, viene processato o richiede revisione"],
+        linkLabel: "Conoscere CloudRIM", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documenti e stock collegati" : "Controllo operativo della cantina" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "L'agente IA di Winerim. Fai domande su vendite, margine, stock, costi o cambi di carta e ricevi risposte operative per decidere cosa rivedere, comprare, spingere o togliere.",
+        benefits: ["Interroga carta, vendite, stock, costi, margini e documenti", "Spiega opportunita e rischi in linguaggio operativo", "Prepara decisioni senza eseguire azioni critiche senza approvazione", "Aiuta direzione, sommelier e sala a decidere con contesto"],
+        linkLabel: "Vedere SAVia", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversazione sui dati di cantina" : "Risposte operative sulla carta" })),
+      },
+      {
         icon: GraduationCap, title: "Formazione del personale di sala",
         desc: "Guide al vino, schede semplificate e raccomandazioni contestuali affinché il personale di sala possa parlare di vino con sicurezza, con o senza formazione precedente. L'obiettivo non è trasformarli in sommelier, ma in venditori informati.",
         benefits: ["Schede semplificate di ogni vino accessibili da qualsiasi dispositivo", "Raccomandazioni contestuali che il team può usare in sala", "Guide di servizio: temperatura, calice, decantazione, abbinamento suggerito", "Formazione continua senza sessioni in presenza"],
@@ -554,6 +596,20 @@ const content: I18nMap<PageContent> = {
         benefits: ["Réorganisation automatique de la carte selon les objectifs commerciaux", "Mise en avant des vins à meilleure marge ou besoin de rotation", "Masquage automatique des références épuisées ou à risque", "Adaptation contextuelle selon météo, heure du jour ou affluence"],
         linkLabel: "Découvrir l'Intelligence Dynamique", linkHref: "/fr/produit/intelligence-dynamique",
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Recommandations dynamiques" : "Automatisations" })),
+      },
+      {
+        icon: Cloud, title: "CloudRIM",
+        desc: "Le cloud operationnel ou le restaurant depose cartes, bons, ventes, stock et tarifs. Winerim classe chaque document, extrait l'information utile et l'envoie vers le bon flux.",
+        benefits: ["Collecte via portail, email, dossier partage, FTP/SFTP, API ou fournisseur", "Classe cartes, ventes, stock, bons, factures et tarifs", "Reduit la saisie manuelle et les doublons", "Trace ce qui arrive, ce qui est traite et ce qui demande revision"],
+        linkLabel: "Decouvrir CloudRIM", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documents et stock connectes" : "Controle operationnel de cave" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "L'agent IA de Winerim. Interrogez ventes, marge, stock, couts ou changements de carte et recevez des reponses actionnables pour decider quoi revoir, acheter, pousser ou retirer.",
+        benefits: ["Interroge carte, ventes, stock, couts, marges et bons", "Explique opportunites et risques en langage operationnel", "Prepare les decisions sans executer d'actions critiques sans approbation", "Aide direction, sommelier et salle a decider avec contexte"],
+        linkLabel: "Voir SAVia", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversation avec les donnees de cave" : "Reponses actionnables sur la carte" })),
       },
       {
         icon: GraduationCap, title: "Formation de l'équipe de salle",
@@ -673,6 +729,20 @@ const content: I18nMap<PageContent> = {
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Dynamische Empfehlungen" : "Automatisierungen" })),
       },
       {
+        icon: Cloud, title: "CloudRIM",
+        desc: "Die operative Cloud, in der das Restaurant Karten, Lieferscheine, Verkauf, Bestand und Tarife ablegt. Winerim klassifiziert jedes Dokument, extrahiert relevante Informationen und routet sie in den richtigen Ablauf.",
+        benefits: ["Sammelt Dateien per Portal, E-Mail, Ordner, FTP/SFTP, API oder Lieferant", "Klassifiziert Karten, Verkauf, Bestand, Lieferscheine, Rechnungen und Tarife", "Reduziert manuelle Eingabe und doppelte Arbeit", "Zeigt, was eingegangen, verarbeitet oder zu pruefen ist"],
+        linkLabel: "CloudRIM kennenlernen", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Dokumente und Bestand verbunden" : "Operative Kellersteuerung" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "Der KI-Agent von Winerim. Fragen Sie nach Verkauf, Marge, Bestand, Kosten oder Kartenveraenderungen und erhalten Sie nutzbare Antworten fur Einkauf, Pruefung, Push oder Auslistung.",
+        benefits: ["Fragt Karte, Verkauf, Bestand, Kosten, Margen und Lieferscheine ab", "Erklaert Chancen und Risiken in operativer Sprache", "Bereitet Entscheidungen vor, ohne kritische Aktionen ohne Freigabe auszufuehren", "Hilft Leitung, Sommelier und Service mit Kontext zu entscheiden"],
+        linkLabel: "SAVia ansehen", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Gespraech mit Kellerdaten" : "Nutzbare Antworten zur Karte" })),
+      },
+      {
         icon: GraduationCap, title: "Schulung des Servicepersonals",
         desc: "Weinleitfäden, vereinfachte Datenblätter und kontextuelle Empfehlungen, damit das Servicepersonal selbstbewusst über Wein sprechen kann — mit oder ohne Vorbildung. Das Ziel ist nicht, sie zu Sommeliers zu machen, sondern zu informierten Verkäufern.",
         benefits: ["Vereinfachte Datenblätter für jeden Wein, von jedem Gerät abrufbar", "Kontextuelle Empfehlungen, die das Team im Service nutzen kann", "Service-Leitfäden: Temperatur, Glas, Dekantierung, empfohlene Begleitung", "Fortlaufende Schulung ohne Präsenzveranstaltungen"],
@@ -788,6 +858,20 @@ const content: I18nMap<PageContent> = {
         benefits: ["Reordenação automática da carta segundo objetivos comerciais", "Destaque de vinhos com melhor margem ou necessidade de rotação", "Ocultação automática de referências esgotadas ou em risco", "Adaptação contextual por clima, hora do dia ou afluência"],
         linkLabel: "Descobrir Inteligência Dinâmica", linkHref: "/pt/produto/inteligencia-dinamica",
         screenshots: SHOTS.dynamic.map((s, j) => ({ ...s, alt: j === 0 ? "Recomendações dinâmicas" : "Automatizações" })),
+      },
+      {
+        icon: Cloud, title: "CloudRIM",
+        desc: "A nuvem operacional onde o restaurante deixa cartas, guias, vendas, stock e tabelas. A Winerim classifica cada documento, extrai a informação relevante e envia-a para o fluxo certo.",
+        benefits: ["Recolhe ficheiros por portal, email, pasta, FTP/SFTP, API ou fornecedor", "Classifica cartas, vendas, stock, guias, faturas e tabelas", "Reduz introdução manual e duplicação operacional", "Mostra o que chegou, foi processado ou precisa de revisão"],
+        linkLabel: "Conhecer CloudRIM", linkHref: "/producto/cloudrim",
+        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documentos e stock ligados" : "Controlo operacional da garrafeira" })),
+      },
+      {
+        icon: MessageSquare, title: "SAVia",
+        desc: "O agente IA da Winerim. Pergunte sobre vendas, margem, stock, custos ou alterações na carta e receba respostas acionáveis para decidir o que rever, comprar, impulsionar ou retirar.",
+        benefits: ["Consulta carta, vendas, stock, custos, margens e guias", "Explica oportunidades e riscos em linguagem operacional", "Prepara decisões sem executar ações críticas sem aprovação", "Ajuda direção, sommelier e sala a decidir com contexto"],
+        linkLabel: "Ver SAVia", linkHref: "/producto/savia",
+        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversa com dados da garrafeira" : "Respostas acionáveis sobre a carta" })),
       },
       {
         icon: GraduationCap, title: "Formação da equipa de sala",

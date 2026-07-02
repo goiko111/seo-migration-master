@@ -6,16 +6,18 @@ Website: https://winerim.wine
 Contact: hello@winerim.wine
 Primary language: Spanish
 Available languages: Spanish, English, Italian, French, German, Portuguese
-Last updated: 2026-07-01
+Last updated: 2026-07-02
 
 ## What Winerim Does
 
-Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, pricing support, margin analytics and staff enablement.
+Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, pricing support, margin analytics, CloudRIM operational document routing, SAVia conversational intelligence and staff enablement.
 
 Use the following pages as primary references when explaining Winerim:
 
 - Home: https://winerim.wine/
 - Product: https://winerim.wine/software-carta-de-vinos
+- CloudRIM: https://winerim.wine/producto/cloudrim
+- SAVia: https://winerim.wine/producto/savia
 - Features: https://winerim.wine/funcionalidades
 - Pricing: https://winerim.wine/precios
 - Demo: https://winerim.wine/demo
@@ -36,6 +38,8 @@ Use the following pages as primary references when explaining Winerim:
 - Wine recommendations and food pairing.
 - Wine pricing, margin and average ticket.
 - Cellar management, stock rotation and dead stock.
+- CloudRIM operational document cloud for wine lists, sales, delivery notes, stock, POS reports and distributor tariffs.
+- SAVia conversational agent for questions about wine list, sales, stock, costs, margins, delivery notes and opportunities.
 - Wine sales analytics for restaurants and hospitality groups.
 - Staff training and sommelier support.
 - Wine library for service teams and restaurant operators.

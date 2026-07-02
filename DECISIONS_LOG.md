@@ -1,5 +1,44 @@
 # Decisions Log
 
+## 2026-07-02
+
+### CloudRIM y SAVia como capacidades principales
+
+#### Hechos
+
+- Se crearon las paginas `/producto/cloudrim` y `/producto/savia` con versiones localizadas para `es/en/it/fr/de/pt`.
+- CloudRIM queda presentado como nube operativa/documental para recoger cartas, ventas, albaranes, stock, reportes TPV y tarifas de distribuidores por portal, email, carpeta compartida, FTP/SFTP, API o proveedor.
+- SAVia queda presentado como agente conversacional de Winerim para preguntar sobre carta, ventas, stock, costes, margenes, albaranes y oportunidades.
+- Se anadieron CloudRIM/SAVia a home, navbar, footer, `/funcionalidades`, `/integraciones` y `/producto/inteligencia-dinamica`.
+- Se sincronizaron React, `ROUTE_MAP`, sitemap, prerender, Worker, `sitemap-extra`, `llms.txt`, `llms-full.txt` y el test SEO.
+- Validaciones locales pasadas: test SEO enfocado, build, Deno check, Worker syntax check, Worker dry-run, JSON sitemap-extra, `git diff --check` y QA navegador desktop/mobile.
+- El deploy CLI de Supabase sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- No se desplego Worker real porque la publicacion debe coordinarse con frontend y Edge Functions.
+
+#### Decisiones
+
+- Tratar CloudRIM y SAVia como capacidades principales del producto Winerim, no como simples features secundarias.
+- Dar pagina propia a ambas capacidades y usar el copy del handoff como base comercial y semantica.
+- Mantener SAVia bajo el principio de aprobacion humana para acciones criticas: puede consultar, resumir y preparar, pero no ejecutar cambios sensibles sin confirmacion.
+- Coordinar publicacion en este orden:
+  - frontend Lovable;
+  - Edge Functions `sitemap` y `prerender`;
+  - Cloudflare Worker;
+  - revalidacion produccion/Search Console.
+
+#### Hipotesis
+
+- CloudRIM deberia reforzar la propuesta de automatizacion operativa y facilitar explicar integraciones no perfectas.
+- SAVia deberia mejorar comprension comercial porque convierte datos de Winerim en preguntas y respuestas naturales.
+- La nueva superficie SEO/LLM deberia ayudar a posicionar Winerim en busquedas sobre IA operacional para carta, stock, albaranes y margenes.
+
+#### Tareas pendientes
+
+- Publicar desde Lovable y desplegar Edge Functions SEO.
+- Desplegar Worker despues de Lovable/Supabase.
+- Revalidar las nuevas rutas y reenviar sitemap en Search Console.
+- No incluir ni tocar el cambio ajeno en `src/components/WineListAnalyzerTool.tsx`.
+
 ## 2026-07-01
 
 ### Revalidacion productiva de landing Meta Demo

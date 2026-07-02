@@ -6,6 +6,7 @@ import type { SupportedLang } from "@/i18n/types";
 const LogoStrip = lazy(() => import("@/components/LogoStrip"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const SolutionSection = lazy(() => import("@/components/landing/SolutionSection"));
+const CloudRimSaviaSection = lazy(() => import("@/components/landing/CloudRimSaviaSection"));
 const ConnectedCellarSection = lazy(() => import("@/components/landing/ConnectedCellarSection"));
 const WhoItHelpsSection = lazy(() => import("@/components/landing/WhoItHelpsSection"));
 const BusinessProfilesSection = lazy(() => import("@/components/landing/BusinessProfilesSection"));
@@ -35,6 +36,7 @@ const HomeBelowFold = ({ lang }: { lang: SupportedLang }) => (
     <Suspense fallback={<SectionFallback />}>
       <ProblemSection />
       <SolutionSection />
+      <CloudRimSaviaSection />
     </Suspense>
 
     {/* 5. How it works - reduce friction early */}

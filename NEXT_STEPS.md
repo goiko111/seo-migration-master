@@ -1,5 +1,88 @@
 # Next Steps
 
+## Actualizacion 2026-07-02: retomar tras implementar CloudRIM/SAVia
+
+## Hechos
+
+- CloudRIM/SAVia estan implementados localmente y validados.
+- Rutas nuevas:
+  - `/producto/cloudrim`;
+  - `/producto/savia`;
+  - `/en/product/cloudrim`;
+  - `/en/product/savia`;
+  - `/it/prodotto/cloudrim`;
+  - `/it/prodotto/savia`;
+  - `/fr/produit/cloudrim`;
+  - `/fr/produit/savia`;
+  - `/de/produkt/cloudrim`;
+  - `/de/produkt/savia`;
+  - `/pt/produto/cloudrim`;
+  - `/pt/produto/savia`.
+- Superficies actualizadas:
+  - home despues de `La solucion: 5 herramientas en una`;
+  - navbar/footer;
+  - `/funcionalidades`;
+  - `/integraciones`;
+  - `/producto/inteligencia-dinamica`;
+  - `sitemap`;
+  - `prerender`;
+  - Worker;
+  - `sitemap-extra`;
+  - `llms.txt`;
+  - `llms-full.txt`;
+  - test SEO.
+- Validaciones locales OK:
+  - test SEO enfocado;
+  - build;
+  - Deno check;
+  - Worker syntax check;
+  - Worker dry-run;
+  - JSON sitemap-extra;
+  - `git diff --check`;
+  - QA navegador desktop/mobile en 8 rutas clave.
+- Supabase CLI no puede desplegar sin `SUPABASE_ACCESS_TOKEN`.
+- Cambio ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Pushear el commit si no esta ya en `origin/main`.
+2. En Lovable, publicar frontend del ultimo commit.
+3. En Lovable/Supabase, desplegar Edge Functions:
+   - `sitemap`;
+   - `prerender`.
+4. Desplegar Cloudflare Worker `winerim-proxy` despues de que frontend y Edge Functions esten publicados.
+5. Revalidar produccion como usuario:
+   - `/producto/cloudrim`;
+   - `/producto/savia`;
+   - `/en/product/cloudrim`;
+   - `/pt/produto/savia`;
+   - home;
+   - `/funcionalidades`;
+   - `/integraciones`;
+   - `/producto/inteligencia-dinamica`.
+6. Revalidar como Googlebot:
+   - CloudRIM ES/EN/IT/FR/DE/PT;
+   - SAVia ES/EN/IT/FR/DE/PT;
+   - canonicals;
+   - hreflang;
+   - `x-prerendered`;
+   - contenido real sin `Not found`.
+7. Confirmar `/sitemap.xml` contiene las 12 URLs nuevas y reenviarlo en Search Console.
+8. Revisar `llms.txt` y `llms-full.txt` productivos.
+
+## Pendientes SEO previos que siguen vivos
+
+- Search Console cuando haya cuota:
+  - `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta`;
+  - `https://winerim.wine/article/uvas-que-conocer-para-empezar`;
+  - `https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante`;
+  - `https://winerim.wine/it/calcolatrice-margini-vino`.
+- Revisar si Search Console actualiza `/sitemap.xml` hacia `2282` URLs o el nuevo total tras CloudRIM/SAVia.
+- Mantener pendiente separado:
+  - optimizar banner de cookies en landings de pago si se decide;
+  - confirmar visualmente leads QA anteriores en CRM;
+  - no tocar chat hasta nueva orden.
+
 ## Actualizacion 2026-07-01: retomar tras revalidar landing Meta Demo en produccion
 
 ## Hechos

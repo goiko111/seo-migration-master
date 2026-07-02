@@ -100,6 +100,8 @@ const Funcionalidades = lazy(() => import("./pages/Funcionalidades"));
 const InteligenciaDinamica = lazy(() => import("./pages/InteligenciaDinamica"));
 const WinerimCore = lazy(() => import("./pages/WinerimCore"));
 const WinerimSupply = lazy(() => import("./pages/WinerimSupply"));
+const CloudRim = lazy(() => import("./pages/CloudRim"));
+const SAVia = lazy(() => import("./pages/SAVia"));
 const BenchmarksPlaybooks = lazy(() => import("./pages/BenchmarksPlaybooks"));
 const Empleo = lazy(() => import("./pages/Empleo"));
 const Distribuidor = lazy(() => import("./pages/Distribuidor"));
@@ -301,6 +303,8 @@ const esRoutes = (
     <Route path="/producto/inteligencia-dinamica" element={<InteligenciaDinamica />} />
     <Route path="/producto/winerim-core" element={<WinerimCore />} />
     <Route path="/producto/winerim-supply" element={<WinerimSupply />} />
+    <Route path="/producto/cloudrim" element={<CloudRim />} />
+    <Route path="/producto/savia" element={<SAVia />} />
     <Route path="/benchmarks-playbooks" element={<BenchmarksPlaybooks />} />
     <Route path="/benchmarks-playbooks/:slug" element={<BenchmarkPlaybookDetail />} />
     <Route path="/comparativas" element={<Comparativas />} />
@@ -367,6 +371,12 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/product/winerim-supply`} element={<WinerimSupply />} />
     <Route path={`${prefix}/prodotto/winerim-supply`} element={<WinerimSupply />} />
     <Route path={`${prefix}/produit/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/product/cloudrim`} element={<CloudRim />} />
+    <Route path={`${prefix}/prodotto/cloudrim`} element={<CloudRim />} />
+    <Route path={`${prefix}/produit/cloudrim`} element={<CloudRim />} />
+    <Route path={`${prefix}/product/savia`} element={<SAVia />} />
+    <Route path={`${prefix}/prodotto/savia`} element={<SAVia />} />
+    <Route path={`${prefix}/produit/savia`} element={<SAVia />} />
     <Route path={`${prefix}/privacy`} element={<Privacidad />} />
     <Route path={`${prefix}/confidentialite`} element={<Privacidad />} />
     <Route path={`${prefix}/terms`} element={<Terminos />} />
@@ -652,6 +662,8 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/produkt/dynamische-intelligenz`} element={<InteligenciaDinamica />} />
     <Route path={`${prefix}/produkt/winerim-core`} element={<WinerimCore />} />
     <Route path={`${prefix}/produkt/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/produkt/cloudrim`} element={<CloudRim />} />
+    <Route path={`${prefix}/produkt/savia`} element={<SAVia />} />
     <Route path={`${prefix}/datenschutz`} element={<Privacidad />} />
     <Route path={`${prefix}/agb`} element={<Terminos />} />
     <Route path={`${prefix}/loesungen/restaurant-gruppen`} element={<GruposRestauracion />} />
@@ -716,6 +728,8 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/produto/inteligencia-dinamica`} element={<InteligenciaDinamica />} />
     <Route path={`${prefix}/produto/winerim-core`} element={<WinerimCore />} />
     <Route path={`${prefix}/produto/winerim-supply`} element={<WinerimSupply />} />
+    <Route path={`${prefix}/produto/cloudrim`} element={<CloudRim />} />
+    <Route path={`${prefix}/produto/savia`} element={<SAVia />} />
     <Route path={`${prefix}/privacidade`} element={<Privacidad />} />
     <Route path={`${prefix}/termos`} element={<Terminos />} />
     <Route path={`${prefix}/solucoes/grupos-restauracao`} element={<GruposRestauracion />} />
