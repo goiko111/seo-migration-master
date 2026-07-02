@@ -39,12 +39,6 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vino por copa", desc: "Evalúa si tu oferta por copa está equilibrada en estilos, precios y rentabilidad. Con Winerim, esto se monitoriza en tiempo real.", tag: "Diagnóstico" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100. Estructura, equilibrio, pricing, copa, rotación y potencial comercial en un solo diagnóstico.", tag: "Auditoría" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock muerto", desc: "Estima el capital inmovilizado en vinos sin rotación. Winerim lo detecta automáticamente y te alerta antes de que se acumule.", tag: "Gestión" },
-      { to: "/recursos/auditoria-pareto-80-20-carta-vinos", title: "Auditoría Pareto 80/20", desc: "Descubre qué vinos sostienen la facturación, cuáles ocupan espacio y qué referencias conviene impulsar, revisar o retirar.", tag: "Auditoría" },
-      { to: "/recursos/diagnostico-fuga-margen-carta-vinos", title: "Diagnóstico de fuga de margen", desc: "Localiza pérdidas por coste desactualizado, PVP mal ajustado, copa mal calculada, reposición por inercia y compras sin datos.", tag: "Pricing" },
-      { to: "/recursos/perfil-rim-restaurante", title: "Perfil RIM del restaurante", desc: "Identifica si tu carta es gourmet, estratégica, turística, pasiva o de supervivencia y qué decisiones debería priorizar.", tag: "Diagnóstico" },
-      { to: "/recursos/calculadora-valor-pos-vino", title: "Calculadora de valor POS", desc: "Estima cuánto valor pierdes cuando las ventas del TPV no se conectan con carta, stock, margen y compras.", tag: "ROI" },
-      { to: "/recursos/auditoria-distribuidores-catalogo", title: "Auditoría de distribuidores", desc: "Evalúa catálogo, tarifas, albaranes, precios de compra, servicio y encaje real de cada proveedor con tu carta.", tag: "Supply" },
-      { to: "/recursos/autoevaluacion-premios-winerim", title: "Autoevaluación Premios Winerim", desc: "Puntúa tu carta con criterios de rentabilidad, rotación, equilibrio, identidad, experiencia, stock y calidad digital.", tag: "Benchmark" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto en ticket medio", desc: "Estima cuánto más facturarías en vino mejorando el ratio de mesas, el ticket por mesa y la estrategia de copa.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compara la carta de vinos de tus locales: surtido, pricing, copa y ticket medio. Detecta inconsistencias y oportunidades.", tag: "Grupos" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analiza si una referencia merece seguir comprándose: rentabilidad, sobreprecio, stock inmovilizado y oportunidad de mejora. Demo de Winerim Supply.", tag: "Supply" },
@@ -213,7 +207,7 @@ const content: Record<string, {
   },
 };
 
-const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw, BarChart3, DollarSign, ClipboardList, TrendingUp, ShoppingCart, Wine, RotateCcw, RotateCcw, ShoppingCart];
+const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw, RotateCcw, RotateCcw, ShoppingCart];
 
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
