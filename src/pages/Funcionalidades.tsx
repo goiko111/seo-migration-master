@@ -30,10 +30,16 @@ import mgmtRecomendados from "@/assets/mgmt-recomendados.webp";
 import mgmtAutomatizaciones from "@/assets/mgmt-automatizaciones.webp";
 import mgmtRotacion from "@/assets/mgmt-rotacion.webp";
 import mgmtObsolescencia from "@/assets/mgmt-obsolescencia.webp";
-import mgmtPedidos from "@/assets/mgmt-pedidos.webp";
-import dashboardInsightsImg from "@/assets/winerim-dashboard-insights.webp";
 import wineCellarMapImg from "@/assets/wine-cellar-map-grupo-jorge.jpg";
 import wineLockersSummaryImg from "@/assets/wine-lockers-summary-premium-grille.jpg";
+import featureWineCellarMapsListImg from "@/assets/feature-wine-cellar-maps-list.jpg";
+import featureWineLockerClientWinesImg from "@/assets/feature-wine-locker-client-wines.jpg";
+import featureCloudRimInboxImg from "@/assets/feature-cloudrim-inbox.jpg";
+import featureCloudRimUploadImg from "@/assets/feature-cloudrim-upload.jpg";
+import featureSaviaConversationImg from "@/assets/feature-savia-conversation.jpg";
+import featureSaviaStockAnswerImg from "@/assets/feature-savia-stock-answer.jpg";
+import featureTrainingTastingNotesImg from "@/assets/feature-training-tasting-notes.jpg";
+import featureTrainingPairingGuideImg from "@/assets/feature-training-pairing-guide.jpg";
 import ss08 from "@/assets/screenshots/ss-08.webp";
 import ss10 from "@/assets/screenshots/ss-10.webp";
 import ss14 from "@/assets/screenshots/ss-14.webp";
@@ -109,11 +115,19 @@ const SHOTS = {
   ],
   cellarMap: [
     { img: wineCellarMapImg, label: "Wine Cellar" },
-    { img: mgmtStock, label: "Stock" },
+    { img: featureWineCellarMapsListImg, label: "Mapas" },
   ],
   lockers: [
     { img: wineLockersSummaryImg, label: "Wine Lockers" },
-    { img: mgmtPedidos, label: "Pedidos" },
+    { img: featureWineLockerClientWinesImg, label: "Cliente" },
+  ],
+  cloudRim: [
+    { img: featureCloudRimInboxImg, label: "Bandeja" },
+    { img: featureCloudRimUploadImg, label: "Subida" },
+  ],
+  savia: [
+    { img: featureSaviaConversationImg, label: "SAVia" },
+    { img: featureSaviaStockAnswerImg, label: "Respuesta" },
   ],
   pricing: [
     { img: mgmtRendimiento, label: "Rendimiento" },
@@ -132,8 +146,8 @@ const SHOTS = {
     { img: mgmtAutomatizaciones, label: "Automatización" },
   ],
   training: [
-    { img: mgmtInsights, label: "Insights" },
-    { img: dashboardInsightsImg, label: "Dashboard" },
+    { img: featureTrainingTastingNotesImg, label: "Ficha" },
+    { img: featureTrainingPairingGuideImg, label: "Maridaje" },
   ],
 };
 
@@ -200,7 +214,7 @@ const content: I18nMap<PageContent> = {
         desc: "Gestión de lockers privados para clientes, socios o clubes de vino. Controla qué vinos tiene cada cliente, cuántas botellas quedan, qué se ha pedido y el historial de consumo.",
         benefits: ["Ficha privada por cliente o socio", "Control de vinos guardados, botellas disponibles y pedidos", "Historial de consumo y solicitudes de reposición", "Experiencia premium para clubes, hoteles, parrillas y restaurantes con membresía"],
         linkLabel: "Solicitar demo", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumen de Wine Lockers" : "Pedidos vinculados a locker de vino" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumen de Wine Lockers" : "Area de Wine Lockers y resumen privado" })),
       },
       {
         icon: TrendingUp, title: "Pricing y análisis de márgenes",
@@ -235,21 +249,21 @@ const content: I18nMap<PageContent> = {
         desc: "La nube operativa donde el restaurante deja cartas, albaranes, ventas, stock y tarifas. Winerim clasifica cada documento, extrae la información relevante y la envía al flujo correcto.",
         benefits: ["Recibe documentos por portal, email, carpeta compartida, FTP/SFTP, API o proveedor", "Clasifica cartas, ventas, stock, albaranes, facturas y tarifas", "Reduce introducción manual y duplicidad operativa", "Deja trazabilidad sobre lo recibido, procesado y pendiente de revisión"],
         linkLabel: "Conocer CloudRIM", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documentos y stock conectados" : "Control operativo de bodega" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "Bandeja CloudRIM de documentos" : "Subida de documentos CloudRIM" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "El agente IA de Winerim. Pregunta por ventas, margen, stock, costes o cambios de carta y recibe respuestas accionables para decidir qué revisar, comprar, impulsar o descatalogar.",
         benefits: ["Consulta carta, ventas, stock, costes, márgenes y albaranes", "Explica oportunidades y riesgos en lenguaje operativo", "Prepara decisiones sin ejecutar acciones críticas sin aprobación", "Ayuda a dirección, sumiller y sala a decidir con contexto"],
         linkLabel: "Ver SAVia", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversación con datos de bodega" : "Respuestas accionables sobre la carta" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "Panel conversacional de SAVia" : "Respuesta de SAVia sobre stock" })),
       },
       {
         icon: GraduationCap, title: "Formación del equipo de sala",
         desc: "Guías de vino, fichas simplificadas y recomendaciones contextuales para que el equipo de sala pueda hablar de vino con confianza, tenga o no formación previa. El objetivo no es convertirlos en sumilleres, sino en vendedores informados.",
         benefits: ["Fichas simplificadas de cada vino accesibles desde cualquier dispositivo", "Recomendaciones contextuales que el equipo puede usar en sala", "Guías de servicio: temperatura, copa, decantación, maridaje sugerido", "Formación continua sin necesidad de sesiones presenciales"],
         linkLabel: "Guía para restaurantes sin sumiller", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Insights para el equipo" : "Dashboard de insights" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Ficha de cata para el equipo" : "Guia de maridaje para sala" })),
       },
     ],
     comparisonRows: [
@@ -347,7 +361,7 @@ const content: I18nMap<PageContent> = {
         desc: "Private locker management for clients, members or wine clubs. Track which wines each client stores, how many bottles remain, what has been requested and the consumption history.",
         benefits: ["Private profile per client or member", "Control stored wines, available bottles and requests", "Consumption history and replenishment requests", "Premium experience for clubs, hotels, grills and membership restaurants"],
         linkLabel: "Request demo", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers summary" : "Orders linked to a wine locker" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers summary" : "Wine Lockers area and private summary" })),
       },
       {
         icon: TrendingUp, title: "Pricing & margin analysis",
@@ -382,21 +396,21 @@ const content: I18nMap<PageContent> = {
         desc: "The operating cloud where the restaurant drops wine lists, delivery notes, sales, stock and distributor tariffs. Winerim classifies each document, extracts the relevant information and routes it to the right workflow.",
         benefits: ["Collects files via portal, email, shared folder, FTP/SFTP, API or provider", "Classifies lists, sales, stock, delivery notes, invoices and tariffs", "Reduces manual entry and duplicated work", "Tracks what arrived, what was processed and what needs review"],
         linkLabel: "Meet CloudRIM", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documents and stock connected" : "Cellar operating control" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "CloudRIM document inbox" : "CloudRIM document upload" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "Winerim's AI agent. Ask about sales, margin, stock, costs or wine list changes and get actionable answers to decide what to review, buy, push or delist.",
         benefits: ["Queries wine list, sales, stock, costs, margins and delivery notes", "Explains opportunities and risks in operating language", "Prepares decisions without executing critical actions without approval", "Helps owners, sommeliers and floor teams decide with context"],
         linkLabel: "See SAVia", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Cellar data conversation" : "Actionable wine list answers" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "SAVia conversational panel" : "SAVia stock answer" })),
       },
       {
         icon: GraduationCap, title: "Floor staff training",
         desc: "Wine guides, simplified sheets and contextual recommendations so floor staff can talk about wine with confidence, with or without prior training. The goal isn't to turn them into sommeliers, but into informed sellers.",
         benefits: ["Simplified sheets for every wine accessible from any device", "Contextual recommendations the team can use on the floor", "Service guides: temperature, glass, decanting, suggested pairing", "Continuous training without in-person sessions"],
         linkLabel: "Guide for restaurants without a sommelier", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Team insights" : "Insights dashboard" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Tasting sheet for the team" : "Pairing guide for service" })),
       },
     ],
     comparisonRows: [
@@ -494,7 +508,7 @@ const content: I18nMap<PageContent> = {
         desc: "Gestione di locker privati per clienti, soci o wine club. Controlla quali vini conserva ogni cliente, quante bottiglie restano, cosa e stato richiesto e lo storico dei consumi.",
         benefits: ["Scheda privata per cliente o socio", "Controllo di vini custoditi, bottiglie disponibili e richieste", "Storico consumi e richieste di riordino", "Esperienza premium per club, hotel, grill e ristoranti con membership"],
         linkLabel: "Richiedere demo", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Riepilogo Wine Lockers" : "Ordini collegati a un wine locker" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Riepilogo Wine Lockers" : "Area Wine Lockers e riepilogo privato" })),
       },
       {
         icon: TrendingUp, title: "Pricing e analisi dei margini",
@@ -529,21 +543,21 @@ const content: I18nMap<PageContent> = {
         desc: "La nube operativa dove il ristorante lascia carta, documenti, vendite, stock e tariffe. Winerim classifica ogni documento, estrae l'informazione rilevante e la invia al flusso corretto.",
         benefits: ["Raccoglie file via portale, email, cartella, FTP/SFTP, API o fornitore", "Classifica carta, vendite, stock, documenti, fatture e tariffe", "Riduce inserimenti manuali e duplicazioni operative", "Traccia cio che arriva, viene processato o richiede revisione"],
         linkLabel: "Conoscere CloudRIM", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documenti e stock collegati" : "Controllo operativo della cantina" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "Bacheca documenti CloudRIM" : "Caricamento documenti CloudRIM" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "L'agente IA di Winerim. Fai domande su vendite, margine, stock, costi o cambi di carta e ricevi risposte operative per decidere cosa rivedere, comprare, spingere o togliere.",
         benefits: ["Interroga carta, vendite, stock, costi, margini e documenti", "Spiega opportunita e rischi in linguaggio operativo", "Prepara decisioni senza eseguire azioni critiche senza approvazione", "Aiuta direzione, sommelier e sala a decidere con contesto"],
         linkLabel: "Vedere SAVia", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversazione sui dati di cantina" : "Risposte operative sulla carta" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "Pannello conversazionale SAVia" : "Risposta SAVia sullo stock" })),
       },
       {
         icon: GraduationCap, title: "Formazione del personale di sala",
         desc: "Guide al vino, schede semplificate e raccomandazioni contestuali affinché il personale di sala possa parlare di vino con sicurezza, con o senza formazione precedente. L'obiettivo non è trasformarli in sommelier, ma in venditori informati.",
         benefits: ["Schede semplificate di ogni vino accessibili da qualsiasi dispositivo", "Raccomandazioni contestuali che il team può usare in sala", "Guide di servizio: temperatura, calice, decantazione, abbinamento suggerito", "Formazione continua senza sessioni in presenza"],
         linkLabel: "Guida per ristoranti senza sommelier", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Insights per il team" : "Dashboard insights" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Scheda di degustazione per il team" : "Guida agli abbinamenti per la sala" })),
       },
     ],
     comparisonRows: [
@@ -641,7 +655,7 @@ const content: I18nMap<PageContent> = {
         desc: "Gestion de casiers prives pour clients, membres ou clubs de vin. Suivez les vins gardes par chaque client, les bouteilles restantes, les demandes et l'historique de consommation.",
         benefits: ["Fiche privee par client ou membre", "Controle des vins gardes, bouteilles disponibles et demandes", "Historique de consommation et demandes de reassort", "Experience premium pour clubs, hotels, grills et restaurants avec membres"],
         linkLabel: "Demander une demo", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resume Wine Lockers" : "Commandes liees a un wine locker" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resume Wine Lockers" : "Espace Wine Lockers et resume prive" })),
       },
       {
         icon: TrendingUp, title: "Pricing et analyse des marges",
@@ -676,21 +690,21 @@ const content: I18nMap<PageContent> = {
         desc: "Le cloud operationnel ou le restaurant depose cartes, bons, ventes, stock et tarifs. Winerim classe chaque document, extrait l'information utile et l'envoie vers le bon flux.",
         benefits: ["Collecte via portail, email, dossier partage, FTP/SFTP, API ou fournisseur", "Classe cartes, ventes, stock, bons, factures et tarifs", "Reduit la saisie manuelle et les doublons", "Trace ce qui arrive, ce qui est traite et ce qui demande revision"],
         linkLabel: "Decouvrir CloudRIM", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documents et stock connectes" : "Controle operationnel de cave" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "Boite de documents CloudRIM" : "Depot de documents CloudRIM" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "L'agent IA de Winerim. Interrogez ventes, marge, stock, couts ou changements de carte et recevez des reponses actionnables pour decider quoi revoir, acheter, pousser ou retirer.",
         benefits: ["Interroge carte, ventes, stock, couts, marges et bons", "Explique opportunites et risques en langage operationnel", "Prepare les decisions sans executer d'actions critiques sans approbation", "Aide direction, sommelier et salle a decider avec contexte"],
         linkLabel: "Voir SAVia", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversation avec les donnees de cave" : "Reponses actionnables sur la carte" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "Panneau conversationnel SAVia" : "Reponse SAVia sur le stock" })),
       },
       {
         icon: GraduationCap, title: "Formation de l'équipe de salle",
         desc: "Guides du vin, fiches simplifiées et recommandations contextuelles pour que l'équipe de salle puisse parler du vin avec assurance, avec ou sans formation préalable. L'objectif n'est pas d'en faire des sommeliers, mais des vendeurs informés.",
         benefits: ["Fiches simplifiées de chaque vin accessibles depuis n'importe quel appareil", "Recommandations contextuelles utilisables en salle", "Guides de service : température, verre, décantation, accord suggéré", "Formation continue sans sessions en présentiel"],
         linkLabel: "Guide pour restaurants sans sommelier", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Insights pour l'équipe" : "Dashboard insights" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Fiche de degustation pour l'equipe" : "Guide d'accords pour la salle" })),
       },
     ],
     comparisonRows: [
@@ -788,7 +802,7 @@ const content: I18nMap<PageContent> = {
         desc: "Private Locker-Verwaltung fur Kunden, Mitglieder oder Weinclubs. Verfolgen Sie, welche Weine jeder Kunde lagert, wie viele Flaschen verfugbar sind, was angefragt wurde und die Konsumhistorie.",
         benefits: ["Privates Profil pro Kunde oder Mitglied", "Kontrolle gelagerter Weine, verfugbarer Flaschen und Anfragen", "Konsumhistorie und Nachschubanfragen", "Premium-Erlebnis fur Clubs, Hotels, Grills und Mitgliedschaftsrestaurants"],
         linkLabel: "Demo anfragen", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers Ubersicht" : "Bestellungen verbunden mit einem Wine Locker" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers Ubersicht" : "Wine Lockers Bereich und private Ubersicht" })),
       },
       {
         icon: TrendingUp, title: "Pricing & Margenanalyse",
@@ -823,21 +837,21 @@ const content: I18nMap<PageContent> = {
         desc: "Die operative Cloud, in der das Restaurant Karten, Lieferscheine, Verkauf, Bestand und Tarife ablegt. Winerim klassifiziert jedes Dokument, extrahiert relevante Informationen und routet sie in den richtigen Ablauf.",
         benefits: ["Sammelt Dateien per Portal, E-Mail, Ordner, FTP/SFTP, API oder Lieferant", "Klassifiziert Karten, Verkauf, Bestand, Lieferscheine, Rechnungen und Tarife", "Reduziert manuelle Eingabe und doppelte Arbeit", "Zeigt, was eingegangen, verarbeitet oder zu pruefen ist"],
         linkLabel: "CloudRIM kennenlernen", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Dokumente und Bestand verbunden" : "Operative Kellersteuerung" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "CloudRIM Dokumenten-Eingang" : "CloudRIM Dokumenten-Upload" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "Der KI-Agent von Winerim. Fragen Sie nach Verkauf, Marge, Bestand, Kosten oder Kartenveraenderungen und erhalten Sie nutzbare Antworten fur Einkauf, Pruefung, Push oder Auslistung.",
         benefits: ["Fragt Karte, Verkauf, Bestand, Kosten, Margen und Lieferscheine ab", "Erklaert Chancen und Risiken in operativer Sprache", "Bereitet Entscheidungen vor, ohne kritische Aktionen ohne Freigabe auszufuehren", "Hilft Leitung, Sommelier und Service mit Kontext zu entscheiden"],
         linkLabel: "SAVia ansehen", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Gespraech mit Kellerdaten" : "Nutzbare Antworten zur Karte" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "SAVia Konversationspanel" : "SAVia Bestandsantwort" })),
       },
       {
         icon: GraduationCap, title: "Schulung des Servicepersonals",
         desc: "Weinleitfäden, vereinfachte Datenblätter und kontextuelle Empfehlungen, damit das Servicepersonal selbstbewusst über Wein sprechen kann — mit oder ohne Vorbildung. Das Ziel ist nicht, sie zu Sommeliers zu machen, sondern zu informierten Verkäufern.",
         benefits: ["Vereinfachte Datenblätter für jeden Wein, von jedem Gerät abrufbar", "Kontextuelle Empfehlungen, die das Team im Service nutzen kann", "Service-Leitfäden: Temperatur, Glas, Dekantierung, empfohlene Begleitung", "Fortlaufende Schulung ohne Präsenzveranstaltungen"],
         linkLabel: "Leitfaden für Restaurants ohne Sommelier", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Insights für das Team" : "Insights-Dashboard" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Verkostungsblatt fuer das Team" : "Speisebegleitungsleitfaden fuer den Service" })),
       },
     ],
     comparisonRows: [
@@ -935,7 +949,7 @@ const content: I18nMap<PageContent> = {
         desc: "Gestão de lockers privados para clientes, sócios ou clubes de vinho. Controle que vinhos cada cliente guarda, quantas garrafas restam, o que foi pedido e o histórico de consumo.",
         benefits: ["Ficha privada por cliente ou sócio", "Controlo de vinhos guardados, garrafas disponíveis e pedidos", "Histórico de consumo e pedidos de reposição", "Experiência premium para clubes, hotéis, grills e restaurantes com membros"],
         linkLabel: "Pedir demo", linkHref: "/demo",
-        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumo Wine Lockers" : "Pedidos ligados a um wine locker" })),
+        screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumo Wine Lockers" : "Area Wine Lockers e resumo privado" })),
       },
       {
         icon: TrendingUp, title: "Pricing e análise de margens",
@@ -970,21 +984,21 @@ const content: I18nMap<PageContent> = {
         desc: "A nuvem operacional onde o restaurante deixa cartas, guias, vendas, stock e tabelas. A Winerim classifica cada documento, extrai a informação relevante e envia-a para o fluxo certo.",
         benefits: ["Recolhe ficheiros por portal, email, pasta, FTP/SFTP, API ou fornecedor", "Classifica cartas, vendas, stock, guias, faturas e tabelas", "Reduz introdução manual e duplicação operacional", "Mostra o que chegou, foi processado ou precisa de revisão"],
         linkLabel: "Conhecer CloudRIM", linkHref: "/producto/cloudrim",
-        screenshots: SHOTS.stock.map((s, j) => ({ ...s, alt: j === 0 ? "Documentos e stock ligados" : "Controlo operacional da garrafeira" })),
+        screenshots: SHOTS.cloudRim.map((s, j) => ({ ...s, alt: j === 0 ? "Caixa de documentos CloudRIM" : "Upload de documentos CloudRIM" })),
       },
       {
         icon: MessageSquare, title: "SAVia",
         desc: "O agente IA da Winerim. Pergunte sobre vendas, margem, stock, custos ou alterações na carta e receba respostas acionáveis para decidir o que rever, comprar, impulsionar ou retirar.",
         benefits: ["Consulta carta, vendas, stock, custos, margens e guias", "Explica oportunidades e riscos em linguagem operacional", "Prepara decisões sem executar ações críticas sem aprovação", "Ajuda direção, sommelier e sala a decidir com contexto"],
         linkLabel: "Ver SAVia", linkHref: "/producto/savia",
-        screenshots: SHOTS.analytics.map((s, j) => ({ ...s, alt: j === 0 ? "Conversa com dados da garrafeira" : "Respostas acionáveis sobre a carta" })),
+        screenshots: SHOTS.savia.map((s, j) => ({ ...s, alt: j === 0 ? "Painel conversacional SAVia" : "Resposta SAVia sobre stock" })),
       },
       {
         icon: GraduationCap, title: "Formação da equipa de sala",
         desc: "Guias de vinho, fichas simplificadas e recomendações contextuais para que a equipa de sala possa falar de vinho com confiança, com ou sem formação prévia. O objetivo não é transformá-los em escanções, mas em vendedores informados.",
         benefits: ["Fichas simplificadas de cada vinho acessíveis a partir de qualquer dispositivo", "Recomendações contextuais que a equipa pode usar em sala", "Guias de serviço: temperatura, copo, decantação, harmonização sugerida", "Formação contínua sem necessidade de sessões presenciais"],
         linkLabel: "Guia para restaurantes sem escanção", linkHref: "/guias/como-usar-winerim-sin-sumiller",
-        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Insights para a equipa" : "Dashboard de insights" })),
+        screenshots: SHOTS.training.map((s, j) => ({ ...s, alt: j === 0 ? "Ficha de prova para a equipa" : "Guia de harmonizacao para sala" })),
       },
     ],
     comparisonRows: [
