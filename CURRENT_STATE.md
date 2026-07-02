@@ -4,6 +4,12 @@
 
 ## Hechos
 
+- Tras el publish hecho por el usuario, `https://winerim.wine/sitemap.xml` ya sirve la version completa en produccion con deployment `1f496f52-39b9-4f32-a925-db02f74b0596`.
+- La URL limpia de produccion devuelve `2.294` URLs, incluye CloudRIM/SAVia, biblioteca y articulos, y el fallback parcial de `403` ya no esta activo.
+- Se reenvio `/sitemap.xml` en Search Console el 2026-07-02 y Google confirmo `Se ha enviado el sitemap correctamente`; la tabla todavia puede mostrar `403` hasta que procese la nueva lectura.
+- La Edge Function productiva `prerender`, probada directamente como Googlebot, sigue antigua para CloudRIM/SAVia: devuelve contenido generico/home, canonical `https://winerim.wine`, sin CloudRIM/SAVia.
+- Googlebot en el apex `winerim.wine` sigue recibiendo la home para CloudRIM/SAVia, sin `x-prerendered` ni `x-worker-branch`.
+- No se debe pedir indexacion manual de CloudRIM/SAVia hasta corregir el prerender/canonical para bots.
 - Tras el publish de Lovable, `https://winerim.wine/sitemap.xml` ya responde `200` en produccion, pero la version publicada inicialmente era el fallback parcial de `403` URLs.
 - Search Console acepto el reenvio de `/sitemap.xml` el 2026-07-02 y paso a mostrar `403` paginas descubiertas para ese sitemap, frente a las `2.282` URLs que mostraba la lectura anterior.
 - `https://winerim.wine/llms.txt` responde `200`, contiene CloudRIM/SAVia y muestra el despliegue productivo `x-deployment-id: 46a9e914-a3a2-4326-9f72-1b6b8ec36d5b`.
@@ -37,6 +43,8 @@
 - Usar temporalmente un sitemap estatico completo de `2.294` URLs mientras el deploy CLI de Supabase siga bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
 - Anadir solo CloudRIM/SAVia al sitemap completo de la Edge Function, y no las otras `204` URLs extra del fallback parcial, porque algunas son legales, privadas o paginas historicamente excluidas hasta tener prerender/canonical propio.
 - Reenviar `/sitemap.xml` en Search Console de nuevo solo despues de publicar y revalidar que produccion sirve `2.294` URLs.
+- Priorizar ahora el deploy de la Edge Function `prerender`; el sitemap ya esta resuelto temporalmente con el estatico completo.
+- No solicitar indexacion de CloudRIM/SAVia mientras Googlebot reciba canonical raiz.
 
 ## Hipotesis
 
@@ -60,6 +68,7 @@
   - debe incluir CloudRIM/SAVia, biblioteca y articulos.
 - Reenviar `/sitemap.xml` en Search Console tras esa revalidacion para reemplazar la lectura parcial de `403`.
 - Resolver el prerender del apex para que Googlebot reciba CloudRIM/SAVia con canonical propio.
+- Desplegar `supabase/functions/prerender/index.ts` desde Lovable/Supabase o recuperar `SUPABASE_ACCESS_TOKEN` para hacerlo por CLI.
 
 ## Actualizacion 2026-07-02: puente Worker desplegado y bloqueo de apex detectado
 

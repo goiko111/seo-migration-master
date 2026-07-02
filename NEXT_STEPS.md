@@ -4,6 +4,11 @@
 
 ## Hechos
 
+- El usuario publico Lovable y produccion cambio a deployment `1f496f52-39b9-4f32-a925-db02f74b0596`.
+- `https://winerim.wine/sitemap.xml` ya devuelve `2.294` URLs en limpio, sin cache-buster, incluyendo CloudRIM/SAVia, biblioteca y articulos.
+- Se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`; la tabla puede tardar en sustituir el valor anterior de `403`.
+- La Edge Function productiva `prerender` sigue antigua para CloudRIM/SAVia y devuelve home/canonical raiz cuando se prueba como Googlebot.
+- Googlebot en `winerim.wine` sigue recibiendo home/canonical raiz en CloudRIM/SAVia; por tanto no conviene solicitar indexacion manual todavia.
 - Produccion ya sirve `https://winerim.wine/sitemap.xml` con `HTTP 200`.
 - El primer publish sirvio un fallback parcial de `403` URLs y Search Console lo acepto el 2026-07-02, mostrando `403` paginas descubiertas.
 - Se preparo localmente un sitemap estatico completo de `2.294` URLs:
@@ -20,19 +25,19 @@
 
 ## Tareas pendientes inmediatas
 
-1. Publicar el commit `d6af8bf` desde Lovable o dar acceso Lovable a Codex en el proyecto correcto para poder pulsar Publish:
-   - `public/sitemap.xml` de `2.294` URLs;
-   - `scripts/refresh-static-sitemap.mjs`;
-   - script npm `generate:sitemap-static`;
-   - documentacion actualizada.
-2. Revalidar produccion tras publish:
-   - `curl https://winerim.wine/sitemap.xml` debe contar `2.294` `<url>`;
-   - debe incluir `/producto/cloudrim`, `/producto/savia`, variantes EN/IT/FR/DE/PT, biblioteca y articulos.
-3. Reenviar `/sitemap.xml` en Search Console para sustituir la lectura parcial de `403`.
-4. Mantener vivo el bloqueo SEO principal:
+1. Desplegar la Edge Function `supabase/functions/prerender/index.ts` desde Lovable/Supabase, o conseguir `SUPABASE_ACCESS_TOKEN` para desplegar por CLI.
+2. Revalidar despues del deploy de `prerender`:
+   - `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/prerender?path=/producto/cloudrim` como Googlebot debe contener CloudRIM y canonical propio;
+   - las 12 rutas CloudRIM/SAVia en `winerim.wine` deben devolver contenido real, canonical propio y `x-prerendered`/rama bot correcta.
+3. Cuando el prerender este correcto, solicitar indexacion manual en Search Console para:
+   - `https://winerim.wine/producto/cloudrim`;
+   - `https://winerim.wine/producto/savia`;
+   - variantes principales EN/PT si hay cuota.
+4. Vigilar Search Console hasta que `/sitemap.xml` actualice paginas descubiertas desde `403` hacia `2.294`.
+5. Mantener vivo el bloqueo SEO principal:
    - Googlebot en CloudRIM/SAVia del apex debe dejar de recibir canonical raiz;
    - resolver por Edge Functions `prerender`/`sitemap` desde Lovable/Supabase o por ownership/routing de Cloudflare Worker.
-5. Cuando el prerender del apex este resuelto:
+6. Cuando el prerender del apex este resuelto:
    - revalidar las 12 rutas CloudRIM/SAVia como Googlebot;
    - solicitar indexacion manual de las rutas principales si hay cuota.
 

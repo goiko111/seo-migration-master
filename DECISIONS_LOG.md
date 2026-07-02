@@ -2,6 +2,29 @@
 
 ## 2026-07-02
 
+### Sitemap completo publicado y reenviado
+
+#### Hechos
+
+- El usuario publico Lovable y produccion cambio a deployment `1f496f52-39b9-4f32-a925-db02f74b0596`.
+- `https://winerim.wine/sitemap.xml` devuelve `2.294` URLs sin cache-buster, con CloudRIM/SAVia, biblioteca y articulos.
+- Search Console recibio de nuevo `/sitemap.xml` y confirmo `Se ha enviado el sitemap correctamente`.
+- La tabla de Search Console todavia puede mostrar `403` paginas descubiertas hasta que Google procese la nueva lectura.
+- La Edge Function `prerender` productiva, probada como Googlebot, sigue devolviendo contenido generico/home y canonical raiz para CloudRIM/SAVia.
+- Googlebot en el apex tambien sigue recibiendo home/canonical raiz para CloudRIM/SAVia.
+
+#### Decisiones
+
+- Dar por corregido el problema urgente del sitemap parcial.
+- No solicitar indexacion manual de CloudRIM/SAVia hasta que `prerender` entregue contenido y canonical propios.
+- Priorizar el deploy de `supabase/functions/prerender/index.ts` por Lovable/Supabase o por CLI con `SUPABASE_ACCESS_TOKEN`.
+
+#### Tareas pendientes
+
+- Desplegar `prerender`.
+- Revalidar las 12 rutas CloudRIM/SAVia como Googlebot.
+- Solicitar indexacion manual de las rutas principales cuando el prerender este correcto.
+
 ### Sitemap completo estatico tras publish parcial
 
 #### Hechos

@@ -2,6 +2,10 @@
 
 ## Hechos
 
+- El 2026-07-02, tras el publish del usuario, `https://winerim.wine/sitemap.xml` quedo corregido en produccion con `2.294` URLs y deployment `1f496f52-39b9-4f32-a925-db02f74b0596`.
+- El 2026-07-02 se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`; puede tardar en dejar de mostrar `403` paginas descubiertas.
+- El bloqueo SEO pendiente ya no es el sitemap, sino `prerender`: la Edge Function productiva y el apex siguen devolviendo home/canonical raiz para CloudRIM/SAVia cuando se prueban como Googlebot.
+- No se debe solicitar indexacion manual de CloudRIM/SAVia hasta desplegar y validar `supabase/functions/prerender/index.ts`.
 - El 2026-07-02, tras publish de Lovable, `https://winerim.wine/sitemap.xml` paso a `200` pero servia un fallback parcial de `403` URLs; Search Console lo acepto y mostro `403` paginas descubiertas.
 - Para corregirlo, se preparo `public/sitemap.xml` como sitemap estatico completo de `2.294` URLs, generado desde la Edge Function viva de Supabase (`2.282` URLs) mas las 12 rutas CloudRIM/SAVia.
 - Se anadio `scripts/refresh-static-sitemap.mjs` y `npm run generate:sitemap-static` para regenerar ese sitemap completo sin depender del deploy CLI de Supabase.
