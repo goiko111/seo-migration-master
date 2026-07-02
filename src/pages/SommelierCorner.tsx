@@ -13,6 +13,7 @@ import { InterviewSkeleton } from "@/components/ContentSkeletons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
 import { localizedArticlePath } from "@/lib/articleRoutes";
+import { visiblePublishedAtFilter } from "@/lib/publishing";
 
 interface Interview {
   quote: string; name: string; role: string; excerpt: string; image: string; slug: string; publishedAt: string | null;
@@ -88,6 +89,7 @@ const SommelierCorner = () => {
         .eq("published", true)
         .eq("category", "interview")
         .eq("lang", lang)
+        .or(visiblePublishedAtFilter())
         .order("published_at", { ascending: false });
 
       // Fallback to Spanish if no interviews exist in the current language
@@ -98,6 +100,7 @@ const SommelierCorner = () => {
           .eq("published", true)
           .eq("category", "interview")
           .eq("lang", "es")
+          .or(visiblePublishedAtFilter())
           .order("published_at", { ascending: false }));
       }
 

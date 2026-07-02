@@ -16,6 +16,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight } from "lucide-react";
 import { getI18n } from "@/i18n/types";
 import { localizedArticlePath } from "@/lib/articleRoutes";
+import { visiblePublishedAtFilter } from "@/lib/publishing";
 
 interface BlogPost {
   title: string;
@@ -65,6 +66,7 @@ const Blog = () => {
         .eq("published", true)
         .eq("lang", lang)
         .neq("category", "interview")
+        .or(visiblePublishedAtFilter())
         .order("published_at", { ascending: false });
 
       if (data && data.length > 0) {
@@ -86,6 +88,7 @@ const Blog = () => {
           .eq("published", true)
           .eq("lang", "es")
           .neq("category", "interview")
+          .or(visiblePublishedAtFilter())
           .order("published_at", { ascending: false });
 
         if (fallbackData && fallbackData.length > 0) {

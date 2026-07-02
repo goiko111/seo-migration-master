@@ -6991,12 +6991,23 @@ function articleStaticLink(lang: WineLibraryLang, esPath: string): string {
   return staticLocalizedPath(lang, esPath) || esPath;
 }
 
+function visiblePublishedAtOrFilter(nowIso: string): string {
+  return `(published_at.is.null,published_at.lte.${nowIso})`;
+}
+
 async function renderArticle(slug: string): Promise<string | null> {
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+  const articleParams = new URLSearchParams({
+    slug: `eq.${slug}`,
+    published: 'eq.true',
+    select: '*',
+    limit: '1',
+  });
+  articleParams.set('or', visiblePublishedAtOrFilter(new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')));
 
   const res = await fetch(
-    `${supabaseUrl}/rest/v1/articles?slug=eq.${encodeURIComponent(slug)}&published=eq.true&select=*&limit=1`,
+    `${supabaseUrl}/rest/v1/articles?${articleParams.toString()}`,
     { headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` } }
   );
 

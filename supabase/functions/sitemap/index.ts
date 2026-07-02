@@ -765,6 +765,10 @@ function urlBlock(loc: string, lastmod: string, changefreq: string, priority: st
   return xml;
 }
 
+function visiblePublishedAtOrFilter(nowIso: string): string {
+  return `(published_at.is.null,published_at.lte.${nowIso})`;
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -773,10 +777,18 @@ Deno.serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const now = new Date().toISOString().split('T')[0];
+    const nowDate = new Date();
+    const now = nowDate.toISOString().split('T')[0];
+    const nowIso = nowDate.toISOString().replace(/\.\d{3}Z$/, 'Z');
+    const articleParams = new URLSearchParams({
+      published: 'eq.true',
+      select: 'slug,updated_at,lang',
+      order: 'updated_at.desc',
+    });
+    articleParams.set('or', visiblePublishedAtOrFilter(nowIso));
 
     const [articlesRes, seoPagesRes] = await Promise.all([
-      fetch(`${supabaseUrl}/rest/v1/articles?published=eq.true&select=slug,updated_at,lang&order=updated_at.desc`, {
+      fetch(`${supabaseUrl}/rest/v1/articles?${articleParams.toString()}`, {
         headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` },
       }),
       fetch(`${supabaseUrl}/rest/v1/seo_pages?published=eq.true&select=slug,updated_at,lang&order=updated_at.desc`, {

@@ -22,6 +22,7 @@ import { getArticleBySlug } from "@/data/articles";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { type SupportedLang } from "@/i18n/types";
 import { articleDbSlugForLang, inferArticleLangFromSlug, localizedArticlePath, stripArticleLangSuffix } from "@/lib/articleRoutes";
+import { visiblePublishedAtFilter } from "@/lib/publishing";
 
 interface ArticleData {
   title: string;
@@ -64,6 +65,7 @@ const ArticlePage = () => {
         .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
         .eq("slug", dbSlug)
         .eq("published", true)
+        .or(visiblePublishedAtFilter())
         .maybeSingle();
 
       // Fallback to Spanish base slug if no translation exists
@@ -73,6 +75,7 @@ const ArticlePage = () => {
           .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
           .eq("slug", baseSlug)
           .eq("published", true)
+          .or(visiblePublishedAtFilter())
           .maybeSingle());
       }
 
