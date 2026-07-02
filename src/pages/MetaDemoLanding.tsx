@@ -29,6 +29,7 @@ import { supabase } from "@/integrations/supabase/client";
 import winerimLogo from "@/assets/winerim-logo.webp";
 
 const META_PIXEL_ID = "450273446324682";
+const META_DATASET_ID = META_PIXEL_ID;
 const CAMPAIGN_HOST = "go.winerim.wine";
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
@@ -193,7 +194,11 @@ function ensureMetaPixel() {
 
   const win = window as any;
   if (typeof win.fbq === "function") {
-    win.fbq("track", "PageView", { content_name: "meta_demo_landing" });
+    win.fbq("track", "PageView", {
+      content_name: "meta_demo_landing",
+      meta_pixel_id: META_PIXEL_ID,
+      meta_dataset_id: META_DATASET_ID,
+    });
     return;
   }
 
@@ -215,7 +220,11 @@ function ensureMetaPixel() {
   firstScript?.parentNode?.insertBefore(script, firstScript);
 
   win.fbq("init", META_PIXEL_ID);
-  win.fbq("track", "PageView", { content_name: "meta_demo_landing" });
+  win.fbq("track", "PageView", {
+    content_name: "meta_demo_landing",
+    meta_pixel_id: META_PIXEL_ID,
+    meta_dataset_id: META_DATASET_ID,
+  });
 }
 
 function fireMetaLead(attribution: Attribution) {
@@ -226,6 +235,8 @@ function fireMetaLead(attribution: Attribution) {
   fbq("track", "Lead", {
     content_name: "meta_demo_landing",
     content_category: "demo_request",
+    meta_pixel_id: META_PIXEL_ID,
+    meta_dataset_id: META_DATASET_ID,
     ...attribution,
   });
 }
@@ -335,6 +346,8 @@ const MetaDemoLanding = () => {
       message: JSON.stringify({
         landing: "meta_demo_landing",
         requested_demo: true,
+        meta_pixel_id: META_PIXEL_ID,
+        meta_dataset_id: META_DATASET_ID,
         attribution: currentAttribution,
       }),
     };
@@ -351,6 +364,9 @@ const MetaDemoLanding = () => {
       source: "meta_demo_landing",
       lead_type: "demo",
       lead_category: "meta_campaign",
+      meta_pixel_id: META_PIXEL_ID,
+      meta_dataset_id: META_DATASET_ID,
+      tracking_source: "meta_pixel",
       landing_url: currentAttribution.landing_url || null,
       referrer: currentAttribution.referrer || null,
       fbclid: currentAttribution.fbclid || null,
@@ -383,12 +399,20 @@ const MetaDemoLanding = () => {
           utm_content: currentAttribution.utm_content || "",
           utm_term: currentAttribution.utm_term || "",
           fbclid: currentAttribution.fbclid || "",
+          meta_pixel_id: META_PIXEL_ID,
+          meta_dataset_id: META_DATASET_ID,
+          source: "meta_demo_landing",
+          landing_host: CAMPAIGN_HOST,
         },
       });
       if (gfError) {
         console.warn("[gastrofunnel] forward error", gfError);
       } else if ((gfData as any)?.success && typeof (window as any).fbq === "function" && hasConsent()) {
-        (window as any).fbq("track", "Lead", { content_name: "gastrofunnel" });
+        (window as any).fbq("track", "Lead", {
+          content_name: "gastrofunnel",
+          meta_pixel_id: META_PIXEL_ID,
+          meta_dataset_id: META_DATASET_ID,
+        });
       }
     } catch (err) {
       console.warn("[gastrofunnel] forward exception", err);
@@ -417,7 +441,7 @@ const MetaDemoLanding = () => {
 
       <a
         href="#demo-form"
-        className="fixed right-4 top-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/25 transition hover:bg-accent/90 sm:right-8 sm:px-5"
+        className="fixed right-4 top-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-wine px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/25 transition hover:bg-wine-dark sm:right-8 sm:px-5"
       >
         Solicita tu demo
         <ArrowRight className="h-3.5 w-3.5" />
@@ -444,7 +468,7 @@ const MetaDemoLanding = () => {
                   Sistema Winerim IA
                 </span>
                 <h1 className="font-heading text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-                  Solicita una demo gratuita de <span className="text-accent">Winerim</span>
+                  Solicita una demo gratuita de <span className="text-wine">Winerim</span>
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-8 text-white/74">
                   15 minutos · Sin compromiso · Adaptada a tu tipo de negocio
@@ -528,6 +552,8 @@ const MetaDemoLanding = () => {
                     <input key={key} type="hidden" name={key} value={attribution[key] || ""} readOnly />
                   ))}
                   <input type="hidden" name="fbclid" value={attribution.fbclid || ""} readOnly />
+                  <input type="hidden" name="meta_pixel_id" value={META_PIXEL_ID} readOnly />
+                  <input type="hidden" name="meta_dataset_id" value={META_DATASET_ID} readOnly />
                   {/* Honeypot anti-spam: must stay empty for humans */}
                   <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
                     <label htmlFor="company_website">Website</label>
@@ -626,7 +652,7 @@ const MetaDemoLanding = () => {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="h-12 w-full rounded-md bg-accent text-sm font-bold uppercase tracking-[0.16em] text-white hover:bg-accent/90"
+                    className="h-12 w-full rounded-md bg-wine text-sm font-bold uppercase tracking-[0.16em] text-white hover:bg-wine-dark"
                   >
                     {submitting ? (
                       <>

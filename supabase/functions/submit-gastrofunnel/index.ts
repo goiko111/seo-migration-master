@@ -12,6 +12,10 @@ interface Payload {
   utm_content?: string;
   utm_term?: string;
   fbclid?: string;
+  meta_pixel_id?: string;
+  meta_dataset_id?: string;
+  source?: string;
+  landing_host?: string;
   hp?: string; // honeypot
 }
 
@@ -74,6 +78,10 @@ Deno.serve(async (req) => {
     `UTM content: ${body.utm_content || ""}`,
     `UTM term: ${body.utm_term || ""}`,
     `fbclid: ${body.fbclid || ""}`,
+    `Meta pixel: ${body.meta_pixel_id || ""}`,
+    `Meta dataset: ${body.meta_dataset_id || body.meta_pixel_id || ""}`,
+    `Landing host: ${body.landing_host || "go.winerim.wine"}`,
+    `Source: ${body.source || "meta_demo_landing"}`,
   ].join("\n");
 
   const payload = {
@@ -82,7 +90,7 @@ Deno.serve(async (req) => {
     email: body.email,
     phone: body.phone || "",
     company: body.restaurant || "",
-    tags: ["gastrofunnel"],
+    tags: ["gastrofunnel", "meta-demo-landing", `meta-pixel-${body.meta_pixel_id || "unknown"}`],
     body_text: bodyText,
   };
 

@@ -156,6 +156,9 @@ Deno.serve(async (req) => {
     const attribution = messagePayload.attribution && typeof messagePayload.attribution === "object"
       ? messagePayload.attribution
       : {};
+    const metaPixelId = lead.meta_pixel_id || messagePayload.meta_pixel_id || null;
+    const metaDatasetId = lead.meta_dataset_id || messagePayload.meta_dataset_id || metaPixelId;
+    const trackingSource = lead.tracking_source || messagePayload.tracking_source || null;
     const resolvedMenuLink = await resolvePrivateStorageLink(
       supabase,
       lead.menu_link || lead.carta_url || null,
@@ -186,6 +189,9 @@ Deno.serve(async (req) => {
           references_count: lead.references_count,
           has_sommelier: lead.has_sommelier,
           main_challenge: lead.main_challenge,
+          meta_pixel_id: metaPixelId,
+          meta_dataset_id: metaDatasetId,
+          tracking_source: trackingSource,
           message: lead.message,
           menu_link: resolvedMenuLink,
           },
@@ -215,6 +221,9 @@ Deno.serve(async (req) => {
             references_count: lead.references_count || null,
             has_sommelier: lead.has_sommelier || null,
             main_challenge: lead.main_challenge || null,
+            meta_pixel_id: metaPixelId,
+            meta_dataset_id: metaDatasetId,
+            tracking_source: trackingSource,
             message: lead.message || null,
             menu_link: resolvedMenuLink || null,
             form_type: lead.form_type || null,
