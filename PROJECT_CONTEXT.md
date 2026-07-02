@@ -5,6 +5,7 @@
 - El 2026-07-02, tras publish de Lovable, `https://winerim.wine/sitemap.xml` paso a `200` pero servia un fallback parcial de `403` URLs; Search Console lo acepto y mostro `403` paginas descubiertas.
 - Para corregirlo, se preparo `public/sitemap.xml` como sitemap estatico completo de `2.294` URLs, generado desde la Edge Function viva de Supabase (`2.282` URLs) mas las 12 rutas CloudRIM/SAVia.
 - Se anadio `scripts/refresh-static-sitemap.mjs` y `npm run generate:sitemap-static` para regenerar ese sitemap completo sin depender del deploy CLI de Supabase.
+- El commit `d6af8bf` con el sitemap completo esta pusheado, pero no publicado: Lovable no dio acceso a Codex en los proyectos probados y produccion sigue en `403` URLs hasta que se publique.
 - En produccion, el navegador real ya ve CloudRIM/SAVia con H1, titulo y canonical propios; Googlebot en el apex sigue viendo home/canonical raiz para esas rutas.
 - El siguiente paso operativo es publicar el sitemap de `2.294` URLs, revalidar produccion y reenviar `/sitemap.xml` en Search Console para sustituir la lectura parcial de `403`.
 - El 2026-07-02 se desplego `winerim-proxy` version `41cd1394-5a19-4ead-abc9-436fb646f41e` con puente estatico para CloudRIM/SAVia, pero el apex `winerim.wine` no ejecuta el Worker aunque la ruta `winerim.wine/*` exista en Cloudflare.

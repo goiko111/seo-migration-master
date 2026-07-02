@@ -22,6 +22,13 @@
   - validacion de `2.294` `<loc>` unicos y checks de CloudRIM/SAVia, biblioteca y articulo;
   - `npm run build`;
   - `git diff --check`.
+- El commit `d6af8bf fix: restore full static sitemap` esta pusheado a `origin/main`.
+- Tras esperar y revalidar produccion, `https://winerim.wine/sitemap.xml` sigue sirviendo el deployment `46a9e914-a3a2-4326-9f72-1b6b8ec36d5b` con `403` URLs; el push no disparo publish automatico.
+- El navegador integrado no tiene acceso a los proyectos Lovable probados:
+  - `https://lovable.dev/projects/ebb36746-82ff-43c3-86c1-558573beddcd`;
+  - `https://lovable.dev/projects/2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`.
+- Ambos proyectos muestran `You don't have access`; por tanto no se pudo pulsar Publish desde Codex en esta sesion.
+- `https://winerim.wine/sitemap_index.xml` devuelve `404`, asi que no sirve como mitigacion temporal para Search Console.
 - El cambio ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse ni incluirse.
 
 ## Decisiones
@@ -46,6 +53,7 @@
 ## Tareas pendientes
 
 - Publicar desde Lovable o flujo equivalente el commit que deja `public/sitemap.xml` en `2.294` URLs.
+- Para publicar desde Codex hace falta que la sesion de Lovable del navegador integrado tenga acceso al proyecto correcto.
 - Revalidar en produccion:
   - `https://winerim.wine/sitemap.xml` debe devolver `200`;
   - debe contener `2.294` URLs;

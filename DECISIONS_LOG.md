@@ -14,6 +14,9 @@
 - Se anadio `scripts/refresh-static-sitemap.mjs` y el script `npm run generate:sitemap-static`.
 - Se regenero `public/sitemap.xml` con `2.294` URLs unicas: `2.282` del sitemap completo de Supabase + `12` URLs CloudRIM/SAVia.
 - Validaciones locales pasadas: generacion, unicidad/cierre XML, checks de rutas clave, build y `git diff --check`.
+- El commit `d6af8bf fix: restore full static sitemap` se pusheo a `origin/main`.
+- Lovable no se pudo publicar desde Codex porque los proyectos probados devuelven `You don't have access`.
+- Produccion sigue en el deployment anterior con sitemap de `403` URLs hasta que se pulse Publish o se de acceso Lovable operativo.
 
 #### Decisiones
 
@@ -30,6 +33,7 @@
 #### Tareas pendientes
 
 - Publicar el commit con el sitemap de `2.294` URLs.
+- Si Codex debe publicarlo, abrir Lovable con acceso al proyecto correcto.
 - Revalidar `https://winerim.wine/sitemap.xml` en produccion y reenviarlo en Search Console.
 - Resolver la capa apex/Worker/Edge para que Googlebot reciba CloudRIM/SAVia reales.
 

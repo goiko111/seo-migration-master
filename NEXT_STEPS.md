@@ -11,13 +11,16 @@
   - `12` URLs CloudRIM/SAVia nuevas.
 - `npm run generate:sitemap-static` reconstruye ese archivo desde `scripts/refresh-static-sitemap.mjs`.
 - `npm run build` pasa con el sitemap completo.
+- El commit `d6af8bf fix: restore full static sitemap` esta pusheado a `origin/main`.
+- Produccion sigue sirviendo el deployment `46a9e914-a3a2-4326-9f72-1b6b8ec36d5b` con `403` URLs; el push no publico automaticamente.
+- Codex no pudo publicar desde Lovable porque los proyectos `ebb36746-82ff-43c3-86c1-558573beddcd` y `2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` devuelven `You don't have access` en el navegador integrado.
 - En navegador real, CloudRIM/SAVia estan publicadas y funcionan para usuarios con canonical propio.
 - Como Googlebot en `winerim.wine`, CloudRIM/SAVia siguen devolviendo home/canonical raiz porque el apex no ejecuta Worker/prerender correcto.
 - `src/components/WineListAnalyzerTool.tsx` sigue siendo cambio ajeno y fuera de alcance.
 
 ## Tareas pendientes inmediatas
 
-1. Publicar el commit con:
+1. Publicar el commit `d6af8bf` desde Lovable o dar acceso Lovable a Codex en el proyecto correcto para poder pulsar Publish:
    - `public/sitemap.xml` de `2.294` URLs;
    - `scripts/refresh-static-sitemap.mjs`;
    - script npm `generate:sitemap-static`;
