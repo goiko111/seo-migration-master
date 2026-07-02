@@ -387,6 +387,11 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-stock-muerto', priority: '0.7', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/simulador-senal-margenes', priority: '0.7', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/test-perfil-rim', priority: '0.7', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/simulador-pareto-carta-vinos', priority: '0.7', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/calculadora-fuga-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/comparador-distribuidores', priority: '0.7', changefreq: 'monthly', multilang: false },
 
   // Resources (ES-only)
   { esPath: '/recursos/plantilla-carta-de-vinos', priority: '0.6', changefreq: 'monthly', multilang: false },

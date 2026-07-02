@@ -169,6 +169,11 @@ export const seoRouteMap: SeoRouteEntry[] = [
   { path: "/herramientas/diagnostico-vino-por-copa", canonical: `${BASE}/herramientas/diagnostico-vino-por-copa`, lang: "es", type: "tool", intent: "diagnóstico vino por copa restaurante" },
   { path: "/herramientas/wine-list-score", canonical: `${BASE}/herramientas/wine-list-score`, lang: "es", type: "tool", intent: "wine list score auditoría carta vinos" },
   { path: "/herramientas/calculadora-stock-muerto", canonical: `${BASE}/herramientas/calculadora-stock-muerto`, lang: "es", type: "tool", intent: "calculadora stock muerto vinos rotación" },
+  { path: "/herramientas/simulador-senal-margenes", canonical: `${BASE}/herramientas/simulador-senal-margenes`, lang: "es", type: "tool", intent: "simulador señal márgenes vino restaurante" },
+  { path: "/herramientas/test-perfil-rim", canonical: `${BASE}/herramientas/test-perfil-rim`, lang: "es", type: "tool", intent: "test perfil RIM restaurante carta vinos" },
+  { path: "/herramientas/simulador-pareto-carta-vinos", canonical: `${BASE}/herramientas/simulador-pareto-carta-vinos`, lang: "es", type: "tool", intent: "simulador Pareto 80 20 carta vinos restaurante" },
+  { path: "/herramientas/calculadora-fuga-margen", canonical: `${BASE}/herramientas/calculadora-fuga-margen`, lang: "es", type: "tool", intent: "calculadora fuga margen vino restaurante" },
+  { path: "/herramientas/comparador-distribuidores", canonical: `${BASE}/herramientas/comparador-distribuidores`, lang: "es", type: "tool", intent: "comparador distribuidores vino restaurante" },
 
   // ─────────────────────────────────────────────
   // BLOG (ES)
