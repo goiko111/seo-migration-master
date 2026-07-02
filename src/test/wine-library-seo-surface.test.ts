@@ -319,6 +319,12 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("'/en/product/savia'");
     expect(worker).toContain("'/de/produkt/cloudrim'");
     expect(worker).toContain("'/pt/produto/savia'");
+    expect(worker).toContain("const CLOUDRIM_ALTERNATES");
+    expect(worker).toContain("const SAVIA_ALTERNATES");
+    expect(worker).toContain("const CLOUDRIM_WORKER_PAGES");
+    expect(worker).toContain("const SAVIA_WORKER_PAGES");
+    expect(worker).toContain("WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD");
+    expect(worker).toContain("missingCloudRimSaviaPaths");
     expect(llms).toContain("CloudRIM: https://winerim.wine/producto/cloudrim");
     expect(llms).toContain("SAVia: https://winerim.wine/producto/savia");
     expect(llmsFull).toContain("CloudRIM: an operational document cloud");

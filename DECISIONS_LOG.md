@@ -2,6 +2,41 @@
 
 ## 2026-07-02
 
+### Puente Worker CloudRIM/SAVia y bloqueo del apex
+
+#### Hechos
+
+- Se amplio `cloudflare-worker-v3-hybrid.js` con prerender estatico para CloudRIM/SAVia en seis idiomas.
+- Se anadio inyeccion de las 12 URLs CloudRIM/SAVia al sitemap del Worker si la Edge Function productiva no las trae.
+- Se genero `public/sitemap.xml` como fallback estatico de 403 URLs basado en `public/sitemap-extra.json`.
+- Validaciones locales pasadas: syntax Worker, test SEO enfocado, build, dry-run Worker y `git diff --check`.
+- Se desplego `winerim-proxy` version `41cd1394-5a19-4ead-abc9-436fb646f41e`.
+- La ruta `go.winerim.wine/*` ejecuta correctamente `winerim-proxy`; Googlebot recibe `worker-static-prerender`.
+- La ruta `winerim.wine/*` existe en Cloudflare Workers Routes, pero el apex no ejecuta el Worker.
+- Cloudflare Trace devuelve `hostname does not belong to your account` para `https://winerim.wine/producto/cloudrim`.
+- Se probo poner el registro apex en `Proxied`; no activo el Worker y dejo `/sitemap.xml` en `404`.
+- Se revirtio el apex a `DNS only`.
+- `https://winerim.wine/sitemap.xml` sigue devolviendo `404` hasta que Lovable publique el fallback estatico o se resuelva la capa Edge/Worker del apex.
+
+#### Decisiones
+
+- No mantener el apex `winerim.wine` en `Proxied` mientras el Worker no se ejecute y Trace no reconozca el hostname como perteneciente al account.
+- Mantener en codigo el puente Worker para cuando el apex vuelva a entrar por Worker o para rutas de subdominio que si ejecutan `winerim-proxy`.
+- Anadir un sitemap estatico de respaldo en `public/sitemap.xml` para reducir dependencia de la Edge Function `sitemap` y evitar 404 tras el proximo publish.
+- No reenviar sitemap en Search Console hasta verificar `HTTP 200` real en `https://winerim.wine/sitemap.xml`.
+
+#### Hipotesis
+
+- El apex puede estar ligado a la integracion de Lovable/proveedor de hostname y por eso Workers Trace no lo trata igual que `go.winerim.wine`.
+- El fallback estatico publicado desde Lovable deberia devolver al menos un sitemap parcial con URLs estrategicas y CloudRIM/SAVia.
+
+#### Tareas pendientes
+
+- Publicar desde Lovable el commit que incluye `public/sitemap.xml`.
+- Resolver ownership/routing del apex en Cloudflare/Lovable para que `winerim.wine/*` ejecute el Worker o desplegar Edge Functions `sitemap`/`prerender`.
+- Revalidar sitemap y 12 rutas CloudRIM/SAVia como Googlebot antes de Search Console.
+- Mantener fuera de alcance `src/components/WineListAnalyzerTool.tsx`.
+
 ### CloudRIM y SAVia como capacidades principales
 
 #### Hechos

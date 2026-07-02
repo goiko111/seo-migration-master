@@ -1,5 +1,56 @@
 # Next Steps
 
+## Actualizacion 2026-07-02: retomar tras puente Worker y bloqueo apex
+
+## Hechos
+
+- CloudRIM/SAVia estan implementados en codigo y el puente Worker esta preparado.
+- Worker desplegado: `winerim-proxy` version `41cd1394-5a19-4ead-abc9-436fb646f41e`.
+- Triggers Worker activos en Cloudflare:
+  - `winerim.wine/*`;
+  - `go.winerim.wine/*`.
+- `go.winerim.wine/*` si ejecuta `winerim-proxy`; la prueba Googlebot de `/producto/cloudrim` devuelve `worker-static-prerender`.
+- `winerim.wine/*` no ejecuta `winerim-proxy`; Cloudflare Trace para el apex devuelve `hostname does not belong to your account`.
+- Se probo el apex `Proxied`, pero no ejecuto Worker y dejo `/sitemap.xml` en `404`; se revirtio a `DNS only`.
+- `public/sitemap.xml` queda creado como fallback estatico con 403 URLs, incluyendo CloudRIM/SAVia.
+- Produccion actual en apex:
+  - `https://winerim.wine/sitemap.xml` devuelve `404`;
+  - Googlebot en `/producto/cloudrim` recibe HTML de home con canonical `https://winerim.wine/`.
+- Supabase CLI sigue bloqueado sin `SUPABASE_ACCESS_TOKEN`.
+- Cambio ajeno `src/components/WineListAnalyzerTool.tsx` sigue fuera de alcance.
+
+## Tareas pendientes inmediatas
+
+1. Publicar desde Lovable el commit que incluye:
+   - `public/sitemap.xml`;
+   - puente Worker CloudRIM/SAVia;
+   - tests/documentacion actualizados.
+2. Revalidar tras publish:
+   - `https://winerim.wine/sitemap.xml` debe responder `200`;
+   - debe contener CloudRIM/SAVia en `es/en/it/fr/de/pt`.
+3. Resolver el bloqueo del apex:
+   - revisar en Cloudflare/Lovable por que Trace marca `winerim.wine` como `hostname does not belong to your account`;
+   - confirmar si el dominio apex esta gestionado por integracion/proveedor de Lovable;
+   - decidir si se corrige por ownership/routing Cloudflare o por Edge Functions Supabase.
+4. Cuando el apex ejecute Worker o Edge Functions:
+   - validar las 12 rutas CloudRIM/SAVia como Googlebot;
+   - confirmar canonical propio, hreflang y contenido localizado;
+   - reenviar `/sitemap.xml` en Search Console.
+5. Desplegar `sitemap` y `prerender` desde Lovable/Supabase si se obtiene acceso operativo.
+
+## Pendientes SEO previos que siguen vivos
+
+- Search Console cuando haya cuota y sitemap `200`:
+  - `https://winerim.wine/article/tipos-de-vino-para-entender-una-carta`;
+  - `https://winerim.wine/article/uvas-que-conocer-para-empezar`;
+  - `https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante`;
+  - `https://winerim.wine/it/calcolatrice-margini-vino`.
+- Confirmar si el fallback estatico de 403 URLs es suficiente temporalmente o si hay que generar un sitemap estatico completo de biblioteca/articulos.
+- Mantener pendiente separado:
+  - optimizar banner de cookies en landings de pago si se decide;
+  - confirmar visualmente leads QA anteriores en CRM;
+  - no tocar chat hasta nueva orden.
+
 ## Actualizacion 2026-07-02: retomar tras implementar CloudRIM/SAVia
 
 ## Hechos

@@ -1,5 +1,66 @@
 # Current State
 
+## Actualizacion 2026-07-02: puente Worker desplegado y bloqueo de apex detectado
+
+## Hechos
+
+- Se anadio en `cloudflare-worker-v3-hybrid.js` un prerender estatico puente para CloudRIM y SAVia en `es/en/it/fr/de/pt`.
+- El puente Worker genera HTML bot con canonical propio, `hreflang`, schema `SoftwareApplication`, `x-prerendered: true` y `x-worker-branch: worker-static-prerender`.
+- Se anadio inyeccion de las 12 rutas CloudRIM/SAVia al sitemap del Worker cuando la Edge Function antigua no las incluya.
+- Se reforzo `src/test/wine-library-seo-surface.test.ts` para cubrir `CLOUDRIM_WORKER_PAGES`, `SAVIA_WORKER_PAGES` y `missingCloudRimSaviaPaths`.
+- Se genero `public/sitemap.xml` como fallback estatico con 403 URLs procedentes de `public/sitemap-extra.json`, incluyendo CloudRIM/SAVia y variantes localizadas.
+- Validaciones locales OK:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npm run build`;
+  - `npm run deploy:worker:dry-run`;
+  - `git diff --check`.
+- Se desplego Cloudflare Worker `winerim-proxy` version `41cd1394-5a19-4ead-abc9-436fb646f41e` con triggers:
+  - `winerim.wine/*`;
+  - `go.winerim.wine/*`.
+- `https://go.winerim.wine/producto/cloudrim` valida como Googlebot con `worker-static-prerender`, canonical de `https://winerim.wine/producto/cloudrim` y contenido CloudRIM.
+- `https://winerim.wine/producto/cloudrim` no ejecuta el Worker: Googlebot recibe el HTML shell de home con canonical `https://winerim.wine/`.
+- Cloudflare Trace para `https://go.winerim.wine/producto/cloudrim` muestra `Workers > winerim-proxy` como matched.
+- Cloudflare Trace para `https://winerim.wine/producto/cloudrim` devuelve `hostname does not belong to your account`, aunque la zona `winerim.wine` y la ruta Worker aparecen en el dashboard.
+- Se probo cambiar el registro apex `A winerim.wine -> 185.158.133.1` a `Proxied`; no hizo entrar el Worker y dejo `/sitemap.xml` en `404`.
+- Se revirtio el apex a `DNS only` para no dejar una configuracion proxied que no aporta Worker.
+- Produccion actual sigue sin sitemap publico en apex: `https://winerim.wine/sitemap.xml` devuelve `404` hasta que se publique el fallback estatico o se reactive la capa Edge/Worker correcta.
+- El deploy CLI de Supabase sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`.
+- El cambio local ajeno `src/components/WineListAnalyzerTool.tsx` sigue sin tocarse ni incluirse.
+
+## Decisiones
+
+- Mantener el puente Worker y el fallback de sitemap estatico en codigo, porque son necesarios cuando `prerender`/`sitemap` de Supabase no estan publicados.
+- No dejar el apex en `Proxied` mientras Cloudflare Trace diga que `winerim.wine` no pertenece al account para esa traza y el Worker no se ejecute.
+- No reenviar sitemap en Search Console hasta que `https://winerim.wine/sitemap.xml` devuelva `200`.
+- Tratar el problema del apex como bloqueo de configuracion Cloudflare/Lovable/proveedor, no como bug de React ni del Worker, porque `go.winerim.wine` ejecuta el mismo Worker correctamente.
+
+## Hipotesis
+
+- El apex `winerim.wine` parece estar condicionado por la integracion/proveedor de Lovable o por ownership de hostname, mientras que `go.winerim.wine` si pertenece al account a efectos de Workers/Trace.
+- Publicar `public/sitemap.xml` desde Lovable deberia recuperar un sitemap basico aunque el Worker del apex siga sin ejecutarse.
+- Desplegar las Edge Functions `sitemap` y `prerender` desde Lovable/Supabase podria resolver el sitemap y el prerender sin depender del Worker del apex.
+
+## Contradicciones / dudas abiertas
+
+- Contradiccion detectada: en Cloudflare existen rutas `winerim.wine/*` y `go.winerim.wine/*` hacia `winerim-proxy`, pero Trace solo reconoce `go.winerim.wine` como hostname del account.
+- Contradiccion detectada: la documentacion historica daba por operativo `/sitemap.xml`, pero la validacion actual de produccion devuelve `404`.
+- Pendiente confirmar si Lovable ha cambiado la configuracion del dominio apex o si el sitemap dependia antes de una capa Worker/Edge que ya no esta efectiva en el apex.
+
+## Tareas pendientes
+
+- Publicar desde Lovable el frontend que incluye `public/sitemap.xml`.
+- Revalidar despues del publish:
+  - `https://winerim.wine/sitemap.xml` debe devolver `200`;
+  - debe contener `/producto/cloudrim`, `/producto/savia` y variantes localizadas.
+- Resolver con Cloudflare/Lovable por que Trace dice `hostname does not belong to your account` para `winerim.wine`.
+- Cuando el apex vuelva a pasar por Worker o Edge Functions:
+  - revalidar CloudRIM/SAVia como Googlebot en las 12 rutas;
+  - confirmar canonicals propios;
+  - reenviar `/sitemap.xml` en Search Console.
+- Desplegar `sitemap` y `prerender` desde Lovable/Supabase cuando haya acceso operativo.
+- Mantener fuera de alcance `src/components/WineListAnalyzerTool.tsx` salvo instruccion expresa.
+
 ## Actualizacion 2026-07-02: CloudRIM y SAVia incorporados en la web
 
 ## Hechos

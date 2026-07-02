@@ -2,6 +2,11 @@
 
 ## Hechos
 
+- El 2026-07-02 se desplego `winerim-proxy` version `41cd1394-5a19-4ead-abc9-436fb646f41e` con puente estatico para CloudRIM/SAVia, pero el apex `winerim.wine` no ejecuta el Worker aunque la ruta `winerim.wine/*` exista en Cloudflare.
+- `go.winerim.wine/*` si ejecuta `winerim-proxy`; la validacion Googlebot de `/producto/cloudrim` en ese host devuelve `worker-static-prerender`, canonical propio y contenido CloudRIM.
+- Cloudflare Trace para `https://winerim.wine/producto/cloudrim` devuelve `hostname does not belong to your account`; Trace para `go.winerim.wine` si muestra `Workers > winerim-proxy`.
+- Se probo poner el apex `A winerim.wine -> 185.158.133.1` en `Proxied`; no activo el Worker y dejo `/sitemap.xml` en `404`, por lo que se revirtio a `DNS only`.
+- `https://winerim.wine/sitemap.xml` devuelve `404` en la validacion actual; se creo `public/sitemap.xml` como fallback estatico de 403 URLs para publicar desde Lovable.
 - El 2026-07-02 se implemento localmente CloudRIM y SAVia como capacidades principales de la web Winerim.
 - CloudRIM tiene pagina propia en `/producto/cloudrim` y variantes EN/IT/FR/DE/PT; se define como nube operativa/documental para recoger cartas, ventas, albaranes, stock, reportes TPV y tarifas por portal, email, carpeta compartida, FTP/SFTP, API o proveedor.
 - SAVia tiene pagina propia en `/producto/savia` y variantes EN/IT/FR/DE/PT; se define como agente conversacional para preguntar sobre carta, ventas, stock, costes, margenes, albaranes y oportunidades, sin ejecutar acciones criticas sin aprobacion humana.
@@ -213,6 +218,10 @@
 
 ## Decisiones
 
+- No dejar `winerim.wine` en `Proxied` mientras el Worker no se ejecute y Cloudflare Trace no reconozca el hostname como perteneciente al account.
+- Mantener `public/sitemap.xml` como fallback estatico publicable desde Lovable para evitar `404` en sitemap cuando fallen Edge Function/Worker.
+- No reenviar sitemap en Search Console hasta que `https://winerim.wine/sitemap.xml` devuelva `HTTP 200`.
+- Tratar el bloqueo del apex como problema de configuracion Cloudflare/Lovable/proveedor de hostname, no como problema de copy, React o contenido CloudRIM/SAVia.
 - CloudRIM y SAVia pasan a ser capacidades principales de Winerim con paginas propias, presencia en home/producto y superficie SEO/LLM completa.
 - SAVia debe comunicarse siempre como agente que prepara decisiones y respuestas, no como sistema que ejecuta acciones criticas sin aprobacion humana.
 - La publicacion de CloudRIM/SAVia debe coordinarse en orden: Lovable frontend, Edge Functions `sitemap`/`prerender`, Cloudflare Worker y revalidacion de produccion/Search Console.
