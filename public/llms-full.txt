@@ -1,6 +1,6 @@
 # Winerim AI Reference
 
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 
 ## Entity Summary
 
@@ -19,8 +19,8 @@ Winerim combines the wine-list product with operational data-routing and convers
 5. Wine Cellar: physical bottle-location maps that connect digital stock with cellar zones, racks, shelves and positions.
 6. Wine Lockers: private client or member wine storage management, including stored wines, available bottles, orders, consumption requests and history.
 7. Analytics and pricing support: margin, ticket, rotation and purchasing insights.
-8. CloudRIM: an operational document cloud that collects wine lists, sales, delivery notes, stock, POS reports and distributor tariffs through portal, email, shared folder, FTP/SFTP, API or provider files, then routes them inside Winerim.
-9. SAVia: a conversational Winerim agent for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities, preparing decisions without executing critical actions without human approval.
+8. CloudRIM: an operational document cloud that collects wine lists, sales, delivery notes, invoices, stock, POS reports and distributor tariffs through portal, email, shared folder, FTP/SFTP, API or provider files, detects invoice vs delivery note, prepares delivery-note-to-invoice reconciliation and routes documents inside Winerim.
+9. SAVia: a conversational Winerim agent for asking about wine list, sales, stock, costs, margins, invoices, delivery notes, RIMs and opportunities, explaining facts and previewing actions without executing critical changes without human approval.
 
 Primary product pages:
 

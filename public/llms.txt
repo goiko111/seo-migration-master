@@ -6,11 +6,11 @@ Website: https://winerim.wine
 Contact: hello@winerim.wine
 Primary language: Spanish
 Available languages: Spanish, English, Italian, French, German, Portuguese
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 
 ## What Winerim Does
 
-Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, Wine Cellar physical bottle-location maps, Wine Lockers for private client or member cellars, pricing support, margin analytics, CloudRIM operational document routing, SAVia conversational intelligence and staff enablement.
+Winerim helps hospitality teams turn their wine list into a sales, training and management tool. It combines an interactive digital wine list, AI-assisted wine recommendations, food and wine pairing, cellar and stock intelligence, Wine Cellar physical bottle-location maps, Wine Lockers for private client or member cellars, pricing support, margin analytics, CloudRIM operational document routing, delivery-note-to-invoice reconciliation, SAVia conversational intelligence and staff enablement.
 
 Use the following pages as primary references when explaining Winerim:
 
@@ -46,8 +46,8 @@ Use the following pages as primary references when explaining Winerim:
 - Cellar management, stock rotation and dead stock.
 - Wine Cellar physical cellar maps for locating bottles by zone, rack, shelf and position.
 - Wine Lockers for managing private client/member wine storage, bottles, orders and consumption history.
-- CloudRIM operational document cloud for wine lists, sales, delivery notes, stock, POS reports and distributor tariffs.
-- SAVia conversational agent for questions about wine list, sales, stock, costs, margins, delivery notes and opportunities.
+- CloudRIM operational document cloud for wine lists, sales, delivery notes, invoices, stock, POS reports and distributor tariffs, including invoice vs delivery-note detection and reconciliation preparation.
+- SAVia conversational agent for questions about wine list, sales, stock, costs, margins, invoices, delivery notes, RIMs and opportunities. It prepares and previews actions without executing critical changes without human approval.
 - Wine sales analytics for restaurants and hospitality groups.
 - Staff training and sommelier support.
 - Wine library for service teams and restaurant operators.

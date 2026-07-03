@@ -4529,3 +4529,62 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - actualizar `llms.txt`/`llms-full.txt` si procede;
    - revisar Search Console en 48-72 h para las seis rutas del hub;
    - solicitar indexacion selectiva solo para URLs principales de cada nueva ola.
+
+## Actualizacion 2026-07-03: próximos pasos tras Worker, Ágora V5 y migración editorial preparada
+
+## Hechos
+
+- Ágora V5 ya está generado:
+  - `/Users/GOIKO/Documents/Playground/agora_doc_2026-07-03/output/Winerim_Agora_brief_comercial_partner_v5_2026-07-03.pdf`;
+  - `/Users/GOIKO/Documents/Playground/agora_doc_2026-07-03/output/Winerim_Agora_brief_comercial_partner_v5_2026-07-03.docx`.
+- Migración editorial preparada:
+  - `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`;
+  - 12 artículos;
+  - 2 semanas editoriales;
+  - 6 idiomas.
+- Worker desplegado:
+  - Version ID `8dd5e4dc-33da-4269-a0a1-7899a9e2e910`;
+  - sitemap productivo: `2.305` URLs;
+  - CloudRIM/SAVia prerender productivo enriquecido.
+- Bloqueos confirmados:
+  - Supabase CLI sin `SUPABASE_ACCESS_TOKEN`;
+  - proyecto Supabase no enlazado;
+  - `www.winerim.wine` devuelve `421`;
+  - HTTP global no redirige todavía en páginas humanas.
+
+## Decisiones
+
+- Prioridad inmediata: aplicar migración editorial y publicar frontend, no crear más contenido sin cerrar la cadena de publicación.
+- Search Console se debe tocar después de aplicar migración/publicar frontend, salvo `/presentacion`, que ya puede inspeccionarse porque está en sitemap.
+- No sustituir capturas de Funcionalidades hasta conseguir capturas limpias y específicas.
+
+## Hipótesis
+
+- Aplicar la migración editorial debería añadir las 12 URLs nuevas al blog/sitemap según fecha si las funciones de visibilidad temporal están ya desplegadas.
+- Reenviar sitemap después de la migración reducirá el desfase entre URLs reales y URLs descubiertas en Search Console.
+
+## Tareas pendientes listas para retomar
+
+1. Aplicar migración editorial:
+   - con `SUPABASE_ACCESS_TOKEN` y proyecto enlazado;
+   - o pegando SQL desde Lovable/Supabase SQL editor.
+2. Verificar después de aplicar:
+   - `select article_group, lang, slug, published, published_at from public.articles where article_group in (...)`;
+   - esperar `12` filas, `6` por grupo.
+3. Publicar frontend desde Lovable si los cambios React de CloudRIM/SAVia/Funcionalidades no están en producción.
+4. Search Console:
+   - reenviar `https://winerim.wine/sitemap.xml`;
+   - inspeccionar `/presentacion`, `/producto/cloudrim`, `/producto/savia`, `/funcionalidades`, `/blog`;
+   - pedir indexación de `/presentacion`;
+   - pedir indexación de artículos solo cuando estén publicados/aplicados.
+5. Cloudflare:
+   - crear o corregir `www.winerim.wine` con certificado válido;
+   - redirigir `www` a `https://winerim.wine/`;
+   - activar regla global HTTP -> HTTPS.
+6. Funcionalidades/capturas:
+   - conseguir capturas limpias por funcionalidad;
+   - revisar visualmente antes de publicar;
+   - reemplazar solo si mejoran los composites actuales.
+7. Ágora:
+   - enviar V5 comercial al usuario/stakeholders;
+   - preparar documento técnico separado solo si Ágora pide endpoints, auth, sandbox, rate limits o modelo multi-cliente.

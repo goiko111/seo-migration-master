@@ -4081,6 +4081,39 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Mantener la contradiccion documentada explicitamente y limpiar/reconectar el codigo muerto en una tarea posterior.
 - Mantener la migracion `20260630082747...` como fuente de politicas y no recuperar los `UPDATE storage.buckets` en migraciones futuras.
 
+## 2026-07-03
+
+### Agentes paralelos para seis frentes
+
+#### Hechos
+
+- Se usaron agentes paralelos para Ágora, Biblioteca/Aprender vino, CloudRIM/SAVia/Funcionalidades y SEO.
+- El documento Ágora V5 quedó generado como DOCX/PDF comercial.
+- La nueva migración editorial de 12 artículos quedó preparada localmente, no aplicada remoto.
+- CloudRIM/SAVia y `llms` quedaron reforzados en repo.
+- El Worker `winerim-proxy` quedó desplegado con Version ID `8dd5e4dc-33da-4269-a0a1-7899a9e2e910`.
+- El sitemap productivo quedó en `2.305` URLs, sin duplicados, con `/presentacion` y alternates para CloudRIM/SAVia.
+
+#### Decisiones
+
+- Usar subagentes para frentes independientes, pero integrar/verificar desde la sesión principal antes de considerar cerrada la tanda.
+- Publicar desde CLI solo lo que esté autenticado y validado: Cloudflare Worker sí; Supabase remoto no.
+- Mantener las capturas actuales de Funcionalidades hasta conseguir capturas limpias y específicas sin modales, notificaciones ni contexto interno sensible.
+- Considerar `www` y redirección HTTP global como tarea de infraestructura Cloudflare/DNS, no como tarea cerrada por el deploy del Worker.
+- Mantener la migración editorial de Biblioteca/Aprender como dato local idempotente hasta revisar/aplicar cadena de migraciones pendiente.
+
+#### Hipótesis
+
+- El Worker enriquecido debería dar señales suficientes a Googlebot/LLMs mientras se centraliza o mejora Supabase `prerender`.
+- El nuevo sitemap con alternates debería reducir ambigüedad de canonical/hreflang en Search Console.
+
+#### Tareas pendientes
+
+- Aplicar la migración editorial en Supabase.
+- Publicar frontend desde Lovable si los cambios React aún no están live.
+- Reenviar sitemap e inspeccionar URLs clave en Search Console.
+- Resolver `www` y HTTP global en Cloudflare.
+
 #### Hipotesis
 
 - El backend `api.winerim.wine` puede estar usando almacenamiento propio de Cloudflare o procesamiento temporal; su retencion real no es inferible desde el frontend.

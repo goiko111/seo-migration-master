@@ -2240,36 +2240,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/herramientas/simulador-senal-margenes</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/herramientas/test-perfil-rim</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/herramientas/simulador-pareto-carta-vinos</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/herramientas/calculadora-fuga-margen</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/herramientas/comparador-distribuidores</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://winerim.wine/recursos/plantilla-carta-de-vinos</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -2338,54 +2308,6 @@
   <url>
     <loc>https://winerim.wine/recursos/revision-mensual-margenes</loc>
     <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/auditoria-pareto-80-20-carta-vinos</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/diagnostico-fuga-margen-carta-vinos</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/perfil-rim-restaurante</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/calculadora-valor-pos-vino</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/auditoria-distribuidores-catalogo</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/checklist-albaranes-facturas-coste-vino</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/plan-temporada-carta-vinos</loc>
-    <lastmod>2026-07-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/recursos/autoevaluacion-premios-winerim</loc>
-    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -23138,332 +23060,332 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/biblioteca-vinho/castas/zweigelt"/>
   </url>
   <url>
-    <loc>https://winerim.wine/en/article/types-of-wine-restaurant-wine-list</loc>
-    <lastmod>2026-07-01</lastmod>
+    <loc>https://winerim.wine/pt/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/pt/article/regioes-vinicolas-para-conhecer-em-restaurante</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/de/article/weinregionen-fuer-den-service-kennen</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/fr/article/regions-viticoles-a-connaitre-en-restauration</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/it/article/regioni-vinicole-da-conoscere-in-ristorante</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/en/article/wine-regions-to-know-for-restaurant-service</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/article/regiones-vinicolas-para-empezar-en-restaurante</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/pt/article/castas-para-conhecer-ao-comecar</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/rebsorten-die-man-zum-einstieg-kennen-sollte</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/fr/article/cepages-a-connaitre-pour-commencer</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/vitigni-da-conoscere-per-iniziare</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/en/article/grapes-to-know-when-starting-with-wine</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/article/uvas-que-conocer-para-empezar</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/pt/article/tipos-de-vinho-para-entender-uma-carta</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/de/article/weinarten-weinkarte-verstehen</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/tipos-de-vino-para-entender-una-carta</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/fr/article/types-de-vin-pour-comprendre-une-carte</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/it/article/tipi-di-vino-per-capire-una-carta</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/vocabulario-de-cata-de-vino</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/harmonizacoes-basicas-para-restaurantes</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/einfache-food-wine-pairings-fuer-restaurants</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/accords-mets-vins-de-base-pour-restaurants</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/abbinamenti-base-cibo-vino-per-ristoranti</loc>
-    <lastmod>2026-07-01</lastmod>
+    <loc>https://winerim.wine/en/article/types-of-wine-restaurant-wine-list</loc>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/en/article/basic-food-and-wine-pairing-for-restaurants</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/maridajes-basicos-para-restaurantes</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/pt/article/vocabulario-de-prova-de-vinho</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/de/article/weinverkostung-vokabular</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/fr/article/vocabulaire-de-degustation-du-vin</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/it/article/vocabolario-degustazione-vino</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/en/article/wine-tasting-vocabulary</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/vocabulario-de-cata-de-vino</loc>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/pt/article/como-provar-vinho-em-cinco-passos</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/de/article/wein-verkosten-in-fuenf-schritten</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/fr/article/comment-deguster-le-vin-en-cinq-etapes</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/it/article/come-degustare-il-vino-in-cinque-passaggi</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/en/article/how-to-taste-wine-in-five-steps</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/article/como-catar-vino-en-cinco-pasos</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/harmonizacoes-basicas-para-restaurantes</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/vitigni-da-conoscere-per-iniziare</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/maridajes-basicos-para-restaurantes</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/maridajes-carta-vinos-rentable</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/uvas-regiones-equipo-sala-vender-vino</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/rebsorten-die-man-zum-einstieg-kennen-sollte</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/tipos-de-vino-para-entender-una-carta</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/einfache-food-wine-pairings-fuer-restaurants</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/accords-mets-vins-de-base-pour-restaurants</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/abbinamenti-base-cibo-vino-per-ristoranti</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/biblioteca-vino-restaurante-vender-mas</loc>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://winerim.wine/article/alex-peiro</loc>
     <lastmod>2026-06-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/biblioteca-vino-restaurante-vender-mas</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/uvas-regiones-equipo-sala-vender-vino</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/maridajes-carta-vinos-rentable</loc>
-    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -25388,85 +25310,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/it/article/quando-la-carta-vini-e-troppo-lunga</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/quand-la-carte-des-vins-est-trop-longue</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/welche-weine-pro-glas-nach-lokaltyp</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/come-vendere-piu-vino-in-sala-con-dati</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/pricing-vino-errori-comuni</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/alternative-carte-pdf-vins</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/wann-ist-eine-weinkarte-zu-lang</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/wine-pricing-mistakes-restaurant</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/quali-vini-offrire-al-bicchiere-secondo-tipo-locale</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/zu-lange-weinkarte</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/software-offener-weinausschank-restaurants</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/erros-preco-vinho-restaurante</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/software-vino-al-calice-ristoranti</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/como-saber-carta-vinhos-desequilibrada</loc>
+    <loc>https://winerim.wine/de/article/fehler-weinepreis-restaurant</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25478,73 +25322,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/de/article/fehler-weinepreis-restaurant</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://winerim.wine/it/article/come-sapere-se-la-carta-vini-squilibrata</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/tarification-vin-restaurant</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/alternativa-carta-pdf-vinhos</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/como-vender-mais-vinho-em-sala-com-dados</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/comment-vendre-plus-de-vin-en-salle-avec-donnees</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/quando-una-carta-vini-troppo-lunga</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/fr/article/quels-vins-proposer-au-verre-selon-type-etablissement</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/de/article/alternative-zur-pdf-weinkarte</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/software-vinho-copo-restaurantes</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/it/article/alternativa-carta-pdf-vini</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/pt/article/quando-carta-vinhos-demasiado-longa</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25568,7 +25346,145 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/en/article/what-wines-offer-by-glass-venue-type</loc>
+    <loc>https://winerim.wine/it/article/software-vino-al-calice-ristoranti</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/quali-vini-offrire-al-bicchiere-secondo-tipo-locale</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/zu-lange-weinkarte</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/comment-vendre-plus-de-vin-en-salle-avec-donnees</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/alternative-carte-pdf-vins</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/pricing-vino-errori-comuni</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/come-vendere-piu-vino-in-sala-con-dati</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/welche-weine-pro-glas-nach-lokaltyp</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/quand-la-carte-des-vins-est-trop-longue</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/alternative-zur-pdf-weinkarte</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/quando-carta-vinhos-demasiado-longa</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/alternativa-carta-pdf-vini</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/alternativa-carta-pdf-vinhos</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/tarification-vin-restaurant</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/software-vinho-copo-restaurantes</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/como-vender-mais-vinho-em-sala-com-dados</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/wann-ist-eine-weinkarte-zu-lang</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/wine-pricing-mistakes-restaurant</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/como-saber-carta-vinhos-desequilibrada</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/quando-la-carta-vini-e-troppo-lunga</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/de/article/software-offener-weinausschank-restaurants</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/article/erros-preco-vinho-restaurante</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/it/article/quando-una-carta-vini-troppo-lunga</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/fr/article/quels-vins-proposer-au-verre-selon-type-etablissement</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25586,7 +25502,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/5-errores-reales-que-vemos-en-cartas-de-vinos-de-restaurantes</loc>
+    <loc>https://winerim.wine/en/article/what-wines-offer-by-glass-venue-type</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25598,31 +25520,19 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-la-ia-esta-cambiando-la-venta-de-vino-en-restauracion</loc>
+    <loc>https://winerim.wine/article/5-errores-reales-que-vemos-en-cartas-de-vinos-de-restaurantes</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/el-problema-de-tener-demasiadas-referencias-en-carta</loc>
+    <loc>https://winerim.wine/article/carta-digital-vs-carta-tradicional-de-vinos</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/que-estan-haciendo-mejor-los-restaurantes-que-mas-venden-vino</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/que-busca-un-comensal-cuando-mira-una-carta-de-vinos</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/por-que-el-vino-deberia-ser-el-producto-mas-estrategico-del-restaurante</loc>
+    <loc>https://winerim.wine/article/por-que-la-mayoria-de-cartas-de-vinos-no-venden</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25646,7 +25556,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-usar-el-vino-por-copa-para-vender-mas-botellas</loc>
+    <loc>https://winerim.wine/article/el-problema-de-tener-demasiadas-referencias-en-carta</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/que-estan-haciendo-mejor-los-restaurantes-que-mas-venden-vino</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25670,55 +25586,31 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/article/como-usar-el-vino-por-copa-para-vender-mas-botellas</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/que-busca-un-comensal-cuando-mira-una-carta-de-vinos</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/article/como-deberia-ser-una-carta-de-vinos-segun-tu-tipo-de-restaurante</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/carta-digital-vs-carta-tradicional-de-vinos</loc>
+    <loc>https://winerim.wine/article/por-que-el-vino-deberia-ser-el-producto-mas-estrategico-del-restaurante</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/por-que-la-mayoria-de-cartas-de-vinos-no-venden</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/como-pensar-la-carta-de-vinos-desde-la-rentabilidad</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/como-saber-si-carta-vinos-descompensada</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/errores-fijar-precios-vino-restaurante</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/beyond-pdf-wine-list</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/como-saber-si-estas-comprando-mal-vino</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/como-calcular-precio-por-copa-sin-comerte-margen</loc>
+    <loc>https://winerim.wine/article/como-la-ia-esta-cambiando-la-venta-de-vino-en-restauracion</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25730,43 +25622,31 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-vender-mas-vino-en-sala-con-datos</loc>
+    <loc>https://winerim.wine/article/alternativa-carta-pdf-vinos</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/que-vinos-merece-la-pena-reponer</loc>
+    <loc>https://winerim.wine/en/article/beyond-pdf-wine-list</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-detectar-stock-muerto-carta-vinos</loc>
+    <loc>https://winerim.wine/article/diferencia-carta-digital-carta-vinos-inteligente</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/software-vino-por-copa-restaurantes</loc>
+    <loc>https://winerim.wine/article/como-calcular-precio-por-copa-sin-comerte-margen</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/software-carta-vinos-restaurante</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/when-wine-list-too-long</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/metricas-fb-vino-restaurante</loc>
+    <loc>https://winerim.wine/article/vender-mejor-vs-comprar-mejor-vino</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25778,25 +25658,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/article/metricas-fb-vino-restaurante</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/como-detectar-stock-muerto-carta-vinos</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/que-vinos-merece-la-pena-reponer</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/como-saber-si-estas-comprando-mal-vino-restaurante</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/que-es-carta-de-vinos-inteligente</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/article/diferencia-entre-vender-mejor-y-comprar-mejor-vino</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/palancas-mejorar-margen-vino-sin-rehacer-carta</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/alternativa-carta-pdf-vinos</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/en/article/wine-by-the-glass-software-restaurants</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25814,30 +25706,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/diferencia-carta-digital-carta-vinos-inteligente</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/vender-mejor-vs-comprar-mejor-vino</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/que-es-carta-de-vinos-inteligente</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://winerim.wine/article/como-saber-si-estas-comprando-mal-vino-restaurante</loc>
-    <lastmod>2026-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://winerim.wine/article/como-mejorar-margen-vino-sin-subir-precios</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -25845,6 +25713,12 @@
   </url>
   <url>
     <loc>https://winerim.wine/article/que-vinos-merece-la-pena-reponer-y-cuales-no</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/como-saber-si-estas-comprando-mal-vino</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25868,31 +25742,67 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/juan-perez-vidal</loc>
+    <loc>https://winerim.wine/article/como-saber-si-carta-vinos-descompensada</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes</loc>
+    <loc>https://winerim.wine/article/errores-fijar-precios-vino-restaurante</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-hacer-una-carta-de-vinos-perfecta-para-tu-restaurante</loc>
+    <loc>https://winerim.wine/article/palancas-mejorar-margen-vino-sin-rehacer-carta</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/ia-para-restaurantes-las-mejores-aplicaciones</loc>
+    <loc>https://winerim.wine/article/como-vender-mas-vino-en-sala-con-datos</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/como-mejorar-la-experiencia-del-cliente-en-un-restaurante</loc>
+    <loc>https://winerim.wine/article/software-vino-por-copa-restaurantes</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/software-carta-vinos-restaurante</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/when-wine-list-too-long</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/en/article/wine-by-the-glass-software-restaurants</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/xavi-nolla</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/daniel-ramos</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/alex-pardo</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25910,6 +25820,42 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://winerim.wine/article/juan-perez-vidal</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/simone-monese</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/berta-romero</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/joan-guso</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/por-que-los-jovenes-no-beben-vino-en-los-restaurantes</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/paco-martinez-ales</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://winerim.wine/article/nacho-otamendi</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -25922,7 +25868,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/daniel-ramos</loc>
+    <loc>https://winerim.wine/article/como-hacer-una-carta-de-vinos-perfecta-para-tu-restaurante</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/article/ia-para-restaurantes-las-mejores-aplicaciones</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -25958,110 +25910,272 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/alex-pardo</loc>
+    <loc>https://winerim.wine/article/como-mejorar-la-experiencia-del-cliente-en-un-restaurante</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/article/simone-monese</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://winerim.wine/presentacion</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
   </url>
   <url>
-    <loc>https://winerim.wine/article/paco-martinez-ales</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://winerim.wine/en/presentation</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
   </url>
   <url>
-    <loc>https://winerim.wine/article/xavi-nolla</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://winerim.wine/it/presentazione</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
   </url>
   <url>
-    <loc>https://winerim.wine/article/berta-romero</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://winerim.wine/fr/presentation</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
   </url>
   <url>
-    <loc>https://winerim.wine/article/joan-guso</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://winerim.wine/de/praesentation</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/apresentacao</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/presentacion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/presentation"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/presentazione"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/presentation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/praesentation"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/apresentacao"/>
   </url>
   <url>
     <loc>https://winerim.wine/producto/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/en/product/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/it/prodotto/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/fr/produit/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/de/produkt/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/pt/produto/cloudrim</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/cloudrim"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/cloudrim"/>
   </url>
   <url>
     <loc>https://winerim.wine/producto/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
   </url>
   <url>
     <loc>https://winerim.wine/en/product/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
   </url>
   <url>
     <loc>https://winerim.wine/it/prodotto/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
   </url>
   <url>
     <loc>https://winerim.wine/fr/produit/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
   </url>
   <url>
     <loc>https://winerim.wine/de/produkt/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
+  </url>
+  <url>
+    <loc>https://winerim.wine/pt/produto/savia</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://winerim.wine/producto/savia"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://winerim.wine/en/product/savia"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://winerim.wine/it/prodotto/savia"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://winerim.wine/fr/produit/savia"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/produkt/savia"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/produto/savia"/>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/simulador-senal-margenes</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://winerim.wine/pt/produto/savia</loc>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://winerim.wine/herramientas/test-perfil-rim</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/simulador-pareto-carta-vinos</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/calculadora-fuga-margen</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://winerim.wine/herramientas/comparador-distribuidores</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

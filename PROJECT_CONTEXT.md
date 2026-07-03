@@ -379,3 +379,83 @@
 - Solicitar indexación selectiva de los artículos internacionales solo después de validar que Search Console permite hacerlo sin error.
 - Monitorizar en Search Console la ampliacion semantica de regiones, estilos y maridajes tras el deploy validado de `69d2fbf`.
 - Si se abre la tarea Spiritsrim, usar `SPIRITSRIM_CODEX_HANDOFF.md` como punto de partida junto con los cuatro documentos fuente de verdad.
+
+## Actualizacion 2026-07-03: ejecucion paralela Agora, contenido, CloudRIM/SAVia y SEO
+
+### Hechos
+
+- Se trabajó con cuatro agentes paralelos sobre los seis frentes pedidos por el usuario.
+- Documento comercial Ágora:
+  - se creó `Winerim_Agora_brief_comercial_partner_v5_2026-07-03.docx`;
+  - se creó `Winerim_Agora_brief_comercial_partner_v5_2026-07-03.pdf`;
+  - rutas: `/Users/GOIKO/Documents/Playground/agora_doc_2026-07-03/output/`;
+  - script: `/Users/GOIKO/Documents/Playground/agora_doc_2026-07-03/scripts/build_winerim_agora_partner_brief_v5.py`;
+  - QA visual reportado: PDF válido de 5 páginas, DOCX OK, sin solapes ni cortes.
+- Biblioteca del vino y Aprender vino:
+  - se preparó la migración local `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`;
+  - añade `12` artículos: `2` temas x `6` idiomas;
+  - fechas semanales: `2026-07-06` para Biblioteca del vino y `2026-07-13` para Aprender vino;
+  - no se aplicó remoto porque `supabase migration list --linked` falla por proyecto no enlazado y `supabase projects list` falla por falta de `SUPABASE_ACCESS_TOKEN`.
+- CloudRIM/SAVia:
+  - se reforzaron las páginas React de CloudRIM, SAVia, Winerim Supply, Winerim Core, Inteligencia Dinámica y Funcionalidades;
+  - se actualizaron `public/llms.txt` y `public/llms-full.txt` con facturas, conciliación albarán-factura, RIMs y aprobación humana;
+  - se corrigió el posible solape entre cookie banner y CTA flotante moviendo el banner en mobile.
+- Capturas de Funcionalidades:
+  - no se sustituyeron assets porque las capturas alternativas disponibles tenían modal/notificación o contexto interno peor que los composites actuales.
+- SEO técnico:
+  - se actualizó `cloudflare-worker-v3-hybrid.js`;
+  - se enriqueció el prerender estático Worker de CloudRIM/SAVia hasta unas `280` palabras y `7` alternates;
+  - se añadió `/presentacion` y variantes localizadas al sitemap;
+  - se añadieron alternates sitemap para CloudRIM, SAVia y Presentación;
+  - se alineó `scripts/refresh-static-sitemap.mjs`;
+  - `public/sitemap.xml` local queda con `2.305` URLs, sin duplicados y XML válido.
+- Cloudflare Worker:
+  - dry-run OK;
+  - desplegado `winerim-proxy` Version ID `8dd5e4dc-33da-4269-a0a1-7899a9e2e910`.
+- Producción tras Worker:
+  - `https://winerim.wine/sitemap.xml` devuelve `200`, `X-Worker-Branch: sitemap-worker-detail-bridge`, `2.305` URLs, sin duplicados;
+  - `/presentacion`, `/en/presentation`, `/producto/cloudrim` y `/producto/savia` están en sitemap con `7` alternates;
+  - Googlebot recibe `worker-static-prerender` para `/producto/cloudrim` y `/producto/savia`, con `283` y `281` palabras respectivamente y `7` alternates;
+  - `http://winerim.wine/sitemap.xml` ya redirige `301` a HTTPS;
+  - `http://winerim.wine/` y `http://winerim.wine/producto/cloudrim` siguen devolviendo `200` para UA humana, lo que indica que esa parte requiere regla/capa Cloudflare fuera del Worker actual;
+  - `https://www.winerim.wine/` sigue devolviendo `421`.
+- Verificaciones locales:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `node --check scripts/refresh-static-sitemap.mjs`;
+  - `npm run generate:sitemap-static`;
+  - `npm run build`;
+  - `npm run test` con `57` tests;
+  - `git diff --check`.
+- Cambio ajeno/no propio presente y no tocado:
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+### Decisiones
+
+- Mantener las capturas actuales de Funcionalidades hasta conseguir capturas limpias sin modales ni notificaciones.
+- Publicar inmediatamente el Worker porque Cloudflare CLI sí estaba autenticado, pero no aplicar migraciones Supabase sin credenciales/proyecto enlazado.
+- Tratar `www` y la redirección HTTP completa como problema de configuración Cloudflare/DNS/certificado, no como problema resuelto solo por código.
+- Mantener `Aprender vino` y Biblioteca del vino separados también en la nueva migración editorial.
+
+### Hipótesis
+
+- El sitemap con `/presentacion` y alternates de producto debería reducir errores de descubrimiento/canonical en Search Console tras recrawl.
+- El prerender estático más largo de CloudRIM/SAVia debería mejorar comprensión por Googlebot y LLMs aunque Supabase `prerender` no tenga todavía una versión completa.
+- La regla `Always Use HTTPS` o equivalente en Cloudflare debería resolver los `200` por HTTP en páginas humanas que no están entrando por la ruta Worker adecuada.
+- El `421` de `www` probablemente requiere DNS/certificado/routing de hostname antes de que la redirección Worker pueda actuar.
+
+### Tareas pendientes
+
+- Aplicar la migración `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` desde Lovable/Supabase o con `SUPABASE_ACCESS_TOKEN`.
+- Revalidar tras aplicar migración:
+  - `12` artículos visibles según fecha;
+  - `/blog` y variantes no saltan a español;
+  - sitemap incluye los nuevos artículos solo cuando corresponda por fecha;
+  - Googlebot recibe article/prerender correcto en una muestra ES/EN/PT.
+- En Search Console:
+  - reenviar `https://winerim.wine/sitemap.xml`;
+  - inspeccionar `/presentacion`, `/producto/cloudrim`, `/producto/savia`, `/funcionalidades` y `/blog`;
+  - solicitar indexación selectiva de `/presentacion` y de las URLs editoriales cuando estén aplicadas.
+- En Cloudflare:
+  - configurar `www.winerim.wine` para redirigir `301` a `https://winerim.wine/`;
+  - forzar HTTP -> HTTPS para todas las rutas, no solo sitemap.
+- Hacer QA visual post-publish de CloudRIM/SAVia/Funcionalidades en desktop/mobile si Lovable publica el frontend React.

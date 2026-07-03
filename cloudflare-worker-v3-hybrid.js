@@ -344,14 +344,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/producto/cloudrim',
     lang: 'es',
     title: 'CloudRIM | Nube documental operativa para restaurantes',
-    description: 'CloudRIM recoge cartas, ventas, albaranes, stock, reportes TPV y tarifas de distribuidores, y los enruta dentro de Winerim.',
+    description: 'CloudRIM recoge cartas, ventas, albaranes, facturas, stock, reportes TPV y tarifas de distribuidores, distingue el tipo documental, prepara conciliacion albaran-factura y enruta todo dentro de Winerim.',
     h1: 'La nube donde tu restaurante deja los documentos y Winerim hace el trabajo pesado',
     subtitle: 'CloudRIM centraliza documentos y datos dispersos para convertirlos en informacion operativa dentro de Winerim.',
     sections: [
       ['El problema', 'Cartas, albaranes, facturas, tarifas, stock y ventas suelen vivir en canales distintos. CloudRIM permite que entren en Winerim sin multiplicar trabajo manual.'],
       ['Como funciona', 'El restaurante sube o conecta documentos por portal, email, carpeta compartida, FTP/SFTP, API, TPV o proveedor. CloudRIM identifica el origen y enruta cada archivo.'],
       ['Que recoge', 'Cartas de vino, ventas, albaranes, facturas, stock, reportes TPV y tarifas de distribuidores, incluso cuando llegan en formatos diferentes.'],
+      ['Conciliacion albaran-factura', 'Cuando detecta una factura o albaran, Winerim compara proveedor, lineas, cantidades, precios y totales antes de actualizar costes, stock o margenes. Si algo no cuadra, queda en revision humana.'],
       ['Que gana el restaurante', 'Menos administracion manual, menos errores de copia, costes y stock mas actualizados, margenes mas claros y mejores datos para Winerim Core, Winerim Supply y SAVia.'],
+      ['Decision conectada', 'CloudRIM convierte documentos dispersos en senales trazables para compras, reposicion, pricing, RIMs, alertas de margen y conversaciones con SAVia.'],
     ],
     links: [['SAVia', '/producto/savia'], ['Integraciones', '/integraciones'], ['Winerim Supply', '/producto/winerim-supply'], ['Demo', '/demo']],
   },
@@ -359,14 +361,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/en/product/cloudrim',
     lang: 'en',
     title: 'CloudRIM | Operational Document Cloud for Restaurants',
-    description: 'CloudRIM collects wine lists, sales, delivery notes, stock, POS reports and distributor tariffs, then routes them inside Winerim.',
+    description: 'CloudRIM collects wine lists, sales, delivery notes, invoices, stock, POS reports and distributor tariffs, identifies document type, prepares delivery-note-to-invoice reconciliation and routes everything inside Winerim.',
     h1: 'The operational cloud where your restaurant drops documents and Winerim does the heavy work',
     subtitle: 'CloudRIM centralises scattered documents and data so they become usable operational inputs inside Winerim.',
     sections: [
       ['The problem', 'Wine lists, delivery notes, invoices, tariffs, stock and sales often live in different channels. CloudRIM brings them into Winerim without adding manual work.'],
       ['How it works', 'The restaurant uploads or connects documents through a portal, email, shared folder, FTP/SFTP, API, POS or supplier. CloudRIM identifies the source and routes each file.'],
       ['What it collects', 'Wine lists, sales, delivery notes, invoices, stock, POS reports and distributor tariffs, even when formats and channels differ.'],
+      ['Delivery-note-to-invoice reconciliation', 'When CloudRIM detects an invoice or delivery note, Winerim compares supplier, lines, quantities, prices and totals before costs, stock or margins are updated. If something does not match, it stays under human review.'],
       ['What the restaurant gains', 'Less manual administration, fewer copy-paste errors, updated costs and stock, clearer margins and better data for Winerim Core, Winerim Supply and SAVia.'],
+      ['Connected decision layer', 'CloudRIM turns scattered documents into traceable signals for purchasing, replenishment, pricing, RIMs, margin alerts and SAVia conversations.'],
     ],
     links: [['SAVia', '/en/product/savia'], ['Integrations', '/en/integrations'], ['Winerim Supply', '/en/product/winerim-supply'], ['Demo', '/en/demo']],
   },
@@ -374,14 +378,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/it/prodotto/cloudrim',
     lang: 'it',
     title: 'CloudRIM | Nube documentale operativa per ristoranti',
-    description: 'CloudRIM raccoglie carte vini, vendite, bolle, stock, report POS e tariffe dei distributori e li instrada dentro Winerim.',
+    description: 'CloudRIM raccoglie carte vini, vendite, bolle, fatture, stock, report POS e tariffe dei distributori, riconosce il tipo di documento, prepara riconciliazione bolla-fattura e instrada tutto dentro Winerim.',
     h1: 'La nube operativa dove il ristorante lascia i documenti e Winerim fa il lavoro pesante',
     subtitle: 'CloudRIM centralizza documenti e dati dispersi per trasformarli in input operativi dentro Winerim.',
     sections: [
       ['Il problema', 'Carta, bolle, fatture, listini, stock e vendite arrivano da canali diversi. CloudRIM li porta in Winerim senza aggiungere lavoro manuale.'],
       ['Come funziona', 'Il ristorante carica o collega documenti tramite portale, email, cartella condivisa, FTP/SFTP, API, POS o fornitore. CloudRIM riconosce origine e tipo, poi instrada ogni file.'],
       ['Cosa raccoglie', 'Carte vini, vendite, bolle, fatture, stock, report POS e listini distributori anche con formati diversi.'],
+      ['Riconciliazione bolla-fattura', 'Quando rileva una fattura o una bolla, Winerim confronta fornitore, righe, quantita, prezzi e totali prima di aggiornare costi, stock o margini. Se qualcosa non torna, resta in revisione umana.'],
       ['Cosa guadagna il ristorante', 'Meno amministrazione manuale, meno errori, costi e stock piu aggiornati, margini piu chiari e dati migliori per Winerim Core, Winerim Supply e SAVia.'],
+      ['Decisione connessa', 'CloudRIM trasforma documenti dispersi in segnali tracciabili per acquisti, riordino, pricing, RIM, avvisi di margine e conversazioni con SAVia.'],
     ],
     links: [['SAVia', '/it/prodotto/savia'], ['Integrazioni', '/it/integrazioni'], ['Winerim Supply', '/it/prodotto/winerim-supply'], ['Demo', '/it/demo']],
   },
@@ -389,14 +395,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/fr/produit/cloudrim',
     lang: 'fr',
     title: 'CloudRIM | Nuage documentaire operationnel pour restaurants',
-    description: 'CloudRIM collecte cartes, ventes, bons de livraison, stock, rapports POS et tarifs distributeurs, puis les route dans Winerim.',
+    description: 'CloudRIM collecte cartes, ventes, bons de livraison, factures, stock, rapports POS et tarifs distributeurs, reconnait le type documentaire, prepare le rapprochement bon-facture et route tout dans Winerim.',
     h1: 'Le nuage operationnel ou le restaurant depose ses documents et Winerim fait le travail lourd',
     subtitle: 'CloudRIM centralise documents et donnees disperses pour les transformer en entrees operationnelles dans Winerim.',
     sections: [
       ['Le probleme', 'Carte, bons, factures, tarifs, stock et ventes arrivent par des canaux differents. CloudRIM les fait entrer dans Winerim sans ajouter du travail manuel.'],
       ['Comment ca fonctionne', 'Le restaurant envoie ou connecte les documents via portail, email, dossier partage, FTP/SFTP, API, POS ou fournisseur. CloudRIM reconnait la source et route chaque fichier.'],
       ['Ce qui est collecte', 'Cartes des vins, ventes, bons, factures, stock, rapports POS et tarifs distributeurs, meme avec des formats differents.'],
+      ['Rapprochement bon-facture', 'Quand CloudRIM detecte une facture ou un bon, Winerim compare fournisseur, lignes, quantites, prix et totaux avant de modifier couts, stock ou marges. En cas d ecart, le document reste en validation humaine.'],
       ['Ce que gagne le restaurant', 'Moins d administration manuelle, moins d erreurs, couts et stocks plus a jour, marges plus lisibles et meilleures donnees pour Winerim Core, Winerim Supply et SAVia.'],
+      ['Decision connectee', 'CloudRIM transforme les documents disperses en signaux tracables pour achats, reassort, pricing, RIM, alertes de marge et conversations avec SAVia.'],
     ],
     links: [['SAVia', '/fr/produit/savia'], ['Integrations', '/fr/integrations'], ['Winerim Supply', '/fr/produit/winerim-supply'], ['Demo', '/fr/demo']],
   },
@@ -404,14 +412,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/de/produkt/cloudrim',
     lang: 'de',
     title: 'CloudRIM | Operative Dokumenten-Cloud fuer Restaurants',
-    description: 'CloudRIM sammelt Weinkarten, Verkaeufe, Lieferscheine, Bestand, POS-Reports und Lieferantentarife und routet sie in Winerim.',
+    description: 'CloudRIM sammelt Weinkarten, Verkaeufe, Lieferscheine, Rechnungen, Bestand, POS-Reports und Lieferantentarife, erkennt Dokumenttypen, bereitet den Abgleich Lieferschein-Rechnung vor und routet alles in Winerim.',
     h1: 'Die operative Cloud, in der das Restaurant Dokumente ablegt und Winerim die schwere Arbeit uebernimmt',
     subtitle: 'CloudRIM zentralisiert verstreute Dokumente und Daten, damit sie in Winerim operativ nutzbar werden.',
     sections: [
       ['Das Problem', 'Karte, Lieferscheine, Rechnungen, Tarife, Bestand und Verkauf liegen oft in getrennten Kanaelen. CloudRIM bringt sie ohne zusaetzliche Handarbeit in Winerim.'],
       ['So funktioniert es', 'Das Restaurant laedt Dokumente hoch oder verbindet Portal, E-Mail, geteilte Ordner, FTP/SFTP, API, POS oder Lieferanten. CloudRIM erkennt Quelle und Typ und routet jede Datei.'],
       ['Was gesammelt wird', 'Weinkarten, Verkaeufe, Lieferscheine, Rechnungen, Bestand, POS-Reports und Lieferantentarife, auch bei unterschiedlichen Formaten.'],
+      ['Abgleich Lieferschein-Rechnung', 'Wenn CloudRIM eine Rechnung oder einen Lieferschein erkennt, vergleicht Winerim Lieferant, Positionen, Mengen, Preise und Summen, bevor Kosten, Bestand oder Margen geaendert werden. Abweichungen bleiben in menschlicher Pruefung.'],
       ['Was das Restaurant gewinnt', 'Weniger manuelle Verwaltung, weniger Fehler, aktuellere Kosten und Bestaende, klarere Margen und bessere Daten fuer Winerim Core, Winerim Supply und SAVia.'],
+      ['Verbundene Entscheidungsebene', 'CloudRIM macht aus verstreuten Dokumenten nachvollziehbare Signale fuer Einkauf, Nachschub, Pricing, RIMs, Margenalarme und SAVia-Gespraeche.'],
     ],
     links: [['SAVia', '/de/produkt/savia'], ['Integrationen', '/de/integrationen'], ['Winerim Supply', '/de/produkt/winerim-supply'], ['Demo', '/de/demo']],
   },
@@ -419,14 +429,16 @@ const CLOUDRIM_WORKER_PAGES = Object.fromEntries([
     path: '/pt/produto/cloudrim',
     lang: 'pt',
     title: 'CloudRIM | Nuvem documental operacional para restaurantes',
-    description: 'CloudRIM recolhe cartas, vendas, guias, stock, relatorios POS e tabelas de distribuidores, e encaminha tudo dentro da Winerim.',
+    description: 'CloudRIM recolhe cartas, vendas, guias, faturas, stock, relatorios POS e tabelas de distribuidores, deteta o tipo documental, prepara conciliacao guia-fatura e encaminha tudo dentro da Winerim.',
     h1: 'A nuvem operacional onde o restaurante deixa documentos e a Winerim faz o trabalho pesado',
     subtitle: 'CloudRIM centraliza documentos e dados dispersos para os transformar em informacao operacional dentro da Winerim.',
     sections: [
       ['O problema', 'Carta, guias, faturas, tabelas, stock e vendas vivem em canais diferentes. CloudRIM faz entrar tudo na Winerim sem criar mais trabalho manual.'],
       ['Como funciona', 'O restaurante carrega ou liga documentos por portal, email, pasta partilhada, FTP/SFTP, API, POS ou fornecedor. CloudRIM identifica origem e tipo e encaminha cada ficheiro.'],
       ['O que recolhe', 'Cartas de vinho, vendas, guias, faturas, stock, relatorios POS e tabelas de distribuidores mesmo com formatos diferentes.'],
+      ['Conciliacao guia-fatura', 'Quando deteta uma fatura ou guia, a Winerim compara fornecedor, linhas, quantidades, precos e totais antes de atualizar custos, stock ou margens. Se algo nao bate certo, fica em revisao humana.'],
       ['O que ganha o restaurante', 'Menos administracao manual, menos erros, custos e stock mais atualizados, margens mais claras e melhores dados para Winerim Core, Winerim Supply e SAVia.'],
+      ['Camada de decisao ligada', 'CloudRIM transforma documentos dispersos em sinais rastreaveis para compras, reposicao, pricing, RIMs, alertas de margem e conversas com SAVia.'],
     ],
     links: [['SAVia', '/pt/produto/savia'], ['Integracoes', '/pt/integracoes'], ['Winerim Supply', '/pt/produto/winerim-supply'], ['Demo', '/pt/demo']],
   },
@@ -437,14 +449,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/producto/savia',
     lang: 'es',
     title: 'SAVia | Agente conversacional para carta, stock y margenes',
-    description: 'SAVia es el agente conversacional de Winerim para preguntar sobre carta, ventas, stock, costes, margenes, albaranes y oportunidades.',
+    description: 'SAVia es el agente conversacional de Winerim para preguntar sobre carta, ventas, stock, costes, margenes, facturas, albaranes, RIMs y oportunidades. Explica datos y prepara acciones sin ejecutar cambios criticos sin aprobacion humana.',
     h1: 'Pregunta a tu bodega. SAVia responde con datos de Winerim.',
-    subtitle: 'SAVia ayuda a interpretar carta, ventas, stock, costes, margenes, albaranes y oportunidades sin perderse en dashboards.',
+    subtitle: 'SAVia ayuda a interpretar carta, ventas, stock, costes, margenes, albaranes, facturas, RIMs y oportunidades sin perderse en dashboards.',
     sections: [
       ['Por que existe', 'Los dashboards muestran datos. SAVia ayuda a interpretarlos, conectar senales y preparar decisiones en lenguaje natural.'],
-      ['Que puedes preguntar', 'Que vinos inmovilizan capital, que referencias han perdido margen, que conviene impulsar, que albaranes revisar o que cambiar antes de comprar.'],
-      ['Aprobacion humana', 'SAVia consulta, resume y prepara acciones, pero los cambios criticos como precios, compras o retirada de referencias quedan bajo aprobacion humana.'],
+      ['Que puedes preguntar', 'Que vinos inmovilizan capital, que referencias han perdido margen, que conviene impulsar, que factura no cuadra con su albaran o que RIM preparar antes de aprobar.'],
+      ['Preview antes de actuar', 'SAVia puede resumir impacto previsto en stock, coste, margen, rotacion, precio y carta antes de que el equipo decida aplicar un cambio.'],
+      ['Aprobacion humana', 'SAVia consulta, explica, resume y prepara acciones, pero no cambia stock, PVP, costes, albaranes, facturas, RIMs o referencias sin aprobacion humana.'],
       ['Contexto conectado', 'SAVia trabaja con carta, ventas, stock, costes, albaranes, facturas, tarifas y documentos procesados por CloudRIM.'],
+      ['Para quien ayuda', 'Direccion, sumiller, compras y sala pueden hacer preguntas distintas sobre la misma realidad operativa y recibir una respuesta trazable.'],
     ],
     links: [['CloudRIM', '/producto/cloudrim'], ['Inteligencia dinamica', '/producto/inteligencia-dinamica'], ['Winerim Core', '/producto/winerim-core'], ['Demo', '/demo']],
   },
@@ -452,14 +466,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/en/product/savia',
     lang: 'en',
     title: 'SAVia | Conversational Agent for Wine List, Stock and Margins',
-    description: 'SAVia is Winerim conversational intelligence for asking about wine list, sales, stock, costs, margins, delivery notes and opportunities.',
+    description: 'SAVia is Winerim conversational intelligence for asking about wine list, sales, stock, costs, margins, invoices, delivery notes, RIMs and opportunities. It explains data and prepares actions without executing critical changes without human approval.',
     h1: 'Ask your cellar. SAVia answers with Winerim data.',
-    subtitle: 'SAVia helps teams understand wine list, sales, stock, costs and margins without digging through dashboards.',
+    subtitle: 'SAVia helps teams understand wine list, sales, stock, costs, margins, invoices, delivery notes, RIMs and opportunities without digging through dashboards.',
     sections: [
       ['Why it exists', 'Dashboards show data. SAVia helps interpret it, connect signals and prepare decisions in everyday language.'],
-      ['What you can ask', 'Which wines tie up capital, which references lost margin, what to push, what delivery notes need review or what to change before buying.'],
-      ['Human approval', 'SAVia can consult, summarize and prepare actions, but critical changes such as prices, purchases or removing references remain under human approval.'],
+      ['What you can ask', 'Which wines tie up capital, which references lost margin, what to push, which invoice does not match its delivery note or which RIM to prepare before approval.'],
+      ['Preview before action', 'SAVia can summarize the expected impact on stock, cost, margin, rotation, price and the wine list before the team decides to apply a change.'],
+      ['Human approval', 'SAVia can consult, explain, summarize and prepare actions, but it does not change stock, prices, costs, delivery notes, invoices, RIMs or references without human approval.'],
       ['Connected context', 'SAVia works with wine list, sales, stock, costs, delivery notes, invoices, tariffs and documents processed by CloudRIM.'],
+      ['Who it helps', 'Owners, sommeliers, purchasing and floor teams can ask different questions about the same operation and receive a traceable answer.'],
     ],
     links: [['CloudRIM', '/en/product/cloudrim'], ['Dynamic intelligence', '/en/product/dynamic-intelligence'], ['Winerim Core', '/en/product/winerim-core'], ['Demo', '/en/demo']],
   },
@@ -467,14 +483,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/it/prodotto/savia',
     lang: 'it',
     title: 'SAVia | Agente conversazionale per carta vini, stock e margini',
-    description: 'SAVia e l agente conversazionale di Winerim per interrogare carta, vendite, stock, costi, margini, bolle e opportunita.',
+    description: 'SAVia e l agente conversazionale di Winerim per interrogare carta, vendite, stock, costi, margini, fatture, bolle, RIM e opportunita. Spiega dati e prepara azioni senza eseguire cambi critici senza approvazione umana.',
     h1: 'Chiedi alla tua cantina. SAVia risponde con i dati Winerim.',
-    subtitle: 'SAVia aiuta a interpretare carta, vendite, stock, costi, margini e opportunita senza perdersi nei dashboard.',
+    subtitle: 'SAVia aiuta a interpretare carta, vendite, stock, costi, margini, fatture, bolle, RIM e opportunita senza perdersi nei dashboard.',
     sections: [
       ['Perche esiste', 'I dashboard mostrano dati. SAVia aiuta a interpretarli, collegare segnali e preparare decisioni in linguaggio naturale.'],
-      ['Cosa puoi chiedere', 'Quali vini immobilizzano capitale, quali referenze hanno perso margine, cosa spingere, quali bolle rivedere o cosa cambiare prima di comprare.'],
-      ['Approvazione umana', 'SAVia consulta, riassume e prepara azioni, ma cambi critici su prezzi, acquisti o referenze restano sotto approvazione umana.'],
+      ['Cosa puoi chiedere', 'Quali vini immobilizzano capitale, quali referenze hanno perso margine, cosa spingere, quale fattura non torna con la bolla o quale RIM preparare prima dell approvazione.'],
+      ['Preview prima dell azione', 'SAVia puo riassumere impatto previsto su stock, costo, margine, rotazione, prezzo e carta prima che il team decida di applicare un cambio.'],
+      ['Approvazione umana', 'SAVia consulta, spiega, riassume e prepara azioni, ma non cambia stock, prezzi, costi, bolle, fatture, RIM o referenze senza approvazione umana.'],
       ['Contesto connesso', 'SAVia lavora con carta, vendite, stock, costi, bolle, fatture, tariffe e documenti processati da CloudRIM.'],
+      ['Per chi aiuta', 'Direzione, sommelier, acquisti e sala possono fare domande diverse sulla stessa operativita e ricevere una risposta tracciabile.'],
     ],
     links: [['CloudRIM', '/it/prodotto/cloudrim'], ['Intelligenza dinamica', '/it/prodotto/intelligenza-dinamica'], ['Winerim Core', '/it/prodotto/winerim-core'], ['Demo', '/it/demo']],
   },
@@ -482,14 +500,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/fr/produit/savia',
     lang: 'fr',
     title: 'SAVia | Agent conversationnel pour carte, stock et marges',
-    description: 'SAVia est l agent conversationnel de Winerim pour interroger carte, ventes, stock, couts, marges, bons et opportunites.',
+    description: 'SAVia est l agent conversationnel de Winerim pour interroger carte, ventes, stock, couts, marges, factures, bons, RIM et opportunites. Elle explique les donnees et prepare les actions sans executer de changement critique sans validation humaine.',
     h1: 'Interrogez votre cave. SAVia repond avec les donnees Winerim.',
-    subtitle: 'SAVia aide a interpreter carte, ventes, stock, couts, marges et opportunites sans fouiller dans les dashboards.',
+    subtitle: 'SAVia aide a interpreter carte, ventes, stock, couts, marges, factures, bons, RIM et opportunites sans fouiller dans les dashboards.',
     sections: [
       ['Pourquoi il existe', 'Les dashboards montrent les donnees. SAVia aide a les interpreter, relier les signaux et preparer des decisions en langage courant.'],
-      ['Ce que vous pouvez demander', 'Quels vins immobilisent du capital, quelles references perdent de la marge, quoi pousser, quels bons revoir ou quoi changer avant achat.'],
-      ['Validation humaine', 'SAVia consulte, resume et prepare, mais prix, achats ou retrait de references restent sous validation humaine.'],
+      ['Ce que vous pouvez demander', 'Quels vins immobilisent du capital, quelles references perdent de la marge, quoi pousser, quelle facture ne correspond pas a son bon ou quel RIM preparer avant validation.'],
+      ['Preview avant action', 'SAVia peut resumer l impact attendu sur stock, cout, marge, rotation, prix et carte avant que l equipe decide d appliquer un changement.'],
+      ['Validation humaine', 'SAVia consulte, explique, resume et prepare, mais ne change pas stock, prix, couts, bons, factures, RIM ou references sans validation humaine.'],
       ['Contexte connecte', 'SAVia travaille avec carte, ventes, stock, couts, bons, factures, tarifs et documents traites par CloudRIM.'],
+      ['Pour qui elle aide', 'Direction, sommelier, achats et salle peuvent poser des questions differentes sur la meme operation et recevoir une reponse tracable.'],
     ],
     links: [['CloudRIM', '/fr/produit/cloudrim'], ['Intelligence dynamique', '/fr/produit/intelligence-dynamique'], ['Winerim Core', '/fr/produit/winerim-core'], ['Demo', '/fr/demo']],
   },
@@ -497,14 +517,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/de/produkt/savia',
     lang: 'de',
     title: 'SAVia | Konversationsagent fuer Weinkarte, Bestand und Marge',
-    description: 'SAVia ist der Winerim-Konversationsagent fuer Fragen zu Karte, Verkauf, Bestand, Kosten, Margen, Lieferscheinen und Chancen.',
+    description: 'SAVia ist der Winerim-Konversationsagent fuer Fragen zu Karte, Verkauf, Bestand, Kosten, Margen, Rechnungen, Lieferscheinen, RIMs und Chancen. SAVia erklaert Daten und bereitet Aktionen vor, ohne kritische Aenderungen ohne menschliche Freigabe auszufuehren.',
     h1: 'Fragen Sie Ihren Keller. SAVia antwortet mit Winerim-Daten.',
-    subtitle: 'SAVia hilft Teams, Weinkarte, Verkauf, Bestand, Kosten und Margen zu verstehen, ohne sich durch Dashboards zu klicken.',
+    subtitle: 'SAVia hilft Teams, Weinkarte, Verkauf, Bestand, Kosten, Margen, Rechnungen, Lieferscheine, RIMs und Chancen zu verstehen, ohne sich durch Dashboards zu klicken.',
     sections: [
       ['Warum es SAVia gibt', 'Dashboards zeigen Daten. SAVia hilft, sie zu interpretieren, Signale zu verbinden und Entscheidungen in Alltagssprache vorzubereiten.'],
-      ['Was Sie fragen koennen', 'Welche Weine Kapital binden, welche Referenzen Marge verlieren, was gepusht werden sollte, welche Lieferscheine zu pruefen sind oder was vor dem Einkauf geaendert werden sollte.'],
-      ['Menschliche Freigabe', 'SAVia kann abfragen, zusammenfassen und Aktionen vorbereiten. Kritische Aenderungen an Preisen, Einkauf oder Referenzen bleiben unter menschlicher Freigabe.'],
+      ['Was Sie fragen koennen', 'Welche Weine Kapital binden, welche Referenzen Marge verlieren, was gepusht werden sollte, welche Rechnung nicht zum Lieferschein passt oder welcher RIM vor Freigabe vorbereitet werden soll.'],
+      ['Vorschau vor Aktion', 'SAVia kann die erwartete Auswirkung auf Bestand, Kosten, Marge, Rotation, Preis und Karte zusammenfassen, bevor das Team eine Aenderung anwendet.'],
+      ['Menschliche Freigabe', 'SAVia kann abfragen, erklaeren, zusammenfassen und Aktionen vorbereiten. Bestand, Preise, Kosten, Lieferscheine, Rechnungen, RIMs und Referenzen werden nicht ohne menschliche Freigabe geaendert.'],
       ['Verbundener Kontext', 'SAVia nutzt Weinkarte, Verkauf, Bestand, Kosten, Lieferscheine, Rechnungen, Tarife und durch CloudRIM verarbeitete Dokumente.'],
+      ['Wem es hilft', 'Management, Sommeliers, Einkauf und Service koennen unterschiedliche Fragen zur gleichen Operation stellen und eine nachvollziehbare Antwort erhalten.'],
     ],
     links: [['CloudRIM', '/de/produkt/cloudrim'], ['Dynamische Intelligenz', '/de/produkt/dynamische-intelligenz'], ['Winerim Core', '/de/produkt/winerim-core'], ['Demo', '/de/demo']],
   },
@@ -512,14 +534,16 @@ const SAVIA_WORKER_PAGES = Object.fromEntries([
     path: '/pt/produto/savia',
     lang: 'pt',
     title: 'SAVia | Agente conversacional para carta, stock e margens',
-    description: 'SAVia e o agente conversacional da Winerim para perguntar sobre carta, vendas, stock, custos, margens, guias e oportunidades.',
+    description: 'SAVia e o agente conversacional da Winerim para perguntar sobre carta, vendas, stock, custos, margens, faturas, guias, RIMs e oportunidades. Explica dados e prepara acoes sem executar alteracoes criticas sem aprovacao humana.',
     h1: 'Pergunte a sua garrafeira. SAVia responde com dados Winerim.',
-    subtitle: 'SAVia ajuda a interpretar carta, vendas, stock, custos, margens e oportunidades sem procurar em dashboards.',
+    subtitle: 'SAVia ajuda a interpretar carta, vendas, stock, custos, margens, faturas, guias, RIMs e oportunidades sem procurar em dashboards.',
     sections: [
       ['Porque existe', 'Os dashboards mostram dados. SAVia ajuda a interpreta-los, ligar sinais e preparar decisoes em linguagem natural.'],
-      ['O que pode perguntar', 'Que vinhos imobilizam capital, que referencias perderam margem, o que promover, que guias rever ou o que mudar antes de comprar.'],
-      ['Aprovacao humana', 'SAVia consulta, resume e prepara acoes, mas alteracoes criticas de preco, compras ou referencias ficam sob aprovacao humana.'],
+      ['O que pode perguntar', 'Que vinhos imobilizam capital, que referencias perderam margem, o que promover, que fatura nao bate certo com a guia ou que RIM preparar antes de aprovar.'],
+      ['Preview antes da acao', 'SAVia pode resumir impacto previsto em stock, custo, margem, rotacao, preco e carta antes de a equipa decidir aplicar uma alteracao.'],
+      ['Aprovacao humana', 'SAVia consulta, explica, resume e prepara acoes, mas nao altera stock, precos, custos, guias, faturas, RIMs ou referencias sem aprovacao humana.'],
       ['Contexto ligado', 'SAVia trabalha com carta, vendas, stock, custos, guias, faturas, tabelas e documentos processados pelo CloudRIM.'],
+      ['Para quem ajuda', 'Direcao, sommelier, compras e sala podem fazer perguntas diferentes sobre a mesma operacao e receber uma resposta rastreavel.'],
     ],
     links: [['CloudRIM', '/pt/produto/cloudrim'], ['Inteligencia dinamica', '/pt/produto/inteligencia-dinamica'], ['Winerim Core', '/pt/produto/winerim-core'], ['Demo', '/pt/demo']],
   },
@@ -893,7 +917,8 @@ const BAROMETER_ALTERNATES = {
 const WORKER_BAROMETER_SITEMAP_LASTMOD = '2026-06-10';
 const WORKER_LEARN_WINE_SITEMAP_LASTMOD = '2026-06-30';
 const WORKER_DISTRIBUTOR_SITEMAP_LASTMOD = '2026-07-01';
-const WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD = '2026-07-02';
+const WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD = '2026-07-03';
+const WORKER_PRESENTATION_SITEMAP_LASTMOD = '2026-07-03';
 
 const WORKER_TERMS_PATHS = {
   es: '/terminos',
@@ -906,6 +931,17 @@ const WORKER_TERMS_PATHS = {
 
 function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function escapeRegex(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function sitemapAlternateLinks(site, alternates) {
+  if (!alternates) return '';
+  return Object.entries(alternates)
+    .map(([lang, altPath]) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${site}${altPath}"/>`)
+    .join('\n');
 }
 
 function renderWorkerStaticPrerender(path, site) {
@@ -1058,12 +1094,13 @@ function renderWorkerDetailPrerender(path, site) {
 </html>`;
 }
 
-function detailUrlBlock(site, path, lastmod) {
+function detailUrlBlock(site, path, lastmod, priority = '0.6', alternates = null) {
+  const alternateLinks = sitemapAlternateLinks(site, alternates);
   return `  <url>
     <loc>${site}${path}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>${priority}</priority>${alternateLinks ? `\n${alternateLinks}` : ''}
   </url>
 `;
 }
@@ -1101,6 +1138,8 @@ function stabilizeSitemapLastmod(xml) {
 function injectWorkerDetailUrlsIntoSitemap(xml, site) {
   const hasDetailUrls = xml.includes(`${site}/recursos/plantilla-formacion-equipo-sala`)
     && xml.includes(`${site}/benchmarks-playbooks/benchmark-peso-vino-ticket-medio`);
+  const presentationPaths = [...new Set(Object.values(PRESENTATION_ALTERNATES))];
+  const missingPresentationPaths = presentationPaths.filter(path => !xml.includes(`${site}${path}`));
   const barometerPaths = [...new Set(Object.values(BAROMETER_ALTERNATES))];
   const missingBarometerPaths = barometerPaths.filter(path => !xml.includes(`${site}${path}`));
   const learnWinePaths = [...new Set(Object.values(LEARN_WINE_ALTERNATES))];
@@ -1123,27 +1162,48 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
 
   if (
     hasDetailUrls
+    && missingPresentationPaths.length === 0
     && missingBarometerPaths.length === 0
     && missingLearnWinePaths.length === 0
     && missingDistributorPaths.length === 0
     && missingCloudRimSaviaPaths.length === 0
     && missingOnlineToolPaths.length === 0
   ) {
-    return stabilizeSitemapLastmod(xml);
+    return ensureWorkerSitemapAlternates(stabilizeSitemapLastmod(xml), site);
   }
 
   const blocks = [
     ...(hasDetailUrls ? [] : Object.keys(RESOURCE_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/recursos/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD))),
     ...(hasDetailUrls ? [] : Object.keys(BENCHMARK_DETAIL_PRERENDER_PAGES).map(slug => detailUrlBlock(site, `/benchmarks-playbooks/${slug}`, WORKER_DETAIL_SITEMAP_LASTMOD))),
-    ...missingBarometerPaths.map(path => detailUrlBlock(site, path, WORKER_BAROMETER_SITEMAP_LASTMOD)),
-    ...missingLearnWinePaths.map(path => detailUrlBlock(site, path, WORKER_LEARN_WINE_SITEMAP_LASTMOD)),
-    ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD)),
-    ...missingCloudRimSaviaPaths.map(path => detailUrlBlock(site, path, WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD)),
+    ...missingPresentationPaths.map(path => detailUrlBlock(site, path, WORKER_PRESENTATION_SITEMAP_LASTMOD, path === '/presentacion' ? '0.7' : '0.6', PRESENTATION_ALTERNATES)),
+    ...missingBarometerPaths.map(path => detailUrlBlock(site, path, WORKER_BAROMETER_SITEMAP_LASTMOD, path === '/barometro-cartas-vino-2026' ? '0.8' : '0.7', BAROMETER_ALTERNATES)),
+    ...missingLearnWinePaths.map(path => detailUrlBlock(site, path, WORKER_LEARN_WINE_SITEMAP_LASTMOD, path === '/aprender-vino' ? '0.8' : '0.7', LEARN_WINE_ALTERNATES)),
+    ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD, path === '/distribuidor' ? '0.7' : '0.6', DISTRIBUTOR_ALTERNATES)),
+    ...missingCloudRimSaviaPaths.map(path => detailUrlBlock(site, path, WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD, path === '/producto/cloudrim' || path === '/producto/savia' ? '0.7' : '0.6', path.includes('savia') ? SAVIA_ALTERNATES : CLOUDRIM_ALTERNATES)),
     ...missingOnlineToolPaths.map(path => detailUrlBlock(site, path, WORKER_TOOLS_SITEMAP_LASTMOD)),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
-  return stabilizeSitemapLastmod(bridgedXml);
+  return ensureWorkerSitemapAlternates(stabilizeSitemapLastmod(bridgedXml), site);
+}
+
+function addAlternatesToExistingSitemapUrl(xml, site, alternates) {
+  return [...new Set(Object.values(alternates))].reduce((currentXml, path) => {
+    const loc = `${site}${path}`;
+    const pattern = new RegExp(`(<url>\\s*<loc>${escapeRegex(loc)}<\\/loc>)([\\s\\S]*?<\\/url>)`);
+    return currentXml.replace(pattern, (match, start, rest) => {
+      if (match.includes('<xhtml:link')) return match;
+      return `${start}${rest.replace('</url>', `${sitemapAlternateLinks(site, alternates)}\n  </url>`)}`;
+    });
+  }, xml);
+}
+
+function ensureWorkerSitemapAlternates(xml, site) {
+  return [
+    PRESENTATION_ALTERNATES,
+    CLOUDRIM_ALTERNATES,
+    SAVIA_ALTERNATES,
+  ].reduce((currentXml, alternates) => addAlternatesToExistingSitemapUrl(currentXml, site, alternates), xml);
 }
 
 // ─── NOINDEX routes (served but with noindex header) ───
@@ -1864,6 +1924,22 @@ export default {
     let path = url.pathname;
     const ua = request.headers.get('User-Agent') || '';
     const hostname = url.hostname.toLowerCase();
+    const canonicalSite = env.SITE_URL || 'https://winerim.wine';
+
+    // ── 0. Canonical host/scheme ──
+    if (
+      (hostname === 'winerim.wine' || hostname === 'www.winerim.wine')
+      && (url.protocol === 'http:' || hostname === 'www.winerim.wine')
+    ) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `${canonicalSite}${path}${url.search}`,
+          'Cache-Control': 'public, max-age=31536000',
+          'X-Worker-Branch': 'canonical-host-scheme-redirect',
+        },
+      });
+    }
 
     // ── 0. Static assets → pass through to origin directly ──
     if (STATIC_EXT.test(path)) {

@@ -6297,3 +6297,70 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Ajustar `file_size_limit` y `allowed_mime_types` desde Lovable Cloud Storage si el panel lo permite.
 - Limpiar o reconectar el `handleSubmit` muerto de `src/pages/AnalizaCarta.tsx` para evitar futuras conclusiones erroneas.
 - Retomar la primera ola de spokes de `Aprender vino` y su publicacion multilingue.
+
+## Actualizacion 2026-07-03: estado tras agentes paralelos y despliegue Worker
+
+## Hechos
+
+- Se completó una ronda con cuatro agentes paralelos:
+  - Ágora/documento comercial;
+  - Biblioteca del vino + Aprender vino;
+  - CloudRIM/SAVia/Funcionalidades;
+  - SEO/Search Console/sitemap/llms audit.
+- Ágora:
+  - V5 comercial creada y validada visualmente;
+  - DOCX y PDF finales en `/Users/GOIKO/Documents/Playground/agora_doc_2026-07-03/output/`;
+  - el documento refuerza qué es Winerim y mantiene cautelas sobre API, permisos, sandbox y acciones críticas.
+- Biblioteca del vino + Aprender vino:
+  - migración local creada: `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`;
+  - añade 12 artículos nuevos, 2 grupos editoriales, 6 idiomas;
+  - fechas: `2026-07-06` y `2026-07-13`;
+  - no está aplicada remoto por falta de `SUPABASE_ACCESS_TOKEN` y proyecto Supabase no enlazado.
+- CloudRIM/SAVia:
+  - React actualizado en páginas de producto y funcionalidades;
+  - `llms.txt` y `llms-full.txt` actualizados;
+  - Worker está enriquecido para CloudRIM/SAVia;
+  - Worker desplegado con Version ID `8dd5e4dc-33da-4269-a0a1-7899a9e2e910`.
+- Sitemap:
+  - `public/sitemap.xml` local queda con `2.305` URLs;
+  - producción `https://winerim.wine/sitemap.xml` devuelve `2.305` URLs, sin duplicados;
+  - `/presentacion` y variantes localizadas ya aparecen con alternates;
+  - CloudRIM y SAVia aparecen con alternates.
+- Producción validada:
+  - Googlebot `/producto/cloudrim`: `200`, `worker-static-prerender`, `283` palabras, `7` alternates;
+  - Googlebot `/producto/savia`: `200`, `worker-static-prerender`, `281` palabras, `7` alternates;
+  - `http://winerim.wine/sitemap.xml` redirige `301` a HTTPS.
+- Producción aún problemática:
+  - `http://winerim.wine/` devuelve `200`, no `301`;
+  - `http://winerim.wine/producto/cloudrim` devuelve `200`, no `301`;
+  - `https://www.winerim.wine/` devuelve `421`.
+- Verificaciones locales pasadas:
+  - `git diff --check`;
+  - `node --check` de Worker y script sitemap;
+  - `npm run generate:sitemap-static`;
+  - `npm run build`;
+  - `npm run test` (`57` tests).
+- Cambio ajeno/no propio:
+  - `src/components/WineListAnalyzerTool.tsx` sigue modificado y no fue tocado ni revertido.
+
+## Decisiones
+
+- No aplicar la migración editorial hasta tener credenciales Supabase o ejecutarla desde Lovable/Supabase.
+- Dar por desplegada solo la parte Worker; frontend React y migraciones siguen dependiendo de publish/aplicación en Lovable/Supabase.
+- Mantener las capturas actuales en Funcionalidades porque las nuevas candidatas no estaban limpias para publicación.
+- Tratar `www` y HTTP global como configuración Cloudflare/DNS/certificado pendiente.
+
+## Hipótesis
+
+- La producción puede estar aplicando Worker en sitemap y rutas bot, pero no en todas las rutas HTTP humanas; por eso sitemap redirige y páginas HTTP siguen `200`.
+- El frontend publicado todavía puede no reflejar todas las mejoras React hasta que Lovable publique el repo actual.
+- Search Console debería actualizar el conteo y alternates tras reenviar sitemap y recrawl.
+
+## Tareas pendientes
+
+- Aplicar `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+- Publicar o verificar frontend Lovable con cambios CloudRIM/SAVia/Funcionalidades.
+- Reenviar sitemap en Search Console y solicitar indexación selectiva de `/presentacion`.
+- Corregir DNS/certificado/routing de `www.winerim.wine`.
+- Activar regla Cloudflare equivalente a `Always Use HTTPS` para todas las rutas.
+- Revalidar producción humana y Googlebot tras frontend/migración.
