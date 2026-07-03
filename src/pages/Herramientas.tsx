@@ -75,6 +75,11 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "By-the-Glass Diagnostic", desc: "Evaluate if your by-the-glass offering is balanced in styles, prices and profitability.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audit your wine list with a 0-100 score across structure, balance, pricing, rotation and commercial potential.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Dead Stock Calculator", desc: "Estimate tied-up capital in slow-moving wines. Winerim detects this automatically.", tag: "Management" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Margin Signal Simulator", desc: "Enter price, cost, stock, sales and days without sales to classify a wine as OK, do not reorder, liquidate or critical.", tag: "Margins" },
+      { to: "/herramientas/test-perfil-rim", title: "RIM Profile Test", desc: "Identify whether your restaurant has a strategic, gastronomic, collector, tourist, passive or survival wine list.", tag: "Diagnostic" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Pareto 80/20 Simulator", desc: "See which references sustain your wine margin, which support the list and which may be locking stock without return.", tag: "Margins" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Margin Leakage Calculator", desc: "Estimate how much margin escapes through cost, price, by-the-glass, stock and profitability targets for a wine reference.", tag: "Margins" },
+      { to: "/herramientas/comparador-distribuidores", title: "Distributor Comparator", desc: "Compare suppliers by price, service, documentation, distinctive references and rotation to prioritize purchasing.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Average Ticket Impact Calculator", desc: "Estimate how much more wine revenue you could generate by improving table ratio, ticket per table and glass strategy.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Multi-Unit Wine List Auditor", desc: "Compare wine lists across your locations: assortment, pricing, by-the-glass and average ticket. Detect inconsistencies and opportunities.", tag: "Groups" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Smart Purchase Calculator", desc: "Analyze if a wine reference is worth buying: profitability, overpricing, tied-up stock and improvement opportunity. Winerim Supply demo.", tag: "Supply" },
@@ -106,6 +111,11 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostica vino al calice", desc: "Valuta se la tua offerta al calice è equilibrata in stili, prezzi e redditività.", tag: "Diagnostica" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audita la tua carta con un punteggio 0-100 su struttura, equilibrio, pricing e potenziale commerciale.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calcolatrice stock morto", desc: "Stima il capitale immobilizzato in vini a bassa rotazione.", tag: "Gestione" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Simulatore segnale margini", desc: "Inserisci prezzo, costo, stock, vendite e giorni senza vendita per classificare una referenza: OK, non riordinare, liquidare o critica.", tag: "Margini" },
+      { to: "/herramientas/test-perfil-rim", title: "Test Profilo RIM", desc: "Scopri se la tua carta è strategica, gastronomica, da collezione, turistica, passiva o di sopravvivenza.", tag: "Diagnostica" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Simulatore Pareto 80/20", desc: "Individua quali referenze sostengono il margine, quali supportano la carta e quali bloccano stock senza ritorno.", tag: "Margini" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Calcolatrice fuga di margine", desc: "Stima quanto margine sfugge per costo, prezzo, calice, stock e obiettivo di redditività.", tag: "Margini" },
+      { to: "/herramientas/comparador-distribuidores", title: "Comparatore distributori", desc: "Confronta fornitori per prezzo, servizio, documenti, referenze differenzianti e rotazione per decidere meglio gli acquisti.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calcolatrice impatto scontrino medio", desc: "Stima quanto in più potresti fatturare in vino migliorando il rapporto tavoli, lo scontrino per tavolo e la strategia al calice.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor carta multi-locale", desc: "Confronta la carta dei vini dei tuoi locali: assortimento, pricing, calice e scontrino medio. Rileva incoerenze e opportunità.", tag: "Gruppi" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calcolatrice acquisto intelligente", desc: "Analizza se una referenza vale la pena: redditività, sovrapprezzo, stock immobilizzato e opportunità di miglioramento. Demo di Winerim Supply.", tag: "Supply" },
@@ -137,6 +147,11 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnostic vin au verre", desc: "Évaluez si votre offre au verre est équilibrée en styles, prix et rentabilité.", tag: "Diagnostic" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditez votre carte avec un score de 0 à 100 sur la structure, l'équilibre, le pricing et le potentiel commercial.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculateur stock mort", desc: "Estimez le capital immobilisé dans les vins à faible rotation.", tag: "Gestion" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Simulateur signal de marges", desc: "Saisissez prix, coût, stock, ventes et jours sans vente pour classer une référence : OK, ne pas recommander, liquider ou critique.", tag: "Marges" },
+      { to: "/herramientas/test-perfil-rim", title: "Test Profil RIM", desc: "Découvrez si votre carte est stratégique, gastronomique, collection, touristique, passive ou en survie.", tag: "Diagnostic" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Simulateur Pareto 80/20", desc: "Identifiez les références qui portent la marge, celles qui soutiennent la carte et celles qui immobilisent du stock sans retour.", tag: "Marges" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Calculateur fuite de marge", desc: "Estimez la marge perdue par coût, prix, verre, stock et objectif de rentabilité sur une référence.", tag: "Marges" },
+      { to: "/herramientas/comparador-distribuidores", title: "Comparateur distributeurs", desc: "Comparez fournisseurs par prix, service, documents, références différenciantes et rotation pour prioriser les achats.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculateur impact ticket moyen", desc: "Estimez combien vous pourriez facturer en plus en vin en améliorant le ratio de tables, le ticket par table et la stratégie au verre.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditeur carte multi-sites", desc: "Comparez la carte des vins de vos établissements : assortiment, pricing, verre et ticket moyen. Détectez incohérences et opportunités.", tag: "Groupes" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculateur achat intelligent", desc: "Analysez si une référence vaut la peine : rentabilité, surcoût, stock immobilisé et opportunité d'amélioration. Démo de Winerim Supply.", tag: "Supply" },
@@ -168,6 +183,11 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Glasausschank-Diagnose", desc: "Bewerten Sie, ob Ihr Glasangebot in Stilen, Preisen und Rentabilität ausgewogen ist.", tag: "Diagnose" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Auditieren Sie Ihre Karte mit einem 0-100 Score in Struktur, Ausgewogenheit, Pricing, Rotation und kommerziellem Potenzial.", tag: "Audit" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Totbestand-Rechner", desc: "Schätzen Sie das in langsam drehenden Weinen gebundene Kapital. Winerim erkennt dies automatisch.", tag: "Verwaltung" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Margensignal-Simulator", desc: "Geben Sie Preis, Kosten, Bestand, Verkäufe und Tage ohne Verkauf ein, um eine Referenz als OK, nicht nachbestellen, liquidieren oder kritisch einzustufen.", tag: "Margen" },
+      { to: "/herramientas/test-perfil-rim", title: "RIM-Profiltest", desc: "Erkennen Sie, ob Ihre Karte strategisch, gastronomisch, sammlerisch, touristisch, passiv oder im Überlebensmodus ist.", tag: "Diagnose" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Pareto-80/20-Simulator", desc: "Erkennen Sie, welche Referenzen Ihre Marge tragen, welche die Karte stützen und welche Bestand ohne Rückfluss binden.", tag: "Margen" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Margenverlust-Rechner", desc: "Schätzen Sie, wie viel Marge durch Kosten, Preis, Glasverkauf, Bestand und Renditeziel verloren geht.", tag: "Margen" },
+      { to: "/herramientas/comparador-distribuidores", title: "Distributoren-Vergleich", desc: "Vergleichen Sie Lieferanten nach Preis, Service, Dokumentation, differenzierenden Referenzen und Rotation.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Durchschnittsbon-Impact-Rechner", desc: "Schätzen Sie, wie viel mehr Weinumsatz Sie durch bessere Tischquote, höheren Bon pro Tisch und Glasstrategie erzielen könnten.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Multi-Standort-Karten-Auditor", desc: "Vergleichen Sie die Weinkarten Ihrer Standorte: Sortiment, Pricing, Glas und Durchschnittsbon. Erkennen Sie Inkonsistenzen und Chancen.", tag: "Gruppen" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Intelligenter-Einkauf-Rechner", desc: "Analysieren Sie, ob eine Weinreferenz es wert ist, weiter gekauft zu werden: Rentabilität, Überpreisung, gebundener Bestand und Verbesserungschance. Winerim Supply Demo.", tag: "Supply" },
@@ -199,6 +219,11 @@ const content: Record<string, {
       { to: "/herramientas/diagnostico-vino-por-copa", title: "Diagnóstico de vinho a copo", desc: "Avalie se a sua oferta a copo está equilibrada em estilos, preços e rentabilidade.", tag: "Diagnóstico" },
       { to: "/herramientas/wine-list-score", title: "Wine List Score", desc: "Audite a sua carta com um score de 0 a 100 em estrutura, equilíbrio, pricing, rotação e potencial comercial.", tag: "Auditoria" },
       { to: "/herramientas/calculadora-stock-muerto", title: "Calculadora de stock morto", desc: "Estime o capital imobilizado em vinhos sem rotação. A Winerim deteta-o automaticamente.", tag: "Gestão" },
+      { to: "/herramientas/simulador-senal-margenes", title: "Simulador de sinal de margens", desc: "Introduza PVP, custo, stock, vendas e dias sem venda para classificar uma referência como OK, não repor, liquidar ou crítica.", tag: "Margens" },
+      { to: "/herramientas/test-perfil-rim", title: "Teste Perfil RIM", desc: "Descubra se a sua carta é estratégica, gastronómica, colecionadora, turística, passiva ou de sobrevivência.", tag: "Diagnóstico" },
+      { to: "/herramientas/simulador-pareto-carta-vinos", title: "Simulador Pareto 80/20", desc: "Detete que referências sustentam a margem, quais apoiam a carta e quais prendem stock sem retorno.", tag: "Margens" },
+      { to: "/herramientas/calculadora-fuga-margen", title: "Calculadora de fuga de margem", desc: "Estime quanta margem se perde por custo, PVP, copo, stock e objetivo de rentabilidade.", tag: "Margens" },
+      { to: "/herramientas/comparador-distribuidores", title: "Comparador de distribuidores", desc: "Compare fornecedores por preço, serviço, documentação, referências diferenciais e rotação para priorizar compras.", tag: "Supply" },
       { to: "/herramientas/calculadora-ticket-medio-vino", title: "Calculadora de impacto no ticket médio", desc: "Estime quanto mais poderia faturar em vinho melhorando o rácio de mesas, o ticket por mesa e a estratégia a copo.", tag: "ROI" },
       { to: "/herramientas/auditor-carta-multilocal", title: "Auditor de carta multi-local", desc: "Compare a carta de vinhos dos seus locais: sortido, pricing, copo e ticket médio. Detete inconsistências e oportunidades.", tag: "Grupos" },
       { to: "/herramientas/calculadora-compra-inteligente", title: "Calculadora de compra inteligente", desc: "Analise se uma referência vale a pena: rentabilidade, sobrepreço, stock imobilizado e oportunidade de melhoria. Demo da Winerim Supply.", tag: "Supply" },
@@ -212,13 +237,25 @@ const content: Record<string, {
   },
 };
 
-const toolIcons = [Search, Calculator, Wine, DollarSign, Utensils, TrendingUp, BarChart3, GlassWater, ClipboardList, RotateCcw, RotateCcw, RotateCcw, ShoppingCart];
 const toolIconByPath: Record<string, typeof Search> = {
+  "/wine-list-analyzer": Search,
+  "/calculadora-margen-vino": Calculator,
+  "/herramientas/calculadora-precio-vino-por-copa": Wine,
+  "/wine-pricing-tool": DollarSign,
+  "/wine-pairing-generator": Utensils,
+  "/wine-roi-calculator": TrendingUp,
+  "/wine-list-benchmark": BarChart3,
+  "/herramientas/diagnostico-vino-por-copa": GlassWater,
+  "/herramientas/wine-list-score": ClipboardList,
+  "/herramientas/calculadora-stock-muerto": RotateCcw,
   "/herramientas/simulador-senal-margenes": AlertTriangle,
   "/herramientas/test-perfil-rim": Target,
   "/herramientas/simulador-pareto-carta-vinos": PieChart,
   "/herramientas/calculadora-fuga-margen": ShieldAlert,
   "/herramientas/comparador-distribuidores": Building2,
+  "/herramientas/calculadora-ticket-medio-vino": TrendingUp,
+  "/herramientas/auditor-carta-multilocal": Building2,
+  "/herramientas/calculadora-compra-inteligente": ShoppingCart,
 };
 
 const Herramientas = () => {
@@ -281,7 +318,7 @@ const Herramientas = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTools.map((tool, i) => {
-              const Icon = toolIconByPath[tool.to] || toolIcons[t.tools.indexOf(tool)] || Search;
+              const Icon = toolIconByPath[tool.to] || Search;
               return (
                 <ScrollReveal key={tool.to} delay={i * 0.04}>
                   <Link to={localePath(tool.to)} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
@@ -381,7 +418,7 @@ const Herramientas = () => {
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">{t.ctaTitle}</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t.ctaDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/analisis-carta" className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
+                <Link to={localePath("/analisis-carta")} className="bg-gradient-wine text-primary-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all">
                   {t.ctaBtn1}
                 </Link>
                 <Link to={localePath("/demo")} className="border border-border text-foreground px-8 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">

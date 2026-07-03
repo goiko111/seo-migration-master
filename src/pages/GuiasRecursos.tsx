@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import {
   BookOpen, TrendingUp, Wine, BarChart3, Utensils, Calculator,
   Brain, DollarSign, Download, Search, FileText, CheckCircle,
-  Layers, Building2, Users, ArrowRight, Wrench
+  Layers, Building2, Users, ArrowRight, Wrench, GlassWater,
+  ClipboardList, RotateCcw, AlertTriangle, Target, PieChart,
+  ShieldAlert, ShoppingCart
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -217,6 +219,17 @@ const tools = [
   { to: "/wine-pairing-generator", icon: Utensils, title: "Generador de maridajes", desc: "Genera sugerencias de maridaje con IA." },
   { to: "/wine-roi-calculator", icon: TrendingUp, title: "Calculadora de ROI", desc: "Calcula el retorno de inversión de digitalizar tu carta." },
   { to: "/wine-list-benchmark", icon: BarChart3, title: "Benchmark de cartas", desc: "Compara tu carta con los estándares del sector." },
+  { to: "/herramientas/diagnostico-vino-por-copa", icon: GlassWater, title: "Diagnóstico vino por copa", desc: "Evalúa equilibrio, precios y rentabilidad de tu oferta por copa." },
+  { to: "/herramientas/wine-list-score", icon: ClipboardList, title: "Wine List Score", desc: "Audita tu carta con un score de 0 a 100 y prioridades de mejora." },
+  { to: "/herramientas/calculadora-stock-muerto", icon: RotateCcw, title: "Calculadora stock muerto", desc: "Estima capital inmovilizado en vinos sin rotación." },
+  { to: "/herramientas/simulador-senal-margenes", icon: AlertTriangle, title: "Simulador señal de márgenes", desc: "Clasifica referencias por margen, stock, ventas y días sin venta." },
+  { to: "/herramientas/test-perfil-rim", icon: Target, title: "Test Perfil RIM", desc: "Descubre el perfil operativo de tu carta y qué medir primero." },
+  { to: "/herramientas/simulador-pareto-carta-vinos", icon: PieChart, title: "Simulador Pareto 80/20", desc: "Detecta qué vinos sostienen el margen y cuáles ocupan stock sin retorno." },
+  { to: "/herramientas/calculadora-fuga-margen", icon: ShieldAlert, title: "Calculadora fuga de margen", desc: "Cuantifica pérdidas por coste, PVP, copa, stock y objetivo de rentabilidad." },
+  { to: "/herramientas/comparador-distribuidores", icon: Building2, title: "Comparador distribuidores", desc: "Compara proveedores por precio, servicio, documentación y rotación." },
+  { to: "/herramientas/calculadora-ticket-medio-vino", icon: TrendingUp, title: "Calculadora ticket medio", desc: "Estima impacto de mejorar ratio de mesas, copa y ticket de vino." },
+  { to: "/herramientas/auditor-carta-multilocal", icon: Building2, title: "Auditor carta multi-local", desc: "Compara surtido, pricing, copa y oportunidades entre locales." },
+  { to: "/herramientas/calculadora-compra-inteligente", icon: ShoppingCart, title: "Calculadora compra inteligente", desc: "Decide si una referencia merece seguir comprándose con datos de margen y stock." },
 ];
 
 const solutions = [

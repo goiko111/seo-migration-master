@@ -461,6 +461,21 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/tools/multi-unit-auditor`} element={<AuditorMultiLocal />} />
     <Route path={`${prefix}/strumenti/auditor-carta-multilocale`} element={<AuditorMultiLocal />} />
     <Route path={`${prefix}/outils/auditeur-carte-multi-sites`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/tools/margin-signal-simulator`} element={<SimuladorSenalMargenes />} />
+    <Route path={`${prefix}/tools/rim-profile-test`} element={<TestPerfilRim />} />
+    <Route path={`${prefix}/tools/pareto-wine-list-simulator`} element={<SimuladorParetoCarta />} />
+    <Route path={`${prefix}/tools/margin-leakage-calculator`} element={<CalculadoraFugaMargen />} />
+    <Route path={`${prefix}/tools/distributor-comparator`} element={<ComparadorDistribuidores />} />
+    <Route path={`${prefix}/strumenti/simulatore-segnale-margini`} element={<SimuladorSenalMargenes />} />
+    <Route path={`${prefix}/strumenti/test-profilo-rim`} element={<TestPerfilRim />} />
+    <Route path={`${prefix}/strumenti/simulatore-pareto-carta-vini`} element={<SimuladorParetoCarta />} />
+    <Route path={`${prefix}/strumenti/calcolatrice-fuga-margine`} element={<CalculadoraFugaMargen />} />
+    <Route path={`${prefix}/strumenti/comparatore-distributori`} element={<ComparadorDistribuidores />} />
+    <Route path={`${prefix}/outils/simulateur-signal-marges`} element={<SimuladorSenalMargenes />} />
+    <Route path={`${prefix}/outils/test-profil-rim`} element={<TestPerfilRim />} />
+    <Route path={`${prefix}/outils/simulateur-pareto-carte-vins`} element={<SimuladorParetoCarta />} />
+    <Route path={`${prefix}/outils/calculateur-fuite-marge`} element={<CalculadoraFugaMargen />} />
+    <Route path={`${prefix}/outils/comparateur-distributeurs`} element={<ComparadorDistribuidores />} />
     {/* Simulador Carta — localized slugs */}
     <Route path={`${prefix}/wine-list-simulator`} element={<SimuladorCarta />} />
     <Route path={`${prefix}/simulatore-carta`} element={<SimuladorCarta />} />
@@ -699,6 +714,11 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/tools/intelligenter-einkauf-rechner`} element={<CalculadoraCompraInteligente />} />
     <Route path={`${prefix}/tools/glasausschank-diagnose`} element={<DiagnosticoVinoPorCopa />} />
     <Route path={`${prefix}/tools/multi-standort-auditor`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/tools/margensignal-simulator`} element={<SimuladorSenalMargenes />} />
+    <Route path={`${prefix}/tools/rim-profiltest`} element={<TestPerfilRim />} />
+    <Route path={`${prefix}/tools/pareto-weinkarten-simulator`} element={<SimuladorParetoCarta />} />
+    <Route path={`${prefix}/tools/margenverlust-rechner`} element={<CalculadoraFugaMargen />} />
+    <Route path={`${prefix}/tools/distributoren-vergleich`} element={<ComparadorDistribuidores />} />
     <Route path={`${prefix}/ratgeber/weinkarte-restaurantgruppe-strukturieren`} element={<GuiaCartaGrupoRestauracion />} />
     <Route path={`${prefix}/ratgeber/rentable-glasausschank-strategie`} element={<GuiaEstrategiaVinoPorCopa />} />
     <Route path={`${prefix}/ratgeber/totbestand-weine-erkennen`} element={<GuiaDetectarVinosMuertos />} />
@@ -766,6 +786,11 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/ferramentas/diagnostico-vinho-por-copo`} element={<DiagnosticoVinoPorCopa />} />
     <Route path={`${prefix}/ferramentas/wine-list-score`} element={<WineListScore />} />
     <Route path={`${prefix}/ferramentas/auditor-carta-multilocal`} element={<AuditorMultiLocal />} />
+    <Route path={`${prefix}/ferramentas/simulador-sinal-margens`} element={<SimuladorSenalMargenes />} />
+    <Route path={`${prefix}/ferramentas/teste-perfil-rim`} element={<TestPerfilRim />} />
+    <Route path={`${prefix}/ferramentas/simulador-pareto-carta-vinhos`} element={<SimuladorParetoCarta />} />
+    <Route path={`${prefix}/ferramentas/calculadora-fuga-margem`} element={<CalculadoraFugaMargen />} />
+    <Route path={`${prefix}/ferramentas/comparador-distribuidores`} element={<ComparadorDistribuidores />} />
     <Route path={`${prefix}/guias/como-estruturar-carta-vinhos-grupo-restauracao`} element={<GuiaCartaGrupoRestauracion />} />
     <Route path={`${prefix}/guias/estrategia-rentavel-vinho-por-copo`} element={<GuiaEstrategiaVinoPorCopa />} />
     <Route path={`${prefix}/guias/como-detectar-vinhos-mortos`} element={<GuiaDetectarVinosMuertos />} />
