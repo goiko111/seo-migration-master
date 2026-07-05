@@ -1,0 +1,1 @@
+GRANT INSERT, UPDATE, SELECT ON public.articles TO sandbox_exec;
