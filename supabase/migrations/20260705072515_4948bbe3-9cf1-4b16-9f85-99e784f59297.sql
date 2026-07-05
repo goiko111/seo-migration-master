@@ -1,0 +1,1 @@
+REVOKE INSERT, UPDATE, SELECT ON public.articles FROM sandbox_exec;
