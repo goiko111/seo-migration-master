@@ -23,6 +23,12 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { type SupportedLang } from "@/i18n/types";
 import { articleDbSlugForLang, inferArticleLangFromSlug, localizedArticlePath, stripArticleLangSuffix } from "@/lib/articleRoutes";
 import { visiblePublishedAtFilter } from "@/lib/publishing";
+import { CANONICAL_DOMAIN } from "@/seo/config";
+
+const ARTICLE_LANGS: SupportedLang[] = ["es", "en", "it", "fr", "de", "pt"];
+
+const isSupportedArticleLang = (value: string | null | undefined): value is SupportedLang =>
+  !!value && ARTICLE_LANGS.includes(value as SupportedLang);
 
 interface ArticleData {
   title: string;
@@ -34,6 +40,7 @@ interface ArticleData {
   publishedAt?: string;
   relatedLinks?: RelatedLink[] | null;
   lang?: string;
+  hreflang?: { lang: string; url: string }[];
 }
 
 const i18n: Record<string, { loading: string; notFoundTitle: string; notFoundDesc: string; backToBlog: string; interview: string; article: string; backToCorner: string }> = {
@@ -62,7 +69,7 @@ const ArticlePage = () => {
       // Try the language-specific slug first
       let { data } = await supabase
         .from("articles")
-        .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
+        .select("slug, title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang, article_group")
         .eq("slug", dbSlug)
         .eq("published", true)
         .or(visiblePublishedAtFilter())
@@ -72,7 +79,7 @@ const ArticlePage = () => {
       if (!data && lang !== "es") {
         ({ data } = await supabase
           .from("articles")
-          .select("title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang")
+          .select("slug, title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang, article_group")
           .eq("slug", baseSlug)
           .eq("published", true)
           .or(visiblePublishedAtFilter())
@@ -80,6 +87,35 @@ const ArticlePage = () => {
       }
 
       if (data) {
+        let hreflang: { lang: string; url: string }[] | undefined;
+
+        if (data.article_group) {
+          const { data: siblings } = await supabase
+            .from("articles")
+            .select("slug, lang")
+            .eq("article_group", data.article_group)
+            .eq("published", true)
+            .or(visiblePublishedAtFilter());
+
+          const urlsByLang = new Map<SupportedLang, string>();
+          (siblings || []).forEach((sibling) => {
+            if (!sibling.slug || !isSupportedArticleLang(sibling.lang)) return;
+            urlsByLang.set(
+              sibling.lang,
+              `${CANONICAL_DOMAIN}${localizedArticlePath(stripArticleLangSuffix(sibling.slug), sibling.lang)}`,
+            );
+          });
+
+          if (urlsByLang.size > 1) {
+            hreflang = [
+              ...(urlsByLang.has("es") ? [{ lang: "x-default", url: urlsByLang.get("es")! }] : []),
+              ...ARTICLE_LANGS
+                .filter((articleLang) => urlsByLang.has(articleLang))
+                .map((articleLang) => ({ lang: articleLang, url: urlsByLang.get(articleLang)! })),
+            ];
+          }
+        }
+
         setArticle({
           title: data.title,
           subtitle: data.category === "interview"
@@ -92,6 +128,7 @@ const ArticlePage = () => {
           publishedAt: data.published_at || undefined,
           relatedLinks: Array.isArray(data.related_links) ? (data.related_links as unknown as RelatedLink[]) : null,
           lang: data.lang || "es",
+          hreflang,
         });
       } else {
         const staticArticle = getArticleBySlug(baseSlug);
@@ -177,6 +214,7 @@ const ArticlePage = () => {
         author={article.author}
         publishedAt={article.publishedAt}
         wordCount={article.body ? article.body.trim().split(/\s+/).length : undefined}
+        hreflang={article.hreflang}
       />
 
       {/* HERO */}

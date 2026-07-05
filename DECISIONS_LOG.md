@@ -4127,3 +4127,101 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Ajustar `file_size_limit` y `allowed_mime_types` desde Lovable Cloud Storage si es posible.
 - Limpiar o reconectar el `handleSubmit` muerto de `AnalizaCarta.tsx`.
 - Continuar con la primera ola de spokes de `Aprender vino`.
+
+## 2026-07-05
+
+### Search Console, herramientas localizadas y Radar Winerim
+
+#### Hechos
+
+- Produccion sirve `https://winerim.wine/sitemap.xml` con `HTTP 200` y `2.330` URLs.
+- Search Console muestra `/sitemap.xml` como `Correcto`, ultima lectura `5 jul 2026`, `2.330` paginas descubiertas.
+- Se desplego `winerim-proxy` Version ID `91667a6c-bbb5-48ba-a47a-e489918bed53`.
+- Las 25 rutas de herramientas localizadas que aparecian en sitemap quedaron cubiertas en Worker con prerender/canonical propio.
+- Validaciones locales de cierre:
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - test SEO enfocado con `19/19`;
+  - `npm run build`.
+- Search Console mostraba CloudRIM con diagnostico antiguo de duplicada/canonical home por rastreo del `2 jul 2026`.
+- La prueba en vivo de CloudRIM el `5 jul 2026` mostro que la URL esta disponible para Google y se puede indexar.
+- Se solicito indexacion manual de `https://winerim.wine/producto/cloudrim` y Google confirmo que entro en cola prioritaria.
+- Search Console muestra ya indexadas `SAVia`, `/presentacion` y `/aprender-vino`.
+- `https://www.winerim.wine/` sigue en `421` aunque la ruta Worker `www.winerim.wine/*` existe.
+- Se creo `src/seo/NEW_WINE_RADAR_AND_MONTHLY_NEWS_2026-07-05.md`.
+- Se creo `src/seo/WINE_LIBRARY_LEARN_WINE_NEXT_EXPANSION_2026-07-05.md`.
+
+#### Decisiones
+
+- Tratar `Radar Winerim` como producto/contenido B2B primero, no como newsletter B2C de inicio.
+- Usar `Novedades de Julio` como carta dinamica generada desde altas recientes, disponibilidad, stock, margen y argumento de sala.
+- No pedir indexacion de SAVia, `/presentacion` ni `/aprender-vino` porque ya aparecen indexadas.
+- Pedir indexacion de CloudRIM solo despues de validar en vivo que Google puede indexarla.
+- Mantener el fix de herramientas localizadas en Worker y conservar rutas Worker en scripts de deploy para evitar perder triggers en futuros despliegues.
+- No aplicar la migracion editorial pendiente en Supabase sin despliegue/verificacion remota.
+- Tratar `www` como tarea de Cloudflare/routing con permisos superiores.
+
+#### Hipotesis
+
+- CloudRIM deberia salir del estado de duplicada cuando Google procese el recrawl solicitado.
+- `Radar Winerim` puede convertir un problema operativo de base de datos en una senal comercial propia.
+- Las cartas `Novedades de Julio` pueden ser una salida visible de alto valor porque hacen que las altas recientes se vendan en sala.
+- La monetizacion inicial debe ir por restaurantes, grupos, distribuidores y bodegas; B2C queda como fase posterior.
+
+#### Contradicciones / dudas abiertas
+
+- Los documentos anteriores arrastraban conteos `2.294` y `2.305`; el estado vivo es `2.330`.
+- Search Console conserva un diagnostico viejo para CloudRIM, pero la prueba en vivo y curl productivo muestran canonical/prerender correcto.
+- La ruta Worker `www.winerim.wine/*` existe, pero `www` no entra correctamente y sigue respondiendo `421`.
+- `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no fue integrado ni revertido.
+
+#### Tareas pendientes
+
+- Monitorizar CloudRIM en Search Console tras la solicitud de indexacion.
+- Corregir `www.winerim.wine` en Cloudflare dashboard o con permisos DNS/rulesets.
+- Aplicar la migracion editorial `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+- Avanzar MVP de `Radar Winerim` con muestra anonima de solicitudes de vinos faltantes.
+- Prototipar carta `Novedades de Julio` con un restaurante piloto.
+
+## 2026-07-05
+
+### Migracion editorial Lovable Cloud, articulos multilingues y auditoria de idioma
+
+#### Hechos
+
+- La migracion editorial `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` fue revisada y reforzada para ejecutarse via Lovable Cloud.
+- No se crean tablas nuevas; se altera e inserta en `public.articles`.
+- Se añadieron GRANTs y politicas RLS explicitamente sobre `public.articles`.
+- Se sincronizo el nuevo spoke de Aprender vino `recomendar por estilos` en:
+  - `src/pages/AprenderVino.tsx`;
+  - `supabase/functions/prerender/index.ts`;
+  - `cloudflare-worker-v3-hybrid.js`;
+  - `public/llms.txt`;
+  - `public/llms-full.txt`;
+  - `src/test/wine-library-seo-surface.test.ts`.
+- Se añadieron `hreflang` por `article_group` en frontend y prerender dinamico.
+- La auditoria de idioma encontro backlog fuera del alcance inmediato: route maps, home DE/PT, herramientas, biblioteca detalle y perfiles localizados en LLM files.
+
+#### Decisiones
+
+- El camino vigente para esta migracion es Lovable Cloud con dos tool calls:
+  - `supabase--migration`;
+  - `preview_ui--publish`.
+- No usar Supabase CLI, dashboard ni pasos manuales en la entrega final de esta sesion.
+- Incluir permisos/RLS de `public.articles` aunque la tabla no sea nueva, para que el agente de Lovable no tenga que reinterpretar cambios recientes de exposicion API.
+- Mantener cadencia semanal:
+  - Biblioteca del vino: lunes `2026-07-06`;
+  - Aprender vino: lunes `2026-07-13`.
+- Mantener articulos por encima de `900` palabras y con enlaces de conversion localizados.
+
+#### Hipotesis
+
+- La ejecucion por Lovable Cloud reducira el riesgo operativo frente a depender de credenciales locales no disponibles.
+- Los alternates por `article_group` mejoraran canonicalizacion e interpretacion multilingue de articulos traducidos.
+- El backlog de idioma puede abordarse en una ola separada sin bloquear esta migracion.
+
+#### Tareas pendientes
+
+- Ejecutar migracion y publish desde Lovable.
+- Revisar URLs publicadas y Search Console tras recrawl.
+- Planificar ola de fixes de idioma para route maps, home DE/PT, herramientas y biblioteca detalle.

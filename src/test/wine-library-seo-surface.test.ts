@@ -274,6 +274,40 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("/en/article/types-of-wine-restaurant-wine-list");
     expect(worker).toContain("/pt/article/regioes-vinicolas-para-conhecer-em-restaurante");
     expect(llms).toContain("https://winerim.wine/article/uvas-que-conocer-para-empezar");
+    expect(prerender).toContain("/article/recomendar-vino-por-estilos-restaurante");
+    expect(worker).toContain("/en/article/recommend-wine-by-style-restaurant");
+    expect(worker).toContain("/it/article/raccomandare-vino-per-stile-ristorante");
+    expect(worker).toContain("/fr/article/recommander-vin-par-style-restaurant");
+    expect(worker).toContain("/de/article/wein-nach-stil-empfehlen-restaurant");
+    expect(worker).toContain("/pt/article/recomendar-vinho-por-estilos-restaurante");
+    expect(llms).toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
+    expect(llms).toContain("https://winerim.wine/pt/article/recomendar-vinho-por-estilos-restaurante");
+  });
+
+  it("prepares the wine-library and learn-wine editorial migration for Lovable Cloud", () => {
+    const migration = readFileSync(
+      "supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql",
+      "utf8",
+    );
+    const articlePage = readFileSync("src/pages/ArticlePage.tsx", "utf8");
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+
+    expect(migration).toContain("ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY");
+    expect(migration).toContain("GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.articles TO authenticated");
+    expect(migration).toContain("GRANT ALL ON TABLE public.articles TO service_role");
+    expect(migration).toContain('CREATE POLICY "Public can read published articles"');
+    expect(migration).toContain('CREATE POLICY "Admins can manage articles"');
+    expect(migration).toContain("wine-library-service-guide-floor-team");
+    expect(migration).toContain("learn-wine-recommend-by-style");
+    expect(migration).toContain("2026-07-06T09:00:00+02:00");
+    expect(migration).toContain("2026-07-13T09:25:00+02:00");
+    expect(migration).toContain('"to":"/en/wine-list-analysis"');
+    expect(migration).toContain('"to":"/pt/analise-carta"');
+    expect(migration).toContain("recommend-wine-by-style-restaurant_en");
+    expect(migration).toContain("recomendar-vinho-por-estilos-restaurante_pt");
+    expect(articlePage).toContain("article_group");
+    expect(articlePage).toContain("hreflang={article.hreflang}");
+    expect(prerender).toContain("articleHreflang");
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {

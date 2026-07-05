@@ -1,4 +1,5 @@
 -- Editorial expansion for Wine Library and Learn Wine.
+-- Reviewed against Supabase API exposure changes: https://supabase.com/changelog.md
 -- Scope guard: data-only migration for public.articles. It does not touch product
 -- pages, Funcionalidades, Edge Functions or remote state.
 -- Cadence: one editorial topic per Monday; ES/EN/IT/FR/DE/PT variants share the
@@ -7,6 +8,40 @@
 ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS lang TEXT DEFAULT 'es';
 ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS article_group TEXT;
 ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS related_links jsonb DEFAULT '[]'::jsonb;
+
+ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
+
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT SELECT ON TABLE public.articles TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.articles TO authenticated;
+GRANT ALL ON TABLE public.articles TO service_role;
+
+DROP POLICY IF EXISTS "Public can read published articles" ON public.articles;
+CREATE POLICY "Public can read published articles"
+ON public.articles
+FOR SELECT
+TO anon, authenticated
+USING (
+  published = true
+  AND (
+    published_at IS NULL
+    OR published_at <= now()
+  )
+);
+
+DROP POLICY IF EXISTS "Admins can manage articles" ON public.articles;
+CREATE POLICY "Admins can manage articles"
+ON public.articles
+FOR ALL
+TO authenticated
+USING (
+  public.has_role((select auth.uid()), 'admin')
+  OR public.has_role((select auth.uid()), 'editor')
+)
+WITH CHECK (
+  public.has_role((select auth.uid()), 'admin')
+  OR public.has_role((select auth.uid()), 'editor')
+);
 
 WITH rows (
   slug,
@@ -159,7 +194,9 @@ $body$,
       {"to":"/biblioteca-vino/guia-servicio","label":"Guía de servicio","type":"guide"},
       {"to":"/biblioteca-vino/estilos","label":"Estilos de vino","type":"guide"},
       {"to":"/biblioteca-vino/maridajes","label":"Maridajes","type":"guide"},
-      {"to":"/aprender-vino","label":"Aprender vino","type":"guide"}
+      {"to":"/aprender-vino","label":"Aprender vino","type":"guide"},
+      {"to":"/analisis-carta","label":"Análisis de carta","type":"conversion"},
+      {"to":"/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -295,7 +332,9 @@ $body$,
       {"to":"/en/wine-library/service-guide","label":"Service guide","type":"guide"},
       {"to":"/en/wine-library/styles","label":"Wine styles","type":"guide"},
       {"to":"/en/wine-library/pairings","label":"Pairings","type":"guide"},
-      {"to":"/en/learn-wine","label":"Learn Wine","type":"guide"}
+      {"to":"/en/learn-wine","label":"Learn Wine","type":"guide"},
+      {"to":"/en/wine-list-analysis","label":"Wine list analysis","type":"conversion"},
+      {"to":"/en/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -397,6 +436,14 @@ No. Crea un linguaggio comune. Il responsabile vino puo affinare, ma la base dev
 **Da quali vini iniziare?**
 Da quelli che vendono molto, generano domande o meritano piu rotazione.
 
+## Come usarla nel briefing di sala
+
+La guida di servizio funziona quando entra nella routine del team. Prima di ogni servizio si possono scegliere due o tre referenze da ripassare: una bottiglia sicura, una bottiglia da spingere e una alternativa per budget diverso. Per ciascuna il responsabile deve chiarire temperatura, calice, piatto collegato, frase per il cliente e punto di attenzione sullo stock.
+
+Questo esercizio evita che la formazione resti teorica. Se il team sa spiegare un vino ma non sa quando proporlo, la scheda non sta lavorando. Se invece la guida collega gesto, piatto e disponibilita, la carta diventa piu facile da vendere. Winerim puo usare questa logica per ordinare schede, raccomandazioni e analisi: non solo cosa significa un vino, ma quale ruolo pratico ha nella sala.
+
+Un buon segnale e che anche una persona nuova possa proporre un'alternativa senza cercare il sommelier per ogni tavolo. Non sostituisce il criterio del responsabile; lo rende condivisibile.
+
 Continua con [Biblioteca del vino](/it/biblioteca-vino), [guida di servizio](/it/biblioteca-vino/guida-servizio), [stili](/it/biblioteca-vino/stili), [abbinamenti](/it/biblioteca-vino/abbinamenti) e [Imparare il vino](/it/imparare-il-vino).
 $body$,
     $image$https://winerim.wine/blog/personal-recomiende-vino.jpg$image$,
@@ -409,7 +456,9 @@ $body$,
       {"to":"/it/biblioteca-vino/guida-servizio","label":"Guida di servizio","type":"guide"},
       {"to":"/it/biblioteca-vino/stili","label":"Stili","type":"guide"},
       {"to":"/it/biblioteca-vino/abbinamenti","label":"Abbinamenti","type":"guide"},
-      {"to":"/it/imparare-il-vino","label":"Imparare il vino","type":"guide"}
+      {"to":"/it/imparare-il-vino","label":"Imparare il vino","type":"guide"},
+      {"to":"/it/analisi-carta","label":"Analisi carta","type":"conversion"},
+      {"to":"/it/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -511,6 +560,10 @@ Non. Il cree un langage commun. Le responsable vin affine, mais la base doit etr
 **Quels styles documenter d'abord ?**
 Ceux qui se vendent beaucoup, ceux qui posent question et ceux qui devraient mieux tourner.
 
+## Comment l'utiliser en briefing
+
+Le plus utile est de transformer le guide en rituel court. Avant le service, choisissez deux vins a reviser: une valeur sure et une reference qui merite plus de rotation. Pour chacun, precisez temperature, verre, plat associe, phrase client et alternative si le budget ou le stock change. La connaissance devient alors une aide concrete, pas une fiche lue une fois.
+
 Continuez avec la [Bibliothèque du vin](/fr/bibliotheque-vin), le [guide de service](/fr/bibliotheque-vin/guide-service), les [styles de vin](/fr/bibliotheque-vin/styles-de-vin), les [accords](/fr/bibliotheque-vin/accords) et [Apprendre le vin](/fr/apprendre-le-vin).
 $body$,
     $image$https://winerim.wine/blog/personal-recomiende-vino.jpg$image$,
@@ -523,7 +576,9 @@ $body$,
       {"to":"/fr/bibliotheque-vin/guide-service","label":"Guide de service","type":"guide"},
       {"to":"/fr/bibliotheque-vin/styles-de-vin","label":"Styles de vin","type":"guide"},
       {"to":"/fr/bibliotheque-vin/accords","label":"Accords","type":"guide"},
-      {"to":"/fr/apprendre-le-vin","label":"Apprendre le vin","type":"guide"}
+      {"to":"/fr/apprendre-le-vin","label":"Apprendre le vin","type":"guide"},
+      {"to":"/fr/analyse-carte","label":"Analyse de carte","type":"conversion"},
+      {"to":"/fr/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -625,6 +680,16 @@ Nein. Er schafft eine gemeinsame Sprache. Die Weinverantwortlichen koennen verfe
 **Welche Stile zuerst dokumentieren?**
 Die meistverkauften Weine, die Weine mit vielen Fragen und jene, die besser rotieren sollten.
 
+## Einsatz im Service-Briefing
+
+Der Service-Guide wird wirksam, wenn er in die tägliche Routine kommt. Vor dem Service kann das Team zwei oder drei Weine durchgehen: eine sichere Empfehlung, eine Referenz mit Rotationspotenzial und eine Alternative in anderer Preislage. Fuer jeden Wein werden Temperatur, Glas, passendes Gericht, kurzer Servicesatz und Bestandssituation geklaert.
+
+So bleibt Wissen nicht abstrakt. Ein Team kann viele Begriffe kennen und trotzdem nicht wissen, wann es welchen Wein anbieten soll. Der Guide verbindet deshalb Geste, Sprache, Gericht und Verfügbarkeit. Das hilft neuen Mitarbeitenden, schneller sicher zu werden, und gibt erfahrenen Sommeliers ein gemeinsames Format fuer Schulung, Empfehlung und Kontrolle.
+
+Winerim kann diese Struktur mit Karte, Bestand, Marge und Verkauf verbinden. Eine Service-Notiz ist dann nicht nur Text, sondern ein Signal: welcher Wein braucht mehr Sichtbarkeit, welcher Stil passt zum Menü und welche Alternative soll genannt werden, wenn eine Flasche nicht verfügbar ist.
+
+Ein zweiter Nutzen ist die Vergleichbarkeit zwischen Services. Wenn jede Empfehlung nach demselben Muster dokumentiert wird, sieht die Leitung schneller, welche Weine verstanden werden und welche nicht. Das erleichtert Nachschulung, Monatsreview und die Entscheidung, ob eine Referenz mehr Sichtbarkeit, einen anderen Preis oder eine klare Alternative braucht.
+
 Weiter mit [Weinbibliothek](/de/weinbibliothek), [Service-Guide](/de/weinbibliothek/service-guide), [Weinstile](/de/weinbibliothek/weinstile), [Weinbegleitung](/de/weinbibliothek/weinbegleitung) und [Wein lernen](/de/wein-lernen).
 $body$,
     $image$https://winerim.wine/blog/personal-recomiende-vino.jpg$image$,
@@ -637,7 +702,9 @@ $body$,
       {"to":"/de/weinbibliothek/service-guide","label":"Service-Guide","type":"guide"},
       {"to":"/de/weinbibliothek/weinstile","label":"Weinstile","type":"guide"},
       {"to":"/de/weinbibliothek/weinbegleitung","label":"Weinbegleitung","type":"guide"},
-      {"to":"/de/wein-lernen","label":"Wein lernen","type":"guide"}
+      {"to":"/de/wein-lernen","label":"Wein lernen","type":"guide"},
+      {"to":"/de/weinkarten-analyse","label":"Weinkarten-Analyse","type":"conversion"},
+      {"to":"/de/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -739,6 +806,14 @@ Não. Cria uma linguagem comum. A pessoa responsável pelo vinho afina, mas a ba
 **Por onde começar?**
 Pelos vinhos que mais vendem, pelos que geram perguntas e pelos que deveriam rodar melhor.
 
+## Como usar no briefing de sala
+
+O guia de serviço ganha valor quando entra no briefing diário. Antes do serviço, escolha duas ou três referências: uma opção segura, uma garrafa que precisa de mais rotação e uma alternativa de preço. Para cada uma, defina temperatura, copo, prato ligado, frase curta para o cliente e atenção ao stock.
+
+Isto transforma formação em prática. A equipa não fica apenas a memorizar termos; aprende quando propor cada vinho e como adaptar a recomendação se muda o prato, o orçamento ou a disponibilidade. Para Winerim, esta lógica liga biblioteca, carta, stock e margem: cada ficha passa a ter uma função operacional dentro da sala.
+
+Um bom resultado é que uma pessoa nova consiga recomendar uma alternativa sem depender sempre do responsável de vinho. O critério continua humano, mas passa a estar melhor distribuído.
+
 Continue com [Biblioteca do vinho](/pt/biblioteca-vinho), [guia de serviço](/pt/biblioteca-vinho/guia-servico), [estilos](/pt/biblioteca-vinho/estilos), [harmonizações](/pt/biblioteca-vinho/harmonizacoes) e [Aprender vinho](/pt/aprender-vinho).
 $body$,
     $image$https://winerim.wine/blog/personal-recomiende-vino.jpg$image$,
@@ -751,7 +826,9 @@ $body$,
       {"to":"/pt/biblioteca-vinho/guia-servico","label":"Guia de serviço","type":"guide"},
       {"to":"/pt/biblioteca-vinho/estilos","label":"Estilos","type":"guide"},
       {"to":"/pt/biblioteca-vinho/harmonizacoes","label":"Harmonizações","type":"guide"},
-      {"to":"/pt/aprender-vinho","label":"Aprender vinho","type":"guide"}
+      {"to":"/pt/aprender-vinho","label":"Aprender vinho","type":"guide"},
+      {"to":"/pt/analise-carta","label":"Análise de carta","type":"conversion"},
+      {"to":"/pt/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -894,7 +971,9 @@ $body$,
       {"to":"/biblioteca-vino/estilos","label":"Estilos de vino","type":"guide"},
       {"to":"/biblioteca-vino/maridajes","label":"Maridajes","type":"guide"},
       {"to":"/biblioteca-vino/glosario","label":"Glosario","type":"guide"},
-      {"to":"/biblioteca-vino/guia-servicio","label":"Guía de servicio","type":"guide"}
+      {"to":"/biblioteca-vino/guia-servicio","label":"Guía de servicio","type":"guide"},
+      {"to":"/analisis-carta","label":"Análisis de carta","type":"conversion"},
+      {"to":"/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -1023,7 +1102,9 @@ $body$,
       {"to":"/en/wine-library/styles","label":"Wine styles","type":"guide"},
       {"to":"/en/wine-library/pairings","label":"Pairings","type":"guide"},
       {"to":"/en/wine-library/glossary","label":"Glossary","type":"guide"},
-      {"to":"/en/wine-library/service-guide","label":"Service guide","type":"guide"}
+      {"to":"/en/wine-library/service-guide","label":"Service guide","type":"guide"},
+      {"to":"/en/wine-list-analysis","label":"Wine list analysis","type":"conversion"},
+      {"to":"/en/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -1119,6 +1200,14 @@ Frase: "Ha dolcezza, ma anche acidita o forza; per questo funziona in calice pic
 
 Scegli due vini reali per stile. Scrivi una parola di sensazione, un piatto, una frase di venti secondi, un'alternativa piu economica e un upsell nello stesso stile. Poi simula cinque frasi del cliente e rispondi per stile prima di nominare vitigno o regione.
 
+## Controllare la carta per stile
+
+Lavorare per stili serve anche a leggere se la carta e equilibrata. Prepara una tabella con gli otto stili e indica quante referenze hai per bottiglia, quante al calice, quali sono ferme in stock e quali hanno margine interessante. Se uno stile ha troppe bottiglie simili, il cliente vede ripetizione. Se uno stile manca, la sala deve forzare raccomandazioni poco naturali.
+
+La revisione non chiede di avere lo stesso numero di vini in ogni categoria. Un ristorante di pesce avra piu bianchi freschi, spumanti secchi e bianchi di struttura. Una griglia avra piu rossi medi e strutturati. Un wine bar deve dare spazio anche a rosati gastronomici, fortificati e stili meno evidenti. L'importante e che ogni momento di consumo abbia una risposta chiara.
+
+Per Winerim questa tabella e il ponte tra formazione e gestione: stile, stock, rotazione e margine si leggono insieme. Cosi il team non decide solo per intuizione, ma capisce quali vini mantenere, quali spiegare meglio e quali usare come alternativa di upsell.
+
 ## Errori frequenti
 
 Trattare gli stili come scatole rigide. Confondere leggero con semplice o fresco con economico. Raccomandare sempre la regione famosa anche quando un'altra bottiglia risponde meglio alla sensazione richiesta. Non verificare se la carta ha abbastanza opzioni per ogni stile.
@@ -1143,7 +1232,9 @@ $body$,
       {"to":"/it/biblioteca-vino/stili","label":"Stili","type":"guide"},
       {"to":"/it/biblioteca-vino/abbinamenti","label":"Abbinamenti","type":"guide"},
       {"to":"/it/biblioteca-vino/glossario","label":"Glossario","type":"guide"},
-      {"to":"/it/biblioteca-vino/guida-servizio","label":"Guida di servizio","type":"guide"}
+      {"to":"/it/biblioteca-vino/guida-servizio","label":"Guida di servizio","type":"guide"},
+      {"to":"/it/analisi-carta","label":"Analisi carta","type":"conversion"},
+      {"to":"/it/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -1263,7 +1354,9 @@ $body$,
       {"to":"/fr/bibliotheque-vin/styles-de-vin","label":"Styles de vin","type":"guide"},
       {"to":"/fr/bibliotheque-vin/accords","label":"Accords","type":"guide"},
       {"to":"/fr/bibliotheque-vin/glossaire","label":"Glossaire","type":"guide"},
-      {"to":"/fr/bibliotheque-vin/guide-service","label":"Guide de service","type":"guide"}
+      {"to":"/fr/bibliotheque-vin/guide-service","label":"Guide de service","type":"guide"},
+      {"to":"/fr/analyse-carte","label":"Analyse de carte","type":"conversion"},
+      {"to":"/fr/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -1359,6 +1452,14 @@ Satz: "Er hat Suesse, aber auch Saeure oder Kraft; deshalb am besten im kleinen 
 
 Waehlen Sie zwei echte Weine pro Stil. Schreiben Sie ein Gefuehlswort, ein Gericht, einen Satz unter zwanzig Sekunden, eine guenstigere Alternative und ein Upsell im gleichen Stil. Danach simuliert das Team fuenf Gaestesaetze und antwortet zuerst mit Stil, dann mit Rebsorte oder Region.
 
+## Die Weinkarte nach Stilen pruefen
+
+Stile sind nicht nur Training, sondern auch ein Werkzeug fuer die Kartenanalyse. Legen Sie eine Tabelle mit den acht Stilen an und tragen Sie ein: wie viele Flaschen es gibt, welche Weine glasweise angeboten werden, wo Bestand liegt, welche Referenzen gute Marge haben und welche kaum rotieren. Wenn ein Stil zu viele aehnliche Flaschen hat, entsteht Wiederholung. Wenn ein Stil fehlt, muss der Service Empfehlungen erzwingen, die nicht sauber passen.
+
+Die Karte muss nicht in jedem Stil gleich viele Weine haben. Ein Fischrestaurant braucht mehr frische Weissweine, trockenen Schaumwein und texturierte Weissweine. Ein Grillrestaurant braucht mehr mittelgewichtige und strukturierte Rotweine. Eine Weinbar sollte auch gastronomischen Rose, Suesswein, fortifizierte Weine und weniger offensichtliche Stile sichtbar machen.
+
+Fuer Winerim ist diese Sicht der Verbindungspunkt zwischen Lernen und Steuerung: Stil, Bestand, Rotation und Marge gehoeren zusammen. So erkennt das Team, welche Weine erklaert werden muessen, welche als sichere Empfehlung dienen und welche als sinnvoller Upsell funktionieren.
+
 ## Haeufige Fehler
 
 Stile als starre Boxen behandeln. Leicht mit simpel oder frisch mit billig verwechseln. Immer die bekannte Region empfehlen, obwohl eine andere Flasche besser zum Gefuehl passt. Nicht pruefen, ob die Karte pro Stil genug Optionen hat.
@@ -1383,7 +1484,9 @@ $body$,
       {"to":"/de/weinbibliothek/weinstile","label":"Weinstile","type":"guide"},
       {"to":"/de/weinbibliothek/weinbegleitung","label":"Weinbegleitung","type":"guide"},
       {"to":"/de/weinbibliothek/glossar","label":"Glossar","type":"guide"},
-      {"to":"/de/weinbibliothek/service-guide","label":"Service-Guide","type":"guide"}
+      {"to":"/de/weinbibliothek/service-guide","label":"Service-Guide","type":"guide"},
+      {"to":"/de/weinkarten-analyse","label":"Weinkarten-Analyse","type":"conversion"},
+      {"to":"/de/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   ),
   (
@@ -1479,6 +1582,14 @@ Frase: "Tem doçura, mas também acidez ou força; por isso funciona melhor em c
 
 Escolha dois vinhos reais por estilo. Para cada um, escreva uma palavra de sensação, um prato, uma frase de vinte segundos, uma alternativa mais económica e uma opção de upsell no mesmo estilo. Depois simule cinco frases de cliente e responda por estilo antes de dizer casta ou região.
 
+## Rever a carta por estilos
+
+Trabalhar por estilos também ajuda a perceber se a carta está equilibrada. Faça uma tabela com os oito estilos e indique quantas referências existem por garrafa, quantas estão a copo, que stock está parado, que vinhos têm margem interessante e que opções funcionam como upsell. Se um estilo tem muitas garrafas parecidas, cria ruído. Se um estilo não existe, a equipa acaba por forçar recomendações.
+
+A carta não precisa de ter o mesmo número de vinhos em cada categoria. Um restaurante de peixe precisa de mais brancos frescos, espumantes secos e brancos com textura. Uma grelha precisa de mais tintos médios e estruturados. Um wine bar deve dar espaço a rosés gastronómicos, fortificados e estilos menos óbvios. O importante é que cada momento de consumo tenha resposta.
+
+Para Winerim, esta leitura liga aprendizagem e gestão: estilo, stock, rotação e margem passam a ser vistos em conjunto. Assim a equipa sabe que vinhos explicar melhor, que referências manter visíveis e que alternativas usar para subir valor sem perder confiança.
+
 ## Erros frequentes
 
 Tratar estilos como caixas rígidas. Confundir leve com simples ou fresco com barato. Recomendar sempre a região famosa, mesmo quando outra garrafa encaixa melhor na sensação pedida. Não verificar se a carta tem opções suficientes por estilo.
@@ -1503,7 +1614,9 @@ $body$,
       {"to":"/pt/biblioteca-vinho/estilos","label":"Estilos","type":"guide"},
       {"to":"/pt/biblioteca-vinho/harmonizacoes","label":"Harmonizações","type":"guide"},
       {"to":"/pt/biblioteca-vinho/glossario","label":"Glossário","type":"guide"},
-      {"to":"/pt/biblioteca-vinho/guia-servico","label":"Guia de serviço","type":"guide"}
+      {"to":"/pt/biblioteca-vinho/guia-servico","label":"Guia de serviço","type":"guide"},
+      {"to":"/pt/analise-carta","label":"Análise de carta","type":"conversion"},
+      {"to":"/pt/demo","label":"Demo","type":"conversion"}
     ]$json$::jsonb
   )
 )

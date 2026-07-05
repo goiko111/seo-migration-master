@@ -1,5 +1,104 @@
 # Next Steps
 
+## Actualizacion 2026-07-05: retomar tras Search Console, Worker y Radar Winerim
+
+## Hechos
+
+- Produccion valida `https://winerim.wine/sitemap.xml` con `200` y `2.330` URLs.
+- Search Console marca `/sitemap.xml` como `Correcto`, ultima lectura `5 jul 2026`, `2.330` paginas descubiertas.
+- `https://winerim.wine/producto/cloudrim` ya pasa prueba en vivo de Search Console como URL disponible e indexable.
+- Se solicito indexacion de CloudRIM el 2026-07-05; queda en cola prioritaria de Google.
+- Search Console muestra indexadas:
+  - `https://winerim.wine/producto/savia`;
+  - `https://winerim.wine/presentacion`;
+  - `https://winerim.wine/aprender-vino`.
+- Worker desplegado: `winerim-proxy` Version ID `91667a6c-bbb5-48ba-a47a-e489918bed53`.
+- Las herramientas localizadas del sitemap tienen ahora prerender/canonical propio en Worker.
+- `https://www.winerim.wine/` sigue devolviendo `421`.
+- Nuevos documentos de trabajo:
+  - `src/seo/NEW_WINE_RADAR_AND_MONTHLY_NEWS_2026-07-05.md`;
+  - `src/seo/WINE_LIBRARY_LEARN_WINE_NEXT_EXPANSION_2026-07-05.md`.
+- Migracion editorial pendiente:
+  - `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`;
+  - 12 articulos, 2 grupos, 6 idiomas por grupo;
+  - no aplicada remoto.
+- Validaciones locales de cierre OK:
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npm run build`.
+- Cambio ajeno/preexistente sin tocar:
+  - `src/components/WineListAnalyzerTool.tsx`.
+
+## Prioridad 1: infraestructura y Search Console
+
+1. Revisar en 24-72 horas Search Console para CloudRIM:
+   - confirmar si pasa de `Duplicada: el usuario no ha indicado ninguna version canonica` a indexada;
+   - si no cambia, repetir prueba en vivo y revisar canonical seleccionado por Google.
+2. Resolver `https://www.winerim.wine/`:
+   - opcion preferente: Redirect Rule `www -> https://winerim.wine/{path}?{query}`;
+   - alternativa: revisar DNS/custom hostname/ownership y que `www` entre por Worker;
+   - requiere permisos Cloudflare de DNS/rulesets que el token actual no tiene.
+3. Mantener `/sitemap.xml` monitorizado:
+   - valor esperado actual: `2.330` paginas descubiertas;
+   - investigar cualquier caida brusca o vuelta a conteos antiguos.
+
+## Prioridad 2: Biblioteca del vino y Aprender vino
+
+1. Aplicar/publicar en Supabase/Lovable la migracion:
+   - `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+2. Tras aplicarla, validar:
+   - las 12 URLs de articulos;
+   - sitemap;
+   - prerender;
+   - canonicals;
+   - enlaces internos;
+   - Search Console solo para URLs principales si hay cuota.
+3. Preparar el siguiente lote editorial:
+   - Biblioteca: `wine-library-by-the-glass-stock-rotation`, sugerido para `2026-07-20`;
+   - Aprender vino: `learn-wine-read-label-restaurant`, sugerido para `2026-07-27`.
+
+## Prioridad 3: Radar Winerim y Novedades de Julio
+
+1. Localizar la fuente real de solicitudes de vinos inexistentes:
+   - editor de carta;
+   - notificaciones;
+   - base interna;
+   - soporte;
+   - CloudRIM/albaranes/tarifas si aplica.
+2. Extraer una muestra anonima de 30-90 dias:
+   - volumen total;
+   - duplicados;
+   - bodegas/regiones/tipos mas repetidos;
+   - restaurantes o segmentos solicitantes anonimizados;
+   - tiempo medio de resolucion.
+3. Definir MVP `Radar Winerim`:
+   - estado de solicitud;
+   - deduplicacion;
+   - enriquecimiento;
+   - prioridad;
+   - aviso al cliente cuando el vino queda listo.
+4. Prototipar carta `Novedades de Julio`:
+   - vinos anadidos en 30/45/60 dias;
+   - stock/disponibilidad;
+   - margen;
+   - argumento de sala;
+   - etiquetas `Nuevo`, `Por copa`, `Ultimas botellas`, `Recomendado`.
+5. Crear lead magnet si se valida la propuesta:
+   - `Plantilla Radar de Novedades para Carta de Vinos`;
+   - landing posible `/recursos/plantilla-novedades-carta-vinos`.
+
+## Prioridad 4: cierre operativo de cambios locales
+
+1. Decidir si se hace commit de los cambios propios:
+   - `cloudflare-worker-v3-hybrid.js`;
+   - `package.json`;
+   - `src/seo/NEW_WINE_RADAR_AND_MONTHLY_NEWS_2026-07-05.md`;
+   - `src/seo/WINE_LIBRARY_LEARN_WINE_NEXT_EXPANSION_2026-07-05.md`;
+   - docs fuente actualizados.
+2. No incluir `src/components/WineListAnalyzerTool.tsx` salvo confirmacion expresa de que esos cambios ajenos deben entrar en el mismo commit.
+3. Si se va a desplegar otra vez Worker, usar los scripts actualizados para no perder rutas.
+
 ## Actualizacion 2026-07-02: retomar con sitemap completo y Search Console
 
 ## Hechos
@@ -4588,3 +4687,45 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 7. Ágora:
    - enviar V5 comercial al usuario/stakeholders;
    - preparar documento técnico separado solo si Ágora pide endpoints, auth, sandbox, rate limits o modelo multi-cliente.
+
+## Actualizacion 2026-07-05: siguientes pasos tras preparar migracion editorial Lovable
+
+## Hechos
+
+- La migracion editorial esta lista para entregar a Lovable como SQL completo.
+- El repo contiene los cambios de frontend/prerender/Worker/LLM/test necesarios para enlazar el nuevo spoke de Aprender vino en seis idiomas.
+- Build, TypeScript, test SEO enfocado y lint focal de archivos tocados pasan.
+- Lint global sigue fallando por deuda previa no relacionada.
+
+## Decisiones
+
+- El siguiente paso operativo no es reanalizar Supabase: es ejecutar la migracion en Lovable y publicar.
+- No mezclar el backlog amplio de idioma con el publish de la migracion editorial actual.
+- No tocar `src/components/WineListAnalyzerTool.tsx` sin instruccion explicita porque arrastra cambios ajenos/preexistentes.
+
+## Hipotesis
+
+- Si Lovable aplica la migracion y publica, los articulos del `2026-07-06` deberian quedar visibles inmediatamente y los del `2026-07-13` deberian respetar fecha.
+- Search Console puede tardar en reflejar los nuevos articulos aunque las URLs esten disponibles.
+
+## Tareas pendientes listas para retomar
+
+1. En Lovable:
+   - ejecutar `supabase--migration` con el SQL completo preparado;
+   - ejecutar `preview_ui--publish`.
+2. Validacion post-publish:
+   - consultar que hay `12` filas para los dos `article_group`;
+   - abrir `/aprender-vino`, `/en/learn-wine`, `/it/imparare-il-vino`, `/fr/apprendre-le-vin`, `/de/wein-lernen`, `/pt/aprender-vinho`;
+   - confirmar que aparece el spoke de estilos en los seis idiomas;
+   - inspeccionar un articulo ES, EN y PT;
+   - revisar `hreflang` cuando los seis hermanos esten publicados.
+3. Search Console:
+   - reenviar sitemap tras publish;
+   - solicitar indexacion selectiva de `/aprender-vino` si cambia el contenido detectado;
+   - solicitar indexacion de articulos solo cuando esten publicados segun fecha.
+4. Backlog de idioma:
+   - arreglar route maps/hreflang incompletos;
+   - localizar home/product sections DE/PT;
+   - localizar Biblioteca detalle;
+   - localizar Herramientas y `ToolStrategicBlock` para DE/PT;
+   - ampliar `llms` con perfiles localizados de uvas.

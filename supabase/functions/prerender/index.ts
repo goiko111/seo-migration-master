@@ -5116,7 +5116,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { heading: 'Conectar uvas, regiones y estilos', content: 'La Biblioteca del vino funciona como base de datos de uvas, regiones, estilos, maridajes y glosario. Aprender vino es la ruta guiada para usar esa base en conversaciones reales con clientes.' },
         { heading: 'Recomendar por comida', content: 'El aprendizaje debe aterrizar en maridajes prácticos: pescado, carne, arroces, cocina asiática, quesos, postres y platos de la casa. Así el conocimiento impacta ticket medio y experiencia.' },
         { heading: 'Servir y decidir mejor', content: 'Temperatura, copa, medidas, vino por copa, margen, rotación y revisión mensual convierten el conocimiento en gestión. Una carta que se entiende se vende y se mejora con más facilidad.' },
-        { heading: 'Guías publicadas', content: 'Aprender vino enlaza guías para catar, describir, maridar, entender tipos de vino, reconocer uvas ancla y usar regiones como lenguaje de sala. Son piezas pensadas para formar equipos y conectar aprendizaje con recomendación, carta digital y demo.' },
+        { heading: 'Guías publicadas', content: 'Aprender vino enlaza guías para catar, describir, maridar, entender tipos de vino, reconocer uvas ancla, usar regiones como lenguaje de sala y recomendar por estilos. Son piezas pensadas para formar equipos y conectar aprendizaje con recomendación, carta digital y demo.' },
       ],
       faqs: [
         { q: '¿Aprender vino sustituye a la Biblioteca del vino?', a: 'No. La Biblioteca es la referencia estructurada de uvas, regiones, estilos, maridajes y glosario. Aprender vino es la capa guiada para saber por dónde empezar y cómo aplicar ese contenido en sala.' },
@@ -5140,6 +5140,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Tipos de vino para entender una carta', url: '/article/tipos-de-vino-para-entender-una-carta' },
         { label: 'Uvas que conocer para empezar', url: '/article/uvas-que-conocer-para-empezar' },
         { label: 'Regiones vinicolas para empezar', url: '/article/regiones-vinicolas-para-empezar-en-restaurante' },
+        { label: 'Recomendar vino por estilos', url: '/article/recomendar-vino-por-estilos-restaurante' },
         { label: 'Analizar carta de vinos gratis', url: '/analisis-carta' },
         { label: 'Demo gratuita', url: '/demo' },
       ],
@@ -7019,6 +7020,40 @@ async function renderArticle(slug: string): Promise<string | null> {
   const lang = normalizeArticleLang(article.lang) || inferArticleLang(article.slug || slug);
   const baseSlug = stripArticleLangSuffix(article.slug || slug);
   const canonicalPath = localizedArticlePath(lang, baseSlug);
+  let articleHreflang: HreflangEntry[] | undefined;
+
+  if (article.article_group) {
+    const siblingParams = new URLSearchParams({
+      article_group: `eq.${article.article_group}`,
+      published: 'eq.true',
+      select: 'slug,lang',
+    });
+    siblingParams.set('or', visiblePublishedAtOrFilter(new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')));
+
+    const siblingRes = await fetch(
+      `${supabaseUrl}/rest/v1/articles?${siblingParams.toString()}`,
+      { headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` } }
+    );
+    const siblings = await siblingRes.json();
+    const urlsByLang = new Map<WineLibraryLang, string>();
+
+    if (Array.isArray(siblings)) {
+      for (const sibling of siblings) {
+        const siblingLang = normalizeArticleLang(sibling.lang);
+        if (!siblingLang || !sibling.slug) continue;
+        urlsByLang.set(siblingLang, `${SITE}${localizedArticlePath(siblingLang, stripArticleLangSuffix(sibling.slug))}`);
+      }
+    }
+
+    if (urlsByLang.size > 1) {
+      articleHreflang = [
+        ...(urlsByLang.has('es') ? [{ lang: 'x-default', url: urlsByLang.get('es')! }] : []),
+        ...WINE_LIBRARY_LANGS
+          .filter((articleLang) => urlsByLang.has(articleLang))
+          .map((articleLang) => ({ lang: articleLang, url: urlsByLang.get(articleLang)! })),
+      ];
+    }
+  }
   const articleInternalLinks = uniqueArticleInternalLinks([
     ...articleRelatedLinksFromDb(article.related_links),
     ...articleMarkdownInternalLinks(body),
@@ -7074,7 +7109,8 @@ async function renderArticle(slug: string): Promise<string | null> {
         { name: article.title, url: canonical },
       ],
       internalLinks: articleInternalLinks,
-    }
+    },
+    articleHreflang
   );
 }
 

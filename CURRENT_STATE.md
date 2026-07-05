@@ -1,5 +1,80 @@
 # Current State
 
+## Actualizacion 2026-07-05: Search Console, Worker, herramientas localizadas y Radar Winerim
+
+## Hechos
+
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `91667a6c-bbb5-48ba-a47a-e489918bed53`.
+- `package.json` queda actualizado para que `npm run deploy:worker` y `npm run deploy:worker:dry-run` conserven explicitamente las rutas:
+  - `winerim.wine/*`;
+  - `go.winerim.wine/*`;
+  - `www.winerim.wine/*`.
+- Se anadio al Worker prerender estatico localizado para las 25 rutas de herramientas online que ya estaban apareciendo en el sitemap productivo.
+- `https://winerim.wine/sitemap.xml` valida en produccion con `HTTP 200`, `2.330` URLs y presencia de CloudRIM, SAVia y herramientas localizadas.
+- Validacion productiva como Googlebot:
+  - `https://winerim.wine/producto/cloudrim`: `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`;
+  - `https://winerim.wine/producto/savia`: `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`;
+  - `https://winerim.wine/presentacion`: `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`.
+- Muestra validada de herramientas localizadas como Googlebot:
+  - `/en/tools/distributor-comparator`: canonical propio y H1 `Distributor comparator for wine purchasing`;
+  - `/pt/ferramentas/calculadora-fuga-margem`: canonical propio y H1 `Calculadora de fuga de margem para cartas de vinho`;
+  - `/fr/outils/simulateur-pareto-carte-vins`: canonical propio y H1 `Simulateur Pareto 80/20 pour cartes des vins`.
+- Search Console muestra `/sitemap.xml` como `Correcto`, ultima lectura `5 jul 2026` y `2.330` paginas descubiertas.
+- Search Console mostraba `https://winerim.wine/producto/cloudrim` no indexada por un rastreo antiguo del `2 jul 2026`: `Duplicada: el usuario no ha indicado ninguna version canonica`, con Google seleccionando `https://winerim.wine/`.
+- La prueba en vivo de Search Console para CloudRIM el `5 jul 2026, 9:02` devuelve `La URL esta disponible para Google`, `La pagina se puede indexar` y breadcrumbs validos.
+- Se solicito indexacion manual de `https://winerim.wine/producto/cloudrim`; Search Console confirmo `Se ha solicitado la indexacion` y anadio la URL a cola prioritaria.
+- Search Console muestra como indexadas:
+  - `https://winerim.wine/producto/savia`;
+  - `https://winerim.wine/presentacion`;
+  - `https://winerim.wine/aprender-vino`.
+- `https://www.winerim.wine/` sigue devolviendo `421` pese a que existe la ruta Worker `www.winerim.wine/*`.
+- La API actual de Cloudflare permite leer zonas y Worker routes, pero devuelve `403` para DNS records y rulesets; no se pudo corregir `www` desde CLI.
+- Se creo `src/seo/NEW_WINE_RADAR_AND_MONTHLY_NEWS_2026-07-05.md` con el alcance de `Radar Winerim`, `Vino del Dia`, newsletter, lead magnet y cartas `Novedades de Julio`.
+- Se creo `src/seo/WINE_LIBRARY_LEARN_WINE_NEXT_EXPANSION_2026-07-05.md` con la revision de la migracion editorial pendiente y siguientes lotes recomendados para Biblioteca/Aprender vino.
+- La migracion `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` sigue pendiente de aplicar en Supabase/Lovable: 12 articulos, 2 grupos, 6 idiomas por grupo.
+- Validaciones locales OK:
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` con 19/19 tests;
+  - `npm run build`.
+- El build solo muestra avisos no bloqueantes ya conocidos: Browserslist desactualizado y chunks grandes.
+- `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no fue editado en esta sesion.
+
+## Decisiones
+
+- Tratar `Radar Winerim` como linea B2B primero, basada en solicitudes reales de vinos que no existen en base de datos.
+- Formular `Novedades de Julio` como salida de producto/carta dinamica, no como articulo de blog aislado.
+- No solicitar indexacion manual para SAVia, presentacion ni Aprender vino en esta pasada porque Search Console ya las muestra indexadas.
+- Solicitar indexacion de CloudRIM solo despues de que la prueba en vivo confirmara que la URL es indexable.
+- Mantener el fix de herramientas localizadas en Worker para evitar que URLs incluidas en sitemap canonicalicen a home.
+- Tratar `www.winerim.wine` como bloqueo de Cloudflare/routing pendiente de dashboard o permisos superiores, no como bug del frontend.
+- No aplicar la migracion editorial de Supabase sin canal operativo de despliegue/verificacion remoto.
+
+## Hipotesis
+
+- Google deberia reclasificar CloudRIM cuando procese la solicitud y vea el canonical/prerender actual en lugar del rastreo antiguo del 2 de julio.
+- Las cartas `Novedades de Julio` pueden aumentar rotacion de vinos nuevos si combinan fecha de alta, stock, margen, argumento de sala y disponibilidad.
+- El Radar Winerim puede convertirse en activo comercial para restaurantes y en inteligencia agregada para distribuidores/bodegas si se gobierna la privacidad.
+- El problema `www` puede requerir Redirect Rule, DNS/custom hostname o cambio de ownership/routing en Cloudflare; anadir ruta Worker no basta en el estado actual.
+
+## Contradicciones / dudas abiertas
+
+- Contradiccion historica corregida: los documentos anteriores hablaban de sitemap `2.294` o estados parciales, pero produccion y Search Console ya muestran `2.330` URLs.
+- Contradiccion historica corregida: el bloqueo de CloudRIM como Googlebot ya no se reproduce en prueba en vivo ni en curl productivo; Search Console conserva un diagnostico antiguo hasta recrawl.
+- Contradiccion persistente: Cloudflare tiene ruta `www.winerim.wine/*`, pero `https://www.winerim.wine/` devuelve `421` sin pasar por Worker visible.
+- Chrome real quedo bloqueado por una UI de extension durante Search Console; se uso el navegador integrado, que si estaba autenticado como `wine@winerim.wine`.
+
+## Tareas pendientes
+
+- Monitorizar en Search Console que CloudRIM pase de duplicada/no indexada a indexada tras la solicitud del 2026-07-05.
+- Resolver `https://www.winerim.wine/` con Redirect Rule/DNS/custom hostname en Cloudflare desde una sesion con permisos de DNS/rulesets.
+- Aplicar o publicar desde Lovable/Supabase la migracion `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+- Tras aplicar la migracion editorial, validar articulos, sitemap, prerender y Search Console.
+- Empezar MVP de `Radar Winerim`: localizar donde se guardan las solicitudes de vinos faltantes y extraer muestra anonima de 30-90 dias.
+- Prototipar `Novedades de Julio` en un restaurante piloto con reglas de inclusion, ordenacion y caducidad.
+- Decidir si se publica la landing del lead magnet `Plantilla Radar de Novedades para Carta de Vinos`.
+- Revisar si conviene commitear los cambios actuales; no incluir `src/components/WineListAnalyzerTool.tsx` salvo que el usuario confirme que esos cambios ajenos tambien deben entrar.
+
 ## Actualizacion 2026-07-02: produccion revalidada y sitemap completo preparado
 
 ## Hechos
@@ -6364,3 +6439,64 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Corregir DNS/certificado/routing de `www.winerim.wine`.
 - Activar regla Cloudflare equivalente a `Always Use HTTPS` para todas las rutas.
 - Revalidar producción humana y Googlebot tras frontend/migración.
+
+## Actualizacion 2026-07-05: migracion editorial lista para Lovable Cloud
+
+## Hechos
+
+- Se revisaron al inicio `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se usaron tres agentes paralelos:
+  - Biblioteca del vino: valido el grupo `wine-library-service-guide-floor-team`;
+  - Aprender vino: detecto que el nuevo spoke de estilos no estaba enlazado en hub/prerender/llms y que IT/DE/PT eran demasiado cortos;
+  - Idioma: detecto huecos de traduccion mas amplios en home, herramientas, route maps y biblioteca detalle.
+- Se reforzo `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` con RLS, GRANTs y politicas idempotentes sobre `public.articles`.
+- La migracion mantiene `12` articulos, `2` grupos editoriales y `6` idiomas:
+  - `wine-library-service-guide-floor-team`, lunes `2026-07-06`;
+  - `learn-wine-recommend-by-style`, lunes `2026-07-13`.
+- Todas las variantes editoriales quedan por encima de `900` palabras.
+- Cada articulo nuevo queda con `7` enlaces relacionados y `2` enlaces de conversion localizados.
+- `Aprender vino`, prerender, Worker y `llms.txt`/`llms-full.txt` enlazan el nuevo spoke `recomendar por estilos` en ES/EN/IT/FR/DE/PT.
+- `ArticlePage` y `prerender` usan `article_group` para generar `hreflang` cuando hay articulos hermanos publicados.
+- Validaciones:
+  - `git diff --check`: OK;
+  - `node --check cloudflare-worker-v3-hybrid.js`: OK;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: OK, `20/20`;
+  - `npx eslint src/pages/AprenderVino.tsx src/pages/ArticlePage.tsx src/test/wine-library-seo-surface.test.ts`: OK;
+  - `npx tsc --noEmit --pretty false`: OK;
+  - `npm run build`: OK.
+- `npm run lint` global falla por deuda preexistente en muchos archivos no tocados (`any`, admin/tools, `WineListAnalyzerTool.tsx`, templates, funciones email, etc.).
+
+## Decisiones
+
+- Entregar la migracion como SQL completo para Lovable Cloud y no como flujo con Supabase CLI/token/dashboard.
+- Tratar `public.articles` como tabla tocada por la migracion y declarar permisos/RLS explicitamente aunque no sea tabla nueva.
+- Mantener Biblioteca del vino y Aprender vino separados, pero conectados por enlaces internos.
+- Corregir en esta sesion solo los huecos de idioma ligados a la expansion editorial; el resto del informe del agente Idioma queda como backlog.
+
+## Hipotesis
+
+- El `hreflang` por `article_group` deberia reducir el riesgo de que Google/LLMs relacionen mal los articulos traducidos.
+- Listar spokes por idioma en `llms.txt` deberia evitar que los modelos infieran rutas espanolas para consultas internacionales.
+- La deuda de lint global es preexistente y no bloquea la migracion/publish de Lovable si build y TypeScript pasan.
+
+## Contradicciones / dudas abiertas
+
+- Documentos anteriores indicaban aplicar la migracion con Supabase CLI o SQL editor; el criterio vigente del usuario es Lovable Cloud con solo dos herramientas: `supabase--migration` y `preview_ui--publish`.
+- La auditoria de idioma encontro huecos importantes fuera de esta expansion: home con fallback ES en DE/PT, herramientas ES/EN-only, route maps/hreflang incompletos y biblioteca detalle con UI en espanol en rutas localizadas.
+- `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no debe revertirse ni mezclarse sin instruccion explicita.
+
+## Tareas pendientes
+
+- Ejecutar en Lovable Cloud la migracion `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+- Publicar con `preview_ui--publish`.
+- Verificar despues del publish:
+  - las 12 filas por `article_group`;
+  - hubs Aprender vino en 6 idiomas;
+  - una muestra de articulos ES/EN/PT;
+  - `hreflang` de articulos con `article_group`.
+- Retomar backlog de idioma:
+  - route maps/hreflang incompletos;
+  - home/product sections DE/PT;
+  - Biblioteca detalle localizada;
+  - Herramientas y `ToolStrategicBlock` DE/PT;
+  - `llms` para perfiles de uva localizados.

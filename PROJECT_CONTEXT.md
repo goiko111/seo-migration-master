@@ -2,6 +2,20 @@
 
 ## Hechos
 
+- El 2026-07-05 se revalido Search Console para la propiedad URL-prefix `https://winerim.wine/`: `/sitemap.xml` figura como `Correcto`, ultima lectura `5 jul 2026` y `2.330` paginas descubiertas.
+- El 2026-07-05 Search Console mostro `https://winerim.wine/producto/cloudrim` como no indexada por un rastreo antiguo del `2 jul 2026` que seleccionaba `https://winerim.wine/` como canonical, pero la prueba en vivo ya devuelve `La URL esta disponible para Google` y `La pagina se puede indexar`; se solicito indexacion y Google confirmo que se anadio a cola prioritaria.
+- El 2026-07-05 Search Console mostro `https://winerim.wine/producto/savia`, `https://winerim.wine/presentacion` y `https://winerim.wine/aprender-vino` como URLs ya indexadas.
+- El 2026-07-05 se desplego `winerim-proxy` Version ID `91667a6c-bbb5-48ba-a47a-e489918bed53` con prerender/canonical propio para las 25 herramientas localizadas que estaban en sitemap.
+- El 2026-07-05 `https://winerim.wine/sitemap.xml` devuelve `200` y `2.330` URLs; incluye CloudRIM, SAVia y herramientas localizadas.
+- El 2026-07-05 se valido una muestra de herramientas localizadas como Googlebot:
+  - `/en/tools/distributor-comparator`;
+  - `/pt/ferramentas/calculadora-fuga-margem`;
+  - `/fr/outils/simulateur-pareto-carte-vins`;
+  todas devuelven `200`, `x-prerendered: true`, `x-worker-branch: worker-static-prerender`, canonical propio y H1 localizado.
+- El 2026-07-05 `https://www.winerim.wine/` sigue devolviendo `421` aunque la ruta Worker `www.winerim.wine/*` exista; el bloqueo pendiente es de configuracion/routing Cloudflare, no de React.
+- El 2026-07-05 se creo el alcance `Radar Winerim de vinos nuevos y cartas de novedades` en `src/seo/NEW_WINE_RADAR_AND_MONTHLY_NEWS_2026-07-05.md`.
+- La idea de vinos nuevos queda formulada como `Radar Winerim`: capturar solicitudes de vinos inexistentes, normalizarlas, enriquecerlas y convertirlas cuando proceda en ficha, Vino del Dia, newsletter, lead magnet o carta dinamica `Novedades de Julio`.
+- La orientacion decidida para `Radar Winerim` es B2B primero; cualquier uso B2C queda como fase posterior para no diluir el foco comercial de restaurantes, hoteles, grupos, distribuidores y bodegas.
 - El 2026-07-02, tras el publish del usuario, `https://winerim.wine/sitemap.xml` quedo corregido en produccion con `2.294` URLs y deployment `1f496f52-39b9-4f32-a925-db02f74b0596`.
 - El 2026-07-02 se reenvio `/sitemap.xml` en Search Console y Google confirmo `Se ha enviado el sitemap correctamente`; puede tardar en dejar de mostrar `403` paginas descubiertas.
 - El bloqueo SEO pendiente ya no es el sitemap, sino `prerender`: la Edge Function productiva y el apex siguen devolviendo home/canonical raiz para CloudRIM/SAVia cuando se prueban como Googlebot.
@@ -459,3 +473,38 @@
   - configurar `www.winerim.wine` para redirigir `301` a `https://winerim.wine/`;
   - forzar HTTP -> HTTPS para todas las rutas, no solo sitemap.
 - Hacer QA visual post-publish de CloudRIM/SAVia/Funcionalidades en desktop/mobile si Lovable publica el frontend React.
+
+## Actualizacion 2026-07-05: criterio vigente para expansion editorial Biblioteca/Aprender
+
+### Hechos
+
+- El proyecto usa Lovable Cloud para aplicar migraciones/publicar en este flujo.
+- La migracion editorial vigente es `supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql`.
+- La expansion editorial debe mantener:
+  - seis idiomas: ES/EN/IT/FR/DE/PT;
+  - cadencia semanal de lunes;
+  - articulos extensos, idealmente por encima de `900` palabras;
+  - enlaces internos a biblioteca/aprender y enlaces de conversion localizados;
+  - `article_group` para relacionar traducciones.
+- `public.articles` tiene columnas `lang`, `article_group` y `related_links`.
+- `ArticlePage` y `prerender` pueden emitir `hreflang` de articulos cuando existen hermanos por `article_group`.
+- `llms.txt` y `llms-full.txt` deben listar spokes de Aprender vino por idioma cuando haya URLs localizadas.
+
+### Decisiones
+
+- Para esta migracion, el agente de Lovable debe ejecutar solo:
+  - `supabase--migration`;
+  - `preview_ui--publish`.
+- No depender de Supabase CLI, dashboard ni credenciales locales para este cierre.
+- Incluir RLS/GRANTs explicitamente en migraciones que toquen tablas publicas usadas por frontend.
+- Mantener `Biblioteca del vino` como base/coleccion de entidades y `Aprender vino` como ruta formativa guiada.
+
+### Hipotesis
+
+- El uso consistente de `article_group` favorece indexacion multilingue, canonicalizacion y citabilidad por LLMs.
+- El contenido semanal por idioma deberia evitar el patron anterior de muchos articulos publicados en bloque el mismo dia.
+
+### Tareas pendientes
+
+- Resolver backlog amplio de idioma detectado el `2026-07-05`: route maps/hreflang, home DE/PT, herramientas, biblioteca detalle y perfiles localizados.
+- Tras publish, validar Search Console y sitemap para los nuevos grupos editoriales.
