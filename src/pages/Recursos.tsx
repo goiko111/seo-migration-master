@@ -193,6 +193,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Monthly wine list review", desc: "Structured process to review your wine list every month with real data." },
     { title: "Monthly margin review", desc: "A template to review each month if your list is losing margin and decide what to fix before the problem grows." },
     { title: "Multi-venue control", desc: "Comparative dashboard, centralized assortment and benchmarking across locations." },
+    { title: "Pareto 80/20 audit", desc: "Find which wines sustain revenue, which support the list, and where stock is not returning value." },
+    { title: "Margin leakage diagnosis", desc: "Detect losses from cost, price, by-the-glass, replenishment and purchasing before they accumulate." },
+    { title: "Restaurant RIM profile", desc: "Identify whether your list is strategic, gastronomic, touristic, passive or needs simplification." },
+    { title: "POS value for wine", desc: "Estimate the value lost when POS sales do not feed wine list, stock, margin and purchasing decisions." },
+    { title: "Distributor audit", desc: "Evaluate catalog fit, pricing, delivery notes, service quality and the real value of each supplier." },
+    { title: "Delivery notes and cost checklist", desc: "Check whether invoices, delivery notes and supplier tariffs are really updating your wine costs." },
+    { title: "Seasonal wine-list plan", desc: "Prepare purchasing, by-the-glass, stock, staff training and margins before peak season." },
+    { title: "Winerim Awards self-assessment", desc: "Score your wine list across profitability, balance, guest experience, stock and data maturity." },
   ],
   it: [
     { title: "Template carta dei vini", desc: "Template professionale per progettare e strutturare la tua carta dei vini da zero." },
@@ -209,6 +217,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Revisione mensile della carta", desc: "Processo strutturato per rivedere la tua carta ogni mese con dati reali." },
     { title: "Revisione mensile dei margini", desc: "Un template per verificare ogni mese se la tua carta sta perdendo margine e decidere cosa correggere." },
     { title: "Controllo multi-locale", desc: "Dashboard comparativa, assortimento centralizzato e benchmarking tra locali." },
+    { title: "Audit Pareto 80/20", desc: "Individua quali vini sostengono il fatturato, quali fanno da supporto e dove lo stock non rende." },
+    { title: "Diagnosi fuga di margine", desc: "Trova perdite da costo, prezzo, calice, riordino e acquisti prima che si accumulino." },
+    { title: "Profilo RIM del ristorante", desc: "Scopri se la tua carta è strategica, gastronomica, turistica, passiva o da semplificare." },
+    { title: "Valore POS per il vino", desc: "Stima il valore perso quando le vendite POS non alimentano carta, stock, margine e acquisti." },
+    { title: "Audit distributori", desc: "Valuta catalogo, prezzi, documenti, servizio e reale coerenza di ogni fornitore." },
+    { title: "Checklist documenti e costo", desc: "Controlla se fatture, DDT e tariffe aggiornano davvero il costo della carta." },
+    { title: "Piano stagionale", desc: "Prepara acquisti, calice, stock, formazione e margine prima dell'alta stagione." },
+    { title: "Autovalutazione Premi Winerim", desc: "Valuta la carta su redditività, equilibrio, esperienza, stock e maturità dei dati." },
   ],
   fr: [
     { title: "Modèle de carte des vins", desc: "Modèle professionnel pour concevoir et structurer votre carte des vins de zéro." },
@@ -225,6 +241,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Révision mensuelle de la carte", desc: "Processus structuré pour réviser votre carte chaque mois avec des données réelles." },
     { title: "Révision mensuelle des marges", desc: "Un modèle pour vérifier chaque mois si votre carte perd de la marge et décider quoi corriger." },
     { title: "Contrôle multi-sites", desc: "Dashboard comparatif, assortiment centralisé et benchmarking entre établissements." },
+    { title: "Audit Pareto 80/20", desc: "Identifiez les vins qui portent le chiffre d'affaires, ceux qui soutiennent la carte et les stocks sans retour." },
+    { title: "Diagnostic fuite de marge", desc: "Détectez les pertes liées au coût, au prix, au verre, au réassort et aux achats avant accumulation." },
+    { title: "Profil RIM du restaurant", desc: "Découvrez si votre carte est stratégique, gastronomique, touristique, passive ou à simplifier." },
+    { title: "Valeur POS pour le vin", desc: "Estimez la valeur perdue quand les ventes POS n'alimentent pas carte, stock, marge et achats." },
+    { title: "Audit distributeurs", desc: "Évaluez catalogue, prix, documents, service et adéquation réelle de chaque fournisseur." },
+    { title: "Checklist documents et coût", desc: "Vérifiez si factures, bons de livraison et tarifs mettent vraiment à jour le coût de la carte." },
+    { title: "Plan de saison", desc: "Préparez achats, vin au verre, stock, formation et marge avant la haute saison." },
+    { title: "Autoévaluation Prix Winerim", desc: "Notez votre carte selon rentabilité, équilibre, expérience, stock et maturité data." },
   ],
   de: [
     { title: "Weinkarten-Vorlage", desc: "Professionelle Vorlage zum Entwerfen und Strukturieren Ihrer Weinkarte von Grund auf." },
@@ -241,6 +265,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Monatliche Kartenüberprüfung", desc: "Strukturierter Prozess zur monatlichen Überprüfung Ihrer Karte mit realen Daten." },
     { title: "Monatliche Margenprüfung", desc: "Eine Vorlage zur monatlichen Prüfung, ob Ihre Karte Marge verliert, und was zu korrigieren ist." },
     { title: "Multi-Standort-Kontrolle", desc: "Vergleichs-Dashboard, zentralisiertes Sortiment und Benchmarking zwischen Standorten." },
+    { title: "Pareto-80/20-Audit", desc: "Erkennen Sie, welche Weine den Umsatz tragen, welche nur stützen und wo Bestand keinen Rückfluss bringt." },
+    { title: "Margenverlust-Diagnose", desc: "Finden Sie Verluste durch Kosten, Preis, Glasverkauf, Nachbestellung und Einkauf, bevor sie wachsen." },
+    { title: "Restaurant-RIM-Profil", desc: "Erkennen Sie, ob Ihre Karte strategisch, gastronomisch, touristisch, passiv oder zu komplex ist." },
+    { title: "POS-Wert für Wein", desc: "Schätzen Sie den Wertverlust, wenn POS-Verkäufe nicht in Karte, Bestand, Marge und Einkauf einfließen." },
+    { title: "Distributoren-Audit", desc: "Bewerten Sie Sortiment, Preise, Belege, Service und tatsächliche Passung jedes Lieferanten." },
+    { title: "Checkliste Belege und Kosten", desc: "Prüfen Sie, ob Rechnungen, Lieferscheine und Tarife die Weinkosten wirklich aktualisieren." },
+    { title: "Saisonplan", desc: "Planen Sie Einkauf, Glaswein, Bestand, Schulung und Marge vor der Hochsaison." },
+    { title: "Winerim Awards Selbstbewertung", desc: "Bewerten Sie Ihre Karte nach Rentabilität, Balance, Erlebnis, Bestand und Datenreife." },
   ],
   pt: [
     { title: "Modelo de carta de vinhos", desc: "Modelo profissional para desenhar e estruturar a sua carta de vinhos do zero." },
@@ -257,6 +289,14 @@ const resourceTexts: Record<string, ResourceText[]> = {
     { title: "Revisão mensal da carta", desc: "Processo estruturado para rever a sua carta todos os meses com dados reais." },
     { title: "Revisão mensal de margens", desc: "Um modelo para verificar mensalmente se a sua carta está a perder margem e decidir o que corrigir." },
     { title: "Controlo multi-unidade", desc: "Dashboard comparativo, sortido centralizado e benchmarking entre unidades." },
+    { title: "Auditoria Pareto 80/20", desc: "Detete que vinhos sustentam a faturação, quais apoiam a carta e onde o stock não retorna valor." },
+    { title: "Diagnóstico fuga de margem", desc: "Encontre perdas por custo, PVP, copo, reposição e compras antes de se acumularem." },
+    { title: "Perfil RIM do restaurante", desc: "Descubra se a sua carta é estratégica, gastronómica, turística, passiva ou precisa de simplificação." },
+    { title: "Valor POS para vinho", desc: "Calcule o valor perdido quando as vendas POS não alimentam carta, stock, margem e compras." },
+    { title: "Auditoria de distribuidores", desc: "Avalie catálogo, preços, documentos, serviço e encaixe real de cada fornecedor." },
+    { title: "Checklist documentos e custo", desc: "Controle se faturas, guias e tabelas atualizam realmente o custo da carta." },
+    { title: "Plano de temporada", desc: "Prepare compras, vinho a copo, stock, formação e margem antes da época alta." },
+    { title: "Autoavaliação Prémios Winerim", desc: "Pontue a sua carta por rentabilidade, equilíbrio, experiência, stock e maturidade de dados." },
   ],
 };
 
@@ -290,7 +330,7 @@ const Recursos = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.metaTitle} description={t.metaDesc} url="https://winerim.wine/recursos"
+      <SEOHead title={t.metaTitle} description={t.metaDesc} url={`https://winerim.wine${localePath("/recursos")}`}
         hreflang={allLangPaths("/recursos")} />
       <main>
         {/* ── Hero ── */}

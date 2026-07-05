@@ -1,5 +1,44 @@
 # Decisions Log
 
+## 2026-07-05
+
+### Sincronizacion editorial, RLS de articulos y auditoria multilingue
+
+#### Hechos
+
+- Se revisaron los documentos fuente de verdad al inicio de la sesion.
+- CloudRIM/SAVia ya estaban implementados segun codigo, audit y estado productivo documentado.
+- `origin/main` ya contenia la migracion editorial de 12 articulos de Biblioteca del vino / Aprender vino.
+- La version local y la remota estaban divergidas; se creo la rama de respaldo `codex/backup-before-origin-sync-20260705`.
+- Se resolvio el conflicto de Worker manteniendo el patron dinamico de rutas de herramientas online.
+- Se preparo la migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql` para blindar permisos/RLS de `public.articles`.
+- Se aplico gating local por `published_at` para que la guia `Recomendar vino por estilos`, programada para el 2026-07-13, no salga antes de fecha en hubs, prerender, Worker ni `llms`.
+- Los agentes Biblioteca, Aprender e Idiomas revisaron sus areas y no editaron archivos.
+- La auditoria de idiomas detecto deuda importante en DE/PT y en canonicals/hreflang de algunas paginas localizadas.
+- Validaciones locales completas pasaron: sintaxis Worker, diff check, test SEO, ESLint, Deno check, TypeScript y build.
+
+#### Decisiones
+
+- Dar CloudRIM/SAVia como implementado; seguir con revalidacion y mejoras, no rehacer la exposicion principal.
+- Tratar la migracion base de articulos como presente en remoto, pero anadir una migracion correctiva para garantizar permisos/RLS aunque Lovable ya hubiera aplicado una version incompleta.
+- No exponer enlaces editoriales futuros en `llms`, Worker, prerender ni hub hasta su fecha real de publicacion.
+- Priorizar una tarea de idiomas antes de seguir escalando contenido masivo: si DE/PT o canonicals fallan, mas articulos amplifican el problema.
+- Mantener `src/components/WineListAnalyzerTool.tsx` fuera del commit por ser cambio ajeno/preexistente.
+
+#### Hipotesis
+
+- La migracion correctiva deberia ser segura aunque la migracion original ya tenga RLS, porque los `DROP POLICY IF EXISTS` y `GRANT` son idempotentes en la practica.
+- El gating de enlaces futuros reducira discrepancias entre contenido publicado, contenido enlazado y senales para LLMs.
+- Corregir idiomas/canonicals puede tener mas impacto SEO internacional que publicar otra tanda sin paridad bot/humano.
+
+#### Tareas pendientes
+
+- Pushear el merge y el cierre editorial.
+- Aplicar/publicar la migracion correctiva en Lovable Cloud.
+- Publicar frontend/Edge/Worker y revalidar `Aprender vino`, articulos, sitemap, prerender y `llms`.
+- Crear una tarea especifica de internacionalizacion para home DE/PT, herramientas, formularios, canonicals y hreflang.
+- Preparar la siguiente tanda editorial cuando la capa multilingue quede estable.
+
 ## 2026-07-02
 
 ### Sitemap completo publicado y reenviado

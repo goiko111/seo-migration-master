@@ -1,5 +1,79 @@
 # Current State
 
+## Actualizacion 2026-07-05: sincronizacion editorial, permisos `articles` y auditoria de idiomas
+
+## Hechos
+
+- Se leyeron al inicio de sesion `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md` como fuente de verdad.
+- Se reviso `WINERIM_WEB_CLOUDRIM_SAVIA_EXPOSURE_AUDIT_2026-07-03.md`.
+- CloudRIM y SAVia ya estan implementados en la web y en la superficie SEO/LLM: paginas propias, home, funcionalidades, integraciones, inteligencia dinamica, Worker, prerender, sitemap y `llms`.
+- `origin/main` ya traia la migracion editorial base de 12 articulos de Biblioteca del vino / Aprender vino mediante `66d2fc9 Migró 12 artículos editoriales`.
+- La sincronizacion local/remoto detecto divergencia: local tenia `79c31a6 feat: prepare Lovable wine education expansion` y remoto tenia 4 commits nuevos.
+- Se creo la rama de respaldo `codex/backup-before-origin-sync-20260705` antes de integrar remoto.
+- El cambio ajeno/preexistente `src/components/WineListAnalyzerTool.tsx` se preservo temporalmente en stash para no mezclarlo con este cierre.
+- Se resolvio el conflicto de merge en `cloudflare-worker-v3-hybrid.js` manteniendo el patron `ONLINE_TOOL_GROUPS.flatMap(group => Object.values(group.paths))`.
+- Se preparo la migracion correctiva `supabase/migrations/20260705081417_harden_articles_editorial_permissions.sql` para reforzar `public.articles` con RLS, `GRANT SELECT` a `anon`, `GRANT SELECT/INSERT/UPDATE/DELETE` a `authenticated`, `GRANT ALL` a `service_role` y politicas de lectura publica solo para articulos publicados.
+- La oleada `learn-wine-recommend-by-style` tiene `published_at` del 2026-07-13; antes del ajuste estaba enlazada en hubs/prerender/Worker/LLM aunque aun es futura.
+- Se anadio gating por fecha para enlaces futuros en:
+  - `src/pages/AprenderVino.tsx`;
+  - `supabase/functions/prerender/index.ts`;
+  - `cloudflare-worker-v3-hybrid.js`.
+- Se retiraron temporalmente de `public/llms.txt` y `public/llms-full.txt` los enlaces a la guia futura `Recomendar vino por estilos` hasta su fecha de publicacion.
+- Se actualizo `src/test/wine-library-seo-surface.test.ts` para validar la migracion correctiva, el gating de enlaces futuros y la ausencia de esos enlaces futuros en `llms`.
+- El agente Biblioteca confirmo que la siguiente tanda recomendada es:
+  - Biblioteca: `wine-library-by-the-glass-stock-rotation` para 2026-07-20;
+  - Aprender vino: `learn-wine-read-label-restaurant` para 2026-07-27.
+- El agente Aprender vino confirmo que conviene cerrar primero la coherencia sitemap/prerender/llms/published_at antes de aumentar mas articulos.
+- El agente Idiomas detecto deuda seria de internacionalizacion, especialmente en DE/PT: home con fallback espanol para humanos, diferencias entre bot/humano, canonicals cruzados en algunas paginas y formularios/herramientas con textos o SEO incompletos.
+- Validaciones locales OK:
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `git diff --check`;
+  - `git diff --check --cached`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` con 20/20 tests;
+  - `npx eslint src/pages/AprenderVino.tsx src/pages/ArticlePage.tsx src/test/wine-library-seo-surface.test.ts`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npx tsc --noEmit --pretty false`;
+  - `npm run build`.
+- El build solo muestra avisos no bloqueantes conocidos: Browserslist desactualizado y chunks grandes.
+
+## Decisiones
+
+- Dar por implementada la exposicion web de CloudRIM/SAVia salvo revalidaciones y mejoras incrementales.
+- Considerar la migracion editorial base como ya presente en remoto, pero mantener una migracion correctiva separada para asegurar permisos/RLS si Lovable aplico una version incompleta.
+- No anunciar en hubs, prerender, Worker ni `llms` las URLs editoriales con `published_at` futuro hasta que llegue su fecha.
+- No mezclar la auditoria de idiomas con el commit editorial actual; queda como bloque de trabajo prioritario separado.
+- Mantener fuera del commit el cambio ajeno de `src/components/WineListAnalyzerTool.tsx`.
+
+## Hipotesis
+
+- Si produccion ya aplico la migracion base sin los permisos correctos, la migracion correctiva deberia normalizar el acceso Data API de `articles` sin duplicar contenido.
+- Quitar enlaces futuros de `llms` y aplicar gating reduce riesgo de indexacion prematura y discrepancias entre sitemap/API/prerender.
+- La deuda de idiomas DE/PT puede afectar conversion, SEO internacional y posicionamiento en LLMs mas que seguir ampliando articulos sin corregir la capa de rutas/canonicals.
+
+## Contradicciones / dudas abiertas
+
+- Los documentos anteriores decian que `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` no estaba aplicada, pero `origin/main` ya contiene la oleada de 12 articulos. Lo pendiente real es confirmar aplicacion productiva y cerrar permisos/RLS.
+- Produccion habia llegado a exponer URLs futuras en prerender/sitemap segun la auditoria de agentes; local queda corregido, pero falta publicar y revalidar en produccion.
+- La auditoria de idiomas detecta posible mismatch bot/humano en rutas DE/PT; hay que verificar en produccion tras el siguiente publish antes de tomarlo como estado final.
+
+## Tareas pendientes
+
+- Concluir el merge local/remoto, commitear y pushear el cierre.
+- Restaurar el stash del cambio ajeno `src/components/WineListAnalyzerTool.tsx` tras el commit/push para devolverselo intacto al workspace.
+- Aplicar/publicar en Lovable Cloud la migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql`.
+- Publicar frontend/Edge/Worker con el gating de enlaces futuros y revalidar:
+  - hubs `Aprender vino`;
+  - 12 articulos editoriales;
+  - `llms.txt` y `llms-full.txt`;
+  - sitemap y prerender.
+- Abrir una tarea prioritaria de idiomas:
+  - home DE/PT sin fallback espanol;
+  - canonicals/hreflang por familia;
+  - herramientas localizadas con SEO real;
+  - formularios DE/PT;
+  - paridad bot/humano.
+- Despues de cerrar idiomas, preparar los lotes editoriales 2026-07-20 y 2026-07-27.
+
 ## Actualizacion 2026-07-05: Search Console, Worker, herramientas localizadas y Radar Winerim
 
 ## Hechos

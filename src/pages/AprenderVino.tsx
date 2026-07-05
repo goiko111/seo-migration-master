@@ -48,6 +48,13 @@ interface LearningStep {
   icon: typeof BookOpen;
 }
 
+interface LearnWineArticleLink {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt?: string;
+}
+
 interface LearnWineCopy {
   seoTitle: string;
   seoDescription: string;
@@ -64,7 +71,7 @@ interface LearnWineCopy {
   articlesTitle: string;
   articlesIntro: string;
   articleCta: string;
-  articleLinks: { title: string; description: string; path: string }[];
+  articleLinks: LearnWineArticleLink[];
   methodTitle: string;
   methodIntro: string;
   method: { title: string; text: string }[];
@@ -75,6 +82,9 @@ interface LearnWineCopy {
   faqTitle: string;
   faqs: { q: string; a: string }[];
 }
+
+const isPublishedArticleLink = (article: LearnWineArticleLink) =>
+  !article.publishedAt || new Date(article.publishedAt).getTime() <= Date.now();
 
 const COPY: Record<SupportedLang, LearnWineCopy> = {
   es: {
@@ -135,7 +145,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Primeras guías para empezar",
     articlesIntro:
-      "Siete piezas prácticas para pasar de la teoría a conversación real en sala: catar, describir, recomendar, entender tipos, uvas, regiones y estilos.",
+      "Guías prácticas para pasar de la teoría a conversación real en sala: catar, describir, recomendar, entender tipos, uvas, regiones y estilos.",
     articleCta: "Leer guía",
     articleLinks: [
       {
@@ -172,6 +182,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Recomendar vino por estilos",
         description: "Cómo convertir frases de cliente en estilos claros, alternativas útiles y recomendaciones de sala.",
         path: "/article/recomendar-vino-por-estilos-restaurante",
+        publishedAt: "2026-07-13T09:00:00+02:00",
       },
     ],
     methodTitle: "Método Winerim para aprender vino en restauración",
@@ -222,7 +233,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "First guides to start with",
     articlesIntro:
-      "Seven practical pieces that turn wine learning into floor conversations: tasting, describing, pairing, wine types, grapes, regions and styles.",
+      "Practical guides that turn wine learning into floor conversations: tasting, describing, pairing, wine types, grapes, regions and styles.",
     articleCta: "Read guide",
     articleLinks: [
       {
@@ -259,6 +270,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Recommend wine by style",
         description: "Turn guest language into clear styles, useful alternatives and confident floor recommendations.",
         path: "/en/article/recommend-wine-by-style-restaurant",
+        publishedAt: "2026-07-13T09:05:00+02:00",
       },
     ],
     methodTitle: "The Winerim method for wine learning in hospitality",
@@ -309,7 +321,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Prime guide per iniziare",
     articlesIntro:
-      "Sette contenuti pratici per portare l'apprendimento nella conversazione in sala: degustare, descrivere, abbinare, leggere tipi, vitigni, regioni e stili.",
+      "Guide pratiche per portare l'apprendimento nella conversazione in sala: degustare, descrivere, abbinare, leggere tipi, vitigni, regioni e stili.",
     articleCta: "Leggi la guida",
     articleLinks: [
       {
@@ -346,6 +358,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Consigliare il vino per stile",
         description: "Trasforma le frasi del cliente in stili chiari, alternative utili e raccomandazioni sicure.",
         path: "/it/article/raccomandare-vino-per-stile-ristorante",
+        publishedAt: "2026-07-13T09:10:00+02:00",
       },
     ],
     methodTitle: "Il metodo Winerim per imparare il vino nella ristorazione",
@@ -396,7 +409,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Premiers guides pour commencer",
     articlesIntro:
-      "Sept contenus pratiques pour passer de l'apprentissage à la conversation en salle : déguster, décrire, accorder, lire types, cépages, régions et styles.",
+      "Guides pratiques pour passer de l'apprentissage à la conversation en salle : déguster, décrire, accorder, lire types, cépages, régions et styles.",
     articleCta: "Lire le guide",
     articleLinks: [
       {
@@ -433,6 +446,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Recommander le vin par style",
         description: "Transformer les mots du client en styles clairs, alternatives utiles et recommandations sûres.",
         path: "/fr/article/recommander-vin-par-style-restaurant",
+        publishedAt: "2026-07-13T09:15:00+02:00",
       },
     ],
     methodTitle: "La méthode Winerim pour apprendre le vin en restauration",
@@ -483,7 +497,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Erste Leitfäden für den Einstieg",
     articlesIntro:
-      "Sieben praktische Inhalte, die Weinwissen in Servicegespräche übersetzen: verkosten, beschreiben, pairen, Weinarten, Rebsorten, Regionen und Stile lesen.",
+      "Praktische Inhalte, die Weinwissen in Servicegespräche übersetzen: verkosten, beschreiben, pairen, Weinarten, Rebsorten, Regionen und Stile lesen.",
     articleCta: "Leitfaden lesen",
     articleLinks: [
       {
@@ -520,6 +534,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Wein nach Stil empfehlen",
         description: "Gaestesprache in klare Stile, sinnvolle Alternativen und sichere Empfehlungen uebersetzen.",
         path: "/de/article/wein-nach-stil-empfehlen-restaurant",
+        publishedAt: "2026-07-13T09:20:00+02:00",
       },
     ],
     methodTitle: "Die Winerim-Methode für Weinlernen in der Gastronomie",
@@ -570,7 +585,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
     ],
     articlesTitle: "Primeiros guias para começar",
     articlesIntro:
-      "Sete conteúdos práticos para transformar aprendizagem em conversa de sala: provar, descrever, harmonizar, ler tipos, castas, regiões e estilos.",
+      "Guias práticos para transformar aprendizagem em conversa de sala: provar, descrever, harmonizar, ler tipos, castas, regiões e estilos.",
     articleCta: "Ler guia",
     articleLinks: [
       {
@@ -607,6 +622,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Recomendar vinho por estilos",
         description: "Transformar frases do cliente em estilos claros, alternativas úteis e recomendações seguras.",
         path: "/pt/article/recomendar-vinho-por-estilos-restaurante",
+        publishedAt: "2026-07-13T09:25:00+02:00",
       },
     ],
     methodTitle: "O método Winerim para aprender vinho na restauração",
@@ -634,6 +650,7 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
 const AprenderVino = () => {
   const { lang, localePath } = useLanguage();
   const copy = COPY[lang] || COPY.es;
+  const visibleArticleLinks = copy.articleLinks.filter(isPublishedArticleLink);
   const canonicalPath = LEARN_WINE_ROUTES[lang] || LEARN_WINE_ROUTES.es;
   const canonicalUrl = `${CANONICAL_DOMAIN}${canonicalPath}`;
   const libraryUrl = getWineLibraryPath(lang, "/biblioteca-vino");
@@ -670,7 +687,7 @@ const AprenderVino = () => {
       {
         "@type": "ItemList",
         name: copy.articlesTitle,
-        itemListElement: copy.articleLinks.map((article, index) => ({
+        itemListElement: visibleArticleLinks.map((article, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: article.title,
@@ -814,7 +831,7 @@ const AprenderVino = () => {
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-5 mb-16">
-            {copy.articleLinks.map((article, index) => (
+            {visibleArticleLinks.map((article, index) => (
               <ScrollReveal key={article.path} delay={index * 0.06}>
                 <Link
                   to={article.path}

@@ -251,6 +251,8 @@ describe("wine library SEO surface", () => {
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
     const llms = readFileSync("public/llms.txt", "utf8");
+    const llmsFull = readFileSync("public/llms-full.txt", "utf8");
+    const aprenderVino = readFileSync("src/pages/AprenderVino.tsx", "utf8");
 
     expect(app).toContain("const AprenderVino");
     expect(app).toContain('path="/aprender-vino"');
@@ -280,13 +282,25 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("/fr/article/recommander-vin-par-style-restaurant");
     expect(worker).toContain("/de/article/wein-nach-stil-empfehlen-restaurant");
     expect(worker).toContain("/pt/article/recomendar-vinho-por-estilos-restaurante");
-    expect(llms).toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
-    expect(llms).toContain("https://winerim.wine/pt/article/recomendar-vinho-por-estilos-restaurante");
+    expect(aprenderVino).toContain("visibleArticleLinks");
+    expect(aprenderVino).toContain('publishedAt: "2026-07-13T09:00:00+02:00"');
+    expect(prerender).toContain("const LINK_RELEASES");
+    expect(prerender).toContain("isReleasedLink");
+    expect(worker).toContain("const WORKER_LINK_RELEASES");
+    expect(worker).toContain("isWorkerLinkVisible");
+    expect(llms).not.toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
+    expect(llms).not.toContain("https://winerim.wine/pt/article/recomendar-vinho-por-estilos-restaurante");
+    expect(llmsFull).not.toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
+    expect(llmsFull).not.toContain("https://winerim.wine/pt/article/recomendar-vinho-por-estilos-restaurante");
   });
 
   it("prepares the wine-library and learn-wine editorial migration for Lovable Cloud", () => {
     const migration = readFileSync(
       "supabase/migrations/20260703141412_add_wine_library_learn_wine_editorial_expansion.sql",
+      "utf8",
+    );
+    const permissionsMigration = readFileSync(
+      "supabase/migrations/20260705081417_harden_articles_editorial_permissions.sql",
       "utf8",
     );
     const articlePage = readFileSync("src/pages/ArticlePage.tsx", "utf8");
@@ -305,6 +319,11 @@ describe("wine library SEO surface", () => {
     expect(migration).toContain('"to":"/pt/analise-carta"');
     expect(migration).toContain("recommend-wine-by-style-restaurant_en");
     expect(migration).toContain("recomendar-vinho-por-estilos-restaurante_pt");
+    expect(permissionsMigration).toContain("ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY");
+    expect(permissionsMigration).toContain("GRANT SELECT ON TABLE public.articles TO anon");
+    expect(permissionsMigration).toContain("GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.articles TO authenticated");
+    expect(permissionsMigration).toContain("GRANT ALL ON TABLE public.articles TO service_role");
+    expect(permissionsMigration).toContain('CREATE POLICY "Public can read published articles"');
     expect(articlePage).toContain("article_group");
     expect(articlePage).toContain("hreflang={article.hreflang}");
     expect(prerender).toContain("articleHreflang");

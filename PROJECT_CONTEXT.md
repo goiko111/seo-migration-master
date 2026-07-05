@@ -2,6 +2,12 @@
 
 ## Hechos
 
+- El 2026-07-05 se confirmo que CloudRIM y SAVia ya estan implementados como capacidades principales en la web y superficie SEO/LLM de Winerim.
+- El 2026-07-05 se detecto una contradiccion documental: la migracion editorial `20260703141412_add_wine_library_learn_wine_editorial_expansion.sql` figuraba como pendiente, pero `origin/main` ya contiene la oleada de 12 articulos de Biblioteca del vino / Aprender vino.
+- El 2026-07-05 se preparo la migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql` para asegurar RLS, grants y politicas de `public.articles` tras la expansion editorial.
+- La cadencia editorial decidida para blog/aprender/biblioteca es semanal y con fechas correlativas; las URLs con `published_at` futuro no deben enlazarse ni anunciarse en `llms` antes de su fecha.
+- El 2026-07-05 se corrigio localmente la exposicion prematura de la guia futura `Recomendar vino por estilos` en hubs, prerender, Worker y `llms`; queda pendiente publicar y revalidar en produccion.
+- El 2026-07-05 una auditoria especifica de idiomas detecto que la prioridad multilingue ya no es solo crear contenido DE/PT, sino asegurar paridad humano/bot, canonicals/hreflang correctos y ausencia de fallback espanol en rutas internacionales.
 - El 2026-07-05 se revalido Search Console para la propiedad URL-prefix `https://winerim.wine/`: `/sitemap.xml` figura como `Correcto`, ultima lectura `5 jul 2026` y `2.330` paginas descubiertas.
 - El 2026-07-05 Search Console mostro `https://winerim.wine/producto/cloudrim` como no indexada por un rastreo antiguo del `2 jul 2026` que seleccionaba `https://winerim.wine/` como canonical, pero la prueba en vivo ya devuelve `La URL esta disponible para Google` y `La pagina se puede indexar`; se solicito indexacion y Google confirmo que se anadio a cola prioritaria.
 - El 2026-07-05 Search Console mostro `https://winerim.wine/producto/savia`, `https://winerim.wine/presentacion` y `https://winerim.wine/aprender-vino` como URLs ya indexadas.

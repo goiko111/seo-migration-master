@@ -54,6 +54,20 @@ interface PageContent {
 
 interface HreflangEntry { lang: string; url: string }
 
+const LINK_RELEASES: Record<string, string> = {
+  '/article/recomendar-vino-por-estilos-restaurante': '2026-07-13T09:00:00+02:00',
+  '/en/article/recommend-wine-by-style-restaurant': '2026-07-13T09:05:00+02:00',
+  '/it/article/raccomandare-vino-per-stile-ristorante': '2026-07-13T09:10:00+02:00',
+  '/fr/article/recommander-vin-par-style-restaurant': '2026-07-13T09:15:00+02:00',
+  '/de/article/wein-nach-stil-empfehlen-restaurant': '2026-07-13T09:20:00+02:00',
+  '/pt/article/recomendar-vinho-por-estilos-restaurante': '2026-07-13T09:25:00+02:00',
+};
+
+function isReleasedLink(url: string): boolean {
+  const releaseAt = LINK_RELEASES[url];
+  return !releaseAt || Date.now() >= Date.parse(releaseAt);
+}
+
 const WINE_LIBRARY_HOME_HREFLANG: HreflangEntry[] = [
   { lang: 'es', url: `${SITE}/biblioteca-vino` },
   { lang: 'en', url: `${SITE}/en/wine-library` },
@@ -3719,6 +3733,13 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
           { label: 'Wine glossary', url: '/en/wine-library/glossary' },
           { label: 'Grapes', url: '/en/wine-library/grapes' },
           { label: 'Pairings', url: '/en/wine-library/pairings' },
+          { label: 'Taste wine in five steps', url: '/en/article/how-to-taste-wine-in-five-steps' },
+          { label: 'Tasting vocabulary', url: '/en/article/wine-tasting-vocabulary' },
+          { label: 'Basic pairings', url: '/en/article/basic-food-and-wine-pairing-for-restaurants' },
+          { label: 'Wine types', url: '/en/article/types-of-wine-restaurant-wine-list' },
+          { label: 'Grapes to know', url: '/en/article/grapes-to-know-when-starting-with-wine' },
+          { label: 'Wine regions', url: '/en/article/wine-regions-to-know-for-restaurant-service' },
+          { label: 'Recommend by style', url: '/en/article/recommend-wine-by-style-restaurant' },
           { label: 'Free wine-list analysis', url: '/en/wine-list-analysis' },
         ],
       },
@@ -3745,6 +3766,13 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
           { label: 'Glossario', url: '/it/biblioteca-vino/glossario' },
           { label: 'Vitigni', url: '/it/biblioteca-vino/vitigni' },
           { label: 'Abbinamenti', url: '/it/biblioteca-vino/abbinamenti' },
+          { label: 'Degustare in cinque passaggi', url: '/it/article/come-degustare-il-vino-in-cinque-passaggi' },
+          { label: 'Vocabolario degustazione', url: '/it/article/vocabolario-degustazione-vino' },
+          { label: 'Abbinamenti base', url: '/it/article/abbinamenti-base-cibo-vino-per-ristoranti' },
+          { label: 'Tipi di vino', url: '/it/article/tipi-di-vino-per-capire-una-carta' },
+          { label: 'Vitigni per iniziare', url: '/it/article/vitigni-da-conoscere-per-iniziare' },
+          { label: 'Regioni vinicole', url: '/it/article/regioni-vinicole-da-conoscere-in-ristorante' },
+          { label: 'Consigliare per stile', url: '/it/article/raccomandare-vino-per-stile-ristorante' },
           { label: 'Analisi carta vini', url: '/it/analisi-carta' },
         ],
       },
@@ -3771,6 +3799,13 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
           { label: 'Glossaire', url: '/fr/bibliotheque-vin/glossaire' },
           { label: 'Cépages', url: '/fr/bibliotheque-vin/cepages' },
           { label: 'Accords', url: '/fr/bibliotheque-vin/accords' },
+          { label: 'Déguster en cinq étapes', url: '/fr/article/comment-deguster-le-vin-en-cinq-etapes' },
+          { label: 'Vocabulaire de dégustation', url: '/fr/article/vocabulaire-de-degustation-du-vin' },
+          { label: 'Accords de base', url: '/fr/article/accords-mets-vins-de-base-pour-restaurants' },
+          { label: 'Types de vin', url: '/fr/article/types-de-vin-pour-comprendre-une-carte' },
+          { label: 'Cépages pour commencer', url: '/fr/article/cepages-a-connaitre-pour-commencer' },
+          { label: 'Régions viticoles', url: '/fr/article/regions-viticoles-a-connaitre-en-restauration' },
+          { label: 'Recommander par style', url: '/fr/article/recommander-vin-par-style-restaurant' },
           { label: 'Analyse de carte', url: '/fr/analyse-carte' },
         ],
       },
@@ -3797,6 +3832,13 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
           { label: 'Glossar', url: '/de/weinbibliothek/glossar' },
           { label: 'Rebsorten', url: '/de/weinbibliothek/rebsorten' },
           { label: 'Pairings', url: '/de/weinbibliothek/weinbegleitung' },
+          { label: 'In fünf Schritten verkosten', url: '/de/article/wein-verkosten-in-fuenf-schritten' },
+          { label: 'Verkostungs-Vokabular', url: '/de/article/weinverkostung-vokabular' },
+          { label: 'Einfache Pairings', url: '/de/article/einfache-food-wine-pairings-fuer-restaurants' },
+          { label: 'Weinarten', url: '/de/article/weinarten-weinkarte-verstehen' },
+          { label: 'Rebsorten Einstieg', url: '/de/article/rebsorten-die-man-zum-einstieg-kennen-sollte' },
+          { label: 'Weinregionen', url: '/de/article/weinregionen-fuer-den-service-kennen' },
+          { label: 'Nach Stil empfehlen', url: '/de/article/wein-nach-stil-empfehlen-restaurant' },
           { label: 'Weinkartenanalyse', url: '/de/weinkarten-analyse' },
         ],
       },
@@ -3823,6 +3865,13 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
           { label: 'Glossário', url: '/pt/biblioteca-vinho/glossario' },
           { label: 'Castas', url: '/pt/biblioteca-vinho/castas' },
           { label: 'Harmonizações', url: '/pt/biblioteca-vinho/harmonizacoes' },
+          { label: 'Provar em cinco passos', url: '/pt/article/como-provar-vinho-em-cinco-passos' },
+          { label: 'Vocabulário de prova', url: '/pt/article/vocabulario-de-prova-de-vinho' },
+          { label: 'Harmonizações básicas', url: '/pt/article/harmonizacoes-basicas-para-restaurantes' },
+          { label: 'Tipos de vinho', url: '/pt/article/tipos-de-vinho-para-entender-uma-carta' },
+          { label: 'Castas para começar', url: '/pt/article/castas-para-conhecer-ao-comecar' },
+          { label: 'Regiões vinícolas', url: '/pt/article/regioes-vinicolas-para-conhecer-em-restaurante' },
+          { label: 'Recomendar por estilos', url: '/pt/article/recomendar-vinho-por-estilos-restaurante' },
           { label: 'Análise de carta', url: '/pt/analise-carta' },
         ],
       },
@@ -6241,7 +6290,8 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     })),
   }) : '';
 
-  const collectionLinks = content.internalLinks
+  const visibleInternalLinks = content.internalLinks.filter((link) => isReleasedLink(link.url));
+  const collectionLinks = visibleInternalLinks
     .filter((link, index, links) => links.findIndex((candidate) => candidate.url === link.url) === index)
     .slice(0, 40);
   const isWineLibraryDetail = meta.schemaType === 'Article' && [
@@ -6422,7 +6472,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
       </dl>
     </section>` : '';
 
-  const navHTML = content.internalLinks.map(l =>
+  const navHTML = visibleInternalLinks.map(l =>
     `<a href="${absoluteUrl(l.url)}">${escapeHtml(l.label)}</a>`
   ).join(' | ');
 

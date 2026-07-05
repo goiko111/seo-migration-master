@@ -1,5 +1,76 @@
 # Next Steps
 
+## Actualizacion 2026-07-05: retomar tras sincronizacion editorial y auditoria de idiomas
+
+## Hechos
+
+- CloudRIM/SAVia ya estan implementados y documentados como capacidades principales.
+- La oleada editorial de 12 articulos de Biblioteca del vino / Aprender vino ya esta en `origin/main`.
+- Se preparo una migracion correctiva para `public.articles`:
+  - `supabase/migrations/20260705081417_harden_articles_editorial_permissions.sql`.
+- Local queda preparado para no enlazar articulos con `published_at` futuro hasta su fecha:
+  - React hub `Aprender vino`;
+  - Supabase `prerender`;
+  - Cloudflare Worker;
+  - `llms.txt`;
+  - `llms-full.txt`.
+- Validaciones locales completas OK:
+  - Worker syntax;
+  - diff check;
+  - test SEO 20/20;
+  - ESLint;
+  - Deno check;
+  - TypeScript;
+  - build.
+- La auditoria del agente Idiomas detecto una deuda prioritaria en DE/PT y canonicals/hreflang.
+- `src/components/WineListAnalyzerTool.tsx` es cambio ajeno/preexistente y debe seguir fuera de este trabajo salvo instruccion expresa.
+
+## Prioridad 1: cierre operativo y despliegue
+
+1. Verificar que el merge local/remoto quedo commiteado y pusheado.
+2. En Lovable Cloud, aplicar la migracion correctiva:
+   - `20260705081417_harden_articles_editorial_permissions.sql`.
+3. Publicar frontend/Edge/Worker con los cambios de gating editorial.
+4. Revalidar produccion:
+   - `https://winerim.wine/aprender-vino`;
+   - variantes EN/IT/FR/DE/PT del hub;
+   - que la guia `Recomendar vino por estilos` no aparezca enlazada antes del 2026-07-13;
+   - `https://winerim.wine/llms.txt`;
+   - `https://winerim.wine/llms-full.txt`;
+   - sitemap y prerender.
+5. Confirmar en Supabase/Lovable que los articulos publicados son visibles por anon y que los futuros no se sirven como publicados.
+
+## Prioridad 2: auditoria y correccion de idiomas
+
+1. Crear guardrails/tests para detectar fallback espanol en rutas DE/PT.
+2. Corregir home DE/PT para humanos, no solo para Googlebot/Worker.
+3. Unificar fuente de verdad de rutas localizadas para React, sitemap, prerender y Worker.
+4. Revisar canonicals/hreflang de:
+   - `Contacto`;
+   - `Precios`;
+   - `Hoteles`;
+   - `CalculadoraPrecioCopa`;
+   - herramientas online localizadas.
+5. Localizar formularios DE/PT y herramientas que aun tengan copy/SEO espanol.
+6. Revalidar paridad bot/humano en muestras DE/PT antes de ampliar mas contenido internacional.
+
+## Prioridad 3: siguientes lotes Biblioteca / Aprender vino
+
+1. Preparar lote Biblioteca del vino para 2026-07-20:
+   - `wine-library-by-the-glass-stock-rotation`;
+   - foco: rotacion, stock y vino por copa.
+2. Preparar lote Aprender vino para 2026-07-27:
+   - `learn-wine-read-label-restaurant`;
+   - foco: leer etiquetas para equipos de sala.
+3. Mantener cadencia semanal, con fechas correlativas y versiones adaptadas por idioma/pais.
+4. No mezclar `Aprender vino` con fichas puras de `Biblioteca del vino`: `Aprender vino` es capa didactica; Biblioteca es capa de entidad/conocimiento.
+
+## Prioridad 4: Search Console y `www`
+
+1. Vigilar CloudRIM en Search Console tras la solicitud de indexacion del 2026-07-05.
+2. Mantener monitorizado `/sitemap.xml` y su conteo de URLs.
+3. Resolver `https://www.winerim.wine/` que sigue devolviendo `421`; requiere ajuste Cloudflare/Lovable/routing con permisos de DNS/rulesets.
+
 ## Actualizacion 2026-07-05: retomar tras Search Console, Worker y Radar Winerim
 
 ## Hechos

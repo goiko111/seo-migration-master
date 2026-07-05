@@ -309,6 +309,20 @@ const LEARN_WINE_ALTERNATES = {
   'x-default': '/aprender-vino',
 };
 
+const WORKER_LINK_RELEASES = {
+  '/article/recomendar-vino-por-estilos-restaurante': '2026-07-13T09:00:00+02:00',
+  '/en/article/recommend-wine-by-style-restaurant': '2026-07-13T09:05:00+02:00',
+  '/it/article/raccomandare-vino-per-stile-ristorante': '2026-07-13T09:10:00+02:00',
+  '/fr/article/recommander-vin-par-style-restaurant': '2026-07-13T09:15:00+02:00',
+  '/de/article/wein-nach-stil-empfehlen-restaurant': '2026-07-13T09:20:00+02:00',
+  '/pt/article/recomendar-vinho-por-estilos-restaurante': '2026-07-13T09:25:00+02:00',
+};
+
+function isWorkerLinkVisible(url) {
+  const releaseAt = WORKER_LINK_RELEASES[url];
+  return !releaseAt || Date.now() >= Date.parse(releaseAt);
+}
+
 const DISTRIBUTOR_ALTERNATES = {
   es: '/distribuidor',
   en: '/en/distributor',
@@ -1464,7 +1478,10 @@ function renderWorkerStaticPrerender(path, site) {
   const alternateLinks = alternates ? Object.entries(alternates)
     .map(([lang, altPath]) => `<link rel="alternate" hreflang="${lang}" href="${site}${altPath}">`)
     .join('\n  ') : '';
-  const navLinks = page.links.map(([label, url]) => `<a href="${site}${url}">${escapeHtml(label)}</a>`).join(' | ');
+  const navLinks = page.links
+    .filter(([, url]) => isWorkerLinkVisible(url))
+    .map(([label, url]) => `<a href="${site}${url}">${escapeHtml(label)}</a>`)
+    .join(' | ');
   const sections = page.sections.map(([heading, body]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`).join('\n      ');
 
   return `<!doctype html>
@@ -1890,6 +1907,11 @@ const SEO_EXACT = new Set([
   '/en/tools/by-glass-diagnostic',
   '/en/tools/wine-list-score',
   '/en/tools/multi-unit-auditor',
+  '/en/tools/margin-signal-simulator',
+  '/en/tools/rim-profile-test',
+  '/en/tools/pareto-wine-list-simulator',
+  '/en/tools/margin-leakage-calculator',
+  '/en/tools/distributor-comparator',
   '/en/how-to-sell-more-wine-in-restaurants',
   '/en/wine-pricing-restaurant',
   '/en/wine-by-glass-restaurant',
@@ -1972,6 +1994,11 @@ const SEO_EXACT = new Set([
   '/it/strumenti/diagnostico-vino-al-calice',
   '/it/strumenti/wine-list-score',
   '/it/strumenti/auditor-carta-multilocale',
+  '/it/strumenti/simulatore-segnale-margini',
+  '/it/strumenti/test-profilo-rim',
+  '/it/strumenti/simulatore-pareto-carta-vini',
+  '/it/strumenti/calcolatrice-fuga-margine',
+  '/it/strumenti/comparatore-distributori',
   '/it/come-vendere-piu-vino-ristorante',
   '/it/prezzo-vino-ristorante',
   '/it/vino-al-calice-ristorante',
@@ -2053,6 +2080,11 @@ const SEO_EXACT = new Set([
   '/fr/outils/diagnostic-vin-au-verre',
   '/fr/outils/wine-list-score',
   '/fr/outils/auditeur-carte-multi-sites',
+  '/fr/outils/simulateur-signal-marges',
+  '/fr/outils/test-profil-rim',
+  '/fr/outils/simulateur-pareto-carte-vins',
+  '/fr/outils/calculateur-fuite-marge',
+  '/fr/outils/comparateur-distributeurs',
   '/fr/comment-vendre-plus-vin-restaurant',
   '/fr/prix-vin-restaurant',
   '/fr/vin-au-verre-restaurant',
@@ -2139,6 +2171,11 @@ const SEO_EXACT = new Set([
   '/de/tools/glasausschank-diagnose',
   '/de/tools/wine-list-score',
   '/de/tools/multi-standort-auditor',
+  '/de/tools/margensignal-simulator',
+  '/de/tools/rim-profiltest',
+  '/de/tools/pareto-weinkarten-simulator',
+  '/de/tools/margenverlust-rechner',
+  '/de/tools/distributoren-vergleich',
   '/de/weinkarten-analyzer',
   '/de/wein-roi-rechner',
   '/de/weinbegleitung-generator',
@@ -2220,6 +2257,11 @@ const SEO_EXACT = new Set([
   '/pt/ferramentas/diagnostico-vinho-por-copo',
   '/pt/ferramentas/wine-list-score',
   '/pt/ferramentas/auditor-carta-multilocal',
+  '/pt/ferramentas/simulador-sinal-margens',
+  '/pt/ferramentas/teste-perfil-rim',
+  '/pt/ferramentas/simulador-pareto-carta-vinhos',
+  '/pt/ferramentas/calculadora-fuga-margem',
+  '/pt/ferramentas/comparador-distribuidores',
   '/pt/analisador-carta-vinhos',
   '/pt/calculadora-roi-vinhos',
   '/pt/gerador-harmonizacoes-ia',
