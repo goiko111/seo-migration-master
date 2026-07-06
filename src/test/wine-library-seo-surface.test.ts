@@ -478,5 +478,7 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("const WORKER_STATIC_HUMAN_ROUTES");
     expect(worker).toContain("'X-Worker-Branch': 'worker-static-human'");
     expect(worker).toContain("content=\"${escapeHtml(page.robots || 'index, follow')}\"");
+    expect(worker).toContain("function injectLegalFooterPatch");
+    expect(worker).toContain("data-winerim-legal-footer-patch");
   });
 });

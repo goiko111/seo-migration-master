@@ -1499,6 +1499,38 @@ const WORKER_STATIC_HUMAN_ROUTES = new Set([
   '/terminos-y-condiciones-del-contrato',
 ]);
 
+const LEGAL_FOOTER_PATCH_SCRIPT = `<script data-winerim-legal-footer-patch>
+(() => {
+  const applyLegalFooterLinks = () => {
+    document.querySelectorAll('footer a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      if (href === '/privacidad' || href.endsWith('/privacidad')) {
+        link.setAttribute('href', '/politica-privacidad');
+      }
+      if (href === '/terminos' || href.endsWith('/terminos')) {
+        link.setAttribute('href', '/terminos-y-condiciones-del-contrato');
+      }
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyLegalFooterLinks, { once: true });
+  } else {
+    applyLegalFooterLinks();
+  }
+  const observer = new MutationObserver(applyLegalFooterLinks);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  window.setTimeout(() => observer.disconnect(), 15000);
+})();
+</script>`;
+
+function injectLegalFooterPatch(html) {
+  if (!html || html.includes('data-winerim-legal-footer-patch')) return html;
+  if (/<\/body>/i.test(html)) {
+    return html.replace(/<\/body>/i, `${LEGAL_FOOTER_PATCH_SCRIPT}</body>`);
+  }
+  return `${html}${LEGAL_FOOTER_PATCH_SCRIPT}`;
+}
+
 function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -2505,6 +2537,23 @@ async function proxyToOrigin(request, env, path, search, extraHeaders = {}) {
   const headers = new Headers(request.headers);
   headers.set('Host', new URL(env.ORIGIN).host);
   const res = await fetch(originUrl, { method: request.method, headers });
+  const responseHeaders = new Headers(res.headers);
+  const contentType = responseHeaders.get('Content-Type') || '';
+  if (contentType.includes('text/html')) {
+    const html = injectLegalFooterPatch(await res.text());
+    responseHeaders.delete('Content-Length');
+    responseHeaders.set('X-Frame-Options', 'SAMEORIGIN');
+    responseHeaders.set('X-Content-Type-Options', 'nosniff');
+    for (const [k, v] of Object.entries(extraHeaders)) {
+      responseHeaders.set(k, v);
+    }
+    return new Response(html, {
+      status: res.status,
+      statusText: res.statusText,
+      headers: responseHeaders,
+    });
+  }
+
   const response = new Response(res.body, res);
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   response.headers.set('X-Content-Type-Options', 'nosniff');
