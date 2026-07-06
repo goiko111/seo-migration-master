@@ -3119,7 +3119,9 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/clientes': '/en/clients',
     '/funcionalidades': '/en/features',
     '/privacidad': '/en/privacy',
+    '/politica-privacidad': '/en/privacy',
     '/terminos': '/en/terms',
+    '/terminos-y-condiciones-del-contrato': '/en/terms',
     '/software-carta-de-vinos': '/en/wine-list-management-software',
     '/que-es-winerim': '/en/what-is-winerim',
     '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
@@ -3152,7 +3154,9 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/clientes': '/it/clienti',
     '/funcionalidades': '/it/funzionalita',
     '/privacidad': '/it/privacy',
+    '/politica-privacidad': '/it/privacy',
     '/terminos': '/it/termini',
+    '/terminos-y-condiciones-del-contrato': '/it/termini',
     '/software-carta-de-vinos': '/it/software-carta-vini',
     '/que-es-winerim': '/it/cose-winerim',
     '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
@@ -3185,7 +3189,9 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/clientes': '/fr/clients',
     '/funcionalidades': '/fr/fonctionnalites',
     '/privacidad': '/fr/confidentialite',
+    '/politica-privacidad': '/fr/confidentialite',
     '/terminos': '/fr/conditions',
+    '/terminos-y-condiciones-del-contrato': '/fr/conditions',
     '/software-carta-de-vinos': '/fr/logiciel-carte-des-vins',
     '/que-es-winerim': '/fr/quest-ce-que-winerim',
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
@@ -3218,7 +3224,9 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/clientes': '/de/kunden',
     '/funcionalidades': '/de/funktionen',
     '/privacidad': '/de/datenschutz',
+    '/politica-privacidad': '/de/datenschutz',
     '/terminos': '/de/agb',
+    '/terminos-y-condiciones-del-contrato': '/de/agb',
     '/software-carta-de-vinos': '/de/weinkarten-software',
     '/que-es-winerim': '/de/was-ist-winerim',
     '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
@@ -3251,7 +3259,9 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/clientes': '/pt/clientes',
     '/funcionalidades': '/pt/funcionalidades',
     '/privacidad': '/pt/privacidade',
+    '/politica-privacidad': '/pt/privacidade',
     '/terminos': '/pt/termos',
+    '/terminos-y-condiciones-del-contrato': '/pt/termos',
     '/software-carta-de-vinos': '/pt/software-carta-vinhos',
     '/que-es-winerim': '/pt/o-que-e-winerim',
     '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
@@ -3288,7 +3298,9 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/clientes': { es: 'Clientes', en: 'Clients', it: 'Clienti', fr: 'Clients', de: 'Kunden', pt: 'Clientes' },
   '/funcionalidades': { es: 'Funcionalidades', en: 'Features', it: 'Funzionalita', fr: 'Fonctionnalites', de: 'Funktionen', pt: 'Funcionalidades' },
   '/privacidad': { es: 'Privacidad', en: 'Privacy', it: 'Privacy', fr: 'Confidentialite', de: 'Datenschutz', pt: 'Privacidade' },
+  '/politica-privacidad': { es: 'Política de privacidad', en: 'Privacy', it: 'Privacy', fr: 'Confidentialite', de: 'Datenschutz', pt: 'Privacidade' },
   '/terminos': { es: 'Terminos', en: 'Terms', it: 'Termini', fr: 'Conditions', de: 'AGB', pt: 'Termos' },
+  '/terminos-y-condiciones-del-contrato': { es: 'Términos y condiciones del contrato', en: 'Terms', it: 'Termini', fr: 'Conditions', de: 'AGB', pt: 'Termos' },
   '/software-carta-de-vinos': { es: 'Software de carta de vinos', en: 'Wine list management software', it: 'Software per carta vini', fr: 'Logiciel carte des vins', de: 'Weinkarten-Software', pt: 'Software de carta de vinhos' },
   '/que-es-winerim': { es: 'Que es Winerim', en: 'What is Winerim', it: 'Cos e Winerim', fr: 'Qu est-ce que Winerim', de: 'Was ist Winerim', pt: 'O que e Winerim' },
   '/producto/inteligencia-dinamica': { es: 'Inteligencia dinamica', en: 'Dynamic intelligence', it: 'Intelligenza dinamica', fr: 'Intelligence dynamique', de: 'Dynamische Intelligenz', pt: 'Inteligencia dinamica' },
@@ -4295,6 +4307,35 @@ function makeLegalStaticPage(seed: LegalStaticPageSeed): { meta: PageMeta; conte
 }
 
 const LEGAL_STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = Object.fromEntries([
+  makeLegalStaticPage({
+    path: '/politica-privacidad',
+    lang: 'es',
+    title: 'Política de Privacidad',
+    description: 'Política de privacidad de Winerim.',
+    sections: [
+      { heading: '1. Responsable del tratamiento', content: 'Winerim S.L. es responsable del tratamiento de los datos personales recogidos a través de este sitio web.' },
+      { heading: '2. Datos recogidos', content: 'Recogemos los datos que nos proporcionas voluntariamente a través de nuestros formularios de contacto y demo.' },
+      { heading: '3. Finalidad', content: 'Los datos se utilizan exclusivamente para gestionar las solicitudes de información, demos y contacto comercial.' },
+      { heading: '4. Base legal', content: 'El tratamiento se basa en el consentimiento del interesado al enviar el formulario.' },
+      { heading: '5. Derechos', content: 'Puedes ejercer tus derechos de acceso, rectificación y supresión enviando un email a info@winerim.com.' },
+      { heading: '6. Cookies', content: 'Este sitio utiliza cookies propias y de terceros para mejorar la experiencia de navegación.' },
+      { heading: '7. Conservación', content: 'Los datos se conservarán mientras exista interés mutuo y durante los plazos legalmente establecidos.' },
+    ],
+  }),
+  makeLegalStaticPage({
+    path: '/terminos-y-condiciones-del-contrato',
+    lang: 'es',
+    title: 'Términos de Uso',
+    description: 'Términos y condiciones de uso de Winerim.',
+    sections: [
+      { heading: '1. Titularidad', content: 'Este sitio web es propiedad de Winerim S.L. El acceso y uso del sitio implica la aceptación de estos términos.' },
+      { heading: '2. Uso del servicio', content: 'El usuario se compromete a utilizar el sitio web y sus servicios de forma lícita.' },
+      { heading: '3. Propiedad intelectual', content: 'Todos los contenidos del sitio son propiedad de Winerim o de sus licenciantes.' },
+      { heading: '4. Limitación de responsabilidad', content: 'Winerim no se responsabiliza de los daños que puedan derivarse del uso de este sitio web.' },
+      { heading: '5. Modificaciones', content: 'Winerim se reserva el derecho de modificar estos términos en cualquier momento.' },
+      { heading: '6. Legislación aplicable', content: 'Estos términos se rigen por la legislación española.' },
+    ],
+  }),
   makeLegalStaticPage({
     path: '/privacidad',
     lang: 'es',
@@ -6397,7 +6438,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     url: meta.canonical,
     creator: { '@type': 'Organization', name: 'Winerim', url: SITE },
     publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
-    license: localizedStaticUrl('/terminos'),
+    license: localizedStaticUrl('/terminos-y-condiciones-del-contrato'),
     isAccessibleForFree: true,
     inLanguage: meta.lang,
     measurementTechnique: 'Aggregated and anonymized wine-list analysis across references, prices, by-the-glass offer, wine styles, regions, pairings, margin and rotation signals.',
@@ -6591,8 +6632,8 @@ ${hreflangHTML}
   <footer>
     <p>&copy; ${new Date().getFullYear()} Winerim. ${escapeHtml(navCopy.tagline)}</p>
     <nav aria-label="Legal">
-      <a href="${localizedStaticUrl('/privacidad')}">${escapeHtml(navCopy.privacy)}</a> |
-      <a href="${localizedStaticUrl('/terminos')}">${escapeHtml(navCopy.terms)}</a>
+      <a href="${localizedStaticUrl('/politica-privacidad')}">${escapeHtml(navCopy.privacy)}</a> |
+      <a href="${localizedStaticUrl('/terminos-y-condiciones-del-contrato')}">${escapeHtml(navCopy.terms)}</a>
     </nav>
   </footer>
 </body>

@@ -4347,3 +4347,29 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Ejecutar migracion y publish desde Lovable.
 - Revisar URLs publicadas y Search Console tras recrawl.
 - Planificar ola de fixes de idioma para route maps, home DE/PT, herramientas y biblioteca detalle.
+
+## 2026-07-06
+
+### URLs legales largas y footer
+
+#### Hechos
+
+- El usuario pidio que funcionen `/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Las rutas antiguas `/privacidad` y `/terminos` existian, pero la produccion devolvia `404` Worker para las slugs largas antes del deploy.
+- Tras desplegar Worker, las slugs largas devuelven HTTP `200`, aunque el bundle frontend publicado seguia mostrando `Página no encontrada` hasta publicar el commit correcto.
+
+#### Decisiones
+
+- Usar `/politica-privacidad` y `/terminos-y-condiciones-del-contrato` como destinos principales en español.
+- Mantener `/privacidad` y `/terminos` activos por compatibilidad.
+- Redirigir `/privacy-policy` a `/politica-privacidad` y `/terms-of-service`/`/condiciones-de-servicio-2` a `/terminos-y-condiciones-del-contrato`.
+- Mantener paginas legales no indexables: `noindex, follow`.
+- Aplicar el fix sobre `main` para que Lovable pueda publicarlo.
+
+#### Hipotesis
+
+- El problema restante de `Página no encontrada` era de frontend publicado en Lovable, no de Worker.
+
+#### Tareas pendientes asociadas
+
+- Publicar `main` desde Lovable y revalidar render humano.

@@ -4944,3 +4944,31 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - localizar Biblioteca detalle;
    - localizar Herramientas y `ToolStrategicBlock` para DE/PT;
    - ampliar `llms` con perfiles localizados de uvas.
+
+## Actualizacion 2026-07-06: publicar fix de URLs legales
+
+## Hechos
+
+- El fix legal esta aplicado sobre rama preparada desde `origin/main`.
+- Worker ya fue desplegado y cambio las nuevas URLs de `404 not-found` a HTTP `200`.
+- El navegador humano seguia viendo `Página no encontrada` porque Lovable publico un deployment sin el bundle del commit legal.
+
+## Decisiones
+
+- Empujar el fix legal a `main` y publicar desde Lovable.
+- No solicitar indexacion de paginas legales; solo usar Search Console para comprobar que ya no son `Not found`.
+
+## Hipotesis
+
+- Tras publish de `main`, ambas URLs renderizaran las paginas legales correctas en navegador.
+
+## Tareas pendientes listas para retomar
+
+1. Terminar commit/push del fix legal sobre `main`.
+2. Publicar frontend en Lovable desde `main`.
+3. Revalidar:
+   - `https://winerim.wine/politica-privacidad`;
+   - `https://winerim.wine/terminos-y-condiciones-del-contrato`;
+   - Googlebot para ambas;
+   - footer en home y paginas legales;
+   - redirects legacy.

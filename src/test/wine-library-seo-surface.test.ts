@@ -211,7 +211,9 @@ describe("wine library SEO surface", () => {
   it("maps high-confidence GSC 404 legacy URLs at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 
-    expect(worker).toContain("'/terms-of-service': '/terminos'");
+    expect(worker).toContain("'/privacy-policy': '/politica-privacidad'");
+    expect(worker).toContain("'/terms-of-service': '/terminos-y-condiciones-del-contrato'");
+    expect(worker).toContain("'/condiciones-de-servicio-2': '/terminos-y-condiciones-del-contrato'");
     expect(worker).toContain("'/landing': '/'");
     expect(worker).toContain("'/reviews-restaurante': '/casos-exito'");
     expect(worker).toContain(
@@ -448,6 +450,30 @@ describe("wine library SEO surface", () => {
     expect(exclusionBlock).not.toContain("'/recursos/revision-mensual-margenes'");
     expect(exclusionBlock).not.toContain("'/benchmarks-playbooks/benchmark-peso-vino-ticket-medio'");
     expect(exclusionBlock).toContain("'/privacidad'");
+    expect(exclusionBlock).toContain("'/politica-privacidad'");
     expect(exclusionBlock).toContain("'/terminos'");
+    expect(exclusionBlock).toContain("'/terminos-y-condiciones-del-contrato'");
+  });
+
+  it("serves the long Spanish legal URLs across frontend, footer, worker and prerender", () => {
+    const app = readFileSync("src/App.tsx", "utf8");
+    const footer = readFileSync("src/components/Footer.tsx", "utf8");
+    const privacy = readFileSync("src/pages/Privacidad.tsx", "utf8");
+    const terms = readFileSync("src/pages/Terminos.tsx", "utf8");
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+
+    expect(app).toContain('path="/politica-privacidad"');
+    expect(app).toContain('path="/terminos-y-condiciones-del-contrato"');
+    expect(footer).toContain('"/politica-privacidad"');
+    expect(footer).toContain('"/terminos-y-condiciones-del-contrato"');
+    expect(privacy).toContain('location.pathname === "/politica-privacidad"');
+    expect(terms).toContain('location.pathname === "/terminos-y-condiciones-del-contrato"');
+    expect(prerender).toContain("path: '/politica-privacidad'");
+    expect(prerender).toContain("path: '/terminos-y-condiciones-del-contrato'");
+    expect(prerender).toContain("localizedStaticUrl('/politica-privacidad')");
+    expect(prerender).toContain("localizedStaticUrl('/terminos-y-condiciones-del-contrato')");
+    expect(worker).toContain("'/politica-privacidad'");
+    expect(worker).toContain("'/terminos-y-condiciones-del-contrato'");
   });
 });

@@ -331,7 +331,7 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
                   className="mt-1"
                 />
                 <span>
-                  Acepto la <Link to="/privacidad" className="text-wine underline">política de privacidad</Link>
+                  Acepto la <Link to="/politica-privacidad" className="text-wine underline">política de privacidad</Link>
                   <span className="text-wine"> *</span>
                 </span>
               </label>

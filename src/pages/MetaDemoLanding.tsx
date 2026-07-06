@@ -669,7 +669,7 @@ const MetaDemoLanding = () => {
 
                   <p className="text-center text-xs leading-5 text-white/50">
                     Sin compromiso. Al enviar aceptas nuestra{" "}
-                    <Link to="/privacidad" className="text-white underline underline-offset-4">
+                    <Link to="/politica-privacidad" className="text-white underline underline-offset-4">
                       política de privacidad
                     </Link>
                     .

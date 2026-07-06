@@ -9,7 +9,8 @@ const CONSENT_KEY = "winerim_cookie_consent";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
-  const { t } = useLanguage();
+  const { t, lang, localePath } = useLanguage();
+  const privacyHref = lang === "es" ? "/politica-privacidad" : localePath("/privacidad");
 
   useEffect(() => {
     // Consent was already restored synchronously in index.html <head>.
@@ -49,7 +50,7 @@ const CookieConsent = () => {
                 <h3 className="font-heading text-sm font-semibold mb-1">{t.cookie_title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {t.cookie_desc}{" "}
-                  <a href="/privacidad" className="text-accent hover:underline">{t.cookie_more_info}</a>
+                  <a href={privacyHref} className="text-accent hover:underline">{t.cookie_more_info}</a>
                 </p>
               </div>
             </div>

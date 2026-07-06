@@ -4,6 +4,7 @@ import SEOHead from "@/components/SEOHead";
 import { usePageContent } from "@/hooks/usePageContent";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n } from "@/i18n/types";
+import { useLocation } from "react-router-dom";
 
 const i18n: Record<string, {
   seoTitle: string; seoDesc: string; title: string;
@@ -80,12 +81,14 @@ const i18n: Record<string, {
 const Terminos = () => {
   const { get } = usePageContent("legal");
   const { lang, localePath, allLangPaths } = useLanguage();
+  const location = useLocation();
   const t = getI18n(i18n, lang) || i18n.es;
+  const esPath = lang === "es" && location.pathname === "/terminos-y-condiciones-del-contrato" ? "/terminos-y-condiciones-del-contrato" : "/terminos";
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${localePath("/terminos")}`} hreflang={allLangPaths("/terminos")} noindex />
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`https://winerim.wine${lang === "es" ? esPath : localePath("/terminos")}`} hreflang={allLangPaths(esPath)} noindex />
       <main className="pt-32 pb-24 max-w-3xl mx-auto px-6 md:px-12">
         <h1 className="font-heading text-3xl md:text-4xl font-bold mb-8">{t.title}</h1>
         <div className="prose prose-sm prose-invert max-w-none prose-headings:font-heading prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground">

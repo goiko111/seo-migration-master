@@ -6717,3 +6717,33 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
   - Biblioteca detalle localizada;
   - Herramientas y `ToolStrategicBlock` DE/PT;
   - `llms` para perfiles de uva localizados.
+
+## Actualizacion 2026-07-06: URLs legales largas y footer
+
+### Hechos
+
+- Se implementaron las rutas españolas `/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Se mantienen `/privacidad` y `/terminos` por compatibilidad.
+- Footer, cookies, contacto, landing Meta, simulador y schema de Barometro usan las URLs legales largas en español.
+- Worker desplegado con Version ID `e908312d-ab80-4e63-b42e-e9bd73a44052`; las nuevas rutas ya no caen en `x-worker-branch: not-found`.
+- Produccion tras el despliegue Worker devuelve HTTP `200` y `x-robots-tag: noindex, follow` para ambas URLs, pero el frontend humano seguia mostrando `Página no encontrada` hasta publicar el commit correcto en la rama que Lovable usa.
+
+### Decisiones
+
+- Usar las slugs largas como destino legal principal en español.
+- Mantener las paginas legales como `noindex, follow` y fuera del sitemap organico.
+- Llevar este fix a `main` porque Lovable parece publicar desde `main`, no desde `codex/winerim-lead-magnets-recursos`.
+
+### Hipotesis
+
+- Cuando Lovable publique `main` con este fix, el render humano dejara de mostrar `Página no encontrada`.
+- Googlebot ya recibe una respuesta valida por Worker/prerender, pero conviene revalidar tras publicar frontend.
+
+### Tareas pendientes
+
+- Publicar `main` en Lovable.
+- Revalidar en produccion:
+  - render humano con H1 legal correcto;
+  - canonical propio;
+  - footer con las dos URLs largas;
+  - redirects legacy `/privacy-policy`, `/terms-of-service` y `/condiciones-de-servicio-2`.

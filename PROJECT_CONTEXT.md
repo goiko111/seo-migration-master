@@ -620,3 +620,26 @@
 
 - Resolver backlog amplio de idioma detectado el `2026-07-05`: route maps/hreflang, home DE/PT, herramientas, biblioteca detalle y perfiles localizados.
 - Tras publish, validar Search Console y sitemap para los nuevos grupos editoriales.
+
+## Actualizacion 2026-07-06: URLs legales solicitadas
+
+### Hechos
+
+- El usuario pidio activar `https://winerim.wine/politica-privacidad` y `https://winerim.wine/terminos-y-condiciones-del-contrato`.
+- El fix requiere tres capas sincronizadas: React Router/frontend, Worker y prerender/sitemap.
+- Worker ya se desplego manualmente y dejo de devolver `not-found` para esas rutas.
+- El frontend debe publicarse desde `main` para que el navegador humano no muestre `Página no encontrada`.
+
+### Decisiones
+
+- Las slugs largas son el destino principal legal en español.
+- Las slugs cortas se mantienen como compatibilidad historica.
+- Las paginas legales siguen `noindex, follow`.
+
+### Hipotesis
+
+- Lovable esta publicando desde `main`; por eso se aplica el fix en una rama basada en `origin/main`.
+
+### Tareas pendientes
+
+- Publicar `main` en Lovable y revalidar produccion humana/bot.

@@ -110,6 +110,7 @@ const Contacto = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = content[lang] || content.es;
   const canonicalUrl = getCanonicalUrl(localePath("/contacto"));
+  const privacyHref = lang === "es" ? "/politica-privacidad" : localePath("/privacidad");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -174,7 +175,7 @@ const Contacto = () => {
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">
                   {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre ", de: "Unverbindlich. Mit dem Absenden akzeptieren Sie unsere ", pt: "Sem compromisso. Ao enviar aceita a nossa " }[lang]}
-                  <Link to={localePath("/privacidad")} className="underline hover:text-foreground transition-colors">
+                  <Link to={privacyHref} className="underline hover:text-foreground transition-colors">
                     {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité", de: "Datenschutzrichtlinie", pt: "política de privacidade" }[lang]}
                   </Link>.
                 </p>
