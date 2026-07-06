@@ -4588,3 +4588,61 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
 7. Ágora:
    - enviar V5 comercial al usuario/stakeholders;
    - preparar documento técnico separado solo si Ágora pide endpoints, auth, sandbox, rate limits o modelo multi-cliente.
+
+## Actualizacion 2026-07-06: listo para publicar y revalidar DE/PT + siguiente lote editorial
+
+## Hechos
+
+- En repo quedan preparados:
+  - localizacion profunda de las cinco herramientas principales;
+  - correccion DE/PT de Hoteles y GruposRestauracion;
+  - labels DE/PT en `NextSteps` y `WinerimSupplyBlock`;
+  - correccion de `/soluciones/hoteles` en `sitemap` y `prerender`;
+  - migracion `20260706083118_add_next_wine_library_learn_wine_articles.sql`;
+  - gating por fecha en `AprenderVino`.
+- Verificaciones locales ya pasaron:
+  - TypeScript;
+  - test SEO;
+  - build;
+  - diff check;
+  - Playwright local en rutas DE/PT y Aprender vino.
+- Produccion antes de publicar este lote:
+  - usuario humano ve Hoteles DE/PT bien;
+  - Googlebot para Hoteles DE devuelve prerender de home;
+  - sitemap productivo no incluye Hoteles DE/PT.
+
+## Decisiones
+
+- El siguiente paso no es crear mas contenido: es publicar y revalidar.
+- No solicitar indexacion en Search Console hasta que el sitemap/prerender de Hoteles este publicado y correcto.
+- Mantener Biblioteca del vino y Aprender vino separados; la migracion nueva respeta esa separacion.
+
+## Hipotesis
+
+- Publicar Edge Functions resolvera la parte de bot/sitemap de Hoteles.
+- La migracion nueva no generara URLs visibles hasta `2026-07-20` y `2026-07-27`, salvo consulta con service role.
+
+## Tareas pendientes listas para retomar
+
+1. En Lovable Cloud, aplicar la migracion:
+   - `supabase/migrations/20260706083118_add_next_wine_library_learn_wine_articles.sql`.
+2. Publicar frontend y Edge Functions:
+   - frontend React;
+   - `supabase/functions/sitemap`;
+   - `supabase/functions/prerender`.
+3. Revalidar produccion post-publish:
+   - `https://winerim.wine/sitemap.xml` contiene `https://winerim.wine/de/loesungen/hotels`;
+   - `https://winerim.wine/sitemap.xml` contiene `https://winerim.wine/pt/solucoes/hoteis`;
+   - Googlebot `https://winerim.wine/de/loesungen/hotels` devuelve `html lang=de`, H1 aleman y canonical DE;
+   - Googlebot `https://winerim.wine/pt/solucoes/hoteis` devuelve `html lang=pt`, H1 portugues y canonical PT;
+   - herramientas DE/PT no contienen fallback ingles;
+   - `Aprender vino` no muestra el articulo futuro antes de `2026-07-27`.
+4. Search Console despues de revalidar:
+   - reenviar sitemap;
+   - inspeccionar Hoteles DE/PT y Grupos DE/PT;
+   - inspeccionar las cinco herramientas DE/PT;
+   - no solicitar indexacion de articulos futuros hasta su fecha.
+5. Retomar crecimiento editorial:
+   - siguiente lote de Biblioteca del vino tras validar el lote `2026-07-20`;
+   - siguiente lote de Aprender vino tras validar el lote `2026-07-27`;
+   - revisar paridad DE/PT antes de ampliar masivamente.

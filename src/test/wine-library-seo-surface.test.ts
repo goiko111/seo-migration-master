@@ -260,7 +260,10 @@ describe("wine library SEO surface", () => {
     expect(routes).toContain('"/aprender-vino": "/de/wein-lernen"');
     expect(routes).toContain('"/aprender-vino": "/pt/aprender-vinho"');
     expect(sitemap).toContain("{ esPath: '/aprender-vino', priority: '0.7', changefreq: 'monthly', multilang: true }");
+    expect(sitemap).toContain("{ esPath: '/soluciones/hoteles', priority: '0.7', changefreq: 'monthly', multilang: true }");
     expect(prerender).toContain("'/aprender-vino': [");
+    expect(prerender).toContain("'/soluciones/hoteles': '/de/loesungen/hotels'");
+    expect(prerender).toContain("'/soluciones/hoteles': '/pt/solucoes/hoteis'");
     expect(prerender).toContain("schemaType: 'LearningResource'");
     expect(worker).toContain("const LEARN_WINE_ALTERNATES");
     expect(worker).toContain("'/biblioteca-vino/como-empezar': '/aprender-vino'");
@@ -274,6 +277,34 @@ describe("wine library SEO surface", () => {
     expect(worker).toContain("/en/article/types-of-wine-restaurant-wine-list");
     expect(worker).toContain("/pt/article/regioes-vinicolas-para-conhecer-em-restaurante");
     expect(llms).toContain("https://winerim.wine/article/uvas-que-conocer-para-empezar");
+  });
+
+  it("schedules the next wine-library and learn-wine editorial batch without early LLM exposure", () => {
+    const migration = readFileSync(
+      "supabase/migrations/20260706083118_add_next_wine_library_learn_wine_articles.sql",
+      "utf8",
+    );
+    const aprender = readFileSync("src/pages/AprenderVino.tsx", "utf8");
+    const llms = readFileSync("public/llms.txt", "utf8");
+    const llmsFull = readFileSync("public/llms-full.txt", "utf8");
+
+    expect(migration).toContain("wine-library-by-the-glass-stock-rotation");
+    expect(migration).toContain("learn-wine-read-label-restaurant");
+    expect(migration).toContain("2026-07-20T09:00:00+02:00");
+    expect(migration).toContain("2026-07-27T09:25:00+02:00");
+    expect(migration).toContain("ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY");
+    expect(migration).toContain("published_at <= now()");
+    expect(migration).toContain("GRANT SELECT ON public.articles TO anon");
+    expect(migration).toContain("GRANT SELECT ON public.articles TO authenticated");
+    expect(migration).toContain("GRANT ALL ON public.articles TO service_role");
+    expect(migration).toContain("ON CONFLICT (slug) DO UPDATE SET");
+    expect(aprender).toContain("visibleArticleLinks");
+    expect(aprender).toContain('publishedAt: "2026-07-27T09:00:00+02:00"');
+    expect(aprender).toContain("/pt/article/como-ler-rotulo-vinho-servico-restaurante");
+    expect(llms).not.toContain("leer-etiqueta-vino-servicio-restaurante");
+    expect(llmsFull).not.toContain("leer-etiqueta-vino-servicio-restaurante");
+    expect(llms).not.toContain("como-usar-biblioteca-vino-para-vino-por-copa-y-rotacion");
+    expect(llmsFull).not.toContain("como-usar-biblioteca-vino-para-vino-por-copa-y-rotacion");
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {

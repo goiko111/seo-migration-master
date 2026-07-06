@@ -13,12 +13,12 @@ export interface NextStep {
 }
 
 const typeLabels: Record<StepType, Record<string, string>> = {
-  guide: { es: "Guía", en: "Guide", it: "Guida", fr: "Guide" },
-  tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil" },
-  resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource" },
-  solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution" },
-  benchmark: { es: "Benchmark", en: "Benchmark", it: "Benchmark", fr: "Benchmark" },
-  article: { es: "Artículo", en: "Article", it: "Articolo", fr: "Article" },
+  guide: { es: "Guía", en: "Guide", it: "Guida", fr: "Guide", de: "Ratgeber", pt: "Guia" },
+  tool: { es: "Herramienta", en: "Tool", it: "Strumento", fr: "Outil", de: "Werkzeug", pt: "Ferramenta" },
+  resource: { es: "Recurso", en: "Resource", it: "Risorsa", fr: "Ressource", de: "Ressource", pt: "Recurso" },
+  solution: { es: "Solución", en: "Solution", it: "Soluzione", fr: "Solution", de: "Lösung", pt: "Solução" },
+  benchmark: { es: "Benchmark", en: "Benchmark", it: "Benchmark", fr: "Benchmark", de: "Benchmark", pt: "Benchmark" },
+  article: { es: "Artículo", en: "Article", it: "Articolo", fr: "Article", de: "Artikel", pt: "Artigo" },
 };
 
 const typeIcons: Record<StepType, typeof Wine> = {
@@ -44,6 +44,8 @@ const defaultTitles: Record<string, string> = {
   en: "Recommended next steps",
   it: "Prossimi passi consigliati",
   fr: "Prochaines étapes recommandées",
+  de: "Empfohlene nächste Schritte",
+  pt: "Próximos passos recomendados",
 };
 
 interface NextStepsProps {

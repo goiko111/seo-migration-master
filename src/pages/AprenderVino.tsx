@@ -64,7 +64,7 @@ interface LearnWineCopy {
   articlesTitle: string;
   articlesIntro: string;
   articleCta: string;
-  articleLinks: { title: string; description: string; path: string }[];
+  articleLinks: { title: string; description: string; path: string; publishedAt?: string }[];
   methodTitle: string;
   methodIntro: string;
   method: { title: string; text: string }[];
@@ -168,6 +168,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         description: "Una ruta por regiones que ayudan a explicar expectativa, precio y alternativas en sala.",
         path: "/article/regiones-vinicolas-para-empezar-en-restaurante",
       },
+      {
+        title: "Cómo leer una etiqueta de vino en servicio",
+        description: "Qué mirar primero en una botella para traducir productor, origen, añada y estilo a una recomendación clara.",
+        path: "/article/leer-etiqueta-vino-servicio-restaurante",
+        publishedAt: "2026-07-27T09:00:00+02:00",
+      },
     ],
     methodTitle: "Método Winerim para aprender vino en restauración",
     methodIntro:
@@ -249,6 +255,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Wine regions to know first",
         description: "A route through regions that explain guest expectation, price and service alternatives.",
         path: "/en/article/wine-regions-to-know-for-restaurant-service",
+      },
+      {
+        title: "How to read a wine label in restaurant service",
+        description: "What to read first on a bottle and how to turn producer, origin, vintage and style into a clear recommendation.",
+        path: "/en/article/read-wine-label-restaurant-service",
+        publishedAt: "2026-07-27T09:05:00+02:00",
       },
     ],
     methodTitle: "The Winerim method for wine learning in hospitality",
@@ -332,6 +344,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         description: "Un percorso tra regioni che spiegano aspettativa, prezzo e alternative in sala.",
         path: "/it/article/regioni-vinicole-da-conoscere-in-ristorante",
       },
+      {
+        title: "Come leggere un'etichetta di vino in sala",
+        description: "Cosa guardare prima su una bottiglia e come tradurre produttore, origine, annata e stile in una raccomandazione chiara.",
+        path: "/it/article/leggere-etichetta-vino-servizio-ristorante",
+        publishedAt: "2026-07-27T09:10:00+02:00",
+      },
     ],
     methodTitle: "Il metodo Winerim per imparare il vino nella ristorazione",
     methodIntro:
@@ -413,6 +431,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         title: "Régions viticoles à connaître",
         description: "Un parcours parmi les régions qui expliquent attente, prix et alternatives en salle.",
         path: "/fr/article/regions-viticoles-a-connaitre-en-restauration",
+      },
+      {
+        title: "Lire une étiquette de vin en service",
+        description: "Ce qu'il faut repérer d'abord sur une bouteille pour transformer producteur, origine, millésime et style en recommandation.",
+        path: "/fr/article/lire-etiquette-vin-service-restaurant",
+        publishedAt: "2026-07-27T09:15:00+02:00",
       },
     ],
     methodTitle: "La méthode Winerim pour apprendre le vin en restauration",
@@ -496,6 +520,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         description: "Regionen, die Gaesteerwartung, Preis und Alternativen im Service erklaeren.",
         path: "/de/article/weinregionen-fuer-den-service-kennen",
       },
+      {
+        title: "Weinetikett im Service lesen",
+        description: "Was zuerst auf einer Flasche gelesen wird und wie Produzent, Herkunft, Jahrgang und Stil in eine klare Empfehlung werden.",
+        path: "/de/article/weinetikett-lesen-restaurant",
+        publishedAt: "2026-07-27T09:20:00+02:00",
+      },
     ],
     methodTitle: "Die Winerim-Methode für Weinlernen in der Gastronomie",
     methodIntro:
@@ -578,6 +608,12 @@ const COPY: Record<SupportedLang, LearnWineCopy> = {
         description: "Uma rota por regiões que explicam expectativa, preço e alternativas em sala.",
         path: "/pt/article/regioes-vinicolas-para-conhecer-em-restaurante",
       },
+      {
+        title: "Como ler um rótulo de vinho no serviço",
+        description: "O que observar primeiro numa garrafa e como transformar produtor, origem, ano e estilo numa recomendação clara.",
+        path: "/pt/article/como-ler-rotulo-vinho-servico-restaurante",
+        publishedAt: "2026-07-27T09:25:00+02:00",
+      },
     ],
     methodTitle: "O método Winerim para aprender vinho na restauração",
     methodIntro:
@@ -607,6 +643,9 @@ const AprenderVino = () => {
   const canonicalPath = LEARN_WINE_ROUTES[lang] || LEARN_WINE_ROUTES.es;
   const canonicalUrl = `${CANONICAL_DOMAIN}${canonicalPath}`;
   const libraryUrl = getWineLibraryPath(lang, "/biblioteca-vino");
+  const visibleArticleLinks = copy.articleLinks.filter(
+    (article) => !article.publishedAt || Date.parse(article.publishedAt) <= Date.now(),
+  );
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -640,7 +679,7 @@ const AprenderVino = () => {
       {
         "@type": "ItemList",
         name: copy.articlesTitle,
-        itemListElement: copy.articleLinks.map((article, index) => ({
+        itemListElement: visibleArticleLinks.map((article, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: article.title,
@@ -784,7 +823,7 @@ const AprenderVino = () => {
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-5 mb-16">
-            {copy.articleLinks.map((article, index) => (
+            {visibleArticleLinks.map((article, index) => (
               <ScrollReveal key={article.path} delay={index * 0.06}>
                 <Link
                   to={article.path}

@@ -63,6 +63,34 @@ const i18n: Record<string, {
     ],
     cta: "Voir Winerim Supply",
   },
+  de: {
+    label: "Einkaufsintelligenz",
+    title: "Winerim Supply",
+    subtitle: "Einkaufsintelligenz für Restaurants und Gruppen",
+    desc: "Winerim hilft zu entscheiden, was weiter eingekauft, neu verhandelt, entfernt oder nachbestellt werden sollte - basierend auf Rotation, Bestand, Marge und Einkaufspreis.",
+    bullets: [
+      "Einkaufspreise vergleichen",
+      "Warnungen bei überhöhten Preisen",
+      "Nachbestell-Empfehlungen",
+      "Chancen nach Lieferant",
+      "Intelligente Einkaufsliste",
+    ],
+    cta: "Winerim Supply ansehen",
+  },
+  pt: {
+    label: "Inteligência de compras",
+    title: "Winerim Supply",
+    subtitle: "Inteligência de compras para restaurantes e grupos",
+    desc: "O Winerim ajuda a decidir o que vale a pena continuar a comprar, o que renegociar, o que retirar e que referências repor com base em rotação, stock, margem e preço de compra.",
+    bullets: [
+      "Comparação de preços de compra",
+      "Alertas de sobrepreço",
+      "Recomendação de reposição",
+      "Oportunidades por distribuidor",
+      "Lista de compra inteligente",
+    ],
+    cta: "Ver Winerim Supply",
+  },
 };
 
 const WinerimSupplyBlock = () => {

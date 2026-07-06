@@ -459,3 +459,43 @@
   - configurar `www.winerim.wine` para redirigir `301` a `https://winerim.wine/`;
   - forzar HTTP -> HTTPS para todas las rutas, no solo sitemap.
 - Hacer QA visual post-publish de CloudRIM/SAVia/Funcionalidades en desktop/mobile si Lovable publica el frontend React.
+
+## Actualizacion 2026-07-06: localizacion profunda DE/PT, paridad bot y siguiente lote editorial
+
+### Hechos
+
+- El proyecto sigue operando en Lovable Cloud; las migraciones y Edge Functions deben quedar listas para que Lovable las aplique/publique.
+- Se trabajo en la rama `codex/winerim-lead-magnets-recursos`.
+- Se verifico el deploy de Lovable en `https://seo-migration-magic.lovable.app` con `x-deployment-id: eebb06de-6162-4534-bed4-24914e17838e`.
+- En navegador renderizado, las rutas DE/PT de Hoteles y Grupos cargaban con idioma, H1, canonical y hreflang correctos.
+- Se detecto una contradiccion tecnica importante: en produccion, Googlebot para `https://winerim.wine/de/loesungen/hotels` recibia prerender de home y el sitemap no incluia Hoteles DE/PT, aunque el usuario humano si veia la pagina correcta.
+- Se corrigio en codigo la fuente de esa divergencia:
+  - `supabase/functions/sitemap/index.ts` incluye ahora `/soluciones/hoteles` como ruta multilingue;
+  - `supabase/functions/prerender/index.ts` incluye ahora Hoteles en `STATIC_LOCALIZED_ROUTES` y `STATIC_PAGE_LABELS`.
+- Se completo localizacion profunda para las 5 herramientas y se corrigieron DE/PT de Hoteles y Grupos de restauracion.
+- Se preparo la migracion `supabase/migrations/20260706083118_add_next_wine_library_learn_wine_articles.sql` con 12 articulos nuevos:
+  - Biblioteca del vino: 6 idiomas, fecha `2026-07-20`;
+  - Aprender vino: 6 idiomas, fecha `2026-07-27`.
+- El hub `Aprender vino` ya tiene el siguiente articulo enlazado por idioma, pero filtrado por `publishedAt` para no exponerlo antes de su fecha.
+
+### Decisiones
+
+- Mantener los articulos futuros fuera de `llms.txt` y `llms-full.txt` hasta que esten publicados.
+- Priorizar paridad humano/bot antes de seguir ampliando contenido en masa.
+- Tratar Hoteles como ruta multilingue de sitemap/prerender, no solo como ruta React.
+
+### Hipotesis
+
+- Al publicar Edge Functions, Hoteles DE/PT deberia aparecer en sitemap y Googlebot dejara de recibir prerender de home.
+- El gating por `publishedAt` deberia mantener limpia la cadencia semanal del blog sin enlaces prematuros.
+
+### Tareas pendientes
+
+- Aplicar la migracion `20260706083118_add_next_wine_library_learn_wine_articles.sql` en Lovable Cloud.
+- Publicar frontend y Edge Functions con las correcciones de i18n, sitemap y prerender.
+- Revalidar produccion despues del publish:
+  - sitemap contiene `/de/loesungen/hotels` y `/pt/solucoes/hoteis`;
+  - Googlebot recibe prerender localizado para Hoteles DE/PT;
+  - herramientas DE/PT no tienen fallback ingles;
+  - Aprender vino no muestra articulos futuros antes de fecha;
+  - las URLs futuras no aparecen en `llms` ni sitemap antes de su `published_at`.

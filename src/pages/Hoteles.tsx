@@ -15,14 +15,16 @@ import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
-import NextSteps from "@/components/seo/NextSteps";
+import NextSteps, { type NextStep } from "@/components/seo/NextSteps";
 import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { CANONICAL_DOMAIN } from "@/seo/config";
 
 /* ─── types ─── */
 type PainRow = { area: string; without: string; with_w: string };
 type Metric = { label: string; desc: string };
 type Decision = { title: string; desc: string };
+type InternalLinkItem = { to: string; label: string; type: "guide" | "tool" | "resource" | "solution" | "decision-center" };
 
 type Content = {
   metaTitle: string; metaDescription: string;
@@ -66,6 +68,9 @@ type Content = {
   ctaPrimary: string; ctaSecondary: string; ctaMicro: string;
   /* FAQs */
   faqs: { q: string; a: string }[];
+  /* SEO links */
+  nextStepsTitle: string; nextSteps: NextStep[];
+  internalLinks: InternalLinkItem[];
 };
 
 /* ═══════════════════════════════════════════════════════════ */
@@ -216,6 +221,24 @@ const ES: Content = {
     { q: "¿Qué datos puedo ver como director de F&B?", a: "Ticket medio en vino por outlet, margen por categoría, rotación por referencia, ratio de mesas con vino, rendimiento del programa de copa, coherencia de pricing y evolución mensual." },
     { q: "¿Hay permanencia?", a: "No. Sin permanencia ni penalizaciones. Puedes escalar o reducir outlets según tus necesidades." },
   ],
+
+  nextStepsTitle: "Siguientes pasos",
+  nextSteps: [
+    { to: "/analisis-carta", label: "Analiza tu carta de vinos", description: "Diagnóstico gratuito con recomendaciones accionables.", type: "tool" },
+    { to: "/precios", label: "Planes y precios", description: "Plan Enterprise con integraciones PMS/POS y soporte dedicado.", type: "solution" },
+    { to: "/soluciones/grupos-restauracion", label: "Solución para grupos", description: "Si gestionas múltiples hoteles o marcas.", type: "solution" },
+    { to: "/funcionalidades", label: "Todas las funcionalidades", description: "Carta, IA, stock, analítica, integraciones.", type: "solution" },
+  ],
+  internalLinks: [
+    { to: "/soluciones/grupos-restauracion", label: "Solución para grupos de restauración", type: "solution" },
+    { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica: IA táctica", type: "solution" },
+    { to: "/software-carta-de-vinos", label: "Software de carta de vinos", type: "solution" },
+    { to: "/integraciones", label: "Integraciones POS y PMS", type: "solution" },
+    { to: "/vino-por-copa", label: "Estrategia de vino por copa", type: "guide" },
+    { to: "/casos-exito", label: "Casos de éxito", type: "solution" },
+    { to: "/comparativas", label: "Compara Winerim con alternativas", type: "solution" },
+    { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: "Guía: formar al equipo de sala", type: "guide" },
+  ],
 };
 
 /* ═══════════════════════════════════════════════════════════ */
@@ -365,6 +388,24 @@ const EN: Content = {
     { q: "What data can I see as F&B director?", a: "Wine ticket per outlet, margin by category, rotation, tables ordering wine, glass performance, pricing consistency and monthly trends." },
     { q: "Is there a lock-in?", a: "No. No lock-in or penalties. Scale outlets up or down as needed." },
   ],
+
+  nextStepsTitle: "Next steps",
+  nextSteps: [
+    { to: "/analisis-carta", label: "Analyze your wine list", description: "Free diagnosis with actionable recommendations.", type: "tool" },
+    { to: "/precios", label: "Plans and pricing", description: "Enterprise plan with PMS/POS integrations and dedicated support.", type: "solution" },
+    { to: "/soluciones/grupos-restauracion", label: "Solution for groups", description: "If you manage multiple hotels or brands.", type: "solution" },
+    { to: "/funcionalidades", label: "All features", description: "List, AI, stock, analytics, integrations.", type: "solution" },
+  ],
+  internalLinks: [
+    { to: "/soluciones/grupos-restauracion", label: "Solution for restaurant groups", type: "solution" },
+    { to: "/producto/inteligencia-dinamica", label: "Dynamic intelligence", type: "solution" },
+    { to: "/software-carta-de-vinos", label: "Wine list software", type: "solution" },
+    { to: "/integraciones", label: "POS & PMS integrations", type: "solution" },
+    { to: "/vino-por-copa", label: "By-the-glass strategy", type: "guide" },
+    { to: "/casos-exito", label: "Case studies", type: "solution" },
+    { to: "/comparativas", label: "Compare Winerim", type: "solution" },
+    { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: "Guide: train floor staff", type: "guide" },
+  ],
 };
 
 const IT: Content = { ...EN,
@@ -392,9 +433,163 @@ const DE: Content = { ...EN,
   metaDescription: "Optimieren Sie Wein in Restaurants, Bars, Lounges und Zimmerservice Ihres Hotels. Mehrsprachige digitale Karte mit KI und Analytik.",
   badgeLabel: "Premium-Hospitality", breadSolutions: "Lösungen", breadLabel: "Hotels",
   heroTitle1: "Wein in Ihrem Hotel verwaltet als ", heroTitleHighlight: "Premium-Kategorie",
-  heroDesc: "Winerim hilft Hotels, das Weinangebot an jedem Service-Punkt zu professionalisieren.",
+  heroDesc: "Winerim hilft Hotels, das Weinangebot an allen Servicepunkten zu professionalisieren: Restaurant, Bar, Lounge und Zimmerservice. Mehrsprachige digitale Karte, KI-Empfehlungen und Analytics für die F&B-Leitung.",
   ctaDemo: "Demo anfragen", ctaContact: "Mit Spezialisten sprechen",
-  ctaPrimary: "Ich möchte eine Demo für mein Hotel", ctaSecondary: "Meine Karte analysieren",
+  heroSummary: "Winerim für Hotels ist eine Lösung für Weinmanagement, Empfehlungen und Analytics, entwickelt für Hotelbetreiber. Sie zentralisiert Weinkarten, standardisiert das Gästeerlebnis, schult Serviceteams und liefert echte Performance-Daten an jedem Servicepunkt des Hotels.",
+
+  forTitle: "Ist Winerim das Richtige für Ihr Hotel?", forLabel: "Geeignet für Sie, wenn...", notForLabel: "Wahrscheinlich nicht geeignet, wenn...",
+  forItems: [
+    "Sie ein Restaurant, eine Bar oder Lounge mit Weinkarte betreiben",
+    "Sie internationale Gäste empfangen, die die Karte in ihrer Sprache brauchen",
+    "Sie das Weinerlebnis ohne 24/7-Sommelier aufwerten möchten",
+    "Sie Angebot und Preise über mehrere Outlets konsistent halten müssen",
+    "Ihre F&B-Leitung echte Performance-Daten zur Weinkategorie braucht",
+    "Sie sich mit einem hochwertigen digitalen Erlebnis differenzieren möchten",
+  ],
+  notForItems: [
+    "Ihr Hotel hat keinen Gastronomie- oder Barservice mit Weinangebot",
+    "Sie brauchen keine digitale Karte und keine Analytics zur Weinkategorie",
+    "Sie suchen nur eine statische PDF-Liste ohne Managementfunktionen",
+  ],
+
+  painLabel: "Die Herausforderung", painTitle1: "Wein in der Hospitality: hohes Potenzial, ", painTitleHighlight: "wenig Management",
+  pains: [
+    { text: "Wein ist eine F&B-Kategorie mit hohem Margenpotenzial, wird in vielen Hotels aber mit zu wenigen Management-Tools gesteuert." },
+    { text: "Internationale Gäste verstehen die Weinkarte nicht, wenn sie nicht in ihrer Sprache verfügbar ist, und wählen dann das Sichere oder bestellen gar keinen Wein." },
+    { text: "Jeder Servicepunkt - Restaurant, Bar, Rooftop oder Zimmerservice - arbeitet mit eigenen Kriterien: Preise, Sortiment und Präsentation werden inkonsistent." },
+    { text: "Serviceteams wechseln häufig und haben oft weder Schulung noch Hilfsmittel, um Wein sicher zu empfehlen." },
+    { text: "Es fehlen konsolidierte Daten zur Wein-Performance: was verkauft sich, was bleibt stehen und welche Marge bringt jede Referenz." },
+    { text: "Das Weinerlebnis passt nicht immer zum Positioning des Hotels: veraltete Karten, generische Präsentation und wenig Personalisierung." },
+  ],
+
+  tableLabel: "Vergleich", tableTitle: "Traditionelles Management vs. Winerim in Hotels",
+  tableHeaders: ["Bereich", "Ohne Winerim", "Mit Winerim"],
+  tableRows: [
+    { area: "Weinkarte", without: "PDF oder gedruckte Karte, schnell veraltet", with_w: "Interaktive digitale Karte mit Aktualisierung in Echtzeit" },
+    { area: "Sprachen", without: "Nur 1-2 Sprachen oder ungenaue Übersetzungen", with_w: "Automatisch mehrsprachig in der Sprache des Gastes" },
+    { area: "Empfehlungen", without: "Abhängig vom Wissen einzelner Mitarbeitender", with_w: "KI-Empfehlungen nach Gericht, Profil oder Anlass" },
+    { area: "Konsistenz zwischen Outlets", without: "Jeder Servicepunkt arbeitet eigenständig", with_w: "Sortiment und Pricing werden zentral gesteuert" },
+    { area: "Serviceschulung", without: "Abhängig vom individuellen Talent, ohne Unterstützung", with_w: "Profile, Pairings und Verkaufspunkte für das Team" },
+    { area: "Wein-Analytics", without: "Keine Daten oder verspätete manuelle Reports", with_w: "KPIs in Echtzeit nach Outlet und Referenz" },
+    { area: "Zimmerservice", without: "Begrenzte Liste ohne Kontext oder Pairing", with_w: "Digitales Erlebnis mit personalisierten Empfehlungen" },
+    { area: "Premium-Erlebnis", without: "Generisch und wenig differenzierend", with_w: "Personalisiert, mehrsprachig und passend zum Positioning" },
+  ],
+
+  solLabel: "Die Lösung", solTitle1: "Eine Intelligenzschicht für Wein an ", solTitleHighlight: "jedem Servicepunkt",
+  advantages: [
+    { title: "Premium-Weinkarte, digital und mehrsprachig", desc: "Gäste sehen die Karte in ihrer Sprache mit erweiterten Profilen, Verkostungsnotizen, Pairings und Empfehlungen." },
+    { title: "Konsistenz zwischen Outlets", desc: "Steuern Sie Sortiment, Preise und Präsentation zentral für Restaurant, Bar, Lounge und Zimmerservice." },
+    { title: "Intelligente Empfehlungen", desc: "KI schlägt Weine nach Gericht, Gästetyp oder Tagesmoment vor. Mehr Umsatz und ein besseres Erlebnis." },
+    { title: "Analytics für die F&B-Leitung", desc: "Echte Performance-Daten nach Outlet, Referenz, Kategorie und Zeitraum. Automatisiertes Reporting für das Management." },
+    { title: "Integrierte Schulung für das Team", desc: "Das Personal empfiehlt Wein sicher mit Profilen, Pairings und Verkaufspunkten, abrufbar auf jedem Gerät." },
+  ],
+
+  tpLabel: "Servicepunkte", tpTitle: "Winerim an jedem Touchpoint des Hotels",
+  touchpoints: [
+    { title: "Hotelrestaurant", desc: "Vollständige digitale Karte mit Pairings nach Gericht, Weinprofilen und intelligenten Empfehlungen." },
+    { title: "Bar und Lounge", desc: "Kuratierte Auswahl an Glasweinen mit leicht verständlichen Beschreibungen für Gäste, die entdecken möchten." },
+    { title: "Rooftop und Terrasse", desc: "Kontextgerechte Karte: frische Weine, Schaumweine und saisonale Auswahl mit hochwertiger Präsentation." },
+    { title: "Zimmerservice", desc: "Digitales Erlebnis, mit dem Gäste Wein direkt vom Zimmer aus mit vollständigen Informationen auswählen." },
+    { title: "Events und Bankette", desc: "Weinvorschläge nach Event, Budget oder Stil für Bankette, Cocktails und private Dinner." },
+    { title: "Wine Bar oder Vinothek", desc: "Fortgeschrittenes Management des Glasweinprogramms: Rotation, Schwund, Pricing und Performance nach Service." },
+  ],
+
+  trainLabel: "Serviceschulung", trainTitle: "Ihr Team empfiehlt Wein sicher, auch ohne vorherige Weinausbildung",
+  trainDesc: "In der Hotellerie ist die Fluktuation hoch und ein Sommelier ist nicht immer verfügbar. Winerim gibt dem Serviceteam die Werkzeuge, um Wein in jeder Schicht professionell zu empfehlen.",
+  trainItems: [
+    "Weinprofile mit Verkostungsnotizen, Herkunft und Stil in klarer Sprache",
+    "Automatische Pairings zum Hotelmenü",
+    "Schrittweise Empfehlungen, denen jede Servicekraft folgen kann",
+    "Beschreibung in der Sprache des Gastes für internationalen Service",
+    "Wichtige Verkaufspunkte pro Referenz: was sagen, wie präsentieren",
+    "Keine vorherige Weinausbildung erforderlich",
+  ],
+
+  mLabel: "Was Sie messen können", mTitle: "Wein-KPIs für die F&B-Leitung", mSubtitle: "Handlungsrelevante Daten für bessere Entscheidungen zur Weinkategorie in Ihrem Hotel.",
+  metrics: [
+    { label: "Durchschnittlicher Weinbon pro Outlet", desc: "Vergleichen Sie den durchschnittlichen Weinausgaben je Servicepunkt." },
+    { label: "Marge nach Kategorie und Referenz", desc: "Erkennen Sie, welche Stile oder Preisbereiche die höchste Marge liefern." },
+    { label: "Anteil der Tische mit Weinbestellung", desc: "Messen Sie, welcher Anteil der Gäste in jedem Outlet Wein bestellt." },
+    { label: "Rotation pro Referenz", desc: "Erkennen Sie stagnierende Weine und Referenzen mit hoher Nachfrage." },
+    { label: "Performance des Glasweinprogramms", desc: "Umsatz, Schwund und Marge pro Glas an jedem Servicepunkt." },
+    { label: "Preiskonsistenz zwischen Outlets", desc: "Erkennen Sie Preisabweichungen desselben Weins zwischen Outlets." },
+    { label: "Kosten gebundenen Bestands", desc: "Berechnen Sie Kapital, das in Weinen ohne Rotation gebunden ist." },
+    { label: "Monatliche Entwicklung der Kategorie", desc: "Trends bei Umsatz, Marge und Sortiment von Monat zu Monat." },
+  ],
+
+  dLabel: "Welche Entscheidungen es erleichtert", dTitle: "Entscheidungen, die Winerim auf den Tisch bringt",
+  decisions: [
+    { title: "Welche Weine in jedem Outlet behalten oder entfernen?", desc: "Basierend auf Rotation, Marge und realer Performance statt auf Bauchgefühl." },
+    { title: "Ist das Glasweinprogramm rentabel?", desc: "Analysieren Sie Schwund, Rotation und Marge, um die Auswahl zu optimieren." },
+    { title: "Wo liegen Margenchancen?", desc: "Erkennen Sie untergenutzte Preisbereiche oder Kategorien mit Potenzial." },
+    { title: "Ist das Pricing zwischen Outlets abgestimmt?", desc: "Vergleichen Sie Multiplikatoren und Margen zwischen Restaurant, Bar und Zimmerservice." },
+    { title: "Welcher Servicepunkt braucht Aufmerksamkeit?", desc: "Identifizieren Sie Outlets mit schwacher Wein-Performance." },
+    { title: "Welche Referenz auf weitere Outlets ausrollen?", desc: "Testen Sie einen Wein in einem Outlet, messen Sie Ergebnisse und entscheiden Sie über die Skalierung." },
+  ],
+
+  premLabel: "Premium-Hospitality", premTitle: "Warum Winerim besonders gut zu Hotels passt",
+  premDesc: "Wein ist eine der wenigen F&B-Kategorien, in denen Gästeerlebnis und Geschäftsmarge gemeinsam wachsen. Winerim ist genau für diesen Punkt entwickelt.",
+  premItems: [
+    "Nativ mehrsprachig: Gäste sehen die Karte mühelos in ihrer Sprache",
+    "Hochwertiges digitales Erlebnis passend zum Positioning des Hotels",
+    "Empfehlungen, die den Bon erhöhen, ohne Verkaufsdruck zu erzeugen",
+    "Serviceschulung, die Abhängigkeit von individuellem Talent reduziert",
+    "Konsistentes Erlebnis in Restaurant, Bar, Lounge und Zimmerservice",
+    "Analytics, mit denen F&B die Weinkategorie datenbasiert steuert",
+    "Kein permanenter Sommelier an jedem Servicepunkt erforderlich",
+    "Schrittweise Einführung ohne operative Störung",
+  ],
+
+  doesLabel: "Was es macht / Was es nicht macht", doesTitle: "Winerim in Hotels: vollständige Transparenz",
+  doesItems: [
+    "Verwaltet und optimiert die Weinkarte in allen Hotel-Outlets",
+    "Bietet Gästen intelligente Empfehlungen nach Gericht, Stil oder Moment",
+    "Übersetzt die Karte automatisch in die Sprache des Gastes",
+    "Stellt dem Serviceteam Profile, Pairings und Verkaufspunkte bereit",
+    "Erzeugt echte Analytics nach Outlet, Referenz und Zeitraum",
+    "Integriert sich per API mit Hotel-PMS und POS-Systemen",
+  ],
+  doesNotLabel: "Was es nicht macht",
+  doesNotItems: [
+    "Es ersetzt keine F&B-Strategie und keine menschlichen Entscheidungen",
+    "Es verwaltet kein Kücheninventar, sondern die Weinkategorie",
+    "Es ist kein POS und kein PMS: Es integriert sich in bestehende Systeme",
+  ],
+
+  ctaLabel: "Für Hotels",
+  ctaTitle: "Möchten Sie Wein in Ihrem Hotel professionalisieren?",
+  ctaDesc: "Wir können Ihr aktuelles Weinangebot analysieren und zeigen, wo Chancen bei Marge, Erlebnis und operativer Effizienz liegen.",
+  ctaPrimary: "Ich möchte eine Demo für mein Hotel", ctaSecondary: "Meine Weinkarte analysieren",
+  ctaMicro: "Besonders nützlich für 4- und 5-Sterne-Hotels, Resorts, Boutique-Hotels und Hotelketten mit aktivem F&B.",
+
+  faqs: [
+    { q: "Funktioniert Winerim für Hotels mit mehreren Restaurants und Bars?", a: "Ja. Sie können jedes Outlet unabhängig oder zentral über ein einziges Panel steuern: Restaurant, Bar, Lounge, Rooftop und Zimmerservice." },
+    { q: "Braucht es an jedem Servicepunkt einen Sommelier?", a: "Nein. Winerim enthält erweiterte Profile, automatische Pairings und Empfehlungen, damit das Serviceteam Wein sicher empfehlen kann, auch ohne vorherige Weinausbildung." },
+    { q: "Wird die Karte in der Sprache des Gastes angezeigt?", a: "Ja. Die Karte kann automatisch in der Sprache des Gastes dargestellt werden, abhängig von den aktivierten Sprachen Ihres Projekts." },
+    { q: "Integriert sich Winerim mit unserem Hotel-PMS oder POS?", a: "Ja. Im Enterprise-Plan integriert sich Winerim per API mit führenden Hotel-PMS und POS-Systemen. Wenn Ihr System nicht auf der Liste steht, prüfen wir es gemeinsam." },
+    { q: "Wie lange dauert die Einführung?", a: "Ein Pilot kann in weniger als einer Woche aktiviert werden. Der Rollout auf weitere Outlets erfolgt schrittweise, ohne operative Störung." },
+    { q: "Kann ich Zimmerservice mit Winerim verwalten?", a: "Ja. Gäste können die Weinkarte im Zimmer digital erkunden, mit personalisierten Empfehlungen und Pairings zum Room-Service-Menü." },
+    { q: "Welche Daten sehe ich als F&B-Direktor?", a: "Weinbon pro Outlet, Marge nach Kategorie, Rotation pro Referenz, Anteil der Tische mit Wein, Performance des Glasweinprogramms, Preiskonsistenz und monatliche Entwicklung." },
+    { q: "Gibt es eine Mindestlaufzeit?", a: "Nein. Keine Bindung und keine Strafgebühren. Sie können Outlets je nach Bedarf erweitern oder reduzieren." },
+  ],
+
+  nextStepsTitle: "Nächste Schritte",
+  nextSteps: [
+    { to: "/analisis-carta", label: "Weinkarte analysieren", description: "Kostenlose Diagnose mit konkreten Empfehlungen.", type: "tool" },
+    { to: "/precios", label: "Pakete und Preise", description: "Enterprise-Plan mit PMS/POS-Integrationen und dediziertem Support.", type: "solution" },
+    { to: "/soluciones/grupos-restauracion", label: "Lösung für Gruppen", description: "Wenn Sie mehrere Hotels oder Marken steuern.", type: "solution" },
+    { to: "/funcionalidades", label: "Alle Funktionen", description: "Karte, KI, Bestand, Analytics und Integrationen.", type: "solution" },
+  ],
+  internalLinks: [
+    { to: "/soluciones/grupos-restauracion", label: "Lösung für Restaurantgruppen", type: "solution" },
+    { to: "/producto/inteligencia-dinamica", label: "Dynamische Intelligenz: taktische KI", type: "solution" },
+    { to: "/software-carta-de-vinos", label: "Weinkarten-Software", type: "solution" },
+    { to: "/integraciones", label: "POS- und PMS-Integrationen", type: "solution" },
+    { to: "/vino-por-copa", label: "Glaswein-Strategie", type: "guide" },
+    { to: "/casos-exito", label: "Erfolgsgeschichten", type: "solution" },
+    { to: "/comparativas", label: "Winerim mit Alternativen vergleichen", type: "solution" },
+    { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: "Ratgeber: Serviceteam schulen", type: "guide" },
+  ],
 };
 
 const PT: Content = { ...EN,
@@ -402,9 +597,163 @@ const PT: Content = { ...EN,
   metaDescription: "Otimize o vinho em restaurantes, bares, lounges e room service do seu hotel. Carta digital multiidioma com IA e análise.",
   badgeLabel: "Hospitalidade premium", breadSolutions: "Soluções", breadLabel: "Hotéis",
   heroTitle1: "Vinho no seu hotel, gerido como uma ", heroTitleHighlight: "categoria premium",
-  heroDesc: "Winerim ajuda hotéis a profissionalizar a oferta de vinho em cada ponto de serviço.",
+  heroDesc: "Winerim ajuda hotéis a profissionalizar a oferta de vinho em todos os pontos de serviço: restaurante, bar, lounge e room service. Carta digital multiidioma, recomendações com IA e analytics para direção de F&B.",
   ctaDemo: "Solicitar demonstração", ctaContact: "Falar com um especialista",
-  ctaPrimary: "Quero uma demonstração para meu hotel", ctaSecondary: "Analisar minha carta",
+  heroSummary: "Winerim para hotéis é uma solução de gestão, recomendação e analytics de vinho desenhada para operadores hoteleiros. Permite centralizar a carta de vinhos, normalizar a experiência do hóspede, formar a equipa de sala e obter dados reais de desempenho em cada ponto de serviço do hotel.",
+
+  forTitle: "O Winerim é para o seu hotel?", forLabel: "É para si se...", notForLabel: "Provavelmente não é para si se...",
+  forItems: [
+    "Tem restaurante, bar ou lounge com carta de vinhos",
+    "Recebe hóspedes internacionais que precisam da carta no seu idioma",
+    "Quer elevar a experiência de vinho sem depender de um sommelier 24/7",
+    "Precisa de coerência de oferta e preços entre pontos de venda",
+    "A sua direção de F&B precisa de dados de desempenho do vinho",
+    "Procura diferenciar-se com uma experiência digital premium",
+  ],
+  notForItems: [
+    "O seu hotel não tem serviço de restauração nem bar com vinhos",
+    "Não precisa de carta digital nem de analytics da categoria vinho",
+    "Procura apenas uma lista em PDF sem funcionalidades de gestão",
+  ],
+
+  painLabel: "O desafio", painTitle1: "O vinho na hotelaria: alto potencial, ", painTitleHighlight: "pouca gestão",
+  pains: [
+    { text: "O vinho é uma das categorias de F&B com maior potencial de margem, mas uma das menos geridas com ferramentas adequadas na maioria dos hotéis." },
+    { text: "Hóspedes internacionais não compreendem a carta de vinhos se esta não estiver no seu idioma, e acabam por escolher o mais seguro ou não pedir vinho." },
+    { text: "Cada ponto de venda - restaurante, bar, rooftop, room service - opera com critérios diferentes: preços, sortido e apresentação inconsistentes." },
+    { text: "A equipa de sala muda com frequência e nem sempre tem formação ou ferramentas para recomendar vinho com confiança." },
+    { text: "Não existem dados consolidados sobre o desempenho do vinho: o que vende, o que fica parado e que margem gera cada referência." },
+    { text: "A experiência do vinho nem sempre acompanha o posicionamento do hotel: cartas desatualizadas, apresentação genérica e pouca personalização." },
+  ],
+
+  tableLabel: "Comparação", tableTitle: "Gestão tradicional vs Winerim em hotéis",
+  tableHeaders: ["Área", "Sem Winerim", "Com Winerim"],
+  tableRows: [
+    { area: "Carta de vinhos", without: "PDF ou carta impressa, desatualizada", with_w: "Carta digital interativa, atualizada em tempo real" },
+    { area: "Idiomas", without: "Carta em 1-2 idiomas ou mal traduzida", with_w: "Multiidioma automático no idioma do hóspede" },
+    { area: "Recomendações", without: "Dependem do conhecimento do empregado", with_w: "IA que sugere por prato, perfil ou momento" },
+    { area: "Consistência entre outlets", without: "Cada ponto de venda opera por sua conta", with_w: "Sortido e preços governados a partir de um painel central" },
+    { area: "Formação de sala", without: "Depende do talento individual, sem suporte", with_w: "Fichas, harmonizações e pontos de venda acessíveis à equipa" },
+    { area: "Analytics de vinho", without: "Sem dados ou relatórios manuais tardios", with_w: "KPIs em tempo real por ponto de venda e referência" },
+    { area: "Room service", without: "Carta limitada, sem contexto nem harmonização", with_w: "Experiência digital com recomendações personalizadas" },
+    { area: "Experiência premium", without: "Genérica, pouco diferenciadora", with_w: "Personalizada, multiidioma e alinhada com o posicionamento" },
+  ],
+
+  solLabel: "A solução", solTitle1: "Uma camada de inteligência para o vinho em ", solTitleHighlight: "cada ponto de serviço",
+  advantages: [
+    { title: "Carta digital premium multiidioma", desc: "O hóspede vê a carta no seu idioma com fichas enriquecidas, notas de prova, harmonizações e recomendações." },
+    { title: "Consistência entre outlets", desc: "Gira sortido, preços e apresentação a partir de um painel central para restaurante, bar, lounge e room service." },
+    { title: "Recomendações inteligentes", desc: "IA que sugere vinhos por prato, perfil do hóspede ou momento do dia. Mais vendas e melhor experiência." },
+    { title: "Analytics para direção de F&B", desc: "Dados reais de desempenho por ponto de venda, referência, categoria e período. Reporting executivo automatizado." },
+    { title: "Formação integrada para a equipa", desc: "A equipa recomenda vinho com confiança graças a fichas, harmonizações e pontos-chave de venda acessíveis em qualquer dispositivo." },
+  ],
+
+  tpLabel: "Pontos de serviço", tpTitle: "Winerim em cada touchpoint do hotel",
+  touchpoints: [
+    { title: "Restaurante do hotel", desc: "Carta digital completa com harmonizações por prato, fichas de vinho e recomendações inteligentes." },
+    { title: "Bar e lounge", desc: "Seleção curada de vinhos a copo com descrições acessíveis para hóspedes que querem explorar." },
+    { title: "Rooftop e esplanada", desc: "Carta adaptada ao contexto: vinhos frescos, espumantes e seleção sazonal com apresentação premium." },
+    { title: "Room service", desc: "Experiência digital que permite ao hóspede escolher vinho com informação completa a partir do quarto." },
+    { title: "Eventos e salas", desc: "Propostas de vinho por evento, orçamento ou estilo para banquetes, cocktails e jantares privados." },
+    { title: "Wine bar ou garrafeira", desc: "Gestão avançada do programa de vinho a copo: rotação, desperdício, preços e desempenho por serviço." },
+  ],
+
+  trainLabel: "Formação de sala", trainTitle: "A sua equipa recomenda vinho com confiança, mesmo sem formação prévia em enologia",
+  trainDesc: "Na hotelaria, a rotação de pessoal é elevada e nem sempre há um sommelier disponível. Winerim equipa a equipa de sala com ferramentas para recomendar vinho de forma profissional em cada turno.",
+  trainItems: [
+    "Fichas de vinho com notas de prova, origem e estilo em linguagem clara",
+    "Harmonizações automáticas por prato do menu do hotel",
+    "Recomendações passo a passo que qualquer empregado pode seguir",
+    "Descrição no idioma do hóspede para serviço internacional",
+    "Pontos-chave de venda por referência: o que dizer e como apresentar",
+    "Sem necessidade de formação prévia em vinho",
+  ],
+
+  mLabel: "O que pode medir", mTitle: "KPIs de vinho para direção de F&B", mSubtitle: "Dados acionáveis para tomar melhores decisões sobre a categoria vinho no seu hotel.",
+  metrics: [
+    { label: "Bilhete médio em vinho por outlet", desc: "Compare o gasto médio em vinho por ponto de serviço." },
+    { label: "Margem por categoria e referência", desc: "Identifique que estilos ou intervalos de preço geram mais margem." },
+    { label: "Rácio de mesas que pedem vinho", desc: "Meça que percentagem de hóspedes consome vinho em cada outlet." },
+    { label: "Rotação por referência", desc: "Detete vinhos parados e referências com alta procura." },
+    { label: "Desempenho do programa a copo", desc: "Vendas, desperdício e margem do vinho a copo em cada ponto." },
+    { label: "Coerência de preços entre outlets", desc: "Detete desvios de preço para o mesmo vinho entre outlets." },
+    { label: "Custo de stock imobilizado", desc: "Calcule o capital parado em vinhos sem rotação." },
+    { label: "Evolução mensal da categoria", desc: "Tendências de vendas, margem e sortido mês a mês." },
+  ],
+
+  dLabel: "Que decisões facilita", dTitle: "Decisões que o Winerim coloca em cima da mesa",
+  decisions: [
+    { title: "Que vinhos manter ou retirar em cada outlet?", desc: "Com base em rotação, margem e desempenho real, não em intuição." },
+    { title: "O programa a copo é rentável?", desc: "Analise desperdício, rotação e margem para otimizar a seleção a copo." },
+    { title: "Onde existem oportunidades de margem?", desc: "Detete intervalos de preço pouco explorados ou categorias com potencial." },
+    { title: "Os preços estão alinhados entre outlets?", desc: "Compare multiplicadores e margens entre restaurante, bar e room service." },
+    { title: "Que outlet precisa de atenção?", desc: "Identifique pontos de venda com baixo desempenho em vinho." },
+    { title: "Que referência escalar para mais outlets?", desc: "Teste um vinho num outlet, meça e decida se deve expandir." },
+  ],
+
+  premLabel: "Hospitalidade premium", premTitle: "Porque o Winerim encaixa especialmente bem em hotéis",
+  premDesc: "O vinho é uma das poucas categorias de F&B onde a experiência do cliente e a margem do negócio crescem em conjunto. Winerim foi desenhado para esse ponto exato.",
+  premItems: [
+    "Multiidioma nativo: o hóspede vê a carta no seu idioma sem esforço",
+    "Experiência digital premium alinhada com o posicionamento do hotel",
+    "Recomendações que elevam o bilhete sem pressão comercial",
+    "Formação de sala que reduz dependência do talento individual",
+    "Consistência de experiência entre restaurante, bar, lounge e room service",
+    "Analytics que permitem à direção de F&B governar a categoria vinho com dados reais",
+    "Sem necessidade de um sommelier permanente em cada ponto de serviço",
+    "Implementação progressiva sem disrupção operacional",
+  ],
+
+  doesLabel: "O que faz / O que não faz", doesTitle: "Winerim em hotéis: transparência total",
+  doesItems: [
+    "Gere e otimiza a carta de vinhos em todos os outlets do hotel",
+    "Oferece recomendações inteligentes ao hóspede por prato, estilo ou momento",
+    "Traduz automaticamente a carta para o idioma do hóspede",
+    "Disponibiliza fichas, harmonizações e pontos-chave de venda à equipa de sala",
+    "Gera analytics reais por outlet, referência e período",
+    "Integra-se com PMS e POS hoteleiros via API",
+  ],
+  doesNotLabel: "O que não faz",
+  doesNotItems: [
+    "Não substitui a estratégia de F&B nem a tomada de decisão humana",
+    "Não gere inventário de cozinha, apenas a categoria vinho",
+    "Não é um POS nem um PMS: integra-se com os sistemas existentes",
+  ],
+
+  ctaLabel: "Para hotéis",
+  ctaTitle: "Quer profissionalizar o vinho no seu hotel?",
+  ctaDesc: "Podemos analisar a sua oferta atual de vinho e mostrar onde existem oportunidades de margem, experiência e eficiência operacional.",
+  ctaPrimary: "Quero uma demonstração para o meu hotel", ctaSecondary: "Analisar a minha carta de vinhos",
+  ctaMicro: "Especialmente útil para hotéis 4 e 5 estrelas, resorts, boutique hotels e cadeias hoteleiras com F&B ativo.",
+
+  faqs: [
+    { q: "O Winerim funciona para hotéis com vários restaurantes e bares?", a: "Sim. Pode gerir cada outlet de forma independente ou centralizada a partir de um único painel: restaurante, bar, lounge, rooftop e room service." },
+    { q: "É preciso um sommelier em cada ponto de serviço?", a: "Não. Winerim inclui fichas enriquecidas, harmonizações automáticas e recomendações que permitem à equipa de sala recomendar vinho com confiança, sem formação prévia em enologia." },
+    { q: "A carta aparece no idioma do hóspede?", a: "Sim. A carta pode ser apresentada automaticamente no idioma do hóspede, de acordo com os idiomas ativados no seu projeto." },
+    { q: "Integra-se com o nosso PMS ou POS hoteleiro?", a: "Sim. No plano Enterprise, Winerim integra-se com os principais PMS e POS hoteleiros via API. Se o seu sistema não estiver na lista, avaliamos consigo." },
+    { q: "Quanto tempo demora a implementação?", a: "O piloto pode ser ativado em menos de uma semana. A expansão para mais outlets é feita gradualmente, sem disrupções operacionais." },
+    { q: "Posso gerir room service com o Winerim?", a: "Sim. O hóspede pode explorar a carta de vinhos a partir de um dispositivo no quarto, com recomendações personalizadas e harmonizações com o menu de room service." },
+    { q: "Que dados posso ver como diretor de F&B?", a: "Bilhete médio em vinho por outlet, margem por categoria, rotação por referência, rácio de mesas com vinho, desempenho do programa a copo, coerência de preços e evolução mensal." },
+    { q: "Existe fidelização?", a: "Não. Sem fidelização nem penalizações. Pode escalar ou reduzir outlets conforme as suas necessidades." },
+  ],
+
+  nextStepsTitle: "Próximos passos",
+  nextSteps: [
+    { to: "/analisis-carta", label: "Analise a sua carta de vinhos", description: "Diagnóstico gratuito com recomendações acionáveis.", type: "tool" },
+    { to: "/precios", label: "Planos e preços", description: "Plano Enterprise com integrações PMS/POS e suporte dedicado.", type: "solution" },
+    { to: "/soluciones/grupos-restauracion", label: "Solução para grupos", description: "Se gere vários hotéis ou marcas.", type: "solution" },
+    { to: "/funcionalidades", label: "Todas as funcionalidades", description: "Carta, IA, stock, analytics e integrações.", type: "solution" },
+  ],
+  internalLinks: [
+    { to: "/soluciones/grupos-restauracion", label: "Solução para grupos de restauração", type: "solution" },
+    { to: "/producto/inteligencia-dinamica", label: "Inteligência dinâmica: IA tática", type: "solution" },
+    { to: "/software-carta-de-vinos", label: "Software de carta de vinhos", type: "solution" },
+    { to: "/integraciones", label: "Integrações POS e PMS", type: "solution" },
+    { to: "/vino-por-copa", label: "Estratégia de vinho a copo", type: "guide" },
+    { to: "/casos-exito", label: "Casos de sucesso", type: "solution" },
+    { to: "/comparativas", label: "Comparar Winerim com alternativas", type: "solution" },
+    { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: "Guia: formar a equipa de sala", type: "guide" },
+  ],
 };
 
 const content: Record<string, Content> = { es: ES, en: EN, it: IT, fr: FR, de: DE, pt: PT };
@@ -422,6 +771,8 @@ const decIcons = [Target, GlassWater, DollarSign, DollarSign, AlertTriangle, Ref
 const Hoteles = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
+  const localizedNextSteps = t.nextSteps.map((step) => ({ ...step, to: localePath(step.to) }));
+  const localizedInternalLinks = t.internalLinks.map((link) => ({ ...link, to: localePath(link.to) }));
 
   useEffect(() => {
     const ld = document.createElement("script");
@@ -446,7 +797,7 @@ const Hoteles = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.metaTitle} description={t.metaDescription} url="https://winerim.wine/soluciones/hoteles"
+      <SEOHead title={t.metaTitle} description={t.metaDescription} url={`${CANONICAL_DOMAIN}${localePath("/soluciones/hoteles")}`}
         hreflang={allLangPaths("/soluciones/hoteles")} />
       <Navbar />
 
@@ -813,25 +1164,11 @@ const Hoteles = () => {
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={lang === "es" ? "Siguientes pasos" : "Next steps"}
-        steps={[
-          { to: "/analisis-carta", label: lang === "es" ? "Analiza tu carta de vinos" : "Analyze your wine list", description: lang === "es" ? "Diagnóstico gratuito con recomendaciones accionables." : "Free diagnosis with actionable recommendations.", type: "tool" },
-          { to: "/precios", label: lang === "es" ? "Planes y precios" : "Plans and pricing", description: lang === "es" ? "Plan Enterprise con integraciones PMS/POS y soporte dedicado." : "Enterprise plan with PMS/POS integrations and dedicated support.", type: "solution" },
-          { to: "/soluciones/grupos-restauracion", label: lang === "es" ? "Solución para grupos" : "Solution for groups", description: lang === "es" ? "Si gestionas múltiples hoteles o marcas." : "If you manage multiple hotels or brands.", type: "solution" },
-          { to: "/funcionalidades", label: lang === "es" ? "Todas las funcionalidades" : "All features", description: lang === "es" ? "Carta, IA, stock, analítica, integraciones." : "List, AI, stock, analytics, integrations.", type: "solution" },
-        ]}
+        title={t.nextStepsTitle}
+        steps={localizedNextSteps}
       />
 
-      <InternalLinks links={[
-        { to: localePath("/soluciones/grupos-restauracion"), label: lang === "es" ? "Solución para grupos de restauración" : "Solution for restaurant groups", type: "solution" },
-        { to: localePath("/producto/inteligencia-dinamica"), label: lang === "es" ? "Inteligencia dinámica: IA táctica" : "Dynamic intelligence", type: "solution" },
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos" : "Wine list software", type: "solution" },
-        { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones POS y PMS" : "POS & PMS integrations", type: "solution" },
-        { to: localePath("/vino-por-copa"), label: lang === "es" ? "Estrategia de vino por copa" : "By-the-glass strategy", type: "guide" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : "Case studies", type: "solution" },
-        { to: localePath("/comparativas"), label: lang === "es" ? "Compara Winerim con alternativas" : "Compare Winerim", type: "solution" },
-        { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: lang === "es" ? "Guía: formar al equipo de sala" : "Guide: train floor staff", type: "guide" },
-      ]} />
+      <InternalLinks links={localizedInternalLinks} />
 
       <Footer />
     </div>

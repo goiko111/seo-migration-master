@@ -3073,6 +3073,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/soluciones/grupos-restauracion': '/en/solutions/restaurant-groups',
+    '/soluciones/hoteles': '/en/solutions/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/en/solutions/increase-average-ticket',
   },
   it: {
@@ -3106,6 +3107,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
     '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
     '/soluciones/grupos-restauracion': '/it/soluzioni/gruppi-ristorazione',
+    '/soluciones/hoteles': '/it/soluzioni/hotel',
     '/soluciones/aumentar-ticket-medio-restaurante': '/it/soluzioni/aumentare-scontrino-medio',
   },
   fr: {
@@ -3139,6 +3141,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
     '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
+    '/soluciones/hoteles': '/fr/solutions/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
   },
   de: {
@@ -3172,6 +3175,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
     '/calculadora-margen-vino': '/de/wein-margen-rechner',
     '/soluciones/grupos-restauracion': '/de/loesungen/restaurant-gruppen',
+    '/soluciones/hoteles': '/de/loesungen/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/de/loesungen/durchschnittsbon-erhoehen',
   },
   pt: {
@@ -3205,6 +3209,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
     '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
     '/soluciones/grupos-restauracion': '/pt/solucoes/grupos-restauracao',
+    '/soluciones/hoteles': '/pt/solucoes/hoteis',
     '/soluciones/aumentar-ticket-medio-restaurante': '/pt/solucoes/aumentar-ticket-medio',
   },
 };
@@ -3237,6 +3242,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/producto/winerim-supply': { es: 'Winerim Supply', en: 'Winerim Supply', it: 'Winerim Supply', fr: 'Winerim Supply', de: 'Winerim Supply', pt: 'Winerim Supply' },
   '/producto/cloudrim': { es: 'CloudRIM', en: 'CloudRIM', it: 'CloudRIM', fr: 'CloudRIM', de: 'CloudRIM', pt: 'CloudRIM' },
   '/producto/savia': { es: 'SAVia', en: 'SAVia', it: 'SAVia', fr: 'SAVia', de: 'SAVia', pt: 'SAVia' },
+  '/soluciones/hoteles': { es: 'Hoteles', en: 'Hotels', it: 'Hotel', fr: 'Hotels', de: 'Hotels', pt: 'Hotéis' },
   '/analisis-carta': { es: 'Analisis de carta de vinos', en: 'Wine list analysis', it: 'Analisi carta vini', fr: 'Analyse de carte des vins', de: 'Weinkartenanalyse', pt: 'Analise de carta de vinhos' },
   '/aprender-vino': { es: 'Aprender vino', en: 'Learn wine', it: 'Imparare il vino', fr: 'Apprendre le vin', de: 'Wein lernen', pt: 'Aprender vinho' },
   '/barometro-cartas-vino-2026': { es: 'Barometro Winerim de cartas de vino', en: 'Winerim wine list barometer', it: 'Barometro Winerim delle carte vini', fr: 'Barometre Winerim des cartes des vins', de: 'Winerim Weinkarten-Barometer', pt: 'Barometro Winerim de cartas de vinhos' },

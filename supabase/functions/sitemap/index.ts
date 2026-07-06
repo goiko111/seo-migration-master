@@ -34,6 +34,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/privacidad': '/en/privacy',
     '/terminos': '/en/terms',
     '/soluciones/grupos-restauracion': '/en/solutions/restaurant-groups',
+    '/soluciones/hoteles': '/en/solutions/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/en/solutions/increase-average-ticket',
     '/producto/inteligencia-dinamica': '/en/product/dynamic-intelligence',
     '/producto/winerim-core': '/en/product/winerim-core',
@@ -74,6 +75,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/privacidad': '/it/privacy',
     '/terminos': '/it/termini',
     '/soluciones/grupos-restauracion': '/it/soluzioni/gruppi-ristorazione',
+    '/soluciones/hoteles': '/it/soluzioni/hotel',
     '/soluciones/aumentar-ticket-medio-restaurante': '/it/soluzioni/aumentare-scontrino-medio',
     '/producto/inteligencia-dinamica': '/it/prodotto/intelligenza-dinamica',
     '/producto/winerim-core': '/it/prodotto/winerim-core',
@@ -114,6 +116,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/privacidad': '/fr/confidentialite',
     '/terminos': '/fr/conditions',
     '/soluciones/grupos-restauracion': '/fr/solutions/groupes-restauration',
+    '/soluciones/hoteles': '/fr/solutions/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/fr/solutions/augmenter-ticket-moyen',
     '/producto/inteligencia-dinamica': '/fr/produit/intelligence-dynamique',
     '/producto/winerim-core': '/fr/produit/winerim-core',
@@ -154,6 +157,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/privacidad': '/de/datenschutz',
     '/terminos': '/de/agb',
     '/soluciones/grupos-restauracion': '/de/loesungen/restaurant-gruppen',
+    '/soluciones/hoteles': '/de/loesungen/hotels',
     '/soluciones/aumentar-ticket-medio-restaurante': '/de/loesungen/durchschnittsbon-erhoehen',
     '/producto/inteligencia-dinamica': '/de/produkt/dynamische-intelligenz',
     '/producto/winerim-core': '/de/produkt/winerim-core',
@@ -194,6 +198,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/privacidad': '/pt/privacidade',
     '/terminos': '/pt/termos',
     '/soluciones/grupos-restauracion': '/pt/solucoes/grupos-restauracao',
+    '/soluciones/hoteles': '/pt/solucoes/hoteis',
     '/soluciones/aumentar-ticket-medio-restaurante': '/pt/solucoes/aumentar-ticket-medio',
     '/producto/inteligencia-dinamica': '/pt/produto/inteligencia-dinamica',
     '/producto/winerim-core': '/pt/produto/winerim-core',
@@ -361,6 +366,7 @@ const STATIC_ROUTES: StaticRoute[] = [
 
   // Solutions
   { esPath: '/soluciones/grupos-restauracion', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/soluciones/hoteles', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/soluciones/aumentar-ticket-medio-restaurante', priority: '0.7', changefreq: 'monthly', multilang: true },
 
   // Guides (ES-only)

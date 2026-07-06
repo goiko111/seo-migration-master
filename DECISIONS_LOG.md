@@ -4127,3 +4127,38 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Ajustar `file_size_limit` y `allowed_mime_types` desde Lovable Cloud Storage si es posible.
 - Limpiar o reconectar el `handleSubmit` muerto de `AnalizaCarta.tsx`.
 - Continuar con la primera ola de spokes de `Aprender vino`.
+
+## 2026-07-06
+
+### Localizacion profunda, paridad humano/bot y cadencia editorial
+
+#### Hechos
+
+- Se usaron seis agentes paralelos para dividir trabajo por paginas:
+  - cinco herramientas;
+  - Hoteles/GruposRestauracion y componentes compartidos.
+- La integracion final se valido desde la sesion principal.
+- Se detecto que Hoteles DE/PT funcionaba para humano renderizado pero no para Googlebot/prerender ni sitemap productivo.
+- Se corrigieron los mapas propios de `sitemap` y `prerender`, que estaban desalineados con `src/i18n/types.ts`.
+- Se creo una nueva migracion editorial futura con 12 articulos.
+- El hub `Aprender vino` queda preparado para mostrar el siguiente articulo solo cuando llegue su fecha.
+
+#### Decisiones
+
+- Usar `publishedAt` en el hub para enlaces editoriales futuros en vez de publicar manualmente el enlace el dia de salida.
+- Mantener articulos futuros fuera de `llms.txt` y `llms-full.txt` hasta que ya sean publicos.
+- Considerar obligatorio comprobar paridad humano/bot para rutas de negocio, no solo render humano.
+- Tratar `supabase/functions/sitemap/index.ts` y `supabase/functions/prerender/index.ts` como fuentes separadas que deben sincronizarse con `src/i18n/types.ts`; no asumir que React Router basta.
+- Publicar Edge Functions antes de declarar cerrado Hoteles DE/PT.
+
+#### Hipotesis
+
+- La divergencia de Hoteles aparecio porque el Worker/Edge prerender caia al fallback de home cuando no encontraba la ruta localizada en su mapa interno.
+- Una vez publicado `sitemap`/`prerender`, Search Console deberia ver Hoteles como URL valida, no como home canonicalizada.
+- El patron de fechas por lunes con offsets de cinco minutos por idioma ayudara a mantener cadencia editorial semanal sin publicar lotes masivos el mismo instante.
+
+#### Tareas pendientes asociadas
+
+- Publicar Edge Functions y frontend.
+- Aplicar migracion editorial `20260706083118...`.
+- Revalidar sitemap, Googlebot Hoteles DE/PT, herramientas DE/PT y hubs de Aprender vino/Biblioteca tras publish.

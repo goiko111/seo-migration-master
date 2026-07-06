@@ -6364,3 +6364,64 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Corregir DNS/certificado/routing de `www.winerim.wine`.
 - Activar regla Cloudflare equivalente a `Always Use HTTPS` para todas las rutas.
 - Revalidar producción humana y Googlebot tras frontend/migración.
+
+## Actualizacion 2026-07-06: cierre parcial de DE/PT, Hoteles bot y lote editorial programado
+
+### Hechos
+
+- Rama actual: `codex/winerim-lead-magnets-recursos`.
+- Lovable publico el commit `0e92b82` en `https://seo-migration-magic.lovable.app`; el preview respondio `200` y `x-deployment-id: eebb06de-6162-4534-bed4-24914e17838e`.
+- Validacion con navegador renderizado del preview:
+  - `/de/loesungen/hotels`: `html lang=de`, H1 aleman, canonical `https://winerim.wine/de/loesungen/hotels`, `7` hreflang, sin fallback ingles;
+  - `/pt/solucoes/hoteis`: `html lang=pt`, H1 portugues, canonical `https://winerim.wine/pt/solucoes/hoteis`, `7` hreflang, sin fallback ingles;
+  - `/de/loesungen/restaurant-gruppen` y `/pt/solucoes/grupos-restauracao` tambien OK.
+- Validacion de produccion antes de este nuevo commit:
+  - `https://winerim.wine/sitemap.xml` tenia `2.336` URLs y no incluia Hoteles DE/PT;
+  - Googlebot a `https://winerim.wine/de/loesungen/hotels` devolvia `200` con `x-prerendered: true`, pero el HTML era home (`html lang=es`, title de home y canonical raiz).
+- Contradiccion detectada:
+  - el resumen anterior indicaba paridad humano/bot suficientemente validada;
+  - la revalidacion de Hoteles mostro que esa paridad no existia para esta ruta concreta.
+- Cambios de codigo completados:
+  - `CalculadoraFugaMargen`, `ComparadorDistribuidores`, `SimuladorSenalMargenes`, `SimuladorParetoCarta` y `TestPerfilRim` tienen localizacion profunda `es/en/it/fr/de/pt`;
+  - `Hoteles` y `GruposRestauracion` ya no dependen de bloques EN para DE/PT y usan canonical/hreflang localizados;
+  - `NextSteps` y `WinerimSupplyBlock` incorporan DE/PT;
+  - `AprenderVino` incorpora el siguiente articulo por idioma con filtro `publishedAt`;
+  - `supabase/functions/sitemap/index.ts` incluye `/soluciones/hoteles` como ruta multilingue;
+  - `supabase/functions/prerender/index.ts` incluye Hoteles en mapas localizados y labels.
+- Nueva migracion preparada:
+  - `supabase/migrations/20260706083118_add_next_wine_library_learn_wine_articles.sql`;
+  - 12 articulos, 2 grupos editoriales, 6 idiomas;
+  - Biblioteca del vino: `2026-07-20`;
+  - Aprender vino: `2026-07-27`;
+  - incluye RLS de lectura publica solo para `published=true` y `published_at <= now()`, grants `anon/authenticated/service_role`, y `ON CONFLICT`.
+- Verificaciones locales pasadas:
+  - `npx tsc --noEmit --pretty false`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` (`20` tests);
+  - `npm run build`;
+  - `git diff --check`;
+  - Playwright local sobre 11 rutas: herramientas DE/PT, Hoteles DE/PT, Grupos DE/PT y Aprender vino ES/PT.
+- Avisos no bloqueantes:
+  - Browserslist/caniuse-lite antiguo;
+  - chunks grandes de Vite ya existentes.
+
+### Decisiones
+
+- No exponer articulos futuros en `llms.txt`/`llms-full.txt` antes de su fecha.
+- Resolver primero paridad humano/bot/canonical/hreflang antes de seguir ampliando contenido en bruto.
+- Mantener el publish de Edge Functions como requisito para cerrar el problema de Googlebot en Hoteles.
+
+### Hipotesis
+
+- Tras publicar Edge Functions, el sitemap subira al menos con la entrada multilingue de Hoteles y Googlebot dejara de recibir home para `/de/loesungen/hotels`.
+- La migracion `20260706083118...` no mostrara articulos hasta sus lunes correspondientes por la politica RLS y el filtro de `published_at`.
+
+### Tareas pendientes
+
+- Aplicar en Lovable Cloud la migracion `20260706083118_add_next_wine_library_learn_wine_articles.sql`.
+- Publicar frontend, `sitemap` y `prerender` desde Lovable.
+- Revalidar produccion post-publish:
+  - sitemap contiene Hoteles DE/PT;
+  - Googlebot Hoteles DE/PT recibe canonical/H1 localizado;
+  - herramientas DE/PT no tienen fallback EN;
+  - Aprender vino no muestra los articulos futuros hasta `2026-07-27`;
+  - no aparecen futuras URLs en `llms`/sitemap antes de fecha.
