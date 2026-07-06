@@ -2,6 +2,32 @@
 
 ## 2026-07-06
 
+### URLs legales largas y footer productivo
+
+#### Hechos
+
+- Se publicaron en `main` las rutas largas `/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Se desplego Worker `winerim-proxy` Version ID `8b257e6a-c8c4-4814-8e94-29b7597702ac`.
+- Produccion valida ambas URLs con `200`, canonical propio, `noindex, follow` y sin `Pagina no encontrada`.
+- El footer visible de la home apunta ya a `/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Los redirects legacy `/privacy-policy`, `/terms-of-service` y `/condiciones-de-servicio-2` apuntan a las slugs largas correctas.
+
+#### Decisiones
+
+- Adoptar las slugs largas como URLs legales principales en espanol.
+- Mantener `noindex, follow` para paginas legales y excluirlas del sitemap organico.
+- Mantener `/privacidad` y `/terminos` como compatibilidad.
+- Aplicar un fallback y parche de footer en Worker porque Lovable no habia publicado aun el bundle React correcto en produccion.
+
+#### Hipotesis
+
+- El parche de footer en Worker puede retirarse o dejarse inofensivo cuando Lovable publique el frontend correcto.
+
+#### Tareas pendientes
+
+- Revalidar footer tras el siguiente publish Lovable.
+- Si el bundle React ya sale correcto de origen, evaluar retirar el parche Worker en una limpieza posterior.
+
 ### Lote DE/PT, canonicals, hreflang y paridad humano-bot
 
 #### Hechos

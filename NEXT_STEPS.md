@@ -1,5 +1,32 @@
 # Next Steps
 
+## Actualizacion 2026-07-06: URLs legales cerradas
+
+## Hechos
+
+- `https://winerim.wine/politica-privacidad` y `https://winerim.wine/terminos-y-condiciones-del-contrato` funcionan en produccion.
+- Ambas rutas devuelven `200`, canonical propio, `noindex, follow` y contenido legal.
+- El footer visible de la home ya enlaza a las dos slugs largas.
+- Worker publicado: `8b257e6a-c8c4-4814-8e94-29b7597702ac`.
+- Commits en `main`:
+  - `606f2cd fix: serve legal pages from worker fallback`;
+  - `0ffb13d fix: patch legal footer links at edge`.
+
+## Prioridad 1: seguimiento legal/footer
+
+1. Tras el siguiente publish Lovable, comprobar si el bundle React ya sirve las slugs largas sin depender del parche Worker.
+2. Mantener los redirects legacy activos:
+   - `/privacy-policy`;
+   - `/terms-of-service`;
+   - `/condiciones-de-servicio-2`.
+3. No incluir estas paginas en sitemap organico; mantener `noindex, follow`.
+
+## Prioridad 2: retomar trabajo principal pendiente
+
+1. Completar traduccion profunda de herramientas online.
+2. Corregir DE/PT en `Hoteles` y `GruposRestauracion`.
+3. Retomar Biblioteca del vino y Aprender vino una vez cerrada la paridad i18n prioritaria.
+
 ## Actualizacion 2026-07-06: retomar lote DE/PT tras primer corte local
 
 ## Hechos

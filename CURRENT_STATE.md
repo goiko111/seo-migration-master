@@ -1,5 +1,44 @@
 # Current State
 
+## Actualizacion 2026-07-06: URLs legales y footer en produccion
+
+## Hechos
+
+- Las URLs `https://winerim.wine/politica-privacidad` y `https://winerim.wine/terminos-y-condiciones-del-contrato` funcionan en produccion.
+- Ambas devuelven `HTTP 200`, `x-worker-branch: worker-static-human`, `X-Robots-Tag: noindex, follow`, canonical propio y contenido legal sin `Pagina no encontrada`.
+- El Worker publicado es `winerim-proxy` Version ID `8b257e6a-c8c4-4814-8e94-29b7597702ac`.
+- El footer visible de la home, probado con navegador real, enlaza ya a:
+  - `/politica-privacidad`;
+  - `/terminos-y-condiciones-del-contrato`.
+- Los enlaces antiguos de footer `/privacidad` y `/terminos` ya no aparecen en la home renderizada.
+- Los redirects legacy funcionan:
+  - `/privacy-policy` -> `/politica-privacidad`;
+  - `/terms-of-service` -> `/terminos-y-condiciones-del-contrato`;
+  - `/condiciones-de-servicio-2` -> `/terminos-y-condiciones-del-contrato`.
+- Commits publicados en `main`:
+  - `606f2cd fix: serve legal pages from worker fallback`;
+  - `0ffb13d fix: patch legal footer links at edge`.
+
+## Decisiones
+
+- Mantener las slugs largas como URLs legales principales en espanol.
+- Mantener `/privacidad` y `/terminos` activos como compatibilidad, no como enlaces principales.
+- Usar Worker como garantia productiva para las dos paginas legales y para el footer hasta que Lovable publique el bundle React correcto.
+
+## Hipotesis
+
+- La discrepancia previa venia de Lovable sirviendo un bundle anterior aunque `main` ya tuviera las rutas.
+- Tras el proximo publish completo de Lovable, el parche de footer del Worker sera redundante pero puede mantenerse sin impacto funcional.
+
+## Contradicciones / dudas abiertas
+
+- El frontend React en `main` ya tiene el footer corregido, pero la home productiva antes del parche Worker seguia mostrando `/privacidad` y `/terminos`; por tanto Lovable aun no habia publicado el bundle correcto en el momento de la validacion.
+
+## Tareas pendientes
+
+- Revalidar tras el siguiente publish Lovable que el footer React ya trae las slugs largas de forma nativa.
+- Retomar el backlog vigente: lote DE/PT profundo, herramientas, Hoteles/GruposRestauracion, Biblioteca del vino y Aprender vino.
+
 ## Actualizacion 2026-07-06: lote DE/PT/canonicals/hreflang en curso
 
 ## Hechos

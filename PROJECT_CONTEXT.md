@@ -1,5 +1,38 @@
 # Project Context
 
+## Actualizacion 2026-07-06: URLs legales largas y footer
+
+## Hechos
+
+- Se implementaron y publicaron en `main` las rutas legales espanolas:
+  - `/politica-privacidad`;
+  - `/terminos-y-condiciones-del-contrato`.
+- React, footer, cookies, contacto, landing Meta, simulador, Barometro, sitemap/prerender y Worker quedan sincronizados para usar las slugs largas en espanol.
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `8b257e6a-c8c4-4814-8e94-29b7597702ac`.
+- Produccion valida ambas URLs con `HTTP 200`, `x-worker-branch: worker-static-human`, `X-Robots-Tag: noindex, follow`, canonical propio y sin `Pagina no encontrada`.
+- El footer visible de la home en navegador real ya apunta a `/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Los redirects legacy quedan activos:
+  - `/privacy-policy` -> `/politica-privacidad`;
+  - `/terms-of-service` -> `/terminos-y-condiciones-del-contrato`;
+  - `/condiciones-de-servicio-2` -> `/terminos-y-condiciones-del-contrato`.
+
+## Decisiones
+
+- Las slugs largas son el destino legal principal en espanol.
+- Las paginas legales siguen como `noindex, follow` y fuera del sitemap organico.
+- Mantener `/privacidad` y `/terminos` vivos por compatibilidad.
+- Usar un fallback legal y un parche de footer en Worker mientras el bundle de Lovable termina de publicar el frontend correcto.
+
+## Hipotesis
+
+- Cuando Lovable publique de nuevo `main`, el footer React ya no necesitara depender del parche del Worker.
+- El parche del Worker es seguro porque solo cambia enlaces dentro de `footer a` y no altera contenido comercial ni SEO indexable.
+
+## Tareas pendientes
+
+- En el siguiente publish de Lovable, revalidar que el footer React ya trae las slugs largas sin depender del parche.
+- Mantener el fallback Worker hasta confirmar que Lovable sirve el bundle correcto en produccion.
+
 ## Actualizacion 2026-07-06: lote DE/PT, canonicals, hreflang y paridad humano-bot
 
 ## Hechos
