@@ -323,6 +323,36 @@ function isWorkerLinkVisible(url) {
   return !releaseAt || Date.now() >= Date.parse(releaseAt);
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function stripUnreleasedSitemapUrls(xml, site) {
+  let nextXml = xml;
+  for (const [url, releaseAt] of Object.entries(WORKER_LINK_RELEASES)) {
+    if (Date.now() >= Date.parse(releaseAt)) continue;
+    const loc = `${site}${url}`;
+    const blockPattern = new RegExp(
+      `\\s*<url>(?:(?!</url>)[\\s\\S])*?<loc>${escapeRegExp(loc)}</loc>(?:(?!</url>)[\\s\\S])*?</url>`,
+      'g',
+    );
+    nextXml = nextXml.replace(blockPattern, '');
+  }
+  return nextXml;
+}
+
+function unreleasedArticleResponse() {
+  return new Response('Not found', {
+    status: 404,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=300',
+      'X-Robots-Tag': 'noindex, follow',
+      'X-Worker-Branch': 'future-article-not-found',
+    },
+  });
+}
+
 const DISTRIBUTOR_ALTERNATES = {
   es: '/distribuidor',
   en: '/en/distributor',
@@ -2515,9 +2545,13 @@ export default {
             'apikey': env.SUPABASE_ANON_KEY,
           },
         });
-        const sitemapXml = injectWorkerDetailUrlsIntoSitemap(
-          await res.text(),
-          env.SITE_URL || 'https://winerim.wine',
+        const site = env.SITE_URL || 'https://winerim.wine';
+        const sitemapXml = stripUnreleasedSitemapUrls(
+          injectWorkerDetailUrlsIntoSitemap(
+            await res.text(),
+            site,
+          ),
+          site,
         );
         return new Response(sitemapXml, {
           headers: {
@@ -2530,6 +2564,10 @@ export default {
       } catch (e) {
         return new Response('Sitemap error', { status: 502, headers: { 'X-Worker-Branch': 'sitemap-error' } });
       }
+    }
+
+    if (!isWorkerLinkVisible(path)) {
+      return unreleasedArticleResponse();
     }
 
     // ── 2. Direct legacy redirects from Search Console samples ──

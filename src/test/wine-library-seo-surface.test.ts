@@ -286,8 +286,13 @@ describe("wine library SEO surface", () => {
     expect(aprenderVino).toContain('publishedAt: "2026-07-13T09:00:00+02:00"');
     expect(prerender).toContain("const LINK_RELEASES");
     expect(prerender).toContain("isReleasedLink");
+    expect(prerender).toContain("const ARTICLE_RELEASES");
+    expect(prerender).toContain("isReleasedArticleSlug");
     expect(worker).toContain("const WORKER_LINK_RELEASES");
     expect(worker).toContain("isWorkerLinkVisible");
+    expect(worker).toContain("stripUnreleasedSitemapUrls");
+    expect(worker).toContain("(?:(?!</url>)[\\\\s\\\\S])*?");
+    expect(worker).toContain("future-article-not-found");
     expect(llms).not.toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
     expect(llms).not.toContain("https://winerim.wine/pt/article/recomendar-vinho-por-estilos-restaurante");
     expect(llmsFull).not.toContain("https://winerim.wine/en/article/recommend-wine-by-style-restaurant");
@@ -305,6 +310,7 @@ describe("wine library SEO surface", () => {
     );
     const articlePage = readFileSync("src/pages/ArticlePage.tsx", "utf8");
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
 
     expect(migration).toContain("ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY");
     expect(migration).toContain("GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.articles TO authenticated");
@@ -327,6 +333,10 @@ describe("wine library SEO surface", () => {
     expect(articlePage).toContain("article_group");
     expect(articlePage).toContain("hreflang={article.hreflang}");
     expect(prerender).toContain("articleHreflang");
+    expect(sitemap).toContain("published_at");
+    expect(sitemap).toContain("article_group");
+    expect(sitemap).toContain("articleHreflangBlock");
+    expect(sitemap).toContain("isReleasedArticleSlug");
   });
 
   it("normalizes legacy language query URLs at the Worker edge", () => {

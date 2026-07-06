@@ -1,5 +1,76 @@
 # Current State
 
+## Actualizacion 2026-07-06: revalidacion produccion, hotfix SEO editorial y prioridad DE/PT
+
+## Hechos
+
+- Se leyeron al inicio de sesion `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- El usuario indico que ya estaban hechos los dos primeros puntos operativos:
+  - aplicar en Lovable Cloud la migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql`;
+  - publicar frontend/Edge/Worker.
+- Se revalido produccion como Googlebot:
+  - `/aprender-vino`, `/en/learn-wine`, `/it/imparare-il-vino`, `/fr/apprendre-le-vin`, `/de/wein-lernen`, `/pt/aprender-vinho` devuelven `200`, `x-prerendered: true`, canonical propio y `7` hreflang.
+  - Los hubs no enlazan la guia futura `Recomendar vino por estilos`.
+  - `llms.txt` y `llms-full.txt` devuelven `200` y no anuncian URLs futuras.
+- Contradiccion detectada en produccion:
+  - `https://winerim.wine/sitemap.xml` devuelve `200`, pero sigue incluyendo las 6 URLs futuras del grupo `learn-wine-recommend-by-style` con fecha `2026-07-13`.
+  - La Edge Function directa `sitemap` tambien incluye esas URLs futuras.
+  - Las URLs futuras responden `200` como Googlebot con prerender de articulo real antes de fecha.
+- Los agentes paralelos cerraron auditoria solo lectura:
+  - Biblioteca confirmo que REST anon/RLS no expone el grupo futuro, pero Edge Functions con service role si lo filtran mal.
+  - Aprender vino confirmo que hubs/llms estan limpios, pero sitemap/prerender dinamico de articulos no, y que los articulos productivos no emiten `hreflang`.
+  - Idiomas confirmo prioridad P0 en DE/PT y paridad humano/bot: home humana con contenido ES/canonical root, canonicals ES en contacto/precios localizados y herramientas localizadas correctas solo para bot.
+- Se preparo hotfix local en:
+  - `supabase/functions/prerender/index.ts`: bloqueo por release date y `published_at` antes/despues del fetch, y filtro de siblings.
+  - `supabase/functions/sitemap/index.ts`: seleccion de `published_at`/`article_group`, filtro de articulos futuros y alternates por `article_group` solo con siblings publicados/liberados.
+  - `cloudflare-worker-v3-hybrid.js`: limpieza de URLs futuras en sitemap y `404` con `X-Robots-Tag: noindex, follow` para rutas futuras directas.
+  - `src/test/wine-library-seo-surface.test.ts`: guardrails del hotfix.
+- Validaciones locales del hotfix:
+  - `node --check cloudflare-worker-v3-hybrid.js`: OK.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: OK.
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: OK, `20/20`.
+  - `git diff --check`: OK.
+  - `npx tsc --noEmit --pretty false`: OK.
+- `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no se ha tocado.
+
+## Decisiones
+
+- No seguir ampliando contenido masivo hasta cerrar la fuga de articulos futuros y la prioridad DE/PT de canonicals/hreflang/paridad humano-bot.
+- El bloqueo de articulos futuros debe existir aunque la RLS ya funcione, porque sitemap/prerender usan service role y pueden saltarse la visibilidad anonima.
+- Generar `hreflang` de articulos por `article_group` en sitemap, no solo en React/prerender.
+- Mantener el cambio ajeno de `WineListAnalyzerTool.tsx` fuera de este trabajo.
+
+## Hipotesis
+
+- Produccion esta mezclada: frontend/hubs/llms parecen publicados, pero Edge `sitemap`/`prerender` y/o Worker productivo no reflejan aun todo el parche local.
+- Al publicar el hotfix, Google dejara de descubrir los articulos del 2026-07-13 antes de fecha y las URLs directas dejaran de ser indexables temporalmente.
+- La falta de `hreflang` en articulos publicados puede debilitar la consolidacion multilingue aunque el contenido este correcto.
+
+## Contradicciones / dudas abiertas
+
+- El usuario confirma Edge/Worker publicados, pero la produccion observada no ejecuta el hotfix local completo para sitemap/prerender de articulos futuros.
+- RLS/REST anonima esta bien, pero no basta para Edge Functions con service role.
+- Bot y humano no ven lo mismo en DE/PT y herramientas localizadas; no debe tratarse como un detalle cosmetico.
+
+## Tareas pendientes
+
+- Commiter/pushear el hotfix sin incluir `src/components/WineListAnalyzerTool.tsx`.
+- Publicar Edge Functions `sitemap` y `prerender` desde Lovable Cloud y desplegar Worker con el hotfix.
+- Purgar o revalidar cache de:
+  - `/sitemap.xml`;
+  - las 6 URLs futuras del 2026-07-13.
+- Revalidar produccion tras deploy:
+  - sitemap sin URLs futuras;
+  - URLs futuras con `404/noindex` antes de fecha;
+  - articulos publicados con hreflang por `article_group`;
+  - hubs Aprender vino y `llms` sin regresiones.
+- Empezar lote i18n P0/P1:
+  - home DE/PT;
+  - contacto/precios canonicals;
+  - herramientas localizadas React + SEO;
+  - formularios DE/PT;
+  - guardrails humano JS vs Googlebot.
+
 ## Actualizacion 2026-07-05: sincronizacion editorial, permisos `articles` y auditoria de idiomas
 
 ## Hechos

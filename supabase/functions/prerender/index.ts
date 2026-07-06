@@ -68,6 +68,26 @@ function isReleasedLink(url: string): boolean {
   return !releaseAt || Date.now() >= Date.parse(releaseAt);
 }
 
+const ARTICLE_RELEASES: Record<string, string> = {
+  'recomendar-vino-por-estilos-restaurante': '2026-07-13T09:00:00+02:00',
+  'recommend-wine-by-style-restaurant_en': '2026-07-13T09:05:00+02:00',
+  'raccomandare-vino-per-stile-ristorante_it': '2026-07-13T09:10:00+02:00',
+  'recommander-vin-par-style-restaurant_fr': '2026-07-13T09:15:00+02:00',
+  'wein-nach-stil-empfehlen-restaurant_de': '2026-07-13T09:20:00+02:00',
+  'recomendar-vinho-por-estilos-restaurante_pt': '2026-07-13T09:25:00+02:00',
+};
+
+function isReleasedArticleSlug(slug: string): boolean {
+  const releaseAt = ARTICLE_RELEASES[slug];
+  return !releaseAt || Date.now() >= Date.parse(releaseAt);
+}
+
+function isPublishedAtReleased(publishedAt: unknown): boolean {
+  if (typeof publishedAt !== 'string' || !publishedAt.trim()) return true;
+  const timestamp = Date.parse(publishedAt);
+  return Number.isNaN(timestamp) || timestamp <= Date.now();
+}
+
 const WINE_LIBRARY_HOME_HREFLANG: HreflangEntry[] = [
   { lang: 'es', url: `${SITE}/biblioteca-vino` },
   { lang: 'en', url: `${SITE}/en/wine-library` },
@@ -7047,6 +7067,8 @@ function visiblePublishedAtOrFilter(nowIso: string): string {
 }
 
 async function renderArticle(slug: string): Promise<string | null> {
+  if (!isReleasedArticleSlug(slug)) return null;
+
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
   const articleParams = new URLSearchParams({
@@ -7066,6 +7088,10 @@ async function renderArticle(slug: string): Promise<string | null> {
   if (!Array.isArray(data) || data.length === 0) return null;
 
   const article = data[0];
+  if (!isPublishedAtReleased(article.published_at) || !isReleasedArticleSlug(article.slug || slug)) {
+    return null;
+  }
+
   const body = article.body || '';
   const lang = normalizeArticleLang(article.lang) || inferArticleLang(article.slug || slug);
   const baseSlug = stripArticleLangSuffix(article.slug || slug);
@@ -7076,7 +7102,7 @@ async function renderArticle(slug: string): Promise<string | null> {
     const siblingParams = new URLSearchParams({
       article_group: `eq.${article.article_group}`,
       published: 'eq.true',
-      select: 'slug,lang',
+      select: 'slug,lang,published_at',
     });
     siblingParams.set('or', visiblePublishedAtOrFilter(new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')));
 
@@ -7091,6 +7117,7 @@ async function renderArticle(slug: string): Promise<string | null> {
       for (const sibling of siblings) {
         const siblingLang = normalizeArticleLang(sibling.lang);
         if (!siblingLang || !sibling.slug) continue;
+        if (!isReleasedArticleSlug(sibling.slug) || !isPublishedAtReleased(sibling.published_at)) continue;
         urlsByLang.set(siblingLang, `${SITE}${localizedArticlePath(siblingLang, stripArticleLangSuffix(sibling.slug))}`);
       }
     }

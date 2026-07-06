@@ -1,5 +1,72 @@
 # Next Steps
 
+## Actualizacion 2026-07-06: retomar tras revalidacion sitemap/prerender e idiomas
+
+## Hechos
+
+- La migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql` y el publish frontend/Edge/Worker fueron confirmados por el usuario como hechos.
+- Produccion esta parcialmente correcta:
+  - hubs `Aprender vino` en 6 idiomas: OK;
+  - `llms.txt` y `llms-full.txt`: OK;
+  - sitemap/prerender de articulos futuros: NO OK.
+- Las 6 URLs futuras del grupo `learn-wine-recommend-by-style` (`2026-07-13`) siguen apareciendo en sitemap y respondiendo `200` como Googlebot antes de fecha.
+- El hotfix local prepara:
+  - bloqueo de articulos futuros en `prerender`;
+  - limpieza de URLs futuras en `sitemap`;
+  - `404/noindex` de Worker para rutas futuras directas;
+  - `hreflang` de articulos por `article_group` en sitemap.
+- La prioridad fuerte de idiomas queda confirmada: DE/PT, canonicals, hreflang y paridad humano/bot antes de ampliar mas contenido.
+- `src/components/WineListAnalyzerTool.tsx` sigue siendo cambio ajeno/preexistente y debe quedar fuera salvo orden explicita.
+
+## Prioridad 1: publicar y revalidar hotfix SEO editorial
+
+1. Pushear el hotfix sin incluir `src/components/WineListAnalyzerTool.tsx`.
+2. En Lovable Cloud, publicar Edge Functions:
+   - `supabase/functions/sitemap/index.ts`;
+   - `supabase/functions/prerender/index.ts`.
+3. Desplegar Cloudflare Worker `winerim-proxy` con el codigo actual.
+4. Revalidar produccion:
+   - `https://winerim.wine/sitemap.xml` no debe contener:
+     - `/article/recomendar-vino-por-estilos-restaurante`;
+     - `/en/article/recommend-wine-by-style-restaurant`;
+     - `/it/article/raccomandare-vino-per-stile-ristorante`;
+     - `/fr/article/recommander-vin-par-style-restaurant`;
+     - `/de/article/wein-nach-stil-empfehlen-restaurant`;
+     - `/pt/article/recomendar-vinho-por-estilos-restaurante`.
+   - Esas 6 URLs deben devolver `404` + `X-Robots-Tag: noindex, follow` o no renderizar articulo antes del 2026-07-13.
+   - Articulos publicados deben llevar alternates por `article_group` en sitemap/prerender.
+   - Hubs `Aprender vino` y `llms` deben seguir sin enlaces futuros.
+
+## Prioridad 2: lote i18n DE/PT y paridad humano/bot
+
+1. Corregir home DE/PT:
+   - H1/cuerpo localizados;
+   - canonical `/de` y `/pt`, no root.
+2. Corregir canonicals:
+   - `/de/kontakt`;
+   - `/pt/precos`;
+   - revisar equivalentes de contacto/precios en otros idiomas.
+3. Localizar herramientas React que el Worker ya tapa para bots:
+   - comparador de distribuidores;
+   - calculadora de fuga de margen;
+   - otras herramientas online que aparezcan en sitemap.
+4. Localizar formularios DE/PT, empezando por `ContactFormFields`.
+5. Crear guardrails:
+   - humano JS vs Googlebot;
+   - canonical path;
+   - H1;
+   - `html lang`;
+   - hreflang count;
+   - ausencia de frases ES prohibidas.
+
+## Prioridad 3: seguir Biblioteca / Aprender solo tras estabilizar
+
+1. Mantener programado el lote Biblioteca para `2026-07-20`:
+   - `wine-library-by-the-glass-stock-rotation`.
+2. Mantener programado el lote Aprender vino para `2026-07-27`:
+   - `learn-wine-read-label-restaurant`.
+3. No publicar nuevas tandas hasta que la cadena `published_at` + sitemap + prerender + hreflang este revalidada.
+
 ## Actualizacion 2026-07-05: retomar tras sincronizacion editorial y auditoria de idiomas
 
 ## Hechos

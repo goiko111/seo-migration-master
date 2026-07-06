@@ -1,5 +1,45 @@
 # Decisions Log
 
+## 2026-07-06
+
+### Hotfix editorial SEO, sitemap/prerender y prioridad de idiomas
+
+#### Hechos
+
+- Se revisaron los cuatro documentos fuente de verdad al inicio de sesion.
+- El usuario confirmo que la migracion correctiva `20260705081417_harden_articles_editorial_permissions.sql` y el publish frontend/Edge/Worker ya estaban hechos.
+- La revalidacion productiva confirmo que hubs de `Aprender vino` y `llms` estan limpios y no anuncian la guia futura del `2026-07-13`.
+- La revalidacion productiva detecto que sitemap y prerender dinamico siguen exponiendo las 6 URLs futuras del grupo `learn-wine-recommend-by-style`.
+- Los agentes Biblioteca y Aprender vino confirmaron que la fuga viene de Edge Functions/Worker con service role, no de RLS anonima.
+- El agente Idiomas confirmo prioridad P0 en DE/PT y paridad humano/bot: home con fallback ES, canonicals cruzados y herramientas localizadas correctas para bot pero no para React humano.
+- Se preparo un hotfix local para:
+  - bloquear articulos futuros en `prerender`;
+  - retirarlos de `sitemap`;
+  - devolver `404/noindex` desde Worker para rutas futuras directas;
+  - generar `hreflang` de articulos en sitemap por `article_group`.
+- Validaciones locales clave pasaron: Worker syntax, Deno check, test SEO focal, `git diff --check` y TypeScript.
+
+#### Decisiones
+
+- Frenar nueva expansion masiva de contenido hasta cerrar fuga de URLs futuras y paridad DE/PT/canonicals/hreflang.
+- Tratar `published_at` como regla de producto y SEO, no solo como visibilidad de frontend.
+- Aplicar filtros defensivos por fecha en Edge/Worker aunque RLS ya oculte futuros a usuarios anonimos.
+- Usar `article_group` como fuente de verdad para alternates de articulos.
+- No incluir `src/components/WineListAnalyzerTool.tsx` en el hotfix porque es cambio ajeno/preexistente.
+
+#### Hipotesis
+
+- El estado productivo actual esta parcialmente publicado: algunas capas reflejan el codigo nuevo y otras no.
+- Publicar Edge `sitemap`/`prerender` y Worker juntos debe resolver la incoherencia entre hubs/llms y sitemap/prerender.
+- El lote DE/PT puede aportar mas impacto SEO internacional inmediato que otra tanda de articulos sin solucionar fallback/canonical.
+
+#### Tareas pendientes
+
+- Pushear el hotfix.
+- Publicar Edge Functions `sitemap` y `prerender` desde Lovable Cloud.
+- Desplegar Worker y revalidar sitemap/prerender.
+- Abrir lote i18n P0/P1 para home DE/PT, canonicals de contacto/precios, herramientas localizadas y formularios.
+
 ## 2026-07-05
 
 ### Sincronizacion editorial, RLS de articulos y auditoria multilingue

@@ -290,6 +290,14 @@ function articleLangFromRow(article: { slug?: string; lang?: string | null }): s
   return match ? match[1] : 'es';
 }
 
+interface ArticleSitemapRow {
+  slug?: string;
+  updated_at?: string | null;
+  lang?: string | null;
+  published_at?: string | null;
+  article_group?: string | null;
+}
+
 function articlePath(article: { slug?: string; lang?: string | null }): string | null {
   if (!article.slug) return null;
   const lang = articleLangFromRow(article);
@@ -310,6 +318,37 @@ function hreflangBlock(esPath: string): string {
       xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${SITE}${path}"/>\n`;
     }
   }
+  return xml;
+}
+
+function articleHreflangBlock(article: ArticleSitemapRow, articleGroups: Map<string, ArticleSitemapRow[]>): string {
+  if (!article.article_group) return '';
+
+  const siblings = articleGroups.get(article.article_group) || [];
+  const urlsByLang = new Map<string, string>();
+
+  for (const sibling of siblings) {
+    if (!sibling.slug || !isReleasedArticleSlug(sibling.slug) || !isPublishedAtReleased(sibling.published_at)) continue;
+    const path = articlePath(sibling);
+    if (!path) continue;
+    urlsByLang.set(articleLangFromRow(sibling), `${SITE}${path}`);
+  }
+
+  if (urlsByLang.size <= 1) return '';
+
+  let xml = '';
+  const defaultUrl = urlsByLang.get('es') || urlsByLang.get(articleLangFromRow(article));
+  if (defaultUrl) {
+    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${defaultUrl}"/>\n`;
+  }
+
+  for (const lang of ['es', 'en', 'it', 'fr', 'de', 'pt']) {
+    const url = urlsByLang.get(lang);
+    if (url) {
+      xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${url}"/>\n`;
+    }
+  }
+
   return xml;
 }
 
@@ -774,6 +813,26 @@ function visiblePublishedAtOrFilter(nowIso: string): string {
   return `(published_at.is.null,published_at.lte.${nowIso})`;
 }
 
+const ARTICLE_RELEASES: Record<string, string> = {
+  'recomendar-vino-por-estilos-restaurante': '2026-07-13T09:00:00+02:00',
+  'recommend-wine-by-style-restaurant_en': '2026-07-13T09:05:00+02:00',
+  'raccomandare-vino-per-stile-ristorante_it': '2026-07-13T09:10:00+02:00',
+  'recommander-vin-par-style-restaurant_fr': '2026-07-13T09:15:00+02:00',
+  'wein-nach-stil-empfehlen-restaurant_de': '2026-07-13T09:20:00+02:00',
+  'recomendar-vinho-por-estilos-restaurante_pt': '2026-07-13T09:25:00+02:00',
+};
+
+function isReleasedArticleSlug(slug: string): boolean {
+  const releaseAt = ARTICLE_RELEASES[slug];
+  return !releaseAt || Date.now() >= Date.parse(releaseAt);
+}
+
+function isPublishedAtReleased(publishedAt: unknown): boolean {
+  if (typeof publishedAt !== 'string' || !publishedAt.trim()) return true;
+  const timestamp = Date.parse(publishedAt);
+  return Number.isNaN(timestamp) || timestamp <= Date.now();
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -787,7 +846,7 @@ Deno.serve(async (req) => {
     const nowIso = nowDate.toISOString().replace(/\.\d{3}Z$/, 'Z');
     const articleParams = new URLSearchParams({
       published: 'eq.true',
-      select: 'slug,updated_at,lang',
+      select: 'slug,updated_at,lang,published_at,article_group',
       order: 'updated_at.desc',
     });
     articleParams.set('or', visiblePublishedAtOrFilter(nowIso));
@@ -846,10 +905,17 @@ Deno.serve(async (req) => {
 
     // ── Dynamic: blog articles ──
     if (Array.isArray(articles)) {
+      const articleGroups = new Map<string, ArticleSitemapRow[]>();
+      for (const article of articles as ArticleSitemapRow[]) {
+        if (!article.article_group) continue;
+        articleGroups.set(article.article_group, [...(articleGroups.get(article.article_group) || []), article]);
+      }
+
       for (const article of articles) {
+        if (!article.slug || !isReleasedArticleSlug(article.slug) || !isPublishedAtReleased(article.published_at)) continue;
         const lastmod = article.updated_at ? article.updated_at.split('T')[0] : now;
         const path = articlePath(article);
-        if (path) xml += urlBlock(path, lastmod, 'monthly', '0.6');
+        if (path) xml += urlBlock(path, lastmod, 'monthly', '0.6', articleHreflangBlock(article, articleGroups));
       }
     }
 
