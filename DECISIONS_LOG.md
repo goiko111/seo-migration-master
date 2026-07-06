@@ -18,6 +18,10 @@
   - devolver `404/noindex` desde Worker para rutas futuras directas;
   - generar `hreflang` de articulos en sitemap por `article_group`.
 - Validaciones locales clave pasaron: Worker syntax, Deno check, test SEO focal, `git diff --check` y TypeScript.
+- El hotfix se pusheo como `0c372cd fix: harden editorial article release gating`.
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `1b93b814-2ce0-4b88-b920-d882c70515d6`.
+- Tras el deploy del Worker, el sitemap publico queda sin URLs futuras y las 6 URLs futuras devuelven `404/noindex` en `winerim.wine`.
+- El despliegue CLI de Edge Functions sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; Lovable debe publicar `sitemap` y `prerender`.
 
 #### Decisiones
 
@@ -35,9 +39,8 @@
 
 #### Tareas pendientes
 
-- Pushear el hotfix.
 - Publicar Edge Functions `sitemap` y `prerender` desde Lovable Cloud.
-- Desplegar Worker y revalidar sitemap/prerender.
+- Revalidar Edge directa y articulos publicados con `hreflang` por `article_group`.
 - Abrir lote i18n P0/P1 para home DE/PT, canonicals de contacto/precios, herramientas localizadas y formularios.
 
 ## 2026-07-05

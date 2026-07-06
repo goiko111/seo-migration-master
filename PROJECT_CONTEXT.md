@@ -12,6 +12,10 @@
 - Los articulos dinamicos publicados no estaban emitiendo `hreflang` en sitemap productivo; local queda preparado para generar alternates por `article_group` solo con siblings publicados y ya liberados.
 - El agente de idiomas confirmo prioridad fuerte en DE/PT: home humana con fallback espanol/canonical root, canonicals ES en contacto/precios localizados y herramientas localizadas correctas para bot pero no para humano React.
 - Se puso en marcha trabajo paralelo con tres agentes: Biblioteca, Aprender vino e Idiomas. Los tres hicieron auditoria solo lectura y no editaron archivos.
+- Se pusheo el hotfix `0c372cd fix: harden editorial article release gating` a `origin/main`.
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `1b93b814-2ce0-4b88-b920-d882c70515d6`.
+- Tras el deploy del Worker, el sitemap publico `https://winerim.wine/sitemap.xml` devuelve `2336` URLs, `0` hits futuros y mantiene `12558` alternates; las 6 URLs futuras del 2026-07-13 devuelven `404` con `X-Robots-Tag: noindex, follow`.
+- El deploy CLI de Edge Functions sigue bloqueado por falta de `SUPABASE_ACCESS_TOKEN`; la Edge Function directa `sitemap` aun devuelve `2294` URLs e incluye `6` futuras hasta que Lovable publique `sitemap`/`prerender`.
 
 ## Decisiones
 
@@ -28,10 +32,10 @@
 
 ## Tareas pendientes
 
-- Publicar el hotfix local de Edge/Worker que bloquea articulos futuros y limpia sitemap.
-- Revalidar produccion tras ese deploy:
-  - sitemap sin las 6 URLs del 2026-07-13;
-  - URLs futuras devolviendo `404/noindex` o sin prerender de articulo;
+- Publicar desde Lovable Cloud las Edge Functions `sitemap` y `prerender` del hotfix.
+- Revalidar produccion tras ese deploy Edge:
+  - Edge Function directa `sitemap` sin las 6 URLs del 2026-07-13;
+  - URLs futuras sin prerender de articulo tambien si se llama directo a Edge;
   - articulos publicados con alternates/hreflang por `article_group`;
   - hubs y `llms` manteniendose limpios.
 - Abrir el lote i18n prioritario:

@@ -31,6 +31,16 @@
   - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: OK, `20/20`.
   - `git diff --check`: OK.
   - `npx tsc --noEmit --pretty false`: OK.
+- El hotfix fue commiteado y pusheado como `0c372cd fix: harden editorial article release gating`.
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `1b93b814-2ce0-4b88-b920-d882c70515d6`.
+- Revalidacion productiva tras Worker:
+  - `https://winerim.wine/sitemap.xml`: `200`, `x-worker-branch: sitemap-worker-detail-bridge`, `2336` URLs, `12558` `xhtml:link`, `0` URLs futuras.
+  - Las 6 URLs futuras del `2026-07-13` devuelven `404`, `x-worker-branch: future-article-not-found` y `X-Robots-Tag: noindex, follow`.
+  - Los hubs `Aprender vino` siguen con `200`, canonical propio, `7` hreflang y sin enlaces futuros.
+  - `llms.txt` y `llms-full.txt` siguen sin URLs futuras.
+- El despliegue CLI de Edge Functions fallo por falta de `SUPABASE_ACCESS_TOKEN`.
+- La Edge Function directa `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/sitemap` sigue desfasada: `2294` URLs y `6` URLs futuras.
+- Los articulos publicados aun no reflejan en produccion el nuevo `hreflang` por `article_group` hasta que Lovable publique `sitemap`/`prerender`.
 - `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no se ha tocado.
 
 ## Decisiones
@@ -54,14 +64,13 @@
 
 ## Tareas pendientes
 
-- Commiter/pushear el hotfix sin incluir `src/components/WineListAnalyzerTool.tsx`.
-- Publicar Edge Functions `sitemap` y `prerender` desde Lovable Cloud y desplegar Worker con el hotfix.
+- Publicar Edge Functions `sitemap` y `prerender` desde Lovable Cloud.
 - Purgar o revalidar cache de:
   - `/sitemap.xml`;
   - las 6 URLs futuras del 2026-07-13.
 - Revalidar produccion tras deploy:
-  - sitemap sin URLs futuras;
-  - URLs futuras con `404/noindex` antes de fecha;
+  - Edge directa sin URLs futuras;
+  - URLs futuras sin prerender de articulo al llamar directo a Edge;
   - articulos publicados con hreflang por `article_group`;
   - hubs Aprender vino y `llms` sin regresiones.
 - Empezar lote i18n P0/P1:

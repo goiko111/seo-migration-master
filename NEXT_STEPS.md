@@ -15,26 +15,35 @@
   - limpieza de URLs futuras en `sitemap`;
   - `404/noindex` de Worker para rutas futuras directas;
   - `hreflang` de articulos por `article_group` en sitemap.
+- Hotfix pusheado:
+  - `0c372cd fix: harden editorial article release gating`.
+- Worker desplegado:
+  - `winerim-proxy` Version ID `1b93b814-2ce0-4b88-b920-d882c70515d6`.
+- Estado productivo tras Worker:
+  - sitemap publico: `2336` URLs, `0` URLs futuras del 2026-07-13;
+  - las 6 URLs futuras devuelven `404/noindex`;
+  - hubs y `llms` siguen limpios.
+- Bloqueo pendiente:
+  - Edge Functions directas no se pudieron desplegar por CLI porque falta `SUPABASE_ACCESS_TOKEN`;
+  - Edge directa `sitemap` aun contiene `6` URLs futuras hasta que Lovable publique `sitemap`/`prerender`.
 - La prioridad fuerte de idiomas queda confirmada: DE/PT, canonicals, hreflang y paridad humano/bot antes de ampliar mas contenido.
 - `src/components/WineListAnalyzerTool.tsx` sigue siendo cambio ajeno/preexistente y debe quedar fuera salvo orden explicita.
 
 ## Prioridad 1: publicar y revalidar hotfix SEO editorial
 
-1. Pushear el hotfix sin incluir `src/components/WineListAnalyzerTool.tsx`.
-2. En Lovable Cloud, publicar Edge Functions:
+1. En Lovable Cloud, publicar Edge Functions:
    - `supabase/functions/sitemap/index.ts`;
    - `supabase/functions/prerender/index.ts`.
-3. Desplegar Cloudflare Worker `winerim-proxy` con el codigo actual.
-4. Revalidar produccion:
-   - `https://winerim.wine/sitemap.xml` no debe contener:
+2. Revalidar Edge directa y produccion:
+   - `https://pwkqbcgjrhoyxrsmcypw.supabase.co/functions/v1/sitemap` no debe contener:
      - `/article/recomendar-vino-por-estilos-restaurante`;
      - `/en/article/recommend-wine-by-style-restaurant`;
      - `/it/article/raccomandare-vino-per-stile-ristorante`;
      - `/fr/article/recommander-vin-par-style-restaurant`;
      - `/de/article/wein-nach-stil-empfehlen-restaurant`;
      - `/pt/article/recomendar-vinho-por-estilos-restaurante`.
-   - Esas 6 URLs deben devolver `404` + `X-Robots-Tag: noindex, follow` o no renderizar articulo antes del 2026-07-13.
-   - Articulos publicados deben llevar alternates por `article_group` en sitemap/prerender.
+   - La Edge Function `prerender` no debe renderizar esas 6 URLs como articulo antes del 2026-07-13.
+   - Articulos publicados deben llevar alternates por `article_group` en sitemap y prerender.
    - Hubs `Aprender vino` y `llms` deben seguir sin enlaces futuros.
 
 ## Prioridad 2: lote i18n DE/PT y paridad humano/bot
