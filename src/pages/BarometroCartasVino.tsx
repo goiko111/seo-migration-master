@@ -522,7 +522,8 @@ const BarometroCartasVino = () => {
   const t = getI18n(i18n, lang);
   const canonicalPath = localePath(ES_PATH);
   const canonical = `${CANONICAL_DOMAIN}${canonicalPath}`;
-  const datasetLicense = `${CANONICAL_DOMAIN}${localePath("/terminos")}`;
+  const datasetLicensePath = lang === "es" ? "/terminos-y-condiciones-del-contrato" : localePath("/terminos");
+  const datasetLicense = `${CANONICAL_DOMAIN}${datasetLicensePath}`;
 
   const structuredData = [
     {

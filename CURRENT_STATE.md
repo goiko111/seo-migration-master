@@ -6425,3 +6425,46 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
   - herramientas DE/PT no tienen fallback EN;
   - Aprender vino no muestra los articulos futuros hasta `2026-07-27`;
   - no aparecen futuras URLs en `llms`/sitemap antes de fecha.
+
+## Actualizacion 2026-07-06: URLs legales y footer preparados
+
+### Hechos
+
+- Rama actual: `codex/winerim-lead-magnets-recursos`.
+- Se añadieron rutas frontend para:
+  - `/politica-privacidad`;
+  - `/terminos-y-condiciones-del-contrato`.
+- Las paginas `Privacidad` y `Terminos` detectan la slug española larga y emiten canonical propio con `noindex, follow`.
+- Footer, banner de cookies, landing Meta, contacto, simulador y schema de Barometro apuntan ahora a las URLs legales principales en español.
+- `src/i18n/types.ts`, `supabase/functions/sitemap/index.ts` y `supabase/functions/prerender/index.ts` tienen mapeos multilingues para las slugs largas.
+- `supabase/functions/prerender/index.ts` incluye paginas estaticas legales para las dos nuevas URLs y footer estatico actualizado.
+- `cloudflare-worker-v3-hybrid.js` reconoce las dos rutas como conocidas/noindex y redirige legacy a las slugs largas.
+- Verificaciones locales pasadas:
+  - `git diff --check`;
+  - `npx tsc --noEmit --pretty false`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts` (`21` tests);
+  - `npm run build`;
+  - Playwright local en `http://127.0.0.1:5178/politica-privacidad` y `/terminos-y-condiciones-del-contrato`.
+- Avisos no bloqueantes:
+  - Browserslist/caniuse-lite antiguo;
+  - chunks grandes de Vite ya existentes.
+
+### Decisiones
+
+- Las URLs legales principales en español pasan a ser las slugs largas solicitadas.
+- `/privacidad` y `/terminos` se mantienen funcionando como compatibilidad.
+- Las paginas legales siguen siendo `noindex, follow` y no se fuerzan al sitemap organico.
+
+### Hipotesis
+
+- Cuando Lovable/Cloudflare publiquen este commit, las dos URLs dejaran de producir `Not found` en produccion.
+- Search Console deberia verlas como paginas legales no indexables, no como URLs candidatas a posicionamiento.
+
+### Tareas pendientes
+
+- Publicar frontend, Worker y Edge Functions.
+- Revalidar produccion:
+  - `https://winerim.wine/politica-privacidad`;
+  - `https://winerim.wine/terminos-y-condiciones-del-contrato`;
+  - Googlebot para ambas;
+  - redirects `/privacy-policy`, `/terms-of-service` y `/condiciones-de-servicio-2`.

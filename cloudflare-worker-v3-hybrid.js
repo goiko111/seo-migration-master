@@ -68,8 +68,8 @@ const SEO_ALIASES = {
 
 // ─── High-confidence legacy URLs surfaced by Search Console ───
 const LEGACY_DIRECT_REDIRECTS = {
-  '/privacy-policy': '/privacidad',
-  '/terms-of-service': '/terminos',
+  '/privacy-policy': '/politica-privacidad',
+  '/terms-of-service': '/terminos-y-condiciones-del-contrato',
   '/home': '/',
   '/homepage': '/',
   '/en/homepage': '/en',
@@ -96,7 +96,7 @@ const LEGACY_DIRECT_REDIRECTS = {
   '/analiza-tu-carta': '/analisis-carta',
   '/formulario-contacto': '/contacto',
   '/formulario-de-contacto-web-link-carta': '/contacto',
-  '/condiciones-de-servicio-2': '/terminos',
+  '/condiciones-de-servicio-2': '/terminos-y-condiciones-del-contrato',
   '/carta-vinos-digital': '/software-carta-de-vinos',
   '/carta_vinos_digital': '/software-carta-de-vinos',
   '/choosing-wine-a-not-so-easy-task-for-many-diners': '/software-carta-de-vinos',
@@ -921,7 +921,7 @@ const WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD = '2026-07-03';
 const WORKER_PRESENTATION_SITEMAP_LASTMOD = '2026-07-03';
 
 const WORKER_TERMS_PATHS = {
-  es: '/terminos',
+  es: '/terminos-y-condiciones-del-contrato',
   en: '/en/terms',
   it: '/it/termini',
   fr: '/fr/conditions',
@@ -970,7 +970,7 @@ function renderWorkerStaticPrerender(path, site) {
     inLanguage: page.lang,
     creator: { '@type': 'Organization', name: 'Winerim', url: site },
     publisher: { '@type': 'Organization', name: 'Winerim', url: site },
-    license: `${site}${WORKER_TERMS_PATHS[page.lang] || '/terminos'}`,
+    license: `${site}${WORKER_TERMS_PATHS[page.lang] || '/terminos-y-condiciones-del-contrato'}`,
     measurementTechnique: 'Aggregated and anonymized wine list analysis',
     variableMeasured: ['references per wine list', 'price ranges', 'by-the-glass offer', 'regions', 'grapes', 'styles', 'pairings', 'rotation', 'margin', 'dead stock signals'],
   }) : '';
@@ -1237,7 +1237,9 @@ const NOINDEX_ROUTES = new Set([
   '/gracias',
   '/unsubscribe',
   '/privacidad',
+  '/politica-privacidad',
   '/terminos',
+  '/terminos-y-condiciones-del-contrato',
   '/en/privacy',
   '/en/terms',
   '/it/privacy',
@@ -1289,7 +1291,9 @@ const SEO_EXACT = new Set([
   '/presentacion',
   '/barometro-cartas-vino-2026',
   '/privacidad',
+  '/politica-privacidad',
   '/terminos',
+  '/terminos-y-condiciones-del-contrato',
   // Producto
   '/producto/inteligencia-dinamica',
   '/producto/winerim-core',

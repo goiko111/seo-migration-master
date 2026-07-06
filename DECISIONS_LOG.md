@@ -4162,3 +4162,36 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Publicar Edge Functions y frontend.
 - Aplicar migracion editorial `20260706083118...`.
 - Revalidar sitemap, Googlebot Hoteles DE/PT, herramientas DE/PT y hubs de Aprender vino/Biblioteca tras publish.
+
+## 2026-07-06
+
+### URLs legales largas y footer
+
+#### Hechos
+
+- El usuario pidio que funcionen:
+  - `/terminos-y-condiciones-del-contrato`;
+  - `/politica-privacidad`.
+- Ya existian `/terminos` y `/privacidad`, pero no las slugs largas solicitadas.
+- El footer y varios enlaces legales internos seguian apuntando a `/privacidad` o `/terminos`.
+
+#### Decisiones
+
+- Usar `/politica-privacidad` y `/terminos-y-condiciones-del-contrato` como destinos legales principales en español.
+- Mantener `/privacidad` y `/terminos` activos por compatibilidad historica.
+- Mantener todas las paginas legales con `noindex, follow` y fuera del sitemap organico.
+- Redirigir legacy Search Console:
+  - `/privacy-policy` a `/politica-privacidad`;
+  - `/terms-of-service` y `/condiciones-de-servicio-2` a `/terminos-y-condiciones-del-contrato`.
+- Conservar las URLs legales localizadas ya existentes para EN/IT/FR/DE/PT.
+
+#### Hipotesis
+
+- La combinacion React Router + Worker + prerender evita que humano, Googlebot y LLM bots reciban estados distintos para estas URLs.
+- Mantener las slugs antiguas vivas reduce riesgo de rotura y no deberia generar indexacion por estar noindex.
+
+#### Tareas pendientes asociadas
+
+- Publicar el commit actual.
+- Revalidar produccion humana y bot.
+- Si Search Console mantiene errores, inspeccionar la URL concreta para confirmar si es cache, Worker no publicado o prerender no publicado.

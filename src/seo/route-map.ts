@@ -306,7 +306,9 @@ export const seoRouteMap: SeoRouteEntry[] = [
   // LEGAL (ES)
   // ─────────────────────────────────────────────
   { path: "/privacidad", canonical: `${BASE}/privacidad`, lang: "es", type: "legal", intent: "política privacidad winerim" },
+  { path: "/politica-privacidad", canonical: `${BASE}/politica-privacidad`, lang: "es", type: "legal", intent: "política privacidad winerim" },
   { path: "/terminos", canonical: `${BASE}/terminos`, lang: "es", type: "legal", intent: "términos y condiciones winerim" },
+  { path: "/terminos-y-condiciones-del-contrato", canonical: `${BASE}/terminos-y-condiciones-del-contrato`, lang: "es", type: "legal", intent: "términos y condiciones contrato winerim" },
 
   // ─────────────────────────────────────────────
   // ADMIN (noindex)

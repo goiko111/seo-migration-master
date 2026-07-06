@@ -4646,3 +4646,47 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - siguiente lote de Biblioteca del vino tras validar el lote `2026-07-20`;
    - siguiente lote de Aprender vino tras validar el lote `2026-07-27`;
    - revisar paridad DE/PT antes de ampliar masivamente.
+
+## Actualizacion 2026-07-06: publicar y revalidar URLs legales
+
+## Hechos
+
+- Queda preparado en repo el soporte completo para:
+  - `https://winerim.wine/politica-privacidad`;
+  - `https://winerim.wine/terminos-y-condiciones-del-contrato`.
+- El footer español y los enlaces legales principales apuntan a esas slugs largas.
+- Las slugs antiguas `/privacidad` y `/terminos` siguen funcionando por compatibilidad.
+- Las paginas legales estan marcadas como `noindex, follow` y excluidas del sitemap organico.
+- Validacion local pasada con TypeScript, test SEO, build y Playwright renderizado.
+
+## Decisiones
+
+- Publicar estas rutas como fix independiente del trabajo editorial de Biblioteca/Aprender vino.
+- No pedir indexacion de paginas legales; solo comprobar cobertura/estado si Search Console las reporta.
+
+## Hipotesis
+
+- Si produccion sigue mostrando `Not found`, faltara publicar alguna de estas capas: frontend, Worker o Edge `prerender`.
+- Los redirects legacy deberian limpiar parte de los errores historicos de Search Console.
+
+## Tareas pendientes listas para retomar
+
+1. Publicar frontend desde Lovable.
+2. Publicar Edge Functions:
+   - `supabase/functions/prerender`;
+   - `supabase/functions/sitemap`.
+3. Publicar Worker Cloudflare si el deploy no lo hace automaticamente.
+4. Revalidar produccion humana:
+   - `https://winerim.wine/politica-privacidad` -> `200`, H1 `Política de Privacidad`, canonical propio;
+   - `https://winerim.wine/terminos-y-condiciones-del-contrato` -> `200`, H1 `Términos de Uso`, canonical propio;
+   - footer con ambas URLs largas.
+5. Revalidar bot:
+   - Googlebot recibe `x-prerendered: true` o HTML legal equivalente;
+   - `meta robots`/cabecera efectiva: `noindex, follow`.
+6. Revalidar redirects:
+   - `/privacy-policy` -> `/politica-privacidad`;
+   - `/terms-of-service` -> `/terminos-y-condiciones-del-contrato`;
+   - `/condiciones-de-servicio-2` -> `/terminos-y-condiciones-del-contrato`.
+7. En Search Console:
+   - no solicitar indexacion;
+   - usar inspeccion de URL solo para comprobar que ya no hay `Not found`.

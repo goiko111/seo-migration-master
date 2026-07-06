@@ -499,3 +499,38 @@
   - herramientas DE/PT no tienen fallback ingles;
   - Aprender vino no muestra articulos futuros antes de fecha;
   - las URLs futuras no aparecen en `llms` ni sitemap antes de su `published_at`.
+
+## Actualizacion 2026-07-06: URLs legales largas y footer
+
+### Hechos
+
+- Se pidio que funcionen las URLs:
+  - `https://winerim.wine/terminos-y-condiciones-del-contrato`;
+  - `https://winerim.wine/politica-privacidad`.
+- Se añadieron rutas React españolas para ambas URLs, manteniendo vivas `/terminos` y `/privacidad` por compatibilidad.
+- El footer humano apunta ahora en español a las slugs largas y mantiene las rutas localizadas existentes para EN/IT/FR/DE/PT.
+- Se sincronizaron `ROUTE_MAP`, `sitemap`, `prerender`, Worker y `src/seo/route-map.ts`.
+- El Worker redirige legacy:
+  - `/privacy-policy` -> `/politica-privacidad`;
+  - `/terms-of-service` -> `/terminos-y-condiciones-del-contrato`;
+  - `/condiciones-de-servicio-2` -> `/terminos-y-condiciones-del-contrato`.
+- Las nuevas URLs legales quedan servidas con `noindex, follow` y excluidas del sitemap organico.
+
+### Decisiones
+
+- Usar las slugs largas como destino principal en footer y enlaces legales españoles.
+- No eliminar las slugs antiguas para evitar roturas de enlaces o referencias historicas.
+- Mantener privacidad y terminos como paginas legales no indexables, no como landings SEO.
+
+### Hipotesis
+
+- Tras publicar frontend, Worker y Edge Functions, Search Console deberia dejar de ver esas URLs como `Not found`.
+- Las slugs antiguas pueden seguir existiendo sin perjudicar si no se enlazan como destino principal y permanecen noindex.
+
+### Tareas pendientes
+
+- Publicar frontend, `sitemap`, `prerender` y Worker.
+- Revalidar en produccion:
+  - humano: ambas URLs devuelven `200`, H1 correcto y footer nuevo;
+  - Googlebot: ambas URLs devuelven HTML legal, canonical propio y `noindex, follow`;
+  - legacy redirects devuelven `301` a las slugs largas.

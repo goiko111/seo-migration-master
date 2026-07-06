@@ -215,7 +215,9 @@ const esRoutes = (
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminShell />} />
     <Route path="/privacidad" element={<Privacidad />} />
+    <Route path="/politica-privacidad" element={<Privacidad />} />
     <Route path="/terminos" element={<Terminos />} />
+    <Route path="/terminos-y-condiciones-del-contrato" element={<Terminos />} />
     <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
     <Route path="/analisis-carta" element={<AnalizaCarta />} />
     <Route path="/simulador-carta" element={<SimuladorCarta />} />
