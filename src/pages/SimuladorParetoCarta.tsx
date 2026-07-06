@@ -24,6 +24,8 @@ type WineRow = {
   days: string;
 };
 
+type SegmentKey = "core" | "ballast" | "exploration" | "support";
+
 const initialRows: WineRow[] = [
   { name: "Rioja crianza", revenue: "1800", margin: "62", stock: "18", days: "12" },
   { name: "Ribera premium", revenue: "1200", margin: "58", stock: "9", days: "28" },
@@ -38,7 +40,161 @@ const parseNumber = (value: string) => {
   return Number.isFinite(parsed) ? parsed : 0;
 };
 
-const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const euroFormatters = {
+  es: new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  de: new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  pt: new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+};
+
+const pageCopy = {
+  es: {
+    eyebrow: "Demo · Pareto de carta",
+    intro: "Identifica qué referencias sostienen el margen, cuáles solo acompañan y cuáles podrían estar ocupando carta, stock y atención sin aportar suficiente retorno.",
+    inputTitle: "Introduce referencias clave",
+    inputSubtitle: "Usa facturación y margen estimados del último mes.",
+    fields: {
+      reference: "Referencia",
+      revenue: "Ventas €",
+      margin: "Margen %",
+      stock: "Stock",
+      days: "Días sin venta",
+    },
+    calculate: "Calcular Pareto",
+    reset: "Restaurar ejemplo",
+    reading: "Lectura Pareto",
+    coreCount: (count: number) => `${count} referencias sostienen el núcleo`,
+    revenue: "Facturación",
+    weightedMargin: "Margen ponderado",
+    refsToReview: "Refs. a revisar",
+    marginShare: (share: number, cumulative: number) => `${share}% del margen simulado · acumulado ${cumulative}%`,
+    segments: {
+      core: { label: "Núcleo", action: "Proteger disponibilidad y discurso de venta" },
+      ballast: { label: "Lastre", action: "No reponer y mover por recomendación controlada" },
+      exploration: { label: "Exploración", action: "Probar con maridaje, copa o carta destacada" },
+      support: { label: "Soporte", action: "Mantener si cubre una función clara" },
+    } as Record<SegmentKey, { label: string; action: string }>,
+    cards: [
+      { icon: Target, title: "Núcleo", text: "Vinos que sostienen el margen. Hay que proteger disponibilidad, discurso y PVP." },
+      { icon: Wine, title: "Exploración", text: "Referencias con sentido de carta pero todavía sin tracción suficiente. Necesitan una hipótesis." },
+      { icon: CheckCircle, title: "Lastre", text: "Vinos con stock, días sin venta o baja contribución. No siempre sobran, pero hay que justificarlos." },
+    ],
+    ctaEyebrow: "Pareto automático",
+    ctaTitle: "Winerim encuentra el 20% que sostiene tu carta sin hojas manuales.",
+    ctaText: "La plataforma cruza ventas, stock, PVP, coste, rotación y señales de Márgenes para saber qué proteger, qué empujar y qué dejar de comprar.",
+    ctaPrimary: "Descargar auditoría Pareto 80/20",
+    ctaSecondary: "Solicitar demo",
+    faqs: [
+      { q: "¿Qué es el Pareto 80/20 aplicado a una carta de vinos?", a: "Es una lectura para detectar qué pocas referencias concentran gran parte de la facturación o margen, y cuáles consumen espacio y stock con poco retorno." },
+      { q: "¿Un vino fuera del núcleo debería eliminarse?", a: "No necesariamente. Puede tener función gastronómica, de imagen o de maridaje. Lo importante es que su función esté clara." },
+      { q: "¿Cómo se calcula en Winerim?", a: "Con datos conectados de carta, ventas, stock, coste, PVP, rotación y señales de Márgenes, no con estimaciones manuales." },
+    ],
+    relatedTitle: "Sigue analizando rentabilidad",
+    relatedLinks: [
+      { to: "/herramientas/calculadora-fuga-margen", label: "Calculadora de fuga de margen", type: "tool" },
+      { to: "/herramientas/simulador-senal-margenes", label: "Simulador de señal de Márgenes", type: "tool" },
+      { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", label: "Guía para detectar vinos muertos", type: "guide" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
+    ],
+  },
+  de: {
+    eyebrow: "Demo · Pareto der Weinkarte",
+    intro: "Erkennen Sie, welche Referenzen die Marge tragen, welche nur begleiten und welche Karte, Bestand und Aufmerksamkeit belegen, ohne genug Rendite zu liefern.",
+    inputTitle: "Schlüsselreferenzen eingeben",
+    inputSubtitle: "Nutzen Sie geschätzten Umsatz und Marge des letzten Monats.",
+    fields: {
+      reference: "Referenz",
+      revenue: "Verkäufe €",
+      margin: "Marge %",
+      stock: "Bestand",
+      days: "Tage ohne Verkauf",
+    },
+    calculate: "Pareto berechnen",
+    reset: "Beispiel zurücksetzen",
+    reading: "Pareto-Auswertung",
+    coreCount: (count: number) => `${count} Referenzen tragen den Kern`,
+    revenue: "Umsatz",
+    weightedMargin: "Gewichtete Marge",
+    refsToReview: "Zu prüfende Ref.",
+    marginShare: (share: number, cumulative: number) => `${share}% der simulierten Marge · kumuliert ${cumulative}%`,
+    segments: {
+      core: { label: "Kern", action: "Verfügbarkeit und Verkaufsargumentation schützen" },
+      ballast: { label: "Ballast", action: "Nicht nachkaufen und gezielt über Empfehlungen bewegen" },
+      exploration: { label: "Erkundung", action: "Mit Pairing, Glaswein oder hervorgehobener Karte testen" },
+      support: { label: "Stütze", action: "Behalten, wenn eine klare Funktion erfüllt wird" },
+    } as Record<SegmentKey, { label: string; action: string }>,
+    cards: [
+      { icon: Target, title: "Kern", text: "Weine, die die Marge tragen. Verfügbarkeit, Verkaufssprache und Verkaufspreis müssen geschützt werden." },
+      { icon: Wine, title: "Erkundung", text: "Referenzen mit Sinn für die Karte, aber noch ohne ausreichende Traktion. Sie brauchen eine Hypothese." },
+      { icon: CheckCircle, title: "Ballast", text: "Weine mit Bestand, Tagen ohne Verkauf oder niedrigem Beitrag. Sie sind nicht immer überflüssig, müssen aber begründet werden." },
+    ],
+    ctaEyebrow: "Automatischer Pareto",
+    ctaTitle: "Winerim findet die 20%, die Ihre Karte tragen, ohne manuelle Tabellen.",
+    ctaText: "Die Plattform verbindet Verkäufe, Bestand, Verkaufspreis, Kosten, Rotation und Margensignale, damit Sie wissen, was geschützt, aktiv verkauft und nicht mehr gekauft werden sollte.",
+    ctaPrimary: "Pareto-80/20-Audit herunterladen",
+    ctaSecondary: "Demo anfragen",
+    faqs: [
+      { q: "Was bedeutet Pareto 80/20 bei einer Weinkarte?", a: "Es ist eine Auswertung, die zeigt, welche wenigen Referenzen einen großen Teil von Umsatz oder Marge konzentrieren und welche Platz und Bestand mit wenig Rendite verbrauchen." },
+      { q: "Sollte ein Wein außerhalb des Kerns entfernt werden?", a: "Nicht unbedingt. Er kann eine gastronomische, imagebildende oder Pairing-Funktion haben. Wichtig ist, dass diese Funktion klar ist." },
+      { q: "Wie wird das in Winerim berechnet?", a: "Mit verbundenen Daten aus Karte, Verkäufen, Bestand, Kosten, Verkaufspreis, Rotation und Margensignalen, nicht mit manuellen Schätzungen." },
+    ],
+    relatedTitle: "Rentabilität weiter analysieren",
+    relatedLinks: [
+      { to: "/herramientas/calculadora-fuga-margen", label: "Margenverlust-Rechner", type: "tool" },
+      { to: "/herramientas/simulador-senal-margenes", label: "Margensignal-Simulator", type: "tool" },
+      { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", label: "Leitfaden zum Erkennen toter Weine", type: "guide" },
+      { to: "/producto/inteligencia-dinamica", label: "Dynamische Intelligenz", type: "solution" },
+    ],
+  },
+  pt: {
+    eyebrow: "Demo · Pareto da carta",
+    intro: "Identifique que referências sustentam a margem, quais apenas acompanham e quais podem estar a ocupar carta, stock e atenção sem retorno suficiente.",
+    inputTitle: "Introduza referências-chave",
+    inputSubtitle: "Use faturação e margem estimadas do último mês.",
+    fields: {
+      reference: "Referência",
+      revenue: "Vendas €",
+      margin: "Margem %",
+      stock: "Stock",
+      days: "Dias sem venda",
+    },
+    calculate: "Calcular Pareto",
+    reset: "Restaurar exemplo",
+    reading: "Leitura Pareto",
+    coreCount: (count: number) => `${count} referências sustentam o núcleo`,
+    revenue: "Faturação",
+    weightedMargin: "Margem ponderada",
+    refsToReview: "Refs. a rever",
+    marginShare: (share: number, cumulative: number) => `${share}% da margem simulada · acumulado ${cumulative}%`,
+    segments: {
+      core: { label: "Núcleo", action: "Proteger disponibilidade e discurso de venda" },
+      ballast: { label: "Lastro", action: "Não repor e mover por recomendação controlada" },
+      exploration: { label: "Exploração", action: "Testar com harmonização, copo ou destaque na carta" },
+      support: { label: "Suporte", action: "Manter se cumprir uma função clara" },
+    } as Record<SegmentKey, { label: string; action: string }>,
+    cards: [
+      { icon: Target, title: "Núcleo", text: "Vinhos que sustentam a margem. É preciso proteger disponibilidade, discurso e PVP." },
+      { icon: Wine, title: "Exploração", text: "Referências com sentido de carta, mas ainda sem tração suficiente. Precisam de uma hipótese." },
+      { icon: CheckCircle, title: "Lastro", text: "Vinhos com stock, dias sem venda ou baixa contribuição. Nem sempre sobram, mas é preciso justificá-los." },
+    ],
+    ctaEyebrow: "Pareto automático",
+    ctaTitle: "A Winerim encontra os 20% que sustentam a sua carta sem folhas manuais.",
+    ctaText: "A plataforma cruza vendas, stock, PVP, custo, rotação e sinais de Margens para saber o que proteger, o que impulsionar e o que deixar de comprar.",
+    ctaPrimary: "Descarregar auditoria Pareto 80/20",
+    ctaSecondary: "Solicitar demo",
+    faqs: [
+      { q: "O que é o Pareto 80/20 aplicado a uma carta de vinhos?", a: "É uma leitura para detetar que poucas referências concentram grande parte da faturação ou margem, e quais consomem espaço e stock com pouco retorno." },
+      { q: "Um vinho fora do núcleo deve ser eliminado?", a: "Não necessariamente. Pode ter função gastronómica, de imagem ou de harmonização. O importante é que a sua função esteja clara." },
+      { q: "Como é calculado na Winerim?", a: "Com dados ligados de carta, vendas, stock, custo, PVP, rotação e sinais de Margens, não com estimativas manuais." },
+    ],
+    relatedTitle: "Continue a analisar rentabilidade",
+    relatedLinks: [
+      { to: "/herramientas/calculadora-fuga-margen", label: "Calculadora de fuga de margem", type: "tool" },
+      { to: "/herramientas/simulador-senal-margenes", label: "Simulador de sinal de Margens", type: "tool" },
+      { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", label: "Guia para detetar vinhos mortos", type: "guide" },
+      { to: "/producto/inteligencia-dinamica", label: "Inteligência dinâmica", type: "solution" },
+    ],
+  },
+};
 
 const seoCopy = {
   es: {
@@ -82,6 +238,8 @@ const seoCopy = {
 const SimuladorParetoCarta = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const s = seoCopy[lang] || seoCopy.es;
+  const copy = pageCopy[lang] || pageCopy.es;
+  const euro = euroFormatters[lang as keyof typeof euroFormatters] || euroFormatters.es;
   const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-pareto-carta-vinos")}`;
   const [rows, setRows] = useState(initialRows);
 
@@ -104,26 +262,18 @@ const SimuladorParetoCarta = () => {
       cumulative += row.contribution;
       const share = totalContribution > 0 ? row.contribution / totalContribution : 0;
       const cumulativeShare = totalContribution > 0 ? cumulative / totalContribution : 0;
-      const segment =
+      const segmentKey: SegmentKey =
         cumulativeShare <= 0.8
-          ? "Núcleo"
+          ? "core"
           : row.stock >= 10 && row.days >= 90
-            ? "Lastre"
+            ? "ballast"
             : row.margin >= 60 && row.revenue < totalRevenue * 0.08
-              ? "Exploración"
-              : "Soporte";
-      const action =
-        segment === "Núcleo"
-          ? "Proteger disponibilidad y discurso de venta"
-          : segment === "Lastre"
-            ? "No reponer y mover por recomendación controlada"
-            : segment === "Exploración"
-              ? "Probar con maridaje, copa o carta destacada"
-              : "Mantener si cubre una función clara";
-      return { ...row, index, share, cumulativeShare, segment, action };
+              ? "exploration"
+              : "support";
+      return { ...row, index, share, cumulativeShare, segmentKey };
     });
 
-    const topCount = classified.filter((row) => row.segment === "Núcleo").length;
+    const topCount = classified.filter((row) => row.segmentKey === "core").length;
     return { classified, totalRevenue, totalContribution, topCount };
   }, [rows]);
 
@@ -145,13 +295,13 @@ const SimuladorParetoCarta = () => {
           <div className="max-w-6xl mx-auto px-6 md:px-12">
             <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
-              Demo · Pareto de carta
+              {copy.eyebrow}
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
               {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
-              Identifica qué referencias sostienen el margen, cuáles solo acompañan y cuáles podrían estar ocupando carta, stock y atención sin aportar suficiente retorno.
+              {copy.intro}
             </motion.p>
           </div>
         </section>
@@ -164,8 +314,8 @@ const SimuladorParetoCarta = () => {
                   <PieChart size={20} className="text-wine" />
                 </div>
                 <div>
-                  <h2 className="font-heading text-2xl font-semibold">Introduce referencias clave</h2>
-                  <p className="text-sm text-muted-foreground">Usa facturación y margen estimados del último mes.</p>
+                  <h2 className="font-heading text-2xl font-semibold">{copy.inputTitle}</h2>
+                  <p className="text-sm text-muted-foreground">{copy.inputSubtitle}</p>
                 </div>
               </div>
 
@@ -174,23 +324,23 @@ const SimuladorParetoCarta = () => {
                   <div key={index} className="rounded-lg border border-border bg-background/60 p-4">
                     <div className="grid md:grid-cols-[1.2fr_repeat(4,minmax(0,0.8fr))] gap-3">
                       <div className="space-y-2">
-                        <Label htmlFor={`wine-${index}`}>Referencia</Label>
+                        <Label htmlFor={`wine-${index}`}>{copy.fields.reference}</Label>
                         <Input id={`wine-${index}`} value={row.name} onChange={(e) => updateRow(index, "name", e.target.value)} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor={`revenue-${index}`}>Ventas €</Label>
+                        <Label htmlFor={`revenue-${index}`}>{copy.fields.revenue}</Label>
                         <Input id={`revenue-${index}`} inputMode="decimal" value={row.revenue} onChange={(e) => updateRow(index, "revenue", e.target.value)} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor={`margin-${index}`}>Margen %</Label>
+                        <Label htmlFor={`margin-${index}`}>{copy.fields.margin}</Label>
                         <Input id={`margin-${index}`} inputMode="decimal" value={row.margin} onChange={(e) => updateRow(index, "margin", e.target.value)} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor={`stock-${index}`}>Stock</Label>
+                        <Label htmlFor={`stock-${index}`}>{copy.fields.stock}</Label>
                         <Input id={`stock-${index}`} inputMode="decimal" value={row.stock} onChange={(e) => updateRow(index, "stock", e.target.value)} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor={`days-${index}`}>Días sin venta</Label>
+                        <Label htmlFor={`days-${index}`}>{copy.fields.days}</Label>
                         <Input id={`days-${index}`} inputMode="decimal" value={row.days} onChange={(e) => updateRow(index, "days", e.target.value)} />
                       </div>
                     </div>
@@ -203,12 +353,12 @@ const SimuladorParetoCarta = () => {
                   className="flex-1 bg-wine hover:bg-wine/90"
                   onClick={() => trackAction("tool_use", "tool", "simulador-pareto-carta-vinos")}
                 >
-                  Calcular Pareto
+                  {copy.calculate}
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
                 <Button type="button" variant="outline" className="flex-1" onClick={() => setRows(initialRows)}>
                   <RotateCcw size={16} className="mr-2" />
-                  Restaurar ejemplo
+                  {copy.reset}
                 </Button>
               </div>
             </div>
@@ -218,8 +368,8 @@ const SimuladorParetoCarta = () => {
             <div className="rounded-xl border border-border bg-gradient-card p-6">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
-                  <p className="text-sm text-muted-foreground">Lectura Pareto</p>
-                  <h2 className="font-heading text-2xl font-semibold">{result.topCount} referencias sostienen el núcleo</h2>
+                  <p className="text-sm text-muted-foreground">{copy.reading}</p>
+                  <h2 className="font-heading text-2xl font-semibold">{copy.coreCount(result.topCount)}</h2>
                 </div>
                 <span className="inline-flex items-center gap-2 rounded-full border border-wine/30 bg-wine/10 px-3 py-1.5 text-xs font-semibold text-wine">
                   <BarChart3 size={14} />
@@ -229,16 +379,16 @@ const SimuladorParetoCarta = () => {
 
               <div className="grid sm:grid-cols-3 xl:grid-cols-1 gap-3 mb-6">
                 <div className="rounded-lg border border-border bg-background/70 p-4">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Facturación</p>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">{copy.revenue}</p>
                   <p className="text-2xl font-semibold mt-1">{euro.format(result.totalRevenue)}</p>
                 </div>
                 <div className="rounded-lg border border-border bg-background/70 p-4">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Margen ponderado</p>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">{copy.weightedMargin}</p>
                   <p className="text-2xl font-semibold mt-1">{result.totalRevenue > 0 ? Math.round((result.totalContribution / result.totalRevenue) * 100) : 0}%</p>
                 </div>
                 <div className="rounded-lg border border-border bg-background/70 p-4">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Refs. a revisar</p>
-                  <p className="text-2xl font-semibold mt-1">{result.classified.filter((row) => row.segment === "Lastre").length}</p>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">{copy.refsToReview}</p>
+                  <p className="text-2xl font-semibold mt-1">{result.classified.filter((row) => row.segmentKey === "ballast").length}</p>
                 </div>
               </div>
 
@@ -248,14 +398,14 @@ const SimuladorParetoCarta = () => {
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div>
                         <p className="font-semibold">{row.name}</p>
-                        <p className="text-xs text-muted-foreground">{row.action}</p>
+                        <p className="text-xs text-muted-foreground">{copy.segments[row.segmentKey].action}</p>
                       </div>
-                      <span className="rounded-full bg-wine/10 px-3 py-1 text-xs font-semibold text-wine">{row.segment}</span>
+                      <span className="rounded-full bg-wine/10 px-3 py-1 text-xs font-semibold text-wine">{copy.segments[row.segmentKey].label}</span>
                     </div>
                     <div className="h-2 rounded-full bg-muted overflow-hidden">
                       <div className="h-full bg-wine" style={{ width: `${Math.round(row.cumulativeShare * 100)}%` }} />
                     </div>
-                    <p className="text-xs text-muted-foreground mt-2">{Math.round(row.share * 100)}% del margen simulado · acumulado {Math.round(row.cumulativeShare * 100)}%</p>
+                    <p className="text-xs text-muted-foreground mt-2">{copy.marginShare(Math.round(row.share * 100), Math.round(row.cumulativeShare * 100))}</p>
                   </div>
                 ))}
               </div>
@@ -265,11 +415,7 @@ const SimuladorParetoCarta = () => {
 
         <section className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
           <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { icon: Target, title: "Núcleo", text: "Vinos que sostienen el margen. Hay que proteger disponibilidad, discurso y PVP." },
-              { icon: Wine, title: "Exploración", text: "Referencias con sentido de carta pero todavía sin tracción suficiente. Necesitan una hipótesis." },
-              { icon: CheckCircle, title: "Lastre", text: "Vinos con stock, días sin venta o baja contribución. No siempre sobran, pero hay que justificarlos." },
-            ].map((item) => {
+            {copy.cards.map((item) => {
               const Icon = item.icon;
               return (
                 <ScrollReveal key={item.title}>
@@ -286,17 +432,17 @@ const SimuladorParetoCarta = () => {
 
         <section className="max-w-5xl mx-auto px-6 md:px-12 pb-20">
           <div className="rounded-2xl border border-wine/20 bg-wine text-white p-8 md:p-10">
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white/70 mb-4">Pareto automático</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Winerim encuentra el 20% que sostiene tu carta sin hojas manuales.</h2>
+            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white/70 mb-4">{copy.ctaEyebrow}</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">{copy.ctaTitle}</h2>
             <p className="text-white/80 leading-relaxed max-w-3xl mb-6">
-              La plataforma cruza ventas, stock, PVP, coste, rotación y señales de Márgenes para saber qué proteger, qué empujar y qué dejar de comprar.
+              {copy.ctaText}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg" variant="secondary">
-                <Link to={localePath("/recursos/auditoria-pareto-80-20-carta-vinos")}>Descargar auditoría Pareto 80/20</Link>
+                <Link to={localePath("/recursos/auditoria-pareto-80-20-carta-vinos")}>{copy.ctaPrimary}</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-transparent text-white border-white/40 hover:bg-white/10">
-                <Link to={localePath("/demo")}>Solicitar demo</Link>
+                <Link to={localePath("/demo")}>{copy.ctaSecondary}</Link>
               </Button>
             </div>
           </div>
@@ -304,30 +450,12 @@ const SimuladorParetoCarta = () => {
 
         <FAQSection
           schemaId="simulador-pareto-carta-vinos"
-          faqs={[
-            {
-              q: "¿Qué es el Pareto 80/20 aplicado a una carta de vinos?",
-              a: "Es una lectura para detectar qué pocas referencias concentran gran parte de la facturación o margen, y cuáles consumen espacio y stock con poco retorno.",
-            },
-            {
-              q: "¿Un vino fuera del núcleo debería eliminarse?",
-              a: "No necesariamente. Puede tener función gastronómica, de imagen o de maridaje. Lo importante es que su función esté clara.",
-            },
-            {
-              q: "¿Cómo se calcula en Winerim?",
-              a: "Con datos conectados de carta, ventas, stock, coste, PVP, rotación y señales de Márgenes, no con estimaciones manuales.",
-            },
-          ]}
+          faqs={copy.faqs}
         />
 
         <InternalLinks
-          title="Sigue analizando rentabilidad"
-          links={[
-            { to: "/herramientas/calculadora-fuga-margen", label: "Calculadora de fuga de margen", type: "tool" },
-            { to: "/herramientas/simulador-senal-margenes", label: "Simulador de señal de Márgenes", type: "tool" },
-            { to: "/guias/como-detectar-vinos-muertos-referencias-frenan-rentabilidad", label: "Guía para detectar vinos muertos", type: "guide" },
-            { to: "/producto/inteligencia-dinamica", label: "Inteligencia dinámica", type: "solution" },
-          ]}
+          title={copy.relatedTitle}
+          links={copy.relatedLinks.map((link) => ({ ...link, to: localePath(link.to) }))}
         />
       </main>
       <Footer />
