@@ -1081,6 +1081,42 @@ const STATIC_WORKER_PRERENDER_PAGES = {
   ...CLOUDRIM_WORKER_PAGES,
   ...SAVIA_WORKER_PAGES,
   ...ONLINE_TOOL_WORKER_PAGES,
+  '/politica-privacidad': {
+    lang: 'es',
+    title: 'Politica de Privacidad | Winerim',
+    description: 'Politica de privacidad de Winerim.',
+    h1: 'Politica de Privacidad',
+    subtitle: 'Informacion sobre el tratamiento de datos personales en Winerim.',
+    canonical: '/politica-privacidad',
+    schemaType: 'WebPage',
+    robots: 'noindex, follow',
+    sections: [
+      ['Responsable del tratamiento', 'Winerim S.L. es responsable del tratamiento de los datos personales recogidos a traves de este sitio web.'],
+      ['Datos recogidos', 'Recogemos los datos que nos proporcionas voluntariamente a traves de formularios de contacto, demo y solicitudes comerciales.'],
+      ['Finalidad', 'Los datos se utilizan para gestionar solicitudes de informacion, demos, contacto comercial y comunicaciones relacionadas con Winerim.'],
+      ['Base legal y derechos', 'El tratamiento se basa en el consentimiento del interesado. Puedes ejercer tus derechos de acceso, rectificacion y supresion escribiendo a info@winerim.com.'],
+      ['Cookies y conservacion', 'El sitio puede usar cookies propias y de terceros para mejorar la experiencia. Los datos se conservan mientras exista interes mutuo y durante los plazos legales.'],
+    ],
+    links: [['Inicio', '/'], ['Contacto', '/contacto'], ['Demo', '/demo'], ['Terminos', '/terminos-y-condiciones-del-contrato']],
+  },
+  '/terminos-y-condiciones-del-contrato': {
+    lang: 'es',
+    title: 'Terminos y Condiciones del Contrato | Winerim',
+    description: 'Terminos y condiciones de uso y contratacion de Winerim.',
+    h1: 'Terminos de Uso',
+    subtitle: 'Condiciones generales aplicables al uso del sitio y servicios de Winerim.',
+    canonical: '/terminos-y-condiciones-del-contrato',
+    schemaType: 'WebPage',
+    robots: 'noindex, follow',
+    sections: [
+      ['Titularidad', 'Este sitio web es propiedad de Winerim S.L. El acceso y uso del sitio implica la aceptacion de estos terminos.'],
+      ['Uso del servicio', 'El usuario se compromete a utilizar el sitio web y sus servicios de forma licita y conforme a la normativa aplicable.'],
+      ['Propiedad intelectual', 'Todos los contenidos del sitio son propiedad de Winerim o de sus licenciantes, salvo indicacion expresa en contrario.'],
+      ['Limitacion de responsabilidad', 'Winerim no se responsabiliza de los danos que puedan derivarse del uso indebido del sitio web o de interrupciones ajenas a su control.'],
+      ['Modificaciones y legislacion', 'Winerim puede modificar estos terminos cuando sea necesario. Estos terminos se rigen por la legislacion espanola.'],
+    ],
+    links: [['Inicio', '/'], ['Contacto', '/contacto'], ['Demo', '/demo'], ['Privacidad', '/politica-privacidad']],
+  },
   '/presentacion': {
     lang: 'es',
     title: 'Presentacion Winerim | Carta inteligente de vinos para restaurantes',
@@ -1458,6 +1494,11 @@ const WORKER_TERMS_PATHS = {
   pt: '/pt/termos',
 };
 
+const WORKER_STATIC_HUMAN_ROUTES = new Set([
+  '/politica-privacidad',
+  '/terminos-y-condiciones-del-contrato',
+]);
+
 function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -1521,7 +1562,7 @@ function renderWorkerStaticPrerender(path, site) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(page.title)}</title>
   <meta name="description" content="${escapeHtml(page.description)}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="${escapeHtml(page.robots || 'index, follow')}">
   <link rel="canonical" href="${canonical}">
   ${alternateLinks}
   <meta property="og:type" content="website">
@@ -2752,7 +2793,25 @@ export default {
       });
     }
 
-    // ── 7. Bot traffic → prerender ──
+    // ── 7. Legal static fallback for humans while Lovable frontend catches up ──
+    if (WORKER_STATIC_HUMAN_ROUTES.has(path)) {
+      const workerStaticHtml = renderWorkerStaticPrerender(path, env.SITE_URL || 'https://winerim.wine');
+      if (workerStaticHtml) {
+        const robotsTag = getXRobotsTag(path, hostname);
+        const headers = {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=300, s-maxage=3600',
+          'X-Worker-Branch': 'worker-static-human',
+        };
+        if (robotsTag) headers['X-Robots-Tag'] = robotsTag;
+        return new Response(workerStaticHtml, {
+          status: 200,
+          headers,
+        });
+      }
+    }
+
+    // ── 8. Bot traffic → prerender ──
     if (isBot(ua)) {
       const workerStaticHtml = renderWorkerStaticPrerender(path, env.SITE_URL || 'https://winerim.wine');
       if (workerStaticHtml) {

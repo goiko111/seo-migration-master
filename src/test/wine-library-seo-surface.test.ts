@@ -475,5 +475,8 @@ describe("wine library SEO surface", () => {
     expect(prerender).toContain("localizedStaticUrl('/terminos-y-condiciones-del-contrato')");
     expect(worker).toContain("'/politica-privacidad'");
     expect(worker).toContain("'/terminos-y-condiciones-del-contrato'");
+    expect(worker).toContain("const WORKER_STATIC_HUMAN_ROUTES");
+    expect(worker).toContain("'X-Worker-Branch': 'worker-static-human'");
+    expect(worker).toContain("content=\"${escapeHtml(page.robots || 'index, follow')}\"");
   });
 });
