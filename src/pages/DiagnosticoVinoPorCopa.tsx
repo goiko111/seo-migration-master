@@ -497,10 +497,11 @@ const DiagnosticoVinoPorCopa = () => {
 
     return { score, cobertura, estilosFaltantes, precioMin, precioMax, margenMedio, bajoMargen, sinVentas, ventasTotales, diagnosticos, validCount: validCopas.length };
   }, [validCopas, t]);
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/diagnostico-vino-por-copa")}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/diagnostico-vino-por-copa`}
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={canonicalUrl}
         hreflang={allLangPaths("/herramientas/diagnostico-vino-por-copa")} />
       <Navbar />
 

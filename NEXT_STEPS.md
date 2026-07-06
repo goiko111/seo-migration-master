@@ -1,5 +1,73 @@
 # Next Steps
 
+## Actualizacion 2026-07-06: retomar lote DE/PT tras primer corte local
+
+## Hechos
+
+- Edge Functions ya no exponen URLs futuras en `sitemap`:
+  - publico: `2333` URLs, `0` futuras;
+  - Edge directa: `2302` URLs, `0` futuras.
+- Local queda preparado con primer lote DE/PT/canonicals/hreflang:
+  - home, contacto, precios, demo y gracias localizados;
+  - formularios compartidos DE/PT;
+  - secciones home compartidas DE/PT;
+  - hub de herramientas DE/PT;
+  - herramientas principales con canonical/hreflang/H1 localizado;
+  - Edge `prerender` y `sitemap` actualizados para DE/PT y herramientas multilingues.
+- Validaciones locales OK:
+  - `npx tsc --noEmit --pretty false`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `git diff --check`;
+  - `npm run build`;
+  - Chrome local en rutas DE/PT.
+- Produccion aun requiere publish de este lote; hasta entonces `curl` humano ve shell/canonical raiz en rutas DE/PT.
+- Cambio ajeno a preservar: `src/components/WineListAnalyzerTool.tsx`.
+
+## Prioridad 1: publicar y revalidar lote DE/PT
+
+1. Publicar frontend en Lovable.
+2. Publicar Edge Functions `sitemap` y `prerender` si Lovable no las publica junto al frontend.
+3. Revalidar produccion:
+   - `/de` canonical `https://winerim.wine/de`, `7` hreflang, H1 aleman;
+   - `/pt` canonical `https://winerim.wine/pt`, `7` hreflang, H1 portugues;
+   - `/de/kontakt`, `/pt/contacto`, `/de/preise`, `/pt/precos`;
+   - `/de/tools/margenverlust-rechner`;
+   - `/pt/ferramentas/comparador-distribuidores`;
+   - `/de/danke?tipo=demo`, `/pt/obrigado?tipo=demo` noindex y sin 404.
+4. Revalidar `https://winerim.wine/sitemap.xml` y Edge directa:
+   - herramientas localizadas incluidas;
+   - `0` URLs futuras;
+   - alternates consistentes.
+
+## Prioridad 2: completar paridad humana en herramientas
+
+1. Traducir completamente el cuerpo de:
+   - `src/pages/CalculadoraFugaMargen.tsx`;
+   - `src/pages/ComparadorDistribuidores.tsx`;
+   - `src/pages/SimuladorSenalMargenes.tsx`;
+   - `src/pages/TestPerfilRim.tsx`;
+   - `src/pages/SimuladorParetoCarta.tsx`.
+2. Revisar labels de inputs, resultados, FAQ, CTA, internal links y ejemplos de vinos.
+3. Crear guardrail local para detectar frases ES visibles en `/de/tools/*` y `/pt/ferramentas/*`.
+
+## Prioridad 3: corregir paginas de negocio DE/PT
+
+1. `src/pages/Hoteles.tsx`:
+   - eliminar fallback masivo a EN para DE/PT;
+   - localizar bloque final e internal links.
+2. `src/pages/GruposRestauracion.tsx`:
+   - eliminar fallback masivo a EN para DE/PT;
+   - localizar bloques visibles e internal links hacia Core/Supply.
+
+## Prioridad 4: retomar contenido
+
+1. Una vez estable i18n, retomar Biblioteca del vino:
+   - lote `wine-library-by-the-glass-stock-rotation` para 2026-07-20.
+2. Retomar Aprender vino:
+   - lote `learn-wine-read-label-restaurant` para 2026-07-27.
+3. Mantener regla: no publicar contenido futuro antes de `published_at` en hub, sitemap, prerender, Worker ni `llms`.
+
 ## Actualizacion 2026-07-06: retomar tras revalidacion sitemap/prerender e idiomas
 
 ## Hechos

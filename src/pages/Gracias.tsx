@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
+import { getCanonicalUrl } from "@/seo/config";
 
 /* ── Content per form_type ── */
 interface ThankYouContent {
@@ -193,7 +194,7 @@ const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
       title: "Weinkarte zur Analyse erhalten!",
       subtitle: "Unser Team arbeitet bereits an Ihrer persönlichen Analyse. Sie erhalten den Bericht innerhalb von 48 Stunden.",
       steps: ["Wir analysieren Struktur, Preise und Vielfalt", "Wir identifizieren Verbesserungsmöglichkeiten", "Wir senden Ihnen einen Bericht mit konkreten Empfehlungen"],
-      cta: { label: "Unsere Werkzeuge entdecken", href: "/de/werkzeuge" },
+      cta: { label: "Unsere Tools entdecken", href: "/de/tools" },
       secondaryCta: { label: "Preise ansehen", href: "/de/preise" },
     },
     resource: {
@@ -201,7 +202,7 @@ const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
       subtitle: "Der Download hat automatisch begonnen. Sie erhalten außerdem eine Bestätigungs-E-Mail mit dem Zugriffslink.",
       steps: ["Ihre Ressource wird heruntergeladen", "Prüfen Sie Ihre E-Mail für späteren Zugriff", "Entdecken Sie weitere kostenlose Winerim-Werkzeuge"],
       cta: { label: "Weitere Ressourcen ansehen", href: "/de/ratgeber" },
-      secondaryCta: { label: "Werkzeuge ausprobieren", href: "/de/werkzeuge" },
+      secondaryCta: { label: "Tools ausprobieren", href: "/de/tools" },
     },
     default: {
       title: "Erfolgreich empfangen!",
@@ -249,9 +250,10 @@ const CONTENT: I18nMap<Record<string, ThankYouContent>> = {
 
 const Gracias = () => {
   const [params] = useSearchParams();
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const chrome = CHROME[lang];
   const formType = params.get("tipo") || "default";
+  const canonicalUrl = getCanonicalUrl(localePath("/gracias"));
 
   const langContent = CONTENT[lang];
   const isResource = formType.startsWith("plantilla-") || formType.startsWith("checklist-") || formType.startsWith("scorecard-") || formType.startsWith("guia-") || formType.startsWith("revision-");
@@ -315,7 +317,7 @@ const Gracias = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={chrome.seoTitle} description={chrome.seoDesc} noindex />
+      <SEOHead title={chrome.seoTitle} description={chrome.seoDesc} url={canonicalUrl} noindex />
 
       <main className="pt-32 pb-24 section-padding">
         <div className="max-w-2xl mx-auto text-center">

@@ -421,16 +421,16 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/guias/como-usar-datos-para-decidir-que-vinos-comprar', priority: '0.7', changefreq: 'monthly', multilang: false },
   { esPath: '/guias/como-conectar-carta-stock-ventas-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
 
-  // Tools (ES-only)
-  { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/calculadora-stock-muerto', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/simulador-senal-margenes', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/test-perfil-rim', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/simulador-pareto-carta-vinos', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/calculadora-fuga-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
-  { esPath: '/herramientas/comparador-distribuidores', priority: '0.7', changefreq: 'monthly', multilang: false },
+  // Online tools with localized routes.
+  { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/calculadora-stock-muerto', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/simulador-senal-margenes', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/test-perfil-rim', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/simulador-pareto-carta-vinos', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/calculadora-fuga-margen', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/herramientas/comparador-distribuidores', priority: '0.7', changefreq: 'monthly', multilang: true },
 
   // Resources (ES-only)
   { esPath: '/recursos/plantilla-carta-de-vinos', priority: '0.6', changefreq: 'monthly', multilang: false },

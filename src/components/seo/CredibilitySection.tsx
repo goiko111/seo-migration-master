@@ -9,7 +9,13 @@ interface CredibilitySectionProps {
  * Designed to be placed on commercial pages to reinforce expertise signals.
  */
 const CredibilitySection = ({ lang = "es" }: CredibilitySectionProps) => {
-  const t = lang === "es" ? {
+  const copy: Record<string, {
+    badge: string;
+    stats: { value: string; label: string }[];
+    areas: { icon: typeof Wine; label: string }[];
+    note: string;
+  }> = {
+    es: {
     badge: "Por qué confiar en Winerim",
     stats: [
       { value: "+1.000", label: "Bodegas gestionadas" },
@@ -26,7 +32,8 @@ const CredibilitySection = ({ lang = "es" }: CredibilitySectionProps) => {
       { icon: Award, label: "Maridaje inteligente" },
     ],
     note: "Datos verificados a marzo 2025. Las cifras de mejora son potenciales estimados que varían según el contexto del restaurante.",
-  } : lang === "en" ? {
+  },
+  en: {
     badge: "Why trust Winerim",
     stats: [
       { value: "+1,000", label: "Cellars managed" },
@@ -43,7 +50,8 @@ const CredibilitySection = ({ lang = "es" }: CredibilitySectionProps) => {
       { icon: Award, label: "Smart pairing" },
     ],
     note: "Verified data as of March 2025. Improvement figures are estimated potentials that vary by restaurant context.",
-  } : lang === "it" ? {
+  },
+  it: {
     badge: "Perché fidarsi di Winerim",
     stats: [
       { value: "+1.000", label: "Cantine gestite" },
@@ -60,7 +68,8 @@ const CredibilitySection = ({ lang = "es" }: CredibilitySectionProps) => {
       { icon: Award, label: "Abbinamento intelligente" },
     ],
     note: "Dati verificati a marzo 2025. Le cifre di miglioramento sono potenziali stimati che variano in base al contesto del ristorante.",
-  } : {
+  },
+  fr: {
     badge: "Pourquoi faire confiance à Winerim",
     stats: [
       { value: "+1 000", label: "Caves gérées" },
@@ -77,7 +86,45 @@ const CredibilitySection = ({ lang = "es" }: CredibilitySectionProps) => {
       { icon: Award, label: "Accord intelligent" },
     ],
     note: "Données vérifiées en mars 2025. Les chiffres d'amélioration sont des potentiels estimés qui varient selon le contexte du restaurant.",
+  },
+  de: {
+    badge: "Warum Restaurants Winerim vertrauen",
+    stats: [
+      { value: "+1.000", label: "Verwaltete Weinkeller" },
+      { value: "+300.000", label: "Weinreferenzen" },
+      { value: "15", label: "Länder" },
+      { value: "22+", label: "POS-Integrationen" },
+    ],
+    areas: [
+      { icon: Wine, label: "Weinkarten-Management" },
+      { icon: BarChart3, label: "Verkaufsanalyse" },
+      { icon: Brain, label: "KI für Restaurants" },
+      { icon: Globe, label: "Preise und Margen" },
+      { icon: Shield, label: "Bestandskontrolle" },
+      { icon: Award, label: "Intelligentes Pairing" },
+    ],
+    note: "Datenstand März 2025. Verbesserungszahlen sind geschätzte Potenziale und hängen vom jeweiligen Restaurantkontext ab.",
+  },
+  pt: {
+    badge: "Porque confiar na Winerim",
+    stats: [
+      { value: "+1.000", label: "Garrafeiras geridas" },
+      { value: "+300.000", label: "Referências de vinho" },
+      { value: "15", label: "Países" },
+      { value: "22+", label: "Integrações POS" },
+    ],
+    areas: [
+      { icon: Wine, label: "Gestão da carta" },
+      { icon: BarChart3, label: "Análise de vendas" },
+      { icon: Brain, label: "IA para restaurantes" },
+      { icon: Globe, label: "Preços e margens" },
+      { icon: Shield, label: "Controlo de stock" },
+      { icon: Award, label: "Harmonização inteligente" },
+    ],
+    note: "Dados verificados em março de 2025. Os números de melhoria são potenciais estimados e variam conforme o contexto do restaurante.",
+  },
   };
+  const t = copy[lang] || copy.es;
 
   return (
     <aside

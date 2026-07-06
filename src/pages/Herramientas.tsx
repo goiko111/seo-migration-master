@@ -258,15 +258,156 @@ const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/calculadora-compra-inteligente": ShoppingCart,
 };
 
+const pageUiCopy: Record<string, {
+  all: string;
+  toolCount: string;
+  empty: string;
+  summaryLabel: string;
+  summaryDefinition: string;
+  summaryBullets: string[];
+  methodologyTitle: string;
+  methodologyIntro: string;
+  methodologySteps: { title: string; description: string }[];
+  methodologyValidatedBy: string;
+}> = {
+  es: {
+    all: "Todas",
+    toolCount: "herramientas",
+    empty: "No hay herramientas con este filtro.",
+    summaryLabel: "¿Qué son las herramientas Winerim?",
+    summaryDefinition: "Las herramientas gratuitas de Winerim son calculadoras, analizadores y generadores especializados en la gestión del vino en restauración. Permiten diagnosticar la carta, optimizar precios, calcular márgenes y generar maridajes — sin registro ni coste.",
+    summaryBullets: [
+      "Cada herramienta resuelve un problema concreto de gestión del vino",
+      "Resultados inmediatos, sin necesidad de registro",
+      "Como cliente de Winerim, todas estas funciones se ejecutan automáticamente",
+      "Diseñadas por profesionales del sector hostelero",
+    ],
+    methodologyTitle: "Cómo funcionan las herramientas",
+    methodologyIntro: "Cada herramienta sigue un proceso diseñado para generar resultados accionables sin necesidad de conocimientos técnicos.",
+    methodologySteps: [
+      { title: "Introduces tus datos", description: "Cada herramienta pide los datos mínimos necesarios: referencias, precios, stock o tu carta actual." },
+      { title: "El algoritmo procesa", description: "Análisis automático basado en benchmarks del sector, buenas prácticas de sommellerie y datos de mercado." },
+      { title: "Recibes resultados accionables", description: "Recomendaciones concretas que puedes aplicar directamente o usar para solicitar una evaluación profesional." },
+    ],
+    methodologyValidatedBy: "Metodología basada en prácticas de gestión de vino en restauración real.",
+  },
+  en: {
+    all: "All",
+    toolCount: "tools",
+    empty: "No tools match this filter.",
+    summaryLabel: "What are Winerim tools?",
+    summaryDefinition: "Winerim's free tools are calculators, analyzers and generators specialized in wine management for hospitality. They let you diagnose your list, optimize pricing, calculate margins and generate pairings — no signup required.",
+    summaryBullets: [
+      "Each tool solves a specific wine management problem",
+      "Immediate results, no signup required",
+      "As a Winerim client, all these features run automatically",
+      "Designed by hospitality industry professionals",
+    ],
+    methodologyTitle: "How the tools work",
+    methodologyIntro: "Each tool follows a process designed to generate actionable results without technical knowledge.",
+    methodologySteps: [
+      { title: "Enter your data", description: "Each tool asks for the minimum data needed: references, prices, stock, or your current list." },
+      { title: "The algorithm processes", description: "Automatic analysis based on industry benchmarks, sommelier best practices, and market data." },
+      { title: "Get actionable results", description: "Concrete recommendations you can apply directly or use to request a professional evaluation." },
+    ],
+    methodologyValidatedBy: "Methodology based on real hospitality wine management practices.",
+  },
+  it: {
+    all: "Tutti",
+    toolCount: "strumenti",
+    empty: "Nessuno strumento corrisponde a questo filtro.",
+    summaryLabel: "Cosa sono gli strumenti Winerim?",
+    summaryDefinition: "Gli strumenti gratuiti di Winerim sono calcolatrici, analizzatori e generatori specializzati nella gestione del vino nella ristorazione. Aiutano a diagnosticare la carta, ottimizzare prezzi, calcolare margini e generare abbinamenti.",
+    summaryBullets: [
+      "Ogni strumento risolve un problema concreto di gestione del vino",
+      "Risultati immediati, senza registrazione",
+      "Come cliente Winerim, queste funzioni si eseguono automaticamente",
+      "Progettati da professionisti della ristorazione",
+    ],
+    methodologyTitle: "Come funzionano gli strumenti",
+    methodologyIntro: "Ogni strumento segue un processo pensato per generare risultati azionabili senza conoscenze tecniche.",
+    methodologySteps: [
+      { title: "Inserisci i dati", description: "Ogni strumento richiede i dati minimi necessari: referenze, prezzi, stock o carta attuale." },
+      { title: "L'algoritmo elabora", description: "Analisi automatica basata su benchmark del settore, buone pratiche di sommellerie e dati di mercato." },
+      { title: "Ricevi risultati azionabili", description: "Raccomandazioni concrete da applicare direttamente o usare per una valutazione professionale." },
+    ],
+    methodologyValidatedBy: "Metodologia basata su pratiche reali di gestione del vino nella ristorazione.",
+  },
+  fr: {
+    all: "Tous",
+    toolCount: "outils",
+    empty: "Aucun outil ne correspond à ce filtre.",
+    summaryLabel: "Que sont les outils Winerim ?",
+    summaryDefinition: "Les outils gratuits de Winerim sont des calculateurs, analyseurs et générateurs spécialisés dans la gestion du vin en restauration. Ils permettent de diagnostiquer la carte, optimiser les prix, calculer les marges et générer des accords.",
+    summaryBullets: [
+      "Chaque outil résout un problème précis de gestion du vin",
+      "Résultats immédiats, sans inscription",
+      "En tant que client Winerim, ces fonctions s'exécutent automatiquement",
+      "Conçus par des professionnels de la restauration",
+    ],
+    methodologyTitle: "Comment fonctionnent les outils",
+    methodologyIntro: "Chaque outil suit un processus conçu pour produire des résultats actionnables sans connaissances techniques.",
+    methodologySteps: [
+      { title: "Vous saisissez vos données", description: "Chaque outil demande les données minimales nécessaires : références, prix, stock ou carte actuelle." },
+      { title: "L'algorithme traite", description: "Analyse automatique basée sur des benchmarks du secteur, les bonnes pratiques de sommellerie et les données de marché." },
+      { title: "Vous recevez des résultats actionnables", description: "Des recommandations concrètes à appliquer directement ou à utiliser pour demander une évaluation professionnelle." },
+    ],
+    methodologyValidatedBy: "Méthodologie basée sur des pratiques réelles de gestion du vin en restauration.",
+  },
+  de: {
+    all: "Alle",
+    toolCount: "Tools",
+    empty: "Keine Tools entsprechen diesem Filter.",
+    summaryLabel: "Was sind Winerim-Tools?",
+    summaryDefinition: "Die kostenlosen Winerim-Tools sind Rechner, Analysewerkzeuge und Generatoren für das Weinmanagement in der Gastronomie. Sie helfen, Weinkarten zu diagnostizieren, Preise zu optimieren, Margen zu berechnen und Pairings zu erstellen.",
+    summaryBullets: [
+      "Jedes Tool löst ein konkretes Problem im Weinmanagement",
+      "Sofortige Ergebnisse ohne Registrierung",
+      "Als Winerim-Kunde laufen diese Funktionen automatisch",
+      "Entwickelt für reale Abläufe in Gastronomie und Hotellerie",
+    ],
+    methodologyTitle: "Wie die Tools funktionieren",
+    methodologyIntro: "Jedes Tool folgt einem einfachen Prozess, der ohne technisches Wissen konkrete Ergebnisse liefert.",
+    methodologySteps: [
+      { title: "Sie geben Ihre Daten ein", description: "Jedes Tool fragt nur die nötigen Daten ab: Referenzen, Preise, Bestand oder Ihre aktuelle Weinkarte." },
+      { title: "Der Algorithmus verarbeitet", description: "Automatische Analyse auf Basis von Branchen-Benchmarks, Sommellerie-Praxis und Marktdaten." },
+      { title: "Sie erhalten umsetzbare Ergebnisse", description: "Konkrete Empfehlungen, die Sie direkt nutzen oder für eine professionelle Bewertung einsetzen können." },
+    ],
+    methodologyValidatedBy: "Methodik basierend auf realer Weinmanagement-Praxis in Restaurants und Hotels.",
+  },
+  pt: {
+    all: "Todas",
+    toolCount: "ferramentas",
+    empty: "Nenhuma ferramenta corresponde a este filtro.",
+    summaryLabel: "O que são as ferramentas Winerim?",
+    summaryDefinition: "As ferramentas gratuitas da Winerim são calculadoras, analisadores e geradores especializados na gestão de vinho em restauração. Permitem diagnosticar a carta, otimizar preços, calcular margens e gerar harmonizações.",
+    summaryBullets: [
+      "Cada ferramenta resolve um problema concreto de gestão do vinho",
+      "Resultados imediatos, sem necessidade de registo",
+      "Como cliente Winerim, estas funções executam-se automaticamente",
+      "Criadas para operações reais de restauração e hotelaria",
+    ],
+    methodologyTitle: "Como funcionam as ferramentas",
+    methodologyIntro: "Cada ferramenta segue um processo simples para gerar resultados acionáveis sem conhecimentos técnicos.",
+    methodologySteps: [
+      { title: "Introduz os seus dados", description: "Cada ferramenta pede apenas os dados mínimos necessários: referências, preços, stock ou carta atual." },
+      { title: "O algoritmo processa", description: "Análise automática baseada em benchmarks do setor, boas práticas de sommellerie e dados de mercado." },
+      { title: "Recebe resultados acionáveis", description: "Recomendações concretas que pode aplicar diretamente ou usar para pedir uma avaliação profissional." },
+    ],
+    methodologyValidatedBy: "Metodologia baseada em práticas reais de gestão de vinho em restauração.",
+  },
+};
+
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
+  const ui = pageUiCopy[lang] || pageUiCopy.es;
   const [activeTag, setActiveTag] = useState("all");
 
   // Extract unique tags for filter pills
   const allTags = Array.from(new Set(t.tools.map(tool => tool.tag)));
   const tagFilters = [
-    { key: "all", label: lang === "es" ? "Todas" : "All" },
+    { key: "all", label: ui.all },
     ...allTags.map(tag => ({ key: tag, label: tag })),
   ];
 
@@ -313,7 +454,7 @@ const Herramientas = () => {
                 {f.label}
               </button>
             ))}
-            <span className="self-center text-xs text-muted-foreground ml-2">{filteredTools.length} {lang === "es" ? "herramientas" : "tools"}</span>
+            <span className="self-center text-xs text-muted-foreground ml-2">{filteredTools.length} {ui.toolCount}</span>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -340,7 +481,7 @@ const Herramientas = () => {
           </div>
           {filteredTools.length === 0 && (
             <p className="text-center text-muted-foreground text-sm py-12">
-              {lang === "es" ? "No hay herramientas con este filtro." : "No tools match this filter."}
+              {ui.empty}
             </p>
           )}
         </section>
@@ -365,22 +506,9 @@ const Herramientas = () => {
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
           <ScrollReveal>
             <SummaryBox
-              label={lang === "es" ? "¿Qué son las herramientas Winerim?" : "What are Winerim tools?"}
-              definition={lang === "es"
-                ? "Las herramientas gratuitas de Winerim son calculadoras, analizadores y generadores especializados en la gestión del vino en restauración. Permiten diagnosticar la carta, optimizar precios, calcular márgenes y generar maridajes — sin registro ni coste."
-                : "Winerim's free tools are calculators, analyzers and generators specialized in wine management for hospitality. They let you diagnose your list, optimize pricing, calculate margins and generate pairings — no signup required."
-              }
-              bullets={lang === "es" ? [
-                "Cada herramienta resuelve un problema concreto de gestión del vino",
-                "Resultados inmediatos, sin necesidad de registro",
-                "Como cliente de Winerim, todas estas funciones se ejecutan automáticamente",
-                "Diseñadas por profesionales del sector hostelero",
-              ] : [
-                "Each tool solves a specific wine management problem",
-                "Immediate results, no signup required",
-                "As a Winerim client, all these features run automatically",
-                "Designed by hospitality industry professionals",
-              ]}
+              label={ui.summaryLabel}
+              definition={ui.summaryDefinition}
+              bullets={ui.summaryBullets}
             />
           </ScrollReveal>
         </section>
@@ -389,24 +517,10 @@ const Herramientas = () => {
         <section className="max-w-4xl mx-auto px-6 md:px-12 pb-12">
           <ScrollReveal>
             <MethodologyBox
-              title={lang === "es" ? "Cómo funcionan las herramientas" : "How the tools work"}
-              intro={lang === "es"
-                ? "Cada herramienta sigue un proceso diseñado para generar resultados accionables sin necesidad de conocimientos técnicos."
-                : "Each tool follows a process designed to generate actionable results without technical knowledge."
-              }
-              steps={lang === "es" ? [
-                { title: "Introduces tus datos", description: "Cada herramienta pide los datos mínimos necesarios: referencias, precios, stock o tu carta actual." },
-                { title: "El algoritmo procesa", description: "Análisis automático basado en benchmarks del sector, buenas prácticas de sommellerie y datos de mercado." },
-                { title: "Recibes resultados accionables", description: "Recomendaciones concretas que puedes aplicar directamente o usar para solicitar una evaluación profesional." },
-              ] : [
-                { title: "Enter your data", description: "Each tool asks for the minimum data needed: references, prices, stock, or your current list." },
-                { title: "The algorithm processes", description: "Automatic analysis based on industry benchmarks, sommelier best practices, and market data." },
-                { title: "Get actionable results", description: "Concrete recommendations you can apply directly or use to request a professional evaluation." },
-              ]}
-              validatedBy={lang === "es"
-                ? "Metodología basada en prácticas de gestión de vino en restauración real."
-                : "Methodology based on real hospitality wine management practices."
-              }
+              title={ui.methodologyTitle}
+              intro={ui.methodologyIntro}
+              steps={ui.methodologySteps}
+              validatedBy={ui.methodologyValidatedBy}
             />
           </ScrollReveal>
         </section>

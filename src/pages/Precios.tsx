@@ -18,6 +18,7 @@ import NextSteps from "@/components/seo/NextSteps";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import { getI18n } from "@/i18n/types";
+import { getCanonicalUrl } from "@/seo/config";
 
 /* ─── helpers ─── */
 const em = (html: string) => html.replace(/<em>/g, '<span class="text-gradient-wine italic">').replace(/<\/em>/g, '</span>');
@@ -922,6 +923,7 @@ const getLayerColor = (name: string) => layerColors[name] || { bg: "bg-muted/40"
 const Precios = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = getI18n(i18n, lang) || i18n.es;
+  const canonicalUrl = getCanonicalUrl(localePath("/precios"));
 
   useEffect(() => {
     const ld = document.createElement("script");
@@ -950,7 +952,7 @@ const Precios = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={c.seo_title} description={c.seo_desc} url="https://winerim.wine/precios" hreflang={allLangPaths("/precios")} />
+      <SEOHead title={c.seo_title} description={c.seo_desc} url={canonicalUrl} hreflang={allLangPaths("/precios")} />
       <Navbar />
 
       {/* ── HERO ── */}
@@ -992,7 +994,7 @@ const Precios = () => {
               className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
               {c.ctaBtn} <ArrowRight size={16} />
             </Link>
-            <Link to="/analisis-carta"
+            <Link to={localePath("/analisis-carta")}
               className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 hover:bg-wine/5 transition-all">
               {c.ctaBtn2}
             </Link>
@@ -1482,7 +1484,7 @@ const Precios = () => {
                   className="inline-flex items-center justify-center gap-2 bg-gradient-wine text-primary-foreground px-8 sm:px-10 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20 hover:-translate-y-0.5">
                   {c.ctaBtn} <ArrowRight size={16} />
                 </Link>
-                <Link to="/analisis-carta"
+                <Link to={localePath("/analisis-carta")}
                   className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 hover:bg-wine/5 transition-all">
                   {c.ctaBtn2}
                 </Link>
@@ -1499,19 +1501,19 @@ const Precios = () => {
       <NextSteps
         title={{ es: "Explora más", en: "Explore more", it: "Esplora di più", fr: "En savoir plus", de: "Mehr entdecken", pt: "Explorar mais" }[lang] || "Explore more"}
         steps={[
-          { to: "/analisis-carta", label: { es: "Analiza tu carta gratis", en: "Analyze your list free", it: "Analizza la tua carta gratis", fr: "Analysez votre carte gratuitement", de: "Weinkarte kostenlos analysieren", pt: "Analisar a carta grátis" }[lang]!, description: { es: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", en: "Upload your list and get a diagnostic with actionable recommendations.", it: "Carica la tua carta e ricevi un report con raccomandazioni concrete.", fr: "Envoyez votre carte et recevez un diagnostic avec des recommandations concrètes.", de: "Laden Sie Ihre Weinkarte hoch und erhalten Sie eine Diagnose mit konkreten Empfehlungen.", pt: "Carregue a sua carta e receba um diagnóstico com recomendações concretas." }[lang]!, type: "tool" },
-          { to: "/casos-exito", label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels", de: "Erfolgsgeschichten echter Restaurants", pt: "Casos de sucesso de restaurantes reais" }[lang]!, description: { es: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", en: "How real restaurants use Winerim and what results they achieve.", it: "Come ristoranti reali usano Winerim e quali risultati ottengono.", fr: "Comment de vrais restaurants utilisent Winerim et quels résultats ils obtiennent.", de: "Wie echte Restaurants Winerim einsetzen und welche Ergebnisse sie erzielen.", pt: "Como restaurantes reais usam a Winerim e que resultados obtêm." }[lang]!, type: "solution" },
-          { to: "/funcionalidades", label: { es: "Todas las funcionalidades de Winerim", en: "All Winerim features", it: "Tutte le funzionalità di Winerim", fr: "Toutes les fonctionnalités de Winerim", de: "Alle Winerim-Funktionen", pt: "Todas as funcionalidades Winerim" }[lang]!, description: { es: "11 categorías de funcionalidades especializadas en vino.", en: "11 categories of wine-specialized features.", it: "11 categorie di funzionalità specializzate nel vino.", fr: "11 catégories de fonctionnalités spécialisées dans le vin.", de: "11 Kategorien weinspezialisierter Funktionen.", pt: "11 categorias de funcionalidades especializadas em vinho." }[lang]!, type: "solution" },
-          { to: "/comparativas", label: { es: "Compara Winerim con alternativas", en: "Compare Winerim with alternatives", it: "Confronta Winerim con le alternative", fr: "Comparez Winerim avec les alternatives", de: "Winerim mit Alternativen vergleichen", pt: "Comparar a Winerim com alternativas" }[lang]!, description: { es: "Comparativas claras para decidir qué solución encaja.", en: "Clear comparisons to decide which solution fits.", it: "Confronti chiari per decidere quale soluzione fa per te.", fr: "Comparaisons claires pour choisir la bonne solution.", de: "Klare Vergleiche, um die passende Lösung zu wählen.", pt: "Comparações claras para escolher a solução certa." }[lang]!, type: "solution" },
+          { to: localePath("/analisis-carta"), label: { es: "Analiza tu carta gratis", en: "Analyze your list free", it: "Analizza la tua carta gratis", fr: "Analysez votre carte gratuitement", de: "Weinkarte kostenlos analysieren", pt: "Analisar a carta grátis" }[lang]!, description: { es: "Sube tu carta y recibe un diagnóstico con recomendaciones concretas.", en: "Upload your list and get a diagnostic with actionable recommendations.", it: "Carica la tua carta e ricevi un report con raccomandazioni concrete.", fr: "Envoyez votre carte et recevez un diagnostic avec des recommandations concrètes.", de: "Laden Sie Ihre Weinkarte hoch und erhalten Sie eine Diagnose mit konkreten Empfehlungen.", pt: "Carregue a sua carta e receba um diagnóstico com recomendações concretas." }[lang]!, type: "tool" },
+          { to: localePath("/casos-exito"), label: { es: "Casos de éxito de restaurantes reales", en: "Real restaurant case studies", it: "Casi di successo reali", fr: "Cas clients réels", de: "Erfolgsgeschichten echter Restaurants", pt: "Casos de sucesso de restaurantes reais" }[lang]!, description: { es: "Cómo restaurantes reales usan Winerim y qué resultados obtienen.", en: "How real restaurants use Winerim and what results they achieve.", it: "Come ristoranti reali usano Winerim e quali risultati ottengono.", fr: "Comment de vrais restaurants utilisent Winerim et quels résultats ils obtiennent.", de: "Wie echte Restaurants Winerim einsetzen und welche Ergebnisse sie erzielen.", pt: "Como restaurantes reais usam a Winerim e que resultados obtêm." }[lang]!, type: "solution" },
+          { to: localePath("/funcionalidades"), label: { es: "Todas las funcionalidades de Winerim", en: "All Winerim features", it: "Tutte le funzionalità di Winerim", fr: "Toutes les fonctionnalités de Winerim", de: "Alle Winerim-Funktionen", pt: "Todas as funcionalidades Winerim" }[lang]!, description: { es: "11 categorías de funcionalidades especializadas en vino.", en: "11 categories of wine-specialized features.", it: "11 categorie di funzionalità specializzate nel vino.", fr: "11 catégories de fonctionnalités spécialisées dans le vin.", de: "11 Kategorien weinspezialisierter Funktionen.", pt: "11 categorias de funcionalidades especializadas em vinho." }[lang]!, type: "solution" },
+          { to: localePath("/comparativas"), label: { es: "Compara Winerim con alternativas", en: "Compare Winerim with alternatives", it: "Confronta Winerim con le alternative", fr: "Comparez Winerim avec les alternatives", de: "Winerim mit Alternativen vergleichen", pt: "Comparar a Winerim com alternativas" }[lang]!, description: { es: "Comparativas claras para decidir qué solución encaja.", en: "Clear comparisons to decide which solution fits.", it: "Confronti chiari per decidere quale soluzione fa per te.", fr: "Comparaisons claires pour choisir la bonne solution.", de: "Klare Vergleiche, um die passende Lösung zu wählen.", pt: "Comparações claras para escolher a solução certa." }[lang]!, type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
         { to: localePath("/software-carta-de-vinos"), label: { es: "Software de carta de vinos inteligente", en: "Smart wine list software", it: "Software intelligente per carta dei vini", fr: "Logiciel intelligent de carte des vins", de: "Intelligente Weinkarten-Software", pt: "Software inteligente de carta de vinhos" }[lang]!, type: "solution" },
-        { to: "/herramientas", label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification", de: "Kostenlose Analyse- und Pricing-Tools", pt: "Ferramentas gratuitas de análise e pricing" }[lang]!, type: "tool" },
-        { to: "/guias-y-recursos", label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables", de: "Praktische Leitfäden und Ressourcen", pt: "Guias práticos e recursos" }[lang]!, type: "guide" },
+        { to: localePath("/herramientas"), label: { es: "Herramientas gratuitas de análisis y pricing", en: "Free analysis & pricing tools", it: "Strumenti gratuiti di analisi e pricing", fr: "Outils gratuits d'analyse et de tarification", de: "Kostenlose Analyse- und Pricing-Tools", pt: "Ferramentas gratuitas de análise e pricing" }[lang]!, type: "tool" },
+        { to: localePath("/guias-y-recursos"), label: { es: "Guías prácticas y recursos descargables", en: "Practical guides & resources", it: "Guide pratiche e risorse scaricabili", fr: "Guides pratiques et ressources téléchargeables", de: "Praktische Leitfäden und Ressourcen", pt: "Guias práticos e recursos" }[lang]!, type: "guide" },
         { to: localePath("/soluciones/grupos-restauracion"), label: { es: "Soluciones para grupos de restauración", en: "Solutions for restaurant groups", it: "Soluzioni per gruppi di ristorazione", fr: "Solutions pour groupes de restauration", de: "Lösungen für Gastronomiegruppen", pt: "Soluções para grupos de restauração" }[lang]!, type: "solution" },
-        { to: "/benchmarks-playbooks", label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur", de: "Branchen-Benchmarks und Playbooks", pt: "Benchmarks e playbooks do setor" }[lang]!, type: "resource" },
+        { to: localePath("/benchmarks-playbooks"), label: { es: "Benchmarks y playbooks del sector", en: "Industry benchmarks & playbooks", it: "Benchmark e playbook del settore", fr: "Benchmarks et playbooks du secteur", de: "Branchen-Benchmarks und Playbooks", pt: "Benchmarks e playbooks do setor" }[lang]!, type: "resource" },
       ]} />
 
       <Footer />

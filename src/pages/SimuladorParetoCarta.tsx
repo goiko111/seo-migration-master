@@ -40,8 +40,49 @@ const parseNumber = (value: string) => {
 
 const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 
+const seoCopy = {
+  es: {
+    title: "Simulador Pareto 80/20 para carta de vinos",
+    description: "Descubre qué vinos sostienen la facturación y margen de tu carta, cuáles son soporte y cuáles pueden estar frenando rentabilidad.",
+    tools: "Herramientas",
+    breadcrumb: "Simulador Pareto 80/20",
+  },
+  en: {
+    title: "Pareto 80/20 simulator for wine lists",
+    description: "Discover which wines sustain revenue and margin in your list, which support the offer and which may be slowing profitability.",
+    tools: "Tools",
+    breadcrumb: "Pareto 80/20 simulator",
+  },
+  it: {
+    title: "Simulatore Pareto 80/20 per carta dei vini",
+    description: "Scopri quali vini sostengono fatturato e margine della tua carta, quali fanno da supporto e quali possono frenare la redditività.",
+    tools: "Strumenti",
+    breadcrumb: "Simulatore Pareto 80/20",
+  },
+  fr: {
+    title: "Simulateur Pareto 80/20 pour carte des vins",
+    description: "Découvrez quels vins soutiennent le chiffre d'affaires et la marge de votre carte, lesquels jouent un rôle de support et lesquels peuvent freiner la rentabilité.",
+    tools: "Outils",
+    breadcrumb: "Simulateur Pareto 80/20",
+  },
+  de: {
+    title: "Pareto-80/20-Simulator für Weinkarten",
+    description: "Erkennen Sie, welche Weine Umsatz und Marge Ihrer Karte tragen, welche die Auswahl stützen und welche Rentabilität bremsen können.",
+    tools: "Tools",
+    breadcrumb: "Pareto-80/20-Simulator",
+  },
+  pt: {
+    title: "Simulador Pareto 80/20 para cartas de vinho",
+    description: "Descubra que vinhos sustentam faturação e margem da carta, quais servem de suporte e quais podem travar a rentabilidade.",
+    tools: "Ferramentas",
+    breadcrumb: "Simulador Pareto 80/20",
+  },
+};
+
 const SimuladorParetoCarta = () => {
-  const { localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const s = seoCopy[lang] || seoCopy.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-pareto-carta-vinos")}`;
   const [rows, setRows] = useState(initialRows);
 
   const result = useMemo(() => {
@@ -94,19 +135,20 @@ const SimuladorParetoCarta = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Simulador Pareto 80/20 para carta de vinos"
-        description="Descubre qué vinos sostienen la facturación y margen de tu carta, cuáles son soporte y cuáles pueden estar frenando rentabilidad."
-        url={`${CANONICAL_DOMAIN}/herramientas/simulador-pareto-carta-vinos`}
+        title={s.title}
+        description={s.description}
+        url={canonicalUrl}
+        hreflang={allLangPaths("/herramientas/simulador-pareto-carta-vinos")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Simulador Pareto 80/20" }]} />
+            <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               Demo · Pareto de carta
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Simulador Pareto 80/20 de tu carta de vinos
+              {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               Identifica qué referencias sostienen el margen, cuáles solo acompañan y cuáles podrían estar ocupando carta, stock y atención sin aportar suficiente retorno.

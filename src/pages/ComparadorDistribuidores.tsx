@@ -39,8 +39,49 @@ const numberValue = (value: string) => {
 
 const clamp = (value: number, min = 0, max = 10) => Math.min(max, Math.max(min, value));
 
+const seoCopy = {
+  es: {
+    title: "Comparador de distribuidores de vino",
+    description: "Compara distribuidores por precio, servicio, documentación, referencias diferenciales y rotación real para priorizar compras de vino.",
+    tools: "Herramientas",
+    breadcrumb: "Comparador de distribuidores",
+  },
+  en: {
+    title: "Wine distributor comparator",
+    description: "Compare distributors by price, service, documentation, distinctive references and real rotation to prioritize wine purchasing.",
+    tools: "Tools",
+    breadcrumb: "Distributor comparator",
+  },
+  it: {
+    title: "Comparatore distributori di vino",
+    description: "Confronta distributori per prezzo, servizio, documentazione, referenze differenzianti e rotazione reale per dare priorità agli acquisti di vino.",
+    tools: "Strumenti",
+    breadcrumb: "Comparatore distributori",
+  },
+  fr: {
+    title: "Comparateur de distributeurs de vin",
+    description: "Comparez les distributeurs par prix, service, documentation, références différenciantes et rotation réelle pour prioriser les achats de vin.",
+    tools: "Outils",
+    breadcrumb: "Comparateur distributeurs",
+  },
+  de: {
+    title: "Distributoren-Vergleich für Weineinkauf",
+    description: "Vergleichen Sie Lieferanten nach Preis, Service, Dokumentation, differenzierenden Referenzen und realer Rotation, um Weineinkäufe zu priorisieren.",
+    tools: "Tools",
+    breadcrumb: "Distributoren-Vergleich",
+  },
+  pt: {
+    title: "Comparador de distribuidores de vinho",
+    description: "Compare distribuidores por preço, serviço, documentação, referências diferenciais e rotação real para priorizar compras de vinho.",
+    tools: "Ferramentas",
+    breadcrumb: "Comparador de distribuidores",
+  },
+};
+
 const ComparadorDistribuidores = () => {
-  const { localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const s = seoCopy[lang] || seoCopy.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/comparador-distribuidores")}`;
   const [rows, setRows] = useState(initialRows);
 
   const results = useMemo(() => {
@@ -77,19 +118,20 @@ const ComparadorDistribuidores = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Comparador de distribuidores de vino"
-        description="Compara distribuidores por precio, servicio, documentación, referencias diferenciales y rotación real para priorizar compras de vino."
-        url={`${CANONICAL_DOMAIN}/herramientas/comparador-distribuidores`}
+        title={s.title}
+        description={s.description}
+        url={canonicalUrl}
+        hreflang={allLangPaths("/herramientas/comparador-distribuidores")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Comparador de distribuidores" }]} />
+            <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               Demo · Winerim Supply
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Comparador de distribuidores
+              {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               Evalúa qué proveedor aporta más valor real a tu carta: precio, servicio, orden documental, referencias diferenciales y vinos que sí rotan.

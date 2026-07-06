@@ -3,14 +3,16 @@ import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import HeroSection from "@/components/landing/HeroSection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getCanonicalUrl } from "@/seo/config";
 
 const HomeBelowFold = lazy(() => import("@/components/landing/HomeBelowFold"));
 const FinalCTASection = lazy(() => import("@/components/landing/FinalCTASection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
-  const { t, lang, allLangPaths } = useLanguage();
+  const { t, lang, localePath, allLangPaths } = useLanguage();
   const [loadBelowFold, setLoadBelowFold] = useState(false);
+  const canonicalUrl = getCanonicalUrl(localePath("/"));
 
   // Inject BreadcrumbList + WebPage schemas for Rich Results consistency
   useEffect(() => {
@@ -19,14 +21,14 @@ const Index = () => {
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        itemListElement: [{ "@type": "ListItem", position: 1, name: langNames[lang] || "Inicio", item: "https://winerim.wine/" }],
+        itemListElement: [{ "@type": "ListItem", position: 1, name: langNames[lang] || "Inicio", item: canonicalUrl }],
       },
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         name: t.seo_home_title,
         description: t.seo_home_description,
-        url: "https://winerim.wine/",
+        url: canonicalUrl,
         inLanguage: lang,
         isPartOf: { "@type": "WebSite", name: "Winerim", url: "https://winerim.wine/" },
       },
@@ -37,7 +39,7 @@ const Index = () => {
     el.textContent = JSON.stringify(schemas);
     document.head.appendChild(el);
     return () => { document.getElementById("schema-home-webpage")?.remove(); };
-  }, [lang, t.seo_home_title, t.seo_home_description]);
+  }, [canonicalUrl, lang, t.seo_home_title, t.seo_home_description]);
 
   useEffect(() => {
     let delayId: number | undefined;
@@ -65,7 +67,7 @@ const Index = () => {
       <SEOHead
         title={t.seo_home_title}
         description={t.seo_home_description}
-        url="https://winerim.wine"
+        url={canonicalUrl}
         hreflang={allLangPaths("/")}
       />
       <Navbar />

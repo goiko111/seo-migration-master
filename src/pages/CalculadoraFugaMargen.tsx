@@ -24,8 +24,49 @@ const valueOf = (value: string) => {
   return Number.isFinite(parsed) ? parsed : 0;
 };
 
+const seoCopy = {
+  es: {
+    title: "Calculadora de fuga de margen en vinos",
+    description: "Detecta cuánto margen puedes estar perdiendo por coste, PVP, copa, stock y objetivo de margen en una referencia de vino.",
+    tools: "Herramientas",
+    breadcrumb: "Calculadora de fuga de margen",
+  },
+  en: {
+    title: "Wine margin leakage calculator",
+    description: "Detect how much margin you may be losing through cost, price, by-the-glass, stock and margin targets for a wine reference.",
+    tools: "Tools",
+    breadcrumb: "Margin leakage calculator",
+  },
+  it: {
+    title: "Calcolatrice fuga di margine vino",
+    description: "Rileva quanto margine puoi perdere per costo, prezzo, calice, stock e obiettivo di margine su una referenza vino.",
+    tools: "Strumenti",
+    breadcrumb: "Calcolatrice fuga di margine",
+  },
+  fr: {
+    title: "Calculateur de fuite de marge vin",
+    description: "Détectez la marge perdue par coût, prix, verre, stock et objectif de marge sur une référence vin.",
+    tools: "Outils",
+    breadcrumb: "Calculateur de fuite de marge",
+  },
+  de: {
+    title: "Margenverlust-Rechner für Wein",
+    description: "Ermitteln Sie, wie viel Marge durch Kosten, Preis, Glasverkauf, Bestand und Margenziel bei einer Weinreferenz verloren geht.",
+    tools: "Tools",
+    breadcrumb: "Margenverlust-Rechner",
+  },
+  pt: {
+    title: "Calculadora de fuga de margem em vinhos",
+    description: "Detete quanta margem pode estar a perder por custo, PVP, copo, stock e objetivo de margem numa referência de vinho.",
+    tools: "Ferramentas",
+    breadcrumb: "Calculadora de fuga de margem",
+  },
+};
+
 const CalculadoraFugaMargen = () => {
-  const { localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const s = seoCopy[lang] || seoCopy.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-fuga-margen")}`;
   const [form, setForm] = useState({
     wine: "Godello premium",
     cost: "13.50",
@@ -89,19 +130,20 @@ const CalculadoraFugaMargen = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Calculadora de fuga de margen en vinos"
-        description="Detecta cuánto margen puedes estar perdiendo por coste, PVP, copa, stock y objetivo de margen en una referencia de vino."
-        url={`${CANONICAL_DOMAIN}/herramientas/calculadora-fuga-margen`}
+        title={s.title}
+        description={s.description}
+        url={canonicalUrl}
+        hreflang={allLangPaths("/herramientas/calculadora-fuga-margen")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Calculadora de fuga de margen" }]} />
+            <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               Demo · Margen y coste
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Calculadora de fuga de margen
+              {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               Calcula cuánto margen se escapa cuando el coste sube, el PVP no se actualiza, el vino por copa no recupera suficiente o el stock inmoviliza capital.

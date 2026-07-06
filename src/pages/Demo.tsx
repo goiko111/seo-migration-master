@@ -17,6 +17,7 @@ import FAQSection from "@/components/seo/FAQSection";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getCanonicalUrl } from "@/seo/config";
 
 const content: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string; label: string;
@@ -195,6 +196,7 @@ const Demo = () => {
   const navigate = useNavigate();
   const { lang, allLangPaths, localePath } = useLanguage();
   const c = content[lang] || content.es;
+  const canonicalUrl = getCanonicalUrl(localePath("/demo"));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -230,7 +232,7 @@ const Demo = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
-      navigate("/gracias?tipo=demo");
+      navigate(`${localePath("/gracias")}?tipo=demo`);
       return;
     }
     setSubmitting(false);
@@ -239,7 +241,7 @@ const Demo = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={c.seo_title} description={c.seo_desc} url="https://winerim.wine/demo" hreflang={allLangPaths("/demo")} />
+      <SEOHead title={c.seo_title} description={c.seo_desc} url={canonicalUrl} hreflang={allLangPaths("/demo")} />
       <main>
         <section className="pt-32 pb-24 section-padding">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">

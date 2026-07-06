@@ -1,5 +1,67 @@
 # Project Context
 
+## Actualizacion 2026-07-06: lote DE/PT, canonicals, hreflang y paridad humano-bot
+
+## Hechos
+
+- Se leyeron al inicio de sesion `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Tras la confirmacion del usuario de Edge Functions publicadas, se revalido produccion:
+  - `https://winerim.wine/sitemap.xml`: `200`, `2333` URLs, `13191` alternates, `0` URLs futuras del 2026-07-13.
+  - Edge directa `sitemap`: `200`, `2302` URLs, `12974` alternates, `0` URLs futuras.
+  - Edge directa `prerender` para las URLs futuras del grupo `learn-wine-recommend-by-style`: no renderiza el articulo futuro ni su titulo; sigue devolviendo fallback home `200`.
+- Se lanzaron dos agentes de auditoria solo lectura:
+  - Idioma encontro deuda DE/PT en home compartida, formularios, `NextSteps`, `Navbar`, `Herramientas`, `Hoteles` y `GruposRestauracion`.
+  - SEO/paridad encontro herramientas con bot localizado pero React humano con canonical/copy ES, y Edge `sitemap`/`prerender` con alternates incompletos.
+- Se implemento localmente el primer lote de correcciones DE/PT:
+  - home DE/PT sin fallback espanol en secciones principales;
+  - canonical localizado para home, contacto, precios, demo y thank-you;
+  - formularios compartidos DE/PT en `ContactFormFields`;
+  - `Navbar`, `NextSteps`, `CredibilitySection`, `DefinitionSection`, `WhoItHelpsSection`, `Herramientas` y `CategoryLeapSection` con DE/PT;
+  - rutas localizadas de gracias: `/en/thank-you`, `/it/grazie`, `/fr/merci`, `/de/danke`, `/pt/obrigado`;
+  - canonical/hreflang/H1 principales localizados en herramientas online criticas;
+  - `ToolsLeadPopup` reconoce hubs y subrutas localizadas de herramientas/recursos;
+  - `supabase/functions/prerender` amplía hreflang DE/PT para hubs clave;
+  - `supabase/functions/sitemap` marca herramientas online como multilingues en vez de ES-only.
+- Validacion local:
+  - `npx tsc --noEmit --pretty false`: OK.
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts`: OK, `20/20`.
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`: OK.
+  - `git diff --check`: OK.
+  - `npm run build`: OK con avisos conocidos de Browserslist desactualizado y chunks grandes.
+  - Chrome local sobre `http://127.0.0.1:5177`: `/de`, `/pt`, `/de/kontakt`, `/pt/contacto`, `/de/preise`, `/pt/precos`, herramientas localizadas y thank-you localizados devuelven `html lang` correcto, canonical propio, `7` hreflang en paginas indexables y sin `Not found`.
+- Contradiccion productiva actual: hasta publicar este frontend, `curl` humano a produccion sigue viendo el shell SPA con titulo/canonical raiz en rutas como `/de`, `/pt`, `/de/kontakt` y `/pt/precos`; local ya corrige el DOM tras JS.
+- `src/components/WineListAnalyzerTool.tsx` sigue siendo cambio ajeno/preexistente y no se ha tocado.
+
+## Decisiones
+
+- Cerrar primero canonicals/hreflang y paridad humano-bot DE/PT antes de ampliar contenido de forma masiva.
+- Mantener herramientas localizadas en sitemap/Worker, pero corregir React humano por fases: primero SEO/canonical/H1, despues traduccion completa de cuerpo, formularios y resultados.
+- Tratar Edge directa `sitemap` como fuente que tambien debe emitir herramientas localizadas, no depender solo del Worker para inyectarlas.
+- Mantener las paginas `gracias` como `noindex`, pero con URL/canonical localizado para no heredar canonical raiz del shell.
+
+## Hipotesis
+
+- Publicar este lote deberia corregir la senal humana JS de DE/PT en paginas base y reducir contradicciones frente al bot.
+- Completar traduccion de cuerpo en herramientas, `Hoteles` y `GruposRestauracion` sera el siguiente salto real de paridad internacional.
+- El fallback home `200` de Edge `prerender` para articulos futuros ya no expone contenido futuro, pero idealmente deberia evolucionar a `404/noindex` tambien en Edge directa.
+
+## Tareas pendientes
+
+- Publicar frontend y Edge Functions con este lote DE/PT.
+- Revalidar produccion post-publish:
+  - `/de`, `/pt`, `/de/kontakt`, `/pt/contacto`, `/de/preise`, `/pt/precos`;
+  - herramientas localizadas principales;
+  - `/sitemap.xml` y Edge directa `sitemap`;
+  - Googlebot/humano comparados en una muestra.
+- Traducir cuerpo completo de herramientas online que aun conservan calculos/campos/resultados en espanol:
+  - `CalculadoraFugaMargen`;
+  - `ComparadorDistribuidores`;
+  - `SimuladorSenalMargenes`;
+  - `TestPerfilRim`;
+  - `SimuladorParetoCarta`.
+- Corregir fallback EN visible en `Hoteles` y `GruposRestauracion` para DE/PT.
+- Mantener fuera del commit cualquier cambio ajeno de `WineListAnalyzerTool.tsx`.
+
 ## Actualizacion 2026-07-06: revalidacion editorial, sitemap/prerender e idiomas
 
 ## Hechos

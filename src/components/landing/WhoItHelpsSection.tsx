@@ -156,6 +156,80 @@ const data: Record<string, {
       },
     ],
   },
+  de: {
+    badge: "Für jede Rolle",
+    title: "Wie Winerim ",
+    titleHighlight: "jedes Team unterstützt",
+    roles: [
+      {
+        icon: Users,
+        title: "Serviceteam",
+        benefits: [
+          "Wein sicher empfehlen, auch ohne Sommelier-Ausbildung",
+          "Automatische Pairings für jedes Gericht",
+          "Gästefragen direkt beantworten",
+          "Höherwertige Weine vorschlagen, ohne aufdringlich zu wirken",
+        ],
+      },
+      {
+        icon: Briefcase,
+        title: "Geschäftsführung",
+        benefits: [
+          "Echtzeitblick auf den Weinumsatz",
+          "Klare KPIs: Durchschnittsbon, Rotation, Marge",
+          "Erkennung von langsam drehenden Weinen im Keller",
+          "Kostenkontrolle und Preisoptimierung",
+        ],
+      },
+      {
+        icon: ShoppingCart,
+        title: "Einkauf / Weinkeller",
+        benefits: [
+          "Warnungen bei niedrigem Bestand, bevor etwas ausgeht",
+          "Rotationsdaten für bessere Nachbestellungen",
+          "Margenanalyse nach Referenz und Lieferant",
+          "Weniger gebundener Bestand und weniger Überalterung",
+        ],
+      },
+    ],
+  },
+  pt: {
+    badge: "Para cada função",
+    title: "Como a Winerim ajuda ",
+    titleHighlight: "cada equipa",
+    roles: [
+      {
+        icon: Users,
+        title: "Equipa de sala",
+        benefits: [
+          "Recomendar vinho com confiança, mesmo sem sommelier",
+          "Harmonizações automáticas para cada prato",
+          "Responder às perguntas do cliente no momento",
+          "Sugerir vinhos de maior valor sem ser intrusivo",
+        ],
+      },
+      {
+        icon: Briefcase,
+        title: "Direção / Gestão",
+        benefits: [
+          "Visibilidade em tempo real sobre vendas de vinho",
+          "KPIs claros: ticket médio, rotação, margem",
+          "Deteção de vinhos parados que ocupam garrafeira",
+          "Controlo de custos e otimização de preços",
+        ],
+      },
+      {
+        icon: ShoppingCart,
+        title: "Compras / Garrafeira",
+        benefits: [
+          "Alertas de stock baixo antes da rutura",
+          "Dados de rotação para decidir o que repor",
+          "Análise de margem por referência e fornecedor",
+          "Redução de stock parado e obsolescência",
+        ],
+      },
+    ],
+  },
 };
 
 const WhoItHelpsSection = () => {

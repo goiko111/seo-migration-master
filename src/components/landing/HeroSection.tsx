@@ -15,6 +15,7 @@ const heroData: Record<string, {
   ctaPrimaryMicro: string;
   ctaSecondary: string;
   proof: string;
+  imageAlt: string;
 }> = {
   es: {
     badge: "Software de gestión de carta de vinos",
@@ -26,6 +27,7 @@ const heroData: Record<string, {
     ctaPrimaryMicro: "15 min · Sin compromiso · Adaptada a tu negocio",
     ctaSecondary: "Ver cómo funciona",
     proof: "+1.000 bodegas gestionadas en 15 países",
+    imageAlt: "Winerim — carta de vinos inteligente en tablet para restaurantes",
   },
   en: {
     badge: "Wine list management software",
@@ -37,6 +39,7 @@ const heroData: Record<string, {
     ctaPrimaryMicro: "15 min · No commitment · Tailored to your business",
     ctaSecondary: "See how it works",
     proof: "+1,000 cellars managed across 15 countries",
+    imageAlt: "Winerim smart wine list on a tablet for restaurants",
   },
   it: {
     badge: "Software gestione carta dei vini",
@@ -48,6 +51,7 @@ const heroData: Record<string, {
     ctaPrimaryMicro: "15 min · Senza impegno · Adattata al tuo business",
     ctaSecondary: "Scopri come funziona",
     proof: "+1.000 cantine gestite in 15 paesi",
+    imageAlt: "Winerim — carta dei vini intelligente su tablet per ristoranti",
   },
   fr: {
     badge: "Logiciel de gestion de carte des vins",
@@ -59,6 +63,31 @@ const heroData: Record<string, {
     ctaPrimaryMicro: "15 min · Sans engagement · Adaptée à votre activité",
     ctaSecondary: "Voir comment ça marche",
     proof: "+1 000 caves gérées dans 15 pays",
+    imageAlt: "Winerim — carte des vins intelligente sur tablette pour restaurants",
+  },
+  de: {
+    badge: "Software für Weinkarten-Management",
+    title: "Verkaufen Sie mehr Wein. Verbessern Sie Margen. Steuern Sie Ihren Keller.",
+    titleHighlight: "",
+    subtitle: "Winerim ist die Software, die Ihre Weinkarte in ein Werkzeug für Verkauf, Analyse und Management verwandelt — mit KI, ohne vom Sommelier abhängig zu sein.",
+    forWhom: "Für Restaurants, Hotels und Gastronomiegruppen",
+    ctaPrimary: "Kostenlose Demo anfragen",
+    ctaPrimaryMicro: "15 Min. · Unverbindlich · Auf Ihr Geschäft zugeschnitten",
+    ctaSecondary: "So funktioniert es",
+    proof: "+1.000 verwaltete Weinkeller in 15 Ländern",
+    imageAlt: "Winerim — intelligente Weinkarte auf dem Tablet für Restaurants",
+  },
+  pt: {
+    badge: "Software de gestão de cartas de vinho",
+    title: "Venda mais vinho. Melhore margens. Controle a sua garrafeira.",
+    titleHighlight: "",
+    subtitle: "A Winerim é o software que transforma a sua carta de vinhos numa ferramenta de venda, análise e gestão — com IA, sem depender do sommelier.",
+    forWhom: "Para restaurantes, hotéis e grupos de restauração",
+    ctaPrimary: "Pedir demo gratuita",
+    ctaPrimaryMicro: "15 min · Sem compromisso · Adaptada ao seu negócio",
+    ctaSecondary: "Ver como funciona",
+    proof: "+1.000 garrafeiras geridas em 15 países",
+    imageAlt: "Winerim — carta de vinhos inteligente em tablet para restaurantes",
   },
 };
 
@@ -149,7 +178,7 @@ const HeroSection = memo(() => {
               <div className="absolute -inset-8 bg-[radial-gradient(ellipse,hsl(var(--wine)/0.12),transparent_70%)] blur-2xl" />
               <img
                 src={heroTabletImg}
-                alt="Winerim — carta de vinos inteligente en tablet para restaurantes"
+                alt={h.imageAlt}
                 className="relative w-full max-w-2xl mx-auto drop-shadow-2xl rounded-2xl animate-fade-in-up animation-delay-400"
                 loading="eager"
                 {...({ fetchpriority: "high" } as Record<string, string>)}

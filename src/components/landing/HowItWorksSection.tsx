@@ -23,6 +23,16 @@ const stepsByLang: Record<string, { title: string; desc: string }[]> = {
     { title: "Winerim la transforme en expérience digitale", desc: "Notre IA génère descriptions, accords, filtres et recommandations intelligentes pour chaque référence de votre cave." },
     { title: "Vous commencez à vendre plus de vin", desc: "Vos clients découvrent, comparent et choisissent en confiance. Votre ticket moyen augmente naturellement dès le premier jour." },
   ],
+  de: [
+    { title: "Wir importieren Ihre Weinkarte", desc: "Sie senden uns Ihre aktuelle Karte in jedem Format. Wir digitalisieren und strukturieren alle Informationen." },
+    { title: "Winerim macht daraus ein digitales Erlebnis", desc: "Unsere KI erstellt Beschreibungen, Pairings, Filter und intelligente Empfehlungen fur jede Referenz im Keller." },
+    { title: "Sie verkaufen mehr Wein", desc: "Ihre Gaste entdecken, vergleichen und wahlen sicherer. Der durchschnittliche Bon steigt naturlich ab dem ersten Tag." },
+  ],
+  pt: [
+    { title: "Importamos a sua carta de vinhos", desc: "Envia-nos a carta atual em qualquer formato. Tratamos da digitalizacao e estruturacao de toda a informacao." },
+    { title: "A Winerim transforma-a numa experiencia digital", desc: "A nossa IA gera descricoes, harmonizacoes, filtros e recomendacoes inteligentes para cada referencia da garrafeira." },
+    { title: "Comeca a vender mais vinho", desc: "Os clientes descobrem, comparam e escolhem com confianca. O ticket medio sobe naturalmente desde o primeiro dia." },
+  ],
 };
 
 const icons = [Upload, Sparkles, TrendingUp];

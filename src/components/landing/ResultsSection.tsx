@@ -23,6 +23,16 @@ const metricsByLang: Record<string, { label: string; desc: string; color: string
     { label: "Ticket moyen plus élevé", desc: "Les recommandations guident vers des vins de plus grande valeur", color: "from-accent to-gold-light" },
     { label: "Meilleure rotation de cave", desc: "L'analytique identifie quels vins fonctionnent et lesquels non", color: "from-wine-light to-accent" },
   ],
+  de: [
+    { label: "Mehr Wein verkauft", desc: "Gaste entdecken mehr Referenzen und bestellen mit Vertrauen", color: "from-wine to-wine-light" },
+    { label: "Hoherer Durchschnittsbon", desc: "Intelligente Empfehlungen lenken zu wertigeren Weinen", color: "from-accent to-gold-light" },
+    { label: "Bessere Kellerrotation", desc: "Analysen zeigen, welche Weine funktionieren und welche nicht", color: "from-wine-light to-accent" },
+  ],
+  pt: [
+    { label: "Mais vinho vendido", desc: "Os clientes exploram mais referencias e pedem com confianca", color: "from-wine to-wine-light" },
+    { label: "Ticket medio mais alto", desc: "As recomendacoes inteligentes guiam para vinhos de maior valor", color: "from-accent to-gold-light" },
+    { label: "Melhor rotacao da garrafeira", desc: "A analise identifica que vinhos funcionam e quais devem ser revistos", color: "from-wine-light to-accent" },
+  ],
 };
 
 const ResultsSection = () => {

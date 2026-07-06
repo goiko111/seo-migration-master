@@ -2,6 +2,46 @@
 
 ## 2026-07-06
 
+### Lote DE/PT, canonicals, hreflang y paridad humano-bot
+
+#### Hechos
+
+- Se revalido que el sitemap publico y la Edge directa ya no contienen URLs futuras del 2026-07-13.
+- Edge `prerender` directa ya no renderiza el contenido futuro, aunque responde fallback home `200`.
+- Los agentes de idioma y SEO/paridad identificaron dos frentes principales:
+  - DE/PT en paginas base y componentes compartidos;
+  - herramientas online con Worker/bot localizado pero React humano incompleto.
+- Se implemento un primer lote local de correcciones:
+  - home, contacto, precios, demo y thank-you con canonical localizado;
+  - formularios compartidos DE/PT;
+  - secciones home DE/PT y alt localizado;
+  - badges/navbar y `NextSteps` DE/PT;
+  - hub de herramientas DE/PT;
+  - herramientas criticas con canonical/hreflang/H1 localizado;
+  - Edge `prerender` con hreflang DE/PT en hubs;
+  - Edge `sitemap` con herramientas online multilingues.
+- Validaciones locales pasaron: TypeScript, test SEO, Deno, build, diff check y Chrome DOM local.
+
+#### Decisiones
+
+- Priorizar correccion de senales canonicals/hreflang/paridad antes de seguir creando contenido nuevo.
+- Mantener herramientas localizadas en sitemap, pero completar su React humano por fases para evitar retirar cobertura SEO ya publicada.
+- Considerar `gracias` una pagina `noindex`, pero con canonical localizado para no heredar raiz.
+- Registrar como pendiente separado la traduccion profunda de herramientas, `Hoteles` y `GruposRestauracion`.
+- Mantener `src/components/WineListAnalyzerTool.tsx` fuera de este lote por ser cambio ajeno.
+
+#### Hipotesis
+
+- Publicar este lote reducira canonicals cruzados y fallbacks visibles en DE/PT.
+- La siguiente tanda de traduccion profunda en herramientas reducira la diferencia restante entre bot y humano.
+- La Edge directa deberia idealmente devolver `404/noindex` para futuros, aunque ya no expone contenido futuro.
+
+#### Tareas pendientes
+
+- Publicar frontend/Edge con el lote DE/PT.
+- Revalidar produccion y Search Console cuando Google recrawlee rutas localizadas.
+- Traducir herramientas completas y corregir `Hoteles`/`GruposRestauracion`.
+
 ### Hotfix editorial SEO, sitemap/prerender y prioridad de idiomas
 
 #### Hechos

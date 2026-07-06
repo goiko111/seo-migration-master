@@ -27,6 +27,18 @@ const problemsByLang: Record<string, { icon: typeof Wine; text: string }[]> = {
     { icon: PackageX, text: "Des vins restent sans rotation, mal positionnés dans la carte." },
     { icon: BarChart3, text: "Aucune donnée claire pour les décisions d'achat ou de tarification." },
   ],
+  de: [
+    { icon: Wine, text: "Die Weinkarte verkauft nicht, sie informiert nur. Wein bleibt unterverkauft." },
+    { icon: Users, text: "Dem Serviceteam fehlen Zeit und Wissen, um Weine sicher zu empfehlen." },
+    { icon: PackageX, text: "Weine bleiben ohne Rotation stehen und Referenzen sind falsch positioniert." },
+    { icon: BarChart3, text: "Es fehlen klare Daten fur Einkauf, Preise und Sortimentsentscheidungen." },
+  ],
+  pt: [
+    { icon: Wine, text: "A carta de vinhos nao vende, apenas informa. O vinho fica subvendido." },
+    { icon: Users, text: "A equipa de sala nao tem tempo nem conhecimento para recomendar vinhos." },
+    { icon: PackageX, text: "Ha vinhos parados sem rotacao e referencias mal posicionadas." },
+    { icon: BarChart3, text: "Faltam dados claros para decisoes de compra e pricing." },
+  ],
 };
 
 const copyByLang: Record<string, { badge: string; title: string; highlight: string; quote: string; quoteHighlight: string }> = {
@@ -34,6 +46,8 @@ const copyByLang: Record<string, { badge: string; title: string; highlight: stri
   en: { badge: "The problem", title: "Wine should be your biggest margin… ", highlight: "but it rarely is.", quote: "Low sales, poor rotation, lack of floor knowledge, ", quoteHighlight: "decisions without data." },
   it: { badge: "Il problema", title: "Il vino dovrebbe essere il tuo margine più alto… ", highlight: "ma raramente lo è.", quote: "Vendite basse, rotazione scarsa, poca conoscenza in sala, ", quoteHighlight: "decisioni senza dati." },
   fr: { badge: "Le problème", title: "Le vin devrait être votre plus grande marge… ", highlight: "mais c'est rarement le cas.", quote: "Ventes faibles, mauvaise rotation, manque de connaissances en salle, ", quoteHighlight: "décisions sans données." },
+  de: { badge: "Das Problem", title: "Wein sollte Ihre starkste Marge sein… ", highlight: "ist es aber selten.", quote: "Niedrige Verkaufe, schwache Rotation, wenig Wissen im Service, ", quoteHighlight: "Entscheidungen ohne Daten." },
+  pt: { badge: "O problema", title: "O vinho deveria ser a sua maior margem… ", highlight: "mas raramente e.", quote: "Baixa venda, pouca rotacao, falta de conhecimento em sala, ", quoteHighlight: "decisoes sem dados." },
 };
 
 const ProblemSection = () => {

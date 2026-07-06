@@ -88,8 +88,49 @@ const classifyProfile = (decision: Decision, marginPct: number, velocityMonthly:
   return "estable";
 };
 
+const seoCopy = {
+  es: {
+    title: "Simulador de señal de Márgenes para vino",
+    description: "Calcula una señal simplificada de Márgenes Winerim: ok, no reponer, liquidar o crítico según stock, ventas, PVP, coste y días sin venta.",
+    tools: "Herramientas",
+    breadcrumb: "Simulador de señal de Márgenes",
+  },
+  en: {
+    title: "Wine margin signal simulator",
+    description: "Calculate a simplified Winerim margin signal: ok, do not reorder, liquidate or critical based on stock, sales, price, cost and days without sale.",
+    tools: "Tools",
+    breadcrumb: "Margin signal simulator",
+  },
+  it: {
+    title: "Simulatore segnale margini vino",
+    description: "Calcola un segnale semplificato di margini Winerim: ok, non riordinare, liquidare o critico in base a stock, vendite, prezzo, costo e giorni senza vendita.",
+    tools: "Strumenti",
+    breadcrumb: "Simulatore segnale margini",
+  },
+  fr: {
+    title: "Simulateur de signal de marges vin",
+    description: "Calculez un signal simplifié de marges Winerim : ok, ne pas recommander, liquider ou critique selon stock, ventes, prix, coût et jours sans vente.",
+    tools: "Outils",
+    breadcrumb: "Simulateur signal de marges",
+  },
+  de: {
+    title: "Margensignal-Simulator für Wein",
+    description: "Berechnen Sie ein vereinfachtes Winerim-Margensignal: ok, nicht nachbestellen, liquidieren oder kritisch anhand von Bestand, Verkäufen, Preis, Kosten und Tagen ohne Verkauf.",
+    tools: "Tools",
+    breadcrumb: "Margensignal-Simulator",
+  },
+  pt: {
+    title: "Simulador de sinal de margens para vinho",
+    description: "Calcule um sinal simplificado de Margens Winerim: ok, não repor, liquidar ou crítico conforme stock, vendas, PVP, custo e dias sem venda.",
+    tools: "Ferramentas",
+    breadcrumb: "Simulador de sinal de margens",
+  },
+};
+
 const SimuladorSenalMargenes = () => {
-  const { localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const s = seoCopy[lang] || seoCopy.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-senal-margenes")}`;
   const [form, setForm] = useState({
     wine: "Ribera premium",
     pvp: "64",
@@ -144,19 +185,20 @@ const SimuladorSenalMargenes = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Simulador de señal de Márgenes para vino"
-        description="Calcula una señal simplificada de Márgenes Winerim: ok, no reponer, liquidar o crítico según stock, ventas, PVP, coste y días sin venta."
-        url={`${CANONICAL_DOMAIN}/herramientas/simulador-senal-margenes`}
+        title={s.title}
+        description={s.description}
+        url={canonicalUrl}
+        hreflang={allLangPaths("/herramientas/simulador-senal-margenes")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Simulador de señal de Márgenes" }]} />
+            <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               Demo · Winerim Márgenes
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Simulador de señal de Márgenes
+              {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               Introduce PVP, coste, stock, ventas mensuales y días sin venta. La herramienta devuelve una señal simplificada: mantener, no reponer, liquidar o revisar como crítico.

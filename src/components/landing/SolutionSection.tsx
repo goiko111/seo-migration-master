@@ -31,6 +31,20 @@ const benefitsByLang: Record<string, { title: string; desc: string }[]> = {
     { title: "Outil d'analyse", desc: "Données comportement client, KPIs et Big Data de votre carte." },
     { title: "Outil de formation", desc: "L'équipe de salle apprend en travaillant, sans dépendre du sommelier." },
   ],
+  de: [
+    { title: "Verkaufswerkzeug", desc: "Die Karte fuhrt Gaste zu besseren Entscheidungen und konvertiert mehr." },
+    { title: "Empfehlungswerkzeug", desc: "KI und automatische Pairings fur jedes Gericht und jedes Gasteprofil." },
+    { title: "Managementwerkzeug", desc: "Bestand, Preise, Rotation und Verfugbarkeit in einem einzigen Panel." },
+    { title: "Analysewerkzeug", desc: "Gastverhalten, KPIs und Big-Data-Signale Ihrer Weinkarte." },
+    { title: "Schulungswerkzeug", desc: "Das Serviceteam lernt wahrend der Arbeit, ohne vom Sommelier abhangig zu sein." },
+  ],
+  pt: [
+    { title: "Ferramenta de venda", desc: "A carta guia o cliente para melhores decisoes e converte mais." },
+    { title: "Ferramenta de recomendacao", desc: "IA e harmonizacoes automaticas para cada prato e perfil." },
+    { title: "Ferramenta de gestao", desc: "Stock, pricing, rotacao e disponibilidade num unico painel." },
+    { title: "Ferramenta de analise", desc: "Dados de comportamento, KPIs e Big Data da sua carta." },
+    { title: "Ferramenta de formacao", desc: "A equipa de sala aprende enquanto trabalha, sem depender do sommelier." },
+  ],
 };
 
 const subtitleByLang: Record<string, { badge: string; title: string; subtitle: string }> = {
@@ -38,6 +52,8 @@ const subtitleByLang: Record<string, { badge: string; title: string; subtitle: s
   en: { badge: "The solution", title: "Your wine list becomes <em>5 tools in one</em>", subtitle: "Winerim transforms your wine list into a sales, recommendation, management, analytics, and training tool." },
   it: { badge: "La soluzione", title: "La tua carta dei vini diventa <em>5 strumenti in uno</em>", subtitle: "Winerim trasforma la tua carta in uno strumento di vendita, raccomandazione, gestione, analisi e formazione." },
   fr: { badge: "La solution", title: "Votre carte des vins devient <em>5 outils en un</em>", subtitle: "Winerim transforme votre carte en outil de vente, recommandation, gestion, analyse et formation." },
+  de: { badge: "Die Losung", title: "Ihre Weinkarte wird zu <em>5 Werkzeugen in einem</em>", subtitle: "Winerim verwandelt Ihre Karte in ein Werkzeug fur Verkauf, Empfehlung, Management, Analyse und Schulung." },
+  pt: { badge: "A solucao", title: "A sua carta de vinhos torna-se <em>5 ferramentas numa so</em>", subtitle: "A Winerim transforma a sua carta numa ferramenta de venda, recomendacao, gestao, analise e formacao." },
 };
 
 const icons = [ShoppingCart, Sparkles, Settings, BarChart3, GraduationCap];

@@ -210,6 +210,11 @@ const esRoutes = (
     <Route path="/demo" element={<Demo />} />
     <Route path="/meta-demo" element={<MetaDemoLanding />} />
     <Route path="/gracias" element={<Gracias />} />
+    <Route path="/en/thank-you" element={<Gracias />} />
+    <Route path="/it/grazie" element={<Gracias />} />
+    <Route path="/fr/merci" element={<Gracias />} />
+    <Route path="/de/danke" element={<Gracias />} />
+    <Route path="/pt/obrigado" element={<Gracias />} />
     <Route path="/faqs" element={<FAQs />} />
     <Route path="/article/:slug" element={<ArticlePage />} />
     <Route path="/admin/login" element={<AdminLogin />} />

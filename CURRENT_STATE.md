@@ -1,5 +1,68 @@
 # Current State
 
+## Actualizacion 2026-07-06: lote DE/PT/canonicals/hreflang en curso
+
+## Hechos
+
+- Se leyeron al inicio de sesion los cuatro documentos fuente de verdad.
+- Edge Functions publicadas fueron revalidadas:
+  - sitemap publico: `2333` URLs, `13191` `xhtml:link`, `0` URLs futuras.
+  - sitemap Edge directo: `2302` URLs, `12974` `xhtml:link`, `0` URLs futuras.
+  - prerender Edge directo para articulos futuros ya no muestra contenido futuro ni titulos futuros; devuelve fallback home `200`.
+- Se ejecutaron dos agentes en paralelo, ambos solo lectura:
+  - agente idioma: detecto deuda en `GruposRestauracion`, `Hoteles`, formularios, `NextSteps`, `Navbar`, `Herramientas` y hero DE/PT.
+  - agente SEO/paridad: detecto herramientas localizadas con Worker/bot correcto pero React humano con canonical o copy ES, y hreflang incompleto en Edge.
+- Se implemento localmente el primer lote DE/PT:
+  - home DE/PT: copy principal y secciones compartidas localizadas, canonical propio.
+  - contacto/precios/demo: canonical y navegacion interna localizados.
+  - formularios compartidos: opciones, labels y placeholders DE/PT.
+  - pagina de gracias localizada y rutas `/en/thank-you`, `/it/grazie`, `/fr/merci`, `/de/danke`, `/pt/obrigado`.
+  - herramientas: canonical/hreflang/H1 principales localizados en las rutas criticas y canonical corregido en herramientas que ya tenian i18n.
+  - `Herramientas` hub: controles, resumen y metodologia DE/PT.
+  - Edge `prerender`: hreflang DE/PT agregado a hubs clave.
+  - Edge `sitemap`: herramientas online marcadas como multilingues.
+- Validaciones locales pasadas:
+  - TypeScript;
+  - test SEO de biblioteca/aprender;
+  - Deno check de Edge Functions;
+  - `git diff --check`;
+  - build de Vite;
+  - inspeccion con Chrome local de rutas DE/PT.
+- La inspeccion local confirmo `html lang`, canonical propio, `7` hreflang y ausencia de `Not found` en rutas base y herramientas probadas.
+- Produccion aun no tiene este lote frontend publicado; `curl` humano a produccion sigue viendo shell SPA con canonical raiz en rutas DE/PT hasta el publish.
+- `src/components/WineListAnalyzerTool.tsx` sigue modificado por cambios ajenos/preexistentes y no forma parte de este lote.
+
+## Decisiones
+
+- Este lote prioriza senales SEO y paridad visible de primer nivel; la traduccion completa de todos los formularios/resultados internos de herramientas queda en una segunda tanda.
+- No retirar herramientas localizadas del sitemap: se corrige la fuente humana React y Edge para alinearlas progresivamente.
+- Mantener `gracias` noindex pero con canonical localizado.
+- No mezclar el cambio ajeno `WineListAnalyzerTool.tsx`.
+
+## Hipotesis
+
+- Tras publicar este lote, Search Console deberia ver canonicals propios en DE/PT para paginas base y herramientas localizadas.
+- Las herramientas con cuerpo aun parcialmente ES pueden seguir siendo un riesgo de experiencia humana, aunque ya no deberian enviar canonical ES.
+- `Hoteles` y `GruposRestauracion` son ahora el mayor bloque visible de fallback internacional pendiente.
+
+## Contradicciones / dudas abiertas
+
+- Estado productivo anterior decia Edge directa seguia con futuras; la revalidacion actual muestra Edge directa ya sin URLs futuras.
+- Edge `prerender` directa para articulos futuros no expone contenido futuro, pero responde fallback home `200`; no es fuga critica, pero no es la respuesta ideal.
+- Produccion humana no publicada aun devuelve shell con canonical raiz por `curl`; local JS ya lo corrige.
+
+## Tareas pendientes
+
+- Publicar este lote en Lovable/frontend y Edge Functions.
+- Revalidar produccion con navegador real y Googlebot:
+  - `/de`, `/pt`, `/de/kontakt`, `/pt/contacto`, `/de/preise`, `/pt/precos`;
+  - herramientas localizadas principales;
+  - sitemap publico y Edge directo.
+- Completar traduccion profunda de herramientas online:
+  - labels de inputs, resultados, FAQ, CTA e internal links.
+- Completar DE/PT en `Hoteles` y `GruposRestauracion`.
+- Despues de cerrar i18n, retomar Biblioteca del vino y Aprender vino con los lotes programados.
+
 ## Actualizacion 2026-07-06: revalidacion produccion, hotfix SEO editorial y prioridad DE/PT
 
 ## Hechos

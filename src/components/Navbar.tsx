@@ -36,7 +36,14 @@ const Navbar = memo(() => {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
   const { t, localePath, lang } = useLanguage();
 
-  const newBadge = lang === "es" ? "Nuevo" : lang === "en" ? "New" : lang === "it" ? "Nuovo" : "Nouveau";
+  const newBadge = {
+    es: "Nuevo",
+    en: "New",
+    it: "Nuovo",
+    fr: "Nouveau",
+    de: "Neu",
+    pt: "Novo",
+  }[lang] || "New";
 
   /* ── Navigation structure ────────────────────── */
   const navItems: NavItem[] = [

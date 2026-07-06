@@ -485,6 +485,7 @@ const formatEur = (n: number) => new Intl.NumberFormat("es-ES", { style: "curren
 const CalculadoraStockMuerto = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-stock-muerto")}`;
 
   const [items, setItems] = useState<StockItem[]>([emptyItem(), emptyItem(), emptyItem()]);
   const [calculated, setCalculated] = useState(false);
@@ -552,7 +553,7 @@ const CalculadoraStockMuerto = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url={`${CANONICAL_DOMAIN}/herramientas/calculadora-stock-muerto`}
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={canonicalUrl}
         hreflang={allLangPaths("/herramientas/calculadora-stock-muerto")} />
       <Navbar />
 

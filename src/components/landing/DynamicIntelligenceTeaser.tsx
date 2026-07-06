@@ -44,12 +44,28 @@ const data: Record<string, {
     benefits: ["Plus de marge", "Plus de rotation", "Plus de contrôle aux heures de pointe", "Plus de cohérence commerciale"],
     cta: "Découvrir l'Intelligence Dynamique",
   },
+  de: {
+    badge: "Dynamische Intelligenz",
+    title: "Die Karte, die sich anpasst, ",
+    titleHighlight: "um besser zu verkaufen",
+    subtitle: "Winerim entwickelt sich zu einer dynamischen Intelligenzschicht, die Weine priorisiert, Empfehlungen neu ordnet und Strategien nach Marge, Bestand, Kontext und Zielen aktiviert.",
+    benefits: ["Mehr Marge", "Mehr Rotation", "Mehr Kontrolle in Spitzenzeiten", "Mehr kommerzielle Koharenz"],
+    cta: "Dynamische Intelligenz entdecken",
+  },
+  pt: {
+    badge: "Inteligencia dinamica",
+    title: "A carta que se adapta ",
+    titleHighlight: "para vender melhor",
+    subtitle: "A Winerim evolui para uma camada de inteligencia dinamica que prioriza vinhos, reorganiza recomendacoes e ativa estrategias segundo margem, stock, contexto e objetivos.",
+    benefits: ["Mais margem", "Mais rotacao", "Mais controlo nas horas de maior procura", "Mais coerencia comercial"],
+    cta: "Descobrir Inteligencia Dinamica",
+  },
 };
 
 const icons = [TrendingUp, RefreshCw, Gauge, BarChart3];
 
 const DynamicIntelligenceTeaser = () => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const d = data[lang] || data.es;
 
   return (
@@ -99,7 +115,7 @@ const DynamicIntelligenceTeaser = () => {
               </div>
 
               <Link
-                to="/producto/inteligencia-dinamica"
+                to={localePath("/producto/inteligencia-dinamica")}
                 className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:shadow-wine/15 hover:-translate-y-0.5"
               >
                 {d.cta}

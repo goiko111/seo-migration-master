@@ -96,6 +96,44 @@ const data: Record<string, {
       { name: "Winerim Supply", verb: "Achète mieux", href: "/producto/winerim-supply" },
     ],
   },
+  de: {
+    badge: "Eine andere Kategorie",
+    title: "Winerim ist nicht nur eine ",
+    titleHighlight: "digitale Weinkarte",
+    subtitle: "Während andere Lösungen nur Weine anzeigen, hilft Winerim dabei, besser zu verkaufen, klüger einzukaufen und die ganze Weinkategorie zu steuern.",
+    blocks: [
+      { label: "QR- oder PDF-Karte", them: "Zeigt Weine an", us: "Winerim führt die Wahl und verbessert die Gästeerfahrung" },
+      { label: "Einfache digitale Karte", them: "Digitalisiert die Karte", us: "Winerim analysiert Marge, Rotation, Preise und Kartengesundheit" },
+      { label: "Einzelne Werkzeuge", them: "Lösen einen Teil des Problems", us: "Winerim verbindet Analyse, taktische Umsetzung und Einkaufsintelligenz" },
+      { label: "Traditionelles Management", them: "Beruht auf Intuition und Tabellen", us: "Winerim macht Wein mit echten Daten steuerbar" },
+    ],
+    flowLabel: "Besser einkaufen → Besser analysieren → Besser verkaufen",
+    cta: "Sehen, wie Winerim funktioniert",
+    capsules: [
+      { name: "Winerim Core", verb: "Analysiert", href: "/producto/winerim-core" },
+      { name: "Dynamische Intelligenz", verb: "Handelt", href: "/producto/inteligencia-dinamica" },
+      { name: "Winerim Supply", verb: "Kauft besser", href: "/producto/winerim-supply" },
+    ],
+  },
+  pt: {
+    badge: "Uma categoria diferente",
+    title: "A Winerim não é apenas uma ",
+    titleHighlight: "carta digital",
+    subtitle: "Enquanto outras soluções apenas mostram vinhos, a Winerim ajuda a vender melhor, comprar com mais critério e gerir toda a categoria vinho.",
+    blocks: [
+      { label: "Carta QR ou PDF", them: "Mostra vinhos", us: "A Winerim guia a escolha e melhora a experiência do cliente" },
+      { label: "Carta digital básica", them: "Digitaliza a carta", us: "A Winerim analisa margem, rotação, pricing e saúde da carta" },
+      { label: "Ferramentas soltas", them: "Resolvem uma parte do problema", us: "A Winerim liga análise, execução tática e inteligência de compras" },
+      { label: "Gestão tradicional", them: "Depende de intuição e folhas de cálculo", us: "A Winerim transforma o vinho numa categoria gerível com dados reais" },
+    ],
+    flowLabel: "Comprar melhor → Analisar melhor → Vender melhor",
+    cta: "Ver como funciona a Winerim",
+    capsules: [
+      { name: "Winerim Core", verb: "Analisa", href: "/producto/winerim-core" },
+      { name: "Inteligência Dinâmica", verb: "Atua", href: "/producto/inteligencia-dinamica" },
+      { name: "Winerim Supply", verb: "Compra melhor", href: "/producto/winerim-supply" },
+    ],
+  },
 };
 
 const capsuleStyles = [
@@ -104,9 +142,102 @@ const capsuleStyles = [
   { accent: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20", icon: ShoppingCart },
 ];
 
+const comparisonTableCopy: Record<string, {
+  aria: string;
+  caption: string;
+  columns: string[];
+  rows: string[][];
+}> = {
+  es: {
+    aria: "Comparativa Winerim vs alternativas",
+    caption: "Comparativa de soluciones de carta de vinos para restaurantes",
+    columns: ["Característica", "Carta QR / PDF", "Carta digital básica", "Herramientas sueltas", "Gestión tradicional", "Winerim"],
+    rows: [
+      ["Recomendaciones con IA", "No", "No", "Parcial", "No", "Sí"],
+      ["Maridajes automáticos", "No", "No", "No", "No", "Sí"],
+      ["Analítica de ventas", "No", "Básica", "Parcial", "Manual", "Avanzada"],
+      ["Control de stock", "No", "No", "Parcial", "Manual", "Automático"],
+      ["Optimización de precios", "No", "No", "No", "Manual", "Con datos"],
+      ["Multiidioma", "No", "Algunos", "No", "No", "6 idiomas"],
+      ["Formación equipo", "No", "No", "No", "No", "Integrada"],
+    ],
+  },
+  en: {
+    aria: "Winerim vs alternatives comparison",
+    caption: "Comparison of wine list solutions for restaurants",
+    columns: ["Feature", "QR / PDF list", "Basic digital list", "Standalone tools", "Traditional management", "Winerim"],
+    rows: [
+      ["AI recommendations", "No", "No", "Partial", "No", "Yes"],
+      ["Automatic pairings", "No", "No", "No", "No", "Yes"],
+      ["Sales analytics", "No", "Basic", "Partial", "Manual", "Advanced"],
+      ["Stock control", "No", "No", "Partial", "Manual", "Automatic"],
+      ["Price optimization", "No", "No", "No", "Manual", "Data-driven"],
+      ["Multilingual", "No", "Some", "No", "No", "6 languages"],
+      ["Team training", "No", "No", "No", "No", "Integrated"],
+    ],
+  },
+  it: {
+    aria: "Confronto Winerim vs alternative",
+    caption: "Confronto tra soluzioni per carta dei vini nei ristoranti",
+    columns: ["Funzionalità", "Carta QR / PDF", "Carta digitale base", "Strumenti separati", "Gestione tradizionale", "Winerim"],
+    rows: [
+      ["Raccomandazioni IA", "No", "No", "Parziale", "No", "Sì"],
+      ["Abbinamenti automatici", "No", "No", "No", "No", "Sì"],
+      ["Analisi vendite", "No", "Base", "Parziale", "Manuale", "Avanzata"],
+      ["Controllo stock", "No", "No", "Parziale", "Manuale", "Automatico"],
+      ["Ottimizzazione prezzi", "No", "No", "No", "Manuale", "Con dati"],
+      ["Multilingua", "No", "Alcuni", "No", "No", "6 lingue"],
+      ["Formazione team", "No", "No", "No", "No", "Integrata"],
+    ],
+  },
+  fr: {
+    aria: "Comparaison Winerim vs alternatives",
+    caption: "Comparaison des solutions de carte des vins pour restaurants",
+    columns: ["Fonctionnalité", "Carte QR / PDF", "Carte digitale basique", "Outils isolés", "Gestion traditionnelle", "Winerim"],
+    rows: [
+      ["Recommandations IA", "Non", "Non", "Partiel", "Non", "Oui"],
+      ["Accords automatiques", "Non", "Non", "Non", "Non", "Oui"],
+      ["Analytique des ventes", "Non", "Basique", "Partiel", "Manuel", "Avancée"],
+      ["Contrôle du stock", "Non", "Non", "Partiel", "Manuel", "Automatique"],
+      ["Optimisation des prix", "Non", "Non", "Non", "Manuel", "Avec données"],
+      ["Multilingue", "Non", "Certains", "Non", "Non", "6 langues"],
+      ["Formation équipe", "Non", "Non", "Non", "Non", "Intégrée"],
+    ],
+  },
+  de: {
+    aria: "Vergleich Winerim vs Alternativen",
+    caption: "Vergleich von Weinkarten-Lösungen für Restaurants",
+    columns: ["Funktion", "QR- / PDF-Karte", "Einfache digitale Karte", "Einzelne Tools", "Traditionelles Management", "Winerim"],
+    rows: [
+      ["KI-Empfehlungen", "Nein", "Nein", "Teilweise", "Nein", "Ja"],
+      ["Automatische Pairings", "Nein", "Nein", "Nein", "Nein", "Ja"],
+      ["Verkaufsanalyse", "Nein", "Basis", "Teilweise", "Manuell", "Fortgeschritten"],
+      ["Bestandskontrolle", "Nein", "Nein", "Teilweise", "Manuell", "Automatisch"],
+      ["Preisoptimierung", "Nein", "Nein", "Nein", "Manuell", "Datenbasiert"],
+      ["Mehrsprachigkeit", "Nein", "Einige", "Nein", "Nein", "6 Sprachen"],
+      ["Teamschulung", "Nein", "Nein", "Nein", "Nein", "Integriert"],
+    ],
+  },
+  pt: {
+    aria: "Comparação Winerim vs alternativas",
+    caption: "Comparação de soluções de carta de vinhos para restaurantes",
+    columns: ["Funcionalidade", "Carta QR / PDF", "Carta digital básica", "Ferramentas soltas", "Gestão tradicional", "Winerim"],
+    rows: [
+      ["Recomendações com IA", "Não", "Não", "Parcial", "Não", "Sim"],
+      ["Harmonizações automáticas", "Não", "Não", "Não", "Não", "Sim"],
+      ["Análise de vendas", "Não", "Básica", "Parcial", "Manual", "Avançada"],
+      ["Controlo de stock", "Não", "Não", "Parcial", "Manual", "Automático"],
+      ["Otimização de preços", "Não", "Não", "Não", "Manual", "Com dados"],
+      ["Multi-idioma", "Não", "Alguns", "Não", "Não", "6 idiomas"],
+      ["Formação da equipa", "Não", "Não", "Não", "Não", "Integrada"],
+    ],
+  },
+};
+
 const CategoryLeapSection = () => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const d = data[lang] || data.es;
+  const table = comparisonTableCopy[lang] || comparisonTableCopy.es;
 
   return (
     <section className="section-padding relative overflow-hidden">
@@ -168,26 +299,21 @@ const CategoryLeapSection = () => {
         </div>
 
         {/* Semantic comparison table for screen readers and bots */}
-        <table className="sr-only" aria-label="Comparativa Winerim vs alternativas">
-          <caption>Comparativa de soluciones de carta de vinos para restaurantes</caption>
+        <table className="sr-only" aria-label={table.aria}>
+          <caption>{table.caption}</caption>
           <thead>
             <tr>
-              <th scope="col">Característica</th>
-              <th scope="col">Carta QR / PDF</th>
-              <th scope="col">Carta digital básica</th>
-              <th scope="col">Herramientas sueltas</th>
-              <th scope="col">Gestión tradicional</th>
-              <th scope="col">Winerim</th>
+              {table.columns.map((column) => (
+                <th key={column} scope="col">{column}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <tr><td>Recomendaciones con IA</td><td>No</td><td>No</td><td>Parcial</td><td>No</td><td>Sí</td></tr>
-            <tr><td>Maridajes automáticos</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
-            <tr><td>Analítica de ventas</td><td>No</td><td>Básica</td><td>Parcial</td><td>Manual</td><td>Avanzada</td></tr>
-            <tr><td>Control de stock</td><td>No</td><td>No</td><td>Parcial</td><td>Manual</td><td>Automático</td></tr>
-            <tr><td>Optimización de precios</td><td>No</td><td>No</td><td>No</td><td>Manual</td><td>Con datos</td></tr>
-            <tr><td>Multiidioma</td><td>No</td><td>Algunos</td><td>No</td><td>No</td><td>4 idiomas</td></tr>
-            <tr><td>Formación equipo</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Integrada</td></tr>
+            {table.rows.map((row) => (
+              <tr key={row[0]}>
+                {row.map((cell, index) => <td key={`${row[0]}-${index}`}>{cell}</td>)}
+              </tr>
+            ))}
           </tbody>
         </table>
 
@@ -221,7 +347,7 @@ const CategoryLeapSection = () => {
               transition={{ delay: 0.7, duration: 0.4 }}
               className="text-wine"
             >
-              {lang === "es" ? "Vender mejor" : lang === "en" ? "Sell better" : lang === "it" ? "Vendere meglio" : "Mieux vendre"}
+              {lang === "es" ? "Vender mejor" : lang === "en" ? "Sell better" : lang === "it" ? "Vendere meglio" : lang === "de" ? "Besser verkaufen" : lang === "pt" ? "Vender melhor" : "Mieux vendre"}
             </motion.span>
           </div>
         </ScrollReveal>
@@ -233,7 +359,7 @@ const CategoryLeapSection = () => {
             return (
               <ScrollReveal key={cap.name} delay={0.35 + i * 0.08}>
                 <Link
-                  to={cap.href}
+                  to={localePath(cap.href)}
                   className={`group relative flex flex-col items-center text-center p-5 md:p-6 rounded-xl border ${style.border} bg-card/70 backdrop-blur-sm hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5`}
                 >
                   <div className={`w-9 h-9 rounded-lg ${style.bg} flex items-center justify-center mb-3`}>
@@ -256,7 +382,7 @@ const CategoryLeapSection = () => {
         <ScrollReveal delay={0.5}>
           <div className="text-center">
             <Link
-              to="/demo"
+              to={localePath("/demo")}
               className="inline-flex items-center gap-2 text-sm font-medium text-wine hover:text-wine-light transition-colors group"
             >
               {d.cta}

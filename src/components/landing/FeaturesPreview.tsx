@@ -36,6 +36,22 @@ const featuresByLang: Record<string, { icon: typeof QrCode; title: string; desc:
     { icon: BarChart3, title: "Analytique avancée", desc: "Rapports comportement, KPIs vente, métriques pour direction et achats." },
     { icon: Sparkles, title: "IA appliquée au vin", desc: "Génération de fiches, descripteurs sensoriels, recommandations commerciales et actions dynamiques." },
   ],
+  de: [
+    { icon: QrCode, title: "Interaktive digitale Weinkarte", desc: "Zugriff per QR/Link, dynamische Filter, Vergleich und mehrsprachige Navigation." },
+    { icon: Utensils, title: "Automatische Pairings mit KI", desc: "Intelligente Wein-Gericht-Empfehlungen fur jeden Gast und Kontext." },
+    { icon: Package, title: "Bestand und Inventar", desc: "Kontrolle von Flaschen, Verfugbarkeit, Rotation und automatische Hinweise." },
+    { icon: DollarSign, title: "Pricing und Margen", desc: "Preisanalysen, Margen pro Flasche/Glas und Erkennung schwacher Referenzen." },
+    { icon: BarChart3, title: "Erweiterte Analytik", desc: "Verhaltensberichte, Verkaufs-KPIs und Kennzahlen fur Leitung und Einkauf." },
+    { icon: Sparkles, title: "KI fur Wein", desc: "Generierung von Weinprofilen, sensorischen Beschreibungen, Empfehlungen und dynamischen Aktionen." },
+  ],
+  pt: [
+    { icon: QrCode, title: "Carta digital interativa", desc: "Acesso por QR/link, filtros dinamicos, comparador e navegacao multi-idioma." },
+    { icon: Utensils, title: "Harmonizacoes automaticas com IA", desc: "Recomendacoes vinho-prato inteligentes para cada cliente e contexto." },
+    { icon: Package, title: "Stock e inventario", desc: "Controlo de garrafas, disponibilidade, rotacao e alertas automaticos." },
+    { icon: DollarSign, title: "Pricing e margens", desc: "Analise de precos, margens por garrafa/copo e detecao de referencias pouco rentaveis." },
+    { icon: BarChart3, title: "Analitica avancada", desc: "Relatorios de comportamento, KPIs de venda e metricas para direcao e compras." },
+    { icon: Sparkles, title: "IA aplicada ao vinho", desc: "Geracao de fichas, descritores sensoriais, recomendacoes comerciais e acoes dinamicas." },
+  ],
 };
 
 const FeaturesPreview = () => {

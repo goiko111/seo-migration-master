@@ -18,6 +18,7 @@ import { ads } from "@/lib/analytics";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getCanonicalUrl } from "@/seo/config";
 
 const content: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string;
@@ -106,8 +107,9 @@ const content: Record<string, {
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { lang, allLangPaths } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
   const c = content[lang] || content.es;
+  const canonicalUrl = getCanonicalUrl(localePath("/contacto"));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -141,7 +143,7 @@ const Contacto = () => {
         last_name: leadData.name?.split(" ").slice(1).join(" ") || undefined,
         city: leadData.city || undefined,
       });
-      navigate("/gracias?tipo=contacto");
+      navigate(`${localePath("/gracias")}?tipo=contacto`);
       return;
     }
     setSubmitting(false);
@@ -150,7 +152,7 @@ const Contacto = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <SEOHead title={c.seo_title} description={c.seo_desc} url="https://winerim.wine/contacto" hreflang={allLangPaths("/contacto")} />
+      <SEOHead title={c.seo_title} description={c.seo_desc} url={canonicalUrl} hreflang={allLangPaths("/contacto")} />
       <main>
         <section className="pt-32 pb-16 section-padding text-center">
           <div className="max-w-2xl mx-auto"><Breadcrumbs items={[{ label: c.breadcrumb }]} /></div>
@@ -172,7 +174,7 @@ const Contacto = () => {
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">
                   {{ es: "Sin compromiso. Al enviar aceptas nuestra ", en: "No commitment. By submitting you accept our ", it: "Senza impegno. Inviando accetti la nostra ", fr: "Sans engagement. En envoyant vous acceptez notre ", de: "Unverbindlich. Mit dem Absenden akzeptieren Sie unsere ", pt: "Sem compromisso. Ao enviar aceita a nossa " }[lang]}
-                  <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
+                  <Link to={localePath("/privacidad")} className="underline hover:text-foreground transition-colors">
                     {{ es: "política de privacidad", en: "privacy policy", it: "informativa sulla privacy", fr: "politique de confidentialité", de: "Datenschutzrichtlinie", pt: "política de privacidade" }[lang]}
                   </Link>.
                 </p>

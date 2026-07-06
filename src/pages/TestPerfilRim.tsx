@@ -134,8 +134,49 @@ const profileData = {
   },
 };
 
+const seoCopy = {
+  es: {
+    title: "Test Perfil RIM para restaurantes",
+    description: "Descubre qué perfil RIM tiene tu restaurante: estratégico, gastronómico, coleccionista, turístico, pasivo o superviviente.",
+    tools: "Herramientas",
+    breadcrumb: "Test Perfil RIM",
+  },
+  en: {
+    title: "RIM Profile Test for restaurants",
+    description: "Discover your restaurant's RIM profile: strategic, gastronomic, collector, tourist, passive or survival.",
+    tools: "Tools",
+    breadcrumb: "RIM Profile Test",
+  },
+  it: {
+    title: "Test Profilo RIM per ristoranti",
+    description: "Scopri il profilo RIM del tuo ristorante: strategico, gastronomico, collezionista, turistico, passivo o sopravvivenza.",
+    tools: "Strumenti",
+    breadcrumb: "Test Profilo RIM",
+  },
+  fr: {
+    title: "Test Profil RIM pour restaurants",
+    description: "Découvrez le profil RIM de votre restaurant : stratégique, gastronomique, collection, touristique, passif ou survie.",
+    tools: "Outils",
+    breadcrumb: "Test Profil RIM",
+  },
+  de: {
+    title: "RIM-Profiltest für Restaurants",
+    description: "Ermitteln Sie das RIM-Profil Ihres Restaurants: strategisch, gastronomisch, sammlerisch, touristisch, passiv oder im Überlebensmodus.",
+    tools: "Tools",
+    breadcrumb: "RIM-Profiltest",
+  },
+  pt: {
+    title: "Teste Perfil RIM para restaurantes",
+    description: "Descubra o perfil RIM do seu restaurante: estratégico, gastronómico, colecionador, turístico, passivo ou de sobrevivência.",
+    tools: "Ferramentas",
+    breadcrumb: "Teste Perfil RIM",
+  },
+};
+
 const TestPerfilRim = () => {
-  const { localePath } = useLanguage();
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const s = seoCopy[lang] || seoCopy.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/test-perfil-rim")}`;
   const [answers, setAnswers] = useState(initialAnswers);
 
   const result = useMemo(() => {
@@ -161,19 +202,20 @@ const TestPerfilRim = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SEOHead
-        title="Test Perfil RIM para restaurantes"
-        description="Descubre qué perfil RIM tiene tu restaurante: estratégico, gastronómico, coleccionista, turístico, pasivo o superviviente."
-        url={`${CANONICAL_DOMAIN}/herramientas/test-perfil-rim`}
+        title={s.title}
+        description={s.description}
+        url={canonicalUrl}
+        hreflang={allLangPaths("/herramientas/test-perfil-rim")}
       />
       <main>
         <section className="pt-32 pb-12 section-padding">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: "Herramientas", href: "/herramientas" }, { label: "Test Perfil RIM" }]} />
+            <Breadcrumbs items={[{ label: s.tools, href: localePath("/herramientas") }, { label: s.breadcrumb }]} />
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-4 block">
               Demo · Perfil RIM
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-4xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Test Perfil RIM de tu restaurante
+              {s.breadcrumb}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               Responde seis preguntas y detecta si tu carta de vinos está funcionando como palanca comercial, como carta de identidad o como una fuente silenciosa de coste.

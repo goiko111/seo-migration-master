@@ -550,6 +550,8 @@ const i18n: I18nMap<{
 const AuditorMultiLocal = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/auditor-carta-multilocal")}`;
+  const toolsUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas")}`;
 
   const [locales, setLocales] = useState<LocalData[]>([
     { ...emptyLocal(), nombre: "Local 1" },
@@ -577,14 +579,14 @@ const AuditorMultiLocal = () => {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: t.bc_home, item: CANONICAL_DOMAIN },
-          { "@type": "ListItem", position: 2, name: t.bc_tools, item: `${CANONICAL_DOMAIN}/herramientas` },
-          { "@type": "ListItem", position: 3, name: t.bc_page, item: `${CANONICAL_DOMAIN}/herramientas/auditor-carta-multilocal` },
+          { "@type": "ListItem", position: 2, name: t.bc_tools, item: toolsUrl },
+          { "@type": "ListItem", position: 3, name: t.bc_page, item: canonicalUrl },
         ],
       },
     ]);
     document.head.appendChild(ld);
     return () => { document.getElementById("auditor-multi-jsonld")?.remove(); };
-  }, [t]);
+  }, [canonicalUrl, t, toolsUrl]);
 
   const addLocal = () => setLocales(prev => [...prev, { ...emptyLocal(), nombre: `Local ${prev.length + 1}` }]);
   const removeLocal = (i: number) => { if (locales.length > 2) setLocales(prev => prev.filter((_, idx) => idx !== i)); };
@@ -654,7 +656,7 @@ const AuditorMultiLocal = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url={`${CANONICAL_DOMAIN}/herramientas/auditor-carta-multilocal`}
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={canonicalUrl}
         hreflang={allLangPaths("/herramientas/auditor-carta-multilocal")} />
       <Navbar />
 

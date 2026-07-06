@@ -465,6 +465,7 @@ const i18n: Record<string, LangContent> = {
 const CalculadoraPrecioCopa = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
+  const canonicalUrl = `https://winerim.wine${localePath("/herramientas/calculadora-precio-vino-por-copa")}`;
 
   const [wineType, setWineType] = useState("still-red");
   const [costeBotella, setCosteBotella] = useState(12);
@@ -499,7 +500,7 @@ const CalculadoraPrecioCopa = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seoTitle} description={t.seoDesc} url="https://winerim.wine/herramientas/calculadora-precio-vino-por-copa"
+      <SEOHead title={t.seoTitle} description={t.seoDesc} url={canonicalUrl}
         hreflang={allLangPaths("/herramientas/calculadora-precio-vino-por-copa")} />
       <Navbar />
 
