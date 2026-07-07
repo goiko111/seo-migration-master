@@ -725,12 +725,12 @@ const SimuladorSenalMargenes = () => {
 
         <InternalLinks
           title={ui.internalLinksTitle}
-          links={[
+          links={([
             { to: "/herramientas/calculadora-stock-muerto", label: ui.internalLinks[0].label, type: "tool" },
             { to: "/herramientas/calculadora-compra-inteligente", label: ui.internalLinks[1].label, type: "tool" },
             { to: "/recursos/auditoria-pareto-80-20-carta-vinos", label: ui.internalLinks[2].label, type: "resource" },
             { to: "/producto/winerim-core", label: ui.internalLinks[3].label, type: "solution" },
-          ].map((link) => ({ ...link, to: localePath(link.to) }))}
+          ] as const).map((link) => ({ ...link, to: localePath(link.to) }))}
         />
       </main>
       <Footer />
