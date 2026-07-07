@@ -589,12 +589,12 @@ const CalculadoraFugaMargen = () => {
 
         <InternalLinks
           title={t.internalLinksTitle}
-          links={[
+          links={([
             { to: "/herramientas/simulador-senal-margenes", label: t.internalLinks.marginSignal, type: "tool" },
             { to: "/herramientas/simulador-pareto-carta-vinos", label: t.internalLinks.pareto, type: "tool" },
             { to: "/recursos/checklist-albaranes-facturas-coste-vino", label: t.internalLinks.checklist, type: "resource" },
             { to: "/producto/winerim-supply", label: t.internalLinks.supply, type: "solution" },
-          ].map((link) => ({ ...link, to: localePath(link.to) }))}
+          ] as const).map((link) => ({ ...link, to: localePath(link.to) }))}
         />
       </main>
       <Footer />
