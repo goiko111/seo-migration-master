@@ -476,7 +476,11 @@ const SimuladorParetoCarta = () => {
 
         <InternalLinks
           title={copy.relatedTitle}
-          links={copy.relatedLinks.map((link) => ({ ...link, to: localePath(link.to) }))}
+          links={copy.relatedLinks.map((link) => ({
+            ...link,
+            to: localePath(link.to),
+            type: link.type as "tool" | "guide" | "resource" | "solution" | "decision-center",
+          }))}
         />
       </main>
       <Footer />
