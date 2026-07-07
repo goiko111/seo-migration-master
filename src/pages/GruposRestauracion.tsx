@@ -442,7 +442,7 @@ const FR: Content = { ...EN,
   ctaPrimary: "Je veux une démo pour mon groupe", ctaSecondary: "Analyser plusieurs unités",
 };
 
-const DE: Content = { ...EN,
+const DE: Content = {
   metaTitle: "Winerim für Restaurantgruppen | Zentralisierte Weinkartenverwaltung",
   metaDescription: "Zentralisieren Sie die Weinkartenverwaltung, optimieren Sie Preise und steigern Sie Umsätze in allen Ihren Locations.",
   badgeLabel: "Restaurantgruppen", breadSolutions: "Lösungen", breadLabel: "Restaurantgruppen",
@@ -598,7 +598,7 @@ const DE: Content = { ...EN,
   ],
 };
 
-const PT: Content = { ...EN,
+const PT: Content = {
   metaTitle: "Winerim para Grupos de Restauração | Gestão Centralizada de Vinhos",
   metaDescription: "Centralize a gestão das cartas de vinho, otimize preços e aumente vendas em todos os seus estabelecimentos.",
   badgeLabel: "Grupos de restauração", breadSolutions: "Soluções", breadLabel: "Grupos de restauração",

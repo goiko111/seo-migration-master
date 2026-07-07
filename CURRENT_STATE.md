@@ -1,5 +1,79 @@
 # Current State
 
+## Actualizacion 2026-07-07: agentes i18n/SEO/editorial y herramientas DE/PT
+
+## Hechos
+
+- Se leyeron al inicio de sesion `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md`.
+- Se lanzaron agentes paralelos para:
+  - traduccion profunda DE/PT de herramientas online;
+  - revision DE/PT de `Hoteles` y `GruposRestauracion`;
+  - guardrails de idioma/SEO;
+  - siguiente lote de Biblioteca del vino;
+  - siguiente lote de Aprender vino;
+  - auditoria SEO/paridad humano-bot.
+- La traduccion profunda DE/PT de herramientas quedo aplicada en:
+  - `CalculadoraFugaMargen`;
+  - `ComparadorDistribuidores`;
+  - `SimuladorSenalMargenes`;
+  - `SimuladorParetoCarta`;
+  - ajustes puntuales de `CalculadoraTicketMedio` y `AuditorMultiLocal`.
+- `Hoteles` y `GruposRestauracion` ya no usan fallback masivo a EN para DE/PT.
+- Se creo `src/test/de-pt-seo-guardrails.test.tsx` con guardrail para 32 rutas DE/PT: home, contacto, precios, hub de herramientas y las 12 herramientas online.
+- El agente SEO detecto una contradiccion fuerte: 14 URLs de herramientas DE/PT renderizaban bien para humanos, pero como Googlebot caian a home espanola/canonical raiz.
+- Se corrigio la paridad bot/Edge para las 12 herramientas online:
+  - `cloudflare-worker-v3-hybrid.js` ahora prerenderiza las 12 familias de herramientas con alternates DE/PT incluidos;
+  - `supabase/functions/prerender/index.ts` incluye las 12 herramientas en `STATIC_LOCALIZED_ROUTES` y labels localizados;
+  - `supabase/functions/sitemap/index.ts` incluye las 12 herramientas como `multilang: true` y elimina el bloque residual `Missing tools` ES-only.
+- Se preparo el lote Biblioteca del vino `wine-library-by-the-glass-stock-rotation` en `supabase/migrations/20260707103000_add_wine_library_by_the_glass_stock_rotation.sql`, programado para `2026-07-20` en 6 idiomas.
+- Se preparo el lote Aprender vino `learn-wine-read-label-restaurant` en `supabase/migrations/20260707090000_add_learn_wine_read_label_restaurant.sql`, programado para `2026-07-27` en 6 idiomas.
+- Ambos lotes futuros estan registrados en Worker/prerender/sitemap como release-gated y no se anuncian en `llms.txt` ni `llms-full.txt` antes de fecha.
+- `ArticleRelatedContent` acepta `type: "conversion"` para enlaces editoriales hacia demo, analisis o producto.
+- Se consulto `https://supabase.com/changelog.md`; no se detectaron cambios recientes relevantes para estas migraciones data-only de `articles`.
+- Validaciones locales OK:
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts src/test/de-pt-seo-guardrails.test.tsx src/test/seo-head-i18n.test.tsx` con `91/91`;
+  - `npx tsc --noEmit --pretty false`;
+  - `npx eslint` focal en archivos tocados;
+  - `npm run build`.
+- El build solo mantiene avisos conocidos: Browserslist desactualizado y chunks grandes.
+
+## Decisiones
+
+- Tratar las 12 herramientas online como superficie internacional completa: React humano, sitemap, prerender y Worker deben usar las mismas rutas localizadas.
+- Mantener los nuevos articulos de Biblioteca/Aprender como contenido futuro: preparados en migracion, pero fuera de hubs, sitemap publico efectivo, prerender indexable y `llms` hasta su `published_at`.
+- Usar guardrails de archivo y React para evitar que se repita la divergencia entre `src/i18n/types.ts`, Edge Functions y Worker.
+- Corregir leaks de copy espanol en PT cuando los tests los detecten, no relajar el guardrail.
+
+## Hipotesis
+
+- Al publicar frontend/Edge y desplegar Worker, Googlebot dejara de recibir home espanola en las herramientas DE/PT que estaban cayendo a fallback.
+- Los dos lotes editoriales semanales pueden esperar a su fecha sin ruido en Search Console si Lovable aplica las migraciones y publica las Edge Functions actualizadas.
+- El warning de keys en `Precios` es preexistente y no bloquea esta tanda, pero conviene resolverlo en una limpieza posterior.
+
+## Contradicciones / dudas abiertas
+
+- Produccion puede seguir mostrando el estado antiguo hasta que se publique este commit en Lovable y se despliegue Worker/Edge.
+- Edge Functions no se pueden desplegar desde Codex sin `SUPABASE_ACCESS_TOKEN`; Lovable Cloud debe publicar `sitemap` y `prerender`.
+
+## Tareas pendientes
+
+- Commit/push de esta tanda.
+- Desplegar Cloudflare Worker `winerim-proxy` si las credenciales locales lo permiten.
+- En Lovable Cloud:
+  - aplicar `20260707103000_add_wine_library_by_the_glass_stock_rotation.sql`;
+  - aplicar `20260707090000_add_learn_wine_read_label_restaurant.sql`;
+  - publicar frontend y Edge Functions `sitemap`/`prerender`.
+- Revalidar produccion como humano y Googlebot para una muestra DE/PT de herramientas:
+  - `/de/tools/glaspreis-rechner`;
+  - `/pt/ferramentas/calculadora-preco-vinho-por-copo`;
+  - `/de/tools/durchschnittsbon-rechner`;
+  - `/pt/ferramentas/auditor-carta-multilocal`.
+- Revalidar sitemap publico y Edge directa para confirmar las 12 herramientas localizadas y 0 URLs futuras no liberadas.
+- Retomar expansion de Biblioteca del vino / Aprender vino con el siguiente lote cuando esta publicacion este validada.
+
 ## Actualizacion 2026-07-06: URLs legales y footer en produccion
 
 ## Hechos

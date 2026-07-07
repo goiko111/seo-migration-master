@@ -35,6 +35,26 @@ const initialRows: WineRow[] = [
   { name: "Priorat", revenue: "180", margin: "64", stock: "11", days: "160" },
 ];
 
+const localizedInitialRows: Record<"es" | "de" | "pt", WineRow[]> = {
+  es: initialRows,
+  de: [
+    { name: "Riesling trocken", revenue: "1800", margin: "62", stock: "18", days: "12" },
+    { name: "Spätburgunder Reserve", revenue: "1200", margin: "58", stock: "9", days: "28" },
+    { name: "Grauburgunder", revenue: "950", margin: "66", stock: "12", days: "6" },
+    { name: "Champagner", revenue: "460", margin: "54", stock: "14", days: "95" },
+    { name: "Silvaner jung", revenue: "420", margin: "48", stock: "30", days: "70" },
+    { name: "Mosel Riesling", revenue: "180", margin: "64", stock: "11", days: "160" },
+  ],
+  pt: [
+    { name: "Douro tinto", revenue: "1800", margin: "62", stock: "18", days: "12" },
+    { name: "Alentejo reserva", revenue: "1200", margin: "58", stock: "9", days: "28" },
+    { name: "Alvarinho", revenue: "950", margin: "66", stock: "12", days: "6" },
+    { name: "Champanhe", revenue: "460", margin: "54", stock: "14", days: "95" },
+    { name: "Vinho Verde jovem", revenue: "420", margin: "48", stock: "30", days: "70" },
+    { name: "Dão", revenue: "180", margin: "64", stock: "11", days: "160" },
+  ],
+};
+
 const parseNumber = (value: string) => {
   const parsed = Number(value.replace(",", "."));
   return Number.isFinite(parsed) ? parsed : 0;
@@ -180,7 +200,7 @@ const pageCopy = {
     ctaTitle: "A Winerim encontra os 20% que sustentam a sua carta sem folhas manuais.",
     ctaText: "A plataforma cruza vendas, stock, PVP, custo, rotação e sinais de Margens para saber o que proteger, o que impulsionar e o que deixar de comprar.",
     ctaPrimary: "Descarregar auditoria Pareto 80/20",
-    ctaSecondary: "Solicitar demo",
+    ctaSecondary: "Pedir demo",
     faqs: [
       { q: "O que é o Pareto 80/20 aplicado a uma carta de vinhos?", a: "É uma leitura para detetar que poucas referências concentram grande parte da faturação ou margem, e quais consomem espaço e stock com pouco retorno." },
       { q: "Um vinho fora do núcleo deve ser eliminado?", a: "Não necessariamente. Pode ter função gastronómica, de imagem ou de harmonização. O importante é que a sua função esteja clara." },
@@ -237,11 +257,12 @@ const seoCopy = {
 
 const SimuladorParetoCarta = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
+  const activeLang = lang === "de" || lang === "pt" ? lang : "es";
   const s = seoCopy[lang] || seoCopy.es;
-  const copy = pageCopy[lang] || pageCopy.es;
-  const euro = euroFormatters[lang as keyof typeof euroFormatters] || euroFormatters.es;
+  const copy = pageCopy[activeLang];
+  const euro = euroFormatters[activeLang];
   const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-pareto-carta-vinos")}`;
-  const [rows, setRows] = useState(initialRows);
+  const [rows, setRows] = useState(() => localizedInitialRows[activeLang]);
 
   const result = useMemo(() => {
     const enriched = rows
@@ -356,7 +377,7 @@ const SimuladorParetoCarta = () => {
                   {copy.calculate}
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
-                <Button type="button" variant="outline" className="flex-1" onClick={() => setRows(initialRows)}>
+                <Button type="button" variant="outline" className="flex-1" onClick={() => setRows(localizedInitialRows[activeLang])}>
                   <RotateCcw size={16} className="mr-2" />
                   {copy.reset}
                 </Button>

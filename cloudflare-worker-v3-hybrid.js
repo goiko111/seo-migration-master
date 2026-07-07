@@ -316,6 +316,18 @@ const WORKER_LINK_RELEASES = {
   '/fr/article/recommander-vin-par-style-restaurant': '2026-07-13T09:15:00+02:00',
   '/de/article/wein-nach-stil-empfehlen-restaurant': '2026-07-13T09:20:00+02:00',
   '/pt/article/recomendar-vinho-por-estilos-restaurante': '2026-07-13T09:25:00+02:00',
+  '/article/como-usar-biblioteca-vino-para-vino-por-copa-y-rotacion': '2026-07-20T09:00:00+02:00',
+  '/en/article/wine-library-by-the-glass-stock-rotation': '2026-07-20T09:05:00+02:00',
+  '/it/article/biblioteca-vino-calice-stock-rotazione': '2026-07-20T09:10:00+02:00',
+  '/fr/article/bibliotheque-vin-verre-stock-rotation': '2026-07-20T09:15:00+02:00',
+  '/de/article/weinbibliothek-offenwein-bestand-rotation': '2026-07-20T09:20:00+02:00',
+  '/pt/article/biblioteca-vinho-copo-stock-rotacao': '2026-07-20T09:25:00+02:00',
+  '/article/como-leer-etiqueta-vino-restaurante': '2026-07-27T09:00:00+02:00',
+  '/en/article/read-wine-label-restaurant': '2026-07-27T09:05:00+02:00',
+  '/it/article/come-leggere-etichetta-vino-ristorante': '2026-07-27T09:10:00+02:00',
+  '/fr/article/lire-etiquette-vin-restaurant': '2026-07-27T09:15:00+02:00',
+  '/de/article/weinetikett-lesen-restaurant': '2026-07-27T09:20:00+02:00',
+  '/pt/article/como-ler-rotulo-vinho-restaurante': '2026-07-27T09:25:00+02:00',
 };
 
 function isWorkerLinkVisible(url) {
@@ -1035,6 +1047,202 @@ const ONLINE_TOOL_GROUPS = [
     },
   },
 ];
+
+const ONLINE_TOOL_COPY_TEMPLATES = {
+  es: {
+    subtitle: (label) => `${label} para convertir una duda de carta en una decision operativa.`,
+    problem: (focus) => `El problema aparece cuando ${focus} y el equipo decide con datos incompletos o desactualizados.`,
+    usage: (label) => `Usa ${label} antes de cambiar precios, compras, copa, surtido o prioridades de venta.`,
+    decision: (focus) => `Prepara una decision sobre ${focus}, conectandola despues con carta, stock, ventas, costes y margen en Winerim.`,
+  },
+  en: {
+    subtitle: (label) => `${label} for turning a wine-list question into an operational decision.`,
+    problem: (focus) => `The problem appears when ${focus} and the team is deciding with incomplete or outdated data.`,
+    usage: (label) => `Use ${label} before changing prices, purchasing, by-the-glass strategy, assortment or sales priorities.`,
+    decision: (focus) => `It prepares a decision about ${focus}, then connects it with wine list, stock, sales, cost and margin in Winerim.`,
+  },
+  it: {
+    subtitle: (label) => `${label} per trasformare un dubbio di carta in una decisione operativa.`,
+    problem: (focus) => `Il problema nasce quando ${focus} e il team decide con dati incompleti o non aggiornati.`,
+    usage: (label) => `Usa ${label} prima di cambiare prezzi, acquisti, vino al calice, assortimento o priorita di vendita.`,
+    decision: (focus) => `Prepara una decisione su ${focus}, collegandola poi a carta, stock, vendite, costi e margine in Winerim.`,
+  },
+  fr: {
+    subtitle: (label) => `${label} pour transformer une question de carte en decision operationnelle.`,
+    problem: (focus) => `Le probleme apparait quand ${focus} et que l equipe decide avec des donnees incompletes ou non actualisees.`,
+    usage: (label) => `Utilisez ${label} avant de changer prix, achats, vin au verre, assortiment ou priorites de vente.`,
+    decision: (focus) => `Il prepare une decision sur ${focus}, puis la relie a carte, stock, ventes, couts et marge dans Winerim.`,
+  },
+  de: {
+    subtitle: (label) => `${label} um eine Weinkartenfrage in eine operative Entscheidung zu uebersetzen.`,
+    problem: (focus) => `Das Problem entsteht, wenn ${focus} und das Team mit unvollstaendigen oder veralteten Daten entscheidet.`,
+    usage: (label) => `Nutzen Sie ${label}, bevor Preise, Einkauf, Glasweinstrategie, Sortiment oder Verkaufsprioritaeten geaendert werden.`,
+    decision: (focus) => `Es bereitet eine Entscheidung ueber ${focus} vor und verbindet sie danach in Winerim mit Karte, Bestand, Verkauf, Kosten und Marge.`,
+  },
+  pt: {
+    subtitle: (label) => `${label} para transformar uma duvida de carta numa decisao operacional.`,
+    problem: (focus) => `O problema aparece quando ${focus} e a equipa decide com dados incompletos ou desatualizados.`,
+    usage: (label) => `Use ${label} antes de alterar precos, compras, vinho a copo, sortido ou prioridades de venda.`,
+    decision: (focus) => `Prepara uma decisao sobre ${focus}, ligando-a depois a carta, stock, vendas, custos e margem na Winerim.`,
+  },
+};
+
+const ONLINE_TOOL_COMPACT_GROUPS = [
+  {
+    key: 'wine-by-glass-price',
+    paths: {
+      es: '/herramientas/calculadora-precio-vino-por-copa',
+      en: '/en/tools/wine-by-glass-price-calculator',
+      it: '/it/strumenti/calcolatrice-prezzo-vino-al-calice',
+      fr: '/fr/outils/calculateur-prix-vin-au-verre',
+      de: '/de/tools/glaspreis-rechner',
+      pt: '/pt/ferramentas/calculadora-preco-vinho-por-copo',
+    },
+    copy: {
+      es: { label: 'Calculadora de precio por copa', description: 'Calcula el precio recomendado por copa teniendo en cuenta coste, merma y margen objetivo.', focus: 'precio por copa, merma y margen real' },
+      en: { label: 'Wine by-the-glass price calculator', description: 'Calculate the recommended by-the-glass price using bottle cost, waste and target margin.', focus: 'by-the-glass price, waste and real margin' },
+      it: { label: 'Calcolatrice prezzo vino al calice', description: 'Calcola il prezzo consigliato al calice considerando costo bottiglia, spreco e margine obiettivo.', focus: 'prezzo al calice, spreco e margine reale' },
+      fr: { label: 'Calculateur prix vin au verre', description: 'Calculez le prix recommande au verre avec cout bouteille, pertes et marge cible.', focus: 'prix au verre, pertes et marge reelle' },
+      de: { label: 'Glaspreis-Rechner', description: 'Berechnen Sie den empfohlenen Glaspreis mit Flaschenkosten, Schwund und Zielmarge.', focus: 'Glaspreis, Schwund und reale Marge' },
+      pt: { label: 'Calculadora preco vinho por copo', description: 'Calcule o preco recomendado por copo usando custo da garrafa, quebra e margem-alvo.', focus: 'preco por copo, quebra e margem real' },
+    },
+  },
+  {
+    key: 'dead-stock',
+    paths: {
+      es: '/herramientas/calculadora-stock-muerto',
+      en: '/en/tools/dead-stock-calculator',
+      it: '/it/strumenti/calcolatrice-stock-morto',
+      fr: '/fr/outils/calculateur-stock-mort',
+      de: '/de/tools/totbestand-rechner',
+      pt: '/pt/ferramentas/calculadora-stock-morto',
+    },
+    copy: {
+      es: { label: 'Calculadora de stock muerto', description: 'Estima cuanto capital tienes inmovilizado en vinos con baja rotacion.', focus: 'stock inmovilizado, rotacion lenta y coste de oportunidad' },
+      en: { label: 'Dead stock calculator', description: 'Estimate how much capital is tied up in slow-moving wines.', focus: 'tied-up stock, slow rotation and opportunity cost' },
+      it: { label: 'Calcolatrice stock morto', description: 'Stima il capitale immobilizzato in vini a bassa rotazione.', focus: 'stock fermo, rotazione lenta e costo opportunita' },
+      fr: { label: 'Calculateur stock mort', description: 'Estimez le capital immobilise dans les vins a faible rotation.', focus: 'stock dormant, rotation lente et cout opportunite' },
+      de: { label: 'Totbestand-Rechner', description: 'Schaetzen Sie, wie viel Kapital in langsam rotierenden Weinen gebunden ist.', focus: 'gebundener Bestand, langsame Rotation und Opportunitaetskosten' },
+      pt: { label: 'Calculadora de stock morto', description: 'Estime quanto capital esta imobilizado em vinhos de baixa rotacao.', focus: 'stock parado, rotacao lenta e custo de oportunidade' },
+    },
+  },
+  {
+    key: 'average-ticket',
+    paths: {
+      es: '/herramientas/calculadora-ticket-medio-vino',
+      en: '/en/tools/average-ticket-calculator',
+      it: '/it/strumenti/calcolatrice-scontrino-medio',
+      fr: '/fr/outils/calculateur-ticket-moyen',
+      de: '/de/tools/durchschnittsbon-rechner',
+      pt: '/pt/ferramentas/calculadora-ticket-medio',
+    },
+    copy: {
+      es: { label: 'Calculadora de ticket medio de vino', description: 'Mide el gasto medio en vino y simula el impacto de vender mejor por mesa.', focus: 'ticket medio, ratio de mesas con vino y venta sugerida' },
+      en: { label: 'Average wine ticket calculator', description: 'Measure average wine spend and simulate the impact of better table-level selling.', focus: 'average ticket, table conversion and suggested selling' },
+      it: { label: 'Calcolatrice scontrino medio vino', description: 'Misura lo scontrino medio vino e simula l impatto di vendere meglio per tavolo.', focus: 'scontrino medio, conversione tavoli e vendita suggerita' },
+      fr: { label: 'Calculateur ticket moyen vin', description: 'Mesurez le ticket moyen vin et simulez l impact d une meilleure vente par table.', focus: 'ticket moyen, conversion des tables et vente suggeree' },
+      de: { label: 'Durchschnittsbon-Rechner', description: 'Messen Sie den durchschnittlichen Weinbon und simulieren Sie bessere Tischverkaeufe.', focus: 'Durchschnittsbon, Tischquote und Empfehlung im Service' },
+      pt: { label: 'Calculadora de ticket medio', description: 'Meça o ticket medio de vinho e simule o impacto de vender melhor por mesa.', focus: 'ticket medio, conversao de mesas e venda sugerida' },
+    },
+  },
+  {
+    key: 'smart-purchasing',
+    paths: {
+      es: '/herramientas/calculadora-compra-inteligente',
+      en: '/en/tools/smart-purchasing-calculator',
+      it: '/it/strumenti/calcolatrice-acquisto-intelligente',
+      fr: '/fr/outils/calculateur-achat-intelligent',
+      de: '/de/tools/intelligenter-einkauf-rechner',
+      pt: '/pt/ferramentas/calculadora-compra-inteligente',
+    },
+    copy: {
+      es: { label: 'Calculadora de compra inteligente', description: 'Evalua que comprar, cuanto comprar y cuando reponer segun rotacion, stock y margen.', focus: 'reposicion, volumen de compra, rotacion y margen' },
+      en: { label: 'Smart purchasing calculator', description: 'Assess what to buy, how much to buy and when to reorder based on rotation, stock and margin.', focus: 'replenishment, purchase volume, rotation and margin' },
+      it: { label: 'Calcolatrice acquisto intelligente', description: 'Valuta cosa comprare, quanto comprare e quando riordinare in base a rotazione, stock e margine.', focus: 'riordino, volume acquisto, rotazione e margine' },
+      fr: { label: 'Calculateur achat intelligent', description: 'Evaluez quoi acheter, quelle quantite et quand recommander selon rotation, stock et marge.', focus: 'reassort, volume achat, rotation et marge' },
+      de: { label: 'Intelligenter Einkaufsrechner', description: 'Bewerten Sie, was, wie viel und wann nachgekauft werden sollte, basierend auf Rotation, Bestand und Marge.', focus: 'Nachkauf, Einkaufsvolumen, Rotation und Marge' },
+      pt: { label: 'Calculadora de compra inteligente', description: 'Avalie o que comprar, quanto comprar e quando repor segundo rotacao, stock e margem.', focus: 'reposicao, volume de compra, rotacao e margem' },
+    },
+  },
+  {
+    key: 'by-glass-diagnostic',
+    paths: {
+      es: '/herramientas/diagnostico-vino-por-copa',
+      en: '/en/tools/by-glass-diagnostic',
+      it: '/it/strumenti/diagnostico-vino-al-calice',
+      fr: '/fr/outils/diagnostic-vin-au-verre',
+      de: '/de/tools/glasausschank-diagnose',
+      pt: '/pt/ferramentas/diagnostico-vinho-por-copo',
+    },
+    copy: {
+      es: { label: 'Diagnostico de vino por copa', description: 'Evalua si tu programa por copa esta equilibrado en estilos, precios, rotacion y margen.', focus: 'programa por copa, equilibrio de estilos, precio y rotacion' },
+      en: { label: 'By-the-glass wine diagnostic', description: 'Evaluate whether the by-the-glass program is balanced by style, price, rotation and margin.', focus: 'by-the-glass program, style balance, price and rotation' },
+      it: { label: 'Diagnostico vino al calice', description: 'Valuta se il programma al calice e equilibrato per stili, prezzi, rotazione e margine.', focus: 'programma al calice, equilibrio stili, prezzo e rotazione' },
+      fr: { label: 'Diagnostic vin au verre', description: 'Evaluez si le programme au verre est equilibre par styles, prix, rotation et marge.', focus: 'programme au verre, equilibre des styles, prix et rotation' },
+      de: { label: 'Glasausschank-Diagnose', description: 'Bewerten Sie, ob das Glasweinprogramm nach Stil, Preis, Rotation und Marge ausgewogen ist.', focus: 'Glasweinprogramm, Stilbalance, Preis und Rotation' },
+      pt: { label: 'Diagnostico vinho por copo', description: 'Avalie se o programa a copo esta equilibrado por estilos, precos, rotacao e margem.', focus: 'programa a copo, equilibrio de estilos, preco e rotacao' },
+    },
+  },
+  {
+    key: 'wine-list-score',
+    paths: {
+      es: '/herramientas/wine-list-score',
+      en: '/en/tools/wine-list-score',
+      it: '/it/strumenti/wine-list-score',
+      fr: '/fr/outils/wine-list-score',
+      de: '/de/tools/wine-list-score',
+      pt: '/pt/ferramentas/wine-list-score',
+    },
+    copy: {
+      es: { label: 'Wine List Score', description: 'Obtén una puntuacion de tu carta por diversidad, equilibrio, claridad comercial y potencial de venta.', focus: 'estructura de carta, diversidad, claridad y potencial comercial' },
+      en: { label: 'Wine List Score', description: 'Score the list by diversity, balance, commercial clarity and selling potential.', focus: 'list structure, diversity, clarity and commercial potential' },
+      it: { label: 'Wine List Score', description: 'Ottieni un punteggio della carta per diversita, equilibrio, chiarezza commerciale e potenziale vendita.', focus: 'struttura carta, diversita, chiarezza e potenziale commerciale' },
+      fr: { label: 'Wine List Score', description: 'Obtenez un score de carte selon diversite, equilibre, clarte commerciale et potentiel de vente.', focus: 'structure de carte, diversite, clarte et potentiel commercial' },
+      de: { label: 'Wine List Score', description: 'Bewerten Sie die Karte nach Vielfalt, Balance, kommerzieller Klarheit und Verkaufspotenzial.', focus: 'Kartenstruktur, Vielfalt, Klarheit und kommerzielles Potenzial' },
+      pt: { label: 'Wine List Score', description: 'Obtenha uma pontuacao da carta por diversidade, equilibrio, clareza comercial e potencial de venda.', focus: 'estrutura da carta, diversidade, clareza e potencial comercial' },
+    },
+  },
+  {
+    key: 'multi-unit-auditor',
+    paths: {
+      es: '/herramientas/auditor-carta-multilocal',
+      en: '/en/tools/multi-unit-auditor',
+      it: '/it/strumenti/auditor-carta-multilocale',
+      fr: '/fr/outils/auditeur-carte-multi-sites',
+      de: '/de/tools/multi-standort-auditor',
+      pt: '/pt/ferramentas/auditor-carta-multilocal',
+    },
+    copy: {
+      es: { label: 'Auditor de carta multi-local', description: 'Compara cartas entre locales para detectar incoherencias de surtido, precios, copa y ticket.', focus: 'consistencia entre locales, surtido, precios y copa' },
+      en: { label: 'Multi-unit wine list auditor', description: 'Compare wine lists across venues to detect assortment, pricing, by-the-glass and ticket inconsistencies.', focus: 'venue consistency, assortment, pricing and by-the-glass' },
+      it: { label: 'Auditor carta multilocale', description: 'Confronta le carte tra locali per rilevare incoerenze di assortimento, prezzi, calice e scontrino.', focus: 'coerenza tra locali, assortimento, prezzi e calice' },
+      fr: { label: 'Auditeur carte multi-sites', description: 'Comparez les cartes entre sites pour detecter incoherences de gamme, prix, verre et ticket.', focus: 'coherence entre sites, assortiment, prix et verre' },
+      de: { label: 'Multi-Standort-Karten-Auditor', description: 'Vergleichen Sie Weinkarten ueber Standorte hinweg und finden Sie Sortiments-, Preis-, Glaswein- und Bon-Abweichungen.', focus: 'Standortkonsistenz, Sortiment, Preise und Glaswein' },
+      pt: { label: 'Auditor de carta multilocal', description: 'Compare cartas entre unidades para detetar incoerencias de sortido, precos, copo e ticket.', focus: 'consistencia entre unidades, sortido, precos e copo' },
+    },
+  },
+];
+
+ONLINE_TOOL_GROUPS.push(
+  ...ONLINE_TOOL_COMPACT_GROUPS.map((group) => ({
+    key: group.key,
+    paths: group.paths,
+    copies: Object.fromEntries(
+      Object.entries(group.copy).map(([lang, copy]) => {
+        const template = ONLINE_TOOL_COPY_TEMPLATES[lang];
+        return [lang, {
+          title: `${copy.label} | Winerim`,
+          h1: copy.label,
+          description: copy.description,
+          subtitle: template.subtitle(copy.label),
+          problem: template.problem(copy.focus),
+          usage: template.usage(copy.label),
+          decision: template.decision(copy.focus),
+        }];
+      }),
+    ),
+  })),
+);
 
 const ONLINE_TOOL_ALTERNATES_BY_PATH = Object.fromEntries(
   ONLINE_TOOL_GROUPS.flatMap(group => {

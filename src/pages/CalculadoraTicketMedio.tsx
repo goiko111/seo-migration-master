@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { SupportedLang, I18nMap } from "@/i18n/types";
+import type { SupportedLang } from "@/i18n/types";
 import { getI18n } from "@/i18n/types";
 
 /* ─── Season logic ─── */
@@ -53,7 +53,11 @@ interface ScenarioDeltas {
   glassTicketDelta: number; // percentage on glass ticket specifically
 }
 
-const defaultScenarios: Record<string, ScenarioDeltas> = {
+const scenarioKeys = ["conservative", "base", "optimized", "aggressive"] as const;
+type ScenarioKey = (typeof scenarioKeys)[number];
+type PenetrationLevel = "low" | "moderate" | "good" | "high";
+
+const defaultScenarios: Record<ScenarioKey, ScenarioDeltas> = {
   conservative: { penetrationDelta: 3, ticketDelta: 5, glassDelta: 5, bottleTicketDelta: 3, glassTicketDelta: 5 },
   base: { penetrationDelta: 5, ticketDelta: 10, glassDelta: 10, bottleTicketDelta: 6, glassTicketDelta: 10 },
   optimized: { penetrationDelta: 8, ticketDelta: 18, glassDelta: 15, bottleTicketDelta: 10, glassTicketDelta: 15 },
@@ -61,7 +65,7 @@ const defaultScenarios: Record<string, ScenarioDeltas> = {
 };
 
 /* ─── i18n ─── */
-const i18n: I18nMap<Record<string, any>> = {
+const i18n = {
   es: {
     seo_title: "Calculadora de Impacto en Ticket Medio del Vino | Demo Winerim",
     seo_desc: "Simula el impacto de la penetración del vino, copa vs botella y mix de referencias sobre el ticket medio de tu restaurante. Herramienta gratuita.",
@@ -886,7 +890,7 @@ const i18n: I18nMap<Record<string, any>> = {
     link_assortment: "Sortido consoante o bilhete médio",
     link_margin: "Calculadora de margem de vinho",
     link_core: "Winerim Core: analítica completa",
-    link_demo: "Solicitar demo da Winerim",
+    link_demo: "Pedir demo da Winerim",
     perMonth: "/mês",
     perYear: "/ano",
   },
@@ -895,7 +899,7 @@ const i18n: I18nMap<Record<string, any>> = {
 /* ─── Component ─── */
 const CalculadoraTicketMedio = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const t = getI18n(i18n, lang) || i18n.es;
+  const t = getI18n(i18n, lang) as typeof i18n.es;
 
   /* inputs */
   const [cubiertos, setCubiertos] = useState(120);
@@ -908,21 +912,21 @@ const CalculadoraTicketMedio = () => {
   const [context, setContext] = useState<Context>("casual");
 
   /* editable scenarios */
-  const [scenarioOverrides, setScenarioOverrides] = useState<Record<string, ScenarioDeltas>>({});
-  const [editingScenario, setEditingScenario] = useState<string | null>(null);
+  const [scenarioOverrides, setScenarioOverrides] = useState<Partial<Record<ScenarioKey, ScenarioDeltas>>>({});
+  const [editingScenario, setEditingScenario] = useState<ScenarioKey | null>(null);
 
-  const getScenario = useCallback((id: string): ScenarioDeltas => {
+  const getScenario = useCallback((id: ScenarioKey): ScenarioDeltas => {
     return scenarioOverrides[id] || defaultScenarios[id];
   }, [scenarioOverrides]);
 
-  const updateScenarioField = useCallback((id: string, field: keyof ScenarioDeltas, value: number) => {
+  const updateScenarioField = useCallback((id: ScenarioKey, field: keyof ScenarioDeltas, value: number) => {
     setScenarioOverrides(prev => ({
       ...prev,
       [id]: { ...(prev[id] || defaultScenarios[id]), [field]: value },
     }));
   }, []);
 
-  const resetScenario = useCallback((id: string) => {
+  const resetScenario = useCallback((id: ScenarioKey) => {
     setScenarioOverrides(prev => {
       const next = { ...prev };
       delete next[id];
@@ -930,7 +934,7 @@ const CalculadoraTicketMedio = () => {
     });
   }, []);
 
-  const [activeScenario, setActiveScenario] = useState<string | null>(null);
+  const [activeScenario, setActiveScenario] = useState<ScenarioKey | null>(null);
   const [calculated, setCalculated] = useState(false);
 
   /* JSON-LD */
@@ -981,7 +985,6 @@ const CalculadoraTicketMedio = () => {
     const glassRev = facturacionActual * (effGlassRatio / 100);
     const bottleRev = facturacionActual - glassRev;
 
-    const scenarioKeys = ["conservative", "base", "optimized", "aggressive"] as const;
     const scenarioResults = scenarioKeys.map(id => {
       const sc = getScenario(id);
       const newPen = Math.min(effPenetration + sc.penetrationDelta, 95);
@@ -995,8 +998,8 @@ const CalculadoraTicketMedio = () => {
       const deltaPct = facturacionActual > 0 ? (delta / facturacionActual) * 100 : 0;
       return {
         id,
-        label: (t as any)[id],
-        desc: (t as any)[`${id}_desc`],
+        label: t[id],
+        desc: t[`${id}_desc` as const],
         newPen, newGlassRatio, newGlassT, newBottleT, newWeighted,
         newMesas, newRev,
         delta, deltaYear: delta * 12, deltaPct,
@@ -1012,7 +1015,7 @@ const CalculadoraTicketMedio = () => {
       weightedTicket,
       scenarioResults,
     };
-  }, [cubiertos, diasMes, ratioVino, glassTicket, bottleTicket, ratioCopa, season, context, getScenario]);
+  }, [cubiertos, diasMes, ratioVino, glassTicket, bottleTicket, ratioCopa, season, context, getScenario, t]);
 
   const fmt = (n: number) => n.toLocaleString(t.locale, { maximumFractionDigits: 0 });
   const fmtDec = (n: number) => n.toLocaleString(t.locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -1021,30 +1024,31 @@ const CalculadoraTicketMedio = () => {
   const selected = activeScenario ? results.scenarioResults.find(s => s.id === activeScenario) : null;
   const eduIcons = [GlassWater, Wine, Users, DollarSign];
 
-  const scenarioColors: Record<string, string> = {
+  const scenarioColors: Record<ScenarioKey, string> = {
     conservative: "border-blue-500/30 bg-blue-500/5",
     base: "border-amber-500/30 bg-amber-500/5",
     optimized: "border-emerald-500/30 bg-emerald-500/5",
     aggressive: "border-wine/30 bg-wine/5",
   };
-  const scenarioTextColors: Record<string, string> = {
+  const scenarioTextColors: Record<ScenarioKey, string> = {
     conservative: "text-blue-500",
     base: "text-amber-500",
     optimized: "text-emerald-500",
     aggressive: "text-wine",
   };
-  const readingKeys: Record<string, string> = {
+  const readingKeys: Record<ScenarioKey, "reading_conservative" | "reading_base" | "reading_optimized" | "reading_aggressive"> = {
     conservative: "reading_conservative",
     base: "reading_base",
     optimized: "reading_optimized",
     aggressive: "reading_aggressive",
   };
 
-  const penetrationLevel = results.effPenetration < 25 ? "low" : results.effPenetration < 45 ? "moderate" : results.effPenetration < 65 ? "good" : "high";
-  const penetrationLabel = (t as any)[penetrationLevel];
+  const penetrationLevel: PenetrationLevel = results.effPenetration < 25 ? "low" : results.effPenetration < 45 ? "moderate" : results.effPenetration < 65 ? "good" : "high";
+  const penetrationLabel = t[penetrationLevel];
   const penetrationColor = penetrationLevel === "low" ? "text-destructive" : penetrationLevel === "moderate" ? "text-amber-500" : "text-emerald-500";
   const penetrationBg = penetrationLevel === "low" ? "bg-destructive/10" : penetrationLevel === "moderate" ? "bg-amber-500/10" : "bg-emerald-500/10";
-  const advice = (t as any)[penetrationLevel === "low" ? "lowAdvice" : penetrationLevel === "moderate" ? "modAdvice" : penetrationLevel === "good" ? "goodAdvice" : "highAdvice"];
+  const adviceKey = penetrationLevel === "low" ? "lowAdvice" : penetrationLevel === "moderate" ? "modAdvice" : penetrationLevel === "good" ? "goodAdvice" : "highAdvice";
+  const advice = t[adviceKey];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -1157,7 +1161,7 @@ const CalculadoraTicketMedio = () => {
                     <button key={s} onClick={() => setSeason(s)}
                       className={`flex flex-col items-center gap-1 p-2.5 rounded-lg border text-xs font-medium transition-all ${season === s ? "border-wine/50 bg-wine/5 text-wine" : "border-border bg-background text-muted-foreground hover:border-wine/30"}`}>
                       <Icon size={14} />
-                      <span>{(t as any)[s]}</span>
+                      <span>{t[s]}</span>
                     </button>
                   );
                 })}
@@ -1169,7 +1173,7 @@ const CalculadoraTicketMedio = () => {
                 {(["casual", "gastro", "hotel", "winebar"] as Context[]).map(c => (
                   <button key={c} onClick={() => setContext(c)}
                     className={`p-2.5 rounded-lg border text-xs font-medium transition-all ${context === c ? "border-wine/50 bg-wine/5 text-wine" : "border-border bg-background text-muted-foreground hover:border-wine/30"}`}>
-                    {(t as any)[c]}
+                    {t[c]}
                   </button>
                 ))}
               </div>
@@ -1358,7 +1362,7 @@ const CalculadoraTicketMedio = () => {
                         <Sparkles size={13} className="text-amber-500" />
                         <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-500">{t.reading_title}</p>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{(t as any)[readingKeys[selected.id]]}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{t[readingKeys[selected.id]]}</p>
                     </div>
                   </motion.div>
                 )}
@@ -1413,7 +1417,7 @@ const CalculadoraTicketMedio = () => {
           <ScrollReveal>
             <h2 className="font-heading text-2xl font-bold mb-6">{t.edu_title}</h2>
             <div className="space-y-4">
-              {t.edu_items.map((item: any, i: number) => {
+              {t.edu_items.map((item, i) => {
                 const Icon = eduIcons[i];
                 return (
                   <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-background">
@@ -1437,7 +1441,7 @@ const CalculadoraTicketMedio = () => {
         <ScrollReveal>
           <h2 className="font-heading text-2xl font-bold mb-6">{t.mistakes_title}</h2>
           <div className="grid md:grid-cols-2 gap-4">
-            {t.mistakes.map((item: any, i: number) => (
+            {t.mistakes.map((item, i) => (
               <div key={i} className="p-4 rounded-xl border border-border bg-background">
                 <p className="text-sm font-bold text-foreground mb-1">❌ {item.error}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">✓ {item.fix}</p>
@@ -1456,7 +1460,7 @@ const CalculadoraTicketMedio = () => {
           { to: localePath("/guias/como-decidir-surtido-segun-ticket-medio-tipo-local"), label: t.link_assortment, type: "guide" },
           { to: localePath("/calculadora-margen-vino"), label: t.link_margin, type: "tool" },
           { to: localePath("/producto/winerim-core"), label: t.link_core, type: "solution" },
-          { to: localePath("/decision-center/margenes-pricing"), label: lang === "es" ? "Decision Center: márgenes y pricing" : lang === "it" ? "Decision Center: margini e pricing" : lang === "fr" ? "Decision Center : marges et pricing" : lang === "de" ? "Decision Center: Margen und Pricing" : lang === "pt" ? "Decision Center: margens e pricing" : "Decision Center: margins & pricing", type: "decision-center" as any },
+          { to: localePath("/decision-center/margenes-pricing"), label: lang === "es" ? "Decision Center: márgenes y pricing" : lang === "it" ? "Decision Center: margini e pricing" : lang === "fr" ? "Decision Center : marges et pricing" : lang === "de" ? "Decision Center: Margen und Pricing" : lang === "pt" ? "Decision Center: margens e pricing" : "Decision Center: margins & pricing", type: "decision-center" },
           { to: localePath("/demo"), label: t.link_demo, type: "solution" },
         ]} />
       </div>

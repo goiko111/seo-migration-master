@@ -1,5 +1,44 @@
 # Decisions Log
 
+## 2026-07-07
+
+### Paridad internacional de herramientas y calendario editorial
+
+#### Hechos
+
+- Se pusieron en marcha agentes para i18n DE/PT, SEO/paridad humano-bot, Biblioteca del vino y Aprender vino.
+- Se completo una tanda de traduccion profunda DE/PT en herramientas online y se corrigieron leaks espanoles detectados por los tests.
+- `Hoteles` y `GruposRestauracion` ya no dependen de un spread masivo de EN para DE/PT.
+- El agente SEO detecto 14 URLs DE/PT de herramientas con mismatch: humano correcto, Googlebot cayendo a home espanola.
+- Se amplio la cobertura localizada de 12 herramientas online en:
+  - Worker;
+  - Edge `prerender`;
+  - Edge `sitemap`;
+  - tests de guardrail.
+- Se prepararon dos migraciones editoriales futuras:
+  - `20260707103000_add_wine_library_by_the_glass_stock_rotation.sql`;
+  - `20260707090000_add_learn_wine_read_label_restaurant.sql`.
+- Las validaciones locales pasaron: tests SEO/i18n `91/91`, TypeScript, ESLint focal, Deno check, Worker syntax, build y `git diff --check`.
+
+#### Decisiones
+
+- Las herramientas online deben tratarse como rutas multilingues completas en todas las capas, no solo en React.
+- No se aceptan rutas DE/PT indexables que dependan de fallback home para Googlebot.
+- Los lotes editoriales se preparan con `published_at` futuro y gating defensivo; no se enlazan en `llms` antes de fecha.
+- `src/test/de-pt-seo-guardrails.test.tsx` queda como guardrail obligatorio para paridad DE/PT.
+
+#### Hipotesis
+
+- Publicar Worker + Edge + frontend deberia corregir la caida a home espanola en herramientas DE/PT vistas por Googlebot.
+- La consolidacion por `hreflang` en herramientas ayudara mas al SEO internacional que seguir publicando contenido sin cerrar la capa tecnica.
+
+#### Tareas pendientes
+
+- Commit/push de la tanda.
+- Desplegar Worker si hay credenciales activas.
+- Pedir a Lovable que aplique las dos migraciones y publique frontend/Edge Functions.
+- Revalidar produccion humano/Googlebot y sitemap tras deploy.
+
 ## 2026-07-06
 
 ### URLs legales largas y footer productivo

@@ -30,8 +30,17 @@ type Decision = "ok" | "noreponer" | "liquidar" | "critico";
 type Profile = "lastre" | "sin actividad" | "estrella" | "volumen" | "rentable" | "estable";
 type Confidence = "media" | "baja";
 
-const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-const percent = new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 1 });
+const euroFormatters = {
+  es: new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  de: new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  pt: new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+};
+
+const percentFormatters = {
+  es: new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 1 }),
+  de: new Intl.NumberFormat("de-DE", { style: "percent", maximumFractionDigits: 1 }),
+  pt: new Intl.NumberFormat("pt-PT", { style: "percent", maximumFractionDigits: 1 }),
+};
 
 const decisionTone: Record<Decision, string> = {
   ok: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
@@ -373,9 +382,9 @@ const uiCopy: Record<string, {
   },
   pt: {
     heroEyebrow: "Demo · Winerim Margens",
-    heroDescription: "Introduz o PVP, custo, stock, vendas mensais e dias sem venda. A ferramenta devolve um sinal simplificado: manter, não repor, liquidar ou rever como crítico.",
+    heroDescription: "Introduza o PVP, custo, stock, vendas mensais e dias sem venda. A ferramenta devolve um sinal simplificado: manter, não repor, liquidar ou rever como crítico.",
     formTitle: "Dados da referência",
-    formSubtitle: "Tudo é calculado no teu navegador.",
+    formSubtitle: "Tudo é calculado no seu navegador.",
     wineLabel: "Nome ou família do vinho",
     pvpLabel: "PVP da carta (€)",
     costLabel: "Custo de compra (€)",
@@ -383,7 +392,7 @@ const uiCopy: Record<string, {
     salesLabel: "Vendas mensais",
     daysLabel: "Dias desde a última venda",
     protectedTitle: "Vinho protegido ou estratégico",
-    protectedDescription: "Usa isto para referências de imagem, harmonização ou profundidade que não devem ser avaliadas apenas pela rotação.",
+    protectedDescription: "Use isto para referências de imagem, harmonização ou profundidade que não devem ser avaliadas apenas pela rotação.",
     calculate: "Calcular sinal",
     resultFor: "Resultado para",
     unnamedReference: "Referência sem nome",
@@ -435,10 +444,10 @@ const uiCopy: Record<string, {
       },
       {
         q: "Porque é que a cobertura em meses importa?",
-        a: "Porque mostra quanto tempo demorarias a vender o stock atual ao ritmo de vendas recente. Coberturas muito altas costumam indicar capital imobilizado.",
+        a: "Porque mostra quanto tempo demoraria a vender o stock atual ao ritmo de vendas recente. Coberturas muito altas costumam indicar capital imobilizado.",
       },
     ],
-    internalLinksTitle: "Continua a analisar a tua carta",
+    internalLinksTitle: "Continue a analisar a sua carta",
     internalLinks: [
       { label: "Calculadora de stock morto" },
       { label: "Calculadora de compra inteligente" },
@@ -448,12 +457,8 @@ const uiCopy: Record<string, {
   },
 };
 
-const SimuladorSenalMargenes = () => {
-  const { lang, localePath, allLangPaths } = useLanguage();
-  const s = seoCopy[lang] || seoCopy.es;
-  const ui = uiCopy[lang] || uiCopy.es;
-  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-senal-margenes")}`;
-  const [form, setForm] = useState({
+const initialFormByLang = {
+  es: {
     wine: "Ribera premium",
     pvp: "64",
     cost: "24",
@@ -461,7 +466,36 @@ const SimuladorSenalMargenes = () => {
     monthlySales: "2",
     daysSinceLastSale: "128",
     protectedWine: false,
-  });
+  },
+  de: {
+    wine: "Spätburgunder Reserve",
+    pvp: "64",
+    cost: "24",
+    stock: "14",
+    monthlySales: "2",
+    daysSinceLastSale: "128",
+    protectedWine: false,
+  },
+  pt: {
+    wine: "Douro reserva",
+    pvp: "64",
+    cost: "24",
+    stock: "14",
+    monthlySales: "2",
+    daysSinceLastSale: "128",
+    protectedWine: false,
+  },
+};
+
+const SimuladorSenalMargenes = () => {
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const activeLang = lang === "de" || lang === "pt" ? lang : "es";
+  const s = seoCopy[lang] || seoCopy.es;
+  const ui = uiCopy[activeLang];
+  const euro = euroFormatters[activeLang];
+  const percent = percentFormatters[activeLang];
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/simulador-senal-margenes")}`;
+  const [form, setForm] = useState(() => initialFormByLang[activeLang]);
 
   const result = useMemo(() => {
     const pvp = getNumber(form.pvp);
@@ -493,7 +527,7 @@ const SimuladorSenalMargenes = () => {
     };
   }, [form]);
 
-  const decision = decisionCopy[lang]?.[result.decision] || decisionCopy.es[result.decision];
+  const decision = decisionCopy[activeLang][result.decision];
 
   const update = (key: keyof typeof form, value: string | boolean) => {
     setForm((current) => ({ ...current, [key]: value }));

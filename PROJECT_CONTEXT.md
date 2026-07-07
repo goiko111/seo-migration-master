@@ -1,5 +1,41 @@
 # Project Context
 
+## Actualizacion 2026-07-07: paridad herramientas DE/PT y calendario editorial
+
+## Hechos
+
+- La prioridad vigente del proyecto sigue siendo no ampliar contenido "a lo bruto" si la capa internacional no esta estable.
+- El 2026-07-07 se ejecutaron agentes paralelos de idioma, SEO/paridad, Biblioteca del vino y Aprender vino.
+- La superficie DE/PT de herramientas se amplio y endurecio:
+  - React humano cubre home, contacto, precios, hub de herramientas y 12 herramientas online con `html lang`, canonical propio y `hreflang`;
+  - Worker ya tiene prerender estatico para 12 familias de herramientas, no solo para las 5 que ya estaban cubiertas;
+  - `sitemap` y `prerender` de Supabase incluyen las 12 herramientas en su mapa localizado.
+- Los fallbacks detectados por el agente SEO eran una contradiccion real entre humano y bot: herramientas DE/PT correctas en navegador, pero Googlebot recibiendo home espanola/canonical raiz en rutas que no estaban en el prerender estatico.
+- Quedan preparados dos lotes editoriales futuros:
+  - Biblioteca del vino: `wine-library-by-the-glass-stock-rotation`, `2026-07-20`;
+  - Aprender vino: `learn-wine-read-label-restaurant`, `2026-07-27`.
+- Las migraciones editoriales son data-only sobre `public.articles`, con `author='Winerim'`, `published=true`, `published_at` programado, `article_group` y `related_links`.
+- Las URLs futuras de estos dos lotes no se han anadido a `llms` ni a hubs publicos antes de fecha.
+
+## Decisiones
+
+- `src/i18n/types.ts`, `supabase/functions/sitemap/index.ts`, `supabase/functions/prerender/index.ts` y `cloudflare-worker-v3-hybrid.js` deben permanecer alineados para rutas localizadas importantes.
+- Las herramientas online forman parte de la arquitectura SEO/LLM internacional, no solo de conversion.
+- La cadencia editorial semanal se mantiene, pero las tandas se preparan con release gating defensivo por Worker/Edge.
+- Los tests `wine-library-seo-surface` y `de-pt-seo-guardrails` pasan a ser guardrails obligatorios antes de ampliar Biblioteca/Aprender.
+
+## Hipotesis
+
+- La publicacion de esta tanda deberia reducir senales contradictorias de canonical/hreflang para DE/PT en Search Console.
+- El contenido futuro programado no deberia aparecer en Google/LLMs antes de fecha si Lovable publica tambien Edge Functions.
+
+## Tareas pendientes
+
+- Publicar esta tanda en Lovable/frontend/Edge y desplegar Worker.
+- Aplicar las dos migraciones editoriales futuras en Lovable Cloud.
+- Revalidar produccion y Search Console tras publish.
+- Despues de validar, continuar con mas entidades y guias de Biblioteca del vino y Aprender vino.
+
 ## Actualizacion 2026-07-06: URLs legales largas y footer
 
 ## Hechos

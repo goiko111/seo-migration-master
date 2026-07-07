@@ -388,7 +388,7 @@ const FR: Content = { ...EN,
   ctaPrimary: "Je veux une démo pour mon hôtel", ctaSecondary: "Analyser ma carte",
 };
 
-const DE: Content = { ...EN,
+const DE: Content = {
   metaTitle: "Winerim für Hotels | Intelligente Weinkarte für Gastronomie",
   metaDescription: "Optimieren Sie Wein in Restaurants, Bars, Lounges und Zimmerservice Ihres Hotels. Mehrsprachige digitale Karte mit KI und Analytik.",
   badgeLabel: "Premium-Hospitality", breadSolutions: "Lösungen", breadLabel: "Hotels",
@@ -533,7 +533,7 @@ const DE: Content = { ...EN,
   ],
 };
 
-const PT: Content = { ...EN,
+const PT: Content = {
   metaTitle: "Winerim para Hotéis | Carta de Vinhos Inteligente para F&B",
   metaDescription: "Otimize o vinho em restaurantes, bares, lounges e room service do seu hotel. Carta digital multiidioma com IA e análise.",
   badgeLabel: "Hospitalidade premium", breadSolutions: "Soluções", breadLabel: "Hotéis",

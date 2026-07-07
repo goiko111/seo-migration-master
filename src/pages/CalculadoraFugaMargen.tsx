@@ -16,8 +16,17 @@ import { CANONICAL_DOMAIN } from "@/seo/config";
 import { trackAction } from "@/lib/intentTracking";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const euroFormatter = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-const percentFormatter = new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 1 });
+const euroFormatters = {
+  es: new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  de: new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  pt: new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+};
+
+const percentFormatters = {
+  es: new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 1 }),
+  de: new Intl.NumberFormat("de-DE", { style: "percent", maximumFractionDigits: 1 }),
+  pt: new Intl.NumberFormat("pt-PT", { style: "percent", maximumFractionDigits: 1 }),
+};
 
 const valueOf = (value: string) => {
   const parsed = Number(value.replace(",", "."));
@@ -306,12 +315,8 @@ const uiCopy = {
   },
 };
 
-const CalculadoraFugaMargen = () => {
-  const { lang, localePath, allLangPaths } = useLanguage();
-  const s = seoCopy[lang] || seoCopy.es;
-  const t = lang === "de" ? uiCopy.de : lang === "pt" ? uiCopy.pt : uiCopy.es;
-  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-fuga-margen")}`;
-  const [form, setForm] = useState({
+const initialFormByLang = {
+  es: {
     wine: "Godello premium",
     cost: "13.50",
     pvp: "38",
@@ -320,7 +325,38 @@ const CalculadoraFugaMargen = () => {
     stock: "24",
     glassPrice: "8",
     glassesPerBottle: "5",
-  });
+  },
+  de: {
+    wine: "Riesling Reserve",
+    cost: "13.50",
+    pvp: "38",
+    targetMargin: "62",
+    monthlySales: "18",
+    stock: "24",
+    glassPrice: "8",
+    glassesPerBottle: "5",
+  },
+  pt: {
+    wine: "Alvarinho premium",
+    cost: "13.50",
+    pvp: "38",
+    targetMargin: "62",
+    monthlySales: "18",
+    stock: "24",
+    glassPrice: "8",
+    glassesPerBottle: "5",
+  },
+};
+
+const CalculadoraFugaMargen = () => {
+  const { lang, localePath, allLangPaths } = useLanguage();
+  const activeLang = lang === "de" || lang === "pt" ? lang : "es";
+  const s = seoCopy[lang] || seoCopy.es;
+  const t = uiCopy[activeLang];
+  const euroFormatter = euroFormatters[activeLang];
+  const percentFormatter = percentFormatters[activeLang];
+  const canonicalUrl = `${CANONICAL_DOMAIN}${localePath("/herramientas/calculadora-fuga-margen")}`;
+  const [form, setForm] = useState(() => initialFormByLang[activeLang]);
 
   const result = useMemo(() => {
     const cost = valueOf(form.cost);

@@ -341,6 +341,80 @@ describe("wine library SEO surface", () => {
     expect(sitemap).toContain("isReleasedArticleSlug");
   });
 
+  it("prepares the 2026-07-20 wine-library by-the-glass stock rotation batch without early LLM exposure", () => {
+    const migration = readFileSync(
+      "supabase/migrations/20260707103000_add_wine_library_by_the_glass_stock_rotation.sql",
+      "utf8",
+    );
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+    const relatedContent = readFileSync("src/components/article/ArticleRelatedContent.tsx", "utf8");
+    const llms = readFileSync("public/llms.txt", "utf8");
+    const llmsFull = readFileSync("public/llms-full.txt", "utf8");
+
+    expect(migration).toContain("wine-library-by-the-glass-stock-rotation");
+    expect(migration).toContain("como-usar-biblioteca-vino-para-vino-por-copa-y-rotacion");
+    expect(migration).toContain("wine-library-by-the-glass-stock-rotation_en");
+    expect(migration).toContain("biblioteca-vino-calice-stock-rotazione_it");
+    expect(migration).toContain("bibliotheque-vin-verre-stock-rotation_fr");
+    expect(migration).toContain("weinbibliothek-offenwein-bestand-rotation_de");
+    expect(migration).toContain("biblioteca-vinho-copo-stock-rotacao_pt");
+    expect(migration).toContain("2026-07-20T09:00:00+02:00");
+    expect(migration).toContain("2026-07-20T09:25:00+02:00");
+    expect(migration).toContain('"to":"/en/tools/wine-by-glass-price-calculator"');
+    expect(migration).toContain('"to":"/pt/ferramentas/calculadora-stock-morto"');
+    expect(migration).toContain('"to":"/de/produkt/winerim-supply"');
+    expect(migration).toContain('"type":"conversion"');
+    expect(migration).toContain("La Biblioteca del vino no es solo un lugar para consultar uvas");
+    expect(migration).toContain("The Wine Library is not only a place to look up grapes");
+    expect(migration).toContain("A Biblioteca do vinho não serve apenas para consultar castas");
+    expect(prerender).toContain("'wine-library-by-the-glass-stock-rotation_en': '2026-07-20T09:05:00+02:00'");
+    expect(sitemap).toContain("'biblioteca-vinho-copo-stock-rotacao_pt': '2026-07-20T09:25:00+02:00'");
+    expect(worker).toContain("'/de/article/weinbibliothek-offenwein-bestand-rotation': '2026-07-20T09:20:00+02:00'");
+    expect(relatedContent).toContain('type: "tool" | "guide" | "resource" | "solution" | "conversion" | "decision-center"');
+    expect(relatedContent).toContain("conversion: { icon: ArrowRight");
+    expect(llms).not.toContain("wine-library-by-the-glass-stock-rotation");
+    expect(llms).not.toContain("biblioteca-vinho-copo-stock-rotacao");
+    expect(llmsFull).not.toContain("wine-library-by-the-glass-stock-rotation");
+    expect(llmsFull).not.toContain("biblioteca-vinho-copo-stock-rotacao");
+  });
+
+  it("prepares the 2026-07-27 learn-wine label-reading batch without early LLM exposure", () => {
+    const migration = readFileSync(
+      "supabase/migrations/20260707090000_add_learn_wine_read_label_restaurant.sql",
+      "utf8",
+    );
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+    const llms = readFileSync("public/llms.txt", "utf8");
+    const llmsFull = readFileSync("public/llms-full.txt", "utf8");
+
+    expect(migration).toContain("learn-wine-read-label-restaurant");
+    expect(migration).toContain("como-leer-etiqueta-vino-restaurante");
+    expect(migration).toContain("read-wine-label-restaurant_en");
+    expect(migration).toContain("come-leggere-etichetta-vino-ristorante_it");
+    expect(migration).toContain("lire-etiquette-vin-restaurant_fr");
+    expect(migration).toContain("weinetikett-lesen-restaurant_de");
+    expect(migration).toContain("como-ler-rotulo-vinho-restaurante_pt");
+    expect(migration).toContain("2026-07-27T09:00:00+02:00");
+    expect(migration).toContain("2026-07-27T09:25:00+02:00");
+    expect(migration).toContain('"to":"/en/wine-library/glossary"');
+    expect(migration).toContain('"to":"/pt/produto/cloudrim"');
+    expect(migration).toContain('"type":"conversion"');
+    expect(migration).toContain("Leer una etiqueta de vino no significa recitar todo lo que aparece");
+    expect(migration).toContain("Reading a wine label is not the same as reciting everything printed");
+    expect(migration).toContain("Ler um rótulo de vinho não é repetir tudo o que aparece");
+    expect(prerender).toContain("'read-wine-label-restaurant_en': '2026-07-27T09:05:00+02:00'");
+    expect(sitemap).toContain("'como-ler-rotulo-vinho-restaurante_pt': '2026-07-27T09:25:00+02:00'");
+    expect(worker).toContain("'/de/article/weinetikett-lesen-restaurant': '2026-07-27T09:20:00+02:00'");
+    expect(llms).not.toContain("read-wine-label-restaurant");
+    expect(llms).not.toContain("como-ler-rotulo-vinho-restaurante");
+    expect(llmsFull).not.toContain("read-wine-label-restaurant");
+    expect(llmsFull).not.toContain("como-ler-rotulo-vinho-restaurante");
+  });
+
   it("normalizes legacy language query URLs at the Worker edge", () => {
     const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
 
@@ -453,6 +527,87 @@ describe("wine library SEO surface", () => {
     expect(exclusionBlock).toContain("'/politica-privacidad'");
     expect(exclusionBlock).toContain("'/terminos'");
     expect(exclusionBlock).toContain("'/terminos-y-condiciones-del-contrato'");
+  });
+
+  it("keeps all localized online tools aligned in sitemap, prerender and Worker", () => {
+    const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
+    const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
+    const toolRoutes = [
+      {
+        es: "/herramientas/calculadora-precio-vino-por-copa",
+        de: "/de/tools/glaspreis-rechner",
+        pt: "/pt/ferramentas/calculadora-preco-vinho-por-copo",
+      },
+      {
+        es: "/herramientas/calculadora-stock-muerto",
+        de: "/de/tools/totbestand-rechner",
+        pt: "/pt/ferramentas/calculadora-stock-morto",
+      },
+      {
+        es: "/herramientas/calculadora-ticket-medio-vino",
+        de: "/de/tools/durchschnittsbon-rechner",
+        pt: "/pt/ferramentas/calculadora-ticket-medio",
+      },
+      {
+        es: "/herramientas/calculadora-compra-inteligente",
+        de: "/de/tools/intelligenter-einkauf-rechner",
+        pt: "/pt/ferramentas/calculadora-compra-inteligente",
+      },
+      {
+        es: "/herramientas/diagnostico-vino-por-copa",
+        de: "/de/tools/glasausschank-diagnose",
+        pt: "/pt/ferramentas/diagnostico-vinho-por-copo",
+      },
+      {
+        es: "/herramientas/wine-list-score",
+        de: "/de/tools/wine-list-score",
+        pt: "/pt/ferramentas/wine-list-score",
+      },
+      {
+        es: "/herramientas/auditor-carta-multilocal",
+        de: "/de/tools/multi-standort-auditor",
+        pt: "/pt/ferramentas/auditor-carta-multilocal",
+      },
+      {
+        es: "/herramientas/simulador-senal-margenes",
+        de: "/de/tools/margensignal-simulator",
+        pt: "/pt/ferramentas/simulador-sinal-margens",
+      },
+      {
+        es: "/herramientas/test-perfil-rim",
+        de: "/de/tools/rim-profiltest",
+        pt: "/pt/ferramentas/teste-perfil-rim",
+      },
+      {
+        es: "/herramientas/simulador-pareto-carta-vinos",
+        de: "/de/tools/pareto-weinkarten-simulator",
+        pt: "/pt/ferramentas/simulador-pareto-carta-vinhos",
+      },
+      {
+        es: "/herramientas/calculadora-fuga-margen",
+        de: "/de/tools/margenverlust-rechner",
+        pt: "/pt/ferramentas/calculadora-fuga-margem",
+      },
+      {
+        es: "/herramientas/comparador-distribuidores",
+        de: "/de/tools/distributoren-vergleich",
+        pt: "/pt/ferramentas/comparador-distribuidores",
+      },
+    ];
+
+    for (const { es, de, pt } of toolRoutes) {
+      expect(sitemap).toContain(`{ esPath: '${es}', priority: '0.7', changefreq: 'monthly', multilang: true }`);
+      expect(sitemap).toContain(`'${es}': '${de}'`);
+      expect(sitemap).toContain(`'${es}': '${pt}'`);
+      expect(prerender).toContain(`'${es}': '${de}'`);
+      expect(prerender).toContain(`'${es}': '${pt}'`);
+      expect(worker).toContain(`es: '${es}'`);
+      expect(worker).toContain(`de: '${de}'`);
+      expect(worker).toContain(`pt: '${pt}'`);
+    }
+
+    expect(sitemap).not.toContain("// Missing tools");
   });
 
   it("serves the long Spanish legal URLs across frontend, footer, worker and prerender", () => {

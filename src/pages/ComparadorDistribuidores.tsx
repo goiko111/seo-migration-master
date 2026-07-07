@@ -69,7 +69,11 @@ const localizedInitialRows: Record<"es" | "de" | "pt", Distributor[]> = {
     { name: "Lieferant B", references: "28", price: "8", service: "6", docs: "9", unique: "5", rotation: "6" },
     { name: "Lieferant C", references: "18", price: "5", service: "9", docs: "7", unique: "4", rotation: "4" },
   ],
-  pt: initialRows,
+  pt: [
+    { name: "Fornecedor A", references: "42", price: "7", service: "8", docs: "6", unique: "9", rotation: "7" },
+    { name: "Fornecedor B", references: "28", price: "8", service: "6", docs: "9", unique: "5", rotation: "6" },
+    { name: "Fornecedor C", references: "18", price: "5", service: "9", docs: "7", unique: "4", rotation: "4" },
+  ],
 };
 
 const numberValue = (value: string) => {
@@ -176,9 +180,9 @@ const pageCopy: Record<"es" | "de" | "pt", PageCopy> = {
     ],
   },
   de: {
-    intro: "Bewerten Sie, welcher Lieferant Ihrer Weinkarte wirklich mehr Wert bringt: Preis, Service, saubere Unterlagen, differenzierende Referenzen und Weine, die sich tatsaechlich drehen.",
+    intro: "Bewerten Sie, welcher Lieferant Ihrer Weinkarte wirklich mehr Wert bringt: Preis, Service, saubere Unterlagen, differenzierende Referenzen und Weine, die sich tatsächlich drehen.",
     scoreTitle: "Lieferanten bewerten",
-    scoreHelp: "Vergeben Sie Werte von 0 bis 10, ausser bei der Anzahl der Referenzen.",
+    scoreHelp: "Vergeben Sie Werte von 0 bis 10, außer bei der Anzahl der Referenzen.",
     distributorLabel: "Lieferant",
     fields: {
       references: "Ref.",
@@ -191,44 +195,44 @@ const pageCopy: Record<"es" | "de" | "pt", PageCopy> = {
     updateRanking: "Ranking aktualisieren",
     bestFit: "Bester Fit",
     evaluatedRefs: "Bewertete Ref.",
-    supplierToReview: "Zu pruefender Lieferant",
+    supplierToReview: "Zu prüfender Lieferant",
     mainAction: "Wichtigste Aktion",
     viewSupply: "Winerim Supply ansehen",
     actions: {
       prioritize: "Priorisieren und Wachstumsbedingungen verhandeln",
-      maintain: "Beibehalten, aber Ueberschneidungen und Preise pruefen",
-      review: "Pruefen: moegliche Vereinfachung oder Neuverhandlung",
+      maintain: "Beibehalten, aber Überschneidungen und Preise prüfen",
+      review: "Prüfen: mögliche Vereinfachung oder Neuverhandlung",
     },
     pillars: [
-      { icon: Scale, title: "Tatsaechlicher Preis", text: "Schauen Sie nicht nur auf Rabatte: vergleichen Sie Kosten, Format, Service und Referenzen, die wirklich rotieren." },
-      { icon: Truck, title: "Service", text: "Verspaetungen, unvollstaendige Bestellungen und ungeordnete Unterlagen verursachen ebenfalls operative Kosten." },
-      { icon: ClipboardList, title: "Katalog", text: "Erkennen Sie Ueberschneidungen, Luecken und Lieferanten, die Ihrer Positionierung differenzierende Weine hinzufuegen." },
+      { icon: Scale, title: "Tatsächlicher Preis", text: "Schauen Sie nicht nur auf Rabatte: vergleichen Sie Kosten, Format, Service und Referenzen, die wirklich rotieren." },
+      { icon: Truck, title: "Service", text: "Verspätungen, unvollständige Bestellungen und ungeordnete Unterlagen verursachen ebenfalls operative Kosten." },
+      { icon: ClipboardList, title: "Katalog", text: "Erkennen Sie Überschneidungen, Lücken und Lieferanten, die Ihrer Positionierung differenzierende Weine hinzufügen." },
     ],
     ctaEyebrow: "Lieferanten und Einkauf",
     ctaTitle: "In Winerim wird jeder Lieferant mit der lebendigen Weinkarte abgeglichen.",
-    ctaText: "CloudRIM und Winerim Supply verbinden Kataloge, Lieferscheine, Rechnungen, Kosten, Referenzen und Bestand, damit Sie jederzeit den passenden Lieferanten waehlen.",
+    ctaText: "CloudRIM und Winerim Supply verbinden Kataloge, Lieferscheine, Rechnungen, Kosten, Referenzen und Bestand, damit Sie jederzeit den passenden Lieferanten wählen.",
     auditDownload: "Lieferantenaudit herunterladen",
     viewCloudrim: "CloudRIM ansehen",
     faqs: [
       {
         q: "Was bedeutet differenzierende Referenz?",
-        a: "Eine Referenz, die etwas liefert, was andere Lieferanten nicht abdecken: Stil, Herkunftsbezeichnung, Format, Marge, Verfuegbarkeit oder Passung zu Ihrem Konzept.",
+        a: "Eine Referenz, die etwas liefert, was andere Lieferanten nicht abdecken: Stil, Herkunftsbezeichnung, Format, Marge, Verfügbarkeit oder Passung zu Ihrem Konzept.",
       },
       {
         q: "Gewinnt immer der Lieferant mit dem besten Preis?",
-        a: "Nein. Ein guenstiger Lieferant kann teuer werden, wenn er Lieferscheinfehler, Bestandsluecken oder Referenzen verursacht, die sich nicht drehen.",
+        a: "Nein. Ein günstiger Lieferant kann teuer werden, wenn er Lieferscheinfehler, Bestandslücken oder Referenzen verursacht, die sich nicht drehen.",
       },
       {
-        q: "Wie wuerde Winerim das mit echten Daten machen?",
-        a: "Es verknuepft Katalog, Kosten, Bestand, Verkaeufe, Lieferscheine und Rechnungen, um Lieferanten laufend auf Basis von Evidenz zu vergleichen.",
+        q: "Wie würde Winerim das mit echten Daten machen?",
+        a: "Es verknüpft Katalog, Kosten, Bestand, Verkäufe, Lieferscheine und Rechnungen, um Lieferanten laufend auf Basis von Evidenz zu vergleichen.",
       },
     ],
-    internalLinksTitle: "Einkauf weiter schaerfen",
+    internalLinksTitle: "Einkauf weiter schärfen",
     internalLinks: [
-      { to: "/herramientas/calculadora-compra-inteligente", label: "Rechner fuer intelligenten Einkauf", type: "tool" },
-      { to: "/recursos/checklist-albaranes-facturas-coste-vino", label: "Checkliste fuer Lieferscheine und Rechnungen", type: "resource" },
+      { to: "/herramientas/calculadora-compra-inteligente", label: "Rechner für intelligenten Einkauf", type: "tool" },
+      { to: "/recursos/checklist-albaranes-facturas-coste-vino", label: "Checkliste für Lieferscheine und Rechnungen", type: "resource" },
       { to: "/producto/winerim-supply", label: "Winerim Supply", type: "solution" },
-      { to: "/distribuidor", label: "Winerim fuer Distributoren", type: "solution" },
+      { to: "/distribuidor", label: "Winerim für Distributoren", type: "solution" },
     ],
   },
   pt: {

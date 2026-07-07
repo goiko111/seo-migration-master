@@ -7,7 +7,7 @@ import { type SupportedLang } from "@/i18n/types";
 export interface RelatedLink {
   to: string;
   label: string;
-  type: "tool" | "guide" | "resource" | "solution" | "decision-center";
+  type: "tool" | "guide" | "resource" | "solution" | "conversion" | "decision-center";
 }
 
 const typeConfig = {
@@ -15,16 +15,17 @@ const typeConfig = {
   guide: { icon: BookOpen, badgeClass: "text-accent" },
   resource: { icon: Download, badgeClass: "text-emerald-500" },
   solution: { icon: Lightbulb, badgeClass: "text-amber-500" },
+  conversion: { icon: ArrowRight, badgeClass: "text-amber-500" },
   "decision-center": { icon: Brain, badgeClass: "text-purple-500" },
 };
 
 const copy: Record<SupportedLang, { title: string; badges: Record<RelatedLink["type"], string> }> = {
-  es: { title: "Contenido relacionado", badges: { tool: "Herramienta", guide: "Guía", resource: "Recurso", solution: "Solución", "decision-center": "Decision Center" } },
-  en: { title: "Related content", badges: { tool: "Tool", guide: "Guide", resource: "Resource", solution: "Solution", "decision-center": "Decision Center" } },
-  it: { title: "Contenuti correlati", badges: { tool: "Strumento", guide: "Guida", resource: "Risorsa", solution: "Soluzione", "decision-center": "Decision Center" } },
-  fr: { title: "Contenus associés", badges: { tool: "Outil", guide: "Guide", resource: "Ressource", solution: "Solution", "decision-center": "Decision Center" } },
-  de: { title: "Verwandte Inhalte", badges: { tool: "Tool", guide: "Ratgeber", resource: "Ressource", solution: "Lösung", "decision-center": "Decision Center" } },
-  pt: { title: "Conteúdo relacionado", badges: { tool: "Ferramenta", guide: "Guia", resource: "Recurso", solution: "Solução", "decision-center": "Decision Center" } },
+  es: { title: "Contenido relacionado", badges: { tool: "Herramienta", guide: "Guía", resource: "Recurso", solution: "Solución", conversion: "Conversión", "decision-center": "Decision Center" } },
+  en: { title: "Related content", badges: { tool: "Tool", guide: "Guide", resource: "Resource", solution: "Solution", conversion: "Conversion", "decision-center": "Decision Center" } },
+  it: { title: "Contenuti correlati", badges: { tool: "Strumento", guide: "Guida", resource: "Risorsa", solution: "Soluzione", conversion: "Conversione", "decision-center": "Decision Center" } },
+  fr: { title: "Contenus associés", badges: { tool: "Outil", guide: "Guide", resource: "Ressource", solution: "Solution", conversion: "Conversion", "decision-center": "Decision Center" } },
+  de: { title: "Verwandte Inhalte", badges: { tool: "Tool", guide: "Ratgeber", resource: "Ressource", solution: "Lösung", conversion: "Conversion", "decision-center": "Decision Center" } },
+  pt: { title: "Conteúdo relacionado", badges: { tool: "Ferramenta", guide: "Guia", resource: "Recurso", solution: "Solução", conversion: "Conversão", "decision-center": "Decision Center" } },
 };
 
 /** Keyword → related links mapping for automatic suggestion */

@@ -1,5 +1,64 @@
 # Next Steps
 
+## Actualizacion 2026-07-07: siguiente retoma tras agentes i18n/SEO/editorial
+
+## Hechos
+
+- Localmente queda preparada la tanda DE/PT/SEO/editorial:
+  - 12 herramientas online alineadas en React, Worker, Edge `prerender`, Edge `sitemap` y guardrails;
+  - traduccion profunda DE/PT aplicada en herramientas principales;
+  - `Hoteles` y `GruposRestauracion` sin fallback masivo a EN para DE/PT;
+  - lote Biblioteca del vino `2026-07-20` preparado;
+  - lote Aprender vino `2026-07-27` preparado.
+- Validaciones locales pasadas:
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts src/test/de-pt-seo-guardrails.test.tsx src/test/seo-head-i18n.test.tsx`;
+  - `npx tsc --noEmit --pretty false`;
+  - `npx eslint` focal;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npm run build`.
+
+## Prioridad 1: despliegue coordinado
+
+1. Commit/push de la tanda actual.
+2. Desplegar Worker `winerim-proxy` desde Codex si el login Cloudflare esta disponible.
+3. En Lovable Cloud, aplicar migraciones:
+   - `supabase/migrations/20260707103000_add_wine_library_by_the_glass_stock_rotation.sql`;
+   - `supabase/migrations/20260707090000_add_learn_wine_read_label_restaurant.sql`.
+4. En Lovable Cloud, publicar frontend y Edge Functions:
+   - `supabase/functions/sitemap/index.ts`;
+   - `supabase/functions/prerender/index.ts`.
+
+## Prioridad 2: revalidacion produccion
+
+1. Como Googlebot, validar que ya no caen a home espanola:
+   - `/de/tools/glaspreis-rechner`;
+   - `/pt/ferramentas/calculadora-preco-vinho-por-copo`;
+   - `/de/tools/durchschnittsbon-rechner`;
+   - `/pt/ferramentas/calculadora-ticket-medio`;
+   - `/de/tools/multi-standort-auditor`;
+   - `/pt/ferramentas/auditor-carta-multilocal`.
+2. Revalidar `https://winerim.wine/sitemap.xml`:
+   - 12 familias de herramientas con alternates DE/PT;
+   - 0 URLs futuras no liberadas.
+3. Revalidar Edge directa `sitemap` y `prerender` tras publish Lovable.
+4. Revalidar `llms.txt` y `llms-full.txt` sin URLs de los lotes `2026-07-20` y `2026-07-27` hasta su fecha.
+
+## Prioridad 3: continuar contenido
+
+1. Cuando produccion este validada, seguir con Biblioteca del vino:
+   - mas entidades por uva/region/estilo/maridaje;
+   - enlazado interno desde herramientas y articulos.
+2. Seguir con Aprender vino:
+   - guias para sala, lectura de etiqueta, maridaje operativo y venta por perfil de cliente.
+3. Mantener cadencia semanal y pais/idioma adaptado, sin mezclar hubs de Biblioteca con guias de Aprender.
+
+## Prioridad 4: deuda separada
+
+1. Resolver warning preexistente de keys en `Precios`.
+2. Revalidar footer legal sin parche Worker cuando Lovable publique el bundle correcto.
+3. Resolver `https://www.winerim.wine/` `421` con Cloudflare/Lovable.
+
 ## Actualizacion 2026-07-06: URLs legales cerradas
 
 ## Hechos
