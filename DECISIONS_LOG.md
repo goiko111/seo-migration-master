@@ -2,6 +2,40 @@
 
 ## 2026-07-07
 
+### Publicacion Lovable/Worker de paridad DE/PT y lotes editoriales
+
+#### Hechos
+
+- Se pusheo `fabe827 fix: align de pt tools and schedule wine education` a `main`.
+- Se desplego Worker `winerim-proxy` Version ID `e28e359d-ae3e-4218-b063-c83594165db6`.
+- Lovable aplico dos migraciones editoriales y genero dos archivos de migracion equivalentes con UUID.
+- Lovable desplego `sitemap` y `prerender`.
+- Produccion quedo validada:
+  - herramientas DE/PT como Googlebot con `200`, canonical propio y `7` hreflang;
+  - sitemap publico con herramientas DE/PT y sin futuros;
+  - Edge directa `sitemap` con herramientas DE/PT y sin futuros;
+  - `llms.txt` y `llms-full.txt` sin futuros.
+- Las validaciones locales post-Lovable pasaron.
+
+#### Decisiones
+
+- Mantener las migraciones duplicadas porque estan aplicadas por Lovable y son idempotentes por slug.
+- Dar por cerrada la correccion P0 de herramientas DE/PT humano-bot para esta tanda.
+- No publicar contenido futuro en hubs, sitemap ni `llms` antes de `published_at`.
+
+#### Hipotesis
+
+- Google deberia reducir discrepancias de canonical/hreflang en DE/PT tras recrawl.
+- La duplicidad de migraciones no deberia crear duplicados de articulos por el `ON CONFLICT (slug) DO UPDATE`.
+
+#### Tareas pendientes
+
+- Vigilar Search Console tras nueva lectura de sitemap.
+- Continuar Biblioteca del vino y Aprender vino con cadencia semanal.
+- Limpiar warning preexistente de keys en `Precios`.
+
+## 2026-07-07
+
 ### Paridad internacional de herramientas y calendario editorial
 
 #### Hechos

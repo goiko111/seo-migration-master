@@ -1,5 +1,52 @@
 # Current State
 
+## Cierre 2026-07-07: publicacion i18n/SEO/editorial validada
+
+## Hechos
+
+- El commit `fabe827 fix: align de pt tools and schedule wine education` se pusheo a `main`.
+- Se desplego Cloudflare Worker `winerim-proxy` Version ID `e28e359d-ae3e-4218-b063-c83594165db6`.
+- Lovable aplico las dos migraciones editoriales y creo tambien dos migraciones generadas:
+  - `20260707052248_f2aeb43a-ed08-4695-90fd-066dd2951c43.sql`;
+  - `20260707052534_54dab648-58ba-422d-8b2c-a74f712fb630.sql`.
+- Las migraciones generadas duplican el contenido de las migraciones nombradas, pero son data-only e idempotentes por `ON CONFLICT (slug) DO UPDATE`.
+- Lovable desplego Edge Functions `sitemap` y `prerender` y publico frontend.
+- Edge directa `sitemap` quedo validada con `2365` URLs, `13508` alternates, herramientas DE/PT presentes y sin los lotes futuros `2026-07-20` / `2026-07-27`.
+- Sitemap publico `https://winerim.wine/sitemap.xml` quedo validado con `2371` URLs, `13550` alternates, herramientas DE/PT presentes y sin los lotes futuros.
+- Googlebot en produccion valida herramientas DE/PT con `200`, `x-prerendered: true`, canonical propio y `7` hreflang.
+- `llms.txt` y `llms-full.txt` devuelven `200` y no anuncian los lotes futuros.
+- Validaciones locales post-Lovable OK:
+  - `git diff --check`;
+  - `node --check cloudflare-worker-v3-hybrid.js`;
+  - `npx --yes deno-bin check supabase/functions/prerender/index.ts supabase/functions/sitemap/index.ts`;
+  - `npm run test -- --run src/test/wine-library-seo-surface.test.ts src/test/de-pt-seo-guardrails.test.tsx src/test/seo-head-i18n.test.tsx`;
+  - `npx tsc --noEmit --pretty false`;
+  - `npm run build`.
+- Se corrigio despues un detalle de copy PT en prerender compacto: `preco/medio` pasa a `preço/médio`.
+
+## Decisiones
+
+- Dar por cerrada la prioridad fuerte de paridad tecnica DE/PT para las 12 herramientas online en Worker, Edge `sitemap`, Edge `prerender` y frontend publicado.
+- Mantener las migraciones duplicadas creadas por Lovable porque ya estan en `main`, son idempotentes y reflejan lo aplicado en Lovable Cloud.
+- Tratar el warning de keys en `Precios` como deuda preexistente no bloqueante.
+
+## Hipotesis
+
+- Search Console deberia empezar a consolidar canonical/hreflang de herramientas DE/PT cuando Google recrawlee el sitemap actualizado.
+- Los lotes `2026-07-20` y `2026-07-27` no deberian aparecer en sitemap/llms antes de fecha.
+
+## Contradicciones / dudas abiertas
+
+- Lovable aplico migraciones con nombres generados ademas de las migraciones nombradas preparadas por Codex; no rompe por idempotencia, pero deja duplicidad documental.
+- La comprobacion REST anonima de `articles` no se pudo hacer porque la anon key local usada estaba caducada/no valida.
+
+## Tareas pendientes
+
+- Desplegar/publicar el ajuste menor de acentos PT en Worker/Edge si queda pendiente tras el ultimo commit.
+- Revalidar en Search Console cuando Google lea de nuevo `/sitemap.xml`.
+- Continuar expansion editorial con nuevos lotes solo despues de mantener estable la paridad i18n.
+- Resolver en una limpieza aparte el warning de keys en `Precios`.
+
 ## Actualizacion 2026-07-07: agentes i18n/SEO/editorial y herramientas DE/PT
 
 ## Hechos

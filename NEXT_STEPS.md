@@ -1,5 +1,36 @@
 # Next Steps
 
+## Cierre 2026-07-07: siguiente retoma
+
+## Hechos
+
+- Paridad DE/PT de herramientas online ya esta publicada y validada en produccion.
+- Edge `sitemap` y Worker publico incluyen las herramientas DE/PT y no anuncian los lotes editoriales futuros.
+- Lovable aplico los lotes futuros:
+  - Biblioteca del vino: `wine-library-by-the-glass-stock-rotation`, fecha `2026-07-20`;
+  - Aprender vino: `learn-wine-read-label-restaurant`, fecha `2026-07-27`.
+- `llms.txt` y `llms-full.txt` siguen sin anunciar esos lotes futuros.
+
+## Prioridad 1: vigilancia post-deploy
+
+1. Revalidar Search Console cuando Google procese de nuevo `/sitemap.xml`.
+2. Inspeccionar manualmente una muestra de URLs DE/PT si Search Console vuelve a marcar canonical raiz o idioma incorrecto.
+3. Confirmar que el ajuste menor de acentos PT en Worker/Edge esta publicado.
+
+## Prioridad 2: seguir contenido
+
+1. Retomar Biblioteca del vino con el siguiente lote de uvas/regiones/estilos y enlazado interno.
+2. Retomar Aprender vino con guias operativas para sala, servicio, etiqueta, maridaje y venta.
+3. Mantener separacion editorial:
+   Biblioteca = referencia enciclopedica;
+   Aprender vino = guias practicas de uso y formacion.
+
+## Prioridad 3: deuda separada
+
+1. Resolver warning de keys en `src/pages/Precios.tsx`.
+2. Revisar duplicidad de migraciones generadas vs nombradas solo si empieza a generar ruido operativo.
+3. Resolver `https://www.winerim.wine/` `421` con Cloudflare/Lovable.
+
 ## Actualizacion 2026-07-07: siguiente retoma tras agentes i18n/SEO/editorial
 
 ## Hechos

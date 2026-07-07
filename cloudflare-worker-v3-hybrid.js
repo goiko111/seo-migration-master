@@ -1104,7 +1104,7 @@ const ONLINE_TOOL_COMPACT_GROUPS = [
       it: { label: 'Calcolatrice prezzo vino al calice', description: 'Calcola il prezzo consigliato al calice considerando costo bottiglia, spreco e margine obiettivo.', focus: 'prezzo al calice, spreco e margine reale' },
       fr: { label: 'Calculateur prix vin au verre', description: 'Calculez le prix recommande au verre avec cout bouteille, pertes et marge cible.', focus: 'prix au verre, pertes et marge reelle' },
       de: { label: 'Glaspreis-Rechner', description: 'Berechnen Sie den empfohlenen Glaspreis mit Flaschenkosten, Schwund und Zielmarge.', focus: 'Glaspreis, Schwund und reale Marge' },
-      pt: { label: 'Calculadora preco vinho por copo', description: 'Calcule o preco recomendado por copo usando custo da garrafa, quebra e margem-alvo.', focus: 'preco por copo, quebra e margem real' },
+      pt: { label: 'Calculadora preço vinho por copo', description: 'Calcule o preço recomendado por copo usando custo da garrafa, quebra e margem-alvo.', focus: 'preço por copo, quebra e margem real' },
     },
   },
   {
@@ -1142,7 +1142,7 @@ const ONLINE_TOOL_COMPACT_GROUPS = [
       it: { label: 'Calcolatrice scontrino medio vino', description: 'Misura lo scontrino medio vino e simula l impatto di vendere meglio per tavolo.', focus: 'scontrino medio, conversione tavoli e vendita suggerita' },
       fr: { label: 'Calculateur ticket moyen vin', description: 'Mesurez le ticket moyen vin et simulez l impact d une meilleure vente par table.', focus: 'ticket moyen, conversion des tables et vente suggeree' },
       de: { label: 'Durchschnittsbon-Rechner', description: 'Messen Sie den durchschnittlichen Weinbon und simulieren Sie bessere Tischverkaeufe.', focus: 'Durchschnittsbon, Tischquote und Empfehlung im Service' },
-      pt: { label: 'Calculadora de ticket medio', description: 'Meça o ticket medio de vinho e simule o impacto de vender melhor por mesa.', focus: 'ticket medio, conversao de mesas e venda sugerida' },
+      pt: { label: 'Calculadora de ticket médio', description: 'Meça o ticket médio de vinho e simule o impacto de vender melhor por mesa.', focus: 'ticket médio, conversão de mesas e venda sugerida' },
     },
   },
   {

@@ -1,5 +1,30 @@
 # Project Context
 
+## Cierre 2026-07-07: estado publicado de la tanda i18n/SEO/editorial
+
+## Hechos
+
+- La tanda DE/PT/SEO/editorial se completo, se publico y se revalido.
+- Las 12 herramientas online estan alineadas en frontend, Worker, Edge `sitemap`, Edge `prerender` y guardrails.
+- Los lotes editoriales de Biblioteca del vino y Aprender vino quedaron aplicados en base de datos con `published_at` futuro y sin exposicion en sitemap/llms antes de fecha.
+- Lovable genero migraciones duplicadas equivalentes a las nombradas por Codex; son idempotentes y reflejan el estado aplicado.
+
+## Decisiones
+
+- La arquitectura internacional de Winerim debe seguir tratando herramientas como superficie SEO completa, no solo como assets de conversion.
+- Los lotes futuros se preparan en DB, pero se liberan editorialmente por fecha en hub, sitemap, prerender, Worker y `llms`.
+- Los documentos `PROJECT_CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS_LOG.md` y `NEXT_STEPS.md` siguen siendo fuente de verdad para retomar.
+
+## Hipotesis
+
+- La mejora de paridad humano-bot deberia tener mas impacto SEO internacional inmediato que publicar volumen de contenido sin control tecnico.
+
+## Tareas pendientes
+
+- Vigilar Search Console tras recrawl.
+- Continuar Biblioteca/Aprender con cadencia semanal y contenido profundo.
+- Mantener pruebas de guardrail antes de cada expansion.
+
 ## Actualizacion 2026-07-07: paridad herramientas DE/PT y calendario editorial
 
 ## Hechos
