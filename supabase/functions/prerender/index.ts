@@ -4629,6 +4629,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       sections: [
         { heading: 'El problema', content: 'La carta de vinos no vende, solo informa. El equipo de sala no tiene tiempo ni conocimiento para recomendar. Hay vinos parados sin rotación. No hay datos claros para tomar decisiones de compra ni pricing.' },
         { heading: 'La solución: 5 herramientas en una', content: 'Winerim transforma tu carta en herramienta de venta (guía al comensal), recomendación (IA + maridajes), gestión (stock y pricing), análisis (KPIs y datos) y formación (el equipo aprende mientras trabaja).' },
+        { heading: 'Capacidades operativas conectadas', content: 'CloudRIM recoge cartas, ventas, albaranes, facturas, stock y tarifas desde los canales que ya usa el restaurante. SAVia convierte esos datos en respuestas accionables sobre carta, ventas, costes y márgenes. Wine Cellar mantiene la ubicación física de cada botella por zonas, botelleros y posiciones. Wine Lockers gestiona vinos privados de clientes, socios y clubes.' },
         { heading: 'Cómo ayuda a cada equipo', content: 'Equipo de sala: recomienda vino con confianza sin ser sommelier. Dirección: visibilidad sobre ventas, KPIs y margen en tiempo real. Compras: alertas de stock, datos de rotación y análisis de margen por referencia.' },
         { heading: 'Resultados', content: 'Los restaurantes que implementan Winerim pueden experimentar mejoras en ticket medio de vino, rotación de referencias y eficiencia de gestión. El potencial estimado de mejora oscila entre un 15 % y un 25 %, según el contexto del restaurante.' },
         { heading: 'Cómo funciona', content: '1. Envías tu carta actual en cualquier formato. 2. Winerim la digitaliza con fichas, maridajes y recomendaciones. 3. El comensal accede por QR, web o app. 4. Empiezas a vender más vino desde el primer día.' },
@@ -4646,6 +4647,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
         { label: 'Funcionalidades', url: '/funcionalidades' },
         { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' },
+        { label: 'CloudRIM', url: '/producto/cloudrim' },
+        { label: 'SAVia', url: '/producto/savia' },
         { label: 'Precios', url: '/precios' },
         { label: 'Casos de éxito', url: '/casos-exito' },
         { label: 'Herramientas', url: '/herramientas' },
@@ -4697,7 +4700,7 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   '/funcionalidades': {
     meta: {
       title: 'Funcionalidades | Carta Inteligente de Vinos Winerim',
-      description: 'Descubre todas las funcionalidades de Winerim: carta inteligente, recomendador IA, gestión de stock, analytics de ventas y automatizaciones.',
+      description: 'Funcionalidades de Winerim: carta inteligente, IA, stock, márgenes, CloudRIM, SAVia, Wine Cellar, Wine Lockers, analytics y automatizaciones.',
       canonical: `${SITE}/funcionalidades`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -4715,6 +4718,10 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { heading: 'Maridajes automáticos', content: 'Sugerencias de maridaje generadas por IA para cada plato de tu carta, actualizadas automáticamente al cambiar el menú.' },
         { heading: 'Inteligencia dinámica', content: 'Motor de decisión en tiempo real que ajusta recomendaciones, precios sugeridos y alertas según datos de venta, stock y estacionalidad.' },
         { heading: 'Automatizaciones', content: 'Alertas de stock bajo, informes automáticos de rendimiento, notificaciones de vinos con baja rotación y sugerencias de descatalogación.' },
+        { heading: 'Wine Cellar y mapa de bodega', content: 'Wine Cellar refleja la ubicación física de cada botella por zonas, botelleros, estanterías y posiciones, conectada al stock real para que sala y compras encuentren cualquier referencia sin recuentos manuales.' },
+        { heading: 'Wine Lockers', content: 'Wine Lockers gestiona vinos privados de clientes, socios y clubes: asignación por titular, consumo, reposición y trazabilidad para experiencias premium y programas de fidelización.' },
+        { heading: 'CloudRIM', content: 'CloudRIM es la capa de ingestión que unifica cartas, ventas, albaranes, facturas, stock y tarifas desde los canales que ya usa el restaurante, dejándolos listos para analítica y decisión.' },
+        { heading: 'SAVia', content: 'SAVia es el asistente conversacional que convierte los datos de CloudRIM en respuestas sobre carta, ventas, stock, costes, márgenes y oportunidades, sin obligar al equipo a moverse entre dashboards.' },
       ],
       faqs: [
         { q: '¿Cuántas funcionalidades incluye cada plan?', a: 'Todos los planes incluyen carta digital y recomendador. Los planes superiores añaden analytics avanzados, inteligencia dinámica y gestión multi-restaurante.' },
@@ -4726,6 +4733,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [
         { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
         { label: 'Inteligencia dinámica', url: '/producto/inteligencia-dinamica' },
+        { label: 'CloudRIM', url: '/producto/cloudrim' },
+        { label: 'SAVia', url: '/producto/savia' },
         { label: 'Precios', url: '/precios' },
         { label: 'Demo', url: '/demo' },
         { label: 'Integraciones', url: '/integraciones' },
