@@ -12,6 +12,19 @@ import pt from "./translations/pt";
 
 const TRANSLATIONS: Record<string, TranslationDict> = { es, en, it, fr, de, pt };
 
+const splitPathSuffix = (path: string): { basePath: string; suffix: string } => {
+  const idx = path.search(/[?#]/);
+  if (idx === -1) return { basePath: path, suffix: "" };
+  return { basePath: path.slice(0, idx), suffix: path.slice(idx) };
+};
+
+const localizeEsPath = (esPath: string, targetLang: SupportedLang): string => {
+  const { basePath, suffix } = splitPathSuffix(esPath);
+  if (targetLang === "es") return `${basePath}${suffix}`;
+  const mapped = ROUTE_MAP[targetLang][basePath] || `/${targetLang}${basePath}`;
+  return `${mapped}${suffix}`;
+};
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation();
   const [langOverride, setLangOverrideState] = useState<SupportedLang | null>(null);
@@ -38,20 +51,18 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const value = useMemo<LanguageContextValue>(() => ({
     lang,
     t,
-    localePath: (esPath: string) => {
-      if (lang === "es") return esPath;
-      return ROUTE_MAP[lang][esPath] || `/${lang}${esPath}`;
-    },
+    localePath: (esPath: string) => localizeEsPath(esPath, lang),
     allLangPaths: (esPath: string) => {
       const SITE = "https://winerim.wine";
+      const { basePath, suffix } = splitPathSuffix(esPath);
       return [
-        { lang: "es", url: `${SITE}${esPath}` },
-        { lang: "x-default", url: `${SITE}${esPath}` },
-        { lang: "en", url: `${SITE}${ROUTE_MAP.en[esPath] || `/en${esPath}`}` },
-        { lang: "it", url: `${SITE}${ROUTE_MAP.it[esPath] || `/it${esPath}`}` },
-        { lang: "fr", url: `${SITE}${ROUTE_MAP.fr[esPath] || `/fr${esPath}`}` },
-        { lang: "de", url: `${SITE}${ROUTE_MAP.de[esPath] || `/de${esPath}`}` },
-        { lang: "pt", url: `${SITE}${ROUTE_MAP.pt[esPath] || `/pt${esPath}`}` },
+        { lang: "es", url: `${SITE}${basePath}${suffix}` },
+        { lang: "x-default", url: `${SITE}${basePath}${suffix}` },
+        { lang: "en", url: `${SITE}${localizeEsPath(esPath, "en")}` },
+        { lang: "it", url: `${SITE}${localizeEsPath(esPath, "it")}` },
+        { lang: "fr", url: `${SITE}${localizeEsPath(esPath, "fr")}` },
+        { lang: "de", url: `${SITE}${localizeEsPath(esPath, "de")}` },
+        { lang: "pt", url: `${SITE}${localizeEsPath(esPath, "pt")}` },
       ];
     },
     setLangOverride,
