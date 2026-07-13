@@ -4,6 +4,14 @@ import { ArrowRight, BookOpen, Calculator, Download, Lightbulb, Sparkles } from 
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+const LANG_PREFIX_RE = /^\/(en|it|fr|de|pt)(\/|$)/;
+const applyLocale = (url: string, localePath: (p: string) => string): string => {
+  if (!url || typeof url !== "string") return url;
+  if (!url.startsWith("/")) return url;
+  if (LANG_PREFIX_RE.test(url)) return url;
+  return localePath(url);
+};
+
 interface InternalLink {
   to: string;
   label: string;
@@ -55,7 +63,7 @@ interface InternalLinksProps {
 }
 
 const InternalLinks = ({ links, title }: InternalLinksProps) => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   if (!links.length) return null;
 
   const resolvedTitle = title || defaultTitles[lang] || defaultTitles.es;
@@ -70,10 +78,11 @@ const InternalLinks = ({ links, title }: InternalLinksProps) => {
           const Icon = typeIcons[link.type] || Lightbulb;
           const badge = typeLabels[link.type]?.[lang] || typeLabels[link.type]?.es || link.type;
           const cls = badgeClasses[link.type] || "text-wine";
+          const to = applyLocale(link.to, localePath);
           return (
-            <ScrollReveal key={link.to} delay={i * 0.04} className="min-w-0">
+            <ScrollReveal key={to} delay={i * 0.04} className="min-w-0">
               <Link
-                to={link.to}
+                to={to}
                 className="group flex w-full min-w-0 items-center gap-3 p-4 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-all"
               >
                 <div className="w-8 h-8 rounded-lg bg-wine/10 flex items-center justify-center shrink-0">
