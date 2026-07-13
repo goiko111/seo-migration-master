@@ -7189,6 +7189,25 @@ function articleRequestFromPath(path: string): { dbSlug: string; routeLang: Wine
   return { dbSlug: rawSlug, routeLang: legacyLang || 'es', baseSlug };
 }
 
+const ARTICLE_UNAVAILABLE_COPY: Record<WineLibraryLang, { title: string; description: string; h1: string; body: string; blog: string; home: string }> = {
+  es: { title: 'Articulo no disponible | Winerim', description: 'Esta pagina de Winerim todavia no esta disponible o ya no existe.', h1: 'Articulo no disponible', body: 'Esta guia todavia no esta publicada o no existe. Mientras tanto, puedes seguir explorando el blog y los recursos de Winerim.', blog: 'Blog', home: 'Inicio' },
+  en: { title: 'Article unavailable | Winerim', description: 'This Winerim page is not available yet or no longer exists.', h1: 'Article unavailable', body: 'This guide is not published yet or does not exist. In the meantime, keep exploring Winerim blog and resources.', blog: 'Blog', home: 'Home' },
+  it: { title: 'Articolo non disponibile | Winerim', description: 'Questa pagina Winerim non e ancora disponibile o non esiste piu.', h1: 'Articolo non disponibile', body: 'Questa guida non e ancora pubblicata o non esiste. Nel frattempo puoi continuare a esplorare il blog e le risorse Winerim.', blog: 'Blog', home: 'Home' },
+  fr: { title: 'Article indisponible | Winerim', description: 'Cette page Winerim nest pas encore disponible ou nexiste plus.', h1: 'Article indisponible', body: 'Ce guide nest pas encore publie ou nexiste pas. En attendant, vous pouvez continuer a explorer le blog et les ressources Winerim.', blog: 'Blog', home: 'Accueil' },
+  de: { title: 'Artikel nicht verfuegbar | Winerim', description: 'Diese Winerim-Seite ist noch nicht verfuegbar oder existiert nicht mehr.', h1: 'Artikel nicht verfuegbar', body: 'Dieser Guide ist noch nicht veroeffentlicht oder existiert nicht. In der Zwischenzeit koennen Sie Blog und Ressourcen von Winerim weiter erkunden.', blog: 'Blog', home: 'Startseite' },
+  pt: { title: 'Artigo indisponivel | Winerim', description: 'Esta pagina Winerim ainda nao esta disponivel ou ja nao existe.', h1: 'Artigo indisponivel', body: 'Este guia ainda nao esta publicado ou nao existe. Entretanto, pode continuar a explorar o blog e os recursos da Winerim.', blog: 'Blog', home: 'Inicio' },
+};
+
+function unavailableArticleHTML(path: string, lang: WineLibraryLang): string {
+  const copy = ARTICLE_UNAVAILABLE_COPY[lang] || ARTICLE_UNAVAILABLE_COPY.es;
+  const blogPath = articleStaticLink(lang, '/blog');
+  const homePath = lang === 'es' ? '/' : `/${lang}`;
+  return generateHTML(
+    { title: copy.title, description: copy.description, canonical: `${SITE}${path}`, ogImage: OG_IMAGE, lang, type: 'website', schemaType: 'WebPage', robots: 'noindex, follow' },
+    { h1: copy.h1, subtitle: copy.description, sections: [{ heading: copy.h1, content: copy.body }], faqs: [], breadcrumbs: [ { name: copy.home, url: `${SITE}${homePath}` }, { name: copy.blog, url: `${SITE}${blogPath}` }, { name: copy.h1, url: `${SITE}${path}` } ], internalLinks: [ { label: copy.blog, url: blogPath }, { label: copy.home, url: homePath } ] }
+  );
+}
+
 function normalizeArticleInternalUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const raw = value.trim();
@@ -7841,6 +7860,19 @@ Deno.serve(async (req) => {
       html = await renderArticle(articleRequest.dbSlug);
       if (!html && articleRequest.routeLang !== 'es') {
         html = await renderArticle(articleRequest.baseSlug);
+      }
+      if (!html) {
+        return new Response(unavailableArticleHTML(path, articleRequest.routeLang), {
+          status: 404,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=300, s-maxage=300',
+            'X-Prerender': 'true',
+            'X-Prerender-Article-Unavailable': 'true',
+            'X-Prerender-Resolved-Path': path,
+          },
+        });
       }
     }
 
