@@ -22,6 +22,17 @@ import StickyCTA from "@/components/StickyCTA";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
 
+const LANG_PREFIX_RE = /^\/(en|it|fr|de|pt)(\/|$)/;
+const applyLocale = (url: string, localePath: (p: string) => string): string => {
+  if (!url || typeof url !== "string") return url;
+  if (!url.startsWith("/")) return url;
+  if (LANG_PREFIX_RE.test(url)) return url;
+  return localePath(url);
+};
+const HOME_LABEL: Record<SupportedLang, string> = {
+  es: "Inicio", en: "Home", it: "Home", fr: "Accueil", de: "Startseite", pt: "Início",
+};
+
 interface SolutionStep {
   step: string;
   description: string;
@@ -182,10 +193,14 @@ const labels: I18nMap<{
 };
 
 const PainTemplate = ({ data }: { data: PainPageData }) => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const l = labels[lang];
   const ctaPrimary = data.ctaPrimaryText || l.defaultCtaPrimary;
-  const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
+  const ctaPrimaryUrl = applyLocale(data.ctaPrimaryUrl || "/analisis-carta", localePath);
+  const demoUrl = applyLocale("/demo", localePath);
+  const problemsUrl = applyLocale("/guias-y-recursos", localePath);
+  const stickyUrl = applyLocale("/analisis-carta", localePath);
+  const homeLabel = HOME_LABEL[lang] || HOME_LABEL.es;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -203,8 +218,8 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         url={`https://winerim.wine/${data.slug}`}
         faqs={data.faqs}
         breadcrumbs={[
-          { name: "Inicio", url: "https://winerim.wine/" },
-          { name: l.problems, url: "https://winerim.wine/guias-y-recursos" },
+          { name: homeLabel, url: `https://winerim.wine${localePath("/")}` },
+          { name: l.problems, url: `https://winerim.wine${problemsUrl}` },
           { name: data.heroTitle, url: `https://winerim.wine/${data.slug}` },
         ]}
       />
@@ -216,7 +231,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            { label: l.problems, href: "/guias-y-recursos" },
+            { label: l.problems, href: problemsUrl },
             { label: data.heroTitle },
           ]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
@@ -238,7 +253,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
               className="inline-flex items-center gap-2 bg-gradient-wine text-primary-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:opacity-90 transition-all hover:shadow-lg hover:shadow-wine/20">
               {ctaPrimary} <ArrowRight size={16} />
             </Link>
-            <Link to="/demo"
+            <Link to={demoUrl}
               className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
               {l.requestDemo}
             </Link>
@@ -361,7 +376,7 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
             <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedContent}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedLinks.map((link, i) => (
-                <Link key={i} to={link.url}
+                <Link key={i} to={applyLocale(link.url, localePath)}
                   className="flex items-center gap-3 p-5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-colors group">
                   <CheckCircle size={16} className="text-wine shrink-0" />
                   <span className="text-sm font-medium group-hover:text-foreground transition-colors">{link.label}</span>
@@ -404,11 +419,11 @@ const PainTemplate = ({ data }: { data: PainPageData }) => {
         primaryText={ctaPrimary}
         primaryUrl={ctaPrimaryUrl}
         secondaryText={l.requestDemo}
-        secondaryUrl="/demo"
+        secondaryUrl={demoUrl}
         micro={l.noCommitment}
       />
 
-      <StickyCTA pageType="guide" text={l.stickyText} url="/analisis-carta" />
+      <StickyCTA pageType="guide" text={l.stickyText} url={stickyUrl} />
 
       <Footer />
     </div>
