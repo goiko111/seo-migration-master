@@ -356,15 +356,15 @@ const linksI = i({
     { to: "/fr/tarifs", label: "Plans et tarifs", type: "resource" as const },
   ],
   de: [
-    { to: "/de/weinkarten-analysator", label: "Weinkarten-Software", type: "solution" as const },
-    { to: "/de/weinkarten-analysator", label: "Weinkarten-Analysator", type: "tool" as const },
+    { to: "/de/weinkarten-analyse", label: "Weinkarten-Software", type: "solution" as const },
+    { to: "/de/weinkarten-analyse", label: "Weinkarten-Analysator", type: "tool" as const },
     { to: "/de/speisenbegleitungs-generator", label: "Speisenbegleitungs-Generator", type: "tool" as const },
     { to: "/de/preise", label: "Pläne und Preise", type: "resource" as const },
   ],
   pt: [
-    { to: "/pt/analisador-carta-vinhos", label: "Software de carta de vinhos", type: "solution" as const },
-    { to: "/pt/analisador-carta-vinhos", label: "Analisador de carta", type: "tool" as const },
-    { to: "/pt/gerador-harmonizacoes", label: "Gerador de harmonizações", type: "tool" as const },
+    { to: "/pt/analise-carta", label: "Software de carta de vinhos", type: "solution" as const },
+    { to: "/pt/analise-carta", label: "Analisador de carta", type: "tool" as const },
+    { to: "/pt/gerador-harmonizacoes-ia", label: "Gerador de harmonizações", type: "tool" as const },
     { to: "/pt/precos", label: "Planos e preços", type: "resource" as const },
   ],
 });

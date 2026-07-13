@@ -222,12 +222,12 @@ const de: GuidePageData = {
   ],
   relatedTools: [
     { label: "Weinmargen-Rechner", url: "/de/weinmargen-rechner" },
-    { label: "Glasweinpreis-Rechner", url: "/de/tools/glasweinpreis-rechner" },
+    { label: "Glasweinpreis-Rechner", url: "/de/tools/glaspreis-rechner" },
     { label: "Weinkarten-Analyzer", url: "/de/weinkarten-analyse" },
   ],
   relatedGuides: [
-    { label: "Mehr Wein im Restaurant verkaufen", url: "/de/mehr-wein-verkaufen-restaurant" },
-    { label: "Glaswein im Restaurant", url: "/de/glaswein-restaurant" },
+    { label: "Mehr Wein im Restaurant verkaufen", url: "/de/wie-man-mehr-wein-im-restaurant-verkauft" },
+    { label: "Glaswein im Restaurant", url: "/de/wein-im-glas-restaurant" },
     { label: "Totbestand erkennen", url: "/de/ratgeber/totbestand-erkennen" },
   ],
 };
@@ -240,7 +240,7 @@ const pt: GuidePageData = {
   heroSubtitle: "A rotação de vinhos é um dos indicadores de rentabilidade mais importantes. Descubra como evitar que os seus vinhos fiquem imobilizados na garrafeira.",
   heroBadge: "Guia prático",
   breadcrumbParent: { label: "Guias", href: "/pt/guias" },
-  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/pt/analisador-carta-de-vinhos",
+  ctaPrimaryText: "Analisar a minha carta", ctaPrimaryUrl: "/pt/analise-carta",
   ctaSecondaryText: "Pedir demonstração", ctaSecondaryUrl: "/pt/demo",
   ctaFinalTitle: "Não deixe a sua garrafeira acumular stock morto",
   ctaFinalDescription: "A Winerim dá-lhe os dados para saber que vinhos rodam, quais estão a mais e como otimizar a sua seleção para maximizar a rentabilidade.",
@@ -268,8 +268,8 @@ const pt: GuidePageData = {
   ],
   relatedTools: [
     { label: "Calculadora de margem de vinho", url: "/pt/calculadora-margem-vinho" },
-    { label: "Calculadora preço vinho a copo", url: "/pt/ferramentas/calculadora-preco-vinho-a-copo" },
-    { label: "Analisador de carta de vinhos", url: "/pt/analisador-carta-de-vinhos" },
+    { label: "Calculadora preço vinho a copo", url: "/pt/ferramentas/calculadora-preco-vinho-por-copo" },
+    { label: "Analisador de carta de vinhos", url: "/pt/analise-carta" },
   ],
   relatedGuides: [
     { label: "Como vender mais vinho no restaurante", url: "/pt/como-vender-mais-vinho-restaurante" },

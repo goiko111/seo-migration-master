@@ -474,8 +474,8 @@ const i18n: I18nMap<PageContent> = {
     ctaBtn: "Pedir demo", ctaSecondary: "Analisar a minha carta",
     links: [
       { to: "/pt/software-carta-de-vinhos", label: "Software de carta de vinhos", type: "solution" },
-      { to: "/pt/gerador-harmonizacoes-vinho", label: "Gerador de harmonizações com IA", type: "tool" },
-      { to: "/pt/analisador-carta-de-vinhos", label: "Analisador de carta", type: "tool" },
+      { to: "/pt/gerador-harmonizacoes-ia", label: "Gerador de harmonizações com IA", type: "tool" },
+      { to: "/pt/analise-carta", label: "Analisador de carta", type: "tool" },
       { to: "/pt/solucoes/grupos-restauracao", label: "Winerim para grupos", type: "solution" },
     ],
     faqData: [

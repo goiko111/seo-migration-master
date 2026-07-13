@@ -187,7 +187,7 @@ const de: GuidePageData = {
   ],
   relatedGuides: [
     { label: "Checkliste zur Erkennung toter Weine", url: "/de/ressourcen/checkliste-tote-weine" },
-    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-verbessern" },
+    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-im-restaurant-verbessern" },
   ],
 };
 

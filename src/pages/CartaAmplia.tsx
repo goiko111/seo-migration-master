@@ -649,12 +649,12 @@ const PT: VerticalContent = {
   ctaMicro: "Sem compromisso. Relatório personalizado em menos de 48 horas.",
   nextStepsTitle: "Próximos passos",
   nextSteps: [
-    { label: "Análise gratuita", to: "/pt/analisador-carta-de-vinhos", description: "Detete stock morto e canibalização", type: "tool" as const },
+    { label: "Análise gratuita", to: "/pt/analise-carta", description: "Detete stock morto e canibalização", type: "tool" as const },
     { label: "Guia: detetar vinhos mortos", to: "/pt/guias/como-detetar-vinhos-mortos", description: "Metodologia passo a passo", type: "guide" as const },
     { label: "Calculadora stock morto", to: "/pt/ferramentas/calculadora-stock-morto", description: "Estime capital imobilizado", type: "tool" as const },
   ],
   internalLinks: [
-    { to: "/pt/analisador-carta-de-vinhos", label: "Análise gratuita de carta", type: "tool" },
+    { to: "/pt/analise-carta", label: "Análise gratuita de carta", type: "tool" },
     { to: "/pt/guias/como-detetar-vinhos-mortos", label: "Detetar vinhos mortos", type: "guide" },
     { to: "/pt/ferramentas/calculadora-stock-morto", label: "Calculadora stock morto", type: "tool" },
     { to: "/pt/casos-de-sucesso", label: "Casos de sucesso", type: "resource" },
