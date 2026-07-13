@@ -7861,6 +7861,19 @@ Deno.serve(async (req) => {
       if (!html && articleRequest.routeLang !== 'es') {
         html = await renderArticle(articleRequest.baseSlug);
       }
+      if (!html) {
+        return new Response(unavailableArticleHTML(path, articleRequest.routeLang), {
+          status: 404,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=300, s-maxage=300',
+            'X-Prerender': 'true',
+            'X-Prerender-Article-Unavailable': 'true',
+            'X-Prerender-Resolved-Path': path,
+          },
+        });
+      }
     }
 
     if (!html && (path.startsWith('/software-carta-de-vinos-') || path.startsWith('/software-vino-') || path.startsWith('/wine-list-software-'))) {
