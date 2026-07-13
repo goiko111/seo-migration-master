@@ -218,7 +218,7 @@ const de: GuidePageData = {
   relatedGuides: [
     { label: "Tote Weine erkennen", url: "/de/ratgeber/tote-weine-erkennen" },
     { label: "Sortiment nach Durchschnittsbon entscheiden", url: "/de/ratgeber/sortiment-nach-durchschnittsbon-entscheiden" },
-    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-verbessern" },
+    { label: "Weinrotation verbessern", url: "/de/ratgeber/weinrotation-im-restaurant-verbessern" },
   ],
   ctaPrimaryText: "Meine Karte analysieren", ctaPrimaryUrl: "/wine-list-analyzer",
   ctaSecondaryText: "Demo anfragen", ctaSecondaryUrl: "/de/demo",

@@ -383,7 +383,7 @@ const i18n: I18nMap<{
       { to: "/de/wie-man-weinkarten-organisiert", label: "Wie man eine Weinkarte organisiert", type: "guide" },
       { to: "/de/wie-man-weinkarte-erstellt", label: "Wie man eine Weinkarte erstellt", type: "guide" },
       { to: "/de/ressourcen/weinkarten-vorlage", label: "Weinkarten-Vorlage", type: "resource" },
-      { to: "/de/weinkarten-analysator", label: "Weinkarten-Analysator", type: "tool" },
+      { to: "/de/weinkarten-analyse", label: "Weinkarten-Analysator", type: "tool" },
     ],
     faqData: [
       { q: "Wie viele Positionen sollte eine Weinkarte haben?", a: "Es hängt vom Restauranttyp ab: 15-25 für ein Bistro, 40-60 für eine Weinstube und 80-150 für ein Gourmet-Restaurant. Das Wichtigste ist, dass jede Position einen klaren Zweck hat." },
@@ -449,7 +449,7 @@ const i18n: I18nMap<{
       { to: "/pt/como-organizar-carta-vinhos", label: "Como organizar uma carta de vinhos", type: "guide" },
       { to: "/pt/como-criar-carta-vinhos", label: "Como criar uma carta de vinhos", type: "guide" },
       { to: "/pt/recursos/modelo-carta-vinhos", label: "Modelo de carta de vinhos", type: "resource" },
-      { to: "/pt/analisador-carta-vinhos", label: "Analisador de carta de vinhos", type: "tool" },
+      { to: "/pt/analise-carta", label: "Analisador de carta de vinhos", type: "tool" },
     ],
     faqData: [
       { q: "Quantas referências deve ter uma carta de vinhos?", a: "Depende do tipo de restaurante: 15-25 para um bistrô, 40-60 para uma adega de vinhos e 80-150 para um restaurante gastronómico. O importante é que cada referência tenha um propósito claro." },

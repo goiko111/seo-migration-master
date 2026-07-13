@@ -432,7 +432,7 @@ const i18n: I18nMap<PageContent> = {
     ctaH2: "Descubra se a sua carta de vinhos tem o tamanho certo",
     ctaP: "Analisamos a sua carta de vinhos de forma gratuita e damos-lhe recomendações personalizadas sobre o número ideal de referências para o seu restaurante.",
     ctaBtn: "Pedir análise gratuita", ctaDemoBtn: "Pedir demo",
-    analyzeUrl: "/pt/analisador-carta-de-vinhos", demoUrl: "/pt/demo",
+    analyzeUrl: "/pt/analise-carta", demoUrl: "/pt/demo",
     links: [
       { to: "/pt/como-organizar-carta-de-vinhos", label: "Como organizar uma carta de vinhos", type: "guide" },
       { to: "/pt/como-criar-carta-vinhos-rentavel", label: "Como criar uma carta rentável", type: "guide" },

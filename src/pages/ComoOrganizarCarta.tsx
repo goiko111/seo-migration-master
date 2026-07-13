@@ -432,7 +432,7 @@ const i18n: I18nMap<PageContent> = {
     links: [
       { to: "/pt/quantos-vinhos-carta-restaurante", label: "Quantos vinhos deve ter uma carta", type: "guide" },
       { to: "/pt/como-criar-carta-vinhos-rentavel", label: "Como criar uma carta rentável", type: "guide" },
-      { to: "/pt/analisador-carta-de-vinhos", label: "Analisador de carta de vinhos", type: "tool" },
+      { to: "/pt/analise-carta", label: "Analisador de carta de vinhos", type: "tool" },
       { to: "/pt/recursos/modelo-carta-de-vinhos", label: "Modelo de carta de vinhos", type: "resource" },
     ],
   },

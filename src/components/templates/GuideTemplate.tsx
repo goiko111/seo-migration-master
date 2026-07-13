@@ -65,6 +65,18 @@ const iconMap = {
   list: ListChecks,
 };
 
+const LANG_PREFIX_RE = /^\/(en|it|fr|de|pt)(\/|$)/;
+const applyLocale = (url: string, localePath: (p: string) => string): string => {
+  if (!url || typeof url !== "string") return url;
+  if (!url.startsWith("/")) return url;
+  if (LANG_PREFIX_RE.test(url)) return url;
+  return localePath(url);
+};
+
+const HOME_LABEL: I18nMap<string> = {
+  es: "Inicio", en: "Home", it: "Home", fr: "Accueil", de: "Startseite", pt: "Início",
+};
+
 const labels: I18nMap<{
   toc: string;
   relatedTools: string;
@@ -145,14 +157,17 @@ const labels: I18nMap<{
 };
 
 const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string, GuidePageData> }) => {
-  const { lang } = useLanguage();
+  const { lang, localePath } = useLanguage();
   const l = getI18n(labels, lang);
   // Support both single GuidePageData and multilingual Record
   const data: GuidePageData = "slug" in rawData
     ? rawData as GuidePageData
     : ((rawData as Record<string, GuidePageData>)[lang] || (rawData as Record<string, GuidePageData>).es);
   const ctaPrimary = data.ctaPrimaryText || l.defaultPrimary;
-  const ctaPrimaryUrl = data.ctaPrimaryUrl || "/analisis-carta";
+  const ctaPrimaryUrl = applyLocale(data.ctaPrimaryUrl || "/analisis-carta", localePath);
+  const ctaSecondaryUrl = applyLocale(data.ctaSecondaryUrl || "/demo", localePath);
+  const breadcrumbParentHref = data.breadcrumbParent ? applyLocale(data.breadcrumbParent.href, localePath) : undefined;
+  const homeLabel = getI18n(HOME_LABEL, lang);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -170,9 +185,9 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
         url={`https://winerim.wine/${data.slug}`}
         faqs={data.faqs}
         breadcrumbs={[
-          { name: "Inicio", url: "https://winerim.wine/" },
-          ...(data.breadcrumbParent
-            ? [{ name: data.breadcrumbParent.label, url: `https://winerim.wine${data.breadcrumbParent.href}` }]
+          { name: homeLabel, url: `https://winerim.wine${localePath("/")}` },
+          ...(data.breadcrumbParent && breadcrumbParentHref
+            ? [{ name: data.breadcrumbParent.label, url: `https://winerim.wine${breadcrumbParentHref}` }]
             : []),
           { name: data.heroTitle, url: `https://winerim.wine/${data.slug}` },
         ]}
@@ -185,7 +200,9 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 w-full">
           <Breadcrumbs items={[
-            ...(data.breadcrumbParent ? [data.breadcrumbParent] : [{ label: l.relatedGuides.split(" ")[0], href: "/guias-y-recursos" }]),
+            ...(data.breadcrumbParent
+              ? [{ label: data.breadcrumbParent.label, href: breadcrumbParentHref! }]
+              : [{ label: l.relatedGuides.split(" ")[0], href: applyLocale("/guias-y-recursos", localePath) }]),
             { label: data.heroTitle },
           ]} />
           {data.heroBadge && (
@@ -210,7 +227,7 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
               {ctaPrimary} <ArrowRight size={16} />
             </Link>
             {data.ctaSecondaryText && (
-              <Link to={data.ctaSecondaryUrl || "/demo"}
+              <Link to={ctaSecondaryUrl}
                 className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/50 transition-colors">
                 {data.ctaSecondaryText}
               </Link>
@@ -256,7 +273,7 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
             <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedTools}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedTools.map((tool, i) => (
-                <Link key={i} to={tool.url}
+                <Link key={i} to={applyLocale(tool.url, localePath)}
                   className="flex items-center gap-3 p-5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-colors group">
                   <Sparkles size={16} className="text-wine shrink-0" />
                   <span className="text-sm font-medium group-hover:text-foreground transition-colors">{tool.label}</span>
@@ -275,7 +292,7 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
             <h2 className="font-heading text-2xl font-bold mb-6">{l.relatedGuides}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {data.relatedGuides.map((guide, i) => (
-                <Link key={i} to={guide.url}
+                <Link key={i} to={applyLocale(guide.url, localePath)}
                   className="flex items-center gap-3 p-5 rounded-xl border border-border bg-gradient-card hover:border-wine/40 transition-colors group">
                   <BookOpen size={16} className="text-wine shrink-0" />
                   <span className="text-sm font-medium group-hover:text-foreground transition-colors">{guide.label}</span>
@@ -319,7 +336,7 @@ const GuideTemplate = ({ data: rawData }: { data: GuidePageData | Record<string,
         primaryText={ctaPrimary}
         primaryUrl={ctaPrimaryUrl}
         secondaryText={l.requestDemo}
-        secondaryUrl="/demo"
+        secondaryUrl={applyLocale("/demo", localePath)}
       />
 
       <StickyCTA pageType="guide" />

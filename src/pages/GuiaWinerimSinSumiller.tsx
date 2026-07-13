@@ -226,7 +226,7 @@ const de: GuidePageData = {
   ],
   relatedTools: [
     { label: "Weinkarten-Analyse", url: "/de/weinkarten-analyse" },
-    { label: "Food-Pairing-Generator", url: "/de/pairing-generator" },
+    { label: "Food-Pairing-Generator", url: "/de/weinbegleitung-generator" },
   ],
   relatedGuides: [
     { label: "Servicepersonal für Weinverkauf schulen", url: "/de/ratgeber/servicepersonal-fuer-weinverkauf-schulen" },
@@ -350,7 +350,7 @@ const pt: GuidePageData = {
   ],
   relatedTools: [
     { label: "Analisador de carta", url: "/pt/analise-carta" },
-    { label: "Gerador de harmonizações", url: "/pt/gerador-harmonizacoes-vinho" },
+    { label: "Gerador de harmonizações", url: "/pt/gerador-harmonizacoes-ia" },
   ],
   relatedGuides: [
     { label: "Formar equipa de sala para vender vinho", url: "/pt/guias/como-formar-equipa-sala-vender-vinho" },

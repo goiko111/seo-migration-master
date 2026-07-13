@@ -217,7 +217,7 @@ const i18n: I18nMap<{
     ],
     links: [
       { to: "/pt/software-carta-de-vinhos", label: "Software de carta de vinhos", type: "solution" },
-      { to: "/pt/analisador-carta-de-vinhos", label: "Analisador de carta de vinhos", type: "tool" },
+      { to: "/pt/analise-carta", label: "Analisador de carta de vinhos", type: "tool" },
       { to: "/pt/como-organizar-carta-de-vinhos", label: "Como organizar uma carta de vinhos", type: "guide" },
       { to: "/pt/recursos/modelo-carta-de-vinhos", label: "Modelo de carta de vinhos", type: "resource" },
     ],

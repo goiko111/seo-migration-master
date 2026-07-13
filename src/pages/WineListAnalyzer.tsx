@@ -538,7 +538,7 @@ const WineListAnalyzer = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SEOHead title={t.seo_title} description={t.seo_desc} url="https://winerim.wine/wine-list-analyzer"
+      <SEOHead title={t.seo_title} description={t.seo_desc} url={`https://winerim.wine${localePath("/wine-list-analyzer")}`}
         hreflang={allLangPaths("/wine-list-analyzer")} />
       <Navbar />
 

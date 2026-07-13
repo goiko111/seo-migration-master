@@ -241,7 +241,7 @@ const de: GuidePageData = {
     },
   ],
   relatedTools: [
-    { label: "Glaswein-Preisrechner", url: "/de/werkzeuge/glaswein-preisrechner" },
+    { label: "Glaswein-Preisrechner", url: "/de/tools/glaspreis-rechner" },
     { label: "Glaswein-Diagnose", url: "/de/werkzeuge/glaswein-diagnose" },
   ],
   relatedGuides: [

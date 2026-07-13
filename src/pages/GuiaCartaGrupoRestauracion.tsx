@@ -165,7 +165,7 @@ const pt: GuidePageData = {
     { q: "Cada local precisa de escanção?", a: "Não necessariamente. Um escanção de grupo pode supervisionar 3-5 locais." },
     { q: "Vale a pena centralizar compras?", a: "Sim. 5-15% de poupança e melhores condições." },
   ],
-  relatedTools: [{ label: "Analisador de carta", url: "/pt/analisador-carta-vinhos" }, { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" }],
+  relatedTools: [{ label: "Analisador de carta", url: "/pt/analise-carta" }, { label: "Calculadora de margem", url: "/pt/calculadora-margem-vinho" }],
   relatedGuides: [{ label: "Conectar carta, stock, vendas e margem", url: "/pt/guias/como-conectar-carta-stock-vendas-margem" }, { label: "Soluções para grupos", url: "/pt/solucoes/grupos-restauracao" }],
 };
 

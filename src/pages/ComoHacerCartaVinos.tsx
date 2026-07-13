@@ -604,9 +604,9 @@ const i18n: I18nMap<GuidePageData> = {
       { label: "Weinkarten-Analyse-Tool", url: "/de/weinkarten-analyse" },
     ],
     relatedGuides: [
-      { label: "Wie verkauft man mehr Wein im Restaurant", url: "/de/mehr-wein-verkaufen-restaurant" },
+      { label: "Wie verkauft man mehr Wein im Restaurant", url: "/de/wie-man-mehr-wein-im-restaurant-verkauft" },
       { label: "Wie man den Weinpreis festlegt", url: "/de/weinpreis-restaurant" },
-      { label: "Glaswein im Restaurant", url: "/de/glaswein-restaurant" },
+      { label: "Glaswein im Restaurant", url: "/de/wein-im-glas-restaurant" },
       { label: "Papier vs digitale Weinkarte", url: "/de/papier-vs-digitale-weinkarte" },
     ],
   },
