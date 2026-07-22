@@ -1,5 +1,282 @@
 # Next Steps
 
+## Cierre 2026-07-21: retoma tras ampliar la arquitectura
+
+## Hechos
+
+- Home, Funcionalidades, Winerim Core, `/presentacion` y `/deck` ya muestran la arquitectura ampliada.
+- Wine Cellar y Wine Lockers estan ubicados en Core Bodega.
+- `/presentacion` tiene 23 slides sin precios y `/deck` 43 sin informacion financiera.
+- Humanos y bots reciben la nueva jerarquia en ES/EN/FR/IT/DE/PT.
+
+## Prioridad 1: medicion y consistencia comercial
+
+1. Confirmar eventos de vista, compartir, descarga y clic por capacidad.
+2. Recoger feedback comercial sobre si Core Bodega y el flujo completo se entienden sin explicacion adicional.
+3. Mantener web, presentacion, deck y pagina de precios alineados cuando cambie el alcance contractual.
+
+## Prioridad 2: crecimiento editorial
+
+1. Continuar Biblioteca del vino con paridad ES/EN/FR/IT/DE/PT y enlazado interno.
+2. Continuar Aprender vino con guias profundas y claramente diferenciadas de Biblioteca.
+3. Normalizar el blog semanal de los lunes, ampliar articulos y distribuir fechas de forma coherente.
+
+## Prioridad 3: SEO y LLM
+
+1. Revalidar Search Console, sitemap, canonicals, `hreflang`, `llms.txt` y paridad humano/bot tras esta publicacion.
+2. Medir indexacion de hubs y contenidos por idioma antes de aumentar volumen.
+
+## Hipotesis
+
+- Cerrada la jerarquia de producto, el mayor retorno inmediato vuelve a estar en contenido profundo, indexacion y medicion.
+
+## Ajuste 2026-07-21: retoma tras retirar precios
+
+## Hechos
+
+- `/presentacion` y sus cinco idiomas estan publicados con 22 diapositivas y sin precios.
+- `/deck` sigue publicado con 42 diapositivas y sin metricas financieras.
+- Pages activo: `73dc5a29`; facade activo: `f6c7932b-fd10-431b-92bd-77f9df0f0a58`.
+
+## Prioridad 1: medicion comercial
+
+1. Confirmar eventos de vista, compartir y descarga en presentacion y deck.
+2. Mantener los importes exclusivamente en la pagina de precios y propuestas controladas.
+3. Personalizar `/deck?partner=Nombre` cuando exista un candidato real.
+
+## Prioridad 2: crecimiento editorial
+
+1. Continuar Biblioteca del vino con paridad ES/EN/FR/IT/DE/PT.
+2. Continuar Aprender vino con guias profundas y diferenciadas.
+3. Retomar calendario semanal del blog y auditoria Search Console/LLM.
+
+## Hipotesis
+
+- La presentacion queda cerrada y permite volver al backlog de contenido e indexacion.
+
+## Cierre 2026-07-21: retoma tras unificar las presentaciones
+
+## Hechos
+
+- `/presentacion` esta publicada con 23 slides y `/deck` con 42.
+- Ambas rutas comparten la historia comercial y muestran CloudRIM, Wine Cellar, Wine Lockers, Winerim Supply, RIMs(TM) y SAVia.
+- `/deck` conserva el enfoque de partners sin importes, MRR ni financiacion.
+- Pages activo: `3099172c`; backend activo: `4bde6ba3-4006-40e8-8340-b08594ea5562`; facade activo: `09e0010c-bcbd-430d-ba2a-22eef0f27b95`.
+
+## Prioridad 1: validacion comercial y medicion
+
+1. Validar el volumen del mercado concreto antes de compartir una propuesta territorial.
+2. Confirmar eventos de vista, compartir y descarga en presentacion y deck.
+3. Usar `?partner=Nombre` para candidatos reales y recoger feedback sobre el orden producto-territorio.
+
+## Prioridad 2: crecimiento editorial
+
+1. Continuar Biblioteca del vino con paridad ES/EN/FR/IT/DE/PT y enlazado interno.
+2. Continuar Aprender vino con guias profundas diferenciadas de Biblioteca.
+3. Normalizar el calendario semanal y la profundidad del blog.
+
+## Prioridad 3: SEO y LLM
+
+1. Revalidar Search Console, sitemap, canonicals, `hreflang`, `llms.txt` y paridad humano/bot.
+2. Medir indexacion real de los nuevos hubs y corregir exclusiones por causa, no mediante solicitudes masivas.
+
+## Hipotesis
+
+- Cerrada la arquitectura comercial, el mayor retorno inmediato vuelve a estar en contenido profundo, indexacion y medicion.
+
+## Cierre 2026-07-20: retoma tras el deck territorial
+
+## Hechos
+
+- La presentacion anterior esta disponible en `/presentacion-anterior` y la vigente continua en `/presentacion`.
+- `/deck` ya no contiene informacion financiera y conserva los 13 mercados y 12 playbooks.
+- Pages activo: `97512404`; facade activo: `4d280a3a-b94a-432b-a80b-0e79bc0bbeeb`.
+
+## Prioridad 1: uso comercial del deck
+
+1. Validar el volumen del mercado elegido antes de enviar una propuesta territorial.
+2. Preparar una copia personalizada con `?partner=Nombre` para cada candidato.
+3. Definir el primer piloto de 90 dias con cuentas ancla, canal e integraciones locales.
+
+## Prioridad 2: continuidad editorial y SEO
+
+1. Continuar Biblioteca del vino y Aprender vino con paridad ES/EN/FR/IT/DE/PT.
+2. Retomar el calendario semanal del blog y revisar profundidad de los articulos.
+3. Revalidar Search Console, sitemap, `hreflang`, `llms.txt` y paridad humano/bot.
+
+## Hipotesis
+
+- Las rutas comerciales quedan listas para volver al backlog editorial y de posicionamiento.
+
+## Correccion 2026-07-20: retoma tras autorrecuperacion
+
+## Hechos
+
+- Las seis rutas de presentacion y `/deck` estan publicadas y revalidadas.
+- El frontend recupera automaticamente un primer fallo de carga del chunk y restaura la URL limpia.
+- Pages activo: `4b5c7e9a`; facade activo: `a7aa0797-2467-4166-b698-050745d77ae0`.
+
+## Prioridad 1: vigilancia tecnica
+
+1. Revalidar las siete rutas inmersivas despues de cada cambio de `FRONTEND_ORIGIN`.
+2. Vigilar si aparecen segundos fallos de importacion que ya no deban reintentarse.
+3. Extender la recuperacion a otras rutas solo con evidencia de la misma incidencia.
+
+## Prioridad 2: continuidad del proyecto
+
+1. Validar cifras comerciales pendientes del deck.
+2. Continuar Biblioteca del vino y Aprender vino.
+3. Retomar blog, Search Console, sitemap, `hreflang`, `llms.txt` y paridad humano/bot.
+
+## Hipotesis
+
+- Las rutas comerciales quedan suficientemente estabilizadas para volver al backlog editorial y SEO.
+
+## Correccion 2026-07-20: siguiente retoma tras estabilizar `/deck`
+
+## Hechos
+
+- `/deck` vuelve a cargar contenido en la URL limpia y usa un bundle nuevo.
+- La politica de cache del facade separa ya HTML no cacheable y assets inmutables.
+- Pages activo: `c16caaf2`; facade activo: `5328ac6a-9666-495d-b2c1-e7a5f86744d7`.
+
+## Prioridad 1: vigilancia de despliegues React
+
+1. Tras cada cambio de Pages, abrir la URL limpia en una pestaña nueva y comprobar bundle, consola y contenido.
+2. Confirmar que HTML mantiene `no-store` y assets hash mantienen `immutable`.
+3. No reutilizar una unica politica de cache para documentos y chunks.
+
+## Prioridad 2: continuidad del proyecto
+
+1. Validar cifras comerciales pendientes del deck.
+2. Continuar Biblioteca del vino y Aprender vino.
+3. Retomar blog, Search Console, sitemap, `hreflang`, `llms.txt` y paridad humano/bot.
+
+## Hipotesis
+
+- Cerrada la incidencia de cache, el siguiente retorno vuelve a estar en contenido, SEO y validacion comercial.
+
+## Cierre 2026-07-17: siguiente retoma tras deck partner
+
+## Hechos
+
+- `/deck` esta publicado, validado y separado de `/presentacion`.
+- Contiene 21 diapositivas, 12 mercados de expansion, Espana como base y presupuesto internacional.
+- Pages activo: `b3aeaf99`; facade activo: `4ac9ec87-d0aa-4c1e-8297-271cfd1dac31`.
+- La ruta responde `200` a humano y Googlebot, con `noindex, follow`, sin errores ni overflow.
+
+## Prioridad 1: validacion comercial del deck
+
+1. Confirmar TAM, SAM, SOM, MRR y presupuesto con datos actuales.
+2. Validar la lista de partners, integraciones y cuentas objetivo para cada pais.
+3. Resolver el diferencial de `1K EUR` entre total y subpartidas.
+4. Sustituir la fotografia financiera de Espana de septiembre de 2025 si existen cifras aprobadas mas recientes.
+
+## Prioridad 2: uso y medicion
+
+1. Verificar `partner_deck_view` y `partner_deck_download` en analitica.
+2. Usar `?partner=Nombre` en envios comerciales y recoger feedback.
+3. Crear versiones localizadas solo para mercados con conversacion activa.
+
+## Prioridad 3: crecimiento editorial
+
+1. Continuar Biblioteca del vino con nuevos lotes de referencia y enlazado interno.
+2. Continuar Aprender vino con guias semanales profundas y diferenciadas.
+3. Revisar calendario, extension y traducciones del blog.
+4. Revalidar Search Console, sitemap, canonicals, `hreflang`, `llms.txt` y paridad humano/bot.
+
+## Hipotesis
+
+- Tras cerrar `/presentacion` y `/deck`, el mayor retorno vuelve a estar en validar datos comerciales, medir uso y retomar crecimiento editorial/SEO.
+
+## Cierre 2026-07-17: siguiente retoma tras presentacion
+
+## Hechos
+
+- `/presentacion` y sus cinco variantes internacionales estan publicadas y validadas.
+- La presentacion ya contiene todas las capacidades principales y los precios actuales.
+- Pages activo: `0e2cc481`; facade activo: `9c3b96ea-245b-4121-a0d4-5e2bc0d859c4`.
+- SEO tecnico de presentacion queda alineado: indexable, canonical propio, siete `hreflang` y prerender con novedades.
+
+## Prioridad 1: medicion y rendimiento
+
+1. Confirmar eventos `presentation_view`, `presentation_share` y `presentation_download` en analitica.
+2. Comparar uso y conversion por idioma.
+3. Extraer la generacion PDF a carga diferida si el peso del chunk afecta Core Web Vitals reales.
+
+## Prioridad 2: continuidad comercial
+
+1. Localizar `/precios-modulos-integraciones` si debe enlazarse desde EN/FR/IT/DE/PT.
+2. Revisar la presentacion cuando cambien alcance contractual, precios o nombres de modulos.
+
+## Prioridad 3: crecimiento editorial
+
+1. Continuar Biblioteca del vino con nuevos lotes de referencia y enlazado interno.
+2. Continuar Aprender vino con guias semanales profundas y diferenciadas de Biblioteca.
+3. Revisar calendario, profundidad y traducciones del blog.
+4. Revalidar Search Console, sitemap, canonicals, `hreflang`, `llms.txt` y paridad humano/bot.
+
+## Hipotesis
+
+- Con presentacion, legal y precios estabilizados, el siguiente mayor retorno vuelve a estar en contenido profundo, indexacion y medicion de conversion.
+
+## Ajuste 2026-07-16: siguiente retoma de precios
+
+## Hechos
+
+- La pagina de precios detallada esta publicada y validada.
+- Cada modulo ya explica capacidades, encaje, precio y siguiente paso.
+- Los RIMs™ quedan ubicados dentro de Intelligence y Full / Managed, con explicacion humana y bot.
+- Los seis modulos disponen ya del mismo nivel explicativo mediante un mapa de arquitectura.
+
+## Prioridad 1: medicion
+
+1. Verificar que la analitica registra los CTAs de Core, TPV, Gestion, Margenes, Intelligence y Full.
+2. Comparar clics a producto frente a solicitudes de demo.
+
+## Prioridad 2: confirmacion comercial
+
+1. Validar con ventas la inclusion contractual exacta de Wine Cellar y Wine Lockers, aunque funcionalmente esten conectados con Core.
+2. Confirmar dependencias contractuales entre Core y los modulos adicionales.
+3. Definir nombres publicables de familias RIM solo cuando producto confirme la taxonomia comercial.
+4. Mantener separado en futuras revisiones lo que una capacidad hace y lo que cada contrato incluye.
+
+## Hipotesis
+
+- El siguiente avance de esta pagina debe basarse en comportamiento real y confirmacion de alcance, no en anadir mas texto.
+
+## Cierre 2026-07-16: siguiente retoma
+
+## Hechos
+
+- Legal y precios ya estan publicados con el React real y validados en desktop, mobile y seis idiomas.
+- `winerim-edge-router` version `5027af27-15cd-49ad-a7dd-95df3bf92a43` solo controla `winerim.wine/*`.
+- `winerim-proxy` sigue atendiendo bots, SEO, sitemap, llms, robots, APIs y el resto del sitio.
+- El trabajo local valido esta en `/Users/GOIKO/Documents/Playground/seo-migration-recovered`.
+
+## Prioridad 1: vigilancia corta
+
+1. Comprobar que no aparece `x-winerim-router: react-pages-unavailable`.
+2. Revalidar cache y tiempos de las tres rutas tras varias horas.
+3. Mantener `go.winerim.wine` fuera de cualquier cambio no solicitado.
+
+## Prioridad 2: consolidacion tecnica
+
+1. Conservar el checkout `seo-migration-master` intacto mientras siga APFS `dataless`.
+2. Usar `seo-migration-recovered` como copia operativa.
+3. Decidir despues si se empuja la rama recuperada a GitHub o se materializa de nuevo el checkout original.
+
+## Prioridad 3: retomar crecimiento
+
+1. Continuar Biblioteca del vino con nuevos lotes de entidades, profundidad y enlazado interno.
+2. Continuar Aprender vino con guias practicas semanales en seis idiomas.
+3. Revisar el calendario y profundidad del blog antes de nuevas publicaciones.
+4. Revalidar Search Console, sitemap, canonicals, hreflang y paridad humano/bot.
+
+## Hipotesis
+
+- Con legal/precios ya estabilizados, el mayor retorno vuelve a estar en contenido profundo, enlazado y control de indexacion.
+
 ## Cierre 2026-07-07: siguiente retoma
 
 ## Hechos
@@ -5089,3 +5366,41 @@ Contexto: el deploy CLI de Supabase no se pudo ejecutar aquí porque no hay SUPA
    - Googlebot para ambas;
    - footer en home y paginas legales;
    - redirects legacy.
+
+## Actualizacion 2026-07-22: siguiente lote visual y editorial
+
+### Prioridad 1: capturas que debe aportar Goiko
+
+1. `feature-cloudrim-inbox-current.png`: bandeja CloudRIM poblada con varios documentos, estados, tipo, origen y fecha.
+2. `feature-margins-overview.png`: overview real de Margenes con margen, coste/PVP, stock, rotacion y oportunidades disponibles.
+3. `feature-margins-wine-detail.png`: tabla o ficha por vino con coste, PVP, margen en euros y porcentaje, stock/rotacion y accion sugerida.
+4. `feature-supply-tariff-comparison.png`: comparacion del mismo vino entre distribuidores.
+5. `feature-supply-replenishment.png`: propuesta de reposicion/pedido con cantidad, motivo, proveedor y estado.
+6. `feature-rims-decision-center.png`: Decision Center con propuestas, evidencia, impacto y aprobacion.
+7. `feature-savia-margin-answer.png`: conversacion de SAVia sobre margen/stock con evidencia y accion preparada.
+8. `feature-multilocal-dashboard.png`: comparacion ejecutiva entre varios locales.
+
+Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegador, sin datos personales, sin cursor ni tooltips y con datos de demo suficientes.
+
+### Prioridad 2: implementacion al recibir capturas
+
+1. Revisar visualmente cada archivo antes de editar.
+2. Sustituir CloudRIM en presentacion, pagina de producto y Funcionalidades.
+3. Añadir las dos capturas de Margenes en Core, Funcionalidades y presentacion.
+4. Añadir Supply, RIMs, SAVia y multi-local en sus paginas y slides correspondientes.
+5. Ejecutar build, tests y QA desktop/mobile.
+6. Publicar Pages/router y revalidar produccion.
+
+### Prioridad 3: contenido y posicionamiento
+
+1. Continuar expansion de Biblioteca del vino.
+2. Continuar Aprender vino y completar paridad DE/PT.
+3. Revisar cadencia y profundidad del blog semanal de los lunes.
+4. Revalidar sitemap, `llms.txt`, hreflang, canonicals y Search Console.
+5. Mantener en seguimiento `www.winerim.wine` si reaparece el `421`.
+
+### Estado de cierre
+
+- Presentacion/deck/home/CloudRIM: publicados y revalidados.
+- Documentos legales: contenido JSON servido y render humano validado.
+- Siguiente dependencia real: capturas de producto autenticas, no mas copy provisional.

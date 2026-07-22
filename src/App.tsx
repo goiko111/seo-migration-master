@@ -1,7 +1,32 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
+
+const lazyRouteWithRetry = <T extends ComponentType<Record<string, never>>>(
+  importer: () => Promise<{ default: T }>,
+) => lazy(async () => {
+  try {
+    const module = await importer();
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (url.searchParams.delete("__bundle_retry")) {
+        window.history.replaceState(window.history.state, "", url.toString());
+      }
+    }
+    return module;
+  } catch (error) {
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has("__bundle_retry")) {
+        url.searchParams.set("__bundle_retry", Date.now().toString());
+        window.location.replace(url.toString());
+        return await new Promise<never>(() => undefined);
+      }
+    }
+    throw error;
+  }
+});
 
 // Lazy load UI chrome — not needed for FCP
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
@@ -50,6 +75,7 @@ const WinePricingTool = lazy(() => import("./pages/WinePricingTool"));
 const WineListBenchmark = lazy(() => import("./pages/WineListBenchmark"));
 const BarometroCartasVino = lazy(() => import("./pages/BarometroCartasVino"));
 const Precios = lazy(() => import("./pages/Precios"));
+const PreciosModulosIntegraciones = lazy(() => import("./pages/PreciosModulosIntegraciones"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const Hoteles = lazy(() => import("./pages/Hoteles"));
@@ -133,7 +159,9 @@ const FAQs = lazy(() => import("./pages/FAQs"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const CursosVino = lazy(() => import("./pages/CursosVino"));
 const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
-const Presentation = lazy(() => import("./pages/Presentation"));
+const Presentation = lazyRouteWithRetry(() => import("./pages/Presentation"));
+const PresentationLegacy = lazyRouteWithRetry(() => import("./pages/PresentationLegacy"));
+const PartnerDeck = lazyRouteWithRetry(() => import("./pages/PartnerDeck"));
 const SimuladorCarta = lazy(() => import("./pages/SimuladorCarta"));
 
 // Admin routes — fully isolated chunk (AuthProvider only loads here)
@@ -259,6 +287,7 @@ const esRoutes = (
     <Route path="/wine-list-benchmark" element={<WineListBenchmark />} />
     <Route path="/barometro-cartas-vino-2026" element={<BarometroCartasVino />} />
     <Route path="/precios" element={<Precios />} />
+    <Route path="/precios-modulos-integraciones" element={<PreciosModulosIntegraciones />} />
     <Route path="/integraciones" element={<Integraciones />} />
     <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
     <Route path="/soluciones/hoteles" element={<Hoteles />} />
@@ -327,6 +356,8 @@ const esRoutes = (
     <Route path="/comparativas" element={<Comparativas />} />
     <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
     <Route path="/presentacion" element={<Presentation />} />
+    <Route path="/presentacion-anterior" element={<PresentationLegacy />} />
+    <Route path="/deck" element={<PartnerDeck />} />
     <Route path="/en/presentation" element={<Presentation />} />
     <Route path="/fr/presentation" element={<Presentation />} />
     <Route path="/it/presentazione" element={<Presentation />} />
@@ -868,16 +899,27 @@ const DeferredAppChrome = () => {
   const isCampaignLanding =
     location.pathname === "/meta-demo" ||
     (typeof window !== "undefined" && window.location.hostname === "go.winerim.wine" && location.pathname === "/");
+  const isPresentation = [
+    "/presentacion",
+    "/presentacion-anterior",
+    "/deck",
+    "/en/presentation",
+    "/fr/presentation",
+    "/it/presentazione",
+    "/de/praesentation",
+    "/pt/apresentacao",
+  ].includes(location.pathname);
+  const hideGlobalConversionChrome = isCampaignLanding || isPresentation;
 
   return (
     <Suspense fallback={null}>
       <Toaster />
       <Sonner position="top-center" richColors />
-      <CookieConsent />
+      {!hideGlobalConversionChrome && <CookieConsent />}
       <IntentTracker />
-      {!isCampaignLanding && <BackToTop />}
-      {!isCampaignLanding && <ToolsLeadPopup />}
-      {!isCampaignLanding && <FreemiumToolGuard />}
+      {!hideGlobalConversionChrome && <BackToTop />}
+      {!hideGlobalConversionChrome && <ToolsLeadPopup />}
+      {!hideGlobalConversionChrome && <FreemiumToolGuard />}
     </Suspense>
   );
 };

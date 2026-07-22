@@ -1,0 +1,15 @@
+name = "winerim-edge-router"
+main = "edge-router/winerim-pages-router.js"
+compatibility_date = "2026-05-23"
+
+routes = [
+  { pattern = "winerim.wine/*", zone_name = "winerim.wine" },
+]
+
+[[services]]
+binding = "BACKEND"
+service = "winerim-proxy"
+
+[vars]
+FRONTEND_ORIGIN = "https://782dc9c7.winerim-origin.pages.dev"
+FRONTEND_RELEASE = "782dc9c7-presentation-cloudrim-deck-r6"

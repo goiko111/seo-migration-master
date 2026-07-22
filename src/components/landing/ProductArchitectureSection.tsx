@@ -1,161 +1,150 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BarChart3, Zap, ShoppingCart, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BrainCircuit,
+  Cloud,
+  MessageSquareText,
+  ShoppingCart,
+  Wine,
+} from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getI18n, type I18nMap } from "@/i18n/types";
 
-const data: Record<string, {
-  badge: string;
+type ArchitectureCopy = {
+  eyebrow: string;
   title: string;
-  titleHighlight: string;
   subtitle: string;
-  layers: { name: string; verb: string; description: string; href: string }[];
-  flow: [string, string, string];
-}> = {
+  flow: string[];
+  layers: { name: string; verb: string; description: string; detail: string; href: string }[];
+};
+
+const copy: I18nMap<ArchitectureCopy> = {
   es: {
-    badge: "Arquitectura de producto",
-    title: "Tres capas. Un mismo objetivo: ",
-    titleHighlight: "gestionar mejor todo el negocio del vino.",
-    subtitle: "Winerim combina una capa analítica profunda, una capa de acción dinámica y una nueva capa de inteligencia de compras.",
+    eyebrow: "Arquitectura Winerim",
+    title: "De un documento disperso a una decisión aprobada",
+    subtitle: "Cada capacidad tiene un trabajo concreto. Juntas forman un sistema operativo para carta, bodega física, rentabilidad, compras y decisión.",
+    flow: ["Datos", "Operación", "Rentabilidad", "Decisión", "Aprobación"],
     layers: [
-      { name: "Winerim Core", verb: "Analiza", description: "Margen, rotación, rentabilidad y rendimiento de cada referencia.", href: "/producto/winerim-core" },
-      { name: "Inteligencia Dinámica", verb: "Actúa", description: "Prioriza, reordena y activa estrategias según contexto y objetivos.", href: "/producto/inteligencia-dinamica" },
-      { name: "Winerim Supply", verb: "Compra mejor", description: "Detecta sobrecostes, capital inmovilizado y oportunidades de compra.", href: "/producto/winerim-supply" },
+      { name: "Winerim Core", verb: "Opera", description: "Una fuente de verdad para carta y bodega física.", detail: "Core Carta · stock · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Recoge", description: "Recibe, clasifica y enruta documentos y datos.", detail: "Cartas · albaranes · facturas · tarifas · ventas", href: "/producto/cloudrim" },
+      { name: "Márgenes", verb: "Protege", description: "Explica rentabilidad, erosión y capital inmovilizado.", detail: "Coste real · PVP · copa · rotación · simulación", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Compra", description: "Convierte demanda, stock y tarifas en criterio de compra.", detail: "Comparación · reposición · negociación · pedido", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Detecta", description: "Motores especializados convierten señales en propuestas.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Explica", description: "Permite preguntar, comparar y preparar decisiones.", detail: "Evidencia · impacto · alternativas · preview", href: "/producto/savia" },
     ],
-    flow: ["Comprar mejor", "Analizar mejor", "Vender mejor"],
   },
   en: {
-    badge: "Product architecture",
-    title: "Three layers. One goal: ",
-    titleHighlight: "better management of the entire wine business.",
-    subtitle: "Winerim combines a deep analytics layer, a dynamic action layer, and a new purchasing intelligence layer.",
+    eyebrow: "Winerim architecture", title: "From scattered documents to an approved decision", subtitle: "Every capability has a specific job. Together they form an operating system for the list, physical cellar, profitability, purchasing and decisions.", flow: ["Data", "Operations", "Profitability", "Decision", "Approval"],
     layers: [
-      { name: "Winerim Core", verb: "Analyses", description: "Margin, rotation, profitability and performance of every reference.", href: "/producto/winerim-core" },
-      { name: "Dynamic Intelligence", verb: "Acts", description: "Prioritises, reorders and activates strategies based on context and goals.", href: "/producto/inteligencia-dinamica" },
-      { name: "Winerim Supply", verb: "Buys smarter", description: "Detects overspend, tied-up capital and purchasing opportunities.", href: "/producto/winerim-supply" },
+      { name: "Winerim Core", verb: "Operates", description: "One source of truth for the list and physical cellar.", detail: "Core List · stock · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Collects", description: "Receives, classifies and routes documents and data.", detail: "Lists · delivery notes · invoices · catalogues · sales", href: "/producto/cloudrim" },
+      { name: "Margins", verb: "Protects", description: "Explains profitability, erosion and tied-up capital.", detail: "True cost · selling price · glass · rotation · simulation", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Purchases", description: "Turns demand, stock and catalogues into buying criteria.", detail: "Comparison · replenishment · negotiation · order", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Detects", description: "Specialist engines turn signals into proposals.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Explains", description: "Lets teams ask, compare and prepare decisions.", detail: "Evidence · impact · alternatives · preview", href: "/producto/savia" },
     ],
-    flow: ["Buy smarter", "Analyse better", "Sell better"],
-  },
-  it: {
-    badge: "Architettura di prodotto",
-    title: "Tre livelli. Un unico obiettivo: ",
-    titleHighlight: "gestire meglio tutto il business del vino.",
-    subtitle: "Winerim combina un livello analitico profondo, un livello d'azione dinamica e un nuovo livello di intelligenza d'acquisto.",
-    layers: [
-      { name: "Winerim Core", verb: "Analizza", description: "Margine, rotazione, redditività e rendimento di ogni referenza.", href: "/producto/winerim-core" },
-      { name: "Intelligenza Dinamica", verb: "Agisce", description: "Prioritizza, riordina e attiva strategie in base al contesto e agli obiettivi.", href: "/producto/inteligencia-dinamica" },
-      { name: "Winerim Supply", verb: "Acquista meglio", description: "Rileva sovracosti, capitale immobilizzato e opportunità d'acquisto.", href: "/producto/winerim-supply" },
-    ],
-    flow: ["Comprare meglio", "Analizzare meglio", "Vendere meglio"],
   },
   fr: {
-    badge: "Architecture produit",
-    title: "Trois couches. Un seul objectif : ",
-    titleHighlight: "mieux gérer tout le business du vin.",
-    subtitle: "Winerim combine une couche analytique profonde, une couche d'action dynamique et une nouvelle couche d'intelligence d'achat.",
+    eyebrow: "Architecture Winerim", title: "Du document dispersé à la décision validée", subtitle: "Chaque capacité a un rôle précis. Ensemble, elles forment un système pour la carte, la cave physique, la rentabilité, les achats et la décision.", flow: ["Données", "Opération", "Rentabilité", "Décision", "Validation"],
     layers: [
-      { name: "Winerim Core", verb: "Analyse", description: "Marge, rotation, rentabilité et performance de chaque référence.", href: "/producto/winerim-core" },
-      { name: "Intelligence Dynamique", verb: "Agit", description: "Priorise, réordonne et active des stratégies selon le contexte et les objectifs.", href: "/producto/inteligencia-dinamica" },
-      { name: "Winerim Supply", verb: "Achète mieux", description: "Détecte les surcoûts, le capital immobilisé et les opportunités d'achat.", href: "/producto/winerim-supply" },
+      { name: "Winerim Core", verb: "Opère", description: "Une source de vérité pour la carte et la cave physique.", detail: "Core Carte · stock · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Collecte", description: "Reçoit, classe et route documents et données.", detail: "Cartes · bons · factures · tarifs · ventes", href: "/producto/cloudrim" },
+      { name: "Marges", verb: "Protège", description: "Explique rentabilité, érosion et capital immobilisé.", detail: "Coût réel · prix · verre · rotation · simulation", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Achète", description: "Transforme demande, stock et tarifs en critères d'achat.", detail: "Comparaison · réassort · négociation · commande", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Détecte", description: "Des moteurs spécialisés transforment les signaux en propositions.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Explique", description: "Permet d'interroger, comparer et préparer les décisions.", detail: "Preuves · impact · alternatives · aperçu", href: "/producto/savia" },
     ],
-    flow: ["Mieux acheter", "Mieux analyser", "Mieux vendre"],
+  },
+  it: {
+    eyebrow: "Architettura Winerim", title: "Dal documento disperso alla decisione approvata", subtitle: "Ogni capacità ha un compito preciso. Insieme formano un sistema per carta, cantina fisica, redditività, acquisti e decisioni.", flow: ["Dati", "Operazione", "Redditività", "Decisione", "Approvazione"],
+    layers: [
+      { name: "Winerim Core", verb: "Opera", description: "Un'unica fonte per carta e cantina fisica.", detail: "Core Carta · stock · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Raccoglie", description: "Riceve, classifica e instrada documenti e dati.", detail: "Carte · bolle · fatture · listini · vendite", href: "/producto/cloudrim" },
+      { name: "Margini", verb: "Protegge", description: "Spiega redditività, erosione e capitale immobilizzato.", detail: "Costo reale · prezzo · calice · rotazione · simulazione", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Acquista", description: "Trasforma domanda, stock e listini in criteri di acquisto.", detail: "Confronto · riordino · negoziazione · ordine", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Rileva", description: "Motori specializzati trasformano segnali in proposte.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Spiega", description: "Permette di chiedere, confrontare e preparare decisioni.", detail: "Evidenze · impatto · alternative · anteprima", href: "/producto/savia" },
+    ],
+  },
+  de: {
+    eyebrow: "Winerim Architektur", title: "Vom verstreuten Dokument zur freigegebenen Entscheidung", subtitle: "Jede Fähigkeit hat eine klare Aufgabe. Zusammen bilden sie ein System für Karte, physischen Keller, Rentabilität, Einkauf und Entscheidung.", flow: ["Daten", "Betrieb", "Rentabilität", "Entscheidung", "Freigabe"],
+    layers: [
+      { name: "Winerim Core", verb: "Betreibt", description: "Eine Datenbasis für Karte und physischen Keller.", detail: "Core Karte · Bestand · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Sammelt", description: "Empfängt, klassifiziert und leitet Dokumente und Daten weiter.", detail: "Karten · Belege · Rechnungen · Preislisten · Verkauf", href: "/producto/cloudrim" },
+      { name: "Margen", verb: "Schützt", description: "Erklärt Rentabilität, Erosion und gebundenes Kapital.", detail: "Echte Kosten · Preis · Glas · Rotation · Simulation", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Kauft", description: "Macht aus Nachfrage, Bestand und Preisen Einkaufskriterien.", detail: "Vergleich · Nachkauf · Verhandlung · Bestellung", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Erkennt", description: "Spezialisierte Engines verwandeln Signale in Vorschläge.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Erklärt", description: "Ermöglicht Fragen, Vergleiche und Entscheidungsvorbereitung.", detail: "Belege · Wirkung · Alternativen · Vorschau", href: "/producto/savia" },
+    ],
+  },
+  pt: {
+    eyebrow: "Arquitetura Winerim", title: "Do documento disperso à decisão aprovada", subtitle: "Cada capacidade tem uma função concreta. Juntas formam um sistema para carta, garrafeira física, rentabilidade, compras e decisão.", flow: ["Dados", "Operação", "Rentabilidade", "Decisão", "Aprovação"],
+    layers: [
+      { name: "Winerim Core", verb: "Opera", description: "Uma fonte de verdade para carta e garrafeira física.", detail: "Core Carta · stock · Wine Cellar · Wine Lockers", href: "/producto/winerim-core" },
+      { name: "CloudRIM", verb: "Recolhe", description: "Recebe, classifica e encaminha documentos e dados.", detail: "Cartas · guias · faturas · tabelas · vendas", href: "/producto/cloudrim" },
+      { name: "Margens", verb: "Protege", description: "Explica rentabilidade, erosão e capital imobilizado.", detail: "Custo real · preço · copo · rotação · simulação", href: "/producto/winerim-core#core-margins" },
+      { name: "Winerim Supply", verb: "Compra", description: "Transforma procura, stock e tabelas em critérios de compra.", detail: "Comparação · reposição · negociação · pedido", href: "/producto/winerim-supply" },
+      { name: "RIMs™", verb: "Deteta", description: "Motores especializados transformam sinais em propostas.", detail: "MarginRIM™ · StockRIM™ · FocusRIM™ · SmartRIM™", href: "/producto/inteligencia-dinamica" },
+      { name: "SAVia", verb: "Explica", description: "Permite perguntar, comparar e preparar decisões.", detail: "Evidência · impacto · alternativas · prévia", href: "/producto/savia" },
+    ],
   },
 };
 
-const layerStyles = [
-  { accent: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20", icon: BarChart3 },
-  { accent: "text-wine", bg: "bg-wine/10", border: "border-wine/20", icon: Zap },
-  { accent: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20", icon: ShoppingCart },
+const styles = [
+  { icon: Wine, accent: "text-wine", bg: "bg-wine/10", border: "border-wine/25" },
+  { icon: Cloud, accent: "text-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/25" },
+  { icon: BarChart3, accent: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/25" },
+  { icon: ShoppingCart, accent: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/25" },
+  { icon: BrainCircuit, accent: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/25" },
+  { icon: MessageSquareText, accent: "text-rose-400", bg: "bg-rose-500/10", border: "border-rose-500/25" },
 ];
 
 const ProductArchitectureSection = () => {
-  const { lang } = useLanguage();
-  const d = data[lang] || data.es;
+  const { lang, localePath } = useLanguage();
+  const t = getI18n(copy, lang) || copy.es;
 
   return (
-    <section className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-wine/4 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="relative max-w-5xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-10 md:mb-14">
-            <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-wine/60 mb-4">
-              <span className="w-1 h-1 rounded-full bg-wine/50" />
-              {d.badge}
-            </span>
-            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight mb-3">
-              {d.title}
-              <span className="text-gradient-wine">{d.titleHighlight}</span>
-            </h2>
-            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-              {d.subtitle}
-            </p>
-          </div>
+    <section id="arquitectura-winerim" className="border-y border-border bg-gradient-dark py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        <ScrollReveal className="mx-auto mb-12 max-w-4xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-wine-light">{t.eyebrow}</p>
+          <h2 className="mt-4 font-heading text-3xl font-bold leading-tight md:text-5xl">{t.title}</h2>
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">{t.subtitle}</p>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-3 gap-4 md:gap-5 mb-10">
-          {d.layers.map((layer, i) => {
-            const style = layerStyles[i];
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {t.layers.map((layer, index) => {
+            const style = styles[index];
+            const Icon = style.icon;
             return (
-              <ScrollReveal key={layer.name} delay={i * 0.08}>
-                <Link
-                  to={layer.href}
-                  className={`group relative flex flex-col items-center text-center p-6 md:p-8 rounded-xl border ${style.border} bg-card/70 backdrop-blur-sm hover:border-wine/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5`}
-                >
-                  <div className={`w-10 h-10 rounded-lg ${style.bg} flex items-center justify-center mb-4`}>
-                    <style.icon size={18} className={style.accent} />
+              <ScrollReveal key={layer.name} delay={index * 0.05}>
+                <Link to={localePath(layer.href)} className={`group flex min-h-[230px] h-full flex-col border ${style.border} bg-card p-6 transition hover:-translate-y-0.5 hover:border-wine/45`}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className={`flex h-11 w-11 items-center justify-center rounded-lg ${style.bg}`}>
+                      <Icon className={style.accent} size={21} />
+                    </div>
+                    <span className={`text-[10px] font-bold uppercase tracking-[0.16em] ${style.accent}`}>{layer.verb}</span>
                   </div>
-                  <h3 className="font-heading text-sm font-bold tracking-wide uppercase text-foreground mb-1">
-                    {layer.name}
-                  </h3>
-                  <span className={`text-xs font-semibold tracking-widest uppercase ${style.accent} mb-2`}>
-                    {layer.verb}
-                  </span>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {layer.description}
-                  </p>
-                  <ArrowRight size={14} className="mt-3 text-muted-foreground group-hover:text-wine transition-colors" />
+                  <h3 className="mt-5 font-heading text-xl font-bold">{layer.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{layer.description}</p>
+                  <p className="mt-4 border-t border-border pt-3 text-xs leading-relaxed text-foreground/65">{layer.detail}</p>
+                  <ArrowRight className="mt-auto pt-4 text-wine transition-transform group-hover:translate-x-1" size={28} />
                 </Link>
               </ScrollReveal>
             );
           })}
         </div>
 
-        <ScrollReveal delay={0.3}>
-          <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-muted-foreground">
-            <motion.span
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-              className="text-emerald-500"
-            >
-              {d.flow[0]}
-            </motion.span>
-            <span className="text-border">→</span>
-            <motion.span
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.55, duration: 0.4 }}
-              className="text-amber-500"
-            >
-              {d.flow[1]}
-            </motion.span>
-            <span className="text-border">→</span>
-            <motion.span
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7, duration: 0.4 }}
-              className="text-wine"
-            >
-              {d.flow[2]}
-            </motion.span>
-          </div>
-        </ScrollReveal>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+          {t.flow.map((step, index) => (
+            <div key={step} className="flex items-center gap-2">
+              <span>{step}</span>
+              {index < t.flow.length - 1 && <ArrowRight size={13} className="text-wine/55" />}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

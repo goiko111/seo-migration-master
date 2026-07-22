@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import ConnectedCellarSection from "@/components/landing/ConnectedCellarSection";
+import CoreScopeSection from "@/components/product/CoreScopeSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import type { SupportedLang, I18nMap } from "@/i18n/types";
@@ -94,21 +95,21 @@ const capabilityIconColors = [
 
 const i18n: I18nMap<CoreI18n> = {
   es: {
-    seo_title: "Winerim Core — Motor analítico para cartas de vinos | Winerim",
-    seo_desc: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, benchmark y arquitectura de carta en una sola capa analítica.",
+    seo_title: "Winerim Core — Carta, bodega física y márgenes | Winerim",
+    seo_desc: "Winerim Core conecta carta, stock, Wine Cellar, Wine Lockers, costes, márgenes y rotación en una sola base operativa.",
     bc_product: "Producto",
     eyebrow: "WINERIM CORE",
-    h1: "El motor analítico que convierte tu carta en un sistema de decisión",
-    subtitle: "Winerim Core conecta pricing, margen, stock, rentabilidad, compras, albaranes, facturas, benchmark y arquitectura de carta en una sola capa analítica.",
+    h1: "La base operativa del vino: carta, bodega física y decisión",
+    subtitle: "Winerim Core conecta carta, stock, Wine Cellar, Wine Lockers, costes, márgenes, rotación y arquitectura de carta en una sola fuente de verdad.",
     support_text: "CloudRIM captura la documentación operativa, Core ordena la señal, los RIMs proponen y SAVia explica el impacto antes de que el equipo apruebe cambios críticos.",
     cta_primary: "Quiero ver Winerim Core",
     cta_secondary: "Ver cómo se conecta con Inteligencia Dinámica",
 
     what_eyebrow: "Qué es Winerim Core",
-    what_title: "La infraestructura analítica que ",
-    what_title_hl: "piensa por ti",
-    what_p1: "Winerim Core es el motor de análisis y diagnóstico que alimenta todas las decisiones sobre tu carta de vinos. No es una carta digital. No es un dashboard de métricas. Es una capa analítica profunda compuesta por múltiples módulos interconectados que cruzan datos de ventas, stock, márgenes, pricing, albaranes, facturas, tarifas, benchmark y contexto operativo para darte una visión completa — y accionable — de cómo rinde tu negocio de vino.",
-    what_p2: "Mientras la Inteligencia Dinámica adapta la carta al contexto, Winerim Core analiza, diagnostica y recomienda. Cuando la señal viene de CloudRIM, Core conecta la documentación con margen, stock y compras; después los RIMs proponen y SAVia prepara el preview para aprobación humana.",
+    what_title: "La fuente de verdad que conecta ",
+    what_title_hl: "carta y bodega",
+    what_p1: "Winerim Core mantiene una única referencia operativa para lo que ve el comensal y lo que existe físicamente en la bodega. Conecta perfiles, precios, formatos y disponibilidad con stock, movimientos, ubicaciones Wine Cellar y botellas privadas en Wine Lockers.",
+    what_p2: "Sobre esa misma base, Core cruza ventas, costes, márgenes, rotación, albaranes, facturas y contexto operativo. Los RIMs detectan oportunidades y SAVia prepara una explicación y un preview antes de la aprobación humana.",
     what_pillars: [
       { label: "Analiza", desc: "Cruza datos de venta, stock, margen y contexto operativo en una vista unificada." },
       { label: "Diagnostica", desc: "Detecta ineficiencias, oportunidades perdidas y desequilibrios antes de que se noten en caja." },
@@ -166,7 +167,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Preguntas frecuentes sobre Winerim Core",
     faqs: [
       { q: "¿Qué diferencia hay entre Winerim Core y la Inteligencia Dinámica?", a: "Core es la capa de análisis: diagnostica, mide y recomienda. La Inteligencia Dinámica es la capa de acción: aplica esos diagnósticos en tiempo real sobre la carta visible al comensal." },
-      { q: "¿Core es una carta digital?", a: "No. Winerim Core es un motor analítico. La carta digital es el soporte que el comensal ve, pero detrás hay un sistema de decisión que optimiza lo que se muestra, cómo se ordena y a qué precio." },
+      { q: "¿Core incluye la carta digital?", a: "Sí. Core es la base operativa detrás de la carta digital y de la bodega física. La carta es la superficie que ve el comensal; Wine Cellar, Wine Lockers, stock, márgenes y analítica trabajan sobre la misma referencia." },
       { q: "¿Necesito activar todas las capacidades desde el inicio?", a: "No. Las capacidades se activan progresivamente según tu plan y necesidades. Puedes empezar con pricing y diagnóstico, y ampliar a stock, benchmark o simulación cuando lo necesites." },
       { q: "¿Core funciona sin la Inteligencia Dinámica?", a: "Sí. Core genera valor por sí solo como herramienta de análisis y planificación. La Inteligencia Dinámica es una capa adicional que automatiza acciones, pero Core es autónomo." },
       { q: "¿Puedo usar Winerim Core para varios locales?", a: "Sí. Incluye diagnóstico multi-local que permite comparar rendimiento entre establecimientos de un mismo grupo y detectar desviaciones o mejores prácticas replicables." },
@@ -184,21 +185,21 @@ const i18n: I18nMap<CoreI18n> = {
     ],
   },
   en: {
-    seo_title: "Winerim Core — Analytical Engine for Wine Lists | Winerim",
-    seo_desc: "Winerim Core connects pricing, margin, stock, profitability, purchasing, benchmarking and list architecture in a single analytical layer.",
+    seo_title: "Winerim Core — List, Physical Cellar & Margins | Winerim",
+    seo_desc: "Winerim Core connects the list, stock, Wine Cellar, Wine Lockers, costs, margins and rotation in one operating foundation.",
     bc_product: "Product",
     eyebrow: "WINERIM CORE",
-    h1: "The analytical engine that turns your wine list into a decision system",
-    subtitle: "Winerim Core connects pricing, margin, stock, profitability, purchasing, delivery notes, invoices, benchmarking and list architecture in a single analytical layer.",
+    h1: "The operating foundation for wine: list, physical cellar and decisions",
+    subtitle: "Winerim Core connects the list, stock, Wine Cellar, Wine Lockers, costs, margins, rotation and list architecture in one source of truth.",
     support_text: "CloudRIM captures operating documents, Core organizes the signal, RIMs propose and SAVia explains impact before the team approves critical changes.",
     cta_primary: "See Winerim Core",
     cta_secondary: "See how it connects with Dynamic Intelligence",
 
     what_eyebrow: "What is Winerim Core",
-    what_title: "The analytical infrastructure that ",
-    what_title_hl: "thinks for you",
-    what_p1: "Winerim Core is the analysis and diagnostics engine behind every wine list decision. It's not a digital menu. It's not a metrics dashboard. It's a deep analytical layer composed of multiple interconnected modules that cross-reference sales, stock, margins, pricing, delivery notes, invoices, tariffs, benchmarks and operational context to give you a complete — and actionable — view of how your wine business performs.",
-    what_p2: "While Dynamic Intelligence adapts the list to context, Winerim Core analyses, diagnoses and recommends. When the signal comes from CloudRIM, Core connects documentation with margin, stock and purchasing; then RIMs propose and SAVia prepares the preview for human approval.",
+    what_title: "The source of truth connecting ",
+    what_title_hl: "list and cellar",
+    what_p1: "Winerim Core maintains one operating reference for what guests see and what physically exists in the cellar. It connects profiles, prices, formats and availability with stock, movements, Wine Cellar locations and private bottles in Wine Lockers.",
+    what_p2: "On that same foundation, Core cross-references sales, costs, margins, rotation, delivery notes, invoices and operating context. RIMs detect opportunities and SAVia prepares an explanation and preview for human approval.",
     what_pillars: [
       { label: "Analyses", desc: "Cross-references sales, stock, margin and operational context in a unified view." },
       { label: "Diagnoses", desc: "Detects inefficiencies, missed opportunities and imbalances before they hit revenue." },
@@ -256,7 +257,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Frequently asked questions about Winerim Core",
     faqs: [
       { q: "What's the difference between Winerim Core and Dynamic Intelligence?", a: "Core is the analysis layer: it diagnoses, measures and recommends. Dynamic Intelligence is the action layer: it applies those diagnostics in real time on the guest-facing list." },
-      { q: "Is Core a digital wine list?", a: "No. Winerim Core is an analytical engine. The digital list is what the guest sees, but behind it sits a decision system that optimises what's shown, how it's ordered and at what price." },
+      { q: "Does Core include the digital wine list?", a: "Yes. Core is the operating foundation behind the digital list and physical cellar. The list is the guest-facing surface; Wine Cellar, Wine Lockers, stock, margins and analytics work on the same reference." },
       { q: "Do I need to activate all capabilities from day one?", a: "No. Capabilities are activated progressively based on your plan and needs. Start with pricing and diagnostics, then expand to stock, benchmark or simulation." },
       { q: "Does Core work without Dynamic Intelligence?", a: "Yes. Core generates value on its own as an analysis and planning tool. Dynamic Intelligence is an additional layer that automates actions, but Core is autonomous." },
       { q: "Can I use Winerim Core for multiple venues?", a: "Yes. It includes multi-venue diagnostics to compare performance across locations and detect deviations or replicable best practices." },
@@ -274,21 +275,21 @@ const i18n: I18nMap<CoreI18n> = {
     ],
   },
   it: {
-    seo_title: "Winerim Core — Motore analitico per carte dei vini | Winerim",
-    seo_desc: "Winerim Core collega pricing, margine, stock, redditività, acquisti, benchmark e architettura della carta in un unico livello analitico.",
+    seo_title: "Winerim Core — Carta, cantina fisica e margini | Winerim",
+    seo_desc: "Winerim Core collega carta, stock, Wine Cellar, Wine Lockers, costi, margini e rotazione in un'unica base operativa.",
     bc_product: "Prodotto",
     eyebrow: "WINERIM CORE",
-    h1: "Il motore analitico che trasforma la carta in un sistema di decisione",
-    subtitle: "Winerim Core collega pricing, margine, stock, redditività, acquisti, benchmark e architettura della carta in un unico livello analitico.",
+    h1: "La base operativa del vino: carta, cantina fisica e decisioni",
+    subtitle: "Winerim Core collega carta, stock, Wine Cellar, Wine Lockers, costi, margini, rotazione e architettura in un'unica fonte.",
     support_text: "Non è una collezione di strumenti separati. È la logica che ti permette di capire cosa sta succedendo, cosa non funziona e cosa conviene fare.",
     cta_primary: "Voglio vedere Winerim Core",
     cta_secondary: "Vedi come si connette con l'Intelligenza Dinamica",
 
     what_eyebrow: "Cos'è Winerim Core",
-    what_title: "L'infrastruttura analitica che ",
-    what_title_hl: "pensa per te",
-    what_p1: "Winerim Core è il motore di analisi e diagnosi che alimenta ogni decisione sulla carta dei vini. Non è un menu digitale. Non è una dashboard di metriche. È un livello analitico profondo composto da moduli interconnessi che incrociano vendite, stock, margini, pricing, benchmark e contesto operativo per darti una visione completa — e azionabile — delle performance del tuo business vinicolo.",
-    what_p2: "Mentre l'Intelligenza Dinamica agisce in tempo reale adattando la carta al contesto, Winerim Core analizza, diagnostica e raccomanda. È la base su cui si costruiscono le decisioni tattiche.",
+    what_title: "La fonte unica che collega ",
+    what_title_hl: "carta e cantina",
+    what_p1: "Winerim Core mantiene un'unica referenza operativa per ciò che vede il cliente e ciò che esiste fisicamente in cantina. Collega profili, prezzi, formati e disponibilità a stock, movimenti, posizioni Wine Cellar e bottiglie private nei Wine Lockers.",
+    what_p2: "Sulla stessa base, Core incrocia vendite, costi, margini, rotazione, documenti e contesto operativo. I RIMs rilevano opportunità e SAVia prepara spiegazione e anteprima prima dell'approvazione umana.",
     what_pillars: [
       { label: "Analizza", desc: "Incrocia dati di vendita, stock, margine e contesto operativo in una vista unificata." },
       { label: "Diagnostica", desc: "Rileva inefficienze, opportunità mancate e squilibri prima che impattino il fatturato." },
@@ -346,7 +347,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Domande frequenti su Winerim Core",
     faqs: [
       { q: "Qual è la differenza tra Winerim Core e l'Intelligenza Dinamica?", a: "Core è il livello di analisi: diagnostica, misura e raccomanda. L'Intelligenza Dinamica è il livello di azione: applica le diagnosi in tempo reale sulla carta visibile." },
-      { q: "Core è una carta digitale?", a: "No. Winerim Core è un motore analitico. La carta digitale è il supporto che vede il cliente, ma dietro c'è un sistema di decisione che ottimizza cosa si mostra e come." },
+      { q: "Core include la carta digitale?", a: "Sì. Core è la base operativa della carta digitale e della cantina fisica. Carta, Wine Cellar, Wine Lockers, stock, margini e analisi lavorano sulla stessa referenza." },
       { q: "Devo attivare tutte le capacità dall'inizio?", a: "No. Le capacità si attivano progressivamente in base al piano e alle esigenze. Puoi iniziare con pricing e diagnostica." },
       { q: "Core funziona senza l'Intelligenza Dinamica?", a: "Sì. Core genera valore da solo come strumento di analisi e pianificazione." },
       { q: "Posso usare Winerim Core per più locali?", a: "Sì. Include diagnostica multi-locale per confrontare performance tra sedi e rilevare deviazioni o best practice replicabili." },
@@ -364,21 +365,21 @@ const i18n: I18nMap<CoreI18n> = {
     ],
   },
   fr: {
-    seo_title: "Winerim Core — Moteur analytique pour cartes des vins | Winerim",
-    seo_desc: "Winerim Core relie pricing, marge, stock, rentabilité, achats, benchmark et architecture de carte dans une seule couche analytique.",
+    seo_title: "Winerim Core — Carte, cave physique et marges | Winerim",
+    seo_desc: "Winerim Core relie carte, stock, Wine Cellar, Wine Lockers, coûts, marges et rotation dans un socle opérationnel unique.",
     bc_product: "Produit",
     eyebrow: "WINERIM CORE",
-    h1: "Le moteur analytique qui transforme votre carte en système de décision",
-    subtitle: "Winerim Core relie pricing, marge, stock, rentabilité, achats, benchmark et architecture de carte dans une seule couche analytique.",
+    h1: "Le socle opérationnel du vin : carte, cave physique et décision",
+    subtitle: "Winerim Core relie carte, stock, Wine Cellar, Wine Lockers, coûts, marges, rotation et architecture dans une source de vérité unique.",
     support_text: "Ce n'est pas une collection d'outils séparés. C'est la logique qui permet de comprendre ce qui se passe, ce qui ne fonctionne pas et ce qu'il convient de faire.",
     cta_primary: "Voir Winerim Core",
     cta_secondary: "Voir le lien avec l'Intelligence Dynamique",
 
     what_eyebrow: "Qu'est-ce que Winerim Core",
-    what_title: "L'infrastructure analytique qui ",
-    what_title_hl: "pense pour vous",
-    what_p1: "Winerim Core est le moteur d'analyse et de diagnostic qui alimente chaque décision sur votre carte des vins. Ce n'est pas un menu digital. Ce n'est pas un tableau de bord de métriques. C'est une couche analytique profonde composée de modules interconnectés qui croisent ventes, stock, marges, pricing, benchmarks et contexte opérationnel pour vous donner une vision complète — et actionnable — de la performance de votre activité vin.",
-    what_p2: "Tandis que l'Intelligence Dynamique agit en temps réel en adaptant la carte au contexte, Winerim Core est celui qui analyse, diagnostique et recommande. C'est le socle sur lequel se construisent les décisions tactiques.",
+    what_title: "La source de vérité qui relie ",
+    what_title_hl: "carte et cave",
+    what_p1: "Winerim Core maintient une référence opérationnelle unique pour ce que voit le client et ce qui existe physiquement en cave. Il relie profils, prix, formats et disponibilité au stock, aux mouvements, aux emplacements Wine Cellar et aux bouteilles privées dans Wine Lockers.",
+    what_p2: "Sur ce même socle, Core croise ventes, coûts, marges, rotation, documents et contexte opérationnel. Les RIMs détectent les opportunités et SAVia prépare une explication et un aperçu avant validation humaine.",
     what_pillars: [
       { label: "Analyse", desc: "Croise données de vente, stock, marge et contexte opérationnel dans une vue unifiée." },
       { label: "Diagnostique", desc: "Détecte inefficacités, opportunités manquées et déséquilibres avant qu'ils n'impactent le chiffre d'affaires." },
@@ -436,7 +437,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Questions fréquentes sur Winerim Core",
     faqs: [
       { q: "Quelle différence entre Winerim Core et l'Intelligence Dynamique ?", a: "Core est la couche d'analyse : diagnostique, mesure et recommande. L'Intelligence Dynamique est la couche d'action : applique les diagnostics en temps réel sur la carte visible." },
-      { q: "Core est-il une carte digitale ?", a: "Non. Winerim Core est un moteur analytique. La carte digitale est le support vu par le client, mais derrière il y a un système de décision qui optimise l'affichage." },
+      { q: "Core inclut-il la carte digitale ?", a: "Oui. Core est le socle opérationnel de la carte digitale et de la cave physique. Carte, Wine Cellar, Wine Lockers, stock, marges et analyses travaillent sur la même référence." },
       { q: "Faut-il activer toutes les capacités dès le départ ?", a: "Non. Les capacités s'activent progressivement selon votre plan et vos besoins." },
       { q: "Core fonctionne-t-il sans l'Intelligence Dynamique ?", a: "Oui. Core génère de la valeur en tant qu'outil d'analyse et de planification autonome." },
       { q: "Puis-je utiliser Core pour plusieurs sites ?", a: "Oui. Il inclut un diagnostic multi-site pour comparer les performances entre établissements et détecter les écarts." },
@@ -454,21 +455,21 @@ const i18n: I18nMap<CoreI18n> = {
     ],
   },
   de: {
-    seo_title: "Winerim Core — Analyse-Engine für Weinkarten | Winerim",
-    seo_desc: "Winerim Core verbindet Pricing, Marge, Bestand, Rentabilität, Einkauf, Benchmark und Kartenarchitektur in einer einzigen analytischen Schicht.",
+    seo_title: "Winerim Core — Karte, physischer Keller und Margen | Winerim",
+    seo_desc: "Winerim Core verbindet Karte, Bestand, Wine Cellar, Wine Lockers, Kosten, Margen und Rotation in einer operativen Basis.",
     bc_product: "Produkt",
     eyebrow: "WINERIM CORE",
-    h1: "Die Analyse-Engine, die Ihre Weinkarte in ein Entscheidungssystem verwandelt",
-    subtitle: "Winerim Core verbindet Pricing, Marge, Bestand, Rentabilität, Einkauf, Benchmark und Kartenarchitektur in einer einzigen analytischen Schicht.",
+    h1: "Die operative Weinbasis: Karte, physischer Keller und Entscheidung",
+    subtitle: "Winerim Core verbindet Karte, Bestand, Wine Cellar, Wine Lockers, Kosten, Margen, Rotation und Kartenarchitektur in einer Datenbasis.",
     support_text: "Es ist keine Sammlung einzelner Tools. Es ist die Logik, die Ihnen erlaubt zu verstehen, was gerade passiert, was nicht funktioniert und was zu tun ist.",
     cta_primary: "Winerim Core ansehen",
     cta_secondary: "So verbindet es sich mit Dynamic Intelligence",
 
     what_eyebrow: "Was ist Winerim Core",
-    what_title: "Die analytische Infrastruktur, die ",
-    what_title_hl: "für Sie mitdenkt",
-    what_p1: "Winerim Core ist die Analyse- und Diagnose-Engine, die alle Entscheidungen zu Ihrer Weinkarte speist. Es ist keine digitale Karte. Es ist kein Kennzahlen-Dashboard. Es ist eine tiefe analytische Schicht aus zahlreichen vernetzten Modulen, die Daten zu Verkauf, Bestand, Marge, Pricing, Benchmark und Betriebskontext kreuzen, um Ihnen einen vollständigen – und umsetzbaren – Blick auf die Performance Ihres Weingeschäfts zu geben.",
-    what_p2: "Während die Dynamic Intelligence in Echtzeit agiert und die Karte an den Kontext anpasst, analysiert, diagnostiziert und empfiehlt Winerim Core. Es ist die Grundlage, auf der taktische Entscheidungen aufbauen.",
+    what_title: "Die Datenbasis, die ",
+    what_title_hl: "Karte und Keller verbindet",
+    what_p1: "Winerim Core verwaltet eine operative Referenz für das, was Gäste sehen, und das, was physisch im Keller liegt. Profile, Preise, Formate und Verfügbarkeit sind mit Bestand, Bewegungen, Wine-Cellar-Positionen und privaten Flaschen in Wine Lockers verbunden.",
+    what_p2: "Auf derselben Basis verbindet Core Verkauf, Kosten, Margen, Rotation, Dokumente und Betriebskontext. RIMs erkennen Chancen und SAVia bereitet Erklärung und Vorschau für die menschliche Freigabe vor.",
     what_pillars: [
       { label: "Analysiert", desc: "Kreuzt Verkaufs-, Bestands-, Margen- und Kontextdaten in einer einheitlichen Sicht." },
       { label: "Diagnostiziert", desc: "Erkennt Ineffizienzen, verpasste Chancen und Ungleichgewichte, bevor sie an der Kasse spürbar werden." },
@@ -526,7 +527,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Häufige Fragen zu Winerim Core",
     faqs: [
       { q: "Was ist der Unterschied zwischen Winerim Core und Dynamic Intelligence?", a: "Core ist die Analyseebene: sie diagnostiziert, misst und empfiehlt. Dynamic Intelligence ist die Handlungsebene: sie wendet diese Diagnosen in Echtzeit auf der für den Gast sichtbaren Karte an." },
-      { q: "Ist Core eine digitale Weinkarte?", a: "Nein. Winerim Core ist eine Analyse-Engine. Die digitale Karte ist das Medium, das der Gast sieht; dahinter arbeitet ein Entscheidungssystem, das optimiert, was gezeigt wird, wie es sortiert und zu welchem Preis." },
+      { q: "Enthält Core die digitale Weinkarte?", a: "Ja. Core ist die operative Basis für digitale Karte und physischen Keller. Karte, Wine Cellar, Wine Lockers, Bestand, Margen und Analyse arbeiten mit derselben Referenz." },
       { q: "Muss ich alle Fähigkeiten von Anfang an aktivieren?", a: "Nein. Die Fähigkeiten werden schrittweise nach Ihrem Plan und Bedarf aktiviert. Sie können mit Pricing und Diagnose starten und später Bestand, Benchmark oder Simulation ergänzen." },
       { q: "Funktioniert Core ohne Dynamic Intelligence?", a: "Ja. Core liefert eigenständigen Wert als Analyse- und Planungstool. Dynamic Intelligence ist eine zusätzliche Schicht, die Aktionen automatisiert, aber Core ist autonom." },
       { q: "Kann ich Winerim Core für mehrere Standorte nutzen?", a: "Ja. Enthält eine Multi-Standort-Diagnose, um die Performance zwischen Betrieben einer Gruppe zu vergleichen und Abweichungen oder replizierbare Best Practices zu erkennen." },
@@ -544,21 +545,21 @@ const i18n: I18nMap<CoreI18n> = {
     ],
   },
   pt: {
-    seo_title: "Winerim Core — Motor analítico para cartas de vinhos | Winerim",
-    seo_desc: "O Winerim Core liga pricing, margem, stock, rentabilidade, compras, benchmark e arquitetura de carta numa única camada analítica.",
+    seo_title: "Winerim Core — Carta, garrafeira física e margens | Winerim",
+    seo_desc: "O Winerim Core liga carta, stock, Wine Cellar, Wine Lockers, custos, margens e rotação numa única base operacional.",
     bc_product: "Produto",
     eyebrow: "WINERIM CORE",
-    h1: "O motor analítico que transforma a sua carta num sistema de decisão",
-    subtitle: "O Winerim Core liga pricing, margem, stock, rentabilidade, compras, benchmark e arquitetura de carta numa única camada analítica.",
+    h1: "A base operacional do vinho: carta, garrafeira física e decisão",
+    subtitle: "O Winerim Core liga carta, stock, Wine Cellar, Wine Lockers, custos, margens, rotação e arquitetura numa fonte de verdade única.",
     support_text: "Não é uma coleção de ferramentas soltas. É a lógica que permite perceber o que está a acontecer, o que não funciona e o que convém fazer.",
     cta_primary: "Quero ver o Winerim Core",
     cta_secondary: "Ver como se liga à Inteligência Dinâmica",
 
     what_eyebrow: "O que é o Winerim Core",
-    what_title: "A infraestrutura analítica que ",
-    what_title_hl: "pensa por si",
-    what_p1: "O Winerim Core é o motor de análise e diagnóstico que alimenta todas as decisões sobre a sua carta de vinhos. Não é uma carta digital. Não é um dashboard de métricas. É uma camada analítica profunda composta por vários módulos interligados que cruzam dados de vendas, stock, margens, pricing, benchmark e contexto operacional para lhe dar uma visão completa — e acionável — do desempenho do seu negócio de vinho.",
-    what_p2: "Enquanto a Inteligência Dinâmica atua em tempo real adaptando a carta ao contexto, o Winerim Core analisa, diagnostica e recomenda. É a base sobre a qual se constroem as decisões táticas.",
+    what_title: "A fonte de verdade que liga ",
+    what_title_hl: "carta e garrafeira",
+    what_p1: "O Winerim Core mantém uma referência operacional para o que o cliente vê e o que existe fisicamente na garrafeira. Liga perfis, preços, formatos e disponibilidade a stock, movimentos, posições Wine Cellar e garrafas privadas em Wine Lockers.",
+    what_p2: "Na mesma base, o Core cruza vendas, custos, margens, rotação, documentos e contexto operacional. Os RIMs detetam oportunidades e o SAVia prepara explicação e prévia para aprovação humana.",
     what_pillars: [
       { label: "Analisa", desc: "Cruza dados de venda, stock, margem e contexto operacional numa vista unificada." },
       { label: "Diagnostica", desc: "Deteta ineficiências, oportunidades perdidas e desequilíbrios antes de se notarem na caixa." },
@@ -616,7 +617,7 @@ const i18n: I18nMap<CoreI18n> = {
     faq_title: "Perguntas frequentes sobre o Winerim Core",
     faqs: [
       { q: "Qual é a diferença entre o Winerim Core e a Inteligência Dinâmica?", a: "O Core é a camada de análise: diagnostica, mede e recomenda. A Inteligência Dinâmica é a camada de ação: aplica esses diagnósticos em tempo real sobre a carta visível ao cliente." },
-      { q: "O Core é uma carta digital?", a: "Não. O Winerim Core é um motor analítico. A carta digital é o suporte que o cliente vê, mas por detrás há um sistema de decisão que otimiza o que se mostra, como se ordena e a que preço." },
+      { q: "O Core inclui a carta digital?", a: "Sim. O Core é a base operacional da carta digital e da garrafeira física. Carta, Wine Cellar, Wine Lockers, stock, margens e análise trabalham sobre a mesma referência." },
       { q: "Tenho de ativar todas as capacidades desde o início?", a: "Não. As capacidades ativam-se progressivamente consoante o seu plano e necessidades. Pode começar com pricing e diagnóstico e ampliar a stock, benchmark ou simulação quando precisar." },
       { q: "O Core funciona sem a Inteligência Dinâmica?", a: "Sim. O Core gera valor por si só como ferramenta de análise e planeamento. A Inteligência Dinâmica é uma camada adicional que automatiza ações, mas o Core é autónomo." },
       { q: "Posso usar o Winerim Core em vários locais?", a: "Sim. Inclui diagnóstico multi-local que permite comparar desempenho entre estabelecimentos de um mesmo grupo e detetar desvios ou melhores práticas replicáveis." },
@@ -735,8 +736,10 @@ const WinerimCore = () => {
         </div>
       </section>
 
+      <CoreScopeSection />
+
       {/* ─── 2. SIX CAPABILITIES ─── */}
-      <section className="py-20 md:py-28 bg-gradient-card border-y border-border">
+      <section id="core-analytics" className="py-20 md:py-28 bg-gradient-card border-y border-border">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <ScrollReveal className="text-center mb-16">
             <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-accent mb-4 block">{t.cap_eyebrow}</span>

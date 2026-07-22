@@ -468,7 +468,7 @@ describe("wine library SEO surface", () => {
     expect(llms).toContain("SAVia: https://winerim.wine/producto/savia");
     expect(llmsFull).toContain("CloudRIM: an operational document cloud");
     expect(llmsFull).toContain("SAVia: a conversational Winerim agent");
-    expect(home).toContain("CloudRimSaviaSection");
+    expect(home).toContain("OperationalCapabilitiesTeaser");
     expect(features).toContain("CloudRIM");
     expect(features).toContain("SAVia");
     expect(integrations).toContain("cloudTitle");
@@ -622,8 +622,8 @@ describe("wine library SEO surface", () => {
     expect(app).toContain('path="/terminos-y-condiciones-del-contrato"');
     expect(footer).toContain('"/politica-privacidad"');
     expect(footer).toContain('"/terminos-y-condiciones-del-contrato"');
-    expect(privacy).toContain('location.pathname === "/politica-privacidad"');
-    expect(terms).toContain('location.pathname === "/terminos-y-condiciones-del-contrato"');
+    expect(privacy).toContain('<LegalDocumentPage kind="privacy"');
+    expect(terms).toContain('<LegalDocumentPage kind="terms"');
     expect(prerender).toContain("path: '/politica-privacidad'");
     expect(prerender).toContain("path: '/terminos-y-condiciones-del-contrato'");
     expect(prerender).toContain("localizedStaticUrl('/politica-privacidad')");

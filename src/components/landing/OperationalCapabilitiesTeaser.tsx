@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { Cloud, MessageSquare, MapPinned, LockKeyhole, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BrainCircuit,
+  Cloud,
+  MessageSquareText,
+  ShoppingCart,
+  Wine,
+} from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n, type I18nMap } from "@/i18n/types";
@@ -10,135 +18,134 @@ type Copy = {
   subtitle: string;
   ctaPrimary: string;
   ctaSecondary: string;
-  cards: { title: string; desc: string; more: string }[];
+  cards: { title: string; desc: string; more: string; href: string }[];
 };
 
 const i18n: I18nMap<Copy> = {
   es: {
-    eyebrow: "Capacidades operativas",
-    title: "Una plataforma para carta, stock, compras y bodega",
-    subtitle: "CloudRIM recoge datos, SAVia los convierte en respuestas y los módulos de bodega mantienen ubicaciones físicas y lockers privados bajo control.",
+    eyebrow: "Sistema operativo del vino",
+    title: "Seis capacidades, una sola operacion",
+    subtitle: "Winerim conecta carta, bodega, documentos, rentabilidad, compras y decisiones sin obligar al equipo a trabajar en sistemas separados.",
     ctaPrimary: "Ver funcionalidades",
     ctaSecondary: "Solicitar demo",
     cards: [
-      { title: "CloudRIM", desc: "Cartas, ventas, albaranes, facturas, stock y tarifas entran por los canales que ya usa el restaurante.", more: "Descubrir CloudRIM" },
-      { title: "SAVia", desc: "Pregunta por carta, ventas, stock, costes, márgenes y oportunidades sin perderte en dashboards.", more: "Descubrir SAVia" },
-      { title: "Wine Cellar", desc: "Ubicación física de botellas por zonas, botelleros, estanterías y posiciones conectadas al stock.", more: "Ver Wine Cellar" },
-      { title: "Wine Lockers", desc: "Gestión de vinos privados para clientes, socios, clubes y experiencias premium.", more: "Ver Wine Lockers" },
+      { title: "Winerim Core", desc: "Carta, stock, Wine Cellar y Wine Lockers en una fuente de verdad.", more: "Ver Core", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Recibe y clasifica cartas, albaranes, facturas, ventas y tarifas.", more: "Ver CloudRIM", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Explica margen real, erosion, rotacion y capital inmovilizado.", more: "Ver margenes", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Compara tarifas y prepara reposicion, negociacion y compra.", more: "Ver Supply", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Motores especializados convierten senales operativas en propuestas.", more: "Ver RIMs", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Permite preguntar, comparar y preparar decisiones con evidencia.", more: "Ver SAVia", href: "/producto/savia" },
     ],
   },
   en: {
-    eyebrow: "Operational capabilities",
-    title: "One platform for wine list, stock, purchasing and cellar",
-    subtitle: "CloudRIM gathers the data, SAVia turns it into answers, and the cellar modules keep physical locations and private lockers under control.",
+    eyebrow: "Wine operating system",
+    title: "Six capabilities, one operation",
+    subtitle: "Winerim connects the wine list, cellar, documents, profitability, purchasing and decisions without forcing teams into separate systems.",
     ctaPrimary: "See features",
     ctaSecondary: "Request a demo",
     cards: [
-      { title: "CloudRIM", desc: "Wine lists, sales, delivery notes, invoices, stock and price lists come in through the channels the restaurant already uses.", more: "Discover CloudRIM" },
-      { title: "SAVia", desc: "Ask about wine list, sales, stock, costs, margins and opportunities without getting lost in dashboards.", more: "Discover SAVia" },
-      { title: "Wine Cellar", desc: "Physical bottle location by zones, racks, shelves and positions connected to real stock.", more: "See Wine Cellar" },
-      { title: "Wine Lockers", desc: "Private wine management for guests, members, clubs and premium experiences.", more: "See Wine Lockers" },
-    ],
-  },
-  it: {
-    eyebrow: "Capacità operative",
-    title: "Una piattaforma per carta, stock, acquisti e cantina",
-    subtitle: "CloudRIM raccoglie i dati, SAVia li trasforma in risposte e i moduli di cantina mantengono sotto controllo posizioni fisiche e locker privati.",
-    ctaPrimary: "Vedi le funzionalità",
-    ctaSecondary: "Richiedi una demo",
-    cards: [
-      { title: "CloudRIM", desc: "Carte, vendite, bolle, fatture, stock e listini entrano dai canali già usati dal ristorante.", more: "Scopri CloudRIM" },
-      { title: "SAVia", desc: "Chiedi di carta, vendite, stock, costi, margini e opportunità senza perderti nei dashboard.", more: "Scopri SAVia" },
-      { title: "Wine Cellar", desc: "Posizione fisica delle bottiglie per zone, scaffali, ripiani e posizioni collegate allo stock reale.", more: "Vedi Wine Cellar" },
-      { title: "Wine Lockers", desc: "Gestione di vini privati per clienti, soci, club ed esperienze premium.", more: "Vedi Wine Lockers" },
+      { title: "Winerim Core", desc: "List, stock, Wine Cellar and Wine Lockers in one source of truth.", more: "See Core", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Receives and classifies lists, delivery notes, invoices, sales and catalogues.", more: "See CloudRIM", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Explains true margin, erosion, rotation and tied-up capital.", more: "See margins", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Compares catalogues and prepares replenishment, negotiation and purchasing.", more: "See Supply", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Specialist engines turn operating signals into proposals.", more: "See RIMs", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Lets teams ask, compare and prepare decisions with evidence.", more: "See SAVia", href: "/producto/savia" },
     ],
   },
   fr: {
-    eyebrow: "Capacités opérationnelles",
-    title: "Une plateforme pour la carte, le stock, les achats et la cave",
-    subtitle: "CloudRIM collecte les données, SAVia les transforme en réponses et les modules de cave gardent sous contrôle les emplacements physiques et les lockers privés.",
-    ctaPrimary: "Voir les fonctionnalités",
-    ctaSecondary: "Demander une démo",
+    eyebrow: "Systeme d'exploitation du vin",
+    title: "Six capacites, une seule operation",
+    subtitle: "Winerim relie la carte, la cave, les documents, la rentabilite, les achats et les decisions sans multiplier les systemes.",
+    ctaPrimary: "Voir les fonctionnalites",
+    ctaSecondary: "Demander une demo",
     cards: [
-      { title: "CloudRIM", desc: "Cartes, ventes, bons de livraison, factures, stock et tarifs arrivent par les canaux déjà utilisés par le restaurant.", more: "Découvrir CloudRIM" },
-      { title: "SAVia", desc: "Posez des questions sur la carte, les ventes, le stock, les coûts, les marges et les opportunités sans vous perdre dans les tableaux de bord.", more: "Découvrir SAVia" },
-      { title: "Wine Cellar", desc: "Emplacement physique des bouteilles par zones, casiers, étagères et positions connectés au stock réel.", more: "Voir Wine Cellar" },
-      { title: "Wine Lockers", desc: "Gestion de vins privés pour clients, membres, clubs et expériences premium.", more: "Voir Wine Lockers" },
+      { title: "Winerim Core", desc: "Carte, stock, Wine Cellar et Wine Lockers dans une source unique.", more: "Voir Core", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Recoit et classe cartes, bons, factures, ventes et tarifs.", more: "Voir CloudRIM", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Explique marge reelle, erosion, rotation et capital immobilise.", more: "Voir les marges", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Compare les tarifs et prepare reassort, negociation et achat.", more: "Voir Supply", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Des moteurs specialises transforment les signaux en propositions.", more: "Voir RIMs", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Permet d'interroger, comparer et preparer des decisions etayees.", more: "Voir SAVia", href: "/producto/savia" },
+    ],
+  },
+  it: {
+    eyebrow: "Sistema operativo del vino",
+    title: "Sei capacita, un'unica operazione",
+    subtitle: "Winerim collega carta, cantina, documenti, redditivita, acquisti e decisioni senza imporre sistemi separati.",
+    ctaPrimary: "Vedi le funzionalita",
+    ctaSecondary: "Richiedi una demo",
+    cards: [
+      { title: "Winerim Core", desc: "Carta, stock, Wine Cellar e Wine Lockers in un'unica fonte.", more: "Vedi Core", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Riceve e classifica carte, bolle, fatture, vendite e listini.", more: "Vedi CloudRIM", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Spiega margine reale, erosione, rotazione e capitale immobilizzato.", more: "Vedi i margini", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Confronta listini e prepara riordino, negoziazione e acquisto.", more: "Vedi Supply", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Motori specializzati trasformano segnali operativi in proposte.", more: "Vedi RIMs", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Permette di chiedere, confrontare e preparare decisioni con evidenze.", more: "Vedi SAVia", href: "/producto/savia" },
     ],
   },
   de: {
-    eyebrow: "Operative Fähigkeiten",
-    title: "Eine Plattform für Weinkarte, Bestand, Einkauf und Keller",
-    subtitle: "CloudRIM sammelt die Daten, SAVia macht daraus Antworten, und die Kellermodule halten physische Standorte und private Lockers unter Kontrolle.",
+    eyebrow: "Betriebssystem fur Wein",
+    title: "Sechs Fahigkeiten, ein Betrieb",
+    subtitle: "Winerim verbindet Karte, Keller, Dokumente, Rentabilitat, Einkauf und Entscheidungen, ohne getrennte Systeme zu erzwingen.",
     ctaPrimary: "Funktionen ansehen",
     ctaSecondary: "Demo anfragen",
     cards: [
-      { title: "CloudRIM", desc: "Weinkarten, Verkäufe, Lieferscheine, Rechnungen, Bestand und Preislisten kommen über die Kanäle, die das Restaurant bereits nutzt.", more: "CloudRIM entdecken" },
-      { title: "SAVia", desc: "Fragen zu Weinkarte, Verkäufen, Bestand, Kosten, Margen und Chancen stellen, ohne sich in Dashboards zu verlieren.", more: "SAVia entdecken" },
-      { title: "Wine Cellar", desc: "Physische Flaschenposition nach Zonen, Regalen, Fächern und Positionen, verbunden mit dem realen Bestand.", more: "Wine Cellar ansehen" },
-      { title: "Wine Lockers", desc: "Verwaltung privater Weine für Gäste, Mitglieder, Clubs und Premium-Erlebnisse.", more: "Wine Lockers ansehen" },
+      { title: "Winerim Core", desc: "Karte, Bestand, Wine Cellar und Wine Lockers in einer Datenbasis.", more: "Core ansehen", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Empfangt und klassifiziert Karten, Belege, Rechnungen, Verkauf und Preise.", more: "CloudRIM ansehen", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Erklart echte Marge, Erosion, Rotation und gebundenes Kapital.", more: "Margen ansehen", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Vergleicht Preise und bereitet Nachkauf, Verhandlung und Einkauf vor.", more: "Supply ansehen", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Spezialisierte Engines verwandeln Betriebssignale in Vorschlage.", more: "RIMs ansehen", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Ermoglicht Fragen, Vergleiche und belegte Entscheidungsvorbereitung.", more: "SAVia ansehen", href: "/producto/savia" },
     ],
   },
   pt: {
-    eyebrow: "Capacidades operacionais",
-    title: "Uma plataforma para carta, stock, compras e garrafeira",
-    subtitle: "O CloudRIM recolhe os dados, o SAVia transforma-os em respostas e os módulos de garrafeira mantêm sob controlo localizações físicas e lockers privados.",
+    eyebrow: "Sistema operativo do vinho",
+    title: "Seis capacidades, uma unica operacao",
+    subtitle: "A Winerim liga carta, garrafeira, documentos, rentabilidade, compras e decisoes sem obrigar a equipa a usar sistemas separados.",
     ctaPrimary: "Ver funcionalidades",
     ctaSecondary: "Pedir demo",
     cards: [
-      { title: "CloudRIM", desc: "Cartas, vendas, guias, faturas, stock e tabelas entram pelos canais que o restaurante já usa.", more: "Descobrir CloudRIM" },
-      { title: "SAVia", desc: "Pergunte por carta, vendas, stock, custos, margens e oportunidades sem se perder em dashboards.", more: "Descobrir SAVia" },
-      { title: "Wine Cellar", desc: "Localização física das garrafas por zonas, garrafeiras, prateleiras e posições ligadas ao stock real.", more: "Ver Wine Cellar" },
-      { title: "Wine Lockers", desc: "Gestão de vinhos privados para clientes, sócios, clubes e experiências premium.", more: "Ver Wine Lockers" },
+      { title: "Winerim Core", desc: "Carta, stock, Wine Cellar e Wine Lockers numa fonte de verdade.", more: "Ver Core", href: "/producto/winerim-core" },
+      { title: "CloudRIM", desc: "Recebe e classifica cartas, guias, faturas, vendas e tabelas.", more: "Ver CloudRIM", href: "/producto/cloudrim" },
+      { title: "Margins", desc: "Explica margem real, erosao, rotacao e capital imobilizado.", more: "Ver margens", href: "/producto/winerim-core#core-margins" },
+      { title: "Supply", desc: "Compara tabelas e prepara reposicao, negociacao e compra.", more: "Ver Supply", href: "/producto/winerim-supply" },
+      { title: "RIMs™", desc: "Motores especializados transformam sinais operacionais em propostas.", more: "Ver RIMs", href: "/producto/inteligencia-dinamica" },
+      { title: "SAVia", desc: "Permite perguntar, comparar e preparar decisoes com evidencia.", more: "Ver SAVia", href: "/producto/savia" },
     ],
   },
 };
 
-const ICONS = [Cloud, MessageSquare, MapPinned, LockKeyhole];
-const HREFS = [
-  "/producto/cloudrim",
-  "/producto/savia",
-  "/funcionalidades#feat-3",
-  "/funcionalidades#feat-4",
-];
+const icons = [Wine, Cloud, BarChart3, ShoppingCart, BrainCircuit, MessageSquareText];
 
 const OperationalCapabilitiesTeaser = () => {
   const { lang, localePath } = useLanguage();
   const t = getI18n(i18n, lang) || i18n.es;
 
   return (
-    <section className="py-16 md:py-20 bg-background">
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
+    <section className="border-y border-border bg-background py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
         <ScrollReveal>
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-3">{t.eyebrow}</p>
-            <h2 className="text-3xl md:text-4xl font-serif font-semibold text-foreground mb-4">{t.title}</h2>
-            <p className="text-base md:text-lg text-muted-foreground">{t.subtitle}</p>
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t.eyebrow}</p>
+            <h2 className="mb-4 font-serif text-3xl font-semibold text-foreground md:text-4xl">{t.title}</h2>
+            <p className="text-base text-muted-foreground md:text-lg">{t.subtitle}</p>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-          {t.cards.map((card, i) => {
-            const Icon = ICONS[i];
-            const to = localePath(HREFS[i]);
+        <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {t.cards.map((card, index) => {
+            const Icon = icons[index];
             return (
-              <ScrollReveal key={card.title} delay={i * 80}>
+              <ScrollReveal key={card.title} delay={index * 60}>
                 <Link
-                  to={to}
-                  className="group block h-full rounded-xl border border-border bg-card p-6 transition hover:border-primary hover:shadow-md"
+                  to={localePath(card.href)}
+                  className="group flex h-full min-h-[190px] flex-col border border-border bg-card p-5 transition hover:border-primary"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="shrink-0 rounded-lg bg-primary/10 p-2.5 text-primary">
-                      <Icon size={22} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-1.5">{card.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-3">{card.desc}</p>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
-                        {card.more} <ArrowRight size={14} />
-                      </span>
-                    </div>
-                  </div>
+                  <Icon className="text-primary" size={21} />
+                  <h3 className="mt-4 text-lg font-semibold text-foreground">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-primary transition-all group-hover:gap-2">
+                    {card.more} <ArrowRight size={14} />
+                  </span>
                 </Link>
               </ScrollReveal>
             );
@@ -146,16 +153,10 @@ const OperationalCapabilitiesTeaser = () => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Link
-            to={localePath("/funcionalidades")}
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition"
-          >
+          <Link to={localePath("/funcionalidades")} className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
             {t.ctaPrimary} <ArrowRight size={16} />
           </Link>
-          <Link
-            to={localePath("/demo")}
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary transition"
-          >
+          <Link to={localePath("/demo")} className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary">
             {t.ctaSecondary}
           </Link>
         </div>

@@ -19,6 +19,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
+import cloudrimInbox from "@/assets/feature-cloudrim-inbox.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n, type I18nMap } from "@/i18n/types";
 import { CANONICAL_DOMAIN } from "@/seo/config";
@@ -34,6 +35,8 @@ type CloudRimCopy = {
   primaryCta: string;
   secondaryCta: string;
   trustLine: string;
+  screenshotAlt: string;
+  screenshotCaption: string;
   inputLabel: string;
   inputDesc: string;
   problemKicker: string;
@@ -69,6 +72,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "Probar CloudRIM con mi restaurante",
     secondaryCta: "Ver integraciones",
     trustLine: "Portal, email, carpeta compartida, FTP/SFTP, API, TPV o enlace de proveedor: CloudRIM se adapta al punto donde ya vive la informacion.",
+    screenshotAlt: "Bandeja operativa de documentos de CloudRIM",
+    screenshotCaption: "Una sola bandeja para recibir, clasificar y seguir los documentos que alimentan Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Cartas, ventas, stock, tarifas, albaranes y facturas",
     problemKicker: "Operativa real",
@@ -135,6 +140,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "Try CloudRIM with my restaurant",
     secondaryCta: "See integrations",
     trustLine: "Portal, email, shared folder, FTP/SFTP, API or provider: CloudRIM adapts to where your information already lives.",
+    screenshotAlt: "CloudRIM operating document inbox",
+    screenshotCaption: "One inbox to receive, classify and track the documents that feed Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Lists, sales, stock, tariffs, delivery notes and invoices",
     problemKicker: "Real operations",
@@ -183,6 +190,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "Provare CloudRIM con il mio ristorante",
     secondaryCta: "Vedere integrazioni",
     trustLine: "Portale, email, cartella condivisa, FTP/SFTP, API o fornitore: CloudRIM si adatta a dove vivono gia i dati.",
+    screenshotAlt: "Inbox operativa dei documenti CloudRIM",
+    screenshotCaption: "Un'unica inbox per ricevere, classificare e seguire i documenti che alimentano Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Carte, vendite, stock, tariffe, documenti e fatture",
     problemKicker: "Operativita reale",
@@ -223,6 +232,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "Tester CloudRIM avec mon restaurant",
     secondaryCta: "Voir les integrations",
     trustLine: "Portail, email, dossier partage, FTP/SFTP, API ou fournisseur : CloudRIM s'adapte aux habitudes existantes.",
+    screenshotAlt: "Boite operationnelle de documents CloudRIM",
+    screenshotCaption: "Une seule boite pour recevoir, classer et suivre les documents qui alimentent Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Cartes, ventes, stock, tarifs, bons et factures",
     problemKicker: "Operation reelle",
@@ -263,6 +274,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "CloudRIM mit meinem Restaurant testen",
     secondaryCta: "Integrationen ansehen",
     trustLine: "Portal, E-Mail, geteilter Ordner, FTP/SFTP, API oder Lieferant: CloudRIM passt sich an bestehende Routinen an.",
+    screenshotAlt: "Operativer Dokumenteneingang von CloudRIM",
+    screenshotCaption: "Ein Eingang zum Empfangen, Klassifizieren und Verfolgen aller Dokumente fur Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Karten, Verkaeufe, Bestand, Tarife, Lieferscheine und Rechnungen",
     problemKicker: "Realer Betrieb",
@@ -303,6 +316,8 @@ const copy: I18nMap<CloudRimCopy> = {
     primaryCta: "Testar CloudRIM no meu restaurante",
     secondaryCta: "Ver integrações",
     trustLine: "Portal, email, pasta partilhada, FTP/SFTP, API ou fornecedor: CloudRIM adapta-se ao local onde a informação ja vive.",
+    screenshotAlt: "Caixa operacional de documentos do CloudRIM",
+    screenshotCaption: "Uma unica caixa para receber, classificar e acompanhar os documentos que alimentam a Winerim.",
     inputLabel: "Input cloud",
     inputDesc: "Cartas, vendas, stock, tabelas, guias e faturas",
     problemKicker: "Operacao real",
@@ -426,6 +441,24 @@ const CloudRim = () => {
                 </div>
               </ScrollReveal>
             </div>
+          </div>
+        </section>
+
+        <section className="px-6 pb-20 md:pb-28">
+          <div className="max-w-6xl mx-auto">
+            <ScrollReveal>
+              <figure>
+                <div className="aspect-[16/9] overflow-hidden rounded-xl border border-border bg-[#171817] shadow-xl shadow-black/10">
+                  <img
+                    src={cloudrimInbox}
+                    alt={t.screenshotAlt}
+                    loading="eager"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <figcaption className="mt-4 text-center text-sm text-muted-foreground">{t.screenshotCaption}</figcaption>
+              </figure>
+            </ScrollReveal>
           </div>
         </section>
 

@@ -13,6 +13,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import DynamicSchemaMarkup from "@/components/seo/DynamicSchemaMarkup";
+import ProductArchitectureSection from "@/components/landing/ProductArchitectureSection";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n } from "@/i18n/types";
 import type { I18nMap } from "@/i18n/types";
@@ -206,21 +207,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar y mapa de bodega",
         desc: "Ubicación física de botellas dentro de la bodega: zonas, botelleros, estanterías y posiciones conectadas al stock digital. Pensado para restaurantes, hoteles y grupos donde encontrar una referencia rápido cambia el servicio.",
         benefits: ["Mapa visual de bodega por zonas y posiciones", "Localización rápida de referencias durante el servicio", "Menos dependencia de memoria, notas internas o recuentos largos", "Ideal para bodegas grandes, multicava o equipos con rotación"],
-        linkLabel: "Ver Winerim Core", linkHref: "/producto/winerim-core",
+        linkLabel: "Ver Core Bodega", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Mapa de bodega Wine Cellar" : "Stock conectado al mapa de bodega" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Gestión de lockers privados para clientes, socios o clubes de vino. Controla qué vinos tiene cada cliente, cuántas botellas quedan, qué se ha pedido y el historial de consumo.",
         benefits: ["Ficha privada por cliente o socio", "Control de vinos guardados, botellas disponibles y pedidos", "Historial de consumo y solicitudes de reposición", "Experiencia premium para clubes, hoteles, parrillas y restaurantes con membresía"],
-        linkLabel: "Solicitar demo", linkHref: "/demo",
+        linkLabel: "Ver Wine Lockers en Core", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumen de Wine Lockers" : "Area de Wine Lockers y resumen privado" })),
       },
       {
         icon: TrendingUp, title: "Pricing y análisis de márgenes",
         desc: "Simulador de precios, análisis de márgenes por referencia, detección de erosión y herramientas de pricing inteligente. Compara tu estructura de precios con benchmarks del sector y optimiza sin perder competitividad ni percepción de valor.",
         benefits: ["Análisis de margen real por referencia, categoría y rango de precio", "Simulación de escenarios de pricing antes de implementar cambios", "Detección de erosión de márgenes y sobreprecios en compras", "Benchmark de pricing frente a restaurantes comparables"],
-        linkLabel: "Calculadora de margen", linkHref: "/calculadora-margen-vino",
+        linkLabel: "Ver márgenes en Winerim Core", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Análisis de rendimiento y márgenes" : "Rotación de vinos" })),
       },
       {
@@ -353,21 +354,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar & cellar map",
         desc: "Physical bottle location inside the cellar: zones, racks, shelves and positions connected to digital stock. Built for restaurants, hotels and groups where finding the right reference quickly changes service.",
         benefits: ["Visual cellar map by zones and positions", "Fast reference location during service", "Less dependence on memory, notes or long manual counts", "Ideal for large cellars, multiple storage areas or rotating teams"],
-        linkLabel: "Explore Winerim Core", linkHref: "/producto/winerim-core",
+        linkLabel: "See Core Cellar", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Cellar map" : "Stock connected to cellar map" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Private locker management for clients, members or wine clubs. Track which wines each client stores, how many bottles remain, what has been requested and the consumption history.",
         benefits: ["Private profile per client or member", "Control stored wines, available bottles and requests", "Consumption history and replenishment requests", "Premium experience for clubs, hotels, grills and membership restaurants"],
-        linkLabel: "Request demo", linkHref: "/demo",
+        linkLabel: "See Wine Lockers in Core", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers summary" : "Wine Lockers area and private summary" })),
       },
       {
         icon: TrendingUp, title: "Pricing & margin analysis",
         desc: "Price simulator, per-SKU margin analysis, erosion detection and intelligent pricing tools. Compare your price structure against industry benchmarks and optimise without losing competitiveness or perceived value.",
         benefits: ["Real margin analysis by SKU, category and price range", "Pricing scenario simulation before implementation", "Margin erosion and purchase overprice detection", "Pricing benchmark against comparable restaurants"],
-        linkLabel: "Margin calculator", linkHref: "/calculadora-margen-vino",
+        linkLabel: "See margins in Winerim Core", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Performance and margin analysis" : "Wine rotation" })),
       },
       {
@@ -500,21 +501,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar e mappa cantina",
         desc: "Posizione fisica delle bottiglie in cantina: zone, scaffali, ripiani e posizioni collegati allo stock digitale. Pensato per ristoranti, hotel e gruppi dove trovare rapidamente una referenza cambia il servizio.",
         benefits: ["Mappa visiva della cantina per zone e posizioni", "Localizzazione rapida delle referenze durante il servizio", "Meno dipendenza da memoria, note interne o conteggi lunghi", "Ideale per grandi cantine, piu aree di stoccaggio o team in rotazione"],
-        linkLabel: "Esplora Winerim Core", linkHref: "/producto/winerim-core",
+        linkLabel: "Vedi Core Cantina", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Mappa Wine Cellar" : "Stock collegato alla mappa cantina" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Gestione di locker privati per clienti, soci o wine club. Controlla quali vini conserva ogni cliente, quante bottiglie restano, cosa e stato richiesto e lo storico dei consumi.",
         benefits: ["Scheda privata per cliente o socio", "Controllo di vini custoditi, bottiglie disponibili e richieste", "Storico consumi e richieste di riordino", "Esperienza premium per club, hotel, grill e ristoranti con membership"],
-        linkLabel: "Richiedere demo", linkHref: "/demo",
+        linkLabel: "Vedi Wine Lockers in Core", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Riepilogo Wine Lockers" : "Area Wine Lockers e riepilogo privato" })),
       },
       {
         icon: TrendingUp, title: "Pricing e analisi dei margini",
         desc: "Simulatore di prezzi, analisi dei margini per referenza, rilevamento dell'erosione e strumenti di pricing intelligente. Confronta la tua struttura di prezzi con benchmark del settore e ottimizza senza perdere competitività né percezione di valore.",
         benefits: ["Analisi del margine reale per referenza, categoria e fascia di prezzo", "Simulazione di scenari di pricing prima dell'implementazione", "Rilevamento di erosione dei margini e sovrapprezzo negli acquisti", "Benchmark di pricing rispetto a ristoranti comparabili"],
-        linkLabel: "Calcolatore di margine", linkHref: "/calculadora-margen-vino",
+        linkLabel: "Vedi i margini in Winerim Core", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Analisi rendimento e margini" : "Rotazione vini" })),
       },
       {
@@ -647,21 +648,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar et plan de cave",
         desc: "Emplacement physique des bouteilles dans la cave : zones, casiers, etageres et positions connectes au stock digital. Pense pour restaurants, hotels et groupes ou retrouver vite une reference change le service.",
         benefits: ["Plan visuel de cave par zones et positions", "Localisation rapide des references pendant le service", "Moins de dependance a la memoire, aux notes internes ou aux longs comptages", "Ideal pour grandes caves, multi-zones ou equipes tournantes"],
-        linkLabel: "Explorer Winerim Core", linkHref: "/producto/winerim-core",
+        linkLabel: "Voir Core Cave", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Plan Wine Cellar" : "Stock connecte au plan de cave" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Gestion de casiers prives pour clients, membres ou clubs de vin. Suivez les vins gardes par chaque client, les bouteilles restantes, les demandes et l'historique de consommation.",
         benefits: ["Fiche privee par client ou membre", "Controle des vins gardes, bouteilles disponibles et demandes", "Historique de consommation et demandes de reassort", "Experience premium pour clubs, hotels, grills et restaurants avec membres"],
-        linkLabel: "Demander une demo", linkHref: "/demo",
+        linkLabel: "Voir Wine Lockers dans Core", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resume Wine Lockers" : "Espace Wine Lockers et resume prive" })),
       },
       {
         icon: TrendingUp, title: "Pricing et analyse des marges",
         desc: "Simulateur de prix, analyse des marges par référence, détection d'érosion et outils de pricing intelligent. Comparez votre structure de prix aux benchmarks du secteur et optimisez sans perdre en compétitivité ni en perception de valeur.",
         benefits: ["Analyse de marge réelle par référence, catégorie et tranche de prix", "Simulation de scénarios de pricing avant mise en œuvre", "Détection d'érosion de marges et de surprix d'achat", "Benchmark de pricing face à des restaurants comparables"],
-        linkLabel: "Calculateur de marge", linkHref: "/calculadora-margen-vino",
+        linkLabel: "Voir les marges dans Winerim Core", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Analyse de rendement et marges" : "Rotation des vins" })),
       },
       {
@@ -794,21 +795,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar und Kellerkarte",
         desc: "Physischer Flaschenstandort im Keller: Zonen, Regale, Faecher und Positionen verbunden mit dem digitalen Bestand. Fur Restaurants, Hotels und Gruppen, bei denen schnelles Finden den Service veraendert.",
         benefits: ["Visuelle Kellerkarte nach Zonen und Positionen", "Schnelles Finden von Referenzen wahrend des Service", "Weniger Abhaengigkeit von Erinnerung, internen Notizen oder langen Zahlungen", "Ideal fur grosse Keller, mehrere Lagerbereiche oder wechselnde Teams"],
-        linkLabel: "Winerim Core entdecken", linkHref: "/producto/winerim-core",
+        linkLabel: "Core Keller ansehen", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Cellar Kellerkarte" : "Bestand verbunden mit Kellerkarte" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Private Locker-Verwaltung fur Kunden, Mitglieder oder Weinclubs. Verfolgen Sie, welche Weine jeder Kunde lagert, wie viele Flaschen verfugbar sind, was angefragt wurde und die Konsumhistorie.",
         benefits: ["Privates Profil pro Kunde oder Mitglied", "Kontrolle gelagerter Weine, verfugbarer Flaschen und Anfragen", "Konsumhistorie und Nachschubanfragen", "Premium-Erlebnis fur Clubs, Hotels, Grills und Mitgliedschaftsrestaurants"],
-        linkLabel: "Demo anfragen", linkHref: "/demo",
+        linkLabel: "Wine Lockers in Core ansehen", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Wine Lockers Ubersicht" : "Wine Lockers Bereich und private Ubersicht" })),
       },
       {
         icon: TrendingUp, title: "Pricing & Margenanalyse",
         desc: "Preissimulator, Margenanalyse pro Referenz, Erosionserkennung und intelligente Pricing-Werkzeuge. Vergleichen Sie Ihre Preisstruktur mit Branchen-Benchmarks und optimieren Sie, ohne Wettbewerbsfähigkeit oder Wertwahrnehmung zu verlieren.",
         benefits: ["Echte Margenanalyse nach Referenz, Kategorie und Preissegment", "Pricing-Szenario-Simulation vor der Umsetzung", "Erkennung von Margenerosion und Überbezahlung im Einkauf", "Pricing-Benchmark gegenüber vergleichbaren Restaurants"],
-        linkLabel: "Margenrechner", linkHref: "/calculadora-margen-vino",
+        linkLabel: "Margen in Winerim Core ansehen", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Leistungs- und Margenanalyse" : "Weinrotation" })),
       },
       {
@@ -941,21 +942,21 @@ const content: I18nMap<PageContent> = {
         icon: MapPinned, title: "Wine Cellar e mapa de garrafeira",
         desc: "Localização física das garrafas na garrafeira: zonas, estantes, prateleiras e posições ligadas ao stock digital. Pensado para restaurantes, hotéis e grupos onde encontrar uma referência rapidamente muda o serviço.",
         benefits: ["Mapa visual da garrafeira por zonas e posições", "Localização rápida de referências durante o serviço", "Menos dependência de memória, notas internas ou contagens longas", "Ideal para grandes garrafeiras, várias zonas ou equipas em rotação"],
-        linkLabel: "Explorar Winerim Core", linkHref: "/producto/winerim-core",
+        linkLabel: "Ver Core Garrafeira", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.cellarMap.map((s, j) => ({ ...s, alt: j === 0 ? "Mapa Wine Cellar" : "Stock ligado ao mapa de garrafeira" })),
       },
       {
         icon: LockKeyhole, title: "Wine Lockers",
         desc: "Gestão de lockers privados para clientes, sócios ou clubes de vinho. Controle que vinhos cada cliente guarda, quantas garrafas restam, o que foi pedido e o histórico de consumo.",
         benefits: ["Ficha privada por cliente ou sócio", "Controlo de vinhos guardados, garrafas disponíveis e pedidos", "Histórico de consumo e pedidos de reposição", "Experiência premium para clubes, hotéis, grills e restaurantes com membros"],
-        linkLabel: "Pedir demo", linkHref: "/demo",
+        linkLabel: "Ver Wine Lockers no Core", linkHref: "/producto/winerim-core#core-bodega",
         screenshots: SHOTS.lockers.map((s, j) => ({ ...s, alt: j === 0 ? "Resumo Wine Lockers" : "Area Wine Lockers e resumo privado" })),
       },
       {
         icon: TrendingUp, title: "Pricing e análise de margens",
         desc: "Simulador de preços, análise de margens por referência, deteção de erosão e ferramentas de pricing inteligente. Compare a sua estrutura de preços com benchmarks do setor e otimize sem perder competitividade nem perceção de valor.",
         benefits: ["Análise de margem real por referência, categoria e gama de preço", "Simulação de cenários de pricing antes de implementar alterações", "Deteção de erosão de margens e sobrepreço nas compras", "Benchmark de pricing face a restaurantes comparáveis"],
-        linkLabel: "Calculadora de margem", linkHref: "/calculadora-margen-vino",
+        linkLabel: "Ver margens no Winerim Core", linkHref: "/producto/winerim-core#core-margins",
         screenshots: SHOTS.pricing.map((s, j) => ({ ...s, alt: j === 0 ? "Análise de rendimento e margens" : "Rotação de vinhos" })),
       },
       {
@@ -1111,6 +1112,8 @@ const Funcionalidades = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      <ProductArchitectureSection />
 
       {/* ═══════════════════════════════════════════════════════════
           2. FEATURE BLOCKS WITH SCREENSHOTS

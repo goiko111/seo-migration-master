@@ -45,6 +45,15 @@ const Navbar = memo(() => {
     pt: "Novo",
   }[lang] || "New";
 
+  const productDescriptions = ({
+    es: { core: "Carta, stock, Wine Cellar, Wine Lockers y márgenes", dynamic: "RIMs™ que detectan y preparan decisiones", supply: "Comparación, reposición y criterio de compra", cloud: "Entrada y trazabilidad de datos operativos", savia: "Agente conversacional con aprobación humana" },
+    en: { core: "List, stock, Wine Cellar, Wine Lockers and margins", dynamic: "RIMs™ that detect and prepare decisions", supply: "Comparison, replenishment and buying criteria", cloud: "Operating data intake and traceability", savia: "Conversational agent with human approval" },
+    fr: { core: "Carte, stock, Wine Cellar, Wine Lockers et marges", dynamic: "Des RIMs™ qui détectent et préparent les décisions", supply: "Comparaison, réassort et critères d'achat", cloud: "Collecte et traçabilité des données opérationnelles", savia: "Agent conversationnel avec validation humaine" },
+    it: { core: "Carta, stock, Wine Cellar, Wine Lockers e margini", dynamic: "RIMs™ che rilevano e preparano decisioni", supply: "Confronto, riordino e criteri d'acquisto", cloud: "Ingresso e tracciabilità dei dati operativi", savia: "Agente conversazionale con approvazione umana" },
+    de: { core: "Karte, Bestand, Wine Cellar, Wine Lockers und Margen", dynamic: "RIMs™ erkennen und bereiten Entscheidungen vor", supply: "Vergleich, Nachkauf und Einkaufskriterien", cloud: "Aufnahme und Nachverfolgung operativer Daten", savia: "Dialog-Agent mit menschlicher Freigabe" },
+    pt: { core: "Carta, stock, Wine Cellar, Wine Lockers e margens", dynamic: "RIMs™ que detetam e preparam decisões", supply: "Comparação, reposição e critérios de compra", cloud: "Entrada e rastreabilidade de dados operacionais", savia: "Agente conversacional com aprovação humana" },
+  } as const)[lang];
+
   /* ── Navigation structure ────────────────────── */
   const navItems: NavItem[] = [
     {
@@ -56,11 +65,11 @@ const Navbar = memo(() => {
           items: [
             { label: t.nav_software, href: localePath("/software-carta-de-vinos"), description: t.nav_software_desc },
             { label: t.nav_features, href: localePath("/funcionalidades") },
-            { label: "Winerim Core", href: localePath("/producto/winerim-core"), badge: newBadge },
-            { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: newBadge },
-            { label: "Winerim Supply", href: localePath("/producto/winerim-supply"), badge: newBadge },
-            { label: "CloudRIM", href: localePath("/producto/cloudrim"), badge: newBadge },
-            { label: "SAVia", href: localePath("/producto/savia"), badge: newBadge },
+            { label: "Winerim Core", href: localePath("/producto/winerim-core"), badge: newBadge, description: productDescriptions.core },
+            { label: t.nav_dynamic_intelligence ?? "Inteligencia dinámica", href: localePath("/producto/inteligencia-dinamica"), badge: newBadge, description: productDescriptions.dynamic },
+            { label: "Winerim Supply", href: localePath("/producto/winerim-supply"), badge: newBadge, description: productDescriptions.supply },
+            { label: "CloudRIM", href: localePath("/producto/cloudrim"), badge: newBadge, description: productDescriptions.cloud },
+            { label: "SAVia", href: localePath("/producto/savia"), badge: newBadge, description: productDescriptions.savia },
             { label: t.nav_integrations, href: localePath("/integraciones") },
           ],
         },

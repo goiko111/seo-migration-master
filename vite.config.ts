@@ -26,6 +26,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      "/legal/legalDocuments.json": {
+        target: "https://winerim.wine",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
     hmr: {
       overlay: false,
     },

@@ -1,5 +1,316 @@
 # Decisions Log
 
+## 2026-07-21
+
+### Ordenar Winerim como arquitectura conectada
+
+#### Hechos
+
+- La web y la presentacion nombraban CloudRIM, SAVia, RIMs, Supply, Wine Cellar, Wine Lockers y Margenes, pero no explicaban con suficiente claridad su relacion.
+- El facade enviaba Home, Funcionalidades y Winerim Core al frontend anterior, aunque el nuevo contenido ya estaba publicado en Pages.
+
+#### Decisiones
+
+- Dividir Winerim Core en `Core Carta` y `Core Bodega`.
+- Situar Wine Cellar y Wine Lockers dentro de Core Bodega; Margenes permanece dentro del alcance analitico de Core.
+- Explicar CloudRIM como entrada y enrutado de datos, Supply como compras, RIMs como motores especializados y SAVia como interfaz conversacional con aprobacion humana.
+- Incorporar bloques propios para estas capacidades en `/presentacion`, que queda en 23 slides sin precios, y reutilizar 22 slides de producto en `/deck`, que queda en 43.
+- Servir Home, Funcionalidades y Core desde Pages en seis idiomas y complementar el prerender de bots con copy localizado equivalente.
+
+#### Hipotesis
+
+- La arquitectura deberia mejorar comprension, cross-sell y consistencia entre web, presentacion y material para partners.
+
+#### Tareas pendientes
+
+- Medir el comportamiento de usuarios y revisar la jerarquia solo con evidencia comercial o de producto.
+
+## 2026-07-21
+
+### Retirar precios de la presentacion vigente
+
+#### Hechos
+
+- `/presentacion` incluia una diapositiva con los seis modulos y sus tarifas anuales y mensuales.
+- `/deck` ya excluia esa diapositiva y no contenia cantidades monetarias.
+
+#### Decisiones
+
+- Eliminar la diapositiva tarifaria de `/presentacion` en ES/EN/FR/IT/DE/PT.
+- Mantener el cierre comercial y todas las capacidades nuevas; la presentacion queda en 22 slides.
+- No alterar `/deck`, que permanece en 42 slides, ni el archivo historico no indexable.
+- Reservar la informacion de precios para su pagina dedicada y materiales comerciales especificos.
+
+#### Hipotesis
+
+- Evitar importes dentro de la presentacion reduce mantenimiento y facilita su uso transversal.
+
+#### Tareas pendientes
+
+- Vigilar que futuras ampliaciones de la presentacion no reintroduzcan tarifas.
+
+## 2026-07-21
+
+### Unificar presentacion de producto y deck de partners
+
+#### Hechos
+
+- La presentacion anterior de 18 slides era la narrativa comercial aprobada por negocio.
+- La presentacion moderna incluia capacidades nuevas, pero habia sustituido esa narrativa en vez de ampliarla.
+- El deck de partners debia incluir la explicacion completa de Winerim antes del bloque internacional y seguir sin informacion financiera.
+
+#### Decisiones
+
+- Usar la narrativa anterior como base de `/presentacion` y ampliarla hasta 23 slides con las novedades actuales.
+- Componer `/deck` con 21 slides de producto y novedades, sin precio ni cierre, seguidas de sus 21 slides internacionales.
+- Compartir la implementacion de la historia comercial para impedir que las dos rutas diverjan.
+- Mantener `/presentacion-anterior` como archivo de 18 slides y noindex.
+- Cargar la libreria de generacion PDF solo cuando el usuario pide una descarga.
+- Dejar `winerim.wine/*` exclusivamente en el facade y limitar `winerim-proxy` a `go` y `www`.
+
+#### Hipotesis
+
+- Una introduccion comun permite que el partner entienda primero el producto y despues el territorio sin recibir cifras financieras internas.
+- La carga diferida del PDF mejora el rendimiento inicial de las dos rutas.
+
+#### Tareas pendientes
+
+- Validar cifras de mercado, medir uso y preparar variantes personalizadas solo cuando exista una conversacion real.
+
+## 2026-07-20
+
+### Separar archivo historico y deck territorial
+
+#### Hechos
+
+- La version anterior de la presentacion seguia disponible en el historial de Git con 18 diapositivas.
+- El deck de partners contenia MRR, ARPA, presupuesto, financiacion y cantidades monetarias que no corresponden a la conversacion comercial solicitada.
+- Los datos de volumen por mercado permiten explicar la oportunidad sin exponer informacion financiera.
+
+#### Decisiones
+
+- Publicar la version anterior en `/presentacion-anterior`, privada y no indexable.
+- No reemplazar la presentacion vigente de `/presentacion`.
+- Eliminar del deck toda referencia a MRR, ARPA, EUR, USD, presupuesto, financiacion, ENISA y equity.
+- Sustituir la tabla financiera por prioridad, fase, TAM, SAM, SOM y ventana de apertura.
+
+#### Hipotesis
+
+- Los partners responderan mejor a una propuesta de territorio, volumen, canal y ejecucion local que a una narrativa de financiacion.
+
+#### Tareas pendientes
+
+- Adaptar el deck a cada candidato mediante el parametro `partner` y datos locales validados.
+
+## 2026-07-20
+
+### Autorrecuperacion de chunks en presentaciones
+
+#### Hechos
+
+- Una pestaña de `/presentacion` fallo al importar el bundle actual mientras otra pestaña nueva cargaba el mismo archivo correctamente.
+- Navegar una vez con una query unica recuperaba la importacion y permitia volver a la URL limpia.
+- Se incorporo ese comportamiento de forma controlada a Presentation y PartnerDeck.
+
+#### Decisiones
+
+- Usar `lazyRouteWithRetry` en las dos experiencias inmersivas.
+- Permitir solo un reintento mediante `__bundle_retry` y lanzar el error si tambien falla la segunda carga.
+- Eliminar el parametro con `history.replaceState` cuando el modulo carga correctamente.
+
+#### Hipotesis
+
+- El reintento resuelve caches negativas por pestaña sin ocultar indisponibilidades persistentes ni crear bucles.
+
+#### Tareas pendientes
+
+- Extender el helper a otras rutas lazy solo si se observa el mismo fallo fuera de presentaciones.
+
+## 2026-07-20
+
+### Separar cache de HTML React y assets versionados
+
+#### Hechos
+
+- `/deck` podia mostrar una pantalla vacia aunque todos los archivos respondieran `200`, porque el navegador habia conservado una importacion dinamica fallida de un release anterior.
+- Un nuevo bundle y la expiracion de la antigua cache recuperaron la URL limpia.
+
+#### Decisiones
+
+- Servir documentos HTML de rutas React con `no-store, max-age=0`, `Pragma: no-cache` y `Expires: 0`.
+- Servir `/assets/*` con cache anual `immutable` al estar identificados por hash.
+- Conservar la cache interna del Worker bajo una clave versionada por `FRONTEND_RELEASE`.
+
+#### Hipotesis
+
+- Esta politica elimina la ventana en la que HTML antiguo y assets de un origen nuevo podian quedar desalineados.
+
+#### Tareas pendientes
+
+- Incluir una prueba de URL limpia posterior a cada cambio de `FRONTEND_ORIGIN`.
+
+## 2026-07-17
+
+### Deck internacional separado para partners
+
+#### Hechos
+
+- El material de referencia mezclaba oportunidad, objetivos de canal, planes por pais y presupuesto con cifras agregadas internamente contradictorias.
+- Se creo `/deck` con 21 diapositivas y doce playbooks de mercado, separado de la presentacion general de producto.
+- El calculo por filas produce TAM `1.740.000`, filtrado `1.194.000`, SAM `477.600` y SOM `119.400`.
+- Produccion pasa QA humano/bot, escritorio/movil y queda marcada `noindex, follow`.
+
+#### Decisiones
+
+- Tratar el deck como activo comercial confidencial fuera del sitemap y de la indexacion.
+- Etiquetar distribuidores, integraciones y cuentas como `objetivo` mientras no exista evidencia de una relacion cerrada.
+- Mostrar de forma explicita la fecha y las excepciones de los datos en vez de ocultar contradicciones del material fuente.
+- Mantener una sola version espanola personalizable con `?partner=` hasta justificar localizaciones completas.
+- Compartir el exportador PDF entre `/presentacion` y `/deck` para no duplicar logica pesada.
+
+#### Hipotesis
+
+- La separacion entre deck de producto y deck de partnership deberia reducir ruido y acelerar la definicion de un piloto por territorio.
+
+#### Tareas pendientes
+
+- Confirmar cifras y targets con negocio antes de emitir propuestas contractuales.
+- Aclarar el diferencial de `1K EUR` del presupuesto y actualizar la fotografia financiera de Espana.
+- Medir vistas y descargas del deck.
+
+## 2026-07-17
+
+### Presentacion oficial como sistema operativo del vino
+
+#### Hechos
+
+- La presentacion anterior no recogia la arquitectura de producto incorporada recientemente a la web.
+- Se reconstruyo en 14 diapositivas y seis idiomas con CloudRIM, Wine Cellar, Wine Lockers, Winerim Supply, RIMs(TM), SAVia, multi-local y los seis modulos/precios.
+- Humano y Googlebot reciben contenido localizado coherente.
+- QA real de las seis rutas y movil termino sin errores funcionales o visuales.
+
+#### Decisiones
+
+- El mensaje principal pasa a ser `El sistema operativo del vino para restauracion`.
+- Cada idioma es propietario de su copy completo; no se reutiliza el cuerpo ingles como fallback.
+- La presentacion conserva una experiencia inmersiva propia y no muestra los popups globales de herramientas.
+- React/Pages sirve la experiencia interactiva y `winerim-proxy` mantiene el prerender SEO.
+- `X-Robots-Tag: noindex` se elimina expresamente de rutas normales y assets; solo se aplica a documentos legales.
+
+#### Hipotesis
+
+- La arquitectura narrativa deberia elevar la comprension de valor, la cualificacion de demos y el cross-sell de modulos.
+
+#### Tareas pendientes
+
+- Medir vistas, compartidos y descargas por idioma.
+- Estudiar carga diferida de PDF y localizacion futura del detalle de precios.
+
+## 2026-07-16
+
+### Mapa funcional completo en la pagina de precios
+
+#### Hechos
+
+- Explicar solo los RIMs™ creaba un desequilibrio frente al resto de capacidades.
+- Se creo un mapa comun para Core, TPV, Gestion, Margenes, Intelligence y Full / Managed.
+- Cada modulo documenta entrada, transformacion, resultado y capacidades conectadas.
+- Humano y Googlebot reciben la arquitectura completa.
+
+#### Decisiones
+
+- Separar el bloque de comparacion de precios del bloque de funcionamiento del sistema.
+- Mostrar Wine Cellar, Wine Lockers, CloudRIM, RIMs™, SAVia y Winerim Supply dentro de una arquitectura comun.
+- Mantener una nota que diferencia arquitectura funcional y alcance contractual.
+
+#### Hipotesis
+
+- La estructura reduce la sensacion de catalogo fragmentado y explica Winerim como un sistema conectado.
+
+#### Tareas pendientes
+
+- Confirmar con producto cualquier cambio futuro en la asignacion contractual de capacidades a modulos.
+
+## 2026-07-16
+
+### Encaje de RIMs™ en precios
+
+#### Hechos
+
+- La primera ampliacion de precios detallaba capacidades, pero no nombraba claramente los RIMs™.
+- El producto existente define `Inteligencia Dinamica (RIMs™)` como capacidad de nivel Enterprise/Intelligence.
+- Produccion humana y Googlebot muestran ya el flujo Core -> RIMs™ -> SAVia -> aprobacion humana.
+
+#### Decisiones
+
+- Los RIMs™ no se presentan como septimo modulo ni con precio independiente.
+- Se incluyen de forma explicita en Intelligence y Full / Managed.
+- Core, TPV, Gestion y Margenes aportan las senales que alimentan los RIMs™.
+
+#### Hipotesis
+
+- Explicar esta relacion evita que SAVia y los RIMs™ parezcan productos duplicados o desconectados.
+
+#### Tareas pendientes
+
+- Confirmar con producto si conviene publicar nombres individuales de familias RIM cuando exista una taxonomia comercial cerrada.
+
+## 2026-07-16
+
+### Profundidad comercial de `/precios-modulos-integraciones`
+
+#### Hechos
+
+- La primera version solo mostraba una descripcion breve y un check por modulo.
+- Se amplio a seis capacidades por modulo, recomendacion de uso, precios y CTA contextual.
+- Produccion paso QA desktop/mobile sin errores.
+
+#### Decisiones
+
+- Las paginas de precios deben resolver que incluye cada opcion y para quien encaja.
+- Usar bloques verticales comparables para conservar legibilidad movil.
+- Anadir `FRONTEND_RELEASE` al cache key del facade para despliegues React inmediatos.
+
+#### Hipotesis
+
+- La mayor claridad debe mejorar conversion y reducir solicitudes de demo mal cualificadas.
+
+#### Tareas pendientes
+
+- Medir interacciones por modulo y revisar copy con feedback comercial real.
+
+## 2026-07-16
+
+### Paginas legales y precios con el sistema React real
+
+#### Hechos
+
+- La implementacion estatica del Worker no respetaba el sistema visual de Winerim y podia pedir assets antiguos inexistentes.
+- Se implementaron las paginas con los componentes reales del repositorio y se desplegaron en Cloudflare Pages `winerim-origin`.
+- Se creo `winerim-edge-router` con service binding a `winerim-proxy`.
+- Solo `winerim.wine/*` fue reasignado al facade; `go` y `www` permanecen en el Worker anterior.
+- El primer facade permitia fallback a `worker-static-human`; Chrome detecto carga intermitente de CSS/JS antiguos.
+- Se elimino ese fallback para las rutas objetivo y se anadieron tres reintentos, cache de HTML y respuesta `503` explicita si Pages no esta disponible.
+- La version final `5027af27-15cd-49ad-a7dd-95df3bf92a43` paso QA desktop, mobile, idiomas y paridad bot/humano.
+
+#### Decisiones
+
+- Usar siempre `Navbar`, `Footer`, tokens, componentes y patrones React existentes para paginas nuevas del sitio.
+- Conservar `winerim-proxy` como backend SEO y delegar en el todas las rutas no objetivo.
+- Mantener legal `noindex, follow` y precios indexable.
+- No usar Lovable para este despliegue.
+
+#### Hipotesis
+
+- La cache del facade estabiliza la entrega y reduce dependencia directa de Pages en cada visita.
+- Esta separacion permite migrar mas paginas al frontend real de forma gradual y reversible.
+
+#### Tareas pendientes
+
+- Monitorizar el facade.
+- Integrar la copia recuperada en el flujo Git definitivo sin tocar el checkout `dataless`.
+- Retomar las prioridades editoriales y SEO documentadas.
+
 ## 2026-07-07
 
 ### Publicacion Lovable/Worker de paridad DE/PT y lotes editoriales
@@ -4472,3 +4783,35 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 #### Tareas pendientes asociadas
 
 - Publicar `main` desde Lovable y revalidar render humano.
+
+## 2026-07-22
+
+### Presentacion, deck partner y evidencia visual
+
+#### Hechos
+
+- Se comprobo el contenido real de las diapositivas de CloudRIM, Margenes, RIMs, SAVia, Supply y Wine Cellar.
+- Margenes no tenia una captura real; el activo `Rendimiento de tu Carta` no representa el modulo de margen.
+- La antigua ficha 41 describia un plan territorial historico y conceptos genericos que ya no reflejaban el estado de Winerim.
+
+#### Decisiones
+
+- Reducir CloudRIM a una sola captura en `/presentacion` y reutilizarla en `/producto/cloudrim`.
+- Reemplazar la ficha 41 por una prueba de base actual con `+2.000 restaurantes`, `+1.000 bodegas`, `15 paises` y `6 idiomas`.
+- No incluir MRR, financiacion, presupuesto ni volumen monetario en el deck partner.
+- No falsear capturas: Margenes, Supply, RIMs y SAVia se ilustraran solo con pantallas reales y pobladas.
+- Crear un banco de ocho capturas maestras reutilizable en web y presentacion.
+- Mantener Wine Cellar y Wine Lockers dentro de Core Bodega.
+- Ocultar CookieConsent en presentacion/deck/campaña para no cubrir la diapositiva.
+- Corregir el conjunto de rutas `noindex`: solo legales y privadas deben recibir `X-Robots-Tag: noindex, follow`.
+
+#### Hipotesis
+
+- El nuevo bloque de prueba actual es mas util para partners que un roadmap territorial ya superado.
+- Una comparacion visual de Margenes y Supply dara mas valor comercial que ampliar el numero de slides.
+
+#### Tareas pendientes asociadas
+
+- Capturar las ocho pantallas definidas en `SCREENSHOT_CAPTURE_BRIEF.md`.
+- Sustituir primero CloudRIM y Margenes; despues Supply, RIMs, SAVia y multi-local.
+- Revalidar cada sustitucion en web, presentacion y movil antes de publicar.
