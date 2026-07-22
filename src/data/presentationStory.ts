@@ -136,6 +136,7 @@ export function getCommercialSlideLabels(
           current.cloudrim.eyebrow,
           current.cellar.eyebrow,
           current.performance.eyebrow,
+          current.performance.eyebrow,
           current.intelligence.eyebrow,
           "SAVia",
         ]

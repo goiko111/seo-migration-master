@@ -21,6 +21,8 @@ import type { SupportedLang, I18nMap } from "@/i18n/types";
 import { getI18n } from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import marginsOverview from "@/assets/feature-margins-overview.webp";
+import marginsWineDetail from "@/assets/feature-margins-wine-detail.webp";
 
 /* ── Animation ── */
 const fadeUp = {
@@ -772,6 +774,28 @@ const WinerimCore = () => {
                 </ScrollReveal>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section id="core-margins-proof" className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
+          <ScrollReveal className="mb-10 max-w-3xl">
+            <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.3em] text-accent">{t.cap_eyebrow}</span>
+            <h2 className="font-heading text-2xl font-bold leading-tight md:text-4xl">{t.capabilities[0].title}</h2>
+            <p className="mt-4 leading-relaxed text-muted-foreground">{t.capabilities[0].desc}</p>
+          </ScrollReveal>
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <ScrollReveal>
+              <figure className="h-full overflow-hidden rounded-xl border border-border bg-[#242525] shadow-xl shadow-black/10">
+                <img src={marginsOverview} alt={`${t.capabilities[0].title}: dashboard`} className="h-auto w-full" loading="lazy" />
+              </figure>
+            </ScrollReveal>
+            <ScrollReveal delay={0.08}>
+              <figure className="h-full overflow-hidden rounded-xl border border-border bg-[#242525] shadow-xl shadow-black/10">
+                <img src={marginsWineDetail} alt={`${t.capabilities[0].title}: detail`} className="h-auto w-full" loading="lazy" />
+              </figure>
+            </ScrollReveal>
           </div>
         </div>
       </section>

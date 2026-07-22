@@ -131,12 +131,12 @@ describe("multilingual Winerim presentation", () => {
       LEGACY_PRESENTATION_CONTENT.es,
       PRESENTATION_CONTENT.es,
       { includesUpdates: true, embedded: false },
-    )).toHaveLength(23);
+    )).toHaveLength(24);
     expect(getCommercialSlideLabels(
       LEGACY_PRESENTATION_CONTENT.es,
       PRESENTATION_CONTENT.es,
       { includesUpdates: true, embedded: true },
-    )).toHaveLength(22);
+    )).toHaveLength(23);
   });
 
   it("uses one CloudRIM product capture in the presentation and product page", () => {
@@ -145,7 +145,7 @@ describe("multilingual Winerim presentation", () => {
 
     expect(presentation.match(/src=\{cloudrimInbox\}/g)).toHaveLength(1);
     expect(presentation).not.toContain("cloudrimUpload");
-    expect(cloudrim).toContain('import cloudrimInbox from "@/assets/feature-cloudrim-inbox.jpg"');
+    expect(cloudrim).toContain('import cloudrimInbox from "@/assets/feature-cloudrim-inbox-current.webp"');
     expect(cloudrim).toContain("src={cloudrimInbox}");
   });
 

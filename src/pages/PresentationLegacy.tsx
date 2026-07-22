@@ -41,9 +41,14 @@ import bigData from "@/assets/presentation/rendimiento-carta.webp";
 import comparator from "@/assets/presentation/comparator.webp";
 import stockManagement from "@/assets/presentation/stock-management.webp";
 import clientsGrid from "@/assets/presentation/clients-grid.jpg";
-import cloudrimInbox from "@/assets/feature-cloudrim-inbox.jpg";
-import saviaConversation from "@/assets/feature-savia-conversation.jpg";
-import saviaStockAnswer from "@/assets/feature-savia-stock-answer.jpg";
+import cloudrimInbox from "@/assets/feature-cloudrim-inbox-current.webp";
+import marginsOverview from "@/assets/feature-margins-overview.webp";
+import marginsPortfolio from "@/assets/feature-margins-portfolio.webp";
+import marginsSleepingCapital from "@/assets/feature-margins-sleeping-capital.webp";
+import marginsForecast from "@/assets/feature-margins-consumption-forecast.webp";
+import supplyComparison from "@/assets/feature-supply-tariff-comparison.webp";
+import saviaPrompt from "@/assets/feature-savia-prompt.webp";
+import saviaAnswer from "@/assets/feature-savia-margin-answer.webp";
 import cellarMap from "@/assets/feature-wine-cellar-maps-list.jpg";
 import wineLockers from "@/assets/feature-wine-locker-client-wines.jpg";
 
@@ -960,7 +965,7 @@ export default function PresentationLegacy({
               </Reveal>
               <Reveal delay={0.1}>
                 <figure>
-                  <div className="aspect-[4/3] overflow-hidden rounded-xl border border-wine-dark/10 bg-[#171817] shadow-sm">
+                  <div className="aspect-[16/10] overflow-hidden rounded-xl border border-wine-dark/10 bg-[#171817] shadow-sm">
                     <img src={cloudrimInbox} alt="CloudRIM inbox" loading="lazy" className="h-full w-full object-contain" />
                   </div>
                   <figcaption className="mt-3 text-center text-xs text-wine-dark/55">{currentT.cloudrim.caption}</figcaption>
@@ -1013,31 +1018,58 @@ export default function PresentationLegacy({
 
           {/* NUEVO — MARGENES */}
           <SlideShell>
-            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div className="grid gap-9 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
               <Reveal>
                 <Eyebrow>{depthT.margins.eyebrow}</Eyebrow>
                 <SlideTitle>{depthT.margins.title}</SlideTitle>
                 <p className="text-foreground/70 text-lg leading-relaxed">{depthT.margins.subtitle}</p>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  {depthT.margins.items.map((item) => (
+                    <div key={item.title} className="border-l-2 border-wine pl-3">
+                      <h3 className="font-heading text-base font-bold">{item.title}</h3>
+                      <p className="mt-1 text-xs leading-relaxed text-foreground/60">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
                 <div className="mt-6 border-l-2 border-wine pl-4">
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-wine">{depthT.margins.outcomeLabel}</p>
                   <p className="mt-2 text-sm leading-relaxed text-foreground/70">{depthT.margins.outcome}</p>
                 </div>
               </Reveal>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {depthT.margins.items.map((item, i) => {
-                  const icons = [BarChart3, TrendingUp, Database, Target];
-                  const Icon = icons[i] || BarChart3;
-                  return (
-                    <Reveal key={item.title} delay={i * 0.05}>
-                      <article className="h-full rounded-xl border border-border/50 bg-gradient-card p-5">
-                        <Icon className="h-6 w-6 text-gold" />
-                        <h3 className="mt-4 font-heading text-xl font-bold">{item.title}</h3>
-                        <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.body}</p>
-                      </article>
-                    </Reveal>
-                  );
-                })}
-              </div>
+              <Reveal delay={0.08}>
+                <figure>
+                  <div className="aspect-[16/11] overflow-hidden rounded-xl border border-border/60 bg-[#242525] shadow-xl shadow-black/10">
+                    <img src={marginsOverview} alt="Winerim margins dashboard" loading="lazy" className="h-full w-full object-contain object-top" />
+                  </div>
+                  <figcaption className="mt-3 text-center text-xs text-foreground/45">{depthT.margins.subtitle}</figcaption>
+                </figure>
+              </Reveal>
+            </div>
+          </SlideShell>
+
+          <SlideShell bg="dark">
+            <div className="mb-7 max-w-4xl">
+              <Reveal>
+                <Eyebrow>{depthT.margins.eyebrow}</Eyebrow>
+                <SlideTitle>{depthT.margins.outcomeLabel}</SlideTitle>
+                <p className="mt-3 text-cream/70">{depthT.margins.outcome}</p>
+              </Reveal>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {[
+                { image: marginsPortfolio, label: depthT.margins.items[0].title },
+                { image: marginsSleepingCapital, label: depthT.margins.items[2].title },
+                { image: marginsForecast, label: depthT.margins.items[3].title },
+              ].map((visual, index) => (
+                <Reveal key={visual.label} delay={index * 0.05}>
+                  <figure>
+                    <div className="aspect-[4/3] overflow-hidden rounded-xl border border-cream/15 bg-white/[0.03]">
+                      <img src={visual.image} alt={visual.label} loading="lazy" className="h-full w-full object-contain object-top" />
+                    </div>
+                    <figcaption className="mt-2 text-center text-xs text-cream/55">{visual.label}</figcaption>
+                  </figure>
+                </Reveal>
+              ))}
             </div>
           </SlideShell>
 
@@ -1087,9 +1119,9 @@ export default function PresentationLegacy({
                 </div>
               </Reveal>
               <Reveal delay={0.08}>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <img src={saviaConversation} alt="SAVia conversation" loading="lazy" className="h-full min-h-56 w-full rounded-xl border border-cream/15 bg-white object-cover object-top" />
-                  <img src={saviaStockAnswer} alt="SAVia stock answer" loading="lazy" className="h-full min-h-56 w-full rounded-xl border border-cream/15 bg-white object-cover object-top" />
+                <div className="grid gap-3 sm:grid-cols-[0.34fr_1.66fr]">
+                  <img src={saviaPrompt} alt="SAVia prompt" loading="lazy" className="h-full min-h-56 w-full rounded-xl border border-cream/15 bg-[#1b1c1f] object-contain object-top" />
+                  <img src={saviaAnswer} alt="SAVia answer" loading="lazy" className="h-full min-h-56 w-full rounded-xl border border-cream/15 bg-[#1b1c1f] object-contain object-top" />
                 </div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   {depthT.savia.steps.map((step) => (
@@ -1112,8 +1144,8 @@ export default function PresentationLegacy({
 
       {/* ──────── SLIDE 11c — WINERIM SUPPLY ──────── */}
       <SlideShell bg="cream">
-        <div className="grid lg:grid-cols-5 gap-12 items-center">
-          <div className="lg:col-span-2">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+          <div>
             <Reveal>
               <Eyebrow>{supplyContent.eyebrow}</Eyebrow>
               <SlideTitle className="text-wine-dark">{supplyContent.title}</SlideTitle>
@@ -1124,20 +1156,22 @@ export default function PresentationLegacy({
               <p className="mt-3 text-sm font-medium text-wine-dark/65">{supplyContent.outcome}</p>
             </Reveal>
           </div>
-          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-4">
-            {supplyContent.items.map((item, i) => {
-              const icons = [ShoppingCart, GitCompare, Database, TrendingUp];
-              const Icon = icons[i] || ShoppingCart;
-              return (
-                <Reveal key={i} delay={i * 0.07}>
-                  <div className="bg-white rounded-xl p-5 shadow-sm border border-wine-dark/10 h-full">
-                    <Icon className="h-6 w-6 text-wine mb-3" />
-                    <h3 className="font-heading text-lg font-bold mb-1 text-wine-dark">{item.title}</h3>
-                    <p className="text-sm text-wine-dark/70 leading-relaxed">{item.body}</p>
+          <div>
+            <Reveal delay={0.08}>
+              <figure className="overflow-hidden rounded-xl border border-wine-dark/10 bg-[#242525] shadow-xl shadow-black/10">
+                <img src={supplyComparison} alt="Winerim Supply distributor comparison" loading="lazy" className="aspect-[16/10] w-full object-contain object-top" />
+              </figure>
+            </Reveal>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {supplyContent.items.map((item, i) => (
+                <Reveal key={item.title} delay={i * 0.04}>
+                  <div className="h-full border-l-2 border-wine pl-3">
+                    <h3 className="font-heading text-sm font-bold text-wine-dark">{item.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-wine-dark/65">{item.body}</p>
                   </div>
                 </Reveal>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </SlideShell>

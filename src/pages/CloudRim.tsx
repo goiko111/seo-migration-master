@@ -19,7 +19,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import FAQSection from "@/components/seo/FAQSection";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { Badge } from "@/components/ui/badge";
-import cloudrimInbox from "@/assets/feature-cloudrim-inbox.jpg";
+import cloudrimInbox from "@/assets/feature-cloudrim-inbox-current.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n, type I18nMap } from "@/i18n/types";
 import { CANONICAL_DOMAIN } from "@/seo/config";

@@ -18,6 +18,8 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import DecisionCenterTeaser from "@/components/DecisionCenterTeaser";
 import { type SupportedLang, type I18nMap, getI18n} from "@/i18n/types";
 import { trackAction } from "@/lib/intentTracking";
+import supplyComparison from "@/assets/feature-supply-tariff-comparison.webp";
+import supplyDistributors from "@/assets/feature-supply-distributors.webp";
 
 /* ── Animation helpers ── */
 const fadeUp = {
@@ -602,10 +604,19 @@ const groupCardVisuals = [
 
 const pillarIcons = [ShoppingCart, DollarSign, RefreshCw];
 const networkPillarIcons = [Shield, Users, TrendingUp];
+const supplyVisualCopy: Record<SupportedLang, { title: string; body: string; comparisonAlt: string; distributorsAlt: string }> = {
+  es: { title: "Tarifas y distribuidores, vistos con contexto", body: "Winerim compara el coste de una misma referencia, detecta desviaciones y deja preparada la decisión de compra.", comparisonAlt: "Comparador de precios entre distribuidores en Winerim Supply", distributorsAlt: "Panel de inteligencia de distribuidores en Winerim Supply" },
+  en: { title: "Tariffs and suppliers, viewed in context", body: "Winerim compares the cost of the same SKU, flags deviations and prepares the purchasing decision.", comparisonAlt: "Supplier price comparison in Winerim Supply", distributorsAlt: "Supplier intelligence dashboard in Winerim Supply" },
+  it: { title: "Listini e distributori, letti nel contesto", body: "Winerim confronta il costo della stessa referenza, segnala gli scostamenti e prepara la decisione di acquisto.", comparisonAlt: "Confronto prezzi tra distributori in Winerim Supply", distributorsAlt: "Dashboard di intelligenza distributori in Winerim Supply" },
+  fr: { title: "Tarifs et distributeurs, analysés avec leur contexte", body: "Winerim compare le coût d'une même référence, signale les écarts et prépare la décision d'achat.", comparisonAlt: "Comparaison des prix distributeurs dans Winerim Supply", distributorsAlt: "Tableau d'intelligence distributeurs dans Winerim Supply" },
+  de: { title: "Preislisten und Lieferanten im richtigen Kontext", body: "Winerim vergleicht die Kosten derselben Referenz, markiert Abweichungen und bereitet die Einkaufsentscheidung vor.", comparisonAlt: "Lieferantenpreisvergleich in Winerim Supply", distributorsAlt: "Lieferantenintelligenz in Winerim Supply" },
+  pt: { title: "Tabelas e distribuidores, analisados com contexto", body: "A Winerim compara o custo da mesma referência, sinaliza desvios e prepara a decisão de compra.", comparisonAlt: "Comparação de preços de distribuidores no Winerim Supply", distributorsAlt: "Painel de inteligência de distribuidores no Winerim Supply" },
+};
 
 const WinerimSupply = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const tx = getI18n(i18n, lang);
+  const visual = supplyVisualCopy[lang];
 
   const renderParagraph = (text: string) => {
     if (text.includes("<link>")) {
@@ -659,6 +670,25 @@ const WinerimSupply = () => {
               <Link to={localePath("/producto/winerim-core")} className="inline-flex items-center gap-2 border border-border text-foreground/80 px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase hover:border-wine/40 hover:text-foreground transition-all">
                 {tx.hero_cta_secondary} <ChevronRight size={16} />
               </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20 md:pb-28">
+        <div className="mx-auto max-w-6xl">
+          <ScrollReveal>
+            <div className="mb-7 max-w-3xl">
+              <h2 className="font-heading text-2xl font-bold md:text-3xl">{visual.title}</h2>
+              <p className="mt-3 leading-relaxed text-muted-foreground">{visual.body}</p>
+            </div>
+            <div className="grid items-start gap-4 lg:grid-cols-2">
+              <figure className="overflow-hidden rounded-xl border border-border bg-[#242525] shadow-xl shadow-black/10">
+                <img src={supplyComparison} alt={visual.comparisonAlt} className="h-auto w-full" loading="eager" />
+              </figure>
+              <figure className="overflow-hidden rounded-xl border border-border bg-[#242525] shadow-xl shadow-black/10">
+                <img src={supplyDistributors} alt={visual.distributorsAlt} className="h-auto w-full" loading="lazy" />
+              </figure>
             </div>
           </ScrollReveal>
         </div>

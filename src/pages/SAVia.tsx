@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getI18n, type I18nMap } from "@/i18n/types";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import saviaAnswer from "@/assets/feature-savia-margin-answer.webp";
 
 type RelatedType = "guide" | "tool" | "resource" | "solution" | "decision-center";
 
@@ -409,25 +410,17 @@ const SAVia = () => {
               </ScrollReveal>
 
               <ScrollReveal delay={0.1}>
-                <div className="relative rounded-2xl border border-border bg-card/80 p-6 md:p-8 shadow-xl shadow-black/5 overflow-hidden">
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-wine" />
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-wine/10 flex items-center justify-center">
-                      <MessageSquare size={24} className="text-wine" />
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-wine/70 font-semibold">SAVia</p>
-                      <p className="text-sm text-muted-foreground">{t.inputDesc}</p>
-                    </div>
+                <figure>
+                  <div className="overflow-hidden rounded-xl border border-border bg-[#1b1c1f] shadow-xl shadow-black/10">
+                    <img
+                      src={saviaAnswer}
+                      alt={`SAVia: ${t.inputDesc}`}
+                      className="aspect-[16/10] w-full object-cover object-top"
+                      loading="eager"
+                    />
                   </div>
-                  <div className="space-y-3">
-                    {t.examples.slice(0, 4).map((question) => (
-                      <div key={question} className="rounded-xl border border-border bg-background/70 p-4">
-                        <p className="text-sm text-foreground leading-relaxed">"{question}"</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                  <figcaption className="mt-3 text-center text-xs text-muted-foreground/70">{t.heroNote}</figcaption>
+                </figure>
               </ScrollReveal>
             </div>
           </div>
