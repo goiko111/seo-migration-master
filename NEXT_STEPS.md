@@ -5404,3 +5404,29 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 - Presentacion/deck/home/CloudRIM: publicados y revalidados.
 - Documentos legales: contenido JSON servido y render humano validado.
 - Siguiente dependencia real: capturas de producto autenticas, no mas copy provisional.
+
+## Actualizacion 2026-07-23: siguiente trabajo tras publicar capturas reales
+
+### Hechos
+
+- El lote visual esta publicado y revalidado en web, presentacion y deck.
+- Supply y SAVia ya salen de Pages en ES/EN/IT/FR/DE/PT.
+- Presentacion y deck estan operativos en `24/44` slides.
+
+### Decisiones
+
+- No volver a tocar el lote visual salvo una captura claramente mejor o una necesidad comercial concreta.
+- Priorizar contenido, descubrimiento organico y adopcion del producto en el siguiente bloque.
+
+### Hipotesis
+
+- El mayor retorno inmediato vendra de explicar casos de uso diarios y ampliar contenido enlazado, no de anadir mas slides.
+
+### Tareas pendientes listas para retomar
+
+1. Biblioteca del vino: siguiente lote editorial multilingue, con canonical/hreflang y enlaces internos.
+2. Aprender vino: siguiente modulo y paridad profunda DE/PT.
+3. Blog: calendario semanal de lunes, articulos extensos y fechas correlativas en seis idiomas.
+4. Search Console: revalidar sitemap, canonicals, hreflang, paginas comerciales y cobertura tras la release.
+5. Seguridad tecnica: revisar la vulnerabilidad critica indicada por `npm audit` sin aplicar upgrades automaticos indiscriminados.
+6. Banco visual opcional: Decision Center/RIMs, reposicion Supply y multi-local cuando existan capturas superiores.

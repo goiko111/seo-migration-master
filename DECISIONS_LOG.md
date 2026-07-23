@@ -4815,3 +4815,29 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 - Capturar las ocho pantallas definidas en `SCREENSHOT_CAPTURE_BRIEF.md`.
 - Sustituir primero CloudRIM y Margenes; despues Supply, RIMs, SAVia y multi-local.
 - Revalidar cada sustitucion en web, presentacion y movil antes de publicar.
+
+## 2026-07-23
+
+### Publicacion directa del lote visual real
+
+#### Hechos
+
+- Se desplego Pages `b8495bf6`, backend Worker `fa33686d-d05d-4fc1-8640-edb546f54224` y facade `bec1101a-ad22-463a-931c-a00af618fbd7`.
+- La primera validacion detecto que Supply y SAVia seguian entrando por el origen antiguo; se anadieron las doce rutas localizadas al facade y se redesplego.
+- La validacion humana y Googlebot posterior paso en Funcionalidades, Core, Supply, CloudRIM, SAVia, Presentacion, DE y PT.
+
+#### Decisiones
+
+- Publicar este lote sin Lovable, usando el pipeline Cloudflare ya documentado.
+- Mantener `FRONTEND_RELEASE` versionado para invalidar HTML del facade tras cada Pages deploy.
+- Mantener la presentacion sin tarifas comerciales y el deck sin MRR, financiacion, presupuesto ni importes.
+- Considerar `24/44` como conteo vigente de slides.
+
+#### Hipotesis
+
+- Servir todas las rutas comerciales desde el mismo origen Pages reducira diferencias entre paginas y futuras regresiones de contenido.
+
+#### Tareas pendientes asociadas
+
+- Auditar y actualizar dependencias de forma controlada.
+- Retomar los cuatro frentes editoriales/SEO: Biblioteca, Aprender, blog semanal y Search Console.

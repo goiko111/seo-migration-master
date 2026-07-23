@@ -11,5 +11,5 @@ binding = "BACKEND"
 service = "winerim-proxy"
 
 [vars]
-FRONTEND_ORIGIN = "https://782dc9c7.winerim-origin.pages.dev"
-FRONTEND_RELEASE = "782dc9c7-presentation-cloudrim-deck-r6"
+FRONTEND_ORIGIN = "https://b8495bf6.winerim-origin.pages.dev"
+FRONTEND_RELEASE = "b8495bf6-real-product-proof-r7"

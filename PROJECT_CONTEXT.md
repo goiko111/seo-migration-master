@@ -1092,3 +1092,30 @@
 - Recibir y sustituir las ocho capturas definidas en `SCREENSHOT_CAPTURE_BRIEF.md`.
 - Revisar periodicamente la vigencia comercial de `+2.000 restaurantes` y `+1.000 bodegas`.
 - Continuar Biblioteca del vino, Aprender vino, blog y Search Console despues del lote visual.
+
+## Actualizacion 2026-07-23: publicacion del banco visual real
+
+### Hechos
+
+- La release frontend productiva es `https://b8495bf6.winerim-origin.pages.dev`.
+- `winerim-proxy` quedo en la version `fa33686d-d05d-4fc1-8640-edb546f54224`.
+- `winerim-edge-router` quedo en la version `bec1101a-ad22-463a-931c-a00af618fbd7`.
+- Funcionalidades, Core, Supply, CloudRIM, SAVia, Presentacion y Deck usan capturas reales de producto.
+- La presentacion publicada tiene `24` diapositivas y el deck partner `44`.
+- El deck no contiene MRR, financiacion, presupuesto ni cifras monetarias.
+- Supply y SAVia, incluidas sus variantes ES/EN/IT/FR/DE/PT, se sirven desde la release Pages actual.
+
+### Decisiones
+
+- Mantener el facade `winerim-edge-router` como propietario de `winerim.wine/*` y actualizar `FRONTEND_ORIGIN` en cada release Pages.
+- Usar las capturas reales recibidas como fuente visual comun para web, presentacion y deck.
+- Mantener `/deck` como privado/noindex y `/presentacion` como indexable.
+
+### Hipotesis
+
+- La evidencia visual real reducira la percepcion de Winerim como una simple carta digital y explicara mejor su capa operativa diaria.
+
+### Tareas pendientes
+
+- Conseguir, cuando aporten valor adicional, capturas limpias de Decision Center/RIMs, reposicion de Supply y dashboard multi-local.
+- Retomar Biblioteca del vino, Aprender vino, blog semanal y Search Console.

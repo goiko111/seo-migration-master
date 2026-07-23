@@ -7289,3 +7289,53 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Recibir las ocho capturas del brief y hacer sustitucion/revision una a una.
 - Confirmar con dato de negocio la fecha de corte de las cifras de restaurantes y bodegas.
 - Retomar Biblioteca del vino, Aprender vino, blog semanal, Search Console y `www.winerim.wine` tras cerrar el lote visual.
+
+## Actualizacion 2026-07-23: lote visual publicado en produccion
+
+### Hechos
+
+- Se integraron sobre `main` los commits `2099777` y `7203ea2`.
+- Se publicaron capturas reales de:
+  - CloudRIM: bandeja y trazabilidad documental;
+  - Margenes: overview, cartera, capital dormido, prevision y detalle por referencia;
+  - Supply: distribuidores y comparador de tarifas;
+  - SAVia: consulta y respuesta completa.
+- Produccion activa:
+  - Pages `https://b8495bf6.winerim-origin.pages.dev`;
+  - `winerim-proxy` `fa33686d-d05d-4fc1-8640-edb546f54224`;
+  - `winerim-edge-router` `bec1101a-ad22-463a-931c-a00af618fbd7`.
+- Se corrigio el router para servir Supply y SAVia desde Pages en los seis idiomas.
+- QA humano en produccion:
+  - Funcionalidades carga ocho pruebas visuales reales sin imagenes rotas ni overflow;
+  - Core, Supply, CloudRIM y SAVia tienen H1, canonical e imagenes correctos;
+  - `/presentacion` tiene `24` slides;
+  - `/deck` tiene `44` slides, `noindex, follow` y no contiene MRR, financiacion, presupuesto ni cifras monetarias;
+  - DE/PT mantienen `lang`, canonical, H1 localizado y contenido real.
+- QA Googlebot en ocho rutas: `HTTP 200`, prerender activo, canonical propio, H1 e idioma correctos y sin `Not found`.
+- Validaciones locales:
+  - `npm run build`: OK;
+  - `npm test -- --run`: `148/148`;
+  - suite de arquitectura: `20/20`;
+  - ESLint focal de todos los archivos del lote: OK;
+  - lint global: sigue fallando por `111` errores preexistentes fuera del lote.
+
+### Decisiones
+
+- Publicar directamente con Cloudflare Pages/Workers, sin Lovable ni consumo de creditos.
+- Corregir el facade antes de cerrar cuando una ruta cae al origen antiguo, aunque el frontend Pages ya este desplegado.
+- Tratar los conteos anteriores `23/43` como obsoletos: el DOM productivo actual contiene `24/44` slides.
+
+### Hipotesis
+
+- La combinacion de capturas de overview y detalle facilitara que clientes y partners entiendan la gestion diaria, no solo la carta digital.
+
+### Contradicciones / riesgos
+
+- El apunte del 2026-07-22 indicaba `23` slides en Presentacion y `43` en Deck; la implementacion aprobada y publicada contiene `24` y `44`.
+- `npm audit` informa `22` vulnerabilidades de dependencias (`2` bajas, `5` moderadas, `14` altas y `1` critica); no se aplico un `audit fix` automatico porque podria introducir cambios de version fuera del alcance.
+
+### Tareas pendientes
+
+- Revisar la vulnerabilidad critica de dependencias y preparar una actualizacion controlada.
+- Completar el banco visual solo si se obtienen pantallas mejores de RIMs/Decision Center, reposicion Supply y multi-local.
+- Continuar Biblioteca del vino, Aprender vino, blog semanal y Search Console.
