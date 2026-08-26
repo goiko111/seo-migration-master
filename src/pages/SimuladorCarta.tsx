@@ -7,6 +7,8 @@ import SimulatorForm, { type FormData } from "@/components/simulator/SimulatorFo
 import SimulationProgress from "@/components/simulator/SimulationProgress";
 import TeaserReport from "@/components/simulator/TeaserReport";
 import UnlockForm from "@/components/simulator/UnlockForm";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { simulatorText } from "@/components/simulator/simulatorText";
 import {
   generateSimulationId, submitSimulation, pollStatus,
   SIMULATION_DEADLINE_MS, type Teaser,
@@ -15,6 +17,8 @@ import {
 type Phase = "landing" | "simulating" | "teaser" | "contact";
 
 export default function SimuladorCarta() {
+  const { lang } = useLanguage();
+  const copy = simulatorText(lang);
   const [phase, setPhase] = useState<Phase>("landing");
   const [simId, setSimId] = useState<string>("");
   const [teaser, setTeaser] = useState<Teaser | null>(null);
@@ -43,7 +47,7 @@ export default function SimuladorCarta() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     // Fire-and-forget POST; capture teaser when it returns
-    submitSimulation({ simulationId: id, ...data, lang: "es" }).then((res) => {
+    submitSimulation({ simulationId: id, ...data, lang }).then((res) => {
       if (res?.teaser) setTeaser(res.teaser);
     });
 
@@ -77,9 +81,9 @@ export default function SimuladorCarta() {
   return (
     <>
       <SEOHead
-        title="Simulador de Carta de Vinos · Winerim"
-        description="Diseña la carta de vinos perfecta para tu restaurante en 3 minutos. Gratis. Basado en datos de 149+ restaurantes reales."
-        url="/simulador-carta"
+        title={copy.seoTitle}
+        description={copy.seoDescription}
+        url={copy.path}
       />
       <Navbar />
       <main className="min-h-screen bg-background">
@@ -87,7 +91,7 @@ export default function SimuladorCarta() {
           <>
             <SimulatorHero onStart={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} />
             <section ref={formRef} className="py-12 px-4">
-              <SimulatorForm onSubmit={startSubmission} />
+              <SimulatorForm onSubmit={startSubmission} copy={copy} />
             </section>
           </>
         )}
@@ -95,36 +99,34 @@ export default function SimuladorCarta() {
         {phase === "simulating" && (
           <section className="py-16 px-4">
             <div className="max-w-2xl mx-auto text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-semibold">Simulando tu carta...</h2>
-              <p className="text-muted-foreground mt-2">Esto tarda entre 15 y 30 segundos.</p>
+              <h2 className="text-2xl md:text-3xl font-semibold">{copy.simulatingTitle}</h2>
+              <p className="text-muted-foreground mt-2">{copy.simulatingSubtitle}</p>
             </div>
-            <SimulationProgress teaser={teaser} />
+            <SimulationProgress teaser={teaser} copy={copy} />
           </section>
         )}
 
         {phase === "teaser" && teaser && (
           <section className="py-12 px-4">
-            <TeaserReport teaser={teaser} simulationId={simId} isComplete={isComplete} prefill={contact ?? undefined} />
+            <TeaserReport teaser={teaser} simulationId={simId} isComplete={isComplete} prefill={contact ?? undefined} copy={copy} />
           </section>
         )}
 
         {phase === "teaser" && !teaser && (
           <section className="py-16 px-4">
-            <SimulationProgress teaser={null} />
+            <SimulationProgress teaser={null} copy={copy} />
           </section>
         )}
 
         {phase === "contact" && (
           <section className="py-16 px-4">
             {teaser ? (
-              <TeaserReport teaser={teaser} simulationId={simId} isComplete={false} prefill={contact ?? undefined} />
+              <TeaserReport teaser={teaser} simulationId={simId} isComplete={false} prefill={contact ?? undefined} copy={copy} />
             ) : (
               <div className="max-w-md mx-auto text-center space-y-4">
-                <h2 className="text-2xl font-semibold">Casi listo</h2>
-                <p className="text-muted-foreground">
-                  Tu simulación se está terminando de procesar. Déjanos tus datos y te enviaremos el informe por email en menos de 48 horas.
-                </p>
-                <UnlockForm simulationId={simId} showContactCopy prefill={contact ?? undefined} />
+                <h2 className="text-2xl font-semibold">{copy.almostTitle}</h2>
+                <p className="text-muted-foreground">{copy.almostBody}</p>
+                <UnlockForm simulationId={simId} showContactCopy prefill={contact ?? undefined} copy={copy} />
               </div>
             )}
           </section>

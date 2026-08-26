@@ -101,18 +101,18 @@ const HeroSection = memo(() => {
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-28 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full pt-28 pb-16 overflow-x-hidden">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — copy */}
-          <div>
+          <div className="min-w-0 max-w-full">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6 animate-fade-in">
-              <span className="w-2 h-2 rounded-full bg-wine animate-pulse" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{h.badge}</span>
+            <div className="inline-flex max-w-full items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-6 animate-fade-in">
+              <span className="w-2 h-2 shrink-0 rounded-full bg-wine animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-wide sm:tracking-widest uppercase text-wine-light break-words">{h.badge}</span>
             </div>
 
             {/* H1 — 3 clear outcomes */}
-            <h1 className="font-serif lg:font-heading text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.1] mb-5">
+            <h1 className="font-serif lg:font-heading text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.15] sm:leading-[1.1] mb-5 max-w-full break-words hyphens-auto">
               {h.title.split('. ').map((part, i, arr) => (
                 <span key={i}>
                   {i === 0 ? <span className="text-wine-light">{part}.</span> : <>{" "}{part}{i < arr.length - 1 ? '.' : ''}</>}

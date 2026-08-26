@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Unlock } from "lucide-react";
 import { unlockReport, SIMULATOR_BASE_URL } from "@/lib/simulatorApi";
+import { simulatorText, type SimulatorCopy } from "./simulatorText";
 
 const schema = z.object({
   email: z.string().trim().email("Email inválido").max(255),
@@ -17,9 +18,11 @@ type Props = {
   simulationId: string;
   showContactCopy?: boolean;
   prefill?: { name?: string; email?: string; phone?: string };
+  copy?: SimulatorCopy;
 };
 
-export default function UnlockForm({ simulationId, showContactCopy, prefill }: Props) {
+export default function UnlockForm({ simulationId, showContactCopy, prefill, copy }: Props) {
+  const c = copy ?? simulatorText("es");
   const [email, setEmail] = useState(prefill?.email ?? "");
   const [name, setName] = useState(prefill?.name ?? "");
   const [phone, setPhone] = useState(prefill?.phone ?? "");
@@ -49,24 +52,21 @@ export default function UnlockForm({ simulationId, showContactCopy, prefill }: P
     <Card className="p-6 max-w-md mx-auto bg-card border-wine/30">
       <div className="text-center mb-4">
         <Unlock className="w-8 h-8 text-wine mx-auto mb-2" />
-        <h3 className="text-xl font-semibold">Desbloquea el informe completo</h3>
+        <h3 className="text-xl font-semibold">{c.unlockTitle}</h3>
         {showContactCopy ? (
           <p className="text-sm text-muted-foreground mt-2">
-            Te enviaremos el informe por email en menos de 48 horas.
+            {c.unlockContactCopy}
           </p>
         ) : (
           <ul className="text-sm text-muted-foreground mt-3 space-y-1 text-left">
-            <li>📊 Mapa de precios detallado</li>
-            <li>🗺️ Geografía del vino</li>
-            <li>💰 Análisis financiero</li>
-            <li>🤖 Recomendaciones IA personalizadas</li>
+            {c.unlockBullets.map((b) => <li key={b}>{b}</li>)}
           </ul>
         )}
       </div>
 
       {done ? (
         <div className="text-center text-sm text-wine font-medium py-6">
-          ✅ ¡Desbloqueado! Cargando informe...
+          {c.unlockDone}
         </div>
       ) : (
         <form onSubmit={submit} className="space-y-3">

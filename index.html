@@ -348,7 +348,7 @@
         var isCampaignHost = window.location.hostname === 'go.winerim.wine';
         var isFunnelPage = isCampaignHost || chatDisabledPaths.indexOf(path.replace(/\/$/, '')) !== -1;
         window.__WINERIM_CHAT_DISABLED__ = isFunnelPage;
-        var langMatch = path.match(/^\/(en|it|fr|de|pt)\//);
+        var langMatch = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/);
         var lang = langMatch ? langMatch[1] : 'es';
         var welcomeMessages = {
           es: '¡Hola! 👋 Soy Iñigo, del equipo de Winerim. ¿En qué puedo ayudarte?',
@@ -371,30 +371,48 @@
         };
       })();
       /* Reveal chat widget once it has loaded and positioned itself */
-      window.addEventListener('load', function() {
-        if (window.__WINERIM_CHAT_DISABLED__) return;
-        setTimeout(function() {
+      (function() {
+        var reveal = function() {
+          if (window.__WINERIM_CHAT_DISABLED__) return;
           document.querySelectorAll('#winerim-web-chat, .winerim-web-chat, [data-winerim-chat]')
             .forEach(function(el) { el.classList.add('ready'); });
-        }, 500);
-      });
+        };
+        var watcher = setInterval(reveal, 800);
+        setTimeout(function() { clearInterval(watcher); reveal(); }, 30000);
+      })();
     </script>
     <script>
-      window.addEventListener('load', function() {
-        if (window.__WINERIM_CHAT_DISABLED__) return;
+      (function() {
+        var loaded = false;
+        var hasConsentDecision = function() {
+          try {
+            var v = window.localStorage.getItem('winerim_cookie_consent');
+            return v === 'accepted' || v === 'rejected';
+          } catch (e) { return false; }
+        };
         var loadChat = function() {
+          if (loaded || window.__WINERIM_CHAT_DISABLED__) return;
+          loaded = true;
           var script = document.createElement('script');
           script.src = 'https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js';
           script.async = true;
           document.body.appendChild(script);
         };
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(loadChat, { timeout: 3000 });
-        } else {
-          setTimeout(loadChat, 1500);
-        }
-      });
+        var scheduleChat = function() {
+          if (window.__WINERIM_CHAT_DISABLED__) return;
+          // Do not mount the chat on top of the cookie banner: wait for a decision.
+          if (!hasConsentDecision()) return;
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadChat, { timeout: 3000 });
+          } else {
+            setTimeout(loadChat, 1500);
+          }
+        };
+        window.addEventListener('load', scheduleChat);
+        window.addEventListener('winerim:cookie-consent-updated', scheduleChat);
+      })();
     </script>
+
 
     <!-- Noscript fallback: critical content visible to crawlers that don't execute JS -->
     <noscript>
