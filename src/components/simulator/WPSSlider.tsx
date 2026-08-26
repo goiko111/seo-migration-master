@@ -2,15 +2,25 @@ import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { WPS_ZONES } from "@/data/simulatorRegions";
 import { Info, ChevronDown } from "lucide-react";
+import { simulatorFormText, type SimulatorFormCopy } from "./simulatorFormText";
 
-export default function WPSSlider({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+type Props = { value: number; onChange: (v: number) => void; copy?: SimulatorFormCopy };
+
+export default function WPSSlider({ value, onChange, copy }: Props) {
+  const f = copy ?? simulatorFormText("es");
   const [showLegend, setShowLegend] = useState(false);
-  const zone = WPS_ZONES.find((z) => value >= z.min && value <= z.max) ?? WPS_ZONES[0];
+  const zones = WPS_ZONES.map((z, i) => ({
+    ...z,
+    name: f.wpsZones[i]?.name ?? z.name,
+    desc: f.wpsZones[i]?.desc ?? z.desc,
+    legend: f.wpsZones[i]?.legend ?? z.legend,
+  }));
+  const zone = zones.find((z) => value >= z.min && value <= z.max) ?? zones[0];
   return (
     <div className="space-y-3">
       <Slider value={[value]} min={0} max={100} step={1} onValueChange={([v]) => onChange(v)} />
       <div className="flex flex-wrap justify-between gap-x-2 gap-y-1 text-[10px] text-muted-foreground px-1">
-        {WPS_ZONES.map((z) => (
+        {zones.map((z) => (
           <span key={z.name} className="text-center whitespace-nowrap">{z.name}</span>
         ))}
       </div>
@@ -26,13 +36,13 @@ export default function WPSSlider({ value, onChange }: { value: number; onChange
         className="flex items-center gap-2 text-xs text-wine hover:underline mx-auto"
       >
         <Info size={14} />
-        {showLegend ? "Ocultar leyenda" : "Ver significado de cada nivel"}
+        {showLegend ? f.wpsLegendHide : f.wpsLegendShow}
         <ChevronDown size={14} className={`transition-transform ${showLegend ? "rotate-180" : ""}`} />
       </button>
 
       {showLegend && (
         <div className="rounded-lg border border-border bg-card p-4 space-y-3 text-sm">
-          {WPS_ZONES.map((z) => (
+          {zones.map((z) => (
             <div key={z.name} className="flex gap-3">
               <span className="text-lg leading-none shrink-0">{z.icon}</span>
               <div>

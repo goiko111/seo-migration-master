@@ -12,12 +12,12 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Minus, Plus } from "lucide-react";
 import ChipGroup from "./ChipGroup";
 import WPSSlider from "./WPSSlider";
-import {
-  COUNTRIES, REGIONS_BY_COUNTRY, CUISINE_TYPES, TICKET_RANGES, WINE_SERVICE,
-  CLIENT_PROFILES, WINE_KNOWLEDGE, ORIGIN_PREFERENCE, WINE_TYPES, BEV_COSTS, MARGINS,
-} from "@/data/simulatorRegions";
+import { REGIONS_BY_COUNTRY } from "@/data/simulatorRegions";
+import { TICKET_RANGES } from "@/data/simulatorRegions";
 import type { SimulatePayload } from "@/lib/simulatorApi";
 import { simulatorText, type SimulatorCopy } from "./simulatorText";
+import { simulatorFormText, NUMBER_LOCALE } from "./simulatorFormText";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export type FormData = Omit<SimulatePayload, "simulationId" | "lang">;
 
@@ -55,6 +55,9 @@ const initial: FormData = {
 
 export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: FormData) => void; copy?: SimulatorCopy }) {
   const c = copy ?? simulatorText("es");
+  const f = simulatorFormText(c.lang);
+  const { localePath } = useLanguage();
+  const numberLocale = NUMBER_LOCALE[String(c.lang ?? "es")] ?? "es-ES";
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>(initial);
   const [touched, setTouched] = useState(false);
@@ -71,28 +74,28 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
 
   const validateStep = (): string | null => {
     if (step === 1) {
-      if (!data.restaurantName || data.restaurantName.length < 2) return "Indica el nombre del restaurante";
-      if (!data.city) return "Indica la ciudad o zona";
-      if (!data.country) return "Selecciona el país";
-      if (!data.cuisineTypes?.length) return "Selecciona al menos un tipo de cocina";
+      if (!data.restaurantName || data.restaurantName.length < 2) return f.errors.name;
+      if (!data.city) return f.errors.city;
+      if (!data.country) return f.errors.country;
+      if (!data.cuisineTypes?.length) return f.errors.cuisine;
     }
     if (step === 2) {
-      if (!data.ticketMedio) return "Selecciona el ticket medio";
-      if (data.wps == null) return "Define el protagonismo del vino";
-      if (!data.wineService?.length) return "Selecciona el servicio de vino";
-      if (!data.hasSommelier) return "Indica si tienes sommelier";
+      if (!data.ticketMedio) return f.errors.ticket;
+      if (data.wps == null) return f.errors.wps;
+      if (!data.wineService?.length) return f.errors.wineService;
+      if (!data.hasSommelier) return f.errors.sommelier;
     }
     if (step === 3) {
-      if (!data.clientProfiles?.length) return "Selecciona al menos un perfil de cliente";
+      if (!data.clientProfiles?.length) return f.errors.clientProfile;
     }
     if (step === 4) {
-      if (!data.objective) return "Selecciona tu objetivo principal";
+      if (!data.objective) return f.errors.objective;
     }
     if (step === 5) {
-      if (!data.contactName || data.contactName.trim().length < 2) return "Indica tu nombre";
+      if (!data.contactName || data.contactName.trim().length < 2) return f.errors.yourName;
       const email = (data.contactEmail ?? "").trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Indica un email válido";
-      if (!acceptPrivacy) return "Debes aceptar la política de privacidad";
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return f.errors.email;
+      if (!acceptPrivacy) return f.errors.privacy;
     }
     return null;
   };
@@ -133,37 +136,40 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
         >
           {step === 1 && (
             <>
-              <h2 className="text-2xl font-semibold">Tu Restaurante</h2>
-              <Field label="Nombre del restaurante" required>
-                <Input value={data.restaurantName} onChange={(e) => update("restaurantName", e.target.value)} placeholder="Casa Modelo" />
+              <h2 className="text-2xl font-semibold">{f.steps.restaurant}</h2>
+              <Field label={f.labels.name} required>
+                <Input value={data.restaurantName} onChange={(e) => update("restaurantName", e.target.value)} placeholder={f.placeholders.name} />
               </Field>
-              <Field label="Ciudad / Zona" required>
-                <Input value={data.city} onChange={(e) => update("city", e.target.value)} placeholder="Madrid" />
+              <Field label={f.labels.city} required>
+                <Input value={data.city} onChange={(e) => update("city", e.target.value)} placeholder={f.placeholders.city} />
               </Field>
-              <Field label="País" required>
+              <Field label={f.labels.country} required>
                 <Select value={data.country} onValueChange={(v) => update("country", v)}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    {COUNTRIES.map((c) => <SelectItem key={c.code} value={c.code}>{c.label}</SelectItem>)}
+                    {f.options.countries.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </Field>
-              <Field label="Tipo de cocina" required>
-                <ChipGroup options={CUISINE_TYPES} value={data.cuisineTypes} onChange={(v) => update("cuisineTypes", v)} />
+              <Field label={f.labels.cuisine} required>
+                <ChipGroup options={f.options.cuisine} value={data.cuisineTypes} onChange={(v) => update("cuisineTypes", v)} />
               </Field>
-              <Field label={`Aforo: ${data.capacity} comensales`} required>
+              <Field label={f.labels.capacity(data.capacity)} required>
                 <Slider value={[data.capacity]} min={20} max={300} step={5} onValueChange={([v]) => update("capacity", v)} />
               </Field>
-              <Field label="¿Ya tiene carta de vinos?" required>
+              <Field label={f.labels.hasList} required>
                 <RadioGroup value={data.hasExistingList ? "yes" : "no"} onValueChange={(v) => update("hasExistingList", v === "yes")} className="flex gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="no" /> No (nueva apertura)</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="yes" /> Sí (reestructuración)</label>
+                  {f.options.hasList.map((o) => (
+                    <label key={o.value} className="flex items-center gap-2 cursor-pointer">
+                      <RadioGroupItem value={o.value} /> {o.label}
+                    </label>
+                  ))}
                 </RadioGroup>
                 {data.hasExistingList && (
                   <p className="text-sm text-muted-foreground mt-2">
-                    Si quieres analizar tu carta actual, usa nuestro{" "}
-                    <Link to="/analisis-carta" className="text-wine underline">Analizador de Cartas</Link>.
-                    El simulador es para diseñar una carta nueva desde cero.
+                    {f.helpExistingListPre}{" "}
+                    <Link to={localePath("/analisis-carta")} className="text-wine underline">{f.helpExistingListLink}</Link>.{" "}
+                    {f.helpExistingListPost}
                   </p>
                 )}
               </Field>
@@ -172,31 +178,30 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
 
           {step === 2 && (
             <>
-              <h2 className="text-2xl font-semibold">Tu Concepto</h2>
-              <Field label="Ticket medio" required>
+              <h2 className="text-2xl font-semibold">{f.steps.concept}</h2>
+              <Field label={f.labels.ticket} required>
                 <ChipGroup multi={false} options={TICKET_RANGES} value={data.ticketMedio} onChange={(v) => update("ticketMedio", v)} />
               </Field>
-              <Field label="Protagonismo del vino (WPS)" required>
-                <WPSSlider value={data.wps} onChange={(v) => update("wps", v)} />
+              <Field label={f.labels.wps} required>
+                <WPSSlider value={data.wps} onChange={(v) => update("wps", v)} copy={f} />
               </Field>
-              <Field label="Servicio de vino" required>
-                <ChipGroup options={WINE_SERVICE} value={data.wineService ?? []} onChange={(v) => update("wineService", v)} />
+              <Field label={f.labels.wineService} required>
+                <ChipGroup options={f.options.wineService} value={data.wineService ?? []} onChange={(v) => update("wineService", v)} />
               </Field>
-              <Field label="¿Sommelier en sala?" required>
+              <Field label={f.labels.sommelier} required>
                 <RadioGroup value={data.hasSommelier} onValueChange={(v) => update("hasSommelier", v)} className="flex flex-wrap gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="si_dedicado" /> Sí, dedicado</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="si_compartido" /> Sí, compartido</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="no" /> No</label>
+                  {f.options.sommelier.map((o) => (
+                    <label key={o.value} className="flex items-center gap-2 cursor-pointer">
+                      <RadioGroupItem value={o.value} /> {o.label}
+                    </label>
+                  ))}
                 </RadioGroup>
               </Field>
-              <Field label="Almacenamiento (opcional)">
+              <Field label={f.labels.storage}>
                 <Select value={data.storageSize} onValueChange={(v) => update("storageSize", v)}>
-                  <SelectTrigger><SelectValue placeholder="Selecciona..." /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder={f.placeholders.select} /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pequeno">Pequeño (&lt;50 refs)</SelectItem>
-                    <SelectItem value="medio">Medio (50-150)</SelectItem>
-                    <SelectItem value="grande">Grande (150-300)</SelectItem>
-                    <SelectItem value="bodega_propia">Bodega propia (300+)</SelectItem>
+                    {f.options.storage.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </Field>
@@ -205,89 +210,78 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
 
           {step === 3 && (
             <>
-              <h2 className="text-2xl font-semibold">Tu Cliente</h2>
-              <Field label="Perfil de cliente" required>
-                <ChipGroup options={CLIENT_PROFILES} value={data.clientProfiles ?? []} onChange={(v) => update("clientProfiles", v)} />
+              <h2 className="text-2xl font-semibold">{f.steps.client}</h2>
+              <Field label={f.labels.clientProfile} required>
+                <ChipGroup options={f.options.clientProfiles} value={data.clientProfiles ?? []} onChange={(v) => update("clientProfiles", v)} />
               </Field>
-              <Field label="Sensibilidad al precio">
+              <Field label={f.labels.priceSensitivity}>
                 <Slider value={[data.priceSensitivity ?? 50]} min={0} max={100} step={5} onValueChange={([v]) => update("priceSensitivity", v)} />
                 <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>Calidad ante todo</span><span>El precio importa mucho</span>
+                  <span>{f.labels.priceQuality}</span><span>{f.labels.pricePrice}</span>
                 </div>
               </Field>
-              <Field label="Conocimiento de vino (opcional)">
-                <ChipGroup multi={false} options={WINE_KNOWLEDGE} value={data.wineKnowledge ?? ""} onChange={(v) => update("wineKnowledge", v)} />
+              <Field label={f.labels.wineKnowledge}>
+                <ChipGroup multi={false} options={f.options.wineKnowledge} value={data.wineKnowledge ?? ""} onChange={(v) => update("wineKnowledge", v)} />
               </Field>
-              <Field label="Preferencia de origen (opcional)">
-                <ChipGroup options={ORIGIN_PREFERENCE} value={data.originPreference ?? []} onChange={(v) => update("originPreference", v)} />
+              <Field label={f.labels.originPreference}>
+                <ChipGroup options={f.options.originPreference} value={data.originPreference ?? []} onChange={(v) => update("originPreference", v)} />
               </Field>
             </>
           )}
 
           {step === 4 && (
             <>
-              <h2 className="text-2xl font-semibold">Tu Carta</h2>
-              <p className="text-sm text-muted-foreground -mt-3">Objetivos y preferencias para tu carta de vinos.</p>
+              <h2 className="text-2xl font-semibold">{f.steps.list}</h2>
+              <p className="text-sm text-muted-foreground -mt-3">{f.listIntro}</p>
 
-              <Field label="Objetivo principal" required>
+              <Field label={f.labels.objective} required>
                 <RadioGroup value={data.objective ?? ""} onValueChange={(v) => update("objective", v)} className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {[
-                    ["improve_margin", "Mejorar margen"],
-                    ["increase_rotation", "Mayor rotación"],
-                    ["reduce_waste", "Reducir merma"],
-                    ["new_list", "Carta desde cero"],
-                    ["update_list", "Actualizar carta existente"],
-                  ].map(([v, l]) => (
-                    <label key={v} className="flex items-center gap-2 cursor-pointer p-2 rounded border border-input hover:border-wine/40">
-                      <RadioGroupItem value={v} /> {l}
+                  {f.options.objective.map((o) => (
+                    <label key={o.value} className="flex items-center gap-2 cursor-pointer p-2 rounded border border-input hover:border-wine/40">
+                      <RadioGroupItem value={o.value} /> {o.label}
                     </label>
                   ))}
                 </RadioGroup>
               </Field>
 
-              <Field label={`Presupuesto primera compra: €${(data.budgetFirstPurchase ?? 0).toLocaleString("es-ES")}`}>
+              <Field label={f.labels.budget(`€${(data.budgetFirstPurchase ?? 0).toLocaleString(numberLocale)}`)}>
                 <Slider value={[data.budgetFirstPurchase ?? 1000]} min={1000} max={50000} step={500} onValueChange={([v]) => update("budgetFirstPurchase", v)} />
               </Field>
-              <Field label="Bev. Cost objetivo (opcional)">
-                <ChipGroup multi={false} options={BEV_COSTS} value={data.bevCostTarget ?? ""} onChange={(v) => update("bevCostTarget", v)} />
+              <Field label={f.labels.bevCost}>
+                <ChipGroup multi={false} options={f.options.bevCosts} value={data.bevCostTarget ?? ""} onChange={(v) => update("bevCostTarget", v)} />
               </Field>
-              <Field label="Margen mínimo deseado (opcional)">
-                <ChipGroup multi={false} options={MARGINS} value={data.minMargin ?? ""} onChange={(v) => update("minMargin", v)} />
+              <Field label={f.labels.minMargin}>
+                <ChipGroup multi={false} options={f.options.margins} value={data.minMargin ?? ""} onChange={(v) => update("minMargin", v)} />
               </Field>
 
-              <Field label="Tipos de vino deseados (opcional)">
-                <ChipGroup options={WINE_TYPES} value={data.preferredWineTypes ?? []} onChange={(v) => update("preferredWineTypes", v)} />
+              <Field label={f.labels.wineTypes}>
+                <ChipGroup options={f.options.wineTypes} value={data.preferredWineTypes ?? []} onChange={(v) => update("preferredWineTypes", v)} />
               </Field>
               {regions.length > 0 && (
-                <Field label={`Regiones preferidas (opcional)`}>
+                <Field label={f.labels.regions}>
                   <ChipGroup options={regions} value={data.preferredRegions ?? []} onChange={(v) => update("preferredRegions", v)} />
                 </Field>
               )}
-              <Field label="Estilo de carta (opcional)">
+              <Field label={f.labels.listStyle}>
                 <RadioGroup value={data.listStyle} onValueChange={(v) => update("listStyle", v)} className="grid grid-cols-2 gap-2">
-                  {[
-                    ["clasica", "Clásica (por tipos)"],
-                    ["regiones", "Por regiones"],
-                    ["progresiva", "Progresiva (cuerpo/sabor)"],
-                    ["mixta", "Mixta"],
-                  ].map(([v, l]) => (
-                    <label key={v} className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value={v} /> {l}</label>
+                  {f.options.listStyle.map((o) => (
+                    <label key={o.value} className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value={o.value} /> {o.label}</label>
                   ))}
                 </RadioGroup>
               </Field>
-              <Field label="¿Incluir vinos naturales? (opcional)">
+              <Field label={f.labels.includeNatural}>
                 <RadioGroup value={data.includeNatural} onValueChange={(v) => update("includeNatural", v)} className="flex gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="si" /> Sí</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="no" /> No</label>
-                  <label className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value="algunos" /> Algunos</label>
+                  {f.options.includeNatural.map((o) => (
+                    <label key={o.value} className="flex items-center gap-2 cursor-pointer"><RadioGroupItem value={o.value} /> {o.label}</label>
+                  ))}
                 </RadioGroup>
               </Field>
-              <Field label="Notas adicionales (opcional)">
+              <Field label={f.labels.notes}>
                 <Textarea
                   maxLength={500}
                   value={data.notes ?? ""}
                   onChange={(e) => update("notes", e.target.value)}
-                  placeholder="Ej: Queremos enfocarnos en vinos de autor..."
+                  placeholder={f.placeholders.notes}
                 />
                 <div className="text-xs text-muted-foreground text-right mt-1">{(data.notes ?? "").length}/500</div>
               </Field>
@@ -296,32 +290,32 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
 
           {step === 5 && (
             <>
-              <h2 className="text-2xl font-semibold">Tus Datos</h2>
-              <p className="text-sm text-muted-foreground -mt-3">Para enviarte el informe completo y guardar tu simulación.</p>
+              <h2 className="text-2xl font-semibold">{f.steps.contact}</h2>
+              <p className="text-sm text-muted-foreground -mt-3">{f.contactIntro}</p>
 
-              <Field label="Tu nombre" required>
+              <Field label={f.labels.yourName} required>
                 <Input
                   value={data.contactName ?? ""}
                   onChange={(e) => update("contactName", e.target.value)}
-                  placeholder="Ej: María García"
+                  placeholder={f.placeholders.yourName}
                   maxLength={100}
                 />
               </Field>
-              <Field label="Email profesional" required>
+              <Field label={f.labels.email} required>
                 <Input
                   type="email"
                   value={data.contactEmail ?? ""}
                   onChange={(e) => update("contactEmail", e.target.value)}
-                  placeholder="tu@restaurante.com"
+                  placeholder={f.placeholders.email}
                   maxLength={255}
                 />
               </Field>
-              <Field label="Teléfono (opcional)">
+              <Field label={f.labels.phone}>
                 <Input
                   type="tel"
                   value={data.contactPhone ?? ""}
                   onChange={(e) => update("contactPhone", e.target.value)}
-                  placeholder="+34 600 000 000"
+                  placeholder={f.placeholders.phone}
                   maxLength={40}
                 />
               </Field>
@@ -333,7 +327,8 @@ export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: For
                   className="mt-1"
                 />
                 <span>
-                  Acepto la <Link to="/politica-privacidad" className="text-wine underline">política de privacidad</Link>
+                  {f.labels.privacyPre}{" "}
+                  <Link to={localePath("/politica-privacidad")} className="text-wine underline">{f.labels.privacyLink}</Link>
                   <span className="text-wine"> *</span>
                 </span>
               </label>
