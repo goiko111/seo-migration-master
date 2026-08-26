@@ -76,7 +76,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
                 const refs = Math.round((Number(pct) / 100) * totalRefs);
                 return (
                   <tr key={key} className="border-b last:border-0">
-                    <td className="py-2">{meta.emoji} {meta.label}</td>
+                    <td className="py-2">{meta.emoji} {typeLabels[key.toLowerCase()] ?? meta.label}</td>
                     <td className="py-2">{pct}%</td>
                     <td className="py-2">{refs}</td>
                   </tr>
