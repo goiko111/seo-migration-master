@@ -23,7 +23,7 @@ export default function SimulationProgress({ teaser, copy }: { teaser: Teaser | 
       <Card className="p-6 border-wine/20">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-3 h-3 rounded-full bg-wine animate-pulse" />
-          <div className="text-sm font-medium">{copy.stepWord} {current.step}/7 · {current.label}</div>
+          <div className="text-sm font-medium">{copy.stepWord} {current.step}/7 · {(TIMELINE_LABELS[String(copy.lang ?? "es")] ?? TIMELINE_LABELS.es)[current.step - 1] ?? current.label}</div>
         </div>
         <Progress value={progress} className="h-2" />
       </Card>
