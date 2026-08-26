@@ -371,13 +371,15 @@
         };
       })();
       /* Reveal chat widget once it has loaded and positioned itself */
-      window.addEventListener('load', function() {
-        if (window.__WINERIM_CHAT_DISABLED__) return;
-        setTimeout(function() {
+      (function() {
+        var reveal = function() {
+          if (window.__WINERIM_CHAT_DISABLED__) return;
           document.querySelectorAll('#winerim-web-chat, .winerim-web-chat, [data-winerim-chat]')
             .forEach(function(el) { el.classList.add('ready'); });
-        }, 500);
-      });
+        };
+        var watcher = setInterval(reveal, 800);
+        setTimeout(function() { clearInterval(watcher); reveal(); }, 30000);
+      })();
     </script>
     <script>
       (function() {
