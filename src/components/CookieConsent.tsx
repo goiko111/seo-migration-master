@@ -21,16 +21,22 @@ const CookieConsent = () => {
     }
   }, []);
 
+  const notifyConsentUpdated = () => {
+    window.dispatchEvent(new Event("winerim:cookie-consent-updated"));
+  };
+
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
     updateConsent(true);
     setVisible(false);
+    notifyConsentUpdated();
   };
 
   const reject = () => {
     localStorage.setItem(CONSENT_KEY, "rejected");
     updateConsent(false);
     setVisible(false);
+    notifyConsentUpdated();
   };
 
   return (
