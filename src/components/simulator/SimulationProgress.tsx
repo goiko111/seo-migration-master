@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import { SIMULATION_TIMELINE, type Teaser } from "@/lib/simulatorApi";
 import type { SimulatorCopy } from "./simulatorText";
+import { NUMBER_LOCALE } from "./simulatorFormText";
 
 export default function SimulationProgress({ teaser, copy }: { teaser: Teaser | null; copy: SimulatorCopy }) {
   const [elapsed, setElapsed] = useState(0);
@@ -35,7 +36,7 @@ export default function SimulationProgress({ teaser, copy }: { teaser: Teaser | 
               <Metric label={copy.score} value={String(teaser.coherenceScore)} />
               <Metric label={copy.refs} value={`${teaser.refsRange.min}-${teaser.refsRange.max}`} />
               <Metric label={copy.profile} value={teaser.profile} />
-              <Metric label={copy.firstPurchase} value={`${teaser.currency}${teaser.firstPurchase.low.toLocaleString("es-ES")}+`} />
+              <Metric label={copy.firstPurchase} value={`${teaser.currency}${teaser.firstPurchase.low.toLocaleString(NUMBER_LOCALE[String(copy.lang ?? "es")] ?? "es-ES")}+`} />
             </div>
           </>
         ) : (
