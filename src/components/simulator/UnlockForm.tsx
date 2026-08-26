@@ -7,12 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Unlock } from "lucide-react";
 import { unlockReport, SIMULATOR_BASE_URL } from "@/lib/simulatorApi";
 import { simulatorText, type SimulatorCopy } from "./simulatorText";
-
-const schema = z.object({
-  email: z.string().trim().email("Email inválido").max(255),
-  name: z.string().trim().min(2, "Indica tu nombre").max(100),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
-});
+import { simulatorFormText } from "./simulatorFormText";
 
 type Props = {
   simulationId: string;
@@ -23,6 +18,12 @@ type Props = {
 
 export default function UnlockForm({ simulationId, showContactCopy, prefill, copy }: Props) {
   const c = copy ?? simulatorText("es");
+  const f = simulatorFormText(c.lang);
+  const schema = z.object({
+    email: z.string().trim().email(f.unlock.invalidEmail).max(255),
+    name: z.string().trim().min(2, f.unlock.invalidName).max(100),
+    phone: z.string().trim().max(40).optional().or(z.literal("")),
+  });
   const [email, setEmail] = useState(prefill?.email ?? "");
   const [name, setName] = useState(prefill?.name ?? "");
   const [phone, setPhone] = useState(prefill?.phone ?? "");
@@ -33,7 +34,7 @@ export default function UnlockForm({ simulationId, showContactCopy, prefill, cop
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = schema.safeParse({ email, name, phone });
-    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? "Datos inválidos"); return; }
+    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? f.unlock.invalidData); return; }
     setError(null); setSubmitting(true);
     const res = await unlockReport(simulationId, { email: parsed.data.email, name: parsed.data.name, phone: parsed.data.phone || undefined });
     setSubmitting(false);
@@ -71,20 +72,20 @@ export default function UnlockForm({ simulationId, showContactCopy, prefill, cop
       ) : (
         <form onSubmit={submit} className="space-y-3">
           <div>
-            <Label htmlFor="sim-email">Email profesional</Label>
+            <Label htmlFor="sim-email">{f.labels.email}</Label>
             <Input id="sim-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div>
-            <Label htmlFor="sim-name">Tu nombre</Label>
+            <Label htmlFor="sim-name">{f.labels.yourName}</Label>
             <Input id="sim-name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
           <div>
-            <Label htmlFor="sim-phone">Teléfono (opcional)</Label>
+            <Label htmlFor="sim-phone">{f.labels.phone}</Label>
             <Input id="sim-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button type="submit" disabled={submitting} className="w-full bg-wine hover:bg-wine-dark text-white">
-            {submitting ? "Enviando..." : "🔓 Ver informe completo"}
+            {submitting ? f.unlock.sending : f.unlock.cta}
           </Button>
         </form>
       )}

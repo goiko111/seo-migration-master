@@ -1,13 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+export type ChipOption = string | { value: string; label: string };
+
 type Props = {
-  options: string[];
+  options: ChipOption[];
   value: string[] | string;
   onChange: (v: any) => void;
   multi?: boolean;
   className?: string;
 };
+
+const toOption = (opt: ChipOption) =>
+  typeof opt === "string" ? { value: opt, label: opt } : opt;
 
 export default function ChipGroup({ options, value, onChange, multi = true, className }: Props) {
   const isSelected = (opt: string) =>
@@ -24,21 +29,22 @@ export default function ChipGroup({ options, value, onChange, multi = true, clas
 
   return (
     <div className={cn("flex flex-wrap gap-2", className)}>
-      {options.map((opt) => {
-        const selected = isSelected(opt);
+      {options.map((raw) => {
+        const opt = toOption(raw);
+        const selected = isSelected(opt.value);
         return (
           <Button
-            key={opt}
+            key={opt.value}
             type="button"
             variant={selected ? "default" : "outline"}
             size="sm"
-            onClick={() => toggle(opt)}
+            onClick={() => toggle(opt.value)}
             className={cn(
               "rounded-full transition-all",
               selected && "bg-wine hover:bg-wine-dark text-white border-wine",
             )}
           >
-            {opt}
+            {opt.label}
           </Button>
         );
       })}

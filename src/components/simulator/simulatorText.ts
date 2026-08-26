@@ -1,6 +1,7 @@
 import type { SupportedLang } from "@/i18n/types";
 
 export type SimulatorCopy = {
+  lang?: SupportedLang | string;
   seoTitle: string;
   seoDescription: string;
   path: string;
@@ -378,5 +379,6 @@ const pt: SimulatorCopy = {
 const DICT: Record<string, SimulatorCopy> = { es, en, it, fr, de, pt };
 
 export function simulatorText(lang: SupportedLang | string): SimulatorCopy {
-  return DICT[lang] ?? es;
+  const base = DICT[lang] ?? es;
+  return { ...base, lang: DICT[lang] ? lang : "es" };
 }
