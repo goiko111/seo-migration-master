@@ -5,15 +5,17 @@ import ScoreCircle from "./ScoreCircle";
 import UnlockForm from "./UnlockForm";
 import { WINE_TYPE_META } from "@/data/simulatorRegions";
 import { formatEuro, type Teaser } from "@/lib/simulatorApi";
+import type { SimulatorCopy } from "./simulatorText";
 
 type Props = {
   teaser: Teaser;
   simulationId: string;
   isComplete: boolean;
   prefill?: { name?: string; email?: string; phone?: string };
+  copy: SimulatorCopy;
 };
 
-export default function TeaserReport({ teaser, simulationId, isComplete, prefill }: Props) {
+export default function TeaserReport({ teaser, simulationId, isComplete, prefill, copy }: Props) {
   const totalRefs = teaser.totalRefs;
   const distribution = Object.entries(teaser.distribution || {}).filter(
     ([, pct]) => Number(pct) > 0,
@@ -28,7 +30,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
     >
       {!isComplete && (
         <div className="text-center text-sm text-muted-foreground">
-          Vista preliminar — el informe se sigue procesando en segundo plano.
+          {copy.previewNote}
         </div>
       )}
 
@@ -36,20 +38,20 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
         {/* Score */}
         <Card className="p-6 flex flex-col items-center justify-center border-wine/20">
           <ScoreCircle score={teaser.coherenceScore} />
-          <div className="mt-3 text-sm text-muted-foreground">Perfil: <span className="text-foreground font-medium">{teaser.profile}</span></div>
+          <div className="mt-3 text-sm text-muted-foreground">{copy.profile}: <span className="text-foreground font-medium">{teaser.profile}</span></div>
         </Card>
 
         {/* Métricas */}
         <Card className="p-6 border-wine/20 md:col-span-2">
-          <h3 className="font-semibold mb-3">Métricas clave</h3>
+          <h3 className="font-semibold mb-3">{copy.keyMetrics}</h3>
           <dl className="grid grid-cols-2 gap-y-3 text-sm">
-            <dt className="text-muted-foreground">Referencias recomendadas</dt>
+            <dt className="text-muted-foreground">{copy.recommendedRefs}</dt>
             <dd className="font-medium">{teaser.refsRange.min}-{teaser.refsRange.max}</dd>
-            <dt className="text-muted-foreground">Total estimado</dt>
+            <dt className="text-muted-foreground">{copy.estimatedTotal}</dt>
             <dd className="font-medium">{totalRefs}</dd>
-            <dt className="text-muted-foreground">Inversión primera compra</dt>
+            <dt className="text-muted-foreground">{copy.firstPurchaseInvestment}</dt>
             <dd className="font-medium">{formatEuro(teaser.firstPurchase.low)} – {formatEuro(teaser.firstPurchase.high)}</dd>
-            <dt className="text-muted-foreground">Alertas</dt>
+            <dt className="text-muted-foreground">{copy.alerts}</dt>
             <dd className="font-medium">{teaser.alerts}</dd>
           </dl>
         </Card>
@@ -57,11 +59,11 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
 
       {/* Distribución */}
       <Card className="p-6 border-wine/20">
-        <h3 className="font-semibold mb-3">Distribución por tipo</h3>
+        <h3 className="font-semibold mb-3">{copy.distributionByType}</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-left text-muted-foreground border-b">
-              <tr><th className="py-2">Tipo</th><th className="py-2">%</th><th className="py-2">Refs aprox.</th></tr>
+              <tr><th className="py-2">{copy.type}</th><th className="py-2">%</th><th className="py-2">{copy.approxRefs}</th></tr>
             </thead>
             <tbody>
               {distribution.map(([key, pct]) => {
@@ -83,7 +85,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
       {/* Blurred sections */}
       <div className="relative">
         <div className="grid md:grid-cols-2 gap-6 select-none pointer-events-none" aria-hidden>
-          {["Mapa de precios", "Geografía del vino", "Análisis financiero", "Recomendaciones IA"].map((t) => (
+          {copy.lockedSections.map((t) => (
             <Card key={t} className="p-6 border-wine/20 min-h-[160px]">
               <h3 className="font-semibold mb-3 flex items-center gap-2"><Lock className="w-4 h-4 text-wine" /> {t}</h3>
               <div className="space-y-2">
@@ -96,7 +98,7 @@ export default function TeaserReport({ teaser, simulationId, isComplete, prefill
           ))}
         </div>
         <div className="absolute inset-0 backdrop-blur-md bg-background/60 flex items-center justify-center p-4">
-          <UnlockForm simulationId={simulationId} showContactCopy={!isComplete} prefill={prefill} />
+          <UnlockForm simulationId={simulationId} showContactCopy={!isComplete} prefill={prefill} copy={copy} />
         </div>
       </div>
     </motion.div>

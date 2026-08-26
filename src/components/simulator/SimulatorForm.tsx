@@ -17,6 +17,7 @@ import {
   CLIENT_PROFILES, WINE_KNOWLEDGE, ORIGIN_PREFERENCE, WINE_TYPES, BEV_COSTS, MARGINS,
 } from "@/data/simulatorRegions";
 import type { SimulatePayload } from "@/lib/simulatorApi";
+import { simulatorText, type SimulatorCopy } from "./simulatorText";
 
 export type FormData = Omit<SimulatePayload, "simulationId" | "lang">;
 
@@ -52,7 +53,8 @@ const initial: FormData = {
   contactPhone: "",
 };
 
-export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData) => void }) {
+export default function SimulatorForm({ onSubmit, copy }: { onSubmit: (data: FormData) => void; copy?: SimulatorCopy }) {
+  const c = copy ?? simulatorText("es");
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>(initial);
   const [touched, setTouched] = useState(false);
@@ -118,7 +120,7 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
           />
         ))}
       </div>
-      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Paso {step} de 5</div>
+      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{c.stepOf(step)}</div>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -344,10 +346,10 @@ export default function SimulatorForm({ onSubmit }: { onSubmit: (data: FormData)
 
       <div className="flex justify-between items-center mt-8">
         <Button type="button" variant="ghost" onClick={back} disabled={step === 1}>
-          <ArrowLeft className="mr-1" /> Atrás
+          <ArrowLeft className="mr-1" /> {c.back}
         </Button>
         <Button type="button" onClick={next} className="bg-wine hover:bg-wine-dark text-white">
-          {step === 5 ? "Simular carta" : "Siguiente"} <ArrowRight className="ml-1" />
+          {step === 5 ? c.submit : c.next} <ArrowRight className="ml-1" />
         </Button>
       </div>
     </Card>

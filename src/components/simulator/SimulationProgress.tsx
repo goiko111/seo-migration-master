@@ -3,8 +3,9 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import { SIMULATION_TIMELINE, type Teaser } from "@/lib/simulatorApi";
+import type { SimulatorCopy } from "./simulatorText";
 
-export default function SimulationProgress({ teaser }: { teaser: Teaser | null }) {
+export default function SimulationProgress({ teaser, copy }: { teaser: Teaser | null; copy: SimulatorCopy }) {
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function SimulationProgress({ teaser }: { teaser: Teaser | null }
       <Card className="p-6 border-wine/20">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-3 h-3 rounded-full bg-wine animate-pulse" />
-          <div className="text-sm font-medium">Paso {current.step}/7 · {current.label}</div>
+          <div className="text-sm font-medium">{copy.stepWord} {current.step}/7 · {current.label}</div>
         </div>
         <Progress value={progress} className="h-2" />
       </Card>
@@ -29,12 +30,12 @@ export default function SimulationProgress({ teaser }: { teaser: Teaser | null }
       <Card className="p-6 border-wine/20 space-y-4">
         {teaser ? (
           <>
-            <div className="text-sm text-muted-foreground">Vista preliminar</div>
+            <div className="text-sm text-muted-foreground">{copy.preview}</div>
             <div className="grid grid-cols-2 gap-4">
-              <Metric label="Score" value={String(teaser.coherenceScore)} />
-              <Metric label="Referencias" value={`${teaser.refsRange.min}-${teaser.refsRange.max}`} />
-              <Metric label="Perfil" value={teaser.profile} />
-              <Metric label="Primera compra" value={`${teaser.currency}${teaser.firstPurchase.low.toLocaleString("es-ES")}+`} />
+              <Metric label={copy.score} value={String(teaser.coherenceScore)} />
+              <Metric label={copy.refs} value={`${teaser.refsRange.min}-${teaser.refsRange.max}`} />
+              <Metric label={copy.profile} value={teaser.profile} />
+              <Metric label={copy.firstPurchase} value={`${teaser.currency}${teaser.firstPurchase.low.toLocaleString("es-ES")}+`} />
             </div>
           </>
         ) : (
