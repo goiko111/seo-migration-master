@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import { SIMULATION_TIMELINE, type Teaser } from "@/lib/simulatorApi";
 import type { SimulatorCopy } from "./simulatorText";
-import { NUMBER_LOCALE } from "./simulatorFormText";
+import { NUMBER_LOCALE, TIMELINE_LABELS } from "./simulatorFormText";
 
 export default function SimulationProgress({ teaser, copy }: { teaser: Teaser | null; copy: SimulatorCopy }) {
   const [elapsed, setElapsed] = useState(0);
