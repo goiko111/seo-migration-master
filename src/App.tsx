@@ -10,7 +10,8 @@ const lazyRouteWithRetry = <T extends ComponentType<Record<string, never>>>(
     const module = await importer();
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
-      if (url.searchParams.delete("__bundle_retry")) {
+      if (url.searchParams.has("__bundle_retry")) {
+        url.searchParams.delete("__bundle_retry");
         window.history.replaceState(window.history.state, "", url.toString());
       }
     }

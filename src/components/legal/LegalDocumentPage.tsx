@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
-import type { Language } from "@/i18n/types";
+import type { SupportedLang as Language } from "@/i18n/types";
 
 type LegalKind = "privacy" | "terms";
 

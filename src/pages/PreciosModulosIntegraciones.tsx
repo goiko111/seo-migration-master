@@ -453,7 +453,7 @@ const PreciosModulosIntegraciones = () => (
               { to: "/funcionalidades", label: "Funcionalidades", type: "solution" },
               { to: "/producto/cloudrim", label: "CloudRIM", type: "solution" },
               { to: "/producto/savia", label: "SAVia", type: "solution" },
-              { to: "/analisis-carta", label: "Analizar mi carta", type: "conversion" },
+              { to: "/analisis-carta", label: "Analizar mi carta", type: "tool" },
             ]}
           />
         </div>
