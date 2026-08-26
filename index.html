@@ -380,21 +380,37 @@
       });
     </script>
     <script>
-      window.addEventListener('load', function() {
-        if (window.__WINERIM_CHAT_DISABLED__) return;
+      (function() {
+        var loaded = false;
+        var hasConsentDecision = function() {
+          try {
+            var v = window.localStorage.getItem('winerim_cookie_consent');
+            return v === 'accepted' || v === 'rejected';
+          } catch (e) { return false; }
+        };
         var loadChat = function() {
+          if (loaded || window.__WINERIM_CHAT_DISABLED__) return;
+          loaded = true;
           var script = document.createElement('script');
           script.src = 'https://protocol-whisperer.lovable.app/widget/winerim-web-chat.js';
           script.async = true;
           document.body.appendChild(script);
         };
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(loadChat, { timeout: 3000 });
-        } else {
-          setTimeout(loadChat, 1500);
-        }
-      });
+        var scheduleChat = function() {
+          if (window.__WINERIM_CHAT_DISABLED__) return;
+          // Do not mount the chat on top of the cookie banner: wait for a decision.
+          if (!hasConsentDecision()) return;
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadChat, { timeout: 3000 });
+          } else {
+            setTimeout(loadChat, 1500);
+          }
+        };
+        window.addEventListener('load', scheduleChat);
+        window.addEventListener('winerim:cookie-consent-updated', scheduleChat);
+      })();
     </script>
+
 
     <!-- Noscript fallback: critical content visible to crawlers that don't execute JS -->
     <noscript>
