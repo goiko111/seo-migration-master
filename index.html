@@ -348,7 +348,7 @@
         var isCampaignHost = window.location.hostname === 'go.winerim.wine';
         var isFunnelPage = isCampaignHost || chatDisabledPaths.indexOf(path.replace(/\/$/, '')) !== -1;
         window.__WINERIM_CHAT_DISABLED__ = isFunnelPage;
-        var langMatch = path.match(/^\/(en|it|fr|de|pt)\//);
+        var langMatch = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/);
         var lang = langMatch ? langMatch[1] : 'es';
         var welcomeMessages = {
           es: '¡Hola! 👋 Soy Iñigo, del equipo de Winerim. ¿En qué puedo ayudarte?',
