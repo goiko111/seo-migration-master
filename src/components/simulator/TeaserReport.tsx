@@ -6,6 +6,7 @@ import UnlockForm from "./UnlockForm";
 import { WINE_TYPE_META } from "@/data/simulatorRegions";
 import { formatEuro, type Teaser } from "@/lib/simulatorApi";
 import type { SimulatorCopy } from "./simulatorText";
+import { simulatorFormText } from "./simulatorFormText";
 
 type Props = {
   teaser: Teaser;
@@ -17,6 +18,10 @@ type Props = {
 
 export default function TeaserReport({ teaser, simulationId, isComplete, prefill, copy }: Props) {
   const totalRefs = teaser.totalRefs;
+  const f = simulatorFormText(copy.lang);
+  const typeLabels = Object.fromEntries(
+    f.options.wineTypes.map((o) => [o.value.toLowerCase(), o.label]),
+  ) as Record<string, string>;
   const distribution = Object.entries(teaser.distribution || {}).filter(
     ([, pct]) => Number(pct) > 0,
   );
