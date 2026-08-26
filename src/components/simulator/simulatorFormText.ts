@@ -483,3 +483,13 @@ export function simulatorFormText(lang: SupportedLang | string | undefined): Sim
 export const NUMBER_LOCALE: Record<string, string> = {
   es: "es-ES", en: "en-GB", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
 };
+
+/** Localized progress-step labels (mirrors SIMULATION_TIMELINE order). */
+export const TIMELINE_LABELS: Record<string, string[]> = {
+  es: ["Analizando tu concepto...", "Calculando referencias ideales...", "Distribuyendo por tipo de vino...", "Definiendo gamas de precio...", "Configurando geografía del vino...", "Calculando métricas financieras...", "Generando recomendaciones IA..."],
+  en: ["Analysing your concept...", "Calculating ideal references...", "Distributing by wine type...", "Defining price tiers...", "Setting up wine geography...", "Calculating financial metrics...", "Generating AI recommendations..."],
+  it: ["Analisi del tuo concept...", "Calcolo delle referenze ideali...", "Distribuzione per tipo di vino...", "Definizione delle fasce di prezzo...", "Configurazione della geografia del vino...", "Calcolo delle metriche finanziarie...", "Generazione delle raccomandazioni IA..."],
+  fr: ["Analyse de votre concept...", "Calcul des références idéales...", "Répartition par type de vin...", "Définition des gammes de prix...", "Configuration de la géographie du vin...", "Calcul des indicateurs financiers...", "Génération des recommandations IA..."],
+  de: ["Ihr Konzept wird analysiert...", "Ideale Positionsanzahl wird berechnet...", "Verteilung nach Weintyp...", "Preisstufen werden definiert...", "Weingeografie wird konfiguriert...", "Finanzkennzahlen werden berechnet...", "KI-Empfehlungen werden erstellt..."],
+  pt: ["A analisar o seu conceito...", "A calcular as referências ideais...", "A distribuir por tipo de vinho...", "A definir gamas de preço...", "A configurar a geografia do vinho...", "A calcular métricas financeiras...", "A gerar recomendações IA..."],
+};
