@@ -73,4 +73,62 @@ export function buildHreflang(
 /**
  * OG Image URL — always absolute with production domain.
  */
-export const DEFAULT_OG_IMAGE = `${CANONICAL_DOMAIN}/og-image.png`;
+export const DEFAULT_OG_IMAGE = `${CANONICAL_DOMAIN}/og/winerim-og-es.png`;
+
+export const SEO_LANGS = ["es", "en", "it", "fr", "de", "pt"] as const;
+export type SeoLang = (typeof SEO_LANGS)[number];
+
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
+
+export const OG_LOCALES: Record<SeoLang, string> = {
+  es: "es_ES",
+  en: "en_US",
+  it: "it_IT",
+  fr: "fr_FR",
+  de: "de_DE",
+  pt: "pt_PT",
+};
+
+export const LOCALIZED_OG_IMAGE_ALT: Record<SeoLang, string> = {
+  es: "Winerim, software de IA para cartas de vino en restaurantes",
+  en: "Winerim, AI wine list software for restaurants",
+  it: "Winerim, software IA per carte dei vini nei ristoranti",
+  fr: "Winerim, logiciel IA pour cartes des vins de restaurants",
+  de: "Winerim, KI-Software für Weinkarten in Restaurants",
+  pt: "Winerim, software de IA para cartas de vinho em restaurantes",
+};
+
+export function isSeoLang(value: string | undefined | null): value is SeoLang {
+  return Boolean(value && SEO_LANGS.includes(value as SeoLang));
+}
+
+export function getSeoLangFromPath(pathOrUrl?: string): SeoLang {
+  if (!pathOrUrl) return "es";
+
+  let pathname = pathOrUrl;
+  try {
+    pathname = pathOrUrl.startsWith("http") ? new URL(pathOrUrl).pathname : pathOrUrl;
+  } catch {
+    pathname = pathOrUrl;
+  }
+
+  const match = pathname.match(/^\/(en|it|fr|de|pt)(?:\/|$)/);
+  return isSeoLang(match?.[1]) ? match[1] : "es";
+}
+
+export function getLocalizedOgImage(lang: SeoLang): string {
+  return `${CANONICAL_DOMAIN}/og/winerim-og-${lang}.png`;
+}
+
+export function getLocalizedOgImageAlt(lang: SeoLang): string {
+  return LOCALIZED_OG_IMAGE_ALT[lang];
+}
+
+export function getOgLocale(lang: SeoLang): string {
+  return OG_LOCALES[lang];
+}
+
+export function getOgLocaleAlternates(lang: SeoLang): string[] {
+  return SEO_LANGS.filter((candidate) => candidate !== lang).map((candidate) => OG_LOCALES[candidate]);
+}

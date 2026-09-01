@@ -42,6 +42,12 @@ const PRODUCT_ARCHITECTURE_ROUTES = new Set([
 const REACT_ROUTES = new Set([
   ...PRODUCT_ARCHITECTURE_ROUTES,
   "/precios-modulos-integraciones",
+  "/simulador-carta",
+  "/en/wine-list-simulator",
+  "/fr/simulateur-carte",
+  "/it/simulatore-carta",
+  "/de/weinkarten-simulator",
+  "/pt/simulador-carta",
   "/presentacion",
   "/presentacion-anterior",
   "/deck",
@@ -87,11 +93,277 @@ const LEGAL_ROUTES = new Set([
 
 const NOINDEX_ROUTES = new Set([...LEGAL_ROUTES, ...PRIVATE_ROUTES]);
 
+const SIMULATOR_ALIASES = {
+  "/simulador": "/simulador-carta",
+  "/en/simulador": "/en/wine-list-simulator",
+  "/en/simulador-carta": "/en/wine-list-simulator",
+  "/it/simulador": "/it/simulatore-carta",
+  "/it/simulador-carta": "/it/simulatore-carta",
+  "/fr/simulador": "/fr/simulateur-carte",
+  "/fr/simulador-carta": "/fr/simulateur-carte",
+  "/de/simulador": "/de/weinkarten-simulator",
+  "/de/simulador-carta": "/de/weinkarten-simulator",
+};
+
 const getClientCacheControl = (path) => {
   if (path.startsWith("/assets/")) return "public, max-age=31536000, immutable";
   if (path.startsWith("/legal/")) return "public, max-age=3600, s-maxage=86400";
   if (REACT_ROUTES.has(path)) return "no-store, max-age=0";
   return "public, max-age=60, s-maxage=300";
+};
+
+const SUPPORTED_LOCALES = ["es", "en", "it", "fr", "de", "pt"];
+const LANGUAGE_COOKIE_NAMES = new Set(["winerim_lang", "winerim_locale", "winerim_language", "lang", "locale", "i18next", "NEXT_LOCALE"]);
+const COUNTRY_LANGUAGE_FALLBACKS = {
+  US: "en", GB: "en", IE: "en", CA: "en", AU: "en", NZ: "en",
+  IT: "it", SM: "it",
+  FR: "fr", BE: "fr", LU: "fr", MC: "fr",
+  DE: "de", AT: "de", CH: "de", LI: "de",
+  PT: "pt", BR: "pt", AO: "pt", MZ: "pt",
+  ES: "es", MX: "es", AR: "es", CL: "es", CO: "es", PE: "es", UY: "es",
+};
+const ROUTER_OG_LOCALES = {
+  es: "es_ES",
+  en: "en_US",
+  it: "it_IT",
+  fr: "fr_FR",
+  de: "de_DE",
+  pt: "pt_PT",
+};
+const ROUTER_OG_IMAGE_ALT = {
+  es: "Winerim, software de IA para cartas de vino en restaurantes",
+  en: "Winerim, AI wine list software for restaurants",
+  it: "Winerim, software IA per carte dei vini nei ristoranti",
+  fr: "Winerim, logiciel IA pour cartes des vins de restaurants",
+  de: "Winerim, KI-Software für Weinkarten in Restaurants",
+  pt: "Winerim, software de IA para cartas de vinho em restaurantes",
+};
+const ROUTER_OG_IMAGE_WIDTH = 1200;
+const ROUTER_OG_IMAGE_HEIGHT = 630;
+const ROUTER_HOME_ALTERNATES = {
+  es: "/",
+  en: "/en",
+  it: "/it",
+  fr: "/fr",
+  de: "/de",
+  pt: "/pt",
+  "x-default": "/",
+};
+const ROUTER_SIMULATOR_ALTERNATES = {
+  es: "/simulador-carta",
+  en: "/en/wine-list-simulator",
+  it: "/it/simulatore-carta",
+  fr: "/fr/simulateur-carte",
+  de: "/de/weinkarten-simulator",
+  pt: "/pt/simulador-carta",
+  "x-default": "/simulador-carta",
+};
+const ROUTER_HOME_META = {
+  "/": {
+    lang: "es",
+    title: "Software de IA para Restaurantes — Vende Más Vino | Winerim",
+    description: "Winerim es el software de IA que ayuda a restaurantes a vender más vino, mejorar el ticket medio, optimizar márgenes y controlar la bodega.",
+    canonical: "/",
+  },
+  "/en": {
+    lang: "en",
+    title: "AI wine list software for restaurants | Winerim",
+    description: "AI-powered wine list software for restaurants: digital wine menus, recommendations, pairings, analytics and cellar management.",
+    canonical: "/en",
+  },
+  "/it": {
+    lang: "it",
+    title: "Software IA per carte dei vini | Winerim",
+    description: "Software per carte dei vini con raccomandazioni IA, abbinamenti, analytics e gestione della cantina per ristoranti.",
+    canonical: "/it",
+  },
+  "/fr": {
+    lang: "fr",
+    title: "Logiciel IA pour cartes des vins | Winerim",
+    description: "Logiciel de carte des vins avec recommandations IA, accords, analytics et gestion de cave pour restaurants.",
+    canonical: "/fr",
+  },
+  "/de": {
+    lang: "de",
+    title: "KI-Software für Weinkarten | Winerim",
+    description: "Software für Weinkarten mit KI-Empfehlungen, Pairings, Analytics und Kellerverwaltung für Restaurants.",
+    canonical: "/de",
+  },
+  "/pt": {
+    lang: "pt",
+    title: "Software IA para cartas de vinho | Winerim",
+    description: "Software de carta de vinhos com recomendações IA, harmonizações, análise e gestão de adega para restaurantes.",
+    canonical: "/pt",
+  },
+};
+const ROUTER_SIMULATOR_META = {
+  "/simulador-carta": {
+    lang: "es",
+    title: "Simulador de carta de vinos para restaurantes | Winerim",
+    description: "Simula una carta de vinos por presupuesto, estilos, rotación y objetivos de margen antes de publicarla.",
+    canonical: "/simulador-carta",
+  },
+  "/en/wine-list-simulator": {
+    lang: "en",
+    title: "Wine list simulator for restaurants | Winerim",
+    description: "Simulate a restaurant wine list by budget, styles, rotation and margin goals before publishing it.",
+    canonical: "/en/wine-list-simulator",
+  },
+  "/it/simulatore-carta": {
+    lang: "it",
+    title: "Simulatore di carta vini per ristoranti | Winerim",
+    description: "Simula una carta vini per budget, stili, rotazione e obiettivi di margine prima della pubblicazione.",
+    canonical: "/it/simulatore-carta",
+  },
+  "/fr/simulateur-carte": {
+    lang: "fr",
+    title: "Simulateur de carte des vins pour restaurants | Winerim",
+    description: "Simulez une carte des vins par budget, styles, rotation et objectifs de marge avant publication.",
+    canonical: "/fr/simulateur-carte",
+  },
+  "/de/weinkarten-simulator": {
+    lang: "de",
+    title: "Weinkarten-Simulator für Restaurants | Winerim",
+    description: "Simulieren Sie eine Weinkarte nach Budget, Stil, Rotation und Margenzielen, bevor sie veröffentlicht wird.",
+    canonical: "/de/weinkarten-simulator",
+  },
+  "/pt/simulador-carta": {
+    lang: "pt",
+    title: "Simulador de carta de vinhos para restaurantes | Winerim",
+    description: "Simule uma carta de vinhos por orçamento, estilos, rotação e objetivos de margem antes da publicação.",
+    canonical: "/pt/simulador-carta",
+  },
+};
+
+const normalizeLanguagePreference = (value) => {
+  const primary = String(value || "").trim().toLowerCase().replace(/_/g, "-").split("-")[0];
+  return SUPPORTED_LOCALES.includes(primary) ? primary : null;
+};
+
+const getCookieLanguagePreference = (request) => {
+  const cookieHeader = request.headers.get("Cookie") || "";
+  for (const cookiePart of cookieHeader.split(";")) {
+    const [rawName, ...rawValue] = cookiePart.split("=");
+    const name = rawName?.trim();
+    if (!name || !LANGUAGE_COOKIE_NAMES.has(name)) continue;
+    const encodedValue = rawValue.join("=").trim();
+    try {
+      const lang = normalizeLanguagePreference(decodeURIComponent(encodedValue));
+      if (lang) return lang;
+    } catch (_) {
+      const lang = normalizeLanguagePreference(encodedValue);
+      if (lang) return lang;
+    }
+  }
+  return null;
+};
+
+const getAcceptLanguagePreference = (request) => {
+  const header = request.headers.get("Accept-Language") || "";
+  return header
+    .split(",")
+    .map((part, index) => {
+      const [value, ...params] = part.trim().split(";");
+      const qParam = params.find((param) => param.trim().toLowerCase().startsWith("q="));
+      const q = qParam ? Number.parseFloat(qParam.split("=")[1]) : 1;
+      return { lang: normalizeLanguagePreference(value), q: Number.isFinite(q) ? q : 1, index };
+    })
+    .filter((item) => item.lang)
+    .sort((a, b) => b.q - a.q || a.index - b.index)[0]?.lang || null;
+};
+
+const getCountryLanguageFallback = (request) => {
+  const country = String(request.cf?.country || "").toUpperCase();
+  return normalizeLanguagePreference(COUNTRY_LANGUAGE_FALLBACKS[country]);
+};
+
+const getHomeLocalePath = (request) => {
+  const lang = getCookieLanguagePreference(request)
+    || getAcceptLanguagePreference(request)
+    || getCountryLanguageFallback(request)
+    || "es";
+  return lang === "es" ? "/" : `/${lang}`;
+};
+
+const escapeHtml = (value) => String(value ?? "")
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;");
+
+const siteUrl = "https://winerim.wine";
+const absoluteUrl = (path) => {
+  if (!path) return siteUrl;
+  if (path.startsWith("http")) return path;
+  return path === "/" ? `${siteUrl}/` : `${siteUrl}${path}`;
+};
+const getOgLocale = (lang) => ROUTER_OG_LOCALES[normalizeLanguagePreference(lang) || "es"];
+const getLocalizedOgImage = (lang) => `${siteUrl}/og/winerim-og-${normalizeLanguagePreference(lang) || "es"}.png`;
+const getLocalizedOgImageAlt = (lang) => ROUTER_OG_IMAGE_ALT[normalizeLanguagePreference(lang) || "es"];
+const getReactShellMetadata = (path) => {
+  const simulator = ROUTER_SIMULATOR_META[path];
+  if (simulator) return { ...simulator, alternates: ROUTER_SIMULATOR_ALTERNATES };
+  const home = ROUTER_HOME_META[path];
+  return home ? { ...home, alternates: ROUTER_HOME_ALTERNATES } : null;
+};
+const buildAlternateHeadTags = (alternates) => Object.entries(alternates || {})
+  .map(([lang, path]) => `<link rel="alternate" hreflang="${escapeHtml(lang)}" href="${escapeHtml(absoluteUrl(path))}">`)
+  .join("\n");
+const buildOgLocaleAlternateTags = (lang) => SUPPORTED_LOCALES
+  .filter((candidate) => candidate !== lang)
+  .map((candidate) => `<meta property="og:locale:alternate" content="${escapeHtml(ROUTER_OG_LOCALES[candidate])}">`)
+  .join("\n");
+const buildRouteJsonLd = (meta) => JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Winerim",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  headline: meta.title,
+  description: meta.description,
+  url: absoluteUrl(meta.canonical),
+  image: getLocalizedOgImage(meta.lang),
+  inLanguage: meta.lang,
+  publisher: {
+    "@type": "Organization",
+    name: "Winerim",
+    url: siteUrl,
+    logo: `${siteUrl}/favicon.png`,
+  },
+}).replace(/</g, "\\u003c");
+
+const injectReactShellMetadata = (response, path) => {
+  const meta = getReactShellMetadata(path);
+  if (!meta) return response;
+
+  const ogImage = getLocalizedOgImage(meta.lang);
+  const ogImageAlt = getLocalizedOgImageAlt(meta.lang);
+  const appendedHead = [
+    buildAlternateHeadTags(meta.alternates),
+    buildOgLocaleAlternateTags(meta.lang),
+    `<meta property="og:image:type" content="image/png">`,
+    `<meta property="og:image:alt" content="${escapeHtml(ogImageAlt)}">`,
+    `<meta name="twitter:image:alt" content="${escapeHtml(ogImageAlt)}">`,
+    `<script type="application/ld+json" id="seo-router-jsonld">${buildRouteJsonLd(meta)}</script>`,
+  ].filter(Boolean).join("\n");
+
+  return new HTMLRewriter()
+    .on("html", { element: (element) => element.setAttribute("lang", meta.lang) })
+    .on("title", { element: (element) => element.setInnerContent(meta.title) })
+    .on('meta[name="description"]', { element: (element) => element.setAttribute("content", meta.description) })
+    .on('link[rel="canonical"]', { element: (element) => element.setAttribute("href", absoluteUrl(meta.canonical)) })
+    .on('meta[property="og:title"]', { element: (element) => element.setAttribute("content", meta.title) })
+    .on('meta[property="og:description"]', { element: (element) => element.setAttribute("content", meta.description) })
+    .on('meta[property="og:url"]', { element: (element) => element.setAttribute("content", absoluteUrl(meta.canonical)) })
+    .on('meta[property="og:image"]', { element: (element) => element.setAttribute("content", ogImage) })
+    .on('meta[property="og:image:width"]', { element: (element) => element.setAttribute("content", String(ROUTER_OG_IMAGE_WIDTH)) })
+    .on('meta[property="og:image:height"]', { element: (element) => element.setAttribute("content", String(ROUTER_OG_IMAGE_HEIGHT)) })
+    .on('meta[property="og:locale"]', { element: (element) => element.setAttribute("content", getOgLocale(meta.lang)) })
+    .on('meta[name="twitter:title"]', { element: (element) => element.setAttribute("content", meta.title) })
+    .on('meta[name="twitter:description"]', { element: (element) => element.setAttribute("content", meta.description) })
+    .on('meta[name="twitter:image"]', { element: (element) => element.setAttribute("content", ogImage) })
+    .on("head", { element: (element) => element.append(appendedHead, { html: true }) })
+    .transform(response);
 };
 
 const PRICING_ARCHITECTURE_BOT_HTML = `
@@ -215,11 +487,21 @@ const withFrontendHeaders = (response, path, requestMethod = "GET") => {
     headers.delete("X-Robots-Tag");
   }
 
-  return new Response(requestMethod === "HEAD" ? null : response.body, {
+  const nextResponse = new Response(requestMethod === "HEAD" ? null : response.body, {
     status: response.status,
     statusText: response.statusText,
     headers,
   });
+
+  if (
+    requestMethod === "GET"
+    && (headers.get("Content-Type") || "").includes("text/html")
+    && getReactShellMetadata(path)
+  ) {
+    return injectReactShellMetadata(nextResponse, path);
+  }
+
+  return nextResponse;
 };
 
 const fetchReactPage = async (request, env, path) => {
@@ -270,6 +552,16 @@ export default {
 
     if (url.hostname !== "winerim.wine") {
       return env.BACKEND.fetch(request);
+    }
+
+    const simulatorAliasTarget = SIMULATOR_ALIASES[path];
+    if (simulatorAliasTarget) {
+      return Response.redirect(`${url.origin}${simulatorAliasTarget}`, 301);
+    }
+
+    const homeLocalePath = getHomeLocalePath(request);
+    if (path === "/" && request.method === "GET" && !url.search && !BOT_REGEX.test(ua) && homeLocalePath !== "/") {
+      return Response.redirect(`${url.origin}${homeLocalePath}`, 302);
     }
 
     if (PRIVATE_ROUTES.has(path)) {
