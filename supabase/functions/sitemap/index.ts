@@ -445,6 +445,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/sommelier-corner', priority: '0.7', changefreq: 'weekly', multilang: true },
   { esPath: '/demo', priority: '0.9', changefreq: 'monthly', multilang: true },
   { esPath: '/precios', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/contacto', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/afiliate', priority: '0.6', changefreq: 'monthly', multilang: true },
   { esPath: '/distribuidor', priority: '0.6', changefreq: 'monthly', multilang: true },

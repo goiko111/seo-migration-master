@@ -1401,6 +1401,23 @@ const STATIC_WORKER_PRERENDER_PAGES = {
     ],
     links: [['Inicio', '/'], ['Contacto', '/contacto'], ['Demo', '/demo'], ['Privacidad', '/politica-privacidad']],
   },
+  '/precios-modulos-integraciones': {
+    lang: 'es',
+    title: 'Precios, modulos e integraciones de Winerim | Winerim',
+    description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+    h1: 'Precios, modulos e integraciones de Winerim',
+    subtitle: 'Una vista tecnica y comercial de que incluye cada capa de Winerim y como se decide el alcance para restaurantes, hoteles y grupos.',
+    canonical: '/precios-modulos-integraciones',
+    schemaType: 'WebPage',
+    sections: [
+      ['Arquitectura modular', 'Winerim separa carta, ventas, gestion, margenes e inteligencia para que cada restaurante active solo la capa que necesita sin perder una base comun.'],
+      ['Core y carta', 'Core organiza referencias, precios, formatos, disponibilidad, fichas y experiencia digital para convertir la carta de vinos en una herramienta viva.'],
+      ['TPV, gestion e integraciones', 'Las integraciones conectan TPV, PMS, ERP, inventario, albaranes, facturas y tarifas para cruzar carta, ventas, coste y stock real.'],
+      ['Margenes e Intelligence', 'Margenes calcula rentabilidad y rotacion. Intelligence, RIMs y SAVia preparan propuestas explicables que el equipo revisa antes de actuar.'],
+      ['Como se decide el alcance', 'El precio depende de numero de referencias, locales, modulos activos, integraciones, soporte e implantacion; la demo delimita el paquete exacto.'],
+    ],
+    links: [['Precios', '/precios'], ['Integraciones', '/integraciones'], ['Funcionalidades', '/funcionalidades'], ['Demo', '/demo']],
+  },
   '/presentacion': {
     lang: 'es',
     title: 'Presentacion Winerim | El sistema operativo del vino',
@@ -1952,6 +1969,13 @@ const WORKER_HOME_SHELL_META = {
     canonical: '/pt',
     alternates: WORKER_HOME_ALTERNATES,
   },
+  '/precios-modulos-integraciones': {
+    lang: 'es',
+    title: 'Precios, modulos e integraciones de Winerim | Winerim',
+    description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+    canonical: '/precios-modulos-integraciones',
+    schemaType: 'WebPage',
+  },
 };
 
 const WORKER_LANGUAGE_COOKIE_NAMES = new Set([
@@ -2432,6 +2456,7 @@ const SEO_EXACT = new Set([
   '/ejemplos-carta-vinos',
   '/carta-papel-vs-digital',
   '/precios',
+  '/precios-modulos-integraciones',
   '/integraciones',
   '/implantacion',
   '/como-vender-mas-vino-en-un-restaurante',

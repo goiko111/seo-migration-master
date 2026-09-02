@@ -51,7 +51,8 @@ describe("international partner deck", () => {
     expect(router).toContain('const PRIVATE_ROUTES = new Set(["/deck", "/presentacion-anterior"])');
     expect(router).toContain("NOINDEX_ROUTES");
     expect(router).toContain('if (REACT_ROUTES.has(path)) return "no-store, max-age=0"');
-    expect(router).toContain('if (path.startsWith("/assets/")) return "public, max-age=31536000, immutable"');
+    expect(router).toContain('path.startsWith("/assets/") || path.startsWith("/og/")');
+    expect(router).toContain('return "public, max-age=31536000, immutable"');
     expect(page).toContain("noindex");
     expect(page).toContain('const DECK_VERSION = "partner-international-2026-07-r6"');
     expect(page).toContain('<PresentationLegacy embedded variant="current" partnerName={partner} />');

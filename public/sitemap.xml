@@ -26257,4 +26257,10 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://winerim.wine/de/weinkarten-simulator"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://winerim.wine/pt/simulador-carta"/>
   </url>
+  <url>
+    <loc>https://winerim.wine/precios-modulos-integraciones</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

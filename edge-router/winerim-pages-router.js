@@ -106,7 +106,7 @@ const SIMULATOR_ALIASES = {
 };
 
 const getClientCacheControl = (path) => {
-  if (path.startsWith("/assets/")) return "public, max-age=31536000, immutable";
+  if (path.startsWith("/assets/") || path.startsWith("/og/")) return "public, max-age=31536000, immutable";
   if (path.startsWith("/legal/")) return "public, max-age=3600, s-maxage=86400";
   if (REACT_ROUTES.has(path)) return "no-store, max-age=0";
   return "public, max-age=60, s-maxage=300";
@@ -234,6 +234,15 @@ const ROUTER_SIMULATOR_META = {
     canonical: "/pt/simulador-carta",
   },
 };
+const ROUTER_PRICING_ARCHITECTURE_META = {
+  "/precios-modulos-integraciones": {
+    lang: "es",
+    title: "Precios, modulos e integraciones de Winerim | Winerim",
+    description: "Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.",
+    canonical: "/precios-modulos-integraciones",
+    schemaType: "WebPage",
+  },
+};
 
 const normalizeLanguagePreference = (value) => {
   const primary = String(value || "").trim().toLowerCase().replace(/_/g, "-").split("-")[0];
@@ -303,6 +312,8 @@ const getLocalizedOgImageAlt = (lang) => ROUTER_OG_IMAGE_ALT[normalizeLanguagePr
 const getReactShellMetadata = (path) => {
   const simulator = ROUTER_SIMULATOR_META[path];
   if (simulator) return { ...simulator, alternates: ROUTER_SIMULATOR_ALTERNATES };
+  const pricingArchitecture = ROUTER_PRICING_ARCHITECTURE_META[path];
+  if (pricingArchitecture) return pricingArchitecture;
   const home = ROUTER_HOME_META[path];
   return home ? { ...home, alternates: ROUTER_HOME_ALTERNATES } : null;
 };
@@ -315,7 +326,7 @@ const buildOgLocaleAlternateTags = (lang) => SUPPORTED_LOCALES
   .join("\n");
 const buildRouteJsonLd = (meta) => JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": meta.schemaType || "SoftwareApplication",
   name: "Winerim",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
@@ -606,7 +617,7 @@ export default {
       return fetchReactPage(request, env, path);
     }
 
-    if (path.startsWith("/assets/") || path.startsWith("/legal/")) {
+    if (path.startsWith("/assets/") || path.startsWith("/og/") || path.startsWith("/legal/")) {
       try {
         const response = await fetchFrontend(request, env);
         const contentType = response.headers.get("Content-Type") || "";

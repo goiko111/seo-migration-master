@@ -51,6 +51,25 @@ describe("simulator i18n SEO guardrails", () => {
     expect(prerender).toContain("Wine List Simulator for Restaurants | Winerim");
   });
 
+  it("keeps the pricing architecture route and OG assets healthy at the edge", () => {
+    const worker = read("cloudflare-worker-v3-hybrid.js");
+    const router = read("edge-router/winerim-pages-router.js");
+    const sitemap = read("supabase/functions/sitemap/index.ts");
+    const prerender = read("supabase/functions/prerender/index.ts");
+    const staticSitemap = read("public/sitemap.xml");
+    const refreshScript = read("scripts/refresh-static-sitemap.mjs");
+    const indexHtml = read("index.html");
+
+    expect(worker).toContain("'/precios-modulos-integraciones'");
+    expect(router).toContain('"/precios-modulos-integraciones": {');
+    expect(router).toContain('path.startsWith("/og/")');
+    expect(sitemap).toContain("{ esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false }");
+    expect(prerender).toContain("'/precios-modulos-integraciones': {");
+    expect(staticSitemap).toContain("<loc>https://winerim.wine/precios-modulos-integraciones</loc>");
+    expect(refreshScript).toContain('path: "/precios-modulos-integraciones"');
+    expect(indexHtml).toContain('"/precios-modulos-integraciones": {');
+  });
+
   it("keeps localized shell metadata, x-default alternates and en_US Open Graph", () => {
     const indexHtml = read("index.html");
     const seoConfig = read("src/seo/config.ts");

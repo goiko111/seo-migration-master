@@ -26,6 +26,7 @@ const strategicFallbackUrls = [
   { path: "/fr/produit/savia", priority: "0.6", alternates: "savia" },
   { path: "/de/produkt/savia", priority: "0.6", alternates: "savia" },
   { path: "/pt/produto/savia", priority: "0.6", alternates: "savia" },
+  { path: "/precios-modulos-integraciones", priority: "0.8" },
   { path: "/simulador-carta", priority: "0.8", alternates: "simulator" },
   { path: "/en/wine-list-simulator", priority: "0.7", alternates: "simulator" },
   { path: "/it/simulatore-carta", priority: "0.7", alternates: "simulator" },

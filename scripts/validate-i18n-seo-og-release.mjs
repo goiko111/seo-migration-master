@@ -24,6 +24,7 @@ const allowedChangedFiles = new Set([
   "src/i18n/types.ts",
   "src/pages/SimuladorCarta.tsx",
   "src/seo/config.ts",
+  "src/test/partner-deck.test.ts",
   "src/test/seo-head-i18n.test.tsx",
   "src/test/simulator-i18n-seo-guardrails.test.ts",
   "supabase/functions/prerender/index.ts",
@@ -139,6 +140,14 @@ assertContains("index shell", sources.indexHtml, "var simulatorAlternates");
 assertContains("index x-default", sources.indexHtml, '"x-default": "/simulador-carta"');
 assertContains("index jsonld", sources.indexHtml, 'script.id = "winerim-initial-jsonld"');
 assertContains("seo config", sources.seoConfig, 'DEFAULT_OG_IMAGE = `${CANONICAL_DOMAIN}/og/winerim-og-es.png`');
+assertContains("router pricing shell", sources.router, '"/precios-modulos-integraciones": {');
+assertContains("router og assets", sources.router, 'path.startsWith("/og/")');
+assertContains("worker pricing route", sources.worker, "'/precios-modulos-integraciones'");
+assertContains("prerender pricing page", sources.prerender, "'/precios-modulos-integraciones': {");
+assertContains("sitemap pricing route", sources.sitemap, "{ esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false }");
+assertContains("static sitemap pricing route", sources.staticSitemap, "<loc>https://winerim.wine/precios-modulos-integraciones</loc>");
+assertContains("refresh sitemap pricing route", sources.refreshSitemap, 'path: "/precios-modulos-integraciones"');
+assertContains("index pricing shell", sources.indexHtml, '"/precios-modulos-integraciones": {');
 
 for (const [sourceName, source] of Object.entries({
   seoConfig: sources.seoConfig,

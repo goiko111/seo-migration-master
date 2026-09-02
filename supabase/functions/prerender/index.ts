@@ -4963,6 +4963,43 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       ],
     },
   },
+  '/precios-modulos-integraciones': {
+    meta: {
+      title: 'Precios, modulos e integraciones de Winerim | Winerim',
+      description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+      canonical: `${SITE}/precios-modulos-integraciones`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'WebPage',
+    },
+    content: {
+      h1: 'Precios, modulos e integraciones de Winerim',
+      subtitle: 'Una vista tecnica y comercial de que incluye cada capa de Winerim y como se decide el alcance para restaurantes, hoteles y grupos.',
+      sections: [
+        { heading: 'Arquitectura modular', content: 'Winerim separa carta, ventas, gestion, margenes e inteligencia para que cada restaurante active solo la capa que necesita sin perder una base comun.' },
+        { heading: 'Core y carta', content: 'Core organiza referencias, precios, formatos, disponibilidad, fichas y experiencia digital para convertir la carta de vinos en una herramienta viva.' },
+        { heading: 'TPV, gestion e integraciones', content: 'Las integraciones conectan TPV, PMS, ERP, inventario, albaranes, facturas y tarifas para cruzar carta, ventas, coste y stock real.' },
+        { heading: 'Margenes e Intelligence', content: 'Margenes calcula rentabilidad y rotacion. Intelligence, RIMs y SAVia preparan propuestas explicables que el equipo revisa antes de actuar.' },
+        { heading: 'Como se decide el alcance', content: 'El precio depende de numero de referencias, locales, modulos activos, integraciones, soporte e implantacion; la demo delimita el paquete exacto.' },
+      ],
+      faqs: [
+        { q: 'Tiene Winerim un precio unico?', a: 'No. El alcance depende de referencias, locales, modulos, integraciones, soporte e implantacion.' },
+        { q: 'Que se revisa antes de presupuestar?', a: 'Se revisan carta, volumen de referencias, sistemas conectados, necesidades de stock, margen, compras, reporting y equipo operativo.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Precios', url: `${SITE}/precios` },
+        { name: 'Modulos e integraciones', url: `${SITE}/precios-modulos-integraciones` },
+      ],
+      internalLinks: [
+        { label: 'Precios', url: '/precios' },
+        { label: 'Integraciones', url: '/integraciones' },
+        { label: 'Funcionalidades', url: '/funcionalidades' },
+        { label: 'Demo gratuita', url: '/demo' },
+      ],
+    },
+  },
   '/producto/inteligencia-dinamica': {
     meta: {
       title: 'Inteligencia Dinámica | IA para Cartas de Vinos | Winerim',
