@@ -2322,6 +2322,7 @@ function detailUrlBlock(site, path, lastmod, priority = '0.6', alternates = null
 const WORKER_DETAIL_SITEMAP_LASTMOD = '2026-06-05';
 const WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01';
 const WORKER_TOOLS_SITEMAP_LASTMOD = '2026-07-02';
+const WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD = '2026-09-02';
 
 function isWineLibrarySitemapPath(path) {
   return path.startsWith('/biblioteca-vino')
@@ -2367,6 +2368,8 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
   const missingCloudRimSaviaPaths = cloudRimSaviaPaths.filter(path => !xml.includes(`${site}${path}`));
   const onlineToolPaths = ONLINE_TOOL_GROUPS.flatMap(group => Object.values(group.paths));
   const missingOnlineToolPaths = onlineToolPaths.filter(path => !xml.includes(`${site}${path}`));
+  const pricingArchitecturePaths = ['/precios-modulos-integraciones'];
+  const missingPricingArchitecturePaths = pricingArchitecturePaths.filter(path => !xml.includes(`${site}${path}`));
 
   if (
     hasDetailUrls
@@ -2376,6 +2379,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     && missingDistributorPaths.length === 0
     && missingCloudRimSaviaPaths.length === 0
     && missingOnlineToolPaths.length === 0
+    && missingPricingArchitecturePaths.length === 0
   ) {
     return ensureWorkerSitemapAlternates(stabilizeSitemapLastmod(xml), site);
   }
@@ -2389,6 +2393,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD, path === '/distribuidor' ? '0.7' : '0.6', DISTRIBUTOR_ALTERNATES)),
     ...missingCloudRimSaviaPaths.map(path => detailUrlBlock(site, path, WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD, path === '/producto/cloudrim' || path === '/producto/savia' ? '0.7' : '0.6', path.includes('savia') ? SAVIA_ALTERNATES : CLOUDRIM_ALTERNATES)),
     ...missingOnlineToolPaths.map(path => detailUrlBlock(site, path, WORKER_TOOLS_SITEMAP_LASTMOD, path.startsWith('/herramientas/') ? '0.7' : '0.6', ONLINE_TOOL_ALTERNATES_BY_PATH[path])),
+    ...missingPricingArchitecturePaths.map(path => detailUrlBlock(site, path, WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD, '0.8')),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;

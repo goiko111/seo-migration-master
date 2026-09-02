@@ -143,6 +143,8 @@ assertContains("seo config", sources.seoConfig, 'DEFAULT_OG_IMAGE = `${CANONICAL
 assertContains("router pricing shell", sources.router, '"/precios-modulos-integraciones": {');
 assertContains("router og assets", sources.router, 'path.startsWith("/og/")');
 assertContains("worker pricing route", sources.worker, "'/precios-modulos-integraciones'");
+assertContains("worker pricing sitemap bridge", sources.worker, "WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD");
+assertContains("worker pricing sitemap bridge", sources.worker, "missingPricingArchitecturePaths");
 assertContains("prerender pricing page", sources.prerender, "'/precios-modulos-integraciones': {");
 assertContains("sitemap pricing route", sources.sitemap, "{ esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false }");
 assertContains("static sitemap pricing route", sources.staticSitemap, "<loc>https://winerim.wine/precios-modulos-integraciones</loc>");

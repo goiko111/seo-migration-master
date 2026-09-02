@@ -61,6 +61,8 @@ describe("simulator i18n SEO guardrails", () => {
     const indexHtml = read("index.html");
 
     expect(worker).toContain("'/precios-modulos-integraciones'");
+    expect(worker).toContain("WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD");
+    expect(worker).toContain("missingPricingArchitecturePaths");
     expect(router).toContain('"/precios-modulos-integraciones": {');
     expect(router).toContain('path.startsWith("/og/")');
     expect(sitemap).toContain("{ esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false }");
