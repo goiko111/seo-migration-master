@@ -1,0 +1,15 @@
+name = "winerim-edge-router"
+main = "edge-router/winerim-pages-router.js"
+compatibility_date = "2026-05-23"
+
+routes = [
+  { pattern = "winerim.wine/*", zone_name = "winerim.wine" },
+]
+
+[[services]]
+binding = "BACKEND"
+service = "winerim-proxy"
+
+[vars]
+FRONTEND_ORIGIN = "https://seo-migration-magic.lovable.app"
+FRONTEND_RELEASE = "lovable-ef64edbb-simulator-i18n-20260826"

@@ -6,11 +6,181 @@
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="H6mEyw4Eyg_oF0BVTVdba5R-0Ag75pvRkWVt6kevXFA" />
-    
+
     <title>Winerim – Carta Inteligente de Vinos para Restaurantes</title>
     <meta name="description" content="Winerim es la carta inteligente de vinos para restaurantes. Recomendaciones con IA, maridajes automáticos, analítica de ventas y gestión de bodega.">
     <meta name="keywords" content="carta inteligente de vinos, recomendador de vinos, gestión de bodega, carta de vinos restaurante, sommelier inteligente, winerim" />
     <link rel="canonical" href="https://winerim.wine/" />
+
+    <script>
+      (function () {
+        var site = "https://winerim.wine";
+        var rawPath = window.location.pathname || "/";
+        var path = rawPath.length > 1 ? rawPath.replace(/\/+$/, "") : "/";
+        var pageLang = (path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/) || [])[1] || "es";
+        var staticMeta = {
+          "/en": {
+            lang: "en",
+            title: "Winerim | AI Wine List Software for Restaurants",
+            description: "AI-powered wine list software for restaurants: digital wine menus, recommendations, pairings, analytics and cellar management.",
+            canonical: "/en"
+          },
+          "/it": {
+            lang: "it",
+            title: "Winerim | Carta vini digitale intelligente",
+            description: "Software per carta vini digitale con raccomandazioni, abbinamenti, analisi e gestione della cantina per ristoranti.",
+            canonical: "/it"
+          },
+          "/fr": {
+            lang: "fr",
+            title: "Winerim | Carte des vins digitale intelligente",
+            description: "Logiciel de carte des vins digitale avec recommandations, accords, analyse et gestion de cave pour restaurants.",
+            canonical: "/fr"
+          },
+          "/de": {
+            lang: "de",
+            title: "Winerim | Intelligente digitale Weinkarte",
+            description: "Software fuer digitale Weinkarten mit Empfehlungen, Pairings, Analysen und Kellerverwaltung fuer Restaurants.",
+            canonical: "/de"
+          },
+          "/pt": {
+            lang: "pt",
+            title: "Winerim | Carta de vinhos digital inteligente",
+            description: "Software de carta de vinhos digital com recomendacoes, harmonizacoes, analise e gestao de adega para restaurantes.",
+            canonical: "/pt"
+          },
+          "/simulador-carta": {
+            lang: "es",
+            title: "Simulador de carta de vinos | Winerim",
+            description: "Simula una carta de vinos por estilos, precios, rotacion y margen antes de cambiar la carta real.",
+            canonical: "/simulador-carta"
+          },
+          "/en/wine-list-simulator": {
+            lang: "en",
+            title: "Wine List Simulator | Winerim",
+            description: "Simulate a restaurant wine list by style, price, rotation and margin before changing the live list.",
+            canonical: "/en/wine-list-simulator"
+          },
+          "/it/simulatore-carta": {
+            lang: "it",
+            title: "Simulatore carta vini | Winerim",
+            description: "Simula una carta vini per stili, prezzi, rotazione e margine prima di modificare la carta reale.",
+            canonical: "/it/simulatore-carta"
+          },
+          "/fr/simulateur-carte": {
+            lang: "fr",
+            title: "Simulateur de carte des vins | Winerim",
+            description: "Simulez une carte des vins par styles, prix, rotation et marge avant de modifier la carte reelle.",
+            canonical: "/fr/simulateur-carte"
+          },
+          "/de/weinkarten-simulator": {
+            lang: "de",
+            title: "Weinkarten-Simulator | Winerim",
+            description: "Simulieren Sie eine Weinkarte nach Stil, Preis, Rotation und Marge, bevor die Live-Karte geaendert wird.",
+            canonical: "/de/weinkarten-simulator"
+          },
+          "/pt/simulador-carta": {
+            lang: "pt",
+            title: "Simulador de carta de vinhos | Winerim",
+            description: "Simule uma carta de vinhos por estilos, precos, rotacao e margem antes de alterar a carta real.",
+            canonical: "/pt/simulador-carta"
+          }
+        };
+        var libraryBases = {
+          es: "/biblioteca-vino",
+          en: "/en/wine-library",
+          it: "/it/biblioteca-vino",
+          fr: "/fr/bibliotheque-vin",
+          de: "/de/weinbibliothek",
+          pt: "/pt/biblioteca-vinho"
+        };
+        var librarySections = {
+          es: { regiones: "regiones", uvas: "uvas", estilos: "estilos", maridajes: "maridajes", "guia-servicio": "guia-servicio", glosario: "glosario" },
+          en: { regiones: "regions", uvas: "grapes", estilos: "styles", maridajes: "pairings", "guia-servicio": "service-guide", glosario: "glossary" },
+          it: { regiones: "regioni", uvas: "vitigni", estilos: "stili", maridajes: "abbinamenti", "guia-servicio": "guida-servizio", glosario: "glossario" },
+          fr: { regiones: "regions", uvas: "cepages", estilos: "styles-de-vin", maridajes: "accords", "guia-servicio": "guide-service", glosario: "glossaire" },
+          de: { regiones: "regionen", uvas: "rebsorten", estilos: "weinstile", maridajes: "weinbegleitung", "guia-servicio": "service-guide", glosario: "glossar" },
+          pt: { regiones: "regioes", uvas: "castas", estilos: "estilos", maridajes: "harmonizacoes", "guia-servicio": "guia-servico", glosario: "glossario" }
+        };
+        var libraryCopy = {
+          es: { home: "Biblioteca de vino", sections: { regiones: "Regiones vinicolas", uvas: "Variedades de uva", estilos: "Estilos de vino", maridajes: "Maridajes", "guia-servicio": "Guia de servicio", glosario: "Glosario del vino" }, detail: { regiones: "region vinicola", uvas: "variedad de uva", estilos: "estilo de vino", maridajes: "maridaje", "guia-servicio": "guia de servicio", glosario: "termino de glosario", article: "guia de vino" } },
+          en: { home: "Wine library", sections: { regiones: "Wine regions", uvas: "Grape varieties", estilos: "Wine styles", maridajes: "Wine pairings", "guia-servicio": "Service guide", glosario: "Wine glossary" }, detail: { regiones: "wine region", uvas: "grape variety", estilos: "wine style", maridajes: "wine pairing", "guia-servicio": "service guide", glosario: "glossary term", article: "wine guide" } },
+          it: { home: "Biblioteca del vino", sections: { regiones: "Regioni vinicole", uvas: "Vitigni", estilos: "Stili di vino", maridajes: "Abbinamenti", "guia-servicio": "Guida di servizio", glosario: "Glossario del vino" }, detail: { regiones: "regione vinicola", uvas: "vitigno", estilos: "stile di vino", maridajes: "abbinamento", "guia-servicio": "guida di servizio", glosario: "termine di glossario", article: "guida vino" } },
+          fr: { home: "Bibliotheque du vin", sections: { regiones: "Regions viticoles", uvas: "Cepages", estilos: "Styles de vin", maridajes: "Accords mets-vins", "guia-servicio": "Guide de service", glosario: "Glossaire du vin" }, detail: { regiones: "region viticole", uvas: "cepage", estilos: "style de vin", maridajes: "accord mets-vin", "guia-servicio": "guide de service", glosario: "terme de glossaire", article: "guide vin" } },
+          de: { home: "Weinbibliothek", sections: { regiones: "Weinregionen", uvas: "Rebsorten", estilos: "Weinstile", maridajes: "Weinbegleitung", "guia-servicio": "Service-Guide", glosario: "Weinglossar" }, detail: { regiones: "Weinregion", uvas: "Rebsorte", estilos: "Weinstil", maridajes: "Weinbegleitung", "guia-servicio": "Service-Guide", glosario: "Glossarbegriff", article: "Wein-Guide" } },
+          pt: { home: "Biblioteca do vinho", sections: { regiones: "Regioes vinicolas", uvas: "Castas", estilos: "Estilos de vinho", maridajes: "Harmonizacoes", "guia-servicio": "Guia de servico", glosario: "Glossario do vinho" }, detail: { regiones: "regiao vinicola", uvas: "casta", estilos: "estilo de vinho", maridajes: "harmonizacao", "guia-servicio": "guia de servico", glosario: "termo de glossario", article: "guia de vinho" } }
+        };
+        var libraryDescriptions = {
+          es: function (subject, type) { return subject + " en la biblioteca de vino de Winerim: " + type + " para carta, servicio, venta y formacion en restaurante."; },
+          en: function (subject, type) { return subject + " in the Winerim wine library: " + type + " for restaurant wine lists, service, sales and training."; },
+          it: function (subject, type) { return subject + " nella biblioteca del vino Winerim: " + type + " per carta vini, servizio, vendita e formazione."; },
+          fr: function (subject, type) { return subject + " dans la bibliotheque du vin Winerim : " + type + " pour carte des vins, service, vente et formation."; },
+          de: function (subject, type) { return subject + " in der Winerim Weinbibliothek: " + type + " fuer Weinkarte, Service, Verkauf und Teamtraining."; },
+          pt: function (subject, type) { return subject + " na biblioteca do vinho da Winerim: " + type + " para carta, servico, venda e formacao."; }
+        };
+        var termLabels = {
+          albarino: { es: "Albarino", en: "Albarino", it: "Albarino", fr: "Albarino", de: "Albarino", pt: "Alvarinho" },
+          mencia: { es: "Mencia", en: "Mencia", it: "Mencia", fr: "Mencia", de: "Mencia", pt: "Mencia" },
+          xarello: { es: "Xarel-lo", en: "Xarel-lo", it: "Xarel-lo", fr: "Xarel-lo", de: "Xarel-lo", pt: "Xarel-lo" },
+          "carnes-rojas": { es: "Carnes rojas", en: "Red meat", it: "Carni rosse", fr: "Viandes rouges", de: "Rotes Fleisch", pt: "Carnes vermelhas" },
+          "pescados-y-mariscos": { es: "Pescados y mariscos", en: "Fish and seafood", it: "Pesce e frutti di mare", fr: "Poissons et fruits de mer", de: "Fisch und Meeresfruechte", pt: "Peixes e mariscos" },
+          "lubina-dorada": { es: "Lubina y dorada", en: "Sea bass and sea bream", it: "Branzino e orata", fr: "Bar et dorade", de: "Wolfsbarsch und Dorade", pt: "Robalo e dourada" },
+          "cocina-asiatica-y-fusion": { es: "Cocina asiatica y fusion", en: "Asian and fusion cuisine", it: "Cucina asiatica e fusion", fr: "Cuisine asiatique et fusion", de: "Asiatische und Fusion-Kueche", pt: "Cozinha asiatica e fusao" },
+          quesos: { es: "Quesos", en: "Cheese", it: "Formaggi", fr: "Fromages", de: "Kaese", pt: "Queijos" }
+        };
+        function titleFromSlug(slug) {
+          return String(slug || "").split("-").filter(Boolean).map(function (part) {
+            return part.length <= 3 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1);
+          }).join(" ");
+        }
+        function resolveLibraryMeta() {
+          for (var lang in libraryBases) {
+            var base = libraryBases[lang];
+            if (path !== base && path.indexOf(base + "/") !== 0) continue;
+            var copy = libraryCopy[lang] || libraryCopy.es;
+            var esPath = "/biblioteca-vino";
+            if (path !== base) {
+              var relative = path.slice(base.length + 1);
+              var parts = relative.split("/");
+              var localizedSection = parts.shift();
+              var sectionMap = librarySections[lang] || librarySections.es;
+              var esSection = localizedSection;
+              Object.keys(sectionMap).some(function (key) {
+                if (sectionMap[key] === localizedSection) {
+                  esSection = key;
+                  return true;
+                }
+                return false;
+              });
+              esPath = "/biblioteca-vino/" + esSection + (parts.length ? "/" + parts.join("/") : "");
+            }
+            var esParts = esPath.split("/").filter(Boolean);
+            var section = esParts[1];
+            var isHub = esPath === "/biblioteca-vino" || esParts.length === 2;
+            var subject = isHub ? (copy.sections[section] || copy.home) : ((termLabels[esParts[esParts.length - 1]] || {})[lang] || titleFromSlug(esParts[esParts.length - 1]));
+            var type = isHub ? (copy.sections[section] || copy.home).toLowerCase() : (copy.detail[section] || copy.detail.article);
+            return {
+              lang: lang,
+              title: (isHub ? subject : subject + ": " + type) + " | Winerim",
+              description: (libraryDescriptions[lang] || libraryDescriptions.en)(subject, type),
+              canonical: path
+            };
+          }
+          return null;
+        }
+        var meta = staticMeta[path] || resolveLibraryMeta();
+        if (!meta) {
+          document.documentElement.lang = pageLang;
+          return;
+        }
+        document.documentElement.lang = meta.lang;
+        document.title = meta.title;
+        var description = document.querySelector('meta[name="description"]');
+        if (description) description.setAttribute("content", meta.description);
+        var canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute("href", site + meta.canonical);
+      })();
+    </script>
 
     <!-- Hreflang managed dynamically by SEOHead component -->
 

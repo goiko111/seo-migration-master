@@ -1,0 +1,13 @@
+name = "winerim-proxy"
+main = "cloudflare-worker-v3-hybrid.js"
+compatibility_date = "2026-05-23"
+
+routes = [
+  { pattern = "winerim.wine/*", zone_name = "winerim.wine" },
+  { pattern = "go.winerim.wine/*", zone_name = "winerim.wine" },
+  { pattern = "www.winerim.wine/*", zone_name = "winerim.wine" },
+]
+
+[vars]
+ORIGIN = "https://seo-migration-magic.lovable.app"
+SITE_URL = "https://winerim.wine"

@@ -1,5 +1,312 @@
 # Project Context
 
+## Actualizacion 2026-09-02 08:33 CEST: Biblioteca producto y saneado de articulos preparados localmente
+
+### Hechos
+
+- Se continuo en el repo sano `/Users/GOIKO/codex-workspaces/seo-migration-master-i18n-seo-og-clean2-20260901`, rama `codex/winerim-i18n-seo-og-clean2-20260901`, sin push, publish, deploy, Lovable ni Search Console.
+- Se anadio un puente multidioma Biblioteca -> producto en `src/data/wineLibraryI18n.ts` y `src/pages/BibliotecaVino.tsx`, con enlaces localizados a Winerim Core, CloudRIM, SAVia y Winerim Supply.
+- Se corrigio un texto fijo ES (`denominaciones`) en el preview de paises del hub Biblioteca y dos enlaces internos no localizados a Winerim Core en fichas de uva y region.
+- Se anadio saneado frontend de comentarios HTML en articulos (`sanitizeMarkdownBody`) y `ArticlePage` usa el cuerpo saneado para secciones, conteo de palabras, herramientas y contenido relacionado.
+- Consulta publica a Supabase `articles.body`: `0` filas con `winerim-content-expansion`, `@secret:` o `TELEGRAM_BOT_TOKEN`.
+- QA HTTP read-only: la produccion publica `https://winerim.wine` mantiene sitemap/precios/simulador sanos via Cloudflare, pero la Edge directa Supabase sigue desalineada.
+- Validaciones locales verdes: `npx tsc --noEmit --pretty false`, `npm test -- --run --reporter=dot` (`160/160`), `npm run build`, ESLint focal, `git diff --check`.
+- Informe: `docs/agent_outputs/wine_library_product_bridge_local_2026-09-02.md`.
+
+### Decisiones
+
+- Lovable debe recibir solo un prompt acotado para Supabase Edge Functions `sitemap` y `prerender`; no necesita limpieza data-only de articulos ahora porque no hay filas publicas con los marcadores.
+- El bloque local Biblioteca/blog sanitizer queda preparado pero no publicado; requiere commit/push/release frontend separado si se decide llevarlo a produccion.
+- Cellaria, Matchrim, Spiritsrim, FoodRim, CRM y voz no se anadieron a Biblioteca por falta de ruta/copy publico canonico en este alcance o por pertenecer a otro producto.
+
+### Hipotesis
+
+- El puente Biblioteca -> producto deberia mejorar conversion de trafico informativo, especialmente EN/USA, sin mezclar productos ni claims no documentados.
+- El saneado frontend evita recurrencia visible de comentarios HTML internos en articulos cuando se publique un frontend que lo incluya.
+
+### Contradicciones
+
+- Lovable habia comunicado deploy de `sitemap`/`prerender`, pero la Edge directa Supabase comprobada el 2026-09-02 08:33 CEST no contiene las rutas nuevas y su prerender cae a home/canonical home.
+- `DECISIONS_LOG.md` sigue `compressed,dataless` (`size=275527`, `blocks=0`) y no se actualizo para evitar perdida de historico.
+- La rama PR #3 remota sigue en `1024e5e`; este bloque deja cambios locales no commiteados sobre esa base.
+
+### Tareas pendientes
+
+- Enviar a Lovable el prompt minimo documentado en `NEXT_STEPS.md` para sincronizar Edge `sitemap`/`prerender`.
+- Revalidar Edge directa Supabase tras Lovable y solo despues avanzar Search Console limitada.
+- Decidir release separado de los cambios locales Biblioteca/blog sanitizer.
+- Recuperar o rehidratar `DECISIONS_LOG.md` antes de actualizar ese documento.
+
+## Actualizacion 2026-09-02 08:10 CEST: release tecnico simulator/precios desplegado por vias directas
+
+### Hechos
+
+- Se trabajo desde el repo sano `/Users/GOIKO/codex-workspaces/seo-migration-master-i18n-seo-og-clean2-20260901`, rama `codex/winerim-i18n-seo-og-clean2-20260901`, PR GitHub #3: `https://github.com/goiko111/seo-migration-master/pull/3`.
+- La rama quedo con tres commits sobre `origin/main`: `cc0c665` (simulador i18n/SEO/OG), `b1c80f4` (precios modular y OG), `1024e5e` (puente de sitemap publico para precios modular).
+- Se desplego Cloudflare Pages desde `dist` validado: `https://99319863.winerim-origin.pages.dev`, alias `https://codex-winerim-i18n-seo-og-cl.winerim-origin.pages.dev`.
+- Se desplego `winerim-edge-router` apuntando a la Pages build `99319863`: version `6b84978c-ccfd-43c5-8f86-6abcd1744acc`.
+- Se desplego `winerim-proxy`; version final post-sitemap bridge: `d893a932-b4bc-40f6-872f-034ebf736c8e`.
+- Supabase directo sigue bloqueado por permisos: `supabase functions deploy sitemap prerender --project-ref pwkqbcgjrhoyxrsmcypw --use-api` devuelve `403 FunctionsApiStatusError`.
+- QA productiva tras Cloudflare: `/precios-modulos-integraciones` devuelve `200` para humano, Googlebot y `OAI-SearchBot/1.0`, con title/canonical propios y sin `TELEGRAM_BOT_TOKEN`, `@secret` ni `winerim-content-expansion`.
+- QA productiva tras Cloudflare: las seis rutas canonicas del simulador (`/simulador-carta`, `/en/wine-list-simulator`, `/it/simulatore-carta`, `/fr/simulateur-carte`, `/de/weinkarten-simulator`, `/pt/simulador-carta`) devuelven `200`, `x-prerendered: true`, canonical propio y contenido localizado para Googlebot/OAI.
+- QA productiva tras Cloudflare: `/en/simulador-carta` redirige `301` a `/en/wine-list-simulator`; `/og/winerim-og-es.png` y `/og/winerim-og-en.png` devuelven `200 image/png`; legales siguen `200` con `X-Robots-Tag: noindex, follow`.
+- QA productiva tras Cloudflare: `https://winerim.wine/sitemap.xml` devuelve `200`, `X-Robots-Tag: index, follow`, contiene `/precios-modulos-integraciones` y las seis rutas del simulador.
+- Validaciones locales verdes: `npm test -- --reporter=dot` (`155/155`), `npm run build`, `npx tsc --noEmit --pretty false`, ESLint focal, `deno-bin check`, `node --check`, `git diff --check`, `npm run generate:sitemap-static`, `node scripts/validate-i18n-seo-og-release.mjs`.
+
+### Decisiones
+
+- La recuperacion tecnica prioritaria queda publicada por vias directas Cloudflare sin usar creditos de Lovable.
+- Lovable queda limitado a sincronizar Supabase Edge Functions `sitemap` y `prerender` desde PR #3 / commit `1024e5e`; no debe tocar frontend, Cloudflare, Pages, DNS, migraciones, `llms`, Biblioteca, Blog ni Aprender vino.
+- Ya se puede pasar a Search Console para inspeccion limitada de `/precios-modulos-integraciones`, `/simulador-carta`, `/en/wine-list-simulator` y el grupo de 404/alias relacionado; no hacer indexacion masiva.
+
+### Hipotesis
+
+- Cuando Lovable despliegue `sitemap` y `prerender`, Supabase quedara alineado con la produccion publica que ahora corrige Cloudflare.
+- El puente de sitemap en Worker puede retirarse o simplificarse en el futuro solo despues de comprobar que la Edge Function publica ya incluye `/precios-modulos-integraciones`.
+
+### Contradicciones
+
+- Produccion publica esta sana por Cloudflare, pero Supabase Edge Functions no constan desplegadas desde el codigo nuevo por el bloqueo `403`.
+- La carpeta viva `Documents` sigue siendo fuente documental, pero `git status` vuelve a colgar y `DECISIONS_LOG.md` aparece como archivo dataless/0 blocks aunque tiene tamano declarado; no se ha sobrescrito ni sincronizado desde el clon.
+
+### Tareas pendientes
+
+- En Lovable, ejecutar solo el prompt acotado para desplegar `sitemap` y `prerender` desde PR #3 / commit `1024e5e`.
+- Tras confirmacion de Lovable, comprobar Edge directa Supabase para `/sitemap` y `/prerender?path=/precios-modulos-integraciones`.
+- Pasar Search Console de forma limitada a las URLs ya validadas y reenviar sitemap publico.
+- Mantener contenido editorial, nuevas migraciones, Biblioteca/Blog/Aprender vino y `llms` en gates separados.
+
+## Actualizacion 2026-09-01 18:36 CEST: candidato limpio i18n/SEO/OG preparado sin contaminacion editorial
+
+### Hechos
+
+- Se preparo una rama limpia fuera de `Documents`: `/Users/GOIKO/codex-workspaces/seo-migration-master-i18n-seo-og-clean2-20260901`, rama `codex/winerim-i18n-seo-og-clean2-20260901`, base `origin/main` `ef64edbb35adf4ab44e030ea2e290db21c8f5bad`.
+- Se creo el commit local unico `cc0c6656914dcb3d7f0d08c2335e42b426c3ce22` (`fix: prepare localized simulator seo release`) con 23 archivos, sin push, deploy, publish, Lovable, Cloudflare remoto, Supabase remoto, migraciones, `llms` ni Search Console.
+- El candidato sustituye para release tecnico al paquete P0 bloqueado `9c374e5`, cuyo parent arrastraba cambios editoriales/data de Biblioteca no autorizados.
+- El paquete corrige la superficie tecnica del simulador: slugs canonicos ES/EN/IT/FR/DE/PT, aliases como `/en/simulador-carta`, Worker, Pages router, Edge `prerender`, Edge `sitemap`, sitemap estatico, shell React inicial y metadatos OG/Twitter localizados.
+- Se anadieron seis imagenes OG localizadas `public/og/winerim-og-*.png` y el validador reproducible `scripts/validate-i18n-seo-og-release.mjs`.
+- El fallo reproducible de instalacion se diagnostico en `origin/main`: `package.json` declaraba dos devDependencies Lovable (`@lovable.dev/vite-plugin-dev-server-bridge` y `@lovable.dev/vite-plugin-hmr-gate`) que no existen en `package-lock.json` ni se importan. Se corrigio quitandolas de `package.json`; `package-lock.json` queda intacto.
+- Validaciones verdes del candidato: `npm ci --ignore-scripts --no-audit --no-fund`, `npm test -- --reporter=dot` (`154/154`), `npm run build`, `npx tsc --noEmit --pretty false`, ESLint focal en archivos TS/TSX tocados, `node --check` Worker/router/scripts, `python3 -m py_compile`, `deno-bin check` de Edge Functions, `npm run generate:sitemap-static`, `git diff --check`, `node scripts/validate-i18n-seo-og-release.mjs` y prueba local de prerender Deno para seis rutas canonicas de simulador.
+- `npm run lint` global sigue fallando por deuda preexistente fuera del paquete; no se corrigio en esta tanda para no mezclar refactors amplios.
+
+### Decisiones
+
+- Usar `cc0c6656914dcb3d7f0d08c2335e42b426c3ce22` como candidato limpio de release tecnico i18n/SEO/OG; no usar `9c374e5` para publicar sin separar su parent editorial.
+- Mantener el contenido/migraciones de Biblioteca fuera de este candidato tecnico y exigir autorizacion separada para cualquier mutacion de datos.
+- No publicar ni pedir indexacion hasta confirmar politica de release y repetir QA productiva tras deploy coordinado.
+
+### Hipotesis
+
+- Si se publica exactamente este commit junto con las capas correspondientes, `/en/simulador-carta` deberia redirigir a `/en/wine-list-simulator`, bots deberian recibir `200` localizado en las rutas canonicas y el sitemap deberia anunciar las seis variantes correctas.
+- La eliminacion de las dos devDependencies Lovable no deberia afectar runtime ni build porque no aparecen importadas en `vite.config.ts`, `src`, Worker, router ni Edge Functions.
+
+### Contradicciones
+
+- El paquete anterior `9c374e5` tenia gates verdes (`163/163`), pero su diff efectivo excedia el alcance tecnico por el parent editorial `8538be5`.
+- Este candidato limpio pasa `154/154` tests, no `163/163`, porque no arrastra los tests/cambios editoriales del paquete contaminado.
+- La copia viva de `Documents` sigue siendo fuente documental, pero el artefacto de codigo fiable para commit es el clone de `~/codex-workspaces`.
+
+### Tareas pendientes
+
+- Confirmar si se autoriza push/PR y si GitHub/Lovable publican automaticamente alguna rama.
+- Antes de cualquier publish, repetir los gates en el commit `cc0c6656914dcb3d7f0d08c2335e42b426c3ce22`.
+- Tras deploy coordinado, validar produccion para humano, Googlebot y `OAI-SearchBot/1.0`: simulador canonico, alias, sitemap, canonical, hreflang, OG, home/campanas y legales `200/noindex`.
+- Mantener Biblioteca editorial, nuevas migraciones y `llms` en un gate separado.
+
+## Actualizacion 2026-09-01 16:09 CEST: diff revisado y commit local creado
+
+### Hechos
+
+- Se reviso el diff de la copia sana `/Users/GOIKO/codex-workspaces/seo-migration-master-release-sane-20260901-1536` en la rama `codex/winerim-biblioteca-release-gate-20260901`.
+- La revision cubrio package/configuracion, shell React, router/Worker, prerender/sitemap, blog/articulos, Biblioteca, legales, tests, validadores y documentos.
+- Antes del commit se corrigieron cuatro riesgos detectados en la revision: chat sin espera de cookies, idioma de chat en `/en`/`/de`/etc., redireccion USA que podia afectar `go.winerim.wine`, y breadcrumbs/CTA no localizados en `GuideTemplate`.
+- Se anadio `src/test/router-shell-guardrails.test.ts` para cubrir esos riesgos.
+- Gates verdes tras la revision: `npm ci`, `npm test` (`162/162`), `npm run build`, TypeScript, ESLint focal, `deno-bin check`, `validate_release_gates.mjs`, `validate_wine_library_20260907_batch.mjs`, `node --check` y `git diff --check`.
+- Se creo un commit local reproducible en la rama sana; el hash operativo se obtiene fuera del propio commit con `git rev-parse HEAD`.
+- Informe: `docs/agent_outputs/wine_library_diff_review_local_commit_2026-09-01.md`.
+
+### Decisiones
+
+- Mantener solo el commit local reproducible desde la copia sana.
+- No hacer push, publish, deploy, migraciones, Search Console ni Lovable hasta coordinacion explicita posterior.
+- Mantener `go.winerim.wine` como landing de campana y fuera de la redireccion automatica USA a `/en`.
+
+### Hipotesis
+
+- El paquete esta listo para una rama revisable, pero no debe tratarse como produccion ni como estado Lovable/Cloudflare sincronizado.
+
+### Contradicciones
+
+- La carpeta viva bajo `Documents` sigue siendo fuente documental, pero algunos archivos activos de codigo volvieron a aparecer `compressed,dataless`; la copia sana es la fuente operativa para commit.
+- `Winerim Supply` tiene deuda preexistente de `hreflang` DE/PT en prerender; no fue introducida por este diff y queda fuera del commit Biblioteca.
+
+### Tareas pendientes
+
+- Confirmar politica de publish de Lovable/GitHub antes de cualquier push.
+- Si se autoriza release remoto, repetir gates y coordinar publish/QA productiva.
+
+## Actualizacion 2026-09-01 15:48 CEST: repo sano localizado para release
+
+### Hechos
+
+- Se creo una copia sana principal fuera de `Documents`: `/Users/GOIKO/codex-workspaces/seo-migration-master-release-sane-20260901-1536`.
+- La copia sana parte de `origin/main` en `ef64edbb35adf4ab44e030ea2e290db21c8f5bad` y usa rama local `codex/winerim-biblioteca-release-gate-20260901`.
+- Se traslado a esa rama el paquete local validado sin copiar `.git`, `.env`, `node_modules`, `dist`, backups ni placeholders historicos.
+- `origin/main` clona correctamente, pero `npm ci` falla hasta incorporar el `package.json` local, porque `package.json` remoto lista dos plugins Lovable que no estan en `package-lock.json`.
+- En la rama sana, `npm ci`, `npm test` (`159/159`), build, TypeScript, ESLint focal, `deno-bin check`, release maps, validador del lote 2026-09-07 y `git diff --check` pasan.
+- Informe: `docs/agent_outputs/wine_library_release_repo_health_2026-09-01.md`.
+
+### Decisiones
+
+- Usar la copia de `~/codex-workspaces` como candidata para commit/push posterior; no usar la copia viva con `.git` deshidratado.
+- No hacer commit ni push sin coordinacion explicita.
+
+### Hipotesis
+
+- El clone fuera de `Documents` reduce el riesgo de rehidratacion/deshidratacion de FileProvider antes del release.
+
+### Contradicciones
+
+- La copia viva tiene gates verdes pero no git sano; el clone remoto tiene git sano pero necesita el `package.json` local para `npm ci` reproducible.
+
+### Tareas pendientes
+
+- Revisar diff de la rama sana y decidir si se autoriza commit local/push de rama sin activar publish accidental.
+
+## Actualizacion 2026-09-01 15:36 CEST: gate editorial 2026-09-07 saneado
+
+### Hechos
+
+- Se reviso internamente el SQL local `supabase/migrations/20260713131825_add_wine_library_list_architecture_style_country_price.sql` sin publicar, desplegar ni aplicar migraciones.
+- El lote `wine-library-list-architecture-style-country-price` mantiene seis filas ES/EN/IT/FR/DE/PT, fechas `published_at` escalonadas el 2026-09-07 de 09:00 a 09:25 CEST, 918-1155 palabras visibles y nueve enlaces internos por idioma.
+- Se detectaron y retiraron del SQL local seis comentarios internos `winerim-content-expansion-20260713`.
+- Se creo el gate reproducible `docs/agent_outputs/validate_wine_library_20260907_batch.mjs`.
+- Validaciones verdes tras la limpieza: validador nuevo, `validate_release_gates.mjs`, `npm test -- --reporter=dot` (`159/159`), `npm run build`, TypeScript, ESLint focal, `node --check` Worker/router y `deno-bin check` de Edge Functions.
+- Informe: `docs/agent_outputs/wine_library_20260907_editorial_gate_2026-09-01.md`.
+
+### Decisiones
+
+- El lote queda como candidato local saneado para release coordinado, no como contenido publicado ni aplicado.
+- El nuevo validador debe ejecutarse junto al gate de release maps antes de cualquier migracion/publish.
+- No actualizar `llms` ni pasar Search Console hasta publicacion real y QA posterior.
+
+### Hipotesis
+
+- El saneado elimina una fuente potencial de fugas de marcadores internos si algun render/export futuro no aplica el limpiador del frontend.
+
+### Contradicciones
+
+- La QA previa situaba el marcador en el script limpiador y no visible en DOM, pero el SQL futuro aun conservaba comentarios internos en los bodies.
+- Los gates tecnicos estaban verdes, pero no cubrian explicitamente higiene editorial del SQL.
+
+### Tareas pendientes
+
+- Elegir via canonica de release y trasladar el patch a un repo con `.git` sano o rehidratar `.git` con control.
+- Validar produccion despues del 2026-09-07 09:25 CEST antes de `llms` o Search Console.
+
+## Actualizacion 2026-09-01 07:03 CEST: lote semanal 2026-09-07 seleccionado
+
+### Hechos
+
+- El próximo lunes ya tiene un lote data-only completo: `wine-library-list-architecture-style-country-price`, ES/EN/IT/FR/DE/PT, 942-1181 palabras por mercado y `published_at` escalonado el 2026-09-07 de 09:00 a 09:25 CEST.
+- Pre-release productivo correcto: Googlebot/OAI reciben `404`, `future-article-not-found` y `noindex`; las seis rutas no aparecen en sitemap ni `llms`.
+- Los lotes 2026-08-24 y 2026-08-31 están liberados para bots con prerender, canonical propio, siete hreflang y presencia completa en sitemap.
+- El marcador detectado en HTML humano pertenece al script limpiador y no es texto visible ni contenido editorial renderizado.
+- Informe completo: `docs/agent_outputs/winerim_weekly_blog_preflight_2026-09-01.md`.
+
+### Decisiones
+
+- Usar el lote existente del 2026-09-07 como entrega semanal y no crear un duplicado.
+- Congelar 2026-09-21 por solapamiento con el Blog de stock dormido del 2026-09-28.
+- No publicar, migrar, desplegar ni actualizar `llms` sin aprobación explícita.
+
+### Hipotesis
+
+- La doble compuerta debería mantener el lote oculto hasta cada offset y liberarlo de forma localizada el 2026-09-07.
+
+### Contradicciones
+
+- Los documentos proponían sanear un marcador visible; la inspección del DOM demuestra que el literal restante vive en el código del limpiador, no en el cuerpo visible.
+
+### Tareas pendientes
+
+- Revisión editorial humana del lote y QA ES/EN/IT/FR/DE/PT después de las 09:25 del 2026-09-07.
+- Actualizar `llms` solo tras certificar publicación; decidir un tema no canibalizante para 2026-09-21 o dejar el hueco libre.
+
+## Actualizacion 2026-09-01: coordinacion semanal y QA posterior
+
+### Hechos
+
+- La evidencia mas reciente del frente es `docs/agent_outputs/wine_library_next_block_2026-08-27.md` y su QA JSON.
+- En produccion se auditaron seis rutas de Biblioteca del vino para humano y bots: todas devolvieron `200`, `html lang` correcto, canonical propio, sin overflow mobile y sin `winerim-content-expansion`, `TELEGRAM_BOT_TOKEN` ni `@secret`.
+- Googlebot y `OAI-SearchBot/1.0` devolvieron `200` y canonical propio en las seis rutas, con `x-worker-branch: bot-prerender`.
+- Sigue pendiente publicar el cambio local que elimina `— Winerim` duplicado de los titles SEO de uvas; el title humano observado era, por ejemplo, `Tempranillo | Grape guide — Winerim | Winerim`.
+- En `de/weinbibliothek/weinbegleitung/carnes-rojas`, el title bot conserva `Carnes Rojas` en español aunque la UI humana esta localizada.
+- `public/llms.txt` y `public/llms-full.txt` siguen fechados `2026-07-03`; no se ha autorizado ni documentado una actualizacion.
+- No hay evidencia posterior en `docs/agent_outputs` de aplicacion/publicacion de nuevos lotes tras la QA del 27 de agosto. El calendario contiene propuestas hasta el 28 de septiembre, no prueba de releases.
+- El validador de gates no se pudo ejecutar en esta corrida porque el entorno no tiene el comando `timeout`; no se interpreta como resultado verde ni rojo.
+
+### Decisiones
+
+- Mantener congeladas nuevas publicaciones editoriales hasta comprobar el estado real de los lotes y corregir los defectos de title localizados.
+- Publicar el fix de titles solo desde la fuente frontend canonica confirmada (Lovable si sigue siendo origen operativo), sujeto a aprobacion; no desplegar desde el repo local por inferencia.
+- No tocar `llms`, sitemap, prerender, Worker, migraciones, Search Console ni credenciales en esta coordinacion.
+
+### Hipotesis
+
+- La duplicacion de marca procede de titles de uva que ya incluyen marca mas el sufijo global de `SEOHead`.
+- El naming español del title bot aleman procede de la capa Worker/prerender, independiente de la UI React.
+
+### Contradicciones
+
+- La QA tecnica de seis rutas esta verde, pero la calidad editorial/SEO no esta cerrada por titles inconsistentes entre humano y bot.
+- El calendario propone temas del 31 de agosto en adelante, pero no existe evidencia operativa de que se hayan aplicado o publicado.
+
+### Tareas pendientes
+
+- Confirmar el estado de los lotes 2026-08-31 y siguientes antes de generar otra migracion.
+- Publicar y revalidar el fix de titles de uvas en EN/DE y una muestra IT/FR/PT.
+- Localizar el title bot de `carnes-rojas` en DE.
+- Ejecutar `node docs/agent_outputs/validate_release_gates.mjs` directamente o con un mecanismo de limite disponible, y registrar su salida real.
+- Recuperar la cadencia de actualizacion de `llms` solo cuando haya contenido efectivamente liberado y QA completa.
+
+## Actualizacion 2026-08-24 08:36 CEST: preflight del lote Biblioteca
+
+### Hechos
+
+- Se ejecuto antes de la ventana de release (`08:35 CEST`; releases `09:00`-`09:25`) el preflight de `wine-library-pairing-matrix-texture-acidity-fat`.
+- El validador local esta verde: `ok: true`, `66/66/66/66`, cero warnings.
+- Googlebot y `OAI-SearchBot/1.0` reciben `404`, `x-worker-branch: future-article-not-found` y `X-Robots-Tag: noindex, follow` para las seis rutas; el sitemap contiene cero slugs del lote.
+- El navegador humano recibe el shell React con `200`; ese HTML contiene el marcador interno `winerim-content-expansion-20260713` en las seis rutas. No aparece `TELEGRAM_BOT_TOKEN`.
+- No se publico, desplego, migro, modifico sitemap/prerender/Worker/`llms`, tocaron credenciales ni se uso Lovable.
+
+### Decisiones
+
+- No certificar ni aplicar el lote mientras el marcador interno siga presente y antes de completar QA posterior a `09:25`.
+- No preparar el lote de Blog `2026-10-05` mientras siga pendiente la decision editorial `2026-09-21` frente a `2026-09-28`.
+
+### Hipotesis
+
+- El `200` humano corresponde al shell SPA, no demuestra que las filas editoriales esten liberadas; el marcador puede proceder del contenido embebido o de datos ya accesibles al cliente y requiere localizar su origen.
+
+### Contradicciones
+
+- Los gates de fechas estan alineados, pero la superficie humana expone un marcador que los criterios de calidad prohíben; un gate verde no equivale a lote publicable.
+
+### Tareas pendientes
+
+- Repetir QA completa despues de `09:25` y comprobar contenido, title, canonical, hreflang, prerender, sitemap y ausencia del marcador.
+- Localizar y retirar el marcador mediante un cambio data-only minimo sujeto a aprobacion; despues resolver `09-21/09-28`.
+
+## Actualizacion 2026-08-24: lote de Biblioteca pendiente de QA
+
+- No hay commits ni nuevos `docs/agent_outputs` desde 2026-08-17; los outputs son historicos/propositivos.
+- La QA productiva y el validador local no terminaron dentro del limite operativo; no se certifica release.
+- `llms.txt`/`llms-full.txt` siguen con `Last updated: 2026-07-03`.
+- El SQL del lote 2026-08-24 contiene marcadores internos en `body`; no aplicar sin revision y aprobacion.
+- No publicar, desplegar, migrar, tocar credenciales, sitemap, prerender, Worker, `llms` ni usar Lovable.
+- Pendiente: QA de seis idiomas para humano/Googlebot/OAI, contenido, title, canonical, hreflang, prerender, sitemap y marcadores; despues resolver 09-21/09-28.
+
 ## Cierre 2026-07-07: estado publicado de la tanda i18n/SEO/editorial
 
 ## Hechos
@@ -737,3 +1044,146 @@
 ### Tareas pendientes
 
 - Publicar `main` en Lovable y revalidar produccion humana/bot.
+
+## Actualizacion 2026-09-01: regla de continuidad para 2Ampliar Biblioteca del vino
+
+### Hechos
+
+- La tarea viva `2Ampliar biblioteca del vino` usa `/Users/GOIKO/Documents/Playground/seo-migration-master` como carpeta operativa.
+- Lovable Web Winerim sigue siendo el frontend publicado confirmado para la web publica: proyecto `2c4eed0e-6760-45f0-aeb3-ce44de8e91f1`, latest commit `ef64edbb35adf4ab44e030ea2e290db21c8f5bad`.
+- El router/Worker desplegado para la recuperacion de simulador/precios queda documentado como ya aplicado; no debe redeployarse por rutina.
+- La revision read-only del 2026-09-01 confirma que el gate local `docs/agent_outputs/validate_release_gates.mjs` pasa.
+
+### Decisiones
+
+- No declarar la web ni Biblioteca al 100% hasta cerrar titles, HTML shell inicial y paridad bot/humano en DE/PT.
+- No mezclar la copia antigua `/Users/GOIKO/seo-migration-master` salvo comparacion explicita o recuperacion excepcional documentada.
+- Search Console debe ir despues de validar URL sana; si se usa, que sea selectivo y con evidencia fresca.
+
+### Hipotesis
+
+- La fuente de verdad operativa esta repartida entre Lovable publicado, repo local y Worker/Cloudflare; esa relacion debe documentarse antes de cambios amplios.
+
+### Contradicciones
+
+- El repo local contiene fixes que produccion Lovable aun no refleja.
+- Rutas React hidratadas se ven correctas, pero el HTML inicial sigue naciendo con metadatos ES de home.
+
+### Tareas pendientes
+
+- Cerrar y publicar el fix de titles de uvas/simulador desde la fuente canonica.
+- Corregir title bot localizado de maridajes.
+- Documentar relacion Lovable/repo/Cloudflare y evitar deploys que mezclen estados.
+
+## Actualizacion 2026-09-01: bloque interno local de Biblioteca/shell/simulador
+
+### Hechos
+
+- Se continuo sobre la carpeta viva `/Users/GOIKO/Documents/Playground/seo-migration-master` sin publicar ni tocar produccion.
+- Queda creado `docs/agent_outputs/wine_library_internal_fixes_2026-09-01.md` como evidencia del bloque.
+- Cambios locales relevantes:
+  - `SEOHead` normaliza titulos que ya llegan con marca y evita dobles `Winerim`;
+  - `App.tsx` deja de servir slugs cruzados del simulador en `langRoutes(prefix)` y redirige `/en/simulador-carta` a `/en/wine-list-simulator`;
+  - `prerender` localiza nombres estrategicos de Biblioteca, incluida la ficha alemana `carnes-rojas` como `Rotes Fleisch`;
+  - `cloudflare-worker-v3-hybrid.js` e `index.html` preparan metadata inicial de shell para home multilingue, simulador y Biblioteca.
+- Reconciliacion confirmada localmente:
+  - `wrangler.pages-router.toml` apunta a `https://seo-migration-magic.lovable.app` con release `lovable-ef64edbb-simulator-i18n-20260826`;
+  - `wrangler.winerim.toml` apunta `ORIGIN` al mismo Lovable y usa `SITE_URL = "https://winerim.wine"`;
+  - Lovable project knowledge read-only para `2c4eed0e-6760-45f0-aeb3-ce44de8e91f1` devolvio contenido vacio.
+
+### Decisiones
+
+- Estado operativo: `85%` local, `75%` produccion para este frente, porque las correcciones no estan publicadas.
+- No pasar Search Console por estos cambios hasta publish y revalidacion productiva.
+- Mantener Lovable/local/Cloudflare como fuentes coordinadas pero no intercambiables: cualquier publish debe declarar que commit/release y que Worker/prerender incluye.
+
+### Hipotesis
+
+- El duplicado de titles venia de entradas SEO con marca mas sufijo global en `SEOHead`.
+- El fallo `/en/simulador-carta` venia de rutas React genericas por prefijo que aceptaban slugs de otros idiomas.
+
+### Contradicciones
+
+- `.lovable/plan.md` conserva contexto historico ES-only para el simulador, pero los reports y produccion posterior documentan i18n publicada en `ef64edbb`.
+- El repo local contiene fixes que Lovable/Cloudflare no reflejan hasta una publicacion explicita.
+
+### Tareas pendientes
+
+- Publicar desde la fuente canonica confirmada, no desde una mezcla accidental de estados.
+- Revalidar produccion humano/bots/sitemap tras publish antes de Search Console.
+- Reintentar `npm test` y `npm run build` en entorno estable: ambos se colgaron localmente y se cortaron con timeout controlado.
+
+## Actualizacion 2026-09-01: diagnostico npm/build y paquete local de release
+
+### Hechos
+
+- Se diagnostico el bloqueo de `npm test`/`npm run build`: la causa era deshidratacion `compressed,dataless` de iCloud/FileProvider en archivos criticos, incluido `package-lock.json`, `node_modules/vite/bin/vite.js` y metadata de `.git`.
+- Se recupero la toolchain desde un clon limpio read-only de GitHub en `/tmp/winerim-origin-main-20260901-1108`, commit `ef64edbb35adf4ab44e030ea2e290db21c8f5bad`, sin sincronizar la copia antigua `/Users/GOIKO/seo-migration-master`.
+- Se materializaron dependencias con `npm ci --ignore-scripts --no-audit --no-fund`; Vite queda en `5.4.19` y Vitest en `3.2.4`.
+- Se corrigio localmente el fallback ES de `src/pages/Blog.tsx` y `src/pages/ArticlePage.tsx`: rutas localizadas sin contenido ya no deben mostrar articulos espanoles, sino empty state o pagina localizada `noindex`.
+- Se reconstruyo `src/test/blog-article-language-guardrails.test.ts`, se alineo `supabase/functions/sitemap/index.ts` con `prerender` para `66` releases y se reconstruyo `wrangler.winerim.toml` desde documentacion viva, sin secretos.
+- Evidencia: `docs/agent_outputs/wine_library_release_gate_diagnostics_2026-09-01.md`.
+- Validaciones verdes: `npm test -- --reporter=dot` (`159/159`), `npm run build`, `npx tsc --noEmit --pretty false`, `node docs/agent_outputs/validate_release_gates.mjs`, `node --check` Worker/router y ESLint focal.
+
+### Decisiones
+
+- Considerar el paquete local de Biblioteca/simulador/blog/shell listo para release coordinado, pero no publicado.
+- No ejecutar `npm run deploy:worker:dry-run` ni ningun deploy sin coordinacion explicita del controlador.
+- Tratar `.git` local como bloqueo operativo de commit/push; no repararlo automaticamente ni mezclar repos.
+- No tocar `.env`, migraciones locales deshidratadas no recuperables ni outputs historicos que no existen en el clon GitHub.
+
+### Hipotesis
+
+- La deshidratacion puede reaparecer si la carpeta viva sigue gestionada por iCloud/FileProvider.
+- Tras publicar desde la fuente canonica, el blog localizado deberia dejar de generar contenido ES en rutas internacionales y deberia reducir ruido de Search Console por canonicals/duplicados.
+
+### Contradicciones
+
+- La documentacion inmediatamente anterior decia que `vitest` y `vite build` se colgaban; queda supersedido por esta corrida: ambos pasan tras recuperar placeholders.
+- Produccion/Lovable no consta actualizada con este paquete aunque localmente los gates esten verdes.
+- Persisten placeholders no bloqueantes fuera de `.git`, incluidos docs historicos, migraciones locales de julio y `src/components/simulator/simulatorI18n.ts`.
+
+### Tareas pendientes
+
+- Confirmar via canonica de release y publicar solo ese paquete tecnico, sin articulos nuevos ni Search Console.
+- Reparar o sustituir el `.git` local antes de commit/push desde esta carpeta, o aplicar el patch desde un clon limpio.
+- Revalidar produccion tras publish con humano, Googlebot, `OAI-SearchBot/1.0`, sitemap, canonical, hreflang y ausencia de marcadores internos.
+
+## Actualizacion 2026-09-01: paquete P0 i18n/SEO/OG preparado en clon sano
+
+### Hechos
+
+- Se trabajo en el clon sano `/Users/GOIKO/codex-workspaces/seo-migration-master-release-sane-20260901-1536`, rama `codex/winerim-i18n-seo-og-p0-20260901`, no en la copia antigua `/Users/GOIKO/seo-migration-master`.
+- Queda creado el commit local `9c374e5` (`fix i18n seo og shell package`), sin push, publish, deploy ni Search Console.
+- El paquete cubre HTML inicial localizado, canonical, hreflang, `html lang`, title/description, OG/Twitter, JSON-LD, sitemap, prerender, Worker, router Pages y rutas canonicas del simulador.
+- Rutas canonicas del simulador confirmadas en codigo: ES `/simulador-carta`, EN `/en/wine-list-simulator`, IT `/it/simulatore-carta`, FR `/fr/simulateur-carte`, DE `/de/weinkarten-simulator`, PT `/pt/simulador-carta`.
+- `/en/simulador-carta` queda tratado como alias 301 hacia `/en/wine-list-simulator`.
+- Se generaron assets OG locales 1200x630 en `public/og/winerim-og-{es,en,it,fr,de,pt}.png`.
+- Evidencia tecnica: `/Users/GOIKO/codex-workspaces/seo-migration-master-release-sane-20260901-1536/docs/agent_outputs/winerim_i18n_seo_og_p0_release_package_2026-09-01.md`.
+- Captura mobile EN: `/Users/GOIKO/codex-workspaces/seo-migration-master-release-sane-20260901-1536/docs/agent_outputs/winerim_i18n_p0_en_simulator_mobile_20260901.png`.
+
+### Decisiones
+
+- Mantener este paquete como candidato local listo para coordinacion, no como cambio productivo.
+- Para campanas USA, usar `en_US` en OG locale y pagina canonica EN `/en/wine-list-simulator`.
+- La deteccion de idioma de `/` queda limitada a humanos y solo en raiz, con prioridad cookie/preferencia, `Accept-Language`, pais Cloudflare y fallback ES.
+- No redirigir rutas explicitas de idioma por pais para evitar loops, cloaking o canonicals variables.
+- No pasar Search Console de este bloque hasta publicar y revalidar produccion.
+
+### Hipotesis
+
+- Los fallos vivos actuales proceden de divergencia entre el paquete local validado y las capas publicadas en Lovable/Cloudflare/Supabase.
+- El origen SPA de Lovable necesita apoyo de shell/edge/prerender para emitir HTML bruto correcto por ruta antes de hidratacion.
+
+### Contradicciones
+
+- Produccion ya contiene en sitemap las URLs localizadas del simulador, pero todavia no sirve los nuevos assets OG localizados ni el shell humano localizado.
+- Lovable comunico despliegue de sitemap/prerender/redirects, pero auditoria viva sigue mostrando shell inicial ES en rutas EN y OG/locale antiguos o ausentes en algunas respuestas bot.
+- Esta carpeta sigue siendo la fuente documental viva, pero el commit sano quedo en un clon externo porque el repo vivo tenia historial de deshidratacion iCloud/FileProvider.
+
+### Tareas pendientes
+
+- Coordinar la via canonica de release: Lovable, GitHub/clon sano, Cloudflare Worker/router y Supabase Edge Functions.
+- Publicar el commit `9c374e5` o patch equivalente solo con aprobacion explicita.
+- Revalidar produccion tras publicar antes de Search Console.
+- No tocar articulos nuevos, migraciones editoriales, DE/PT de contenido amplio ni la copia antigua hasta cerrar este release tecnico.
