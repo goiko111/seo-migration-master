@@ -3450,6 +3450,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/herramientas/simulador-senal-margenes': { es: 'Simulador de senal de margenes', en: 'Margin signal simulator', it: 'Simulatore segnale margini', fr: 'Simulateur signal de marges', de: 'Margensignal-Simulator', pt: 'Simulador de sinal de margens' },
   '/herramientas/test-perfil-rim': { es: 'Test de perfil RIM', en: 'RIM profile test', it: 'Test profilo RIM', fr: 'Test profil RIM', de: 'RIM-Profiltest', pt: 'Teste de perfil RIM' },
   '/herramientas/simulador-pareto-carta-vinos': { es: 'Simulador Pareto de carta de vinos', en: 'Pareto wine list simulator', it: 'Simulatore Pareto carta vini', fr: 'Simulateur Pareto carte vins', de: 'Pareto-Weinkarten-Simulator', pt: 'Simulador Pareto de carta de vinhos' },
+  '/simulador-carta': { es: 'Simulador de carta de vinos', en: 'Wine list simulator', it: 'Simulatore carta vini', fr: 'Simulateur de carte des vins', de: 'Weinkarten-Simulator', pt: 'Simulador de carta de vinhos' },
   '/herramientas/calculadora-fuga-margen': { es: 'Calculadora de fuga de margen', en: 'Margin leakage calculator', it: 'Calcolatrice fuga margine', fr: 'Calculateur fuite de marge', de: 'Margenverlust-Rechner', pt: 'Calculadora de fuga de margem' },
   '/herramientas/comparador-distribuidores': { es: 'Comparador de distribuidores', en: 'Distributor comparator', it: 'Comparatore distributori', fr: 'Comparateur distributeurs', de: 'Distributoren-Vergleich', pt: 'Comparador de distribuidores' },
   '/casos-exito': { es: 'Casos de exito', en: 'Case studies', it: 'Casi di successo', fr: 'Cas clients', de: 'Erfolgsgeschichten', pt: 'Casos de sucesso' },
@@ -4678,6 +4679,78 @@ const LEGAL_STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent 
 const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   ...WINE_LIBRARY_LOCALIZED_HOME_STATIC_PAGES,
   ...LEGAL_STATIC_PAGES,
+  '/simulador-carta': {
+    meta: {
+      title: 'Simulador de carta de vinos para restaurantes | Winerim',
+      description: 'Simula tu carta de vinos y estima margen, rotacion y ticket medio antes de cambiar una sola referencia. Resultado inmediato y gratuito.',
+      canonical: `${SITE}/simulador-carta`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'WebApplication',
+    },
+    content: {
+      h1: 'Disena la carta de vinos perfecta para tu restaurante',
+      subtitle: 'Responde unas preguntas sobre tu restaurante y obten una simulacion de carta con estructura, precios y potencial de margen.',
+      sections: [
+        { heading: 'Que hace el simulador', content: 'El simulador construye una propuesta de carta segun tipo de restaurante, ciudad, nivel de precios y objetivo comercial, y estima el impacto en margen y rotacion.' },
+        { heading: 'Para quien es', content: 'Restaurantes, grupos de restauracion y wine bars que quieren revisar su carta con criterio de negocio y no solo de gusto personal.' },
+        { heading: 'Que obtienes', content: 'Una estructura de carta por estilos y rangos de precio, referencias sugeridas y una lectura de margen potencial frente a la carta actual.' },
+      ],
+      faqs: [
+        { q: 'Es gratuito?', a: 'Si. La simulacion inicial es gratuita y no requiere instalar nada.' },
+        { q: 'Sustituye a un sommelier?', a: 'No. Aporta criterio de datos que el equipo puede validar y ajustar.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Simulador de carta de vinos', url: `${SITE}/simulador-carta` },
+      ],
+      internalLinks: [
+        { label: 'Analisis de carta', url: '/analisis-carta' },
+        { label: 'Herramientas', url: '/herramientas' },
+        { label: 'Precios, modulos e integraciones', url: '/precios-modulos-integraciones' },
+        { label: 'Demo gratuita', url: '/demo' },
+      ],
+    },
+  },
+  '/precios-modulos-integraciones': {
+    meta: {
+      title: 'Precios, modulos e integraciones de Winerim | Winerim',
+      description: 'Consulta como se combinan los modulos de Winerim (Core, TPV, Gestion, Margenes, Intelligence) y sus integraciones, con la logica de precios por alcance.',
+      canonical: `${SITE}/precios-modulos-integraciones`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'WebPage',
+    },
+    content: {
+      h1: 'Precios, modulos e integraciones de Winerim',
+      subtitle: 'Como se combinan Core, TPV, Gestion, Margenes e Intelligence y que integraciones soporta cada configuracion.',
+      sections: [
+        { heading: 'Core', content: 'Recibe carta, catalogo, precios, formatos, disponibilidad y estructura de bodega, y conecta carta, stock, Wine Cellar y Wine Lockers en una base operativa comun.' },
+        { heading: 'TPV', content: 'Recibe articulos, tickets, unidades e ingresos, mapea las referencias del punto de venta con los vinos de Winerim y entrega rotacion, ticket medio y rendimiento real.' },
+        { heading: 'Gestion', content: 'Recibe albaranes, facturas, tarifas, pedidos, distribuidores y reportes de stock; CloudRIM clasifica la informacion y Gestion la convierte en inventario, costes, compras y reposicion trazables.' },
+        { heading: 'Margenes', content: 'Cruza coste real, PVP, ventas, formatos y existencias para calcular margen y rotacion, detectar fugas y stock dormido y preparar criterio de pricing, copa, retirada o reposicion.' },
+        { heading: 'Intelligence', content: 'Recibe las senales de Core, TPV, Gestion y Margenes: los RIMs preparan propuestas, SAVia explica el razonamiento y el impacto y el equipo aprueba cualquier accion critica.' },
+      ],
+      faqs: [
+        { q: 'Se puede empezar solo con Core?', a: 'Si. Core es la base y el resto de modulos se activan segun necesidad operativa.' },
+        { q: 'Se integra con mi TPV?', a: 'Winerim se integra con los principales sistemas de punto de venta y gestion de restauracion.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Precios, modulos e integraciones', url: `${SITE}/precios-modulos-integraciones` },
+      ],
+      internalLinks: [
+        { label: 'Precios', url: '/precios' },
+        { label: 'Funcionalidades', url: '/funcionalidades' },
+        { label: 'Winerim Core', url: '/producto/winerim-core' },
+        { label: 'CloudRIM', url: '/producto/cloudrim' },
+        { label: 'SAVia', url: '/producto/savia' },
+        { label: 'Demo gratuita', url: '/demo' },
+      ],
+    },
+  },
   '/': {
     meta: {
       title: 'Software de IA para Restaurantes — Vende Más Vino | Winerim',

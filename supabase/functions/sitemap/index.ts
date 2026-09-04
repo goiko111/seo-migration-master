@@ -504,6 +504,8 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/herramientas/simulador-senal-margenes', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/test-perfil-rim', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/simulador-pareto-carta-vinos', priority: '0.7', changefreq: 'monthly', multilang: true },
+  { esPath: '/simulador-carta', priority: '0.8', changefreq: 'monthly', multilang: true },
+  { esPath: '/precios-modulos-integraciones', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-fuga-margen', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/comparador-distribuidores', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/calculadora-ticket-medio-vino', priority: '0.7', changefreq: 'monthly', multilang: true },
