@@ -17,7 +17,7 @@ import {
 type Phase = "landing" | "simulating" | "teaser" | "contact";
 
 export default function SimuladorCarta() {
-  const { lang } = useLanguage();
+  const { allLangPaths, lang } = useLanguage();
   const copy = simulatorText(lang);
   const [phase, setPhase] = useState<Phase>("landing");
   const [simId, setSimId] = useState<string>("");
@@ -84,6 +84,7 @@ export default function SimuladorCarta() {
         title={copy.seoTitle}
         description={copy.seoDescription}
         url={copy.path}
+        hreflang={allLangPaths("/simulador-carta")}
       />
       <Navbar />
       <main className="min-h-screen bg-background">

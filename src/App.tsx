@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -255,6 +255,20 @@ const esRoutes = (
     <Route path="/como-vender-mas-vino-en-un-restaurante" element={<VenderMasVino />} />
     <Route path="/analisis-carta" element={<AnalizaCarta />} />
     <Route path="/simulador-carta" element={<SimuladorCarta />} />
+    <Route path="/en/wine-list-simulator" element={<SimuladorCarta />} />
+    <Route path="/it/simulatore-carta" element={<SimuladorCarta />} />
+    <Route path="/fr/simulateur-carte" element={<SimuladorCarta />} />
+    <Route path="/de/weinkarten-simulator" element={<SimuladorCarta />} />
+    <Route path="/pt/simulador-carta" element={<SimuladorCarta />} />
+    <Route path="/simulador" element={<Navigate to="/simulador-carta" replace />} />
+    <Route path="/en/simulador" element={<Navigate to="/en/wine-list-simulator" replace />} />
+    <Route path="/en/simulador-carta" element={<Navigate to="/en/wine-list-simulator" replace />} />
+    <Route path="/it/simulador" element={<Navigate to="/it/simulatore-carta" replace />} />
+    <Route path="/it/simulador-carta" element={<Navigate to="/it/simulatore-carta" replace />} />
+    <Route path="/fr/simulador" element={<Navigate to="/fr/simulateur-carte" replace />} />
+    <Route path="/fr/simulador-carta" element={<Navigate to="/fr/simulateur-carte" replace />} />
+    <Route path="/de/simulador" element={<Navigate to="/de/weinkarten-simulator" replace />} />
+    <Route path="/de/simulador-carta" element={<Navigate to="/de/weinkarten-simulator" replace />} />
     <Route path="/software-carta-de-vinos" element={<SoftwareCartaVinos />} />
     <Route path="/inteligencia-artificial-restaurantes" element={<IARestaurantes />} />
     <Route path="/precio-vino-restaurante" element={<PrecioVinoRestaurante />} />
@@ -515,12 +529,6 @@ const langRoutes = (prefix: string) => (
     <Route path={`${prefix}/outils/simulateur-pareto-carte-vins`} element={<SimuladorParetoCarta />} />
     <Route path={`${prefix}/outils/calculateur-fuite-marge`} element={<CalculadoraFugaMargen />} />
     <Route path={`${prefix}/outils/comparateur-distributeurs`} element={<ComparadorDistribuidores />} />
-    {/* Simulador Carta — localized slugs */}
-    <Route path={`${prefix}/wine-list-simulator`} element={<SimuladorCarta />} />
-    <Route path={`${prefix}/simulatore-carta`} element={<SimuladorCarta />} />
-    <Route path={`${prefix}/simulateur-carte`} element={<SimuladorCarta />} />
-    <Route path={`${prefix}/weinkarten-simulator`} element={<SimuladorCarta />} />
-    <Route path={`${prefix}/simulador-carta`} element={<SimuladorCarta />} />
     <Route path={`${prefix}/comparisons`} element={<Comparativas />} />
     <Route path={`${prefix}/confronti`} element={<Comparativas />} />
     <Route path={`${prefix}/comparatifs`} element={<Comparativas />} />

@@ -1,5 +1,17 @@
 import { useEffect } from "react";
-import { CANONICAL_DOMAIN, DEFAULT_OG_IMAGE, isProduction } from "@/seo/config";
+import {
+  CANONICAL_DOMAIN,
+  DEFAULT_OG_IMAGE,
+  getLocalizedOgImage,
+  getLocalizedOgImageAlt,
+  getOgLocale,
+  getOgLocaleAlternates,
+  getSeoLangFromPath,
+  isProduction,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  type SeoLang,
+} from "@/seo/config";
 
 interface HreflangLink {
   lang: string;
@@ -7,6 +19,8 @@ interface HreflangLink {
 }
 
 type StructuredData = Record<string, unknown>;
+const SITE_TITLE_SUFFIX = " | Winerim";
+const TRAILING_SITE_TITLE_RE = /\s*(?:\||—|–|-|·)\s*Winerim\s*$/i;
 
 interface SEOHeadProps {
   title: string;
@@ -23,7 +37,7 @@ interface SEOHeadProps {
   structuredData?: StructuredData | StructuredData[];
 }
 
-const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
+const detectPageLang = (url?: string, hreflang?: HreflangLink[]): SeoLang => {
   const path = (() => {
     if (!url) return "";
     try {
@@ -33,21 +47,35 @@ const detectPageLang = (url?: string, hreflang?: HreflangLink[]) => {
     }
   })();
 
-  const urlLang = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/)?.[1];
-  if (urlLang) return urlLang;
+  const urlLang = getSeoLangFromPath(path);
+  if (urlLang !== "es") return urlLang;
   if (path) return "es";
 
-  return hreflang?.find((h) => h.lang !== "x-default")?.lang || "es";
+  return getSeoLangFromPath(hreflang?.find((h) => h.lang !== "x-default")?.url);
+};
+
+const normalizeSiteTitle = (value: string) => {
+  const cleanTitle = value.trim();
+  if (!cleanTitle) return "Winerim";
+
+  const brandFreeTitle = cleanTitle.replace(TRAILING_SITE_TITLE_RE, "").trim();
+  if (brandFreeTitle !== cleanTitle) return `${brandFreeTitle}${SITE_TITLE_SUFFIX}`;
+
+  return cleanTitle.endsWith(SITE_TITLE_SUFFIX) || cleanTitle.length > 55
+    ? cleanTitle
+    : `${cleanTitle}${SITE_TITLE_SUFFIX}`;
 };
 
 const SEOHead = ({ title, description, image, url, type = "website", publishedAt, modifiedAt, author, wordCount, noindex, hreflang, structuredData }: SEOHeadProps) => {
   useEffect(() => {
-    const suffix = " | Winerim";
-    const fullTitle = title.endsWith(suffix) || title.length > 55 ? title : `${title}${suffix}`;
+    const fullTitle = normalizeSiteTitle(title);
     document.title = fullTitle;
 
     const setMeta = (property: string, content: string, isName = false) => {
       const attr = isName ? "name" : "property";
+      if (isName) {
+        document.querySelectorAll(`meta[property="${property}"]`).forEach((el) => el.remove());
+      }
       let el = document.querySelector(`meta[${attr}="${property}"]`) as HTMLMetaElement | null;
       if (!el) {
         el = document.createElement("meta");
@@ -55,6 +83,20 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         document.head.appendChild(el);
       }
       el.content = content;
+    };
+
+    const removeRepeatedMeta = (property: string, isName = false) => {
+      const attr = isName ? "name" : "property";
+      document.querySelectorAll(`meta[${attr}="${property}"]`).forEach((el) => el.remove());
+    };
+
+    const appendMeta = (property: string, content: string, isName = false) => {
+      const attr = isName ? "name" : "property";
+      const el = document.createElement("meta");
+      el.setAttribute(attr, property);
+      el.content = content;
+      document.head.appendChild(el);
+      return el;
     };
 
     // ── Environment-aware robots ──
@@ -86,7 +128,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
 
     // ── Hreflang — always uses production domain ──
     const hreflangEls: HTMLLinkElement[] = [];
+    const localeAlternateEls: HTMLMetaElement[] = [];
     if (hreflang && hreflang.length > 0) {
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
       hreflang.forEach((link) => {
         const el = document.createElement("link");
         el.rel = "alternate";
@@ -103,31 +147,31 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
     if (description) {
       setMeta("description", description.slice(0, 160), true);
       setMeta("og:description", description.slice(0, 160));
-      setMeta("twitter:description", description.slice(0, 160));
+      setMeta("twitter:description", description.slice(0, 160), true);
     }
 
     setMeta("og:title", fullTitle);
-    setMeta("twitter:title", fullTitle);
+    setMeta("twitter:title", fullTitle, true);
     setMeta("og:type", type);
     setMeta("og:site_name", "Winerim");
     const pageLang = detectPageLang(url, hreflang);
-    const ogLocales: Record<string, string> = {
-      en: "en_GB",
-      it: "it_IT",
-      fr: "fr_FR",
-      de: "de_DE",
-      pt: "pt_PT",
-      es: "es_ES",
-    };
-    setMeta("og:locale", ogLocales[pageLang] || "es_ES");
-    setMeta("twitter:card", "summary_large_image");
+    setMeta("og:locale", getOgLocale(pageLang));
+    removeRepeatedMeta("og:locale:alternate");
+    getOgLocaleAlternates(pageLang).forEach((locale) => {
+      localeAlternateEls.push(appendMeta("og:locale:alternate", locale));
+    });
+    setMeta("twitter:card", "summary_large_image", true);
 
     // OG image — always absolute with production domain
-    const ogImage = image || DEFAULT_OG_IMAGE;
+    const ogImage = image || getLocalizedOgImage(pageLang) || DEFAULT_OG_IMAGE;
+    const ogImageAlt = getLocalizedOgImageAlt(pageLang);
     setMeta("og:image", ogImage);
-    setMeta("og:image:width", "1200");
-    setMeta("og:image:height", "630");
-    setMeta("twitter:image", ogImage);
+    setMeta("og:image:type", "image/png");
+    setMeta("og:image:width", String(OG_IMAGE_WIDTH));
+    setMeta("og:image:height", String(OG_IMAGE_HEIGHT));
+    setMeta("og:image:alt", ogImageAlt);
+    setMeta("twitter:image", ogImage, true);
+    setMeta("twitter:image:alt", ogImageAlt, true);
 
     if (url) {
       // og:url always uses production domain
@@ -165,7 +209,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
           "@type": "Organization",
           name: "Winerim",
           url: CANONICAL_DOMAIN,
-          logo: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE },
+          logo: { "@type": "ImageObject", url: `${CANONICAL_DOMAIN}/favicon.png` },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": canonicalArticleUrl },
         wordCount: wordCount || undefined,
@@ -180,6 +224,8 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
         operatingSystem: "Web",
         description: description || "Carta de vinos digital con recomendador inteligente para restaurantes y bodegas.",
         url: url || CANONICAL_DOMAIN,
+        image: ogImage,
+        inLanguage: pageLang,
         offers: {
           "@type": "Offer",
           category: "SaaS",
@@ -200,6 +246,32 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       orgScript.type = "application/ld+json";
       document.head.appendChild(orgScript);
     }
+    const organizationCopy: Record<SeoLang, { description: string; slogan: string }> = {
+      es: {
+        description: "Plataforma de gestión inteligente de cartas de vinos para restaurantes, hoteles y grupos de restauración.",
+        slogan: "La inteligencia artificial que vende más vino en tu restaurante",
+      },
+      en: {
+        description: "AI wine list software for restaurants, hotels and hospitality groups.",
+        slogan: "AI that helps restaurants sell more wine",
+      },
+      it: {
+        description: "Piattaforma intelligente per carte dei vini in ristoranti, hotel e gruppi di ristorazione.",
+        slogan: "L'intelligenza artificiale che aiuta a vendere piu vino",
+      },
+      fr: {
+        description: "Plateforme intelligente pour cartes des vins de restaurants, hotels et groupes de restauration.",
+        slogan: "L'intelligence artificielle qui aide a vendre plus de vin",
+      },
+      de: {
+        description: "KI-Plattform fuer Weinkarten in Restaurants, Hotels und Gastronomiegruppen.",
+        slogan: "KI, die Restaurants hilft, mehr Wein zu verkaufen",
+      },
+      pt: {
+        description: "Plataforma inteligente para cartas de vinho em restaurantes, hoteis e grupos de restauracao.",
+        slogan: "A inteligencia artificial que ajuda restaurantes a vender mais vinho",
+      },
+    };
     orgScript.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -207,9 +279,9 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       legalName: "Winerim",
       url: CANONICAL_DOMAIN,
       logo: `${CANONICAL_DOMAIN}/favicon.png`,
-      image: DEFAULT_OG_IMAGE,
-      description: "Plataforma de gestión inteligente de cartas de vinos para restaurantes, hoteles y grupos de restauración. Carta digital interactiva con recomendaciones de IA, maridajes automáticos, pricing dinámico y analítica de ventas.",
-      slogan: "La inteligencia artificial que vende más vino en tu restaurante",
+      image: ogImage,
+      description: organizationCopy[pageLang].description,
+      slogan: organizationCopy[pageLang].slogan,
       foundingDate: "2024",
       areaServed: [
         { "@type": "Place", name: "Europe" },
@@ -261,6 +333,7 @@ const SEOHead = ({ title, description, image, url, type = "website", publishedAt
       if (orgScript) orgScript.remove();
       if (canonical) canonical.remove();
       hreflangEls.forEach((el) => el.remove());
+      localeAlternateEls.forEach((el) => el.remove());
       const robotsMeta = document.querySelector('meta[name="robots"]');
       if (robotsMeta) robotsMeta.remove();
     };

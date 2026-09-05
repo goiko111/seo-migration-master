@@ -13,6 +13,38 @@
 
 const SITE = 'https://winerim.wine';
 const OG_IMAGE = `${SITE}/og-image.png`;
+const LOCALIZED_OG_IMAGE_BASE = `${SITE}/og/winerim-og`;
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
+const SEO_LANGS = ['es', 'en', 'it', 'fr', 'de', 'pt'] as const;
+const OG_LOCALES: Record<string, string> = {
+  es: 'es_ES',
+  en: 'en_US',
+  it: 'it_IT',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  pt: 'pt_PT',
+};
+const OG_IMAGE_ALT: Record<string, string> = {
+  es: 'Winerim, software de IA para cartas de vino en restaurantes',
+  en: 'Winerim, AI wine list software for restaurants',
+  it: 'Winerim, software IA per carte dei vini nei ristoranti',
+  fr: 'Winerim, logiciel IA pour cartes des vins de restaurants',
+  de: 'Winerim, KI-Software fuer Weinkarten in Restaurants',
+  pt: 'Winerim, software de IA para cartas de vinho em restaurantes',
+};
+
+function normalizedSeoLang(lang: string | null | undefined): string {
+  return SEO_LANGS.includes(lang as typeof SEO_LANGS[number]) ? String(lang) : 'es';
+}
+
+function localizedOgImage(lang: string | null | undefined): string {
+  return `${LOCALIZED_OG_IMAGE_BASE}-${normalizedSeoLang(lang)}.png`;
+}
+
+function localizedOgImageAlt(lang: string | null | undefined): string {
+  return OG_IMAGE_ALT[normalizedSeoLang(lang)] || OG_IMAGE_ALT.es;
+}
 
 const BOT_UA_PATTERNS = [
   'googlebot', 'bingbot', 'yandexbot', 'duckduckbot', 'baiduspider',
@@ -3214,6 +3246,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/cloudrim': '/en/product/cloudrim',
     '/producto/savia': '/en/product/savia',
     '/analisis-carta': '/en/wine-list-analysis',
+    '/simulador-carta': '/en/wine-list-simulator',
     '/aprender-vino': '/en/learn-wine',
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
@@ -3262,6 +3295,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/cloudrim': '/it/prodotto/cloudrim',
     '/producto/savia': '/it/prodotto/savia',
     '/analisis-carta': '/it/analisi-carta',
+    '/simulador-carta': '/it/simulatore-carta',
     '/aprender-vino': '/it/imparare-il-vino',
     '/barometro-cartas-vino-2026': '/it/barometro-carte-vini-2026',
     '/calculadora-margen-vino': '/it/calcolatrice-margini-vino',
@@ -3310,6 +3344,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/cloudrim': '/fr/produit/cloudrim',
     '/producto/savia': '/fr/produit/savia',
     '/analisis-carta': '/fr/analyse-carte',
+    '/simulador-carta': '/fr/simulateur-carte',
     '/aprender-vino': '/fr/apprendre-le-vin',
     '/barometro-cartas-vino-2026': '/fr/barometre-cartes-vins-2026',
     '/calculadora-margen-vino': '/fr/calculateur-marge-vin',
@@ -3358,6 +3393,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/cloudrim': '/de/produkt/cloudrim',
     '/producto/savia': '/de/produkt/savia',
     '/analisis-carta': '/de/weinkarten-analyse',
+    '/simulador-carta': '/de/weinkarten-simulator',
     '/aprender-vino': '/de/wein-lernen',
     '/barometro-cartas-vino-2026': '/de/weinkarten-barometer-2026',
     '/calculadora-margen-vino': '/de/wein-margen-rechner',
@@ -3406,6 +3442,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/producto/cloudrim': '/pt/produto/cloudrim',
     '/producto/savia': '/pt/produto/savia',
     '/analisis-carta': '/pt/analise-carta',
+    '/simulador-carta': '/pt/simulador-carta',
     '/aprender-vino': '/pt/aprender-vinho',
     '/barometro-cartas-vino-2026': '/pt/barometro-cartas-vinhos-2026',
     '/calculadora-margen-vino': '/pt/calculadora-margem-vinho',
@@ -3471,6 +3508,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/producto/cloudrim': { es: 'CloudRIM', en: 'CloudRIM', it: 'CloudRIM', fr: 'CloudRIM', de: 'CloudRIM', pt: 'CloudRIM' },
   '/producto/savia': { es: 'SAVia', en: 'SAVia', it: 'SAVia', fr: 'SAVia', de: 'SAVia', pt: 'SAVia' },
   '/analisis-carta': { es: 'Analisis de carta de vinos', en: 'Wine list analysis', it: 'Analisi carta vini', fr: 'Analyse de carte des vins', de: 'Weinkartenanalyse', pt: 'Analise de carta de vinhos' },
+  '/simulador-carta': { es: 'Simulador de carta de vinos', en: 'Wine list simulator', it: 'Simulatore carta vini', fr: 'Simulateur de carte des vins', de: 'Weinkarten-Simulator', pt: 'Simulador de carta de vinhos' },
   '/aprender-vino': { es: 'Aprender vino', en: 'Learn wine', it: 'Imparare il vino', fr: 'Apprendre le vin', de: 'Wein lernen', pt: 'Aprender vinho' },
   '/barometro-cartas-vino-2026': { es: 'Barometro Winerim de cartas de vino', en: 'Winerim wine list barometer', it: 'Barometro Winerim delle carte vini', fr: 'Barometre Winerim des cartes des vins', de: 'Winerim Weinkarten-Barometer', pt: 'Barometro Winerim de cartas de vinhos' },
   '/calculadora-margen-vino': { es: 'Calculadora de margen de vino', en: 'Wine margin calculator', it: 'Calcolatrice margini vino', fr: 'Calculateur de marge vin', de: 'Wein-Margenrechner', pt: 'Calculadora de margem de vinho' },
@@ -3549,6 +3587,98 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
 };
 
 function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (esPath === '/simulador-carta' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Wine List Simulator for Restaurants | Winerim',
+        description: 'Simulate a restaurant wine list with references, pricing, categories and margin signals before changing the real menu.',
+        h1: 'Wine list simulator',
+        subtitle: 'Test wine-list, pricing and margin scenarios before moving real references in your restaurant.',
+        sections: [
+          { heading: 'What it simulates', content: 'The simulator helps visualise how a wine list changes when categories, price ranges, by-the-glass options, premium references and style balance move together.' },
+          { heading: 'Why it matters', content: 'It helps detect gaps, duplicates, cannibalisation and margin opportunities before publishing a new wine list or redesigning the current one.' },
+          { heading: 'How Winerim uses it', content: 'Winerim connects simulation with wine-list analysis, recommendations, stock, rotation and pricing so a visual scenario becomes an operational decision.' },
+        ],
+        faqs: [
+          { q: 'Does the simulator replace a full wine-list analysis?', a: 'No. It is an orientation tool. The full analysis connects the real list with margin, rotation, stock, styles and commercial goals.' },
+          { q: 'Can I use it before requesting a demo?', a: 'Yes. It helps you arrive at the demo with a clearer hypothesis about where the wine list can improve.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Free wine-list analysis', url: '/en/wine-list-analysis' }, { label: 'Tools', url: '/en/tools' }, { label: 'Wine margin calculator', url: '/en/wine-margin-calculator' }, { label: 'Request a demo', url: '/en/demo' }],
+      },
+      it: {
+        title: 'Simulatore Carta Vini per Ristoranti | Winerim',
+        description: 'Simula una carta vini con referenze, prezzi, categorie e segnali di margine prima di cambiare la carta reale.',
+        h1: 'Simulatore carta vini',
+        subtitle: 'Prova scenari di carta, prezzo e margine prima di spostare referenze reali nel ristorante.',
+        sections: [
+          { heading: 'Cosa simula', content: 'Il simulatore aiuta a vedere come cambia la carta quando si modificano categorie, fasce prezzo, vini al calice, referenze premium ed equilibrio degli stili.' },
+          { heading: 'Perche conta', content: 'Aiuta a individuare vuoti, duplicazioni, cannibalizzazioni e opportunita di margine prima di pubblicare una nuova carta o ridisegnare quella attuale.' },
+          { heading: 'Come lo usa Winerim', content: 'Winerim collega simulazione, analisi carta, raccomandazioni, stock, rotazione e pricing per trasformare uno scenario visuale in una decisione operativa.' },
+        ],
+        faqs: [
+          { q: 'Il simulatore sostituisce un analisi completa?', a: 'No. E uno strumento di orientamento. L analisi completa collega la carta reale con margine, rotazione, stock, stili e obiettivi commerciali.' },
+          { q: 'Posso usarlo prima di richiedere una demo?', a: 'Si. Aiuta ad arrivare alla demo con un ipotesi piu chiara su dove migliorare la carta vini.' },
+        ],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: 'Strumenti', url: `${SITE}/it/strumenti` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Analisi gratuita carta vini', url: '/it/analisi-carta' }, { label: 'Strumenti', url: '/it/strumenti' }, { label: 'Calcolatrice margini vino', url: '/it/calcolatrice-margini-vino' }, { label: 'Richiedi demo', url: '/it/demo' }],
+      },
+      fr: {
+        title: 'Simulateur de Carte des Vins pour Restaurants | Winerim',
+        description: 'Simulez une carte des vins avec references, prix, categories et signaux de marge avant de modifier la carte reelle.',
+        h1: 'Simulateur de carte des vins',
+        subtitle: 'Testez des scenarios de carte, prix et marge avant de modifier les references reelles du restaurant.',
+        sections: [
+          { heading: 'Ce que cela simule', content: 'Le simulateur aide a visualiser comment une carte evolue quand categories, gammes de prix, vin au verre, references premium et equilibre des styles changent ensemble.' },
+          { heading: 'Pourquoi c est utile', content: 'Il aide a detecter manques, doublons, cannibalisation et opportunites de marge avant de publier une nouvelle carte ou de revoir la carte actuelle.' },
+          { heading: 'Comment Winerim l utilise', content: 'Winerim relie simulation, analyse de carte, recommandations, stock, rotation et pricing pour transformer un scenario visuel en decision operationnelle.' },
+        ],
+        faqs: [
+          { q: 'Le simulateur remplace-t-il une analyse complete?', a: 'Non. C est un outil d orientation. L analyse complete relie la carte reelle a la marge, la rotation, le stock, les styles et les objectifs commerciaux.' },
+          { q: 'Puis-je l utiliser avant une demo?', a: 'Oui. Il aide a arriver en demo avec une hypothese plus claire sur les ameliorations possibles de la carte.' },
+        ],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: 'Outils', url: `${SITE}/fr/outils` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Analyse gratuite de carte', url: '/fr/analyse-carte' }, { label: 'Outils', url: '/fr/outils' }, { label: 'Calculateur marge vin', url: '/fr/calculateur-marge-vin' }, { label: 'Demander une demo', url: '/fr/demo' }],
+      },
+      de: {
+        title: 'Weinkarten-Simulator fuer Restaurants | Winerim',
+        description: 'Simulieren Sie eine Weinkarte mit Referenzen, Preisen, Kategorien und Margensignalen, bevor die echte Karte geaendert wird.',
+        h1: 'Weinkarten-Simulator',
+        subtitle: 'Testen Sie Szenarien fuer Weinkarte, Preise und Marge, bevor echte Referenzen im Restaurant verschoben werden.',
+        sections: [
+          { heading: 'Was simuliert wird', content: 'Der Simulator zeigt, wie sich eine Weinkarte veraendert, wenn Kategorien, Preisbereiche, Glasweine, Premium-Referenzen und Stilbalance zusammen angepasst werden.' },
+          { heading: 'Warum das wichtig ist', content: 'Er hilft, Luecken, Dopplungen, Kannibalisierung und Margenchancen zu erkennen, bevor eine neue Karte veroeffentlicht oder die bestehende Karte umgebaut wird.' },
+          { heading: 'Wie Winerim damit arbeitet', content: 'Winerim verbindet Simulation mit Weinkartenanalyse, Empfehlungen, Bestand, Rotation und Pricing, damit aus einem visuellen Szenario eine operative Entscheidung wird.' },
+        ],
+        faqs: [
+          { q: 'Ersetzt der Simulator eine vollstaendige Weinkartenanalyse?', a: 'Nein. Er ist ein Orientierungstool. Die vollstaendige Analyse verbindet die echte Karte mit Marge, Rotation, Bestand, Stilen und kommerziellen Zielen.' },
+          { q: 'Kann ich ihn vor einer Demo verwenden?', a: 'Ja. Er hilft, mit einer klareren Hypothese zur Demo zu kommen, wo die Weinkarte verbessert werden kann.' },
+        ],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: 'Tools', url: `${SITE}/de/tools` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Kostenlose Weinkartenanalyse', url: '/de/weinkarten-analyse' }, { label: 'Tools', url: '/de/tools' }, { label: 'Wein-Margenrechner', url: '/de/wein-margen-rechner' }, { label: 'Demo anfragen', url: '/de/demo' }],
+      },
+      pt: {
+        title: 'Simulador de Carta de Vinhos para Restaurantes | Winerim',
+        description: 'Simule uma carta de vinhos com referencias, precos, categorias e sinais de margem antes de alterar a carta real.',
+        h1: 'Simulador de carta de vinhos',
+        subtitle: 'Teste cenarios de carta, preco e margem antes de mover referencias reais no restaurante.',
+        sections: [
+          { heading: 'O que simula', content: 'O simulador ajuda a visualizar como a carta muda ao ajustar categorias, faixas de preco, vinho a copo, referencias premium e equilibrio de estilos.' },
+          { heading: 'Porque importa', content: 'Ajuda a detectar falhas, duplicacoes, canibalizacao e oportunidades de margem antes de publicar uma nova carta ou redesenhar a carta atual.' },
+          { heading: 'Como a Winerim usa isto', content: 'A Winerim liga simulacao, analise de carta, recomendacoes, stock, rotacao e pricing para transformar um cenario visual numa decisao operacional.' },
+        ],
+        faqs: [
+          { q: 'O simulador substitui uma analise completa?', a: 'Nao. E uma ferramenta de orientacao. A analise completa liga a carta real a margem, rotacao, stock, estilos e objetivos comerciais.' },
+          { q: 'Posso usa-lo antes de pedir uma demo?', a: 'Sim. Ajuda a chegar a demo com uma hipotese mais clara sobre onde a carta de vinhos pode melhorar.' },
+        ],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Ferramentas', url: `${SITE}/pt/ferramentas` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Analise gratuita de carta', url: '/pt/analise-carta' }, { label: 'Ferramentas', url: '/pt/ferramentas' }, { label: 'Calculadora de margem', url: '/pt/calculadora-margem-vinho' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
   if (esPath === '/producto/cloudrim' && lang !== 'es') {
     const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
       en: {
@@ -4911,6 +5041,43 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       ],
     },
   },
+  '/precios-modulos-integraciones': {
+    meta: {
+      title: 'Precios, modulos e integraciones de Winerim | Winerim',
+      description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+      canonical: `${SITE}/precios-modulos-integraciones`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'WebPage',
+    },
+    content: {
+      h1: 'Precios, modulos e integraciones de Winerim',
+      subtitle: 'Una vista tecnica y comercial de que incluye cada capa de Winerim y como se decide el alcance para restaurantes, hoteles y grupos.',
+      sections: [
+        { heading: 'Arquitectura modular', content: 'Winerim separa carta, ventas, gestion, margenes e inteligencia para que cada restaurante active solo la capa que necesita sin perder una base comun.' },
+        { heading: 'Core y carta', content: 'Core organiza referencias, precios, formatos, disponibilidad, fichas y experiencia digital para convertir la carta de vinos en una herramienta viva.' },
+        { heading: 'TPV, gestion e integraciones', content: 'Las integraciones conectan TPV, PMS, ERP, inventario, albaranes, facturas y tarifas para cruzar carta, ventas, coste y stock real.' },
+        { heading: 'Margenes e Intelligence', content: 'Margenes calcula rentabilidad y rotacion. Intelligence, RIMs y SAVia preparan propuestas explicables que el equipo revisa antes de actuar.' },
+        { heading: 'Como se decide el alcance', content: 'El precio depende de numero de referencias, locales, modulos activos, integraciones, soporte e implantacion; la demo delimita el paquete exacto.' },
+      ],
+      faqs: [
+        { q: 'Tiene Winerim un precio unico?', a: 'No. El alcance depende de referencias, locales, modulos, integraciones, soporte e implantacion.' },
+        { q: 'Que se revisa antes de presupuestar?', a: 'Se revisan carta, volumen de referencias, sistemas conectados, necesidades de stock, margen, compras, reporting y equipo operativo.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Precios', url: `${SITE}/precios` },
+        { name: 'Modulos e integraciones', url: `${SITE}/precios-modulos-integraciones` },
+      ],
+      internalLinks: [
+        { label: 'Precios', url: '/precios' },
+        { label: 'Integraciones', url: '/integraciones' },
+        { label: 'Funcionalidades', url: '/funcionalidades' },
+        { label: 'Demo gratuita', url: '/demo' },
+      ],
+    },
+  },
   '/producto/inteligencia-dinamica': {
     meta: {
       title: 'Inteligencia Dinámica | IA para Cartas de Vinos | Winerim',
@@ -5471,6 +5638,41 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Herramientas', url: '/herramientas' },
         { label: 'Software carta de vinos', url: '/software-carta-de-vinos' },
         { label: 'Demo', url: '/demo' },
+      ],
+    },
+  },
+  '/simulador-carta': {
+    meta: {
+      title: 'Simulador de Carta de Vinos para Restaurantes | Winerim',
+      description: 'Simula una carta de vinos con referencias, precios, categorias y margen para detectar oportunidades antes de cambiar tu carta real.',
+      canonical: `${SITE}/simulador-carta`,
+      ogImage: OG_IMAGE,
+      lang: 'es',
+      type: 'website',
+      schemaType: 'WebPage',
+    },
+    content: {
+      h1: 'Simulador de carta de vinos',
+      subtitle: 'Prueba escenarios de carta, precio y margen antes de mover referencias en tu restaurante.',
+      sections: [
+        { heading: 'Que simula', content: 'El simulador ayuda a visualizar como cambia una carta al ajustar categorias, rango de precios, vinos por copa, referencias premium y equilibrio entre estilos.' },
+        { heading: 'Para que sirve', content: 'Sirve para detectar huecos, duplicidades, canibalizacion y oportunidades de margen antes de publicar una carta nueva o redisenar la carta actual.' },
+        { heading: 'Como usarlo con Winerim', content: 'Winerim conecta la simulacion con analisis de carta, recomendaciones, stock, rotacion y pricing para convertir una decision visual en una mejora operativa.' },
+      ],
+      faqs: [
+        { q: 'El simulador sustituye un analisis completo?', a: 'No. Es una herramienta de orientacion. El analisis completo cruza la carta real con margen, rotacion, stock, estilos y objetivos comerciales.' },
+        { q: 'Puedo usarlo antes de una demo?', a: 'Si. Es util para llegar a la demo con una hipotesis clara sobre donde puede mejorar tu carta de vinos.' },
+      ],
+      breadcrumbs: [
+        { name: 'Inicio', url: `${SITE}/` },
+        { name: 'Herramientas', url: `${SITE}/herramientas` },
+        { name: 'Simulador de carta', url: `${SITE}/simulador-carta` },
+      ],
+      internalLinks: [
+        { label: 'Analizar carta de vinos gratis', url: '/analisis-carta' },
+        { label: 'Herramientas', url: '/herramientas' },
+        { label: 'Calculadora de margen', url: '/calculadora-margen-vino' },
+        { label: 'Demo gratuita', url: '/demo' },
       ],
     },
   },
@@ -6598,6 +6800,15 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
       related: 'Links relacionados', tagline: 'Carta de vinhos inteligente para restaurantes.', privacy: 'Privacidade', terms: 'Termos',
     },
   } as Record<WineLibraryLang, Record<string, string>>)[navLang];
+  const effectiveOgImage = meta.ogImage && meta.ogImage !== OG_IMAGE
+    ? meta.ogImage
+    : localizedOgImage(meta.lang);
+  const effectiveOgImageAlt = localizedOgImageAlt(meta.lang);
+  const effectiveOgLocale = OG_LOCALES[normalizedSeoLang(meta.lang)] || OG_LOCALES.es;
+  const ogLocaleAlternates = SEO_LANGS
+    .filter((lang) => lang !== normalizedSeoLang(meta.lang))
+    .map((lang) => `  <meta property="og:locale:alternate" content="${OG_LOCALES[lang]}" />`)
+    .join('\n');
   const faqSchema = content.faqs.length > 0 ? JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -6680,7 +6891,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     description: meta.description,
     url: meta.canonical,
     creator: { '@type': 'Organization', name: 'Winerim', url: SITE },
-    publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+    publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: effectiveOgImage } },
     license: localizedStaticUrl('/terminos-y-condiciones-del-contrato'),
     isAccessibleForFree: true,
     inLanguage: meta.lang,
@@ -6703,7 +6914,9 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
         description: meta.description,
-        url: SITE,
+        url: meta.canonical,
+        image: effectiveOgImage,
+        inLanguage: meta.lang,
         offers: { '@type': 'Offer', priceCurrency: 'EUR', url: `${SITE}/precios` },
       })
     : wineLibraryDetailContext && wineLibraryDetailEntity
@@ -6728,7 +6941,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
               description: meta.description,
               keywords: [content.h1, ...collectionLinks.slice(0, 12).map((link) => link.label)].join(', '),
               author: { '@type': 'Organization', name: 'Winerim', url: SITE },
-              publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+              publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: effectiveOgImage } },
               mainEntityOfPage: { '@id': `${meta.canonical}#webpage` },
               about: { '@id': wineLibraryDetailTermId },
               ...(mentionLinks.length > 0 ? { mentions: mentionLinks } : {}),
@@ -6750,7 +6963,7 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
         description: meta.description,
         url: meta.canonical,
         author: { '@type': 'Organization', name: 'Winerim', url: SITE },
-        publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+        publisher: { '@type': 'Organization', name: 'Winerim', url: SITE, logo: { '@type': 'ImageObject', url: effectiveOgImage } },
         inLanguage: meta.lang,
         ...(meta.schemaType === 'CollectionPage' ? { mainEntity: { '@id': `${meta.canonical}#itemlist` } } : {}),
         ...(wineLibraryDetailEntity ? { mainEntity: wineLibraryDetailEntity, about: wineLibraryDetailEntity } : {}),
@@ -6762,7 +6975,8 @@ function generateHTML(meta: PageMeta, content: PageContent, hreflang?: HreflangE
     '@type': 'Organization',
     name: 'Winerim',
     url: SITE,
-    logo: OG_IMAGE,
+    logo: `${SITE}/favicon.png`,
+    image: effectiveOgImage,
     description: navCopy.tagline,
     foundingDate: '2024',
     knowsAbout: ['Wine list management', 'Restaurant wine sales optimization', 'AI-powered wine recommendations', 'Digital wine menus', 'Wine pricing strategy', 'Food and wine pairing', 'Hospitality technology'],
@@ -6824,16 +7038,20 @@ ${hreflangHTML}
   <meta property="og:title" content="${escapeAttr(meta.title)}">
   <meta property="og:description" content="${escapeAttr(meta.description)}">
   <meta property="og:url" content="${meta.canonical}">
-  <meta property="og:image" content="${meta.ogImage}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="${effectiveOgImage}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="${OG_IMAGE_WIDTH}">
+  <meta property="og:image:height" content="${OG_IMAGE_HEIGHT}">
+  <meta property="og:image:alt" content="${escapeAttr(effectiveOgImageAlt)}">
   <meta property="og:site_name" content="Winerim">
-  <meta property="og:locale" content="${({ es: 'es_ES', en: 'en_GB', it: 'it_IT', fr: 'fr_FR', de: 'de_DE', pt: 'pt_PT' } as Record<string, string>)[meta.lang] || 'es_ES'}">
+  <meta property="og:locale" content="${effectiveOgLocale}">
+${ogLocaleAlternates}
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeAttr(meta.title)}">
   <meta name="twitter:description" content="${escapeAttr(meta.description)}">
-  <meta name="twitter:image" content="${meta.ogImage}">
+  <meta name="twitter:image" content="${effectiveOgImage}">
+  <meta name="twitter:image:alt" content="${escapeAttr(effectiveOgImageAlt)}">
   
   <script type="application/ld+json">${mainSchema}</script>
   ${itemListSchema ? `<script type="application/ld+json">${itemListSchema}</script>` : ''}

@@ -26,6 +26,13 @@ const strategicFallbackUrls = [
   { path: "/fr/produit/savia", priority: "0.6", alternates: "savia" },
   { path: "/de/produkt/savia", priority: "0.6", alternates: "savia" },
   { path: "/pt/produto/savia", priority: "0.6", alternates: "savia" },
+  { path: "/precios-modulos-integraciones", priority: "0.8" },
+  { path: "/simulador-carta", priority: "0.8", alternates: "simulator" },
+  { path: "/en/wine-list-simulator", priority: "0.7", alternates: "simulator" },
+  { path: "/it/simulatore-carta", priority: "0.7", alternates: "simulator" },
+  { path: "/fr/simulateur-carte", priority: "0.7", alternates: "simulator" },
+  { path: "/de/weinkarten-simulator", priority: "0.7", alternates: "simulator" },
+  { path: "/pt/simulador-carta", priority: "0.7", alternates: "simulator" },
   { path: "/herramientas/simulador-senal-margenes", priority: "0.6" },
   { path: "/herramientas/test-perfil-rim", priority: "0.6" },
   { path: "/herramientas/simulador-pareto-carta-vinos", priority: "0.6" },
@@ -60,6 +67,15 @@ const alternateGroups = {
     fr: "/fr/produit/savia",
     de: "/de/produkt/savia",
     pt: "/pt/produto/savia",
+  },
+  simulator: {
+    "x-default": "/simulador-carta",
+    es: "/simulador-carta",
+    en: "/en/wine-list-simulator",
+    it: "/it/simulatore-carta",
+    fr: "/fr/simulateur-carte",
+    de: "/de/weinkarten-simulator",
+    pt: "/pt/simulador-carta",
   },
 };
 
@@ -102,20 +118,43 @@ function ensureAlternates(xml) {
   return nextXml;
 }
 
-const response = await fetch(EDGE_SITEMAP_URL);
+async function fetchEdgeSitemap() {
+  const response = await fetch(EDGE_SITEMAP_URL);
 
-if (!response.ok) {
-  throw new Error(`Could not fetch edge sitemap: ${response.status} ${response.statusText}`);
+  if (!response.ok) {
+    throw new Error(`Could not fetch edge sitemap: ${response.status} ${response.statusText}`);
+  }
+
+  const edgeXml = await response.text();
+
+  if (!edgeXml.includes("</urlset>")) {
+    throw new Error("Fetched sitemap does not contain a closing </urlset> tag");
+  }
+
+  return { xml: edgeXml, source: "edge" };
 }
 
-const edgeXml = await response.text();
+async function readBaseSitemap() {
+  if (process.env.SITEMAP_BASE === "edge") {
+    return await fetchEdgeSitemap();
+  }
 
-if (!edgeXml.includes("</urlset>")) {
-  throw new Error("Fetched sitemap does not contain a closing </urlset> tag");
+  try {
+    const localXml = await fs.readFile(OUTPUT_PATH, "utf8");
+    if (localXml.includes("</urlset>")) {
+      return { xml: localXml, source: "local" };
+    }
+  } catch {
+    // Fall back to the edge sitemap if the local static sitemap is not present.
+  }
+
+  return await fetchEdgeSitemap();
 }
+
+const { xml: baseXml, source: baseSource } = await readBaseSitemap();
 
 const existingLocs = new Set(
-  [...edgeXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]),
+  [...baseXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]),
 );
 
 const additions = strategicFallbackUrls
@@ -123,14 +162,15 @@ const additions = strategicFallbackUrls
   .map(urlBlock)
   .join("");
 
-const mergedXml = ensureAlternates(edgeXml.replace("</urlset>", `${additions}</urlset>`));
+const mergedXml = ensureAlternates(baseXml.replace("</urlset>", `${additions}</urlset>`));
 await fs.writeFile(OUTPUT_PATH, mergedXml);
 
 const finalCount = [...mergedXml.matchAll(/<url>/g)].length;
 console.log(
   JSON.stringify(
     {
-      edgeUrlCount: existingLocs.size,
+      baseSource,
+      baseUrlCount: existingLocs.size,
       addedUrlCount: strategicFallbackUrls.length - strategicFallbackUrls.filter(({ path }) => existingLocs.has(`https://winerim.wine${path}`)).length,
       finalUrlCount: finalCount,
       output: OUTPUT_PATH.pathname,

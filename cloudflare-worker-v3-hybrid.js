@@ -18,7 +18,7 @@
  */
 
 // ─── Bot detection ───
-const BOT_REGEX = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|facebot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|applebot|semrushbot|ahrefsbot|mj12bot|chatgpt-user|gptbot|claudebot|anthropic-ai|perplexitybot|cohere-ai|bytespider|google-extended|ccbot|petalbot|sogou|exabot/i;
+const BOT_REGEX = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|facebot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|applebot|semrushbot|ahrefsbot|mj12bot|chatgpt-user|gptbot|oai-searchbot|claudebot|anthropic-ai|perplexitybot|cohere-ai|bytespider|google-extended|ccbot|petalbot|sogou|exabot/i;
 
 // ─── Legacy WordPress URLs ───
 const LEGACY_PREFIXES = [
@@ -56,6 +56,15 @@ const SEO_ALIASES = {
   '/wine-pricing-tool': '/en/wine-pricing-tool',
   '/wine-list-benchmark': '/en/wine-list-benchmark',
   '/en/digital-wine-list': '/en/wine-list-management-software',
+  '/simulador': '/simulador-carta',
+  '/en/simulador': '/en/wine-list-simulator',
+  '/en/simulador-carta': '/en/wine-list-simulator',
+  '/it/simulador': '/it/simulatore-carta',
+  '/it/simulador-carta': '/it/simulatore-carta',
+  '/fr/simulador': '/fr/simulateur-carte',
+  '/fr/simulador-carta': '/fr/simulateur-carte',
+  '/de/simulador': '/de/weinkarten-simulator',
+  '/de/simulador-carta': '/de/weinkarten-simulator',
   '/biblioteca-vino/como-empezar': '/aprender-vino',
   '/en/wine-library/how-to-start': '/en/learn-wine',
   '/it/biblioteca-vino/iniziare': '/it/imparare-il-vino',
@@ -1224,6 +1233,73 @@ const ONLINE_TOOL_COMPACT_GROUPS = [
 ];
 
 ONLINE_TOOL_GROUPS.push(
+  {
+    key: 'wine-list-simulator',
+    paths: {
+      es: '/simulador-carta',
+      en: '/en/wine-list-simulator',
+      it: '/it/simulatore-carta',
+      fr: '/fr/simulateur-carte',
+      de: '/de/weinkarten-simulator',
+      pt: '/pt/simulador-carta',
+    },
+    copies: {
+      es: {
+        title: 'Simulador de carta de vinos | Winerim',
+        h1: 'Simulador de carta de vinos para restaurantes',
+        description: 'Simula una carta de vinos por estilos, precios, rotacion y margen para detectar oportunidades antes de cambiar la carta real.',
+        subtitle: 'Una forma rapida de revisar surtido, equilibrio y decisiones de carta antes de tocar el servicio.',
+        problem: 'Muchas cartas se cambian por intuicion: se anaden referencias, se mantienen vinos lentos y no se ve el impacto en margen, precio medio o rotacion.',
+        usage: 'Usalo antes de redisenar la carta, abrir una nueva temporada, revisar vino por copa o preparar una conversacion de compra.',
+        decision: 'El simulador ayuda a priorizar que conservar, impulsar, retirar, pasar a copa o revisar con datos de carta, stock, ventas y margen.',
+      },
+      en: {
+        title: 'Wine List Simulator | Winerim',
+        h1: 'Wine list simulator for restaurants',
+        description: 'Simulate a restaurant wine list by style, price, rotation and margin before changing the live list.',
+        subtitle: 'A quick way to review assortment, balance and list decisions before changing service.',
+        problem: 'Many wine lists are changed by instinct: references are added, slow wines stay in place and the impact on margin, average price or rotation is unclear.',
+        usage: 'Use it before redesigning the list, opening a new season, reviewing by-the-glass strategy or preparing a purchasing conversation.',
+        decision: 'The simulator helps prioritize what to keep, push, remove, move by the glass or review using list, stock, sales and margin data.',
+      },
+      it: {
+        title: 'Simulatore Carta Vini | Winerim',
+        h1: 'Simulatore di carta vini per ristoranti',
+        description: 'Simula una carta vini per stili, prezzi, rotazione e margine prima di modificare la carta reale.',
+        subtitle: 'Un modo rapido per rivedere assortimento, equilibrio e decisioni di carta prima di cambiare il servizio.',
+        problem: 'Molte carte cambiano per intuito: si aggiungono referenze, restano vini lenti e non si vede l impatto su margine, prezzo medio o rotazione.',
+        usage: 'Usalo prima di ridisegnare la carta, aprire una stagione, rivedere il vino al calice o preparare gli acquisti.',
+        decision: 'Il simulatore aiuta a decidere cosa tenere, spingere, ritirare, proporre al calice o rivedere con dati di carta, stock, vendite e margine.',
+      },
+      fr: {
+        title: 'Simulateur de Carte des Vins | Winerim',
+        h1: 'Simulateur de carte des vins pour restaurants',
+        description: 'Simulez une carte des vins par styles, prix, rotation et marge avant de modifier la carte reelle.',
+        subtitle: 'Une facon rapide de revoir assortiment, equilibre et decisions de carte avant de changer le service.',
+        problem: 'Beaucoup de cartes changent a l intuition: des references sont ajoutees, les vins lents restent et l impact sur marge, prix moyen ou rotation reste flou.',
+        usage: 'Utilisez-le avant de refaire la carte, lancer une saison, revoir le vin au verre ou preparer les achats.',
+        decision: 'Le simulateur aide a choisir quoi garder, pousser, retirer, passer au verre ou revoir avec les donnees de carte, stock, ventes et marge.',
+      },
+      de: {
+        title: 'Weinkarten-Simulator | Winerim',
+        h1: 'Weinkarten-Simulator fuer Restaurants',
+        description: 'Simulieren Sie eine Weinkarte nach Stil, Preis, Rotation und Marge, bevor die Live-Karte geaendert wird.',
+        subtitle: 'Ein schneller Weg, Sortiment, Balance und Kartenentscheidungen vor dem Servicewechsel zu pruefen.',
+        problem: 'Viele Karten werden aus dem Bauch heraus geaendert: Referenzen kommen dazu, langsame Weine bleiben und die Wirkung auf Marge, Durchschnittspreis oder Rotation ist unklar.',
+        usage: 'Nutzen Sie es vor Kartenrelaunch, Saisonwechsel, Glasweinreview oder Einkaufsgespraech.',
+        decision: 'Der Simulator priorisiert, was bleiben, gepusht, entfernt, glasweise angeboten oder mit Karten-, Bestands-, Verkaufs- und Margendaten geprueft werden sollte.',
+      },
+      pt: {
+        title: 'Simulador de Carta de Vinhos | Winerim',
+        h1: 'Simulador de carta de vinhos para restaurantes',
+        description: 'Simule uma carta de vinhos por estilos, precos, rotacao e margem antes de alterar a carta real.',
+        subtitle: 'Uma forma rapida de rever sortido, equilibrio e decisoes de carta antes de mudar o servico.',
+        problem: 'Muitas cartas mudam por intuicao: adicionam-se referencias, vinhos lentos ficam e o impacto em margem, preco medio ou rotacao nao fica claro.',
+        usage: 'Use antes de redesenhar a carta, abrir uma temporada, rever vinho a copo ou preparar compras.',
+        decision: 'O simulador ajuda a decidir o que manter, promover, retirar, passar a copo ou rever com dados de carta, stock, vendas e margem.',
+      },
+    },
+  },
   ...ONLINE_TOOL_COMPACT_GROUPS.map((group) => ({
     key: group.key,
     paths: group.paths,
@@ -1324,6 +1400,23 @@ const STATIC_WORKER_PRERENDER_PAGES = {
       ['Modificaciones y legislacion', 'Winerim puede modificar estos terminos cuando sea necesario. Estos terminos se rigen por la legislacion espanola.'],
     ],
     links: [['Inicio', '/'], ['Contacto', '/contacto'], ['Demo', '/demo'], ['Privacidad', '/politica-privacidad']],
+  },
+  '/precios-modulos-integraciones': {
+    lang: 'es',
+    title: 'Precios, modulos e integraciones de Winerim | Winerim',
+    description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+    h1: 'Precios, modulos e integraciones de Winerim',
+    subtitle: 'Una vista tecnica y comercial de que incluye cada capa de Winerim y como se decide el alcance para restaurantes, hoteles y grupos.',
+    canonical: '/precios-modulos-integraciones',
+    schemaType: 'WebPage',
+    sections: [
+      ['Arquitectura modular', 'Winerim separa carta, ventas, gestion, margenes e inteligencia para que cada restaurante active solo la capa que necesita sin perder una base comun.'],
+      ['Core y carta', 'Core organiza referencias, precios, formatos, disponibilidad, fichas y experiencia digital para convertir la carta de vinos en una herramienta viva.'],
+      ['TPV, gestion e integraciones', 'Las integraciones conectan TPV, PMS, ERP, inventario, albaranes, facturas y tarifas para cruzar carta, ventas, coste y stock real.'],
+      ['Margenes e Intelligence', 'Margenes calcula rentabilidad y rotacion. Intelligence, RIMs y SAVia preparan propuestas explicables que el equipo revisa antes de actuar.'],
+      ['Como se decide el alcance', 'El precio depende de numero de referencias, locales, modulos activos, integraciones, soporte e implantacion; la demo delimita el paquete exacto.'],
+    ],
+    links: [['Precios', '/precios'], ['Integraciones', '/integraciones'], ['Funcionalidades', '/funcionalidades'], ['Demo', '/demo']],
   },
   '/presentacion': {
     lang: 'es',
@@ -1767,6 +1860,271 @@ function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+const WORKER_SEO_LANGS = ['es', 'en', 'it', 'fr', 'de', 'pt'];
+const WORKER_OG_LOCALES = {
+  es: 'es_ES',
+  en: 'en_US',
+  it: 'it_IT',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  pt: 'pt_PT',
+};
+const WORKER_OG_IMAGE_ALT = {
+  es: 'Winerim, software de IA para cartas de vino en restaurantes',
+  en: 'Winerim, AI wine list software for restaurants',
+  it: 'Winerim, software IA per carte dei vini nei ristoranti',
+  fr: 'Winerim, logiciel IA pour cartes des vins de restaurants',
+  de: 'Winerim, KI-Software fuer Weinkarten in Restaurants',
+  pt: 'Winerim, software de IA para cartas de vinho em restaurantes',
+};
+const WORKER_OG_IMAGE_WIDTH = 1200;
+const WORKER_OG_IMAGE_HEIGHT = 630;
+const WORKER_HOME_ALTERNATES = {
+  es: '/',
+  en: '/en',
+  it: '/it',
+  fr: '/fr',
+  de: '/de',
+  pt: '/pt',
+  'x-default': '/',
+};
+
+function normalizeWorkerLang(lang) {
+  return WORKER_SEO_LANGS.includes(lang) ? lang : 'es';
+}
+
+function workerLocalizedOgImage(site, lang) {
+  return `${site}/og/winerim-og-${normalizeWorkerLang(lang)}.png`;
+}
+
+function workerLocalizedOgImageAlt(lang) {
+  return WORKER_OG_IMAGE_ALT[normalizeWorkerLang(lang)] || WORKER_OG_IMAGE_ALT.es;
+}
+
+function workerOgLocale(lang) {
+  return WORKER_OG_LOCALES[normalizeWorkerLang(lang)] || WORKER_OG_LOCALES.es;
+}
+
+function workerOgLocaleAlternateTags(lang) {
+  const current = normalizeWorkerLang(lang);
+  return WORKER_SEO_LANGS
+    .filter(candidate => candidate !== current)
+    .map(candidate => `<meta property="og:locale:alternate" content="${WORKER_OG_LOCALES[candidate]}">`)
+    .join('\n  ');
+}
+
+function workerAbsoluteUrl(site, path) {
+  if (!path) return site;
+  if (path.startsWith('http')) return path;
+  return path === '/' ? `${site}/` : `${site}${path}`;
+}
+
+function workerAlternateHeadLinks(site, alternates) {
+  if (!alternates) return '';
+  return Object.entries(alternates)
+    .map(([lang, altPath]) => `<link rel="alternate" hreflang="${escapeHtml(lang)}" href="${escapeHtml(workerAbsoluteUrl(site, altPath))}">`)
+    .join('\n  ');
+}
+
+const WORKER_HOME_SHELL_META = {
+  '/': {
+    lang: 'es',
+    title: 'Software de IA para Restaurantes - Vende Mas Vino | Winerim',
+    description: 'Winerim es el software de IA que ayuda a restaurantes a vender mas vino, mejorar el ticket medio, optimizar margenes y controlar la bodega.',
+    canonical: '/',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/en': {
+    lang: 'en',
+    title: 'AI wine list software for restaurants | Winerim',
+    description: 'AI-powered wine list software for restaurants: digital wine menus, recommendations, pairings, analytics and cellar management.',
+    canonical: '/en',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/it': {
+    lang: 'it',
+    title: 'Software IA per carte dei vini | Winerim',
+    description: 'Software per carte dei vini con raccomandazioni IA, abbinamenti, analytics e gestione della cantina per ristoranti.',
+    canonical: '/it',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/fr': {
+    lang: 'fr',
+    title: 'Logiciel IA pour cartes des vins | Winerim',
+    description: 'Logiciel de carte des vins avec recommandations IA, accords, analytics et gestion de cave pour restaurants.',
+    canonical: '/fr',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/de': {
+    lang: 'de',
+    title: 'KI-Software fuer Weinkarten | Winerim',
+    description: 'Software fuer Weinkarten mit KI-Empfehlungen, Pairings, Analytics und Kellerverwaltung fuer Restaurants.',
+    canonical: '/de',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/pt': {
+    lang: 'pt',
+    title: 'Software IA para cartas de vinho | Winerim',
+    description: 'Software de carta de vinhos com recomendacoes IA, harmonizacoes, analise e gestao de adega para restaurantes.',
+    canonical: '/pt',
+    alternates: WORKER_HOME_ALTERNATES,
+  },
+  '/precios-modulos-integraciones': {
+    lang: 'es',
+    title: 'Precios, modulos e integraciones de Winerim | Winerim',
+    description: 'Entiende como se combinan Core, TPV, Gestion, Margenes, Intelligence e integraciones de Winerim antes de contratar.',
+    canonical: '/precios-modulos-integraciones',
+    schemaType: 'WebPage',
+  },
+};
+
+const WORKER_LANGUAGE_COOKIE_NAMES = new Set([
+  'winerim_lang',
+  'winerim_locale',
+  'winerim_language',
+  'lang',
+  'locale',
+  'i18next',
+  'NEXT_LOCALE',
+]);
+const WORKER_COUNTRY_LANGUAGE_FALLBACKS = {
+  US: 'en', GB: 'en', IE: 'en', CA: 'en', AU: 'en', NZ: 'en',
+  IT: 'it', SM: 'it',
+  FR: 'fr', BE: 'fr', LU: 'fr', MC: 'fr',
+  DE: 'de', AT: 'de', CH: 'de', LI: 'de',
+  PT: 'pt', BR: 'pt', AO: 'pt', MZ: 'pt',
+  ES: 'es', MX: 'es', AR: 'es', CL: 'es', CO: 'es', PE: 'es', UY: 'es',
+};
+
+function normalizeWorkerLanguagePreference(value) {
+  const primary = String(value || '').trim().toLowerCase().replace(/_/g, '-').split('-')[0];
+  return WORKER_SEO_LANGS.includes(primary) ? primary : null;
+}
+
+function getWorkerCookieLanguagePreference(request) {
+  const cookieHeader = request.headers.get('Cookie') || '';
+  for (const cookiePart of cookieHeader.split(';')) {
+    const [rawName, ...rawValue] = cookiePart.split('=');
+    const name = rawName?.trim();
+    if (!name || !WORKER_LANGUAGE_COOKIE_NAMES.has(name)) continue;
+    const encodedValue = rawValue.join('=').trim();
+    try {
+      const lang = normalizeWorkerLanguagePreference(decodeURIComponent(encodedValue));
+      if (lang) return lang;
+    } catch (_) {
+      const lang = normalizeWorkerLanguagePreference(encodedValue);
+      if (lang) return lang;
+    }
+  }
+  return null;
+}
+
+function getWorkerAcceptLanguagePreference(request) {
+  const header = request.headers.get('Accept-Language') || '';
+  return header
+    .split(',')
+    .map((part, index) => {
+      const [value, ...params] = part.trim().split(';');
+      const qParam = params.find(param => param.trim().toLowerCase().startsWith('q='));
+      const q = qParam ? Number.parseFloat(qParam.split('=')[1]) : 1;
+      return { lang: normalizeWorkerLanguagePreference(value), q: Number.isFinite(q) ? q : 1, index };
+    })
+    .filter(item => item.lang)
+    .sort((a, b) => b.q - a.q || a.index - b.index)[0]?.lang || null;
+}
+
+function getWorkerCountryLanguageFallback(request) {
+  const country = String(request.cf?.country || '').toUpperCase();
+  return normalizeWorkerLanguagePreference(WORKER_COUNTRY_LANGUAGE_FALLBACKS[country]);
+}
+
+function getWorkerHomeLocalePath(request) {
+  const lang = getWorkerCookieLanguagePreference(request)
+    || getWorkerAcceptLanguagePreference(request)
+    || getWorkerCountryLanguageFallback(request)
+    || 'es';
+  return lang === 'es' ? '/' : `/${lang}`;
+}
+
+function getWorkerShellMetadata(path) {
+  if (ONLINE_TOOL_WORKER_PAGES[path]) return ONLINE_TOOL_WORKER_PAGES[path];
+  return WORKER_HOME_SHELL_META[path] || null;
+}
+
+function replaceOrInsertHeadTag(html, pattern, replacement) {
+  if (pattern.test(html)) return html.replace(pattern, replacement);
+  return html.replace(/<\/head>/i, `${replacement}\n</head>`);
+}
+
+function setNamedMeta(html, attr, key, content) {
+  const pattern = new RegExp(`<meta\\b(?=[^>]*\\b${attr}=["']${escapeRegex(key)}["'])[^>]*>`, 'i');
+  return replaceOrInsertHeadTag(html, pattern, `<meta ${attr}="${key}" content="${escapeHtml(content)}">`);
+}
+
+function buildWorkerShellJsonLd(site, meta, canonical, ogImage) {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': meta.schemaType || 'SoftwareApplication',
+    name: meta.h1 || meta.title,
+    headline: meta.title,
+    description: meta.description,
+    url: canonical,
+    image: ogImage,
+    inLanguage: normalizeWorkerLang(meta.lang),
+    publisher: {
+      '@type': 'Organization',
+      name: 'Winerim',
+      url: site,
+      logo: `${site}/favicon.png`,
+    },
+  }).replace(/</g, '\\u003c');
+}
+
+function injectWorkerShellMetadataPatch(html, path, site) {
+  const meta = getWorkerShellMetadata(path);
+  if (!html || !meta) return html;
+
+  const lang = normalizeWorkerLang(meta.lang);
+  const canonicalPath = meta.canonical || path;
+  const canonical = workerAbsoluteUrl(site, canonicalPath);
+  const ogImage = workerLocalizedOgImage(site, lang);
+  const ogImageAlt = workerLocalizedOgImageAlt(lang);
+  const alternates = meta.alternates || (ONLINE_TOOL_ALTERNATES_BY_PATH[path] ?? null);
+  const headBlock = [
+    workerAlternateHeadLinks(site, alternates),
+    workerOgLocaleAlternateTags(lang),
+    `<meta property="og:image:type" content="image/png">`,
+    `<meta property="og:image:alt" content="${escapeHtml(ogImageAlt)}">`,
+    `<meta name="twitter:image:alt" content="${escapeHtml(ogImageAlt)}">`,
+    `<script type="application/ld+json" id="seo-worker-shell-jsonld">${buildWorkerShellJsonLd(site, meta, canonical, ogImage)}</script>`,
+  ].filter(Boolean).join('\n  ');
+
+  let nextHtml = html.replace(/<html\b([^>]*)>/i, (match, attrs) => {
+    const withoutLang = attrs.replace(/\s+lang=["'][^"']*["']/i, '');
+    return `<html${withoutLang} lang="${lang}">`;
+  });
+  nextHtml = replaceOrInsertHeadTag(nextHtml, /<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(meta.title)}</title>`);
+  nextHtml = setNamedMeta(nextHtml, 'name', 'description', meta.description);
+  nextHtml = replaceOrInsertHeadTag(nextHtml, /<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, `<link rel="canonical" href="${escapeHtml(canonical)}">`);
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:type', 'website');
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:title', meta.title);
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:description', meta.description);
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:url', canonical);
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:image', ogImage);
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:image:width', String(WORKER_OG_IMAGE_WIDTH));
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:image:height', String(WORKER_OG_IMAGE_HEIGHT));
+  nextHtml = setNamedMeta(nextHtml, 'property', 'og:locale', workerOgLocale(lang));
+  nextHtml = setNamedMeta(nextHtml, 'name', 'twitter:card', 'summary_large_image');
+  nextHtml = setNamedMeta(nextHtml, 'name', 'twitter:title', meta.title);
+  nextHtml = setNamedMeta(nextHtml, 'name', 'twitter:description', meta.description);
+  nextHtml = setNamedMeta(nextHtml, 'name', 'twitter:image', ogImage);
+  return nextHtml
+    .replace(/\s*<link\b(?=[^>]*\brel=["']alternate["'])(?=[^>]*\bhreflang=)[^>]*>\s*/gi, '\n')
+    .replace(/\s*<meta\b(?=[^>]*\bproperty=["']og:locale:alternate["'])[^>]*>\s*/gi, '\n')
+    .replace(/\s*<script\b(?=[^>]*\bid=["']seo-worker-shell-jsonld["'])\b[^>]*>[\s\S]*?<\/script>\s*/gi, '\n')
+    .replace(/<\/head>/i, `  ${headBlock}\n</head>`);
+}
+
 function escapeRegex(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -1785,6 +2143,9 @@ function renderWorkerStaticPrerender(path, site) {
   const canonicalPath = page.canonical || path;
   const canonical = `${site}${canonicalPath}`;
   const schemaType = page.schemaType || 'WebPage';
+  const lang = normalizeWorkerLang(page.lang);
+  const ogImage = workerLocalizedOgImage(site, lang);
+  const ogImageAlt = workerLocalizedOgImageAlt(lang);
   const schema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': schemaType,
@@ -1792,8 +2153,14 @@ function renderWorkerStaticPrerender(path, site) {
     headline: page.title,
     description: page.description,
     url: canonical,
-    inLanguage: page.lang,
-    publisher: { '@type': 'Organization', name: 'Winerim', url: site },
+    image: ogImage,
+    inLanguage: lang,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Winerim',
+      url: site,
+      logo: `${site}/favicon.png`,
+    },
   });
   const datasetSchema = schemaType === 'Report' ? JSON.stringify({
     '@context': 'https://schema.org',
@@ -1810,9 +2177,7 @@ function renderWorkerStaticPrerender(path, site) {
   }) : '';
   const schemaScripts = [`<script type="application/ld+json">${schema}</script>`, datasetSchema ? `<script type="application/ld+json">${datasetSchema}</script>` : ''].join('\n  ');
   const alternates = page.alternates || null;
-  const alternateLinks = alternates ? Object.entries(alternates)
-    .map(([lang, altPath]) => `<link rel="alternate" hreflang="${lang}" href="${site}${altPath}">`)
-    .join('\n  ') : '';
+  const alternateLinks = workerAlternateHeadLinks(site, alternates);
   const navLinks = page.links
     .filter(([, url]) => isWorkerLinkVisible(url))
     .map(([label, url]) => `<a href="${site}${url}">${escapeHtml(label)}</a>`)
@@ -1820,7 +2185,7 @@ function renderWorkerStaticPrerender(path, site) {
   const sections = page.sections.map(([heading, body]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`).join('\n      ');
 
   return `<!doctype html>
-<html lang="${page.lang}">
+<html lang="${lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1833,6 +2198,18 @@ function renderWorkerStaticPrerender(path, site) {
   <meta property="og:title" content="${escapeHtml(page.title)}">
   <meta property="og:description" content="${escapeHtml(page.description)}">
   <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="${WORKER_OG_IMAGE_WIDTH}">
+  <meta property="og:image:height" content="${WORKER_OG_IMAGE_HEIGHT}">
+  <meta property="og:image:alt" content="${escapeHtml(ogImageAlt)}">
+  <meta property="og:locale" content="${workerOgLocale(lang)}">
+  ${workerOgLocaleAlternateTags(lang)}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(page.title)}">
+  <meta name="twitter:description" content="${escapeHtml(page.description)}">
+  <meta name="twitter:image" content="${ogImage}">
+  <meta name="twitter:image:alt" content="${escapeHtml(ogImageAlt)}">
   ${schemaScripts}
 </head>
 <body>
@@ -1945,6 +2322,7 @@ function detailUrlBlock(site, path, lastmod, priority = '0.6', alternates = null
 const WORKER_DETAIL_SITEMAP_LASTMOD = '2026-06-05';
 const WINE_LIBRARY_SITEMAP_LASTMOD = '2026-06-01';
 const WORKER_TOOLS_SITEMAP_LASTMOD = '2026-07-02';
+const WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD = '2026-09-02';
 
 function isWineLibrarySitemapPath(path) {
   return path.startsWith('/biblioteca-vino')
@@ -1990,6 +2368,8 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
   const missingCloudRimSaviaPaths = cloudRimSaviaPaths.filter(path => !xml.includes(`${site}${path}`));
   const onlineToolPaths = ONLINE_TOOL_GROUPS.flatMap(group => Object.values(group.paths));
   const missingOnlineToolPaths = onlineToolPaths.filter(path => !xml.includes(`${site}${path}`));
+  const pricingArchitecturePaths = ['/precios-modulos-integraciones'];
+  const missingPricingArchitecturePaths = pricingArchitecturePaths.filter(path => !xml.includes(`${site}${path}`));
 
   if (
     hasDetailUrls
@@ -1999,6 +2379,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     && missingDistributorPaths.length === 0
     && missingCloudRimSaviaPaths.length === 0
     && missingOnlineToolPaths.length === 0
+    && missingPricingArchitecturePaths.length === 0
   ) {
     return ensureWorkerSitemapAlternates(stabilizeSitemapLastmod(xml), site);
   }
@@ -2012,6 +2393,7 @@ function injectWorkerDetailUrlsIntoSitemap(xml, site) {
     ...missingDistributorPaths.map(path => detailUrlBlock(site, path, WORKER_DISTRIBUTOR_SITEMAP_LASTMOD, path === '/distribuidor' ? '0.7' : '0.6', DISTRIBUTOR_ALTERNATES)),
     ...missingCloudRimSaviaPaths.map(path => detailUrlBlock(site, path, WORKER_CLOUDRIM_SAVIA_SITEMAP_LASTMOD, path === '/producto/cloudrim' || path === '/producto/savia' ? '0.7' : '0.6', path.includes('savia') ? SAVIA_ALTERNATES : CLOUDRIM_ALTERNATES)),
     ...missingOnlineToolPaths.map(path => detailUrlBlock(site, path, WORKER_TOOLS_SITEMAP_LASTMOD, path.startsWith('/herramientas/') ? '0.7' : '0.6', ONLINE_TOOL_ALTERNATES_BY_PATH[path])),
+    ...missingPricingArchitecturePaths.map(path => detailUrlBlock(site, path, WORKER_PRICING_ARCHITECTURE_SITEMAP_LASTMOD, '0.8')),
   ].join('');
 
   const bridgedXml = xml.includes('</urlset>') ? xml.replace('</urlset>', `${blocks}</urlset>`) : `${xml}\n${blocks}`;
@@ -2079,6 +2461,7 @@ const SEO_EXACT = new Set([
   '/ejemplos-carta-vinos',
   '/carta-papel-vs-digital',
   '/precios',
+  '/precios-modulos-integraciones',
   '/integraciones',
   '/implantacion',
   '/como-vender-mas-vino-en-un-restaurante',
@@ -2772,7 +3155,8 @@ async function proxyToOrigin(request, env, path, search, extraHeaders = {}) {
   const responseHeaders = new Headers(res.headers);
   const contentType = responseHeaders.get('Content-Type') || '';
   if (contentType.includes('text/html')) {
-    const html = injectLegalFooterPatch(await res.text());
+    const site = env.SITE_URL || 'https://winerim.wine';
+    const html = injectLegalFooterPatch(injectWorkerShellMetadataPatch(await res.text(), path, site));
     responseHeaders.delete('Content-Length');
     responseHeaders.set('X-Frame-Options', 'SAMEORIGIN');
     responseHeaders.set('X-Content-Type-Options', 'nosniff');
@@ -3012,6 +3396,26 @@ export default {
           'Location': `${env.SITE_URL || 'https://winerim.wine'}/blog`,
           'Cache-Control': 'public, max-age=31536000',
           'X-Worker-Branch': 'wordpress-query-redirect',
+        },
+      });
+    }
+
+    const homeLocalePath = getWorkerHomeLocalePath(request);
+    if (
+      path === '/'
+      && request.method === 'GET'
+      && !url.search
+      && !isBot(ua)
+      && !isCampaignHost(hostname)
+      && homeLocalePath !== '/'
+    ) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': `${env.SITE_URL || 'https://winerim.wine'}${homeLocalePath}`,
+          'Cache-Control': 'private, no-store',
+          'Vary': 'Accept-Language, Cookie',
+          'X-Worker-Branch': 'home-locale-redirect',
         },
       });
     }
