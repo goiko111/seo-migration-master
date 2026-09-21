@@ -18,6 +18,26 @@ export async function generateDeckPdf(filename: string) {
       animation: none !important;
       transition: none !important;
     }
+    .commercial-pdf-payment-links {
+      display: block !important;
+      margin-top: 8px !important;
+      padding-top: 7px !important;
+      border-top: 1px solid rgba(113, 0, 10, 0.2) !important;
+    }
+    .commercial-pdf-payment-links h3,
+    .commercial-pdf-payment-links p {
+      margin: 0 0 4px !important;
+    }
+    .commercial-pdf-payment-links > div {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 4px 8px !important;
+    }
+    .commercial-pdf-payment-links a {
+      color: #71000a !important;
+      font-size: 10px !important;
+      text-decoration: underline !important;
+    }
   `;
   document.head.appendChild(exportStyles);
 
@@ -59,6 +79,17 @@ export async function generateDeckPdf(filename: string) {
         windowWidth: 1600,
         windowHeight: 900,
       });
+      const slideRect = slide.getBoundingClientRect();
+      const linkAreas = Array.from(slide.querySelectorAll<HTMLAnchorElement>("a[data-pdf-link][href]"))
+        .map((anchor) => ({ href: anchor.href, rect: anchor.getBoundingClientRect() }))
+        .filter(({ href, rect }) => /^https?:\/\//i.test(href) && rect.width > 0 && rect.height > 0);
+      const radioAreas = Array.from(slide.querySelectorAll<HTMLInputElement>('input[data-pdf-field][type="radio"]'))
+        .map((input) => ({
+          group: input.name,
+          value: input.value,
+          rect: input.getBoundingClientRect(),
+        }))
+        .filter(({ group, value, rect }) => group && value && rect.width > 0 && rect.height > 0);
 
       slide.style.width = previous.width;
       slide.style.height = previous.height;
@@ -72,14 +103,47 @@ export async function generateDeckPdf(filename: string) {
         width = height * ratio;
       }
       if (index > 0) pdf.addPage();
+      const imageX = (pageWidth - width) / 2;
+      const imageY = (pageHeight - height) / 2;
       pdf.addImage(
         canvas.toDataURL("image/jpeg", 0.86),
         "JPEG",
-        (pageWidth - width) / 2,
-        (pageHeight - height) / 2,
+        imageX,
+        imageY,
         width,
         height,
       );
+      const scaleX = width / slideRect.width;
+      const scaleY = height / slideRect.height;
+      for (const { href, rect } of linkAreas) {
+        pdf.link(
+          imageX + (rect.left - slideRect.left) * scaleX,
+          imageY + (rect.top - slideRect.top) * scaleY,
+          rect.width * scaleX,
+          rect.height * scaleY,
+          { url: href },
+        );
+      }
+      const radioGroups = new Map<string, typeof radioAreas>();
+      for (const radioArea of radioAreas) {
+        const group = radioGroups.get(radioArea.group) || [];
+        group.push(radioArea);
+        radioGroups.set(radioArea.group, group);
+      }
+      for (const [groupName, options] of radioGroups) {
+        const radioGroup = new pdf.AcroForm.RadioButton();
+        radioGroup.fieldName = groupName;
+        pdf.addField(radioGroup);
+        for (const optionArea of options) {
+          const option = radioGroup.createOption(optionArea.value);
+          const mappedX = imageX + (optionArea.rect.left - slideRect.left) * scaleX;
+          const mappedY = imageY + (optionArea.rect.top - slideRect.top) * scaleY;
+          const mappedWidth = Math.max(4, optionArea.rect.width * scaleX);
+          const mappedHeight = Math.max(4, optionArea.rect.height * scaleY);
+          option.Rect = [mappedX, mappedY, mappedWidth, mappedHeight];
+        }
+        radioGroup.setAppearance(pdf.AcroForm.Appearance.RadioButton.Circle);
+      }
     }
 
     pdf.save(`${filename.replace(/[^a-z0-9-_]+/gi, "-").toLowerCase()}.pdf`);

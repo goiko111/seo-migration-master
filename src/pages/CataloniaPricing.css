@@ -1,0 +1,22 @@
+.catalonia-pricing { width:100%; letter-spacing:0; }
+.catalonia-pricing * { letter-spacing:0; }
+.catalonia-pricing-intro { max-width:780px; font-size:18px; line-height:1.6; }
+.catalonia-pricing-columns { display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-top:32px; align-items:start; }
+.catalonia-pricing table { width:100%; border-collapse:collapse; }
+.catalonia-pricing caption { text-align:left; font-size:13px; padding-bottom:16px; }
+.catalonia-pricing th,.catalonia-pricing td { text-align:left; padding:15px 0; border-bottom:1px solid currentColor; font-size:18px; font-weight:400; }
+.catalonia-pricing thead th { font-size:12px; font-weight:600; }
+.catalonia-pricing td { text-align:right; font-weight:600; }
+.catalonia-pricing-pilot { border-left:1px solid currentColor; padding-left:40px; }
+.catalonia-pricing-total { font-size:66px; line-height:1.1; margin:22px 0 18px; }
+.catalonia-pricing-total span { display:block; margin-top:10px; font-size:18px; }
+.catalonia-pricing-revo { margin-top:28px; font-size:17px; }
+.catalonia-pricing-note { max-width:900px; font-size:13px; line-height:1.6; margin-top:20px; opacity:.85; }
+@media(max-width:760px) {
+  .catalonia-pricing-columns { grid-template-columns:1fr; gap:32px; }
+  .catalonia-pricing-pilot { padding:24px 0 0; border-left:0; border-top:1px solid currentColor; }
+  .catalonia-pricing h2 { font-size:32px; }
+  .catalonia-pricing th,.catalonia-pricing td { font-size:16px; }
+  .catalonia-pricing-total { font-size:56px; }
+}
+@media print { .catalonia-pricing-columns { grid-template-columns:1fr 1fr; } .catalonia-pricing { break-inside:avoid; } }

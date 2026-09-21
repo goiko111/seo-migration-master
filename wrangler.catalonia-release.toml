@@ -1,0 +1,17 @@
+name = "winerim-edge-router"
+main = "edge-router/winerim-pages-router.js"
+compatibility_date = "2026-05-23"
+
+routes = [
+  { pattern = "winerim.wine/*", zone_name = "winerim.wine" },
+]
+
+[[services]]
+binding = "BACKEND"
+service = "winerim-proxy"
+
+[vars]
+FRONTEND_ORIGIN = "https://99319863.winerim-origin.pages.dev"
+FRONTEND_RELEASE = "99319863-pricing-architecture-seo"
+CATALONIA_ORIGIN = "https://4867c418.winerim-origin.pages.dev"
+CATALONIA_RELEASE = "4867c418-catalonia-24-plus-1-20260911"

@@ -398,10 +398,92 @@ const pageUiCopy: Record<string, {
   },
 };
 
+const goalCopy: Record<string, {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  action: string;
+  goals: { title: string; desc: string; to: string }[];
+}> = {
+  es: {
+    eyebrow: "Empieza por el problema",
+    title: "¿Qué quieres mejorar primero?",
+    intro: "No necesitas revisar todas las herramientas. Elige el objetivo que más se parece a tu situación y empieza por una prueba concreta.",
+    action: "Abrir herramienta",
+    goals: [
+      { title: "Entender la salud de mi carta", desc: "Estructura, equilibrio, pricing y oportunidades principales.", to: "/wine-list-analyzer" },
+      { title: "Recuperar margen", desc: "Detecta dónde se escapa margen por coste, PVP, copa o stock.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Ordenar varios establecimientos", desc: "Compara surtido, precios, copa y ticket entre locales.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+  en: {
+    eyebrow: "Start with the problem",
+    title: "What do you want to improve first?",
+    intro: "You do not need to review every tool. Choose the goal closest to your situation and start with one concrete check.",
+    action: "Open tool",
+    goals: [
+      { title: "Understand my wine list health", desc: "Structure, balance, pricing and the main opportunities.", to: "/wine-list-analyzer" },
+      { title: "Recover margin", desc: "Find margin leakage across cost, price, by-the-glass and stock.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Reduce tied-up stock", desc: "Estimate dormant capital and prioritize references to review.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Organize multiple venues", desc: "Compare assortment, pricing, by-the-glass and ticket across locations.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+  it: {
+    eyebrow: "Parti dal problema",
+    title: "Cosa vuoi migliorare per prima?",
+    intro: "Non devi esaminare tutti gli strumenti. Scegli l'obiettivo più vicino alla tua situazione e inizia da una verifica concreta.",
+    action: "Apri strumento",
+    goals: [
+      { title: "Capire la salute della carta", desc: "Struttura, equilibrio, pricing e opportunità principali.", to: "/wine-list-analyzer" },
+      { title: "Recuperare margine", desc: "Trova le perdite di margine tra costo, prezzo, calice e stock.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Ridurre il capitale immobilizzato", desc: "Stima il capitale fermo e definisci le referenze da rivedere.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Organizzare più locali", desc: "Confronta assortimento, pricing, calice e scontrino tra sedi.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+  fr: {
+    eyebrow: "Commencez par le problème",
+    title: "Que voulez-vous améliorer en premier ?",
+    intro: "Vous n'avez pas besoin de parcourir tous les outils. Choisissez l'objectif le plus proche de votre situation et commencez par une vérification concrète.",
+    action: "Ouvrir l'outil",
+    goals: [
+      { title: "Comprendre la santé de ma carte", desc: "Structure, équilibre, pricing et principales opportunités.", to: "/wine-list-analyzer" },
+      { title: "Récupérer de la marge", desc: "Repérez les fuites de marge liées au coût, au prix, au verre ou au stock.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Réduire le stock immobilisé", desc: "Estimez le capital dormant et priorisez les références à revoir.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Organiser plusieurs établissements", desc: "Comparez assortiment, prix, verre et ticket entre sites.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+  de: {
+    eyebrow: "Beim Problem beginnen",
+    title: "Was möchten Sie zuerst verbessern?",
+    intro: "Sie müssen nicht alle Tools prüfen. Wählen Sie das passendste Ziel und starten Sie mit einer konkreten Analyse.",
+    action: "Tool öffnen",
+    goals: [
+      { title: "Gesundheit der Weinkarte verstehen", desc: "Struktur, Balance, Pricing und wichtigste Chancen.", to: "/wine-list-analyzer" },
+      { title: "Marge zurückgewinnen", desc: "Margenverluste bei Kosten, Preis, Glasverkauf und Bestand erkennen.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Gebundenen Bestand reduzieren", desc: "Ruhendes Kapital schätzen und Referenzen priorisieren.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Mehrere Standorte ordnen", desc: "Sortiment, Pricing, Glas und Bon standortübergreifend vergleichen.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+  pt: {
+    eyebrow: "Comece pelo problema",
+    title: "O que quer melhorar primeiro?",
+    intro: "Não precisa de rever todas as ferramentas. Escolha o objetivo mais próximo da sua situação e comece por uma análise concreta.",
+    action: "Abrir ferramenta",
+    goals: [
+      { title: "Compreender a saúde da carta", desc: "Estrutura, equilíbrio, pricing e principais oportunidades.", to: "/wine-list-analyzer" },
+      { title: "Recuperar margem", desc: "Detete fugas de margem por custo, preço, copo ou stock.", to: "/herramientas/calculadora-fuga-margen" },
+      { title: "Reduzir stock imobilizado", desc: "Estime capital parado e priorize referências a rever.", to: "/herramientas/calculadora-stock-muerto" },
+      { title: "Organizar vários estabelecimentos", desc: "Compare sortido, pricing, copo e ticket entre locais.", to: "/herramientas/auditor-carta-multilocal" },
+    ],
+  },
+};
+
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
   const ui = pageUiCopy[lang] || pageUiCopy.es;
+  const goals = goalCopy[lang] || goalCopy.es;
   const [activeTag, setActiveTag] = useState("all");
 
   // Extract unique tags for filter pills
@@ -435,6 +517,39 @@ const Herramientas = () => {
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
               {t.subtitle}
             </motion.p>
+          </div>
+        </section>
+
+        <section className="border-y border-border bg-card/20">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16">
+            <div className="max-w-3xl mb-8">
+              <p className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-3">{goals.eyebrow}</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{goals.title}</h2>
+              <p className="text-muted-foreground leading-relaxed">{goals.intro}</p>
+            </div>
+            <div className="grid md:grid-cols-2 border-t border-border">
+              {goals.goals.map((goal, index) => {
+                const Icon = toolIconByPath[goal.to] || Search;
+                return (
+                  <Link
+                    key={goal.to}
+                    to={localePath(goal.to)}
+                    className={`group flex min-h-40 gap-5 border-b border-border p-6 transition-colors hover:bg-wine/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${index % 2 === 0 ? "md:border-r" : ""}`}
+                  >
+                    <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-wine/25 text-wine">
+                      <Icon size={19} />
+                    </div>
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors">{goal.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{goal.desc}</p>
+                      <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                        {goals.action} <ArrowRight size={14} />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
 

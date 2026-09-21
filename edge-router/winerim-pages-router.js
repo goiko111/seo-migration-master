@@ -19,30 +19,65 @@ const PRODUCT_ARCHITECTURE_ROUTES = new Set([
   "/it/prodotto/winerim-core",
   "/de/produkt/winerim-core",
   "/pt/produto/winerim-core",
-  "/producto/winerim-supply",
-  "/en/product/winerim-supply",
-  "/fr/produit/winerim-supply",
-  "/it/prodotto/winerim-supply",
-  "/de/produkt/winerim-supply",
-  "/pt/produto/winerim-supply",
   "/producto/cloudrim",
   "/en/product/cloudrim",
   "/fr/produit/cloudrim",
   "/it/prodotto/cloudrim",
   "/de/produkt/cloudrim",
   "/pt/produto/cloudrim",
+  "/producto/winerim-supply",
+  "/en/product/winerim-supply",
+  "/fr/produit/winerim-supply",
+  "/it/prodotto/winerim-supply",
+  "/de/produkt/winerim-supply",
+  "/pt/produto/winerim-supply",
   "/producto/savia",
   "/en/product/savia",
   "/fr/produit/savia",
   "/it/prodotto/savia",
   "/de/produkt/savia",
   "/pt/produto/savia",
+  "/integraciones",
+  "/en/integrations",
+  "/fr/integrations",
+  "/it/integrazioni",
+  "/de/integrationen",
+  "/pt/integracoes",
+  "/herramientas",
+  "/en/tools",
+  "/fr/outils",
+  "/it/strumenti",
+  "/de/tools",
+  "/pt/ferramentas",
+]);
+
+const COMMERCIAL_AUDIT_ROUTES = new Set([
+  "/software-carta-de-vinos",
+  "/en/wine-list-management-software",
+  "/it/software-carta-vini",
+  "/fr/logiciel-carte-des-vins",
+  "/de/weinkarten-software",
+  "/pt/software-carta-vinhos",
+  "/analisis-carta",
+  "/en/wine-list-analysis",
+  "/it/analisi-carta",
+  "/fr/analyse-carte",
+  "/de/weinkarten-analyse",
+  "/pt/analise-carta",
 ]);
 
 const REACT_ROUTES = new Set([
   ...PRODUCT_ARCHITECTURE_ROUTES,
+  ...COMMERCIAL_AUDIT_ROUTES,
   "/precios-modulos-integraciones",
+  "/simulador-carta",
+  "/en/wine-list-simulator",
+  "/fr/simulateur-carte",
+  "/it/simulatore-carta",
+  "/de/weinkarten-simulator",
+  "/pt/simulador-carta",
   "/presentacion",
+  "/presentacion/catalonia",
   "/presentacion-anterior",
   "/deck",
   "/en/presentation",
@@ -66,7 +101,50 @@ const REACT_ROUTES = new Set([
   "/pt/termos",
 ]);
 
+const ARTICLE_ROUTE_RE = /^\/(?:(?:en|fr|it|de|pt)\/)?article\/[^/]+$/;
+const isReactRoute = (path) => REACT_ROUTES.has(path) || ARTICLE_ROUTE_RE.test(path);
+
+const ARTICLE_MARKER_CLEANER_SCRIPT = `<script>
+(() => {
+  const markerPattern = /(?:<!--|&lt;!--)\\s*winerim-content-expansion-[\\s\\S]*?(?:-->|--&gt;)/gi;
+  const cleanArticleMarkers = () => {
+    if (!document.body) return;
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      markerPattern.lastIndex = 0;
+      if (markerPattern.test(node.nodeValue || "")) nodes.push(node);
+    }
+    for (const textNode of nodes) {
+      textNode.nodeValue = (textNode.nodeValue || "").replace(markerPattern, "").trimStart();
+    }
+  };
+  const scheduleClean = () => setTimeout(cleanArticleMarkers, 0);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", cleanArticleMarkers, { once: true });
+  } else {
+    cleanArticleMarkers();
+  }
+  new MutationObserver(scheduleClean).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
+})();
+</script>`;
+
+const CATALONIA_ROUTE = "/presentacion/catalonia";
+const CATALONIA_ASSET_PREFIX = "/catalonia-assets/";
+const LEGACY_CLIENT_ROUTE = "/presentacion/saddle";
+const GENERIC_PROPOSAL_ROUTE = "/propuesta-comercial";
+const REVO_PROPOSAL_ROUTE = "/propuesta-comercial-revo";
+const COMMERCIAL_ASSET_PREFIX = "/commercial-assets/";
 const PRIVATE_ROUTES = new Set(["/deck", "/presentacion-anterior"]);
+PRIVATE_ROUTES.add(CATALONIA_ROUTE);
+PRIVATE_ROUTES.add(GENERIC_PROPOSAL_ROUTE);
+PRIVATE_ROUTES.add(REVO_PROPOSAL_ROUTE);
+const BACKEND_HUMAN_ROUTES = new Set(["/precios-modulos-integraciones"]);
 
 const LEGAL_ROUTES = new Set([
   "/politica-privacidad",
@@ -86,11 +164,28 @@ const LEGAL_ROUTES = new Set([
 ]);
 
 const NOINDEX_ROUTES = new Set([...LEGAL_ROUTES, ...PRIVATE_ROUTES]);
+const isNoindexRoute = (path) => NOINDEX_ROUTES.has(path) || path.startsWith("/legal/");
+
+const acceptsEnglish = (request) => {
+  const firstLanguage = (request.headers.get("Accept-Language") || "")
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+  return firstLanguage === "en" || firstLanguage.startsWith("en-");
+};
+
+const shouldRedirectUsHomeToEnglish = (request, path, ua) => (
+  path === "/"
+  && request.method === "GET"
+  && !BOT_REGEX.test(ua)
+  && (request.cf?.country === "US" || acceptsEnglish(request))
+);
 
 const getClientCacheControl = (path) => {
   if (path.startsWith("/assets/")) return "public, max-age=31536000, immutable";
-  if (path.startsWith("/legal/")) return "public, max-age=3600, s-maxage=86400";
+  if (PRIVATE_ROUTES.has(path)) return "no-store, max-age=0";
   if (REACT_ROUTES.has(path)) return "no-store, max-age=0";
+  if (ARTICLE_ROUTE_RE.test(path)) return "no-store, max-age=0";
   return "public, max-age=60, s-maxage=300";
 };
 
@@ -196,30 +291,85 @@ const fetchFrontend = async (request, env) => {
   }));
 };
 
+const fetchCataloniaOrigin = async (request, env, path) => {
+  const frontendOrigin = new URL(env.CATALONIA_ORIGIN);
+  const target = new URL(request.url);
+  target.protocol = frontendOrigin.protocol;
+  target.hostname = frontendOrigin.hostname;
+  target.port = frontendOrigin.port;
+  if (path.startsWith(CATALONIA_ASSET_PREFIX)) {
+    target.pathname = path.slice("/catalonia-assets".length);
+  }
+
+  return fetch(new Request(target, {
+    method: request.method === "HEAD" ? "GET" : request.method,
+    headers: request.headers,
+    body: request.method === "GET" || request.method === "HEAD" ? undefined : request.body,
+    redirect: "follow",
+  }));
+};
+
+const fetchCommercialOrigin = async (request, env, path) => {
+  const frontendOrigin = new URL(env.COMMERCIAL_ORIGIN);
+  const target = new URL(request.url);
+  target.protocol = frontendOrigin.protocol;
+  target.hostname = frontendOrigin.hostname;
+  target.port = frontendOrigin.port;
+  if (
+    path.startsWith(COMMERCIAL_ASSET_PREFIX)
+    && !path.startsWith(`${COMMERCIAL_ASSET_PREFIX}product-proof/`)
+  ) {
+    target.pathname = path.slice("/commercial-assets".length);
+  }
+
+  return fetch(new Request(target, {
+    method: request.method === "HEAD" ? "GET" : request.method,
+    headers: request.headers,
+    body: request.method === "GET" || request.method === "HEAD" ? undefined : request.body,
+    redirect: "follow",
+  }));
+};
+
 const withFrontendHeaders = (response, path, requestMethod = "GET") => {
   const headers = new Headers(response.headers);
   headers.set("X-Winerim-Router", "react-pages");
   headers.set("X-Frame-Options", "SAMEORIGIN");
   headers.set("X-Content-Type-Options", "nosniff");
   headers.set("Cache-Control", getClientCacheControl(path));
-  if (REACT_ROUTES.has(path)) {
+  if (isReactRoute(path)) {
     headers.set("Pragma", "no-cache");
     headers.set("Expires", "0");
   } else {
     headers.delete("Pragma");
     headers.delete("Expires");
   }
-  if (NOINDEX_ROUTES.has(path)) {
+  if (isNoindexRoute(path)) {
     headers.set("X-Robots-Tag", "noindex, follow");
   } else {
     headers.delete("X-Robots-Tag");
   }
 
-  return new Response(requestMethod === "HEAD" ? null : response.body, {
+  const nextResponse = new Response(requestMethod === "HEAD" ? null : response.body, {
     status: response.status,
     statusText: response.statusText,
     headers,
   });
+
+  if (
+    ARTICLE_ROUTE_RE.test(path)
+    && requestMethod !== "HEAD"
+    && (headers.get("Content-Type") || "").includes("text/html")
+  ) {
+    return new HTMLRewriter()
+      .on("body", {
+        element(element) {
+          element.append(ARTICLE_MARKER_CLEANER_SCRIPT, { html: true });
+        },
+      })
+      .transform(nextResponse);
+  }
+
+  return nextResponse;
 };
 
 const fetchReactPage = async (request, env, path) => {
@@ -255,7 +405,207 @@ const fetchReactPage = async (request, env, path) => {
       "Content-Type": "text/plain; charset=utf-8",
       "Retry-After": "15",
       "X-Winerim-Router": "react-pages-unavailable",
-      ...(NOINDEX_ROUTES.has(path) ? { "X-Robots-Tag": "noindex, follow" } : {}),
+      ...(isNoindexRoute(path) ? { "X-Robots-Tag": "noindex, follow" } : {}),
+    },
+  });
+};
+
+const withCataloniaDocumentMetadata = (response, requestMethod = "GET") => {
+  if (requestMethod === "HEAD") return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  return new HTMLRewriter()
+    .on("title", {
+      element(element) {
+        element.setInnerContent("Catalonia Group · Condiciones | Winerim");
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", "https://winerim.wine/presentacion/catalonia");
+      },
+    })
+    .on("head", {
+      element(element) {
+        element.append('<meta name="robots" content="noindex, follow">', { html: true });
+      },
+    })
+    .transform(response);
+};
+
+const fetchCataloniaPage = async (request, env, path) => {
+  const cache = caches.default;
+  const cacheUrl = new URL(request.url);
+  cacheUrl.searchParams.set("__catalonia_release", env.CATALONIA_RELEASE || "default");
+  const cacheKey = new Request(cacheUrl, { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) {
+    return withCataloniaDocumentMetadata(
+      withFrontendHeaders(cached, path, request.method),
+      request.method,
+    );
+  }
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetchCataloniaOrigin(request, env, path);
+      if (response.ok && (response.headers.get("Content-Type") || "").includes("text/html")) {
+        const cacheHeaders = new Headers(response.headers);
+        cacheHeaders.set("Cache-Control", "public, max-age=31536000, immutable");
+        const cacheable = new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: cacheHeaders,
+        });
+        await cache.put(cacheKey, cacheable.clone());
+        return withCataloniaDocumentMetadata(
+          withFrontendHeaders(cacheable, path, request.method),
+          request.method,
+        );
+      }
+    } catch {
+      // Retry transient Pages propagation or network failures.
+    }
+  }
+
+  return new Response("Servicio temporalmente no disponible", {
+    status: 503,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Retry-After": "15",
+      "X-Winerim-Router": "catalonia-pages-unavailable",
+      "X-Robots-Tag": "noindex, follow",
+    },
+  });
+};
+
+const fetchCataloniaAsset = async (request, env, path) => {
+  try {
+    const response = await fetchCataloniaOrigin(request, env, path);
+    const contentType = response.headers.get("Content-Type") || "";
+    if (response.ok && !contentType.includes("text/html")) {
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      headers.set("X-Winerim-Router", "catalonia-pages-asset");
+      return new Response(request.method === "HEAD" ? null : response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+  } catch {
+    // Return an explicit failure instead of falling through to another release.
+  }
+
+  return new Response("Asset no disponible", {
+    status: 404,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Winerim-Router": "catalonia-pages-asset-missing",
+    },
+  });
+};
+
+const withProposalDocumentMetadata = (response, path, requestMethod = "GET") => {
+  if (requestMethod === "HEAD") return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  return new HTMLRewriter()
+    .on("title", {
+      element(element) {
+        element.setInnerContent(path === REVO_PROPOSAL_ROUTE
+          ? "Propuesta comercial REVO | Winerim"
+          : "Propuesta comercial | Winerim");
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", `https://winerim.wine${path}`);
+      },
+    })
+    .on("head", {
+      element(element) {
+        element.append('<meta name="robots" content="noindex, follow">', { html: true });
+      },
+    })
+    .transform(response);
+};
+
+const fetchCommercialPage = async (request, env, path) => {
+  const cache = caches.default;
+  const cacheUrl = new URL(request.url);
+  cacheUrl.searchParams.set("__commercial_release", env.COMMERCIAL_RELEASE || "default");
+  const cacheKey = new Request(cacheUrl, { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) {
+    return withProposalDocumentMetadata(
+      withFrontendHeaders(cached, path, request.method),
+      path,
+      request.method,
+    );
+  }
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetchCommercialOrigin(request, env, path);
+      if (response.ok && (response.headers.get("Content-Type") || "").includes("text/html")) {
+        const cacheHeaders = new Headers(response.headers);
+        cacheHeaders.set("Cache-Control", "public, max-age=31536000, immutable");
+        const cacheable = new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: cacheHeaders,
+        });
+        await cache.put(cacheKey, cacheable.clone());
+        return withProposalDocumentMetadata(
+          withFrontendHeaders(cacheable, path, request.method),
+          path,
+          request.method,
+        );
+      }
+    } catch {
+      // Retry transient Pages propagation or network failures.
+    }
+  }
+
+  return new Response("Servicio temporalmente no disponible", {
+    status: 503,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Retry-After": "15",
+      "X-Winerim-Router": "commercial-pages-unavailable",
+      "X-Robots-Tag": "noindex, follow",
+    },
+  });
+};
+
+const fetchCommercialAsset = async (request, env, path) => {
+  try {
+    const response = await fetchCommercialOrigin(request, env, path);
+    const contentType = response.headers.get("Content-Type") || "";
+    if (response.ok && !contentType.includes("text/html")) {
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      headers.set("X-Winerim-Router", "commercial-pages-asset");
+      return new Response(request.method === "HEAD" ? null : response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+  } catch {
+    // Return an explicit failure instead of falling through to another release.
+  }
+
+  return new Response("Asset no disponible", {
+    status: 404,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Winerim-Router": "commercial-pages-asset-missing",
     },
   });
 };
@@ -272,8 +622,51 @@ export default {
       return env.BACKEND.fetch(request);
     }
 
+    if (shouldRedirectUsHomeToEnglish(request, path, ua)) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: "https://winerim.wine/en",
+          "Cache-Control": "no-store, max-age=0",
+          "X-Winerim-Router": "us-home-locale-redirect",
+        },
+      });
+    }
+
+    if (path === LEGACY_CLIENT_ROUTE) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          Location: "https://winerim.wine/propuesta-comercial",
+          "Cache-Control": "no-store, max-age=0",
+          "X-Robots-Tag": "noindex, follow",
+          "X-Winerim-Router": "legacy-commercial-redirect",
+        },
+      });
+    }
+
+    if (path === CATALONIA_ROUTE) {
+      return fetchCataloniaPage(request, env, path);
+    }
+
+    if (path.startsWith(CATALONIA_ASSET_PREFIX)) {
+      return fetchCataloniaAsset(request, env, path);
+    }
+
+    if (path === GENERIC_PROPOSAL_ROUTE || path === REVO_PROPOSAL_ROUTE) {
+      return fetchCommercialPage(request, env, path);
+    }
+
+    if (path.startsWith(COMMERCIAL_ASSET_PREFIX)) {
+      return fetchCommercialAsset(request, env, path);
+    }
+
     if (PRIVATE_ROUTES.has(path)) {
       return fetchReactPage(request, env, path);
+    }
+
+    if (!BOT_REGEX.test(ua) && BACKEND_HUMAN_ROUTES.has(path)) {
+      return env.BACKEND.fetch(request);
     }
 
     if (BOT_REGEX.test(ua)) {
@@ -310,11 +703,11 @@ export default {
       return response;
     }
 
-    if (REACT_ROUTES.has(path)) {
+    if (isReactRoute(path)) {
       return fetchReactPage(request, env, path);
     }
 
-    if (path.startsWith("/assets/") || path.startsWith("/legal/")) {
+    if (path.startsWith("/assets/")) {
       try {
         const response = await fetchFrontend(request, env);
         const contentType = response.headers.get("Content-Type") || "";

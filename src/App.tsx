@@ -161,6 +161,12 @@ const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const CursosVino = lazy(() => import("./pages/CursosVino"));
 const CursoDetalle = lazy(() => import("./pages/CursoDetalle"));
 const Presentation = lazyRouteWithRetry(() => import("./pages/Presentation"));
+const CataloniaPresentation = import.meta.env.VITE_CATALONIA_PRESENTATION === "true"
+  ? lazyRouteWithRetry(() => import("./pages/CataloniaPresentation")) : null;
+const GenericCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION === "true"
+  ? lazyRouteWithRetry(() => import("./pages/GenericCommercialProposal")) : null;
+const RevoCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION === "true"
+  ? lazyRouteWithRetry(() => import("./pages/RevoCommercialProposal")) : null;
 const PresentationLegacy = lazyRouteWithRetry(() => import("./pages/PresentationLegacy"));
 const PartnerDeck = lazyRouteWithRetry(() => import("./pages/PartnerDeck"));
 const SimuladorCarta = lazy(() => import("./pages/SimuladorCarta"));
@@ -357,6 +363,9 @@ const esRoutes = (
     <Route path="/comparativas" element={<Comparativas />} />
     <Route path="/comparativa/:slug" element={<ComparativaDetalle />} />
     <Route path="/presentacion" element={<Presentation />} />
+    {CataloniaPresentation && <Route path="/presentacion/catalonia" element={<CataloniaPresentation />} />}
+    {GenericCommercialProposal && <Route path="/propuesta-comercial" element={<GenericCommercialProposal />} />}
+    {RevoCommercialProposal && <Route path="/propuesta-comercial-revo" element={<RevoCommercialProposal />} />}
     <Route path="/presentacion-anterior" element={<PresentationLegacy />} />
     <Route path="/deck" element={<PartnerDeck />} />
     <Route path="/en/presentation" element={<Presentation />} />
@@ -902,6 +911,9 @@ const DeferredAppChrome = () => {
     (typeof window !== "undefined" && window.location.hostname === "go.winerim.wine" && location.pathname === "/");
   const isPresentation = [
     "/presentacion",
+    "/presentacion/catalonia",
+    "/propuesta-comercial",
+    "/propuesta-comercial-revo",
     "/presentacion-anterior",
     "/deck",
     "/en/presentation",
@@ -917,7 +929,7 @@ const DeferredAppChrome = () => {
       <Toaster />
       <Sonner position="top-center" richColors />
       {!hideGlobalConversionChrome && <CookieConsent />}
-      <IntentTracker />
+      {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo'].includes(location.pathname) && <IntentTracker />}
       {!hideGlobalConversionChrome && <BackToTop />}
       {!hideGlobalConversionChrome && <ToolsLeadPopup />}
       {!hideGlobalConversionChrome && <FreemiumToolGuard />}

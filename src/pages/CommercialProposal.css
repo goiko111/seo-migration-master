@@ -1,0 +1,1229 @@
+.commercial-proposal {
+  color: hsl(var(--wine-dark));
+  font-size: 0.9rem;
+  line-height: 1.45;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.commercial-commercial-slide {
+  color: hsl(var(--cream));
+  min-width: 0;
+  width: 100%;
+}
+
+.commercial-commercial-slide * {
+  letter-spacing: 0;
+}
+
+.commercial-commercial-header {
+  align-items: center;
+  border-bottom: 1px solid hsl(var(--cream) / 0.16);
+  color: hsl(var(--gold-light));
+  display: flex;
+  font-size: 0.7rem;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.commercial-commercial-copy {
+  align-items: end;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  margin-bottom: 0.85rem;
+}
+
+.commercial-commercial-copy h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.03;
+  margin: 0;
+}
+
+.commercial-commercial-copy > p:last-child,
+.commercial-commercial-copy-inline > p {
+  color: hsl(var(--cream) / 0.72);
+  font-size: 0.86rem;
+  line-height: 1.48;
+  margin: 0;
+}
+
+.commercial-commercial-kicker {
+  color: hsl(var(--wine-light));
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.commercial-commercial-copy-inline {
+  align-items: end;
+}
+
+.commercial-product-stage {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1.42fr) minmax(18rem, 0.58fr);
+  height: min(25.5rem, 49vh);
+  min-height: 20rem;
+}
+
+.commercial-product-stage-portrait {
+  grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
+}
+
+.commercial-product-rail {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 0;
+}
+
+.commercial-product-stack {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: min(27rem, 52vh);
+  min-height: 21rem;
+}
+
+.commercial-product-single {
+  height: min(28rem, 54vh);
+  min-height: 22rem;
+}
+
+.commercial-product-shot {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+.commercial-product-shot a {
+  background: #161719;
+  border: 1px solid hsl(var(--cream) / 0.14);
+  display: block;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.commercial-product-shot a:hover,
+.commercial-product-shot a:focus-visible {
+  border-color: hsl(var(--wine-light));
+}
+
+.commercial-product-shot a:focus-visible {
+  outline: 2px solid hsl(var(--gold-light));
+  outline-offset: 2px;
+}
+
+.commercial-product-shot img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.commercial-product-shot-contain img {
+  object-fit: contain;
+}
+
+.commercial-product-shot-wide a {
+  min-height: 6.6rem;
+}
+
+.commercial-product-shot-wide img {
+  object-fit: cover;
+}
+
+.commercial-product-shot figcaption {
+  color: hsl(var(--cream) / 0.55);
+  font-size: 0.64rem;
+  line-height: 1.3;
+  margin-top: 0.24rem;
+}
+
+.commercial-commercial-slide-wine .commercial-commercial-header {
+  border-bottom-color: hsl(var(--cream) / 0.24);
+}
+
+.commercial-commercial-slide-wine .commercial-commercial-kicker {
+  color: hsl(var(--gold-light));
+}
+
+.commercial-commercial-slide-wine .commercial-product-shot a {
+  border-color: hsl(var(--cream) / 0.28);
+}
+
+.commercial-proposal * {
+  letter-spacing: 0;
+}
+
+.commercial-pdf-payment-links {
+  display: none;
+}
+
+.commercial-product-page {
+  color: hsl(var(--cream));
+}
+
+.commercial-product-page .commercial-proposal-header {
+  border-bottom-color: hsl(var(--cream) / 0.18);
+  color: hsl(var(--gold-light));
+}
+
+.commercial-product-page .commercial-title {
+  color: hsl(var(--cream));
+}
+
+.commercial-product-page .commercial-lead,
+.commercial-product-page .commercial-stage-list p,
+.commercial-product-page .commercial-control-grid p {
+  color: hsl(var(--cream) / 0.72);
+}
+
+.commercial-product-page .commercial-note {
+  border-left-color: hsl(var(--wine-light));
+  color: hsl(var(--cream) / 0.82);
+}
+
+.commercial-product-page .commercial-stage-list section {
+  border-top-color: hsl(var(--cream) / 0.16);
+}
+
+.commercial-product-page .commercial-stage-list span {
+  background: hsl(var(--wine));
+}
+
+.commercial-product-page .commercial-control-grid section {
+  border-left-color: hsl(var(--wine-light));
+}
+
+.commercial-product-page .commercial-training-visual img,
+.commercial-product-page .commercial-integration-visuals img {
+  border: 1px solid hsl(var(--cream) / 0.14);
+}
+
+.commercial-product-page .commercial-training-visual figcaption,
+.commercial-product-page .commercial-integration-visuals figcaption {
+  color: hsl(var(--cream) / 0.5);
+}
+
+.commercial-feature-list {
+  display: grid;
+  gap: 0 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.6rem;
+}
+
+.commercial-feature-list section {
+  border-top: 1px solid hsl(var(--cream) / 0.16);
+  min-width: 0;
+  padding: 0.65rem 0;
+}
+
+.commercial-feature-list h3 {
+  color: hsl(var(--cream));
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin: 0 0 0.22rem;
+}
+
+.commercial-feature-list p {
+  color: hsl(var(--cream) / 0.66);
+  font-size: 0.72rem;
+  line-height: 1.42;
+  margin: 0;
+}
+
+.commercial-section-divider {
+  max-width: 66rem;
+}
+
+.commercial-section-divider .commercial-title {
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  max-width: 58rem;
+}
+
+.commercial-section-divider .commercial-lead {
+  font-size: 1.1rem;
+  max-width: 48rem;
+}
+
+.commercial-scope-feature-list {
+  display: grid;
+  gap: 0 1.4rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.6rem 0;
+}
+
+.commercial-scope-feature-list section {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.16);
+  min-width: 0;
+  padding: 0.5rem 0;
+}
+
+.commercial-scope-feature-list h3 {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  margin: 0 0 0.18rem;
+}
+
+.commercial-scope-feature-list p {
+  color: hsl(var(--wine-dark) / 0.7);
+  font-size: 0.68rem;
+  line-height: 1.38;
+  margin: 0;
+}
+
+.commercial-proposal-header {
+  align-items: center;
+  border-bottom: 1px solid hsl(var(--wine-dark) / 0.18);
+  color: hsl(var(--wine));
+  display: flex;
+  font-size: 0.7rem;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.55rem;
+  text-transform: uppercase;
+}
+
+.commercial-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1.03;
+  margin: 0 0 0.65rem;
+}
+
+.commercial-kicker {
+  color: hsl(var(--wine));
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+}
+
+.commercial-subtitle {
+  color: hsl(var(--wine));
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+  font-weight: 700;
+  margin: 0 0 0.85rem;
+}
+
+.commercial-lead {
+  color: hsl(var(--wine-dark) / 0.78);
+  font-size: 0.98rem;
+  line-height: 1.52;
+  margin: 0 0 1rem;
+}
+
+.commercial-cover-grid {
+  align-items: center;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1.05fr 0.95fr;
+  margin-bottom: 1rem;
+}
+
+.commercial-cover-grid img {
+  aspect-ratio: 16 / 10;
+  background: #191919;
+  max-height: 19rem;
+  object-fit: contain;
+  width: 100%;
+}
+
+.commercial-table-wrap {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.commercial-table {
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin: 0.7rem 0 1rem;
+  width: 100%;
+}
+
+.commercial-table caption {
+  color: hsl(var(--wine-dark));
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0 0 0.45rem;
+  text-align: left;
+}
+
+.commercial-table th,
+.commercial-table td {
+  border: 1px solid hsl(var(--wine-dark) / 0.18);
+  padding: 0.48rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.commercial-table thead th {
+  background: #25272b;
+  color: #fff;
+}
+
+.commercial-table tbody th {
+  font-weight: 600;
+}
+
+.commercial-table tbody tr:nth-child(even) {
+  background: hsl(var(--wine-dark) / 0.035);
+}
+
+.commercial-note {
+  border-left: 3px solid hsl(var(--wine));
+  margin: 0.8rem 0 0;
+  padding-left: 0.75rem;
+}
+
+.commercial-two-columns,
+.commercial-feature-grid,
+.commercial-choice-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commercial-two-columns > *,
+.commercial-feature-grid > *,
+.commercial-choice-grid > *,
+.commercial-signatures > * {
+  min-width: 0;
+}
+
+.commercial-proposal h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.commercial-proposal ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.commercial-proposal li + li {
+  margin-top: 0.22rem;
+}
+
+.commercial-emphasis {
+  border-top: 3px solid hsl(var(--wine));
+  padding-top: 0.45rem;
+}
+
+.commercial-provider {
+  border-left: 3px solid hsl(var(--wine));
+  margin-top: 2rem;
+  padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.commercial-provider p,
+.commercial-date,
+.commercial-client-fields p,
+.commercial-conditions-footer p {
+  margin: 0.25rem 0;
+}
+
+.commercial-date {
+  color: hsl(var(--wine));
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+.commercial-media {
+  margin: 0;
+}
+
+.commercial-media img,
+.commercial-media-pair img {
+  background: #191919;
+  object-fit: contain;
+  width: 100%;
+}
+
+.commercial-media img {
+  aspect-ratio: 16 / 10;
+  max-height: 19rem;
+}
+
+.commercial-media-wide img {
+  max-height: 16rem;
+}
+
+.commercial-media figcaption {
+  color: hsl(var(--wine-dark) / 0.58);
+  font-size: 0.7rem;
+  font-style: italic;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+.commercial-feature-grid {
+  align-items: start;
+}
+
+.commercial-media-pair {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 0.8rem;
+}
+
+.commercial-media-pair img {
+  aspect-ratio: 16 / 7;
+  max-height: 11rem;
+}
+
+.commercial-guardrails {
+  display: grid;
+  font-size: 0.74rem;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+  line-height: 1.4;
+}
+
+.commercial-guardrails p {
+  margin: 0;
+}
+
+.commercial-compact-list {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.commercial-steps {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.55rem 0 0.8rem;
+}
+
+.commercial-steps > div {
+  border-top: 2px solid hsl(var(--wine));
+  padding-top: 0.45rem;
+}
+
+.commercial-steps span {
+  color: hsl(var(--wine));
+  font-weight: 700;
+  margin-right: 0.35rem;
+}
+
+.commercial-steps p,
+.commercial-choice-grid p,
+.commercial-signatures p {
+  margin: 0.25rem 0 0;
+}
+
+.commercial-signature-page .commercial-table {
+  margin-bottom: 0.65rem;
+}
+
+.commercial-signatures {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commercial-signatures > div {
+  border: 1px solid hsl(var(--wine-dark) / 0.2);
+  min-height: 8.8rem;
+  padding: 0.65rem;
+}
+
+.commercial-pending {
+  color: hsl(var(--wine));
+  font-size: 0.72rem;
+  margin: 0.7rem 0 0;
+}
+
+.commercial-story-layout,
+.commercial-integration-layout {
+  align-items: start;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 0.95fr 1.05fr;
+}
+
+.commercial-stage-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.commercial-stage-list section {
+  align-items: start;
+  border-top: 1px solid hsl(var(--wine-dark) / 0.16);
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: 1.8rem 1fr;
+  padding-top: 0.55rem;
+}
+
+.commercial-stage-list span {
+  align-items: center;
+  background: hsl(var(--wine));
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  height: 1.65rem;
+  justify-content: center;
+  width: 1.65rem;
+}
+
+.commercial-stage-list h3,
+.commercial-control-grid h3 {
+  font-size: 0.92rem;
+  margin: 0 0 0.15rem;
+}
+
+.commercial-stage-list p,
+.commercial-control-grid p {
+  color: hsl(var(--wine-dark) / 0.7);
+  font-size: 0.74rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.commercial-training-visual {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+}
+
+.commercial-training-visual img {
+  aspect-ratio: 3 / 4;
+  background: #191919;
+  max-height: 24rem;
+  object-fit: contain;
+  width: 100%;
+}
+
+.commercial-training-visual figcaption,
+.commercial-integration-visuals figcaption {
+  color: hsl(var(--wine-dark) / 0.58);
+  font-size: 0.68rem;
+  font-style: italic;
+  grid-column: 1 / -1;
+  margin-top: -0.25rem;
+  text-align: center;
+}
+
+.commercial-control-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commercial-control-grid section {
+  border-left: 2px solid hsl(var(--wine));
+  padding: 0.2rem 0 0.2rem 0.65rem;
+}
+
+.commercial-integration-visuals {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.commercial-integration-visuals figure {
+  margin: 0;
+}
+
+.commercial-integration-visuals img {
+  aspect-ratio: 16 / 7;
+  background: #191919;
+  max-height: 10.5rem;
+  object-fit: contain;
+  width: 100%;
+}
+
+.commercial-capacity-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.2rem;
+}
+
+.commercial-capacity-intro {
+  color: hsl(var(--wine-dark) / 0.82);
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  line-height: 1.45;
+  margin: 0.4rem 0 0.9rem;
+  max-width: 70rem;
+}
+
+.commercial-capacity-grid section {
+  border-top: 3px solid hsl(var(--wine));
+  padding-top: 0.75rem;
+}
+
+.commercial-capacity-grid h3 {
+  margin-top: 0.25rem;
+}
+
+.commercial-capacity-grid section > p:last-child,
+.commercial-spend-grid p,
+.commercial-usage-columns section > p {
+  color: hsl(var(--wine-dark) / 0.7);
+  font-size: 0.76rem;
+  line-height: 1.42;
+}
+
+.commercial-capacity-amount {
+  color: hsl(var(--wine));
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+}
+
+.commercial-usage-equivalence {
+  border-bottom: 1px solid hsl(var(--wine-dark) / 0.14);
+  border-top: 1px solid hsl(var(--wine-dark) / 0.14);
+  margin-top: 1rem;
+  padding: 0.7rem 0;
+}
+
+.commercial-usage-equivalence h3 {
+  color: hsl(var(--wine));
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  text-transform: uppercase;
+}
+
+.commercial-usage-equivalence p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.commercial-usage-equivalence small {
+  color: hsl(var(--wine-dark) / 0.62);
+  display: block;
+  font-size: 0.68rem;
+  margin-top: 0.25rem;
+}
+
+.commercial-billing-rules {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.16);
+  padding-top: 0.8rem;
+}
+
+.commercial-assurance-kicker {
+  color: hsl(var(--wine));
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.commercial-assurance-statement {
+  border-left: 4px solid hsl(var(--wine));
+  color: hsl(var(--wine-dark));
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1rem 0 1.2rem;
+  max-width: 68rem;
+  padding-left: 1rem;
+}
+
+.commercial-spend-grid-compact {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.commercial-assurance-expansion-page .commercial-title {
+  font-size: clamp(1.9rem, 3.4vw, 2.85rem);
+}
+
+.commercial-assurance-expansion-page .commercial-assurance-statement {
+  margin: 0.65rem 0 0.75rem;
+}
+
+.commercial-assurance-expansion-page .commercial-spend-grid {
+  margin: 0.65rem 0 0.8rem;
+}
+
+.commercial-top-up-secondary {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.2);
+  color: hsl(var(--wine-dark) / 0.7);
+  margin-top: 0.8rem;
+  padding-top: 0.65rem;
+}
+
+.commercial-top-up-secondary > h3 {
+  color: hsl(var(--wine-dark) / 0.78);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  margin: 0 0 0.18rem;
+  text-transform: uppercase;
+}
+
+.commercial-top-up-secondary > p {
+  font-size: 0.68rem;
+  line-height: 1.35;
+  margin: 0.2rem 0;
+}
+
+.commercial-top-up-secondary .commercial-table {
+  font-size: 0.64rem;
+  margin: 0.4rem 0;
+}
+
+.commercial-top-up-secondary .commercial-table caption {
+  font-size: 0.72rem;
+  padding-bottom: 0.2rem;
+}
+
+.commercial-top-up-secondary .commercial-table th,
+.commercial-top-up-secondary .commercial-table td {
+  padding: 0.26rem 0.4rem;
+}
+
+.commercial-pack-saving {
+  border-left: 3px solid hsl(var(--wine));
+  font-size: 0.76rem;
+  margin: 0.55rem 0 0.75rem;
+  padding-left: 0.65rem;
+}
+
+.commercial-expansion-rules {
+  display: grid;
+  gap: 0.55rem 0.9rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.commercial-expansion-rules section {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.16);
+  min-width: 0;
+  padding-top: 0.45rem;
+}
+
+.commercial-expansion-rules h3 {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin: 0 0 0.18rem;
+}
+
+.commercial-expansion-rules h4 {
+  color: hsl(var(--wine-dark) / 0.72);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  margin: 0 0 0.12rem;
+}
+
+.commercial-expansion-rules p {
+  color: hsl(var(--wine-dark) / 0.7);
+  font-size: 0.68rem;
+  line-height: 1.38;
+  margin: 0;
+}
+
+.commercial-formula {
+  align-items: center;
+  background: #25272b;
+  color: #fff;
+  display: grid;
+  gap: 0.35rem;
+  grid-template-columns: auto 1fr;
+  margin: 0.85rem 0;
+  padding: 0.85rem 1rem;
+}
+
+.commercial-formula span {
+  color: hsl(40 58% 70%);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.commercial-formula strong {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.commercial-fine-print-page .commercial-title {
+  font-size: clamp(1.8rem, 3vw, 2.55rem);
+  margin-bottom: 0.25rem;
+}
+
+.commercial-fine-print-intro {
+  color: hsl(var(--wine-dark) / 0.58);
+  font-size: 0.68rem;
+  margin: 0 0 0.55rem;
+}
+
+.commercial-usage-detail-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1.12fr 0.94fr 0.94fr;
+}
+
+.commercial-usage-detail-grid > section {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.18);
+  min-width: 0;
+  padding-top: 0.45rem;
+}
+
+.commercial-usage-detail-grid h3 {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  margin: 0 0 0.3rem;
+}
+
+.commercial-usage-detail-grid .commercial-table {
+  font-size: 0.6rem;
+  margin: 0.35rem 0 0.45rem;
+}
+
+.commercial-usage-detail-grid .commercial-table caption {
+  font-size: 0.7rem;
+  padding-bottom: 0.2rem;
+}
+
+.commercial-usage-detail-grid .commercial-table th,
+.commercial-usage-detail-grid .commercial-table td {
+  padding: 0.25rem 0.32rem;
+}
+
+.commercial-usage-detail-grid section > p,
+.commercial-fine-print-note {
+  color: hsl(var(--wine-dark) / 0.64);
+  font-size: 0.62rem;
+  line-height: 1.38;
+}
+
+.commercial-formula {
+  padding: 0.52rem 0.6rem;
+}
+
+.commercial-fine-print-page .commercial-formula {
+  display: block;
+  margin: 0.35rem 0;
+}
+
+.commercial-fine-print-page .commercial-formula span {
+  display: block;
+  font-size: 0.58rem;
+}
+
+.commercial-fine-print-page .commercial-formula strong {
+  display: block;
+  font-size: 0.78rem;
+  margin-top: 0.12rem;
+  text-align: left;
+}
+
+.commercial-fine-print-note {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.18);
+  margin: 0.65rem 0 0;
+  padding-top: 0.5rem;
+}
+
+.commercial-usage-columns > section {
+  min-width: 0;
+}
+
+.commercial-consumption-flow {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0.75rem 0;
+}
+
+.commercial-consumption-flow span {
+  border-top: 2px solid hsl(var(--wine));
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding-top: 0.45rem;
+}
+
+.commercial-spend-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1rem 0;
+}
+
+.commercial-spend-grid section {
+  border-left: 2px solid hsl(var(--wine));
+  padding-left: 0.7rem;
+}
+
+.commercial-spend-grid h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem;
+}
+
+.commercial-spend-grid p {
+  margin: 0;
+}
+
+.commercial-selection-totals {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commercial-selection-totals p {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.18);
+  margin: 0;
+  padding-top: 0.55rem;
+}
+
+.commercial-selection-table label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.commercial-selection-table input[type="radio"] {
+  accent-color: hsl(var(--wine));
+  cursor: pointer;
+  flex: 0 0 auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+.commercial-unavailable-option {
+  color: hsl(var(--wine-dark) / 0.52);
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.45rem 0;
+}
+
+.commercial-selection-rule {
+  border-left: 3px solid hsl(var(--wine));
+  color: hsl(var(--wine-dark) / 0.76);
+  font-size: 0.78rem;
+  margin: 0.65rem 0 0.8rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.commercial-payment-result {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.18);
+  margin-top: 0.7rem;
+  min-height: 3.9rem;
+  padding-top: 0.6rem;
+}
+
+.commercial-payment-result h3 {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  margin: 0 0 0.3rem;
+  text-transform: uppercase;
+}
+
+.commercial-payment-result p {
+  color: hsl(var(--wine-dark) / 0.65);
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.commercial-payment-result a {
+  align-items: center;
+  background: hsl(var(--wine));
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 0.7rem;
+  justify-content: space-between;
+  max-width: 34rem;
+  padding: 0.65rem 0.8rem;
+  text-decoration: none;
+  width: 100%;
+}
+
+.commercial-payment-result a:hover,
+.commercial-payment-result a:focus-visible {
+  background: hsl(var(--wine-dark));
+}
+
+.commercial-payment-result a:focus-visible {
+  outline: 2px solid hsl(var(--gold));
+  outline-offset: 2px;
+}
+
+.commercial-provider-reference {
+  border-top: 1px solid hsl(var(--wine-dark) / 0.18);
+  margin-top: 1.3rem;
+  padding-top: 0.7rem;
+}
+
+.commercial-provider-reference p {
+  margin: 0.2rem 0;
+}
+
+@media (min-width: 1024px) and (max-height: 850px) {
+  .commercial-commercial-copy h2 { font-size: 2.25rem; }
+  .commercial-commercial-copy > p:last-child,
+  .commercial-commercial-copy-inline > p { font-size: 0.74rem; }
+  .commercial-product-stage { height: 20rem; min-height: 17rem; }
+  .commercial-product-stack { height: 21rem; min-height: 18rem; }
+  .commercial-product-single { height: 22rem; min-height: 18rem; }
+  .commercial-proposal { font-size: 0.78rem; }
+  .commercial-title { font-size: 2.3rem; }
+  .commercial-lead { font-size: 0.82rem; margin-bottom: 0.6rem; }
+  .commercial-table { font-size: 0.68rem; margin: 0.45rem 0 0.6rem; }
+  .commercial-table th, .commercial-table td { padding: 0.32rem 0.45rem; }
+  .commercial-proposal h3 { font-size: 1rem; margin-top: 0.55rem; }
+  .commercial-media-pair img { max-height: 7rem; }
+  .commercial-compact-list { font-size: 0.68rem; }
+  .commercial-signatures > div { min-height: 6.2rem; }
+  .commercial-training-visual img { max-height: 17rem; }
+  .commercial-integration-visuals img { max-height: 7.5rem; }
+  .commercial-capacity-grid section > p:last-child,
+  .commercial-spend-grid p,
+  .commercial-usage-columns section > p,
+  .commercial-scope-feature-list p,
+  .commercial-expansion-rules p { font-size: 0.68rem; }
+  .commercial-capacity-intro { font-size: 0.94rem; margin-bottom: 0.55rem; }
+  .commercial-usage-equivalence { margin-top: 0.65rem; padding: 0.5rem 0; }
+  .commercial-assurance-statement { font-size: 1.25rem; margin: 0.7rem 0 0.85rem; }
+  .commercial-assurance-expansion-page .commercial-assurance-statement { font-size: 1rem; }
+  .commercial-top-up-secondary .commercial-table { font-size: 0.58rem; }
+}
+
+@media (max-width: 767px) {
+  .commercial-commercial-header { align-items: flex-start; gap: 0.5rem; }
+  .commercial-commercial-copy,
+  .commercial-commercial-copy-inline,
+  .commercial-product-stage,
+  .commercial-product-stage-portrait {
+    grid-template-columns: 1fr;
+  }
+  .commercial-commercial-copy { gap: 0.65rem; }
+  .commercial-commercial-copy h2 { font-size: 2rem; }
+  .commercial-commercial-copy > p:last-child,
+  .commercial-commercial-copy-inline > p { font-size: 0.8rem; }
+  .commercial-product-stage,
+  .commercial-product-stack,
+  .commercial-product-single {
+    height: auto;
+    min-height: 0;
+  }
+  .commercial-product-rail { grid-template-rows: none; }
+  .commercial-product-shot a { min-height: 13rem; }
+  .commercial-product-shot-wide a { min-height: 8rem; }
+  .commercial-product-shot figcaption { font-size: 0.68rem; }
+  .commercial-proposal { font-size: 0.84rem; }
+  .commercial-proposal-header { align-items: flex-start; gap: 0.5rem; }
+  .commercial-title { font-size: 2rem; }
+  .commercial-cover-grid,
+  .commercial-two-columns,
+  .commercial-feature-grid,
+  .commercial-choice-grid,
+  .commercial-media-pair,
+  .commercial-guardrails,
+  .commercial-signatures {
+    grid-template-columns: 1fr;
+  }
+  .commercial-story-layout,
+  .commercial-integration-layout,
+  .commercial-control-grid,
+  .commercial-feature-list,
+  .commercial-scope-feature-list,
+  .commercial-capacity-grid,
+  .commercial-spend-grid,
+  .commercial-expansion-rules,
+  .commercial-consumption-flow,
+  .commercial-selection-totals,
+  .commercial-usage-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .commercial-formula {
+    grid-template-columns: 1fr;
+  }
+  .commercial-formula strong {
+    text-align: left;
+  }
+  .commercial-cover-grid { gap: 1rem; }
+  .commercial-table {
+    border-collapse: separate;
+    border-spacing: 0 0.55rem;
+    font-size: 0.72rem;
+    min-width: 0;
+  }
+  .commercial-table thead {
+    display: none;
+  }
+  .commercial-table tbody,
+  .commercial-table tr {
+    display: block;
+    width: 100%;
+  }
+  .commercial-table tr {
+    border: 1px solid hsl(var(--wine-dark) / 0.16);
+    padding: 0.28rem 0.45rem;
+  }
+  .commercial-table th,
+  .commercial-table td {
+    align-items: start;
+    background: transparent;
+    border: 0;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: minmax(6.4rem, 38%) 1fr;
+    padding: 0.25rem 0;
+    width: 100%;
+  }
+  .commercial-table th::before,
+  .commercial-table td::before {
+    color: hsl(var(--wine));
+    content: attr(data-label);
+    font-size: 0.63rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .commercial-table-wrap { padding-bottom: 0.35rem; }
+  .commercial-steps { grid-template-columns: 1fr; }
+  .commercial-signatures > div { min-height: 7rem; }
+  .commercial-training-visual img { max-height: none; }
+  .commercial-feature-list section { padding: 0.75rem 0; }
+  .commercial-feature-list h3 { font-size: 0.86rem; }
+  .commercial-feature-list p { font-size: 0.74rem; }
+  .commercial-top-up-secondary .commercial-table,
+  .commercial-usage-detail-grid .commercial-table { font-size: 0.66rem; }
+  .commercial-usage-detail-grid section > p,
+  .commercial-fine-print-note { font-size: 0.68rem; }
+  .commercial-payment-result a { max-width: none; }
+}
+
+@media print {
+  .commercial-proposal { font-size: 10px; }
+  .commercial-title { font-size: 30px; }
+  .commercial-table { font-size: 8px; }
+  .commercial-proposal-header { font-size: 7px; }
+}

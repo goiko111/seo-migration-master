@@ -16,7 +16,51 @@ export function createCurrentCommercialContent(
   legacy: LegacyPresentationContent,
   current: CurrentPresentationContent,
 ): LegacyPresentationContent {
-  if (language === "es" || language === "en") return legacy;
+  if (language === "es") return {
+    ...legacy,
+    sPainsSubtitle: "Cinco situaciones habituales del vino en hostelería y herramientas para abordarlas con el equipo.",
+    sPainsItems: legacy.sPainsItems.map((item, index) => index === 3
+      ? { ...item, antidote: "Disponibilidad de la carta basada en el inventario registrado y en las integraciones validadas." } : item),
+    s3Body: "Winerim reúne carta digital, herramientas de recomendación y gestión de bodega. El alcance de ventas, stock y automatización depende de los módulos y conexiones validados para cada restaurante.",
+    s4ColDinerBody: "Explora vinos por estilo, gusto o maridaje, con el equipo de sala disponible para acompañar la elección.",
+    s4ColRestaurantBody: "Revisa oferta, formatos y precios. Contrasta stock, costes y ventas según la cobertura de tus datos.",
+    s5Items: [
+      { title: "Apoyo a la venta de vino", body: "Maridajes y fichas para acompañar la recomendación, sin garantizar un aumento del ticket." },
+      legacy.s5Items[1], legacy.s5Items[2],
+      { title: "Disponibilidad informada", body: "Revisa el inventario registrado. La sincronización requiere una conexión validada y conciliación física." },
+      { title: "Carta multilingüe", body: "Configura los idiomas y revisa las fichas y el recorrido de tu carta antes de ofrecerlos al huésped." },
+      { title: "Rotación con contexto", body: "Identifica referencias para revisar cuando exista histórico fiable de ventas y existencias." },
+      { title: "Elección acompañada", body: "Búsqueda, comparador y fichas para reducir dudas en mesa." },
+    ],
+    s7Pillars: legacy.s7Pillars.map((item, index) => index === 0
+      ? { title: "Notas de cata asistidas", body: "Perfiles descriptivos que el equipo debe revisar antes de publicar." }
+      : index === 1 ? { title: "Sugerencias de maridaje", body: "Opciones según el plato y la carta; el criterio de sala sigue siendo esencial." } : item),
+    s8TastingBody: "Perfiles aromáticos y descripciones para apoyar la elección. La información asistida por IA requiere revisión editorial; no sustituye una cata ni la ficha técnica del productor.",
+    s8PairingBody: "Sugiere opciones de la carta considerando el plato y sus ingredientes. El equipo revisa la propuesta según preparación y preferencias del comensal.",
+    s9BigDataBullets: ["Revisa demanda y ventas cuando exista histórico validado.", "Compara periodos con la misma cobertura y criterios.", "Identifica referencias que merecen una revisión; no se garantiza una predicción de ventas."],
+    s10Body: "El stock registrado necesita entradas, salidas y conciliación. Confirmamos qué datos aporta cada integración antes de usarlos para decisiones operativas.",
+    s10Items: [
+      { title: "Inventario registrado", body: "Contrasta existencias con conteos físicos." },
+      { title: "Integración validada", body: "Verifica formatos, movimientos y ausencia de duplicados." },
+      { title: "Rotación", body: "Revisa tendencias con histórico fiable y periodo explícito." },
+      { title: "Compras revisadas", body: "Las sugerencias no equivalen a pedidos enviados ni garantizan disponibilidad." },
+      { title: "Margen con contexto", body: "Distingue coste, precio y resultado, con impuestos y formato coherentes." },
+    ],
+    s11Subtitle: "Un despliegue por etapas: primero la operativa de un local, después el alcance compartido del grupo.",
+    s11Items: [
+      { title: "Roles y permisos", body: "Acordar y validar qué puede consultar o modificar cada equipo." },
+      { title: "Datos comparables", body: "Confirmar cobertura, periodos y criterios antes de comparar locales." },
+      { title: "Piloto coordinado", body: "Revisar incidencias y readback antes de ampliar la implantación." },
+      { title: "Bodega central", body: "Flujo sujeto a alcance y validación específicos; no se presupone activo." },
+    ],
+    sMgmtSubtitle: "Carta, bodega y análisis se apoyan en datos de distinta procedencia. La disponibilidad de cada módulo y conexión se confirma para cada implantación.",
+    sMgmtFootnote: "CloudRIM, SAVia, RIMs, compras y capacidades de grupo requieren confirmar alcance, permisos y estado productivo. Una pantalla no certifica el flujo completo.",
+    s12Title: "Una implantación por etapas",
+    s12Body: "Revisamos carta, formatos e idiomas; acordamos las conexiones y comprobamos su resultado con el equipo. El calendario depende del alcance y de la calidad de los datos disponibles.",
+    s13Subtitle: "Referencias visuales de la presentación existente. Los resultados de cada restaurante dependen de su operativa; no se promete un retorno económico.",
+    s13Quote: "Primero información fiable. Después, decisiones que el equipo pueda comprobar.",
+  };
+  if (language === "en") return legacy;
 
   const labels = localizedLabels[language];
   return {

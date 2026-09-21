@@ -24,7 +24,7 @@ import {
   PRESENTATION_ROUTE,
   type PresentationContent as CurrentPresentationContent,
 } from "@/data/presentationContent";
-import { createCurrentCommercialContent, getCommercialSlideLabels } from "@/data/presentationStory";
+import { getCommercialSlideLabels } from "@/data/presentationStory";
 import { PRESENTATION_CAPABILITY_DEPTH } from "@/data/presentationCapabilityDepth";
 import { CANONICAL_DOMAIN } from "@/seo/config";
 
@@ -130,23 +130,55 @@ const Reveal = ({
 
 /* ─── Page ─── */
 
+type PresentationAppendix = {
+  label: string;
+  content: React.ReactNode;
+  bg?: "default" | "wine" | "cream" | "dark";
+};
+
+type PresentationSlideOverride = {
+  content: React.ReactNode;
+  bg?: "default" | "wine" | "cream" | "dark";
+};
+
+type PresentationSlideOverrides = Partial<Record<
+  "experience" | "connectedFlow" | "marginsOverview" | "marginsOutcomes" | "savia" | "supply",
+  PresentationSlideOverride
+>>;
+
 type PresentationLegacyProps = {
   variant?: "archive" | "current";
   embedded?: boolean;
   partnerName?: string | null;
+  appendix?: PresentationAppendix;
+  appendices?: PresentationAppendix[];
+  canonicalPath?: string;
+  documentTitle?: string;
+  pdfFilename?: string;
+  noindex?: boolean;
+  suppressTracking?: boolean;
+  slideOverrides?: PresentationSlideOverrides;
+  slideLabelOverrides?: Partial<Record<number, string>>;
 };
 
 export default function PresentationLegacy({
   variant = "archive",
   embedded = false,
   partnerName,
+  appendix,
+  appendices,
+  canonicalPath,
+  documentTitle,
+  pdfFilename,
+  noindex = false,
+  suppressTracking = false,
+  slideOverrides,
+  slideLabelOverrides,
 }: PresentationLegacyProps) {
   const { lang, allLangPaths } = useLanguage();
   const currentT: CurrentPresentationContent = CURRENT_PRESENTATION_CONTENT[lang];
   const depthT = PRESENTATION_CAPABILITY_DEPTH[lang];
-  const t: PresentationContent = variant === "current" || embedded
-    ? createCurrentCommercialContent(lang, PRESENTATION_CONTENT[lang], currentT)
-    : PRESENTATION_CONTENT[lang];
+  const t: PresentationContent = PRESENTATION_CONTENT[lang];
   const [params] = useSearchParams();
   const grupo = params.get("grupo");
   const preparedForName = partnerName || grupo;
@@ -168,21 +200,27 @@ export default function PresentationLegacy({
   const [totalSlides, setTotalSlides] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigationRequest = useRef(0);
   const reduceMotion = useReducedMotion();
-
-  /* Short labels per slide for side dots / tooltips */
-  const slideLabels = useMemo<string[]>(
-    () => getCommercialSlideLabels(t, currentT, { includesUpdates, embedded }),
-    [currentT, embedded, includesUpdates, t],
+  const resolvedAppendices = useMemo(
+    () => appendices || (appendix ? [appendix] : []),
+    [appendix, appendices],
   );
 
-  const route = embedded
+  /* Short labels per slide for side dots / tooltips */
+  const slideLabels = useMemo<string[]>(() => {
+    const commercialLabels = getCommercialSlideLabels(t, currentT, { includesUpdates, embedded })
+      .map((label, index) => slideLabelOverrides?.[index + 1] || label);
+    return [...commercialLabels, ...resolvedAppendices.map((item) => item.label)];
+  }, [currentT, embedded, includesUpdates, t, resolvedAppendices, slideLabelOverrides]);
+
+  const route = canonicalPath || (embedded
     ? "/deck"
     : variant === "archive"
       ? "/presentacion-anterior"
-      : PRESENTATION_ROUTE[lang];
+      : PRESENTATION_ROUTE[lang]);
   const url = `${CANONICAL_DOMAIN}${route}`;
-  const hreflang = variant === "current" && !embedded
+  const hreflang = variant === "current" && !embedded && !canonicalPath
     ? allLangPaths("/presentacion").map((entry) => ({
         lang: entry.lang,
         url:
@@ -194,7 +232,7 @@ export default function PresentationLegacy({
 
   /* Tracking */
   useEffect(() => {
-    if (typeof window === "undefined" || embedded) return;
+    if (typeof window === "undefined" || embedded || suppressTracking) return;
     const analyticsWindow = window as PresentationAnalyticsWindow;
     analyticsWindow.dataLayer ||= [];
     analyticsWindow.dataLayer.push({
@@ -203,7 +241,7 @@ export default function PresentationLegacy({
       grupo: preparedForName || undefined,
       version: includesUpdates ? "commercial-story-2026-07-deep" : "legacy-archive-2026-07",
     });
-  }, [embedded, includesUpdates, lang, preparedForName]);
+  }, [embedded, includesUpdates, lang, preparedForName, suppressTracking]);
 
   const handleShare = useCallback(async () => {
     const shareUrl = new URL(url);
@@ -246,17 +284,17 @@ export default function PresentationLegacy({
     if (success) {
       setShared(true);
       setTimeout(() => setShared(false), 2200);
-      (window as PresentationAnalyticsWindow).dataLayer?.push({ event: "presentation_share_click", lang });
+      if (!suppressTracking) (window as PresentationAnalyticsWindow).dataLayer?.push({ event: "presentation_share_click", lang });
     } else {
       window.prompt(t.shareLabel, finalUrl);
     }
-  }, [embedded, url, preparedForName, t.metaTitle, t.shareLabel, lang]);
+  }, [embedded, url, preparedForName, t.metaTitle, t.shareLabel, lang, suppressTracking]);
 
   const handleDownloadPdf = useCallback(async () => {
-    (window as PresentationAnalyticsWindow).dataLayer?.push({ event: "presentation_download_pdf", lang });
+    if (!suppressTracking) (window as PresentationAnalyticsWindow).dataLayer?.push({ event: "presentation_download_pdf", lang });
     const { generateDeckPdf } = await import("@/lib/generateDeckPdf");
-    await generateDeckPdf(t.metaTitle || "winerim-presentacion");
-  }, [lang, t.metaTitle]);
+    await generateDeckPdf(pdfFilename || resolvedAppendices[0]?.label || t.metaTitle || "winerim-presentacion");
+  }, [lang, t.metaTitle, resolvedAppendices, suppressTracking, pdfFilename]);
 
   const handleFullscreen = useCallback(() => {
     if (typeof document === "undefined") return;
@@ -281,10 +319,12 @@ export default function PresentationLegacy({
       Array.from(el.querySelectorAll<HTMLElement>(".presentation-slide"));
     setTotalSlides(getSlides().length);
     const onScroll = () => {
-      if (el.scrollTop > 100) setShowScrollArrow(false);
+      const documentScroll = getComputedStyle(el).overflowY !== "auto";
+      const scrollTop = documentScroll ? window.scrollY : el.scrollTop;
+      if (scrollTop > 100) setShowScrollArrow(false);
       else setShowScrollArrow(true);
       const slides = getSlides();
-      const anchor = el.getBoundingClientRect().top + 72;
+      const anchor = (documentScroll ? 0 : el.getBoundingClientRect().top) + 72;
       const containingIndex = slides.findIndex((slide) => {
         const rect = slide.getBoundingClientRect();
         return rect.top <= anchor && rect.bottom > anchor;
@@ -297,21 +337,52 @@ export default function PresentationLegacy({
         { index: 0, distance: Number.POSITIVE_INFINITY },
       );
       setCurrentSlide(containingIndex >= 0 ? containingIndex : nearest.index);
-      const max = el.scrollHeight - el.clientHeight;
-      setScrollProgress(max > 0 ? (el.scrollTop / max) * 100 : 0);
+      const max = documentScroll ? document.documentElement.scrollHeight - window.innerHeight : el.scrollHeight - el.clientHeight;
+      setScrollProgress(max > 0 ? (scrollTop / max) * 100 : 0);
     };
     onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
-  const goToSlide = useCallback((idx: number) => {
+  const goToSlide = useCallback(async (idx: number) => {
     const el = containerRef.current;
     if (!el) return;
     const slides = el.querySelectorAll<HTMLElement>(".presentation-slide");
-    const target = slides[Math.max(0, Math.min(slides.length - 1, idx))];
-    if (target) el.scrollTo({ top: target.offsetTop, behavior: "smooth" });
-  }, []);
+    const targetIndex = Math.max(0, Math.min(slides.length - 1, idx));
+    const target = slides[targetIndex];
+    if (!target) return;
+    const request = ++navigationRequest.current;
+    // Lazy images above the destination can otherwise move it after the jump.
+    const pending = Array.from(slides).slice(0, targetIndex + 1)
+      .flatMap(slide => Array.from(slide.querySelectorAll<HTMLImageElement>("img")))
+      .filter(image => !image.complete);
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        Promise.all([
+          document.fonts?.ready,
+          ...pending.map(image => {
+            image.loading = "eager";
+            return image.decode().catch(() => undefined);
+          }),
+        ]),
+        new Promise(resolve => { timeout = setTimeout(resolve, 5000); }),
+      ]);
+    } finally {
+      clearTimeout(timeout);
+    }
+    if (request !== navigationRequest.current || !el.isConnected) return;
+    const behavior = reduceMotion ? "auto" : "smooth";
+    if (getComputedStyle(el).overflowY === "auto") el.scrollTo({ top: target.offsetTop, behavior });
+    else window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top, behavior });
+  }, [reduceMotion]);
 
   const scrollToNextSlide = useCallback(() => {
     goToSlide(currentSlide + 1);
@@ -399,12 +470,12 @@ export default function PresentationLegacy({
     >
       {!embedded && (
         <SEOHead
-          title={includesUpdates ? currentT.metaTitle : t.metaTitle}
+          title={documentTitle || resolvedAppendices[0]?.label || (includesUpdates ? currentT.metaTitle : t.metaTitle)}
           description={includesUpdates ? currentT.metaDescription : t.metaDescription}
           url={url}
           hreflang={hreflang}
           image={`${CANONICAL_DOMAIN}/og-presentation.jpg`}
-          noindex={variant === "archive"}
+          noindex={noindex || variant === "archive"}
         />
       )}
 
@@ -762,7 +833,9 @@ export default function PresentationLegacy({
       </SlideShell>
 
       {/* ──────── SLIDE 8 — TASTING + PAIRING ──────── */}
-      <SlideShell>
+      {slideOverrides?.experience ? (
+        <SlideShell bg={slideOverrides.experience.bg}>{slideOverrides.experience.content}</SlideShell>
+      ) : <SlideShell>
         <div className="text-center mb-12">
           <Reveal>
             <Eyebrow>{t.s8Eyebrow}</Eyebrow>
@@ -780,7 +853,7 @@ export default function PresentationLegacy({
             <p className="text-foreground/75 leading-relaxed">{t.s8PairingBody}</p>
           </Reveal>
         </div>
-      </SlideShell>
+      </SlideShell>}
 
       {/* ──────── SLIDE 9 — BIG DATA + COMPARATOR ──────── */}
       <SlideShell bg="dark">
@@ -907,7 +980,9 @@ export default function PresentationLegacy({
       {includesUpdates && (
         <>
           {/* NUEVO — ARQUITECTURA CONECTADA */}
-          <SlideShell bg="wine">
+          {slideOverrides?.connectedFlow ? (
+            <SlideShell bg={slideOverrides.connectedFlow.bg}>{slideOverrides.connectedFlow.content}</SlideShell>
+          ) : <SlideShell bg="wine">
             <div className="text-center mb-10 max-w-4xl mx-auto">
               <Reveal>
                 <Eyebrow>{currentT.flow.eyebrow}</Eyebrow>
@@ -935,7 +1010,7 @@ export default function PresentationLegacy({
               })}
             </div>
             <p className="mx-auto mt-7 max-w-4xl text-center text-sm text-cream/65">{currentT.flow.footnote}</p>
-          </SlideShell>
+          </SlideShell>}
 
           {/* NUEVO — CLOUDRIM */}
           <SlideShell bg="cream">
@@ -1017,7 +1092,9 @@ export default function PresentationLegacy({
           </SlideShell>
 
           {/* NUEVO — MARGENES */}
-          <SlideShell>
+          {slideOverrides?.marginsOverview ? (
+            <SlideShell bg={slideOverrides.marginsOverview.bg}>{slideOverrides.marginsOverview.content}</SlideShell>
+          ) : <SlideShell>
             <div className="grid gap-9 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
               <Reveal>
                 <Eyebrow>{depthT.margins.eyebrow}</Eyebrow>
@@ -1045,9 +1122,11 @@ export default function PresentationLegacy({
                 </figure>
               </Reveal>
             </div>
-          </SlideShell>
+          </SlideShell>}
 
-          <SlideShell bg="dark">
+          {slideOverrides?.marginsOutcomes ? (
+            <SlideShell bg={slideOverrides.marginsOutcomes.bg}>{slideOverrides.marginsOutcomes.content}</SlideShell>
+          ) : <SlideShell bg="dark">
             <div className="mb-7 max-w-4xl">
               <Reveal>
                 <Eyebrow>{depthT.margins.eyebrow}</Eyebrow>
@@ -1071,7 +1150,7 @@ export default function PresentationLegacy({
                 </Reveal>
               ))}
             </div>
-          </SlideShell>
+          </SlideShell>}
 
           {/* NUEVO — RIMS */}
           <SlideShell bg="wine">
@@ -1104,7 +1183,9 @@ export default function PresentationLegacy({
           </SlideShell>
 
           {/* NUEVO — SAVIA */}
-          <SlideShell bg="dark">
+          {slideOverrides?.savia ? (
+            <SlideShell bg={slideOverrides.savia.bg}>{slideOverrides.savia.content}</SlideShell>
+          ) : <SlideShell bg="dark">
             <div className="grid gap-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <Reveal>
                 <Eyebrow>{depthT.savia.eyebrow}</Eyebrow>
@@ -1138,12 +1219,14 @@ export default function PresentationLegacy({
                 <p className="mt-3 text-center text-xs text-cream/45">{depthT.savia.caption}</p>
               </Reveal>
             </div>
-          </SlideShell>
+          </SlideShell>}
         </>
       )}
 
       {/* ──────── SLIDE 11c — WINERIM SUPPLY ──────── */}
-      <SlideShell bg="cream">
+      {slideOverrides?.supply ? (
+        <SlideShell bg={slideOverrides.supply.bg}>{slideOverrides.supply.content}</SlideShell>
+      ) : <SlideShell bg="cream">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
           <div>
             <Reveal>
@@ -1174,7 +1257,7 @@ export default function PresentationLegacy({
             </div>
           </div>
         </div>
-      </SlideShell>
+      </SlideShell>}
 
       {/* ──────── SLIDE 12 — IMPLEMENTATION ──────── */}
       <SlideShell>
@@ -1343,6 +1426,11 @@ export default function PresentationLegacy({
           </Reveal>
         </div>
       </SlideShell>}
+      {resolvedAppendices.map((item) => (
+        <SlideShell key={item.label} bg={item.bg || "cream"}>
+          {item.content}
+        </SlideShell>
+      ))}
     </div>
   );
 }
