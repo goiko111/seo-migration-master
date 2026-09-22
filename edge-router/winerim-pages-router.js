@@ -102,6 +102,29 @@ const REACT_ROUTES = new Set([
   "/pt/termos",
 ]);
 
+const PROFITABILITY_DIAGNOSTIC_ROUTE = "/herramientas/diagnostico-rentabilidad-bodega";
+const PROFITABILITY_DIAGNOSTIC_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_ROUTE}`;
+const PROFITABILITY_DIAGNOSTIC_TITLE = "Diagnóstico de Rentabilidad de Bodega | Winerim";
+const PROFITABILITY_DIAGNOSTIC_DESCRIPTION = "Calcula escenarios de ahorro en compras, margen adicional, horas recuperables y capital inmovilizado sin mezclar las magnitudes.";
+const PROFITABILITY_DIAGNOSTIC_BOT_HTML = `
+  <main id="winerim-profitability-diagnostic">
+    <h1>Diagnóstico de rentabilidad de bodega</h1>
+    <p>Compras, margen, tiempo y stock: cuatro lecturas separadas para decidir dónde actuar primero.</p>
+    <section>
+      <h2>Cuatro magnitudes sin atajos</h2>
+      <p>El diagnóstico separa ahorro de costes, margen bruto de contribución adicional, capacidad operativa recuperable y capital circulante potencialmente liberable. Las cifras no se suman ni se presentan como ROI.</p>
+    </section>
+    <section>
+      <h2>Supuestos transparentes y editables</h2>
+      <p>Cada resultado muestra su fórmula y usa los datos introducidos por el usuario. Los mínimos y máximos son escenarios, no garantías ni intervalos estadísticos.</p>
+    </section>
+    <section>
+      <h2>Resultado antes del contacto</h2>
+      <p>El cálculo completo se realiza localmente en el navegador y aparece antes de cualquier invitación a solicitar una demo.</p>
+    </section>
+  </main>
+`;
+
 const ARTICLE_ROUTE_RE = /^\/(?:(?:en|fr|it|de|pt)\/)?article\/[^/]+$/;
 const isReactRoute = (path) => REACT_ROUTES.has(path) || ARTICLE_ROUTE_RE.test(path);
 
@@ -411,6 +434,71 @@ const fetchReactPage = async (request, env, path) => {
   });
 };
 
+const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET") => {
+  if (requestMethod === "HEAD") return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  return new HTMLRewriter()
+    .on("html", {
+      element(element) {
+        element.setAttribute("lang", "es");
+      },
+    })
+    .on("title", {
+      element(element) {
+        element.setInnerContent(PROFITABILITY_DIAGNOSTIC_TITLE);
+      },
+    })
+    .on('meta[name="description"]', {
+      element(element) {
+        element.setAttribute("content", PROFITABILITY_DIAGNOSTIC_DESCRIPTION);
+      },
+    })
+    .on('meta[name="robots"]', {
+      element(element) {
+        element.setAttribute("content", "index, follow");
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", PROFITABILITY_DIAGNOSTIC_URL);
+      },
+    })
+    .on("body", {
+      element(element) {
+        element.append(PROFITABILITY_DIAGNOSTIC_BOT_HTML, { html: true });
+      },
+    })
+    .transform(response);
+};
+
+const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
+  const response = await env.BACKEND.fetch(request);
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!response.ok || !contentType.includes("xml") || request.method === "HEAD") return response;
+
+  const xml = await response.text();
+  if (xml.includes(`<loc>${PROFITABILITY_DIAGNOSTIC_URL}</loc>`)) {
+    return new Response(xml, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  }
+
+  const entry = `<url><loc>${PROFITABILITY_DIAGNOSTIC_URL}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`;
+  const patchedXml = xml.replace("</urlset>", `${entry}</urlset>`);
+  const headers = new Headers(response.headers);
+  headers.delete("Content-Length");
+  headers.set("X-Winerim-Sitemap-Patch", "profitability-diagnostic");
+  return new Response(patchedXml, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+};
+
 const withCataloniaDocumentMetadata = (response, requestMethod = "GET") => {
   if (requestMethod === "HEAD") return response;
   const contentType = response.headers.get("Content-Type") || "";
@@ -658,6 +746,10 @@ export default {
       return fetchCommercialPage(request, env, path);
     }
 
+    if (path === "/sitemap.xml" || path === "/sitemap") {
+      return fetchSitemapWithProfitabilityDiagnostic(request, env);
+    }
+
     if (path.startsWith(COMMERCIAL_ASSET_PREFIX)) {
       return fetchCommercialAsset(request, env, path);
     }
@@ -671,6 +763,10 @@ export default {
     }
 
     if (BOT_REGEX.test(ua)) {
+      if (path === PROFITABILITY_DIAGNOSTIC_ROUTE) {
+        const response = await fetchReactPage(request, env, path);
+        return withProfitabilityDiagnosticBotMetadata(response, request.method);
+      }
       const response = await env.BACKEND.fetch(request);
       const contentType = response.headers.get("Content-Type") || "";
       if (
