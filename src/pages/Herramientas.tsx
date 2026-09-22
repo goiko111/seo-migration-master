@@ -29,6 +29,7 @@ const content: Record<string, {
     ctaDesc: "Con Winerim, no necesitas usar estas herramientas una por una. Nuestra plataforma analiza tu carta, optimiza precios, sugiere maridajes y controla la rotación — todo en automático. Ahorra horas de gestión cada semana y aumenta tus ventas de vino.",
     ctaBtn1: "Analizar mi carta gratis", ctaBtn2: "Solicitar demo",
     tools: [
+      { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Diagnóstico de rentabilidad de bodega", desc: "Separa ahorro en compras, margen adicional, horas recuperables y capital inmovilizado con fórmulas y supuestos editables.", tag: "Diagnóstico" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
@@ -238,6 +239,7 @@ const content: Record<string, {
 };
 
 const toolIconByPath: Record<string, typeof Search> = {
+  "/herramientas/diagnostico-rentabilidad-bodega": BarChart3,
   "/wine-list-analyzer": Search,
   "/calculadora-margen-vino": Calculator,
   "/herramientas/calculadora-precio-vino-por-copa": Wine,
@@ -411,6 +413,7 @@ const goalCopy: Record<string, {
     intro: "No necesitas revisar todas las herramientas. Elige el objetivo que más se parece a tu situación y empieza por una prueba concreta.",
     action: "Abrir herramienta",
     goals: [
+      { title: "Diagnosticar la rentabilidad de mi bodega", desc: "Compras, margen, tiempo y capital inmovilizado sin mezclar magnitudes.", to: "/herramientas/diagnostico-rentabilidad-bodega" },
       { title: "Entender la salud de mi carta", desc: "Estructura, equilibrio, pricing y oportunidades principales.", to: "/wine-list-analyzer" },
       { title: "Recuperar margen", desc: "Detecta dónde se escapa margen por coste, PVP, copa o stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },

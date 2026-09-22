@@ -497,6 +497,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { esPath: '/guias/como-conectar-carta-stock-ventas-margen', priority: '0.7', changefreq: 'monthly', multilang: false },
 
   // Online tools with localized routes.
+  { esPath: '/herramientas/diagnostico-rentabilidad-bodega', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: true },

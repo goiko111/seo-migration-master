@@ -114,6 +114,7 @@ const GuiaSurtidoTicketMedio = lazy(() => import("./pages/GuiaSurtidoTicketMedio
 const GuiaCanibalizacionVinos = lazy(() => import("./pages/GuiaCanibalizacionVinos"));
 const GuiaRevisarCartaCadaMes = lazy(() => import("./pages/GuiaRevisarCartaCadaMes"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
+const RentabilidadBodega = lazy(() => import("./pages/RentabilidadBodega"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
@@ -337,6 +338,7 @@ const esRoutes = (
     <Route path="/guias/como-detectar-canibalizacion-vinos-carta" element={<GuiaCanibalizacionVinos />} />
     <Route path="/guias/como-revisar-carta-vinos-cada-mes" element={<GuiaRevisarCartaCadaMes />} />
     <Route path="/herramientas" element={<Herramientas />} />
+    <Route path="/herramientas/diagnostico-rentabilidad-bodega" element={<RentabilidadBodega />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -923,6 +925,7 @@ const DeferredAppChrome = () => {
     "/pt/apresentacao",
   ].includes(location.pathname);
   const hideGlobalConversionChrome = isCampaignLanding || isPresentation;
+  const isUngatedProfitabilityDiagnostic = location.pathname === "/herramientas/diagnostico-rentabilidad-bodega";
 
   return (
     <Suspense fallback={null}>
@@ -931,8 +934,8 @@ const DeferredAppChrome = () => {
       {!hideGlobalConversionChrome && <CookieConsent />}
       {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo'].includes(location.pathname) && <IntentTracker />}
       {!hideGlobalConversionChrome && <BackToTop />}
-      {!hideGlobalConversionChrome && <ToolsLeadPopup />}
-      {!hideGlobalConversionChrome && <FreemiumToolGuard />}
+      {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <ToolsLeadPopup />}
+      {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <FreemiumToolGuard />}
     </Suspense>
   );
 };

@@ -70,6 +70,7 @@ const REACT_ROUTES = new Set([
   ...PRODUCT_ARCHITECTURE_ROUTES,
   ...COMMERCIAL_AUDIT_ROUTES,
   "/precios-modulos-integraciones",
+  "/herramientas/diagnostico-rentabilidad-bodega",
   "/simulador-carta",
   "/en/wine-list-simulator",
   "/fr/simulateur-carte",

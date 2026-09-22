@@ -6126,6 +6126,24 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
     },
   },
+  '/herramientas/diagnostico-rentabilidad-bodega': {
+    meta: { title: 'Diagnóstico de Rentabilidad de Bodega | Winerim', description: 'Calcula escenarios de ahorro en compras, margen adicional, horas recuperables y capital inmovilizado sin mezclar las magnitudes.', canonical: `${SITE}/herramientas/diagnostico-rentabilidad-bodega`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Diagnóstico de rentabilidad de bodega',
+      subtitle: 'Compras, margen, tiempo y stock: cuatro lecturas separadas para decidir dónde actuar primero.',
+      sections: [
+        { heading: 'Cuatro magnitudes sin atajos', content: 'El diagnóstico separa ahorro de costes, margen bruto de contribución adicional, capacidad operativa recuperable y capital circulante potencialmente liberable. Las cifras no se suman ni se presentan como ROI.' },
+        { heading: 'Supuestos transparentes y editables', content: 'Cada resultado muestra su fórmula y usa los datos introducidos por el usuario. Los mínimos y máximos son escenarios, no garantías ni intervalos estadísticos.' },
+        { heading: 'Resultado antes del contacto', content: 'El cálculo completo se realiza localmente en el navegador y aparece antes de cualquier invitación a solicitar una demo.' },
+      ],
+      faqs: [
+        { q: '¿Se suman los cuatro resultados?', a: 'No. El ahorro, el margen, el tiempo y el capital son magnitudes diferentes y se mantienen separadas.' },
+        { q: '¿El capital liberable es un ingreso?', a: 'No. Es una estimación del capital que dejaría de estar inmovilizado a coste de adquisición.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Diagnóstico de rentabilidad', url: `${SITE}/herramientas/diagnostico-rentabilidad-bodega` }],
+      internalLinks: [{ label: 'Calculadora de compra inteligente', url: '/herramientas/calculadora-compra-inteligente' }, { label: 'Calculadora de stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
   '/herramientas/diagnostico-vino-por-copa': {
     meta: { title: 'Diagnóstico de Vino por Copa | Winerim', description: 'Analiza tu oferta actual de vino por copa e identifica oportunidades de mejora en selección, precio y presentación.', canonical: `${SITE}/herramientas/diagnostico-vino-por-copa`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
