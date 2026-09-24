@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   initializeOpenAIAds,
@@ -92,5 +93,31 @@ describe("OpenAI Ads Pixel", () => {
     expect(isOpenAIAdsEligiblePath("/admin")).toBe(false);
     expect(isOpenAIAdsEligiblePath("/propuesta-comercial")).toBe(false);
     expect(isOpenAIAdsEligiblePath("/presentacion/saddle")).toBe(false);
+  });
+
+  it("serves every public lead form and the legal policy from the measured release", () => {
+    const router = readFileSync("edge-router/winerim-pages-router.js", "utf8");
+    const leadRoutes = [
+      "/contacto",
+      "/en/contact",
+      "/fr/contact",
+      "/it/contatto",
+      "/de/kontakt",
+      "/pt/contacto",
+      "/demo",
+      "/en/demo",
+      "/fr/demo",
+      "/it/demo",
+      "/de/demo",
+      "/pt/demo",
+      "/meta-demo",
+    ];
+
+    for (const route of leadRoutes) {
+      expect(router).toContain(`"${route}"`);
+    }
+    expect(router).toContain('...LEAD_FORM_ROUTES');
+    expect(router).toContain('path.startsWith("/legal/")');
+    expect(router).toContain('fetchFrontend(request, env)');
   });
 });

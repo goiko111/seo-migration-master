@@ -66,9 +66,26 @@ const COMMERCIAL_AUDIT_ROUTES = new Set([
   "/pt/analise-carta",
 ]);
 
+const LEAD_FORM_ROUTES = new Set([
+  "/contacto",
+  "/en/contact",
+  "/fr/contact",
+  "/it/contatto",
+  "/de/kontakt",
+  "/pt/contacto",
+  "/demo",
+  "/en/demo",
+  "/fr/demo",
+  "/it/demo",
+  "/de/demo",
+  "/pt/demo",
+  "/meta-demo",
+]);
+
 const REACT_ROUTES = new Set([
   ...PRODUCT_ARCHITECTURE_ROUTES,
   ...COMMERCIAL_AUDIT_ROUTES,
+  ...LEAD_FORM_ROUTES,
   "/precios-modulos-integraciones",
   "/herramientas/diagnostico-rentabilidad-bodega",
   "/simulador-carta",
@@ -760,6 +777,18 @@ export default {
 
     if (!BOT_REGEX.test(ua) && BACKEND_HUMAN_ROUTES.has(path)) {
       return env.BACKEND.fetch(request);
+    }
+
+    if (path.startsWith("/legal/")) {
+      try {
+        const response = await fetchFrontend(request, env);
+        const contentType = response.headers.get("Content-Type") || "";
+        if (response.ok && !contentType.includes("text/html")) {
+          return withFrontendHeaders(response, path);
+        }
+      } catch {
+        // Fall through to the existing origin if the release asset is unavailable.
+      }
     }
 
     if (BOT_REGEX.test(ua)) {
