@@ -11,8 +11,8 @@ binding = "BACKEND"
 service = "winerim-proxy"
 
 [vars]
-FRONTEND_ORIGIN = "https://cf0778c6.winerim-origin.pages.dev"
-FRONTEND_RELEASE = "cf0778c6-profitability-diagnostic-20260922"
+FRONTEND_ORIGIN = "https://0ec77291.winerim-origin.pages.dev"
+FRONTEND_RELEASE = "0ec77291-chatgpt-ads-measurement-20260924"
 CATALONIA_ORIGIN = "https://4867c418.winerim-origin.pages.dev"
 CATALONIA_RELEASE = "4867c418-catalonia-24-plus-1-20260911"
 COMMERCIAL_ORIGIN = "https://21df23e4.winerim-origin.pages.dev"
