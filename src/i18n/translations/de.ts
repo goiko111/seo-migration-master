@@ -119,7 +119,7 @@ const de: TranslationDict = {
   pricing_title: "Pläne für jeden Geschäftstyp",
   pricing_subtitle: "Von unabhängigen Restaurants bis zu großen Gruppen. Keine Bindung.",
   cookie_title: "Wir verwenden Cookies",
-  cookie_desc: "Wir verwenden unsere eigenen und Cookies von Drittanbietern, um Ihre Erfahrung zu verbessern und die Nutzung der Website zu analysieren.",
+  cookie_desc: "Wir verwenden eigene Cookies und Cookies von Drittanbietern, um Ihre Erfahrung zu verbessern, die Nutzung der Website zu analysieren und Werbekampagnen zu messen.",
   cookie_accept: "Akzeptieren",
   cookie_reject: "Ablehnen",
   cookie_more_info: "Mehr Informationen",

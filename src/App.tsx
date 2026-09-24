@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import ScrollToTop from "./components/ScrollToTop";
+import OpenAIAdsInitializer from "./components/OpenAIAdsInitializer";
 
 const lazyRouteWithRetry = <T extends ComponentType<Record<string, never>>>(
   importer: () => Promise<{ default: T }>,
@@ -931,7 +932,7 @@ const DeferredAppChrome = () => {
     <Suspense fallback={null}>
       <Toaster />
       <Sonner position="top-center" richColors />
-      {!hideGlobalConversionChrome && <CookieConsent />}
+      {!isPresentation && !location.pathname.startsWith("/admin") && <CookieConsent />}
       {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo'].includes(location.pathname) && <IntentTracker />}
       {!hideGlobalConversionChrome && <BackToTop />}
       {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <ToolsLeadPopup />}
@@ -944,6 +945,7 @@ const App = () => (
   <BrowserRouter>
     <LanguageProvider>
       <ScrollToTop />
+      <OpenAIAdsInitializer />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {esRoutes}

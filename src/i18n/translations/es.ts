@@ -139,7 +139,7 @@ const es: TranslationDict = {
   pricing_subtitle: "Desde restaurantes independientes hasta grandes grupos. Sin permanencia.",
 
   cookie_title: "Usamos cookies",
-  cookie_desc: "Utilizamos cookies propias y de terceros para mejorar tu experiencia y analizar el uso del sitio.",
+  cookie_desc: "Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el uso del sitio y medir campañas publicitarias.",
   cookie_accept: "Aceptar",
   cookie_reject: "Rechazar",
   cookie_more_info: "Más información",

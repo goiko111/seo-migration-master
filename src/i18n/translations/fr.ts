@@ -139,7 +139,7 @@ const fr: TranslationDict = {
   pricing_subtitle: "Du restaurant indépendant aux grands groupes. Sans engagement.",
 
   cookie_title: "Nous utilisons des cookies",
-  cookie_desc: "Nous utilisons des cookies propres et tiers pour améliorer votre expérience et analyser l'utilisation du site.",
+  cookie_desc: "Nous utilisons des cookies propres et tiers pour améliorer votre expérience, analyser l'utilisation du site et mesurer les campagnes publicitaires.",
   cookie_accept: "Accepter",
   cookie_reject: "Refuser",
   cookie_more_info: "En savoir plus",

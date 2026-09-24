@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Clock, ShieldCheck, Sparkles, Phone, MessageCircle, Wine, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
@@ -18,6 +17,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getCanonicalUrl } from "@/seo/config";
+import { createLeadSubmissionId, persistLeadAndMeasure } from "@/lib/leadSubmission";
 
 const content: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string; label: string;
@@ -193,6 +193,7 @@ const content: Record<string, {
 
 const Demo = () => {
   const [submitting, setSubmitting] = useState(false);
+  const leadIdRef = useRef<string | null>(null);
   const navigate = useNavigate();
   const { lang, allLangPaths, localePath } = useLanguage();
   const c = content[lang] || content.es;
@@ -220,8 +221,10 @@ const Demo = () => {
       num_locations: (fd.get("num_locations") as string)?.trim() || null,
       main_challenge: (fd.get("main_challenge") as string)?.trim() || null,
     };
-    const { error } = await supabase.from("contact_leads").insert(leadData);
-    if (error) toast.error(c.error);
+    const leadId = leadIdRef.current ?? createLeadSubmissionId();
+    leadIdRef.current = leadId;
+    const result = await persistLeadAndMeasure(leadId, leadData);
+    if (!result.ok) toast.error(c.error);
     else {
       notifyLead(leadData);
       trackFormSubmit("demo");

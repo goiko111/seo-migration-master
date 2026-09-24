@@ -139,7 +139,7 @@ const en: TranslationDict = {
   pricing_subtitle: "From independent restaurants to large groups. No lock-in.",
 
   cookie_title: "We use cookies",
-  cookie_desc: "We use our own and third-party cookies to improve your experience and analyse site usage.",
+  cookie_desc: "We use our own and third-party cookies to improve your experience, analyse site usage and measure advertising campaigns.",
   cookie_accept: "Accept",
   cookie_reject: "Reject",
   cookie_more_info: "More info",

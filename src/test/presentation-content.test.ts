@@ -96,7 +96,7 @@ describe("multilingual Winerim presentation", () => {
     expect(app).toContain('const Presentation = lazyRouteWithRetry(() => import("./pages/Presentation"))');
     expect(app).toContain('const PresentationLegacy = lazyRouteWithRetry(() => import("./pages/PresentationLegacy"))');
     expect(app).toContain('const PartnerDeck = lazyRouteWithRetry(() => import("./pages/PartnerDeck"))');
-    expect(app).toContain("!hideGlobalConversionChrome && <CookieConsent />");
+    expect(app).toContain('!isPresentation && !location.pathname.startsWith("/admin") && <CookieConsent />');
   });
 
   it("keeps the previous presentation available as a private archive", () => {

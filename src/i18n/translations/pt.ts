@@ -119,7 +119,7 @@ const pt: TranslationDict = {
   pricing_title: "Planos adaptados a cada tipo de negócio",
   pricing_subtitle: "De restaurantes independentes a grandes grupos. Sem compromissos.",
   cookie_title: "Utilizamos cookies",
-  cookie_desc: "Utilizamos cookies próprios e de terceiros para melhorar a sua experiência e analisar a utilização do site.",
+  cookie_desc: "Utilizamos cookies próprios e de terceiros para melhorar a sua experiência, analisar a utilização do site e medir campanhas publicitárias.",
   cookie_accept: "Aceitar",
   cookie_reject: "Rejeitar",
   cookie_more_info: "Mais informações",

@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useRef, useState, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 const YouTubeFacade = lazy(() => import("@/components/YouTubeFacade"));
 import { Link } from "react-router-dom";
@@ -10,7 +10,6 @@ import ContactFormFields from "@/components/ContactFormFields";
 import { PREFIXES } from "@/components/PhoneInput";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { notifyLead } from "@/lib/notifyLead";
 import { trackFormSubmit } from "@/hooks/useIntentTracker";
@@ -19,6 +18,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getCanonicalUrl } from "@/seo/config";
+import { createLeadSubmissionId, persistLeadAndMeasure } from "@/lib/leadSubmission";
 
 const content: Record<string, {
   seo_title: string; seo_desc: string; breadcrumb: string;
@@ -106,6 +106,7 @@ const content: Record<string, {
 
 const Contacto = () => {
   const [submitting, setSubmitting] = useState(false);
+  const leadIdRef = useRef<string | null>(null);
   const navigate = useNavigate();
   const { lang, localePath, allLangPaths } = useLanguage();
   const c = content[lang] || content.es;
@@ -132,8 +133,10 @@ const Contacto = () => {
       references_count: (fd.get("references_count") as string)?.trim() || null,
       message: (fd.get("message") as string)?.trim() || null,
     };
-    const { error } = await supabase.from("contact_leads").insert(leadData);
-    if (error) toast.error(c.error);
+    const leadId = leadIdRef.current ?? createLeadSubmissionId();
+    leadIdRef.current = leadId;
+    const result = await persistLeadAndMeasure(leadId, leadData);
+    if (!result.ok) toast.error(c.error);
     else {
       notifyLead(leadData);
       trackFormSubmit("contact");

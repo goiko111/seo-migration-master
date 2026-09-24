@@ -4,6 +4,7 @@ import { Cookie, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { updateConsent, hasConsentDecision } from "@/lib/analytics";
+import { updateOpenAIAdsConsent } from "@/lib/openaiAds";
 
 const CONSENT_KEY = "winerim_cookie_consent";
 
@@ -28,6 +29,7 @@ const CookieConsent = () => {
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
     updateConsent(true);
+    updateOpenAIAdsConsent(true);
     setVisible(false);
     notifyConsentUpdated();
   };
@@ -35,6 +37,7 @@ const CookieConsent = () => {
   const reject = () => {
     localStorage.setItem(CONSENT_KEY, "rejected");
     updateConsent(false);
+    updateOpenAIAdsConsent(false);
     setVisible(false);
     notifyConsentUpdated();
   };

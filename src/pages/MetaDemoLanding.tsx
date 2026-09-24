@@ -27,6 +27,7 @@ import { notifyLead } from "@/lib/notifyLead";
 import { trackFormStart, trackFormSubmit } from "@/hooks/useIntentTracker";
 import { supabase } from "@/integrations/supabase/client";
 import winerimLogo from "@/assets/winerim-logo.webp";
+import { createLeadSubmissionId, persistLeadAndMeasure } from "@/lib/leadSubmission";
 
 const META_PIXEL_ID = "450273446324682";
 const META_DATASET_ID = META_PIXEL_ID;
@@ -284,6 +285,7 @@ const MetaDemoLanding = () => {
   const [submitting, setSubmitting] = useState(false);
   const [attribution, setAttribution] = useState<Attribution>({});
   const startedForm = useRef(false);
+  const leadIdRef = useRef<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -352,8 +354,10 @@ const MetaDemoLanding = () => {
       }),
     };
 
-    const { error } = await supabase.from("contact_leads").insert(leadData);
-    if (error) {
+    const leadId = leadIdRef.current ?? createLeadSubmissionId();
+    leadIdRef.current = leadId;
+    const result = await persistLeadAndMeasure(leadId, leadData);
+    if (!result.ok) {
       toast.error("No hemos podido enviar la solicitud. Inténtalo de nuevo.");
       setSubmitting(false);
       return;
