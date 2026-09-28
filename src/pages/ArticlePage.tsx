@@ -67,24 +67,13 @@ const ArticlePage = () => {
 
     const fetchArticle = async () => {
       // Try the language-specific slug first
-      let { data } = await supabase
+      const { data } = await supabase
         .from("articles")
         .select("slug, title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang, article_group")
         .eq("slug", dbSlug)
         .eq("published", true)
         .or(visiblePublishedAtFilter())
         .maybeSingle();
-
-      // Fallback to Spanish base slug if no translation exists
-      if (!data && lang !== "es") {
-        ({ data } = await supabase
-          .from("articles")
-          .select("slug, title, excerpt, body, image_url, category, author, author_role, published_at, related_links, lang, article_group")
-          .eq("slug", baseSlug)
-          .eq("published", true)
-          .or(visiblePublishedAtFilter())
-          .maybeSingle());
-      }
 
       if (data) {
         let hreflang: { lang: string; url: string }[] | undefined;
@@ -131,7 +120,8 @@ const ArticlePage = () => {
           hreflang,
         });
       } else {
-        const staticArticle = getArticleBySlug(baseSlug);
+        const requestedLang = legacySlugLang || lang;
+        const staticArticle = requestedLang === "es" ? getArticleBySlug(baseSlug) : undefined;
         if (staticArticle) {
           setArticle({
             title: staticArticle.title,
@@ -181,7 +171,12 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <SEOHead title={t.notFoundTitle} />
+        <SEOHead
+          title={t.notFoundTitle}
+          description={t.notFoundDesc}
+          url={localizedArticlePath(stripArticleLangSuffix(slug || ""), requestedArticleLang)}
+          noindex
+        />
         <main className="pt-32 pb-24 text-center section-padding">
           <h1 className="font-heading text-4xl font-bold mb-4">{t.notFoundTitle}</h1>
           <p className="text-muted-foreground mb-8">{t.notFoundDesc}</p>

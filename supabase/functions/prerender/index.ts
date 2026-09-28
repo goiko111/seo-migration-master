@@ -103,6 +103,24 @@ const LINK_RELEASES: Record<string, string> = {
   '/fr/article/fuites-marge-carte-vins-restaurant': '2026-08-31T09:15:00+02:00',
   '/de/article/margenverluste-weinkarte-restaurant': '2026-08-31T09:20:00+02:00',
   '/pt/article/fugas-margem-carta-vinhos-restaurante': '2026-08-31T09:25:00+02:00',
+  '/article/arquitectura-carta-vinos-estilo-pais-precio-restaurante': '2026-09-07T09:00:00+02:00',
+  '/en/article/restaurant-wine-list-architecture-style-country-price': '2026-09-07T09:05:00+02:00',
+  '/it/article/architettura-carta-vini-stile-paese-prezzo-ristorante': '2026-09-07T09:10:00+02:00',
+  '/fr/article/architecture-carte-vins-style-pays-prix-restaurant': '2026-09-07T09:15:00+02:00',
+  '/de/article/weinkarten-architektur-stil-land-preis-restaurant': '2026-09-07T09:20:00+02:00',
+  '/pt/article/arquitetura-carta-vinhos-estilo-pais-preco-restaurante': '2026-09-07T09:25:00+02:00',
+  '/article/guiones-recomendacion-vino-sala': '2026-09-14T09:00:00+02:00',
+  '/en/article/wine-recommendation-scripts-restaurant-floor': '2026-09-14T09:05:00+02:00',
+  '/it/article/copioni-consigliare-vino-sala': '2026-09-14T09:10:00+02:00',
+  '/fr/article/scripts-recommandation-vin-salle': '2026-09-14T09:15:00+02:00',
+  '/de/article/weinempfehlung-service-skripte': '2026-09-14T09:20:00+02:00',
+  '/pt/article/guioes-recomendacao-vinho-sala': '2026-09-14T09:25:00+02:00',
+  '/article/stock-dormido-bodega-rotacion-tpv-cloudrim-savia': '2026-09-28T09:00:00+02:00',
+  '/en/article/sleeping-cellar-stock-pos-cloudrim-savia-rotation': '2026-09-28T09:05:00+02:00',
+  '/it/article/stock-dormiente-cantina-rotazione-tpv-cloudrim-savia': '2026-09-28T09:10:00+02:00',
+  '/fr/article/stock-dormant-cave-rotation-tpv-cloudrim-savia': '2026-09-28T09:15:00+02:00',
+  '/de/article/schlafender-kellerbestand-rotation-pos-cloudrim-savia': '2026-09-28T09:20:00+02:00',
+  '/pt/article/stock-adormecido-adega-rotacao-pos-cloudrim-savia': '2026-09-28T09:25:00+02:00',
 };
 
 function isReleasedLink(url: string): boolean {
@@ -159,6 +177,24 @@ const ARTICLE_RELEASES: Record<string, string> = {
   'fuites-marge-carte-vins-restaurant_fr': '2026-08-31T09:15:00+02:00',
   'margenverluste-weinkarte-restaurant_de': '2026-08-31T09:20:00+02:00',
   'fugas-margem-carta-vinhos-restaurante_pt': '2026-08-31T09:25:00+02:00',
+  'arquitectura-carta-vinos-estilo-pais-precio-restaurante': '2026-09-07T09:00:00+02:00',
+  'restaurant-wine-list-architecture-style-country-price_en': '2026-09-07T09:05:00+02:00',
+  'architettura-carta-vini-stile-paese-prezzo-ristorante_it': '2026-09-07T09:10:00+02:00',
+  'architecture-carte-vins-style-pays-prix-restaurant_fr': '2026-09-07T09:15:00+02:00',
+  'weinkarten-architektur-stil-land-preis-restaurant_de': '2026-09-07T09:20:00+02:00',
+  'arquitetura-carta-vinhos-estilo-pais-preco-restaurante_pt': '2026-09-07T09:25:00+02:00',
+  'guiones-recomendacion-vino-sala': '2026-09-14T09:00:00+02:00',
+  'wine-recommendation-scripts-restaurant-floor_en': '2026-09-14T09:05:00+02:00',
+  'copioni-consigliare-vino-sala_it': '2026-09-14T09:10:00+02:00',
+  'scripts-recommandation-vin-salle_fr': '2026-09-14T09:15:00+02:00',
+  'weinempfehlung-service-skripte_de': '2026-09-14T09:20:00+02:00',
+  'guioes-recomendacao-vinho-sala_pt': '2026-09-14T09:25:00+02:00',
+  'stock-dormido-bodega-rotacion-tpv-cloudrim-savia': '2026-09-28T09:00:00+02:00',
+  'sleeping-cellar-stock-pos-cloudrim-savia-rotation_en': '2026-09-28T09:05:00+02:00',
+  'stock-dormiente-cantina-rotazione-tpv-cloudrim-savia_it': '2026-09-28T09:10:00+02:00',
+  'stock-dormant-cave-rotation-tpv-cloudrim-savia_fr': '2026-09-28T09:15:00+02:00',
+  'schlafender-kellerbestand-rotation-pos-cloudrim-savia_de': '2026-09-28T09:20:00+02:00',
+  'stock-adormecido-adega-rotacao-pos-cloudrim-savia_pt': '2026-09-28T09:25:00+02:00',
 };
 
 function isReleasedArticleSlug(slug: string): boolean {
@@ -2275,8 +2311,13 @@ const WINE_LIBRARY_STRATEGIC_LABELS: Record<string, Partial<Record<WineLibraryLa
   'Xarel-lo': { es: 'Xarel·lo', en: 'Xarel·lo', it: 'Xarel·lo', fr: 'Xarel·lo', de: 'Xarel·lo', pt: 'Xarel·lo' },
 };
 
-const wineLibraryStrategicLabel = (label: string, lang: WineLibraryLang): string =>
-  WINE_LIBRARY_STRATEGIC_LABELS[label]?.[lang] || label;
+const wineLibraryStrategicLabel = (label: string, lang: WineLibraryLang): string => {
+  const normalizedLabel = label.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase();
+  const match = Object.entries(WINE_LIBRARY_STRATEGIC_LABELS).find(([candidate]) => (
+    candidate.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase() === normalizedLabel
+  ));
+  return match?.[1]?.[lang] || label;
+};
 
 const WINE_LIBRARY_HUB_ROUTE_GROUPS: Record<string, WineLibraryHubRouteGroup[]> = {
   '/biblioteca-vino': [
@@ -2816,7 +2857,7 @@ const WINE_LIBRARY_STRATEGIC_LINKS: Record<string, { label: string; esPath: stri
 
 function wineLibraryStrategicLinks(lang: WineLibraryLang, esPath: string): { label: string; url: string }[] {
   return (WINE_LIBRARY_STRATEGIC_LINKS[esPath] || []).map((link) => ({
-    label: link.label,
+    label: wineLibraryStrategicLabel(link.label, lang),
     url: wineLibraryPath(lang, link.esPath),
   }));
 }
@@ -2866,7 +2907,9 @@ function renderWineLibraryPage(path: string): string | null {
 
   const sectionTitle = copy.sectionTitles[section] || copy.home;
   const isSectionHub = parts.length === 2;
-  const subject = isSectionHub ? sectionTitle : titleFromSlug(parts[parts.length - 1]);
+  const subject = isSectionHub
+    ? sectionTitle
+    : wineLibraryStrategicLabel(titleFromSlug(parts[parts.length - 1]), lang);
   const type = isSectionHub ? sectionTitle.toLowerCase() : copy.detailLabels[section] || copy.detailLabels.article;
   const priorityGrapeProfile = !isSectionHub && section === 'uvas'
     ? WINE_LIBRARY_PRIORITY_GRAPES[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_GRAPES[parts[parts.length - 1]]

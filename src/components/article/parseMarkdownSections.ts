@@ -3,12 +3,20 @@ export interface ParsedSection {
   content: string;
 }
 
+export function sanitizeArticleMarkdown(body: string): string {
+  return body
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/^\s*(?:winerim-content-expansion-|@secret:)[^\n]*$/gim, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 /**
  * Splits markdown body by ## headings into distinct sections.
  * Content before the first ## is treated as an intro section.
  */
 export function parseMarkdownSections(body: string): ParsedSection[] {
-  const lines = body.split("\n");
+  const lines = sanitizeArticleMarkdown(body).split("\n");
   const sections: ParsedSection[] = [];
   let currentHeading = "";
   let currentLines: string[] = [];

@@ -1020,8 +1020,8 @@ wineLibraryUi.de = {
   ...wineLibraryUi.en,
   libraryName: "Weinbibliothek",
   knowledgeBadge: "Wissen",
-  wineWord: "Bibliothek",
-  homeTitlePrefix: "Wein",
+  wineWord: "Weinbibliothek",
+  homeTitlePrefix: "",
   homeIntro: "Alles, was Restaurants über Rebsorten, Regionen, Weinstile und Pairings wissen müssen, um eine bessere Weinerfahrung zu bieten.",
   searchPlaceholder: "Rebsorten, Regionen, Stile, Pairings suchen...",
   stats: {

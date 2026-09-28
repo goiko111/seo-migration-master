@@ -204,12 +204,12 @@ const WINE_LIBRARY_BASES = {
   pt: '/pt/biblioteca-vinho',
 };
 const WINE_LIBRARY_SECTION_MAP = {
-  es: { regiones: 'regiones', uvas: 'uvas', estilos: 'estilos', maridajes: 'maridajes' },
-  en: { regiones: 'regions', uvas: 'grapes', estilos: 'styles', maridajes: 'pairings' },
-  it: { regiones: 'regioni', uvas: 'vitigni', estilos: 'stili', maridajes: 'abbinamenti' },
-  fr: { regiones: 'regions', uvas: 'cepages', estilos: 'styles-de-vin', maridajes: 'accords' },
-  de: { regiones: 'regionen', uvas: 'rebsorten', estilos: 'weinstile', maridajes: 'weinbegleitung' },
-  pt: { regiones: 'regioes', uvas: 'castas', estilos: 'estilos', maridajes: 'harmonizacoes' },
+  es: { regiones: 'regiones', uvas: 'uvas', estilos: 'estilos', maridajes: 'maridajes', 'guia-servicio': 'guia-servicio', glosario: 'glosario' },
+  en: { regiones: 'regions', uvas: 'grapes', estilos: 'styles', maridajes: 'pairings', 'guia-servicio': 'service-guide', glosario: 'glossary' },
+  it: { regiones: 'regioni', uvas: 'vitigni', estilos: 'stili', maridajes: 'abbinamenti', 'guia-servicio': 'guida-servizio', glosario: 'glossario' },
+  fr: { regiones: 'regions', uvas: 'cepages', estilos: 'styles-de-vin', maridajes: 'accords', 'guia-servicio': 'guide-service', glosario: 'glossaire' },
+  de: { regiones: 'regionen', uvas: 'rebsorten', estilos: 'weinstile', maridajes: 'weinbegleitung', 'guia-servicio': 'service-guide', glosario: 'glossar' },
+  pt: { regiones: 'regioes', uvas: 'castas', estilos: 'estilos', maridajes: 'harmonizacoes', 'guia-servicio': 'guia-servico', glosario: 'glossario' },
 };
 const WINE_LIBRARY_LEGACY_SHORTCUTS = {
   'tempranillo': '/biblioteca-vino/uvas/tempranillo',
@@ -328,6 +328,54 @@ const WORKER_LINK_RELEASES = {
   '/fr/article/lire-etiquette-vin-restaurant': '2026-07-27T09:15:00+02:00',
   '/de/article/weinetikett-lesen-restaurant': '2026-07-27T09:20:00+02:00',
   '/pt/article/como-ler-rotulo-vinho-restaurante': '2026-07-27T09:25:00+02:00',
+  '/article/como-conservar-una-botella-de-vino-abierta': '2026-08-03T09:00:00+02:00',
+  '/en/article/how-to-preserve-an-open-bottle-of-wine': '2026-08-03T09:05:00+02:00',
+  '/it/article/come-conservare-una-bottiglia-di-vino-aperta': '2026-08-03T09:10:00+02:00',
+  '/fr/article/comment-conserver-une-bouteille-de-vin-ouverte': '2026-08-03T09:15:00+02:00',
+  '/de/article/offene-weinflasche-aufbewahren': '2026-08-03T09:20:00+02:00',
+  '/pt/article/como-conservar-uma-garrafa-de-vinho-aberta': '2026-08-03T09:25:00+02:00',
+  '/article/mapa-sustituciones-vino-restaurante-biblioteca': '2026-08-10T09:00:00+02:00',
+  '/en/article/wine-substitution-map-restaurant-wine-library': '2026-08-10T09:05:00+02:00',
+  '/it/article/mappa-sostituzioni-vino-ristorante-biblioteca': '2026-08-10T09:10:00+02:00',
+  '/fr/article/carte-substitution-vin-restaurant-bibliotheque': '2026-08-10T09:15:00+02:00',
+  '/de/article/wein-substitutionskarte-restaurant-weinbibliothek': '2026-08-10T09:20:00+02:00',
+  '/pt/article/mapa-substituicoes-vinho-restaurante-biblioteca': '2026-08-10T09:25:00+02:00',
+  '/article/temperatura-servicio-vino-restaurante': '2026-08-17T09:00:00+02:00',
+  '/en/article/wine-service-temperature-restaurant': '2026-08-17T09:05:00+02:00',
+  '/it/article/temperatura-servizio-vino-ristorante': '2026-08-17T09:10:00+02:00',
+  '/fr/article/temperature-service-vin-restaurant': '2026-08-17T09:15:00+02:00',
+  '/de/article/serviertemperatur-wein-restaurant': '2026-08-17T09:20:00+02:00',
+  '/pt/article/temperatura-servico-vinho-restaurante': '2026-08-17T09:25:00+02:00',
+  '/article/matriz-maridaje-textura-acidez-grasa-restaurante': '2026-08-24T09:00:00+02:00',
+  '/en/article/pairing-matrix-texture-acidity-fat-restaurant': '2026-08-24T09:05:00+02:00',
+  '/it/article/matrice-abbinamenti-texture-acidita-grasso-ristorante': '2026-08-24T09:10:00+02:00',
+  '/fr/article/matrice-accords-texture-acidite-gras-restaurant': '2026-08-24T09:15:00+02:00',
+  '/de/article/pairing-matrix-textur-saeure-fett-restaurant': '2026-08-24T09:20:00+02:00',
+  '/pt/article/matriz-harmonizacao-textura-acidez-gordura-restaurante': '2026-08-24T09:25:00+02:00',
+  '/article/fugas-margen-carta-vinos-restaurante': '2026-08-31T09:00:00+02:00',
+  '/en/article/wine-list-margin-leaks-restaurant': '2026-08-31T09:05:00+02:00',
+  '/it/article/fughe-margine-carta-vini-ristorante': '2026-08-31T09:10:00+02:00',
+  '/fr/article/fuites-marge-carte-vins-restaurant': '2026-08-31T09:15:00+02:00',
+  '/de/article/margenverluste-weinkarte-restaurant': '2026-08-31T09:20:00+02:00',
+  '/pt/article/fugas-margem-carta-vinhos-restaurante': '2026-08-31T09:25:00+02:00',
+  '/article/arquitectura-carta-vinos-estilo-pais-precio-restaurante': '2026-09-07T09:00:00+02:00',
+  '/en/article/restaurant-wine-list-architecture-style-country-price': '2026-09-07T09:05:00+02:00',
+  '/it/article/architettura-carta-vini-stile-paese-prezzo-ristorante': '2026-09-07T09:10:00+02:00',
+  '/fr/article/architecture-carte-vins-style-pays-prix-restaurant': '2026-09-07T09:15:00+02:00',
+  '/de/article/weinkarten-architektur-stil-land-preis-restaurant': '2026-09-07T09:20:00+02:00',
+  '/pt/article/arquitetura-carta-vinhos-estilo-pais-preco-restaurante': '2026-09-07T09:25:00+02:00',
+  '/article/guiones-recomendacion-vino-sala': '2026-09-14T09:00:00+02:00',
+  '/en/article/wine-recommendation-scripts-restaurant-floor': '2026-09-14T09:05:00+02:00',
+  '/it/article/copioni-consigliare-vino-sala': '2026-09-14T09:10:00+02:00',
+  '/fr/article/scripts-recommandation-vin-salle': '2026-09-14T09:15:00+02:00',
+  '/de/article/weinempfehlung-service-skripte': '2026-09-14T09:20:00+02:00',
+  '/pt/article/guioes-recomendacao-vinho-sala': '2026-09-14T09:25:00+02:00',
+  '/article/stock-dormido-bodega-rotacion-tpv-cloudrim-savia': '2026-09-28T09:00:00+02:00',
+  '/en/article/sleeping-cellar-stock-pos-cloudrim-savia-rotation': '2026-09-28T09:05:00+02:00',
+  '/it/article/stock-dormiente-cantina-rotazione-tpv-cloudrim-savia': '2026-09-28T09:10:00+02:00',
+  '/fr/article/stock-dormant-cave-rotation-tpv-cloudrim-savia': '2026-09-28T09:15:00+02:00',
+  '/de/article/schlafender-kellerbestand-rotation-pos-cloudrim-savia': '2026-09-28T09:20:00+02:00',
+  '/pt/article/stock-adormecido-adega-rotacao-pos-cloudrim-savia': '2026-09-28T09:25:00+02:00',
 };
 
 function isWorkerLinkVisible(url) {
@@ -1767,6 +1815,96 @@ function escapeHtml(value) {
   return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+const SPA_SHELL_COPY = {
+  es: { library: 'Biblioteca de vino', article: 'Artículo de vino', learn: 'Aprender vino', blog: 'Blog de vino', description: 'Conocimiento práctico para mejorar carta, servicio, venta, rotación y rentabilidad del vino en restauración.' },
+  en: { library: 'Wine library', article: 'Wine article', learn: 'Learn wine', blog: 'Wine blog', description: 'Practical knowledge to improve wine lists, service, sales, rotation and profitability in hospitality.' },
+  it: { library: 'Biblioteca del vino', article: 'Articolo sul vino', learn: 'Imparare il vino', blog: 'Blog sul vino', description: 'Conoscenze pratiche per migliorare carta, servizio, vendita, rotazione e redditività del vino.' },
+  fr: { library: 'Bibliothèque du vin', article: 'Article sur le vin', learn: 'Apprendre le vin', blog: 'Blog du vin', description: 'Des connaissances pratiques pour améliorer carte, service, vente, rotation et rentabilité du vin.' },
+  de: { library: 'Weinbibliothek', article: 'Weinartikel', learn: 'Wein lernen', blog: 'Weinblog', description: 'Praxiswissen für Weinkarte, Service, Verkauf, Rotation und Rentabilität in der Gastronomie.' },
+  pt: { library: 'Biblioteca do vinho', article: 'Artigo sobre vinho', learn: 'Aprender vinho', blog: 'Blog de vinho', description: 'Conhecimento prático para melhorar carta, serviço, venda, rotação e rentabilidade do vinho.' },
+};
+
+const SPA_SHELL_LIBRARY_SECTIONS = {
+  es: { regiones: 'Regiones vinícolas', uvas: 'Variedades de uva', estilos: 'Estilos de vino', maridajes: 'Maridajes', 'guia-servicio': 'Guía de servicio', glosario: 'Glosario del vino' },
+  en: { regiones: 'Wine regions', uvas: 'Grape varieties', estilos: 'Wine styles', maridajes: 'Wine pairings', 'guia-servicio': 'Service guide', glosario: 'Wine glossary' },
+  it: { regiones: 'Regioni vinicole', uvas: 'Vitigni', estilos: 'Stili di vino', maridajes: 'Abbinamenti', 'guia-servicio': 'Guida di servizio', glosario: 'Glossario del vino' },
+  fr: { regiones: 'Régions viticoles', uvas: 'Cépages', estilos: 'Styles de vin', maridajes: 'Accords mets-vins', 'guia-servicio': 'Guide de service', glosario: 'Glossaire du vin' },
+  de: { regiones: 'Weinregionen', uvas: 'Rebsorten', estilos: 'Weinstile', maridajes: 'Weinbegleitung', 'guia-servicio': 'Service-Guide', glosario: 'Weinglossar' },
+  pt: { regiones: 'Regiões vinícolas', uvas: 'Castas', estilos: 'Estilos de vinho', maridajes: 'Harmonizações', 'guia-servicio': 'Guia de serviço', glosario: 'Glossário do vinho' },
+};
+
+const SPA_SHELL_TERM_LABELS = {
+  'carnes-rojas': { es: 'Carnes rojas', en: 'Red meat', it: 'Carni rosse', fr: 'Viandes rouges', de: 'Rotes Fleisch', pt: 'Carnes vermelhas' },
+  'pescados-y-mariscos': { es: 'Pescados y mariscos', en: 'Fish and seafood', it: 'Pesce e frutti di mare', fr: 'Poissons et fruits de mer', de: 'Fisch und Meeresfrüchte', pt: 'Peixes e mariscos' },
+  'lubina-dorada': { es: 'Lubina y dorada', en: 'Sea bass and sea bream', it: 'Branzino e orata', fr: 'Bar et dorade', de: 'Wolfsbarsch und Dorade', pt: 'Robalo e dourada' },
+};
+
+function titleFromPathSlug(slug) {
+  return String(slug || '').split('-').filter(Boolean).map((part) => (
+    part.length <= 3 ? part.toUpperCase() : `${part.charAt(0).toUpperCase()}${part.slice(1)}`
+  )).join(' ');
+}
+
+function getSpaShellMetadata(path, site) {
+  const lang = path.match(/^\/(en|it|fr|de|pt)(?:\/|$)/)?.[1] || 'es';
+  const copy = SPA_SHELL_COPY[lang] || SPA_SHELL_COPY.es;
+
+  for (const [candidateLang, base] of Object.entries(WINE_LIBRARY_BASES)) {
+    if (path !== base && !path.startsWith(`${base}/`)) continue;
+    const relative = path === base ? '' : path.slice(base.length + 1);
+    const parts = relative.split('/').filter(Boolean);
+    const localizedSection = parts[0];
+    const section = Object.entries(WINE_LIBRARY_SECTION_MAP[candidateLang] || {}).find(([, value]) => value === localizedSection)?.[0];
+    const isHub = parts.length <= 1;
+    const slug = parts[parts.length - 1];
+    const subject = !relative
+      ? copy.library
+      : isHub
+        ? (SPA_SHELL_LIBRARY_SECTIONS[lang]?.[section] || copy.library)
+        : (SPA_SHELL_TERM_LABELS[slug]?.[lang] || titleFromPathSlug(slug));
+    const type = SPA_SHELL_LIBRARY_SECTIONS[lang]?.[section] || copy.library;
+    return {
+      lang,
+      title: `${isHub ? subject : `${subject}: ${type}`} | Winerim`,
+      description: copy.description,
+      canonical: `${site}${path}`,
+    };
+  }
+
+  const articlePath = /^\/(?:(?:en|it|fr|de|pt)\/)?article\//.test(path);
+  if (articlePath) return { lang, title: `${copy.article} | Winerim`, description: copy.description, canonical: `${site}${path}` };
+
+  const learnPaths = new Set(['/aprender-vino', '/en/learn-wine', '/it/imparare-il-vino', '/fr/apprendre-le-vin', '/de/wein-lernen', '/pt/aprender-vinho']);
+  if (learnPaths.has(path)) return { lang, title: `${copy.learn} | Winerim`, description: copy.description, canonical: `${site}${path}` };
+
+  const blogPaths = new Set(['/blog', '/en/blog', '/it/blog', '/fr/blog', '/de/blog', '/pt/blog']);
+  if (blogPaths.has(path)) return { lang, title: `${copy.blog} | Winerim`, description: copy.description, canonical: `${site}${path}` };
+  return null;
+}
+
+function rewriteSpaShellMetadata(html, path, site) {
+  const meta = getSpaShellMetadata(path, site);
+  if (!meta || !html) return html;
+
+  const tags = [
+    `<title>${escapeHtml(meta.title)}</title>`,
+    `<meta name="description" content="${escapeHtml(meta.description)}">`,
+    `<link rel="canonical" href="${escapeHtml(meta.canonical)}">`,
+    `<meta property="og:title" content="${escapeHtml(meta.title)}">`,
+    `<meta property="og:description" content="${escapeHtml(meta.description)}">`,
+    `<meta property="og:url" content="${escapeHtml(meta.canonical)}">`,
+    '<!-- worker-shell-metadata -->',
+  ].join('\n    ');
+
+  return html
+    .replace(/<html\b([^>]*)\blang=["'][^"']*["']([^>]*)>/i, `<html$1lang="${meta.lang}"$2>`)
+    .replace(/<title>[\s\S]*?<\/title>\s*/i, '')
+    .replace(/<meta\b[^>]*\bname=["']description["'][^>]*>\s*/gi, '')
+    .replace(/<link\b[^>]*\brel=["']canonical["'][^>]*>\s*/gi, '')
+    .replace(/<meta\b[^>]*\bproperty=["']og:(?:title|description|url)["'][^>]*>\s*/gi, '')
+    .replace(/<\/head>/i, `    ${tags}\n  </head>`);
+}
+
 function escapeRegex(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -2772,7 +2910,11 @@ async function proxyToOrigin(request, env, path, search, extraHeaders = {}) {
   const responseHeaders = new Headers(res.headers);
   const contentType = responseHeaders.get('Content-Type') || '';
   if (contentType.includes('text/html')) {
-    const html = injectLegalFooterPatch(await res.text());
+    const html = rewriteSpaShellMetadata(
+      injectLegalFooterPatch(await res.text()),
+      path,
+      env.SITE_URL || 'https://winerim.wine',
+    );
     responseHeaders.delete('Content-Length');
     responseHeaders.set('X-Frame-Options', 'SAMEORIGIN');
     responseHeaders.set('X-Content-Type-Options', 'nosniff');
@@ -3139,15 +3281,33 @@ export default {
         const html = await res.text();
         const looksLikeHtml = /^\s*(?:<!doctype html|<html\b)/i.test(html);
         if (ct.includes('text/html') || looksLikeHtml) {
-          const robotsTag = getXRobotsTag(path, hostname);
+          const robotsTag = getXRobotsTag(path, hostname)
+            || res.headers.get('X-Robots-Tag')
+            || (!res.ok ? 'noindex, follow' : null);
           const headers = {
             'Content-Type': 'text/html; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+            'Cache-Control': res.ok ? 'public, max-age=3600, s-maxage=86400' : 'public, max-age=300',
             'X-Prerendered': 'true',
-            'X-Worker-Branch': 'bot-prerender',
+            'X-Worker-Branch': res.ok ? 'bot-prerender' : 'bot-prerender-error',
+            'X-Prerender-Upstream-Status': String(res.status),
           };
           if (robotsTag) headers['X-Robots-Tag'] = robotsTag;
-          return new Response(html, { status: 200, headers });
+          const unavailable = res.headers.get('X-Prerender-Article-Unavailable');
+          if (unavailable) headers['X-Prerender-Article-Unavailable'] = unavailable;
+          return new Response(html, { status: res.status, statusText: res.statusText, headers });
+        }
+        if (!res.ok) {
+          return new Response(html || 'Not found', {
+            status: res.status,
+            statusText: res.statusText,
+            headers: {
+              'Content-Type': ct || 'text/plain; charset=utf-8',
+              'Cache-Control': 'public, max-age=300',
+              'X-Robots-Tag': 'noindex, follow',
+              'X-Worker-Branch': 'bot-prerender-error',
+              'X-Prerender-Upstream-Status': String(res.status),
+            },
+          });
         }
       } catch (e) {
         console.error('Prerender error:', e);

@@ -50,6 +50,15 @@ const langToLocale: Record<string, string> = {
   es: "es-ES", en: "en-US", it: "it-IT", fr: "fr-FR", de: "de-DE", pt: "pt-PT",
 };
 
+const emptyState: Record<string, { title: string; description: string }> = {
+  es: { title: "Próximos artículos", description: "Estamos preparando nuevas guías prácticas sobre carta, servicio y rentabilidad del vino." },
+  en: { title: "More articles coming soon", description: "We are preparing practical guides on wine lists, service and profitability." },
+  it: { title: "Nuovi articoli in arrivo", description: "Stiamo preparando guide pratiche su carta vini, servizio e redditività." },
+  fr: { title: "De nouveaux articles arrivent", description: "Nous préparons des guides pratiques sur la carte, le service et la rentabilité du vin." },
+  de: { title: "Weitere Artikel folgen", description: "Wir bereiten praktische Leitfäden zu Weinkarte, Service und Rentabilität vor." },
+  pt: { title: "Mais artigos em breve", description: "Estamos a preparar guias práticos sobre carta de vinhos, serviço e rentabilidade." },
+};
+
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
@@ -80,39 +89,20 @@ const Blog = () => {
             publishedAt: a.published_at,
           };
         }));
-      } else {
-        // Fallback: if no articles in this language, show Spanish
-        const { data: fallbackData } = await supabase
-          .from("articles")
-          .select("slug, title, excerpt, image_url, category, published_at")
-          .eq("published", true)
-          .eq("lang", "es")
-          .neq("category", "interview")
-          .or(visiblePublishedAtFilter())
-          .order("published_at", { ascending: false });
-
-        if (fallbackData && fallbackData.length > 0) {
-          setBlogPosts(fallbackData.map(a => ({
+      } else if (lang === "es") {
+        const staticPosts = Object.values(staticArticles)
+          .filter(a => a.type !== "interview")
+          .map(a => ({
             title: a.title,
-            excerpt: a.excerpt || "",
-            image: a.image_url || "",
+            excerpt: a.subtitle || "",
+            image: a.heroImage,
             category: a.category,
-            slug: localizedArticlePath(a.slug, lang),
-            publishedAt: a.published_at,
-          })));
-        } else {
-          const staticPosts = Object.values(staticArticles)
-            .filter(a => a.type !== "interview")
-            .map(a => ({
-              title: a.title,
-              excerpt: a.subtitle || "",
-              image: a.heroImage,
-              category: a.category,
-              slug: localizedArticlePath(a.slug, lang),
-              publishedAt: null,
-            }));
-          setBlogPosts(staticPosts);
-        }
+            slug: localizedArticlePath(a.slug, "es"),
+            publishedAt: null,
+          }));
+        setBlogPosts(staticPosts);
+      } else {
+        setBlogPosts([]);
       }
       setLoading(false);
     };
@@ -155,6 +145,15 @@ const Blog = () => {
             </motion.p>
           </div>
         </section>
+
+        {!featured && (
+          <section className="max-w-6xl mx-auto px-6 md:px-12 pb-16" aria-live="polite">
+            <div className="border-y border-border py-10">
+              <h2 className="font-heading text-2xl font-bold mb-3">{emptyState[lang]?.title || emptyState.es.title}</h2>
+              <p className="text-muted-foreground max-w-2xl">{emptyState[lang]?.description || emptyState.es.description}</p>
+            </div>
+          </section>
+        )}
 
         {/* Featured article â full width card */}
         {featured && (
