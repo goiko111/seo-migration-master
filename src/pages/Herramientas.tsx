@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart, Target, Building2, PieChart, ShieldAlert } from "lucide-react";
+import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart, Target, Building2, PieChart, ShieldAlert, Clock3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -241,6 +241,7 @@ const content: Record<string, {
 
 const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/diagnostico-rentabilidad-bodega": BarChart3,
+  "/herramientas/calculadora-tiempo-operativo": Clock3,
   "/wine-list-analyzer": Search,
   "/calculadora-margen-vino": Calculator,
   "/herramientas/calculadora-precio-vino-por-copa": Wine,
@@ -415,6 +416,7 @@ const goalCopy: Record<string, {
     action: "Abrir herramienta",
     goals: [
       { title: "Diagnosticar la rentabilidad de mi bodega", desc: "Compras, margen, tiempo y capital inmovilizado sin mezclar magnitudes.", to: "/herramientas/diagnostico-rentabilidad-bodega" },
+      { title: "Recuperar tiempo operativo", desc: "Compara tus tareas manuales con un escenario editable usando Winerim.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Entender la salud de mi carta", desc: "Estructura, equilibrio, pricing y oportunidades principales.", to: "/wine-list-analyzer" },
       { title: "Recuperar margen", desc: "Detecta dónde se escapa margen por coste, PVP, copa o stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },

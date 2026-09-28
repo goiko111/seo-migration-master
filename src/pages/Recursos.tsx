@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Download, Wine, Search, DollarSign, BarChart3, Brain,
   FileText, CheckCircle, Layers, Building2, TrendingUp,
-  ArrowRight, Package, Sparkles, PieChart, Target, Calendar
+  ArrowRight, Package, Sparkles, PieChart, Target, Calendar, Clock3
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -312,9 +312,86 @@ const taxonomyFilterLabels: Record<string, Record<string, string>> = {
 };
 const taxonomyKeys = ["all", "pricing", "rotación", "copa", "equipo", "estructura", "rentabilidad", "analítica", "grupo"];
 
+type ResourceJourney = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  action: string;
+  paths: {
+    title: string;
+    desc: string;
+    to: string;
+    icon: React.ElementType;
+  }[];
+};
+
+const resourceJourneys: Record<string, ResourceJourney> = {
+  es: {
+    eyebrow: "Empieza por una decisión",
+    title: "Dos recorridos para pasar del diagnóstico a la acción",
+    intro: "Obtén primero una estimación útil. Después podrás elegir la plantilla, checklist o funcionalidad de Winerim que corresponda.",
+    action: "Empezar diagnóstico",
+    paths: [
+      { title: "Mejorar la rentabilidad", desc: "Separa compras, margen, tiempo y capital inmovilizado sin mezclar magnitudes.", to: "/herramientas/diagnostico-rentabilidad-bodega", icon: TrendingUp },
+      { title: "Recuperar tiempo operativo", desc: "Calcula cuánto tiempo dedicas a tareas manuales y edita el escenario tarea por tarea.", to: "/herramientas/calculadora-tiempo-operativo", icon: Clock3 },
+    ],
+  },
+  en: {
+    eyebrow: "Start with a decision",
+    title: "Two paths from diagnosis to action",
+    intro: "Get a useful starting point, then choose the template, checklist or Winerim capability that fits the result.",
+    action: "Start here",
+    paths: [
+      { title: "Improve profitability", desc: "Find margin leakage across cost, pricing, by-the-glass and purchasing.", to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: TrendingUp },
+      { title: "Recover operating time", desc: "Begin with a structured monthly review and identify recurring manual work.", to: "/recursos/plantilla-revision-mensual-carta", icon: Clock3 },
+    ],
+  },
+  it: {
+    eyebrow: "Parti da una decisione",
+    title: "Due percorsi dalla diagnosi all'azione",
+    intro: "Ottieni un punto di partenza utile, poi scegli il modello, la checklist o la funzione Winerim adatta.",
+    action: "Inizia qui",
+    paths: [
+      { title: "Migliorare la redditività", desc: "Individua le perdite tra costo, prezzo, calice e acquisti.", to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: TrendingUp },
+      { title: "Recuperare tempo operativo", desc: "Parti da una revisione mensile strutturata e individua il lavoro manuale ricorrente.", to: "/recursos/plantilla-revision-mensual-carta", icon: Clock3 },
+    ],
+  },
+  fr: {
+    eyebrow: "Commencez par une décision",
+    title: "Deux parcours du diagnostic à l'action",
+    intro: "Obtenez un point de départ utile, puis choisissez le modèle, la checklist ou la fonction Winerim adaptée.",
+    action: "Commencer ici",
+    paths: [
+      { title: "Améliorer la rentabilité", desc: "Repérez les pertes liées au coût, au prix, au verre et aux achats.", to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: TrendingUp },
+      { title: "Récupérer du temps opérationnel", desc: "Commencez par une revue mensuelle structurée et identifiez le travail manuel récurrent.", to: "/recursos/plantilla-revision-mensual-carta", icon: Clock3 },
+    ],
+  },
+  de: {
+    eyebrow: "Mit einer Entscheidung beginnen",
+    title: "Zwei Wege von der Diagnose zur Umsetzung",
+    intro: "Erhalten Sie einen nützlichen Ausgangspunkt und wählen Sie danach Vorlage, Checkliste oder passende Winerim-Funktion.",
+    action: "Hier starten",
+    paths: [
+      { title: "Rentabilität verbessern", desc: "Erkennen Sie Verluste bei Kosten, Preis, Glasverkauf und Einkauf.", to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: TrendingUp },
+      { title: "Operative Zeit zurückgewinnen", desc: "Starten Sie mit einer strukturierten Monatsprüfung und erkennen Sie wiederkehrende Handarbeit.", to: "/recursos/plantilla-revision-mensual-carta", icon: Clock3 },
+    ],
+  },
+  pt: {
+    eyebrow: "Comece por uma decisão",
+    title: "Dois percursos do diagnóstico à ação",
+    intro: "Obtenha um ponto de partida útil e depois escolha o modelo, checklist ou funcionalidade Winerim adequada.",
+    action: "Começar aqui",
+    paths: [
+      { title: "Melhorar a rentabilidade", desc: "Detete perdas por custo, preço, copo e compras.", to: "/recursos/diagnostico-fuga-margen-carta-vinos", icon: TrendingUp },
+      { title: "Recuperar tempo operacional", desc: "Comece por uma revisão mensal estruturada e identifique o trabalho manual recorrente.", to: "/recursos/plantilla-revision-mensual-carta", icon: Clock3 },
+    ],
+  },
+};
+
 const Recursos = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = langContent[lang] || langContent.es;
+  const journey = resourceJourneys[lang] || resourceJourneys.es;
   const texts = resourceTexts[lang] || resourceTexts.es;
   const [filter, setFilter] = useState("all");
 
@@ -334,12 +411,8 @@ const Recursos = () => {
         hreflang={allLangPaths("/recursos")} />
       <main>
         {/* ── Hero ── */}
-        <section className="pt-32 pb-14 section-padding relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-emerald-500/3 rounded-full blur-[160px]" />
-            <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] bg-wine/4 rounded-full blur-[120px]" />
-          </div>
-          <div className="relative max-w-5xl mx-auto px-6 md:px-12">
+        <section className="pt-32 pb-14 section-padding">
+          <div className="max-w-5xl mx-auto px-6 md:px-12">
             <Breadcrumbs items={[{ label: lang === "es" ? "Recursos" : lang === "en" ? "Resources" : lang === "it" ? "Risorse" : "Ressources" }]} />
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/5 mb-6">
@@ -375,8 +448,41 @@ const Recursos = () => {
           </div>
         </section>
 
+        <section className="border-y border-border bg-card/20">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16">
+            <div className="max-w-3xl mb-8">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3">{journey.eyebrow}</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{journey.title}</h2>
+              <p className="text-muted-foreground leading-relaxed">{journey.intro}</p>
+            </div>
+            <div className="grid md:grid-cols-2 border-t border-border">
+              {journey.paths.map((path, index) => {
+                const Icon = path.icon;
+                return (
+                  <Link
+                    key={path.title}
+                    to={localePath(path.to)}
+                    className={`group flex min-h-40 gap-5 border-b border-border p-6 transition-colors duration-150 hover:bg-wine/5 active:bg-wine/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${index === 0 ? "md:border-r" : ""}`}
+                  >
+                    <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-wine/25 text-wine">
+                      <Icon size={19} />
+                    </span>
+                    <span className="flex min-w-0 flex-1 flex-col">
+                      <span className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors duration-150">{path.title}</span>
+                      <span className="text-sm text-muted-foreground leading-relaxed mb-4">{path.desc}</span>
+                      <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                        {journey.action} <ArrowRight size={14} />
+                      </span>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* ── Filter + Grid ── */}
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16">
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16">
           {/* Filters */}
           <ScrollReveal>
             <div className="flex flex-wrap gap-2 mb-8">
