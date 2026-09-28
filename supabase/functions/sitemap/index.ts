@@ -498,6 +498,7 @@ const STATIC_ROUTES: StaticRoute[] = [
 
   // Online tools with localized routes.
   { esPath: '/herramientas/diagnostico-rentabilidad-bodega', priority: '0.8', changefreq: 'monthly', multilang: false },
+  { esPath: '/herramientas/calculadora-tiempo-operativo', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/diagnostico-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },
   { esPath: '/herramientas/wine-list-score', priority: '0.7', changefreq: 'monthly', multilang: true },

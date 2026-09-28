@@ -116,6 +116,7 @@ const GuiaCanibalizacionVinos = lazy(() => import("./pages/GuiaCanibalizacionVin
 const GuiaRevisarCartaCadaMes = lazy(() => import("./pages/GuiaRevisarCartaCadaMes"));
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const RentabilidadBodega = lazy(() => import("./pages/RentabilidadBodega"));
+const CalculadoraTiempoOperativo = lazy(() => import("./pages/CalculadoraTiempoOperativo"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
@@ -344,6 +345,7 @@ const esRoutes = (
     <Route path="/guias/como-revisar-carta-vinos-cada-mes" element={<GuiaRevisarCartaCadaMes />} />
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-rentabilidad-bodega" element={<RentabilidadBodega />} />
+    <Route path="/herramientas/calculadora-tiempo-operativo" element={<CalculadoraTiempoOperativo />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -934,7 +936,10 @@ const DeferredAppChrome = () => {
     "/pt/apresentacao",
   ].includes(location.pathname);
   const hideGlobalConversionChrome = isCampaignLanding || isPresentation;
-  const isUngatedProfitabilityDiagnostic = location.pathname === "/herramientas/diagnostico-rentabilidad-bodega";
+  const isUngatedDecisionTool = [
+    "/herramientas/diagnostico-rentabilidad-bodega",
+    "/herramientas/calculadora-tiempo-operativo",
+  ].includes(location.pathname);
 
   return (
     <Suspense fallback={null}>
@@ -943,8 +948,8 @@ const DeferredAppChrome = () => {
       {!isPresentation && !location.pathname.startsWith("/admin") && <CookieConsent />}
       {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo', '/propuesta-comercial-melia', '/propuesta-comercial-melia-paradisus-los-cabos'].includes(location.pathname) && <IntentTracker />}
       {!hideGlobalConversionChrome && <BackToTop />}
-      {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <ToolsLeadPopup />}
-      {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <FreemiumToolGuard />}
+      {!hideGlobalConversionChrome && !isUngatedDecisionTool && <ToolsLeadPopup />}
+      {!hideGlobalConversionChrome && !isUngatedDecisionTool && <FreemiumToolGuard />}
     </Suspense>
   );
 };

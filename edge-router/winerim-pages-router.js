@@ -88,6 +88,7 @@ const REACT_ROUTES = new Set([
   ...LEAD_FORM_ROUTES,
   "/precios-modulos-integraciones",
   "/herramientas/diagnostico-rentabilidad-bodega",
+  "/herramientas/calculadora-tiempo-operativo",
   "/simulador-carta",
   "/en/wine-list-simulator",
   "/fr/simulateur-carte",
@@ -138,6 +139,29 @@ const PROFITABILITY_DIAGNOSTIC_BOT_HTML = `
     <section>
       <h2>Resultado antes del contacto</h2>
       <p>El cálculo completo se realiza localmente en el navegador y aparece antes de cualquier invitación a solicitar una demo.</p>
+    </section>
+  </main>
+`;
+
+const OPERATIONAL_TIME_ROUTE = "/herramientas/calculadora-tiempo-operativo";
+const OPERATIONAL_TIME_URL = `https://winerim.wine${OPERATIONAL_TIME_ROUTE}`;
+const OPERATIONAL_TIME_TITLE = "Calculadora de Tiempo Operativo | Winerim";
+const OPERATIONAL_TIME_DESCRIPTION = "Estima horas recuperables al actualizar la carta, revisar márgenes, procesar documentos, conciliar el TPV y preparar informes.";
+const OPERATIONAL_TIME_BOT_HTML = `
+  <main id="winerim-operational-time-calculator">
+    <h1>Calculadora de tiempo operativo recuperable</h1>
+    <p>Compara el tiempo manual actual con un escenario usando Winerim, tarea por tarea y sin convertir horas en ahorro salarial.</p>
+    <section>
+      <h2>Ocho tareas editables</h2>
+      <p>Actualización de carta y precios, márgenes, documentos, conciliación de ventas, stock y TPV, distribuidores, informes, grupos y formación del equipo.</p>
+    </section>
+    <section>
+      <h2>Fórmula transparente</h2>
+      <p>El resultado por tarea es la diferencia entre minutos actuales y minutos estimados con Winerim, multiplicada por la frecuencia mensual. Los resultados se muestran por semana, mes y año.</p>
+    </section>
+    <section>
+      <h2>Sin garantía ni formulario obligatorio</h2>
+      <p>Todos los supuestos son editables, el cálculo se realiza localmente y el resultado aparece antes de cualquier invitación comercial.</p>
     </section>
   </main>
 `;
@@ -494,13 +518,62 @@ const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET")
     .transform(response);
 };
 
+const withOperationalTimeBotMetadata = (response, requestMethod = "GET") => {
+  if (requestMethod === "HEAD") return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  return new HTMLRewriter()
+    .on("html", {
+      element(element) {
+        element.setAttribute("lang", "es");
+      },
+    })
+    .on("title", {
+      element(element) {
+        element.setInnerContent(OPERATIONAL_TIME_TITLE);
+      },
+    })
+    .on('meta[name="description"]', {
+      element(element) {
+        element.setAttribute("content", OPERATIONAL_TIME_DESCRIPTION);
+      },
+    })
+    .on('meta[name="robots"]', {
+      element(element) {
+        element.setAttribute("content", "index, follow");
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", OPERATIONAL_TIME_URL);
+      },
+    })
+    .on("body", {
+      element(element) {
+        element.append(OPERATIONAL_TIME_BOT_HTML, { html: true });
+      },
+    })
+    .transform(response);
+};
+
 const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
   const response = await env.BACKEND.fetch(request);
   const contentType = response.headers.get("Content-Type") || "";
   if (!response.ok || !contentType.includes("xml") || request.method === "HEAD") return response;
 
   const xml = await response.text();
-  if (xml.includes(`<loc>${PROFITABILITY_DIAGNOSTIC_URL}</loc>`)) {
+  const urls = [PROFITABILITY_DIAGNOSTIC_URL, OPERATIONAL_TIME_URL];
+  let patchedXml = xml;
+  const added = [];
+  for (const targetUrl of urls) {
+    if (patchedXml.includes(`<loc>${targetUrl}</loc>`)) continue;
+    const entry = `<url><loc>${targetUrl}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`;
+    patchedXml = patchedXml.replace("</urlset>", `${entry}</urlset>`);
+    added.push(targetUrl);
+  }
+
+  if (added.length === 0) {
     return new Response(xml, {
       status: response.status,
       statusText: response.statusText,
@@ -508,11 +581,9 @@ const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
     });
   }
 
-  const entry = `<url><loc>${PROFITABILITY_DIAGNOSTIC_URL}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`;
-  const patchedXml = xml.replace("</urlset>", `${entry}</urlset>`);
   const headers = new Headers(response.headers);
   headers.delete("Content-Length");
-  headers.set("X-Winerim-Sitemap-Patch", "profitability-diagnostic");
+  headers.set("X-Winerim-Sitemap-Patch", "decision-tools");
   return new Response(patchedXml, {
     status: response.status,
     statusText: response.statusText,
@@ -830,6 +901,10 @@ export default {
       if (path === PROFITABILITY_DIAGNOSTIC_ROUTE) {
         const response = await fetchReactPage(request, env, path);
         return withProfitabilityDiagnosticBotMetadata(response, request.method);
+      }
+      if (path === OPERATIONAL_TIME_ROUTE) {
+        const response = await fetchReactPage(request, env, path);
+        return withOperationalTimeBotMetadata(response, request.method);
       }
       const response = await env.BACKEND.fetch(request);
       const contentType = response.headers.get("Content-Type") || "";

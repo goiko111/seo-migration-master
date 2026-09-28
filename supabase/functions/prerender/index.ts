@@ -6187,6 +6187,24 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Calculadora de compra inteligente', url: '/herramientas/calculadora-compra-inteligente' }, { label: 'Calculadora de stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Demo', url: '/demo' }],
     },
   },
+  '/herramientas/calculadora-tiempo-operativo': {
+    meta: { title: 'Calculadora de Tiempo Operativo | Winerim', description: 'Estima horas recuperables al actualizar la carta, revisar márgenes, procesar documentos, conciliar el TPV y preparar informes.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Calculadora de tiempo operativo recuperable',
+      subtitle: 'Compara el tiempo manual actual con un escenario usando Winerim, tarea por tarea y sin convertir horas en ahorro salarial.',
+      sections: [
+        { heading: 'Ocho tareas editables', content: 'Actualización de carta y precios, márgenes, documentos, conciliación de ventas, stock y TPV, distribuidores, informes, grupos y formación del equipo.' },
+        { heading: 'Fórmula transparente', content: 'El resultado por tarea es la diferencia entre minutos actuales y minutos estimados con Winerim, multiplicada por la frecuencia mensual. Los resultados se muestran por semana, mes y año.' },
+        { heading: 'Resultado antes del contacto', content: 'Todos los supuestos son editables, el cálculo se realiza localmente y el resultado aparece antes de cualquier invitación comercial.' },
+      ],
+      faqs: [
+        { q: '¿Las horas son una garantía?', a: 'No. Son un escenario basado en los tiempos y frecuencias introducidos por el usuario.' },
+        { q: '¿El tiempo recuperable equivale a ahorro salarial?', a: 'No. Representa capacidad operativa disponible para otras tareas, no reducción de plantilla ni ahorro contable.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de tiempo operativo', url: `${SITE}/herramientas/calculadora-tiempo-operativo` }],
+      internalLinks: [{ label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Integraciones', url: '/integraciones' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
   '/herramientas/diagnostico-vino-por-copa': {
     meta: { title: 'Diagnóstico de Vino por Copa | Winerim', description: 'Analiza tu oferta actual de vino por copa e identifica oportunidades de mejora en selección, precio y presentación.', canonical: `${SITE}/herramientas/diagnostico-vino-por-copa`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {

@@ -30,6 +30,7 @@ const content: Record<string, {
     ctaBtn1: "Analizar mi carta gratis", ctaBtn2: "Solicitar demo",
     tools: [
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Diagnóstico de rentabilidad de bodega", desc: "Separa ahorro en compras, margen adicional, horas recuperables y capital inmovilizado con fórmulas y supuestos editables.", tag: "Diagnóstico" },
+      { to: "/herramientas/calculadora-tiempo-operativo", title: "Calculadora de tiempo operativo", desc: "Compara el tiempo manual con tu escenario usando Winerim, tarea por tarea, y estima horas recuperables por semana, mes y año.", tag: "Operaciones" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
