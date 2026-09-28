@@ -54,7 +54,7 @@ por ledger y versionado de Supabase.
 ## QA local combinado
 
 - `npm run validate:wine-library`: verde.
-- Vitest: `25` archivos y `210` pruebas verdes.
+- Vitest: `24` archivos y `210` pruebas verdes.
 - TypeScript, build de produccion y lint focal: verdes.
 - `node --check` para ambos Workers y scripts: verde.
 - Deno check para `sitemap` y `prerender`: verde.
