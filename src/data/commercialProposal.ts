@@ -1,5 +1,7 @@
 export const GENERIC_PROPOSAL_ROUTE = "/propuesta-comercial";
 export const REVO_PROPOSAL_ROUTE = "/propuesta-comercial-revo";
+export const MELIA_PROPOSAL_ROUTE = "/propuesta-comercial-melia";
+export const MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE = "/propuesta-comercial-melia-paradisus-los-cabos";
 
 export const COMMERCIAL_OFFER = {
   client: "Cliente",
@@ -7,6 +9,14 @@ export const COMMERCIAL_OFFER = {
   providerCif: "B01729607",
   providerAddress: "Askatasunaren Hiribidea 17, 2º · 20004 Donostia-San Sebastián",
   date: "15 de septiembre de 2026",
+} as const;
+
+export const WINERIM_LLC_OFFER = {
+  provider: "Winerim LLC",
+  providerIdLabel: "Business ID",
+  providerId: "7335504",
+  providerAddress: "Domicilio fiscal: 1210 Washington Ave, Suite 213 · Miami Beach, FL 33139 · EE. UU.",
+  jurisdiction: "Constituida en New Mexico, EE. UU.",
 } as const;
 
 export const COMMERCIAL_SCOPE = [
@@ -126,6 +136,36 @@ export const COMMERCIAL_REVO_PRICING = [
   ["Integración Winerim–REVO XEF", "175 € + IVA / mes", "1.500 € + IVA / año", "125 € + IVA / mes", "600 €"],
   ["Ambos servicios", "350 € + IVA / mes", "3.000 € + IVA / año", "250 € + IVA / mes", "1.200 €"],
 ] as const;
+
+export const COMMERCIAL_MELIA_PRICING = [
+  ["Winerim Master", "850 € / año", "1 Master", "Anual"],
+  ["Winerim · centro de consumo", "850 € / año", "Por centro de consumo", "Anual"],
+  ["Integración Winerim–REVO · Master / Bodega Central", "1.800 € / año", "1 Master", "Anual"],
+  ["Integración Winerim–REVO · centro de consumo", "900 € / año", "Por centro de consumo", "Anual"],
+] as const;
+
+export const COMMERCIAL_MELIA_TERMS = [
+  ["Modalidad anual", "La propuesta se formaliza por 12 meses. Todos los importes contratados se presentan y calculan como totales anuales."],
+  ["Unidades Winerim", "Winerim Master y cada centro de consumo seleccionado tienen un precio de 850 € al año por unidad. El mismo número de centros de consumo se aplica a Winerim y a REVO."],
+  ["Unidades REVO", "REVO Master / Bodega Central suma 1.800 € al año y cada centro de consumo conectado 900 € al año. Cualquier cambio posterior requiere confirmación escrita."],
+  ["Referencia de ahorro", "La modalidad mensual de REVO es 199 € al mes por Master y 99 € al mes por centro de consumo. La modalidad anual equivale a 150 € y 75 € al mes, respectivamente."],
+  ["Bolsas mensuales", "Las capacidades incluidas se renuevan cada mes natural. No se anticipan doce mensualidades de créditos ni se acumula el saldo no consumido."],
+  ["Ampliaciones puntuales", "Requieren aceptación previa, no se renuevan automáticamente y son válidas durante 90 días."],
+  ["Datos y permisos", "El cliente responde de la exactitud de carta, precios, stock, composiciones y permisos. Winerim LLC conserva los derechos sobre Winerim. El cliente conserva sus datos, marcas y contenidos."],
+  ["Protección y confidencialidad", "Ambas partes protegerán la información no pública y cumplirán la normativa de protección de datos. Cuando proceda, formalizarán el acuerdo de encargo de tratamiento correspondiente."],
+  ["Términos complementarios", "Los Términos B2B de Winerim complementan esta propuesta. Esta pieza prevalece únicamente respecto del alcance, unidades e importes que las partes hayan seleccionado y firmado."],
+] as const;
+
+export const COMMERCIAL_MELIA_PRICES = {
+  winerimUnitAnnual: 850,
+  revoMasterAnnual: 1800,
+  revoCenterAnnual: 900,
+  revoMasterMonthlyPlan: 199,
+  revoCenterMonthlyPlan: 99,
+  revoMasterAnnualEquivalentMonthly: 150,
+  revoCenterAnnualEquivalentMonthly: 75,
+  months: 12,
+} as const;
 
 export const COMMERCIAL_TERMS = [
   ["Servicios y precio", "Cada servicio es independiente. La modalidad y el importe solo quedan cerrados cuando las partes completan la selección. Los precios indicados no incluyen IVA."],

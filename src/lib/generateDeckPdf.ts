@@ -71,25 +71,59 @@ export async function generateDeckPdf(filename: string) {
         ),
       );
 
-      const canvas = await html2canvas(slide, {
-        backgroundColor: null,
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        windowWidth: 1600,
-        windowHeight: 900,
-      });
+      const pdfTextInputs = Array.from(slide.querySelectorAll<HTMLInputElement>('input[data-pdf-field][type="number"], input[data-pdf-field][type="text"]'));
+      const pdfRadioInputs = Array.from(slide.querySelectorAll<HTMLInputElement>('input[data-pdf-field][type="radio"]'));
+      const textInputStyles = pdfTextInputs.map((input) => ({
+        input,
+        color: input.style.color,
+        caretColor: input.style.caretColor,
+      }));
+      const radioInputStyles = pdfRadioInputs.map((input) => ({
+        input,
+        opacity: input.style.opacity,
+      }));
+      for (const { input } of textInputStyles) {
+        input.style.color = "transparent";
+        input.style.caretColor = "transparent";
+      }
+      for (const { input } of radioInputStyles) input.style.opacity = "0";
+
+      let canvas: Awaited<ReturnType<typeof html2canvas>>;
+      try {
+        canvas = await html2canvas(slide, {
+          backgroundColor: null,
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          windowWidth: 1600,
+          windowHeight: 900,
+        });
+      } finally {
+        for (const { input, color, caretColor } of textInputStyles) {
+          input.style.color = color;
+          input.style.caretColor = caretColor;
+        }
+        for (const { input, opacity } of radioInputStyles) input.style.opacity = opacity;
+      }
       const slideRect = slide.getBoundingClientRect();
       const linkAreas = Array.from(slide.querySelectorAll<HTMLAnchorElement>("a[data-pdf-link][href]"))
         .map((anchor) => ({ href: anchor.href, rect: anchor.getBoundingClientRect() }))
         .filter(({ href, rect }) => /^https?:\/\//i.test(href) && rect.width > 0 && rect.height > 0);
-      const radioAreas = Array.from(slide.querySelectorAll<HTMLInputElement>('input[data-pdf-field][type="radio"]'))
+      const radioAreas = pdfRadioInputs
         .map((input) => ({
           group: input.name,
           value: input.value,
+          checked: input.checked,
           rect: input.getBoundingClientRect(),
         }))
         .filter(({ group, value, rect }) => group && value && rect.width > 0 && rect.height > 0);
+      const textAreas = pdfTextInputs
+        .map((input) => ({
+          name: input.name || input.id,
+          value: input.value,
+          rect: input.getBoundingClientRect(),
+        }))
+        .filter(({ name, rect }) => name && rect.width > 0 && rect.height > 0);
 
       slide.style.width = previous.width;
       slide.style.height = previous.height;
@@ -133,9 +167,15 @@ export async function generateDeckPdf(filename: string) {
       for (const [groupName, options] of radioGroups) {
         const radioGroup = new pdf.AcroForm.RadioButton();
         radioGroup.fieldName = groupName;
+        const selectedValue = options.find((option) => option.checked)?.value;
+        if (selectedValue) {
+          radioGroup.value = selectedValue;
+          radioGroup.defaultValue = selectedValue;
+        }
         pdf.addField(radioGroup);
         for (const optionArea of options) {
           const option = radioGroup.createOption(optionArea.value);
+          option.appearanceState = optionArea.checked ? optionArea.value : "Off";
           const mappedX = imageX + (optionArea.rect.left - slideRect.left) * scaleX;
           const mappedY = imageY + (optionArea.rect.top - slideRect.top) * scaleY;
           const mappedWidth = Math.max(4, optionArea.rect.width * scaleX);
@@ -143,6 +183,20 @@ export async function generateDeckPdf(filename: string) {
           option.Rect = [mappedX, mappedY, mappedWidth, mappedHeight];
         }
         radioGroup.setAppearance(pdf.AcroForm.Appearance.RadioButton.Circle);
+      }
+      for (const textArea of textAreas) {
+        const field = new pdf.AcroForm.TextField();
+        field.fieldName = textArea.name;
+        field.value = textArea.value;
+        field.defaultValue = textArea.value;
+        field.fontSize = 11;
+        field.Rect = [
+          imageX + (textArea.rect.left - slideRect.left) * scaleX,
+          imageY + (textArea.rect.top - slideRect.top) * scaleY,
+          Math.max(10, textArea.rect.width * scaleX),
+          Math.max(5, textArea.rect.height * scaleY),
+        ];
+        pdf.addField(field);
       }
     }
 

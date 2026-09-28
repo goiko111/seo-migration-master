@@ -180,11 +180,15 @@ const CATALONIA_ASSET_PREFIX = "/catalonia-assets/";
 const LEGACY_CLIENT_ROUTE = "/presentacion/saddle";
 const GENERIC_PROPOSAL_ROUTE = "/propuesta-comercial";
 const REVO_PROPOSAL_ROUTE = "/propuesta-comercial-revo";
+const MELIA_PROPOSAL_ROUTE = "/propuesta-comercial-melia";
+const MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE = "/propuesta-comercial-melia-paradisus-los-cabos";
 const COMMERCIAL_ASSET_PREFIX = "/commercial-assets/";
 const PRIVATE_ROUTES = new Set(["/deck", "/presentacion-anterior"]);
 PRIVATE_ROUTES.add(CATALONIA_ROUTE);
 PRIVATE_ROUTES.add(GENERIC_PROPOSAL_ROUTE);
 PRIVATE_ROUTES.add(REVO_PROPOSAL_ROUTE);
+PRIVATE_ROUTES.add(MELIA_PROPOSAL_ROUTE);
+PRIVATE_ROUTES.add(MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE);
 const BACKEND_HUMAN_ROUTES = new Set(["/precios-modulos-integraciones"]);
 
 const LEGAL_ROUTES = new Set([
@@ -522,6 +526,22 @@ const withCataloniaDocumentMetadata = (response, requestMethod = "GET") => {
   if (!contentType.includes("text/html")) return response;
 
   return new HTMLRewriter()
+    .on("script", {
+      element(element) {
+        const src = element.getAttribute("src");
+        if (src?.startsWith("/assets/")) {
+          element.setAttribute("src", `/commercial-assets${src}`);
+        }
+      },
+    })
+    .on("link", {
+      element(element) {
+        const href = element.getAttribute("href");
+        if (href?.startsWith("/assets/")) {
+          element.setAttribute("href", `/commercial-assets${href}`);
+        }
+      },
+    })
     .on("title", {
       element(element) {
         element.setInnerContent("Catalonia Group · Condiciones | Winerim");
@@ -614,17 +634,32 @@ const fetchCataloniaAsset = async (request, env, path) => {
   });
 };
 
-const withProposalDocumentMetadata = (response, path, requestMethod = "GET") => {
+const withProposalDocumentMetadata = async (response, path, requestMethod = "GET") => {
   if (requestMethod === "HEAD") return response;
   const contentType = response.headers.get("Content-Type") || "";
   if (!contentType.includes("text/html")) return response;
 
+  const headers = new Headers(response.headers);
+  headers.delete("Content-Length");
+  const html = (await response.text())
+    .replaceAll('src="/assets/', 'src="/commercial-assets/assets/')
+    .replaceAll('href="/assets/', 'href="/commercial-assets/assets/');
+  const commercialDocument = new Response(html, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+
   return new HTMLRewriter()
     .on("title", {
       element(element) {
-        element.setInnerContent(path === REVO_PROPOSAL_ROUTE
-          ? "Propuesta comercial REVO | Winerim"
-          : "Propuesta comercial | Winerim");
+        element.setInnerContent(path === MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE
+          ? "Propuesta comercial Meliá Paradisus Los Cabos | Winerim"
+          : path === MELIA_PROPOSAL_ROUTE
+            ? "Propuesta comercial Meliá | Winerim"
+          : path === REVO_PROPOSAL_ROUTE
+            ? "Propuesta comercial REVO | Winerim"
+            : "Propuesta comercial | Winerim");
       },
     })
     .on('link[rel="canonical"]', {
@@ -637,7 +672,7 @@ const withProposalDocumentMetadata = (response, path, requestMethod = "GET") => 
         element.append('<meta name="robots" content="noindex, follow">', { html: true });
       },
     })
-    .transform(response);
+    .transform(commercialDocument);
 };
 
 const fetchCommercialPage = async (request, env, path) => {
@@ -759,7 +794,7 @@ export default {
       return fetchCataloniaAsset(request, env, path);
     }
 
-    if (path === GENERIC_PROPOSAL_ROUTE || path === REVO_PROPOSAL_ROUTE) {
+    if (path === GENERIC_PROPOSAL_ROUTE || path === REVO_PROPOSAL_ROUTE || path === MELIA_PROPOSAL_ROUTE || path === MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE) {
       return fetchCommercialPage(request, env, path);
     }
 
@@ -842,6 +877,23 @@ export default {
         }
       } catch {
         // Fall through to the existing origin for previous frontend assets.
+      }
+
+      try {
+        const response = await fetchCommercialOrigin(request, env, path);
+        const contentType = response.headers.get("Content-Type") || "";
+        if (response.ok && !contentType.includes("text/html")) {
+          const headers = new Headers(response.headers);
+          headers.set("Cache-Control", "public, max-age=31536000, immutable");
+          headers.set("X-Winerim-Router", "commercial-pages-asset-fallback");
+          return new Response(request.method === "HEAD" ? null : response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers,
+          });
+        }
+      } catch {
+        // Fall through to the backend only when neither release owns the asset.
       }
     }
 

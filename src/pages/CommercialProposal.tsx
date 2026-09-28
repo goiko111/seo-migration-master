@@ -15,6 +15,9 @@ import {
   COMMERCIAL_REVO_PRICING,
   COMMERCIAL_REVO_SCOPE,
   COMMERCIAL_REVO_SELECTION,
+  COMMERCIAL_MELIA_PRICES,
+  COMMERCIAL_MELIA_PRICING,
+  COMMERCIAL_MELIA_TERMS,
   COMMERCIAL_SELECTION,
   COMMERCIAL_SAVIA_USAGE,
   COMMERCIAL_SPEND_CONTROLS,
@@ -23,7 +26,10 @@ import {
   COMMERCIAL_USAGE_EQUIVALENCE,
   COMMERCIAL_RECONCILIATION_USAGE,
   GENERIC_PROPOSAL_ROUTE,
+  MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE,
+  MELIA_PROPOSAL_ROUTE,
   REVO_PROPOSAL_ROUTE,
+  WINERIM_LLC_OFFER,
 } from "@/data/commercialProposal";
 import PresentationLegacy from "./PresentationLegacy";
 import "./CommercialProposal.css";
@@ -36,7 +42,15 @@ type ProposalAudience = {
   clientLabel: string;
 };
 
-type IntegrationProposal = "agora" | "revo";
+type IntegrationProposal = "agora" | "revo" | "melia" | "melia-paradisus-los-cabos";
+
+type ProviderDetails = {
+  name: string;
+  idLabel: string;
+  id: string;
+  address: string;
+  jurisdiction?: string;
+};
 
 type IntegrationConfig = {
   name: string;
@@ -45,9 +59,31 @@ type IntegrationConfig = {
   pdfFilename: string;
   scope: ReadonlyArray<readonly string[]>;
   pricing: ReadonlyArray<readonly string[]>;
+  pricingHeaders: readonly string[];
   pricingExplanation: string;
   selectionRule: React.ReactNode;
+  terms: ReadonlyArray<readonly string[]>;
+  clientName?: string;
+  clientTaxIdLabel?: string;
+  defaultCenters?: number;
+  provider: ProviderDetails;
+  selectionMode: "standard" | "melia";
   showProviderMonitor: boolean;
+};
+
+const BASQUE_HIGHLANDS_PROVIDER: ProviderDetails = {
+  name: COMMERCIAL_OFFER.provider,
+  idLabel: "CIF",
+  id: COMMERCIAL_OFFER.providerCif,
+  address: COMMERCIAL_OFFER.providerAddress,
+};
+
+const WINERIM_LLC_PROVIDER: ProviderDetails = {
+  name: WINERIM_LLC_OFFER.provider,
+  idLabel: WINERIM_LLC_OFFER.providerIdLabel,
+  id: WINERIM_LLC_OFFER.providerId,
+  address: WINERIM_LLC_OFFER.providerAddress,
+  jurisdiction: WINERIM_LLC_OFFER.jurisdiction,
 };
 
 const INTEGRATION_CONFIG: Record<IntegrationProposal, IntegrationConfig> = {
@@ -58,8 +94,12 @@ const INTEGRATION_CONFIG: Record<IntegrationProposal, IntegrationConfig> = {
     pdfFilename: "winerim-propuesta-comercial",
     scope: COMMERCIAL_AGORA_SCOPE,
     pricing: COMMERCIAL_PRICING,
+    pricingHeaders: ["Servicio", "Mensual", "Anual anticipado", "Equivalente anual", "Ahorro anual"],
     pricingExplanation: "Doce mensualidades suman 2.100 € por servicio frente a 1.500 € anuales. Para ambos, 4.200 € frente a 3.000 €. Los importes se incrementarán con el IVA aplicable.",
     selectionRule: <><strong>Una única periodicidad:</strong> si se contratan ambos servicios, los dos deben seleccionarse en la misma modalidad, ambos mensuales o ambos anuales anticipados.</>,
+    terms: COMMERCIAL_TERMS,
+    provider: BASQUE_HIGHLANDS_PROVIDER,
+    selectionMode: "standard",
     showProviderMonitor: true,
   },
   revo: {
@@ -69,8 +109,46 @@ const INTEGRATION_CONFIG: Record<IntegrationProposal, IntegrationConfig> = {
     pdfFilename: "winerim-propuesta-comercial-revo",
     scope: COMMERCIAL_REVO_SCOPE,
     pricing: COMMERCIAL_REVO_PRICING,
+    pricingHeaders: ["Servicio", "Mensual", "Anual anticipado", "Equivalente anual", "Ahorro anual"],
     pricingExplanation: "Doce mensualidades suman 2.100 € por servicio frente a 1.500 € anuales. Para ambos, 4.200 € frente a 3.000 €. Los importes se incrementarán con el IVA aplicable.",
     selectionRule: <><strong>Una única periodicidad:</strong> si se contratan ambos servicios, los dos deben seleccionarse en la misma modalidad, ambos mensuales o ambos anuales anticipados.</>,
+    terms: COMMERCIAL_TERMS,
+    provider: BASQUE_HIGHLANDS_PROVIDER,
+    selectionMode: "standard",
+    showProviderMonitor: false,
+  },
+  melia: {
+    name: "REVO",
+    canonicalPath: MELIA_PROPOSAL_ROUTE,
+    documentTitle: "Propuesta comercial Meliá",
+    pdfFilename: "winerim-propuesta-comercial-melia",
+    scope: COMMERCIAL_REVO_SCOPE,
+    pricing: COMMERCIAL_MELIA_PRICING,
+    pricingHeaders: ["Servicio", "Total anual", "Unidad", "Modalidad"],
+    pricingExplanation: "Winerim Master y cada centro de consumo cuestan 850 € al año por unidad. REVO Master / Bodega Central suma 1.800 € al año y cada centro de consumo integrado 900 € al año. Con 11 centros de consumo, elegir la modalidad anual de REVO ahorra 3.756 € al año frente a la modalidad mensual.",
+    selectionRule: <><strong>Modalidad anual:</strong> activa o desactiva cada servicio e indica el número de centros de consumo. La misma cantidad se aplica a Winerim y a la integración Winerim–REVO.</>,
+    terms: COMMERCIAL_MELIA_TERMS,
+    clientName: "Meliá",
+    provider: WINERIM_LLC_PROVIDER,
+    selectionMode: "melia",
+    showProviderMonitor: false,
+  },
+  "melia-paradisus-los-cabos": {
+    name: "REVO",
+    canonicalPath: MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE,
+    documentTitle: "Propuesta comercial Meliá Paradisus Los Cabos",
+    pdfFilename: "winerim-propuesta-comercial-melia-paradisus-los-cabos",
+    scope: COMMERCIAL_REVO_SCOPE,
+    pricing: COMMERCIAL_MELIA_PRICING,
+    pricingHeaders: ["Servicio", "Total anual", "Unidad", "Modalidad"],
+    pricingExplanation: "Winerim Master y cada centro de consumo cuestan 850 € al año por unidad. REVO Master / Bodega Central suma 1.800 € al año y cada centro de consumo integrado 900 € al año. Con 4 centros de consumo, elegir la modalidad anual de REVO ahorra 1.740 € al año frente a la modalidad mensual.",
+    selectionRule: <><strong>Modalidad anual:</strong> activa o desactiva cada servicio e indica el número de centros de consumo. La misma cantidad se aplica a Winerim y a la integración Winerim–REVO.</>,
+    terms: COMMERCIAL_MELIA_TERMS,
+    clientName: "Meliá Paradisus Los Cabos",
+    clientTaxIdLabel: "RFC / Tax ID",
+    defaultCenters: 4,
+    provider: WINERIM_LLC_PROVIDER,
+    selectionMode: "melia",
     showProviderMonitor: false,
   },
 };
@@ -239,6 +317,129 @@ const ServiceSelectionTable = ({ selection }: { selection: ReadonlyArray<readonl
           ))}
         </div>
       </section>
+    </div>
+  );
+};
+
+const formatEuro = (amount: number) => `${String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} €`;
+const withoutIva = (rows: ReadonlyArray<readonly string[]>) => rows.map((row) => row.map((cell) => cell.replace(/\s*\+\s*IVA/g, "")));
+
+const MeliaSelectionTable = ({
+  defaultCenters = 11,
+  canonicalPath,
+}: {
+  defaultCenters?: number;
+  canonicalPath: string;
+}) => {
+  const [winerimChoice, setWinerimChoice] = useState<"include" | "none">("include");
+  const [integrationChoice, setIntegrationChoice] = useState<"include" | "none">("include");
+  const [centers, setCenters] = useState(defaultCenters);
+
+  const normalizedCenters = Math.max(1, centers);
+  const winerimUnits = winerimChoice === "include" ? normalizedCenters + 1 : 0;
+  const winerimAnnual = winerimUnits * COMMERCIAL_MELIA_PRICES.winerimUnitAnnual;
+  const integrationAnnual = integrationChoice === "include"
+    ? COMMERCIAL_MELIA_PRICES.revoMasterAnnual + (COMMERCIAL_MELIA_PRICES.revoCenterAnnual * normalizedCenters)
+    : 0;
+  const revoMonthlyModeAnnual = (
+    COMMERCIAL_MELIA_PRICES.revoMasterMonthlyPlan
+    + (COMMERCIAL_MELIA_PRICES.revoCenterMonthlyPlan * normalizedCenters)
+  ) * COMMERCIAL_MELIA_PRICES.months;
+  const revoAnnualSavings = revoMonthlyModeAnnual - (
+    COMMERCIAL_MELIA_PRICES.revoMasterAnnual
+    + (COMMERCIAL_MELIA_PRICES.revoCenterAnnual * normalizedCenters)
+  );
+  const annualTotal = winerimAnnual + integrationAnnual;
+  const contractGeneratorBaseUrl = import.meta.env.VITE_CONTRACT_GENERATOR_URL?.trim();
+  const contractTemplate = canonicalPath === MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE
+    ? "melia-paradisus-los-cabos"
+    : "melia";
+  const contractGeneratorUrl = contractGeneratorBaseUrl
+    ? `${contractGeneratorBaseUrl.replace(/\/$/, "")}/?${new URLSearchParams({
+        template: contractTemplate,
+        centers: String(normalizedCenters),
+        winerim: winerimChoice === "include" ? "1" : "0",
+        integration: integrationChoice === "include" ? "1" : "0",
+      }).toString()}`
+    : null;
+
+  const updateCenters = (value: string) => {
+    const parsed = Number.parseInt(value, 10);
+    setCenters(Number.isFinite(parsed) ? Math.min(999, Math.max(1, parsed)) : 1);
+  };
+
+  return (
+    <div className="commercial-melia-selection">
+      <div className="commercial-table-wrap">
+        <table className="commercial-table commercial-selection-table">
+          <caption>Selección contractual</caption>
+          <thead>
+            <tr><th scope="col">Servicio</th><th scope="col">Incluir en la propuesta anual</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-label="Servicio">Winerim</th>
+              <td data-label="Incluir en la propuesta anual">
+                <label><input type="checkbox" name="melia-winerim" checked={winerimChoice === "include"} onChange={(event) => setWinerimChoice(event.target.checked ? "include" : "none")} /> Winerim Master + centros de consumo seleccionados</label>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" data-label="Servicio">Integración Winerim–REVO</th>
+              <td data-label="Incluir en la propuesta anual">
+                <label><input type="checkbox" name="melia-revo-integration" checked={integrationChoice === "include"} onChange={(event) => setIntegrationChoice(event.target.checked ? "include" : "none")} /> REVO Master + centros de consumo seleccionados</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section className={`commercial-unit-selector${winerimChoice === "none" && integrationChoice === "none" ? " is-disabled" : ""}`}>
+        <div>
+          <label htmlFor="melia-center-count">Número de centros de consumo</label>
+          <p>La misma cantidad se aplica a Winerim y a la integración REVO.</p>
+        </div>
+        <input
+          id="melia-center-count"
+          name="melia-center-count"
+          type="number"
+          min="1"
+          max="999"
+          inputMode="numeric"
+          value={normalizedCenters}
+          disabled={winerimChoice === "none" && integrationChoice === "none"}
+          onChange={(event) => updateCenters(event.target.value)}
+        />
+      </section>
+
+      <section className="commercial-calculation" aria-live="polite">
+        <h3>Cálculo de la propuesta</h3>
+        <div className="commercial-calculation-grid">
+          <p><span>Winerim Master</span><strong>{winerimChoice === "include" ? "850 € / año" : "No seleccionado"}</strong></p>
+          <p><span>Winerim · {normalizedCenters} {normalizedCenters === 1 ? "centro de consumo" : "centros de consumo"}</span><strong>{winerimChoice === "include" ? `${formatEuro(COMMERCIAL_MELIA_PRICES.winerimUnitAnnual * normalizedCenters)} / año` : "No seleccionados"}</strong></p>
+          <p><span>REVO Master / Bodega Central</span><strong>{integrationChoice === "include" ? `${formatEuro(COMMERCIAL_MELIA_PRICES.revoMasterAnnual)} / año` : "No seleccionado"}</strong></p>
+          <p><span>REVO · {normalizedCenters} {normalizedCenters === 1 ? "centro de consumo" : "centros de consumo"}</span><strong>{integrationChoice === "include" ? `${formatEuro(COMMERCIAL_MELIA_PRICES.revoCenterAnnual * normalizedCenters)} / año` : "No seleccionados"}</strong></p>
+        </div>
+        <div className="commercial-calculation-total">
+          <p><span>Total anual Winerim</span><strong>{formatEuro(winerimAnnual)}</strong></p>
+          <p><span>Total anual integración REVO</span><strong>{formatEuro(integrationAnnual)}</strong></p>
+          <p><span>Compromiso anual total</span><strong>{formatEuro(annualTotal)}</strong></p>
+        </div>
+        <p className="commercial-calculation-formula">Fórmula anual: Winerim {formatEuro(COMMERCIAL_MELIA_PRICES.winerimUnitAnnual)} × {winerimUnits} unidades + REVO {formatEuro(integrationAnnual)} = <strong>{formatEuro(annualTotal)}</strong></p>
+        <div className="commercial-melia-rate-note">
+          <p><strong>Modalidad mensual:</strong> {formatEuro(COMMERCIAL_MELIA_PRICES.revoMasterMonthlyPlan)}/mes por REVO Master más {formatEuro(COMMERCIAL_MELIA_PRICES.revoCenterMonthlyPlan)}/mes por centro de consumo.</p>
+          <p><strong>Modalidad anual:</strong> equivalente a {formatEuro(COMMERCIAL_MELIA_PRICES.revoMasterAnnualEquivalentMonthly)}/mes por REVO Master más {formatEuro(COMMERCIAL_MELIA_PRICES.revoCenterAnnualEquivalentMonthly)}/mes por centro de consumo.</p>
+          <p><strong>Ahorro con pago anual para 1 Master + {normalizedCenters} {normalizedCenters === 1 ? "centro de consumo" : "centros de consumo"}: {formatEuro(revoAnnualSavings)}/año.</strong></p>
+        </div>
+      </section>
+      {contractGeneratorUrl && (
+        <div className="commercial-contract-action">
+          <a href={contractGeneratorUrl} target="_blank" rel="noreferrer" data-pdf-link>
+            Preparar contrato con esta selección
+          </a>
+          <p>Los importes se recalculan desde el catálogo contractual; la URL no contiene precios ni datos del cliente.</p>
+        </div>
+      )}
+      <p className="commercial-pdf-calculation-note">Configura los servicios y centros de consumo en la <a href={`https://winerim.wine${canonicalPath}`} data-pdf-link>versión online</a> antes de descargar el PDF. El documento se genera con la selección y los totales visibles en ese momento.</p>
     </div>
   );
 };
@@ -463,15 +664,17 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
     content: (
       <article className="commercial-proposal commercial-cover">
         <ProposalHeader page={25} section="Propuesta comercial y condiciones" audience={audience} />
-        <p className="commercial-kicker">Winerim</p>
+        <p className="commercial-kicker">{config.clientName ? `Propuesta para ${config.clientName}` : "Winerim"}</p>
         <Title>Carta de vinos, inteligencia operativa e integración con {config.name}</Title>
-        <p className="commercial-lead">La propuesta convierte el relato anterior en un alcance concreto para un establecimiento, con precios y límites expresos. El cliente puede contratar Winerim, la integración con {config.name} o ambos.</p>
+        <p className="commercial-lead">{config.clientName
+          ? `Una propuesta específica para ${config.clientName}, con Winerim Master, centros de consumo y una integración Winerim–REVO dimensionada por REVO Master / Bodega Central y número de centros de consumo.`
+          : `La propuesta convierte el relato anterior en un alcance concreto para un establecimiento, con precios y límites expresos. El cliente puede contratar Winerim, la integración con ${config.name} o ambos.`}</p>
         <div className="commercial-provider">
           <h3>Proveedor</h3>
-          <p><strong>{COMMERCIAL_OFFER.provider} · CIF {COMMERCIAL_OFFER.providerCif}</strong></p>
-          <p>{COMMERCIAL_OFFER.providerAddress}</p>
+          <p><strong>{config.provider.name} · {config.provider.idLabel} {config.provider.id}</strong></p>
+          <p>{config.provider.address}{config.provider.jurisdiction ? ` · ${config.provider.jurisdiction}` : ""}</p>
         </div>
-        <p className="commercial-date">{COMMERCIAL_OFFER.date}</p>
+        <p className="commercial-date">{config.clientName ? "28 de septiembre de 2026" : COMMERCIAL_OFFER.date}</p>
       </article>
     ),
   },
@@ -481,7 +684,9 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
       <article className="commercial-proposal commercial-dense commercial-scope-page">
         <ProposalHeader page={26} section="Alcance de la propuesta" audience={audience} />
         <Title>Alcance de la propuesta</Title>
-        <p className="commercial-lead">La licencia y los precios se refieren a un establecimiento. Winerim aporta herramientas y contexto para que el equipo decida con mejores datos, sin garantizar resultados económicos concretos.</p>
+        <p className="commercial-lead">{config.clientName
+          ? "Winerim Master y los centros de consumo se ofrecen con precio anual. La integración Winerim–REVO se dimensiona con un REVO Master / Bodega Central y el mismo número de centros de consumo. Winerim aporta herramientas y contexto para decidir con mejores datos, sin garantizar resultados económicos concretos."
+          : "La licencia y los precios se refieren a un establecimiento. Winerim aporta herramientas y contexto para que el equipo decida con mejores datos, sin garantizar resultados económicos concretos."}</p>
         <div className="commercial-scope-feature-list" aria-label="Funcionalidades incluidas en el alcance">
           {COMMERCIAL_FEATURES.map(([title, body]) => (
             <section key={title}>
@@ -535,7 +740,7 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
         <section className="commercial-top-up-secondary" aria-label="Ampliaciones opcionales">
           <h3>Ampliaciones para picos puntuales</h3>
           <p>{COMMERCIAL_EXPANSION_MESSAGE}</p>
-          <DataTable caption="Precios por establecimiento" headers={["Ampliación", "Capacidad", "Precio"]} rows={COMMERCIAL_TOP_UPS} />
+          <DataTable caption="Precios por establecimiento" headers={["Ampliación", "Capacidad", "Precio"]} rows={config.selectionMode === "melia" ? withoutIva(COMMERCIAL_TOP_UPS) : COMMERCIAL_TOP_UPS} />
           <p className="commercial-pack-saving"><strong>Pack completo:</strong> ahorro de 18 € frente a las tres ampliaciones por separado.</p>
           <div className="commercial-expansion-rules" aria-label="Facturación de ampliaciones">
             {COMMERCIAL_EXPANSION_RULES.map(([title, body]) => (
@@ -596,10 +801,10 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
     content: (
       <article className="commercial-proposal">
         <ProposalHeader page={31} section="Inversión" audience={audience} />
-        <Title>Opciones económicas por establecimiento</Title>
-        <DataTable caption="Precios por establecimiento" headers={["Servicio", "Mensual", "Anual anticipado", "Equivalente anual", "Ahorro anual"]} rows={config.pricing} />
+        <Title>{config.selectionMode === "melia" ? "Inversión anual y unidades integradas" : "Opciones económicas por establecimiento"}</Title>
+        <DataTable caption={config.clientName ? "Precios de la propuesta" : "Precios por establecimiento"} headers={config.pricingHeaders} rows={config.pricing} />
         <section className="commercial-emphasis">
-          <h3>Cálculo del ahorro</h3>
+          <h3>{config.selectionMode === "melia" ? "Cálculo del compromiso anual" : "Cálculo del ahorro"}</h3>
           <p>{config.pricingExplanation}</p>
         </section>
         <p className="commercial-note">No se incluye ningún coste adicional salvo que ambas partes lo acuerden por escrito.</p>
@@ -612,9 +817,11 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
       <article className="commercial-proposal commercial-dense">
         <ProposalHeader page={32} section="Condiciones" audience={audience} />
         <Title>Condiciones esenciales y validez</Title>
-        <DataTable caption="Condiciones esenciales" headers={["Bloque", "Condición"]} rows={COMMERCIAL_TERMS} />
+        <DataTable caption="Condiciones esenciales" headers={["Bloque", "Condición"]} rows={config.terms} />
         <div className="commercial-conditions-footer">
-          <p><strong>Validez y aceptación.</strong> Oferta válida hasta: ____ / ____ / ______. La aceptación requiere completar los datos del cliente, seleccionar la modalidad de cada servicio y firmar la propuesta.</p>
+          <p><strong>Validez y aceptación.</strong> Oferta válida hasta: ____ / ____ / ______. {config.selectionMode === "melia"
+            ? "La aceptación requiere completar los datos del cliente, seleccionar los servicios, indicar el número de centros de consumo y firmar la propuesta."
+            : "La aceptación requiere completar los datos del cliente, seleccionar la modalidad de cada servicio y firmar la propuesta."}</p>
           <p>Las capacidades beta o early access mantendrán los límites y salvaguardas descritos en esta propuesta.</p>
         </div>
       </article>
@@ -625,10 +832,14 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
     content: (
       <article className="commercial-proposal commercial-dense commercial-signature-page">
         <ProposalHeader page={33} section="Selección contractual" audience={audience} />
-        <Title>Selecciona la modalidad de cada servicio</Title>
-        <p className="commercial-lead">Marca una opción para Winerim y otra para la integración con {config.name}.</p>
+        <Title>{config.selectionMode === "melia" ? "Selecciona servicios y centros de consumo" : "Selecciona la modalidad de cada servicio"}</Title>
+        <p className="commercial-lead">{config.selectionMode === "melia"
+          ? "Activa o desactiva Winerim y la integración Winerim–REVO, e indica cuántos centros de consumo se incluirán junto a sus respectivos Master."
+          : `Marca una opción para Winerim y otra para la integración con ${config.name}.`}</p>
         <p className="commercial-selection-rule">{config.selectionRule}</p>
-        <ServiceSelectionTable selection={config.name === "REVO" ? COMMERCIAL_REVO_SELECTION : COMMERCIAL_SELECTION} />
+        {config.selectionMode === "melia"
+          ? <MeliaSelectionTable defaultCenters={config.defaultCenters} canonicalPath={config.canonicalPath} />
+          : <ServiceSelectionTable selection={config.name === "REVO" ? COMMERCIAL_REVO_SELECTION : COMMERCIAL_SELECTION} />}
         <p className="commercial-note">No se contrata ninguna ampliación al inicio. Si más adelante existe un pico puntual, el cliente podrá solicitarla y aceptarla expresamente.</p>
       </article>
     ),
@@ -641,17 +852,17 @@ const buildProposalSections = (audience: ProposalAudience, config: IntegrationCo
         <Title>Datos del cliente y aceptación</Title>
         <section className="commercial-client-fields">
           <h3>Datos del cliente</h3>
-          <p>Razón social: ____________________________________ &nbsp; CIF: ____________________</p>
+          <p>Razón social: ____________________________________ &nbsp; {config.clientTaxIdLabel ?? "CIF"}: ____________________</p>
           <p>Domicilio: ____________________________________________________________________</p>
           <p>Representante: ___________________________________ &nbsp; Cargo: ____________________</p>
           <p>Fecha: __________________________________________ &nbsp; Firma: ____________________</p>
         </section>
         <section className="commercial-provider-reference">
           <h3>Proveedor</h3>
-          <p><strong>{COMMERCIAL_OFFER.provider} · Winerim · CIF {COMMERCIAL_OFFER.providerCif}</strong></p>
-          <p>{COMMERCIAL_OFFER.providerAddress}</p>
+          <p><strong>{config.provider.name} · Winerim · {config.provider.idLabel} {config.provider.id}</strong></p>
+          <p>{config.provider.address}{config.provider.jurisdiction ? ` · ${config.provider.jurisdiction}` : ""}</p>
         </section>
-        <p className="commercial-pending">La firma acepta únicamente los servicios, modalidad e importes marcados en la página anterior, junto con las condiciones de esta propuesta.</p>
+        <p className="commercial-pending">La firma acepta únicamente los servicios, modalidad, unidades e importes marcados en la página anterior, junto con las condiciones de esta propuesta.</p>
       </article>
     ),
   },
@@ -661,7 +872,7 @@ export function CommercialProposalPresentation({ integration = "agora" }: { inte
   const config = INTEGRATION_CONFIG[integration];
   const audience: ProposalAudience = {
     canonicalPath: config.canonicalPath,
-    clientLabel: `Propuesta comercial ${config.name}`,
+    clientLabel: config.clientName ? `Propuesta comercial ${config.clientName}` : `Propuesta comercial ${config.name}`,
   };
   const commercialSections = buildCommercialSections(audience, config);
   const commercialOverrides = {

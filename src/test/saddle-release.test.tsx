@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import {
   COMMERCIAL_CAPACITY_INTRO,
@@ -10,13 +10,17 @@ import {
   COMMERCIAL_PRICING,
   COMMERCIAL_PAYMENT_LINKS,
   COMMERCIAL_REVO_PRICING,
+  COMMERCIAL_MELIA_PRICES,
   COMMERCIAL_TOP_UPS,
   COMMERCIAL_USAGE_EQUIVALENCE,
+  WINERIM_LLC_OFFER,
 } from "@/data/commercialProposal";
 import PresentationLegacy from "@/pages/PresentationLegacy";
 import CommercialProposal from "@/pages/CommercialProposal";
 import GenericCommercialProposal from "@/pages/GenericCommercialProposal";
 import RevoCommercialProposal from "@/pages/RevoCommercialProposal";
+import MeliaCommercialProposal from "@/pages/MeliaCommercialProposal";
+import MeliaParadisusLosCabosCommercialProposal from "@/pages/MeliaParadisusLosCabosCommercialProposal";
 
 const snapshotSlides = (root: HTMLElement) => [...root.querySelectorAll(".presentation-slide")].map((slide) => ({
   text: slide.textContent,
@@ -128,6 +132,7 @@ describe("Neutral commercial proposal release", () => {
     expect(shell).not.toMatch(/Saddle/i);
     expect(page).not.toMatch(/Saddle/i);
     expect(data).not.toMatch(/Saddle/i);
+    expect(shell).toContain("'/propuesta-comercial-melia'");
     expect(worker).toContain('const LEGACY_CLIENT_ROUTE = "/presentacion/saddle"');
     expect(worker).toContain('Location: "https://winerim.wine/propuesta-comercial"');
     expect(worker).toContain('const COMMERCIAL_ASSET_PREFIX = "/commercial-assets/"');
@@ -181,6 +186,95 @@ describe("Neutral commercial proposal release", () => {
     expect(annualLink?.href).toBe(COMMERCIAL_PAYMENT_LINKS.annual.both.href);
     expect(COMMERCIAL_REVO_PRICING[1][1]).toBe("175 € + IVA / mes");
     revo.unmount();
+  });
+
+  it("renders the Meliá annual offer and recalculates the selected REVO centers", () => {
+    const melia = render(
+      <MemoryRouter initialEntries={["/propuesta-comercial-melia"]}>
+        <LanguageProvider><MeliaCommercialProposal /></LanguageProvider>
+      </MemoryRouter>,
+    );
+    const slides = melia.container.querySelectorAll(".presentation-slide");
+    expect(slides).toHaveLength(34);
+    expect(slides[24].textContent).toContain("Propuesta para Meliá");
+    expect(slides[30].textContent).toContain("Winerim · centro de consumo");
+    expect(slides[30].textContent).toContain("Por centro de consumo");
+    expect(slides[30].textContent).toContain("850 € / año");
+    expect(slides[30].textContent).toContain("1.800 € / año");
+    expect(slides[30].textContent).toContain("900 € / año");
+    expect(slides[30].textContent).toContain("3.756 € al año");
+    expect(slides[32].textContent).toContain("Integración Winerim–REVO");
+    expect(slides[32].textContent).toContain("21.900 €");
+    expect(slides[32].textContent).toContain("3.756 €/año");
+    expect(slides[30].textContent).not.toMatch(/\bIVA\b/);
+    expect(slides[32].textContent).not.toMatch(/\bIVA\b/);
+    expect(melia.container.textContent).not.toMatch(/\bIVA\b/);
+
+    const serviceToggles = slides[32].querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    expect(serviceToggles).toHaveLength(2);
+    expect([...serviceToggles].every((input) => input.checked)).toBe(true);
+    fireEvent.click(serviceToggles[0]);
+    expect(serviceToggles[0].checked).toBe(false);
+    expect(slides[32].textContent).toContain("Total anual Winerim0 €");
+    expect(slides[32].textContent).toContain("Compromiso anual total11.700 €");
+    fireEvent.click(serviceToggles[0]);
+    expect(serviceToggles[0].checked).toBe(true);
+    expect(slides[32].textContent).toContain("Compromiso anual total21.900 €");
+
+    const quantity = slides[32].querySelector<HTMLInputElement>("#melia-center-count");
+    expect(quantity).not.toBeNull();
+    fireEvent.change(quantity!, { target: { value: "7" } });
+    expect(slides[32].textContent).toContain("14.900 €");
+    expect(slides[32].textContent).toContain("6.800 €");
+    expect(slides[32].textContent).toContain("8.100 €");
+    expect(slides[32].textContent).toContain("2.604 €/año");
+    expect(slides[32].querySelector(".commercial-payment-result a")).toBeNull();
+    expect(COMMERCIAL_MELIA_PRICES).toEqual({
+      winerimUnitAnnual: 850,
+      revoMasterAnnual: 1800,
+      revoCenterAnnual: 900,
+      revoMasterMonthlyPlan: 199,
+      revoCenterMonthlyPlan: 99,
+      revoMasterAnnualEquivalentMonthly: 150,
+      revoCenterAnnualEquivalentMonthly: 75,
+      months: 12,
+    });
+    melia.unmount();
+  });
+
+  it("renders the Meliá Paradisus Los Cabos proposal with Winerim LLC and four centers by default", () => {
+    vi.stubEnv("VITE_CONTRACT_GENERATOR_URL", "http://127.0.0.1:4200");
+    const proposal = render(
+      <MemoryRouter initialEntries={["/propuesta-comercial-melia-paradisus-los-cabos"]}>
+        <LanguageProvider><MeliaParadisusLosCabosCommercialProposal /></LanguageProvider>
+      </MemoryRouter>,
+    );
+    const slides = proposal.container.querySelectorAll(".presentation-slide");
+    expect(slides).toHaveLength(34);
+    expect(slides[24].textContent).toContain("Propuesta para Meliá Paradisus Los Cabos");
+    expect(slides[24].textContent).toContain(`${WINERIM_LLC_OFFER.provider} · ${WINERIM_LLC_OFFER.providerIdLabel} ${WINERIM_LLC_OFFER.providerId}`);
+    expect(slides[24].textContent).toContain("1210 Washington Ave, Suite 213");
+    expect(slides[30].textContent).toContain("1.740 € al año");
+    const quantity = slides[32].querySelector<HTMLInputElement>("#melia-center-count");
+    expect(quantity?.value).toBe("4");
+    expect(slides[32].textContent).toContain("Compromiso anual total9.650 €");
+    expect(slides[32].textContent).toContain("1.740 €/año");
+    const contractLink = slides[32].querySelector<HTMLAnchorElement>(".commercial-contract-action a");
+    expect(contractLink?.href).toBe("http://127.0.0.1:4200/?template=melia-paradisus-los-cabos&centers=4&winerim=1&integration=1");
+    expect(contractLink?.href).not.toContain("price");
+
+    fireEvent.change(quantity!, { target: { value: "7" } });
+    expect(contractLink?.href).toBe("http://127.0.0.1:4200/?template=melia-paradisus-los-cabos&centers=7&winerim=1&integration=1");
+
+    const serviceToggles = slides[32].querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    fireEvent.click(serviceToggles[0]);
+    expect(contractLink?.href).toBe("http://127.0.0.1:4200/?template=melia-paradisus-los-cabos&centers=7&winerim=0&integration=1");
+    expect(slides[32].querySelector<HTMLAnchorElement>(".commercial-pdf-calculation-note a")?.href).toBe("https://winerim.wine/propuesta-comercial-melia-paradisus-los-cabos");
+    expect(slides[33].textContent).toContain("RFC / Tax ID");
+    expect(slides[33].textContent).toContain("Winerim LLC · Winerim · Business ID 7335504");
+    expect(proposal.container.textContent).not.toMatch(/\bIVA\b/);
+    proposal.unmount();
+    vi.unstubAllEnvs();
   });
 
   it("keeps unsupported commitments out of the offer", () => {

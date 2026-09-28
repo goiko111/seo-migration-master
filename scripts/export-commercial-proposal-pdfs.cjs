@@ -4,10 +4,13 @@ const { chromium } = require("/Users/GOIKO/.cache/codex-runtimes/codex-primary-r
 
 const BASE_URL = (process.env.PROPOSAL_BASE_URL || "http://127.0.0.1:4196").replace(/\/$/, "");
 const OUTPUT_DIR = process.env.PDF_OUTPUT_DIR || "/Users/GOIKO/Downloads";
+const requestedRoute = process.env.PROPOSAL_ROUTE;
 const documents = [
   ["/propuesta-comercial", "winerim-propuesta-comercial.pdf"],
   ["/propuesta-comercial-revo", "winerim-propuesta-comercial-revo.pdf"],
-];
+  ["/propuesta-comercial-melia", "winerim-propuesta-comercial-melia.pdf"],
+  ["/propuesta-comercial-melia-paradisus-los-cabos", "winerim-propuesta-comercial-melia-paradisus-los-cabos.pdf"],
+].filter(([route]) => !requestedRoute || route === requestedRoute);
 
 (async () => {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });

@@ -169,6 +169,10 @@ const GenericCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION =
   ? lazyRouteWithRetry(() => import("./pages/GenericCommercialProposal")) : null;
 const RevoCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION === "true"
   ? lazyRouteWithRetry(() => import("./pages/RevoCommercialProposal")) : null;
+const MeliaCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION === "true"
+  ? lazyRouteWithRetry(() => import("./pages/MeliaCommercialProposal")) : null;
+const MeliaParadisusLosCabosCommercialProposal = import.meta.env.VITE_COMMERCIAL_PRESENTATION === "true"
+  ? lazyRouteWithRetry(() => import("./pages/MeliaParadisusLosCabosCommercialProposal")) : null;
 const PresentationLegacy = lazyRouteWithRetry(() => import("./pages/PresentationLegacy"));
 const PartnerDeck = lazyRouteWithRetry(() => import("./pages/PartnerDeck"));
 const SimuladorCarta = lazy(() => import("./pages/SimuladorCarta"));
@@ -369,6 +373,8 @@ const esRoutes = (
     {CataloniaPresentation && <Route path="/presentacion/catalonia" element={<CataloniaPresentation />} />}
     {GenericCommercialProposal && <Route path="/propuesta-comercial" element={<GenericCommercialProposal />} />}
     {RevoCommercialProposal && <Route path="/propuesta-comercial-revo" element={<RevoCommercialProposal />} />}
+    {MeliaCommercialProposal && <Route path="/propuesta-comercial-melia" element={<MeliaCommercialProposal />} />}
+    {MeliaParadisusLosCabosCommercialProposal && <Route path="/propuesta-comercial-melia-paradisus-los-cabos" element={<MeliaParadisusLosCabosCommercialProposal />} />}
     <Route path="/presentacion-anterior" element={<PresentationLegacy />} />
     <Route path="/deck" element={<PartnerDeck />} />
     <Route path="/en/presentation" element={<Presentation />} />
@@ -917,6 +923,8 @@ const DeferredAppChrome = () => {
     "/presentacion/catalonia",
     "/propuesta-comercial",
     "/propuesta-comercial-revo",
+    "/propuesta-comercial-melia",
+    "/propuesta-comercial-melia-paradisus-los-cabos",
     "/presentacion-anterior",
     "/deck",
     "/en/presentation",
@@ -933,7 +941,7 @@ const DeferredAppChrome = () => {
       <Toaster />
       <Sonner position="top-center" richColors />
       {!isPresentation && !location.pathname.startsWith("/admin") && <CookieConsent />}
-      {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo'].includes(location.pathname) && <IntentTracker />}
+      {!['/presentacion/catalonia', '/propuesta-comercial', '/propuesta-comercial-revo', '/propuesta-comercial-melia', '/propuesta-comercial-melia-paradisus-los-cabos'].includes(location.pathname) && <IntentTracker />}
       {!hideGlobalConversionChrome && <BackToTop />}
       {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <ToolsLeadPopup />}
       {!hideGlobalConversionChrome && !isUngatedProfitabilityDiagnostic && <FreemiumToolGuard />}
