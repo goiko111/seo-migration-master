@@ -1,0 +1,267 @@
+{
+  "generatedAt": "2026-09-28T10:05:01.076Z",
+  "projectRef": "pwkqbcgjrhoyxrsmcypw",
+  "mode": "read-only",
+  "localPackage": {
+    "status": "valid",
+    "expectedRows": 36,
+    "foundRows": 36,
+    "expectedLanguages": [
+      "de",
+      "en",
+      "es",
+      "fr",
+      "it",
+      "pt"
+    ],
+    "expectedGroups": [
+      "wine-list-margin-leaks-restaurant",
+      "learn-wine-service-temperature-restaurant",
+      "wine-library-pairing-matrix-texture-acidity-fat",
+      "learn-wine-guest-questions-service-scripts",
+      "wine-library-list-architecture-style-country-price",
+      "slow-stock-pos-cloudrim-savia-rotation"
+    ],
+    "duplicateSlugs": [],
+    "duplicateGroupLanguages": [],
+    "duplicateTitleHashes": [],
+    "duplicateBodyHashes": [],
+    "duplicateMigrationVersions": [],
+    "malformedContentMigrations": [],
+    "malformedSupportMigrations": [],
+    "uniqueSlugConstraint": true,
+    "errors": [],
+    "migrations": [
+      {
+        "filename": "20260713112000_fix_learn_wine_localized_pairing_links.sql",
+        "version": "20260713112000",
+        "kind": "support",
+        "checksum": "4daaaea02a3415064b42315c0ae2119ddf97a32c3d0ccca3edfb0c2a34ab566b"
+      },
+      {
+        "filename": "20260713123000_add_blog_wine_list_margin_leaks_restaurant.sql",
+        "version": "20260713123000",
+        "kind": "content",
+        "checksum": "e24c97ffccc4b295d8901db84cd2cb64412bf9f65a0a3f16bb4eb2a987f7b908"
+      },
+      {
+        "filename": "20260713124000_add_learn_wine_service_temperature_restaurant.sql",
+        "version": "20260713124000",
+        "kind": "content",
+        "checksum": "d6c99b13b32ad93fd8e2abf5ef2c01a16ddf83d780bb5b661964c5258d2b55f6"
+      },
+      {
+        "filename": "20260713125000_add_wine_library_pairing_matrix_texture_acidity_fat.sql",
+        "version": "20260713125000",
+        "kind": "content",
+        "checksum": "5587f986e7e5fb6ce955861e9166ae6c20fb41478a07926b4d1b67559de3070b"
+      },
+      {
+        "filename": "20260713130000_fix_de_pt_global_related_links.sql",
+        "version": "20260713130000",
+        "kind": "support",
+        "checksum": "9957bbac4cbaa444b336e6f67a46203b60c90d7d5ab5b5a30616a13402a5c3c1"
+      },
+      {
+        "filename": "20260713131823_add_learn_wine_guest_questions_service_scripts.sql",
+        "version": "20260713131823",
+        "kind": "content",
+        "checksum": "7ec6d6f89219aea350ae56859710e9deb5a6fbef9338d8890506ba9b2deb334d"
+      },
+      {
+        "filename": "20260713131825_add_wine_library_list_architecture_style_country_price.sql",
+        "version": "20260713131825",
+        "kind": "content",
+        "checksum": "19f7dc8fdc679f334f458e52f3fc660240e9b0e1c76c76f64441547a9300cc4a"
+      },
+      {
+        "filename": "20260713152451_add_blog_slow_stock_rotation_restaurant.sql",
+        "version": "20260713152451",
+        "kind": "content",
+        "checksum": "1136c3f17ec98760e6e0c6f6a5c26eee43b675dfda92087e5abf8519ec0b1a82"
+      },
+      {
+        "filename": "20260811153500_sanitize_article_internal_markers.sql",
+        "version": "20260811153500",
+        "kind": "support",
+        "checksum": "82aa36e5700d026f01e3fe11f59949e9864bc9bce9f290bfbc2af87e4920c2ad"
+      }
+    ]
+  },
+  "ledger": {
+    "status": "skipped",
+    "reason": "Local-only audit requested.",
+    "remoteVersions": []
+  },
+  "articleRows": {
+    "status": "skipped",
+    "reason": "Local-only audit requested.",
+    "source": null,
+    "expected": 36,
+    "found": 0,
+    "returned": 0,
+    "duplicateSlugs": [],
+    "duplicateGroupLanguages": [],
+    "duplicateBodies": [],
+    "unexpectedRowsInExpectedGroups": [],
+    "metadataMismatches": []
+  },
+  "migrations": [
+    {
+      "filename": "20260713112000_fix_learn_wine_localized_pairing_links.sql",
+      "version": "20260713112000",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713123000_add_blog_wine_list_margin_leaks_restaurant.sql",
+      "version": "20260713123000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "fugas-margen-carta-vinos-restaurante",
+        "wine-list-margin-leaks-restaurant_en",
+        "fughe-margine-carta-vini-ristorante_it",
+        "fuites-marge-carte-vins-restaurant_fr",
+        "margenverluste-weinkarte-restaurant_de",
+        "fugas-margem-carta-vinhos-restaurante_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713124000_add_learn_wine_service_temperature_restaurant.sql",
+      "version": "20260713124000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "temperatura-servicio-vino-restaurante",
+        "wine-service-temperature-restaurant_en",
+        "temperatura-servizio-vino-ristorante_it",
+        "temperature-service-vin-restaurant_fr",
+        "serviertemperatur-wein-restaurant_de",
+        "temperatura-servico-vinho-restaurante_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713125000_add_wine_library_pairing_matrix_texture_acidity_fat.sql",
+      "version": "20260713125000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "matriz-maridaje-textura-acidez-grasa-restaurante",
+        "pairing-matrix-texture-acidity-fat-restaurant_en",
+        "matrice-abbinamenti-texture-acidita-grasso-ristorante_it",
+        "matrice-accords-texture-acidite-gras-restaurant_fr",
+        "pairing-matrix-textur-saeure-fett-restaurant_de",
+        "matriz-harmonizacao-textura-acidez-gordura-restaurante_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713130000_fix_de_pt_global_related_links.sql",
+      "version": "20260713130000",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713131823_add_learn_wine_guest_questions_service_scripts.sql",
+      "version": "20260713131823",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "guiones-recomendacion-vino-sala",
+        "wine-recommendation-scripts-restaurant-floor_en",
+        "copioni-consigliare-vino-sala_it",
+        "scripts-recommandation-vin-salle_fr",
+        "weinempfehlung-service-skripte_de",
+        "guioes-recomendacao-vinho-sala_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713131825_add_wine_library_list_architecture_style_country_price.sql",
+      "version": "20260713131825",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "arquitectura-carta-vinos-estilo-pais-precio-restaurante",
+        "restaurant-wine-list-architecture-style-country-price_en",
+        "architettura-carta-vini-stile-paese-prezzo-ristorante_it",
+        "architecture-carte-vins-style-pays-prix-restaurant_fr",
+        "weinkarten-architektur-stil-land-preis-restaurant_de",
+        "arquitetura-carta-vinhos-estilo-pais-preco-restaurante_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713152451_add_blog_slow_stock_rotation_restaurant.sql",
+      "version": "20260713152451",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "stock-dormido-bodega-rotacion-tpv-cloudrim-savia",
+        "sleeping-cellar-stock-pos-cloudrim-savia-rotation_en",
+        "stock-dormiente-cantina-rotazione-tpv-cloudrim-savia_it",
+        "stock-dormant-cave-rotation-tpv-cloudrim-savia_fr",
+        "schlafender-kellerbestand-rotation-pos-cloudrim-savia_de",
+        "stock-adormecido-adega-rotacao-pos-cloudrim-savia_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260811153500_sanitize_article_internal_markers.sql",
+      "version": "20260811153500",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    }
+  ],
+  "snapshot": {
+    "status": "not-requested",
+    "path": null
+  },
+  "releaseGate": "local-ready",
+  "instruction": "Local package is internally consistent. Run the authorized remote audit before any write."
+}

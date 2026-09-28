@@ -73,13 +73,16 @@ por ledger y versionado de Supabase.
 ## Gate de release
 
 1. Entrar con una cuenta Supabase que vea `pwkqbcgjrhoyxrsmcypw`, enlazar el worktree y
-   ejecutar `npm run audit:wine-library:remote`.
-2. El informe debe quedar `ready`, sin grupos parciales ni acciones de reparacion. Si
+   seguir `docs/agent_outputs/WINE_LIBRARY_REMOTE_INTERVENTION_2026-09-28.md`.
+2. Ejecutar el preflight autorizado con `--snapshot-file`. El informe debe quedar
+   `ready`, con paquete local valido, snapshot escrito y sin duplicados, filas
+   inesperadas, discrepancias ni grupos parciales. Si
    hay filas completas con version ausente del ledger, detenerse y reparar el historial
    de forma explicita; no reaplicar automaticamente.
-3. Guardar IDs/versiones actuales de `sitemap` y `prerender` y exportar un snapshot de
-   las 36 filas objetivo antes de cualquier escritura.
-4. Aplicar solo migraciones marcadas `apply-in-order` y repetir el preflight.
+3. Guardar IDs/versiones actuales de `sitemap` y `prerender`; el snapshot completo de
+   las filas objetivo queda generado por el mismo preflight antes de cualquier escritura.
+4. Exigir que `supabase db push --linked --dry-run` coincida exactamente con las
+   migraciones `apply-in-order`; aplicar solo con autorizacion y repetir el preflight.
 5. Desplegar `sitemap` y `prerender`, crear un nuevo Pages inmutable desde esta revision,
    desplegar `winerim-proxy` y actualizar `winerim-edge-router` conservando los origenes
    comercial y Catalonia.

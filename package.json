@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "audit:wine-library:local": "node scripts/audit-wine-library-remote-ledger.mjs --local-only",
     "audit:wine-library:remote": "node scripts/audit-wine-library-remote-ledger.mjs",
     "validate:wine-library": "node scripts/validate-wine-library-release.mjs",
     "generate:sitemap-static": "node scripts/refresh-static-sitemap.mjs",
