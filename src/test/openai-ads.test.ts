@@ -20,6 +20,7 @@ beforeEach(() => {
   resetOpenAIAdsForTests();
   localStorage.clear();
   sessionStorage.clear();
+  window.history.replaceState({}, "", "/");
   delete window.oaiq;
   sdkScripts().forEach((script) => script.remove());
 });
@@ -67,6 +68,25 @@ describe("OpenAI Ads Pixel", () => {
       ["consent", true],
     ]);
     expect(sdkScripts()).toHaveLength(1);
+  });
+
+  it("preserves the OpenAI click reference until consent after SPA navigation", () => {
+    window.history.replaceState({}, "", "/en?oppref=click_ref_123");
+    initializeOpenAIAds(false);
+
+    window.history.replaceState({}, "", "/en/demo");
+    initializeOpenAIAds(false);
+    updateOpenAIAdsConsent(true);
+
+    expect(window.location.pathname).toBe("/en/demo");
+    expect(new URLSearchParams(window.location.search).get("oppref")).toBe(
+      "click_ref_123",
+    );
+    expect(sdkScripts()).toHaveLength(1);
+
+    window.history.replaceState({}, "", "/en/contact");
+    initializeOpenAIAds(true);
+    expect(new URLSearchParams(window.location.search).has("oppref")).toBe(false);
   });
 
   it("emits one standard lead event with a stable event id", () => {
@@ -119,5 +139,6 @@ describe("OpenAI Ads Pixel", () => {
     expect(router).toContain('...LEAD_FORM_ROUTES');
     expect(router).toContain('path.startsWith("/legal/")');
     expect(router).toContain('fetchFrontend(request, env)');
+    expect(router).toContain('Location: `https://winerim.wine/en${url.search}`');
   });
 });

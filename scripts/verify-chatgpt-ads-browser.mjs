@@ -31,6 +31,46 @@ try {
   );
   await deniedContext.close();
 
+  const attributionContext = await browser.newContext();
+  const attributionPage = await attributionContext.newPage();
+  const attributionOpenAiRequests = [];
+  attributionPage.on("request", (request) => {
+    if (/https:\/\/bzr(cdn)?\.openai\.com/.test(request.url())) {
+      attributionOpenAiRequests.push(request.url());
+    }
+  });
+  await attributionPage.route(sdkUrl, async (route) => {
+    await route.fulfill({
+      contentType: "application/javascript",
+      body: `window.__oaiqCaptured = Array.isArray(window.oaiq && window.oaiq.q) ? window.oaiq.q.slice() : [];
+window.oaiq = (...args) => window.__oaiqCaptured.push(args);`,
+    });
+  });
+  await attributionPage.goto(`${baseUrl}/en?oppref=browser_click_ref`, {
+    waitUntil: "networkidle",
+  });
+  await attributionPage.evaluate(() => {
+    window.history.pushState({}, "", "/en/demo");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  });
+  await attributionPage.waitForURL("**/en/demo");
+  await attributionPage.waitForTimeout(1_700);
+  assert(
+    attributionOpenAiRequests.length === 0,
+    "OpenAI request was made before consent during attribution test",
+  );
+  await attributionPage.getByRole("button", { name: "Accept", exact: true }).click();
+  await attributionPage.waitForFunction(() => Array.isArray(window.__oaiqCaptured));
+  const restoredOppref = await attributionPage.evaluate(
+    () => new URLSearchParams(window.location.search).get("oppref"),
+  );
+  assert(restoredOppref === "browser_click_ref", "oppref was lost before SDK loading");
+  assert(
+    attributionOpenAiRequests.filter((url) => url === sdkUrl).length === 1,
+    `Expected one attributed SDK request, got ${attributionOpenAiRequests.join(", ")}`,
+  );
+  await attributionContext.close();
+
   const acceptedContext = await browser.newContext();
   await acceptedContext.addInitScript(() => {
     localStorage.setItem("winerim_cookie_consent", "accepted");
@@ -123,6 +163,8 @@ window.oaiq = (...args) => window.__oaiqCaptured.push(args);`,
 
   console.log(JSON.stringify({
     deniedOpenAiRequests: deniedOpenAiRequests.length,
+    attributionSdkRequests: attributionOpenAiRequests.filter((url) => url === sdkUrl).length,
+    attributionOpprefPreserved: restoredOppref === "browser_click_ref",
     acceptedSdkRequests: openAiRequests.filter((url) => url === sdkUrl).length,
     persistenceAttempts: leadPayloads.length,
     leadEvents: measureCalls.length,

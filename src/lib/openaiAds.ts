@@ -5,6 +5,8 @@ export const OPENAI_ADS_SDK_URL = "https://bzrcdn.openai.com/sdk/oaiq.min.js";
 
 const SDK_MARKER = "data-winerim-openai-ads";
 const MEASURED_LEAD_PREFIX = "winerim_openai_ads_lead_";
+const OPENAI_CLICK_REFERENCE_PARAM = "oppref";
+const MAX_CLICK_REFERENCE_LENGTH = 512;
 const EXCLUDED_PREFIXES = [
   "/admin",
   "/presentacion",
@@ -27,6 +29,7 @@ declare global {
 
 let initialized = false;
 let sdkRequested = false;
+let pendingClickReference: string | null = null;
 const measuredLeadIds = new Set<string>();
 
 export function isOpenAIAdsEligiblePath(pathname: string): boolean {
@@ -50,6 +53,31 @@ function getQueue(): Oaiq {
   return queue;
 }
 
+function captureClickReference(): void {
+  if (typeof window === "undefined") return;
+
+  const value = new URLSearchParams(window.location.search).get(
+    OPENAI_CLICK_REFERENCE_PARAM,
+  );
+  if (value && value.length <= MAX_CLICK_REFERENCE_LENGTH) {
+    pendingClickReference = value;
+  }
+}
+
+function restoreClickReferenceToCurrentUrl(): void {
+  if (typeof window === "undefined" || !pendingClickReference) return;
+
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(OPENAI_CLICK_REFERENCE_PARAM)) return;
+
+  url.searchParams.set(OPENAI_CLICK_REFERENCE_PARAM, pendingClickReference);
+  window.history.replaceState(
+    window.history.state,
+    "",
+    `${url.pathname}${url.search}${url.hash}`,
+  );
+}
+
 function requestSdk(): void {
   if (typeof document === "undefined" || sdkRequested) return;
 
@@ -67,6 +95,12 @@ function requestSdk(): void {
   sdkRequested = true;
 }
 
+function requestSdkWithClickReference(): void {
+  restoreClickReferenceToCurrentUrl();
+  requestSdk();
+  pendingClickReference = null;
+}
+
 /**
  * Installs one global Pixel queue. Consent is always denied before init; the SDK
  * is requested only after a stored or newly granted consent decision.
@@ -74,6 +108,7 @@ function requestSdk(): void {
 export function initializeOpenAIAds(consentGranted = hasConsent()): void {
   if (typeof window === "undefined") return;
 
+  captureClickReference();
   const oaiq = getQueue();
   if (!initialized) {
     oaiq("consent", false);
@@ -86,15 +121,16 @@ export function initializeOpenAIAds(consentGranted = hasConsent()): void {
 
   if (consentGranted) {
     oaiq("consent", true);
-    requestSdk();
+    requestSdkWithClickReference();
   }
 }
 
 export function updateOpenAIAdsConsent(granted: boolean): void {
   if (!initialized || typeof window === "undefined") return;
 
+  captureClickReference();
   getQueue()("consent", granted);
-  if (granted) requestSdk();
+  if (granted) requestSdkWithClickReference();
 }
 
 function wasLeadMeasured(eventId: string): boolean {
@@ -133,5 +169,6 @@ export function measureOpenAILeadCreated(leadId: string): boolean {
 export function resetOpenAIAdsForTests(): void {
   initialized = false;
   sdkRequested = false;
+  pendingClickReference = null;
   measuredLeadIds.clear();
 }

@@ -767,7 +767,7 @@ export default {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "https://winerim.wine/en",
+          Location: `https://winerim.wine/en${url.search}`,
           "Cache-Control": "no-store, max-age=0",
           "X-Winerim-Router": "us-home-locale-redirect",
         },
