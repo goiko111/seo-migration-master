@@ -1,5 +1,9 @@
 # Biblioteca del vino - release handoff
 
+> Este handoff conserva el paquete editorial aislado. Para el candidato combinado con
+> la fuente comercial que reproduce produccion, usar
+> `WINE_LIBRARY_COMBINED_RELEASE_HANDOFF_2026-09-28.md`.
+
 Fecha: 2026-09-28
 
 Estado: candidato local completo, validado y no publicado.

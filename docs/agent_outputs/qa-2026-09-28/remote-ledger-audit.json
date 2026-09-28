@@ -1,0 +1,148 @@
+{
+  "generatedAt": "2026-09-28T09:16:59.392Z",
+  "projectRef": "pwkqbcgjrhoyxrsmcypw",
+  "mode": "read-only",
+  "ledger": {
+    "status": "unavailable",
+    "reason": "Supabase CLI is not linked in this worktree.",
+    "remoteVersions": []
+  },
+  "articleRows": {
+    "status": "available",
+    "expected": 36,
+    "found": 18
+  },
+  "migrations": [
+    {
+      "filename": "20260713112000_fix_learn_wine_localized_pairing_links.sql",
+      "version": "20260713112000",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713123000_add_blog_wine_list_margin_leaks_restaurant.sql",
+      "version": "20260713123000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "complete",
+      "expectedRows": 6,
+      "presentRows": 6,
+      "missingSlugs": [],
+      "provisionalAction": "likely-skip-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713124000_add_learn_wine_service_temperature_restaurant.sql",
+      "version": "20260713124000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "complete",
+      "expectedRows": 6,
+      "presentRows": 6,
+      "missingSlugs": [],
+      "provisionalAction": "likely-skip-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713125000_add_wine_library_pairing_matrix_texture_acidity_fat.sql",
+      "version": "20260713125000",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "complete",
+      "expectedRows": 6,
+      "presentRows": 6,
+      "missingSlugs": [],
+      "provisionalAction": "likely-skip-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713130000_fix_de_pt_global_related_links.sql",
+      "version": "20260713130000",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713131823_add_learn_wine_guest_questions_service_scripts.sql",
+      "version": "20260713131823",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "guiones-recomendacion-vino-sala",
+        "wine-recommendation-scripts-restaurant-floor_en",
+        "copioni-consigliare-vino-sala_it",
+        "scripts-recommandation-vin-salle_fr",
+        "weinempfehlung-service-skripte_de",
+        "guioes-recomendacao-vinho-sala_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713131825_add_wine_library_list_architecture_style_country_price.sql",
+      "version": "20260713131825",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "arquitectura-carta-vinos-estilo-pais-precio-restaurante",
+        "restaurant-wine-list-architecture-style-country-price_en",
+        "architettura-carta-vini-stile-paese-prezzo-ristorante_it",
+        "architecture-carte-vins-style-pays-prix-restaurant_fr",
+        "weinkarten-architektur-stil-land-preis-restaurant_de",
+        "arquitetura-carta-vinhos-estilo-pais-preco-restaurante_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260713152451_add_blog_slow_stock_rotation_restaurant.sql",
+      "version": "20260713152451",
+      "kind": "content",
+      "ledgerState": "unknown",
+      "rowState": "absent",
+      "expectedRows": 6,
+      "presentRows": 0,
+      "missingSlugs": [
+        "stock-dormido-bodega-rotacion-tpv-cloudrim-savia",
+        "sleeping-cellar-stock-pos-cloudrim-savia-rotation_en",
+        "stock-dormiente-cantina-rotazione-tpv-cloudrim-savia_it",
+        "stock-dormant-cave-rotation-tpv-cloudrim-savia_fr",
+        "schlafender-kellerbestand-rotation-pos-cloudrim-savia_de",
+        "stock-adormecido-adega-rotacao-pos-cloudrim-savia_pt"
+      ],
+      "provisionalAction": "likely-apply-after-ledger-confirmation",
+      "action": "block-until-ledger-is-readable"
+    },
+    {
+      "filename": "20260811153500_sanitize_article_internal_markers.sql",
+      "version": "20260811153500",
+      "kind": "support",
+      "ledgerState": "unknown",
+      "rowState": "not-applicable",
+      "expectedRows": 0,
+      "presentRows": 0,
+      "missingSlugs": [],
+      "provisionalAction": "ledger-only-decision",
+      "action": "block-until-ledger-is-readable"
+    }
+  ],
+  "releaseGate": "blocked",
+  "instruction": "Do not apply migrations. Restore read-only ledger access and resolve every blocking action first."
+}
