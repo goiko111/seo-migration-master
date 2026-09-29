@@ -65,16 +65,27 @@ describe("operational time calculator", () => {
 
   it("keeps the human, bot and sitemap contracts in sync", () => {
     const route = "/herramientas/calculadora-tiempo-operativo";
+    const enRoute = "/en/tools/operational-time-calculator";
     const app = readFileSync("src/App.tsx", "utf8");
     const tools = readFileSync("src/pages/Herramientas.tsx", "utf8");
-    const worker = readFileSync("edge-router/winerim-pages-router.js", "utf8");
+    const edgeRouter = readFileSync("edge-router/winerim-pages-router.js", "utf8");
+    const worker = readFileSync("cloudflare-worker-v3-hybrid.js", "utf8");
     const sitemap = readFileSync("supabase/functions/sitemap/index.ts", "utf8");
     const prerender = readFileSync("supabase/functions/prerender/index.ts", "utf8");
+    const page = readFileSync("src/pages/CalculadoraTiempoOperativo.tsx", "utf8");
 
     expect(app).toContain(route);
+    expect(app).toContain(enRoute);
     expect(tools).toContain(route);
+    expect(edgeRouter).toContain(route);
+    expect(edgeRouter).toContain(enRoute);
     expect(worker).toContain(route);
+    expect(worker).toContain(enRoute);
     expect(sitemap).toContain(`{ esPath: '${route}', priority: '0.8', changefreq: 'monthly', multilang: false }`);
+    expect(sitemap).toContain(`{ esPath: '${enRoute}', priority: '0.8', changefreq: 'monthly', multilang: false }`);
     expect(prerender).toContain(`'${route}': {`);
+    expect(prerender).toContain(`'${enRoute}': {`);
+    expect(page).toContain("Recoverable operational time calculator");
+    expect(page).toContain("Calculated locally · We do not send this data");
   });
 });

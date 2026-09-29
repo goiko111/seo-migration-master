@@ -16,9 +16,10 @@ import InternalLinks from "@/components/seo/InternalLinks";
 import NextSteps from "@/components/seo/NextSteps";
 import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { integrationProviderPath } from "@/lib/integrationRoutes";
 
 /* ─── types ─── */
-interface Integration { name: string; desc: string; status: "active" | "development" | "custom" }
+interface Integration { name: string; desc: string; status: "active" | "development" | "custom"; href?: string }
 interface BenefitItem { title: string; desc: string }
 interface ImplStep { title: string; desc: string }
 
@@ -110,8 +111,8 @@ const ES: Content = {
   posDesc: "Con una integración validada, Winerim recibe ventas, catálogo o stock para convertir la operativa del TPV en trazabilidad y analítica. El alcance, la dirección y la frecuencia se confirman para cada proveedor y establecimiento.",
   posNoteTitle: "¿Tu TPV no está en la lista?", posNote: "Podemos revisar su API, exportaciones y permisos. La viabilidad, el alcance y el coste se confirman por escrito antes de activar nada.",
   pos: [
-    { name: "Agora POS", desc: "Sincronización bidireccional de ventas, catálogo y stock", status: "active" },
-    { name: "Revo XEF", desc: "Conector sujeto a preflight, permisos, mapeo y piloto de lectura", status: "custom" },
+    { name: "Agora POS", desc: "Flujo verificable de catálogo y ventas; stock según el alcance de cada conexión", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Conector sujeto a preflight, permisos, mapeo y piloto de lectura", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "POS on-premise con acceso SQL Server por validar", status: "custom" },
     { name: "Glop", desc: "TPV con API documentada; alcance por validar", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "Importación CSV/XML sujeta a muestra y mapeo", status: "custom" },
@@ -271,8 +272,8 @@ const EN: Content = {
   posDesc: "With a validated integration, Winerim can receive sales, catalog or stock data and turn POS activity into traceability and analytics. Scope, direction and frequency are confirmed for each provider and venue.",
   posNoteTitle: "Your POS not listed?", posNote: "We can review its API, exports and permissions. Feasibility, scope and cost are confirmed in writing before anything is activated.",
   pos: [
-    { name: "Agora POS", desc: "Bidirectional sales, catalog and stock sync", status: "active" },
-    { name: "Revo XEF", desc: "Connector subject to preflight, permissions, mapping and read pilot", status: "custom" },
+    { name: "Agora POS", desc: "Verifiable catalog and sales flow; stock depends on each connection's scope", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Connector subject to preflight, permissions, mapping and read pilot", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "On-prem SQL Server access to be validated", status: "custom" },
     { name: "Glop", desc: "Documented POS API; scope to be validated", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "CSV/XML imports subject to sample and mapping", status: "custom" },
@@ -427,8 +428,8 @@ const IT: Content = {
   posDesc: "Con un'integrazione convalidata, Winerim può ricevere dati di vendita, catalogo o stock e trasformare l'attività del POS in tracciabilità e analisi. Ambito, direzione e frequenza vengono confermati per ogni fornitore e locale.",
   posNoteTitle: "Il tuo POS non è nell'elenco?", posNote: "Possiamo esaminarne API, esportazioni e permessi. Fattibilità, ambito e costo vengono confermati per iscritto prima di qualsiasi attivazione.",
   pos: [
-    { name: "Agora POS", desc: "Sincronizzazione bidirezionale verificata di vendite, catalogo e stock", status: "active" },
-    { name: "Revo XEF", desc: "Connettore soggetto a preflight, permessi, mappatura e test di lettura", status: "custom" },
+    { name: "Agora POS", desc: "Flusso verificabile di catalogo e vendite; stock secondo l'ambito della connessione", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Connettore soggetto a preflight, permessi, mappatura e test di lettura", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "Accesso locale a SQL Server da convalidare", status: "custom" },
     { name: "Glop", desc: "API POS documentata; ambito da convalidare", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "Importazioni CSV/XML soggette a campione e mappatura", status: "custom" },
@@ -577,8 +578,8 @@ const FR: Content = {
   posDesc: "Avec une intégration validée, Winerim peut recevoir des données de vente, de catalogue ou de stock et transformer l'activité du POS en traçabilité et en analyses. Le périmètre, le sens des échanges et la fréquence sont confirmés pour chaque fournisseur et établissement.",
   posNoteTitle: "Votre POS n'est pas dans la liste ?", posNote: "Nous pouvons examiner son API, ses exports et ses autorisations. Faisabilité, périmètre et coût sont confirmés par écrit avant toute activation.",
   pos: [
-    { name: "Agora POS", desc: "Synchronisation bidirectionnelle vérifiée des ventes, du catalogue et du stock", status: "active" },
-    { name: "Revo XEF", desc: "Connecteur soumis au préflight, aux autorisations, au mapping et à un pilote de lecture", status: "custom" },
+    { name: "Agora POS", desc: "Flux vérifiable du catalogue et des ventes ; stock selon le périmètre de la connexion", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Connecteur soumis au préflight, aux autorisations, au mapping et à un pilote de lecture", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "Accès local à SQL Server à valider", status: "custom" },
     { name: "Glop", desc: "API POS documentée ; périmètre à valider", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "Imports CSV/XML soumis à un échantillon et au mapping", status: "custom" },
@@ -727,8 +728,8 @@ const DE: Content = {
   posDesc: "Mit einer validierten Integration kann Winerim Verkaufs-, Katalog- oder Bestandsdaten empfangen und POS-Aktivitäten in nachvollziehbare Auswertungen überführen. Umfang, Richtung und Frequenz werden für jeden Anbieter und Standort bestätigt.",
   posNoteTitle: "Ihr Kassensystem fehlt?", posNote: "Wir können API, Exporte und Berechtigungen prüfen. Machbarkeit, Umfang und Kosten werden vor jeder Aktivierung schriftlich bestätigt.",
   pos: [
-    { name: "Agora POS", desc: "Verifizierte bidirektionale Synchronisierung von Verkäufen, Katalog und Bestand", status: "active" },
-    { name: "Revo XEF", desc: "Konnektor vorbehaltlich Vorprüfung, Berechtigungen, Mapping und Lesepilot", status: "custom" },
+    { name: "Agora POS", desc: "Prüfbarer Katalog- und Verkaufsfluss; Bestand je nach Verbindungsumfang", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Konnektor vorbehaltlich Vorprüfung, Berechtigungen, Mapping und Lesepilot", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "Lokaler SQL-Server-Zugriff muss validiert werden", status: "custom" },
     { name: "Glop", desc: "Dokumentierte POS-API; Umfang muss validiert werden", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "CSV/XML-Import vorbehaltlich Beispieldaten und Mapping", status: "custom" },
@@ -877,8 +878,8 @@ const PT: Content = {
   posDesc: "Com uma integração validada, a Winerim pode receber dados de vendas, catálogo ou stock e transformar a atividade do POS em rastreabilidade e análise. O âmbito, a direção e a frequência são confirmados para cada fornecedor e unidade.",
   posNoteTitle: "O seu POS não está na lista?", posNote: "Podemos rever a API, exportações e permissões. Viabilidade, âmbito e custo são confirmados por escrito antes de qualquer ativação.",
   pos: [
-    { name: "Agora POS", desc: "Sincronização bidirecional verificada de vendas, catálogo e stock", status: "active" },
-    { name: "Revo XEF", desc: "Conector sujeito a preflight, permissões, mapeamento e piloto de leitura", status: "custom" },
+    { name: "Agora POS", desc: "Fluxo verificável de catálogo e vendas; stock conforme o âmbito da ligação", status: "active", href: "/integraciones/agora" },
+    { name: "Revo XEF", desc: "Conector sujeito a preflight, permissões, mapeamento e piloto de leitura", status: "custom", href: "/integraciones/revo-xef" },
     { name: "ICG FrontRest", desc: "Acesso local a SQL Server por validar", status: "custom" },
     { name: "Glop", desc: "API POS documentada; âmbito por validar", status: "custom" },
     { name: "Hiopos / Hioffice", desc: "Importações CSV/XML sujeitas a amostra e mapeamento", status: "custom" },
@@ -1108,6 +1109,11 @@ const Integraciones = () => {
               <StatusBadge status={int.status} t={t} />
             </div>
             <p className="text-xs text-muted-foreground mt-auto">{int.desc}</p>
+            {int.href && (
+              <Link to={integrationProviderPath(int.href.endsWith("revo-xef") ? "revo-xef" : "agora", lang)} className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-wine hover:text-wine-light">
+                {int.name} <ArrowRight size={13} aria-hidden="true" />
+              </Link>
+            )}
           </div>
         </ScrollReveal>
       ))}

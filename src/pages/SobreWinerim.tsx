@@ -326,7 +326,7 @@ const SobreWinerim = () => {
             <ScrollReveal delay={0.2}>
               <div className="mt-8 grid sm:grid-cols-3 gap-4">
                 {[
-                  { icon: Zap, label: "22+ integraciones TPV disponibles" },
+                  { icon: Zap, label: "Integraciones TPV con alcance validado por instalación" },
                   { icon: Award, label: "Contenido validado por profesionales de sommellerie" },
                   { icon: Brain, label: "Motor de IA entrenado con datos específicos del sector" },
                 ].map((item, i) => (

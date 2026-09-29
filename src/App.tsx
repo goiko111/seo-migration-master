@@ -79,6 +79,7 @@ const BarometroCartasVino = lazy(() => import("./pages/BarometroCartasVino"));
 const Precios = lazy(() => import("./pages/Precios"));
 const PreciosModulosIntegraciones = lazy(() => import("./pages/PreciosModulosIntegraciones"));
 const Integraciones = lazy(() => import("./pages/Integraciones"));
+const IntegrationProvider = lazy(() => import("./pages/IntegrationProvider"));
 const GruposRestauracion = lazy(() => import("./pages/GruposRestauracion"));
 const Hoteles = lazy(() => import("./pages/Hoteles"));
 const RestauranteSinSumiller = lazy(() => import("./pages/RestauranteSinSumiller"));
@@ -303,6 +304,28 @@ const esRoutes = (
     <Route path="/precios" element={<Precios />} />
     <Route path="/precios-modulos-integraciones" element={<PreciosModulosIntegraciones />} />
     <Route path="/integraciones" element={<Integraciones />} />
+    <Route path="/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/integraciones/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/en/integrations/agora" element={<IntegrationProvider />} />
+    <Route path="/en/integrations/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/it/integrazioni/agora" element={<IntegrationProvider />} />
+    <Route path="/it/integrazioni/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/fr/integrations/agora" element={<IntegrationProvider />} />
+    <Route path="/fr/integrations/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/de/integrationen/agora" element={<IntegrationProvider />} />
+    <Route path="/de/integrationen/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/pt/integracoes/agora" element={<IntegrationProvider />} />
+    <Route path="/pt/integracoes/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/en/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/en/integraciones/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/it/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/it/integraciones/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/fr/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/fr/integraciones/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/de/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/de/integraciones/revo-xef" element={<IntegrationProvider />} />
+    <Route path="/pt/integraciones/agora" element={<IntegrationProvider />} />
+    <Route path="/pt/integraciones/revo-xef" element={<IntegrationProvider />} />
     <Route path="/soluciones/grupos-restauracion" element={<GruposRestauracion />} />
     <Route path="/soluciones/hoteles" element={<Hoteles />} />
     <Route path="/soluciones/restaurantes-sin-sumiller" element={<RestauranteSinSumiller />} />
@@ -346,6 +369,7 @@ const esRoutes = (
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-rentabilidad-bodega" element={<RentabilidadBodega />} />
     <Route path="/herramientas/calculadora-tiempo-operativo" element={<CalculadoraTiempoOperativo />} />
+    <Route path="/en/tools/operational-time-calculator" element={<CalculadoraTiempoOperativo />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -939,6 +963,7 @@ const DeferredAppChrome = () => {
   const isUngatedDecisionTool = [
     "/herramientas/diagnostico-rentabilidad-bodega",
     "/herramientas/calculadora-tiempo-operativo",
+    "/en/tools/operational-time-calculator",
   ].includes(location.pathname);
 
   return (

@@ -103,7 +103,7 @@ const ES: Content = {
       details: [
         "Carga completa de la carta de vinos (referencias, precios, fichas)",
         "Configuración de categorías, secciones y estructura visual",
-        "Conexión con TPV si aplica (Agora, Revo, ICG, etc.)",
+        "Conexión con TPV compatible si aplica, previa validación técnica",
         "Configuración de vino por copa, maridajes y recomendaciones",
       ],
     },

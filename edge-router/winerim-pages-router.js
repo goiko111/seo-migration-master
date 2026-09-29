@@ -89,6 +89,7 @@ const REACT_ROUTES = new Set([
   "/precios-modulos-integraciones",
   "/herramientas/diagnostico-rentabilidad-bodega",
   "/herramientas/calculadora-tiempo-operativo",
+  "/en/tools/operational-time-calculator",
   "/simulador-carta",
   "/en/wine-list-simulator",
   "/fr/simulateur-carte",
@@ -162,6 +163,29 @@ const OPERATIONAL_TIME_BOT_HTML = `
     <section>
       <h2>Sin garantía ni formulario obligatorio</h2>
       <p>Todos los supuestos son editables, el cálculo se realiza localmente y el resultado aparece antes de cualquier invitación comercial.</p>
+    </section>
+  </main>
+`;
+
+const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
+const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
+const OPERATIONAL_TIME_EN_TITLE = "Restaurant Operational Time Calculator | Winerim";
+const OPERATIONAL_TIME_EN_DESCRIPTION = "Estimate recoverable hours when updating wine lists, reviewing margins, processing documents, reconciling POS data and preparing reports.";
+const OPERATIONAL_TIME_EN_BOT_HTML = `
+  <main id="winerim-operational-time-calculator">
+    <h1>Recoverable operational time calculator</h1>
+    <p>Compare current manual time with your own Winerim scenario, task by task, without turning hours into a salary-saving claim.</p>
+    <section>
+      <h2>Eight editable tasks</h2>
+      <p>Wine list and price updates, margins, documents, sales, stock and POS reconciliation, distributors, reporting, groups and team training.</p>
+    </section>
+    <section>
+      <h2>Transparent formula</h2>
+      <p>Each task uses current minutes minus estimated minutes with Winerim, multiplied by monthly frequency. Results are shown per week, month and year.</p>
+    </section>
+    <section>
+      <h2>No guarantee or mandatory form</h2>
+      <p>Every assumption is editable, calculation stays in the browser and the complete result appears before any commercial invitation.</p>
     </section>
   </main>
 `;
@@ -518,25 +542,28 @@ const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET")
     .transform(response);
 };
 
-const withOperationalTimeBotMetadata = (response, requestMethod = "GET") => {
+const withOperationalTimeBotMetadata = (response, requestMethod = "GET", english = false) => {
   if (requestMethod === "HEAD") return response;
   const contentType = response.headers.get("Content-Type") || "";
   if (!contentType.includes("text/html")) return response;
+  const config = english
+    ? { lang: "en", title: OPERATIONAL_TIME_EN_TITLE, description: OPERATIONAL_TIME_EN_DESCRIPTION, url: OPERATIONAL_TIME_EN_URL, html: OPERATIONAL_TIME_EN_BOT_HTML }
+    : { lang: "es", title: OPERATIONAL_TIME_TITLE, description: OPERATIONAL_TIME_DESCRIPTION, url: OPERATIONAL_TIME_URL, html: OPERATIONAL_TIME_BOT_HTML };
 
   return new HTMLRewriter()
     .on("html", {
       element(element) {
-        element.setAttribute("lang", "es");
+        element.setAttribute("lang", config.lang);
       },
     })
     .on("title", {
       element(element) {
-        element.setInnerContent(OPERATIONAL_TIME_TITLE);
+        element.setInnerContent(config.title);
       },
     })
     .on('meta[name="description"]', {
       element(element) {
-        element.setAttribute("content", OPERATIONAL_TIME_DESCRIPTION);
+        element.setAttribute("content", config.description);
       },
     })
     .on('meta[name="robots"]', {
@@ -546,12 +573,12 @@ const withOperationalTimeBotMetadata = (response, requestMethod = "GET") => {
     })
     .on('link[rel="canonical"]', {
       element(element) {
-        element.setAttribute("href", OPERATIONAL_TIME_URL);
+        element.setAttribute("href", config.url);
       },
     })
     .on("body", {
       element(element) {
-        element.append(OPERATIONAL_TIME_BOT_HTML, { html: true });
+        element.append(config.html, { html: true });
       },
     })
     .transform(response);
@@ -563,7 +590,7 @@ const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
   if (!response.ok || !contentType.includes("xml") || request.method === "HEAD") return response;
 
   const xml = await response.text();
-  const urls = [PROFITABILITY_DIAGNOSTIC_URL, OPERATIONAL_TIME_URL];
+  const urls = [PROFITABILITY_DIAGNOSTIC_URL, OPERATIONAL_TIME_URL, OPERATIONAL_TIME_EN_URL];
   let patchedXml = xml;
   const added = [];
   for (const targetUrl of urls) {
@@ -905,6 +932,10 @@ export default {
       if (path === OPERATIONAL_TIME_ROUTE) {
         const response = await fetchReactPage(request, env, path);
         return withOperationalTimeBotMetadata(response, request.method);
+      }
+      if (path === OPERATIONAL_TIME_EN_ROUTE) {
+        const response = await fetchReactPage(request, env, path);
+        return withOperationalTimeBotMetadata(response, request.method, true);
       }
       const response = await env.BACKEND.fetch(request);
       const contentType = response.headers.get("Content-Type") || "";

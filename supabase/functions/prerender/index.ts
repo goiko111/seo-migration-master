@@ -103,24 +103,6 @@ const LINK_RELEASES: Record<string, string> = {
   '/fr/article/fuites-marge-carte-vins-restaurant': '2026-08-31T09:15:00+02:00',
   '/de/article/margenverluste-weinkarte-restaurant': '2026-08-31T09:20:00+02:00',
   '/pt/article/fugas-margem-carta-vinhos-restaurante': '2026-08-31T09:25:00+02:00',
-  '/article/arquitectura-carta-vinos-estilo-pais-precio-restaurante': '2026-09-07T09:00:00+02:00',
-  '/en/article/restaurant-wine-list-architecture-style-country-price': '2026-09-07T09:05:00+02:00',
-  '/it/article/architettura-carta-vini-stile-paese-prezzo-ristorante': '2026-09-07T09:10:00+02:00',
-  '/fr/article/architecture-carte-vins-style-pays-prix-restaurant': '2026-09-07T09:15:00+02:00',
-  '/de/article/weinkarten-architektur-stil-land-preis-restaurant': '2026-09-07T09:20:00+02:00',
-  '/pt/article/arquitetura-carta-vinhos-estilo-pais-preco-restaurante': '2026-09-07T09:25:00+02:00',
-  '/article/guiones-recomendacion-vino-sala': '2026-09-14T09:00:00+02:00',
-  '/en/article/wine-recommendation-scripts-restaurant-floor': '2026-09-14T09:05:00+02:00',
-  '/it/article/copioni-consigliare-vino-sala': '2026-09-14T09:10:00+02:00',
-  '/fr/article/scripts-recommandation-vin-salle': '2026-09-14T09:15:00+02:00',
-  '/de/article/weinempfehlung-service-skripte': '2026-09-14T09:20:00+02:00',
-  '/pt/article/guioes-recomendacao-vinho-sala': '2026-09-14T09:25:00+02:00',
-  '/article/stock-dormido-bodega-rotacion-tpv-cloudrim-savia': '2026-09-28T09:00:00+02:00',
-  '/en/article/sleeping-cellar-stock-pos-cloudrim-savia-rotation': '2026-09-28T09:05:00+02:00',
-  '/it/article/stock-dormiente-cantina-rotazione-tpv-cloudrim-savia': '2026-09-28T09:10:00+02:00',
-  '/fr/article/stock-dormant-cave-rotation-tpv-cloudrim-savia': '2026-09-28T09:15:00+02:00',
-  '/de/article/schlafender-kellerbestand-rotation-pos-cloudrim-savia': '2026-09-28T09:20:00+02:00',
-  '/pt/article/stock-adormecido-adega-rotacao-pos-cloudrim-savia': '2026-09-28T09:25:00+02:00',
 };
 
 function isReleasedLink(url: string): boolean {
@@ -177,24 +159,6 @@ const ARTICLE_RELEASES: Record<string, string> = {
   'fuites-marge-carte-vins-restaurant_fr': '2026-08-31T09:15:00+02:00',
   'margenverluste-weinkarte-restaurant_de': '2026-08-31T09:20:00+02:00',
   'fugas-margem-carta-vinhos-restaurante_pt': '2026-08-31T09:25:00+02:00',
-  'arquitectura-carta-vinos-estilo-pais-precio-restaurante': '2026-09-07T09:00:00+02:00',
-  'restaurant-wine-list-architecture-style-country-price_en': '2026-09-07T09:05:00+02:00',
-  'architettura-carta-vini-stile-paese-prezzo-ristorante_it': '2026-09-07T09:10:00+02:00',
-  'architecture-carte-vins-style-pays-prix-restaurant_fr': '2026-09-07T09:15:00+02:00',
-  'weinkarten-architektur-stil-land-preis-restaurant_de': '2026-09-07T09:20:00+02:00',
-  'arquitetura-carta-vinhos-estilo-pais-preco-restaurante_pt': '2026-09-07T09:25:00+02:00',
-  'guiones-recomendacion-vino-sala': '2026-09-14T09:00:00+02:00',
-  'wine-recommendation-scripts-restaurant-floor_en': '2026-09-14T09:05:00+02:00',
-  'copioni-consigliare-vino-sala_it': '2026-09-14T09:10:00+02:00',
-  'scripts-recommandation-vin-salle_fr': '2026-09-14T09:15:00+02:00',
-  'weinempfehlung-service-skripte_de': '2026-09-14T09:20:00+02:00',
-  'guioes-recomendacao-vinho-sala_pt': '2026-09-14T09:25:00+02:00',
-  'stock-dormido-bodega-rotacion-tpv-cloudrim-savia': '2026-09-28T09:00:00+02:00',
-  'sleeping-cellar-stock-pos-cloudrim-savia-rotation_en': '2026-09-28T09:05:00+02:00',
-  'stock-dormiente-cantina-rotazione-tpv-cloudrim-savia_it': '2026-09-28T09:10:00+02:00',
-  'stock-dormant-cave-rotation-tpv-cloudrim-savia_fr': '2026-09-28T09:15:00+02:00',
-  'schlafender-kellerbestand-rotation-pos-cloudrim-savia_de': '2026-09-28T09:20:00+02:00',
-  'stock-adormecido-adega-rotacao-pos-cloudrim-savia_pt': '2026-09-28T09:25:00+02:00',
 };
 
 function isReleasedArticleSlug(slug: string): boolean {
@@ -2311,13 +2275,8 @@ const WINE_LIBRARY_STRATEGIC_LABELS: Record<string, Partial<Record<WineLibraryLa
   'Xarel-lo': { es: 'Xarel·lo', en: 'Xarel·lo', it: 'Xarel·lo', fr: 'Xarel·lo', de: 'Xarel·lo', pt: 'Xarel·lo' },
 };
 
-const wineLibraryStrategicLabel = (label: string, lang: WineLibraryLang): string => {
-  const normalizedLabel = label.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase();
-  const match = Object.entries(WINE_LIBRARY_STRATEGIC_LABELS).find(([candidate]) => (
-    candidate.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase() === normalizedLabel
-  ));
-  return match?.[1]?.[lang] || label;
-};
+const wineLibraryStrategicLabel = (label: string, lang: WineLibraryLang): string =>
+  WINE_LIBRARY_STRATEGIC_LABELS[label]?.[lang] || label;
 
 const WINE_LIBRARY_HUB_ROUTE_GROUPS: Record<string, WineLibraryHubRouteGroup[]> = {
   '/biblioteca-vino': [
@@ -2857,7 +2816,7 @@ const WINE_LIBRARY_STRATEGIC_LINKS: Record<string, { label: string; esPath: stri
 
 function wineLibraryStrategicLinks(lang: WineLibraryLang, esPath: string): { label: string; url: string }[] {
   return (WINE_LIBRARY_STRATEGIC_LINKS[esPath] || []).map((link) => ({
-    label: wineLibraryStrategicLabel(link.label, lang),
+    label: link.label,
     url: wineLibraryPath(lang, link.esPath),
   }));
 }
@@ -2907,9 +2866,7 @@ function renderWineLibraryPage(path: string): string | null {
 
   const sectionTitle = copy.sectionTitles[section] || copy.home;
   const isSectionHub = parts.length === 2;
-  const subject = isSectionHub
-    ? sectionTitle
-    : wineLibraryStrategicLabel(titleFromSlug(parts[parts.length - 1]), lang);
+  const subject = isSectionHub ? sectionTitle : titleFromSlug(parts[parts.length - 1]);
   const type = isSectionHub ? sectionTitle.toLowerCase() : copy.detailLabels[section] || copy.detailLabels.article;
   const priorityGrapeProfile = !isSectionHub && section === 'uvas'
     ? WINE_LIBRARY_PRIORITY_GRAPES[parts[parts.length - 1]] || WINE_LIBRARY_EXPANDED_GRAPES[parts[parts.length - 1]]
@@ -5306,12 +5263,12 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       subtitle: 'Conecta la carta de vinos con ventas, stock, costes, PMS hotelero, ERP y sistemas de punto de venta para tomar decisiones con datos reales.',
       sections: [
         { heading: 'Por qué importan las integraciones', content: 'Sin conexión con el TPV, el vino queda aislado: no sabes qué referencias se venden realmente, qué margen generan ni qué vinos se quedan sin rotación. Winerim conecta carta, ventas, stock y coste para convertir la carta en un sistema de decisión.' },
-        { heading: 'TPV, POS y ventas reales', content: 'Winerim se integra con sistemas de punto de venta para sincronizar ventas por referencia, periodo y punto de servicio. Esto permite medir ticket medio de vino, rotación, margen y rendimiento por copa o botella.' },
+        { heading: 'TPV, POS y ventas reales', content: 'Winerim conecta con sistemas de punto de venta después de validar acceso, permisos, mapeo y una muestra real de datos. El alcance y la frecuencia se confirman por instalación.' },
         { heading: 'Inventario, ERP y compras', content: 'La integración con inventario y ERP ayuda a mantener stock actualizado, detectar sobrestock, revisar costes y decidir compras con información real en lugar de intuición o presión comercial.' },
         { heading: 'Hoteles, grupos y API', content: 'En hoteles y grupos, Winerim centraliza datos entre locales, outlets y sistemas PMS. Para equipos técnicos, la API permite proyectos personalizados y conexión con sistemas propios.' },
       ],
       faqs: [
-        { q: '¿Winerim se integra con mi TPV?', a: 'Winerim se integra con múltiples sistemas de punto de venta y puede evaluar integraciones personalizadas según el stack del restaurante, hotel o grupo.' },
+        { q: '¿Winerim se integra con mi TPV?', a: 'Winerim puede conectar con TPV compatibles después de un preflight técnico. Ágora dispone de un flujo verificable por conexión y REVO XEF requiere validar versión, permisos, mapeo y piloto.' },
         { q: '¿Necesito cambiar de sistema?', a: 'No. Winerim está diseñado para conectarse con las herramientas existentes y evitar doble entrada de datos.' },
         { q: '¿Las integraciones están incluidas en todos los planes?', a: 'Las integraciones avanzadas suelen formar parte de planes Pro o Enterprise, dependiendo del sistema, volumen de datos y complejidad técnica.' },
       ],
@@ -5326,6 +5283,72 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Analizar carta', url: '/analisis-carta' },
         { label: 'Demo', url: '/demo' },
       ],
+    },
+  },
+  '/integraciones/agora': {
+    meta: { title: 'Integración Winerim con Ágora | TPV y datos operativos', description: 'Conecta catálogo y ventas de vino de Ágora con Winerim mediante un despliegue controlado, trazable y validado para cada establecimiento.', canonical: `${SITE}/integraciones/agora`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Integración Winerim con Ágora',
+      subtitle: 'Flujo técnico verificado con activación, mapeo, piloto y readback por conexión.',
+      sections: [
+        { heading: 'Qué conecta Winerim', content: 'Relaciona referencias, familias, formatos y precios, recibe ventas por botella o copa y trata el stock solo cuando el alcance de la conexión ha sido validado.' },
+        { heading: 'Activación verificable', content: 'Cada instalación pasa por preflight, mapeo, piloto controlado, readback y una venta real correctamente asociada antes de considerarse operativa.' },
+        { heading: 'Límites documentados', content: 'No se promete tiempo real continuo, impresión física ni certificación universal. Frecuencia, permisos, excepciones y recuperación se acuerdan por conexión.' },
+      ],
+      faqs: [
+        { q: '¿Ágora se conecta automáticamente?', a: 'No. Existe un flujo técnico disponible, pero cada instalación necesita acceso, mapeo, piloto y readback antes de activarse.' },
+        { q: '¿Incluye catálogo, ventas y stock?', a: 'Catálogo y ventas forman parte del flujo verificable. El tratamiento de stock depende del mapeo, permisos y alcance acordado.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Integraciones', url: `${SITE}/integraciones` }, { name: 'Ágora', url: `${SITE}/integraciones/agora` }],
+      internalLinks: [{ label: 'Integraciones', url: '/integraciones' }, { label: 'REVO XEF', url: '/integraciones/revo-xef' }, { label: 'Conectar carta, stock, ventas y margen', url: '/guias/como-conectar-carta-stock-ventas-margen' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/integraciones/revo-xef': {
+    meta: { title: 'Integración Winerim con REVO XEF | Alcance y preflight', description: 'Evalúa y conecta datos de REVO XEF con Winerim después de validar permisos, versión, mapeo y una lectura piloto.', canonical: `${SITE}/integraciones/revo-xef`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Integración Winerim con REVO XEF',
+      subtitle: 'Disponibilidad y alcance sujetos a preflight, muestra de datos y piloto de lectura.',
+      sections: [
+        { heading: 'Qué se evalúa', content: 'Winerim revisa catálogo, familias, ventas, precios, formatos, centros y frecuencia disponibles en la instalación del cliente.' },
+        { heading: 'Activación por fases', content: 'El proceso incluye preflight, muestra de datos, piloto de lectura y una propuesta escrita de alcance antes de activar la operación.' },
+        { heading: 'Límites documentados', content: 'No se confirma bidireccionalidad, escritura ni tiempo real antes del piloto. La integración no se cierra hasta verificar mapeo y ausencia de duplicados.' },
+      ],
+      faqs: [
+        { q: '¿Winerim se integra con cualquier REVO XEF?', a: 'No se da por supuesto. Primero se revisan versión, permisos y datos disponibles, y después se confirma el alcance por escrito.' },
+        { q: '¿Cuándo se considera lista?', a: 'Cuando una lectura real queda correctamente mapeada, sin duplicados, y se han documentado frecuencia, excepciones y soporte.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Integraciones', url: `${SITE}/integraciones` }, { name: 'REVO XEF', url: `${SITE}/integraciones/revo-xef` }],
+      internalLinks: [{ label: 'Integraciones', url: '/integraciones' }, { label: 'Ágora', url: '/integraciones/agora' }, { label: 'Gestión para grupos', url: '/soluciones/grupos-restauracion' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/integrations/agora': {
+    meta: { title: 'Winerim integration with Ágora | POS and operational data', description: 'Connect Ágora wine catalog and sales data to Winerim through a controlled, traceable deployment validated for each venue.', canonical: `${SITE}/en/integrations/agora`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim integration with Ágora',
+      subtitle: 'Verified technical flow with activation, mapping, pilot and readback per connection.',
+      sections: [
+        { heading: 'What Winerim connects', content: 'Maps references, families, formats and prices, receives bottle or glass sales and handles stock only after connection scope has been validated.' },
+        { heading: 'Verifiable activation', content: 'Every installation goes through preflight, mapping, a controlled pilot, readback and one correctly mapped real sale before it is considered operational.' },
+        { heading: 'Documented limits', content: 'Continuous real time, physical printing and universal certification are not promised. Frequency, permissions, exceptions and recovery are agreed per connection.' },
+      ],
+      faqs: [{ q: 'Is Ágora connected automatically?', a: 'No. A technical flow is available, but every installation needs access, mapping, a pilot and readback before activation.' }],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Integrations', url: `${SITE}/en/integrations` }, { name: 'Ágora', url: `${SITE}/en/integrations/agora` }],
+      internalLinks: [{ label: 'Integrations', url: '/en/integrations' }, { label: 'REVO XEF', url: '/en/integrations/revo-xef' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Demo', url: '/en/demo' }],
+    },
+  },
+  '/en/integrations/revo-xef': {
+    meta: { title: 'Winerim integration with REVO XEF | Scope and preflight', description: 'Assess and connect REVO XEF data to Winerim after validating permissions, version, mapping and a read pilot.', canonical: `${SITE}/en/integrations/revo-xef`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim integration with REVO XEF',
+      subtitle: 'Availability and scope subject to preflight, a data sample and a read pilot.',
+      sections: [
+        { heading: 'What is assessed', content: 'Winerim reviews catalog, families, sales, prices, formats, locations and frequency available in the customer installation.' },
+        { heading: 'Phased activation', content: 'The process includes preflight, a data sample, a read pilot and written scope before operations are enabled.' },
+        { heading: 'Documented limits', content: 'Bidirectionality, writing and real time are not confirmed before the pilot. Integration is not complete until mapping and duplicate prevention are verified.' },
+      ],
+      faqs: [{ q: 'Does Winerim integrate with every REVO XEF installation?', a: 'We do not assume that. Version, permissions and available data are reviewed first, then scope is confirmed in writing.' }],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Integrations', url: `${SITE}/en/integrations` }, { name: 'REVO XEF', url: `${SITE}/en/integrations/revo-xef` }],
+      internalLinks: [{ label: 'Integrations', url: '/en/integrations' }, { label: 'Ágora', url: '/en/integrations/agora' }, { label: 'Restaurant groups', url: '/en/solutions/restaurant-groups' }, { label: 'Demo', url: '/en/demo' }],
     },
   },
   '/blog': {
@@ -6188,21 +6211,39 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/herramientas/calculadora-tiempo-operativo': {
-    meta: { title: 'Calculadora de Tiempo Operativo | Winerim', description: 'Estima horas recuperables al actualizar la carta, revisar márgenes, procesar documentos, conciliar el TPV y preparar informes.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Calculadora de Tiempo Operativo Recuperable | Winerim', description: 'Estima horas recuperables por semana, mes y año al reducir tareas manuales de carta, márgenes, documentos, TPV e informes.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
       h1: 'Calculadora de tiempo operativo recuperable',
-      subtitle: 'Compara el tiempo manual actual con un escenario usando Winerim, tarea por tarea y sin convertir horas en ahorro salarial.',
+      subtitle: 'Convierte tareas manuales repetidas en un escenario de capacidad operativa, con hipótesis visibles y editables.',
       sections: [
-        { heading: 'Ocho tareas editables', content: 'Actualización de carta y precios, márgenes, documentos, conciliación de ventas, stock y TPV, distribuidores, informes, grupos y formación del equipo.' },
-        { heading: 'Fórmula transparente', content: 'El resultado por tarea es la diferencia entre minutos actuales y minutos estimados con Winerim, multiplicada por la frecuencia mensual. Los resultados se muestran por semana, mes y año.' },
-        { heading: 'Resultado antes del contacto', content: 'Todos los supuestos son editables, el cálculo se realiza localmente y el resultado aparece antes de cualquier invitación comercial.' },
+        { heading: 'Fórmula transparente', content: 'Cada tarea aplica la fórmula tiempo manual actual menos tiempo estimado con Winerim, multiplicado por su frecuencia. Los resultados se muestran por semana, mes y año.' },
+        { heading: 'Ocho tareas operativas', content: 'Actualización de carta y precios, revisión de márgenes, documentos y facturas, conciliación de ventas, stock y TPV, comparación de distribuidores, informes, consolidación multiunidad y formación del equipo.' },
+        { heading: 'Escenario, no garantía', content: 'El usuario puede editar cada hipótesis. El resultado representa capacidad potencialmente recuperable y no una promesa fija de ahorro de horas.' },
       ],
       faqs: [
-        { q: '¿Las horas son una garantía?', a: 'No. Son un escenario basado en los tiempos y frecuencias introducidos por el usuario.' },
-        { q: '¿El tiempo recuperable equivale a ahorro salarial?', a: 'No. Representa capacidad operativa disponible para otras tareas, no reducción de plantilla ni ahorro contable.' },
+        { q: '¿Es una garantía de ahorro?', a: 'No. Es un escenario calculado con las hipótesis introducidas por el usuario.' },
+        { q: '¿Se mezclan horas con ahorro económico?', a: 'No. La calculadora muestra tiempo operativo y lo mantiene separado de costes, margen y capital.' },
       ],
-      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de tiempo operativo', url: `${SITE}/herramientas/calculadora-tiempo-operativo` }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de tiempo', url: `${SITE}/herramientas/calculadora-tiempo-operativo` }],
       internalLinks: [{ label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Integraciones', url: '/integraciones' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/tools/operational-time-calculator': {
+    meta: { title: 'Restaurant Operational Time Calculator | Winerim', description: 'Estimate recoverable hours per week, month and year across wine list, margin, document, POS and reporting tasks.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Recoverable operational time calculator',
+      subtitle: 'Turn repeated manual tasks into an operational capacity scenario with visible, editable assumptions.',
+      sections: [
+        { heading: 'Transparent formula', content: 'Each task uses current manual time minus estimated time with Winerim, multiplied by monthly frequency. Results are shown per week, month and year.' },
+        { heading: 'Eight operational tasks', content: 'Wine list and price updates, margin review, documents and invoices, sales, stock and POS reconciliation, distributor comparison, reporting, multi-unit consolidation and team training.' },
+        { heading: 'A scenario, not a guarantee', content: 'Every assumption can be edited. The result represents potentially recoverable capacity, not a fixed promise of saved hours.' },
+      ],
+      faqs: [
+        { q: 'Is this a savings guarantee?', a: 'No. It is a scenario calculated from the assumptions entered by the user.' },
+        { q: 'Does it convert hours into financial savings?', a: 'No. The calculator shows operational time and keeps it separate from costs, margin and working capital.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Operational time calculator', url: `${SITE}/en/tools/operational-time-calculator` }],
+      internalLinks: [{ label: 'Tools', url: '/en/tools' }, { label: 'Integrations', url: '/en/integrations' }, { label: 'Request a demo', url: '/en/demo' }],
     },
   },
   '/herramientas/diagnostico-vino-por-copa': {

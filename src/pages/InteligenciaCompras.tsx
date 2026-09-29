@@ -102,7 +102,7 @@ const ES: VerticalContent = {
     { q: "¿Funciona para grupos con múltiples locales?", a: "Sí. Especialmente útil para consolidar compras y detectar diferencias de precio entre locales." },
     { q: "¿Puedo probar antes de contratar?", a: "Sí. Te ofrecemos un análisis gratuito de tu carta y una demo personalizada." },
     { q: "¿Cuánto tarda en dar resultados?", a: "Las primeras alertas de sobreprecio y recomendaciones aparecen en la primera semana." },
-    { q: "¿Se integra con mi TPV?", a: "Winerim se integra con los principales TPV del sector para cruzar datos de venta con datos de compra." },
+    { q: "¿Se integra con mi TPV?", a: "Winerim puede conectar con TPV compatibles después de validar acceso, permisos, mapeo y una muestra real de datos. El alcance se confirma por instalación." },
   ],
   ctaLabel: "Da el siguiente paso",
   ctaTitle: "¿Sabes cuánto estás dejando de ganar en cada compra de vino?",
