@@ -47,6 +47,7 @@ const ROUTE_MAP: Record<string, Record<string, string>> = {
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/herramientas/calculadora-precio-vino-por-copa': '/en/tools/wine-by-glass-price-calculator',
+    '/herramientas/diagnostico-rentabilidad-bodega': '/en/tools/wine-cellar-profitability-diagnostic',
     '/herramientas/calculadora-tiempo-operativo': '/en/tools/operational-time-calculator',
     '/herramientas/calculadora-stock-muerto': '/en/tools/dead-stock-calculator',
     '/herramientas/calculadora-ticket-medio-vino': '/en/tools/average-ticket-calculator',
@@ -503,6 +504,7 @@ const STATIC_ROUTES: StaticRoute[] = [
 
   // Online tools with localized routes.
   { esPath: '/herramientas/diagnostico-rentabilidad-bodega', priority: '0.8', changefreq: 'monthly', multilang: false },
+  { esPath: '/en/tools/wine-cellar-profitability-diagnostic', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-tiempo-operativo', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/en/tools/operational-time-calculator', priority: '0.8', changefreq: 'monthly', multilang: false },
   { esPath: '/herramientas/calculadora-precio-vino-por-copa', priority: '0.7', changefreq: 'monthly', multilang: true },

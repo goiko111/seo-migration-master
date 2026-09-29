@@ -85,6 +85,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/empleo": "/en/careers",
     "/benchmarks-playbooks": "/en/benchmarks-playbooks",
     "/herramientas/calculadora-precio-vino-por-copa": "/en/tools/wine-by-glass-price-calculator",
+    "/herramientas/diagnostico-rentabilidad-bodega": "/en/tools/wine-cellar-profitability-diagnostic",
     "/herramientas/calculadora-tiempo-operativo": "/en/tools/operational-time-calculator",
     "/herramientas/calculadora-stock-muerto": "/en/tools/dead-stock-calculator",
     "/herramientas/calculadora-ticket-medio-vino": "/en/tools/average-ticket-calculator",

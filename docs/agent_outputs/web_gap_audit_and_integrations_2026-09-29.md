@@ -12,6 +12,10 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
   - `/herramientas/calculadora-tiempo-operativo`
   - `/en/tools/operational-time-calculator`
 - Ambas versiones calculan localmente, muestran la formula, separan tiempo recuperable de ahorro salarial y permiten descargar el escenario sin formulario obligatorio.
+- El diagnostico de rentabilidad tambien existe en ES y EN/USD:
+  - `/herramientas/diagnostico-rentabilidad-bodega`
+  - `/en/tools/wine-cellar-profitability-diagnostic`
+- El recorrido USA mantiene separadas compras, margen, tiempo y capital, usa USD por defecto y entrega resultados antes del CTA de demo.
 - Existen fichas verificables para Agora y REVO en ES/EN. Incluyen datos, direccion, preflight, mapeo, piloto y readback sin prometer compatibilidad universal.
 - App, sitemap, prerender, Cloudflare Worker y router Pages contienen las mismas rutas y metadata.
 - Se retiraron afirmaciones sin respaldo suficiente: `22+ integraciones TPV`, disponibilidad universal y porcentajes fijos de mejora.
@@ -29,11 +33,11 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
 
 - Una entrada por objetivo y dos diagnosticos transparentes facilitaran que el visitante entienda que hacer primero.
 - Las fichas por proveedor reduciran dudas comerciales si mantienen el alcance condicionado a version, permisos, muestra, mapeo y piloto.
-- Para Estados Unidos, completar el diagnostico de rentabilidad en EN/USD y mantener idioma desde anuncio hasta demo tendra mas impacto que añadir nuevas herramientas aisladas.
+- Para Estados Unidos, mantener la continuidad de idioma desde anuncio hasta demo y completar las paginas de producto tendra mas impacto que añadir nuevas herramientas aisladas.
 
 ## Contradicciones y deuda
 
-- La web no esta traducida al 100%. El recorrido de tiempo ya esta en EN, pero el diagnostico de rentabilidad y otros tramos de conversion siguen incompletos para USA.
+- La web no esta traducida al 100%. Los dos diagnosticos prioritarios ya estan en EN, pero otros tramos de producto y conversion siguen incompletos para USA.
 - Las rutas IT/FR/DE/PT de integraciones son tecnicas y `noindex`; no equivalen a fichas comerciales localizadas.
 - Carta Architect, Armonias, control de mermas, pedido recomendado y conciliacion TPV/stock existen en producto o en evidencia interna, pero carecen de paginas publicas completas y verificables.
 - Falta una superficie publica de Novedades que excluya capacidades internas.
@@ -48,10 +52,9 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
 
 ### P1
 
-1. Completar el diagnostico de rentabilidad en ingles y USD, con CTA y demo coherentes.
-2. Crear la pagina publica de Carta Architect con evidencia real y limites claros.
-3. Crear paginas o un recorrido de operacion diaria para Armonias, mermas, pedido recomendado y conciliacion TPV/stock.
-4. Consolidar Git, ejecutar Deno check y coordinar un release unico con QA productiva.
+1. Crear la pagina publica de Carta Architect con evidencia real y limites claros.
+2. Crear paginas o un recorrido de operacion diaria para Armonias, mermas, pedido recomendado y conciliacion TPV/stock.
+3. Consolidar Git, ejecutar Deno check y coordinar un release unico con QA productiva.
 
 ### P2
 
@@ -68,6 +71,7 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
 ## Quick wins completados
 
 - Calculadora de tiempo ES/EN con ejemplo ficticio: `6 h/semana`, `26 h/mes`, `312 h/ano` y cobertura `8/8`.
+- Diagnostico de rentabilidad ES/EN con USD por defecto en la ruta inglesa y cuatro magnitudes no agregadas.
 - Entrada guiada en Herramientas/Recursos.
 - Fichas Agora/REVO ES/EN.
 - Limpieza de claims no demostrados.

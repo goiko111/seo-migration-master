@@ -368,6 +368,7 @@ const esRoutes = (
     <Route path="/guias/como-revisar-carta-vinos-cada-mes" element={<GuiaRevisarCartaCadaMes />} />
     <Route path="/herramientas" element={<Herramientas />} />
     <Route path="/herramientas/diagnostico-rentabilidad-bodega" element={<RentabilidadBodega />} />
+    <Route path="/en/tools/wine-cellar-profitability-diagnostic" element={<RentabilidadBodega />} />
     <Route path="/herramientas/calculadora-tiempo-operativo" element={<CalculadoraTiempoOperativo />} />
     <Route path="/en/tools/operational-time-calculator" element={<CalculadoraTiempoOperativo />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
@@ -962,6 +963,7 @@ const DeferredAppChrome = () => {
   const hideGlobalConversionChrome = isCampaignLanding || isPresentation;
   const isUngatedDecisionTool = [
     "/herramientas/diagnostico-rentabilidad-bodega",
+    "/en/tools/wine-cellar-profitability-diagnostic",
     "/herramientas/calculadora-tiempo-operativo",
     "/en/tools/operational-time-calculator",
   ].includes(location.pathname);

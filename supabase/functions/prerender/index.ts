@@ -6210,6 +6210,24 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       internalLinks: [{ label: 'Calculadora de compra inteligente', url: '/herramientas/calculadora-compra-inteligente' }, { label: 'Calculadora de stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Demo', url: '/demo' }],
     },
   },
+  '/en/tools/wine-cellar-profitability-diagnostic': {
+    meta: { title: 'Wine Cellar Profitability Diagnostic | Winerim', description: 'Model purchasing savings, additional contribution margin, recoverable hours and tied-up capital without combining unlike measures.', canonical: `${SITE}/en/tools/wine-cellar-profitability-diagnostic`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'Wine cellar profitability diagnostic',
+      subtitle: 'Purchasing, margin, time and stock: four separate views to decide where to act first.',
+      sections: [
+        { heading: 'Four measures kept separate', content: 'The diagnostic separates potential purchasing cost reduction, additional gross contribution margin, recoverable operational capacity and working capital potentially released. The figures are not added together or presented as ROI.' },
+        { heading: 'Transparent, editable assumptions', content: 'Each result shows its formula and uses the data entered by the user. Minimum and maximum values are scenarios, not guarantees or statistical intervals.' },
+        { heading: 'Result before contact', content: 'The complete calculation runs locally in the browser and appears before any invitation to request a demo.' },
+      ],
+      faqs: [
+        { q: 'Are the four results added together?', a: 'No. Purchasing savings, margin, time and capital are different measures and remain separate.' },
+        { q: 'Is released capital revenue?', a: 'No. It estimates capital that may no longer remain tied up at acquisition cost.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Profitability diagnostic', url: `${SITE}/en/tools/wine-cellar-profitability-diagnostic` }],
+      internalLinks: [{ label: 'Smart purchasing calculator', url: '/en/tools/smart-purchasing-calculator' }, { label: 'Dead stock calculator', url: '/en/tools/dead-stock-calculator' }, { label: 'Request a demo', url: '/en/demo' }],
+    },
+  },
   '/herramientas/calculadora-tiempo-operativo': {
     meta: { title: 'Calculadora de Tiempo Operativo Recuperable | Winerim', description: 'Estima horas recuperables por semana, mes y año al reducir tareas manuales de carta, márgenes, documentos, TPV e informes.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {

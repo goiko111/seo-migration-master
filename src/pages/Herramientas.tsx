@@ -67,6 +67,8 @@ const content: Record<string, {
     ctaDesc: "With Winerim, you don't need to use these tools one by one. Our platform analyzes your list, optimizes prices, suggests pairings and controls rotation — all automatically. Save hours of management every week and increase wine sales.",
     ctaBtn1: "Analyze my list free", ctaBtn2: "Request demo",
     tools: [
+      { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Wine Cellar Profitability Diagnostic", desc: "Keep purchasing savings, additional contribution margin, recoverable hours and tied-up capital separate with editable assumptions.", tag: "Diagnostic" },
+      { to: "/herramientas/calculadora-tiempo-operativo", title: "Operational Time Calculator", desc: "Compare current manual work with your Winerim scenario, task by task, and estimate recoverable hours per week, month and year.", tag: "Operations" },
       { to: "/wine-list-analyzer", title: "Wine List Analyzer", desc: "Upload your list and get improvement recommendations. With Winerim, this analysis updates automatically every week.", tag: "Analysis" },
       { to: "/calculadora-margen-vino", title: "Wine Margin Calculator", desc: "Calculate the optimal margin for each reference. As a Winerim client, margins are optimized automatically based on your goals.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
@@ -429,6 +431,8 @@ const goalCopy: Record<string, {
     intro: "You do not need to review every tool. Choose the goal closest to your situation and start with one concrete check.",
     action: "Open tool",
     goals: [
+      { title: "Diagnose wine cellar profitability", desc: "Purchasing, margin, time and tied-up capital without combining unlike measures.", to: "/herramientas/diagnostico-rentabilidad-bodega" },
+      { title: "Recover operational time", desc: "Compare manual tasks with an editable scenario using Winerim.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Understand my wine list health", desc: "Structure, balance, pricing and the main opportunities.", to: "/wine-list-analyzer" },
       { title: "Recover margin", desc: "Find margin leakage across cost, price, by-the-glass and stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reduce tied-up stock", desc: "Estimate dormant capital and prioritize references to review.", to: "/herramientas/calculadora-stock-muerto" },

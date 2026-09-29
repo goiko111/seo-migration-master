@@ -88,6 +88,7 @@ const REACT_ROUTES = new Set([
   ...LEAD_FORM_ROUTES,
   "/precios-modulos-integraciones",
   "/herramientas/diagnostico-rentabilidad-bodega",
+  "/en/tools/wine-cellar-profitability-diagnostic",
   "/herramientas/calculadora-tiempo-operativo",
   "/en/tools/operational-time-calculator",
   "/simulador-carta",
@@ -140,6 +141,29 @@ const PROFITABILITY_DIAGNOSTIC_BOT_HTML = `
     <section>
       <h2>Resultado antes del contacto</h2>
       <p>El cálculo completo se realiza localmente en el navegador y aparece antes de cualquier invitación a solicitar una demo.</p>
+    </section>
+  </main>
+`;
+
+const PROFITABILITY_DIAGNOSTIC_EN_ROUTE = "/en/tools/wine-cellar-profitability-diagnostic";
+const PROFITABILITY_DIAGNOSTIC_EN_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_EN_ROUTE}`;
+const PROFITABILITY_DIAGNOSTIC_EN_TITLE = "Wine Cellar Profitability Diagnostic | Winerim";
+const PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION = "Model purchasing savings, additional contribution margin, recoverable hours and tied-up capital without combining unlike measures.";
+const PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML = `
+  <main id="winerim-profitability-diagnostic">
+    <h1>Wine cellar profitability diagnostic</h1>
+    <p>Purchasing, margin, time and stock: four separate views to decide where to act first.</p>
+    <section>
+      <h2>Four measures kept separate</h2>
+      <p>The diagnostic separates potential purchasing cost reduction, additional gross contribution margin, recoverable operational capacity and working capital potentially released. The figures are not added together or presented as ROI.</p>
+    </section>
+    <section>
+      <h2>Transparent, editable assumptions</h2>
+      <p>Each result shows its formula and uses data entered by the user. Minimum and maximum values are scenarios, not guarantees or statistical intervals.</p>
+    </section>
+    <section>
+      <h2>Result before contact</h2>
+      <p>The complete calculation runs locally in the browser and appears before any invitation to request a demo.</p>
     </section>
   </main>
 `;
@@ -503,25 +527,29 @@ const fetchReactPage = async (request, env, path) => {
   });
 };
 
-const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET") => {
+const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET", english = false) => {
   if (requestMethod === "HEAD") return response;
   const contentType = response.headers.get("Content-Type") || "";
   if (!contentType.includes("text/html")) return response;
 
+  const config = english
+    ? { lang: "en", title: PROFITABILITY_DIAGNOSTIC_EN_TITLE, description: PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION, url: PROFITABILITY_DIAGNOSTIC_EN_URL, html: PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML }
+    : { lang: "es", title: PROFITABILITY_DIAGNOSTIC_TITLE, description: PROFITABILITY_DIAGNOSTIC_DESCRIPTION, url: PROFITABILITY_DIAGNOSTIC_URL, html: PROFITABILITY_DIAGNOSTIC_BOT_HTML };
+
   return new HTMLRewriter()
     .on("html", {
       element(element) {
-        element.setAttribute("lang", "es");
+        element.setAttribute("lang", config.lang);
       },
     })
     .on("title", {
       element(element) {
-        element.setInnerContent(PROFITABILITY_DIAGNOSTIC_TITLE);
+        element.setInnerContent(config.title);
       },
     })
     .on('meta[name="description"]', {
       element(element) {
-        element.setAttribute("content", PROFITABILITY_DIAGNOSTIC_DESCRIPTION);
+        element.setAttribute("content", config.description);
       },
     })
     .on('meta[name="robots"]', {
@@ -531,12 +559,12 @@ const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET")
     })
     .on('link[rel="canonical"]', {
       element(element) {
-        element.setAttribute("href", PROFITABILITY_DIAGNOSTIC_URL);
+        element.setAttribute("href", config.url);
       },
     })
     .on("body", {
       element(element) {
-        element.append(PROFITABILITY_DIAGNOSTIC_BOT_HTML, { html: true });
+        element.append(config.html, { html: true });
       },
     })
     .transform(response);
@@ -590,7 +618,7 @@ const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
   if (!response.ok || !contentType.includes("xml") || request.method === "HEAD") return response;
 
   const xml = await response.text();
-  const urls = [PROFITABILITY_DIAGNOSTIC_URL, OPERATIONAL_TIME_URL, OPERATIONAL_TIME_EN_URL];
+  const urls = [PROFITABILITY_DIAGNOSTIC_URL, PROFITABILITY_DIAGNOSTIC_EN_URL, OPERATIONAL_TIME_URL, OPERATIONAL_TIME_EN_URL];
   let patchedXml = xml;
   const added = [];
   for (const targetUrl of urls) {
@@ -928,6 +956,10 @@ export default {
       if (path === PROFITABILITY_DIAGNOSTIC_ROUTE) {
         const response = await fetchReactPage(request, env, path);
         return withProfitabilityDiagnosticBotMetadata(response, request.method);
+      }
+      if (path === PROFITABILITY_DIAGNOSTIC_EN_ROUTE) {
+        const response = await fetchReactPage(request, env, path);
+        return withProfitabilityDiagnosticBotMetadata(response, request.method, true);
       }
       if (path === OPERATIONAL_TIME_ROUTE) {
         const response = await fetchReactPage(request, env, path);
