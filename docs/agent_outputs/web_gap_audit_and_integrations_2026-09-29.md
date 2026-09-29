@@ -19,7 +19,7 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
 - Existen fichas verificables para Agora y REVO en ES/EN. Incluyen datos, direccion, preflight, mapeo, piloto y readback sin prometer compatibilidad universal.
 - App, sitemap, prerender, Cloudflare Worker y router Pages contienen las mismas rutas y metadata.
 - Se retiraron afirmaciones sin respaldo suficiente: `22+ integraciones TPV`, disponibilidad universal y porcentajes fijos de mejora.
-- Validacion local: TypeScript, build, `25` archivos y `220/220` pruebas, sintaxis de ambos Workers y `git diff --check` verdes.
+- Validacion local: TypeScript, build, `25` archivos y `221/221` pruebas, sintaxis de ambos Workers y `git diff --check` verdes.
 - QA visual en `390x844` y `1440x900`: canonical, `lang`, enlaces, calculo y layout correctos; sin overflow ni mezcla ES/EN.
 
 ## Decisiones
@@ -80,3 +80,5 @@ Revision del inventario aportado por el usuario, de la fuente local viva y de la
 ## Gate de release
 
 No publicar hasta tener una revision coordinada, Deno check, origenes alineados y QA productiva de humano, Googlebot, OAI, sitemap, canonical, hreflang, home, funcionalidades y legales.
+
+Commits locales: `41d354d1` (integraciones y tiempo ES/EN) y `05167b22` (rentabilidad EN/USD).
