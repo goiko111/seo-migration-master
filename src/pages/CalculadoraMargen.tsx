@@ -16,6 +16,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import FAQSection from "@/components/seo/FAQSection";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { getBeverageCostHealth } from "@/lib/wineMarginHealth";
 import { getI18n } from "@/i18n/types";
 
 /* ─── Types ─── */
@@ -120,13 +121,6 @@ const detectRangeLabel = (cost: number): string => {
   return "icon";
 };
 
-/* ─── BC% thresholds ─── */
-const bcHealth = (bc: number): "good" | "warning" | "danger" => {
-  if (bc <= 28) return "good";
-  if (bc <= 35) return "warning";
-  return "danger";
-};
-
 /* ─── i18n (ES base — others follow same structure) ─── */
 const i18n: Record<string, LangContent> = {
   es: {
@@ -162,7 +156,7 @@ const i18n: Record<string, LangContent> = {
       "Fijar precios que no cubren el coste por copa ni la merma",
     ],
     impact: [
-      "Mejora del margen bruto medio entre un 5-15%",
+      "Comparativa visible entre margen bruto, PVP y coste de compra",
       "Beverage Cost % controlado y visible para cada referencia",
       "Pricing alineado con el posicionamiento real del restaurante",
     ],
@@ -176,7 +170,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Coste de compra", metricPvpCurrent: "PVP actual", metricPvpRec: "PVP recomendado", metricDeviation: "Desviación",
     metricMarginAbs: "Margen bruto", metricMarginPct: "Margen %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "PVP copa", metricCostPerGlass: "Coste copa", metricBreakeven: "Copas para cubrir coste",
-    bcLabel: "Beverage Cost", bcGood: "Óptimo", bcWarning: "En riesgo", bcDanger: "Crítico",
+    bcLabel: "Beverage Cost", bcGood: "Óptimo", bcWarning: "A revisar", bcDanger: "Crítico",
     compareLabel: "Comparativa con tu precio actual", yourPrice: "Tu precio", recommended: "Recomendado", yourMargin: "Tu margen actual",
     deviationLabel: "Desviación",
     execTitle: "Lectura ejecutiva",
@@ -189,7 +183,7 @@ const i18n: Record<string, LangContent> = {
       { range: "Vinos premium+", mult: "×1.8 – ×2.3", note: "Menor margen % para mantener precios competitivos" },
     ],
     glassRuleTitle: "La regla de la copa",
-    glassRuleDesc: "El precio de una copa de vino debería ser suficiente para que las 2-3 primeras copas vendidas cubran el coste de la botella completa. Así, aunque se pierdan 1-2 copas por merma, la operación sigue siendo rentable.",
+    glassRuleDesc: "El precio de una copa puede plantearse para que las 2-3 primeras copas vendidas cubran el coste de la botella. Es una referencia de contribución, no una garantía de rentabilidad: faltan merma real y costes operativos.",
     errorsTitle: "Errores comunes de pricing",
     errors: ["Usar el mismo multiplicador para todos los vinos", "No diferenciar entre tranquilo, espumoso y fortificado", "No tener escalera de precios progresiva", "Ignorar el ticket medio del restaurante al fijar pricing"],
     ctaBadge: "Winerim Core", ctaTitle: "Esta calculadora es solo el", ctaTitleHighlight: "principio",
@@ -238,7 +232,7 @@ const i18n: Record<string, LangContent> = {
       "Setting prices that don't cover the cost per glass or waste",
     ],
     impact: [
-      "Average gross margin improvement of 5-15%",
+      "Visible comparison of gross margin, selling price and purchase cost",
       "Beverage Cost % controlled and visible for every reference",
       "Pricing aligned with the restaurant's actual positioning",
     ],
@@ -252,7 +246,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Purchase cost", metricPvpCurrent: "Current PVP", metricPvpRec: "Recommended PVP", metricDeviation: "Deviation",
     metricMarginAbs: "Gross margin", metricMarginPct: "Margin %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "Glass PVP", metricCostPerGlass: "Glass cost", metricBreakeven: "Glasses to cover cost",
-    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "At risk", bcDanger: "Critical",
+    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "Review", bcDanger: "Critical",
     compareLabel: "Comparison with your current price", yourPrice: "Your price", recommended: "Recommended", yourMargin: "Your current margin",
     deviationLabel: "Deviation",
     execTitle: "Executive reading",
@@ -265,7 +259,7 @@ const i18n: Record<string, LangContent> = {
       { range: "Premium+ wines", mult: "×1.8 – ×2.3", note: "Lower margin % to keep prices competitive" },
     ],
     glassRuleTitle: "The glass rule",
-    glassRuleDesc: "The price of a glass of wine should be enough so that the first 2-3 glasses sold cover the cost of the entire bottle. This way, even if 1-2 glasses are lost to waste, the operation remains profitable.",
+    glassRuleDesc: "A by-the-glass price can be set so the first 2-3 glasses cover the bottle cost. This is a contribution reference, not a profitability guarantee: actual waste and operating costs still matter.",
     errorsTitle: "Common pricing mistakes",
     errors: ["Using the same multiplier for all wines", "Not differentiating between still, sparkling and fortified", "No progressive price ladder", "Ignoring average ticket when setting wine pricing"],
     ctaBadge: "Winerim Core", ctaTitle: "This calculator is just the", ctaTitleHighlight: "beginning",
@@ -312,7 +306,7 @@ const i18n: Record<string, LangContent> = {
       "Fissare prezzi che non coprono il costo per calice né le perdite",
     ],
     impact: [
-      "Miglioramento del margine lordo medio tra il 5-15%",
+      "Confronto visibile tra margine lordo, prezzo di vendita e costo d'acquisto",
       "Beverage Cost % controllato e visibile per ogni referenza",
       "Pricing allineato con il posizionamento reale del ristorante",
     ],
@@ -326,7 +320,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Costo d'acquisto", metricPvpCurrent: "PVP attuale", metricPvpRec: "PVP consigliato", metricDeviation: "Deviazione",
     metricMarginAbs: "Margine lordo", metricMarginPct: "Margine %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "PVP calice", metricCostPerGlass: "Costo calice", metricBreakeven: "Calici per coprire il costo",
-    bcLabel: "Beverage Cost", bcGood: "Ottimale", bcWarning: "A rischio", bcDanger: "Critico",
+    bcLabel: "Beverage Cost", bcGood: "Ottimale", bcWarning: "Da rivedere", bcDanger: "Critico",
     compareLabel: "Confronto con il tuo prezzo attuale", yourPrice: "Il tuo prezzo", recommended: "Consigliato", yourMargin: "Il tuo margine attuale",
     deviationLabel: "Deviazione",
     execTitle: "Lettura esecutiva",
@@ -385,7 +379,7 @@ const i18n: Record<string, LangContent> = {
       "Fixer des prix qui ne couvrent pas le coût par verre ni la perte",
     ],
     impact: [
-      "Amélioration de la marge brute moyenne de 5 à 15%",
+      "Comparaison visible entre marge brute, prix de vente et coût d'achat",
       "Beverage Cost % contrôlé et visible pour chaque référence",
       "Pricing aligné avec le positionnement réel du restaurant",
     ],
@@ -399,7 +393,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Coût d'achat", metricPvpCurrent: "PVP actuel", metricPvpRec: "PVP recommandé", metricDeviation: "Écart",
     metricMarginAbs: "Marge brute", metricMarginPct: "Marge %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "PVP verre", metricCostPerGlass: "Coût verre", metricBreakeven: "Verres pour couvrir le coût",
-    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "À risque", bcDanger: "Critique",
+    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "À revoir", bcDanger: "Critique",
     compareLabel: "Comparaison avec votre prix actuel", yourPrice: "Votre prix", recommended: "Recommandé", yourMargin: "Votre marge actuelle",
     deviationLabel: "Écart",
     execTitle: "Lecture exécutive",
@@ -458,7 +452,7 @@ const i18n: Record<string, LangContent> = {
       "Preise festzulegen, die weder die Kosten pro Glas noch den Schwund decken",
     ],
     impact: [
-      "Verbesserung der durchschnittlichen Bruttomarge um 5-15%",
+      "Sichtbarer Vergleich von Bruttomarge, Verkaufspreis und Einkaufskosten",
       "Beverage Cost % kontrolliert und für jede Referenz sichtbar",
       "Pricing abgestimmt auf die tatsächliche Positionierung des Restaurants",
     ],
@@ -472,7 +466,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Einkaufskosten", metricPvpCurrent: "Aktueller VK", metricPvpRec: "Empfohlener VK", metricDeviation: "Abweichung",
     metricMarginAbs: "Bruttomarge", metricMarginPct: "Marge %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "VK pro Glas", metricCostPerGlass: "Kosten pro Glas", metricBreakeven: "Gläser zur Kostendeckung",
-    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "Gefährdet", bcDanger: "Kritisch",
+    bcLabel: "Beverage Cost", bcGood: "Optimal", bcWarning: "Prüfen", bcDanger: "Kritisch",
     compareLabel: "Vergleich mit Ihrem aktuellen Preis", yourPrice: "Ihr Preis", recommended: "Empfohlen", yourMargin: "Ihre aktuelle Marge",
     deviationLabel: "Abweichung",
     execTitle: "Executive-Zusammenfassung",
@@ -485,7 +479,7 @@ const i18n: Record<string, LangContent> = {
       { range: "Premium+ Weine", mult: "×1.8 – ×2.3", note: "Geringere Marge %, um wettbewerbsfähige Preise zu halten" },
     ],
     glassRuleTitle: "Die Glasregel",
-    glassRuleDesc: "Der Preis eines Glases Wein sollte ausreichen, damit die ersten 2-3 verkauften Gläser die Kosten der gesamten Flasche decken. So bleibt der Betrieb auch dann rentabel, wenn 1-2 Gläser durch Schwund verloren gehen.",
+    glassRuleDesc: "Der Glaspreis kann so angesetzt werden, dass die ersten 2-3 Gläser die Flaschenkosten decken. Das ist eine Deckungsbeitragsreferenz, keine Rentabilitätsgarantie; tatsächlicher Schwund und Betriebskosten bleiben relevant.",
     errorsTitle: "Häufige Pricing-Fehler",
     errors: ["Denselben Multiplikator für alle Weine verwenden", "Nicht zwischen Stillwein, Schaumwein und Likörwein unterscheiden", "Keine progressive Preistreppe haben", "Den Durchschnittsbon bei der Preisfestlegung ignorieren"],
     ctaBadge: "Winerim Core", ctaTitle: "Dieser Rechner ist nur der", ctaTitleHighlight: "Anfang",
@@ -531,7 +525,7 @@ const i18n: Record<string, LangContent> = {
       "Definir preços que não cobrem o custo por copo nem a quebra",
     ],
     impact: [
-      "Melhoria da margem bruta média entre 5-15%",
+      "Comparação visível entre margem bruta, preço de venda e custo de compra",
       "Beverage Cost % controlado e visível para cada referência",
       "Pricing alinhado com o posicionamento real do restaurante",
     ],
@@ -545,7 +539,7 @@ const i18n: Record<string, LangContent> = {
     metricCost: "Custo de compra", metricPvpCurrent: "PVP atual", metricPvpRec: "PVP recomendado", metricDeviation: "Desvio",
     metricMarginAbs: "Margem bruta", metricMarginPct: "Margem %", metricBcPct: "Beverage Cost %",
     metricGlassPrice: "PVP copo", metricCostPerGlass: "Custo copo", metricBreakeven: "Copos para cobrir o custo",
-    bcLabel: "Beverage Cost", bcGood: "Ótimo", bcWarning: "Em risco", bcDanger: "Crítico",
+    bcLabel: "Beverage Cost", bcGood: "Ótimo", bcWarning: "A rever", bcDanger: "Crítico",
     compareLabel: "Comparação com o seu preço atual", yourPrice: "O seu preço", recommended: "Recomendado", yourMargin: "A sua margem atual",
     deviationLabel: "Desvio",
     execTitle: "Leitura executiva",
@@ -558,7 +552,7 @@ const i18n: Record<string, LangContent> = {
       { range: "Vinhos premium+", mult: "×1.8 – ×2.3", note: "Margem % menor para manter preços competitivos" },
     ],
     glassRuleTitle: "A regra do copo",
-    glassRuleDesc: "O preço de um copo de vinho deve ser suficiente para que os 2-3 primeiros copos vendidos cubram o custo da garrafa inteira. Assim, mesmo que se percam 1-2 copos por quebra, a operação continua rentável.",
+    glassRuleDesc: "O preço por copo pode ser definido para que os primeiros 2-3 copos cubram o custo da garrafa. É uma referência de contribuição, não uma garantia de rentabilidade; a quebra real e os custos operacionais continuam relevantes.",
     errorsTitle: "Erros comuns de pricing",
     errors: ["Usar o mesmo multiplicador para todos os vinhos", "Não diferenciar entre tranquilo, espumante e fortificado", "Não ter uma escada de preços progressiva", "Ignorar o bilhete médio ao definir o pricing do vinho"],
     ctaBadge: "Winerim Core", ctaTitle: "Esta calculadora é apenas o", ctaTitleHighlight: "princípio",
@@ -587,9 +581,9 @@ const execI18n: Record<string, {
     title: "Diagnóstico Winerim", health: "Salud del margen", deviation: "Desviación vs objetivo", advice: "Recomendación",
     optimal: "Óptimo", low: "Bajo", critical: "Crítico",
     yourMargin: "Tu margen", target: "Objetivo",
-    execHealthy: (cat, ctx) => `El pricing de este ${cat} está bien calibrado para un contexto ${ctx}. El margen y el Beverage Cost se encuentran dentro del rango objetivo. Mantén y revisa trimestralmente.`,
+    execHealthy: (cat, ctx) => `El margen bruto calculado para este ${cat} está dentro del rango del modelo para un contexto ${ctx}. Contrasta la rotación real antes de mantener o cambiar el PVP.`,
     execLow: (cat, priceDiff) => `Este ${cat} está dejando ${priceDiff} € de margen potencial sin capturar. El multiplicador actual es inferior al recomendado. Sube el PVP progresivamente y mide la rotación durante 2-3 semanas.`,
-    execCritical: (cat, margin) => `Alerta: el margen de este ${cat} es del ${margin}%, muy por debajo del rango objetivo. A este nivel, la operación no cubre costes operativos. Revisa el PVP o sustituye la referencia.`,
+    execCritical: (cat, margin) => `El margen de este ${cat} es del ${margin}%, muy por debajo del rango del modelo. Revisa el PVP, el coste y la rotación antes de decidir si mantienes la referencia.`,
     execAbove: (diff) => `Tu precio actual está ${diff} € por encima del recomendado. Esto puede frenar la rotación. Si la referencia rota bien, mantén; si no, ajusta a la baja.`,
     execBcWarn: (bc) => ` El Beverage Cost (${bc}%) está por encima del umbral recomendado del 28%. Considera reducir el coste de compra o ajustar el PVP.`,
   },
@@ -597,9 +591,9 @@ const execI18n: Record<string, {
     title: "Winerim Diagnosis", health: "Margin health", deviation: "Deviation vs target", advice: "Recommendation",
     optimal: "Optimal", low: "Low", critical: "Critical",
     yourMargin: "Your margin", target: "Target",
-    execHealthy: (cat, ctx) => `The pricing of this ${cat} is well-calibrated for a ${ctx} context. Margin and Beverage Cost are within target range. Maintain and review quarterly.`,
+    execHealthy: (cat, ctx) => `The calculated gross margin for this ${cat} is within the model range for a ${ctx} context. Compare actual rotation before maintaining or changing the price.`,
     execLow: (cat, priceDiff) => `This ${cat} is leaving €${priceDiff} of potential margin uncaptured. The current multiplier is below recommended. Raise PVP progressively and measure rotation over 2-3 weeks.`,
-    execCritical: (cat, margin) => `Alert: the margin on this ${cat} is ${margin}%, well below the target range. At this level, the operation doesn't cover operating costs. Review PVP or replace the reference.`,
+    execCritical: (cat, margin) => `The margin on this ${cat} is ${margin}%, well below the model range. Review price, cost and rotation before deciding whether to keep the reference.`,
     execAbove: (diff) => `Your current price is €${diff} above recommended. This may slow rotation. If rotation is strong, maintain; otherwise, adjust downward.`,
     execBcWarn: (bc) => ` Beverage Cost (${bc}%) is above the recommended 28% threshold. Consider reducing purchase cost or adjusting PVP.`,
   },
@@ -607,9 +601,9 @@ const execI18n: Record<string, {
     title: "Diagnosi Winerim", health: "Salute del margine", deviation: "Deviazione vs obiettivo", advice: "Raccomandazione",
     optimal: "Ottimale", low: "Basso", critical: "Critico",
     yourMargin: "Il tuo margine", target: "Obiettivo",
-    execHealthy: (cat, ctx) => `Il pricing di questo ${cat} è ben calibrato per un contesto ${ctx}. Margine e Beverage Cost sono nel range obiettivo. Mantieni e rivedi trimestralmente.`,
+    execHealthy: (cat, ctx) => `Il margine lordo calcolato per questo ${cat} rientra nel range del modello per un contesto ${ctx}. Verifica la rotazione reale prima di modificare il prezzo.`,
     execLow: (cat, priceDiff) => `Questo ${cat} sta lasciando ${priceDiff} € di margine potenziale non catturato. Alza il PVP progressivamente.`,
-    execCritical: (cat, margin) => `Allerta: il margine di questo ${cat} è del ${margin}%, molto sotto il range obiettivo. Azione urgente necessaria.`,
+    execCritical: (cat, margin) => `Il margine di questo ${cat} è del ${margin}%, molto sotto il range del modello. Verifica prezzo, costo e rotazione prima di decidere.`,
     execAbove: (diff) => `Il tuo prezzo attuale è ${diff} € sopra il consigliato. Verifica l'impatto sulla rotazione.`,
     execBcWarn: (bc) => ` Il Beverage Cost (${bc}%) supera la soglia raccomandata del 28%.`,
   },
@@ -617,9 +611,9 @@ const execI18n: Record<string, {
     title: "Diagnostic Winerim", health: "Santé de la marge", deviation: "Écart vs objectif", advice: "Recommandation",
     optimal: "Optimal", low: "Bas", critical: "Critique",
     yourMargin: "Votre marge", target: "Objectif",
-    execHealthy: (cat, ctx) => `Le pricing de ce ${cat} est bien calibré pour un contexte ${ctx}. La marge et le Beverage Cost sont dans la plage cible. Maintenez et révisez trimestriellement.`,
+    execHealthy: (cat, ctx) => `La marge brute calculée pour ce ${cat} se situe dans la plage du modèle pour un contexte ${ctx}. Vérifiez la rotation réelle avant de modifier le prix.`,
     execLow: (cat, priceDiff) => `Ce ${cat} laisse ${priceDiff} € de marge potentielle non capturée. Augmentez le PVP progressivement.`,
-    execCritical: (cat, margin) => `Alerte : la marge de ce ${cat} est de ${margin}%, bien en dessous de la plage cible. Action urgente nécessaire.`,
+    execCritical: (cat, margin) => `La marge de ce ${cat} est de ${margin}%, bien en dessous de la plage du modèle. Vérifiez prix, coût et rotation avant de décider.`,
     execAbove: (diff) => `Votre prix actuel est ${diff} € au-dessus du recommandé. Vérifiez l'impact sur la rotation.`,
     execBcWarn: (bc) => ` Le Beverage Cost (${bc}%) dépasse le seuil recommandé de 28%.`,
   },
@@ -627,9 +621,9 @@ const execI18n: Record<string, {
     title: "Winerim-Diagnose", health: "Margengesundheit", deviation: "Abweichung vs Ziel", advice: "Empfehlung",
     optimal: "Optimal", low: "Niedrig", critical: "Kritisch",
     yourMargin: "Ihre Marge", target: "Ziel",
-    execHealthy: (cat, ctx) => `Das Pricing dieses ${cat} ist für einen ${ctx}-Kontext gut kalibriert. Marge und Beverage Cost liegen im Zielbereich. Beibehalten und vierteljährlich überprüfen.`,
+    execHealthy: (cat, ctx) => `Die berechnete Bruttomarge dieses ${cat} liegt für einen ${ctx}-Kontext im Modellbereich. Prüfen Sie die tatsächliche Rotation vor einer Preisänderung.`,
     execLow: (cat, priceDiff) => `Dieser ${cat} lässt ${priceDiff} € potenzielle Marge ungenutzt. Heben Sie den VK progressiv an.`,
-    execCritical: (cat, margin) => `Alarm: Die Marge dieses ${cat} beträgt ${margin}%, weit unter dem Zielbereich. Dringendes Handeln erforderlich.`,
+    execCritical: (cat, margin) => `Die Marge dieses ${cat} beträgt ${margin}% und liegt deutlich unter dem Modellbereich. Prüfen Sie Preis, Kosten und Rotation vor einer Entscheidung.`,
     execAbove: (diff) => `Ihr aktueller Preis liegt ${diff} € über dem empfohlenen. Prüfen Sie die Auswirkung auf die Rotation.`,
     execBcWarn: (bc) => ` Der Beverage Cost (${bc}%) überschreitet den empfohlenen Schwellenwert von 28%.`,
   },
@@ -637,9 +631,9 @@ const execI18n: Record<string, {
     title: "Diagnóstico Winerim", health: "Saúde da margem", deviation: "Desvio vs objetivo", advice: "Recomendação",
     optimal: "Ótimo", low: "Baixo", critical: "Crítico",
     yourMargin: "A sua margem", target: "Objetivo",
-    execHealthy: (cat, ctx) => `O pricing deste ${cat} está bem calibrado para um contexto ${ctx}. A margem e o Beverage Cost estão no intervalo-objetivo. Manter e rever trimestralmente.`,
+    execHealthy: (cat, ctx) => `A margem bruta calculada deste ${cat} está no intervalo do modelo para um contexto ${ctx}. Compare a rotação real antes de alterar o preço.`,
     execLow: (cat, priceDiff) => `Este ${cat} está a deixar ${priceDiff} € de margem potencial por capturar. Suba o PVP progressivamente.`,
-    execCritical: (cat, margin) => `Alerta: a margem deste ${cat} é de ${margin}%, muito abaixo do intervalo-objetivo. Ação urgente necessária.`,
+    execCritical: (cat, margin) => `A margem deste ${cat} é de ${margin}%, muito abaixo do intervalo do modelo. Reveja preço, custo e rotação antes de decidir.`,
     execAbove: (diff) => `O seu preço atual está ${diff} € acima do recomendado. Verifique o impacto na rotação.`,
     execBcWarn: (bc) => ` O Beverage Cost (${bc}%) ultrapassa o limite recomendado de 28%.`,
   },
@@ -761,7 +755,7 @@ const CalculadoraMargen = () => {
   const healthBg = marginHealth === "optimal" ? "bg-emerald-500/10" : marginHealth === "low" ? "bg-amber-500/10" : "bg-destructive/10";
   const healthLabel = marginHealth === "optimal" ? dl.optimal : marginHealth === "low" ? dl.low : dl.critical;
 
-  const bcStatus = bcHealth(results.beverageCost);
+  const bcStatus = getBeverageCostHealth(results.beverageCost);
   const bcColor = bcStatus === "good" ? "text-emerald-500" : bcStatus === "warning" ? "text-amber-500" : "text-destructive";
   const bcBg = bcStatus === "good" ? "bg-emerald-500/10" : bcStatus === "warning" ? "bg-amber-500/10" : "bg-destructive/10";
   const bcLabel = bcStatus === "good" ? t.bcGood : bcStatus === "warning" ? t.bcWarning : t.bcDanger;
@@ -1029,7 +1023,7 @@ const CalculadoraMargen = () => {
                       </div>
                       <div>
                         <p className="text-[10px] text-muted-foreground mb-0.5">{t.metricBcPct}</p>
-                        <p className={`font-heading font-bold ${bcHealth(results.currentBc!) === "good" ? "text-emerald-500" : bcHealth(results.currentBc!) === "warning" ? "text-amber-500" : "text-destructive"}`}>
+                    <p className={`font-heading font-bold ${getBeverageCostHealth(results.currentBc!) === "good" ? "text-emerald-500" : getBeverageCostHealth(results.currentBc!) === "warning" ? "text-amber-500" : "text-destructive"}`}>
                           {results.currentBc?.toFixed(1)}%
                         </p>
                       </div>

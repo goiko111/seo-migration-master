@@ -1119,3 +1119,33 @@
 
 - Conseguir, cuando aporten valor adicional, capturas limpias de Decision Center/RIMs, reposicion de Supply y dashboard multi-local.
 - Retomar Biblioteca del vino, Aprender vino, blog semanal y Search Console.
+
+## Actualizacion 2026-10-04: diagnostico de rentabilidad de la carta
+
+### Hechos
+
+- La ruta existente `/herramientas/diagnostico-rentabilidad-bodega` y su variante EN se consolidaron; no se creo una herramienta duplicada.
+- El modelo `2.0.0` calcula cuatro bloques independientes: botella, copa, capital en stock lento y escenario de PVP/volumen/reposicion.
+- El resultado aparece antes de cualquier dato de contacto y se calcula localmente.
+- La revision ampliada es opcional, pide solo email y empresa opcional, separa consentimiento de respuesta y marketing, y no envia las cifras economicas.
+- Frontend, Worker, edge-router y prerender comparten ahora el mismo posicionamiento SEO.
+
+### Decisiones
+
+- Mantener separadas las cifras introducidas, calculadas y verificadas; la version publica declara que no hay datos operativos conectados.
+- No presentar el escenario como prediccion de demanda, ROI ni garantia de rentabilidad.
+- Enviar a Winerim Core los casos de pricing/rotacion/stock y a CloudRIM los casos que necesitan costes/documentos contrastados.
+- Mantener la release solo local hasta revision explicita.
+
+### Hipotesis
+
+- Un diagnostico especifico de economia de carta explica mejor el valor de Winerim que el antiguo bloque generico de compras, tiempo y ahorro.
+
+### Contradicciones
+
+- El prerender anterior aun hablaba de compras, tiempo y capital mientras el producto solicitado ya era botella, copa, stock y reposicion; queda reconciliado en codigo, pendiente de publicar.
+
+### Tareas pendientes
+
+- Revision funcional/comercial y autorizacion de release.
+- Tras publicar, validar humano, Googlebot/OAI, canonicals y eventos sin PII en ES/EN.

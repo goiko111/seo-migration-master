@@ -124,46 +124,46 @@ const REACT_ROUTES = new Set([
 
 const PROFITABILITY_DIAGNOSTIC_ROUTE = "/herramientas/diagnostico-rentabilidad-bodega";
 const PROFITABILITY_DIAGNOSTIC_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_ROUTE}`;
-const PROFITABILITY_DIAGNOSTIC_TITLE = "Diagnóstico de Rentabilidad de Bodega | Winerim";
-const PROFITABILITY_DIAGNOSTIC_DESCRIPTION = "Calcula escenarios de ahorro en compras, margen adicional, horas recuperables y capital inmovilizado sin mezclar las magnitudes.";
+const PROFITABILITY_DIAGNOSTIC_TITLE = "Diagnóstico de Rentabilidad de la Carta | Winerim";
+const PROFITABILITY_DIAGNOSTIC_DESCRIPTION = "Calcula margen por botella y copa, Beverage Cost, capital inmovilizado y escenarios de precio, rotación y reposición con fórmulas transparentes.";
 const PROFITABILITY_DIAGNOSTIC_BOT_HTML = `
   <main id="winerim-profitability-diagnostic">
-    <h1>Diagnóstico de rentabilidad de bodega</h1>
-    <p>Compras, margen, tiempo y stock: cuatro lecturas separadas para decidir dónde actuar primero.</p>
+    <h1>Diagnóstico de rentabilidad de la carta de vinos</h1>
+    <p>Botella, copa, stock lento y reposición: cuatro lecturas conectadas sin mezclar datos introducidos, cálculos y datos operativos verificados.</p>
     <section>
-      <h2>Cuatro magnitudes sin atajos</h2>
-      <p>El diagnóstico separa ahorro de costes, margen bruto de contribución adicional, capacidad operativa recuperable y capital circulante potencialmente liberable. Las cifras no se suman ni se presentan como ROI.</p>
+      <h2>Economía de botella y copa</h2>
+      <p>Calcula margen bruto y Beverage Cost por botella y por copa, considerando las copas cobrables y una merma editable.</p>
     </section>
     <section>
-      <h2>Supuestos transparentes y editables</h2>
-      <p>Cada resultado muestra su fórmula y usa los datos introducidos por el usuario. Los mínimos y máximos son escenarios, no garantías ni intervalos estadísticos.</p>
+      <h2>Stock lento y escenario operativo</h2>
+      <p>Valora capital inmovilizado a coste y compara un escenario de PVP, volumen y reposición definido por el usuario. No predice demanda ni garantiza rentabilidad.</p>
     </section>
     <section>
-      <h2>Resultado antes del contacto</h2>
-      <p>El cálculo completo se realiza localmente en el navegador y aparece antes de cualquier invitación a solicitar una demo.</p>
+      <h2>Resultado local antes del contacto</h2>
+      <p>El cálculo completo se realiza en el navegador. La revisión ampliada es opcional y no envía las cifras del diagnóstico.</p>
     </section>
   </main>
 `;
 
 const PROFITABILITY_DIAGNOSTIC_EN_ROUTE = "/en/tools/wine-cellar-profitability-diagnostic";
 const PROFITABILITY_DIAGNOSTIC_EN_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_EN_ROUTE}`;
-const PROFITABILITY_DIAGNOSTIC_EN_TITLE = "Wine Cellar Profitability Diagnostic | Winerim";
-const PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION = "Model purchasing savings, additional contribution margin, recoverable hours and tied-up capital without combining unlike measures.";
+const PROFITABILITY_DIAGNOSTIC_EN_TITLE = "Wine List Profitability Diagnostic | Winerim";
+const PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION = "Calculate bottle and by-the-glass margin, Beverage Cost, tied-up capital, and transparent price, rotation and replenishment scenarios.";
 const PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML = `
   <main id="winerim-profitability-diagnostic">
-    <h1>Wine cellar profitability diagnostic</h1>
-    <p>Purchasing, margin, time and stock: four separate views to decide where to act first.</p>
+    <h1>Wine list profitability diagnostic</h1>
+    <p>Bottle, by-the-glass, slow stock and replenishment: four connected views that keep entered, calculated and verified operational data separate.</p>
     <section>
-      <h2>Four measures kept separate</h2>
-      <p>The diagnostic separates potential purchasing cost reduction, additional gross contribution margin, recoverable operational capacity and working capital potentially released. The figures are not added together or presented as ROI.</p>
+      <h2>Bottle and by-the-glass economics</h2>
+      <p>Calculate gross margin and Beverage Cost per bottle and glass using editable billable-glass and waste assumptions.</p>
     </section>
     <section>
-      <h2>Transparent, editable assumptions</h2>
-      <p>Each result shows its formula and uses data entered by the user. Minimum and maximum values are scenarios, not guarantees or statistical intervals.</p>
+      <h2>Slow stock and operational scenario</h2>
+      <p>Value tied-up capital at cost and compare a user-defined price, volume and replenishment scenario. It does not forecast demand or guarantee profitability.</p>
     </section>
     <section>
-      <h2>Result before contact</h2>
-      <p>The complete calculation runs locally in the browser and appears before any invitation to request a demo.</p>
+      <h2>Local result before contact</h2>
+      <p>The complete calculation runs in the browser. The expanded review is optional and does not send the diagnostic figures.</p>
     </section>
   </main>
 `;

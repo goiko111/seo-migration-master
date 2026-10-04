@@ -5430,3 +5430,31 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 4. Search Console: revalidar sitemap, canonicals, hreflang, paginas comerciales y cobertura tras la release.
 5. Seguridad tecnica: revisar la vulnerabilidad critica indicada por `npm audit` sin aplicar upgrades automaticos indiscriminados.
 6. Banco visual opcional: Decision Center/RIMs, reposicion Supply y multi-local cuando existan capturas superiores.
+
+## Actualizacion 2026-10-04: gate del diagnostico de rentabilidad
+
+### Hechos
+
+- El candidato local esta implementado y pasa `222/222` tests, build, checks de Worker/prerender y QA visual desktop/movil.
+- No se ha publicado ni se ha tocado produccion.
+
+### Decisiones
+
+- El siguiente paso es revision y decision de release, no mas desarrollo funcional dentro de este lote.
+- La publicacion debe ser atomica: frontend + Worker/edge-router + prerender, seguida de QA ES/EN.
+
+### Hipotesis
+
+- No deberia solicitarse indexacion hasta comprobar paridad humano/bot en produccion.
+
+### Contradicciones / riesgos
+
+- Publicar solo frontend dejaria a bots con el mensaje antiguo; publicar solo prerender dejaria a humanos con la version anterior.
+
+### Tareas pendientes listas para retomar
+
+1. Revisar copy, formulas y recorrido del candidato local.
+2. Autorizar o rechazar release.
+3. Con autorizacion: publicar capas coordinadas sin Lovable si el pipeline directo sigue disponible.
+4. Revalidar ES/EN: resultado, formulario, canonical, Googlebot/OAI, sitemap y eventos sin PII.
+5. Solo despues, registrar indexacion selectiva/Search Console si procede.

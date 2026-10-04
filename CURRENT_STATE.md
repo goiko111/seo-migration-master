@@ -7339,3 +7339,36 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Revisar la vulnerabilidad critica de dependencias y preparar una actualizacion controlada.
 - Completar el banco visual solo si se obtienen pantallas mejores de RIMs/Decision Center, reposicion Supply y multi-local.
 - Continuar Biblioteca del vino, Aprender vino, blog semanal y Search Console.
+
+## Actualizacion 2026-10-04: candidato local del diagnostico de rentabilidad
+
+### Hechos confirmados
+
+- Implementacion local completa en la rama `codex/winerim-web-next-20260929`.
+- Rutas conservadas:
+  - `/herramientas/diagnostico-rentabilidad-bodega`;
+  - `/en/tools/wine-cellar-profitability-diagnostic`.
+- El calculo cubre margen/BC de botella, BC por copa con merma, capital inmovilizado y escenario de precio, volumen y reposicion.
+- `/calculadora-margen-vino` ya no muestra BC `34,5 %` como `En riesgo`; usa `A revisar` y la lectura ejecutiva diferencia margen del umbral BC.
+- Se retiraron claims no demostrados de mejora media `5-15 %`.
+- Validaciones: `222/222` tests, build OK, Worker y edge-router `node --check` OK, prerender `deno check` OK, QA Playwright desktop/movil OK y sin overflow/errores de consola.
+- Evidencia: `docs/agent_outputs/profitability_diagnostic_2026-10-04_desktop.png` y `profitability_diagnostic_2026-10-04_mobile.png`.
+
+### Decisiones
+
+- Estado de release: preparado para revision, no publicado.
+- El formulario ampliado no comparte valores financieros; solo contexto categorico y consentimientos.
+
+### Hipotesis
+
+- La captacion minima posterior al resultado reducira friccion sin convertir la herramienta en un formulario encubierto.
+
+### Contradicciones / riesgos
+
+- La produccion sigue mostrando la version anterior hasta que se publique frontend, Worker/edge-router y prerender de forma coordinada.
+- La exactitud operativa real solo puede verificarse despues de conectar fuentes validadas de Winerim/TPV/CloudRIM.
+
+### Tareas pendientes
+
+- Revision del candidato y decision go/no-go.
+- Si hay go, publicar las capas coordinadas y ejecutar QA productivo ES/EN.

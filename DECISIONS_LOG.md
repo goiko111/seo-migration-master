@@ -4841,3 +4841,30 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Auditar y actualizar dependencias de forma controlada.
 - Retomar los cuatro frentes editoriales/SEO: Biblioteca, Aprender, blog semanal y Search Console.
+
+## 2026-10-04
+
+### Diagnostico de rentabilidad especifico de carta
+
+#### Hechos
+
+- La herramienta generica anterior estaba ya indexada y conectada a Worker/prerender, por lo que duplicar ruta habria fragmentado SEO y mantenimiento.
+- La inconsistencia visible de `34,5 %` provenia de dos lecturas distintas: margen dentro del rango del modelo y BC por encima del umbral preferente.
+
+#### Decisiones
+
+- Evolucionar la ruta existente a modelo `2.0.0`, sin crear otra calculadora.
+- Usar como nucleos botella, copa, stock lento y escenario PVP/volumen/reposicion.
+- Etiquetar el origen de datos: introducido, calculado y verificado no conectado.
+- Cambiar el estado BC intermedio de `En riesgo` a `A revisar` y redactar la lectura ejecutiva sin afirmar que margen y BC estan ambos en objetivo.
+- Eliminar promesas porcentuales de impacto no respaldadas.
+- Mantener el resultado inmediato y hacer opcional la solicitud ampliada con consentimientos separados.
+- No desplegar hasta revision coordinada de frontend, Worker/edge-router y prerender.
+
+#### Hipotesis
+
+- La transparencia de formula y procedencia mejora confianza y hace mas claro cuando Winerim Core o CloudRIM pueden aportar verificacion.
+
+#### Tareas pendientes asociadas
+
+- Revisar el candidato local y, si se aprueba, publicar y validar produccion.

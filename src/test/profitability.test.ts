@@ -8,58 +8,98 @@ import {
   prioritizeProfitabilityAreas,
   PROFITABILITY_AREAS,
 } from "@/lib/profitability";
+import { getBeverageCostHealth } from "@/lib/wineMarginHealth";
 
-describe("profitability diagnosis", () => {
+describe("wine-list profitability diagnosis", () => {
   it("keeps missing data separate from zero", () => {
     const result = calculateProfitabilityDiagnosis(EMPTY_PROFITABILITY_ANSWERS);
     expect(result.coverage).toBe(0);
     expect(result.results).toEqual({});
   });
 
-  it("calculates the four example ranges independently", () => {
+  it("calculates bottle, glass, capital and scenario independently", () => {
     const result = calculateProfitabilityDiagnosis(EXAMPLE_PROFITABILITY_ANSWERS);
     expect(result.coverage).toBe(4);
-    expect(result.results.cost).toEqual({ low: 200, high: 400 });
-    expect(result.results.margin).toEqual({ low: 280, high: 560 });
-    expect(result.results.time).toEqual({ low: 6, high: 12 });
-    expect(result.results.capital).toEqual({ low: 900, high: 1800 });
+    expect(result.results.bottle).toEqual({
+      grossMarginPerBottle: 24,
+      marginPercent: 66.67,
+      beverageCostPercent: 33.33,
+      monthlyContribution: 720,
+    });
+    expect(result.results.glass).toEqual({
+      effectiveGlasses: 5.4,
+      revenuePerBottle: 37.8,
+      grossContributionPerBottle: 25.8,
+      beverageCostPercent: 31.75,
+      breakEvenGlasses: 2,
+    });
+    expect(result.results.capital).toEqual({ tiedCapital: 600, estimatedRelease: 150 });
+    expect(result.results.scenario).toEqual({
+      currentMonthlyContribution: 720,
+      scenarioMonthlyContribution: 936,
+      contributionDelta: 216,
+      volumeChangePercent: 20,
+      currentBeverageCostPercent: 33.33,
+      scenarioBeverageCostPercent: 31.58,
+      reorderPointUnits: 13,
+      stockCoverageDays: 16.67,
+    });
   });
 
-  it("accepts decimal commas and rejects thousand separators", () => {
+  it("accepts decimal commas and rejects separators or negative values", () => {
     expect(parseProfitabilityAnswer("10,5")).toBe(10.5);
     expect(() => parseProfitabilityAnswer("1.000,50")).toThrow();
+    expect(() => parseProfitabilityAnswer("-1")).toThrow();
   });
 
-  it("rejects percentages above 100", () => {
+  it("rejects invalid percentages and zero divisors without hiding other blocks", () => {
     const result = calculateProfitabilityDiagnosis({
-      ...EMPTY_PROFITABILITY_ANSWERS,
-      purchases: "1000",
-      purchaseLow: "20",
-      purchaseHigh: "120",
+      ...EXAMPLE_PROFITABILITY_ANSWERS,
+      glassWastePercent: "100",
+      bottlePvp: "0",
     });
-    expect(result.errors.purchaseHigh).toContain("100");
-    expect(result.results.cost).toBeUndefined();
+    expect(result.errors.glassWastePercent).toContain("inferior");
+    expect(result.errors.bottlePvp).toContain("mayor");
+    expect(result.results.bottle).toBeUndefined();
+    expect(result.results.glass).toBeUndefined();
+    expect(result.results.capital).toBeDefined();
+    expect(result.results.scenario).toBeDefined();
   });
 
-  it("orders a negative contribution range from the larger loss to the smaller loss", () => {
+  it("handles a zero-volume scenario without inventing a rotation percentage", () => {
     const result = calculateProfitabilityDiagnosis({
-      ...EMPTY_PROFITABILITY_ANSWERS,
-      unitPrice: "8",
-      unitCost: "10",
-      unitsLow: "10",
-      unitsHigh: "20",
+      ...EXAMPLE_PROFITABILITY_ANSWERS,
+      currentUnitsMonth: "0",
+      scenarioUnitsMonth: "0",
     });
-    expect(result.results.margin).toEqual({ low: -40, high: -20 });
+    expect(result.results.scenario?.volumeChangePercent).toBeNull();
+    expect(result.results.scenario?.stockCoverageDays).toBeNull();
+    expect(result.results.scenario?.reorderPointUnits).toBe(4);
   });
 
-  it("shows an explicit formula for every area", () => {
-    Object.values(PROFITABILITY_AREAS).forEach((area) => {
-      expect(area.formula.length).toBeGreaterThan(20);
+  it("shows an explicit formula for every area and labels provenance", () => {
+    Object.values(PROFITABILITY_AREAS).forEach((area) => expect(area.formula.length).toBeGreaterThan(30));
+    const result = calculateProfitabilityDiagnosis(EXAMPLE_PROFITABILITY_ANSWERS);
+    expect(result.sources).toEqual({
+      inputs: "entered",
+      outputs: "calculated",
+      operationalData: "verified",
+      verifiedConnected: false,
     });
   });
 
   it("prioritizes three actions without inventing a total score", () => {
-    expect(prioritizeProfitabilityAreas("time")).toEqual(["time", "capital", "cost"]);
+    expect(prioritizeProfitabilityAreas("capital")).toEqual(["capital", "scenario", "bottle"]);
+  });
+
+  it("marks 34.5% Beverage Cost for review, not as a contradictory overall success", () => {
+    expect(getBeverageCostHealth(28)).toBe("good");
+    expect(getBeverageCostHealth(34.5)).toBe("warning");
+    expect(getBeverageCostHealth(36)).toBe("danger");
+    const calculator = readFileSync("src/pages/CalculadoraMargen.tsx", "utf8");
+    expect(calculator).toContain('bcWarning: "A revisar"');
+    expect(calculator).not.toContain('bcWarning: "En riesgo"');
+    expect(calculator).not.toContain("Mejora del margen bruto medio entre un 5-15%");
   });
 
   it("keeps the human, bot and sitemap route in sync", () => {
