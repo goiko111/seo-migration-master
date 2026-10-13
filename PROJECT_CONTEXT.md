@@ -1388,10 +1388,14 @@
 - `/herramientas` presenta ahora la calculadora de tiempo operativo recuperable como
   primera recomendación y primera herramienta del catálogo.
 - El diagnóstico de rentabilidad queda inmediatamente después.
-- El popup de captación ya no se abre automáticamente en el hub de Herramientas;
-  permanece activo en fichas individuales y hubs de Recursos.
-- Producción usa Pages `https://fbcd47a9.winerim-origin.pages.dev` y facade
-  `57457ebb-877b-4163-b172-0fb7b14bf48b`.
+- El popup de captación ya no se abre automáticamente en el hub de Herramientas.
+  Las dos calculadoras de decisión entregan el resultado sin popup y usan un CTA
+  integrado después del resultado; otras fichas y hubs de Recursos lo conservan.
+- Producción usa Pages `https://d08ea172.winerim-origin.pages.dev` y facade
+  `e6caf93d-539a-4845-a0a7-66635ef3f423`.
+- Los campos distinguen explícitamente minutos por tarea hoy y minutos por tarea en
+  el escenario futuro, definido como una estimación editable con Winerim o con el
+  proceso mejorado.
 
 ### Decisiones
 

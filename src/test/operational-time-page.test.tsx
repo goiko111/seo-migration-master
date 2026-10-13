@@ -13,6 +13,9 @@ describe("CalculadoraTiempoOperativo", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: "Partners" }).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "¿Cuánto te cuesta gestionar el vino?" })).toBeInTheDocument();
+    expect(screen.getAllByText("Minutos por vez (hoy)").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Minutos por vez (escenario futuro)").length).toBeGreaterThan(0);
+    expect(screen.getByText(/cuánto estimas que tardarías con Winerim/i)).toBeInTheDocument();
     expect(screen.getByText(/semana × 52 ÷ 12/i)).toBeInTheDocument();
     expect(screen.queryByRole("textbox", { name: /email/i })).not.toBeInTheDocument();
 

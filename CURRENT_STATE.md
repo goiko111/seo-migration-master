@@ -7600,13 +7600,16 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - La tarjeta prioritaria abre correctamente
   `/herramientas/calculadora-tiempo-operativo` en producción.
 - El catálogo no muestra el popup automático tras su espera anterior de ocho segundos.
+- La calculadora explica `Minutos por vez (hoy)` y `Minutos por vez (escenario
+  futuro)`; conserva el resultado sin formulario y el CTA integrado posterior.
 - Gates verdes: `252/252` tests, TypeScript, build y `git diff --check`.
-- Release activa: Pages `fbcd47a9`; facade
-  `57457ebb-877b-4163-b172-0fb7b14bf48b`.
+- Release activa: Pages `d08ea172`; facade
+  `e6caf93d-539a-4845-a0a7-66635ef3f423`.
 
 ### Decisiones
 
-- Mantener el popup en herramientas individuales, pero no en la página de elección.
+- Mantener el resultado sin popup en las dos calculadoras de decisión y el popup en
+  las demás herramientas individuales, pero no en la página de elección.
 
 ### Hipótesis
 
