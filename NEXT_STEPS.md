@@ -5799,3 +5799,35 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 2. Verificar el endpoint directo de la función en ES/EN y registrar hash/revisión.
 3. Medir clic de entrada, inicio y finalización de las tres calculadoras sin PII.
 4. Retomar después Search Console y traducciones como líneas independientes.
+
+## Actualización 2026-10-13: siguiente bloque tras publicar merma
+
+### Hechos
+
+- La calculadora de mermas está publicada, indexable y verificada en ES/EN.
+- Frontend, Workers, sitemap, pruebas funcionales y QA responsive están verdes.
+
+### Decisiones
+
+- No ampliar ahora a otros idiomas sin traducción completa.
+- No modificar fórmulas o hipótesis sin evidencia de uso consentida.
+
+### Hipótesis
+
+- La cuarta posición mantiene visible la herramienta sin diluir los tres
+  recorridos principales.
+
+### Contradicciones / límites
+
+- La fuente secundaria Lovable/Supabase no se desplegó; producción funciona desde
+  Cloudflare y está validada.
+- La deuda de metadata inicial afecta a herramientas anteriores, no a las nuevas
+  rutas de merma.
+
+### Siguiente bloque verificable
+
+1. Instrumentar inicio, finalización y descarga sin PII ni valores introducidos.
+2. Observar uso antes de recalibrar porcentajes o textos.
+3. Corregir la metadata inicial de las herramientas antiguas en un release
+   técnico separado.
+4. Mantener Search Console y traducciones como trabajos independientes.

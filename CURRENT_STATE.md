@@ -7771,3 +7771,45 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Ejecutar el parche Lovable acotado y verificar su endpoint directo.
 - Instrumentar uso agregado sin PII.
+
+## Actualización 2026-10-13: calculadora de mermas en producción
+
+### Hechos confirmados
+
+- ES: `https://winerim.wine/herramientas/calculadora-mermas-vino`.
+- EN: `https://winerim.wine/en/tools/wine-waste-calculator`.
+- Ambas rutas funcionan con humano, Googlebot y OAI, devuelven `200`, canonical
+  propio y aparecen exactamente una vez como `loc` en el sitemap.
+- La herramienta ocupa la cuarta posición en `Empieza aquí` y en el listado de
+  Herramientas; el orden productivo se verificó por DOM.
+- El ejemplo reproduce 90 EUR/mes de coste perdido, 1.080 EUR/año y 120 EUR/mes
+  de venta no cobrada sin sumar magnitudes diferentes.
+- QA visual productiva completada en los tres pasos para escritorio y móvil, sin
+  errores de consola ni overflow horizontal.
+- Producción: Pages `5c395503`, backend
+  `3a8d56e1-822f-4f5a-8b04-3db90d2e6627`, facade
+  `2bd98d46-51f7-4ef5-a58e-88ce8b34f67c`.
+
+### Decisiones
+
+- Mantener datos y cálculo en cliente; registrar solo nombres de acciones cuando
+  se instrumente medición.
+- Tratar las hipótesis base como editables y no garantizadas.
+
+### Hipótesis
+
+- El desglose por origen permitirá que el usuario priorice procesos concretos en
+  vez de quedarse únicamente con una cifra agregada.
+
+### Contradicciones / riesgos
+
+- Lovable/Supabase no es la capa pública activa para esta ruta; su fuente local
+  quedó preparada, pero no se realizó un despliegue adicional de Edge Functions.
+- Persisten avisos no bloqueantes preexistentes de React Router, `caniuse-lite`,
+  una `key` en Precios y chunks grandes.
+
+### Tareas pendientes
+
+- Medición agregada sin PII y contraste de hipótesis con datos consentidos.
+- Resolver la metadata inicial de las herramientas antiguas como mantenimiento
+  SEO separado.

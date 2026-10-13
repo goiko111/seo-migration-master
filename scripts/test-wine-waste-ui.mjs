@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import { chromium } from "/Users/GOIKO/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs";
 
-const base = "http://127.0.0.1:4178";
-const out = "docs/agent_outputs/wine_waste_calculator_2026-10-13";
+const base = process.env.BASE_URL || "http://127.0.0.1:4178";
+const out = process.env.SCREENSHOT_DIR || "docs/agent_outputs/wine_waste_calculator_2026-10-13";
 await fs.mkdir(out, { recursive: true });
 
 async function runFlow(page, prefix, mobile = false) {

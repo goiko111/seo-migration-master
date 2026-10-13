@@ -1569,3 +1569,52 @@
 - Aplicar en Lovable el parche exacto documentado en
   `docs/agent_outputs/lovable_prerender_calculator_v5_exact_patch_2026-10-13.md`.
 - Medir uso sin PII antes de cambiar la prioridad o las hipótesis.
+
+## Actualización 2026-10-13: calculadora de mermas publicada
+
+### Hechos
+
+- La nueva herramienta está publicada en
+  `/herramientas/calculadora-mermas-vino` y en
+  `/en/tools/wine-waste-calculator`.
+- Se integra como cuarta prioridad tanto en `Empieza aquí` como en el listado
+  general, después de tiempo operativo, rentabilidad y fuga de margen.
+- El cálculo separa coste perdido y ventas no cobradas; ofrece monedas EUR, USD y
+  GBP, fórmulas visibles, escenario descargable y tres acciones priorizadas.
+- La release activa usa Pages `https://5c395503.winerim-origin.pages.dev`, backend
+  `winerim-proxy` `3a8d56e1-822f-4f5a-8b04-3db90d2e6627` y facade
+  `winerim-edge-router` `2bd98d46-51f7-4ef5-a58e-88ce8b34f67c`.
+- Humano, Googlebot y OAI reciben `200` y canonical propio en ES/EN; el sitemap
+  contiene una única entrada `loc` exacta por ruta.
+- Gates finales: `263/263` tests, TypeScript, build, sintaxis Worker, Deno check,
+  dry-runs y QA Playwright productiva en escritorio y móvil.
+
+### Decisiones
+
+- Publicar solo ES/EN, los idiomas con contenido completo, sin crear rutas vacías
+  para IT/FR/DE/PT.
+- Mantener el coste de merma como métrica principal y la venta no cobrada como
+  magnitud independiente para no sumarlas de forma engañosa.
+- No enviar importes ni datos introducidos a analítica; los cálculos permanecen
+  en el navegador.
+
+### Hipótesis
+
+- Situar la merma como cuarto diagnóstico facilitará descubrir pérdidas
+  operativas sin desplazar los tres recorridos prioritarios ya publicados.
+
+### Contradicciones
+
+- Las fuentes locales de las Edge Functions de Lovable/Supabase contienen las
+  rutas, pero la publicación pública vigente se resuelve por el Worker de
+  Cloudflare; no se gastaron créditos de Lovable.
+- Varias herramientas anteriores conservan canonical de home en el HTML shell
+  humano antes de hidratar, aunque los bots cubiertos reciben canonical correcto.
+  La calculadora de mermas sí tiene metadata inicial específica.
+
+### Tareas pendientes
+
+- Medir inicio, finalización y descarga de forma agregada y sin PII antes de
+  recalibrar hipótesis.
+- Corregir en un lote independiente la metadata inicial genérica del resto de
+  herramientas, sin alterar esta release.

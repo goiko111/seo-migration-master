@@ -147,6 +147,19 @@ const OPERATIONAL_TIME_URL = `https://winerim.wine${OPERATIONAL_TIME_ROUTE}`;
 const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
 const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
 
+const WINE_WASTE_ROUTES = new Map([
+  ["/herramientas/calculadora-mermas-vino", {
+    lang: "es",
+    title: "Calculadora de mermas de vino para restaurantes | Winerim",
+    description: "Calcula cuánto vino pierdes al mes por copeo, botellas abiertas, roturas, invitaciones e inventario. Cálculo local, gratis y sin registro.",
+  }],
+  ["/en/tools/wine-waste-calculator", {
+    lang: "en",
+    title: "Wine waste calculator for restaurants | Winerim",
+    description: "Calculate monthly wine waste from by-the-glass service, open bottles, breakage, unrecorded comps and inventory. Free, local and transparent.",
+  }],
+]);
+
 const ARTICLE_ROUTE_RE = /^\/(?:(?:en|fr|it|de|pt)\/)?article\/[^/]+$/;
 const TOOL_HUB_ROUTES = new Set(["/herramientas", "/en/tools", "/it/strumenti", "/fr/outils", "/de/tools", "/pt/ferramentas"]);
 const TOOL_ROUTE_PREFIXES = ["/herramientas/", "/en/tools/", "/it/strumenti/", "/fr/outils/", "/de/tools/", "/pt/ferramentas/"];
@@ -465,6 +478,24 @@ const fetchReactPage = async (request, env, path) => {
   });
 };
 
+const withWineWasteMetadata = (response, path, requestMethod = "GET") => {
+  if (requestMethod === "HEAD" || !response.ok) return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  const metadata = WINE_WASTE_ROUTES.get(path);
+  if (!metadata || !contentType.includes("text/html")) return response;
+  const canonical = `https://winerim.wine${path}`;
+
+  return new HTMLRewriter()
+    .on("html", { element(element) { element.setAttribute("lang", metadata.lang); } })
+    .on("title", { element(element) { element.setInnerContent(metadata.title); } })
+    .on('meta[name="description"]', { element(element) { element.setAttribute("content", metadata.description); } })
+    .on('meta[property="og:title"]', { element(element) { element.setAttribute("content", metadata.title); } })
+    .on('meta[property="og:description"]', { element(element) { element.setAttribute("content", metadata.description); } })
+    .on('meta[property="og:url"]', { element(element) { element.setAttribute("content", canonical); } })
+    .on('link[rel="canonical"]', { element(element) { element.setAttribute("href", canonical); } })
+    .transform(response);
+};
+
 const fetchPricingArchitecturePage = async (request, env, path, renderBotContent) => {
   const response = await fetchReactPage(request, env, path);
   if (request.method === "HEAD" || !response.ok) return response;
@@ -523,7 +554,13 @@ const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
   if (!response.ok || !contentType.includes("xml") || request.method === "HEAD") return response;
 
   const xml = await response.text();
-  const urls = [PROFITABILITY_DIAGNOSTIC_URL, PROFITABILITY_DIAGNOSTIC_EN_URL, OPERATIONAL_TIME_URL, OPERATIONAL_TIME_EN_URL];
+  const urls = [
+    PROFITABILITY_DIAGNOSTIC_URL,
+    PROFITABILITY_DIAGNOSTIC_EN_URL,
+    OPERATIONAL_TIME_URL,
+    OPERATIONAL_TIME_EN_URL,
+    ...Array.from(WINE_WASTE_ROUTES.keys(), path => `https://winerim.wine${path}`),
+  ];
   let patchedXml = xml;
   const added = [];
   for (const targetUrl of urls) {
@@ -890,7 +927,8 @@ export default {
     }
 
     if (isReactRoute(path)) {
-      return fetchReactPage(request, env, path);
+      const response = await fetchReactPage(request, env, path);
+      return withWineWasteMetadata(response, path, request.method);
     }
 
     if (path.startsWith("/assets/")) {

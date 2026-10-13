@@ -5219,3 +5219,37 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendiente
 
 - Desplegar solo `prerender` con el parche exacto y registrar su nueva revisión.
+
+## 2026-10-13 — Publicación de la calculadora de mermas
+
+### Hechos
+
+- La calculadora se implementó y publicó como herramienta nativa Winerim con
+  rutas ES/EN, integración en Herramientas, SEO, sitemap y prerender.
+- El recorrido ofrece contexto, cifras y resultado, además de descarga y enlaces
+  a diagnósticos relacionados.
+
+### Decisiones
+
+- Prioridad estable: tiempo operativo, rentabilidad, fuga de margen y merma.
+- Separar coste perdido de venta no cobrada y evitar un total combinado.
+- No usar una tasa universal: cuando falta un dato se muestra la hipótesis base,
+  editable y no garantizada.
+- Publicar por la vía directa de Cloudflare sin consumir créditos de Lovable.
+
+### Hipótesis
+
+- Una explicación visible del origen de cada cifra mejorará confianza y calidad
+  de las conversaciones comerciales.
+
+### Contradicciones
+
+- Las Edge Functions de Lovable/Supabase son una fuente secundaria; la capa SEO
+  pública activa es `winerim-proxy`.
+- Otras herramientas aún dependen de hidratación para reemplazar el canonical de
+  home en el HTML humano inicial; esta nueva ruta se corrigió de forma explícita.
+
+### Pendiente
+
+- Instrumentar eventos agregados sin importes ni PII.
+- Generalizar la metadata inicial del shell en un lote técnico independiente.
