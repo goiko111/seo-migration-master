@@ -64,4 +64,14 @@ describe("partner landing", () => {
       expect(copy.faqs).not.toEqual(PARTNER_LANDING_COPY.en.faqs);
     }
   });
+
+  it.each([
+    ["/it/affiliati", "Aprire gli strumenti in italiano", "/it/strumenti"],
+    ["/fr/affilies", "Ouvrir les outils en français", "/fr/outils"],
+    ["/de/partner", "Werkzeuge auf Deutsch öffnen", "/de/tools"],
+    ["/pt/afiliados", "Abrir ferramentas em português", "/pt/ferramentas"],
+  ])("keeps the partner tool journey localized on %s", (path, label, href) => {
+    renderPage(path);
+    expect(screen.getAllByRole("link", { name: label })[0]).toHaveAttribute("href", href);
+  });
 });

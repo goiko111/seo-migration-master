@@ -62,7 +62,9 @@ const Afiliate = () => {
   const canonicalPath = localePath("/afiliate");
   const fullCalculatorPath = lang === "es"
     ? "/herramientas/calculadora-tiempo-operativo"
-    : "/en/tools/operational-time-calculator";
+    : lang === "en"
+      ? "/en/tools/operational-time-calculator"
+      : localePath("/herramientas");
 
   const updateClient = (field: keyof ClientValueInputs, value: string) => {
     setClientInputs((current) => ({ ...current, [field]: value }));
