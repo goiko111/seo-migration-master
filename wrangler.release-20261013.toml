@@ -11,8 +11,8 @@ binding = "BACKEND"
 service = "winerim-proxy"
 
 [vars]
-FRONTEND_ORIGIN = "https://839325cb.winerim-origin.pages.dev"
-FRONTEND_RELEASE = "839325cb-time-calculator-v4-20261013"
+FRONTEND_ORIGIN = "https://cd560b1c.winerim-origin.pages.dev"
+FRONTEND_RELEASE = "cd560b1c-time-calculator-v5-20261013"
 CATALONIA_ORIGIN = "https://4867c418.winerim-origin.pages.dev"
 CATALONIA_RELEASE = "4867c418-catalonia-24-plus-1-20260911"
 COMMERCIAL_ORIGIN = "https://b5d4f8eb.winerim-origin.pages.dev"

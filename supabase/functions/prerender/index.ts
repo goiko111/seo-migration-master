@@ -6313,14 +6313,14 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/herramientas/calculadora-tiempo-operativo': {
-    meta: { title: 'Calculadora del Coste Operativo del Vino | Winerim', description: 'Calcula horas y valor del tiempo semanal dedicado a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Calculadora del Coste Operativo del Vino | Winerim', description: 'Calcula tiempo recuperable en hasta trece tareas de vino para restaurantes, hoteles y grupos, con minutos Winerim, ranking y jornadas anuales.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
       h1: '¿Cuánto te cuesta gestionar el vino?',
-      subtitle: 'Compara el tiempo actual con un escenario definido por ti y valora el tiempo por rol con hipótesis visibles y editables.',
+      subtitle: 'Compara tu tiempo actual con los minutos estimados con Winerim para restaurante, hotel o grupo mediante hipótesis visibles y editables.',
       sections: [
-        { heading: 'Fórmula transparente', content: 'Cada tarea aplica minutos actuales menos minutos del escenario, multiplicados por la frecuencia semanal. El mes medio usa semana por 52 dividido entre 12 y el año usa semana por 52.' },
-        { heading: 'Siete tareas semanales', content: 'Artículos del TPV, recepción de albaranes, recuento de botellas, conciliación de stock, preparación de pedidos, decisión de compra y comunicación con distribuidores.' },
-        { heading: 'Escenario, no garantía', content: 'El usuario puede editar cada hipótesis. El resultado representa capacidad potencialmente recuperable y no una promesa fija de ahorro de horas.' },
+        { heading: 'Fórmula transparente', content: 'Los minutos con Winerim se calculan desde el tiempo actual y una hipótesis visible de automatización por tarea. El resultado usa la frecuencia semanal indicada por el usuario.' },
+        { heading: 'Trece tareas y tres perfiles', content: 'Restaurante activa diez tareas comunes. Hotel o resort y grupo incorporan también cartas en varios idiomas, consolidación entre centros y dudas o formación del equipo.' },
+        { heading: 'Prioridades y jornadas anuales', content: 'El resultado muestra semana, mes y año, las tres automatizaciones con mayor impacto y su equivalencia orientativa en jornadas de ocho horas. No es una garantía.' },
       ],
       faqs: [
         { q: '¿Es una garantía de ahorro?', a: 'No. Es un escenario calculado con las hipótesis introducidas por el usuario.' },
@@ -6331,14 +6331,14 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/en/tools/operational-time-calculator': {
-    meta: { title: 'Wine Operations Cost Calculator | Winerim', description: 'Calculate weekly hours and time value for POS items, deliveries, bottle counts, reconciliation, orders, purchasing and distributors.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Wine Operations Cost Calculator | Winerim', description: 'Calculate recoverable time across up to thirteen wine tasks for restaurants, hotels and groups, with Winerim minutes, ranking and annual workdays.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
     content: {
       h1: 'What does it cost to manage your wine operation?',
-      subtitle: 'Compare current time with a scenario you define and value time by role using visible, editable assumptions.',
+      subtitle: 'Compare current time with estimated Winerim minutes for a restaurant, hotel or group using visible, editable assumptions.',
       sections: [
-        { heading: 'Transparent formula', content: 'Each task uses current minutes minus scenario minutes, multiplied by weekly frequency. Average month uses week times 52 divided by 12 and year uses week times 52.' },
-        { heading: 'Seven weekly tasks', content: 'POS items, delivery-note intake, bottle counts, stock reconciliation, order preparation, buying decisions and distributor communication.' },
-        { heading: 'A scenario, not a guarantee', content: 'Every assumption can be edited. The result represents potentially recoverable capacity, not a fixed promise of saved hours.' },
+        { heading: 'Transparent formula', content: 'Winerim minutes are calculated from current time and a visible automation assumption for each task. Results use the weekly frequency entered by the user.' },
+        { heading: 'Thirteen tasks and three profiles', content: 'Restaurant activates ten common tasks. Hotel or resort and group also include multilingual wine-list updates, multi-location consolidation and recurring team questions or training.' },
+        { heading: 'Priorities and annual workdays', content: 'Results show week, month and year, the three highest-impact automations and an indicative equivalent in eight-hour workdays. This is not a guarantee.' },
       ],
       faqs: [
         { q: 'Is this a savings guarantee?', a: 'No. It is a scenario calculated from the assumptions entered by the user.' },

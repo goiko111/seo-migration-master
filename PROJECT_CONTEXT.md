@@ -1487,3 +1487,52 @@
 
 - Medir finalización sin PII y estudiar perfiles opcionales por tipo de operación
   antes de añadir traducciones, grupos o formación a la lista principal.
+
+## Actualización 2026-10-13: calculadora operativa v5 por perfiles
+
+### Hechos
+
+- La calculadora ofrece perfiles `Restaurante`, `Hotel o resort` y `Grupo`.
+  Cambiar de perfil activa las tareas habituales sin sobrescribir los valores que
+  ya haya introducido el visitante.
+- El perfil Restaurante mantiene las diez tareas comunes. Hotel y Grupo activan
+  además tres tareas opcionales: cartas en varios idiomas, consolidación de varios
+  establecimientos y dudas o formación recurrente del equipo.
+- El cierre muestra las tres automatizaciones con mayor impacto y convierte las
+  horas netas anuales en jornadas orientativas de ocho horas.
+- `Origen de las cifras` se limita a cuatro fuentes comprensibles: entrada del
+  usuario, cálculo, hipótesis base Winerim y ejemplo ficticio.
+- La captura de SAVia fue sustituida por la consulta real de rotación a 90 días
+  aportada por el usuario y optimizada a WebP.
+- Producción activa: Pages `https://cd560b1c.winerim-origin.pages.dev`, facade
+  `e24c8391-8baa-4393-957d-ac65b412a65a` y backend `winerim-proxy`
+  `18d9db48-acdb-423f-9389-f83376957c4f`.
+- Googlebot y OAI reciben `200`, canonical propio y el prerender actualizado con
+  trece tareas, tres perfiles, prioridades y jornadas anuales.
+- Gates finales: `254/254` tests, TypeScript, build, sintaxis Worker, Deno check,
+  dry-runs, QA Playwright de escritorio/móvil y `git diff --check`.
+
+### Decisiones
+
+- Los perfiles son presets editables, no benchmarks ni fuentes de minutos.
+- Las tres tareas nuevas permanecen separadas para evitar doble conteo y se
+  identifican visualmente como opcionales.
+- Mantener únicamente cuatro categorías visibles en el origen de cifras.
+
+### Hipótesis
+
+- Un preset por tipo de operación reducirá el trabajo inicial sin dar una falsa
+  precisión sobre el tiempo actual de cada negocio.
+
+### Contradicciones
+
+- La Edge Function `prerender` de Lovable Cloud está actualizada localmente, pero
+  el despliegue directo fue rechazado con `403`; el Worker estático activo ya
+  entrega el contenido correcto a buscadores.
+
+### Tareas pendientes
+
+- Desplegar únicamente `prerender` desde Lovable Cloud para reconciliar la fuente
+  secundaria, sin tocar frontend, sitemap, migraciones ni Worker.
+- Medir selección de perfil, finalización y descarga sin PII antes de recalibrar
+  hipótesis.

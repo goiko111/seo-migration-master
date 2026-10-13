@@ -17,6 +17,8 @@ describe("CalculadoraTiempoOperativo", () => {
     expect(screen.getAllByText("Minutos con Winerim").length).toBeGreaterThan(0);
     expect(screen.getByText(/Los minutos con Winerim aparecen automáticamente/i)).toBeInTheDocument();
     expect(screen.getByText(/semana × 52 ÷ 12/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Restaurante" })).toHaveAttribute("aria-pressed", "true");
+    expect(document.getElementById("multilingualUpdates-currentMinutes")).toBeDisabled();
     expect(screen.queryByRole("textbox", { name: /email/i })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /cargar ejemplo ficticio/i }));
@@ -24,13 +26,34 @@ describe("CalculadoraTiempoOperativo", () => {
     expect(screen.getByText("Tareas calculadas: 10/10")).toBeInTheDocument();
     expect(screen.getByText("Tareas con coste/hora: 10/10")).toBeInTheDocument();
     expect(screen.getByRole("table", { name: "Valor del tiempo" })).toBeInTheDocument();
+    expect(screen.getByText(/Equivale a 79 jornadas de 8 horas recuperadas al año/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Las 3 automatizaciones con mayor impacto" })).toBeInTheDocument();
     expect(screen.getByText(/coste de oportunidad/i)).toBeInTheDocument();
     expect(screen.getByText("Introducido por ti")).toBeInTheDocument();
-    expect(screen.getByText(/No conectados en esta calculadora pública/i)).toBeInTheDocument();
+    expect(screen.queryByText(/No conectados en esta calculadora pública/i)).not.toBeInTheDocument();
+    expect(screen.getByAltText(/ranking de vinos por rotación/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /ver mi diagnóstico de rentabilidad/i })).toHaveAttribute(
       "href",
       "/herramientas/diagnostico-rentabilidad-bodega",
     );
+  });
+
+  it("applies hotel and group presets without discarding entered values", () => {
+    render(<MemoryRouter><CalculadoraTiempoOperativo /></MemoryRouter>);
+
+    const multilingual = document.getElementById("multilingualUpdates-currentMinutes") as HTMLInputElement;
+    expect(multilingual).toBeDisabled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hotel o resort" }));
+    expect(screen.getByRole("button", { name: "Hotel o resort" })).toHaveAttribute("aria-pressed", "true");
+    expect(multilingual).toBeEnabled();
+    fireEvent.change(multilingual, { target: { value: "47" } });
+
+    fireEvent.click(screen.getByRole("button", { name: "Restaurante" }));
+    expect(multilingual).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Grupo" }));
+    expect(multilingual).toBeEnabled();
+    expect(multilingual).toHaveValue("47");
   });
 
   it("calculates the future scenario automatically and allows tasks to be excluded", () => {

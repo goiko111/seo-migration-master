@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
+  applyOperationalProfile,
   calculateOperationalTime,
   createEmptyOperationalTimeAnswers,
   EXAMPLE_OPERATIONAL_TIME_ANSWERS,
@@ -19,8 +20,8 @@ describe("operational time calculator", () => {
     expect(result.taskResults).toEqual({});
   });
 
-  it("uses ten explicit, non-overlapping weekly tasks", () => {
-    expect(OPERATIONAL_TASKS).toHaveLength(10);
+  it("uses thirteen explicit, non-overlapping weekly tasks", () => {
+    expect(OPERATIONAL_TASKS).toHaveLength(13);
     expect(OPERATIONAL_TASKS.map(({ id }) => id)).toEqual([
       "posItems",
       "salesPrices",
@@ -32,31 +33,52 @@ describe("operational time calculator", () => {
       "buyingDecision",
       "distributorCommunication",
       "operationalReporting",
+      "multilingualUpdates",
+      "multiLocationConsolidation",
+      "teamTraining",
     ]);
     OPERATIONAL_TASKS.forEach((task) => expect(task.boundary.length).toBeGreaterThan(45));
+    expect(OPERATIONAL_TASKS.filter(({ optional }) => optional).map(({ id }) => id)).toEqual([
+      "multilingualUpdates",
+      "multiLocationConsolidation",
+      "teamTraining",
+    ]);
+  });
+
+  it("uses profiles as editable presets without overwriting entered values", () => {
+    const restaurant = createEmptyOperationalTimeAnswers("restaurant");
+    expect(Object.values(restaurant).filter(({ enabled }) => enabled)).toHaveLength(10);
+    expect(restaurant.multilingualUpdates.enabled).toBe(false);
+
+    restaurant.multilingualUpdates.currentMinutes = "47";
+    const hotel = applyOperationalProfile(restaurant, "hotel");
+    expect(Object.values(hotel).filter(({ enabled }) => enabled)).toHaveLength(13);
+    expect(hotel.multilingualUpdates.enabled).toBe(true);
+    expect(hotel.multilingualUpdates.currentMinutes).toBe("47");
   });
 
   it("calculates current, scenario, recoverable, additional and net values", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
-    expect(result.modelVersion).toBe("4.0.0");
-    expect(result.coverage).toBe(10);
-    expect(result.costCoverage).toBe(10);
-    expect(result.currentHoursPerWeek).toBe(15.42);
-    expect(result.scenarioHoursPerWeek).toBe(3.27);
-    expect(result.recoverableHoursPerWeek).toBe(12.15);
+    expect(result.modelVersion).toBe("5.0.0");
+    expect(result.coverage).toBe(13);
+    expect(result.costCoverage).toBe(13);
+    expect(result.currentHoursPerWeek).toBe(21.42);
+    expect(result.scenarioHoursPerWeek).toBe(4.32);
+    expect(result.recoverableHoursPerWeek).toBe(17.1);
     expect(result.additionalHoursPerWeek).toBe(0);
-    expect(result.netHoursPerWeek).toBe(12.15);
-    expect(result.currentTimeValuePerWeek).toBe(321.4);
-    expect(result.scenarioTimeValuePerWeek).toBe(66.92);
-    expect(result.netTimeValuePerWeek).toBe(254.48);
+    expect(result.netHoursPerWeek).toBe(17.1);
+    expect(result.currentTimeValuePerWeek).toBe(480.4);
+    expect(result.scenarioTimeValuePerWeek).toBe(93.92);
+    expect(result.netTimeValuePerWeek).toBe(386.48);
   });
 
   it("uses 52/12 for an average month and 52 weeks for a year", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(OPERATIONAL_WEEKS_PER_MONTH).toBeCloseTo(4.333333, 5);
-    expect(result.netHoursPerMonth).toBe(52.65);
-    expect(result.netHoursPerYear).toBe(631.8);
-    expect(result.netTimeValuePerYear).toBe(13232.96);
+    expect(result.netHoursPerMonth).toBe(74.1);
+    expect(result.netHoursPerYear).toBe(889.2);
+    expect(result.netWorkdaysPerYear).toBe(111.15);
+    expect(result.netTimeValuePerYear).toBe(20096.96);
   });
 
   it("derives the future scenario from the editable reduction assumption", () => {
@@ -100,7 +122,7 @@ describe("operational time calculator", () => {
     const answers = structuredClone(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     answers.posItems.hourlyCost = "0";
     const result = calculateOperationalTime(answers);
-    expect(result.costCoverage).toBe(10);
+    expect(result.costCoverage).toBe(13);
     expect(result.taskResults.posItems?.hourlyCost).toBe(0);
     expect(result.taskResults.posItems?.netTimeValuePerWeek).toBe(0);
   });
@@ -137,21 +159,19 @@ describe("operational time calculator", () => {
   it("prioritizes the three largest positive net results only", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(prioritizeOperationalTasks(result.taskResults)).toEqual([
+      "multiLocationConsolidation",
       "distributorCommunication",
       "posItems",
-      "operationalReporting",
     ]);
   });
 
-  it("labels inputs, calculations, fictional examples and unconnected verification", () => {
+  it("labels inputs, calculations, fictional examples and scenario assumptions", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(result.sources).toEqual({
       inputs: "entered",
       outputs: "calculated",
       example: "fictional",
-      operationalData: "verified",
       scenarioAssumptions: "winerim-baseline",
-      verifiedConnected: false,
     });
   });
 
@@ -173,10 +193,14 @@ describe("operational time calculator", () => {
     expect(edgeRouter).toContain(enRoute);
     expect(worker).toContain(route);
     expect(worker).toContain(enRoute);
+    expect(worker).toContain("Trece tareas y tres perfiles");
+    expect(worker).toContain("Thirteen tasks and three profiles");
     expect(sitemap).toContain(`{ esPath: '${route}', priority: '0.8', changefreq: 'monthly', multilang: false }`);
     expect(sitemap).toContain(`{ esPath: '${enRoute}', priority: '0.8', changefreq: 'monthly', multilang: false }`);
     expect(prerender).toContain(`'${route}': {`);
     expect(prerender).toContain(`'${enRoute}': {`);
+    expect(prerender).toContain("Prioridades y jornadas anuales");
+    expect(prerender).toContain("Priorities and annual workdays");
     expect(page).toContain("What does it cost to manage your wine operation?");
     expect(page).toContain("Calculated locally · We do not send this data");
     expect(page).toContain("does not imply cash savings, headcount reduction, added sales or guaranteed ROI");

@@ -3,33 +3,42 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BarChart3,
+  Building2,
   ChartNoAxesCombined,
   CircleDollarSign,
   Download,
   FileCheck2,
   FileText,
   FlaskConical,
+  GraduationCap,
+  Hotel,
+  Languages,
   ListChecks,
   MessagesSquare,
+  Network,
   PackageSearch,
   RefreshCcw,
   RotateCcw,
   ShieldCheck,
   ShoppingCart,
+  UtensilsCrossed,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import productImage from "@/assets/feature-savia-prompt.webp";
+import productImage from "@/assets/feature-savia-rotation-analysis.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
+  applyOperationalProfile,
   calculateOperationalTime,
   createEmptyOperationalTimeAnswers,
   EXAMPLE_OPERATIONAL_TIME_ANSWERS,
   estimateOperationalScenarioMinutes,
   OPERATIONAL_TASKS,
   OPERATIONAL_WEEKS_PER_MONTH,
+  OPERATIONAL_WEEKS_PER_YEAR,
   prioritizeOperationalTasks,
+  type OperationalProfileId,
   type OperationalTaskId,
   type OperationalTimeAnswers,
   type OperationalTimeEntry,
@@ -50,6 +59,15 @@ const taskIcons = {
   buyingDecision: BarChart3,
   distributorCommunication: MessagesSquare,
   operationalReporting: ChartNoAxesCombined,
+  multilingualUpdates: Languages,
+  multiLocationConsolidation: Network,
+  teamTraining: GraduationCap,
+};
+
+const profileIcons = {
+  restaurant: UtensilsCrossed,
+  hotel: Hotel,
+  group: Building2,
 };
 
 const FIELD_KEYS = [
@@ -119,6 +137,24 @@ const EN_TASKS: Record<OperationalTaskId, Pick<(typeof OPERATIONAL_TASKS)[number
     boundary: "Prepares and consolidates information only; decisions and execution are measured separately.",
     action: "Consolidate reports and follow-up",
   },
+  multilingualUpdates: {
+    title: "Update wine lists in multiple languages",
+    description: "Apply approved content, pricing and availability changes across language versions of the wine list.",
+    boundary: "Configured language versions only; excludes creating the base catalogue and specialist editorial translation.",
+    action: "Centralize wine lists and languages",
+  },
+  multiLocationConsolidation: {
+    title: "Consolidate multiple locations",
+    description: "Bring sales, stock, purchasing and follow-up from different locations into one shared view.",
+    boundary: "Multi-location consolidation and follow-up only; excludes local data capture and interpretation of each site's decisions.",
+    action: "Consolidate group operations",
+  },
+  teamTraining: {
+    title: "Answer questions and train the team",
+    description: "Handle recurring operational questions and keep service, wine-list and product criteria consistent.",
+    boundary: "Recurring questions and operational consistency only; it does not replace onboarding, human training or team supervision.",
+    action: "Support the team with SAVia",
+  },
 };
 
 const ES_COPY = {
@@ -130,11 +166,15 @@ const ES_COPY = {
   professional: "Para profesionales del vino",
   tools: "Herramientas",
   eyebrow: "Tiempo y datos operativos",
-  intro: "Mide diez tareas semanales sin mezclar catálogo, precios, documentos, inventario, compras e informes. Winerim calcula automáticamente los minutos estimados para cada tarea.",
+  intro: "Mide hasta trece tareas semanales sin mezclar catálogo, precios, documentos, inventario, compras e informes. Winerim calcula automáticamente los minutos estimados para cada tarea.",
   local: "Cálculo local · No enviamos estos datos",
   scenario: "Tu operación",
   formTitle: "Tiempo, frecuencia y persona responsable",
   frequency: "Indica cuánto tardas hoy y cuántas veces realizas cada tarea por semana. Los minutos con Winerim aparecen automáticamente según el nivel de automatización de cada proceso.",
+  profileTitle: "Tipo de operación",
+  profileHint: "El perfil activa las tareas habituales. Puedes incluir o excluir cualquier tarea sin perder los datos introducidos.",
+  profiles: { restaurant: "Restaurante", hotel: "Hotel o resort", group: "Grupo" },
+  optional: "Opcional",
   currency: "Moneda para valorar el tiempo",
   loadExample: "Cargar ejemplo ficticio",
   reset: "Reiniciar calculadora",
@@ -176,16 +216,16 @@ const ES_COPY = {
   calculated: "Calculado con tus datos",
   assumption: "Estimación base Winerim, visible y no garantizada",
   fictional: "Ejemplo ficticio cuando lo cargas",
-  verified: "Datos operativos verificados",
-  notConnected: "No conectados en esta calculadora pública",
   sourceNote: "Los minutos Winerim se calculan con una estimación de automatización por tarea. No son resultados medidos de un cliente ni una garantía. Ventas, margen y mejora comercial son datos distintos y no se suman aquí.",
   currentTimeCost: "Valor del tiempo actual",
   scenarioTimeCost: "Valor del tiempo en el escenario",
   opportunityValue: "Valor del tiempo liberado",
   cashNote: "El valor del tiempo liberado es coste de oportunidad. No implica ahorro de caja, reducción de plantilla, ventas adicionales ni ROI garantizado.",
   next: "Siguiente paso",
-  priorities: "Tus tres tareas con mayor tiempo recuperable",
-  priorityResult: (title: string, hours: string) => `${title}: ${hours} h/semana netas en tu escenario.`,
+  priorities: "Las 3 automatizaciones con mayor impacto",
+  priorityResult: (title: string, week: string, month: string, year: string) => `${title}: ${week} h/semana, ${month} h/mes y ${year} h/año recuperables.`,
+  workdayEquivalent: (days: string) => `Equivale a ${days} jornadas de 8 horas recuperadas al año`,
+  workdayNote: "Equivalencia orientativa calculada sobre el resultado neto anual.",
   open: "abrir",
   empty: "Completa al menos una tarea para obtener un resultado y prioridades basadas en tus propios datos.",
   noPositive: "Tus datos no muestran tareas con tiempo recuperable positivo. Revisa los supuestos o contrasta el proceso real.",
@@ -195,9 +235,9 @@ const ES_COPY = {
   proofTitle: "El TPV aporta tiempo y datos, pero cada beneficio se mide por separado",
   proofText: "Winerim puede contrastar carta, documentos, stock, ventas y compras cuando las fuentes están conectadas y validadas. Esta calculadora solo mide tiempo y su valor; no atribuye ventas ni margen.",
   demo: "Revisar mi caso con Winerim",
-  imageAlt: "Consulta operativa en SAVia sobre stock y pedidos",
-  imageCaption: "Ejemplo de consulta operativa. El alcance depende de los datos e integraciones disponibles.",
-  footerModel: "Modelo 4.0 · Resultado orientativo, no garantía.",
+  imageAlt: "SAVia mostrando el ranking de vinos por rotación de los últimos 90 días",
+  imageCaption: "SAVia consolida las líneas de venta y explica la metodología antes de mostrar el ranking por vino.",
+  footerModel: "Modelo 5.0 · Resultado orientativo, no garantía.",
   footerForm: "Resultado completo sin formulario",
   reportScenario: "Escenario Winerim calculado automáticamente",
   reportExample: "EJEMPLO FICTICIO EDITADO O DE DEMOSTRACIÓN",
@@ -224,11 +264,15 @@ const EN_COPY = {
   professional: "For wine professionals",
   tools: "Tools",
   eyebrow: "Operational time and data",
-  intro: "Measure ten weekly tasks without mixing catalogue, pricing, documents, inventory, purchasing and reporting. Winerim automatically calculates the estimated minutes for each task.",
+  intro: "Measure up to thirteen weekly tasks without mixing catalogue, pricing, documents, inventory, purchasing and reporting. Winerim automatically calculates the estimated minutes for each task.",
   local: "Calculated locally · We do not send this data",
   scenario: "Your operation",
   formTitle: "Time, frequency and responsible role",
   frequency: "Enter how long each task takes today and how many times you perform it per week. The minutes with Winerim appear automatically from the estimated automation level of each process.",
+  profileTitle: "Operation type",
+  profileHint: "The profile activates typical tasks. You can include or exclude any task without losing entered data.",
+  profiles: { restaurant: "Restaurant", hotel: "Hotel or resort", group: "Group" },
+  optional: "Optional",
   currency: "Currency used to value time",
   loadExample: "Load a fictional example",
   reset: "Reset calculator",
@@ -270,16 +314,16 @@ const EN_COPY = {
   calculated: "Calculated from your data",
   assumption: "Winerim baseline estimate, visible and not guaranteed",
   fictional: "Fictional example when loaded",
-  verified: "Verified operational data",
-  notConnected: "Not connected in this public calculator",
   sourceNote: "Winerim minutes use an automation estimate for each task. They are not measured customer results or a guarantee. Sales, margin and commercial improvement are separate data and are not added here.",
   currentTimeCost: "Current time value",
   scenarioTimeCost: "Scenario time value",
   opportunityValue: "Value of time released",
   cashNote: "The value of time released is an opportunity cost. It does not imply cash savings, headcount reduction, added sales or guaranteed ROI.",
   next: "Next step",
-  priorities: "Your three tasks with the most recoverable time",
-  priorityResult: (title: string, hours: string) => `${title}: ${hours} net hours per week in your scenario.`,
+  priorities: "The 3 highest-impact automations",
+  priorityResult: (title: string, week: string, month: string, year: string) => `${title}: ${week} recoverable hours/week, ${month} hours/month and ${year} hours/year.`,
+  workdayEquivalent: (days: string) => `Equivalent to ${days} eight-hour workdays recovered per year`,
+  workdayNote: "Indicative equivalent calculated from the annual net result.",
   open: "open",
   empty: "Complete at least one task to get a result and priorities based on your own data.",
   noPositive: "Your data does not show any task with positive recoverable time. Review the assumptions or compare them with the real process.",
@@ -289,9 +333,9 @@ const EN_COPY = {
   proofTitle: "POS data can create time and information, but each benefit needs its own measure",
   proofText: "Winerim can compare list, document, stock, sales and purchasing data when sources are connected and validated. This calculator only measures time and its value; it does not attribute sales or margin.",
   demo: "Review my operation with Winerim",
-  imageAlt: "SAVia operational query about stock and orders",
-  imageCaption: "Example operational query. Scope depends on available data and integrations.",
-  footerModel: "Model 4.0 · Indicative result, not a guarantee.",
+  imageAlt: "SAVia showing a wine rotation ranking for the last 90 days",
+  imageCaption: "SAVia consolidates sales lines and explains the method before showing the wine ranking.",
+  footerModel: "Model 5.0 · Indicative result, not a guarantee.",
   footerForm: "Complete result without a form",
   reportScenario: "Winerim scenario calculated automatically",
   reportExample: "EDITED OR DEMONSTRATION FICTIONAL EXAMPLE",
@@ -316,6 +360,7 @@ export default function CalculadoraTiempoOperativo() {
     () => OPERATIONAL_TASKS.map((task) => isEnglish ? { ...task, ...EN_TASKS[task.id] } : task),
     [isEnglish],
   );
+  const [profile, setProfile] = useState<OperationalProfileId>("restaurant");
   const [answers, setAnswers] = useState<OperationalTimeAnswers>(createEmptyOperationalTimeAnswers);
   const [currency, setCurrency] = useState<Currency>(isEnglish ? "USD" : "EUR");
   const [example, setExample] = useState(false);
@@ -337,14 +382,20 @@ export default function CalculadoraTiempoOperativo() {
   };
 
   const reset = () => {
-    setAnswers(createEmptyOperationalTimeAnswers());
+    setAnswers(createEmptyOperationalTimeAnswers(profile));
     setCurrency(isEnglish ? "USD" : "EUR");
     setExample(false);
   };
 
   const loadExample = () => {
-    setAnswers(structuredClone(EXAMPLE_OPERATIONAL_TIME_ANSWERS));
+    setAnswers(applyOperationalProfile(structuredClone(EXAMPLE_OPERATIONAL_TIME_ANSWERS), profile));
     setExample(true);
+  };
+
+  const selectProfile = (nextProfile: OperationalProfileId) => {
+    setProfile(nextProfile);
+    setAnswers((current) => applyOperationalProfile(current, nextProfile));
+    setExample(false);
   };
 
   const periodRows = [
@@ -397,9 +448,11 @@ export default function CalculadoraTiempoOperativo() {
       `Winerim | ${t.appName}`,
       example ? t.reportExample : t.reportScenario,
       `${isEnglish ? "Model" : "Modelo"} ${calculation.modelVersion}. ${t.reportModel}`,
+      `${t.profileTitle}: ${t.profiles[profile]}.`,
       t.formula,
       t.conversion,
       ...periodRows.map((row) => `${row.label}: ${number(row.currentHours)} h ${t.reportCurrent} · ${number(row.scenarioHours)} h ${t.reportScenarioHours} · ${signed(row.netHours)} h ${t.reportNet} · ${money(row.currentValue)} ${t.reportCurrentValue} · ${money(row.scenarioValue)} ${t.reportScenarioValue} · ${signedMoney(row.netValue)} ${t.reportReleasedValue}.`),
+      calculation.netWorkdaysPerYear > 0 ? `${t.workdayEquivalent(number(calculation.netWorkdaysPerYear))}. ${t.workdayNote}` : "",
       calculation.costCoverage < calculation.coverage ? t.partialCost(calculation.costCoverage, calculation.coverage) : "",
       ...taskLines,
       t.disclaimer,
@@ -464,6 +517,29 @@ export default function CalculadoraTiempoOperativo() {
             </div>
           </div>
 
+          <div className="time-profile-picker">
+            <div>
+              <strong>{t.profileTitle}</strong>
+              <p>{t.profileHint}</p>
+            </div>
+            <div className="time-profile-options" role="group" aria-label={t.profileTitle}>
+              {(Object.keys(profileIcons) as OperationalProfileId[]).map((profileId) => {
+                const ProfileIcon = profileIcons[profileId];
+                return (
+                  <button
+                    type="button"
+                    key={profileId}
+                    aria-pressed={profile === profileId}
+                    onClick={() => selectProfile(profileId)}
+                  >
+                    <ProfileIcon size={17} aria-hidden="true" />
+                    {t.profiles[profileId]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {example && <p className="profit-example" role="status">{t.example}</p>}
 
           <div className="time-summary" aria-live="polite">
@@ -486,7 +562,6 @@ export default function CalculadoraTiempoOperativo() {
               <span data-source="calculated">{t.calculated}</span>
               <span data-source="assumption">{t.assumption}</span>
               <span data-source="fictional">{t.fictional}</span>
-              <span data-source="verified">{t.verified}: {t.notConnected}</span>
             </div>
             <p>{t.sourceNote}</p>
           </section>
@@ -507,7 +582,11 @@ export default function CalculadoraTiempoOperativo() {
                   <label className="time-task-toggle">
                     <input type="checkbox" checked={entry.enabled} onChange={(event) => updateEntry(task.id, { enabled: event.target.checked })} />
                     <Icon size={19} aria-hidden="true" />
-                    <span><strong>{task.title}</strong><small>{task.description}</small><small className="time-boundary">{task.boundary}</small></span>
+                    <span>
+                      <strong>{task.title}{task.optional && <em className="time-optional">{t.optional}</em>}</strong>
+                      <small>{task.description}</small>
+                      <small className="time-boundary">{task.boundary}</small>
+                    </span>
                   </label>
                   <div className="time-task-fields">
                     <label htmlFor={`${task.id}-role`}>
@@ -556,7 +635,7 @@ export default function CalculadoraTiempoOperativo() {
             <section className="time-results" aria-labelledby="time-results-title">
               <div className="time-results-heading">
                 <div><p className="profit-eyebrow">{t.value}</p><h2 id="time-results-title">{t.currentTimeCost}, {t.scenarioTimeCost.toLowerCase()} y {t.net.toLowerCase()}</h2></div>
-                <div><span>{t.coverage}: {calculation.coverage}/{OPERATIONAL_TASKS.length}</span><span>{t.costCoverage}: {calculation.costCoverage}/{calculation.coverage}</span></div>
+                <div><span>{t.coverage}: {calculation.coverage}/{calculation.enabledCount}</span><span>{t.costCoverage}: {calculation.costCoverage}/{calculation.coverage}</span></div>
               </div>
               <div className="time-period-table" role="table" aria-label={t.value}>
                 <div className="time-period-row time-period-head" role="row">
@@ -574,6 +653,12 @@ export default function CalculadoraTiempoOperativo() {
                   </div>
                 ))}
               </div>
+              {calculation.netWorkdaysPerYear > 0 && (
+                <div className="time-workday-equivalent">
+                  <strong>{t.workdayEquivalent(number(calculation.netWorkdaysPerYear))}</strong>
+                  <span>{t.workdayNote}</span>
+                </div>
+              )}
               {calculation.costCoverage < calculation.coverage && <p className="time-cost-coverage">{t.partialCost(calculation.costCoverage, calculation.coverage)}</p>}
               <p className="time-cash-note"><strong>{t.opportunityValue}:</strong> {t.cashNote}</p>
             </section>
@@ -586,7 +671,7 @@ export default function CalculadoraTiempoOperativo() {
                 {priorities.map((taskId, index) => {
                   const task = tasks.find(({ id }) => id === taskId)!;
                   const result = calculation.taskResults[taskId]!;
-                  return <li key={taskId}><span>0{index + 1}</span><div><h3>{task.action}</h3><p>{t.priorityResult(task.title, number(result.netHoursPerWeek))}</p></div><Link to={localePath(task.route)} aria-label={`${task.action}: ${t.open}`}><ArrowRight size={18} /></Link></li>;
+                  return <li key={taskId}><span>0{index + 1}</span><div><h3>{task.action}</h3><p>{t.priorityResult(task.title, number(result.netHoursPerWeek), number(result.netHoursPerWeek * OPERATIONAL_WEEKS_PER_MONTH), number(result.netHoursPerWeek * OPERATIONAL_WEEKS_PER_YEAR))}</p></div><Link to={localePath(task.route)} aria-label={`${task.action}: ${t.open}`}><ArrowRight size={18} /></Link></li>;
                 })}
               </ol>
             ) : <p className="time-empty">{calculation.coverage > 0 ? t.noPositive : t.empty}</p>}

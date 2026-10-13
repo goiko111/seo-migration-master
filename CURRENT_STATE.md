@@ -7693,3 +7693,48 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Medición agregada sin PII y eventual selector por perfil operativo.
+
+## Actualización 2026-10-13: v5 publicada y verificada
+
+### Hechos confirmados
+
+- `/herramientas/calculadora-tiempo-operativo` dispone de tres perfiles y hasta
+  trece tareas; los perfiles conservan los valores introducidos al cambiar.
+- Hotel y Grupo añaden idiomas, consolidación multiestablecimiento y formación o
+  consultas recurrentes del equipo como tareas opcionales.
+- El resultado incluye ranking de tres automatizaciones y jornadas equivalentes
+  de ocho horas al año.
+- La sección de fuentes contiene exactamente cuatro etiquetas y se eliminó la
+  etiqueta redundante de datos verificados/no conectados.
+- La imagen productiva es `src/assets/feature-savia-rotation-analysis.webp`
+  (`1866x845`, `67 KB`) y carga correctamente.
+- QA productiva: `10` tareas activas en Restaurante, `13` en Hotel/Grupo, tres
+  prioridades, sin overflow horizontal móvil ni errores de consola.
+- Releases activas: Pages `cd560b1c`, facade
+  `e24c8391-8baa-4393-957d-ac65b412a65a`, backend
+  `18d9db48-acdb-423f-9389-f83376957c4f`.
+- Gates finales verdes: `254/254` tests, TypeScript, build, `node --check`, Deno
+  check, dry-runs y QA Playwright productiva.
+
+### Decisiones
+
+- Mantener Restaurante como perfil inicial y los porcentajes como hipótesis de
+  producto secundarias, nunca como resultados medidos.
+
+### Hipótesis
+
+- Hotel/Grupo completarán más tareas relevantes gracias al preset, sin aumentar
+  la fricción para restaurantes independientes.
+
+### Contradicciones / riesgos
+
+- El CLI de Supabase puede leer el proyecto pero no desplegar funciones: la API
+  responde `403` por privilegios insuficientes. La fuente local está alineada y el
+  prerender público activo ya se corrigió en `winerim-proxy`.
+- Persisten avisos no bloqueantes conocidos de React Router, `caniuse-lite`, una
+  `key` en Precios y chunks grandes.
+
+### Tareas pendientes
+
+- Publicar solo la Edge Function `prerender` desde Lovable Cloud.
+- Medir uso por perfil sin PII y contrastar hipótesis con datos consentidos.

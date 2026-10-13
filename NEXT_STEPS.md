@@ -5734,3 +5734,39 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 1. Medir inicio, tareas completadas y descarga sin PII.
 2. Diseñar perfiles opcionales sin cambiar los valores actuales por defecto.
 3. Mantener la QA de idiomas y Search Console como trabajos independientes.
+
+## Actualización 2026-10-13: siguiente paso tras calculadora v5
+
+### Hechos
+
+- La v5 por perfiles está publicada y el prerender activo del Worker describe ya
+  trece tareas, tres perfiles, top 3 y jornadas anuales.
+- La fuente local de Edge `prerender` contiene el mismo contenido, pero su deploy
+  directo devolvió `403` por permisos.
+
+### Decisiones
+
+- No cambiar de nuevo tareas ni porcentajes sin datos de uso o evidencia real.
+- No tocar sitemap, migraciones, frontend ni otros contenidos para reconciliar la
+  única Edge Function pendiente.
+
+### Hipótesis
+
+- Los perfiles mejorarán la finalización en hoteles y grupos manteniendo una
+  entrada sencilla para restaurantes.
+
+### Contradicciones / límites
+
+- Producción pública está correcta, pero la copia secundaria en Lovable Cloud aún
+  no refleja la revisión textual del prerender.
+
+### Siguiente bloque verificable
+
+1. Pedir a Lovable únicamente: `Despliega la Edge Function prerender desde el
+   código actual, sin publicar frontend, sitemap, migraciones ni ningún otro
+   componente.`
+2. Verificar la respuesta directa de esa función y confirmar que contiene
+   `Trece tareas y tres perfiles` y su equivalente inglés.
+3. Instrumentar selección de perfil, carga de ejemplo, finalización y descarga sin
+   PII.
+4. Mantener Search Console y traducciones como líneas separadas.

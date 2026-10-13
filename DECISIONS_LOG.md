@@ -5156,3 +5156,38 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendiente
 
 - Validar por perfil y recalibrar cuando exista evidencia consentida.
+
+## 2026-10-13 — Perfiles, tareas opcionales y resultado anual
+
+### Hechos
+
+- El mismo conjunto fijo de diez tareas no expresaba trabajo específico de
+  hoteles o grupos.
+- El bloque de fuentes mostraba una quinta etiqueta sobre datos no conectados que
+  no intervenía en el cálculo y añadía ruido.
+
+### Decisiones
+
+- Añadir perfiles Restaurante, Hotel o resort y Grupo como presets que solo
+  cambian qué tareas están activas y nunca borran datos del usuario.
+- Añadir idiomas (`90 %`), consolidación multiestablecimiento (`85 %`) y formación
+  o consultas recurrentes (`70 %`) como hipótesis opcionales para Hotel/Grupo.
+- Mostrar el top 3 por horas netas recuperables y la equivalencia anual usando
+  jornadas de ocho horas.
+- Reducir el origen de cifras a entrada, cálculo, hipótesis y ejemplo ficticio.
+- Usar la captura real de SAVia sobre rotación de 90 días facilitada por el usuario.
+
+### Hipótesis
+
+- La personalización por perfil aumenta relevancia sin convertir la herramienta
+  en una promesa específica para cada cliente.
+
+### Contradicciones
+
+- La fuente Edge local y el Worker están alineados, pero solo el Worker pudo
+  publicarse directamente; Lovable Cloud rechazó el deploy de Edge con `403`.
+
+### Pendiente
+
+- Reconciliar la Edge Function con un deploy acotado desde Lovable y medir el
+  comportamiento antes de modificar porcentajes.

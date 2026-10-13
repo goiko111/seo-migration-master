@@ -1,6 +1,9 @@
-export const OPERATIONAL_TIME_MODEL_VERSION = "4.0.0";
+export const OPERATIONAL_TIME_MODEL_VERSION = "5.0.0";
 export const OPERATIONAL_WEEKS_PER_YEAR = 52;
 export const OPERATIONAL_WEEKS_PER_MONTH = OPERATIONAL_WEEKS_PER_YEAR / 12;
+export const OPERATIONAL_WORKDAY_HOURS = 8;
+
+export type OperationalProfileId = "restaurant" | "hotel" | "group";
 
 export type OperationalTaskId =
   | "posItems"
@@ -12,7 +15,10 @@ export type OperationalTaskId =
   | "orderPreparation"
   | "buyingDecision"
   | "distributorCommunication"
-  | "operationalReporting";
+  | "operationalReporting"
+  | "multilingualUpdates"
+  | "multiLocationConsolidation"
+  | "teamTraining";
 
 export interface OperationalTaskSpec {
   id: OperationalTaskId;
@@ -22,6 +28,8 @@ export interface OperationalTaskSpec {
   action: string;
   route: string;
   defaultReductionPercent: number;
+  optional: boolean;
+  profiles: OperationalProfileId[];
 }
 
 export interface OperationalTimeEntry {
@@ -34,6 +42,8 @@ export interface OperationalTimeEntry {
 }
 
 export type OperationalTimeAnswers = Record<OperationalTaskId, OperationalTimeEntry>;
+
+const ALL_PROFILES: OperationalProfileId[] = ["restaurant", "hotel", "group"];
 
 export interface OperationalTaskResult {
   id: OperationalTaskId;
@@ -60,6 +70,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Revisar catálogo e integración TPV",
     route: "/integraciones",
     defaultReductionPercent: 95,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "salesPrices",
@@ -69,6 +81,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Automatizar precios y formatos de venta",
     route: "/integraciones",
     defaultReductionPercent: 95,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "deliveryNotes",
@@ -78,6 +92,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Revisar el flujo documental de CloudRIM",
     route: "/producto/cloudrim",
     defaultReductionPercent: 70,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "documentReconciliation",
@@ -87,6 +103,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Automatizar la conciliación documental",
     route: "/producto/cloudrim",
     defaultReductionPercent: 80,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "bottleCount",
@@ -96,6 +114,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Ordenar el control físico de stock",
     route: "/producto/winerim-core",
     defaultReductionPercent: 60,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "stockReconciliation",
@@ -105,6 +125,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Contrastar ventas, stock y TPV",
     route: "/integraciones",
     defaultReductionPercent: 80,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "orderPreparation",
@@ -114,6 +136,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Revisar reposición y compras",
     route: "/producto/winerim-supply",
     defaultReductionPercent: 90,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "buyingDecision",
@@ -123,6 +147,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Consultar la decisión con SAVia",
     route: "/producto/savia",
     defaultReductionPercent: 75,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "distributorCommunication",
@@ -132,6 +158,8 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Comparar distribuidores con el mismo criterio",
     route: "/herramientas/comparador-distribuidores",
     defaultReductionPercent: 75,
+    optional: false,
+    profiles: ALL_PROFILES,
   },
   {
     id: "operationalReporting",
@@ -141,11 +169,46 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     action: "Consolidar informes y seguimiento",
     route: "/producto/inteligencia-dinamica",
     defaultReductionPercent: 85,
+    optional: false,
+    profiles: ALL_PROFILES,
+  },
+  {
+    id: "multilingualUpdates",
+    title: "Actualizar cartas en varios idiomas",
+    description: "Replicar cambios aprobados de contenido, precios y disponibilidad en las versiones idiomáticas de la carta.",
+    boundary: "Solo actualización de versiones ya configuradas; no incluye crear el catálogo base ni realizar traducción editorial especializada.",
+    action: "Centralizar cartas e idiomas",
+    route: "/funcionalidades",
+    defaultReductionPercent: 90,
+    optional: true,
+    profiles: ["hotel", "group"],
+  },
+  {
+    id: "multiLocationConsolidation",
+    title: "Consolidar varios establecimientos",
+    description: "Reunir ventas, stock, compras y seguimiento de distintos centros en una visión común.",
+    boundary: "Solo consolidación y seguimiento entre centros; no incluye capturar datos locales ni interpretar decisiones de cada establecimiento.",
+    action: "Consolidar la operación del grupo",
+    route: "/soluciones/grupos-restauracion",
+    defaultReductionPercent: 85,
+    optional: true,
+    profiles: ["hotel", "group"],
+  },
+  {
+    id: "teamTraining",
+    title: "Resolver dudas y formar al equipo",
+    description: "Atender consultas operativas recurrentes y mantener criterios de servicio, carta y producto consistentes.",
+    boundary: "Solo dudas recurrentes y estandarización operativa; no sustituye el onboarding, la formación humana ni la supervisión del equipo.",
+    action: "Dar soporte al equipo con SAVia",
+    route: "/producto/savia",
+    defaultReductionPercent: 70,
+    optional: true,
+    profiles: ["hotel", "group"],
   },
 ];
 
-const emptyEntry = (defaultReductionPercent: number): OperationalTimeEntry => ({
-  enabled: true,
+const emptyEntry = (defaultReductionPercent: number, enabled: boolean): OperationalTimeEntry => ({
+  enabled,
   role: "",
   currentMinutes: "",
   reductionPercent: String(defaultReductionPercent),
@@ -153,8 +216,15 @@ const emptyEntry = (defaultReductionPercent: number): OperationalTimeEntry => ({
   hourlyCost: "",
 });
 
-export const createEmptyOperationalTimeAnswers = (): OperationalTimeAnswers =>
-  Object.fromEntries(OPERATIONAL_TASKS.map(({ id, defaultReductionPercent }) => [id, emptyEntry(defaultReductionPercent)])) as OperationalTimeAnswers;
+export const createEmptyOperationalTimeAnswers = (profile: OperationalProfileId = "restaurant"): OperationalTimeAnswers =>
+  Object.fromEntries(OPERATIONAL_TASKS.map(({ id, defaultReductionPercent, profiles }) => [id, emptyEntry(defaultReductionPercent, profiles.includes(profile))])) as OperationalTimeAnswers;
+
+export const applyOperationalProfile = (
+  answers: OperationalTimeAnswers,
+  profile: OperationalProfileId,
+): OperationalTimeAnswers => Object.fromEntries(
+  OPERATIONAL_TASKS.map(({ id, profiles }) => [id, { ...answers[id], enabled: profiles.includes(profile) }]),
+) as OperationalTimeAnswers;
 
 export const EXAMPLE_OPERATIONAL_TIME_ANSWERS: OperationalTimeAnswers = {
   posItems: { enabled: true, role: "Responsable de sala", currentMinutes: "45", reductionPercent: "95", occurrencesPerWeek: "2", hourlyCost: "18" },
@@ -167,6 +237,9 @@ export const EXAMPLE_OPERATIONAL_TIME_ANSWERS: OperationalTimeAnswers = {
   buyingDecision: { enabled: true, role: "Dirección / sumiller", currentMinutes: "90", reductionPercent: "75", occurrencesPerWeek: "1", hourlyCost: "28" },
   distributorCommunication: { enabled: true, role: "Responsable de compras", currentMinutes: "60", reductionPercent: "75", occurrencesPerWeek: "2", hourlyCost: "20" },
   operationalReporting: { enabled: true, role: "Dirección", currentMinutes: "90", reductionPercent: "85", occurrencesPerWeek: "1", hourlyCost: "28" },
+  multilingualUpdates: { enabled: true, role: "Marketing / dirección", currentMinutes: "90", reductionPercent: "90", occurrencesPerWeek: "1", hourlyCost: "24" },
+  multiLocationConsolidation: { enabled: true, role: "Dirección de operaciones", currentMinutes: "180", reductionPercent: "85", occurrencesPerWeek: "1", hourlyCost: "30" },
+  teamTraining: { enabled: true, role: "Responsable de sala", currentMinutes: "90", reductionPercent: "70", occurrencesPerWeek: "1", hourlyCost: "22" },
 };
 
 export function parseOperationalTimeValue(raw: string): number | null {
@@ -259,9 +332,10 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
 
   return {
     modelVersion: OPERATIONAL_TIME_MODEL_VERSION,
-    modelCompatibility: "4.0 exposes automatically calculated Winerim minutes from task-level automation assumptions; 3.x percentages remain internal and are not reused as user inputs.",
+    modelCompatibility: "5.0 adds profile presets, optional multi-language, multi-location and training tasks, plus an eight-hour workday equivalent; profile changes never overwrite user-entered values.",
     errors,
     taskResults,
+    enabledCount: OPERATIONAL_TASKS.filter(({ id }) => answers[id].enabled).length,
     coverage: results.length,
     costCoverage: valuedResults.length,
     currentHoursPerWeek,
@@ -275,6 +349,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
     currentHoursPerYear: round(currentHoursPerWeek * OPERATIONAL_WEEKS_PER_YEAR),
     scenarioHoursPerYear: round(scenarioHoursPerWeek * OPERATIONAL_WEEKS_PER_YEAR),
     netHoursPerYear: round(netHoursPerWeek * OPERATIONAL_WEEKS_PER_YEAR),
+    netWorkdaysPerYear: round(Math.max(0, netHoursPerWeek * OPERATIONAL_WEEKS_PER_YEAR) / OPERATIONAL_WORKDAY_HOURS),
     currentTimeValuePerWeek,
     scenarioTimeValuePerWeek,
     netTimeValuePerWeek,
@@ -288,9 +363,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
       inputs: "entered" as const,
       outputs: "calculated" as const,
       example: "fictional" as const,
-      operationalData: "verified" as const,
       scenarioAssumptions: "winerim-baseline" as const,
-      verifiedConnected: false,
     },
   };
 }
