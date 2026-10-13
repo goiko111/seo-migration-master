@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BarChart3,
+  ChartNoAxesCombined,
+  CircleDollarSign,
   Download,
+  FileCheck2,
   FileText,
   FlaskConical,
   ListChecks,
@@ -23,6 +26,7 @@ import {
   calculateOperationalTime,
   createEmptyOperationalTimeAnswers,
   EXAMPLE_OPERATIONAL_TIME_ANSWERS,
+  estimateOperationalScenarioMinutes,
   OPERATIONAL_TASKS,
   OPERATIONAL_WEEKS_PER_MONTH,
   prioritizeOperationalTasks,
@@ -37,17 +41,19 @@ type Currency = "EUR" | "USD" | "GBP";
 
 const taskIcons = {
   posItems: ListChecks,
+  salesPrices: CircleDollarSign,
   deliveryNotes: FileText,
+  documentReconciliation: FileCheck2,
   bottleCount: PackageSearch,
   stockReconciliation: RefreshCcw,
   orderPreparation: ShoppingCart,
   buyingDecision: BarChart3,
   distributorCommunication: MessagesSquare,
+  operationalReporting: ChartNoAxesCombined,
 };
 
 const FIELD_KEYS = [
   "currentMinutes",
-  "reductionPercent",
   "occurrencesPerWeek",
   "hourlyCost",
 ] as const;
@@ -59,11 +65,23 @@ const EN_TASKS: Record<OperationalTaskId, Pick<(typeof OPERATIONAL_TASKS)[number
     boundary: "POS catalog maintenance only; excludes delivery-note intake and sales analysis.",
     action: "Review POS catalog and integration",
   },
+  salesPrices: {
+    title: "Set and update sales prices",
+    description: "Publish bottle, glass and format prices in Winerim and the connected POS.",
+    boundary: "Executes approved prices only; margin analysis and pricing decisions are measured separately.",
+    action: "Automate sales prices and formats",
+  },
   deliveryNotes: {
     title: "Receive delivery notes",
     description: "Read incoming documents and transfer quantities, costs and supplier details.",
     boundary: "Document and goods intake only; excludes deciding what to buy.",
     action: "Review the CloudRIM document flow",
+  },
+  documentReconciliation: {
+    title: "Reconcile order, delivery note and invoice",
+    description: "Compare quantities, prices, discounts, taxes and totals before approval.",
+    boundary: "Document comparison and discrepancy detection only; receiving goods and resolving exceptions are separate.",
+    action: "Automate document reconciliation",
   },
   bottleCount: {
     title: "Count bottles",
@@ -95,22 +113,28 @@ const EN_TASKS: Record<OperationalTaskId, Pick<(typeof OPERATIONAL_TASKS)[number
     boundary: "Communication only; it does not duplicate purchase analysis or order preparation.",
     action: "Compare distributors using the same criteria",
   },
+  operationalReporting: {
+    title: "Prepare operational reports",
+    description: "Bring sales, stock, rotation, margin and waste together for management or the floor team.",
+    boundary: "Prepares and consolidates information only; decisions and execution are measured separately.",
+    action: "Consolidate reports and follow-up",
+  },
 };
 
 const ES_COPY = {
   locale: "es-ES",
   title: "Calculadora del coste operativo de gestionar el vino",
-  description: "Calcula horas y valor del tiempo dedicado cada semana a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.",
+  description: "Calcula horas y valor del tiempo dedicado cada semana a TPV, precios, documentos, inventario, pedidos, compras e informes.",
   appName: "¿Cuánto te cuesta gestionar el vino?",
   skip: "Ir a la calculadora",
   professional: "Para profesionales del vino",
   tools: "Herramientas",
   eyebrow: "Tiempo y datos operativos",
-  intro: "Mide siete tareas semanales sin mezclar recuento, conciliación, análisis y pedidos. Winerim estima automáticamente un escenario futuro a partir de tu operación actual.",
+  intro: "Mide diez tareas semanales sin mezclar catálogo, precios, documentos, inventario, compras e informes. Winerim calcula automáticamente los minutos estimados para cada tarea.",
   local: "Cálculo local · No enviamos estos datos",
   scenario: "Tu operación",
   formTitle: "Tiempo, frecuencia y persona responsable",
-  frequency: "Indica cuánto tardas hoy cada vez que haces la tarea y cuántas veces la realizas por semana. Winerim calcula automáticamente el escenario futuro con una hipótesis orientativa por tarea; puedes ajustar ese porcentaje.",
+  frequency: "Indica cuánto tardas hoy y cuántas veces realizas cada tarea por semana. Los minutos con Winerim aparecen automáticamente según el nivel de automatización de cada proceso.",
   currency: "Moneda para valorar el tiempo",
   loadExample: "Cargar ejemplo ficticio",
   reset: "Reiniciar calculadora",
@@ -127,11 +151,11 @@ const ES_COPY = {
   coverage: "Tareas calculadas",
   costCoverage: "Tareas con coste/hora",
   conversion: `Mes medio = semana × 52 ÷ 12 = semana × ${new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2 }).format(OPERATIONAL_WEEKS_PER_MONTH)}. Año = semana × 52.`,
-  formula: "Escenario Winerim = tiempo actual × (1 − ahorro orientativo). Horas por tarea = minutos por vez × veces por semana ÷ 60. Neto = situación actual − escenario estimado.",
+  formula: "Minutos con Winerim = tiempo actual × (1 − automatización estimada). Horas por tarea = minutos por vez × veces por semana ÷ 60. Neto = situación actual − escenario estimado.",
   fields: {
     role: "Persona o rol",
     currentMinutes: "Minutos por vez (hoy)",
-    reductionPercent: "Ahorro orientativo Winerim",
+    winerimMinutes: "Minutos con Winerim",
     occurrencesPerWeek: "Veces por semana",
     hourlyCost: "Coste aproximado por hora",
   },
@@ -139,7 +163,9 @@ const ES_COPY = {
   times: "veces",
   perHour: "/h",
   weeklyDifference: "Neto semanal",
-  estimatedPerTask: (minutes: string, percent: string) => `Escenario: ${minutes} min/vez · hipótesis ${percent} %`,
+  automationApplied: (percent: string) => `${percent} % de automatización estimada`,
+  minutesPending: "Se calcula al indicar el tiempo actual",
+  estimatedPerTask: (minutes: string) => `Con Winerim: ${minutes} min/vez`,
   noData: "Sin datos",
   costMissing: "Añade coste/hora para valorar el tiempo",
   moreTime: "Este escenario añade tiempo.",
@@ -148,11 +174,11 @@ const ES_COPY = {
   sourceTitle: "Origen de las cifras",
   entered: "Introducido por ti",
   calculated: "Calculado con tus datos",
-  assumption: "Hipótesis base Winerim, editable y no garantizada",
+  assumption: "Estimación base Winerim, visible y no garantizada",
   fictional: "Ejemplo ficticio cuando lo cargas",
   verified: "Datos operativos verificados",
   notConnected: "No conectados en esta calculadora pública",
-  sourceNote: "Los porcentajes iniciales son hipótesis operativas prudentes por tipo de tarea, no resultados medidos de un cliente. Puedes ajustarlos. Ventas, margen y mejora comercial son datos distintos y no se suman aquí.",
+  sourceNote: "Los minutos Winerim se calculan con una estimación de automatización por tarea. No son resultados medidos de un cliente ni una garantía. Ventas, margen y mejora comercial son datos distintos y no se suman aquí.",
   currentTimeCost: "Valor del tiempo actual",
   scenarioTimeCost: "Valor del tiempo en el escenario",
   opportunityValue: "Valor del tiempo liberado",
@@ -171,9 +197,9 @@ const ES_COPY = {
   demo: "Revisar mi caso con Winerim",
   imageAlt: "Consulta operativa en SAVia sobre stock y pedidos",
   imageCaption: "Ejemplo de consulta operativa. El alcance depende de los datos e integraciones disponibles.",
-  footerModel: "Modelo 3.0 · Resultado orientativo, no garantía.",
+  footerModel: "Modelo 4.0 · Resultado orientativo, no garantía.",
   footerForm: "Resultado completo sin formulario",
-  reportScenario: "Escenario Winerim calculado con hipótesis editables",
+  reportScenario: "Escenario Winerim calculado automáticamente",
   reportExample: "EJEMPLO FICTICIO EDITADO O DE DEMOSTRACIÓN",
   reportModel: "Cálculo local en el navegador.",
   reportExcluded: "no realizada / excluida",
@@ -185,24 +211,24 @@ const ES_COPY = {
   reportCurrentValue: "valor actual del tiempo",
   reportScenarioValue: "valor del tiempo en el escenario",
   reportReleasedValue: "valor neto del tiempo liberado",
-  disclaimer: "El escenario Winerim aplica porcentajes orientativos editables por tarea; no representa una garantía ni un benchmark de clientes. El valor del tiempo liberado es coste de oportunidad: no equivale a ahorro salarial, reducción de plantilla, ventas adicionales, ROI ni garantía de implantación.",
+  disclaimer: "El escenario Winerim aplica estimaciones de automatización por tarea; no representa una garantía ni un benchmark de clientes. El valor del tiempo liberado es coste de oportunidad: no equivale a ahorro salarial, reducción de plantilla, ventas adicionales, ROI ni garantía de implantación.",
 };
 
 const EN_COPY = {
   ...ES_COPY,
   locale: "en-US",
   title: "Wine operations cost calculator",
-  description: "Calculate the hours and time value spent each week on POS items, deliveries, inventory, reconciliation, orders, purchasing and distributors.",
+  description: "Calculate the hours and time value spent each week on POS items, prices, documents, inventory, orders, purchasing and reporting.",
   appName: "What does it cost to manage your wine operation?",
   skip: "Skip to the calculator",
   professional: "For wine professionals",
   tools: "Tools",
   eyebrow: "Operational time and data",
-  intro: "Measure seven weekly tasks without mixing counts, reconciliation, analysis and orders. Winerim automatically estimates a future scenario from your current operation.",
+  intro: "Measure ten weekly tasks without mixing catalogue, pricing, documents, inventory, purchasing and reporting. Winerim automatically calculates the estimated minutes for each task.",
   local: "Calculated locally · We do not send this data",
   scenario: "Your operation",
   formTitle: "Time, frequency and responsible role",
-  frequency: "Enter how long each task takes today and how many times you perform it per week. Winerim automatically calculates the future scenario using an indicative assumption for each task; you can adjust that percentage.",
+  frequency: "Enter how long each task takes today and how many times you perform it per week. The minutes with Winerim appear automatically from the estimated automation level of each process.",
   currency: "Currency used to value time",
   loadExample: "Load a fictional example",
   reset: "Reset calculator",
@@ -219,11 +245,11 @@ const EN_COPY = {
   coverage: "Calculated tasks",
   costCoverage: "Tasks with hourly cost",
   conversion: `Average month = week × 52 ÷ 12 = week × ${new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(OPERATIONAL_WEEKS_PER_MONTH)}. Year = week × 52.`,
-  formula: "Winerim scenario = current time × (1 − indicative saving). Hours by task = minutes per occurrence × occurrences per week ÷ 60. Net = current operation − estimated scenario.",
+  formula: "Minutes with Winerim = current time × (1 − estimated automation). Hours by task = minutes per occurrence × occurrences per week ÷ 60. Net = current operation − estimated scenario.",
   fields: {
     role: "Person or role",
     currentMinutes: "Minutes per task (today)",
-    reductionPercent: "Indicative Winerim saving",
+    winerimMinutes: "Minutes with Winerim",
     occurrencesPerWeek: "Times per week",
     hourlyCost: "Approximate hourly cost",
   },
@@ -231,7 +257,9 @@ const EN_COPY = {
   times: "times",
   perHour: "/h",
   weeklyDifference: "Weekly net",
-  estimatedPerTask: (minutes: string, percent: string) => `Scenario: ${minutes} min/task · ${percent}% assumption`,
+  automationApplied: (percent: string) => `${percent}% estimated automation`,
+  minutesPending: "Calculated after entering current time",
+  estimatedPerTask: (minutes: string) => `With Winerim: ${minutes} min/task`,
   noData: "No data",
   costMissing: "Add hourly cost to value this time",
   moreTime: "This scenario adds time.",
@@ -240,11 +268,11 @@ const EN_COPY = {
   sourceTitle: "Source of each figure",
   entered: "Entered by you",
   calculated: "Calculated from your data",
-  assumption: "Winerim baseline assumption, editable and not guaranteed",
+  assumption: "Winerim baseline estimate, visible and not guaranteed",
   fictional: "Fictional example when loaded",
   verified: "Verified operational data",
   notConnected: "Not connected in this public calculator",
-  sourceNote: "The initial percentages are prudent operating assumptions by task type, not measured customer results. You can adjust them. Sales, margin and commercial improvement are separate data and are not added here.",
+  sourceNote: "Winerim minutes use an automation estimate for each task. They are not measured customer results or a guarantee. Sales, margin and commercial improvement are separate data and are not added here.",
   currentTimeCost: "Current time value",
   scenarioTimeCost: "Scenario time value",
   opportunityValue: "Value of time released",
@@ -263,9 +291,9 @@ const EN_COPY = {
   demo: "Review my operation with Winerim",
   imageAlt: "SAVia operational query about stock and orders",
   imageCaption: "Example operational query. Scope depends on available data and integrations.",
-  footerModel: "Model 3.0 · Indicative result, not a guarantee.",
+  footerModel: "Model 4.0 · Indicative result, not a guarantee.",
   footerForm: "Complete result without a form",
-  reportScenario: "Winerim scenario calculated with editable assumptions",
+  reportScenario: "Winerim scenario calculated automatically",
   reportExample: "EDITED OR DEMONSTRATION FICTIONAL EXAMPLE",
   reportModel: "Calculated locally in the browser.",
   reportExcluded: "not performed / excluded",
@@ -277,7 +305,7 @@ const EN_COPY = {
   reportCurrentValue: "current time value",
   reportScenarioValue: "scenario time value",
   reportReleasedValue: "net value of time released",
-  disclaimer: "The Winerim scenario applies editable indicative percentages by task; it is not a guarantee or a customer benchmark. The value of released time is an opportunity cost; it is not salary savings, headcount reduction, added sales, ROI or an implementation guarantee.",
+  disclaimer: "The Winerim scenario applies automation estimates by task; it is not a guarantee or a customer benchmark. The value of released time is an opportunity cost; it is not salary savings, headcount reduction, added sales, ROI or an implementation guarantee.",
 };
 
 export default function CalculadoraTiempoOperativo() {
@@ -358,7 +386,7 @@ export default function CalculadoraTiempoOperativo() {
       return [
         task.title,
         entry.role || t.reportMissing,
-        `${result.reductionPercent}% ${isEnglish ? "indicative saving" : "de ahorro orientativo"}`,
+        `${result.reductionPercent}% ${isEnglish ? "estimated automation" : "de automatización estimada"}`,
         `${number(result.currentHoursPerWeek)} h/${t.week.toLowerCase()} ${t.reportCurrent}`,
         `${number(result.scenarioHoursPerWeek)} h/${t.week.toLowerCase()} ${t.reportScenarioHours}`,
         `${signed(result.netHoursPerWeek)} h/${t.week.toLowerCase()} ${t.reportNet}`,
@@ -468,6 +496,12 @@ export default function CalculadoraTiempoOperativo() {
               const Icon = taskIcons[task.id];
               const entry = answers[task.id];
               const result = calculation.taskResults[task.id];
+              let estimatedMinutes: number | null = null;
+              try {
+                estimatedMinutes = estimateOperationalScenarioMinutes(entry.currentMinutes, entry.reductionPercent);
+              } catch {
+                estimatedMinutes = null;
+              }
               return (
                 <article className="time-task" key={task.id} data-disabled={!entry.enabled || undefined}>
                   <label className="time-task-toggle">
@@ -484,21 +518,28 @@ export default function CalculadoraTiempoOperativo() {
                       const error = calculation.errors[`${task.id}.${field}`];
                       const inputId = `${task.id}-${field}`;
                       return (
-                        <label key={field} htmlFor={inputId}>
+                        <label key={field} htmlFor={inputId} className={`time-field time-field-${field}`}>
                           <span>{t.fields[field]}</span>
                           <span className="time-input-wrap">
                             <input id={inputId} inputMode="decimal" value={entry[field]} disabled={!entry.enabled} onChange={(event) => updateEntry(task.id, { [field]: event.target.value })} aria-invalid={error ? true : undefined} aria-describedby={error ? `${inputId}-error` : undefined} placeholder="—" />
-                            <small>{field === "occurrencesPerWeek" ? t.times : field === "hourlyCost" ? `${currency}${t.perHour}` : field === "reductionPercent" ? "%" : "min"}</small>
+                            <small>{field === "occurrencesPerWeek" ? t.times : field === "hourlyCost" ? `${currency}${t.perHour}` : "min"}</small>
                           </span>
                           {error && <small className="profit-error" id={`${inputId}-error`}>{errorText(error)}</small>}
                         </label>
                       );
                     })}
+                    <div className="time-estimate" aria-live="polite">
+                      <span>{t.fields.winerimMinutes}</span>
+                      <output id={`${task.id}-winerimMinutes`}>
+                        {estimatedMinutes === null ? "—" : `${number(estimatedMinutes)} min`}
+                      </output>
+                      <small>{estimatedMinutes === null ? t.minutesPending : t.automationApplied(number(Number(entry.reductionPercent)))}</small>
+                    </div>
                   </div>
                   <div className="time-task-result">
                     <span>{t.weeklyDifference}</span>
                     <strong>{result ? signed(result.netHoursPerWeek) : t.noData}</strong>
-                    {result && <small>{t.estimatedPerTask(number(result.scenarioMinutesPerOccurrence), number(result.reductionPercent))}</small>}
+                    {result && <small>{t.estimatedPerTask(number(result.scenarioMinutesPerOccurrence))}</small>}
                     {result?.netTimeValuePerWeek !== null && result?.netTimeValuePerWeek !== undefined
                       ? <small>{signedMoney(result.netTimeValuePerWeek)} · {t.value.toLowerCase()}</small>
                       : result ? <small>{t.costMissing}</small> : null}

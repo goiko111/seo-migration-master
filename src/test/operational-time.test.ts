@@ -19,41 +19,44 @@ describe("operational time calculator", () => {
     expect(result.taskResults).toEqual({});
   });
 
-  it("uses seven explicit, non-overlapping weekly tasks", () => {
-    expect(OPERATIONAL_TASKS).toHaveLength(7);
+  it("uses ten explicit, non-overlapping weekly tasks", () => {
+    expect(OPERATIONAL_TASKS).toHaveLength(10);
     expect(OPERATIONAL_TASKS.map(({ id }) => id)).toEqual([
       "posItems",
+      "salesPrices",
       "deliveryNotes",
+      "documentReconciliation",
       "bottleCount",
       "stockReconciliation",
       "orderPreparation",
       "buyingDecision",
       "distributorCommunication",
+      "operationalReporting",
     ]);
     OPERATIONAL_TASKS.forEach((task) => expect(task.boundary.length).toBeGreaterThan(45));
   });
 
   it("calculates current, scenario, recoverable, additional and net values", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
-    expect(result.modelVersion).toBe("3.0.0");
-    expect(result.coverage).toBe(7);
-    expect(result.costCoverage).toBe(7);
-    expect(result.currentHoursPerWeek).toBe(11.42);
-    expect(result.scenarioHoursPerWeek).toBe(6.92);
-    expect(result.recoverableHoursPerWeek).toBe(4.5);
+    expect(result.modelVersion).toBe("4.0.0");
+    expect(result.coverage).toBe(10);
+    expect(result.costCoverage).toBe(10);
+    expect(result.currentHoursPerWeek).toBe(15.42);
+    expect(result.scenarioHoursPerWeek).toBe(3.27);
+    expect(result.recoverableHoursPerWeek).toBe(12.15);
     expect(result.additionalHoursPerWeek).toBe(0);
-    expect(result.netHoursPerWeek).toBe(4.5);
-    expect(result.currentTimeValuePerWeek).toBe(229.4);
-    expect(result.scenarioTimeValuePerWeek).toBe(134.9);
-    expect(result.netTimeValuePerWeek).toBe(94.5);
+    expect(result.netHoursPerWeek).toBe(12.15);
+    expect(result.currentTimeValuePerWeek).toBe(321.4);
+    expect(result.scenarioTimeValuePerWeek).toBe(66.92);
+    expect(result.netTimeValuePerWeek).toBe(254.48);
   });
 
   it("uses 52/12 for an average month and 52 weeks for a year", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(OPERATIONAL_WEEKS_PER_MONTH).toBeCloseTo(4.333333, 5);
-    expect(result.netHoursPerMonth).toBe(19.5);
-    expect(result.netHoursPerYear).toBe(234);
-    expect(result.netTimeValuePerYear).toBe(4914);
+    expect(result.netHoursPerMonth).toBe(52.65);
+    expect(result.netHoursPerYear).toBe(631.8);
+    expect(result.netTimeValuePerYear).toBe(13232.96);
   });
 
   it("derives the future scenario from the editable reduction assumption", () => {
@@ -97,7 +100,7 @@ describe("operational time calculator", () => {
     const answers = structuredClone(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     answers.posItems.hourlyCost = "0";
     const result = calculateOperationalTime(answers);
-    expect(result.costCoverage).toBe(7);
+    expect(result.costCoverage).toBe(10);
     expect(result.taskResults.posItems?.hourlyCost).toBe(0);
     expect(result.taskResults.posItems?.netTimeValuePerWeek).toBe(0);
   });
@@ -134,9 +137,9 @@ describe("operational time calculator", () => {
   it("prioritizes the three largest positive net results only", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(prioritizeOperationalTasks(result.taskResults)).toEqual([
-      "stockReconciliation",
-      "deliveryNotes",
+      "distributorCommunication",
       "posItems",
+      "operationalReporting",
     ]);
   });
 
@@ -147,7 +150,7 @@ describe("operational time calculator", () => {
       outputs: "calculated",
       example: "fictional",
       operationalData: "verified",
-      scenarioAssumptions: "editable-model",
+      scenarioAssumptions: "winerim-baseline",
       verifiedConnected: false,
     });
   });

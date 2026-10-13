@@ -5123,3 +5123,36 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendiente
 
 - Calibrar los supuestos solo con mediciones comparables y consentidas.
+
+## 2026-10-13 — Minutos Winerim y ampliación a diez tareas
+
+### Hechos
+
+- El usuario confirmó niveles de automatización para siete tareas y que precios de
+  venta se actualizan automáticamente.
+- Winerim dispone además de conciliación documental y consolidación de informes
+  como tareas distintas y verificables.
+
+### Decisiones
+
+- Usar `95/70/60/80/90/75/75 %` para alta TPV, albaranes, recuento, stock,
+  pedidos, compra y distribuidores.
+- Usar `95 %` para precios, `80 %` para conciliación documental y `85 %` para
+  informes operativos.
+- Mostrar el resultado automático en minutos; el porcentaje se conserva como
+  explicación secundaria y no como campo que el prospecto deba estimar.
+- No añadir todavía traducciones de carta, formación ni consolidación de grupos a
+  la lista principal para evitar longitud y doble conteo.
+
+### Hipótesis
+
+- La comparación minuto a minuto será más comprensible y creíble.
+
+### Contradicciones
+
+- Estos porcentajes expresan una estimación de producto, no evidencia estadística
+  de ahorro observada en clientes.
+
+### Pendiente
+
+- Validar por perfil y recalibrar cuando exista evidencia consentida.

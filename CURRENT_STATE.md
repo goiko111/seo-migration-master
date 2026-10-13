@@ -7660,3 +7660,36 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Instrumentar y revisar eventos agregados sin PII antes de cambiar las hipótesis.
+
+## Actualización 2026-10-13: calculadora operativa v4 publicada
+
+### Hechos confirmados
+
+- `/herramientas/calculadora-tiempo-operativo` muestra diez tareas y calcula los
+  minutos Winerim al introducir el tiempo actual.
+- Ejemplo verificado en producción: `40 min` para alta TPV produce `2 min` con
+  Winerim y muestra `95 % de automatización estimada` como nota secundaria.
+- Se añadieron precios de venta, conciliación pedido-albarán-factura e informes
+  operativos con límites separados para no duplicar tiempo.
+- Gates verdes: `252/252` tests, TypeScript, build, `git diff --check`, QA visual y
+  funcional, humano/Googlebot `200` y canonical propio.
+- Release activa: Pages `839325cb`; facade
+  `c4dd1ce7-eb43-4d9c-88ab-d1f4ad10fa96`.
+
+### Decisiones
+
+- Mostrar minutos automáticos como dato principal y mantener la automatización
+  aplicada visible pero no editable en la interfaz pública.
+
+### Hipótesis
+
+- Diez tareas cubren mejor el flujo operativo sin convertir la calculadora en un
+  inventario completo de funcionalidades.
+
+### Contradicciones / riesgos
+
+- La estimación aún no está calibrada con datos agregados de clientes.
+
+### Tareas pendientes
+
+- Medición agregada sin PII y eventual selector por perfil operativo.

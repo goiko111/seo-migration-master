@@ -1452,3 +1452,38 @@
 
 - Medir inicio, finalización y ajustes de porcentaje sin PII; recalibrar únicamente
   cuando existan datos verificables y comparables.
+
+## Actualización 2026-10-13: calculadora operativa v4
+
+### Hechos
+
+- La calculadora presenta `Minutos con Winerim` calculados automáticamente en vez
+  de pedir o destacar porcentajes de ahorro.
+- El modelo contiene diez tareas: alta TPV, precios de venta, albaranes,
+  conciliación documental, recuento, conciliación de stock, pedidos, decisión de
+  compra, distribuidores e informes operativos.
+- La automatización base definida por producto es, respectivamente: `95`, `95`,
+  `70`, `80`, `60`, `80`, `90`, `75`, `75` y `85 %`.
+- Producción usa Pages `https://839325cb.winerim-origin.pages.dev` y facade
+  `c4dd1ce7-eb43-4d9c-88ab-d1f4ad10fa96`.
+
+### Decisiones
+
+- Tratar el porcentaje como dato explicativo secundario y mostrar minutos como
+  unidad principal para facilitar la comprensión.
+- Separar la ejecución de precios de la decisión de pricing, y la recepción de
+  documentos de su conciliación, para evitar doble conteo.
+
+### Hipótesis
+
+- Los minutos comparables harán más tangible el ahorro que un porcentaje aislado.
+
+### Contradicciones
+
+- Los niveles de automatización son supuestos de producto confirmados por el
+  usuario, no mediciones agregadas de clientes.
+
+### Tareas pendientes
+
+- Medir finalización sin PII y estudiar perfiles opcionales por tipo de operación
+  antes de añadir traducciones, grupos o formación a la lista principal.

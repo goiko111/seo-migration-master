@@ -1,15 +1,18 @@
-export const OPERATIONAL_TIME_MODEL_VERSION = "3.0.0";
+export const OPERATIONAL_TIME_MODEL_VERSION = "4.0.0";
 export const OPERATIONAL_WEEKS_PER_YEAR = 52;
 export const OPERATIONAL_WEEKS_PER_MONTH = OPERATIONAL_WEEKS_PER_YEAR / 12;
 
 export type OperationalTaskId =
   | "posItems"
+  | "salesPrices"
   | "deliveryNotes"
+  | "documentReconciliation"
   | "bottleCount"
   | "stockReconciliation"
   | "orderPreparation"
   | "buyingDecision"
-  | "distributorCommunication";
+  | "distributorCommunication"
+  | "operationalReporting";
 
 export interface OperationalTaskSpec {
   id: OperationalTaskId;
@@ -56,7 +59,16 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo mantenimiento del catálogo TPV; no incluye recepcionar albaranes ni analizar ventas.",
     action: "Revisar catálogo e integración TPV",
     route: "/integraciones",
-    defaultReductionPercent: 50,
+    defaultReductionPercent: 95,
+  },
+  {
+    id: "salesPrices",
+    title: "Poner y actualizar precios de venta",
+    description: "Publicar PVP, precios por copa y formatos en Winerim y en el TPV conectado.",
+    boundary: "Solo ejecuta precios ya aprobados; analizar margen y decidir el precio se mide en otra tarea.",
+    action: "Automatizar precios y formatos de venta",
+    route: "/integraciones",
+    defaultReductionPercent: 95,
   },
   {
     id: "deliveryNotes",
@@ -65,7 +77,16 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo recepción documental y de mercancía; no incluye decidir qué comprar.",
     action: "Revisar el flujo documental de CloudRIM",
     route: "/producto/cloudrim",
-    defaultReductionPercent: 50,
+    defaultReductionPercent: 70,
+  },
+  {
+    id: "documentReconciliation",
+    title: "Conciliar pedido, albarán y factura",
+    description: "Comparar cantidades, precios, descuentos, impuestos y totales antes de aprobar.",
+    boundary: "Solo comparación documental y detección de diferencias; recepcionar mercancía y resolver excepciones se miden aparte.",
+    action: "Automatizar la conciliación documental",
+    route: "/producto/cloudrim",
+    defaultReductionPercent: 80,
   },
   {
     id: "bottleCount",
@@ -74,7 +95,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo recuento físico; las diferencias frente al teórico se tratan en la tarea siguiente.",
     action: "Ordenar el control físico de stock",
     route: "/producto/winerim-core",
-    defaultReductionPercent: 0,
+    defaultReductionPercent: 60,
   },
   {
     id: "stockReconciliation",
@@ -83,7 +104,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Incluye localizar y revisar diferencias; no vuelve a contar las botellas.",
     action: "Contrastar ventas, stock y TPV",
     route: "/integraciones",
-    defaultReductionPercent: 60,
+    defaultReductionPercent: 80,
   },
   {
     id: "orderPreparation",
@@ -92,7 +113,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo preparar el pedido; el análisis para decidir qué comprar se mide aparte.",
     action: "Revisar reposición y compras",
     route: "/producto/winerim-supply",
-    defaultReductionPercent: 45,
+    defaultReductionPercent: 90,
   },
   {
     id: "buyingDecision",
@@ -101,7 +122,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo análisis y decisión; no incluye confeccionar el pedido ni hablar con proveedores.",
     action: "Consultar la decisión con SAVia",
     route: "/producto/savia",
-    defaultReductionPercent: 50,
+    defaultReductionPercent: 75,
   },
   {
     id: "distributorCommunication",
@@ -110,7 +131,16 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo comunicación y seguimiento; no duplica el análisis de compra ni el pedido.",
     action: "Comparar distribuidores con el mismo criterio",
     route: "/herramientas/comparador-distribuidores",
-    defaultReductionPercent: 35,
+    defaultReductionPercent: 75,
+  },
+  {
+    id: "operationalReporting",
+    title: "Preparar informes operativos",
+    description: "Reunir ventas, stock, rotación, margen y merma para dirección o el equipo de sala.",
+    boundary: "Solo prepara y consolida la información; interpretar decisiones y ejecutar cambios se mide aparte.",
+    action: "Consolidar informes y seguimiento",
+    route: "/producto/inteligencia-dinamica",
+    defaultReductionPercent: 85,
   },
 ];
 
@@ -127,13 +157,16 @@ export const createEmptyOperationalTimeAnswers = (): OperationalTimeAnswers =>
   Object.fromEntries(OPERATIONAL_TASKS.map(({ id, defaultReductionPercent }) => [id, emptyEntry(defaultReductionPercent)])) as OperationalTimeAnswers;
 
 export const EXAMPLE_OPERATIONAL_TIME_ANSWERS: OperationalTimeAnswers = {
-  posItems: { enabled: true, role: "Responsable de sala", currentMinutes: "45", reductionPercent: "50", occurrencesPerWeek: "2", hourlyCost: "18" },
-  deliveryNotes: { enabled: true, role: "Responsable de compras", currentMinutes: "20", reductionPercent: "50", occurrencesPerWeek: "5", hourlyCost: "20" },
-  bottleCount: { enabled: true, role: "Equipo de bodega", currentMinutes: "120", reductionPercent: "0", occurrencesPerWeek: "1", hourlyCost: "16" },
-  stockReconciliation: { enabled: true, role: "Responsable de bodega", currentMinutes: "90", reductionPercent: "60", occurrencesPerWeek: "1", hourlyCost: "20" },
-  orderPreparation: { enabled: true, role: "Responsable de compras", currentMinutes: "75", reductionPercent: "45", occurrencesPerWeek: "1", hourlyCost: "20" },
-  buyingDecision: { enabled: true, role: "Dirección / sumiller", currentMinutes: "90", reductionPercent: "50", occurrencesPerWeek: "1", hourlyCost: "28" },
-  distributorCommunication: { enabled: true, role: "Responsable de compras", currentMinutes: "60", reductionPercent: "35", occurrencesPerWeek: "2", hourlyCost: "20" },
+  posItems: { enabled: true, role: "Responsable de sala", currentMinutes: "45", reductionPercent: "95", occurrencesPerWeek: "2", hourlyCost: "18" },
+  salesPrices: { enabled: true, role: "Dirección / sumiller", currentMinutes: "60", reductionPercent: "95", occurrencesPerWeek: "1", hourlyCost: "20" },
+  deliveryNotes: { enabled: true, role: "Responsable de compras", currentMinutes: "20", reductionPercent: "70", occurrencesPerWeek: "5", hourlyCost: "20" },
+  documentReconciliation: { enabled: true, role: "Administración / compras", currentMinutes: "45", reductionPercent: "80", occurrencesPerWeek: "2", hourlyCost: "20" },
+  bottleCount: { enabled: true, role: "Equipo de bodega", currentMinutes: "120", reductionPercent: "60", occurrencesPerWeek: "1", hourlyCost: "16" },
+  stockReconciliation: { enabled: true, role: "Responsable de bodega", currentMinutes: "90", reductionPercent: "80", occurrencesPerWeek: "1", hourlyCost: "20" },
+  orderPreparation: { enabled: true, role: "Responsable de compras", currentMinutes: "75", reductionPercent: "90", occurrencesPerWeek: "1", hourlyCost: "20" },
+  buyingDecision: { enabled: true, role: "Dirección / sumiller", currentMinutes: "90", reductionPercent: "75", occurrencesPerWeek: "1", hourlyCost: "28" },
+  distributorCommunication: { enabled: true, role: "Responsable de compras", currentMinutes: "60", reductionPercent: "75", occurrencesPerWeek: "2", hourlyCost: "20" },
+  operationalReporting: { enabled: true, role: "Dirección", currentMinutes: "90", reductionPercent: "85", occurrencesPerWeek: "1", hourlyCost: "28" },
 };
 
 export function parseOperationalTimeValue(raw: string): number | null {
@@ -151,6 +184,14 @@ export function parseOperationalTimeValue(raw: string): number | null {
 
 const round = (value: number) => Math.round((value + Number.EPSILON) * 100) / 100;
 const sum = (values: number[]) => round(values.reduce((total, value) => total + value, 0));
+
+export function estimateOperationalScenarioMinutes(currentMinutesRaw: string, reductionPercentRaw: string): number | null {
+  const currentMinutes = parseOperationalTimeValue(currentMinutesRaw);
+  const reductionPercent = parseOperationalTimeValue(reductionPercentRaw);
+  if (currentMinutes === null || reductionPercent === null) return null;
+  if (reductionPercent > 100) throw new Error("El ahorro estimado debe estar entre 0 y 100 %.");
+  return round(currentMinutes * (1 - reductionPercent / 100));
+}
 
 export function calculateOperationalTime(answers: OperationalTimeAnswers) {
   const errors: Record<string, string> = {};
@@ -184,7 +225,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
 
     if (Object.values(required).some((value) => value === null)) continue;
 
-    const scenarioMinutesPerOccurrence = round(required.currentMinutes! * (1 - required.reductionPercent! / 100));
+    const scenarioMinutesPerOccurrence = estimateOperationalScenarioMinutes(entry.currentMinutes, entry.reductionPercent)!;
     const currentHoursPerWeek = round(required.currentMinutes! * required.occurrencesPerWeek! / 60);
     const scenarioHoursPerWeek = round(scenarioMinutesPerOccurrence * required.occurrencesPerWeek! / 60);
     const netHoursPerWeek = round(currentHoursPerWeek - scenarioHoursPerWeek);
@@ -218,7 +259,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
 
   return {
     modelVersion: OPERATIONAL_TIME_MODEL_VERSION,
-    modelCompatibility: "3.0 derives the future scenario from editable task-level reduction assumptions; 2.x manually entered future minutes are not reused automatically.",
+    modelCompatibility: "4.0 exposes automatically calculated Winerim minutes from task-level automation assumptions; 3.x percentages remain internal and are not reused as user inputs.",
     errors,
     taskResults,
     coverage: results.length,
@@ -248,7 +289,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
       outputs: "calculated" as const,
       example: "fictional" as const,
       operationalData: "verified" as const,
-      scenarioAssumptions: "editable-model" as const,
+      scenarioAssumptions: "winerim-baseline" as const,
       verifiedConnected: false,
     },
   };

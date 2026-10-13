@@ -5708,3 +5708,29 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 2. Contrastar las hipótesis con datos reales y consentidos antes de publicarlas
    como benchmark.
 3. Mantener separado el seguimiento ya abierto de Search Console y traducciones.
+
+## Actualización 2026-10-13: siguientes pasos de la calculadora v4
+
+### Hechos
+
+- Diez tareas y minutos automáticos están publicados en Pages `839325cb` y facade
+  `c4dd1ce7-eb43-4d9c-88ab-d1f4ad10fa96`.
+
+### Decisiones
+
+- No ampliar otra vez la lista principal sin validar longitud y solapamientos.
+
+### Hipótesis
+
+- Perfiles de restaurante, hotel y grupo podrían mejorar la relevancia sin pedir
+  más datos al usuario.
+
+### Contradicciones / límites
+
+- No existe aún una muestra empírica por perfil para modificar los porcentajes.
+
+### Siguiente bloque verificable
+
+1. Medir inicio, tareas completadas y descarga sin PII.
+2. Diseñar perfiles opcionales sin cambiar los valores actuales por defecto.
+3. Mantener la QA de idiomas y Search Console como trabajos independientes.

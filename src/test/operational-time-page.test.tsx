@@ -14,15 +14,15 @@ describe("CalculadoraTiempoOperativo", () => {
     expect(screen.getAllByRole("link", { name: "Partners" }).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "¿Cuánto te cuesta gestionar el vino?" })).toBeInTheDocument();
     expect(screen.getAllByText("Minutos por vez (hoy)").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Ahorro orientativo Winerim").length).toBeGreaterThan(0);
-    expect(screen.getByText(/Winerim calcula automáticamente el escenario futuro/i)).toBeInTheDocument();
+    expect(screen.getAllByText("Minutos con Winerim").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Los minutos con Winerim aparecen automáticamente/i)).toBeInTheDocument();
     expect(screen.getByText(/semana × 52 ÷ 12/i)).toBeInTheDocument();
     expect(screen.queryByRole("textbox", { name: /email/i })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /cargar ejemplo ficticio/i }));
 
-    expect(screen.getByText("Tareas calculadas: 7/7")).toBeInTheDocument();
-    expect(screen.getByText("Tareas con coste/hora: 7/7")).toBeInTheDocument();
+    expect(screen.getByText("Tareas calculadas: 10/10")).toBeInTheDocument();
+    expect(screen.getByText("Tareas con coste/hora: 10/10")).toBeInTheDocument();
     expect(screen.getByRole("table", { name: "Valor del tiempo" })).toBeInTheDocument();
     expect(screen.getByText(/coste de oportunidad/i)).toBeInTheDocument();
     expect(screen.getByText("Introducido por ti")).toBeInTheDocument();
@@ -37,21 +37,21 @@ describe("CalculadoraTiempoOperativo", () => {
     render(<MemoryRouter><CalculadoraTiempoOperativo /></MemoryRouter>);
 
     const current = document.getElementById("posItems-currentMinutes") as HTMLInputElement;
-    const reduction = document.getElementById("posItems-reductionPercent") as HTMLInputElement;
     const frequency = document.getElementById("posItems-occurrencesPerWeek") as HTMLInputElement;
     const cost = document.getElementById("posItems-hourlyCost") as HTMLInputElement;
 
     fireEvent.change(current, { target: { value: "30" } });
-    fireEvent.change(reduction, { target: { value: "25" } });
     fireEvent.change(frequency, { target: { value: "4" } });
     fireEvent.change(cost, { target: { value: "20" } });
 
-    expect(screen.getAllByText("+0,5 h").length).toBeGreaterThan(0);
-    expect(screen.getByText(/Escenario: 22,5 min\/vez · hipótesis 25 %/i)).toBeInTheDocument();
+    expect(screen.getAllByText("+1,9 h").length).toBeGreaterThan(0);
+    expect(document.getElementById("posItems-winerimMinutes")).toHaveTextContent("1,5 min");
+    expect(screen.getByText(/95 % de automatización estimada/i)).toBeInTheDocument();
+    expect(screen.getByText(/Con Winerim: 1,5 min\/vez/i)).toBeInTheDocument();
 
-    const taskToggles = screen.getAllByRole("checkbox");
-    fireEvent.click(taskToggles[1]);
-    expect(document.getElementById("deliveryNotes-currentMinutes")).toBeDisabled();
+    const deliveryInput = document.getElementById("deliveryNotes-currentMinutes") as HTMLInputElement;
+    fireEvent.click(deliveryInput.closest("article")!.querySelector('input[type="checkbox"]')!);
+    expect(deliveryInput).toBeDisabled();
   });
 
   it("uses English copy, USD and localized routes on the English journey", () => {
