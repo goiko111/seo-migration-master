@@ -1212,3 +1212,37 @@
 - Autorizar o rechazar una release coordinada de frontend, Worker/edge-router y prerender/sitemap.
 - Con go, validar humano, Googlebot y OAI, canonical, hreflang y sitemap antes de Search Console.
 - Verificar por escrito cualquier condicion economica del programa partner antes de publicarla.
+
+## Actualizacion 2026-10-13: release inmutable preparada, corte bloqueado por Supabase
+
+### Hechos
+
+- El usuario autorizo avanzar con la release coordinada.
+- Pages candidata: `https://64badf62.winerim-origin.pages.dev`, creada desde
+  `9a1c41ac` y todavia fuera del trafico de `winerim.wine`.
+- Cloudflare permite desplegar Pages y Workers; los dry-runs de backend y facade
+  son correctos.
+- La cuenta Supabase conectada no ve `pwkqbcgjrhoyxrsmcypw`; no se han podido
+  versionar ni desplegar `sitemap` y `prerender`.
+- Produccion, datos, migraciones y Search Console permanecen intactos.
+
+### Decisiones
+
+- No publicar solo las capas Cloudflare.
+- Mantener la release de Pages como artefacto inmutable y completar el corte solo
+  cuando las dos Edge Functions puedan desplegarse en la misma ventana.
+
+### Hipotesis
+
+- No hace falta mas desarrollo funcional para el corte; falta acceso operativo al
+  proyecto Supabase correcto.
+
+### Contradicciones
+
+- La autorizacion de release existe, pero el proyecto Supabase web sigue ausente de
+  la cuenta conectada.
+
+### Tareas pendientes
+
+- Recuperar acceso a `pwkqbcgjrhoyxrsmcypw`, desplegar `sitemap` y `prerender`,
+  activar los dos Workers y ejecutar QA productivo antes de Search Console.

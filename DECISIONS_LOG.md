@@ -4926,3 +4926,35 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 #### Tareas pendientes asociadas
 
 - Go/no-go, release coordinada y QA productiva humano/bots/sitemap antes de Search Console.
+
+## 2026-10-13
+
+### Release autorizada y detenida antes del corte
+
+#### Hechos
+
+- Se creo Pages `64badf62` y se revalidaron tests, build y dry-runs.
+- El proyecto Supabase web no esta disponible en la cuenta conectada.
+- No se cambio ningun componente productivo.
+
+#### Decisiones
+
+- No desplegar Cloudflare parcialmente cuando `sitemap` y `prerender` no pueden
+  versionarse ni publicarse.
+- Mantener Catalonia y propuestas comerciales en sus origenes actuales durante el
+  futuro cambio del frontend general.
+- No aplicar migraciones editoriales en este corte.
+
+#### Hipotesis
+
+- La release candidata no requiere nuevas modificaciones una vez recuperado el
+  acceso Supabase.
+
+#### Contradicciones
+
+- Existe go de negocio, pero no existe acceso tecnico al proyecto Supabase requerido.
+
+#### Tareas pendientes asociadas
+
+- Recuperar acceso, desplegar las cuatro capas en una ventana y completar QA antes
+  de Search Console.

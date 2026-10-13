@@ -5516,3 +5516,34 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 4. Validar `/herramientas/calculadora-tiempo-operativo` y `/en/tools/operational-time-calculator`: `200`, H1, canonical, hreflang, calculo positivo/negativo y sitemap.
 5. Ejecutar `deno check supabase/functions/prerender/index.ts` en un entorno con Deno.
 6. Solo con QA productiva verde, inspeccionar las URLs en Search Console y reenviar sitemap si procede.
+
+## Actualizacion 2026-10-13: corte preparado y bloqueado antes de produccion
+
+### Hechos
+
+- Go recibido; Pages `64badf62` esta desplegada como candidato inmutable.
+- Tests, build y dry-runs de backend/facade estan verdes.
+- `pwkqbcgjrhoyxrsmcypw` no aparece en la cuenta Supabase conectada.
+
+### Decisiones
+
+- No activar Pages ni Workers hasta poder publicar y versionar `sitemap` y
+  `prerender` en la misma ventana.
+
+### Hipotesis
+
+- El bloqueo es de acceso, no de codigo.
+
+### Contradicciones / riesgos
+
+- La candidata puede probarse por su URL inmutable, pero el dominio principal sigue
+  sirviendo la release anterior.
+
+### Tareas pendientes listas para retomar
+
+1. Conectar una cuenta que vea `pwkqbcgjrhoyxrsmcypw`.
+2. Registrar versiones actuales y desplegar solo `sitemap` y `prerender`.
+3. Ejecutar `npm run deploy:worker`.
+4. Ejecutar `wrangler deploy --config wrangler.release-20261013.toml`.
+5. Validar humano, Googlebot, OAI, sitemap, legales, home y funcionalidades.
+6. Solo entonces usar Search Console de forma selectiva.

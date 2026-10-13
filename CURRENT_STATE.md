@@ -7438,3 +7438,36 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Decision go/no-go.
 - Si hay go: release atomica y QA productiva de las dos calculadoras y las seis rutas partner.
 - Solo despues: sitemap/Search Console e inspeccion selectiva.
+
+## Actualizacion 2026-10-13: intento de release coordinada
+
+### Hechos confirmados
+
+- La autorizacion de despliegue esta concedida.
+- Se repitieron `239/239` tests, build y dry-runs de ambos Workers con resultado verde.
+- Pages candidata creada: `https://64badf62.winerim-origin.pages.dev`.
+- Rollback confirmado: router `d3bb33d3-772c-47db-bdbb-d2cadc6e2734`, backend
+  `d893a932-b4bc-40f6-872f-034ebf736c8e` y frontend `0ec77291`.
+- Supabase conectado no lista `pwkqbcgjrhoyxrsmcypw`; no hubo despliegue de
+  Edge Functions ni cambio de produccion.
+
+### Decisiones
+
+- Pausar el corte antes del primer cambio productivo para evitar version drift.
+- Conservar Pages como release candidata y usar el fichero
+  `wrangler.release-20261013.toml` cuando se recupere Supabase.
+
+### Hipotesis
+
+- Con acceso al proyecto correcto, el despliegue restante es mecanico y no requiere
+  mas cambios de producto.
+
+### Contradicciones / riesgos
+
+- La CLI Cloudflare esta operativa; la identidad Supabase disponible pertenece a
+  otros proyectos y no al backend web historico.
+
+### Tareas pendientes
+
+- Desplegar `sitemap` y `prerender` en `pwkqbcgjrhoyxrsmcypw`.
+- Desplegar backend y facade, ejecutar QA productivo y decidir Search Console.
