@@ -3144,6 +3144,8 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'en', url: `${SITE}/en/affiliate` },
     { lang: 'it', url: `${SITE}/it/affiliati` },
     { lang: 'fr', url: `${SITE}/fr/affilies` },
+    { lang: 'de', url: `${SITE}/de/partner` },
+    { lang: 'pt', url: `${SITE}/pt/afiliados` },
     { lang: 'x-default', url: `${SITE}/afiliate` },
   ],
   '/sommelier-corner': [
@@ -3829,6 +3831,83 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
         ],
         breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Ferramentas', url: `${SITE}/pt/ferramentas` }, { name: label, url: canonical }],
         internalLinks: [{ label: 'Como definir o preco do vinho', url: '/pt/preco-vinho-restaurante' }, { label: 'Winerim Core', url: '/pt/produto/winerim-core' }, { label: 'Winerim Supply', url: '/pt/produto/winerim-supply' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
+  if (esPath === '/afiliate' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Winerim Partners | Assess your hospitality portfolio fit',
+        description: 'Calculate operational value for customers and the real capacity of your portfolio before requesting a Winerim partner conversation.',
+        h1: 'Add value to the sales visits you already make',
+        subtitle: 'Identify a real operational problem, quantify it with the customer and assess whether a joint conversation makes sense.',
+        sections: [
+          { heading: 'Two input-led calculations', content: 'Estimate customer time value and portfolio conversation capacity from editable assumptions. No data is sent and no partner income is forecast.' },
+          { heading: 'Who fits', content: 'Partners need professional access to hospitality accounts, time to learn and the ability to qualify a concrete operational problem before selling.' },
+          { heading: 'Terms require an agreement', content: 'This page publishes no standard commission, exclusivity, quota or income forecast. Any commercial terms must be approved in writing.' },
+        ],
+        faqs: [{ q: 'Does the calculator predict sales?', a: 'No. It only calculates time, time value and conversation capacity from the visitor\'s assumptions.' }],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Operational time calculator', url: '/en/tools/operational-time-calculator' }, { label: 'Contact Winerim', url: '/en/contact' }],
+      },
+      it: {
+        title: 'Partner Winerim | Valuta la tua rete hospitality',
+        description: 'Calcola il valore operativo per i clienti e la capacita reale della tua rete prima di richiedere un confronto partner con Winerim.',
+        h1: 'Aggiungi valore alle visite commerciali che fai gia',
+        subtitle: 'Individua un problema operativo reale, quantificalo con il cliente e valuta se ha senso un confronto congiunto.',
+        sections: [
+          { heading: 'Due calcoli basati sui tuoi dati', content: 'Stima il valore del tempo del cliente e la capacita della rete da ipotesi modificabili. Nessun dato viene inviato e non si prevede il reddito del partner.' },
+          { heading: 'Chi e adatto', content: 'Servono accesso professionale a clienti hospitality, tempo per formarsi e capacita di qualificare un problema operativo prima di vendere.' },
+          { heading: 'Le condizioni richiedono un accordo', content: 'Questa pagina non pubblica commissioni standard, esclusiva, quote o previsioni di reddito. Ogni condizione commerciale va approvata per iscritto.' },
+        ],
+        faqs: [{ q: 'Il calcolo prevede le vendite?', a: 'No. Calcola solo tempo, valore del tempo e capacita di conversazione dalle ipotesi del visitatore.' }],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contatta Winerim', url: '/it/contatto' }],
+      },
+      fr: {
+        title: 'Partenaires Winerim | Evaluez votre portefeuille CHR',
+        description: 'Calculez la valeur operationnelle pour vos clients et la capacite reelle de votre portefeuille avant de demander un echange partenaire Winerim.',
+        h1: 'Ajoutez de la valeur aux visites commerciales que vous realisez deja',
+        subtitle: 'Identifiez un probleme operationnel reel, quantifiez-le avec le client et decidez si un echange commun est pertinent.',
+        sections: [
+          { heading: 'Deux calculs fondes sur vos donnees', content: 'Estimez la valeur du temps client et la capacite du portefeuille a partir d hypotheses modifiables. Aucune donnee n est envoyee et aucun revenu partenaire n est prevu.' },
+          { heading: 'Qui est adapte', content: 'Il faut un acces professionnel aux comptes CHR, du temps pour se former et la capacite a qualifier un probleme operationnel avant de vendre.' },
+          { heading: 'Les conditions exigent un accord', content: 'Cette page ne publie ni commission standard, ni exclusivite, ni quota, ni prevision de revenus. Toute condition commerciale doit etre approuvee par ecrit.' },
+        ],
+        faqs: [{ q: 'Le calcul predit il des ventes ?', a: 'Non. Il calcule uniquement le temps, sa valeur et la capacite d echange a partir des hypotheses du visiteur.' }],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contacter Winerim', url: '/fr/contact' }],
+      },
+      de: {
+        title: 'Winerim Partner | Hospitality-Portfolio pruefen',
+        description: 'Berechnen Sie den operativen Wert fuer Kunden und die reale Kapazitaet Ihres Portfolios vor einem Partnergespraech mit Winerim.',
+        h1: 'Schaffen Sie Mehrwert in den Kundenterminen, die Sie bereits fuehren',
+        subtitle: 'Ein reales operatives Problem erkennen, mit dem Kunden beziffern und die Eignung fuer ein gemeinsames Gespraech pruefen.',
+        sections: [
+          { heading: 'Zwei Berechnungen aus Ihren Angaben', content: 'Kundenzeitwert und Gespraechskapazitaet werden aus bearbeitbaren Annahmen berechnet. Es werden keine Daten gesendet und keine Partnereinnahmen prognostiziert.' },
+          { heading: 'Wer passt', content: 'Partner brauchen professionellen Zugang zu Hospitality-Konten, Zeit fuer Schulung und die Faehigkeit, vor dem Verkauf ein konkretes operatives Problem zu qualifizieren.' },
+          { heading: 'Bedingungen brauchen eine Vereinbarung', content: 'Diese Seite veroeffentlicht keine Standardprovision, Exklusivitaet, Quote oder Einkommensprognose. Wirtschaftliche Bedingungen muessen schriftlich genehmigt werden.' },
+        ],
+        faqs: [{ q: 'Prognostiziert die Berechnung Verkaeufe?', a: 'Nein. Sie berechnet nur Zeit, Zeitwert und Gespraechskapazitaet aus den Annahmen des Besuchers.' }],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim kontaktieren', url: '/de/kontakt' }],
+      },
+      pt: {
+        title: 'Parceiros Winerim | Avalie a sua carteira HORECA',
+        description: 'Calcule o valor operacional para clientes e a capacidade real da sua carteira antes de solicitar uma conversa de parceiro Winerim.',
+        h1: 'Acrescente valor as visitas comerciais que ja realiza',
+        subtitle: 'Identifique um problema operacional real, quantifique-o com o cliente e avalie se faz sentido uma conversa conjunta.',
+        sections: [
+          { heading: 'Dois calculos baseados nos seus dados', content: 'Estime o valor do tempo do cliente e a capacidade da carteira a partir de hipoteses editaveis. Nao se enviam dados nem se preve rendimento do parceiro.' },
+          { heading: 'Quem encaixa', content: 'E necessario acesso profissional a contas HORECA, tempo para formacao e capacidade para qualificar um problema operacional antes de vender.' },
+          { heading: 'As condicoes exigem acordo', content: 'Esta pagina nao publica comissao padrao, exclusividade, quota ou previsao de rendimento. Qualquer condicao comercial deve ser aprovada por escrito.' },
+        ],
+        faqs: [{ q: 'O calculo preve vendas?', a: 'Nao. Calcula apenas tempo, valor do tempo e capacidade de conversa a partir das hipoteses do visitante.' }],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contactar Winerim', url: '/pt/contacto' }],
       },
     };
 
@@ -5263,12 +5342,12 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       subtitle: 'Conecta la carta de vinos con ventas, stock, costes, PMS hotelero, ERP y sistemas de punto de venta para tomar decisiones con datos reales.',
       sections: [
         { heading: 'Por qué importan las integraciones', content: 'Sin conexión con el TPV, el vino queda aislado: no sabes qué referencias se venden realmente, qué margen generan ni qué vinos se quedan sin rotación. Winerim conecta carta, ventas, stock y coste para convertir la carta en un sistema de decisión.' },
-        { heading: 'TPV, POS y ventas reales', content: 'Winerim se integra con sistemas de punto de venta para sincronizar ventas por referencia, periodo y punto de servicio. Esto permite medir ticket medio de vino, rotación, margen y rendimiento por copa o botella.' },
+        { heading: 'TPV, POS y ventas reales', content: 'Winerim conecta con sistemas de punto de venta después de validar acceso, permisos, mapeo y una muestra real de datos. El alcance y la frecuencia se confirman por instalación.' },
         { heading: 'Inventario, ERP y compras', content: 'La integración con inventario y ERP ayuda a mantener stock actualizado, detectar sobrestock, revisar costes y decidir compras con información real en lugar de intuición o presión comercial.' },
         { heading: 'Hoteles, grupos y API', content: 'En hoteles y grupos, Winerim centraliza datos entre locales, outlets y sistemas PMS. Para equipos técnicos, la API permite proyectos personalizados y conexión con sistemas propios.' },
       ],
       faqs: [
-        { q: '¿Winerim se integra con mi TPV?', a: 'Winerim se integra con múltiples sistemas de punto de venta y puede evaluar integraciones personalizadas según el stack del restaurante, hotel o grupo.' },
+        { q: '¿Winerim se integra con mi TPV?', a: 'Winerim puede conectar con TPV compatibles después de un preflight técnico. Ágora dispone de un flujo verificable por conexión y REVO XEF requiere validar versión, permisos, mapeo y piloto.' },
         { q: '¿Necesito cambiar de sistema?', a: 'No. Winerim está diseñado para conectarse con las herramientas existentes y evitar doble entrada de datos.' },
         { q: '¿Las integraciones están incluidas en todos los planes?', a: 'Las integraciones avanzadas suelen formar parte de planes Pro o Enterprise, dependiendo del sistema, volumen de datos y complejidad técnica.' },
       ],
@@ -5283,6 +5362,72 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
         { label: 'Analizar carta', url: '/analisis-carta' },
         { label: 'Demo', url: '/demo' },
       ],
+    },
+  },
+  '/integraciones/agora': {
+    meta: { title: 'Integración Winerim con Ágora | TPV y datos operativos', description: 'Conecta catálogo y ventas de vino de Ágora con Winerim mediante un despliegue controlado, trazable y validado para cada establecimiento.', canonical: `${SITE}/integraciones/agora`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Integración Winerim con Ágora',
+      subtitle: 'Flujo técnico verificado con activación, mapeo, piloto y readback por conexión.',
+      sections: [
+        { heading: 'Qué conecta Winerim', content: 'Relaciona referencias, familias, formatos y precios, recibe ventas por botella o copa y trata el stock solo cuando el alcance de la conexión ha sido validado.' },
+        { heading: 'Activación verificable', content: 'Cada instalación pasa por preflight, mapeo, piloto controlado, readback y una venta real correctamente asociada antes de considerarse operativa.' },
+        { heading: 'Límites documentados', content: 'No se promete tiempo real continuo, impresión física ni certificación universal. Frecuencia, permisos, excepciones y recuperación se acuerdan por conexión.' },
+      ],
+      faqs: [
+        { q: '¿Ágora se conecta automáticamente?', a: 'No. Existe un flujo técnico disponible, pero cada instalación necesita acceso, mapeo, piloto y readback antes de activarse.' },
+        { q: '¿Incluye catálogo, ventas y stock?', a: 'Catálogo y ventas forman parte del flujo verificable. El tratamiento de stock depende del mapeo, permisos y alcance acordado.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Integraciones', url: `${SITE}/integraciones` }, { name: 'Ágora', url: `${SITE}/integraciones/agora` }],
+      internalLinks: [{ label: 'Integraciones', url: '/integraciones' }, { label: 'REVO XEF', url: '/integraciones/revo-xef' }, { label: 'Conectar carta, stock, ventas y margen', url: '/guias/como-conectar-carta-stock-ventas-margen' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/integraciones/revo-xef': {
+    meta: { title: 'Integración Winerim con REVO XEF | Alcance y preflight', description: 'Evalúa y conecta datos de REVO XEF con Winerim después de validar permisos, versión, mapeo y una lectura piloto.', canonical: `${SITE}/integraciones/revo-xef`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Integración Winerim con REVO XEF',
+      subtitle: 'Disponibilidad y alcance sujetos a preflight, muestra de datos y piloto de lectura.',
+      sections: [
+        { heading: 'Qué se evalúa', content: 'Winerim revisa catálogo, familias, ventas, precios, formatos, centros y frecuencia disponibles en la instalación del cliente.' },
+        { heading: 'Activación por fases', content: 'El proceso incluye preflight, muestra de datos, piloto de lectura y una propuesta escrita de alcance antes de activar la operación.' },
+        { heading: 'Límites documentados', content: 'No se confirma bidireccionalidad, escritura ni tiempo real antes del piloto. La integración no se cierra hasta verificar mapeo y ausencia de duplicados.' },
+      ],
+      faqs: [
+        { q: '¿Winerim se integra con cualquier REVO XEF?', a: 'No se da por supuesto. Primero se revisan versión, permisos y datos disponibles, y después se confirma el alcance por escrito.' },
+        { q: '¿Cuándo se considera lista?', a: 'Cuando una lectura real queda correctamente mapeada, sin duplicados, y se han documentado frecuencia, excepciones y soporte.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Integraciones', url: `${SITE}/integraciones` }, { name: 'REVO XEF', url: `${SITE}/integraciones/revo-xef` }],
+      internalLinks: [{ label: 'Integraciones', url: '/integraciones' }, { label: 'Ágora', url: '/integraciones/agora' }, { label: 'Gestión para grupos', url: '/soluciones/grupos-restauracion' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/integrations/agora': {
+    meta: { title: 'Winerim integration with Ágora | POS and operational data', description: 'Connect Ágora wine catalog and sales data to Winerim through a controlled, traceable deployment validated for each venue.', canonical: `${SITE}/en/integrations/agora`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim integration with Ágora',
+      subtitle: 'Verified technical flow with activation, mapping, pilot and readback per connection.',
+      sections: [
+        { heading: 'What Winerim connects', content: 'Maps references, families, formats and prices, receives bottle or glass sales and handles stock only after connection scope has been validated.' },
+        { heading: 'Verifiable activation', content: 'Every installation goes through preflight, mapping, a controlled pilot, readback and one correctly mapped real sale before it is considered operational.' },
+        { heading: 'Documented limits', content: 'Continuous real time, physical printing and universal certification are not promised. Frequency, permissions, exceptions and recovery are agreed per connection.' },
+      ],
+      faqs: [{ q: 'Is Ágora connected automatically?', a: 'No. A technical flow is available, but every installation needs access, mapping, a pilot and readback before activation.' }],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Integrations', url: `${SITE}/en/integrations` }, { name: 'Ágora', url: `${SITE}/en/integrations/agora` }],
+      internalLinks: [{ label: 'Integrations', url: '/en/integrations' }, { label: 'REVO XEF', url: '/en/integrations/revo-xef' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Demo', url: '/en/demo' }],
+    },
+  },
+  '/en/integrations/revo-xef': {
+    meta: { title: 'Winerim integration with REVO XEF | Scope and preflight', description: 'Assess and connect REVO XEF data to Winerim after validating permissions, version, mapping and a read pilot.', canonical: `${SITE}/en/integrations/revo-xef`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'SoftwareApplication' },
+    content: {
+      h1: 'Winerim integration with REVO XEF',
+      subtitle: 'Availability and scope subject to preflight, a data sample and a read pilot.',
+      sections: [
+        { heading: 'What is assessed', content: 'Winerim reviews catalog, families, sales, prices, formats, locations and frequency available in the customer installation.' },
+        { heading: 'Phased activation', content: 'The process includes preflight, a data sample, a read pilot and written scope before operations are enabled.' },
+        { heading: 'Documented limits', content: 'Bidirectionality, writing and real time are not confirmed before the pilot. Integration is not complete until mapping and duplicate prevention are verified.' },
+      ],
+      faqs: [{ q: 'Does Winerim integrate with every REVO XEF installation?', a: 'We do not assume that. Version, permissions and available data are reviewed first, then scope is confirmed in writing.' }],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Integrations', url: `${SITE}/en/integrations` }, { name: 'REVO XEF', url: `${SITE}/en/integrations/revo-xef` }],
+      internalLinks: [{ label: 'Integrations', url: '/en/integrations' }, { label: 'Ágora', url: '/en/integrations/agora' }, { label: 'Restaurant groups', url: '/en/solutions/restaurant-groups' }, { label: 'Demo', url: '/en/demo' }],
     },
   },
   '/blog': {
@@ -6092,13 +6237,18 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/afiliate': {
-    meta: { title: 'Programa de Afiliados Winerim', description: 'Únete al programa de afiliados de Winerim y gana comisiones recomendando la carta inteligente de vinos a restaurantes.', canonical: `${SITE}/afiliate`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Partners Winerim | Valora el encaje de tu cartera HORECA', description: 'Calcula el valor operativo para tus clientes y la capacidad real de tu cartera antes de solicitar una conversación de partner con Winerim.', canonical: `${SITE}/afiliate`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
-      h1: 'Programa de afiliados Winerim',
-      sections: [{ heading: 'Cómo funciona', content: 'Recomienda Winerim a restaurantes de tu red. Por cada cliente que se convierta, recibes una comisión recurrente.' }],
-      faqs: [],
-      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Afíliate', url: `${SITE}/afiliate` }],
-      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+      h1: 'Añade valor a las visitas comerciales que ya haces',
+      subtitle: 'Detecta un problema operativo real, cuantifícalo con el cliente y valora si existe encaje para una conversación conjunta.',
+      sections: [
+        { heading: 'Dos cálculos con tus propios datos', content: 'Estima valor operativo para el cliente y capacidad de cartera con supuestos editables. No se envían datos, no se predicen cierres y no se calculan ingresos del partner.' },
+        { heading: 'Quién encaja', content: 'Partners con acceso profesional a cuentas HORECA, tiempo para formarse y capacidad para cualificar un problema operativo concreto antes de vender.' },
+        { heading: 'Las condiciones requieren acuerdo', content: 'Esta página no publica comisión, exclusividad, cuota ni previsión de ingresos estándar. Cualquier condición económica debe aprobarse por escrito.' },
+      ],
+      faqs: [{ q: '¿La calculadora predice ventas?', a: 'No. Solo calcula tiempo, valor del tiempo y capacidad para mantener conversaciones a partir de los supuestos del visitante.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Partners', url: `${SITE}/afiliate` }],
+      internalLinks: [{ label: 'Calculadora de tiempo operativo', url: '/herramientas/calculadora-tiempo-operativo' }, { label: 'Contacto', url: '/contacto' }],
     },
   },
   '/sommelier-corner': {
@@ -6124,6 +6274,78 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       faqs: [{ q: '¿Es gratuita?', a: 'Sí. 100% gratuita y sin registro.' }],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora precio copa', url: `${SITE}/herramientas/calculadora-precio-vino-por-copa` }],
       internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/diagnostico-rentabilidad-bodega': {
+    meta: { title: 'Diagnóstico de Rentabilidad de la Carta | Winerim', description: 'Calcula margen por botella y copa, Beverage Cost, capital inmovilizado y escenarios de precio, rotación y reposición con fórmulas transparentes.', canonical: `${SITE}/herramientas/diagnostico-rentabilidad-bodega`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: {
+      h1: 'Diagnóstico de rentabilidad de la carta de vinos',
+      subtitle: 'Botella, copa, stock lento y reposición: cuatro lecturas conectadas con el origen de cada cifra visible.',
+      sections: [
+        { heading: 'Economía de botella y copa', content: 'Calcula margen bruto y Beverage Cost por botella y por copa, considerando las copas cobrables y una merma editable.' },
+        { heading: 'Stock lento y escenario operativo', content: 'Valora capital inmovilizado a coste y compara un escenario de PVP, volumen y reposición definido por el usuario. No predice demanda ni garantiza rentabilidad.' },
+        { heading: 'Resultado local antes del contacto', content: 'El cálculo completo se realiza en el navegador. La revisión ampliada es opcional y no envía las cifras del diagnóstico.' },
+      ],
+      faqs: [
+        { q: '¿Predice la demanda?', a: 'No. El usuario define el volumen del escenario; la herramienta muestra el efecto aritmético sobre contribución y reposición.' },
+        { q: '¿El capital liberable es un ingreso?', a: 'No. Es una estimación del capital que dejaría de estar inmovilizado a coste de adquisición.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Diagnóstico de rentabilidad', url: `${SITE}/herramientas/diagnostico-rentabilidad-bodega` }],
+      internalLinks: [{ label: 'Calculadora de margen', url: '/calculadora-margen-vino' }, { label: 'Calculadora de stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'CloudRIM', url: '/producto/cloudrim' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/tools/wine-cellar-profitability-diagnostic': {
+    meta: { title: 'Wine List Profitability Diagnostic | Winerim', description: 'Calculate bottle and by-the-glass margin, Beverage Cost, tied-up capital, and transparent price, rotation and replenishment scenarios.', canonical: `${SITE}/en/tools/wine-cellar-profitability-diagnostic`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: {
+      h1: 'Wine list profitability diagnostic',
+      subtitle: 'Bottle, by-the-glass, slow stock and replenishment with the source of each figure visible.',
+      sections: [
+        { heading: 'Bottle and by-the-glass economics', content: 'Calculate gross margin and Beverage Cost per bottle and glass using editable billable-glass and waste assumptions.' },
+        { heading: 'Slow stock and operational scenario', content: 'Value tied-up capital at cost and compare a user-defined price, volume and replenishment scenario. It does not forecast demand or guarantee profitability.' },
+        { heading: 'Local result before contact', content: 'The complete calculation runs in the browser. The expanded review is optional and does not send the diagnostic figures.' },
+      ],
+      faqs: [
+        { q: 'Does it forecast demand?', a: 'No. The user defines scenario volume; the tool shows the arithmetic effect on contribution and replenishment.' },
+        { q: 'Is released capital revenue?', a: 'No. It estimates capital that may no longer remain tied up at acquisition cost.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Profitability diagnostic', url: `${SITE}/en/tools/wine-cellar-profitability-diagnostic` }],
+      internalLinks: [{ label: 'Wine margin calculator', url: '/en/wine-margin-calculator' }, { label: 'Dead stock calculator', url: '/en/tools/dead-stock-calculator' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'CloudRIM', url: '/en/product/cloudrim' }, { label: 'Request a demo', url: '/en/demo' }],
+    },
+  },
+  '/herramientas/calculadora-tiempo-operativo': {
+    meta: { title: 'Calculadora del Coste Operativo del Vino | Winerim', description: 'Calcula horas y valor del tiempo semanal dedicado a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: '¿Cuánto te cuesta gestionar el vino?',
+      subtitle: 'Compara el tiempo actual con un escenario definido por ti y valora el tiempo por rol con hipótesis visibles y editables.',
+      sections: [
+        { heading: 'Fórmula transparente', content: 'Cada tarea aplica minutos actuales menos minutos del escenario, multiplicados por la frecuencia semanal. El mes medio usa semana por 52 dividido entre 12 y el año usa semana por 52.' },
+        { heading: 'Siete tareas semanales', content: 'Artículos del TPV, recepción de albaranes, recuento de botellas, conciliación de stock, preparación de pedidos, decisión de compra y comunicación con distribuidores.' },
+        { heading: 'Escenario, no garantía', content: 'El usuario puede editar cada hipótesis. El resultado representa capacidad potencialmente recuperable y no una promesa fija de ahorro de horas.' },
+      ],
+      faqs: [
+        { q: '¿Es una garantía de ahorro?', a: 'No. Es un escenario calculado con las hipótesis introducidas por el usuario.' },
+        { q: '¿Se mezclan horas con ahorro económico?', a: 'No. El coste por hora es opcional y expresa coste de oportunidad; no implica ahorro de caja, reducción de plantilla, ventas adicionales ni ROI.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de tiempo', url: `${SITE}/herramientas/calculadora-tiempo-operativo` }],
+      internalLinks: [{ label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Integraciones', url: '/integraciones' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/en/tools/operational-time-calculator': {
+    meta: { title: 'Wine Operations Cost Calculator | Winerim', description: 'Calculate weekly hours and time value for POS items, deliveries, bottle counts, reconciliation, orders, purchasing and distributors.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    content: {
+      h1: 'What does it cost to manage your wine operation?',
+      subtitle: 'Compare current time with a scenario you define and value time by role using visible, editable assumptions.',
+      sections: [
+        { heading: 'Transparent formula', content: 'Each task uses current minutes minus scenario minutes, multiplied by weekly frequency. Average month uses week times 52 divided by 12 and year uses week times 52.' },
+        { heading: 'Seven weekly tasks', content: 'POS items, delivery-note intake, bottle counts, stock reconciliation, order preparation, buying decisions and distributor communication.' },
+        { heading: 'A scenario, not a guarantee', content: 'Every assumption can be edited. The result represents potentially recoverable capacity, not a fixed promise of saved hours.' },
+      ],
+      faqs: [
+        { q: 'Is this a savings guarantee?', a: 'No. It is a scenario calculated from the assumptions entered by the user.' },
+        { q: 'Does it convert hours into financial savings?', a: 'No. Hourly cost is optional and expresses opportunity cost; it does not imply cash savings, headcount reduction, added sales or ROI.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Operational time calculator', url: `${SITE}/en/tools/operational-time-calculator` }],
+      internalLinks: [{ label: 'Tools', url: '/en/tools' }, { label: 'Integrations', url: '/en/integrations' }, { label: 'Request a demo', url: '/en/demo' }],
     },
   },
   '/herramientas/diagnostico-vino-por-copa': {
