@@ -2,14 +2,18 @@
 
 ## Hechos
 
-- Candidato Git: `9a1c41ac` en `codex/winerim-web-next-20260929`.
+- Candidato Git funcional: `9a1c41ac`; correccion de continuidad de idioma:
+  `fa99b388`, en `codex/winerim-web-next-20260929`.
 - Cloudflare esta autenticado para Pages y Workers.
 - Se creo una release inmutable de Pages sin conectarla al dominio:
-  `https://64badf62.winerim-origin.pages.dev`.
+  `https://f97077cf.winerim-origin.pages.dev`.
 - La release responde `200` en calculadora operativa ES/EN, partner ES/DE y
   diagnostico de rentabilidad ES/EN. La calculadora ES se renderizo en navegador
   con sus siete tareas y metadata propia.
-- Gates repetidos antes de publicar: `239/239` tests, build de produccion,
+- La QA de la primera candidata detecto que IT/FR/DE/PT enlazaban la calculadora
+  inglesa desde su landing partner. Se corrigio el recorrido: ES/EN conservan su
+  calculadora y los otros cuatro idiomas apuntan a su hub de herramientas localizado.
+- Gates repetidos tras la correccion: `243/243` tests, build de produccion,
   dry-run de `winerim-proxy` y dry-run de `winerim-edge-router`.
 - Versiones productivas de rollback confirmadas:
   - `winerim-edge-router`: `d3bb33d3-772c-47db-bdbb-d2cadc6e2734`;

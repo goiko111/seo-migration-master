@@ -4933,7 +4933,9 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 #### Hechos
 
-- Se creo Pages `64badf62` y se revalidaron tests, build y dry-runs.
+- Se creo Pages `f97077cf` y se revalidaron `243/243` tests, build y dry-runs.
+- IT/FR/DE/PT enlazan desde partner a su hub de herramientas localizado; solo ES/EN
+  enlazan directamente a la calculadora operativa completa disponible hoy.
 - El proyecto Supabase web no esta disponible en la cuenta conectada.
 - No se cambio ningun componente productivo.
 

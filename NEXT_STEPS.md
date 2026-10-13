@@ -5521,7 +5521,8 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 
 ### Hechos
 
-- Go recibido; Pages `64badf62` esta desplegada como candidato inmutable.
+- Go recibido; Pages `f97077cf` esta desplegada como candidato inmutable.
+- La continuidad de idioma del recorrido partner quedo corregida y cubierta por tests.
 - Tests, build y dry-runs de backend/facade estan verdes.
 - `pwkqbcgjrhoyxrsmcypw` no aparece en la cuenta Supabase conectada.
 

@@ -7444,8 +7444,10 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Hechos confirmados
 
 - La autorizacion de despliegue esta concedida.
-- Se repitieron `239/239` tests, build y dry-runs de ambos Workers con resultado verde.
-- Pages candidata creada: `https://64badf62.winerim-origin.pages.dev`.
+- Se repitieron `243/243` tests, build y dry-runs de ambos Workers con resultado verde.
+- Pages candidata creada: `https://f97077cf.winerim-origin.pages.dev`.
+- El enlace profundo partner ya no salta a ingles desde IT/FR/DE/PT; usa el hub de
+  herramientas localizado hasta que exista calculadora completa en esos idiomas.
 - Rollback confirmado: router `d3bb33d3-772c-47db-bdbb-d2cadc6e2734`, backend
   `d893a932-b4bc-40f6-872f-034ebf736c8e` y frontend `0ec77291`.
 - Supabase conectado no lista `pwkqbcgjrhoyxrsmcypw`; no hubo despliegue de

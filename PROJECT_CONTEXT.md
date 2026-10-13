@@ -1218,8 +1218,10 @@
 ### Hechos
 
 - El usuario autorizo avanzar con la release coordinada.
-- Pages candidata: `https://64badf62.winerim-origin.pages.dev`, creada desde
-  `9a1c41ac` y todavia fuera del trafico de `winerim.wine`.
+- Pages candidata: `https://f97077cf.winerim-origin.pages.dev`, creada desde
+  `fa99b388` y todavia fuera del trafico de `winerim.wine`.
+- IT/FR/DE/PT mantienen ahora el recorrido partner dentro de su idioma; la
+  calculadora operativa completa sigue publicada solo en ES/EN.
 - Cloudflare permite desplegar Pages y Workers; los dry-runs de backend y facade
   son correctos.
 - La cuenta Supabase conectada no ve `pwkqbcgjrhoyxrsmcypw`; no se han podido
