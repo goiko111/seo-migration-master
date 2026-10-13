@@ -5594,3 +5594,35 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 
 - La discrepancia de hashes comunicados por Lovable queda abierta como trazabilidad;
   no hay divergencia funcional observada en produccion.
+
+## Actualizacion 2026-10-13: Search Console ejecutado
+
+### Hechos
+
+- Herramientas integradas con cabecera/pie globales y aliases del simulador
+  corregidos en produccion.
+- `sitemap.xml` reenviado con estado correcto.
+- Calculadoras ES/EN verificadas en vivo y enviadas a indexacion selectiva.
+- Partner ES ya indexado; simuladores canonicos ES/EN ya indexados.
+
+### Decisiones
+
+- No repetir solicitudes ni pedir indexacion de redirects.
+- No tocar Supabase/Lovable Cloud hasta que un cambio de Edge Function lo exija.
+
+### Hipotesis
+
+- Google necesita 24-72 horas para reflejar el sitemap y las nuevas URLs.
+
+### Contradicciones / riesgos
+
+- Solo esta accesible la propiedad URL-prefix, no la propiedad de dominio.
+
+### Siguiente bloque verificable
+
+1. Revisar ultima lectura y paginas descubiertas del sitemap en 24-72 horas.
+2. Confirmar que ambas calculadoras pasan a `La URL esta en Google` con canonical
+   propio; no reenviar mientras la solicitud siga activa.
+3. Validar eventos de uso y conversion sin PII.
+4. Retomar Biblioteca del vino, Aprender vino y blog en lotes editoriales separados.
+5. Resolver deuda tecnica no bloqueante en un lote independiente.

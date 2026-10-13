@@ -4975,7 +4975,7 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
   origen anterior.
 - Ambos fallos quedaron corregidos en el facade. La QA final confirma paridad humana,
   Googlebot, OAI y sitemap.
-- Los gates finales pasan `244/244` y SEO/i18n `252/252`.
+- Los gates finales pasan `245/245` y SEO/i18n `252/252`.
 
 #### Decisiones
 
@@ -5001,3 +5001,36 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Search Console selectivo, seguimiento de cobertura y analitica de las nuevas rutas.
 - Resolver la deuda tecnica no bloqueante en un lote separado.
+
+## 2026-10-13
+
+### Integracion final de herramientas y cierre operativo de Search Console
+
+#### Hechos
+
+- Las dos herramientas adoptan `Navbar`/`Footer` globales y conservan calculos,
+  metadata, responsive y CTAs.
+- Pages `b6740e31` y facade `62ad7ebb-a2c3-458f-b2ba-99e612ba6167` estan activos.
+- Los aliases incorrectos del simulador responden `301` a sus canonicas.
+- Search Console recibio de nuevo `sitemap.xml`; las calculadoras ES/EN superaron la
+  prueba en vivo y se solicitaron individualmente. `/afiliate` ya estaba indexada.
+
+#### Decisiones
+
+- Tratar Lovable Cloud/Supabase como la capa de Edge Functions, sin tocarla cuando
+  el cambio no la requiere.
+- Usar solicitudes de indexacion solo para URLs nuevas, canonicas y verificadas.
+
+#### Hipotesis
+
+- La recaptura de sitemap resolvera el desfase temporal de siete URLs descubiertas.
+
+#### Contradicciones
+
+- `sc-domain:winerim.wine` no esta disponible para la cuenta actual; se opero sobre
+  la propiedad verificada `https://winerim.wine/`.
+
+#### Tareas pendientes asociadas
+
+- Comprobar cobertura/canonical en 24-72 horas y continuar medicion, contenido y
+  deuda tecnica como lotes independientes.

@@ -7496,7 +7496,7 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
   Funcionalidades conservan `200`.
 - La entrada inglesa por idioma del navegador funciona con `302 / -> /en` para GET
   humano con `Accept-Language: en-US`.
-- Gates locales posteriores al hotfix: `244/244`, build, lint focal, sintaxis,
+- Gates locales posteriores al hotfix: `245/245`, build, lint focal, sintaxis,
   `git diff --check` y `252/252` en el auditor SEO/i18n.
 
 ### Decisiones
@@ -7526,3 +7526,36 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Search Console selectivo y reenvio de sitemap si procede.
 - Monitorizar 24-72 horas, analitica/eventos sin PII y cobertura por idioma.
 - Retomar contenido editorial y deuda tecnica como lotes separados.
+
+## Actualizacion 2026-10-13: shell global, redirects y Search Console
+
+### Hechos confirmados
+
+- Calculadora operativa y diagnostico de rentabilidad comparten cabecera y pie de la
+  web; la cabecera usa fondo solido en estas superficies claras.
+- Frontend activo `b6740e31`; facade activo
+  `62ad7ebb-a2c3-458f-b2ba-99e612ba6167`; backend sin cambios.
+- Aliases corregidos: `/simulador` -> `/simulador-carta` y
+  `/en/simulador-carta` -> `/en/wine-list-simulator`, ambos `301`.
+- Gates verdes: `245/245`, build, lint focal, sintaxis Worker, dry-run y
+  `git diff --check`.
+- Search Console: sitemap reenviado correctamente; calculadoras ES/EN aptas en
+  prueba en vivo y añadidas a la cola prioritaria; `/afiliate` ya indexada.
+
+### Decisiones
+
+- No tocar Lovable Cloud/Supabase, SQL, contenido ni Edge Functions en este lote.
+- No pedir indexacion de redirecciones ni ejecutar indexacion masiva.
+
+### Hipotesis
+
+- Google actualizara de `2.427` a las `2.434` URLs actuales tras releer el sitemap.
+
+### Contradicciones / riesgos
+
+- La cuenta no ve la propiedad de dominio, solo la URL-prefix; no impide las
+  acciones ejecutadas, pero limita una vista agregada de subdominios/protocolos.
+
+### Tareas pendientes
+
+- Revalidar Search Console en 24-72 horas y medir uso/conversion sin PII.

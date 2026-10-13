@@ -8,6 +8,10 @@ describe("RentabilidadBodega", () => {
   it("delivers the full result before offering minimal contact capture", () => {
     render(<MemoryRouter><RentabilidadBodega /></MemoryRouter>);
 
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("navigation")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Partners" }).length).toBeGreaterThan(0);
     expect(screen.getByText(/resultado completo aparece antes/i)).toBeInTheDocument();
     expect(screen.queryByRole("textbox", { name: /email profesional/i })).not.toBeInTheDocument();
 
@@ -50,6 +54,6 @@ describe("RentabilidadBodega", () => {
     expect(screen.getByText("Scenario contribution change")).toBeInTheDocument();
     expect(screen.getByText("Entered by you")).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: /work email/i })).toBeRequired();
-    expect(screen.getByRole("link", { name: /request a demo/i })).toHaveAttribute("href", "/en/demo");
+    expect(screen.getAllByRole("link", { name: /request a demo/i })[0]).toHaveAttribute("href", "/en/demo");
   });
 });

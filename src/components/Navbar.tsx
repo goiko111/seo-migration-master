@@ -26,8 +26,12 @@ interface NavItem {
   columns?: DropdownColumn[];
 }
 
+interface NavbarProps {
+  solid?: boolean;
+}
+
 /* ── Component ─────────────────────────────────── */
-const Navbar = memo(() => {
+const Navbar = memo(({ solid = false }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -174,7 +178,7 @@ const Navbar = memo(() => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
+        scrolled || solid ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between h-16 sm:h-20">

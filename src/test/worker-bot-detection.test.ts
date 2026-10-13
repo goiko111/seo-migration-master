@@ -21,4 +21,11 @@ describe("worker bot detection", () => {
       expect(botRegex.test("Mozilla/5.0 Safari/605.1.15")).toBe(false);
     });
   }
+
+  it("redirects obsolete simulator aliases to their canonical routes", () => {
+    const source = fs.readFileSync(path.resolve("edge-router/winerim-pages-router.js"), "utf8");
+    expect(source).toContain('["/simulador", "/simulador-carta"]');
+    expect(source).toContain('["/en/simulador-carta", "/en/wine-list-simulator"]');
+    expect(source).toContain('"X-Winerim-Router": "legacy-path-redirect"');
+  });
 });

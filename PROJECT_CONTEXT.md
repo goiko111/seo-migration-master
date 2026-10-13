@@ -1273,7 +1273,7 @@
   siguen `200/noindex` en sus origenes preservados.
 - Un GET humano con `Accept-Language: en-US` redirige `302` de `/` a `/en`; los
   bots no heredan esa redireccion.
-- Gates finales: `244/244` tests, build, ESLint focal, sintaxis de ambos Workers,
+- Gates finales: `245/245` tests, build, ESLint focal, sintaxis de ambos Workers,
   `git diff --check` y auditor SEO/i18n `252/252`.
 
 ### Decisiones
@@ -1309,3 +1309,42 @@
 - Vigilar cobertura y metadata durante las siguientes 24-72 horas.
 - Verificar eventos de uso y conversion sin PII y retomar Biblioteca del vino,
   Aprender vino, blog y la deuda tecnica separada.
+
+## Cierre 2026-10-13: integracion visual y Search Console
+
+### Hechos
+
+- Las calculadoras de coste operativo y rentabilidad usan ahora el `Navbar` y el
+  `Footer` globales; el enlace `Partners` forma parte del footer compartido.
+- Frontend general activo: `https://b6740e31.winerim-origin.pages.dev`; facade
+  `winerim-edge-router` activo: `62ad7ebb-a2c3-458f-b2ba-99e612ba6167`.
+- `/simulador` redirige permanentemente a `/simulador-carta` y
+  `/en/simulador-carta` a `/en/wine-list-simulator` para humanos, Googlebot y OAI.
+- Search Console en la propiedad URL-prefix `https://winerim.wine/` confirma
+  `/afiliate` indexada, las dos rutas canonicas del simulador indexadas y los dos
+  aliases antiguos disponibles como redireccion.
+- `sitemap.xml` se reenvio el 13-10-2026 con estado `Correcto`; Google todavia
+  muestra `2.427` paginas descubiertas frente a `2.434` URLs verificadas en vivo.
+- Las calculadoras ES/EN pasaron la prueba de URL publicada y se solicitaron para
+  indexacion selectiva. No hubo solicitud masiva.
+
+### Decisiones
+
+- Mantener Lovable Cloud/Supabase fuera de este cambio: aloja las Edge Functions,
+  pero el ajuste requerido era frontend, router Cloudflare y Search Console.
+- No solicitar indexacion de aliases; se dejan consolidar mediante sus `301`.
+
+### Hipotesis
+
+- La diferencia `2.427`/`2.434` desaparecera cuando Google relea el sitemap
+  reenviado y procese las dos solicitudes prioritarias.
+
+### Contradicciones
+
+- La propiedad de dominio `sc-domain:winerim.wine` no esta accesible con la cuenta
+  actual; la propiedad URL-prefix verificada si esta disponible y permite operar.
+
+### Tareas pendientes
+
+- Revisar en 24-72 horas lectura del sitemap, cobertura y canonical elegida de las
+  dos calculadoras; no repetir solicitudes mientras sigan en cola.

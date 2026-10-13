@@ -1,5 +1,10 @@
 const BOT_REGEX = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|facebot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|applebot|semrushbot|ahrefsbot|mj12bot|chatgpt-user|gptbot|oai-searchbot|claudebot|anthropic-ai|perplexitybot|cohere-ai|bytespider|google-extended|ccbot|petalbot|sogou|exabot/i;
 
+const LEGACY_ROUTE_REDIRECTS = new Map([
+  ["/simulador", "/simulador-carta"],
+  ["/en/simulador-carta", "/en/wine-list-simulator"],
+]);
+
 const PRODUCT_ARCHITECTURE_ROUTES = new Set([
   "/",
   "/en",
@@ -728,6 +733,18 @@ export default {
 
     if (url.hostname !== "winerim.wine") {
       return env.BACKEND.fetch(request);
+    }
+
+    const legacyRouteTarget = LEGACY_ROUTE_REDIRECTS.get(path);
+    if (legacyRouteTarget) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          Location: `https://winerim.wine${legacyRouteTarget}${url.search}`,
+          "Cache-Control": "public, max-age=31536000, immutable",
+          "X-Winerim-Router": "legacy-path-redirect",
+        },
+      });
     }
 
     if (shouldRedirectUsHomeToEnglish(request, path, ua)) {

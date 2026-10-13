@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import SEOHead from "@/components/SEOHead";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import productImage from "@/assets/feature-margins-overview.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ga } from "@/lib/analytics";
@@ -492,7 +494,7 @@ export default function RentabilidadBodega() {
   };
 
   return (
-    <div className="profitability-page">
+    <>
       <SEOHead
         title={t.title}
         description={t.description}
@@ -511,13 +513,10 @@ export default function RentabilidadBodega() {
           offers: { "@type": "Offer", price: "0", priceCurrency: isEnglish ? "USD" : "EUR" },
         }}
       />
-      <a className="profit-skip" href="#diagnostico">{t.skip}</a>
-      <header className="profit-header">
-        <Link to="/" className="profit-brand"><Wine aria-hidden="true" size={26} /> Winerim<span>{t.professional}</span></Link>
-        <Link to={localePath("/herramientas")}>{t.tools} <ArrowRight size={16} aria-hidden="true" /></Link>
-      </header>
-
-      <main>
+      <Navbar solid />
+      <div className="profitability-page">
+        <a className="profit-skip" href="#diagnostico">{t.skip}</a>
+        <main>
         <div className="profit-intro">
           <p className="profit-eyebrow">{t.eyebrow}</p>
           <h1>{t.title}</h1>
@@ -646,9 +645,9 @@ export default function RentabilidadBodega() {
           <div><p className="profit-eyebrow">{t.productEyebrow}</p><h2>{t.productTitle}</h2><p>{t.productText}</p><Link to={localePath("/producto/winerim-core")}>{t.core} <ArrowRight size={17} /></Link></div>
           <figure><img src={productImage} alt={t.imageAlt} width="1324" height="928" loading="lazy" /><figcaption>{t.imageCaption}</figcaption></figure>
         </section>
-      </main>
-
-      <footer className="profit-footer"><span>{t.footer}</span><span>{t.localFooter(diagnosis.modelVersion)}</span></footer>
-    </div>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }

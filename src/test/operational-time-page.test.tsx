@@ -8,6 +8,10 @@ describe("CalculadoraTiempoOperativo", () => {
   it("shows the full weekly, monthly and annual result without contact capture", () => {
     render(<MemoryRouter><CalculadoraTiempoOperativo /></MemoryRouter>);
 
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("navigation")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Partners" }).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "¿Cuánto te cuesta gestionar el vino?" })).toBeInTheDocument();
     expect(screen.getByText(/semana × 52 ÷ 12/i)).toBeInTheDocument();
     expect(screen.queryByRole("textbox", { name: /email/i })).not.toBeInTheDocument();

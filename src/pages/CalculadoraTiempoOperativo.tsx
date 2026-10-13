@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BarChart3,
-  Check,
   Download,
   FileText,
   FlaskConical,
@@ -14,8 +13,9 @@ import {
   RotateCcw,
   ShieldCheck,
   ShoppingCart,
-  Wine,
 } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import productImage from "@/assets/feature-savia-prompt.webp";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -383,7 +383,7 @@ export default function CalculadoraTiempoOperativo() {
   };
 
   return (
-    <div className="profitability-page operational-time-page">
+    <>
       <SEOHead
         title={t.title}
         description={t.description}
@@ -402,13 +402,10 @@ export default function CalculadoraTiempoOperativo() {
           offers: { "@type": "Offer", price: "0", priceCurrency: currency },
         }}
       />
-      <a className="profit-skip" href="#calculadora">{t.skip}</a>
-      <header className="profit-header">
-        <Link to="/" className="profit-brand"><Wine aria-hidden="true" size={26} /> Winerim<span>{t.professional}</span></Link>
-        <Link to={localePath("/herramientas")}>{t.tools} <ArrowRight size={16} aria-hidden="true" /></Link>
-      </header>
-
-      <main>
+      <Navbar solid />
+      <div className="profitability-page operational-time-page">
+        <a className="profit-skip" href="#calculadora">{t.skip}</a>
+        <main>
         <div className="profit-intro time-intro">
           <p className="profit-eyebrow">{t.eyebrow}</p>
           <h1>{t.appName}</h1>
@@ -556,9 +553,9 @@ export default function CalculadoraTiempoOperativo() {
           <div><p className="profit-eyebrow">{t.proofEyebrow}</p><h2>{t.proofTitle}</h2><p>{t.proofText}</p><Link to={localePath("/demo")}>{t.demo} <ArrowRight size={17} /></Link></div>
           <figure><img src={productImage} alt={t.imageAlt} loading="lazy" /><figcaption>{t.imageCaption}</figcaption></figure>
         </section>
-      </main>
-
-      <footer className="profit-footer"><span>{t.footerModel}</span><span><Check size={13} aria-hidden="true" /> {t.footerForm}</span></footer>
-    </div>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
