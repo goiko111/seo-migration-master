@@ -5066,3 +5066,29 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Comprobar la recaptura en Search Console y planificar QA nativa si se amplían
   campañas en mercados no ingleses.
+## 2026-10-13 — Tiempo operativo como primera herramienta
+
+### Hechos
+
+- Las dos calculadoras nuevas estaban presentes en producción, pero rentabilidad
+  aparecía antes que tiempo operativo y el popup podía ocultar el catálogo.
+
+### Decisiones
+
+- Colocar tiempo operativo recuperable primero, a ancho completo y con la indicación
+  `Empieza aquí`.
+- Mantener rentabilidad en segunda posición.
+- No activar el popup automático en hubs de Herramientas.
+
+### Hipótesis
+
+- El tiempo recuperable es una promesa más inmediata y universal para orientar la
+  primera interacción.
+
+### Contradicciones
+
+- Ninguna contradicción funcional nueva detectada.
+
+### Pendiente
+
+- Validar la hipótesis con eventos agregados de uso y conversión.

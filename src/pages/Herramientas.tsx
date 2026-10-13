@@ -29,8 +29,8 @@ const content: Record<string, {
     ctaDesc: "Con Winerim, no necesitas usar estas herramientas una por una. Nuestra plataforma analiza tu carta, optimiza precios, sugiere maridajes y controla la rotación — todo en automático. Ahorra horas de gestión cada semana y aumenta tus ventas de vino.",
     ctaBtn1: "Analizar mi carta gratis", ctaBtn2: "Solicitar demo",
     tools: [
+      { to: "/herramientas/calculadora-tiempo-operativo", title: "Calculadora de tiempo operativo recuperable", desc: "Compara el tiempo manual con tu escenario usando Winerim, tarea por tarea, y estima horas recuperables por semana, mes y año.", tag: "Operaciones" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Diagnóstico de rentabilidad de bodega", desc: "Separa ahorro en compras, margen adicional, horas recuperables y capital inmovilizado con fórmulas y supuestos editables.", tag: "Diagnóstico" },
-      { to: "/herramientas/calculadora-tiempo-operativo", title: "Calculadora de tiempo operativo", desc: "Compara el tiempo manual con tu escenario usando Winerim, tarea por tarea, y estima horas recuperables por semana, mes y año.", tag: "Operaciones" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
@@ -67,8 +67,8 @@ const content: Record<string, {
     ctaDesc: "With Winerim, you don't need to use these tools one by one. Our platform analyzes your list, optimizes prices, suggests pairings and controls rotation — all automatically. Save hours of management every week and increase wine sales.",
     ctaBtn1: "Analyze my list free", ctaBtn2: "Request demo",
     tools: [
+      { to: "/herramientas/calculadora-tiempo-operativo", title: "Recoverable Operational Time Calculator", desc: "Compare current manual work with your Winerim scenario, task by task, and estimate recoverable hours per week, month and year.", tag: "Operations" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Wine Cellar Profitability Diagnostic", desc: "Keep purchasing savings, additional contribution margin, recoverable hours and tied-up capital separate with editable assumptions.", tag: "Diagnostic" },
-      { to: "/herramientas/calculadora-tiempo-operativo", title: "Operational Time Calculator", desc: "Compare current manual work with your Winerim scenario, task by task, and estimate recoverable hours per week, month and year.", tag: "Operations" },
       { to: "/wine-list-analyzer", title: "Wine List Analyzer", desc: "Upload your list and get improvement recommendations. With Winerim, this analysis updates automatically every week.", tag: "Analysis" },
       { to: "/calculadora-margen-vino", title: "Wine Margin Calculator", desc: "Calculate the optimal margin for each reference. As a Winerim client, margins are optimized automatically based on your goals.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
@@ -409,6 +409,7 @@ const goalCopy: Record<string, {
   title: string;
   intro: string;
   action: string;
+  featured: string;
   goals: { title: string; desc: string; to: string }[];
 }> = {
   es: {
@@ -416,9 +417,10 @@ const goalCopy: Record<string, {
     title: "¿Qué quieres mejorar primero?",
     intro: "No necesitas revisar todas las herramientas. Elige el objetivo que más se parece a tu situación y empieza por una prueba concreta.",
     action: "Abrir herramienta",
+    featured: "Empieza aquí",
     goals: [
+      { title: "Recuperar tiempo operativo", desc: "Calcula las horas que puedes recuperar cada semana, mes y año con un escenario editable tarea por tarea.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Diagnosticar la rentabilidad de mi bodega", desc: "Compras, margen, tiempo y capital inmovilizado sin mezclar magnitudes.", to: "/herramientas/diagnostico-rentabilidad-bodega" },
-      { title: "Recuperar tiempo operativo", desc: "Compara tus tareas manuales con un escenario editable usando Winerim.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Entender la salud de mi carta", desc: "Estructura, equilibrio, pricing y oportunidades principales.", to: "/wine-list-analyzer" },
       { title: "Recuperar margen", desc: "Detecta dónde se escapa margen por coste, PVP, copa o stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },
@@ -430,9 +432,10 @@ const goalCopy: Record<string, {
     title: "What do you want to improve first?",
     intro: "You do not need to review every tool. Choose the goal closest to your situation and start with one concrete check.",
     action: "Open tool",
+    featured: "Start here",
     goals: [
+      { title: "Recover operational time", desc: "Calculate the hours you can recover each week, month and year with an editable task-by-task scenario.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Diagnose wine cellar profitability", desc: "Purchasing, margin, time and tied-up capital without combining unlike measures.", to: "/herramientas/diagnostico-rentabilidad-bodega" },
-      { title: "Recover operational time", desc: "Compare manual tasks with an editable scenario using Winerim.", to: "/herramientas/calculadora-tiempo-operativo" },
       { title: "Understand my wine list health", desc: "Structure, balance, pricing and the main opportunities.", to: "/wine-list-analyzer" },
       { title: "Recover margin", desc: "Find margin leakage across cost, price, by-the-glass and stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reduce tied-up stock", desc: "Estimate dormant capital and prioritize references to review.", to: "/herramientas/calculadora-stock-muerto" },
@@ -444,6 +447,7 @@ const goalCopy: Record<string, {
     title: "Cosa vuoi migliorare per prima?",
     intro: "Non devi esaminare tutti gli strumenti. Scegli l'obiettivo più vicino alla tua situazione e inizia da una verifica concreta.",
     action: "Apri strumento",
+    featured: "Inizia qui",
     goals: [
       { title: "Capire la salute della carta", desc: "Struttura, equilibrio, pricing e opportunità principali.", to: "/wine-list-analyzer" },
       { title: "Recuperare margine", desc: "Trova le perdite di margine tra costo, prezzo, calice e stock.", to: "/herramientas/calculadora-fuga-margen" },
@@ -456,6 +460,7 @@ const goalCopy: Record<string, {
     title: "Que voulez-vous améliorer en premier ?",
     intro: "Vous n'avez pas besoin de parcourir tous les outils. Choisissez l'objectif le plus proche de votre situation et commencez par une vérification concrète.",
     action: "Ouvrir l'outil",
+    featured: "Commencez ici",
     goals: [
       { title: "Comprendre la santé de ma carte", desc: "Structure, équilibre, pricing et principales opportunités.", to: "/wine-list-analyzer" },
       { title: "Récupérer de la marge", desc: "Repérez les fuites de marge liées au coût, au prix, au verre ou au stock.", to: "/herramientas/calculadora-fuga-margen" },
@@ -468,6 +473,7 @@ const goalCopy: Record<string, {
     title: "Was möchten Sie zuerst verbessern?",
     intro: "Sie müssen nicht alle Tools prüfen. Wählen Sie das passendste Ziel und starten Sie mit einer konkreten Analyse.",
     action: "Tool öffnen",
+    featured: "Hier starten",
     goals: [
       { title: "Gesundheit der Weinkarte verstehen", desc: "Struktur, Balance, Pricing und wichtigste Chancen.", to: "/wine-list-analyzer" },
       { title: "Marge zurückgewinnen", desc: "Margenverluste bei Kosten, Preis, Glasverkauf und Bestand erkennen.", to: "/herramientas/calculadora-fuga-margen" },
@@ -480,6 +486,7 @@ const goalCopy: Record<string, {
     title: "O que quer melhorar primeiro?",
     intro: "Não precisa de rever todas as ferramentas. Escolha o objetivo mais próximo da sua situação e comece por uma análise concreta.",
     action: "Abrir ferramenta",
+    featured: "Comece aqui",
     goals: [
       { title: "Compreender a saúde da carta", desc: "Estrutura, equilíbrio, pricing e principais oportunidades.", to: "/wine-list-analyzer" },
       { title: "Recuperar margem", desc: "Detete fugas de margem por custo, preço, copo ou stock.", to: "/herramientas/calculadora-fuga-margen" },
@@ -580,16 +587,22 @@ const Herramientas = () => {
             <div className="grid md:grid-cols-2 border-t border-border">
               {goals.goals.map((goal, index) => {
                 const Icon = toolIconByPath[goal.to] || Search;
+                const isFeatured = goal.to === "/herramientas/calculadora-tiempo-operativo";
                 return (
                   <Link
                     key={goal.to}
                     to={localePath(goal.to)}
-                    className={`group flex min-h-40 gap-5 border-b border-border p-6 transition-colors hover:bg-wine/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${index % 2 === 0 ? "md:border-r" : ""}`}
+                    className={`group flex min-h-40 gap-5 border-b border-border p-6 transition-colors hover:bg-wine/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${isFeatured ? "md:col-span-2 bg-wine/[0.035]" : index % 2 === 1 ? "md:border-r" : ""}`}
                   >
                     <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-wine/25 text-wine">
                       <Icon size={19} />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col">
+                      {isFeatured && (
+                        <span className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-wine">
+                          {goals.featured}
+                        </span>
+                      )}
                       <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors">{goal.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-4">{goal.desc}</p>
                       <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">

@@ -151,8 +151,9 @@ const MAX_BYTES = 10 * 1024 * 1024;
 
 /**
  * Path-aware popup. Shows on:
- *  - localized tools/resources hubs        → 8s
+ *  - localized resources hubs              → 8s
  *  - localized tool subpages               → 15s (warm lead)
+ * The tools catalogue stays unobstructed so visitors can choose a tool first.
  * Honors per-session dismissal.
  */
 const ToolsLeadPopup = () => {
@@ -171,8 +172,8 @@ const ToolsLeadPopup = () => {
     const stripped = pathname.replace(/^\/(en|it|fr|de|pt)(?=\/|$)/, "") || "/";
     // Tool subpages: /herramientas/<something>, /tools/<something>, etc. → 15s
     if (/^\/(herramientas|tools|outils|strumenti|ferramentas|werkzeuge)\/.+/.test(stripped)) return { active: true, delay: 15000 };
-    // Hub pages
-    if (/^\/(herramientas|tools|outils|strumenti|ferramentas|werkzeuge|recursos|resources|risorse|ressources|ressourcen)$/.test(stripped)) {
+    // Resource hubs
+    if (/^\/(recursos|resources|risorse|ressources|ressourcen)$/.test(stripped)) {
       return { active: true, delay: 8000 };
     }
     return { active: false, delay: 0 };

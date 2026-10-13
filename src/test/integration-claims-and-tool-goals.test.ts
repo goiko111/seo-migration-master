@@ -82,12 +82,21 @@ describe("integration claims and guided tool entry", () => {
 
   it("offers a problem-led route into the existing tools in Spanish and English", () => {
     const tools = readFileSync("src/pages/Herramientas.tsx", "utf8");
+    const popup = readFileSync("src/components/ToolsLeadPopup.tsx", "utf8");
 
     expect(tools).toContain("¿Qué quieres mejorar primero?");
     expect(tools).toContain("What do you want to improve first?");
+    expect(tools.indexOf("Calculadora de tiempo operativo recuperable")).toBeLessThan(
+      tools.indexOf("Diagnóstico de rentabilidad de bodega"),
+    );
+    expect(tools.indexOf("Recoverable Operational Time Calculator")).toBeLessThan(
+      tools.indexOf("Wine Cellar Profitability Diagnostic"),
+    );
+    expect(tools).toContain('featured: "Empieza aquí"');
     expect(tools).toContain('/herramientas/calculadora-fuga-margen');
     expect(tools).toContain('/herramientas/calculadora-stock-muerto');
     expect(tools).toContain('/herramientas/auditor-carta-multilocal');
+    expect(popup).not.toContain("herramientas|tools|outils|strumenti|ferramentas|werkzeuge|recursos");
   });
 
   it("does not load the third-party chat before explicit cookie consent", () => {

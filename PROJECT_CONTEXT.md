@@ -1381,3 +1381,33 @@
 
 - Revalidar Search Console en 24-72 horas y realizar QA lingüística nativa por
   mercado antes de nuevas campañas no inglesas.
+## Actualización 2026-10-13: prioridad de herramientas
+
+### Hechos
+
+- `/herramientas` presenta ahora la calculadora de tiempo operativo recuperable como
+  primera recomendación y primera herramienta del catálogo.
+- El diagnóstico de rentabilidad queda inmediatamente después.
+- El popup de captación ya no se abre automáticamente en el hub de Herramientas;
+  permanece activo en fichas individuales y hubs de Recursos.
+- Producción usa Pages `https://fbcd47a9.winerim-origin.pages.dev` y facade
+  `57457ebb-877b-4163-b172-0fb7b14bf48b`.
+
+### Decisiones
+
+- La recuperación de tiempo es la entrada principal al catálogo por ser la propuesta
+  más fácil de comprender antes de entrar en diagnósticos financieros más amplios.
+
+### Hipótesis
+
+- Una primera recomendación explícita reducirá la indecisión en un catálogo de veinte
+  herramientas.
+
+### Contradicciones
+
+- Las calculadoras nuevas siguen completas solo en ES/EN; no se presentan como
+  herramientas localizadas en IT/FR/DE/PT.
+
+### Tareas pendientes
+
+- Medir clics a la primera herramienta y finalización del cálculo sin PII.

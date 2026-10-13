@@ -5655,3 +5655,28 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Encargar una pasada nativa por idioma antes de campañas IT/FR/DE/PT.
 4. Resolver en un lote separado React Router v7, la `key` de Precios,
    `caniuse-lite` y code splitting.
+## Actualización 2026-10-13: siguiente paso tras reordenar Herramientas
+
+### Hechos
+
+- Tiempo operativo recuperable ya es la primera recomendación y primera tarjeta de
+  `/herramientas` en producción.
+- Rentabilidad queda segunda y el catálogo no se tapa con el popup automático.
+
+### Decisiones
+
+- No realizar más cambios de jerarquía sin datos de uso.
+
+### Hipótesis
+
+- La prioridad visible debe aumentar el inicio de la calculadora.
+
+### Contradicciones / límites
+
+- IT/FR/DE/PT todavía no disponen de versión completa de estas dos calculadoras.
+
+### Siguiente bloque verificable
+
+1. Medir entrada, carga de ejemplo y finalización de la calculadora sin PII.
+2. Revisar Search Console tras el periodo de recrawl ya abierto.
+3. Traducir las calculadoras a IT/FR/DE/PT antes de destacarlas en esos mercados.

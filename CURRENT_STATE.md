@@ -7591,3 +7591,33 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Search Console en 24-72 horas y seguimiento de analítica/conversión sin PII.
+## Actualización 2026-10-13: Herramientas reordenadas
+
+### Hechos confirmados
+
+- La calculadora de tiempo operativo recuperable ocupa la primera posición destacada
+  en `/herramientas`, seguida del diagnóstico de rentabilidad.
+- La tarjeta prioritaria abre correctamente
+  `/herramientas/calculadora-tiempo-operativo` en producción.
+- El catálogo no muestra el popup automático tras su espera anterior de ocho segundos.
+- Gates verdes: `252/252` tests, TypeScript, build y `git diff --check`.
+- Release activa: Pages `fbcd47a9`; facade
+  `57457ebb-877b-4163-b172-0fb7b14bf48b`.
+
+### Decisiones
+
+- Mantener el popup en herramientas individuales, pero no en la página de elección.
+
+### Hipótesis
+
+- La nueva jerarquía hará más visible el valor operativo de Winerim y aumentará el
+  inicio de cálculos.
+
+### Contradicciones / riesgos
+
+- Persisten los avisos no bloqueantes ya documentados de React Router, `key` en
+  Precios, `caniuse-lite` y chunks grandes.
+
+### Tareas pendientes
+
+- Observar eventos de entrada y finalización de la calculadora sin enviar PII.
