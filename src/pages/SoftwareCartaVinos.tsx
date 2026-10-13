@@ -713,7 +713,7 @@ const SoftwareCartaVinos = () => {
                 <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] mb-6">
                   {t.h1pre}{" "}
                   <span className="text-gradient-wine italic">{t.h1accent}</span>{" "}
-                  {lang === "es" ? "en restaurantes" : lang === "en" ? "in restaurants" : lang === "it" ? "nei ristoranti" : "pour restaurants"}
+                  {({ es: "en restaurantes", en: "in restaurants", it: "nei ristoranti", fr: "pour restaurants", de: "für Restaurants", pt: "em restaurantes" } as const)[lang] || "en restaurantes"}
                 </h1>
 
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl">
@@ -926,7 +926,7 @@ const SoftwareCartaVinos = () => {
                   <thead>
                     <tr className="border-b border-border">
                       <th className="text-left py-4 px-3 font-semibold text-foreground">
-                        {lang === "es" ? "Característica" : lang === "en" ? "Feature" : lang === "it" ? "Caratteristica" : "Caractéristique"}
+                        {({ es: "Característica", en: "Feature", it: "Caratteristica", fr: "Caractéristique", de: "Funktion", pt: "Funcionalidade" } as const)[lang] || "Característica"}
                       </th>
                       <th className="text-center py-4 px-3 font-semibold text-muted-foreground">
                         <FileText size={16} className="mx-auto mb-1" />{t.compHeaders.paper}

@@ -428,7 +428,7 @@ const VenderMasVino = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-wine-dark/10" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
-            <Breadcrumbs items={[{ label: lang === "es" ? "Guías" : lang === "it" ? "Guide" : "Guides", href: localePath("/guias-y-recursos") }, { label: t.breadcrumbLabel }]} />
+            <Breadcrumbs items={[{ label: ({ es: "Guías", en: "Guides", it: "Guide", fr: "Guides", de: "Ratgeber", pt: "Guias" } as const)[lang] || "Guías", href: localePath("/guias-y-recursos") }, { label: t.breadcrumbLabel }]} />
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
               <Wine size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.badge}</span>

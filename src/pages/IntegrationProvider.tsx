@@ -304,7 +304,14 @@ const IntegrationProvider = () => {
   const t = useMemo(() => getI18n(providerCopy(provider), lang), [provider, lang]);
   const providerName = provider === "agora" ? "Ágora" : "REVO XEF";
   const canonicalPath = integrationProviderPath(providerSlug, lang);
-  const seoSuffix = lang === "es" ? "TPV y datos operativos" : "POS and operational data";
+  const seoSuffix = ({
+    es: "TPV y datos operativos",
+    en: "POS and operational data",
+    it: "POS e dati operativi",
+    fr: "Caisse et données opérationnelles",
+    de: "Kassensystem und Betriebsdaten",
+    pt: "POS e dados operacionais",
+  } as const)[lang] || "TPV y datos operativos";
   const localizeRelatedPath = (path: string) => {
     if (path === "/integraciones/agora") return integrationProviderPath("agora", lang);
     if (path === "/integraciones/revo-xef") return integrationProviderPath("revo-xef", lang);

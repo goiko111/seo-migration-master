@@ -181,7 +181,9 @@ const LegalDocumentPage = ({ kind }: { kind: LegalKind }) => {
               <div className="grid gap-12 lg:grid-cols-[250px_minmax(0,1fr)]">
                 <aside className="hidden lg:block">
                   <div className="sticky top-28 border-l border-border pl-5">
-                    <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{lang === "es" ? "Contenido" : "Contents"}</p>
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                      {({ es: "Contenido", en: "Contents", it: "Contenuto", fr: "Sommaire", de: "Inhalt", pt: "Conteúdo" } as const)[lang]}
+                    </p>
                     <nav aria-label="Legal document sections" className="max-h-[68vh] space-y-2 overflow-auto pr-3">
                       {document.sections.map((section) => <a href={`#${slugify(section.heading)}`} className="block text-xs leading-relaxed text-muted-foreground transition-colors hover:text-foreground" key={section.heading}>{section.heading}</a>)}
                     </nav>

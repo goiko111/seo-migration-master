@@ -5626,3 +5626,32 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Validar eventos de uso y conversion sin PII.
 4. Retomar Biblioteca del vino, Aprender vino y blog en lotes editoriales separados.
 5. Resolver deuda tecnica no bloqueante en un lote independiente.
+## Actualización 2026-10-13: siguiente bloque tras herramientas/i18n
+
+### Hechos
+
+- El 404 de `/precios-modulos-integraciones` está resuelto.
+- Las `2.434` URLs del sitemap responden `200`.
+- Herramientas y calculadoras usan la release Pages actual y los gates están verdes.
+
+### Decisiones
+
+- No realizar más cambios de infraestructura en este lote.
+
+### Hipótesis
+
+- Search Console reflejará el arreglo en 24-72 horas.
+
+### Contradicciones / límites
+
+- La calidad lingüística nativa del corpus completo no queda certificada por los
+  gates técnicos.
+
+### Tareas pendientes, en orden
+
+1. Revalidar `/precios-modulos-integraciones` y cobertura del sitemap en Search
+   Console dentro de 24-72 horas.
+2. Revisar métricas de uso y conversión de las calculadoras, sin PII.
+3. Encargar una pasada nativa por idioma antes de campañas IT/FR/DE/PT.
+4. Resolver en un lote separado React Router v7, la `key` de Precios,
+   `caniuse-lite` y code splitting.

@@ -1348,3 +1348,36 @@
 
 - Revisar en 24-72 horas lectura del sitemap, cobertura y canonical elegida de las
   dos calculadoras; no repetir solicitudes mientras sigan en cola.
+## Actualización 2026-10-13: herramientas, URLs e i18n visible
+
+### Hechos
+
+- La familia pública de Herramientas usa la release Pages
+  `https://169386d2.winerim-origin.pages.dev`; el router activo es
+  `f7237ef2-4e6f-4286-810e-e8d2bae1d816`.
+- `/precios-modulos-integraciones` vuelve a responder `200` para humano, Googlebot
+  y OAI, con canonical propio y un solo H1.
+- El sitemap productivo contiene `2.434` URLs y el barrido completo devuelve cero
+  fallos HTTP.
+- Las calculadoras nuevas comparten la estética oscura de Winerim y la calculadora
+  de fuga de margen ya muestra UI real en ES/EN/IT/FR/DE/PT.
+
+### Decisiones
+
+- Se mantiene el despliegue directo Cloudflare y no se toca Lovable Cloud/Supabase.
+- El `100 %` SEO/i18n (`252/252`) se interpreta como cobertura estructural; no como
+  certificación lingüística nativa de todo el corpus.
+
+### Hipótesis
+
+- Search Console corregirá el `404` histórico al recapturar la URL.
+
+### Contradicciones
+
+- El origen antiguo de Lovable seguía sirviendo una calculadora desactualizada aun
+  después de publicar Pages; se resolvió mediante routing selectivo de Herramientas.
+
+### Tareas pendientes
+
+- Revalidar Search Console en 24-72 horas y realizar QA lingüística nativa por
+  mercado antes de nuevas campañas no inglesas.

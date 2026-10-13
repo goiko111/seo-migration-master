@@ -519,6 +519,38 @@ const ucIcons = [Wine, Utensils, Globe];
 const RestauranteSinSumiller = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
+  const navigationCopy = ({
+    es: {
+      title: "Siguientes pasos",
+      steps: [["Analiza tu carta de vinos", "Diagnóstico gratuito con recomendaciones accionables."], ["Guía: usar Winerim sin sumiller", "Paso a paso para sacar partido sin experto en sala."], ["Guía: formar al equipo de sala", "Cómo tu equipo puede recomendar vino con criterio."], ["Planes y precios", "Desde el plan Starter para restaurantes independientes."]],
+      links: ["Software de carta de vinos inteligente", "Inteligencia dinámica: IA táctica", "Aumentar ticket medio con datos", "Estrategia de vino por copa", "Casos de éxito", "Todas las funcionalidades", "Winerim para hoteles", "Compara Winerim con alternativas"],
+    },
+    en: {
+      title: "Next steps",
+      steps: [["Analyze your wine list", "Free diagnosis with actionable recommendations."], ["Guide: use Winerim without a sommelier", "A practical path to get value without an expert on the floor."], ["Guide: train floor staff", "Help your team recommend wine with confidence."], ["Plans and pricing", "Starting with the Starter plan for independent restaurants."]],
+      links: ["Smart wine list software", "Dynamic intelligence", "Increase average ticket with data", "By-the-glass strategy", "Case studies", "All features", "Winerim for hotels", "Compare Winerim with alternatives"],
+    },
+    it: {
+      title: "Prossimi passi",
+      steps: [["Analizza la carta dei vini", "Diagnosi gratuita con raccomandazioni operative."], ["Guida: usare Winerim senza sommelier", "Un percorso pratico per lavorare senza un esperto in sala."], ["Guida: formare il personale di sala", "Aiuta il team a consigliare il vino con competenza."], ["Piani e prezzi", "A partire dal piano Starter per ristoranti indipendenti."]],
+      links: ["Software intelligente per la carta dei vini", "Intelligenza dinamica", "Aumentare lo scontrino medio con i dati", "Strategia del vino al calice", "Casi di successo", "Tutte le funzionalità", "Winerim per hotel", "Confronta Winerim con le alternative"],
+    },
+    fr: {
+      title: "Prochaines étapes",
+      steps: [["Analysez votre carte des vins", "Diagnostic gratuit avec recommandations concrètes."], ["Guide : utiliser Winerim sans sommelier", "Une méthode pratique sans expert permanent en salle."], ["Guide : former l'équipe de salle", "Aidez votre équipe à recommander le vin avec justesse."], ["Offres et tarifs", "À partir de l'offre Starter pour restaurants indépendants."]],
+      links: ["Logiciel intelligent de carte des vins", "Intelligence dynamique", "Augmenter le ticket moyen grâce aux données", "Stratégie du vin au verre", "Études de cas", "Toutes les fonctionnalités", "Winerim pour les hôtels", "Comparer Winerim aux alternatives"],
+    },
+    de: {
+      title: "Nächste Schritte",
+      steps: [["Weinkarte analysieren", "Kostenlose Diagnose mit umsetzbaren Empfehlungen."], ["Ratgeber: Winerim ohne Sommelier nutzen", "Ein praktischer Weg ohne festen Experten im Service."], ["Ratgeber: Serviceteam schulen", "Helfen Sie Ihrem Team, Wein sicher zu empfehlen."], ["Pläne und Preise", "Ab dem Starter-Plan für unabhängige Restaurants."]],
+      links: ["Intelligente Weinkarten-Software", "Dynamische Intelligenz", "Durchschnittsbon mit Daten steigern", "Strategie für offenen Ausschank", "Fallstudien", "Alle Funktionen", "Winerim für Hotels", "Winerim mit Alternativen vergleichen"],
+    },
+    pt: {
+      title: "Próximos passos",
+      steps: [["Analise a sua carta de vinhos", "Diagnóstico gratuito com recomendações acionáveis."], ["Guia: usar o Winerim sem escanção", "Um percurso prático sem especialista permanente na sala."], ["Guia: formar a equipa de sala", "Ajude a equipa a recomendar vinho com confiança."], ["Planos e preços", "A partir do plano Starter para restaurantes independentes."]],
+      links: ["Software inteligente de carta de vinhos", "Inteligência dinâmica", "Aumentar o ticket médio com dados", "Estratégia de vinho a copo", "Casos de sucesso", "Todas as funcionalidades", "Winerim para hotéis", "Comparar o Winerim com alternativas"],
+    },
+  } as const)[lang];
 
   useEffect(() => {
     const ld = document.createElement("script");
@@ -840,24 +872,24 @@ const RestauranteSinSumiller = () => {
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={lang === "es" ? "Siguientes pasos" : "Next steps"}
+        title={navigationCopy.title}
         steps={[
-          { to: "/analisis-carta", label: lang === "es" ? "Analiza tu carta de vinos" : "Analyze your wine list", description: lang === "es" ? "Diagnóstico gratuito con recomendaciones accionables." : "Free diagnosis with actionable recommendations.", type: "tool" },
-          { to: "/guias/como-usar-winerim-sin-sumiller", label: lang === "es" ? "Guía: usar Winerim sin sumiller" : "Guide: use Winerim without a sommelier", description: lang === "es" ? "Paso a paso para sacar partido sin experto en sala." : "Step by step to get value without an expert.", type: "guide" },
-          { to: "/guias/como-formar-equipo-sala-para-vender-vino", label: lang === "es" ? "Guía: formar al equipo de sala" : "Guide: train floor staff", description: lang === "es" ? "Cómo tu equipo puede recomendar vino con criterio." : "How your team can recommend wine with criteria.", type: "guide" },
-          { to: "/precios", label: lang === "es" ? "Planes y precios" : "Plans and pricing", description: lang === "es" ? "Desde el plan Starter para restaurantes independientes." : "From the Starter plan for independent restaurants.", type: "solution" },
+          { to: localePath("/analisis-carta"), label: navigationCopy.steps[0][0], description: navigationCopy.steps[0][1], type: "tool" },
+          { to: localePath("/guias/como-usar-winerim-sin-sumiller"), label: navigationCopy.steps[1][0], description: navigationCopy.steps[1][1], type: "guide" },
+          { to: localePath("/guias/como-formar-equipo-sala-para-vender-vino"), label: navigationCopy.steps[2][0], description: navigationCopy.steps[2][1], type: "guide" },
+          { to: localePath("/precios"), label: navigationCopy.steps[3][0], description: navigationCopy.steps[3][1], type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos inteligente" : "Smart wine list software", type: "solution" },
-        { to: localePath("/producto/inteligencia-dinamica"), label: lang === "es" ? "Inteligencia dinámica: IA táctica" : "Dynamic intelligence", type: "solution" },
-        { to: localePath("/soluciones/aumentar-ticket-medio-restaurante"), label: lang === "es" ? "Aumentar ticket medio con datos" : "Increase average ticket", type: "guide" },
-        { to: localePath("/vino-por-copa"), label: lang === "es" ? "Estrategia de vino por copa" : "By-the-glass strategy", type: "guide" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : "Case studies", type: "solution" },
-        { to: localePath("/funcionalidades"), label: lang === "es" ? "Todas las funcionalidades" : "All features", type: "solution" },
-        { to: localePath("/soluciones/hoteles"), label: lang === "es" ? "Winerim para hoteles" : "Winerim for hotels", type: "solution" },
-        { to: localePath("/comparativas"), label: lang === "es" ? "Compara Winerim con alternativas" : "Compare Winerim", type: "solution" },
+        { to: localePath("/software-carta-de-vinos"), label: navigationCopy.links[0], type: "solution" },
+        { to: localePath("/producto/inteligencia-dinamica"), label: navigationCopy.links[1], type: "solution" },
+        { to: localePath("/soluciones/aumentar-ticket-medio-restaurante"), label: navigationCopy.links[2], type: "guide" },
+        { to: localePath("/vino-por-copa"), label: navigationCopy.links[3], type: "guide" },
+        { to: localePath("/casos-exito"), label: navigationCopy.links[4], type: "solution" },
+        { to: localePath("/funcionalidades"), label: navigationCopy.links[5], type: "solution" },
+        { to: localePath("/soluciones/hoteles"), label: navigationCopy.links[6], type: "solution" },
+        { to: localePath("/comparativas"), label: navigationCopy.links[7], type: "solution" },
       ]} />
 
       <Footer />

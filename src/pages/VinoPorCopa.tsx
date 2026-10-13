@@ -511,7 +511,7 @@ const VinoPorCopa = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--wine)/0.08),transparent_60%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-32 pb-20">
           <div className="max-w-3xl">
-            <Breadcrumbs items={[{ label: lang === "es" ? "Guías" : lang === "it" ? "Guide" : "Guides", href: localePath("/guias-y-recursos") }, { label: t.breadcrumbLabel }]} />
+            <Breadcrumbs items={[{ label: ({ es: "Guías", en: "Guides", it: "Guide", fr: "Guides", de: "Ratgeber", pt: "Guias" } as const)[lang] || "Guías", href: localePath("/guias-y-recursos") }, { label: t.breadcrumbLabel }]} />
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-wine/30 bg-wine/5 mb-8">
               <GlassWater size={14} className="text-wine" />
               <span className="text-xs font-semibold tracking-widest uppercase text-wine-light">{t.badge}</span>

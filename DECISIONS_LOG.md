@@ -5034,3 +5034,35 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Comprobar cobertura/canonical en 24-72 horas y continuar medicion, contenido y
   deuda tecnica como lotes independientes.
+## 2026-10-13 — Herramientas, 404 e i18n visible
+
+### Hechos
+
+- Un crawl de producción detectó un solo `404` entre `2.434` URLs:
+  `/precios-modulos-integraciones`.
+- La calculadora de margen mezclaba SEO localizado con UI española en EN/IT/FR.
+
+### Decisiones
+
+- Servir `/precios-modulos-integraciones` desde React/Pages y generar metadata y
+  contenido bot coherentes en el facade.
+- Servir toda la familia localizada de Herramientas desde la release versionada de
+  Pages para evitar divergencia con el origen antiguo.
+- Unificar las calculadoras nuevas con los tokens visuales de Winerim.
+- Corregir fallbacks visibles de seis idiomas sin afirmar que una auditoría técnica
+  equivale a traducción editorial nativa.
+- No tocar Lovable Cloud/Supabase ni gastar créditos.
+
+### Hipótesis
+
+- El estado de Search Console convergerá tras la siguiente recaptura.
+
+### Contradicciones
+
+- Pages contenía el fix pero producción seguía sirviendo el origen antiguo en la
+  calculadora de margen hasta añadir routing explícito.
+
+### Tareas pendientes
+
+- Comprobar la recaptura en Search Console y planificar QA nativa si se amplían
+  campañas en mercados no ingleses.

@@ -18,12 +18,18 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const euroFormatters = {
   es: new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  en: new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  it: new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
+  fr: new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
   de: new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
   pt: new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }),
 };
 
 const percentFormatters = {
   es: new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 1 }),
+  en: new Intl.NumberFormat("en-IE", { style: "percent", maximumFractionDigits: 1 }),
+  it: new Intl.NumberFormat("it-IT", { style: "percent", maximumFractionDigits: 1 }),
+  fr: new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 1 }),
   de: new Intl.NumberFormat("de-DE", { style: "percent", maximumFractionDigits: 1 }),
   pt: new Intl.NumberFormat("pt-PT", { style: "percent", maximumFractionDigits: 1 }),
 };
@@ -152,6 +158,105 @@ const uiCopy = {
       checklist: "Checklist albaranes y facturas",
       supply: "Winerim Supply",
     },
+  },
+  en: {
+    eyebrow: "Demo · Margin and cost",
+    intro: "Calculate how much margin leaks when purchase cost rises, the list price is not updated, by-the-glass revenue falls short or stock ties up capital.",
+    marginDataTitle: "Margin data",
+    marginDataText: "Use a real wine reference or an approximate case.",
+    fields: { wine: "Reference", cost: "Purchase cost (€)", pvp: "List price (€)", target: "Target margin (%)", sales: "Bottles sold/month", stock: "Current stock", glass: "Price per glass (€)", glasses: "Glasses per bottle" },
+    calculate: "Calculate leakage",
+    resultFor: "Result for",
+    unnamedReference: "Unnamed reference",
+    leakLabel: "Leakage",
+    severity: { alta: "high", media: "medium", baja: "low" },
+    metrics: {
+      annualLeak: "Estimated annual leakage", recommendedPvp: "Recommended list price", currentMargin: "Current margin", glassMargin: "By-the-glass margin",
+      monthly: (value: string) => `${value} per month`, target: (value: string) => `${value} target`, perBottle: (value: string) => `${value} per bottle`, perServedBottle: (value: string) => `${value} per bottle served`,
+    },
+    recommendedAction: "Recommended action",
+    recommendations: { alta: "Review price and purchasing before reordering", media: "Adjust price, by-the-glass offer or distributor terms", baja: "Maintain and monitor cost" },
+    capitalText: (value: string) => `Estimated tied-up capital: ${value}. If the actual cost has changed and the list price has not, leakage accumulates every month.`,
+    miniStats: { unitLeak: "Leakage per unit", cost: "Cost", bottlesMonth: "Bottles/month" },
+    cards: [
+      { icon: DollarSign, title: "Actual cost", text: "If the cost changes on a delivery note or invoice and the list price is not updated, margin erodes unnoticed." },
+      { icon: Wine, title: "By the glass", text: "A wine can sell well by the glass and still lose profitability if bottle cost, waste and service are not recovered." },
+      { icon: ShieldAlert, title: "Stock", text: "A reference with a sound margin can still be a poor purchase if stock builds up and rotation slows." },
+    ],
+    cta: { eyebrow: "Live margin control", title: "Winerim spots leakage before it becomes a poor purchasing decision.", text: "By connecting the wine list, costs, POS, stock and distributors, Winerim can flag which references to review, stop reordering or move by the glass.", diagnostic: "Download leakage diagnostic", simulator: "Try the Margins signal" },
+    faqs: [
+      { q: "What is margin leakage?", a: "Margin lost because cost, list price, by-the-glass sales or purchasing are not aligned with the wine list's economic target." },
+      { q: "Is raising the list price always the answer?", a: "No. Renegotiating with the distributor, changing format, moving the wine by the glass, protecting it or not reordering may be more appropriate." },
+      { q: "Does this calculator replace a real analysis?", a: "No. It is a quick demo. Winerim uses connected data and continuous signals to detect leakage more accurately." },
+    ],
+    internalLinksTitle: "Related tools",
+    internalLinks: { marginSignal: "Margins signal simulator", pareto: "Pareto 80/20 simulator", checklist: "Delivery note and invoice checklist", supply: "Winerim Supply" },
+  },
+  it: {
+    eyebrow: "Demo · Margine e costo",
+    intro: "Calcola quanto margine si perde quando il costo aumenta, il prezzo in carta non viene aggiornato, il vino al calice non recupera abbastanza o lo stock immobilizza capitale.",
+    marginDataTitle: "Dati di margine",
+    marginDataText: "Puoi usare una referenza reale o un caso approssimativo.",
+    fields: { wine: "Referenza", cost: "Costo di acquisto (€)", pvp: "Prezzo in carta (€)", target: "Margine obiettivo (%)", sales: "Bottiglie vendute/mese", stock: "Stock attuale", glass: "Prezzo al calice (€)", glasses: "Calici per bottiglia" },
+    calculate: "Calcola la perdita",
+    resultFor: "Risultato per",
+    unnamedReference: "Referenza senza nome",
+    leakLabel: "Perdita",
+    severity: { alta: "alta", media: "media", baja: "bassa" },
+    metrics: {
+      annualLeak: "Perdita annua stimata", recommendedPvp: "Prezzo consigliato", currentMargin: "Margine attuale", glassMargin: "Margine al calice",
+      monthly: (value: string) => `${value} al mese`, target: (value: string) => `${value} obiettivo`, perBottle: (value: string) => `${value} per bottiglia`, perServedBottle: (value: string) => `${value} per bottiglia servita`,
+    },
+    recommendedAction: "Azione consigliata",
+    recommendations: { alta: "Rivedere prezzo e acquisto prima del riordino", media: "Adeguare prezzo, proposta al calice o condizioni del distributore", baja: "Mantenere e monitorare il costo" },
+    capitalText: (value: string) => `Capitale immobilizzato stimato: ${value}. Se il costo reale cambia e il prezzo in carta no, la perdita si accumula ogni mese.`,
+    miniStats: { unitLeak: "Perdita unitaria", cost: "Costo", bottlesMonth: "Bottiglie/mese" },
+    cards: [
+      { icon: DollarSign, title: "Costo reale", text: "Se il costo cambia in bolla o fattura e il prezzo non viene aggiornato, il margine si erode senza avviso." },
+      { icon: Wine, title: "Calice", text: "Un vino può vendere molto al calice e perdere redditività se non recupera bottiglia, spreco e servizio." },
+      { icon: ShieldAlert, title: "Stock", text: "Una referenza con un margine corretto può essere un cattivo acquisto se accumula stock e rallenta." },
+    ],
+    cta: { eyebrow: "Margine sempre aggiornato", title: "Winerim individua le perdite prima che diventino acquisti sbagliati.", text: "Collegando carta, costi, POS, stock e distributori, Winerim indica quali referenze rivedere, non riordinare o proporre al calice.", diagnostic: "Scarica la diagnosi", simulator: "Prova il segnale Margini" },
+    faqs: [
+      { q: "Che cos'è una perdita di margine?", a: "È il margine perso perché costo, prezzo, vendita al calice o acquisto non sono allineati all'obiettivo economico della carta." },
+      { q: "Aumentare il prezzo è sempre la soluzione?", a: "No. Può essere meglio rinegoziare, cambiare formato, vendere al calice, proteggere il vino o non riordinarlo." },
+      { q: "La calcolatrice sostituisce un'analisi reale?", a: "No. È una demo rapida. Winerim usa dati collegati e segnali continui per individuare le perdite con maggiore precisione." },
+    ],
+    internalLinksTitle: "Strumenti correlati",
+    internalLinks: { marginSignal: "Simulatore del segnale Margini", pareto: "Simulatore Pareto 80/20", checklist: "Checklist bolle e fatture", supply: "Winerim Supply" },
+  },
+  fr: {
+    eyebrow: "Démo · Marge et coût",
+    intro: "Calculez la marge perdue lorsque le coût augmente, que le prix de carte n'est pas actualisé, que le vin au verre ne couvre pas assez ou que le stock immobilise du capital.",
+    marginDataTitle: "Données de marge",
+    marginDataText: "Utilisez une référence réelle ou un cas approximatif.",
+    fields: { wine: "Référence", cost: "Coût d'achat (€)", pvp: "Prix de carte (€)", target: "Marge cible (%)", sales: "Bouteilles vendues/mois", stock: "Stock actuel", glass: "Prix au verre (€)", glasses: "Verres par bouteille" },
+    calculate: "Calculer la fuite",
+    resultFor: "Résultat pour",
+    unnamedReference: "Référence sans nom",
+    leakLabel: "Fuite",
+    severity: { alta: "élevée", media: "moyenne", baja: "faible" },
+    metrics: {
+      annualLeak: "Fuite annuelle estimée", recommendedPvp: "Prix conseillé", currentMargin: "Marge actuelle", glassMargin: "Marge au verre",
+      monthly: (value: string) => `${value} par mois`, target: (value: string) => `${value} cible`, perBottle: (value: string) => `${value} par bouteille`, perServedBottle: (value: string) => `${value} par bouteille servie`,
+    },
+    recommendedAction: "Action recommandée",
+    recommendations: { alta: "Revoir le prix et l'achat avant de recommander", media: "Ajuster le prix, l'offre au verre ou les conditions du distributeur", baja: "Maintenir et surveiller le coût" },
+    capitalText: (value: string) => `Capital immobilisé estimé : ${value}. Si le coût réel change sans mise à jour du prix, la fuite s'accumule chaque mois.`,
+    miniStats: { unitLeak: "Fuite unitaire", cost: "Coût", bottlesMonth: "Bouteilles/mois" },
+    cards: [
+      { icon: DollarSign, title: "Coût réel", text: "Si le coût change sur un bon de livraison ou une facture sans mise à jour du prix, la marge s'érode discrètement." },
+      { icon: Wine, title: "Au verre", text: "Un vin peut bien se vendre au verre et perdre en rentabilité si la bouteille, la perte et le service ne sont pas couverts." },
+      { icon: ShieldAlert, title: "Stock", text: "Une référence à la marge correcte peut rester un mauvais achat si le stock s'accumule et la rotation ralentit." },
+    ],
+    cta: { eyebrow: "Marge toujours à jour", title: "Winerim repère les fuites avant qu'elles ne deviennent de mauvais achats.", text: "En reliant carte, coûts, caisse, stock et distributeurs, Winerim indique les références à revoir, à ne pas recommander ou à proposer au verre.", diagnostic: "Télécharger le diagnostic", simulator: "Tester le signal Marges" },
+    faqs: [
+      { q: "Qu'est-ce qu'une fuite de marge ?", a: "Une marge perdue parce que le coût, le prix, la vente au verre ou l'achat ne sont pas alignés sur l'objectif économique de la carte." },
+      { q: "Augmenter le prix est-il toujours la solution ?", a: "Non. Il peut être préférable de renégocier, changer de format, proposer au verre, protéger le vin ou arrêter le réassort." },
+      { q: "Le calculateur remplace-t-il une analyse réelle ?", a: "Non. C'est une démo rapide. Winerim utilise des données connectées et des signaux continus pour détecter les fuites avec plus de précision." },
+    ],
+    internalLinksTitle: "Outils associés",
+    internalLinks: { marginSignal: "Simulateur du signal Marges", pareto: "Simulateur Pareto 80/20", checklist: "Checklist bons de livraison et factures", supply: "Winerim Supply" },
   },
   de: {
     eyebrow: "Demo · Marge und Kosten",
@@ -326,6 +431,15 @@ const initialFormByLang = {
     glassPrice: "8",
     glassesPerBottle: "5",
   },
+  en: {
+    wine: "Premium Chardonnay", cost: "13.50", pvp: "38", targetMargin: "62", monthlySales: "18", stock: "24", glassPrice: "8", glassesPerBottle: "5",
+  },
+  it: {
+    wine: "Verdicchio premium", cost: "13.50", pvp: "38", targetMargin: "62", monthlySales: "18", stock: "24", glassPrice: "8", glassesPerBottle: "5",
+  },
+  fr: {
+    wine: "Chenin premium", cost: "13.50", pvp: "38", targetMargin: "62", monthlySales: "18", stock: "24", glassPrice: "8", glassesPerBottle: "5",
+  },
   de: {
     wine: "Riesling Reserve",
     cost: "13.50",
@@ -350,7 +464,7 @@ const initialFormByLang = {
 
 const CalculadoraFugaMargen = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
-  const activeLang = lang === "de" || lang === "pt" ? lang : "es";
+  const activeLang = ["es", "en", "it", "fr", "de", "pt"].includes(lang) ? lang as keyof typeof uiCopy : "es";
   const s = seoCopy[lang] || seoCopy.es;
   const t = uiCopy[activeLang];
   const euroFormatter = euroFormatters[activeLang];

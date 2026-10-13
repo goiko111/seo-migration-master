@@ -65,3 +65,20 @@
 @media(max-width:1140px){.time-workspace{margin-left:32px;margin-right:32px}.time-task{grid-template-columns:1fr}.time-task-fields{grid-template-columns:1.25fr repeat(4,minmax(0,1fr))}.time-task-result{border-left:0;padding-left:50px}.time-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.time-summary>div:nth-child(3){border-right:0}.time-summary>div:nth-child(-n+3){border-bottom:1px solid var(--time-line)}}
 @media(max-width:760px){.time-workspace{margin:0 16px 36px;padding:22px 18px 26px}.time-toolbar{flex-direction:column}.time-toolbar-actions{width:100%;justify-content:flex-end}.time-toolbar h2,.time-actions h2,.time-results h2{font-size:24px}.time-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.time-summary>div{padding:14px;min-height:78px;border-bottom:1px solid var(--time-line)}.time-summary>div:nth-child(odd){border-right:1px solid var(--time-line)}.time-summary>div:nth-child(even){border-right:0}.time-summary>div:last-child{border-bottom:0}.time-summary strong{font-size:22px}.time-method{grid-template-columns:1fr;gap:8px}.time-source .profit-source-list{grid-template-columns:1fr}.time-task{grid-template-columns:1fr;gap:16px;padding:20px 0}.time-task-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.time-task-fields>label:first-child{grid-column:1/-1}.time-task-result{padding-left:46px}.time-task-result strong{font-size:22px}.time-results-heading{align-items:flex-start;flex-direction:column}.time-results-heading>div:last-child{justify-content:flex-start}.time-period-table{overflow-x:auto}.time-period-row{min-width:650px}.time-actions .profit-actions li{align-items:flex-start}.time-actions .profit-actions li>a{margin-left:auto}.time-intro br{display:none}}
 @media(max-width:440px){.time-task-fields{grid-template-columns:1fr}.time-task-fields>label:first-child{grid-column:auto}.time-task-fields>label{display:grid;grid-template-columns:116px minmax(0,1fr);align-items:center}.time-task-fields>label>span:first-child{margin:0;min-height:0}.time-summary{grid-template-columns:1fr}.time-summary>div{border-right:0!important;border-bottom:1px solid var(--time-line)!important}.time-summary>div:last-child{border-bottom:0!important}.time-toolbar-actions{justify-content:space-between}.time-currency{margin-right:auto}}
+
+.operational-time-page{--time-green:hsl(var(--accent));--time-wine:hsl(var(--wine-light));--time-line:hsl(var(--border))}
+.time-workspace{border-color:var(--tool-border);background:var(--tool-panel);box-shadow:0 24px 70px hsl(0 0% 0%/.22)}
+.time-toolbar h2,.time-actions h2,.time-results h2{font-family:var(--font-heading)}
+.time-toolbar p:not(.profit-eyebrow),.time-currency,.time-summary span,.time-task-result span,.time-summary small,.time-method p,.time-task-toggle small,.time-task-fields>label>span:first-child,.time-task-result small,.time-period-row span small,.time-cost-coverage,.time-cash-note{color:var(--tool-muted)}
+.time-currency select,.time-task-fields>label>input,.time-input-wrap input{border-color:var(--tool-border);background:var(--tool-bg);color:var(--tool-text)}
+.time-task-fields>label>input:disabled,.time-input-wrap input:disabled{background:hsl(var(--muted)/.35);color:var(--tool-muted)}
+.time-summary{border-color:var(--tool-border);border-left-color:var(--tool-wine);background:hsl(var(--muted)/.28)}
+.time-summary>div,.time-task-list,.time-task,.time-task-result,.time-results,.time-period-table,.time-period-row,.time-period-row>*,.time-actions,.time-actions .profit-actions li:last-child{border-color:var(--tool-border)}
+.time-summary-net strong,.time-task-toggle svg{color:var(--tool-accent)}
+.time-task-toggle input{accent-color:var(--tool-wine)}
+.time-warning{border-color:hsl(42 82% 58%);background:hsl(42 82% 58%/.1);color:hsl(42 82% 72%)}
+.time-period-head{background:hsl(var(--muted)/.35)}
+.time-period-head>*{color:var(--tool-muted)}
+.time-period-row [data-negative=true]{color:hsl(350 75% 66%)}
+.time-cash-note{border-color:var(--tool-accent);background:hsl(var(--accent)/.08)}
+.time-empty{color:var(--tool-muted);border-color:var(--tool-border)}

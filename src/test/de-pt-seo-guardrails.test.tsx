@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import type { ComponentType } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { ROUTE_MAP, type SupportedLang } from "@/i18n/types";
@@ -188,5 +188,21 @@ describe("DE/PT SEO guardrails", () => {
     expect(footer).toContain('lang === "es" ? "/terminos-y-condiciones-del-contrato" : localePath("/terminos")');
     expect(footer).not.toContain('lang === "es" ? "/privacidad"');
     expect(footer).not.toContain('lang === "es" ? "/terminos"');
+  });
+});
+
+describe("margin leakage calculator visible translations", () => {
+  it.each([
+    ["/en/tools/margin-leakage-calculator", "Margin data", "Calculate leakage"],
+    ["/it/strumenti/calcolatrice-fuga-margine", "Dati di margine", "Calcola la perdita"],
+    ["/fr/outils/calculateur-fuite-marge", "Données de marge", "Calculer la fuite"],
+    ["/de/tools/margenverlust-rechner", "Margendaten", "Margenverlust berechnen"],
+    ["/pt/ferramentas/calculadora-fuga-margem", "Dados de margem", "Calcular fuga"],
+  ])("%s renders its own interactive copy", (path, sectionTitle, actionLabel) => {
+    renderLocalizedRoute(path, "/herramientas/calculadora-fuga-margen");
+
+    expect(screen.getByText(sectionTitle)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: actionLabel })).toBeInTheDocument();
+    expect(document.body).not.toHaveTextContent("Datos de margen");
   });
 });

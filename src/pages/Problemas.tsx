@@ -417,6 +417,14 @@ const blockColors = [
 const Problemas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
+  const relatedLabels = ({
+    es: ["Todas las funcionalidades de Winerim", "Guía: cómo vender más vino en un restaurante", "Analiza tu carta gratis y recibe un diagnóstico", "Calculadora de impacto en ticket medio", "Guía: revisar la carta cada mes", "Casos de éxito de restaurantes reales", "Comparativas: Winerim vs alternativas", "Benchmarks y playbooks del sector"],
+    en: ["All Winerim features", "Guide: how to sell more wine", "Analyze your wine list free", "Average ticket impact calculator", "Guide: monthly wine list review", "Real restaurant case studies", "Comparisons: Winerim vs alternatives", "Industry benchmarks and playbooks"],
+    it: ["Tutte le funzionalità Winerim", "Guida: come vendere più vino", "Analizza gratis la carta dei vini", "Calcolatrice dell'impatto sullo scontrino medio", "Guida: revisione mensile della carta", "Casi di successo di ristoranti reali", "Confronti: Winerim vs alternative", "Benchmark e playbook del settore"],
+    fr: ["Toutes les fonctionnalités Winerim", "Guide : vendre plus de vin", "Analysez gratuitement votre carte", "Calculateur d'impact sur le ticket moyen", "Guide : révision mensuelle de la carte", "Cas clients de restaurants", "Comparatifs : Winerim vs alternatives", "Benchmarks et playbooks du secteur"],
+    de: ["Alle Winerim-Funktionen", "Ratgeber: mehr Wein verkaufen", "Weinkarte kostenlos analysieren", "Rechner für den Einfluss auf den Durchschnittsbon", "Ratgeber: monatliche Kartenprüfung", "Fallstudien aus echten Restaurants", "Vergleiche: Winerim vs Alternativen", "Branchen-Benchmarks und Playbooks"],
+    pt: ["Todas as funcionalidades Winerim", "Guia: como vender mais vinho", "Analise grátis a sua carta", "Calculadora de impacto no ticket médio", "Guia: revisão mensal da carta", "Casos de sucesso de restaurantes", "Comparações: Winerim vs alternativas", "Benchmarks e playbooks do setor"],
+  } as const)[lang] || [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -522,14 +530,14 @@ const Problemas = () => {
         </section>
 
         <InternalLinks title={t.linksTitle} links={[
-          { to: localePath("/funcionalidades"), label: lang === "es" ? "Todas las funcionalidades de Winerim" : "All Winerim features", type: "solution" },
-          { to: localePath("/como-vender-mas-vino-en-un-restaurante"), label: lang === "es" ? "Guía: cómo vender más vino en un restaurante" : "Guide: how to sell more wine", type: "guide" },
-          { to: "/analisis-carta", label: lang === "es" ? "Analiza tu carta gratis y recibe un diagnóstico" : "Analyze your list free", type: "tool" },
-          { to: "/herramientas/calculadora-ticket-medio-vino", label: lang === "es" ? "Calculadora de impacto en ticket medio" : "Average ticket impact calculator", type: "tool" },
-          { to: "/guias/como-revisar-carta-vinos-cada-mes", label: lang === "es" ? "Guía: revisar la carta cada mes" : "Guide: monthly list review", type: "guide" },
-          { to: "/casos-exito", label: lang === "es" ? "Casos de éxito de restaurantes reales" : "Real case studies", type: "solution" },
-          { to: "/comparativas", label: lang === "es" ? "Comparativas: Winerim vs alternativas" : "Comparisons: Winerim vs alternatives", type: "solution" },
-          { to: "/benchmarks-playbooks", label: lang === "es" ? "Benchmarks y playbooks del sector" : "Industry benchmarks & playbooks", type: "resource" },
+          { to: localePath("/funcionalidades"), label: relatedLabels[0], type: "solution" },
+          { to: localePath("/como-vender-mas-vino-en-un-restaurante"), label: relatedLabels[1], type: "guide" },
+          { to: localePath("/analisis-carta"), label: relatedLabels[2], type: "tool" },
+          { to: localePath("/herramientas/calculadora-ticket-medio-vino"), label: relatedLabels[3], type: "tool" },
+          { to: localePath("/guias/como-revisar-carta-vinos-cada-mes"), label: relatedLabels[4], type: "guide" },
+          { to: localePath("/casos-exito"), label: relatedLabels[5], type: "solution" },
+          { to: localePath("/comparativas"), label: relatedLabels[6], type: "solution" },
+          { to: localePath("/benchmarks-playbooks"), label: relatedLabels[7], type: "resource" },
         ]} />
       </main>
       <Footer />

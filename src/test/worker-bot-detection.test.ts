@@ -28,4 +28,20 @@ describe("worker bot detection", () => {
     expect(source).toContain('["/en/simulador-carta", "/en/wine-list-simulator"]');
     expect(source).toContain('"X-Winerim-Router": "legacy-path-redirect"');
   });
+
+  it("serves the pricing architecture from React for humans and bots", () => {
+    const source = fs.readFileSync(path.resolve("edge-router/winerim-pages-router.js"), "utf8");
+    expect(source).not.toContain("BACKEND_HUMAN_ROUTES");
+    expect(source).toContain('if (path === "/precios-modulos-integraciones")');
+    expect(source).toContain("return fetchPricingArchitecturePage(request, env, path, BOT_REGEX.test(ua))");
+    expect(source).toContain("Precios, módulos e integraciones de Winerim");
+    expect(source).toContain('rewriter.on("body > noscript"');
+  });
+
+  it("serves every localized public tool from the versioned React release", () => {
+    const source = fs.readFileSync(path.resolve("edge-router/winerim-pages-router.js"), "utf8");
+    expect(source).toContain('const TOOL_HUB_ROUTES = new Set(["/herramientas", "/en/tools", "/it/strumenti", "/fr/outils", "/de/tools", "/pt/ferramentas"])');
+    expect(source).toContain('const TOOL_ROUTE_PREFIXES = ["/herramientas/", "/en/tools/", "/it/strumenti/", "/fr/outils/", "/de/tools/", "/pt/ferramentas/"]');
+    expect(source).toContain("TOOL_ROUTE_PREFIXES.some((prefix) => path.startsWith(prefix))");
+  });
 });

@@ -146,7 +146,14 @@ const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
 const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
 
 const ARTICLE_ROUTE_RE = /^\/(?:(?:en|fr|it|de|pt)\/)?article\/[^/]+$/;
-const isReactRoute = (path) => REACT_ROUTES.has(path) || ARTICLE_ROUTE_RE.test(path);
+const TOOL_HUB_ROUTES = new Set(["/herramientas", "/en/tools", "/it/strumenti", "/fr/outils", "/de/tools", "/pt/ferramentas"]);
+const TOOL_ROUTE_PREFIXES = ["/herramientas/", "/en/tools/", "/it/strumenti/", "/fr/outils/", "/de/tools/", "/pt/ferramentas/"];
+const isReactRoute = (path) => (
+  REACT_ROUTES.has(path)
+  || TOOL_HUB_ROUTES.has(path)
+  || TOOL_ROUTE_PREFIXES.some((prefix) => path.startsWith(prefix))
+  || ARTICLE_ROUTE_RE.test(path)
+);
 
 const ARTICLE_MARKER_CLEANER_SCRIPT = `<script>
 (() => {
@@ -192,8 +199,6 @@ PRIVATE_ROUTES.add(GENERIC_PROPOSAL_ROUTE);
 PRIVATE_ROUTES.add(REVO_PROPOSAL_ROUTE);
 PRIVATE_ROUTES.add(MELIA_PROPOSAL_ROUTE);
 PRIVATE_ROUTES.add(MELIA_PARADISUS_LOS_CABOS_PROPOSAL_ROUTE);
-const BACKEND_HUMAN_ROUTES = new Set(["/precios-modulos-integraciones"]);
-
 const LEGAL_ROUTES = new Set([
   "/politica-privacidad",
   "/privacidad",
@@ -456,6 +461,58 @@ const fetchReactPage = async (request, env, path) => {
       ...(isNoindexRoute(path) ? { "X-Robots-Tag": "noindex, follow" } : {}),
     },
   });
+};
+
+const fetchPricingArchitecturePage = async (request, env, path, renderBotContent) => {
+  const response = await fetchReactPage(request, env, path);
+  if (request.method === "HEAD" || !response.ok) return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  const rewriter = new HTMLRewriter()
+    .on("html", {
+      element(element) {
+        element.setAttribute("lang", "es");
+      },
+    })
+    .on("title", {
+      element(element) {
+        element.setInnerContent("Precios, módulos e integraciones | Winerim");
+      },
+    })
+    .on('meta[name="description"]', {
+      element(element) {
+        element.setAttribute("content", "Consulta cómo encajan Core, TPV, Gestión, Márgenes, Intelligence y las integraciones dentro de Winerim.");
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", "https://winerim.wine/precios-modulos-integraciones");
+      },
+    });
+
+  if (renderBotContent) {
+    rewriter.on("#root", {
+      element(element) {
+        element.setInnerContent(`
+          <main>
+            <article>
+              <h1>Precios, módulos e integraciones de Winerim</h1>
+              <p>Una lectura clara de la arquitectura comercial y operativa de Winerim.</p>
+              ${PRICING_ARCHITECTURE_BOT_HTML}
+            </article>
+          </main>
+        `, { html: true });
+      },
+    });
+    rewriter.on("body > noscript", {
+      element(element) {
+        element.remove();
+      },
+    });
+  }
+
+  return rewriter.transform(response);
 };
 
 const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
@@ -794,10 +851,6 @@ export default {
       return fetchReactPage(request, env, path);
     }
 
-    if (!BOT_REGEX.test(ua) && BACKEND_HUMAN_ROUTES.has(path)) {
-      return env.BACKEND.fetch(request);
-    }
-
     if (path.startsWith("/legal/")) {
       try {
         const response = await fetchFrontend(request, env);
@@ -810,23 +863,13 @@ export default {
       }
     }
 
+    if (path === "/precios-modulos-integraciones") {
+      return fetchPricingArchitecturePage(request, env, path, BOT_REGEX.test(ua));
+    }
+
     if (BOT_REGEX.test(ua)) {
       const response = await env.BACKEND.fetch(request);
       const contentType = response.headers.get("Content-Type") || "";
-      if (
-        path === "/precios-modulos-integraciones"
-        && request.method === "GET"
-        && response.ok
-        && contentType.includes("text/html")
-      ) {
-        return new HTMLRewriter()
-          .on("article", {
-            element(element) {
-              element.append(PRICING_ARCHITECTURE_BOT_HTML, { html: true });
-            },
-          })
-          .transform(response);
-      }
       if (
         PRODUCT_ARCHITECTURE_ROUTES.has(path)
         && request.method === "GET"

@@ -13,7 +13,14 @@ describe("integration claims and guided tool entry", () => {
     expect(integrations).toContain("No asumimos bidireccionalidad ni tiempo real continuo sin validación técnica.");
     expect(provider).toContain("Una conexión técnica no se considera certificada");
     expect(provider).toContain("No confirmamos bidireccionalidad, escritura o tiempo real antes del piloto.");
-    expect(provider).toContain('lang === "es" ? "TPV y datos operativos" : "POS and operational data"');
+    for (const suffix of [
+      'es: "TPV y datos operativos"',
+      'en: "POS and operational data"',
+      'it: "POS e dati operativi"',
+      'fr: "Caisse et données opérationnelles"',
+      'de: "Kassensystem und Betriebsdaten"',
+      'pt: "POS e dados operacionais"',
+    ]) expect(provider).toContain(suffix);
     expect(provider).toContain('integrationProviderPath("revo-xef", lang)');
     expect(features).not.toContain("evalúa la viabilidad de conexión sin coste adicional");
     expect(features).toContain("Control de stock conectado");

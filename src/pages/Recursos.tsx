@@ -413,7 +413,7 @@ const Recursos = () => {
         {/* ── Hero ── */}
         <section className="pt-32 pb-14 section-padding">
           <div className="max-w-5xl mx-auto px-6 md:px-12">
-            <Breadcrumbs items={[{ label: lang === "es" ? "Recursos" : lang === "en" ? "Resources" : lang === "it" ? "Risorse" : "Ressources" }]} />
+            <Breadcrumbs items={[{ label: ({ es: "Recursos", en: "Resources", it: "Risorse", fr: "Ressources", de: "Ressourcen", pt: "Recursos" } as const)[lang] || "Recursos" }]} />
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/5 mb-6">
               <Package size={14} className="text-emerald-400" />

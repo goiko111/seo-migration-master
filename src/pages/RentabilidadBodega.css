@@ -83,3 +83,63 @@
 @media(max-width:1200px){.profit-workspace,.profit-product{margin-left:32px;margin-right:32px}.profit-workspace{grid-template-columns:220px minmax(0,1fr)}.profit-form{padding-left:28px;padding-right:28px}.profit-objectives{grid-template-columns:repeat(2,minmax(0,1fr))}.profit-local{position:static;display:block;margin-top:20px}}
 @media(max-width:760px){.profitability-page main{padding-top:72px}.profit-intro{padding:30px 20px 25px}.profit-intro h1{font-size:36px}.profit-intro>p:not(.profit-eyebrow){font-size:15px}.profit-workspace{display:block;margin:0 16px 36px}.profit-sidebar{padding:18px 16px;border-right:0;border-bottom:1px solid #d5ddd7}.profit-sidebar>.profit-eyebrow,.profit-sidebar-bottom{display:none}.profit-sidebar ol{display:flex;justify-content:space-between;gap:8px;margin:0}.profit-sidebar li{font-size:11px;gap:6px;max-width:33%}.profit-sidebar li>span{height:24px;width:24px;font-size:10px}.profit-form{padding:18px 18px 24px}.profit-form h2{font-size:25px}.profit-fields{gap:20px;grid-template-columns:1fr}.profit-form-footer{align-items:flex-start;flex-wrap:wrap}.profit-form-footer>span{width:100%}.profit-form-footer>.profit-primary{margin-left:auto}.profit-product{grid-template-columns:1fr;gap:28px;margin:0 20px 36px}.profit-product h2{font-size:29px}.profit-results{grid-template-columns:1fr}.profit-result:nth-child(even){border-left:0;padding-left:0}.profit-result strong{font-size:30px}.profit-report-actions>.profit-primary{width:100%}.profit-actions li{gap:10px}.profit-tabs button{padding:6px;font-size:12px}.profit-step-tools .profit-mobile-sample{display:grid}.profit-source-list{display:grid}.profit-review-panel{padding:19px 16px}.profit-review-panel>h3{font-size:22px}}
 @media(prefers-reduced-motion:reduce){.profitability-page *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Shared Winerim tool surface: aligned with the public calculator family. */
+.profitability-page{
+  --tool-bg:hsl(var(--background));
+  --tool-panel:hsl(var(--card));
+  --tool-panel-raised:hsl(140 2% 16%);
+  --tool-border:hsl(var(--border));
+  --tool-text:hsl(var(--foreground));
+  --tool-muted:hsl(var(--muted-foreground));
+  --tool-wine:hsl(var(--wine-light));
+  --tool-wine-strong:hsl(var(--wine));
+  --tool-accent:hsl(var(--accent));
+  background:var(--tool-bg);
+  color:var(--tool-text);
+  font-family:var(--font-sans);
+}
+.profitability-page h1,.profitability-page h2,.profitability-page h3{font-family:var(--font-heading)}
+.profit-intro{padding-top:58px;padding-bottom:42px}
+.profit-intro h1{font-family:var(--font-heading);font-weight:700;color:var(--tool-text)}
+.profit-eyebrow{color:var(--tool-accent);text-transform:uppercase;letter-spacing:.18em!important}
+.profit-intro>p:not(.profit-eyebrow),.profit-local,.profit-sidebar li,.profit-sidebar-bottom,.profit-step-heading,.profit-basis,.profit-disclaimer,.profit-result>span,.profit-result-formula,.profit-review-panel>p,.profit-consent,.profit-product p:not(.profit-eyebrow),.profit-product figcaption{color:var(--tool-muted)}
+.profit-local{border:1px solid var(--tool-border);border-radius:999px;padding:7px 11px;background:hsl(var(--card)/.72)}
+.profit-workspace{border-color:var(--tool-border);background:var(--tool-panel);box-shadow:0 24px 70px hsl(0 0% 0%/.22)}
+.profit-sidebar{background:hsl(var(--muted)/.4);border-color:var(--tool-border)}
+.profit-sidebar li>span{border-color:var(--tool-border);background:var(--tool-panel)}
+.profit-sidebar li[aria-current]{color:var(--tool-text)}
+.profit-sidebar li[aria-current]>span{background:var(--tool-wine-strong);border-color:var(--tool-wine);color:white;box-shadow:0 0 0 3px hsl(var(--wine)/.14)}
+.profit-sidebar-bottom p:first-child,.profit-source-panel h3,.profit-formula summary,.profit-result-formula summary{color:var(--tool-text)}
+.profit-icon-button{border-color:var(--tool-border);background:var(--tool-panel-raised);color:var(--tool-text);transition:border-color 160ms ease,transform 160ms cubic-bezier(.23,1,.32,1),background-color 160ms ease}
+.profit-icon-button:hover{border-color:hsl(var(--wine-light)/.65);background:hsl(var(--wine)/.12)}
+.profit-icon-button:active,.profit-primary:active,.profit-text-button:active,.profit-secondary-link:active{transform:scale(.97)}
+.profit-fields input,.profit-fields select{border-color:var(--tool-border);background:var(--tool-bg);color:var(--tool-text)}
+.profit-fields input::placeholder{color:hsl(var(--muted-foreground)/.72)}
+.profit-objectives label{border-color:var(--tool-border);background:var(--tool-panel-raised)}
+.profit-objectives label:has(input:checked){background:hsl(var(--wine)/.16);border-color:var(--tool-wine);color:var(--tool-text)}
+.profit-objectives input,.profit-consent input{accent-color:var(--tool-wine)}
+.profit-form-footer,.profit-tabs,.profit-results,.profit-result,.profit-actions li,.profit-formula{border-color:var(--tool-border)}
+.profit-primary{background:var(--tool-wine-strong);border-color:var(--tool-wine);border-radius:6px;transition:background-color 160ms ease,transform 160ms cubic-bezier(.23,1,.32,1)}
+.profit-primary:hover{background:var(--tool-wine)}
+.profit-primary:disabled{background:hsl(var(--muted));border-color:var(--tool-border);color:var(--tool-muted)}
+.profit-text-button,.profit-secondary-link,.profit-actions li>span,.profit-actions a,.profit-product a,.profit-consent a{color:var(--tool-accent)}
+.profit-tabs button{color:var(--tool-muted)}
+.profit-tabs button[aria-pressed=true]{border-bottom-color:var(--tool-wine);color:var(--tool-text)}
+.profit-example{background:hsl(var(--wine)/.11);border-color:var(--tool-wine);color:var(--tool-text)}
+.profit-result>svg{color:var(--tool-accent)}
+.profit-result h3,.profit-actions p{color:var(--tool-muted)}
+.profit-source-panel{border-color:var(--tool-border);background:hsl(var(--muted)/.28)}
+.profit-source-panel>p{color:var(--tool-muted)}
+.profit-source-list span{border-color:var(--tool-border);background:var(--tool-panel-raised);color:var(--tool-text)}
+.profit-source-list span[data-source=calculated]{border-color:hsl(var(--accent)/.5);background:hsl(var(--accent)/.08);color:var(--tool-accent)}
+.profit-source-list span[data-source=verified]{color:var(--tool-muted)}
+.profit-empty-result{color:var(--tool-muted)!important;font-family:var(--font-sans)!important}
+.profit-actions a{border-color:var(--tool-border);background:var(--tool-panel-raised)}
+.profit-review-panel{border-color:var(--tool-border);background:hsl(var(--muted)/.2)}
+.profit-review-panel>h3{font-family:var(--font-heading);color:var(--tool-text)}
+.profit-success{color:hsl(145 55% 62%)}
+.profit-product h2{font-family:var(--font-heading)}
+.profit-product img{border-color:var(--tool-border);box-shadow:0 20px 55px hsl(0 0% 0%/.3)}
+.profitability-page button:focus-visible,.profitability-page a:focus-visible,.profitability-page input:focus-visible,.profitability-page select:focus-visible,.profitability-page summary:focus-visible{outline-color:var(--tool-accent)}
+.profit-skip:focus{background:var(--tool-panel);color:var(--tool-text);border:1px solid var(--tool-accent)}

@@ -323,7 +323,7 @@ const BenchmarksPlaybooks = () => {
         url={`${CANONICAL}${localePath("/benchmarks-playbooks")}`}
         faqs={t.faqs}
         breadcrumbs={[
-          { name: lang === "es" ? "Inicio" : "Home", url: CANONICAL },
+          { name: ({ es: "Inicio", en: "Home", it: "Home", fr: "Accueil", de: "Startseite", pt: "Início" } as const)[lang] || "Inicio", url: CANONICAL },
           { name: "Benchmarks & Playbooks", url: `${CANONICAL}${localePath("/benchmarks-playbooks")}` },
         ]}
       />

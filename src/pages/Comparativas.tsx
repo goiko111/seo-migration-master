@@ -198,7 +198,7 @@ const Comparativas = () => {
         url={url}
         faqs={t.faqs}
         breadcrumbs={[
-          { name: lang === "es" ? "Inicio" : lang === "en" ? "Home" : lang === "it" ? "Home" : "Accueil", url: "https://winerim.wine" },
+          { name: ({ es: "Inicio", en: "Home", it: "Home", fr: "Accueil", de: "Startseite", pt: "Início" } as const)[lang] || "Inicio", url: "https://winerim.wine" },
           { name: t.breadComparativas, url },
         ]}
       />

@@ -610,20 +610,24 @@ const CalculadoraPrecioCopa = () => {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-medium">
-                  {lang === "es" ? "Merma estimada" : lang === "en" ? "Estimated waste" : lang === "it" ? "Scarto stimato" : "Perte estimée"}
+                  {({ es: "Merma estimada", en: "Estimated waste", it: "Scarto stimato", fr: "Perte estimée", de: "Geschätzter Schwund", pt: "Quebra estimada" } as const)[lang] || "Merma estimada"}
                 </label>
                 <span className="text-sm font-bold text-amber-500">{wasteGlasses} {wasteGlasses === 1 ? t.glassUnit : t.glassesUnit}</span>
               </div>
               <Slider value={[wasteGlasses]} onValueChange={([v]) => setWasteGlasses(v)} min={0} max={3} step={1} />
               <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                <span>0 ({lang === "es" ? "sin merma" : lang === "en" ? "no waste" : lang === "it" ? "senza scarti" : "sans perte"})</span>
-                <span>3 ({lang === "es" ? "alta merma" : lang === "en" ? "high waste" : lang === "it" ? "alto scarto" : "forte perte"})</span>
+                <span>0 ({({ es: "sin merma", en: "no waste", it: "senza scarti", fr: "sans perte", de: "kein Schwund", pt: "sem quebra" } as const)[lang] || "sin merma"})</span>
+                <span>3 ({({ es: "alta merma", en: "high waste", it: "alto scarto", fr: "forte perte", de: "hoher Schwund", pt: "quebra elevada" } as const)[lang] || "alta merma"})</span>
               </div>
               <p className="text-[10px] text-muted-foreground mt-1.5">
-                {lang === "es" ? "Copas que se pierden por botella abierta no terminada. Con Coravin: 0. Espumoso sin tapón: 2-3."
-                  : lang === "en" ? "Glasses lost per unfinished open bottle. With Coravin: 0. Sparkling without stopper: 2-3."
-                  : lang === "it" ? "Calici persi per bottiglia aperta non finita. Con Coravin: 0. Spumante senza tappo: 2-3."
-                  : "Verres perdus par bouteille ouverte non terminée. Avec Coravin : 0. Effervescent sans bouchon : 2-3."}
+                {({
+                  es: "Copas que se pierden por botella abierta no terminada. Con Coravin: 0. Espumoso sin tapón: 2-3.",
+                  en: "Glasses lost per unfinished open bottle. With Coravin: 0. Sparkling without stopper: 2-3.",
+                  it: "Calici persi per bottiglia aperta non finita. Con Coravin: 0. Spumante senza tappo: 2-3.",
+                  fr: "Verres perdus par bouteille ouverte non terminée. Avec Coravin : 0. Effervescent sans bouchon : 2-3.",
+                  de: "Gläser, die je nicht geleerter offener Flasche verloren gehen. Mit Coravin: 0. Schaumwein ohne Verschluss: 2–3.",
+                  pt: "Copos perdidos por garrafa aberta não terminada. Com Coravin: 0. Espumante sem rolha: 2–3.",
+                } as const)[lang] || "Copas que se pierden por botella abierta no terminada."}
               </p>
             </div>
           </motion.div>

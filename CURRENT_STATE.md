@@ -7559,3 +7559,35 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Revalidar Search Console en 24-72 horas y medir uso/conversion sin PII.
+## Actualización 2026-10-13: release de herramientas e i18n
+
+### Hechos confirmados
+
+- Pages activa para Herramientas: `https://169386d2.winerim-origin.pages.dev`.
+- Facade activo: `winerim-edge-router`
+  `f7237ef2-4e6f-4286-810e-e8d2bae1d816`.
+- `/precios-modulos-integraciones`: humano/Googlebot/OAI `200`, canonical propio,
+  un H1 y contenido React correcto tras hidratación.
+- Sitemap: `2.434/2.434` URLs con `200`.
+- EN de la calculadora de margen verificada en producción sin contenido ES.
+- Gates: TypeScript, build, `251/251` tests, sintaxis/dry-run Worker,
+  `git diff --check` y auditor SEO/i18n `252/252`.
+
+### Decisiones
+
+- Routing selectivo de todas las rutas públicas de Herramientas a Pages.
+- Sin cambios en backend, Lovable Cloud/Supabase, SQL o Edge Functions.
+
+### Hipótesis
+
+- La próxima recaptura de Google retirará el `404` anterior.
+
+### Contradicciones / riesgos
+
+- Persisten avisos no bloqueantes de React Router v7, `key` en Precios,
+  `caniuse-lite` y tamaño de chunks.
+- Falta validación editorial nativa del corpus completo por mercado.
+
+### Tareas pendientes
+
+- Search Console en 24-72 horas y seguimiento de analítica/conversión sin PII.

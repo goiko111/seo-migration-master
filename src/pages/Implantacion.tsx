@@ -438,6 +438,15 @@ const supportIcons = [Headphones, Zap, BarChart3, BookOpen];
 const Implantacion = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = contentMap[lang] || contentMap.es;
+  const navigationCopy = ({
+    es: { title: "Siguientes pasos", steps: [["Solicitar demo", "Te mostramos el proceso en detalle."], ["Integraciones", "Cómo se conecta con tu TPV y sistemas."], ["Planes y precios", "La implantación está incluida en todos los planes."], ["Funcionalidades", "Todo lo que incluye Winerim."]], links: ["Software de carta de vinos", "Integraciones", "Para restaurantes sin sumiller", "Winerim para hoteles", "Winerim para grupos", "Casos de éxito"] },
+    en: { title: "Next steps", steps: [["Request a demo", "We show you the process in detail."], ["Integrations", "How Winerim connects to your POS and systems."], ["Plans and pricing", "Implementation is included in every plan."], ["Features", "Everything included in Winerim."]], links: ["Wine list software", "Integrations", "For restaurants without a sommelier", "Winerim for hotels", "Winerim for groups", "Case studies"] },
+    it: { title: "Prossimi passi", steps: [["Richiedi una demo", "Ti mostriamo il processo in dettaglio."], ["Integrazioni", "Come Winerim si collega al POS e ai tuoi sistemi."], ["Piani e prezzi", "L'implementazione è inclusa in tutti i piani."], ["Funzionalità", "Tutto ciò che include Winerim."]], links: ["Software per la carta dei vini", "Integrazioni", "Per ristoranti senza sommelier", "Winerim per hotel", "Winerim per gruppi", "Casi di successo"] },
+    fr: { title: "Prochaines étapes", steps: [["Demander une démo", "Nous vous présentons le processus en détail."], ["Intégrations", "Comment Winerim se connecte à votre caisse et à vos systèmes."], ["Offres et tarifs", "Le déploiement est inclus dans toutes les offres."], ["Fonctionnalités", "Tout ce qui est inclus dans Winerim."]], links: ["Logiciel de carte des vins", "Intégrations", "Pour les restaurants sans sommelier", "Winerim pour les hôtels", "Winerim pour les groupes", "Études de cas"] },
+    de: { title: "Nächste Schritte", steps: [["Demo anfordern", "Wir zeigen Ihnen den Prozess im Detail."], ["Integrationen", "Wie Winerim mit Ihrem Kassensystem verbunden wird."], ["Pläne und Preise", "Die Implementierung ist in allen Plänen enthalten."], ["Funktionen", "Alles, was Winerim bietet."]], links: ["Weinkarten-Software", "Integrationen", "Für Restaurants ohne Sommelier", "Winerim für Hotels", "Winerim für Gruppen", "Fallstudien"] },
+    pt: { title: "Próximos passos", steps: [["Solicitar demonstração", "Mostramos o processo em detalhe."], ["Integrações", "Como o Winerim se liga ao seu POS e sistemas."], ["Planos e preços", "A implementação está incluída em todos os planos."], ["Funcionalidades", "Tudo o que o Winerim inclui."]], links: ["Software de carta de vinhos", "Integrações", "Para restaurantes sem escanção", "Winerim para hotéis", "Winerim para grupos de restauração", "Casos de sucesso"] },
+  } as const)[lang];
+  const tableHeaders = ({ es: ["Fase", "Tiempo", "Quién"], en: ["Phase", "Time", "Owner"], it: ["Fase", "Tempo", "Responsabile"], fr: ["Phase", "Durée", "Responsable"], de: ["Phase", "Zeit", "Verantwortlich"], pt: ["Fase", "Tempo", "Responsável"] } as const)[lang];
 
   useEffect(() => {
     const ld = document.createElement("script");
@@ -653,9 +662,9 @@ const Implantacion = () => {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-wine/5 border-b border-border">
-                    <th className="text-left py-3 px-4 font-semibold text-foreground">{lang === "es" ? "Fase" : lang === "de" ? "Phase" : lang === "pt" ? "Fase" : "Phase"}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-foreground">{lang === "es" ? "Tiempo" : lang === "de" ? "Zeit" : lang === "pt" ? "Tempo" : "Time"}</th>
-                    <th className="text-left py-3 px-4 font-semibold text-foreground">{lang === "es" ? "Quién" : lang === "de" ? "Wer" : lang === "pt" ? "Quem" : "Who"}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">{tableHeaders[0]}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">{tableHeaders[1]}</th>
+                    <th className="text-left py-3 px-4 font-semibold text-foreground">{tableHeaders[2]}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -768,22 +777,22 @@ const Implantacion = () => {
 
       {/* ── Next Steps ── */}
       <NextSteps
-        title={lang === "es" ? "Siguientes pasos" : lang === "de" ? "Nächste Schritte" : lang === "pt" ? "Próximos passos" : "Next steps"}
+        title={navigationCopy.title}
         steps={[
-          { to: "/demo", label: lang === "es" ? "Solicitar demo" : lang === "de" ? "Demo anfordern" : lang === "pt" ? "Solicitar demonstração" : "Request demo", description: lang === "es" ? "Te mostramos el proceso en detalle." : lang === "de" ? "Wir zeigen Ihnen den Prozess im Detail." : lang === "pt" ? "Mostramos o processo em detalhe." : "We show you the process in detail.", type: "solution" },
-          { to: "/integraciones", label: lang === "es" ? "Integraciones" : lang === "de" ? "Integrationen" : lang === "pt" ? "Integrações" : "Integrations", description: lang === "es" ? "Cómo se conecta con tu TPV y sistemas." : lang === "de" ? "Wie es sich mit Ihrem POS und Ihren Systemen verbindet." : lang === "pt" ? "Como se integra com o seu TPV e sistemas." : "How it connects with your POS and systems.", type: "solution" },
-          { to: "/precios", label: lang === "es" ? "Planes y precios" : lang === "de" ? "Pläne und Preise" : lang === "pt" ? "Planos e preços" : "Plans and pricing", description: lang === "es" ? "La implantación está incluida en todos los planes." : lang === "de" ? "Die Implementierung ist in allen Plänen enthalten." : lang === "pt" ? "A implementação está incluída em todos os planos." : "Implementation is included in all plans.", type: "solution" },
-          { to: "/funcionalidades", label: lang === "es" ? "Funcionalidades" : lang === "de" ? "Funktionen" : lang === "pt" ? "Funcionalidades" : "Features", description: lang === "es" ? "Todo lo que incluye Winerim." : lang === "de" ? "Alles was Winerim bietet." : lang === "pt" ? "Tudo que Winerim inclui." : "Everything Winerim includes.", type: "solution" },
+          { to: localePath("/demo"), label: navigationCopy.steps[0][0], description: navigationCopy.steps[0][1], type: "solution" },
+          { to: localePath("/integraciones"), label: navigationCopy.steps[1][0], description: navigationCopy.steps[1][1], type: "solution" },
+          { to: localePath("/precios"), label: navigationCopy.steps[2][0], description: navigationCopy.steps[2][1], type: "solution" },
+          { to: localePath("/funcionalidades"), label: navigationCopy.steps[3][0], description: navigationCopy.steps[3][1], type: "solution" },
         ]}
       />
 
       <InternalLinks links={[
-        { to: localePath("/software-carta-de-vinos"), label: lang === "es" ? "Software de carta de vinos" : lang === "de" ? "Weinkarten-Software" : lang === "pt" ? "Software de carta de vinhos" : "Wine list software", type: "solution" },
-        { to: localePath("/integraciones"), label: lang === "es" ? "Integraciones" : lang === "de" ? "Integrationen" : lang === "pt" ? "Integrações" : "Integrations", type: "solution" },
-        { to: localePath("/soluciones/restaurantes-sin-sumiller"), label: lang === "es" ? "Para restaurantes sin sumiller" : lang === "de" ? "Für Restaurants ohne Sommelier" : lang === "pt" ? "Para restaurantes sem escanção" : "For restaurants without sommelier", type: "solution" },
-        { to: localePath("/soluciones/hoteles"), label: lang === "es" ? "Winerim para hoteles" : lang === "de" ? "Winerim für Hotels" : lang === "pt" ? "Winerim para hotéis" : "Winerim for hotels", type: "solution" },
-        { to: localePath("/soluciones/grupos-restauracion"), label: lang === "es" ? "Winerim para grupos" : lang === "de" ? "Winerim für Gruppen" : lang === "pt" ? "Winerim para grupos de restauração" : "Winerim for groups", type: "solution" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : lang === "de" ? "Fallstudien" : lang === "pt" ? "Casos de sucesso" : "Case studies", type: "solution" },
+        { to: localePath("/software-carta-de-vinos"), label: navigationCopy.links[0], type: "solution" },
+        { to: localePath("/integraciones"), label: navigationCopy.links[1], type: "solution" },
+        { to: localePath("/soluciones/restaurantes-sin-sumiller"), label: navigationCopy.links[2], type: "solution" },
+        { to: localePath("/soluciones/hoteles"), label: navigationCopy.links[3], type: "solution" },
+        { to: localePath("/soluciones/grupos-restauracion"), label: navigationCopy.links[4], type: "solution" },
+        { to: localePath("/casos-exito"), label: navigationCopy.links[5], type: "solution" },
       ]} />
 
       <Footer />

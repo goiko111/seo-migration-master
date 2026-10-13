@@ -306,7 +306,7 @@ const ToolsLeadPopup = () => {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-wine/30 bg-wine/10 mb-4">
           <Sparkles size={12} className="text-wine" />
           <span className="text-[10px] font-semibold tracking-widest uppercase text-wine-light">
-            {lang === "es" ? "Análisis gratuito" : "Free analysis"}
+            {({ es: "Análisis gratuito", en: "Free analysis", it: "Analisi gratuita", fr: "Analyse gratuite", de: "Kostenlose Analyse", pt: "Análise gratuita" } as const)[lang] || "Análisis gratuito"}
           </span>
         </div>
 

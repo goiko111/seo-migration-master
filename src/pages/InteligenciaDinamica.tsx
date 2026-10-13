@@ -1048,10 +1048,14 @@ const InteligenciaDinamica = () => {
                   <p className="text-sm text-muted-foreground text-center sm:text-left leading-relaxed">
                     {tx.core_bridge}{" "}
                     <Link to={localePath("/producto/winerim-core")} className="text-wine hover:text-wine-light font-semibold underline underline-offset-4 transition-colors">Winerim Core</Link>
-                    {lang === "es" ? ", donde Winerim analiza márgenes, stock, pricing, previsión y estructura de carta en profundidad." :
-                     lang === "en" ? ", where Winerim analyses margins, stock, pricing, forecasting and list structure in depth." :
-                     lang === "it" ? ", dove Winerim analizza margini, stock, pricing, previsioni e struttura della carta in profondità." :
-                     ", où Winerim analyse marges, stock, pricing, prévisions et structure de carte en profondeur."}
+                    {({
+                      es: ", donde Winerim analiza márgenes, stock, pricing, previsión y estructura de carta en profundidad.",
+                      en: ", where Winerim analyses margins, stock, pricing, forecasting and list structure in depth.",
+                      it: ", dove Winerim analizza margini, stock, pricing, previsioni e struttura della carta in profondità.",
+                      fr: ", où Winerim analyse marges, stock, pricing, prévisions et structure de carte en profondeur.",
+                      de: ", wo Winerim Margen, Bestand, Pricing, Prognosen und die Struktur der Weinkarte eingehend analysiert.",
+                      pt: ", onde o Winerim analisa em profundidade margens, stock, pricing, previsão e estrutura da carta.",
+                    } as const)[lang] || ""}
                   </p>
                   <Link to={localePath("/producto/winerim-core")} className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-wine hover:text-wine-light whitespace-nowrap transition-colors shrink-0">
                     {tx.core_bridge_cta} <ArrowRight size={12} />
@@ -1144,7 +1148,7 @@ const InteligenciaDinamica = () => {
                 <p className="font-heading text-xl md:text-2xl text-foreground/90 leading-snug italic">
                   {tx.s2_closing}{" "}
                   <span className="text-gradient-wine not-italic font-semibold">{tx.s2_closing_highlight}</span>
-                  {" "}{lang === "es" ? "cada referencia.\"" : lang === "en" ? "each reference.\"" : lang === "it" ? "ogni referenza.\"" : "chaque référence.\""}
+                  {" "}{({ es: "cada referencia.\"", en: "each reference.\"", it: "ogni referenza.\"", fr: "chaque référence.\"", de: "jede Referenz.\"", pt: "cada referência.\"" } as const)[lang] || "cada referencia.\""}
                 </p>
               </div>
             </ScrollReveal>
@@ -1645,13 +1649,13 @@ const InteligenciaDinamica = () => {
       </main>
       <InternalLinks links={[
         { to: localePath("/producto/winerim-core"), label: tx.il_core, type: "solution" },
-        { to: localePath("/producto/winerim-supply"), label: lang === "es" ? "Winerim Supply: inteligencia de compras" : lang === "en" ? "Winerim Supply: purchasing intelligence" : lang === "it" ? "Winerim Supply: intelligenza acquisti" : "Winerim Supply : intelligence achats", type: "solution" },
+        { to: localePath("/producto/winerim-supply"), label: ({ es: "Winerim Supply: inteligencia de compras", en: "Winerim Supply: purchasing intelligence", it: "Winerim Supply: intelligenza acquisti", fr: "Winerim Supply : intelligence achats", de: "Winerim Supply: Einkaufsintelligenz", pt: "Winerim Supply: inteligência de compras" } as const)[lang] || "Winerim Supply", type: "solution" },
         { to: localePath("/producto/savia"), label: lang === "es" ? "SAVia: agente IA de Winerim" : lang === "en" ? "SAVia: Winerim AI agent" : lang === "it" ? "SAVia: agente IA Winerim" : lang === "de" ? "SAVia: Winerim KI-Agent" : lang === "pt" ? "SAVia: agente IA Winerim" : "SAVia : agent IA Winerim", type: "solution" },
         { to: localePath("/funcionalidades"), label: tx.il_features, type: "solution" },
-        { to: localePath("/herramientas/wine-list-score"), label: lang === "es" ? "Wine List Score: evalúa tu carta" : lang === "en" ? "Wine List Score: evaluate your list" : lang === "it" ? "Wine List Score: valuta la tua carta" : "Wine List Score : évaluez votre carte", type: "tool" },
-        { to: localePath("/recursos/checklist-carta-de-vinos-rentable"), label: lang === "es" ? "Checklist carta rentable" : lang === "en" ? "Profitable wine list checklist" : lang === "it" ? "Checklist carta redditizia" : "Checklist carte rentable", type: "resource" },
-        { to: localePath("/decision-center/margenes-pricing"), label: lang === "es" ? "Decision Center: márgenes y pricing" : lang === "en" ? "Decision Center: margins & pricing" : lang === "it" ? "Decision Center: margini e pricing" : "Decision Center : marges et pricing", type: "decision-center" },
-        { to: localePath("/precios"), label: lang === "es" ? "Planes y precios" : lang === "en" ? "Plans & pricing" : lang === "it" ? "Piani e prezzi" : "Plans et tarifs", type: "solution" },
+        { to: localePath("/herramientas/wine-list-score"), label: ({ es: "Wine List Score: evalúa tu carta", en: "Wine List Score: evaluate your list", it: "Wine List Score: valuta la tua carta", fr: "Wine List Score : évaluez votre carte", de: "Wine List Score: Weinkarte bewerten", pt: "Wine List Score: avalie a sua carta" } as const)[lang] || "Wine List Score", type: "tool" },
+        { to: localePath("/recursos/checklist-carta-de-vinos-rentable"), label: ({ es: "Checklist carta rentable", en: "Profitable wine list checklist", it: "Checklist carta redditizia", fr: "Checklist carte rentable", de: "Checkliste für rentable Weinkarten", pt: "Checklist para uma carta rentável" } as const)[lang] || "Checklist", type: "resource" },
+        { to: localePath("/decision-center/margenes-pricing"), label: ({ es: "Decision Center: márgenes y pricing", en: "Decision Center: margins & pricing", it: "Decision Center: margini e pricing", fr: "Decision Center : marges et pricing", de: "Decision Center: Margen und Pricing", pt: "Decision Center: margens e pricing" } as const)[lang] || "Decision Center", type: "decision-center" },
+        { to: localePath("/precios"), label: ({ es: "Planes y precios", en: "Plans & pricing", it: "Piani e prezzi", fr: "Offres et tarifs", de: "Pläne und Preise", pt: "Planos e preços" } as const)[lang] || "Planes y precios", type: "solution" },
         { to: localePath("/demo"), label: tx.il_demo, type: "solution" },
       ]} />
       <Footer />

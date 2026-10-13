@@ -295,9 +295,9 @@ const Clientes = () => {
       </section>
 
       <InternalLinks links={[
-        { to: localePath("/funcionalidades"), label: lang === "es" ? "Funcionalidades" : "Features", type: "solution" },
-        { to: localePath("/casos-exito"), label: lang === "es" ? "Casos de éxito" : "Case studies", type: "guide" },
-        { to: localePath("/precios"), label: lang === "es" ? "Precios" : "Pricing", type: "resource" },
+        { to: localePath("/funcionalidades"), label: ({ es: "Funcionalidades", en: "Features", it: "Funzionalità", fr: "Fonctionnalités", de: "Funktionen", pt: "Funcionalidades" } as const)[lang] || "Funcionalidades", type: "solution" },
+        { to: localePath("/casos-exito"), label: ({ es: "Casos de éxito", en: "Case studies", it: "Casi di successo", fr: "Études de cas", de: "Fallstudien", pt: "Casos de sucesso" } as const)[lang] || "Casos de éxito", type: "guide" },
+        { to: localePath("/precios"), label: ({ es: "Precios", en: "Pricing", it: "Prezzi", fr: "Tarifs", de: "Preise", pt: "Preços" } as const)[lang] || "Precios", type: "resource" },
       ]} />
       <Footer />
     </div>

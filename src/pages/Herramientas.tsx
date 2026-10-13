@@ -489,11 +489,51 @@ const goalCopy: Record<string, {
   },
 };
 
+const toolsFaqCopy: Record<string, { title: string; faqs: { q: string; a: string }[] }> = {
+  es: { title: "Preguntas frecuentes sobre las herramientas", faqs: [
+    { q: "¿Las herramientas son realmente gratuitas?", a: "Sí. Todas las herramientas son de acceso libre, sin registro ni coste. Están diseñadas para que cualquier restaurante pueda evaluar su carta y tomar mejores decisiones." },
+    { q: "¿Qué diferencia hay entre usar las herramientas y ser cliente de Winerim?", a: "Las herramientas ofrecen análisis puntuales. Como cliente de Winerim, estas funciones se ejecutan automáticamente y de forma continua, integradas con tus datos de venta y stock." },
+    { q: "¿Necesito conocimientos técnicos para usarlas?", a: "No. Introduces los datos solicitados y recibes un resultado accionable con explicaciones claras." },
+    { q: "¿Puedo usar los resultados para mejorar mi carta?", a: "Sí. Cada herramienta genera recomendaciones que puedes aplicar directamente. También puedes solicitar un análisis completo o una demo." },
+  ] },
+  en: { title: "Frequently asked questions about the tools", faqs: [
+    { q: "Are the tools really free?", a: "Yes. All tools are free to use, with no signup or fee. They help restaurants assess their wine lists and make better decisions." },
+    { q: "How are the tools different from being a Winerim client?", a: "The tools provide one-off analyses. For Winerim clients, these functions run automatically and continuously with sales and stock data." },
+    { q: "Do I need technical knowledge?", a: "No. Enter the requested data and receive an actionable result with clear explanations." },
+    { q: "Can I use the results to improve my wine list?", a: "Yes. Each tool provides recommendations you can apply directly. You can also request a full analysis or demo." },
+  ] },
+  it: { title: "Domande frequenti sugli strumenti", faqs: [
+    { q: "Gli strumenti sono davvero gratuiti?", a: "Sì. Tutti gli strumenti sono gratuiti e non richiedono registrazione. Aiutano i ristoranti a valutare la carta dei vini e a prendere decisioni migliori." },
+    { q: "Qual è la differenza tra gli strumenti e Winerim?", a: "Gli strumenti offrono analisi puntuali. Per i clienti Winerim, queste funzioni operano automaticamente e in modo continuo con i dati di vendita e stock." },
+    { q: "Servono conoscenze tecniche?", a: "No. Inserisci i dati richiesti e ricevi un risultato operativo con spiegazioni chiare." },
+    { q: "Posso usare i risultati per migliorare la carta?", a: "Sì. Ogni strumento genera raccomandazioni applicabili direttamente. Puoi anche richiedere un'analisi completa o una demo." },
+  ] },
+  fr: { title: "Questions fréquentes sur les outils", faqs: [
+    { q: "Les outils sont-ils vraiment gratuits ?", a: "Oui. Tous les outils sont gratuits et sans inscription. Ils aident les restaurants à évaluer leur carte des vins et à mieux décider." },
+    { q: "Quelle différence entre les outils et Winerim ?", a: "Les outils proposent des analyses ponctuelles. Pour les clients Winerim, ces fonctions s'exécutent automatiquement et en continu avec les données de ventes et de stock." },
+    { q: "Faut-il des connaissances techniques ?", a: "Non. Saisissez les données demandées et obtenez un résultat exploitable avec des explications claires." },
+    { q: "Puis-je utiliser les résultats pour améliorer ma carte ?", a: "Oui. Chaque outil fournit des recommandations directement applicables. Vous pouvez aussi demander une analyse complète ou une démo." },
+  ] },
+  de: { title: "Häufige Fragen zu den Tools", faqs: [
+    { q: "Sind die Tools wirklich kostenlos?", a: "Ja. Alle Tools sind kostenlos und ohne Anmeldung verfügbar. Sie helfen Restaurants, ihre Weinkarte zu bewerten und bessere Entscheidungen zu treffen." },
+    { q: "Was unterscheidet die Tools von Winerim?", a: "Die Tools liefern punktuelle Analysen. Bei Winerim-Kunden laufen diese Funktionen automatisch und kontinuierlich mit Verkaufs- und Bestandsdaten." },
+    { q: "Brauche ich technisches Wissen?", a: "Nein. Geben Sie die angefragten Daten ein und erhalten Sie ein umsetzbares Ergebnis mit klaren Erklärungen." },
+    { q: "Kann ich die Ergebnisse für meine Weinkarte nutzen?", a: "Ja. Jedes Tool liefert direkt umsetzbare Empfehlungen. Zusätzlich können Sie eine vollständige Analyse oder Demo anfragen." },
+  ] },
+  pt: { title: "Perguntas frequentes sobre as ferramentas", faqs: [
+    { q: "As ferramentas são realmente gratuitas?", a: "Sim. Todas as ferramentas são gratuitas e não exigem registo. Ajudam os restaurantes a avaliar a carta de vinhos e a tomar melhores decisões." },
+    { q: "Qual é a diferença entre as ferramentas e o Winerim?", a: "As ferramentas oferecem análises pontuais. Para clientes Winerim, estas funções são executadas automaticamente e de forma contínua com dados de vendas e stock." },
+    { q: "Preciso de conhecimentos técnicos?", a: "Não. Introduza os dados pedidos e receba um resultado acionável com explicações claras." },
+    { q: "Posso usar os resultados para melhorar a carta?", a: "Sim. Cada ferramenta gera recomendações diretamente aplicáveis. Também pode pedir uma análise completa ou uma demo." },
+  ] },
+};
+
 const Herramientas = () => {
   const { lang, localePath, allLangPaths } = useLanguage();
   const t = content[lang] || content.es;
   const ui = pageUiCopy[lang] || pageUiCopy.es;
   const goals = goalCopy[lang] || goalCopy.es;
+  const faq = toolsFaqCopy[lang] || toolsFaqCopy.es;
   const [activeTag, setActiveTag] = useState("all");
 
   // Extract unique tags for filter pills
@@ -671,18 +711,8 @@ const Herramientas = () => {
         {/* FAQs */}
         <FAQSection
           schemaId="herramientas"
-          title={lang === "es" ? "Preguntas frecuentes sobre las herramientas" : "Frequently asked questions"}
-          faqs={lang === "es" ? [
-            { q: "¿Las herramientas son realmente gratuitas?", a: "Sí. Todas las herramientas son de acceso libre, sin registro ni coste. Están diseñadas para que cualquier restaurante pueda evaluar su carta y tomar mejores decisiones." },
-            { q: "¿Qué diferencia hay entre usar las herramientas y ser cliente de Winerim?", a: "Las herramientas ofrecen análisis puntuales. Como cliente de Winerim, estas funciones se ejecutan automáticamente y de forma continua, integradas con tus datos de venta y stock." },
-            { q: "¿Necesito conocimientos técnicos para usarlas?", a: "No. Cada herramienta está diseñada para ser intuitiva. Introduces los datos que te pide y recibes un resultado accionable con explicaciones claras." },
-            { q: "¿Puedo usar los resultados para mejorar mi carta?", a: "Absolutamente. Cada herramienta genera recomendaciones que puedes aplicar directamente. Si necesitas ayuda profesional, puedes solicitar un análisis completo o una demo." },
-          ] : [
-            { q: "Are the tools really free?", a: "Yes. All tools are free to use, no signup required. They're designed so any restaurant can evaluate its list and make better decisions." },
-            { q: "What's the difference between the tools and being a Winerim client?", a: "The tools offer one-time analyses. As a Winerim client, these functions run automatically and continuously, integrated with your sales and stock data." },
-            { q: "Do I need technical knowledge?", a: "No. Each tool is designed to be intuitive. Enter the requested data and receive actionable results with clear explanations." },
-            { q: "Can I use the results to improve my list?", a: "Absolutely. Each tool generates recommendations you can apply directly. For professional help, request a full analysis or demo." },
-          ]}
+          title={faq.title}
+          faqs={faq.faqs}
         />
       </main>
       <Footer />
