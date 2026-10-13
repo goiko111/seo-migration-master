@@ -3144,6 +3144,8 @@ const HREFLANG_MAP: Record<string, HreflangEntry[]> = {
     { lang: 'en', url: `${SITE}/en/affiliate` },
     { lang: 'it', url: `${SITE}/it/affiliati` },
     { lang: 'fr', url: `${SITE}/fr/affilies` },
+    { lang: 'de', url: `${SITE}/de/partner` },
+    { lang: 'pt', url: `${SITE}/pt/afiliados` },
     { lang: 'x-default', url: `${SITE}/afiliate` },
   ],
   '/sommelier-corner': [
@@ -3829,6 +3831,83 @@ function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, labe
         ],
         breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: 'Ferramentas', url: `${SITE}/pt/ferramentas` }, { name: label, url: canonical }],
         internalLinks: [{ label: 'Como definir o preco do vinho', url: '/pt/preco-vinho-restaurante' }, { label: 'Winerim Core', url: '/pt/produto/winerim-core' }, { label: 'Winerim Supply', url: '/pt/produto/winerim-supply' }, { label: 'Pedir demo', url: '/pt/demo' }],
+      },
+    };
+
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
+  if (esPath === '/afiliate' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Winerim Partners | Assess your hospitality portfolio fit',
+        description: 'Calculate operational value for customers and the real capacity of your portfolio before requesting a Winerim partner conversation.',
+        h1: 'Add value to the sales visits you already make',
+        subtitle: 'Identify a real operational problem, quantify it with the customer and assess whether a joint conversation makes sense.',
+        sections: [
+          { heading: 'Two input-led calculations', content: 'Estimate customer time value and portfolio conversation capacity from editable assumptions. No data is sent and no partner income is forecast.' },
+          { heading: 'Who fits', content: 'Partners need professional access to hospitality accounts, time to learn and the ability to qualify a concrete operational problem before selling.' },
+          { heading: 'Terms require an agreement', content: 'This page publishes no standard commission, exclusivity, quota or income forecast. Any commercial terms must be approved in writing.' },
+        ],
+        faqs: [{ q: 'Does the calculator predict sales?', a: 'No. It only calculates time, time value and conversation capacity from the visitor\'s assumptions.' }],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Operational time calculator', url: '/en/tools/operational-time-calculator' }, { label: 'Contact Winerim', url: '/en/contact' }],
+      },
+      it: {
+        title: 'Partner Winerim | Valuta la tua rete hospitality',
+        description: 'Calcola il valore operativo per i clienti e la capacita reale della tua rete prima di richiedere un confronto partner con Winerim.',
+        h1: 'Aggiungi valore alle visite commerciali che fai gia',
+        subtitle: 'Individua un problema operativo reale, quantificalo con il cliente e valuta se ha senso un confronto congiunto.',
+        sections: [
+          { heading: 'Due calcoli basati sui tuoi dati', content: 'Stima il valore del tempo del cliente e la capacita della rete da ipotesi modificabili. Nessun dato viene inviato e non si prevede il reddito del partner.' },
+          { heading: 'Chi e adatto', content: 'Servono accesso professionale a clienti hospitality, tempo per formarsi e capacita di qualificare un problema operativo prima di vendere.' },
+          { heading: 'Le condizioni richiedono un accordo', content: 'Questa pagina non pubblica commissioni standard, esclusiva, quote o previsioni di reddito. Ogni condizione commerciale va approvata per iscritto.' },
+        ],
+        faqs: [{ q: 'Il calcolo prevede le vendite?', a: 'No. Calcola solo tempo, valore del tempo e capacita di conversazione dalle ipotesi del visitatore.' }],
+        breadcrumbs: [{ name: 'Home', url: `${SITE}/it` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contatta Winerim', url: '/it/contatto' }],
+      },
+      fr: {
+        title: 'Partenaires Winerim | Evaluez votre portefeuille CHR',
+        description: 'Calculez la valeur operationnelle pour vos clients et la capacite reelle de votre portefeuille avant de demander un echange partenaire Winerim.',
+        h1: 'Ajoutez de la valeur aux visites commerciales que vous realisez deja',
+        subtitle: 'Identifiez un probleme operationnel reel, quantifiez-le avec le client et decidez si un echange commun est pertinent.',
+        sections: [
+          { heading: 'Deux calculs fondes sur vos donnees', content: 'Estimez la valeur du temps client et la capacite du portefeuille a partir d hypotheses modifiables. Aucune donnee n est envoyee et aucun revenu partenaire n est prevu.' },
+          { heading: 'Qui est adapte', content: 'Il faut un acces professionnel aux comptes CHR, du temps pour se former et la capacite a qualifier un probleme operationnel avant de vendre.' },
+          { heading: 'Les conditions exigent un accord', content: 'Cette page ne publie ni commission standard, ni exclusivite, ni quota, ni prevision de revenus. Toute condition commerciale doit etre approuvee par ecrit.' },
+        ],
+        faqs: [{ q: 'Le calcul predit il des ventes ?', a: 'Non. Il calcule uniquement le temps, sa valeur et la capacite d echange a partir des hypotheses du visiteur.' }],
+        breadcrumbs: [{ name: 'Accueil', url: `${SITE}/fr` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contacter Winerim', url: '/fr/contact' }],
+      },
+      de: {
+        title: 'Winerim Partner | Hospitality-Portfolio pruefen',
+        description: 'Berechnen Sie den operativen Wert fuer Kunden und die reale Kapazitaet Ihres Portfolios vor einem Partnergespraech mit Winerim.',
+        h1: 'Schaffen Sie Mehrwert in den Kundenterminen, die Sie bereits fuehren',
+        subtitle: 'Ein reales operatives Problem erkennen, mit dem Kunden beziffern und die Eignung fuer ein gemeinsames Gespraech pruefen.',
+        sections: [
+          { heading: 'Zwei Berechnungen aus Ihren Angaben', content: 'Kundenzeitwert und Gespraechskapazitaet werden aus bearbeitbaren Annahmen berechnet. Es werden keine Daten gesendet und keine Partnereinnahmen prognostiziert.' },
+          { heading: 'Wer passt', content: 'Partner brauchen professionellen Zugang zu Hospitality-Konten, Zeit fuer Schulung und die Faehigkeit, vor dem Verkauf ein konkretes operatives Problem zu qualifizieren.' },
+          { heading: 'Bedingungen brauchen eine Vereinbarung', content: 'Diese Seite veroeffentlicht keine Standardprovision, Exklusivitaet, Quote oder Einkommensprognose. Wirtschaftliche Bedingungen muessen schriftlich genehmigt werden.' },
+        ],
+        faqs: [{ q: 'Prognostiziert die Berechnung Verkaeufe?', a: 'Nein. Sie berechnet nur Zeit, Zeitwert und Gespraechskapazitaet aus den Annahmen des Besuchers.' }],
+        breadcrumbs: [{ name: 'Startseite', url: `${SITE}/de` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Winerim kontaktieren', url: '/de/kontakt' }],
+      },
+      pt: {
+        title: 'Parceiros Winerim | Avalie a sua carteira HORECA',
+        description: 'Calcule o valor operacional para clientes e a capacidade real da sua carteira antes de solicitar uma conversa de parceiro Winerim.',
+        h1: 'Acrescente valor as visitas comerciais que ja realiza',
+        subtitle: 'Identifique um problema operacional real, quantifique-o com o cliente e avalie se faz sentido uma conversa conjunta.',
+        sections: [
+          { heading: 'Dois calculos baseados nos seus dados', content: 'Estime o valor do tempo do cliente e a capacidade da carteira a partir de hipoteses editaveis. Nao se enviam dados nem se preve rendimento do parceiro.' },
+          { heading: 'Quem encaixa', content: 'E necessario acesso profissional a contas HORECA, tempo para formacao e capacidade para qualificar um problema operacional antes de vender.' },
+          { heading: 'As condicoes exigem acordo', content: 'Esta pagina nao publica comissao padrao, exclusividade, quota ou previsao de rendimento. Qualquer condicao comercial deve ser aprovada por escrito.' },
+        ],
+        faqs: [{ q: 'O calculo preve vendas?', a: 'Nao. Calcula apenas tempo, valor do tempo e capacidade de conversa a partir das hipoteses do visitante.' }],
+        breadcrumbs: [{ name: 'Inicio', url: `${SITE}/pt` }, { name: label, url: canonical }],
+        internalLinks: [{ label: 'Contactar Winerim', url: '/pt/contacto' }],
       },
     };
 
@@ -6158,13 +6237,18 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/afiliate': {
-    meta: { title: 'Programa de Afiliados Winerim', description: 'Únete al programa de afiliados de Winerim y gana comisiones recomendando la carta inteligente de vinos a restaurantes.', canonical: `${SITE}/afiliate`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Partners Winerim | Valora el encaje de tu cartera HORECA', description: 'Calcula el valor operativo para tus clientes y la capacidad real de tu cartera antes de solicitar una conversación de partner con Winerim.', canonical: `${SITE}/afiliate`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
-      h1: 'Programa de afiliados Winerim',
-      sections: [{ heading: 'Cómo funciona', content: 'Recomienda Winerim a restaurantes de tu red. Por cada cliente que se convierta, recibes una comisión recurrente.' }],
-      faqs: [],
-      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Afíliate', url: `${SITE}/afiliate` }],
-      internalLinks: [{ label: 'Software carta de vinos', url: '/software-carta-de-vinos' }, { label: 'Demo', url: '/demo' }],
+      h1: 'Añade valor a las visitas comerciales que ya haces',
+      subtitle: 'Detecta un problema operativo real, cuantifícalo con el cliente y valora si existe encaje para una conversación conjunta.',
+      sections: [
+        { heading: 'Dos cálculos con tus propios datos', content: 'Estima valor operativo para el cliente y capacidad de cartera con supuestos editables. No se envían datos, no se predicen cierres y no se calculan ingresos del partner.' },
+        { heading: 'Quién encaja', content: 'Partners con acceso profesional a cuentas HORECA, tiempo para formarse y capacidad para cualificar un problema operativo concreto antes de vender.' },
+        { heading: 'Las condiciones requieren acuerdo', content: 'Esta página no publica comisión, exclusividad, cuota ni previsión de ingresos estándar. Cualquier condición económica debe aprobarse por escrito.' },
+      ],
+      faqs: [{ q: '¿La calculadora predice ventas?', a: 'No. Solo calcula tiempo, valor del tiempo y capacidad para mantener conversaciones a partir de los supuestos del visitante.' }],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Partners', url: `${SITE}/afiliate` }],
+      internalLinks: [{ label: 'Calculadora de tiempo operativo', url: '/herramientas/calculadora-tiempo-operativo' }, { label: 'Contacto', url: '/contacto' }],
     },
   },
   '/sommelier-corner': {
@@ -6229,36 +6313,36 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
     },
   },
   '/herramientas/calculadora-tiempo-operativo': {
-    meta: { title: 'Calculadora de Tiempo Operativo Recuperable | Winerim', description: 'Estima horas recuperables por semana, mes y año al reducir tareas manuales de carta, márgenes, documentos, TPV e informes.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Calculadora del Coste Operativo del Vino | Winerim', description: 'Calcula horas y valor del tiempo semanal dedicado a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.', canonical: `${SITE}/herramientas/calculadora-tiempo-operativo`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebPage' },
     content: {
-      h1: 'Calculadora de tiempo operativo recuperable',
-      subtitle: 'Convierte tareas manuales repetidas en un escenario de capacidad operativa, con hipótesis visibles y editables.',
+      h1: '¿Cuánto te cuesta gestionar el vino?',
+      subtitle: 'Compara el tiempo actual con un escenario definido por ti y valora el tiempo por rol con hipótesis visibles y editables.',
       sections: [
-        { heading: 'Fórmula transparente', content: 'Cada tarea aplica la fórmula tiempo manual actual menos tiempo estimado con Winerim, multiplicado por su frecuencia. Los resultados se muestran por semana, mes y año.' },
-        { heading: 'Ocho tareas operativas', content: 'Actualización de carta y precios, revisión de márgenes, documentos y facturas, conciliación de ventas, stock y TPV, comparación de distribuidores, informes, consolidación multiunidad y formación del equipo.' },
+        { heading: 'Fórmula transparente', content: 'Cada tarea aplica minutos actuales menos minutos del escenario, multiplicados por la frecuencia semanal. El mes medio usa semana por 52 dividido entre 12 y el año usa semana por 52.' },
+        { heading: 'Siete tareas semanales', content: 'Artículos del TPV, recepción de albaranes, recuento de botellas, conciliación de stock, preparación de pedidos, decisión de compra y comunicación con distribuidores.' },
         { heading: 'Escenario, no garantía', content: 'El usuario puede editar cada hipótesis. El resultado representa capacidad potencialmente recuperable y no una promesa fija de ahorro de horas.' },
       ],
       faqs: [
         { q: '¿Es una garantía de ahorro?', a: 'No. Es un escenario calculado con las hipótesis introducidas por el usuario.' },
-        { q: '¿Se mezclan horas con ahorro económico?', a: 'No. La calculadora muestra tiempo operativo y lo mantiene separado de costes, margen y capital.' },
+        { q: '¿Se mezclan horas con ahorro económico?', a: 'No. El coste por hora es opcional y expresa coste de oportunidad; no implica ahorro de caja, reducción de plantilla, ventas adicionales ni ROI.' },
       ],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de tiempo', url: `${SITE}/herramientas/calculadora-tiempo-operativo` }],
       internalLinks: [{ label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Integraciones', url: '/integraciones' }, { label: 'Demo', url: '/demo' }],
     },
   },
   '/en/tools/operational-time-calculator': {
-    meta: { title: 'Restaurant Operational Time Calculator | Winerim', description: 'Estimate recoverable hours per week, month and year across wine list, margin, document, POS and reporting tasks.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
+    meta: { title: 'Wine Operations Cost Calculator | Winerim', description: 'Calculate weekly hours and time value for POS items, deliveries, bottle counts, reconciliation, orders, purchasing and distributors.', canonical: `${SITE}/en/tools/operational-time-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebPage' },
     content: {
-      h1: 'Recoverable operational time calculator',
-      subtitle: 'Turn repeated manual tasks into an operational capacity scenario with visible, editable assumptions.',
+      h1: 'What does it cost to manage your wine operation?',
+      subtitle: 'Compare current time with a scenario you define and value time by role using visible, editable assumptions.',
       sections: [
-        { heading: 'Transparent formula', content: 'Each task uses current manual time minus estimated time with Winerim, multiplied by monthly frequency. Results are shown per week, month and year.' },
-        { heading: 'Eight operational tasks', content: 'Wine list and price updates, margin review, documents and invoices, sales, stock and POS reconciliation, distributor comparison, reporting, multi-unit consolidation and team training.' },
+        { heading: 'Transparent formula', content: 'Each task uses current minutes minus scenario minutes, multiplied by weekly frequency. Average month uses week times 52 divided by 12 and year uses week times 52.' },
+        { heading: 'Seven weekly tasks', content: 'POS items, delivery-note intake, bottle counts, stock reconciliation, order preparation, buying decisions and distributor communication.' },
         { heading: 'A scenario, not a guarantee', content: 'Every assumption can be edited. The result represents potentially recoverable capacity, not a fixed promise of saved hours.' },
       ],
       faqs: [
         { q: 'Is this a savings guarantee?', a: 'No. It is a scenario calculated from the assumptions entered by the user.' },
-        { q: 'Does it convert hours into financial savings?', a: 'No. The calculator shows operational time and keeps it separate from costs, margin and working capital.' },
+        { q: 'Does it convert hours into financial savings?', a: 'No. Hourly cost is optional and expresses opportunity cost; it does not imply cash savings, headcount reduction, added sales or ROI.' },
       ],
       breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Operational time calculator', url: `${SITE}/en/tools/operational-time-calculator` }],
       internalLinks: [{ label: 'Tools', url: '/en/tools' }, { label: 'Integrations', url: '/en/integrations' }, { label: 'Request a demo', url: '/en/demo' }],

@@ -170,19 +170,19 @@ const PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML = `
 
 const OPERATIONAL_TIME_ROUTE = "/herramientas/calculadora-tiempo-operativo";
 const OPERATIONAL_TIME_URL = `https://winerim.wine${OPERATIONAL_TIME_ROUTE}`;
-const OPERATIONAL_TIME_TITLE = "Calculadora de Tiempo Operativo | Winerim";
-const OPERATIONAL_TIME_DESCRIPTION = "Estima horas recuperables al actualizar la carta, revisar márgenes, procesar documentos, conciliar el TPV y preparar informes.";
+const OPERATIONAL_TIME_TITLE = "Calculadora del Coste Operativo del Vino | Winerim";
+const OPERATIONAL_TIME_DESCRIPTION = "Calcula horas y valor del tiempo semanal dedicado a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.";
 const OPERATIONAL_TIME_BOT_HTML = `
   <main id="winerim-operational-time-calculator">
-    <h1>Calculadora de tiempo operativo recuperable</h1>
-    <p>Compara el tiempo manual actual con un escenario usando Winerim, tarea por tarea y sin convertir horas en ahorro salarial.</p>
+    <h1>¿Cuánto te cuesta gestionar el vino?</h1>
+    <p>Compara el tiempo actual con un escenario definido por ti, tarea por tarea, y valora el tiempo por rol sin convertirlo en ahorro salarial.</p>
     <section>
-      <h2>Ocho tareas editables</h2>
-      <p>Actualización de carta y precios, márgenes, documentos, conciliación de ventas, stock y TPV, distribuidores, informes, grupos y formación del equipo.</p>
+      <h2>Siete tareas semanales sin solapamientos</h2>
+      <p>Artículos del TPV, recepción de albaranes, recuento de botellas, conciliación de stock, preparación de pedidos, decisión de compra y comunicación con distribuidores.</p>
     </section>
     <section>
       <h2>Fórmula transparente</h2>
-      <p>El resultado por tarea es la diferencia entre minutos actuales y minutos estimados con Winerim, multiplicada por la frecuencia mensual. Los resultados se muestran por semana, mes y año.</p>
+      <p>El resultado por tarea es la diferencia entre minutos actuales y minutos del escenario, multiplicada por la frecuencia semanal. El mes medio usa semana por 52 dividido entre 12 y el año usa semana por 52. El coste por hora es opcional.</p>
     </section>
     <section>
       <h2>Sin garantía ni formulario obligatorio</h2>
@@ -193,19 +193,19 @@ const OPERATIONAL_TIME_BOT_HTML = `
 
 const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
 const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
-const OPERATIONAL_TIME_EN_TITLE = "Restaurant Operational Time Calculator | Winerim";
-const OPERATIONAL_TIME_EN_DESCRIPTION = "Estimate recoverable hours when updating wine lists, reviewing margins, processing documents, reconciling POS data and preparing reports.";
+const OPERATIONAL_TIME_EN_TITLE = "Wine Operations Cost Calculator | Winerim";
+const OPERATIONAL_TIME_EN_DESCRIPTION = "Calculate weekly hours and time value for POS items, deliveries, bottle counts, reconciliation, orders, purchasing and distributors.";
 const OPERATIONAL_TIME_EN_BOT_HTML = `
   <main id="winerim-operational-time-calculator">
-    <h1>Recoverable operational time calculator</h1>
-    <p>Compare current manual time with your own Winerim scenario, task by task, without turning hours into a salary-saving claim.</p>
+    <h1>What does it cost to manage your wine operation?</h1>
+    <p>Compare current time with a scenario you define, task by task, and value time by role without turning it into a salary-saving claim.</p>
     <section>
-      <h2>Eight editable tasks</h2>
-      <p>Wine list and price updates, margins, documents, sales, stock and POS reconciliation, distributors, reporting, groups and team training.</p>
+      <h2>Seven weekly tasks without overlap</h2>
+      <p>POS items, delivery-note intake, bottle counts, stock reconciliation, order preparation, buying decisions and distributor communication.</p>
     </section>
     <section>
       <h2>Transparent formula</h2>
-      <p>Each task uses current minutes minus estimated minutes with Winerim, multiplied by monthly frequency. Results are shown per week, month and year.</p>
+      <p>Each task uses current minutes minus scenario minutes, multiplied by weekly frequency. Average month uses week times 52 divided by 12 and year uses week times 52. Hourly cost is optional.</p>
     </section>
     <section>
       <h2>No guarantee or mandatory form</h2>

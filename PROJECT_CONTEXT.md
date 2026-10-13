@@ -1178,3 +1178,37 @@
 
 - Obtener decision explicita go/no-go para produccion.
 - Con go, publicar frontend, facade Worker/edge-router y prerender, y ejecutar QA productivo ES/EN antes de Search Console.
+
+## Actualizacion 2026-10-13: coste operativo, partners y denominador SEO/i18n
+
+### Hechos
+
+- La calculadora de tiempo operativo local cubre siete tareas semanales con tiempo actual/escenario, frecuencia, rol y coste horario opcional.
+- Los resultados son firmados y separan tiempo, valor de oportunidad y resultados de negocio no verificados.
+- La landing partner local incorpora dos calculos honestos: valor operativo del cliente y capacidad de conversaciones de la cartera; no calcula comision, ventas ni ingresos.
+- La auditoria reproducible cruza `42` rutas estaticas indexables por `6` idiomas y cinco superficies tecnicas: `252/252` filas coherentes.
+- Se reconciliaron en `src/i18n/types.ts` las cinco variantes localizadas de `/simulador-carta` que ya existian en router, sitemap y prerender.
+- Produccion conserva la landing partner anterior; las rutas ES/EN de la calculadora operativa devuelven `404` para humano, Googlebot y OAI y no aparecen en el sitemap productivo.
+- Gate local: `239/239` tests, build, ESLint focal y sintaxis Worker/edge-router correctos. Deno no esta instalado.
+
+### Decisiones
+
+- Mantener este bloque como candidato local y no publicar sin coordinacion explicita.
+- No presentar ahorro de caja, ROI, ingresos de partner, comision, exclusividad o conversion como datos demostrados.
+- Excluir Biblioteca y articulos dinamicos del nuevo denominador estatico porque tienen validadores dedicados.
+
+### Hipotesis
+
+- Mostrar escenarios negativos y formulas editables aumenta la confianza frente a una cifra de ahorro unica.
+- Una landing partner centrada primero en el problema del cliente y la capacidad real de seguimiento cualifica mejor trafico frio.
+
+### Contradicciones
+
+- El paquete local y produccion no estan alineados: local contiene calculadora y nueva landing; produccion mantiene version anterior y `404` en la calculadora.
+- El HTML inicial humano de las rutas partner productivas nace con metadata de home y se corrige tras hidratar.
+
+### Tareas pendientes
+
+- Autorizar o rechazar una release coordinada de frontend, Worker/edge-router y prerender/sitemap.
+- Con go, validar humano, Googlebot y OAI, canonical, hreflang y sitemap antes de Search Console.
+- Verificar por escrito cualquier condicion economica del programa partner antes de publicarla.

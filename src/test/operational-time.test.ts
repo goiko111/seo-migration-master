@@ -4,6 +4,8 @@ import {
   calculateOperationalTime,
   createEmptyOperationalTimeAnswers,
   EXAMPLE_OPERATIONAL_TIME_ANSWERS,
+  OPERATIONAL_TASKS,
+  OPERATIONAL_WEEKS_PER_MONTH,
   parseOperationalTimeValue,
   prioritizeOperationalTasks,
 } from "@/lib/operationalTime";
@@ -12,55 +14,138 @@ describe("operational time calculator", () => {
   it("keeps empty data separate from zero", () => {
     const result = calculateOperationalTime(createEmptyOperationalTimeAnswers());
     expect(result.coverage).toBe(0);
-    expect(result.recoverableHoursPerMonth).toBe(0);
+    expect(result.costCoverage).toBe(0);
+    expect(result.netHoursPerWeek).toBe(0);
     expect(result.taskResults).toEqual({});
   });
 
-  it("calculates the fictitious example by task and period", () => {
-    const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
-    expect(result.coverage).toBe(8);
-    expect(result.taskResults.list?.recoverableHoursPerMonth).toBe(5);
-    expect(result.taskResults.documents?.recoverableHoursPerMonth).toBe(4);
-    expect(result.recoverableHoursPerMonth).toBe(26);
-    expect(result.recoverableHoursPerWeek).toBe(6);
-    expect(result.recoverableHoursPerYear).toBe(312);
+  it("uses seven explicit, non-overlapping weekly tasks", () => {
+    expect(OPERATIONAL_TASKS).toHaveLength(7);
+    expect(OPERATIONAL_TASKS.map(({ id }) => id)).toEqual([
+      "posItems",
+      "deliveryNotes",
+      "bottleCount",
+      "stockReconciliation",
+      "orderPreparation",
+      "buyingDecision",
+      "distributorCommunication",
+    ]);
+    OPERATIONAL_TASKS.forEach((task) => expect(task.boundary.length).toBeGreaterThan(45));
   });
 
-  it("shows additional time instead of hiding a negative task", () => {
+  it("calculates current, scenario, recoverable, additional and net values", () => {
+    const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
+    expect(result.modelVersion).toBe("2.0.0");
+    expect(result.coverage).toBe(7);
+    expect(result.costCoverage).toBe(7);
+    expect(result.currentHoursPerWeek).toBe(11.42);
+    expect(result.scenarioHoursPerWeek).toBe(6.83);
+    expect(result.recoverableHoursPerWeek).toBe(4.59);
+    expect(result.additionalHoursPerWeek).toBe(0);
+    expect(result.netHoursPerWeek).toBe(4.59);
+    expect(result.currentTimeValuePerWeek).toBe(229.4);
+    expect(result.scenarioTimeValuePerWeek).toBe(133.26);
+    expect(result.netTimeValuePerWeek).toBe(96.14);
+  });
+
+  it("uses 52/12 for an average month and 52 weeks for a year", () => {
+    const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
+    expect(OPERATIONAL_WEEKS_PER_MONTH).toBeCloseTo(4.333333, 5);
+    expect(result.netHoursPerMonth).toBe(19.89);
+    expect(result.netHoursPerYear).toBe(238.68);
+    expect(result.netTimeValuePerYear).toBe(4999.28);
+  });
+
+  it("keeps additional time and subtracts it from the signed net", () => {
     const answers = createEmptyOperationalTimeAnswers();
-    answers.list = {
+    answers.posItems = {
       enabled: true,
+      role: "Manager",
       currentMinutes: "30",
-      winerimMinutes: "45",
-      occurrencesPerMonth: "4",
+      scenarioMinutes: "45",
+      occurrencesPerWeek: "4",
+      hourlyCost: "20",
     };
     const result = calculateOperationalTime(answers);
-    expect(result.taskResults.list?.differenceHoursPerMonth).toBe(-1);
-    expect(result.recoverableHoursPerMonth).toBe(0);
-    expect(result.additionalHoursPerMonth).toBe(1);
+    expect(result.taskResults.posItems?.netHoursPerWeek).toBe(-1);
+    expect(result.recoverableHoursPerWeek).toBe(0);
+    expect(result.additionalHoursPerWeek).toBe(1);
+    expect(result.netHoursPerWeek).toBe(-1);
+    expect(result.netTimeValuePerWeek).toBe(-20);
   });
 
-  it("ignores disabled tasks and validates enabled values", () => {
+  it("calculates hours without inventing a missing hourly cost", () => {
     const answers = createEmptyOperationalTimeAnswers();
-    answers.list.enabled = false;
-    answers.margins.currentMinutes = "1.000,50";
+    answers.deliveryNotes = {
+      enabled: true,
+      role: "",
+      currentMinutes: "20",
+      scenarioMinutes: "10",
+      occurrencesPerWeek: "3",
+      hourlyCost: "",
+    };
     const result = calculateOperationalTime(answers);
-    expect(result.taskResults.list).toBeUndefined();
-    expect(result.errors["margins.currentMinutes"]).toContain("separador");
+    expect(result.coverage).toBe(1);
+    expect(result.costCoverage).toBe(0);
+    expect(result.netHoursPerWeek).toBe(0.5);
+    expect(result.taskResults.deliveryNotes?.hourlyCost).toBeNull();
+    expect(result.taskResults.deliveryNotes?.netTimeValuePerWeek).toBeNull();
   });
 
-  it("accepts decimal commas and rejects excessive values", () => {
+  it("accepts a zero hourly cost without treating it as missing", () => {
+    const answers = structuredClone(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
+    answers.posItems.hourlyCost = "0";
+    const result = calculateOperationalTime(answers);
+    expect(result.costCoverage).toBe(7);
+    expect(result.taskResults.posItems?.hourlyCost).toBe(0);
+    expect(result.taskResults.posItems?.netTimeValuePerWeek).toBe(0);
+  });
+
+  it("ignores disabled tasks and rejects negative, formatted and extreme values", () => {
+    const answers = createEmptyOperationalTimeAnswers();
+    answers.posItems.enabled = false;
+    answers.deliveryNotes.currentMinutes = "-1";
+    answers.bottleCount.currentMinutes = "1.000,50";
+    answers.stockReconciliation.currentMinutes = "100001";
+    const result = calculateOperationalTime(answers);
+    expect(result.taskResults.posItems).toBeUndefined();
+    expect(result.errors["deliveryNotes.currentMinutes"]).toContain("positivo");
+    expect(result.errors["bottleCount.currentMinutes"]).toContain("separador");
+    expect(result.errors["stockReconciliation.currentMinutes"]).toContain("límite");
+  });
+
+  it("accepts decimal commas and preserves the role as entered", () => {
     expect(parseOperationalTimeValue("10,5")).toBe(10.5);
-    expect(() => parseOperationalTimeValue("100001")).toThrow("límite");
+    const answers = createEmptyOperationalTimeAnswers();
+    answers.buyingDecision = {
+      enabled: true,
+      role: "Dirección",
+      currentMinutes: "60,5",
+      scenarioMinutes: "30",
+      occurrencesPerWeek: "1",
+      hourlyCost: "25,5",
+    };
+    expect(calculateOperationalTime(answers).taskResults.buyingDecision?.role).toBe("Dirección");
   });
 
-  it("prioritizes only positive recoverable tasks", () => {
+  it("prioritizes the three largest positive net results only", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(prioritizeOperationalTasks(result.taskResults)).toEqual([
-      "list",
-      "groups",
-      "margins",
+      "stockReconciliation",
+      "deliveryNotes",
+      "posItems",
     ]);
+  });
+
+  it("labels inputs, calculations, fictional examples and unconnected verification", () => {
+    const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
+    expect(result.sources).toEqual({
+      inputs: "entered",
+      outputs: "calculated",
+      example: "fictional",
+      operationalData: "verified",
+      verifiedConnected: false,
+    });
   });
 
   it("keeps the human, bot and sitemap contracts in sync", () => {
@@ -85,7 +170,8 @@ describe("operational time calculator", () => {
     expect(sitemap).toContain(`{ esPath: '${enRoute}', priority: '0.8', changefreq: 'monthly', multilang: false }`);
     expect(prerender).toContain(`'${route}': {`);
     expect(prerender).toContain(`'${enRoute}': {`);
-    expect(page).toContain("Recoverable operational time calculator");
+    expect(page).toContain("What does it cost to manage your wine operation?");
     expect(page).toContain("Calculated locally · We do not send this data");
+    expect(page).toContain("does not imply cash savings, headcount reduction, added sales or guaranteed ROI");
   });
 });

@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "audit:wine-library:local": "node scripts/audit-wine-library-remote-ledger.mjs --local-only",
     "audit:wine-library:remote": "node scripts/audit-wine-library-remote-ledger.mjs",
+    "audit:seo-i18n": "node scripts/audit-seo-i18n-denominator.mjs",
     "validate:wine-library": "node scripts/validate-wine-library-release.mjs",
     "generate:sitemap-static": "node scripts/refresh-static-sitemap.mjs",
     "deploy:supabase:seo": "npx --yes supabase@latest functions deploy sitemap --project-ref pwkqbcgjrhoyxrsmcypw && npx --yes supabase@latest functions deploy prerender --project-ref pwkqbcgjrhoyxrsmcypw",

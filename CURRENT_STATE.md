@@ -7406,3 +7406,35 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Decision go/no-go del usuario.
 - Tras go: despliegue coordinado, QA humano/bot ES/EN, comprobacion de eventos sin PII y solo despues Search Console.
+
+## Actualizacion 2026-10-13: candidato coste operativo + partners
+
+### Hechos confirmados
+
+- Implementacion local completa sobre `codex/winerim-web-next-20260929`, baseline `554b95c53a747acd239f1341567c33de69fc501f`.
+- Calculadora operativa ES/EN ampliada a siete tareas con coste por rol y resultado firmado semanal/mensual/anual.
+- Landing partner reescrita en seis idiomas con calculo de valor cliente y calculo de capacidad de cartera, sin prediccion de ingresos.
+- QA visual completada en desktop y `390 px`; no se detecto overflow ni error de consola en las rutas comprobadas.
+- Auditor `scripts/audit-seo-i18n-denominator.mjs`: `252/252` filas verdes.
+- Produccion: partner `200` con contenido anterior; calculadora ES/EN `404` para humano/Googlebot/OAI y ausente del sitemap.
+
+### Decisiones
+
+- Estado de release: preparado localmente, no desplegado.
+- Search Console queda bloqueado hasta que las rutas productivas esten sanas y alineadas por superficie.
+
+### Hipotesis
+
+- La mayor mejora de conversion vendra de dar utilidad medible antes del CTA, no de aumentar promesas comerciales.
+
+### Contradicciones / riesgos
+
+- El raw HTML humano de partner sigue naciendo con title/H1/canonical de home antes de hidratar.
+- El bot ES de `/afiliate` aun muestra en produccion el mensaje antiguo de comision recurrente, no el candidato prudente.
+- `deno check` queda sin ejecutar por ausencia del binario, aunque TypeScript frontend, tests y build pasan.
+
+### Tareas pendientes
+
+- Decision go/no-go.
+- Si hay go: release atomica y QA productiva de las dos calculadoras y las seis rutas partner.
+- Solo despues: sitemap/Search Console e inspeccion selectiva.

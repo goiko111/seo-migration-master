@@ -5486,3 +5486,33 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Validar rutas ES/EN como humano, Googlebot y `OAI-SearchBot/1.0`.
 4. Confirmar canonical, hreflang, sitemap, formulario y eventos sin valores financieros ni PII analitica.
 5. Solo con todo verde, pasar a Search Console y retomar el siguiente bloque de la web.
+
+## Actualizacion 2026-10-13: release gate coste operativo + partners
+
+### Hechos
+
+- El desarrollo local esta completo y los gates disponibles estan verdes.
+- Produccion sigue desfasada: partner anterior y calculadora ES/EN en `404`.
+
+### Decisiones
+
+- No continuar con nuevos claims ni nuevas herramientas dentro de este lote.
+- El siguiente bloque es una decision de release, no mas desarrollo funcional.
+
+### Hipotesis
+
+- Publicar las capas juntas evitara que humanos y bots reciban propuestas distintas.
+
+### Contradicciones / riesgos
+
+- Deno no esta disponible en este entorno; ese check debe ejecutarse en el entorno de release.
+- El shell HTML inicial productivo sigue usando metadata de home en rutas partner antes de hidratar.
+
+### Tareas pendientes listas para retomar
+
+1. Obtener go/no-go explicito para publicar.
+2. Con go, desplegar frontend, Worker/edge-router y Supabase prerender/sitemap en una unica ventana.
+3. Validar `/afiliate`, `/en/affiliate`, `/it/affiliati`, `/fr/affilies`, `/de/partner` y `/pt/afiliados` como humano, Googlebot y OAI.
+4. Validar `/herramientas/calculadora-tiempo-operativo` y `/en/tools/operational-time-calculator`: `200`, H1, canonical, hreflang, calculo positivo/negativo y sitemap.
+5. Ejecutar `deno check supabase/functions/prerender/index.ts` en un entorno con Deno.
+6. Solo con QA productiva verde, inspeccionar las URLs en Search Console y reenviar sitemap si procede.

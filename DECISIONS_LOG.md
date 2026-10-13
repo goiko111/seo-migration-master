@@ -4896,3 +4896,33 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 #### Tareas pendientes asociadas
 
 - Go/no-go de produccion y, si procede, despliegue y QA coordinados.
+
+## 2026-10-13
+
+### Coste operativo, partners y control SEO/i18n
+
+#### Hechos
+
+- El candidato local pasa `239/239` tests, build, lint focal, sintaxis de Worker/edge-router y auditor SEO/i18n `252/252`.
+- Produccion no contiene aun las rutas operativas y conserva la experiencia partner anterior.
+
+#### Decisiones
+
+- Calcular diferencias de tiempo y valor con signo; nunca recortar a cero escenarios desfavorables.
+- Tratar el coste horario como coste de oportunidad opcional, no como ahorro de caja garantizado.
+- No inferir comisiones, exclusividad, cuotas, conversiones, ventas o ingresos partner sin acuerdo escrito aprobado.
+- Mantener dos calculos separados en partner: valor para el cliente y capacidad de seguimiento de la cartera.
+- Usar `npm run audit:seo-i18n` como gate reproducible para rutas estaticas indexables.
+- No desplegar ni solicitar indexacion sin autorizacion y release coordinada de todas las capas.
+
+#### Hipotesis
+
+- La transparencia de supuestos y la posibilidad de obtener resultados negativos reducen claims dudosos y mejoran la calidad de la conversacion comercial.
+
+#### Contradicciones
+
+- Candidato local verde frente a produccion anterior y calculadora `404`.
+
+#### Tareas pendientes asociadas
+
+- Go/no-go, release coordinada y QA productiva humano/bots/sitemap antes de Search Console.
