@@ -5770,3 +5770,32 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Instrumentar selección de perfil, carga de ejemplo, finalización y descarga sin
    PII.
 4. Mantener Search Console y traducciones como líneas separadas.
+
+## Actualización 2026-10-13: siguiente bloque tras priorizar calculadoras
+
+### Hechos
+
+- Las tres calculadoras prioritarias ya encabezan ambos bloques en producción.
+- Frontend, tests y bots están verdes; no queda gate de publicación frontend.
+
+### Decisiones
+
+- No alterar sitemap, Worker SEO ni contenido de producto para resolver el
+  desfase secundario de Lovable.
+
+### Hipótesis
+
+- La nueva jerarquía permitirá comparar uso entre los tres recorridos.
+
+### Contradicciones / límites
+
+- Lovable debe modificar primero su fuente antigua; desplegarla de nuevo sin
+  cambios repetiría el problema.
+
+### Siguiente bloque verificable
+
+1. Enviar a Lovable el prompt de
+   `docs/agent_outputs/lovable_prerender_calculator_v5_exact_patch_2026-10-13.md`.
+2. Verificar el endpoint directo de la función en ES/EN y registrar hash/revisión.
+3. Medir clic de entrada, inicio y finalización de las tres calculadoras sin PII.
+4. Retomar después Search Console y traducciones como líneas independientes.

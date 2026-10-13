@@ -1536,3 +1536,36 @@
   secundaria, sin tocar frontend, sitemap, migraciones ni Worker.
 - Medir selección de perfil, finalización y descarga sin PII antes de recalibrar
   hipótesis.
+
+## Actualización 2026-10-13: prioridad estable de las tres calculadoras
+
+### Hechos
+
+- Tiempo operativo, diagnóstico de rentabilidad y fuga de margen ocupan las tres
+  primeras posiciones de `Empieza aquí` y del listado general en ES/EN.
+- En IT/FR/DE/PT se adelanta fuga de margen, única de las tres con versión
+  localizada disponible.
+- Producción usa Pages `https://fe3faf86.winerim-origin.pages.dev` y facade
+  `bdcf1b7a-2923-46ae-a36d-41e558719f28`.
+- Googlebot y OAI siguen recibiendo el prerender v5 correcto desde
+  `worker-static-prerender`.
+
+### Decisiones
+
+- Centralizar el orden en `src/lib/toolPriority.ts` y aplicarlo a ambos bloques.
+
+### Hipótesis
+
+- Priorizar los diagnósticos de entrada reducirá la elección inicial sin ocultar
+  el resto de herramientas.
+
+### Contradicciones
+
+- Lovable desplegó su fuente antigua de `prerender`; el frontend y el prerender
+  público están correctos, pero su copia secundaria conserva siete tareas.
+
+### Tareas pendientes
+
+- Aplicar en Lovable el parche exacto documentado en
+  `docs/agent_outputs/lovable_prerender_calculator_v5_exact_patch_2026-10-13.md`.
+- Medir uso sin PII antes de cambiar la prioridad o las hipótesis.

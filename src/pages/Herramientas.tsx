@@ -12,6 +12,7 @@ import MethodologyBox from "@/components/seo/MethodologyBox";
 import FAQSection from "@/components/seo/FAQSection";
 import { useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { prioritizeToolItems } from "@/lib/toolPriority";
 
 const content: Record<string, {
   seoTitle: string; seoDesc: string; badge: string; h1: string; subtitle: string;
@@ -542,15 +543,17 @@ const Herramientas = () => {
   const goals = goalCopy[lang] || goalCopy.es;
   const faq = toolsFaqCopy[lang] || toolsFaqCopy.es;
   const [activeTag, setActiveTag] = useState("all");
+  const prioritizedTools = prioritizeToolItems(t.tools);
+  const prioritizedGoals = prioritizeToolItems(goals.goals);
 
   // Extract unique tags for filter pills
-  const allTags = Array.from(new Set(t.tools.map(tool => tool.tag)));
+  const allTags = Array.from(new Set(prioritizedTools.map(tool => tool.tag)));
   const tagFilters = [
     { key: "all", label: ui.all },
     ...allTags.map(tag => ({ key: tag, label: tag })),
   ];
 
-  const filteredTools = activeTag === "all" ? t.tools : t.tools.filter(tool => tool.tag === activeTag);
+  const filteredTools = activeTag === "all" ? prioritizedTools : prioritizedTools.filter(tool => tool.tag === activeTag);
 
   return (
     <div className="min-h-screen bg-background">
@@ -585,7 +588,7 @@ const Herramientas = () => {
               <p className="text-muted-foreground leading-relaxed">{goals.intro}</p>
             </div>
             <div className="grid md:grid-cols-2 border-t border-border">
-              {goals.goals.map((goal, index) => {
+              {prioritizedGoals.map((goal, index) => {
                 const Icon = toolIconByPath[goal.to] || Search;
                 const isFeatured = goal.to === "/herramientas/calculadora-tiempo-operativo";
                 return (

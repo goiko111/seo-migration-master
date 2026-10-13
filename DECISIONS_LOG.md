@@ -5191,3 +5191,31 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Reconciliar la Edge Function con un deploy acotado desde Lovable y medir el
   comportamiento antes de modificar porcentajes.
+
+## 2026-10-13 — Prioridad de calculadoras y reconciliación Lovable
+
+### Hechos
+
+- La landing de herramientas tenía tiempo y rentabilidad arriba, pero fuga de
+  margen quedaba detrás de otros recorridos en los dos bloques.
+- Lovable desplegó una fuente `prerender` que aún describe siete tareas.
+
+### Decisiones
+
+- Definir una prioridad central: tiempo operativo, rentabilidad y fuga de margen.
+- Aplicarla tanto a los objetivos como al listado, preservando el orden del resto.
+- Corregir Lovable mediante textos explícitos; no volver a pedir un despliegue
+  ambiguo de su código actual.
+
+### Hipótesis
+
+- La prioridad común evita regresiones cuando se añadan herramientas nuevas.
+
+### Contradicciones
+
+- El endpoint secundario de Lovable está desalineado, pero el Worker público está
+  correcto y comprobado con Googlebot y OAI.
+
+### Pendiente
+
+- Desplegar solo `prerender` con el parche exacto y registrar su nueva revisión.

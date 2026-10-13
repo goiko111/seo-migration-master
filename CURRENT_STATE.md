@@ -7738,3 +7738,36 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Publicar solo la Edge Function `prerender` desde Lovable Cloud.
 - Medir uso por perfil sin PII y contrastar hipótesis con datos consentidos.
+
+## Actualización 2026-10-13: calculadoras prioritarias publicadas
+
+### Hechos confirmados
+
+- La regla `prioritizeToolItems` mantiene primero tiempo operativo, rentabilidad y
+  fuga de margen en `Empieza aquí` y en el listado de herramientas.
+- QA productiva confirmó las mismas tres primeras rutas en ambos bloques, sin
+  errores de consola.
+- Gates verdes: `257/257` tests, TypeScript, build, `git diff --check` y Playwright.
+- Release activa: Pages `fe3faf86`; facade
+  `bdcf1b7a-2923-46ae-a36d-41e558719f28`.
+
+### Decisiones
+
+- No publicar rutas sin traducción en IT/FR/DE/PT; allí se prioriza solo fuga de
+  margen.
+
+### Hipótesis
+
+- El orden estable dirigirá más sesiones a los tres recorridos principales.
+
+### Contradicciones / riesgos
+
+- Lovable Cloud conserva una revisión antigua del `prerender`, aunque la capa SEO
+  pública activa ya contiene trece tareas y tres perfiles.
+- Persisten los avisos no bloqueantes conocidos de React Router, `caniuse-lite`,
+  una `key` en Precios y chunks grandes.
+
+### Tareas pendientes
+
+- Ejecutar el parche Lovable acotado y verificar su endpoint directo.
+- Instrumentar uso agregado sin PII.

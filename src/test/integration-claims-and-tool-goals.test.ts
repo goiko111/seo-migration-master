@@ -96,6 +96,8 @@ describe("integration claims and guided tool entry", () => {
     expect(tools).toContain('/herramientas/calculadora-fuga-margen');
     expect(tools).toContain('/herramientas/calculadora-stock-muerto');
     expect(tools).toContain('/herramientas/auditor-carta-multilocal');
+    expect(tools).toContain("const prioritizedTools = prioritizeToolItems(t.tools)");
+    expect(tools).toContain("const prioritizedGoals = prioritizeToolItems(goals.goals)");
     expect(popup).not.toContain("herramientas|tools|outils|strumenti|ferramentas|werkzeuge|recursos");
   });
 
