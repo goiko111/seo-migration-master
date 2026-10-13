@@ -32,6 +32,7 @@ const content: Record<string, {
     tools: [
       { to: "/herramientas/calculadora-tiempo-operativo", title: "Calculadora de tiempo operativo recuperable", desc: "Compara el tiempo manual con tu escenario usando Winerim, tarea por tarea, y estima horas recuperables por semana, mes y año.", tag: "Operaciones" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Diagnóstico de rentabilidad de bodega", desc: "Separa ahorro en compras, margen adicional, horas recuperables y capital inmovilizado con fórmulas y supuestos editables.", tag: "Diagnóstico" },
+      { to: "/herramientas/calculadora-mermas-vino", title: "Calculadora de mermas de vino", desc: "Estima cuánto vino pierdes al mes por copeo, botellas abiertas, roturas, invitaciones sin registrar y diferencias de inventario.", tag: "Gestión" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
@@ -70,6 +71,7 @@ const content: Record<string, {
     tools: [
       { to: "/herramientas/calculadora-tiempo-operativo", title: "Recoverable Operational Time Calculator", desc: "Compare current manual work with your Winerim scenario, task by task, and estimate recoverable hours per week, month and year.", tag: "Operations" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Wine Cellar Profitability Diagnostic", desc: "Keep purchasing savings, additional contribution margin, recoverable hours and tied-up capital separate with editable assumptions.", tag: "Diagnostic" },
+      { to: "/herramientas/calculadora-mermas-vino", title: "Wine Waste Calculator", desc: "Estimate monthly wine loss from by-the-glass service, open bottles, breakage, unrecorded comps and inventory differences.", tag: "Management" },
       { to: "/wine-list-analyzer", title: "Wine List Analyzer", desc: "Upload your list and get improvement recommendations. With Winerim, this analysis updates automatically every week.", tag: "Analysis" },
       { to: "/calculadora-margen-vino", title: "Wine Margin Calculator", desc: "Calculate the optimal margin for each reference. As a Winerim client, margins are optimized automatically based on your goals.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
@@ -245,6 +247,7 @@ const content: Record<string, {
 const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/diagnostico-rentabilidad-bodega": BarChart3,
   "/herramientas/calculadora-tiempo-operativo": Clock3,
+  "/herramientas/calculadora-mermas-vino": ShieldAlert,
   "/wine-list-analyzer": Search,
   "/calculadora-margen-vino": Calculator,
   "/herramientas/calculadora-precio-vino-por-copa": Wine,

@@ -96,6 +96,8 @@ const REACT_ROUTES = new Set([
   "/en/tools/wine-cellar-profitability-diagnostic",
   "/herramientas/calculadora-tiempo-operativo",
   "/en/tools/operational-time-calculator",
+  "/herramientas/calculadora-mermas-vino",
+  "/en/tools/wine-waste-calculator",
   "/afiliate",
   "/en/affiliate",
   "/it/affiliati",

@@ -3220,6 +3220,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/barometro-cartas-vino-2026': '/en/wine-list-barometer-2026',
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/herramientas/calculadora-precio-vino-por-copa': '/en/tools/wine-by-glass-price-calculator',
+    '/herramientas/calculadora-mermas-vino': '/en/tools/wine-waste-calculator',
     '/herramientas/calculadora-stock-muerto': '/en/tools/dead-stock-calculator',
     '/herramientas/calculadora-ticket-medio-vino': '/en/tools/average-ticket-calculator',
     '/herramientas/calculadora-compra-inteligente': '/en/tools/smart-purchasing-calculator',
@@ -3443,6 +3444,7 @@ const STATIC_PAGE_LABELS: Record<string, Record<WineLibraryLang, string>> = {
   '/guias-y-recursos': { es: 'Guias y recursos', en: 'Guides and resources', it: 'Guide e risorse', fr: 'Guides et ressources', de: 'Ratgeber und Ressourcen', pt: 'Guias e recursos' },
   '/herramientas': { es: 'Herramientas', en: 'Tools', it: 'Strumenti', fr: 'Outils', de: 'Tools', pt: 'Ferramentas' },
   '/herramientas/calculadora-precio-vino-por-copa': { es: 'Calculadora de precio por copa', en: 'Wine by-the-glass price calculator', it: 'Calcolatrice prezzo vino al calice', fr: 'Calculateur prix vin au verre', de: 'Glaspreis-Rechner', pt: 'Calculadora preço vinho por copo' },
+  '/herramientas/calculadora-mermas-vino': { es: 'Calculadora de mermas de vino', en: 'Wine waste calculator', it: 'Wine waste calculator', fr: 'Wine waste calculator', de: 'Wine waste calculator', pt: 'Wine waste calculator' },
   '/herramientas/calculadora-stock-muerto': { es: 'Calculadora de stock muerto', en: 'Dead stock calculator', it: 'Calcolatrice stock morto', fr: 'Calculateur stock mort', de: 'Totbestand-Rechner', pt: 'Calculadora de stock morto' },
   '/herramientas/calculadora-ticket-medio-vino': { es: 'Calculadora de ticket medio de vino', en: 'Average wine ticket calculator', it: 'Calcolatrice scontrino medio vino', fr: 'Calculateur ticket moyen vin', de: 'Durchschnittsbon-Rechner', pt: 'Calculadora de ticket médio' },
   '/herramientas/calculadora-compra-inteligente': { es: 'Calculadora de compra inteligente', en: 'Smart purchasing calculator', it: 'Calcolatrice acquisto intelligente', fr: 'Calculateur achat intelligent', de: 'Intelligenter Einkaufsrechner', pt: 'Calculadora de compra inteligente' },
@@ -6274,6 +6276,42 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       faqs: [{ q: '¿Es gratuita?', a: 'Sí. 100% gratuita y sin registro.' }],
       breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora precio copa', url: `${SITE}/herramientas/calculadora-precio-vino-por-copa` }],
       internalLinks: [{ label: 'Herramientas', url: '/herramientas' }, { label: 'Vino por copa', url: '/vino-por-copa-restaurante' }, { label: 'Demo', url: '/demo' }],
+    },
+  },
+  '/herramientas/calculadora-mermas-vino': {
+    meta: { title: 'Calculadora de mermas de vino para restaurantes | Winerim', description: 'Calcula cuánto vino pierdes al mes por copeo, botellas abiertas, roturas, invitaciones e inventario. Cálculo local, gratis y sin registro.', canonical: `${SITE}/herramientas/calculadora-mermas-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: {
+      h1: '¿Cuánto vino pierdes cada mes?',
+      subtitle: 'Copeo, botellas abiertas, roturas, invitaciones e inventario. Un escenario con fórmulas visibles, sin promesas ocultas.',
+      sections: [
+        { heading: 'Coste perdido y venta no cobrada, por separado', content: 'La cifra principal valora a coste el vino pagado que no se cobró. El PVP de copas no cobradas se muestra aparte y nunca se suma al coste perdido.' },
+        { heading: 'Siete fuentes de merma', content: 'Separa copas sin explicar, caducidad, dosis generosa, roturas, invitaciones sin registrar, diferencias de inventario y errores de albarán.' },
+        { heading: 'Cálculo local con fórmulas visibles', content: 'El escenario se calcula en el navegador. Las cifras introducidas no se envían y las estimaciones base quedan identificadas y editables.' },
+      ],
+      faqs: [
+        { q: '¿Es un cálculo exacto?', a: 'Es un escenario con tus cifras y estimaciones visibles. La medición real necesita ventas del TPV, stock y recuentos.' },
+        { q: '¿Se envían mis datos?', a: 'No. El cálculo se realiza en tu navegador.' },
+      ],
+      breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Calculadora de mermas', url: `${SITE}/herramientas/calculadora-mermas-vino` }],
+      internalLinks: [{ label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Calculadora de stock muerto', url: '/herramientas/calculadora-stock-muerto' }, { label: 'Solicitar demo', url: '/demo' }],
+    },
+  },
+  '/en/tools/wine-waste-calculator': {
+    meta: { title: 'Wine waste calculator for restaurants | Winerim', description: 'Calculate monthly wine waste from by-the-glass service, open bottles, breakage, unrecorded comps and inventory. Free, local and transparent.', canonical: `${SITE}/en/tools/wine-waste-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: {
+      h1: 'How much wine do you lose each month?',
+      subtitle: 'By-the-glass service, open bottles, breakage, comps and inventory. A scenario with visible formulas and no hidden promises.',
+      sections: [
+        { heading: 'Lost cost and unbilled sales stay separate', content: 'The primary figure values paid wine that was not charged at cost. The selling price of unbilled glasses is shown separately and never added to lost cost.' },
+        { heading: 'Seven sources of wine waste', content: 'Separate unexplained glasses, expiry, generous pours, breakage, unrecorded comps, inventory differences and delivery-note errors.' },
+        { heading: 'Local calculation with visible formulas', content: 'The scenario runs in the browser. Entered figures are not sent, and base estimates remain identified and editable.' },
+      ],
+      faqs: [
+        { q: 'Is the calculation exact?', a: 'It is a scenario using your figures and visible estimates. Actual measurement requires POS sales, stock and counts.' },
+        { q: 'Do you send my data?', a: 'No. The calculation runs in your browser.' },
+      ],
+      breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Wine waste calculator', url: `${SITE}/en/tools/wine-waste-calculator` }],
+      internalLinks: [{ label: 'Profitability diagnostic', url: '/en/tools/wine-cellar-profitability-diagnostic' }, { label: 'Dead stock calculator', url: '/en/tools/dead-stock-calculator' }, { label: 'Request a demo', url: '/en/demo' }],
     },
   },
   '/herramientas/diagnostico-rentabilidad-bodega': {

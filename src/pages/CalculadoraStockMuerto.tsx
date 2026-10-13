@@ -929,7 +929,14 @@ const CalculadoraStockMuerto = () => {
         </div>
       </section>
 
-      <InternalLinks links={t.internalLinks} />
+      <InternalLinks links={lang === "es" || lang === "en" ? [
+        ...t.internalLinks,
+        {
+          to: lang === "en" ? "/en/tools/wine-waste-calculator" : "/herramientas/calculadora-mermas-vino",
+          label: lang === "en" ? "Wine waste calculator" : "Calculadora de mermas de vino",
+          type: "tool" as const,
+        },
+      ] : t.internalLinks} />
       <Footer />
     </div>
   );

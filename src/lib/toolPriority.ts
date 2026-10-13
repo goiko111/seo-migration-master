@@ -2,6 +2,7 @@ export const PRIORITY_TOOL_ROUTES = [
   "/herramientas/calculadora-tiempo-operativo",
   "/herramientas/diagnostico-rentabilidad-bodega",
   "/herramientas/calculadora-fuga-margen",
+  "/herramientas/calculadora-mermas-vino",
 ] as const;
 
 const priorityByRoute = new Map<string, number>(

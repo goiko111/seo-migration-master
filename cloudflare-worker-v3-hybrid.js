@@ -1271,6 +1271,34 @@ const ONLINE_TOOL_COMPACT_GROUPS = [
   },
 ];
 
+ONLINE_TOOL_GROUPS.push({
+  key: 'wine-waste-calculator',
+  paths: {
+    es: '/herramientas/calculadora-mermas-vino',
+    en: '/en/tools/wine-waste-calculator',
+  },
+  copies: {
+    es: {
+      title: 'Calculadora de mermas de vino para restaurantes | Winerim',
+      h1: '¿Cuánto vino pierdes cada mes?',
+      description: 'Calcula cuánto vino pierdes al mes por copeo, botellas abiertas, roturas, invitaciones e inventario. Cálculo local, gratis y sin registro.',
+      subtitle: 'Copeo, botellas abiertas, roturas, invitaciones e inventario. Un escenario con fórmulas visibles, sin promesas ocultas.',
+      problem: 'La merma de vino mezcla a menudo coste ya pagado y venta no cobrada. Esta calculadora los separa para mostrar cuánto vino se pierde a coste y dónde actuar primero.',
+      usage: 'Úsala con las botellas abiertas, copas cobradas, bajas, invitaciones, recuentos y compras de un mes. El cálculo se realiza en el navegador y no envía las cifras.',
+      decision: 'Ayuda a priorizar control de copeo, caducidad, dosis, roturas, invitaciones, inventario o revisión de albaranes sin sumar magnitudes distintas.',
+    },
+    en: {
+      title: 'Wine waste calculator for restaurants | Winerim',
+      h1: 'How much wine do you lose each month?',
+      description: 'Calculate monthly wine waste from by-the-glass service, open bottles, breakage, unrecorded comps and inventory. Free, local and transparent.',
+      subtitle: 'By-the-glass service, open bottles, breakage, comps and inventory. A scenario with visible formulas and no hidden promises.',
+      problem: 'Wine waste often mixes cost already paid with unbilled sales. This calculator keeps them separate and shows where lost cost comes from.',
+      usage: 'Use it with one month of open bottles, charged glasses, stock adjustments, comps, counts and purchases. The calculation runs locally in the browser.',
+      decision: 'It helps prioritize by-the-glass control, expiry, pour size, breakage, comps, inventory or delivery-note review without adding unlike measures.',
+    },
+  },
+});
+
 ONLINE_TOOL_GROUPS.push(
   ...ONLINE_TOOL_COMPACT_GROUPS.map((group) => ({
     key: group.key,

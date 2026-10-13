@@ -1,0 +1,29 @@
+.waste-page .profit-local{display:inline-flex;align-items:center;gap:7px}
+.waste-toggle{grid-template-columns:repeat(2,minmax(0,160px));margin-bottom:0}
+.waste-hint{display:block;color:var(--tool-muted);font-size:11px;font-weight:400;line-height:1.5;margin-top:6px}
+.waste-input-section{border-top:1px solid var(--tool-border);padding-top:24px;margin-top:26px}
+.waste-input-section:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.waste-input-section>h3{display:flex;align-items:center;gap:8px;font-size:15px;margin-bottom:18px}
+.waste-check{display:flex;align-items:flex-start;gap:10px;margin-top:18px;font-size:12px;line-height:1.55;color:var(--tool-muted);cursor:pointer}
+.waste-check input{width:17px;height:17px;accent-color:var(--tool-wine);flex:0 0 auto;margin-top:1px}
+.waste-summary{border-left:4px solid var(--tool-wine);padding:4px 0 4px 20px;margin-bottom:26px}
+.waste-summary>strong{display:block;font:700 30px/1.28 var(--font-heading);max-width:760px}
+.waste-summary>p{color:var(--tool-accent);font-size:14px;font-weight:700;margin-top:8px!important}
+.waste-summary>div{margin-top:20px;padding-top:16px;border-top:1px solid var(--tool-border)}
+.waste-summary>div span{display:block;font-size:15px;font-weight:700}
+.waste-summary>div small{display:block;color:var(--tool-muted);font-size:11px;margin-top:5px}
+.waste-warning{display:flex;align-items:flex-start;gap:9px;border:1px solid hsl(40 80% 45%/.45);background:hsl(40 70% 45%/.08);padding:12px 14px;border-radius:6px;color:hsl(42 80% 70%);font-size:12px;line-height:1.5;margin-bottom:22px!important}
+.waste-result-section{border-top:1px solid var(--tool-border);padding-top:22px;margin-top:22px}
+.waste-result-section>h3{font-size:17px;margin-bottom:18px}
+.waste-bars{display:grid;gap:16px}
+.waste-bar>div{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.waste-bar>div strong{font-variant-numeric:tabular-nums}
+.waste-bar-track{height:7px;background:hsl(var(--muted)/.7);display:block;border-radius:999px;overflow:hidden;margin:8px 0 6px}
+.waste-bar-track>span{display:block;height:100%;min-width:0;background:var(--tool-wine);border-radius:inherit}
+.waste-bar>small{color:var(--tool-muted);font-size:10px}
+.waste-yield{font-size:13px;font-weight:700;color:var(--tool-accent);margin-top:22px!important}
+.waste-page .profit-source-panel{margin-top:26px}
+.waste-page .profit-actions li>div{min-width:0}
+.waste-page .profit-actions li>span{font-weight:800;align-self:flex-start;padding-top:2px}
+.waste-page .profit-actions strong{color:var(--tool-text)}
+@media(max-width:760px){.waste-toggle{grid-template-columns:1fr 1fr}.waste-summary>strong{font-size:25px}.waste-input-section{margin-top:22px}.waste-page .profit-report-actions{align-items:stretch}.waste-page .profit-report-actions>*{width:100%;justify-content:center}}

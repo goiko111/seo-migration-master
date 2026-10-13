@@ -675,7 +675,14 @@ const DiagnosticoVinoPorCopa = () => {
       </section>
 
       <FAQSection faqs={t.faqs} schemaId="diag-copa" />
-      <InternalLinks links={t.links} />
+      <InternalLinks links={lang === "es" || lang === "en" ? [
+        ...t.links,
+        {
+          to: lang === "en" ? "/en/tools/wine-waste-calculator" : "/herramientas/calculadora-mermas-vino",
+          label: lang === "en" ? "Wine waste calculator" : "Calculadora de mermas de vino",
+          type: "tool" as const,
+        },
+      ] : t.links} />
       <Footer />
     </div>
   );

@@ -118,6 +118,7 @@ const GuiaRevisarCartaCadaMes = lazy(() => import("./pages/GuiaRevisarCartaCadaM
 const Herramientas = lazy(() => import("./pages/Herramientas"));
 const RentabilidadBodega = lazy(() => import("./pages/RentabilidadBodega"));
 const CalculadoraTiempoOperativo = lazy(() => import("./pages/CalculadoraTiempoOperativo"));
+const CalculadoraMermasVino = lazy(() => import("./pages/CalculadoraMermasVino"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
@@ -371,6 +372,8 @@ const esRoutes = (
     <Route path="/en/tools/wine-cellar-profitability-diagnostic" element={<RentabilidadBodega />} />
     <Route path="/herramientas/calculadora-tiempo-operativo" element={<CalculadoraTiempoOperativo />} />
     <Route path="/en/tools/operational-time-calculator" element={<CalculadoraTiempoOperativo />} />
+    <Route path="/herramientas/calculadora-mermas-vino" element={<CalculadoraMermasVino />} />
+    <Route path="/en/tools/wine-waste-calculator" element={<CalculadoraMermasVino />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -966,6 +969,8 @@ const DeferredAppChrome = () => {
     "/en/tools/wine-cellar-profitability-diagnostic",
     "/herramientas/calculadora-tiempo-operativo",
     "/en/tools/operational-time-calculator",
+    "/herramientas/calculadora-mermas-vino",
+    "/en/tools/wine-waste-calculator",
   ].includes(location.pathname);
 
   return (

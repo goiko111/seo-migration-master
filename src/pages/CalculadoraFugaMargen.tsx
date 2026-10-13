@@ -706,6 +706,11 @@ const CalculadoraFugaMargen = () => {
           links={([
             { to: "/herramientas/simulador-senal-margenes", label: t.internalLinks.marginSignal, type: "tool" },
             { to: "/herramientas/simulador-pareto-carta-vinos", label: t.internalLinks.pareto, type: "tool" },
+            ...(lang === "es" || lang === "en" ? [{
+              to: lang === "en" ? "/en/tools/wine-waste-calculator" : "/herramientas/calculadora-mermas-vino",
+              label: lang === "en" ? "Wine waste calculator" : "Calculadora de mermas de vino",
+              type: "tool" as const,
+            }] : []),
             { to: "/recursos/checklist-albaranes-facturas-coste-vino", label: t.internalLinks.checklist, type: "resource" },
             { to: "/producto/winerim-supply", label: t.internalLinks.supply, type: "solution" },
           ] as const).map((link) => ({ ...link, to: localePath(link.to) }))}
