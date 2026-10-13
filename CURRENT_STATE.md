@@ -7624,3 +7624,39 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Observar eventos de entrada y finalización de la calculadora sin enviar PII.
+
+## Actualización 2026-10-13: cálculo automático del escenario futuro
+
+### Hechos confirmados
+
+- `/herramientas/calculadora-tiempo-operativo` solicita tiempo actual y frecuencia;
+  el tiempo futuro se calcula automáticamente con una hipótesis por tarea.
+- El porcentaje de ahorro permanece visible y editable. La interfaz y el informe
+  identifican esas cifras como hipótesis orientativas, no garantizadas ni medidas
+  en clientes.
+- El ejemplo productivo transforma `45 min/vez` en `22,5 min/vez` con una hipótesis
+  visible del `50 %`.
+- URL limpia y Googlebot responden `200`; Googlebot recibe prerender y canonical
+  `https://winerim.wine/herramientas/calculadora-tiempo-operativo`.
+- Release activa: Pages `e2b225fd`; facade
+  `c4f44784-7f58-4030-a499-4ce7553f98e1`.
+- Gates verdes: `252/252` tests, TypeScript, build, Worker dry-run y QA funcional
+  en producción.
+
+### Decisiones
+
+- Mantener el resultado sin popup y no pedir al visitante una estimación manual de
+  uso futuro de Winerim.
+
+### Hipótesis
+
+- El modelo automático debe aumentar la tasa de finalización sin perder
+  transparencia gracias al porcentaje editable.
+
+### Contradicciones / riesgos
+
+- Los porcentajes iniciales aún no son benchmarks empíricos de clientes.
+
+### Tareas pendientes
+
+- Instrumentar y revisar eventos agregados sin PII antes de cambiar las hipótesis.

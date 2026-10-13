@@ -1,4 +1,4 @@
-export const OPERATIONAL_TIME_MODEL_VERSION = "2.0.0";
+export const OPERATIONAL_TIME_MODEL_VERSION = "3.0.0";
 export const OPERATIONAL_WEEKS_PER_YEAR = 52;
 export const OPERATIONAL_WEEKS_PER_MONTH = OPERATIONAL_WEEKS_PER_YEAR / 12;
 
@@ -18,13 +18,14 @@ export interface OperationalTaskSpec {
   boundary: string;
   action: string;
   route: string;
+  defaultReductionPercent: number;
 }
 
 export interface OperationalTimeEntry {
   enabled: boolean;
   role: string;
   currentMinutes: string;
-  scenarioMinutes: string;
+  reductionPercent: string;
   occurrencesPerWeek: string;
   hourlyCost: string;
 }
@@ -35,6 +36,8 @@ export interface OperationalTaskResult {
   id: OperationalTaskId;
   role: string | null;
   currentHoursPerWeek: number;
+  scenarioMinutesPerOccurrence: number;
+  reductionPercent: number;
   scenarioHoursPerWeek: number;
   netHoursPerWeek: number;
   recoverableHoursPerWeek: number;
@@ -53,6 +56,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo mantenimiento del catálogo TPV; no incluye recepcionar albaranes ni analizar ventas.",
     action: "Revisar catálogo e integración TPV",
     route: "/integraciones",
+    defaultReductionPercent: 50,
   },
   {
     id: "deliveryNotes",
@@ -61,6 +65,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo recepción documental y de mercancía; no incluye decidir qué comprar.",
     action: "Revisar el flujo documental de CloudRIM",
     route: "/producto/cloudrim",
+    defaultReductionPercent: 50,
   },
   {
     id: "bottleCount",
@@ -69,6 +74,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo recuento físico; las diferencias frente al teórico se tratan en la tarea siguiente.",
     action: "Ordenar el control físico de stock",
     route: "/producto/winerim-core",
+    defaultReductionPercent: 0,
   },
   {
     id: "stockReconciliation",
@@ -77,6 +83,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Incluye localizar y revisar diferencias; no vuelve a contar las botellas.",
     action: "Contrastar ventas, stock y TPV",
     route: "/integraciones",
+    defaultReductionPercent: 60,
   },
   {
     id: "orderPreparation",
@@ -85,6 +92,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo preparar el pedido; el análisis para decidir qué comprar se mide aparte.",
     action: "Revisar reposición y compras",
     route: "/producto/winerim-supply",
+    defaultReductionPercent: 45,
   },
   {
     id: "buyingDecision",
@@ -93,6 +101,7 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo análisis y decisión; no incluye confeccionar el pedido ni hablar con proveedores.",
     action: "Consultar la decisión con SAVia",
     route: "/producto/savia",
+    defaultReductionPercent: 50,
   },
   {
     id: "distributorCommunication",
@@ -101,29 +110,30 @@ export const OPERATIONAL_TASKS: OperationalTaskSpec[] = [
     boundary: "Solo comunicación y seguimiento; no duplica el análisis de compra ni el pedido.",
     action: "Comparar distribuidores con el mismo criterio",
     route: "/herramientas/comparador-distribuidores",
+    defaultReductionPercent: 35,
   },
 ];
 
-const emptyEntry = (): OperationalTimeEntry => ({
+const emptyEntry = (defaultReductionPercent: number): OperationalTimeEntry => ({
   enabled: true,
   role: "",
   currentMinutes: "",
-  scenarioMinutes: "",
+  reductionPercent: String(defaultReductionPercent),
   occurrencesPerWeek: "",
   hourlyCost: "",
 });
 
 export const createEmptyOperationalTimeAnswers = (): OperationalTimeAnswers =>
-  Object.fromEntries(OPERATIONAL_TASKS.map(({ id }) => [id, emptyEntry()])) as OperationalTimeAnswers;
+  Object.fromEntries(OPERATIONAL_TASKS.map(({ id, defaultReductionPercent }) => [id, emptyEntry(defaultReductionPercent)])) as OperationalTimeAnswers;
 
 export const EXAMPLE_OPERATIONAL_TIME_ANSWERS: OperationalTimeAnswers = {
-  posItems: { enabled: true, role: "Responsable de sala", currentMinutes: "45", scenarioMinutes: "20", occurrencesPerWeek: "2", hourlyCost: "18" },
-  deliveryNotes: { enabled: true, role: "Responsable de compras", currentMinutes: "20", scenarioMinutes: "10", occurrencesPerWeek: "5", hourlyCost: "20" },
-  bottleCount: { enabled: true, role: "Equipo de bodega", currentMinutes: "120", scenarioMinutes: "120", occurrencesPerWeek: "1", hourlyCost: "16" },
-  stockReconciliation: { enabled: true, role: "Responsable de bodega", currentMinutes: "90", scenarioMinutes: "35", occurrencesPerWeek: "1", hourlyCost: "20" },
-  orderPreparation: { enabled: true, role: "Responsable de compras", currentMinutes: "75", scenarioMinutes: "40", occurrencesPerWeek: "1", hourlyCost: "20" },
-  buyingDecision: { enabled: true, role: "Dirección / sumiller", currentMinutes: "90", scenarioMinutes: "45", occurrencesPerWeek: "1", hourlyCost: "28" },
-  distributorCommunication: { enabled: true, role: "Responsable de compras", currentMinutes: "60", scenarioMinutes: "40", occurrencesPerWeek: "2", hourlyCost: "20" },
+  posItems: { enabled: true, role: "Responsable de sala", currentMinutes: "45", reductionPercent: "50", occurrencesPerWeek: "2", hourlyCost: "18" },
+  deliveryNotes: { enabled: true, role: "Responsable de compras", currentMinutes: "20", reductionPercent: "50", occurrencesPerWeek: "5", hourlyCost: "20" },
+  bottleCount: { enabled: true, role: "Equipo de bodega", currentMinutes: "120", reductionPercent: "0", occurrencesPerWeek: "1", hourlyCost: "16" },
+  stockReconciliation: { enabled: true, role: "Responsable de bodega", currentMinutes: "90", reductionPercent: "60", occurrencesPerWeek: "1", hourlyCost: "20" },
+  orderPreparation: { enabled: true, role: "Responsable de compras", currentMinutes: "75", reductionPercent: "45", occurrencesPerWeek: "1", hourlyCost: "20" },
+  buyingDecision: { enabled: true, role: "Dirección / sumiller", currentMinutes: "90", reductionPercent: "50", occurrencesPerWeek: "1", hourlyCost: "28" },
+  distributorCommunication: { enabled: true, role: "Responsable de compras", currentMinutes: "60", reductionPercent: "35", occurrencesPerWeek: "2", hourlyCost: "20" },
 };
 
 export function parseOperationalTimeValue(raw: string): number | null {
@@ -151,13 +161,18 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
     if (!entry.enabled) continue;
 
     const required: Record<string, number | null> = {};
-    for (const field of ["currentMinutes", "scenarioMinutes", "occurrencesPerWeek"] as const) {
+    for (const field of ["currentMinutes", "reductionPercent", "occurrencesPerWeek"] as const) {
       try {
         required[field] = parseOperationalTimeValue(entry[field]);
       } catch (error) {
         errors[`${task.id}.${field}`] = error instanceof Error ? error.message : "Valor no válido.";
         required[field] = null;
       }
+    }
+
+    if (required.reductionPercent !== null && required.reductionPercent > 100) {
+      errors[`${task.id}.reductionPercent`] = "El ahorro estimado debe estar entre 0 y 100 %.";
+      required.reductionPercent = null;
     }
 
     let hourlyCost: number | null = null;
@@ -169,13 +184,16 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
 
     if (Object.values(required).some((value) => value === null)) continue;
 
+    const scenarioMinutesPerOccurrence = round(required.currentMinutes! * (1 - required.reductionPercent! / 100));
     const currentHoursPerWeek = round(required.currentMinutes! * required.occurrencesPerWeek! / 60);
-    const scenarioHoursPerWeek = round(required.scenarioMinutes! * required.occurrencesPerWeek! / 60);
+    const scenarioHoursPerWeek = round(scenarioMinutesPerOccurrence * required.occurrencesPerWeek! / 60);
     const netHoursPerWeek = round(currentHoursPerWeek - scenarioHoursPerWeek);
     taskResults[task.id] = {
       id: task.id,
       role: entry.role.trim() || null,
       currentHoursPerWeek,
+      scenarioMinutesPerOccurrence,
+      reductionPercent: required.reductionPercent!,
       scenarioHoursPerWeek,
       netHoursPerWeek,
       recoverableHoursPerWeek: Math.max(0, netHoursPerWeek),
@@ -200,7 +218,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
 
   return {
     modelVersion: OPERATIONAL_TIME_MODEL_VERSION,
-    modelCompatibility: "2.0 uses weekly frequency and seven non-overlapping task boundaries; 1.x monthly inputs are not reused automatically.",
+    modelCompatibility: "3.0 derives the future scenario from editable task-level reduction assumptions; 2.x manually entered future minutes are not reused automatically.",
     errors,
     taskResults,
     coverage: results.length,
@@ -230,6 +248,7 @@ export function calculateOperationalTime(answers: OperationalTimeAnswers) {
       outputs: "calculated" as const,
       example: "fictional" as const,
       operationalData: "verified" as const,
+      scenarioAssumptions: "editable-model" as const,
       verifiedConnected: false,
     },
   };

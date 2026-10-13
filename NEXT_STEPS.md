@@ -5680,3 +5680,31 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 1. Medir entrada, carga de ejemplo y finalización de la calculadora sin PII.
 2. Revisar Search Console tras el periodo de recrawl ya abierto.
 3. Traducir las calculadoras a IT/FR/DE/PT antes de destacarlas en esos mercados.
+
+## Actualización 2026-10-13: siguiente paso tras automatizar el escenario
+
+### Hechos
+
+- El escenario futuro se calcula automáticamente y está desplegado con gates
+  verdes en Pages `e2b225fd` y facade
+  `c4f44784-7f58-4030-a499-4ce7553f98e1`.
+
+### Decisiones
+
+- No modificar más los porcentajes iniciales sin datos verificables.
+
+### Hipótesis
+
+- Los usuarios completarán más cálculos al no tener que imaginar su uso futuro.
+
+### Contradicciones / límites
+
+- Las hipótesis por tarea son editables pero todavía no están calibradas con una
+  muestra de clientes.
+
+### Siguiente bloque verificable
+
+1. Medir inicio, carga de ejemplo, finalización y ajuste de porcentajes sin PII.
+2. Contrastar las hipótesis con datos reales y consentidos antes de publicarlas
+   como benchmark.
+3. Mantener separado el seguimiento ya abierto de Search Console y traducciones.

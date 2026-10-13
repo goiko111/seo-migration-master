@@ -5092,3 +5092,34 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendiente
 
 - Validar la hipótesis con eventos agregados de uso y conversión.
+
+## 2026-10-13 — Escenario futuro calculado por Winerim
+
+### Hechos
+
+- El visitante todavía no usa Winerim y no dispone de una base fiable para
+  introducir manualmente sus minutos futuros.
+- El modelo `3.0.0` deriva ese escenario a partir del tiempo actual, la frecuencia
+  y un porcentaje de ahorro por tarea visible en pantalla.
+
+### Decisiones
+
+- Sustituir `minutos en tu escenario` por `ahorro orientativo Winerim` y calcular
+  automáticamente los minutos futuros.
+- Permitir editar el porcentaje y explicar la fórmula en la propia herramienta.
+- Asignar `0 %` por defecto al recuento físico de botellas y no atribuir ahorro a
+  esa tarea mientras no exista una automatización verificable del recuento.
+- No presentar los porcentajes por defecto como garantía ni evidencia de clientes.
+
+### Hipótesis
+
+- El cálculo automático es más comprensible para prospectos y reduce respuestas
+  inventadas o inconsistentes.
+
+### Contradicciones
+
+- Falta evidencia agregada de clientes para validar los porcentajes iniciales.
+
+### Pendiente
+
+- Calibrar los supuestos solo con mediciones comparables y consentidas.

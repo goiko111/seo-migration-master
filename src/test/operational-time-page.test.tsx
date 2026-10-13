@@ -14,8 +14,8 @@ describe("CalculadoraTiempoOperativo", () => {
     expect(screen.getAllByRole("link", { name: "Partners" }).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "¿Cuánto te cuesta gestionar el vino?" })).toBeInTheDocument();
     expect(screen.getAllByText("Minutos por vez (hoy)").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Minutos por vez (escenario futuro)").length).toBeGreaterThan(0);
-    expect(screen.getByText(/cuánto estimas que tardarías con Winerim/i)).toBeInTheDocument();
+    expect(screen.getAllByText("Ahorro orientativo Winerim").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Winerim calcula automáticamente el escenario futuro/i)).toBeInTheDocument();
     expect(screen.getByText(/semana × 52 ÷ 12/i)).toBeInTheDocument();
     expect(screen.queryByRole("textbox", { name: /email/i })).not.toBeInTheDocument();
 
@@ -33,22 +33,21 @@ describe("CalculadoraTiempoOperativo", () => {
     );
   });
 
-  it("keeps a negative scenario visible and allows tasks to be excluded", () => {
+  it("calculates the future scenario automatically and allows tasks to be excluded", () => {
     render(<MemoryRouter><CalculadoraTiempoOperativo /></MemoryRouter>);
 
     const current = document.getElementById("posItems-currentMinutes") as HTMLInputElement;
-    const scenario = document.getElementById("posItems-scenarioMinutes") as HTMLInputElement;
+    const reduction = document.getElementById("posItems-reductionPercent") as HTMLInputElement;
     const frequency = document.getElementById("posItems-occurrencesPerWeek") as HTMLInputElement;
     const cost = document.getElementById("posItems-hourlyCost") as HTMLInputElement;
 
     fireEvent.change(current, { target: { value: "30" } });
-    fireEvent.change(scenario, { target: { value: "45" } });
+    fireEvent.change(reduction, { target: { value: "25" } });
     fireEvent.change(frequency, { target: { value: "4" } });
     fireEvent.change(cost, { target: { value: "20" } });
 
-    expect(screen.getAllByText("-1 h").length).toBeGreaterThan(0);
-    expect(screen.getByText(/añade tiempo/i)).toBeInTheDocument();
-    expect(screen.getByText(/sí reducen el neto/i)).toBeInTheDocument();
+    expect(screen.getAllByText("+0,5 h").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Escenario: 22,5 min\/vez · hipótesis 25 %/i)).toBeInTheDocument();
 
     const taskToggles = screen.getAllByRole("checkbox");
     fireEvent.click(taskToggles[1]);

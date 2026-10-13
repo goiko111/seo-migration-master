@@ -1415,3 +1415,40 @@
 ### Tareas pendientes
 
 - Medir clics a la primera herramienta y finalización del cálculo sin PII.
+
+## Actualización 2026-10-13: escenario Winerim automático
+
+### Hechos
+
+- La calculadora de tiempo operativo ya no pide al visitante que estime cuánto
+  tardaría usando un producto que todavía no conoce.
+- El visitante introduce minutos actuales y frecuencia; el modelo `3.0.0` deriva
+  automáticamente los minutos del escenario Winerim mediante un porcentaje de
+  ahorro visible y editable para cada tarea.
+- Los porcentajes iniciales son hipótesis operativas prudentes, no resultados
+  medidos de clientes. El recuento físico parte de `0 %` porque Winerim no elimina
+  por sí mismo la necesidad de contar botellas.
+- Producción usa Pages `https://e2b225fd.winerim-origin.pages.dev` y facade
+  `c4f44784-7f58-4030-a499-4ce7553f98e1`.
+
+### Decisiones
+
+- Automatizar el escenario futuro, conservar el porcentaje editable y mostrar la
+  fórmula para que el cálculo sea comprensible y ajustable.
+- No convertir las hipótesis internas en una promesa de ahorro ni presentarlas
+  como benchmark verificado.
+
+### Hipótesis
+
+- Eliminar la estimación manual del escenario futuro reducirá fricción y errores
+  de interpretación al completar la herramienta.
+
+### Contradicciones
+
+- Todavía no existen datos agregados y verificables de clientes con los que
+  calibrar cada porcentaje inicial.
+
+### Tareas pendientes
+
+- Medir inicio, finalización y ajustes de porcentaje sin PII; recalibrar únicamente
+  cuando existan datos verificables y comparables.

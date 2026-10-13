@@ -35,43 +35,44 @@ describe("operational time calculator", () => {
 
   it("calculates current, scenario, recoverable, additional and net values", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
-    expect(result.modelVersion).toBe("2.0.0");
+    expect(result.modelVersion).toBe("3.0.0");
     expect(result.coverage).toBe(7);
     expect(result.costCoverage).toBe(7);
     expect(result.currentHoursPerWeek).toBe(11.42);
-    expect(result.scenarioHoursPerWeek).toBe(6.83);
-    expect(result.recoverableHoursPerWeek).toBe(4.59);
+    expect(result.scenarioHoursPerWeek).toBe(6.92);
+    expect(result.recoverableHoursPerWeek).toBe(4.5);
     expect(result.additionalHoursPerWeek).toBe(0);
-    expect(result.netHoursPerWeek).toBe(4.59);
+    expect(result.netHoursPerWeek).toBe(4.5);
     expect(result.currentTimeValuePerWeek).toBe(229.4);
-    expect(result.scenarioTimeValuePerWeek).toBe(133.26);
-    expect(result.netTimeValuePerWeek).toBe(96.14);
+    expect(result.scenarioTimeValuePerWeek).toBe(134.9);
+    expect(result.netTimeValuePerWeek).toBe(94.5);
   });
 
   it("uses 52/12 for an average month and 52 weeks for a year", () => {
     const result = calculateOperationalTime(EXAMPLE_OPERATIONAL_TIME_ANSWERS);
     expect(OPERATIONAL_WEEKS_PER_MONTH).toBeCloseTo(4.333333, 5);
-    expect(result.netHoursPerMonth).toBe(19.89);
-    expect(result.netHoursPerYear).toBe(238.68);
-    expect(result.netTimeValuePerYear).toBe(4999.28);
+    expect(result.netHoursPerMonth).toBe(19.5);
+    expect(result.netHoursPerYear).toBe(234);
+    expect(result.netTimeValuePerYear).toBe(4914);
   });
 
-  it("keeps additional time and subtracts it from the signed net", () => {
+  it("derives the future scenario from the editable reduction assumption", () => {
     const answers = createEmptyOperationalTimeAnswers();
     answers.posItems = {
       enabled: true,
       role: "Manager",
       currentMinutes: "30",
-      scenarioMinutes: "45",
+      reductionPercent: "25",
       occurrencesPerWeek: "4",
       hourlyCost: "20",
     };
     const result = calculateOperationalTime(answers);
-    expect(result.taskResults.posItems?.netHoursPerWeek).toBe(-1);
-    expect(result.recoverableHoursPerWeek).toBe(0);
-    expect(result.additionalHoursPerWeek).toBe(1);
-    expect(result.netHoursPerWeek).toBe(-1);
-    expect(result.netTimeValuePerWeek).toBe(-20);
+    expect(result.taskResults.posItems?.scenarioMinutesPerOccurrence).toBe(22.5);
+    expect(result.taskResults.posItems?.netHoursPerWeek).toBe(0.5);
+    expect(result.recoverableHoursPerWeek).toBe(0.5);
+    expect(result.additionalHoursPerWeek).toBe(0);
+    expect(result.netHoursPerWeek).toBe(0.5);
+    expect(result.netTimeValuePerWeek).toBe(10);
   });
 
   it("calculates hours without inventing a missing hourly cost", () => {
@@ -80,7 +81,7 @@ describe("operational time calculator", () => {
       enabled: true,
       role: "",
       currentMinutes: "20",
-      scenarioMinutes: "10",
+      reductionPercent: "50",
       occurrencesPerWeek: "3",
       hourlyCost: "",
     };
@@ -107,11 +108,13 @@ describe("operational time calculator", () => {
     answers.deliveryNotes.currentMinutes = "-1";
     answers.bottleCount.currentMinutes = "1.000,50";
     answers.stockReconciliation.currentMinutes = "100001";
+    answers.orderPreparation.reductionPercent = "101";
     const result = calculateOperationalTime(answers);
     expect(result.taskResults.posItems).toBeUndefined();
     expect(result.errors["deliveryNotes.currentMinutes"]).toContain("positivo");
     expect(result.errors["bottleCount.currentMinutes"]).toContain("separador");
     expect(result.errors["stockReconciliation.currentMinutes"]).toContain("límite");
+    expect(result.errors["orderPreparation.reductionPercent"]).toContain("0 y 100");
   });
 
   it("accepts decimal commas and preserves the role as entered", () => {
@@ -121,7 +124,7 @@ describe("operational time calculator", () => {
       enabled: true,
       role: "Dirección",
       currentMinutes: "60,5",
-      scenarioMinutes: "30",
+      reductionPercent: "50",
       occurrencesPerWeek: "1",
       hourlyCost: "25,5",
     };
@@ -144,6 +147,7 @@ describe("operational time calculator", () => {
       outputs: "calculated",
       example: "fictional",
       operationalData: "verified",
+      scenarioAssumptions: "editable-model",
       verifiedConnected: false,
     });
   });
