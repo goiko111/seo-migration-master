@@ -91,6 +91,12 @@ const REACT_ROUTES = new Set([
   "/en/tools/wine-cellar-profitability-diagnostic",
   "/herramientas/calculadora-tiempo-operativo",
   "/en/tools/operational-time-calculator",
+  "/afiliate",
+  "/en/affiliate",
+  "/it/affiliati",
+  "/fr/affilies",
+  "/de/partner",
+  "/pt/afiliados",
   "/simulador-carta",
   "/en/wine-list-simulator",
   "/fr/simulateur-carte",
@@ -124,95 +130,15 @@ const REACT_ROUTES = new Set([
 
 const PROFITABILITY_DIAGNOSTIC_ROUTE = "/herramientas/diagnostico-rentabilidad-bodega";
 const PROFITABILITY_DIAGNOSTIC_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_ROUTE}`;
-const PROFITABILITY_DIAGNOSTIC_TITLE = "Diagnóstico de Rentabilidad de la Carta | Winerim";
-const PROFITABILITY_DIAGNOSTIC_DESCRIPTION = "Calcula margen por botella y copa, Beverage Cost, capital inmovilizado y escenarios de precio, rotación y reposición con fórmulas transparentes.";
-const PROFITABILITY_DIAGNOSTIC_BOT_HTML = `
-  <main id="winerim-profitability-diagnostic">
-    <h1>Diagnóstico de rentabilidad de la carta de vinos</h1>
-    <p>Botella, copa, stock lento y reposición: cuatro lecturas conectadas sin mezclar datos introducidos, cálculos y datos operativos verificados.</p>
-    <section>
-      <h2>Economía de botella y copa</h2>
-      <p>Calcula margen bruto y Beverage Cost por botella y por copa, considerando las copas cobrables y una merma editable.</p>
-    </section>
-    <section>
-      <h2>Stock lento y escenario operativo</h2>
-      <p>Valora capital inmovilizado a coste y compara un escenario de PVP, volumen y reposición definido por el usuario. No predice demanda ni garantiza rentabilidad.</p>
-    </section>
-    <section>
-      <h2>Resultado local antes del contacto</h2>
-      <p>El cálculo completo se realiza en el navegador. La revisión ampliada es opcional y no envía las cifras del diagnóstico.</p>
-    </section>
-  </main>
-`;
 
 const PROFITABILITY_DIAGNOSTIC_EN_ROUTE = "/en/tools/wine-cellar-profitability-diagnostic";
 const PROFITABILITY_DIAGNOSTIC_EN_URL = `https://winerim.wine${PROFITABILITY_DIAGNOSTIC_EN_ROUTE}`;
-const PROFITABILITY_DIAGNOSTIC_EN_TITLE = "Wine List Profitability Diagnostic | Winerim";
-const PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION = "Calculate bottle and by-the-glass margin, Beverage Cost, tied-up capital, and transparent price, rotation and replenishment scenarios.";
-const PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML = `
-  <main id="winerim-profitability-diagnostic">
-    <h1>Wine list profitability diagnostic</h1>
-    <p>Bottle, by-the-glass, slow stock and replenishment: four connected views that keep entered, calculated and verified operational data separate.</p>
-    <section>
-      <h2>Bottle and by-the-glass economics</h2>
-      <p>Calculate gross margin and Beverage Cost per bottle and glass using editable billable-glass and waste assumptions.</p>
-    </section>
-    <section>
-      <h2>Slow stock and operational scenario</h2>
-      <p>Value tied-up capital at cost and compare a user-defined price, volume and replenishment scenario. It does not forecast demand or guarantee profitability.</p>
-    </section>
-    <section>
-      <h2>Local result before contact</h2>
-      <p>The complete calculation runs in the browser. The expanded review is optional and does not send the diagnostic figures.</p>
-    </section>
-  </main>
-`;
 
 const OPERATIONAL_TIME_ROUTE = "/herramientas/calculadora-tiempo-operativo";
 const OPERATIONAL_TIME_URL = `https://winerim.wine${OPERATIONAL_TIME_ROUTE}`;
-const OPERATIONAL_TIME_TITLE = "Calculadora del Coste Operativo del Vino | Winerim";
-const OPERATIONAL_TIME_DESCRIPTION = "Calcula horas y valor del tiempo semanal dedicado a TPV, albaranes, inventario, conciliación, pedidos, compras y distribuidores.";
-const OPERATIONAL_TIME_BOT_HTML = `
-  <main id="winerim-operational-time-calculator">
-    <h1>¿Cuánto te cuesta gestionar el vino?</h1>
-    <p>Compara el tiempo actual con un escenario definido por ti, tarea por tarea, y valora el tiempo por rol sin convertirlo en ahorro salarial.</p>
-    <section>
-      <h2>Siete tareas semanales sin solapamientos</h2>
-      <p>Artículos del TPV, recepción de albaranes, recuento de botellas, conciliación de stock, preparación de pedidos, decisión de compra y comunicación con distribuidores.</p>
-    </section>
-    <section>
-      <h2>Fórmula transparente</h2>
-      <p>El resultado por tarea es la diferencia entre minutos actuales y minutos del escenario, multiplicada por la frecuencia semanal. El mes medio usa semana por 52 dividido entre 12 y el año usa semana por 52. El coste por hora es opcional.</p>
-    </section>
-    <section>
-      <h2>Sin garantía ni formulario obligatorio</h2>
-      <p>Todos los supuestos son editables, el cálculo se realiza localmente y el resultado aparece antes de cualquier invitación comercial.</p>
-    </section>
-  </main>
-`;
 
 const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
 const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
-const OPERATIONAL_TIME_EN_TITLE = "Wine Operations Cost Calculator | Winerim";
-const OPERATIONAL_TIME_EN_DESCRIPTION = "Calculate weekly hours and time value for POS items, deliveries, bottle counts, reconciliation, orders, purchasing and distributors.";
-const OPERATIONAL_TIME_EN_BOT_HTML = `
-  <main id="winerim-operational-time-calculator">
-    <h1>What does it cost to manage your wine operation?</h1>
-    <p>Compare current time with a scenario you define, task by task, and value time by role without turning it into a salary-saving claim.</p>
-    <section>
-      <h2>Seven weekly tasks without overlap</h2>
-      <p>POS items, delivery-note intake, bottle counts, stock reconciliation, order preparation, buying decisions and distributor communication.</p>
-    </section>
-    <section>
-      <h2>Transparent formula</h2>
-      <p>Each task uses current minutes minus scenario minutes, multiplied by weekly frequency. Average month uses week times 52 divided by 12 and year uses week times 52. Hourly cost is optional.</p>
-    </section>
-    <section>
-      <h2>No guarantee or mandatory form</h2>
-      <p>Every assumption is editable, calculation stays in the browser and the complete result appears before any commercial invitation.</p>
-    </section>
-  </main>
-`;
 
 const ARTICLE_ROUTE_RE = /^\/(?:(?:en|fr|it|de|pt)\/)?article\/[^/]+$/;
 const isReactRoute = (path) => REACT_ROUTES.has(path) || ARTICLE_ROUTE_RE.test(path);
@@ -525,91 +451,6 @@ const fetchReactPage = async (request, env, path) => {
       ...(isNoindexRoute(path) ? { "X-Robots-Tag": "noindex, follow" } : {}),
     },
   });
-};
-
-const withProfitabilityDiagnosticBotMetadata = (response, requestMethod = "GET", english = false) => {
-  if (requestMethod === "HEAD") return response;
-  const contentType = response.headers.get("Content-Type") || "";
-  if (!contentType.includes("text/html")) return response;
-
-  const config = english
-    ? { lang: "en", title: PROFITABILITY_DIAGNOSTIC_EN_TITLE, description: PROFITABILITY_DIAGNOSTIC_EN_DESCRIPTION, url: PROFITABILITY_DIAGNOSTIC_EN_URL, html: PROFITABILITY_DIAGNOSTIC_EN_BOT_HTML }
-    : { lang: "es", title: PROFITABILITY_DIAGNOSTIC_TITLE, description: PROFITABILITY_DIAGNOSTIC_DESCRIPTION, url: PROFITABILITY_DIAGNOSTIC_URL, html: PROFITABILITY_DIAGNOSTIC_BOT_HTML };
-
-  return new HTMLRewriter()
-    .on("html", {
-      element(element) {
-        element.setAttribute("lang", config.lang);
-      },
-    })
-    .on("title", {
-      element(element) {
-        element.setInnerContent(config.title);
-      },
-    })
-    .on('meta[name="description"]', {
-      element(element) {
-        element.setAttribute("content", config.description);
-      },
-    })
-    .on('meta[name="robots"]', {
-      element(element) {
-        element.setAttribute("content", "index, follow");
-      },
-    })
-    .on('link[rel="canonical"]', {
-      element(element) {
-        element.setAttribute("href", config.url);
-      },
-    })
-    .on("body", {
-      element(element) {
-        element.append(config.html, { html: true });
-      },
-    })
-    .transform(response);
-};
-
-const withOperationalTimeBotMetadata = (response, requestMethod = "GET", english = false) => {
-  if (requestMethod === "HEAD") return response;
-  const contentType = response.headers.get("Content-Type") || "";
-  if (!contentType.includes("text/html")) return response;
-  const config = english
-    ? { lang: "en", title: OPERATIONAL_TIME_EN_TITLE, description: OPERATIONAL_TIME_EN_DESCRIPTION, url: OPERATIONAL_TIME_EN_URL, html: OPERATIONAL_TIME_EN_BOT_HTML }
-    : { lang: "es", title: OPERATIONAL_TIME_TITLE, description: OPERATIONAL_TIME_DESCRIPTION, url: OPERATIONAL_TIME_URL, html: OPERATIONAL_TIME_BOT_HTML };
-
-  return new HTMLRewriter()
-    .on("html", {
-      element(element) {
-        element.setAttribute("lang", config.lang);
-      },
-    })
-    .on("title", {
-      element(element) {
-        element.setInnerContent(config.title);
-      },
-    })
-    .on('meta[name="description"]', {
-      element(element) {
-        element.setAttribute("content", config.description);
-      },
-    })
-    .on('meta[name="robots"]', {
-      element(element) {
-        element.setAttribute("content", "index, follow");
-      },
-    })
-    .on('link[rel="canonical"]', {
-      element(element) {
-        element.setAttribute("href", config.url);
-      },
-    })
-    .on("body", {
-      element(element) {
-        element.append(config.html, { html: true });
-      },
-    })
-    .transform(response);
 };
 
 const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
@@ -953,22 +794,6 @@ export default {
     }
 
     if (BOT_REGEX.test(ua)) {
-      if (path === PROFITABILITY_DIAGNOSTIC_ROUTE) {
-        const response = await fetchReactPage(request, env, path);
-        return withProfitabilityDiagnosticBotMetadata(response, request.method);
-      }
-      if (path === PROFITABILITY_DIAGNOSTIC_EN_ROUTE) {
-        const response = await fetchReactPage(request, env, path);
-        return withProfitabilityDiagnosticBotMetadata(response, request.method, true);
-      }
-      if (path === OPERATIONAL_TIME_ROUTE) {
-        const response = await fetchReactPage(request, env, path);
-        return withOperationalTimeBotMetadata(response, request.method);
-      }
-      if (path === OPERATIONAL_TIME_EN_ROUTE) {
-        const response = await fetchReactPage(request, env, path);
-        return withOperationalTimeBotMetadata(response, request.method, true);
-      }
       const response = await env.BACKEND.fetch(request);
       const contentType = response.headers.get("Content-Type") || "";
       if (

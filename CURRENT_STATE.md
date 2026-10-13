@@ -7473,3 +7473,56 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Desplegar `sitemap` y `prerender` en `pwkqbcgjrhoyxrsmcypw`.
 - Desplegar backend y facade, ejecutar QA productivo y decidir Search Console.
+
+## Actualizacion 2026-10-13: release coordinada activa y validada
+
+### Hechos confirmados
+
+- Frontend general activo: `https://f97077cf.winerim-origin.pages.dev`.
+- Backend activo: `winerim-proxy` version
+  `c47493d8-7ef4-4f91-a58b-2b63fdb33f0e`.
+- Facade activo: `winerim-edge-router` version
+  `4b4d2b66-573a-499b-b8e4-614f35105698`.
+- Lovable Cloud publico solo `sitemap` y `prerender`; commit informado por Lovable
+  `31af7114bc7084d61e193ae89ec023312a596075`.
+- Produccion humana publica la calculadora operativa ES/EN y la landing partner
+  localizada en seis idiomas. Las seis rutas partner tienen metadata hidratada y
+  recorrido de herramientas coherente con el idioma.
+- Googlebot y OAI pasan las cuatro herramientas y las seis rutas partner con `200`,
+  canonical propio y un solo H1. Los simuladores ES/EN siguen correctos y un articulo
+  inexistente responde `404`.
+- Sitemap productivo: XML valido, `2434` URLs, cero `loc` duplicados.
+- Legales, propuestas comerciales y Catalonia conservan `200/noindex`; home y
+  Funcionalidades conservan `200`.
+- La entrada inglesa por idioma del navegador funciona con `302 / -> /en` para GET
+  humano con `Accept-Language: en-US`.
+- Gates locales posteriores al hotfix: `244/244`, build, lint focal, sintaxis,
+  `git diff --check` y `252/252` en el auditor SEO/i18n.
+
+### Decisiones
+
+- Eliminar el puente temporal del facade para las herramientas y delegar el HTML de
+  bots en `winerim-proxy`, que ya dispone de prerender limpio.
+- Incluir explicitamente las seis rutas partner en `REACT_ROUTES` para que humanos no
+  caigan en el origen anterior.
+- Search Console pasa de bloqueado a listo para inspeccion selectiva; no se ha
+  solicitado indexacion todavia.
+
+### Hipotesis
+
+- La siguiente recaptura de Google deberia sustituir los antiguos `404` y metadata de
+  home por las versiones verificadas en esta release.
+
+### Contradicciones / riesgos
+
+- Los hashes comunicados por Lovable para las fuentes desplegadas no coinciden con los
+  hashes locales, aunque la QA funcional productiva coincide con el comportamiento
+  esperado.
+- Persisten avisos no bloqueantes: React Router v7, una `key` duplicada en `Precios`,
+  `caniuse-lite` antiguo y chunks grandes.
+
+### Tareas pendientes
+
+- Search Console selectivo y reenvio de sitemap si procede.
+- Monitorizar 24-72 horas, analitica/eventos sin PII y cobertura por idioma.
+- Retomar contenido editorial y deuda tecnica como lotes separados.

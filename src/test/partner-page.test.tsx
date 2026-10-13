@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import Afiliate from "@/pages/Afiliate";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { PARTNER_LANDING_COPY } from "@/data/partnerLandingCopy";
@@ -73,5 +74,19 @@ describe("partner landing", () => {
   ])("keeps the partner tool journey localized on %s", (path, label, href) => {
     renderPage(path);
     expect(screen.getAllByRole("link", { name: label })[0]).toHaveAttribute("href", href);
+  });
+
+  it("serves all localized partner routes from the current Pages release", () => {
+    const router = readFileSync("edge-router/winerim-pages-router.js", "utf8");
+    for (const route of [
+      "/afiliate",
+      "/en/affiliate",
+      "/it/affiliati",
+      "/fr/affilies",
+      "/de/partner",
+      "/pt/afiliados",
+    ]) {
+      expect(router).toContain(`"${route}"`);
+    }
   });
 });

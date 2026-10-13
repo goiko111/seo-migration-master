@@ -5548,3 +5548,49 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 4. Ejecutar `wrangler deploy --config wrangler.release-20261013.toml`.
 5. Validar humano, Googlebot, OAI, sitemap, legales, home y funcionalidades.
 6. Solo entonces usar Search Console de forma selectiva.
+
+## Actualizacion 2026-10-13: siguiente bloque tras release verde
+
+### Hechos
+
+- Frontend, `sitemap`, `prerender`, backend y facade ya estan publicados y validados.
+- Calculadora operativa ES/EN, diagnostico de rentabilidad ES/EN y partner en seis
+  idiomas tienen paridad humana/bot y presencia correcta en sitemap.
+- Versiones activas: Pages `f97077cf`, backend
+  `c47493d8-7ef4-4f91-a58b-2b63fdb33f0e`, facade
+  `4b4d2b66-573a-499b-b8e4-614f35105698`.
+- Search Console no se ha tocado.
+
+### Prioridad 1: Search Console y vigilancia
+
+1. Inspeccionar selectivamente las calculadoras ES/EN, `/afiliate`, `/de/partner`,
+   `/simulador-carta` y `/en/wine-list-simulator`.
+2. Reenviar `https://winerim.wine/sitemap.xml` si la propiedad lo requiere.
+3. Revisar cobertura, canonical elegida y ultimo rastreo durante 24-72 horas.
+4. No solicitar indexacion masiva ni usar Search Console para URLs no verificadas.
+
+### Prioridad 2: medicion
+
+1. Confirmar eventos de carga de ejemplo, descarga de escenario, clic a diagnostico y
+   CTA de partner sin enviar cifras financieras ni PII.
+2. Comparar uso ES/EN y recorrido partner por idioma.
+3. Medir si la redireccion humana `/ -> /en` para navegador ingles mejora continuidad
+   de campanas USA.
+
+### Prioridad 3: continuidad de producto y contenido
+
+1. Retomar Biblioteca del vino con el siguiente lote multilingue validado.
+2. Retomar Aprender vino y profundidad DE/PT.
+3. Retomar blog semanal, auditoria de articulos y enlazado interno.
+4. Separar la deuda tecnica: `key` de Precios, React Router v7, `caniuse-lite`, chunks
+   grandes y auditoria de dependencias.
+
+### Hipotesis
+
+- Con la nueva superficie ya rastreable, el siguiente retorno depende mas de medicion,
+  indexacion y contenido profundo que de sumar otra herramienta sin datos de uso.
+
+### Contradicciones / riesgos
+
+- La discrepancia de hashes comunicados por Lovable queda abierta como trazabilidad;
+  no hay divergencia funcional observada en produccion.

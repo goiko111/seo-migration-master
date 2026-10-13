@@ -4960,3 +4960,44 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Recuperar acceso, desplegar las cuatro capas en una ventana y completar QA antes
   de Search Console.
+
+## 2026-10-13
+
+### Cierre coordinado de coste operativo y partners
+
+#### Hechos
+
+- Lovable Cloud desplego `sitemap` y `prerender`; Cloudflare desplego
+  `winerim-proxy` `c47493d8-7ef4-4f91-a58b-2b63fdb33f0e` y el facade final
+  `4b4d2b66-573a-499b-b8e4-614f35105698` sobre Pages `f97077cf`.
+- La QA inicial del corte detecto dos divergencias: las herramientas de bot acumulaban
+  el H1 de home junto al contenido inyectado y las rutas partner humanas seguian en el
+  origen anterior.
+- Ambos fallos quedaron corregidos en el facade. La QA final confirma paridad humana,
+  Googlebot, OAI y sitemap.
+- Los gates finales pasan `244/244` y SEO/i18n `252/252`.
+
+#### Decisiones
+
+- Retirar los inyectores duplicados de herramientas del facade y usar el prerender
+  canonico de `winerim-proxy`.
+- Enrutar siempre las seis rutas partner humanas a la release Pages vigente.
+- Conservar Catalonia y las propuestas comerciales en sus origenes independientes.
+- No mezclar migraciones editoriales, SQL, datos ni nuevas publicaciones de contenido.
+- Habilitar Search Console solo para inspeccion selectiva posterior al QA verde.
+
+#### Hipotesis
+
+- Una unica fuente de HTML para bots reduce el riesgo de H1, canonical y copy
+  divergentes en futuros releases.
+
+#### Contradicciones
+
+- Lovable informa hashes de fuente distintos de los locales pese a declarar copia
+  exacta. Se acepta el release por evidencia funcional completa, manteniendo la
+  discrepancia registrada para futuras auditorias.
+
+#### Tareas pendientes asociadas
+
+- Search Console selectivo, seguimiento de cobertura y analitica de las nuevas rutas.
+- Resolver la deuda tecnica no bloqueante en un lote separado.

@@ -1248,3 +1248,64 @@
 
 - Recuperar acceso a `pwkqbcgjrhoyxrsmcypw`, desplegar `sitemap` y `prerender`,
   activar los dos Workers y ejecutar QA productivo antes de Search Console.
+
+## Cierre 2026-10-13: coste operativo y partner publicados
+
+### Hechos
+
+- Lovable Cloud desplego exclusivamente las Edge Functions `sitemap` y
+  `prerender`; no publico frontend, SQL, migraciones, datos, secretos, redirects,
+  Cloudflare, Pages, DNS ni Search Console.
+- La release general activa es `https://f97077cf.winerim-origin.pages.dev`.
+- `winerim-proxy` quedo en `c47493d8-7ef4-4f91-a58b-2b63fdb33f0e` y
+  `winerim-edge-router` en `4b4d2b66-573a-499b-b8e4-614f35105698`.
+- La calculadora de coste operativo esta publicada en ES/EN y la landing partner
+  prudente en ES/EN/IT/FR/DE/PT. Las seis rutas partner humanas conservan idioma,
+  `title`, H1 y canonical propios.
+- Googlebot y `OAI-SearchBot/1.0` reciben `200`, un unico H1 y canonical propio en
+  las cuatro herramientas ES/EN y en las seis rutas partner. Un articulo inexistente
+  conserva `404` y `noindex`.
+- El sitemap productivo es XML valido, contiene `2434` URLs y no tiene `loc`
+  duplicados. Incluye calculadoras, partners y simulador localizado.
+- La QA interactiva de la calculadora confirma el ejemplo `11,4 h` actuales,
+  `6,8 h` de escenario y `+4,6 h` semanales, sin overflow en `1280 px` ni `390 px`.
+- Home y Funcionalidades siguen `200`; legales, propuestas comerciales y Catalonia
+  siguen `200/noindex` en sus origenes preservados.
+- Un GET humano con `Accept-Language: en-US` redirige `302` de `/` a `/en`; los
+  bots no heredan esa redireccion.
+- Gates finales: `244/244` tests, build, ESLint focal, sintaxis de ambos Workers,
+  `git diff --check` y auditor SEO/i18n `252/252`.
+
+### Decisiones
+
+- Servir a bots las herramientas nuevas desde el prerender limpio de
+  `winerim-proxy`; se retiraron los inyectores temporales del facade que duplicaban
+  el contenido del shell React.
+- Servir las seis rutas partner humanas desde la release Pages actual y mantener una
+  prueba de regresion que exige su presencia en el router.
+- Considerar el lote apto para inspeccion selectiva en Search Console, sin realizar
+  solicitudes masivas.
+- Mantener fuera de este corte las migraciones editoriales y cualquier cambio de datos.
+
+### Hipotesis
+
+- La paridad verificada entre experiencia humana, bot y sitemap deberia eliminar el
+  `404` de las calculadoras en el siguiente rastreo y evitar metadata espanola en
+  rutas partner localizadas.
+
+### Contradicciones
+
+- Lovable declaro copia exacta, pero los SHA-256 informados por su despliegue no
+  coinciden con los archivos locales. La salida productiva si coincide en rutas,
+  canonical, H1 y sitemap comprobados; queda como discrepancia de trazabilidad, no
+  como fallo funcional observado.
+- Las entradas anteriores que describen produccion desfasada o el corte bloqueado
+  por Supabase quedan sustituidas por este cierre.
+
+### Tareas pendientes
+
+- Inspeccionar selectivamente en Search Console las calculadoras, partner y simulador,
+  y reenviar el sitemap si la propiedad lo requiere.
+- Vigilar cobertura y metadata durante las siguientes 24-72 horas.
+- Verificar eventos de uso y conversion sin PII y retomar Biblioteca del vino,
+  Aprender vino, blog y la deuda tecnica separada.

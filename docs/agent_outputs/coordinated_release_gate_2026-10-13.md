@@ -56,3 +56,48 @@
    `wrangler.release-20261013.toml`.
 5. Ejecutar QA humano, Googlebot, OAI, sitemap, legales, home y funcionalidades.
 6. Solo con todo verde, pasar a Search Console selectivo.
+
+## Resultado final
+
+### Despliegue
+
+- Lovable Cloud publico solo `sitemap` y `prerender`.
+  - edit: `edt-ea588f80-7c13-42b1-98f6-45cd48c9d59d`;
+  - commit informado: `31af7114bc7084d61e193ae89ec023312a596075`.
+- `winerim-proxy`: `c47493d8-7ef4-4f91-a58b-2b63fdb33f0e`.
+- `winerim-edge-router` final: `4b4d2b66-573a-499b-b8e4-614f35105698`.
+- Pages general activa: `https://f97077cf.winerim-origin.pages.dev`.
+- No se tocaron SQL, migraciones, datos, contenido editorial, secretos, DNS ni Search
+  Console.
+
+### Hallazgos durante el corte
+
+1. El facade inyectaba HTML de herramienta sobre el shell React y dejaba dos H1 para
+   bots. Se retiro ese puente y se delego en el prerender limpio de `winerim-proxy`.
+2. Las seis rutas partner no estaban en `REACT_ROUTES`; humanos seguian viendo el
+   origen anterior. Se incorporaron y se anadio una prueba de regresion.
+
+### QA final
+
+- Humanos: calculadora operativa ES/EN y partner ES/EN/IT/FR/DE/PT con title, H1,
+  canonical e idioma propios; sin overflow en desktop/movil.
+- Interaccion: ejemplo de calculadora `11,4 h -> 6,8 h`, neto `+4,6 h/semana`.
+- Bots: Googlebot y OAI con `200`, un solo H1 y canonical propio en herramientas,
+  partner y simulador; articulo inexistente `404/noindex`.
+- Sitemap: XML valido, `2434` URLs y cero `loc` duplicados.
+- Regresion: home/Funcionalidades `200`; legales, propuestas y Catalonia
+  `200/noindex`.
+- Gates: `244/244` tests, build, ESLint focal, sintaxis Workers, `git diff --check` y
+  auditor SEO/i18n `252/252`.
+
+### Contradiccion registrada
+
+- Los SHA-256 de fuente comunicados por Lovable difieren de los hashes locales pese a
+  declarar copia exacta. La salida productiva coincide funcionalmente con las rutas y
+  metadatos esperados, por lo que no bloquea el cierre, pero debe conservarse en la
+  trazabilidad.
+
+### Gate siguiente
+
+- Release verde. Search Console queda listo para inspeccion selectiva y reenvio del
+  sitemap; no se ha ejecutado todavia.
