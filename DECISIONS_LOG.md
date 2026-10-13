@@ -4868,3 +4868,31 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 #### Tareas pendientes asociadas
 
 - Revisar el candidato local y, si se aprueba, publicar y validar produccion.
+
+## 2026-10-13
+
+### Cierre de revision tecnica del diagnostico
+
+#### Hechos
+
+- El candidato completo pasa tests, build, lint focal, validacion de Worker/Edge y QA interactiva desktop/movil.
+- El calculo de reposicion divide las unidades mensuales entre `30`; ese supuesto ya se muestra en las formulas ES/EN.
+- El formulario opcional ya restablece el estado de envio tambien cuando la persistencia lanza una excepcion.
+
+#### Decisiones
+
+- Cerrar el desarrollo interno de este lote salvo hallazgo comercial nuevo.
+- Exigir autorizacion explicita antes de desplegar.
+- Publicar las tres capas juntas y no solicitar indexacion hasta verificar paridad humano/bot.
+
+#### Hipotesis
+
+- La formula explicitada y el manejo de error reducen ambiguedad y friccion sin cambiar el modelo economico `2.0.0`.
+
+#### Contradicciones
+
+- Ninguna nueva; la unica diferencia abierta es candidato local frente a version productiva anterior.
+
+#### Tareas pendientes asociadas
+
+- Go/no-go de produccion y, si procede, despliegue y QA coordinados.

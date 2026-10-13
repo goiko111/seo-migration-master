@@ -5458,3 +5458,31 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Con autorizacion: publicar capas coordinadas sin Lovable si el pipeline directo sigue disponible.
 4. Revalidar ES/EN: resultado, formulario, canonical, Googlebot/OAI, sitemap y eventos sin PII.
 5. Solo despues, registrar indexacion selectiva/Search Console si procede.
+
+## Actualizacion 2026-10-13: siguiente gate tras revision tecnica
+
+### Hechos
+
+- La revision de copy tecnico, formulas, errores y recorrido local esta cerrada.
+- Todos los gates reproducibles estan verdes y produccion no se ha tocado.
+
+### Decisiones
+
+- No queda otro desarrollo funcional obligatorio dentro del diagnostico antes del release.
+- El siguiente paso cambia estado externo y necesita autorizacion explicita.
+
+### Hipotesis
+
+- Una unica ventana de despliegue para las tres capas evitara divergencia temporal entre humanos y bots.
+
+### Contradicciones / riesgos
+
+- Publicar una sola capa mantiene el riesgo ya documentado de mensajes SEO distintos.
+
+### Tareas pendientes listas para retomar
+
+1. Recibir go/no-go explicito para desplegar el diagnostico.
+2. Con go: publicar frontend Pages, Worker/edge-router y prerender en la misma ventana.
+3. Validar rutas ES/EN como humano, Googlebot y `OAI-SearchBot/1.0`.
+4. Confirmar canonical, hreflang, sitemap, formulario y eventos sin valores financieros ni PII analitica.
+5. Solo con todo verde, pasar a Search Console y retomar el siguiente bloque de la web.

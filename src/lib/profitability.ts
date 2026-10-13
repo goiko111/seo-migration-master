@@ -100,7 +100,7 @@ export const PROFITABILITY_AREAS: Record<ProfitabilityArea, ProfitabilityAreaSpe
     title: "Escenario",
     question: "¿Qué cambia al ajustar PVP, rotación y reposición?",
     basis: "Tú defines el volumen del escenario. El diagnóstico no predice demanda ni garantiza que un cambio de precio altere la rotación.",
-    formula: "Contribución = unidades × (PVP neto − coste). Reposición = consumo diario del escenario × plazo de entrega + stock de seguridad.",
+    formula: "Contribución = unidades × (PVP neto − coste). Consumo diario = unidades del escenario al mes ÷ 30. Reposición = consumo diario × plazo de entrega + stock de seguridad.",
     fields: [
       { key: "currentUnitsMonth", label: "Unidades actuales al mes", unit: "units" },
       { key: "scenarioUnitsMonth", label: "Unidades del escenario al mes", unit: "units" },

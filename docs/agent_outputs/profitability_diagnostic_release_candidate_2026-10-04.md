@@ -30,3 +30,12 @@ Fecha: 2026-10-04
 
 - Estado: listo para revision, no publicado.
 - Gate: publicar frontend, Worker/edge-router y prerender de forma coordinada; despues validar humano, Googlebot/OAI y analitica sin PII.
+
+## Revision final 2026-10-13
+
+- Revision tecnica cerrada sin bloqueos.
+- Formula de reposicion explicita el supuesto de `30` dias en ES/EN.
+- Copy de contribucion por botella estabilizado sin reemplazos dinamicos.
+- Formulario protegido ante excepciones de red.
+- Gates repetidos: `222/222`, build, lint focal, Worker/Edge y QA desktop/movil verdes.
+- Estado final: tecnicamente listo, no publicado; falta autorizacion explicita de produccion.

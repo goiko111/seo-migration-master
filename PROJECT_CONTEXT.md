@@ -1149,3 +1149,32 @@
 
 - Revision funcional/comercial y autorizacion de release.
 - Tras publicar, validar humano, Googlebot/OAI, canonicals y eventos sin PII en ES/EN.
+
+## Actualizacion 2026-10-13: revision tecnica final del diagnostico
+
+### Hechos
+
+- La revision interna del candidato `d7d657bf` no detecto bloqueos de release.
+- Se hizo visible el supuesto de `30` dias usado para convertir unidades mensuales en consumo diario del escenario.
+- Se sustituyo la etiqueta construida por reemplazo de texto por copy ES/EN explicito para la contribucion por botella vendida por copas.
+- El formulario opcional recupera su estado tras una excepcion de red y conserva el identificador de envio para reintentos idempotentes.
+- El gate completo sigue verde: `222/222` tests, build, ESLint focal, Worker/edge-router y Edge Functions.
+- La QA interactiva ES en `1280 px` y `390 px` confirma canonical propio, ausencia de overflow, cero errores de consola y consentimientos obligatorios correctos.
+
+### Decisiones
+
+- Considerar cerrada la revision tecnica local del lote.
+- No inferir autorizacion de produccion de una instruccion generica de continuidad; el despliegue coordinado requiere un go explicito.
+
+### Hipotesis
+
+- Hacer visible la conversion mensual/diaria reduce el riesgo de interpretar el punto de reposicion como una prediccion opaca.
+
+### Contradicciones
+
+- No hay contradiccion nueva en codigo; produccion sigue siendo distinta del candidato local hasta un despliegue coordinado.
+
+### Tareas pendientes
+
+- Obtener decision explicita go/no-go para produccion.
+- Con go, publicar frontend, facade Worker/edge-router y prerender, y ejecutar QA productivo ES/EN antes de Search Console.

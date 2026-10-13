@@ -19,6 +19,7 @@ describe("RentabilidadBodega", () => {
     expect(screen.getByText("Beverage Cost por copa")).toBeInTheDocument();
     expect(screen.getByText("Capital en stock lento")).toBeInTheDocument();
     expect(screen.getByText("Cambio de contribución del escenario")).toBeInTheDocument();
+    expect(screen.getByText(/Contribución por botella:/)).toBeInTheDocument();
     expect(screen.getByText("Introducido por ti")).toBeInTheDocument();
     expect(screen.getByText("Calculado con tus datos")).toBeInTheDocument();
     expect(screen.getByText(/no conectado en este diagnóstico público/i)).toBeInTheDocument();

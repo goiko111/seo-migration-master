@@ -79,6 +79,7 @@ describe("wine-list profitability diagnosis", () => {
 
   it("shows an explicit formula for every area and labels provenance", () => {
     Object.values(PROFITABILITY_AREAS).forEach((area) => expect(area.formula.length).toBeGreaterThan(30));
+    expect(PROFITABILITY_AREAS.scenario.formula).toContain("÷ 30");
     const result = calculateProfitabilityDiagnosis(EXAMPLE_PROFITABILITY_ANSWERS);
     expect(result.sources).toEqual({
       inputs: "entered",

@@ -7372,3 +7372,37 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Revision del candidato y decision go/no-go.
 - Si hay go, publicar las capas coordinadas y ejecutar QA productivo ES/EN.
+
+## Actualizacion 2026-10-13: candidato revisado y gates verdes
+
+### Hechos confirmados
+
+- La revision tecnica local del diagnostico esta completa.
+- Ajustes finales aplicados: supuesto visible de mes de `30` dias, etiqueta ES/EN estable para contribucion por botella y recuperacion del formulario ante excepciones de red.
+- Validaciones actuales:
+  - `npm test -- --run`: `25` archivos, `222/222` tests;
+  - `npm run build`: OK;
+  - ESLint focal: OK;
+  - `node --check` de Worker y edge-router: OK;
+  - `deno check` de prerender y sitemap: OK;
+  - QA interactiva desktop/movil: canonical correcto, sin overflow y sin errores de consola.
+- No se ha publicado ni modificado produccion.
+
+### Decisiones
+
+- Estado de release: tecnicamente listo, pendiente de autorizacion explicita de despliegue.
+- Mantener el despliegue atomico de frontend, Worker/edge-router y prerender.
+
+### Hipotesis
+
+- El candidato puede pasar a produccion sin mas desarrollo funcional si la revision comercial no solicita cambios de copy.
+
+### Contradicciones / riesgos
+
+- Los avisos heredados de React Router, la key duplicada de `Precios`, `caniuse-lite` antiguo y chunks grandes no bloquean este lote, pero permanecen como deuda tecnica separada.
+- Produccion conserva la experiencia anterior mientras no se publique el paquete coordinado.
+
+### Tareas pendientes
+
+- Decision go/no-go del usuario.
+- Tras go: despliegue coordinado, QA humano/bot ES/EN, comprobacion de eventos sin PII y solo despues Search Console.

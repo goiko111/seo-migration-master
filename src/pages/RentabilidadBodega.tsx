@@ -80,7 +80,7 @@ const EN_PROFITABILITY_AREAS: Record<ProfitabilityArea, ProfitabilityAreaSpec> =
     title: "Scenario",
     question: "What changes when price, rotation and replenishment change?",
     basis: "You enter the scenario volume. The tool does not predict demand or guarantee that price changes will alter rotation.",
-    formula: "Contribution = units × (net price − cost). Reorder point = scenario daily use × lead time + safety stock.",
+    formula: "Contribution = units × (net price − cost). Daily use = scenario monthly units ÷ 30. Reorder point = daily use × lead time + safety stock.",
     fields: [
       { key: "currentUnitsMonth", label: "Current units per month", unit: "units" },
       { key: "scenarioUnitsMonth", label: "Scenario units per month", unit: "units" },
@@ -153,6 +153,7 @@ const ES_COPY = {
   capitalTitle: "Capital en stock lento",
   scenarioTitle: "Cambio de contribución del escenario",
   monthlyContribution: "Contribución mensual",
+  glassContribution: "Contribución por botella",
   unitMargin: "Margen por botella",
   beverageCost: "Beverage Cost",
   effectiveGlasses: "Copas efectivas",
@@ -253,6 +254,7 @@ const EN_COPY = {
   capitalTitle: "Capital in slow stock",
   scenarioTitle: "Scenario contribution change",
   monthlyContribution: "Monthly contribution",
+  glassContribution: "Contribution per bottle",
   unitMargin: "Margin per bottle",
   beverageCost: "Beverage Cost",
   effectiveGlasses: "Effective glasses",
@@ -430,16 +432,20 @@ export default function RentabilidadBodega() {
     };
     const leadId = leadIdRef.current ?? createLeadSubmissionId();
     leadIdRef.current = leadId;
-    const result = await persistLeadAndMeasure(leadId, leadData);
-    if (!result.ok) {
+    try {
+      const result = await persistLeadAndMeasure(leadId, leadData);
+      if (!result.ok) {
+        toast.error(t.sendError);
+        return;
+      }
+      await notifyLead(leadData);
+      trackFormSubmit("profitability_review");
+      setSubmitted(true);
+    } catch {
       toast.error(t.sendError);
+    } finally {
       setSubmitting(false);
-      return;
     }
-    await notifyLead(leadData);
-    trackFormSubmit("profitability_review");
-    setSubmitted(true);
-    setSubmitting(false);
   };
 
   const renderResult = (area: ProfitabilityArea) => {
@@ -458,7 +464,7 @@ export default function RentabilidadBodega() {
         <strong>{number(result.beverageCostPercent)}%</strong>
         <span>{t.effectiveGlasses}: {number(result.effectiveGlasses)}</span>
         <span>{t.breakEven}: {result.breakEvenGlasses}</span>
-        <span>{t.monthlyContribution.replace("mensual", "por botella").replace("Monthly", "Bottle")}: {money(result.grossContributionPerBottle, 2)}</span>
+        <span>{t.glassContribution}: {money(result.grossContributionPerBottle, 2)}</span>
       </> : <strong className="profit-empty-result">{t.noResult}</strong>;
     }
     if (area === "capital") {
